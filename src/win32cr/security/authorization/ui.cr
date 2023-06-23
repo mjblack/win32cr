@@ -136,16 +136,16 @@ lib LibWin32
 
 
   struct ISecurityInformationVTbl
-    query_interface : Proc(ISecurityInformation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISecurityInformation*, UInt32)
-    release : Proc(ISecurityInformation*, UInt32)
-    get_object_information : Proc(ISecurityInformation*, SI_OBJECT_INFO*, HRESULT)
-    get_security : Proc(ISecurityInformation*, OBJECT_SECURITY_INFORMATION, SECURITY_DESCRIPTOR**, LibC::BOOL, HRESULT)
-    set_security : Proc(ISecurityInformation*, OBJECT_SECURITY_INFORMATION, SECURITY_DESCRIPTOR*, HRESULT)
-    get_access_rights : Proc(ISecurityInformation*, Guid*, SECURITY_INFO_PAGE_FLAGS, SI_ACCESS**, UInt32*, UInt32*, HRESULT)
-    map_generic : Proc(ISecurityInformation*, Guid*, UInt8*, UInt32*, HRESULT)
-    get_inherit_types : Proc(ISecurityInformation*, SI_INHERIT_TYPE**, UInt32*, HRESULT)
-    property_sheet_page_callback : Proc(ISecurityInformation*, LibC::HANDLE, PSPCB_MESSAGE, SI_PAGE_TYPE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_object_information : UInt64
+    get_security : UInt64
+    set_security : UInt64
+    get_access_rights : UInt64
+    map_generic : UInt64
+    get_inherit_types : UInt64
+    property_sheet_page_callback : UInt64
   end
 
   ISecurityInformation_GUID = "965fc360-16ff-11d0-91cb-00aa00bbb723"
@@ -155,11 +155,11 @@ lib LibWin32
   end
 
   struct ISecurityInformation2VTbl
-    query_interface : Proc(ISecurityInformation2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISecurityInformation2*, UInt32)
-    release : Proc(ISecurityInformation2*, UInt32)
-    is_dacl_canonical : Proc(ISecurityInformation2*, ACL*, LibC::BOOL)
-    lookup_sids : Proc(ISecurityInformation2*, UInt32, PSID*, IDataObject*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    is_dacl_canonical : UInt64
+    lookup_sids : UInt64
   end
 
   ISecurityInformation2_GUID = "c3ccfdb4-6f88-11d2-a3ce-00c04fb1782a"
@@ -169,10 +169,10 @@ lib LibWin32
   end
 
   struct IEffectivePermissionVTbl
-    query_interface : Proc(IEffectivePermission*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEffectivePermission*, UInt32)
-    release : Proc(IEffectivePermission*, UInt32)
-    get_effective_permission : Proc(IEffectivePermission*, Guid*, PSID, LibC::LPWSTR, SECURITY_DESCRIPTOR*, OBJECT_TYPE_LIST**, UInt32*, UInt32**, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_effective_permission : UInt64
   end
 
   IEffectivePermission_GUID = "3853dc76-9f35-407c-88a1-d19344365fbc"
@@ -182,10 +182,10 @@ lib LibWin32
   end
 
   struct ISecurityObjectTypeInfoVTbl
-    query_interface : Proc(ISecurityObjectTypeInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISecurityObjectTypeInfo*, UInt32)
-    release : Proc(ISecurityObjectTypeInfo*, UInt32)
-    get_inherit_source : Proc(ISecurityObjectTypeInfo*, UInt32, ACL*, INHERITED_FROMA**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_inherit_source : UInt64
   end
 
   ISecurityObjectTypeInfo_GUID = "fc3066eb-79ef-444b-9111-d18a75ebf2fa"
@@ -195,11 +195,11 @@ lib LibWin32
   end
 
   struct ISecurityInformation3VTbl
-    query_interface : Proc(ISecurityInformation3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISecurityInformation3*, UInt32)
-    release : Proc(ISecurityInformation3*, UInt32)
-    get_full_resource_name : Proc(ISecurityInformation3*, LibC::LPWSTR*, HRESULT)
-    open_elevated_editor : Proc(ISecurityInformation3*, LibC::HANDLE, SI_PAGE_TYPE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_full_resource_name : UInt64
+    open_elevated_editor : UInt64
   end
 
   ISecurityInformation3_GUID = "e2cdc9cc-31bd-4f8f-8c8b-b641af516a1a"
@@ -209,10 +209,10 @@ lib LibWin32
   end
 
   struct ISecurityInformation4VTbl
-    query_interface : Proc(ISecurityInformation4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISecurityInformation4*, UInt32)
-    release : Proc(ISecurityInformation4*, UInt32)
-    get_secondary_security : Proc(ISecurityInformation4*, SECURITY_OBJECT**, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_secondary_security : UInt64
   end
 
   ISecurityInformation4_GUID = "ea961070-cd14-4621-ace4-f63c03e583e4"
@@ -222,10 +222,10 @@ lib LibWin32
   end
 
   struct IEffectivePermission2VTbl
-    query_interface : Proc(IEffectivePermission2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEffectivePermission2*, UInt32)
-    release : Proc(IEffectivePermission2*, UInt32)
-    compute_effective_permission_with_secondary_security : Proc(IEffectivePermission2*, PSID, PSID, LibC::LPWSTR, SECURITY_OBJECT*, UInt32, TOKEN_GROUPS*, AUTHZ_SID_OPERATION*, TOKEN_GROUPS*, AUTHZ_SID_OPERATION*, AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, EFFPERM_RESULT_LIST*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    compute_effective_permission_with_secondary_security : UInt64
   end
 
   IEffectivePermission2_GUID = "941fabca-dd47-4fca-90bb-b0e10255f20d"
@@ -243,4 +243,126 @@ lib LibWin32
 
   # Params # hwndowner : LibC::HANDLE [In],psi : ISecurityInformation [In],usipage : SI_PAGE_TYPE [In]
   fun EditSecurityAdvanced(hwndowner : LibC::HANDLE, psi : ISecurityInformation, usipage : SI_PAGE_TYPE) : HRESULT
+end
+struct LibWin32::ISecurityInformation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_object_information(pobjectinfo : SI_OBJECT_INFO*) : HRESULT
+    @lpVtbl.value.get_object_information.unsafe_as(Proc(SI_OBJECT_INFO*, HRESULT)).call(pobjectinfo)
+  end
+  def get_security(requestedinformation : OBJECT_SECURITY_INFORMATION, ppsecuritydescriptor : SECURITY_DESCRIPTOR**, fdefault : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_security.unsafe_as(Proc(OBJECT_SECURITY_INFORMATION, SECURITY_DESCRIPTOR**, LibC::BOOL, HRESULT)).call(requestedinformation, ppsecuritydescriptor, fdefault)
+  end
+  def set_security(securityinformation : OBJECT_SECURITY_INFORMATION, psecuritydescriptor : SECURITY_DESCRIPTOR*) : HRESULT
+    @lpVtbl.value.set_security.unsafe_as(Proc(OBJECT_SECURITY_INFORMATION, SECURITY_DESCRIPTOR*, HRESULT)).call(securityinformation, psecuritydescriptor)
+  end
+  def get_access_rights(pguidobjecttype : Guid*, dwflags : SECURITY_INFO_PAGE_FLAGS, ppaccess : SI_ACCESS**, pcaccesses : UInt32*, pidefaultaccess : UInt32*) : HRESULT
+    @lpVtbl.value.get_access_rights.unsafe_as(Proc(Guid*, SECURITY_INFO_PAGE_FLAGS, SI_ACCESS**, UInt32*, UInt32*, HRESULT)).call(pguidobjecttype, dwflags, ppaccess, pcaccesses, pidefaultaccess)
+  end
+  def map_generic(pguidobjecttype : Guid*, paceflags : UInt8*, pmask : UInt32*) : HRESULT
+    @lpVtbl.value.map_generic.unsafe_as(Proc(Guid*, UInt8*, UInt32*, HRESULT)).call(pguidobjecttype, paceflags, pmask)
+  end
+  def get_inherit_types(ppinherittypes : SI_INHERIT_TYPE**, pcinherittypes : UInt32*) : HRESULT
+    @lpVtbl.value.get_inherit_types.unsafe_as(Proc(SI_INHERIT_TYPE**, UInt32*, HRESULT)).call(ppinherittypes, pcinherittypes)
+  end
+  def property_sheet_page_callback(hwnd : LibC::HANDLE, umsg : PSPCB_MESSAGE, upage : SI_PAGE_TYPE) : HRESULT
+    @lpVtbl.value.property_sheet_page_callback.unsafe_as(Proc(LibC::HANDLE, PSPCB_MESSAGE, SI_PAGE_TYPE, HRESULT)).call(hwnd, umsg, upage)
+  end
+end
+struct LibWin32::ISecurityInformation2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def is_dacl_canonical(pdacl : ACL*) : LibC::BOOL
+    @lpVtbl.value.is_dacl_canonical.unsafe_as(Proc(ACL*, LibC::BOOL)).call(pdacl)
+  end
+  def lookup_sids(csids : UInt32, rgpsids : PSID*, ppdo : IDataObject*) : HRESULT
+    @lpVtbl.value.lookup_sids.unsafe_as(Proc(UInt32, PSID*, IDataObject*, HRESULT)).call(csids, rgpsids, ppdo)
+  end
+end
+struct LibWin32::IEffectivePermission
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_effective_permission(pguidobjecttype : Guid*, pusersid : PSID, pszservername : LibC::LPWSTR, psd : SECURITY_DESCRIPTOR*, ppobjecttypelist : OBJECT_TYPE_LIST**, pcobjecttypelistlength : UInt32*, ppgrantedaccesslist : UInt32**, pcgrantedaccesslistlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_effective_permission.unsafe_as(Proc(Guid*, PSID, LibC::LPWSTR, SECURITY_DESCRIPTOR*, OBJECT_TYPE_LIST**, UInt32*, UInt32**, UInt32*, HRESULT)).call(pguidobjecttype, pusersid, pszservername, psd, ppobjecttypelist, pcobjecttypelistlength, ppgrantedaccesslist, pcgrantedaccesslistlength)
+  end
+end
+struct LibWin32::ISecurityObjectTypeInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_inherit_source(si : UInt32, pacl : ACL*, ppinheritarray : INHERITED_FROMA**) : HRESULT
+    @lpVtbl.value.get_inherit_source.unsafe_as(Proc(UInt32, ACL*, INHERITED_FROMA**, HRESULT)).call(si, pacl, ppinheritarray)
+  end
+end
+struct LibWin32::ISecurityInformation3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_full_resource_name(ppszresourcename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_full_resource_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszresourcename)
+  end
+  def open_elevated_editor(hwnd : LibC::HANDLE, upage : SI_PAGE_TYPE) : HRESULT
+    @lpVtbl.value.open_elevated_editor.unsafe_as(Proc(LibC::HANDLE, SI_PAGE_TYPE, HRESULT)).call(hwnd, upage)
+  end
+end
+struct LibWin32::ISecurityInformation4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_secondary_security(psecurityobjects : SECURITY_OBJECT**, psecurityobjectcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_secondary_security.unsafe_as(Proc(SECURITY_OBJECT**, UInt32*, HRESULT)).call(psecurityobjects, psecurityobjectcount)
+  end
+end
+struct LibWin32::IEffectivePermission2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def compute_effective_permission_with_secondary_security(psid : PSID, pdevicesid : PSID, pszservername : LibC::LPWSTR, psecurityobjects : SECURITY_OBJECT*, dwsecurityobjectcount : UInt32, pusergroups : TOKEN_GROUPS*, pauthzusergroupsoperations : AUTHZ_SID_OPERATION*, pdevicegroups : TOKEN_GROUPS*, pauthzdevicegroupsoperations : AUTHZ_SID_OPERATION*, pauthzuserclaims : AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, pauthzuserclaimsoperations : AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, pauthzdeviceclaims : AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, pauthzdeviceclaimsoperations : AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, peffpermresultlists : EFFPERM_RESULT_LIST*) : HRESULT
+    @lpVtbl.value.compute_effective_permission_with_secondary_security.unsafe_as(Proc(PSID, PSID, LibC::LPWSTR, SECURITY_OBJECT*, UInt32, TOKEN_GROUPS*, AUTHZ_SID_OPERATION*, TOKEN_GROUPS*, AUTHZ_SID_OPERATION*, AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*, AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, EFFPERM_RESULT_LIST*, HRESULT)).call(psid, pdevicesid, pszservername, psecurityobjects, dwsecurityobjectcount, pusergroups, pauthzusergroupsoperations, pdevicegroups, pauthzdevicegroupsoperations, pauthzuserclaims, pauthzuserclaimsoperations, pauthzdeviceclaims, pauthzdeviceclaimsoperations, peffpermresultlists)
+  end
 end

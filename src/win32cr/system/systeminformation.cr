@@ -614,17 +614,17 @@ lib LibWin32
   fun GlobalMemoryStatusEx(lpbuffer : MEMORYSTATUSEX*) : LibC::BOOL
 
   # Params # lpsysteminfo : SYSTEM_INFO* [In]
-  fun GetSystemInfo(lpsysteminfo : SYSTEM_INFO*)
+  fun GetSystemInfo(lpsysteminfo : SYSTEM_INFO*) : Void
 
   # Params # lpsystemtime : SYSTEMTIME* [In]
-  fun GetSystemTime(lpsystemtime : SYSTEMTIME*)
+  fun GetSystemTime(lpsystemtime : SYSTEMTIME*) : Void
 
   # Params # lpsystemtimeasfiletime : FILETIME* [In]
   # Commented out because function is part of Lib C
-  #fun GetSystemTimeAsFileTime(lpsystemtimeasfiletime : FILETIME*)
+  #fun GetSystemTimeAsFileTime(lpsystemtimeasfiletime : FILETIME*) : Void
 
   # Params # lpsystemtime : SYSTEMTIME* [In]
-  fun GetLocalTime(lpsystemtime : SYSTEMTIME*)
+  fun GetLocalTime(lpsystemtime : SYSTEMTIME*) : Void
 
   # Params # usercetenvironment : USER_CET_ENVIRONMENT [In]
   fun IsUserCetAvailableInEnvironment(usercetenvironment : USER_CET_ENVIRONMENT) : LibC::BOOL
@@ -695,11 +695,11 @@ lib LibWin32
 
   # Params # lpsysteminfo : SYSTEM_INFO* [In]
   # Commented out because function is part of Lib C
-  #fun GetNativeSystemInfo(lpsysteminfo : SYSTEM_INFO*)
+  #fun GetNativeSystemInfo(lpsysteminfo : SYSTEM_INFO*) : Void
 
   # Params # lpsystemtimeasfiletime : FILETIME* [In]
   # Commented out because function is part of Lib C
-  #fun GetSystemTimePreciseAsFileTime(lpsystemtimeasfiletime : FILETIME*)
+  #fun GetSystemTimePreciseAsFileTime(lpsystemtimeasfiletime : FILETIME*) : Void
 
   # Params # dwosmajorversion : UInt32 [In],dwosminorversion : UInt32 [In],dwspmajorversion : UInt32 [In],dwspminorversion : UInt32 [In],pdwreturnedproducttype : OS_PRODUCT_TYPE* [In]
   fun GetProductInfo(dwosmajorversion : UInt32, dwosminorversion : UInt32, dwspmajorversion : UInt32, dwspminorversion : UInt32, pdwreturnedproducttype : OS_PRODUCT_TYPE*) : LibC::BOOL
@@ -777,7 +777,7 @@ lib LibWin32
   fun RtlGetSystemGlobalData(dataid : RTL_SYSTEM_GLOBAL_DATA_ID, buffer : Void*, size : UInt32) : UInt32
 
   # Params # pulluapinfo : UInt64* [In],puldevicefamily : DEVICEFAMILYINFOENUM* [In],puldeviceform : DEVICEFAMILYDEVICEFORM* [In]
-  fun RtlGetDeviceFamilyInfoEnum(pulluapinfo : UInt64*, puldevicefamily : DEVICEFAMILYINFOENUM*, puldeviceform : DEVICEFAMILYDEVICEFORM*)
+  fun RtlGetDeviceFamilyInfoEnum(pulluapinfo : UInt64*, puldevicefamily : DEVICEFAMILYINFOENUM*, puldeviceform : DEVICEFAMILYDEVICEFORM*) : Void
 
   # Params # puldevicefamilybuffersize : UInt32* [In],puldeviceformbuffersize : UInt32* [In],devicefamily : LibC::LPWSTR [In],deviceform : LibC::LPWSTR [In]
   fun RtlConvertDeviceFamilyInfoToString(puldevicefamilybuffersize : UInt32*, puldeviceformbuffersize : UInt32*, devicefamily : LibC::LPWSTR, deviceform : LibC::LPWSTR) : UInt32
@@ -786,7 +786,7 @@ lib LibWin32
   fun RtlSwitchedVVI(versioninfo : OSVERSIONINFOEXW*, typemask : UInt32, conditionmask : UInt64) : UInt32
 
   # Params # lpbuffer : MEMORYSTATUS* [In]
-  fun GlobalMemoryStatus(lpbuffer : MEMORYSTATUS*)
+  fun GlobalMemoryStatus(lpbuffer : MEMORYSTATUS*) : Void
 
   # Params # 
   fun GetSystemDEPPolicy : DEP_SYSTEM_POLICY_TYPE

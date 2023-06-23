@@ -3085,7 +3085,7 @@ lib LibWin32
   fun IsHungAppWindow(hwnd : LibC::HANDLE) : LibC::BOOL
 
   # Params # 
-  fun DisableProcessWindowsGhosting
+  fun DisableProcessWindowsGhosting : Void
 
   # Params # lpstring : PSTR [In]
   fun RegisterWindowMessageA(lpstring : PSTR) : UInt32
@@ -3187,7 +3187,7 @@ lib LibWin32
   fun DefWindowProcW(hwnd : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : LRESULT
 
   # Params # nexitcode : Int32 [In]
-  fun PostQuitMessage(nexitcode : Int32)
+  fun PostQuitMessage(nexitcode : Int32) : Void
 
   # Params # lpprevwndfunc : WNDPROC [In],hwnd : LibC::HANDLE [In],msg : UInt32 [In],wparam : LibC::UINT_PTR [In],lparam : LPARAM [In]
   fun CallWindowProcA(lpprevwndfunc : WNDPROC, hwnd : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : LRESULT
@@ -3700,7 +3700,7 @@ lib LibWin32
   fun GetForegroundWindow : HANDLE
 
   # Params # hwnd : LibC::HANDLE [In],funknown : LibC::BOOL [In]
-  fun SwitchToThisWindow(hwnd : LibC::HANDLE, funknown : LibC::BOOL)
+  fun SwitchToThisWindow(hwnd : LibC::HANDLE, funknown : LibC::BOOL) : Void
 
   # Params # hwnd : LibC::HANDLE [In]
   fun SetForegroundWindow(hwnd : LibC::HANDLE) : LibC::BOOL
@@ -4159,7 +4159,7 @@ lib LibWin32
   fun SoundSentry : LibC::BOOL
 
   # Params # dwlevel : UInt32 [In]
-  fun SetDebugErrorLevel(dwlevel : UInt32)
+  fun SetDebugErrorLevel(dwlevel : UInt32) : Void
 
   # Params # hwnd : LibC::HANDLE [In],pstring : Char* [In],cchmaxcount : Int32 [In]
   fun InternalGetWindowText(hwnd : LibC::HANDLE, pstring : Char*, cchmaxcount : Int32) : Int32
@@ -4228,13 +4228,13 @@ lib LibWin32
   fun CreateResourceIndexer(projectroot : LibC::LPWSTR, extensiondllpath : LibC::LPWSTR, ppresourceindexer : Void**) : HRESULT
 
   # Params # resourceindexer : Void* [In]
-  fun DestroyResourceIndexer(resourceindexer : Void*)
+  fun DestroyResourceIndexer(resourceindexer : Void*) : Void
 
   # Params # resourceindexer : Void* [In],filepath : LibC::LPWSTR [In],ppresourceuri : LibC::LPWSTR* [In],pqualifiercount : UInt32* [In],ppqualifiers : IndexedResourceQualifier** [In]
   fun IndexFilePath(resourceindexer : Void*, filepath : LibC::LPWSTR, ppresourceuri : LibC::LPWSTR*, pqualifiercount : UInt32*, ppqualifiers : IndexedResourceQualifier**) : HRESULT
 
   # Params # resourceuri : LibC::LPWSTR [In],qualifiercount : UInt32 [In],qualifiers : IndexedResourceQualifier* [In]
-  fun DestroyIndexedResults(resourceuri : LibC::LPWSTR, qualifiercount : UInt32, qualifiers : IndexedResourceQualifier*)
+  fun DestroyIndexedResults(resourceuri : LibC::LPWSTR, qualifiercount : UInt32, qualifiers : IndexedResourceQualifier*) : Void
 
   # Params # packagefamilyname : LibC::LPWSTR [In],projectroot : LibC::LPWSTR [In],platformversion : MrmPlatformVersion [In],defaultqualifiers : LibC::LPWSTR [In],indexer : MrmResourceIndexerHandle* [In]
   fun MrmCreateResourceIndexer(packagefamilyname : LibC::LPWSTR, projectroot : LibC::LPWSTR, platformversion : MrmPlatformVersion, defaultqualifiers : LibC::LPWSTR, indexer : MrmResourceIndexerHandle*) : HRESULT

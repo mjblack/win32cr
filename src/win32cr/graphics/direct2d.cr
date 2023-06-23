@@ -1745,10 +1745,10 @@ lib LibWin32
 
 
   struct ID2D1ResourceVTbl
-    query_interface : Proc(ID2D1Resource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Resource*, UInt32)
-    release : Proc(ID2D1Resource*, UInt32)
-    get_factory : Proc(ID2D1Resource*, ID2D1Factory*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
   end
 
   ID2D1Resource_GUID = "2cd90691-12e2-11dc-9fed-001143a055f9"
@@ -1758,10 +1758,10 @@ lib LibWin32
   end
 
   struct ID2D1ImageVTbl
-    query_interface : Proc(ID2D1Image*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Image*, UInt32)
-    release : Proc(ID2D1Image*, UInt32)
-    get_factory : Proc(ID2D1Image*, ID2D1Factory*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
   end
 
   ID2D1Image_GUID = "65019f75-8da2-497c-b32c-dfa34e48ede6"
@@ -1771,17 +1771,17 @@ lib LibWin32
   end
 
   struct ID2D1BitmapVTbl
-    query_interface : Proc(ID2D1Bitmap*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Bitmap*, UInt32)
-    release : Proc(ID2D1Bitmap*, UInt32)
-    get_factory : Proc(ID2D1Bitmap*, ID2D1Factory*, Void)
-    get_size : Proc(ID2D1Bitmap*, D2D_SIZE_F)
-    get_pixel_size : Proc(ID2D1Bitmap*, D2D_SIZE_U)
-    get_pixel_format : Proc(ID2D1Bitmap*, D2D1_PIXEL_FORMAT)
-    get_dpi : Proc(ID2D1Bitmap*, Float32*, Float32*, Void)
-    copy_from_bitmap : Proc(ID2D1Bitmap*, D2D_POINT_2U*, ID2D1Bitmap, D2D_RECT_U*, HRESULT)
-    copy_from_render_target : Proc(ID2D1Bitmap*, D2D_POINT_2U*, ID2D1RenderTarget, D2D_RECT_U*, HRESULT)
-    copy_from_memory : Proc(ID2D1Bitmap*, D2D_RECT_U*, Void*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_size : UInt64
+    get_pixel_size : UInt64
+    get_pixel_format : UInt64
+    get_dpi : UInt64
+    copy_from_bitmap : UInt64
+    copy_from_render_target : UInt64
+    copy_from_memory : UInt64
   end
 
   ID2D1Bitmap_GUID = "a2296057-ea42-4099-983b-539fb6505426"
@@ -1791,14 +1791,14 @@ lib LibWin32
   end
 
   struct ID2D1GradientStopCollectionVTbl
-    query_interface : Proc(ID2D1GradientStopCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1GradientStopCollection*, UInt32)
-    release : Proc(ID2D1GradientStopCollection*, UInt32)
-    get_factory : Proc(ID2D1GradientStopCollection*, ID2D1Factory*, Void)
-    get_gradient_stop_count : Proc(ID2D1GradientStopCollection*, UInt32)
-    get_gradient_stops : Proc(ID2D1GradientStopCollection*, D2D1_GRADIENT_STOP*, UInt32, Void)
-    get_color_interpolation_gamma : Proc(ID2D1GradientStopCollection*, D2D1_GAMMA)
-    get_extend_mode : Proc(ID2D1GradientStopCollection*, D2D1_EXTEND_MODE)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_gradient_stop_count : UInt64
+    get_gradient_stops : UInt64
+    get_color_interpolation_gamma : UInt64
+    get_extend_mode : UInt64
   end
 
   ID2D1GradientStopCollection_GUID = "2cd906a7-12e2-11dc-9fed-001143a055f9"
@@ -1808,14 +1808,14 @@ lib LibWin32
   end
 
   struct ID2D1BrushVTbl
-    query_interface : Proc(ID2D1Brush*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Brush*, UInt32)
-    release : Proc(ID2D1Brush*, UInt32)
-    get_factory : Proc(ID2D1Brush*, ID2D1Factory*, Void)
-    set_opacity : Proc(ID2D1Brush*, Float32, Void)
-    set_transform : Proc(ID2D1Brush*, D2D_MATRIX_3X2_F*, Void)
-    get_opacity : Proc(ID2D1Brush*, Float32)
-    get_transform : Proc(ID2D1Brush*, D2D_MATRIX_3X2_F*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    set_opacity : UInt64
+    set_transform : UInt64
+    get_opacity : UInt64
+    get_transform : UInt64
   end
 
   ID2D1Brush_GUID = "2cd906a8-12e2-11dc-9fed-001143a055f9"
@@ -1825,22 +1825,22 @@ lib LibWin32
   end
 
   struct ID2D1BitmapBrushVTbl
-    query_interface : Proc(ID2D1BitmapBrush*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1BitmapBrush*, UInt32)
-    release : Proc(ID2D1BitmapBrush*, UInt32)
-    get_factory : Proc(ID2D1BitmapBrush*, ID2D1Factory*, Void)
-    set_opacity : Proc(ID2D1BitmapBrush*, Float32, Void)
-    set_transform : Proc(ID2D1BitmapBrush*, D2D_MATRIX_3X2_F*, Void)
-    get_opacity : Proc(ID2D1BitmapBrush*, Float32)
-    get_transform : Proc(ID2D1BitmapBrush*, D2D_MATRIX_3X2_F*, Void)
-    set_extend_mode_x : Proc(ID2D1BitmapBrush*, D2D1_EXTEND_MODE, Void)
-    set_extend_mode_y : Proc(ID2D1BitmapBrush*, D2D1_EXTEND_MODE, Void)
-    set_interpolation_mode : Proc(ID2D1BitmapBrush*, D2D1_BITMAP_INTERPOLATION_MODE, Void)
-    set_bitmap : Proc(ID2D1BitmapBrush*, ID2D1Bitmap, Void)
-    get_extend_mode_x : Proc(ID2D1BitmapBrush*, D2D1_EXTEND_MODE)
-    get_extend_mode_y : Proc(ID2D1BitmapBrush*, D2D1_EXTEND_MODE)
-    get_interpolation_mode : Proc(ID2D1BitmapBrush*, D2D1_BITMAP_INTERPOLATION_MODE)
-    get_bitmap : Proc(ID2D1BitmapBrush*, ID2D1Bitmap*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    set_opacity : UInt64
+    set_transform : UInt64
+    get_opacity : UInt64
+    get_transform : UInt64
+    set_extend_mode_x : UInt64
+    set_extend_mode_y : UInt64
+    set_interpolation_mode : UInt64
+    set_bitmap : UInt64
+    get_extend_mode_x : UInt64
+    get_extend_mode_y : UInt64
+    get_interpolation_mode : UInt64
+    get_bitmap : UInt64
   end
 
   ID2D1BitmapBrush_GUID = "2cd906aa-12e2-11dc-9fed-001143a055f9"
@@ -1850,16 +1850,16 @@ lib LibWin32
   end
 
   struct ID2D1SolidColorBrushVTbl
-    query_interface : Proc(ID2D1SolidColorBrush*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1SolidColorBrush*, UInt32)
-    release : Proc(ID2D1SolidColorBrush*, UInt32)
-    get_factory : Proc(ID2D1SolidColorBrush*, ID2D1Factory*, Void)
-    set_opacity : Proc(ID2D1SolidColorBrush*, Float32, Void)
-    set_transform : Proc(ID2D1SolidColorBrush*, D2D_MATRIX_3X2_F*, Void)
-    get_opacity : Proc(ID2D1SolidColorBrush*, Float32)
-    get_transform : Proc(ID2D1SolidColorBrush*, D2D_MATRIX_3X2_F*, Void)
-    set_color : Proc(ID2D1SolidColorBrush*, D2D1_COLOR_F*, Void)
-    get_color : Proc(ID2D1SolidColorBrush*, D2D1_COLOR_F)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    set_opacity : UInt64
+    set_transform : UInt64
+    get_opacity : UInt64
+    get_transform : UInt64
+    set_color : UInt64
+    get_color : UInt64
   end
 
   ID2D1SolidColorBrush_GUID = "2cd906a9-12e2-11dc-9fed-001143a055f9"
@@ -1869,19 +1869,19 @@ lib LibWin32
   end
 
   struct ID2D1LinearGradientBrushVTbl
-    query_interface : Proc(ID2D1LinearGradientBrush*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1LinearGradientBrush*, UInt32)
-    release : Proc(ID2D1LinearGradientBrush*, UInt32)
-    get_factory : Proc(ID2D1LinearGradientBrush*, ID2D1Factory*, Void)
-    set_opacity : Proc(ID2D1LinearGradientBrush*, Float32, Void)
-    set_transform : Proc(ID2D1LinearGradientBrush*, D2D_MATRIX_3X2_F*, Void)
-    get_opacity : Proc(ID2D1LinearGradientBrush*, Float32)
-    get_transform : Proc(ID2D1LinearGradientBrush*, D2D_MATRIX_3X2_F*, Void)
-    set_start_point : Proc(ID2D1LinearGradientBrush*, D2D_POINT_2F, Void)
-    set_end_point : Proc(ID2D1LinearGradientBrush*, D2D_POINT_2F, Void)
-    get_start_point : Proc(ID2D1LinearGradientBrush*, D2D_POINT_2F)
-    get_end_point : Proc(ID2D1LinearGradientBrush*, D2D_POINT_2F)
-    get_gradient_stop_collection : Proc(ID2D1LinearGradientBrush*, ID2D1GradientStopCollection*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    set_opacity : UInt64
+    set_transform : UInt64
+    get_opacity : UInt64
+    get_transform : UInt64
+    set_start_point : UInt64
+    set_end_point : UInt64
+    get_start_point : UInt64
+    get_end_point : UInt64
+    get_gradient_stop_collection : UInt64
   end
 
   ID2D1LinearGradientBrush_GUID = "2cd906ab-12e2-11dc-9fed-001143a055f9"
@@ -1891,23 +1891,23 @@ lib LibWin32
   end
 
   struct ID2D1RadialGradientBrushVTbl
-    query_interface : Proc(ID2D1RadialGradientBrush*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1RadialGradientBrush*, UInt32)
-    release : Proc(ID2D1RadialGradientBrush*, UInt32)
-    get_factory : Proc(ID2D1RadialGradientBrush*, ID2D1Factory*, Void)
-    set_opacity : Proc(ID2D1RadialGradientBrush*, Float32, Void)
-    set_transform : Proc(ID2D1RadialGradientBrush*, D2D_MATRIX_3X2_F*, Void)
-    get_opacity : Proc(ID2D1RadialGradientBrush*, Float32)
-    get_transform : Proc(ID2D1RadialGradientBrush*, D2D_MATRIX_3X2_F*, Void)
-    set_center : Proc(ID2D1RadialGradientBrush*, D2D_POINT_2F, Void)
-    set_gradient_origin_offset : Proc(ID2D1RadialGradientBrush*, D2D_POINT_2F, Void)
-    set_radius_x : Proc(ID2D1RadialGradientBrush*, Float32, Void)
-    set_radius_y : Proc(ID2D1RadialGradientBrush*, Float32, Void)
-    get_center : Proc(ID2D1RadialGradientBrush*, D2D_POINT_2F)
-    get_gradient_origin_offset : Proc(ID2D1RadialGradientBrush*, D2D_POINT_2F)
-    get_radius_x : Proc(ID2D1RadialGradientBrush*, Float32)
-    get_radius_y : Proc(ID2D1RadialGradientBrush*, Float32)
-    get_gradient_stop_collection : Proc(ID2D1RadialGradientBrush*, ID2D1GradientStopCollection*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    set_opacity : UInt64
+    set_transform : UInt64
+    get_opacity : UInt64
+    get_transform : UInt64
+    set_center : UInt64
+    set_gradient_origin_offset : UInt64
+    set_radius_x : UInt64
+    set_radius_y : UInt64
+    get_center : UInt64
+    get_gradient_origin_offset : UInt64
+    get_radius_x : UInt64
+    get_radius_y : UInt64
+    get_gradient_stop_collection : UInt64
   end
 
   ID2D1RadialGradientBrush_GUID = "2cd906ac-12e2-11dc-9fed-001143a055f9"
@@ -1917,19 +1917,19 @@ lib LibWin32
   end
 
   struct ID2D1StrokeStyleVTbl
-    query_interface : Proc(ID2D1StrokeStyle*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1StrokeStyle*, UInt32)
-    release : Proc(ID2D1StrokeStyle*, UInt32)
-    get_factory : Proc(ID2D1StrokeStyle*, ID2D1Factory*, Void)
-    get_start_cap : Proc(ID2D1StrokeStyle*, D2D1_CAP_STYLE)
-    get_end_cap : Proc(ID2D1StrokeStyle*, D2D1_CAP_STYLE)
-    get_dash_cap : Proc(ID2D1StrokeStyle*, D2D1_CAP_STYLE)
-    get_miter_limit : Proc(ID2D1StrokeStyle*, Float32)
-    get_line_join : Proc(ID2D1StrokeStyle*, D2D1_LINE_JOIN)
-    get_dash_offset : Proc(ID2D1StrokeStyle*, Float32)
-    get_dash_style : Proc(ID2D1StrokeStyle*, D2D1_DASH_STYLE)
-    get_dashes_count : Proc(ID2D1StrokeStyle*, UInt32)
-    get_dashes : Proc(ID2D1StrokeStyle*, Float32*, UInt32, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_start_cap : UInt64
+    get_end_cap : UInt64
+    get_dash_cap : UInt64
+    get_miter_limit : UInt64
+    get_line_join : UInt64
+    get_dash_offset : UInt64
+    get_dash_style : UInt64
+    get_dashes_count : UInt64
+    get_dashes : UInt64
   end
 
   ID2D1StrokeStyle_GUID = "2cd9069d-12e2-11dc-9fed-001143a055f9"
@@ -1939,23 +1939,23 @@ lib LibWin32
   end
 
   struct ID2D1GeometryVTbl
-    query_interface : Proc(ID2D1Geometry*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Geometry*, UInt32)
-    release : Proc(ID2D1Geometry*, UInt32)
-    get_factory : Proc(ID2D1Geometry*, ID2D1Factory*, Void)
-    get_bounds : Proc(ID2D1Geometry*, D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)
-    get_widened_bounds : Proc(ID2D1Geometry*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, D2D_RECT_F*, HRESULT)
-    stroke_contains_point : Proc(ID2D1Geometry*, D2D_POINT_2F, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)
-    fill_contains_point : Proc(ID2D1Geometry*, D2D_POINT_2F, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)
-    compare_with_geometry : Proc(ID2D1Geometry*, ID2D1Geometry, D2D_MATRIX_3X2_F*, Float32, D2D1_GEOMETRY_RELATION*, HRESULT)
-    simplify : Proc(ID2D1Geometry*, D2D1_GEOMETRY_SIMPLIFICATION_OPTION, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    tessellate : Proc(ID2D1Geometry*, D2D_MATRIX_3X2_F*, Float32, ID2D1TessellationSink, HRESULT)
-    combine_with_geometry : Proc(ID2D1Geometry*, ID2D1Geometry, D2D1_COMBINE_MODE, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    outline : Proc(ID2D1Geometry*, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    compute_area : Proc(ID2D1Geometry*, D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)
-    compute_length : Proc(ID2D1Geometry*, D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)
-    compute_point_at_length : Proc(ID2D1Geometry*, Float32, D2D_MATRIX_3X2_F*, Float32, D2D_POINT_2F*, D2D_POINT_2F*, HRESULT)
-    widen : Proc(ID2D1Geometry*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_bounds : UInt64
+    get_widened_bounds : UInt64
+    stroke_contains_point : UInt64
+    fill_contains_point : UInt64
+    compare_with_geometry : UInt64
+    simplify : UInt64
+    tessellate : UInt64
+    combine_with_geometry : UInt64
+    outline : UInt64
+    compute_area : UInt64
+    compute_length : UInt64
+    compute_point_at_length : UInt64
+    widen : UInt64
   end
 
   ID2D1Geometry_GUID = "2cd906a1-12e2-11dc-9fed-001143a055f9"
@@ -1965,24 +1965,24 @@ lib LibWin32
   end
 
   struct ID2D1RectangleGeometryVTbl
-    query_interface : Proc(ID2D1RectangleGeometry*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1RectangleGeometry*, UInt32)
-    release : Proc(ID2D1RectangleGeometry*, UInt32)
-    get_factory : Proc(ID2D1RectangleGeometry*, ID2D1Factory*, Void)
-    get_bounds : Proc(ID2D1RectangleGeometry*, D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)
-    get_widened_bounds : Proc(ID2D1RectangleGeometry*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, D2D_RECT_F*, HRESULT)
-    stroke_contains_point : Proc(ID2D1RectangleGeometry*, D2D_POINT_2F, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)
-    fill_contains_point : Proc(ID2D1RectangleGeometry*, D2D_POINT_2F, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)
-    compare_with_geometry : Proc(ID2D1RectangleGeometry*, ID2D1Geometry, D2D_MATRIX_3X2_F*, Float32, D2D1_GEOMETRY_RELATION*, HRESULT)
-    simplify : Proc(ID2D1RectangleGeometry*, D2D1_GEOMETRY_SIMPLIFICATION_OPTION, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    tessellate : Proc(ID2D1RectangleGeometry*, D2D_MATRIX_3X2_F*, Float32, ID2D1TessellationSink, HRESULT)
-    combine_with_geometry : Proc(ID2D1RectangleGeometry*, ID2D1Geometry, D2D1_COMBINE_MODE, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    outline : Proc(ID2D1RectangleGeometry*, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    compute_area : Proc(ID2D1RectangleGeometry*, D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)
-    compute_length : Proc(ID2D1RectangleGeometry*, D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)
-    compute_point_at_length : Proc(ID2D1RectangleGeometry*, Float32, D2D_MATRIX_3X2_F*, Float32, D2D_POINT_2F*, D2D_POINT_2F*, HRESULT)
-    widen : Proc(ID2D1RectangleGeometry*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    get_rect : Proc(ID2D1RectangleGeometry*, D2D_RECT_F*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_bounds : UInt64
+    get_widened_bounds : UInt64
+    stroke_contains_point : UInt64
+    fill_contains_point : UInt64
+    compare_with_geometry : UInt64
+    simplify : UInt64
+    tessellate : UInt64
+    combine_with_geometry : UInt64
+    outline : UInt64
+    compute_area : UInt64
+    compute_length : UInt64
+    compute_point_at_length : UInt64
+    widen : UInt64
+    get_rect : UInt64
   end
 
   ID2D1RectangleGeometry_GUID = "2cd906a2-12e2-11dc-9fed-001143a055f9"
@@ -1992,24 +1992,24 @@ lib LibWin32
   end
 
   struct ID2D1RoundedRectangleGeometryVTbl
-    query_interface : Proc(ID2D1RoundedRectangleGeometry*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1RoundedRectangleGeometry*, UInt32)
-    release : Proc(ID2D1RoundedRectangleGeometry*, UInt32)
-    get_factory : Proc(ID2D1RoundedRectangleGeometry*, ID2D1Factory*, Void)
-    get_bounds : Proc(ID2D1RoundedRectangleGeometry*, D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)
-    get_widened_bounds : Proc(ID2D1RoundedRectangleGeometry*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, D2D_RECT_F*, HRESULT)
-    stroke_contains_point : Proc(ID2D1RoundedRectangleGeometry*, D2D_POINT_2F, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)
-    fill_contains_point : Proc(ID2D1RoundedRectangleGeometry*, D2D_POINT_2F, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)
-    compare_with_geometry : Proc(ID2D1RoundedRectangleGeometry*, ID2D1Geometry, D2D_MATRIX_3X2_F*, Float32, D2D1_GEOMETRY_RELATION*, HRESULT)
-    simplify : Proc(ID2D1RoundedRectangleGeometry*, D2D1_GEOMETRY_SIMPLIFICATION_OPTION, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    tessellate : Proc(ID2D1RoundedRectangleGeometry*, D2D_MATRIX_3X2_F*, Float32, ID2D1TessellationSink, HRESULT)
-    combine_with_geometry : Proc(ID2D1RoundedRectangleGeometry*, ID2D1Geometry, D2D1_COMBINE_MODE, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    outline : Proc(ID2D1RoundedRectangleGeometry*, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    compute_area : Proc(ID2D1RoundedRectangleGeometry*, D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)
-    compute_length : Proc(ID2D1RoundedRectangleGeometry*, D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)
-    compute_point_at_length : Proc(ID2D1RoundedRectangleGeometry*, Float32, D2D_MATRIX_3X2_F*, Float32, D2D_POINT_2F*, D2D_POINT_2F*, HRESULT)
-    widen : Proc(ID2D1RoundedRectangleGeometry*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    get_rounded_rect : Proc(ID2D1RoundedRectangleGeometry*, D2D1_ROUNDED_RECT*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_bounds : UInt64
+    get_widened_bounds : UInt64
+    stroke_contains_point : UInt64
+    fill_contains_point : UInt64
+    compare_with_geometry : UInt64
+    simplify : UInt64
+    tessellate : UInt64
+    combine_with_geometry : UInt64
+    outline : UInt64
+    compute_area : UInt64
+    compute_length : UInt64
+    compute_point_at_length : UInt64
+    widen : UInt64
+    get_rounded_rect : UInt64
   end
 
   ID2D1RoundedRectangleGeometry_GUID = "2cd906a3-12e2-11dc-9fed-001143a055f9"
@@ -2019,24 +2019,24 @@ lib LibWin32
   end
 
   struct ID2D1EllipseGeometryVTbl
-    query_interface : Proc(ID2D1EllipseGeometry*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1EllipseGeometry*, UInt32)
-    release : Proc(ID2D1EllipseGeometry*, UInt32)
-    get_factory : Proc(ID2D1EllipseGeometry*, ID2D1Factory*, Void)
-    get_bounds : Proc(ID2D1EllipseGeometry*, D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)
-    get_widened_bounds : Proc(ID2D1EllipseGeometry*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, D2D_RECT_F*, HRESULT)
-    stroke_contains_point : Proc(ID2D1EllipseGeometry*, D2D_POINT_2F, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)
-    fill_contains_point : Proc(ID2D1EllipseGeometry*, D2D_POINT_2F, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)
-    compare_with_geometry : Proc(ID2D1EllipseGeometry*, ID2D1Geometry, D2D_MATRIX_3X2_F*, Float32, D2D1_GEOMETRY_RELATION*, HRESULT)
-    simplify : Proc(ID2D1EllipseGeometry*, D2D1_GEOMETRY_SIMPLIFICATION_OPTION, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    tessellate : Proc(ID2D1EllipseGeometry*, D2D_MATRIX_3X2_F*, Float32, ID2D1TessellationSink, HRESULT)
-    combine_with_geometry : Proc(ID2D1EllipseGeometry*, ID2D1Geometry, D2D1_COMBINE_MODE, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    outline : Proc(ID2D1EllipseGeometry*, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    compute_area : Proc(ID2D1EllipseGeometry*, D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)
-    compute_length : Proc(ID2D1EllipseGeometry*, D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)
-    compute_point_at_length : Proc(ID2D1EllipseGeometry*, Float32, D2D_MATRIX_3X2_F*, Float32, D2D_POINT_2F*, D2D_POINT_2F*, HRESULT)
-    widen : Proc(ID2D1EllipseGeometry*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    get_ellipse : Proc(ID2D1EllipseGeometry*, D2D1_ELLIPSE*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_bounds : UInt64
+    get_widened_bounds : UInt64
+    stroke_contains_point : UInt64
+    fill_contains_point : UInt64
+    compare_with_geometry : UInt64
+    simplify : UInt64
+    tessellate : UInt64
+    combine_with_geometry : UInt64
+    outline : UInt64
+    compute_area : UInt64
+    compute_length : UInt64
+    compute_point_at_length : UInt64
+    widen : UInt64
+    get_ellipse : UInt64
   end
 
   ID2D1EllipseGeometry_GUID = "2cd906a4-12e2-11dc-9fed-001143a055f9"
@@ -2046,26 +2046,26 @@ lib LibWin32
   end
 
   struct ID2D1GeometryGroupVTbl
-    query_interface : Proc(ID2D1GeometryGroup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1GeometryGroup*, UInt32)
-    release : Proc(ID2D1GeometryGroup*, UInt32)
-    get_factory : Proc(ID2D1GeometryGroup*, ID2D1Factory*, Void)
-    get_bounds : Proc(ID2D1GeometryGroup*, D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)
-    get_widened_bounds : Proc(ID2D1GeometryGroup*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, D2D_RECT_F*, HRESULT)
-    stroke_contains_point : Proc(ID2D1GeometryGroup*, D2D_POINT_2F, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)
-    fill_contains_point : Proc(ID2D1GeometryGroup*, D2D_POINT_2F, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)
-    compare_with_geometry : Proc(ID2D1GeometryGroup*, ID2D1Geometry, D2D_MATRIX_3X2_F*, Float32, D2D1_GEOMETRY_RELATION*, HRESULT)
-    simplify : Proc(ID2D1GeometryGroup*, D2D1_GEOMETRY_SIMPLIFICATION_OPTION, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    tessellate : Proc(ID2D1GeometryGroup*, D2D_MATRIX_3X2_F*, Float32, ID2D1TessellationSink, HRESULT)
-    combine_with_geometry : Proc(ID2D1GeometryGroup*, ID2D1Geometry, D2D1_COMBINE_MODE, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    outline : Proc(ID2D1GeometryGroup*, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    compute_area : Proc(ID2D1GeometryGroup*, D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)
-    compute_length : Proc(ID2D1GeometryGroup*, D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)
-    compute_point_at_length : Proc(ID2D1GeometryGroup*, Float32, D2D_MATRIX_3X2_F*, Float32, D2D_POINT_2F*, D2D_POINT_2F*, HRESULT)
-    widen : Proc(ID2D1GeometryGroup*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    get_fill_mode : Proc(ID2D1GeometryGroup*, D2D1_FILL_MODE)
-    get_source_geometry_count : Proc(ID2D1GeometryGroup*, UInt32)
-    get_source_geometries : Proc(ID2D1GeometryGroup*, ID2D1Geometry*, UInt32, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_bounds : UInt64
+    get_widened_bounds : UInt64
+    stroke_contains_point : UInt64
+    fill_contains_point : UInt64
+    compare_with_geometry : UInt64
+    simplify : UInt64
+    tessellate : UInt64
+    combine_with_geometry : UInt64
+    outline : UInt64
+    compute_area : UInt64
+    compute_length : UInt64
+    compute_point_at_length : UInt64
+    widen : UInt64
+    get_fill_mode : UInt64
+    get_source_geometry_count : UInt64
+    get_source_geometries : UInt64
   end
 
   ID2D1GeometryGroup_GUID = "2cd906a6-12e2-11dc-9fed-001143a055f9"
@@ -2075,25 +2075,25 @@ lib LibWin32
   end
 
   struct ID2D1TransformedGeometryVTbl
-    query_interface : Proc(ID2D1TransformedGeometry*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1TransformedGeometry*, UInt32)
-    release : Proc(ID2D1TransformedGeometry*, UInt32)
-    get_factory : Proc(ID2D1TransformedGeometry*, ID2D1Factory*, Void)
-    get_bounds : Proc(ID2D1TransformedGeometry*, D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)
-    get_widened_bounds : Proc(ID2D1TransformedGeometry*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, D2D_RECT_F*, HRESULT)
-    stroke_contains_point : Proc(ID2D1TransformedGeometry*, D2D_POINT_2F, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)
-    fill_contains_point : Proc(ID2D1TransformedGeometry*, D2D_POINT_2F, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)
-    compare_with_geometry : Proc(ID2D1TransformedGeometry*, ID2D1Geometry, D2D_MATRIX_3X2_F*, Float32, D2D1_GEOMETRY_RELATION*, HRESULT)
-    simplify : Proc(ID2D1TransformedGeometry*, D2D1_GEOMETRY_SIMPLIFICATION_OPTION, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    tessellate : Proc(ID2D1TransformedGeometry*, D2D_MATRIX_3X2_F*, Float32, ID2D1TessellationSink, HRESULT)
-    combine_with_geometry : Proc(ID2D1TransformedGeometry*, ID2D1Geometry, D2D1_COMBINE_MODE, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    outline : Proc(ID2D1TransformedGeometry*, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    compute_area : Proc(ID2D1TransformedGeometry*, D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)
-    compute_length : Proc(ID2D1TransformedGeometry*, D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)
-    compute_point_at_length : Proc(ID2D1TransformedGeometry*, Float32, D2D_MATRIX_3X2_F*, Float32, D2D_POINT_2F*, D2D_POINT_2F*, HRESULT)
-    widen : Proc(ID2D1TransformedGeometry*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    get_source_geometry : Proc(ID2D1TransformedGeometry*, ID2D1Geometry*, Void)
-    get_transform : Proc(ID2D1TransformedGeometry*, D2D_MATRIX_3X2_F*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_bounds : UInt64
+    get_widened_bounds : UInt64
+    stroke_contains_point : UInt64
+    fill_contains_point : UInt64
+    compare_with_geometry : UInt64
+    simplify : UInt64
+    tessellate : UInt64
+    combine_with_geometry : UInt64
+    outline : UInt64
+    compute_area : UInt64
+    compute_length : UInt64
+    compute_point_at_length : UInt64
+    widen : UInt64
+    get_source_geometry : UInt64
+    get_transform : UInt64
   end
 
   ID2D1TransformedGeometry_GUID = "2cd906bb-12e2-11dc-9fed-001143a055f9"
@@ -2103,21 +2103,21 @@ lib LibWin32
   end
 
   struct ID2D1GeometrySinkVTbl
-    query_interface : Proc(ID2D1GeometrySink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1GeometrySink*, UInt32)
-    release : Proc(ID2D1GeometrySink*, UInt32)
-    set_fill_mode : Proc(ID2D1GeometrySink*, D2D1_FILL_MODE, Void)
-    set_segment_flags : Proc(ID2D1GeometrySink*, D2D1_PATH_SEGMENT, Void)
-    begin_figure : Proc(ID2D1GeometrySink*, D2D_POINT_2F, D2D1_FIGURE_BEGIN, Void)
-    add_lines : Proc(ID2D1GeometrySink*, D2D_POINT_2F*, UInt32, Void)
-    add_beziers : Proc(ID2D1GeometrySink*, D2D1_BEZIER_SEGMENT*, UInt32, Void)
-    end_figure : Proc(ID2D1GeometrySink*, D2D1_FIGURE_END, Void)
-    close : Proc(ID2D1GeometrySink*, HRESULT)
-    add_line : Proc(ID2D1GeometrySink*, D2D_POINT_2F, Void)
-    add_bezier : Proc(ID2D1GeometrySink*, D2D1_BEZIER_SEGMENT*, Void)
-    add_quadratic_bezier : Proc(ID2D1GeometrySink*, D2D1_QUADRATIC_BEZIER_SEGMENT*, Void)
-    add_quadratic_beziers : Proc(ID2D1GeometrySink*, D2D1_QUADRATIC_BEZIER_SEGMENT*, UInt32, Void)
-    add_arc : Proc(ID2D1GeometrySink*, D2D1_ARC_SEGMENT*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_fill_mode : UInt64
+    set_segment_flags : UInt64
+    begin_figure : UInt64
+    add_lines : UInt64
+    add_beziers : UInt64
+    end_figure : UInt64
+    close : UInt64
+    add_line : UInt64
+    add_bezier : UInt64
+    add_quadratic_bezier : UInt64
+    add_quadratic_beziers : UInt64
+    add_arc : UInt64
   end
 
   ID2D1GeometrySink_GUID = "2cd9069f-12e2-11dc-9fed-001143a055f9"
@@ -2127,11 +2127,11 @@ lib LibWin32
   end
 
   struct ID2D1TessellationSinkVTbl
-    query_interface : Proc(ID2D1TessellationSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1TessellationSink*, UInt32)
-    release : Proc(ID2D1TessellationSink*, UInt32)
-    add_triangles : Proc(ID2D1TessellationSink*, D2D1_TRIANGLE*, UInt32, Void)
-    close : Proc(ID2D1TessellationSink*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_triangles : UInt64
+    close : UInt64
   end
 
   ID2D1TessellationSink_GUID = "2cd906c1-12e2-11dc-9fed-001143a055f9"
@@ -2141,27 +2141,27 @@ lib LibWin32
   end
 
   struct ID2D1PathGeometryVTbl
-    query_interface : Proc(ID2D1PathGeometry*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1PathGeometry*, UInt32)
-    release : Proc(ID2D1PathGeometry*, UInt32)
-    get_factory : Proc(ID2D1PathGeometry*, ID2D1Factory*, Void)
-    get_bounds : Proc(ID2D1PathGeometry*, D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)
-    get_widened_bounds : Proc(ID2D1PathGeometry*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, D2D_RECT_F*, HRESULT)
-    stroke_contains_point : Proc(ID2D1PathGeometry*, D2D_POINT_2F, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)
-    fill_contains_point : Proc(ID2D1PathGeometry*, D2D_POINT_2F, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)
-    compare_with_geometry : Proc(ID2D1PathGeometry*, ID2D1Geometry, D2D_MATRIX_3X2_F*, Float32, D2D1_GEOMETRY_RELATION*, HRESULT)
-    simplify : Proc(ID2D1PathGeometry*, D2D1_GEOMETRY_SIMPLIFICATION_OPTION, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    tessellate : Proc(ID2D1PathGeometry*, D2D_MATRIX_3X2_F*, Float32, ID2D1TessellationSink, HRESULT)
-    combine_with_geometry : Proc(ID2D1PathGeometry*, ID2D1Geometry, D2D1_COMBINE_MODE, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    outline : Proc(ID2D1PathGeometry*, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    compute_area : Proc(ID2D1PathGeometry*, D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)
-    compute_length : Proc(ID2D1PathGeometry*, D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)
-    compute_point_at_length : Proc(ID2D1PathGeometry*, Float32, D2D_MATRIX_3X2_F*, Float32, D2D_POINT_2F*, D2D_POINT_2F*, HRESULT)
-    widen : Proc(ID2D1PathGeometry*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    open : Proc(ID2D1PathGeometry*, ID2D1GeometrySink*, HRESULT)
-    stream : Proc(ID2D1PathGeometry*, ID2D1GeometrySink, HRESULT)
-    get_segment_count : Proc(ID2D1PathGeometry*, UInt32*, HRESULT)
-    get_figure_count : Proc(ID2D1PathGeometry*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_bounds : UInt64
+    get_widened_bounds : UInt64
+    stroke_contains_point : UInt64
+    fill_contains_point : UInt64
+    compare_with_geometry : UInt64
+    simplify : UInt64
+    tessellate : UInt64
+    combine_with_geometry : UInt64
+    outline : UInt64
+    compute_area : UInt64
+    compute_length : UInt64
+    compute_point_at_length : UInt64
+    widen : UInt64
+    open : UInt64
+    stream : UInt64
+    get_segment_count : UInt64
+    get_figure_count : UInt64
   end
 
   ID2D1PathGeometry_GUID = "2cd906a5-12e2-11dc-9fed-001143a055f9"
@@ -2171,11 +2171,11 @@ lib LibWin32
   end
 
   struct ID2D1MeshVTbl
-    query_interface : Proc(ID2D1Mesh*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Mesh*, UInt32)
-    release : Proc(ID2D1Mesh*, UInt32)
-    get_factory : Proc(ID2D1Mesh*, ID2D1Factory*, Void)
-    open : Proc(ID2D1Mesh*, ID2D1TessellationSink*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    open : UInt64
   end
 
   ID2D1Mesh_GUID = "2cd906c2-12e2-11dc-9fed-001143a055f9"
@@ -2185,11 +2185,11 @@ lib LibWin32
   end
 
   struct ID2D1LayerVTbl
-    query_interface : Proc(ID2D1Layer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Layer*, UInt32)
-    release : Proc(ID2D1Layer*, UInt32)
-    get_factory : Proc(ID2D1Layer*, ID2D1Factory*, Void)
-    get_size : Proc(ID2D1Layer*, D2D_SIZE_F)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_size : UInt64
   end
 
   ID2D1Layer_GUID = "2cd9069b-12e2-11dc-9fed-001143a055f9"
@@ -2199,14 +2199,14 @@ lib LibWin32
   end
 
   struct ID2D1DrawingStateBlockVTbl
-    query_interface : Proc(ID2D1DrawingStateBlock*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1DrawingStateBlock*, UInt32)
-    release : Proc(ID2D1DrawingStateBlock*, UInt32)
-    get_factory : Proc(ID2D1DrawingStateBlock*, ID2D1Factory*, Void)
-    get_description : Proc(ID2D1DrawingStateBlock*, D2D1_DRAWING_STATE_DESCRIPTION*, Void)
-    set_description : Proc(ID2D1DrawingStateBlock*, D2D1_DRAWING_STATE_DESCRIPTION*, Void)
-    set_text_rendering_params : Proc(ID2D1DrawingStateBlock*, IDWriteRenderingParams, Void)
-    get_text_rendering_params : Proc(ID2D1DrawingStateBlock*, IDWriteRenderingParams*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_description : UInt64
+    set_description : UInt64
+    set_text_rendering_params : UInt64
+    get_text_rendering_params : UInt64
   end
 
   ID2D1DrawingStateBlock_GUID = "28506e39-ebf6-46a1-bb47-fd85565ab957"
@@ -2216,63 +2216,63 @@ lib LibWin32
   end
 
   struct ID2D1RenderTargetVTbl
-    query_interface : Proc(ID2D1RenderTarget*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1RenderTarget*, UInt32)
-    release : Proc(ID2D1RenderTarget*, UInt32)
-    get_factory : Proc(ID2D1RenderTarget*, ID2D1Factory*, Void)
-    create_bitmap : Proc(ID2D1RenderTarget*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_from_wic_bitmap : Proc(ID2D1RenderTarget*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_shared_bitmap : Proc(ID2D1RenderTarget*, Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_brush : Proc(ID2D1RenderTarget*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)
-    create_solid_color_brush : Proc(ID2D1RenderTarget*, D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)
-    create_gradient_stop_collection : Proc(ID2D1RenderTarget*, D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)
-    create_linear_gradient_brush : Proc(ID2D1RenderTarget*, D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)
-    create_radial_gradient_brush : Proc(ID2D1RenderTarget*, D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)
-    create_compatible_render_target : Proc(ID2D1RenderTarget*, D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)
-    create_layer : Proc(ID2D1RenderTarget*, D2D_SIZE_F*, ID2D1Layer*, HRESULT)
-    create_mesh : Proc(ID2D1RenderTarget*, ID2D1Mesh*, HRESULT)
-    draw_line : Proc(ID2D1RenderTarget*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    draw_rectangle : Proc(ID2D1RenderTarget*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rectangle : Proc(ID2D1RenderTarget*, D2D_RECT_F*, ID2D1Brush, Void)
-    draw_rounded_rectangle : Proc(ID2D1RenderTarget*, D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rounded_rectangle : Proc(ID2D1RenderTarget*, D2D1_ROUNDED_RECT*, ID2D1Brush, Void)
-    draw_ellipse : Proc(ID2D1RenderTarget*, D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_ellipse : Proc(ID2D1RenderTarget*, D2D1_ELLIPSE*, ID2D1Brush, Void)
-    draw_geometry : Proc(ID2D1RenderTarget*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_geometry : Proc(ID2D1RenderTarget*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)
-    fill_mesh : Proc(ID2D1RenderTarget*, ID2D1Mesh, ID2D1Brush, Void)
-    fill_opacity_mask : Proc(ID2D1RenderTarget*, ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)
-    draw_bitmap : Proc(ID2D1RenderTarget*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)
-    draw_text : Proc(ID2D1RenderTarget*, Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)
-    draw_text_layout : Proc(ID2D1RenderTarget*, D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)
-    draw_glyph_run : Proc(ID2D1RenderTarget*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    set_transform : Proc(ID2D1RenderTarget*, D2D_MATRIX_3X2_F*, Void)
-    get_transform : Proc(ID2D1RenderTarget*, D2D_MATRIX_3X2_F*, Void)
-    set_antialias_mode : Proc(ID2D1RenderTarget*, D2D1_ANTIALIAS_MODE, Void)
-    get_antialias_mode : Proc(ID2D1RenderTarget*, D2D1_ANTIALIAS_MODE)
-    set_text_antialias_mode : Proc(ID2D1RenderTarget*, D2D1_TEXT_ANTIALIAS_MODE, Void)
-    get_text_antialias_mode : Proc(ID2D1RenderTarget*, D2D1_TEXT_ANTIALIAS_MODE)
-    set_text_rendering_params : Proc(ID2D1RenderTarget*, IDWriteRenderingParams, Void)
-    get_text_rendering_params : Proc(ID2D1RenderTarget*, IDWriteRenderingParams*, Void)
-    set_tags : Proc(ID2D1RenderTarget*, UInt64, UInt64, Void)
-    get_tags : Proc(ID2D1RenderTarget*, UInt64*, UInt64*, Void)
-    push_layer : Proc(ID2D1RenderTarget*, D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)
-    pop_layer : Proc(ID2D1RenderTarget*, Void)
-    flush : Proc(ID2D1RenderTarget*, UInt64*, UInt64*, HRESULT)
-    save_drawing_state : Proc(ID2D1RenderTarget*, ID2D1DrawingStateBlock, Void)
-    restore_drawing_state : Proc(ID2D1RenderTarget*, ID2D1DrawingStateBlock, Void)
-    push_axis_aligned_clip : Proc(ID2D1RenderTarget*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)
-    pop_axis_aligned_clip : Proc(ID2D1RenderTarget*, Void)
-    clear : Proc(ID2D1RenderTarget*, D2D1_COLOR_F*, Void)
-    begin_draw : Proc(ID2D1RenderTarget*, Void)
-    end_draw : Proc(ID2D1RenderTarget*, UInt64*, UInt64*, HRESULT)
-    get_pixel_format : Proc(ID2D1RenderTarget*, D2D1_PIXEL_FORMAT)
-    set_dpi : Proc(ID2D1RenderTarget*, Float32, Float32, Void)
-    get_dpi : Proc(ID2D1RenderTarget*, Float32*, Float32*, Void)
-    get_size : Proc(ID2D1RenderTarget*, D2D_SIZE_F)
-    get_pixel_size : Proc(ID2D1RenderTarget*, D2D_SIZE_U)
-    get_maximum_bitmap_size : Proc(ID2D1RenderTarget*, UInt32)
-    is_supported : Proc(ID2D1RenderTarget*, D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_bitmap : UInt64
+    create_bitmap_from_wic_bitmap : UInt64
+    create_shared_bitmap : UInt64
+    create_bitmap_brush : UInt64
+    create_solid_color_brush : UInt64
+    create_gradient_stop_collection : UInt64
+    create_linear_gradient_brush : UInt64
+    create_radial_gradient_brush : UInt64
+    create_compatible_render_target : UInt64
+    create_layer : UInt64
+    create_mesh : UInt64
+    draw_line : UInt64
+    draw_rectangle : UInt64
+    fill_rectangle : UInt64
+    draw_rounded_rectangle : UInt64
+    fill_rounded_rectangle : UInt64
+    draw_ellipse : UInt64
+    fill_ellipse : UInt64
+    draw_geometry : UInt64
+    fill_geometry : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    draw_bitmap : UInt64
+    draw_text : UInt64
+    draw_text_layout : UInt64
+    draw_glyph_run : UInt64
+    set_transform : UInt64
+    get_transform : UInt64
+    set_antialias_mode : UInt64
+    get_antialias_mode : UInt64
+    set_text_antialias_mode : UInt64
+    get_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    get_text_rendering_params : UInt64
+    set_tags : UInt64
+    get_tags : UInt64
+    push_layer : UInt64
+    pop_layer : UInt64
+    flush : UInt64
+    save_drawing_state : UInt64
+    restore_drawing_state : UInt64
+    push_axis_aligned_clip : UInt64
+    pop_axis_aligned_clip : UInt64
+    clear : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    get_pixel_format : UInt64
+    set_dpi : UInt64
+    get_dpi : UInt64
+    get_size : UInt64
+    get_pixel_size : UInt64
+    get_maximum_bitmap_size : UInt64
+    is_supported : UInt64
   end
 
   ID2D1RenderTarget_GUID = "2cd90694-12e2-11dc-9fed-001143a055f9"
@@ -2282,64 +2282,64 @@ lib LibWin32
   end
 
   struct ID2D1BitmapRenderTargetVTbl
-    query_interface : Proc(ID2D1BitmapRenderTarget*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1BitmapRenderTarget*, UInt32)
-    release : Proc(ID2D1BitmapRenderTarget*, UInt32)
-    get_factory : Proc(ID2D1BitmapRenderTarget*, ID2D1Factory*, Void)
-    create_bitmap : Proc(ID2D1BitmapRenderTarget*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_from_wic_bitmap : Proc(ID2D1BitmapRenderTarget*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_shared_bitmap : Proc(ID2D1BitmapRenderTarget*, Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_brush : Proc(ID2D1BitmapRenderTarget*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)
-    create_solid_color_brush : Proc(ID2D1BitmapRenderTarget*, D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)
-    create_gradient_stop_collection : Proc(ID2D1BitmapRenderTarget*, D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)
-    create_linear_gradient_brush : Proc(ID2D1BitmapRenderTarget*, D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)
-    create_radial_gradient_brush : Proc(ID2D1BitmapRenderTarget*, D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)
-    create_compatible_render_target : Proc(ID2D1BitmapRenderTarget*, D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)
-    create_layer : Proc(ID2D1BitmapRenderTarget*, D2D_SIZE_F*, ID2D1Layer*, HRESULT)
-    create_mesh : Proc(ID2D1BitmapRenderTarget*, ID2D1Mesh*, HRESULT)
-    draw_line : Proc(ID2D1BitmapRenderTarget*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    draw_rectangle : Proc(ID2D1BitmapRenderTarget*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rectangle : Proc(ID2D1BitmapRenderTarget*, D2D_RECT_F*, ID2D1Brush, Void)
-    draw_rounded_rectangle : Proc(ID2D1BitmapRenderTarget*, D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rounded_rectangle : Proc(ID2D1BitmapRenderTarget*, D2D1_ROUNDED_RECT*, ID2D1Brush, Void)
-    draw_ellipse : Proc(ID2D1BitmapRenderTarget*, D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_ellipse : Proc(ID2D1BitmapRenderTarget*, D2D1_ELLIPSE*, ID2D1Brush, Void)
-    draw_geometry : Proc(ID2D1BitmapRenderTarget*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_geometry : Proc(ID2D1BitmapRenderTarget*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)
-    fill_mesh : Proc(ID2D1BitmapRenderTarget*, ID2D1Mesh, ID2D1Brush, Void)
-    fill_opacity_mask : Proc(ID2D1BitmapRenderTarget*, ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)
-    draw_bitmap : Proc(ID2D1BitmapRenderTarget*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)
-    draw_text : Proc(ID2D1BitmapRenderTarget*, Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)
-    draw_text_layout : Proc(ID2D1BitmapRenderTarget*, D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)
-    draw_glyph_run : Proc(ID2D1BitmapRenderTarget*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    set_transform : Proc(ID2D1BitmapRenderTarget*, D2D_MATRIX_3X2_F*, Void)
-    get_transform : Proc(ID2D1BitmapRenderTarget*, D2D_MATRIX_3X2_F*, Void)
-    set_antialias_mode : Proc(ID2D1BitmapRenderTarget*, D2D1_ANTIALIAS_MODE, Void)
-    get_antialias_mode : Proc(ID2D1BitmapRenderTarget*, D2D1_ANTIALIAS_MODE)
-    set_text_antialias_mode : Proc(ID2D1BitmapRenderTarget*, D2D1_TEXT_ANTIALIAS_MODE, Void)
-    get_text_antialias_mode : Proc(ID2D1BitmapRenderTarget*, D2D1_TEXT_ANTIALIAS_MODE)
-    set_text_rendering_params : Proc(ID2D1BitmapRenderTarget*, IDWriteRenderingParams, Void)
-    get_text_rendering_params : Proc(ID2D1BitmapRenderTarget*, IDWriteRenderingParams*, Void)
-    set_tags : Proc(ID2D1BitmapRenderTarget*, UInt64, UInt64, Void)
-    get_tags : Proc(ID2D1BitmapRenderTarget*, UInt64*, UInt64*, Void)
-    push_layer : Proc(ID2D1BitmapRenderTarget*, D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)
-    pop_layer : Proc(ID2D1BitmapRenderTarget*, Void)
-    flush : Proc(ID2D1BitmapRenderTarget*, UInt64*, UInt64*, HRESULT)
-    save_drawing_state : Proc(ID2D1BitmapRenderTarget*, ID2D1DrawingStateBlock, Void)
-    restore_drawing_state : Proc(ID2D1BitmapRenderTarget*, ID2D1DrawingStateBlock, Void)
-    push_axis_aligned_clip : Proc(ID2D1BitmapRenderTarget*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)
-    pop_axis_aligned_clip : Proc(ID2D1BitmapRenderTarget*, Void)
-    clear : Proc(ID2D1BitmapRenderTarget*, D2D1_COLOR_F*, Void)
-    begin_draw : Proc(ID2D1BitmapRenderTarget*, Void)
-    end_draw : Proc(ID2D1BitmapRenderTarget*, UInt64*, UInt64*, HRESULT)
-    get_pixel_format : Proc(ID2D1BitmapRenderTarget*, D2D1_PIXEL_FORMAT)
-    set_dpi : Proc(ID2D1BitmapRenderTarget*, Float32, Float32, Void)
-    get_dpi : Proc(ID2D1BitmapRenderTarget*, Float32*, Float32*, Void)
-    get_size : Proc(ID2D1BitmapRenderTarget*, D2D_SIZE_F)
-    get_pixel_size : Proc(ID2D1BitmapRenderTarget*, D2D_SIZE_U)
-    get_maximum_bitmap_size : Proc(ID2D1BitmapRenderTarget*, UInt32)
-    is_supported : Proc(ID2D1BitmapRenderTarget*, D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)
-    get_bitmap : Proc(ID2D1BitmapRenderTarget*, ID2D1Bitmap*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_bitmap : UInt64
+    create_bitmap_from_wic_bitmap : UInt64
+    create_shared_bitmap : UInt64
+    create_bitmap_brush : UInt64
+    create_solid_color_brush : UInt64
+    create_gradient_stop_collection : UInt64
+    create_linear_gradient_brush : UInt64
+    create_radial_gradient_brush : UInt64
+    create_compatible_render_target : UInt64
+    create_layer : UInt64
+    create_mesh : UInt64
+    draw_line : UInt64
+    draw_rectangle : UInt64
+    fill_rectangle : UInt64
+    draw_rounded_rectangle : UInt64
+    fill_rounded_rectangle : UInt64
+    draw_ellipse : UInt64
+    fill_ellipse : UInt64
+    draw_geometry : UInt64
+    fill_geometry : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    draw_bitmap : UInt64
+    draw_text : UInt64
+    draw_text_layout : UInt64
+    draw_glyph_run : UInt64
+    set_transform : UInt64
+    get_transform : UInt64
+    set_antialias_mode : UInt64
+    get_antialias_mode : UInt64
+    set_text_antialias_mode : UInt64
+    get_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    get_text_rendering_params : UInt64
+    set_tags : UInt64
+    get_tags : UInt64
+    push_layer : UInt64
+    pop_layer : UInt64
+    flush : UInt64
+    save_drawing_state : UInt64
+    restore_drawing_state : UInt64
+    push_axis_aligned_clip : UInt64
+    pop_axis_aligned_clip : UInt64
+    clear : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    get_pixel_format : UInt64
+    set_dpi : UInt64
+    get_dpi : UInt64
+    get_size : UInt64
+    get_pixel_size : UInt64
+    get_maximum_bitmap_size : UInt64
+    is_supported : UInt64
+    get_bitmap : UInt64
   end
 
   ID2D1BitmapRenderTarget_GUID = "2cd90695-12e2-11dc-9fed-001143a055f9"
@@ -2349,66 +2349,66 @@ lib LibWin32
   end
 
   struct ID2D1HwndRenderTargetVTbl
-    query_interface : Proc(ID2D1HwndRenderTarget*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1HwndRenderTarget*, UInt32)
-    release : Proc(ID2D1HwndRenderTarget*, UInt32)
-    get_factory : Proc(ID2D1HwndRenderTarget*, ID2D1Factory*, Void)
-    create_bitmap : Proc(ID2D1HwndRenderTarget*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_from_wic_bitmap : Proc(ID2D1HwndRenderTarget*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_shared_bitmap : Proc(ID2D1HwndRenderTarget*, Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_brush : Proc(ID2D1HwndRenderTarget*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)
-    create_solid_color_brush : Proc(ID2D1HwndRenderTarget*, D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)
-    create_gradient_stop_collection : Proc(ID2D1HwndRenderTarget*, D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)
-    create_linear_gradient_brush : Proc(ID2D1HwndRenderTarget*, D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)
-    create_radial_gradient_brush : Proc(ID2D1HwndRenderTarget*, D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)
-    create_compatible_render_target : Proc(ID2D1HwndRenderTarget*, D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)
-    create_layer : Proc(ID2D1HwndRenderTarget*, D2D_SIZE_F*, ID2D1Layer*, HRESULT)
-    create_mesh : Proc(ID2D1HwndRenderTarget*, ID2D1Mesh*, HRESULT)
-    draw_line : Proc(ID2D1HwndRenderTarget*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    draw_rectangle : Proc(ID2D1HwndRenderTarget*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rectangle : Proc(ID2D1HwndRenderTarget*, D2D_RECT_F*, ID2D1Brush, Void)
-    draw_rounded_rectangle : Proc(ID2D1HwndRenderTarget*, D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rounded_rectangle : Proc(ID2D1HwndRenderTarget*, D2D1_ROUNDED_RECT*, ID2D1Brush, Void)
-    draw_ellipse : Proc(ID2D1HwndRenderTarget*, D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_ellipse : Proc(ID2D1HwndRenderTarget*, D2D1_ELLIPSE*, ID2D1Brush, Void)
-    draw_geometry : Proc(ID2D1HwndRenderTarget*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_geometry : Proc(ID2D1HwndRenderTarget*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)
-    fill_mesh : Proc(ID2D1HwndRenderTarget*, ID2D1Mesh, ID2D1Brush, Void)
-    fill_opacity_mask : Proc(ID2D1HwndRenderTarget*, ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)
-    draw_bitmap : Proc(ID2D1HwndRenderTarget*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)
-    draw_text : Proc(ID2D1HwndRenderTarget*, Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)
-    draw_text_layout : Proc(ID2D1HwndRenderTarget*, D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)
-    draw_glyph_run : Proc(ID2D1HwndRenderTarget*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    set_transform : Proc(ID2D1HwndRenderTarget*, D2D_MATRIX_3X2_F*, Void)
-    get_transform : Proc(ID2D1HwndRenderTarget*, D2D_MATRIX_3X2_F*, Void)
-    set_antialias_mode : Proc(ID2D1HwndRenderTarget*, D2D1_ANTIALIAS_MODE, Void)
-    get_antialias_mode : Proc(ID2D1HwndRenderTarget*, D2D1_ANTIALIAS_MODE)
-    set_text_antialias_mode : Proc(ID2D1HwndRenderTarget*, D2D1_TEXT_ANTIALIAS_MODE, Void)
-    get_text_antialias_mode : Proc(ID2D1HwndRenderTarget*, D2D1_TEXT_ANTIALIAS_MODE)
-    set_text_rendering_params : Proc(ID2D1HwndRenderTarget*, IDWriteRenderingParams, Void)
-    get_text_rendering_params : Proc(ID2D1HwndRenderTarget*, IDWriteRenderingParams*, Void)
-    set_tags : Proc(ID2D1HwndRenderTarget*, UInt64, UInt64, Void)
-    get_tags : Proc(ID2D1HwndRenderTarget*, UInt64*, UInt64*, Void)
-    push_layer : Proc(ID2D1HwndRenderTarget*, D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)
-    pop_layer : Proc(ID2D1HwndRenderTarget*, Void)
-    flush : Proc(ID2D1HwndRenderTarget*, UInt64*, UInt64*, HRESULT)
-    save_drawing_state : Proc(ID2D1HwndRenderTarget*, ID2D1DrawingStateBlock, Void)
-    restore_drawing_state : Proc(ID2D1HwndRenderTarget*, ID2D1DrawingStateBlock, Void)
-    push_axis_aligned_clip : Proc(ID2D1HwndRenderTarget*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)
-    pop_axis_aligned_clip : Proc(ID2D1HwndRenderTarget*, Void)
-    clear : Proc(ID2D1HwndRenderTarget*, D2D1_COLOR_F*, Void)
-    begin_draw : Proc(ID2D1HwndRenderTarget*, Void)
-    end_draw : Proc(ID2D1HwndRenderTarget*, UInt64*, UInt64*, HRESULT)
-    get_pixel_format : Proc(ID2D1HwndRenderTarget*, D2D1_PIXEL_FORMAT)
-    set_dpi : Proc(ID2D1HwndRenderTarget*, Float32, Float32, Void)
-    get_dpi : Proc(ID2D1HwndRenderTarget*, Float32*, Float32*, Void)
-    get_size : Proc(ID2D1HwndRenderTarget*, D2D_SIZE_F)
-    get_pixel_size : Proc(ID2D1HwndRenderTarget*, D2D_SIZE_U)
-    get_maximum_bitmap_size : Proc(ID2D1HwndRenderTarget*, UInt32)
-    is_supported : Proc(ID2D1HwndRenderTarget*, D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)
-    check_window_state : Proc(ID2D1HwndRenderTarget*, D2D1_WINDOW_STATE)
-    resize : Proc(ID2D1HwndRenderTarget*, D2D_SIZE_U*, HRESULT)
-    get_hwnd : Proc(ID2D1HwndRenderTarget*, HANDLE)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_bitmap : UInt64
+    create_bitmap_from_wic_bitmap : UInt64
+    create_shared_bitmap : UInt64
+    create_bitmap_brush : UInt64
+    create_solid_color_brush : UInt64
+    create_gradient_stop_collection : UInt64
+    create_linear_gradient_brush : UInt64
+    create_radial_gradient_brush : UInt64
+    create_compatible_render_target : UInt64
+    create_layer : UInt64
+    create_mesh : UInt64
+    draw_line : UInt64
+    draw_rectangle : UInt64
+    fill_rectangle : UInt64
+    draw_rounded_rectangle : UInt64
+    fill_rounded_rectangle : UInt64
+    draw_ellipse : UInt64
+    fill_ellipse : UInt64
+    draw_geometry : UInt64
+    fill_geometry : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    draw_bitmap : UInt64
+    draw_text : UInt64
+    draw_text_layout : UInt64
+    draw_glyph_run : UInt64
+    set_transform : UInt64
+    get_transform : UInt64
+    set_antialias_mode : UInt64
+    get_antialias_mode : UInt64
+    set_text_antialias_mode : UInt64
+    get_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    get_text_rendering_params : UInt64
+    set_tags : UInt64
+    get_tags : UInt64
+    push_layer : UInt64
+    pop_layer : UInt64
+    flush : UInt64
+    save_drawing_state : UInt64
+    restore_drawing_state : UInt64
+    push_axis_aligned_clip : UInt64
+    pop_axis_aligned_clip : UInt64
+    clear : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    get_pixel_format : UInt64
+    set_dpi : UInt64
+    get_dpi : UInt64
+    get_size : UInt64
+    get_pixel_size : UInt64
+    get_maximum_bitmap_size : UInt64
+    is_supported : UInt64
+    check_window_state : UInt64
+    resize : UInt64
+    get_hwnd : UInt64
   end
 
   ID2D1HwndRenderTarget_GUID = "2cd90698-12e2-11dc-9fed-001143a055f9"
@@ -2418,11 +2418,11 @@ lib LibWin32
   end
 
   struct ID2D1GdiInteropRenderTargetVTbl
-    query_interface : Proc(ID2D1GdiInteropRenderTarget*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1GdiInteropRenderTarget*, UInt32)
-    release : Proc(ID2D1GdiInteropRenderTarget*, UInt32)
-    get_dc : Proc(ID2D1GdiInteropRenderTarget*, D2D1_DC_INITIALIZE_MODE, HDC*, HRESULT)
-    release_dc : Proc(ID2D1GdiInteropRenderTarget*, RECT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_dc : UInt64
+    release_dc : UInt64
   end
 
   ID2D1GdiInteropRenderTarget_GUID = "e0db51c3-6f77-4bae-b3d5-e47509b35838"
@@ -2432,64 +2432,64 @@ lib LibWin32
   end
 
   struct ID2D1DCRenderTargetVTbl
-    query_interface : Proc(ID2D1DCRenderTarget*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1DCRenderTarget*, UInt32)
-    release : Proc(ID2D1DCRenderTarget*, UInt32)
-    get_factory : Proc(ID2D1DCRenderTarget*, ID2D1Factory*, Void)
-    create_bitmap : Proc(ID2D1DCRenderTarget*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_from_wic_bitmap : Proc(ID2D1DCRenderTarget*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_shared_bitmap : Proc(ID2D1DCRenderTarget*, Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_brush : Proc(ID2D1DCRenderTarget*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)
-    create_solid_color_brush : Proc(ID2D1DCRenderTarget*, D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)
-    create_gradient_stop_collection : Proc(ID2D1DCRenderTarget*, D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)
-    create_linear_gradient_brush : Proc(ID2D1DCRenderTarget*, D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)
-    create_radial_gradient_brush : Proc(ID2D1DCRenderTarget*, D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)
-    create_compatible_render_target : Proc(ID2D1DCRenderTarget*, D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)
-    create_layer : Proc(ID2D1DCRenderTarget*, D2D_SIZE_F*, ID2D1Layer*, HRESULT)
-    create_mesh : Proc(ID2D1DCRenderTarget*, ID2D1Mesh*, HRESULT)
-    draw_line : Proc(ID2D1DCRenderTarget*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    draw_rectangle : Proc(ID2D1DCRenderTarget*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rectangle : Proc(ID2D1DCRenderTarget*, D2D_RECT_F*, ID2D1Brush, Void)
-    draw_rounded_rectangle : Proc(ID2D1DCRenderTarget*, D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rounded_rectangle : Proc(ID2D1DCRenderTarget*, D2D1_ROUNDED_RECT*, ID2D1Brush, Void)
-    draw_ellipse : Proc(ID2D1DCRenderTarget*, D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_ellipse : Proc(ID2D1DCRenderTarget*, D2D1_ELLIPSE*, ID2D1Brush, Void)
-    draw_geometry : Proc(ID2D1DCRenderTarget*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_geometry : Proc(ID2D1DCRenderTarget*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)
-    fill_mesh : Proc(ID2D1DCRenderTarget*, ID2D1Mesh, ID2D1Brush, Void)
-    fill_opacity_mask : Proc(ID2D1DCRenderTarget*, ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)
-    draw_bitmap : Proc(ID2D1DCRenderTarget*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)
-    draw_text : Proc(ID2D1DCRenderTarget*, Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)
-    draw_text_layout : Proc(ID2D1DCRenderTarget*, D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)
-    draw_glyph_run : Proc(ID2D1DCRenderTarget*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    set_transform : Proc(ID2D1DCRenderTarget*, D2D_MATRIX_3X2_F*, Void)
-    get_transform : Proc(ID2D1DCRenderTarget*, D2D_MATRIX_3X2_F*, Void)
-    set_antialias_mode : Proc(ID2D1DCRenderTarget*, D2D1_ANTIALIAS_MODE, Void)
-    get_antialias_mode : Proc(ID2D1DCRenderTarget*, D2D1_ANTIALIAS_MODE)
-    set_text_antialias_mode : Proc(ID2D1DCRenderTarget*, D2D1_TEXT_ANTIALIAS_MODE, Void)
-    get_text_antialias_mode : Proc(ID2D1DCRenderTarget*, D2D1_TEXT_ANTIALIAS_MODE)
-    set_text_rendering_params : Proc(ID2D1DCRenderTarget*, IDWriteRenderingParams, Void)
-    get_text_rendering_params : Proc(ID2D1DCRenderTarget*, IDWriteRenderingParams*, Void)
-    set_tags : Proc(ID2D1DCRenderTarget*, UInt64, UInt64, Void)
-    get_tags : Proc(ID2D1DCRenderTarget*, UInt64*, UInt64*, Void)
-    push_layer : Proc(ID2D1DCRenderTarget*, D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)
-    pop_layer : Proc(ID2D1DCRenderTarget*, Void)
-    flush : Proc(ID2D1DCRenderTarget*, UInt64*, UInt64*, HRESULT)
-    save_drawing_state : Proc(ID2D1DCRenderTarget*, ID2D1DrawingStateBlock, Void)
-    restore_drawing_state : Proc(ID2D1DCRenderTarget*, ID2D1DrawingStateBlock, Void)
-    push_axis_aligned_clip : Proc(ID2D1DCRenderTarget*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)
-    pop_axis_aligned_clip : Proc(ID2D1DCRenderTarget*, Void)
-    clear : Proc(ID2D1DCRenderTarget*, D2D1_COLOR_F*, Void)
-    begin_draw : Proc(ID2D1DCRenderTarget*, Void)
-    end_draw : Proc(ID2D1DCRenderTarget*, UInt64*, UInt64*, HRESULT)
-    get_pixel_format : Proc(ID2D1DCRenderTarget*, D2D1_PIXEL_FORMAT)
-    set_dpi : Proc(ID2D1DCRenderTarget*, Float32, Float32, Void)
-    get_dpi : Proc(ID2D1DCRenderTarget*, Float32*, Float32*, Void)
-    get_size : Proc(ID2D1DCRenderTarget*, D2D_SIZE_F)
-    get_pixel_size : Proc(ID2D1DCRenderTarget*, D2D_SIZE_U)
-    get_maximum_bitmap_size : Proc(ID2D1DCRenderTarget*, UInt32)
-    is_supported : Proc(ID2D1DCRenderTarget*, D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)
-    bind_dc : Proc(ID2D1DCRenderTarget*, HDC, RECT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_bitmap : UInt64
+    create_bitmap_from_wic_bitmap : UInt64
+    create_shared_bitmap : UInt64
+    create_bitmap_brush : UInt64
+    create_solid_color_brush : UInt64
+    create_gradient_stop_collection : UInt64
+    create_linear_gradient_brush : UInt64
+    create_radial_gradient_brush : UInt64
+    create_compatible_render_target : UInt64
+    create_layer : UInt64
+    create_mesh : UInt64
+    draw_line : UInt64
+    draw_rectangle : UInt64
+    fill_rectangle : UInt64
+    draw_rounded_rectangle : UInt64
+    fill_rounded_rectangle : UInt64
+    draw_ellipse : UInt64
+    fill_ellipse : UInt64
+    draw_geometry : UInt64
+    fill_geometry : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    draw_bitmap : UInt64
+    draw_text : UInt64
+    draw_text_layout : UInt64
+    draw_glyph_run : UInt64
+    set_transform : UInt64
+    get_transform : UInt64
+    set_antialias_mode : UInt64
+    get_antialias_mode : UInt64
+    set_text_antialias_mode : UInt64
+    get_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    get_text_rendering_params : UInt64
+    set_tags : UInt64
+    get_tags : UInt64
+    push_layer : UInt64
+    pop_layer : UInt64
+    flush : UInt64
+    save_drawing_state : UInt64
+    restore_drawing_state : UInt64
+    push_axis_aligned_clip : UInt64
+    pop_axis_aligned_clip : UInt64
+    clear : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    get_pixel_format : UInt64
+    set_dpi : UInt64
+    get_dpi : UInt64
+    get_size : UInt64
+    get_pixel_size : UInt64
+    get_maximum_bitmap_size : UInt64
+    is_supported : UInt64
+    bind_dc : UInt64
   end
 
   ID2D1DCRenderTarget_GUID = "1c51bc64-de61-46fd-9899-63a5d8f03950"
@@ -2499,23 +2499,23 @@ lib LibWin32
   end
 
   struct ID2D1FactoryVTbl
-    query_interface : Proc(ID2D1Factory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Factory*, UInt32)
-    release : Proc(ID2D1Factory*, UInt32)
-    reload_system_metrics : Proc(ID2D1Factory*, HRESULT)
-    get_desktop_dpi : Proc(ID2D1Factory*, Float32*, Float32*, Void)
-    create_rectangle_geometry : Proc(ID2D1Factory*, D2D_RECT_F*, ID2D1RectangleGeometry*, HRESULT)
-    create_rounded_rectangle_geometry : Proc(ID2D1Factory*, D2D1_ROUNDED_RECT*, ID2D1RoundedRectangleGeometry*, HRESULT)
-    create_ellipse_geometry : Proc(ID2D1Factory*, D2D1_ELLIPSE*, ID2D1EllipseGeometry*, HRESULT)
-    create_geometry_group : Proc(ID2D1Factory*, D2D1_FILL_MODE, ID2D1Geometry*, UInt32, ID2D1GeometryGroup*, HRESULT)
-    create_transformed_geometry : Proc(ID2D1Factory*, ID2D1Geometry, D2D_MATRIX_3X2_F*, ID2D1TransformedGeometry*, HRESULT)
-    create_path_geometry : Proc(ID2D1Factory*, ID2D1PathGeometry*, HRESULT)
-    create_stroke_style : Proc(ID2D1Factory*, D2D1_STROKE_STYLE_PROPERTIES*, Float32*, UInt32, ID2D1StrokeStyle*, HRESULT)
-    create_drawing_state_block : Proc(ID2D1Factory*, D2D1_DRAWING_STATE_DESCRIPTION*, IDWriteRenderingParams, ID2D1DrawingStateBlock*, HRESULT)
-    create_wic_bitmap_render_target : Proc(ID2D1Factory*, IWICBitmap, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)
-    create_hwnd_render_target : Proc(ID2D1Factory*, D2D1_RENDER_TARGET_PROPERTIES*, D2D1_HWND_RENDER_TARGET_PROPERTIES*, ID2D1HwndRenderTarget*, HRESULT)
-    create_dxgi_surface_render_target : Proc(ID2D1Factory*, IDXGISurface, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)
-    create_dc_render_target : Proc(ID2D1Factory*, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    reload_system_metrics : UInt64
+    get_desktop_dpi : UInt64
+    create_rectangle_geometry : UInt64
+    create_rounded_rectangle_geometry : UInt64
+    create_ellipse_geometry : UInt64
+    create_geometry_group : UInt64
+    create_transformed_geometry : UInt64
+    create_path_geometry : UInt64
+    create_stroke_style : UInt64
+    create_drawing_state_block : UInt64
+    create_wic_bitmap_render_target : UInt64
+    create_hwnd_render_target : UInt64
+    create_dxgi_surface_render_target : UInt64
+    create_dc_render_target : UInt64
   end
 
   ID2D1Factory_GUID = "06152247-6f50-465a-9245-118bfd3b6007"
@@ -2525,10 +2525,10 @@ lib LibWin32
   end
 
   struct ID2D1GdiMetafileSinkVTbl
-    query_interface : Proc(ID2D1GdiMetafileSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1GdiMetafileSink*, UInt32)
-    release : Proc(ID2D1GdiMetafileSink*, UInt32)
-    process_record : Proc(ID2D1GdiMetafileSink*, UInt32, Void*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    process_record : UInt64
   end
 
   ID2D1GdiMetafileSink_GUID = "82237326-8111-4f7c-bcf4-b5c1175564fe"
@@ -2538,12 +2538,12 @@ lib LibWin32
   end
 
   struct ID2D1GdiMetafileVTbl
-    query_interface : Proc(ID2D1GdiMetafile*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1GdiMetafile*, UInt32)
-    release : Proc(ID2D1GdiMetafile*, UInt32)
-    get_factory : Proc(ID2D1GdiMetafile*, ID2D1Factory*, Void)
-    stream : Proc(ID2D1GdiMetafile*, ID2D1GdiMetafileSink, HRESULT)
-    get_bounds : Proc(ID2D1GdiMetafile*, D2D_RECT_F*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    stream : UInt64
+    get_bounds : UInt64
   end
 
   ID2D1GdiMetafile_GUID = "2f543dc3-cfc1-4211-864f-cfd91c6f3395"
@@ -2553,34 +2553,34 @@ lib LibWin32
   end
 
   struct ID2D1CommandSinkVTbl
-    query_interface : Proc(ID2D1CommandSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1CommandSink*, UInt32)
-    release : Proc(ID2D1CommandSink*, UInt32)
-    begin_draw : Proc(ID2D1CommandSink*, HRESULT)
-    end_draw : Proc(ID2D1CommandSink*, HRESULT)
-    set_antialias_mode : Proc(ID2D1CommandSink*, D2D1_ANTIALIAS_MODE, HRESULT)
-    set_tags : Proc(ID2D1CommandSink*, UInt64, UInt64, HRESULT)
-    set_text_antialias_mode : Proc(ID2D1CommandSink*, D2D1_TEXT_ANTIALIAS_MODE, HRESULT)
-    set_text_rendering_params : Proc(ID2D1CommandSink*, IDWriteRenderingParams, HRESULT)
-    set_transform : Proc(ID2D1CommandSink*, D2D_MATRIX_3X2_F*, HRESULT)
-    set_primitive_blend : Proc(ID2D1CommandSink*, D2D1_PRIMITIVE_BLEND, HRESULT)
-    set_unit_mode : Proc(ID2D1CommandSink*, D2D1_UNIT_MODE, HRESULT)
-    clear : Proc(ID2D1CommandSink*, D2D1_COLOR_F*, HRESULT)
-    draw_glyph_run : Proc(ID2D1CommandSink*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, HRESULT)
-    draw_line : Proc(ID2D1CommandSink*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_geometry : Proc(ID2D1CommandSink*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_rectangle : Proc(ID2D1CommandSink*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_bitmap : Proc(ID2D1CommandSink*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, HRESULT)
-    draw_image : Proc(ID2D1CommandSink*, ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, HRESULT)
-    draw_gdi_metafile : Proc(ID2D1CommandSink*, ID2D1GdiMetafile, D2D_POINT_2F*, HRESULT)
-    fill_mesh : Proc(ID2D1CommandSink*, ID2D1Mesh, ID2D1Brush, HRESULT)
-    fill_opacity_mask : Proc(ID2D1CommandSink*, ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, HRESULT)
-    fill_geometry : Proc(ID2D1CommandSink*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, HRESULT)
-    fill_rectangle : Proc(ID2D1CommandSink*, D2D_RECT_F*, ID2D1Brush, HRESULT)
-    push_axis_aligned_clip : Proc(ID2D1CommandSink*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, HRESULT)
-    push_layer : Proc(ID2D1CommandSink*, D2D1_LAYER_PARAMETERS1*, ID2D1Layer, HRESULT)
-    pop_axis_aligned_clip : Proc(ID2D1CommandSink*, HRESULT)
-    pop_layer : Proc(ID2D1CommandSink*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    set_antialias_mode : UInt64
+    set_tags : UInt64
+    set_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    set_transform : UInt64
+    set_primitive_blend : UInt64
+    set_unit_mode : UInt64
+    clear : UInt64
+    draw_glyph_run : UInt64
+    draw_line : UInt64
+    draw_geometry : UInt64
+    draw_rectangle : UInt64
+    draw_bitmap : UInt64
+    draw_image : UInt64
+    draw_gdi_metafile : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    fill_geometry : UInt64
+    fill_rectangle : UInt64
+    push_axis_aligned_clip : UInt64
+    push_layer : UInt64
+    pop_axis_aligned_clip : UInt64
+    pop_layer : UInt64
   end
 
   ID2D1CommandSink_GUID = "54d7898a-a061-40a7-bec7-e465bcba2c4f"
@@ -2590,12 +2590,12 @@ lib LibWin32
   end
 
   struct ID2D1CommandListVTbl
-    query_interface : Proc(ID2D1CommandList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1CommandList*, UInt32)
-    release : Proc(ID2D1CommandList*, UInt32)
-    get_factory : Proc(ID2D1CommandList*, ID2D1Factory*, Void)
-    stream : Proc(ID2D1CommandList*, ID2D1CommandSink, HRESULT)
-    close : Proc(ID2D1CommandList*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    stream : UInt64
+    close : UInt64
   end
 
   ID2D1CommandList_GUID = "b4f34a19-2383-4d76-94f6-ec343657c3dc"
@@ -2605,11 +2605,11 @@ lib LibWin32
   end
 
   struct ID2D1PrintControlVTbl
-    query_interface : Proc(ID2D1PrintControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1PrintControl*, UInt32)
-    release : Proc(ID2D1PrintControl*, UInt32)
-    add_page : Proc(ID2D1PrintControl*, ID2D1CommandList, D2D_SIZE_F, IStream, UInt64*, UInt64*, HRESULT)
-    close : Proc(ID2D1PrintControl*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_page : UInt64
+    close : UInt64
   end
 
   ID2D1PrintControl_GUID = "2c1d867d-c290-41c8-ae7e-34a98702e9a5"
@@ -2619,24 +2619,24 @@ lib LibWin32
   end
 
   struct ID2D1ImageBrushVTbl
-    query_interface : Proc(ID2D1ImageBrush*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1ImageBrush*, UInt32)
-    release : Proc(ID2D1ImageBrush*, UInt32)
-    get_factory : Proc(ID2D1ImageBrush*, ID2D1Factory*, Void)
-    set_opacity : Proc(ID2D1ImageBrush*, Float32, Void)
-    set_transform : Proc(ID2D1ImageBrush*, D2D_MATRIX_3X2_F*, Void)
-    get_opacity : Proc(ID2D1ImageBrush*, Float32)
-    get_transform : Proc(ID2D1ImageBrush*, D2D_MATRIX_3X2_F*, Void)
-    set_image : Proc(ID2D1ImageBrush*, ID2D1Image, Void)
-    set_extend_mode_x : Proc(ID2D1ImageBrush*, D2D1_EXTEND_MODE, Void)
-    set_extend_mode_y : Proc(ID2D1ImageBrush*, D2D1_EXTEND_MODE, Void)
-    set_interpolation_mode : Proc(ID2D1ImageBrush*, D2D1_INTERPOLATION_MODE, Void)
-    set_source_rectangle : Proc(ID2D1ImageBrush*, D2D_RECT_F*, Void)
-    get_image : Proc(ID2D1ImageBrush*, ID2D1Image*, Void)
-    get_extend_mode_x : Proc(ID2D1ImageBrush*, D2D1_EXTEND_MODE)
-    get_extend_mode_y : Proc(ID2D1ImageBrush*, D2D1_EXTEND_MODE)
-    get_interpolation_mode : Proc(ID2D1ImageBrush*, D2D1_INTERPOLATION_MODE)
-    get_source_rectangle : Proc(ID2D1ImageBrush*, D2D_RECT_F*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    set_opacity : UInt64
+    set_transform : UInt64
+    get_opacity : UInt64
+    get_transform : UInt64
+    set_image : UInt64
+    set_extend_mode_x : UInt64
+    set_extend_mode_y : UInt64
+    set_interpolation_mode : UInt64
+    set_source_rectangle : UInt64
+    get_image : UInt64
+    get_extend_mode_x : UInt64
+    get_extend_mode_y : UInt64
+    get_interpolation_mode : UInt64
+    get_source_rectangle : UInt64
   end
 
   ID2D1ImageBrush_GUID = "fe9e984d-3f95-407c-b5db-cb94d4e8f87c"
@@ -2646,24 +2646,24 @@ lib LibWin32
   end
 
   struct ID2D1BitmapBrush1VTbl
-    query_interface : Proc(ID2D1BitmapBrush1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1BitmapBrush1*, UInt32)
-    release : Proc(ID2D1BitmapBrush1*, UInt32)
-    get_factory : Proc(ID2D1BitmapBrush1*, ID2D1Factory*, Void)
-    set_opacity : Proc(ID2D1BitmapBrush1*, Float32, Void)
-    set_transform : Proc(ID2D1BitmapBrush1*, D2D_MATRIX_3X2_F*, Void)
-    get_opacity : Proc(ID2D1BitmapBrush1*, Float32)
-    get_transform : Proc(ID2D1BitmapBrush1*, D2D_MATRIX_3X2_F*, Void)
-    set_extend_mode_x : Proc(ID2D1BitmapBrush1*, D2D1_EXTEND_MODE, Void)
-    set_extend_mode_y : Proc(ID2D1BitmapBrush1*, D2D1_EXTEND_MODE, Void)
-    set_interpolation_mode : Proc(ID2D1BitmapBrush1*, D2D1_BITMAP_INTERPOLATION_MODE, Void)
-    set_bitmap : Proc(ID2D1BitmapBrush1*, ID2D1Bitmap, Void)
-    get_extend_mode_x : Proc(ID2D1BitmapBrush1*, D2D1_EXTEND_MODE)
-    get_extend_mode_y : Proc(ID2D1BitmapBrush1*, D2D1_EXTEND_MODE)
-    get_interpolation_mode : Proc(ID2D1BitmapBrush1*, D2D1_BITMAP_INTERPOLATION_MODE)
-    get_bitmap : Proc(ID2D1BitmapBrush1*, ID2D1Bitmap*, Void)
-    set_interpolation_mode1 : Proc(ID2D1BitmapBrush1*, D2D1_INTERPOLATION_MODE, Void)
-    get_interpolation_mode1 : Proc(ID2D1BitmapBrush1*, D2D1_INTERPOLATION_MODE)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    set_opacity : UInt64
+    set_transform : UInt64
+    get_opacity : UInt64
+    get_transform : UInt64
+    set_extend_mode_x : UInt64
+    set_extend_mode_y : UInt64
+    set_interpolation_mode : UInt64
+    set_bitmap : UInt64
+    get_extend_mode_x : UInt64
+    get_extend_mode_y : UInt64
+    get_interpolation_mode : UInt64
+    get_bitmap : UInt64
+    set_interpolation_mode1 : UInt64
+    get_interpolation_mode1 : UInt64
   end
 
   ID2D1BitmapBrush1_GUID = "41343a53-e41a-49a2-91cd-21793bbb62e5"
@@ -2673,20 +2673,20 @@ lib LibWin32
   end
 
   struct ID2D1StrokeStyle1VTbl
-    query_interface : Proc(ID2D1StrokeStyle1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1StrokeStyle1*, UInt32)
-    release : Proc(ID2D1StrokeStyle1*, UInt32)
-    get_factory : Proc(ID2D1StrokeStyle1*, ID2D1Factory*, Void)
-    get_start_cap : Proc(ID2D1StrokeStyle1*, D2D1_CAP_STYLE)
-    get_end_cap : Proc(ID2D1StrokeStyle1*, D2D1_CAP_STYLE)
-    get_dash_cap : Proc(ID2D1StrokeStyle1*, D2D1_CAP_STYLE)
-    get_miter_limit : Proc(ID2D1StrokeStyle1*, Float32)
-    get_line_join : Proc(ID2D1StrokeStyle1*, D2D1_LINE_JOIN)
-    get_dash_offset : Proc(ID2D1StrokeStyle1*, Float32)
-    get_dash_style : Proc(ID2D1StrokeStyle1*, D2D1_DASH_STYLE)
-    get_dashes_count : Proc(ID2D1StrokeStyle1*, UInt32)
-    get_dashes : Proc(ID2D1StrokeStyle1*, Float32*, UInt32, Void)
-    get_stroke_transform_type : Proc(ID2D1StrokeStyle1*, D2D1_STROKE_TRANSFORM_TYPE)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_start_cap : UInt64
+    get_end_cap : UInt64
+    get_dash_cap : UInt64
+    get_miter_limit : UInt64
+    get_line_join : UInt64
+    get_dash_offset : UInt64
+    get_dash_style : UInt64
+    get_dashes_count : UInt64
+    get_dashes : UInt64
+    get_stroke_transform_type : UInt64
   end
 
   ID2D1StrokeStyle1_GUID = "10a72a66-e91c-43f4-993f-ddf4b82b0b4a"
@@ -2696,28 +2696,28 @@ lib LibWin32
   end
 
   struct ID2D1PathGeometry1VTbl
-    query_interface : Proc(ID2D1PathGeometry1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1PathGeometry1*, UInt32)
-    release : Proc(ID2D1PathGeometry1*, UInt32)
-    get_factory : Proc(ID2D1PathGeometry1*, ID2D1Factory*, Void)
-    get_bounds : Proc(ID2D1PathGeometry1*, D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)
-    get_widened_bounds : Proc(ID2D1PathGeometry1*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, D2D_RECT_F*, HRESULT)
-    stroke_contains_point : Proc(ID2D1PathGeometry1*, D2D_POINT_2F, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)
-    fill_contains_point : Proc(ID2D1PathGeometry1*, D2D_POINT_2F, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)
-    compare_with_geometry : Proc(ID2D1PathGeometry1*, ID2D1Geometry, D2D_MATRIX_3X2_F*, Float32, D2D1_GEOMETRY_RELATION*, HRESULT)
-    simplify : Proc(ID2D1PathGeometry1*, D2D1_GEOMETRY_SIMPLIFICATION_OPTION, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    tessellate : Proc(ID2D1PathGeometry1*, D2D_MATRIX_3X2_F*, Float32, ID2D1TessellationSink, HRESULT)
-    combine_with_geometry : Proc(ID2D1PathGeometry1*, ID2D1Geometry, D2D1_COMBINE_MODE, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    outline : Proc(ID2D1PathGeometry1*, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    compute_area : Proc(ID2D1PathGeometry1*, D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)
-    compute_length : Proc(ID2D1PathGeometry1*, D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)
-    compute_point_at_length : Proc(ID2D1PathGeometry1*, Float32, D2D_MATRIX_3X2_F*, Float32, D2D_POINT_2F*, D2D_POINT_2F*, HRESULT)
-    widen : Proc(ID2D1PathGeometry1*, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    open : Proc(ID2D1PathGeometry1*, ID2D1GeometrySink*, HRESULT)
-    stream : Proc(ID2D1PathGeometry1*, ID2D1GeometrySink, HRESULT)
-    get_segment_count : Proc(ID2D1PathGeometry1*, UInt32*, HRESULT)
-    get_figure_count : Proc(ID2D1PathGeometry1*, UInt32*, HRESULT)
-    compute_point_and_segment_at_length : Proc(ID2D1PathGeometry1*, Float32, UInt32, D2D_MATRIX_3X2_F*, Float32, D2D1_POINT_DESCRIPTION*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_bounds : UInt64
+    get_widened_bounds : UInt64
+    stroke_contains_point : UInt64
+    fill_contains_point : UInt64
+    compare_with_geometry : UInt64
+    simplify : UInt64
+    tessellate : UInt64
+    combine_with_geometry : UInt64
+    outline : UInt64
+    compute_area : UInt64
+    compute_length : UInt64
+    compute_point_at_length : UInt64
+    widen : UInt64
+    open : UInt64
+    stream : UInt64
+    get_segment_count : UInt64
+    get_figure_count : UInt64
+    compute_point_and_segment_at_length : UInt64
   end
 
   ID2D1PathGeometry1_GUID = "62baa2d2-ab54-41b7-b872-787e0106a421"
@@ -2727,20 +2727,20 @@ lib LibWin32
   end
 
   struct ID2D1PropertiesVTbl
-    query_interface : Proc(ID2D1Properties*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Properties*, UInt32)
-    release : Proc(ID2D1Properties*, UInt32)
-    get_property_count : Proc(ID2D1Properties*, UInt32)
-    get_property_name : Proc(ID2D1Properties*, UInt32, Char*, UInt32, HRESULT)
-    get_property_name_length : Proc(ID2D1Properties*, UInt32, UInt32)
-    get_type : Proc(ID2D1Properties*, UInt32, D2D1_PROPERTY_TYPE)
-    get_property_index : Proc(ID2D1Properties*, LibC::LPWSTR, UInt32)
-    set_value_by_name : Proc(ID2D1Properties*, LibC::LPWSTR, D2D1_PROPERTY_TYPE, UInt8*, UInt32, HRESULT)
-    set_value : Proc(ID2D1Properties*, UInt32, D2D1_PROPERTY_TYPE, UInt8*, UInt32, HRESULT)
-    get_value_by_name : Proc(ID2D1Properties*, LibC::LPWSTR, D2D1_PROPERTY_TYPE, UInt8*, UInt32, HRESULT)
-    get_value : Proc(ID2D1Properties*, UInt32, D2D1_PROPERTY_TYPE, UInt8*, UInt32, HRESULT)
-    get_value_size : Proc(ID2D1Properties*, UInt32, UInt32)
-    get_sub_properties : Proc(ID2D1Properties*, UInt32, ID2D1Properties*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_property_count : UInt64
+    get_property_name : UInt64
+    get_property_name_length : UInt64
+    get_type : UInt64
+    get_property_index : UInt64
+    set_value_by_name : UInt64
+    set_value : UInt64
+    get_value_by_name : UInt64
+    get_value : UInt64
+    get_value_size : UInt64
+    get_sub_properties : UInt64
   end
 
   ID2D1Properties_GUID = "483473d7-cd46-4f9d-9d3a-3112aa80159d"
@@ -2750,25 +2750,25 @@ lib LibWin32
   end
 
   struct ID2D1EffectVTbl
-    query_interface : Proc(ID2D1Effect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Effect*, UInt32)
-    release : Proc(ID2D1Effect*, UInt32)
-    get_property_count : Proc(ID2D1Effect*, UInt32)
-    get_property_name : Proc(ID2D1Effect*, UInt32, Char*, UInt32, HRESULT)
-    get_property_name_length : Proc(ID2D1Effect*, UInt32, UInt32)
-    get_type : Proc(ID2D1Effect*, UInt32, D2D1_PROPERTY_TYPE)
-    get_property_index : Proc(ID2D1Effect*, LibC::LPWSTR, UInt32)
-    set_value_by_name : Proc(ID2D1Effect*, LibC::LPWSTR, D2D1_PROPERTY_TYPE, UInt8*, UInt32, HRESULT)
-    set_value : Proc(ID2D1Effect*, UInt32, D2D1_PROPERTY_TYPE, UInt8*, UInt32, HRESULT)
-    get_value_by_name : Proc(ID2D1Effect*, LibC::LPWSTR, D2D1_PROPERTY_TYPE, UInt8*, UInt32, HRESULT)
-    get_value : Proc(ID2D1Effect*, UInt32, D2D1_PROPERTY_TYPE, UInt8*, UInt32, HRESULT)
-    get_value_size : Proc(ID2D1Effect*, UInt32, UInt32)
-    get_sub_properties : Proc(ID2D1Effect*, UInt32, ID2D1Properties*, HRESULT)
-    set_input : Proc(ID2D1Effect*, UInt32, ID2D1Image, LibC::BOOL, Void)
-    set_input_count : Proc(ID2D1Effect*, UInt32, HRESULT)
-    get_input : Proc(ID2D1Effect*, UInt32, ID2D1Image*, Void)
-    get_input_count : Proc(ID2D1Effect*, UInt32)
-    get_output : Proc(ID2D1Effect*, ID2D1Image*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_property_count : UInt64
+    get_property_name : UInt64
+    get_property_name_length : UInt64
+    get_type : UInt64
+    get_property_index : UInt64
+    set_value_by_name : UInt64
+    set_value : UInt64
+    get_value_by_name : UInt64
+    get_value : UInt64
+    get_value_size : UInt64
+    get_sub_properties : UInt64
+    set_input : UInt64
+    set_input_count : UInt64
+    get_input : UInt64
+    get_input_count : UInt64
+    get_output : UInt64
   end
 
   ID2D1Effect_GUID = "28211a43-7d89-476f-8181-2d6159b220ad"
@@ -2778,22 +2778,22 @@ lib LibWin32
   end
 
   struct ID2D1Bitmap1VTbl
-    query_interface : Proc(ID2D1Bitmap1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Bitmap1*, UInt32)
-    release : Proc(ID2D1Bitmap1*, UInt32)
-    get_factory : Proc(ID2D1Bitmap1*, ID2D1Factory*, Void)
-    get_size : Proc(ID2D1Bitmap1*, D2D_SIZE_F)
-    get_pixel_size : Proc(ID2D1Bitmap1*, D2D_SIZE_U)
-    get_pixel_format : Proc(ID2D1Bitmap1*, D2D1_PIXEL_FORMAT)
-    get_dpi : Proc(ID2D1Bitmap1*, Float32*, Float32*, Void)
-    copy_from_bitmap : Proc(ID2D1Bitmap1*, D2D_POINT_2U*, ID2D1Bitmap, D2D_RECT_U*, HRESULT)
-    copy_from_render_target : Proc(ID2D1Bitmap1*, D2D_POINT_2U*, ID2D1RenderTarget, D2D_RECT_U*, HRESULT)
-    copy_from_memory : Proc(ID2D1Bitmap1*, D2D_RECT_U*, Void*, UInt32, HRESULT)
-    get_color_context : Proc(ID2D1Bitmap1*, ID2D1ColorContext*, Void)
-    get_options : Proc(ID2D1Bitmap1*, D2D1_BITMAP_OPTIONS)
-    get_surface : Proc(ID2D1Bitmap1*, IDXGISurface*, HRESULT)
-    map : Proc(ID2D1Bitmap1*, D2D1_MAP_OPTIONS, D2D1_MAPPED_RECT*, HRESULT)
-    unmap : Proc(ID2D1Bitmap1*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_size : UInt64
+    get_pixel_size : UInt64
+    get_pixel_format : UInt64
+    get_dpi : UInt64
+    copy_from_bitmap : UInt64
+    copy_from_render_target : UInt64
+    copy_from_memory : UInt64
+    get_color_context : UInt64
+    get_options : UInt64
+    get_surface : UInt64
+    map : UInt64
+    unmap : UInt64
   end
 
   ID2D1Bitmap1_GUID = "a898a84c-3873-4588-b08b-ebbf978df041"
@@ -2803,13 +2803,13 @@ lib LibWin32
   end
 
   struct ID2D1ColorContextVTbl
-    query_interface : Proc(ID2D1ColorContext*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1ColorContext*, UInt32)
-    release : Proc(ID2D1ColorContext*, UInt32)
-    get_factory : Proc(ID2D1ColorContext*, ID2D1Factory*, Void)
-    get_color_space : Proc(ID2D1ColorContext*, D2D1_COLOR_SPACE)
-    get_profile_size : Proc(ID2D1ColorContext*, UInt32)
-    get_profile : Proc(ID2D1ColorContext*, UInt8*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_color_space : UInt64
+    get_profile_size : UInt64
+    get_profile : UInt64
   end
 
   ID2D1ColorContext_GUID = "1c4820bb-5771-4518-a581-2fe4dd0ec657"
@@ -2819,19 +2819,19 @@ lib LibWin32
   end
 
   struct ID2D1GradientStopCollection1VTbl
-    query_interface : Proc(ID2D1GradientStopCollection1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1GradientStopCollection1*, UInt32)
-    release : Proc(ID2D1GradientStopCollection1*, UInt32)
-    get_factory : Proc(ID2D1GradientStopCollection1*, ID2D1Factory*, Void)
-    get_gradient_stop_count : Proc(ID2D1GradientStopCollection1*, UInt32)
-    get_gradient_stops : Proc(ID2D1GradientStopCollection1*, D2D1_GRADIENT_STOP*, UInt32, Void)
-    get_color_interpolation_gamma : Proc(ID2D1GradientStopCollection1*, D2D1_GAMMA)
-    get_extend_mode : Proc(ID2D1GradientStopCollection1*, D2D1_EXTEND_MODE)
-    get_gradient_stops1 : Proc(ID2D1GradientStopCollection1*, D2D1_GRADIENT_STOP*, UInt32, Void)
-    get_pre_interpolation_space : Proc(ID2D1GradientStopCollection1*, D2D1_COLOR_SPACE)
-    get_post_interpolation_space : Proc(ID2D1GradientStopCollection1*, D2D1_COLOR_SPACE)
-    get_buffer_precision : Proc(ID2D1GradientStopCollection1*, D2D1_BUFFER_PRECISION)
-    get_color_interpolation_mode : Proc(ID2D1GradientStopCollection1*, D2D1_COLOR_INTERPOLATION_MODE)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_gradient_stop_count : UInt64
+    get_gradient_stops : UInt64
+    get_color_interpolation_gamma : UInt64
+    get_extend_mode : UInt64
+    get_gradient_stops1 : UInt64
+    get_pre_interpolation_space : UInt64
+    get_post_interpolation_space : UInt64
+    get_buffer_precision : UInt64
+    get_color_interpolation_mode : UInt64
   end
 
   ID2D1GradientStopCollection1_GUID = "ae1572f4-5dd0-4777-998b-9279472ae63b"
@@ -2841,16 +2841,16 @@ lib LibWin32
   end
 
   struct ID2D1DrawingStateBlock1VTbl
-    query_interface : Proc(ID2D1DrawingStateBlock1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1DrawingStateBlock1*, UInt32)
-    release : Proc(ID2D1DrawingStateBlock1*, UInt32)
-    get_factory : Proc(ID2D1DrawingStateBlock1*, ID2D1Factory*, Void)
-    get_description : Proc(ID2D1DrawingStateBlock1*, D2D1_DRAWING_STATE_DESCRIPTION*, Void)
-    set_description : Proc(ID2D1DrawingStateBlock1*, D2D1_DRAWING_STATE_DESCRIPTION*, Void)
-    set_text_rendering_params : Proc(ID2D1DrawingStateBlock1*, IDWriteRenderingParams, Void)
-    get_text_rendering_params : Proc(ID2D1DrawingStateBlock1*, IDWriteRenderingParams*, Void)
-    get_description2 : Proc(ID2D1DrawingStateBlock1*, D2D1_DRAWING_STATE_DESCRIPTION1*, Void)
-    set_description2 : Proc(ID2D1DrawingStateBlock1*, D2D1_DRAWING_STATE_DESCRIPTION1*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_description : UInt64
+    set_description : UInt64
+    set_text_rendering_params : UInt64
+    get_text_rendering_params : UInt64
+    get_description2 : UInt64
+    set_description2 : UInt64
   end
 
   ID2D1DrawingStateBlock1_GUID = "689f1f85-c72e-4e33-8f19-85754efd5ace"
@@ -2860,98 +2860,98 @@ lib LibWin32
   end
 
   struct ID2D1DeviceContextVTbl
-    query_interface : Proc(ID2D1DeviceContext*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1DeviceContext*, UInt32)
-    release : Proc(ID2D1DeviceContext*, UInt32)
-    get_factory : Proc(ID2D1DeviceContext*, ID2D1Factory*, Void)
-    create_bitmap : Proc(ID2D1DeviceContext*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_from_wic_bitmap : Proc(ID2D1DeviceContext*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_shared_bitmap : Proc(ID2D1DeviceContext*, Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_brush : Proc(ID2D1DeviceContext*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)
-    create_solid_color_brush : Proc(ID2D1DeviceContext*, D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)
-    create_gradient_stop_collection : Proc(ID2D1DeviceContext*, D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)
-    create_linear_gradient_brush : Proc(ID2D1DeviceContext*, D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)
-    create_radial_gradient_brush : Proc(ID2D1DeviceContext*, D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)
-    create_compatible_render_target : Proc(ID2D1DeviceContext*, D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)
-    create_layer : Proc(ID2D1DeviceContext*, D2D_SIZE_F*, ID2D1Layer*, HRESULT)
-    create_mesh : Proc(ID2D1DeviceContext*, ID2D1Mesh*, HRESULT)
-    draw_line : Proc(ID2D1DeviceContext*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    draw_rectangle : Proc(ID2D1DeviceContext*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rectangle : Proc(ID2D1DeviceContext*, D2D_RECT_F*, ID2D1Brush, Void)
-    draw_rounded_rectangle : Proc(ID2D1DeviceContext*, D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rounded_rectangle : Proc(ID2D1DeviceContext*, D2D1_ROUNDED_RECT*, ID2D1Brush, Void)
-    draw_ellipse : Proc(ID2D1DeviceContext*, D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_ellipse : Proc(ID2D1DeviceContext*, D2D1_ELLIPSE*, ID2D1Brush, Void)
-    draw_geometry : Proc(ID2D1DeviceContext*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_geometry : Proc(ID2D1DeviceContext*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)
-    fill_mesh : Proc(ID2D1DeviceContext*, ID2D1Mesh, ID2D1Brush, Void)
-    fill_opacity_mask : Proc(ID2D1DeviceContext*, ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)
-    draw_bitmap : Proc(ID2D1DeviceContext*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)
-    draw_text : Proc(ID2D1DeviceContext*, Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)
-    draw_text_layout : Proc(ID2D1DeviceContext*, D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)
-    draw_glyph_run : Proc(ID2D1DeviceContext*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    set_transform : Proc(ID2D1DeviceContext*, D2D_MATRIX_3X2_F*, Void)
-    get_transform : Proc(ID2D1DeviceContext*, D2D_MATRIX_3X2_F*, Void)
-    set_antialias_mode : Proc(ID2D1DeviceContext*, D2D1_ANTIALIAS_MODE, Void)
-    get_antialias_mode : Proc(ID2D1DeviceContext*, D2D1_ANTIALIAS_MODE)
-    set_text_antialias_mode : Proc(ID2D1DeviceContext*, D2D1_TEXT_ANTIALIAS_MODE, Void)
-    get_text_antialias_mode : Proc(ID2D1DeviceContext*, D2D1_TEXT_ANTIALIAS_MODE)
-    set_text_rendering_params : Proc(ID2D1DeviceContext*, IDWriteRenderingParams, Void)
-    get_text_rendering_params : Proc(ID2D1DeviceContext*, IDWriteRenderingParams*, Void)
-    set_tags : Proc(ID2D1DeviceContext*, UInt64, UInt64, Void)
-    get_tags : Proc(ID2D1DeviceContext*, UInt64*, UInt64*, Void)
-    push_layer : Proc(ID2D1DeviceContext*, D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)
-    pop_layer : Proc(ID2D1DeviceContext*, Void)
-    flush : Proc(ID2D1DeviceContext*, UInt64*, UInt64*, HRESULT)
-    save_drawing_state : Proc(ID2D1DeviceContext*, ID2D1DrawingStateBlock, Void)
-    restore_drawing_state : Proc(ID2D1DeviceContext*, ID2D1DrawingStateBlock, Void)
-    push_axis_aligned_clip : Proc(ID2D1DeviceContext*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)
-    pop_axis_aligned_clip : Proc(ID2D1DeviceContext*, Void)
-    clear : Proc(ID2D1DeviceContext*, D2D1_COLOR_F*, Void)
-    begin_draw : Proc(ID2D1DeviceContext*, Void)
-    end_draw : Proc(ID2D1DeviceContext*, UInt64*, UInt64*, HRESULT)
-    get_pixel_format : Proc(ID2D1DeviceContext*, D2D1_PIXEL_FORMAT)
-    set_dpi : Proc(ID2D1DeviceContext*, Float32, Float32, Void)
-    get_dpi : Proc(ID2D1DeviceContext*, Float32*, Float32*, Void)
-    get_size : Proc(ID2D1DeviceContext*, D2D_SIZE_F)
-    get_pixel_size : Proc(ID2D1DeviceContext*, D2D_SIZE_U)
-    get_maximum_bitmap_size : Proc(ID2D1DeviceContext*, UInt32)
-    is_supported : Proc(ID2D1DeviceContext*, D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)
-    create_bitmap2 : Proc(ID2D1DeviceContext*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_bitmap_from_wic_bitmap2 : Proc(ID2D1DeviceContext*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_color_context : Proc(ID2D1DeviceContext*, D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_filename : Proc(ID2D1DeviceContext*, LibC::LPWSTR, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_wic_color_context : Proc(ID2D1DeviceContext*, IWICColorContext, ID2D1ColorContext*, HRESULT)
-    create_bitmap_from_dxgi_surface : Proc(ID2D1DeviceContext*, IDXGISurface, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_effect : Proc(ID2D1DeviceContext*, Guid*, ID2D1Effect*, HRESULT)
-    create_gradient_stop_collection2 : Proc(ID2D1DeviceContext*, D2D1_GRADIENT_STOP*, UInt32, D2D1_COLOR_SPACE, D2D1_COLOR_SPACE, D2D1_BUFFER_PRECISION, D2D1_EXTEND_MODE, D2D1_COLOR_INTERPOLATION_MODE, ID2D1GradientStopCollection1*, HRESULT)
-    create_image_brush : Proc(ID2D1DeviceContext*, ID2D1Image, D2D1_IMAGE_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1ImageBrush*, HRESULT)
-    create_bitmap_brush2 : Proc(ID2D1DeviceContext*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES1*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush1*, HRESULT)
-    create_command_list : Proc(ID2D1DeviceContext*, ID2D1CommandList*, HRESULT)
-    is_dxgi_format_supported : Proc(ID2D1DeviceContext*, DXGI_FORMAT, LibC::BOOL)
-    is_buffer_precision_supported : Proc(ID2D1DeviceContext*, D2D1_BUFFER_PRECISION, LibC::BOOL)
-    get_image_local_bounds : Proc(ID2D1DeviceContext*, ID2D1Image, D2D_RECT_F*, HRESULT)
-    get_image_world_bounds : Proc(ID2D1DeviceContext*, ID2D1Image, D2D_RECT_F*, HRESULT)
-    get_glyph_run_world_bounds : Proc(ID2D1DeviceContext*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_RECT_F*, HRESULT)
-    get_device : Proc(ID2D1DeviceContext*, ID2D1Device*, Void)
-    set_target : Proc(ID2D1DeviceContext*, ID2D1Image, Void)
-    get_target : Proc(ID2D1DeviceContext*, ID2D1Image*, Void)
-    set_rendering_controls : Proc(ID2D1DeviceContext*, D2D1_RENDERING_CONTROLS*, Void)
-    get_rendering_controls : Proc(ID2D1DeviceContext*, D2D1_RENDERING_CONTROLS*, Void)
-    set_primitive_blend : Proc(ID2D1DeviceContext*, D2D1_PRIMITIVE_BLEND, Void)
-    get_primitive_blend : Proc(ID2D1DeviceContext*, D2D1_PRIMITIVE_BLEND)
-    set_unit_mode : Proc(ID2D1DeviceContext*, D2D1_UNIT_MODE, Void)
-    get_unit_mode : Proc(ID2D1DeviceContext*, D2D1_UNIT_MODE)
-    draw_glyph_run2 : Proc(ID2D1DeviceContext*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    draw_image : Proc(ID2D1DeviceContext*, ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, Void)
-    draw_gdi_metafile : Proc(ID2D1DeviceContext*, ID2D1GdiMetafile, D2D_POINT_2F*, Void)
-    draw_bitmap2 : Proc(ID2D1DeviceContext*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, Void)
-    push_layer2 : Proc(ID2D1DeviceContext*, D2D1_LAYER_PARAMETERS1*, ID2D1Layer, Void)
-    invalidate_effect_input_rectangle : Proc(ID2D1DeviceContext*, ID2D1Effect, UInt32, D2D_RECT_F*, HRESULT)
-    get_effect_invalid_rectangle_count : Proc(ID2D1DeviceContext*, ID2D1Effect, UInt32*, HRESULT)
-    get_effect_invalid_rectangles : Proc(ID2D1DeviceContext*, ID2D1Effect, D2D_RECT_F*, UInt32, HRESULT)
-    get_effect_required_input_rectangles : Proc(ID2D1DeviceContext*, ID2D1Effect, D2D_RECT_F*, D2D1_EFFECT_INPUT_DESCRIPTION*, D2D_RECT_F*, UInt32, HRESULT)
-    fill_opacity_mask2 : Proc(ID2D1DeviceContext*, ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_bitmap : UInt64
+    create_bitmap_from_wic_bitmap : UInt64
+    create_shared_bitmap : UInt64
+    create_bitmap_brush : UInt64
+    create_solid_color_brush : UInt64
+    create_gradient_stop_collection : UInt64
+    create_linear_gradient_brush : UInt64
+    create_radial_gradient_brush : UInt64
+    create_compatible_render_target : UInt64
+    create_layer : UInt64
+    create_mesh : UInt64
+    draw_line : UInt64
+    draw_rectangle : UInt64
+    fill_rectangle : UInt64
+    draw_rounded_rectangle : UInt64
+    fill_rounded_rectangle : UInt64
+    draw_ellipse : UInt64
+    fill_ellipse : UInt64
+    draw_geometry : UInt64
+    fill_geometry : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    draw_bitmap : UInt64
+    draw_text : UInt64
+    draw_text_layout : UInt64
+    draw_glyph_run : UInt64
+    set_transform : UInt64
+    get_transform : UInt64
+    set_antialias_mode : UInt64
+    get_antialias_mode : UInt64
+    set_text_antialias_mode : UInt64
+    get_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    get_text_rendering_params : UInt64
+    set_tags : UInt64
+    get_tags : UInt64
+    push_layer : UInt64
+    pop_layer : UInt64
+    flush : UInt64
+    save_drawing_state : UInt64
+    restore_drawing_state : UInt64
+    push_axis_aligned_clip : UInt64
+    pop_axis_aligned_clip : UInt64
+    clear : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    get_pixel_format : UInt64
+    set_dpi : UInt64
+    get_dpi : UInt64
+    get_size : UInt64
+    get_pixel_size : UInt64
+    get_maximum_bitmap_size : UInt64
+    is_supported : UInt64
+    create_bitmap2 : UInt64
+    create_bitmap_from_wic_bitmap2 : UInt64
+    create_color_context : UInt64
+    create_color_context_from_filename : UInt64
+    create_color_context_from_wic_color_context : UInt64
+    create_bitmap_from_dxgi_surface : UInt64
+    create_effect : UInt64
+    create_gradient_stop_collection2 : UInt64
+    create_image_brush : UInt64
+    create_bitmap_brush2 : UInt64
+    create_command_list : UInt64
+    is_dxgi_format_supported : UInt64
+    is_buffer_precision_supported : UInt64
+    get_image_local_bounds : UInt64
+    get_image_world_bounds : UInt64
+    get_glyph_run_world_bounds : UInt64
+    get_device : UInt64
+    set_target : UInt64
+    get_target : UInt64
+    set_rendering_controls : UInt64
+    get_rendering_controls : UInt64
+    set_primitive_blend : UInt64
+    get_primitive_blend : UInt64
+    set_unit_mode : UInt64
+    get_unit_mode : UInt64
+    draw_glyph_run2 : UInt64
+    draw_image : UInt64
+    draw_gdi_metafile : UInt64
+    draw_bitmap2 : UInt64
+    push_layer2 : UInt64
+    invalidate_effect_input_rectangle : UInt64
+    get_effect_invalid_rectangle_count : UInt64
+    get_effect_invalid_rectangles : UInt64
+    get_effect_required_input_rectangles : UInt64
+    fill_opacity_mask2 : UInt64
   end
 
   ID2D1DeviceContext_GUID = "e8f7fe7a-191c-466d-ad95-975678bda998"
@@ -2961,15 +2961,15 @@ lib LibWin32
   end
 
   struct ID2D1DeviceVTbl
-    query_interface : Proc(ID2D1Device*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Device*, UInt32)
-    release : Proc(ID2D1Device*, UInt32)
-    get_factory : Proc(ID2D1Device*, ID2D1Factory*, Void)
-    create_device_context : Proc(ID2D1Device*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext*, HRESULT)
-    create_print_control : Proc(ID2D1Device*, IWICImagingFactory, IPrintDocumentPackageTarget, D2D1_PRINT_CONTROL_PROPERTIES*, ID2D1PrintControl*, HRESULT)
-    set_maximum_texture_memory : Proc(ID2D1Device*, UInt64, Void)
-    get_maximum_texture_memory : Proc(ID2D1Device*, UInt64)
-    clear_resources : Proc(ID2D1Device*, UInt32, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_device_context : UInt64
+    create_print_control : UInt64
+    set_maximum_texture_memory : UInt64
+    get_maximum_texture_memory : UInt64
+    clear_resources : UInt64
   end
 
   ID2D1Device_GUID = "47dd575d-ac05-4cdd-8049-9b02cd16f44c"
@@ -2979,33 +2979,33 @@ lib LibWin32
   end
 
   struct ID2D1Factory1VTbl
-    query_interface : Proc(ID2D1Factory1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Factory1*, UInt32)
-    release : Proc(ID2D1Factory1*, UInt32)
-    reload_system_metrics : Proc(ID2D1Factory1*, HRESULT)
-    get_desktop_dpi : Proc(ID2D1Factory1*, Float32*, Float32*, Void)
-    create_rectangle_geometry : Proc(ID2D1Factory1*, D2D_RECT_F*, ID2D1RectangleGeometry*, HRESULT)
-    create_rounded_rectangle_geometry : Proc(ID2D1Factory1*, D2D1_ROUNDED_RECT*, ID2D1RoundedRectangleGeometry*, HRESULT)
-    create_ellipse_geometry : Proc(ID2D1Factory1*, D2D1_ELLIPSE*, ID2D1EllipseGeometry*, HRESULT)
-    create_geometry_group : Proc(ID2D1Factory1*, D2D1_FILL_MODE, ID2D1Geometry*, UInt32, ID2D1GeometryGroup*, HRESULT)
-    create_transformed_geometry : Proc(ID2D1Factory1*, ID2D1Geometry, D2D_MATRIX_3X2_F*, ID2D1TransformedGeometry*, HRESULT)
-    create_path_geometry : Proc(ID2D1Factory1*, ID2D1PathGeometry*, HRESULT)
-    create_stroke_style : Proc(ID2D1Factory1*, D2D1_STROKE_STYLE_PROPERTIES*, Float32*, UInt32, ID2D1StrokeStyle*, HRESULT)
-    create_drawing_state_block : Proc(ID2D1Factory1*, D2D1_DRAWING_STATE_DESCRIPTION*, IDWriteRenderingParams, ID2D1DrawingStateBlock*, HRESULT)
-    create_wic_bitmap_render_target : Proc(ID2D1Factory1*, IWICBitmap, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)
-    create_hwnd_render_target : Proc(ID2D1Factory1*, D2D1_RENDER_TARGET_PROPERTIES*, D2D1_HWND_RENDER_TARGET_PROPERTIES*, ID2D1HwndRenderTarget*, HRESULT)
-    create_dxgi_surface_render_target : Proc(ID2D1Factory1*, IDXGISurface, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)
-    create_dc_render_target : Proc(ID2D1Factory1*, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)
-    create_device : Proc(ID2D1Factory1*, IDXGIDevice, ID2D1Device*, HRESULT)
-    create_stroke_style2 : Proc(ID2D1Factory1*, D2D1_STROKE_STYLE_PROPERTIES1*, Float32*, UInt32, ID2D1StrokeStyle1*, HRESULT)
-    create_path_geometry2 : Proc(ID2D1Factory1*, ID2D1PathGeometry1*, HRESULT)
-    create_drawing_state_block2 : Proc(ID2D1Factory1*, D2D1_DRAWING_STATE_DESCRIPTION1*, IDWriteRenderingParams, ID2D1DrawingStateBlock1*, HRESULT)
-    create_gdi_metafile : Proc(ID2D1Factory1*, IStream, ID2D1GdiMetafile*, HRESULT)
-    register_effect_from_stream : Proc(ID2D1Factory1*, Guid*, IStream, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)
-    register_effect_from_string : Proc(ID2D1Factory1*, Guid*, LibC::LPWSTR, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)
-    unregister_effect : Proc(ID2D1Factory1*, Guid*, HRESULT)
-    get_registered_effects : Proc(ID2D1Factory1*, Guid*, UInt32, UInt32*, UInt32*, HRESULT)
-    get_effect_properties : Proc(ID2D1Factory1*, Guid*, ID2D1Properties*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    reload_system_metrics : UInt64
+    get_desktop_dpi : UInt64
+    create_rectangle_geometry : UInt64
+    create_rounded_rectangle_geometry : UInt64
+    create_ellipse_geometry : UInt64
+    create_geometry_group : UInt64
+    create_transformed_geometry : UInt64
+    create_path_geometry : UInt64
+    create_stroke_style : UInt64
+    create_drawing_state_block : UInt64
+    create_wic_bitmap_render_target : UInt64
+    create_hwnd_render_target : UInt64
+    create_dxgi_surface_render_target : UInt64
+    create_dc_render_target : UInt64
+    create_device : UInt64
+    create_stroke_style2 : UInt64
+    create_path_geometry2 : UInt64
+    create_drawing_state_block2 : UInt64
+    create_gdi_metafile : UInt64
+    register_effect_from_stream : UInt64
+    register_effect_from_string : UInt64
+    unregister_effect : UInt64
+    get_registered_effects : UInt64
+    get_effect_properties : UInt64
   end
 
   ID2D1Factory1_GUID = "bb12d362-daee-4b9a-aa1d-14ba401cfa1f"
@@ -3015,12 +3015,12 @@ lib LibWin32
   end
 
   struct ID2D1MultithreadVTbl
-    query_interface : Proc(ID2D1Multithread*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Multithread*, UInt32)
-    release : Proc(ID2D1Multithread*, UInt32)
-    get_multithread_protected : Proc(ID2D1Multithread*, LibC::BOOL)
-    enter : Proc(ID2D1Multithread*, Void)
-    leave : Proc(ID2D1Multithread*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_multithread_protected : UInt64
+    enter : UInt64
+    leave : UInt64
   end
 
   ID2D1Multithread_GUID = "31e6e7bc-e0ff-4d46-8c64-a0a8c41c15d3"
@@ -3030,11 +3030,11 @@ lib LibWin32
   end
 
   struct ID2D1VertexBufferVTbl
-    query_interface : Proc(ID2D1VertexBuffer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1VertexBuffer*, UInt32)
-    release : Proc(ID2D1VertexBuffer*, UInt32)
-    map : Proc(ID2D1VertexBuffer*, UInt8**, UInt32, HRESULT)
-    unmap : Proc(ID2D1VertexBuffer*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    map : UInt64
+    unmap : UInt64
   end
 
   ID2D1VertexBuffer_GUID = "9b8b1336-00a5-4668-92b7-ced5d8bf9b7b"
@@ -3044,10 +3044,10 @@ lib LibWin32
   end
 
   struct ID2D1ResourceTextureVTbl
-    query_interface : Proc(ID2D1ResourceTexture*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1ResourceTexture*, UInt32)
-    release : Proc(ID2D1ResourceTexture*, UInt32)
-    update : Proc(ID2D1ResourceTexture*, UInt32*, UInt32*, UInt32*, UInt32, UInt8*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    update : UInt64
   end
 
   ID2D1ResourceTexture_GUID = "688d15c3-02b0-438d-b13a-d1b44c32c39a"
@@ -3057,13 +3057,13 @@ lib LibWin32
   end
 
   struct ID2D1RenderInfoVTbl
-    query_interface : Proc(ID2D1RenderInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1RenderInfo*, UInt32)
-    release : Proc(ID2D1RenderInfo*, UInt32)
-    set_input_description : Proc(ID2D1RenderInfo*, UInt32, D2D1_INPUT_DESCRIPTION, HRESULT)
-    set_output_buffer : Proc(ID2D1RenderInfo*, D2D1_BUFFER_PRECISION, D2D1_CHANNEL_DEPTH, HRESULT)
-    set_cached : Proc(ID2D1RenderInfo*, LibC::BOOL, Void)
-    set_instruction_count_hint : Proc(ID2D1RenderInfo*, UInt32, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input_description : UInt64
+    set_output_buffer : UInt64
+    set_cached : UInt64
+    set_instruction_count_hint : UInt64
   end
 
   ID2D1RenderInfo_GUID = "519ae1bd-d19a-420d-b849-364f594776b7"
@@ -3073,18 +3073,18 @@ lib LibWin32
   end
 
   struct ID2D1DrawInfoVTbl
-    query_interface : Proc(ID2D1DrawInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1DrawInfo*, UInt32)
-    release : Proc(ID2D1DrawInfo*, UInt32)
-    set_input_description : Proc(ID2D1DrawInfo*, UInt32, D2D1_INPUT_DESCRIPTION, HRESULT)
-    set_output_buffer : Proc(ID2D1DrawInfo*, D2D1_BUFFER_PRECISION, D2D1_CHANNEL_DEPTH, HRESULT)
-    set_cached : Proc(ID2D1DrawInfo*, LibC::BOOL, Void)
-    set_instruction_count_hint : Proc(ID2D1DrawInfo*, UInt32, Void)
-    set_pixel_shader_constant_buffer : Proc(ID2D1DrawInfo*, UInt8*, UInt32, HRESULT)
-    set_resource_texture : Proc(ID2D1DrawInfo*, UInt32, ID2D1ResourceTexture, HRESULT)
-    set_vertex_shader_constant_buffer : Proc(ID2D1DrawInfo*, UInt8*, UInt32, HRESULT)
-    set_pixel_shader : Proc(ID2D1DrawInfo*, Guid*, D2D1_PIXEL_OPTIONS, HRESULT)
-    set_vertex_processing : Proc(ID2D1DrawInfo*, ID2D1VertexBuffer, D2D1_VERTEX_OPTIONS, D2D1_BLEND_DESCRIPTION*, D2D1_VERTEX_RANGE*, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input_description : UInt64
+    set_output_buffer : UInt64
+    set_cached : UInt64
+    set_instruction_count_hint : UInt64
+    set_pixel_shader_constant_buffer : UInt64
+    set_resource_texture : UInt64
+    set_vertex_shader_constant_buffer : UInt64
+    set_pixel_shader : UInt64
+    set_vertex_processing : UInt64
   end
 
   ID2D1DrawInfo_GUID = "693ce632-7f2f-45de-93fe-18d88b37aa21"
@@ -3094,16 +3094,16 @@ lib LibWin32
   end
 
   struct ID2D1ComputeInfoVTbl
-    query_interface : Proc(ID2D1ComputeInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1ComputeInfo*, UInt32)
-    release : Proc(ID2D1ComputeInfo*, UInt32)
-    set_input_description : Proc(ID2D1ComputeInfo*, UInt32, D2D1_INPUT_DESCRIPTION, HRESULT)
-    set_output_buffer : Proc(ID2D1ComputeInfo*, D2D1_BUFFER_PRECISION, D2D1_CHANNEL_DEPTH, HRESULT)
-    set_cached : Proc(ID2D1ComputeInfo*, LibC::BOOL, Void)
-    set_instruction_count_hint : Proc(ID2D1ComputeInfo*, UInt32, Void)
-    set_compute_shader_constant_buffer : Proc(ID2D1ComputeInfo*, UInt8*, UInt32, HRESULT)
-    set_compute_shader : Proc(ID2D1ComputeInfo*, Guid*, HRESULT)
-    set_resource_texture : Proc(ID2D1ComputeInfo*, UInt32, ID2D1ResourceTexture, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input_description : UInt64
+    set_output_buffer : UInt64
+    set_cached : UInt64
+    set_instruction_count_hint : UInt64
+    set_compute_shader_constant_buffer : UInt64
+    set_compute_shader : UInt64
+    set_resource_texture : UInt64
   end
 
   ID2D1ComputeInfo_GUID = "5598b14b-9fd7-48b7-9bdb-8f0964eb38bc"
@@ -3113,10 +3113,10 @@ lib LibWin32
   end
 
   struct ID2D1TransformNodeVTbl
-    query_interface : Proc(ID2D1TransformNode*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1TransformNode*, UInt32)
-    release : Proc(ID2D1TransformNode*, UInt32)
-    get_input_count : Proc(ID2D1TransformNode*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_input_count : UInt64
   end
 
   ID2D1TransformNode_GUID = "b2efe1e7-729f-4102-949f-505fa21bf666"
@@ -3126,18 +3126,18 @@ lib LibWin32
   end
 
   struct ID2D1TransformGraphVTbl
-    query_interface : Proc(ID2D1TransformGraph*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1TransformGraph*, UInt32)
-    release : Proc(ID2D1TransformGraph*, UInt32)
-    get_input_count : Proc(ID2D1TransformGraph*, UInt32)
-    set_single_transform_node : Proc(ID2D1TransformGraph*, ID2D1TransformNode, HRESULT)
-    add_node : Proc(ID2D1TransformGraph*, ID2D1TransformNode, HRESULT)
-    remove_node : Proc(ID2D1TransformGraph*, ID2D1TransformNode, HRESULT)
-    set_output_node : Proc(ID2D1TransformGraph*, ID2D1TransformNode, HRESULT)
-    connect_node : Proc(ID2D1TransformGraph*, ID2D1TransformNode, ID2D1TransformNode, UInt32, HRESULT)
-    connect_to_effect_input : Proc(ID2D1TransformGraph*, UInt32, ID2D1TransformNode, UInt32, HRESULT)
-    clear : Proc(ID2D1TransformGraph*, Void)
-    set_passthrough_graph : Proc(ID2D1TransformGraph*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_input_count : UInt64
+    set_single_transform_node : UInt64
+    add_node : UInt64
+    remove_node : UInt64
+    set_output_node : UInt64
+    connect_node : UInt64
+    connect_to_effect_input : UInt64
+    clear : UInt64
+    set_passthrough_graph : UInt64
   end
 
   ID2D1TransformGraph_GUID = "13d29038-c3e6-4034-9081-13b53a417992"
@@ -3147,13 +3147,13 @@ lib LibWin32
   end
 
   struct ID2D1TransformVTbl
-    query_interface : Proc(ID2D1Transform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Transform*, UInt32)
-    release : Proc(ID2D1Transform*, UInt32)
-    get_input_count : Proc(ID2D1Transform*, UInt32)
-    map_output_rect_to_input_rects : Proc(ID2D1Transform*, RECT*, RECT*, UInt32, HRESULT)
-    map_input_rects_to_output_rect : Proc(ID2D1Transform*, RECT*, RECT*, UInt32, RECT*, RECT*, HRESULT)
-    map_invalid_rect : Proc(ID2D1Transform*, UInt32, RECT, RECT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_input_count : UInt64
+    map_output_rect_to_input_rects : UInt64
+    map_input_rects_to_output_rect : UInt64
+    map_invalid_rect : UInt64
   end
 
   ID2D1Transform_GUID = "ef1a287d-342a-4f76-8fdb-da0d6ea9f92b"
@@ -3163,14 +3163,14 @@ lib LibWin32
   end
 
   struct ID2D1DrawTransformVTbl
-    query_interface : Proc(ID2D1DrawTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1DrawTransform*, UInt32)
-    release : Proc(ID2D1DrawTransform*, UInt32)
-    get_input_count : Proc(ID2D1DrawTransform*, UInt32)
-    map_output_rect_to_input_rects : Proc(ID2D1DrawTransform*, RECT*, RECT*, UInt32, HRESULT)
-    map_input_rects_to_output_rect : Proc(ID2D1DrawTransform*, RECT*, RECT*, UInt32, RECT*, RECT*, HRESULT)
-    map_invalid_rect : Proc(ID2D1DrawTransform*, UInt32, RECT, RECT*, HRESULT)
-    set_draw_info : Proc(ID2D1DrawTransform*, ID2D1DrawInfo, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_input_count : UInt64
+    map_output_rect_to_input_rects : UInt64
+    map_input_rects_to_output_rect : UInt64
+    map_invalid_rect : UInt64
+    set_draw_info : UInt64
   end
 
   ID2D1DrawTransform_GUID = "36bfdcb6-9739-435d-a30d-a653beff6a6f"
@@ -3180,15 +3180,15 @@ lib LibWin32
   end
 
   struct ID2D1ComputeTransformVTbl
-    query_interface : Proc(ID2D1ComputeTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1ComputeTransform*, UInt32)
-    release : Proc(ID2D1ComputeTransform*, UInt32)
-    get_input_count : Proc(ID2D1ComputeTransform*, UInt32)
-    map_output_rect_to_input_rects : Proc(ID2D1ComputeTransform*, RECT*, RECT*, UInt32, HRESULT)
-    map_input_rects_to_output_rect : Proc(ID2D1ComputeTransform*, RECT*, RECT*, UInt32, RECT*, RECT*, HRESULT)
-    map_invalid_rect : Proc(ID2D1ComputeTransform*, UInt32, RECT, RECT*, HRESULT)
-    set_compute_info : Proc(ID2D1ComputeTransform*, ID2D1ComputeInfo, HRESULT)
-    calculate_threadgroups : Proc(ID2D1ComputeTransform*, RECT*, UInt32*, UInt32*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_input_count : UInt64
+    map_output_rect_to_input_rects : UInt64
+    map_input_rects_to_output_rect : UInt64
+    map_invalid_rect : UInt64
+    set_compute_info : UInt64
+    calculate_threadgroups : UInt64
   end
 
   ID2D1ComputeTransform_GUID = "0d85573c-01e3-4f7d-bfd9-0d60608bf3c3"
@@ -3198,10 +3198,10 @@ lib LibWin32
   end
 
   struct ID2D1AnalysisTransformVTbl
-    query_interface : Proc(ID2D1AnalysisTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1AnalysisTransform*, UInt32)
-    release : Proc(ID2D1AnalysisTransform*, UInt32)
-    process_analysis_results : Proc(ID2D1AnalysisTransform*, UInt8*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    process_analysis_results : UInt64
   end
 
   ID2D1AnalysisTransform_GUID = "0359dc30-95e6-4568-9055-27720d130e93"
@@ -3211,15 +3211,15 @@ lib LibWin32
   end
 
   struct ID2D1SourceTransformVTbl
-    query_interface : Proc(ID2D1SourceTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1SourceTransform*, UInt32)
-    release : Proc(ID2D1SourceTransform*, UInt32)
-    get_input_count : Proc(ID2D1SourceTransform*, UInt32)
-    map_output_rect_to_input_rects : Proc(ID2D1SourceTransform*, RECT*, RECT*, UInt32, HRESULT)
-    map_input_rects_to_output_rect : Proc(ID2D1SourceTransform*, RECT*, RECT*, UInt32, RECT*, RECT*, HRESULT)
-    map_invalid_rect : Proc(ID2D1SourceTransform*, UInt32, RECT, RECT*, HRESULT)
-    set_render_info : Proc(ID2D1SourceTransform*, ID2D1RenderInfo, HRESULT)
-    draw : Proc(ID2D1SourceTransform*, ID2D1Bitmap1, RECT*, D2D_POINT_2U, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_input_count : UInt64
+    map_output_rect_to_input_rects : UInt64
+    map_input_rects_to_output_rect : UInt64
+    map_invalid_rect : UInt64
+    set_render_info : UInt64
+    draw : UInt64
   end
 
   ID2D1SourceTransform_GUID = "db1800dd-0c34-4cf9-be90-31cc0a5653e1"
@@ -3229,12 +3229,12 @@ lib LibWin32
   end
 
   struct ID2D1ConcreteTransformVTbl
-    query_interface : Proc(ID2D1ConcreteTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1ConcreteTransform*, UInt32)
-    release : Proc(ID2D1ConcreteTransform*, UInt32)
-    get_input_count : Proc(ID2D1ConcreteTransform*, UInt32)
-    set_output_buffer : Proc(ID2D1ConcreteTransform*, D2D1_BUFFER_PRECISION, D2D1_CHANNEL_DEPTH, HRESULT)
-    set_cached : Proc(ID2D1ConcreteTransform*, LibC::BOOL, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_input_count : UInt64
+    set_output_buffer : UInt64
+    set_cached : UInt64
   end
 
   ID2D1ConcreteTransform_GUID = "1a799d8a-69f7-4e4c-9fed-437ccc6684cc"
@@ -3244,14 +3244,14 @@ lib LibWin32
   end
 
   struct ID2D1BlendTransformVTbl
-    query_interface : Proc(ID2D1BlendTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1BlendTransform*, UInt32)
-    release : Proc(ID2D1BlendTransform*, UInt32)
-    get_input_count : Proc(ID2D1BlendTransform*, UInt32)
-    set_output_buffer : Proc(ID2D1BlendTransform*, D2D1_BUFFER_PRECISION, D2D1_CHANNEL_DEPTH, HRESULT)
-    set_cached : Proc(ID2D1BlendTransform*, LibC::BOOL, Void)
-    set_description : Proc(ID2D1BlendTransform*, D2D1_BLEND_DESCRIPTION*, Void)
-    get_description : Proc(ID2D1BlendTransform*, D2D1_BLEND_DESCRIPTION*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_input_count : UInt64
+    set_output_buffer : UInt64
+    set_cached : UInt64
+    set_description : UInt64
+    get_description : UInt64
   end
 
   ID2D1BlendTransform_GUID = "63ac0b32-ba44-450f-8806-7f4ca1ff2f1b"
@@ -3261,16 +3261,16 @@ lib LibWin32
   end
 
   struct ID2D1BorderTransformVTbl
-    query_interface : Proc(ID2D1BorderTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1BorderTransform*, UInt32)
-    release : Proc(ID2D1BorderTransform*, UInt32)
-    get_input_count : Proc(ID2D1BorderTransform*, UInt32)
-    set_output_buffer : Proc(ID2D1BorderTransform*, D2D1_BUFFER_PRECISION, D2D1_CHANNEL_DEPTH, HRESULT)
-    set_cached : Proc(ID2D1BorderTransform*, LibC::BOOL, Void)
-    set_extend_mode_x : Proc(ID2D1BorderTransform*, D2D1_EXTEND_MODE, Void)
-    set_extend_mode_y : Proc(ID2D1BorderTransform*, D2D1_EXTEND_MODE, Void)
-    get_extend_mode_x : Proc(ID2D1BorderTransform*, D2D1_EXTEND_MODE)
-    get_extend_mode_y : Proc(ID2D1BorderTransform*, D2D1_EXTEND_MODE)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_input_count : UInt64
+    set_output_buffer : UInt64
+    set_cached : UInt64
+    set_extend_mode_x : UInt64
+    set_extend_mode_y : UInt64
+    get_extend_mode_x : UInt64
+    get_extend_mode_y : UInt64
   end
 
   ID2D1BorderTransform_GUID = "4998735c-3a19-473c-9781-656847e3a347"
@@ -3280,12 +3280,12 @@ lib LibWin32
   end
 
   struct ID2D1OffsetTransformVTbl
-    query_interface : Proc(ID2D1OffsetTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1OffsetTransform*, UInt32)
-    release : Proc(ID2D1OffsetTransform*, UInt32)
-    get_input_count : Proc(ID2D1OffsetTransform*, UInt32)
-    set_offset : Proc(ID2D1OffsetTransform*, POINT, Void)
-    get_offset : Proc(ID2D1OffsetTransform*, POINT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_input_count : UInt64
+    set_offset : UInt64
+    get_offset : UInt64
   end
 
   ID2D1OffsetTransform_GUID = "3fe6adea-7643-4f53-bd14-a0ce63f24042"
@@ -3295,12 +3295,12 @@ lib LibWin32
   end
 
   struct ID2D1BoundsAdjustmentTransformVTbl
-    query_interface : Proc(ID2D1BoundsAdjustmentTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1BoundsAdjustmentTransform*, UInt32)
-    release : Proc(ID2D1BoundsAdjustmentTransform*, UInt32)
-    get_input_count : Proc(ID2D1BoundsAdjustmentTransform*, UInt32)
-    set_output_bounds : Proc(ID2D1BoundsAdjustmentTransform*, RECT*, Void)
-    get_output_bounds : Proc(ID2D1BoundsAdjustmentTransform*, RECT*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_input_count : UInt64
+    set_output_bounds : UInt64
+    get_output_bounds : UInt64
   end
 
   ID2D1BoundsAdjustmentTransform_GUID = "90f732e2-5092-4606-a819-8651970baccd"
@@ -3310,12 +3310,12 @@ lib LibWin32
   end
 
   struct ID2D1EffectImplVTbl
-    query_interface : Proc(ID2D1EffectImpl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1EffectImpl*, UInt32)
-    release : Proc(ID2D1EffectImpl*, UInt32)
-    initialize : Proc(ID2D1EffectImpl*, ID2D1EffectContext, ID2D1TransformGraph, HRESULT)
-    prepare_for_render : Proc(ID2D1EffectImpl*, D2D1_CHANGE_TYPE, HRESULT)
-    set_graph : Proc(ID2D1EffectImpl*, ID2D1TransformGraph, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    prepare_for_render : UInt64
+    set_graph : UInt64
   end
 
   ID2D1EffectImpl_GUID = "a248fd3f-3e6c-4e63-9f03-7f68ecc91db9"
@@ -3325,30 +3325,30 @@ lib LibWin32
   end
 
   struct ID2D1EffectContextVTbl
-    query_interface : Proc(ID2D1EffectContext*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1EffectContext*, UInt32)
-    release : Proc(ID2D1EffectContext*, UInt32)
-    get_dpi : Proc(ID2D1EffectContext*, Float32*, Float32*, Void)
-    create_effect : Proc(ID2D1EffectContext*, Guid*, ID2D1Effect*, HRESULT)
-    get_maximum_supported_feature_level : Proc(ID2D1EffectContext*, D3D_FEATURE_LEVEL*, UInt32, D3D_FEATURE_LEVEL*, HRESULT)
-    create_transform_node_from_effect : Proc(ID2D1EffectContext*, ID2D1Effect, ID2D1TransformNode*, HRESULT)
-    create_blend_transform : Proc(ID2D1EffectContext*, UInt32, D2D1_BLEND_DESCRIPTION*, ID2D1BlendTransform*, HRESULT)
-    create_border_transform : Proc(ID2D1EffectContext*, D2D1_EXTEND_MODE, D2D1_EXTEND_MODE, ID2D1BorderTransform*, HRESULT)
-    create_offset_transform : Proc(ID2D1EffectContext*, POINT, ID2D1OffsetTransform*, HRESULT)
-    create_bounds_adjustment_transform : Proc(ID2D1EffectContext*, RECT*, ID2D1BoundsAdjustmentTransform*, HRESULT)
-    load_pixel_shader : Proc(ID2D1EffectContext*, Guid*, UInt8*, UInt32, HRESULT)
-    load_vertex_shader : Proc(ID2D1EffectContext*, Guid*, UInt8*, UInt32, HRESULT)
-    load_compute_shader : Proc(ID2D1EffectContext*, Guid*, UInt8*, UInt32, HRESULT)
-    is_shader_loaded : Proc(ID2D1EffectContext*, Guid*, LibC::BOOL)
-    create_resource_texture : Proc(ID2D1EffectContext*, Guid*, D2D1_RESOURCE_TEXTURE_PROPERTIES*, UInt8*, UInt32*, UInt32, ID2D1ResourceTexture*, HRESULT)
-    find_resource_texture : Proc(ID2D1EffectContext*, Guid*, ID2D1ResourceTexture*, HRESULT)
-    create_vertex_buffer : Proc(ID2D1EffectContext*, D2D1_VERTEX_BUFFER_PROPERTIES*, Guid*, D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES*, ID2D1VertexBuffer*, HRESULT)
-    find_vertex_buffer : Proc(ID2D1EffectContext*, Guid*, ID2D1VertexBuffer*, HRESULT)
-    create_color_context : Proc(ID2D1EffectContext*, D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_filename : Proc(ID2D1EffectContext*, LibC::LPWSTR, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_wic_color_context : Proc(ID2D1EffectContext*, IWICColorContext, ID2D1ColorContext*, HRESULT)
-    check_feature_support : Proc(ID2D1EffectContext*, D2D1_FEATURE, Void*, UInt32, HRESULT)
-    is_buffer_precision_supported : Proc(ID2D1EffectContext*, D2D1_BUFFER_PRECISION, LibC::BOOL)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_dpi : UInt64
+    create_effect : UInt64
+    get_maximum_supported_feature_level : UInt64
+    create_transform_node_from_effect : UInt64
+    create_blend_transform : UInt64
+    create_border_transform : UInt64
+    create_offset_transform : UInt64
+    create_bounds_adjustment_transform : UInt64
+    load_pixel_shader : UInt64
+    load_vertex_shader : UInt64
+    load_compute_shader : UInt64
+    is_shader_loaded : UInt64
+    create_resource_texture : UInt64
+    find_resource_texture : UInt64
+    create_vertex_buffer : UInt64
+    find_vertex_buffer : UInt64
+    create_color_context : UInt64
+    create_color_context_from_filename : UInt64
+    create_color_context_from_wic_color_context : UInt64
+    check_feature_support : UInt64
+    is_buffer_precision_supported : UInt64
   end
 
   ID2D1EffectContext_GUID = "3d9f916b-27dc-4ad7-b4f1-64945340f563"
@@ -3358,10 +3358,10 @@ lib LibWin32
   end
 
   struct ID2D1GeometryRealizationVTbl
-    query_interface : Proc(ID2D1GeometryRealization*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1GeometryRealization*, UInt32)
-    release : Proc(ID2D1GeometryRealization*, UInt32)
-    get_factory : Proc(ID2D1GeometryRealization*, ID2D1Factory*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
   end
 
   ID2D1GeometryRealization_GUID = "a16907d7-bc02-4801-99e8-8cf7f485f774"
@@ -3371,101 +3371,101 @@ lib LibWin32
   end
 
   struct ID2D1DeviceContext1VTbl
-    query_interface : Proc(ID2D1DeviceContext1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1DeviceContext1*, UInt32)
-    release : Proc(ID2D1DeviceContext1*, UInt32)
-    get_factory : Proc(ID2D1DeviceContext1*, ID2D1Factory*, Void)
-    create_bitmap : Proc(ID2D1DeviceContext1*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_from_wic_bitmap : Proc(ID2D1DeviceContext1*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_shared_bitmap : Proc(ID2D1DeviceContext1*, Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_brush : Proc(ID2D1DeviceContext1*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)
-    create_solid_color_brush : Proc(ID2D1DeviceContext1*, D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)
-    create_gradient_stop_collection : Proc(ID2D1DeviceContext1*, D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)
-    create_linear_gradient_brush : Proc(ID2D1DeviceContext1*, D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)
-    create_radial_gradient_brush : Proc(ID2D1DeviceContext1*, D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)
-    create_compatible_render_target : Proc(ID2D1DeviceContext1*, D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)
-    create_layer : Proc(ID2D1DeviceContext1*, D2D_SIZE_F*, ID2D1Layer*, HRESULT)
-    create_mesh : Proc(ID2D1DeviceContext1*, ID2D1Mesh*, HRESULT)
-    draw_line : Proc(ID2D1DeviceContext1*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    draw_rectangle : Proc(ID2D1DeviceContext1*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rectangle : Proc(ID2D1DeviceContext1*, D2D_RECT_F*, ID2D1Brush, Void)
-    draw_rounded_rectangle : Proc(ID2D1DeviceContext1*, D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rounded_rectangle : Proc(ID2D1DeviceContext1*, D2D1_ROUNDED_RECT*, ID2D1Brush, Void)
-    draw_ellipse : Proc(ID2D1DeviceContext1*, D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_ellipse : Proc(ID2D1DeviceContext1*, D2D1_ELLIPSE*, ID2D1Brush, Void)
-    draw_geometry : Proc(ID2D1DeviceContext1*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_geometry : Proc(ID2D1DeviceContext1*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)
-    fill_mesh : Proc(ID2D1DeviceContext1*, ID2D1Mesh, ID2D1Brush, Void)
-    fill_opacity_mask : Proc(ID2D1DeviceContext1*, ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)
-    draw_bitmap : Proc(ID2D1DeviceContext1*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)
-    draw_text : Proc(ID2D1DeviceContext1*, Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)
-    draw_text_layout : Proc(ID2D1DeviceContext1*, D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)
-    draw_glyph_run : Proc(ID2D1DeviceContext1*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    set_transform : Proc(ID2D1DeviceContext1*, D2D_MATRIX_3X2_F*, Void)
-    get_transform : Proc(ID2D1DeviceContext1*, D2D_MATRIX_3X2_F*, Void)
-    set_antialias_mode : Proc(ID2D1DeviceContext1*, D2D1_ANTIALIAS_MODE, Void)
-    get_antialias_mode : Proc(ID2D1DeviceContext1*, D2D1_ANTIALIAS_MODE)
-    set_text_antialias_mode : Proc(ID2D1DeviceContext1*, D2D1_TEXT_ANTIALIAS_MODE, Void)
-    get_text_antialias_mode : Proc(ID2D1DeviceContext1*, D2D1_TEXT_ANTIALIAS_MODE)
-    set_text_rendering_params : Proc(ID2D1DeviceContext1*, IDWriteRenderingParams, Void)
-    get_text_rendering_params : Proc(ID2D1DeviceContext1*, IDWriteRenderingParams*, Void)
-    set_tags : Proc(ID2D1DeviceContext1*, UInt64, UInt64, Void)
-    get_tags : Proc(ID2D1DeviceContext1*, UInt64*, UInt64*, Void)
-    push_layer : Proc(ID2D1DeviceContext1*, D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)
-    pop_layer : Proc(ID2D1DeviceContext1*, Void)
-    flush : Proc(ID2D1DeviceContext1*, UInt64*, UInt64*, HRESULT)
-    save_drawing_state : Proc(ID2D1DeviceContext1*, ID2D1DrawingStateBlock, Void)
-    restore_drawing_state : Proc(ID2D1DeviceContext1*, ID2D1DrawingStateBlock, Void)
-    push_axis_aligned_clip : Proc(ID2D1DeviceContext1*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)
-    pop_axis_aligned_clip : Proc(ID2D1DeviceContext1*, Void)
-    clear : Proc(ID2D1DeviceContext1*, D2D1_COLOR_F*, Void)
-    begin_draw : Proc(ID2D1DeviceContext1*, Void)
-    end_draw : Proc(ID2D1DeviceContext1*, UInt64*, UInt64*, HRESULT)
-    get_pixel_format : Proc(ID2D1DeviceContext1*, D2D1_PIXEL_FORMAT)
-    set_dpi : Proc(ID2D1DeviceContext1*, Float32, Float32, Void)
-    get_dpi : Proc(ID2D1DeviceContext1*, Float32*, Float32*, Void)
-    get_size : Proc(ID2D1DeviceContext1*, D2D_SIZE_F)
-    get_pixel_size : Proc(ID2D1DeviceContext1*, D2D_SIZE_U)
-    get_maximum_bitmap_size : Proc(ID2D1DeviceContext1*, UInt32)
-    is_supported : Proc(ID2D1DeviceContext1*, D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)
-    create_bitmap2 : Proc(ID2D1DeviceContext1*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_bitmap_from_wic_bitmap2 : Proc(ID2D1DeviceContext1*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_color_context : Proc(ID2D1DeviceContext1*, D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_filename : Proc(ID2D1DeviceContext1*, LibC::LPWSTR, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_wic_color_context : Proc(ID2D1DeviceContext1*, IWICColorContext, ID2D1ColorContext*, HRESULT)
-    create_bitmap_from_dxgi_surface : Proc(ID2D1DeviceContext1*, IDXGISurface, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_effect : Proc(ID2D1DeviceContext1*, Guid*, ID2D1Effect*, HRESULT)
-    create_gradient_stop_collection2 : Proc(ID2D1DeviceContext1*, D2D1_GRADIENT_STOP*, UInt32, D2D1_COLOR_SPACE, D2D1_COLOR_SPACE, D2D1_BUFFER_PRECISION, D2D1_EXTEND_MODE, D2D1_COLOR_INTERPOLATION_MODE, ID2D1GradientStopCollection1*, HRESULT)
-    create_image_brush : Proc(ID2D1DeviceContext1*, ID2D1Image, D2D1_IMAGE_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1ImageBrush*, HRESULT)
-    create_bitmap_brush2 : Proc(ID2D1DeviceContext1*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES1*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush1*, HRESULT)
-    create_command_list : Proc(ID2D1DeviceContext1*, ID2D1CommandList*, HRESULT)
-    is_dxgi_format_supported : Proc(ID2D1DeviceContext1*, DXGI_FORMAT, LibC::BOOL)
-    is_buffer_precision_supported : Proc(ID2D1DeviceContext1*, D2D1_BUFFER_PRECISION, LibC::BOOL)
-    get_image_local_bounds : Proc(ID2D1DeviceContext1*, ID2D1Image, D2D_RECT_F*, HRESULT)
-    get_image_world_bounds : Proc(ID2D1DeviceContext1*, ID2D1Image, D2D_RECT_F*, HRESULT)
-    get_glyph_run_world_bounds : Proc(ID2D1DeviceContext1*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_RECT_F*, HRESULT)
-    get_device : Proc(ID2D1DeviceContext1*, ID2D1Device*, Void)
-    set_target : Proc(ID2D1DeviceContext1*, ID2D1Image, Void)
-    get_target : Proc(ID2D1DeviceContext1*, ID2D1Image*, Void)
-    set_rendering_controls : Proc(ID2D1DeviceContext1*, D2D1_RENDERING_CONTROLS*, Void)
-    get_rendering_controls : Proc(ID2D1DeviceContext1*, D2D1_RENDERING_CONTROLS*, Void)
-    set_primitive_blend : Proc(ID2D1DeviceContext1*, D2D1_PRIMITIVE_BLEND, Void)
-    get_primitive_blend : Proc(ID2D1DeviceContext1*, D2D1_PRIMITIVE_BLEND)
-    set_unit_mode : Proc(ID2D1DeviceContext1*, D2D1_UNIT_MODE, Void)
-    get_unit_mode : Proc(ID2D1DeviceContext1*, D2D1_UNIT_MODE)
-    draw_glyph_run2 : Proc(ID2D1DeviceContext1*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    draw_image : Proc(ID2D1DeviceContext1*, ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, Void)
-    draw_gdi_metafile : Proc(ID2D1DeviceContext1*, ID2D1GdiMetafile, D2D_POINT_2F*, Void)
-    draw_bitmap2 : Proc(ID2D1DeviceContext1*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, Void)
-    push_layer2 : Proc(ID2D1DeviceContext1*, D2D1_LAYER_PARAMETERS1*, ID2D1Layer, Void)
-    invalidate_effect_input_rectangle : Proc(ID2D1DeviceContext1*, ID2D1Effect, UInt32, D2D_RECT_F*, HRESULT)
-    get_effect_invalid_rectangle_count : Proc(ID2D1DeviceContext1*, ID2D1Effect, UInt32*, HRESULT)
-    get_effect_invalid_rectangles : Proc(ID2D1DeviceContext1*, ID2D1Effect, D2D_RECT_F*, UInt32, HRESULT)
-    get_effect_required_input_rectangles : Proc(ID2D1DeviceContext1*, ID2D1Effect, D2D_RECT_F*, D2D1_EFFECT_INPUT_DESCRIPTION*, D2D_RECT_F*, UInt32, HRESULT)
-    fill_opacity_mask2 : Proc(ID2D1DeviceContext1*, ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, Void)
-    create_filled_geometry_realization : Proc(ID2D1DeviceContext1*, ID2D1Geometry, Float32, ID2D1GeometryRealization*, HRESULT)
-    create_stroked_geometry_realization : Proc(ID2D1DeviceContext1*, ID2D1Geometry, Float32, Float32, ID2D1StrokeStyle, ID2D1GeometryRealization*, HRESULT)
-    draw_geometry_realization : Proc(ID2D1DeviceContext1*, ID2D1GeometryRealization, ID2D1Brush, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_bitmap : UInt64
+    create_bitmap_from_wic_bitmap : UInt64
+    create_shared_bitmap : UInt64
+    create_bitmap_brush : UInt64
+    create_solid_color_brush : UInt64
+    create_gradient_stop_collection : UInt64
+    create_linear_gradient_brush : UInt64
+    create_radial_gradient_brush : UInt64
+    create_compatible_render_target : UInt64
+    create_layer : UInt64
+    create_mesh : UInt64
+    draw_line : UInt64
+    draw_rectangle : UInt64
+    fill_rectangle : UInt64
+    draw_rounded_rectangle : UInt64
+    fill_rounded_rectangle : UInt64
+    draw_ellipse : UInt64
+    fill_ellipse : UInt64
+    draw_geometry : UInt64
+    fill_geometry : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    draw_bitmap : UInt64
+    draw_text : UInt64
+    draw_text_layout : UInt64
+    draw_glyph_run : UInt64
+    set_transform : UInt64
+    get_transform : UInt64
+    set_antialias_mode : UInt64
+    get_antialias_mode : UInt64
+    set_text_antialias_mode : UInt64
+    get_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    get_text_rendering_params : UInt64
+    set_tags : UInt64
+    get_tags : UInt64
+    push_layer : UInt64
+    pop_layer : UInt64
+    flush : UInt64
+    save_drawing_state : UInt64
+    restore_drawing_state : UInt64
+    push_axis_aligned_clip : UInt64
+    pop_axis_aligned_clip : UInt64
+    clear : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    get_pixel_format : UInt64
+    set_dpi : UInt64
+    get_dpi : UInt64
+    get_size : UInt64
+    get_pixel_size : UInt64
+    get_maximum_bitmap_size : UInt64
+    is_supported : UInt64
+    create_bitmap2 : UInt64
+    create_bitmap_from_wic_bitmap2 : UInt64
+    create_color_context : UInt64
+    create_color_context_from_filename : UInt64
+    create_color_context_from_wic_color_context : UInt64
+    create_bitmap_from_dxgi_surface : UInt64
+    create_effect : UInt64
+    create_gradient_stop_collection2 : UInt64
+    create_image_brush : UInt64
+    create_bitmap_brush2 : UInt64
+    create_command_list : UInt64
+    is_dxgi_format_supported : UInt64
+    is_buffer_precision_supported : UInt64
+    get_image_local_bounds : UInt64
+    get_image_world_bounds : UInt64
+    get_glyph_run_world_bounds : UInt64
+    get_device : UInt64
+    set_target : UInt64
+    get_target : UInt64
+    set_rendering_controls : UInt64
+    get_rendering_controls : UInt64
+    set_primitive_blend : UInt64
+    get_primitive_blend : UInt64
+    set_unit_mode : UInt64
+    get_unit_mode : UInt64
+    draw_glyph_run2 : UInt64
+    draw_image : UInt64
+    draw_gdi_metafile : UInt64
+    draw_bitmap2 : UInt64
+    push_layer2 : UInt64
+    invalidate_effect_input_rectangle : UInt64
+    get_effect_invalid_rectangle_count : UInt64
+    get_effect_invalid_rectangles : UInt64
+    get_effect_required_input_rectangles : UInt64
+    fill_opacity_mask2 : UInt64
+    create_filled_geometry_realization : UInt64
+    create_stroked_geometry_realization : UInt64
+    draw_geometry_realization : UInt64
   end
 
   ID2D1DeviceContext1_GUID = "d37f57e4-6908-459f-a199-e72f24f79987"
@@ -3475,18 +3475,18 @@ lib LibWin32
   end
 
   struct ID2D1Device1VTbl
-    query_interface : Proc(ID2D1Device1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Device1*, UInt32)
-    release : Proc(ID2D1Device1*, UInt32)
-    get_factory : Proc(ID2D1Device1*, ID2D1Factory*, Void)
-    create_device_context : Proc(ID2D1Device1*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext*, HRESULT)
-    create_print_control : Proc(ID2D1Device1*, IWICImagingFactory, IPrintDocumentPackageTarget, D2D1_PRINT_CONTROL_PROPERTIES*, ID2D1PrintControl*, HRESULT)
-    set_maximum_texture_memory : Proc(ID2D1Device1*, UInt64, Void)
-    get_maximum_texture_memory : Proc(ID2D1Device1*, UInt64)
-    clear_resources : Proc(ID2D1Device1*, UInt32, Void)
-    get_rendering_priority : Proc(ID2D1Device1*, D2D1_RENDERING_PRIORITY)
-    set_rendering_priority : Proc(ID2D1Device1*, D2D1_RENDERING_PRIORITY, Void)
-    create_device_context2 : Proc(ID2D1Device1*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext1*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_device_context : UInt64
+    create_print_control : UInt64
+    set_maximum_texture_memory : UInt64
+    get_maximum_texture_memory : UInt64
+    clear_resources : UInt64
+    get_rendering_priority : UInt64
+    set_rendering_priority : UInt64
+    create_device_context2 : UInt64
   end
 
   ID2D1Device1_GUID = "d21768e1-23a4-4823-a14b-7c3eba85d658"
@@ -3496,34 +3496,34 @@ lib LibWin32
   end
 
   struct ID2D1Factory2VTbl
-    query_interface : Proc(ID2D1Factory2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Factory2*, UInt32)
-    release : Proc(ID2D1Factory2*, UInt32)
-    reload_system_metrics : Proc(ID2D1Factory2*, HRESULT)
-    get_desktop_dpi : Proc(ID2D1Factory2*, Float32*, Float32*, Void)
-    create_rectangle_geometry : Proc(ID2D1Factory2*, D2D_RECT_F*, ID2D1RectangleGeometry*, HRESULT)
-    create_rounded_rectangle_geometry : Proc(ID2D1Factory2*, D2D1_ROUNDED_RECT*, ID2D1RoundedRectangleGeometry*, HRESULT)
-    create_ellipse_geometry : Proc(ID2D1Factory2*, D2D1_ELLIPSE*, ID2D1EllipseGeometry*, HRESULT)
-    create_geometry_group : Proc(ID2D1Factory2*, D2D1_FILL_MODE, ID2D1Geometry*, UInt32, ID2D1GeometryGroup*, HRESULT)
-    create_transformed_geometry : Proc(ID2D1Factory2*, ID2D1Geometry, D2D_MATRIX_3X2_F*, ID2D1TransformedGeometry*, HRESULT)
-    create_path_geometry : Proc(ID2D1Factory2*, ID2D1PathGeometry*, HRESULT)
-    create_stroke_style : Proc(ID2D1Factory2*, D2D1_STROKE_STYLE_PROPERTIES*, Float32*, UInt32, ID2D1StrokeStyle*, HRESULT)
-    create_drawing_state_block : Proc(ID2D1Factory2*, D2D1_DRAWING_STATE_DESCRIPTION*, IDWriteRenderingParams, ID2D1DrawingStateBlock*, HRESULT)
-    create_wic_bitmap_render_target : Proc(ID2D1Factory2*, IWICBitmap, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)
-    create_hwnd_render_target : Proc(ID2D1Factory2*, D2D1_RENDER_TARGET_PROPERTIES*, D2D1_HWND_RENDER_TARGET_PROPERTIES*, ID2D1HwndRenderTarget*, HRESULT)
-    create_dxgi_surface_render_target : Proc(ID2D1Factory2*, IDXGISurface, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)
-    create_dc_render_target : Proc(ID2D1Factory2*, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)
-    create_device : Proc(ID2D1Factory2*, IDXGIDevice, ID2D1Device*, HRESULT)
-    create_stroke_style2 : Proc(ID2D1Factory2*, D2D1_STROKE_STYLE_PROPERTIES1*, Float32*, UInt32, ID2D1StrokeStyle1*, HRESULT)
-    create_path_geometry2 : Proc(ID2D1Factory2*, ID2D1PathGeometry1*, HRESULT)
-    create_drawing_state_block2 : Proc(ID2D1Factory2*, D2D1_DRAWING_STATE_DESCRIPTION1*, IDWriteRenderingParams, ID2D1DrawingStateBlock1*, HRESULT)
-    create_gdi_metafile : Proc(ID2D1Factory2*, IStream, ID2D1GdiMetafile*, HRESULT)
-    register_effect_from_stream : Proc(ID2D1Factory2*, Guid*, IStream, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)
-    register_effect_from_string : Proc(ID2D1Factory2*, Guid*, LibC::LPWSTR, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)
-    unregister_effect : Proc(ID2D1Factory2*, Guid*, HRESULT)
-    get_registered_effects : Proc(ID2D1Factory2*, Guid*, UInt32, UInt32*, UInt32*, HRESULT)
-    get_effect_properties : Proc(ID2D1Factory2*, Guid*, ID2D1Properties*, HRESULT)
-    create_device2 : Proc(ID2D1Factory2*, IDXGIDevice, ID2D1Device1*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    reload_system_metrics : UInt64
+    get_desktop_dpi : UInt64
+    create_rectangle_geometry : UInt64
+    create_rounded_rectangle_geometry : UInt64
+    create_ellipse_geometry : UInt64
+    create_geometry_group : UInt64
+    create_transformed_geometry : UInt64
+    create_path_geometry : UInt64
+    create_stroke_style : UInt64
+    create_drawing_state_block : UInt64
+    create_wic_bitmap_render_target : UInt64
+    create_hwnd_render_target : UInt64
+    create_dxgi_surface_render_target : UInt64
+    create_dc_render_target : UInt64
+    create_device : UInt64
+    create_stroke_style2 : UInt64
+    create_path_geometry2 : UInt64
+    create_drawing_state_block2 : UInt64
+    create_gdi_metafile : UInt64
+    register_effect_from_stream : UInt64
+    register_effect_from_string : UInt64
+    unregister_effect : UInt64
+    get_registered_effects : UInt64
+    get_effect_properties : UInt64
+    create_device2 : UInt64
   end
 
   ID2D1Factory2_GUID = "94f81a73-9212-4376-9c58-b16a3a0d3992"
@@ -3533,35 +3533,35 @@ lib LibWin32
   end
 
   struct ID2D1CommandSink1VTbl
-    query_interface : Proc(ID2D1CommandSink1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1CommandSink1*, UInt32)
-    release : Proc(ID2D1CommandSink1*, UInt32)
-    begin_draw : Proc(ID2D1CommandSink1*, HRESULT)
-    end_draw : Proc(ID2D1CommandSink1*, HRESULT)
-    set_antialias_mode : Proc(ID2D1CommandSink1*, D2D1_ANTIALIAS_MODE, HRESULT)
-    set_tags : Proc(ID2D1CommandSink1*, UInt64, UInt64, HRESULT)
-    set_text_antialias_mode : Proc(ID2D1CommandSink1*, D2D1_TEXT_ANTIALIAS_MODE, HRESULT)
-    set_text_rendering_params : Proc(ID2D1CommandSink1*, IDWriteRenderingParams, HRESULT)
-    set_transform : Proc(ID2D1CommandSink1*, D2D_MATRIX_3X2_F*, HRESULT)
-    set_primitive_blend : Proc(ID2D1CommandSink1*, D2D1_PRIMITIVE_BLEND, HRESULT)
-    set_unit_mode : Proc(ID2D1CommandSink1*, D2D1_UNIT_MODE, HRESULT)
-    clear : Proc(ID2D1CommandSink1*, D2D1_COLOR_F*, HRESULT)
-    draw_glyph_run : Proc(ID2D1CommandSink1*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, HRESULT)
-    draw_line : Proc(ID2D1CommandSink1*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_geometry : Proc(ID2D1CommandSink1*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_rectangle : Proc(ID2D1CommandSink1*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_bitmap : Proc(ID2D1CommandSink1*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, HRESULT)
-    draw_image : Proc(ID2D1CommandSink1*, ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, HRESULT)
-    draw_gdi_metafile : Proc(ID2D1CommandSink1*, ID2D1GdiMetafile, D2D_POINT_2F*, HRESULT)
-    fill_mesh : Proc(ID2D1CommandSink1*, ID2D1Mesh, ID2D1Brush, HRESULT)
-    fill_opacity_mask : Proc(ID2D1CommandSink1*, ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, HRESULT)
-    fill_geometry : Proc(ID2D1CommandSink1*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, HRESULT)
-    fill_rectangle : Proc(ID2D1CommandSink1*, D2D_RECT_F*, ID2D1Brush, HRESULT)
-    push_axis_aligned_clip : Proc(ID2D1CommandSink1*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, HRESULT)
-    push_layer : Proc(ID2D1CommandSink1*, D2D1_LAYER_PARAMETERS1*, ID2D1Layer, HRESULT)
-    pop_axis_aligned_clip : Proc(ID2D1CommandSink1*, HRESULT)
-    pop_layer : Proc(ID2D1CommandSink1*, HRESULT)
-    set_primitive_blend1 : Proc(ID2D1CommandSink1*, D2D1_PRIMITIVE_BLEND, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    set_antialias_mode : UInt64
+    set_tags : UInt64
+    set_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    set_transform : UInt64
+    set_primitive_blend : UInt64
+    set_unit_mode : UInt64
+    clear : UInt64
+    draw_glyph_run : UInt64
+    draw_line : UInt64
+    draw_geometry : UInt64
+    draw_rectangle : UInt64
+    draw_bitmap : UInt64
+    draw_image : UInt64
+    draw_gdi_metafile : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    fill_geometry : UInt64
+    fill_rectangle : UInt64
+    push_axis_aligned_clip : UInt64
+    push_layer : UInt64
+    pop_axis_aligned_clip : UInt64
+    pop_layer : UInt64
+    set_primitive_blend1 : UInt64
   end
 
   ID2D1CommandSink1_GUID = "9eb767fd-4269-4467-b8c2-eb30cb305743"
@@ -3571,12 +3571,12 @@ lib LibWin32
   end
 
   struct ID2D1SvgAttributeVTbl
-    query_interface : Proc(ID2D1SvgAttribute*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1SvgAttribute*, UInt32)
-    release : Proc(ID2D1SvgAttribute*, UInt32)
-    get_factory : Proc(ID2D1SvgAttribute*, ID2D1Factory*, Void)
-    get_element : Proc(ID2D1SvgAttribute*, ID2D1SvgElement*, Void)
-    clone : Proc(ID2D1SvgAttribute*, ID2D1SvgAttribute*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_element : UInt64
+    clone : UInt64
   end
 
   ID2D1SvgAttribute_GUID = "c9cdb0dd-f8c9-4e70-b7c2-301c80292c5e"
@@ -3586,19 +3586,19 @@ lib LibWin32
   end
 
   struct ID2D1SvgPaintVTbl
-    query_interface : Proc(ID2D1SvgPaint*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1SvgPaint*, UInt32)
-    release : Proc(ID2D1SvgPaint*, UInt32)
-    get_factory : Proc(ID2D1SvgPaint*, ID2D1Factory*, Void)
-    get_element : Proc(ID2D1SvgPaint*, ID2D1SvgElement*, Void)
-    clone : Proc(ID2D1SvgPaint*, ID2D1SvgAttribute*, HRESULT)
-    set_paint_type : Proc(ID2D1SvgPaint*, D2D1_SVG_PAINT_TYPE, HRESULT)
-    get_paint_type : Proc(ID2D1SvgPaint*, D2D1_SVG_PAINT_TYPE)
-    set_color : Proc(ID2D1SvgPaint*, D2D1_COLOR_F*, HRESULT)
-    get_color : Proc(ID2D1SvgPaint*, D2D1_COLOR_F*, Void)
-    set_id : Proc(ID2D1SvgPaint*, LibC::LPWSTR, HRESULT)
-    get_id : Proc(ID2D1SvgPaint*, Char*, UInt32, HRESULT)
-    get_id_length : Proc(ID2D1SvgPaint*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_element : UInt64
+    clone : UInt64
+    set_paint_type : UInt64
+    get_paint_type : UInt64
+    set_color : UInt64
+    get_color : UInt64
+    set_id : UInt64
+    get_id : UInt64
+    get_id_length : UInt64
   end
 
   ID2D1SvgPaint_GUID = "d59bab0a-68a2-455b-a5dc-9eb2854e2490"
@@ -3608,18 +3608,18 @@ lib LibWin32
   end
 
   struct ID2D1SvgStrokeDashArrayVTbl
-    query_interface : Proc(ID2D1SvgStrokeDashArray*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1SvgStrokeDashArray*, UInt32)
-    release : Proc(ID2D1SvgStrokeDashArray*, UInt32)
-    get_factory : Proc(ID2D1SvgStrokeDashArray*, ID2D1Factory*, Void)
-    get_element : Proc(ID2D1SvgStrokeDashArray*, ID2D1SvgElement*, Void)
-    clone : Proc(ID2D1SvgStrokeDashArray*, ID2D1SvgAttribute*, HRESULT)
-    remove_dashes_at_end : Proc(ID2D1SvgStrokeDashArray*, UInt32, HRESULT)
-    update_dashes : Proc(ID2D1SvgStrokeDashArray*, D2D1_SVG_LENGTH*, UInt32, UInt32, HRESULT)
-    update_dashes2 : Proc(ID2D1SvgStrokeDashArray*, Float32*, UInt32, UInt32, HRESULT)
-    get_dashes : Proc(ID2D1SvgStrokeDashArray*, D2D1_SVG_LENGTH*, UInt32, UInt32, HRESULT)
-    get_dashes2 : Proc(ID2D1SvgStrokeDashArray*, Float32*, UInt32, UInt32, HRESULT)
-    get_dashes_count : Proc(ID2D1SvgStrokeDashArray*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_element : UInt64
+    clone : UInt64
+    remove_dashes_at_end : UInt64
+    update_dashes : UInt64
+    update_dashes2 : UInt64
+    get_dashes : UInt64
+    get_dashes2 : UInt64
+    get_dashes_count : UInt64
   end
 
   ID2D1SvgStrokeDashArray_GUID = "f1c0ca52-92a3-4f00-b4ce-f35691efd9d9"
@@ -3629,16 +3629,16 @@ lib LibWin32
   end
 
   struct ID2D1SvgPointCollectionVTbl
-    query_interface : Proc(ID2D1SvgPointCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1SvgPointCollection*, UInt32)
-    release : Proc(ID2D1SvgPointCollection*, UInt32)
-    get_factory : Proc(ID2D1SvgPointCollection*, ID2D1Factory*, Void)
-    get_element : Proc(ID2D1SvgPointCollection*, ID2D1SvgElement*, Void)
-    clone : Proc(ID2D1SvgPointCollection*, ID2D1SvgAttribute*, HRESULT)
-    remove_points_at_end : Proc(ID2D1SvgPointCollection*, UInt32, HRESULT)
-    update_points : Proc(ID2D1SvgPointCollection*, D2D_POINT_2F*, UInt32, UInt32, HRESULT)
-    get_points : Proc(ID2D1SvgPointCollection*, D2D_POINT_2F*, UInt32, UInt32, HRESULT)
-    get_points_count : Proc(ID2D1SvgPointCollection*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_element : UInt64
+    clone : UInt64
+    remove_points_at_end : UInt64
+    update_points : UInt64
+    get_points : UInt64
+    get_points_count : UInt64
   end
 
   ID2D1SvgPointCollection_GUID = "9dbe4c0d-3572-4dd9-9825-5530813bb712"
@@ -3648,21 +3648,21 @@ lib LibWin32
   end
 
   struct ID2D1SvgPathDataVTbl
-    query_interface : Proc(ID2D1SvgPathData*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1SvgPathData*, UInt32)
-    release : Proc(ID2D1SvgPathData*, UInt32)
-    get_factory : Proc(ID2D1SvgPathData*, ID2D1Factory*, Void)
-    get_element : Proc(ID2D1SvgPathData*, ID2D1SvgElement*, Void)
-    clone : Proc(ID2D1SvgPathData*, ID2D1SvgAttribute*, HRESULT)
-    remove_segment_data_at_end : Proc(ID2D1SvgPathData*, UInt32, HRESULT)
-    update_segment_data : Proc(ID2D1SvgPathData*, Float32*, UInt32, UInt32, HRESULT)
-    get_segment_data : Proc(ID2D1SvgPathData*, Float32*, UInt32, UInt32, HRESULT)
-    get_segment_data_count : Proc(ID2D1SvgPathData*, UInt32)
-    remove_commands_at_end : Proc(ID2D1SvgPathData*, UInt32, HRESULT)
-    update_commands : Proc(ID2D1SvgPathData*, D2D1_SVG_PATH_COMMAND*, UInt32, UInt32, HRESULT)
-    get_commands : Proc(ID2D1SvgPathData*, D2D1_SVG_PATH_COMMAND*, UInt32, UInt32, HRESULT)
-    get_commands_count : Proc(ID2D1SvgPathData*, UInt32)
-    create_path_geometry : Proc(ID2D1SvgPathData*, D2D1_FILL_MODE, ID2D1PathGeometry1*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_element : UInt64
+    clone : UInt64
+    remove_segment_data_at_end : UInt64
+    update_segment_data : UInt64
+    get_segment_data : UInt64
+    get_segment_data_count : UInt64
+    remove_commands_at_end : UInt64
+    update_commands : UInt64
+    get_commands : UInt64
+    get_commands_count : UInt64
+    create_path_geometry : UInt64
   end
 
   ID2D1SvgPathData_GUID = "c095e4f4-bb98-43d6-9745-4d1b84ec9888"
@@ -3672,40 +3672,40 @@ lib LibWin32
   end
 
   struct ID2D1SvgElementVTbl
-    query_interface : Proc(ID2D1SvgElement*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1SvgElement*, UInt32)
-    release : Proc(ID2D1SvgElement*, UInt32)
-    get_factory : Proc(ID2D1SvgElement*, ID2D1Factory*, Void)
-    get_document : Proc(ID2D1SvgElement*, ID2D1SvgDocument*, Void)
-    get_tag_name : Proc(ID2D1SvgElement*, Char*, UInt32, HRESULT)
-    get_tag_name_length : Proc(ID2D1SvgElement*, UInt32)
-    is_text_content : Proc(ID2D1SvgElement*, LibC::BOOL)
-    get_parent : Proc(ID2D1SvgElement*, ID2D1SvgElement*, Void)
-    has_children : Proc(ID2D1SvgElement*, LibC::BOOL)
-    get_first_child : Proc(ID2D1SvgElement*, ID2D1SvgElement*, Void)
-    get_last_child : Proc(ID2D1SvgElement*, ID2D1SvgElement*, Void)
-    get_previous_child : Proc(ID2D1SvgElement*, ID2D1SvgElement, ID2D1SvgElement*, HRESULT)
-    get_next_child : Proc(ID2D1SvgElement*, ID2D1SvgElement, ID2D1SvgElement*, HRESULT)
-    insert_child_before : Proc(ID2D1SvgElement*, ID2D1SvgElement, ID2D1SvgElement, HRESULT)
-    append_child : Proc(ID2D1SvgElement*, ID2D1SvgElement, HRESULT)
-    replace_child : Proc(ID2D1SvgElement*, ID2D1SvgElement, ID2D1SvgElement, HRESULT)
-    remove_child : Proc(ID2D1SvgElement*, ID2D1SvgElement, HRESULT)
-    create_child : Proc(ID2D1SvgElement*, LibC::LPWSTR, ID2D1SvgElement*, HRESULT)
-    is_attribute_specified : Proc(ID2D1SvgElement*, LibC::LPWSTR, LibC::BOOL*, LibC::BOOL)
-    get_specified_attribute_count : Proc(ID2D1SvgElement*, UInt32)
-    get_specified_attribute_name : Proc(ID2D1SvgElement*, UInt32, Char*, UInt32, LibC::BOOL*, HRESULT)
-    get_specified_attribute_name_length : Proc(ID2D1SvgElement*, UInt32, UInt32*, LibC::BOOL*, HRESULT)
-    remove_attribute : Proc(ID2D1SvgElement*, LibC::LPWSTR, HRESULT)
-    set_text_value : Proc(ID2D1SvgElement*, Char*, UInt32, HRESULT)
-    get_text_value : Proc(ID2D1SvgElement*, Char*, UInt32, HRESULT)
-    get_text_value_length : Proc(ID2D1SvgElement*, UInt32)
-    set_attribute_value : Proc(ID2D1SvgElement*, LibC::LPWSTR, ID2D1SvgAttribute, HRESULT)
-    set_attribute_value2 : Proc(ID2D1SvgElement*, LibC::LPWSTR, D2D1_SVG_ATTRIBUTE_POD_TYPE, Void*, UInt32, HRESULT)
-    set_attribute_value3 : Proc(ID2D1SvgElement*, LibC::LPWSTR, D2D1_SVG_ATTRIBUTE_STRING_TYPE, LibC::LPWSTR, HRESULT)
-    get_attribute_value : Proc(ID2D1SvgElement*, LibC::LPWSTR, Guid*, Void**, HRESULT)
-    get_attribute_value2 : Proc(ID2D1SvgElement*, LibC::LPWSTR, D2D1_SVG_ATTRIBUTE_POD_TYPE, Void*, UInt32, HRESULT)
-    get_attribute_value3 : Proc(ID2D1SvgElement*, LibC::LPWSTR, D2D1_SVG_ATTRIBUTE_STRING_TYPE, Char*, UInt32, HRESULT)
-    get_attribute_value_length : Proc(ID2D1SvgElement*, LibC::LPWSTR, D2D1_SVG_ATTRIBUTE_STRING_TYPE, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_document : UInt64
+    get_tag_name : UInt64
+    get_tag_name_length : UInt64
+    is_text_content : UInt64
+    get_parent : UInt64
+    has_children : UInt64
+    get_first_child : UInt64
+    get_last_child : UInt64
+    get_previous_child : UInt64
+    get_next_child : UInt64
+    insert_child_before : UInt64
+    append_child : UInt64
+    replace_child : UInt64
+    remove_child : UInt64
+    create_child : UInt64
+    is_attribute_specified : UInt64
+    get_specified_attribute_count : UInt64
+    get_specified_attribute_name : UInt64
+    get_specified_attribute_name_length : UInt64
+    remove_attribute : UInt64
+    set_text_value : UInt64
+    get_text_value : UInt64
+    get_text_value_length : UInt64
+    set_attribute_value : UInt64
+    set_attribute_value2 : UInt64
+    set_attribute_value3 : UInt64
+    get_attribute_value : UInt64
+    get_attribute_value2 : UInt64
+    get_attribute_value3 : UInt64
+    get_attribute_value_length : UInt64
   end
 
   ID2D1SvgElement_GUID = "ac7b67a6-183e-49c1-a823-0ebe40b0db29"
@@ -3715,21 +3715,21 @@ lib LibWin32
   end
 
   struct ID2D1SvgDocumentVTbl
-    query_interface : Proc(ID2D1SvgDocument*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1SvgDocument*, UInt32)
-    release : Proc(ID2D1SvgDocument*, UInt32)
-    get_factory : Proc(ID2D1SvgDocument*, ID2D1Factory*, Void)
-    set_viewport_size : Proc(ID2D1SvgDocument*, D2D_SIZE_F, HRESULT)
-    get_viewport_size : Proc(ID2D1SvgDocument*, D2D_SIZE_F)
-    set_root : Proc(ID2D1SvgDocument*, ID2D1SvgElement, HRESULT)
-    get_root : Proc(ID2D1SvgDocument*, ID2D1SvgElement*, Void)
-    find_element_by_id : Proc(ID2D1SvgDocument*, LibC::LPWSTR, ID2D1SvgElement*, HRESULT)
-    serialize : Proc(ID2D1SvgDocument*, IStream, ID2D1SvgElement, HRESULT)
-    deserialize : Proc(ID2D1SvgDocument*, IStream, ID2D1SvgElement*, HRESULT)
-    create_paint : Proc(ID2D1SvgDocument*, D2D1_SVG_PAINT_TYPE, D2D1_COLOR_F*, LibC::LPWSTR, ID2D1SvgPaint*, HRESULT)
-    create_stroke_dash_array : Proc(ID2D1SvgDocument*, D2D1_SVG_LENGTH*, UInt32, ID2D1SvgStrokeDashArray*, HRESULT)
-    create_point_collection : Proc(ID2D1SvgDocument*, D2D_POINT_2F*, UInt32, ID2D1SvgPointCollection*, HRESULT)
-    create_path_data : Proc(ID2D1SvgDocument*, Float32*, UInt32, D2D1_SVG_PATH_COMMAND*, UInt32, ID2D1SvgPathData*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    set_viewport_size : UInt64
+    get_viewport_size : UInt64
+    set_root : UInt64
+    get_root : UInt64
+    find_element_by_id : UInt64
+    serialize : UInt64
+    deserialize : UInt64
+    create_paint : UInt64
+    create_stroke_dash_array : UInt64
+    create_point_collection : UInt64
+    create_path_data : UInt64
   end
 
   ID2D1SvgDocument_GUID = "86b88e4d-afa4-4d7b-88e4-68a51c4a0aec"
@@ -3739,14 +3739,14 @@ lib LibWin32
   end
 
   struct ID2D1InkStyleVTbl
-    query_interface : Proc(ID2D1InkStyle*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1InkStyle*, UInt32)
-    release : Proc(ID2D1InkStyle*, UInt32)
-    get_factory : Proc(ID2D1InkStyle*, ID2D1Factory*, Void)
-    set_nib_transform : Proc(ID2D1InkStyle*, D2D_MATRIX_3X2_F*, Void)
-    get_nib_transform : Proc(ID2D1InkStyle*, D2D_MATRIX_3X2_F*, Void)
-    set_nib_shape : Proc(ID2D1InkStyle*, D2D1_INK_NIB_SHAPE, Void)
-    get_nib_shape : Proc(ID2D1InkStyle*, D2D1_INK_NIB_SHAPE)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    set_nib_transform : UInt64
+    get_nib_transform : UInt64
+    set_nib_shape : UInt64
+    get_nib_shape : UInt64
   end
 
   ID2D1InkStyle_GUID = "bae8b344-23fc-4071-8cb5-d05d6f073848"
@@ -3756,20 +3756,20 @@ lib LibWin32
   end
 
   struct ID2D1InkVTbl
-    query_interface : Proc(ID2D1Ink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Ink*, UInt32)
-    release : Proc(ID2D1Ink*, UInt32)
-    get_factory : Proc(ID2D1Ink*, ID2D1Factory*, Void)
-    set_start_point : Proc(ID2D1Ink*, D2D1_INK_POINT*, Void)
-    get_start_point : Proc(ID2D1Ink*, D2D1_INK_POINT)
-    add_segments : Proc(ID2D1Ink*, D2D1_INK_BEZIER_SEGMENT*, UInt32, HRESULT)
-    remove_segments_at_end : Proc(ID2D1Ink*, UInt32, HRESULT)
-    set_segments : Proc(ID2D1Ink*, UInt32, D2D1_INK_BEZIER_SEGMENT*, UInt32, HRESULT)
-    set_segment_at_end : Proc(ID2D1Ink*, D2D1_INK_BEZIER_SEGMENT*, HRESULT)
-    get_segment_count : Proc(ID2D1Ink*, UInt32)
-    get_segments : Proc(ID2D1Ink*, UInt32, D2D1_INK_BEZIER_SEGMENT*, UInt32, HRESULT)
-    stream_as_geometry : Proc(ID2D1Ink*, ID2D1InkStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)
-    get_bounds : Proc(ID2D1Ink*, ID2D1InkStyle, D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    set_start_point : UInt64
+    get_start_point : UInt64
+    add_segments : UInt64
+    remove_segments_at_end : UInt64
+    set_segments : UInt64
+    set_segment_at_end : UInt64
+    get_segment_count : UInt64
+    get_segments : UInt64
+    stream_as_geometry : UInt64
+    get_bounds : UInt64
   end
 
   ID2D1Ink_GUID = "b499923b-7029-478f-a8b3-432c7c5f5312"
@@ -3779,12 +3779,12 @@ lib LibWin32
   end
 
   struct ID2D1GradientMeshVTbl
-    query_interface : Proc(ID2D1GradientMesh*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1GradientMesh*, UInt32)
-    release : Proc(ID2D1GradientMesh*, UInt32)
-    get_factory : Proc(ID2D1GradientMesh*, ID2D1Factory*, Void)
-    get_patch_count : Proc(ID2D1GradientMesh*, UInt32)
-    get_patches : Proc(ID2D1GradientMesh*, UInt32, D2D1_GRADIENT_MESH_PATCH*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_patch_count : UInt64
+    get_patches : UInt64
   end
 
   ID2D1GradientMesh_GUID = "f292e401-c050-4cde-83d7-04962d3b23c2"
@@ -3794,12 +3794,12 @@ lib LibWin32
   end
 
   struct ID2D1ImageSourceVTbl
-    query_interface : Proc(ID2D1ImageSource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1ImageSource*, UInt32)
-    release : Proc(ID2D1ImageSource*, UInt32)
-    get_factory : Proc(ID2D1ImageSource*, ID2D1Factory*, Void)
-    offer_resources : Proc(ID2D1ImageSource*, HRESULT)
-    try_reclaim_resources : Proc(ID2D1ImageSource*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    offer_resources : UInt64
+    try_reclaim_resources : UInt64
   end
 
   ID2D1ImageSource_GUID = "c9b664e5-74a1-4378-9ac2-eefc37a3f4d8"
@@ -3809,15 +3809,15 @@ lib LibWin32
   end
 
   struct ID2D1ImageSourceFromWicVTbl
-    query_interface : Proc(ID2D1ImageSourceFromWic*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1ImageSourceFromWic*, UInt32)
-    release : Proc(ID2D1ImageSourceFromWic*, UInt32)
-    get_factory : Proc(ID2D1ImageSourceFromWic*, ID2D1Factory*, Void)
-    offer_resources : Proc(ID2D1ImageSourceFromWic*, HRESULT)
-    try_reclaim_resources : Proc(ID2D1ImageSourceFromWic*, LibC::BOOL*, HRESULT)
-    ensure_cached : Proc(ID2D1ImageSourceFromWic*, D2D_RECT_U*, HRESULT)
-    trim_cache : Proc(ID2D1ImageSourceFromWic*, D2D_RECT_U*, HRESULT)
-    get_source : Proc(ID2D1ImageSourceFromWic*, IWICBitmapSource*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    offer_resources : UInt64
+    try_reclaim_resources : UInt64
+    ensure_cached : UInt64
+    trim_cache : UInt64
+    get_source : UInt64
   end
 
   ID2D1ImageSourceFromWic_GUID = "77395441-1c8f-4555-8683-f50dab0fe792"
@@ -3827,12 +3827,12 @@ lib LibWin32
   end
 
   struct ID2D1TransformedImageSourceVTbl
-    query_interface : Proc(ID2D1TransformedImageSource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1TransformedImageSource*, UInt32)
-    release : Proc(ID2D1TransformedImageSource*, UInt32)
-    get_factory : Proc(ID2D1TransformedImageSource*, ID2D1Factory*, Void)
-    get_source : Proc(ID2D1TransformedImageSource*, ID2D1ImageSource*, Void)
-    get_properties : Proc(ID2D1TransformedImageSource*, D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_source : UInt64
+    get_properties : UInt64
   end
 
   ID2D1TransformedImageSource_GUID = "7f1f79e5-2796-416c-8f55-700f911445e5"
@@ -3842,10 +3842,10 @@ lib LibWin32
   end
 
   struct ID2D1LookupTable3DVTbl
-    query_interface : Proc(ID2D1LookupTable3D*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1LookupTable3D*, UInt32)
-    release : Proc(ID2D1LookupTable3D*, UInt32)
-    get_factory : Proc(ID2D1LookupTable3D*, ID2D1Factory*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
   end
 
   ID2D1LookupTable3D_GUID = "53dd9855-a3b0-4d5b-82e1-26e25c5e5797"
@@ -3855,112 +3855,112 @@ lib LibWin32
   end
 
   struct ID2D1DeviceContext2VTbl
-    query_interface : Proc(ID2D1DeviceContext2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1DeviceContext2*, UInt32)
-    release : Proc(ID2D1DeviceContext2*, UInt32)
-    get_factory : Proc(ID2D1DeviceContext2*, ID2D1Factory*, Void)
-    create_bitmap : Proc(ID2D1DeviceContext2*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_from_wic_bitmap : Proc(ID2D1DeviceContext2*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_shared_bitmap : Proc(ID2D1DeviceContext2*, Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_brush : Proc(ID2D1DeviceContext2*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)
-    create_solid_color_brush : Proc(ID2D1DeviceContext2*, D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)
-    create_gradient_stop_collection : Proc(ID2D1DeviceContext2*, D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)
-    create_linear_gradient_brush : Proc(ID2D1DeviceContext2*, D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)
-    create_radial_gradient_brush : Proc(ID2D1DeviceContext2*, D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)
-    create_compatible_render_target : Proc(ID2D1DeviceContext2*, D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)
-    create_layer : Proc(ID2D1DeviceContext2*, D2D_SIZE_F*, ID2D1Layer*, HRESULT)
-    create_mesh : Proc(ID2D1DeviceContext2*, ID2D1Mesh*, HRESULT)
-    draw_line : Proc(ID2D1DeviceContext2*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    draw_rectangle : Proc(ID2D1DeviceContext2*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rectangle : Proc(ID2D1DeviceContext2*, D2D_RECT_F*, ID2D1Brush, Void)
-    draw_rounded_rectangle : Proc(ID2D1DeviceContext2*, D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rounded_rectangle : Proc(ID2D1DeviceContext2*, D2D1_ROUNDED_RECT*, ID2D1Brush, Void)
-    draw_ellipse : Proc(ID2D1DeviceContext2*, D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_ellipse : Proc(ID2D1DeviceContext2*, D2D1_ELLIPSE*, ID2D1Brush, Void)
-    draw_geometry : Proc(ID2D1DeviceContext2*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_geometry : Proc(ID2D1DeviceContext2*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)
-    fill_mesh : Proc(ID2D1DeviceContext2*, ID2D1Mesh, ID2D1Brush, Void)
-    fill_opacity_mask : Proc(ID2D1DeviceContext2*, ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)
-    draw_bitmap : Proc(ID2D1DeviceContext2*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)
-    draw_text : Proc(ID2D1DeviceContext2*, Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)
-    draw_text_layout : Proc(ID2D1DeviceContext2*, D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)
-    draw_glyph_run : Proc(ID2D1DeviceContext2*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    set_transform : Proc(ID2D1DeviceContext2*, D2D_MATRIX_3X2_F*, Void)
-    get_transform : Proc(ID2D1DeviceContext2*, D2D_MATRIX_3X2_F*, Void)
-    set_antialias_mode : Proc(ID2D1DeviceContext2*, D2D1_ANTIALIAS_MODE, Void)
-    get_antialias_mode : Proc(ID2D1DeviceContext2*, D2D1_ANTIALIAS_MODE)
-    set_text_antialias_mode : Proc(ID2D1DeviceContext2*, D2D1_TEXT_ANTIALIAS_MODE, Void)
-    get_text_antialias_mode : Proc(ID2D1DeviceContext2*, D2D1_TEXT_ANTIALIAS_MODE)
-    set_text_rendering_params : Proc(ID2D1DeviceContext2*, IDWriteRenderingParams, Void)
-    get_text_rendering_params : Proc(ID2D1DeviceContext2*, IDWriteRenderingParams*, Void)
-    set_tags : Proc(ID2D1DeviceContext2*, UInt64, UInt64, Void)
-    get_tags : Proc(ID2D1DeviceContext2*, UInt64*, UInt64*, Void)
-    push_layer : Proc(ID2D1DeviceContext2*, D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)
-    pop_layer : Proc(ID2D1DeviceContext2*, Void)
-    flush : Proc(ID2D1DeviceContext2*, UInt64*, UInt64*, HRESULT)
-    save_drawing_state : Proc(ID2D1DeviceContext2*, ID2D1DrawingStateBlock, Void)
-    restore_drawing_state : Proc(ID2D1DeviceContext2*, ID2D1DrawingStateBlock, Void)
-    push_axis_aligned_clip : Proc(ID2D1DeviceContext2*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)
-    pop_axis_aligned_clip : Proc(ID2D1DeviceContext2*, Void)
-    clear : Proc(ID2D1DeviceContext2*, D2D1_COLOR_F*, Void)
-    begin_draw : Proc(ID2D1DeviceContext2*, Void)
-    end_draw : Proc(ID2D1DeviceContext2*, UInt64*, UInt64*, HRESULT)
-    get_pixel_format : Proc(ID2D1DeviceContext2*, D2D1_PIXEL_FORMAT)
-    set_dpi : Proc(ID2D1DeviceContext2*, Float32, Float32, Void)
-    get_dpi : Proc(ID2D1DeviceContext2*, Float32*, Float32*, Void)
-    get_size : Proc(ID2D1DeviceContext2*, D2D_SIZE_F)
-    get_pixel_size : Proc(ID2D1DeviceContext2*, D2D_SIZE_U)
-    get_maximum_bitmap_size : Proc(ID2D1DeviceContext2*, UInt32)
-    is_supported : Proc(ID2D1DeviceContext2*, D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)
-    create_bitmap2 : Proc(ID2D1DeviceContext2*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_bitmap_from_wic_bitmap2 : Proc(ID2D1DeviceContext2*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_color_context : Proc(ID2D1DeviceContext2*, D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_filename : Proc(ID2D1DeviceContext2*, LibC::LPWSTR, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_wic_color_context : Proc(ID2D1DeviceContext2*, IWICColorContext, ID2D1ColorContext*, HRESULT)
-    create_bitmap_from_dxgi_surface : Proc(ID2D1DeviceContext2*, IDXGISurface, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_effect : Proc(ID2D1DeviceContext2*, Guid*, ID2D1Effect*, HRESULT)
-    create_gradient_stop_collection2 : Proc(ID2D1DeviceContext2*, D2D1_GRADIENT_STOP*, UInt32, D2D1_COLOR_SPACE, D2D1_COLOR_SPACE, D2D1_BUFFER_PRECISION, D2D1_EXTEND_MODE, D2D1_COLOR_INTERPOLATION_MODE, ID2D1GradientStopCollection1*, HRESULT)
-    create_image_brush : Proc(ID2D1DeviceContext2*, ID2D1Image, D2D1_IMAGE_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1ImageBrush*, HRESULT)
-    create_bitmap_brush2 : Proc(ID2D1DeviceContext2*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES1*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush1*, HRESULT)
-    create_command_list : Proc(ID2D1DeviceContext2*, ID2D1CommandList*, HRESULT)
-    is_dxgi_format_supported : Proc(ID2D1DeviceContext2*, DXGI_FORMAT, LibC::BOOL)
-    is_buffer_precision_supported : Proc(ID2D1DeviceContext2*, D2D1_BUFFER_PRECISION, LibC::BOOL)
-    get_image_local_bounds : Proc(ID2D1DeviceContext2*, ID2D1Image, D2D_RECT_F*, HRESULT)
-    get_image_world_bounds : Proc(ID2D1DeviceContext2*, ID2D1Image, D2D_RECT_F*, HRESULT)
-    get_glyph_run_world_bounds : Proc(ID2D1DeviceContext2*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_RECT_F*, HRESULT)
-    get_device : Proc(ID2D1DeviceContext2*, ID2D1Device*, Void)
-    set_target : Proc(ID2D1DeviceContext2*, ID2D1Image, Void)
-    get_target : Proc(ID2D1DeviceContext2*, ID2D1Image*, Void)
-    set_rendering_controls : Proc(ID2D1DeviceContext2*, D2D1_RENDERING_CONTROLS*, Void)
-    get_rendering_controls : Proc(ID2D1DeviceContext2*, D2D1_RENDERING_CONTROLS*, Void)
-    set_primitive_blend : Proc(ID2D1DeviceContext2*, D2D1_PRIMITIVE_BLEND, Void)
-    get_primitive_blend : Proc(ID2D1DeviceContext2*, D2D1_PRIMITIVE_BLEND)
-    set_unit_mode : Proc(ID2D1DeviceContext2*, D2D1_UNIT_MODE, Void)
-    get_unit_mode : Proc(ID2D1DeviceContext2*, D2D1_UNIT_MODE)
-    draw_glyph_run2 : Proc(ID2D1DeviceContext2*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    draw_image : Proc(ID2D1DeviceContext2*, ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, Void)
-    draw_gdi_metafile : Proc(ID2D1DeviceContext2*, ID2D1GdiMetafile, D2D_POINT_2F*, Void)
-    draw_bitmap2 : Proc(ID2D1DeviceContext2*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, Void)
-    push_layer2 : Proc(ID2D1DeviceContext2*, D2D1_LAYER_PARAMETERS1*, ID2D1Layer, Void)
-    invalidate_effect_input_rectangle : Proc(ID2D1DeviceContext2*, ID2D1Effect, UInt32, D2D_RECT_F*, HRESULT)
-    get_effect_invalid_rectangle_count : Proc(ID2D1DeviceContext2*, ID2D1Effect, UInt32*, HRESULT)
-    get_effect_invalid_rectangles : Proc(ID2D1DeviceContext2*, ID2D1Effect, D2D_RECT_F*, UInt32, HRESULT)
-    get_effect_required_input_rectangles : Proc(ID2D1DeviceContext2*, ID2D1Effect, D2D_RECT_F*, D2D1_EFFECT_INPUT_DESCRIPTION*, D2D_RECT_F*, UInt32, HRESULT)
-    fill_opacity_mask2 : Proc(ID2D1DeviceContext2*, ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, Void)
-    create_filled_geometry_realization : Proc(ID2D1DeviceContext2*, ID2D1Geometry, Float32, ID2D1GeometryRealization*, HRESULT)
-    create_stroked_geometry_realization : Proc(ID2D1DeviceContext2*, ID2D1Geometry, Float32, Float32, ID2D1StrokeStyle, ID2D1GeometryRealization*, HRESULT)
-    draw_geometry_realization : Proc(ID2D1DeviceContext2*, ID2D1GeometryRealization, ID2D1Brush, Void)
-    create_ink : Proc(ID2D1DeviceContext2*, D2D1_INK_POINT*, ID2D1Ink*, HRESULT)
-    create_ink_style : Proc(ID2D1DeviceContext2*, D2D1_INK_STYLE_PROPERTIES*, ID2D1InkStyle*, HRESULT)
-    create_gradient_mesh : Proc(ID2D1DeviceContext2*, D2D1_GRADIENT_MESH_PATCH*, UInt32, ID2D1GradientMesh*, HRESULT)
-    create_image_source_from_wic : Proc(ID2D1DeviceContext2*, IWICBitmapSource, D2D1_IMAGE_SOURCE_LOADING_OPTIONS, D2D1_ALPHA_MODE, ID2D1ImageSourceFromWic*, HRESULT)
-    create_lookup_table3_d : Proc(ID2D1DeviceContext2*, D2D1_BUFFER_PRECISION, UInt32*, UInt8*, UInt32, UInt32*, ID2D1LookupTable3D*, HRESULT)
-    create_image_source_from_dxgi : Proc(ID2D1DeviceContext2*, IDXGISurface*, UInt32, DXGI_COLOR_SPACE_TYPE, D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, ID2D1ImageSource*, HRESULT)
-    get_gradient_mesh_world_bounds : Proc(ID2D1DeviceContext2*, ID2D1GradientMesh, D2D_RECT_F*, HRESULT)
-    draw_ink : Proc(ID2D1DeviceContext2*, ID2D1Ink, ID2D1Brush, ID2D1InkStyle, Void)
-    draw_gradient_mesh : Proc(ID2D1DeviceContext2*, ID2D1GradientMesh, Void)
-    draw_gdi_metafile2 : Proc(ID2D1DeviceContext2*, ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, Void)
-    create_transformed_image_source : Proc(ID2D1DeviceContext2*, ID2D1ImageSource, D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, ID2D1TransformedImageSource*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_bitmap : UInt64
+    create_bitmap_from_wic_bitmap : UInt64
+    create_shared_bitmap : UInt64
+    create_bitmap_brush : UInt64
+    create_solid_color_brush : UInt64
+    create_gradient_stop_collection : UInt64
+    create_linear_gradient_brush : UInt64
+    create_radial_gradient_brush : UInt64
+    create_compatible_render_target : UInt64
+    create_layer : UInt64
+    create_mesh : UInt64
+    draw_line : UInt64
+    draw_rectangle : UInt64
+    fill_rectangle : UInt64
+    draw_rounded_rectangle : UInt64
+    fill_rounded_rectangle : UInt64
+    draw_ellipse : UInt64
+    fill_ellipse : UInt64
+    draw_geometry : UInt64
+    fill_geometry : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    draw_bitmap : UInt64
+    draw_text : UInt64
+    draw_text_layout : UInt64
+    draw_glyph_run : UInt64
+    set_transform : UInt64
+    get_transform : UInt64
+    set_antialias_mode : UInt64
+    get_antialias_mode : UInt64
+    set_text_antialias_mode : UInt64
+    get_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    get_text_rendering_params : UInt64
+    set_tags : UInt64
+    get_tags : UInt64
+    push_layer : UInt64
+    pop_layer : UInt64
+    flush : UInt64
+    save_drawing_state : UInt64
+    restore_drawing_state : UInt64
+    push_axis_aligned_clip : UInt64
+    pop_axis_aligned_clip : UInt64
+    clear : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    get_pixel_format : UInt64
+    set_dpi : UInt64
+    get_dpi : UInt64
+    get_size : UInt64
+    get_pixel_size : UInt64
+    get_maximum_bitmap_size : UInt64
+    is_supported : UInt64
+    create_bitmap2 : UInt64
+    create_bitmap_from_wic_bitmap2 : UInt64
+    create_color_context : UInt64
+    create_color_context_from_filename : UInt64
+    create_color_context_from_wic_color_context : UInt64
+    create_bitmap_from_dxgi_surface : UInt64
+    create_effect : UInt64
+    create_gradient_stop_collection2 : UInt64
+    create_image_brush : UInt64
+    create_bitmap_brush2 : UInt64
+    create_command_list : UInt64
+    is_dxgi_format_supported : UInt64
+    is_buffer_precision_supported : UInt64
+    get_image_local_bounds : UInt64
+    get_image_world_bounds : UInt64
+    get_glyph_run_world_bounds : UInt64
+    get_device : UInt64
+    set_target : UInt64
+    get_target : UInt64
+    set_rendering_controls : UInt64
+    get_rendering_controls : UInt64
+    set_primitive_blend : UInt64
+    get_primitive_blend : UInt64
+    set_unit_mode : UInt64
+    get_unit_mode : UInt64
+    draw_glyph_run2 : UInt64
+    draw_image : UInt64
+    draw_gdi_metafile : UInt64
+    draw_bitmap2 : UInt64
+    push_layer2 : UInt64
+    invalidate_effect_input_rectangle : UInt64
+    get_effect_invalid_rectangle_count : UInt64
+    get_effect_invalid_rectangles : UInt64
+    get_effect_required_input_rectangles : UInt64
+    fill_opacity_mask2 : UInt64
+    create_filled_geometry_realization : UInt64
+    create_stroked_geometry_realization : UInt64
+    draw_geometry_realization : UInt64
+    create_ink : UInt64
+    create_ink_style : UInt64
+    create_gradient_mesh : UInt64
+    create_image_source_from_wic : UInt64
+    create_lookup_table3_d : UInt64
+    create_image_source_from_dxgi : UInt64
+    get_gradient_mesh_world_bounds : UInt64
+    draw_ink : UInt64
+    draw_gradient_mesh : UInt64
+    draw_gdi_metafile2 : UInt64
+    create_transformed_image_source : UInt64
   end
 
   ID2D1DeviceContext2_GUID = "394ea6a3-0c34-4321-950b-6ca20f0be6c7"
@@ -3970,21 +3970,21 @@ lib LibWin32
   end
 
   struct ID2D1Device2VTbl
-    query_interface : Proc(ID2D1Device2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Device2*, UInt32)
-    release : Proc(ID2D1Device2*, UInt32)
-    get_factory : Proc(ID2D1Device2*, ID2D1Factory*, Void)
-    create_device_context : Proc(ID2D1Device2*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext*, HRESULT)
-    create_print_control : Proc(ID2D1Device2*, IWICImagingFactory, IPrintDocumentPackageTarget, D2D1_PRINT_CONTROL_PROPERTIES*, ID2D1PrintControl*, HRESULT)
-    set_maximum_texture_memory : Proc(ID2D1Device2*, UInt64, Void)
-    get_maximum_texture_memory : Proc(ID2D1Device2*, UInt64)
-    clear_resources : Proc(ID2D1Device2*, UInt32, Void)
-    get_rendering_priority : Proc(ID2D1Device2*, D2D1_RENDERING_PRIORITY)
-    set_rendering_priority : Proc(ID2D1Device2*, D2D1_RENDERING_PRIORITY, Void)
-    create_device_context2 : Proc(ID2D1Device2*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext1*, HRESULT)
-    create_device_context3 : Proc(ID2D1Device2*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext2*, HRESULT)
-    flush_device_contexts : Proc(ID2D1Device2*, ID2D1Bitmap, Void)
-    get_dxgi_device : Proc(ID2D1Device2*, IDXGIDevice*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_device_context : UInt64
+    create_print_control : UInt64
+    set_maximum_texture_memory : UInt64
+    get_maximum_texture_memory : UInt64
+    clear_resources : UInt64
+    get_rendering_priority : UInt64
+    set_rendering_priority : UInt64
+    create_device_context2 : UInt64
+    create_device_context3 : UInt64
+    flush_device_contexts : UInt64
+    get_dxgi_device : UInt64
   end
 
   ID2D1Device2_GUID = "a44472e1-8dfb-4e60-8492-6e2861c9ca8b"
@@ -3994,35 +3994,35 @@ lib LibWin32
   end
 
   struct ID2D1Factory3VTbl
-    query_interface : Proc(ID2D1Factory3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Factory3*, UInt32)
-    release : Proc(ID2D1Factory3*, UInt32)
-    reload_system_metrics : Proc(ID2D1Factory3*, HRESULT)
-    get_desktop_dpi : Proc(ID2D1Factory3*, Float32*, Float32*, Void)
-    create_rectangle_geometry : Proc(ID2D1Factory3*, D2D_RECT_F*, ID2D1RectangleGeometry*, HRESULT)
-    create_rounded_rectangle_geometry : Proc(ID2D1Factory3*, D2D1_ROUNDED_RECT*, ID2D1RoundedRectangleGeometry*, HRESULT)
-    create_ellipse_geometry : Proc(ID2D1Factory3*, D2D1_ELLIPSE*, ID2D1EllipseGeometry*, HRESULT)
-    create_geometry_group : Proc(ID2D1Factory3*, D2D1_FILL_MODE, ID2D1Geometry*, UInt32, ID2D1GeometryGroup*, HRESULT)
-    create_transformed_geometry : Proc(ID2D1Factory3*, ID2D1Geometry, D2D_MATRIX_3X2_F*, ID2D1TransformedGeometry*, HRESULT)
-    create_path_geometry : Proc(ID2D1Factory3*, ID2D1PathGeometry*, HRESULT)
-    create_stroke_style : Proc(ID2D1Factory3*, D2D1_STROKE_STYLE_PROPERTIES*, Float32*, UInt32, ID2D1StrokeStyle*, HRESULT)
-    create_drawing_state_block : Proc(ID2D1Factory3*, D2D1_DRAWING_STATE_DESCRIPTION*, IDWriteRenderingParams, ID2D1DrawingStateBlock*, HRESULT)
-    create_wic_bitmap_render_target : Proc(ID2D1Factory3*, IWICBitmap, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)
-    create_hwnd_render_target : Proc(ID2D1Factory3*, D2D1_RENDER_TARGET_PROPERTIES*, D2D1_HWND_RENDER_TARGET_PROPERTIES*, ID2D1HwndRenderTarget*, HRESULT)
-    create_dxgi_surface_render_target : Proc(ID2D1Factory3*, IDXGISurface, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)
-    create_dc_render_target : Proc(ID2D1Factory3*, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)
-    create_device : Proc(ID2D1Factory3*, IDXGIDevice, ID2D1Device*, HRESULT)
-    create_stroke_style2 : Proc(ID2D1Factory3*, D2D1_STROKE_STYLE_PROPERTIES1*, Float32*, UInt32, ID2D1StrokeStyle1*, HRESULT)
-    create_path_geometry2 : Proc(ID2D1Factory3*, ID2D1PathGeometry1*, HRESULT)
-    create_drawing_state_block2 : Proc(ID2D1Factory3*, D2D1_DRAWING_STATE_DESCRIPTION1*, IDWriteRenderingParams, ID2D1DrawingStateBlock1*, HRESULT)
-    create_gdi_metafile : Proc(ID2D1Factory3*, IStream, ID2D1GdiMetafile*, HRESULT)
-    register_effect_from_stream : Proc(ID2D1Factory3*, Guid*, IStream, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)
-    register_effect_from_string : Proc(ID2D1Factory3*, Guid*, LibC::LPWSTR, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)
-    unregister_effect : Proc(ID2D1Factory3*, Guid*, HRESULT)
-    get_registered_effects : Proc(ID2D1Factory3*, Guid*, UInt32, UInt32*, UInt32*, HRESULT)
-    get_effect_properties : Proc(ID2D1Factory3*, Guid*, ID2D1Properties*, HRESULT)
-    create_device2 : Proc(ID2D1Factory3*, IDXGIDevice, ID2D1Device1*, HRESULT)
-    create_device3 : Proc(ID2D1Factory3*, IDXGIDevice, ID2D1Device2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    reload_system_metrics : UInt64
+    get_desktop_dpi : UInt64
+    create_rectangle_geometry : UInt64
+    create_rounded_rectangle_geometry : UInt64
+    create_ellipse_geometry : UInt64
+    create_geometry_group : UInt64
+    create_transformed_geometry : UInt64
+    create_path_geometry : UInt64
+    create_stroke_style : UInt64
+    create_drawing_state_block : UInt64
+    create_wic_bitmap_render_target : UInt64
+    create_hwnd_render_target : UInt64
+    create_dxgi_surface_render_target : UInt64
+    create_dc_render_target : UInt64
+    create_device : UInt64
+    create_stroke_style2 : UInt64
+    create_path_geometry2 : UInt64
+    create_drawing_state_block2 : UInt64
+    create_gdi_metafile : UInt64
+    register_effect_from_stream : UInt64
+    register_effect_from_string : UInt64
+    unregister_effect : UInt64
+    get_registered_effects : UInt64
+    get_effect_properties : UInt64
+    create_device2 : UInt64
+    create_device3 : UInt64
   end
 
   ID2D1Factory3_GUID = "0869759f-4f00-413f-b03e-2bda45404d0f"
@@ -4032,38 +4032,38 @@ lib LibWin32
   end
 
   struct ID2D1CommandSink2VTbl
-    query_interface : Proc(ID2D1CommandSink2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1CommandSink2*, UInt32)
-    release : Proc(ID2D1CommandSink2*, UInt32)
-    begin_draw : Proc(ID2D1CommandSink2*, HRESULT)
-    end_draw : Proc(ID2D1CommandSink2*, HRESULT)
-    set_antialias_mode : Proc(ID2D1CommandSink2*, D2D1_ANTIALIAS_MODE, HRESULT)
-    set_tags : Proc(ID2D1CommandSink2*, UInt64, UInt64, HRESULT)
-    set_text_antialias_mode : Proc(ID2D1CommandSink2*, D2D1_TEXT_ANTIALIAS_MODE, HRESULT)
-    set_text_rendering_params : Proc(ID2D1CommandSink2*, IDWriteRenderingParams, HRESULT)
-    set_transform : Proc(ID2D1CommandSink2*, D2D_MATRIX_3X2_F*, HRESULT)
-    set_primitive_blend : Proc(ID2D1CommandSink2*, D2D1_PRIMITIVE_BLEND, HRESULT)
-    set_unit_mode : Proc(ID2D1CommandSink2*, D2D1_UNIT_MODE, HRESULT)
-    clear : Proc(ID2D1CommandSink2*, D2D1_COLOR_F*, HRESULT)
-    draw_glyph_run : Proc(ID2D1CommandSink2*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, HRESULT)
-    draw_line : Proc(ID2D1CommandSink2*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_geometry : Proc(ID2D1CommandSink2*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_rectangle : Proc(ID2D1CommandSink2*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_bitmap : Proc(ID2D1CommandSink2*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, HRESULT)
-    draw_image : Proc(ID2D1CommandSink2*, ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, HRESULT)
-    draw_gdi_metafile : Proc(ID2D1CommandSink2*, ID2D1GdiMetafile, D2D_POINT_2F*, HRESULT)
-    fill_mesh : Proc(ID2D1CommandSink2*, ID2D1Mesh, ID2D1Brush, HRESULT)
-    fill_opacity_mask : Proc(ID2D1CommandSink2*, ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, HRESULT)
-    fill_geometry : Proc(ID2D1CommandSink2*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, HRESULT)
-    fill_rectangle : Proc(ID2D1CommandSink2*, D2D_RECT_F*, ID2D1Brush, HRESULT)
-    push_axis_aligned_clip : Proc(ID2D1CommandSink2*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, HRESULT)
-    push_layer : Proc(ID2D1CommandSink2*, D2D1_LAYER_PARAMETERS1*, ID2D1Layer, HRESULT)
-    pop_axis_aligned_clip : Proc(ID2D1CommandSink2*, HRESULT)
-    pop_layer : Proc(ID2D1CommandSink2*, HRESULT)
-    set_primitive_blend1 : Proc(ID2D1CommandSink2*, D2D1_PRIMITIVE_BLEND, HRESULT)
-    draw_ink : Proc(ID2D1CommandSink2*, ID2D1Ink, ID2D1Brush, ID2D1InkStyle, HRESULT)
-    draw_gradient_mesh : Proc(ID2D1CommandSink2*, ID2D1GradientMesh, HRESULT)
-    draw_gdi_metafile2 : Proc(ID2D1CommandSink2*, ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    set_antialias_mode : UInt64
+    set_tags : UInt64
+    set_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    set_transform : UInt64
+    set_primitive_blend : UInt64
+    set_unit_mode : UInt64
+    clear : UInt64
+    draw_glyph_run : UInt64
+    draw_line : UInt64
+    draw_geometry : UInt64
+    draw_rectangle : UInt64
+    draw_bitmap : UInt64
+    draw_image : UInt64
+    draw_gdi_metafile : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    fill_geometry : UInt64
+    fill_rectangle : UInt64
+    push_axis_aligned_clip : UInt64
+    push_layer : UInt64
+    pop_axis_aligned_clip : UInt64
+    pop_layer : UInt64
+    set_primitive_blend1 : UInt64
+    draw_ink : UInt64
+    draw_gradient_mesh : UInt64
+    draw_gdi_metafile2 : UInt64
   end
 
   ID2D1CommandSink2_GUID = "3bab440e-417e-47df-a2e2-bc0be6a00916"
@@ -4073,14 +4073,14 @@ lib LibWin32
   end
 
   struct ID2D1GdiMetafile1VTbl
-    query_interface : Proc(ID2D1GdiMetafile1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1GdiMetafile1*, UInt32)
-    release : Proc(ID2D1GdiMetafile1*, UInt32)
-    get_factory : Proc(ID2D1GdiMetafile1*, ID2D1Factory*, Void)
-    stream : Proc(ID2D1GdiMetafile1*, ID2D1GdiMetafileSink, HRESULT)
-    get_bounds : Proc(ID2D1GdiMetafile1*, D2D_RECT_F*, HRESULT)
-    get_dpi : Proc(ID2D1GdiMetafile1*, Float32*, Float32*, HRESULT)
-    get_source_bounds : Proc(ID2D1GdiMetafile1*, D2D_RECT_F*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    stream : UInt64
+    get_bounds : UInt64
+    get_dpi : UInt64
+    get_source_bounds : UInt64
   end
 
   ID2D1GdiMetafile1_GUID = "2e69f9e8-dd3f-4bf9-95ba-c04f49d788df"
@@ -4090,11 +4090,11 @@ lib LibWin32
   end
 
   struct ID2D1GdiMetafileSink1VTbl
-    query_interface : Proc(ID2D1GdiMetafileSink1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1GdiMetafileSink1*, UInt32)
-    release : Proc(ID2D1GdiMetafileSink1*, UInt32)
-    process_record : Proc(ID2D1GdiMetafileSink1*, UInt32, Void*, UInt32, HRESULT)
-    process_record2 : Proc(ID2D1GdiMetafileSink1*, UInt32, Void*, UInt32, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    process_record : UInt64
+    process_record2 : UInt64
   end
 
   ID2D1GdiMetafileSink1_GUID = "fd0ecb6b-91e6-411e-8655-395e760f91b4"
@@ -4104,15 +4104,15 @@ lib LibWin32
   end
 
   struct ID2D1SpriteBatchVTbl
-    query_interface : Proc(ID2D1SpriteBatch*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1SpriteBatch*, UInt32)
-    release : Proc(ID2D1SpriteBatch*, UInt32)
-    get_factory : Proc(ID2D1SpriteBatch*, ID2D1Factory*, Void)
-    add_sprites : Proc(ID2D1SpriteBatch*, UInt32, D2D_RECT_F*, D2D_RECT_U*, D2D1_COLOR_F*, D2D_MATRIX_3X2_F*, UInt32, UInt32, UInt32, UInt32, HRESULT)
-    set_sprites : Proc(ID2D1SpriteBatch*, UInt32, UInt32, D2D_RECT_F*, D2D_RECT_U*, D2D1_COLOR_F*, D2D_MATRIX_3X2_F*, UInt32, UInt32, UInt32, UInt32, HRESULT)
-    get_sprites : Proc(ID2D1SpriteBatch*, UInt32, UInt32, D2D_RECT_F*, D2D_RECT_U*, D2D1_COLOR_F*, D2D_MATRIX_3X2_F*, HRESULT)
-    get_sprite_count : Proc(ID2D1SpriteBatch*, UInt32)
-    clear : Proc(ID2D1SpriteBatch*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    add_sprites : UInt64
+    set_sprites : UInt64
+    get_sprites : UInt64
+    get_sprite_count : UInt64
+    clear : UInt64
   end
 
   ID2D1SpriteBatch_GUID = "4dc583bf-3a10-438a-8722-e9765224f1f1"
@@ -4122,114 +4122,114 @@ lib LibWin32
   end
 
   struct ID2D1DeviceContext3VTbl
-    query_interface : Proc(ID2D1DeviceContext3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1DeviceContext3*, UInt32)
-    release : Proc(ID2D1DeviceContext3*, UInt32)
-    get_factory : Proc(ID2D1DeviceContext3*, ID2D1Factory*, Void)
-    create_bitmap : Proc(ID2D1DeviceContext3*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_from_wic_bitmap : Proc(ID2D1DeviceContext3*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_shared_bitmap : Proc(ID2D1DeviceContext3*, Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_brush : Proc(ID2D1DeviceContext3*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)
-    create_solid_color_brush : Proc(ID2D1DeviceContext3*, D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)
-    create_gradient_stop_collection : Proc(ID2D1DeviceContext3*, D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)
-    create_linear_gradient_brush : Proc(ID2D1DeviceContext3*, D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)
-    create_radial_gradient_brush : Proc(ID2D1DeviceContext3*, D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)
-    create_compatible_render_target : Proc(ID2D1DeviceContext3*, D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)
-    create_layer : Proc(ID2D1DeviceContext3*, D2D_SIZE_F*, ID2D1Layer*, HRESULT)
-    create_mesh : Proc(ID2D1DeviceContext3*, ID2D1Mesh*, HRESULT)
-    draw_line : Proc(ID2D1DeviceContext3*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    draw_rectangle : Proc(ID2D1DeviceContext3*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rectangle : Proc(ID2D1DeviceContext3*, D2D_RECT_F*, ID2D1Brush, Void)
-    draw_rounded_rectangle : Proc(ID2D1DeviceContext3*, D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rounded_rectangle : Proc(ID2D1DeviceContext3*, D2D1_ROUNDED_RECT*, ID2D1Brush, Void)
-    draw_ellipse : Proc(ID2D1DeviceContext3*, D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_ellipse : Proc(ID2D1DeviceContext3*, D2D1_ELLIPSE*, ID2D1Brush, Void)
-    draw_geometry : Proc(ID2D1DeviceContext3*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_geometry : Proc(ID2D1DeviceContext3*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)
-    fill_mesh : Proc(ID2D1DeviceContext3*, ID2D1Mesh, ID2D1Brush, Void)
-    fill_opacity_mask : Proc(ID2D1DeviceContext3*, ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)
-    draw_bitmap : Proc(ID2D1DeviceContext3*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)
-    draw_text : Proc(ID2D1DeviceContext3*, Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)
-    draw_text_layout : Proc(ID2D1DeviceContext3*, D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)
-    draw_glyph_run : Proc(ID2D1DeviceContext3*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    set_transform : Proc(ID2D1DeviceContext3*, D2D_MATRIX_3X2_F*, Void)
-    get_transform : Proc(ID2D1DeviceContext3*, D2D_MATRIX_3X2_F*, Void)
-    set_antialias_mode : Proc(ID2D1DeviceContext3*, D2D1_ANTIALIAS_MODE, Void)
-    get_antialias_mode : Proc(ID2D1DeviceContext3*, D2D1_ANTIALIAS_MODE)
-    set_text_antialias_mode : Proc(ID2D1DeviceContext3*, D2D1_TEXT_ANTIALIAS_MODE, Void)
-    get_text_antialias_mode : Proc(ID2D1DeviceContext3*, D2D1_TEXT_ANTIALIAS_MODE)
-    set_text_rendering_params : Proc(ID2D1DeviceContext3*, IDWriteRenderingParams, Void)
-    get_text_rendering_params : Proc(ID2D1DeviceContext3*, IDWriteRenderingParams*, Void)
-    set_tags : Proc(ID2D1DeviceContext3*, UInt64, UInt64, Void)
-    get_tags : Proc(ID2D1DeviceContext3*, UInt64*, UInt64*, Void)
-    push_layer : Proc(ID2D1DeviceContext3*, D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)
-    pop_layer : Proc(ID2D1DeviceContext3*, Void)
-    flush : Proc(ID2D1DeviceContext3*, UInt64*, UInt64*, HRESULT)
-    save_drawing_state : Proc(ID2D1DeviceContext3*, ID2D1DrawingStateBlock, Void)
-    restore_drawing_state : Proc(ID2D1DeviceContext3*, ID2D1DrawingStateBlock, Void)
-    push_axis_aligned_clip : Proc(ID2D1DeviceContext3*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)
-    pop_axis_aligned_clip : Proc(ID2D1DeviceContext3*, Void)
-    clear : Proc(ID2D1DeviceContext3*, D2D1_COLOR_F*, Void)
-    begin_draw : Proc(ID2D1DeviceContext3*, Void)
-    end_draw : Proc(ID2D1DeviceContext3*, UInt64*, UInt64*, HRESULT)
-    get_pixel_format : Proc(ID2D1DeviceContext3*, D2D1_PIXEL_FORMAT)
-    set_dpi : Proc(ID2D1DeviceContext3*, Float32, Float32, Void)
-    get_dpi : Proc(ID2D1DeviceContext3*, Float32*, Float32*, Void)
-    get_size : Proc(ID2D1DeviceContext3*, D2D_SIZE_F)
-    get_pixel_size : Proc(ID2D1DeviceContext3*, D2D_SIZE_U)
-    get_maximum_bitmap_size : Proc(ID2D1DeviceContext3*, UInt32)
-    is_supported : Proc(ID2D1DeviceContext3*, D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)
-    create_bitmap2 : Proc(ID2D1DeviceContext3*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_bitmap_from_wic_bitmap2 : Proc(ID2D1DeviceContext3*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_color_context : Proc(ID2D1DeviceContext3*, D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_filename : Proc(ID2D1DeviceContext3*, LibC::LPWSTR, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_wic_color_context : Proc(ID2D1DeviceContext3*, IWICColorContext, ID2D1ColorContext*, HRESULT)
-    create_bitmap_from_dxgi_surface : Proc(ID2D1DeviceContext3*, IDXGISurface, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_effect : Proc(ID2D1DeviceContext3*, Guid*, ID2D1Effect*, HRESULT)
-    create_gradient_stop_collection2 : Proc(ID2D1DeviceContext3*, D2D1_GRADIENT_STOP*, UInt32, D2D1_COLOR_SPACE, D2D1_COLOR_SPACE, D2D1_BUFFER_PRECISION, D2D1_EXTEND_MODE, D2D1_COLOR_INTERPOLATION_MODE, ID2D1GradientStopCollection1*, HRESULT)
-    create_image_brush : Proc(ID2D1DeviceContext3*, ID2D1Image, D2D1_IMAGE_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1ImageBrush*, HRESULT)
-    create_bitmap_brush2 : Proc(ID2D1DeviceContext3*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES1*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush1*, HRESULT)
-    create_command_list : Proc(ID2D1DeviceContext3*, ID2D1CommandList*, HRESULT)
-    is_dxgi_format_supported : Proc(ID2D1DeviceContext3*, DXGI_FORMAT, LibC::BOOL)
-    is_buffer_precision_supported : Proc(ID2D1DeviceContext3*, D2D1_BUFFER_PRECISION, LibC::BOOL)
-    get_image_local_bounds : Proc(ID2D1DeviceContext3*, ID2D1Image, D2D_RECT_F*, HRESULT)
-    get_image_world_bounds : Proc(ID2D1DeviceContext3*, ID2D1Image, D2D_RECT_F*, HRESULT)
-    get_glyph_run_world_bounds : Proc(ID2D1DeviceContext3*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_RECT_F*, HRESULT)
-    get_device : Proc(ID2D1DeviceContext3*, ID2D1Device*, Void)
-    set_target : Proc(ID2D1DeviceContext3*, ID2D1Image, Void)
-    get_target : Proc(ID2D1DeviceContext3*, ID2D1Image*, Void)
-    set_rendering_controls : Proc(ID2D1DeviceContext3*, D2D1_RENDERING_CONTROLS*, Void)
-    get_rendering_controls : Proc(ID2D1DeviceContext3*, D2D1_RENDERING_CONTROLS*, Void)
-    set_primitive_blend : Proc(ID2D1DeviceContext3*, D2D1_PRIMITIVE_BLEND, Void)
-    get_primitive_blend : Proc(ID2D1DeviceContext3*, D2D1_PRIMITIVE_BLEND)
-    set_unit_mode : Proc(ID2D1DeviceContext3*, D2D1_UNIT_MODE, Void)
-    get_unit_mode : Proc(ID2D1DeviceContext3*, D2D1_UNIT_MODE)
-    draw_glyph_run2 : Proc(ID2D1DeviceContext3*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    draw_image : Proc(ID2D1DeviceContext3*, ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, Void)
-    draw_gdi_metafile : Proc(ID2D1DeviceContext3*, ID2D1GdiMetafile, D2D_POINT_2F*, Void)
-    draw_bitmap2 : Proc(ID2D1DeviceContext3*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, Void)
-    push_layer2 : Proc(ID2D1DeviceContext3*, D2D1_LAYER_PARAMETERS1*, ID2D1Layer, Void)
-    invalidate_effect_input_rectangle : Proc(ID2D1DeviceContext3*, ID2D1Effect, UInt32, D2D_RECT_F*, HRESULT)
-    get_effect_invalid_rectangle_count : Proc(ID2D1DeviceContext3*, ID2D1Effect, UInt32*, HRESULT)
-    get_effect_invalid_rectangles : Proc(ID2D1DeviceContext3*, ID2D1Effect, D2D_RECT_F*, UInt32, HRESULT)
-    get_effect_required_input_rectangles : Proc(ID2D1DeviceContext3*, ID2D1Effect, D2D_RECT_F*, D2D1_EFFECT_INPUT_DESCRIPTION*, D2D_RECT_F*, UInt32, HRESULT)
-    fill_opacity_mask2 : Proc(ID2D1DeviceContext3*, ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, Void)
-    create_filled_geometry_realization : Proc(ID2D1DeviceContext3*, ID2D1Geometry, Float32, ID2D1GeometryRealization*, HRESULT)
-    create_stroked_geometry_realization : Proc(ID2D1DeviceContext3*, ID2D1Geometry, Float32, Float32, ID2D1StrokeStyle, ID2D1GeometryRealization*, HRESULT)
-    draw_geometry_realization : Proc(ID2D1DeviceContext3*, ID2D1GeometryRealization, ID2D1Brush, Void)
-    create_ink : Proc(ID2D1DeviceContext3*, D2D1_INK_POINT*, ID2D1Ink*, HRESULT)
-    create_ink_style : Proc(ID2D1DeviceContext3*, D2D1_INK_STYLE_PROPERTIES*, ID2D1InkStyle*, HRESULT)
-    create_gradient_mesh : Proc(ID2D1DeviceContext3*, D2D1_GRADIENT_MESH_PATCH*, UInt32, ID2D1GradientMesh*, HRESULT)
-    create_image_source_from_wic : Proc(ID2D1DeviceContext3*, IWICBitmapSource, D2D1_IMAGE_SOURCE_LOADING_OPTIONS, D2D1_ALPHA_MODE, ID2D1ImageSourceFromWic*, HRESULT)
-    create_lookup_table3_d : Proc(ID2D1DeviceContext3*, D2D1_BUFFER_PRECISION, UInt32*, UInt8*, UInt32, UInt32*, ID2D1LookupTable3D*, HRESULT)
-    create_image_source_from_dxgi : Proc(ID2D1DeviceContext3*, IDXGISurface*, UInt32, DXGI_COLOR_SPACE_TYPE, D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, ID2D1ImageSource*, HRESULT)
-    get_gradient_mesh_world_bounds : Proc(ID2D1DeviceContext3*, ID2D1GradientMesh, D2D_RECT_F*, HRESULT)
-    draw_ink : Proc(ID2D1DeviceContext3*, ID2D1Ink, ID2D1Brush, ID2D1InkStyle, Void)
-    draw_gradient_mesh : Proc(ID2D1DeviceContext3*, ID2D1GradientMesh, Void)
-    draw_gdi_metafile2 : Proc(ID2D1DeviceContext3*, ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, Void)
-    create_transformed_image_source : Proc(ID2D1DeviceContext3*, ID2D1ImageSource, D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, ID2D1TransformedImageSource*, HRESULT)
-    create_sprite_batch : Proc(ID2D1DeviceContext3*, ID2D1SpriteBatch*, HRESULT)
-    draw_sprite_batch : Proc(ID2D1DeviceContext3*, ID2D1SpriteBatch, UInt32, UInt32, ID2D1Bitmap, D2D1_BITMAP_INTERPOLATION_MODE, D2D1_SPRITE_OPTIONS, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_bitmap : UInt64
+    create_bitmap_from_wic_bitmap : UInt64
+    create_shared_bitmap : UInt64
+    create_bitmap_brush : UInt64
+    create_solid_color_brush : UInt64
+    create_gradient_stop_collection : UInt64
+    create_linear_gradient_brush : UInt64
+    create_radial_gradient_brush : UInt64
+    create_compatible_render_target : UInt64
+    create_layer : UInt64
+    create_mesh : UInt64
+    draw_line : UInt64
+    draw_rectangle : UInt64
+    fill_rectangle : UInt64
+    draw_rounded_rectangle : UInt64
+    fill_rounded_rectangle : UInt64
+    draw_ellipse : UInt64
+    fill_ellipse : UInt64
+    draw_geometry : UInt64
+    fill_geometry : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    draw_bitmap : UInt64
+    draw_text : UInt64
+    draw_text_layout : UInt64
+    draw_glyph_run : UInt64
+    set_transform : UInt64
+    get_transform : UInt64
+    set_antialias_mode : UInt64
+    get_antialias_mode : UInt64
+    set_text_antialias_mode : UInt64
+    get_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    get_text_rendering_params : UInt64
+    set_tags : UInt64
+    get_tags : UInt64
+    push_layer : UInt64
+    pop_layer : UInt64
+    flush : UInt64
+    save_drawing_state : UInt64
+    restore_drawing_state : UInt64
+    push_axis_aligned_clip : UInt64
+    pop_axis_aligned_clip : UInt64
+    clear : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    get_pixel_format : UInt64
+    set_dpi : UInt64
+    get_dpi : UInt64
+    get_size : UInt64
+    get_pixel_size : UInt64
+    get_maximum_bitmap_size : UInt64
+    is_supported : UInt64
+    create_bitmap2 : UInt64
+    create_bitmap_from_wic_bitmap2 : UInt64
+    create_color_context : UInt64
+    create_color_context_from_filename : UInt64
+    create_color_context_from_wic_color_context : UInt64
+    create_bitmap_from_dxgi_surface : UInt64
+    create_effect : UInt64
+    create_gradient_stop_collection2 : UInt64
+    create_image_brush : UInt64
+    create_bitmap_brush2 : UInt64
+    create_command_list : UInt64
+    is_dxgi_format_supported : UInt64
+    is_buffer_precision_supported : UInt64
+    get_image_local_bounds : UInt64
+    get_image_world_bounds : UInt64
+    get_glyph_run_world_bounds : UInt64
+    get_device : UInt64
+    set_target : UInt64
+    get_target : UInt64
+    set_rendering_controls : UInt64
+    get_rendering_controls : UInt64
+    set_primitive_blend : UInt64
+    get_primitive_blend : UInt64
+    set_unit_mode : UInt64
+    get_unit_mode : UInt64
+    draw_glyph_run2 : UInt64
+    draw_image : UInt64
+    draw_gdi_metafile : UInt64
+    draw_bitmap2 : UInt64
+    push_layer2 : UInt64
+    invalidate_effect_input_rectangle : UInt64
+    get_effect_invalid_rectangle_count : UInt64
+    get_effect_invalid_rectangles : UInt64
+    get_effect_required_input_rectangles : UInt64
+    fill_opacity_mask2 : UInt64
+    create_filled_geometry_realization : UInt64
+    create_stroked_geometry_realization : UInt64
+    draw_geometry_realization : UInt64
+    create_ink : UInt64
+    create_ink_style : UInt64
+    create_gradient_mesh : UInt64
+    create_image_source_from_wic : UInt64
+    create_lookup_table3_d : UInt64
+    create_image_source_from_dxgi : UInt64
+    get_gradient_mesh_world_bounds : UInt64
+    draw_ink : UInt64
+    draw_gradient_mesh : UInt64
+    draw_gdi_metafile2 : UInt64
+    create_transformed_image_source : UInt64
+    create_sprite_batch : UInt64
+    draw_sprite_batch : UInt64
   end
 
   ID2D1DeviceContext3_GUID = "235a7496-8351-414c-bcd4-6672ab2d8e00"
@@ -4239,22 +4239,22 @@ lib LibWin32
   end
 
   struct ID2D1Device3VTbl
-    query_interface : Proc(ID2D1Device3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Device3*, UInt32)
-    release : Proc(ID2D1Device3*, UInt32)
-    get_factory : Proc(ID2D1Device3*, ID2D1Factory*, Void)
-    create_device_context : Proc(ID2D1Device3*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext*, HRESULT)
-    create_print_control : Proc(ID2D1Device3*, IWICImagingFactory, IPrintDocumentPackageTarget, D2D1_PRINT_CONTROL_PROPERTIES*, ID2D1PrintControl*, HRESULT)
-    set_maximum_texture_memory : Proc(ID2D1Device3*, UInt64, Void)
-    get_maximum_texture_memory : Proc(ID2D1Device3*, UInt64)
-    clear_resources : Proc(ID2D1Device3*, UInt32, Void)
-    get_rendering_priority : Proc(ID2D1Device3*, D2D1_RENDERING_PRIORITY)
-    set_rendering_priority : Proc(ID2D1Device3*, D2D1_RENDERING_PRIORITY, Void)
-    create_device_context2 : Proc(ID2D1Device3*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext1*, HRESULT)
-    create_device_context3 : Proc(ID2D1Device3*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext2*, HRESULT)
-    flush_device_contexts : Proc(ID2D1Device3*, ID2D1Bitmap, Void)
-    get_dxgi_device : Proc(ID2D1Device3*, IDXGIDevice*, HRESULT)
-    create_device_context4 : Proc(ID2D1Device3*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext3*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_device_context : UInt64
+    create_print_control : UInt64
+    set_maximum_texture_memory : UInt64
+    get_maximum_texture_memory : UInt64
+    clear_resources : UInt64
+    get_rendering_priority : UInt64
+    set_rendering_priority : UInt64
+    create_device_context2 : UInt64
+    create_device_context3 : UInt64
+    flush_device_contexts : UInt64
+    get_dxgi_device : UInt64
+    create_device_context4 : UInt64
   end
 
   ID2D1Device3_GUID = "852f2087-802c-4037-ab60-ff2e7ee6fc01"
@@ -4264,36 +4264,36 @@ lib LibWin32
   end
 
   struct ID2D1Factory4VTbl
-    query_interface : Proc(ID2D1Factory4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Factory4*, UInt32)
-    release : Proc(ID2D1Factory4*, UInt32)
-    reload_system_metrics : Proc(ID2D1Factory4*, HRESULT)
-    get_desktop_dpi : Proc(ID2D1Factory4*, Float32*, Float32*, Void)
-    create_rectangle_geometry : Proc(ID2D1Factory4*, D2D_RECT_F*, ID2D1RectangleGeometry*, HRESULT)
-    create_rounded_rectangle_geometry : Proc(ID2D1Factory4*, D2D1_ROUNDED_RECT*, ID2D1RoundedRectangleGeometry*, HRESULT)
-    create_ellipse_geometry : Proc(ID2D1Factory4*, D2D1_ELLIPSE*, ID2D1EllipseGeometry*, HRESULT)
-    create_geometry_group : Proc(ID2D1Factory4*, D2D1_FILL_MODE, ID2D1Geometry*, UInt32, ID2D1GeometryGroup*, HRESULT)
-    create_transformed_geometry : Proc(ID2D1Factory4*, ID2D1Geometry, D2D_MATRIX_3X2_F*, ID2D1TransformedGeometry*, HRESULT)
-    create_path_geometry : Proc(ID2D1Factory4*, ID2D1PathGeometry*, HRESULT)
-    create_stroke_style : Proc(ID2D1Factory4*, D2D1_STROKE_STYLE_PROPERTIES*, Float32*, UInt32, ID2D1StrokeStyle*, HRESULT)
-    create_drawing_state_block : Proc(ID2D1Factory4*, D2D1_DRAWING_STATE_DESCRIPTION*, IDWriteRenderingParams, ID2D1DrawingStateBlock*, HRESULT)
-    create_wic_bitmap_render_target : Proc(ID2D1Factory4*, IWICBitmap, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)
-    create_hwnd_render_target : Proc(ID2D1Factory4*, D2D1_RENDER_TARGET_PROPERTIES*, D2D1_HWND_RENDER_TARGET_PROPERTIES*, ID2D1HwndRenderTarget*, HRESULT)
-    create_dxgi_surface_render_target : Proc(ID2D1Factory4*, IDXGISurface, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)
-    create_dc_render_target : Proc(ID2D1Factory4*, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)
-    create_device : Proc(ID2D1Factory4*, IDXGIDevice, ID2D1Device*, HRESULT)
-    create_stroke_style2 : Proc(ID2D1Factory4*, D2D1_STROKE_STYLE_PROPERTIES1*, Float32*, UInt32, ID2D1StrokeStyle1*, HRESULT)
-    create_path_geometry2 : Proc(ID2D1Factory4*, ID2D1PathGeometry1*, HRESULT)
-    create_drawing_state_block2 : Proc(ID2D1Factory4*, D2D1_DRAWING_STATE_DESCRIPTION1*, IDWriteRenderingParams, ID2D1DrawingStateBlock1*, HRESULT)
-    create_gdi_metafile : Proc(ID2D1Factory4*, IStream, ID2D1GdiMetafile*, HRESULT)
-    register_effect_from_stream : Proc(ID2D1Factory4*, Guid*, IStream, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)
-    register_effect_from_string : Proc(ID2D1Factory4*, Guid*, LibC::LPWSTR, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)
-    unregister_effect : Proc(ID2D1Factory4*, Guid*, HRESULT)
-    get_registered_effects : Proc(ID2D1Factory4*, Guid*, UInt32, UInt32*, UInt32*, HRESULT)
-    get_effect_properties : Proc(ID2D1Factory4*, Guid*, ID2D1Properties*, HRESULT)
-    create_device2 : Proc(ID2D1Factory4*, IDXGIDevice, ID2D1Device1*, HRESULT)
-    create_device3 : Proc(ID2D1Factory4*, IDXGIDevice, ID2D1Device2*, HRESULT)
-    create_device4 : Proc(ID2D1Factory4*, IDXGIDevice, ID2D1Device3*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    reload_system_metrics : UInt64
+    get_desktop_dpi : UInt64
+    create_rectangle_geometry : UInt64
+    create_rounded_rectangle_geometry : UInt64
+    create_ellipse_geometry : UInt64
+    create_geometry_group : UInt64
+    create_transformed_geometry : UInt64
+    create_path_geometry : UInt64
+    create_stroke_style : UInt64
+    create_drawing_state_block : UInt64
+    create_wic_bitmap_render_target : UInt64
+    create_hwnd_render_target : UInt64
+    create_dxgi_surface_render_target : UInt64
+    create_dc_render_target : UInt64
+    create_device : UInt64
+    create_stroke_style2 : UInt64
+    create_path_geometry2 : UInt64
+    create_drawing_state_block2 : UInt64
+    create_gdi_metafile : UInt64
+    register_effect_from_stream : UInt64
+    register_effect_from_string : UInt64
+    unregister_effect : UInt64
+    get_registered_effects : UInt64
+    get_effect_properties : UInt64
+    create_device2 : UInt64
+    create_device3 : UInt64
+    create_device4 : UInt64
   end
 
   ID2D1Factory4_GUID = "bd4ec2d2-0662-4bee-ba8e-6f29f032e096"
@@ -4303,39 +4303,39 @@ lib LibWin32
   end
 
   struct ID2D1CommandSink3VTbl
-    query_interface : Proc(ID2D1CommandSink3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1CommandSink3*, UInt32)
-    release : Proc(ID2D1CommandSink3*, UInt32)
-    begin_draw : Proc(ID2D1CommandSink3*, HRESULT)
-    end_draw : Proc(ID2D1CommandSink3*, HRESULT)
-    set_antialias_mode : Proc(ID2D1CommandSink3*, D2D1_ANTIALIAS_MODE, HRESULT)
-    set_tags : Proc(ID2D1CommandSink3*, UInt64, UInt64, HRESULT)
-    set_text_antialias_mode : Proc(ID2D1CommandSink3*, D2D1_TEXT_ANTIALIAS_MODE, HRESULT)
-    set_text_rendering_params : Proc(ID2D1CommandSink3*, IDWriteRenderingParams, HRESULT)
-    set_transform : Proc(ID2D1CommandSink3*, D2D_MATRIX_3X2_F*, HRESULT)
-    set_primitive_blend : Proc(ID2D1CommandSink3*, D2D1_PRIMITIVE_BLEND, HRESULT)
-    set_unit_mode : Proc(ID2D1CommandSink3*, D2D1_UNIT_MODE, HRESULT)
-    clear : Proc(ID2D1CommandSink3*, D2D1_COLOR_F*, HRESULT)
-    draw_glyph_run : Proc(ID2D1CommandSink3*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, HRESULT)
-    draw_line : Proc(ID2D1CommandSink3*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_geometry : Proc(ID2D1CommandSink3*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_rectangle : Proc(ID2D1CommandSink3*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_bitmap : Proc(ID2D1CommandSink3*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, HRESULT)
-    draw_image : Proc(ID2D1CommandSink3*, ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, HRESULT)
-    draw_gdi_metafile : Proc(ID2D1CommandSink3*, ID2D1GdiMetafile, D2D_POINT_2F*, HRESULT)
-    fill_mesh : Proc(ID2D1CommandSink3*, ID2D1Mesh, ID2D1Brush, HRESULT)
-    fill_opacity_mask : Proc(ID2D1CommandSink3*, ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, HRESULT)
-    fill_geometry : Proc(ID2D1CommandSink3*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, HRESULT)
-    fill_rectangle : Proc(ID2D1CommandSink3*, D2D_RECT_F*, ID2D1Brush, HRESULT)
-    push_axis_aligned_clip : Proc(ID2D1CommandSink3*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, HRESULT)
-    push_layer : Proc(ID2D1CommandSink3*, D2D1_LAYER_PARAMETERS1*, ID2D1Layer, HRESULT)
-    pop_axis_aligned_clip : Proc(ID2D1CommandSink3*, HRESULT)
-    pop_layer : Proc(ID2D1CommandSink3*, HRESULT)
-    set_primitive_blend1 : Proc(ID2D1CommandSink3*, D2D1_PRIMITIVE_BLEND, HRESULT)
-    draw_ink : Proc(ID2D1CommandSink3*, ID2D1Ink, ID2D1Brush, ID2D1InkStyle, HRESULT)
-    draw_gradient_mesh : Proc(ID2D1CommandSink3*, ID2D1GradientMesh, HRESULT)
-    draw_gdi_metafile2 : Proc(ID2D1CommandSink3*, ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, HRESULT)
-    draw_sprite_batch : Proc(ID2D1CommandSink3*, ID2D1SpriteBatch, UInt32, UInt32, ID2D1Bitmap, D2D1_BITMAP_INTERPOLATION_MODE, D2D1_SPRITE_OPTIONS, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    set_antialias_mode : UInt64
+    set_tags : UInt64
+    set_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    set_transform : UInt64
+    set_primitive_blend : UInt64
+    set_unit_mode : UInt64
+    clear : UInt64
+    draw_glyph_run : UInt64
+    draw_line : UInt64
+    draw_geometry : UInt64
+    draw_rectangle : UInt64
+    draw_bitmap : UInt64
+    draw_image : UInt64
+    draw_gdi_metafile : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    fill_geometry : UInt64
+    fill_rectangle : UInt64
+    push_axis_aligned_clip : UInt64
+    push_layer : UInt64
+    pop_axis_aligned_clip : UInt64
+    pop_layer : UInt64
+    set_primitive_blend1 : UInt64
+    draw_ink : UInt64
+    draw_gradient_mesh : UInt64
+    draw_gdi_metafile2 : UInt64
+    draw_sprite_batch : UInt64
   end
 
   ID2D1CommandSink3_GUID = "18079135-4cf3-4868-bc8e-06067e6d242d"
@@ -4345,15 +4345,15 @@ lib LibWin32
   end
 
   struct ID2D1SvgGlyphStyleVTbl
-    query_interface : Proc(ID2D1SvgGlyphStyle*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1SvgGlyphStyle*, UInt32)
-    release : Proc(ID2D1SvgGlyphStyle*, UInt32)
-    get_factory : Proc(ID2D1SvgGlyphStyle*, ID2D1Factory*, Void)
-    set_fill : Proc(ID2D1SvgGlyphStyle*, ID2D1Brush, HRESULT)
-    get_fill : Proc(ID2D1SvgGlyphStyle*, ID2D1Brush*, Void)
-    set_stroke : Proc(ID2D1SvgGlyphStyle*, ID2D1Brush, Float32, Float32*, UInt32, Float32, HRESULT)
-    get_stroke_dashes_count : Proc(ID2D1SvgGlyphStyle*, UInt32)
-    get_stroke : Proc(ID2D1SvgGlyphStyle*, ID2D1Brush*, Float32*, Float32*, UInt32, Float32*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    set_fill : UInt64
+    get_fill : UInt64
+    set_stroke : UInt64
+    get_stroke_dashes_count : UInt64
+    get_stroke : UInt64
   end
 
   ID2D1SvgGlyphStyle_GUID = "af671749-d241-4db8-8e41-dcc2e5c1a438"
@@ -4363,121 +4363,121 @@ lib LibWin32
   end
 
   struct ID2D1DeviceContext4VTbl
-    query_interface : Proc(ID2D1DeviceContext4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1DeviceContext4*, UInt32)
-    release : Proc(ID2D1DeviceContext4*, UInt32)
-    get_factory : Proc(ID2D1DeviceContext4*, ID2D1Factory*, Void)
-    create_bitmap : Proc(ID2D1DeviceContext4*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_from_wic_bitmap : Proc(ID2D1DeviceContext4*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_shared_bitmap : Proc(ID2D1DeviceContext4*, Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_brush : Proc(ID2D1DeviceContext4*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)
-    create_solid_color_brush : Proc(ID2D1DeviceContext4*, D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)
-    create_gradient_stop_collection : Proc(ID2D1DeviceContext4*, D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)
-    create_linear_gradient_brush : Proc(ID2D1DeviceContext4*, D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)
-    create_radial_gradient_brush : Proc(ID2D1DeviceContext4*, D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)
-    create_compatible_render_target : Proc(ID2D1DeviceContext4*, D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)
-    create_layer : Proc(ID2D1DeviceContext4*, D2D_SIZE_F*, ID2D1Layer*, HRESULT)
-    create_mesh : Proc(ID2D1DeviceContext4*, ID2D1Mesh*, HRESULT)
-    draw_line : Proc(ID2D1DeviceContext4*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    draw_rectangle : Proc(ID2D1DeviceContext4*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rectangle : Proc(ID2D1DeviceContext4*, D2D_RECT_F*, ID2D1Brush, Void)
-    draw_rounded_rectangle : Proc(ID2D1DeviceContext4*, D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rounded_rectangle : Proc(ID2D1DeviceContext4*, D2D1_ROUNDED_RECT*, ID2D1Brush, Void)
-    draw_ellipse : Proc(ID2D1DeviceContext4*, D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_ellipse : Proc(ID2D1DeviceContext4*, D2D1_ELLIPSE*, ID2D1Brush, Void)
-    draw_geometry : Proc(ID2D1DeviceContext4*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_geometry : Proc(ID2D1DeviceContext4*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)
-    fill_mesh : Proc(ID2D1DeviceContext4*, ID2D1Mesh, ID2D1Brush, Void)
-    fill_opacity_mask : Proc(ID2D1DeviceContext4*, ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)
-    draw_bitmap : Proc(ID2D1DeviceContext4*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)
-    draw_text : Proc(ID2D1DeviceContext4*, Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)
-    draw_text_layout : Proc(ID2D1DeviceContext4*, D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)
-    draw_glyph_run : Proc(ID2D1DeviceContext4*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    set_transform : Proc(ID2D1DeviceContext4*, D2D_MATRIX_3X2_F*, Void)
-    get_transform : Proc(ID2D1DeviceContext4*, D2D_MATRIX_3X2_F*, Void)
-    set_antialias_mode : Proc(ID2D1DeviceContext4*, D2D1_ANTIALIAS_MODE, Void)
-    get_antialias_mode : Proc(ID2D1DeviceContext4*, D2D1_ANTIALIAS_MODE)
-    set_text_antialias_mode : Proc(ID2D1DeviceContext4*, D2D1_TEXT_ANTIALIAS_MODE, Void)
-    get_text_antialias_mode : Proc(ID2D1DeviceContext4*, D2D1_TEXT_ANTIALIAS_MODE)
-    set_text_rendering_params : Proc(ID2D1DeviceContext4*, IDWriteRenderingParams, Void)
-    get_text_rendering_params : Proc(ID2D1DeviceContext4*, IDWriteRenderingParams*, Void)
-    set_tags : Proc(ID2D1DeviceContext4*, UInt64, UInt64, Void)
-    get_tags : Proc(ID2D1DeviceContext4*, UInt64*, UInt64*, Void)
-    push_layer : Proc(ID2D1DeviceContext4*, D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)
-    pop_layer : Proc(ID2D1DeviceContext4*, Void)
-    flush : Proc(ID2D1DeviceContext4*, UInt64*, UInt64*, HRESULT)
-    save_drawing_state : Proc(ID2D1DeviceContext4*, ID2D1DrawingStateBlock, Void)
-    restore_drawing_state : Proc(ID2D1DeviceContext4*, ID2D1DrawingStateBlock, Void)
-    push_axis_aligned_clip : Proc(ID2D1DeviceContext4*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)
-    pop_axis_aligned_clip : Proc(ID2D1DeviceContext4*, Void)
-    clear : Proc(ID2D1DeviceContext4*, D2D1_COLOR_F*, Void)
-    begin_draw : Proc(ID2D1DeviceContext4*, Void)
-    end_draw : Proc(ID2D1DeviceContext4*, UInt64*, UInt64*, HRESULT)
-    get_pixel_format : Proc(ID2D1DeviceContext4*, D2D1_PIXEL_FORMAT)
-    set_dpi : Proc(ID2D1DeviceContext4*, Float32, Float32, Void)
-    get_dpi : Proc(ID2D1DeviceContext4*, Float32*, Float32*, Void)
-    get_size : Proc(ID2D1DeviceContext4*, D2D_SIZE_F)
-    get_pixel_size : Proc(ID2D1DeviceContext4*, D2D_SIZE_U)
-    get_maximum_bitmap_size : Proc(ID2D1DeviceContext4*, UInt32)
-    is_supported : Proc(ID2D1DeviceContext4*, D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)
-    create_bitmap2 : Proc(ID2D1DeviceContext4*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_bitmap_from_wic_bitmap2 : Proc(ID2D1DeviceContext4*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_color_context : Proc(ID2D1DeviceContext4*, D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_filename : Proc(ID2D1DeviceContext4*, LibC::LPWSTR, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_wic_color_context : Proc(ID2D1DeviceContext4*, IWICColorContext, ID2D1ColorContext*, HRESULT)
-    create_bitmap_from_dxgi_surface : Proc(ID2D1DeviceContext4*, IDXGISurface, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_effect : Proc(ID2D1DeviceContext4*, Guid*, ID2D1Effect*, HRESULT)
-    create_gradient_stop_collection2 : Proc(ID2D1DeviceContext4*, D2D1_GRADIENT_STOP*, UInt32, D2D1_COLOR_SPACE, D2D1_COLOR_SPACE, D2D1_BUFFER_PRECISION, D2D1_EXTEND_MODE, D2D1_COLOR_INTERPOLATION_MODE, ID2D1GradientStopCollection1*, HRESULT)
-    create_image_brush : Proc(ID2D1DeviceContext4*, ID2D1Image, D2D1_IMAGE_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1ImageBrush*, HRESULT)
-    create_bitmap_brush2 : Proc(ID2D1DeviceContext4*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES1*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush1*, HRESULT)
-    create_command_list : Proc(ID2D1DeviceContext4*, ID2D1CommandList*, HRESULT)
-    is_dxgi_format_supported : Proc(ID2D1DeviceContext4*, DXGI_FORMAT, LibC::BOOL)
-    is_buffer_precision_supported : Proc(ID2D1DeviceContext4*, D2D1_BUFFER_PRECISION, LibC::BOOL)
-    get_image_local_bounds : Proc(ID2D1DeviceContext4*, ID2D1Image, D2D_RECT_F*, HRESULT)
-    get_image_world_bounds : Proc(ID2D1DeviceContext4*, ID2D1Image, D2D_RECT_F*, HRESULT)
-    get_glyph_run_world_bounds : Proc(ID2D1DeviceContext4*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_RECT_F*, HRESULT)
-    get_device : Proc(ID2D1DeviceContext4*, ID2D1Device*, Void)
-    set_target : Proc(ID2D1DeviceContext4*, ID2D1Image, Void)
-    get_target : Proc(ID2D1DeviceContext4*, ID2D1Image*, Void)
-    set_rendering_controls : Proc(ID2D1DeviceContext4*, D2D1_RENDERING_CONTROLS*, Void)
-    get_rendering_controls : Proc(ID2D1DeviceContext4*, D2D1_RENDERING_CONTROLS*, Void)
-    set_primitive_blend : Proc(ID2D1DeviceContext4*, D2D1_PRIMITIVE_BLEND, Void)
-    get_primitive_blend : Proc(ID2D1DeviceContext4*, D2D1_PRIMITIVE_BLEND)
-    set_unit_mode : Proc(ID2D1DeviceContext4*, D2D1_UNIT_MODE, Void)
-    get_unit_mode : Proc(ID2D1DeviceContext4*, D2D1_UNIT_MODE)
-    draw_glyph_run2 : Proc(ID2D1DeviceContext4*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    draw_image : Proc(ID2D1DeviceContext4*, ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, Void)
-    draw_gdi_metafile : Proc(ID2D1DeviceContext4*, ID2D1GdiMetafile, D2D_POINT_2F*, Void)
-    draw_bitmap2 : Proc(ID2D1DeviceContext4*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, Void)
-    push_layer2 : Proc(ID2D1DeviceContext4*, D2D1_LAYER_PARAMETERS1*, ID2D1Layer, Void)
-    invalidate_effect_input_rectangle : Proc(ID2D1DeviceContext4*, ID2D1Effect, UInt32, D2D_RECT_F*, HRESULT)
-    get_effect_invalid_rectangle_count : Proc(ID2D1DeviceContext4*, ID2D1Effect, UInt32*, HRESULT)
-    get_effect_invalid_rectangles : Proc(ID2D1DeviceContext4*, ID2D1Effect, D2D_RECT_F*, UInt32, HRESULT)
-    get_effect_required_input_rectangles : Proc(ID2D1DeviceContext4*, ID2D1Effect, D2D_RECT_F*, D2D1_EFFECT_INPUT_DESCRIPTION*, D2D_RECT_F*, UInt32, HRESULT)
-    fill_opacity_mask2 : Proc(ID2D1DeviceContext4*, ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, Void)
-    create_filled_geometry_realization : Proc(ID2D1DeviceContext4*, ID2D1Geometry, Float32, ID2D1GeometryRealization*, HRESULT)
-    create_stroked_geometry_realization : Proc(ID2D1DeviceContext4*, ID2D1Geometry, Float32, Float32, ID2D1StrokeStyle, ID2D1GeometryRealization*, HRESULT)
-    draw_geometry_realization : Proc(ID2D1DeviceContext4*, ID2D1GeometryRealization, ID2D1Brush, Void)
-    create_ink : Proc(ID2D1DeviceContext4*, D2D1_INK_POINT*, ID2D1Ink*, HRESULT)
-    create_ink_style : Proc(ID2D1DeviceContext4*, D2D1_INK_STYLE_PROPERTIES*, ID2D1InkStyle*, HRESULT)
-    create_gradient_mesh : Proc(ID2D1DeviceContext4*, D2D1_GRADIENT_MESH_PATCH*, UInt32, ID2D1GradientMesh*, HRESULT)
-    create_image_source_from_wic : Proc(ID2D1DeviceContext4*, IWICBitmapSource, D2D1_IMAGE_SOURCE_LOADING_OPTIONS, D2D1_ALPHA_MODE, ID2D1ImageSourceFromWic*, HRESULT)
-    create_lookup_table3_d : Proc(ID2D1DeviceContext4*, D2D1_BUFFER_PRECISION, UInt32*, UInt8*, UInt32, UInt32*, ID2D1LookupTable3D*, HRESULT)
-    create_image_source_from_dxgi : Proc(ID2D1DeviceContext4*, IDXGISurface*, UInt32, DXGI_COLOR_SPACE_TYPE, D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, ID2D1ImageSource*, HRESULT)
-    get_gradient_mesh_world_bounds : Proc(ID2D1DeviceContext4*, ID2D1GradientMesh, D2D_RECT_F*, HRESULT)
-    draw_ink : Proc(ID2D1DeviceContext4*, ID2D1Ink, ID2D1Brush, ID2D1InkStyle, Void)
-    draw_gradient_mesh : Proc(ID2D1DeviceContext4*, ID2D1GradientMesh, Void)
-    draw_gdi_metafile2 : Proc(ID2D1DeviceContext4*, ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, Void)
-    create_transformed_image_source : Proc(ID2D1DeviceContext4*, ID2D1ImageSource, D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, ID2D1TransformedImageSource*, HRESULT)
-    create_sprite_batch : Proc(ID2D1DeviceContext4*, ID2D1SpriteBatch*, HRESULT)
-    draw_sprite_batch : Proc(ID2D1DeviceContext4*, ID2D1SpriteBatch, UInt32, UInt32, ID2D1Bitmap, D2D1_BITMAP_INTERPOLATION_MODE, D2D1_SPRITE_OPTIONS, Void)
-    create_svg_glyph_style : Proc(ID2D1DeviceContext4*, ID2D1SvgGlyphStyle*, HRESULT)
-    draw_text2 : Proc(ID2D1DeviceContext4*, Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)
-    draw_text_layout2 : Proc(ID2D1DeviceContext4*, D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D1_DRAW_TEXT_OPTIONS, Void)
-    draw_color_bitmap_glyph_run : Proc(ID2D1DeviceContext4*, DWRITE_GLYPH_IMAGE_FORMATS, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION, Void)
-    draw_svg_glyph_run : Proc(ID2D1DeviceContext4*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, DWRITE_MEASURING_MODE, Void)
-    get_color_bitmap_glyph_image : Proc(ID2D1DeviceContext4*, DWRITE_GLYPH_IMAGE_FORMATS, D2D_POINT_2F, IDWriteFontFace, Float32, UInt16, LibC::BOOL, D2D_MATRIX_3X2_F*, Float32, Float32, D2D_MATRIX_3X2_F*, ID2D1Image*, HRESULT)
-    get_svg_glyph_image : Proc(ID2D1DeviceContext4*, D2D_POINT_2F, IDWriteFontFace, Float32, UInt16, LibC::BOOL, D2D_MATRIX_3X2_F*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D_MATRIX_3X2_F*, ID2D1CommandList*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_bitmap : UInt64
+    create_bitmap_from_wic_bitmap : UInt64
+    create_shared_bitmap : UInt64
+    create_bitmap_brush : UInt64
+    create_solid_color_brush : UInt64
+    create_gradient_stop_collection : UInt64
+    create_linear_gradient_brush : UInt64
+    create_radial_gradient_brush : UInt64
+    create_compatible_render_target : UInt64
+    create_layer : UInt64
+    create_mesh : UInt64
+    draw_line : UInt64
+    draw_rectangle : UInt64
+    fill_rectangle : UInt64
+    draw_rounded_rectangle : UInt64
+    fill_rounded_rectangle : UInt64
+    draw_ellipse : UInt64
+    fill_ellipse : UInt64
+    draw_geometry : UInt64
+    fill_geometry : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    draw_bitmap : UInt64
+    draw_text : UInt64
+    draw_text_layout : UInt64
+    draw_glyph_run : UInt64
+    set_transform : UInt64
+    get_transform : UInt64
+    set_antialias_mode : UInt64
+    get_antialias_mode : UInt64
+    set_text_antialias_mode : UInt64
+    get_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    get_text_rendering_params : UInt64
+    set_tags : UInt64
+    get_tags : UInt64
+    push_layer : UInt64
+    pop_layer : UInt64
+    flush : UInt64
+    save_drawing_state : UInt64
+    restore_drawing_state : UInt64
+    push_axis_aligned_clip : UInt64
+    pop_axis_aligned_clip : UInt64
+    clear : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    get_pixel_format : UInt64
+    set_dpi : UInt64
+    get_dpi : UInt64
+    get_size : UInt64
+    get_pixel_size : UInt64
+    get_maximum_bitmap_size : UInt64
+    is_supported : UInt64
+    create_bitmap2 : UInt64
+    create_bitmap_from_wic_bitmap2 : UInt64
+    create_color_context : UInt64
+    create_color_context_from_filename : UInt64
+    create_color_context_from_wic_color_context : UInt64
+    create_bitmap_from_dxgi_surface : UInt64
+    create_effect : UInt64
+    create_gradient_stop_collection2 : UInt64
+    create_image_brush : UInt64
+    create_bitmap_brush2 : UInt64
+    create_command_list : UInt64
+    is_dxgi_format_supported : UInt64
+    is_buffer_precision_supported : UInt64
+    get_image_local_bounds : UInt64
+    get_image_world_bounds : UInt64
+    get_glyph_run_world_bounds : UInt64
+    get_device : UInt64
+    set_target : UInt64
+    get_target : UInt64
+    set_rendering_controls : UInt64
+    get_rendering_controls : UInt64
+    set_primitive_blend : UInt64
+    get_primitive_blend : UInt64
+    set_unit_mode : UInt64
+    get_unit_mode : UInt64
+    draw_glyph_run2 : UInt64
+    draw_image : UInt64
+    draw_gdi_metafile : UInt64
+    draw_bitmap2 : UInt64
+    push_layer2 : UInt64
+    invalidate_effect_input_rectangle : UInt64
+    get_effect_invalid_rectangle_count : UInt64
+    get_effect_invalid_rectangles : UInt64
+    get_effect_required_input_rectangles : UInt64
+    fill_opacity_mask2 : UInt64
+    create_filled_geometry_realization : UInt64
+    create_stroked_geometry_realization : UInt64
+    draw_geometry_realization : UInt64
+    create_ink : UInt64
+    create_ink_style : UInt64
+    create_gradient_mesh : UInt64
+    create_image_source_from_wic : UInt64
+    create_lookup_table3_d : UInt64
+    create_image_source_from_dxgi : UInt64
+    get_gradient_mesh_world_bounds : UInt64
+    draw_ink : UInt64
+    draw_gradient_mesh : UInt64
+    draw_gdi_metafile2 : UInt64
+    create_transformed_image_source : UInt64
+    create_sprite_batch : UInt64
+    draw_sprite_batch : UInt64
+    create_svg_glyph_style : UInt64
+    draw_text2 : UInt64
+    draw_text_layout2 : UInt64
+    draw_color_bitmap_glyph_run : UInt64
+    draw_svg_glyph_run : UInt64
+    get_color_bitmap_glyph_image : UInt64
+    get_svg_glyph_image : UInt64
   end
 
   ID2D1DeviceContext4_GUID = "8c427831-3d90-4476-b647-c4fae349e4db"
@@ -4487,25 +4487,25 @@ lib LibWin32
   end
 
   struct ID2D1Device4VTbl
-    query_interface : Proc(ID2D1Device4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Device4*, UInt32)
-    release : Proc(ID2D1Device4*, UInt32)
-    get_factory : Proc(ID2D1Device4*, ID2D1Factory*, Void)
-    create_device_context : Proc(ID2D1Device4*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext*, HRESULT)
-    create_print_control : Proc(ID2D1Device4*, IWICImagingFactory, IPrintDocumentPackageTarget, D2D1_PRINT_CONTROL_PROPERTIES*, ID2D1PrintControl*, HRESULT)
-    set_maximum_texture_memory : Proc(ID2D1Device4*, UInt64, Void)
-    get_maximum_texture_memory : Proc(ID2D1Device4*, UInt64)
-    clear_resources : Proc(ID2D1Device4*, UInt32, Void)
-    get_rendering_priority : Proc(ID2D1Device4*, D2D1_RENDERING_PRIORITY)
-    set_rendering_priority : Proc(ID2D1Device4*, D2D1_RENDERING_PRIORITY, Void)
-    create_device_context2 : Proc(ID2D1Device4*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext1*, HRESULT)
-    create_device_context3 : Proc(ID2D1Device4*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext2*, HRESULT)
-    flush_device_contexts : Proc(ID2D1Device4*, ID2D1Bitmap, Void)
-    get_dxgi_device : Proc(ID2D1Device4*, IDXGIDevice*, HRESULT)
-    create_device_context4 : Proc(ID2D1Device4*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext3*, HRESULT)
-    create_device_context5 : Proc(ID2D1Device4*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext4*, HRESULT)
-    set_maximum_color_glyph_cache_memory : Proc(ID2D1Device4*, UInt64, Void)
-    get_maximum_color_glyph_cache_memory : Proc(ID2D1Device4*, UInt64)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_device_context : UInt64
+    create_print_control : UInt64
+    set_maximum_texture_memory : UInt64
+    get_maximum_texture_memory : UInt64
+    clear_resources : UInt64
+    get_rendering_priority : UInt64
+    set_rendering_priority : UInt64
+    create_device_context2 : UInt64
+    create_device_context3 : UInt64
+    flush_device_contexts : UInt64
+    get_dxgi_device : UInt64
+    create_device_context4 : UInt64
+    create_device_context5 : UInt64
+    set_maximum_color_glyph_cache_memory : UInt64
+    get_maximum_color_glyph_cache_memory : UInt64
   end
 
   ID2D1Device4_GUID = "d7bdb159-5683-4a46-bc9c-72dc720b858b"
@@ -4515,37 +4515,37 @@ lib LibWin32
   end
 
   struct ID2D1Factory5VTbl
-    query_interface : Proc(ID2D1Factory5*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Factory5*, UInt32)
-    release : Proc(ID2D1Factory5*, UInt32)
-    reload_system_metrics : Proc(ID2D1Factory5*, HRESULT)
-    get_desktop_dpi : Proc(ID2D1Factory5*, Float32*, Float32*, Void)
-    create_rectangle_geometry : Proc(ID2D1Factory5*, D2D_RECT_F*, ID2D1RectangleGeometry*, HRESULT)
-    create_rounded_rectangle_geometry : Proc(ID2D1Factory5*, D2D1_ROUNDED_RECT*, ID2D1RoundedRectangleGeometry*, HRESULT)
-    create_ellipse_geometry : Proc(ID2D1Factory5*, D2D1_ELLIPSE*, ID2D1EllipseGeometry*, HRESULT)
-    create_geometry_group : Proc(ID2D1Factory5*, D2D1_FILL_MODE, ID2D1Geometry*, UInt32, ID2D1GeometryGroup*, HRESULT)
-    create_transformed_geometry : Proc(ID2D1Factory5*, ID2D1Geometry, D2D_MATRIX_3X2_F*, ID2D1TransformedGeometry*, HRESULT)
-    create_path_geometry : Proc(ID2D1Factory5*, ID2D1PathGeometry*, HRESULT)
-    create_stroke_style : Proc(ID2D1Factory5*, D2D1_STROKE_STYLE_PROPERTIES*, Float32*, UInt32, ID2D1StrokeStyle*, HRESULT)
-    create_drawing_state_block : Proc(ID2D1Factory5*, D2D1_DRAWING_STATE_DESCRIPTION*, IDWriteRenderingParams, ID2D1DrawingStateBlock*, HRESULT)
-    create_wic_bitmap_render_target : Proc(ID2D1Factory5*, IWICBitmap, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)
-    create_hwnd_render_target : Proc(ID2D1Factory5*, D2D1_RENDER_TARGET_PROPERTIES*, D2D1_HWND_RENDER_TARGET_PROPERTIES*, ID2D1HwndRenderTarget*, HRESULT)
-    create_dxgi_surface_render_target : Proc(ID2D1Factory5*, IDXGISurface, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)
-    create_dc_render_target : Proc(ID2D1Factory5*, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)
-    create_device : Proc(ID2D1Factory5*, IDXGIDevice, ID2D1Device*, HRESULT)
-    create_stroke_style2 : Proc(ID2D1Factory5*, D2D1_STROKE_STYLE_PROPERTIES1*, Float32*, UInt32, ID2D1StrokeStyle1*, HRESULT)
-    create_path_geometry2 : Proc(ID2D1Factory5*, ID2D1PathGeometry1*, HRESULT)
-    create_drawing_state_block2 : Proc(ID2D1Factory5*, D2D1_DRAWING_STATE_DESCRIPTION1*, IDWriteRenderingParams, ID2D1DrawingStateBlock1*, HRESULT)
-    create_gdi_metafile : Proc(ID2D1Factory5*, IStream, ID2D1GdiMetafile*, HRESULT)
-    register_effect_from_stream : Proc(ID2D1Factory5*, Guid*, IStream, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)
-    register_effect_from_string : Proc(ID2D1Factory5*, Guid*, LibC::LPWSTR, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)
-    unregister_effect : Proc(ID2D1Factory5*, Guid*, HRESULT)
-    get_registered_effects : Proc(ID2D1Factory5*, Guid*, UInt32, UInt32*, UInt32*, HRESULT)
-    get_effect_properties : Proc(ID2D1Factory5*, Guid*, ID2D1Properties*, HRESULT)
-    create_device2 : Proc(ID2D1Factory5*, IDXGIDevice, ID2D1Device1*, HRESULT)
-    create_device3 : Proc(ID2D1Factory5*, IDXGIDevice, ID2D1Device2*, HRESULT)
-    create_device4 : Proc(ID2D1Factory5*, IDXGIDevice, ID2D1Device3*, HRESULT)
-    create_device5 : Proc(ID2D1Factory5*, IDXGIDevice, ID2D1Device4*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    reload_system_metrics : UInt64
+    get_desktop_dpi : UInt64
+    create_rectangle_geometry : UInt64
+    create_rounded_rectangle_geometry : UInt64
+    create_ellipse_geometry : UInt64
+    create_geometry_group : UInt64
+    create_transformed_geometry : UInt64
+    create_path_geometry : UInt64
+    create_stroke_style : UInt64
+    create_drawing_state_block : UInt64
+    create_wic_bitmap_render_target : UInt64
+    create_hwnd_render_target : UInt64
+    create_dxgi_surface_render_target : UInt64
+    create_dc_render_target : UInt64
+    create_device : UInt64
+    create_stroke_style2 : UInt64
+    create_path_geometry2 : UInt64
+    create_drawing_state_block2 : UInt64
+    create_gdi_metafile : UInt64
+    register_effect_from_stream : UInt64
+    register_effect_from_string : UInt64
+    unregister_effect : UInt64
+    get_registered_effects : UInt64
+    get_effect_properties : UInt64
+    create_device2 : UInt64
+    create_device3 : UInt64
+    create_device4 : UInt64
+    create_device5 : UInt64
   end
 
   ID2D1Factory5_GUID = "c4349994-838e-4b0f-8cab-44997d9eeacc"
@@ -4555,40 +4555,40 @@ lib LibWin32
   end
 
   struct ID2D1CommandSink4VTbl
-    query_interface : Proc(ID2D1CommandSink4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1CommandSink4*, UInt32)
-    release : Proc(ID2D1CommandSink4*, UInt32)
-    begin_draw : Proc(ID2D1CommandSink4*, HRESULT)
-    end_draw : Proc(ID2D1CommandSink4*, HRESULT)
-    set_antialias_mode : Proc(ID2D1CommandSink4*, D2D1_ANTIALIAS_MODE, HRESULT)
-    set_tags : Proc(ID2D1CommandSink4*, UInt64, UInt64, HRESULT)
-    set_text_antialias_mode : Proc(ID2D1CommandSink4*, D2D1_TEXT_ANTIALIAS_MODE, HRESULT)
-    set_text_rendering_params : Proc(ID2D1CommandSink4*, IDWriteRenderingParams, HRESULT)
-    set_transform : Proc(ID2D1CommandSink4*, D2D_MATRIX_3X2_F*, HRESULT)
-    set_primitive_blend : Proc(ID2D1CommandSink4*, D2D1_PRIMITIVE_BLEND, HRESULT)
-    set_unit_mode : Proc(ID2D1CommandSink4*, D2D1_UNIT_MODE, HRESULT)
-    clear : Proc(ID2D1CommandSink4*, D2D1_COLOR_F*, HRESULT)
-    draw_glyph_run : Proc(ID2D1CommandSink4*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, HRESULT)
-    draw_line : Proc(ID2D1CommandSink4*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_geometry : Proc(ID2D1CommandSink4*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_rectangle : Proc(ID2D1CommandSink4*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_bitmap : Proc(ID2D1CommandSink4*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, HRESULT)
-    draw_image : Proc(ID2D1CommandSink4*, ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, HRESULT)
-    draw_gdi_metafile : Proc(ID2D1CommandSink4*, ID2D1GdiMetafile, D2D_POINT_2F*, HRESULT)
-    fill_mesh : Proc(ID2D1CommandSink4*, ID2D1Mesh, ID2D1Brush, HRESULT)
-    fill_opacity_mask : Proc(ID2D1CommandSink4*, ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, HRESULT)
-    fill_geometry : Proc(ID2D1CommandSink4*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, HRESULT)
-    fill_rectangle : Proc(ID2D1CommandSink4*, D2D_RECT_F*, ID2D1Brush, HRESULT)
-    push_axis_aligned_clip : Proc(ID2D1CommandSink4*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, HRESULT)
-    push_layer : Proc(ID2D1CommandSink4*, D2D1_LAYER_PARAMETERS1*, ID2D1Layer, HRESULT)
-    pop_axis_aligned_clip : Proc(ID2D1CommandSink4*, HRESULT)
-    pop_layer : Proc(ID2D1CommandSink4*, HRESULT)
-    set_primitive_blend1 : Proc(ID2D1CommandSink4*, D2D1_PRIMITIVE_BLEND, HRESULT)
-    draw_ink : Proc(ID2D1CommandSink4*, ID2D1Ink, ID2D1Brush, ID2D1InkStyle, HRESULT)
-    draw_gradient_mesh : Proc(ID2D1CommandSink4*, ID2D1GradientMesh, HRESULT)
-    draw_gdi_metafile2 : Proc(ID2D1CommandSink4*, ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, HRESULT)
-    draw_sprite_batch : Proc(ID2D1CommandSink4*, ID2D1SpriteBatch, UInt32, UInt32, ID2D1Bitmap, D2D1_BITMAP_INTERPOLATION_MODE, D2D1_SPRITE_OPTIONS, HRESULT)
-    set_primitive_blend2 : Proc(ID2D1CommandSink4*, D2D1_PRIMITIVE_BLEND, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    set_antialias_mode : UInt64
+    set_tags : UInt64
+    set_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    set_transform : UInt64
+    set_primitive_blend : UInt64
+    set_unit_mode : UInt64
+    clear : UInt64
+    draw_glyph_run : UInt64
+    draw_line : UInt64
+    draw_geometry : UInt64
+    draw_rectangle : UInt64
+    draw_bitmap : UInt64
+    draw_image : UInt64
+    draw_gdi_metafile : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    fill_geometry : UInt64
+    fill_rectangle : UInt64
+    push_axis_aligned_clip : UInt64
+    push_layer : UInt64
+    pop_axis_aligned_clip : UInt64
+    pop_layer : UInt64
+    set_primitive_blend1 : UInt64
+    draw_ink : UInt64
+    draw_gradient_mesh : UInt64
+    draw_gdi_metafile2 : UInt64
+    draw_sprite_batch : UInt64
+    set_primitive_blend2 : UInt64
   end
 
   ID2D1CommandSink4_GUID = "c78a6519-40d6-4218-b2de-beeeb744bb3e"
@@ -4598,16 +4598,16 @@ lib LibWin32
   end
 
   struct ID2D1ColorContext1VTbl
-    query_interface : Proc(ID2D1ColorContext1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1ColorContext1*, UInt32)
-    release : Proc(ID2D1ColorContext1*, UInt32)
-    get_factory : Proc(ID2D1ColorContext1*, ID2D1Factory*, Void)
-    get_color_space : Proc(ID2D1ColorContext1*, D2D1_COLOR_SPACE)
-    get_profile_size : Proc(ID2D1ColorContext1*, UInt32)
-    get_profile : Proc(ID2D1ColorContext1*, UInt8*, UInt32, HRESULT)
-    get_color_context_type : Proc(ID2D1ColorContext1*, D2D1_COLOR_CONTEXT_TYPE)
-    get_dxgi_color_space : Proc(ID2D1ColorContext1*, DXGI_COLOR_SPACE_TYPE)
-    get_simple_color_profile : Proc(ID2D1ColorContext1*, D2D1_SIMPLE_COLOR_PROFILE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    get_color_space : UInt64
+    get_profile_size : UInt64
+    get_profile : UInt64
+    get_color_context_type : UInt64
+    get_dxgi_color_space : UInt64
+    get_simple_color_profile : UInt64
   end
 
   ID2D1ColorContext1_GUID = "1ab42875-c57f-4be9-bd85-9cd78d6f55ee"
@@ -4617,125 +4617,125 @@ lib LibWin32
   end
 
   struct ID2D1DeviceContext5VTbl
-    query_interface : Proc(ID2D1DeviceContext5*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1DeviceContext5*, UInt32)
-    release : Proc(ID2D1DeviceContext5*, UInt32)
-    get_factory : Proc(ID2D1DeviceContext5*, ID2D1Factory*, Void)
-    create_bitmap : Proc(ID2D1DeviceContext5*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_from_wic_bitmap : Proc(ID2D1DeviceContext5*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_shared_bitmap : Proc(ID2D1DeviceContext5*, Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_brush : Proc(ID2D1DeviceContext5*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)
-    create_solid_color_brush : Proc(ID2D1DeviceContext5*, D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)
-    create_gradient_stop_collection : Proc(ID2D1DeviceContext5*, D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)
-    create_linear_gradient_brush : Proc(ID2D1DeviceContext5*, D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)
-    create_radial_gradient_brush : Proc(ID2D1DeviceContext5*, D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)
-    create_compatible_render_target : Proc(ID2D1DeviceContext5*, D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)
-    create_layer : Proc(ID2D1DeviceContext5*, D2D_SIZE_F*, ID2D1Layer*, HRESULT)
-    create_mesh : Proc(ID2D1DeviceContext5*, ID2D1Mesh*, HRESULT)
-    draw_line : Proc(ID2D1DeviceContext5*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    draw_rectangle : Proc(ID2D1DeviceContext5*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rectangle : Proc(ID2D1DeviceContext5*, D2D_RECT_F*, ID2D1Brush, Void)
-    draw_rounded_rectangle : Proc(ID2D1DeviceContext5*, D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rounded_rectangle : Proc(ID2D1DeviceContext5*, D2D1_ROUNDED_RECT*, ID2D1Brush, Void)
-    draw_ellipse : Proc(ID2D1DeviceContext5*, D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_ellipse : Proc(ID2D1DeviceContext5*, D2D1_ELLIPSE*, ID2D1Brush, Void)
-    draw_geometry : Proc(ID2D1DeviceContext5*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_geometry : Proc(ID2D1DeviceContext5*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)
-    fill_mesh : Proc(ID2D1DeviceContext5*, ID2D1Mesh, ID2D1Brush, Void)
-    fill_opacity_mask : Proc(ID2D1DeviceContext5*, ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)
-    draw_bitmap : Proc(ID2D1DeviceContext5*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)
-    draw_text : Proc(ID2D1DeviceContext5*, Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)
-    draw_text_layout : Proc(ID2D1DeviceContext5*, D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)
-    draw_glyph_run : Proc(ID2D1DeviceContext5*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    set_transform : Proc(ID2D1DeviceContext5*, D2D_MATRIX_3X2_F*, Void)
-    get_transform : Proc(ID2D1DeviceContext5*, D2D_MATRIX_3X2_F*, Void)
-    set_antialias_mode : Proc(ID2D1DeviceContext5*, D2D1_ANTIALIAS_MODE, Void)
-    get_antialias_mode : Proc(ID2D1DeviceContext5*, D2D1_ANTIALIAS_MODE)
-    set_text_antialias_mode : Proc(ID2D1DeviceContext5*, D2D1_TEXT_ANTIALIAS_MODE, Void)
-    get_text_antialias_mode : Proc(ID2D1DeviceContext5*, D2D1_TEXT_ANTIALIAS_MODE)
-    set_text_rendering_params : Proc(ID2D1DeviceContext5*, IDWriteRenderingParams, Void)
-    get_text_rendering_params : Proc(ID2D1DeviceContext5*, IDWriteRenderingParams*, Void)
-    set_tags : Proc(ID2D1DeviceContext5*, UInt64, UInt64, Void)
-    get_tags : Proc(ID2D1DeviceContext5*, UInt64*, UInt64*, Void)
-    push_layer : Proc(ID2D1DeviceContext5*, D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)
-    pop_layer : Proc(ID2D1DeviceContext5*, Void)
-    flush : Proc(ID2D1DeviceContext5*, UInt64*, UInt64*, HRESULT)
-    save_drawing_state : Proc(ID2D1DeviceContext5*, ID2D1DrawingStateBlock, Void)
-    restore_drawing_state : Proc(ID2D1DeviceContext5*, ID2D1DrawingStateBlock, Void)
-    push_axis_aligned_clip : Proc(ID2D1DeviceContext5*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)
-    pop_axis_aligned_clip : Proc(ID2D1DeviceContext5*, Void)
-    clear : Proc(ID2D1DeviceContext5*, D2D1_COLOR_F*, Void)
-    begin_draw : Proc(ID2D1DeviceContext5*, Void)
-    end_draw : Proc(ID2D1DeviceContext5*, UInt64*, UInt64*, HRESULT)
-    get_pixel_format : Proc(ID2D1DeviceContext5*, D2D1_PIXEL_FORMAT)
-    set_dpi : Proc(ID2D1DeviceContext5*, Float32, Float32, Void)
-    get_dpi : Proc(ID2D1DeviceContext5*, Float32*, Float32*, Void)
-    get_size : Proc(ID2D1DeviceContext5*, D2D_SIZE_F)
-    get_pixel_size : Proc(ID2D1DeviceContext5*, D2D_SIZE_U)
-    get_maximum_bitmap_size : Proc(ID2D1DeviceContext5*, UInt32)
-    is_supported : Proc(ID2D1DeviceContext5*, D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)
-    create_bitmap2 : Proc(ID2D1DeviceContext5*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_bitmap_from_wic_bitmap2 : Proc(ID2D1DeviceContext5*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_color_context : Proc(ID2D1DeviceContext5*, D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_filename : Proc(ID2D1DeviceContext5*, LibC::LPWSTR, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_wic_color_context : Proc(ID2D1DeviceContext5*, IWICColorContext, ID2D1ColorContext*, HRESULT)
-    create_bitmap_from_dxgi_surface : Proc(ID2D1DeviceContext5*, IDXGISurface, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_effect : Proc(ID2D1DeviceContext5*, Guid*, ID2D1Effect*, HRESULT)
-    create_gradient_stop_collection2 : Proc(ID2D1DeviceContext5*, D2D1_GRADIENT_STOP*, UInt32, D2D1_COLOR_SPACE, D2D1_COLOR_SPACE, D2D1_BUFFER_PRECISION, D2D1_EXTEND_MODE, D2D1_COLOR_INTERPOLATION_MODE, ID2D1GradientStopCollection1*, HRESULT)
-    create_image_brush : Proc(ID2D1DeviceContext5*, ID2D1Image, D2D1_IMAGE_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1ImageBrush*, HRESULT)
-    create_bitmap_brush2 : Proc(ID2D1DeviceContext5*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES1*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush1*, HRESULT)
-    create_command_list : Proc(ID2D1DeviceContext5*, ID2D1CommandList*, HRESULT)
-    is_dxgi_format_supported : Proc(ID2D1DeviceContext5*, DXGI_FORMAT, LibC::BOOL)
-    is_buffer_precision_supported : Proc(ID2D1DeviceContext5*, D2D1_BUFFER_PRECISION, LibC::BOOL)
-    get_image_local_bounds : Proc(ID2D1DeviceContext5*, ID2D1Image, D2D_RECT_F*, HRESULT)
-    get_image_world_bounds : Proc(ID2D1DeviceContext5*, ID2D1Image, D2D_RECT_F*, HRESULT)
-    get_glyph_run_world_bounds : Proc(ID2D1DeviceContext5*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_RECT_F*, HRESULT)
-    get_device : Proc(ID2D1DeviceContext5*, ID2D1Device*, Void)
-    set_target : Proc(ID2D1DeviceContext5*, ID2D1Image, Void)
-    get_target : Proc(ID2D1DeviceContext5*, ID2D1Image*, Void)
-    set_rendering_controls : Proc(ID2D1DeviceContext5*, D2D1_RENDERING_CONTROLS*, Void)
-    get_rendering_controls : Proc(ID2D1DeviceContext5*, D2D1_RENDERING_CONTROLS*, Void)
-    set_primitive_blend : Proc(ID2D1DeviceContext5*, D2D1_PRIMITIVE_BLEND, Void)
-    get_primitive_blend : Proc(ID2D1DeviceContext5*, D2D1_PRIMITIVE_BLEND)
-    set_unit_mode : Proc(ID2D1DeviceContext5*, D2D1_UNIT_MODE, Void)
-    get_unit_mode : Proc(ID2D1DeviceContext5*, D2D1_UNIT_MODE)
-    draw_glyph_run2 : Proc(ID2D1DeviceContext5*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    draw_image : Proc(ID2D1DeviceContext5*, ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, Void)
-    draw_gdi_metafile : Proc(ID2D1DeviceContext5*, ID2D1GdiMetafile, D2D_POINT_2F*, Void)
-    draw_bitmap2 : Proc(ID2D1DeviceContext5*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, Void)
-    push_layer2 : Proc(ID2D1DeviceContext5*, D2D1_LAYER_PARAMETERS1*, ID2D1Layer, Void)
-    invalidate_effect_input_rectangle : Proc(ID2D1DeviceContext5*, ID2D1Effect, UInt32, D2D_RECT_F*, HRESULT)
-    get_effect_invalid_rectangle_count : Proc(ID2D1DeviceContext5*, ID2D1Effect, UInt32*, HRESULT)
-    get_effect_invalid_rectangles : Proc(ID2D1DeviceContext5*, ID2D1Effect, D2D_RECT_F*, UInt32, HRESULT)
-    get_effect_required_input_rectangles : Proc(ID2D1DeviceContext5*, ID2D1Effect, D2D_RECT_F*, D2D1_EFFECT_INPUT_DESCRIPTION*, D2D_RECT_F*, UInt32, HRESULT)
-    fill_opacity_mask2 : Proc(ID2D1DeviceContext5*, ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, Void)
-    create_filled_geometry_realization : Proc(ID2D1DeviceContext5*, ID2D1Geometry, Float32, ID2D1GeometryRealization*, HRESULT)
-    create_stroked_geometry_realization : Proc(ID2D1DeviceContext5*, ID2D1Geometry, Float32, Float32, ID2D1StrokeStyle, ID2D1GeometryRealization*, HRESULT)
-    draw_geometry_realization : Proc(ID2D1DeviceContext5*, ID2D1GeometryRealization, ID2D1Brush, Void)
-    create_ink : Proc(ID2D1DeviceContext5*, D2D1_INK_POINT*, ID2D1Ink*, HRESULT)
-    create_ink_style : Proc(ID2D1DeviceContext5*, D2D1_INK_STYLE_PROPERTIES*, ID2D1InkStyle*, HRESULT)
-    create_gradient_mesh : Proc(ID2D1DeviceContext5*, D2D1_GRADIENT_MESH_PATCH*, UInt32, ID2D1GradientMesh*, HRESULT)
-    create_image_source_from_wic : Proc(ID2D1DeviceContext5*, IWICBitmapSource, D2D1_IMAGE_SOURCE_LOADING_OPTIONS, D2D1_ALPHA_MODE, ID2D1ImageSourceFromWic*, HRESULT)
-    create_lookup_table3_d : Proc(ID2D1DeviceContext5*, D2D1_BUFFER_PRECISION, UInt32*, UInt8*, UInt32, UInt32*, ID2D1LookupTable3D*, HRESULT)
-    create_image_source_from_dxgi : Proc(ID2D1DeviceContext5*, IDXGISurface*, UInt32, DXGI_COLOR_SPACE_TYPE, D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, ID2D1ImageSource*, HRESULT)
-    get_gradient_mesh_world_bounds : Proc(ID2D1DeviceContext5*, ID2D1GradientMesh, D2D_RECT_F*, HRESULT)
-    draw_ink : Proc(ID2D1DeviceContext5*, ID2D1Ink, ID2D1Brush, ID2D1InkStyle, Void)
-    draw_gradient_mesh : Proc(ID2D1DeviceContext5*, ID2D1GradientMesh, Void)
-    draw_gdi_metafile2 : Proc(ID2D1DeviceContext5*, ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, Void)
-    create_transformed_image_source : Proc(ID2D1DeviceContext5*, ID2D1ImageSource, D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, ID2D1TransformedImageSource*, HRESULT)
-    create_sprite_batch : Proc(ID2D1DeviceContext5*, ID2D1SpriteBatch*, HRESULT)
-    draw_sprite_batch : Proc(ID2D1DeviceContext5*, ID2D1SpriteBatch, UInt32, UInt32, ID2D1Bitmap, D2D1_BITMAP_INTERPOLATION_MODE, D2D1_SPRITE_OPTIONS, Void)
-    create_svg_glyph_style : Proc(ID2D1DeviceContext5*, ID2D1SvgGlyphStyle*, HRESULT)
-    draw_text2 : Proc(ID2D1DeviceContext5*, Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)
-    draw_text_layout2 : Proc(ID2D1DeviceContext5*, D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D1_DRAW_TEXT_OPTIONS, Void)
-    draw_color_bitmap_glyph_run : Proc(ID2D1DeviceContext5*, DWRITE_GLYPH_IMAGE_FORMATS, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION, Void)
-    draw_svg_glyph_run : Proc(ID2D1DeviceContext5*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, DWRITE_MEASURING_MODE, Void)
-    get_color_bitmap_glyph_image : Proc(ID2D1DeviceContext5*, DWRITE_GLYPH_IMAGE_FORMATS, D2D_POINT_2F, IDWriteFontFace, Float32, UInt16, LibC::BOOL, D2D_MATRIX_3X2_F*, Float32, Float32, D2D_MATRIX_3X2_F*, ID2D1Image*, HRESULT)
-    get_svg_glyph_image : Proc(ID2D1DeviceContext5*, D2D_POINT_2F, IDWriteFontFace, Float32, UInt16, LibC::BOOL, D2D_MATRIX_3X2_F*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D_MATRIX_3X2_F*, ID2D1CommandList*, HRESULT)
-    create_svg_document : Proc(ID2D1DeviceContext5*, IStream, D2D_SIZE_F, ID2D1SvgDocument*, HRESULT)
-    draw_svg_document : Proc(ID2D1DeviceContext5*, ID2D1SvgDocument, Void)
-    create_color_context_from_dxgi_color_space : Proc(ID2D1DeviceContext5*, DXGI_COLOR_SPACE_TYPE, ID2D1ColorContext1*, HRESULT)
-    create_color_context_from_simple_color_profile : Proc(ID2D1DeviceContext5*, D2D1_SIMPLE_COLOR_PROFILE*, ID2D1ColorContext1*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_bitmap : UInt64
+    create_bitmap_from_wic_bitmap : UInt64
+    create_shared_bitmap : UInt64
+    create_bitmap_brush : UInt64
+    create_solid_color_brush : UInt64
+    create_gradient_stop_collection : UInt64
+    create_linear_gradient_brush : UInt64
+    create_radial_gradient_brush : UInt64
+    create_compatible_render_target : UInt64
+    create_layer : UInt64
+    create_mesh : UInt64
+    draw_line : UInt64
+    draw_rectangle : UInt64
+    fill_rectangle : UInt64
+    draw_rounded_rectangle : UInt64
+    fill_rounded_rectangle : UInt64
+    draw_ellipse : UInt64
+    fill_ellipse : UInt64
+    draw_geometry : UInt64
+    fill_geometry : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    draw_bitmap : UInt64
+    draw_text : UInt64
+    draw_text_layout : UInt64
+    draw_glyph_run : UInt64
+    set_transform : UInt64
+    get_transform : UInt64
+    set_antialias_mode : UInt64
+    get_antialias_mode : UInt64
+    set_text_antialias_mode : UInt64
+    get_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    get_text_rendering_params : UInt64
+    set_tags : UInt64
+    get_tags : UInt64
+    push_layer : UInt64
+    pop_layer : UInt64
+    flush : UInt64
+    save_drawing_state : UInt64
+    restore_drawing_state : UInt64
+    push_axis_aligned_clip : UInt64
+    pop_axis_aligned_clip : UInt64
+    clear : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    get_pixel_format : UInt64
+    set_dpi : UInt64
+    get_dpi : UInt64
+    get_size : UInt64
+    get_pixel_size : UInt64
+    get_maximum_bitmap_size : UInt64
+    is_supported : UInt64
+    create_bitmap2 : UInt64
+    create_bitmap_from_wic_bitmap2 : UInt64
+    create_color_context : UInt64
+    create_color_context_from_filename : UInt64
+    create_color_context_from_wic_color_context : UInt64
+    create_bitmap_from_dxgi_surface : UInt64
+    create_effect : UInt64
+    create_gradient_stop_collection2 : UInt64
+    create_image_brush : UInt64
+    create_bitmap_brush2 : UInt64
+    create_command_list : UInt64
+    is_dxgi_format_supported : UInt64
+    is_buffer_precision_supported : UInt64
+    get_image_local_bounds : UInt64
+    get_image_world_bounds : UInt64
+    get_glyph_run_world_bounds : UInt64
+    get_device : UInt64
+    set_target : UInt64
+    get_target : UInt64
+    set_rendering_controls : UInt64
+    get_rendering_controls : UInt64
+    set_primitive_blend : UInt64
+    get_primitive_blend : UInt64
+    set_unit_mode : UInt64
+    get_unit_mode : UInt64
+    draw_glyph_run2 : UInt64
+    draw_image : UInt64
+    draw_gdi_metafile : UInt64
+    draw_bitmap2 : UInt64
+    push_layer2 : UInt64
+    invalidate_effect_input_rectangle : UInt64
+    get_effect_invalid_rectangle_count : UInt64
+    get_effect_invalid_rectangles : UInt64
+    get_effect_required_input_rectangles : UInt64
+    fill_opacity_mask2 : UInt64
+    create_filled_geometry_realization : UInt64
+    create_stroked_geometry_realization : UInt64
+    draw_geometry_realization : UInt64
+    create_ink : UInt64
+    create_ink_style : UInt64
+    create_gradient_mesh : UInt64
+    create_image_source_from_wic : UInt64
+    create_lookup_table3_d : UInt64
+    create_image_source_from_dxgi : UInt64
+    get_gradient_mesh_world_bounds : UInt64
+    draw_ink : UInt64
+    draw_gradient_mesh : UInt64
+    draw_gdi_metafile2 : UInt64
+    create_transformed_image_source : UInt64
+    create_sprite_batch : UInt64
+    draw_sprite_batch : UInt64
+    create_svg_glyph_style : UInt64
+    draw_text2 : UInt64
+    draw_text_layout2 : UInt64
+    draw_color_bitmap_glyph_run : UInt64
+    draw_svg_glyph_run : UInt64
+    get_color_bitmap_glyph_image : UInt64
+    get_svg_glyph_image : UInt64
+    create_svg_document : UInt64
+    draw_svg_document : UInt64
+    create_color_context_from_dxgi_color_space : UInt64
+    create_color_context_from_simple_color_profile : UInt64
   end
 
   ID2D1DeviceContext5_GUID = "7836d248-68cc-4df6-b9e8-de991bf62eb7"
@@ -4745,26 +4745,26 @@ lib LibWin32
   end
 
   struct ID2D1Device5VTbl
-    query_interface : Proc(ID2D1Device5*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Device5*, UInt32)
-    release : Proc(ID2D1Device5*, UInt32)
-    get_factory : Proc(ID2D1Device5*, ID2D1Factory*, Void)
-    create_device_context : Proc(ID2D1Device5*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext*, HRESULT)
-    create_print_control : Proc(ID2D1Device5*, IWICImagingFactory, IPrintDocumentPackageTarget, D2D1_PRINT_CONTROL_PROPERTIES*, ID2D1PrintControl*, HRESULT)
-    set_maximum_texture_memory : Proc(ID2D1Device5*, UInt64, Void)
-    get_maximum_texture_memory : Proc(ID2D1Device5*, UInt64)
-    clear_resources : Proc(ID2D1Device5*, UInt32, Void)
-    get_rendering_priority : Proc(ID2D1Device5*, D2D1_RENDERING_PRIORITY)
-    set_rendering_priority : Proc(ID2D1Device5*, D2D1_RENDERING_PRIORITY, Void)
-    create_device_context2 : Proc(ID2D1Device5*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext1*, HRESULT)
-    create_device_context3 : Proc(ID2D1Device5*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext2*, HRESULT)
-    flush_device_contexts : Proc(ID2D1Device5*, ID2D1Bitmap, Void)
-    get_dxgi_device : Proc(ID2D1Device5*, IDXGIDevice*, HRESULT)
-    create_device_context4 : Proc(ID2D1Device5*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext3*, HRESULT)
-    create_device_context5 : Proc(ID2D1Device5*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext4*, HRESULT)
-    set_maximum_color_glyph_cache_memory : Proc(ID2D1Device5*, UInt64, Void)
-    get_maximum_color_glyph_cache_memory : Proc(ID2D1Device5*, UInt64)
-    create_device_context6 : Proc(ID2D1Device5*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext5*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_device_context : UInt64
+    create_print_control : UInt64
+    set_maximum_texture_memory : UInt64
+    get_maximum_texture_memory : UInt64
+    clear_resources : UInt64
+    get_rendering_priority : UInt64
+    set_rendering_priority : UInt64
+    create_device_context2 : UInt64
+    create_device_context3 : UInt64
+    flush_device_contexts : UInt64
+    get_dxgi_device : UInt64
+    create_device_context4 : UInt64
+    create_device_context5 : UInt64
+    set_maximum_color_glyph_cache_memory : UInt64
+    get_maximum_color_glyph_cache_memory : UInt64
+    create_device_context6 : UInt64
   end
 
   ID2D1Device5_GUID = "d55ba0a4-6405-4694-aef5-08ee1a4358b4"
@@ -4774,38 +4774,38 @@ lib LibWin32
   end
 
   struct ID2D1Factory6VTbl
-    query_interface : Proc(ID2D1Factory6*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Factory6*, UInt32)
-    release : Proc(ID2D1Factory6*, UInt32)
-    reload_system_metrics : Proc(ID2D1Factory6*, HRESULT)
-    get_desktop_dpi : Proc(ID2D1Factory6*, Float32*, Float32*, Void)
-    create_rectangle_geometry : Proc(ID2D1Factory6*, D2D_RECT_F*, ID2D1RectangleGeometry*, HRESULT)
-    create_rounded_rectangle_geometry : Proc(ID2D1Factory6*, D2D1_ROUNDED_RECT*, ID2D1RoundedRectangleGeometry*, HRESULT)
-    create_ellipse_geometry : Proc(ID2D1Factory6*, D2D1_ELLIPSE*, ID2D1EllipseGeometry*, HRESULT)
-    create_geometry_group : Proc(ID2D1Factory6*, D2D1_FILL_MODE, ID2D1Geometry*, UInt32, ID2D1GeometryGroup*, HRESULT)
-    create_transformed_geometry : Proc(ID2D1Factory6*, ID2D1Geometry, D2D_MATRIX_3X2_F*, ID2D1TransformedGeometry*, HRESULT)
-    create_path_geometry : Proc(ID2D1Factory6*, ID2D1PathGeometry*, HRESULT)
-    create_stroke_style : Proc(ID2D1Factory6*, D2D1_STROKE_STYLE_PROPERTIES*, Float32*, UInt32, ID2D1StrokeStyle*, HRESULT)
-    create_drawing_state_block : Proc(ID2D1Factory6*, D2D1_DRAWING_STATE_DESCRIPTION*, IDWriteRenderingParams, ID2D1DrawingStateBlock*, HRESULT)
-    create_wic_bitmap_render_target : Proc(ID2D1Factory6*, IWICBitmap, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)
-    create_hwnd_render_target : Proc(ID2D1Factory6*, D2D1_RENDER_TARGET_PROPERTIES*, D2D1_HWND_RENDER_TARGET_PROPERTIES*, ID2D1HwndRenderTarget*, HRESULT)
-    create_dxgi_surface_render_target : Proc(ID2D1Factory6*, IDXGISurface, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)
-    create_dc_render_target : Proc(ID2D1Factory6*, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)
-    create_device : Proc(ID2D1Factory6*, IDXGIDevice, ID2D1Device*, HRESULT)
-    create_stroke_style2 : Proc(ID2D1Factory6*, D2D1_STROKE_STYLE_PROPERTIES1*, Float32*, UInt32, ID2D1StrokeStyle1*, HRESULT)
-    create_path_geometry2 : Proc(ID2D1Factory6*, ID2D1PathGeometry1*, HRESULT)
-    create_drawing_state_block2 : Proc(ID2D1Factory6*, D2D1_DRAWING_STATE_DESCRIPTION1*, IDWriteRenderingParams, ID2D1DrawingStateBlock1*, HRESULT)
-    create_gdi_metafile : Proc(ID2D1Factory6*, IStream, ID2D1GdiMetafile*, HRESULT)
-    register_effect_from_stream : Proc(ID2D1Factory6*, Guid*, IStream, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)
-    register_effect_from_string : Proc(ID2D1Factory6*, Guid*, LibC::LPWSTR, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)
-    unregister_effect : Proc(ID2D1Factory6*, Guid*, HRESULT)
-    get_registered_effects : Proc(ID2D1Factory6*, Guid*, UInt32, UInt32*, UInt32*, HRESULT)
-    get_effect_properties : Proc(ID2D1Factory6*, Guid*, ID2D1Properties*, HRESULT)
-    create_device2 : Proc(ID2D1Factory6*, IDXGIDevice, ID2D1Device1*, HRESULT)
-    create_device3 : Proc(ID2D1Factory6*, IDXGIDevice, ID2D1Device2*, HRESULT)
-    create_device4 : Proc(ID2D1Factory6*, IDXGIDevice, ID2D1Device3*, HRESULT)
-    create_device5 : Proc(ID2D1Factory6*, IDXGIDevice, ID2D1Device4*, HRESULT)
-    create_device6 : Proc(ID2D1Factory6*, IDXGIDevice, ID2D1Device5*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    reload_system_metrics : UInt64
+    get_desktop_dpi : UInt64
+    create_rectangle_geometry : UInt64
+    create_rounded_rectangle_geometry : UInt64
+    create_ellipse_geometry : UInt64
+    create_geometry_group : UInt64
+    create_transformed_geometry : UInt64
+    create_path_geometry : UInt64
+    create_stroke_style : UInt64
+    create_drawing_state_block : UInt64
+    create_wic_bitmap_render_target : UInt64
+    create_hwnd_render_target : UInt64
+    create_dxgi_surface_render_target : UInt64
+    create_dc_render_target : UInt64
+    create_device : UInt64
+    create_stroke_style2 : UInt64
+    create_path_geometry2 : UInt64
+    create_drawing_state_block2 : UInt64
+    create_gdi_metafile : UInt64
+    register_effect_from_stream : UInt64
+    register_effect_from_string : UInt64
+    unregister_effect : UInt64
+    get_registered_effects : UInt64
+    get_effect_properties : UInt64
+    create_device2 : UInt64
+    create_device3 : UInt64
+    create_device4 : UInt64
+    create_device5 : UInt64
+    create_device6 : UInt64
   end
 
   ID2D1Factory6_GUID = "f9976f46-f642-44c1-97ca-da32ea2a2635"
@@ -4815,41 +4815,41 @@ lib LibWin32
   end
 
   struct ID2D1CommandSink5VTbl
-    query_interface : Proc(ID2D1CommandSink5*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1CommandSink5*, UInt32)
-    release : Proc(ID2D1CommandSink5*, UInt32)
-    begin_draw : Proc(ID2D1CommandSink5*, HRESULT)
-    end_draw : Proc(ID2D1CommandSink5*, HRESULT)
-    set_antialias_mode : Proc(ID2D1CommandSink5*, D2D1_ANTIALIAS_MODE, HRESULT)
-    set_tags : Proc(ID2D1CommandSink5*, UInt64, UInt64, HRESULT)
-    set_text_antialias_mode : Proc(ID2D1CommandSink5*, D2D1_TEXT_ANTIALIAS_MODE, HRESULT)
-    set_text_rendering_params : Proc(ID2D1CommandSink5*, IDWriteRenderingParams, HRESULT)
-    set_transform : Proc(ID2D1CommandSink5*, D2D_MATRIX_3X2_F*, HRESULT)
-    set_primitive_blend : Proc(ID2D1CommandSink5*, D2D1_PRIMITIVE_BLEND, HRESULT)
-    set_unit_mode : Proc(ID2D1CommandSink5*, D2D1_UNIT_MODE, HRESULT)
-    clear : Proc(ID2D1CommandSink5*, D2D1_COLOR_F*, HRESULT)
-    draw_glyph_run : Proc(ID2D1CommandSink5*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, HRESULT)
-    draw_line : Proc(ID2D1CommandSink5*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_geometry : Proc(ID2D1CommandSink5*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_rectangle : Proc(ID2D1CommandSink5*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)
-    draw_bitmap : Proc(ID2D1CommandSink5*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, HRESULT)
-    draw_image : Proc(ID2D1CommandSink5*, ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, HRESULT)
-    draw_gdi_metafile : Proc(ID2D1CommandSink5*, ID2D1GdiMetafile, D2D_POINT_2F*, HRESULT)
-    fill_mesh : Proc(ID2D1CommandSink5*, ID2D1Mesh, ID2D1Brush, HRESULT)
-    fill_opacity_mask : Proc(ID2D1CommandSink5*, ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, HRESULT)
-    fill_geometry : Proc(ID2D1CommandSink5*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, HRESULT)
-    fill_rectangle : Proc(ID2D1CommandSink5*, D2D_RECT_F*, ID2D1Brush, HRESULT)
-    push_axis_aligned_clip : Proc(ID2D1CommandSink5*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, HRESULT)
-    push_layer : Proc(ID2D1CommandSink5*, D2D1_LAYER_PARAMETERS1*, ID2D1Layer, HRESULT)
-    pop_axis_aligned_clip : Proc(ID2D1CommandSink5*, HRESULT)
-    pop_layer : Proc(ID2D1CommandSink5*, HRESULT)
-    set_primitive_blend1 : Proc(ID2D1CommandSink5*, D2D1_PRIMITIVE_BLEND, HRESULT)
-    draw_ink : Proc(ID2D1CommandSink5*, ID2D1Ink, ID2D1Brush, ID2D1InkStyle, HRESULT)
-    draw_gradient_mesh : Proc(ID2D1CommandSink5*, ID2D1GradientMesh, HRESULT)
-    draw_gdi_metafile2 : Proc(ID2D1CommandSink5*, ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, HRESULT)
-    draw_sprite_batch : Proc(ID2D1CommandSink5*, ID2D1SpriteBatch, UInt32, UInt32, ID2D1Bitmap, D2D1_BITMAP_INTERPOLATION_MODE, D2D1_SPRITE_OPTIONS, HRESULT)
-    set_primitive_blend2 : Proc(ID2D1CommandSink5*, D2D1_PRIMITIVE_BLEND, HRESULT)
-    blend_image : Proc(ID2D1CommandSink5*, ID2D1Image, D2D1_BLEND_MODE, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    set_antialias_mode : UInt64
+    set_tags : UInt64
+    set_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    set_transform : UInt64
+    set_primitive_blend : UInt64
+    set_unit_mode : UInt64
+    clear : UInt64
+    draw_glyph_run : UInt64
+    draw_line : UInt64
+    draw_geometry : UInt64
+    draw_rectangle : UInt64
+    draw_bitmap : UInt64
+    draw_image : UInt64
+    draw_gdi_metafile : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    fill_geometry : UInt64
+    fill_rectangle : UInt64
+    push_axis_aligned_clip : UInt64
+    push_layer : UInt64
+    pop_axis_aligned_clip : UInt64
+    pop_layer : UInt64
+    set_primitive_blend1 : UInt64
+    draw_ink : UInt64
+    draw_gradient_mesh : UInt64
+    draw_gdi_metafile2 : UInt64
+    draw_sprite_batch : UInt64
+    set_primitive_blend2 : UInt64
+    blend_image : UInt64
   end
 
   ID2D1CommandSink5_GUID = "7047dd26-b1e7-44a7-959a-8349e2144fa8"
@@ -4859,126 +4859,126 @@ lib LibWin32
   end
 
   struct ID2D1DeviceContext6VTbl
-    query_interface : Proc(ID2D1DeviceContext6*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1DeviceContext6*, UInt32)
-    release : Proc(ID2D1DeviceContext6*, UInt32)
-    get_factory : Proc(ID2D1DeviceContext6*, ID2D1Factory*, Void)
-    create_bitmap : Proc(ID2D1DeviceContext6*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_from_wic_bitmap : Proc(ID2D1DeviceContext6*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_shared_bitmap : Proc(ID2D1DeviceContext6*, Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)
-    create_bitmap_brush : Proc(ID2D1DeviceContext6*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)
-    create_solid_color_brush : Proc(ID2D1DeviceContext6*, D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)
-    create_gradient_stop_collection : Proc(ID2D1DeviceContext6*, D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)
-    create_linear_gradient_brush : Proc(ID2D1DeviceContext6*, D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)
-    create_radial_gradient_brush : Proc(ID2D1DeviceContext6*, D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)
-    create_compatible_render_target : Proc(ID2D1DeviceContext6*, D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)
-    create_layer : Proc(ID2D1DeviceContext6*, D2D_SIZE_F*, ID2D1Layer*, HRESULT)
-    create_mesh : Proc(ID2D1DeviceContext6*, ID2D1Mesh*, HRESULT)
-    draw_line : Proc(ID2D1DeviceContext6*, D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    draw_rectangle : Proc(ID2D1DeviceContext6*, D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rectangle : Proc(ID2D1DeviceContext6*, D2D_RECT_F*, ID2D1Brush, Void)
-    draw_rounded_rectangle : Proc(ID2D1DeviceContext6*, D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_rounded_rectangle : Proc(ID2D1DeviceContext6*, D2D1_ROUNDED_RECT*, ID2D1Brush, Void)
-    draw_ellipse : Proc(ID2D1DeviceContext6*, D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_ellipse : Proc(ID2D1DeviceContext6*, D2D1_ELLIPSE*, ID2D1Brush, Void)
-    draw_geometry : Proc(ID2D1DeviceContext6*, ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)
-    fill_geometry : Proc(ID2D1DeviceContext6*, ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)
-    fill_mesh : Proc(ID2D1DeviceContext6*, ID2D1Mesh, ID2D1Brush, Void)
-    fill_opacity_mask : Proc(ID2D1DeviceContext6*, ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)
-    draw_bitmap : Proc(ID2D1DeviceContext6*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)
-    draw_text : Proc(ID2D1DeviceContext6*, Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)
-    draw_text_layout : Proc(ID2D1DeviceContext6*, D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)
-    draw_glyph_run : Proc(ID2D1DeviceContext6*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    set_transform : Proc(ID2D1DeviceContext6*, D2D_MATRIX_3X2_F*, Void)
-    get_transform : Proc(ID2D1DeviceContext6*, D2D_MATRIX_3X2_F*, Void)
-    set_antialias_mode : Proc(ID2D1DeviceContext6*, D2D1_ANTIALIAS_MODE, Void)
-    get_antialias_mode : Proc(ID2D1DeviceContext6*, D2D1_ANTIALIAS_MODE)
-    set_text_antialias_mode : Proc(ID2D1DeviceContext6*, D2D1_TEXT_ANTIALIAS_MODE, Void)
-    get_text_antialias_mode : Proc(ID2D1DeviceContext6*, D2D1_TEXT_ANTIALIAS_MODE)
-    set_text_rendering_params : Proc(ID2D1DeviceContext6*, IDWriteRenderingParams, Void)
-    get_text_rendering_params : Proc(ID2D1DeviceContext6*, IDWriteRenderingParams*, Void)
-    set_tags : Proc(ID2D1DeviceContext6*, UInt64, UInt64, Void)
-    get_tags : Proc(ID2D1DeviceContext6*, UInt64*, UInt64*, Void)
-    push_layer : Proc(ID2D1DeviceContext6*, D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)
-    pop_layer : Proc(ID2D1DeviceContext6*, Void)
-    flush : Proc(ID2D1DeviceContext6*, UInt64*, UInt64*, HRESULT)
-    save_drawing_state : Proc(ID2D1DeviceContext6*, ID2D1DrawingStateBlock, Void)
-    restore_drawing_state : Proc(ID2D1DeviceContext6*, ID2D1DrawingStateBlock, Void)
-    push_axis_aligned_clip : Proc(ID2D1DeviceContext6*, D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)
-    pop_axis_aligned_clip : Proc(ID2D1DeviceContext6*, Void)
-    clear : Proc(ID2D1DeviceContext6*, D2D1_COLOR_F*, Void)
-    begin_draw : Proc(ID2D1DeviceContext6*, Void)
-    end_draw : Proc(ID2D1DeviceContext6*, UInt64*, UInt64*, HRESULT)
-    get_pixel_format : Proc(ID2D1DeviceContext6*, D2D1_PIXEL_FORMAT)
-    set_dpi : Proc(ID2D1DeviceContext6*, Float32, Float32, Void)
-    get_dpi : Proc(ID2D1DeviceContext6*, Float32*, Float32*, Void)
-    get_size : Proc(ID2D1DeviceContext6*, D2D_SIZE_F)
-    get_pixel_size : Proc(ID2D1DeviceContext6*, D2D_SIZE_U)
-    get_maximum_bitmap_size : Proc(ID2D1DeviceContext6*, UInt32)
-    is_supported : Proc(ID2D1DeviceContext6*, D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)
-    create_bitmap2 : Proc(ID2D1DeviceContext6*, D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_bitmap_from_wic_bitmap2 : Proc(ID2D1DeviceContext6*, IWICBitmapSource, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_color_context : Proc(ID2D1DeviceContext6*, D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_filename : Proc(ID2D1DeviceContext6*, LibC::LPWSTR, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_wic_color_context : Proc(ID2D1DeviceContext6*, IWICColorContext, ID2D1ColorContext*, HRESULT)
-    create_bitmap_from_dxgi_surface : Proc(ID2D1DeviceContext6*, IDXGISurface, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)
-    create_effect : Proc(ID2D1DeviceContext6*, Guid*, ID2D1Effect*, HRESULT)
-    create_gradient_stop_collection2 : Proc(ID2D1DeviceContext6*, D2D1_GRADIENT_STOP*, UInt32, D2D1_COLOR_SPACE, D2D1_COLOR_SPACE, D2D1_BUFFER_PRECISION, D2D1_EXTEND_MODE, D2D1_COLOR_INTERPOLATION_MODE, ID2D1GradientStopCollection1*, HRESULT)
-    create_image_brush : Proc(ID2D1DeviceContext6*, ID2D1Image, D2D1_IMAGE_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1ImageBrush*, HRESULT)
-    create_bitmap_brush2 : Proc(ID2D1DeviceContext6*, ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES1*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush1*, HRESULT)
-    create_command_list : Proc(ID2D1DeviceContext6*, ID2D1CommandList*, HRESULT)
-    is_dxgi_format_supported : Proc(ID2D1DeviceContext6*, DXGI_FORMAT, LibC::BOOL)
-    is_buffer_precision_supported : Proc(ID2D1DeviceContext6*, D2D1_BUFFER_PRECISION, LibC::BOOL)
-    get_image_local_bounds : Proc(ID2D1DeviceContext6*, ID2D1Image, D2D_RECT_F*, HRESULT)
-    get_image_world_bounds : Proc(ID2D1DeviceContext6*, ID2D1Image, D2D_RECT_F*, HRESULT)
-    get_glyph_run_world_bounds : Proc(ID2D1DeviceContext6*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_RECT_F*, HRESULT)
-    get_device : Proc(ID2D1DeviceContext6*, ID2D1Device*, Void)
-    set_target : Proc(ID2D1DeviceContext6*, ID2D1Image, Void)
-    get_target : Proc(ID2D1DeviceContext6*, ID2D1Image*, Void)
-    set_rendering_controls : Proc(ID2D1DeviceContext6*, D2D1_RENDERING_CONTROLS*, Void)
-    get_rendering_controls : Proc(ID2D1DeviceContext6*, D2D1_RENDERING_CONTROLS*, Void)
-    set_primitive_blend : Proc(ID2D1DeviceContext6*, D2D1_PRIMITIVE_BLEND, Void)
-    get_primitive_blend : Proc(ID2D1DeviceContext6*, D2D1_PRIMITIVE_BLEND)
-    set_unit_mode : Proc(ID2D1DeviceContext6*, D2D1_UNIT_MODE, Void)
-    get_unit_mode : Proc(ID2D1DeviceContext6*, D2D1_UNIT_MODE)
-    draw_glyph_run2 : Proc(ID2D1DeviceContext6*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)
-    draw_image : Proc(ID2D1DeviceContext6*, ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, Void)
-    draw_gdi_metafile : Proc(ID2D1DeviceContext6*, ID2D1GdiMetafile, D2D_POINT_2F*, Void)
-    draw_bitmap2 : Proc(ID2D1DeviceContext6*, ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, Void)
-    push_layer2 : Proc(ID2D1DeviceContext6*, D2D1_LAYER_PARAMETERS1*, ID2D1Layer, Void)
-    invalidate_effect_input_rectangle : Proc(ID2D1DeviceContext6*, ID2D1Effect, UInt32, D2D_RECT_F*, HRESULT)
-    get_effect_invalid_rectangle_count : Proc(ID2D1DeviceContext6*, ID2D1Effect, UInt32*, HRESULT)
-    get_effect_invalid_rectangles : Proc(ID2D1DeviceContext6*, ID2D1Effect, D2D_RECT_F*, UInt32, HRESULT)
-    get_effect_required_input_rectangles : Proc(ID2D1DeviceContext6*, ID2D1Effect, D2D_RECT_F*, D2D1_EFFECT_INPUT_DESCRIPTION*, D2D_RECT_F*, UInt32, HRESULT)
-    fill_opacity_mask2 : Proc(ID2D1DeviceContext6*, ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, Void)
-    create_filled_geometry_realization : Proc(ID2D1DeviceContext6*, ID2D1Geometry, Float32, ID2D1GeometryRealization*, HRESULT)
-    create_stroked_geometry_realization : Proc(ID2D1DeviceContext6*, ID2D1Geometry, Float32, Float32, ID2D1StrokeStyle, ID2D1GeometryRealization*, HRESULT)
-    draw_geometry_realization : Proc(ID2D1DeviceContext6*, ID2D1GeometryRealization, ID2D1Brush, Void)
-    create_ink : Proc(ID2D1DeviceContext6*, D2D1_INK_POINT*, ID2D1Ink*, HRESULT)
-    create_ink_style : Proc(ID2D1DeviceContext6*, D2D1_INK_STYLE_PROPERTIES*, ID2D1InkStyle*, HRESULT)
-    create_gradient_mesh : Proc(ID2D1DeviceContext6*, D2D1_GRADIENT_MESH_PATCH*, UInt32, ID2D1GradientMesh*, HRESULT)
-    create_image_source_from_wic : Proc(ID2D1DeviceContext6*, IWICBitmapSource, D2D1_IMAGE_SOURCE_LOADING_OPTIONS, D2D1_ALPHA_MODE, ID2D1ImageSourceFromWic*, HRESULT)
-    create_lookup_table3_d : Proc(ID2D1DeviceContext6*, D2D1_BUFFER_PRECISION, UInt32*, UInt8*, UInt32, UInt32*, ID2D1LookupTable3D*, HRESULT)
-    create_image_source_from_dxgi : Proc(ID2D1DeviceContext6*, IDXGISurface*, UInt32, DXGI_COLOR_SPACE_TYPE, D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, ID2D1ImageSource*, HRESULT)
-    get_gradient_mesh_world_bounds : Proc(ID2D1DeviceContext6*, ID2D1GradientMesh, D2D_RECT_F*, HRESULT)
-    draw_ink : Proc(ID2D1DeviceContext6*, ID2D1Ink, ID2D1Brush, ID2D1InkStyle, Void)
-    draw_gradient_mesh : Proc(ID2D1DeviceContext6*, ID2D1GradientMesh, Void)
-    draw_gdi_metafile2 : Proc(ID2D1DeviceContext6*, ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, Void)
-    create_transformed_image_source : Proc(ID2D1DeviceContext6*, ID2D1ImageSource, D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, ID2D1TransformedImageSource*, HRESULT)
-    create_sprite_batch : Proc(ID2D1DeviceContext6*, ID2D1SpriteBatch*, HRESULT)
-    draw_sprite_batch : Proc(ID2D1DeviceContext6*, ID2D1SpriteBatch, UInt32, UInt32, ID2D1Bitmap, D2D1_BITMAP_INTERPOLATION_MODE, D2D1_SPRITE_OPTIONS, Void)
-    create_svg_glyph_style : Proc(ID2D1DeviceContext6*, ID2D1SvgGlyphStyle*, HRESULT)
-    draw_text2 : Proc(ID2D1DeviceContext6*, Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)
-    draw_text_layout2 : Proc(ID2D1DeviceContext6*, D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D1_DRAW_TEXT_OPTIONS, Void)
-    draw_color_bitmap_glyph_run : Proc(ID2D1DeviceContext6*, DWRITE_GLYPH_IMAGE_FORMATS, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION, Void)
-    draw_svg_glyph_run : Proc(ID2D1DeviceContext6*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, DWRITE_MEASURING_MODE, Void)
-    get_color_bitmap_glyph_image : Proc(ID2D1DeviceContext6*, DWRITE_GLYPH_IMAGE_FORMATS, D2D_POINT_2F, IDWriteFontFace, Float32, UInt16, LibC::BOOL, D2D_MATRIX_3X2_F*, Float32, Float32, D2D_MATRIX_3X2_F*, ID2D1Image*, HRESULT)
-    get_svg_glyph_image : Proc(ID2D1DeviceContext6*, D2D_POINT_2F, IDWriteFontFace, Float32, UInt16, LibC::BOOL, D2D_MATRIX_3X2_F*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D_MATRIX_3X2_F*, ID2D1CommandList*, HRESULT)
-    create_svg_document : Proc(ID2D1DeviceContext6*, IStream, D2D_SIZE_F, ID2D1SvgDocument*, HRESULT)
-    draw_svg_document : Proc(ID2D1DeviceContext6*, ID2D1SvgDocument, Void)
-    create_color_context_from_dxgi_color_space : Proc(ID2D1DeviceContext6*, DXGI_COLOR_SPACE_TYPE, ID2D1ColorContext1*, HRESULT)
-    create_color_context_from_simple_color_profile : Proc(ID2D1DeviceContext6*, D2D1_SIMPLE_COLOR_PROFILE*, ID2D1ColorContext1*, HRESULT)
-    blend_image : Proc(ID2D1DeviceContext6*, ID2D1Image, D2D1_BLEND_MODE, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_bitmap : UInt64
+    create_bitmap_from_wic_bitmap : UInt64
+    create_shared_bitmap : UInt64
+    create_bitmap_brush : UInt64
+    create_solid_color_brush : UInt64
+    create_gradient_stop_collection : UInt64
+    create_linear_gradient_brush : UInt64
+    create_radial_gradient_brush : UInt64
+    create_compatible_render_target : UInt64
+    create_layer : UInt64
+    create_mesh : UInt64
+    draw_line : UInt64
+    draw_rectangle : UInt64
+    fill_rectangle : UInt64
+    draw_rounded_rectangle : UInt64
+    fill_rounded_rectangle : UInt64
+    draw_ellipse : UInt64
+    fill_ellipse : UInt64
+    draw_geometry : UInt64
+    fill_geometry : UInt64
+    fill_mesh : UInt64
+    fill_opacity_mask : UInt64
+    draw_bitmap : UInt64
+    draw_text : UInt64
+    draw_text_layout : UInt64
+    draw_glyph_run : UInt64
+    set_transform : UInt64
+    get_transform : UInt64
+    set_antialias_mode : UInt64
+    get_antialias_mode : UInt64
+    set_text_antialias_mode : UInt64
+    get_text_antialias_mode : UInt64
+    set_text_rendering_params : UInt64
+    get_text_rendering_params : UInt64
+    set_tags : UInt64
+    get_tags : UInt64
+    push_layer : UInt64
+    pop_layer : UInt64
+    flush : UInt64
+    save_drawing_state : UInt64
+    restore_drawing_state : UInt64
+    push_axis_aligned_clip : UInt64
+    pop_axis_aligned_clip : UInt64
+    clear : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    get_pixel_format : UInt64
+    set_dpi : UInt64
+    get_dpi : UInt64
+    get_size : UInt64
+    get_pixel_size : UInt64
+    get_maximum_bitmap_size : UInt64
+    is_supported : UInt64
+    create_bitmap2 : UInt64
+    create_bitmap_from_wic_bitmap2 : UInt64
+    create_color_context : UInt64
+    create_color_context_from_filename : UInt64
+    create_color_context_from_wic_color_context : UInt64
+    create_bitmap_from_dxgi_surface : UInt64
+    create_effect : UInt64
+    create_gradient_stop_collection2 : UInt64
+    create_image_brush : UInt64
+    create_bitmap_brush2 : UInt64
+    create_command_list : UInt64
+    is_dxgi_format_supported : UInt64
+    is_buffer_precision_supported : UInt64
+    get_image_local_bounds : UInt64
+    get_image_world_bounds : UInt64
+    get_glyph_run_world_bounds : UInt64
+    get_device : UInt64
+    set_target : UInt64
+    get_target : UInt64
+    set_rendering_controls : UInt64
+    get_rendering_controls : UInt64
+    set_primitive_blend : UInt64
+    get_primitive_blend : UInt64
+    set_unit_mode : UInt64
+    get_unit_mode : UInt64
+    draw_glyph_run2 : UInt64
+    draw_image : UInt64
+    draw_gdi_metafile : UInt64
+    draw_bitmap2 : UInt64
+    push_layer2 : UInt64
+    invalidate_effect_input_rectangle : UInt64
+    get_effect_invalid_rectangle_count : UInt64
+    get_effect_invalid_rectangles : UInt64
+    get_effect_required_input_rectangles : UInt64
+    fill_opacity_mask2 : UInt64
+    create_filled_geometry_realization : UInt64
+    create_stroked_geometry_realization : UInt64
+    draw_geometry_realization : UInt64
+    create_ink : UInt64
+    create_ink_style : UInt64
+    create_gradient_mesh : UInt64
+    create_image_source_from_wic : UInt64
+    create_lookup_table3_d : UInt64
+    create_image_source_from_dxgi : UInt64
+    get_gradient_mesh_world_bounds : UInt64
+    draw_ink : UInt64
+    draw_gradient_mesh : UInt64
+    draw_gdi_metafile2 : UInt64
+    create_transformed_image_source : UInt64
+    create_sprite_batch : UInt64
+    draw_sprite_batch : UInt64
+    create_svg_glyph_style : UInt64
+    draw_text2 : UInt64
+    draw_text_layout2 : UInt64
+    draw_color_bitmap_glyph_run : UInt64
+    draw_svg_glyph_run : UInt64
+    get_color_bitmap_glyph_image : UInt64
+    get_svg_glyph_image : UInt64
+    create_svg_document : UInt64
+    draw_svg_document : UInt64
+    create_color_context_from_dxgi_color_space : UInt64
+    create_color_context_from_simple_color_profile : UInt64
+    blend_image : UInt64
   end
 
   ID2D1DeviceContext6_GUID = "985f7e37-4ed0-4a19-98a3-15b0edfde306"
@@ -4988,27 +4988,27 @@ lib LibWin32
   end
 
   struct ID2D1Device6VTbl
-    query_interface : Proc(ID2D1Device6*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Device6*, UInt32)
-    release : Proc(ID2D1Device6*, UInt32)
-    get_factory : Proc(ID2D1Device6*, ID2D1Factory*, Void)
-    create_device_context : Proc(ID2D1Device6*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext*, HRESULT)
-    create_print_control : Proc(ID2D1Device6*, IWICImagingFactory, IPrintDocumentPackageTarget, D2D1_PRINT_CONTROL_PROPERTIES*, ID2D1PrintControl*, HRESULT)
-    set_maximum_texture_memory : Proc(ID2D1Device6*, UInt64, Void)
-    get_maximum_texture_memory : Proc(ID2D1Device6*, UInt64)
-    clear_resources : Proc(ID2D1Device6*, UInt32, Void)
-    get_rendering_priority : Proc(ID2D1Device6*, D2D1_RENDERING_PRIORITY)
-    set_rendering_priority : Proc(ID2D1Device6*, D2D1_RENDERING_PRIORITY, Void)
-    create_device_context2 : Proc(ID2D1Device6*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext1*, HRESULT)
-    create_device_context3 : Proc(ID2D1Device6*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext2*, HRESULT)
-    flush_device_contexts : Proc(ID2D1Device6*, ID2D1Bitmap, Void)
-    get_dxgi_device : Proc(ID2D1Device6*, IDXGIDevice*, HRESULT)
-    create_device_context4 : Proc(ID2D1Device6*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext3*, HRESULT)
-    create_device_context5 : Proc(ID2D1Device6*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext4*, HRESULT)
-    set_maximum_color_glyph_cache_memory : Proc(ID2D1Device6*, UInt64, Void)
-    get_maximum_color_glyph_cache_memory : Proc(ID2D1Device6*, UInt64)
-    create_device_context6 : Proc(ID2D1Device6*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext5*, HRESULT)
-    create_device_context7 : Proc(ID2D1Device6*, D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext6*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_factory : UInt64
+    create_device_context : UInt64
+    create_print_control : UInt64
+    set_maximum_texture_memory : UInt64
+    get_maximum_texture_memory : UInt64
+    clear_resources : UInt64
+    get_rendering_priority : UInt64
+    set_rendering_priority : UInt64
+    create_device_context2 : UInt64
+    create_device_context3 : UInt64
+    flush_device_contexts : UInt64
+    get_dxgi_device : UInt64
+    create_device_context4 : UInt64
+    create_device_context5 : UInt64
+    set_maximum_color_glyph_cache_memory : UInt64
+    get_maximum_color_glyph_cache_memory : UInt64
+    create_device_context6 : UInt64
+    create_device_context7 : UInt64
   end
 
   ID2D1Device6_GUID = "7bfef914-2d75-4bad-be87-e18ddb077b6d"
@@ -5018,39 +5018,39 @@ lib LibWin32
   end
 
   struct ID2D1Factory7VTbl
-    query_interface : Proc(ID2D1Factory7*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1Factory7*, UInt32)
-    release : Proc(ID2D1Factory7*, UInt32)
-    reload_system_metrics : Proc(ID2D1Factory7*, HRESULT)
-    get_desktop_dpi : Proc(ID2D1Factory7*, Float32*, Float32*, Void)
-    create_rectangle_geometry : Proc(ID2D1Factory7*, D2D_RECT_F*, ID2D1RectangleGeometry*, HRESULT)
-    create_rounded_rectangle_geometry : Proc(ID2D1Factory7*, D2D1_ROUNDED_RECT*, ID2D1RoundedRectangleGeometry*, HRESULT)
-    create_ellipse_geometry : Proc(ID2D1Factory7*, D2D1_ELLIPSE*, ID2D1EllipseGeometry*, HRESULT)
-    create_geometry_group : Proc(ID2D1Factory7*, D2D1_FILL_MODE, ID2D1Geometry*, UInt32, ID2D1GeometryGroup*, HRESULT)
-    create_transformed_geometry : Proc(ID2D1Factory7*, ID2D1Geometry, D2D_MATRIX_3X2_F*, ID2D1TransformedGeometry*, HRESULT)
-    create_path_geometry : Proc(ID2D1Factory7*, ID2D1PathGeometry*, HRESULT)
-    create_stroke_style : Proc(ID2D1Factory7*, D2D1_STROKE_STYLE_PROPERTIES*, Float32*, UInt32, ID2D1StrokeStyle*, HRESULT)
-    create_drawing_state_block : Proc(ID2D1Factory7*, D2D1_DRAWING_STATE_DESCRIPTION*, IDWriteRenderingParams, ID2D1DrawingStateBlock*, HRESULT)
-    create_wic_bitmap_render_target : Proc(ID2D1Factory7*, IWICBitmap, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)
-    create_hwnd_render_target : Proc(ID2D1Factory7*, D2D1_RENDER_TARGET_PROPERTIES*, D2D1_HWND_RENDER_TARGET_PROPERTIES*, ID2D1HwndRenderTarget*, HRESULT)
-    create_dxgi_surface_render_target : Proc(ID2D1Factory7*, IDXGISurface, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)
-    create_dc_render_target : Proc(ID2D1Factory7*, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)
-    create_device : Proc(ID2D1Factory7*, IDXGIDevice, ID2D1Device*, HRESULT)
-    create_stroke_style2 : Proc(ID2D1Factory7*, D2D1_STROKE_STYLE_PROPERTIES1*, Float32*, UInt32, ID2D1StrokeStyle1*, HRESULT)
-    create_path_geometry2 : Proc(ID2D1Factory7*, ID2D1PathGeometry1*, HRESULT)
-    create_drawing_state_block2 : Proc(ID2D1Factory7*, D2D1_DRAWING_STATE_DESCRIPTION1*, IDWriteRenderingParams, ID2D1DrawingStateBlock1*, HRESULT)
-    create_gdi_metafile : Proc(ID2D1Factory7*, IStream, ID2D1GdiMetafile*, HRESULT)
-    register_effect_from_stream : Proc(ID2D1Factory7*, Guid*, IStream, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)
-    register_effect_from_string : Proc(ID2D1Factory7*, Guid*, LibC::LPWSTR, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)
-    unregister_effect : Proc(ID2D1Factory7*, Guid*, HRESULT)
-    get_registered_effects : Proc(ID2D1Factory7*, Guid*, UInt32, UInt32*, UInt32*, HRESULT)
-    get_effect_properties : Proc(ID2D1Factory7*, Guid*, ID2D1Properties*, HRESULT)
-    create_device2 : Proc(ID2D1Factory7*, IDXGIDevice, ID2D1Device1*, HRESULT)
-    create_device3 : Proc(ID2D1Factory7*, IDXGIDevice, ID2D1Device2*, HRESULT)
-    create_device4 : Proc(ID2D1Factory7*, IDXGIDevice, ID2D1Device3*, HRESULT)
-    create_device5 : Proc(ID2D1Factory7*, IDXGIDevice, ID2D1Device4*, HRESULT)
-    create_device6 : Proc(ID2D1Factory7*, IDXGIDevice, ID2D1Device5*, HRESULT)
-    create_device7 : Proc(ID2D1Factory7*, IDXGIDevice, ID2D1Device6*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    reload_system_metrics : UInt64
+    get_desktop_dpi : UInt64
+    create_rectangle_geometry : UInt64
+    create_rounded_rectangle_geometry : UInt64
+    create_ellipse_geometry : UInt64
+    create_geometry_group : UInt64
+    create_transformed_geometry : UInt64
+    create_path_geometry : UInt64
+    create_stroke_style : UInt64
+    create_drawing_state_block : UInt64
+    create_wic_bitmap_render_target : UInt64
+    create_hwnd_render_target : UInt64
+    create_dxgi_surface_render_target : UInt64
+    create_dc_render_target : UInt64
+    create_device : UInt64
+    create_stroke_style2 : UInt64
+    create_path_geometry2 : UInt64
+    create_drawing_state_block2 : UInt64
+    create_gdi_metafile : UInt64
+    register_effect_from_stream : UInt64
+    register_effect_from_string : UInt64
+    unregister_effect : UInt64
+    get_registered_effects : UInt64
+    get_effect_properties : UInt64
+    create_device2 : UInt64
+    create_device3 : UInt64
+    create_device4 : UInt64
+    create_device5 : UInt64
+    create_device6 : UInt64
+    create_device7 : UInt64
   end
 
   ID2D1Factory7_GUID = "bdc2bdd3-b96c-4de6-bdf7-99d4745454de"
@@ -5060,31 +5060,31 @@ lib LibWin32
   end
 
   struct ID2D1EffectContext1VTbl
-    query_interface : Proc(ID2D1EffectContext1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1EffectContext1*, UInt32)
-    release : Proc(ID2D1EffectContext1*, UInt32)
-    get_dpi : Proc(ID2D1EffectContext1*, Float32*, Float32*, Void)
-    create_effect : Proc(ID2D1EffectContext1*, Guid*, ID2D1Effect*, HRESULT)
-    get_maximum_supported_feature_level : Proc(ID2D1EffectContext1*, D3D_FEATURE_LEVEL*, UInt32, D3D_FEATURE_LEVEL*, HRESULT)
-    create_transform_node_from_effect : Proc(ID2D1EffectContext1*, ID2D1Effect, ID2D1TransformNode*, HRESULT)
-    create_blend_transform : Proc(ID2D1EffectContext1*, UInt32, D2D1_BLEND_DESCRIPTION*, ID2D1BlendTransform*, HRESULT)
-    create_border_transform : Proc(ID2D1EffectContext1*, D2D1_EXTEND_MODE, D2D1_EXTEND_MODE, ID2D1BorderTransform*, HRESULT)
-    create_offset_transform : Proc(ID2D1EffectContext1*, POINT, ID2D1OffsetTransform*, HRESULT)
-    create_bounds_adjustment_transform : Proc(ID2D1EffectContext1*, RECT*, ID2D1BoundsAdjustmentTransform*, HRESULT)
-    load_pixel_shader : Proc(ID2D1EffectContext1*, Guid*, UInt8*, UInt32, HRESULT)
-    load_vertex_shader : Proc(ID2D1EffectContext1*, Guid*, UInt8*, UInt32, HRESULT)
-    load_compute_shader : Proc(ID2D1EffectContext1*, Guid*, UInt8*, UInt32, HRESULT)
-    is_shader_loaded : Proc(ID2D1EffectContext1*, Guid*, LibC::BOOL)
-    create_resource_texture : Proc(ID2D1EffectContext1*, Guid*, D2D1_RESOURCE_TEXTURE_PROPERTIES*, UInt8*, UInt32*, UInt32, ID2D1ResourceTexture*, HRESULT)
-    find_resource_texture : Proc(ID2D1EffectContext1*, Guid*, ID2D1ResourceTexture*, HRESULT)
-    create_vertex_buffer : Proc(ID2D1EffectContext1*, D2D1_VERTEX_BUFFER_PROPERTIES*, Guid*, D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES*, ID2D1VertexBuffer*, HRESULT)
-    find_vertex_buffer : Proc(ID2D1EffectContext1*, Guid*, ID2D1VertexBuffer*, HRESULT)
-    create_color_context : Proc(ID2D1EffectContext1*, D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_filename : Proc(ID2D1EffectContext1*, LibC::LPWSTR, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_wic_color_context : Proc(ID2D1EffectContext1*, IWICColorContext, ID2D1ColorContext*, HRESULT)
-    check_feature_support : Proc(ID2D1EffectContext1*, D2D1_FEATURE, Void*, UInt32, HRESULT)
-    is_buffer_precision_supported : Proc(ID2D1EffectContext1*, D2D1_BUFFER_PRECISION, LibC::BOOL)
-    create_lookup_table3_d : Proc(ID2D1EffectContext1*, D2D1_BUFFER_PRECISION, UInt32*, UInt8*, UInt32, UInt32*, ID2D1LookupTable3D*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_dpi : UInt64
+    create_effect : UInt64
+    get_maximum_supported_feature_level : UInt64
+    create_transform_node_from_effect : UInt64
+    create_blend_transform : UInt64
+    create_border_transform : UInt64
+    create_offset_transform : UInt64
+    create_bounds_adjustment_transform : UInt64
+    load_pixel_shader : UInt64
+    load_vertex_shader : UInt64
+    load_compute_shader : UInt64
+    is_shader_loaded : UInt64
+    create_resource_texture : UInt64
+    find_resource_texture : UInt64
+    create_vertex_buffer : UInt64
+    find_vertex_buffer : UInt64
+    create_color_context : UInt64
+    create_color_context_from_filename : UInt64
+    create_color_context_from_wic_color_context : UInt64
+    check_feature_support : UInt64
+    is_buffer_precision_supported : UInt64
+    create_lookup_table3_d : UInt64
   end
 
   ID2D1EffectContext1_GUID = "84ab595a-fc81-4546-bacd-e8ef4d8abe7a"
@@ -5094,33 +5094,33 @@ lib LibWin32
   end
 
   struct ID2D1EffectContext2VTbl
-    query_interface : Proc(ID2D1EffectContext2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID2D1EffectContext2*, UInt32)
-    release : Proc(ID2D1EffectContext2*, UInt32)
-    get_dpi : Proc(ID2D1EffectContext2*, Float32*, Float32*, Void)
-    create_effect : Proc(ID2D1EffectContext2*, Guid*, ID2D1Effect*, HRESULT)
-    get_maximum_supported_feature_level : Proc(ID2D1EffectContext2*, D3D_FEATURE_LEVEL*, UInt32, D3D_FEATURE_LEVEL*, HRESULT)
-    create_transform_node_from_effect : Proc(ID2D1EffectContext2*, ID2D1Effect, ID2D1TransformNode*, HRESULT)
-    create_blend_transform : Proc(ID2D1EffectContext2*, UInt32, D2D1_BLEND_DESCRIPTION*, ID2D1BlendTransform*, HRESULT)
-    create_border_transform : Proc(ID2D1EffectContext2*, D2D1_EXTEND_MODE, D2D1_EXTEND_MODE, ID2D1BorderTransform*, HRESULT)
-    create_offset_transform : Proc(ID2D1EffectContext2*, POINT, ID2D1OffsetTransform*, HRESULT)
-    create_bounds_adjustment_transform : Proc(ID2D1EffectContext2*, RECT*, ID2D1BoundsAdjustmentTransform*, HRESULT)
-    load_pixel_shader : Proc(ID2D1EffectContext2*, Guid*, UInt8*, UInt32, HRESULT)
-    load_vertex_shader : Proc(ID2D1EffectContext2*, Guid*, UInt8*, UInt32, HRESULT)
-    load_compute_shader : Proc(ID2D1EffectContext2*, Guid*, UInt8*, UInt32, HRESULT)
-    is_shader_loaded : Proc(ID2D1EffectContext2*, Guid*, LibC::BOOL)
-    create_resource_texture : Proc(ID2D1EffectContext2*, Guid*, D2D1_RESOURCE_TEXTURE_PROPERTIES*, UInt8*, UInt32*, UInt32, ID2D1ResourceTexture*, HRESULT)
-    find_resource_texture : Proc(ID2D1EffectContext2*, Guid*, ID2D1ResourceTexture*, HRESULT)
-    create_vertex_buffer : Proc(ID2D1EffectContext2*, D2D1_VERTEX_BUFFER_PROPERTIES*, Guid*, D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES*, ID2D1VertexBuffer*, HRESULT)
-    find_vertex_buffer : Proc(ID2D1EffectContext2*, Guid*, ID2D1VertexBuffer*, HRESULT)
-    create_color_context : Proc(ID2D1EffectContext2*, D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_filename : Proc(ID2D1EffectContext2*, LibC::LPWSTR, ID2D1ColorContext*, HRESULT)
-    create_color_context_from_wic_color_context : Proc(ID2D1EffectContext2*, IWICColorContext, ID2D1ColorContext*, HRESULT)
-    check_feature_support : Proc(ID2D1EffectContext2*, D2D1_FEATURE, Void*, UInt32, HRESULT)
-    is_buffer_precision_supported : Proc(ID2D1EffectContext2*, D2D1_BUFFER_PRECISION, LibC::BOOL)
-    create_lookup_table3_d : Proc(ID2D1EffectContext2*, D2D1_BUFFER_PRECISION, UInt32*, UInt8*, UInt32, UInt32*, ID2D1LookupTable3D*, HRESULT)
-    create_color_context_from_dxgi_color_space : Proc(ID2D1EffectContext2*, DXGI_COLOR_SPACE_TYPE, ID2D1ColorContext1*, HRESULT)
-    create_color_context_from_simple_color_profile : Proc(ID2D1EffectContext2*, D2D1_SIMPLE_COLOR_PROFILE*, ID2D1ColorContext1*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_dpi : UInt64
+    create_effect : UInt64
+    get_maximum_supported_feature_level : UInt64
+    create_transform_node_from_effect : UInt64
+    create_blend_transform : UInt64
+    create_border_transform : UInt64
+    create_offset_transform : UInt64
+    create_bounds_adjustment_transform : UInt64
+    load_pixel_shader : UInt64
+    load_vertex_shader : UInt64
+    load_compute_shader : UInt64
+    is_shader_loaded : UInt64
+    create_resource_texture : UInt64
+    find_resource_texture : UInt64
+    create_vertex_buffer : UInt64
+    find_vertex_buffer : UInt64
+    create_color_context : UInt64
+    create_color_context_from_filename : UInt64
+    create_color_context_from_wic_color_context : UInt64
+    check_feature_support : UInt64
+    is_buffer_precision_supported : UInt64
+    create_lookup_table3_d : UInt64
+    create_color_context_from_dxgi_color_space : UInt64
+    create_color_context_from_simple_color_profile : UInt64
   end
 
   ID2D1EffectContext2_GUID = "577ad2a0-9fc7-4dda-8b18-dab810140052"
@@ -5134,10 +5134,10 @@ lib LibWin32
   fun D2D1CreateFactory(factorytype : D2D1_FACTORY_TYPE, riid : Guid*, pfactoryoptions : D2D1_FACTORY_OPTIONS*, ppifactory : Void**) : HRESULT
 
   # Params # angle : Float32 [In],center : D2D_POINT_2F [In],matrix : D2D_MATRIX_3X2_F* [In]
-  fun D2D1MakeRotateMatrix(angle : Float32, center : D2D_POINT_2F, matrix : D2D_MATRIX_3X2_F*)
+  fun D2D1MakeRotateMatrix(angle : Float32, center : D2D_POINT_2F, matrix : D2D_MATRIX_3X2_F*) : Void
 
   # Params # anglex : Float32 [In],angley : Float32 [In],center : D2D_POINT_2F [In],matrix : D2D_MATRIX_3X2_F* [In]
-  fun D2D1MakeSkewMatrix(anglex : Float32, angley : Float32, center : D2D_POINT_2F, matrix : D2D_MATRIX_3X2_F*)
+  fun D2D1MakeSkewMatrix(anglex : Float32, angley : Float32, center : D2D_POINT_2F, matrix : D2D_MATRIX_3X2_F*) : Void
 
   # Params # matrix : D2D_MATRIX_3X2_F* [In]
   fun D2D1IsMatrixInvertible(matrix : D2D_MATRIX_3X2_F*) : LibC::BOOL
@@ -5155,7 +5155,7 @@ lib LibWin32
   fun D2D1ConvertColorSpace(sourcecolorspace : D2D1_COLOR_SPACE, destinationcolorspace : D2D1_COLOR_SPACE, color : D2D1_COLOR_F*) : D2D1_COLOR_F
 
   # Params # angle : Float32 [In],s : Float32* [In],c : Float32* [In]
-  fun D2D1SinCos(angle : Float32, s : Float32*, c : Float32*)
+  fun D2D1SinCos(angle : Float32, s : Float32*, c : Float32*) : Void
 
   # Params # angle : Float32 [In]
   fun D2D1Tan(angle : Float32) : Float32
@@ -5167,5 +5167,7385 @@ lib LibWin32
   fun D2D1ComputeMaximumScaleFactor(matrix : D2D_MATRIX_3X2_F*) : Float32
 
   # Params # ppoint0 : D2D_POINT_2F* [In],ppoint1 : D2D_POINT_2F* [In],ppoint2 : D2D_POINT_2F* [In],ppoint3 : D2D_POINT_2F* [In],ppoint4 : D2D_POINT_2F* [In],ppoint5 : D2D_POINT_2F* [In],ppoint6 : D2D_POINT_2F* [In],ppoint7 : D2D_POINT_2F* [In],ppoint8 : D2D_POINT_2F* [In],ppoint9 : D2D_POINT_2F* [In],ppoint10 : D2D_POINT_2F* [In],ppoint11 : D2D_POINT_2F* [In],ptensorpoint11 : D2D_POINT_2F* [In],ptensorpoint12 : D2D_POINT_2F* [In],ptensorpoint21 : D2D_POINT_2F* [In],ptensorpoint22 : D2D_POINT_2F* [In]
-  fun D2D1GetGradientMeshInteriorPointsFromCoonsPatch(ppoint0 : D2D_POINT_2F*, ppoint1 : D2D_POINT_2F*, ppoint2 : D2D_POINT_2F*, ppoint3 : D2D_POINT_2F*, ppoint4 : D2D_POINT_2F*, ppoint5 : D2D_POINT_2F*, ppoint6 : D2D_POINT_2F*, ppoint7 : D2D_POINT_2F*, ppoint8 : D2D_POINT_2F*, ppoint9 : D2D_POINT_2F*, ppoint10 : D2D_POINT_2F*, ppoint11 : D2D_POINT_2F*, ptensorpoint11 : D2D_POINT_2F*, ptensorpoint12 : D2D_POINT_2F*, ptensorpoint21 : D2D_POINT_2F*, ptensorpoint22 : D2D_POINT_2F*)
+  fun D2D1GetGradientMeshInteriorPointsFromCoonsPatch(ppoint0 : D2D_POINT_2F*, ppoint1 : D2D_POINT_2F*, ppoint2 : D2D_POINT_2F*, ppoint3 : D2D_POINT_2F*, ppoint4 : D2D_POINT_2F*, ppoint5 : D2D_POINT_2F*, ppoint6 : D2D_POINT_2F*, ppoint7 : D2D_POINT_2F*, ppoint8 : D2D_POINT_2F*, ppoint9 : D2D_POINT_2F*, ppoint10 : D2D_POINT_2F*, ppoint11 : D2D_POINT_2F*, ptensorpoint11 : D2D_POINT_2F*, ptensorpoint12 : D2D_POINT_2F*, ptensorpoint21 : D2D_POINT_2F*, ptensorpoint22 : D2D_POINT_2F*) : Void
+end
+struct LibWin32::ID2D1Resource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+end
+struct LibWin32::ID2D1Image
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+end
+struct LibWin32::ID2D1Bitmap
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_size : D2D_SIZE_F
+    @lpVtbl.value.get_size.unsafe_as(Proc(D2D_SIZE_F)).call
+  end
+  def get_pixel_size : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.unsafe_as(Proc(D2D_SIZE_U)).call
+  end
+  def get_pixel_format : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(D2D1_PIXEL_FORMAT)).call
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def copy_from_bitmap(destpoint : D2D_POINT_2U*, bitmap : ID2D1Bitmap, srcrect : D2D_RECT_U*) : HRESULT
+    @lpVtbl.value.copy_from_bitmap.unsafe_as(Proc(D2D_POINT_2U*, ID2D1Bitmap, D2D_RECT_U*, HRESULT)).call(destpoint, bitmap, srcrect)
+  end
+  def copy_from_render_target(destpoint : D2D_POINT_2U*, rendertarget : ID2D1RenderTarget, srcrect : D2D_RECT_U*) : HRESULT
+    @lpVtbl.value.copy_from_render_target.unsafe_as(Proc(D2D_POINT_2U*, ID2D1RenderTarget, D2D_RECT_U*, HRESULT)).call(destpoint, rendertarget, srcrect)
+  end
+  def copy_from_memory(dstrect : D2D_RECT_U*, srcdata : Void*, pitch : UInt32) : HRESULT
+    @lpVtbl.value.copy_from_memory.unsafe_as(Proc(D2D_RECT_U*, Void*, UInt32, HRESULT)).call(dstrect, srcdata, pitch)
+  end
+end
+struct LibWin32::ID2D1GradientStopCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_gradient_stop_count : UInt32
+    @lpVtbl.value.get_gradient_stop_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_gradient_stops(gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32) : Void
+    @lpVtbl.value.get_gradient_stops.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, Void)).call(gradientstops, gradientstopscount)
+  end
+  def get_color_interpolation_gamma : D2D1_GAMMA
+    @lpVtbl.value.get_color_interpolation_gamma.unsafe_as(Proc(D2D1_GAMMA)).call
+  end
+  def get_extend_mode : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode.unsafe_as(Proc(D2D1_EXTEND_MODE)).call
+  end
+end
+struct LibWin32::ID2D1Brush
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def set_opacity(opacity : Float32) : Void
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, Void)).call(opacity)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_opacity : Float32
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32)).call
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+end
+struct LibWin32::ID2D1BitmapBrush
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def set_opacity(opacity : Float32) : Void
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, Void)).call(opacity)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_opacity : Float32
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32)).call
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_extend_mode_x(extendmodex : D2D1_EXTEND_MODE) : Void
+    @lpVtbl.value.set_extend_mode_x.unsafe_as(Proc(D2D1_EXTEND_MODE, Void)).call(extendmodex)
+  end
+  def set_extend_mode_y(extendmodey : D2D1_EXTEND_MODE) : Void
+    @lpVtbl.value.set_extend_mode_y.unsafe_as(Proc(D2D1_EXTEND_MODE, Void)).call(extendmodey)
+  end
+  def set_interpolation_mode(interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE) : Void
+    @lpVtbl.value.set_interpolation_mode.unsafe_as(Proc(D2D1_BITMAP_INTERPOLATION_MODE, Void)).call(interpolationmode)
+  end
+  def set_bitmap(bitmap : ID2D1Bitmap) : Void
+    @lpVtbl.value.set_bitmap.unsafe_as(Proc(ID2D1Bitmap, Void)).call(bitmap)
+  end
+  def get_extend_mode_x : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode_x.unsafe_as(Proc(D2D1_EXTEND_MODE)).call
+  end
+  def get_extend_mode_y : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode_y.unsafe_as(Proc(D2D1_EXTEND_MODE)).call
+  end
+  def get_interpolation_mode : D2D1_BITMAP_INTERPOLATION_MODE
+    @lpVtbl.value.get_interpolation_mode.unsafe_as(Proc(D2D1_BITMAP_INTERPOLATION_MODE)).call
+  end
+  def get_bitmap(bitmap : ID2D1Bitmap*) : Void
+    @lpVtbl.value.get_bitmap.unsafe_as(Proc(ID2D1Bitmap*, Void)).call(bitmap)
+  end
+end
+struct LibWin32::ID2D1SolidColorBrush
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def set_opacity(opacity : Float32) : Void
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, Void)).call(opacity)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_opacity : Float32
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32)).call
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_color(color : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.set_color.unsafe_as(Proc(D2D1_COLOR_F*, Void)).call(color)
+  end
+  def get_color : D2D1_COLOR_F
+    @lpVtbl.value.get_color.unsafe_as(Proc(D2D1_COLOR_F)).call
+  end
+end
+struct LibWin32::ID2D1LinearGradientBrush
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def set_opacity(opacity : Float32) : Void
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, Void)).call(opacity)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_opacity : Float32
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32)).call
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_start_point(startpoint : D2D_POINT_2F) : Void
+    @lpVtbl.value.set_start_point.unsafe_as(Proc(D2D_POINT_2F, Void)).call(startpoint)
+  end
+  def set_end_point(endpoint : D2D_POINT_2F) : Void
+    @lpVtbl.value.set_end_point.unsafe_as(Proc(D2D_POINT_2F, Void)).call(endpoint)
+  end
+  def get_start_point : D2D_POINT_2F
+    @lpVtbl.value.get_start_point.unsafe_as(Proc(D2D_POINT_2F)).call
+  end
+  def get_end_point : D2D_POINT_2F
+    @lpVtbl.value.get_end_point.unsafe_as(Proc(D2D_POINT_2F)).call
+  end
+  def get_gradient_stop_collection(gradientstopcollection : ID2D1GradientStopCollection*) : Void
+    @lpVtbl.value.get_gradient_stop_collection.unsafe_as(Proc(ID2D1GradientStopCollection*, Void)).call(gradientstopcollection)
+  end
+end
+struct LibWin32::ID2D1RadialGradientBrush
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def set_opacity(opacity : Float32) : Void
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, Void)).call(opacity)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_opacity : Float32
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32)).call
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_center(center : D2D_POINT_2F) : Void
+    @lpVtbl.value.set_center.unsafe_as(Proc(D2D_POINT_2F, Void)).call(center)
+  end
+  def set_gradient_origin_offset(gradientoriginoffset : D2D_POINT_2F) : Void
+    @lpVtbl.value.set_gradient_origin_offset.unsafe_as(Proc(D2D_POINT_2F, Void)).call(gradientoriginoffset)
+  end
+  def set_radius_x(radiusx : Float32) : Void
+    @lpVtbl.value.set_radius_x.unsafe_as(Proc(Float32, Void)).call(radiusx)
+  end
+  def set_radius_y(radiusy : Float32) : Void
+    @lpVtbl.value.set_radius_y.unsafe_as(Proc(Float32, Void)).call(radiusy)
+  end
+  def get_center : D2D_POINT_2F
+    @lpVtbl.value.get_center.unsafe_as(Proc(D2D_POINT_2F)).call
+  end
+  def get_gradient_origin_offset : D2D_POINT_2F
+    @lpVtbl.value.get_gradient_origin_offset.unsafe_as(Proc(D2D_POINT_2F)).call
+  end
+  def get_radius_x : Float32
+    @lpVtbl.value.get_radius_x.unsafe_as(Proc(Float32)).call
+  end
+  def get_radius_y : Float32
+    @lpVtbl.value.get_radius_y.unsafe_as(Proc(Float32)).call
+  end
+  def get_gradient_stop_collection(gradientstopcollection : ID2D1GradientStopCollection*) : Void
+    @lpVtbl.value.get_gradient_stop_collection.unsafe_as(Proc(ID2D1GradientStopCollection*, Void)).call(gradientstopcollection)
+  end
+end
+struct LibWin32::ID2D1StrokeStyle
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_start_cap : D2D1_CAP_STYLE
+    @lpVtbl.value.get_start_cap.unsafe_as(Proc(D2D1_CAP_STYLE)).call
+  end
+  def get_end_cap : D2D1_CAP_STYLE
+    @lpVtbl.value.get_end_cap.unsafe_as(Proc(D2D1_CAP_STYLE)).call
+  end
+  def get_dash_cap : D2D1_CAP_STYLE
+    @lpVtbl.value.get_dash_cap.unsafe_as(Proc(D2D1_CAP_STYLE)).call
+  end
+  def get_miter_limit : Float32
+    @lpVtbl.value.get_miter_limit.unsafe_as(Proc(Float32)).call
+  end
+  def get_line_join : D2D1_LINE_JOIN
+    @lpVtbl.value.get_line_join.unsafe_as(Proc(D2D1_LINE_JOIN)).call
+  end
+  def get_dash_offset : Float32
+    @lpVtbl.value.get_dash_offset.unsafe_as(Proc(Float32)).call
+  end
+  def get_dash_style : D2D1_DASH_STYLE
+    @lpVtbl.value.get_dash_style.unsafe_as(Proc(D2D1_DASH_STYLE)).call
+  end
+  def get_dashes_count : UInt32
+    @lpVtbl.value.get_dashes_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_dashes(dashes : Float32*, dashescount : UInt32) : Void
+    @lpVtbl.value.get_dashes.unsafe_as(Proc(Float32*, UInt32, Void)).call(dashes, dashescount)
+  end
+end
+struct LibWin32::ID2D1Geometry
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_bounds(worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.unsafe_as(Proc(D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)).call(worldtransform, bounds)
+  end
+  def get_widened_bounds(strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_widened_bounds.unsafe_as(Proc(Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, D2D_RECT_F*, HRESULT)).call(strokewidth, strokestyle, worldtransform, flatteningtolerance, bounds)
+  end
+  def stroke_contains_point(point : D2D_POINT_2F, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.stroke_contains_point.unsafe_as(Proc(D2D_POINT_2F, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)).call(point, strokewidth, strokestyle, worldtransform, flatteningtolerance, contains)
+  end
+  def fill_contains_point(point : D2D_POINT_2F, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_contains_point.unsafe_as(Proc(D2D_POINT_2F, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)).call(point, worldtransform, flatteningtolerance, contains)
+  end
+  def compare_with_geometry(inputgeometry : ID2D1Geometry, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, relation : D2D1_GEOMETRY_RELATION*) : HRESULT
+    @lpVtbl.value.compare_with_geometry.unsafe_as(Proc(ID2D1Geometry, D2D_MATRIX_3X2_F*, Float32, D2D1_GEOMETRY_RELATION*, HRESULT)).call(inputgeometry, inputgeometrytransform, flatteningtolerance, relation)
+  end
+  def simplify(simplificationoption : D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.simplify.unsafe_as(Proc(D2D1_GEOMETRY_SIMPLIFICATION_OPTION, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(simplificationoption, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def tessellate(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, tessellationsink : ID2D1TessellationSink) : HRESULT
+    @lpVtbl.value.tessellate.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, ID2D1TessellationSink, HRESULT)).call(worldtransform, flatteningtolerance, tessellationsink)
+  end
+  def combine_with_geometry(inputgeometry : ID2D1Geometry, combinemode : D2D1_COMBINE_MODE, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.combine_with_geometry.unsafe_as(Proc(ID2D1Geometry, D2D1_COMBINE_MODE, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(inputgeometry, combinemode, inputgeometrytransform, flatteningtolerance, geometrysink)
+  end
+  def outline(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.outline.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(worldtransform, flatteningtolerance, geometrysink)
+  end
+  def compute_area(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, area : Float32*) : HRESULT
+    @lpVtbl.value.compute_area.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)).call(worldtransform, flatteningtolerance, area)
+  end
+  def compute_length(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, length : Float32*) : HRESULT
+    @lpVtbl.value.compute_length.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)).call(worldtransform, flatteningtolerance, length)
+  end
+  def compute_point_at_length(length : Float32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, point : D2D_POINT_2F*, unittangentvector : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_point_at_length.unsafe_as(Proc(Float32, D2D_MATRIX_3X2_F*, Float32, D2D_POINT_2F*, D2D_POINT_2F*, HRESULT)).call(length, worldtransform, flatteningtolerance, point, unittangentvector)
+  end
+  def widen(strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.widen.unsafe_as(Proc(Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(strokewidth, strokestyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+end
+struct LibWin32::ID2D1RectangleGeometry
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_bounds(worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.unsafe_as(Proc(D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)).call(worldtransform, bounds)
+  end
+  def get_widened_bounds(strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_widened_bounds.unsafe_as(Proc(Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, D2D_RECT_F*, HRESULT)).call(strokewidth, strokestyle, worldtransform, flatteningtolerance, bounds)
+  end
+  def stroke_contains_point(point : D2D_POINT_2F, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.stroke_contains_point.unsafe_as(Proc(D2D_POINT_2F, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)).call(point, strokewidth, strokestyle, worldtransform, flatteningtolerance, contains)
+  end
+  def fill_contains_point(point : D2D_POINT_2F, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_contains_point.unsafe_as(Proc(D2D_POINT_2F, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)).call(point, worldtransform, flatteningtolerance, contains)
+  end
+  def compare_with_geometry(inputgeometry : ID2D1Geometry, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, relation : D2D1_GEOMETRY_RELATION*) : HRESULT
+    @lpVtbl.value.compare_with_geometry.unsafe_as(Proc(ID2D1Geometry, D2D_MATRIX_3X2_F*, Float32, D2D1_GEOMETRY_RELATION*, HRESULT)).call(inputgeometry, inputgeometrytransform, flatteningtolerance, relation)
+  end
+  def simplify(simplificationoption : D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.simplify.unsafe_as(Proc(D2D1_GEOMETRY_SIMPLIFICATION_OPTION, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(simplificationoption, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def tessellate(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, tessellationsink : ID2D1TessellationSink) : HRESULT
+    @lpVtbl.value.tessellate.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, ID2D1TessellationSink, HRESULT)).call(worldtransform, flatteningtolerance, tessellationsink)
+  end
+  def combine_with_geometry(inputgeometry : ID2D1Geometry, combinemode : D2D1_COMBINE_MODE, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.combine_with_geometry.unsafe_as(Proc(ID2D1Geometry, D2D1_COMBINE_MODE, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(inputgeometry, combinemode, inputgeometrytransform, flatteningtolerance, geometrysink)
+  end
+  def outline(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.outline.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(worldtransform, flatteningtolerance, geometrysink)
+  end
+  def compute_area(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, area : Float32*) : HRESULT
+    @lpVtbl.value.compute_area.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)).call(worldtransform, flatteningtolerance, area)
+  end
+  def compute_length(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, length : Float32*) : HRESULT
+    @lpVtbl.value.compute_length.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)).call(worldtransform, flatteningtolerance, length)
+  end
+  def compute_point_at_length(length : Float32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, point : D2D_POINT_2F*, unittangentvector : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_point_at_length.unsafe_as(Proc(Float32, D2D_MATRIX_3X2_F*, Float32, D2D_POINT_2F*, D2D_POINT_2F*, HRESULT)).call(length, worldtransform, flatteningtolerance, point, unittangentvector)
+  end
+  def widen(strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.widen.unsafe_as(Proc(Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(strokewidth, strokestyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def get_rect(rect : D2D_RECT_F*) : Void
+    @lpVtbl.value.get_rect.unsafe_as(Proc(D2D_RECT_F*, Void)).call(rect)
+  end
+end
+struct LibWin32::ID2D1RoundedRectangleGeometry
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_bounds(worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.unsafe_as(Proc(D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)).call(worldtransform, bounds)
+  end
+  def get_widened_bounds(strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_widened_bounds.unsafe_as(Proc(Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, D2D_RECT_F*, HRESULT)).call(strokewidth, strokestyle, worldtransform, flatteningtolerance, bounds)
+  end
+  def stroke_contains_point(point : D2D_POINT_2F, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.stroke_contains_point.unsafe_as(Proc(D2D_POINT_2F, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)).call(point, strokewidth, strokestyle, worldtransform, flatteningtolerance, contains)
+  end
+  def fill_contains_point(point : D2D_POINT_2F, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_contains_point.unsafe_as(Proc(D2D_POINT_2F, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)).call(point, worldtransform, flatteningtolerance, contains)
+  end
+  def compare_with_geometry(inputgeometry : ID2D1Geometry, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, relation : D2D1_GEOMETRY_RELATION*) : HRESULT
+    @lpVtbl.value.compare_with_geometry.unsafe_as(Proc(ID2D1Geometry, D2D_MATRIX_3X2_F*, Float32, D2D1_GEOMETRY_RELATION*, HRESULT)).call(inputgeometry, inputgeometrytransform, flatteningtolerance, relation)
+  end
+  def simplify(simplificationoption : D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.simplify.unsafe_as(Proc(D2D1_GEOMETRY_SIMPLIFICATION_OPTION, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(simplificationoption, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def tessellate(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, tessellationsink : ID2D1TessellationSink) : HRESULT
+    @lpVtbl.value.tessellate.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, ID2D1TessellationSink, HRESULT)).call(worldtransform, flatteningtolerance, tessellationsink)
+  end
+  def combine_with_geometry(inputgeometry : ID2D1Geometry, combinemode : D2D1_COMBINE_MODE, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.combine_with_geometry.unsafe_as(Proc(ID2D1Geometry, D2D1_COMBINE_MODE, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(inputgeometry, combinemode, inputgeometrytransform, flatteningtolerance, geometrysink)
+  end
+  def outline(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.outline.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(worldtransform, flatteningtolerance, geometrysink)
+  end
+  def compute_area(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, area : Float32*) : HRESULT
+    @lpVtbl.value.compute_area.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)).call(worldtransform, flatteningtolerance, area)
+  end
+  def compute_length(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, length : Float32*) : HRESULT
+    @lpVtbl.value.compute_length.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)).call(worldtransform, flatteningtolerance, length)
+  end
+  def compute_point_at_length(length : Float32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, point : D2D_POINT_2F*, unittangentvector : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_point_at_length.unsafe_as(Proc(Float32, D2D_MATRIX_3X2_F*, Float32, D2D_POINT_2F*, D2D_POINT_2F*, HRESULT)).call(length, worldtransform, flatteningtolerance, point, unittangentvector)
+  end
+  def widen(strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.widen.unsafe_as(Proc(Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(strokewidth, strokestyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def get_rounded_rect(roundedrect : D2D1_ROUNDED_RECT*) : Void
+    @lpVtbl.value.get_rounded_rect.unsafe_as(Proc(D2D1_ROUNDED_RECT*, Void)).call(roundedrect)
+  end
+end
+struct LibWin32::ID2D1EllipseGeometry
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_bounds(worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.unsafe_as(Proc(D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)).call(worldtransform, bounds)
+  end
+  def get_widened_bounds(strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_widened_bounds.unsafe_as(Proc(Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, D2D_RECT_F*, HRESULT)).call(strokewidth, strokestyle, worldtransform, flatteningtolerance, bounds)
+  end
+  def stroke_contains_point(point : D2D_POINT_2F, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.stroke_contains_point.unsafe_as(Proc(D2D_POINT_2F, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)).call(point, strokewidth, strokestyle, worldtransform, flatteningtolerance, contains)
+  end
+  def fill_contains_point(point : D2D_POINT_2F, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_contains_point.unsafe_as(Proc(D2D_POINT_2F, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)).call(point, worldtransform, flatteningtolerance, contains)
+  end
+  def compare_with_geometry(inputgeometry : ID2D1Geometry, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, relation : D2D1_GEOMETRY_RELATION*) : HRESULT
+    @lpVtbl.value.compare_with_geometry.unsafe_as(Proc(ID2D1Geometry, D2D_MATRIX_3X2_F*, Float32, D2D1_GEOMETRY_RELATION*, HRESULT)).call(inputgeometry, inputgeometrytransform, flatteningtolerance, relation)
+  end
+  def simplify(simplificationoption : D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.simplify.unsafe_as(Proc(D2D1_GEOMETRY_SIMPLIFICATION_OPTION, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(simplificationoption, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def tessellate(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, tessellationsink : ID2D1TessellationSink) : HRESULT
+    @lpVtbl.value.tessellate.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, ID2D1TessellationSink, HRESULT)).call(worldtransform, flatteningtolerance, tessellationsink)
+  end
+  def combine_with_geometry(inputgeometry : ID2D1Geometry, combinemode : D2D1_COMBINE_MODE, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.combine_with_geometry.unsafe_as(Proc(ID2D1Geometry, D2D1_COMBINE_MODE, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(inputgeometry, combinemode, inputgeometrytransform, flatteningtolerance, geometrysink)
+  end
+  def outline(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.outline.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(worldtransform, flatteningtolerance, geometrysink)
+  end
+  def compute_area(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, area : Float32*) : HRESULT
+    @lpVtbl.value.compute_area.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)).call(worldtransform, flatteningtolerance, area)
+  end
+  def compute_length(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, length : Float32*) : HRESULT
+    @lpVtbl.value.compute_length.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)).call(worldtransform, flatteningtolerance, length)
+  end
+  def compute_point_at_length(length : Float32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, point : D2D_POINT_2F*, unittangentvector : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_point_at_length.unsafe_as(Proc(Float32, D2D_MATRIX_3X2_F*, Float32, D2D_POINT_2F*, D2D_POINT_2F*, HRESULT)).call(length, worldtransform, flatteningtolerance, point, unittangentvector)
+  end
+  def widen(strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.widen.unsafe_as(Proc(Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(strokewidth, strokestyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def get_ellipse(ellipse : D2D1_ELLIPSE*) : Void
+    @lpVtbl.value.get_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, Void)).call(ellipse)
+  end
+end
+struct LibWin32::ID2D1GeometryGroup
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_bounds(worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.unsafe_as(Proc(D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)).call(worldtransform, bounds)
+  end
+  def get_widened_bounds(strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_widened_bounds.unsafe_as(Proc(Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, D2D_RECT_F*, HRESULT)).call(strokewidth, strokestyle, worldtransform, flatteningtolerance, bounds)
+  end
+  def stroke_contains_point(point : D2D_POINT_2F, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.stroke_contains_point.unsafe_as(Proc(D2D_POINT_2F, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)).call(point, strokewidth, strokestyle, worldtransform, flatteningtolerance, contains)
+  end
+  def fill_contains_point(point : D2D_POINT_2F, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_contains_point.unsafe_as(Proc(D2D_POINT_2F, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)).call(point, worldtransform, flatteningtolerance, contains)
+  end
+  def compare_with_geometry(inputgeometry : ID2D1Geometry, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, relation : D2D1_GEOMETRY_RELATION*) : HRESULT
+    @lpVtbl.value.compare_with_geometry.unsafe_as(Proc(ID2D1Geometry, D2D_MATRIX_3X2_F*, Float32, D2D1_GEOMETRY_RELATION*, HRESULT)).call(inputgeometry, inputgeometrytransform, flatteningtolerance, relation)
+  end
+  def simplify(simplificationoption : D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.simplify.unsafe_as(Proc(D2D1_GEOMETRY_SIMPLIFICATION_OPTION, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(simplificationoption, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def tessellate(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, tessellationsink : ID2D1TessellationSink) : HRESULT
+    @lpVtbl.value.tessellate.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, ID2D1TessellationSink, HRESULT)).call(worldtransform, flatteningtolerance, tessellationsink)
+  end
+  def combine_with_geometry(inputgeometry : ID2D1Geometry, combinemode : D2D1_COMBINE_MODE, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.combine_with_geometry.unsafe_as(Proc(ID2D1Geometry, D2D1_COMBINE_MODE, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(inputgeometry, combinemode, inputgeometrytransform, flatteningtolerance, geometrysink)
+  end
+  def outline(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.outline.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(worldtransform, flatteningtolerance, geometrysink)
+  end
+  def compute_area(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, area : Float32*) : HRESULT
+    @lpVtbl.value.compute_area.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)).call(worldtransform, flatteningtolerance, area)
+  end
+  def compute_length(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, length : Float32*) : HRESULT
+    @lpVtbl.value.compute_length.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)).call(worldtransform, flatteningtolerance, length)
+  end
+  def compute_point_at_length(length : Float32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, point : D2D_POINT_2F*, unittangentvector : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_point_at_length.unsafe_as(Proc(Float32, D2D_MATRIX_3X2_F*, Float32, D2D_POINT_2F*, D2D_POINT_2F*, HRESULT)).call(length, worldtransform, flatteningtolerance, point, unittangentvector)
+  end
+  def widen(strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.widen.unsafe_as(Proc(Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(strokewidth, strokestyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def get_fill_mode : D2D1_FILL_MODE
+    @lpVtbl.value.get_fill_mode.unsafe_as(Proc(D2D1_FILL_MODE)).call
+  end
+  def get_source_geometry_count : UInt32
+    @lpVtbl.value.get_source_geometry_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_source_geometries(geometries : ID2D1Geometry*, geometriescount : UInt32) : Void
+    @lpVtbl.value.get_source_geometries.unsafe_as(Proc(ID2D1Geometry*, UInt32, Void)).call(geometries, geometriescount)
+  end
+end
+struct LibWin32::ID2D1TransformedGeometry
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_bounds(worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.unsafe_as(Proc(D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)).call(worldtransform, bounds)
+  end
+  def get_widened_bounds(strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_widened_bounds.unsafe_as(Proc(Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, D2D_RECT_F*, HRESULT)).call(strokewidth, strokestyle, worldtransform, flatteningtolerance, bounds)
+  end
+  def stroke_contains_point(point : D2D_POINT_2F, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.stroke_contains_point.unsafe_as(Proc(D2D_POINT_2F, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)).call(point, strokewidth, strokestyle, worldtransform, flatteningtolerance, contains)
+  end
+  def fill_contains_point(point : D2D_POINT_2F, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_contains_point.unsafe_as(Proc(D2D_POINT_2F, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)).call(point, worldtransform, flatteningtolerance, contains)
+  end
+  def compare_with_geometry(inputgeometry : ID2D1Geometry, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, relation : D2D1_GEOMETRY_RELATION*) : HRESULT
+    @lpVtbl.value.compare_with_geometry.unsafe_as(Proc(ID2D1Geometry, D2D_MATRIX_3X2_F*, Float32, D2D1_GEOMETRY_RELATION*, HRESULT)).call(inputgeometry, inputgeometrytransform, flatteningtolerance, relation)
+  end
+  def simplify(simplificationoption : D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.simplify.unsafe_as(Proc(D2D1_GEOMETRY_SIMPLIFICATION_OPTION, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(simplificationoption, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def tessellate(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, tessellationsink : ID2D1TessellationSink) : HRESULT
+    @lpVtbl.value.tessellate.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, ID2D1TessellationSink, HRESULT)).call(worldtransform, flatteningtolerance, tessellationsink)
+  end
+  def combine_with_geometry(inputgeometry : ID2D1Geometry, combinemode : D2D1_COMBINE_MODE, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.combine_with_geometry.unsafe_as(Proc(ID2D1Geometry, D2D1_COMBINE_MODE, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(inputgeometry, combinemode, inputgeometrytransform, flatteningtolerance, geometrysink)
+  end
+  def outline(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.outline.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(worldtransform, flatteningtolerance, geometrysink)
+  end
+  def compute_area(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, area : Float32*) : HRESULT
+    @lpVtbl.value.compute_area.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)).call(worldtransform, flatteningtolerance, area)
+  end
+  def compute_length(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, length : Float32*) : HRESULT
+    @lpVtbl.value.compute_length.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)).call(worldtransform, flatteningtolerance, length)
+  end
+  def compute_point_at_length(length : Float32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, point : D2D_POINT_2F*, unittangentvector : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_point_at_length.unsafe_as(Proc(Float32, D2D_MATRIX_3X2_F*, Float32, D2D_POINT_2F*, D2D_POINT_2F*, HRESULT)).call(length, worldtransform, flatteningtolerance, point, unittangentvector)
+  end
+  def widen(strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.widen.unsafe_as(Proc(Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(strokewidth, strokestyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def get_source_geometry(sourcegeometry : ID2D1Geometry*) : Void
+    @lpVtbl.value.get_source_geometry.unsafe_as(Proc(ID2D1Geometry*, Void)).call(sourcegeometry)
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+end
+struct LibWin32::ID2D1GeometrySink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_fill_mode(fillmode : D2D1_FILL_MODE) : Void
+    @lpVtbl.value.set_fill_mode.unsafe_as(Proc(D2D1_FILL_MODE, Void)).call(fillmode)
+  end
+  def set_segment_flags(vertexflags : D2D1_PATH_SEGMENT) : Void
+    @lpVtbl.value.set_segment_flags.unsafe_as(Proc(D2D1_PATH_SEGMENT, Void)).call(vertexflags)
+  end
+  def begin_figure(startpoint : D2D_POINT_2F, figurebegin : D2D1_FIGURE_BEGIN) : Void
+    @lpVtbl.value.begin_figure.unsafe_as(Proc(D2D_POINT_2F, D2D1_FIGURE_BEGIN, Void)).call(startpoint, figurebegin)
+  end
+  def add_lines(points : D2D_POINT_2F*, pointscount : UInt32) : Void
+    @lpVtbl.value.add_lines.unsafe_as(Proc(D2D_POINT_2F*, UInt32, Void)).call(points, pointscount)
+  end
+  def add_beziers(beziers : D2D1_BEZIER_SEGMENT*, bezierscount : UInt32) : Void
+    @lpVtbl.value.add_beziers.unsafe_as(Proc(D2D1_BEZIER_SEGMENT*, UInt32, Void)).call(beziers, bezierscount)
+  end
+  def end_figure(figureend : D2D1_FIGURE_END) : Void
+    @lpVtbl.value.end_figure.unsafe_as(Proc(D2D1_FIGURE_END, Void)).call(figureend)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def add_line(point : D2D_POINT_2F) : Void
+    @lpVtbl.value.add_line.unsafe_as(Proc(D2D_POINT_2F, Void)).call(point)
+  end
+  def add_bezier(bezier : D2D1_BEZIER_SEGMENT*) : Void
+    @lpVtbl.value.add_bezier.unsafe_as(Proc(D2D1_BEZIER_SEGMENT*, Void)).call(bezier)
+  end
+  def add_quadratic_bezier(bezier : D2D1_QUADRATIC_BEZIER_SEGMENT*) : Void
+    @lpVtbl.value.add_quadratic_bezier.unsafe_as(Proc(D2D1_QUADRATIC_BEZIER_SEGMENT*, Void)).call(bezier)
+  end
+  def add_quadratic_beziers(beziers : D2D1_QUADRATIC_BEZIER_SEGMENT*, bezierscount : UInt32) : Void
+    @lpVtbl.value.add_quadratic_beziers.unsafe_as(Proc(D2D1_QUADRATIC_BEZIER_SEGMENT*, UInt32, Void)).call(beziers, bezierscount)
+  end
+  def add_arc(arc : D2D1_ARC_SEGMENT*) : Void
+    @lpVtbl.value.add_arc.unsafe_as(Proc(D2D1_ARC_SEGMENT*, Void)).call(arc)
+  end
+end
+struct LibWin32::ID2D1TessellationSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_triangles(triangles : D2D1_TRIANGLE*, trianglescount : UInt32) : Void
+    @lpVtbl.value.add_triangles.unsafe_as(Proc(D2D1_TRIANGLE*, UInt32, Void)).call(triangles, trianglescount)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ID2D1PathGeometry
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_bounds(worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.unsafe_as(Proc(D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)).call(worldtransform, bounds)
+  end
+  def get_widened_bounds(strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_widened_bounds.unsafe_as(Proc(Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, D2D_RECT_F*, HRESULT)).call(strokewidth, strokestyle, worldtransform, flatteningtolerance, bounds)
+  end
+  def stroke_contains_point(point : D2D_POINT_2F, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.stroke_contains_point.unsafe_as(Proc(D2D_POINT_2F, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)).call(point, strokewidth, strokestyle, worldtransform, flatteningtolerance, contains)
+  end
+  def fill_contains_point(point : D2D_POINT_2F, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_contains_point.unsafe_as(Proc(D2D_POINT_2F, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)).call(point, worldtransform, flatteningtolerance, contains)
+  end
+  def compare_with_geometry(inputgeometry : ID2D1Geometry, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, relation : D2D1_GEOMETRY_RELATION*) : HRESULT
+    @lpVtbl.value.compare_with_geometry.unsafe_as(Proc(ID2D1Geometry, D2D_MATRIX_3X2_F*, Float32, D2D1_GEOMETRY_RELATION*, HRESULT)).call(inputgeometry, inputgeometrytransform, flatteningtolerance, relation)
+  end
+  def simplify(simplificationoption : D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.simplify.unsafe_as(Proc(D2D1_GEOMETRY_SIMPLIFICATION_OPTION, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(simplificationoption, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def tessellate(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, tessellationsink : ID2D1TessellationSink) : HRESULT
+    @lpVtbl.value.tessellate.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, ID2D1TessellationSink, HRESULT)).call(worldtransform, flatteningtolerance, tessellationsink)
+  end
+  def combine_with_geometry(inputgeometry : ID2D1Geometry, combinemode : D2D1_COMBINE_MODE, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.combine_with_geometry.unsafe_as(Proc(ID2D1Geometry, D2D1_COMBINE_MODE, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(inputgeometry, combinemode, inputgeometrytransform, flatteningtolerance, geometrysink)
+  end
+  def outline(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.outline.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(worldtransform, flatteningtolerance, geometrysink)
+  end
+  def compute_area(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, area : Float32*) : HRESULT
+    @lpVtbl.value.compute_area.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)).call(worldtransform, flatteningtolerance, area)
+  end
+  def compute_length(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, length : Float32*) : HRESULT
+    @lpVtbl.value.compute_length.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)).call(worldtransform, flatteningtolerance, length)
+  end
+  def compute_point_at_length(length : Float32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, point : D2D_POINT_2F*, unittangentvector : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_point_at_length.unsafe_as(Proc(Float32, D2D_MATRIX_3X2_F*, Float32, D2D_POINT_2F*, D2D_POINT_2F*, HRESULT)).call(length, worldtransform, flatteningtolerance, point, unittangentvector)
+  end
+  def widen(strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.widen.unsafe_as(Proc(Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(strokewidth, strokestyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def open(geometrysink : ID2D1GeometrySink*) : HRESULT
+    @lpVtbl.value.open.unsafe_as(Proc(ID2D1GeometrySink*, HRESULT)).call(geometrysink)
+  end
+  def stream(geometrysink : ID2D1GeometrySink) : HRESULT
+    @lpVtbl.value.stream.unsafe_as(Proc(ID2D1GeometrySink, HRESULT)).call(geometrysink)
+  end
+  def get_segment_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_segment_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_figure_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_figure_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+end
+struct LibWin32::ID2D1Mesh
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def open(tessellationsink : ID2D1TessellationSink*) : HRESULT
+    @lpVtbl.value.open.unsafe_as(Proc(ID2D1TessellationSink*, HRESULT)).call(tessellationsink)
+  end
+end
+struct LibWin32::ID2D1Layer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_size : D2D_SIZE_F
+    @lpVtbl.value.get_size.unsafe_as(Proc(D2D_SIZE_F)).call
+  end
+end
+struct LibWin32::ID2D1DrawingStateBlock
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_description(statedescription : D2D1_DRAWING_STATE_DESCRIPTION*) : Void
+    @lpVtbl.value.get_description.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION*, Void)).call(statedescription)
+  end
+  def set_description(statedescription : D2D1_DRAWING_STATE_DESCRIPTION*) : Void
+    @lpVtbl.value.set_description.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION*, Void)).call(statedescription)
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, Void)).call(textrenderingparams)
+  end
+  def get_text_rendering_params(textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, Void)).call(textrenderingparams)
+  end
+end
+struct LibWin32::ID2D1RenderTarget
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_bitmap(size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.unsafe_as(Proc(Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.unsafe_as(Proc(D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)).call(color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)).call(gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.unsafe_as(Proc(D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)).call(lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.unsafe_as(Proc(D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)).call(radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.unsafe_as(Proc(D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)).call(desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.unsafe_as(Proc(D2D_SIZE_F*, ID2D1Layer*, HRESULT)).call(size, layer)
+  end
+  def create_mesh(mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.unsafe_as(Proc(ID2D1Mesh*, HRESULT)).call(mesh)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Void)).call(rect, brush)
+  end
+  def draw_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Void)).call(roundedrect, brush)
+  end
+  def draw_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Void)).call(ellipse, brush)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)).call(geometry, brush, opacitybrush)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, Void)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)).call(string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.unsafe_as(Proc(D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)).call(origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, Void)).call(antialiasmode)
+  end
+  def get_antialias_mode : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE)).call
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, Void)).call(textantialiasmode)
+  end
+  def get_text_antialias_mode : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE)).call
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, Void)).call(textrenderingparams)
+  end
+  def get_text_rendering_params(textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, Void)).call(textrenderingparams)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, Void)).call(tag1, tag2)
+  end
+  def get_tags(tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.unsafe_as(Proc(UInt64*, UInt64*, Void)).call(tag1, tag2)
+  end
+  def push_layer(layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def pop_layer : Void
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(Void)).call
+  end
+  def flush(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def save_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def restore_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)).call(cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip : Void
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(Void)).call
+  end
+  def clear(clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, Void)).call(clearcolor)
+  end
+  def begin_draw : Void
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(Void)).call
+  end
+  def end_draw(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def get_pixel_format : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(D2D1_PIXEL_FORMAT)).call
+  end
+  def set_dpi(dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.unsafe_as(Proc(Float32, Float32, Void)).call(dpix, dpiy)
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def get_size : D2D_SIZE_F
+    @lpVtbl.value.get_size.unsafe_as(Proc(D2D_SIZE_F)).call
+  end
+  def get_pixel_size : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.unsafe_as(Proc(D2D_SIZE_U)).call
+  end
+  def get_maximum_bitmap_size : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.unsafe_as(Proc(UInt32)).call
+  end
+  def is_supported(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)).call(rendertargetproperties)
+  end
+end
+struct LibWin32::ID2D1BitmapRenderTarget
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_bitmap(size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.unsafe_as(Proc(Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.unsafe_as(Proc(D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)).call(color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)).call(gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.unsafe_as(Proc(D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)).call(lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.unsafe_as(Proc(D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)).call(radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.unsafe_as(Proc(D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)).call(desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.unsafe_as(Proc(D2D_SIZE_F*, ID2D1Layer*, HRESULT)).call(size, layer)
+  end
+  def create_mesh(mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.unsafe_as(Proc(ID2D1Mesh*, HRESULT)).call(mesh)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Void)).call(rect, brush)
+  end
+  def draw_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Void)).call(roundedrect, brush)
+  end
+  def draw_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Void)).call(ellipse, brush)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)).call(geometry, brush, opacitybrush)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, Void)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)).call(string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.unsafe_as(Proc(D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)).call(origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, Void)).call(antialiasmode)
+  end
+  def get_antialias_mode : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE)).call
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, Void)).call(textantialiasmode)
+  end
+  def get_text_antialias_mode : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE)).call
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, Void)).call(textrenderingparams)
+  end
+  def get_text_rendering_params(textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, Void)).call(textrenderingparams)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, Void)).call(tag1, tag2)
+  end
+  def get_tags(tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.unsafe_as(Proc(UInt64*, UInt64*, Void)).call(tag1, tag2)
+  end
+  def push_layer(layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def pop_layer : Void
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(Void)).call
+  end
+  def flush(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def save_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def restore_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)).call(cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip : Void
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(Void)).call
+  end
+  def clear(clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, Void)).call(clearcolor)
+  end
+  def begin_draw : Void
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(Void)).call
+  end
+  def end_draw(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def get_pixel_format : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(D2D1_PIXEL_FORMAT)).call
+  end
+  def set_dpi(dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.unsafe_as(Proc(Float32, Float32, Void)).call(dpix, dpiy)
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def get_size : D2D_SIZE_F
+    @lpVtbl.value.get_size.unsafe_as(Proc(D2D_SIZE_F)).call
+  end
+  def get_pixel_size : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.unsafe_as(Proc(D2D_SIZE_U)).call
+  end
+  def get_maximum_bitmap_size : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.unsafe_as(Proc(UInt32)).call
+  end
+  def is_supported(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)).call(rendertargetproperties)
+  end
+  def get_bitmap(bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.get_bitmap.unsafe_as(Proc(ID2D1Bitmap*, HRESULT)).call(bitmap)
+  end
+end
+struct LibWin32::ID2D1HwndRenderTarget
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_bitmap(size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.unsafe_as(Proc(Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.unsafe_as(Proc(D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)).call(color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)).call(gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.unsafe_as(Proc(D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)).call(lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.unsafe_as(Proc(D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)).call(radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.unsafe_as(Proc(D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)).call(desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.unsafe_as(Proc(D2D_SIZE_F*, ID2D1Layer*, HRESULT)).call(size, layer)
+  end
+  def create_mesh(mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.unsafe_as(Proc(ID2D1Mesh*, HRESULT)).call(mesh)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Void)).call(rect, brush)
+  end
+  def draw_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Void)).call(roundedrect, brush)
+  end
+  def draw_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Void)).call(ellipse, brush)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)).call(geometry, brush, opacitybrush)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, Void)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)).call(string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.unsafe_as(Proc(D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)).call(origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, Void)).call(antialiasmode)
+  end
+  def get_antialias_mode : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE)).call
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, Void)).call(textantialiasmode)
+  end
+  def get_text_antialias_mode : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE)).call
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, Void)).call(textrenderingparams)
+  end
+  def get_text_rendering_params(textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, Void)).call(textrenderingparams)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, Void)).call(tag1, tag2)
+  end
+  def get_tags(tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.unsafe_as(Proc(UInt64*, UInt64*, Void)).call(tag1, tag2)
+  end
+  def push_layer(layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def pop_layer : Void
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(Void)).call
+  end
+  def flush(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def save_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def restore_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)).call(cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip : Void
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(Void)).call
+  end
+  def clear(clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, Void)).call(clearcolor)
+  end
+  def begin_draw : Void
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(Void)).call
+  end
+  def end_draw(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def get_pixel_format : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(D2D1_PIXEL_FORMAT)).call
+  end
+  def set_dpi(dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.unsafe_as(Proc(Float32, Float32, Void)).call(dpix, dpiy)
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def get_size : D2D_SIZE_F
+    @lpVtbl.value.get_size.unsafe_as(Proc(D2D_SIZE_F)).call
+  end
+  def get_pixel_size : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.unsafe_as(Proc(D2D_SIZE_U)).call
+  end
+  def get_maximum_bitmap_size : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.unsafe_as(Proc(UInt32)).call
+  end
+  def is_supported(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)).call(rendertargetproperties)
+  end
+  def check_window_state : D2D1_WINDOW_STATE
+    @lpVtbl.value.check_window_state.unsafe_as(Proc(D2D1_WINDOW_STATE)).call
+  end
+  def resize(pixelsize : D2D_SIZE_U*) : HRESULT
+    @lpVtbl.value.resize.unsafe_as(Proc(D2D_SIZE_U*, HRESULT)).call(pixelsize)
+  end
+  def get_hwnd : HANDLE
+    @lpVtbl.value.get_hwnd.unsafe_as(Proc(HANDLE)).call
+  end
+end
+struct LibWin32::ID2D1GdiInteropRenderTarget
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_dc(mode : D2D1_DC_INITIALIZE_MODE, hdc : HDC*) : HRESULT
+    @lpVtbl.value.get_dc.unsafe_as(Proc(D2D1_DC_INITIALIZE_MODE, HDC*, HRESULT)).call(mode, hdc)
+  end
+  def release_dc(update : RECT*) : HRESULT
+    @lpVtbl.value.release_dc.unsafe_as(Proc(RECT*, HRESULT)).call(update)
+  end
+end
+struct LibWin32::ID2D1DCRenderTarget
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_bitmap(size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.unsafe_as(Proc(Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.unsafe_as(Proc(D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)).call(color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)).call(gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.unsafe_as(Proc(D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)).call(lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.unsafe_as(Proc(D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)).call(radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.unsafe_as(Proc(D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)).call(desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.unsafe_as(Proc(D2D_SIZE_F*, ID2D1Layer*, HRESULT)).call(size, layer)
+  end
+  def create_mesh(mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.unsafe_as(Proc(ID2D1Mesh*, HRESULT)).call(mesh)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Void)).call(rect, brush)
+  end
+  def draw_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Void)).call(roundedrect, brush)
+  end
+  def draw_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Void)).call(ellipse, brush)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)).call(geometry, brush, opacitybrush)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, Void)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)).call(string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.unsafe_as(Proc(D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)).call(origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, Void)).call(antialiasmode)
+  end
+  def get_antialias_mode : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE)).call
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, Void)).call(textantialiasmode)
+  end
+  def get_text_antialias_mode : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE)).call
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, Void)).call(textrenderingparams)
+  end
+  def get_text_rendering_params(textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, Void)).call(textrenderingparams)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, Void)).call(tag1, tag2)
+  end
+  def get_tags(tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.unsafe_as(Proc(UInt64*, UInt64*, Void)).call(tag1, tag2)
+  end
+  def push_layer(layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def pop_layer : Void
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(Void)).call
+  end
+  def flush(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def save_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def restore_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)).call(cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip : Void
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(Void)).call
+  end
+  def clear(clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, Void)).call(clearcolor)
+  end
+  def begin_draw : Void
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(Void)).call
+  end
+  def end_draw(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def get_pixel_format : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(D2D1_PIXEL_FORMAT)).call
+  end
+  def set_dpi(dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.unsafe_as(Proc(Float32, Float32, Void)).call(dpix, dpiy)
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def get_size : D2D_SIZE_F
+    @lpVtbl.value.get_size.unsafe_as(Proc(D2D_SIZE_F)).call
+  end
+  def get_pixel_size : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.unsafe_as(Proc(D2D_SIZE_U)).call
+  end
+  def get_maximum_bitmap_size : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.unsafe_as(Proc(UInt32)).call
+  end
+  def is_supported(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)).call(rendertargetproperties)
+  end
+  def bind_dc(hdc : HDC, psubrect : RECT*) : HRESULT
+    @lpVtbl.value.bind_dc.unsafe_as(Proc(HDC, RECT*, HRESULT)).call(hdc, psubrect)
+  end
+end
+struct LibWin32::ID2D1Factory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def reload_system_metrics : HRESULT
+    @lpVtbl.value.reload_system_metrics.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_desktop_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_desktop_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def create_rectangle_geometry(rectangle : D2D_RECT_F*, rectanglegeometry : ID2D1RectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rectangle_geometry.unsafe_as(Proc(D2D_RECT_F*, ID2D1RectangleGeometry*, HRESULT)).call(rectangle, rectanglegeometry)
+  end
+  def create_rounded_rectangle_geometry(roundedrectangle : D2D1_ROUNDED_RECT*, roundedrectanglegeometry : ID2D1RoundedRectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rounded_rectangle_geometry.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1RoundedRectangleGeometry*, HRESULT)).call(roundedrectangle, roundedrectanglegeometry)
+  end
+  def create_ellipse_geometry(ellipse : D2D1_ELLIPSE*, ellipsegeometry : ID2D1EllipseGeometry*) : HRESULT
+    @lpVtbl.value.create_ellipse_geometry.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1EllipseGeometry*, HRESULT)).call(ellipse, ellipsegeometry)
+  end
+  def create_geometry_group(fillmode : D2D1_FILL_MODE, geometries : ID2D1Geometry*, geometriescount : UInt32, geometrygroup : ID2D1GeometryGroup*) : HRESULT
+    @lpVtbl.value.create_geometry_group.unsafe_as(Proc(D2D1_FILL_MODE, ID2D1Geometry*, UInt32, ID2D1GeometryGroup*, HRESULT)).call(fillmode, geometries, geometriescount, geometrygroup)
+  end
+  def create_transformed_geometry(sourcegeometry : ID2D1Geometry, transform : D2D_MATRIX_3X2_F*, transformedgeometry : ID2D1TransformedGeometry*) : HRESULT
+    @lpVtbl.value.create_transformed_geometry.unsafe_as(Proc(ID2D1Geometry, D2D_MATRIX_3X2_F*, ID2D1TransformedGeometry*, HRESULT)).call(sourcegeometry, transform, transformedgeometry)
+  end
+  def create_path_geometry(pathgeometry : ID2D1PathGeometry*) : HRESULT
+    @lpVtbl.value.create_path_geometry.unsafe_as(Proc(ID2D1PathGeometry*, HRESULT)).call(pathgeometry)
+  end
+  def create_stroke_style(strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle*) : HRESULT
+    @lpVtbl.value.create_stroke_style.unsafe_as(Proc(D2D1_STROKE_STYLE_PROPERTIES*, Float32*, UInt32, ID2D1StrokeStyle*, HRESULT)).call(strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_drawing_state_block(drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION*, IDWriteRenderingParams, ID2D1DrawingStateBlock*, HRESULT)).call(drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_wic_bitmap_render_target(target : IWICBitmap, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_wic_bitmap_render_target.unsafe_as(Proc(IWICBitmap, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)).call(target, rendertargetproperties, rendertarget)
+  end
+  def create_hwnd_render_target(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, hwndrendertargetproperties : D2D1_HWND_RENDER_TARGET_PROPERTIES*, hwndrendertarget : ID2D1HwndRenderTarget*) : HRESULT
+    @lpVtbl.value.create_hwnd_render_target.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, D2D1_HWND_RENDER_TARGET_PROPERTIES*, ID2D1HwndRenderTarget*, HRESULT)).call(rendertargetproperties, hwndrendertargetproperties, hwndrendertarget)
+  end
+  def create_dxgi_surface_render_target(dxgisurface : IDXGISurface, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_dxgi_surface_render_target.unsafe_as(Proc(IDXGISurface, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)).call(dxgisurface, rendertargetproperties, rendertarget)
+  end
+  def create_dc_render_target(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, dcrendertarget : ID2D1DCRenderTarget*) : HRESULT
+    @lpVtbl.value.create_dc_render_target.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)).call(rendertargetproperties, dcrendertarget)
+  end
+end
+struct LibWin32::ID2D1GdiMetafileSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def process_record(recordtype : UInt32, recorddata : Void*, recorddatasize : UInt32) : HRESULT
+    @lpVtbl.value.process_record.unsafe_as(Proc(UInt32, Void*, UInt32, HRESULT)).call(recordtype, recorddata, recorddatasize)
+  end
+end
+struct LibWin32::ID2D1GdiMetafile
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def stream(sink : ID2D1GdiMetafileSink) : HRESULT
+    @lpVtbl.value.stream.unsafe_as(Proc(ID2D1GdiMetafileSink, HRESULT)).call(sink)
+  end
+  def get_bounds(bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.unsafe_as(Proc(D2D_RECT_F*, HRESULT)).call(bounds)
+  end
+end
+struct LibWin32::ID2D1CommandSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_draw : HRESULT
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def end_draw : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, HRESULT)).call(antialiasmode)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : HRESULT
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, HRESULT)).call(tag1, tag2)
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, HRESULT)).call(textantialiasmode)
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : HRESULT
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, HRESULT)).call(textrenderingparams)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, HRESULT)).call(transform)
+  end
+  def set_primitive_blend(primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, HRESULT)).call(primitiveblend)
+  end
+  def set_unit_mode(unitmode : D2D1_UNIT_MODE) : HRESULT
+    @lpVtbl.value.set_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE, HRESULT)).call(unitmode)
+  end
+  def clear(color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, HRESULT)).call(color)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : HRESULT
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, HRESULT)).call(baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : HRESULT
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, HRESULT)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def draw_image(image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.draw_image.unsafe_as(Proc(ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, HRESULT)).call(image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile.unsafe_as(Proc(ID2D1GdiMetafile, D2D_POINT_2F*, HRESULT)).call(gdimetafile, targetoffset)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, HRESULT)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, HRESULT)).call(opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, HRESULT)).call(geometry, brush, opacitybrush)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, HRESULT)).call(rect, brush)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, HRESULT)).call(cliprect, antialiasmode)
+  end
+  def push_layer(layerparameters1 : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : HRESULT
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS1*, ID2D1Layer, HRESULT)).call(layerparameters1, layer)
+  end
+  def pop_axis_aligned_clip : HRESULT
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(HRESULT)).call
+  end
+  def pop_layer : HRESULT
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ID2D1CommandList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def stream(sink : ID2D1CommandSink) : HRESULT
+    @lpVtbl.value.stream.unsafe_as(Proc(ID2D1CommandSink, HRESULT)).call(sink)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ID2D1PrintControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_page(commandlist : ID2D1CommandList, pagesize : D2D_SIZE_F, pageprintticketstream : IStream, tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.add_page.unsafe_as(Proc(ID2D1CommandList, D2D_SIZE_F, IStream, UInt64*, UInt64*, HRESULT)).call(commandlist, pagesize, pageprintticketstream, tag1, tag2)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ID2D1ImageBrush
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def set_opacity(opacity : Float32) : Void
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, Void)).call(opacity)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_opacity : Float32
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32)).call
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_image(image : ID2D1Image) : Void
+    @lpVtbl.value.set_image.unsafe_as(Proc(ID2D1Image, Void)).call(image)
+  end
+  def set_extend_mode_x(extendmodex : D2D1_EXTEND_MODE) : Void
+    @lpVtbl.value.set_extend_mode_x.unsafe_as(Proc(D2D1_EXTEND_MODE, Void)).call(extendmodex)
+  end
+  def set_extend_mode_y(extendmodey : D2D1_EXTEND_MODE) : Void
+    @lpVtbl.value.set_extend_mode_y.unsafe_as(Proc(D2D1_EXTEND_MODE, Void)).call(extendmodey)
+  end
+  def set_interpolation_mode(interpolationmode : D2D1_INTERPOLATION_MODE) : Void
+    @lpVtbl.value.set_interpolation_mode.unsafe_as(Proc(D2D1_INTERPOLATION_MODE, Void)).call(interpolationmode)
+  end
+  def set_source_rectangle(sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.set_source_rectangle.unsafe_as(Proc(D2D_RECT_F*, Void)).call(sourcerectangle)
+  end
+  def get_image(image : ID2D1Image*) : Void
+    @lpVtbl.value.get_image.unsafe_as(Proc(ID2D1Image*, Void)).call(image)
+  end
+  def get_extend_mode_x : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode_x.unsafe_as(Proc(D2D1_EXTEND_MODE)).call
+  end
+  def get_extend_mode_y : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode_y.unsafe_as(Proc(D2D1_EXTEND_MODE)).call
+  end
+  def get_interpolation_mode : D2D1_INTERPOLATION_MODE
+    @lpVtbl.value.get_interpolation_mode.unsafe_as(Proc(D2D1_INTERPOLATION_MODE)).call
+  end
+  def get_source_rectangle(sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.get_source_rectangle.unsafe_as(Proc(D2D_RECT_F*, Void)).call(sourcerectangle)
+  end
+end
+struct LibWin32::ID2D1BitmapBrush1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def set_opacity(opacity : Float32) : Void
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, Void)).call(opacity)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_opacity : Float32
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32)).call
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_extend_mode_x(extendmodex : D2D1_EXTEND_MODE) : Void
+    @lpVtbl.value.set_extend_mode_x.unsafe_as(Proc(D2D1_EXTEND_MODE, Void)).call(extendmodex)
+  end
+  def set_extend_mode_y(extendmodey : D2D1_EXTEND_MODE) : Void
+    @lpVtbl.value.set_extend_mode_y.unsafe_as(Proc(D2D1_EXTEND_MODE, Void)).call(extendmodey)
+  end
+  def set_interpolation_mode(interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE) : Void
+    @lpVtbl.value.set_interpolation_mode.unsafe_as(Proc(D2D1_BITMAP_INTERPOLATION_MODE, Void)).call(interpolationmode)
+  end
+  def set_bitmap(bitmap : ID2D1Bitmap) : Void
+    @lpVtbl.value.set_bitmap.unsafe_as(Proc(ID2D1Bitmap, Void)).call(bitmap)
+  end
+  def get_extend_mode_x : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode_x.unsafe_as(Proc(D2D1_EXTEND_MODE)).call
+  end
+  def get_extend_mode_y : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode_y.unsafe_as(Proc(D2D1_EXTEND_MODE)).call
+  end
+  def get_interpolation_mode : D2D1_BITMAP_INTERPOLATION_MODE
+    @lpVtbl.value.get_interpolation_mode.unsafe_as(Proc(D2D1_BITMAP_INTERPOLATION_MODE)).call
+  end
+  def get_bitmap(bitmap : ID2D1Bitmap*) : Void
+    @lpVtbl.value.get_bitmap.unsafe_as(Proc(ID2D1Bitmap*, Void)).call(bitmap)
+  end
+  def set_interpolation_mode1(interpolationmode : D2D1_INTERPOLATION_MODE) : Void
+    @lpVtbl.value.set_interpolation_mode1.unsafe_as(Proc(D2D1_INTERPOLATION_MODE, Void)).call(interpolationmode)
+  end
+  def get_interpolation_mode1 : D2D1_INTERPOLATION_MODE
+    @lpVtbl.value.get_interpolation_mode1.unsafe_as(Proc(D2D1_INTERPOLATION_MODE)).call
+  end
+end
+struct LibWin32::ID2D1StrokeStyle1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_start_cap : D2D1_CAP_STYLE
+    @lpVtbl.value.get_start_cap.unsafe_as(Proc(D2D1_CAP_STYLE)).call
+  end
+  def get_end_cap : D2D1_CAP_STYLE
+    @lpVtbl.value.get_end_cap.unsafe_as(Proc(D2D1_CAP_STYLE)).call
+  end
+  def get_dash_cap : D2D1_CAP_STYLE
+    @lpVtbl.value.get_dash_cap.unsafe_as(Proc(D2D1_CAP_STYLE)).call
+  end
+  def get_miter_limit : Float32
+    @lpVtbl.value.get_miter_limit.unsafe_as(Proc(Float32)).call
+  end
+  def get_line_join : D2D1_LINE_JOIN
+    @lpVtbl.value.get_line_join.unsafe_as(Proc(D2D1_LINE_JOIN)).call
+  end
+  def get_dash_offset : Float32
+    @lpVtbl.value.get_dash_offset.unsafe_as(Proc(Float32)).call
+  end
+  def get_dash_style : D2D1_DASH_STYLE
+    @lpVtbl.value.get_dash_style.unsafe_as(Proc(D2D1_DASH_STYLE)).call
+  end
+  def get_dashes_count : UInt32
+    @lpVtbl.value.get_dashes_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_dashes(dashes : Float32*, dashescount : UInt32) : Void
+    @lpVtbl.value.get_dashes.unsafe_as(Proc(Float32*, UInt32, Void)).call(dashes, dashescount)
+  end
+  def get_stroke_transform_type : D2D1_STROKE_TRANSFORM_TYPE
+    @lpVtbl.value.get_stroke_transform_type.unsafe_as(Proc(D2D1_STROKE_TRANSFORM_TYPE)).call
+  end
+end
+struct LibWin32::ID2D1PathGeometry1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_bounds(worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.unsafe_as(Proc(D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)).call(worldtransform, bounds)
+  end
+  def get_widened_bounds(strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_widened_bounds.unsafe_as(Proc(Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, D2D_RECT_F*, HRESULT)).call(strokewidth, strokestyle, worldtransform, flatteningtolerance, bounds)
+  end
+  def stroke_contains_point(point : D2D_POINT_2F, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.stroke_contains_point.unsafe_as(Proc(D2D_POINT_2F, Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)).call(point, strokewidth, strokestyle, worldtransform, flatteningtolerance, contains)
+  end
+  def fill_contains_point(point : D2D_POINT_2F, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, contains : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.fill_contains_point.unsafe_as(Proc(D2D_POINT_2F, D2D_MATRIX_3X2_F*, Float32, LibC::BOOL*, HRESULT)).call(point, worldtransform, flatteningtolerance, contains)
+  end
+  def compare_with_geometry(inputgeometry : ID2D1Geometry, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, relation : D2D1_GEOMETRY_RELATION*) : HRESULT
+    @lpVtbl.value.compare_with_geometry.unsafe_as(Proc(ID2D1Geometry, D2D_MATRIX_3X2_F*, Float32, D2D1_GEOMETRY_RELATION*, HRESULT)).call(inputgeometry, inputgeometrytransform, flatteningtolerance, relation)
+  end
+  def simplify(simplificationoption : D2D1_GEOMETRY_SIMPLIFICATION_OPTION, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.simplify.unsafe_as(Proc(D2D1_GEOMETRY_SIMPLIFICATION_OPTION, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(simplificationoption, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def tessellate(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, tessellationsink : ID2D1TessellationSink) : HRESULT
+    @lpVtbl.value.tessellate.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, ID2D1TessellationSink, HRESULT)).call(worldtransform, flatteningtolerance, tessellationsink)
+  end
+  def combine_with_geometry(inputgeometry : ID2D1Geometry, combinemode : D2D1_COMBINE_MODE, inputgeometrytransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.combine_with_geometry.unsafe_as(Proc(ID2D1Geometry, D2D1_COMBINE_MODE, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(inputgeometry, combinemode, inputgeometrytransform, flatteningtolerance, geometrysink)
+  end
+  def outline(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.outline.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(worldtransform, flatteningtolerance, geometrysink)
+  end
+  def compute_area(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, area : Float32*) : HRESULT
+    @lpVtbl.value.compute_area.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)).call(worldtransform, flatteningtolerance, area)
+  end
+  def compute_length(worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, length : Float32*) : HRESULT
+    @lpVtbl.value.compute_length.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Float32, Float32*, HRESULT)).call(worldtransform, flatteningtolerance, length)
+  end
+  def compute_point_at_length(length : Float32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, point : D2D_POINT_2F*, unittangentvector : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_point_at_length.unsafe_as(Proc(Float32, D2D_MATRIX_3X2_F*, Float32, D2D_POINT_2F*, D2D_POINT_2F*, HRESULT)).call(length, worldtransform, flatteningtolerance, point, unittangentvector)
+  end
+  def widen(strokewidth : Float32, strokestyle : ID2D1StrokeStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.widen.unsafe_as(Proc(Float32, ID2D1StrokeStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(strokewidth, strokestyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def open(geometrysink : ID2D1GeometrySink*) : HRESULT
+    @lpVtbl.value.open.unsafe_as(Proc(ID2D1GeometrySink*, HRESULT)).call(geometrysink)
+  end
+  def stream(geometrysink : ID2D1GeometrySink) : HRESULT
+    @lpVtbl.value.stream.unsafe_as(Proc(ID2D1GeometrySink, HRESULT)).call(geometrysink)
+  end
+  def get_segment_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_segment_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_figure_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_figure_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def compute_point_and_segment_at_length(length : Float32, startsegment : UInt32, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, pointdescription : D2D1_POINT_DESCRIPTION*) : HRESULT
+    @lpVtbl.value.compute_point_and_segment_at_length.unsafe_as(Proc(Float32, UInt32, D2D_MATRIX_3X2_F*, Float32, D2D1_POINT_DESCRIPTION*, HRESULT)).call(length, startsegment, worldtransform, flatteningtolerance, pointdescription)
+  end
+end
+struct LibWin32::ID2D1Properties
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_property_count : UInt32
+    @lpVtbl.value.get_property_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_property_name(index : UInt32, name : Char*, namecount : UInt32) : HRESULT
+    @lpVtbl.value.get_property_name.unsafe_as(Proc(UInt32, Char*, UInt32, HRESULT)).call(index, name, namecount)
+  end
+  def get_property_name_length(index : UInt32) : UInt32
+    @lpVtbl.value.get_property_name_length.unsafe_as(Proc(UInt32, UInt32)).call(index)
+  end
+  def get_type(index : UInt32) : D2D1_PROPERTY_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(UInt32, D2D1_PROPERTY_TYPE)).call(index)
+  end
+  def get_property_index(name : LibC::LPWSTR) : UInt32
+    @lpVtbl.value.get_property_index.unsafe_as(Proc(LibC::LPWSTR, UInt32)).call(name)
+  end
+  def set_value_by_name(name : LibC::LPWSTR, type : D2D1_PROPERTY_TYPE, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.set_value_by_name.unsafe_as(Proc(LibC::LPWSTR, D2D1_PROPERTY_TYPE, UInt8*, UInt32, HRESULT)).call(name, type, data, datasize)
+  end
+  def set_value(index : UInt32, type : D2D1_PROPERTY_TYPE, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.set_value.unsafe_as(Proc(UInt32, D2D1_PROPERTY_TYPE, UInt8*, UInt32, HRESULT)).call(index, type, data, datasize)
+  end
+  def get_value_by_name(name : LibC::LPWSTR, type : D2D1_PROPERTY_TYPE, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.get_value_by_name.unsafe_as(Proc(LibC::LPWSTR, D2D1_PROPERTY_TYPE, UInt8*, UInt32, HRESULT)).call(name, type, data, datasize)
+  end
+  def get_value(index : UInt32, type : D2D1_PROPERTY_TYPE, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.get_value.unsafe_as(Proc(UInt32, D2D1_PROPERTY_TYPE, UInt8*, UInt32, HRESULT)).call(index, type, data, datasize)
+  end
+  def get_value_size(index : UInt32) : UInt32
+    @lpVtbl.value.get_value_size.unsafe_as(Proc(UInt32, UInt32)).call(index)
+  end
+  def get_sub_properties(index : UInt32, subproperties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_sub_properties.unsafe_as(Proc(UInt32, ID2D1Properties*, HRESULT)).call(index, subproperties)
+  end
+end
+struct LibWin32::ID2D1Effect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_property_count : UInt32
+    @lpVtbl.value.get_property_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_property_name(index : UInt32, name : Char*, namecount : UInt32) : HRESULT
+    @lpVtbl.value.get_property_name.unsafe_as(Proc(UInt32, Char*, UInt32, HRESULT)).call(index, name, namecount)
+  end
+  def get_property_name_length(index : UInt32) : UInt32
+    @lpVtbl.value.get_property_name_length.unsafe_as(Proc(UInt32, UInt32)).call(index)
+  end
+  def get_type(index : UInt32) : D2D1_PROPERTY_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(UInt32, D2D1_PROPERTY_TYPE)).call(index)
+  end
+  def get_property_index(name : LibC::LPWSTR) : UInt32
+    @lpVtbl.value.get_property_index.unsafe_as(Proc(LibC::LPWSTR, UInt32)).call(name)
+  end
+  def set_value_by_name(name : LibC::LPWSTR, type : D2D1_PROPERTY_TYPE, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.set_value_by_name.unsafe_as(Proc(LibC::LPWSTR, D2D1_PROPERTY_TYPE, UInt8*, UInt32, HRESULT)).call(name, type, data, datasize)
+  end
+  def set_value(index : UInt32, type : D2D1_PROPERTY_TYPE, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.set_value.unsafe_as(Proc(UInt32, D2D1_PROPERTY_TYPE, UInt8*, UInt32, HRESULT)).call(index, type, data, datasize)
+  end
+  def get_value_by_name(name : LibC::LPWSTR, type : D2D1_PROPERTY_TYPE, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.get_value_by_name.unsafe_as(Proc(LibC::LPWSTR, D2D1_PROPERTY_TYPE, UInt8*, UInt32, HRESULT)).call(name, type, data, datasize)
+  end
+  def get_value(index : UInt32, type : D2D1_PROPERTY_TYPE, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.get_value.unsafe_as(Proc(UInt32, D2D1_PROPERTY_TYPE, UInt8*, UInt32, HRESULT)).call(index, type, data, datasize)
+  end
+  def get_value_size(index : UInt32) : UInt32
+    @lpVtbl.value.get_value_size.unsafe_as(Proc(UInt32, UInt32)).call(index)
+  end
+  def get_sub_properties(index : UInt32, subproperties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_sub_properties.unsafe_as(Proc(UInt32, ID2D1Properties*, HRESULT)).call(index, subproperties)
+  end
+  def set_input(index : UInt32, input : ID2D1Image, invalidate : LibC::BOOL) : Void
+    @lpVtbl.value.set_input.unsafe_as(Proc(UInt32, ID2D1Image, LibC::BOOL, Void)).call(index, input, invalidate)
+  end
+  def set_input_count(inputcount : UInt32) : HRESULT
+    @lpVtbl.value.set_input_count.unsafe_as(Proc(UInt32, HRESULT)).call(inputcount)
+  end
+  def get_input(index : UInt32, input : ID2D1Image*) : Void
+    @lpVtbl.value.get_input.unsafe_as(Proc(UInt32, ID2D1Image*, Void)).call(index, input)
+  end
+  def get_input_count : UInt32
+    @lpVtbl.value.get_input_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_output(outputimage : ID2D1Image*) : Void
+    @lpVtbl.value.get_output.unsafe_as(Proc(ID2D1Image*, Void)).call(outputimage)
+  end
+end
+struct LibWin32::ID2D1Bitmap1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_size : D2D_SIZE_F
+    @lpVtbl.value.get_size.unsafe_as(Proc(D2D_SIZE_F)).call
+  end
+  def get_pixel_size : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.unsafe_as(Proc(D2D_SIZE_U)).call
+  end
+  def get_pixel_format : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(D2D1_PIXEL_FORMAT)).call
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def copy_from_bitmap(destpoint : D2D_POINT_2U*, bitmap : ID2D1Bitmap, srcrect : D2D_RECT_U*) : HRESULT
+    @lpVtbl.value.copy_from_bitmap.unsafe_as(Proc(D2D_POINT_2U*, ID2D1Bitmap, D2D_RECT_U*, HRESULT)).call(destpoint, bitmap, srcrect)
+  end
+  def copy_from_render_target(destpoint : D2D_POINT_2U*, rendertarget : ID2D1RenderTarget, srcrect : D2D_RECT_U*) : HRESULT
+    @lpVtbl.value.copy_from_render_target.unsafe_as(Proc(D2D_POINT_2U*, ID2D1RenderTarget, D2D_RECT_U*, HRESULT)).call(destpoint, rendertarget, srcrect)
+  end
+  def copy_from_memory(dstrect : D2D_RECT_U*, srcdata : Void*, pitch : UInt32) : HRESULT
+    @lpVtbl.value.copy_from_memory.unsafe_as(Proc(D2D_RECT_U*, Void*, UInt32, HRESULT)).call(dstrect, srcdata, pitch)
+  end
+  def get_color_context(colorcontext : ID2D1ColorContext*) : Void
+    @lpVtbl.value.get_color_context.unsafe_as(Proc(ID2D1ColorContext*, Void)).call(colorcontext)
+  end
+  def get_options : D2D1_BITMAP_OPTIONS
+    @lpVtbl.value.get_options.unsafe_as(Proc(D2D1_BITMAP_OPTIONS)).call
+  end
+  def get_surface(dxgisurface : IDXGISurface*) : HRESULT
+    @lpVtbl.value.get_surface.unsafe_as(Proc(IDXGISurface*, HRESULT)).call(dxgisurface)
+  end
+  def map(options : D2D1_MAP_OPTIONS, mappedrect : D2D1_MAPPED_RECT*) : HRESULT
+    @lpVtbl.value.map.unsafe_as(Proc(D2D1_MAP_OPTIONS, D2D1_MAPPED_RECT*, HRESULT)).call(options, mappedrect)
+  end
+  def unmap : HRESULT
+    @lpVtbl.value.unmap.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ID2D1ColorContext
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_color_space : D2D1_COLOR_SPACE
+    @lpVtbl.value.get_color_space.unsafe_as(Proc(D2D1_COLOR_SPACE)).call
+  end
+  def get_profile_size : UInt32
+    @lpVtbl.value.get_profile_size.unsafe_as(Proc(UInt32)).call
+  end
+  def get_profile(profile : UInt8*, profilesize : UInt32) : HRESULT
+    @lpVtbl.value.get_profile.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(profile, profilesize)
+  end
+end
+struct LibWin32::ID2D1GradientStopCollection1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_gradient_stop_count : UInt32
+    @lpVtbl.value.get_gradient_stop_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_gradient_stops(gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32) : Void
+    @lpVtbl.value.get_gradient_stops.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, Void)).call(gradientstops, gradientstopscount)
+  end
+  def get_color_interpolation_gamma : D2D1_GAMMA
+    @lpVtbl.value.get_color_interpolation_gamma.unsafe_as(Proc(D2D1_GAMMA)).call
+  end
+  def get_extend_mode : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode.unsafe_as(Proc(D2D1_EXTEND_MODE)).call
+  end
+  def get_gradient_stops1(gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32) : Void
+    @lpVtbl.value.get_gradient_stops1.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, Void)).call(gradientstops, gradientstopscount)
+  end
+  def get_pre_interpolation_space : D2D1_COLOR_SPACE
+    @lpVtbl.value.get_pre_interpolation_space.unsafe_as(Proc(D2D1_COLOR_SPACE)).call
+  end
+  def get_post_interpolation_space : D2D1_COLOR_SPACE
+    @lpVtbl.value.get_post_interpolation_space.unsafe_as(Proc(D2D1_COLOR_SPACE)).call
+  end
+  def get_buffer_precision : D2D1_BUFFER_PRECISION
+    @lpVtbl.value.get_buffer_precision.unsafe_as(Proc(D2D1_BUFFER_PRECISION)).call
+  end
+  def get_color_interpolation_mode : D2D1_COLOR_INTERPOLATION_MODE
+    @lpVtbl.value.get_color_interpolation_mode.unsafe_as(Proc(D2D1_COLOR_INTERPOLATION_MODE)).call
+  end
+end
+struct LibWin32::ID2D1DrawingStateBlock1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_description(statedescription : D2D1_DRAWING_STATE_DESCRIPTION*) : Void
+    @lpVtbl.value.get_description.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION*, Void)).call(statedescription)
+  end
+  def set_description(statedescription : D2D1_DRAWING_STATE_DESCRIPTION*) : Void
+    @lpVtbl.value.set_description.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION*, Void)).call(statedescription)
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, Void)).call(textrenderingparams)
+  end
+  def get_text_rendering_params(textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, Void)).call(textrenderingparams)
+  end
+  def get_description2(statedescription : D2D1_DRAWING_STATE_DESCRIPTION1*) : Void
+    @lpVtbl.value.get_description2.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION1*, Void)).call(statedescription)
+  end
+  def set_description2(statedescription : D2D1_DRAWING_STATE_DESCRIPTION1*) : Void
+    @lpVtbl.value.set_description2.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION1*, Void)).call(statedescription)
+  end
+end
+struct LibWin32::ID2D1DeviceContext
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_bitmap(size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.unsafe_as(Proc(Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.unsafe_as(Proc(D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)).call(color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)).call(gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.unsafe_as(Proc(D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)).call(lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.unsafe_as(Proc(D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)).call(radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.unsafe_as(Proc(D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)).call(desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.unsafe_as(Proc(D2D_SIZE_F*, ID2D1Layer*, HRESULT)).call(size, layer)
+  end
+  def create_mesh(mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.unsafe_as(Proc(ID2D1Mesh*, HRESULT)).call(mesh)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Void)).call(rect, brush)
+  end
+  def draw_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Void)).call(roundedrect, brush)
+  end
+  def draw_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Void)).call(ellipse, brush)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)).call(geometry, brush, opacitybrush)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, Void)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)).call(string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.unsafe_as(Proc(D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)).call(origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, Void)).call(antialiasmode)
+  end
+  def get_antialias_mode : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE)).call
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, Void)).call(textantialiasmode)
+  end
+  def get_text_antialias_mode : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE)).call
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, Void)).call(textrenderingparams)
+  end
+  def get_text_rendering_params(textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, Void)).call(textrenderingparams)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, Void)).call(tag1, tag2)
+  end
+  def get_tags(tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.unsafe_as(Proc(UInt64*, UInt64*, Void)).call(tag1, tag2)
+  end
+  def push_layer(layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def pop_layer : Void
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(Void)).call
+  end
+  def flush(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def save_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def restore_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)).call(cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip : Void
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(Void)).call
+  end
+  def clear(clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, Void)).call(clearcolor)
+  end
+  def begin_draw : Void
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(Void)).call
+  end
+  def end_draw(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def get_pixel_format : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(D2D1_PIXEL_FORMAT)).call
+  end
+  def set_dpi(dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.unsafe_as(Proc(Float32, Float32, Void)).call(dpix, dpiy)
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def get_size : D2D_SIZE_F
+    @lpVtbl.value.get_size.unsafe_as(Proc(D2D_SIZE_F)).call
+  end
+  def get_pixel_size : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.unsafe_as(Proc(D2D_SIZE_U)).call
+  end
+  def get_maximum_bitmap_size : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.unsafe_as(Proc(UInt32)).call
+  end
+  def is_supported(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)).call(rendertargetproperties)
+  end
+  def create_bitmap2(size : D2D_SIZE_U, sourcedata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap2.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(size, sourcedata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap2(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap2.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_color_context(space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.unsafe_as(Proc(D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)).call(space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.unsafe_as(Proc(LibC::LPWSTR, ID2D1ColorContext*, HRESULT)).call(filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.unsafe_as(Proc(IWICColorContext, ID2D1ColorContext*, HRESULT)).call(wiccolorcontext, colorcontext)
+  end
+  def create_bitmap_from_dxgi_surface(surface : IDXGISurface, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_dxgi_surface.unsafe_as(Proc(IDXGISurface, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(surface, bitmapproperties, bitmap)
+  end
+  def create_effect(effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.unsafe_as(Proc(Guid*, ID2D1Effect*, HRESULT)).call(effectid, effect)
+  end
+  def create_gradient_stop_collection2(straightalphagradientstops : D2D1_GRADIENT_STOP*, straightalphagradientstopscount : UInt32, preinterpolationspace : D2D1_COLOR_SPACE, postinterpolationspace : D2D1_COLOR_SPACE, bufferprecision : D2D1_BUFFER_PRECISION, extendmode : D2D1_EXTEND_MODE, colorinterpolationmode : D2D1_COLOR_INTERPOLATION_MODE, gradientstopcollection1 : ID2D1GradientStopCollection1*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection2.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_COLOR_SPACE, D2D1_COLOR_SPACE, D2D1_BUFFER_PRECISION, D2D1_EXTEND_MODE, D2D1_COLOR_INTERPOLATION_MODE, ID2D1GradientStopCollection1*, HRESULT)).call(straightalphagradientstops, straightalphagradientstopscount, preinterpolationspace, postinterpolationspace, bufferprecision, extendmode, colorinterpolationmode, gradientstopcollection1)
+  end
+  def create_image_brush(image : ID2D1Image, imagebrushproperties : D2D1_IMAGE_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, imagebrush : ID2D1ImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.unsafe_as(Proc(ID2D1Image, D2D1_IMAGE_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1ImageBrush*, HRESULT)).call(image, imagebrushproperties, brushproperties, imagebrush)
+  end
+  def create_bitmap_brush2(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES1*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush1*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush2.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES1*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush1*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_command_list(commandlist : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(ID2D1CommandList*, HRESULT)).call(commandlist)
+  end
+  def is_dxgi_format_supported(format : DXGI_FORMAT) : LibC::BOOL
+    @lpVtbl.value.is_dxgi_format_supported.unsafe_as(Proc(DXGI_FORMAT, LibC::BOOL)).call(format)
+  end
+  def is_buffer_precision_supported(bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.unsafe_as(Proc(D2D1_BUFFER_PRECISION, LibC::BOOL)).call(bufferprecision)
+  end
+  def get_image_local_bounds(image : ID2D1Image, localbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_local_bounds.unsafe_as(Proc(ID2D1Image, D2D_RECT_F*, HRESULT)).call(image, localbounds)
+  end
+  def get_image_world_bounds(image : ID2D1Image, worldbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_world_bounds.unsafe_as(Proc(ID2D1Image, D2D_RECT_F*, HRESULT)).call(image, worldbounds)
+  end
+  def get_glyph_run_world_bounds(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_glyph_run_world_bounds.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_RECT_F*, HRESULT)).call(baselineorigin, glyphrun, measuringmode, bounds)
+  end
+  def get_device(device : ID2D1Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID2D1Device*, Void)).call(device)
+  end
+  def set_target(image : ID2D1Image) : Void
+    @lpVtbl.value.set_target.unsafe_as(Proc(ID2D1Image, Void)).call(image)
+  end
+  def get_target(image : ID2D1Image*) : Void
+    @lpVtbl.value.get_target.unsafe_as(Proc(ID2D1Image*, Void)).call(image)
+  end
+  def set_rendering_controls(renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.set_rendering_controls.unsafe_as(Proc(D2D1_RENDERING_CONTROLS*, Void)).call(renderingcontrols)
+  end
+  def get_rendering_controls(renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.get_rendering_controls.unsafe_as(Proc(D2D1_RENDERING_CONTROLS*, Void)).call(renderingcontrols)
+  end
+  def set_primitive_blend(primitiveblend : D2D1_PRIMITIVE_BLEND) : Void
+    @lpVtbl.value.set_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, Void)).call(primitiveblend)
+  end
+  def get_primitive_blend : D2D1_PRIMITIVE_BLEND
+    @lpVtbl.value.get_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND)).call
+  end
+  def set_unit_mode(unitmode : D2D1_UNIT_MODE) : Void
+    @lpVtbl.value.set_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE, Void)).call(unitmode)
+  end
+  def get_unit_mode : D2D1_UNIT_MODE
+    @lpVtbl.value.get_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE)).call
+  end
+  def draw_glyph_run2(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run2.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_image(image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : Void
+    @lpVtbl.value.draw_image.unsafe_as(Proc(ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, Void)).call(image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : Void
+    @lpVtbl.value.draw_gdi_metafile.unsafe_as(Proc(ID2D1GdiMetafile, D2D_POINT_2F*, Void)).call(gdimetafile, targetoffset)
+  end
+  def draw_bitmap2(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : Void
+    @lpVtbl.value.draw_bitmap2.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def push_layer2(layerparameters : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer2.unsafe_as(Proc(D2D1_LAYER_PARAMETERS1*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def invalidate_effect_input_rectangle(effect : ID2D1Effect, input : UInt32, inputrectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.invalidate_effect_input_rectangle.unsafe_as(Proc(ID2D1Effect, UInt32, D2D_RECT_F*, HRESULT)).call(effect, input, inputrectangle)
+  end
+  def get_effect_invalid_rectangle_count(effect : ID2D1Effect, rectanglecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangle_count.unsafe_as(Proc(ID2D1Effect, UInt32*, HRESULT)).call(effect, rectanglecount)
+  end
+  def get_effect_invalid_rectangles(effect : ID2D1Effect, rectangles : D2D_RECT_F*, rectanglescount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangles.unsafe_as(Proc(ID2D1Effect, D2D_RECT_F*, UInt32, HRESULT)).call(effect, rectangles, rectanglescount)
+  end
+  def get_effect_required_input_rectangles(rendereffect : ID2D1Effect, renderimagerectangle : D2D_RECT_F*, inputdescriptions : D2D1_EFFECT_INPUT_DESCRIPTION*, requiredinputrects : D2D_RECT_F*, inputcount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_required_input_rectangles.unsafe_as(Proc(ID2D1Effect, D2D_RECT_F*, D2D1_EFFECT_INPUT_DESCRIPTION*, D2D_RECT_F*, UInt32, HRESULT)).call(rendereffect, renderimagerectangle, inputdescriptions, requiredinputrects, inputcount)
+  end
+  def fill_opacity_mask2(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask2.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+end
+struct LibWin32::ID2D1Device
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_device_context(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext : ID2D1DeviceContext*) : HRESULT
+    @lpVtbl.value.create_device_context.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext*, HRESULT)).call(options, devicecontext)
+  end
+  def create_print_control(wicfactory : IWICImagingFactory, documenttarget : IPrintDocumentPackageTarget, printcontrolproperties : D2D1_PRINT_CONTROL_PROPERTIES*, printcontrol : ID2D1PrintControl*) : HRESULT
+    @lpVtbl.value.create_print_control.unsafe_as(Proc(IWICImagingFactory, IPrintDocumentPackageTarget, D2D1_PRINT_CONTROL_PROPERTIES*, ID2D1PrintControl*, HRESULT)).call(wicfactory, documenttarget, printcontrolproperties, printcontrol)
+  end
+  def set_maximum_texture_memory(maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_texture_memory.unsafe_as(Proc(UInt64, Void)).call(maximuminbytes)
+  end
+  def get_maximum_texture_memory : UInt64
+    @lpVtbl.value.get_maximum_texture_memory.unsafe_as(Proc(UInt64)).call
+  end
+  def clear_resources(millisecondssinceuse : UInt32) : Void
+    @lpVtbl.value.clear_resources.unsafe_as(Proc(UInt32, Void)).call(millisecondssinceuse)
+  end
+end
+struct LibWin32::ID2D1Factory1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def reload_system_metrics : HRESULT
+    @lpVtbl.value.reload_system_metrics.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_desktop_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_desktop_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def create_rectangle_geometry(rectangle : D2D_RECT_F*, rectanglegeometry : ID2D1RectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rectangle_geometry.unsafe_as(Proc(D2D_RECT_F*, ID2D1RectangleGeometry*, HRESULT)).call(rectangle, rectanglegeometry)
+  end
+  def create_rounded_rectangle_geometry(roundedrectangle : D2D1_ROUNDED_RECT*, roundedrectanglegeometry : ID2D1RoundedRectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rounded_rectangle_geometry.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1RoundedRectangleGeometry*, HRESULT)).call(roundedrectangle, roundedrectanglegeometry)
+  end
+  def create_ellipse_geometry(ellipse : D2D1_ELLIPSE*, ellipsegeometry : ID2D1EllipseGeometry*) : HRESULT
+    @lpVtbl.value.create_ellipse_geometry.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1EllipseGeometry*, HRESULT)).call(ellipse, ellipsegeometry)
+  end
+  def create_geometry_group(fillmode : D2D1_FILL_MODE, geometries : ID2D1Geometry*, geometriescount : UInt32, geometrygroup : ID2D1GeometryGroup*) : HRESULT
+    @lpVtbl.value.create_geometry_group.unsafe_as(Proc(D2D1_FILL_MODE, ID2D1Geometry*, UInt32, ID2D1GeometryGroup*, HRESULT)).call(fillmode, geometries, geometriescount, geometrygroup)
+  end
+  def create_transformed_geometry(sourcegeometry : ID2D1Geometry, transform : D2D_MATRIX_3X2_F*, transformedgeometry : ID2D1TransformedGeometry*) : HRESULT
+    @lpVtbl.value.create_transformed_geometry.unsafe_as(Proc(ID2D1Geometry, D2D_MATRIX_3X2_F*, ID2D1TransformedGeometry*, HRESULT)).call(sourcegeometry, transform, transformedgeometry)
+  end
+  def create_path_geometry(pathgeometry : ID2D1PathGeometry*) : HRESULT
+    @lpVtbl.value.create_path_geometry.unsafe_as(Proc(ID2D1PathGeometry*, HRESULT)).call(pathgeometry)
+  end
+  def create_stroke_style(strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle*) : HRESULT
+    @lpVtbl.value.create_stroke_style.unsafe_as(Proc(D2D1_STROKE_STYLE_PROPERTIES*, Float32*, UInt32, ID2D1StrokeStyle*, HRESULT)).call(strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_drawing_state_block(drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION*, IDWriteRenderingParams, ID2D1DrawingStateBlock*, HRESULT)).call(drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_wic_bitmap_render_target(target : IWICBitmap, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_wic_bitmap_render_target.unsafe_as(Proc(IWICBitmap, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)).call(target, rendertargetproperties, rendertarget)
+  end
+  def create_hwnd_render_target(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, hwndrendertargetproperties : D2D1_HWND_RENDER_TARGET_PROPERTIES*, hwndrendertarget : ID2D1HwndRenderTarget*) : HRESULT
+    @lpVtbl.value.create_hwnd_render_target.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, D2D1_HWND_RENDER_TARGET_PROPERTIES*, ID2D1HwndRenderTarget*, HRESULT)).call(rendertargetproperties, hwndrendertargetproperties, hwndrendertarget)
+  end
+  def create_dxgi_surface_render_target(dxgisurface : IDXGISurface, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_dxgi_surface_render_target.unsafe_as(Proc(IDXGISurface, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)).call(dxgisurface, rendertargetproperties, rendertarget)
+  end
+  def create_dc_render_target(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, dcrendertarget : ID2D1DCRenderTarget*) : HRESULT
+    @lpVtbl.value.create_dc_render_target.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)).call(rendertargetproperties, dcrendertarget)
+  end
+  def create_device(dxgidevice : IDXGIDevice, d2ddevice : ID2D1Device*) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(IDXGIDevice, ID2D1Device*, HRESULT)).call(dxgidevice, d2ddevice)
+  end
+  def create_stroke_style2(strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES1*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle1*) : HRESULT
+    @lpVtbl.value.create_stroke_style2.unsafe_as(Proc(D2D1_STROKE_STYLE_PROPERTIES1*, Float32*, UInt32, ID2D1StrokeStyle1*, HRESULT)).call(strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_path_geometry2(pathgeometry : ID2D1PathGeometry1*) : HRESULT
+    @lpVtbl.value.create_path_geometry2.unsafe_as(Proc(ID2D1PathGeometry1*, HRESULT)).call(pathgeometry)
+  end
+  def create_drawing_state_block2(drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION1*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock1*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block2.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION1*, IDWriteRenderingParams, ID2D1DrawingStateBlock1*, HRESULT)).call(drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_gdi_metafile(metafilestream : IStream, metafile : ID2D1GdiMetafile*) : HRESULT
+    @lpVtbl.value.create_gdi_metafile.unsafe_as(Proc(IStream, ID2D1GdiMetafile*, HRESULT)).call(metafilestream, metafile)
+  end
+  def register_effect_from_stream(classid : Guid*, propertyxml : IStream, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_stream.unsafe_as(Proc(Guid*, IStream, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)).call(classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def register_effect_from_string(classid : Guid*, propertyxml : LibC::LPWSTR, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_string.unsafe_as(Proc(Guid*, LibC::LPWSTR, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)).call(classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def unregister_effect(classid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_effect.unsafe_as(Proc(Guid*, HRESULT)).call(classid)
+  end
+  def get_registered_effects(effects : Guid*, effectscount : UInt32, effectsreturned : UInt32*, effectsregistered : UInt32*) : HRESULT
+    @lpVtbl.value.get_registered_effects.unsafe_as(Proc(Guid*, UInt32, UInt32*, UInt32*, HRESULT)).call(effects, effectscount, effectsreturned, effectsregistered)
+  end
+  def get_effect_properties(effectid : Guid*, properties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_effect_properties.unsafe_as(Proc(Guid*, ID2D1Properties*, HRESULT)).call(effectid, properties)
+  end
+end
+struct LibWin32::ID2D1Multithread
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_multithread_protected : LibC::BOOL
+    @lpVtbl.value.get_multithread_protected.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def enter : Void
+    @lpVtbl.value.enter.unsafe_as(Proc(Void)).call
+  end
+  def leave : Void
+    @lpVtbl.value.leave.unsafe_as(Proc(Void)).call
+  end
+end
+struct LibWin32::ID2D1VertexBuffer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def map(data : UInt8**, buffersize : UInt32) : HRESULT
+    @lpVtbl.value.map.unsafe_as(Proc(UInt8**, UInt32, HRESULT)).call(data, buffersize)
+  end
+  def unmap : HRESULT
+    @lpVtbl.value.unmap.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ID2D1ResourceTexture
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def update(minimumextents : UInt32*, maximimumextents : UInt32*, strides : UInt32*, dimensions : UInt32, data : UInt8*, datacount : UInt32) : HRESULT
+    @lpVtbl.value.update.unsafe_as(Proc(UInt32*, UInt32*, UInt32*, UInt32, UInt8*, UInt32, HRESULT)).call(minimumextents, maximimumextents, strides, dimensions, data, datacount)
+  end
+end
+struct LibWin32::ID2D1RenderInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input_description(inputindex : UInt32, inputdescription : D2D1_INPUT_DESCRIPTION) : HRESULT
+    @lpVtbl.value.set_input_description.unsafe_as(Proc(UInt32, D2D1_INPUT_DESCRIPTION, HRESULT)).call(inputindex, inputdescription)
+  end
+  def set_output_buffer(bufferprecision : D2D1_BUFFER_PRECISION, channeldepth : D2D1_CHANNEL_DEPTH) : HRESULT
+    @lpVtbl.value.set_output_buffer.unsafe_as(Proc(D2D1_BUFFER_PRECISION, D2D1_CHANNEL_DEPTH, HRESULT)).call(bufferprecision, channeldepth)
+  end
+  def set_cached(iscached : LibC::BOOL) : Void
+    @lpVtbl.value.set_cached.unsafe_as(Proc(LibC::BOOL, Void)).call(iscached)
+  end
+  def set_instruction_count_hint(instructioncount : UInt32) : Void
+    @lpVtbl.value.set_instruction_count_hint.unsafe_as(Proc(UInt32, Void)).call(instructioncount)
+  end
+end
+struct LibWin32::ID2D1DrawInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input_description(inputindex : UInt32, inputdescription : D2D1_INPUT_DESCRIPTION) : HRESULT
+    @lpVtbl.value.set_input_description.unsafe_as(Proc(UInt32, D2D1_INPUT_DESCRIPTION, HRESULT)).call(inputindex, inputdescription)
+  end
+  def set_output_buffer(bufferprecision : D2D1_BUFFER_PRECISION, channeldepth : D2D1_CHANNEL_DEPTH) : HRESULT
+    @lpVtbl.value.set_output_buffer.unsafe_as(Proc(D2D1_BUFFER_PRECISION, D2D1_CHANNEL_DEPTH, HRESULT)).call(bufferprecision, channeldepth)
+  end
+  def set_cached(iscached : LibC::BOOL) : Void
+    @lpVtbl.value.set_cached.unsafe_as(Proc(LibC::BOOL, Void)).call(iscached)
+  end
+  def set_instruction_count_hint(instructioncount : UInt32) : Void
+    @lpVtbl.value.set_instruction_count_hint.unsafe_as(Proc(UInt32, Void)).call(instructioncount)
+  end
+  def set_pixel_shader_constant_buffer(buffer : UInt8*, buffercount : UInt32) : HRESULT
+    @lpVtbl.value.set_pixel_shader_constant_buffer.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(buffer, buffercount)
+  end
+  def set_resource_texture(textureindex : UInt32, resourcetexture : ID2D1ResourceTexture) : HRESULT
+    @lpVtbl.value.set_resource_texture.unsafe_as(Proc(UInt32, ID2D1ResourceTexture, HRESULT)).call(textureindex, resourcetexture)
+  end
+  def set_vertex_shader_constant_buffer(buffer : UInt8*, buffercount : UInt32) : HRESULT
+    @lpVtbl.value.set_vertex_shader_constant_buffer.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(buffer, buffercount)
+  end
+  def set_pixel_shader(shaderid : Guid*, pixeloptions : D2D1_PIXEL_OPTIONS) : HRESULT
+    @lpVtbl.value.set_pixel_shader.unsafe_as(Proc(Guid*, D2D1_PIXEL_OPTIONS, HRESULT)).call(shaderid, pixeloptions)
+  end
+  def set_vertex_processing(vertexbuffer : ID2D1VertexBuffer, vertexoptions : D2D1_VERTEX_OPTIONS, blenddescription : D2D1_BLEND_DESCRIPTION*, vertexrange : D2D1_VERTEX_RANGE*, vertexshader : Guid*) : HRESULT
+    @lpVtbl.value.set_vertex_processing.unsafe_as(Proc(ID2D1VertexBuffer, D2D1_VERTEX_OPTIONS, D2D1_BLEND_DESCRIPTION*, D2D1_VERTEX_RANGE*, Guid*, HRESULT)).call(vertexbuffer, vertexoptions, blenddescription, vertexrange, vertexshader)
+  end
+end
+struct LibWin32::ID2D1ComputeInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input_description(inputindex : UInt32, inputdescription : D2D1_INPUT_DESCRIPTION) : HRESULT
+    @lpVtbl.value.set_input_description.unsafe_as(Proc(UInt32, D2D1_INPUT_DESCRIPTION, HRESULT)).call(inputindex, inputdescription)
+  end
+  def set_output_buffer(bufferprecision : D2D1_BUFFER_PRECISION, channeldepth : D2D1_CHANNEL_DEPTH) : HRESULT
+    @lpVtbl.value.set_output_buffer.unsafe_as(Proc(D2D1_BUFFER_PRECISION, D2D1_CHANNEL_DEPTH, HRESULT)).call(bufferprecision, channeldepth)
+  end
+  def set_cached(iscached : LibC::BOOL) : Void
+    @lpVtbl.value.set_cached.unsafe_as(Proc(LibC::BOOL, Void)).call(iscached)
+  end
+  def set_instruction_count_hint(instructioncount : UInt32) : Void
+    @lpVtbl.value.set_instruction_count_hint.unsafe_as(Proc(UInt32, Void)).call(instructioncount)
+  end
+  def set_compute_shader_constant_buffer(buffer : UInt8*, buffercount : UInt32) : HRESULT
+    @lpVtbl.value.set_compute_shader_constant_buffer.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(buffer, buffercount)
+  end
+  def set_compute_shader(shaderid : Guid*) : HRESULT
+    @lpVtbl.value.set_compute_shader.unsafe_as(Proc(Guid*, HRESULT)).call(shaderid)
+  end
+  def set_resource_texture(textureindex : UInt32, resourcetexture : ID2D1ResourceTexture) : HRESULT
+    @lpVtbl.value.set_resource_texture.unsafe_as(Proc(UInt32, ID2D1ResourceTexture, HRESULT)).call(textureindex, resourcetexture)
+  end
+end
+struct LibWin32::ID2D1TransformNode
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_input_count : UInt32
+    @lpVtbl.value.get_input_count.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::ID2D1TransformGraph
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_input_count : UInt32
+    @lpVtbl.value.get_input_count.unsafe_as(Proc(UInt32)).call
+  end
+  def set_single_transform_node(node : ID2D1TransformNode) : HRESULT
+    @lpVtbl.value.set_single_transform_node.unsafe_as(Proc(ID2D1TransformNode, HRESULT)).call(node)
+  end
+  def add_node(node : ID2D1TransformNode) : HRESULT
+    @lpVtbl.value.add_node.unsafe_as(Proc(ID2D1TransformNode, HRESULT)).call(node)
+  end
+  def remove_node(node : ID2D1TransformNode) : HRESULT
+    @lpVtbl.value.remove_node.unsafe_as(Proc(ID2D1TransformNode, HRESULT)).call(node)
+  end
+  def set_output_node(node : ID2D1TransformNode) : HRESULT
+    @lpVtbl.value.set_output_node.unsafe_as(Proc(ID2D1TransformNode, HRESULT)).call(node)
+  end
+  def connect_node(fromnode : ID2D1TransformNode, tonode : ID2D1TransformNode, tonodeinputindex : UInt32) : HRESULT
+    @lpVtbl.value.connect_node.unsafe_as(Proc(ID2D1TransformNode, ID2D1TransformNode, UInt32, HRESULT)).call(fromnode, tonode, tonodeinputindex)
+  end
+  def connect_to_effect_input(toeffectinputindex : UInt32, node : ID2D1TransformNode, tonodeinputindex : UInt32) : HRESULT
+    @lpVtbl.value.connect_to_effect_input.unsafe_as(Proc(UInt32, ID2D1TransformNode, UInt32, HRESULT)).call(toeffectinputindex, node, tonodeinputindex)
+  end
+  def clear : Void
+    @lpVtbl.value.clear.unsafe_as(Proc(Void)).call
+  end
+  def set_passthrough_graph(effectinputindex : UInt32) : HRESULT
+    @lpVtbl.value.set_passthrough_graph.unsafe_as(Proc(UInt32, HRESULT)).call(effectinputindex)
+  end
+end
+struct LibWin32::ID2D1Transform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_input_count : UInt32
+    @lpVtbl.value.get_input_count.unsafe_as(Proc(UInt32)).call
+  end
+  def map_output_rect_to_input_rects(outputrect : RECT*, inputrects : RECT*, inputrectscount : UInt32) : HRESULT
+    @lpVtbl.value.map_output_rect_to_input_rects.unsafe_as(Proc(RECT*, RECT*, UInt32, HRESULT)).call(outputrect, inputrects, inputrectscount)
+  end
+  def map_input_rects_to_output_rect(inputrects : RECT*, inputopaquesubrects : RECT*, inputrectcount : UInt32, outputrect : RECT*, outputopaquesubrect : RECT*) : HRESULT
+    @lpVtbl.value.map_input_rects_to_output_rect.unsafe_as(Proc(RECT*, RECT*, UInt32, RECT*, RECT*, HRESULT)).call(inputrects, inputopaquesubrects, inputrectcount, outputrect, outputopaquesubrect)
+  end
+  def map_invalid_rect(inputindex : UInt32, invalidinputrect : RECT, invalidoutputrect : RECT*) : HRESULT
+    @lpVtbl.value.map_invalid_rect.unsafe_as(Proc(UInt32, RECT, RECT*, HRESULT)).call(inputindex, invalidinputrect, invalidoutputrect)
+  end
+end
+struct LibWin32::ID2D1DrawTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_input_count : UInt32
+    @lpVtbl.value.get_input_count.unsafe_as(Proc(UInt32)).call
+  end
+  def map_output_rect_to_input_rects(outputrect : RECT*, inputrects : RECT*, inputrectscount : UInt32) : HRESULT
+    @lpVtbl.value.map_output_rect_to_input_rects.unsafe_as(Proc(RECT*, RECT*, UInt32, HRESULT)).call(outputrect, inputrects, inputrectscount)
+  end
+  def map_input_rects_to_output_rect(inputrects : RECT*, inputopaquesubrects : RECT*, inputrectcount : UInt32, outputrect : RECT*, outputopaquesubrect : RECT*) : HRESULT
+    @lpVtbl.value.map_input_rects_to_output_rect.unsafe_as(Proc(RECT*, RECT*, UInt32, RECT*, RECT*, HRESULT)).call(inputrects, inputopaquesubrects, inputrectcount, outputrect, outputopaquesubrect)
+  end
+  def map_invalid_rect(inputindex : UInt32, invalidinputrect : RECT, invalidoutputrect : RECT*) : HRESULT
+    @lpVtbl.value.map_invalid_rect.unsafe_as(Proc(UInt32, RECT, RECT*, HRESULT)).call(inputindex, invalidinputrect, invalidoutputrect)
+  end
+  def set_draw_info(drawinfo : ID2D1DrawInfo) : HRESULT
+    @lpVtbl.value.set_draw_info.unsafe_as(Proc(ID2D1DrawInfo, HRESULT)).call(drawinfo)
+  end
+end
+struct LibWin32::ID2D1ComputeTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_input_count : UInt32
+    @lpVtbl.value.get_input_count.unsafe_as(Proc(UInt32)).call
+  end
+  def map_output_rect_to_input_rects(outputrect : RECT*, inputrects : RECT*, inputrectscount : UInt32) : HRESULT
+    @lpVtbl.value.map_output_rect_to_input_rects.unsafe_as(Proc(RECT*, RECT*, UInt32, HRESULT)).call(outputrect, inputrects, inputrectscount)
+  end
+  def map_input_rects_to_output_rect(inputrects : RECT*, inputopaquesubrects : RECT*, inputrectcount : UInt32, outputrect : RECT*, outputopaquesubrect : RECT*) : HRESULT
+    @lpVtbl.value.map_input_rects_to_output_rect.unsafe_as(Proc(RECT*, RECT*, UInt32, RECT*, RECT*, HRESULT)).call(inputrects, inputopaquesubrects, inputrectcount, outputrect, outputopaquesubrect)
+  end
+  def map_invalid_rect(inputindex : UInt32, invalidinputrect : RECT, invalidoutputrect : RECT*) : HRESULT
+    @lpVtbl.value.map_invalid_rect.unsafe_as(Proc(UInt32, RECT, RECT*, HRESULT)).call(inputindex, invalidinputrect, invalidoutputrect)
+  end
+  def set_compute_info(computeinfo : ID2D1ComputeInfo) : HRESULT
+    @lpVtbl.value.set_compute_info.unsafe_as(Proc(ID2D1ComputeInfo, HRESULT)).call(computeinfo)
+  end
+  def calculate_threadgroups(outputrect : RECT*, dimensionx : UInt32*, dimensiony : UInt32*, dimensionz : UInt32*) : HRESULT
+    @lpVtbl.value.calculate_threadgroups.unsafe_as(Proc(RECT*, UInt32*, UInt32*, UInt32*, HRESULT)).call(outputrect, dimensionx, dimensiony, dimensionz)
+  end
+end
+struct LibWin32::ID2D1AnalysisTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def process_analysis_results(analysisdata : UInt8*, analysisdatacount : UInt32) : HRESULT
+    @lpVtbl.value.process_analysis_results.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(analysisdata, analysisdatacount)
+  end
+end
+struct LibWin32::ID2D1SourceTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_input_count : UInt32
+    @lpVtbl.value.get_input_count.unsafe_as(Proc(UInt32)).call
+  end
+  def map_output_rect_to_input_rects(outputrect : RECT*, inputrects : RECT*, inputrectscount : UInt32) : HRESULT
+    @lpVtbl.value.map_output_rect_to_input_rects.unsafe_as(Proc(RECT*, RECT*, UInt32, HRESULT)).call(outputrect, inputrects, inputrectscount)
+  end
+  def map_input_rects_to_output_rect(inputrects : RECT*, inputopaquesubrects : RECT*, inputrectcount : UInt32, outputrect : RECT*, outputopaquesubrect : RECT*) : HRESULT
+    @lpVtbl.value.map_input_rects_to_output_rect.unsafe_as(Proc(RECT*, RECT*, UInt32, RECT*, RECT*, HRESULT)).call(inputrects, inputopaquesubrects, inputrectcount, outputrect, outputopaquesubrect)
+  end
+  def map_invalid_rect(inputindex : UInt32, invalidinputrect : RECT, invalidoutputrect : RECT*) : HRESULT
+    @lpVtbl.value.map_invalid_rect.unsafe_as(Proc(UInt32, RECT, RECT*, HRESULT)).call(inputindex, invalidinputrect, invalidoutputrect)
+  end
+  def set_render_info(renderinfo : ID2D1RenderInfo) : HRESULT
+    @lpVtbl.value.set_render_info.unsafe_as(Proc(ID2D1RenderInfo, HRESULT)).call(renderinfo)
+  end
+  def draw(target : ID2D1Bitmap1, drawrect : RECT*, targetorigin : D2D_POINT_2U) : HRESULT
+    @lpVtbl.value.draw.unsafe_as(Proc(ID2D1Bitmap1, RECT*, D2D_POINT_2U, HRESULT)).call(target, drawrect, targetorigin)
+  end
+end
+struct LibWin32::ID2D1ConcreteTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_input_count : UInt32
+    @lpVtbl.value.get_input_count.unsafe_as(Proc(UInt32)).call
+  end
+  def set_output_buffer(bufferprecision : D2D1_BUFFER_PRECISION, channeldepth : D2D1_CHANNEL_DEPTH) : HRESULT
+    @lpVtbl.value.set_output_buffer.unsafe_as(Proc(D2D1_BUFFER_PRECISION, D2D1_CHANNEL_DEPTH, HRESULT)).call(bufferprecision, channeldepth)
+  end
+  def set_cached(iscached : LibC::BOOL) : Void
+    @lpVtbl.value.set_cached.unsafe_as(Proc(LibC::BOOL, Void)).call(iscached)
+  end
+end
+struct LibWin32::ID2D1BlendTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_input_count : UInt32
+    @lpVtbl.value.get_input_count.unsafe_as(Proc(UInt32)).call
+  end
+  def set_output_buffer(bufferprecision : D2D1_BUFFER_PRECISION, channeldepth : D2D1_CHANNEL_DEPTH) : HRESULT
+    @lpVtbl.value.set_output_buffer.unsafe_as(Proc(D2D1_BUFFER_PRECISION, D2D1_CHANNEL_DEPTH, HRESULT)).call(bufferprecision, channeldepth)
+  end
+  def set_cached(iscached : LibC::BOOL) : Void
+    @lpVtbl.value.set_cached.unsafe_as(Proc(LibC::BOOL, Void)).call(iscached)
+  end
+  def set_description(description : D2D1_BLEND_DESCRIPTION*) : Void
+    @lpVtbl.value.set_description.unsafe_as(Proc(D2D1_BLEND_DESCRIPTION*, Void)).call(description)
+  end
+  def get_description(description : D2D1_BLEND_DESCRIPTION*) : Void
+    @lpVtbl.value.get_description.unsafe_as(Proc(D2D1_BLEND_DESCRIPTION*, Void)).call(description)
+  end
+end
+struct LibWin32::ID2D1BorderTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_input_count : UInt32
+    @lpVtbl.value.get_input_count.unsafe_as(Proc(UInt32)).call
+  end
+  def set_output_buffer(bufferprecision : D2D1_BUFFER_PRECISION, channeldepth : D2D1_CHANNEL_DEPTH) : HRESULT
+    @lpVtbl.value.set_output_buffer.unsafe_as(Proc(D2D1_BUFFER_PRECISION, D2D1_CHANNEL_DEPTH, HRESULT)).call(bufferprecision, channeldepth)
+  end
+  def set_cached(iscached : LibC::BOOL) : Void
+    @lpVtbl.value.set_cached.unsafe_as(Proc(LibC::BOOL, Void)).call(iscached)
+  end
+  def set_extend_mode_x(extendmode : D2D1_EXTEND_MODE) : Void
+    @lpVtbl.value.set_extend_mode_x.unsafe_as(Proc(D2D1_EXTEND_MODE, Void)).call(extendmode)
+  end
+  def set_extend_mode_y(extendmode : D2D1_EXTEND_MODE) : Void
+    @lpVtbl.value.set_extend_mode_y.unsafe_as(Proc(D2D1_EXTEND_MODE, Void)).call(extendmode)
+  end
+  def get_extend_mode_x : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode_x.unsafe_as(Proc(D2D1_EXTEND_MODE)).call
+  end
+  def get_extend_mode_y : D2D1_EXTEND_MODE
+    @lpVtbl.value.get_extend_mode_y.unsafe_as(Proc(D2D1_EXTEND_MODE)).call
+  end
+end
+struct LibWin32::ID2D1OffsetTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_input_count : UInt32
+    @lpVtbl.value.get_input_count.unsafe_as(Proc(UInt32)).call
+  end
+  def set_offset(offset : POINT) : Void
+    @lpVtbl.value.set_offset.unsafe_as(Proc(POINT, Void)).call(offset)
+  end
+  def get_offset : POINT
+    @lpVtbl.value.get_offset.unsafe_as(Proc(POINT)).call
+  end
+end
+struct LibWin32::ID2D1BoundsAdjustmentTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_input_count : UInt32
+    @lpVtbl.value.get_input_count.unsafe_as(Proc(UInt32)).call
+  end
+  def set_output_bounds(outputbounds : RECT*) : Void
+    @lpVtbl.value.set_output_bounds.unsafe_as(Proc(RECT*, Void)).call(outputbounds)
+  end
+  def get_output_bounds(outputbounds : RECT*) : Void
+    @lpVtbl.value.get_output_bounds.unsafe_as(Proc(RECT*, Void)).call(outputbounds)
+  end
+end
+struct LibWin32::ID2D1EffectImpl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(effectcontext : ID2D1EffectContext, transformgraph : ID2D1TransformGraph) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(ID2D1EffectContext, ID2D1TransformGraph, HRESULT)).call(effectcontext, transformgraph)
+  end
+  def prepare_for_render(changetype : D2D1_CHANGE_TYPE) : HRESULT
+    @lpVtbl.value.prepare_for_render.unsafe_as(Proc(D2D1_CHANGE_TYPE, HRESULT)).call(changetype)
+  end
+  def set_graph(transformgraph : ID2D1TransformGraph) : HRESULT
+    @lpVtbl.value.set_graph.unsafe_as(Proc(ID2D1TransformGraph, HRESULT)).call(transformgraph)
+  end
+end
+struct LibWin32::ID2D1EffectContext
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def create_effect(effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.unsafe_as(Proc(Guid*, ID2D1Effect*, HRESULT)).call(effectid, effect)
+  end
+  def get_maximum_supported_feature_level(featurelevels : D3D_FEATURE_LEVEL*, featurelevelscount : UInt32, maximumsupportedfeaturelevel : D3D_FEATURE_LEVEL*) : HRESULT
+    @lpVtbl.value.get_maximum_supported_feature_level.unsafe_as(Proc(D3D_FEATURE_LEVEL*, UInt32, D3D_FEATURE_LEVEL*, HRESULT)).call(featurelevels, featurelevelscount, maximumsupportedfeaturelevel)
+  end
+  def create_transform_node_from_effect(effect : ID2D1Effect, transformnode : ID2D1TransformNode*) : HRESULT
+    @lpVtbl.value.create_transform_node_from_effect.unsafe_as(Proc(ID2D1Effect, ID2D1TransformNode*, HRESULT)).call(effect, transformnode)
+  end
+  def create_blend_transform(numinputs : UInt32, blenddescription : D2D1_BLEND_DESCRIPTION*, transform : ID2D1BlendTransform*) : HRESULT
+    @lpVtbl.value.create_blend_transform.unsafe_as(Proc(UInt32, D2D1_BLEND_DESCRIPTION*, ID2D1BlendTransform*, HRESULT)).call(numinputs, blenddescription, transform)
+  end
+  def create_border_transform(extendmodex : D2D1_EXTEND_MODE, extendmodey : D2D1_EXTEND_MODE, transform : ID2D1BorderTransform*) : HRESULT
+    @lpVtbl.value.create_border_transform.unsafe_as(Proc(D2D1_EXTEND_MODE, D2D1_EXTEND_MODE, ID2D1BorderTransform*, HRESULT)).call(extendmodex, extendmodey, transform)
+  end
+  def create_offset_transform(offset : POINT, transform : ID2D1OffsetTransform*) : HRESULT
+    @lpVtbl.value.create_offset_transform.unsafe_as(Proc(POINT, ID2D1OffsetTransform*, HRESULT)).call(offset, transform)
+  end
+  def create_bounds_adjustment_transform(outputrectangle : RECT*, transform : ID2D1BoundsAdjustmentTransform*) : HRESULT
+    @lpVtbl.value.create_bounds_adjustment_transform.unsafe_as(Proc(RECT*, ID2D1BoundsAdjustmentTransform*, HRESULT)).call(outputrectangle, transform)
+  end
+  def load_pixel_shader(shaderid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_pixel_shader.unsafe_as(Proc(Guid*, UInt8*, UInt32, HRESULT)).call(shaderid, shaderbuffer, shaderbuffercount)
+  end
+  def load_vertex_shader(resourceid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_vertex_shader.unsafe_as(Proc(Guid*, UInt8*, UInt32, HRESULT)).call(resourceid, shaderbuffer, shaderbuffercount)
+  end
+  def load_compute_shader(resourceid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_compute_shader.unsafe_as(Proc(Guid*, UInt8*, UInt32, HRESULT)).call(resourceid, shaderbuffer, shaderbuffercount)
+  end
+  def is_shader_loaded(shaderid : Guid*) : LibC::BOOL
+    @lpVtbl.value.is_shader_loaded.unsafe_as(Proc(Guid*, LibC::BOOL)).call(shaderid)
+  end
+  def create_resource_texture(resourceid : Guid*, resourcetextureproperties : D2D1_RESOURCE_TEXTURE_PROPERTIES*, data : UInt8*, strides : UInt32*, datasize : UInt32, resourcetexture : ID2D1ResourceTexture*) : HRESULT
+    @lpVtbl.value.create_resource_texture.unsafe_as(Proc(Guid*, D2D1_RESOURCE_TEXTURE_PROPERTIES*, UInt8*, UInt32*, UInt32, ID2D1ResourceTexture*, HRESULT)).call(resourceid, resourcetextureproperties, data, strides, datasize, resourcetexture)
+  end
+  def find_resource_texture(resourceid : Guid*, resourcetexture : ID2D1ResourceTexture*) : HRESULT
+    @lpVtbl.value.find_resource_texture.unsafe_as(Proc(Guid*, ID2D1ResourceTexture*, HRESULT)).call(resourceid, resourcetexture)
+  end
+  def create_vertex_buffer(vertexbufferproperties : D2D1_VERTEX_BUFFER_PROPERTIES*, resourceid : Guid*, customvertexbufferproperties : D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES*, buffer : ID2D1VertexBuffer*) : HRESULT
+    @lpVtbl.value.create_vertex_buffer.unsafe_as(Proc(D2D1_VERTEX_BUFFER_PROPERTIES*, Guid*, D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES*, ID2D1VertexBuffer*, HRESULT)).call(vertexbufferproperties, resourceid, customvertexbufferproperties, buffer)
+  end
+  def find_vertex_buffer(resourceid : Guid*, buffer : ID2D1VertexBuffer*) : HRESULT
+    @lpVtbl.value.find_vertex_buffer.unsafe_as(Proc(Guid*, ID2D1VertexBuffer*, HRESULT)).call(resourceid, buffer)
+  end
+  def create_color_context(space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.unsafe_as(Proc(D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)).call(space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.unsafe_as(Proc(LibC::LPWSTR, ID2D1ColorContext*, HRESULT)).call(filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.unsafe_as(Proc(IWICColorContext, ID2D1ColorContext*, HRESULT)).call(wiccolorcontext, colorcontext)
+  end
+  def check_feature_support(feature : D2D1_FEATURE, featuresupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D2D1_FEATURE, Void*, UInt32, HRESULT)).call(feature, featuresupportdata, featuresupportdatasize)
+  end
+  def is_buffer_precision_supported(bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.unsafe_as(Proc(D2D1_BUFFER_PRECISION, LibC::BOOL)).call(bufferprecision)
+  end
+end
+struct LibWin32::ID2D1GeometryRealization
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+end
+struct LibWin32::ID2D1DeviceContext1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_bitmap(size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.unsafe_as(Proc(Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.unsafe_as(Proc(D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)).call(color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)).call(gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.unsafe_as(Proc(D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)).call(lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.unsafe_as(Proc(D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)).call(radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.unsafe_as(Proc(D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)).call(desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.unsafe_as(Proc(D2D_SIZE_F*, ID2D1Layer*, HRESULT)).call(size, layer)
+  end
+  def create_mesh(mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.unsafe_as(Proc(ID2D1Mesh*, HRESULT)).call(mesh)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Void)).call(rect, brush)
+  end
+  def draw_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Void)).call(roundedrect, brush)
+  end
+  def draw_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Void)).call(ellipse, brush)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)).call(geometry, brush, opacitybrush)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, Void)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)).call(string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.unsafe_as(Proc(D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)).call(origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, Void)).call(antialiasmode)
+  end
+  def get_antialias_mode : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE)).call
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, Void)).call(textantialiasmode)
+  end
+  def get_text_antialias_mode : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE)).call
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, Void)).call(textrenderingparams)
+  end
+  def get_text_rendering_params(textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, Void)).call(textrenderingparams)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, Void)).call(tag1, tag2)
+  end
+  def get_tags(tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.unsafe_as(Proc(UInt64*, UInt64*, Void)).call(tag1, tag2)
+  end
+  def push_layer(layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def pop_layer : Void
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(Void)).call
+  end
+  def flush(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def save_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def restore_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)).call(cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip : Void
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(Void)).call
+  end
+  def clear(clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, Void)).call(clearcolor)
+  end
+  def begin_draw : Void
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(Void)).call
+  end
+  def end_draw(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def get_pixel_format : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(D2D1_PIXEL_FORMAT)).call
+  end
+  def set_dpi(dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.unsafe_as(Proc(Float32, Float32, Void)).call(dpix, dpiy)
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def get_size : D2D_SIZE_F
+    @lpVtbl.value.get_size.unsafe_as(Proc(D2D_SIZE_F)).call
+  end
+  def get_pixel_size : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.unsafe_as(Proc(D2D_SIZE_U)).call
+  end
+  def get_maximum_bitmap_size : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.unsafe_as(Proc(UInt32)).call
+  end
+  def is_supported(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)).call(rendertargetproperties)
+  end
+  def create_bitmap2(size : D2D_SIZE_U, sourcedata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap2.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(size, sourcedata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap2(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap2.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_color_context(space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.unsafe_as(Proc(D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)).call(space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.unsafe_as(Proc(LibC::LPWSTR, ID2D1ColorContext*, HRESULT)).call(filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.unsafe_as(Proc(IWICColorContext, ID2D1ColorContext*, HRESULT)).call(wiccolorcontext, colorcontext)
+  end
+  def create_bitmap_from_dxgi_surface(surface : IDXGISurface, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_dxgi_surface.unsafe_as(Proc(IDXGISurface, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(surface, bitmapproperties, bitmap)
+  end
+  def create_effect(effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.unsafe_as(Proc(Guid*, ID2D1Effect*, HRESULT)).call(effectid, effect)
+  end
+  def create_gradient_stop_collection2(straightalphagradientstops : D2D1_GRADIENT_STOP*, straightalphagradientstopscount : UInt32, preinterpolationspace : D2D1_COLOR_SPACE, postinterpolationspace : D2D1_COLOR_SPACE, bufferprecision : D2D1_BUFFER_PRECISION, extendmode : D2D1_EXTEND_MODE, colorinterpolationmode : D2D1_COLOR_INTERPOLATION_MODE, gradientstopcollection1 : ID2D1GradientStopCollection1*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection2.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_COLOR_SPACE, D2D1_COLOR_SPACE, D2D1_BUFFER_PRECISION, D2D1_EXTEND_MODE, D2D1_COLOR_INTERPOLATION_MODE, ID2D1GradientStopCollection1*, HRESULT)).call(straightalphagradientstops, straightalphagradientstopscount, preinterpolationspace, postinterpolationspace, bufferprecision, extendmode, colorinterpolationmode, gradientstopcollection1)
+  end
+  def create_image_brush(image : ID2D1Image, imagebrushproperties : D2D1_IMAGE_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, imagebrush : ID2D1ImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.unsafe_as(Proc(ID2D1Image, D2D1_IMAGE_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1ImageBrush*, HRESULT)).call(image, imagebrushproperties, brushproperties, imagebrush)
+  end
+  def create_bitmap_brush2(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES1*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush1*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush2.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES1*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush1*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_command_list(commandlist : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(ID2D1CommandList*, HRESULT)).call(commandlist)
+  end
+  def is_dxgi_format_supported(format : DXGI_FORMAT) : LibC::BOOL
+    @lpVtbl.value.is_dxgi_format_supported.unsafe_as(Proc(DXGI_FORMAT, LibC::BOOL)).call(format)
+  end
+  def is_buffer_precision_supported(bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.unsafe_as(Proc(D2D1_BUFFER_PRECISION, LibC::BOOL)).call(bufferprecision)
+  end
+  def get_image_local_bounds(image : ID2D1Image, localbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_local_bounds.unsafe_as(Proc(ID2D1Image, D2D_RECT_F*, HRESULT)).call(image, localbounds)
+  end
+  def get_image_world_bounds(image : ID2D1Image, worldbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_world_bounds.unsafe_as(Proc(ID2D1Image, D2D_RECT_F*, HRESULT)).call(image, worldbounds)
+  end
+  def get_glyph_run_world_bounds(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_glyph_run_world_bounds.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_RECT_F*, HRESULT)).call(baselineorigin, glyphrun, measuringmode, bounds)
+  end
+  def get_device(device : ID2D1Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID2D1Device*, Void)).call(device)
+  end
+  def set_target(image : ID2D1Image) : Void
+    @lpVtbl.value.set_target.unsafe_as(Proc(ID2D1Image, Void)).call(image)
+  end
+  def get_target(image : ID2D1Image*) : Void
+    @lpVtbl.value.get_target.unsafe_as(Proc(ID2D1Image*, Void)).call(image)
+  end
+  def set_rendering_controls(renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.set_rendering_controls.unsafe_as(Proc(D2D1_RENDERING_CONTROLS*, Void)).call(renderingcontrols)
+  end
+  def get_rendering_controls(renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.get_rendering_controls.unsafe_as(Proc(D2D1_RENDERING_CONTROLS*, Void)).call(renderingcontrols)
+  end
+  def set_primitive_blend(primitiveblend : D2D1_PRIMITIVE_BLEND) : Void
+    @lpVtbl.value.set_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, Void)).call(primitiveblend)
+  end
+  def get_primitive_blend : D2D1_PRIMITIVE_BLEND
+    @lpVtbl.value.get_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND)).call
+  end
+  def set_unit_mode(unitmode : D2D1_UNIT_MODE) : Void
+    @lpVtbl.value.set_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE, Void)).call(unitmode)
+  end
+  def get_unit_mode : D2D1_UNIT_MODE
+    @lpVtbl.value.get_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE)).call
+  end
+  def draw_glyph_run2(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run2.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_image(image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : Void
+    @lpVtbl.value.draw_image.unsafe_as(Proc(ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, Void)).call(image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : Void
+    @lpVtbl.value.draw_gdi_metafile.unsafe_as(Proc(ID2D1GdiMetafile, D2D_POINT_2F*, Void)).call(gdimetafile, targetoffset)
+  end
+  def draw_bitmap2(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : Void
+    @lpVtbl.value.draw_bitmap2.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def push_layer2(layerparameters : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer2.unsafe_as(Proc(D2D1_LAYER_PARAMETERS1*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def invalidate_effect_input_rectangle(effect : ID2D1Effect, input : UInt32, inputrectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.invalidate_effect_input_rectangle.unsafe_as(Proc(ID2D1Effect, UInt32, D2D_RECT_F*, HRESULT)).call(effect, input, inputrectangle)
+  end
+  def get_effect_invalid_rectangle_count(effect : ID2D1Effect, rectanglecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangle_count.unsafe_as(Proc(ID2D1Effect, UInt32*, HRESULT)).call(effect, rectanglecount)
+  end
+  def get_effect_invalid_rectangles(effect : ID2D1Effect, rectangles : D2D_RECT_F*, rectanglescount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangles.unsafe_as(Proc(ID2D1Effect, D2D_RECT_F*, UInt32, HRESULT)).call(effect, rectangles, rectanglescount)
+  end
+  def get_effect_required_input_rectangles(rendereffect : ID2D1Effect, renderimagerectangle : D2D_RECT_F*, inputdescriptions : D2D1_EFFECT_INPUT_DESCRIPTION*, requiredinputrects : D2D_RECT_F*, inputcount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_required_input_rectangles.unsafe_as(Proc(ID2D1Effect, D2D_RECT_F*, D2D1_EFFECT_INPUT_DESCRIPTION*, D2D_RECT_F*, UInt32, HRESULT)).call(rendereffect, renderimagerectangle, inputdescriptions, requiredinputrects, inputcount)
+  end
+  def fill_opacity_mask2(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask2.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def create_filled_geometry_realization(geometry : ID2D1Geometry, flatteningtolerance : Float32, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_filled_geometry_realization.unsafe_as(Proc(ID2D1Geometry, Float32, ID2D1GeometryRealization*, HRESULT)).call(geometry, flatteningtolerance, geometryrealization)
+  end
+  def create_stroked_geometry_realization(geometry : ID2D1Geometry, flatteningtolerance : Float32, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_stroked_geometry_realization.unsafe_as(Proc(ID2D1Geometry, Float32, Float32, ID2D1StrokeStyle, ID2D1GeometryRealization*, HRESULT)).call(geometry, flatteningtolerance, strokewidth, strokestyle, geometryrealization)
+  end
+  def draw_geometry_realization(geometryrealization : ID2D1GeometryRealization, brush : ID2D1Brush) : Void
+    @lpVtbl.value.draw_geometry_realization.unsafe_as(Proc(ID2D1GeometryRealization, ID2D1Brush, Void)).call(geometryrealization, brush)
+  end
+end
+struct LibWin32::ID2D1Device1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_device_context(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext : ID2D1DeviceContext*) : HRESULT
+    @lpVtbl.value.create_device_context.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext*, HRESULT)).call(options, devicecontext)
+  end
+  def create_print_control(wicfactory : IWICImagingFactory, documenttarget : IPrintDocumentPackageTarget, printcontrolproperties : D2D1_PRINT_CONTROL_PROPERTIES*, printcontrol : ID2D1PrintControl*) : HRESULT
+    @lpVtbl.value.create_print_control.unsafe_as(Proc(IWICImagingFactory, IPrintDocumentPackageTarget, D2D1_PRINT_CONTROL_PROPERTIES*, ID2D1PrintControl*, HRESULT)).call(wicfactory, documenttarget, printcontrolproperties, printcontrol)
+  end
+  def set_maximum_texture_memory(maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_texture_memory.unsafe_as(Proc(UInt64, Void)).call(maximuminbytes)
+  end
+  def get_maximum_texture_memory : UInt64
+    @lpVtbl.value.get_maximum_texture_memory.unsafe_as(Proc(UInt64)).call
+  end
+  def clear_resources(millisecondssinceuse : UInt32) : Void
+    @lpVtbl.value.clear_resources.unsafe_as(Proc(UInt32, Void)).call(millisecondssinceuse)
+  end
+  def get_rendering_priority : D2D1_RENDERING_PRIORITY
+    @lpVtbl.value.get_rendering_priority.unsafe_as(Proc(D2D1_RENDERING_PRIORITY)).call
+  end
+  def set_rendering_priority(renderingpriority : D2D1_RENDERING_PRIORITY) : Void
+    @lpVtbl.value.set_rendering_priority.unsafe_as(Proc(D2D1_RENDERING_PRIORITY, Void)).call(renderingpriority)
+  end
+  def create_device_context2(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext1 : ID2D1DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_device_context2.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext1*, HRESULT)).call(options, devicecontext1)
+  end
+end
+struct LibWin32::ID2D1Factory2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def reload_system_metrics : HRESULT
+    @lpVtbl.value.reload_system_metrics.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_desktop_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_desktop_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def create_rectangle_geometry(rectangle : D2D_RECT_F*, rectanglegeometry : ID2D1RectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rectangle_geometry.unsafe_as(Proc(D2D_RECT_F*, ID2D1RectangleGeometry*, HRESULT)).call(rectangle, rectanglegeometry)
+  end
+  def create_rounded_rectangle_geometry(roundedrectangle : D2D1_ROUNDED_RECT*, roundedrectanglegeometry : ID2D1RoundedRectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rounded_rectangle_geometry.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1RoundedRectangleGeometry*, HRESULT)).call(roundedrectangle, roundedrectanglegeometry)
+  end
+  def create_ellipse_geometry(ellipse : D2D1_ELLIPSE*, ellipsegeometry : ID2D1EllipseGeometry*) : HRESULT
+    @lpVtbl.value.create_ellipse_geometry.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1EllipseGeometry*, HRESULT)).call(ellipse, ellipsegeometry)
+  end
+  def create_geometry_group(fillmode : D2D1_FILL_MODE, geometries : ID2D1Geometry*, geometriescount : UInt32, geometrygroup : ID2D1GeometryGroup*) : HRESULT
+    @lpVtbl.value.create_geometry_group.unsafe_as(Proc(D2D1_FILL_MODE, ID2D1Geometry*, UInt32, ID2D1GeometryGroup*, HRESULT)).call(fillmode, geometries, geometriescount, geometrygroup)
+  end
+  def create_transformed_geometry(sourcegeometry : ID2D1Geometry, transform : D2D_MATRIX_3X2_F*, transformedgeometry : ID2D1TransformedGeometry*) : HRESULT
+    @lpVtbl.value.create_transformed_geometry.unsafe_as(Proc(ID2D1Geometry, D2D_MATRIX_3X2_F*, ID2D1TransformedGeometry*, HRESULT)).call(sourcegeometry, transform, transformedgeometry)
+  end
+  def create_path_geometry(pathgeometry : ID2D1PathGeometry*) : HRESULT
+    @lpVtbl.value.create_path_geometry.unsafe_as(Proc(ID2D1PathGeometry*, HRESULT)).call(pathgeometry)
+  end
+  def create_stroke_style(strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle*) : HRESULT
+    @lpVtbl.value.create_stroke_style.unsafe_as(Proc(D2D1_STROKE_STYLE_PROPERTIES*, Float32*, UInt32, ID2D1StrokeStyle*, HRESULT)).call(strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_drawing_state_block(drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION*, IDWriteRenderingParams, ID2D1DrawingStateBlock*, HRESULT)).call(drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_wic_bitmap_render_target(target : IWICBitmap, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_wic_bitmap_render_target.unsafe_as(Proc(IWICBitmap, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)).call(target, rendertargetproperties, rendertarget)
+  end
+  def create_hwnd_render_target(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, hwndrendertargetproperties : D2D1_HWND_RENDER_TARGET_PROPERTIES*, hwndrendertarget : ID2D1HwndRenderTarget*) : HRESULT
+    @lpVtbl.value.create_hwnd_render_target.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, D2D1_HWND_RENDER_TARGET_PROPERTIES*, ID2D1HwndRenderTarget*, HRESULT)).call(rendertargetproperties, hwndrendertargetproperties, hwndrendertarget)
+  end
+  def create_dxgi_surface_render_target(dxgisurface : IDXGISurface, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_dxgi_surface_render_target.unsafe_as(Proc(IDXGISurface, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)).call(dxgisurface, rendertargetproperties, rendertarget)
+  end
+  def create_dc_render_target(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, dcrendertarget : ID2D1DCRenderTarget*) : HRESULT
+    @lpVtbl.value.create_dc_render_target.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)).call(rendertargetproperties, dcrendertarget)
+  end
+  def create_device(dxgidevice : IDXGIDevice, d2ddevice : ID2D1Device*) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(IDXGIDevice, ID2D1Device*, HRESULT)).call(dxgidevice, d2ddevice)
+  end
+  def create_stroke_style2(strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES1*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle1*) : HRESULT
+    @lpVtbl.value.create_stroke_style2.unsafe_as(Proc(D2D1_STROKE_STYLE_PROPERTIES1*, Float32*, UInt32, ID2D1StrokeStyle1*, HRESULT)).call(strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_path_geometry2(pathgeometry : ID2D1PathGeometry1*) : HRESULT
+    @lpVtbl.value.create_path_geometry2.unsafe_as(Proc(ID2D1PathGeometry1*, HRESULT)).call(pathgeometry)
+  end
+  def create_drawing_state_block2(drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION1*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock1*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block2.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION1*, IDWriteRenderingParams, ID2D1DrawingStateBlock1*, HRESULT)).call(drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_gdi_metafile(metafilestream : IStream, metafile : ID2D1GdiMetafile*) : HRESULT
+    @lpVtbl.value.create_gdi_metafile.unsafe_as(Proc(IStream, ID2D1GdiMetafile*, HRESULT)).call(metafilestream, metafile)
+  end
+  def register_effect_from_stream(classid : Guid*, propertyxml : IStream, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_stream.unsafe_as(Proc(Guid*, IStream, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)).call(classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def register_effect_from_string(classid : Guid*, propertyxml : LibC::LPWSTR, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_string.unsafe_as(Proc(Guid*, LibC::LPWSTR, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)).call(classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def unregister_effect(classid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_effect.unsafe_as(Proc(Guid*, HRESULT)).call(classid)
+  end
+  def get_registered_effects(effects : Guid*, effectscount : UInt32, effectsreturned : UInt32*, effectsregistered : UInt32*) : HRESULT
+    @lpVtbl.value.get_registered_effects.unsafe_as(Proc(Guid*, UInt32, UInt32*, UInt32*, HRESULT)).call(effects, effectscount, effectsreturned, effectsregistered)
+  end
+  def get_effect_properties(effectid : Guid*, properties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_effect_properties.unsafe_as(Proc(Guid*, ID2D1Properties*, HRESULT)).call(effectid, properties)
+  end
+  def create_device2(dxgidevice : IDXGIDevice, d2ddevice1 : ID2D1Device1*) : HRESULT
+    @lpVtbl.value.create_device2.unsafe_as(Proc(IDXGIDevice, ID2D1Device1*, HRESULT)).call(dxgidevice, d2ddevice1)
+  end
+end
+struct LibWin32::ID2D1CommandSink1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_draw : HRESULT
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def end_draw : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, HRESULT)).call(antialiasmode)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : HRESULT
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, HRESULT)).call(tag1, tag2)
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, HRESULT)).call(textantialiasmode)
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : HRESULT
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, HRESULT)).call(textrenderingparams)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, HRESULT)).call(transform)
+  end
+  def set_primitive_blend(primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, HRESULT)).call(primitiveblend)
+  end
+  def set_unit_mode(unitmode : D2D1_UNIT_MODE) : HRESULT
+    @lpVtbl.value.set_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE, HRESULT)).call(unitmode)
+  end
+  def clear(color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, HRESULT)).call(color)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : HRESULT
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, HRESULT)).call(baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : HRESULT
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, HRESULT)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def draw_image(image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.draw_image.unsafe_as(Proc(ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, HRESULT)).call(image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile.unsafe_as(Proc(ID2D1GdiMetafile, D2D_POINT_2F*, HRESULT)).call(gdimetafile, targetoffset)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, HRESULT)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, HRESULT)).call(opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, HRESULT)).call(geometry, brush, opacitybrush)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, HRESULT)).call(rect, brush)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, HRESULT)).call(cliprect, antialiasmode)
+  end
+  def push_layer(layerparameters1 : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : HRESULT
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS1*, ID2D1Layer, HRESULT)).call(layerparameters1, layer)
+  end
+  def pop_axis_aligned_clip : HRESULT
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(HRESULT)).call
+  end
+  def pop_layer : HRESULT
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_primitive_blend1(primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend1.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, HRESULT)).call(primitiveblend)
+  end
+end
+struct LibWin32::ID2D1SvgAttribute
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_element(element : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_element.unsafe_as(Proc(ID2D1SvgElement*, Void)).call(element)
+  end
+  def clone(attribute : ID2D1SvgAttribute*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(ID2D1SvgAttribute*, HRESULT)).call(attribute)
+  end
+end
+struct LibWin32::ID2D1SvgPaint
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_element(element : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_element.unsafe_as(Proc(ID2D1SvgElement*, Void)).call(element)
+  end
+  def clone(attribute : ID2D1SvgAttribute*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(ID2D1SvgAttribute*, HRESULT)).call(attribute)
+  end
+  def set_paint_type(painttype : D2D1_SVG_PAINT_TYPE) : HRESULT
+    @lpVtbl.value.set_paint_type.unsafe_as(Proc(D2D1_SVG_PAINT_TYPE, HRESULT)).call(painttype)
+  end
+  def get_paint_type : D2D1_SVG_PAINT_TYPE
+    @lpVtbl.value.get_paint_type.unsafe_as(Proc(D2D1_SVG_PAINT_TYPE)).call
+  end
+  def set_color(color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.set_color.unsafe_as(Proc(D2D1_COLOR_F*, HRESULT)).call(color)
+  end
+  def get_color(color : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.get_color.unsafe_as(Proc(D2D1_COLOR_F*, Void)).call(color)
+  end
+  def set_id(id : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_id.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(id)
+  end
+  def get_id(id : Char*, idcount : UInt32) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(id, idcount)
+  end
+  def get_id_length : UInt32
+    @lpVtbl.value.get_id_length.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::ID2D1SvgStrokeDashArray
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_element(element : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_element.unsafe_as(Proc(ID2D1SvgElement*, Void)).call(element)
+  end
+  def clone(attribute : ID2D1SvgAttribute*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(ID2D1SvgAttribute*, HRESULT)).call(attribute)
+  end
+  def remove_dashes_at_end(dashescount : UInt32) : HRESULT
+    @lpVtbl.value.remove_dashes_at_end.unsafe_as(Proc(UInt32, HRESULT)).call(dashescount)
+  end
+  def update_dashes(dashes : D2D1_SVG_LENGTH*, dashescount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.update_dashes.unsafe_as(Proc(D2D1_SVG_LENGTH*, UInt32, UInt32, HRESULT)).call(dashes, dashescount, startindex)
+  end
+  def update_dashes2(dashes : Float32*, dashescount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.update_dashes2.unsafe_as(Proc(Float32*, UInt32, UInt32, HRESULT)).call(dashes, dashescount, startindex)
+  end
+  def get_dashes(dashes : D2D1_SVG_LENGTH*, dashescount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.get_dashes.unsafe_as(Proc(D2D1_SVG_LENGTH*, UInt32, UInt32, HRESULT)).call(dashes, dashescount, startindex)
+  end
+  def get_dashes2(dashes : Float32*, dashescount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.get_dashes2.unsafe_as(Proc(Float32*, UInt32, UInt32, HRESULT)).call(dashes, dashescount, startindex)
+  end
+  def get_dashes_count : UInt32
+    @lpVtbl.value.get_dashes_count.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::ID2D1SvgPointCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_element(element : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_element.unsafe_as(Proc(ID2D1SvgElement*, Void)).call(element)
+  end
+  def clone(attribute : ID2D1SvgAttribute*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(ID2D1SvgAttribute*, HRESULT)).call(attribute)
+  end
+  def remove_points_at_end(pointscount : UInt32) : HRESULT
+    @lpVtbl.value.remove_points_at_end.unsafe_as(Proc(UInt32, HRESULT)).call(pointscount)
+  end
+  def update_points(points : D2D_POINT_2F*, pointscount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.update_points.unsafe_as(Proc(D2D_POINT_2F*, UInt32, UInt32, HRESULT)).call(points, pointscount, startindex)
+  end
+  def get_points(points : D2D_POINT_2F*, pointscount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.get_points.unsafe_as(Proc(D2D_POINT_2F*, UInt32, UInt32, HRESULT)).call(points, pointscount, startindex)
+  end
+  def get_points_count : UInt32
+    @lpVtbl.value.get_points_count.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::ID2D1SvgPathData
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_element(element : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_element.unsafe_as(Proc(ID2D1SvgElement*, Void)).call(element)
+  end
+  def clone(attribute : ID2D1SvgAttribute*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(ID2D1SvgAttribute*, HRESULT)).call(attribute)
+  end
+  def remove_segment_data_at_end(datacount : UInt32) : HRESULT
+    @lpVtbl.value.remove_segment_data_at_end.unsafe_as(Proc(UInt32, HRESULT)).call(datacount)
+  end
+  def update_segment_data(data : Float32*, datacount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.update_segment_data.unsafe_as(Proc(Float32*, UInt32, UInt32, HRESULT)).call(data, datacount, startindex)
+  end
+  def get_segment_data(data : Float32*, datacount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.get_segment_data.unsafe_as(Proc(Float32*, UInt32, UInt32, HRESULT)).call(data, datacount, startindex)
+  end
+  def get_segment_data_count : UInt32
+    @lpVtbl.value.get_segment_data_count.unsafe_as(Proc(UInt32)).call
+  end
+  def remove_commands_at_end(commandscount : UInt32) : HRESULT
+    @lpVtbl.value.remove_commands_at_end.unsafe_as(Proc(UInt32, HRESULT)).call(commandscount)
+  end
+  def update_commands(commands : D2D1_SVG_PATH_COMMAND*, commandscount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.update_commands.unsafe_as(Proc(D2D1_SVG_PATH_COMMAND*, UInt32, UInt32, HRESULT)).call(commands, commandscount, startindex)
+  end
+  def get_commands(commands : D2D1_SVG_PATH_COMMAND*, commandscount : UInt32, startindex : UInt32) : HRESULT
+    @lpVtbl.value.get_commands.unsafe_as(Proc(D2D1_SVG_PATH_COMMAND*, UInt32, UInt32, HRESULT)).call(commands, commandscount, startindex)
+  end
+  def get_commands_count : UInt32
+    @lpVtbl.value.get_commands_count.unsafe_as(Proc(UInt32)).call
+  end
+  def create_path_geometry(fillmode : D2D1_FILL_MODE, pathgeometry : ID2D1PathGeometry1*) : HRESULT
+    @lpVtbl.value.create_path_geometry.unsafe_as(Proc(D2D1_FILL_MODE, ID2D1PathGeometry1*, HRESULT)).call(fillmode, pathgeometry)
+  end
+end
+struct LibWin32::ID2D1SvgElement
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_document(document : ID2D1SvgDocument*) : Void
+    @lpVtbl.value.get_document.unsafe_as(Proc(ID2D1SvgDocument*, Void)).call(document)
+  end
+  def get_tag_name(name : Char*, namecount : UInt32) : HRESULT
+    @lpVtbl.value.get_tag_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(name, namecount)
+  end
+  def get_tag_name_length : UInt32
+    @lpVtbl.value.get_tag_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def is_text_content : LibC::BOOL
+    @lpVtbl.value.is_text_content.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_parent(parent : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_parent.unsafe_as(Proc(ID2D1SvgElement*, Void)).call(parent)
+  end
+  def has_children : LibC::BOOL
+    @lpVtbl.value.has_children.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_first_child(child : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_first_child.unsafe_as(Proc(ID2D1SvgElement*, Void)).call(child)
+  end
+  def get_last_child(child : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_last_child.unsafe_as(Proc(ID2D1SvgElement*, Void)).call(child)
+  end
+  def get_previous_child(referencechild : ID2D1SvgElement, previouschild : ID2D1SvgElement*) : HRESULT
+    @lpVtbl.value.get_previous_child.unsafe_as(Proc(ID2D1SvgElement, ID2D1SvgElement*, HRESULT)).call(referencechild, previouschild)
+  end
+  def get_next_child(referencechild : ID2D1SvgElement, nextchild : ID2D1SvgElement*) : HRESULT
+    @lpVtbl.value.get_next_child.unsafe_as(Proc(ID2D1SvgElement, ID2D1SvgElement*, HRESULT)).call(referencechild, nextchild)
+  end
+  def insert_child_before(newchild : ID2D1SvgElement, referencechild : ID2D1SvgElement) : HRESULT
+    @lpVtbl.value.insert_child_before.unsafe_as(Proc(ID2D1SvgElement, ID2D1SvgElement, HRESULT)).call(newchild, referencechild)
+  end
+  def append_child(newchild : ID2D1SvgElement) : HRESULT
+    @lpVtbl.value.append_child.unsafe_as(Proc(ID2D1SvgElement, HRESULT)).call(newchild)
+  end
+  def replace_child(newchild : ID2D1SvgElement, oldchild : ID2D1SvgElement) : HRESULT
+    @lpVtbl.value.replace_child.unsafe_as(Proc(ID2D1SvgElement, ID2D1SvgElement, HRESULT)).call(newchild, oldchild)
+  end
+  def remove_child(oldchild : ID2D1SvgElement) : HRESULT
+    @lpVtbl.value.remove_child.unsafe_as(Proc(ID2D1SvgElement, HRESULT)).call(oldchild)
+  end
+  def create_child(tagname : LibC::LPWSTR, newchild : ID2D1SvgElement*) : HRESULT
+    @lpVtbl.value.create_child.unsafe_as(Proc(LibC::LPWSTR, ID2D1SvgElement*, HRESULT)).call(tagname, newchild)
+  end
+  def is_attribute_specified(name : LibC::LPWSTR, inherited : LibC::BOOL*) : LibC::BOOL
+    @lpVtbl.value.is_attribute_specified.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, LibC::BOOL)).call(name, inherited)
+  end
+  def get_specified_attribute_count : UInt32
+    @lpVtbl.value.get_specified_attribute_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_specified_attribute_name(index : UInt32, name : Char*, namecount : UInt32, inherited : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_specified_attribute_name.unsafe_as(Proc(UInt32, Char*, UInt32, LibC::BOOL*, HRESULT)).call(index, name, namecount, inherited)
+  end
+  def get_specified_attribute_name_length(index : UInt32, namelength : UInt32*, inherited : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_specified_attribute_name_length.unsafe_as(Proc(UInt32, UInt32*, LibC::BOOL*, HRESULT)).call(index, namelength, inherited)
+  end
+  def remove_attribute(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_attribute.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def set_text_value(name : Char*, namecount : UInt32) : HRESULT
+    @lpVtbl.value.set_text_value.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(name, namecount)
+  end
+  def get_text_value(name : Char*, namecount : UInt32) : HRESULT
+    @lpVtbl.value.get_text_value.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(name, namecount)
+  end
+  def get_text_value_length : UInt32
+    @lpVtbl.value.get_text_value_length.unsafe_as(Proc(UInt32)).call
+  end
+  def set_attribute_value(name : LibC::LPWSTR, value : ID2D1SvgAttribute) : HRESULT
+    @lpVtbl.value.set_attribute_value.unsafe_as(Proc(LibC::LPWSTR, ID2D1SvgAttribute, HRESULT)).call(name, value)
+  end
+  def set_attribute_value2(name : LibC::LPWSTR, type : D2D1_SVG_ATTRIBUTE_POD_TYPE, value : Void*, valuesizeinbytes : UInt32) : HRESULT
+    @lpVtbl.value.set_attribute_value2.unsafe_as(Proc(LibC::LPWSTR, D2D1_SVG_ATTRIBUTE_POD_TYPE, Void*, UInt32, HRESULT)).call(name, type, value, valuesizeinbytes)
+  end
+  def set_attribute_value3(name : LibC::LPWSTR, type : D2D1_SVG_ATTRIBUTE_STRING_TYPE, value : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_attribute_value3.unsafe_as(Proc(LibC::LPWSTR, D2D1_SVG_ATTRIBUTE_STRING_TYPE, LibC::LPWSTR, HRESULT)).call(name, type, value)
+  end
+  def get_attribute_value(name : LibC::LPWSTR, riid : Guid*, value : Void**) : HRESULT
+    @lpVtbl.value.get_attribute_value.unsafe_as(Proc(LibC::LPWSTR, Guid*, Void**, HRESULT)).call(name, riid, value)
+  end
+  def get_attribute_value2(name : LibC::LPWSTR, type : D2D1_SVG_ATTRIBUTE_POD_TYPE, value : Void*, valuesizeinbytes : UInt32) : HRESULT
+    @lpVtbl.value.get_attribute_value2.unsafe_as(Proc(LibC::LPWSTR, D2D1_SVG_ATTRIBUTE_POD_TYPE, Void*, UInt32, HRESULT)).call(name, type, value, valuesizeinbytes)
+  end
+  def get_attribute_value3(name : LibC::LPWSTR, type : D2D1_SVG_ATTRIBUTE_STRING_TYPE, value : Char*, valuecount : UInt32) : HRESULT
+    @lpVtbl.value.get_attribute_value3.unsafe_as(Proc(LibC::LPWSTR, D2D1_SVG_ATTRIBUTE_STRING_TYPE, Char*, UInt32, HRESULT)).call(name, type, value, valuecount)
+  end
+  def get_attribute_value_length(name : LibC::LPWSTR, type : D2D1_SVG_ATTRIBUTE_STRING_TYPE, valuelength : UInt32*) : HRESULT
+    @lpVtbl.value.get_attribute_value_length.unsafe_as(Proc(LibC::LPWSTR, D2D1_SVG_ATTRIBUTE_STRING_TYPE, UInt32*, HRESULT)).call(name, type, valuelength)
+  end
+end
+struct LibWin32::ID2D1SvgDocument
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def set_viewport_size(viewportsize : D2D_SIZE_F) : HRESULT
+    @lpVtbl.value.set_viewport_size.unsafe_as(Proc(D2D_SIZE_F, HRESULT)).call(viewportsize)
+  end
+  def get_viewport_size : D2D_SIZE_F
+    @lpVtbl.value.get_viewport_size.unsafe_as(Proc(D2D_SIZE_F)).call
+  end
+  def set_root(root : ID2D1SvgElement) : HRESULT
+    @lpVtbl.value.set_root.unsafe_as(Proc(ID2D1SvgElement, HRESULT)).call(root)
+  end
+  def get_root(root : ID2D1SvgElement*) : Void
+    @lpVtbl.value.get_root.unsafe_as(Proc(ID2D1SvgElement*, Void)).call(root)
+  end
+  def find_element_by_id(id : LibC::LPWSTR, svgelement : ID2D1SvgElement*) : HRESULT
+    @lpVtbl.value.find_element_by_id.unsafe_as(Proc(LibC::LPWSTR, ID2D1SvgElement*, HRESULT)).call(id, svgelement)
+  end
+  def serialize(outputxmlstream : IStream, subtree : ID2D1SvgElement) : HRESULT
+    @lpVtbl.value.serialize.unsafe_as(Proc(IStream, ID2D1SvgElement, HRESULT)).call(outputxmlstream, subtree)
+  end
+  def deserialize(inputxmlstream : IStream, subtree : ID2D1SvgElement*) : HRESULT
+    @lpVtbl.value.deserialize.unsafe_as(Proc(IStream, ID2D1SvgElement*, HRESULT)).call(inputxmlstream, subtree)
+  end
+  def create_paint(painttype : D2D1_SVG_PAINT_TYPE, color : D2D1_COLOR_F*, id : LibC::LPWSTR, paint : ID2D1SvgPaint*) : HRESULT
+    @lpVtbl.value.create_paint.unsafe_as(Proc(D2D1_SVG_PAINT_TYPE, D2D1_COLOR_F*, LibC::LPWSTR, ID2D1SvgPaint*, HRESULT)).call(painttype, color, id, paint)
+  end
+  def create_stroke_dash_array(dashes : D2D1_SVG_LENGTH*, dashescount : UInt32, strokedasharray : ID2D1SvgStrokeDashArray*) : HRESULT
+    @lpVtbl.value.create_stroke_dash_array.unsafe_as(Proc(D2D1_SVG_LENGTH*, UInt32, ID2D1SvgStrokeDashArray*, HRESULT)).call(dashes, dashescount, strokedasharray)
+  end
+  def create_point_collection(points : D2D_POINT_2F*, pointscount : UInt32, pointcollection : ID2D1SvgPointCollection*) : HRESULT
+    @lpVtbl.value.create_point_collection.unsafe_as(Proc(D2D_POINT_2F*, UInt32, ID2D1SvgPointCollection*, HRESULT)).call(points, pointscount, pointcollection)
+  end
+  def create_path_data(segmentdata : Float32*, segmentdatacount : UInt32, commands : D2D1_SVG_PATH_COMMAND*, commandscount : UInt32, pathdata : ID2D1SvgPathData*) : HRESULT
+    @lpVtbl.value.create_path_data.unsafe_as(Proc(Float32*, UInt32, D2D1_SVG_PATH_COMMAND*, UInt32, ID2D1SvgPathData*, HRESULT)).call(segmentdata, segmentdatacount, commands, commandscount, pathdata)
+  end
+end
+struct LibWin32::ID2D1InkStyle
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def set_nib_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_nib_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_nib_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_nib_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_nib_shape(nibshape : D2D1_INK_NIB_SHAPE) : Void
+    @lpVtbl.value.set_nib_shape.unsafe_as(Proc(D2D1_INK_NIB_SHAPE, Void)).call(nibshape)
+  end
+  def get_nib_shape : D2D1_INK_NIB_SHAPE
+    @lpVtbl.value.get_nib_shape.unsafe_as(Proc(D2D1_INK_NIB_SHAPE)).call
+  end
+end
+struct LibWin32::ID2D1Ink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def set_start_point(startpoint : D2D1_INK_POINT*) : Void
+    @lpVtbl.value.set_start_point.unsafe_as(Proc(D2D1_INK_POINT*, Void)).call(startpoint)
+  end
+  def get_start_point : D2D1_INK_POINT
+    @lpVtbl.value.get_start_point.unsafe_as(Proc(D2D1_INK_POINT)).call
+  end
+  def add_segments(segments : D2D1_INK_BEZIER_SEGMENT*, segmentscount : UInt32) : HRESULT
+    @lpVtbl.value.add_segments.unsafe_as(Proc(D2D1_INK_BEZIER_SEGMENT*, UInt32, HRESULT)).call(segments, segmentscount)
+  end
+  def remove_segments_at_end(segmentscount : UInt32) : HRESULT
+    @lpVtbl.value.remove_segments_at_end.unsafe_as(Proc(UInt32, HRESULT)).call(segmentscount)
+  end
+  def set_segments(startsegment : UInt32, segments : D2D1_INK_BEZIER_SEGMENT*, segmentscount : UInt32) : HRESULT
+    @lpVtbl.value.set_segments.unsafe_as(Proc(UInt32, D2D1_INK_BEZIER_SEGMENT*, UInt32, HRESULT)).call(startsegment, segments, segmentscount)
+  end
+  def set_segment_at_end(segment : D2D1_INK_BEZIER_SEGMENT*) : HRESULT
+    @lpVtbl.value.set_segment_at_end.unsafe_as(Proc(D2D1_INK_BEZIER_SEGMENT*, HRESULT)).call(segment)
+  end
+  def get_segment_count : UInt32
+    @lpVtbl.value.get_segment_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_segments(startsegment : UInt32, segments : D2D1_INK_BEZIER_SEGMENT*, segmentscount : UInt32) : HRESULT
+    @lpVtbl.value.get_segments.unsafe_as(Proc(UInt32, D2D1_INK_BEZIER_SEGMENT*, UInt32, HRESULT)).call(startsegment, segments, segmentscount)
+  end
+  def stream_as_geometry(inkstyle : ID2D1InkStyle, worldtransform : D2D_MATRIX_3X2_F*, flatteningtolerance : Float32, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.stream_as_geometry.unsafe_as(Proc(ID2D1InkStyle, D2D_MATRIX_3X2_F*, Float32, ID2D1SimplifiedGeometrySink, HRESULT)).call(inkstyle, worldtransform, flatteningtolerance, geometrysink)
+  end
+  def get_bounds(inkstyle : ID2D1InkStyle, worldtransform : D2D_MATRIX_3X2_F*, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.unsafe_as(Proc(ID2D1InkStyle, D2D_MATRIX_3X2_F*, D2D_RECT_F*, HRESULT)).call(inkstyle, worldtransform, bounds)
+  end
+end
+struct LibWin32::ID2D1GradientMesh
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_patch_count : UInt32
+    @lpVtbl.value.get_patch_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_patches(startindex : UInt32, patches : D2D1_GRADIENT_MESH_PATCH*, patchescount : UInt32) : HRESULT
+    @lpVtbl.value.get_patches.unsafe_as(Proc(UInt32, D2D1_GRADIENT_MESH_PATCH*, UInt32, HRESULT)).call(startindex, patches, patchescount)
+  end
+end
+struct LibWin32::ID2D1ImageSource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def offer_resources : HRESULT
+    @lpVtbl.value.offer_resources.unsafe_as(Proc(HRESULT)).call
+  end
+  def try_reclaim_resources(resourcesdiscarded : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_reclaim_resources.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(resourcesdiscarded)
+  end
+end
+struct LibWin32::ID2D1ImageSourceFromWic
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def offer_resources : HRESULT
+    @lpVtbl.value.offer_resources.unsafe_as(Proc(HRESULT)).call
+  end
+  def try_reclaim_resources(resourcesdiscarded : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_reclaim_resources.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(resourcesdiscarded)
+  end
+  def ensure_cached(rectangletofill : D2D_RECT_U*) : HRESULT
+    @lpVtbl.value.ensure_cached.unsafe_as(Proc(D2D_RECT_U*, HRESULT)).call(rectangletofill)
+  end
+  def trim_cache(rectangletopreserve : D2D_RECT_U*) : HRESULT
+    @lpVtbl.value.trim_cache.unsafe_as(Proc(D2D_RECT_U*, HRESULT)).call(rectangletopreserve)
+  end
+  def get_source(wicbitmapsource : IWICBitmapSource*) : Void
+    @lpVtbl.value.get_source.unsafe_as(Proc(IWICBitmapSource*, Void)).call(wicbitmapsource)
+  end
+end
+struct LibWin32::ID2D1TransformedImageSource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_source(imagesource : ID2D1ImageSource*) : Void
+    @lpVtbl.value.get_source.unsafe_as(Proc(ID2D1ImageSource*, Void)).call(imagesource)
+  end
+  def get_properties(properties : D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*) : Void
+    @lpVtbl.value.get_properties.unsafe_as(Proc(D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, Void)).call(properties)
+  end
+end
+struct LibWin32::ID2D1LookupTable3D
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+end
+struct LibWin32::ID2D1DeviceContext2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_bitmap(size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.unsafe_as(Proc(Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.unsafe_as(Proc(D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)).call(color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)).call(gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.unsafe_as(Proc(D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)).call(lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.unsafe_as(Proc(D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)).call(radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.unsafe_as(Proc(D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)).call(desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.unsafe_as(Proc(D2D_SIZE_F*, ID2D1Layer*, HRESULT)).call(size, layer)
+  end
+  def create_mesh(mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.unsafe_as(Proc(ID2D1Mesh*, HRESULT)).call(mesh)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Void)).call(rect, brush)
+  end
+  def draw_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Void)).call(roundedrect, brush)
+  end
+  def draw_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Void)).call(ellipse, brush)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)).call(geometry, brush, opacitybrush)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, Void)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)).call(string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.unsafe_as(Proc(D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)).call(origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, Void)).call(antialiasmode)
+  end
+  def get_antialias_mode : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE)).call
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, Void)).call(textantialiasmode)
+  end
+  def get_text_antialias_mode : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE)).call
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, Void)).call(textrenderingparams)
+  end
+  def get_text_rendering_params(textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, Void)).call(textrenderingparams)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, Void)).call(tag1, tag2)
+  end
+  def get_tags(tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.unsafe_as(Proc(UInt64*, UInt64*, Void)).call(tag1, tag2)
+  end
+  def push_layer(layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def pop_layer : Void
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(Void)).call
+  end
+  def flush(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def save_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def restore_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)).call(cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip : Void
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(Void)).call
+  end
+  def clear(clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, Void)).call(clearcolor)
+  end
+  def begin_draw : Void
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(Void)).call
+  end
+  def end_draw(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def get_pixel_format : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(D2D1_PIXEL_FORMAT)).call
+  end
+  def set_dpi(dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.unsafe_as(Proc(Float32, Float32, Void)).call(dpix, dpiy)
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def get_size : D2D_SIZE_F
+    @lpVtbl.value.get_size.unsafe_as(Proc(D2D_SIZE_F)).call
+  end
+  def get_pixel_size : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.unsafe_as(Proc(D2D_SIZE_U)).call
+  end
+  def get_maximum_bitmap_size : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.unsafe_as(Proc(UInt32)).call
+  end
+  def is_supported(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)).call(rendertargetproperties)
+  end
+  def create_bitmap2(size : D2D_SIZE_U, sourcedata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap2.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(size, sourcedata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap2(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap2.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_color_context(space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.unsafe_as(Proc(D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)).call(space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.unsafe_as(Proc(LibC::LPWSTR, ID2D1ColorContext*, HRESULT)).call(filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.unsafe_as(Proc(IWICColorContext, ID2D1ColorContext*, HRESULT)).call(wiccolorcontext, colorcontext)
+  end
+  def create_bitmap_from_dxgi_surface(surface : IDXGISurface, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_dxgi_surface.unsafe_as(Proc(IDXGISurface, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(surface, bitmapproperties, bitmap)
+  end
+  def create_effect(effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.unsafe_as(Proc(Guid*, ID2D1Effect*, HRESULT)).call(effectid, effect)
+  end
+  def create_gradient_stop_collection2(straightalphagradientstops : D2D1_GRADIENT_STOP*, straightalphagradientstopscount : UInt32, preinterpolationspace : D2D1_COLOR_SPACE, postinterpolationspace : D2D1_COLOR_SPACE, bufferprecision : D2D1_BUFFER_PRECISION, extendmode : D2D1_EXTEND_MODE, colorinterpolationmode : D2D1_COLOR_INTERPOLATION_MODE, gradientstopcollection1 : ID2D1GradientStopCollection1*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection2.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_COLOR_SPACE, D2D1_COLOR_SPACE, D2D1_BUFFER_PRECISION, D2D1_EXTEND_MODE, D2D1_COLOR_INTERPOLATION_MODE, ID2D1GradientStopCollection1*, HRESULT)).call(straightalphagradientstops, straightalphagradientstopscount, preinterpolationspace, postinterpolationspace, bufferprecision, extendmode, colorinterpolationmode, gradientstopcollection1)
+  end
+  def create_image_brush(image : ID2D1Image, imagebrushproperties : D2D1_IMAGE_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, imagebrush : ID2D1ImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.unsafe_as(Proc(ID2D1Image, D2D1_IMAGE_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1ImageBrush*, HRESULT)).call(image, imagebrushproperties, brushproperties, imagebrush)
+  end
+  def create_bitmap_brush2(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES1*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush1*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush2.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES1*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush1*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_command_list(commandlist : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(ID2D1CommandList*, HRESULT)).call(commandlist)
+  end
+  def is_dxgi_format_supported(format : DXGI_FORMAT) : LibC::BOOL
+    @lpVtbl.value.is_dxgi_format_supported.unsafe_as(Proc(DXGI_FORMAT, LibC::BOOL)).call(format)
+  end
+  def is_buffer_precision_supported(bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.unsafe_as(Proc(D2D1_BUFFER_PRECISION, LibC::BOOL)).call(bufferprecision)
+  end
+  def get_image_local_bounds(image : ID2D1Image, localbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_local_bounds.unsafe_as(Proc(ID2D1Image, D2D_RECT_F*, HRESULT)).call(image, localbounds)
+  end
+  def get_image_world_bounds(image : ID2D1Image, worldbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_world_bounds.unsafe_as(Proc(ID2D1Image, D2D_RECT_F*, HRESULT)).call(image, worldbounds)
+  end
+  def get_glyph_run_world_bounds(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_glyph_run_world_bounds.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_RECT_F*, HRESULT)).call(baselineorigin, glyphrun, measuringmode, bounds)
+  end
+  def get_device(device : ID2D1Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID2D1Device*, Void)).call(device)
+  end
+  def set_target(image : ID2D1Image) : Void
+    @lpVtbl.value.set_target.unsafe_as(Proc(ID2D1Image, Void)).call(image)
+  end
+  def get_target(image : ID2D1Image*) : Void
+    @lpVtbl.value.get_target.unsafe_as(Proc(ID2D1Image*, Void)).call(image)
+  end
+  def set_rendering_controls(renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.set_rendering_controls.unsafe_as(Proc(D2D1_RENDERING_CONTROLS*, Void)).call(renderingcontrols)
+  end
+  def get_rendering_controls(renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.get_rendering_controls.unsafe_as(Proc(D2D1_RENDERING_CONTROLS*, Void)).call(renderingcontrols)
+  end
+  def set_primitive_blend(primitiveblend : D2D1_PRIMITIVE_BLEND) : Void
+    @lpVtbl.value.set_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, Void)).call(primitiveblend)
+  end
+  def get_primitive_blend : D2D1_PRIMITIVE_BLEND
+    @lpVtbl.value.get_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND)).call
+  end
+  def set_unit_mode(unitmode : D2D1_UNIT_MODE) : Void
+    @lpVtbl.value.set_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE, Void)).call(unitmode)
+  end
+  def get_unit_mode : D2D1_UNIT_MODE
+    @lpVtbl.value.get_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE)).call
+  end
+  def draw_glyph_run2(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run2.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_image(image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : Void
+    @lpVtbl.value.draw_image.unsafe_as(Proc(ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, Void)).call(image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : Void
+    @lpVtbl.value.draw_gdi_metafile.unsafe_as(Proc(ID2D1GdiMetafile, D2D_POINT_2F*, Void)).call(gdimetafile, targetoffset)
+  end
+  def draw_bitmap2(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : Void
+    @lpVtbl.value.draw_bitmap2.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def push_layer2(layerparameters : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer2.unsafe_as(Proc(D2D1_LAYER_PARAMETERS1*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def invalidate_effect_input_rectangle(effect : ID2D1Effect, input : UInt32, inputrectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.invalidate_effect_input_rectangle.unsafe_as(Proc(ID2D1Effect, UInt32, D2D_RECT_F*, HRESULT)).call(effect, input, inputrectangle)
+  end
+  def get_effect_invalid_rectangle_count(effect : ID2D1Effect, rectanglecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangle_count.unsafe_as(Proc(ID2D1Effect, UInt32*, HRESULT)).call(effect, rectanglecount)
+  end
+  def get_effect_invalid_rectangles(effect : ID2D1Effect, rectangles : D2D_RECT_F*, rectanglescount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangles.unsafe_as(Proc(ID2D1Effect, D2D_RECT_F*, UInt32, HRESULT)).call(effect, rectangles, rectanglescount)
+  end
+  def get_effect_required_input_rectangles(rendereffect : ID2D1Effect, renderimagerectangle : D2D_RECT_F*, inputdescriptions : D2D1_EFFECT_INPUT_DESCRIPTION*, requiredinputrects : D2D_RECT_F*, inputcount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_required_input_rectangles.unsafe_as(Proc(ID2D1Effect, D2D_RECT_F*, D2D1_EFFECT_INPUT_DESCRIPTION*, D2D_RECT_F*, UInt32, HRESULT)).call(rendereffect, renderimagerectangle, inputdescriptions, requiredinputrects, inputcount)
+  end
+  def fill_opacity_mask2(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask2.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def create_filled_geometry_realization(geometry : ID2D1Geometry, flatteningtolerance : Float32, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_filled_geometry_realization.unsafe_as(Proc(ID2D1Geometry, Float32, ID2D1GeometryRealization*, HRESULT)).call(geometry, flatteningtolerance, geometryrealization)
+  end
+  def create_stroked_geometry_realization(geometry : ID2D1Geometry, flatteningtolerance : Float32, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_stroked_geometry_realization.unsafe_as(Proc(ID2D1Geometry, Float32, Float32, ID2D1StrokeStyle, ID2D1GeometryRealization*, HRESULT)).call(geometry, flatteningtolerance, strokewidth, strokestyle, geometryrealization)
+  end
+  def draw_geometry_realization(geometryrealization : ID2D1GeometryRealization, brush : ID2D1Brush) : Void
+    @lpVtbl.value.draw_geometry_realization.unsafe_as(Proc(ID2D1GeometryRealization, ID2D1Brush, Void)).call(geometryrealization, brush)
+  end
+  def create_ink(startpoint : D2D1_INK_POINT*, ink : ID2D1Ink*) : HRESULT
+    @lpVtbl.value.create_ink.unsafe_as(Proc(D2D1_INK_POINT*, ID2D1Ink*, HRESULT)).call(startpoint, ink)
+  end
+  def create_ink_style(inkstyleproperties : D2D1_INK_STYLE_PROPERTIES*, inkstyle : ID2D1InkStyle*) : HRESULT
+    @lpVtbl.value.create_ink_style.unsafe_as(Proc(D2D1_INK_STYLE_PROPERTIES*, ID2D1InkStyle*, HRESULT)).call(inkstyleproperties, inkstyle)
+  end
+  def create_gradient_mesh(patches : D2D1_GRADIENT_MESH_PATCH*, patchescount : UInt32, gradientmesh : ID2D1GradientMesh*) : HRESULT
+    @lpVtbl.value.create_gradient_mesh.unsafe_as(Proc(D2D1_GRADIENT_MESH_PATCH*, UInt32, ID2D1GradientMesh*, HRESULT)).call(patches, patchescount, gradientmesh)
+  end
+  def create_image_source_from_wic(wicbitmapsource : IWICBitmapSource, loadingoptions : D2D1_IMAGE_SOURCE_LOADING_OPTIONS, alphamode : D2D1_ALPHA_MODE, imagesource : ID2D1ImageSourceFromWic*) : HRESULT
+    @lpVtbl.value.create_image_source_from_wic.unsafe_as(Proc(IWICBitmapSource, D2D1_IMAGE_SOURCE_LOADING_OPTIONS, D2D1_ALPHA_MODE, ID2D1ImageSourceFromWic*, HRESULT)).call(wicbitmapsource, loadingoptions, alphamode, imagesource)
+  end
+  def create_lookup_table3_d(precision : D2D1_BUFFER_PRECISION, extents : UInt32*, data : UInt8*, datacount : UInt32, strides : UInt32*, lookuptable : ID2D1LookupTable3D*) : HRESULT
+    @lpVtbl.value.create_lookup_table3_d.unsafe_as(Proc(D2D1_BUFFER_PRECISION, UInt32*, UInt8*, UInt32, UInt32*, ID2D1LookupTable3D*, HRESULT)).call(precision, extents, data, datacount, strides, lookuptable)
+  end
+  def create_image_source_from_dxgi(surfaces : IDXGISurface*, surfacecount : UInt32, colorspace : DXGI_COLOR_SPACE_TYPE, options : D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, imagesource : ID2D1ImageSource*) : HRESULT
+    @lpVtbl.value.create_image_source_from_dxgi.unsafe_as(Proc(IDXGISurface*, UInt32, DXGI_COLOR_SPACE_TYPE, D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, ID2D1ImageSource*, HRESULT)).call(surfaces, surfacecount, colorspace, options, imagesource)
+  end
+  def get_gradient_mesh_world_bounds(gradientmesh : ID2D1GradientMesh, pbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_gradient_mesh_world_bounds.unsafe_as(Proc(ID2D1GradientMesh, D2D_RECT_F*, HRESULT)).call(gradientmesh, pbounds)
+  end
+  def draw_ink(ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : Void
+    @lpVtbl.value.draw_ink.unsafe_as(Proc(ID2D1Ink, ID2D1Brush, ID2D1InkStyle, Void)).call(ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(gradientmesh : ID2D1GradientMesh) : Void
+    @lpVtbl.value.draw_gradient_mesh.unsafe_as(Proc(ID2D1GradientMesh, Void)).call(gradientmesh)
+  end
+  def draw_gdi_metafile2(gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_gdi_metafile2.unsafe_as(Proc(ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, Void)).call(gdimetafile, destinationrectangle, sourcerectangle)
+  end
+  def create_transformed_image_source(imagesource : ID2D1ImageSource, properties : D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, transformedimagesource : ID2D1TransformedImageSource*) : HRESULT
+    @lpVtbl.value.create_transformed_image_source.unsafe_as(Proc(ID2D1ImageSource, D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, ID2D1TransformedImageSource*, HRESULT)).call(imagesource, properties, transformedimagesource)
+  end
+end
+struct LibWin32::ID2D1Device2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_device_context(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext : ID2D1DeviceContext*) : HRESULT
+    @lpVtbl.value.create_device_context.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext*, HRESULT)).call(options, devicecontext)
+  end
+  def create_print_control(wicfactory : IWICImagingFactory, documenttarget : IPrintDocumentPackageTarget, printcontrolproperties : D2D1_PRINT_CONTROL_PROPERTIES*, printcontrol : ID2D1PrintControl*) : HRESULT
+    @lpVtbl.value.create_print_control.unsafe_as(Proc(IWICImagingFactory, IPrintDocumentPackageTarget, D2D1_PRINT_CONTROL_PROPERTIES*, ID2D1PrintControl*, HRESULT)).call(wicfactory, documenttarget, printcontrolproperties, printcontrol)
+  end
+  def set_maximum_texture_memory(maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_texture_memory.unsafe_as(Proc(UInt64, Void)).call(maximuminbytes)
+  end
+  def get_maximum_texture_memory : UInt64
+    @lpVtbl.value.get_maximum_texture_memory.unsafe_as(Proc(UInt64)).call
+  end
+  def clear_resources(millisecondssinceuse : UInt32) : Void
+    @lpVtbl.value.clear_resources.unsafe_as(Proc(UInt32, Void)).call(millisecondssinceuse)
+  end
+  def get_rendering_priority : D2D1_RENDERING_PRIORITY
+    @lpVtbl.value.get_rendering_priority.unsafe_as(Proc(D2D1_RENDERING_PRIORITY)).call
+  end
+  def set_rendering_priority(renderingpriority : D2D1_RENDERING_PRIORITY) : Void
+    @lpVtbl.value.set_rendering_priority.unsafe_as(Proc(D2D1_RENDERING_PRIORITY, Void)).call(renderingpriority)
+  end
+  def create_device_context2(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext1 : ID2D1DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_device_context2.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext1*, HRESULT)).call(options, devicecontext1)
+  end
+  def create_device_context3(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext2 : ID2D1DeviceContext2*) : HRESULT
+    @lpVtbl.value.create_device_context3.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext2*, HRESULT)).call(options, devicecontext2)
+  end
+  def flush_device_contexts(bitmap : ID2D1Bitmap) : Void
+    @lpVtbl.value.flush_device_contexts.unsafe_as(Proc(ID2D1Bitmap, Void)).call(bitmap)
+  end
+  def get_dxgi_device(dxgidevice : IDXGIDevice*) : HRESULT
+    @lpVtbl.value.get_dxgi_device.unsafe_as(Proc(IDXGIDevice*, HRESULT)).call(dxgidevice)
+  end
+end
+struct LibWin32::ID2D1Factory3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def reload_system_metrics : HRESULT
+    @lpVtbl.value.reload_system_metrics.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_desktop_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_desktop_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def create_rectangle_geometry(rectangle : D2D_RECT_F*, rectanglegeometry : ID2D1RectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rectangle_geometry.unsafe_as(Proc(D2D_RECT_F*, ID2D1RectangleGeometry*, HRESULT)).call(rectangle, rectanglegeometry)
+  end
+  def create_rounded_rectangle_geometry(roundedrectangle : D2D1_ROUNDED_RECT*, roundedrectanglegeometry : ID2D1RoundedRectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rounded_rectangle_geometry.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1RoundedRectangleGeometry*, HRESULT)).call(roundedrectangle, roundedrectanglegeometry)
+  end
+  def create_ellipse_geometry(ellipse : D2D1_ELLIPSE*, ellipsegeometry : ID2D1EllipseGeometry*) : HRESULT
+    @lpVtbl.value.create_ellipse_geometry.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1EllipseGeometry*, HRESULT)).call(ellipse, ellipsegeometry)
+  end
+  def create_geometry_group(fillmode : D2D1_FILL_MODE, geometries : ID2D1Geometry*, geometriescount : UInt32, geometrygroup : ID2D1GeometryGroup*) : HRESULT
+    @lpVtbl.value.create_geometry_group.unsafe_as(Proc(D2D1_FILL_MODE, ID2D1Geometry*, UInt32, ID2D1GeometryGroup*, HRESULT)).call(fillmode, geometries, geometriescount, geometrygroup)
+  end
+  def create_transformed_geometry(sourcegeometry : ID2D1Geometry, transform : D2D_MATRIX_3X2_F*, transformedgeometry : ID2D1TransformedGeometry*) : HRESULT
+    @lpVtbl.value.create_transformed_geometry.unsafe_as(Proc(ID2D1Geometry, D2D_MATRIX_3X2_F*, ID2D1TransformedGeometry*, HRESULT)).call(sourcegeometry, transform, transformedgeometry)
+  end
+  def create_path_geometry(pathgeometry : ID2D1PathGeometry*) : HRESULT
+    @lpVtbl.value.create_path_geometry.unsafe_as(Proc(ID2D1PathGeometry*, HRESULT)).call(pathgeometry)
+  end
+  def create_stroke_style(strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle*) : HRESULT
+    @lpVtbl.value.create_stroke_style.unsafe_as(Proc(D2D1_STROKE_STYLE_PROPERTIES*, Float32*, UInt32, ID2D1StrokeStyle*, HRESULT)).call(strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_drawing_state_block(drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION*, IDWriteRenderingParams, ID2D1DrawingStateBlock*, HRESULT)).call(drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_wic_bitmap_render_target(target : IWICBitmap, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_wic_bitmap_render_target.unsafe_as(Proc(IWICBitmap, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)).call(target, rendertargetproperties, rendertarget)
+  end
+  def create_hwnd_render_target(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, hwndrendertargetproperties : D2D1_HWND_RENDER_TARGET_PROPERTIES*, hwndrendertarget : ID2D1HwndRenderTarget*) : HRESULT
+    @lpVtbl.value.create_hwnd_render_target.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, D2D1_HWND_RENDER_TARGET_PROPERTIES*, ID2D1HwndRenderTarget*, HRESULT)).call(rendertargetproperties, hwndrendertargetproperties, hwndrendertarget)
+  end
+  def create_dxgi_surface_render_target(dxgisurface : IDXGISurface, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_dxgi_surface_render_target.unsafe_as(Proc(IDXGISurface, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)).call(dxgisurface, rendertargetproperties, rendertarget)
+  end
+  def create_dc_render_target(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, dcrendertarget : ID2D1DCRenderTarget*) : HRESULT
+    @lpVtbl.value.create_dc_render_target.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)).call(rendertargetproperties, dcrendertarget)
+  end
+  def create_device(dxgidevice : IDXGIDevice, d2ddevice : ID2D1Device*) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(IDXGIDevice, ID2D1Device*, HRESULT)).call(dxgidevice, d2ddevice)
+  end
+  def create_stroke_style2(strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES1*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle1*) : HRESULT
+    @lpVtbl.value.create_stroke_style2.unsafe_as(Proc(D2D1_STROKE_STYLE_PROPERTIES1*, Float32*, UInt32, ID2D1StrokeStyle1*, HRESULT)).call(strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_path_geometry2(pathgeometry : ID2D1PathGeometry1*) : HRESULT
+    @lpVtbl.value.create_path_geometry2.unsafe_as(Proc(ID2D1PathGeometry1*, HRESULT)).call(pathgeometry)
+  end
+  def create_drawing_state_block2(drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION1*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock1*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block2.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION1*, IDWriteRenderingParams, ID2D1DrawingStateBlock1*, HRESULT)).call(drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_gdi_metafile(metafilestream : IStream, metafile : ID2D1GdiMetafile*) : HRESULT
+    @lpVtbl.value.create_gdi_metafile.unsafe_as(Proc(IStream, ID2D1GdiMetafile*, HRESULT)).call(metafilestream, metafile)
+  end
+  def register_effect_from_stream(classid : Guid*, propertyxml : IStream, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_stream.unsafe_as(Proc(Guid*, IStream, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)).call(classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def register_effect_from_string(classid : Guid*, propertyxml : LibC::LPWSTR, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_string.unsafe_as(Proc(Guid*, LibC::LPWSTR, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)).call(classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def unregister_effect(classid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_effect.unsafe_as(Proc(Guid*, HRESULT)).call(classid)
+  end
+  def get_registered_effects(effects : Guid*, effectscount : UInt32, effectsreturned : UInt32*, effectsregistered : UInt32*) : HRESULT
+    @lpVtbl.value.get_registered_effects.unsafe_as(Proc(Guid*, UInt32, UInt32*, UInt32*, HRESULT)).call(effects, effectscount, effectsreturned, effectsregistered)
+  end
+  def get_effect_properties(effectid : Guid*, properties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_effect_properties.unsafe_as(Proc(Guid*, ID2D1Properties*, HRESULT)).call(effectid, properties)
+  end
+  def create_device2(dxgidevice : IDXGIDevice, d2ddevice1 : ID2D1Device1*) : HRESULT
+    @lpVtbl.value.create_device2.unsafe_as(Proc(IDXGIDevice, ID2D1Device1*, HRESULT)).call(dxgidevice, d2ddevice1)
+  end
+  def create_device3(dxgidevice : IDXGIDevice, d2ddevice2 : ID2D1Device2*) : HRESULT
+    @lpVtbl.value.create_device3.unsafe_as(Proc(IDXGIDevice, ID2D1Device2*, HRESULT)).call(dxgidevice, d2ddevice2)
+  end
+end
+struct LibWin32::ID2D1CommandSink2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_draw : HRESULT
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def end_draw : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, HRESULT)).call(antialiasmode)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : HRESULT
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, HRESULT)).call(tag1, tag2)
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, HRESULT)).call(textantialiasmode)
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : HRESULT
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, HRESULT)).call(textrenderingparams)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, HRESULT)).call(transform)
+  end
+  def set_primitive_blend(primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, HRESULT)).call(primitiveblend)
+  end
+  def set_unit_mode(unitmode : D2D1_UNIT_MODE) : HRESULT
+    @lpVtbl.value.set_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE, HRESULT)).call(unitmode)
+  end
+  def clear(color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, HRESULT)).call(color)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : HRESULT
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, HRESULT)).call(baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : HRESULT
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, HRESULT)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def draw_image(image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.draw_image.unsafe_as(Proc(ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, HRESULT)).call(image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile.unsafe_as(Proc(ID2D1GdiMetafile, D2D_POINT_2F*, HRESULT)).call(gdimetafile, targetoffset)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, HRESULT)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, HRESULT)).call(opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, HRESULT)).call(geometry, brush, opacitybrush)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, HRESULT)).call(rect, brush)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, HRESULT)).call(cliprect, antialiasmode)
+  end
+  def push_layer(layerparameters1 : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : HRESULT
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS1*, ID2D1Layer, HRESULT)).call(layerparameters1, layer)
+  end
+  def pop_axis_aligned_clip : HRESULT
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(HRESULT)).call
+  end
+  def pop_layer : HRESULT
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_primitive_blend1(primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend1.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, HRESULT)).call(primitiveblend)
+  end
+  def draw_ink(ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : HRESULT
+    @lpVtbl.value.draw_ink.unsafe_as(Proc(ID2D1Ink, ID2D1Brush, ID2D1InkStyle, HRESULT)).call(ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(gradientmesh : ID2D1GradientMesh) : HRESULT
+    @lpVtbl.value.draw_gradient_mesh.unsafe_as(Proc(ID2D1GradientMesh, HRESULT)).call(gradientmesh)
+  end
+  def draw_gdi_metafile2(gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile2.unsafe_as(Proc(ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, HRESULT)).call(gdimetafile, destinationrectangle, sourcerectangle)
+  end
+end
+struct LibWin32::ID2D1GdiMetafile1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def stream(sink : ID2D1GdiMetafileSink) : HRESULT
+    @lpVtbl.value.stream.unsafe_as(Proc(ID2D1GdiMetafileSink, HRESULT)).call(sink)
+  end
+  def get_bounds(bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_bounds.unsafe_as(Proc(D2D_RECT_F*, HRESULT)).call(bounds)
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : HRESULT
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, HRESULT)).call(dpix, dpiy)
+  end
+  def get_source_bounds(bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_source_bounds.unsafe_as(Proc(D2D_RECT_F*, HRESULT)).call(bounds)
+  end
+end
+struct LibWin32::ID2D1GdiMetafileSink1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def process_record(recordtype : UInt32, recorddata : Void*, recorddatasize : UInt32) : HRESULT
+    @lpVtbl.value.process_record.unsafe_as(Proc(UInt32, Void*, UInt32, HRESULT)).call(recordtype, recorddata, recorddatasize)
+  end
+  def process_record2(recordtype : UInt32, recorddata : Void*, recorddatasize : UInt32, flags : UInt32) : HRESULT
+    @lpVtbl.value.process_record2.unsafe_as(Proc(UInt32, Void*, UInt32, UInt32, HRESULT)).call(recordtype, recorddata, recorddatasize, flags)
+  end
+end
+struct LibWin32::ID2D1SpriteBatch
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def add_sprites(spritecount : UInt32, destinationrectangles : D2D_RECT_F*, sourcerectangles : D2D_RECT_U*, colors : D2D1_COLOR_F*, transforms : D2D_MATRIX_3X2_F*, destinationrectanglesstride : UInt32, sourcerectanglesstride : UInt32, colorsstride : UInt32, transformsstride : UInt32) : HRESULT
+    @lpVtbl.value.add_sprites.unsafe_as(Proc(UInt32, D2D_RECT_F*, D2D_RECT_U*, D2D1_COLOR_F*, D2D_MATRIX_3X2_F*, UInt32, UInt32, UInt32, UInt32, HRESULT)).call(spritecount, destinationrectangles, sourcerectangles, colors, transforms, destinationrectanglesstride, sourcerectanglesstride, colorsstride, transformsstride)
+  end
+  def set_sprites(startindex : UInt32, spritecount : UInt32, destinationrectangles : D2D_RECT_F*, sourcerectangles : D2D_RECT_U*, colors : D2D1_COLOR_F*, transforms : D2D_MATRIX_3X2_F*, destinationrectanglesstride : UInt32, sourcerectanglesstride : UInt32, colorsstride : UInt32, transformsstride : UInt32) : HRESULT
+    @lpVtbl.value.set_sprites.unsafe_as(Proc(UInt32, UInt32, D2D_RECT_F*, D2D_RECT_U*, D2D1_COLOR_F*, D2D_MATRIX_3X2_F*, UInt32, UInt32, UInt32, UInt32, HRESULT)).call(startindex, spritecount, destinationrectangles, sourcerectangles, colors, transforms, destinationrectanglesstride, sourcerectanglesstride, colorsstride, transformsstride)
+  end
+  def get_sprites(startindex : UInt32, spritecount : UInt32, destinationrectangles : D2D_RECT_F*, sourcerectangles : D2D_RECT_U*, colors : D2D1_COLOR_F*, transforms : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.get_sprites.unsafe_as(Proc(UInt32, UInt32, D2D_RECT_F*, D2D_RECT_U*, D2D1_COLOR_F*, D2D_MATRIX_3X2_F*, HRESULT)).call(startindex, spritecount, destinationrectangles, sourcerectangles, colors, transforms)
+  end
+  def get_sprite_count : UInt32
+    @lpVtbl.value.get_sprite_count.unsafe_as(Proc(UInt32)).call
+  end
+  def clear : Void
+    @lpVtbl.value.clear.unsafe_as(Proc(Void)).call
+  end
+end
+struct LibWin32::ID2D1DeviceContext3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_bitmap(size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.unsafe_as(Proc(Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.unsafe_as(Proc(D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)).call(color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)).call(gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.unsafe_as(Proc(D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)).call(lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.unsafe_as(Proc(D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)).call(radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.unsafe_as(Proc(D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)).call(desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.unsafe_as(Proc(D2D_SIZE_F*, ID2D1Layer*, HRESULT)).call(size, layer)
+  end
+  def create_mesh(mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.unsafe_as(Proc(ID2D1Mesh*, HRESULT)).call(mesh)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Void)).call(rect, brush)
+  end
+  def draw_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Void)).call(roundedrect, brush)
+  end
+  def draw_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Void)).call(ellipse, brush)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)).call(geometry, brush, opacitybrush)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, Void)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)).call(string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.unsafe_as(Proc(D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)).call(origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, Void)).call(antialiasmode)
+  end
+  def get_antialias_mode : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE)).call
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, Void)).call(textantialiasmode)
+  end
+  def get_text_antialias_mode : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE)).call
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, Void)).call(textrenderingparams)
+  end
+  def get_text_rendering_params(textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, Void)).call(textrenderingparams)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, Void)).call(tag1, tag2)
+  end
+  def get_tags(tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.unsafe_as(Proc(UInt64*, UInt64*, Void)).call(tag1, tag2)
+  end
+  def push_layer(layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def pop_layer : Void
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(Void)).call
+  end
+  def flush(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def save_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def restore_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)).call(cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip : Void
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(Void)).call
+  end
+  def clear(clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, Void)).call(clearcolor)
+  end
+  def begin_draw : Void
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(Void)).call
+  end
+  def end_draw(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def get_pixel_format : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(D2D1_PIXEL_FORMAT)).call
+  end
+  def set_dpi(dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.unsafe_as(Proc(Float32, Float32, Void)).call(dpix, dpiy)
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def get_size : D2D_SIZE_F
+    @lpVtbl.value.get_size.unsafe_as(Proc(D2D_SIZE_F)).call
+  end
+  def get_pixel_size : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.unsafe_as(Proc(D2D_SIZE_U)).call
+  end
+  def get_maximum_bitmap_size : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.unsafe_as(Proc(UInt32)).call
+  end
+  def is_supported(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)).call(rendertargetproperties)
+  end
+  def create_bitmap2(size : D2D_SIZE_U, sourcedata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap2.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(size, sourcedata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap2(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap2.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_color_context(space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.unsafe_as(Proc(D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)).call(space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.unsafe_as(Proc(LibC::LPWSTR, ID2D1ColorContext*, HRESULT)).call(filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.unsafe_as(Proc(IWICColorContext, ID2D1ColorContext*, HRESULT)).call(wiccolorcontext, colorcontext)
+  end
+  def create_bitmap_from_dxgi_surface(surface : IDXGISurface, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_dxgi_surface.unsafe_as(Proc(IDXGISurface, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(surface, bitmapproperties, bitmap)
+  end
+  def create_effect(effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.unsafe_as(Proc(Guid*, ID2D1Effect*, HRESULT)).call(effectid, effect)
+  end
+  def create_gradient_stop_collection2(straightalphagradientstops : D2D1_GRADIENT_STOP*, straightalphagradientstopscount : UInt32, preinterpolationspace : D2D1_COLOR_SPACE, postinterpolationspace : D2D1_COLOR_SPACE, bufferprecision : D2D1_BUFFER_PRECISION, extendmode : D2D1_EXTEND_MODE, colorinterpolationmode : D2D1_COLOR_INTERPOLATION_MODE, gradientstopcollection1 : ID2D1GradientStopCollection1*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection2.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_COLOR_SPACE, D2D1_COLOR_SPACE, D2D1_BUFFER_PRECISION, D2D1_EXTEND_MODE, D2D1_COLOR_INTERPOLATION_MODE, ID2D1GradientStopCollection1*, HRESULT)).call(straightalphagradientstops, straightalphagradientstopscount, preinterpolationspace, postinterpolationspace, bufferprecision, extendmode, colorinterpolationmode, gradientstopcollection1)
+  end
+  def create_image_brush(image : ID2D1Image, imagebrushproperties : D2D1_IMAGE_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, imagebrush : ID2D1ImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.unsafe_as(Proc(ID2D1Image, D2D1_IMAGE_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1ImageBrush*, HRESULT)).call(image, imagebrushproperties, brushproperties, imagebrush)
+  end
+  def create_bitmap_brush2(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES1*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush1*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush2.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES1*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush1*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_command_list(commandlist : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(ID2D1CommandList*, HRESULT)).call(commandlist)
+  end
+  def is_dxgi_format_supported(format : DXGI_FORMAT) : LibC::BOOL
+    @lpVtbl.value.is_dxgi_format_supported.unsafe_as(Proc(DXGI_FORMAT, LibC::BOOL)).call(format)
+  end
+  def is_buffer_precision_supported(bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.unsafe_as(Proc(D2D1_BUFFER_PRECISION, LibC::BOOL)).call(bufferprecision)
+  end
+  def get_image_local_bounds(image : ID2D1Image, localbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_local_bounds.unsafe_as(Proc(ID2D1Image, D2D_RECT_F*, HRESULT)).call(image, localbounds)
+  end
+  def get_image_world_bounds(image : ID2D1Image, worldbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_world_bounds.unsafe_as(Proc(ID2D1Image, D2D_RECT_F*, HRESULT)).call(image, worldbounds)
+  end
+  def get_glyph_run_world_bounds(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_glyph_run_world_bounds.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_RECT_F*, HRESULT)).call(baselineorigin, glyphrun, measuringmode, bounds)
+  end
+  def get_device(device : ID2D1Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID2D1Device*, Void)).call(device)
+  end
+  def set_target(image : ID2D1Image) : Void
+    @lpVtbl.value.set_target.unsafe_as(Proc(ID2D1Image, Void)).call(image)
+  end
+  def get_target(image : ID2D1Image*) : Void
+    @lpVtbl.value.get_target.unsafe_as(Proc(ID2D1Image*, Void)).call(image)
+  end
+  def set_rendering_controls(renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.set_rendering_controls.unsafe_as(Proc(D2D1_RENDERING_CONTROLS*, Void)).call(renderingcontrols)
+  end
+  def get_rendering_controls(renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.get_rendering_controls.unsafe_as(Proc(D2D1_RENDERING_CONTROLS*, Void)).call(renderingcontrols)
+  end
+  def set_primitive_blend(primitiveblend : D2D1_PRIMITIVE_BLEND) : Void
+    @lpVtbl.value.set_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, Void)).call(primitiveblend)
+  end
+  def get_primitive_blend : D2D1_PRIMITIVE_BLEND
+    @lpVtbl.value.get_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND)).call
+  end
+  def set_unit_mode(unitmode : D2D1_UNIT_MODE) : Void
+    @lpVtbl.value.set_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE, Void)).call(unitmode)
+  end
+  def get_unit_mode : D2D1_UNIT_MODE
+    @lpVtbl.value.get_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE)).call
+  end
+  def draw_glyph_run2(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run2.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_image(image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : Void
+    @lpVtbl.value.draw_image.unsafe_as(Proc(ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, Void)).call(image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : Void
+    @lpVtbl.value.draw_gdi_metafile.unsafe_as(Proc(ID2D1GdiMetafile, D2D_POINT_2F*, Void)).call(gdimetafile, targetoffset)
+  end
+  def draw_bitmap2(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : Void
+    @lpVtbl.value.draw_bitmap2.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def push_layer2(layerparameters : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer2.unsafe_as(Proc(D2D1_LAYER_PARAMETERS1*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def invalidate_effect_input_rectangle(effect : ID2D1Effect, input : UInt32, inputrectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.invalidate_effect_input_rectangle.unsafe_as(Proc(ID2D1Effect, UInt32, D2D_RECT_F*, HRESULT)).call(effect, input, inputrectangle)
+  end
+  def get_effect_invalid_rectangle_count(effect : ID2D1Effect, rectanglecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangle_count.unsafe_as(Proc(ID2D1Effect, UInt32*, HRESULT)).call(effect, rectanglecount)
+  end
+  def get_effect_invalid_rectangles(effect : ID2D1Effect, rectangles : D2D_RECT_F*, rectanglescount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangles.unsafe_as(Proc(ID2D1Effect, D2D_RECT_F*, UInt32, HRESULT)).call(effect, rectangles, rectanglescount)
+  end
+  def get_effect_required_input_rectangles(rendereffect : ID2D1Effect, renderimagerectangle : D2D_RECT_F*, inputdescriptions : D2D1_EFFECT_INPUT_DESCRIPTION*, requiredinputrects : D2D_RECT_F*, inputcount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_required_input_rectangles.unsafe_as(Proc(ID2D1Effect, D2D_RECT_F*, D2D1_EFFECT_INPUT_DESCRIPTION*, D2D_RECT_F*, UInt32, HRESULT)).call(rendereffect, renderimagerectangle, inputdescriptions, requiredinputrects, inputcount)
+  end
+  def fill_opacity_mask2(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask2.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def create_filled_geometry_realization(geometry : ID2D1Geometry, flatteningtolerance : Float32, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_filled_geometry_realization.unsafe_as(Proc(ID2D1Geometry, Float32, ID2D1GeometryRealization*, HRESULT)).call(geometry, flatteningtolerance, geometryrealization)
+  end
+  def create_stroked_geometry_realization(geometry : ID2D1Geometry, flatteningtolerance : Float32, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_stroked_geometry_realization.unsafe_as(Proc(ID2D1Geometry, Float32, Float32, ID2D1StrokeStyle, ID2D1GeometryRealization*, HRESULT)).call(geometry, flatteningtolerance, strokewidth, strokestyle, geometryrealization)
+  end
+  def draw_geometry_realization(geometryrealization : ID2D1GeometryRealization, brush : ID2D1Brush) : Void
+    @lpVtbl.value.draw_geometry_realization.unsafe_as(Proc(ID2D1GeometryRealization, ID2D1Brush, Void)).call(geometryrealization, brush)
+  end
+  def create_ink(startpoint : D2D1_INK_POINT*, ink : ID2D1Ink*) : HRESULT
+    @lpVtbl.value.create_ink.unsafe_as(Proc(D2D1_INK_POINT*, ID2D1Ink*, HRESULT)).call(startpoint, ink)
+  end
+  def create_ink_style(inkstyleproperties : D2D1_INK_STYLE_PROPERTIES*, inkstyle : ID2D1InkStyle*) : HRESULT
+    @lpVtbl.value.create_ink_style.unsafe_as(Proc(D2D1_INK_STYLE_PROPERTIES*, ID2D1InkStyle*, HRESULT)).call(inkstyleproperties, inkstyle)
+  end
+  def create_gradient_mesh(patches : D2D1_GRADIENT_MESH_PATCH*, patchescount : UInt32, gradientmesh : ID2D1GradientMesh*) : HRESULT
+    @lpVtbl.value.create_gradient_mesh.unsafe_as(Proc(D2D1_GRADIENT_MESH_PATCH*, UInt32, ID2D1GradientMesh*, HRESULT)).call(patches, patchescount, gradientmesh)
+  end
+  def create_image_source_from_wic(wicbitmapsource : IWICBitmapSource, loadingoptions : D2D1_IMAGE_SOURCE_LOADING_OPTIONS, alphamode : D2D1_ALPHA_MODE, imagesource : ID2D1ImageSourceFromWic*) : HRESULT
+    @lpVtbl.value.create_image_source_from_wic.unsafe_as(Proc(IWICBitmapSource, D2D1_IMAGE_SOURCE_LOADING_OPTIONS, D2D1_ALPHA_MODE, ID2D1ImageSourceFromWic*, HRESULT)).call(wicbitmapsource, loadingoptions, alphamode, imagesource)
+  end
+  def create_lookup_table3_d(precision : D2D1_BUFFER_PRECISION, extents : UInt32*, data : UInt8*, datacount : UInt32, strides : UInt32*, lookuptable : ID2D1LookupTable3D*) : HRESULT
+    @lpVtbl.value.create_lookup_table3_d.unsafe_as(Proc(D2D1_BUFFER_PRECISION, UInt32*, UInt8*, UInt32, UInt32*, ID2D1LookupTable3D*, HRESULT)).call(precision, extents, data, datacount, strides, lookuptable)
+  end
+  def create_image_source_from_dxgi(surfaces : IDXGISurface*, surfacecount : UInt32, colorspace : DXGI_COLOR_SPACE_TYPE, options : D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, imagesource : ID2D1ImageSource*) : HRESULT
+    @lpVtbl.value.create_image_source_from_dxgi.unsafe_as(Proc(IDXGISurface*, UInt32, DXGI_COLOR_SPACE_TYPE, D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, ID2D1ImageSource*, HRESULT)).call(surfaces, surfacecount, colorspace, options, imagesource)
+  end
+  def get_gradient_mesh_world_bounds(gradientmesh : ID2D1GradientMesh, pbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_gradient_mesh_world_bounds.unsafe_as(Proc(ID2D1GradientMesh, D2D_RECT_F*, HRESULT)).call(gradientmesh, pbounds)
+  end
+  def draw_ink(ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : Void
+    @lpVtbl.value.draw_ink.unsafe_as(Proc(ID2D1Ink, ID2D1Brush, ID2D1InkStyle, Void)).call(ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(gradientmesh : ID2D1GradientMesh) : Void
+    @lpVtbl.value.draw_gradient_mesh.unsafe_as(Proc(ID2D1GradientMesh, Void)).call(gradientmesh)
+  end
+  def draw_gdi_metafile2(gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_gdi_metafile2.unsafe_as(Proc(ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, Void)).call(gdimetafile, destinationrectangle, sourcerectangle)
+  end
+  def create_transformed_image_source(imagesource : ID2D1ImageSource, properties : D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, transformedimagesource : ID2D1TransformedImageSource*) : HRESULT
+    @lpVtbl.value.create_transformed_image_source.unsafe_as(Proc(ID2D1ImageSource, D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, ID2D1TransformedImageSource*, HRESULT)).call(imagesource, properties, transformedimagesource)
+  end
+  def create_sprite_batch(spritebatch : ID2D1SpriteBatch*) : HRESULT
+    @lpVtbl.value.create_sprite_batch.unsafe_as(Proc(ID2D1SpriteBatch*, HRESULT)).call(spritebatch)
+  end
+  def draw_sprite_batch(spritebatch : ID2D1SpriteBatch, startindex : UInt32, spritecount : UInt32, bitmap : ID2D1Bitmap, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, spriteoptions : D2D1_SPRITE_OPTIONS) : Void
+    @lpVtbl.value.draw_sprite_batch.unsafe_as(Proc(ID2D1SpriteBatch, UInt32, UInt32, ID2D1Bitmap, D2D1_BITMAP_INTERPOLATION_MODE, D2D1_SPRITE_OPTIONS, Void)).call(spritebatch, startindex, spritecount, bitmap, interpolationmode, spriteoptions)
+  end
+end
+struct LibWin32::ID2D1Device3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_device_context(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext : ID2D1DeviceContext*) : HRESULT
+    @lpVtbl.value.create_device_context.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext*, HRESULT)).call(options, devicecontext)
+  end
+  def create_print_control(wicfactory : IWICImagingFactory, documenttarget : IPrintDocumentPackageTarget, printcontrolproperties : D2D1_PRINT_CONTROL_PROPERTIES*, printcontrol : ID2D1PrintControl*) : HRESULT
+    @lpVtbl.value.create_print_control.unsafe_as(Proc(IWICImagingFactory, IPrintDocumentPackageTarget, D2D1_PRINT_CONTROL_PROPERTIES*, ID2D1PrintControl*, HRESULT)).call(wicfactory, documenttarget, printcontrolproperties, printcontrol)
+  end
+  def set_maximum_texture_memory(maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_texture_memory.unsafe_as(Proc(UInt64, Void)).call(maximuminbytes)
+  end
+  def get_maximum_texture_memory : UInt64
+    @lpVtbl.value.get_maximum_texture_memory.unsafe_as(Proc(UInt64)).call
+  end
+  def clear_resources(millisecondssinceuse : UInt32) : Void
+    @lpVtbl.value.clear_resources.unsafe_as(Proc(UInt32, Void)).call(millisecondssinceuse)
+  end
+  def get_rendering_priority : D2D1_RENDERING_PRIORITY
+    @lpVtbl.value.get_rendering_priority.unsafe_as(Proc(D2D1_RENDERING_PRIORITY)).call
+  end
+  def set_rendering_priority(renderingpriority : D2D1_RENDERING_PRIORITY) : Void
+    @lpVtbl.value.set_rendering_priority.unsafe_as(Proc(D2D1_RENDERING_PRIORITY, Void)).call(renderingpriority)
+  end
+  def create_device_context2(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext1 : ID2D1DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_device_context2.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext1*, HRESULT)).call(options, devicecontext1)
+  end
+  def create_device_context3(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext2 : ID2D1DeviceContext2*) : HRESULT
+    @lpVtbl.value.create_device_context3.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext2*, HRESULT)).call(options, devicecontext2)
+  end
+  def flush_device_contexts(bitmap : ID2D1Bitmap) : Void
+    @lpVtbl.value.flush_device_contexts.unsafe_as(Proc(ID2D1Bitmap, Void)).call(bitmap)
+  end
+  def get_dxgi_device(dxgidevice : IDXGIDevice*) : HRESULT
+    @lpVtbl.value.get_dxgi_device.unsafe_as(Proc(IDXGIDevice*, HRESULT)).call(dxgidevice)
+  end
+  def create_device_context4(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext3 : ID2D1DeviceContext3*) : HRESULT
+    @lpVtbl.value.create_device_context4.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext3*, HRESULT)).call(options, devicecontext3)
+  end
+end
+struct LibWin32::ID2D1Factory4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def reload_system_metrics : HRESULT
+    @lpVtbl.value.reload_system_metrics.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_desktop_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_desktop_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def create_rectangle_geometry(rectangle : D2D_RECT_F*, rectanglegeometry : ID2D1RectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rectangle_geometry.unsafe_as(Proc(D2D_RECT_F*, ID2D1RectangleGeometry*, HRESULT)).call(rectangle, rectanglegeometry)
+  end
+  def create_rounded_rectangle_geometry(roundedrectangle : D2D1_ROUNDED_RECT*, roundedrectanglegeometry : ID2D1RoundedRectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rounded_rectangle_geometry.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1RoundedRectangleGeometry*, HRESULT)).call(roundedrectangle, roundedrectanglegeometry)
+  end
+  def create_ellipse_geometry(ellipse : D2D1_ELLIPSE*, ellipsegeometry : ID2D1EllipseGeometry*) : HRESULT
+    @lpVtbl.value.create_ellipse_geometry.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1EllipseGeometry*, HRESULT)).call(ellipse, ellipsegeometry)
+  end
+  def create_geometry_group(fillmode : D2D1_FILL_MODE, geometries : ID2D1Geometry*, geometriescount : UInt32, geometrygroup : ID2D1GeometryGroup*) : HRESULT
+    @lpVtbl.value.create_geometry_group.unsafe_as(Proc(D2D1_FILL_MODE, ID2D1Geometry*, UInt32, ID2D1GeometryGroup*, HRESULT)).call(fillmode, geometries, geometriescount, geometrygroup)
+  end
+  def create_transformed_geometry(sourcegeometry : ID2D1Geometry, transform : D2D_MATRIX_3X2_F*, transformedgeometry : ID2D1TransformedGeometry*) : HRESULT
+    @lpVtbl.value.create_transformed_geometry.unsafe_as(Proc(ID2D1Geometry, D2D_MATRIX_3X2_F*, ID2D1TransformedGeometry*, HRESULT)).call(sourcegeometry, transform, transformedgeometry)
+  end
+  def create_path_geometry(pathgeometry : ID2D1PathGeometry*) : HRESULT
+    @lpVtbl.value.create_path_geometry.unsafe_as(Proc(ID2D1PathGeometry*, HRESULT)).call(pathgeometry)
+  end
+  def create_stroke_style(strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle*) : HRESULT
+    @lpVtbl.value.create_stroke_style.unsafe_as(Proc(D2D1_STROKE_STYLE_PROPERTIES*, Float32*, UInt32, ID2D1StrokeStyle*, HRESULT)).call(strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_drawing_state_block(drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION*, IDWriteRenderingParams, ID2D1DrawingStateBlock*, HRESULT)).call(drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_wic_bitmap_render_target(target : IWICBitmap, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_wic_bitmap_render_target.unsafe_as(Proc(IWICBitmap, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)).call(target, rendertargetproperties, rendertarget)
+  end
+  def create_hwnd_render_target(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, hwndrendertargetproperties : D2D1_HWND_RENDER_TARGET_PROPERTIES*, hwndrendertarget : ID2D1HwndRenderTarget*) : HRESULT
+    @lpVtbl.value.create_hwnd_render_target.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, D2D1_HWND_RENDER_TARGET_PROPERTIES*, ID2D1HwndRenderTarget*, HRESULT)).call(rendertargetproperties, hwndrendertargetproperties, hwndrendertarget)
+  end
+  def create_dxgi_surface_render_target(dxgisurface : IDXGISurface, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_dxgi_surface_render_target.unsafe_as(Proc(IDXGISurface, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)).call(dxgisurface, rendertargetproperties, rendertarget)
+  end
+  def create_dc_render_target(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, dcrendertarget : ID2D1DCRenderTarget*) : HRESULT
+    @lpVtbl.value.create_dc_render_target.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)).call(rendertargetproperties, dcrendertarget)
+  end
+  def create_device(dxgidevice : IDXGIDevice, d2ddevice : ID2D1Device*) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(IDXGIDevice, ID2D1Device*, HRESULT)).call(dxgidevice, d2ddevice)
+  end
+  def create_stroke_style2(strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES1*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle1*) : HRESULT
+    @lpVtbl.value.create_stroke_style2.unsafe_as(Proc(D2D1_STROKE_STYLE_PROPERTIES1*, Float32*, UInt32, ID2D1StrokeStyle1*, HRESULT)).call(strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_path_geometry2(pathgeometry : ID2D1PathGeometry1*) : HRESULT
+    @lpVtbl.value.create_path_geometry2.unsafe_as(Proc(ID2D1PathGeometry1*, HRESULT)).call(pathgeometry)
+  end
+  def create_drawing_state_block2(drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION1*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock1*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block2.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION1*, IDWriteRenderingParams, ID2D1DrawingStateBlock1*, HRESULT)).call(drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_gdi_metafile(metafilestream : IStream, metafile : ID2D1GdiMetafile*) : HRESULT
+    @lpVtbl.value.create_gdi_metafile.unsafe_as(Proc(IStream, ID2D1GdiMetafile*, HRESULT)).call(metafilestream, metafile)
+  end
+  def register_effect_from_stream(classid : Guid*, propertyxml : IStream, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_stream.unsafe_as(Proc(Guid*, IStream, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)).call(classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def register_effect_from_string(classid : Guid*, propertyxml : LibC::LPWSTR, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_string.unsafe_as(Proc(Guid*, LibC::LPWSTR, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)).call(classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def unregister_effect(classid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_effect.unsafe_as(Proc(Guid*, HRESULT)).call(classid)
+  end
+  def get_registered_effects(effects : Guid*, effectscount : UInt32, effectsreturned : UInt32*, effectsregistered : UInt32*) : HRESULT
+    @lpVtbl.value.get_registered_effects.unsafe_as(Proc(Guid*, UInt32, UInt32*, UInt32*, HRESULT)).call(effects, effectscount, effectsreturned, effectsregistered)
+  end
+  def get_effect_properties(effectid : Guid*, properties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_effect_properties.unsafe_as(Proc(Guid*, ID2D1Properties*, HRESULT)).call(effectid, properties)
+  end
+  def create_device2(dxgidevice : IDXGIDevice, d2ddevice1 : ID2D1Device1*) : HRESULT
+    @lpVtbl.value.create_device2.unsafe_as(Proc(IDXGIDevice, ID2D1Device1*, HRESULT)).call(dxgidevice, d2ddevice1)
+  end
+  def create_device3(dxgidevice : IDXGIDevice, d2ddevice2 : ID2D1Device2*) : HRESULT
+    @lpVtbl.value.create_device3.unsafe_as(Proc(IDXGIDevice, ID2D1Device2*, HRESULT)).call(dxgidevice, d2ddevice2)
+  end
+  def create_device4(dxgidevice : IDXGIDevice, d2ddevice3 : ID2D1Device3*) : HRESULT
+    @lpVtbl.value.create_device4.unsafe_as(Proc(IDXGIDevice, ID2D1Device3*, HRESULT)).call(dxgidevice, d2ddevice3)
+  end
+end
+struct LibWin32::ID2D1CommandSink3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_draw : HRESULT
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def end_draw : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, HRESULT)).call(antialiasmode)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : HRESULT
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, HRESULT)).call(tag1, tag2)
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, HRESULT)).call(textantialiasmode)
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : HRESULT
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, HRESULT)).call(textrenderingparams)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, HRESULT)).call(transform)
+  end
+  def set_primitive_blend(primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, HRESULT)).call(primitiveblend)
+  end
+  def set_unit_mode(unitmode : D2D1_UNIT_MODE) : HRESULT
+    @lpVtbl.value.set_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE, HRESULT)).call(unitmode)
+  end
+  def clear(color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, HRESULT)).call(color)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : HRESULT
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, HRESULT)).call(baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : HRESULT
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, HRESULT)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def draw_image(image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.draw_image.unsafe_as(Proc(ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, HRESULT)).call(image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile.unsafe_as(Proc(ID2D1GdiMetafile, D2D_POINT_2F*, HRESULT)).call(gdimetafile, targetoffset)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, HRESULT)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, HRESULT)).call(opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, HRESULT)).call(geometry, brush, opacitybrush)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, HRESULT)).call(rect, brush)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, HRESULT)).call(cliprect, antialiasmode)
+  end
+  def push_layer(layerparameters1 : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : HRESULT
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS1*, ID2D1Layer, HRESULT)).call(layerparameters1, layer)
+  end
+  def pop_axis_aligned_clip : HRESULT
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(HRESULT)).call
+  end
+  def pop_layer : HRESULT
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_primitive_blend1(primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend1.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, HRESULT)).call(primitiveblend)
+  end
+  def draw_ink(ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : HRESULT
+    @lpVtbl.value.draw_ink.unsafe_as(Proc(ID2D1Ink, ID2D1Brush, ID2D1InkStyle, HRESULT)).call(ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(gradientmesh : ID2D1GradientMesh) : HRESULT
+    @lpVtbl.value.draw_gradient_mesh.unsafe_as(Proc(ID2D1GradientMesh, HRESULT)).call(gradientmesh)
+  end
+  def draw_gdi_metafile2(gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile2.unsafe_as(Proc(ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, HRESULT)).call(gdimetafile, destinationrectangle, sourcerectangle)
+  end
+  def draw_sprite_batch(spritebatch : ID2D1SpriteBatch, startindex : UInt32, spritecount : UInt32, bitmap : ID2D1Bitmap, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, spriteoptions : D2D1_SPRITE_OPTIONS) : HRESULT
+    @lpVtbl.value.draw_sprite_batch.unsafe_as(Proc(ID2D1SpriteBatch, UInt32, UInt32, ID2D1Bitmap, D2D1_BITMAP_INTERPOLATION_MODE, D2D1_SPRITE_OPTIONS, HRESULT)).call(spritebatch, startindex, spritecount, bitmap, interpolationmode, spriteoptions)
+  end
+end
+struct LibWin32::ID2D1SvgGlyphStyle
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def set_fill(brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.set_fill.unsafe_as(Proc(ID2D1Brush, HRESULT)).call(brush)
+  end
+  def get_fill(brush : ID2D1Brush*) : Void
+    @lpVtbl.value.get_fill.unsafe_as(Proc(ID2D1Brush*, Void)).call(brush)
+  end
+  def set_stroke(brush : ID2D1Brush, strokewidth : Float32, dashes : Float32*, dashescount : UInt32, dashoffset : Float32) : HRESULT
+    @lpVtbl.value.set_stroke.unsafe_as(Proc(ID2D1Brush, Float32, Float32*, UInt32, Float32, HRESULT)).call(brush, strokewidth, dashes, dashescount, dashoffset)
+  end
+  def get_stroke_dashes_count : UInt32
+    @lpVtbl.value.get_stroke_dashes_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_stroke(brush : ID2D1Brush*, strokewidth : Float32*, dashes : Float32*, dashescount : UInt32, dashoffset : Float32*) : Void
+    @lpVtbl.value.get_stroke.unsafe_as(Proc(ID2D1Brush*, Float32*, Float32*, UInt32, Float32*, Void)).call(brush, strokewidth, dashes, dashescount, dashoffset)
+  end
+end
+struct LibWin32::ID2D1DeviceContext4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_bitmap(size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.unsafe_as(Proc(Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.unsafe_as(Proc(D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)).call(color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)).call(gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.unsafe_as(Proc(D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)).call(lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.unsafe_as(Proc(D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)).call(radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.unsafe_as(Proc(D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)).call(desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.unsafe_as(Proc(D2D_SIZE_F*, ID2D1Layer*, HRESULT)).call(size, layer)
+  end
+  def create_mesh(mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.unsafe_as(Proc(ID2D1Mesh*, HRESULT)).call(mesh)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Void)).call(rect, brush)
+  end
+  def draw_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Void)).call(roundedrect, brush)
+  end
+  def draw_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Void)).call(ellipse, brush)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)).call(geometry, brush, opacitybrush)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, Void)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)).call(string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.unsafe_as(Proc(D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)).call(origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, Void)).call(antialiasmode)
+  end
+  def get_antialias_mode : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE)).call
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, Void)).call(textantialiasmode)
+  end
+  def get_text_antialias_mode : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE)).call
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, Void)).call(textrenderingparams)
+  end
+  def get_text_rendering_params(textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, Void)).call(textrenderingparams)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, Void)).call(tag1, tag2)
+  end
+  def get_tags(tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.unsafe_as(Proc(UInt64*, UInt64*, Void)).call(tag1, tag2)
+  end
+  def push_layer(layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def pop_layer : Void
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(Void)).call
+  end
+  def flush(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def save_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def restore_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)).call(cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip : Void
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(Void)).call
+  end
+  def clear(clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, Void)).call(clearcolor)
+  end
+  def begin_draw : Void
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(Void)).call
+  end
+  def end_draw(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def get_pixel_format : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(D2D1_PIXEL_FORMAT)).call
+  end
+  def set_dpi(dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.unsafe_as(Proc(Float32, Float32, Void)).call(dpix, dpiy)
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def get_size : D2D_SIZE_F
+    @lpVtbl.value.get_size.unsafe_as(Proc(D2D_SIZE_F)).call
+  end
+  def get_pixel_size : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.unsafe_as(Proc(D2D_SIZE_U)).call
+  end
+  def get_maximum_bitmap_size : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.unsafe_as(Proc(UInt32)).call
+  end
+  def is_supported(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)).call(rendertargetproperties)
+  end
+  def create_bitmap2(size : D2D_SIZE_U, sourcedata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap2.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(size, sourcedata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap2(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap2.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_color_context(space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.unsafe_as(Proc(D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)).call(space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.unsafe_as(Proc(LibC::LPWSTR, ID2D1ColorContext*, HRESULT)).call(filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.unsafe_as(Proc(IWICColorContext, ID2D1ColorContext*, HRESULT)).call(wiccolorcontext, colorcontext)
+  end
+  def create_bitmap_from_dxgi_surface(surface : IDXGISurface, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_dxgi_surface.unsafe_as(Proc(IDXGISurface, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(surface, bitmapproperties, bitmap)
+  end
+  def create_effect(effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.unsafe_as(Proc(Guid*, ID2D1Effect*, HRESULT)).call(effectid, effect)
+  end
+  def create_gradient_stop_collection2(straightalphagradientstops : D2D1_GRADIENT_STOP*, straightalphagradientstopscount : UInt32, preinterpolationspace : D2D1_COLOR_SPACE, postinterpolationspace : D2D1_COLOR_SPACE, bufferprecision : D2D1_BUFFER_PRECISION, extendmode : D2D1_EXTEND_MODE, colorinterpolationmode : D2D1_COLOR_INTERPOLATION_MODE, gradientstopcollection1 : ID2D1GradientStopCollection1*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection2.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_COLOR_SPACE, D2D1_COLOR_SPACE, D2D1_BUFFER_PRECISION, D2D1_EXTEND_MODE, D2D1_COLOR_INTERPOLATION_MODE, ID2D1GradientStopCollection1*, HRESULT)).call(straightalphagradientstops, straightalphagradientstopscount, preinterpolationspace, postinterpolationspace, bufferprecision, extendmode, colorinterpolationmode, gradientstopcollection1)
+  end
+  def create_image_brush(image : ID2D1Image, imagebrushproperties : D2D1_IMAGE_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, imagebrush : ID2D1ImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.unsafe_as(Proc(ID2D1Image, D2D1_IMAGE_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1ImageBrush*, HRESULT)).call(image, imagebrushproperties, brushproperties, imagebrush)
+  end
+  def create_bitmap_brush2(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES1*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush1*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush2.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES1*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush1*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_command_list(commandlist : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(ID2D1CommandList*, HRESULT)).call(commandlist)
+  end
+  def is_dxgi_format_supported(format : DXGI_FORMAT) : LibC::BOOL
+    @lpVtbl.value.is_dxgi_format_supported.unsafe_as(Proc(DXGI_FORMAT, LibC::BOOL)).call(format)
+  end
+  def is_buffer_precision_supported(bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.unsafe_as(Proc(D2D1_BUFFER_PRECISION, LibC::BOOL)).call(bufferprecision)
+  end
+  def get_image_local_bounds(image : ID2D1Image, localbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_local_bounds.unsafe_as(Proc(ID2D1Image, D2D_RECT_F*, HRESULT)).call(image, localbounds)
+  end
+  def get_image_world_bounds(image : ID2D1Image, worldbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_world_bounds.unsafe_as(Proc(ID2D1Image, D2D_RECT_F*, HRESULT)).call(image, worldbounds)
+  end
+  def get_glyph_run_world_bounds(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_glyph_run_world_bounds.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_RECT_F*, HRESULT)).call(baselineorigin, glyphrun, measuringmode, bounds)
+  end
+  def get_device(device : ID2D1Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID2D1Device*, Void)).call(device)
+  end
+  def set_target(image : ID2D1Image) : Void
+    @lpVtbl.value.set_target.unsafe_as(Proc(ID2D1Image, Void)).call(image)
+  end
+  def get_target(image : ID2D1Image*) : Void
+    @lpVtbl.value.get_target.unsafe_as(Proc(ID2D1Image*, Void)).call(image)
+  end
+  def set_rendering_controls(renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.set_rendering_controls.unsafe_as(Proc(D2D1_RENDERING_CONTROLS*, Void)).call(renderingcontrols)
+  end
+  def get_rendering_controls(renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.get_rendering_controls.unsafe_as(Proc(D2D1_RENDERING_CONTROLS*, Void)).call(renderingcontrols)
+  end
+  def set_primitive_blend(primitiveblend : D2D1_PRIMITIVE_BLEND) : Void
+    @lpVtbl.value.set_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, Void)).call(primitiveblend)
+  end
+  def get_primitive_blend : D2D1_PRIMITIVE_BLEND
+    @lpVtbl.value.get_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND)).call
+  end
+  def set_unit_mode(unitmode : D2D1_UNIT_MODE) : Void
+    @lpVtbl.value.set_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE, Void)).call(unitmode)
+  end
+  def get_unit_mode : D2D1_UNIT_MODE
+    @lpVtbl.value.get_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE)).call
+  end
+  def draw_glyph_run2(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run2.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_image(image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : Void
+    @lpVtbl.value.draw_image.unsafe_as(Proc(ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, Void)).call(image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : Void
+    @lpVtbl.value.draw_gdi_metafile.unsafe_as(Proc(ID2D1GdiMetafile, D2D_POINT_2F*, Void)).call(gdimetafile, targetoffset)
+  end
+  def draw_bitmap2(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : Void
+    @lpVtbl.value.draw_bitmap2.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def push_layer2(layerparameters : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer2.unsafe_as(Proc(D2D1_LAYER_PARAMETERS1*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def invalidate_effect_input_rectangle(effect : ID2D1Effect, input : UInt32, inputrectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.invalidate_effect_input_rectangle.unsafe_as(Proc(ID2D1Effect, UInt32, D2D_RECT_F*, HRESULT)).call(effect, input, inputrectangle)
+  end
+  def get_effect_invalid_rectangle_count(effect : ID2D1Effect, rectanglecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangle_count.unsafe_as(Proc(ID2D1Effect, UInt32*, HRESULT)).call(effect, rectanglecount)
+  end
+  def get_effect_invalid_rectangles(effect : ID2D1Effect, rectangles : D2D_RECT_F*, rectanglescount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangles.unsafe_as(Proc(ID2D1Effect, D2D_RECT_F*, UInt32, HRESULT)).call(effect, rectangles, rectanglescount)
+  end
+  def get_effect_required_input_rectangles(rendereffect : ID2D1Effect, renderimagerectangle : D2D_RECT_F*, inputdescriptions : D2D1_EFFECT_INPUT_DESCRIPTION*, requiredinputrects : D2D_RECT_F*, inputcount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_required_input_rectangles.unsafe_as(Proc(ID2D1Effect, D2D_RECT_F*, D2D1_EFFECT_INPUT_DESCRIPTION*, D2D_RECT_F*, UInt32, HRESULT)).call(rendereffect, renderimagerectangle, inputdescriptions, requiredinputrects, inputcount)
+  end
+  def fill_opacity_mask2(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask2.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def create_filled_geometry_realization(geometry : ID2D1Geometry, flatteningtolerance : Float32, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_filled_geometry_realization.unsafe_as(Proc(ID2D1Geometry, Float32, ID2D1GeometryRealization*, HRESULT)).call(geometry, flatteningtolerance, geometryrealization)
+  end
+  def create_stroked_geometry_realization(geometry : ID2D1Geometry, flatteningtolerance : Float32, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_stroked_geometry_realization.unsafe_as(Proc(ID2D1Geometry, Float32, Float32, ID2D1StrokeStyle, ID2D1GeometryRealization*, HRESULT)).call(geometry, flatteningtolerance, strokewidth, strokestyle, geometryrealization)
+  end
+  def draw_geometry_realization(geometryrealization : ID2D1GeometryRealization, brush : ID2D1Brush) : Void
+    @lpVtbl.value.draw_geometry_realization.unsafe_as(Proc(ID2D1GeometryRealization, ID2D1Brush, Void)).call(geometryrealization, brush)
+  end
+  def create_ink(startpoint : D2D1_INK_POINT*, ink : ID2D1Ink*) : HRESULT
+    @lpVtbl.value.create_ink.unsafe_as(Proc(D2D1_INK_POINT*, ID2D1Ink*, HRESULT)).call(startpoint, ink)
+  end
+  def create_ink_style(inkstyleproperties : D2D1_INK_STYLE_PROPERTIES*, inkstyle : ID2D1InkStyle*) : HRESULT
+    @lpVtbl.value.create_ink_style.unsafe_as(Proc(D2D1_INK_STYLE_PROPERTIES*, ID2D1InkStyle*, HRESULT)).call(inkstyleproperties, inkstyle)
+  end
+  def create_gradient_mesh(patches : D2D1_GRADIENT_MESH_PATCH*, patchescount : UInt32, gradientmesh : ID2D1GradientMesh*) : HRESULT
+    @lpVtbl.value.create_gradient_mesh.unsafe_as(Proc(D2D1_GRADIENT_MESH_PATCH*, UInt32, ID2D1GradientMesh*, HRESULT)).call(patches, patchescount, gradientmesh)
+  end
+  def create_image_source_from_wic(wicbitmapsource : IWICBitmapSource, loadingoptions : D2D1_IMAGE_SOURCE_LOADING_OPTIONS, alphamode : D2D1_ALPHA_MODE, imagesource : ID2D1ImageSourceFromWic*) : HRESULT
+    @lpVtbl.value.create_image_source_from_wic.unsafe_as(Proc(IWICBitmapSource, D2D1_IMAGE_SOURCE_LOADING_OPTIONS, D2D1_ALPHA_MODE, ID2D1ImageSourceFromWic*, HRESULT)).call(wicbitmapsource, loadingoptions, alphamode, imagesource)
+  end
+  def create_lookup_table3_d(precision : D2D1_BUFFER_PRECISION, extents : UInt32*, data : UInt8*, datacount : UInt32, strides : UInt32*, lookuptable : ID2D1LookupTable3D*) : HRESULT
+    @lpVtbl.value.create_lookup_table3_d.unsafe_as(Proc(D2D1_BUFFER_PRECISION, UInt32*, UInt8*, UInt32, UInt32*, ID2D1LookupTable3D*, HRESULT)).call(precision, extents, data, datacount, strides, lookuptable)
+  end
+  def create_image_source_from_dxgi(surfaces : IDXGISurface*, surfacecount : UInt32, colorspace : DXGI_COLOR_SPACE_TYPE, options : D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, imagesource : ID2D1ImageSource*) : HRESULT
+    @lpVtbl.value.create_image_source_from_dxgi.unsafe_as(Proc(IDXGISurface*, UInt32, DXGI_COLOR_SPACE_TYPE, D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, ID2D1ImageSource*, HRESULT)).call(surfaces, surfacecount, colorspace, options, imagesource)
+  end
+  def get_gradient_mesh_world_bounds(gradientmesh : ID2D1GradientMesh, pbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_gradient_mesh_world_bounds.unsafe_as(Proc(ID2D1GradientMesh, D2D_RECT_F*, HRESULT)).call(gradientmesh, pbounds)
+  end
+  def draw_ink(ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : Void
+    @lpVtbl.value.draw_ink.unsafe_as(Proc(ID2D1Ink, ID2D1Brush, ID2D1InkStyle, Void)).call(ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(gradientmesh : ID2D1GradientMesh) : Void
+    @lpVtbl.value.draw_gradient_mesh.unsafe_as(Proc(ID2D1GradientMesh, Void)).call(gradientmesh)
+  end
+  def draw_gdi_metafile2(gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_gdi_metafile2.unsafe_as(Proc(ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, Void)).call(gdimetafile, destinationrectangle, sourcerectangle)
+  end
+  def create_transformed_image_source(imagesource : ID2D1ImageSource, properties : D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, transformedimagesource : ID2D1TransformedImageSource*) : HRESULT
+    @lpVtbl.value.create_transformed_image_source.unsafe_as(Proc(ID2D1ImageSource, D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, ID2D1TransformedImageSource*, HRESULT)).call(imagesource, properties, transformedimagesource)
+  end
+  def create_sprite_batch(spritebatch : ID2D1SpriteBatch*) : HRESULT
+    @lpVtbl.value.create_sprite_batch.unsafe_as(Proc(ID2D1SpriteBatch*, HRESULT)).call(spritebatch)
+  end
+  def draw_sprite_batch(spritebatch : ID2D1SpriteBatch, startindex : UInt32, spritecount : UInt32, bitmap : ID2D1Bitmap, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, spriteoptions : D2D1_SPRITE_OPTIONS) : Void
+    @lpVtbl.value.draw_sprite_batch.unsafe_as(Proc(ID2D1SpriteBatch, UInt32, UInt32, ID2D1Bitmap, D2D1_BITMAP_INTERPOLATION_MODE, D2D1_SPRITE_OPTIONS, Void)).call(spritebatch, startindex, spritecount, bitmap, interpolationmode, spriteoptions)
+  end
+  def create_svg_glyph_style(svgglyphstyle : ID2D1SvgGlyphStyle*) : HRESULT
+    @lpVtbl.value.create_svg_glyph_style.unsafe_as(Proc(ID2D1SvgGlyphStyle*, HRESULT)).call(svgglyphstyle)
+  end
+  def draw_text2(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text2.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)).call(string, stringlength, textformat, layoutrect, defaultfillbrush, svgglyphstyle, colorpaletteindex, options, measuringmode)
+  end
+  def draw_text_layout2(origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout2.unsafe_as(Proc(D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D1_DRAW_TEXT_OPTIONS, Void)).call(origin, textlayout, defaultfillbrush, svgglyphstyle, colorpaletteindex, options)
+  end
+  def draw_color_bitmap_glyph_run(glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bitmapsnapoption : D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION) : Void
+    @lpVtbl.value.draw_color_bitmap_glyph_run.unsafe_as(Proc(DWRITE_GLYPH_IMAGE_FORMATS, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION, Void)).call(glyphimageformat, baselineorigin, glyphrun, measuringmode, bitmapsnapoption)
+  end
+  def draw_svg_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_svg_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, defaultfillbrush, svgglyphstyle, colorpaletteindex, measuringmode)
+  end
+  def get_color_bitmap_glyph_image(glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, glyphorigin : D2D_POINT_2F, fontface : IDWriteFontFace, fontemsize : Float32, glyphindex : UInt16, issideways : LibC::BOOL, worldtransform : D2D_MATRIX_3X2_F*, dpix : Float32, dpiy : Float32, glyphtransform : D2D_MATRIX_3X2_F*, glyphimage : ID2D1Image*) : HRESULT
+    @lpVtbl.value.get_color_bitmap_glyph_image.unsafe_as(Proc(DWRITE_GLYPH_IMAGE_FORMATS, D2D_POINT_2F, IDWriteFontFace, Float32, UInt16, LibC::BOOL, D2D_MATRIX_3X2_F*, Float32, Float32, D2D_MATRIX_3X2_F*, ID2D1Image*, HRESULT)).call(glyphimageformat, glyphorigin, fontface, fontemsize, glyphindex, issideways, worldtransform, dpix, dpiy, glyphtransform, glyphimage)
+  end
+  def get_svg_glyph_image(glyphorigin : D2D_POINT_2F, fontface : IDWriteFontFace, fontemsize : Float32, glyphindex : UInt16, issideways : LibC::BOOL, worldtransform : D2D_MATRIX_3X2_F*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, glyphtransform : D2D_MATRIX_3X2_F*, glyphimage : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.get_svg_glyph_image.unsafe_as(Proc(D2D_POINT_2F, IDWriteFontFace, Float32, UInt16, LibC::BOOL, D2D_MATRIX_3X2_F*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D_MATRIX_3X2_F*, ID2D1CommandList*, HRESULT)).call(glyphorigin, fontface, fontemsize, glyphindex, issideways, worldtransform, defaultfillbrush, svgglyphstyle, colorpaletteindex, glyphtransform, glyphimage)
+  end
+end
+struct LibWin32::ID2D1Device4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_device_context(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext : ID2D1DeviceContext*) : HRESULT
+    @lpVtbl.value.create_device_context.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext*, HRESULT)).call(options, devicecontext)
+  end
+  def create_print_control(wicfactory : IWICImagingFactory, documenttarget : IPrintDocumentPackageTarget, printcontrolproperties : D2D1_PRINT_CONTROL_PROPERTIES*, printcontrol : ID2D1PrintControl*) : HRESULT
+    @lpVtbl.value.create_print_control.unsafe_as(Proc(IWICImagingFactory, IPrintDocumentPackageTarget, D2D1_PRINT_CONTROL_PROPERTIES*, ID2D1PrintControl*, HRESULT)).call(wicfactory, documenttarget, printcontrolproperties, printcontrol)
+  end
+  def set_maximum_texture_memory(maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_texture_memory.unsafe_as(Proc(UInt64, Void)).call(maximuminbytes)
+  end
+  def get_maximum_texture_memory : UInt64
+    @lpVtbl.value.get_maximum_texture_memory.unsafe_as(Proc(UInt64)).call
+  end
+  def clear_resources(millisecondssinceuse : UInt32) : Void
+    @lpVtbl.value.clear_resources.unsafe_as(Proc(UInt32, Void)).call(millisecondssinceuse)
+  end
+  def get_rendering_priority : D2D1_RENDERING_PRIORITY
+    @lpVtbl.value.get_rendering_priority.unsafe_as(Proc(D2D1_RENDERING_PRIORITY)).call
+  end
+  def set_rendering_priority(renderingpriority : D2D1_RENDERING_PRIORITY) : Void
+    @lpVtbl.value.set_rendering_priority.unsafe_as(Proc(D2D1_RENDERING_PRIORITY, Void)).call(renderingpriority)
+  end
+  def create_device_context2(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext1 : ID2D1DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_device_context2.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext1*, HRESULT)).call(options, devicecontext1)
+  end
+  def create_device_context3(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext2 : ID2D1DeviceContext2*) : HRESULT
+    @lpVtbl.value.create_device_context3.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext2*, HRESULT)).call(options, devicecontext2)
+  end
+  def flush_device_contexts(bitmap : ID2D1Bitmap) : Void
+    @lpVtbl.value.flush_device_contexts.unsafe_as(Proc(ID2D1Bitmap, Void)).call(bitmap)
+  end
+  def get_dxgi_device(dxgidevice : IDXGIDevice*) : HRESULT
+    @lpVtbl.value.get_dxgi_device.unsafe_as(Proc(IDXGIDevice*, HRESULT)).call(dxgidevice)
+  end
+  def create_device_context4(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext3 : ID2D1DeviceContext3*) : HRESULT
+    @lpVtbl.value.create_device_context4.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext3*, HRESULT)).call(options, devicecontext3)
+  end
+  def create_device_context5(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext4 : ID2D1DeviceContext4*) : HRESULT
+    @lpVtbl.value.create_device_context5.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext4*, HRESULT)).call(options, devicecontext4)
+  end
+  def set_maximum_color_glyph_cache_memory(maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_color_glyph_cache_memory.unsafe_as(Proc(UInt64, Void)).call(maximuminbytes)
+  end
+  def get_maximum_color_glyph_cache_memory : UInt64
+    @lpVtbl.value.get_maximum_color_glyph_cache_memory.unsafe_as(Proc(UInt64)).call
+  end
+end
+struct LibWin32::ID2D1Factory5
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def reload_system_metrics : HRESULT
+    @lpVtbl.value.reload_system_metrics.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_desktop_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_desktop_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def create_rectangle_geometry(rectangle : D2D_RECT_F*, rectanglegeometry : ID2D1RectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rectangle_geometry.unsafe_as(Proc(D2D_RECT_F*, ID2D1RectangleGeometry*, HRESULT)).call(rectangle, rectanglegeometry)
+  end
+  def create_rounded_rectangle_geometry(roundedrectangle : D2D1_ROUNDED_RECT*, roundedrectanglegeometry : ID2D1RoundedRectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rounded_rectangle_geometry.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1RoundedRectangleGeometry*, HRESULT)).call(roundedrectangle, roundedrectanglegeometry)
+  end
+  def create_ellipse_geometry(ellipse : D2D1_ELLIPSE*, ellipsegeometry : ID2D1EllipseGeometry*) : HRESULT
+    @lpVtbl.value.create_ellipse_geometry.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1EllipseGeometry*, HRESULT)).call(ellipse, ellipsegeometry)
+  end
+  def create_geometry_group(fillmode : D2D1_FILL_MODE, geometries : ID2D1Geometry*, geometriescount : UInt32, geometrygroup : ID2D1GeometryGroup*) : HRESULT
+    @lpVtbl.value.create_geometry_group.unsafe_as(Proc(D2D1_FILL_MODE, ID2D1Geometry*, UInt32, ID2D1GeometryGroup*, HRESULT)).call(fillmode, geometries, geometriescount, geometrygroup)
+  end
+  def create_transformed_geometry(sourcegeometry : ID2D1Geometry, transform : D2D_MATRIX_3X2_F*, transformedgeometry : ID2D1TransformedGeometry*) : HRESULT
+    @lpVtbl.value.create_transformed_geometry.unsafe_as(Proc(ID2D1Geometry, D2D_MATRIX_3X2_F*, ID2D1TransformedGeometry*, HRESULT)).call(sourcegeometry, transform, transformedgeometry)
+  end
+  def create_path_geometry(pathgeometry : ID2D1PathGeometry*) : HRESULT
+    @lpVtbl.value.create_path_geometry.unsafe_as(Proc(ID2D1PathGeometry*, HRESULT)).call(pathgeometry)
+  end
+  def create_stroke_style(strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle*) : HRESULT
+    @lpVtbl.value.create_stroke_style.unsafe_as(Proc(D2D1_STROKE_STYLE_PROPERTIES*, Float32*, UInt32, ID2D1StrokeStyle*, HRESULT)).call(strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_drawing_state_block(drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION*, IDWriteRenderingParams, ID2D1DrawingStateBlock*, HRESULT)).call(drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_wic_bitmap_render_target(target : IWICBitmap, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_wic_bitmap_render_target.unsafe_as(Proc(IWICBitmap, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)).call(target, rendertargetproperties, rendertarget)
+  end
+  def create_hwnd_render_target(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, hwndrendertargetproperties : D2D1_HWND_RENDER_TARGET_PROPERTIES*, hwndrendertarget : ID2D1HwndRenderTarget*) : HRESULT
+    @lpVtbl.value.create_hwnd_render_target.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, D2D1_HWND_RENDER_TARGET_PROPERTIES*, ID2D1HwndRenderTarget*, HRESULT)).call(rendertargetproperties, hwndrendertargetproperties, hwndrendertarget)
+  end
+  def create_dxgi_surface_render_target(dxgisurface : IDXGISurface, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_dxgi_surface_render_target.unsafe_as(Proc(IDXGISurface, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)).call(dxgisurface, rendertargetproperties, rendertarget)
+  end
+  def create_dc_render_target(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, dcrendertarget : ID2D1DCRenderTarget*) : HRESULT
+    @lpVtbl.value.create_dc_render_target.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)).call(rendertargetproperties, dcrendertarget)
+  end
+  def create_device(dxgidevice : IDXGIDevice, d2ddevice : ID2D1Device*) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(IDXGIDevice, ID2D1Device*, HRESULT)).call(dxgidevice, d2ddevice)
+  end
+  def create_stroke_style2(strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES1*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle1*) : HRESULT
+    @lpVtbl.value.create_stroke_style2.unsafe_as(Proc(D2D1_STROKE_STYLE_PROPERTIES1*, Float32*, UInt32, ID2D1StrokeStyle1*, HRESULT)).call(strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_path_geometry2(pathgeometry : ID2D1PathGeometry1*) : HRESULT
+    @lpVtbl.value.create_path_geometry2.unsafe_as(Proc(ID2D1PathGeometry1*, HRESULT)).call(pathgeometry)
+  end
+  def create_drawing_state_block2(drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION1*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock1*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block2.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION1*, IDWriteRenderingParams, ID2D1DrawingStateBlock1*, HRESULT)).call(drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_gdi_metafile(metafilestream : IStream, metafile : ID2D1GdiMetafile*) : HRESULT
+    @lpVtbl.value.create_gdi_metafile.unsafe_as(Proc(IStream, ID2D1GdiMetafile*, HRESULT)).call(metafilestream, metafile)
+  end
+  def register_effect_from_stream(classid : Guid*, propertyxml : IStream, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_stream.unsafe_as(Proc(Guid*, IStream, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)).call(classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def register_effect_from_string(classid : Guid*, propertyxml : LibC::LPWSTR, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_string.unsafe_as(Proc(Guid*, LibC::LPWSTR, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)).call(classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def unregister_effect(classid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_effect.unsafe_as(Proc(Guid*, HRESULT)).call(classid)
+  end
+  def get_registered_effects(effects : Guid*, effectscount : UInt32, effectsreturned : UInt32*, effectsregistered : UInt32*) : HRESULT
+    @lpVtbl.value.get_registered_effects.unsafe_as(Proc(Guid*, UInt32, UInt32*, UInt32*, HRESULT)).call(effects, effectscount, effectsreturned, effectsregistered)
+  end
+  def get_effect_properties(effectid : Guid*, properties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_effect_properties.unsafe_as(Proc(Guid*, ID2D1Properties*, HRESULT)).call(effectid, properties)
+  end
+  def create_device2(dxgidevice : IDXGIDevice, d2ddevice1 : ID2D1Device1*) : HRESULT
+    @lpVtbl.value.create_device2.unsafe_as(Proc(IDXGIDevice, ID2D1Device1*, HRESULT)).call(dxgidevice, d2ddevice1)
+  end
+  def create_device3(dxgidevice : IDXGIDevice, d2ddevice2 : ID2D1Device2*) : HRESULT
+    @lpVtbl.value.create_device3.unsafe_as(Proc(IDXGIDevice, ID2D1Device2*, HRESULT)).call(dxgidevice, d2ddevice2)
+  end
+  def create_device4(dxgidevice : IDXGIDevice, d2ddevice3 : ID2D1Device3*) : HRESULT
+    @lpVtbl.value.create_device4.unsafe_as(Proc(IDXGIDevice, ID2D1Device3*, HRESULT)).call(dxgidevice, d2ddevice3)
+  end
+  def create_device5(dxgidevice : IDXGIDevice, d2ddevice4 : ID2D1Device4*) : HRESULT
+    @lpVtbl.value.create_device5.unsafe_as(Proc(IDXGIDevice, ID2D1Device4*, HRESULT)).call(dxgidevice, d2ddevice4)
+  end
+end
+struct LibWin32::ID2D1CommandSink4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_draw : HRESULT
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def end_draw : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, HRESULT)).call(antialiasmode)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : HRESULT
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, HRESULT)).call(tag1, tag2)
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, HRESULT)).call(textantialiasmode)
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : HRESULT
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, HRESULT)).call(textrenderingparams)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, HRESULT)).call(transform)
+  end
+  def set_primitive_blend(primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, HRESULT)).call(primitiveblend)
+  end
+  def set_unit_mode(unitmode : D2D1_UNIT_MODE) : HRESULT
+    @lpVtbl.value.set_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE, HRESULT)).call(unitmode)
+  end
+  def clear(color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, HRESULT)).call(color)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : HRESULT
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, HRESULT)).call(baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : HRESULT
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, HRESULT)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def draw_image(image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.draw_image.unsafe_as(Proc(ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, HRESULT)).call(image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile.unsafe_as(Proc(ID2D1GdiMetafile, D2D_POINT_2F*, HRESULT)).call(gdimetafile, targetoffset)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, HRESULT)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, HRESULT)).call(opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, HRESULT)).call(geometry, brush, opacitybrush)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, HRESULT)).call(rect, brush)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, HRESULT)).call(cliprect, antialiasmode)
+  end
+  def push_layer(layerparameters1 : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : HRESULT
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS1*, ID2D1Layer, HRESULT)).call(layerparameters1, layer)
+  end
+  def pop_axis_aligned_clip : HRESULT
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(HRESULT)).call
+  end
+  def pop_layer : HRESULT
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_primitive_blend1(primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend1.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, HRESULT)).call(primitiveblend)
+  end
+  def draw_ink(ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : HRESULT
+    @lpVtbl.value.draw_ink.unsafe_as(Proc(ID2D1Ink, ID2D1Brush, ID2D1InkStyle, HRESULT)).call(ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(gradientmesh : ID2D1GradientMesh) : HRESULT
+    @lpVtbl.value.draw_gradient_mesh.unsafe_as(Proc(ID2D1GradientMesh, HRESULT)).call(gradientmesh)
+  end
+  def draw_gdi_metafile2(gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile2.unsafe_as(Proc(ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, HRESULT)).call(gdimetafile, destinationrectangle, sourcerectangle)
+  end
+  def draw_sprite_batch(spritebatch : ID2D1SpriteBatch, startindex : UInt32, spritecount : UInt32, bitmap : ID2D1Bitmap, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, spriteoptions : D2D1_SPRITE_OPTIONS) : HRESULT
+    @lpVtbl.value.draw_sprite_batch.unsafe_as(Proc(ID2D1SpriteBatch, UInt32, UInt32, ID2D1Bitmap, D2D1_BITMAP_INTERPOLATION_MODE, D2D1_SPRITE_OPTIONS, HRESULT)).call(spritebatch, startindex, spritecount, bitmap, interpolationmode, spriteoptions)
+  end
+  def set_primitive_blend2(primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend2.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, HRESULT)).call(primitiveblend)
+  end
+end
+struct LibWin32::ID2D1ColorContext1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def get_color_space : D2D1_COLOR_SPACE
+    @lpVtbl.value.get_color_space.unsafe_as(Proc(D2D1_COLOR_SPACE)).call
+  end
+  def get_profile_size : UInt32
+    @lpVtbl.value.get_profile_size.unsafe_as(Proc(UInt32)).call
+  end
+  def get_profile(profile : UInt8*, profilesize : UInt32) : HRESULT
+    @lpVtbl.value.get_profile.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(profile, profilesize)
+  end
+  def get_color_context_type : D2D1_COLOR_CONTEXT_TYPE
+    @lpVtbl.value.get_color_context_type.unsafe_as(Proc(D2D1_COLOR_CONTEXT_TYPE)).call
+  end
+  def get_dxgi_color_space : DXGI_COLOR_SPACE_TYPE
+    @lpVtbl.value.get_dxgi_color_space.unsafe_as(Proc(DXGI_COLOR_SPACE_TYPE)).call
+  end
+  def get_simple_color_profile(simpleprofile : D2D1_SIMPLE_COLOR_PROFILE*) : HRESULT
+    @lpVtbl.value.get_simple_color_profile.unsafe_as(Proc(D2D1_SIMPLE_COLOR_PROFILE*, HRESULT)).call(simpleprofile)
+  end
+end
+struct LibWin32::ID2D1DeviceContext5
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_bitmap(size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.unsafe_as(Proc(Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.unsafe_as(Proc(D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)).call(color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)).call(gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.unsafe_as(Proc(D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)).call(lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.unsafe_as(Proc(D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)).call(radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.unsafe_as(Proc(D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)).call(desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.unsafe_as(Proc(D2D_SIZE_F*, ID2D1Layer*, HRESULT)).call(size, layer)
+  end
+  def create_mesh(mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.unsafe_as(Proc(ID2D1Mesh*, HRESULT)).call(mesh)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Void)).call(rect, brush)
+  end
+  def draw_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Void)).call(roundedrect, brush)
+  end
+  def draw_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Void)).call(ellipse, brush)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)).call(geometry, brush, opacitybrush)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, Void)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)).call(string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.unsafe_as(Proc(D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)).call(origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, Void)).call(antialiasmode)
+  end
+  def get_antialias_mode : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE)).call
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, Void)).call(textantialiasmode)
+  end
+  def get_text_antialias_mode : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE)).call
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, Void)).call(textrenderingparams)
+  end
+  def get_text_rendering_params(textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, Void)).call(textrenderingparams)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, Void)).call(tag1, tag2)
+  end
+  def get_tags(tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.unsafe_as(Proc(UInt64*, UInt64*, Void)).call(tag1, tag2)
+  end
+  def push_layer(layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def pop_layer : Void
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(Void)).call
+  end
+  def flush(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def save_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def restore_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)).call(cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip : Void
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(Void)).call
+  end
+  def clear(clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, Void)).call(clearcolor)
+  end
+  def begin_draw : Void
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(Void)).call
+  end
+  def end_draw(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def get_pixel_format : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(D2D1_PIXEL_FORMAT)).call
+  end
+  def set_dpi(dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.unsafe_as(Proc(Float32, Float32, Void)).call(dpix, dpiy)
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def get_size : D2D_SIZE_F
+    @lpVtbl.value.get_size.unsafe_as(Proc(D2D_SIZE_F)).call
+  end
+  def get_pixel_size : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.unsafe_as(Proc(D2D_SIZE_U)).call
+  end
+  def get_maximum_bitmap_size : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.unsafe_as(Proc(UInt32)).call
+  end
+  def is_supported(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)).call(rendertargetproperties)
+  end
+  def create_bitmap2(size : D2D_SIZE_U, sourcedata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap2.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(size, sourcedata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap2(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap2.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_color_context(space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.unsafe_as(Proc(D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)).call(space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.unsafe_as(Proc(LibC::LPWSTR, ID2D1ColorContext*, HRESULT)).call(filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.unsafe_as(Proc(IWICColorContext, ID2D1ColorContext*, HRESULT)).call(wiccolorcontext, colorcontext)
+  end
+  def create_bitmap_from_dxgi_surface(surface : IDXGISurface, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_dxgi_surface.unsafe_as(Proc(IDXGISurface, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(surface, bitmapproperties, bitmap)
+  end
+  def create_effect(effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.unsafe_as(Proc(Guid*, ID2D1Effect*, HRESULT)).call(effectid, effect)
+  end
+  def create_gradient_stop_collection2(straightalphagradientstops : D2D1_GRADIENT_STOP*, straightalphagradientstopscount : UInt32, preinterpolationspace : D2D1_COLOR_SPACE, postinterpolationspace : D2D1_COLOR_SPACE, bufferprecision : D2D1_BUFFER_PRECISION, extendmode : D2D1_EXTEND_MODE, colorinterpolationmode : D2D1_COLOR_INTERPOLATION_MODE, gradientstopcollection1 : ID2D1GradientStopCollection1*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection2.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_COLOR_SPACE, D2D1_COLOR_SPACE, D2D1_BUFFER_PRECISION, D2D1_EXTEND_MODE, D2D1_COLOR_INTERPOLATION_MODE, ID2D1GradientStopCollection1*, HRESULT)).call(straightalphagradientstops, straightalphagradientstopscount, preinterpolationspace, postinterpolationspace, bufferprecision, extendmode, colorinterpolationmode, gradientstopcollection1)
+  end
+  def create_image_brush(image : ID2D1Image, imagebrushproperties : D2D1_IMAGE_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, imagebrush : ID2D1ImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.unsafe_as(Proc(ID2D1Image, D2D1_IMAGE_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1ImageBrush*, HRESULT)).call(image, imagebrushproperties, brushproperties, imagebrush)
+  end
+  def create_bitmap_brush2(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES1*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush1*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush2.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES1*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush1*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_command_list(commandlist : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(ID2D1CommandList*, HRESULT)).call(commandlist)
+  end
+  def is_dxgi_format_supported(format : DXGI_FORMAT) : LibC::BOOL
+    @lpVtbl.value.is_dxgi_format_supported.unsafe_as(Proc(DXGI_FORMAT, LibC::BOOL)).call(format)
+  end
+  def is_buffer_precision_supported(bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.unsafe_as(Proc(D2D1_BUFFER_PRECISION, LibC::BOOL)).call(bufferprecision)
+  end
+  def get_image_local_bounds(image : ID2D1Image, localbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_local_bounds.unsafe_as(Proc(ID2D1Image, D2D_RECT_F*, HRESULT)).call(image, localbounds)
+  end
+  def get_image_world_bounds(image : ID2D1Image, worldbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_world_bounds.unsafe_as(Proc(ID2D1Image, D2D_RECT_F*, HRESULT)).call(image, worldbounds)
+  end
+  def get_glyph_run_world_bounds(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_glyph_run_world_bounds.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_RECT_F*, HRESULT)).call(baselineorigin, glyphrun, measuringmode, bounds)
+  end
+  def get_device(device : ID2D1Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID2D1Device*, Void)).call(device)
+  end
+  def set_target(image : ID2D1Image) : Void
+    @lpVtbl.value.set_target.unsafe_as(Proc(ID2D1Image, Void)).call(image)
+  end
+  def get_target(image : ID2D1Image*) : Void
+    @lpVtbl.value.get_target.unsafe_as(Proc(ID2D1Image*, Void)).call(image)
+  end
+  def set_rendering_controls(renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.set_rendering_controls.unsafe_as(Proc(D2D1_RENDERING_CONTROLS*, Void)).call(renderingcontrols)
+  end
+  def get_rendering_controls(renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.get_rendering_controls.unsafe_as(Proc(D2D1_RENDERING_CONTROLS*, Void)).call(renderingcontrols)
+  end
+  def set_primitive_blend(primitiveblend : D2D1_PRIMITIVE_BLEND) : Void
+    @lpVtbl.value.set_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, Void)).call(primitiveblend)
+  end
+  def get_primitive_blend : D2D1_PRIMITIVE_BLEND
+    @lpVtbl.value.get_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND)).call
+  end
+  def set_unit_mode(unitmode : D2D1_UNIT_MODE) : Void
+    @lpVtbl.value.set_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE, Void)).call(unitmode)
+  end
+  def get_unit_mode : D2D1_UNIT_MODE
+    @lpVtbl.value.get_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE)).call
+  end
+  def draw_glyph_run2(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run2.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_image(image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : Void
+    @lpVtbl.value.draw_image.unsafe_as(Proc(ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, Void)).call(image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : Void
+    @lpVtbl.value.draw_gdi_metafile.unsafe_as(Proc(ID2D1GdiMetafile, D2D_POINT_2F*, Void)).call(gdimetafile, targetoffset)
+  end
+  def draw_bitmap2(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : Void
+    @lpVtbl.value.draw_bitmap2.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def push_layer2(layerparameters : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer2.unsafe_as(Proc(D2D1_LAYER_PARAMETERS1*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def invalidate_effect_input_rectangle(effect : ID2D1Effect, input : UInt32, inputrectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.invalidate_effect_input_rectangle.unsafe_as(Proc(ID2D1Effect, UInt32, D2D_RECT_F*, HRESULT)).call(effect, input, inputrectangle)
+  end
+  def get_effect_invalid_rectangle_count(effect : ID2D1Effect, rectanglecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangle_count.unsafe_as(Proc(ID2D1Effect, UInt32*, HRESULT)).call(effect, rectanglecount)
+  end
+  def get_effect_invalid_rectangles(effect : ID2D1Effect, rectangles : D2D_RECT_F*, rectanglescount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangles.unsafe_as(Proc(ID2D1Effect, D2D_RECT_F*, UInt32, HRESULT)).call(effect, rectangles, rectanglescount)
+  end
+  def get_effect_required_input_rectangles(rendereffect : ID2D1Effect, renderimagerectangle : D2D_RECT_F*, inputdescriptions : D2D1_EFFECT_INPUT_DESCRIPTION*, requiredinputrects : D2D_RECT_F*, inputcount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_required_input_rectangles.unsafe_as(Proc(ID2D1Effect, D2D_RECT_F*, D2D1_EFFECT_INPUT_DESCRIPTION*, D2D_RECT_F*, UInt32, HRESULT)).call(rendereffect, renderimagerectangle, inputdescriptions, requiredinputrects, inputcount)
+  end
+  def fill_opacity_mask2(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask2.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def create_filled_geometry_realization(geometry : ID2D1Geometry, flatteningtolerance : Float32, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_filled_geometry_realization.unsafe_as(Proc(ID2D1Geometry, Float32, ID2D1GeometryRealization*, HRESULT)).call(geometry, flatteningtolerance, geometryrealization)
+  end
+  def create_stroked_geometry_realization(geometry : ID2D1Geometry, flatteningtolerance : Float32, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_stroked_geometry_realization.unsafe_as(Proc(ID2D1Geometry, Float32, Float32, ID2D1StrokeStyle, ID2D1GeometryRealization*, HRESULT)).call(geometry, flatteningtolerance, strokewidth, strokestyle, geometryrealization)
+  end
+  def draw_geometry_realization(geometryrealization : ID2D1GeometryRealization, brush : ID2D1Brush) : Void
+    @lpVtbl.value.draw_geometry_realization.unsafe_as(Proc(ID2D1GeometryRealization, ID2D1Brush, Void)).call(geometryrealization, brush)
+  end
+  def create_ink(startpoint : D2D1_INK_POINT*, ink : ID2D1Ink*) : HRESULT
+    @lpVtbl.value.create_ink.unsafe_as(Proc(D2D1_INK_POINT*, ID2D1Ink*, HRESULT)).call(startpoint, ink)
+  end
+  def create_ink_style(inkstyleproperties : D2D1_INK_STYLE_PROPERTIES*, inkstyle : ID2D1InkStyle*) : HRESULT
+    @lpVtbl.value.create_ink_style.unsafe_as(Proc(D2D1_INK_STYLE_PROPERTIES*, ID2D1InkStyle*, HRESULT)).call(inkstyleproperties, inkstyle)
+  end
+  def create_gradient_mesh(patches : D2D1_GRADIENT_MESH_PATCH*, patchescount : UInt32, gradientmesh : ID2D1GradientMesh*) : HRESULT
+    @lpVtbl.value.create_gradient_mesh.unsafe_as(Proc(D2D1_GRADIENT_MESH_PATCH*, UInt32, ID2D1GradientMesh*, HRESULT)).call(patches, patchescount, gradientmesh)
+  end
+  def create_image_source_from_wic(wicbitmapsource : IWICBitmapSource, loadingoptions : D2D1_IMAGE_SOURCE_LOADING_OPTIONS, alphamode : D2D1_ALPHA_MODE, imagesource : ID2D1ImageSourceFromWic*) : HRESULT
+    @lpVtbl.value.create_image_source_from_wic.unsafe_as(Proc(IWICBitmapSource, D2D1_IMAGE_SOURCE_LOADING_OPTIONS, D2D1_ALPHA_MODE, ID2D1ImageSourceFromWic*, HRESULT)).call(wicbitmapsource, loadingoptions, alphamode, imagesource)
+  end
+  def create_lookup_table3_d(precision : D2D1_BUFFER_PRECISION, extents : UInt32*, data : UInt8*, datacount : UInt32, strides : UInt32*, lookuptable : ID2D1LookupTable3D*) : HRESULT
+    @lpVtbl.value.create_lookup_table3_d.unsafe_as(Proc(D2D1_BUFFER_PRECISION, UInt32*, UInt8*, UInt32, UInt32*, ID2D1LookupTable3D*, HRESULT)).call(precision, extents, data, datacount, strides, lookuptable)
+  end
+  def create_image_source_from_dxgi(surfaces : IDXGISurface*, surfacecount : UInt32, colorspace : DXGI_COLOR_SPACE_TYPE, options : D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, imagesource : ID2D1ImageSource*) : HRESULT
+    @lpVtbl.value.create_image_source_from_dxgi.unsafe_as(Proc(IDXGISurface*, UInt32, DXGI_COLOR_SPACE_TYPE, D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, ID2D1ImageSource*, HRESULT)).call(surfaces, surfacecount, colorspace, options, imagesource)
+  end
+  def get_gradient_mesh_world_bounds(gradientmesh : ID2D1GradientMesh, pbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_gradient_mesh_world_bounds.unsafe_as(Proc(ID2D1GradientMesh, D2D_RECT_F*, HRESULT)).call(gradientmesh, pbounds)
+  end
+  def draw_ink(ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : Void
+    @lpVtbl.value.draw_ink.unsafe_as(Proc(ID2D1Ink, ID2D1Brush, ID2D1InkStyle, Void)).call(ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(gradientmesh : ID2D1GradientMesh) : Void
+    @lpVtbl.value.draw_gradient_mesh.unsafe_as(Proc(ID2D1GradientMesh, Void)).call(gradientmesh)
+  end
+  def draw_gdi_metafile2(gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_gdi_metafile2.unsafe_as(Proc(ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, Void)).call(gdimetafile, destinationrectangle, sourcerectangle)
+  end
+  def create_transformed_image_source(imagesource : ID2D1ImageSource, properties : D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, transformedimagesource : ID2D1TransformedImageSource*) : HRESULT
+    @lpVtbl.value.create_transformed_image_source.unsafe_as(Proc(ID2D1ImageSource, D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, ID2D1TransformedImageSource*, HRESULT)).call(imagesource, properties, transformedimagesource)
+  end
+  def create_sprite_batch(spritebatch : ID2D1SpriteBatch*) : HRESULT
+    @lpVtbl.value.create_sprite_batch.unsafe_as(Proc(ID2D1SpriteBatch*, HRESULT)).call(spritebatch)
+  end
+  def draw_sprite_batch(spritebatch : ID2D1SpriteBatch, startindex : UInt32, spritecount : UInt32, bitmap : ID2D1Bitmap, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, spriteoptions : D2D1_SPRITE_OPTIONS) : Void
+    @lpVtbl.value.draw_sprite_batch.unsafe_as(Proc(ID2D1SpriteBatch, UInt32, UInt32, ID2D1Bitmap, D2D1_BITMAP_INTERPOLATION_MODE, D2D1_SPRITE_OPTIONS, Void)).call(spritebatch, startindex, spritecount, bitmap, interpolationmode, spriteoptions)
+  end
+  def create_svg_glyph_style(svgglyphstyle : ID2D1SvgGlyphStyle*) : HRESULT
+    @lpVtbl.value.create_svg_glyph_style.unsafe_as(Proc(ID2D1SvgGlyphStyle*, HRESULT)).call(svgglyphstyle)
+  end
+  def draw_text2(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text2.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)).call(string, stringlength, textformat, layoutrect, defaultfillbrush, svgglyphstyle, colorpaletteindex, options, measuringmode)
+  end
+  def draw_text_layout2(origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout2.unsafe_as(Proc(D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D1_DRAW_TEXT_OPTIONS, Void)).call(origin, textlayout, defaultfillbrush, svgglyphstyle, colorpaletteindex, options)
+  end
+  def draw_color_bitmap_glyph_run(glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bitmapsnapoption : D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION) : Void
+    @lpVtbl.value.draw_color_bitmap_glyph_run.unsafe_as(Proc(DWRITE_GLYPH_IMAGE_FORMATS, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION, Void)).call(glyphimageformat, baselineorigin, glyphrun, measuringmode, bitmapsnapoption)
+  end
+  def draw_svg_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_svg_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, defaultfillbrush, svgglyphstyle, colorpaletteindex, measuringmode)
+  end
+  def get_color_bitmap_glyph_image(glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, glyphorigin : D2D_POINT_2F, fontface : IDWriteFontFace, fontemsize : Float32, glyphindex : UInt16, issideways : LibC::BOOL, worldtransform : D2D_MATRIX_3X2_F*, dpix : Float32, dpiy : Float32, glyphtransform : D2D_MATRIX_3X2_F*, glyphimage : ID2D1Image*) : HRESULT
+    @lpVtbl.value.get_color_bitmap_glyph_image.unsafe_as(Proc(DWRITE_GLYPH_IMAGE_FORMATS, D2D_POINT_2F, IDWriteFontFace, Float32, UInt16, LibC::BOOL, D2D_MATRIX_3X2_F*, Float32, Float32, D2D_MATRIX_3X2_F*, ID2D1Image*, HRESULT)).call(glyphimageformat, glyphorigin, fontface, fontemsize, glyphindex, issideways, worldtransform, dpix, dpiy, glyphtransform, glyphimage)
+  end
+  def get_svg_glyph_image(glyphorigin : D2D_POINT_2F, fontface : IDWriteFontFace, fontemsize : Float32, glyphindex : UInt16, issideways : LibC::BOOL, worldtransform : D2D_MATRIX_3X2_F*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, glyphtransform : D2D_MATRIX_3X2_F*, glyphimage : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.get_svg_glyph_image.unsafe_as(Proc(D2D_POINT_2F, IDWriteFontFace, Float32, UInt16, LibC::BOOL, D2D_MATRIX_3X2_F*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D_MATRIX_3X2_F*, ID2D1CommandList*, HRESULT)).call(glyphorigin, fontface, fontemsize, glyphindex, issideways, worldtransform, defaultfillbrush, svgglyphstyle, colorpaletteindex, glyphtransform, glyphimage)
+  end
+  def create_svg_document(inputxmlstream : IStream, viewportsize : D2D_SIZE_F, svgdocument : ID2D1SvgDocument*) : HRESULT
+    @lpVtbl.value.create_svg_document.unsafe_as(Proc(IStream, D2D_SIZE_F, ID2D1SvgDocument*, HRESULT)).call(inputxmlstream, viewportsize, svgdocument)
+  end
+  def draw_svg_document(svgdocument : ID2D1SvgDocument) : Void
+    @lpVtbl.value.draw_svg_document.unsafe_as(Proc(ID2D1SvgDocument, Void)).call(svgdocument)
+  end
+  def create_color_context_from_dxgi_color_space(colorspace : DXGI_COLOR_SPACE_TYPE, colorcontext : ID2D1ColorContext1*) : HRESULT
+    @lpVtbl.value.create_color_context_from_dxgi_color_space.unsafe_as(Proc(DXGI_COLOR_SPACE_TYPE, ID2D1ColorContext1*, HRESULT)).call(colorspace, colorcontext)
+  end
+  def create_color_context_from_simple_color_profile(simpleprofile : D2D1_SIMPLE_COLOR_PROFILE*, colorcontext : ID2D1ColorContext1*) : HRESULT
+    @lpVtbl.value.create_color_context_from_simple_color_profile.unsafe_as(Proc(D2D1_SIMPLE_COLOR_PROFILE*, ID2D1ColorContext1*, HRESULT)).call(simpleprofile, colorcontext)
+  end
+end
+struct LibWin32::ID2D1Device5
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_device_context(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext : ID2D1DeviceContext*) : HRESULT
+    @lpVtbl.value.create_device_context.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext*, HRESULT)).call(options, devicecontext)
+  end
+  def create_print_control(wicfactory : IWICImagingFactory, documenttarget : IPrintDocumentPackageTarget, printcontrolproperties : D2D1_PRINT_CONTROL_PROPERTIES*, printcontrol : ID2D1PrintControl*) : HRESULT
+    @lpVtbl.value.create_print_control.unsafe_as(Proc(IWICImagingFactory, IPrintDocumentPackageTarget, D2D1_PRINT_CONTROL_PROPERTIES*, ID2D1PrintControl*, HRESULT)).call(wicfactory, documenttarget, printcontrolproperties, printcontrol)
+  end
+  def set_maximum_texture_memory(maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_texture_memory.unsafe_as(Proc(UInt64, Void)).call(maximuminbytes)
+  end
+  def get_maximum_texture_memory : UInt64
+    @lpVtbl.value.get_maximum_texture_memory.unsafe_as(Proc(UInt64)).call
+  end
+  def clear_resources(millisecondssinceuse : UInt32) : Void
+    @lpVtbl.value.clear_resources.unsafe_as(Proc(UInt32, Void)).call(millisecondssinceuse)
+  end
+  def get_rendering_priority : D2D1_RENDERING_PRIORITY
+    @lpVtbl.value.get_rendering_priority.unsafe_as(Proc(D2D1_RENDERING_PRIORITY)).call
+  end
+  def set_rendering_priority(renderingpriority : D2D1_RENDERING_PRIORITY) : Void
+    @lpVtbl.value.set_rendering_priority.unsafe_as(Proc(D2D1_RENDERING_PRIORITY, Void)).call(renderingpriority)
+  end
+  def create_device_context2(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext1 : ID2D1DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_device_context2.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext1*, HRESULT)).call(options, devicecontext1)
+  end
+  def create_device_context3(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext2 : ID2D1DeviceContext2*) : HRESULT
+    @lpVtbl.value.create_device_context3.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext2*, HRESULT)).call(options, devicecontext2)
+  end
+  def flush_device_contexts(bitmap : ID2D1Bitmap) : Void
+    @lpVtbl.value.flush_device_contexts.unsafe_as(Proc(ID2D1Bitmap, Void)).call(bitmap)
+  end
+  def get_dxgi_device(dxgidevice : IDXGIDevice*) : HRESULT
+    @lpVtbl.value.get_dxgi_device.unsafe_as(Proc(IDXGIDevice*, HRESULT)).call(dxgidevice)
+  end
+  def create_device_context4(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext3 : ID2D1DeviceContext3*) : HRESULT
+    @lpVtbl.value.create_device_context4.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext3*, HRESULT)).call(options, devicecontext3)
+  end
+  def create_device_context5(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext4 : ID2D1DeviceContext4*) : HRESULT
+    @lpVtbl.value.create_device_context5.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext4*, HRESULT)).call(options, devicecontext4)
+  end
+  def set_maximum_color_glyph_cache_memory(maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_color_glyph_cache_memory.unsafe_as(Proc(UInt64, Void)).call(maximuminbytes)
+  end
+  def get_maximum_color_glyph_cache_memory : UInt64
+    @lpVtbl.value.get_maximum_color_glyph_cache_memory.unsafe_as(Proc(UInt64)).call
+  end
+  def create_device_context6(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext5 : ID2D1DeviceContext5*) : HRESULT
+    @lpVtbl.value.create_device_context6.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext5*, HRESULT)).call(options, devicecontext5)
+  end
+end
+struct LibWin32::ID2D1Factory6
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def reload_system_metrics : HRESULT
+    @lpVtbl.value.reload_system_metrics.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_desktop_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_desktop_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def create_rectangle_geometry(rectangle : D2D_RECT_F*, rectanglegeometry : ID2D1RectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rectangle_geometry.unsafe_as(Proc(D2D_RECT_F*, ID2D1RectangleGeometry*, HRESULT)).call(rectangle, rectanglegeometry)
+  end
+  def create_rounded_rectangle_geometry(roundedrectangle : D2D1_ROUNDED_RECT*, roundedrectanglegeometry : ID2D1RoundedRectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rounded_rectangle_geometry.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1RoundedRectangleGeometry*, HRESULT)).call(roundedrectangle, roundedrectanglegeometry)
+  end
+  def create_ellipse_geometry(ellipse : D2D1_ELLIPSE*, ellipsegeometry : ID2D1EllipseGeometry*) : HRESULT
+    @lpVtbl.value.create_ellipse_geometry.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1EllipseGeometry*, HRESULT)).call(ellipse, ellipsegeometry)
+  end
+  def create_geometry_group(fillmode : D2D1_FILL_MODE, geometries : ID2D1Geometry*, geometriescount : UInt32, geometrygroup : ID2D1GeometryGroup*) : HRESULT
+    @lpVtbl.value.create_geometry_group.unsafe_as(Proc(D2D1_FILL_MODE, ID2D1Geometry*, UInt32, ID2D1GeometryGroup*, HRESULT)).call(fillmode, geometries, geometriescount, geometrygroup)
+  end
+  def create_transformed_geometry(sourcegeometry : ID2D1Geometry, transform : D2D_MATRIX_3X2_F*, transformedgeometry : ID2D1TransformedGeometry*) : HRESULT
+    @lpVtbl.value.create_transformed_geometry.unsafe_as(Proc(ID2D1Geometry, D2D_MATRIX_3X2_F*, ID2D1TransformedGeometry*, HRESULT)).call(sourcegeometry, transform, transformedgeometry)
+  end
+  def create_path_geometry(pathgeometry : ID2D1PathGeometry*) : HRESULT
+    @lpVtbl.value.create_path_geometry.unsafe_as(Proc(ID2D1PathGeometry*, HRESULT)).call(pathgeometry)
+  end
+  def create_stroke_style(strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle*) : HRESULT
+    @lpVtbl.value.create_stroke_style.unsafe_as(Proc(D2D1_STROKE_STYLE_PROPERTIES*, Float32*, UInt32, ID2D1StrokeStyle*, HRESULT)).call(strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_drawing_state_block(drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION*, IDWriteRenderingParams, ID2D1DrawingStateBlock*, HRESULT)).call(drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_wic_bitmap_render_target(target : IWICBitmap, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_wic_bitmap_render_target.unsafe_as(Proc(IWICBitmap, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)).call(target, rendertargetproperties, rendertarget)
+  end
+  def create_hwnd_render_target(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, hwndrendertargetproperties : D2D1_HWND_RENDER_TARGET_PROPERTIES*, hwndrendertarget : ID2D1HwndRenderTarget*) : HRESULT
+    @lpVtbl.value.create_hwnd_render_target.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, D2D1_HWND_RENDER_TARGET_PROPERTIES*, ID2D1HwndRenderTarget*, HRESULT)).call(rendertargetproperties, hwndrendertargetproperties, hwndrendertarget)
+  end
+  def create_dxgi_surface_render_target(dxgisurface : IDXGISurface, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_dxgi_surface_render_target.unsafe_as(Proc(IDXGISurface, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)).call(dxgisurface, rendertargetproperties, rendertarget)
+  end
+  def create_dc_render_target(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, dcrendertarget : ID2D1DCRenderTarget*) : HRESULT
+    @lpVtbl.value.create_dc_render_target.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)).call(rendertargetproperties, dcrendertarget)
+  end
+  def create_device(dxgidevice : IDXGIDevice, d2ddevice : ID2D1Device*) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(IDXGIDevice, ID2D1Device*, HRESULT)).call(dxgidevice, d2ddevice)
+  end
+  def create_stroke_style2(strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES1*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle1*) : HRESULT
+    @lpVtbl.value.create_stroke_style2.unsafe_as(Proc(D2D1_STROKE_STYLE_PROPERTIES1*, Float32*, UInt32, ID2D1StrokeStyle1*, HRESULT)).call(strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_path_geometry2(pathgeometry : ID2D1PathGeometry1*) : HRESULT
+    @lpVtbl.value.create_path_geometry2.unsafe_as(Proc(ID2D1PathGeometry1*, HRESULT)).call(pathgeometry)
+  end
+  def create_drawing_state_block2(drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION1*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock1*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block2.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION1*, IDWriteRenderingParams, ID2D1DrawingStateBlock1*, HRESULT)).call(drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_gdi_metafile(metafilestream : IStream, metafile : ID2D1GdiMetafile*) : HRESULT
+    @lpVtbl.value.create_gdi_metafile.unsafe_as(Proc(IStream, ID2D1GdiMetafile*, HRESULT)).call(metafilestream, metafile)
+  end
+  def register_effect_from_stream(classid : Guid*, propertyxml : IStream, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_stream.unsafe_as(Proc(Guid*, IStream, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)).call(classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def register_effect_from_string(classid : Guid*, propertyxml : LibC::LPWSTR, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_string.unsafe_as(Proc(Guid*, LibC::LPWSTR, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)).call(classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def unregister_effect(classid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_effect.unsafe_as(Proc(Guid*, HRESULT)).call(classid)
+  end
+  def get_registered_effects(effects : Guid*, effectscount : UInt32, effectsreturned : UInt32*, effectsregistered : UInt32*) : HRESULT
+    @lpVtbl.value.get_registered_effects.unsafe_as(Proc(Guid*, UInt32, UInt32*, UInt32*, HRESULT)).call(effects, effectscount, effectsreturned, effectsregistered)
+  end
+  def get_effect_properties(effectid : Guid*, properties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_effect_properties.unsafe_as(Proc(Guid*, ID2D1Properties*, HRESULT)).call(effectid, properties)
+  end
+  def create_device2(dxgidevice : IDXGIDevice, d2ddevice1 : ID2D1Device1*) : HRESULT
+    @lpVtbl.value.create_device2.unsafe_as(Proc(IDXGIDevice, ID2D1Device1*, HRESULT)).call(dxgidevice, d2ddevice1)
+  end
+  def create_device3(dxgidevice : IDXGIDevice, d2ddevice2 : ID2D1Device2*) : HRESULT
+    @lpVtbl.value.create_device3.unsafe_as(Proc(IDXGIDevice, ID2D1Device2*, HRESULT)).call(dxgidevice, d2ddevice2)
+  end
+  def create_device4(dxgidevice : IDXGIDevice, d2ddevice3 : ID2D1Device3*) : HRESULT
+    @lpVtbl.value.create_device4.unsafe_as(Proc(IDXGIDevice, ID2D1Device3*, HRESULT)).call(dxgidevice, d2ddevice3)
+  end
+  def create_device5(dxgidevice : IDXGIDevice, d2ddevice4 : ID2D1Device4*) : HRESULT
+    @lpVtbl.value.create_device5.unsafe_as(Proc(IDXGIDevice, ID2D1Device4*, HRESULT)).call(dxgidevice, d2ddevice4)
+  end
+  def create_device6(dxgidevice : IDXGIDevice, d2ddevice5 : ID2D1Device5*) : HRESULT
+    @lpVtbl.value.create_device6.unsafe_as(Proc(IDXGIDevice, ID2D1Device5*, HRESULT)).call(dxgidevice, d2ddevice5)
+  end
+end
+struct LibWin32::ID2D1CommandSink5
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_draw : HRESULT
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def end_draw : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, HRESULT)).call(antialiasmode)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : HRESULT
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, HRESULT)).call(tag1, tag2)
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, HRESULT)).call(textantialiasmode)
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : HRESULT
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, HRESULT)).call(textrenderingparams)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, HRESULT)).call(transform)
+  end
+  def set_primitive_blend(primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, HRESULT)).call(primitiveblend)
+  end
+  def set_unit_mode(unitmode : D2D1_UNIT_MODE) : HRESULT
+    @lpVtbl.value.set_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE, HRESULT)).call(unitmode)
+  end
+  def clear(color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, HRESULT)).call(color)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : HRESULT
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, HRESULT)).call(baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : HRESULT
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, HRESULT)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : HRESULT
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, HRESULT)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def draw_image(image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.draw_image.unsafe_as(Proc(ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, HRESULT)).call(image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile.unsafe_as(Proc(ID2D1GdiMetafile, D2D_POINT_2F*, HRESULT)).call(gdimetafile, targetoffset)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, HRESULT)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, HRESULT)).call(opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, HRESULT)).call(geometry, brush, opacitybrush)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : HRESULT
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, HRESULT)).call(rect, brush)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, HRESULT)).call(cliprect, antialiasmode)
+  end
+  def push_layer(layerparameters1 : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : HRESULT
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS1*, ID2D1Layer, HRESULT)).call(layerparameters1, layer)
+  end
+  def pop_axis_aligned_clip : HRESULT
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(HRESULT)).call
+  end
+  def pop_layer : HRESULT
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_primitive_blend1(primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend1.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, HRESULT)).call(primitiveblend)
+  end
+  def draw_ink(ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : HRESULT
+    @lpVtbl.value.draw_ink.unsafe_as(Proc(ID2D1Ink, ID2D1Brush, ID2D1InkStyle, HRESULT)).call(ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(gradientmesh : ID2D1GradientMesh) : HRESULT
+    @lpVtbl.value.draw_gradient_mesh.unsafe_as(Proc(ID2D1GradientMesh, HRESULT)).call(gradientmesh)
+  end
+  def draw_gdi_metafile2(gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.draw_gdi_metafile2.unsafe_as(Proc(ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, HRESULT)).call(gdimetafile, destinationrectangle, sourcerectangle)
+  end
+  def draw_sprite_batch(spritebatch : ID2D1SpriteBatch, startindex : UInt32, spritecount : UInt32, bitmap : ID2D1Bitmap, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, spriteoptions : D2D1_SPRITE_OPTIONS) : HRESULT
+    @lpVtbl.value.draw_sprite_batch.unsafe_as(Proc(ID2D1SpriteBatch, UInt32, UInt32, ID2D1Bitmap, D2D1_BITMAP_INTERPOLATION_MODE, D2D1_SPRITE_OPTIONS, HRESULT)).call(spritebatch, startindex, spritecount, bitmap, interpolationmode, spriteoptions)
+  end
+  def set_primitive_blend2(primitiveblend : D2D1_PRIMITIVE_BLEND) : HRESULT
+    @lpVtbl.value.set_primitive_blend2.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, HRESULT)).call(primitiveblend)
+  end
+  def blend_image(image : ID2D1Image, blendmode : D2D1_BLEND_MODE, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE) : HRESULT
+    @lpVtbl.value.blend_image.unsafe_as(Proc(ID2D1Image, D2D1_BLEND_MODE, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, HRESULT)).call(image, blendmode, targetoffset, imagerectangle, interpolationmode)
+  end
+end
+struct LibWin32::ID2D1DeviceContext6
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_bitmap(size : D2D_SIZE_U, srcdata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(size, srcdata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_shared_bitmap(riid : Guid*, data : Void*, bitmapproperties : D2D1_BITMAP_PROPERTIES*, bitmap : ID2D1Bitmap*) : HRESULT
+    @lpVtbl.value.create_shared_bitmap.unsafe_as(Proc(Guid*, Void*, D2D1_BITMAP_PROPERTIES*, ID2D1Bitmap*, HRESULT)).call(riid, data, bitmapproperties, bitmap)
+  end
+  def create_bitmap_brush(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_solid_color_brush(color : D2D1_COLOR_F*, brushproperties : D2D1_BRUSH_PROPERTIES*, solidcolorbrush : ID2D1SolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.unsafe_as(Proc(D2D1_COLOR_F*, D2D1_BRUSH_PROPERTIES*, ID2D1SolidColorBrush*, HRESULT)).call(color, brushproperties, solidcolorbrush)
+  end
+  def create_gradient_stop_collection(gradientstops : D2D1_GRADIENT_STOP*, gradientstopscount : UInt32, colorinterpolationgamma : D2D1_GAMMA, extendmode : D2D1_EXTEND_MODE, gradientstopcollection : ID2D1GradientStopCollection*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_GAMMA, D2D1_EXTEND_MODE, ID2D1GradientStopCollection*, HRESULT)).call(gradientstops, gradientstopscount, colorinterpolationgamma, extendmode, gradientstopcollection)
+  end
+  def create_linear_gradient_brush(lineargradientbrushproperties : D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, lineargradientbrush : ID2D1LinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.unsafe_as(Proc(D2D1_LINEAR_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1LinearGradientBrush*, HRESULT)).call(lineargradientbrushproperties, brushproperties, gradientstopcollection, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(radialgradientbrushproperties : D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, gradientstopcollection : ID2D1GradientStopCollection, radialgradientbrush : ID2D1RadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.unsafe_as(Proc(D2D1_RADIAL_GRADIENT_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1GradientStopCollection, ID2D1RadialGradientBrush*, HRESULT)).call(radialgradientbrushproperties, brushproperties, gradientstopcollection, radialgradientbrush)
+  end
+  def create_compatible_render_target(desiredsize : D2D_SIZE_F*, desiredpixelsize : D2D_SIZE_U*, desiredformat : D2D1_PIXEL_FORMAT*, options : D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, bitmaprendertarget : ID2D1BitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_compatible_render_target.unsafe_as(Proc(D2D_SIZE_F*, D2D_SIZE_U*, D2D1_PIXEL_FORMAT*, D2D1_COMPATIBLE_RENDER_TARGET_OPTIONS, ID2D1BitmapRenderTarget*, HRESULT)).call(desiredsize, desiredpixelsize, desiredformat, options, bitmaprendertarget)
+  end
+  def create_layer(size : D2D_SIZE_F*, layer : ID2D1Layer*) : HRESULT
+    @lpVtbl.value.create_layer.unsafe_as(Proc(D2D_SIZE_F*, ID2D1Layer*, HRESULT)).call(size, layer)
+  end
+  def create_mesh(mesh : ID2D1Mesh*) : HRESULT
+    @lpVtbl.value.create_mesh.unsafe_as(Proc(ID2D1Mesh*, HRESULT)).call(mesh)
+  end
+  def draw_line(point0 : D2D_POINT_2F, point1 : D2D_POINT_2F, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_line.unsafe_as(Proc(D2D_POINT_2F, D2D_POINT_2F, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(point0, point1, brush, strokewidth, strokestyle)
+  end
+  def draw_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(rect, brush, strokewidth, strokestyle)
+  end
+  def fill_rectangle(rect : D2D_RECT_F*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rectangle.unsafe_as(Proc(D2D_RECT_F*, ID2D1Brush, Void)).call(rect, brush)
+  end
+  def draw_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(roundedrect, brush, strokewidth, strokestyle)
+  end
+  def fill_rounded_rectangle(roundedrect : D2D1_ROUNDED_RECT*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_rounded_rectangle.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1Brush, Void)).call(roundedrect, brush)
+  end
+  def draw_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(ellipse, brush, strokewidth, strokestyle)
+  end
+  def fill_ellipse(ellipse : D2D1_ELLIPSE*, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_ellipse.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1Brush, Void)).call(ellipse, brush)
+  end
+  def draw_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, strokewidth : Float32, strokestyle : ID2D1StrokeStyle) : Void
+    @lpVtbl.value.draw_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, Float32, ID2D1StrokeStyle, Void)).call(geometry, brush, strokewidth, strokestyle)
+  end
+  def fill_geometry(geometry : ID2D1Geometry, brush : ID2D1Brush, opacitybrush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_geometry.unsafe_as(Proc(ID2D1Geometry, ID2D1Brush, ID2D1Brush, Void)).call(geometry, brush, opacitybrush)
+  end
+  def fill_mesh(mesh : ID2D1Mesh, brush : ID2D1Brush) : Void
+    @lpVtbl.value.fill_mesh.unsafe_as(Proc(ID2D1Mesh, ID2D1Brush, Void)).call(mesh, brush)
+  end
+  def fill_opacity_mask(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, content : D2D1_OPACITY_MASK_CONTENT, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D1_OPACITY_MASK_CONTENT, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, content, destinationrectangle, sourcerectangle)
+  end
+  def draw_bitmap(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_BITMAP_INTERPOLATION_MODE, D2D_RECT_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle)
+  end
+  def draw_text(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)).call(string, stringlength, textformat, layoutrect, defaultfillbrush, options, measuringmode)
+  end
+  def draw_text_layout(origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout.unsafe_as(Proc(D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, D2D1_DRAW_TEXT_OPTIONS, Void)).call(origin, textlayout, defaultfillbrush, options)
+  end
+  def draw_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, foregroundbrush, measuringmode)
+  end
+  def set_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.set_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def get_transform(transform : D2D_MATRIX_3X2_F*) : Void
+    @lpVtbl.value.get_transform.unsafe_as(Proc(D2D_MATRIX_3X2_F*, Void)).call(transform)
+  end
+  def set_antialias_mode(antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE, Void)).call(antialiasmode)
+  end
+  def get_antialias_mode : D2D1_ANTIALIAS_MODE
+    @lpVtbl.value.get_antialias_mode.unsafe_as(Proc(D2D1_ANTIALIAS_MODE)).call
+  end
+  def set_text_antialias_mode(textantialiasmode : D2D1_TEXT_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE, Void)).call(textantialiasmode)
+  end
+  def get_text_antialias_mode : D2D1_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.unsafe_as(Proc(D2D1_TEXT_ANTIALIAS_MODE)).call
+  end
+  def set_text_rendering_params(textrenderingparams : IDWriteRenderingParams) : Void
+    @lpVtbl.value.set_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams, Void)).call(textrenderingparams)
+  end
+  def get_text_rendering_params(textrenderingparams : IDWriteRenderingParams*) : Void
+    @lpVtbl.value.get_text_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, Void)).call(textrenderingparams)
+  end
+  def set_tags(tag1 : UInt64, tag2 : UInt64) : Void
+    @lpVtbl.value.set_tags.unsafe_as(Proc(UInt64, UInt64, Void)).call(tag1, tag2)
+  end
+  def get_tags(tag1 : UInt64*, tag2 : UInt64*) : Void
+    @lpVtbl.value.get_tags.unsafe_as(Proc(UInt64*, UInt64*, Void)).call(tag1, tag2)
+  end
+  def push_layer(layerparameters : D2D1_LAYER_PARAMETERS*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer.unsafe_as(Proc(D2D1_LAYER_PARAMETERS*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def pop_layer : Void
+    @lpVtbl.value.pop_layer.unsafe_as(Proc(Void)).call
+  end
+  def flush(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.flush.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def save_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.save_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def restore_drawing_state(drawingstateblock : ID2D1DrawingStateBlock) : Void
+    @lpVtbl.value.restore_drawing_state.unsafe_as(Proc(ID2D1DrawingStateBlock, Void)).call(drawingstateblock)
+  end
+  def push_axis_aligned_clip(cliprect : D2D_RECT_F*, antialiasmode : D2D1_ANTIALIAS_MODE) : Void
+    @lpVtbl.value.push_axis_aligned_clip.unsafe_as(Proc(D2D_RECT_F*, D2D1_ANTIALIAS_MODE, Void)).call(cliprect, antialiasmode)
+  end
+  def pop_axis_aligned_clip : Void
+    @lpVtbl.value.pop_axis_aligned_clip.unsafe_as(Proc(Void)).call
+  end
+  def clear(clearcolor : D2D1_COLOR_F*) : Void
+    @lpVtbl.value.clear.unsafe_as(Proc(D2D1_COLOR_F*, Void)).call(clearcolor)
+  end
+  def begin_draw : Void
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(Void)).call
+  end
+  def end_draw(tag1 : UInt64*, tag2 : UInt64*) : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(tag1, tag2)
+  end
+  def get_pixel_format : D2D1_PIXEL_FORMAT
+    @lpVtbl.value.get_pixel_format.unsafe_as(Proc(D2D1_PIXEL_FORMAT)).call
+  end
+  def set_dpi(dpix : Float32, dpiy : Float32) : Void
+    @lpVtbl.value.set_dpi.unsafe_as(Proc(Float32, Float32, Void)).call(dpix, dpiy)
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def get_size : D2D_SIZE_F
+    @lpVtbl.value.get_size.unsafe_as(Proc(D2D_SIZE_F)).call
+  end
+  def get_pixel_size : D2D_SIZE_U
+    @lpVtbl.value.get_pixel_size.unsafe_as(Proc(D2D_SIZE_U)).call
+  end
+  def get_maximum_bitmap_size : UInt32
+    @lpVtbl.value.get_maximum_bitmap_size.unsafe_as(Proc(UInt32)).call
+  end
+  def is_supported(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*) : LibC::BOOL
+    @lpVtbl.value.is_supported.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, LibC::BOOL)).call(rendertargetproperties)
+  end
+  def create_bitmap2(size : D2D_SIZE_U, sourcedata : Void*, pitch : UInt32, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap2.unsafe_as(Proc(D2D_SIZE_U, Void*, UInt32, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(size, sourcedata, pitch, bitmapproperties, bitmap)
+  end
+  def create_bitmap_from_wic_bitmap2(wicbitmapsource : IWICBitmapSource, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_wic_bitmap2.unsafe_as(Proc(IWICBitmapSource, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(wicbitmapsource, bitmapproperties, bitmap)
+  end
+  def create_color_context(space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.unsafe_as(Proc(D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)).call(space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.unsafe_as(Proc(LibC::LPWSTR, ID2D1ColorContext*, HRESULT)).call(filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.unsafe_as(Proc(IWICColorContext, ID2D1ColorContext*, HRESULT)).call(wiccolorcontext, colorcontext)
+  end
+  def create_bitmap_from_dxgi_surface(surface : IDXGISurface, bitmapproperties : D2D1_BITMAP_PROPERTIES1*, bitmap : ID2D1Bitmap1*) : HRESULT
+    @lpVtbl.value.create_bitmap_from_dxgi_surface.unsafe_as(Proc(IDXGISurface, D2D1_BITMAP_PROPERTIES1*, ID2D1Bitmap1*, HRESULT)).call(surface, bitmapproperties, bitmap)
+  end
+  def create_effect(effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.unsafe_as(Proc(Guid*, ID2D1Effect*, HRESULT)).call(effectid, effect)
+  end
+  def create_gradient_stop_collection2(straightalphagradientstops : D2D1_GRADIENT_STOP*, straightalphagradientstopscount : UInt32, preinterpolationspace : D2D1_COLOR_SPACE, postinterpolationspace : D2D1_COLOR_SPACE, bufferprecision : D2D1_BUFFER_PRECISION, extendmode : D2D1_EXTEND_MODE, colorinterpolationmode : D2D1_COLOR_INTERPOLATION_MODE, gradientstopcollection1 : ID2D1GradientStopCollection1*) : HRESULT
+    @lpVtbl.value.create_gradient_stop_collection2.unsafe_as(Proc(D2D1_GRADIENT_STOP*, UInt32, D2D1_COLOR_SPACE, D2D1_COLOR_SPACE, D2D1_BUFFER_PRECISION, D2D1_EXTEND_MODE, D2D1_COLOR_INTERPOLATION_MODE, ID2D1GradientStopCollection1*, HRESULT)).call(straightalphagradientstops, straightalphagradientstopscount, preinterpolationspace, postinterpolationspace, bufferprecision, extendmode, colorinterpolationmode, gradientstopcollection1)
+  end
+  def create_image_brush(image : ID2D1Image, imagebrushproperties : D2D1_IMAGE_BRUSH_PROPERTIES*, brushproperties : D2D1_BRUSH_PROPERTIES*, imagebrush : ID2D1ImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.unsafe_as(Proc(ID2D1Image, D2D1_IMAGE_BRUSH_PROPERTIES*, D2D1_BRUSH_PROPERTIES*, ID2D1ImageBrush*, HRESULT)).call(image, imagebrushproperties, brushproperties, imagebrush)
+  end
+  def create_bitmap_brush2(bitmap : ID2D1Bitmap, bitmapbrushproperties : D2D1_BITMAP_BRUSH_PROPERTIES1*, brushproperties : D2D1_BRUSH_PROPERTIES*, bitmapbrush : ID2D1BitmapBrush1*) : HRESULT
+    @lpVtbl.value.create_bitmap_brush2.unsafe_as(Proc(ID2D1Bitmap, D2D1_BITMAP_BRUSH_PROPERTIES1*, D2D1_BRUSH_PROPERTIES*, ID2D1BitmapBrush1*, HRESULT)).call(bitmap, bitmapbrushproperties, brushproperties, bitmapbrush)
+  end
+  def create_command_list(commandlist : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(ID2D1CommandList*, HRESULT)).call(commandlist)
+  end
+  def is_dxgi_format_supported(format : DXGI_FORMAT) : LibC::BOOL
+    @lpVtbl.value.is_dxgi_format_supported.unsafe_as(Proc(DXGI_FORMAT, LibC::BOOL)).call(format)
+  end
+  def is_buffer_precision_supported(bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.unsafe_as(Proc(D2D1_BUFFER_PRECISION, LibC::BOOL)).call(bufferprecision)
+  end
+  def get_image_local_bounds(image : ID2D1Image, localbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_local_bounds.unsafe_as(Proc(ID2D1Image, D2D_RECT_F*, HRESULT)).call(image, localbounds)
+  end
+  def get_image_world_bounds(image : ID2D1Image, worldbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_image_world_bounds.unsafe_as(Proc(ID2D1Image, D2D_RECT_F*, HRESULT)).call(image, worldbounds)
+  end
+  def get_glyph_run_world_bounds(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_glyph_run_world_bounds.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_RECT_F*, HRESULT)).call(baselineorigin, glyphrun, measuringmode, bounds)
+  end
+  def get_device(device : ID2D1Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID2D1Device*, Void)).call(device)
+  end
+  def set_target(image : ID2D1Image) : Void
+    @lpVtbl.value.set_target.unsafe_as(Proc(ID2D1Image, Void)).call(image)
+  end
+  def get_target(image : ID2D1Image*) : Void
+    @lpVtbl.value.get_target.unsafe_as(Proc(ID2D1Image*, Void)).call(image)
+  end
+  def set_rendering_controls(renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.set_rendering_controls.unsafe_as(Proc(D2D1_RENDERING_CONTROLS*, Void)).call(renderingcontrols)
+  end
+  def get_rendering_controls(renderingcontrols : D2D1_RENDERING_CONTROLS*) : Void
+    @lpVtbl.value.get_rendering_controls.unsafe_as(Proc(D2D1_RENDERING_CONTROLS*, Void)).call(renderingcontrols)
+  end
+  def set_primitive_blend(primitiveblend : D2D1_PRIMITIVE_BLEND) : Void
+    @lpVtbl.value.set_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND, Void)).call(primitiveblend)
+  end
+  def get_primitive_blend : D2D1_PRIMITIVE_BLEND
+    @lpVtbl.value.get_primitive_blend.unsafe_as(Proc(D2D1_PRIMITIVE_BLEND)).call
+  end
+  def set_unit_mode(unitmode : D2D1_UNIT_MODE) : Void
+    @lpVtbl.value.set_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE, Void)).call(unitmode)
+  end
+  def get_unit_mode : D2D1_UNIT_MODE
+    @lpVtbl.value.get_unit_mode.unsafe_as(Proc(D2D1_UNIT_MODE)).call
+  end
+  def draw_glyph_run2(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, foregroundbrush : ID2D1Brush, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_glyph_run2.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, ID2D1Brush, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, glyphrundescription, foregroundbrush, measuringmode)
+  end
+  def draw_image(image : ID2D1Image, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE, compositemode : D2D1_COMPOSITE_MODE) : Void
+    @lpVtbl.value.draw_image.unsafe_as(Proc(ID2D1Image, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, D2D1_COMPOSITE_MODE, Void)).call(image, targetoffset, imagerectangle, interpolationmode, compositemode)
+  end
+  def draw_gdi_metafile(gdimetafile : ID2D1GdiMetafile, targetoffset : D2D_POINT_2F*) : Void
+    @lpVtbl.value.draw_gdi_metafile.unsafe_as(Proc(ID2D1GdiMetafile, D2D_POINT_2F*, Void)).call(gdimetafile, targetoffset)
+  end
+  def draw_bitmap2(bitmap : ID2D1Bitmap, destinationrectangle : D2D_RECT_F*, opacity : Float32, interpolationmode : D2D1_INTERPOLATION_MODE, sourcerectangle : D2D_RECT_F*, perspectivetransform : D2D_MATRIX_4X4_F*) : Void
+    @lpVtbl.value.draw_bitmap2.unsafe_as(Proc(ID2D1Bitmap, D2D_RECT_F*, Float32, D2D1_INTERPOLATION_MODE, D2D_RECT_F*, D2D_MATRIX_4X4_F*, Void)).call(bitmap, destinationrectangle, opacity, interpolationmode, sourcerectangle, perspectivetransform)
+  end
+  def push_layer2(layerparameters : D2D1_LAYER_PARAMETERS1*, layer : ID2D1Layer) : Void
+    @lpVtbl.value.push_layer2.unsafe_as(Proc(D2D1_LAYER_PARAMETERS1*, ID2D1Layer, Void)).call(layerparameters, layer)
+  end
+  def invalidate_effect_input_rectangle(effect : ID2D1Effect, input : UInt32, inputrectangle : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.invalidate_effect_input_rectangle.unsafe_as(Proc(ID2D1Effect, UInt32, D2D_RECT_F*, HRESULT)).call(effect, input, inputrectangle)
+  end
+  def get_effect_invalid_rectangle_count(effect : ID2D1Effect, rectanglecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangle_count.unsafe_as(Proc(ID2D1Effect, UInt32*, HRESULT)).call(effect, rectanglecount)
+  end
+  def get_effect_invalid_rectangles(effect : ID2D1Effect, rectangles : D2D_RECT_F*, rectanglescount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_invalid_rectangles.unsafe_as(Proc(ID2D1Effect, D2D_RECT_F*, UInt32, HRESULT)).call(effect, rectangles, rectanglescount)
+  end
+  def get_effect_required_input_rectangles(rendereffect : ID2D1Effect, renderimagerectangle : D2D_RECT_F*, inputdescriptions : D2D1_EFFECT_INPUT_DESCRIPTION*, requiredinputrects : D2D_RECT_F*, inputcount : UInt32) : HRESULT
+    @lpVtbl.value.get_effect_required_input_rectangles.unsafe_as(Proc(ID2D1Effect, D2D_RECT_F*, D2D1_EFFECT_INPUT_DESCRIPTION*, D2D_RECT_F*, UInt32, HRESULT)).call(rendereffect, renderimagerectangle, inputdescriptions, requiredinputrects, inputcount)
+  end
+  def fill_opacity_mask2(opacitymask : ID2D1Bitmap, brush : ID2D1Brush, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.fill_opacity_mask2.unsafe_as(Proc(ID2D1Bitmap, ID2D1Brush, D2D_RECT_F*, D2D_RECT_F*, Void)).call(opacitymask, brush, destinationrectangle, sourcerectangle)
+  end
+  def create_filled_geometry_realization(geometry : ID2D1Geometry, flatteningtolerance : Float32, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_filled_geometry_realization.unsafe_as(Proc(ID2D1Geometry, Float32, ID2D1GeometryRealization*, HRESULT)).call(geometry, flatteningtolerance, geometryrealization)
+  end
+  def create_stroked_geometry_realization(geometry : ID2D1Geometry, flatteningtolerance : Float32, strokewidth : Float32, strokestyle : ID2D1StrokeStyle, geometryrealization : ID2D1GeometryRealization*) : HRESULT
+    @lpVtbl.value.create_stroked_geometry_realization.unsafe_as(Proc(ID2D1Geometry, Float32, Float32, ID2D1StrokeStyle, ID2D1GeometryRealization*, HRESULT)).call(geometry, flatteningtolerance, strokewidth, strokestyle, geometryrealization)
+  end
+  def draw_geometry_realization(geometryrealization : ID2D1GeometryRealization, brush : ID2D1Brush) : Void
+    @lpVtbl.value.draw_geometry_realization.unsafe_as(Proc(ID2D1GeometryRealization, ID2D1Brush, Void)).call(geometryrealization, brush)
+  end
+  def create_ink(startpoint : D2D1_INK_POINT*, ink : ID2D1Ink*) : HRESULT
+    @lpVtbl.value.create_ink.unsafe_as(Proc(D2D1_INK_POINT*, ID2D1Ink*, HRESULT)).call(startpoint, ink)
+  end
+  def create_ink_style(inkstyleproperties : D2D1_INK_STYLE_PROPERTIES*, inkstyle : ID2D1InkStyle*) : HRESULT
+    @lpVtbl.value.create_ink_style.unsafe_as(Proc(D2D1_INK_STYLE_PROPERTIES*, ID2D1InkStyle*, HRESULT)).call(inkstyleproperties, inkstyle)
+  end
+  def create_gradient_mesh(patches : D2D1_GRADIENT_MESH_PATCH*, patchescount : UInt32, gradientmesh : ID2D1GradientMesh*) : HRESULT
+    @lpVtbl.value.create_gradient_mesh.unsafe_as(Proc(D2D1_GRADIENT_MESH_PATCH*, UInt32, ID2D1GradientMesh*, HRESULT)).call(patches, patchescount, gradientmesh)
+  end
+  def create_image_source_from_wic(wicbitmapsource : IWICBitmapSource, loadingoptions : D2D1_IMAGE_SOURCE_LOADING_OPTIONS, alphamode : D2D1_ALPHA_MODE, imagesource : ID2D1ImageSourceFromWic*) : HRESULT
+    @lpVtbl.value.create_image_source_from_wic.unsafe_as(Proc(IWICBitmapSource, D2D1_IMAGE_SOURCE_LOADING_OPTIONS, D2D1_ALPHA_MODE, ID2D1ImageSourceFromWic*, HRESULT)).call(wicbitmapsource, loadingoptions, alphamode, imagesource)
+  end
+  def create_lookup_table3_d(precision : D2D1_BUFFER_PRECISION, extents : UInt32*, data : UInt8*, datacount : UInt32, strides : UInt32*, lookuptable : ID2D1LookupTable3D*) : HRESULT
+    @lpVtbl.value.create_lookup_table3_d.unsafe_as(Proc(D2D1_BUFFER_PRECISION, UInt32*, UInt8*, UInt32, UInt32*, ID2D1LookupTable3D*, HRESULT)).call(precision, extents, data, datacount, strides, lookuptable)
+  end
+  def create_image_source_from_dxgi(surfaces : IDXGISurface*, surfacecount : UInt32, colorspace : DXGI_COLOR_SPACE_TYPE, options : D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, imagesource : ID2D1ImageSource*) : HRESULT
+    @lpVtbl.value.create_image_source_from_dxgi.unsafe_as(Proc(IDXGISurface*, UInt32, DXGI_COLOR_SPACE_TYPE, D2D1_IMAGE_SOURCE_FROM_DXGI_OPTIONS, ID2D1ImageSource*, HRESULT)).call(surfaces, surfacecount, colorspace, options, imagesource)
+  end
+  def get_gradient_mesh_world_bounds(gradientmesh : ID2D1GradientMesh, pbounds : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.get_gradient_mesh_world_bounds.unsafe_as(Proc(ID2D1GradientMesh, D2D_RECT_F*, HRESULT)).call(gradientmesh, pbounds)
+  end
+  def draw_ink(ink : ID2D1Ink, brush : ID2D1Brush, inkstyle : ID2D1InkStyle) : Void
+    @lpVtbl.value.draw_ink.unsafe_as(Proc(ID2D1Ink, ID2D1Brush, ID2D1InkStyle, Void)).call(ink, brush, inkstyle)
+  end
+  def draw_gradient_mesh(gradientmesh : ID2D1GradientMesh) : Void
+    @lpVtbl.value.draw_gradient_mesh.unsafe_as(Proc(ID2D1GradientMesh, Void)).call(gradientmesh)
+  end
+  def draw_gdi_metafile2(gdimetafile : ID2D1GdiMetafile, destinationrectangle : D2D_RECT_F*, sourcerectangle : D2D_RECT_F*) : Void
+    @lpVtbl.value.draw_gdi_metafile2.unsafe_as(Proc(ID2D1GdiMetafile, D2D_RECT_F*, D2D_RECT_F*, Void)).call(gdimetafile, destinationrectangle, sourcerectangle)
+  end
+  def create_transformed_image_source(imagesource : ID2D1ImageSource, properties : D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, transformedimagesource : ID2D1TransformedImageSource*) : HRESULT
+    @lpVtbl.value.create_transformed_image_source.unsafe_as(Proc(ID2D1ImageSource, D2D1_TRANSFORMED_IMAGE_SOURCE_PROPERTIES*, ID2D1TransformedImageSource*, HRESULT)).call(imagesource, properties, transformedimagesource)
+  end
+  def create_sprite_batch(spritebatch : ID2D1SpriteBatch*) : HRESULT
+    @lpVtbl.value.create_sprite_batch.unsafe_as(Proc(ID2D1SpriteBatch*, HRESULT)).call(spritebatch)
+  end
+  def draw_sprite_batch(spritebatch : ID2D1SpriteBatch, startindex : UInt32, spritecount : UInt32, bitmap : ID2D1Bitmap, interpolationmode : D2D1_BITMAP_INTERPOLATION_MODE, spriteoptions : D2D1_SPRITE_OPTIONS) : Void
+    @lpVtbl.value.draw_sprite_batch.unsafe_as(Proc(ID2D1SpriteBatch, UInt32, UInt32, ID2D1Bitmap, D2D1_BITMAP_INTERPOLATION_MODE, D2D1_SPRITE_OPTIONS, Void)).call(spritebatch, startindex, spritecount, bitmap, interpolationmode, spriteoptions)
+  end
+  def create_svg_glyph_style(svgglyphstyle : ID2D1SvgGlyphStyle*) : HRESULT
+    @lpVtbl.value.create_svg_glyph_style.unsafe_as(Proc(ID2D1SvgGlyphStyle*, HRESULT)).call(svgglyphstyle)
+  end
+  def draw_text2(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutrect : D2D_RECT_F*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, options : D2D1_DRAW_TEXT_OPTIONS, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_text2.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, D2D_RECT_F*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D1_DRAW_TEXT_OPTIONS, DWRITE_MEASURING_MODE, Void)).call(string, stringlength, textformat, layoutrect, defaultfillbrush, svgglyphstyle, colorpaletteindex, options, measuringmode)
+  end
+  def draw_text_layout2(origin : D2D_POINT_2F, textlayout : IDWriteTextLayout, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, options : D2D1_DRAW_TEXT_OPTIONS) : Void
+    @lpVtbl.value.draw_text_layout2.unsafe_as(Proc(D2D_POINT_2F, IDWriteTextLayout, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D1_DRAW_TEXT_OPTIONS, Void)).call(origin, textlayout, defaultfillbrush, svgglyphstyle, colorpaletteindex, options)
+  end
+  def draw_color_bitmap_glyph_run(glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, bitmapsnapoption : D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION) : Void
+    @lpVtbl.value.draw_color_bitmap_glyph_run.unsafe_as(Proc(DWRITE_GLYPH_IMAGE_FORMATS, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D1_COLOR_BITMAP_GLYPH_SNAP_OPTION, Void)).call(glyphimageformat, baselineorigin, glyphrun, measuringmode, bitmapsnapoption)
+  end
+  def draw_svg_glyph_run(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, measuringmode : DWRITE_MEASURING_MODE) : Void
+    @lpVtbl.value.draw_svg_glyph_run.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, DWRITE_MEASURING_MODE, Void)).call(baselineorigin, glyphrun, defaultfillbrush, svgglyphstyle, colorpaletteindex, measuringmode)
+  end
+  def get_color_bitmap_glyph_image(glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, glyphorigin : D2D_POINT_2F, fontface : IDWriteFontFace, fontemsize : Float32, glyphindex : UInt16, issideways : LibC::BOOL, worldtransform : D2D_MATRIX_3X2_F*, dpix : Float32, dpiy : Float32, glyphtransform : D2D_MATRIX_3X2_F*, glyphimage : ID2D1Image*) : HRESULT
+    @lpVtbl.value.get_color_bitmap_glyph_image.unsafe_as(Proc(DWRITE_GLYPH_IMAGE_FORMATS, D2D_POINT_2F, IDWriteFontFace, Float32, UInt16, LibC::BOOL, D2D_MATRIX_3X2_F*, Float32, Float32, D2D_MATRIX_3X2_F*, ID2D1Image*, HRESULT)).call(glyphimageformat, glyphorigin, fontface, fontemsize, glyphindex, issideways, worldtransform, dpix, dpiy, glyphtransform, glyphimage)
+  end
+  def get_svg_glyph_image(glyphorigin : D2D_POINT_2F, fontface : IDWriteFontFace, fontemsize : Float32, glyphindex : UInt16, issideways : LibC::BOOL, worldtransform : D2D_MATRIX_3X2_F*, defaultfillbrush : ID2D1Brush, svgglyphstyle : ID2D1SvgGlyphStyle, colorpaletteindex : UInt32, glyphtransform : D2D_MATRIX_3X2_F*, glyphimage : ID2D1CommandList*) : HRESULT
+    @lpVtbl.value.get_svg_glyph_image.unsafe_as(Proc(D2D_POINT_2F, IDWriteFontFace, Float32, UInt16, LibC::BOOL, D2D_MATRIX_3X2_F*, ID2D1Brush, ID2D1SvgGlyphStyle, UInt32, D2D_MATRIX_3X2_F*, ID2D1CommandList*, HRESULT)).call(glyphorigin, fontface, fontemsize, glyphindex, issideways, worldtransform, defaultfillbrush, svgglyphstyle, colorpaletteindex, glyphtransform, glyphimage)
+  end
+  def create_svg_document(inputxmlstream : IStream, viewportsize : D2D_SIZE_F, svgdocument : ID2D1SvgDocument*) : HRESULT
+    @lpVtbl.value.create_svg_document.unsafe_as(Proc(IStream, D2D_SIZE_F, ID2D1SvgDocument*, HRESULT)).call(inputxmlstream, viewportsize, svgdocument)
+  end
+  def draw_svg_document(svgdocument : ID2D1SvgDocument) : Void
+    @lpVtbl.value.draw_svg_document.unsafe_as(Proc(ID2D1SvgDocument, Void)).call(svgdocument)
+  end
+  def create_color_context_from_dxgi_color_space(colorspace : DXGI_COLOR_SPACE_TYPE, colorcontext : ID2D1ColorContext1*) : HRESULT
+    @lpVtbl.value.create_color_context_from_dxgi_color_space.unsafe_as(Proc(DXGI_COLOR_SPACE_TYPE, ID2D1ColorContext1*, HRESULT)).call(colorspace, colorcontext)
+  end
+  def create_color_context_from_simple_color_profile(simpleprofile : D2D1_SIMPLE_COLOR_PROFILE*, colorcontext : ID2D1ColorContext1*) : HRESULT
+    @lpVtbl.value.create_color_context_from_simple_color_profile.unsafe_as(Proc(D2D1_SIMPLE_COLOR_PROFILE*, ID2D1ColorContext1*, HRESULT)).call(simpleprofile, colorcontext)
+  end
+  def blend_image(image : ID2D1Image, blendmode : D2D1_BLEND_MODE, targetoffset : D2D_POINT_2F*, imagerectangle : D2D_RECT_F*, interpolationmode : D2D1_INTERPOLATION_MODE) : Void
+    @lpVtbl.value.blend_image.unsafe_as(Proc(ID2D1Image, D2D1_BLEND_MODE, D2D_POINT_2F*, D2D_RECT_F*, D2D1_INTERPOLATION_MODE, Void)).call(image, blendmode, targetoffset, imagerectangle, interpolationmode)
+  end
+end
+struct LibWin32::ID2D1Device6
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_factory(factory : ID2D1Factory*) : Void
+    @lpVtbl.value.get_factory.unsafe_as(Proc(ID2D1Factory*, Void)).call(factory)
+  end
+  def create_device_context(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext : ID2D1DeviceContext*) : HRESULT
+    @lpVtbl.value.create_device_context.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext*, HRESULT)).call(options, devicecontext)
+  end
+  def create_print_control(wicfactory : IWICImagingFactory, documenttarget : IPrintDocumentPackageTarget, printcontrolproperties : D2D1_PRINT_CONTROL_PROPERTIES*, printcontrol : ID2D1PrintControl*) : HRESULT
+    @lpVtbl.value.create_print_control.unsafe_as(Proc(IWICImagingFactory, IPrintDocumentPackageTarget, D2D1_PRINT_CONTROL_PROPERTIES*, ID2D1PrintControl*, HRESULT)).call(wicfactory, documenttarget, printcontrolproperties, printcontrol)
+  end
+  def set_maximum_texture_memory(maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_texture_memory.unsafe_as(Proc(UInt64, Void)).call(maximuminbytes)
+  end
+  def get_maximum_texture_memory : UInt64
+    @lpVtbl.value.get_maximum_texture_memory.unsafe_as(Proc(UInt64)).call
+  end
+  def clear_resources(millisecondssinceuse : UInt32) : Void
+    @lpVtbl.value.clear_resources.unsafe_as(Proc(UInt32, Void)).call(millisecondssinceuse)
+  end
+  def get_rendering_priority : D2D1_RENDERING_PRIORITY
+    @lpVtbl.value.get_rendering_priority.unsafe_as(Proc(D2D1_RENDERING_PRIORITY)).call
+  end
+  def set_rendering_priority(renderingpriority : D2D1_RENDERING_PRIORITY) : Void
+    @lpVtbl.value.set_rendering_priority.unsafe_as(Proc(D2D1_RENDERING_PRIORITY, Void)).call(renderingpriority)
+  end
+  def create_device_context2(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext1 : ID2D1DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_device_context2.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext1*, HRESULT)).call(options, devicecontext1)
+  end
+  def create_device_context3(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext2 : ID2D1DeviceContext2*) : HRESULT
+    @lpVtbl.value.create_device_context3.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext2*, HRESULT)).call(options, devicecontext2)
+  end
+  def flush_device_contexts(bitmap : ID2D1Bitmap) : Void
+    @lpVtbl.value.flush_device_contexts.unsafe_as(Proc(ID2D1Bitmap, Void)).call(bitmap)
+  end
+  def get_dxgi_device(dxgidevice : IDXGIDevice*) : HRESULT
+    @lpVtbl.value.get_dxgi_device.unsafe_as(Proc(IDXGIDevice*, HRESULT)).call(dxgidevice)
+  end
+  def create_device_context4(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext3 : ID2D1DeviceContext3*) : HRESULT
+    @lpVtbl.value.create_device_context4.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext3*, HRESULT)).call(options, devicecontext3)
+  end
+  def create_device_context5(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext4 : ID2D1DeviceContext4*) : HRESULT
+    @lpVtbl.value.create_device_context5.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext4*, HRESULT)).call(options, devicecontext4)
+  end
+  def set_maximum_color_glyph_cache_memory(maximuminbytes : UInt64) : Void
+    @lpVtbl.value.set_maximum_color_glyph_cache_memory.unsafe_as(Proc(UInt64, Void)).call(maximuminbytes)
+  end
+  def get_maximum_color_glyph_cache_memory : UInt64
+    @lpVtbl.value.get_maximum_color_glyph_cache_memory.unsafe_as(Proc(UInt64)).call
+  end
+  def create_device_context6(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext5 : ID2D1DeviceContext5*) : HRESULT
+    @lpVtbl.value.create_device_context6.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext5*, HRESULT)).call(options, devicecontext5)
+  end
+  def create_device_context7(options : D2D1_DEVICE_CONTEXT_OPTIONS, devicecontext6 : ID2D1DeviceContext6*) : HRESULT
+    @lpVtbl.value.create_device_context7.unsafe_as(Proc(D2D1_DEVICE_CONTEXT_OPTIONS, ID2D1DeviceContext6*, HRESULT)).call(options, devicecontext6)
+  end
+end
+struct LibWin32::ID2D1Factory7
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def reload_system_metrics : HRESULT
+    @lpVtbl.value.reload_system_metrics.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_desktop_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_desktop_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def create_rectangle_geometry(rectangle : D2D_RECT_F*, rectanglegeometry : ID2D1RectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rectangle_geometry.unsafe_as(Proc(D2D_RECT_F*, ID2D1RectangleGeometry*, HRESULT)).call(rectangle, rectanglegeometry)
+  end
+  def create_rounded_rectangle_geometry(roundedrectangle : D2D1_ROUNDED_RECT*, roundedrectanglegeometry : ID2D1RoundedRectangleGeometry*) : HRESULT
+    @lpVtbl.value.create_rounded_rectangle_geometry.unsafe_as(Proc(D2D1_ROUNDED_RECT*, ID2D1RoundedRectangleGeometry*, HRESULT)).call(roundedrectangle, roundedrectanglegeometry)
+  end
+  def create_ellipse_geometry(ellipse : D2D1_ELLIPSE*, ellipsegeometry : ID2D1EllipseGeometry*) : HRESULT
+    @lpVtbl.value.create_ellipse_geometry.unsafe_as(Proc(D2D1_ELLIPSE*, ID2D1EllipseGeometry*, HRESULT)).call(ellipse, ellipsegeometry)
+  end
+  def create_geometry_group(fillmode : D2D1_FILL_MODE, geometries : ID2D1Geometry*, geometriescount : UInt32, geometrygroup : ID2D1GeometryGroup*) : HRESULT
+    @lpVtbl.value.create_geometry_group.unsafe_as(Proc(D2D1_FILL_MODE, ID2D1Geometry*, UInt32, ID2D1GeometryGroup*, HRESULT)).call(fillmode, geometries, geometriescount, geometrygroup)
+  end
+  def create_transformed_geometry(sourcegeometry : ID2D1Geometry, transform : D2D_MATRIX_3X2_F*, transformedgeometry : ID2D1TransformedGeometry*) : HRESULT
+    @lpVtbl.value.create_transformed_geometry.unsafe_as(Proc(ID2D1Geometry, D2D_MATRIX_3X2_F*, ID2D1TransformedGeometry*, HRESULT)).call(sourcegeometry, transform, transformedgeometry)
+  end
+  def create_path_geometry(pathgeometry : ID2D1PathGeometry*) : HRESULT
+    @lpVtbl.value.create_path_geometry.unsafe_as(Proc(ID2D1PathGeometry*, HRESULT)).call(pathgeometry)
+  end
+  def create_stroke_style(strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle*) : HRESULT
+    @lpVtbl.value.create_stroke_style.unsafe_as(Proc(D2D1_STROKE_STYLE_PROPERTIES*, Float32*, UInt32, ID2D1StrokeStyle*, HRESULT)).call(strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_drawing_state_block(drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION*, IDWriteRenderingParams, ID2D1DrawingStateBlock*, HRESULT)).call(drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_wic_bitmap_render_target(target : IWICBitmap, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_wic_bitmap_render_target.unsafe_as(Proc(IWICBitmap, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)).call(target, rendertargetproperties, rendertarget)
+  end
+  def create_hwnd_render_target(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, hwndrendertargetproperties : D2D1_HWND_RENDER_TARGET_PROPERTIES*, hwndrendertarget : ID2D1HwndRenderTarget*) : HRESULT
+    @lpVtbl.value.create_hwnd_render_target.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, D2D1_HWND_RENDER_TARGET_PROPERTIES*, ID2D1HwndRenderTarget*, HRESULT)).call(rendertargetproperties, hwndrendertargetproperties, hwndrendertarget)
+  end
+  def create_dxgi_surface_render_target(dxgisurface : IDXGISurface, rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, rendertarget : ID2D1RenderTarget*) : HRESULT
+    @lpVtbl.value.create_dxgi_surface_render_target.unsafe_as(Proc(IDXGISurface, D2D1_RENDER_TARGET_PROPERTIES*, ID2D1RenderTarget*, HRESULT)).call(dxgisurface, rendertargetproperties, rendertarget)
+  end
+  def create_dc_render_target(rendertargetproperties : D2D1_RENDER_TARGET_PROPERTIES*, dcrendertarget : ID2D1DCRenderTarget*) : HRESULT
+    @lpVtbl.value.create_dc_render_target.unsafe_as(Proc(D2D1_RENDER_TARGET_PROPERTIES*, ID2D1DCRenderTarget*, HRESULT)).call(rendertargetproperties, dcrendertarget)
+  end
+  def create_device(dxgidevice : IDXGIDevice, d2ddevice : ID2D1Device*) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(IDXGIDevice, ID2D1Device*, HRESULT)).call(dxgidevice, d2ddevice)
+  end
+  def create_stroke_style2(strokestyleproperties : D2D1_STROKE_STYLE_PROPERTIES1*, dashes : Float32*, dashescount : UInt32, strokestyle : ID2D1StrokeStyle1*) : HRESULT
+    @lpVtbl.value.create_stroke_style2.unsafe_as(Proc(D2D1_STROKE_STYLE_PROPERTIES1*, Float32*, UInt32, ID2D1StrokeStyle1*, HRESULT)).call(strokestyleproperties, dashes, dashescount, strokestyle)
+  end
+  def create_path_geometry2(pathgeometry : ID2D1PathGeometry1*) : HRESULT
+    @lpVtbl.value.create_path_geometry2.unsafe_as(Proc(ID2D1PathGeometry1*, HRESULT)).call(pathgeometry)
+  end
+  def create_drawing_state_block2(drawingstatedescription : D2D1_DRAWING_STATE_DESCRIPTION1*, textrenderingparams : IDWriteRenderingParams, drawingstateblock : ID2D1DrawingStateBlock1*) : HRESULT
+    @lpVtbl.value.create_drawing_state_block2.unsafe_as(Proc(D2D1_DRAWING_STATE_DESCRIPTION1*, IDWriteRenderingParams, ID2D1DrawingStateBlock1*, HRESULT)).call(drawingstatedescription, textrenderingparams, drawingstateblock)
+  end
+  def create_gdi_metafile(metafilestream : IStream, metafile : ID2D1GdiMetafile*) : HRESULT
+    @lpVtbl.value.create_gdi_metafile.unsafe_as(Proc(IStream, ID2D1GdiMetafile*, HRESULT)).call(metafilestream, metafile)
+  end
+  def register_effect_from_stream(classid : Guid*, propertyxml : IStream, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_stream.unsafe_as(Proc(Guid*, IStream, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)).call(classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def register_effect_from_string(classid : Guid*, propertyxml : LibC::LPWSTR, bindings : D2D1_PROPERTY_BINDING*, bindingscount : UInt32, effectfactory : PD2D1_EFFECT_FACTORY) : HRESULT
+    @lpVtbl.value.register_effect_from_string.unsafe_as(Proc(Guid*, LibC::LPWSTR, D2D1_PROPERTY_BINDING*, UInt32, PD2D1_EFFECT_FACTORY, HRESULT)).call(classid, propertyxml, bindings, bindingscount, effectfactory)
+  end
+  def unregister_effect(classid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_effect.unsafe_as(Proc(Guid*, HRESULT)).call(classid)
+  end
+  def get_registered_effects(effects : Guid*, effectscount : UInt32, effectsreturned : UInt32*, effectsregistered : UInt32*) : HRESULT
+    @lpVtbl.value.get_registered_effects.unsafe_as(Proc(Guid*, UInt32, UInt32*, UInt32*, HRESULT)).call(effects, effectscount, effectsreturned, effectsregistered)
+  end
+  def get_effect_properties(effectid : Guid*, properties : ID2D1Properties*) : HRESULT
+    @lpVtbl.value.get_effect_properties.unsafe_as(Proc(Guid*, ID2D1Properties*, HRESULT)).call(effectid, properties)
+  end
+  def create_device2(dxgidevice : IDXGIDevice, d2ddevice1 : ID2D1Device1*) : HRESULT
+    @lpVtbl.value.create_device2.unsafe_as(Proc(IDXGIDevice, ID2D1Device1*, HRESULT)).call(dxgidevice, d2ddevice1)
+  end
+  def create_device3(dxgidevice : IDXGIDevice, d2ddevice2 : ID2D1Device2*) : HRESULT
+    @lpVtbl.value.create_device3.unsafe_as(Proc(IDXGIDevice, ID2D1Device2*, HRESULT)).call(dxgidevice, d2ddevice2)
+  end
+  def create_device4(dxgidevice : IDXGIDevice, d2ddevice3 : ID2D1Device3*) : HRESULT
+    @lpVtbl.value.create_device4.unsafe_as(Proc(IDXGIDevice, ID2D1Device3*, HRESULT)).call(dxgidevice, d2ddevice3)
+  end
+  def create_device5(dxgidevice : IDXGIDevice, d2ddevice4 : ID2D1Device4*) : HRESULT
+    @lpVtbl.value.create_device5.unsafe_as(Proc(IDXGIDevice, ID2D1Device4*, HRESULT)).call(dxgidevice, d2ddevice4)
+  end
+  def create_device6(dxgidevice : IDXGIDevice, d2ddevice5 : ID2D1Device5*) : HRESULT
+    @lpVtbl.value.create_device6.unsafe_as(Proc(IDXGIDevice, ID2D1Device5*, HRESULT)).call(dxgidevice, d2ddevice5)
+  end
+  def create_device7(dxgidevice : IDXGIDevice, d2ddevice6 : ID2D1Device6*) : HRESULT
+    @lpVtbl.value.create_device7.unsafe_as(Proc(IDXGIDevice, ID2D1Device6*, HRESULT)).call(dxgidevice, d2ddevice6)
+  end
+end
+struct LibWin32::ID2D1EffectContext1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def create_effect(effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.unsafe_as(Proc(Guid*, ID2D1Effect*, HRESULT)).call(effectid, effect)
+  end
+  def get_maximum_supported_feature_level(featurelevels : D3D_FEATURE_LEVEL*, featurelevelscount : UInt32, maximumsupportedfeaturelevel : D3D_FEATURE_LEVEL*) : HRESULT
+    @lpVtbl.value.get_maximum_supported_feature_level.unsafe_as(Proc(D3D_FEATURE_LEVEL*, UInt32, D3D_FEATURE_LEVEL*, HRESULT)).call(featurelevels, featurelevelscount, maximumsupportedfeaturelevel)
+  end
+  def create_transform_node_from_effect(effect : ID2D1Effect, transformnode : ID2D1TransformNode*) : HRESULT
+    @lpVtbl.value.create_transform_node_from_effect.unsafe_as(Proc(ID2D1Effect, ID2D1TransformNode*, HRESULT)).call(effect, transformnode)
+  end
+  def create_blend_transform(numinputs : UInt32, blenddescription : D2D1_BLEND_DESCRIPTION*, transform : ID2D1BlendTransform*) : HRESULT
+    @lpVtbl.value.create_blend_transform.unsafe_as(Proc(UInt32, D2D1_BLEND_DESCRIPTION*, ID2D1BlendTransform*, HRESULT)).call(numinputs, blenddescription, transform)
+  end
+  def create_border_transform(extendmodex : D2D1_EXTEND_MODE, extendmodey : D2D1_EXTEND_MODE, transform : ID2D1BorderTransform*) : HRESULT
+    @lpVtbl.value.create_border_transform.unsafe_as(Proc(D2D1_EXTEND_MODE, D2D1_EXTEND_MODE, ID2D1BorderTransform*, HRESULT)).call(extendmodex, extendmodey, transform)
+  end
+  def create_offset_transform(offset : POINT, transform : ID2D1OffsetTransform*) : HRESULT
+    @lpVtbl.value.create_offset_transform.unsafe_as(Proc(POINT, ID2D1OffsetTransform*, HRESULT)).call(offset, transform)
+  end
+  def create_bounds_adjustment_transform(outputrectangle : RECT*, transform : ID2D1BoundsAdjustmentTransform*) : HRESULT
+    @lpVtbl.value.create_bounds_adjustment_transform.unsafe_as(Proc(RECT*, ID2D1BoundsAdjustmentTransform*, HRESULT)).call(outputrectangle, transform)
+  end
+  def load_pixel_shader(shaderid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_pixel_shader.unsafe_as(Proc(Guid*, UInt8*, UInt32, HRESULT)).call(shaderid, shaderbuffer, shaderbuffercount)
+  end
+  def load_vertex_shader(resourceid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_vertex_shader.unsafe_as(Proc(Guid*, UInt8*, UInt32, HRESULT)).call(resourceid, shaderbuffer, shaderbuffercount)
+  end
+  def load_compute_shader(resourceid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_compute_shader.unsafe_as(Proc(Guid*, UInt8*, UInt32, HRESULT)).call(resourceid, shaderbuffer, shaderbuffercount)
+  end
+  def is_shader_loaded(shaderid : Guid*) : LibC::BOOL
+    @lpVtbl.value.is_shader_loaded.unsafe_as(Proc(Guid*, LibC::BOOL)).call(shaderid)
+  end
+  def create_resource_texture(resourceid : Guid*, resourcetextureproperties : D2D1_RESOURCE_TEXTURE_PROPERTIES*, data : UInt8*, strides : UInt32*, datasize : UInt32, resourcetexture : ID2D1ResourceTexture*) : HRESULT
+    @lpVtbl.value.create_resource_texture.unsafe_as(Proc(Guid*, D2D1_RESOURCE_TEXTURE_PROPERTIES*, UInt8*, UInt32*, UInt32, ID2D1ResourceTexture*, HRESULT)).call(resourceid, resourcetextureproperties, data, strides, datasize, resourcetexture)
+  end
+  def find_resource_texture(resourceid : Guid*, resourcetexture : ID2D1ResourceTexture*) : HRESULT
+    @lpVtbl.value.find_resource_texture.unsafe_as(Proc(Guid*, ID2D1ResourceTexture*, HRESULT)).call(resourceid, resourcetexture)
+  end
+  def create_vertex_buffer(vertexbufferproperties : D2D1_VERTEX_BUFFER_PROPERTIES*, resourceid : Guid*, customvertexbufferproperties : D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES*, buffer : ID2D1VertexBuffer*) : HRESULT
+    @lpVtbl.value.create_vertex_buffer.unsafe_as(Proc(D2D1_VERTEX_BUFFER_PROPERTIES*, Guid*, D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES*, ID2D1VertexBuffer*, HRESULT)).call(vertexbufferproperties, resourceid, customvertexbufferproperties, buffer)
+  end
+  def find_vertex_buffer(resourceid : Guid*, buffer : ID2D1VertexBuffer*) : HRESULT
+    @lpVtbl.value.find_vertex_buffer.unsafe_as(Proc(Guid*, ID2D1VertexBuffer*, HRESULT)).call(resourceid, buffer)
+  end
+  def create_color_context(space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.unsafe_as(Proc(D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)).call(space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.unsafe_as(Proc(LibC::LPWSTR, ID2D1ColorContext*, HRESULT)).call(filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.unsafe_as(Proc(IWICColorContext, ID2D1ColorContext*, HRESULT)).call(wiccolorcontext, colorcontext)
+  end
+  def check_feature_support(feature : D2D1_FEATURE, featuresupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D2D1_FEATURE, Void*, UInt32, HRESULT)).call(feature, featuresupportdata, featuresupportdatasize)
+  end
+  def is_buffer_precision_supported(bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.unsafe_as(Proc(D2D1_BUFFER_PRECISION, LibC::BOOL)).call(bufferprecision)
+  end
+  def create_lookup_table3_d(precision : D2D1_BUFFER_PRECISION, extents : UInt32*, data : UInt8*, datacount : UInt32, strides : UInt32*, lookuptable : ID2D1LookupTable3D*) : HRESULT
+    @lpVtbl.value.create_lookup_table3_d.unsafe_as(Proc(D2D1_BUFFER_PRECISION, UInt32*, UInt8*, UInt32, UInt32*, ID2D1LookupTable3D*, HRESULT)).call(precision, extents, data, datacount, strides, lookuptable)
+  end
+end
+struct LibWin32::ID2D1EffectContext2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_dpi(dpix : Float32*, dpiy : Float32*) : Void
+    @lpVtbl.value.get_dpi.unsafe_as(Proc(Float32*, Float32*, Void)).call(dpix, dpiy)
+  end
+  def create_effect(effectid : Guid*, effect : ID2D1Effect*) : HRESULT
+    @lpVtbl.value.create_effect.unsafe_as(Proc(Guid*, ID2D1Effect*, HRESULT)).call(effectid, effect)
+  end
+  def get_maximum_supported_feature_level(featurelevels : D3D_FEATURE_LEVEL*, featurelevelscount : UInt32, maximumsupportedfeaturelevel : D3D_FEATURE_LEVEL*) : HRESULT
+    @lpVtbl.value.get_maximum_supported_feature_level.unsafe_as(Proc(D3D_FEATURE_LEVEL*, UInt32, D3D_FEATURE_LEVEL*, HRESULT)).call(featurelevels, featurelevelscount, maximumsupportedfeaturelevel)
+  end
+  def create_transform_node_from_effect(effect : ID2D1Effect, transformnode : ID2D1TransformNode*) : HRESULT
+    @lpVtbl.value.create_transform_node_from_effect.unsafe_as(Proc(ID2D1Effect, ID2D1TransformNode*, HRESULT)).call(effect, transformnode)
+  end
+  def create_blend_transform(numinputs : UInt32, blenddescription : D2D1_BLEND_DESCRIPTION*, transform : ID2D1BlendTransform*) : HRESULT
+    @lpVtbl.value.create_blend_transform.unsafe_as(Proc(UInt32, D2D1_BLEND_DESCRIPTION*, ID2D1BlendTransform*, HRESULT)).call(numinputs, blenddescription, transform)
+  end
+  def create_border_transform(extendmodex : D2D1_EXTEND_MODE, extendmodey : D2D1_EXTEND_MODE, transform : ID2D1BorderTransform*) : HRESULT
+    @lpVtbl.value.create_border_transform.unsafe_as(Proc(D2D1_EXTEND_MODE, D2D1_EXTEND_MODE, ID2D1BorderTransform*, HRESULT)).call(extendmodex, extendmodey, transform)
+  end
+  def create_offset_transform(offset : POINT, transform : ID2D1OffsetTransform*) : HRESULT
+    @lpVtbl.value.create_offset_transform.unsafe_as(Proc(POINT, ID2D1OffsetTransform*, HRESULT)).call(offset, transform)
+  end
+  def create_bounds_adjustment_transform(outputrectangle : RECT*, transform : ID2D1BoundsAdjustmentTransform*) : HRESULT
+    @lpVtbl.value.create_bounds_adjustment_transform.unsafe_as(Proc(RECT*, ID2D1BoundsAdjustmentTransform*, HRESULT)).call(outputrectangle, transform)
+  end
+  def load_pixel_shader(shaderid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_pixel_shader.unsafe_as(Proc(Guid*, UInt8*, UInt32, HRESULT)).call(shaderid, shaderbuffer, shaderbuffercount)
+  end
+  def load_vertex_shader(resourceid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_vertex_shader.unsafe_as(Proc(Guid*, UInt8*, UInt32, HRESULT)).call(resourceid, shaderbuffer, shaderbuffercount)
+  end
+  def load_compute_shader(resourceid : Guid*, shaderbuffer : UInt8*, shaderbuffercount : UInt32) : HRESULT
+    @lpVtbl.value.load_compute_shader.unsafe_as(Proc(Guid*, UInt8*, UInt32, HRESULT)).call(resourceid, shaderbuffer, shaderbuffercount)
+  end
+  def is_shader_loaded(shaderid : Guid*) : LibC::BOOL
+    @lpVtbl.value.is_shader_loaded.unsafe_as(Proc(Guid*, LibC::BOOL)).call(shaderid)
+  end
+  def create_resource_texture(resourceid : Guid*, resourcetextureproperties : D2D1_RESOURCE_TEXTURE_PROPERTIES*, data : UInt8*, strides : UInt32*, datasize : UInt32, resourcetexture : ID2D1ResourceTexture*) : HRESULT
+    @lpVtbl.value.create_resource_texture.unsafe_as(Proc(Guid*, D2D1_RESOURCE_TEXTURE_PROPERTIES*, UInt8*, UInt32*, UInt32, ID2D1ResourceTexture*, HRESULT)).call(resourceid, resourcetextureproperties, data, strides, datasize, resourcetexture)
+  end
+  def find_resource_texture(resourceid : Guid*, resourcetexture : ID2D1ResourceTexture*) : HRESULT
+    @lpVtbl.value.find_resource_texture.unsafe_as(Proc(Guid*, ID2D1ResourceTexture*, HRESULT)).call(resourceid, resourcetexture)
+  end
+  def create_vertex_buffer(vertexbufferproperties : D2D1_VERTEX_BUFFER_PROPERTIES*, resourceid : Guid*, customvertexbufferproperties : D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES*, buffer : ID2D1VertexBuffer*) : HRESULT
+    @lpVtbl.value.create_vertex_buffer.unsafe_as(Proc(D2D1_VERTEX_BUFFER_PROPERTIES*, Guid*, D2D1_CUSTOM_VERTEX_BUFFER_PROPERTIES*, ID2D1VertexBuffer*, HRESULT)).call(vertexbufferproperties, resourceid, customvertexbufferproperties, buffer)
+  end
+  def find_vertex_buffer(resourceid : Guid*, buffer : ID2D1VertexBuffer*) : HRESULT
+    @lpVtbl.value.find_vertex_buffer.unsafe_as(Proc(Guid*, ID2D1VertexBuffer*, HRESULT)).call(resourceid, buffer)
+  end
+  def create_color_context(space : D2D1_COLOR_SPACE, profile : UInt8*, profilesize : UInt32, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context.unsafe_as(Proc(D2D1_COLOR_SPACE, UInt8*, UInt32, ID2D1ColorContext*, HRESULT)).call(space, profile, profilesize, colorcontext)
+  end
+  def create_color_context_from_filename(filename : LibC::LPWSTR, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_filename.unsafe_as(Proc(LibC::LPWSTR, ID2D1ColorContext*, HRESULT)).call(filename, colorcontext)
+  end
+  def create_color_context_from_wic_color_context(wiccolorcontext : IWICColorContext, colorcontext : ID2D1ColorContext*) : HRESULT
+    @lpVtbl.value.create_color_context_from_wic_color_context.unsafe_as(Proc(IWICColorContext, ID2D1ColorContext*, HRESULT)).call(wiccolorcontext, colorcontext)
+  end
+  def check_feature_support(feature : D2D1_FEATURE, featuresupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D2D1_FEATURE, Void*, UInt32, HRESULT)).call(feature, featuresupportdata, featuresupportdatasize)
+  end
+  def is_buffer_precision_supported(bufferprecision : D2D1_BUFFER_PRECISION) : LibC::BOOL
+    @lpVtbl.value.is_buffer_precision_supported.unsafe_as(Proc(D2D1_BUFFER_PRECISION, LibC::BOOL)).call(bufferprecision)
+  end
+  def create_lookup_table3_d(precision : D2D1_BUFFER_PRECISION, extents : UInt32*, data : UInt8*, datacount : UInt32, strides : UInt32*, lookuptable : ID2D1LookupTable3D*) : HRESULT
+    @lpVtbl.value.create_lookup_table3_d.unsafe_as(Proc(D2D1_BUFFER_PRECISION, UInt32*, UInt8*, UInt32, UInt32*, ID2D1LookupTable3D*, HRESULT)).call(precision, extents, data, datacount, strides, lookuptable)
+  end
+  def create_color_context_from_dxgi_color_space(colorspace : DXGI_COLOR_SPACE_TYPE, colorcontext : ID2D1ColorContext1*) : HRESULT
+    @lpVtbl.value.create_color_context_from_dxgi_color_space.unsafe_as(Proc(DXGI_COLOR_SPACE_TYPE, ID2D1ColorContext1*, HRESULT)).call(colorspace, colorcontext)
+  end
+  def create_color_context_from_simple_color_profile(simpleprofile : D2D1_SIMPLE_COLOR_PROFILE*, colorcontext : ID2D1ColorContext1*) : HRESULT
+    @lpVtbl.value.create_color_context_from_simple_color_profile.unsafe_as(Proc(D2D1_SIMPLE_COLOR_PROFILE*, ID2D1ColorContext1*, HRESULT)).call(simpleprofile, colorcontext)
+  end
 end

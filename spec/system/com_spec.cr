@@ -29,5 +29,21 @@ module Win32cr::System
         result.should eq(LibWin32::S_OK)
       end
     end
+
+    describe "IMalloc 100 bytes" do
+      LibWin32.CoGetMalloc(1, out imalloc)
+      ptr = imalloc.value.alloc(100_u64)
+      size = imalloc.value.get_size(ptr)
+
+      it "should not be null" do
+        ptr.null?.should eq(false)
+      end
+
+      it "should report 100 bytes" do
+        size.should eq(100_u64)
+      end
+
+      imalloc.value.free(ptr)
+    end
   end
 end

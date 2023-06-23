@@ -13,15 +13,15 @@ require "../../system/winrt.cr"
 lib LibWin32
 
   struct ICompositionDrawingSurfaceInteropVTbl
-    query_interface : Proc(ICompositionDrawingSurfaceInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICompositionDrawingSurfaceInterop*, UInt32)
-    release : Proc(ICompositionDrawingSurfaceInterop*, UInt32)
-    begin_draw : Proc(ICompositionDrawingSurfaceInterop*, RECT*, Guid*, Void**, POINT*, HRESULT)
-    end_draw : Proc(ICompositionDrawingSurfaceInterop*, HRESULT)
-    resize : Proc(ICompositionDrawingSurfaceInterop*, SIZE, HRESULT)
-    scroll : Proc(ICompositionDrawingSurfaceInterop*, RECT*, RECT*, Int32, Int32, HRESULT)
-    resume_draw : Proc(ICompositionDrawingSurfaceInterop*, HRESULT)
-    suspend_draw : Proc(ICompositionDrawingSurfaceInterop*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    resize : UInt64
+    scroll : UInt64
+    resume_draw : UInt64
+    suspend_draw : UInt64
   end
 
   ICompositionDrawingSurfaceInterop_GUID = "fd04e6e3-fe0c-4c3c-ab19-a07601a576ee"
@@ -31,16 +31,16 @@ lib LibWin32
   end
 
   struct ICompositionDrawingSurfaceInterop2VTbl
-    query_interface : Proc(ICompositionDrawingSurfaceInterop2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICompositionDrawingSurfaceInterop2*, UInt32)
-    release : Proc(ICompositionDrawingSurfaceInterop2*, UInt32)
-    begin_draw : Proc(ICompositionDrawingSurfaceInterop2*, RECT*, Guid*, Void**, POINT*, HRESULT)
-    end_draw : Proc(ICompositionDrawingSurfaceInterop2*, HRESULT)
-    resize : Proc(ICompositionDrawingSurfaceInterop2*, SIZE, HRESULT)
-    scroll : Proc(ICompositionDrawingSurfaceInterop2*, RECT*, RECT*, Int32, Int32, HRESULT)
-    resume_draw : Proc(ICompositionDrawingSurfaceInterop2*, HRESULT)
-    suspend_draw : Proc(ICompositionDrawingSurfaceInterop2*, HRESULT)
-    copy_surface : Proc(ICompositionDrawingSurfaceInterop2*, IUnknown, Int32, Int32, RECT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    resize : UInt64
+    scroll : UInt64
+    resume_draw : UInt64
+    suspend_draw : UInt64
+    copy_surface : UInt64
   end
 
   ICompositionDrawingSurfaceInterop2_GUID = "41e64aae-98c0-4239-8e95-a330dd6aa18b"
@@ -50,11 +50,11 @@ lib LibWin32
   end
 
   struct ICompositionGraphicsDeviceInteropVTbl
-    query_interface : Proc(ICompositionGraphicsDeviceInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICompositionGraphicsDeviceInterop*, UInt32)
-    release : Proc(ICompositionGraphicsDeviceInterop*, UInt32)
-    get_rendering_device : Proc(ICompositionGraphicsDeviceInterop*, IUnknown*, HRESULT)
-    set_rendering_device : Proc(ICompositionGraphicsDeviceInterop*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_rendering_device : UInt64
+    set_rendering_device : UInt64
   end
 
   ICompositionGraphicsDeviceInterop_GUID = "a116ff71-f8bf-4c8a-9c98-70779a32a9c8"
@@ -64,12 +64,12 @@ lib LibWin32
   end
 
   struct ICompositorInteropVTbl
-    query_interface : Proc(ICompositorInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICompositorInterop*, UInt32)
-    release : Proc(ICompositorInterop*, UInt32)
-    create_composition_surface_for_handle : Proc(ICompositorInterop*, LibC::HANDLE, ICompositionSurface*, HRESULT)
-    create_composition_surface_for_swap_chain : Proc(ICompositorInterop*, IUnknown, ICompositionSurface*, HRESULT)
-    create_graphics_device : Proc(ICompositorInterop*, IUnknown, CompositionGraphicsDevice*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_composition_surface_for_handle : UInt64
+    create_composition_surface_for_swap_chain : UInt64
+    create_graphics_device : UInt64
   end
 
   ICompositorInterop_GUID = "25297d5c-3ad4-4c9c-b5cf-e36a38512330"
@@ -79,10 +79,10 @@ lib LibWin32
   end
 
   struct ISwapChainInteropVTbl
-    query_interface : Proc(ISwapChainInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISwapChainInterop*, UInt32)
-    release : Proc(ISwapChainInterop*, UInt32)
-    set_swap_chain : Proc(ISwapChainInterop*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_swap_chain : UInt64
   end
 
   ISwapChainInterop_GUID = "26f496a0-7f38-45fb-88f7-faaabe67dd59"
@@ -92,10 +92,10 @@ lib LibWin32
   end
 
   struct IVisualInteractionSourceInteropVTbl
-    query_interface : Proc(IVisualInteractionSourceInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVisualInteractionSourceInterop*, UInt32)
-    release : Proc(IVisualInteractionSourceInterop*, UInt32)
-    try_redirect_for_manipulation : Proc(IVisualInteractionSourceInterop*, POINTER_INFO*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    try_redirect_for_manipulation : UInt64
   end
 
   IVisualInteractionSourceInterop_GUID = "11f62cd1-2f9d-42d3-b05f-d6790d9e9f8e"
@@ -105,13 +105,13 @@ lib LibWin32
   end
 
   struct ICompositionCapabilitiesInteropFactoryVTbl
-    query_interface : Proc(ICompositionCapabilitiesInteropFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICompositionCapabilitiesInteropFactory*, UInt32)
-    release : Proc(ICompositionCapabilitiesInteropFactory*, UInt32)
-    get_iids : Proc(ICompositionCapabilitiesInteropFactory*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(ICompositionCapabilitiesInteropFactory*, HSTRING*, HRESULT)
-    get_trust_level : Proc(ICompositionCapabilitiesInteropFactory*, TrustLevel*, HRESULT)
-    get_for_window : Proc(ICompositionCapabilitiesInteropFactory*, LibC::HANDLE, CompositionCapabilities*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    get_for_window : UInt64
   end
 
   ICompositionCapabilitiesInteropFactory_GUID = "2c9db356-e70d-4642-8298-bc4aa5b4865c"
@@ -121,11 +121,11 @@ lib LibWin32
   end
 
   struct ICompositorDesktopInteropVTbl
-    query_interface : Proc(ICompositorDesktopInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICompositorDesktopInterop*, UInt32)
-    release : Proc(ICompositorDesktopInterop*, UInt32)
-    create_desktop_window_target : Proc(ICompositorDesktopInterop*, LibC::HANDLE, LibC::BOOL, DesktopWindowTarget*, HRESULT)
-    ensure_on_thread : Proc(ICompositorDesktopInterop*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_desktop_window_target : UInt64
+    ensure_on_thread : UInt64
   end
 
   ICompositorDesktopInterop_GUID = "29e691fa-4567-4dca-b319-d0f207eb6807"
@@ -135,10 +135,10 @@ lib LibWin32
   end
 
   struct IDesktopWindowTargetInteropVTbl
-    query_interface : Proc(IDesktopWindowTargetInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDesktopWindowTargetInterop*, UInt32)
-    release : Proc(IDesktopWindowTargetInterop*, UInt32)
-    get_hwnd : Proc(IDesktopWindowTargetInterop*, HANDLE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_hwnd : UInt64
   end
 
   IDesktopWindowTargetInterop_GUID = "35dbf59e-e3f9-45b0-81e7-fe75f4145dc9"
@@ -147,4 +147,184 @@ lib LibWin32
     lpVtbl : IDesktopWindowTargetInteropVTbl*
   end
 
+end
+struct LibWin32::ICompositionDrawingSurfaceInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_draw(updaterect : RECT*, iid : Guid*, updateobject : Void**, updateoffset : POINT*) : HRESULT
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(RECT*, Guid*, Void**, POINT*, HRESULT)).call(updaterect, iid, updateobject, updateoffset)
+  end
+  def end_draw : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def resize(sizepixels : SIZE) : HRESULT
+    @lpVtbl.value.resize.unsafe_as(Proc(SIZE, HRESULT)).call(sizepixels)
+  end
+  def scroll(scrollrect : RECT*, cliprect : RECT*, offsetx : Int32, offsety : Int32) : HRESULT
+    @lpVtbl.value.scroll.unsafe_as(Proc(RECT*, RECT*, Int32, Int32, HRESULT)).call(scrollrect, cliprect, offsetx, offsety)
+  end
+  def resume_draw : HRESULT
+    @lpVtbl.value.resume_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def suspend_draw : HRESULT
+    @lpVtbl.value.suspend_draw.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ICompositionDrawingSurfaceInterop2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_draw(updaterect : RECT*, iid : Guid*, updateobject : Void**, updateoffset : POINT*) : HRESULT
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(RECT*, Guid*, Void**, POINT*, HRESULT)).call(updaterect, iid, updateobject, updateoffset)
+  end
+  def end_draw : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def resize(sizepixels : SIZE) : HRESULT
+    @lpVtbl.value.resize.unsafe_as(Proc(SIZE, HRESULT)).call(sizepixels)
+  end
+  def scroll(scrollrect : RECT*, cliprect : RECT*, offsetx : Int32, offsety : Int32) : HRESULT
+    @lpVtbl.value.scroll.unsafe_as(Proc(RECT*, RECT*, Int32, Int32, HRESULT)).call(scrollrect, cliprect, offsetx, offsety)
+  end
+  def resume_draw : HRESULT
+    @lpVtbl.value.resume_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def suspend_draw : HRESULT
+    @lpVtbl.value.suspend_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def copy_surface(destinationresource : IUnknown, destinationoffsetx : Int32, destinationoffsety : Int32, sourcerectangle : RECT*) : HRESULT
+    @lpVtbl.value.copy_surface.unsafe_as(Proc(IUnknown, Int32, Int32, RECT*, HRESULT)).call(destinationresource, destinationoffsetx, destinationoffsety, sourcerectangle)
+  end
+end
+struct LibWin32::ICompositionGraphicsDeviceInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_rendering_device(value : IUnknown*) : HRESULT
+    @lpVtbl.value.get_rendering_device.unsafe_as(Proc(IUnknown*, HRESULT)).call(value)
+  end
+  def set_rendering_device(value : IUnknown) : HRESULT
+    @lpVtbl.value.set_rendering_device.unsafe_as(Proc(IUnknown, HRESULT)).call(value)
+  end
+end
+struct LibWin32::ICompositorInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_composition_surface_for_handle(swapchain : LibC::HANDLE, result : ICompositionSurface*) : HRESULT
+    @lpVtbl.value.create_composition_surface_for_handle.unsafe_as(Proc(LibC::HANDLE, ICompositionSurface*, HRESULT)).call(swapchain, result)
+  end
+  def create_composition_surface_for_swap_chain(swapchain : IUnknown, result : ICompositionSurface*) : HRESULT
+    @lpVtbl.value.create_composition_surface_for_swap_chain.unsafe_as(Proc(IUnknown, ICompositionSurface*, HRESULT)).call(swapchain, result)
+  end
+  def create_graphics_device(renderingdevice : IUnknown, result : CompositionGraphicsDevice*) : HRESULT
+    @lpVtbl.value.create_graphics_device.unsafe_as(Proc(IUnknown, CompositionGraphicsDevice*, HRESULT)).call(renderingdevice, result)
+  end
+end
+struct LibWin32::ISwapChainInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_swap_chain(swapchain : IUnknown) : HRESULT
+    @lpVtbl.value.set_swap_chain.unsafe_as(Proc(IUnknown, HRESULT)).call(swapchain)
+  end
+end
+struct LibWin32::IVisualInteractionSourceInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def try_redirect_for_manipulation(pointerinfo : POINTER_INFO*) : HRESULT
+    @lpVtbl.value.try_redirect_for_manipulation.unsafe_as(Proc(POINTER_INFO*, HRESULT)).call(pointerinfo)
+  end
+end
+struct LibWin32::ICompositionCapabilitiesInteropFactory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def get_for_window(hwnd : LibC::HANDLE, result : CompositionCapabilities*) : HRESULT
+    @lpVtbl.value.get_for_window.unsafe_as(Proc(LibC::HANDLE, CompositionCapabilities*, HRESULT)).call(hwnd, result)
+  end
+end
+struct LibWin32::ICompositorDesktopInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_desktop_window_target(hwndtarget : LibC::HANDLE, istopmost : LibC::BOOL, result : DesktopWindowTarget*) : HRESULT
+    @lpVtbl.value.create_desktop_window_target.unsafe_as(Proc(LibC::HANDLE, LibC::BOOL, DesktopWindowTarget*, HRESULT)).call(hwndtarget, istopmost, result)
+  end
+  def ensure_on_thread(threadid : UInt32) : HRESULT
+    @lpVtbl.value.ensure_on_thread.unsafe_as(Proc(UInt32, HRESULT)).call(threadid)
+  end
+end
+struct LibWin32::IDesktopWindowTargetInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_hwnd(value : HANDLE*) : HRESULT
+    @lpVtbl.value.get_hwnd.unsafe_as(Proc(HANDLE*, HRESULT)).call(value)
+  end
 end

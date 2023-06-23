@@ -1864,12 +1864,12 @@ lib LibWin32
 
 
   struct IQueryFormVTbl
-    query_interface : Proc(IQueryForm*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IQueryForm*, UInt32)
-    release : Proc(IQueryForm*, UInt32)
-    initialize : Proc(IQueryForm*, HKEY, HRESULT)
-    add_forms : Proc(IQueryForm*, LPCQADDFORMSPROC, LPARAM, HRESULT)
-    add_pages : Proc(IQueryForm*, LPCQADDPAGESPROC, LPARAM, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    add_forms : UInt64
+    add_pages : UInt64
   end
 
   IQueryForm_GUID = "8cfcee30-39bd-11d0-b8d1-00a024ab2dbb"
@@ -1879,17 +1879,17 @@ lib LibWin32
   end
 
   struct IPersistQueryVTbl
-    query_interface : Proc(IPersistQuery*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPersistQuery*, UInt32)
-    release : Proc(IPersistQuery*, UInt32)
-    get_class_id : Proc(IPersistQuery*, Guid*, HRESULT)
-    write_string : Proc(IPersistQuery*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    read_string : Proc(IPersistQuery*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, Int32, HRESULT)
-    write_int : Proc(IPersistQuery*, LibC::LPWSTR, LibC::LPWSTR, Int32, HRESULT)
-    read_int : Proc(IPersistQuery*, LibC::LPWSTR, LibC::LPWSTR, Int32*, HRESULT)
-    write_struct : Proc(IPersistQuery*, LibC::LPWSTR, LibC::LPWSTR, Void*, UInt32, HRESULT)
-    read_struct : Proc(IPersistQuery*, LibC::LPWSTR, LibC::LPWSTR, Void*, UInt32, HRESULT)
-    clear : Proc(IPersistQuery*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_class_id : UInt64
+    write_string : UInt64
+    read_string : UInt64
+    write_int : UInt64
+    read_int : UInt64
+    write_struct : UInt64
+    read_struct : UInt64
+    clear : UInt64
   end
 
   IPersistQuery_GUID = "1a3114b8-a62e-11d0-a6c5-00a0c906af45"
@@ -1899,10 +1899,10 @@ lib LibWin32
   end
 
   struct ICommonQueryVTbl
-    query_interface : Proc(ICommonQuery*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICommonQuery*, UInt32)
-    release : Proc(ICommonQuery*, UInt32)
-    open_query_window : Proc(ICommonQuery*, LibC::HANDLE, OPENQUERYWINDOW*, IDataObject*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    open_query_window : UInt64
   end
 
   ICommonQuery_GUID = "ab50dec0-6f1d-11d0-a1c4-00aa00c16e65"
@@ -1912,26 +1912,26 @@ lib LibWin32
   end
 
   struct IADsVTbl
-    query_interface : Proc(IADs*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADs*, UInt32)
-    release : Proc(IADs*, UInt32)
-    get_type_info_count : Proc(IADs*, UInt32*, HRESULT)
-    get_type_info : Proc(IADs*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADs*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADs*, UInt8**, HRESULT)
-    get_class : Proc(IADs*, UInt8**, HRESULT)
-    get_guid : Proc(IADs*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADs*, UInt8**, HRESULT)
-    get_parent : Proc(IADs*, UInt8**, HRESULT)
-    get_schema : Proc(IADs*, UInt8**, HRESULT)
-    get_info : Proc(IADs*, HRESULT)
-    set_info : Proc(IADs*, HRESULT)
-    get : Proc(IADs*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADs*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADs*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADs*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADs*, VARIANT, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
   end
 
   IADs_GUID = "fd8256d0-fd15-11ce-abc4-02608c9e7553"
@@ -1941,24 +1941,24 @@ lib LibWin32
   end
 
   struct IADsContainerVTbl
-    query_interface : Proc(IADsContainer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsContainer*, UInt32)
-    release : Proc(IADsContainer*, UInt32)
-    get_type_info_count : Proc(IADsContainer*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsContainer*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsContainer*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsContainer*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IADsContainer*, Int32*, HRESULT)
-    get__new_enum : Proc(IADsContainer*, IUnknown*, HRESULT)
-    get_filter : Proc(IADsContainer*, VARIANT*, HRESULT)
-    put_filter : Proc(IADsContainer*, VARIANT, HRESULT)
-    get_hints : Proc(IADsContainer*, VARIANT*, HRESULT)
-    put_hints : Proc(IADsContainer*, VARIANT, HRESULT)
-    get_object : Proc(IADsContainer*, UInt8*, UInt8*, IDispatch*, HRESULT)
-    create : Proc(IADsContainer*, UInt8*, UInt8*, IDispatch*, HRESULT)
-    delete : Proc(IADsContainer*, UInt8*, UInt8*, HRESULT)
-    copy_here : Proc(IADsContainer*, UInt8*, UInt8*, IDispatch*, HRESULT)
-    move_here : Proc(IADsContainer*, UInt8*, UInt8*, IDispatch*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    get__new_enum : UInt64
+    get_filter : UInt64
+    put_filter : UInt64
+    get_hints : UInt64
+    put_hints : UInt64
+    get_object : UInt64
+    create : UInt64
+    delete : UInt64
+    copy_here : UInt64
+    move_here : UInt64
   end
 
   IADsContainer_GUID = "001677d0-fd16-11ce-abc4-02608c9e7553"
@@ -1968,17 +1968,17 @@ lib LibWin32
   end
 
   struct IADsCollectionVTbl
-    query_interface : Proc(IADsCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsCollection*, UInt32)
-    release : Proc(IADsCollection*, UInt32)
-    get_type_info_count : Proc(IADsCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IADsCollection*, IUnknown*, HRESULT)
-    add : Proc(IADsCollection*, UInt8*, VARIANT, HRESULT)
-    remove : Proc(IADsCollection*, UInt8*, HRESULT)
-    get_object : Proc(IADsCollection*, UInt8*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    add : UInt64
+    remove : UInt64
+    get_object : UInt64
   end
 
   IADsCollection_GUID = "72b945e0-253b-11cf-a988-00aa006bc149"
@@ -1988,17 +1988,17 @@ lib LibWin32
   end
 
   struct IADsMembersVTbl
-    query_interface : Proc(IADsMembers*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsMembers*, UInt32)
-    release : Proc(IADsMembers*, UInt32)
-    get_type_info_count : Proc(IADsMembers*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsMembers*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsMembers*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsMembers*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IADsMembers*, Int32*, HRESULT)
-    get__new_enum : Proc(IADsMembers*, IUnknown*, HRESULT)
-    get_filter : Proc(IADsMembers*, VARIANT*, HRESULT)
-    put_filter : Proc(IADsMembers*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    get__new_enum : UInt64
+    get_filter : UInt64
+    put_filter : UInt64
   end
 
   IADsMembers_GUID = "451a0030-72ec-11cf-b03b-00aa006e0975"
@@ -2008,22 +2008,22 @@ lib LibWin32
   end
 
   struct IADsPropertyListVTbl
-    query_interface : Proc(IADsPropertyList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsPropertyList*, UInt32)
-    release : Proc(IADsPropertyList*, UInt32)
-    get_type_info_count : Proc(IADsPropertyList*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsPropertyList*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsPropertyList*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsPropertyList*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_property_count : Proc(IADsPropertyList*, Int32*, HRESULT)
-    next : Proc(IADsPropertyList*, VARIANT*, HRESULT)
-    skip : Proc(IADsPropertyList*, Int32, HRESULT)
-    reset : Proc(IADsPropertyList*, HRESULT)
-    item : Proc(IADsPropertyList*, VARIANT, VARIANT*, HRESULT)
-    get_property_item : Proc(IADsPropertyList*, UInt8*, Int32, VARIANT*, HRESULT)
-    put_property_item : Proc(IADsPropertyList*, VARIANT, HRESULT)
-    reset_property_item : Proc(IADsPropertyList*, VARIANT, HRESULT)
-    purge_property_list : Proc(IADsPropertyList*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_property_count : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    item : UInt64
+    get_property_item : UInt64
+    put_property_item : UInt64
+    reset_property_item : UInt64
+    purge_property_list : UInt64
   end
 
   IADsPropertyList_GUID = "c6f602b6-8f69-11d0-8528-00c04fd8d503"
@@ -2033,22 +2033,22 @@ lib LibWin32
   end
 
   struct IADsPropertyEntryVTbl
-    query_interface : Proc(IADsPropertyEntry*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsPropertyEntry*, UInt32)
-    release : Proc(IADsPropertyEntry*, UInt32)
-    get_type_info_count : Proc(IADsPropertyEntry*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsPropertyEntry*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsPropertyEntry*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsPropertyEntry*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    clear : Proc(IADsPropertyEntry*, HRESULT)
-    get_name : Proc(IADsPropertyEntry*, UInt8**, HRESULT)
-    put_name : Proc(IADsPropertyEntry*, UInt8*, HRESULT)
-    get_a_ds_type : Proc(IADsPropertyEntry*, Int32*, HRESULT)
-    put_a_ds_type : Proc(IADsPropertyEntry*, Int32, HRESULT)
-    get_control_code : Proc(IADsPropertyEntry*, Int32*, HRESULT)
-    put_control_code : Proc(IADsPropertyEntry*, Int32, HRESULT)
-    get_values : Proc(IADsPropertyEntry*, VARIANT*, HRESULT)
-    put_values : Proc(IADsPropertyEntry*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    clear : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_a_ds_type : UInt64
+    put_a_ds_type : UInt64
+    get_control_code : UInt64
+    put_control_code : UInt64
+    get_values : UInt64
+    put_values : UInt64
   end
 
   IADsPropertyEntry_GUID = "05792c8e-941f-11d0-8529-00c04fd8d503"
@@ -2058,38 +2058,38 @@ lib LibWin32
   end
 
   struct IADsPropertyValueVTbl
-    query_interface : Proc(IADsPropertyValue*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsPropertyValue*, UInt32)
-    release : Proc(IADsPropertyValue*, UInt32)
-    get_type_info_count : Proc(IADsPropertyValue*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsPropertyValue*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsPropertyValue*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsPropertyValue*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    clear : Proc(IADsPropertyValue*, HRESULT)
-    get_a_ds_type : Proc(IADsPropertyValue*, Int32*, HRESULT)
-    put_a_ds_type : Proc(IADsPropertyValue*, Int32, HRESULT)
-    get_dn_string : Proc(IADsPropertyValue*, UInt8**, HRESULT)
-    put_dn_string : Proc(IADsPropertyValue*, UInt8*, HRESULT)
-    get_case_exact_string : Proc(IADsPropertyValue*, UInt8**, HRESULT)
-    put_case_exact_string : Proc(IADsPropertyValue*, UInt8*, HRESULT)
-    get_case_ignore_string : Proc(IADsPropertyValue*, UInt8**, HRESULT)
-    put_case_ignore_string : Proc(IADsPropertyValue*, UInt8*, HRESULT)
-    get_printable_string : Proc(IADsPropertyValue*, UInt8**, HRESULT)
-    put_printable_string : Proc(IADsPropertyValue*, UInt8*, HRESULT)
-    get_numeric_string : Proc(IADsPropertyValue*, UInt8**, HRESULT)
-    put_numeric_string : Proc(IADsPropertyValue*, UInt8*, HRESULT)
-    get_boolean : Proc(IADsPropertyValue*, Int32*, HRESULT)
-    put_boolean : Proc(IADsPropertyValue*, Int32, HRESULT)
-    get_integer : Proc(IADsPropertyValue*, Int32*, HRESULT)
-    put_integer : Proc(IADsPropertyValue*, Int32, HRESULT)
-    get_octet_string : Proc(IADsPropertyValue*, VARIANT*, HRESULT)
-    put_octet_string : Proc(IADsPropertyValue*, VARIANT, HRESULT)
-    get_security_descriptor : Proc(IADsPropertyValue*, IDispatch*, HRESULT)
-    put_security_descriptor : Proc(IADsPropertyValue*, IDispatch, HRESULT)
-    get_large_integer : Proc(IADsPropertyValue*, IDispatch*, HRESULT)
-    put_large_integer : Proc(IADsPropertyValue*, IDispatch, HRESULT)
-    get_utc_time : Proc(IADsPropertyValue*, Float64*, HRESULT)
-    put_utc_time : Proc(IADsPropertyValue*, Float64, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    clear : UInt64
+    get_a_ds_type : UInt64
+    put_a_ds_type : UInt64
+    get_dn_string : UInt64
+    put_dn_string : UInt64
+    get_case_exact_string : UInt64
+    put_case_exact_string : UInt64
+    get_case_ignore_string : UInt64
+    put_case_ignore_string : UInt64
+    get_printable_string : UInt64
+    put_printable_string : UInt64
+    get_numeric_string : UInt64
+    put_numeric_string : UInt64
+    get_boolean : UInt64
+    put_boolean : UInt64
+    get_integer : UInt64
+    put_integer : UInt64
+    get_octet_string : UInt64
+    put_octet_string : UInt64
+    get_security_descriptor : UInt64
+    put_security_descriptor : UInt64
+    get_large_integer : UInt64
+    put_large_integer : UInt64
+    get_utc_time : UInt64
+    put_utc_time : UInt64
   end
 
   IADsPropertyValue_GUID = "79fa9ad0-a97c-11d0-8534-00c04fd8d503"
@@ -2099,15 +2099,15 @@ lib LibWin32
   end
 
   struct IADsPropertyValue2VTbl
-    query_interface : Proc(IADsPropertyValue2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsPropertyValue2*, UInt32)
-    release : Proc(IADsPropertyValue2*, UInt32)
-    get_type_info_count : Proc(IADsPropertyValue2*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsPropertyValue2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsPropertyValue2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsPropertyValue2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_object_property : Proc(IADsPropertyValue2*, Int32*, VARIANT*, HRESULT)
-    put_object_property : Proc(IADsPropertyValue2*, Int32, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_object_property : UInt64
+    put_object_property : UInt64
   end
 
   IADsPropertyValue2_GUID = "306e831c-5bc7-11d1-a3b8-00c04fb950dc"
@@ -2117,14 +2117,14 @@ lib LibWin32
   end
 
   struct IPrivateDispatchVTbl
-    query_interface : Proc(IPrivateDispatch*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPrivateDispatch*, UInt32)
-    release : Proc(IPrivateDispatch*, UInt32)
-    adsi_initialize_dispatch_manager : Proc(IPrivateDispatch*, Int32, HRESULT)
-    adsi_get_type_info_count : Proc(IPrivateDispatch*, UInt32*, HRESULT)
-    adsi_get_type_info : Proc(IPrivateDispatch*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    adsi_get_i_ds_of_names : Proc(IPrivateDispatch*, Guid*, UInt16**, UInt32, UInt32, Int32*, HRESULT)
-    adsi_invoke : Proc(IPrivateDispatch*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    adsi_initialize_dispatch_manager : UInt64
+    adsi_get_type_info_count : UInt64
+    adsi_get_type_info : UInt64
+    adsi_get_i_ds_of_names : UInt64
+    adsi_invoke : UInt64
   end
 
   IPrivateDispatch_GUID = "86ab4bbe-65f6-11d1-8c13-00c04fd8d503"
@@ -2134,11 +2134,11 @@ lib LibWin32
   end
 
   struct IPrivateUnknownVTbl
-    query_interface : Proc(IPrivateUnknown*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPrivateUnknown*, UInt32)
-    release : Proc(IPrivateUnknown*, UInt32)
-    adsi_initialize_object : Proc(IPrivateUnknown*, UInt8*, UInt8*, Int32, HRESULT)
-    adsi_release_object : Proc(IPrivateUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    adsi_initialize_object : UInt64
+    adsi_release_object : UInt64
   end
 
   IPrivateUnknown_GUID = "89126bab-6ead-11d1-8c18-00c04fd8d503"
@@ -2148,12 +2148,12 @@ lib LibWin32
   end
 
   struct IADsExtensionVTbl
-    query_interface : Proc(IADsExtension*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsExtension*, UInt32)
-    release : Proc(IADsExtension*, UInt32)
-    operate : Proc(IADsExtension*, UInt32, VARIANT, VARIANT, VARIANT, HRESULT)
-    private_get_i_ds_of_names : Proc(IADsExtension*, Guid*, UInt16**, UInt32, UInt32, Int32*, HRESULT)
-    private_invoke : Proc(IADsExtension*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    operate : UInt64
+    private_get_i_ds_of_names : UInt64
+    private_invoke : UInt64
   end
 
   IADsExtension_GUID = "3d35553c-d2b0-11d1-b17b-0000f87593a0"
@@ -2163,14 +2163,14 @@ lib LibWin32
   end
 
   struct IADsDeleteOpsVTbl
-    query_interface : Proc(IADsDeleteOps*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsDeleteOps*, UInt32)
-    release : Proc(IADsDeleteOps*, UInt32)
-    get_type_info_count : Proc(IADsDeleteOps*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsDeleteOps*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsDeleteOps*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsDeleteOps*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    delete_object : Proc(IADsDeleteOps*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    delete_object : UInt64
   end
 
   IADsDeleteOps_GUID = "b2bd0902-8878-11d1-8c21-00c04fd8d503"
@@ -2180,28 +2180,28 @@ lib LibWin32
   end
 
   struct IADsNamespacesVTbl
-    query_interface : Proc(IADsNamespaces*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsNamespaces*, UInt32)
-    release : Proc(IADsNamespaces*, UInt32)
-    get_type_info_count : Proc(IADsNamespaces*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsNamespaces*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsNamespaces*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsNamespaces*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsNamespaces*, UInt8**, HRESULT)
-    get_class : Proc(IADsNamespaces*, UInt8**, HRESULT)
-    get_guid : Proc(IADsNamespaces*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsNamespaces*, UInt8**, HRESULT)
-    get_parent : Proc(IADsNamespaces*, UInt8**, HRESULT)
-    get_schema : Proc(IADsNamespaces*, UInt8**, HRESULT)
-    get_info : Proc(IADsNamespaces*, HRESULT)
-    set_info : Proc(IADsNamespaces*, HRESULT)
-    get : Proc(IADsNamespaces*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsNamespaces*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsNamespaces*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsNamespaces*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsNamespaces*, VARIANT, Int32, HRESULT)
-    get_default_container : Proc(IADsNamespaces*, UInt8**, HRESULT)
-    put_default_container : Proc(IADsNamespaces*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_default_container : UInt64
+    put_default_container : UInt64
   end
 
   IADsNamespaces_GUID = "28b96ba0-b330-11cf-a9ad-00aa006bc149"
@@ -2211,56 +2211,56 @@ lib LibWin32
   end
 
   struct IADsClassVTbl
-    query_interface : Proc(IADsClass*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsClass*, UInt32)
-    release : Proc(IADsClass*, UInt32)
-    get_type_info_count : Proc(IADsClass*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsClass*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsClass*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsClass*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsClass*, UInt8**, HRESULT)
-    get_class : Proc(IADsClass*, UInt8**, HRESULT)
-    get_guid : Proc(IADsClass*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsClass*, UInt8**, HRESULT)
-    get_parent : Proc(IADsClass*, UInt8**, HRESULT)
-    get_schema : Proc(IADsClass*, UInt8**, HRESULT)
-    get_info : Proc(IADsClass*, HRESULT)
-    set_info : Proc(IADsClass*, HRESULT)
-    get : Proc(IADsClass*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsClass*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsClass*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsClass*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsClass*, VARIANT, Int32, HRESULT)
-    get_primary_interface : Proc(IADsClass*, UInt8**, HRESULT)
-    get_clsid : Proc(IADsClass*, UInt8**, HRESULT)
-    put_clsid : Proc(IADsClass*, UInt8*, HRESULT)
-    get_oid : Proc(IADsClass*, UInt8**, HRESULT)
-    put_oid : Proc(IADsClass*, UInt8*, HRESULT)
-    get_abstract : Proc(IADsClass*, Int16*, HRESULT)
-    put_abstract : Proc(IADsClass*, Int16, HRESULT)
-    get_auxiliary : Proc(IADsClass*, Int16*, HRESULT)
-    put_auxiliary : Proc(IADsClass*, Int16, HRESULT)
-    get_mandatory_properties : Proc(IADsClass*, VARIANT*, HRESULT)
-    put_mandatory_properties : Proc(IADsClass*, VARIANT, HRESULT)
-    get_optional_properties : Proc(IADsClass*, VARIANT*, HRESULT)
-    put_optional_properties : Proc(IADsClass*, VARIANT, HRESULT)
-    get_naming_properties : Proc(IADsClass*, VARIANT*, HRESULT)
-    put_naming_properties : Proc(IADsClass*, VARIANT, HRESULT)
-    get_derived_from : Proc(IADsClass*, VARIANT*, HRESULT)
-    put_derived_from : Proc(IADsClass*, VARIANT, HRESULT)
-    get_aux_derived_from : Proc(IADsClass*, VARIANT*, HRESULT)
-    put_aux_derived_from : Proc(IADsClass*, VARIANT, HRESULT)
-    get_possible_superiors : Proc(IADsClass*, VARIANT*, HRESULT)
-    put_possible_superiors : Proc(IADsClass*, VARIANT, HRESULT)
-    get_containment : Proc(IADsClass*, VARIANT*, HRESULT)
-    put_containment : Proc(IADsClass*, VARIANT, HRESULT)
-    get_container : Proc(IADsClass*, Int16*, HRESULT)
-    put_container : Proc(IADsClass*, Int16, HRESULT)
-    get_help_file_name : Proc(IADsClass*, UInt8**, HRESULT)
-    put_help_file_name : Proc(IADsClass*, UInt8*, HRESULT)
-    get_help_file_context : Proc(IADsClass*, Int32*, HRESULT)
-    put_help_file_context : Proc(IADsClass*, Int32, HRESULT)
-    qualifiers : Proc(IADsClass*, IADsCollection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_primary_interface : UInt64
+    get_clsid : UInt64
+    put_clsid : UInt64
+    get_oid : UInt64
+    put_oid : UInt64
+    get_abstract : UInt64
+    put_abstract : UInt64
+    get_auxiliary : UInt64
+    put_auxiliary : UInt64
+    get_mandatory_properties : UInt64
+    put_mandatory_properties : UInt64
+    get_optional_properties : UInt64
+    put_optional_properties : UInt64
+    get_naming_properties : UInt64
+    put_naming_properties : UInt64
+    get_derived_from : UInt64
+    put_derived_from : UInt64
+    get_aux_derived_from : UInt64
+    put_aux_derived_from : UInt64
+    get_possible_superiors : UInt64
+    put_possible_superiors : UInt64
+    get_containment : UInt64
+    put_containment : UInt64
+    get_container : UInt64
+    put_container : UInt64
+    get_help_file_name : UInt64
+    put_help_file_name : UInt64
+    get_help_file_context : UInt64
+    put_help_file_context : UInt64
+    qualifiers : UInt64
   end
 
   IADsClass_GUID = "c8f93dd0-4ae0-11cf-9e73-00aa004a5691"
@@ -2270,37 +2270,37 @@ lib LibWin32
   end
 
   struct IADsPropertyVTbl
-    query_interface : Proc(IADsProperty*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsProperty*, UInt32)
-    release : Proc(IADsProperty*, UInt32)
-    get_type_info_count : Proc(IADsProperty*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsProperty*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsProperty*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsProperty*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsProperty*, UInt8**, HRESULT)
-    get_class : Proc(IADsProperty*, UInt8**, HRESULT)
-    get_guid : Proc(IADsProperty*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsProperty*, UInt8**, HRESULT)
-    get_parent : Proc(IADsProperty*, UInt8**, HRESULT)
-    get_schema : Proc(IADsProperty*, UInt8**, HRESULT)
-    get_info : Proc(IADsProperty*, HRESULT)
-    set_info : Proc(IADsProperty*, HRESULT)
-    get : Proc(IADsProperty*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsProperty*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsProperty*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsProperty*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsProperty*, VARIANT, Int32, HRESULT)
-    get_oid : Proc(IADsProperty*, UInt8**, HRESULT)
-    put_oid : Proc(IADsProperty*, UInt8*, HRESULT)
-    get_syntax : Proc(IADsProperty*, UInt8**, HRESULT)
-    put_syntax : Proc(IADsProperty*, UInt8*, HRESULT)
-    get_max_range : Proc(IADsProperty*, Int32*, HRESULT)
-    put_max_range : Proc(IADsProperty*, Int32, HRESULT)
-    get_min_range : Proc(IADsProperty*, Int32*, HRESULT)
-    put_min_range : Proc(IADsProperty*, Int32, HRESULT)
-    get_multi_valued : Proc(IADsProperty*, Int16*, HRESULT)
-    put_multi_valued : Proc(IADsProperty*, Int16, HRESULT)
-    qualifiers : Proc(IADsProperty*, IADsCollection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_oid : UInt64
+    put_oid : UInt64
+    get_syntax : UInt64
+    put_syntax : UInt64
+    get_max_range : UInt64
+    put_max_range : UInt64
+    get_min_range : UInt64
+    put_min_range : UInt64
+    get_multi_valued : UInt64
+    put_multi_valued : UInt64
+    qualifiers : UInt64
   end
 
   IADsProperty_GUID = "c8f93dd3-4ae0-11cf-9e73-00aa004a5691"
@@ -2310,28 +2310,28 @@ lib LibWin32
   end
 
   struct IADsSyntaxVTbl
-    query_interface : Proc(IADsSyntax*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsSyntax*, UInt32)
-    release : Proc(IADsSyntax*, UInt32)
-    get_type_info_count : Proc(IADsSyntax*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsSyntax*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsSyntax*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsSyntax*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsSyntax*, UInt8**, HRESULT)
-    get_class : Proc(IADsSyntax*, UInt8**, HRESULT)
-    get_guid : Proc(IADsSyntax*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsSyntax*, UInt8**, HRESULT)
-    get_parent : Proc(IADsSyntax*, UInt8**, HRESULT)
-    get_schema : Proc(IADsSyntax*, UInt8**, HRESULT)
-    get_info : Proc(IADsSyntax*, HRESULT)
-    set_info : Proc(IADsSyntax*, HRESULT)
-    get : Proc(IADsSyntax*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsSyntax*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsSyntax*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsSyntax*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsSyntax*, VARIANT, Int32, HRESULT)
-    get_ole_auto_data_type : Proc(IADsSyntax*, Int32*, HRESULT)
-    put_ole_auto_data_type : Proc(IADsSyntax*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_ole_auto_data_type : UInt64
+    put_ole_auto_data_type : UInt64
   end
 
   IADsSyntax_GUID = "c8f93dd2-4ae0-11cf-9e73-00aa004a5691"
@@ -2341,34 +2341,34 @@ lib LibWin32
   end
 
   struct IADsLocalityVTbl
-    query_interface : Proc(IADsLocality*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsLocality*, UInt32)
-    release : Proc(IADsLocality*, UInt32)
-    get_type_info_count : Proc(IADsLocality*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsLocality*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsLocality*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsLocality*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsLocality*, UInt8**, HRESULT)
-    get_class : Proc(IADsLocality*, UInt8**, HRESULT)
-    get_guid : Proc(IADsLocality*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsLocality*, UInt8**, HRESULT)
-    get_parent : Proc(IADsLocality*, UInt8**, HRESULT)
-    get_schema : Proc(IADsLocality*, UInt8**, HRESULT)
-    get_info : Proc(IADsLocality*, HRESULT)
-    set_info : Proc(IADsLocality*, HRESULT)
-    get : Proc(IADsLocality*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsLocality*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsLocality*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsLocality*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsLocality*, VARIANT, Int32, HRESULT)
-    get_description : Proc(IADsLocality*, UInt8**, HRESULT)
-    put_description : Proc(IADsLocality*, UInt8*, HRESULT)
-    get_locality_name : Proc(IADsLocality*, UInt8**, HRESULT)
-    put_locality_name : Proc(IADsLocality*, UInt8*, HRESULT)
-    get_postal_address : Proc(IADsLocality*, UInt8**, HRESULT)
-    put_postal_address : Proc(IADsLocality*, UInt8*, HRESULT)
-    get_see_also : Proc(IADsLocality*, VARIANT*, HRESULT)
-    put_see_also : Proc(IADsLocality*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_locality_name : UInt64
+    put_locality_name : UInt64
+    get_postal_address : UInt64
+    put_postal_address : UInt64
+    get_see_also : UInt64
+    put_see_also : UInt64
   end
 
   IADsLocality_GUID = "a05e03a2-effe-11cf-8abc-00c04fd8d503"
@@ -2378,38 +2378,38 @@ lib LibWin32
   end
 
   struct IADsOVTbl
-    query_interface : Proc(IADsO*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsO*, UInt32)
-    release : Proc(IADsO*, UInt32)
-    get_type_info_count : Proc(IADsO*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsO*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsO*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsO*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsO*, UInt8**, HRESULT)
-    get_class : Proc(IADsO*, UInt8**, HRESULT)
-    get_guid : Proc(IADsO*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsO*, UInt8**, HRESULT)
-    get_parent : Proc(IADsO*, UInt8**, HRESULT)
-    get_schema : Proc(IADsO*, UInt8**, HRESULT)
-    get_info : Proc(IADsO*, HRESULT)
-    set_info : Proc(IADsO*, HRESULT)
-    get : Proc(IADsO*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsO*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsO*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsO*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsO*, VARIANT, Int32, HRESULT)
-    get_description : Proc(IADsO*, UInt8**, HRESULT)
-    put_description : Proc(IADsO*, UInt8*, HRESULT)
-    get_locality_name : Proc(IADsO*, UInt8**, HRESULT)
-    put_locality_name : Proc(IADsO*, UInt8*, HRESULT)
-    get_postal_address : Proc(IADsO*, UInt8**, HRESULT)
-    put_postal_address : Proc(IADsO*, UInt8*, HRESULT)
-    get_telephone_number : Proc(IADsO*, UInt8**, HRESULT)
-    put_telephone_number : Proc(IADsO*, UInt8*, HRESULT)
-    get_fax_number : Proc(IADsO*, UInt8**, HRESULT)
-    put_fax_number : Proc(IADsO*, UInt8*, HRESULT)
-    get_see_also : Proc(IADsO*, VARIANT*, HRESULT)
-    put_see_also : Proc(IADsO*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_locality_name : UInt64
+    put_locality_name : UInt64
+    get_postal_address : UInt64
+    put_postal_address : UInt64
+    get_telephone_number : UInt64
+    put_telephone_number : UInt64
+    get_fax_number : UInt64
+    put_fax_number : UInt64
+    get_see_also : UInt64
+    put_see_also : UInt64
   end
 
   IADsO_GUID = "a1cd2dc6-effe-11cf-8abc-00c04fd8d503"
@@ -2419,40 +2419,40 @@ lib LibWin32
   end
 
   struct IADsOUVTbl
-    query_interface : Proc(IADsOU*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsOU*, UInt32)
-    release : Proc(IADsOU*, UInt32)
-    get_type_info_count : Proc(IADsOU*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsOU*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsOU*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsOU*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsOU*, UInt8**, HRESULT)
-    get_class : Proc(IADsOU*, UInt8**, HRESULT)
-    get_guid : Proc(IADsOU*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsOU*, UInt8**, HRESULT)
-    get_parent : Proc(IADsOU*, UInt8**, HRESULT)
-    get_schema : Proc(IADsOU*, UInt8**, HRESULT)
-    get_info : Proc(IADsOU*, HRESULT)
-    set_info : Proc(IADsOU*, HRESULT)
-    get : Proc(IADsOU*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsOU*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsOU*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsOU*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsOU*, VARIANT, Int32, HRESULT)
-    get_description : Proc(IADsOU*, UInt8**, HRESULT)
-    put_description : Proc(IADsOU*, UInt8*, HRESULT)
-    get_locality_name : Proc(IADsOU*, UInt8**, HRESULT)
-    put_locality_name : Proc(IADsOU*, UInt8*, HRESULT)
-    get_postal_address : Proc(IADsOU*, UInt8**, HRESULT)
-    put_postal_address : Proc(IADsOU*, UInt8*, HRESULT)
-    get_telephone_number : Proc(IADsOU*, UInt8**, HRESULT)
-    put_telephone_number : Proc(IADsOU*, UInt8*, HRESULT)
-    get_fax_number : Proc(IADsOU*, UInt8**, HRESULT)
-    put_fax_number : Proc(IADsOU*, UInt8*, HRESULT)
-    get_see_also : Proc(IADsOU*, VARIANT*, HRESULT)
-    put_see_also : Proc(IADsOU*, VARIANT, HRESULT)
-    get_business_category : Proc(IADsOU*, UInt8**, HRESULT)
-    put_business_category : Proc(IADsOU*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_locality_name : UInt64
+    put_locality_name : UInt64
+    get_postal_address : UInt64
+    put_postal_address : UInt64
+    get_telephone_number : UInt64
+    put_telephone_number : UInt64
+    get_fax_number : UInt64
+    put_fax_number : UInt64
+    get_see_also : UInt64
+    put_see_also : UInt64
+    get_business_category : UInt64
+    put_business_category : UInt64
   end
 
   IADsOU_GUID = "a2f733b8-effe-11cf-8abc-00c04fd8d503"
@@ -2462,43 +2462,43 @@ lib LibWin32
   end
 
   struct IADsDomainVTbl
-    query_interface : Proc(IADsDomain*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsDomain*, UInt32)
-    release : Proc(IADsDomain*, UInt32)
-    get_type_info_count : Proc(IADsDomain*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsDomain*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsDomain*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsDomain*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsDomain*, UInt8**, HRESULT)
-    get_class : Proc(IADsDomain*, UInt8**, HRESULT)
-    get_guid : Proc(IADsDomain*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsDomain*, UInt8**, HRESULT)
-    get_parent : Proc(IADsDomain*, UInt8**, HRESULT)
-    get_schema : Proc(IADsDomain*, UInt8**, HRESULT)
-    get_info : Proc(IADsDomain*, HRESULT)
-    set_info : Proc(IADsDomain*, HRESULT)
-    get : Proc(IADsDomain*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsDomain*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsDomain*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsDomain*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsDomain*, VARIANT, Int32, HRESULT)
-    get_is_workgroup : Proc(IADsDomain*, Int16*, HRESULT)
-    get_min_password_length : Proc(IADsDomain*, Int32*, HRESULT)
-    put_min_password_length : Proc(IADsDomain*, Int32, HRESULT)
-    get_min_password_age : Proc(IADsDomain*, Int32*, HRESULT)
-    put_min_password_age : Proc(IADsDomain*, Int32, HRESULT)
-    get_max_password_age : Proc(IADsDomain*, Int32*, HRESULT)
-    put_max_password_age : Proc(IADsDomain*, Int32, HRESULT)
-    get_max_bad_passwords_allowed : Proc(IADsDomain*, Int32*, HRESULT)
-    put_max_bad_passwords_allowed : Proc(IADsDomain*, Int32, HRESULT)
-    get_password_history_length : Proc(IADsDomain*, Int32*, HRESULT)
-    put_password_history_length : Proc(IADsDomain*, Int32, HRESULT)
-    get_password_attributes : Proc(IADsDomain*, Int32*, HRESULT)
-    put_password_attributes : Proc(IADsDomain*, Int32, HRESULT)
-    get_auto_unlock_interval : Proc(IADsDomain*, Int32*, HRESULT)
-    put_auto_unlock_interval : Proc(IADsDomain*, Int32, HRESULT)
-    get_lockout_observation_interval : Proc(IADsDomain*, Int32*, HRESULT)
-    put_lockout_observation_interval : Proc(IADsDomain*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_is_workgroup : UInt64
+    get_min_password_length : UInt64
+    put_min_password_length : UInt64
+    get_min_password_age : UInt64
+    put_min_password_age : UInt64
+    get_max_password_age : UInt64
+    put_max_password_age : UInt64
+    get_max_bad_passwords_allowed : UInt64
+    put_max_bad_passwords_allowed : UInt64
+    get_password_history_length : UInt64
+    put_password_history_length : UInt64
+    get_password_attributes : UInt64
+    put_password_attributes : UInt64
+    get_auto_unlock_interval : UInt64
+    put_auto_unlock_interval : UInt64
+    get_lockout_observation_interval : UInt64
+    put_lockout_observation_interval : UInt64
   end
 
   IADsDomain_GUID = "00e4c220-fd16-11ce-abc4-02608c9e7553"
@@ -2508,58 +2508,58 @@ lib LibWin32
   end
 
   struct IADsComputerVTbl
-    query_interface : Proc(IADsComputer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsComputer*, UInt32)
-    release : Proc(IADsComputer*, UInt32)
-    get_type_info_count : Proc(IADsComputer*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsComputer*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsComputer*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsComputer*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsComputer*, UInt8**, HRESULT)
-    get_class : Proc(IADsComputer*, UInt8**, HRESULT)
-    get_guid : Proc(IADsComputer*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsComputer*, UInt8**, HRESULT)
-    get_parent : Proc(IADsComputer*, UInt8**, HRESULT)
-    get_schema : Proc(IADsComputer*, UInt8**, HRESULT)
-    get_info : Proc(IADsComputer*, HRESULT)
-    set_info : Proc(IADsComputer*, HRESULT)
-    get : Proc(IADsComputer*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsComputer*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsComputer*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsComputer*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsComputer*, VARIANT, Int32, HRESULT)
-    get_computer_id : Proc(IADsComputer*, UInt8**, HRESULT)
-    get_site : Proc(IADsComputer*, UInt8**, HRESULT)
-    get_description : Proc(IADsComputer*, UInt8**, HRESULT)
-    put_description : Proc(IADsComputer*, UInt8*, HRESULT)
-    get_location : Proc(IADsComputer*, UInt8**, HRESULT)
-    put_location : Proc(IADsComputer*, UInt8*, HRESULT)
-    get_primary_user : Proc(IADsComputer*, UInt8**, HRESULT)
-    put_primary_user : Proc(IADsComputer*, UInt8*, HRESULT)
-    get_owner : Proc(IADsComputer*, UInt8**, HRESULT)
-    put_owner : Proc(IADsComputer*, UInt8*, HRESULT)
-    get_division : Proc(IADsComputer*, UInt8**, HRESULT)
-    put_division : Proc(IADsComputer*, UInt8*, HRESULT)
-    get_department : Proc(IADsComputer*, UInt8**, HRESULT)
-    put_department : Proc(IADsComputer*, UInt8*, HRESULT)
-    get_role : Proc(IADsComputer*, UInt8**, HRESULT)
-    put_role : Proc(IADsComputer*, UInt8*, HRESULT)
-    get_operating_system : Proc(IADsComputer*, UInt8**, HRESULT)
-    put_operating_system : Proc(IADsComputer*, UInt8*, HRESULT)
-    get_operating_system_version : Proc(IADsComputer*, UInt8**, HRESULT)
-    put_operating_system_version : Proc(IADsComputer*, UInt8*, HRESULT)
-    get_model : Proc(IADsComputer*, UInt8**, HRESULT)
-    put_model : Proc(IADsComputer*, UInt8*, HRESULT)
-    get_processor : Proc(IADsComputer*, UInt8**, HRESULT)
-    put_processor : Proc(IADsComputer*, UInt8*, HRESULT)
-    get_processor_count : Proc(IADsComputer*, UInt8**, HRESULT)
-    put_processor_count : Proc(IADsComputer*, UInt8*, HRESULT)
-    get_memory_size : Proc(IADsComputer*, UInt8**, HRESULT)
-    put_memory_size : Proc(IADsComputer*, UInt8*, HRESULT)
-    get_storage_capacity : Proc(IADsComputer*, UInt8**, HRESULT)
-    put_storage_capacity : Proc(IADsComputer*, UInt8*, HRESULT)
-    get_net_addresses : Proc(IADsComputer*, VARIANT*, HRESULT)
-    put_net_addresses : Proc(IADsComputer*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_computer_id : UInt64
+    get_site : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_location : UInt64
+    put_location : UInt64
+    get_primary_user : UInt64
+    put_primary_user : UInt64
+    get_owner : UInt64
+    put_owner : UInt64
+    get_division : UInt64
+    put_division : UInt64
+    get_department : UInt64
+    put_department : UInt64
+    get_role : UInt64
+    put_role : UInt64
+    get_operating_system : UInt64
+    put_operating_system : UInt64
+    get_operating_system_version : UInt64
+    put_operating_system_version : UInt64
+    get_model : UInt64
+    put_model : UInt64
+    get_processor : UInt64
+    put_processor : UInt64
+    get_processor_count : UInt64
+    put_processor_count : UInt64
+    get_memory_size : UInt64
+    put_memory_size : UInt64
+    get_storage_capacity : UInt64
+    put_storage_capacity : UInt64
+    get_net_addresses : UInt64
+    put_net_addresses : UInt64
   end
 
   IADsComputer_GUID = "efe3cc70-1d9f-11cf-b1f3-02608c9e7553"
@@ -2569,28 +2569,28 @@ lib LibWin32
   end
 
   struct IADsComputerOperationsVTbl
-    query_interface : Proc(IADsComputerOperations*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsComputerOperations*, UInt32)
-    release : Proc(IADsComputerOperations*, UInt32)
-    get_type_info_count : Proc(IADsComputerOperations*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsComputerOperations*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsComputerOperations*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsComputerOperations*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsComputerOperations*, UInt8**, HRESULT)
-    get_class : Proc(IADsComputerOperations*, UInt8**, HRESULT)
-    get_guid : Proc(IADsComputerOperations*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsComputerOperations*, UInt8**, HRESULT)
-    get_parent : Proc(IADsComputerOperations*, UInt8**, HRESULT)
-    get_schema : Proc(IADsComputerOperations*, UInt8**, HRESULT)
-    get_info : Proc(IADsComputerOperations*, HRESULT)
-    set_info : Proc(IADsComputerOperations*, HRESULT)
-    get : Proc(IADsComputerOperations*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsComputerOperations*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsComputerOperations*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsComputerOperations*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsComputerOperations*, VARIANT, Int32, HRESULT)
-    status : Proc(IADsComputerOperations*, IDispatch*, HRESULT)
-    shutdown : Proc(IADsComputerOperations*, Int16, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    status : UInt64
+    shutdown : UInt64
   end
 
   IADsComputerOperations_GUID = "ef497680-1d9f-11cf-b1f3-02608c9e7553"
@@ -2600,32 +2600,32 @@ lib LibWin32
   end
 
   struct IADsGroupVTbl
-    query_interface : Proc(IADsGroup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsGroup*, UInt32)
-    release : Proc(IADsGroup*, UInt32)
-    get_type_info_count : Proc(IADsGroup*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsGroup*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsGroup*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsGroup*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsGroup*, UInt8**, HRESULT)
-    get_class : Proc(IADsGroup*, UInt8**, HRESULT)
-    get_guid : Proc(IADsGroup*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsGroup*, UInt8**, HRESULT)
-    get_parent : Proc(IADsGroup*, UInt8**, HRESULT)
-    get_schema : Proc(IADsGroup*, UInt8**, HRESULT)
-    get_info : Proc(IADsGroup*, HRESULT)
-    set_info : Proc(IADsGroup*, HRESULT)
-    get : Proc(IADsGroup*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsGroup*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsGroup*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsGroup*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsGroup*, VARIANT, Int32, HRESULT)
-    get_description : Proc(IADsGroup*, UInt8**, HRESULT)
-    put_description : Proc(IADsGroup*, UInt8*, HRESULT)
-    members : Proc(IADsGroup*, IADsMembers*, HRESULT)
-    is_member : Proc(IADsGroup*, UInt8*, Int16*, HRESULT)
-    add : Proc(IADsGroup*, UInt8*, HRESULT)
-    remove : Proc(IADsGroup*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    members : UInt64
+    is_member : UInt64
+    add : UInt64
+    remove : UInt64
   end
 
   IADsGroup_GUID = "27636b00-410f-11cf-b1ff-02608c9e7553"
@@ -2635,117 +2635,117 @@ lib LibWin32
   end
 
   struct IADsUserVTbl
-    query_interface : Proc(IADsUser*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsUser*, UInt32)
-    release : Proc(IADsUser*, UInt32)
-    get_type_info_count : Proc(IADsUser*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsUser*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsUser*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsUser*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsUser*, UInt8**, HRESULT)
-    get_class : Proc(IADsUser*, UInt8**, HRESULT)
-    get_guid : Proc(IADsUser*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsUser*, UInt8**, HRESULT)
-    get_parent : Proc(IADsUser*, UInt8**, HRESULT)
-    get_schema : Proc(IADsUser*, UInt8**, HRESULT)
-    get_info : Proc(IADsUser*, HRESULT)
-    set_info : Proc(IADsUser*, HRESULT)
-    get : Proc(IADsUser*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsUser*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsUser*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsUser*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsUser*, VARIANT, Int32, HRESULT)
-    get_bad_login_address : Proc(IADsUser*, UInt8**, HRESULT)
-    get_bad_login_count : Proc(IADsUser*, Int32*, HRESULT)
-    get_last_login : Proc(IADsUser*, Float64*, HRESULT)
-    get_last_logoff : Proc(IADsUser*, Float64*, HRESULT)
-    get_last_failed_login : Proc(IADsUser*, Float64*, HRESULT)
-    get_password_last_changed : Proc(IADsUser*, Float64*, HRESULT)
-    get_description : Proc(IADsUser*, UInt8**, HRESULT)
-    put_description : Proc(IADsUser*, UInt8*, HRESULT)
-    get_division : Proc(IADsUser*, UInt8**, HRESULT)
-    put_division : Proc(IADsUser*, UInt8*, HRESULT)
-    get_department : Proc(IADsUser*, UInt8**, HRESULT)
-    put_department : Proc(IADsUser*, UInt8*, HRESULT)
-    get_employee_id : Proc(IADsUser*, UInt8**, HRESULT)
-    put_employee_id : Proc(IADsUser*, UInt8*, HRESULT)
-    get_full_name : Proc(IADsUser*, UInt8**, HRESULT)
-    put_full_name : Proc(IADsUser*, UInt8*, HRESULT)
-    get_first_name : Proc(IADsUser*, UInt8**, HRESULT)
-    put_first_name : Proc(IADsUser*, UInt8*, HRESULT)
-    get_last_name : Proc(IADsUser*, UInt8**, HRESULT)
-    put_last_name : Proc(IADsUser*, UInt8*, HRESULT)
-    get_other_name : Proc(IADsUser*, UInt8**, HRESULT)
-    put_other_name : Proc(IADsUser*, UInt8*, HRESULT)
-    get_name_prefix : Proc(IADsUser*, UInt8**, HRESULT)
-    put_name_prefix : Proc(IADsUser*, UInt8*, HRESULT)
-    get_name_suffix : Proc(IADsUser*, UInt8**, HRESULT)
-    put_name_suffix : Proc(IADsUser*, UInt8*, HRESULT)
-    get_title : Proc(IADsUser*, UInt8**, HRESULT)
-    put_title : Proc(IADsUser*, UInt8*, HRESULT)
-    get_manager : Proc(IADsUser*, UInt8**, HRESULT)
-    put_manager : Proc(IADsUser*, UInt8*, HRESULT)
-    get_telephone_home : Proc(IADsUser*, VARIANT*, HRESULT)
-    put_telephone_home : Proc(IADsUser*, VARIANT, HRESULT)
-    get_telephone_mobile : Proc(IADsUser*, VARIANT*, HRESULT)
-    put_telephone_mobile : Proc(IADsUser*, VARIANT, HRESULT)
-    get_telephone_number : Proc(IADsUser*, VARIANT*, HRESULT)
-    put_telephone_number : Proc(IADsUser*, VARIANT, HRESULT)
-    get_telephone_pager : Proc(IADsUser*, VARIANT*, HRESULT)
-    put_telephone_pager : Proc(IADsUser*, VARIANT, HRESULT)
-    get_fax_number : Proc(IADsUser*, VARIANT*, HRESULT)
-    put_fax_number : Proc(IADsUser*, VARIANT, HRESULT)
-    get_office_locations : Proc(IADsUser*, VARIANT*, HRESULT)
-    put_office_locations : Proc(IADsUser*, VARIANT, HRESULT)
-    get_postal_addresses : Proc(IADsUser*, VARIANT*, HRESULT)
-    put_postal_addresses : Proc(IADsUser*, VARIANT, HRESULT)
-    get_postal_codes : Proc(IADsUser*, VARIANT*, HRESULT)
-    put_postal_codes : Proc(IADsUser*, VARIANT, HRESULT)
-    get_see_also : Proc(IADsUser*, VARIANT*, HRESULT)
-    put_see_also : Proc(IADsUser*, VARIANT, HRESULT)
-    get_account_disabled : Proc(IADsUser*, Int16*, HRESULT)
-    put_account_disabled : Proc(IADsUser*, Int16, HRESULT)
-    get_account_expiration_date : Proc(IADsUser*, Float64*, HRESULT)
-    put_account_expiration_date : Proc(IADsUser*, Float64, HRESULT)
-    get_grace_logins_allowed : Proc(IADsUser*, Int32*, HRESULT)
-    put_grace_logins_allowed : Proc(IADsUser*, Int32, HRESULT)
-    get_grace_logins_remaining : Proc(IADsUser*, Int32*, HRESULT)
-    put_grace_logins_remaining : Proc(IADsUser*, Int32, HRESULT)
-    get_is_account_locked : Proc(IADsUser*, Int16*, HRESULT)
-    put_is_account_locked : Proc(IADsUser*, Int16, HRESULT)
-    get_login_hours : Proc(IADsUser*, VARIANT*, HRESULT)
-    put_login_hours : Proc(IADsUser*, VARIANT, HRESULT)
-    get_login_workstations : Proc(IADsUser*, VARIANT*, HRESULT)
-    put_login_workstations : Proc(IADsUser*, VARIANT, HRESULT)
-    get_max_logins : Proc(IADsUser*, Int32*, HRESULT)
-    put_max_logins : Proc(IADsUser*, Int32, HRESULT)
-    get_max_storage : Proc(IADsUser*, Int32*, HRESULT)
-    put_max_storage : Proc(IADsUser*, Int32, HRESULT)
-    get_password_expiration_date : Proc(IADsUser*, Float64*, HRESULT)
-    put_password_expiration_date : Proc(IADsUser*, Float64, HRESULT)
-    get_password_minimum_length : Proc(IADsUser*, Int32*, HRESULT)
-    put_password_minimum_length : Proc(IADsUser*, Int32, HRESULT)
-    get_password_required : Proc(IADsUser*, Int16*, HRESULT)
-    put_password_required : Proc(IADsUser*, Int16, HRESULT)
-    get_require_unique_password : Proc(IADsUser*, Int16*, HRESULT)
-    put_require_unique_password : Proc(IADsUser*, Int16, HRESULT)
-    get_email_address : Proc(IADsUser*, UInt8**, HRESULT)
-    put_email_address : Proc(IADsUser*, UInt8*, HRESULT)
-    get_home_directory : Proc(IADsUser*, UInt8**, HRESULT)
-    put_home_directory : Proc(IADsUser*, UInt8*, HRESULT)
-    get_languages : Proc(IADsUser*, VARIANT*, HRESULT)
-    put_languages : Proc(IADsUser*, VARIANT, HRESULT)
-    get_profile : Proc(IADsUser*, UInt8**, HRESULT)
-    put_profile : Proc(IADsUser*, UInt8*, HRESULT)
-    get_login_script : Proc(IADsUser*, UInt8**, HRESULT)
-    put_login_script : Proc(IADsUser*, UInt8*, HRESULT)
-    get_picture : Proc(IADsUser*, VARIANT*, HRESULT)
-    put_picture : Proc(IADsUser*, VARIANT, HRESULT)
-    get_home_page : Proc(IADsUser*, UInt8**, HRESULT)
-    put_home_page : Proc(IADsUser*, UInt8*, HRESULT)
-    groups : Proc(IADsUser*, IADsMembers*, HRESULT)
-    set_password : Proc(IADsUser*, UInt8*, HRESULT)
-    change_password : Proc(IADsUser*, UInt8*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_bad_login_address : UInt64
+    get_bad_login_count : UInt64
+    get_last_login : UInt64
+    get_last_logoff : UInt64
+    get_last_failed_login : UInt64
+    get_password_last_changed : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_division : UInt64
+    put_division : UInt64
+    get_department : UInt64
+    put_department : UInt64
+    get_employee_id : UInt64
+    put_employee_id : UInt64
+    get_full_name : UInt64
+    put_full_name : UInt64
+    get_first_name : UInt64
+    put_first_name : UInt64
+    get_last_name : UInt64
+    put_last_name : UInt64
+    get_other_name : UInt64
+    put_other_name : UInt64
+    get_name_prefix : UInt64
+    put_name_prefix : UInt64
+    get_name_suffix : UInt64
+    put_name_suffix : UInt64
+    get_title : UInt64
+    put_title : UInt64
+    get_manager : UInt64
+    put_manager : UInt64
+    get_telephone_home : UInt64
+    put_telephone_home : UInt64
+    get_telephone_mobile : UInt64
+    put_telephone_mobile : UInt64
+    get_telephone_number : UInt64
+    put_telephone_number : UInt64
+    get_telephone_pager : UInt64
+    put_telephone_pager : UInt64
+    get_fax_number : UInt64
+    put_fax_number : UInt64
+    get_office_locations : UInt64
+    put_office_locations : UInt64
+    get_postal_addresses : UInt64
+    put_postal_addresses : UInt64
+    get_postal_codes : UInt64
+    put_postal_codes : UInt64
+    get_see_also : UInt64
+    put_see_also : UInt64
+    get_account_disabled : UInt64
+    put_account_disabled : UInt64
+    get_account_expiration_date : UInt64
+    put_account_expiration_date : UInt64
+    get_grace_logins_allowed : UInt64
+    put_grace_logins_allowed : UInt64
+    get_grace_logins_remaining : UInt64
+    put_grace_logins_remaining : UInt64
+    get_is_account_locked : UInt64
+    put_is_account_locked : UInt64
+    get_login_hours : UInt64
+    put_login_hours : UInt64
+    get_login_workstations : UInt64
+    put_login_workstations : UInt64
+    get_max_logins : UInt64
+    put_max_logins : UInt64
+    get_max_storage : UInt64
+    put_max_storage : UInt64
+    get_password_expiration_date : UInt64
+    put_password_expiration_date : UInt64
+    get_password_minimum_length : UInt64
+    put_password_minimum_length : UInt64
+    get_password_required : UInt64
+    put_password_required : UInt64
+    get_require_unique_password : UInt64
+    put_require_unique_password : UInt64
+    get_email_address : UInt64
+    put_email_address : UInt64
+    get_home_directory : UInt64
+    put_home_directory : UInt64
+    get_languages : UInt64
+    put_languages : UInt64
+    get_profile : UInt64
+    put_profile : UInt64
+    get_login_script : UInt64
+    put_login_script : UInt64
+    get_picture : UInt64
+    put_picture : UInt64
+    get_home_page : UInt64
+    put_home_page : UInt64
+    groups : UInt64
+    set_password : UInt64
+    change_password : UInt64
   end
 
   IADsUser_GUID = "3e37e320-17e2-11cf-abc4-02608c9e7553"
@@ -2755,52 +2755,52 @@ lib LibWin32
   end
 
   struct IADsPrintQueueVTbl
-    query_interface : Proc(IADsPrintQueue*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsPrintQueue*, UInt32)
-    release : Proc(IADsPrintQueue*, UInt32)
-    get_type_info_count : Proc(IADsPrintQueue*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsPrintQueue*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsPrintQueue*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsPrintQueue*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsPrintQueue*, UInt8**, HRESULT)
-    get_class : Proc(IADsPrintQueue*, UInt8**, HRESULT)
-    get_guid : Proc(IADsPrintQueue*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsPrintQueue*, UInt8**, HRESULT)
-    get_parent : Proc(IADsPrintQueue*, UInt8**, HRESULT)
-    get_schema : Proc(IADsPrintQueue*, UInt8**, HRESULT)
-    get_info : Proc(IADsPrintQueue*, HRESULT)
-    set_info : Proc(IADsPrintQueue*, HRESULT)
-    get : Proc(IADsPrintQueue*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsPrintQueue*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsPrintQueue*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsPrintQueue*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsPrintQueue*, VARIANT, Int32, HRESULT)
-    get_printer_path : Proc(IADsPrintQueue*, UInt8**, HRESULT)
-    put_printer_path : Proc(IADsPrintQueue*, UInt8*, HRESULT)
-    get_model : Proc(IADsPrintQueue*, UInt8**, HRESULT)
-    put_model : Proc(IADsPrintQueue*, UInt8*, HRESULT)
-    get_datatype : Proc(IADsPrintQueue*, UInt8**, HRESULT)
-    put_datatype : Proc(IADsPrintQueue*, UInt8*, HRESULT)
-    get_print_processor : Proc(IADsPrintQueue*, UInt8**, HRESULT)
-    put_print_processor : Proc(IADsPrintQueue*, UInt8*, HRESULT)
-    get_description : Proc(IADsPrintQueue*, UInt8**, HRESULT)
-    put_description : Proc(IADsPrintQueue*, UInt8*, HRESULT)
-    get_location : Proc(IADsPrintQueue*, UInt8**, HRESULT)
-    put_location : Proc(IADsPrintQueue*, UInt8*, HRESULT)
-    get_start_time : Proc(IADsPrintQueue*, Float64*, HRESULT)
-    put_start_time : Proc(IADsPrintQueue*, Float64, HRESULT)
-    get_until_time : Proc(IADsPrintQueue*, Float64*, HRESULT)
-    put_until_time : Proc(IADsPrintQueue*, Float64, HRESULT)
-    get_default_job_priority : Proc(IADsPrintQueue*, Int32*, HRESULT)
-    put_default_job_priority : Proc(IADsPrintQueue*, Int32, HRESULT)
-    get_priority : Proc(IADsPrintQueue*, Int32*, HRESULT)
-    put_priority : Proc(IADsPrintQueue*, Int32, HRESULT)
-    get_banner_page : Proc(IADsPrintQueue*, UInt8**, HRESULT)
-    put_banner_page : Proc(IADsPrintQueue*, UInt8*, HRESULT)
-    get_print_devices : Proc(IADsPrintQueue*, VARIANT*, HRESULT)
-    put_print_devices : Proc(IADsPrintQueue*, VARIANT, HRESULT)
-    get_net_addresses : Proc(IADsPrintQueue*, VARIANT*, HRESULT)
-    put_net_addresses : Proc(IADsPrintQueue*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_printer_path : UInt64
+    put_printer_path : UInt64
+    get_model : UInt64
+    put_model : UInt64
+    get_datatype : UInt64
+    put_datatype : UInt64
+    get_print_processor : UInt64
+    put_print_processor : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_location : UInt64
+    put_location : UInt64
+    get_start_time : UInt64
+    put_start_time : UInt64
+    get_until_time : UInt64
+    put_until_time : UInt64
+    get_default_job_priority : UInt64
+    put_default_job_priority : UInt64
+    get_priority : UInt64
+    put_priority : UInt64
+    get_banner_page : UInt64
+    put_banner_page : UInt64
+    get_print_devices : UInt64
+    put_print_devices : UInt64
+    get_net_addresses : UInt64
+    put_net_addresses : UInt64
   end
 
   IADsPrintQueue_GUID = "b15160d0-1226-11cf-a985-00aa006bc149"
@@ -2810,31 +2810,31 @@ lib LibWin32
   end
 
   struct IADsPrintQueueOperationsVTbl
-    query_interface : Proc(IADsPrintQueueOperations*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsPrintQueueOperations*, UInt32)
-    release : Proc(IADsPrintQueueOperations*, UInt32)
-    get_type_info_count : Proc(IADsPrintQueueOperations*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsPrintQueueOperations*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsPrintQueueOperations*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsPrintQueueOperations*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsPrintQueueOperations*, UInt8**, HRESULT)
-    get_class : Proc(IADsPrintQueueOperations*, UInt8**, HRESULT)
-    get_guid : Proc(IADsPrintQueueOperations*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsPrintQueueOperations*, UInt8**, HRESULT)
-    get_parent : Proc(IADsPrintQueueOperations*, UInt8**, HRESULT)
-    get_schema : Proc(IADsPrintQueueOperations*, UInt8**, HRESULT)
-    get_info : Proc(IADsPrintQueueOperations*, HRESULT)
-    set_info : Proc(IADsPrintQueueOperations*, HRESULT)
-    get : Proc(IADsPrintQueueOperations*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsPrintQueueOperations*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsPrintQueueOperations*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsPrintQueueOperations*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsPrintQueueOperations*, VARIANT, Int32, HRESULT)
-    get_status : Proc(IADsPrintQueueOperations*, Int32*, HRESULT)
-    print_jobs : Proc(IADsPrintQueueOperations*, IADsCollection*, HRESULT)
-    pause : Proc(IADsPrintQueueOperations*, HRESULT)
-    resume : Proc(IADsPrintQueueOperations*, HRESULT)
-    purge : Proc(IADsPrintQueueOperations*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_status : UInt64
+    print_jobs : UInt64
+    pause : UInt64
+    resume : UInt64
+    purge : UInt64
   end
 
   IADsPrintQueueOperations_GUID = "124be5c0-156e-11cf-a986-00aa006bc149"
@@ -2844,44 +2844,44 @@ lib LibWin32
   end
 
   struct IADsPrintJobVTbl
-    query_interface : Proc(IADsPrintJob*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsPrintJob*, UInt32)
-    release : Proc(IADsPrintJob*, UInt32)
-    get_type_info_count : Proc(IADsPrintJob*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsPrintJob*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsPrintJob*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsPrintJob*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsPrintJob*, UInt8**, HRESULT)
-    get_class : Proc(IADsPrintJob*, UInt8**, HRESULT)
-    get_guid : Proc(IADsPrintJob*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsPrintJob*, UInt8**, HRESULT)
-    get_parent : Proc(IADsPrintJob*, UInt8**, HRESULT)
-    get_schema : Proc(IADsPrintJob*, UInt8**, HRESULT)
-    get_info : Proc(IADsPrintJob*, HRESULT)
-    set_info : Proc(IADsPrintJob*, HRESULT)
-    get : Proc(IADsPrintJob*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsPrintJob*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsPrintJob*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsPrintJob*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsPrintJob*, VARIANT, Int32, HRESULT)
-    get_host_print_queue : Proc(IADsPrintJob*, UInt8**, HRESULT)
-    get_user : Proc(IADsPrintJob*, UInt8**, HRESULT)
-    get_user_path : Proc(IADsPrintJob*, UInt8**, HRESULT)
-    get_time_submitted : Proc(IADsPrintJob*, Float64*, HRESULT)
-    get_total_pages : Proc(IADsPrintJob*, Int32*, HRESULT)
-    get_size : Proc(IADsPrintJob*, Int32*, HRESULT)
-    get_description : Proc(IADsPrintJob*, UInt8**, HRESULT)
-    put_description : Proc(IADsPrintJob*, UInt8*, HRESULT)
-    get_priority : Proc(IADsPrintJob*, Int32*, HRESULT)
-    put_priority : Proc(IADsPrintJob*, Int32, HRESULT)
-    get_start_time : Proc(IADsPrintJob*, Float64*, HRESULT)
-    put_start_time : Proc(IADsPrintJob*, Float64, HRESULT)
-    get_until_time : Proc(IADsPrintJob*, Float64*, HRESULT)
-    put_until_time : Proc(IADsPrintJob*, Float64, HRESULT)
-    get_notify : Proc(IADsPrintJob*, UInt8**, HRESULT)
-    put_notify : Proc(IADsPrintJob*, UInt8*, HRESULT)
-    get_notify_path : Proc(IADsPrintJob*, UInt8**, HRESULT)
-    put_notify_path : Proc(IADsPrintJob*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_host_print_queue : UInt64
+    get_user : UInt64
+    get_user_path : UInt64
+    get_time_submitted : UInt64
+    get_total_pages : UInt64
+    get_size : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_priority : UInt64
+    put_priority : UInt64
+    get_start_time : UInt64
+    put_start_time : UInt64
+    get_until_time : UInt64
+    put_until_time : UInt64
+    get_notify : UInt64
+    put_notify : UInt64
+    get_notify_path : UInt64
+    put_notify_path : UInt64
   end
 
   IADsPrintJob_GUID = "32fb6780-1ed0-11cf-a988-00aa006bc149"
@@ -2891,33 +2891,33 @@ lib LibWin32
   end
 
   struct IADsPrintJobOperationsVTbl
-    query_interface : Proc(IADsPrintJobOperations*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsPrintJobOperations*, UInt32)
-    release : Proc(IADsPrintJobOperations*, UInt32)
-    get_type_info_count : Proc(IADsPrintJobOperations*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsPrintJobOperations*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsPrintJobOperations*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsPrintJobOperations*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsPrintJobOperations*, UInt8**, HRESULT)
-    get_class : Proc(IADsPrintJobOperations*, UInt8**, HRESULT)
-    get_guid : Proc(IADsPrintJobOperations*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsPrintJobOperations*, UInt8**, HRESULT)
-    get_parent : Proc(IADsPrintJobOperations*, UInt8**, HRESULT)
-    get_schema : Proc(IADsPrintJobOperations*, UInt8**, HRESULT)
-    get_info : Proc(IADsPrintJobOperations*, HRESULT)
-    set_info : Proc(IADsPrintJobOperations*, HRESULT)
-    get : Proc(IADsPrintJobOperations*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsPrintJobOperations*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsPrintJobOperations*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsPrintJobOperations*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsPrintJobOperations*, VARIANT, Int32, HRESULT)
-    get_status : Proc(IADsPrintJobOperations*, Int32*, HRESULT)
-    get_time_elapsed : Proc(IADsPrintJobOperations*, Int32*, HRESULT)
-    get_pages_printed : Proc(IADsPrintJobOperations*, Int32*, HRESULT)
-    get_position : Proc(IADsPrintJobOperations*, Int32*, HRESULT)
-    put_position : Proc(IADsPrintJobOperations*, Int32, HRESULT)
-    pause : Proc(IADsPrintJobOperations*, HRESULT)
-    resume : Proc(IADsPrintJobOperations*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_status : UInt64
+    get_time_elapsed : UInt64
+    get_pages_printed : UInt64
+    get_position : UInt64
+    put_position : UInt64
+    pause : UInt64
+    resume : UInt64
   end
 
   IADsPrintJobOperations_GUID = "9a52db30-1ecf-11cf-a988-00aa006bc149"
@@ -2927,50 +2927,50 @@ lib LibWin32
   end
 
   struct IADsServiceVTbl
-    query_interface : Proc(IADsService*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsService*, UInt32)
-    release : Proc(IADsService*, UInt32)
-    get_type_info_count : Proc(IADsService*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsService*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsService*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsService*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsService*, UInt8**, HRESULT)
-    get_class : Proc(IADsService*, UInt8**, HRESULT)
-    get_guid : Proc(IADsService*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsService*, UInt8**, HRESULT)
-    get_parent : Proc(IADsService*, UInt8**, HRESULT)
-    get_schema : Proc(IADsService*, UInt8**, HRESULT)
-    get_info : Proc(IADsService*, HRESULT)
-    set_info : Proc(IADsService*, HRESULT)
-    get : Proc(IADsService*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsService*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsService*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsService*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsService*, VARIANT, Int32, HRESULT)
-    get_host_computer : Proc(IADsService*, UInt8**, HRESULT)
-    put_host_computer : Proc(IADsService*, UInt8*, HRESULT)
-    get_display_name : Proc(IADsService*, UInt8**, HRESULT)
-    put_display_name : Proc(IADsService*, UInt8*, HRESULT)
-    get_version : Proc(IADsService*, UInt8**, HRESULT)
-    put_version : Proc(IADsService*, UInt8*, HRESULT)
-    get_service_type : Proc(IADsService*, Int32*, HRESULT)
-    put_service_type : Proc(IADsService*, Int32, HRESULT)
-    get_start_type : Proc(IADsService*, Int32*, HRESULT)
-    put_start_type : Proc(IADsService*, Int32, HRESULT)
-    get_path : Proc(IADsService*, UInt8**, HRESULT)
-    put_path : Proc(IADsService*, UInt8*, HRESULT)
-    get_startup_parameters : Proc(IADsService*, UInt8**, HRESULT)
-    put_startup_parameters : Proc(IADsService*, UInt8*, HRESULT)
-    get_error_control : Proc(IADsService*, Int32*, HRESULT)
-    put_error_control : Proc(IADsService*, Int32, HRESULT)
-    get_load_order_group : Proc(IADsService*, UInt8**, HRESULT)
-    put_load_order_group : Proc(IADsService*, UInt8*, HRESULT)
-    get_service_account_name : Proc(IADsService*, UInt8**, HRESULT)
-    put_service_account_name : Proc(IADsService*, UInt8*, HRESULT)
-    get_service_account_path : Proc(IADsService*, UInt8**, HRESULT)
-    put_service_account_path : Proc(IADsService*, UInt8*, HRESULT)
-    get_dependencies : Proc(IADsService*, VARIANT*, HRESULT)
-    put_dependencies : Proc(IADsService*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_host_computer : UInt64
+    put_host_computer : UInt64
+    get_display_name : UInt64
+    put_display_name : UInt64
+    get_version : UInt64
+    put_version : UInt64
+    get_service_type : UInt64
+    put_service_type : UInt64
+    get_start_type : UInt64
+    put_start_type : UInt64
+    get_path : UInt64
+    put_path : UInt64
+    get_startup_parameters : UInt64
+    put_startup_parameters : UInt64
+    get_error_control : UInt64
+    put_error_control : UInt64
+    get_load_order_group : UInt64
+    put_load_order_group : UInt64
+    get_service_account_name : UInt64
+    put_service_account_name : UInt64
+    get_service_account_path : UInt64
+    put_service_account_path : UInt64
+    get_dependencies : UInt64
+    put_dependencies : UInt64
   end
 
   IADsService_GUID = "68af66e0-31ca-11cf-a98a-00aa006bc149"
@@ -2980,32 +2980,32 @@ lib LibWin32
   end
 
   struct IADsServiceOperationsVTbl
-    query_interface : Proc(IADsServiceOperations*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsServiceOperations*, UInt32)
-    release : Proc(IADsServiceOperations*, UInt32)
-    get_type_info_count : Proc(IADsServiceOperations*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsServiceOperations*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsServiceOperations*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsServiceOperations*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsServiceOperations*, UInt8**, HRESULT)
-    get_class : Proc(IADsServiceOperations*, UInt8**, HRESULT)
-    get_guid : Proc(IADsServiceOperations*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsServiceOperations*, UInt8**, HRESULT)
-    get_parent : Proc(IADsServiceOperations*, UInt8**, HRESULT)
-    get_schema : Proc(IADsServiceOperations*, UInt8**, HRESULT)
-    get_info : Proc(IADsServiceOperations*, HRESULT)
-    set_info : Proc(IADsServiceOperations*, HRESULT)
-    get : Proc(IADsServiceOperations*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsServiceOperations*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsServiceOperations*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsServiceOperations*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsServiceOperations*, VARIANT, Int32, HRESULT)
-    get_status : Proc(IADsServiceOperations*, Int32*, HRESULT)
-    start : Proc(IADsServiceOperations*, HRESULT)
-    stop : Proc(IADsServiceOperations*, HRESULT)
-    pause : Proc(IADsServiceOperations*, HRESULT)
-    continue : Proc(IADsServiceOperations*, HRESULT)
-    set_password : Proc(IADsServiceOperations*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_status : UInt64
+    start : UInt64
+    stop : UInt64
+    pause : UInt64
+    continue : UInt64
+    set_password : UInt64
   end
 
   IADsServiceOperations_GUID = "5d7b33f0-31ca-11cf-a98a-00aa006bc149"
@@ -3015,54 +3015,54 @@ lib LibWin32
   end
 
   struct IADsFileServiceVTbl
-    query_interface : Proc(IADsFileService*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsFileService*, UInt32)
-    release : Proc(IADsFileService*, UInt32)
-    get_type_info_count : Proc(IADsFileService*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsFileService*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsFileService*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsFileService*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsFileService*, UInt8**, HRESULT)
-    get_class : Proc(IADsFileService*, UInt8**, HRESULT)
-    get_guid : Proc(IADsFileService*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsFileService*, UInt8**, HRESULT)
-    get_parent : Proc(IADsFileService*, UInt8**, HRESULT)
-    get_schema : Proc(IADsFileService*, UInt8**, HRESULT)
-    get_info : Proc(IADsFileService*, HRESULT)
-    set_info : Proc(IADsFileService*, HRESULT)
-    get : Proc(IADsFileService*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsFileService*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsFileService*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsFileService*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsFileService*, VARIANT, Int32, HRESULT)
-    get_host_computer : Proc(IADsFileService*, UInt8**, HRESULT)
-    put_host_computer : Proc(IADsFileService*, UInt8*, HRESULT)
-    get_display_name : Proc(IADsFileService*, UInt8**, HRESULT)
-    put_display_name : Proc(IADsFileService*, UInt8*, HRESULT)
-    get_version : Proc(IADsFileService*, UInt8**, HRESULT)
-    put_version : Proc(IADsFileService*, UInt8*, HRESULT)
-    get_service_type : Proc(IADsFileService*, Int32*, HRESULT)
-    put_service_type : Proc(IADsFileService*, Int32, HRESULT)
-    get_start_type : Proc(IADsFileService*, Int32*, HRESULT)
-    put_start_type : Proc(IADsFileService*, Int32, HRESULT)
-    get_path : Proc(IADsFileService*, UInt8**, HRESULT)
-    put_path : Proc(IADsFileService*, UInt8*, HRESULT)
-    get_startup_parameters : Proc(IADsFileService*, UInt8**, HRESULT)
-    put_startup_parameters : Proc(IADsFileService*, UInt8*, HRESULT)
-    get_error_control : Proc(IADsFileService*, Int32*, HRESULT)
-    put_error_control : Proc(IADsFileService*, Int32, HRESULT)
-    get_load_order_group : Proc(IADsFileService*, UInt8**, HRESULT)
-    put_load_order_group : Proc(IADsFileService*, UInt8*, HRESULT)
-    get_service_account_name : Proc(IADsFileService*, UInt8**, HRESULT)
-    put_service_account_name : Proc(IADsFileService*, UInt8*, HRESULT)
-    get_service_account_path : Proc(IADsFileService*, UInt8**, HRESULT)
-    put_service_account_path : Proc(IADsFileService*, UInt8*, HRESULT)
-    get_dependencies : Proc(IADsFileService*, VARIANT*, HRESULT)
-    put_dependencies : Proc(IADsFileService*, VARIANT, HRESULT)
-    get_description : Proc(IADsFileService*, UInt8**, HRESULT)
-    put_description : Proc(IADsFileService*, UInt8*, HRESULT)
-    get_max_user_count : Proc(IADsFileService*, Int32*, HRESULT)
-    put_max_user_count : Proc(IADsFileService*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_host_computer : UInt64
+    put_host_computer : UInt64
+    get_display_name : UInt64
+    put_display_name : UInt64
+    get_version : UInt64
+    put_version : UInt64
+    get_service_type : UInt64
+    put_service_type : UInt64
+    get_start_type : UInt64
+    put_start_type : UInt64
+    get_path : UInt64
+    put_path : UInt64
+    get_startup_parameters : UInt64
+    put_startup_parameters : UInt64
+    get_error_control : UInt64
+    put_error_control : UInt64
+    get_load_order_group : UInt64
+    put_load_order_group : UInt64
+    get_service_account_name : UInt64
+    put_service_account_name : UInt64
+    get_service_account_path : UInt64
+    put_service_account_path : UInt64
+    get_dependencies : UInt64
+    put_dependencies : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_max_user_count : UInt64
+    put_max_user_count : UInt64
   end
 
   IADsFileService_GUID = "a89d1900-31ca-11cf-a98a-00aa006bc149"
@@ -3072,34 +3072,34 @@ lib LibWin32
   end
 
   struct IADsFileServiceOperationsVTbl
-    query_interface : Proc(IADsFileServiceOperations*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsFileServiceOperations*, UInt32)
-    release : Proc(IADsFileServiceOperations*, UInt32)
-    get_type_info_count : Proc(IADsFileServiceOperations*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsFileServiceOperations*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsFileServiceOperations*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsFileServiceOperations*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsFileServiceOperations*, UInt8**, HRESULT)
-    get_class : Proc(IADsFileServiceOperations*, UInt8**, HRESULT)
-    get_guid : Proc(IADsFileServiceOperations*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsFileServiceOperations*, UInt8**, HRESULT)
-    get_parent : Proc(IADsFileServiceOperations*, UInt8**, HRESULT)
-    get_schema : Proc(IADsFileServiceOperations*, UInt8**, HRESULT)
-    get_info : Proc(IADsFileServiceOperations*, HRESULT)
-    set_info : Proc(IADsFileServiceOperations*, HRESULT)
-    get : Proc(IADsFileServiceOperations*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsFileServiceOperations*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsFileServiceOperations*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsFileServiceOperations*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsFileServiceOperations*, VARIANT, Int32, HRESULT)
-    get_status : Proc(IADsFileServiceOperations*, Int32*, HRESULT)
-    start : Proc(IADsFileServiceOperations*, HRESULT)
-    stop : Proc(IADsFileServiceOperations*, HRESULT)
-    pause : Proc(IADsFileServiceOperations*, HRESULT)
-    continue : Proc(IADsFileServiceOperations*, HRESULT)
-    set_password : Proc(IADsFileServiceOperations*, UInt8*, HRESULT)
-    sessions : Proc(IADsFileServiceOperations*, IADsCollection*, HRESULT)
-    resources : Proc(IADsFileServiceOperations*, IADsCollection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_status : UInt64
+    start : UInt64
+    stop : UInt64
+    pause : UInt64
+    continue : UInt64
+    set_password : UInt64
+    sessions : UInt64
+    resources : UInt64
   end
 
   IADsFileServiceOperations_GUID = "a02ded10-31ca-11cf-a98a-00aa006bc149"
@@ -3109,35 +3109,35 @@ lib LibWin32
   end
 
   struct IADsFileShareVTbl
-    query_interface : Proc(IADsFileShare*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsFileShare*, UInt32)
-    release : Proc(IADsFileShare*, UInt32)
-    get_type_info_count : Proc(IADsFileShare*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsFileShare*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsFileShare*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsFileShare*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsFileShare*, UInt8**, HRESULT)
-    get_class : Proc(IADsFileShare*, UInt8**, HRESULT)
-    get_guid : Proc(IADsFileShare*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsFileShare*, UInt8**, HRESULT)
-    get_parent : Proc(IADsFileShare*, UInt8**, HRESULT)
-    get_schema : Proc(IADsFileShare*, UInt8**, HRESULT)
-    get_info : Proc(IADsFileShare*, HRESULT)
-    set_info : Proc(IADsFileShare*, HRESULT)
-    get : Proc(IADsFileShare*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsFileShare*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsFileShare*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsFileShare*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsFileShare*, VARIANT, Int32, HRESULT)
-    get_current_user_count : Proc(IADsFileShare*, Int32*, HRESULT)
-    get_description : Proc(IADsFileShare*, UInt8**, HRESULT)
-    put_description : Proc(IADsFileShare*, UInt8*, HRESULT)
-    get_host_computer : Proc(IADsFileShare*, UInt8**, HRESULT)
-    put_host_computer : Proc(IADsFileShare*, UInt8*, HRESULT)
-    get_path : Proc(IADsFileShare*, UInt8**, HRESULT)
-    put_path : Proc(IADsFileShare*, UInt8*, HRESULT)
-    get_max_user_count : Proc(IADsFileShare*, Int32*, HRESULT)
-    put_max_user_count : Proc(IADsFileShare*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_current_user_count : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_host_computer : UInt64
+    put_host_computer : UInt64
+    get_path : UInt64
+    put_path : UInt64
+    get_max_user_count : UInt64
+    put_max_user_count : UInt64
   end
 
   IADsFileShare_GUID = "eb6dcaf0-4b83-11cf-a995-00aa006bc149"
@@ -3147,32 +3147,32 @@ lib LibWin32
   end
 
   struct IADsSessionVTbl
-    query_interface : Proc(IADsSession*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsSession*, UInt32)
-    release : Proc(IADsSession*, UInt32)
-    get_type_info_count : Proc(IADsSession*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsSession*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsSession*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsSession*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsSession*, UInt8**, HRESULT)
-    get_class : Proc(IADsSession*, UInt8**, HRESULT)
-    get_guid : Proc(IADsSession*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsSession*, UInt8**, HRESULT)
-    get_parent : Proc(IADsSession*, UInt8**, HRESULT)
-    get_schema : Proc(IADsSession*, UInt8**, HRESULT)
-    get_info : Proc(IADsSession*, HRESULT)
-    set_info : Proc(IADsSession*, HRESULT)
-    get : Proc(IADsSession*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsSession*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsSession*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsSession*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsSession*, VARIANT, Int32, HRESULT)
-    get_user : Proc(IADsSession*, UInt8**, HRESULT)
-    get_user_path : Proc(IADsSession*, UInt8**, HRESULT)
-    get_computer : Proc(IADsSession*, UInt8**, HRESULT)
-    get_computer_path : Proc(IADsSession*, UInt8**, HRESULT)
-    get_connect_time : Proc(IADsSession*, Int32*, HRESULT)
-    get_idle_time : Proc(IADsSession*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_user : UInt64
+    get_user_path : UInt64
+    get_computer : UInt64
+    get_computer_path : UInt64
+    get_connect_time : UInt64
+    get_idle_time : UInt64
   end
 
   IADsSession_GUID = "398b7da0-4aab-11cf-ae2c-00aa006ebfb9"
@@ -3182,30 +3182,30 @@ lib LibWin32
   end
 
   struct IADsResourceVTbl
-    query_interface : Proc(IADsResource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsResource*, UInt32)
-    release : Proc(IADsResource*, UInt32)
-    get_type_info_count : Proc(IADsResource*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsResource*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsResource*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsResource*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IADsResource*, UInt8**, HRESULT)
-    get_class : Proc(IADsResource*, UInt8**, HRESULT)
-    get_guid : Proc(IADsResource*, UInt8**, HRESULT)
-    get_a_ds_path : Proc(IADsResource*, UInt8**, HRESULT)
-    get_parent : Proc(IADsResource*, UInt8**, HRESULT)
-    get_schema : Proc(IADsResource*, UInt8**, HRESULT)
-    get_info : Proc(IADsResource*, HRESULT)
-    set_info : Proc(IADsResource*, HRESULT)
-    get : Proc(IADsResource*, UInt8*, VARIANT*, HRESULT)
-    put : Proc(IADsResource*, UInt8*, VARIANT, HRESULT)
-    get_ex : Proc(IADsResource*, UInt8*, VARIANT*, HRESULT)
-    put_ex : Proc(IADsResource*, Int32, UInt8*, VARIANT, HRESULT)
-    get_info_ex : Proc(IADsResource*, VARIANT, Int32, HRESULT)
-    get_user : Proc(IADsResource*, UInt8**, HRESULT)
-    get_user_path : Proc(IADsResource*, UInt8**, HRESULT)
-    get_path : Proc(IADsResource*, UInt8**, HRESULT)
-    get_lock_count : Proc(IADsResource*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_class : UInt64
+    get_guid : UInt64
+    get_a_ds_path : UInt64
+    get_parent : UInt64
+    get_schema : UInt64
+    get_info : UInt64
+    set_info : UInt64
+    get : UInt64
+    put : UInt64
+    get_ex : UInt64
+    put_ex : UInt64
+    get_info_ex : UInt64
+    get_user : UInt64
+    get_user_path : UInt64
+    get_path : UInt64
+    get_lock_count : UInt64
   end
 
   IADsResource_GUID = "34a05b20-4aab-11cf-ae2c-00aa006ebfb9"
@@ -3215,14 +3215,14 @@ lib LibWin32
   end
 
   struct IADsOpenDSObjectVTbl
-    query_interface : Proc(IADsOpenDSObject*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsOpenDSObject*, UInt32)
-    release : Proc(IADsOpenDSObject*, UInt32)
-    get_type_info_count : Proc(IADsOpenDSObject*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsOpenDSObject*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsOpenDSObject*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsOpenDSObject*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    open_ds_object : Proc(IADsOpenDSObject*, UInt8*, UInt8*, UInt8*, Int32, IDispatch*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    open_ds_object : UInt64
   end
 
   IADsOpenDSObject_GUID = "ddf2891e-0f9c-11d0-8ad4-00c04fd8d503"
@@ -3232,14 +3232,14 @@ lib LibWin32
   end
 
   struct IDirectoryObjectVTbl
-    query_interface : Proc(IDirectoryObject*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectoryObject*, UInt32)
-    release : Proc(IDirectoryObject*, UInt32)
-    get_object_information : Proc(IDirectoryObject*, ADS_OBJECT_INFO**, HRESULT)
-    get_object_attributes : Proc(IDirectoryObject*, LibC::LPWSTR*, UInt32, ADS_ATTR_INFO**, UInt32*, HRESULT)
-    set_object_attributes : Proc(IDirectoryObject*, ADS_ATTR_INFO*, UInt32, UInt32*, HRESULT)
-    create_ds_object : Proc(IDirectoryObject*, LibC::LPWSTR, ADS_ATTR_INFO*, UInt32, IDispatch*, HRESULT)
-    delete_ds_object : Proc(IDirectoryObject*, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_object_information : UInt64
+    get_object_attributes : UInt64
+    set_object_attributes : UInt64
+    create_ds_object : UInt64
+    delete_ds_object : UInt64
   end
 
   IDirectoryObject_GUID = "e798de2c-22e4-11d0-84fe-00c04fd8d503"
@@ -3249,19 +3249,19 @@ lib LibWin32
   end
 
   struct IDirectorySearchVTbl
-    query_interface : Proc(IDirectorySearch*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectorySearch*, UInt32)
-    release : Proc(IDirectorySearch*, UInt32)
-    set_search_preference : Proc(IDirectorySearch*, Ads_searchpref_info*, UInt32, HRESULT)
-    execute_search : Proc(IDirectorySearch*, LibC::LPWSTR, LibC::LPWSTR*, UInt32, LibC::IntPtrT*, HRESULT)
-    abandon_search : Proc(IDirectorySearch*, LibC::IntPtrT, HRESULT)
-    get_first_row : Proc(IDirectorySearch*, LibC::IntPtrT, HRESULT)
-    get_next_row : Proc(IDirectorySearch*, LibC::IntPtrT, HRESULT)
-    get_previous_row : Proc(IDirectorySearch*, LibC::IntPtrT, HRESULT)
-    get_next_column_name : Proc(IDirectorySearch*, LibC::IntPtrT, LibC::LPWSTR*, HRESULT)
-    get_column : Proc(IDirectorySearch*, LibC::IntPtrT, LibC::LPWSTR, Ads_search_column*, HRESULT)
-    free_column : Proc(IDirectorySearch*, Ads_search_column*, HRESULT)
-    close_search_handle : Proc(IDirectorySearch*, LibC::IntPtrT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_search_preference : UInt64
+    execute_search : UInt64
+    abandon_search : UInt64
+    get_first_row : UInt64
+    get_next_row : UInt64
+    get_previous_row : UInt64
+    get_next_column_name : UInt64
+    get_column : UInt64
+    free_column : UInt64
+    close_search_handle : UInt64
   end
 
   IDirectorySearch_GUID = "109ba8ec-92f0-11d0-a790-00c04fd8d5a8"
@@ -3271,17 +3271,17 @@ lib LibWin32
   end
 
   struct IDirectorySchemaMgmtVTbl
-    query_interface : Proc(IDirectorySchemaMgmt*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectorySchemaMgmt*, UInt32)
-    release : Proc(IDirectorySchemaMgmt*, UInt32)
-    enum_attributes : Proc(IDirectorySchemaMgmt*, LibC::LPWSTR*, UInt32, ADS_ATTR_DEF**, UInt32*, HRESULT)
-    create_attribute_definition : Proc(IDirectorySchemaMgmt*, LibC::LPWSTR, ADS_ATTR_DEF*, HRESULT)
-    write_attribute_definition : Proc(IDirectorySchemaMgmt*, LibC::LPWSTR, ADS_ATTR_DEF*, HRESULT)
-    delete_attribute_definition : Proc(IDirectorySchemaMgmt*, LibC::LPWSTR, HRESULT)
-    enum_classes : Proc(IDirectorySchemaMgmt*, LibC::LPWSTR*, UInt32, ADS_CLASS_DEF**, UInt32*, HRESULT)
-    write_class_definition : Proc(IDirectorySchemaMgmt*, LibC::LPWSTR, ADS_CLASS_DEF*, HRESULT)
-    create_class_definition : Proc(IDirectorySchemaMgmt*, LibC::LPWSTR, ADS_CLASS_DEF*, HRESULT)
-    delete_class_definition : Proc(IDirectorySchemaMgmt*, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enum_attributes : UInt64
+    create_attribute_definition : UInt64
+    write_attribute_definition : UInt64
+    delete_attribute_definition : UInt64
+    enum_classes : UInt64
+    write_class_definition : UInt64
+    create_class_definition : UInt64
+    delete_class_definition : UInt64
   end
 
   IDirectorySchemaMgmt_GUID = "75db3b9c-a4d8-11d0-a79c-00c04fd8d5a8"
@@ -3291,13 +3291,13 @@ lib LibWin32
   end
 
   struct IADsAggregateeVTbl
-    query_interface : Proc(IADsAggregatee*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsAggregatee*, UInt32)
-    release : Proc(IADsAggregatee*, UInt32)
-    connect_as_aggregatee : Proc(IADsAggregatee*, IUnknown, HRESULT)
-    disconnect_as_aggregatee : Proc(IADsAggregatee*, HRESULT)
-    relinquish_interface : Proc(IADsAggregatee*, Guid*, HRESULT)
-    restore_interface : Proc(IADsAggregatee*, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    connect_as_aggregatee : UInt64
+    disconnect_as_aggregatee : UInt64
+    relinquish_interface : UInt64
+    restore_interface : UInt64
   end
 
   IADsAggregatee_GUID = "1346ce8c-9039-11d0-8528-00c04fd8d503"
@@ -3307,11 +3307,11 @@ lib LibWin32
   end
 
   struct IADsAggregatorVTbl
-    query_interface : Proc(IADsAggregator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsAggregator*, UInt32)
-    release : Proc(IADsAggregator*, UInt32)
-    connect_as_aggregator : Proc(IADsAggregator*, IUnknown, HRESULT)
-    disconnect_as_aggregator : Proc(IADsAggregator*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    connect_as_aggregator : UInt64
+    disconnect_as_aggregator : UInt64
   end
 
   IADsAggregator_GUID = "52db5fb0-941f-11d0-8529-00c04fd8d503"
@@ -3321,27 +3321,27 @@ lib LibWin32
   end
 
   struct IADsAccessControlEntryVTbl
-    query_interface : Proc(IADsAccessControlEntry*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsAccessControlEntry*, UInt32)
-    release : Proc(IADsAccessControlEntry*, UInt32)
-    get_type_info_count : Proc(IADsAccessControlEntry*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsAccessControlEntry*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsAccessControlEntry*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsAccessControlEntry*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_access_mask : Proc(IADsAccessControlEntry*, Int32*, HRESULT)
-    put_access_mask : Proc(IADsAccessControlEntry*, Int32, HRESULT)
-    get_ace_type : Proc(IADsAccessControlEntry*, Int32*, HRESULT)
-    put_ace_type : Proc(IADsAccessControlEntry*, Int32, HRESULT)
-    get_ace_flags : Proc(IADsAccessControlEntry*, Int32*, HRESULT)
-    put_ace_flags : Proc(IADsAccessControlEntry*, Int32, HRESULT)
-    get_flags : Proc(IADsAccessControlEntry*, Int32*, HRESULT)
-    put_flags : Proc(IADsAccessControlEntry*, Int32, HRESULT)
-    get_object_type : Proc(IADsAccessControlEntry*, UInt8**, HRESULT)
-    put_object_type : Proc(IADsAccessControlEntry*, UInt8*, HRESULT)
-    get_inherited_object_type : Proc(IADsAccessControlEntry*, UInt8**, HRESULT)
-    put_inherited_object_type : Proc(IADsAccessControlEntry*, UInt8*, HRESULT)
-    get_trustee : Proc(IADsAccessControlEntry*, UInt8**, HRESULT)
-    put_trustee : Proc(IADsAccessControlEntry*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_access_mask : UInt64
+    put_access_mask : UInt64
+    get_ace_type : UInt64
+    put_ace_type : UInt64
+    get_ace_flags : UInt64
+    put_ace_flags : UInt64
+    get_flags : UInt64
+    put_flags : UInt64
+    get_object_type : UInt64
+    put_object_type : UInt64
+    get_inherited_object_type : UInt64
+    put_inherited_object_type : UInt64
+    get_trustee : UInt64
+    put_trustee : UInt64
   end
 
   IADsAccessControlEntry_GUID = "b4f3a14c-9bdd-11d0-852c-00c04fd8d503"
@@ -3351,21 +3351,21 @@ lib LibWin32
   end
 
   struct IADsAccessControlListVTbl
-    query_interface : Proc(IADsAccessControlList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsAccessControlList*, UInt32)
-    release : Proc(IADsAccessControlList*, UInt32)
-    get_type_info_count : Proc(IADsAccessControlList*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsAccessControlList*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsAccessControlList*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsAccessControlList*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_acl_revision : Proc(IADsAccessControlList*, Int32*, HRESULT)
-    put_acl_revision : Proc(IADsAccessControlList*, Int32, HRESULT)
-    get_ace_count : Proc(IADsAccessControlList*, Int32*, HRESULT)
-    put_ace_count : Proc(IADsAccessControlList*, Int32, HRESULT)
-    add_ace : Proc(IADsAccessControlList*, IDispatch, HRESULT)
-    remove_ace : Proc(IADsAccessControlList*, IDispatch, HRESULT)
-    copy_access_list : Proc(IADsAccessControlList*, IDispatch*, HRESULT)
-    get__new_enum : Proc(IADsAccessControlList*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_acl_revision : UInt64
+    put_acl_revision : UInt64
+    get_ace_count : UInt64
+    put_ace_count : UInt64
+    add_ace : UInt64
+    remove_ace : UInt64
+    copy_access_list : UInt64
+    get__new_enum : UInt64
   end
 
   IADsAccessControlList_GUID = "b7ee91cc-9bdd-11d0-852c-00c04fd8d503"
@@ -3375,34 +3375,34 @@ lib LibWin32
   end
 
   struct IADsSecurityDescriptorVTbl
-    query_interface : Proc(IADsSecurityDescriptor*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsSecurityDescriptor*, UInt32)
-    release : Proc(IADsSecurityDescriptor*, UInt32)
-    get_type_info_count : Proc(IADsSecurityDescriptor*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsSecurityDescriptor*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsSecurityDescriptor*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsSecurityDescriptor*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_revision : Proc(IADsSecurityDescriptor*, Int32*, HRESULT)
-    put_revision : Proc(IADsSecurityDescriptor*, Int32, HRESULT)
-    get_control : Proc(IADsSecurityDescriptor*, Int32*, HRESULT)
-    put_control : Proc(IADsSecurityDescriptor*, Int32, HRESULT)
-    get_owner : Proc(IADsSecurityDescriptor*, UInt8**, HRESULT)
-    put_owner : Proc(IADsSecurityDescriptor*, UInt8*, HRESULT)
-    get_owner_defaulted : Proc(IADsSecurityDescriptor*, Int16*, HRESULT)
-    put_owner_defaulted : Proc(IADsSecurityDescriptor*, Int16, HRESULT)
-    get_group : Proc(IADsSecurityDescriptor*, UInt8**, HRESULT)
-    put_group : Proc(IADsSecurityDescriptor*, UInt8*, HRESULT)
-    get_group_defaulted : Proc(IADsSecurityDescriptor*, Int16*, HRESULT)
-    put_group_defaulted : Proc(IADsSecurityDescriptor*, Int16, HRESULT)
-    get_discretionary_acl : Proc(IADsSecurityDescriptor*, IDispatch*, HRESULT)
-    put_discretionary_acl : Proc(IADsSecurityDescriptor*, IDispatch, HRESULT)
-    get_dacl_defaulted : Proc(IADsSecurityDescriptor*, Int16*, HRESULT)
-    put_dacl_defaulted : Proc(IADsSecurityDescriptor*, Int16, HRESULT)
-    get_system_acl : Proc(IADsSecurityDescriptor*, IDispatch*, HRESULT)
-    put_system_acl : Proc(IADsSecurityDescriptor*, IDispatch, HRESULT)
-    get_sacl_defaulted : Proc(IADsSecurityDescriptor*, Int16*, HRESULT)
-    put_sacl_defaulted : Proc(IADsSecurityDescriptor*, Int16, HRESULT)
-    copy_security_descriptor : Proc(IADsSecurityDescriptor*, IDispatch*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_revision : UInt64
+    put_revision : UInt64
+    get_control : UInt64
+    put_control : UInt64
+    get_owner : UInt64
+    put_owner : UInt64
+    get_owner_defaulted : UInt64
+    put_owner_defaulted : UInt64
+    get_group : UInt64
+    put_group : UInt64
+    get_group_defaulted : UInt64
+    put_group_defaulted : UInt64
+    get_discretionary_acl : UInt64
+    put_discretionary_acl : UInt64
+    get_dacl_defaulted : UInt64
+    put_dacl_defaulted : UInt64
+    get_system_acl : UInt64
+    put_system_acl : UInt64
+    get_sacl_defaulted : UInt64
+    put_sacl_defaulted : UInt64
+    copy_security_descriptor : UInt64
   end
 
   IADsSecurityDescriptor_GUID = "b8c787ca-9bdd-11d0-852c-00c04fd8d503"
@@ -3412,17 +3412,17 @@ lib LibWin32
   end
 
   struct IADsLargeIntegerVTbl
-    query_interface : Proc(IADsLargeInteger*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsLargeInteger*, UInt32)
-    release : Proc(IADsLargeInteger*, UInt32)
-    get_type_info_count : Proc(IADsLargeInteger*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsLargeInteger*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsLargeInteger*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsLargeInteger*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_high_part : Proc(IADsLargeInteger*, Int32*, HRESULT)
-    put_high_part : Proc(IADsLargeInteger*, Int32, HRESULT)
-    get_low_part : Proc(IADsLargeInteger*, Int32*, HRESULT)
-    put_low_part : Proc(IADsLargeInteger*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_high_part : UInt64
+    put_high_part : UInt64
+    get_low_part : UInt64
+    put_low_part : UInt64
   end
 
   IADsLargeInteger_GUID = "9068270b-0939-11d1-8be1-00c04fd8d503"
@@ -3432,20 +3432,20 @@ lib LibWin32
   end
 
   struct IADsNameTranslateVTbl
-    query_interface : Proc(IADsNameTranslate*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsNameTranslate*, UInt32)
-    release : Proc(IADsNameTranslate*, UInt32)
-    get_type_info_count : Proc(IADsNameTranslate*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsNameTranslate*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsNameTranslate*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsNameTranslate*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    put_chase_referral : Proc(IADsNameTranslate*, Int32, HRESULT)
-    init : Proc(IADsNameTranslate*, Int32, UInt8*, HRESULT)
-    init_ex : Proc(IADsNameTranslate*, Int32, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
-    set : Proc(IADsNameTranslate*, Int32, UInt8*, HRESULT)
-    get : Proc(IADsNameTranslate*, Int32, UInt8**, HRESULT)
-    set_ex : Proc(IADsNameTranslate*, Int32, VARIANT, HRESULT)
-    get_ex : Proc(IADsNameTranslate*, Int32, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    put_chase_referral : UInt64
+    init : UInt64
+    init_ex : UInt64
+    set : UInt64
+    get : UInt64
+    set_ex : UInt64
+    get_ex : UInt64
   end
 
   IADsNameTranslate_GUID = "b1b272a3-3625-11d1-a3a4-00c04fb950dc"
@@ -3455,15 +3455,15 @@ lib LibWin32
   end
 
   struct IADsCaseIgnoreListVTbl
-    query_interface : Proc(IADsCaseIgnoreList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsCaseIgnoreList*, UInt32)
-    release : Proc(IADsCaseIgnoreList*, UInt32)
-    get_type_info_count : Proc(IADsCaseIgnoreList*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsCaseIgnoreList*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsCaseIgnoreList*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsCaseIgnoreList*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_case_ignore_list : Proc(IADsCaseIgnoreList*, VARIANT*, HRESULT)
-    put_case_ignore_list : Proc(IADsCaseIgnoreList*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_case_ignore_list : UInt64
+    put_case_ignore_list : UInt64
   end
 
   IADsCaseIgnoreList_GUID = "7b66b533-4680-11d1-a3b4-00c04fb950dc"
@@ -3473,17 +3473,17 @@ lib LibWin32
   end
 
   struct IADsFaxNumberVTbl
-    query_interface : Proc(IADsFaxNumber*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsFaxNumber*, UInt32)
-    release : Proc(IADsFaxNumber*, UInt32)
-    get_type_info_count : Proc(IADsFaxNumber*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsFaxNumber*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsFaxNumber*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsFaxNumber*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_telephone_number : Proc(IADsFaxNumber*, UInt8**, HRESULT)
-    put_telephone_number : Proc(IADsFaxNumber*, UInt8*, HRESULT)
-    get_parameters : Proc(IADsFaxNumber*, VARIANT*, HRESULT)
-    put_parameters : Proc(IADsFaxNumber*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_telephone_number : UInt64
+    put_telephone_number : UInt64
+    get_parameters : UInt64
+    put_parameters : UInt64
   end
 
   IADsFaxNumber_GUID = "a910dea9-4680-11d1-a3b4-00c04fb950dc"
@@ -3493,17 +3493,17 @@ lib LibWin32
   end
 
   struct IADsNetAddressVTbl
-    query_interface : Proc(IADsNetAddress*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsNetAddress*, UInt32)
-    release : Proc(IADsNetAddress*, UInt32)
-    get_type_info_count : Proc(IADsNetAddress*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsNetAddress*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsNetAddress*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsNetAddress*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_address_type : Proc(IADsNetAddress*, Int32*, HRESULT)
-    put_address_type : Proc(IADsNetAddress*, Int32, HRESULT)
-    get_address : Proc(IADsNetAddress*, VARIANT*, HRESULT)
-    put_address : Proc(IADsNetAddress*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_address_type : UInt64
+    put_address_type : UInt64
+    get_address : UInt64
+    put_address : UInt64
   end
 
   IADsNetAddress_GUID = "b21a50a9-4080-11d1-a3ac-00c04fb950dc"
@@ -3513,15 +3513,15 @@ lib LibWin32
   end
 
   struct IADsOctetListVTbl
-    query_interface : Proc(IADsOctetList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsOctetList*, UInt32)
-    release : Proc(IADsOctetList*, UInt32)
-    get_type_info_count : Proc(IADsOctetList*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsOctetList*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsOctetList*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsOctetList*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_octet_list : Proc(IADsOctetList*, VARIANT*, HRESULT)
-    put_octet_list : Proc(IADsOctetList*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_octet_list : UInt64
+    put_octet_list : UInt64
   end
 
   IADsOctetList_GUID = "7b28b80f-4680-11d1-a3b4-00c04fb950dc"
@@ -3531,17 +3531,17 @@ lib LibWin32
   end
 
   struct IADsEmailVTbl
-    query_interface : Proc(IADsEmail*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsEmail*, UInt32)
-    release : Proc(IADsEmail*, UInt32)
-    get_type_info_count : Proc(IADsEmail*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsEmail*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsEmail*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsEmail*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_type : Proc(IADsEmail*, Int32*, HRESULT)
-    put_type : Proc(IADsEmail*, Int32, HRESULT)
-    get_address : Proc(IADsEmail*, UInt8**, HRESULT)
-    put_address : Proc(IADsEmail*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_type : UInt64
+    put_type : UInt64
+    get_address : UInt64
+    put_address : UInt64
   end
 
   IADsEmail_GUID = "97af011a-478e-11d1-a3b4-00c04fb950dc"
@@ -3551,19 +3551,19 @@ lib LibWin32
   end
 
   struct IADsPathVTbl
-    query_interface : Proc(IADsPath*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsPath*, UInt32)
-    release : Proc(IADsPath*, UInt32)
-    get_type_info_count : Proc(IADsPath*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsPath*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsPath*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsPath*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_type : Proc(IADsPath*, Int32*, HRESULT)
-    put_type : Proc(IADsPath*, Int32, HRESULT)
-    get_volume_name : Proc(IADsPath*, UInt8**, HRESULT)
-    put_volume_name : Proc(IADsPath*, UInt8*, HRESULT)
-    get_path : Proc(IADsPath*, UInt8**, HRESULT)
-    put_path : Proc(IADsPath*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_type : UInt64
+    put_type : UInt64
+    get_volume_name : UInt64
+    put_volume_name : UInt64
+    get_path : UInt64
+    put_path : UInt64
   end
 
   IADsPath_GUID = "b287fcd5-4080-11d1-a3ac-00c04fb950dc"
@@ -3573,23 +3573,23 @@ lib LibWin32
   end
 
   struct IADsReplicaPointerVTbl
-    query_interface : Proc(IADsReplicaPointer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsReplicaPointer*, UInt32)
-    release : Proc(IADsReplicaPointer*, UInt32)
-    get_type_info_count : Proc(IADsReplicaPointer*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsReplicaPointer*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsReplicaPointer*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsReplicaPointer*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_server_name : Proc(IADsReplicaPointer*, UInt8**, HRESULT)
-    put_server_name : Proc(IADsReplicaPointer*, UInt8*, HRESULT)
-    get_replica_type : Proc(IADsReplicaPointer*, Int32*, HRESULT)
-    put_replica_type : Proc(IADsReplicaPointer*, Int32, HRESULT)
-    get_replica_number : Proc(IADsReplicaPointer*, Int32*, HRESULT)
-    put_replica_number : Proc(IADsReplicaPointer*, Int32, HRESULT)
-    get_count : Proc(IADsReplicaPointer*, Int32*, HRESULT)
-    put_count : Proc(IADsReplicaPointer*, Int32, HRESULT)
-    get_replica_address_hints : Proc(IADsReplicaPointer*, VARIANT*, HRESULT)
-    put_replica_address_hints : Proc(IADsReplicaPointer*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_server_name : UInt64
+    put_server_name : UInt64
+    get_replica_type : UInt64
+    put_replica_type : UInt64
+    get_replica_number : UInt64
+    put_replica_number : UInt64
+    get_count : UInt64
+    put_count : UInt64
+    get_replica_address_hints : UInt64
+    put_replica_address_hints : UInt64
   end
 
   IADsReplicaPointer_GUID = "f60fb803-4080-11d1-a3ac-00c04fb950dc"
@@ -3599,20 +3599,20 @@ lib LibWin32
   end
 
   struct IADsAclVTbl
-    query_interface : Proc(IADsAcl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsAcl*, UInt32)
-    release : Proc(IADsAcl*, UInt32)
-    get_type_info_count : Proc(IADsAcl*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsAcl*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsAcl*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsAcl*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_protected_attr_name : Proc(IADsAcl*, UInt8**, HRESULT)
-    put_protected_attr_name : Proc(IADsAcl*, UInt8*, HRESULT)
-    get_subject_name : Proc(IADsAcl*, UInt8**, HRESULT)
-    put_subject_name : Proc(IADsAcl*, UInt8*, HRESULT)
-    get_privileges : Proc(IADsAcl*, Int32*, HRESULT)
-    put_privileges : Proc(IADsAcl*, Int32, HRESULT)
-    copy_acl : Proc(IADsAcl*, IDispatch*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_protected_attr_name : UInt64
+    put_protected_attr_name : UInt64
+    get_subject_name : UInt64
+    put_subject_name : UInt64
+    get_privileges : UInt64
+    put_privileges : UInt64
+    copy_acl : UInt64
   end
 
   IADsAcl_GUID = "8452d3ab-0869-11d1-a377-00c04fb950dc"
@@ -3622,17 +3622,17 @@ lib LibWin32
   end
 
   struct IADsTimestampVTbl
-    query_interface : Proc(IADsTimestamp*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsTimestamp*, UInt32)
-    release : Proc(IADsTimestamp*, UInt32)
-    get_type_info_count : Proc(IADsTimestamp*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsTimestamp*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsTimestamp*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsTimestamp*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_whole_seconds : Proc(IADsTimestamp*, Int32*, HRESULT)
-    put_whole_seconds : Proc(IADsTimestamp*, Int32, HRESULT)
-    get_event_id : Proc(IADsTimestamp*, Int32*, HRESULT)
-    put_event_id : Proc(IADsTimestamp*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_whole_seconds : UInt64
+    put_whole_seconds : UInt64
+    get_event_id : UInt64
+    put_event_id : UInt64
   end
 
   IADsTimestamp_GUID = "b2f5a901-4080-11d1-a3ac-00c04fb950dc"
@@ -3642,15 +3642,15 @@ lib LibWin32
   end
 
   struct IADsPostalAddressVTbl
-    query_interface : Proc(IADsPostalAddress*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsPostalAddress*, UInt32)
-    release : Proc(IADsPostalAddress*, UInt32)
-    get_type_info_count : Proc(IADsPostalAddress*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsPostalAddress*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsPostalAddress*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsPostalAddress*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_postal_address : Proc(IADsPostalAddress*, VARIANT*, HRESULT)
-    put_postal_address : Proc(IADsPostalAddress*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_postal_address : UInt64
+    put_postal_address : UInt64
   end
 
   IADsPostalAddress_GUID = "7adecf29-4680-11d1-a3b4-00c04fb950dc"
@@ -3660,17 +3660,17 @@ lib LibWin32
   end
 
   struct IADsBackLinkVTbl
-    query_interface : Proc(IADsBackLink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsBackLink*, UInt32)
-    release : Proc(IADsBackLink*, UInt32)
-    get_type_info_count : Proc(IADsBackLink*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsBackLink*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsBackLink*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsBackLink*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_remote_id : Proc(IADsBackLink*, Int32*, HRESULT)
-    put_remote_id : Proc(IADsBackLink*, Int32, HRESULT)
-    get_object_name : Proc(IADsBackLink*, UInt8**, HRESULT)
-    put_object_name : Proc(IADsBackLink*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_remote_id : UInt64
+    put_remote_id : UInt64
+    get_object_name : UInt64
+    put_object_name : UInt64
   end
 
   IADsBackLink_GUID = "fd1302bd-4080-11d1-a3ac-00c04fb950dc"
@@ -3680,19 +3680,19 @@ lib LibWin32
   end
 
   struct IADsTypedNameVTbl
-    query_interface : Proc(IADsTypedName*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsTypedName*, UInt32)
-    release : Proc(IADsTypedName*, UInt32)
-    get_type_info_count : Proc(IADsTypedName*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsTypedName*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsTypedName*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsTypedName*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_object_name : Proc(IADsTypedName*, UInt8**, HRESULT)
-    put_object_name : Proc(IADsTypedName*, UInt8*, HRESULT)
-    get_level : Proc(IADsTypedName*, Int32*, HRESULT)
-    put_level : Proc(IADsTypedName*, Int32, HRESULT)
-    get_interval : Proc(IADsTypedName*, Int32*, HRESULT)
-    put_interval : Proc(IADsTypedName*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_object_name : UInt64
+    put_object_name : UInt64
+    get_level : UInt64
+    put_level : UInt64
+    get_interval : UInt64
+    put_interval : UInt64
   end
 
   IADsTypedName_GUID = "b371a349-4080-11d1-a3ac-00c04fb950dc"
@@ -3702,17 +3702,17 @@ lib LibWin32
   end
 
   struct IADsHoldVTbl
-    query_interface : Proc(IADsHold*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsHold*, UInt32)
-    release : Proc(IADsHold*, UInt32)
-    get_type_info_count : Proc(IADsHold*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsHold*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsHold*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsHold*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_object_name : Proc(IADsHold*, UInt8**, HRESULT)
-    put_object_name : Proc(IADsHold*, UInt8*, HRESULT)
-    get_amount : Proc(IADsHold*, Int32*, HRESULT)
-    put_amount : Proc(IADsHold*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_object_name : UInt64
+    put_object_name : UInt64
+    get_amount : UInt64
+    put_amount : UInt64
   end
 
   IADsHold_GUID = "b3eb3b37-4080-11d1-a3ac-00c04fb950dc"
@@ -3722,15 +3722,15 @@ lib LibWin32
   end
 
   struct IADsObjectOptionsVTbl
-    query_interface : Proc(IADsObjectOptions*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsObjectOptions*, UInt32)
-    release : Proc(IADsObjectOptions*, UInt32)
-    get_type_info_count : Proc(IADsObjectOptions*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsObjectOptions*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsObjectOptions*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsObjectOptions*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_option : Proc(IADsObjectOptions*, Int32, VARIANT*, HRESULT)
-    set_option : Proc(IADsObjectOptions*, Int32, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_option : UInt64
+    set_option : UInt64
   end
 
   IADsObjectOptions_GUID = "46f14fda-232b-11d1-a808-00c04fd8d5a8"
@@ -3740,24 +3740,24 @@ lib LibWin32
   end
 
   struct IADsPathnameVTbl
-    query_interface : Proc(IADsPathname*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsPathname*, UInt32)
-    release : Proc(IADsPathname*, UInt32)
-    get_type_info_count : Proc(IADsPathname*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsPathname*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsPathname*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsPathname*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    set : Proc(IADsPathname*, UInt8*, Int32, HRESULT)
-    set_display_type : Proc(IADsPathname*, Int32, HRESULT)
-    retrieve : Proc(IADsPathname*, Int32, UInt8**, HRESULT)
-    get_num_elements : Proc(IADsPathname*, Int32*, HRESULT)
-    get_element : Proc(IADsPathname*, Int32, UInt8**, HRESULT)
-    add_leaf_element : Proc(IADsPathname*, UInt8*, HRESULT)
-    remove_leaf_element : Proc(IADsPathname*, HRESULT)
-    copy_path : Proc(IADsPathname*, IDispatch*, HRESULT)
-    get_escaped_element : Proc(IADsPathname*, Int32, UInt8*, UInt8**, HRESULT)
-    get_escaped_mode : Proc(IADsPathname*, Int32*, HRESULT)
-    put_escaped_mode : Proc(IADsPathname*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    set : UInt64
+    set_display_type : UInt64
+    retrieve : UInt64
+    get_num_elements : UInt64
+    get_element : UInt64
+    add_leaf_element : UInt64
+    remove_leaf_element : UInt64
+    copy_path : UInt64
+    get_escaped_element : UInt64
+    get_escaped_mode : UInt64
+    put_escaped_mode : UInt64
   end
 
   IADsPathname_GUID = "d592aed4-f420-11d0-a36e-00c04fb950dc"
@@ -3767,26 +3767,26 @@ lib LibWin32
   end
 
   struct IADsADSystemInfoVTbl
-    query_interface : Proc(IADsADSystemInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsADSystemInfo*, UInt32)
-    release : Proc(IADsADSystemInfo*, UInt32)
-    get_type_info_count : Proc(IADsADSystemInfo*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsADSystemInfo*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsADSystemInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsADSystemInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_user_name : Proc(IADsADSystemInfo*, UInt8**, HRESULT)
-    get_computer_name : Proc(IADsADSystemInfo*, UInt8**, HRESULT)
-    get_site_name : Proc(IADsADSystemInfo*, UInt8**, HRESULT)
-    get_domain_short_name : Proc(IADsADSystemInfo*, UInt8**, HRESULT)
-    get_domain_dns_name : Proc(IADsADSystemInfo*, UInt8**, HRESULT)
-    get_forest_dns_name : Proc(IADsADSystemInfo*, UInt8**, HRESULT)
-    get_pdc_role_owner : Proc(IADsADSystemInfo*, UInt8**, HRESULT)
-    get_schema_role_owner : Proc(IADsADSystemInfo*, UInt8**, HRESULT)
-    get_is_native_mode : Proc(IADsADSystemInfo*, Int16*, HRESULT)
-    get_any_dc_name : Proc(IADsADSystemInfo*, UInt8**, HRESULT)
-    get_dc_site_name : Proc(IADsADSystemInfo*, UInt8*, UInt8**, HRESULT)
-    refresh_schema_cache : Proc(IADsADSystemInfo*, HRESULT)
-    get_trees : Proc(IADsADSystemInfo*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_user_name : UInt64
+    get_computer_name : UInt64
+    get_site_name : UInt64
+    get_domain_short_name : UInt64
+    get_domain_dns_name : UInt64
+    get_forest_dns_name : UInt64
+    get_pdc_role_owner : UInt64
+    get_schema_role_owner : UInt64
+    get_is_native_mode : UInt64
+    get_any_dc_name : UInt64
+    get_dc_site_name : UInt64
+    refresh_schema_cache : UInt64
+    get_trees : UInt64
   end
 
   IADsADSystemInfo_GUID = "5bb11929-afd1-11d2-9cb9-0000f87a369e"
@@ -3796,17 +3796,17 @@ lib LibWin32
   end
 
   struct IADsWinNTSystemInfoVTbl
-    query_interface : Proc(IADsWinNTSystemInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsWinNTSystemInfo*, UInt32)
-    release : Proc(IADsWinNTSystemInfo*, UInt32)
-    get_type_info_count : Proc(IADsWinNTSystemInfo*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsWinNTSystemInfo*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsWinNTSystemInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsWinNTSystemInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_user_name : Proc(IADsWinNTSystemInfo*, UInt8**, HRESULT)
-    get_computer_name : Proc(IADsWinNTSystemInfo*, UInt8**, HRESULT)
-    get_domain_name : Proc(IADsWinNTSystemInfo*, UInt8**, HRESULT)
-    get_pdc : Proc(IADsWinNTSystemInfo*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_user_name : UInt64
+    get_computer_name : UInt64
+    get_domain_name : UInt64
+    get_pdc : UInt64
   end
 
   IADsWinNTSystemInfo_GUID = "6c6d65dc-afd1-11d2-9cb9-0000f87a369e"
@@ -3816,17 +3816,17 @@ lib LibWin32
   end
 
   struct IADsDNWithBinaryVTbl
-    query_interface : Proc(IADsDNWithBinary*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsDNWithBinary*, UInt32)
-    release : Proc(IADsDNWithBinary*, UInt32)
-    get_type_info_count : Proc(IADsDNWithBinary*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsDNWithBinary*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsDNWithBinary*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsDNWithBinary*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_binary_value : Proc(IADsDNWithBinary*, VARIANT*, HRESULT)
-    put_binary_value : Proc(IADsDNWithBinary*, VARIANT, HRESULT)
-    get_dn_string : Proc(IADsDNWithBinary*, UInt8**, HRESULT)
-    put_dn_string : Proc(IADsDNWithBinary*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_binary_value : UInt64
+    put_binary_value : UInt64
+    get_dn_string : UInt64
+    put_dn_string : UInt64
   end
 
   IADsDNWithBinary_GUID = "7e99c0a2-f935-11d2-ba96-00c04fb6d0d1"
@@ -3836,17 +3836,17 @@ lib LibWin32
   end
 
   struct IADsDNWithStringVTbl
-    query_interface : Proc(IADsDNWithString*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsDNWithString*, UInt32)
-    release : Proc(IADsDNWithString*, UInt32)
-    get_type_info_count : Proc(IADsDNWithString*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsDNWithString*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsDNWithString*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsDNWithString*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_string_value : Proc(IADsDNWithString*, UInt8**, HRESULT)
-    put_string_value : Proc(IADsDNWithString*, UInt8*, HRESULT)
-    get_dn_string : Proc(IADsDNWithString*, UInt8**, HRESULT)
-    put_dn_string : Proc(IADsDNWithString*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_string_value : UInt64
+    put_string_value : UInt64
+    get_dn_string : UInt64
+    put_dn_string : UInt64
   end
 
   IADsDNWithString_GUID = "370df02e-f934-11d2-ba96-00c04fb6d0d1"
@@ -3856,18 +3856,18 @@ lib LibWin32
   end
 
   struct IADsSecurityUtilityVTbl
-    query_interface : Proc(IADsSecurityUtility*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsSecurityUtility*, UInt32)
-    release : Proc(IADsSecurityUtility*, UInt32)
-    get_type_info_count : Proc(IADsSecurityUtility*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsSecurityUtility*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsSecurityUtility*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsSecurityUtility*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_security_descriptor : Proc(IADsSecurityUtility*, VARIANT, Int32, Int32, VARIANT*, HRESULT)
-    set_security_descriptor : Proc(IADsSecurityUtility*, VARIANT, Int32, VARIANT, Int32, HRESULT)
-    convert_security_descriptor : Proc(IADsSecurityUtility*, VARIANT, Int32, Int32, VARIANT*, HRESULT)
-    get_security_mask : Proc(IADsSecurityUtility*, Int32*, HRESULT)
-    put_security_mask : Proc(IADsSecurityUtility*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_security_descriptor : UInt64
+    set_security_descriptor : UInt64
+    convert_security_descriptor : UInt64
+    get_security_mask : UInt64
+    put_security_mask : UInt64
   end
 
   IADsSecurityUtility_GUID = "a63251b2-5f21-474b-ab52-4a8efad10895"
@@ -3877,14 +3877,14 @@ lib LibWin32
   end
 
   struct IDsBrowseDomainTreeVTbl
-    query_interface : Proc(IDsBrowseDomainTree*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDsBrowseDomainTree*, UInt32)
-    release : Proc(IDsBrowseDomainTree*, UInt32)
-    browse_to : Proc(IDsBrowseDomainTree*, LibC::HANDLE, LibC::LPWSTR*, UInt32, HRESULT)
-    get_domains : Proc(IDsBrowseDomainTree*, DOMAIN_TREE**, UInt32, HRESULT)
-    free_domains : Proc(IDsBrowseDomainTree*, DOMAIN_TREE**, HRESULT)
-    flush_cached_domains : Proc(IDsBrowseDomainTree*, HRESULT)
-    set_computer : Proc(IDsBrowseDomainTree*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    browse_to : UInt64
+    get_domains : UInt64
+    free_domains : UInt64
+    flush_cached_domains : UInt64
+    set_computer : UInt64
   end
 
   IDsBrowseDomainTree_GUID = "7cabcf1e-78f5-11d2-960c-00c04fa31a86"
@@ -3894,20 +3894,20 @@ lib LibWin32
   end
 
   struct IDsDisplaySpecifierVTbl
-    query_interface : Proc(IDsDisplaySpecifier*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDsDisplaySpecifier*, UInt32)
-    release : Proc(IDsDisplaySpecifier*, UInt32)
-    set_server : Proc(IDsDisplaySpecifier*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
-    set_language_id : Proc(IDsDisplaySpecifier*, UInt16, HRESULT)
-    get_display_specifier : Proc(IDsDisplaySpecifier*, LibC::LPWSTR, Guid*, Void**, HRESULT)
-    get_icon_location : Proc(IDsDisplaySpecifier*, LibC::LPWSTR, UInt32, Char*, Int32, Int32*, HRESULT)
-    get_icon : Proc(IDsDisplaySpecifier*, LibC::LPWSTR, UInt32, Int32, Int32, HANDLE)
-    get_friendly_class_name : Proc(IDsDisplaySpecifier*, LibC::LPWSTR, Char*, Int32, HRESULT)
-    get_friendly_attribute_name : Proc(IDsDisplaySpecifier*, LibC::LPWSTR, LibC::LPWSTR, Char*, UInt32, HRESULT)
-    is_class_container : Proc(IDsDisplaySpecifier*, LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::BOOL)
-    get_class_creation_info : Proc(IDsDisplaySpecifier*, LibC::LPWSTR, DSCLASSCREATIONINFO**, HRESULT)
-    enum_class_attributes : Proc(IDsDisplaySpecifier*, LibC::LPWSTR, LPDSENUMATTRIBUTES, LPARAM, HRESULT)
-    get_attribute_a_ds_type : Proc(IDsDisplaySpecifier*, LibC::LPWSTR, ADSTYPEENUM)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_server : UInt64
+    set_language_id : UInt64
+    get_display_specifier : UInt64
+    get_icon_location : UInt64
+    get_icon : UInt64
+    get_friendly_class_name : UInt64
+    get_friendly_attribute_name : UInt64
+    is_class_container : UInt64
+    get_class_creation_info : UInt64
+    enum_class_attributes : UInt64
+    get_attribute_a_ds_type : UInt64
   end
 
   IDsDisplaySpecifier_GUID = "1ab4a8c0-6a0b-11d2-ad49-00c04fa31a86"
@@ -3917,11 +3917,11 @@ lib LibWin32
   end
 
   struct IDsObjectPickerVTbl
-    query_interface : Proc(IDsObjectPicker*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDsObjectPicker*, UInt32)
-    release : Proc(IDsObjectPicker*, UInt32)
-    initialize : Proc(IDsObjectPicker*, DSOP_INIT_INFO*, HRESULT)
-    invoke_dialog : Proc(IDsObjectPicker*, LibC::HANDLE, IDataObject*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    invoke_dialog : UInt64
   end
 
   IDsObjectPicker_GUID = "0c87e64e-3b7a-11d2-b9e0-00c04fd8dbf7"
@@ -3931,12 +3931,12 @@ lib LibWin32
   end
 
   struct IDsObjectPickerCredentialsVTbl
-    query_interface : Proc(IDsObjectPickerCredentials*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDsObjectPickerCredentials*, UInt32)
-    release : Proc(IDsObjectPickerCredentials*, UInt32)
-    initialize : Proc(IDsObjectPickerCredentials*, DSOP_INIT_INFO*, HRESULT)
-    invoke_dialog : Proc(IDsObjectPickerCredentials*, LibC::HANDLE, IDataObject*, HRESULT)
-    set_credentials : Proc(IDsObjectPickerCredentials*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    invoke_dialog : UInt64
+    set_credentials : UInt64
   end
 
   IDsObjectPickerCredentials_GUID = "e2d3ec9b-d041-445a-8f16-4748de8fb1cf"
@@ -3946,11 +3946,11 @@ lib LibWin32
   end
 
   struct IDsAdminCreateObjVTbl
-    query_interface : Proc(IDsAdminCreateObj*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDsAdminCreateObj*, UInt32)
-    release : Proc(IDsAdminCreateObj*, UInt32)
-    initialize : Proc(IDsAdminCreateObj*, IADsContainer, IADs, LibC::LPWSTR, HRESULT)
-    create_modal : Proc(IDsAdminCreateObj*, LibC::HANDLE, IADs*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    create_modal : UInt64
   end
 
   IDsAdminCreateObj_GUID = "53554a38-f902-11d2-82b9-00c04f68928b"
@@ -3960,11 +3960,11 @@ lib LibWin32
   end
 
   struct IDsAdminNewObjVTbl
-    query_interface : Proc(IDsAdminNewObj*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDsAdminNewObj*, UInt32)
-    release : Proc(IDsAdminNewObj*, UInt32)
-    set_buttons : Proc(IDsAdminNewObj*, UInt32, LibC::BOOL, HRESULT)
-    get_page_counts : Proc(IDsAdminNewObj*, Int32*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_buttons : UInt64
+    get_page_counts : UInt64
   end
 
   IDsAdminNewObj_GUID = "f2573587-e6fc-11d2-82af-00c04f68928b"
@@ -3974,11 +3974,11 @@ lib LibWin32
   end
 
   struct IDsAdminNewObjPrimarySiteVTbl
-    query_interface : Proc(IDsAdminNewObjPrimarySite*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDsAdminNewObjPrimarySite*, UInt32)
-    release : Proc(IDsAdminNewObjPrimarySite*, UInt32)
-    create_new : Proc(IDsAdminNewObjPrimarySite*, LibC::LPWSTR, HRESULT)
-    commit : Proc(IDsAdminNewObjPrimarySite*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_new : UInt64
+    commit : UInt64
   end
 
   IDsAdminNewObjPrimarySite_GUID = "be2b487e-f904-11d2-82b9-00c04f68928b"
@@ -3988,15 +3988,15 @@ lib LibWin32
   end
 
   struct IDsAdminNewObjExtVTbl
-    query_interface : Proc(IDsAdminNewObjExt*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDsAdminNewObjExt*, UInt32)
-    release : Proc(IDsAdminNewObjExt*, UInt32)
-    initialize : Proc(IDsAdminNewObjExt*, IADsContainer, IADs, LibC::LPWSTR, IDsAdminNewObj, DSA_NEWOBJ_DISPINFO*, HRESULT)
-    add_pages : Proc(IDsAdminNewObjExt*, LPFNSVADDPROPSHEETPAGE, LPARAM, HRESULT)
-    set_object : Proc(IDsAdminNewObjExt*, IADs, HRESULT)
-    write_data : Proc(IDsAdminNewObjExt*, LibC::HANDLE, UInt32, HRESULT)
-    on_error : Proc(IDsAdminNewObjExt*, LibC::HANDLE, HRESULT, UInt32, HRESULT)
-    get_summary_info : Proc(IDsAdminNewObjExt*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    add_pages : UInt64
+    set_object : UInt64
+    write_data : UInt64
+    on_error : UInt64
+    get_summary_info : UInt64
   end
 
   IDsAdminNewObjExt_GUID = "6088eae2-e7bf-11d2-82af-00c04f68928b"
@@ -4006,13 +4006,13 @@ lib LibWin32
   end
 
   struct IDsAdminNotifyHandlerVTbl
-    query_interface : Proc(IDsAdminNotifyHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDsAdminNotifyHandler*, UInt32)
-    release : Proc(IDsAdminNotifyHandler*, UInt32)
-    initialize : Proc(IDsAdminNotifyHandler*, IDataObject, UInt32*, HRESULT)
-    rbegin : Proc(IDsAdminNotifyHandler*, UInt32, IDataObject, IDataObject, UInt32*, UInt8**, HRESULT)
-    notify : Proc(IDsAdminNotifyHandler*, UInt32, UInt32, HRESULT)
-    rend : Proc(IDsAdminNotifyHandler*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    begin_ : UInt64
+    notify : UInt64
+    end_ : UInt64
   end
 
   IDsAdminNotifyHandler_GUID = "e4a2b8b3-5a18-11d2-97c1-00a0c9a06d2d"
@@ -4047,7 +4047,7 @@ lib LibWin32
   fun ADsGetLastError(lperror : UInt32*, lperrorbuf : Char*, dwerrorbuflen : UInt32, lpnamebuf : Char*, dwnamebuflen : UInt32) : HRESULT
 
   # Params # dwerr : UInt32 [In],pszerror : LibC::LPWSTR [In],pszprovider : LibC::LPWSTR [In]
-  fun ADsSetLastError(dwerr : UInt32, pszerror : LibC::LPWSTR, pszprovider : LibC::LPWSTR)
+  fun ADsSetLastError(dwerr : UInt32, pszerror : LibC::LPWSTR, pszprovider : LibC::LPWSTR) : Void
 
   # Params # cb : UInt32 [In]
   fun AllocADsMem(cb : UInt32) : Void*
@@ -4080,7 +4080,7 @@ lib LibWin32
   fun AdsTypeToPropVariant(padsvalues : ADSVALUE*, dwnumvalues : UInt32, pvariant : VARIANT*) : HRESULT
 
   # Params # padsvalues : ADSVALUE* [In],dwnumvalues : UInt32 [In]
-  fun AdsFreeAdsValues(padsvalues : ADSVALUE*, dwnumvalues : UInt32)
+  fun AdsFreeAdsValues(padsvalues : ADSVALUE*, dwnumvalues : UInt32) : Void
 
   # Params # psecuritydescriptor : SECURITY_DESCRIPTOR* [In],pvarsec : VARIANT* [In],pszservername : LibC::LPWSTR [In],username : LibC::LPWSTR [In],password : LibC::LPWSTR [In],dwflags : UInt32 [In]
   fun BinarySDToSecurityDescriptor(psecuritydescriptor : SECURITY_DESCRIPTOR*, pvarsec : VARIANT*, pszservername : LibC::LPWSTR, username : LibC::LPWSTR, password : LibC::LPWSTR, dwflags : UInt32) : HRESULT
@@ -4230,7 +4230,7 @@ lib LibWin32
   fun DsMakePasswordCredentialsA(user : PSTR, domain : PSTR, password : PSTR, pauthidentity : Void**) : UInt32
 
   # Params # authidentity : Void* [In]
-  fun DsFreePasswordCredentials(authidentity : Void*)
+  fun DsFreePasswordCredentials(authidentity : Void*) : Void
 
   # Params # hds : LibC::HANDLE [In],flags : DS_NAME_FLAGS [In],formatoffered : DS_NAME_FORMAT [In],formatdesired : DS_NAME_FORMAT [In],cnames : UInt32 [In],rpnames : LibC::LPWSTR* [In],ppresult : DS_NAME_RESULTW** [In]
   fun DsCrackNamesW(hds : LibC::HANDLE, flags : DS_NAME_FLAGS, formatoffered : DS_NAME_FORMAT, formatdesired : DS_NAME_FORMAT, cnames : UInt32, rpnames : LibC::LPWSTR*, ppresult : DS_NAME_RESULTW**) : UInt32
@@ -4239,10 +4239,10 @@ lib LibWin32
   fun DsCrackNamesA(hds : LibC::HANDLE, flags : DS_NAME_FLAGS, formatoffered : DS_NAME_FORMAT, formatdesired : DS_NAME_FORMAT, cnames : UInt32, rpnames : PSTR*, ppresult : DS_NAME_RESULTA**) : UInt32
 
   # Params # presult : DS_NAME_RESULTW* [In]
-  fun DsFreeNameResultW(presult : DS_NAME_RESULTW*)
+  fun DsFreeNameResultW(presult : DS_NAME_RESULTW*) : Void
 
   # Params # presult : DS_NAME_RESULTA* [In]
-  fun DsFreeNameResultA(presult : DS_NAME_RESULTA*)
+  fun DsFreeNameResultA(presult : DS_NAME_RESULTA*) : Void
 
   # Params # servicetype : DS_SPN_NAME_TYPE [In],serviceclass : PSTR [In],servicename : PSTR [In],instanceport : UInt16 [In],cinstancenames : UInt16 [In],pinstancenames : PSTR* [In],pinstanceports : UInt16* [In],pcspn : UInt32* [In],prpszspn : PSTR** [In]
   fun DsGetSpnA(servicetype : DS_SPN_NAME_TYPE, serviceclass : PSTR, servicename : PSTR, instanceport : UInt16, cinstancenames : UInt16, pinstancenames : PSTR*, pinstanceports : UInt16*, pcspn : UInt32*, prpszspn : PSTR**) : UInt32
@@ -4251,10 +4251,10 @@ lib LibWin32
   fun DsGetSpnW(servicetype : DS_SPN_NAME_TYPE, serviceclass : LibC::LPWSTR, servicename : LibC::LPWSTR, instanceport : UInt16, cinstancenames : UInt16, pinstancenames : LibC::LPWSTR*, pinstanceports : UInt16*, pcspn : UInt32*, prpszspn : LibC::LPWSTR**) : UInt32
 
   # Params # cspn : UInt32 [In],rpszspn : PSTR* [In]
-  fun DsFreeSpnArrayA(cspn : UInt32, rpszspn : PSTR*)
+  fun DsFreeSpnArrayA(cspn : UInt32, rpszspn : PSTR*) : Void
 
   # Params # cspn : UInt32 [In],rpszspn : LibC::LPWSTR* [In]
-  fun DsFreeSpnArrayW(cspn : UInt32, rpszspn : LibC::LPWSTR*)
+  fun DsFreeSpnArrayW(cspn : UInt32, rpszspn : LibC::LPWSTR*) : Void
 
   # Params # hds : LibC::HANDLE [In],operation : DS_SPN_WRITE_OP [In],pszaccount : PSTR [In],cspn : UInt32 [In],rpszspn : PSTR* [In]
   fun DsWriteAccountSpnA(hds : LibC::HANDLE, operation : DS_SPN_WRITE_OP, pszaccount : PSTR, cspn : UInt32, rpszspn : PSTR*) : UInt32
@@ -4365,19 +4365,19 @@ lib LibWin32
   fun DsQuerySitesByCostA(hds : LibC::HANDLE, pszfromsite : PSTR, rgsztosites : PSTR*, ctosites : UInt32, dwflags : UInt32, prgsiteinfo : DS_SITE_COST_INFO**) : UInt32
 
   # Params # rgsiteinfo : DS_SITE_COST_INFO* [In]
-  fun DsQuerySitesFree(rgsiteinfo : DS_SITE_COST_INFO*)
+  fun DsQuerySitesFree(rgsiteinfo : DS_SITE_COST_INFO*) : Void
 
   # Params # hds : LibC::HANDLE [In],cguids : UInt32 [In],rguids : Guid* [In],ppguidmap : DS_SCHEMA_GUID_MAPA** [In]
   fun DsMapSchemaGuidsA(hds : LibC::HANDLE, cguids : UInt32, rguids : Guid*, ppguidmap : DS_SCHEMA_GUID_MAPA**) : UInt32
 
   # Params # pguidmap : DS_SCHEMA_GUID_MAPA* [In]
-  fun DsFreeSchemaGuidMapA(pguidmap : DS_SCHEMA_GUID_MAPA*)
+  fun DsFreeSchemaGuidMapA(pguidmap : DS_SCHEMA_GUID_MAPA*) : Void
 
   # Params # hds : LibC::HANDLE [In],cguids : UInt32 [In],rguids : Guid* [In],ppguidmap : DS_SCHEMA_GUID_MAPW** [In]
   fun DsMapSchemaGuidsW(hds : LibC::HANDLE, cguids : UInt32, rguids : Guid*, ppguidmap : DS_SCHEMA_GUID_MAPW**) : UInt32
 
   # Params # pguidmap : DS_SCHEMA_GUID_MAPW* [In]
-  fun DsFreeSchemaGuidMapW(pguidmap : DS_SCHEMA_GUID_MAPW*)
+  fun DsFreeSchemaGuidMapW(pguidmap : DS_SCHEMA_GUID_MAPW*) : Void
 
   # Params # hds : LibC::HANDLE [In],domainname : PSTR [In],infolevel : UInt32 [In],pcout : UInt32* [In],ppinfo : Void** [In]
   fun DsGetDomainControllerInfoA(hds : LibC::HANDLE, domainname : PSTR, infolevel : UInt32, pcout : UInt32*, ppinfo : Void**) : UInt32
@@ -4386,10 +4386,10 @@ lib LibWin32
   fun DsGetDomainControllerInfoW(hds : LibC::HANDLE, domainname : LibC::LPWSTR, infolevel : UInt32, pcout : UInt32*, ppinfo : Void**) : UInt32
 
   # Params # infolevel : UInt32 [In],cinfo : UInt32 [In],pinfo : Void* [In]
-  fun DsFreeDomainControllerInfoA(infolevel : UInt32, cinfo : UInt32, pinfo : Void*)
+  fun DsFreeDomainControllerInfoA(infolevel : UInt32, cinfo : UInt32, pinfo : Void*) : Void
 
   # Params # infolevel : UInt32 [In],cinfo : UInt32 [In],pinfo : Void* [In]
-  fun DsFreeDomainControllerInfoW(infolevel : UInt32, cinfo : UInt32, pinfo : Void*)
+  fun DsFreeDomainControllerInfoW(infolevel : UInt32, cinfo : UInt32, pinfo : Void*) : Void
 
   # Params # hds : LibC::HANDLE [In],taskid : DS_KCC_TASKID [In],dwflags : UInt32 [In]
   fun DsReplicaConsistencyCheck(hds : LibC::HANDLE, taskid : DS_KCC_TASKID, dwflags : UInt32) : UInt32
@@ -4407,7 +4407,7 @@ lib LibWin32
   fun DsReplicaGetInfo2W(hds : LibC::HANDLE, infotype : DS_REPL_INFO_TYPE, pszobject : LibC::LPWSTR, puuidforsourcedsaobjguid : Guid*, pszattributename : LibC::LPWSTR, pszvalue : LibC::LPWSTR, dwflags : UInt32, dwenumerationcontext : UInt32, ppinfo : Void**) : UInt32
 
   # Params # infotype : DS_REPL_INFO_TYPE [In],pinfo : Void* [In]
-  fun DsReplicaFreeInfo(infotype : DS_REPL_INFO_TYPE, pinfo : Void*)
+  fun DsReplicaFreeInfo(infotype : DS_REPL_INFO_TYPE, pinfo : Void*) : Void
 
   # Params # hds : LibC::HANDLE [In],flags : UInt32 [In],srcdomain : LibC::LPWSTR [In],srcprincipal : LibC::LPWSTR [In],srcdomaincontroller : LibC::LPWSTR [In],srcdomaincreds : Void* [In],dstdomain : LibC::LPWSTR [In],dstprincipal : LibC::LPWSTR [In]
   fun DsAddSidHistoryW(hds : LibC::HANDLE, flags : UInt32, srcdomain : LibC::LPWSTR, srcprincipal : LibC::LPWSTR, srcdomaincontroller : LibC::LPWSTR, srcdomaincreds : Void*, dstdomain : LibC::LPWSTR, dstprincipal : LibC::LPWSTR) : UInt32
@@ -4425,7 +4425,7 @@ lib LibWin32
   fun DsRoleGetPrimaryDomainInformation(lpserver : LibC::LPWSTR, infolevel : DSROLE_PRIMARY_DOMAIN_INFO_LEVEL, buffer : UInt8**) : UInt32
 
   # Params # buffer : Void* [In]
-  fun DsRoleFreeMemory(buffer : Void*)
+  fun DsRoleFreeMemory(buffer : Void*) : Void
 
   # Params # computername : PSTR [In],domainname : PSTR [In],domainguid : Guid* [In],sitename : PSTR [In],flags : UInt32 [In],domaincontrollerinfo : DOMAIN_CONTROLLER_INFOA** [In]
   fun DsGetDcNameA(computername : PSTR, domainname : PSTR, domainguid : Guid*, sitename : PSTR, flags : UInt32, domaincontrollerinfo : DOMAIN_CONTROLLER_INFOA**) : UInt32
@@ -4494,5 +4494,4529 @@ lib LibWin32
   fun DsGetDcNextA(getdccontexthandle : LibC::HANDLE, sockaddresscount : UInt32*, sockaddresses : SOCKET_ADDRESS**, dnshostname : PSTR*) : UInt32
 
   # Params # getdccontexthandle : GetDcContextHandle [In]
-  fun DsGetDcCloseW(getdccontexthandle : GetDcContextHandle)
+  fun DsGetDcCloseW(getdccontexthandle : GetDcContextHandle) : Void
+end
+struct LibWin32::IQueryForm
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(hkform : HKEY) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HKEY, HRESULT)).call(hkform)
+  end
+  def add_forms(paddformsproc : LPCQADDFORMSPROC, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.add_forms.unsafe_as(Proc(LPCQADDFORMSPROC, LPARAM, HRESULT)).call(paddformsproc, lparam)
+  end
+  def add_pages(paddpagesproc : LPCQADDPAGESPROC, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.add_pages.unsafe_as(Proc(LPCQADDPAGESPROC, LPARAM, HRESULT)).call(paddpagesproc, lparam)
+  end
+end
+struct LibWin32::IPersistQuery
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_class_id(pclassid : Guid*) : HRESULT
+    @lpVtbl.value.get_class_id.unsafe_as(Proc(Guid*, HRESULT)).call(pclassid)
+  end
+  def write_string(psection : LibC::LPWSTR, pvaluename : LibC::LPWSTR, pvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_string.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(psection, pvaluename, pvalue)
+  end
+  def read_string(psection : LibC::LPWSTR, pvaluename : LibC::LPWSTR, pbuffer : LibC::LPWSTR, cchbuffer : Int32) : HRESULT
+    @lpVtbl.value.read_string.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, Int32, HRESULT)).call(psection, pvaluename, pbuffer, cchbuffer)
+  end
+  def write_int(psection : LibC::LPWSTR, pvaluename : LibC::LPWSTR, value : Int32) : HRESULT
+    @lpVtbl.value.write_int.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Int32, HRESULT)).call(psection, pvaluename, value)
+  end
+  def read_int(psection : LibC::LPWSTR, pvaluename : LibC::LPWSTR, pvalue : Int32*) : HRESULT
+    @lpVtbl.value.read_int.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Int32*, HRESULT)).call(psection, pvaluename, pvalue)
+  end
+  def write_struct(psection : LibC::LPWSTR, pvaluename : LibC::LPWSTR, pstruct : Void*, cbstruct : UInt32) : HRESULT
+    @lpVtbl.value.write_struct.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Void*, UInt32, HRESULT)).call(psection, pvaluename, pstruct, cbstruct)
+  end
+  def read_struct(psection : LibC::LPWSTR, pvaluename : LibC::LPWSTR, pstruct : Void*, cbstruct : UInt32) : HRESULT
+    @lpVtbl.value.read_struct.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Void*, UInt32, HRESULT)).call(psection, pvaluename, pstruct, cbstruct)
+  end
+  def clear : HRESULT
+    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ICommonQuery
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def open_query_window(hwndparent : LibC::HANDLE, pquerywnd : OPENQUERYWINDOW*, ppdataobject : IDataObject*) : HRESULT
+    @lpVtbl.value.open_query_window.unsafe_as(Proc(LibC::HANDLE, OPENQUERYWINDOW*, IDataObject*, HRESULT)).call(hwndparent, pquerywnd, ppdataobject)
+  end
+end
+struct LibWin32::IADs
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+end
+struct LibWin32::IADsContainer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get__new_enum(retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(retval)
+  end
+  def get_filter(pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.get_filter.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvar)
+  end
+  def put_filter(var : VARIANT) : HRESULT
+    @lpVtbl.value.put_filter.unsafe_as(Proc(VARIANT, HRESULT)).call(var)
+  end
+  def get_hints(pvfilter : VARIANT*) : HRESULT
+    @lpVtbl.value.get_hints.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvfilter)
+  end
+  def put_hints(vhints : VARIANT) : HRESULT
+    @lpVtbl.value.put_hints.unsafe_as(Proc(VARIANT, HRESULT)).call(vhints)
+  end
+  def get_object(classname : UInt8*, relativename : UInt8*, ppobject : IDispatch*) : HRESULT
+    @lpVtbl.value.get_object.unsafe_as(Proc(UInt8*, UInt8*, IDispatch*, HRESULT)).call(classname, relativename, ppobject)
+  end
+  def create(classname : UInt8*, relativename : UInt8*, ppobject : IDispatch*) : HRESULT
+    @lpVtbl.value.create.unsafe_as(Proc(UInt8*, UInt8*, IDispatch*, HRESULT)).call(classname, relativename, ppobject)
+  end
+  def delete(bstrclassname : UInt8*, bstrrelativename : UInt8*) : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrclassname, bstrrelativename)
+  end
+  def copy_here(sourcename : UInt8*, newname : UInt8*, ppobject : IDispatch*) : HRESULT
+    @lpVtbl.value.copy_here.unsafe_as(Proc(UInt8*, UInt8*, IDispatch*, HRESULT)).call(sourcename, newname, ppobject)
+  end
+  def move_here(sourcename : UInt8*, newname : UInt8*, ppobject : IDispatch*) : HRESULT
+    @lpVtbl.value.move_here.unsafe_as(Proc(UInt8*, UInt8*, IDispatch*, HRESULT)).call(sourcename, newname, ppobject)
+  end
+end
+struct LibWin32::IADsCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(ppenumerator : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppenumerator)
+  end
+  def add(bstrname : UInt8*, vitem : VARIANT) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vitem)
+  end
+  def remove(bstritemtoberemoved : UInt8*) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(UInt8*, HRESULT)).call(bstritemtoberemoved)
+  end
+  def get_object(bstrname : UInt8*, pvitem : VARIANT*) : HRESULT
+    @lpVtbl.value.get_object.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvitem)
+  end
+end
+struct LibWin32::IADsMembers
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def get__new_enum(ppenumerator : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppenumerator)
+  end
+  def get_filter(pvfilter : VARIANT*) : HRESULT
+    @lpVtbl.value.get_filter.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvfilter)
+  end
+  def put_filter(pvfilter : VARIANT) : HRESULT
+    @lpVtbl.value.put_filter.unsafe_as(Proc(VARIANT, HRESULT)).call(pvfilter)
+  end
+end
+struct LibWin32::IADsPropertyList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_property_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_property_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def next(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def skip(celements : Int32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(Int32, HRESULT)).call(celements)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def item(varindex : VARIANT, pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.item.unsafe_as(Proc(VARIANT, VARIANT*, HRESULT)).call(varindex, pvariant)
+  end
+  def get_property_item(bstrname : UInt8*, lnadstype : Int32, pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property_item.unsafe_as(Proc(UInt8*, Int32, VARIANT*, HRESULT)).call(bstrname, lnadstype, pvariant)
+  end
+  def put_property_item(vardata : VARIANT) : HRESULT
+    @lpVtbl.value.put_property_item.unsafe_as(Proc(VARIANT, HRESULT)).call(vardata)
+  end
+  def reset_property_item(varentry : VARIANT) : HRESULT
+    @lpVtbl.value.reset_property_item.unsafe_as(Proc(VARIANT, HRESULT)).call(varentry)
+  end
+  def purge_property_list : HRESULT
+    @lpVtbl.value.purge_property_list.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IADsPropertyEntry
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def clear : HRESULT
+    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+  def get_a_ds_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_a_ds_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_a_ds_type(lnadstype : Int32) : HRESULT
+    @lpVtbl.value.put_a_ds_type.unsafe_as(Proc(Int32, HRESULT)).call(lnadstype)
+  end
+  def get_control_code(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_control_code.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_control_code(lncontrolcode : Int32) : HRESULT
+    @lpVtbl.value.put_control_code.unsafe_as(Proc(Int32, HRESULT)).call(lncontrolcode)
+  end
+  def get_values(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_values.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_values(vvalues : VARIANT) : HRESULT
+    @lpVtbl.value.put_values.unsafe_as(Proc(VARIANT, HRESULT)).call(vvalues)
+  end
+end
+struct LibWin32::IADsPropertyValue
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def clear : HRESULT
+    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_a_ds_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_a_ds_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_a_ds_type(lnadstype : Int32) : HRESULT
+    @lpVtbl.value.put_a_ds_type.unsafe_as(Proc(Int32, HRESULT)).call(lnadstype)
+  end
+  def get_dn_string(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_dn_string.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_dn_string(bstrdnstring : UInt8*) : HRESULT
+    @lpVtbl.value.put_dn_string.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdnstring)
+  end
+  def get_case_exact_string(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_case_exact_string.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_case_exact_string(bstrcaseexactstring : UInt8*) : HRESULT
+    @lpVtbl.value.put_case_exact_string.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrcaseexactstring)
+  end
+  def get_case_ignore_string(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_case_ignore_string.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_case_ignore_string(bstrcaseignorestring : UInt8*) : HRESULT
+    @lpVtbl.value.put_case_ignore_string.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrcaseignorestring)
+  end
+  def get_printable_string(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_printable_string.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_printable_string(bstrprintablestring : UInt8*) : HRESULT
+    @lpVtbl.value.put_printable_string.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprintablestring)
+  end
+  def get_numeric_string(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_numeric_string.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_numeric_string(bstrnumericstring : UInt8*) : HRESULT
+    @lpVtbl.value.put_numeric_string.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrnumericstring)
+  end
+  def get_boolean(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_boolean.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_boolean(lnboolean : Int32) : HRESULT
+    @lpVtbl.value.put_boolean.unsafe_as(Proc(Int32, HRESULT)).call(lnboolean)
+  end
+  def get_integer(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_integer.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_integer(lninteger : Int32) : HRESULT
+    @lpVtbl.value.put_integer.unsafe_as(Proc(Int32, HRESULT)).call(lninteger)
+  end
+  def get_octet_string(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_octet_string.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_octet_string(voctetstring : VARIANT) : HRESULT
+    @lpVtbl.value.put_octet_string.unsafe_as(Proc(VARIANT, HRESULT)).call(voctetstring)
+  end
+  def get_security_descriptor(retval : IDispatch*) : HRESULT
+    @lpVtbl.value.get_security_descriptor.unsafe_as(Proc(IDispatch*, HRESULT)).call(retval)
+  end
+  def put_security_descriptor(psecuritydescriptor : IDispatch) : HRESULT
+    @lpVtbl.value.put_security_descriptor.unsafe_as(Proc(IDispatch, HRESULT)).call(psecuritydescriptor)
+  end
+  def get_large_integer(retval : IDispatch*) : HRESULT
+    @lpVtbl.value.get_large_integer.unsafe_as(Proc(IDispatch*, HRESULT)).call(retval)
+  end
+  def put_large_integer(plargeinteger : IDispatch) : HRESULT
+    @lpVtbl.value.put_large_integer.unsafe_as(Proc(IDispatch, HRESULT)).call(plargeinteger)
+  end
+  def get_utc_time(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_utc_time.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def put_utc_time(dautctime : Float64) : HRESULT
+    @lpVtbl.value.put_utc_time.unsafe_as(Proc(Float64, HRESULT)).call(dautctime)
+  end
+end
+struct LibWin32::IADsPropertyValue2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_object_property(lnadstype : Int32*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_object_property.unsafe_as(Proc(Int32*, VARIANT*, HRESULT)).call(lnadstype, pvprop)
+  end
+  def put_object_property(lnadstype : Int32, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_object_property.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lnadstype, vprop)
+  end
+end
+struct LibWin32::IPrivateDispatch
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def adsi_initialize_dispatch_manager(dwextensionid : Int32) : HRESULT
+    @lpVtbl.value.adsi_initialize_dispatch_manager.unsafe_as(Proc(Int32, HRESULT)).call(dwextensionid)
+  end
+  def adsi_get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.adsi_get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def adsi_get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.adsi_get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def adsi_get_i_ds_of_names(riid : Guid*, rgsznames : UInt16**, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.adsi_get_i_ds_of_names.unsafe_as(Proc(Guid*, UInt16**, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def adsi_invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.adsi_invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IPrivateUnknown
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def adsi_initialize_object(lpszusername : UInt8*, lpszpassword : UInt8*, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.adsi_initialize_object.unsafe_as(Proc(UInt8*, UInt8*, Int32, HRESULT)).call(lpszusername, lpszpassword, lnreserved)
+  end
+  def adsi_release_object : HRESULT
+    @lpVtbl.value.adsi_release_object.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IADsExtension
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def operate(dwcode : UInt32, vardata1 : VARIANT, vardata2 : VARIANT, vardata3 : VARIANT) : HRESULT
+    @lpVtbl.value.operate.unsafe_as(Proc(UInt32, VARIANT, VARIANT, VARIANT, HRESULT)).call(dwcode, vardata1, vardata2, vardata3)
+  end
+  def private_get_i_ds_of_names(riid : Guid*, rgsznames : UInt16**, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.private_get_i_ds_of_names.unsafe_as(Proc(Guid*, UInt16**, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def private_invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.private_invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IADsDeleteOps
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def delete_object(lnflags : Int32) : HRESULT
+    @lpVtbl.value.delete_object.unsafe_as(Proc(Int32, HRESULT)).call(lnflags)
+  end
+end
+struct LibWin32::IADsNamespaces
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_default_container(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_default_container.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_default_container(bstrdefaultcontainer : UInt8*) : HRESULT
+    @lpVtbl.value.put_default_container.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdefaultcontainer)
+  end
+end
+struct LibWin32::IADsClass
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_primary_interface(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_primary_interface.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_clsid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_clsid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_clsid(bstrclsid : UInt8*) : HRESULT
+    @lpVtbl.value.put_clsid.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrclsid)
+  end
+  def get_oid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_oid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_oid(bstroid : UInt8*) : HRESULT
+    @lpVtbl.value.put_oid.unsafe_as(Proc(UInt8*, HRESULT)).call(bstroid)
+  end
+  def get_abstract(retval : Int16*) : HRESULT
+    @lpVtbl.value.get_abstract.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  end
+  def put_abstract(fabstract : Int16) : HRESULT
+    @lpVtbl.value.put_abstract.unsafe_as(Proc(Int16, HRESULT)).call(fabstract)
+  end
+  def get_auxiliary(retval : Int16*) : HRESULT
+    @lpVtbl.value.get_auxiliary.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  end
+  def put_auxiliary(fauxiliary : Int16) : HRESULT
+    @lpVtbl.value.put_auxiliary.unsafe_as(Proc(Int16, HRESULT)).call(fauxiliary)
+  end
+  def get_mandatory_properties(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_mandatory_properties.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_mandatory_properties(vmandatoryproperties : VARIANT) : HRESULT
+    @lpVtbl.value.put_mandatory_properties.unsafe_as(Proc(VARIANT, HRESULT)).call(vmandatoryproperties)
+  end
+  def get_optional_properties(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_optional_properties.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_optional_properties(voptionalproperties : VARIANT) : HRESULT
+    @lpVtbl.value.put_optional_properties.unsafe_as(Proc(VARIANT, HRESULT)).call(voptionalproperties)
+  end
+  def get_naming_properties(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_naming_properties.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_naming_properties(vnamingproperties : VARIANT) : HRESULT
+    @lpVtbl.value.put_naming_properties.unsafe_as(Proc(VARIANT, HRESULT)).call(vnamingproperties)
+  end
+  def get_derived_from(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_derived_from.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_derived_from(vderivedfrom : VARIANT) : HRESULT
+    @lpVtbl.value.put_derived_from.unsafe_as(Proc(VARIANT, HRESULT)).call(vderivedfrom)
+  end
+  def get_aux_derived_from(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_aux_derived_from.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_aux_derived_from(vauxderivedfrom : VARIANT) : HRESULT
+    @lpVtbl.value.put_aux_derived_from.unsafe_as(Proc(VARIANT, HRESULT)).call(vauxderivedfrom)
+  end
+  def get_possible_superiors(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_possible_superiors.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_possible_superiors(vpossiblesuperiors : VARIANT) : HRESULT
+    @lpVtbl.value.put_possible_superiors.unsafe_as(Proc(VARIANT, HRESULT)).call(vpossiblesuperiors)
+  end
+  def get_containment(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_containment.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_containment(vcontainment : VARIANT) : HRESULT
+    @lpVtbl.value.put_containment.unsafe_as(Proc(VARIANT, HRESULT)).call(vcontainment)
+  end
+  def get_container(retval : Int16*) : HRESULT
+    @lpVtbl.value.get_container.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  end
+  def put_container(fcontainer : Int16) : HRESULT
+    @lpVtbl.value.put_container.unsafe_as(Proc(Int16, HRESULT)).call(fcontainer)
+  end
+  def get_help_file_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_help_file_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_help_file_name(bstrhelpfilename : UInt8*) : HRESULT
+    @lpVtbl.value.put_help_file_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrhelpfilename)
+  end
+  def get_help_file_context(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_help_file_context.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_help_file_context(lnhelpfilecontext : Int32) : HRESULT
+    @lpVtbl.value.put_help_file_context.unsafe_as(Proc(Int32, HRESULT)).call(lnhelpfilecontext)
+  end
+  def qualifiers(ppqualifiers : IADsCollection*) : HRESULT
+    @lpVtbl.value.qualifiers.unsafe_as(Proc(IADsCollection*, HRESULT)).call(ppqualifiers)
+  end
+end
+struct LibWin32::IADsProperty
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_oid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_oid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_oid(bstroid : UInt8*) : HRESULT
+    @lpVtbl.value.put_oid.unsafe_as(Proc(UInt8*, HRESULT)).call(bstroid)
+  end
+  def get_syntax(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_syntax.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_syntax(bstrsyntax : UInt8*) : HRESULT
+    @lpVtbl.value.put_syntax.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsyntax)
+  end
+  def get_max_range(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_max_range.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_max_range(lnmaxrange : Int32) : HRESULT
+    @lpVtbl.value.put_max_range.unsafe_as(Proc(Int32, HRESULT)).call(lnmaxrange)
+  end
+  def get_min_range(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_min_range.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_min_range(lnminrange : Int32) : HRESULT
+    @lpVtbl.value.put_min_range.unsafe_as(Proc(Int32, HRESULT)).call(lnminrange)
+  end
+  def get_multi_valued(retval : Int16*) : HRESULT
+    @lpVtbl.value.get_multi_valued.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  end
+  def put_multi_valued(fmultivalued : Int16) : HRESULT
+    @lpVtbl.value.put_multi_valued.unsafe_as(Proc(Int16, HRESULT)).call(fmultivalued)
+  end
+  def qualifiers(ppqualifiers : IADsCollection*) : HRESULT
+    @lpVtbl.value.qualifiers.unsafe_as(Proc(IADsCollection*, HRESULT)).call(ppqualifiers)
+  end
+end
+struct LibWin32::IADsSyntax
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_ole_auto_data_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_ole_auto_data_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_ole_auto_data_type(lnoleautodatatype : Int32) : HRESULT
+    @lpVtbl.value.put_ole_auto_data_type.unsafe_as(Proc(Int32, HRESULT)).call(lnoleautodatatype)
+  end
+end
+struct LibWin32::IADsLocality
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_locality_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_locality_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_locality_name(bstrlocalityname : UInt8*) : HRESULT
+    @lpVtbl.value.put_locality_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrlocalityname)
+  end
+  def get_postal_address(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_postal_address.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_postal_address(bstrpostaladdress : UInt8*) : HRESULT
+    @lpVtbl.value.put_postal_address.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrpostaladdress)
+  end
+  def get_see_also(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_see_also.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_see_also(vseealso : VARIANT) : HRESULT
+    @lpVtbl.value.put_see_also.unsafe_as(Proc(VARIANT, HRESULT)).call(vseealso)
+  end
+end
+struct LibWin32::IADsO
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_locality_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_locality_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_locality_name(bstrlocalityname : UInt8*) : HRESULT
+    @lpVtbl.value.put_locality_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrlocalityname)
+  end
+  def get_postal_address(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_postal_address.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_postal_address(bstrpostaladdress : UInt8*) : HRESULT
+    @lpVtbl.value.put_postal_address.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrpostaladdress)
+  end
+  def get_telephone_number(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_telephone_number.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_telephone_number(bstrtelephonenumber : UInt8*) : HRESULT
+    @lpVtbl.value.put_telephone_number.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtelephonenumber)
+  end
+  def get_fax_number(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_fax_number.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_fax_number(bstrfaxnumber : UInt8*) : HRESULT
+    @lpVtbl.value.put_fax_number.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrfaxnumber)
+  end
+  def get_see_also(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_see_also.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_see_also(vseealso : VARIANT) : HRESULT
+    @lpVtbl.value.put_see_also.unsafe_as(Proc(VARIANT, HRESULT)).call(vseealso)
+  end
+end
+struct LibWin32::IADsOU
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_locality_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_locality_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_locality_name(bstrlocalityname : UInt8*) : HRESULT
+    @lpVtbl.value.put_locality_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrlocalityname)
+  end
+  def get_postal_address(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_postal_address.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_postal_address(bstrpostaladdress : UInt8*) : HRESULT
+    @lpVtbl.value.put_postal_address.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrpostaladdress)
+  end
+  def get_telephone_number(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_telephone_number.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_telephone_number(bstrtelephonenumber : UInt8*) : HRESULT
+    @lpVtbl.value.put_telephone_number.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtelephonenumber)
+  end
+  def get_fax_number(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_fax_number.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_fax_number(bstrfaxnumber : UInt8*) : HRESULT
+    @lpVtbl.value.put_fax_number.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrfaxnumber)
+  end
+  def get_see_also(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_see_also.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_see_also(vseealso : VARIANT) : HRESULT
+    @lpVtbl.value.put_see_also.unsafe_as(Proc(VARIANT, HRESULT)).call(vseealso)
+  end
+  def get_business_category(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_business_category.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_business_category(bstrbusinesscategory : UInt8*) : HRESULT
+    @lpVtbl.value.put_business_category.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrbusinesscategory)
+  end
+end
+struct LibWin32::IADsDomain
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_is_workgroup(retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_workgroup.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  end
+  def get_min_password_length(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_min_password_length.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_min_password_length(lnminpasswordlength : Int32) : HRESULT
+    @lpVtbl.value.put_min_password_length.unsafe_as(Proc(Int32, HRESULT)).call(lnminpasswordlength)
+  end
+  def get_min_password_age(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_min_password_age.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_min_password_age(lnminpasswordage : Int32) : HRESULT
+    @lpVtbl.value.put_min_password_age.unsafe_as(Proc(Int32, HRESULT)).call(lnminpasswordage)
+  end
+  def get_max_password_age(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_max_password_age.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_max_password_age(lnmaxpasswordage : Int32) : HRESULT
+    @lpVtbl.value.put_max_password_age.unsafe_as(Proc(Int32, HRESULT)).call(lnmaxpasswordage)
+  end
+  def get_max_bad_passwords_allowed(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_max_bad_passwords_allowed.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_max_bad_passwords_allowed(lnmaxbadpasswordsallowed : Int32) : HRESULT
+    @lpVtbl.value.put_max_bad_passwords_allowed.unsafe_as(Proc(Int32, HRESULT)).call(lnmaxbadpasswordsallowed)
+  end
+  def get_password_history_length(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_password_history_length.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_password_history_length(lnpasswordhistorylength : Int32) : HRESULT
+    @lpVtbl.value.put_password_history_length.unsafe_as(Proc(Int32, HRESULT)).call(lnpasswordhistorylength)
+  end
+  def get_password_attributes(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_password_attributes.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_password_attributes(lnpasswordattributes : Int32) : HRESULT
+    @lpVtbl.value.put_password_attributes.unsafe_as(Proc(Int32, HRESULT)).call(lnpasswordattributes)
+  end
+  def get_auto_unlock_interval(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_auto_unlock_interval.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_auto_unlock_interval(lnautounlockinterval : Int32) : HRESULT
+    @lpVtbl.value.put_auto_unlock_interval.unsafe_as(Proc(Int32, HRESULT)).call(lnautounlockinterval)
+  end
+  def get_lockout_observation_interval(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_lockout_observation_interval.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_lockout_observation_interval(lnlockoutobservationinterval : Int32) : HRESULT
+    @lpVtbl.value.put_lockout_observation_interval.unsafe_as(Proc(Int32, HRESULT)).call(lnlockoutobservationinterval)
+  end
+end
+struct LibWin32::IADsComputer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_computer_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_computer_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_site(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_site.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_location(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_location.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_location(bstrlocation : UInt8*) : HRESULT
+    @lpVtbl.value.put_location.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrlocation)
+  end
+  def get_primary_user(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_primary_user.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_primary_user(bstrprimaryuser : UInt8*) : HRESULT
+    @lpVtbl.value.put_primary_user.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprimaryuser)
+  end
+  def get_owner(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_owner(bstrowner : UInt8*) : HRESULT
+    @lpVtbl.value.put_owner.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrowner)
+  end
+  def get_division(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_division.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_division(bstrdivision : UInt8*) : HRESULT
+    @lpVtbl.value.put_division.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdivision)
+  end
+  def get_department(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_department.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_department(bstrdepartment : UInt8*) : HRESULT
+    @lpVtbl.value.put_department.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdepartment)
+  end
+  def get_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_role(bstrrole : UInt8*) : HRESULT
+    @lpVtbl.value.put_role.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrrole)
+  end
+  def get_operating_system(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_operating_system.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_operating_system(bstroperatingsystem : UInt8*) : HRESULT
+    @lpVtbl.value.put_operating_system.unsafe_as(Proc(UInt8*, HRESULT)).call(bstroperatingsystem)
+  end
+  def get_operating_system_version(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_operating_system_version.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_operating_system_version(bstroperatingsystemversion : UInt8*) : HRESULT
+    @lpVtbl.value.put_operating_system_version.unsafe_as(Proc(UInt8*, HRESULT)).call(bstroperatingsystemversion)
+  end
+  def get_model(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_model.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_model(bstrmodel : UInt8*) : HRESULT
+    @lpVtbl.value.put_model.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrmodel)
+  end
+  def get_processor(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_processor.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_processor(bstrprocessor : UInt8*) : HRESULT
+    @lpVtbl.value.put_processor.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprocessor)
+  end
+  def get_processor_count(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_processor_count.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_processor_count(bstrprocessorcount : UInt8*) : HRESULT
+    @lpVtbl.value.put_processor_count.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprocessorcount)
+  end
+  def get_memory_size(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_memory_size.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_memory_size(bstrmemorysize : UInt8*) : HRESULT
+    @lpVtbl.value.put_memory_size.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrmemorysize)
+  end
+  def get_storage_capacity(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_storage_capacity.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_storage_capacity(bstrstoragecapacity : UInt8*) : HRESULT
+    @lpVtbl.value.put_storage_capacity.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrstoragecapacity)
+  end
+  def get_net_addresses(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_net_addresses.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_net_addresses(vnetaddresses : VARIANT) : HRESULT
+    @lpVtbl.value.put_net_addresses.unsafe_as(Proc(VARIANT, HRESULT)).call(vnetaddresses)
+  end
+end
+struct LibWin32::IADsComputerOperations
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def status(ppobject : IDispatch*) : HRESULT
+    @lpVtbl.value.status.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppobject)
+  end
+  def shutdown(breboot : Int16) : HRESULT
+    @lpVtbl.value.shutdown.unsafe_as(Proc(Int16, HRESULT)).call(breboot)
+  end
+end
+struct LibWin32::IADsGroup
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def members(ppmembers : IADsMembers*) : HRESULT
+    @lpVtbl.value.members.unsafe_as(Proc(IADsMembers*, HRESULT)).call(ppmembers)
+  end
+  def is_member(bstrmember : UInt8*, bmember : Int16*) : HRESULT
+    @lpVtbl.value.is_member.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstrmember, bmember)
+  end
+  def add(bstrnewitem : UInt8*) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrnewitem)
+  end
+  def remove(bstritemtoberemoved : UInt8*) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(UInt8*, HRESULT)).call(bstritemtoberemoved)
+  end
+end
+struct LibWin32::IADsUser
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_bad_login_address(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_bad_login_address.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_bad_login_count(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_bad_login_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_last_login(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_login.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_last_logoff(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_logoff.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_last_failed_login(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_last_failed_login.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_password_last_changed(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_password_last_changed.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_division(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_division.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_division(bstrdivision : UInt8*) : HRESULT
+    @lpVtbl.value.put_division.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdivision)
+  end
+  def get_department(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_department.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_department(bstrdepartment : UInt8*) : HRESULT
+    @lpVtbl.value.put_department.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdepartment)
+  end
+  def get_employee_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_employee_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_employee_id(bstremployeeid : UInt8*) : HRESULT
+    @lpVtbl.value.put_employee_id.unsafe_as(Proc(UInt8*, HRESULT)).call(bstremployeeid)
+  end
+  def get_full_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_full_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_full_name(bstrfullname : UInt8*) : HRESULT
+    @lpVtbl.value.put_full_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrfullname)
+  end
+  def get_first_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_first_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_first_name(bstrfirstname : UInt8*) : HRESULT
+    @lpVtbl.value.put_first_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrfirstname)
+  end
+  def get_last_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_last_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_last_name(bstrlastname : UInt8*) : HRESULT
+    @lpVtbl.value.put_last_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrlastname)
+  end
+  def get_other_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_other_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_other_name(bstrothername : UInt8*) : HRESULT
+    @lpVtbl.value.put_other_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrothername)
+  end
+  def get_name_prefix(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name_prefix.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_name_prefix(bstrnameprefix : UInt8*) : HRESULT
+    @lpVtbl.value.put_name_prefix.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrnameprefix)
+  end
+  def get_name_suffix(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name_suffix.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_name_suffix(bstrnamesuffix : UInt8*) : HRESULT
+    @lpVtbl.value.put_name_suffix.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrnamesuffix)
+  end
+  def get_title(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_title(bstrtitle : UInt8*) : HRESULT
+    @lpVtbl.value.put_title.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtitle)
+  end
+  def get_manager(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_manager.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_manager(bstrmanager : UInt8*) : HRESULT
+    @lpVtbl.value.put_manager.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrmanager)
+  end
+  def get_telephone_home(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_telephone_home.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_telephone_home(vtelephonehome : VARIANT) : HRESULT
+    @lpVtbl.value.put_telephone_home.unsafe_as(Proc(VARIANT, HRESULT)).call(vtelephonehome)
+  end
+  def get_telephone_mobile(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_telephone_mobile.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_telephone_mobile(vtelephonemobile : VARIANT) : HRESULT
+    @lpVtbl.value.put_telephone_mobile.unsafe_as(Proc(VARIANT, HRESULT)).call(vtelephonemobile)
+  end
+  def get_telephone_number(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_telephone_number.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_telephone_number(vtelephonenumber : VARIANT) : HRESULT
+    @lpVtbl.value.put_telephone_number.unsafe_as(Proc(VARIANT, HRESULT)).call(vtelephonenumber)
+  end
+  def get_telephone_pager(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_telephone_pager.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_telephone_pager(vtelephonepager : VARIANT) : HRESULT
+    @lpVtbl.value.put_telephone_pager.unsafe_as(Proc(VARIANT, HRESULT)).call(vtelephonepager)
+  end
+  def get_fax_number(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_fax_number.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_fax_number(vfaxnumber : VARIANT) : HRESULT
+    @lpVtbl.value.put_fax_number.unsafe_as(Proc(VARIANT, HRESULT)).call(vfaxnumber)
+  end
+  def get_office_locations(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_office_locations.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_office_locations(vofficelocations : VARIANT) : HRESULT
+    @lpVtbl.value.put_office_locations.unsafe_as(Proc(VARIANT, HRESULT)).call(vofficelocations)
+  end
+  def get_postal_addresses(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_postal_addresses.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_postal_addresses(vpostaladdresses : VARIANT) : HRESULT
+    @lpVtbl.value.put_postal_addresses.unsafe_as(Proc(VARIANT, HRESULT)).call(vpostaladdresses)
+  end
+  def get_postal_codes(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_postal_codes.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_postal_codes(vpostalcodes : VARIANT) : HRESULT
+    @lpVtbl.value.put_postal_codes.unsafe_as(Proc(VARIANT, HRESULT)).call(vpostalcodes)
+  end
+  def get_see_also(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_see_also.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_see_also(vseealso : VARIANT) : HRESULT
+    @lpVtbl.value.put_see_also.unsafe_as(Proc(VARIANT, HRESULT)).call(vseealso)
+  end
+  def get_account_disabled(retval : Int16*) : HRESULT
+    @lpVtbl.value.get_account_disabled.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  end
+  def put_account_disabled(faccountdisabled : Int16) : HRESULT
+    @lpVtbl.value.put_account_disabled.unsafe_as(Proc(Int16, HRESULT)).call(faccountdisabled)
+  end
+  def get_account_expiration_date(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_account_expiration_date.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def put_account_expiration_date(daaccountexpirationdate : Float64) : HRESULT
+    @lpVtbl.value.put_account_expiration_date.unsafe_as(Proc(Float64, HRESULT)).call(daaccountexpirationdate)
+  end
+  def get_grace_logins_allowed(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_grace_logins_allowed.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_grace_logins_allowed(lngraceloginsallowed : Int32) : HRESULT
+    @lpVtbl.value.put_grace_logins_allowed.unsafe_as(Proc(Int32, HRESULT)).call(lngraceloginsallowed)
+  end
+  def get_grace_logins_remaining(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_grace_logins_remaining.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_grace_logins_remaining(lngraceloginsremaining : Int32) : HRESULT
+    @lpVtbl.value.put_grace_logins_remaining.unsafe_as(Proc(Int32, HRESULT)).call(lngraceloginsremaining)
+  end
+  def get_is_account_locked(retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_account_locked.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  end
+  def put_is_account_locked(fisaccountlocked : Int16) : HRESULT
+    @lpVtbl.value.put_is_account_locked.unsafe_as(Proc(Int16, HRESULT)).call(fisaccountlocked)
+  end
+  def get_login_hours(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_login_hours.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_login_hours(vloginhours : VARIANT) : HRESULT
+    @lpVtbl.value.put_login_hours.unsafe_as(Proc(VARIANT, HRESULT)).call(vloginhours)
+  end
+  def get_login_workstations(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_login_workstations.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_login_workstations(vloginworkstations : VARIANT) : HRESULT
+    @lpVtbl.value.put_login_workstations.unsafe_as(Proc(VARIANT, HRESULT)).call(vloginworkstations)
+  end
+  def get_max_logins(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_max_logins.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_max_logins(lnmaxlogins : Int32) : HRESULT
+    @lpVtbl.value.put_max_logins.unsafe_as(Proc(Int32, HRESULT)).call(lnmaxlogins)
+  end
+  def get_max_storage(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_max_storage.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_max_storage(lnmaxstorage : Int32) : HRESULT
+    @lpVtbl.value.put_max_storage.unsafe_as(Proc(Int32, HRESULT)).call(lnmaxstorage)
+  end
+  def get_password_expiration_date(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_password_expiration_date.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def put_password_expiration_date(dapasswordexpirationdate : Float64) : HRESULT
+    @lpVtbl.value.put_password_expiration_date.unsafe_as(Proc(Float64, HRESULT)).call(dapasswordexpirationdate)
+  end
+  def get_password_minimum_length(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_password_minimum_length.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_password_minimum_length(lnpasswordminimumlength : Int32) : HRESULT
+    @lpVtbl.value.put_password_minimum_length.unsafe_as(Proc(Int32, HRESULT)).call(lnpasswordminimumlength)
+  end
+  def get_password_required(retval : Int16*) : HRESULT
+    @lpVtbl.value.get_password_required.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  end
+  def put_password_required(fpasswordrequired : Int16) : HRESULT
+    @lpVtbl.value.put_password_required.unsafe_as(Proc(Int16, HRESULT)).call(fpasswordrequired)
+  end
+  def get_require_unique_password(retval : Int16*) : HRESULT
+    @lpVtbl.value.get_require_unique_password.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  end
+  def put_require_unique_password(frequireuniquepassword : Int16) : HRESULT
+    @lpVtbl.value.put_require_unique_password.unsafe_as(Proc(Int16, HRESULT)).call(frequireuniquepassword)
+  end
+  def get_email_address(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_email_address.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_email_address(bstremailaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_email_address.unsafe_as(Proc(UInt8*, HRESULT)).call(bstremailaddress)
+  end
+  def get_home_directory(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_home_directory.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_home_directory(bstrhomedirectory : UInt8*) : HRESULT
+    @lpVtbl.value.put_home_directory.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrhomedirectory)
+  end
+  def get_languages(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_languages.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_languages(vlanguages : VARIANT) : HRESULT
+    @lpVtbl.value.put_languages.unsafe_as(Proc(VARIANT, HRESULT)).call(vlanguages)
+  end
+  def get_profile(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_profile.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_profile(bstrprofile : UInt8*) : HRESULT
+    @lpVtbl.value.put_profile.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprofile)
+  end
+  def get_login_script(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_login_script.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_login_script(bstrloginscript : UInt8*) : HRESULT
+    @lpVtbl.value.put_login_script.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrloginscript)
+  end
+  def get_picture(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_picture.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_picture(vpicture : VARIANT) : HRESULT
+    @lpVtbl.value.put_picture.unsafe_as(Proc(VARIANT, HRESULT)).call(vpicture)
+  end
+  def get_home_page(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_home_page.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_home_page(bstrhomepage : UInt8*) : HRESULT
+    @lpVtbl.value.put_home_page.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrhomepage)
+  end
+  def groups(ppgroups : IADsMembers*) : HRESULT
+    @lpVtbl.value.groups.unsafe_as(Proc(IADsMembers*, HRESULT)).call(ppgroups)
+  end
+  def set_password(newpassword : UInt8*) : HRESULT
+    @lpVtbl.value.set_password.unsafe_as(Proc(UInt8*, HRESULT)).call(newpassword)
+  end
+  def change_password(bstroldpassword : UInt8*, bstrnewpassword : UInt8*) : HRESULT
+    @lpVtbl.value.change_password.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstroldpassword, bstrnewpassword)
+  end
+end
+struct LibWin32::IADsPrintQueue
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_printer_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_printer_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_printer_path(bstrprinterpath : UInt8*) : HRESULT
+    @lpVtbl.value.put_printer_path.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprinterpath)
+  end
+  def get_model(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_model.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_model(bstrmodel : UInt8*) : HRESULT
+    @lpVtbl.value.put_model.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrmodel)
+  end
+  def get_datatype(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_datatype.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_datatype(bstrdatatype : UInt8*) : HRESULT
+    @lpVtbl.value.put_datatype.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdatatype)
+  end
+  def get_print_processor(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_print_processor.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_print_processor(bstrprintprocessor : UInt8*) : HRESULT
+    @lpVtbl.value.put_print_processor.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprintprocessor)
+  end
+  def get_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_location(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_location.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_location(bstrlocation : UInt8*) : HRESULT
+    @lpVtbl.value.put_location.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrlocation)
+  end
+  def get_start_time(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_start_time.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def put_start_time(dastarttime : Float64) : HRESULT
+    @lpVtbl.value.put_start_time.unsafe_as(Proc(Float64, HRESULT)).call(dastarttime)
+  end
+  def get_until_time(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_until_time.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def put_until_time(dauntiltime : Float64) : HRESULT
+    @lpVtbl.value.put_until_time.unsafe_as(Proc(Float64, HRESULT)).call(dauntiltime)
+  end
+  def get_default_job_priority(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_default_job_priority.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_default_job_priority(lndefaultjobpriority : Int32) : HRESULT
+    @lpVtbl.value.put_default_job_priority.unsafe_as(Proc(Int32, HRESULT)).call(lndefaultjobpriority)
+  end
+  def get_priority(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_priority.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_priority(lnpriority : Int32) : HRESULT
+    @lpVtbl.value.put_priority.unsafe_as(Proc(Int32, HRESULT)).call(lnpriority)
+  end
+  def get_banner_page(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_banner_page.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_banner_page(bstrbannerpage : UInt8*) : HRESULT
+    @lpVtbl.value.put_banner_page.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrbannerpage)
+  end
+  def get_print_devices(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_print_devices.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_print_devices(vprintdevices : VARIANT) : HRESULT
+    @lpVtbl.value.put_print_devices.unsafe_as(Proc(VARIANT, HRESULT)).call(vprintdevices)
+  end
+  def get_net_addresses(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_net_addresses.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_net_addresses(vnetaddresses : VARIANT) : HRESULT
+    @lpVtbl.value.put_net_addresses.unsafe_as(Proc(VARIANT, HRESULT)).call(vnetaddresses)
+  end
+end
+struct LibWin32::IADsPrintQueueOperations
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_status(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def print_jobs(pobject : IADsCollection*) : HRESULT
+    @lpVtbl.value.print_jobs.unsafe_as(Proc(IADsCollection*, HRESULT)).call(pobject)
+  end
+  def pause : HRESULT
+    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume : HRESULT
+    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  end
+  def purge : HRESULT
+    @lpVtbl.value.purge.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IADsPrintJob
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_host_print_queue(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_host_print_queue.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_user(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_user.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_user_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_time_submitted(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_time_submitted.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_total_pages(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_total_pages.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_size(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_priority(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_priority.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_priority(lnpriority : Int32) : HRESULT
+    @lpVtbl.value.put_priority.unsafe_as(Proc(Int32, HRESULT)).call(lnpriority)
+  end
+  def get_start_time(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_start_time.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def put_start_time(dastarttime : Float64) : HRESULT
+    @lpVtbl.value.put_start_time.unsafe_as(Proc(Float64, HRESULT)).call(dastarttime)
+  end
+  def get_until_time(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_until_time.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def put_until_time(dauntiltime : Float64) : HRESULT
+    @lpVtbl.value.put_until_time.unsafe_as(Proc(Float64, HRESULT)).call(dauntiltime)
+  end
+  def get_notify(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_notify.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_notify(bstrnotify : UInt8*) : HRESULT
+    @lpVtbl.value.put_notify.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrnotify)
+  end
+  def get_notify_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_notify_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_notify_path(bstrnotifypath : UInt8*) : HRESULT
+    @lpVtbl.value.put_notify_path.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrnotifypath)
+  end
+end
+struct LibWin32::IADsPrintJobOperations
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_status(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_time_elapsed(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_time_elapsed.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_pages_printed(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_pages_printed.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_position(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_position.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_position(lnposition : Int32) : HRESULT
+    @lpVtbl.value.put_position.unsafe_as(Proc(Int32, HRESULT)).call(lnposition)
+  end
+  def pause : HRESULT
+    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume : HRESULT
+    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IADsService
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_host_computer(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_host_computer.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_host_computer(bstrhostcomputer : UInt8*) : HRESULT
+    @lpVtbl.value.put_host_computer.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrhostcomputer)
+  end
+  def get_display_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_display_name(bstrdisplayname : UInt8*) : HRESULT
+    @lpVtbl.value.put_display_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdisplayname)
+  end
+  def get_version(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_version(bstrversion : UInt8*) : HRESULT
+    @lpVtbl.value.put_version.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrversion)
+  end
+  def get_service_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_service_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_service_type(lnservicetype : Int32) : HRESULT
+    @lpVtbl.value.put_service_type.unsafe_as(Proc(Int32, HRESULT)).call(lnservicetype)
+  end
+  def get_start_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_start_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_start_type(lnstarttype : Int32) : HRESULT
+    @lpVtbl.value.put_start_type.unsafe_as(Proc(Int32, HRESULT)).call(lnstarttype)
+  end
+  def get_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_path(bstrpath : UInt8*) : HRESULT
+    @lpVtbl.value.put_path.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrpath)
+  end
+  def get_startup_parameters(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_startup_parameters.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_startup_parameters(bstrstartupparameters : UInt8*) : HRESULT
+    @lpVtbl.value.put_startup_parameters.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrstartupparameters)
+  end
+  def get_error_control(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_error_control.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_error_control(lnerrorcontrol : Int32) : HRESULT
+    @lpVtbl.value.put_error_control.unsafe_as(Proc(Int32, HRESULT)).call(lnerrorcontrol)
+  end
+  def get_load_order_group(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_load_order_group.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_load_order_group(bstrloadordergroup : UInt8*) : HRESULT
+    @lpVtbl.value.put_load_order_group.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrloadordergroup)
+  end
+  def get_service_account_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_account_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_service_account_name(bstrserviceaccountname : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_account_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrserviceaccountname)
+  end
+  def get_service_account_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_account_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_service_account_path(bstrserviceaccountpath : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_account_path.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrserviceaccountpath)
+  end
+  def get_dependencies(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_dependencies.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_dependencies(vdependencies : VARIANT) : HRESULT
+    @lpVtbl.value.put_dependencies.unsafe_as(Proc(VARIANT, HRESULT)).call(vdependencies)
+  end
+end
+struct LibWin32::IADsServiceOperations
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_status(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def start : HRESULT
+    @lpVtbl.value.start.unsafe_as(Proc(HRESULT)).call
+  end
+  def stop : HRESULT
+    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  end
+  def pause : HRESULT
+    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  end
+  def continue : HRESULT
+    @lpVtbl.value.continue.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_password(bstrnewpassword : UInt8*) : HRESULT
+    @lpVtbl.value.set_password.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrnewpassword)
+  end
+end
+struct LibWin32::IADsFileService
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_host_computer(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_host_computer.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_host_computer(bstrhostcomputer : UInt8*) : HRESULT
+    @lpVtbl.value.put_host_computer.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrhostcomputer)
+  end
+  def get_display_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_display_name(bstrdisplayname : UInt8*) : HRESULT
+    @lpVtbl.value.put_display_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdisplayname)
+  end
+  def get_version(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_version(bstrversion : UInt8*) : HRESULT
+    @lpVtbl.value.put_version.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrversion)
+  end
+  def get_service_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_service_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_service_type(lnservicetype : Int32) : HRESULT
+    @lpVtbl.value.put_service_type.unsafe_as(Proc(Int32, HRESULT)).call(lnservicetype)
+  end
+  def get_start_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_start_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_start_type(lnstarttype : Int32) : HRESULT
+    @lpVtbl.value.put_start_type.unsafe_as(Proc(Int32, HRESULT)).call(lnstarttype)
+  end
+  def get_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_path(bstrpath : UInt8*) : HRESULT
+    @lpVtbl.value.put_path.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrpath)
+  end
+  def get_startup_parameters(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_startup_parameters.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_startup_parameters(bstrstartupparameters : UInt8*) : HRESULT
+    @lpVtbl.value.put_startup_parameters.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrstartupparameters)
+  end
+  def get_error_control(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_error_control.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_error_control(lnerrorcontrol : Int32) : HRESULT
+    @lpVtbl.value.put_error_control.unsafe_as(Proc(Int32, HRESULT)).call(lnerrorcontrol)
+  end
+  def get_load_order_group(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_load_order_group.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_load_order_group(bstrloadordergroup : UInt8*) : HRESULT
+    @lpVtbl.value.put_load_order_group.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrloadordergroup)
+  end
+  def get_service_account_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_account_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_service_account_name(bstrserviceaccountname : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_account_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrserviceaccountname)
+  end
+  def get_service_account_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_account_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_service_account_path(bstrserviceaccountpath : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_account_path.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrserviceaccountpath)
+  end
+  def get_dependencies(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_dependencies.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_dependencies(vdependencies : VARIANT) : HRESULT
+    @lpVtbl.value.put_dependencies.unsafe_as(Proc(VARIANT, HRESULT)).call(vdependencies)
+  end
+  def get_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_max_user_count(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_max_user_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_max_user_count(lnmaxusercount : Int32) : HRESULT
+    @lpVtbl.value.put_max_user_count.unsafe_as(Proc(Int32, HRESULT)).call(lnmaxusercount)
+  end
+end
+struct LibWin32::IADsFileServiceOperations
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_status(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def start : HRESULT
+    @lpVtbl.value.start.unsafe_as(Proc(HRESULT)).call
+  end
+  def stop : HRESULT
+    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  end
+  def pause : HRESULT
+    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  end
+  def continue : HRESULT
+    @lpVtbl.value.continue.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_password(bstrnewpassword : UInt8*) : HRESULT
+    @lpVtbl.value.set_password.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrnewpassword)
+  end
+  def sessions(ppsessions : IADsCollection*) : HRESULT
+    @lpVtbl.value.sessions.unsafe_as(Proc(IADsCollection*, HRESULT)).call(ppsessions)
+  end
+  def resources(ppresources : IADsCollection*) : HRESULT
+    @lpVtbl.value.resources.unsafe_as(Proc(IADsCollection*, HRESULT)).call(ppresources)
+  end
+end
+struct LibWin32::IADsFileShare
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_current_user_count(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_user_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_host_computer(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_host_computer.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_host_computer(bstrhostcomputer : UInt8*) : HRESULT
+    @lpVtbl.value.put_host_computer.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrhostcomputer)
+  end
+  def get_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_path(bstrpath : UInt8*) : HRESULT
+    @lpVtbl.value.put_path.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrpath)
+  end
+  def get_max_user_count(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_max_user_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_max_user_count(lnmaxusercount : Int32) : HRESULT
+    @lpVtbl.value.put_max_user_count.unsafe_as(Proc(Int32, HRESULT)).call(lnmaxusercount)
+  end
+end
+struct LibWin32::IADsSession
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_user(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_user.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_user_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_computer(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_computer.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_computer_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_computer_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_connect_time(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_connect_time.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_idle_time(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_idle_time.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IADsResource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_class(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_class.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_guid(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_a_ds_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_a_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_parent(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_info : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_info : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put(bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrname, vprop)
+  end
+  def get_ex(bstrname : UInt8*, pvprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrname, pvprop)
+  end
+  def put_ex(lncontrolcode : Int32, bstrname : UInt8*, vprop : VARIANT) : HRESULT
+    @lpVtbl.value.put_ex.unsafe_as(Proc(Int32, UInt8*, VARIANT, HRESULT)).call(lncontrolcode, bstrname, vprop)
+  end
+  def get_info_ex(vproperties : VARIANT, lnreserved : Int32) : HRESULT
+    @lpVtbl.value.get_info_ex.unsafe_as(Proc(VARIANT, Int32, HRESULT)).call(vproperties, lnreserved)
+  end
+  def get_user(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_user.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_user_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_lock_count(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_lock_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IADsOpenDSObject
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def open_ds_object(lpszdnname : UInt8*, lpszusername : UInt8*, lpszpassword : UInt8*, lnreserved : Int32, ppoledsobj : IDispatch*) : HRESULT
+    @lpVtbl.value.open_ds_object.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, Int32, IDispatch*, HRESULT)).call(lpszdnname, lpszusername, lpszpassword, lnreserved, ppoledsobj)
+  end
+end
+struct LibWin32::IDirectoryObject
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_object_information(ppobjinfo : ADS_OBJECT_INFO**) : HRESULT
+    @lpVtbl.value.get_object_information.unsafe_as(Proc(ADS_OBJECT_INFO**, HRESULT)).call(ppobjinfo)
+  end
+  def get_object_attributes(pattributenames : LibC::LPWSTR*, dwnumberattributes : UInt32, ppattributeentries : ADS_ATTR_INFO**, pdwnumattributesreturned : UInt32*) : HRESULT
+    @lpVtbl.value.get_object_attributes.unsafe_as(Proc(LibC::LPWSTR*, UInt32, ADS_ATTR_INFO**, UInt32*, HRESULT)).call(pattributenames, dwnumberattributes, ppattributeentries, pdwnumattributesreturned)
+  end
+  def set_object_attributes(pattributeentries : ADS_ATTR_INFO*, dwnumattributes : UInt32, pdwnumattributesmodified : UInt32*) : HRESULT
+    @lpVtbl.value.set_object_attributes.unsafe_as(Proc(ADS_ATTR_INFO*, UInt32, UInt32*, HRESULT)).call(pattributeentries, dwnumattributes, pdwnumattributesmodified)
+  end
+  def create_ds_object(pszrdnname : LibC::LPWSTR, pattributeentries : ADS_ATTR_INFO*, dwnumattributes : UInt32, ppobject : IDispatch*) : HRESULT
+    @lpVtbl.value.create_ds_object.unsafe_as(Proc(LibC::LPWSTR, ADS_ATTR_INFO*, UInt32, IDispatch*, HRESULT)).call(pszrdnname, pattributeentries, dwnumattributes, ppobject)
+  end
+  def delete_ds_object(pszrdnname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_ds_object.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszrdnname)
+  end
+end
+struct LibWin32::IDirectorySearch
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_search_preference(psearchprefs : Ads_searchpref_info*, dwnumprefs : UInt32) : HRESULT
+    @lpVtbl.value.set_search_preference.unsafe_as(Proc(Ads_searchpref_info*, UInt32, HRESULT)).call(psearchprefs, dwnumprefs)
+  end
+  def execute_search(pszsearchfilter : LibC::LPWSTR, pattributenames : LibC::LPWSTR*, dwnumberattributes : UInt32, phsearchresult : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.execute_search.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR*, UInt32, LibC::IntPtrT*, HRESULT)).call(pszsearchfilter, pattributenames, dwnumberattributes, phsearchresult)
+  end
+  def abandon_search(phsearchresult : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.abandon_search.unsafe_as(Proc(LibC::IntPtrT, HRESULT)).call(phsearchresult)
+  end
+  def get_first_row(hsearchresult : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.get_first_row.unsafe_as(Proc(LibC::IntPtrT, HRESULT)).call(hsearchresult)
+  end
+  def get_next_row(hsearchresult : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.get_next_row.unsafe_as(Proc(LibC::IntPtrT, HRESULT)).call(hsearchresult)
+  end
+  def get_previous_row(hsearchresult : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.get_previous_row.unsafe_as(Proc(LibC::IntPtrT, HRESULT)).call(hsearchresult)
+  end
+  def get_next_column_name(hsearchhandle : LibC::IntPtrT, ppszcolumnname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_next_column_name.unsafe_as(Proc(LibC::IntPtrT, LibC::LPWSTR*, HRESULT)).call(hsearchhandle, ppszcolumnname)
+  end
+  def get_column(hsearchresult : LibC::IntPtrT, szcolumnname : LibC::LPWSTR, psearchcolumn : Ads_search_column*) : HRESULT
+    @lpVtbl.value.get_column.unsafe_as(Proc(LibC::IntPtrT, LibC::LPWSTR, Ads_search_column*, HRESULT)).call(hsearchresult, szcolumnname, psearchcolumn)
+  end
+  def free_column(psearchcolumn : Ads_search_column*) : HRESULT
+    @lpVtbl.value.free_column.unsafe_as(Proc(Ads_search_column*, HRESULT)).call(psearchcolumn)
+  end
+  def close_search_handle(hsearchresult : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.close_search_handle.unsafe_as(Proc(LibC::IntPtrT, HRESULT)).call(hsearchresult)
+  end
+end
+struct LibWin32::IDirectorySchemaMgmt
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enum_attributes(ppszattrnames : LibC::LPWSTR*, dwnumattributes : UInt32, ppattrdefinition : ADS_ATTR_DEF**, pdwnumattributes : UInt32*) : HRESULT
+    @lpVtbl.value.enum_attributes.unsafe_as(Proc(LibC::LPWSTR*, UInt32, ADS_ATTR_DEF**, UInt32*, HRESULT)).call(ppszattrnames, dwnumattributes, ppattrdefinition, pdwnumattributes)
+  end
+  def create_attribute_definition(pszattributename : LibC::LPWSTR, pattributedefinition : ADS_ATTR_DEF*) : HRESULT
+    @lpVtbl.value.create_attribute_definition.unsafe_as(Proc(LibC::LPWSTR, ADS_ATTR_DEF*, HRESULT)).call(pszattributename, pattributedefinition)
+  end
+  def write_attribute_definition(pszattributename : LibC::LPWSTR, pattributedefinition : ADS_ATTR_DEF*) : HRESULT
+    @lpVtbl.value.write_attribute_definition.unsafe_as(Proc(LibC::LPWSTR, ADS_ATTR_DEF*, HRESULT)).call(pszattributename, pattributedefinition)
+  end
+  def delete_attribute_definition(pszattributename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_attribute_definition.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszattributename)
+  end
+  def enum_classes(ppszclassnames : LibC::LPWSTR*, dwnumclasses : UInt32, ppclassdefinition : ADS_CLASS_DEF**, pdwnumclasses : UInt32*) : HRESULT
+    @lpVtbl.value.enum_classes.unsafe_as(Proc(LibC::LPWSTR*, UInt32, ADS_CLASS_DEF**, UInt32*, HRESULT)).call(ppszclassnames, dwnumclasses, ppclassdefinition, pdwnumclasses)
+  end
+  def write_class_definition(pszclassname : LibC::LPWSTR, pclassdefinition : ADS_CLASS_DEF*) : HRESULT
+    @lpVtbl.value.write_class_definition.unsafe_as(Proc(LibC::LPWSTR, ADS_CLASS_DEF*, HRESULT)).call(pszclassname, pclassdefinition)
+  end
+  def create_class_definition(pszclassname : LibC::LPWSTR, pclassdefinition : ADS_CLASS_DEF*) : HRESULT
+    @lpVtbl.value.create_class_definition.unsafe_as(Proc(LibC::LPWSTR, ADS_CLASS_DEF*, HRESULT)).call(pszclassname, pclassdefinition)
+  end
+  def delete_class_definition(pszclassname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_class_definition.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszclassname)
+  end
+end
+struct LibWin32::IADsAggregatee
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def connect_as_aggregatee(pouterunknown : IUnknown) : HRESULT
+    @lpVtbl.value.connect_as_aggregatee.unsafe_as(Proc(IUnknown, HRESULT)).call(pouterunknown)
+  end
+  def disconnect_as_aggregatee : HRESULT
+    @lpVtbl.value.disconnect_as_aggregatee.unsafe_as(Proc(HRESULT)).call
+  end
+  def relinquish_interface(riid : Guid*) : HRESULT
+    @lpVtbl.value.relinquish_interface.unsafe_as(Proc(Guid*, HRESULT)).call(riid)
+  end
+  def restore_interface(riid : Guid*) : HRESULT
+    @lpVtbl.value.restore_interface.unsafe_as(Proc(Guid*, HRESULT)).call(riid)
+  end
+end
+struct LibWin32::IADsAggregator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def connect_as_aggregator(paggregatee : IUnknown) : HRESULT
+    @lpVtbl.value.connect_as_aggregator.unsafe_as(Proc(IUnknown, HRESULT)).call(paggregatee)
+  end
+  def disconnect_as_aggregator : HRESULT
+    @lpVtbl.value.disconnect_as_aggregator.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IADsAccessControlEntry
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_access_mask(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_access_mask.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_access_mask(lnaccessmask : Int32) : HRESULT
+    @lpVtbl.value.put_access_mask.unsafe_as(Proc(Int32, HRESULT)).call(lnaccessmask)
+  end
+  def get_ace_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_ace_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_ace_type(lnacetype : Int32) : HRESULT
+    @lpVtbl.value.put_ace_type.unsafe_as(Proc(Int32, HRESULT)).call(lnacetype)
+  end
+  def get_ace_flags(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_ace_flags.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_ace_flags(lnaceflags : Int32) : HRESULT
+    @lpVtbl.value.put_ace_flags.unsafe_as(Proc(Int32, HRESULT)).call(lnaceflags)
+  end
+  def get_flags(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_flags.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_flags(lnflags : Int32) : HRESULT
+    @lpVtbl.value.put_flags.unsafe_as(Proc(Int32, HRESULT)).call(lnflags)
+  end
+  def get_object_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_object_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_object_type(bstrobjecttype : UInt8*) : HRESULT
+    @lpVtbl.value.put_object_type.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrobjecttype)
+  end
+  def get_inherited_object_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_inherited_object_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_inherited_object_type(bstrinheritedobjecttype : UInt8*) : HRESULT
+    @lpVtbl.value.put_inherited_object_type.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrinheritedobjecttype)
+  end
+  def get_trustee(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_trustee.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_trustee(bstrtrustee : UInt8*) : HRESULT
+    @lpVtbl.value.put_trustee.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtrustee)
+  end
+end
+struct LibWin32::IADsAccessControlList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_acl_revision(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_acl_revision.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_acl_revision(lnaclrevision : Int32) : HRESULT
+    @lpVtbl.value.put_acl_revision.unsafe_as(Proc(Int32, HRESULT)).call(lnaclrevision)
+  end
+  def get_ace_count(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_ace_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_ace_count(lnacecount : Int32) : HRESULT
+    @lpVtbl.value.put_ace_count.unsafe_as(Proc(Int32, HRESULT)).call(lnacecount)
+  end
+  def add_ace(paccesscontrolentry : IDispatch) : HRESULT
+    @lpVtbl.value.add_ace.unsafe_as(Proc(IDispatch, HRESULT)).call(paccesscontrolentry)
+  end
+  def remove_ace(paccesscontrolentry : IDispatch) : HRESULT
+    @lpVtbl.value.remove_ace.unsafe_as(Proc(IDispatch, HRESULT)).call(paccesscontrolentry)
+  end
+  def copy_access_list(ppaccesscontrollist : IDispatch*) : HRESULT
+    @lpVtbl.value.copy_access_list.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppaccesscontrollist)
+  end
+  def get__new_enum(retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IADsSecurityDescriptor
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_revision(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_revision.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_revision(lnrevision : Int32) : HRESULT
+    @lpVtbl.value.put_revision.unsafe_as(Proc(Int32, HRESULT)).call(lnrevision)
+  end
+  def get_control(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_control.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_control(lncontrol : Int32) : HRESULT
+    @lpVtbl.value.put_control.unsafe_as(Proc(Int32, HRESULT)).call(lncontrol)
+  end
+  def get_owner(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_owner(bstrowner : UInt8*) : HRESULT
+    @lpVtbl.value.put_owner.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrowner)
+  end
+  def get_owner_defaulted(retval : Int16*) : HRESULT
+    @lpVtbl.value.get_owner_defaulted.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  end
+  def put_owner_defaulted(fownerdefaulted : Int16) : HRESULT
+    @lpVtbl.value.put_owner_defaulted.unsafe_as(Proc(Int16, HRESULT)).call(fownerdefaulted)
+  end
+  def get_group(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_group.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_group(bstrgroup : UInt8*) : HRESULT
+    @lpVtbl.value.put_group.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrgroup)
+  end
+  def get_group_defaulted(retval : Int16*) : HRESULT
+    @lpVtbl.value.get_group_defaulted.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  end
+  def put_group_defaulted(fgroupdefaulted : Int16) : HRESULT
+    @lpVtbl.value.put_group_defaulted.unsafe_as(Proc(Int16, HRESULT)).call(fgroupdefaulted)
+  end
+  def get_discretionary_acl(retval : IDispatch*) : HRESULT
+    @lpVtbl.value.get_discretionary_acl.unsafe_as(Proc(IDispatch*, HRESULT)).call(retval)
+  end
+  def put_discretionary_acl(pdiscretionaryacl : IDispatch) : HRESULT
+    @lpVtbl.value.put_discretionary_acl.unsafe_as(Proc(IDispatch, HRESULT)).call(pdiscretionaryacl)
+  end
+  def get_dacl_defaulted(retval : Int16*) : HRESULT
+    @lpVtbl.value.get_dacl_defaulted.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  end
+  def put_dacl_defaulted(fdacldefaulted : Int16) : HRESULT
+    @lpVtbl.value.put_dacl_defaulted.unsafe_as(Proc(Int16, HRESULT)).call(fdacldefaulted)
+  end
+  def get_system_acl(retval : IDispatch*) : HRESULT
+    @lpVtbl.value.get_system_acl.unsafe_as(Proc(IDispatch*, HRESULT)).call(retval)
+  end
+  def put_system_acl(psystemacl : IDispatch) : HRESULT
+    @lpVtbl.value.put_system_acl.unsafe_as(Proc(IDispatch, HRESULT)).call(psystemacl)
+  end
+  def get_sacl_defaulted(retval : Int16*) : HRESULT
+    @lpVtbl.value.get_sacl_defaulted.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  end
+  def put_sacl_defaulted(fsacldefaulted : Int16) : HRESULT
+    @lpVtbl.value.put_sacl_defaulted.unsafe_as(Proc(Int16, HRESULT)).call(fsacldefaulted)
+  end
+  def copy_security_descriptor(ppsecuritydescriptor : IDispatch*) : HRESULT
+    @lpVtbl.value.copy_security_descriptor.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppsecuritydescriptor)
+  end
+end
+struct LibWin32::IADsLargeInteger
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_high_part(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_high_part.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_high_part(lnhighpart : Int32) : HRESULT
+    @lpVtbl.value.put_high_part.unsafe_as(Proc(Int32, HRESULT)).call(lnhighpart)
+  end
+  def get_low_part(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_low_part.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_low_part(lnlowpart : Int32) : HRESULT
+    @lpVtbl.value.put_low_part.unsafe_as(Proc(Int32, HRESULT)).call(lnlowpart)
+  end
+end
+struct LibWin32::IADsNameTranslate
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def put_chase_referral(lnchasereferral : Int32) : HRESULT
+    @lpVtbl.value.put_chase_referral.unsafe_as(Proc(Int32, HRESULT)).call(lnchasereferral)
+  end
+  def init(lnsettype : Int32, bstradspath : UInt8*) : HRESULT
+    @lpVtbl.value.init.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(lnsettype, bstradspath)
+  end
+  def init_ex(lnsettype : Int32, bstradspath : UInt8*, bstruserid : UInt8*, bstrdomain : UInt8*, bstrpassword : UInt8*) : HRESULT
+    @lpVtbl.value.init_ex.unsafe_as(Proc(Int32, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)).call(lnsettype, bstradspath, bstruserid, bstrdomain, bstrpassword)
+  end
+  def set(lnsettype : Int32, bstradspath : UInt8*) : HRESULT
+    @lpVtbl.value.set.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(lnsettype, bstradspath)
+  end
+  def get(lnformattype : Int32, pbstradspath : UInt8**) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(lnformattype, pbstradspath)
+  end
+  def set_ex(lnformattype : Int32, pvar : VARIANT) : HRESULT
+    @lpVtbl.value.set_ex.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lnformattype, pvar)
+  end
+  def get_ex(lnformattype : Int32, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.get_ex.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(lnformattype, pvar)
+  end
+end
+struct LibWin32::IADsCaseIgnoreList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_case_ignore_list(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_case_ignore_list.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_case_ignore_list(vcaseignorelist : VARIANT) : HRESULT
+    @lpVtbl.value.put_case_ignore_list.unsafe_as(Proc(VARIANT, HRESULT)).call(vcaseignorelist)
+  end
+end
+struct LibWin32::IADsFaxNumber
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_telephone_number(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_telephone_number.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_telephone_number(bstrtelephonenumber : UInt8*) : HRESULT
+    @lpVtbl.value.put_telephone_number.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtelephonenumber)
+  end
+  def get_parameters(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_parameters.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_parameters(vparameters : VARIANT) : HRESULT
+    @lpVtbl.value.put_parameters.unsafe_as(Proc(VARIANT, HRESULT)).call(vparameters)
+  end
+end
+struct LibWin32::IADsNetAddress
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_address_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_address_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_address_type(lnaddresstype : Int32) : HRESULT
+    @lpVtbl.value.put_address_type.unsafe_as(Proc(Int32, HRESULT)).call(lnaddresstype)
+  end
+  def get_address(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_address.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_address(vaddress : VARIANT) : HRESULT
+    @lpVtbl.value.put_address.unsafe_as(Proc(VARIANT, HRESULT)).call(vaddress)
+  end
+end
+struct LibWin32::IADsOctetList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_octet_list(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_octet_list.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_octet_list(voctetlist : VARIANT) : HRESULT
+    @lpVtbl.value.put_octet_list.unsafe_as(Proc(VARIANT, HRESULT)).call(voctetlist)
+  end
+end
+struct LibWin32::IADsEmail
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_type(lntype : Int32) : HRESULT
+    @lpVtbl.value.put_type.unsafe_as(Proc(Int32, HRESULT)).call(lntype)
+  end
+  def get_address(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_address.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_address(bstraddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_address.unsafe_as(Proc(UInt8*, HRESULT)).call(bstraddress)
+  end
+end
+struct LibWin32::IADsPath
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_type(lntype : Int32) : HRESULT
+    @lpVtbl.value.put_type.unsafe_as(Proc(Int32, HRESULT)).call(lntype)
+  end
+  def get_volume_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_volume_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_volume_name(bstrvolumename : UInt8*) : HRESULT
+    @lpVtbl.value.put_volume_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrvolumename)
+  end
+  def get_path(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_path(bstrpath : UInt8*) : HRESULT
+    @lpVtbl.value.put_path.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrpath)
+  end
+end
+struct LibWin32::IADsReplicaPointer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_server_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_server_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_server_name(bstrservername : UInt8*) : HRESULT
+    @lpVtbl.value.put_server_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrservername)
+  end
+  def get_replica_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_replica_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_replica_type(lnreplicatype : Int32) : HRESULT
+    @lpVtbl.value.put_replica_type.unsafe_as(Proc(Int32, HRESULT)).call(lnreplicatype)
+  end
+  def get_replica_number(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_replica_number.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_replica_number(lnreplicanumber : Int32) : HRESULT
+    @lpVtbl.value.put_replica_number.unsafe_as(Proc(Int32, HRESULT)).call(lnreplicanumber)
+  end
+  def get_count(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_count(lncount : Int32) : HRESULT
+    @lpVtbl.value.put_count.unsafe_as(Proc(Int32, HRESULT)).call(lncount)
+  end
+  def get_replica_address_hints(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_replica_address_hints.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_replica_address_hints(vreplicaaddresshints : VARIANT) : HRESULT
+    @lpVtbl.value.put_replica_address_hints.unsafe_as(Proc(VARIANT, HRESULT)).call(vreplicaaddresshints)
+  end
+end
+struct LibWin32::IADsAcl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_protected_attr_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_protected_attr_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_protected_attr_name(bstrprotectedattrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_protected_attr_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprotectedattrname)
+  end
+  def get_subject_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_subject_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_subject_name(bstrsubjectname : UInt8*) : HRESULT
+    @lpVtbl.value.put_subject_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsubjectname)
+  end
+  def get_privileges(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_privileges.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_privileges(lnprivileges : Int32) : HRESULT
+    @lpVtbl.value.put_privileges.unsafe_as(Proc(Int32, HRESULT)).call(lnprivileges)
+  end
+  def copy_acl(ppacl : IDispatch*) : HRESULT
+    @lpVtbl.value.copy_acl.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppacl)
+  end
+end
+struct LibWin32::IADsTimestamp
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_whole_seconds(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_whole_seconds.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_whole_seconds(lnwholeseconds : Int32) : HRESULT
+    @lpVtbl.value.put_whole_seconds.unsafe_as(Proc(Int32, HRESULT)).call(lnwholeseconds)
+  end
+  def get_event_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_event_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_event_id(lneventid : Int32) : HRESULT
+    @lpVtbl.value.put_event_id.unsafe_as(Proc(Int32, HRESULT)).call(lneventid)
+  end
+end
+struct LibWin32::IADsPostalAddress
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_postal_address(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_postal_address.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_postal_address(vpostaladdress : VARIANT) : HRESULT
+    @lpVtbl.value.put_postal_address.unsafe_as(Proc(VARIANT, HRESULT)).call(vpostaladdress)
+  end
+end
+struct LibWin32::IADsBackLink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_remote_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_remote_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_remote_id(lnremoteid : Int32) : HRESULT
+    @lpVtbl.value.put_remote_id.unsafe_as(Proc(Int32, HRESULT)).call(lnremoteid)
+  end
+  def get_object_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_object_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_object_name(bstrobjectname : UInt8*) : HRESULT
+    @lpVtbl.value.put_object_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrobjectname)
+  end
+end
+struct LibWin32::IADsTypedName
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_object_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_object_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_object_name(bstrobjectname : UInt8*) : HRESULT
+    @lpVtbl.value.put_object_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrobjectname)
+  end
+  def get_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_level(lnlevel : Int32) : HRESULT
+    @lpVtbl.value.put_level.unsafe_as(Proc(Int32, HRESULT)).call(lnlevel)
+  end
+  def get_interval(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_interval.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_interval(lninterval : Int32) : HRESULT
+    @lpVtbl.value.put_interval.unsafe_as(Proc(Int32, HRESULT)).call(lninterval)
+  end
+end
+struct LibWin32::IADsHold
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_object_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_object_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_object_name(bstrobjectname : UInt8*) : HRESULT
+    @lpVtbl.value.put_object_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrobjectname)
+  end
+  def get_amount(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_amount.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_amount(lnamount : Int32) : HRESULT
+    @lpVtbl.value.put_amount.unsafe_as(Proc(Int32, HRESULT)).call(lnamount)
+  end
+end
+struct LibWin32::IADsObjectOptions
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_option(lnoption : Int32, pvvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_option.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(lnoption, pvvalue)
+  end
+  def set_option(lnoption : Int32, vvalue : VARIANT) : HRESULT
+    @lpVtbl.value.set_option.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lnoption, vvalue)
+  end
+end
+struct LibWin32::IADsPathname
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def set(bstradspath : UInt8*, lnsettype : Int32) : HRESULT
+    @lpVtbl.value.set.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(bstradspath, lnsettype)
+  end
+  def set_display_type(lndisplaytype : Int32) : HRESULT
+    @lpVtbl.value.set_display_type.unsafe_as(Proc(Int32, HRESULT)).call(lndisplaytype)
+  end
+  def retrieve(lnformattype : Int32, pbstradspath : UInt8**) : HRESULT
+    @lpVtbl.value.retrieve.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(lnformattype, pbstradspath)
+  end
+  def get_num_elements(plnnumpathelements : Int32*) : HRESULT
+    @lpVtbl.value.get_num_elements.unsafe_as(Proc(Int32*, HRESULT)).call(plnnumpathelements)
+  end
+  def get_element(lnelementindex : Int32, pbstrelement : UInt8**) : HRESULT
+    @lpVtbl.value.get_element.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(lnelementindex, pbstrelement)
+  end
+  def add_leaf_element(bstrleafelement : UInt8*) : HRESULT
+    @lpVtbl.value.add_leaf_element.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrleafelement)
+  end
+  def remove_leaf_element : HRESULT
+    @lpVtbl.value.remove_leaf_element.unsafe_as(Proc(HRESULT)).call
+  end
+  def copy_path(ppadspath : IDispatch*) : HRESULT
+    @lpVtbl.value.copy_path.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppadspath)
+  end
+  def get_escaped_element(lnreserved : Int32, bstrinstr : UInt8*, pbstroutstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_escaped_element.unsafe_as(Proc(Int32, UInt8*, UInt8**, HRESULT)).call(lnreserved, bstrinstr, pbstroutstr)
+  end
+  def get_escaped_mode(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_escaped_mode.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_escaped_mode(lnescapedmode : Int32) : HRESULT
+    @lpVtbl.value.put_escaped_mode.unsafe_as(Proc(Int32, HRESULT)).call(lnescapedmode)
+  end
+end
+struct LibWin32::IADsADSystemInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_user_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_computer_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_computer_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_site_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_site_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_domain_short_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain_short_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_domain_dns_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain_dns_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_forest_dns_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_forest_dns_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_pdc_role_owner(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_pdc_role_owner.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_schema_role_owner(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema_role_owner.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_is_native_mode(retval : Int16*) : HRESULT
+    @lpVtbl.value.get_is_native_mode.unsafe_as(Proc(Int16*, HRESULT)).call(retval)
+  end
+  def get_any_dc_name(pszdcname : UInt8**) : HRESULT
+    @lpVtbl.value.get_any_dc_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pszdcname)
+  end
+  def get_dc_site_name(szserver : UInt8*, pszsitename : UInt8**) : HRESULT
+    @lpVtbl.value.get_dc_site_name.unsafe_as(Proc(UInt8*, UInt8**, HRESULT)).call(szserver, pszsitename)
+  end
+  def refresh_schema_cache : HRESULT
+    @lpVtbl.value.refresh_schema_cache.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_trees(pvtrees : VARIANT*) : HRESULT
+    @lpVtbl.value.get_trees.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvtrees)
+  end
+end
+struct LibWin32::IADsWinNTSystemInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_user_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_computer_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_computer_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_domain_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_pdc(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_pdc.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IADsDNWithBinary
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_binary_value(retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_binary_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(retval)
+  end
+  def put_binary_value(vbinaryvalue : VARIANT) : HRESULT
+    @lpVtbl.value.put_binary_value.unsafe_as(Proc(VARIANT, HRESULT)).call(vbinaryvalue)
+  end
+  def get_dn_string(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_dn_string.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_dn_string(bstrdnstring : UInt8*) : HRESULT
+    @lpVtbl.value.put_dn_string.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdnstring)
+  end
+end
+struct LibWin32::IADsDNWithString
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_string_value(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_string_value.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_string_value(bstrstringvalue : UInt8*) : HRESULT
+    @lpVtbl.value.put_string_value.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrstringvalue)
+  end
+  def get_dn_string(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_dn_string.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def put_dn_string(bstrdnstring : UInt8*) : HRESULT
+    @lpVtbl.value.put_dn_string.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdnstring)
+  end
+end
+struct LibWin32::IADsSecurityUtility
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_security_descriptor(varpath : VARIANT, lpathformat : Int32, lformat : Int32, pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_security_descriptor.unsafe_as(Proc(VARIANT, Int32, Int32, VARIANT*, HRESULT)).call(varpath, lpathformat, lformat, pvariant)
+  end
+  def set_security_descriptor(varpath : VARIANT, lpathformat : Int32, vardata : VARIANT, ldataformat : Int32) : HRESULT
+    @lpVtbl.value.set_security_descriptor.unsafe_as(Proc(VARIANT, Int32, VARIANT, Int32, HRESULT)).call(varpath, lpathformat, vardata, ldataformat)
+  end
+  def convert_security_descriptor(varsd : VARIANT, ldataformat : Int32, loutformat : Int32, presult : VARIANT*) : HRESULT
+    @lpVtbl.value.convert_security_descriptor.unsafe_as(Proc(VARIANT, Int32, Int32, VARIANT*, HRESULT)).call(varsd, ldataformat, loutformat, presult)
+  end
+  def get_security_mask(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_security_mask.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def put_security_mask(lnsecuritymask : Int32) : HRESULT
+    @lpVtbl.value.put_security_mask.unsafe_as(Proc(Int32, HRESULT)).call(lnsecuritymask)
+  end
+end
+struct LibWin32::IDsBrowseDomainTree
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def browse_to(hwndparent : LibC::HANDLE, ppsztargetpath : LibC::LPWSTR*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.browse_to.unsafe_as(Proc(LibC::HANDLE, LibC::LPWSTR*, UInt32, HRESULT)).call(hwndparent, ppsztargetpath, dwflags)
+  end
+  def get_domains(ppdomaintree : DOMAIN_TREE**, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.get_domains.unsafe_as(Proc(DOMAIN_TREE**, UInt32, HRESULT)).call(ppdomaintree, dwflags)
+  end
+  def free_domains(ppdomaintree : DOMAIN_TREE**) : HRESULT
+    @lpVtbl.value.free_domains.unsafe_as(Proc(DOMAIN_TREE**, HRESULT)).call(ppdomaintree)
+  end
+  def flush_cached_domains : HRESULT
+    @lpVtbl.value.flush_cached_domains.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_computer(pszcomputername : LibC::LPWSTR, pszusername : LibC::LPWSTR, pszpassword : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_computer.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszcomputername, pszusername, pszpassword)
+  end
+end
+struct LibWin32::IDsDisplaySpecifier
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_server(pszserver : LibC::LPWSTR, pszusername : LibC::LPWSTR, pszpassword : LibC::LPWSTR, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_server.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(pszserver, pszusername, pszpassword, dwflags)
+  end
+  def set_language_id(langid : UInt16) : HRESULT
+    @lpVtbl.value.set_language_id.unsafe_as(Proc(UInt16, HRESULT)).call(langid)
+  end
+  def get_display_specifier(pszobjectclass : LibC::LPWSTR, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_display_specifier.unsafe_as(Proc(LibC::LPWSTR, Guid*, Void**, HRESULT)).call(pszobjectclass, riid, ppv)
+  end
+  def get_icon_location(pszobjectclass : LibC::LPWSTR, dwflags : UInt32, pszbuffer : Char*, cchbuffer : Int32, presid : Int32*) : HRESULT
+    @lpVtbl.value.get_icon_location.unsafe_as(Proc(LibC::LPWSTR, UInt32, Char*, Int32, Int32*, HRESULT)).call(pszobjectclass, dwflags, pszbuffer, cchbuffer, presid)
+  end
+  def get_icon(pszobjectclass : LibC::LPWSTR, dwflags : UInt32, cxicon : Int32, cyicon : Int32) : HANDLE
+    @lpVtbl.value.get_icon.unsafe_as(Proc(LibC::LPWSTR, UInt32, Int32, Int32, HANDLE)).call(pszobjectclass, dwflags, cxicon, cyicon)
+  end
+  def get_friendly_class_name(pszobjectclass : LibC::LPWSTR, pszbuffer : Char*, cchbuffer : Int32) : HRESULT
+    @lpVtbl.value.get_friendly_class_name.unsafe_as(Proc(LibC::LPWSTR, Char*, Int32, HRESULT)).call(pszobjectclass, pszbuffer, cchbuffer)
+  end
+  def get_friendly_attribute_name(pszobjectclass : LibC::LPWSTR, pszattributename : LibC::LPWSTR, pszbuffer : Char*, cchbuffer : UInt32) : HRESULT
+    @lpVtbl.value.get_friendly_attribute_name.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Char*, UInt32, HRESULT)).call(pszobjectclass, pszattributename, pszbuffer, cchbuffer)
+  end
+  def is_class_container(pszobjectclass : LibC::LPWSTR, pszadspath : LibC::LPWSTR, dwflags : UInt32) : LibC::BOOL
+    @lpVtbl.value.is_class_container.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::BOOL)).call(pszobjectclass, pszadspath, dwflags)
+  end
+  def get_class_creation_info(pszobjectclass : LibC::LPWSTR, ppdscci : DSCLASSCREATIONINFO**) : HRESULT
+    @lpVtbl.value.get_class_creation_info.unsafe_as(Proc(LibC::LPWSTR, DSCLASSCREATIONINFO**, HRESULT)).call(pszobjectclass, ppdscci)
+  end
+  def enum_class_attributes(pszobjectclass : LibC::LPWSTR, pcbenum : LPDSENUMATTRIBUTES, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.enum_class_attributes.unsafe_as(Proc(LibC::LPWSTR, LPDSENUMATTRIBUTES, LPARAM, HRESULT)).call(pszobjectclass, pcbenum, lparam)
+  end
+  def get_attribute_a_ds_type(pszattributename : LibC::LPWSTR) : ADSTYPEENUM
+    @lpVtbl.value.get_attribute_a_ds_type.unsafe_as(Proc(LibC::LPWSTR, ADSTYPEENUM)).call(pszattributename)
+  end
+end
+struct LibWin32::IDsObjectPicker
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pinitinfo : DSOP_INIT_INFO*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(DSOP_INIT_INFO*, HRESULT)).call(pinitinfo)
+  end
+  def invoke_dialog(hwndparent : LibC::HANDLE, ppdoselections : IDataObject*) : HRESULT
+    @lpVtbl.value.invoke_dialog.unsafe_as(Proc(LibC::HANDLE, IDataObject*, HRESULT)).call(hwndparent, ppdoselections)
+  end
+end
+struct LibWin32::IDsObjectPickerCredentials
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pinitinfo : DSOP_INIT_INFO*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(DSOP_INIT_INFO*, HRESULT)).call(pinitinfo)
+  end
+  def invoke_dialog(hwndparent : LibC::HANDLE, ppdoselections : IDataObject*) : HRESULT
+    @lpVtbl.value.invoke_dialog.unsafe_as(Proc(LibC::HANDLE, IDataObject*, HRESULT)).call(hwndparent, ppdoselections)
+  end
+  def set_credentials(szusername : LibC::LPWSTR, szpassword : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_credentials.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(szusername, szpassword)
+  end
+end
+struct LibWin32::IDsAdminCreateObj
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(padscontainerobj : IADsContainer, padscopysource : IADs, lpszclassname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(IADsContainer, IADs, LibC::LPWSTR, HRESULT)).call(padscontainerobj, padscopysource, lpszclassname)
+  end
+  def create_modal(hwndparent : LibC::HANDLE, ppadsobj : IADs*) : HRESULT
+    @lpVtbl.value.create_modal.unsafe_as(Proc(LibC::HANDLE, IADs*, HRESULT)).call(hwndparent, ppadsobj)
+  end
+end
+struct LibWin32::IDsAdminNewObj
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_buttons(ncurrindex : UInt32, bvalid : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_buttons.unsafe_as(Proc(UInt32, LibC::BOOL, HRESULT)).call(ncurrindex, bvalid)
+  end
+  def get_page_counts(pntotal : Int32*, pnstartindex : Int32*) : HRESULT
+    @lpVtbl.value.get_page_counts.unsafe_as(Proc(Int32*, Int32*, HRESULT)).call(pntotal, pnstartindex)
+  end
+end
+struct LibWin32::IDsAdminNewObjPrimarySite
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_new(pszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.create_new.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszname)
+  end
+  def commit : HRESULT
+    @lpVtbl.value.commit.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IDsAdminNewObjExt
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(padscontainerobj : IADsContainer, padscopysource : IADs, lpszclassname : LibC::LPWSTR, pdsadminnewobj : IDsAdminNewObj, pdispinfo : DSA_NEWOBJ_DISPINFO*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(IADsContainer, IADs, LibC::LPWSTR, IDsAdminNewObj, DSA_NEWOBJ_DISPINFO*, HRESULT)).call(padscontainerobj, padscopysource, lpszclassname, pdsadminnewobj, pdispinfo)
+  end
+  def add_pages(lpfnaddpage : LPFNSVADDPROPSHEETPAGE, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.add_pages.unsafe_as(Proc(LPFNSVADDPROPSHEETPAGE, LPARAM, HRESULT)).call(lpfnaddpage, lparam)
+  end
+  def set_object(padsobj : IADs) : HRESULT
+    @lpVtbl.value.set_object.unsafe_as(Proc(IADs, HRESULT)).call(padsobj)
+  end
+  def write_data(hwnd : LibC::HANDLE, ucontext : UInt32) : HRESULT
+    @lpVtbl.value.write_data.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(hwnd, ucontext)
+  end
+  def on_error(hwnd : LibC::HANDLE, hr : HRESULT, ucontext : UInt32) : HRESULT
+    @lpVtbl.value.on_error.unsafe_as(Proc(LibC::HANDLE, HRESULT, UInt32, HRESULT)).call(hwnd, hr, ucontext)
+  end
+  def get_summary_info(pbstrtext : UInt8**) : HRESULT
+    @lpVtbl.value.get_summary_info.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtext)
+  end
+end
+struct LibWin32::IDsAdminNotifyHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pextrainfo : IDataObject, pueventflags : UInt32*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(IDataObject, UInt32*, HRESULT)).call(pextrainfo, pueventflags)
+  end
+  def begin_(uevent : UInt32, parg1 : IDataObject, parg2 : IDataObject, puflags : UInt32*, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.begin_.unsafe_as(Proc(UInt32, IDataObject, IDataObject, UInt32*, UInt8**, HRESULT)).call(uevent, parg1, parg2, puflags, pbstr)
+  end
+  def notify(nitem : UInt32, uflags : UInt32) : HRESULT
+    @lpVtbl.value.notify.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(nitem, uflags)
+  end
+  def end_ : HRESULT
+    @lpVtbl.value.end_.unsafe_as(Proc(HRESULT)).call
+  end
 end

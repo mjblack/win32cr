@@ -623,12 +623,12 @@ lib LibWin32
 
 
   struct IPrintDialogCallbackVTbl
-    query_interface : Proc(IPrintDialogCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPrintDialogCallback*, UInt32)
-    release : Proc(IPrintDialogCallback*, UInt32)
-    init_done : Proc(IPrintDialogCallback*, HRESULT)
-    selection_change : Proc(IPrintDialogCallback*, HRESULT)
-    handle_message : Proc(IPrintDialogCallback*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    init_done : UInt64
+    selection_change : UInt64
+    handle_message : UInt64
   end
 
   IPrintDialogCallback_GUID = "5852a2c3-6530-11d1-b6a3-0000f8757bf9"
@@ -638,12 +638,12 @@ lib LibWin32
   end
 
   struct IPrintDialogServicesVTbl
-    query_interface : Proc(IPrintDialogServices*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPrintDialogServices*, UInt32)
-    release : Proc(IPrintDialogServices*, UInt32)
-    get_current_dev_mode : Proc(IPrintDialogServices*, DEVMODEA*, UInt32*, HRESULT)
-    get_current_printer_name : Proc(IPrintDialogServices*, Char*, UInt32*, HRESULT)
-    get_current_port_name : Proc(IPrintDialogServices*, Char*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_current_dev_mode : UInt64
+    get_current_printer_name : UInt64
+    get_current_port_name : UInt64
   end
 
   IPrintDialogServices_GUID = "509aaeda-5639-11d1-b6a1-0000f8757bf9"
@@ -715,4 +715,44 @@ lib LibWin32
 
   # Params # param0 : PAGESETUPDLGW* [In]
   fun PageSetupDlgW(param0 : PAGESETUPDLGW*) : LibC::BOOL
+end
+struct LibWin32::IPrintDialogCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def init_done : HRESULT
+    @lpVtbl.value.init_done.unsafe_as(Proc(HRESULT)).call
+  end
+  def selection_change : HRESULT
+    @lpVtbl.value.selection_change.unsafe_as(Proc(HRESULT)).call
+  end
+  def handle_message(hdlg : LibC::HANDLE, umsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, presult : LRESULT*) : HRESULT
+    @lpVtbl.value.handle_message.unsafe_as(Proc(LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, HRESULT)).call(hdlg, umsg, wparam, lparam, presult)
+  end
+end
+struct LibWin32::IPrintDialogServices
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_current_dev_mode(pdevmode : DEVMODEA*, pcbsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_dev_mode.unsafe_as(Proc(DEVMODEA*, UInt32*, HRESULT)).call(pdevmode, pcbsize)
+  end
+  def get_current_printer_name(pprintername : Char*, pcchsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_printer_name.unsafe_as(Proc(Char*, UInt32*, HRESULT)).call(pprintername, pcchsize)
+  end
+  def get_current_port_name(pportname : Char*, pcchsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_port_name.unsafe_as(Proc(Char*, UInt32*, HRESULT)).call(pportname, pcchsize)
+  end
 end

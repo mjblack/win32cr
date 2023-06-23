@@ -120,12 +120,12 @@ lib LibWin32
 
 
   struct IItemEnumeratorVTbl
-    query_interface : Proc(IItemEnumerator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IItemEnumerator*, UInt32)
-    release : Proc(IItemEnumerator*, UInt32)
-    current : Proc(IItemEnumerator*, VARIANT*, HRESULT)
-    move_next : Proc(IItemEnumerator*, LibC::BOOL*, HRESULT)
-    reset : Proc(IItemEnumerator*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    current : UInt64
+    move_next : UInt64
+    reset : UInt64
   end
 
   IItemEnumerator_GUID = "9f7d7bb7-20b3-11da-81a5-0030f1642e3c"
@@ -135,13 +135,13 @@ lib LibWin32
   end
 
   struct ISettingsIdentityVTbl
-    query_interface : Proc(ISettingsIdentity*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISettingsIdentity*, UInt32)
-    release : Proc(ISettingsIdentity*, UInt32)
-    get_attribute : Proc(ISettingsIdentity*, Void*, LibC::LPWSTR, UInt8**, HRESULT)
-    set_attribute : Proc(ISettingsIdentity*, Void*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_flags : Proc(ISettingsIdentity*, UInt32*, HRESULT)
-    set_flags : Proc(ISettingsIdentity*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_attribute : UInt64
+    set_attribute : UInt64
+    get_flags : UInt64
+    set_flags : UInt64
   end
 
   ISettingsIdentity_GUID = "9f7d7bb6-20b3-11da-81a5-0030f1642e3c"
@@ -151,30 +151,30 @@ lib LibWin32
   end
 
   struct ITargetInfoVTbl
-    query_interface : Proc(ITargetInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITargetInfo*, UInt32)
-    release : Proc(ITargetInfo*, UInt32)
-    get_target_mode : Proc(ITargetInfo*, WcmTargetMode*, HRESULT)
-    set_target_mode : Proc(ITargetInfo*, WcmTargetMode, HRESULT)
-    get_temporary_store_location : Proc(ITargetInfo*, UInt8**, HRESULT)
-    set_temporary_store_location : Proc(ITargetInfo*, LibC::LPWSTR, HRESULT)
-    get_target_id : Proc(ITargetInfo*, UInt8**, HRESULT)
-    set_target_id : Proc(ITargetInfo*, Guid, HRESULT)
-    get_target_processor_architecture : Proc(ITargetInfo*, UInt8**, HRESULT)
-    set_target_processor_architecture : Proc(ITargetInfo*, LibC::LPWSTR, HRESULT)
-    get_property : Proc(ITargetInfo*, LibC::BOOL, LibC::LPWSTR, UInt8**, HRESULT)
-    set_property : Proc(ITargetInfo*, LibC::BOOL, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_enumerator : Proc(ITargetInfo*, IItemEnumerator*, HRESULT)
-    expand_target : Proc(ITargetInfo*, LibC::BOOL, LibC::LPWSTR, UInt8**, HRESULT)
-    expand_target_path : Proc(ITargetInfo*, LibC::BOOL, LibC::LPWSTR, UInt8**, HRESULT)
-    set_module_path : Proc(ITargetInfo*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    load_module : Proc(ITargetInfo*, LibC::LPWSTR, HINSTANCE*, HRESULT)
-    set_wow64_context : Proc(ITargetInfo*, LibC::LPWSTR, UInt8*, HRESULT)
-    translate_wow64 : Proc(ITargetInfo*, LibC::LPWSTR, LibC::LPWSTR, UInt8**, HRESULT)
-    set_schema_hive_location : Proc(ITargetInfo*, LibC::LPWSTR, HRESULT)
-    get_schema_hive_location : Proc(ITargetInfo*, UInt8**, HRESULT)
-    set_schema_hive_mount_name : Proc(ITargetInfo*, LibC::LPWSTR, HRESULT)
-    get_schema_hive_mount_name : Proc(ITargetInfo*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_target_mode : UInt64
+    set_target_mode : UInt64
+    get_temporary_store_location : UInt64
+    set_temporary_store_location : UInt64
+    get_target_id : UInt64
+    set_target_id : UInt64
+    get_target_processor_architecture : UInt64
+    set_target_processor_architecture : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    get_enumerator : UInt64
+    expand_target : UInt64
+    expand_target_path : UInt64
+    set_module_path : UInt64
+    load_module : UInt64
+    set_wow64_context : UInt64
+    translate_wow64 : UInt64
+    set_schema_hive_location : UInt64
+    get_schema_hive_location : UInt64
+    set_schema_hive_mount_name : UInt64
+    get_schema_hive_mount_name : UInt64
   end
 
   ITargetInfo_GUID = "9f7d7bb8-20b3-11da-81a5-0030f1642e3c"
@@ -184,25 +184,25 @@ lib LibWin32
   end
 
   struct ISettingsEngineVTbl
-    query_interface : Proc(ISettingsEngine*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISettingsEngine*, UInt32)
-    release : Proc(ISettingsEngine*, UInt32)
-    get_namespaces : Proc(ISettingsEngine*, WcmNamespaceEnumerationFlags, Void*, IItemEnumerator*, HRESULT)
-    get_namespace : Proc(ISettingsEngine*, ISettingsIdentity, WcmNamespaceAccess, Void*, ISettingsNamespace*, HRESULT)
-    get_error_description : Proc(ISettingsEngine*, Int32, UInt8**, HRESULT)
-    create_settings_identity : Proc(ISettingsEngine*, ISettingsIdentity*, HRESULT)
-    get_store_status : Proc(ISettingsEngine*, Void*, WcmUserStatus*, HRESULT)
-    load_store : Proc(ISettingsEngine*, UInt32, HRESULT)
-    unload_store : Proc(ISettingsEngine*, Void*, HRESULT)
-    register_namespace : Proc(ISettingsEngine*, ISettingsIdentity, IStream, LibC::BOOL, VARIANT*, HRESULT)
-    unregister_namespace : Proc(ISettingsEngine*, ISettingsIdentity, LibC::BOOL, HRESULT)
-    create_target_info : Proc(ISettingsEngine*, ITargetInfo*, HRESULT)
-    get_target_info : Proc(ISettingsEngine*, ITargetInfo*, HRESULT)
-    set_target_info : Proc(ISettingsEngine*, ITargetInfo, HRESULT)
-    create_settings_context : Proc(ISettingsEngine*, UInt32, Void*, ISettingsContext*, HRESULT)
-    set_settings_context : Proc(ISettingsEngine*, ISettingsContext, HRESULT)
-    apply_settings_context : Proc(ISettingsEngine*, ISettingsContext, LibC::LPWSTR**, LibC::UINT_PTR*, HRESULT)
-    get_settings_context : Proc(ISettingsEngine*, ISettingsContext*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_namespaces : UInt64
+    get_namespace : UInt64
+    get_error_description : UInt64
+    create_settings_identity : UInt64
+    get_store_status : UInt64
+    load_store : UInt64
+    unload_store : UInt64
+    register_namespace : UInt64
+    unregister_namespace : UInt64
+    create_target_info : UInt64
+    get_target_info : UInt64
+    set_target_info : UInt64
+    create_settings_context : UInt64
+    set_settings_context : UInt64
+    apply_settings_context : UInt64
+    get_settings_context : UInt64
   end
 
   ISettingsEngine_GUID = "9f7d7bb9-20b3-11da-81a5-0030f1642e3c"
@@ -212,31 +212,31 @@ lib LibWin32
   end
 
   struct ISettingsItemVTbl
-    query_interface : Proc(ISettingsItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISettingsItem*, UInt32)
-    release : Proc(ISettingsItem*, UInt32)
-    get_name : Proc(ISettingsItem*, UInt8**, HRESULT)
-    get_value : Proc(ISettingsItem*, VARIANT*, HRESULT)
-    set_value : Proc(ISettingsItem*, VARIANT*, HRESULT)
-    get_setting_type : Proc(ISettingsItem*, WcmSettingType*, HRESULT)
-    get_data_type : Proc(ISettingsItem*, WcmDataType*, HRESULT)
-    get_value_raw : Proc(ISettingsItem*, UInt8**, UInt32*, HRESULT)
-    set_value_raw : Proc(ISettingsItem*, Int32, UInt8*, UInt32, HRESULT)
-    has_child : Proc(ISettingsItem*, LibC::BOOL*, HRESULT)
-    children : Proc(ISettingsItem*, IItemEnumerator*, HRESULT)
-    get_child : Proc(ISettingsItem*, LibC::LPWSTR, ISettingsItem*, HRESULT)
-    get_setting_by_path : Proc(ISettingsItem*, LibC::LPWSTR, ISettingsItem*, HRESULT)
-    create_setting_by_path : Proc(ISettingsItem*, LibC::LPWSTR, ISettingsItem*, HRESULT)
-    remove_setting_by_path : Proc(ISettingsItem*, LibC::LPWSTR, HRESULT)
-    get_list_key_information : Proc(ISettingsItem*, UInt8**, WcmDataType*, HRESULT)
-    create_list_element : Proc(ISettingsItem*, VARIANT*, ISettingsItem*, HRESULT)
-    remove_list_element : Proc(ISettingsItem*, LibC::LPWSTR, HRESULT)
-    attributes : Proc(ISettingsItem*, IItemEnumerator*, HRESULT)
-    get_attribute : Proc(ISettingsItem*, LibC::LPWSTR, VARIANT*, HRESULT)
-    get_path : Proc(ISettingsItem*, UInt8**, HRESULT)
-    get_restriction_facets : Proc(ISettingsItem*, WcmRestrictionFacets*, HRESULT)
-    get_restriction : Proc(ISettingsItem*, WcmRestrictionFacets, VARIANT*, HRESULT)
-    get_key_value : Proc(ISettingsItem*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_name : UInt64
+    get_value : UInt64
+    set_value : UInt64
+    get_setting_type : UInt64
+    get_data_type : UInt64
+    get_value_raw : UInt64
+    set_value_raw : UInt64
+    has_child : UInt64
+    children : UInt64
+    get_child : UInt64
+    get_setting_by_path : UInt64
+    create_setting_by_path : UInt64
+    remove_setting_by_path : UInt64
+    get_list_key_information : UInt64
+    create_list_element : UInt64
+    remove_list_element : UInt64
+    attributes : UInt64
+    get_attribute : UInt64
+    get_path : UInt64
+    get_restriction_facets : UInt64
+    get_restriction : UInt64
+    get_key_value : UInt64
   end
 
   ISettingsItem_GUID = "9f7d7bbb-20b3-11da-81a5-0030f1642e3c"
@@ -246,16 +246,16 @@ lib LibWin32
   end
 
   struct ISettingsNamespaceVTbl
-    query_interface : Proc(ISettingsNamespace*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISettingsNamespace*, UInt32)
-    release : Proc(ISettingsNamespace*, UInt32)
-    get_identity : Proc(ISettingsNamespace*, ISettingsIdentity*, HRESULT)
-    settings : Proc(ISettingsNamespace*, IItemEnumerator*, HRESULT)
-    save : Proc(ISettingsNamespace*, LibC::BOOL, ISettingsResult*, HRESULT)
-    get_setting_by_path : Proc(ISettingsNamespace*, LibC::LPWSTR, ISettingsItem*, HRESULT)
-    create_setting_by_path : Proc(ISettingsNamespace*, LibC::LPWSTR, ISettingsItem*, HRESULT)
-    remove_setting_by_path : Proc(ISettingsNamespace*, LibC::LPWSTR, HRESULT)
-    get_attribute : Proc(ISettingsNamespace*, LibC::LPWSTR, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_identity : UInt64
+    settings : UInt64
+    save : UInt64
+    get_setting_by_path : UInt64
+    create_setting_by_path : UInt64
+    remove_setting_by_path : UInt64
+    get_attribute : UInt64
   end
 
   ISettingsNamespace_GUID = "9f7d7bba-20b3-11da-81a5-0030f1642e3c"
@@ -265,15 +265,15 @@ lib LibWin32
   end
 
   struct ISettingsResultVTbl
-    query_interface : Proc(ISettingsResult*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISettingsResult*, UInt32)
-    release : Proc(ISettingsResult*, UInt32)
-    get_description : Proc(ISettingsResult*, UInt8**, HRESULT)
-    get_error_code : Proc(ISettingsResult*, HRESULT*, HRESULT)
-    get_context_description : Proc(ISettingsResult*, UInt8**, HRESULT)
-    get_line : Proc(ISettingsResult*, UInt32*, HRESULT)
-    get_column : Proc(ISettingsResult*, UInt32*, HRESULT)
-    get_source : Proc(ISettingsResult*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_description : UInt64
+    get_error_code : UInt64
+    get_context_description : UInt64
+    get_line : UInt64
+    get_column : UInt64
+    get_source : UInt64
   end
 
   ISettingsResult_GUID = "9f7d7bbc-20b3-11da-81a5-0030f1642e3c"
@@ -283,16 +283,16 @@ lib LibWin32
   end
 
   struct ISettingsContextVTbl
-    query_interface : Proc(ISettingsContext*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISettingsContext*, UInt32)
-    release : Proc(ISettingsContext*, UInt32)
-    serialize : Proc(ISettingsContext*, IStream, ITargetInfo, HRESULT)
-    deserialize : Proc(ISettingsContext*, IStream, ITargetInfo, ISettingsResult**, LibC::UINT_PTR*, HRESULT)
-    set_user_data : Proc(ISettingsContext*, Void*, HRESULT)
-    get_user_data : Proc(ISettingsContext*, Void**, HRESULT)
-    get_namespaces : Proc(ISettingsContext*, IItemEnumerator*, HRESULT)
-    get_stored_settings : Proc(ISettingsContext*, ISettingsIdentity, IItemEnumerator*, IItemEnumerator*, IItemEnumerator*, HRESULT)
-    revert_setting : Proc(ISettingsContext*, ISettingsIdentity, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    serialize : UInt64
+    deserialize : UInt64
+    set_user_data : UInt64
+    get_user_data : UInt64
+    get_namespaces : UInt64
+    get_stored_settings : UInt64
+    revert_setting : UInt64
   end
 
   ISettingsContext_GUID = "9f7d7bbd-20b3-11da-81a5-0030f1642e3c"
@@ -301,4 +301,350 @@ lib LibWin32
     lpVtbl : ISettingsContextVTbl*
   end
 
+end
+struct LibWin32::IItemEnumerator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def current(item : VARIANT*) : HRESULT
+    @lpVtbl.value.current.unsafe_as(Proc(VARIANT*, HRESULT)).call(item)
+  end
+  def move_next(itemvalid : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(itemvalid)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ISettingsIdentity
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_attribute(reserved : Void*, name : LibC::LPWSTR, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_attribute.unsafe_as(Proc(Void*, LibC::LPWSTR, UInt8**, HRESULT)).call(reserved, name, value)
+  end
+  def set_attribute(reserved : Void*, name : LibC::LPWSTR, value : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_attribute.unsafe_as(Proc(Void*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(reserved, name, value)
+  end
+  def get_flags(flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(flags)
+  end
+  def set_flags(flags : UInt32) : HRESULT
+    @lpVtbl.value.set_flags.unsafe_as(Proc(UInt32, HRESULT)).call(flags)
+  end
+end
+struct LibWin32::ITargetInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_target_mode(targetmode : WcmTargetMode*) : HRESULT
+    @lpVtbl.value.get_target_mode.unsafe_as(Proc(WcmTargetMode*, HRESULT)).call(targetmode)
+  end
+  def set_target_mode(targetmode : WcmTargetMode) : HRESULT
+    @lpVtbl.value.set_target_mode.unsafe_as(Proc(WcmTargetMode, HRESULT)).call(targetmode)
+  end
+  def get_temporary_store_location(temporarystorelocation : UInt8**) : HRESULT
+    @lpVtbl.value.get_temporary_store_location.unsafe_as(Proc(UInt8**, HRESULT)).call(temporarystorelocation)
+  end
+  def set_temporary_store_location(temporarystorelocation : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_temporary_store_location.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(temporarystorelocation)
+  end
+  def get_target_id(targetid : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_id.unsafe_as(Proc(UInt8**, HRESULT)).call(targetid)
+  end
+  def set_target_id(targetid : Guid) : HRESULT
+    @lpVtbl.value.set_target_id.unsafe_as(Proc(Guid, HRESULT)).call(targetid)
+  end
+  def get_target_processor_architecture(processorarchitecture : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_processor_architecture.unsafe_as(Proc(UInt8**, HRESULT)).call(processorarchitecture)
+  end
+  def set_target_processor_architecture(processorarchitecture : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_target_processor_architecture.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(processorarchitecture)
+  end
+  def get_property(offline : LibC::BOOL, property : LibC::LPWSTR, value : UInt8**) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(LibC::BOOL, LibC::LPWSTR, UInt8**, HRESULT)).call(offline, property, value)
+  end
+  def set_property(offline : LibC::BOOL, property : LibC::LPWSTR, value : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(LibC::BOOL, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(offline, property, value)
+  end
+  def get_enumerator(enumerator : IItemEnumerator*) : HRESULT
+    @lpVtbl.value.get_enumerator.unsafe_as(Proc(IItemEnumerator*, HRESULT)).call(enumerator)
+  end
+  def expand_target(offline : LibC::BOOL, location : LibC::LPWSTR, expandedlocation : UInt8**) : HRESULT
+    @lpVtbl.value.expand_target.unsafe_as(Proc(LibC::BOOL, LibC::LPWSTR, UInt8**, HRESULT)).call(offline, location, expandedlocation)
+  end
+  def expand_target_path(offline : LibC::BOOL, location : LibC::LPWSTR, expandedlocation : UInt8**) : HRESULT
+    @lpVtbl.value.expand_target_path.unsafe_as(Proc(LibC::BOOL, LibC::LPWSTR, UInt8**, HRESULT)).call(offline, location, expandedlocation)
+  end
+  def set_module_path(module_ : LibC::LPWSTR, path : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_module_path.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(module_, path)
+  end
+  def load_module(module_ : LibC::LPWSTR, modulehandle : HINSTANCE*) : HRESULT
+    @lpVtbl.value.load_module.unsafe_as(Proc(LibC::LPWSTR, HINSTANCE*, HRESULT)).call(module_, modulehandle)
+  end
+  def set_wow64_context(installermodule : LibC::LPWSTR, wow64context : UInt8*) : HRESULT
+    @lpVtbl.value.set_wow64_context.unsafe_as(Proc(LibC::LPWSTR, UInt8*, HRESULT)).call(installermodule, wow64context)
+  end
+  def translate_wow64(clientarchitecture : LibC::LPWSTR, value : LibC::LPWSTR, translatedvalue : UInt8**) : HRESULT
+    @lpVtbl.value.translate_wow64.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt8**, HRESULT)).call(clientarchitecture, value, translatedvalue)
+  end
+  def set_schema_hive_location(pwzhivedir : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_schema_hive_location.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwzhivedir)
+  end
+  def get_schema_hive_location(phivelocation : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema_hive_location.unsafe_as(Proc(UInt8**, HRESULT)).call(phivelocation)
+  end
+  def set_schema_hive_mount_name(pwzmountname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_schema_hive_mount_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwzmountname)
+  end
+  def get_schema_hive_mount_name(pmountname : UInt8**) : HRESULT
+    @lpVtbl.value.get_schema_hive_mount_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pmountname)
+  end
+end
+struct LibWin32::ISettingsEngine
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_namespaces(flags : WcmNamespaceEnumerationFlags, reserved : Void*, namespaces : IItemEnumerator*) : HRESULT
+    @lpVtbl.value.get_namespaces.unsafe_as(Proc(WcmNamespaceEnumerationFlags, Void*, IItemEnumerator*, HRESULT)).call(flags, reserved, namespaces)
+  end
+  def get_namespace(settingsid : ISettingsIdentity, access : WcmNamespaceAccess, reserved : Void*, namespaceitem : ISettingsNamespace*) : HRESULT
+    @lpVtbl.value.get_namespace.unsafe_as(Proc(ISettingsIdentity, WcmNamespaceAccess, Void*, ISettingsNamespace*, HRESULT)).call(settingsid, access, reserved, namespaceitem)
+  end
+  def get_error_description(hresult : Int32, message : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_description.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(hresult, message)
+  end
+  def create_settings_identity(settingsid : ISettingsIdentity*) : HRESULT
+    @lpVtbl.value.create_settings_identity.unsafe_as(Proc(ISettingsIdentity*, HRESULT)).call(settingsid)
+  end
+  def get_store_status(reserved : Void*, status : WcmUserStatus*) : HRESULT
+    @lpVtbl.value.get_store_status.unsafe_as(Proc(Void*, WcmUserStatus*, HRESULT)).call(reserved, status)
+  end
+  def load_store(flags : UInt32) : HRESULT
+    @lpVtbl.value.load_store.unsafe_as(Proc(UInt32, HRESULT)).call(flags)
+  end
+  def unload_store(reserved : Void*) : HRESULT
+    @lpVtbl.value.unload_store.unsafe_as(Proc(Void*, HRESULT)).call(reserved)
+  end
+  def register_namespace(settingsid : ISettingsIdentity, stream : IStream, pushsettings : LibC::BOOL, results : VARIANT*) : HRESULT
+    @lpVtbl.value.register_namespace.unsafe_as(Proc(ISettingsIdentity, IStream, LibC::BOOL, VARIANT*, HRESULT)).call(settingsid, stream, pushsettings, results)
+  end
+  def unregister_namespace(settingsid : ISettingsIdentity, removesettings : LibC::BOOL) : HRESULT
+    @lpVtbl.value.unregister_namespace.unsafe_as(Proc(ISettingsIdentity, LibC::BOOL, HRESULT)).call(settingsid, removesettings)
+  end
+  def create_target_info(target : ITargetInfo*) : HRESULT
+    @lpVtbl.value.create_target_info.unsafe_as(Proc(ITargetInfo*, HRESULT)).call(target)
+  end
+  def get_target_info(target : ITargetInfo*) : HRESULT
+    @lpVtbl.value.get_target_info.unsafe_as(Proc(ITargetInfo*, HRESULT)).call(target)
+  end
+  def set_target_info(target : ITargetInfo) : HRESULT
+    @lpVtbl.value.set_target_info.unsafe_as(Proc(ITargetInfo, HRESULT)).call(target)
+  end
+  def create_settings_context(flags : UInt32, reserved : Void*, settingscontext : ISettingsContext*) : HRESULT
+    @lpVtbl.value.create_settings_context.unsafe_as(Proc(UInt32, Void*, ISettingsContext*, HRESULT)).call(flags, reserved, settingscontext)
+  end
+  def set_settings_context(settingscontext : ISettingsContext) : HRESULT
+    @lpVtbl.value.set_settings_context.unsafe_as(Proc(ISettingsContext, HRESULT)).call(settingscontext)
+  end
+  def apply_settings_context(settingscontext : ISettingsContext, pppwzidentities : LibC::LPWSTR**, pcidentities : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.apply_settings_context.unsafe_as(Proc(ISettingsContext, LibC::LPWSTR**, LibC::UINT_PTR*, HRESULT)).call(settingscontext, pppwzidentities, pcidentities)
+  end
+  def get_settings_context(settingscontext : ISettingsContext*) : HRESULT
+    @lpVtbl.value.get_settings_context.unsafe_as(Proc(ISettingsContext*, HRESULT)).call(settingscontext)
+  end
+end
+struct LibWin32::ISettingsItem
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_name(name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  end
+  def get_value(value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  end
+  def set_value(value : VARIANT*) : HRESULT
+    @lpVtbl.value.set_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  end
+  def get_setting_type(type : WcmSettingType*) : HRESULT
+    @lpVtbl.value.get_setting_type.unsafe_as(Proc(WcmSettingType*, HRESULT)).call(type)
+  end
+  def get_data_type(type : WcmDataType*) : HRESULT
+    @lpVtbl.value.get_data_type.unsafe_as(Proc(WcmDataType*, HRESULT)).call(type)
+  end
+  def get_value_raw(data : UInt8**, datasize : UInt32*) : HRESULT
+    @lpVtbl.value.get_value_raw.unsafe_as(Proc(UInt8**, UInt32*, HRESULT)).call(data, datasize)
+  end
+  def set_value_raw(datatype : Int32, data : UInt8*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.set_value_raw.unsafe_as(Proc(Int32, UInt8*, UInt32, HRESULT)).call(datatype, data, datasize)
+  end
+  def has_child(itemhaschild : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_child.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(itemhaschild)
+  end
+  def children(children : IItemEnumerator*) : HRESULT
+    @lpVtbl.value.children.unsafe_as(Proc(IItemEnumerator*, HRESULT)).call(children)
+  end
+  def get_child(name : LibC::LPWSTR, child : ISettingsItem*) : HRESULT
+    @lpVtbl.value.get_child.unsafe_as(Proc(LibC::LPWSTR, ISettingsItem*, HRESULT)).call(name, child)
+  end
+  def get_setting_by_path(path : LibC::LPWSTR, setting : ISettingsItem*) : HRESULT
+    @lpVtbl.value.get_setting_by_path.unsafe_as(Proc(LibC::LPWSTR, ISettingsItem*, HRESULT)).call(path, setting)
+  end
+  def create_setting_by_path(path : LibC::LPWSTR, setting : ISettingsItem*) : HRESULT
+    @lpVtbl.value.create_setting_by_path.unsafe_as(Proc(LibC::LPWSTR, ISettingsItem*, HRESULT)).call(path, setting)
+  end
+  def remove_setting_by_path(path : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_setting_by_path.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(path)
+  end
+  def get_list_key_information(keyname : UInt8**, datatype : WcmDataType*) : HRESULT
+    @lpVtbl.value.get_list_key_information.unsafe_as(Proc(UInt8**, WcmDataType*, HRESULT)).call(keyname, datatype)
+  end
+  def create_list_element(keydata : VARIANT*, child : ISettingsItem*) : HRESULT
+    @lpVtbl.value.create_list_element.unsafe_as(Proc(VARIANT*, ISettingsItem*, HRESULT)).call(keydata, child)
+  end
+  def remove_list_element(elementname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_list_element.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(elementname)
+  end
+  def attributes(attributes : IItemEnumerator*) : HRESULT
+    @lpVtbl.value.attributes.unsafe_as(Proc(IItemEnumerator*, HRESULT)).call(attributes)
+  end
+  def get_attribute(name : LibC::LPWSTR, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, HRESULT)).call(name, value)
+  end
+  def get_path(path : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(path)
+  end
+  def get_restriction_facets(restrictionfacets : WcmRestrictionFacets*) : HRESULT
+    @lpVtbl.value.get_restriction_facets.unsafe_as(Proc(WcmRestrictionFacets*, HRESULT)).call(restrictionfacets)
+  end
+  def get_restriction(restrictionfacet : WcmRestrictionFacets, facetdata : VARIANT*) : HRESULT
+    @lpVtbl.value.get_restriction.unsafe_as(Proc(WcmRestrictionFacets, VARIANT*, HRESULT)).call(restrictionfacet, facetdata)
+  end
+  def get_key_value(value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_key_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(value)
+  end
+end
+struct LibWin32::ISettingsNamespace
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_identity(settingsid : ISettingsIdentity*) : HRESULT
+    @lpVtbl.value.get_identity.unsafe_as(Proc(ISettingsIdentity*, HRESULT)).call(settingsid)
+  end
+  def settings(settings : IItemEnumerator*) : HRESULT
+    @lpVtbl.value.settings.unsafe_as(Proc(IItemEnumerator*, HRESULT)).call(settings)
+  end
+  def save(pushsettings : LibC::BOOL, result : ISettingsResult*) : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(LibC::BOOL, ISettingsResult*, HRESULT)).call(pushsettings, result)
+  end
+  def get_setting_by_path(path : LibC::LPWSTR, setting : ISettingsItem*) : HRESULT
+    @lpVtbl.value.get_setting_by_path.unsafe_as(Proc(LibC::LPWSTR, ISettingsItem*, HRESULT)).call(path, setting)
+  end
+  def create_setting_by_path(path : LibC::LPWSTR, setting : ISettingsItem*) : HRESULT
+    @lpVtbl.value.create_setting_by_path.unsafe_as(Proc(LibC::LPWSTR, ISettingsItem*, HRESULT)).call(path, setting)
+  end
+  def remove_setting_by_path(path : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_setting_by_path.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(path)
+  end
+  def get_attribute(name : LibC::LPWSTR, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, HRESULT)).call(name, value)
+  end
+end
+struct LibWin32::ISettingsResult
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_description(description : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(description)
+  end
+  def get_error_code(hrout : HRESULT*) : HRESULT
+    @lpVtbl.value.get_error_code.unsafe_as(Proc(HRESULT*, HRESULT)).call(hrout)
+  end
+  def get_context_description(description : UInt8**) : HRESULT
+    @lpVtbl.value.get_context_description.unsafe_as(Proc(UInt8**, HRESULT)).call(description)
+  end
+  def get_line(dwline : UInt32*) : HRESULT
+    @lpVtbl.value.get_line.unsafe_as(Proc(UInt32*, HRESULT)).call(dwline)
+  end
+  def get_column(dwcolumn : UInt32*) : HRESULT
+    @lpVtbl.value.get_column.unsafe_as(Proc(UInt32*, HRESULT)).call(dwcolumn)
+  end
+  def get_source(file : UInt8**) : HRESULT
+    @lpVtbl.value.get_source.unsafe_as(Proc(UInt8**, HRESULT)).call(file)
+  end
+end
+struct LibWin32::ISettingsContext
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def serialize(pstream : IStream, ptarget : ITargetInfo) : HRESULT
+    @lpVtbl.value.serialize.unsafe_as(Proc(IStream, ITargetInfo, HRESULT)).call(pstream, ptarget)
+  end
+  def deserialize(pstream : IStream, ptarget : ITargetInfo, pppresults : ISettingsResult**, pcresultcount : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.deserialize.unsafe_as(Proc(IStream, ITargetInfo, ISettingsResult**, LibC::UINT_PTR*, HRESULT)).call(pstream, ptarget, pppresults, pcresultcount)
+  end
+  def set_user_data(puserdata : Void*) : HRESULT
+    @lpVtbl.value.set_user_data.unsafe_as(Proc(Void*, HRESULT)).call(puserdata)
+  end
+  def get_user_data(puserdata : Void**) : HRESULT
+    @lpVtbl.value.get_user_data.unsafe_as(Proc(Void**, HRESULT)).call(puserdata)
+  end
+  def get_namespaces(ppnamespaceids : IItemEnumerator*) : HRESULT
+    @lpVtbl.value.get_namespaces.unsafe_as(Proc(IItemEnumerator*, HRESULT)).call(ppnamespaceids)
+  end
+  def get_stored_settings(pidentity : ISettingsIdentity, ppaddedsettings : IItemEnumerator*, ppmodifiedsettings : IItemEnumerator*, ppdeletedsettings : IItemEnumerator*) : HRESULT
+    @lpVtbl.value.get_stored_settings.unsafe_as(Proc(ISettingsIdentity, IItemEnumerator*, IItemEnumerator*, IItemEnumerator*, HRESULT)).call(pidentity, ppaddedsettings, ppmodifiedsettings, ppdeletedsettings)
+  end
+  def revert_setting(pidentity : ISettingsIdentity, pwzsetting : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.revert_setting.unsafe_as(Proc(ISettingsIdentity, LibC::LPWSTR, HRESULT)).call(pidentity, pwzsetting)
+  end
 end

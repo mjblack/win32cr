@@ -512,20 +512,20 @@ lib LibWin32
 
 
   struct IDeviceModelPlugInVTbl
-    query_interface : Proc(IDeviceModelPlugIn*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDeviceModelPlugIn*, UInt32)
-    release : Proc(IDeviceModelPlugIn*, UInt32)
-    initialize : Proc(IDeviceModelPlugIn*, UInt8*, UInt32, UInt32, HRESULT)
-    get_num_channels : Proc(IDeviceModelPlugIn*, UInt32*, HRESULT)
-    device_to_colorimetric_colors : Proc(IDeviceModelPlugIn*, UInt32, UInt32, Float32*, XYZColorF*, HRESULT)
-    colorimetric_to_device_colors : Proc(IDeviceModelPlugIn*, UInt32, UInt32, XYZColorF*, Float32*, HRESULT)
-    colorimetric_to_device_colors_with_black : Proc(IDeviceModelPlugIn*, UInt32, UInt32, XYZColorF*, BlackInformation*, Float32*, HRESULT)
-    set_transform_device_model_info : Proc(IDeviceModelPlugIn*, UInt32, IDeviceModelPlugIn, HRESULT)
-    get_primary_samples : Proc(IDeviceModelPlugIn*, PrimaryXYZColors*, HRESULT)
-    get_gamut_boundary_mesh_size : Proc(IDeviceModelPlugIn*, UInt32*, UInt32*, HRESULT)
-    get_gamut_boundary_mesh : Proc(IDeviceModelPlugIn*, UInt32, UInt32, UInt32, Float32*, GamutShellTriangle*, HRESULT)
-    get_neutral_axis_size : Proc(IDeviceModelPlugIn*, UInt32*, HRESULT)
-    get_neutral_axis : Proc(IDeviceModelPlugIn*, UInt32, XYZColorF*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    get_num_channels : UInt64
+    device_to_colorimetric_colors : UInt64
+    colorimetric_to_device_colors : UInt64
+    colorimetric_to_device_colors_with_black : UInt64
+    set_transform_device_model_info : UInt64
+    get_primary_samples : UInt64
+    get_gamut_boundary_mesh_size : UInt64
+    get_gamut_boundary_mesh : UInt64
+    get_neutral_axis_size : UInt64
+    get_neutral_axis : UInt64
   end
 
   IDeviceModelPlugIn_GUID = "1cd63475-07c4-46fe-a903-d655316d11fd"
@@ -535,11 +535,11 @@ lib LibWin32
   end
 
   struct IGamutMapModelPlugInVTbl
-    query_interface : Proc(IGamutMapModelPlugIn*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGamutMapModelPlugIn*, UInt32)
-    release : Proc(IGamutMapModelPlugIn*, UInt32)
-    initialize : Proc(IGamutMapModelPlugIn*, UInt8*, IDeviceModelPlugIn, IDeviceModelPlugIn, GamutBoundaryDescription*, GamutBoundaryDescription*, HRESULT)
-    source_to_destination_appearance_colors : Proc(IGamutMapModelPlugIn*, UInt32, JChColorF*, JChColorF*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    source_to_destination_appearance_colors : UInt64
   end
 
   IGamutMapModelPlugIn_GUID = "2dd80115-ad1e-41f6-a219-a4f4b583d1f9"
@@ -911,4 +911,65 @@ lib LibWin32
 
   # Params # targetadapterid : LUID [In],sourceid : UInt32 [In],scope : WCS_PROFILE_MANAGEMENT_SCOPE* [In]
   fun ColorProfileGetDisplayUserScope(targetadapterid : LUID, sourceid : UInt32, scope : WCS_PROFILE_MANAGEMENT_SCOPE*) : HRESULT
+end
+struct LibWin32::IDeviceModelPlugIn
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(bstrxml : UInt8*, cnummodels : UInt32, imodelposition : UInt32) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(UInt8*, UInt32, UInt32, HRESULT)).call(bstrxml, cnummodels, imodelposition)
+  end
+  def get_num_channels(pnumchannels : UInt32*) : HRESULT
+    @lpVtbl.value.get_num_channels.unsafe_as(Proc(UInt32*, HRESULT)).call(pnumchannels)
+  end
+  def device_to_colorimetric_colors(ccolors : UInt32, cchannels : UInt32, pdevicevalues : Float32*, pxyzcolors : XYZColorF*) : HRESULT
+    @lpVtbl.value.device_to_colorimetric_colors.unsafe_as(Proc(UInt32, UInt32, Float32*, XYZColorF*, HRESULT)).call(ccolors, cchannels, pdevicevalues, pxyzcolors)
+  end
+  def colorimetric_to_device_colors(ccolors : UInt32, cchannels : UInt32, pxyzcolors : XYZColorF*, pdevicevalues : Float32*) : HRESULT
+    @lpVtbl.value.colorimetric_to_device_colors.unsafe_as(Proc(UInt32, UInt32, XYZColorF*, Float32*, HRESULT)).call(ccolors, cchannels, pxyzcolors, pdevicevalues)
+  end
+  def colorimetric_to_device_colors_with_black(ccolors : UInt32, cchannels : UInt32, pxyzcolors : XYZColorF*, pblackinformation : BlackInformation*, pdevicevalues : Float32*) : HRESULT
+    @lpVtbl.value.colorimetric_to_device_colors_with_black.unsafe_as(Proc(UInt32, UInt32, XYZColorF*, BlackInformation*, Float32*, HRESULT)).call(ccolors, cchannels, pxyzcolors, pblackinformation, pdevicevalues)
+  end
+  def set_transform_device_model_info(imodelposition : UInt32, pidevicemodelother : IDeviceModelPlugIn) : HRESULT
+    @lpVtbl.value.set_transform_device_model_info.unsafe_as(Proc(UInt32, IDeviceModelPlugIn, HRESULT)).call(imodelposition, pidevicemodelother)
+  end
+  def get_primary_samples(pprimarycolor : PrimaryXYZColors*) : HRESULT
+    @lpVtbl.value.get_primary_samples.unsafe_as(Proc(PrimaryXYZColors*, HRESULT)).call(pprimarycolor)
+  end
+  def get_gamut_boundary_mesh_size(pnumvertices : UInt32*, pnumtriangles : UInt32*) : HRESULT
+    @lpVtbl.value.get_gamut_boundary_mesh_size.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pnumvertices, pnumtriangles)
+  end
+  def get_gamut_boundary_mesh(cchannels : UInt32, cvertices : UInt32, ctriangles : UInt32, pvertices : Float32*, ptriangles : GamutShellTriangle*) : HRESULT
+    @lpVtbl.value.get_gamut_boundary_mesh.unsafe_as(Proc(UInt32, UInt32, UInt32, Float32*, GamutShellTriangle*, HRESULT)).call(cchannels, cvertices, ctriangles, pvertices, ptriangles)
+  end
+  def get_neutral_axis_size(pccolors : UInt32*) : HRESULT
+    @lpVtbl.value.get_neutral_axis_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pccolors)
+  end
+  def get_neutral_axis(ccolors : UInt32, pxyzcolors : XYZColorF*) : HRESULT
+    @lpVtbl.value.get_neutral_axis.unsafe_as(Proc(UInt32, XYZColorF*, HRESULT)).call(ccolors, pxyzcolors)
+  end
+end
+struct LibWin32::IGamutMapModelPlugIn
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(bstrxml : UInt8*, psrcplugin : IDeviceModelPlugIn, pdestplugin : IDeviceModelPlugIn, psrcgbd : GamutBoundaryDescription*, pdestgbd : GamutBoundaryDescription*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(UInt8*, IDeviceModelPlugIn, IDeviceModelPlugIn, GamutBoundaryDescription*, GamutBoundaryDescription*, HRESULT)).call(bstrxml, psrcplugin, pdestplugin, psrcgbd, pdestgbd)
+  end
+  def source_to_destination_appearance_colors(ccolors : UInt32, pinputcolors : JChColorF*, poutputcolors : JChColorF*) : HRESULT
+    @lpVtbl.value.source_to_destination_appearance_colors.unsafe_as(Proc(UInt32, JChColorF*, JChColorF*, HRESULT)).call(ccolors, pinputcolors, poutputcolors)
+  end
 end

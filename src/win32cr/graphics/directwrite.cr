@@ -1119,10 +1119,10 @@ lib LibWin32
 
 
   struct IDWriteFontFileLoaderVTbl
-    query_interface : Proc(IDWriteFontFileLoader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFileLoader*, UInt32)
-    release : Proc(IDWriteFontFileLoader*, UInt32)
-    create_stream_from_key : Proc(IDWriteFontFileLoader*, Void*, UInt32, IDWriteFontFileStream*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_stream_from_key : UInt64
   end
 
   IDWriteFontFileLoader_GUID = "727cad4e-d6af-4c9e-8a08-d695b11caa49"
@@ -1132,13 +1132,13 @@ lib LibWin32
   end
 
   struct IDWriteLocalFontFileLoaderVTbl
-    query_interface : Proc(IDWriteLocalFontFileLoader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteLocalFontFileLoader*, UInt32)
-    release : Proc(IDWriteLocalFontFileLoader*, UInt32)
-    create_stream_from_key : Proc(IDWriteLocalFontFileLoader*, Void*, UInt32, IDWriteFontFileStream*, HRESULT)
-    get_file_path_length_from_key : Proc(IDWriteLocalFontFileLoader*, Void*, UInt32, UInt32*, HRESULT)
-    get_file_path_from_key : Proc(IDWriteLocalFontFileLoader*, Void*, UInt32, Char*, UInt32, HRESULT)
-    get_last_write_time_from_key : Proc(IDWriteLocalFontFileLoader*, Void*, UInt32, FILETIME*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_stream_from_key : UInt64
+    get_file_path_length_from_key : UInt64
+    get_file_path_from_key : UInt64
+    get_last_write_time_from_key : UInt64
   end
 
   IDWriteLocalFontFileLoader_GUID = "b2d9f3ec-c9fe-4a11-a2ec-d86208f7c0a2"
@@ -1148,13 +1148,13 @@ lib LibWin32
   end
 
   struct IDWriteFontFileStreamVTbl
-    query_interface : Proc(IDWriteFontFileStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFileStream*, UInt32)
-    release : Proc(IDWriteFontFileStream*, UInt32)
-    read_file_fragment : Proc(IDWriteFontFileStream*, Void**, UInt64, UInt64, Void**, HRESULT)
-    release_file_fragment : Proc(IDWriteFontFileStream*, Void*, Void)
-    get_file_size : Proc(IDWriteFontFileStream*, UInt64*, HRESULT)
-    get_last_write_time : Proc(IDWriteFontFileStream*, UInt64*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    read_file_fragment : UInt64
+    release_file_fragment : UInt64
+    get_file_size : UInt64
+    get_last_write_time : UInt64
   end
 
   IDWriteFontFileStream_GUID = "6d4865fe-0ab8-4d91-8f62-5dd6be34a3e0"
@@ -1164,12 +1164,12 @@ lib LibWin32
   end
 
   struct IDWriteFontFileVTbl
-    query_interface : Proc(IDWriteFontFile*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFile*, UInt32)
-    release : Proc(IDWriteFontFile*, UInt32)
-    get_reference_key : Proc(IDWriteFontFile*, Void**, UInt32*, HRESULT)
-    get_loader : Proc(IDWriteFontFile*, IDWriteFontFileLoader*, HRESULT)
-    analyze : Proc(IDWriteFontFile*, LibC::BOOL*, DWRITE_FONT_FILE_TYPE*, DWRITE_FONT_FACE_TYPE*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_reference_key : UInt64
+    get_loader : UInt64
+    analyze : UInt64
   end
 
   IDWriteFontFile_GUID = "739d886a-cef5-47dc-8769-1a8b41bebbb0"
@@ -1179,14 +1179,14 @@ lib LibWin32
   end
 
   struct IDWriteRenderingParamsVTbl
-    query_interface : Proc(IDWriteRenderingParams*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteRenderingParams*, UInt32)
-    release : Proc(IDWriteRenderingParams*, UInt32)
-    get_gamma : Proc(IDWriteRenderingParams*, Float32)
-    get_enhanced_contrast : Proc(IDWriteRenderingParams*, Float32)
-    get_clear_type_level : Proc(IDWriteRenderingParams*, Float32)
-    get_pixel_geometry : Proc(IDWriteRenderingParams*, DWRITE_PIXEL_GEOMETRY)
-    get_rendering_mode : Proc(IDWriteRenderingParams*, DWRITE_RENDERING_MODE)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_gamma : UInt64
+    get_enhanced_contrast : UInt64
+    get_clear_type_level : UInt64
+    get_pixel_geometry : UInt64
+    get_rendering_mode : UInt64
   end
 
   IDWriteRenderingParams_GUID = "2f0da53a-2add-47cd-82ee-d9ec34688e75"
@@ -1196,24 +1196,24 @@ lib LibWin32
   end
 
   struct IDWriteFontFaceVTbl
-    query_interface : Proc(IDWriteFontFace*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFace*, UInt32)
-    release : Proc(IDWriteFontFace*, UInt32)
-    get_type : Proc(IDWriteFontFace*, DWRITE_FONT_FACE_TYPE)
-    get_files : Proc(IDWriteFontFace*, UInt32*, IDWriteFontFile*, HRESULT)
-    get_index : Proc(IDWriteFontFace*, UInt32)
-    get_simulations : Proc(IDWriteFontFace*, DWRITE_FONT_SIMULATIONS)
-    is_symbol_font : Proc(IDWriteFontFace*, LibC::BOOL)
-    get_metrics : Proc(IDWriteFontFace*, DWRITE_FONT_METRICS*, Void)
-    get_glyph_count : Proc(IDWriteFontFace*, UInt16)
-    get_design_glyph_metrics : Proc(IDWriteFontFace*, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)
-    get_glyph_indices : Proc(IDWriteFontFace*, UInt32*, UInt32, UInt16*, HRESULT)
-    try_get_font_table : Proc(IDWriteFontFace*, UInt32, Void**, UInt32*, Void**, LibC::BOOL*, HRESULT)
-    release_font_table : Proc(IDWriteFontFace*, Void*, Void)
-    get_glyph_run_outline : Proc(IDWriteFontFace*, Float32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, UInt32, LibC::BOOL, LibC::BOOL, ID2D1SimplifiedGeometrySink, HRESULT)
-    get_recommended_rendering_mode : Proc(IDWriteFontFace*, Float32, Float32, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, HRESULT)
-    get_gdi_compatible_metrics : Proc(IDWriteFontFace*, Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS*, HRESULT)
-    get_gdi_compatible_glyph_metrics : Proc(IDWriteFontFace*, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type : UInt64
+    get_files : UInt64
+    get_index : UInt64
+    get_simulations : UInt64
+    is_symbol_font : UInt64
+    get_metrics : UInt64
+    get_glyph_count : UInt64
+    get_design_glyph_metrics : UInt64
+    get_glyph_indices : UInt64
+    try_get_font_table : UInt64
+    release_font_table : UInt64
+    get_glyph_run_outline : UInt64
+    get_recommended_rendering_mode : UInt64
+    get_gdi_compatible_metrics : UInt64
+    get_gdi_compatible_glyph_metrics : UInt64
   end
 
   IDWriteFontFace_GUID = "5f49804d-7024-4d43-bfa9-d25984f53849"
@@ -1223,10 +1223,10 @@ lib LibWin32
   end
 
   struct IDWriteFontCollectionLoaderVTbl
-    query_interface : Proc(IDWriteFontCollectionLoader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontCollectionLoader*, UInt32)
-    release : Proc(IDWriteFontCollectionLoader*, UInt32)
-    create_enumerator_from_key : Proc(IDWriteFontCollectionLoader*, IDWriteFactory, Void*, UInt32, IDWriteFontFileEnumerator*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_enumerator_from_key : UInt64
   end
 
   IDWriteFontCollectionLoader_GUID = "cca920e4-52f0-492b-bfa8-29c72ee0a468"
@@ -1236,11 +1236,11 @@ lib LibWin32
   end
 
   struct IDWriteFontFileEnumeratorVTbl
-    query_interface : Proc(IDWriteFontFileEnumerator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFileEnumerator*, UInt32)
-    release : Proc(IDWriteFontFileEnumerator*, UInt32)
-    move_next : Proc(IDWriteFontFileEnumerator*, LibC::BOOL*, HRESULT)
-    get_current_font_file : Proc(IDWriteFontFileEnumerator*, IDWriteFontFile*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    move_next : UInt64
+    get_current_font_file : UInt64
   end
 
   IDWriteFontFileEnumerator_GUID = "72755049-5ff7-435d-8348-4be97cfa6c7c"
@@ -1250,15 +1250,15 @@ lib LibWin32
   end
 
   struct IDWriteLocalizedStringsVTbl
-    query_interface : Proc(IDWriteLocalizedStrings*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteLocalizedStrings*, UInt32)
-    release : Proc(IDWriteLocalizedStrings*, UInt32)
-    get_count : Proc(IDWriteLocalizedStrings*, UInt32)
-    find_locale_name : Proc(IDWriteLocalizedStrings*, LibC::LPWSTR, UInt32*, LibC::BOOL*, HRESULT)
-    get_locale_name_length : Proc(IDWriteLocalizedStrings*, UInt32, UInt32*, HRESULT)
-    get_locale_name : Proc(IDWriteLocalizedStrings*, UInt32, Char*, UInt32, HRESULT)
-    get_string_length : Proc(IDWriteLocalizedStrings*, UInt32, UInt32*, HRESULT)
-    get_string : Proc(IDWriteLocalizedStrings*, UInt32, Char*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    find_locale_name : UInt64
+    get_locale_name_length : UInt64
+    get_locale_name : UInt64
+    get_string_length : UInt64
+    get_string : UInt64
   end
 
   IDWriteLocalizedStrings_GUID = "08256209-099a-4b34-b86d-c22b110e7771"
@@ -1268,13 +1268,13 @@ lib LibWin32
   end
 
   struct IDWriteFontCollectionVTbl
-    query_interface : Proc(IDWriteFontCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontCollection*, UInt32)
-    release : Proc(IDWriteFontCollection*, UInt32)
-    get_font_family_count : Proc(IDWriteFontCollection*, UInt32)
-    get_font_family : Proc(IDWriteFontCollection*, UInt32, IDWriteFontFamily*, HRESULT)
-    find_family_name : Proc(IDWriteFontCollection*, LibC::LPWSTR, UInt32*, LibC::BOOL*, HRESULT)
-    get_font_from_font_face : Proc(IDWriteFontCollection*, IDWriteFontFace, IDWriteFont*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_family_count : UInt64
+    get_font_family : UInt64
+    find_family_name : UInt64
+    get_font_from_font_face : UInt64
   end
 
   IDWriteFontCollection_GUID = "a84cee02-3eea-4eee-a827-87c1a02a0fcc"
@@ -1284,12 +1284,12 @@ lib LibWin32
   end
 
   struct IDWriteFontListVTbl
-    query_interface : Proc(IDWriteFontList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontList*, UInt32)
-    release : Proc(IDWriteFontList*, UInt32)
-    get_font_collection : Proc(IDWriteFontList*, IDWriteFontCollection*, HRESULT)
-    get_font_count : Proc(IDWriteFontList*, UInt32)
-    get_font : Proc(IDWriteFontList*, UInt32, IDWriteFont*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_collection : UInt64
+    get_font_count : UInt64
+    get_font : UInt64
   end
 
   IDWriteFontList_GUID = "1a0d8438-1d97-4ec1-aef9-a2fb86ed6acb"
@@ -1299,15 +1299,15 @@ lib LibWin32
   end
 
   struct IDWriteFontFamilyVTbl
-    query_interface : Proc(IDWriteFontFamily*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFamily*, UInt32)
-    release : Proc(IDWriteFontFamily*, UInt32)
-    get_font_collection : Proc(IDWriteFontFamily*, IDWriteFontCollection*, HRESULT)
-    get_font_count : Proc(IDWriteFontFamily*, UInt32)
-    get_font : Proc(IDWriteFontFamily*, UInt32, IDWriteFont*, HRESULT)
-    get_family_names : Proc(IDWriteFontFamily*, IDWriteLocalizedStrings*, HRESULT)
-    get_first_matching_font : Proc(IDWriteFontFamily*, DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFont*, HRESULT)
-    get_matching_fonts : Proc(IDWriteFontFamily*, DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFontList*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_collection : UInt64
+    get_font_count : UInt64
+    get_font : UInt64
+    get_family_names : UInt64
+    get_first_matching_font : UInt64
+    get_matching_fonts : UInt64
   end
 
   IDWriteFontFamily_GUID = "da20d8ef-812a-4c43-9802-62ec4abd7add"
@@ -1317,20 +1317,20 @@ lib LibWin32
   end
 
   struct IDWriteFontVTbl
-    query_interface : Proc(IDWriteFont*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFont*, UInt32)
-    release : Proc(IDWriteFont*, UInt32)
-    get_font_family : Proc(IDWriteFont*, IDWriteFontFamily*, HRESULT)
-    get_weight : Proc(IDWriteFont*, DWRITE_FONT_WEIGHT)
-    get_stretch : Proc(IDWriteFont*, DWRITE_FONT_STRETCH)
-    get_style : Proc(IDWriteFont*, DWRITE_FONT_STYLE)
-    is_symbol_font : Proc(IDWriteFont*, LibC::BOOL)
-    get_face_names : Proc(IDWriteFont*, IDWriteLocalizedStrings*, HRESULT)
-    get_informational_strings : Proc(IDWriteFont*, DWRITE_INFORMATIONAL_STRING_ID, IDWriteLocalizedStrings*, LibC::BOOL*, HRESULT)
-    get_simulations : Proc(IDWriteFont*, DWRITE_FONT_SIMULATIONS)
-    get_metrics : Proc(IDWriteFont*, DWRITE_FONT_METRICS*, Void)
-    has_character : Proc(IDWriteFont*, UInt32, LibC::BOOL*, HRESULT)
-    create_font_face : Proc(IDWriteFont*, IDWriteFontFace*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_family : UInt64
+    get_weight : UInt64
+    get_stretch : UInt64
+    get_style : UInt64
+    is_symbol_font : UInt64
+    get_face_names : UInt64
+    get_informational_strings : UInt64
+    get_simulations : UInt64
+    get_metrics : UInt64
+    has_character : UInt64
+    create_font_face : UInt64
   end
 
   IDWriteFont_GUID = "acd16696-8c14-4f5d-877e-fe3fc1d32737"
@@ -1340,34 +1340,34 @@ lib LibWin32
   end
 
   struct IDWriteTextFormatVTbl
-    query_interface : Proc(IDWriteTextFormat*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextFormat*, UInt32)
-    release : Proc(IDWriteTextFormat*, UInt32)
-    set_text_alignment : Proc(IDWriteTextFormat*, DWRITE_TEXT_ALIGNMENT, HRESULT)
-    set_paragraph_alignment : Proc(IDWriteTextFormat*, DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)
-    set_word_wrapping : Proc(IDWriteTextFormat*, DWRITE_WORD_WRAPPING, HRESULT)
-    set_reading_direction : Proc(IDWriteTextFormat*, DWRITE_READING_DIRECTION, HRESULT)
-    set_flow_direction : Proc(IDWriteTextFormat*, DWRITE_FLOW_DIRECTION, HRESULT)
-    set_incremental_tab_stop : Proc(IDWriteTextFormat*, Float32, HRESULT)
-    set_trimming : Proc(IDWriteTextFormat*, DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)
-    set_line_spacing : Proc(IDWriteTextFormat*, DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)
-    get_text_alignment : Proc(IDWriteTextFormat*, DWRITE_TEXT_ALIGNMENT)
-    get_paragraph_alignment : Proc(IDWriteTextFormat*, DWRITE_PARAGRAPH_ALIGNMENT)
-    get_word_wrapping : Proc(IDWriteTextFormat*, DWRITE_WORD_WRAPPING)
-    get_reading_direction : Proc(IDWriteTextFormat*, DWRITE_READING_DIRECTION)
-    get_flow_direction : Proc(IDWriteTextFormat*, DWRITE_FLOW_DIRECTION)
-    get_incremental_tab_stop : Proc(IDWriteTextFormat*, Float32)
-    get_trimming : Proc(IDWriteTextFormat*, DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)
-    get_line_spacing : Proc(IDWriteTextFormat*, DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)
-    get_font_collection : Proc(IDWriteTextFormat*, IDWriteFontCollection*, HRESULT)
-    get_font_family_name_length : Proc(IDWriteTextFormat*, UInt32)
-    get_font_family_name : Proc(IDWriteTextFormat*, Char*, UInt32, HRESULT)
-    get_font_weight : Proc(IDWriteTextFormat*, DWRITE_FONT_WEIGHT)
-    get_font_style : Proc(IDWriteTextFormat*, DWRITE_FONT_STYLE)
-    get_font_stretch : Proc(IDWriteTextFormat*, DWRITE_FONT_STRETCH)
-    get_font_size : Proc(IDWriteTextFormat*, Float32)
-    get_locale_name_length : Proc(IDWriteTextFormat*, UInt32)
-    get_locale_name : Proc(IDWriteTextFormat*, Char*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_text_alignment : UInt64
+    set_paragraph_alignment : UInt64
+    set_word_wrapping : UInt64
+    set_reading_direction : UInt64
+    set_flow_direction : UInt64
+    set_incremental_tab_stop : UInt64
+    set_trimming : UInt64
+    set_line_spacing : UInt64
+    get_text_alignment : UInt64
+    get_paragraph_alignment : UInt64
+    get_word_wrapping : UInt64
+    get_reading_direction : UInt64
+    get_flow_direction : UInt64
+    get_incremental_tab_stop : UInt64
+    get_trimming : UInt64
+    get_line_spacing : UInt64
+    get_font_collection : UInt64
+    get_font_family_name_length : UInt64
+    get_font_family_name : UInt64
+    get_font_weight : UInt64
+    get_font_style : UInt64
+    get_font_stretch : UInt64
+    get_font_size : UInt64
+    get_locale_name_length : UInt64
+    get_locale_name : UInt64
   end
 
   IDWriteTextFormat_GUID = "9c906818-31d7-4fd3-a151-7c5e225db55a"
@@ -1377,12 +1377,12 @@ lib LibWin32
   end
 
   struct IDWriteTypographyVTbl
-    query_interface : Proc(IDWriteTypography*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTypography*, UInt32)
-    release : Proc(IDWriteTypography*, UInt32)
-    add_font_feature : Proc(IDWriteTypography*, DWRITE_FONT_FEATURE, HRESULT)
-    get_font_feature_count : Proc(IDWriteTypography*, UInt32)
-    get_font_feature : Proc(IDWriteTypography*, UInt32, DWRITE_FONT_FEATURE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_font_feature : UInt64
+    get_font_feature_count : UInt64
+    get_font_feature : UInt64
   end
 
   IDWriteTypography_GUID = "55f1112b-1dc2-4b3c-9541-f46894ed85b6"
@@ -1392,9 +1392,9 @@ lib LibWin32
   end
 
   struct IDWriteNumberSubstitutionVTbl
-    query_interface : Proc(IDWriteNumberSubstitution*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteNumberSubstitution*, UInt32)
-    release : Proc(IDWriteNumberSubstitution*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
   end
 
   IDWriteNumberSubstitution_GUID = "14885cc9-bab0-4f90-b6ed-5c366a2cd03d"
@@ -1404,14 +1404,14 @@ lib LibWin32
   end
 
   struct IDWriteTextAnalysisSourceVTbl
-    query_interface : Proc(IDWriteTextAnalysisSource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextAnalysisSource*, UInt32)
-    release : Proc(IDWriteTextAnalysisSource*, UInt32)
-    get_text_at_position : Proc(IDWriteTextAnalysisSource*, UInt32, UInt16**, UInt32*, HRESULT)
-    get_text_before_position : Proc(IDWriteTextAnalysisSource*, UInt32, UInt16**, UInt32*, HRESULT)
-    get_paragraph_reading_direction : Proc(IDWriteTextAnalysisSource*, DWRITE_READING_DIRECTION)
-    get_locale_name : Proc(IDWriteTextAnalysisSource*, UInt32, UInt32*, UInt16**, HRESULT)
-    get_number_substitution : Proc(IDWriteTextAnalysisSource*, UInt32, UInt32*, IDWriteNumberSubstitution*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_text_at_position : UInt64
+    get_text_before_position : UInt64
+    get_paragraph_reading_direction : UInt64
+    get_locale_name : UInt64
+    get_number_substitution : UInt64
   end
 
   IDWriteTextAnalysisSource_GUID = "688e1a58-5094-47c8-adc8-fbcea60ae92b"
@@ -1421,13 +1421,13 @@ lib LibWin32
   end
 
   struct IDWriteTextAnalysisSinkVTbl
-    query_interface : Proc(IDWriteTextAnalysisSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextAnalysisSink*, UInt32)
-    release : Proc(IDWriteTextAnalysisSink*, UInt32)
-    set_script_analysis : Proc(IDWriteTextAnalysisSink*, UInt32, UInt32, DWRITE_SCRIPT_ANALYSIS*, HRESULT)
-    set_line_breakpoints : Proc(IDWriteTextAnalysisSink*, UInt32, UInt32, DWRITE_LINE_BREAKPOINT*, HRESULT)
-    set_bidi_level : Proc(IDWriteTextAnalysisSink*, UInt32, UInt32, UInt8, UInt8, HRESULT)
-    set_number_substitution : Proc(IDWriteTextAnalysisSink*, UInt32, UInt32, IDWriteNumberSubstitution, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_script_analysis : UInt64
+    set_line_breakpoints : UInt64
+    set_bidi_level : UInt64
+    set_number_substitution : UInt64
   end
 
   IDWriteTextAnalysisSink_GUID = "5810cd44-0ca0-4701-b3fa-bec5182ae4f6"
@@ -1437,16 +1437,16 @@ lib LibWin32
   end
 
   struct IDWriteTextAnalyzerVTbl
-    query_interface : Proc(IDWriteTextAnalyzer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextAnalyzer*, UInt32)
-    release : Proc(IDWriteTextAnalyzer*, UInt32)
-    analyze_script : Proc(IDWriteTextAnalyzer*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)
-    analyze_bidi : Proc(IDWriteTextAnalyzer*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)
-    analyze_number_substitution : Proc(IDWriteTextAnalyzer*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)
-    analyze_line_breakpoints : Proc(IDWriteTextAnalyzer*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)
-    get_glyphs : Proc(IDWriteTextAnalyzer*, Char*, UInt32, IDWriteFontFace, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, IDWriteNumberSubstitution, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, UInt32, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, HRESULT)
-    get_glyph_placements : Proc(IDWriteTextAnalyzer*, Char*, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, IDWriteFontFace, Float32, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)
-    get_gdi_compatible_glyph_placements : Proc(IDWriteTextAnalyzer*, Char*, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, IDWriteFontFace, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    analyze_script : UInt64
+    analyze_bidi : UInt64
+    analyze_number_substitution : UInt64
+    analyze_line_breakpoints : UInt64
+    get_glyphs : UInt64
+    get_glyph_placements : UInt64
+    get_gdi_compatible_glyph_placements : UInt64
   end
 
   IDWriteTextAnalyzer_GUID = "b7e6163e-7f46-43b4-84b3-e4e6249c365d"
@@ -1456,13 +1456,13 @@ lib LibWin32
   end
 
   struct IDWriteInlineObjectVTbl
-    query_interface : Proc(IDWriteInlineObject*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteInlineObject*, UInt32)
-    release : Proc(IDWriteInlineObject*, UInt32)
-    draw : Proc(IDWriteInlineObject*, Void*, IDWriteTextRenderer, Float32, Float32, LibC::BOOL, LibC::BOOL, IUnknown, HRESULT)
-    get_metrics : Proc(IDWriteInlineObject*, DWRITE_INLINE_OBJECT_METRICS*, HRESULT)
-    get_overhang_metrics : Proc(IDWriteInlineObject*, DWRITE_OVERHANG_METRICS*, HRESULT)
-    get_break_conditions : Proc(IDWriteInlineObject*, DWRITE_BREAK_CONDITION*, DWRITE_BREAK_CONDITION*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    draw : UInt64
+    get_metrics : UInt64
+    get_overhang_metrics : UInt64
+    get_break_conditions : UInt64
   end
 
   IDWriteInlineObject_GUID = "8339fde3-106f-47ab-8373-1c6295eb10b3"
@@ -1472,12 +1472,12 @@ lib LibWin32
   end
 
   struct IDWritePixelSnappingVTbl
-    query_interface : Proc(IDWritePixelSnapping*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWritePixelSnapping*, UInt32)
-    release : Proc(IDWritePixelSnapping*, UInt32)
-    is_pixel_snapping_disabled : Proc(IDWritePixelSnapping*, Void*, LibC::BOOL*, HRESULT)
-    get_current_transform : Proc(IDWritePixelSnapping*, Void*, DWRITE_MATRIX*, HRESULT)
-    get_pixels_per_dip : Proc(IDWritePixelSnapping*, Void*, Float32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    is_pixel_snapping_disabled : UInt64
+    get_current_transform : UInt64
+    get_pixels_per_dip : UInt64
   end
 
   IDWritePixelSnapping_GUID = "eaf3a2da-ecf4-4d24-b644-b34f6842024b"
@@ -1487,16 +1487,16 @@ lib LibWin32
   end
 
   struct IDWriteTextRendererVTbl
-    query_interface : Proc(IDWriteTextRenderer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextRenderer*, UInt32)
-    release : Proc(IDWriteTextRenderer*, UInt32)
-    is_pixel_snapping_disabled : Proc(IDWriteTextRenderer*, Void*, LibC::BOOL*, HRESULT)
-    get_current_transform : Proc(IDWriteTextRenderer*, Void*, DWRITE_MATRIX*, HRESULT)
-    get_pixels_per_dip : Proc(IDWriteTextRenderer*, Void*, Float32*, HRESULT)
-    draw_glyph_run : Proc(IDWriteTextRenderer*, Void*, Float32, Float32, DWRITE_MEASURING_MODE, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, IUnknown, HRESULT)
-    draw_underline : Proc(IDWriteTextRenderer*, Void*, Float32, Float32, DWRITE_UNDERLINE*, IUnknown, HRESULT)
-    draw_strikethrough : Proc(IDWriteTextRenderer*, Void*, Float32, Float32, DWRITE_STRIKETHROUGH*, IUnknown, HRESULT)
-    draw_inline_object : Proc(IDWriteTextRenderer*, Void*, Float32, Float32, IDWriteInlineObject, LibC::BOOL, LibC::BOOL, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    is_pixel_snapping_disabled : UInt64
+    get_current_transform : UInt64
+    get_pixels_per_dip : UInt64
+    draw_glyph_run : UInt64
+    draw_underline : UInt64
+    draw_strikethrough : UInt64
+    draw_inline_object : UInt64
   end
 
   IDWriteTextRenderer_GUID = "ef8a8135-5cc6-45fe-8825-c5a0724eb819"
@@ -1506,73 +1506,73 @@ lib LibWin32
   end
 
   struct IDWriteTextLayoutVTbl
-    query_interface : Proc(IDWriteTextLayout*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextLayout*, UInt32)
-    release : Proc(IDWriteTextLayout*, UInt32)
-    set_text_alignment : Proc(IDWriteTextLayout*, DWRITE_TEXT_ALIGNMENT, HRESULT)
-    set_paragraph_alignment : Proc(IDWriteTextLayout*, DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)
-    set_word_wrapping : Proc(IDWriteTextLayout*, DWRITE_WORD_WRAPPING, HRESULT)
-    set_reading_direction : Proc(IDWriteTextLayout*, DWRITE_READING_DIRECTION, HRESULT)
-    set_flow_direction : Proc(IDWriteTextLayout*, DWRITE_FLOW_DIRECTION, HRESULT)
-    set_incremental_tab_stop : Proc(IDWriteTextLayout*, Float32, HRESULT)
-    set_trimming : Proc(IDWriteTextLayout*, DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)
-    set_line_spacing : Proc(IDWriteTextLayout*, DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)
-    get_text_alignment : Proc(IDWriteTextLayout*, DWRITE_TEXT_ALIGNMENT)
-    get_paragraph_alignment : Proc(IDWriteTextLayout*, DWRITE_PARAGRAPH_ALIGNMENT)
-    get_word_wrapping : Proc(IDWriteTextLayout*, DWRITE_WORD_WRAPPING)
-    get_reading_direction : Proc(IDWriteTextLayout*, DWRITE_READING_DIRECTION)
-    get_flow_direction : Proc(IDWriteTextLayout*, DWRITE_FLOW_DIRECTION)
-    get_incremental_tab_stop : Proc(IDWriteTextLayout*, Float32)
-    get_trimming : Proc(IDWriteTextLayout*, DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)
-    get_line_spacing : Proc(IDWriteTextLayout*, DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)
-    get_font_collection : Proc(IDWriteTextLayout*, IDWriteFontCollection*, HRESULT)
-    get_font_family_name_length : Proc(IDWriteTextLayout*, UInt32)
-    get_font_family_name : Proc(IDWriteTextLayout*, Char*, UInt32, HRESULT)
-    get_font_weight : Proc(IDWriteTextLayout*, DWRITE_FONT_WEIGHT)
-    get_font_style : Proc(IDWriteTextLayout*, DWRITE_FONT_STYLE)
-    get_font_stretch : Proc(IDWriteTextLayout*, DWRITE_FONT_STRETCH)
-    get_font_size : Proc(IDWriteTextLayout*, Float32)
-    get_locale_name_length : Proc(IDWriteTextLayout*, UInt32)
-    get_locale_name : Proc(IDWriteTextLayout*, Char*, UInt32, HRESULT)
-    set_max_width : Proc(IDWriteTextLayout*, Float32, HRESULT)
-    set_max_height : Proc(IDWriteTextLayout*, Float32, HRESULT)
-    set_font_collection : Proc(IDWriteTextLayout*, IDWriteFontCollection, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_family_name : Proc(IDWriteTextLayout*, LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_weight : Proc(IDWriteTextLayout*, DWRITE_FONT_WEIGHT, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_style : Proc(IDWriteTextLayout*, DWRITE_FONT_STYLE, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_stretch : Proc(IDWriteTextLayout*, DWRITE_FONT_STRETCH, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_size : Proc(IDWriteTextLayout*, Float32, DWRITE_TEXT_RANGE, HRESULT)
-    set_underline : Proc(IDWriteTextLayout*, LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)
-    set_strikethrough : Proc(IDWriteTextLayout*, LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)
-    set_drawing_effect : Proc(IDWriteTextLayout*, IUnknown, DWRITE_TEXT_RANGE, HRESULT)
-    set_inline_object : Proc(IDWriteTextLayout*, IDWriteInlineObject, DWRITE_TEXT_RANGE, HRESULT)
-    set_typography : Proc(IDWriteTextLayout*, IDWriteTypography, DWRITE_TEXT_RANGE, HRESULT)
-    set_locale_name : Proc(IDWriteTextLayout*, LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)
-    get_max_width : Proc(IDWriteTextLayout*, Float32)
-    get_max_height : Proc(IDWriteTextLayout*, Float32)
-    get_font_collection2 : Proc(IDWriteTextLayout*, UInt32, IDWriteFontCollection*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_family_name_length2 : Proc(IDWriteTextLayout*, UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_family_name2 : Proc(IDWriteTextLayout*, UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_weight2 : Proc(IDWriteTextLayout*, UInt32, DWRITE_FONT_WEIGHT*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_style2 : Proc(IDWriteTextLayout*, UInt32, DWRITE_FONT_STYLE*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_stretch2 : Proc(IDWriteTextLayout*, UInt32, DWRITE_FONT_STRETCH*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_size2 : Proc(IDWriteTextLayout*, UInt32, Float32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_underline : Proc(IDWriteTextLayout*, UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_strikethrough : Proc(IDWriteTextLayout*, UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_drawing_effect : Proc(IDWriteTextLayout*, UInt32, IUnknown*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_inline_object : Proc(IDWriteTextLayout*, UInt32, IDWriteInlineObject*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_typography : Proc(IDWriteTextLayout*, UInt32, IDWriteTypography*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_locale_name_length2 : Proc(IDWriteTextLayout*, UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_locale_name2 : Proc(IDWriteTextLayout*, UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)
-    draw : Proc(IDWriteTextLayout*, Void*, IDWriteTextRenderer, Float32, Float32, HRESULT)
-    get_line_metrics : Proc(IDWriteTextLayout*, DWRITE_LINE_METRICS*, UInt32, UInt32*, HRESULT)
-    get_metrics : Proc(IDWriteTextLayout*, DWRITE_TEXT_METRICS*, HRESULT)
-    get_overhang_metrics : Proc(IDWriteTextLayout*, DWRITE_OVERHANG_METRICS*, HRESULT)
-    get_cluster_metrics : Proc(IDWriteTextLayout*, DWRITE_CLUSTER_METRICS*, UInt32, UInt32*, HRESULT)
-    determine_min_width : Proc(IDWriteTextLayout*, Float32*, HRESULT)
-    hit_test_point : Proc(IDWriteTextLayout*, Float32, Float32, LibC::BOOL*, LibC::BOOL*, DWRITE_HIT_TEST_METRICS*, HRESULT)
-    hit_test_text_position : Proc(IDWriteTextLayout*, UInt32, LibC::BOOL, Float32*, Float32*, DWRITE_HIT_TEST_METRICS*, HRESULT)
-    hit_test_text_range : Proc(IDWriteTextLayout*, UInt32, UInt32, Float32, Float32, DWRITE_HIT_TEST_METRICS*, UInt32, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_text_alignment : UInt64
+    set_paragraph_alignment : UInt64
+    set_word_wrapping : UInt64
+    set_reading_direction : UInt64
+    set_flow_direction : UInt64
+    set_incremental_tab_stop : UInt64
+    set_trimming : UInt64
+    set_line_spacing : UInt64
+    get_text_alignment : UInt64
+    get_paragraph_alignment : UInt64
+    get_word_wrapping : UInt64
+    get_reading_direction : UInt64
+    get_flow_direction : UInt64
+    get_incremental_tab_stop : UInt64
+    get_trimming : UInt64
+    get_line_spacing : UInt64
+    get_font_collection : UInt64
+    get_font_family_name_length : UInt64
+    get_font_family_name : UInt64
+    get_font_weight : UInt64
+    get_font_style : UInt64
+    get_font_stretch : UInt64
+    get_font_size : UInt64
+    get_locale_name_length : UInt64
+    get_locale_name : UInt64
+    set_max_width : UInt64
+    set_max_height : UInt64
+    set_font_collection : UInt64
+    set_font_family_name : UInt64
+    set_font_weight : UInt64
+    set_font_style : UInt64
+    set_font_stretch : UInt64
+    set_font_size : UInt64
+    set_underline : UInt64
+    set_strikethrough : UInt64
+    set_drawing_effect : UInt64
+    set_inline_object : UInt64
+    set_typography : UInt64
+    set_locale_name : UInt64
+    get_max_width : UInt64
+    get_max_height : UInt64
+    get_font_collection2 : UInt64
+    get_font_family_name_length2 : UInt64
+    get_font_family_name2 : UInt64
+    get_font_weight2 : UInt64
+    get_font_style2 : UInt64
+    get_font_stretch2 : UInt64
+    get_font_size2 : UInt64
+    get_underline : UInt64
+    get_strikethrough : UInt64
+    get_drawing_effect : UInt64
+    get_inline_object : UInt64
+    get_typography : UInt64
+    get_locale_name_length2 : UInt64
+    get_locale_name2 : UInt64
+    draw : UInt64
+    get_line_metrics : UInt64
+    get_metrics : UInt64
+    get_overhang_metrics : UInt64
+    get_cluster_metrics : UInt64
+    determine_min_width : UInt64
+    hit_test_point : UInt64
+    hit_test_text_position : UInt64
+    hit_test_text_range : UInt64
   end
 
   IDWriteTextLayout_GUID = "53737037-6d14-410b-9bfe-0b182bb70961"
@@ -1582,17 +1582,17 @@ lib LibWin32
   end
 
   struct IDWriteBitmapRenderTargetVTbl
-    query_interface : Proc(IDWriteBitmapRenderTarget*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteBitmapRenderTarget*, UInt32)
-    release : Proc(IDWriteBitmapRenderTarget*, UInt32)
-    draw_glyph_run : Proc(IDWriteBitmapRenderTarget*, Float32, Float32, DWRITE_MEASURING_MODE, DWRITE_GLYPH_RUN*, IDWriteRenderingParams, UInt32, RECT*, HRESULT)
-    get_memory_dc : Proc(IDWriteBitmapRenderTarget*, HDC)
-    get_pixels_per_dip : Proc(IDWriteBitmapRenderTarget*, Float32)
-    set_pixels_per_dip : Proc(IDWriteBitmapRenderTarget*, Float32, HRESULT)
-    get_current_transform : Proc(IDWriteBitmapRenderTarget*, DWRITE_MATRIX*, HRESULT)
-    set_current_transform : Proc(IDWriteBitmapRenderTarget*, DWRITE_MATRIX*, HRESULT)
-    get_size : Proc(IDWriteBitmapRenderTarget*, SIZE*, HRESULT)
-    resize : Proc(IDWriteBitmapRenderTarget*, UInt32, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    draw_glyph_run : UInt64
+    get_memory_dc : UInt64
+    get_pixels_per_dip : UInt64
+    set_pixels_per_dip : UInt64
+    get_current_transform : UInt64
+    set_current_transform : UInt64
+    get_size : UInt64
+    resize : UInt64
   end
 
   IDWriteBitmapRenderTarget_GUID = "5e5a32a3-8dff-4773-9ff6-0696eab77267"
@@ -1602,14 +1602,14 @@ lib LibWin32
   end
 
   struct IDWriteGdiInteropVTbl
-    query_interface : Proc(IDWriteGdiInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteGdiInterop*, UInt32)
-    release : Proc(IDWriteGdiInterop*, UInt32)
-    create_font_from_logfont : Proc(IDWriteGdiInterop*, LOGFONTW*, IDWriteFont*, HRESULT)
-    convert_font_to_logfont : Proc(IDWriteGdiInterop*, IDWriteFont, LOGFONTW*, LibC::BOOL*, HRESULT)
-    convert_font_face_to_logfont : Proc(IDWriteGdiInterop*, IDWriteFontFace, LOGFONTW*, HRESULT)
-    create_font_face_from_hdc : Proc(IDWriteGdiInterop*, HDC, IDWriteFontFace*, HRESULT)
-    create_bitmap_render_target : Proc(IDWriteGdiInterop*, HDC, UInt32, UInt32, IDWriteBitmapRenderTarget*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_font_from_logfont : UInt64
+    convert_font_to_logfont : UInt64
+    convert_font_face_to_logfont : UInt64
+    create_font_face_from_hdc : UInt64
+    create_bitmap_render_target : UInt64
   end
 
   IDWriteGdiInterop_GUID = "1edd9491-9853-4299-898f-6432983b6f3a"
@@ -1619,12 +1619,12 @@ lib LibWin32
   end
 
   struct IDWriteGlyphRunAnalysisVTbl
-    query_interface : Proc(IDWriteGlyphRunAnalysis*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteGlyphRunAnalysis*, UInt32)
-    release : Proc(IDWriteGlyphRunAnalysis*, UInt32)
-    get_alpha_texture_bounds : Proc(IDWriteGlyphRunAnalysis*, DWRITE_TEXTURE_TYPE, RECT*, HRESULT)
-    create_alpha_texture : Proc(IDWriteGlyphRunAnalysis*, DWRITE_TEXTURE_TYPE, RECT*, UInt8*, UInt32, HRESULT)
-    get_alpha_blend_params : Proc(IDWriteGlyphRunAnalysis*, IDWriteRenderingParams, Float32*, Float32*, Float32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_alpha_texture_bounds : UInt64
+    create_alpha_texture : UInt64
+    get_alpha_blend_params : UInt64
   end
 
   IDWriteGlyphRunAnalysis_GUID = "7d97dbf7-e085-42d4-81e3-6a883bded118"
@@ -1634,30 +1634,30 @@ lib LibWin32
   end
 
   struct IDWriteFactoryVTbl
-    query_interface : Proc(IDWriteFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFactory*, UInt32)
-    release : Proc(IDWriteFactory*, UInt32)
-    get_system_font_collection : Proc(IDWriteFactory*, IDWriteFontCollection*, LibC::BOOL, HRESULT)
-    create_custom_font_collection : Proc(IDWriteFactory*, IDWriteFontCollectionLoader, Void*, UInt32, IDWriteFontCollection*, HRESULT)
-    register_font_collection_loader : Proc(IDWriteFactory*, IDWriteFontCollectionLoader, HRESULT)
-    unregister_font_collection_loader : Proc(IDWriteFactory*, IDWriteFontCollectionLoader, HRESULT)
-    create_font_file_reference : Proc(IDWriteFactory*, LibC::LPWSTR, FILETIME*, IDWriteFontFile*, HRESULT)
-    create_custom_font_file_reference : Proc(IDWriteFactory*, Void*, UInt32, IDWriteFontFileLoader, IDWriteFontFile*, HRESULT)
-    create_font_face : Proc(IDWriteFactory*, DWRITE_FONT_FACE_TYPE, UInt32, IDWriteFontFile*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFace*, HRESULT)
-    create_rendering_params : Proc(IDWriteFactory*, IDWriteRenderingParams*, HRESULT)
-    create_monitor_rendering_params : Proc(IDWriteFactory*, HMONITOR, IDWriteRenderingParams*, HRESULT)
-    create_custom_rendering_params : Proc(IDWriteFactory*, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams*, HRESULT)
-    register_font_file_loader : Proc(IDWriteFactory*, IDWriteFontFileLoader, HRESULT)
-    unregister_font_file_loader : Proc(IDWriteFactory*, IDWriteFontFileLoader, HRESULT)
-    create_text_format : Proc(IDWriteFactory*, LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, Float32, LibC::LPWSTR, IDWriteTextFormat*, HRESULT)
-    create_typography : Proc(IDWriteFactory*, IDWriteTypography*, HRESULT)
-    get_gdi_interop : Proc(IDWriteFactory*, IDWriteGdiInterop*, HRESULT)
-    create_text_layout : Proc(IDWriteFactory*, Char*, UInt32, IDWriteTextFormat, Float32, Float32, IDWriteTextLayout*, HRESULT)
-    create_gdi_compatible_text_layout : Proc(IDWriteFactory*, Char*, UInt32, IDWriteTextFormat, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, IDWriteTextLayout*, HRESULT)
-    create_ellipsis_trimming_sign : Proc(IDWriteFactory*, IDWriteTextFormat, IDWriteInlineObject*, HRESULT)
-    create_text_analyzer : Proc(IDWriteFactory*, IDWriteTextAnalyzer*, HRESULT)
-    create_number_substitution : Proc(IDWriteFactory*, DWRITE_NUMBER_SUBSTITUTION_METHOD, LibC::LPWSTR, LibC::BOOL, IDWriteNumberSubstitution*, HRESULT)
-    create_glyph_run_analysis : Proc(IDWriteFactory*, DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_system_font_collection : UInt64
+    create_custom_font_collection : UInt64
+    register_font_collection_loader : UInt64
+    unregister_font_collection_loader : UInt64
+    create_font_file_reference : UInt64
+    create_custom_font_file_reference : UInt64
+    create_font_face : UInt64
+    create_rendering_params : UInt64
+    create_monitor_rendering_params : UInt64
+    create_custom_rendering_params : UInt64
+    register_font_file_loader : UInt64
+    unregister_font_file_loader : UInt64
+    create_text_format : UInt64
+    create_typography : UInt64
+    get_gdi_interop : UInt64
+    create_text_layout : UInt64
+    create_gdi_compatible_text_layout : UInt64
+    create_ellipsis_trimming_sign : UInt64
+    create_text_analyzer : UInt64
+    create_number_substitution : UInt64
+    create_glyph_run_analysis : UInt64
   end
 
   IDWriteFactory_GUID = "b859ee5a-d838-4b5b-a2e8-1adc7d93db48"
@@ -1667,32 +1667,32 @@ lib LibWin32
   end
 
   struct IDWriteFactory1VTbl
-    query_interface : Proc(IDWriteFactory1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFactory1*, UInt32)
-    release : Proc(IDWriteFactory1*, UInt32)
-    get_system_font_collection : Proc(IDWriteFactory1*, IDWriteFontCollection*, LibC::BOOL, HRESULT)
-    create_custom_font_collection : Proc(IDWriteFactory1*, IDWriteFontCollectionLoader, Void*, UInt32, IDWriteFontCollection*, HRESULT)
-    register_font_collection_loader : Proc(IDWriteFactory1*, IDWriteFontCollectionLoader, HRESULT)
-    unregister_font_collection_loader : Proc(IDWriteFactory1*, IDWriteFontCollectionLoader, HRESULT)
-    create_font_file_reference : Proc(IDWriteFactory1*, LibC::LPWSTR, FILETIME*, IDWriteFontFile*, HRESULT)
-    create_custom_font_file_reference : Proc(IDWriteFactory1*, Void*, UInt32, IDWriteFontFileLoader, IDWriteFontFile*, HRESULT)
-    create_font_face : Proc(IDWriteFactory1*, DWRITE_FONT_FACE_TYPE, UInt32, IDWriteFontFile*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFace*, HRESULT)
-    create_rendering_params : Proc(IDWriteFactory1*, IDWriteRenderingParams*, HRESULT)
-    create_monitor_rendering_params : Proc(IDWriteFactory1*, HMONITOR, IDWriteRenderingParams*, HRESULT)
-    create_custom_rendering_params : Proc(IDWriteFactory1*, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams*, HRESULT)
-    register_font_file_loader : Proc(IDWriteFactory1*, IDWriteFontFileLoader, HRESULT)
-    unregister_font_file_loader : Proc(IDWriteFactory1*, IDWriteFontFileLoader, HRESULT)
-    create_text_format : Proc(IDWriteFactory1*, LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, Float32, LibC::LPWSTR, IDWriteTextFormat*, HRESULT)
-    create_typography : Proc(IDWriteFactory1*, IDWriteTypography*, HRESULT)
-    get_gdi_interop : Proc(IDWriteFactory1*, IDWriteGdiInterop*, HRESULT)
-    create_text_layout : Proc(IDWriteFactory1*, Char*, UInt32, IDWriteTextFormat, Float32, Float32, IDWriteTextLayout*, HRESULT)
-    create_gdi_compatible_text_layout : Proc(IDWriteFactory1*, Char*, UInt32, IDWriteTextFormat, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, IDWriteTextLayout*, HRESULT)
-    create_ellipsis_trimming_sign : Proc(IDWriteFactory1*, IDWriteTextFormat, IDWriteInlineObject*, HRESULT)
-    create_text_analyzer : Proc(IDWriteFactory1*, IDWriteTextAnalyzer*, HRESULT)
-    create_number_substitution : Proc(IDWriteFactory1*, DWRITE_NUMBER_SUBSTITUTION_METHOD, LibC::LPWSTR, LibC::BOOL, IDWriteNumberSubstitution*, HRESULT)
-    create_glyph_run_analysis : Proc(IDWriteFactory1*, DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    get_eudc_font_collection : Proc(IDWriteFactory1*, IDWriteFontCollection*, LibC::BOOL, HRESULT)
-    create_custom_rendering_params2 : Proc(IDWriteFactory1*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams1*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_system_font_collection : UInt64
+    create_custom_font_collection : UInt64
+    register_font_collection_loader : UInt64
+    unregister_font_collection_loader : UInt64
+    create_font_file_reference : UInt64
+    create_custom_font_file_reference : UInt64
+    create_font_face : UInt64
+    create_rendering_params : UInt64
+    create_monitor_rendering_params : UInt64
+    create_custom_rendering_params : UInt64
+    register_font_file_loader : UInt64
+    unregister_font_file_loader : UInt64
+    create_text_format : UInt64
+    create_typography : UInt64
+    get_gdi_interop : UInt64
+    create_text_layout : UInt64
+    create_gdi_compatible_text_layout : UInt64
+    create_ellipsis_trimming_sign : UInt64
+    create_text_analyzer : UInt64
+    create_number_substitution : UInt64
+    create_glyph_run_analysis : UInt64
+    get_eudc_font_collection : UInt64
+    create_custom_rendering_params2 : UInt64
   end
 
   IDWriteFactory1_GUID = "30572f99-dac6-41db-a16e-0486307e606a"
@@ -1702,36 +1702,36 @@ lib LibWin32
   end
 
   struct IDWriteFontFace1VTbl
-    query_interface : Proc(IDWriteFontFace1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFace1*, UInt32)
-    release : Proc(IDWriteFontFace1*, UInt32)
-    get_type : Proc(IDWriteFontFace1*, DWRITE_FONT_FACE_TYPE)
-    get_files : Proc(IDWriteFontFace1*, UInt32*, IDWriteFontFile*, HRESULT)
-    get_index : Proc(IDWriteFontFace1*, UInt32)
-    get_simulations : Proc(IDWriteFontFace1*, DWRITE_FONT_SIMULATIONS)
-    is_symbol_font : Proc(IDWriteFontFace1*, LibC::BOOL)
-    get_metrics : Proc(IDWriteFontFace1*, DWRITE_FONT_METRICS*, Void)
-    get_glyph_count : Proc(IDWriteFontFace1*, UInt16)
-    get_design_glyph_metrics : Proc(IDWriteFontFace1*, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)
-    get_glyph_indices : Proc(IDWriteFontFace1*, UInt32*, UInt32, UInt16*, HRESULT)
-    try_get_font_table : Proc(IDWriteFontFace1*, UInt32, Void**, UInt32*, Void**, LibC::BOOL*, HRESULT)
-    release_font_table : Proc(IDWriteFontFace1*, Void*, Void)
-    get_glyph_run_outline : Proc(IDWriteFontFace1*, Float32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, UInt32, LibC::BOOL, LibC::BOOL, ID2D1SimplifiedGeometrySink, HRESULT)
-    get_recommended_rendering_mode : Proc(IDWriteFontFace1*, Float32, Float32, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, HRESULT)
-    get_gdi_compatible_metrics : Proc(IDWriteFontFace1*, Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS*, HRESULT)
-    get_gdi_compatible_glyph_metrics : Proc(IDWriteFontFace1*, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)
-    get_metrics2 : Proc(IDWriteFontFace1*, DWRITE_FONT_METRICS1*, Void)
-    get_gdi_compatible_metrics2 : Proc(IDWriteFontFace1*, Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS1*, HRESULT)
-    get_caret_metrics : Proc(IDWriteFontFace1*, DWRITE_CARET_METRICS*, Void)
-    get_unicode_ranges : Proc(IDWriteFontFace1*, UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)
-    is_monospaced_font : Proc(IDWriteFontFace1*, LibC::BOOL)
-    get_design_glyph_advances : Proc(IDWriteFontFace1*, UInt32, UInt16*, Int32*, LibC::BOOL, HRESULT)
-    get_gdi_compatible_glyph_advances : Proc(IDWriteFontFace1*, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, UInt32, UInt16*, Int32*, HRESULT)
-    get_kerning_pair_adjustments : Proc(IDWriteFontFace1*, UInt32, UInt16*, Int32*, HRESULT)
-    has_kerning_pairs : Proc(IDWriteFontFace1*, LibC::BOOL)
-    get_recommended_rendering_mode2 : Proc(IDWriteFontFace1*, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, DWRITE_RENDERING_MODE*, HRESULT)
-    get_vertical_glyph_variants : Proc(IDWriteFontFace1*, UInt32, UInt16*, UInt16*, HRESULT)
-    has_vertical_glyph_variants : Proc(IDWriteFontFace1*, LibC::BOOL)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type : UInt64
+    get_files : UInt64
+    get_index : UInt64
+    get_simulations : UInt64
+    is_symbol_font : UInt64
+    get_metrics : UInt64
+    get_glyph_count : UInt64
+    get_design_glyph_metrics : UInt64
+    get_glyph_indices : UInt64
+    try_get_font_table : UInt64
+    release_font_table : UInt64
+    get_glyph_run_outline : UInt64
+    get_recommended_rendering_mode : UInt64
+    get_gdi_compatible_metrics : UInt64
+    get_gdi_compatible_glyph_metrics : UInt64
+    get_metrics2 : UInt64
+    get_gdi_compatible_metrics2 : UInt64
+    get_caret_metrics : UInt64
+    get_unicode_ranges : UInt64
+    is_monospaced_font : UInt64
+    get_design_glyph_advances : UInt64
+    get_gdi_compatible_glyph_advances : UInt64
+    get_kerning_pair_adjustments : UInt64
+    has_kerning_pairs : UInt64
+    get_recommended_rendering_mode2 : UInt64
+    get_vertical_glyph_variants : UInt64
+    has_vertical_glyph_variants : UInt64
   end
 
   IDWriteFontFace1_GUID = "a71efdb4-9fdb-4838-ad90-cfc3be8c3daf"
@@ -1741,24 +1741,24 @@ lib LibWin32
   end
 
   struct IDWriteFont1VTbl
-    query_interface : Proc(IDWriteFont1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFont1*, UInt32)
-    release : Proc(IDWriteFont1*, UInt32)
-    get_font_family : Proc(IDWriteFont1*, IDWriteFontFamily*, HRESULT)
-    get_weight : Proc(IDWriteFont1*, DWRITE_FONT_WEIGHT)
-    get_stretch : Proc(IDWriteFont1*, DWRITE_FONT_STRETCH)
-    get_style : Proc(IDWriteFont1*, DWRITE_FONT_STYLE)
-    is_symbol_font : Proc(IDWriteFont1*, LibC::BOOL)
-    get_face_names : Proc(IDWriteFont1*, IDWriteLocalizedStrings*, HRESULT)
-    get_informational_strings : Proc(IDWriteFont1*, DWRITE_INFORMATIONAL_STRING_ID, IDWriteLocalizedStrings*, LibC::BOOL*, HRESULT)
-    get_simulations : Proc(IDWriteFont1*, DWRITE_FONT_SIMULATIONS)
-    get_metrics : Proc(IDWriteFont1*, DWRITE_FONT_METRICS*, Void)
-    has_character : Proc(IDWriteFont1*, UInt32, LibC::BOOL*, HRESULT)
-    create_font_face : Proc(IDWriteFont1*, IDWriteFontFace*, HRESULT)
-    get_metrics2 : Proc(IDWriteFont1*, DWRITE_FONT_METRICS1*, Void)
-    get_panose : Proc(IDWriteFont1*, DWRITE_PANOSE*, Void)
-    get_unicode_ranges : Proc(IDWriteFont1*, UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)
-    is_monospaced_font : Proc(IDWriteFont1*, LibC::BOOL)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_family : UInt64
+    get_weight : UInt64
+    get_stretch : UInt64
+    get_style : UInt64
+    is_symbol_font : UInt64
+    get_face_names : UInt64
+    get_informational_strings : UInt64
+    get_simulations : UInt64
+    get_metrics : UInt64
+    has_character : UInt64
+    create_font_face : UInt64
+    get_metrics2 : UInt64
+    get_panose : UInt64
+    get_unicode_ranges : UInt64
+    is_monospaced_font : UInt64
   end
 
   IDWriteFont1_GUID = "acd16696-8c14-4f5d-877e-fe3fc1d32738"
@@ -1768,15 +1768,15 @@ lib LibWin32
   end
 
   struct IDWriteRenderingParams1VTbl
-    query_interface : Proc(IDWriteRenderingParams1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteRenderingParams1*, UInt32)
-    release : Proc(IDWriteRenderingParams1*, UInt32)
-    get_gamma : Proc(IDWriteRenderingParams1*, Float32)
-    get_enhanced_contrast : Proc(IDWriteRenderingParams1*, Float32)
-    get_clear_type_level : Proc(IDWriteRenderingParams1*, Float32)
-    get_pixel_geometry : Proc(IDWriteRenderingParams1*, DWRITE_PIXEL_GEOMETRY)
-    get_rendering_mode : Proc(IDWriteRenderingParams1*, DWRITE_RENDERING_MODE)
-    get_grayscale_enhanced_contrast : Proc(IDWriteRenderingParams1*, Float32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_gamma : UInt64
+    get_enhanced_contrast : UInt64
+    get_clear_type_level : UInt64
+    get_pixel_geometry : UInt64
+    get_rendering_mode : UInt64
+    get_grayscale_enhanced_contrast : UInt64
   end
 
   IDWriteRenderingParams1_GUID = "94413cf4-a6fc-4248-8b50-6674348fcad3"
@@ -1786,25 +1786,25 @@ lib LibWin32
   end
 
   struct IDWriteTextAnalyzer1VTbl
-    query_interface : Proc(IDWriteTextAnalyzer1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextAnalyzer1*, UInt32)
-    release : Proc(IDWriteTextAnalyzer1*, UInt32)
-    analyze_script : Proc(IDWriteTextAnalyzer1*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)
-    analyze_bidi : Proc(IDWriteTextAnalyzer1*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)
-    analyze_number_substitution : Proc(IDWriteTextAnalyzer1*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)
-    analyze_line_breakpoints : Proc(IDWriteTextAnalyzer1*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)
-    get_glyphs : Proc(IDWriteTextAnalyzer1*, Char*, UInt32, IDWriteFontFace, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, IDWriteNumberSubstitution, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, UInt32, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, HRESULT)
-    get_glyph_placements : Proc(IDWriteTextAnalyzer1*, Char*, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, IDWriteFontFace, Float32, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)
-    get_gdi_compatible_glyph_placements : Proc(IDWriteTextAnalyzer1*, Char*, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, IDWriteFontFace, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)
-    apply_character_spacing : Proc(IDWriteTextAnalyzer1*, Float32, Float32, Float32, UInt32, UInt32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, DWRITE_SHAPING_GLYPH_PROPERTIES*, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)
-    get_baseline : Proc(IDWriteTextAnalyzer1*, IDWriteFontFace, DWRITE_BASELINE, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS, LibC::LPWSTR, Int32*, LibC::BOOL*, HRESULT)
-    analyze_vertical_glyph_orientation : Proc(IDWriteTextAnalyzer1*, IDWriteTextAnalysisSource1, UInt32, UInt32, IDWriteTextAnalysisSink1, HRESULT)
-    get_glyph_orientation_transform : Proc(IDWriteTextAnalyzer1*, DWRITE_GLYPH_ORIENTATION_ANGLE, LibC::BOOL, DWRITE_MATRIX*, HRESULT)
-    get_script_properties : Proc(IDWriteTextAnalyzer1*, DWRITE_SCRIPT_ANALYSIS, DWRITE_SCRIPT_PROPERTIES*, HRESULT)
-    get_text_complexity : Proc(IDWriteTextAnalyzer1*, Char*, UInt32, IDWriteFontFace, LibC::BOOL*, UInt32*, UInt16*, HRESULT)
-    get_justification_opportunities : Proc(IDWriteTextAnalyzer1*, IDWriteFontFace, Float32, DWRITE_SCRIPT_ANALYSIS, UInt32, UInt32, Char*, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, DWRITE_JUSTIFICATION_OPPORTUNITY*, HRESULT)
-    justify_glyph_advances : Proc(IDWriteTextAnalyzer1*, Float32, UInt32, DWRITE_JUSTIFICATION_OPPORTUNITY*, Float32*, DWRITE_GLYPH_OFFSET*, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)
-    get_justified_glyphs : Proc(IDWriteTextAnalyzer1*, IDWriteFontFace, Float32, DWRITE_SCRIPT_ANALYSIS, UInt32, UInt32, UInt32, UInt16*, UInt16*, Float32*, Float32*, DWRITE_GLYPH_OFFSET*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, UInt16*, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    analyze_script : UInt64
+    analyze_bidi : UInt64
+    analyze_number_substitution : UInt64
+    analyze_line_breakpoints : UInt64
+    get_glyphs : UInt64
+    get_glyph_placements : UInt64
+    get_gdi_compatible_glyph_placements : UInt64
+    apply_character_spacing : UInt64
+    get_baseline : UInt64
+    analyze_vertical_glyph_orientation : UInt64
+    get_glyph_orientation_transform : UInt64
+    get_script_properties : UInt64
+    get_text_complexity : UInt64
+    get_justification_opportunities : UInt64
+    justify_glyph_advances : UInt64
+    get_justified_glyphs : UInt64
   end
 
   IDWriteTextAnalyzer1_GUID = "80dad800-e21f-4e83-96ce-bfcce500db7c"
@@ -1814,15 +1814,15 @@ lib LibWin32
   end
 
   struct IDWriteTextAnalysisSource1VTbl
-    query_interface : Proc(IDWriteTextAnalysisSource1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextAnalysisSource1*, UInt32)
-    release : Proc(IDWriteTextAnalysisSource1*, UInt32)
-    get_text_at_position : Proc(IDWriteTextAnalysisSource1*, UInt32, UInt16**, UInt32*, HRESULT)
-    get_text_before_position : Proc(IDWriteTextAnalysisSource1*, UInt32, UInt16**, UInt32*, HRESULT)
-    get_paragraph_reading_direction : Proc(IDWriteTextAnalysisSource1*, DWRITE_READING_DIRECTION)
-    get_locale_name : Proc(IDWriteTextAnalysisSource1*, UInt32, UInt32*, UInt16**, HRESULT)
-    get_number_substitution : Proc(IDWriteTextAnalysisSource1*, UInt32, UInt32*, IDWriteNumberSubstitution*, HRESULT)
-    get_vertical_glyph_orientation : Proc(IDWriteTextAnalysisSource1*, UInt32, UInt32*, DWRITE_VERTICAL_GLYPH_ORIENTATION*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_text_at_position : UInt64
+    get_text_before_position : UInt64
+    get_paragraph_reading_direction : UInt64
+    get_locale_name : UInt64
+    get_number_substitution : UInt64
+    get_vertical_glyph_orientation : UInt64
   end
 
   IDWriteTextAnalysisSource1_GUID = "639cfad8-0fb4-4b21-a58a-067920120009"
@@ -1832,14 +1832,14 @@ lib LibWin32
   end
 
   struct IDWriteTextAnalysisSink1VTbl
-    query_interface : Proc(IDWriteTextAnalysisSink1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextAnalysisSink1*, UInt32)
-    release : Proc(IDWriteTextAnalysisSink1*, UInt32)
-    set_script_analysis : Proc(IDWriteTextAnalysisSink1*, UInt32, UInt32, DWRITE_SCRIPT_ANALYSIS*, HRESULT)
-    set_line_breakpoints : Proc(IDWriteTextAnalysisSink1*, UInt32, UInt32, DWRITE_LINE_BREAKPOINT*, HRESULT)
-    set_bidi_level : Proc(IDWriteTextAnalysisSink1*, UInt32, UInt32, UInt8, UInt8, HRESULT)
-    set_number_substitution : Proc(IDWriteTextAnalysisSink1*, UInt32, UInt32, IDWriteNumberSubstitution, HRESULT)
-    set_glyph_orientation : Proc(IDWriteTextAnalysisSink1*, UInt32, UInt32, DWRITE_GLYPH_ORIENTATION_ANGLE, UInt8, LibC::BOOL, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_script_analysis : UInt64
+    set_line_breakpoints : UInt64
+    set_bidi_level : UInt64
+    set_number_substitution : UInt64
+    set_glyph_orientation : UInt64
   end
 
   IDWriteTextAnalysisSink1_GUID = "b0d941a0-85e7-4d8b-9fd3-5ced9934482a"
@@ -1849,77 +1849,77 @@ lib LibWin32
   end
 
   struct IDWriteTextLayout1VTbl
-    query_interface : Proc(IDWriteTextLayout1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextLayout1*, UInt32)
-    release : Proc(IDWriteTextLayout1*, UInt32)
-    set_text_alignment : Proc(IDWriteTextLayout1*, DWRITE_TEXT_ALIGNMENT, HRESULT)
-    set_paragraph_alignment : Proc(IDWriteTextLayout1*, DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)
-    set_word_wrapping : Proc(IDWriteTextLayout1*, DWRITE_WORD_WRAPPING, HRESULT)
-    set_reading_direction : Proc(IDWriteTextLayout1*, DWRITE_READING_DIRECTION, HRESULT)
-    set_flow_direction : Proc(IDWriteTextLayout1*, DWRITE_FLOW_DIRECTION, HRESULT)
-    set_incremental_tab_stop : Proc(IDWriteTextLayout1*, Float32, HRESULT)
-    set_trimming : Proc(IDWriteTextLayout1*, DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)
-    set_line_spacing : Proc(IDWriteTextLayout1*, DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)
-    get_text_alignment : Proc(IDWriteTextLayout1*, DWRITE_TEXT_ALIGNMENT)
-    get_paragraph_alignment : Proc(IDWriteTextLayout1*, DWRITE_PARAGRAPH_ALIGNMENT)
-    get_word_wrapping : Proc(IDWriteTextLayout1*, DWRITE_WORD_WRAPPING)
-    get_reading_direction : Proc(IDWriteTextLayout1*, DWRITE_READING_DIRECTION)
-    get_flow_direction : Proc(IDWriteTextLayout1*, DWRITE_FLOW_DIRECTION)
-    get_incremental_tab_stop : Proc(IDWriteTextLayout1*, Float32)
-    get_trimming : Proc(IDWriteTextLayout1*, DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)
-    get_line_spacing : Proc(IDWriteTextLayout1*, DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)
-    get_font_collection : Proc(IDWriteTextLayout1*, IDWriteFontCollection*, HRESULT)
-    get_font_family_name_length : Proc(IDWriteTextLayout1*, UInt32)
-    get_font_family_name : Proc(IDWriteTextLayout1*, Char*, UInt32, HRESULT)
-    get_font_weight : Proc(IDWriteTextLayout1*, DWRITE_FONT_WEIGHT)
-    get_font_style : Proc(IDWriteTextLayout1*, DWRITE_FONT_STYLE)
-    get_font_stretch : Proc(IDWriteTextLayout1*, DWRITE_FONT_STRETCH)
-    get_font_size : Proc(IDWriteTextLayout1*, Float32)
-    get_locale_name_length : Proc(IDWriteTextLayout1*, UInt32)
-    get_locale_name : Proc(IDWriteTextLayout1*, Char*, UInt32, HRESULT)
-    set_max_width : Proc(IDWriteTextLayout1*, Float32, HRESULT)
-    set_max_height : Proc(IDWriteTextLayout1*, Float32, HRESULT)
-    set_font_collection : Proc(IDWriteTextLayout1*, IDWriteFontCollection, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_family_name : Proc(IDWriteTextLayout1*, LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_weight : Proc(IDWriteTextLayout1*, DWRITE_FONT_WEIGHT, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_style : Proc(IDWriteTextLayout1*, DWRITE_FONT_STYLE, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_stretch : Proc(IDWriteTextLayout1*, DWRITE_FONT_STRETCH, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_size : Proc(IDWriteTextLayout1*, Float32, DWRITE_TEXT_RANGE, HRESULT)
-    set_underline : Proc(IDWriteTextLayout1*, LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)
-    set_strikethrough : Proc(IDWriteTextLayout1*, LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)
-    set_drawing_effect : Proc(IDWriteTextLayout1*, IUnknown, DWRITE_TEXT_RANGE, HRESULT)
-    set_inline_object : Proc(IDWriteTextLayout1*, IDWriteInlineObject, DWRITE_TEXT_RANGE, HRESULT)
-    set_typography : Proc(IDWriteTextLayout1*, IDWriteTypography, DWRITE_TEXT_RANGE, HRESULT)
-    set_locale_name : Proc(IDWriteTextLayout1*, LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)
-    get_max_width : Proc(IDWriteTextLayout1*, Float32)
-    get_max_height : Proc(IDWriteTextLayout1*, Float32)
-    get_font_collection2 : Proc(IDWriteTextLayout1*, UInt32, IDWriteFontCollection*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_family_name_length2 : Proc(IDWriteTextLayout1*, UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_family_name2 : Proc(IDWriteTextLayout1*, UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_weight2 : Proc(IDWriteTextLayout1*, UInt32, DWRITE_FONT_WEIGHT*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_style2 : Proc(IDWriteTextLayout1*, UInt32, DWRITE_FONT_STYLE*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_stretch2 : Proc(IDWriteTextLayout1*, UInt32, DWRITE_FONT_STRETCH*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_size2 : Proc(IDWriteTextLayout1*, UInt32, Float32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_underline : Proc(IDWriteTextLayout1*, UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_strikethrough : Proc(IDWriteTextLayout1*, UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_drawing_effect : Proc(IDWriteTextLayout1*, UInt32, IUnknown*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_inline_object : Proc(IDWriteTextLayout1*, UInt32, IDWriteInlineObject*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_typography : Proc(IDWriteTextLayout1*, UInt32, IDWriteTypography*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_locale_name_length2 : Proc(IDWriteTextLayout1*, UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_locale_name2 : Proc(IDWriteTextLayout1*, UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)
-    draw : Proc(IDWriteTextLayout1*, Void*, IDWriteTextRenderer, Float32, Float32, HRESULT)
-    get_line_metrics : Proc(IDWriteTextLayout1*, DWRITE_LINE_METRICS*, UInt32, UInt32*, HRESULT)
-    get_metrics : Proc(IDWriteTextLayout1*, DWRITE_TEXT_METRICS*, HRESULT)
-    get_overhang_metrics : Proc(IDWriteTextLayout1*, DWRITE_OVERHANG_METRICS*, HRESULT)
-    get_cluster_metrics : Proc(IDWriteTextLayout1*, DWRITE_CLUSTER_METRICS*, UInt32, UInt32*, HRESULT)
-    determine_min_width : Proc(IDWriteTextLayout1*, Float32*, HRESULT)
-    hit_test_point : Proc(IDWriteTextLayout1*, Float32, Float32, LibC::BOOL*, LibC::BOOL*, DWRITE_HIT_TEST_METRICS*, HRESULT)
-    hit_test_text_position : Proc(IDWriteTextLayout1*, UInt32, LibC::BOOL, Float32*, Float32*, DWRITE_HIT_TEST_METRICS*, HRESULT)
-    hit_test_text_range : Proc(IDWriteTextLayout1*, UInt32, UInt32, Float32, Float32, DWRITE_HIT_TEST_METRICS*, UInt32, UInt32*, HRESULT)
-    set_pair_kerning : Proc(IDWriteTextLayout1*, LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)
-    get_pair_kerning : Proc(IDWriteTextLayout1*, UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)
-    set_character_spacing : Proc(IDWriteTextLayout1*, Float32, Float32, Float32, DWRITE_TEXT_RANGE, HRESULT)
-    get_character_spacing : Proc(IDWriteTextLayout1*, UInt32, Float32*, Float32*, Float32*, DWRITE_TEXT_RANGE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_text_alignment : UInt64
+    set_paragraph_alignment : UInt64
+    set_word_wrapping : UInt64
+    set_reading_direction : UInt64
+    set_flow_direction : UInt64
+    set_incremental_tab_stop : UInt64
+    set_trimming : UInt64
+    set_line_spacing : UInt64
+    get_text_alignment : UInt64
+    get_paragraph_alignment : UInt64
+    get_word_wrapping : UInt64
+    get_reading_direction : UInt64
+    get_flow_direction : UInt64
+    get_incremental_tab_stop : UInt64
+    get_trimming : UInt64
+    get_line_spacing : UInt64
+    get_font_collection : UInt64
+    get_font_family_name_length : UInt64
+    get_font_family_name : UInt64
+    get_font_weight : UInt64
+    get_font_style : UInt64
+    get_font_stretch : UInt64
+    get_font_size : UInt64
+    get_locale_name_length : UInt64
+    get_locale_name : UInt64
+    set_max_width : UInt64
+    set_max_height : UInt64
+    set_font_collection : UInt64
+    set_font_family_name : UInt64
+    set_font_weight : UInt64
+    set_font_style : UInt64
+    set_font_stretch : UInt64
+    set_font_size : UInt64
+    set_underline : UInt64
+    set_strikethrough : UInt64
+    set_drawing_effect : UInt64
+    set_inline_object : UInt64
+    set_typography : UInt64
+    set_locale_name : UInt64
+    get_max_width : UInt64
+    get_max_height : UInt64
+    get_font_collection2 : UInt64
+    get_font_family_name_length2 : UInt64
+    get_font_family_name2 : UInt64
+    get_font_weight2 : UInt64
+    get_font_style2 : UInt64
+    get_font_stretch2 : UInt64
+    get_font_size2 : UInt64
+    get_underline : UInt64
+    get_strikethrough : UInt64
+    get_drawing_effect : UInt64
+    get_inline_object : UInt64
+    get_typography : UInt64
+    get_locale_name_length2 : UInt64
+    get_locale_name2 : UInt64
+    draw : UInt64
+    get_line_metrics : UInt64
+    get_metrics : UInt64
+    get_overhang_metrics : UInt64
+    get_cluster_metrics : UInt64
+    determine_min_width : UInt64
+    hit_test_point : UInt64
+    hit_test_text_position : UInt64
+    hit_test_text_range : UInt64
+    set_pair_kerning : UInt64
+    get_pair_kerning : UInt64
+    set_character_spacing : UInt64
+    get_character_spacing : UInt64
   end
 
   IDWriteTextLayout1_GUID = "9064d822-80a7-465c-a986-df65f78b8feb"
@@ -1929,19 +1929,19 @@ lib LibWin32
   end
 
   struct IDWriteBitmapRenderTarget1VTbl
-    query_interface : Proc(IDWriteBitmapRenderTarget1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteBitmapRenderTarget1*, UInt32)
-    release : Proc(IDWriteBitmapRenderTarget1*, UInt32)
-    draw_glyph_run : Proc(IDWriteBitmapRenderTarget1*, Float32, Float32, DWRITE_MEASURING_MODE, DWRITE_GLYPH_RUN*, IDWriteRenderingParams, UInt32, RECT*, HRESULT)
-    get_memory_dc : Proc(IDWriteBitmapRenderTarget1*, HDC)
-    get_pixels_per_dip : Proc(IDWriteBitmapRenderTarget1*, Float32)
-    set_pixels_per_dip : Proc(IDWriteBitmapRenderTarget1*, Float32, HRESULT)
-    get_current_transform : Proc(IDWriteBitmapRenderTarget1*, DWRITE_MATRIX*, HRESULT)
-    set_current_transform : Proc(IDWriteBitmapRenderTarget1*, DWRITE_MATRIX*, HRESULT)
-    get_size : Proc(IDWriteBitmapRenderTarget1*, SIZE*, HRESULT)
-    resize : Proc(IDWriteBitmapRenderTarget1*, UInt32, UInt32, HRESULT)
-    get_text_antialias_mode : Proc(IDWriteBitmapRenderTarget1*, DWRITE_TEXT_ANTIALIAS_MODE)
-    set_text_antialias_mode : Proc(IDWriteBitmapRenderTarget1*, DWRITE_TEXT_ANTIALIAS_MODE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    draw_glyph_run : UInt64
+    get_memory_dc : UInt64
+    get_pixels_per_dip : UInt64
+    set_pixels_per_dip : UInt64
+    get_current_transform : UInt64
+    set_current_transform : UInt64
+    get_size : UInt64
+    resize : UInt64
+    get_text_antialias_mode : UInt64
+    set_text_antialias_mode : UInt64
   end
 
   IDWriteBitmapRenderTarget1_GUID = "791e8298-3ef3-4230-9880-c9bdecc42064"
@@ -1951,20 +1951,20 @@ lib LibWin32
   end
 
   struct IDWriteTextRenderer1VTbl
-    query_interface : Proc(IDWriteTextRenderer1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextRenderer1*, UInt32)
-    release : Proc(IDWriteTextRenderer1*, UInt32)
-    is_pixel_snapping_disabled : Proc(IDWriteTextRenderer1*, Void*, LibC::BOOL*, HRESULT)
-    get_current_transform : Proc(IDWriteTextRenderer1*, Void*, DWRITE_MATRIX*, HRESULT)
-    get_pixels_per_dip : Proc(IDWriteTextRenderer1*, Void*, Float32*, HRESULT)
-    draw_glyph_run : Proc(IDWriteTextRenderer1*, Void*, Float32, Float32, DWRITE_MEASURING_MODE, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, IUnknown, HRESULT)
-    draw_underline : Proc(IDWriteTextRenderer1*, Void*, Float32, Float32, DWRITE_UNDERLINE*, IUnknown, HRESULT)
-    draw_strikethrough : Proc(IDWriteTextRenderer1*, Void*, Float32, Float32, DWRITE_STRIKETHROUGH*, IUnknown, HRESULT)
-    draw_inline_object : Proc(IDWriteTextRenderer1*, Void*, Float32, Float32, IDWriteInlineObject, LibC::BOOL, LibC::BOOL, IUnknown, HRESULT)
-    draw_glyph_run2 : Proc(IDWriteTextRenderer1*, Void*, Float32, Float32, DWRITE_GLYPH_ORIENTATION_ANGLE, DWRITE_MEASURING_MODE, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, IUnknown, HRESULT)
-    draw_underline2 : Proc(IDWriteTextRenderer1*, Void*, Float32, Float32, DWRITE_GLYPH_ORIENTATION_ANGLE, DWRITE_UNDERLINE*, IUnknown, HRESULT)
-    draw_strikethrough2 : Proc(IDWriteTextRenderer1*, Void*, Float32, Float32, DWRITE_GLYPH_ORIENTATION_ANGLE, DWRITE_STRIKETHROUGH*, IUnknown, HRESULT)
-    draw_inline_object2 : Proc(IDWriteTextRenderer1*, Void*, Float32, Float32, DWRITE_GLYPH_ORIENTATION_ANGLE, IDWriteInlineObject, LibC::BOOL, LibC::BOOL, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    is_pixel_snapping_disabled : UInt64
+    get_current_transform : UInt64
+    get_pixels_per_dip : UInt64
+    draw_glyph_run : UInt64
+    draw_underline : UInt64
+    draw_strikethrough : UInt64
+    draw_inline_object : UInt64
+    draw_glyph_run2 : UInt64
+    draw_underline2 : UInt64
+    draw_strikethrough2 : UInt64
+    draw_inline_object2 : UInt64
   end
 
   IDWriteTextRenderer1_GUID = "d3e0e934-22a0-427e-aae4-7d9574b59db1"
@@ -1974,42 +1974,42 @@ lib LibWin32
   end
 
   struct IDWriteTextFormat1VTbl
-    query_interface : Proc(IDWriteTextFormat1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextFormat1*, UInt32)
-    release : Proc(IDWriteTextFormat1*, UInt32)
-    set_text_alignment : Proc(IDWriteTextFormat1*, DWRITE_TEXT_ALIGNMENT, HRESULT)
-    set_paragraph_alignment : Proc(IDWriteTextFormat1*, DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)
-    set_word_wrapping : Proc(IDWriteTextFormat1*, DWRITE_WORD_WRAPPING, HRESULT)
-    set_reading_direction : Proc(IDWriteTextFormat1*, DWRITE_READING_DIRECTION, HRESULT)
-    set_flow_direction : Proc(IDWriteTextFormat1*, DWRITE_FLOW_DIRECTION, HRESULT)
-    set_incremental_tab_stop : Proc(IDWriteTextFormat1*, Float32, HRESULT)
-    set_trimming : Proc(IDWriteTextFormat1*, DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)
-    set_line_spacing : Proc(IDWriteTextFormat1*, DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)
-    get_text_alignment : Proc(IDWriteTextFormat1*, DWRITE_TEXT_ALIGNMENT)
-    get_paragraph_alignment : Proc(IDWriteTextFormat1*, DWRITE_PARAGRAPH_ALIGNMENT)
-    get_word_wrapping : Proc(IDWriteTextFormat1*, DWRITE_WORD_WRAPPING)
-    get_reading_direction : Proc(IDWriteTextFormat1*, DWRITE_READING_DIRECTION)
-    get_flow_direction : Proc(IDWriteTextFormat1*, DWRITE_FLOW_DIRECTION)
-    get_incremental_tab_stop : Proc(IDWriteTextFormat1*, Float32)
-    get_trimming : Proc(IDWriteTextFormat1*, DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)
-    get_line_spacing : Proc(IDWriteTextFormat1*, DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)
-    get_font_collection : Proc(IDWriteTextFormat1*, IDWriteFontCollection*, HRESULT)
-    get_font_family_name_length : Proc(IDWriteTextFormat1*, UInt32)
-    get_font_family_name : Proc(IDWriteTextFormat1*, Char*, UInt32, HRESULT)
-    get_font_weight : Proc(IDWriteTextFormat1*, DWRITE_FONT_WEIGHT)
-    get_font_style : Proc(IDWriteTextFormat1*, DWRITE_FONT_STYLE)
-    get_font_stretch : Proc(IDWriteTextFormat1*, DWRITE_FONT_STRETCH)
-    get_font_size : Proc(IDWriteTextFormat1*, Float32)
-    get_locale_name_length : Proc(IDWriteTextFormat1*, UInt32)
-    get_locale_name : Proc(IDWriteTextFormat1*, Char*, UInt32, HRESULT)
-    set_vertical_glyph_orientation : Proc(IDWriteTextFormat1*, DWRITE_VERTICAL_GLYPH_ORIENTATION, HRESULT)
-    get_vertical_glyph_orientation : Proc(IDWriteTextFormat1*, DWRITE_VERTICAL_GLYPH_ORIENTATION)
-    set_last_line_wrapping : Proc(IDWriteTextFormat1*, LibC::BOOL, HRESULT)
-    get_last_line_wrapping : Proc(IDWriteTextFormat1*, LibC::BOOL)
-    set_optical_alignment : Proc(IDWriteTextFormat1*, DWRITE_OPTICAL_ALIGNMENT, HRESULT)
-    get_optical_alignment : Proc(IDWriteTextFormat1*, DWRITE_OPTICAL_ALIGNMENT)
-    set_font_fallback : Proc(IDWriteTextFormat1*, IDWriteFontFallback, HRESULT)
-    get_font_fallback : Proc(IDWriteTextFormat1*, IDWriteFontFallback*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_text_alignment : UInt64
+    set_paragraph_alignment : UInt64
+    set_word_wrapping : UInt64
+    set_reading_direction : UInt64
+    set_flow_direction : UInt64
+    set_incremental_tab_stop : UInt64
+    set_trimming : UInt64
+    set_line_spacing : UInt64
+    get_text_alignment : UInt64
+    get_paragraph_alignment : UInt64
+    get_word_wrapping : UInt64
+    get_reading_direction : UInt64
+    get_flow_direction : UInt64
+    get_incremental_tab_stop : UInt64
+    get_trimming : UInt64
+    get_line_spacing : UInt64
+    get_font_collection : UInt64
+    get_font_family_name_length : UInt64
+    get_font_family_name : UInt64
+    get_font_weight : UInt64
+    get_font_style : UInt64
+    get_font_stretch : UInt64
+    get_font_size : UInt64
+    get_locale_name_length : UInt64
+    get_locale_name : UInt64
+    set_vertical_glyph_orientation : UInt64
+    get_vertical_glyph_orientation : UInt64
+    set_last_line_wrapping : UInt64
+    get_last_line_wrapping : UInt64
+    set_optical_alignment : UInt64
+    get_optical_alignment : UInt64
+    set_font_fallback : UInt64
+    get_font_fallback : UInt64
   end
 
   IDWriteTextFormat1_GUID = "5f174b49-0d8b-4cfb-8bca-f1cce9d06c67"
@@ -2019,86 +2019,86 @@ lib LibWin32
   end
 
   struct IDWriteTextLayout2VTbl
-    query_interface : Proc(IDWriteTextLayout2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextLayout2*, UInt32)
-    release : Proc(IDWriteTextLayout2*, UInt32)
-    set_text_alignment : Proc(IDWriteTextLayout2*, DWRITE_TEXT_ALIGNMENT, HRESULT)
-    set_paragraph_alignment : Proc(IDWriteTextLayout2*, DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)
-    set_word_wrapping : Proc(IDWriteTextLayout2*, DWRITE_WORD_WRAPPING, HRESULT)
-    set_reading_direction : Proc(IDWriteTextLayout2*, DWRITE_READING_DIRECTION, HRESULT)
-    set_flow_direction : Proc(IDWriteTextLayout2*, DWRITE_FLOW_DIRECTION, HRESULT)
-    set_incremental_tab_stop : Proc(IDWriteTextLayout2*, Float32, HRESULT)
-    set_trimming : Proc(IDWriteTextLayout2*, DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)
-    set_line_spacing : Proc(IDWriteTextLayout2*, DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)
-    get_text_alignment : Proc(IDWriteTextLayout2*, DWRITE_TEXT_ALIGNMENT)
-    get_paragraph_alignment : Proc(IDWriteTextLayout2*, DWRITE_PARAGRAPH_ALIGNMENT)
-    get_word_wrapping : Proc(IDWriteTextLayout2*, DWRITE_WORD_WRAPPING)
-    get_reading_direction : Proc(IDWriteTextLayout2*, DWRITE_READING_DIRECTION)
-    get_flow_direction : Proc(IDWriteTextLayout2*, DWRITE_FLOW_DIRECTION)
-    get_incremental_tab_stop : Proc(IDWriteTextLayout2*, Float32)
-    get_trimming : Proc(IDWriteTextLayout2*, DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)
-    get_line_spacing : Proc(IDWriteTextLayout2*, DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)
-    get_font_collection : Proc(IDWriteTextLayout2*, IDWriteFontCollection*, HRESULT)
-    get_font_family_name_length : Proc(IDWriteTextLayout2*, UInt32)
-    get_font_family_name : Proc(IDWriteTextLayout2*, Char*, UInt32, HRESULT)
-    get_font_weight : Proc(IDWriteTextLayout2*, DWRITE_FONT_WEIGHT)
-    get_font_style : Proc(IDWriteTextLayout2*, DWRITE_FONT_STYLE)
-    get_font_stretch : Proc(IDWriteTextLayout2*, DWRITE_FONT_STRETCH)
-    get_font_size : Proc(IDWriteTextLayout2*, Float32)
-    get_locale_name_length : Proc(IDWriteTextLayout2*, UInt32)
-    get_locale_name : Proc(IDWriteTextLayout2*, Char*, UInt32, HRESULT)
-    set_max_width : Proc(IDWriteTextLayout2*, Float32, HRESULT)
-    set_max_height : Proc(IDWriteTextLayout2*, Float32, HRESULT)
-    set_font_collection : Proc(IDWriteTextLayout2*, IDWriteFontCollection, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_family_name : Proc(IDWriteTextLayout2*, LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_weight : Proc(IDWriteTextLayout2*, DWRITE_FONT_WEIGHT, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_style : Proc(IDWriteTextLayout2*, DWRITE_FONT_STYLE, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_stretch : Proc(IDWriteTextLayout2*, DWRITE_FONT_STRETCH, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_size : Proc(IDWriteTextLayout2*, Float32, DWRITE_TEXT_RANGE, HRESULT)
-    set_underline : Proc(IDWriteTextLayout2*, LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)
-    set_strikethrough : Proc(IDWriteTextLayout2*, LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)
-    set_drawing_effect : Proc(IDWriteTextLayout2*, IUnknown, DWRITE_TEXT_RANGE, HRESULT)
-    set_inline_object : Proc(IDWriteTextLayout2*, IDWriteInlineObject, DWRITE_TEXT_RANGE, HRESULT)
-    set_typography : Proc(IDWriteTextLayout2*, IDWriteTypography, DWRITE_TEXT_RANGE, HRESULT)
-    set_locale_name : Proc(IDWriteTextLayout2*, LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)
-    get_max_width : Proc(IDWriteTextLayout2*, Float32)
-    get_max_height : Proc(IDWriteTextLayout2*, Float32)
-    get_font_collection2 : Proc(IDWriteTextLayout2*, UInt32, IDWriteFontCollection*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_family_name_length2 : Proc(IDWriteTextLayout2*, UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_family_name2 : Proc(IDWriteTextLayout2*, UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_weight2 : Proc(IDWriteTextLayout2*, UInt32, DWRITE_FONT_WEIGHT*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_style2 : Proc(IDWriteTextLayout2*, UInt32, DWRITE_FONT_STYLE*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_stretch2 : Proc(IDWriteTextLayout2*, UInt32, DWRITE_FONT_STRETCH*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_size2 : Proc(IDWriteTextLayout2*, UInt32, Float32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_underline : Proc(IDWriteTextLayout2*, UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_strikethrough : Proc(IDWriteTextLayout2*, UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_drawing_effect : Proc(IDWriteTextLayout2*, UInt32, IUnknown*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_inline_object : Proc(IDWriteTextLayout2*, UInt32, IDWriteInlineObject*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_typography : Proc(IDWriteTextLayout2*, UInt32, IDWriteTypography*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_locale_name_length2 : Proc(IDWriteTextLayout2*, UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_locale_name2 : Proc(IDWriteTextLayout2*, UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)
-    draw : Proc(IDWriteTextLayout2*, Void*, IDWriteTextRenderer, Float32, Float32, HRESULT)
-    get_line_metrics : Proc(IDWriteTextLayout2*, DWRITE_LINE_METRICS*, UInt32, UInt32*, HRESULT)
-    get_metrics : Proc(IDWriteTextLayout2*, DWRITE_TEXT_METRICS*, HRESULT)
-    get_overhang_metrics : Proc(IDWriteTextLayout2*, DWRITE_OVERHANG_METRICS*, HRESULT)
-    get_cluster_metrics : Proc(IDWriteTextLayout2*, DWRITE_CLUSTER_METRICS*, UInt32, UInt32*, HRESULT)
-    determine_min_width : Proc(IDWriteTextLayout2*, Float32*, HRESULT)
-    hit_test_point : Proc(IDWriteTextLayout2*, Float32, Float32, LibC::BOOL*, LibC::BOOL*, DWRITE_HIT_TEST_METRICS*, HRESULT)
-    hit_test_text_position : Proc(IDWriteTextLayout2*, UInt32, LibC::BOOL, Float32*, Float32*, DWRITE_HIT_TEST_METRICS*, HRESULT)
-    hit_test_text_range : Proc(IDWriteTextLayout2*, UInt32, UInt32, Float32, Float32, DWRITE_HIT_TEST_METRICS*, UInt32, UInt32*, HRESULT)
-    set_pair_kerning : Proc(IDWriteTextLayout2*, LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)
-    get_pair_kerning : Proc(IDWriteTextLayout2*, UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)
-    set_character_spacing : Proc(IDWriteTextLayout2*, Float32, Float32, Float32, DWRITE_TEXT_RANGE, HRESULT)
-    get_character_spacing : Proc(IDWriteTextLayout2*, UInt32, Float32*, Float32*, Float32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_metrics2 : Proc(IDWriteTextLayout2*, DWRITE_TEXT_METRICS1*, HRESULT)
-    set_vertical_glyph_orientation : Proc(IDWriteTextLayout2*, DWRITE_VERTICAL_GLYPH_ORIENTATION, HRESULT)
-    get_vertical_glyph_orientation : Proc(IDWriteTextLayout2*, DWRITE_VERTICAL_GLYPH_ORIENTATION)
-    set_last_line_wrapping : Proc(IDWriteTextLayout2*, LibC::BOOL, HRESULT)
-    get_last_line_wrapping : Proc(IDWriteTextLayout2*, LibC::BOOL)
-    set_optical_alignment : Proc(IDWriteTextLayout2*, DWRITE_OPTICAL_ALIGNMENT, HRESULT)
-    get_optical_alignment : Proc(IDWriteTextLayout2*, DWRITE_OPTICAL_ALIGNMENT)
-    set_font_fallback : Proc(IDWriteTextLayout2*, IDWriteFontFallback, HRESULT)
-    get_font_fallback : Proc(IDWriteTextLayout2*, IDWriteFontFallback*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_text_alignment : UInt64
+    set_paragraph_alignment : UInt64
+    set_word_wrapping : UInt64
+    set_reading_direction : UInt64
+    set_flow_direction : UInt64
+    set_incremental_tab_stop : UInt64
+    set_trimming : UInt64
+    set_line_spacing : UInt64
+    get_text_alignment : UInt64
+    get_paragraph_alignment : UInt64
+    get_word_wrapping : UInt64
+    get_reading_direction : UInt64
+    get_flow_direction : UInt64
+    get_incremental_tab_stop : UInt64
+    get_trimming : UInt64
+    get_line_spacing : UInt64
+    get_font_collection : UInt64
+    get_font_family_name_length : UInt64
+    get_font_family_name : UInt64
+    get_font_weight : UInt64
+    get_font_style : UInt64
+    get_font_stretch : UInt64
+    get_font_size : UInt64
+    get_locale_name_length : UInt64
+    get_locale_name : UInt64
+    set_max_width : UInt64
+    set_max_height : UInt64
+    set_font_collection : UInt64
+    set_font_family_name : UInt64
+    set_font_weight : UInt64
+    set_font_style : UInt64
+    set_font_stretch : UInt64
+    set_font_size : UInt64
+    set_underline : UInt64
+    set_strikethrough : UInt64
+    set_drawing_effect : UInt64
+    set_inline_object : UInt64
+    set_typography : UInt64
+    set_locale_name : UInt64
+    get_max_width : UInt64
+    get_max_height : UInt64
+    get_font_collection2 : UInt64
+    get_font_family_name_length2 : UInt64
+    get_font_family_name2 : UInt64
+    get_font_weight2 : UInt64
+    get_font_style2 : UInt64
+    get_font_stretch2 : UInt64
+    get_font_size2 : UInt64
+    get_underline : UInt64
+    get_strikethrough : UInt64
+    get_drawing_effect : UInt64
+    get_inline_object : UInt64
+    get_typography : UInt64
+    get_locale_name_length2 : UInt64
+    get_locale_name2 : UInt64
+    draw : UInt64
+    get_line_metrics : UInt64
+    get_metrics : UInt64
+    get_overhang_metrics : UInt64
+    get_cluster_metrics : UInt64
+    determine_min_width : UInt64
+    hit_test_point : UInt64
+    hit_test_text_position : UInt64
+    hit_test_text_range : UInt64
+    set_pair_kerning : UInt64
+    get_pair_kerning : UInt64
+    set_character_spacing : UInt64
+    get_character_spacing : UInt64
+    get_metrics2 : UInt64
+    set_vertical_glyph_orientation : UInt64
+    get_vertical_glyph_orientation : UInt64
+    set_last_line_wrapping : UInt64
+    get_last_line_wrapping : UInt64
+    set_optical_alignment : UInt64
+    get_optical_alignment : UInt64
+    set_font_fallback : UInt64
+    get_font_fallback : UInt64
   end
 
   IDWriteTextLayout2_GUID = "1093c18f-8d5e-43f0-b064-0917311b525e"
@@ -2108,28 +2108,28 @@ lib LibWin32
   end
 
   struct IDWriteTextAnalyzer2VTbl
-    query_interface : Proc(IDWriteTextAnalyzer2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextAnalyzer2*, UInt32)
-    release : Proc(IDWriteTextAnalyzer2*, UInt32)
-    analyze_script : Proc(IDWriteTextAnalyzer2*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)
-    analyze_bidi : Proc(IDWriteTextAnalyzer2*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)
-    analyze_number_substitution : Proc(IDWriteTextAnalyzer2*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)
-    analyze_line_breakpoints : Proc(IDWriteTextAnalyzer2*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)
-    get_glyphs : Proc(IDWriteTextAnalyzer2*, Char*, UInt32, IDWriteFontFace, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, IDWriteNumberSubstitution, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, UInt32, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, HRESULT)
-    get_glyph_placements : Proc(IDWriteTextAnalyzer2*, Char*, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, IDWriteFontFace, Float32, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)
-    get_gdi_compatible_glyph_placements : Proc(IDWriteTextAnalyzer2*, Char*, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, IDWriteFontFace, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)
-    apply_character_spacing : Proc(IDWriteTextAnalyzer2*, Float32, Float32, Float32, UInt32, UInt32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, DWRITE_SHAPING_GLYPH_PROPERTIES*, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)
-    get_baseline : Proc(IDWriteTextAnalyzer2*, IDWriteFontFace, DWRITE_BASELINE, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS, LibC::LPWSTR, Int32*, LibC::BOOL*, HRESULT)
-    analyze_vertical_glyph_orientation : Proc(IDWriteTextAnalyzer2*, IDWriteTextAnalysisSource1, UInt32, UInt32, IDWriteTextAnalysisSink1, HRESULT)
-    get_glyph_orientation_transform : Proc(IDWriteTextAnalyzer2*, DWRITE_GLYPH_ORIENTATION_ANGLE, LibC::BOOL, DWRITE_MATRIX*, HRESULT)
-    get_script_properties : Proc(IDWriteTextAnalyzer2*, DWRITE_SCRIPT_ANALYSIS, DWRITE_SCRIPT_PROPERTIES*, HRESULT)
-    get_text_complexity : Proc(IDWriteTextAnalyzer2*, Char*, UInt32, IDWriteFontFace, LibC::BOOL*, UInt32*, UInt16*, HRESULT)
-    get_justification_opportunities : Proc(IDWriteTextAnalyzer2*, IDWriteFontFace, Float32, DWRITE_SCRIPT_ANALYSIS, UInt32, UInt32, Char*, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, DWRITE_JUSTIFICATION_OPPORTUNITY*, HRESULT)
-    justify_glyph_advances : Proc(IDWriteTextAnalyzer2*, Float32, UInt32, DWRITE_JUSTIFICATION_OPPORTUNITY*, Float32*, DWRITE_GLYPH_OFFSET*, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)
-    get_justified_glyphs : Proc(IDWriteTextAnalyzer2*, IDWriteFontFace, Float32, DWRITE_SCRIPT_ANALYSIS, UInt32, UInt32, UInt32, UInt16*, UInt16*, Float32*, Float32*, DWRITE_GLYPH_OFFSET*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, UInt16*, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)
-    get_glyph_orientation_transform2 : Proc(IDWriteTextAnalyzer2*, DWRITE_GLYPH_ORIENTATION_ANGLE, LibC::BOOL, Float32, Float32, DWRITE_MATRIX*, HRESULT)
-    get_typographic_features : Proc(IDWriteTextAnalyzer2*, IDWriteFontFace, DWRITE_SCRIPT_ANALYSIS, LibC::LPWSTR, UInt32, UInt32*, DWRITE_FONT_FEATURE_TAG*, HRESULT)
-    check_typographic_feature : Proc(IDWriteTextAnalyzer2*, IDWriteFontFace, DWRITE_SCRIPT_ANALYSIS, LibC::LPWSTR, DWRITE_FONT_FEATURE_TAG, UInt32, UInt16*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    analyze_script : UInt64
+    analyze_bidi : UInt64
+    analyze_number_substitution : UInt64
+    analyze_line_breakpoints : UInt64
+    get_glyphs : UInt64
+    get_glyph_placements : UInt64
+    get_gdi_compatible_glyph_placements : UInt64
+    apply_character_spacing : UInt64
+    get_baseline : UInt64
+    analyze_vertical_glyph_orientation : UInt64
+    get_glyph_orientation_transform : UInt64
+    get_script_properties : UInt64
+    get_text_complexity : UInt64
+    get_justification_opportunities : UInt64
+    justify_glyph_advances : UInt64
+    get_justified_glyphs : UInt64
+    get_glyph_orientation_transform2 : UInt64
+    get_typographic_features : UInt64
+    check_typographic_feature : UInt64
   end
 
   IDWriteTextAnalyzer2_GUID = "553a9ff3-5693-4df7-b52b-74806f7f2eb9"
@@ -2139,10 +2139,10 @@ lib LibWin32
   end
 
   struct IDWriteFontFallbackVTbl
-    query_interface : Proc(IDWriteFontFallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFallback*, UInt32)
-    release : Proc(IDWriteFontFallback*, UInt32)
-    map_characters : Proc(IDWriteFontFallback*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteFontCollection, LibC::LPWSTR, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, UInt32*, IDWriteFont*, Float32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    map_characters : UInt64
   end
 
   IDWriteFontFallback_GUID = "efa008f9-f7a1-48bf-b05c-f224713cc0ff"
@@ -2152,12 +2152,12 @@ lib LibWin32
   end
 
   struct IDWriteFontFallbackBuilderVTbl
-    query_interface : Proc(IDWriteFontFallbackBuilder*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFallbackBuilder*, UInt32)
-    release : Proc(IDWriteFontFallbackBuilder*, UInt32)
-    add_mapping : Proc(IDWriteFontFallbackBuilder*, DWRITE_UNICODE_RANGE*, UInt32, UInt16**, UInt32, IDWriteFontCollection, LibC::LPWSTR, LibC::LPWSTR, Float32, HRESULT)
-    add_mappings : Proc(IDWriteFontFallbackBuilder*, IDWriteFontFallback, HRESULT)
-    create_font_fallback : Proc(IDWriteFontFallbackBuilder*, IDWriteFontFallback*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_mapping : UInt64
+    add_mappings : UInt64
+    create_font_fallback : UInt64
   end
 
   IDWriteFontFallbackBuilder_GUID = "fd882d06-8aba-4fb8-b849-8be8b73e14de"
@@ -2167,25 +2167,25 @@ lib LibWin32
   end
 
   struct IDWriteFont2VTbl
-    query_interface : Proc(IDWriteFont2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFont2*, UInt32)
-    release : Proc(IDWriteFont2*, UInt32)
-    get_font_family : Proc(IDWriteFont2*, IDWriteFontFamily*, HRESULT)
-    get_weight : Proc(IDWriteFont2*, DWRITE_FONT_WEIGHT)
-    get_stretch : Proc(IDWriteFont2*, DWRITE_FONT_STRETCH)
-    get_style : Proc(IDWriteFont2*, DWRITE_FONT_STYLE)
-    is_symbol_font : Proc(IDWriteFont2*, LibC::BOOL)
-    get_face_names : Proc(IDWriteFont2*, IDWriteLocalizedStrings*, HRESULT)
-    get_informational_strings : Proc(IDWriteFont2*, DWRITE_INFORMATIONAL_STRING_ID, IDWriteLocalizedStrings*, LibC::BOOL*, HRESULT)
-    get_simulations : Proc(IDWriteFont2*, DWRITE_FONT_SIMULATIONS)
-    get_metrics : Proc(IDWriteFont2*, DWRITE_FONT_METRICS*, Void)
-    has_character : Proc(IDWriteFont2*, UInt32, LibC::BOOL*, HRESULT)
-    create_font_face : Proc(IDWriteFont2*, IDWriteFontFace*, HRESULT)
-    get_metrics2 : Proc(IDWriteFont2*, DWRITE_FONT_METRICS1*, Void)
-    get_panose : Proc(IDWriteFont2*, DWRITE_PANOSE*, Void)
-    get_unicode_ranges : Proc(IDWriteFont2*, UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)
-    is_monospaced_font : Proc(IDWriteFont2*, LibC::BOOL)
-    is_color_font : Proc(IDWriteFont2*, LibC::BOOL)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_family : UInt64
+    get_weight : UInt64
+    get_stretch : UInt64
+    get_style : UInt64
+    is_symbol_font : UInt64
+    get_face_names : UInt64
+    get_informational_strings : UInt64
+    get_simulations : UInt64
+    get_metrics : UInt64
+    has_character : UInt64
+    create_font_face : UInt64
+    get_metrics2 : UInt64
+    get_panose : UInt64
+    get_unicode_ranges : UInt64
+    is_monospaced_font : UInt64
+    is_color_font : UInt64
   end
 
   IDWriteFont2_GUID = "29748ed6-8c9c-4a6a-be0b-d912e8538944"
@@ -2195,41 +2195,41 @@ lib LibWin32
   end
 
   struct IDWriteFontFace2VTbl
-    query_interface : Proc(IDWriteFontFace2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFace2*, UInt32)
-    release : Proc(IDWriteFontFace2*, UInt32)
-    get_type : Proc(IDWriteFontFace2*, DWRITE_FONT_FACE_TYPE)
-    get_files : Proc(IDWriteFontFace2*, UInt32*, IDWriteFontFile*, HRESULT)
-    get_index : Proc(IDWriteFontFace2*, UInt32)
-    get_simulations : Proc(IDWriteFontFace2*, DWRITE_FONT_SIMULATIONS)
-    is_symbol_font : Proc(IDWriteFontFace2*, LibC::BOOL)
-    get_metrics : Proc(IDWriteFontFace2*, DWRITE_FONT_METRICS*, Void)
-    get_glyph_count : Proc(IDWriteFontFace2*, UInt16)
-    get_design_glyph_metrics : Proc(IDWriteFontFace2*, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)
-    get_glyph_indices : Proc(IDWriteFontFace2*, UInt32*, UInt32, UInt16*, HRESULT)
-    try_get_font_table : Proc(IDWriteFontFace2*, UInt32, Void**, UInt32*, Void**, LibC::BOOL*, HRESULT)
-    release_font_table : Proc(IDWriteFontFace2*, Void*, Void)
-    get_glyph_run_outline : Proc(IDWriteFontFace2*, Float32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, UInt32, LibC::BOOL, LibC::BOOL, ID2D1SimplifiedGeometrySink, HRESULT)
-    get_recommended_rendering_mode : Proc(IDWriteFontFace2*, Float32, Float32, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, HRESULT)
-    get_gdi_compatible_metrics : Proc(IDWriteFontFace2*, Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS*, HRESULT)
-    get_gdi_compatible_glyph_metrics : Proc(IDWriteFontFace2*, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)
-    get_metrics2 : Proc(IDWriteFontFace2*, DWRITE_FONT_METRICS1*, Void)
-    get_gdi_compatible_metrics2 : Proc(IDWriteFontFace2*, Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS1*, HRESULT)
-    get_caret_metrics : Proc(IDWriteFontFace2*, DWRITE_CARET_METRICS*, Void)
-    get_unicode_ranges : Proc(IDWriteFontFace2*, UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)
-    is_monospaced_font : Proc(IDWriteFontFace2*, LibC::BOOL)
-    get_design_glyph_advances : Proc(IDWriteFontFace2*, UInt32, UInt16*, Int32*, LibC::BOOL, HRESULT)
-    get_gdi_compatible_glyph_advances : Proc(IDWriteFontFace2*, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, UInt32, UInt16*, Int32*, HRESULT)
-    get_kerning_pair_adjustments : Proc(IDWriteFontFace2*, UInt32, UInt16*, Int32*, HRESULT)
-    has_kerning_pairs : Proc(IDWriteFontFace2*, LibC::BOOL)
-    get_recommended_rendering_mode2 : Proc(IDWriteFontFace2*, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, DWRITE_RENDERING_MODE*, HRESULT)
-    get_vertical_glyph_variants : Proc(IDWriteFontFace2*, UInt32, UInt16*, UInt16*, HRESULT)
-    has_vertical_glyph_variants : Proc(IDWriteFontFace2*, LibC::BOOL)
-    is_color_font : Proc(IDWriteFontFace2*, LibC::BOOL)
-    get_color_palette_count : Proc(IDWriteFontFace2*, UInt32)
-    get_palette_entry_count : Proc(IDWriteFontFace2*, UInt32)
-    get_palette_entries : Proc(IDWriteFontFace2*, UInt32, UInt32, UInt32, DWRITE_COLOR_F*, HRESULT)
-    get_recommended_rendering_mode3 : Proc(IDWriteFontFace2*, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, DWRITE_GRID_FIT_MODE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type : UInt64
+    get_files : UInt64
+    get_index : UInt64
+    get_simulations : UInt64
+    is_symbol_font : UInt64
+    get_metrics : UInt64
+    get_glyph_count : UInt64
+    get_design_glyph_metrics : UInt64
+    get_glyph_indices : UInt64
+    try_get_font_table : UInt64
+    release_font_table : UInt64
+    get_glyph_run_outline : UInt64
+    get_recommended_rendering_mode : UInt64
+    get_gdi_compatible_metrics : UInt64
+    get_gdi_compatible_glyph_metrics : UInt64
+    get_metrics2 : UInt64
+    get_gdi_compatible_metrics2 : UInt64
+    get_caret_metrics : UInt64
+    get_unicode_ranges : UInt64
+    is_monospaced_font : UInt64
+    get_design_glyph_advances : UInt64
+    get_gdi_compatible_glyph_advances : UInt64
+    get_kerning_pair_adjustments : UInt64
+    has_kerning_pairs : UInt64
+    get_recommended_rendering_mode2 : UInt64
+    get_vertical_glyph_variants : UInt64
+    has_vertical_glyph_variants : UInt64
+    is_color_font : UInt64
+    get_color_palette_count : UInt64
+    get_palette_entry_count : UInt64
+    get_palette_entries : UInt64
+    get_recommended_rendering_mode3 : UInt64
   end
 
   IDWriteFontFace2_GUID = "d8b768ff-64bc-4e66-982b-ec8e87f693f7"
@@ -2239,11 +2239,11 @@ lib LibWin32
   end
 
   struct IDWriteColorGlyphRunEnumeratorVTbl
-    query_interface : Proc(IDWriteColorGlyphRunEnumerator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteColorGlyphRunEnumerator*, UInt32)
-    release : Proc(IDWriteColorGlyphRunEnumerator*, UInt32)
-    move_next : Proc(IDWriteColorGlyphRunEnumerator*, LibC::BOOL*, HRESULT)
-    get_current_run : Proc(IDWriteColorGlyphRunEnumerator*, DWRITE_COLOR_GLYPH_RUN**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    move_next : UInt64
+    get_current_run : UInt64
   end
 
   IDWriteColorGlyphRunEnumerator_GUID = "d31fbe17-f157-41a2-8d24-cb779e0560e8"
@@ -2253,16 +2253,16 @@ lib LibWin32
   end
 
   struct IDWriteRenderingParams2VTbl
-    query_interface : Proc(IDWriteRenderingParams2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteRenderingParams2*, UInt32)
-    release : Proc(IDWriteRenderingParams2*, UInt32)
-    get_gamma : Proc(IDWriteRenderingParams2*, Float32)
-    get_enhanced_contrast : Proc(IDWriteRenderingParams2*, Float32)
-    get_clear_type_level : Proc(IDWriteRenderingParams2*, Float32)
-    get_pixel_geometry : Proc(IDWriteRenderingParams2*, DWRITE_PIXEL_GEOMETRY)
-    get_rendering_mode : Proc(IDWriteRenderingParams2*, DWRITE_RENDERING_MODE)
-    get_grayscale_enhanced_contrast : Proc(IDWriteRenderingParams2*, Float32)
-    get_grid_fit_mode : Proc(IDWriteRenderingParams2*, DWRITE_GRID_FIT_MODE)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_gamma : UInt64
+    get_enhanced_contrast : UInt64
+    get_clear_type_level : UInt64
+    get_pixel_geometry : UInt64
+    get_rendering_mode : UInt64
+    get_grayscale_enhanced_contrast : UInt64
+    get_grid_fit_mode : UInt64
   end
 
   IDWriteRenderingParams2_GUID = "f9d711c3-9777-40ae-87e8-3e5af9bf0948"
@@ -2272,37 +2272,37 @@ lib LibWin32
   end
 
   struct IDWriteFactory2VTbl
-    query_interface : Proc(IDWriteFactory2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFactory2*, UInt32)
-    release : Proc(IDWriteFactory2*, UInt32)
-    get_system_font_collection : Proc(IDWriteFactory2*, IDWriteFontCollection*, LibC::BOOL, HRESULT)
-    create_custom_font_collection : Proc(IDWriteFactory2*, IDWriteFontCollectionLoader, Void*, UInt32, IDWriteFontCollection*, HRESULT)
-    register_font_collection_loader : Proc(IDWriteFactory2*, IDWriteFontCollectionLoader, HRESULT)
-    unregister_font_collection_loader : Proc(IDWriteFactory2*, IDWriteFontCollectionLoader, HRESULT)
-    create_font_file_reference : Proc(IDWriteFactory2*, LibC::LPWSTR, FILETIME*, IDWriteFontFile*, HRESULT)
-    create_custom_font_file_reference : Proc(IDWriteFactory2*, Void*, UInt32, IDWriteFontFileLoader, IDWriteFontFile*, HRESULT)
-    create_font_face : Proc(IDWriteFactory2*, DWRITE_FONT_FACE_TYPE, UInt32, IDWriteFontFile*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFace*, HRESULT)
-    create_rendering_params : Proc(IDWriteFactory2*, IDWriteRenderingParams*, HRESULT)
-    create_monitor_rendering_params : Proc(IDWriteFactory2*, HMONITOR, IDWriteRenderingParams*, HRESULT)
-    create_custom_rendering_params : Proc(IDWriteFactory2*, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams*, HRESULT)
-    register_font_file_loader : Proc(IDWriteFactory2*, IDWriteFontFileLoader, HRESULT)
-    unregister_font_file_loader : Proc(IDWriteFactory2*, IDWriteFontFileLoader, HRESULT)
-    create_text_format : Proc(IDWriteFactory2*, LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, Float32, LibC::LPWSTR, IDWriteTextFormat*, HRESULT)
-    create_typography : Proc(IDWriteFactory2*, IDWriteTypography*, HRESULT)
-    get_gdi_interop : Proc(IDWriteFactory2*, IDWriteGdiInterop*, HRESULT)
-    create_text_layout : Proc(IDWriteFactory2*, Char*, UInt32, IDWriteTextFormat, Float32, Float32, IDWriteTextLayout*, HRESULT)
-    create_gdi_compatible_text_layout : Proc(IDWriteFactory2*, Char*, UInt32, IDWriteTextFormat, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, IDWriteTextLayout*, HRESULT)
-    create_ellipsis_trimming_sign : Proc(IDWriteFactory2*, IDWriteTextFormat, IDWriteInlineObject*, HRESULT)
-    create_text_analyzer : Proc(IDWriteFactory2*, IDWriteTextAnalyzer*, HRESULT)
-    create_number_substitution : Proc(IDWriteFactory2*, DWRITE_NUMBER_SUBSTITUTION_METHOD, LibC::LPWSTR, LibC::BOOL, IDWriteNumberSubstitution*, HRESULT)
-    create_glyph_run_analysis : Proc(IDWriteFactory2*, DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    get_eudc_font_collection : Proc(IDWriteFactory2*, IDWriteFontCollection*, LibC::BOOL, HRESULT)
-    create_custom_rendering_params2 : Proc(IDWriteFactory2*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams1*, HRESULT)
-    get_system_font_fallback : Proc(IDWriteFactory2*, IDWriteFontFallback*, HRESULT)
-    create_font_fallback_builder : Proc(IDWriteFactory2*, IDWriteFontFallbackBuilder*, HRESULT)
-    translate_color_glyph_run : Proc(IDWriteFactory2*, Float32, Float32, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator*, HRESULT)
-    create_custom_rendering_params3 : Proc(IDWriteFactory2*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams2*, HRESULT)
-    create_glyph_run_analysis2 : Proc(IDWriteFactory2*, DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_system_font_collection : UInt64
+    create_custom_font_collection : UInt64
+    register_font_collection_loader : UInt64
+    unregister_font_collection_loader : UInt64
+    create_font_file_reference : UInt64
+    create_custom_font_file_reference : UInt64
+    create_font_face : UInt64
+    create_rendering_params : UInt64
+    create_monitor_rendering_params : UInt64
+    create_custom_rendering_params : UInt64
+    register_font_file_loader : UInt64
+    unregister_font_file_loader : UInt64
+    create_text_format : UInt64
+    create_typography : UInt64
+    get_gdi_interop : UInt64
+    create_text_layout : UInt64
+    create_gdi_compatible_text_layout : UInt64
+    create_ellipsis_trimming_sign : UInt64
+    create_text_analyzer : UInt64
+    create_number_substitution : UInt64
+    create_glyph_run_analysis : UInt64
+    get_eudc_font_collection : UInt64
+    create_custom_rendering_params2 : UInt64
+    get_system_font_fallback : UInt64
+    create_font_fallback_builder : UInt64
+    translate_color_glyph_run : UInt64
+    create_custom_rendering_params3 : UInt64
+    create_glyph_run_analysis2 : UInt64
   end
 
   IDWriteFactory2_GUID = "0439fc60-ca44-4994-8dee-3a9af7b732ec"
@@ -2312,17 +2312,17 @@ lib LibWin32
   end
 
   struct IDWriteRenderingParams3VTbl
-    query_interface : Proc(IDWriteRenderingParams3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteRenderingParams3*, UInt32)
-    release : Proc(IDWriteRenderingParams3*, UInt32)
-    get_gamma : Proc(IDWriteRenderingParams3*, Float32)
-    get_enhanced_contrast : Proc(IDWriteRenderingParams3*, Float32)
-    get_clear_type_level : Proc(IDWriteRenderingParams3*, Float32)
-    get_pixel_geometry : Proc(IDWriteRenderingParams3*, DWRITE_PIXEL_GEOMETRY)
-    get_rendering_mode : Proc(IDWriteRenderingParams3*, DWRITE_RENDERING_MODE)
-    get_grayscale_enhanced_contrast : Proc(IDWriteRenderingParams3*, Float32)
-    get_grid_fit_mode : Proc(IDWriteRenderingParams3*, DWRITE_GRID_FIT_MODE)
-    get_rendering_mode1 : Proc(IDWriteRenderingParams3*, DWRITE_RENDERING_MODE1)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_gamma : UInt64
+    get_enhanced_contrast : UInt64
+    get_clear_type_level : UInt64
+    get_pixel_geometry : UInt64
+    get_rendering_mode : UInt64
+    get_grayscale_enhanced_contrast : UInt64
+    get_grid_fit_mode : UInt64
+    get_rendering_mode1 : UInt64
   end
 
   IDWriteRenderingParams3_GUID = "b7924baa-391b-412a-8c5c-e44cc2d867dc"
@@ -2332,46 +2332,46 @@ lib LibWin32
   end
 
   struct IDWriteFactory3VTbl
-    query_interface : Proc(IDWriteFactory3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFactory3*, UInt32)
-    release : Proc(IDWriteFactory3*, UInt32)
-    get_system_font_collection : Proc(IDWriteFactory3*, IDWriteFontCollection*, LibC::BOOL, HRESULT)
-    create_custom_font_collection : Proc(IDWriteFactory3*, IDWriteFontCollectionLoader, Void*, UInt32, IDWriteFontCollection*, HRESULT)
-    register_font_collection_loader : Proc(IDWriteFactory3*, IDWriteFontCollectionLoader, HRESULT)
-    unregister_font_collection_loader : Proc(IDWriteFactory3*, IDWriteFontCollectionLoader, HRESULT)
-    create_font_file_reference : Proc(IDWriteFactory3*, LibC::LPWSTR, FILETIME*, IDWriteFontFile*, HRESULT)
-    create_custom_font_file_reference : Proc(IDWriteFactory3*, Void*, UInt32, IDWriteFontFileLoader, IDWriteFontFile*, HRESULT)
-    create_font_face : Proc(IDWriteFactory3*, DWRITE_FONT_FACE_TYPE, UInt32, IDWriteFontFile*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFace*, HRESULT)
-    create_rendering_params : Proc(IDWriteFactory3*, IDWriteRenderingParams*, HRESULT)
-    create_monitor_rendering_params : Proc(IDWriteFactory3*, HMONITOR, IDWriteRenderingParams*, HRESULT)
-    create_custom_rendering_params : Proc(IDWriteFactory3*, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams*, HRESULT)
-    register_font_file_loader : Proc(IDWriteFactory3*, IDWriteFontFileLoader, HRESULT)
-    unregister_font_file_loader : Proc(IDWriteFactory3*, IDWriteFontFileLoader, HRESULT)
-    create_text_format : Proc(IDWriteFactory3*, LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, Float32, LibC::LPWSTR, IDWriteTextFormat*, HRESULT)
-    create_typography : Proc(IDWriteFactory3*, IDWriteTypography*, HRESULT)
-    get_gdi_interop : Proc(IDWriteFactory3*, IDWriteGdiInterop*, HRESULT)
-    create_text_layout : Proc(IDWriteFactory3*, Char*, UInt32, IDWriteTextFormat, Float32, Float32, IDWriteTextLayout*, HRESULT)
-    create_gdi_compatible_text_layout : Proc(IDWriteFactory3*, Char*, UInt32, IDWriteTextFormat, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, IDWriteTextLayout*, HRESULT)
-    create_ellipsis_trimming_sign : Proc(IDWriteFactory3*, IDWriteTextFormat, IDWriteInlineObject*, HRESULT)
-    create_text_analyzer : Proc(IDWriteFactory3*, IDWriteTextAnalyzer*, HRESULT)
-    create_number_substitution : Proc(IDWriteFactory3*, DWRITE_NUMBER_SUBSTITUTION_METHOD, LibC::LPWSTR, LibC::BOOL, IDWriteNumberSubstitution*, HRESULT)
-    create_glyph_run_analysis : Proc(IDWriteFactory3*, DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    get_eudc_font_collection : Proc(IDWriteFactory3*, IDWriteFontCollection*, LibC::BOOL, HRESULT)
-    create_custom_rendering_params2 : Proc(IDWriteFactory3*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams1*, HRESULT)
-    get_system_font_fallback : Proc(IDWriteFactory3*, IDWriteFontFallback*, HRESULT)
-    create_font_fallback_builder : Proc(IDWriteFactory3*, IDWriteFontFallbackBuilder*, HRESULT)
-    translate_color_glyph_run : Proc(IDWriteFactory3*, Float32, Float32, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator*, HRESULT)
-    create_custom_rendering_params3 : Proc(IDWriteFactory3*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams2*, HRESULT)
-    create_glyph_run_analysis2 : Proc(IDWriteFactory3*, DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    create_glyph_run_analysis3 : Proc(IDWriteFactory3*, DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE1, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    create_custom_rendering_params4 : Proc(IDWriteFactory3*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE1, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams3*, HRESULT)
-    create_font_face_reference : Proc(IDWriteFactory3*, IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)
-    create_font_face_reference2 : Proc(IDWriteFactory3*, LibC::LPWSTR, FILETIME*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)
-    get_system_font_set : Proc(IDWriteFactory3*, IDWriteFontSet*, HRESULT)
-    create_font_set_builder : Proc(IDWriteFactory3*, IDWriteFontSetBuilder*, HRESULT)
-    create_font_collection_from_font_set : Proc(IDWriteFactory3*, IDWriteFontSet, IDWriteFontCollection1*, HRESULT)
-    get_system_font_collection2 : Proc(IDWriteFactory3*, LibC::BOOL, IDWriteFontCollection1*, LibC::BOOL, HRESULT)
-    get_font_download_queue : Proc(IDWriteFactory3*, IDWriteFontDownloadQueue*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_system_font_collection : UInt64
+    create_custom_font_collection : UInt64
+    register_font_collection_loader : UInt64
+    unregister_font_collection_loader : UInt64
+    create_font_file_reference : UInt64
+    create_custom_font_file_reference : UInt64
+    create_font_face : UInt64
+    create_rendering_params : UInt64
+    create_monitor_rendering_params : UInt64
+    create_custom_rendering_params : UInt64
+    register_font_file_loader : UInt64
+    unregister_font_file_loader : UInt64
+    create_text_format : UInt64
+    create_typography : UInt64
+    get_gdi_interop : UInt64
+    create_text_layout : UInt64
+    create_gdi_compatible_text_layout : UInt64
+    create_ellipsis_trimming_sign : UInt64
+    create_text_analyzer : UInt64
+    create_number_substitution : UInt64
+    create_glyph_run_analysis : UInt64
+    get_eudc_font_collection : UInt64
+    create_custom_rendering_params2 : UInt64
+    get_system_font_fallback : UInt64
+    create_font_fallback_builder : UInt64
+    translate_color_glyph_run : UInt64
+    create_custom_rendering_params3 : UInt64
+    create_glyph_run_analysis2 : UInt64
+    create_glyph_run_analysis3 : UInt64
+    create_custom_rendering_params4 : UInt64
+    create_font_face_reference : UInt64
+    create_font_face_reference2 : UInt64
+    get_system_font_set : UInt64
+    create_font_set_builder : UInt64
+    create_font_collection_from_font_set : UInt64
+    get_system_font_collection2 : UInt64
+    get_font_download_queue : UInt64
   end
 
   IDWriteFactory3_GUID = "9a1b41c3-d3bb-466a-87fc-fe67556a3b65"
@@ -2381,19 +2381,19 @@ lib LibWin32
   end
 
   struct IDWriteFontSetVTbl
-    query_interface : Proc(IDWriteFontSet*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontSet*, UInt32)
-    release : Proc(IDWriteFontSet*, UInt32)
-    get_font_count : Proc(IDWriteFontSet*, UInt32)
-    get_font_face_reference : Proc(IDWriteFontSet*, UInt32, IDWriteFontFaceReference*, HRESULT)
-    find_font_face_reference : Proc(IDWriteFontSet*, IDWriteFontFaceReference, UInt32*, LibC::BOOL*, HRESULT)
-    find_font_face : Proc(IDWriteFontSet*, IDWriteFontFace, UInt32*, LibC::BOOL*, HRESULT)
-    get_property_values : Proc(IDWriteFontSet*, DWRITE_FONT_PROPERTY_ID, IDWriteStringList*, HRESULT)
-    get_property_values2 : Proc(IDWriteFontSet*, DWRITE_FONT_PROPERTY_ID, LibC::LPWSTR, IDWriteStringList*, HRESULT)
-    get_property_values3 : Proc(IDWriteFontSet*, UInt32, DWRITE_FONT_PROPERTY_ID, LibC::BOOL*, IDWriteLocalizedStrings*, HRESULT)
-    get_property_occurrence_count : Proc(IDWriteFontSet*, DWRITE_FONT_PROPERTY*, UInt32*, HRESULT)
-    get_matching_fonts : Proc(IDWriteFontSet*, LibC::LPWSTR, DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFontSet*, HRESULT)
-    get_matching_fonts2 : Proc(IDWriteFontSet*, DWRITE_FONT_PROPERTY*, UInt32, IDWriteFontSet*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_count : UInt64
+    get_font_face_reference : UInt64
+    find_font_face_reference : UInt64
+    find_font_face : UInt64
+    get_property_values : UInt64
+    get_property_values2 : UInt64
+    get_property_values3 : UInt64
+    get_property_occurrence_count : UInt64
+    get_matching_fonts : UInt64
+    get_matching_fonts2 : UInt64
   end
 
   IDWriteFontSet_GUID = "53585141-d9f8-4095-8321-d73cf6bd116b"
@@ -2403,13 +2403,13 @@ lib LibWin32
   end
 
   struct IDWriteFontSetBuilderVTbl
-    query_interface : Proc(IDWriteFontSetBuilder*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontSetBuilder*, UInt32)
-    release : Proc(IDWriteFontSetBuilder*, UInt32)
-    add_font_face_reference : Proc(IDWriteFontSetBuilder*, IDWriteFontFaceReference, DWRITE_FONT_PROPERTY*, UInt32, HRESULT)
-    add_font_face_reference2 : Proc(IDWriteFontSetBuilder*, IDWriteFontFaceReference, HRESULT)
-    add_font_set : Proc(IDWriteFontSetBuilder*, IDWriteFontSet, HRESULT)
-    create_font_set : Proc(IDWriteFontSetBuilder*, IDWriteFontSet*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_font_face_reference : UInt64
+    add_font_face_reference2 : UInt64
+    add_font_set : UInt64
+    create_font_set : UInt64
   end
 
   IDWriteFontSetBuilder_GUID = "2f642afe-9c68-4f40-b8be-457401afcb3d"
@@ -2419,15 +2419,15 @@ lib LibWin32
   end
 
   struct IDWriteFontCollection1VTbl
-    query_interface : Proc(IDWriteFontCollection1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontCollection1*, UInt32)
-    release : Proc(IDWriteFontCollection1*, UInt32)
-    get_font_family_count : Proc(IDWriteFontCollection1*, UInt32)
-    get_font_family : Proc(IDWriteFontCollection1*, UInt32, IDWriteFontFamily*, HRESULT)
-    find_family_name : Proc(IDWriteFontCollection1*, LibC::LPWSTR, UInt32*, LibC::BOOL*, HRESULT)
-    get_font_from_font_face : Proc(IDWriteFontCollection1*, IDWriteFontFace, IDWriteFont*, HRESULT)
-    get_font_set : Proc(IDWriteFontCollection1*, IDWriteFontSet*, HRESULT)
-    get_font_family2 : Proc(IDWriteFontCollection1*, UInt32, IDWriteFontFamily1*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_family_count : UInt64
+    get_font_family : UInt64
+    find_family_name : UInt64
+    get_font_from_font_face : UInt64
+    get_font_set : UInt64
+    get_font_family2 : UInt64
   end
 
   IDWriteFontCollection1_GUID = "53585141-d9f8-4095-8321-d73cf6bd116c"
@@ -2437,18 +2437,18 @@ lib LibWin32
   end
 
   struct IDWriteFontFamily1VTbl
-    query_interface : Proc(IDWriteFontFamily1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFamily1*, UInt32)
-    release : Proc(IDWriteFontFamily1*, UInt32)
-    get_font_collection : Proc(IDWriteFontFamily1*, IDWriteFontCollection*, HRESULT)
-    get_font_count : Proc(IDWriteFontFamily1*, UInt32)
-    get_font : Proc(IDWriteFontFamily1*, UInt32, IDWriteFont*, HRESULT)
-    get_family_names : Proc(IDWriteFontFamily1*, IDWriteLocalizedStrings*, HRESULT)
-    get_first_matching_font : Proc(IDWriteFontFamily1*, DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFont*, HRESULT)
-    get_matching_fonts : Proc(IDWriteFontFamily1*, DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFontList*, HRESULT)
-    get_font_locality : Proc(IDWriteFontFamily1*, UInt32, DWRITE_LOCALITY)
-    get_font2 : Proc(IDWriteFontFamily1*, UInt32, IDWriteFont3*, HRESULT)
-    get_font_face_reference : Proc(IDWriteFontFamily1*, UInt32, IDWriteFontFaceReference*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_collection : UInt64
+    get_font_count : UInt64
+    get_font : UInt64
+    get_family_names : UInt64
+    get_first_matching_font : UInt64
+    get_matching_fonts : UInt64
+    get_font_locality : UInt64
+    get_font2 : UInt64
+    get_font_face_reference : UInt64
   end
 
   IDWriteFontFamily1_GUID = "da20d8ef-812a-4c43-9802-62ec4abd7adf"
@@ -2458,15 +2458,15 @@ lib LibWin32
   end
 
   struct IDWriteFontList1VTbl
-    query_interface : Proc(IDWriteFontList1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontList1*, UInt32)
-    release : Proc(IDWriteFontList1*, UInt32)
-    get_font_collection : Proc(IDWriteFontList1*, IDWriteFontCollection*, HRESULT)
-    get_font_count : Proc(IDWriteFontList1*, UInt32)
-    get_font : Proc(IDWriteFontList1*, UInt32, IDWriteFont*, HRESULT)
-    get_font_locality : Proc(IDWriteFontList1*, UInt32, DWRITE_LOCALITY)
-    get_font2 : Proc(IDWriteFontList1*, UInt32, IDWriteFont3*, HRESULT)
-    get_font_face_reference : Proc(IDWriteFontList1*, UInt32, IDWriteFontFaceReference*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_collection : UInt64
+    get_font_count : UInt64
+    get_font : UInt64
+    get_font_locality : UInt64
+    get_font2 : UInt64
+    get_font_face_reference : UInt64
   end
 
   IDWriteFontList1_GUID = "da20d8ef-812a-4c43-9802-62ec4abd7ade"
@@ -2476,23 +2476,23 @@ lib LibWin32
   end
 
   struct IDWriteFontFaceReferenceVTbl
-    query_interface : Proc(IDWriteFontFaceReference*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFaceReference*, UInt32)
-    release : Proc(IDWriteFontFaceReference*, UInt32)
-    create_font_face : Proc(IDWriteFontFaceReference*, IDWriteFontFace3*, HRESULT)
-    create_font_face_with_simulations : Proc(IDWriteFontFaceReference*, DWRITE_FONT_SIMULATIONS, IDWriteFontFace3*, HRESULT)
-    equals : Proc(IDWriteFontFaceReference*, IDWriteFontFaceReference, LibC::BOOL)
-    get_font_face_index : Proc(IDWriteFontFaceReference*, UInt32)
-    get_simulations : Proc(IDWriteFontFaceReference*, DWRITE_FONT_SIMULATIONS)
-    get_font_file : Proc(IDWriteFontFaceReference*, IDWriteFontFile*, HRESULT)
-    get_local_file_size : Proc(IDWriteFontFaceReference*, UInt64)
-    get_file_size : Proc(IDWriteFontFaceReference*, UInt64)
-    get_file_time : Proc(IDWriteFontFaceReference*, FILETIME*, HRESULT)
-    get_locality : Proc(IDWriteFontFaceReference*, DWRITE_LOCALITY)
-    enqueue_font_download_request : Proc(IDWriteFontFaceReference*, HRESULT)
-    enqueue_character_download_request : Proc(IDWriteFontFaceReference*, Char*, UInt32, HRESULT)
-    enqueue_glyph_download_request : Proc(IDWriteFontFaceReference*, UInt16*, UInt32, HRESULT)
-    enqueue_file_fragment_download_request : Proc(IDWriteFontFaceReference*, UInt64, UInt64, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_font_face : UInt64
+    create_font_face_with_simulations : UInt64
+    equals : UInt64
+    get_font_face_index : UInt64
+    get_simulations : UInt64
+    get_font_file : UInt64
+    get_local_file_size : UInt64
+    get_file_size : UInt64
+    get_file_time : UInt64
+    get_locality : UInt64
+    enqueue_font_download_request : UInt64
+    enqueue_character_download_request : UInt64
+    enqueue_glyph_download_request : UInt64
+    enqueue_file_fragment_download_request : UInt64
   end
 
   IDWriteFontFaceReference_GUID = "5e7fa7ca-dde3-424c-89f0-9fcd6fed58cd"
@@ -2502,30 +2502,30 @@ lib LibWin32
   end
 
   struct IDWriteFont3VTbl
-    query_interface : Proc(IDWriteFont3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFont3*, UInt32)
-    release : Proc(IDWriteFont3*, UInt32)
-    get_font_family : Proc(IDWriteFont3*, IDWriteFontFamily*, HRESULT)
-    get_weight : Proc(IDWriteFont3*, DWRITE_FONT_WEIGHT)
-    get_stretch : Proc(IDWriteFont3*, DWRITE_FONT_STRETCH)
-    get_style : Proc(IDWriteFont3*, DWRITE_FONT_STYLE)
-    is_symbol_font : Proc(IDWriteFont3*, LibC::BOOL)
-    get_face_names : Proc(IDWriteFont3*, IDWriteLocalizedStrings*, HRESULT)
-    get_informational_strings : Proc(IDWriteFont3*, DWRITE_INFORMATIONAL_STRING_ID, IDWriteLocalizedStrings*, LibC::BOOL*, HRESULT)
-    get_simulations : Proc(IDWriteFont3*, DWRITE_FONT_SIMULATIONS)
-    get_metrics : Proc(IDWriteFont3*, DWRITE_FONT_METRICS*, Void)
-    has_character : Proc(IDWriteFont3*, UInt32, LibC::BOOL*, HRESULT)
-    create_font_face : Proc(IDWriteFont3*, IDWriteFontFace*, HRESULT)
-    get_metrics2 : Proc(IDWriteFont3*, DWRITE_FONT_METRICS1*, Void)
-    get_panose : Proc(IDWriteFont3*, DWRITE_PANOSE*, Void)
-    get_unicode_ranges : Proc(IDWriteFont3*, UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)
-    is_monospaced_font : Proc(IDWriteFont3*, LibC::BOOL)
-    is_color_font : Proc(IDWriteFont3*, LibC::BOOL)
-    create_font_face2 : Proc(IDWriteFont3*, IDWriteFontFace3*, HRESULT)
-    equals : Proc(IDWriteFont3*, IDWriteFont, LibC::BOOL)
-    get_font_face_reference : Proc(IDWriteFont3*, IDWriteFontFaceReference*, HRESULT)
-    has_character2 : Proc(IDWriteFont3*, UInt32, LibC::BOOL)
-    get_locality : Proc(IDWriteFont3*, DWRITE_LOCALITY)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_family : UInt64
+    get_weight : UInt64
+    get_stretch : UInt64
+    get_style : UInt64
+    is_symbol_font : UInt64
+    get_face_names : UInt64
+    get_informational_strings : UInt64
+    get_simulations : UInt64
+    get_metrics : UInt64
+    has_character : UInt64
+    create_font_face : UInt64
+    get_metrics2 : UInt64
+    get_panose : UInt64
+    get_unicode_ranges : UInt64
+    is_monospaced_font : UInt64
+    is_color_font : UInt64
+    create_font_face2 : UInt64
+    equals : UInt64
+    get_font_face_reference : UInt64
+    has_character2 : UInt64
+    get_locality : UInt64
   end
 
   IDWriteFont3_GUID = "29748ed6-8c9c-4a6a-be0b-d912e8538944"
@@ -2535,55 +2535,55 @@ lib LibWin32
   end
 
   struct IDWriteFontFace3VTbl
-    query_interface : Proc(IDWriteFontFace3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFace3*, UInt32)
-    release : Proc(IDWriteFontFace3*, UInt32)
-    get_type : Proc(IDWriteFontFace3*, DWRITE_FONT_FACE_TYPE)
-    get_files : Proc(IDWriteFontFace3*, UInt32*, IDWriteFontFile*, HRESULT)
-    get_index : Proc(IDWriteFontFace3*, UInt32)
-    get_simulations : Proc(IDWriteFontFace3*, DWRITE_FONT_SIMULATIONS)
-    is_symbol_font : Proc(IDWriteFontFace3*, LibC::BOOL)
-    get_metrics : Proc(IDWriteFontFace3*, DWRITE_FONT_METRICS*, Void)
-    get_glyph_count : Proc(IDWriteFontFace3*, UInt16)
-    get_design_glyph_metrics : Proc(IDWriteFontFace3*, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)
-    get_glyph_indices : Proc(IDWriteFontFace3*, UInt32*, UInt32, UInt16*, HRESULT)
-    try_get_font_table : Proc(IDWriteFontFace3*, UInt32, Void**, UInt32*, Void**, LibC::BOOL*, HRESULT)
-    release_font_table : Proc(IDWriteFontFace3*, Void*, Void)
-    get_glyph_run_outline : Proc(IDWriteFontFace3*, Float32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, UInt32, LibC::BOOL, LibC::BOOL, ID2D1SimplifiedGeometrySink, HRESULT)
-    get_recommended_rendering_mode : Proc(IDWriteFontFace3*, Float32, Float32, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, HRESULT)
-    get_gdi_compatible_metrics : Proc(IDWriteFontFace3*, Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS*, HRESULT)
-    get_gdi_compatible_glyph_metrics : Proc(IDWriteFontFace3*, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)
-    get_metrics2 : Proc(IDWriteFontFace3*, DWRITE_FONT_METRICS1*, Void)
-    get_gdi_compatible_metrics2 : Proc(IDWriteFontFace3*, Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS1*, HRESULT)
-    get_caret_metrics : Proc(IDWriteFontFace3*, DWRITE_CARET_METRICS*, Void)
-    get_unicode_ranges : Proc(IDWriteFontFace3*, UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)
-    is_monospaced_font : Proc(IDWriteFontFace3*, LibC::BOOL)
-    get_design_glyph_advances : Proc(IDWriteFontFace3*, UInt32, UInt16*, Int32*, LibC::BOOL, HRESULT)
-    get_gdi_compatible_glyph_advances : Proc(IDWriteFontFace3*, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, UInt32, UInt16*, Int32*, HRESULT)
-    get_kerning_pair_adjustments : Proc(IDWriteFontFace3*, UInt32, UInt16*, Int32*, HRESULT)
-    has_kerning_pairs : Proc(IDWriteFontFace3*, LibC::BOOL)
-    get_recommended_rendering_mode2 : Proc(IDWriteFontFace3*, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, DWRITE_RENDERING_MODE*, HRESULT)
-    get_vertical_glyph_variants : Proc(IDWriteFontFace3*, UInt32, UInt16*, UInt16*, HRESULT)
-    has_vertical_glyph_variants : Proc(IDWriteFontFace3*, LibC::BOOL)
-    is_color_font : Proc(IDWriteFontFace3*, LibC::BOOL)
-    get_color_palette_count : Proc(IDWriteFontFace3*, UInt32)
-    get_palette_entry_count : Proc(IDWriteFontFace3*, UInt32)
-    get_palette_entries : Proc(IDWriteFontFace3*, UInt32, UInt32, UInt32, DWRITE_COLOR_F*, HRESULT)
-    get_recommended_rendering_mode3 : Proc(IDWriteFontFace3*, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, DWRITE_GRID_FIT_MODE*, HRESULT)
-    get_font_face_reference : Proc(IDWriteFontFace3*, IDWriteFontFaceReference*, HRESULT)
-    get_panose : Proc(IDWriteFontFace3*, DWRITE_PANOSE*, Void)
-    get_weight : Proc(IDWriteFontFace3*, DWRITE_FONT_WEIGHT)
-    get_stretch : Proc(IDWriteFontFace3*, DWRITE_FONT_STRETCH)
-    get_style : Proc(IDWriteFontFace3*, DWRITE_FONT_STYLE)
-    get_family_names : Proc(IDWriteFontFace3*, IDWriteLocalizedStrings*, HRESULT)
-    get_face_names : Proc(IDWriteFontFace3*, IDWriteLocalizedStrings*, HRESULT)
-    get_informational_strings : Proc(IDWriteFontFace3*, DWRITE_INFORMATIONAL_STRING_ID, IDWriteLocalizedStrings*, LibC::BOOL*, HRESULT)
-    has_character : Proc(IDWriteFontFace3*, UInt32, LibC::BOOL)
-    get_recommended_rendering_mode4 : Proc(IDWriteFontFace3*, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE1*, DWRITE_GRID_FIT_MODE*, HRESULT)
-    is_character_local : Proc(IDWriteFontFace3*, UInt32, LibC::BOOL)
-    is_glyph_local : Proc(IDWriteFontFace3*, UInt16, LibC::BOOL)
-    are_characters_local : Proc(IDWriteFontFace3*, Char*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)
-    are_glyphs_local : Proc(IDWriteFontFace3*, UInt16*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type : UInt64
+    get_files : UInt64
+    get_index : UInt64
+    get_simulations : UInt64
+    is_symbol_font : UInt64
+    get_metrics : UInt64
+    get_glyph_count : UInt64
+    get_design_glyph_metrics : UInt64
+    get_glyph_indices : UInt64
+    try_get_font_table : UInt64
+    release_font_table : UInt64
+    get_glyph_run_outline : UInt64
+    get_recommended_rendering_mode : UInt64
+    get_gdi_compatible_metrics : UInt64
+    get_gdi_compatible_glyph_metrics : UInt64
+    get_metrics2 : UInt64
+    get_gdi_compatible_metrics2 : UInt64
+    get_caret_metrics : UInt64
+    get_unicode_ranges : UInt64
+    is_monospaced_font : UInt64
+    get_design_glyph_advances : UInt64
+    get_gdi_compatible_glyph_advances : UInt64
+    get_kerning_pair_adjustments : UInt64
+    has_kerning_pairs : UInt64
+    get_recommended_rendering_mode2 : UInt64
+    get_vertical_glyph_variants : UInt64
+    has_vertical_glyph_variants : UInt64
+    is_color_font : UInt64
+    get_color_palette_count : UInt64
+    get_palette_entry_count : UInt64
+    get_palette_entries : UInt64
+    get_recommended_rendering_mode3 : UInt64
+    get_font_face_reference : UInt64
+    get_panose : UInt64
+    get_weight : UInt64
+    get_stretch : UInt64
+    get_style : UInt64
+    get_family_names : UInt64
+    get_face_names : UInt64
+    get_informational_strings : UInt64
+    has_character : UInt64
+    get_recommended_rendering_mode4 : UInt64
+    is_character_local : UInt64
+    is_glyph_local : UInt64
+    are_characters_local : UInt64
+    are_glyphs_local : UInt64
   end
 
   IDWriteFontFace3_GUID = "d37d7598-09be-4222-a236-2081341cc1f2"
@@ -2593,14 +2593,14 @@ lib LibWin32
   end
 
   struct IDWriteStringListVTbl
-    query_interface : Proc(IDWriteStringList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteStringList*, UInt32)
-    release : Proc(IDWriteStringList*, UInt32)
-    get_count : Proc(IDWriteStringList*, UInt32)
-    get_locale_name_length : Proc(IDWriteStringList*, UInt32, UInt32*, HRESULT)
-    get_locale_name : Proc(IDWriteStringList*, UInt32, Char*, UInt32, HRESULT)
-    get_string_length : Proc(IDWriteStringList*, UInt32, UInt32*, HRESULT)
-    get_string : Proc(IDWriteStringList*, UInt32, Char*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_locale_name_length : UInt64
+    get_locale_name : UInt64
+    get_string_length : UInt64
+    get_string : UInt64
   end
 
   IDWriteStringList_GUID = "cfee3140-1157-47ca-8b85-31bfcf3f2d0e"
@@ -2610,10 +2610,10 @@ lib LibWin32
   end
 
   struct IDWriteFontDownloadListenerVTbl
-    query_interface : Proc(IDWriteFontDownloadListener*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontDownloadListener*, UInt32)
-    release : Proc(IDWriteFontDownloadListener*, UInt32)
-    download_completed : Proc(IDWriteFontDownloadListener*, IDWriteFontDownloadQueue, IUnknown, HRESULT, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    download_completed : UInt64
   end
 
   IDWriteFontDownloadListener_GUID = "b06fe5b9-43ec-4393-881b-dbe4dc72fda7"
@@ -2623,15 +2623,15 @@ lib LibWin32
   end
 
   struct IDWriteFontDownloadQueueVTbl
-    query_interface : Proc(IDWriteFontDownloadQueue*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontDownloadQueue*, UInt32)
-    release : Proc(IDWriteFontDownloadQueue*, UInt32)
-    add_listener : Proc(IDWriteFontDownloadQueue*, IDWriteFontDownloadListener, UInt32*, HRESULT)
-    remove_listener : Proc(IDWriteFontDownloadQueue*, UInt32, HRESULT)
-    is_empty : Proc(IDWriteFontDownloadQueue*, LibC::BOOL)
-    begin_download : Proc(IDWriteFontDownloadQueue*, IUnknown, HRESULT)
-    cancel_download : Proc(IDWriteFontDownloadQueue*, HRESULT)
-    get_generation_count : Proc(IDWriteFontDownloadQueue*, UInt64)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_listener : UInt64
+    remove_listener : UInt64
+    is_empty : UInt64
+    begin_download : UInt64
+    cancel_download : UInt64
+    get_generation_count : UInt64
   end
 
   IDWriteFontDownloadQueue_GUID = "b71e6052-5aea-4fa3-832e-f60d431f7e91"
@@ -2641,18 +2641,18 @@ lib LibWin32
   end
 
   struct IDWriteGdiInterop1VTbl
-    query_interface : Proc(IDWriteGdiInterop1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteGdiInterop1*, UInt32)
-    release : Proc(IDWriteGdiInterop1*, UInt32)
-    create_font_from_logfont : Proc(IDWriteGdiInterop1*, LOGFONTW*, IDWriteFont*, HRESULT)
-    convert_font_to_logfont : Proc(IDWriteGdiInterop1*, IDWriteFont, LOGFONTW*, LibC::BOOL*, HRESULT)
-    convert_font_face_to_logfont : Proc(IDWriteGdiInterop1*, IDWriteFontFace, LOGFONTW*, HRESULT)
-    create_font_face_from_hdc : Proc(IDWriteGdiInterop1*, HDC, IDWriteFontFace*, HRESULT)
-    create_bitmap_render_target : Proc(IDWriteGdiInterop1*, HDC, UInt32, UInt32, IDWriteBitmapRenderTarget*, HRESULT)
-    create_font_from_logfont2 : Proc(IDWriteGdiInterop1*, LOGFONTW*, IDWriteFontCollection, IDWriteFont*, HRESULT)
-    get_font_signature : Proc(IDWriteGdiInterop1*, IDWriteFontFace, FONTSIGNATURE*, HRESULT)
-    get_font_signature2 : Proc(IDWriteGdiInterop1*, IDWriteFont, FONTSIGNATURE*, HRESULT)
-    get_matching_fonts_by_logfont : Proc(IDWriteGdiInterop1*, LOGFONTA*, IDWriteFontSet, IDWriteFontSet*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_font_from_logfont : UInt64
+    convert_font_to_logfont : UInt64
+    convert_font_face_to_logfont : UInt64
+    create_font_face_from_hdc : UInt64
+    create_bitmap_render_target : UInt64
+    create_font_from_logfont2 : UInt64
+    get_font_signature : UInt64
+    get_font_signature2 : UInt64
+    get_matching_fonts_by_logfont : UInt64
   end
 
   IDWriteGdiInterop1_GUID = "4556be70-3abd-4f70-90be-421780a6f515"
@@ -2662,44 +2662,44 @@ lib LibWin32
   end
 
   struct IDWriteTextFormat2VTbl
-    query_interface : Proc(IDWriteTextFormat2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextFormat2*, UInt32)
-    release : Proc(IDWriteTextFormat2*, UInt32)
-    set_text_alignment : Proc(IDWriteTextFormat2*, DWRITE_TEXT_ALIGNMENT, HRESULT)
-    set_paragraph_alignment : Proc(IDWriteTextFormat2*, DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)
-    set_word_wrapping : Proc(IDWriteTextFormat2*, DWRITE_WORD_WRAPPING, HRESULT)
-    set_reading_direction : Proc(IDWriteTextFormat2*, DWRITE_READING_DIRECTION, HRESULT)
-    set_flow_direction : Proc(IDWriteTextFormat2*, DWRITE_FLOW_DIRECTION, HRESULT)
-    set_incremental_tab_stop : Proc(IDWriteTextFormat2*, Float32, HRESULT)
-    set_trimming : Proc(IDWriteTextFormat2*, DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)
-    set_line_spacing : Proc(IDWriteTextFormat2*, DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)
-    get_text_alignment : Proc(IDWriteTextFormat2*, DWRITE_TEXT_ALIGNMENT)
-    get_paragraph_alignment : Proc(IDWriteTextFormat2*, DWRITE_PARAGRAPH_ALIGNMENT)
-    get_word_wrapping : Proc(IDWriteTextFormat2*, DWRITE_WORD_WRAPPING)
-    get_reading_direction : Proc(IDWriteTextFormat2*, DWRITE_READING_DIRECTION)
-    get_flow_direction : Proc(IDWriteTextFormat2*, DWRITE_FLOW_DIRECTION)
-    get_incremental_tab_stop : Proc(IDWriteTextFormat2*, Float32)
-    get_trimming : Proc(IDWriteTextFormat2*, DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)
-    get_line_spacing : Proc(IDWriteTextFormat2*, DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)
-    get_font_collection : Proc(IDWriteTextFormat2*, IDWriteFontCollection*, HRESULT)
-    get_font_family_name_length : Proc(IDWriteTextFormat2*, UInt32)
-    get_font_family_name : Proc(IDWriteTextFormat2*, Char*, UInt32, HRESULT)
-    get_font_weight : Proc(IDWriteTextFormat2*, DWRITE_FONT_WEIGHT)
-    get_font_style : Proc(IDWriteTextFormat2*, DWRITE_FONT_STYLE)
-    get_font_stretch : Proc(IDWriteTextFormat2*, DWRITE_FONT_STRETCH)
-    get_font_size : Proc(IDWriteTextFormat2*, Float32)
-    get_locale_name_length : Proc(IDWriteTextFormat2*, UInt32)
-    get_locale_name : Proc(IDWriteTextFormat2*, Char*, UInt32, HRESULT)
-    set_vertical_glyph_orientation : Proc(IDWriteTextFormat2*, DWRITE_VERTICAL_GLYPH_ORIENTATION, HRESULT)
-    get_vertical_glyph_orientation : Proc(IDWriteTextFormat2*, DWRITE_VERTICAL_GLYPH_ORIENTATION)
-    set_last_line_wrapping : Proc(IDWriteTextFormat2*, LibC::BOOL, HRESULT)
-    get_last_line_wrapping : Proc(IDWriteTextFormat2*, LibC::BOOL)
-    set_optical_alignment : Proc(IDWriteTextFormat2*, DWRITE_OPTICAL_ALIGNMENT, HRESULT)
-    get_optical_alignment : Proc(IDWriteTextFormat2*, DWRITE_OPTICAL_ALIGNMENT)
-    set_font_fallback : Proc(IDWriteTextFormat2*, IDWriteFontFallback, HRESULT)
-    get_font_fallback : Proc(IDWriteTextFormat2*, IDWriteFontFallback*, HRESULT)
-    set_line_spacing2 : Proc(IDWriteTextFormat2*, DWRITE_LINE_SPACING*, HRESULT)
-    get_line_spacing2 : Proc(IDWriteTextFormat2*, DWRITE_LINE_SPACING*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_text_alignment : UInt64
+    set_paragraph_alignment : UInt64
+    set_word_wrapping : UInt64
+    set_reading_direction : UInt64
+    set_flow_direction : UInt64
+    set_incremental_tab_stop : UInt64
+    set_trimming : UInt64
+    set_line_spacing : UInt64
+    get_text_alignment : UInt64
+    get_paragraph_alignment : UInt64
+    get_word_wrapping : UInt64
+    get_reading_direction : UInt64
+    get_flow_direction : UInt64
+    get_incremental_tab_stop : UInt64
+    get_trimming : UInt64
+    get_line_spacing : UInt64
+    get_font_collection : UInt64
+    get_font_family_name_length : UInt64
+    get_font_family_name : UInt64
+    get_font_weight : UInt64
+    get_font_style : UInt64
+    get_font_stretch : UInt64
+    get_font_size : UInt64
+    get_locale_name_length : UInt64
+    get_locale_name : UInt64
+    set_vertical_glyph_orientation : UInt64
+    get_vertical_glyph_orientation : UInt64
+    set_last_line_wrapping : UInt64
+    get_last_line_wrapping : UInt64
+    set_optical_alignment : UInt64
+    get_optical_alignment : UInt64
+    set_font_fallback : UInt64
+    get_font_fallback : UInt64
+    set_line_spacing2 : UInt64
+    get_line_spacing2 : UInt64
   end
 
   IDWriteTextFormat2_GUID = "f67e0edd-9e3d-4ecc-8c32-4183253dfe70"
@@ -2709,90 +2709,90 @@ lib LibWin32
   end
 
   struct IDWriteTextLayout3VTbl
-    query_interface : Proc(IDWriteTextLayout3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextLayout3*, UInt32)
-    release : Proc(IDWriteTextLayout3*, UInt32)
-    set_text_alignment : Proc(IDWriteTextLayout3*, DWRITE_TEXT_ALIGNMENT, HRESULT)
-    set_paragraph_alignment : Proc(IDWriteTextLayout3*, DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)
-    set_word_wrapping : Proc(IDWriteTextLayout3*, DWRITE_WORD_WRAPPING, HRESULT)
-    set_reading_direction : Proc(IDWriteTextLayout3*, DWRITE_READING_DIRECTION, HRESULT)
-    set_flow_direction : Proc(IDWriteTextLayout3*, DWRITE_FLOW_DIRECTION, HRESULT)
-    set_incremental_tab_stop : Proc(IDWriteTextLayout3*, Float32, HRESULT)
-    set_trimming : Proc(IDWriteTextLayout3*, DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)
-    set_line_spacing : Proc(IDWriteTextLayout3*, DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)
-    get_text_alignment : Proc(IDWriteTextLayout3*, DWRITE_TEXT_ALIGNMENT)
-    get_paragraph_alignment : Proc(IDWriteTextLayout3*, DWRITE_PARAGRAPH_ALIGNMENT)
-    get_word_wrapping : Proc(IDWriteTextLayout3*, DWRITE_WORD_WRAPPING)
-    get_reading_direction : Proc(IDWriteTextLayout3*, DWRITE_READING_DIRECTION)
-    get_flow_direction : Proc(IDWriteTextLayout3*, DWRITE_FLOW_DIRECTION)
-    get_incremental_tab_stop : Proc(IDWriteTextLayout3*, Float32)
-    get_trimming : Proc(IDWriteTextLayout3*, DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)
-    get_line_spacing : Proc(IDWriteTextLayout3*, DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)
-    get_font_collection : Proc(IDWriteTextLayout3*, IDWriteFontCollection*, HRESULT)
-    get_font_family_name_length : Proc(IDWriteTextLayout3*, UInt32)
-    get_font_family_name : Proc(IDWriteTextLayout3*, Char*, UInt32, HRESULT)
-    get_font_weight : Proc(IDWriteTextLayout3*, DWRITE_FONT_WEIGHT)
-    get_font_style : Proc(IDWriteTextLayout3*, DWRITE_FONT_STYLE)
-    get_font_stretch : Proc(IDWriteTextLayout3*, DWRITE_FONT_STRETCH)
-    get_font_size : Proc(IDWriteTextLayout3*, Float32)
-    get_locale_name_length : Proc(IDWriteTextLayout3*, UInt32)
-    get_locale_name : Proc(IDWriteTextLayout3*, Char*, UInt32, HRESULT)
-    set_max_width : Proc(IDWriteTextLayout3*, Float32, HRESULT)
-    set_max_height : Proc(IDWriteTextLayout3*, Float32, HRESULT)
-    set_font_collection : Proc(IDWriteTextLayout3*, IDWriteFontCollection, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_family_name : Proc(IDWriteTextLayout3*, LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_weight : Proc(IDWriteTextLayout3*, DWRITE_FONT_WEIGHT, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_style : Proc(IDWriteTextLayout3*, DWRITE_FONT_STYLE, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_stretch : Proc(IDWriteTextLayout3*, DWRITE_FONT_STRETCH, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_size : Proc(IDWriteTextLayout3*, Float32, DWRITE_TEXT_RANGE, HRESULT)
-    set_underline : Proc(IDWriteTextLayout3*, LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)
-    set_strikethrough : Proc(IDWriteTextLayout3*, LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)
-    set_drawing_effect : Proc(IDWriteTextLayout3*, IUnknown, DWRITE_TEXT_RANGE, HRESULT)
-    set_inline_object : Proc(IDWriteTextLayout3*, IDWriteInlineObject, DWRITE_TEXT_RANGE, HRESULT)
-    set_typography : Proc(IDWriteTextLayout3*, IDWriteTypography, DWRITE_TEXT_RANGE, HRESULT)
-    set_locale_name : Proc(IDWriteTextLayout3*, LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)
-    get_max_width : Proc(IDWriteTextLayout3*, Float32)
-    get_max_height : Proc(IDWriteTextLayout3*, Float32)
-    get_font_collection2 : Proc(IDWriteTextLayout3*, UInt32, IDWriteFontCollection*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_family_name_length2 : Proc(IDWriteTextLayout3*, UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_family_name2 : Proc(IDWriteTextLayout3*, UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_weight2 : Proc(IDWriteTextLayout3*, UInt32, DWRITE_FONT_WEIGHT*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_style2 : Proc(IDWriteTextLayout3*, UInt32, DWRITE_FONT_STYLE*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_stretch2 : Proc(IDWriteTextLayout3*, UInt32, DWRITE_FONT_STRETCH*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_size2 : Proc(IDWriteTextLayout3*, UInt32, Float32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_underline : Proc(IDWriteTextLayout3*, UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_strikethrough : Proc(IDWriteTextLayout3*, UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_drawing_effect : Proc(IDWriteTextLayout3*, UInt32, IUnknown*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_inline_object : Proc(IDWriteTextLayout3*, UInt32, IDWriteInlineObject*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_typography : Proc(IDWriteTextLayout3*, UInt32, IDWriteTypography*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_locale_name_length2 : Proc(IDWriteTextLayout3*, UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_locale_name2 : Proc(IDWriteTextLayout3*, UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)
-    draw : Proc(IDWriteTextLayout3*, Void*, IDWriteTextRenderer, Float32, Float32, HRESULT)
-    get_line_metrics : Proc(IDWriteTextLayout3*, DWRITE_LINE_METRICS*, UInt32, UInt32*, HRESULT)
-    get_metrics : Proc(IDWriteTextLayout3*, DWRITE_TEXT_METRICS*, HRESULT)
-    get_overhang_metrics : Proc(IDWriteTextLayout3*, DWRITE_OVERHANG_METRICS*, HRESULT)
-    get_cluster_metrics : Proc(IDWriteTextLayout3*, DWRITE_CLUSTER_METRICS*, UInt32, UInt32*, HRESULT)
-    determine_min_width : Proc(IDWriteTextLayout3*, Float32*, HRESULT)
-    hit_test_point : Proc(IDWriteTextLayout3*, Float32, Float32, LibC::BOOL*, LibC::BOOL*, DWRITE_HIT_TEST_METRICS*, HRESULT)
-    hit_test_text_position : Proc(IDWriteTextLayout3*, UInt32, LibC::BOOL, Float32*, Float32*, DWRITE_HIT_TEST_METRICS*, HRESULT)
-    hit_test_text_range : Proc(IDWriteTextLayout3*, UInt32, UInt32, Float32, Float32, DWRITE_HIT_TEST_METRICS*, UInt32, UInt32*, HRESULT)
-    set_pair_kerning : Proc(IDWriteTextLayout3*, LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)
-    get_pair_kerning : Proc(IDWriteTextLayout3*, UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)
-    set_character_spacing : Proc(IDWriteTextLayout3*, Float32, Float32, Float32, DWRITE_TEXT_RANGE, HRESULT)
-    get_character_spacing : Proc(IDWriteTextLayout3*, UInt32, Float32*, Float32*, Float32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_metrics2 : Proc(IDWriteTextLayout3*, DWRITE_TEXT_METRICS1*, HRESULT)
-    set_vertical_glyph_orientation : Proc(IDWriteTextLayout3*, DWRITE_VERTICAL_GLYPH_ORIENTATION, HRESULT)
-    get_vertical_glyph_orientation : Proc(IDWriteTextLayout3*, DWRITE_VERTICAL_GLYPH_ORIENTATION)
-    set_last_line_wrapping : Proc(IDWriteTextLayout3*, LibC::BOOL, HRESULT)
-    get_last_line_wrapping : Proc(IDWriteTextLayout3*, LibC::BOOL)
-    set_optical_alignment : Proc(IDWriteTextLayout3*, DWRITE_OPTICAL_ALIGNMENT, HRESULT)
-    get_optical_alignment : Proc(IDWriteTextLayout3*, DWRITE_OPTICAL_ALIGNMENT)
-    set_font_fallback : Proc(IDWriteTextLayout3*, IDWriteFontFallback, HRESULT)
-    get_font_fallback : Proc(IDWriteTextLayout3*, IDWriteFontFallback*, HRESULT)
-    invalidate_layout : Proc(IDWriteTextLayout3*, HRESULT)
-    set_line_spacing2 : Proc(IDWriteTextLayout3*, DWRITE_LINE_SPACING*, HRESULT)
-    get_line_spacing2 : Proc(IDWriteTextLayout3*, DWRITE_LINE_SPACING*, HRESULT)
-    get_line_metrics2 : Proc(IDWriteTextLayout3*, DWRITE_LINE_METRICS1*, UInt32, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_text_alignment : UInt64
+    set_paragraph_alignment : UInt64
+    set_word_wrapping : UInt64
+    set_reading_direction : UInt64
+    set_flow_direction : UInt64
+    set_incremental_tab_stop : UInt64
+    set_trimming : UInt64
+    set_line_spacing : UInt64
+    get_text_alignment : UInt64
+    get_paragraph_alignment : UInt64
+    get_word_wrapping : UInt64
+    get_reading_direction : UInt64
+    get_flow_direction : UInt64
+    get_incremental_tab_stop : UInt64
+    get_trimming : UInt64
+    get_line_spacing : UInt64
+    get_font_collection : UInt64
+    get_font_family_name_length : UInt64
+    get_font_family_name : UInt64
+    get_font_weight : UInt64
+    get_font_style : UInt64
+    get_font_stretch : UInt64
+    get_font_size : UInt64
+    get_locale_name_length : UInt64
+    get_locale_name : UInt64
+    set_max_width : UInt64
+    set_max_height : UInt64
+    set_font_collection : UInt64
+    set_font_family_name : UInt64
+    set_font_weight : UInt64
+    set_font_style : UInt64
+    set_font_stretch : UInt64
+    set_font_size : UInt64
+    set_underline : UInt64
+    set_strikethrough : UInt64
+    set_drawing_effect : UInt64
+    set_inline_object : UInt64
+    set_typography : UInt64
+    set_locale_name : UInt64
+    get_max_width : UInt64
+    get_max_height : UInt64
+    get_font_collection2 : UInt64
+    get_font_family_name_length2 : UInt64
+    get_font_family_name2 : UInt64
+    get_font_weight2 : UInt64
+    get_font_style2 : UInt64
+    get_font_stretch2 : UInt64
+    get_font_size2 : UInt64
+    get_underline : UInt64
+    get_strikethrough : UInt64
+    get_drawing_effect : UInt64
+    get_inline_object : UInt64
+    get_typography : UInt64
+    get_locale_name_length2 : UInt64
+    get_locale_name2 : UInt64
+    draw : UInt64
+    get_line_metrics : UInt64
+    get_metrics : UInt64
+    get_overhang_metrics : UInt64
+    get_cluster_metrics : UInt64
+    determine_min_width : UInt64
+    hit_test_point : UInt64
+    hit_test_text_position : UInt64
+    hit_test_text_range : UInt64
+    set_pair_kerning : UInt64
+    get_pair_kerning : UInt64
+    set_character_spacing : UInt64
+    get_character_spacing : UInt64
+    get_metrics2 : UInt64
+    set_vertical_glyph_orientation : UInt64
+    get_vertical_glyph_orientation : UInt64
+    set_last_line_wrapping : UInt64
+    get_last_line_wrapping : UInt64
+    set_optical_alignment : UInt64
+    get_optical_alignment : UInt64
+    set_font_fallback : UInt64
+    get_font_fallback : UInt64
+    invalidate_layout : UInt64
+    set_line_spacing2 : UInt64
+    get_line_spacing2 : UInt64
+    get_line_metrics2 : UInt64
   end
 
   IDWriteTextLayout3_GUID = "07ddcd52-020e-4de8-ac33-6c953d83f92d"
@@ -2802,12 +2802,12 @@ lib LibWin32
   end
 
   struct IDWriteColorGlyphRunEnumerator1VTbl
-    query_interface : Proc(IDWriteColorGlyphRunEnumerator1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteColorGlyphRunEnumerator1*, UInt32)
-    release : Proc(IDWriteColorGlyphRunEnumerator1*, UInt32)
-    move_next : Proc(IDWriteColorGlyphRunEnumerator1*, LibC::BOOL*, HRESULT)
-    get_current_run : Proc(IDWriteColorGlyphRunEnumerator1*, DWRITE_COLOR_GLYPH_RUN**, HRESULT)
-    get_current_run2 : Proc(IDWriteColorGlyphRunEnumerator1*, DWRITE_COLOR_GLYPH_RUN1**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    move_next : UInt64
+    get_current_run : UInt64
+    get_current_run2 : UInt64
   end
 
   IDWriteColorGlyphRunEnumerator1_GUID = "7c5f86da-c7a1-4f05-b8e1-55a179fe5a35"
@@ -2817,59 +2817,59 @@ lib LibWin32
   end
 
   struct IDWriteFontFace4VTbl
-    query_interface : Proc(IDWriteFontFace4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFace4*, UInt32)
-    release : Proc(IDWriteFontFace4*, UInt32)
-    get_type : Proc(IDWriteFontFace4*, DWRITE_FONT_FACE_TYPE)
-    get_files : Proc(IDWriteFontFace4*, UInt32*, IDWriteFontFile*, HRESULT)
-    get_index : Proc(IDWriteFontFace4*, UInt32)
-    get_simulations : Proc(IDWriteFontFace4*, DWRITE_FONT_SIMULATIONS)
-    is_symbol_font : Proc(IDWriteFontFace4*, LibC::BOOL)
-    get_metrics : Proc(IDWriteFontFace4*, DWRITE_FONT_METRICS*, Void)
-    get_glyph_count : Proc(IDWriteFontFace4*, UInt16)
-    get_design_glyph_metrics : Proc(IDWriteFontFace4*, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)
-    get_glyph_indices : Proc(IDWriteFontFace4*, UInt32*, UInt32, UInt16*, HRESULT)
-    try_get_font_table : Proc(IDWriteFontFace4*, UInt32, Void**, UInt32*, Void**, LibC::BOOL*, HRESULT)
-    release_font_table : Proc(IDWriteFontFace4*, Void*, Void)
-    get_glyph_run_outline : Proc(IDWriteFontFace4*, Float32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, UInt32, LibC::BOOL, LibC::BOOL, ID2D1SimplifiedGeometrySink, HRESULT)
-    get_recommended_rendering_mode : Proc(IDWriteFontFace4*, Float32, Float32, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, HRESULT)
-    get_gdi_compatible_metrics : Proc(IDWriteFontFace4*, Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS*, HRESULT)
-    get_gdi_compatible_glyph_metrics : Proc(IDWriteFontFace4*, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)
-    get_metrics2 : Proc(IDWriteFontFace4*, DWRITE_FONT_METRICS1*, Void)
-    get_gdi_compatible_metrics2 : Proc(IDWriteFontFace4*, Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS1*, HRESULT)
-    get_caret_metrics : Proc(IDWriteFontFace4*, DWRITE_CARET_METRICS*, Void)
-    get_unicode_ranges : Proc(IDWriteFontFace4*, UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)
-    is_monospaced_font : Proc(IDWriteFontFace4*, LibC::BOOL)
-    get_design_glyph_advances : Proc(IDWriteFontFace4*, UInt32, UInt16*, Int32*, LibC::BOOL, HRESULT)
-    get_gdi_compatible_glyph_advances : Proc(IDWriteFontFace4*, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, UInt32, UInt16*, Int32*, HRESULT)
-    get_kerning_pair_adjustments : Proc(IDWriteFontFace4*, UInt32, UInt16*, Int32*, HRESULT)
-    has_kerning_pairs : Proc(IDWriteFontFace4*, LibC::BOOL)
-    get_recommended_rendering_mode2 : Proc(IDWriteFontFace4*, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, DWRITE_RENDERING_MODE*, HRESULT)
-    get_vertical_glyph_variants : Proc(IDWriteFontFace4*, UInt32, UInt16*, UInt16*, HRESULT)
-    has_vertical_glyph_variants : Proc(IDWriteFontFace4*, LibC::BOOL)
-    is_color_font : Proc(IDWriteFontFace4*, LibC::BOOL)
-    get_color_palette_count : Proc(IDWriteFontFace4*, UInt32)
-    get_palette_entry_count : Proc(IDWriteFontFace4*, UInt32)
-    get_palette_entries : Proc(IDWriteFontFace4*, UInt32, UInt32, UInt32, DWRITE_COLOR_F*, HRESULT)
-    get_recommended_rendering_mode3 : Proc(IDWriteFontFace4*, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, DWRITE_GRID_FIT_MODE*, HRESULT)
-    get_font_face_reference : Proc(IDWriteFontFace4*, IDWriteFontFaceReference*, HRESULT)
-    get_panose : Proc(IDWriteFontFace4*, DWRITE_PANOSE*, Void)
-    get_weight : Proc(IDWriteFontFace4*, DWRITE_FONT_WEIGHT)
-    get_stretch : Proc(IDWriteFontFace4*, DWRITE_FONT_STRETCH)
-    get_style : Proc(IDWriteFontFace4*, DWRITE_FONT_STYLE)
-    get_family_names : Proc(IDWriteFontFace4*, IDWriteLocalizedStrings*, HRESULT)
-    get_face_names : Proc(IDWriteFontFace4*, IDWriteLocalizedStrings*, HRESULT)
-    get_informational_strings : Proc(IDWriteFontFace4*, DWRITE_INFORMATIONAL_STRING_ID, IDWriteLocalizedStrings*, LibC::BOOL*, HRESULT)
-    has_character : Proc(IDWriteFontFace4*, UInt32, LibC::BOOL)
-    get_recommended_rendering_mode4 : Proc(IDWriteFontFace4*, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE1*, DWRITE_GRID_FIT_MODE*, HRESULT)
-    is_character_local : Proc(IDWriteFontFace4*, UInt32, LibC::BOOL)
-    is_glyph_local : Proc(IDWriteFontFace4*, UInt16, LibC::BOOL)
-    are_characters_local : Proc(IDWriteFontFace4*, Char*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)
-    are_glyphs_local : Proc(IDWriteFontFace4*, UInt16*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)
-    get_glyph_image_formats : Proc(IDWriteFontFace4*, UInt16, UInt32, UInt32, DWRITE_GLYPH_IMAGE_FORMATS*, HRESULT)
-    get_glyph_image_formats2 : Proc(IDWriteFontFace4*, DWRITE_GLYPH_IMAGE_FORMATS)
-    get_glyph_image_data : Proc(IDWriteFontFace4*, UInt16, UInt32, DWRITE_GLYPH_IMAGE_FORMATS, DWRITE_GLYPH_IMAGE_DATA*, Void**, HRESULT)
-    release_glyph_image_data : Proc(IDWriteFontFace4*, Void*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type : UInt64
+    get_files : UInt64
+    get_index : UInt64
+    get_simulations : UInt64
+    is_symbol_font : UInt64
+    get_metrics : UInt64
+    get_glyph_count : UInt64
+    get_design_glyph_metrics : UInt64
+    get_glyph_indices : UInt64
+    try_get_font_table : UInt64
+    release_font_table : UInt64
+    get_glyph_run_outline : UInt64
+    get_recommended_rendering_mode : UInt64
+    get_gdi_compatible_metrics : UInt64
+    get_gdi_compatible_glyph_metrics : UInt64
+    get_metrics2 : UInt64
+    get_gdi_compatible_metrics2 : UInt64
+    get_caret_metrics : UInt64
+    get_unicode_ranges : UInt64
+    is_monospaced_font : UInt64
+    get_design_glyph_advances : UInt64
+    get_gdi_compatible_glyph_advances : UInt64
+    get_kerning_pair_adjustments : UInt64
+    has_kerning_pairs : UInt64
+    get_recommended_rendering_mode2 : UInt64
+    get_vertical_glyph_variants : UInt64
+    has_vertical_glyph_variants : UInt64
+    is_color_font : UInt64
+    get_color_palette_count : UInt64
+    get_palette_entry_count : UInt64
+    get_palette_entries : UInt64
+    get_recommended_rendering_mode3 : UInt64
+    get_font_face_reference : UInt64
+    get_panose : UInt64
+    get_weight : UInt64
+    get_stretch : UInt64
+    get_style : UInt64
+    get_family_names : UInt64
+    get_face_names : UInt64
+    get_informational_strings : UInt64
+    has_character : UInt64
+    get_recommended_rendering_mode4 : UInt64
+    is_character_local : UInt64
+    is_glyph_local : UInt64
+    are_characters_local : UInt64
+    are_glyphs_local : UInt64
+    get_glyph_image_formats : UInt64
+    get_glyph_image_formats2 : UInt64
+    get_glyph_image_data : UInt64
+    release_glyph_image_data : UInt64
   end
 
   IDWriteFontFace4_GUID = "27f2a904-4eb8-441d-9678-0563f53e3e2f"
@@ -2879,49 +2879,49 @@ lib LibWin32
   end
 
   struct IDWriteFactory4VTbl
-    query_interface : Proc(IDWriteFactory4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFactory4*, UInt32)
-    release : Proc(IDWriteFactory4*, UInt32)
-    get_system_font_collection : Proc(IDWriteFactory4*, IDWriteFontCollection*, LibC::BOOL, HRESULT)
-    create_custom_font_collection : Proc(IDWriteFactory4*, IDWriteFontCollectionLoader, Void*, UInt32, IDWriteFontCollection*, HRESULT)
-    register_font_collection_loader : Proc(IDWriteFactory4*, IDWriteFontCollectionLoader, HRESULT)
-    unregister_font_collection_loader : Proc(IDWriteFactory4*, IDWriteFontCollectionLoader, HRESULT)
-    create_font_file_reference : Proc(IDWriteFactory4*, LibC::LPWSTR, FILETIME*, IDWriteFontFile*, HRESULT)
-    create_custom_font_file_reference : Proc(IDWriteFactory4*, Void*, UInt32, IDWriteFontFileLoader, IDWriteFontFile*, HRESULT)
-    create_font_face : Proc(IDWriteFactory4*, DWRITE_FONT_FACE_TYPE, UInt32, IDWriteFontFile*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFace*, HRESULT)
-    create_rendering_params : Proc(IDWriteFactory4*, IDWriteRenderingParams*, HRESULT)
-    create_monitor_rendering_params : Proc(IDWriteFactory4*, HMONITOR, IDWriteRenderingParams*, HRESULT)
-    create_custom_rendering_params : Proc(IDWriteFactory4*, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams*, HRESULT)
-    register_font_file_loader : Proc(IDWriteFactory4*, IDWriteFontFileLoader, HRESULT)
-    unregister_font_file_loader : Proc(IDWriteFactory4*, IDWriteFontFileLoader, HRESULT)
-    create_text_format : Proc(IDWriteFactory4*, LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, Float32, LibC::LPWSTR, IDWriteTextFormat*, HRESULT)
-    create_typography : Proc(IDWriteFactory4*, IDWriteTypography*, HRESULT)
-    get_gdi_interop : Proc(IDWriteFactory4*, IDWriteGdiInterop*, HRESULT)
-    create_text_layout : Proc(IDWriteFactory4*, Char*, UInt32, IDWriteTextFormat, Float32, Float32, IDWriteTextLayout*, HRESULT)
-    create_gdi_compatible_text_layout : Proc(IDWriteFactory4*, Char*, UInt32, IDWriteTextFormat, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, IDWriteTextLayout*, HRESULT)
-    create_ellipsis_trimming_sign : Proc(IDWriteFactory4*, IDWriteTextFormat, IDWriteInlineObject*, HRESULT)
-    create_text_analyzer : Proc(IDWriteFactory4*, IDWriteTextAnalyzer*, HRESULT)
-    create_number_substitution : Proc(IDWriteFactory4*, DWRITE_NUMBER_SUBSTITUTION_METHOD, LibC::LPWSTR, LibC::BOOL, IDWriteNumberSubstitution*, HRESULT)
-    create_glyph_run_analysis : Proc(IDWriteFactory4*, DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    get_eudc_font_collection : Proc(IDWriteFactory4*, IDWriteFontCollection*, LibC::BOOL, HRESULT)
-    create_custom_rendering_params2 : Proc(IDWriteFactory4*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams1*, HRESULT)
-    get_system_font_fallback : Proc(IDWriteFactory4*, IDWriteFontFallback*, HRESULT)
-    create_font_fallback_builder : Proc(IDWriteFactory4*, IDWriteFontFallbackBuilder*, HRESULT)
-    translate_color_glyph_run : Proc(IDWriteFactory4*, Float32, Float32, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator*, HRESULT)
-    create_custom_rendering_params3 : Proc(IDWriteFactory4*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams2*, HRESULT)
-    create_glyph_run_analysis2 : Proc(IDWriteFactory4*, DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    create_glyph_run_analysis3 : Proc(IDWriteFactory4*, DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE1, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    create_custom_rendering_params4 : Proc(IDWriteFactory4*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE1, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams3*, HRESULT)
-    create_font_face_reference : Proc(IDWriteFactory4*, IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)
-    create_font_face_reference2 : Proc(IDWriteFactory4*, LibC::LPWSTR, FILETIME*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)
-    get_system_font_set : Proc(IDWriteFactory4*, IDWriteFontSet*, HRESULT)
-    create_font_set_builder : Proc(IDWriteFactory4*, IDWriteFontSetBuilder*, HRESULT)
-    create_font_collection_from_font_set : Proc(IDWriteFactory4*, IDWriteFontSet, IDWriteFontCollection1*, HRESULT)
-    get_system_font_collection2 : Proc(IDWriteFactory4*, LibC::BOOL, IDWriteFontCollection1*, LibC::BOOL, HRESULT)
-    get_font_download_queue : Proc(IDWriteFactory4*, IDWriteFontDownloadQueue*, HRESULT)
-    translate_color_glyph_run2 : Proc(IDWriteFactory4*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_GLYPH_IMAGE_FORMATS, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator1*, HRESULT)
-    compute_glyph_origins : Proc(IDWriteFactory4*, DWRITE_GLYPH_RUN*, D2D_POINT_2F, D2D_POINT_2F*, HRESULT)
-    compute_glyph_origins2 : Proc(IDWriteFactory4*, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_POINT_2F, DWRITE_MATRIX*, D2D_POINT_2F*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_system_font_collection : UInt64
+    create_custom_font_collection : UInt64
+    register_font_collection_loader : UInt64
+    unregister_font_collection_loader : UInt64
+    create_font_file_reference : UInt64
+    create_custom_font_file_reference : UInt64
+    create_font_face : UInt64
+    create_rendering_params : UInt64
+    create_monitor_rendering_params : UInt64
+    create_custom_rendering_params : UInt64
+    register_font_file_loader : UInt64
+    unregister_font_file_loader : UInt64
+    create_text_format : UInt64
+    create_typography : UInt64
+    get_gdi_interop : UInt64
+    create_text_layout : UInt64
+    create_gdi_compatible_text_layout : UInt64
+    create_ellipsis_trimming_sign : UInt64
+    create_text_analyzer : UInt64
+    create_number_substitution : UInt64
+    create_glyph_run_analysis : UInt64
+    get_eudc_font_collection : UInt64
+    create_custom_rendering_params2 : UInt64
+    get_system_font_fallback : UInt64
+    create_font_fallback_builder : UInt64
+    translate_color_glyph_run : UInt64
+    create_custom_rendering_params3 : UInt64
+    create_glyph_run_analysis2 : UInt64
+    create_glyph_run_analysis3 : UInt64
+    create_custom_rendering_params4 : UInt64
+    create_font_face_reference : UInt64
+    create_font_face_reference2 : UInt64
+    get_system_font_set : UInt64
+    create_font_set_builder : UInt64
+    create_font_collection_from_font_set : UInt64
+    get_system_font_collection2 : UInt64
+    get_font_download_queue : UInt64
+    translate_color_glyph_run2 : UInt64
+    compute_glyph_origins : UInt64
+    compute_glyph_origins2 : UInt64
   end
 
   IDWriteFactory4_GUID = "4b0b5bd3-0797-4549-8ac5-fe915cc53856"
@@ -2931,14 +2931,14 @@ lib LibWin32
   end
 
   struct IDWriteFontSetBuilder1VTbl
-    query_interface : Proc(IDWriteFontSetBuilder1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontSetBuilder1*, UInt32)
-    release : Proc(IDWriteFontSetBuilder1*, UInt32)
-    add_font_face_reference : Proc(IDWriteFontSetBuilder1*, IDWriteFontFaceReference, DWRITE_FONT_PROPERTY*, UInt32, HRESULT)
-    add_font_face_reference2 : Proc(IDWriteFontSetBuilder1*, IDWriteFontFaceReference, HRESULT)
-    add_font_set : Proc(IDWriteFontSetBuilder1*, IDWriteFontSet, HRESULT)
-    create_font_set : Proc(IDWriteFontSetBuilder1*, IDWriteFontSet*, HRESULT)
-    add_font_file : Proc(IDWriteFontSetBuilder1*, IDWriteFontFile, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_font_face_reference : UInt64
+    add_font_face_reference2 : UInt64
+    add_font_set : UInt64
+    create_font_set : UInt64
+    add_font_file : UInt64
   end
 
   IDWriteFontSetBuilder1_GUID = "3ff7715f-3cdc-4dc6-9b72-ec5621dccafd"
@@ -2948,11 +2948,11 @@ lib LibWin32
   end
 
   struct IDWriteAsyncResultVTbl
-    query_interface : Proc(IDWriteAsyncResult*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteAsyncResult*, UInt32)
-    release : Proc(IDWriteAsyncResult*, UInt32)
-    get_wait_handle : Proc(IDWriteAsyncResult*, LibC::HANDLE)
-    get_result : Proc(IDWriteAsyncResult*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_wait_handle : UInt64
+    get_result : UInt64
   end
 
   IDWriteAsyncResult_GUID = "ce25f8fd-863b-4d13-9651-c1f88dc73fe2"
@@ -2962,17 +2962,17 @@ lib LibWin32
   end
 
   struct IDWriteRemoteFontFileStreamVTbl
-    query_interface : Proc(IDWriteRemoteFontFileStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteRemoteFontFileStream*, UInt32)
-    release : Proc(IDWriteRemoteFontFileStream*, UInt32)
-    read_file_fragment : Proc(IDWriteRemoteFontFileStream*, Void**, UInt64, UInt64, Void**, HRESULT)
-    release_file_fragment : Proc(IDWriteRemoteFontFileStream*, Void*, Void)
-    get_file_size : Proc(IDWriteRemoteFontFileStream*, UInt64*, HRESULT)
-    get_last_write_time : Proc(IDWriteRemoteFontFileStream*, UInt64*, HRESULT)
-    get_local_file_size : Proc(IDWriteRemoteFontFileStream*, UInt64*, HRESULT)
-    get_file_fragment_locality : Proc(IDWriteRemoteFontFileStream*, UInt64, UInt64, LibC::BOOL*, UInt64*, HRESULT)
-    get_locality : Proc(IDWriteRemoteFontFileStream*, DWRITE_LOCALITY)
-    begin_download : Proc(IDWriteRemoteFontFileStream*, Guid*, DWRITE_FILE_FRAGMENT*, UInt32, IDWriteAsyncResult*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    read_file_fragment : UInt64
+    release_file_fragment : UInt64
+    get_file_size : UInt64
+    get_last_write_time : UInt64
+    get_local_file_size : UInt64
+    get_file_fragment_locality : UInt64
+    get_locality : UInt64
+    begin_download : UInt64
   end
 
   IDWriteRemoteFontFileStream_GUID = "4db3757a-2c72-4ed9-b2b6-1ababe1aff9c"
@@ -2982,13 +2982,13 @@ lib LibWin32
   end
 
   struct IDWriteRemoteFontFileLoaderVTbl
-    query_interface : Proc(IDWriteRemoteFontFileLoader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteRemoteFontFileLoader*, UInt32)
-    release : Proc(IDWriteRemoteFontFileLoader*, UInt32)
-    create_stream_from_key : Proc(IDWriteRemoteFontFileLoader*, Void*, UInt32, IDWriteFontFileStream*, HRESULT)
-    create_remote_stream_from_key : Proc(IDWriteRemoteFontFileLoader*, Void*, UInt32, IDWriteRemoteFontFileStream*, HRESULT)
-    get_locality_from_key : Proc(IDWriteRemoteFontFileLoader*, Void*, UInt32, DWRITE_LOCALITY*, HRESULT)
-    create_font_file_reference_from_url : Proc(IDWriteRemoteFontFileLoader*, IDWriteFactory, LibC::LPWSTR, LibC::LPWSTR, IDWriteFontFile*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_stream_from_key : UInt64
+    create_remote_stream_from_key : UInt64
+    get_locality_from_key : UInt64
+    create_font_file_reference_from_url : UInt64
   end
 
   IDWriteRemoteFontFileLoader_GUID = "68648c83-6ede-46c0-ab46-20083a887fde"
@@ -2998,12 +2998,12 @@ lib LibWin32
   end
 
   struct IDWriteInMemoryFontFileLoaderVTbl
-    query_interface : Proc(IDWriteInMemoryFontFileLoader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteInMemoryFontFileLoader*, UInt32)
-    release : Proc(IDWriteInMemoryFontFileLoader*, UInt32)
-    create_stream_from_key : Proc(IDWriteInMemoryFontFileLoader*, Void*, UInt32, IDWriteFontFileStream*, HRESULT)
-    create_in_memory_font_file_reference : Proc(IDWriteInMemoryFontFileLoader*, IDWriteFactory, Void*, UInt32, IUnknown, IDWriteFontFile*, HRESULT)
-    get_file_count : Proc(IDWriteInMemoryFontFileLoader*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_stream_from_key : UInt64
+    create_in_memory_font_file_reference : UInt64
+    get_file_count : UInt64
   end
 
   IDWriteInMemoryFontFileLoader_GUID = "dc102f47-a12d-4b1c-822d-9e117e33043f"
@@ -3013,54 +3013,54 @@ lib LibWin32
   end
 
   struct IDWriteFactory5VTbl
-    query_interface : Proc(IDWriteFactory5*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFactory5*, UInt32)
-    release : Proc(IDWriteFactory5*, UInt32)
-    get_system_font_collection : Proc(IDWriteFactory5*, IDWriteFontCollection*, LibC::BOOL, HRESULT)
-    create_custom_font_collection : Proc(IDWriteFactory5*, IDWriteFontCollectionLoader, Void*, UInt32, IDWriteFontCollection*, HRESULT)
-    register_font_collection_loader : Proc(IDWriteFactory5*, IDWriteFontCollectionLoader, HRESULT)
-    unregister_font_collection_loader : Proc(IDWriteFactory5*, IDWriteFontCollectionLoader, HRESULT)
-    create_font_file_reference : Proc(IDWriteFactory5*, LibC::LPWSTR, FILETIME*, IDWriteFontFile*, HRESULT)
-    create_custom_font_file_reference : Proc(IDWriteFactory5*, Void*, UInt32, IDWriteFontFileLoader, IDWriteFontFile*, HRESULT)
-    create_font_face : Proc(IDWriteFactory5*, DWRITE_FONT_FACE_TYPE, UInt32, IDWriteFontFile*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFace*, HRESULT)
-    create_rendering_params : Proc(IDWriteFactory5*, IDWriteRenderingParams*, HRESULT)
-    create_monitor_rendering_params : Proc(IDWriteFactory5*, HMONITOR, IDWriteRenderingParams*, HRESULT)
-    create_custom_rendering_params : Proc(IDWriteFactory5*, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams*, HRESULT)
-    register_font_file_loader : Proc(IDWriteFactory5*, IDWriteFontFileLoader, HRESULT)
-    unregister_font_file_loader : Proc(IDWriteFactory5*, IDWriteFontFileLoader, HRESULT)
-    create_text_format : Proc(IDWriteFactory5*, LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, Float32, LibC::LPWSTR, IDWriteTextFormat*, HRESULT)
-    create_typography : Proc(IDWriteFactory5*, IDWriteTypography*, HRESULT)
-    get_gdi_interop : Proc(IDWriteFactory5*, IDWriteGdiInterop*, HRESULT)
-    create_text_layout : Proc(IDWriteFactory5*, Char*, UInt32, IDWriteTextFormat, Float32, Float32, IDWriteTextLayout*, HRESULT)
-    create_gdi_compatible_text_layout : Proc(IDWriteFactory5*, Char*, UInt32, IDWriteTextFormat, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, IDWriteTextLayout*, HRESULT)
-    create_ellipsis_trimming_sign : Proc(IDWriteFactory5*, IDWriteTextFormat, IDWriteInlineObject*, HRESULT)
-    create_text_analyzer : Proc(IDWriteFactory5*, IDWriteTextAnalyzer*, HRESULT)
-    create_number_substitution : Proc(IDWriteFactory5*, DWRITE_NUMBER_SUBSTITUTION_METHOD, LibC::LPWSTR, LibC::BOOL, IDWriteNumberSubstitution*, HRESULT)
-    create_glyph_run_analysis : Proc(IDWriteFactory5*, DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    get_eudc_font_collection : Proc(IDWriteFactory5*, IDWriteFontCollection*, LibC::BOOL, HRESULT)
-    create_custom_rendering_params2 : Proc(IDWriteFactory5*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams1*, HRESULT)
-    get_system_font_fallback : Proc(IDWriteFactory5*, IDWriteFontFallback*, HRESULT)
-    create_font_fallback_builder : Proc(IDWriteFactory5*, IDWriteFontFallbackBuilder*, HRESULT)
-    translate_color_glyph_run : Proc(IDWriteFactory5*, Float32, Float32, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator*, HRESULT)
-    create_custom_rendering_params3 : Proc(IDWriteFactory5*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams2*, HRESULT)
-    create_glyph_run_analysis2 : Proc(IDWriteFactory5*, DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    create_glyph_run_analysis3 : Proc(IDWriteFactory5*, DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE1, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    create_custom_rendering_params4 : Proc(IDWriteFactory5*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE1, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams3*, HRESULT)
-    create_font_face_reference : Proc(IDWriteFactory5*, IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)
-    create_font_face_reference2 : Proc(IDWriteFactory5*, LibC::LPWSTR, FILETIME*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)
-    get_system_font_set : Proc(IDWriteFactory5*, IDWriteFontSet*, HRESULT)
-    create_font_set_builder : Proc(IDWriteFactory5*, IDWriteFontSetBuilder*, HRESULT)
-    create_font_collection_from_font_set : Proc(IDWriteFactory5*, IDWriteFontSet, IDWriteFontCollection1*, HRESULT)
-    get_system_font_collection2 : Proc(IDWriteFactory5*, LibC::BOOL, IDWriteFontCollection1*, LibC::BOOL, HRESULT)
-    get_font_download_queue : Proc(IDWriteFactory5*, IDWriteFontDownloadQueue*, HRESULT)
-    translate_color_glyph_run2 : Proc(IDWriteFactory5*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_GLYPH_IMAGE_FORMATS, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator1*, HRESULT)
-    compute_glyph_origins : Proc(IDWriteFactory5*, DWRITE_GLYPH_RUN*, D2D_POINT_2F, D2D_POINT_2F*, HRESULT)
-    compute_glyph_origins2 : Proc(IDWriteFactory5*, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_POINT_2F, DWRITE_MATRIX*, D2D_POINT_2F*, HRESULT)
-    create_font_set_builder2 : Proc(IDWriteFactory5*, IDWriteFontSetBuilder1*, HRESULT)
-    create_in_memory_font_file_loader : Proc(IDWriteFactory5*, IDWriteInMemoryFontFileLoader*, HRESULT)
-    create_http_font_file_loader : Proc(IDWriteFactory5*, LibC::LPWSTR, LibC::LPWSTR, IDWriteRemoteFontFileLoader*, HRESULT)
-    analyze_container_type : Proc(IDWriteFactory5*, Void*, UInt32, DWRITE_CONTAINER_TYPE)
-    unpack_font_file : Proc(IDWriteFactory5*, DWRITE_CONTAINER_TYPE, Void*, UInt32, IDWriteFontFileStream*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_system_font_collection : UInt64
+    create_custom_font_collection : UInt64
+    register_font_collection_loader : UInt64
+    unregister_font_collection_loader : UInt64
+    create_font_file_reference : UInt64
+    create_custom_font_file_reference : UInt64
+    create_font_face : UInt64
+    create_rendering_params : UInt64
+    create_monitor_rendering_params : UInt64
+    create_custom_rendering_params : UInt64
+    register_font_file_loader : UInt64
+    unregister_font_file_loader : UInt64
+    create_text_format : UInt64
+    create_typography : UInt64
+    get_gdi_interop : UInt64
+    create_text_layout : UInt64
+    create_gdi_compatible_text_layout : UInt64
+    create_ellipsis_trimming_sign : UInt64
+    create_text_analyzer : UInt64
+    create_number_substitution : UInt64
+    create_glyph_run_analysis : UInt64
+    get_eudc_font_collection : UInt64
+    create_custom_rendering_params2 : UInt64
+    get_system_font_fallback : UInt64
+    create_font_fallback_builder : UInt64
+    translate_color_glyph_run : UInt64
+    create_custom_rendering_params3 : UInt64
+    create_glyph_run_analysis2 : UInt64
+    create_glyph_run_analysis3 : UInt64
+    create_custom_rendering_params4 : UInt64
+    create_font_face_reference : UInt64
+    create_font_face_reference2 : UInt64
+    get_system_font_set : UInt64
+    create_font_set_builder : UInt64
+    create_font_collection_from_font_set : UInt64
+    get_system_font_collection2 : UInt64
+    get_font_download_queue : UInt64
+    translate_color_glyph_run2 : UInt64
+    compute_glyph_origins : UInt64
+    compute_glyph_origins2 : UInt64
+    create_font_set_builder2 : UInt64
+    create_in_memory_font_file_loader : UInt64
+    create_http_font_file_loader : UInt64
+    analyze_container_type : UInt64
+    unpack_font_file : UInt64
   end
 
   IDWriteFactory5_GUID = "958db99a-be2a-4f09-af7d-65189803d1d3"
@@ -3070,61 +3070,61 @@ lib LibWin32
   end
 
   struct IDWriteFactory6VTbl
-    query_interface : Proc(IDWriteFactory6*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFactory6*, UInt32)
-    release : Proc(IDWriteFactory6*, UInt32)
-    get_system_font_collection : Proc(IDWriteFactory6*, IDWriteFontCollection*, LibC::BOOL, HRESULT)
-    create_custom_font_collection : Proc(IDWriteFactory6*, IDWriteFontCollectionLoader, Void*, UInt32, IDWriteFontCollection*, HRESULT)
-    register_font_collection_loader : Proc(IDWriteFactory6*, IDWriteFontCollectionLoader, HRESULT)
-    unregister_font_collection_loader : Proc(IDWriteFactory6*, IDWriteFontCollectionLoader, HRESULT)
-    create_font_file_reference : Proc(IDWriteFactory6*, LibC::LPWSTR, FILETIME*, IDWriteFontFile*, HRESULT)
-    create_custom_font_file_reference : Proc(IDWriteFactory6*, Void*, UInt32, IDWriteFontFileLoader, IDWriteFontFile*, HRESULT)
-    create_font_face : Proc(IDWriteFactory6*, DWRITE_FONT_FACE_TYPE, UInt32, IDWriteFontFile*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFace*, HRESULT)
-    create_rendering_params : Proc(IDWriteFactory6*, IDWriteRenderingParams*, HRESULT)
-    create_monitor_rendering_params : Proc(IDWriteFactory6*, HMONITOR, IDWriteRenderingParams*, HRESULT)
-    create_custom_rendering_params : Proc(IDWriteFactory6*, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams*, HRESULT)
-    register_font_file_loader : Proc(IDWriteFactory6*, IDWriteFontFileLoader, HRESULT)
-    unregister_font_file_loader : Proc(IDWriteFactory6*, IDWriteFontFileLoader, HRESULT)
-    create_text_format : Proc(IDWriteFactory6*, LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, Float32, LibC::LPWSTR, IDWriteTextFormat*, HRESULT)
-    create_typography : Proc(IDWriteFactory6*, IDWriteTypography*, HRESULT)
-    get_gdi_interop : Proc(IDWriteFactory6*, IDWriteGdiInterop*, HRESULT)
-    create_text_layout : Proc(IDWriteFactory6*, Char*, UInt32, IDWriteTextFormat, Float32, Float32, IDWriteTextLayout*, HRESULT)
-    create_gdi_compatible_text_layout : Proc(IDWriteFactory6*, Char*, UInt32, IDWriteTextFormat, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, IDWriteTextLayout*, HRESULT)
-    create_ellipsis_trimming_sign : Proc(IDWriteFactory6*, IDWriteTextFormat, IDWriteInlineObject*, HRESULT)
-    create_text_analyzer : Proc(IDWriteFactory6*, IDWriteTextAnalyzer*, HRESULT)
-    create_number_substitution : Proc(IDWriteFactory6*, DWRITE_NUMBER_SUBSTITUTION_METHOD, LibC::LPWSTR, LibC::BOOL, IDWriteNumberSubstitution*, HRESULT)
-    create_glyph_run_analysis : Proc(IDWriteFactory6*, DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    get_eudc_font_collection : Proc(IDWriteFactory6*, IDWriteFontCollection*, LibC::BOOL, HRESULT)
-    create_custom_rendering_params2 : Proc(IDWriteFactory6*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams1*, HRESULT)
-    get_system_font_fallback : Proc(IDWriteFactory6*, IDWriteFontFallback*, HRESULT)
-    create_font_fallback_builder : Proc(IDWriteFactory6*, IDWriteFontFallbackBuilder*, HRESULT)
-    translate_color_glyph_run : Proc(IDWriteFactory6*, Float32, Float32, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator*, HRESULT)
-    create_custom_rendering_params3 : Proc(IDWriteFactory6*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams2*, HRESULT)
-    create_glyph_run_analysis2 : Proc(IDWriteFactory6*, DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    create_glyph_run_analysis3 : Proc(IDWriteFactory6*, DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE1, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    create_custom_rendering_params4 : Proc(IDWriteFactory6*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE1, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams3*, HRESULT)
-    create_font_face_reference : Proc(IDWriteFactory6*, IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)
-    create_font_face_reference2 : Proc(IDWriteFactory6*, LibC::LPWSTR, FILETIME*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)
-    get_system_font_set : Proc(IDWriteFactory6*, IDWriteFontSet*, HRESULT)
-    create_font_set_builder : Proc(IDWriteFactory6*, IDWriteFontSetBuilder*, HRESULT)
-    create_font_collection_from_font_set : Proc(IDWriteFactory6*, IDWriteFontSet, IDWriteFontCollection1*, HRESULT)
-    get_system_font_collection2 : Proc(IDWriteFactory6*, LibC::BOOL, IDWriteFontCollection1*, LibC::BOOL, HRESULT)
-    get_font_download_queue : Proc(IDWriteFactory6*, IDWriteFontDownloadQueue*, HRESULT)
-    translate_color_glyph_run2 : Proc(IDWriteFactory6*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_GLYPH_IMAGE_FORMATS, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator1*, HRESULT)
-    compute_glyph_origins : Proc(IDWriteFactory6*, DWRITE_GLYPH_RUN*, D2D_POINT_2F, D2D_POINT_2F*, HRESULT)
-    compute_glyph_origins2 : Proc(IDWriteFactory6*, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_POINT_2F, DWRITE_MATRIX*, D2D_POINT_2F*, HRESULT)
-    create_font_set_builder2 : Proc(IDWriteFactory6*, IDWriteFontSetBuilder1*, HRESULT)
-    create_in_memory_font_file_loader : Proc(IDWriteFactory6*, IDWriteInMemoryFontFileLoader*, HRESULT)
-    create_http_font_file_loader : Proc(IDWriteFactory6*, LibC::LPWSTR, LibC::LPWSTR, IDWriteRemoteFontFileLoader*, HRESULT)
-    analyze_container_type : Proc(IDWriteFactory6*, Void*, UInt32, DWRITE_CONTAINER_TYPE)
-    unpack_font_file : Proc(IDWriteFactory6*, DWRITE_CONTAINER_TYPE, Void*, UInt32, IDWriteFontFileStream*, HRESULT)
-    create_font_face_reference3 : Proc(IDWriteFactory6*, IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontFaceReference1*, HRESULT)
-    create_font_resource : Proc(IDWriteFactory6*, IDWriteFontFile, UInt32, IDWriteFontResource*, HRESULT)
-    get_system_font_set2 : Proc(IDWriteFactory6*, LibC::BOOL, IDWriteFontSet1*, HRESULT)
-    get_system_font_collection3 : Proc(IDWriteFactory6*, LibC::BOOL, DWRITE_FONT_FAMILY_MODEL, IDWriteFontCollection2*, HRESULT)
-    create_font_collection_from_font_set2 : Proc(IDWriteFactory6*, IDWriteFontSet, DWRITE_FONT_FAMILY_MODEL, IDWriteFontCollection2*, HRESULT)
-    create_font_set_builder3 : Proc(IDWriteFactory6*, IDWriteFontSetBuilder2*, HRESULT)
-    create_text_format2 : Proc(IDWriteFactory6*, LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_AXIS_VALUE*, UInt32, Float32, LibC::LPWSTR, IDWriteTextFormat3*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_system_font_collection : UInt64
+    create_custom_font_collection : UInt64
+    register_font_collection_loader : UInt64
+    unregister_font_collection_loader : UInt64
+    create_font_file_reference : UInt64
+    create_custom_font_file_reference : UInt64
+    create_font_face : UInt64
+    create_rendering_params : UInt64
+    create_monitor_rendering_params : UInt64
+    create_custom_rendering_params : UInt64
+    register_font_file_loader : UInt64
+    unregister_font_file_loader : UInt64
+    create_text_format : UInt64
+    create_typography : UInt64
+    get_gdi_interop : UInt64
+    create_text_layout : UInt64
+    create_gdi_compatible_text_layout : UInt64
+    create_ellipsis_trimming_sign : UInt64
+    create_text_analyzer : UInt64
+    create_number_substitution : UInt64
+    create_glyph_run_analysis : UInt64
+    get_eudc_font_collection : UInt64
+    create_custom_rendering_params2 : UInt64
+    get_system_font_fallback : UInt64
+    create_font_fallback_builder : UInt64
+    translate_color_glyph_run : UInt64
+    create_custom_rendering_params3 : UInt64
+    create_glyph_run_analysis2 : UInt64
+    create_glyph_run_analysis3 : UInt64
+    create_custom_rendering_params4 : UInt64
+    create_font_face_reference : UInt64
+    create_font_face_reference2 : UInt64
+    get_system_font_set : UInt64
+    create_font_set_builder : UInt64
+    create_font_collection_from_font_set : UInt64
+    get_system_font_collection2 : UInt64
+    get_font_download_queue : UInt64
+    translate_color_glyph_run2 : UInt64
+    compute_glyph_origins : UInt64
+    compute_glyph_origins2 : UInt64
+    create_font_set_builder2 : UInt64
+    create_in_memory_font_file_loader : UInt64
+    create_http_font_file_loader : UInt64
+    analyze_container_type : UInt64
+    unpack_font_file : UInt64
+    create_font_face_reference3 : UInt64
+    create_font_resource : UInt64
+    get_system_font_set2 : UInt64
+    get_system_font_collection3 : UInt64
+    create_font_collection_from_font_set2 : UInt64
+    create_font_set_builder3 : UInt64
+    create_text_format2 : UInt64
   end
 
   IDWriteFactory6_GUID = "f3744d80-21f7-42eb-b35d-995bc72fc223"
@@ -3134,64 +3134,64 @@ lib LibWin32
   end
 
   struct IDWriteFontFace5VTbl
-    query_interface : Proc(IDWriteFontFace5*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFace5*, UInt32)
-    release : Proc(IDWriteFontFace5*, UInt32)
-    get_type : Proc(IDWriteFontFace5*, DWRITE_FONT_FACE_TYPE)
-    get_files : Proc(IDWriteFontFace5*, UInt32*, IDWriteFontFile*, HRESULT)
-    get_index : Proc(IDWriteFontFace5*, UInt32)
-    get_simulations : Proc(IDWriteFontFace5*, DWRITE_FONT_SIMULATIONS)
-    is_symbol_font : Proc(IDWriteFontFace5*, LibC::BOOL)
-    get_metrics : Proc(IDWriteFontFace5*, DWRITE_FONT_METRICS*, Void)
-    get_glyph_count : Proc(IDWriteFontFace5*, UInt16)
-    get_design_glyph_metrics : Proc(IDWriteFontFace5*, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)
-    get_glyph_indices : Proc(IDWriteFontFace5*, UInt32*, UInt32, UInt16*, HRESULT)
-    try_get_font_table : Proc(IDWriteFontFace5*, UInt32, Void**, UInt32*, Void**, LibC::BOOL*, HRESULT)
-    release_font_table : Proc(IDWriteFontFace5*, Void*, Void)
-    get_glyph_run_outline : Proc(IDWriteFontFace5*, Float32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, UInt32, LibC::BOOL, LibC::BOOL, ID2D1SimplifiedGeometrySink, HRESULT)
-    get_recommended_rendering_mode : Proc(IDWriteFontFace5*, Float32, Float32, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, HRESULT)
-    get_gdi_compatible_metrics : Proc(IDWriteFontFace5*, Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS*, HRESULT)
-    get_gdi_compatible_glyph_metrics : Proc(IDWriteFontFace5*, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)
-    get_metrics2 : Proc(IDWriteFontFace5*, DWRITE_FONT_METRICS1*, Void)
-    get_gdi_compatible_metrics2 : Proc(IDWriteFontFace5*, Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS1*, HRESULT)
-    get_caret_metrics : Proc(IDWriteFontFace5*, DWRITE_CARET_METRICS*, Void)
-    get_unicode_ranges : Proc(IDWriteFontFace5*, UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)
-    is_monospaced_font : Proc(IDWriteFontFace5*, LibC::BOOL)
-    get_design_glyph_advances : Proc(IDWriteFontFace5*, UInt32, UInt16*, Int32*, LibC::BOOL, HRESULT)
-    get_gdi_compatible_glyph_advances : Proc(IDWriteFontFace5*, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, UInt32, UInt16*, Int32*, HRESULT)
-    get_kerning_pair_adjustments : Proc(IDWriteFontFace5*, UInt32, UInt16*, Int32*, HRESULT)
-    has_kerning_pairs : Proc(IDWriteFontFace5*, LibC::BOOL)
-    get_recommended_rendering_mode2 : Proc(IDWriteFontFace5*, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, DWRITE_RENDERING_MODE*, HRESULT)
-    get_vertical_glyph_variants : Proc(IDWriteFontFace5*, UInt32, UInt16*, UInt16*, HRESULT)
-    has_vertical_glyph_variants : Proc(IDWriteFontFace5*, LibC::BOOL)
-    is_color_font : Proc(IDWriteFontFace5*, LibC::BOOL)
-    get_color_palette_count : Proc(IDWriteFontFace5*, UInt32)
-    get_palette_entry_count : Proc(IDWriteFontFace5*, UInt32)
-    get_palette_entries : Proc(IDWriteFontFace5*, UInt32, UInt32, UInt32, DWRITE_COLOR_F*, HRESULT)
-    get_recommended_rendering_mode3 : Proc(IDWriteFontFace5*, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, DWRITE_GRID_FIT_MODE*, HRESULT)
-    get_font_face_reference : Proc(IDWriteFontFace5*, IDWriteFontFaceReference*, HRESULT)
-    get_panose : Proc(IDWriteFontFace5*, DWRITE_PANOSE*, Void)
-    get_weight : Proc(IDWriteFontFace5*, DWRITE_FONT_WEIGHT)
-    get_stretch : Proc(IDWriteFontFace5*, DWRITE_FONT_STRETCH)
-    get_style : Proc(IDWriteFontFace5*, DWRITE_FONT_STYLE)
-    get_family_names : Proc(IDWriteFontFace5*, IDWriteLocalizedStrings*, HRESULT)
-    get_face_names : Proc(IDWriteFontFace5*, IDWriteLocalizedStrings*, HRESULT)
-    get_informational_strings : Proc(IDWriteFontFace5*, DWRITE_INFORMATIONAL_STRING_ID, IDWriteLocalizedStrings*, LibC::BOOL*, HRESULT)
-    has_character : Proc(IDWriteFontFace5*, UInt32, LibC::BOOL)
-    get_recommended_rendering_mode4 : Proc(IDWriteFontFace5*, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE1*, DWRITE_GRID_FIT_MODE*, HRESULT)
-    is_character_local : Proc(IDWriteFontFace5*, UInt32, LibC::BOOL)
-    is_glyph_local : Proc(IDWriteFontFace5*, UInt16, LibC::BOOL)
-    are_characters_local : Proc(IDWriteFontFace5*, Char*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)
-    are_glyphs_local : Proc(IDWriteFontFace5*, UInt16*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)
-    get_glyph_image_formats : Proc(IDWriteFontFace5*, UInt16, UInt32, UInt32, DWRITE_GLYPH_IMAGE_FORMATS*, HRESULT)
-    get_glyph_image_formats2 : Proc(IDWriteFontFace5*, DWRITE_GLYPH_IMAGE_FORMATS)
-    get_glyph_image_data : Proc(IDWriteFontFace5*, UInt16, UInt32, DWRITE_GLYPH_IMAGE_FORMATS, DWRITE_GLYPH_IMAGE_DATA*, Void**, HRESULT)
-    release_glyph_image_data : Proc(IDWriteFontFace5*, Void*, Void)
-    get_font_axis_value_count : Proc(IDWriteFontFace5*, UInt32)
-    get_font_axis_values : Proc(IDWriteFontFace5*, DWRITE_FONT_AXIS_VALUE*, UInt32, HRESULT)
-    has_variations : Proc(IDWriteFontFace5*, LibC::BOOL)
-    get_font_resource : Proc(IDWriteFontFace5*, IDWriteFontResource*, HRESULT)
-    equals : Proc(IDWriteFontFace5*, IDWriteFontFace, LibC::BOOL)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type : UInt64
+    get_files : UInt64
+    get_index : UInt64
+    get_simulations : UInt64
+    is_symbol_font : UInt64
+    get_metrics : UInt64
+    get_glyph_count : UInt64
+    get_design_glyph_metrics : UInt64
+    get_glyph_indices : UInt64
+    try_get_font_table : UInt64
+    release_font_table : UInt64
+    get_glyph_run_outline : UInt64
+    get_recommended_rendering_mode : UInt64
+    get_gdi_compatible_metrics : UInt64
+    get_gdi_compatible_glyph_metrics : UInt64
+    get_metrics2 : UInt64
+    get_gdi_compatible_metrics2 : UInt64
+    get_caret_metrics : UInt64
+    get_unicode_ranges : UInt64
+    is_monospaced_font : UInt64
+    get_design_glyph_advances : UInt64
+    get_gdi_compatible_glyph_advances : UInt64
+    get_kerning_pair_adjustments : UInt64
+    has_kerning_pairs : UInt64
+    get_recommended_rendering_mode2 : UInt64
+    get_vertical_glyph_variants : UInt64
+    has_vertical_glyph_variants : UInt64
+    is_color_font : UInt64
+    get_color_palette_count : UInt64
+    get_palette_entry_count : UInt64
+    get_palette_entries : UInt64
+    get_recommended_rendering_mode3 : UInt64
+    get_font_face_reference : UInt64
+    get_panose : UInt64
+    get_weight : UInt64
+    get_stretch : UInt64
+    get_style : UInt64
+    get_family_names : UInt64
+    get_face_names : UInt64
+    get_informational_strings : UInt64
+    has_character : UInt64
+    get_recommended_rendering_mode4 : UInt64
+    is_character_local : UInt64
+    is_glyph_local : UInt64
+    are_characters_local : UInt64
+    are_glyphs_local : UInt64
+    get_glyph_image_formats : UInt64
+    get_glyph_image_formats2 : UInt64
+    get_glyph_image_data : UInt64
+    release_glyph_image_data : UInt64
+    get_font_axis_value_count : UInt64
+    get_font_axis_values : UInt64
+    has_variations : UInt64
+    get_font_resource : UInt64
+    equals : UInt64
   end
 
   IDWriteFontFace5_GUID = "98eff3a5-b667-479a-b145-e2fa5b9fdc29"
@@ -3201,21 +3201,21 @@ lib LibWin32
   end
 
   struct IDWriteFontResourceVTbl
-    query_interface : Proc(IDWriteFontResource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontResource*, UInt32)
-    release : Proc(IDWriteFontResource*, UInt32)
-    get_font_file : Proc(IDWriteFontResource*, IDWriteFontFile*, HRESULT)
-    get_font_face_index : Proc(IDWriteFontResource*, UInt32)
-    get_font_axis_count : Proc(IDWriteFontResource*, UInt32)
-    get_default_font_axis_values : Proc(IDWriteFontResource*, DWRITE_FONT_AXIS_VALUE*, UInt32, HRESULT)
-    get_font_axis_ranges : Proc(IDWriteFontResource*, DWRITE_FONT_AXIS_RANGE*, UInt32, HRESULT)
-    get_font_axis_attributes : Proc(IDWriteFontResource*, UInt32, DWRITE_FONT_AXIS_ATTRIBUTES)
-    get_axis_names : Proc(IDWriteFontResource*, UInt32, IDWriteLocalizedStrings*, HRESULT)
-    get_axis_value_name_count : Proc(IDWriteFontResource*, UInt32, UInt32)
-    get_axis_value_names : Proc(IDWriteFontResource*, UInt32, UInt32, DWRITE_FONT_AXIS_RANGE*, IDWriteLocalizedStrings*, HRESULT)
-    has_variations : Proc(IDWriteFontResource*, LibC::BOOL)
-    create_font_face : Proc(IDWriteFontResource*, DWRITE_FONT_SIMULATIONS, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontFace5*, HRESULT)
-    create_font_face_reference : Proc(IDWriteFontResource*, DWRITE_FONT_SIMULATIONS, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontFaceReference1*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_file : UInt64
+    get_font_face_index : UInt64
+    get_font_axis_count : UInt64
+    get_default_font_axis_values : UInt64
+    get_font_axis_ranges : UInt64
+    get_font_axis_attributes : UInt64
+    get_axis_names : UInt64
+    get_axis_value_name_count : UInt64
+    get_axis_value_names : UInt64
+    has_variations : UInt64
+    create_font_face : UInt64
+    create_font_face_reference : UInt64
   end
 
   IDWriteFontResource_GUID = "1f803a76-6871-48e8-987f-b975551c50f2"
@@ -3225,26 +3225,26 @@ lib LibWin32
   end
 
   struct IDWriteFontFaceReference1VTbl
-    query_interface : Proc(IDWriteFontFaceReference1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFaceReference1*, UInt32)
-    release : Proc(IDWriteFontFaceReference1*, UInt32)
-    create_font_face : Proc(IDWriteFontFaceReference1*, IDWriteFontFace3*, HRESULT)
-    create_font_face_with_simulations : Proc(IDWriteFontFaceReference1*, DWRITE_FONT_SIMULATIONS, IDWriteFontFace3*, HRESULT)
-    equals : Proc(IDWriteFontFaceReference1*, IDWriteFontFaceReference, LibC::BOOL)
-    get_font_face_index : Proc(IDWriteFontFaceReference1*, UInt32)
-    get_simulations : Proc(IDWriteFontFaceReference1*, DWRITE_FONT_SIMULATIONS)
-    get_font_file : Proc(IDWriteFontFaceReference1*, IDWriteFontFile*, HRESULT)
-    get_local_file_size : Proc(IDWriteFontFaceReference1*, UInt64)
-    get_file_size : Proc(IDWriteFontFaceReference1*, UInt64)
-    get_file_time : Proc(IDWriteFontFaceReference1*, FILETIME*, HRESULT)
-    get_locality : Proc(IDWriteFontFaceReference1*, DWRITE_LOCALITY)
-    enqueue_font_download_request : Proc(IDWriteFontFaceReference1*, HRESULT)
-    enqueue_character_download_request : Proc(IDWriteFontFaceReference1*, Char*, UInt32, HRESULT)
-    enqueue_glyph_download_request : Proc(IDWriteFontFaceReference1*, UInt16*, UInt32, HRESULT)
-    enqueue_file_fragment_download_request : Proc(IDWriteFontFaceReference1*, UInt64, UInt64, HRESULT)
-    create_font_face2 : Proc(IDWriteFontFaceReference1*, IDWriteFontFace5*, HRESULT)
-    get_font_axis_value_count : Proc(IDWriteFontFaceReference1*, UInt32)
-    get_font_axis_values : Proc(IDWriteFontFaceReference1*, DWRITE_FONT_AXIS_VALUE*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_font_face : UInt64
+    create_font_face_with_simulations : UInt64
+    equals : UInt64
+    get_font_face_index : UInt64
+    get_simulations : UInt64
+    get_font_file : UInt64
+    get_local_file_size : UInt64
+    get_file_size : UInt64
+    get_file_time : UInt64
+    get_locality : UInt64
+    enqueue_font_download_request : UInt64
+    enqueue_character_download_request : UInt64
+    enqueue_glyph_download_request : UInt64
+    enqueue_file_fragment_download_request : UInt64
+    create_font_face2 : UInt64
+    get_font_axis_value_count : UInt64
+    get_font_axis_values : UInt64
   end
 
   IDWriteFontFaceReference1_GUID = "c081fe77-2fd1-41ac-a5a3-34983c4ba61a"
@@ -3254,16 +3254,16 @@ lib LibWin32
   end
 
   struct IDWriteFontSetBuilder2VTbl
-    query_interface : Proc(IDWriteFontSetBuilder2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontSetBuilder2*, UInt32)
-    release : Proc(IDWriteFontSetBuilder2*, UInt32)
-    add_font_face_reference : Proc(IDWriteFontSetBuilder2*, IDWriteFontFaceReference, DWRITE_FONT_PROPERTY*, UInt32, HRESULT)
-    add_font_face_reference2 : Proc(IDWriteFontSetBuilder2*, IDWriteFontFaceReference, HRESULT)
-    add_font_set : Proc(IDWriteFontSetBuilder2*, IDWriteFontSet, HRESULT)
-    create_font_set : Proc(IDWriteFontSetBuilder2*, IDWriteFontSet*, HRESULT)
-    add_font_file : Proc(IDWriteFontSetBuilder2*, IDWriteFontFile, HRESULT)
-    add_font : Proc(IDWriteFontSetBuilder2*, IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, DWRITE_FONT_AXIS_VALUE*, UInt32, DWRITE_FONT_AXIS_RANGE*, UInt32, DWRITE_FONT_PROPERTY*, UInt32, HRESULT)
-    add_font_file2 : Proc(IDWriteFontSetBuilder2*, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_font_face_reference : UInt64
+    add_font_face_reference2 : UInt64
+    add_font_set : UInt64
+    create_font_set : UInt64
+    add_font_file : UInt64
+    add_font : UInt64
+    add_font_file2 : UInt64
   end
 
   IDWriteFontSetBuilder2_GUID = "ee5ba612-b131-463c-8f4f-3189b9401e45"
@@ -3273,32 +3273,32 @@ lib LibWin32
   end
 
   struct IDWriteFontSet1VTbl
-    query_interface : Proc(IDWriteFontSet1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontSet1*, UInt32)
-    release : Proc(IDWriteFontSet1*, UInt32)
-    get_font_count : Proc(IDWriteFontSet1*, UInt32)
-    get_font_face_reference : Proc(IDWriteFontSet1*, UInt32, IDWriteFontFaceReference*, HRESULT)
-    find_font_face_reference : Proc(IDWriteFontSet1*, IDWriteFontFaceReference, UInt32*, LibC::BOOL*, HRESULT)
-    find_font_face : Proc(IDWriteFontSet1*, IDWriteFontFace, UInt32*, LibC::BOOL*, HRESULT)
-    get_property_values : Proc(IDWriteFontSet1*, DWRITE_FONT_PROPERTY_ID, IDWriteStringList*, HRESULT)
-    get_property_values2 : Proc(IDWriteFontSet1*, DWRITE_FONT_PROPERTY_ID, LibC::LPWSTR, IDWriteStringList*, HRESULT)
-    get_property_values3 : Proc(IDWriteFontSet1*, UInt32, DWRITE_FONT_PROPERTY_ID, LibC::BOOL*, IDWriteLocalizedStrings*, HRESULT)
-    get_property_occurrence_count : Proc(IDWriteFontSet1*, DWRITE_FONT_PROPERTY*, UInt32*, HRESULT)
-    get_matching_fonts : Proc(IDWriteFontSet1*, LibC::LPWSTR, DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFontSet*, HRESULT)
-    get_matching_fonts2 : Proc(IDWriteFontSet1*, DWRITE_FONT_PROPERTY*, UInt32, IDWriteFontSet*, HRESULT)
-    get_matching_fonts3 : Proc(IDWriteFontSet1*, DWRITE_FONT_PROPERTY*, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontSet1*, HRESULT)
-    get_first_font_resources : Proc(IDWriteFontSet1*, IDWriteFontSet1*, HRESULT)
-    get_filtered_fonts : Proc(IDWriteFontSet1*, UInt32*, UInt32, IDWriteFontSet1*, HRESULT)
-    get_filtered_fonts2 : Proc(IDWriteFontSet1*, DWRITE_FONT_AXIS_RANGE*, UInt32, LibC::BOOL, IDWriteFontSet1*, HRESULT)
-    get_filtered_fonts3 : Proc(IDWriteFontSet1*, DWRITE_FONT_PROPERTY*, UInt32, LibC::BOOL, IDWriteFontSet1*, HRESULT)
-    get_filtered_font_indices : Proc(IDWriteFontSet1*, DWRITE_FONT_AXIS_RANGE*, UInt32, LibC::BOOL, UInt32*, UInt32, UInt32*, HRESULT)
-    get_filtered_font_indices2 : Proc(IDWriteFontSet1*, DWRITE_FONT_PROPERTY*, UInt32, LibC::BOOL, UInt32*, UInt32, UInt32*, HRESULT)
-    get_font_axis_ranges : Proc(IDWriteFontSet1*, UInt32, DWRITE_FONT_AXIS_RANGE*, UInt32, UInt32*, HRESULT)
-    get_font_axis_ranges2 : Proc(IDWriteFontSet1*, DWRITE_FONT_AXIS_RANGE*, UInt32, UInt32*, HRESULT)
-    get_font_face_reference2 : Proc(IDWriteFontSet1*, UInt32, IDWriteFontFaceReference1*, HRESULT)
-    create_font_resource : Proc(IDWriteFontSet1*, UInt32, IDWriteFontResource*, HRESULT)
-    create_font_face : Proc(IDWriteFontSet1*, UInt32, IDWriteFontFace5*, HRESULT)
-    get_font_locality : Proc(IDWriteFontSet1*, UInt32, DWRITE_LOCALITY)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_count : UInt64
+    get_font_face_reference : UInt64
+    find_font_face_reference : UInt64
+    find_font_face : UInt64
+    get_property_values : UInt64
+    get_property_values2 : UInt64
+    get_property_values3 : UInt64
+    get_property_occurrence_count : UInt64
+    get_matching_fonts : UInt64
+    get_matching_fonts2 : UInt64
+    get_matching_fonts3 : UInt64
+    get_first_font_resources : UInt64
+    get_filtered_fonts : UInt64
+    get_filtered_fonts2 : UInt64
+    get_filtered_fonts3 : UInt64
+    get_filtered_font_indices : UInt64
+    get_filtered_font_indices2 : UInt64
+    get_font_axis_ranges : UInt64
+    get_font_axis_ranges2 : UInt64
+    get_font_face_reference2 : UInt64
+    create_font_resource : UInt64
+    create_font_face : UInt64
+    get_font_locality : UInt64
   end
 
   IDWriteFontSet1_GUID = "7e9fda85-6c92-4053-bc47-7ae3530db4d3"
@@ -3308,16 +3308,16 @@ lib LibWin32
   end
 
   struct IDWriteFontList2VTbl
-    query_interface : Proc(IDWriteFontList2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontList2*, UInt32)
-    release : Proc(IDWriteFontList2*, UInt32)
-    get_font_collection : Proc(IDWriteFontList2*, IDWriteFontCollection*, HRESULT)
-    get_font_count : Proc(IDWriteFontList2*, UInt32)
-    get_font : Proc(IDWriteFontList2*, UInt32, IDWriteFont*, HRESULT)
-    get_font_locality : Proc(IDWriteFontList2*, UInt32, DWRITE_LOCALITY)
-    get_font2 : Proc(IDWriteFontList2*, UInt32, IDWriteFont3*, HRESULT)
-    get_font_face_reference : Proc(IDWriteFontList2*, UInt32, IDWriteFontFaceReference*, HRESULT)
-    get_font_set : Proc(IDWriteFontList2*, IDWriteFontSet1*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_collection : UInt64
+    get_font_count : UInt64
+    get_font : UInt64
+    get_font_locality : UInt64
+    get_font2 : UInt64
+    get_font_face_reference : UInt64
+    get_font_set : UInt64
   end
 
   IDWriteFontList2_GUID = "c0763a34-77af-445a-b735-08c37b0a5bf5"
@@ -3327,20 +3327,20 @@ lib LibWin32
   end
 
   struct IDWriteFontFamily2VTbl
-    query_interface : Proc(IDWriteFontFamily2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFamily2*, UInt32)
-    release : Proc(IDWriteFontFamily2*, UInt32)
-    get_font_collection : Proc(IDWriteFontFamily2*, IDWriteFontCollection*, HRESULT)
-    get_font_count : Proc(IDWriteFontFamily2*, UInt32)
-    get_font : Proc(IDWriteFontFamily2*, UInt32, IDWriteFont*, HRESULT)
-    get_family_names : Proc(IDWriteFontFamily2*, IDWriteLocalizedStrings*, HRESULT)
-    get_first_matching_font : Proc(IDWriteFontFamily2*, DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFont*, HRESULT)
-    get_matching_fonts : Proc(IDWriteFontFamily2*, DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFontList*, HRESULT)
-    get_font_locality : Proc(IDWriteFontFamily2*, UInt32, DWRITE_LOCALITY)
-    get_font2 : Proc(IDWriteFontFamily2*, UInt32, IDWriteFont3*, HRESULT)
-    get_font_face_reference : Proc(IDWriteFontFamily2*, UInt32, IDWriteFontFaceReference*, HRESULT)
-    get_matching_fonts2 : Proc(IDWriteFontFamily2*, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontList2*, HRESULT)
-    get_font_set : Proc(IDWriteFontFamily2*, IDWriteFontSet1*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_collection : UInt64
+    get_font_count : UInt64
+    get_font : UInt64
+    get_family_names : UInt64
+    get_first_matching_font : UInt64
+    get_matching_fonts : UInt64
+    get_font_locality : UInt64
+    get_font2 : UInt64
+    get_font_face_reference : UInt64
+    get_matching_fonts2 : UInt64
+    get_font_set : UInt64
   end
 
   IDWriteFontFamily2_GUID = "3ed49e77-a398-4261-b9cf-c126c2131ef3"
@@ -3350,19 +3350,19 @@ lib LibWin32
   end
 
   struct IDWriteFontCollection2VTbl
-    query_interface : Proc(IDWriteFontCollection2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontCollection2*, UInt32)
-    release : Proc(IDWriteFontCollection2*, UInt32)
-    get_font_family_count : Proc(IDWriteFontCollection2*, UInt32)
-    get_font_family : Proc(IDWriteFontCollection2*, UInt32, IDWriteFontFamily*, HRESULT)
-    find_family_name : Proc(IDWriteFontCollection2*, LibC::LPWSTR, UInt32*, LibC::BOOL*, HRESULT)
-    get_font_from_font_face : Proc(IDWriteFontCollection2*, IDWriteFontFace, IDWriteFont*, HRESULT)
-    get_font_set : Proc(IDWriteFontCollection2*, IDWriteFontSet*, HRESULT)
-    get_font_family2 : Proc(IDWriteFontCollection2*, UInt32, IDWriteFontFamily1*, HRESULT)
-    get_font_family3 : Proc(IDWriteFontCollection2*, UInt32, IDWriteFontFamily2*, HRESULT)
-    get_matching_fonts : Proc(IDWriteFontCollection2*, LibC::LPWSTR, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontList2*, HRESULT)
-    get_font_family_model : Proc(IDWriteFontCollection2*, DWRITE_FONT_FAMILY_MODEL)
-    get_font_set2 : Proc(IDWriteFontCollection2*, IDWriteFontSet1*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_family_count : UInt64
+    get_font_family : UInt64
+    find_family_name : UInt64
+    get_font_from_font_face : UInt64
+    get_font_set : UInt64
+    get_font_family2 : UInt64
+    get_font_family3 : UInt64
+    get_matching_fonts : UInt64
+    get_font_family_model : UInt64
+    get_font_set2 : UInt64
   end
 
   IDWriteFontCollection2_GUID = "514039c6-4617-4064-bf8b-92ea83e506e0"
@@ -3372,95 +3372,95 @@ lib LibWin32
   end
 
   struct IDWriteTextLayout4VTbl
-    query_interface : Proc(IDWriteTextLayout4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextLayout4*, UInt32)
-    release : Proc(IDWriteTextLayout4*, UInt32)
-    set_text_alignment : Proc(IDWriteTextLayout4*, DWRITE_TEXT_ALIGNMENT, HRESULT)
-    set_paragraph_alignment : Proc(IDWriteTextLayout4*, DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)
-    set_word_wrapping : Proc(IDWriteTextLayout4*, DWRITE_WORD_WRAPPING, HRESULT)
-    set_reading_direction : Proc(IDWriteTextLayout4*, DWRITE_READING_DIRECTION, HRESULT)
-    set_flow_direction : Proc(IDWriteTextLayout4*, DWRITE_FLOW_DIRECTION, HRESULT)
-    set_incremental_tab_stop : Proc(IDWriteTextLayout4*, Float32, HRESULT)
-    set_trimming : Proc(IDWriteTextLayout4*, DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)
-    set_line_spacing : Proc(IDWriteTextLayout4*, DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)
-    get_text_alignment : Proc(IDWriteTextLayout4*, DWRITE_TEXT_ALIGNMENT)
-    get_paragraph_alignment : Proc(IDWriteTextLayout4*, DWRITE_PARAGRAPH_ALIGNMENT)
-    get_word_wrapping : Proc(IDWriteTextLayout4*, DWRITE_WORD_WRAPPING)
-    get_reading_direction : Proc(IDWriteTextLayout4*, DWRITE_READING_DIRECTION)
-    get_flow_direction : Proc(IDWriteTextLayout4*, DWRITE_FLOW_DIRECTION)
-    get_incremental_tab_stop : Proc(IDWriteTextLayout4*, Float32)
-    get_trimming : Proc(IDWriteTextLayout4*, DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)
-    get_line_spacing : Proc(IDWriteTextLayout4*, DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)
-    get_font_collection : Proc(IDWriteTextLayout4*, IDWriteFontCollection*, HRESULT)
-    get_font_family_name_length : Proc(IDWriteTextLayout4*, UInt32)
-    get_font_family_name : Proc(IDWriteTextLayout4*, Char*, UInt32, HRESULT)
-    get_font_weight : Proc(IDWriteTextLayout4*, DWRITE_FONT_WEIGHT)
-    get_font_style : Proc(IDWriteTextLayout4*, DWRITE_FONT_STYLE)
-    get_font_stretch : Proc(IDWriteTextLayout4*, DWRITE_FONT_STRETCH)
-    get_font_size : Proc(IDWriteTextLayout4*, Float32)
-    get_locale_name_length : Proc(IDWriteTextLayout4*, UInt32)
-    get_locale_name : Proc(IDWriteTextLayout4*, Char*, UInt32, HRESULT)
-    set_max_width : Proc(IDWriteTextLayout4*, Float32, HRESULT)
-    set_max_height : Proc(IDWriteTextLayout4*, Float32, HRESULT)
-    set_font_collection : Proc(IDWriteTextLayout4*, IDWriteFontCollection, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_family_name : Proc(IDWriteTextLayout4*, LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_weight : Proc(IDWriteTextLayout4*, DWRITE_FONT_WEIGHT, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_style : Proc(IDWriteTextLayout4*, DWRITE_FONT_STYLE, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_stretch : Proc(IDWriteTextLayout4*, DWRITE_FONT_STRETCH, DWRITE_TEXT_RANGE, HRESULT)
-    set_font_size : Proc(IDWriteTextLayout4*, Float32, DWRITE_TEXT_RANGE, HRESULT)
-    set_underline : Proc(IDWriteTextLayout4*, LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)
-    set_strikethrough : Proc(IDWriteTextLayout4*, LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)
-    set_drawing_effect : Proc(IDWriteTextLayout4*, IUnknown, DWRITE_TEXT_RANGE, HRESULT)
-    set_inline_object : Proc(IDWriteTextLayout4*, IDWriteInlineObject, DWRITE_TEXT_RANGE, HRESULT)
-    set_typography : Proc(IDWriteTextLayout4*, IDWriteTypography, DWRITE_TEXT_RANGE, HRESULT)
-    set_locale_name : Proc(IDWriteTextLayout4*, LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)
-    get_max_width : Proc(IDWriteTextLayout4*, Float32)
-    get_max_height : Proc(IDWriteTextLayout4*, Float32)
-    get_font_collection2 : Proc(IDWriteTextLayout4*, UInt32, IDWriteFontCollection*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_family_name_length2 : Proc(IDWriteTextLayout4*, UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_family_name2 : Proc(IDWriteTextLayout4*, UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_weight2 : Proc(IDWriteTextLayout4*, UInt32, DWRITE_FONT_WEIGHT*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_style2 : Proc(IDWriteTextLayout4*, UInt32, DWRITE_FONT_STYLE*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_stretch2 : Proc(IDWriteTextLayout4*, UInt32, DWRITE_FONT_STRETCH*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_font_size2 : Proc(IDWriteTextLayout4*, UInt32, Float32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_underline : Proc(IDWriteTextLayout4*, UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_strikethrough : Proc(IDWriteTextLayout4*, UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_drawing_effect : Proc(IDWriteTextLayout4*, UInt32, IUnknown*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_inline_object : Proc(IDWriteTextLayout4*, UInt32, IDWriteInlineObject*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_typography : Proc(IDWriteTextLayout4*, UInt32, IDWriteTypography*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_locale_name_length2 : Proc(IDWriteTextLayout4*, UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_locale_name2 : Proc(IDWriteTextLayout4*, UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)
-    draw : Proc(IDWriteTextLayout4*, Void*, IDWriteTextRenderer, Float32, Float32, HRESULT)
-    get_line_metrics : Proc(IDWriteTextLayout4*, DWRITE_LINE_METRICS*, UInt32, UInt32*, HRESULT)
-    get_metrics : Proc(IDWriteTextLayout4*, DWRITE_TEXT_METRICS*, HRESULT)
-    get_overhang_metrics : Proc(IDWriteTextLayout4*, DWRITE_OVERHANG_METRICS*, HRESULT)
-    get_cluster_metrics : Proc(IDWriteTextLayout4*, DWRITE_CLUSTER_METRICS*, UInt32, UInt32*, HRESULT)
-    determine_min_width : Proc(IDWriteTextLayout4*, Float32*, HRESULT)
-    hit_test_point : Proc(IDWriteTextLayout4*, Float32, Float32, LibC::BOOL*, LibC::BOOL*, DWRITE_HIT_TEST_METRICS*, HRESULT)
-    hit_test_text_position : Proc(IDWriteTextLayout4*, UInt32, LibC::BOOL, Float32*, Float32*, DWRITE_HIT_TEST_METRICS*, HRESULT)
-    hit_test_text_range : Proc(IDWriteTextLayout4*, UInt32, UInt32, Float32, Float32, DWRITE_HIT_TEST_METRICS*, UInt32, UInt32*, HRESULT)
-    set_pair_kerning : Proc(IDWriteTextLayout4*, LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)
-    get_pair_kerning : Proc(IDWriteTextLayout4*, UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)
-    set_character_spacing : Proc(IDWriteTextLayout4*, Float32, Float32, Float32, DWRITE_TEXT_RANGE, HRESULT)
-    get_character_spacing : Proc(IDWriteTextLayout4*, UInt32, Float32*, Float32*, Float32*, DWRITE_TEXT_RANGE*, HRESULT)
-    get_metrics2 : Proc(IDWriteTextLayout4*, DWRITE_TEXT_METRICS1*, HRESULT)
-    set_vertical_glyph_orientation : Proc(IDWriteTextLayout4*, DWRITE_VERTICAL_GLYPH_ORIENTATION, HRESULT)
-    get_vertical_glyph_orientation : Proc(IDWriteTextLayout4*, DWRITE_VERTICAL_GLYPH_ORIENTATION)
-    set_last_line_wrapping : Proc(IDWriteTextLayout4*, LibC::BOOL, HRESULT)
-    get_last_line_wrapping : Proc(IDWriteTextLayout4*, LibC::BOOL)
-    set_optical_alignment : Proc(IDWriteTextLayout4*, DWRITE_OPTICAL_ALIGNMENT, HRESULT)
-    get_optical_alignment : Proc(IDWriteTextLayout4*, DWRITE_OPTICAL_ALIGNMENT)
-    set_font_fallback : Proc(IDWriteTextLayout4*, IDWriteFontFallback, HRESULT)
-    get_font_fallback : Proc(IDWriteTextLayout4*, IDWriteFontFallback*, HRESULT)
-    invalidate_layout : Proc(IDWriteTextLayout4*, HRESULT)
-    set_line_spacing2 : Proc(IDWriteTextLayout4*, DWRITE_LINE_SPACING*, HRESULT)
-    get_line_spacing2 : Proc(IDWriteTextLayout4*, DWRITE_LINE_SPACING*, HRESULT)
-    get_line_metrics2 : Proc(IDWriteTextLayout4*, DWRITE_LINE_METRICS1*, UInt32, UInt32*, HRESULT)
-    set_font_axis_values : Proc(IDWriteTextLayout4*, DWRITE_FONT_AXIS_VALUE*, UInt32, DWRITE_TEXT_RANGE, HRESULT)
-    get_font_axis_value_count : Proc(IDWriteTextLayout4*, UInt32, UInt32)
-    get_font_axis_values : Proc(IDWriteTextLayout4*, UInt32, DWRITE_FONT_AXIS_VALUE*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)
-    get_automatic_font_axes : Proc(IDWriteTextLayout4*, DWRITE_AUTOMATIC_FONT_AXES)
-    set_automatic_font_axes : Proc(IDWriteTextLayout4*, DWRITE_AUTOMATIC_FONT_AXES, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_text_alignment : UInt64
+    set_paragraph_alignment : UInt64
+    set_word_wrapping : UInt64
+    set_reading_direction : UInt64
+    set_flow_direction : UInt64
+    set_incremental_tab_stop : UInt64
+    set_trimming : UInt64
+    set_line_spacing : UInt64
+    get_text_alignment : UInt64
+    get_paragraph_alignment : UInt64
+    get_word_wrapping : UInt64
+    get_reading_direction : UInt64
+    get_flow_direction : UInt64
+    get_incremental_tab_stop : UInt64
+    get_trimming : UInt64
+    get_line_spacing : UInt64
+    get_font_collection : UInt64
+    get_font_family_name_length : UInt64
+    get_font_family_name : UInt64
+    get_font_weight : UInt64
+    get_font_style : UInt64
+    get_font_stretch : UInt64
+    get_font_size : UInt64
+    get_locale_name_length : UInt64
+    get_locale_name : UInt64
+    set_max_width : UInt64
+    set_max_height : UInt64
+    set_font_collection : UInt64
+    set_font_family_name : UInt64
+    set_font_weight : UInt64
+    set_font_style : UInt64
+    set_font_stretch : UInt64
+    set_font_size : UInt64
+    set_underline : UInt64
+    set_strikethrough : UInt64
+    set_drawing_effect : UInt64
+    set_inline_object : UInt64
+    set_typography : UInt64
+    set_locale_name : UInt64
+    get_max_width : UInt64
+    get_max_height : UInt64
+    get_font_collection2 : UInt64
+    get_font_family_name_length2 : UInt64
+    get_font_family_name2 : UInt64
+    get_font_weight2 : UInt64
+    get_font_style2 : UInt64
+    get_font_stretch2 : UInt64
+    get_font_size2 : UInt64
+    get_underline : UInt64
+    get_strikethrough : UInt64
+    get_drawing_effect : UInt64
+    get_inline_object : UInt64
+    get_typography : UInt64
+    get_locale_name_length2 : UInt64
+    get_locale_name2 : UInt64
+    draw : UInt64
+    get_line_metrics : UInt64
+    get_metrics : UInt64
+    get_overhang_metrics : UInt64
+    get_cluster_metrics : UInt64
+    determine_min_width : UInt64
+    hit_test_point : UInt64
+    hit_test_text_position : UInt64
+    hit_test_text_range : UInt64
+    set_pair_kerning : UInt64
+    get_pair_kerning : UInt64
+    set_character_spacing : UInt64
+    get_character_spacing : UInt64
+    get_metrics2 : UInt64
+    set_vertical_glyph_orientation : UInt64
+    get_vertical_glyph_orientation : UInt64
+    set_last_line_wrapping : UInt64
+    get_last_line_wrapping : UInt64
+    set_optical_alignment : UInt64
+    get_optical_alignment : UInt64
+    set_font_fallback : UInt64
+    get_font_fallback : UInt64
+    invalidate_layout : UInt64
+    set_line_spacing2 : UInt64
+    get_line_spacing2 : UInt64
+    get_line_metrics2 : UInt64
+    set_font_axis_values : UInt64
+    get_font_axis_value_count : UInt64
+    get_font_axis_values : UInt64
+    get_automatic_font_axes : UInt64
+    set_automatic_font_axes : UInt64
   end
 
   IDWriteTextLayout4_GUID = "05a9bf42-223f-4441-b5fb-8263685f55e9"
@@ -3470,49 +3470,49 @@ lib LibWin32
   end
 
   struct IDWriteTextFormat3VTbl
-    query_interface : Proc(IDWriteTextFormat3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteTextFormat3*, UInt32)
-    release : Proc(IDWriteTextFormat3*, UInt32)
-    set_text_alignment : Proc(IDWriteTextFormat3*, DWRITE_TEXT_ALIGNMENT, HRESULT)
-    set_paragraph_alignment : Proc(IDWriteTextFormat3*, DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)
-    set_word_wrapping : Proc(IDWriteTextFormat3*, DWRITE_WORD_WRAPPING, HRESULT)
-    set_reading_direction : Proc(IDWriteTextFormat3*, DWRITE_READING_DIRECTION, HRESULT)
-    set_flow_direction : Proc(IDWriteTextFormat3*, DWRITE_FLOW_DIRECTION, HRESULT)
-    set_incremental_tab_stop : Proc(IDWriteTextFormat3*, Float32, HRESULT)
-    set_trimming : Proc(IDWriteTextFormat3*, DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)
-    set_line_spacing : Proc(IDWriteTextFormat3*, DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)
-    get_text_alignment : Proc(IDWriteTextFormat3*, DWRITE_TEXT_ALIGNMENT)
-    get_paragraph_alignment : Proc(IDWriteTextFormat3*, DWRITE_PARAGRAPH_ALIGNMENT)
-    get_word_wrapping : Proc(IDWriteTextFormat3*, DWRITE_WORD_WRAPPING)
-    get_reading_direction : Proc(IDWriteTextFormat3*, DWRITE_READING_DIRECTION)
-    get_flow_direction : Proc(IDWriteTextFormat3*, DWRITE_FLOW_DIRECTION)
-    get_incremental_tab_stop : Proc(IDWriteTextFormat3*, Float32)
-    get_trimming : Proc(IDWriteTextFormat3*, DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)
-    get_line_spacing : Proc(IDWriteTextFormat3*, DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)
-    get_font_collection : Proc(IDWriteTextFormat3*, IDWriteFontCollection*, HRESULT)
-    get_font_family_name_length : Proc(IDWriteTextFormat3*, UInt32)
-    get_font_family_name : Proc(IDWriteTextFormat3*, Char*, UInt32, HRESULT)
-    get_font_weight : Proc(IDWriteTextFormat3*, DWRITE_FONT_WEIGHT)
-    get_font_style : Proc(IDWriteTextFormat3*, DWRITE_FONT_STYLE)
-    get_font_stretch : Proc(IDWriteTextFormat3*, DWRITE_FONT_STRETCH)
-    get_font_size : Proc(IDWriteTextFormat3*, Float32)
-    get_locale_name_length : Proc(IDWriteTextFormat3*, UInt32)
-    get_locale_name : Proc(IDWriteTextFormat3*, Char*, UInt32, HRESULT)
-    set_vertical_glyph_orientation : Proc(IDWriteTextFormat3*, DWRITE_VERTICAL_GLYPH_ORIENTATION, HRESULT)
-    get_vertical_glyph_orientation : Proc(IDWriteTextFormat3*, DWRITE_VERTICAL_GLYPH_ORIENTATION)
-    set_last_line_wrapping : Proc(IDWriteTextFormat3*, LibC::BOOL, HRESULT)
-    get_last_line_wrapping : Proc(IDWriteTextFormat3*, LibC::BOOL)
-    set_optical_alignment : Proc(IDWriteTextFormat3*, DWRITE_OPTICAL_ALIGNMENT, HRESULT)
-    get_optical_alignment : Proc(IDWriteTextFormat3*, DWRITE_OPTICAL_ALIGNMENT)
-    set_font_fallback : Proc(IDWriteTextFormat3*, IDWriteFontFallback, HRESULT)
-    get_font_fallback : Proc(IDWriteTextFormat3*, IDWriteFontFallback*, HRESULT)
-    set_line_spacing2 : Proc(IDWriteTextFormat3*, DWRITE_LINE_SPACING*, HRESULT)
-    get_line_spacing2 : Proc(IDWriteTextFormat3*, DWRITE_LINE_SPACING*, HRESULT)
-    set_font_axis_values : Proc(IDWriteTextFormat3*, DWRITE_FONT_AXIS_VALUE*, UInt32, HRESULT)
-    get_font_axis_value_count : Proc(IDWriteTextFormat3*, UInt32)
-    get_font_axis_values : Proc(IDWriteTextFormat3*, DWRITE_FONT_AXIS_VALUE*, UInt32, HRESULT)
-    get_automatic_font_axes : Proc(IDWriteTextFormat3*, DWRITE_AUTOMATIC_FONT_AXES)
-    set_automatic_font_axes : Proc(IDWriteTextFormat3*, DWRITE_AUTOMATIC_FONT_AXES, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_text_alignment : UInt64
+    set_paragraph_alignment : UInt64
+    set_word_wrapping : UInt64
+    set_reading_direction : UInt64
+    set_flow_direction : UInt64
+    set_incremental_tab_stop : UInt64
+    set_trimming : UInt64
+    set_line_spacing : UInt64
+    get_text_alignment : UInt64
+    get_paragraph_alignment : UInt64
+    get_word_wrapping : UInt64
+    get_reading_direction : UInt64
+    get_flow_direction : UInt64
+    get_incremental_tab_stop : UInt64
+    get_trimming : UInt64
+    get_line_spacing : UInt64
+    get_font_collection : UInt64
+    get_font_family_name_length : UInt64
+    get_font_family_name : UInt64
+    get_font_weight : UInt64
+    get_font_style : UInt64
+    get_font_stretch : UInt64
+    get_font_size : UInt64
+    get_locale_name_length : UInt64
+    get_locale_name : UInt64
+    set_vertical_glyph_orientation : UInt64
+    get_vertical_glyph_orientation : UInt64
+    set_last_line_wrapping : UInt64
+    get_last_line_wrapping : UInt64
+    set_optical_alignment : UInt64
+    get_optical_alignment : UInt64
+    set_font_fallback : UInt64
+    get_font_fallback : UInt64
+    set_line_spacing2 : UInt64
+    get_line_spacing2 : UInt64
+    set_font_axis_values : UInt64
+    get_font_axis_value_count : UInt64
+    get_font_axis_values : UInt64
+    get_automatic_font_axes : UInt64
+    set_automatic_font_axes : UInt64
   end
 
   IDWriteTextFormat3_GUID = "6d3b5641-e550-430d-a85b-b7bf48a93427"
@@ -3522,11 +3522,11 @@ lib LibWin32
   end
 
   struct IDWriteFontFallback1VTbl
-    query_interface : Proc(IDWriteFontFallback1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFallback1*, UInt32)
-    release : Proc(IDWriteFontFallback1*, UInt32)
-    map_characters : Proc(IDWriteFontFallback1*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteFontCollection, LibC::LPWSTR, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, UInt32*, IDWriteFont*, Float32*, HRESULT)
-    map_characters2 : Proc(IDWriteFontFallback1*, IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteFontCollection, LibC::LPWSTR, DWRITE_FONT_AXIS_VALUE*, UInt32, UInt32*, Float32*, IDWriteFontFace5*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    map_characters : UInt64
+    map_characters2 : UInt64
   end
 
   IDWriteFontFallback1_GUID = "2397599d-dd0d-4681-bd6a-f4f31eaade77"
@@ -3536,33 +3536,33 @@ lib LibWin32
   end
 
   struct IDWriteFontSet2VTbl
-    query_interface : Proc(IDWriteFontSet2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontSet2*, UInt32)
-    release : Proc(IDWriteFontSet2*, UInt32)
-    get_font_count : Proc(IDWriteFontSet2*, UInt32)
-    get_font_face_reference : Proc(IDWriteFontSet2*, UInt32, IDWriteFontFaceReference*, HRESULT)
-    find_font_face_reference : Proc(IDWriteFontSet2*, IDWriteFontFaceReference, UInt32*, LibC::BOOL*, HRESULT)
-    find_font_face : Proc(IDWriteFontSet2*, IDWriteFontFace, UInt32*, LibC::BOOL*, HRESULT)
-    get_property_values : Proc(IDWriteFontSet2*, DWRITE_FONT_PROPERTY_ID, IDWriteStringList*, HRESULT)
-    get_property_values2 : Proc(IDWriteFontSet2*, DWRITE_FONT_PROPERTY_ID, LibC::LPWSTR, IDWriteStringList*, HRESULT)
-    get_property_values3 : Proc(IDWriteFontSet2*, UInt32, DWRITE_FONT_PROPERTY_ID, LibC::BOOL*, IDWriteLocalizedStrings*, HRESULT)
-    get_property_occurrence_count : Proc(IDWriteFontSet2*, DWRITE_FONT_PROPERTY*, UInt32*, HRESULT)
-    get_matching_fonts : Proc(IDWriteFontSet2*, LibC::LPWSTR, DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFontSet*, HRESULT)
-    get_matching_fonts2 : Proc(IDWriteFontSet2*, DWRITE_FONT_PROPERTY*, UInt32, IDWriteFontSet*, HRESULT)
-    get_matching_fonts3 : Proc(IDWriteFontSet2*, DWRITE_FONT_PROPERTY*, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontSet1*, HRESULT)
-    get_first_font_resources : Proc(IDWriteFontSet2*, IDWriteFontSet1*, HRESULT)
-    get_filtered_fonts : Proc(IDWriteFontSet2*, UInt32*, UInt32, IDWriteFontSet1*, HRESULT)
-    get_filtered_fonts2 : Proc(IDWriteFontSet2*, DWRITE_FONT_AXIS_RANGE*, UInt32, LibC::BOOL, IDWriteFontSet1*, HRESULT)
-    get_filtered_fonts3 : Proc(IDWriteFontSet2*, DWRITE_FONT_PROPERTY*, UInt32, LibC::BOOL, IDWriteFontSet1*, HRESULT)
-    get_filtered_font_indices : Proc(IDWriteFontSet2*, DWRITE_FONT_AXIS_RANGE*, UInt32, LibC::BOOL, UInt32*, UInt32, UInt32*, HRESULT)
-    get_filtered_font_indices2 : Proc(IDWriteFontSet2*, DWRITE_FONT_PROPERTY*, UInt32, LibC::BOOL, UInt32*, UInt32, UInt32*, HRESULT)
-    get_font_axis_ranges : Proc(IDWriteFontSet2*, UInt32, DWRITE_FONT_AXIS_RANGE*, UInt32, UInt32*, HRESULT)
-    get_font_axis_ranges2 : Proc(IDWriteFontSet2*, DWRITE_FONT_AXIS_RANGE*, UInt32, UInt32*, HRESULT)
-    get_font_face_reference2 : Proc(IDWriteFontSet2*, UInt32, IDWriteFontFaceReference1*, HRESULT)
-    create_font_resource : Proc(IDWriteFontSet2*, UInt32, IDWriteFontResource*, HRESULT)
-    create_font_face : Proc(IDWriteFontSet2*, UInt32, IDWriteFontFace5*, HRESULT)
-    get_font_locality : Proc(IDWriteFontSet2*, UInt32, DWRITE_LOCALITY)
-    get_expiration_event : Proc(IDWriteFontSet2*, LibC::HANDLE)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_count : UInt64
+    get_font_face_reference : UInt64
+    find_font_face_reference : UInt64
+    find_font_face : UInt64
+    get_property_values : UInt64
+    get_property_values2 : UInt64
+    get_property_values3 : UInt64
+    get_property_occurrence_count : UInt64
+    get_matching_fonts : UInt64
+    get_matching_fonts2 : UInt64
+    get_matching_fonts3 : UInt64
+    get_first_font_resources : UInt64
+    get_filtered_fonts : UInt64
+    get_filtered_fonts2 : UInt64
+    get_filtered_fonts3 : UInt64
+    get_filtered_font_indices : UInt64
+    get_filtered_font_indices2 : UInt64
+    get_font_axis_ranges : UInt64
+    get_font_axis_ranges2 : UInt64
+    get_font_face_reference2 : UInt64
+    create_font_resource : UInt64
+    create_font_face : UInt64
+    get_font_locality : UInt64
+    get_expiration_event : UInt64
   end
 
   IDWriteFontSet2_GUID = "dc7ead19-e54c-43af-b2da-4e2b79ba3f7f"
@@ -3572,20 +3572,20 @@ lib LibWin32
   end
 
   struct IDWriteFontCollection3VTbl
-    query_interface : Proc(IDWriteFontCollection3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontCollection3*, UInt32)
-    release : Proc(IDWriteFontCollection3*, UInt32)
-    get_font_family_count : Proc(IDWriteFontCollection3*, UInt32)
-    get_font_family : Proc(IDWriteFontCollection3*, UInt32, IDWriteFontFamily*, HRESULT)
-    find_family_name : Proc(IDWriteFontCollection3*, LibC::LPWSTR, UInt32*, LibC::BOOL*, HRESULT)
-    get_font_from_font_face : Proc(IDWriteFontCollection3*, IDWriteFontFace, IDWriteFont*, HRESULT)
-    get_font_set : Proc(IDWriteFontCollection3*, IDWriteFontSet*, HRESULT)
-    get_font_family2 : Proc(IDWriteFontCollection3*, UInt32, IDWriteFontFamily1*, HRESULT)
-    get_font_family3 : Proc(IDWriteFontCollection3*, UInt32, IDWriteFontFamily2*, HRESULT)
-    get_matching_fonts : Proc(IDWriteFontCollection3*, LibC::LPWSTR, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontList2*, HRESULT)
-    get_font_family_model : Proc(IDWriteFontCollection3*, DWRITE_FONT_FAMILY_MODEL)
-    get_font_set2 : Proc(IDWriteFontCollection3*, IDWriteFontSet1*, HRESULT)
-    get_expiration_event : Proc(IDWriteFontCollection3*, LibC::HANDLE)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_family_count : UInt64
+    get_font_family : UInt64
+    find_family_name : UInt64
+    get_font_from_font_face : UInt64
+    get_font_set : UInt64
+    get_font_family2 : UInt64
+    get_font_family3 : UInt64
+    get_matching_fonts : UInt64
+    get_font_family_model : UInt64
+    get_font_set2 : UInt64
+    get_expiration_event : UInt64
   end
 
   IDWriteFontCollection3_GUID = "a4d055a6-f9e3-4e25-93b7-9e309f3af8e9"
@@ -3595,63 +3595,63 @@ lib LibWin32
   end
 
   struct IDWriteFactory7VTbl
-    query_interface : Proc(IDWriteFactory7*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFactory7*, UInt32)
-    release : Proc(IDWriteFactory7*, UInt32)
-    get_system_font_collection : Proc(IDWriteFactory7*, IDWriteFontCollection*, LibC::BOOL, HRESULT)
-    create_custom_font_collection : Proc(IDWriteFactory7*, IDWriteFontCollectionLoader, Void*, UInt32, IDWriteFontCollection*, HRESULT)
-    register_font_collection_loader : Proc(IDWriteFactory7*, IDWriteFontCollectionLoader, HRESULT)
-    unregister_font_collection_loader : Proc(IDWriteFactory7*, IDWriteFontCollectionLoader, HRESULT)
-    create_font_file_reference : Proc(IDWriteFactory7*, LibC::LPWSTR, FILETIME*, IDWriteFontFile*, HRESULT)
-    create_custom_font_file_reference : Proc(IDWriteFactory7*, Void*, UInt32, IDWriteFontFileLoader, IDWriteFontFile*, HRESULT)
-    create_font_face : Proc(IDWriteFactory7*, DWRITE_FONT_FACE_TYPE, UInt32, IDWriteFontFile*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFace*, HRESULT)
-    create_rendering_params : Proc(IDWriteFactory7*, IDWriteRenderingParams*, HRESULT)
-    create_monitor_rendering_params : Proc(IDWriteFactory7*, HMONITOR, IDWriteRenderingParams*, HRESULT)
-    create_custom_rendering_params : Proc(IDWriteFactory7*, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams*, HRESULT)
-    register_font_file_loader : Proc(IDWriteFactory7*, IDWriteFontFileLoader, HRESULT)
-    unregister_font_file_loader : Proc(IDWriteFactory7*, IDWriteFontFileLoader, HRESULT)
-    create_text_format : Proc(IDWriteFactory7*, LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, Float32, LibC::LPWSTR, IDWriteTextFormat*, HRESULT)
-    create_typography : Proc(IDWriteFactory7*, IDWriteTypography*, HRESULT)
-    get_gdi_interop : Proc(IDWriteFactory7*, IDWriteGdiInterop*, HRESULT)
-    create_text_layout : Proc(IDWriteFactory7*, Char*, UInt32, IDWriteTextFormat, Float32, Float32, IDWriteTextLayout*, HRESULT)
-    create_gdi_compatible_text_layout : Proc(IDWriteFactory7*, Char*, UInt32, IDWriteTextFormat, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, IDWriteTextLayout*, HRESULT)
-    create_ellipsis_trimming_sign : Proc(IDWriteFactory7*, IDWriteTextFormat, IDWriteInlineObject*, HRESULT)
-    create_text_analyzer : Proc(IDWriteFactory7*, IDWriteTextAnalyzer*, HRESULT)
-    create_number_substitution : Proc(IDWriteFactory7*, DWRITE_NUMBER_SUBSTITUTION_METHOD, LibC::LPWSTR, LibC::BOOL, IDWriteNumberSubstitution*, HRESULT)
-    create_glyph_run_analysis : Proc(IDWriteFactory7*, DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    get_eudc_font_collection : Proc(IDWriteFactory7*, IDWriteFontCollection*, LibC::BOOL, HRESULT)
-    create_custom_rendering_params2 : Proc(IDWriteFactory7*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams1*, HRESULT)
-    get_system_font_fallback : Proc(IDWriteFactory7*, IDWriteFontFallback*, HRESULT)
-    create_font_fallback_builder : Proc(IDWriteFactory7*, IDWriteFontFallbackBuilder*, HRESULT)
-    translate_color_glyph_run : Proc(IDWriteFactory7*, Float32, Float32, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator*, HRESULT)
-    create_custom_rendering_params3 : Proc(IDWriteFactory7*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams2*, HRESULT)
-    create_glyph_run_analysis2 : Proc(IDWriteFactory7*, DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    create_glyph_run_analysis3 : Proc(IDWriteFactory7*, DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE1, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)
-    create_custom_rendering_params4 : Proc(IDWriteFactory7*, Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE1, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams3*, HRESULT)
-    create_font_face_reference : Proc(IDWriteFactory7*, IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)
-    create_font_face_reference2 : Proc(IDWriteFactory7*, LibC::LPWSTR, FILETIME*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)
-    get_system_font_set : Proc(IDWriteFactory7*, IDWriteFontSet*, HRESULT)
-    create_font_set_builder : Proc(IDWriteFactory7*, IDWriteFontSetBuilder*, HRESULT)
-    create_font_collection_from_font_set : Proc(IDWriteFactory7*, IDWriteFontSet, IDWriteFontCollection1*, HRESULT)
-    get_system_font_collection2 : Proc(IDWriteFactory7*, LibC::BOOL, IDWriteFontCollection1*, LibC::BOOL, HRESULT)
-    get_font_download_queue : Proc(IDWriteFactory7*, IDWriteFontDownloadQueue*, HRESULT)
-    translate_color_glyph_run2 : Proc(IDWriteFactory7*, D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_GLYPH_IMAGE_FORMATS, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator1*, HRESULT)
-    compute_glyph_origins : Proc(IDWriteFactory7*, DWRITE_GLYPH_RUN*, D2D_POINT_2F, D2D_POINT_2F*, HRESULT)
-    compute_glyph_origins2 : Proc(IDWriteFactory7*, DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_POINT_2F, DWRITE_MATRIX*, D2D_POINT_2F*, HRESULT)
-    create_font_set_builder2 : Proc(IDWriteFactory7*, IDWriteFontSetBuilder1*, HRESULT)
-    create_in_memory_font_file_loader : Proc(IDWriteFactory7*, IDWriteInMemoryFontFileLoader*, HRESULT)
-    create_http_font_file_loader : Proc(IDWriteFactory7*, LibC::LPWSTR, LibC::LPWSTR, IDWriteRemoteFontFileLoader*, HRESULT)
-    analyze_container_type : Proc(IDWriteFactory7*, Void*, UInt32, DWRITE_CONTAINER_TYPE)
-    unpack_font_file : Proc(IDWriteFactory7*, DWRITE_CONTAINER_TYPE, Void*, UInt32, IDWriteFontFileStream*, HRESULT)
-    create_font_face_reference3 : Proc(IDWriteFactory7*, IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontFaceReference1*, HRESULT)
-    create_font_resource : Proc(IDWriteFactory7*, IDWriteFontFile, UInt32, IDWriteFontResource*, HRESULT)
-    get_system_font_set2 : Proc(IDWriteFactory7*, LibC::BOOL, IDWriteFontSet1*, HRESULT)
-    get_system_font_collection3 : Proc(IDWriteFactory7*, LibC::BOOL, DWRITE_FONT_FAMILY_MODEL, IDWriteFontCollection2*, HRESULT)
-    create_font_collection_from_font_set2 : Proc(IDWriteFactory7*, IDWriteFontSet, DWRITE_FONT_FAMILY_MODEL, IDWriteFontCollection2*, HRESULT)
-    create_font_set_builder3 : Proc(IDWriteFactory7*, IDWriteFontSetBuilder2*, HRESULT)
-    create_text_format2 : Proc(IDWriteFactory7*, LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_AXIS_VALUE*, UInt32, Float32, LibC::LPWSTR, IDWriteTextFormat3*, HRESULT)
-    get_system_font_set3 : Proc(IDWriteFactory7*, LibC::BOOL, IDWriteFontSet2*, HRESULT)
-    get_system_font_collection4 : Proc(IDWriteFactory7*, LibC::BOOL, DWRITE_FONT_FAMILY_MODEL, IDWriteFontCollection3*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_system_font_collection : UInt64
+    create_custom_font_collection : UInt64
+    register_font_collection_loader : UInt64
+    unregister_font_collection_loader : UInt64
+    create_font_file_reference : UInt64
+    create_custom_font_file_reference : UInt64
+    create_font_face : UInt64
+    create_rendering_params : UInt64
+    create_monitor_rendering_params : UInt64
+    create_custom_rendering_params : UInt64
+    register_font_file_loader : UInt64
+    unregister_font_file_loader : UInt64
+    create_text_format : UInt64
+    create_typography : UInt64
+    get_gdi_interop : UInt64
+    create_text_layout : UInt64
+    create_gdi_compatible_text_layout : UInt64
+    create_ellipsis_trimming_sign : UInt64
+    create_text_analyzer : UInt64
+    create_number_substitution : UInt64
+    create_glyph_run_analysis : UInt64
+    get_eudc_font_collection : UInt64
+    create_custom_rendering_params2 : UInt64
+    get_system_font_fallback : UInt64
+    create_font_fallback_builder : UInt64
+    translate_color_glyph_run : UInt64
+    create_custom_rendering_params3 : UInt64
+    create_glyph_run_analysis2 : UInt64
+    create_glyph_run_analysis3 : UInt64
+    create_custom_rendering_params4 : UInt64
+    create_font_face_reference : UInt64
+    create_font_face_reference2 : UInt64
+    get_system_font_set : UInt64
+    create_font_set_builder : UInt64
+    create_font_collection_from_font_set : UInt64
+    get_system_font_collection2 : UInt64
+    get_font_download_queue : UInt64
+    translate_color_glyph_run2 : UInt64
+    compute_glyph_origins : UInt64
+    compute_glyph_origins2 : UInt64
+    create_font_set_builder2 : UInt64
+    create_in_memory_font_file_loader : UInt64
+    create_http_font_file_loader : UInt64
+    analyze_container_type : UInt64
+    unpack_font_file : UInt64
+    create_font_face_reference3 : UInt64
+    create_font_resource : UInt64
+    get_system_font_set2 : UInt64
+    get_system_font_collection3 : UInt64
+    create_font_collection_from_font_set2 : UInt64
+    create_font_set_builder3 : UInt64
+    create_text_format2 : UInt64
+    get_system_font_set3 : UInt64
+    get_system_font_collection4 : UInt64
   end
 
   IDWriteFactory7_GUID = "35d0e0b3-9076-4d2e-a016-a91b568a06b4"
@@ -3661,36 +3661,36 @@ lib LibWin32
   end
 
   struct IDWriteFontSet3VTbl
-    query_interface : Proc(IDWriteFontSet3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontSet3*, UInt32)
-    release : Proc(IDWriteFontSet3*, UInt32)
-    get_font_count : Proc(IDWriteFontSet3*, UInt32)
-    get_font_face_reference : Proc(IDWriteFontSet3*, UInt32, IDWriteFontFaceReference*, HRESULT)
-    find_font_face_reference : Proc(IDWriteFontSet3*, IDWriteFontFaceReference, UInt32*, LibC::BOOL*, HRESULT)
-    find_font_face : Proc(IDWriteFontSet3*, IDWriteFontFace, UInt32*, LibC::BOOL*, HRESULT)
-    get_property_values : Proc(IDWriteFontSet3*, DWRITE_FONT_PROPERTY_ID, IDWriteStringList*, HRESULT)
-    get_property_values2 : Proc(IDWriteFontSet3*, DWRITE_FONT_PROPERTY_ID, LibC::LPWSTR, IDWriteStringList*, HRESULT)
-    get_property_values3 : Proc(IDWriteFontSet3*, UInt32, DWRITE_FONT_PROPERTY_ID, LibC::BOOL*, IDWriteLocalizedStrings*, HRESULT)
-    get_property_occurrence_count : Proc(IDWriteFontSet3*, DWRITE_FONT_PROPERTY*, UInt32*, HRESULT)
-    get_matching_fonts : Proc(IDWriteFontSet3*, LibC::LPWSTR, DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFontSet*, HRESULT)
-    get_matching_fonts2 : Proc(IDWriteFontSet3*, DWRITE_FONT_PROPERTY*, UInt32, IDWriteFontSet*, HRESULT)
-    get_matching_fonts3 : Proc(IDWriteFontSet3*, DWRITE_FONT_PROPERTY*, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontSet1*, HRESULT)
-    get_first_font_resources : Proc(IDWriteFontSet3*, IDWriteFontSet1*, HRESULT)
-    get_filtered_fonts : Proc(IDWriteFontSet3*, UInt32*, UInt32, IDWriteFontSet1*, HRESULT)
-    get_filtered_fonts2 : Proc(IDWriteFontSet3*, DWRITE_FONT_AXIS_RANGE*, UInt32, LibC::BOOL, IDWriteFontSet1*, HRESULT)
-    get_filtered_fonts3 : Proc(IDWriteFontSet3*, DWRITE_FONT_PROPERTY*, UInt32, LibC::BOOL, IDWriteFontSet1*, HRESULT)
-    get_filtered_font_indices : Proc(IDWriteFontSet3*, DWRITE_FONT_AXIS_RANGE*, UInt32, LibC::BOOL, UInt32*, UInt32, UInt32*, HRESULT)
-    get_filtered_font_indices2 : Proc(IDWriteFontSet3*, DWRITE_FONT_PROPERTY*, UInt32, LibC::BOOL, UInt32*, UInt32, UInt32*, HRESULT)
-    get_font_axis_ranges : Proc(IDWriteFontSet3*, UInt32, DWRITE_FONT_AXIS_RANGE*, UInt32, UInt32*, HRESULT)
-    get_font_axis_ranges2 : Proc(IDWriteFontSet3*, DWRITE_FONT_AXIS_RANGE*, UInt32, UInt32*, HRESULT)
-    get_font_face_reference2 : Proc(IDWriteFontSet3*, UInt32, IDWriteFontFaceReference1*, HRESULT)
-    create_font_resource : Proc(IDWriteFontSet3*, UInt32, IDWriteFontResource*, HRESULT)
-    create_font_face : Proc(IDWriteFontSet3*, UInt32, IDWriteFontFace5*, HRESULT)
-    get_font_locality : Proc(IDWriteFontSet3*, UInt32, DWRITE_LOCALITY)
-    get_expiration_event : Proc(IDWriteFontSet3*, LibC::HANDLE)
-    get_font_source_type : Proc(IDWriteFontSet3*, UInt32, DWRITE_FONT_SOURCE_TYPE)
-    get_font_source_name_length : Proc(IDWriteFontSet3*, UInt32, UInt32)
-    get_font_source_name : Proc(IDWriteFontSet3*, UInt32, Char*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_count : UInt64
+    get_font_face_reference : UInt64
+    find_font_face_reference : UInt64
+    find_font_face : UInt64
+    get_property_values : UInt64
+    get_property_values2 : UInt64
+    get_property_values3 : UInt64
+    get_property_occurrence_count : UInt64
+    get_matching_fonts : UInt64
+    get_matching_fonts2 : UInt64
+    get_matching_fonts3 : UInt64
+    get_first_font_resources : UInt64
+    get_filtered_fonts : UInt64
+    get_filtered_fonts2 : UInt64
+    get_filtered_fonts3 : UInt64
+    get_filtered_font_indices : UInt64
+    get_filtered_font_indices2 : UInt64
+    get_font_axis_ranges : UInt64
+    get_font_axis_ranges2 : UInt64
+    get_font_face_reference2 : UInt64
+    create_font_resource : UInt64
+    create_font_face : UInt64
+    get_font_locality : UInt64
+    get_expiration_event : UInt64
+    get_font_source_type : UInt64
+    get_font_source_name_length : UInt64
+    get_font_source_name : UInt64
   end
 
   IDWriteFontSet3_GUID = "7c073ef2-a7f4-4045-8c32-8ab8ae640f90"
@@ -3700,66 +3700,66 @@ lib LibWin32
   end
 
   struct IDWriteFontFace6VTbl
-    query_interface : Proc(IDWriteFontFace6*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDWriteFontFace6*, UInt32)
-    release : Proc(IDWriteFontFace6*, UInt32)
-    get_type : Proc(IDWriteFontFace6*, DWRITE_FONT_FACE_TYPE)
-    get_files : Proc(IDWriteFontFace6*, UInt32*, IDWriteFontFile*, HRESULT)
-    get_index : Proc(IDWriteFontFace6*, UInt32)
-    get_simulations : Proc(IDWriteFontFace6*, DWRITE_FONT_SIMULATIONS)
-    is_symbol_font : Proc(IDWriteFontFace6*, LibC::BOOL)
-    get_metrics : Proc(IDWriteFontFace6*, DWRITE_FONT_METRICS*, Void)
-    get_glyph_count : Proc(IDWriteFontFace6*, UInt16)
-    get_design_glyph_metrics : Proc(IDWriteFontFace6*, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)
-    get_glyph_indices : Proc(IDWriteFontFace6*, UInt32*, UInt32, UInt16*, HRESULT)
-    try_get_font_table : Proc(IDWriteFontFace6*, UInt32, Void**, UInt32*, Void**, LibC::BOOL*, HRESULT)
-    release_font_table : Proc(IDWriteFontFace6*, Void*, Void)
-    get_glyph_run_outline : Proc(IDWriteFontFace6*, Float32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, UInt32, LibC::BOOL, LibC::BOOL, ID2D1SimplifiedGeometrySink, HRESULT)
-    get_recommended_rendering_mode : Proc(IDWriteFontFace6*, Float32, Float32, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, HRESULT)
-    get_gdi_compatible_metrics : Proc(IDWriteFontFace6*, Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS*, HRESULT)
-    get_gdi_compatible_glyph_metrics : Proc(IDWriteFontFace6*, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)
-    get_metrics2 : Proc(IDWriteFontFace6*, DWRITE_FONT_METRICS1*, Void)
-    get_gdi_compatible_metrics2 : Proc(IDWriteFontFace6*, Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS1*, HRESULT)
-    get_caret_metrics : Proc(IDWriteFontFace6*, DWRITE_CARET_METRICS*, Void)
-    get_unicode_ranges : Proc(IDWriteFontFace6*, UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)
-    is_monospaced_font : Proc(IDWriteFontFace6*, LibC::BOOL)
-    get_design_glyph_advances : Proc(IDWriteFontFace6*, UInt32, UInt16*, Int32*, LibC::BOOL, HRESULT)
-    get_gdi_compatible_glyph_advances : Proc(IDWriteFontFace6*, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, UInt32, UInt16*, Int32*, HRESULT)
-    get_kerning_pair_adjustments : Proc(IDWriteFontFace6*, UInt32, UInt16*, Int32*, HRESULT)
-    has_kerning_pairs : Proc(IDWriteFontFace6*, LibC::BOOL)
-    get_recommended_rendering_mode2 : Proc(IDWriteFontFace6*, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, DWRITE_RENDERING_MODE*, HRESULT)
-    get_vertical_glyph_variants : Proc(IDWriteFontFace6*, UInt32, UInt16*, UInt16*, HRESULT)
-    has_vertical_glyph_variants : Proc(IDWriteFontFace6*, LibC::BOOL)
-    is_color_font : Proc(IDWriteFontFace6*, LibC::BOOL)
-    get_color_palette_count : Proc(IDWriteFontFace6*, UInt32)
-    get_palette_entry_count : Proc(IDWriteFontFace6*, UInt32)
-    get_palette_entries : Proc(IDWriteFontFace6*, UInt32, UInt32, UInt32, DWRITE_COLOR_F*, HRESULT)
-    get_recommended_rendering_mode3 : Proc(IDWriteFontFace6*, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, DWRITE_GRID_FIT_MODE*, HRESULT)
-    get_font_face_reference : Proc(IDWriteFontFace6*, IDWriteFontFaceReference*, HRESULT)
-    get_panose : Proc(IDWriteFontFace6*, DWRITE_PANOSE*, Void)
-    get_weight : Proc(IDWriteFontFace6*, DWRITE_FONT_WEIGHT)
-    get_stretch : Proc(IDWriteFontFace6*, DWRITE_FONT_STRETCH)
-    get_style : Proc(IDWriteFontFace6*, DWRITE_FONT_STYLE)
-    get_family_names : Proc(IDWriteFontFace6*, IDWriteLocalizedStrings*, HRESULT)
-    get_face_names : Proc(IDWriteFontFace6*, IDWriteLocalizedStrings*, HRESULT)
-    get_informational_strings : Proc(IDWriteFontFace6*, DWRITE_INFORMATIONAL_STRING_ID, IDWriteLocalizedStrings*, LibC::BOOL*, HRESULT)
-    has_character : Proc(IDWriteFontFace6*, UInt32, LibC::BOOL)
-    get_recommended_rendering_mode4 : Proc(IDWriteFontFace6*, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE1*, DWRITE_GRID_FIT_MODE*, HRESULT)
-    is_character_local : Proc(IDWriteFontFace6*, UInt32, LibC::BOOL)
-    is_glyph_local : Proc(IDWriteFontFace6*, UInt16, LibC::BOOL)
-    are_characters_local : Proc(IDWriteFontFace6*, Char*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)
-    are_glyphs_local : Proc(IDWriteFontFace6*, UInt16*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)
-    get_glyph_image_formats : Proc(IDWriteFontFace6*, UInt16, UInt32, UInt32, DWRITE_GLYPH_IMAGE_FORMATS*, HRESULT)
-    get_glyph_image_formats2 : Proc(IDWriteFontFace6*, DWRITE_GLYPH_IMAGE_FORMATS)
-    get_glyph_image_data : Proc(IDWriteFontFace6*, UInt16, UInt32, DWRITE_GLYPH_IMAGE_FORMATS, DWRITE_GLYPH_IMAGE_DATA*, Void**, HRESULT)
-    release_glyph_image_data : Proc(IDWriteFontFace6*, Void*, Void)
-    get_font_axis_value_count : Proc(IDWriteFontFace6*, UInt32)
-    get_font_axis_values : Proc(IDWriteFontFace6*, DWRITE_FONT_AXIS_VALUE*, UInt32, HRESULT)
-    has_variations : Proc(IDWriteFontFace6*, LibC::BOOL)
-    get_font_resource : Proc(IDWriteFontFace6*, IDWriteFontResource*, HRESULT)
-    equals : Proc(IDWriteFontFace6*, IDWriteFontFace, LibC::BOOL)
-    get_family_names2 : Proc(IDWriteFontFace6*, DWRITE_FONT_FAMILY_MODEL, IDWriteLocalizedStrings*, HRESULT)
-    get_face_names2 : Proc(IDWriteFontFace6*, DWRITE_FONT_FAMILY_MODEL, IDWriteLocalizedStrings*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type : UInt64
+    get_files : UInt64
+    get_index : UInt64
+    get_simulations : UInt64
+    is_symbol_font : UInt64
+    get_metrics : UInt64
+    get_glyph_count : UInt64
+    get_design_glyph_metrics : UInt64
+    get_glyph_indices : UInt64
+    try_get_font_table : UInt64
+    release_font_table : UInt64
+    get_glyph_run_outline : UInt64
+    get_recommended_rendering_mode : UInt64
+    get_gdi_compatible_metrics : UInt64
+    get_gdi_compatible_glyph_metrics : UInt64
+    get_metrics2 : UInt64
+    get_gdi_compatible_metrics2 : UInt64
+    get_caret_metrics : UInt64
+    get_unicode_ranges : UInt64
+    is_monospaced_font : UInt64
+    get_design_glyph_advances : UInt64
+    get_gdi_compatible_glyph_advances : UInt64
+    get_kerning_pair_adjustments : UInt64
+    has_kerning_pairs : UInt64
+    get_recommended_rendering_mode2 : UInt64
+    get_vertical_glyph_variants : UInt64
+    has_vertical_glyph_variants : UInt64
+    is_color_font : UInt64
+    get_color_palette_count : UInt64
+    get_palette_entry_count : UInt64
+    get_palette_entries : UInt64
+    get_recommended_rendering_mode3 : UInt64
+    get_font_face_reference : UInt64
+    get_panose : UInt64
+    get_weight : UInt64
+    get_stretch : UInt64
+    get_style : UInt64
+    get_family_names : UInt64
+    get_face_names : UInt64
+    get_informational_strings : UInt64
+    has_character : UInt64
+    get_recommended_rendering_mode4 : UInt64
+    is_character_local : UInt64
+    is_glyph_local : UInt64
+    are_characters_local : UInt64
+    are_glyphs_local : UInt64
+    get_glyph_image_formats : UInt64
+    get_glyph_image_formats2 : UInt64
+    get_glyph_image_data : UInt64
+    release_glyph_image_data : UInt64
+    get_font_axis_value_count : UInt64
+    get_font_axis_values : UInt64
+    has_variations : UInt64
+    get_font_resource : UInt64
+    equals : UInt64
+    get_family_names2 : UInt64
+    get_face_names2 : UInt64
   end
 
   IDWriteFontFace6_GUID = "c4b1fe1b-6e84-47d5-b54c-a597981b06ad"
@@ -3771,4 +3771,5729 @@ lib LibWin32
 
   # Params # factorytype : DWRITE_FACTORY_TYPE [In],iid : Guid* [In],factory : IUnknown* [In]
   fun DWriteCreateFactory(factorytype : DWRITE_FACTORY_TYPE, iid : Guid*, factory : IUnknown*) : HRESULT
+end
+struct LibWin32::IDWriteFontFileLoader
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_stream_from_key(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfilestream : IDWriteFontFileStream*) : HRESULT
+    @lpVtbl.value.create_stream_from_key.unsafe_as(Proc(Void*, UInt32, IDWriteFontFileStream*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, fontfilestream)
+  end
+end
+struct LibWin32::IDWriteLocalFontFileLoader
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_stream_from_key(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfilestream : IDWriteFontFileStream*) : HRESULT
+    @lpVtbl.value.create_stream_from_key.unsafe_as(Proc(Void*, UInt32, IDWriteFontFileStream*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, fontfilestream)
+  end
+  def get_file_path_length_from_key(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, filepathlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_file_path_length_from_key.unsafe_as(Proc(Void*, UInt32, UInt32*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, filepathlength)
+  end
+  def get_file_path_from_key(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, filepath : Char*, filepathsize : UInt32) : HRESULT
+    @lpVtbl.value.get_file_path_from_key.unsafe_as(Proc(Void*, UInt32, Char*, UInt32, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, filepath, filepathsize)
+  end
+  def get_last_write_time_from_key(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, lastwritetime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_last_write_time_from_key.unsafe_as(Proc(Void*, UInt32, FILETIME*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, lastwritetime)
+  end
+end
+struct LibWin32::IDWriteFontFileStream
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def read_file_fragment(fragmentstart : Void**, fileoffset : UInt64, fragmentsize : UInt64, fragmentcontext : Void**) : HRESULT
+    @lpVtbl.value.read_file_fragment.unsafe_as(Proc(Void**, UInt64, UInt64, Void**, HRESULT)).call(fragmentstart, fileoffset, fragmentsize, fragmentcontext)
+  end
+  def release_file_fragment(fragmentcontext : Void*) : Void
+    @lpVtbl.value.release_file_fragment.unsafe_as(Proc(Void*, Void)).call(fragmentcontext)
+  end
+  def get_file_size(filesize : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_size.unsafe_as(Proc(UInt64*, HRESULT)).call(filesize)
+  end
+  def get_last_write_time(lastwritetime : UInt64*) : HRESULT
+    @lpVtbl.value.get_last_write_time.unsafe_as(Proc(UInt64*, HRESULT)).call(lastwritetime)
+  end
+end
+struct LibWin32::IDWriteFontFile
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_reference_key(fontfilereferencekey : Void**, fontfilereferencekeysize : UInt32*) : HRESULT
+    @lpVtbl.value.get_reference_key.unsafe_as(Proc(Void**, UInt32*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize)
+  end
+  def get_loader(fontfileloader : IDWriteFontFileLoader*) : HRESULT
+    @lpVtbl.value.get_loader.unsafe_as(Proc(IDWriteFontFileLoader*, HRESULT)).call(fontfileloader)
+  end
+  def analyze(issupportedfonttype : LibC::BOOL*, fontfiletype : DWRITE_FONT_FILE_TYPE*, fontfacetype : DWRITE_FONT_FACE_TYPE*, numberoffaces : UInt32*) : HRESULT
+    @lpVtbl.value.analyze.unsafe_as(Proc(LibC::BOOL*, DWRITE_FONT_FILE_TYPE*, DWRITE_FONT_FACE_TYPE*, UInt32*, HRESULT)).call(issupportedfonttype, fontfiletype, fontfacetype, numberoffaces)
+  end
+end
+struct LibWin32::IDWriteRenderingParams
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_gamma : Float32
+    @lpVtbl.value.get_gamma.unsafe_as(Proc(Float32)).call
+  end
+  def get_enhanced_contrast : Float32
+    @lpVtbl.value.get_enhanced_contrast.unsafe_as(Proc(Float32)).call
+  end
+  def get_clear_type_level : Float32
+    @lpVtbl.value.get_clear_type_level.unsafe_as(Proc(Float32)).call
+  end
+  def get_pixel_geometry : DWRITE_PIXEL_GEOMETRY
+    @lpVtbl.value.get_pixel_geometry.unsafe_as(Proc(DWRITE_PIXEL_GEOMETRY)).call
+  end
+  def get_rendering_mode : DWRITE_RENDERING_MODE
+    @lpVtbl.value.get_rendering_mode.unsafe_as(Proc(DWRITE_RENDERING_MODE)).call
+  end
+end
+struct LibWin32::IDWriteFontFace
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type : DWRITE_FONT_FACE_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(DWRITE_FONT_FACE_TYPE)).call
+  end
+  def get_files(numberoffiles : UInt32*, fontfiles : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_files.unsafe_as(Proc(UInt32*, IDWriteFontFile*, HRESULT)).call(numberoffiles, fontfiles)
+  end
+  def get_index : UInt32
+    @lpVtbl.value.get_index.unsafe_as(Proc(UInt32)).call
+  end
+  def get_simulations : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS)).call
+  end
+  def is_symbol_font : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_metrics(fontfacemetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_FONT_METRICS*, Void)).call(fontfacemetrics)
+  end
+  def get_glyph_count : UInt16
+    @lpVtbl.value.get_glyph_count.unsafe_as(Proc(UInt16)).call
+  end
+  def get_design_glyph_metrics(glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_metrics.unsafe_as(Proc(UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)).call(glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_glyph_indices(codepoints : UInt32*, codepointcount : UInt32, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.unsafe_as(Proc(UInt32*, UInt32, UInt16*, HRESULT)).call(codepoints, codepointcount, glyphindices)
+  end
+  def try_get_font_table(opentypetabletag : UInt32, tabledata : Void**, tablesize : UInt32*, tablecontext : Void**, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_get_font_table.unsafe_as(Proc(UInt32, Void**, UInt32*, Void**, LibC::BOOL*, HRESULT)).call(opentypetabletag, tabledata, tablesize, tablecontext, exists)
+  end
+  def release_font_table(tablecontext : Void*) : Void
+    @lpVtbl.value.release_font_table.unsafe_as(Proc(Void*, Void)).call(tablecontext)
+  end
+  def get_glyph_run_outline(emsize : Float32, glyphindices : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphcount : UInt32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.get_glyph_run_outline.unsafe_as(Proc(Float32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, UInt32, LibC::BOOL, LibC::BOOL, ID2D1SimplifiedGeometrySink, HRESULT)).call(emsize, glyphindices, glyphadvances, glyphoffsets, glyphcount, issideways, isrighttoleft, geometrysink)
+  end
+  def get_recommended_rendering_mode(emsize : Float32, pixelsperdip : Float32, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode.unsafe_as(Proc(Float32, Float32, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, HRESULT)).call(emsize, pixelsperdip, measuringmode, renderingparams, renderingmode)
+  end
+  def get_gdi_compatible_metrics(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontfacemetrics : DWRITE_FONT_METRICS*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS*, HRESULT)).call(emsize, pixelsperdip, transform, fontfacemetrics)
+  end
+  def get_gdi_compatible_glyph_metrics(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_metrics.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)).call(emsize, pixelsperdip, transform, usegdinatural, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+end
+struct LibWin32::IDWriteFontCollectionLoader
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_enumerator_from_key(factory : IDWriteFactory, collectionkey : Void*, collectionkeysize : UInt32, fontfileenumerator : IDWriteFontFileEnumerator*) : HRESULT
+    @lpVtbl.value.create_enumerator_from_key.unsafe_as(Proc(IDWriteFactory, Void*, UInt32, IDWriteFontFileEnumerator*, HRESULT)).call(factory, collectionkey, collectionkeysize, fontfileenumerator)
+  end
+end
+struct LibWin32::IDWriteFontFileEnumerator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def move_next(hascurrentfile : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(hascurrentfile)
+  end
+  def get_current_font_file(fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_current_font_file.unsafe_as(Proc(IDWriteFontFile*, HRESULT)).call(fontfile)
+  end
+end
+struct LibWin32::IDWriteLocalizedStrings
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count : UInt32
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32)).call
+  end
+  def find_locale_name(localename : LibC::LPWSTR, index : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_locale_name.unsafe_as(Proc(LibC::LPWSTR, UInt32*, LibC::BOOL*, HRESULT)).call(localename, index, exists)
+  end
+  def get_locale_name_length(index : UInt32, length : UInt32*) : HRESULT
+    @lpVtbl.value.get_locale_name_length.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(index, length)
+  end
+  def get_locale_name(index : UInt32, localename : Char*, size : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.unsafe_as(Proc(UInt32, Char*, UInt32, HRESULT)).call(index, localename, size)
+  end
+  def get_string_length(index : UInt32, length : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(index, length)
+  end
+  def get_string(index : UInt32, stringbuffer : Char*, size : UInt32) : HRESULT
+    @lpVtbl.value.get_string.unsafe_as(Proc(UInt32, Char*, UInt32, HRESULT)).call(index, stringbuffer, size)
+  end
+end
+struct LibWin32::IDWriteFontCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family_count : UInt32
+    @lpVtbl.value.get_font_family_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family(index : UInt32, fontfamily : IDWriteFontFamily*) : HRESULT
+    @lpVtbl.value.get_font_family.unsafe_as(Proc(UInt32, IDWriteFontFamily*, HRESULT)).call(index, fontfamily)
+  end
+  def find_family_name(familyname : LibC::LPWSTR, index : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_family_name.unsafe_as(Proc(LibC::LPWSTR, UInt32*, LibC::BOOL*, HRESULT)).call(familyname, index, exists)
+  end
+  def get_font_from_font_face(fontface : IDWriteFontFace, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font_from_font_face.unsafe_as(Proc(IDWriteFontFace, IDWriteFont*, HRESULT)).call(fontface, font)
+  end
+end
+struct LibWin32::IDWriteFontList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_collection(fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.unsafe_as(Proc(IDWriteFontCollection*, HRESULT)).call(fontcollection)
+  end
+  def get_font_count : UInt32
+    @lpVtbl.value.get_font_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font(index : UInt32, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font.unsafe_as(Proc(UInt32, IDWriteFont*, HRESULT)).call(index, font)
+  end
+end
+struct LibWin32::IDWriteFontFamily
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_collection(fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.unsafe_as(Proc(IDWriteFontCollection*, HRESULT)).call(fontcollection)
+  end
+  def get_font_count : UInt32
+    @lpVtbl.value.get_font_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font(index : UInt32, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font.unsafe_as(Proc(UInt32, IDWriteFont*, HRESULT)).call(index, font)
+  end
+  def get_family_names(names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_family_names.unsafe_as(Proc(IDWriteLocalizedStrings*, HRESULT)).call(names)
+  end
+  def get_first_matching_font(weight : DWRITE_FONT_WEIGHT, stretch : DWRITE_FONT_STRETCH, style : DWRITE_FONT_STYLE, matchingfont : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_first_matching_font.unsafe_as(Proc(DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFont*, HRESULT)).call(weight, stretch, style, matchingfont)
+  end
+  def get_matching_fonts(weight : DWRITE_FONT_WEIGHT, stretch : DWRITE_FONT_STRETCH, style : DWRITE_FONT_STYLE, matchingfonts : IDWriteFontList*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.unsafe_as(Proc(DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFontList*, HRESULT)).call(weight, stretch, style, matchingfonts)
+  end
+end
+struct LibWin32::IDWriteFont
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family(fontfamily : IDWriteFontFamily*) : HRESULT
+    @lpVtbl.value.get_font_family.unsafe_as(Proc(IDWriteFontFamily*, HRESULT)).call(fontfamily)
+  end
+  def get_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def is_symbol_font : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_face_names(names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names.unsafe_as(Proc(IDWriteLocalizedStrings*, HRESULT)).call(names)
+  end
+  def get_informational_strings(informationalstringid : DWRITE_INFORMATIONAL_STRING_ID, informationalstrings : IDWriteLocalizedStrings*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_informational_strings.unsafe_as(Proc(DWRITE_INFORMATIONAL_STRING_ID, IDWriteLocalizedStrings*, LibC::BOOL*, HRESULT)).call(informationalstringid, informationalstrings, exists)
+  end
+  def get_simulations : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS)).call
+  end
+  def get_metrics(fontmetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_FONT_METRICS*, Void)).call(fontmetrics)
+  end
+  def has_character(unicodevalue : UInt32, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_character.unsafe_as(Proc(UInt32, LibC::BOOL*, HRESULT)).call(unicodevalue, exists)
+  end
+  def create_font_face(fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(IDWriteFontFace*, HRESULT)).call(fontface)
+  end
+end
+struct LibWin32::IDWriteTextFormat
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_text_alignment(textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT, HRESULT)).call(textalignment)
+  end
+  def set_paragraph_alignment(paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)).call(paragraphalignment)
+  end
+  def set_word_wrapping(wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING, HRESULT)).call(wordwrapping)
+  end
+  def set_reading_direction(readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION, HRESULT)).call(readingdirection)
+  end
+  def set_flow_direction(flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION, HRESULT)).call(flowdirection)
+  end
+  def set_incremental_tab_stop(incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.unsafe_as(Proc(Float32, HRESULT)).call(incrementaltabstop)
+  end
+  def set_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT)).call
+  end
+  def get_paragraph_alignment : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT)).call
+  end
+  def get_word_wrapping : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING)).call
+  end
+  def get_reading_direction : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION)).call
+  end
+  def get_flow_direction : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION)).call
+  end
+  def get_incremental_tab_stop : Float32
+    @lpVtbl.value.get_incremental_tab_stop.unsafe_as(Proc(Float32)).call
+  end
+  def get_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.unsafe_as(Proc(IDWriteFontCollection*, HRESULT)).call(fontcollection)
+  end
+  def get_font_family_name_length : UInt32
+    @lpVtbl.value.get_font_family_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family_name(fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(fontfamilyname, namesize)
+  end
+  def get_font_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_font_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def get_font_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_font_size : Float32
+    @lpVtbl.value.get_font_size.unsafe_as(Proc(Float32)).call
+  end
+  def get_locale_name_length : UInt32
+    @lpVtbl.value.get_locale_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_locale_name(localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(localename, namesize)
+  end
+end
+struct LibWin32::IDWriteTypography
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_font_feature(fontfeature : DWRITE_FONT_FEATURE) : HRESULT
+    @lpVtbl.value.add_font_feature.unsafe_as(Proc(DWRITE_FONT_FEATURE, HRESULT)).call(fontfeature)
+  end
+  def get_font_feature_count : UInt32
+    @lpVtbl.value.get_font_feature_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_feature(fontfeatureindex : UInt32, fontfeature : DWRITE_FONT_FEATURE*) : HRESULT
+    @lpVtbl.value.get_font_feature.unsafe_as(Proc(UInt32, DWRITE_FONT_FEATURE*, HRESULT)).call(fontfeatureindex, fontfeature)
+  end
+end
+struct LibWin32::IDWriteNumberSubstitution
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::IDWriteTextAnalysisSource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_text_at_position(textposition : UInt32, textstring : UInt16**, textlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_at_position.unsafe_as(Proc(UInt32, UInt16**, UInt32*, HRESULT)).call(textposition, textstring, textlength)
+  end
+  def get_text_before_position(textposition : UInt32, textstring : UInt16**, textlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_before_position.unsafe_as(Proc(UInt32, UInt16**, UInt32*, HRESULT)).call(textposition, textstring, textlength)
+  end
+  def get_paragraph_reading_direction : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_paragraph_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION)).call
+  end
+  def get_locale_name(textposition : UInt32, textlength : UInt32*, localename : UInt16**) : HRESULT
+    @lpVtbl.value.get_locale_name.unsafe_as(Proc(UInt32, UInt32*, UInt16**, HRESULT)).call(textposition, textlength, localename)
+  end
+  def get_number_substitution(textposition : UInt32, textlength : UInt32*, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.get_number_substitution.unsafe_as(Proc(UInt32, UInt32*, IDWriteNumberSubstitution*, HRESULT)).call(textposition, textlength, numbersubstitution)
+  end
+end
+struct LibWin32::IDWriteTextAnalysisSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_script_analysis(textposition : UInt32, textlength : UInt32, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*) : HRESULT
+    @lpVtbl.value.set_script_analysis.unsafe_as(Proc(UInt32, UInt32, DWRITE_SCRIPT_ANALYSIS*, HRESULT)).call(textposition, textlength, scriptanalysis)
+  end
+  def set_line_breakpoints(textposition : UInt32, textlength : UInt32, linebreakpoints : DWRITE_LINE_BREAKPOINT*) : HRESULT
+    @lpVtbl.value.set_line_breakpoints.unsafe_as(Proc(UInt32, UInt32, DWRITE_LINE_BREAKPOINT*, HRESULT)).call(textposition, textlength, linebreakpoints)
+  end
+  def set_bidi_level(textposition : UInt32, textlength : UInt32, explicitlevel : UInt8, resolvedlevel : UInt8) : HRESULT
+    @lpVtbl.value.set_bidi_level.unsafe_as(Proc(UInt32, UInt32, UInt8, UInt8, HRESULT)).call(textposition, textlength, explicitlevel, resolvedlevel)
+  end
+  def set_number_substitution(textposition : UInt32, textlength : UInt32, numbersubstitution : IDWriteNumberSubstitution) : HRESULT
+    @lpVtbl.value.set_number_substitution.unsafe_as(Proc(UInt32, UInt32, IDWriteNumberSubstitution, HRESULT)).call(textposition, textlength, numbersubstitution)
+  end
+end
+struct LibWin32::IDWriteTextAnalyzer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def analyze_script(analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_script.unsafe_as(Proc(IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)).call(analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_bidi(analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_bidi.unsafe_as(Proc(IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)).call(analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_number_substitution(analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_number_substitution.unsafe_as(Proc(IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)).call(analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_line_breakpoints(analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_line_breakpoints.unsafe_as(Proc(IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)).call(analysissource, textposition, textlength, analysissink)
+  end
+  def get_glyphs(textstring : Char*, textlength : UInt32, fontface : IDWriteFontFace, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, numbersubstitution : IDWriteNumberSubstitution, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, maxglyphcount : UInt32, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, actualglyphcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_glyphs.unsafe_as(Proc(Char*, UInt32, IDWriteFontFace, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, IDWriteNumberSubstitution, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, UInt32, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, HRESULT)).call(textstring, textlength, fontface, issideways, isrighttoleft, scriptanalysis, localename, numbersubstitution, features, featurerangelengths, featureranges, maxglyphcount, clustermap, textprops, glyphindices, glyphprops, actualglyphcount)
+  end
+  def get_glyph_placements(textstring : Char*, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, textlength : UInt32, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphcount : UInt32, fontface : IDWriteFontFace, fontemsize : Float32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.get_glyph_placements.unsafe_as(Proc(Char*, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, IDWriteFontFace, Float32, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)).call(textstring, clustermap, textprops, textlength, glyphindices, glyphprops, glyphcount, fontface, fontemsize, issideways, isrighttoleft, scriptanalysis, localename, features, featurerangelengths, featureranges, glyphadvances, glyphoffsets)
+  end
+  def get_gdi_compatible_glyph_placements(textstring : Char*, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, textlength : UInt32, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphcount : UInt32, fontface : IDWriteFontFace, fontemsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_placements.unsafe_as(Proc(Char*, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, IDWriteFontFace, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)).call(textstring, clustermap, textprops, textlength, glyphindices, glyphprops, glyphcount, fontface, fontemsize, pixelsperdip, transform, usegdinatural, issideways, isrighttoleft, scriptanalysis, localename, features, featurerangelengths, featureranges, glyphadvances, glyphoffsets)
+  end
+end
+struct LibWin32::IDWriteInlineObject
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def draw(clientdrawingcontext : Void*, renderer : IDWriteTextRenderer, originx : Float32, originy : Float32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw.unsafe_as(Proc(Void*, IDWriteTextRenderer, Float32, Float32, LibC::BOOL, LibC::BOOL, IUnknown, HRESULT)).call(clientdrawingcontext, renderer, originx, originy, issideways, isrighttoleft, clientdrawingeffect)
+  end
+  def get_metrics(metrics : DWRITE_INLINE_OBJECT_METRICS*) : HRESULT
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_INLINE_OBJECT_METRICS*, HRESULT)).call(metrics)
+  end
+  def get_overhang_metrics(overhangs : DWRITE_OVERHANG_METRICS*) : HRESULT
+    @lpVtbl.value.get_overhang_metrics.unsafe_as(Proc(DWRITE_OVERHANG_METRICS*, HRESULT)).call(overhangs)
+  end
+  def get_break_conditions(breakconditionbefore : DWRITE_BREAK_CONDITION*, breakconditionafter : DWRITE_BREAK_CONDITION*) : HRESULT
+    @lpVtbl.value.get_break_conditions.unsafe_as(Proc(DWRITE_BREAK_CONDITION*, DWRITE_BREAK_CONDITION*, HRESULT)).call(breakconditionbefore, breakconditionafter)
+  end
+end
+struct LibWin32::IDWritePixelSnapping
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def is_pixel_snapping_disabled(clientdrawingcontext : Void*, isdisabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_pixel_snapping_disabled.unsafe_as(Proc(Void*, LibC::BOOL*, HRESULT)).call(clientdrawingcontext, isdisabled)
+  end
+  def get_current_transform(clientdrawingcontext : Void*, transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.get_current_transform.unsafe_as(Proc(Void*, DWRITE_MATRIX*, HRESULT)).call(clientdrawingcontext, transform)
+  end
+  def get_pixels_per_dip(clientdrawingcontext : Void*, pixelsperdip : Float32*) : HRESULT
+    @lpVtbl.value.get_pixels_per_dip.unsafe_as(Proc(Void*, Float32*, HRESULT)).call(clientdrawingcontext, pixelsperdip)
+  end
+end
+struct LibWin32::IDWriteTextRenderer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def is_pixel_snapping_disabled(clientdrawingcontext : Void*, isdisabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_pixel_snapping_disabled.unsafe_as(Proc(Void*, LibC::BOOL*, HRESULT)).call(clientdrawingcontext, isdisabled)
+  end
+  def get_current_transform(clientdrawingcontext : Void*, transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.get_current_transform.unsafe_as(Proc(Void*, DWRITE_MATRIX*, HRESULT)).call(clientdrawingcontext, transform)
+  end
+  def get_pixels_per_dip(clientdrawingcontext : Void*, pixelsperdip : Float32*) : HRESULT
+    @lpVtbl.value.get_pixels_per_dip.unsafe_as(Proc(Void*, Float32*, HRESULT)).call(clientdrawingcontext, pixelsperdip)
+  end
+  def draw_glyph_run(clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, measuringmode : DWRITE_MEASURING_MODE, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(Void*, Float32, Float32, DWRITE_MEASURING_MODE, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, IUnknown, HRESULT)).call(clientdrawingcontext, baselineoriginx, baselineoriginy, measuringmode, glyphrun, glyphrundescription, clientdrawingeffect)
+  end
+  def draw_underline(clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, underline : DWRITE_UNDERLINE*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_underline.unsafe_as(Proc(Void*, Float32, Float32, DWRITE_UNDERLINE*, IUnknown, HRESULT)).call(clientdrawingcontext, baselineoriginx, baselineoriginy, underline, clientdrawingeffect)
+  end
+  def draw_strikethrough(clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, strikethrough : DWRITE_STRIKETHROUGH*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_strikethrough.unsafe_as(Proc(Void*, Float32, Float32, DWRITE_STRIKETHROUGH*, IUnknown, HRESULT)).call(clientdrawingcontext, baselineoriginx, baselineoriginy, strikethrough, clientdrawingeffect)
+  end
+  def draw_inline_object(clientdrawingcontext : Void*, originx : Float32, originy : Float32, inlineobject : IDWriteInlineObject, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_inline_object.unsafe_as(Proc(Void*, Float32, Float32, IDWriteInlineObject, LibC::BOOL, LibC::BOOL, IUnknown, HRESULT)).call(clientdrawingcontext, originx, originy, inlineobject, issideways, isrighttoleft, clientdrawingeffect)
+  end
+end
+struct LibWin32::IDWriteTextLayout
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_text_alignment(textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT, HRESULT)).call(textalignment)
+  end
+  def set_paragraph_alignment(paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)).call(paragraphalignment)
+  end
+  def set_word_wrapping(wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING, HRESULT)).call(wordwrapping)
+  end
+  def set_reading_direction(readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION, HRESULT)).call(readingdirection)
+  end
+  def set_flow_direction(flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION, HRESULT)).call(flowdirection)
+  end
+  def set_incremental_tab_stop(incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.unsafe_as(Proc(Float32, HRESULT)).call(incrementaltabstop)
+  end
+  def set_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT)).call
+  end
+  def get_paragraph_alignment : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT)).call
+  end
+  def get_word_wrapping : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING)).call
+  end
+  def get_reading_direction : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION)).call
+  end
+  def get_flow_direction : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION)).call
+  end
+  def get_incremental_tab_stop : Float32
+    @lpVtbl.value.get_incremental_tab_stop.unsafe_as(Proc(Float32)).call
+  end
+  def get_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.unsafe_as(Proc(IDWriteFontCollection*, HRESULT)).call(fontcollection)
+  end
+  def get_font_family_name_length : UInt32
+    @lpVtbl.value.get_font_family_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family_name(fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(fontfamilyname, namesize)
+  end
+  def get_font_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_font_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def get_font_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_font_size : Float32
+    @lpVtbl.value.get_font_size.unsafe_as(Proc(Float32)).call
+  end
+  def get_locale_name_length : UInt32
+    @lpVtbl.value.get_locale_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_locale_name(localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(localename, namesize)
+  end
+  def set_max_width(maxwidth : Float32) : HRESULT
+    @lpVtbl.value.set_max_width.unsafe_as(Proc(Float32, HRESULT)).call(maxwidth)
+  end
+  def set_max_height(maxheight : Float32) : HRESULT
+    @lpVtbl.value.set_max_height.unsafe_as(Proc(Float32, HRESULT)).call(maxheight)
+  end
+  def set_font_collection(fontcollection : IDWriteFontCollection, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_collection.unsafe_as(Proc(IDWriteFontCollection, DWRITE_TEXT_RANGE, HRESULT)).call(fontcollection, textrange)
+  end
+  def set_font_family_name(fontfamilyname : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_family_name.unsafe_as(Proc(LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)).call(fontfamilyname, textrange)
+  end
+  def set_font_weight(fontweight : DWRITE_FONT_WEIGHT, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT, DWRITE_TEXT_RANGE, HRESULT)).call(fontweight, textrange)
+  end
+  def set_font_style(fontstyle : DWRITE_FONT_STYLE, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_style.unsafe_as(Proc(DWRITE_FONT_STYLE, DWRITE_TEXT_RANGE, HRESULT)).call(fontstyle, textrange)
+  end
+  def set_font_stretch(fontstretch : DWRITE_FONT_STRETCH, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH, DWRITE_TEXT_RANGE, HRESULT)).call(fontstretch, textrange)
+  end
+  def set_font_size(fontsize : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_size.unsafe_as(Proc(Float32, DWRITE_TEXT_RANGE, HRESULT)).call(fontsize, textrange)
+  end
+  def set_underline(hasunderline : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_underline.unsafe_as(Proc(LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)).call(hasunderline, textrange)
+  end
+  def set_strikethrough(hasstrikethrough : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_strikethrough.unsafe_as(Proc(LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)).call(hasstrikethrough, textrange)
+  end
+  def set_drawing_effect(drawingeffect : IUnknown, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_drawing_effect.unsafe_as(Proc(IUnknown, DWRITE_TEXT_RANGE, HRESULT)).call(drawingeffect, textrange)
+  end
+  def set_inline_object(inlineobject : IDWriteInlineObject, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_inline_object.unsafe_as(Proc(IDWriteInlineObject, DWRITE_TEXT_RANGE, HRESULT)).call(inlineobject, textrange)
+  end
+  def set_typography(typography : IDWriteTypography, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_typography.unsafe_as(Proc(IDWriteTypography, DWRITE_TEXT_RANGE, HRESULT)).call(typography, textrange)
+  end
+  def set_locale_name(localename : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_locale_name.unsafe_as(Proc(LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)).call(localename, textrange)
+  end
+  def get_max_width : Float32
+    @lpVtbl.value.get_max_width.unsafe_as(Proc(Float32)).call
+  end
+  def get_max_height : Float32
+    @lpVtbl.value.get_max_height.unsafe_as(Proc(Float32)).call
+  end
+  def get_font_collection2(currentposition : UInt32, fontcollection : IDWriteFontCollection*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_collection2.unsafe_as(Proc(UInt32, IDWriteFontCollection*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontcollection, textrange)
+  end
+  def get_font_family_name_length2(currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name_length2.unsafe_as(Proc(UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, namelength, textrange)
+  end
+  def get_font_family_name2(currentposition : UInt32, fontfamilyname : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name2.unsafe_as(Proc(UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontfamilyname, namesize, textrange)
+  end
+  def get_font_weight2(currentposition : UInt32, fontweight : DWRITE_FONT_WEIGHT*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_weight2.unsafe_as(Proc(UInt32, DWRITE_FONT_WEIGHT*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontweight, textrange)
+  end
+  def get_font_style2(currentposition : UInt32, fontstyle : DWRITE_FONT_STYLE*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_style2.unsafe_as(Proc(UInt32, DWRITE_FONT_STYLE*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontstyle, textrange)
+  end
+  def get_font_stretch2(currentposition : UInt32, fontstretch : DWRITE_FONT_STRETCH*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_stretch2.unsafe_as(Proc(UInt32, DWRITE_FONT_STRETCH*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontstretch, textrange)
+  end
+  def get_font_size2(currentposition : UInt32, fontsize : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_size2.unsafe_as(Proc(UInt32, Float32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontsize, textrange)
+  end
+  def get_underline(currentposition : UInt32, hasunderline : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_underline.unsafe_as(Proc(UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, hasunderline, textrange)
+  end
+  def get_strikethrough(currentposition : UInt32, hasstrikethrough : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_strikethrough.unsafe_as(Proc(UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, hasstrikethrough, textrange)
+  end
+  def get_drawing_effect(currentposition : UInt32, drawingeffect : IUnknown*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_drawing_effect.unsafe_as(Proc(UInt32, IUnknown*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, drawingeffect, textrange)
+  end
+  def get_inline_object(currentposition : UInt32, inlineobject : IDWriteInlineObject*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_inline_object.unsafe_as(Proc(UInt32, IDWriteInlineObject*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, inlineobject, textrange)
+  end
+  def get_typography(currentposition : UInt32, typography : IDWriteTypography*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_typography.unsafe_as(Proc(UInt32, IDWriteTypography*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, typography, textrange)
+  end
+  def get_locale_name_length2(currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name_length2.unsafe_as(Proc(UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, namelength, textrange)
+  end
+  def get_locale_name2(currentposition : UInt32, localename : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name2.unsafe_as(Proc(UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, localename, namesize, textrange)
+  end
+  def draw(clientdrawingcontext : Void*, renderer : IDWriteTextRenderer, originx : Float32, originy : Float32) : HRESULT
+    @lpVtbl.value.draw.unsafe_as(Proc(Void*, IDWriteTextRenderer, Float32, Float32, HRESULT)).call(clientdrawingcontext, renderer, originx, originy)
+  end
+  def get_line_metrics(linemetrics : DWRITE_LINE_METRICS*, maxlinecount : UInt32, actuallinecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_metrics.unsafe_as(Proc(DWRITE_LINE_METRICS*, UInt32, UInt32*, HRESULT)).call(linemetrics, maxlinecount, actuallinecount)
+  end
+  def get_metrics(textmetrics : DWRITE_TEXT_METRICS*) : HRESULT
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_TEXT_METRICS*, HRESULT)).call(textmetrics)
+  end
+  def get_overhang_metrics(overhangs : DWRITE_OVERHANG_METRICS*) : HRESULT
+    @lpVtbl.value.get_overhang_metrics.unsafe_as(Proc(DWRITE_OVERHANG_METRICS*, HRESULT)).call(overhangs)
+  end
+  def get_cluster_metrics(clustermetrics : DWRITE_CLUSTER_METRICS*, maxclustercount : UInt32, actualclustercount : UInt32*) : HRESULT
+    @lpVtbl.value.get_cluster_metrics.unsafe_as(Proc(DWRITE_CLUSTER_METRICS*, UInt32, UInt32*, HRESULT)).call(clustermetrics, maxclustercount, actualclustercount)
+  end
+  def determine_min_width(minwidth : Float32*) : HRESULT
+    @lpVtbl.value.determine_min_width.unsafe_as(Proc(Float32*, HRESULT)).call(minwidth)
+  end
+  def hit_test_point(pointx : Float32, pointy : Float32, istrailinghit : LibC::BOOL*, isinside : LibC::BOOL*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_point.unsafe_as(Proc(Float32, Float32, LibC::BOOL*, LibC::BOOL*, DWRITE_HIT_TEST_METRICS*, HRESULT)).call(pointx, pointy, istrailinghit, isinside, hittestmetrics)
+  end
+  def hit_test_text_position(textposition : UInt32, istrailinghit : LibC::BOOL, pointx : Float32*, pointy : Float32*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_text_position.unsafe_as(Proc(UInt32, LibC::BOOL, Float32*, Float32*, DWRITE_HIT_TEST_METRICS*, HRESULT)).call(textposition, istrailinghit, pointx, pointy, hittestmetrics)
+  end
+  def hit_test_text_range(textposition : UInt32, textlength : UInt32, originx : Float32, originy : Float32, hittestmetrics : DWRITE_HIT_TEST_METRICS*, maxhittestmetricscount : UInt32, actualhittestmetricscount : UInt32*) : HRESULT
+    @lpVtbl.value.hit_test_text_range.unsafe_as(Proc(UInt32, UInt32, Float32, Float32, DWRITE_HIT_TEST_METRICS*, UInt32, UInt32*, HRESULT)).call(textposition, textlength, originx, originy, hittestmetrics, maxhittestmetricscount, actualhittestmetricscount)
+  end
+end
+struct LibWin32::IDWriteBitmapRenderTarget
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def draw_glyph_run(baselineoriginx : Float32, baselineoriginy : Float32, measuringmode : DWRITE_MEASURING_MODE, glyphrun : DWRITE_GLYPH_RUN*, renderingparams : IDWriteRenderingParams, textcolor : UInt32, blackboxrect : RECT*) : HRESULT
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(Float32, Float32, DWRITE_MEASURING_MODE, DWRITE_GLYPH_RUN*, IDWriteRenderingParams, UInt32, RECT*, HRESULT)).call(baselineoriginx, baselineoriginy, measuringmode, glyphrun, renderingparams, textcolor, blackboxrect)
+  end
+  def get_memory_dc : HDC
+    @lpVtbl.value.get_memory_dc.unsafe_as(Proc(HDC)).call
+  end
+  def get_pixels_per_dip : Float32
+    @lpVtbl.value.get_pixels_per_dip.unsafe_as(Proc(Float32)).call
+  end
+  def set_pixels_per_dip(pixelsperdip : Float32) : HRESULT
+    @lpVtbl.value.set_pixels_per_dip.unsafe_as(Proc(Float32, HRESULT)).call(pixelsperdip)
+  end
+  def get_current_transform(transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.get_current_transform.unsafe_as(Proc(DWRITE_MATRIX*, HRESULT)).call(transform)
+  end
+  def set_current_transform(transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.set_current_transform.unsafe_as(Proc(DWRITE_MATRIX*, HRESULT)).call(transform)
+  end
+  def get_size(size : SIZE*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(SIZE*, HRESULT)).call(size)
+  end
+  def resize(width : UInt32, height : UInt32) : HRESULT
+    @lpVtbl.value.resize.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(width, height)
+  end
+end
+struct LibWin32::IDWriteGdiInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_font_from_logfont(logfont : LOGFONTW*, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.create_font_from_logfont.unsafe_as(Proc(LOGFONTW*, IDWriteFont*, HRESULT)).call(logfont, font)
+  end
+  def convert_font_to_logfont(font : IDWriteFont, logfont : LOGFONTW*, issystemfont : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.convert_font_to_logfont.unsafe_as(Proc(IDWriteFont, LOGFONTW*, LibC::BOOL*, HRESULT)).call(font, logfont, issystemfont)
+  end
+  def convert_font_face_to_logfont(font : IDWriteFontFace, logfont : LOGFONTW*) : HRESULT
+    @lpVtbl.value.convert_font_face_to_logfont.unsafe_as(Proc(IDWriteFontFace, LOGFONTW*, HRESULT)).call(font, logfont)
+  end
+  def create_font_face_from_hdc(hdc : HDC, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face_from_hdc.unsafe_as(Proc(HDC, IDWriteFontFace*, HRESULT)).call(hdc, fontface)
+  end
+  def create_bitmap_render_target(hdc : HDC, width : UInt32, height : UInt32, rendertarget : IDWriteBitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_bitmap_render_target.unsafe_as(Proc(HDC, UInt32, UInt32, IDWriteBitmapRenderTarget*, HRESULT)).call(hdc, width, height, rendertarget)
+  end
+end
+struct LibWin32::IDWriteGlyphRunAnalysis
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_alpha_texture_bounds(texturetype : DWRITE_TEXTURE_TYPE, texturebounds : RECT*) : HRESULT
+    @lpVtbl.value.get_alpha_texture_bounds.unsafe_as(Proc(DWRITE_TEXTURE_TYPE, RECT*, HRESULT)).call(texturetype, texturebounds)
+  end
+  def create_alpha_texture(texturetype : DWRITE_TEXTURE_TYPE, texturebounds : RECT*, alphavalues : UInt8*, buffersize : UInt32) : HRESULT
+    @lpVtbl.value.create_alpha_texture.unsafe_as(Proc(DWRITE_TEXTURE_TYPE, RECT*, UInt8*, UInt32, HRESULT)).call(texturetype, texturebounds, alphavalues, buffersize)
+  end
+  def get_alpha_blend_params(renderingparams : IDWriteRenderingParams, blendgamma : Float32*, blendenhancedcontrast : Float32*, blendcleartypelevel : Float32*) : HRESULT
+    @lpVtbl.value.get_alpha_blend_params.unsafe_as(Proc(IDWriteRenderingParams, Float32*, Float32*, Float32*, HRESULT)).call(renderingparams, blendgamma, blendenhancedcontrast, blendcleartypelevel)
+  end
+end
+struct LibWin32::IDWriteFactory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_system_font_collection(fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection.unsafe_as(Proc(IDWriteFontCollection*, LibC::BOOL, HRESULT)).call(fontcollection, checkforupdates)
+  end
+  def create_custom_font_collection(collectionloader : IDWriteFontCollectionLoader, collectionkey : Void*, collectionkeysize : UInt32, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.create_custom_font_collection.unsafe_as(Proc(IDWriteFontCollectionLoader, Void*, UInt32, IDWriteFontCollection*, HRESULT)).call(collectionloader, collectionkey, collectionkeysize, fontcollection)
+  end
+  def register_font_collection_loader(fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.register_font_collection_loader.unsafe_as(Proc(IDWriteFontCollectionLoader, HRESULT)).call(fontcollectionloader)
+  end
+  def unregister_font_collection_loader(fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.unregister_font_collection_loader.unsafe_as(Proc(IDWriteFontCollectionLoader, HRESULT)).call(fontcollectionloader)
+  end
+  def create_font_file_reference(filepath : LibC::LPWSTR, lastwritetime : FILETIME*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference.unsafe_as(Proc(LibC::LPWSTR, FILETIME*, IDWriteFontFile*, HRESULT)).call(filepath, lastwritetime, fontfile)
+  end
+  def create_custom_font_file_reference(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfileloader : IDWriteFontFileLoader, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_custom_font_file_reference.unsafe_as(Proc(Void*, UInt32, IDWriteFontFileLoader, IDWriteFontFile*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, fontfileloader, fontfile)
+  end
+  def create_font_face(fontfacetype : DWRITE_FONT_FACE_TYPE, numberoffiles : UInt32, fontfiles : IDWriteFontFile*, faceindex : UInt32, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(DWRITE_FONT_FACE_TYPE, UInt32, IDWriteFontFile*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFace*, HRESULT)).call(fontfacetype, numberoffiles, fontfiles, faceindex, fontfacesimulationflags, fontface)
+  end
+  def create_rendering_params(renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, HRESULT)).call(renderingparams)
+  end
+  def create_monitor_rendering_params(monitor : HMONITOR, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_monitor_rendering_params.unsafe_as(Proc(HMONITOR, IDWriteRenderingParams*, HRESULT)).call(monitor, renderingparams)
+  end
+  def create_custom_rendering_params(gamma : Float32, enhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams*, HRESULT)).call(gamma, enhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def register_font_file_loader(fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.register_font_file_loader.unsafe_as(Proc(IDWriteFontFileLoader, HRESULT)).call(fontfileloader)
+  end
+  def unregister_font_file_loader(fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.unregister_font_file_loader.unsafe_as(Proc(IDWriteFontFileLoader, HRESULT)).call(fontfileloader)
+  end
+  def create_text_format(fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontweight : DWRITE_FONT_WEIGHT, fontstyle : DWRITE_FONT_STYLE, fontstretch : DWRITE_FONT_STRETCH, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat*) : HRESULT
+    @lpVtbl.value.create_text_format.unsafe_as(Proc(LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, Float32, LibC::LPWSTR, IDWriteTextFormat*, HRESULT)).call(fontfamilyname, fontcollection, fontweight, fontstyle, fontstretch, fontsize, localename, textformat)
+  end
+  def create_typography(typography : IDWriteTypography*) : HRESULT
+    @lpVtbl.value.create_typography.unsafe_as(Proc(IDWriteTypography*, HRESULT)).call(typography)
+  end
+  def get_gdi_interop(gdiinterop : IDWriteGdiInterop*) : HRESULT
+    @lpVtbl.value.get_gdi_interop.unsafe_as(Proc(IDWriteGdiInterop*, HRESULT)).call(gdiinterop)
+  end
+  def create_text_layout(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, maxwidth : Float32, maxheight : Float32, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_text_layout.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, Float32, Float32, IDWriteTextLayout*, HRESULT)).call(string, stringlength, textformat, maxwidth, maxheight, textlayout)
+  end
+  def create_gdi_compatible_text_layout(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutwidth : Float32, layoutheight : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_gdi_compatible_text_layout.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, IDWriteTextLayout*, HRESULT)).call(string, stringlength, textformat, layoutwidth, layoutheight, pixelsperdip, transform, usegdinatural, textlayout)
+  end
+  def create_ellipsis_trimming_sign(textformat : IDWriteTextFormat, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.create_ellipsis_trimming_sign.unsafe_as(Proc(IDWriteTextFormat, IDWriteInlineObject*, HRESULT)).call(textformat, trimmingsign)
+  end
+  def create_text_analyzer(textanalyzer : IDWriteTextAnalyzer*) : HRESULT
+    @lpVtbl.value.create_text_analyzer.unsafe_as(Proc(IDWriteTextAnalyzer*, HRESULT)).call(textanalyzer)
+  end
+  def create_number_substitution(substitutionmethod : DWRITE_NUMBER_SUBSTITUTION_METHOD, localename : LibC::LPWSTR, ignoreuseroverride : LibC::BOOL, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.create_number_substitution.unsafe_as(Proc(DWRITE_NUMBER_SUBSTITUTION_METHOD, LibC::LPWSTR, LibC::BOOL, IDWriteNumberSubstitution*, HRESULT)).call(substitutionmethod, localename, ignoreuseroverride, numbersubstitution)
+  end
+  def create_glyph_run_analysis(glyphrun : DWRITE_GLYPH_RUN*, pixelsperdip : Float32, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis.unsafe_as(Proc(DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, pixelsperdip, transform, renderingmode, measuringmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+end
+struct LibWin32::IDWriteFactory1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_system_font_collection(fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection.unsafe_as(Proc(IDWriteFontCollection*, LibC::BOOL, HRESULT)).call(fontcollection, checkforupdates)
+  end
+  def create_custom_font_collection(collectionloader : IDWriteFontCollectionLoader, collectionkey : Void*, collectionkeysize : UInt32, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.create_custom_font_collection.unsafe_as(Proc(IDWriteFontCollectionLoader, Void*, UInt32, IDWriteFontCollection*, HRESULT)).call(collectionloader, collectionkey, collectionkeysize, fontcollection)
+  end
+  def register_font_collection_loader(fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.register_font_collection_loader.unsafe_as(Proc(IDWriteFontCollectionLoader, HRESULT)).call(fontcollectionloader)
+  end
+  def unregister_font_collection_loader(fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.unregister_font_collection_loader.unsafe_as(Proc(IDWriteFontCollectionLoader, HRESULT)).call(fontcollectionloader)
+  end
+  def create_font_file_reference(filepath : LibC::LPWSTR, lastwritetime : FILETIME*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference.unsafe_as(Proc(LibC::LPWSTR, FILETIME*, IDWriteFontFile*, HRESULT)).call(filepath, lastwritetime, fontfile)
+  end
+  def create_custom_font_file_reference(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfileloader : IDWriteFontFileLoader, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_custom_font_file_reference.unsafe_as(Proc(Void*, UInt32, IDWriteFontFileLoader, IDWriteFontFile*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, fontfileloader, fontfile)
+  end
+  def create_font_face(fontfacetype : DWRITE_FONT_FACE_TYPE, numberoffiles : UInt32, fontfiles : IDWriteFontFile*, faceindex : UInt32, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(DWRITE_FONT_FACE_TYPE, UInt32, IDWriteFontFile*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFace*, HRESULT)).call(fontfacetype, numberoffiles, fontfiles, faceindex, fontfacesimulationflags, fontface)
+  end
+  def create_rendering_params(renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, HRESULT)).call(renderingparams)
+  end
+  def create_monitor_rendering_params(monitor : HMONITOR, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_monitor_rendering_params.unsafe_as(Proc(HMONITOR, IDWriteRenderingParams*, HRESULT)).call(monitor, renderingparams)
+  end
+  def create_custom_rendering_params(gamma : Float32, enhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams*, HRESULT)).call(gamma, enhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def register_font_file_loader(fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.register_font_file_loader.unsafe_as(Proc(IDWriteFontFileLoader, HRESULT)).call(fontfileloader)
+  end
+  def unregister_font_file_loader(fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.unregister_font_file_loader.unsafe_as(Proc(IDWriteFontFileLoader, HRESULT)).call(fontfileloader)
+  end
+  def create_text_format(fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontweight : DWRITE_FONT_WEIGHT, fontstyle : DWRITE_FONT_STYLE, fontstretch : DWRITE_FONT_STRETCH, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat*) : HRESULT
+    @lpVtbl.value.create_text_format.unsafe_as(Proc(LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, Float32, LibC::LPWSTR, IDWriteTextFormat*, HRESULT)).call(fontfamilyname, fontcollection, fontweight, fontstyle, fontstretch, fontsize, localename, textformat)
+  end
+  def create_typography(typography : IDWriteTypography*) : HRESULT
+    @lpVtbl.value.create_typography.unsafe_as(Proc(IDWriteTypography*, HRESULT)).call(typography)
+  end
+  def get_gdi_interop(gdiinterop : IDWriteGdiInterop*) : HRESULT
+    @lpVtbl.value.get_gdi_interop.unsafe_as(Proc(IDWriteGdiInterop*, HRESULT)).call(gdiinterop)
+  end
+  def create_text_layout(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, maxwidth : Float32, maxheight : Float32, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_text_layout.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, Float32, Float32, IDWriteTextLayout*, HRESULT)).call(string, stringlength, textformat, maxwidth, maxheight, textlayout)
+  end
+  def create_gdi_compatible_text_layout(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutwidth : Float32, layoutheight : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_gdi_compatible_text_layout.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, IDWriteTextLayout*, HRESULT)).call(string, stringlength, textformat, layoutwidth, layoutheight, pixelsperdip, transform, usegdinatural, textlayout)
+  end
+  def create_ellipsis_trimming_sign(textformat : IDWriteTextFormat, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.create_ellipsis_trimming_sign.unsafe_as(Proc(IDWriteTextFormat, IDWriteInlineObject*, HRESULT)).call(textformat, trimmingsign)
+  end
+  def create_text_analyzer(textanalyzer : IDWriteTextAnalyzer*) : HRESULT
+    @lpVtbl.value.create_text_analyzer.unsafe_as(Proc(IDWriteTextAnalyzer*, HRESULT)).call(textanalyzer)
+  end
+  def create_number_substitution(substitutionmethod : DWRITE_NUMBER_SUBSTITUTION_METHOD, localename : LibC::LPWSTR, ignoreuseroverride : LibC::BOOL, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.create_number_substitution.unsafe_as(Proc(DWRITE_NUMBER_SUBSTITUTION_METHOD, LibC::LPWSTR, LibC::BOOL, IDWriteNumberSubstitution*, HRESULT)).call(substitutionmethod, localename, ignoreuseroverride, numbersubstitution)
+  end
+  def create_glyph_run_analysis(glyphrun : DWRITE_GLYPH_RUN*, pixelsperdip : Float32, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis.unsafe_as(Proc(DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, pixelsperdip, transform, renderingmode, measuringmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def get_eudc_font_collection(fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_eudc_font_collection.unsafe_as(Proc(IDWriteFontCollection*, LibC::BOOL, HRESULT)).call(fontcollection, checkforupdates)
+  end
+  def create_custom_rendering_params2(gamma : Float32, enhancedcontrast : Float32, enhancedcontrastgrayscale : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams1*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params2.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams1*, HRESULT)).call(gamma, enhancedcontrast, enhancedcontrastgrayscale, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+end
+struct LibWin32::IDWriteFontFace1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type : DWRITE_FONT_FACE_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(DWRITE_FONT_FACE_TYPE)).call
+  end
+  def get_files(numberoffiles : UInt32*, fontfiles : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_files.unsafe_as(Proc(UInt32*, IDWriteFontFile*, HRESULT)).call(numberoffiles, fontfiles)
+  end
+  def get_index : UInt32
+    @lpVtbl.value.get_index.unsafe_as(Proc(UInt32)).call
+  end
+  def get_simulations : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS)).call
+  end
+  def is_symbol_font : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_metrics(fontfacemetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_FONT_METRICS*, Void)).call(fontfacemetrics)
+  end
+  def get_glyph_count : UInt16
+    @lpVtbl.value.get_glyph_count.unsafe_as(Proc(UInt16)).call
+  end
+  def get_design_glyph_metrics(glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_metrics.unsafe_as(Proc(UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)).call(glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_glyph_indices(codepoints : UInt32*, codepointcount : UInt32, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.unsafe_as(Proc(UInt32*, UInt32, UInt16*, HRESULT)).call(codepoints, codepointcount, glyphindices)
+  end
+  def try_get_font_table(opentypetabletag : UInt32, tabledata : Void**, tablesize : UInt32*, tablecontext : Void**, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_get_font_table.unsafe_as(Proc(UInt32, Void**, UInt32*, Void**, LibC::BOOL*, HRESULT)).call(opentypetabletag, tabledata, tablesize, tablecontext, exists)
+  end
+  def release_font_table(tablecontext : Void*) : Void
+    @lpVtbl.value.release_font_table.unsafe_as(Proc(Void*, Void)).call(tablecontext)
+  end
+  def get_glyph_run_outline(emsize : Float32, glyphindices : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphcount : UInt32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.get_glyph_run_outline.unsafe_as(Proc(Float32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, UInt32, LibC::BOOL, LibC::BOOL, ID2D1SimplifiedGeometrySink, HRESULT)).call(emsize, glyphindices, glyphadvances, glyphoffsets, glyphcount, issideways, isrighttoleft, geometrysink)
+  end
+  def get_recommended_rendering_mode(emsize : Float32, pixelsperdip : Float32, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode.unsafe_as(Proc(Float32, Float32, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, HRESULT)).call(emsize, pixelsperdip, measuringmode, renderingparams, renderingmode)
+  end
+  def get_gdi_compatible_metrics(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontfacemetrics : DWRITE_FONT_METRICS*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS*, HRESULT)).call(emsize, pixelsperdip, transform, fontfacemetrics)
+  end
+  def get_gdi_compatible_glyph_metrics(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_metrics.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)).call(emsize, pixelsperdip, transform, usegdinatural, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_metrics2(fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.unsafe_as(Proc(DWRITE_FONT_METRICS1*, Void)).call(fontmetrics)
+  end
+  def get_gdi_compatible_metrics2(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontmetrics : DWRITE_FONT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics2.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS1*, HRESULT)).call(emsize, pixelsperdip, transform, fontmetrics)
+  end
+  def get_caret_metrics(caretmetrics : DWRITE_CARET_METRICS*) : Void
+    @lpVtbl.value.get_caret_metrics.unsafe_as(Proc(DWRITE_CARET_METRICS*, Void)).call(caretmetrics)
+  end
+  def get_unicode_ranges(maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.unsafe_as(Proc(UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)).call(maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_design_glyph_advances(glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_advances.unsafe_as(Proc(UInt32, UInt16*, Int32*, LibC::BOOL, HRESULT)).call(glyphcount, glyphindices, glyphadvances, issideways)
+  end
+  def get_gdi_compatible_glyph_advances(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_advances.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, UInt32, UInt16*, Int32*, HRESULT)).call(emsize, pixelsperdip, transform, usegdinatural, issideways, glyphcount, glyphindices, glyphadvances)
+  end
+  def get_kerning_pair_adjustments(glyphcount : UInt32, glyphindices : UInt16*, glyphadvanceadjustments : Int32*) : HRESULT
+    @lpVtbl.value.get_kerning_pair_adjustments.unsafe_as(Proc(UInt32, UInt16*, Int32*, HRESULT)).call(glyphcount, glyphindices, glyphadvanceadjustments)
+  end
+  def has_kerning_pairs : LibC::BOOL
+    @lpVtbl.value.has_kerning_pairs.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_recommended_rendering_mode2(fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode2.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, DWRITE_RENDERING_MODE*, HRESULT)).call(fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingmode)
+  end
+  def get_vertical_glyph_variants(glyphcount : UInt32, nominalglyphindices : UInt16*, verticalglyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_vertical_glyph_variants.unsafe_as(Proc(UInt32, UInt16*, UInt16*, HRESULT)).call(glyphcount, nominalglyphindices, verticalglyphindices)
+  end
+  def has_vertical_glyph_variants : LibC::BOOL
+    @lpVtbl.value.has_vertical_glyph_variants.unsafe_as(Proc(LibC::BOOL)).call
+  end
+end
+struct LibWin32::IDWriteFont1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family(fontfamily : IDWriteFontFamily*) : HRESULT
+    @lpVtbl.value.get_font_family.unsafe_as(Proc(IDWriteFontFamily*, HRESULT)).call(fontfamily)
+  end
+  def get_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def is_symbol_font : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_face_names(names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names.unsafe_as(Proc(IDWriteLocalizedStrings*, HRESULT)).call(names)
+  end
+  def get_informational_strings(informationalstringid : DWRITE_INFORMATIONAL_STRING_ID, informationalstrings : IDWriteLocalizedStrings*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_informational_strings.unsafe_as(Proc(DWRITE_INFORMATIONAL_STRING_ID, IDWriteLocalizedStrings*, LibC::BOOL*, HRESULT)).call(informationalstringid, informationalstrings, exists)
+  end
+  def get_simulations : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS)).call
+  end
+  def get_metrics(fontmetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_FONT_METRICS*, Void)).call(fontmetrics)
+  end
+  def has_character(unicodevalue : UInt32, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_character.unsafe_as(Proc(UInt32, LibC::BOOL*, HRESULT)).call(unicodevalue, exists)
+  end
+  def create_font_face(fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(IDWriteFontFace*, HRESULT)).call(fontface)
+  end
+  def get_metrics2(fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.unsafe_as(Proc(DWRITE_FONT_METRICS1*, Void)).call(fontmetrics)
+  end
+  def get_panose(panose : DWRITE_PANOSE*) : Void
+    @lpVtbl.value.get_panose.unsafe_as(Proc(DWRITE_PANOSE*, Void)).call(panose)
+  end
+  def get_unicode_ranges(maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.unsafe_as(Proc(UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)).call(maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+end
+struct LibWin32::IDWriteRenderingParams1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_gamma : Float32
+    @lpVtbl.value.get_gamma.unsafe_as(Proc(Float32)).call
+  end
+  def get_enhanced_contrast : Float32
+    @lpVtbl.value.get_enhanced_contrast.unsafe_as(Proc(Float32)).call
+  end
+  def get_clear_type_level : Float32
+    @lpVtbl.value.get_clear_type_level.unsafe_as(Proc(Float32)).call
+  end
+  def get_pixel_geometry : DWRITE_PIXEL_GEOMETRY
+    @lpVtbl.value.get_pixel_geometry.unsafe_as(Proc(DWRITE_PIXEL_GEOMETRY)).call
+  end
+  def get_rendering_mode : DWRITE_RENDERING_MODE
+    @lpVtbl.value.get_rendering_mode.unsafe_as(Proc(DWRITE_RENDERING_MODE)).call
+  end
+  def get_grayscale_enhanced_contrast : Float32
+    @lpVtbl.value.get_grayscale_enhanced_contrast.unsafe_as(Proc(Float32)).call
+  end
+end
+struct LibWin32::IDWriteTextAnalyzer1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def analyze_script(analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_script.unsafe_as(Proc(IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)).call(analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_bidi(analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_bidi.unsafe_as(Proc(IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)).call(analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_number_substitution(analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_number_substitution.unsafe_as(Proc(IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)).call(analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_line_breakpoints(analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_line_breakpoints.unsafe_as(Proc(IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)).call(analysissource, textposition, textlength, analysissink)
+  end
+  def get_glyphs(textstring : Char*, textlength : UInt32, fontface : IDWriteFontFace, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, numbersubstitution : IDWriteNumberSubstitution, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, maxglyphcount : UInt32, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, actualglyphcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_glyphs.unsafe_as(Proc(Char*, UInt32, IDWriteFontFace, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, IDWriteNumberSubstitution, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, UInt32, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, HRESULT)).call(textstring, textlength, fontface, issideways, isrighttoleft, scriptanalysis, localename, numbersubstitution, features, featurerangelengths, featureranges, maxglyphcount, clustermap, textprops, glyphindices, glyphprops, actualglyphcount)
+  end
+  def get_glyph_placements(textstring : Char*, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, textlength : UInt32, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphcount : UInt32, fontface : IDWriteFontFace, fontemsize : Float32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.get_glyph_placements.unsafe_as(Proc(Char*, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, IDWriteFontFace, Float32, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)).call(textstring, clustermap, textprops, textlength, glyphindices, glyphprops, glyphcount, fontface, fontemsize, issideways, isrighttoleft, scriptanalysis, localename, features, featurerangelengths, featureranges, glyphadvances, glyphoffsets)
+  end
+  def get_gdi_compatible_glyph_placements(textstring : Char*, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, textlength : UInt32, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphcount : UInt32, fontface : IDWriteFontFace, fontemsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_placements.unsafe_as(Proc(Char*, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, IDWriteFontFace, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)).call(textstring, clustermap, textprops, textlength, glyphindices, glyphprops, glyphcount, fontface, fontemsize, pixelsperdip, transform, usegdinatural, issideways, isrighttoleft, scriptanalysis, localename, features, featurerangelengths, featureranges, glyphadvances, glyphoffsets)
+  end
+  def apply_character_spacing(leadingspacing : Float32, trailingspacing : Float32, minimumadvancewidth : Float32, textlength : UInt32, glyphcount : UInt32, clustermap : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphproperties : DWRITE_SHAPING_GLYPH_PROPERTIES*, modifiedglyphadvances : Float32*, modifiedglyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.apply_character_spacing.unsafe_as(Proc(Float32, Float32, Float32, UInt32, UInt32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, DWRITE_SHAPING_GLYPH_PROPERTIES*, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)).call(leadingspacing, trailingspacing, minimumadvancewidth, textlength, glyphcount, clustermap, glyphadvances, glyphoffsets, glyphproperties, modifiedglyphadvances, modifiedglyphoffsets)
+  end
+  def get_baseline(fontface : IDWriteFontFace, baseline : DWRITE_BASELINE, isvertical : LibC::BOOL, issimulationallowed : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, localename : LibC::LPWSTR, baselinecoordinate : Int32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_baseline.unsafe_as(Proc(IDWriteFontFace, DWRITE_BASELINE, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS, LibC::LPWSTR, Int32*, LibC::BOOL*, HRESULT)).call(fontface, baseline, isvertical, issimulationallowed, scriptanalysis, localename, baselinecoordinate, exists)
+  end
+  def analyze_vertical_glyph_orientation(analysissource : IDWriteTextAnalysisSource1, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink1) : HRESULT
+    @lpVtbl.value.analyze_vertical_glyph_orientation.unsafe_as(Proc(IDWriteTextAnalysisSource1, UInt32, UInt32, IDWriteTextAnalysisSink1, HRESULT)).call(analysissource, textposition, textlength, analysissink)
+  end
+  def get_glyph_orientation_transform(glyphorientationangle : DWRITE_GLYPH_ORIENTATION_ANGLE, issideways : LibC::BOOL, transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.get_glyph_orientation_transform.unsafe_as(Proc(DWRITE_GLYPH_ORIENTATION_ANGLE, LibC::BOOL, DWRITE_MATRIX*, HRESULT)).call(glyphorientationangle, issideways, transform)
+  end
+  def get_script_properties(scriptanalysis : DWRITE_SCRIPT_ANALYSIS, scriptproperties : DWRITE_SCRIPT_PROPERTIES*) : HRESULT
+    @lpVtbl.value.get_script_properties.unsafe_as(Proc(DWRITE_SCRIPT_ANALYSIS, DWRITE_SCRIPT_PROPERTIES*, HRESULT)).call(scriptanalysis, scriptproperties)
+  end
+  def get_text_complexity(textstring : Char*, textlength : UInt32, fontface : IDWriteFontFace, istextsimple : LibC::BOOL*, textlengthread : UInt32*, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_text_complexity.unsafe_as(Proc(Char*, UInt32, IDWriteFontFace, LibC::BOOL*, UInt32*, UInt16*, HRESULT)).call(textstring, textlength, fontface, istextsimple, textlengthread, glyphindices)
+  end
+  def get_justification_opportunities(fontface : IDWriteFontFace, fontemsize : Float32, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, textlength : UInt32, glyphcount : UInt32, textstring : Char*, clustermap : UInt16*, glyphproperties : DWRITE_SHAPING_GLYPH_PROPERTIES*, justificationopportunities : DWRITE_JUSTIFICATION_OPPORTUNITY*) : HRESULT
+    @lpVtbl.value.get_justification_opportunities.unsafe_as(Proc(IDWriteFontFace, Float32, DWRITE_SCRIPT_ANALYSIS, UInt32, UInt32, Char*, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, DWRITE_JUSTIFICATION_OPPORTUNITY*, HRESULT)).call(fontface, fontemsize, scriptanalysis, textlength, glyphcount, textstring, clustermap, glyphproperties, justificationopportunities)
+  end
+  def justify_glyph_advances(linewidth : Float32, glyphcount : UInt32, justificationopportunities : DWRITE_JUSTIFICATION_OPPORTUNITY*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, justifiedglyphadvances : Float32*, justifiedglyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.justify_glyph_advances.unsafe_as(Proc(Float32, UInt32, DWRITE_JUSTIFICATION_OPPORTUNITY*, Float32*, DWRITE_GLYPH_OFFSET*, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)).call(linewidth, glyphcount, justificationopportunities, glyphadvances, glyphoffsets, justifiedglyphadvances, justifiedglyphoffsets)
+  end
+  def get_justified_glyphs(fontface : IDWriteFontFace, fontemsize : Float32, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, textlength : UInt32, glyphcount : UInt32, maxglyphcount : UInt32, clustermap : UInt16*, glyphindices : UInt16*, glyphadvances : Float32*, justifiedglyphadvances : Float32*, justifiedglyphoffsets : DWRITE_GLYPH_OFFSET*, glyphproperties : DWRITE_SHAPING_GLYPH_PROPERTIES*, actualglyphcount : UInt32*, modifiedclustermap : UInt16*, modifiedglyphindices : UInt16*, modifiedglyphadvances : Float32*, modifiedglyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.get_justified_glyphs.unsafe_as(Proc(IDWriteFontFace, Float32, DWRITE_SCRIPT_ANALYSIS, UInt32, UInt32, UInt32, UInt16*, UInt16*, Float32*, Float32*, DWRITE_GLYPH_OFFSET*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, UInt16*, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)).call(fontface, fontemsize, scriptanalysis, textlength, glyphcount, maxglyphcount, clustermap, glyphindices, glyphadvances, justifiedglyphadvances, justifiedglyphoffsets, glyphproperties, actualglyphcount, modifiedclustermap, modifiedglyphindices, modifiedglyphadvances, modifiedglyphoffsets)
+  end
+end
+struct LibWin32::IDWriteTextAnalysisSource1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_text_at_position(textposition : UInt32, textstring : UInt16**, textlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_at_position.unsafe_as(Proc(UInt32, UInt16**, UInt32*, HRESULT)).call(textposition, textstring, textlength)
+  end
+  def get_text_before_position(textposition : UInt32, textstring : UInt16**, textlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_text_before_position.unsafe_as(Proc(UInt32, UInt16**, UInt32*, HRESULT)).call(textposition, textstring, textlength)
+  end
+  def get_paragraph_reading_direction : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_paragraph_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION)).call
+  end
+  def get_locale_name(textposition : UInt32, textlength : UInt32*, localename : UInt16**) : HRESULT
+    @lpVtbl.value.get_locale_name.unsafe_as(Proc(UInt32, UInt32*, UInt16**, HRESULT)).call(textposition, textlength, localename)
+  end
+  def get_number_substitution(textposition : UInt32, textlength : UInt32*, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.get_number_substitution.unsafe_as(Proc(UInt32, UInt32*, IDWriteNumberSubstitution*, HRESULT)).call(textposition, textlength, numbersubstitution)
+  end
+  def get_vertical_glyph_orientation(textposition : UInt32, textlength : UInt32*, glyphorientation : DWRITE_VERTICAL_GLYPH_ORIENTATION*, bidilevel : UInt8*) : HRESULT
+    @lpVtbl.value.get_vertical_glyph_orientation.unsafe_as(Proc(UInt32, UInt32*, DWRITE_VERTICAL_GLYPH_ORIENTATION*, UInt8*, HRESULT)).call(textposition, textlength, glyphorientation, bidilevel)
+  end
+end
+struct LibWin32::IDWriteTextAnalysisSink1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_script_analysis(textposition : UInt32, textlength : UInt32, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*) : HRESULT
+    @lpVtbl.value.set_script_analysis.unsafe_as(Proc(UInt32, UInt32, DWRITE_SCRIPT_ANALYSIS*, HRESULT)).call(textposition, textlength, scriptanalysis)
+  end
+  def set_line_breakpoints(textposition : UInt32, textlength : UInt32, linebreakpoints : DWRITE_LINE_BREAKPOINT*) : HRESULT
+    @lpVtbl.value.set_line_breakpoints.unsafe_as(Proc(UInt32, UInt32, DWRITE_LINE_BREAKPOINT*, HRESULT)).call(textposition, textlength, linebreakpoints)
+  end
+  def set_bidi_level(textposition : UInt32, textlength : UInt32, explicitlevel : UInt8, resolvedlevel : UInt8) : HRESULT
+    @lpVtbl.value.set_bidi_level.unsafe_as(Proc(UInt32, UInt32, UInt8, UInt8, HRESULT)).call(textposition, textlength, explicitlevel, resolvedlevel)
+  end
+  def set_number_substitution(textposition : UInt32, textlength : UInt32, numbersubstitution : IDWriteNumberSubstitution) : HRESULT
+    @lpVtbl.value.set_number_substitution.unsafe_as(Proc(UInt32, UInt32, IDWriteNumberSubstitution, HRESULT)).call(textposition, textlength, numbersubstitution)
+  end
+  def set_glyph_orientation(textposition : UInt32, textlength : UInt32, glyphorientationangle : DWRITE_GLYPH_ORIENTATION_ANGLE, adjustedbidilevel : UInt8, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_glyph_orientation.unsafe_as(Proc(UInt32, UInt32, DWRITE_GLYPH_ORIENTATION_ANGLE, UInt8, LibC::BOOL, LibC::BOOL, HRESULT)).call(textposition, textlength, glyphorientationangle, adjustedbidilevel, issideways, isrighttoleft)
+  end
+end
+struct LibWin32::IDWriteTextLayout1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_text_alignment(textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT, HRESULT)).call(textalignment)
+  end
+  def set_paragraph_alignment(paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)).call(paragraphalignment)
+  end
+  def set_word_wrapping(wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING, HRESULT)).call(wordwrapping)
+  end
+  def set_reading_direction(readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION, HRESULT)).call(readingdirection)
+  end
+  def set_flow_direction(flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION, HRESULT)).call(flowdirection)
+  end
+  def set_incremental_tab_stop(incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.unsafe_as(Proc(Float32, HRESULT)).call(incrementaltabstop)
+  end
+  def set_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT)).call
+  end
+  def get_paragraph_alignment : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT)).call
+  end
+  def get_word_wrapping : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING)).call
+  end
+  def get_reading_direction : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION)).call
+  end
+  def get_flow_direction : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION)).call
+  end
+  def get_incremental_tab_stop : Float32
+    @lpVtbl.value.get_incremental_tab_stop.unsafe_as(Proc(Float32)).call
+  end
+  def get_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.unsafe_as(Proc(IDWriteFontCollection*, HRESULT)).call(fontcollection)
+  end
+  def get_font_family_name_length : UInt32
+    @lpVtbl.value.get_font_family_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family_name(fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(fontfamilyname, namesize)
+  end
+  def get_font_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_font_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def get_font_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_font_size : Float32
+    @lpVtbl.value.get_font_size.unsafe_as(Proc(Float32)).call
+  end
+  def get_locale_name_length : UInt32
+    @lpVtbl.value.get_locale_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_locale_name(localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(localename, namesize)
+  end
+  def set_max_width(maxwidth : Float32) : HRESULT
+    @lpVtbl.value.set_max_width.unsafe_as(Proc(Float32, HRESULT)).call(maxwidth)
+  end
+  def set_max_height(maxheight : Float32) : HRESULT
+    @lpVtbl.value.set_max_height.unsafe_as(Proc(Float32, HRESULT)).call(maxheight)
+  end
+  def set_font_collection(fontcollection : IDWriteFontCollection, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_collection.unsafe_as(Proc(IDWriteFontCollection, DWRITE_TEXT_RANGE, HRESULT)).call(fontcollection, textrange)
+  end
+  def set_font_family_name(fontfamilyname : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_family_name.unsafe_as(Proc(LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)).call(fontfamilyname, textrange)
+  end
+  def set_font_weight(fontweight : DWRITE_FONT_WEIGHT, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT, DWRITE_TEXT_RANGE, HRESULT)).call(fontweight, textrange)
+  end
+  def set_font_style(fontstyle : DWRITE_FONT_STYLE, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_style.unsafe_as(Proc(DWRITE_FONT_STYLE, DWRITE_TEXT_RANGE, HRESULT)).call(fontstyle, textrange)
+  end
+  def set_font_stretch(fontstretch : DWRITE_FONT_STRETCH, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH, DWRITE_TEXT_RANGE, HRESULT)).call(fontstretch, textrange)
+  end
+  def set_font_size(fontsize : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_size.unsafe_as(Proc(Float32, DWRITE_TEXT_RANGE, HRESULT)).call(fontsize, textrange)
+  end
+  def set_underline(hasunderline : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_underline.unsafe_as(Proc(LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)).call(hasunderline, textrange)
+  end
+  def set_strikethrough(hasstrikethrough : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_strikethrough.unsafe_as(Proc(LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)).call(hasstrikethrough, textrange)
+  end
+  def set_drawing_effect(drawingeffect : IUnknown, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_drawing_effect.unsafe_as(Proc(IUnknown, DWRITE_TEXT_RANGE, HRESULT)).call(drawingeffect, textrange)
+  end
+  def set_inline_object(inlineobject : IDWriteInlineObject, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_inline_object.unsafe_as(Proc(IDWriteInlineObject, DWRITE_TEXT_RANGE, HRESULT)).call(inlineobject, textrange)
+  end
+  def set_typography(typography : IDWriteTypography, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_typography.unsafe_as(Proc(IDWriteTypography, DWRITE_TEXT_RANGE, HRESULT)).call(typography, textrange)
+  end
+  def set_locale_name(localename : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_locale_name.unsafe_as(Proc(LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)).call(localename, textrange)
+  end
+  def get_max_width : Float32
+    @lpVtbl.value.get_max_width.unsafe_as(Proc(Float32)).call
+  end
+  def get_max_height : Float32
+    @lpVtbl.value.get_max_height.unsafe_as(Proc(Float32)).call
+  end
+  def get_font_collection2(currentposition : UInt32, fontcollection : IDWriteFontCollection*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_collection2.unsafe_as(Proc(UInt32, IDWriteFontCollection*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontcollection, textrange)
+  end
+  def get_font_family_name_length2(currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name_length2.unsafe_as(Proc(UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, namelength, textrange)
+  end
+  def get_font_family_name2(currentposition : UInt32, fontfamilyname : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name2.unsafe_as(Proc(UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontfamilyname, namesize, textrange)
+  end
+  def get_font_weight2(currentposition : UInt32, fontweight : DWRITE_FONT_WEIGHT*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_weight2.unsafe_as(Proc(UInt32, DWRITE_FONT_WEIGHT*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontweight, textrange)
+  end
+  def get_font_style2(currentposition : UInt32, fontstyle : DWRITE_FONT_STYLE*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_style2.unsafe_as(Proc(UInt32, DWRITE_FONT_STYLE*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontstyle, textrange)
+  end
+  def get_font_stretch2(currentposition : UInt32, fontstretch : DWRITE_FONT_STRETCH*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_stretch2.unsafe_as(Proc(UInt32, DWRITE_FONT_STRETCH*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontstretch, textrange)
+  end
+  def get_font_size2(currentposition : UInt32, fontsize : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_size2.unsafe_as(Proc(UInt32, Float32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontsize, textrange)
+  end
+  def get_underline(currentposition : UInt32, hasunderline : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_underline.unsafe_as(Proc(UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, hasunderline, textrange)
+  end
+  def get_strikethrough(currentposition : UInt32, hasstrikethrough : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_strikethrough.unsafe_as(Proc(UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, hasstrikethrough, textrange)
+  end
+  def get_drawing_effect(currentposition : UInt32, drawingeffect : IUnknown*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_drawing_effect.unsafe_as(Proc(UInt32, IUnknown*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, drawingeffect, textrange)
+  end
+  def get_inline_object(currentposition : UInt32, inlineobject : IDWriteInlineObject*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_inline_object.unsafe_as(Proc(UInt32, IDWriteInlineObject*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, inlineobject, textrange)
+  end
+  def get_typography(currentposition : UInt32, typography : IDWriteTypography*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_typography.unsafe_as(Proc(UInt32, IDWriteTypography*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, typography, textrange)
+  end
+  def get_locale_name_length2(currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name_length2.unsafe_as(Proc(UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, namelength, textrange)
+  end
+  def get_locale_name2(currentposition : UInt32, localename : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name2.unsafe_as(Proc(UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, localename, namesize, textrange)
+  end
+  def draw(clientdrawingcontext : Void*, renderer : IDWriteTextRenderer, originx : Float32, originy : Float32) : HRESULT
+    @lpVtbl.value.draw.unsafe_as(Proc(Void*, IDWriteTextRenderer, Float32, Float32, HRESULT)).call(clientdrawingcontext, renderer, originx, originy)
+  end
+  def get_line_metrics(linemetrics : DWRITE_LINE_METRICS*, maxlinecount : UInt32, actuallinecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_metrics.unsafe_as(Proc(DWRITE_LINE_METRICS*, UInt32, UInt32*, HRESULT)).call(linemetrics, maxlinecount, actuallinecount)
+  end
+  def get_metrics(textmetrics : DWRITE_TEXT_METRICS*) : HRESULT
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_TEXT_METRICS*, HRESULT)).call(textmetrics)
+  end
+  def get_overhang_metrics(overhangs : DWRITE_OVERHANG_METRICS*) : HRESULT
+    @lpVtbl.value.get_overhang_metrics.unsafe_as(Proc(DWRITE_OVERHANG_METRICS*, HRESULT)).call(overhangs)
+  end
+  def get_cluster_metrics(clustermetrics : DWRITE_CLUSTER_METRICS*, maxclustercount : UInt32, actualclustercount : UInt32*) : HRESULT
+    @lpVtbl.value.get_cluster_metrics.unsafe_as(Proc(DWRITE_CLUSTER_METRICS*, UInt32, UInt32*, HRESULT)).call(clustermetrics, maxclustercount, actualclustercount)
+  end
+  def determine_min_width(minwidth : Float32*) : HRESULT
+    @lpVtbl.value.determine_min_width.unsafe_as(Proc(Float32*, HRESULT)).call(minwidth)
+  end
+  def hit_test_point(pointx : Float32, pointy : Float32, istrailinghit : LibC::BOOL*, isinside : LibC::BOOL*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_point.unsafe_as(Proc(Float32, Float32, LibC::BOOL*, LibC::BOOL*, DWRITE_HIT_TEST_METRICS*, HRESULT)).call(pointx, pointy, istrailinghit, isinside, hittestmetrics)
+  end
+  def hit_test_text_position(textposition : UInt32, istrailinghit : LibC::BOOL, pointx : Float32*, pointy : Float32*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_text_position.unsafe_as(Proc(UInt32, LibC::BOOL, Float32*, Float32*, DWRITE_HIT_TEST_METRICS*, HRESULT)).call(textposition, istrailinghit, pointx, pointy, hittestmetrics)
+  end
+  def hit_test_text_range(textposition : UInt32, textlength : UInt32, originx : Float32, originy : Float32, hittestmetrics : DWRITE_HIT_TEST_METRICS*, maxhittestmetricscount : UInt32, actualhittestmetricscount : UInt32*) : HRESULT
+    @lpVtbl.value.hit_test_text_range.unsafe_as(Proc(UInt32, UInt32, Float32, Float32, DWRITE_HIT_TEST_METRICS*, UInt32, UInt32*, HRESULT)).call(textposition, textlength, originx, originy, hittestmetrics, maxhittestmetricscount, actualhittestmetricscount)
+  end
+  def set_pair_kerning(ispairkerningenabled : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_pair_kerning.unsafe_as(Proc(LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)).call(ispairkerningenabled, textrange)
+  end
+  def get_pair_kerning(currentposition : UInt32, ispairkerningenabled : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_pair_kerning.unsafe_as(Proc(UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, ispairkerningenabled, textrange)
+  end
+  def set_character_spacing(leadingspacing : Float32, trailingspacing : Float32, minimumadvancewidth : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_character_spacing.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_TEXT_RANGE, HRESULT)).call(leadingspacing, trailingspacing, minimumadvancewidth, textrange)
+  end
+  def get_character_spacing(currentposition : UInt32, leadingspacing : Float32*, trailingspacing : Float32*, minimumadvancewidth : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_character_spacing.unsafe_as(Proc(UInt32, Float32*, Float32*, Float32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, leadingspacing, trailingspacing, minimumadvancewidth, textrange)
+  end
+end
+struct LibWin32::IDWriteBitmapRenderTarget1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def draw_glyph_run(baselineoriginx : Float32, baselineoriginy : Float32, measuringmode : DWRITE_MEASURING_MODE, glyphrun : DWRITE_GLYPH_RUN*, renderingparams : IDWriteRenderingParams, textcolor : UInt32, blackboxrect : RECT*) : HRESULT
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(Float32, Float32, DWRITE_MEASURING_MODE, DWRITE_GLYPH_RUN*, IDWriteRenderingParams, UInt32, RECT*, HRESULT)).call(baselineoriginx, baselineoriginy, measuringmode, glyphrun, renderingparams, textcolor, blackboxrect)
+  end
+  def get_memory_dc : HDC
+    @lpVtbl.value.get_memory_dc.unsafe_as(Proc(HDC)).call
+  end
+  def get_pixels_per_dip : Float32
+    @lpVtbl.value.get_pixels_per_dip.unsafe_as(Proc(Float32)).call
+  end
+  def set_pixels_per_dip(pixelsperdip : Float32) : HRESULT
+    @lpVtbl.value.set_pixels_per_dip.unsafe_as(Proc(Float32, HRESULT)).call(pixelsperdip)
+  end
+  def get_current_transform(transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.get_current_transform.unsafe_as(Proc(DWRITE_MATRIX*, HRESULT)).call(transform)
+  end
+  def set_current_transform(transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.set_current_transform.unsafe_as(Proc(DWRITE_MATRIX*, HRESULT)).call(transform)
+  end
+  def get_size(size : SIZE*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(SIZE*, HRESULT)).call(size)
+  end
+  def resize(width : UInt32, height : UInt32) : HRESULT
+    @lpVtbl.value.resize.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(width, height)
+  end
+  def get_text_antialias_mode : DWRITE_TEXT_ANTIALIAS_MODE
+    @lpVtbl.value.get_text_antialias_mode.unsafe_as(Proc(DWRITE_TEXT_ANTIALIAS_MODE)).call
+  end
+  def set_text_antialias_mode(antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE) : HRESULT
+    @lpVtbl.value.set_text_antialias_mode.unsafe_as(Proc(DWRITE_TEXT_ANTIALIAS_MODE, HRESULT)).call(antialiasmode)
+  end
+end
+struct LibWin32::IDWriteTextRenderer1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def is_pixel_snapping_disabled(clientdrawingcontext : Void*, isdisabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_pixel_snapping_disabled.unsafe_as(Proc(Void*, LibC::BOOL*, HRESULT)).call(clientdrawingcontext, isdisabled)
+  end
+  def get_current_transform(clientdrawingcontext : Void*, transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.get_current_transform.unsafe_as(Proc(Void*, DWRITE_MATRIX*, HRESULT)).call(clientdrawingcontext, transform)
+  end
+  def get_pixels_per_dip(clientdrawingcontext : Void*, pixelsperdip : Float32*) : HRESULT
+    @lpVtbl.value.get_pixels_per_dip.unsafe_as(Proc(Void*, Float32*, HRESULT)).call(clientdrawingcontext, pixelsperdip)
+  end
+  def draw_glyph_run(clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, measuringmode : DWRITE_MEASURING_MODE, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_glyph_run.unsafe_as(Proc(Void*, Float32, Float32, DWRITE_MEASURING_MODE, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, IUnknown, HRESULT)).call(clientdrawingcontext, baselineoriginx, baselineoriginy, measuringmode, glyphrun, glyphrundescription, clientdrawingeffect)
+  end
+  def draw_underline(clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, underline : DWRITE_UNDERLINE*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_underline.unsafe_as(Proc(Void*, Float32, Float32, DWRITE_UNDERLINE*, IUnknown, HRESULT)).call(clientdrawingcontext, baselineoriginx, baselineoriginy, underline, clientdrawingeffect)
+  end
+  def draw_strikethrough(clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, strikethrough : DWRITE_STRIKETHROUGH*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_strikethrough.unsafe_as(Proc(Void*, Float32, Float32, DWRITE_STRIKETHROUGH*, IUnknown, HRESULT)).call(clientdrawingcontext, baselineoriginx, baselineoriginy, strikethrough, clientdrawingeffect)
+  end
+  def draw_inline_object(clientdrawingcontext : Void*, originx : Float32, originy : Float32, inlineobject : IDWriteInlineObject, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_inline_object.unsafe_as(Proc(Void*, Float32, Float32, IDWriteInlineObject, LibC::BOOL, LibC::BOOL, IUnknown, HRESULT)).call(clientdrawingcontext, originx, originy, inlineobject, issideways, isrighttoleft, clientdrawingeffect)
+  end
+  def draw_glyph_run2(clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, orientationangle : DWRITE_GLYPH_ORIENTATION_ANGLE, measuringmode : DWRITE_MEASURING_MODE, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_glyph_run2.unsafe_as(Proc(Void*, Float32, Float32, DWRITE_GLYPH_ORIENTATION_ANGLE, DWRITE_MEASURING_MODE, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, IUnknown, HRESULT)).call(clientdrawingcontext, baselineoriginx, baselineoriginy, orientationangle, measuringmode, glyphrun, glyphrundescription, clientdrawingeffect)
+  end
+  def draw_underline2(clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, orientationangle : DWRITE_GLYPH_ORIENTATION_ANGLE, underline : DWRITE_UNDERLINE*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_underline2.unsafe_as(Proc(Void*, Float32, Float32, DWRITE_GLYPH_ORIENTATION_ANGLE, DWRITE_UNDERLINE*, IUnknown, HRESULT)).call(clientdrawingcontext, baselineoriginx, baselineoriginy, orientationangle, underline, clientdrawingeffect)
+  end
+  def draw_strikethrough2(clientdrawingcontext : Void*, baselineoriginx : Float32, baselineoriginy : Float32, orientationangle : DWRITE_GLYPH_ORIENTATION_ANGLE, strikethrough : DWRITE_STRIKETHROUGH*, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_strikethrough2.unsafe_as(Proc(Void*, Float32, Float32, DWRITE_GLYPH_ORIENTATION_ANGLE, DWRITE_STRIKETHROUGH*, IUnknown, HRESULT)).call(clientdrawingcontext, baselineoriginx, baselineoriginy, orientationangle, strikethrough, clientdrawingeffect)
+  end
+  def draw_inline_object2(clientdrawingcontext : Void*, originx : Float32, originy : Float32, orientationangle : DWRITE_GLYPH_ORIENTATION_ANGLE, inlineobject : IDWriteInlineObject, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, clientdrawingeffect : IUnknown) : HRESULT
+    @lpVtbl.value.draw_inline_object2.unsafe_as(Proc(Void*, Float32, Float32, DWRITE_GLYPH_ORIENTATION_ANGLE, IDWriteInlineObject, LibC::BOOL, LibC::BOOL, IUnknown, HRESULT)).call(clientdrawingcontext, originx, originy, orientationangle, inlineobject, issideways, isrighttoleft, clientdrawingeffect)
+  end
+end
+struct LibWin32::IDWriteTextFormat1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_text_alignment(textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT, HRESULT)).call(textalignment)
+  end
+  def set_paragraph_alignment(paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)).call(paragraphalignment)
+  end
+  def set_word_wrapping(wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING, HRESULT)).call(wordwrapping)
+  end
+  def set_reading_direction(readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION, HRESULT)).call(readingdirection)
+  end
+  def set_flow_direction(flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION, HRESULT)).call(flowdirection)
+  end
+  def set_incremental_tab_stop(incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.unsafe_as(Proc(Float32, HRESULT)).call(incrementaltabstop)
+  end
+  def set_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT)).call
+  end
+  def get_paragraph_alignment : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT)).call
+  end
+  def get_word_wrapping : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING)).call
+  end
+  def get_reading_direction : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION)).call
+  end
+  def get_flow_direction : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION)).call
+  end
+  def get_incremental_tab_stop : Float32
+    @lpVtbl.value.get_incremental_tab_stop.unsafe_as(Proc(Float32)).call
+  end
+  def get_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.unsafe_as(Proc(IDWriteFontCollection*, HRESULT)).call(fontcollection)
+  end
+  def get_font_family_name_length : UInt32
+    @lpVtbl.value.get_font_family_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family_name(fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(fontfamilyname, namesize)
+  end
+  def get_font_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_font_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def get_font_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_font_size : Float32
+    @lpVtbl.value.get_font_size.unsafe_as(Proc(Float32)).call
+  end
+  def get_locale_name_length : UInt32
+    @lpVtbl.value.get_locale_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_locale_name(localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(localename, namesize)
+  end
+  def set_vertical_glyph_orientation(glyphorientation : DWRITE_VERTICAL_GLYPH_ORIENTATION) : HRESULT
+    @lpVtbl.value.set_vertical_glyph_orientation.unsafe_as(Proc(DWRITE_VERTICAL_GLYPH_ORIENTATION, HRESULT)).call(glyphorientation)
+  end
+  def get_vertical_glyph_orientation : DWRITE_VERTICAL_GLYPH_ORIENTATION
+    @lpVtbl.value.get_vertical_glyph_orientation.unsafe_as(Proc(DWRITE_VERTICAL_GLYPH_ORIENTATION)).call
+  end
+  def set_last_line_wrapping(islastlinewrappingenabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_line_wrapping.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(islastlinewrappingenabled)
+  end
+  def get_last_line_wrapping : LibC::BOOL
+    @lpVtbl.value.get_last_line_wrapping.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def set_optical_alignment(opticalalignment : DWRITE_OPTICAL_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_optical_alignment.unsafe_as(Proc(DWRITE_OPTICAL_ALIGNMENT, HRESULT)).call(opticalalignment)
+  end
+  def get_optical_alignment : DWRITE_OPTICAL_ALIGNMENT
+    @lpVtbl.value.get_optical_alignment.unsafe_as(Proc(DWRITE_OPTICAL_ALIGNMENT)).call
+  end
+  def set_font_fallback(fontfallback : IDWriteFontFallback) : HRESULT
+    @lpVtbl.value.set_font_fallback.unsafe_as(Proc(IDWriteFontFallback, HRESULT)).call(fontfallback)
+  end
+  def get_font_fallback(fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_font_fallback.unsafe_as(Proc(IDWriteFontFallback*, HRESULT)).call(fontfallback)
+  end
+end
+struct LibWin32::IDWriteTextLayout2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_text_alignment(textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT, HRESULT)).call(textalignment)
+  end
+  def set_paragraph_alignment(paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)).call(paragraphalignment)
+  end
+  def set_word_wrapping(wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING, HRESULT)).call(wordwrapping)
+  end
+  def set_reading_direction(readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION, HRESULT)).call(readingdirection)
+  end
+  def set_flow_direction(flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION, HRESULT)).call(flowdirection)
+  end
+  def set_incremental_tab_stop(incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.unsafe_as(Proc(Float32, HRESULT)).call(incrementaltabstop)
+  end
+  def set_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT)).call
+  end
+  def get_paragraph_alignment : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT)).call
+  end
+  def get_word_wrapping : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING)).call
+  end
+  def get_reading_direction : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION)).call
+  end
+  def get_flow_direction : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION)).call
+  end
+  def get_incremental_tab_stop : Float32
+    @lpVtbl.value.get_incremental_tab_stop.unsafe_as(Proc(Float32)).call
+  end
+  def get_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.unsafe_as(Proc(IDWriteFontCollection*, HRESULT)).call(fontcollection)
+  end
+  def get_font_family_name_length : UInt32
+    @lpVtbl.value.get_font_family_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family_name(fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(fontfamilyname, namesize)
+  end
+  def get_font_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_font_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def get_font_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_font_size : Float32
+    @lpVtbl.value.get_font_size.unsafe_as(Proc(Float32)).call
+  end
+  def get_locale_name_length : UInt32
+    @lpVtbl.value.get_locale_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_locale_name(localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(localename, namesize)
+  end
+  def set_max_width(maxwidth : Float32) : HRESULT
+    @lpVtbl.value.set_max_width.unsafe_as(Proc(Float32, HRESULT)).call(maxwidth)
+  end
+  def set_max_height(maxheight : Float32) : HRESULT
+    @lpVtbl.value.set_max_height.unsafe_as(Proc(Float32, HRESULT)).call(maxheight)
+  end
+  def set_font_collection(fontcollection : IDWriteFontCollection, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_collection.unsafe_as(Proc(IDWriteFontCollection, DWRITE_TEXT_RANGE, HRESULT)).call(fontcollection, textrange)
+  end
+  def set_font_family_name(fontfamilyname : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_family_name.unsafe_as(Proc(LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)).call(fontfamilyname, textrange)
+  end
+  def set_font_weight(fontweight : DWRITE_FONT_WEIGHT, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT, DWRITE_TEXT_RANGE, HRESULT)).call(fontweight, textrange)
+  end
+  def set_font_style(fontstyle : DWRITE_FONT_STYLE, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_style.unsafe_as(Proc(DWRITE_FONT_STYLE, DWRITE_TEXT_RANGE, HRESULT)).call(fontstyle, textrange)
+  end
+  def set_font_stretch(fontstretch : DWRITE_FONT_STRETCH, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH, DWRITE_TEXT_RANGE, HRESULT)).call(fontstretch, textrange)
+  end
+  def set_font_size(fontsize : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_size.unsafe_as(Proc(Float32, DWRITE_TEXT_RANGE, HRESULT)).call(fontsize, textrange)
+  end
+  def set_underline(hasunderline : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_underline.unsafe_as(Proc(LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)).call(hasunderline, textrange)
+  end
+  def set_strikethrough(hasstrikethrough : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_strikethrough.unsafe_as(Proc(LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)).call(hasstrikethrough, textrange)
+  end
+  def set_drawing_effect(drawingeffect : IUnknown, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_drawing_effect.unsafe_as(Proc(IUnknown, DWRITE_TEXT_RANGE, HRESULT)).call(drawingeffect, textrange)
+  end
+  def set_inline_object(inlineobject : IDWriteInlineObject, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_inline_object.unsafe_as(Proc(IDWriteInlineObject, DWRITE_TEXT_RANGE, HRESULT)).call(inlineobject, textrange)
+  end
+  def set_typography(typography : IDWriteTypography, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_typography.unsafe_as(Proc(IDWriteTypography, DWRITE_TEXT_RANGE, HRESULT)).call(typography, textrange)
+  end
+  def set_locale_name(localename : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_locale_name.unsafe_as(Proc(LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)).call(localename, textrange)
+  end
+  def get_max_width : Float32
+    @lpVtbl.value.get_max_width.unsafe_as(Proc(Float32)).call
+  end
+  def get_max_height : Float32
+    @lpVtbl.value.get_max_height.unsafe_as(Proc(Float32)).call
+  end
+  def get_font_collection2(currentposition : UInt32, fontcollection : IDWriteFontCollection*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_collection2.unsafe_as(Proc(UInt32, IDWriteFontCollection*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontcollection, textrange)
+  end
+  def get_font_family_name_length2(currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name_length2.unsafe_as(Proc(UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, namelength, textrange)
+  end
+  def get_font_family_name2(currentposition : UInt32, fontfamilyname : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name2.unsafe_as(Proc(UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontfamilyname, namesize, textrange)
+  end
+  def get_font_weight2(currentposition : UInt32, fontweight : DWRITE_FONT_WEIGHT*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_weight2.unsafe_as(Proc(UInt32, DWRITE_FONT_WEIGHT*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontweight, textrange)
+  end
+  def get_font_style2(currentposition : UInt32, fontstyle : DWRITE_FONT_STYLE*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_style2.unsafe_as(Proc(UInt32, DWRITE_FONT_STYLE*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontstyle, textrange)
+  end
+  def get_font_stretch2(currentposition : UInt32, fontstretch : DWRITE_FONT_STRETCH*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_stretch2.unsafe_as(Proc(UInt32, DWRITE_FONT_STRETCH*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontstretch, textrange)
+  end
+  def get_font_size2(currentposition : UInt32, fontsize : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_size2.unsafe_as(Proc(UInt32, Float32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontsize, textrange)
+  end
+  def get_underline(currentposition : UInt32, hasunderline : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_underline.unsafe_as(Proc(UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, hasunderline, textrange)
+  end
+  def get_strikethrough(currentposition : UInt32, hasstrikethrough : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_strikethrough.unsafe_as(Proc(UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, hasstrikethrough, textrange)
+  end
+  def get_drawing_effect(currentposition : UInt32, drawingeffect : IUnknown*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_drawing_effect.unsafe_as(Proc(UInt32, IUnknown*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, drawingeffect, textrange)
+  end
+  def get_inline_object(currentposition : UInt32, inlineobject : IDWriteInlineObject*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_inline_object.unsafe_as(Proc(UInt32, IDWriteInlineObject*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, inlineobject, textrange)
+  end
+  def get_typography(currentposition : UInt32, typography : IDWriteTypography*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_typography.unsafe_as(Proc(UInt32, IDWriteTypography*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, typography, textrange)
+  end
+  def get_locale_name_length2(currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name_length2.unsafe_as(Proc(UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, namelength, textrange)
+  end
+  def get_locale_name2(currentposition : UInt32, localename : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name2.unsafe_as(Proc(UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, localename, namesize, textrange)
+  end
+  def draw(clientdrawingcontext : Void*, renderer : IDWriteTextRenderer, originx : Float32, originy : Float32) : HRESULT
+    @lpVtbl.value.draw.unsafe_as(Proc(Void*, IDWriteTextRenderer, Float32, Float32, HRESULT)).call(clientdrawingcontext, renderer, originx, originy)
+  end
+  def get_line_metrics(linemetrics : DWRITE_LINE_METRICS*, maxlinecount : UInt32, actuallinecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_metrics.unsafe_as(Proc(DWRITE_LINE_METRICS*, UInt32, UInt32*, HRESULT)).call(linemetrics, maxlinecount, actuallinecount)
+  end
+  def get_metrics(textmetrics : DWRITE_TEXT_METRICS*) : HRESULT
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_TEXT_METRICS*, HRESULT)).call(textmetrics)
+  end
+  def get_overhang_metrics(overhangs : DWRITE_OVERHANG_METRICS*) : HRESULT
+    @lpVtbl.value.get_overhang_metrics.unsafe_as(Proc(DWRITE_OVERHANG_METRICS*, HRESULT)).call(overhangs)
+  end
+  def get_cluster_metrics(clustermetrics : DWRITE_CLUSTER_METRICS*, maxclustercount : UInt32, actualclustercount : UInt32*) : HRESULT
+    @lpVtbl.value.get_cluster_metrics.unsafe_as(Proc(DWRITE_CLUSTER_METRICS*, UInt32, UInt32*, HRESULT)).call(clustermetrics, maxclustercount, actualclustercount)
+  end
+  def determine_min_width(minwidth : Float32*) : HRESULT
+    @lpVtbl.value.determine_min_width.unsafe_as(Proc(Float32*, HRESULT)).call(minwidth)
+  end
+  def hit_test_point(pointx : Float32, pointy : Float32, istrailinghit : LibC::BOOL*, isinside : LibC::BOOL*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_point.unsafe_as(Proc(Float32, Float32, LibC::BOOL*, LibC::BOOL*, DWRITE_HIT_TEST_METRICS*, HRESULT)).call(pointx, pointy, istrailinghit, isinside, hittestmetrics)
+  end
+  def hit_test_text_position(textposition : UInt32, istrailinghit : LibC::BOOL, pointx : Float32*, pointy : Float32*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_text_position.unsafe_as(Proc(UInt32, LibC::BOOL, Float32*, Float32*, DWRITE_HIT_TEST_METRICS*, HRESULT)).call(textposition, istrailinghit, pointx, pointy, hittestmetrics)
+  end
+  def hit_test_text_range(textposition : UInt32, textlength : UInt32, originx : Float32, originy : Float32, hittestmetrics : DWRITE_HIT_TEST_METRICS*, maxhittestmetricscount : UInt32, actualhittestmetricscount : UInt32*) : HRESULT
+    @lpVtbl.value.hit_test_text_range.unsafe_as(Proc(UInt32, UInt32, Float32, Float32, DWRITE_HIT_TEST_METRICS*, UInt32, UInt32*, HRESULT)).call(textposition, textlength, originx, originy, hittestmetrics, maxhittestmetricscount, actualhittestmetricscount)
+  end
+  def set_pair_kerning(ispairkerningenabled : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_pair_kerning.unsafe_as(Proc(LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)).call(ispairkerningenabled, textrange)
+  end
+  def get_pair_kerning(currentposition : UInt32, ispairkerningenabled : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_pair_kerning.unsafe_as(Proc(UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, ispairkerningenabled, textrange)
+  end
+  def set_character_spacing(leadingspacing : Float32, trailingspacing : Float32, minimumadvancewidth : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_character_spacing.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_TEXT_RANGE, HRESULT)).call(leadingspacing, trailingspacing, minimumadvancewidth, textrange)
+  end
+  def get_character_spacing(currentposition : UInt32, leadingspacing : Float32*, trailingspacing : Float32*, minimumadvancewidth : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_character_spacing.unsafe_as(Proc(UInt32, Float32*, Float32*, Float32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, leadingspacing, trailingspacing, minimumadvancewidth, textrange)
+  end
+  def get_metrics2(textmetrics : DWRITE_TEXT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_metrics2.unsafe_as(Proc(DWRITE_TEXT_METRICS1*, HRESULT)).call(textmetrics)
+  end
+  def set_vertical_glyph_orientation(glyphorientation : DWRITE_VERTICAL_GLYPH_ORIENTATION) : HRESULT
+    @lpVtbl.value.set_vertical_glyph_orientation.unsafe_as(Proc(DWRITE_VERTICAL_GLYPH_ORIENTATION, HRESULT)).call(glyphorientation)
+  end
+  def get_vertical_glyph_orientation : DWRITE_VERTICAL_GLYPH_ORIENTATION
+    @lpVtbl.value.get_vertical_glyph_orientation.unsafe_as(Proc(DWRITE_VERTICAL_GLYPH_ORIENTATION)).call
+  end
+  def set_last_line_wrapping(islastlinewrappingenabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_line_wrapping.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(islastlinewrappingenabled)
+  end
+  def get_last_line_wrapping : LibC::BOOL
+    @lpVtbl.value.get_last_line_wrapping.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def set_optical_alignment(opticalalignment : DWRITE_OPTICAL_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_optical_alignment.unsafe_as(Proc(DWRITE_OPTICAL_ALIGNMENT, HRESULT)).call(opticalalignment)
+  end
+  def get_optical_alignment : DWRITE_OPTICAL_ALIGNMENT
+    @lpVtbl.value.get_optical_alignment.unsafe_as(Proc(DWRITE_OPTICAL_ALIGNMENT)).call
+  end
+  def set_font_fallback(fontfallback : IDWriteFontFallback) : HRESULT
+    @lpVtbl.value.set_font_fallback.unsafe_as(Proc(IDWriteFontFallback, HRESULT)).call(fontfallback)
+  end
+  def get_font_fallback(fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_font_fallback.unsafe_as(Proc(IDWriteFontFallback*, HRESULT)).call(fontfallback)
+  end
+end
+struct LibWin32::IDWriteTextAnalyzer2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def analyze_script(analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_script.unsafe_as(Proc(IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)).call(analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_bidi(analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_bidi.unsafe_as(Proc(IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)).call(analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_number_substitution(analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_number_substitution.unsafe_as(Proc(IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)).call(analysissource, textposition, textlength, analysissink)
+  end
+  def analyze_line_breakpoints(analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink) : HRESULT
+    @lpVtbl.value.analyze_line_breakpoints.unsafe_as(Proc(IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteTextAnalysisSink, HRESULT)).call(analysissource, textposition, textlength, analysissink)
+  end
+  def get_glyphs(textstring : Char*, textlength : UInt32, fontface : IDWriteFontFace, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, numbersubstitution : IDWriteNumberSubstitution, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, maxglyphcount : UInt32, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, actualglyphcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_glyphs.unsafe_as(Proc(Char*, UInt32, IDWriteFontFace, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, IDWriteNumberSubstitution, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, UInt32, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, HRESULT)).call(textstring, textlength, fontface, issideways, isrighttoleft, scriptanalysis, localename, numbersubstitution, features, featurerangelengths, featureranges, maxglyphcount, clustermap, textprops, glyphindices, glyphprops, actualglyphcount)
+  end
+  def get_glyph_placements(textstring : Char*, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, textlength : UInt32, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphcount : UInt32, fontface : IDWriteFontFace, fontemsize : Float32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.get_glyph_placements.unsafe_as(Proc(Char*, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, IDWriteFontFace, Float32, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)).call(textstring, clustermap, textprops, textlength, glyphindices, glyphprops, glyphcount, fontface, fontemsize, issideways, isrighttoleft, scriptanalysis, localename, features, featurerangelengths, featureranges, glyphadvances, glyphoffsets)
+  end
+  def get_gdi_compatible_glyph_placements(textstring : Char*, clustermap : UInt16*, textprops : DWRITE_SHAPING_TEXT_PROPERTIES*, textlength : UInt32, glyphindices : UInt16*, glyphprops : DWRITE_SHAPING_GLYPH_PROPERTIES*, glyphcount : UInt32, fontface : IDWriteFontFace, fontemsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS*, localename : LibC::LPWSTR, features : DWRITE_TYPOGRAPHIC_FEATURES**, featurerangelengths : UInt32*, featureranges : UInt32, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_placements.unsafe_as(Proc(Char*, UInt16*, DWRITE_SHAPING_TEXT_PROPERTIES*, UInt32, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32, IDWriteFontFace, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS*, LibC::LPWSTR, DWRITE_TYPOGRAPHIC_FEATURES**, UInt32*, UInt32, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)).call(textstring, clustermap, textprops, textlength, glyphindices, glyphprops, glyphcount, fontface, fontemsize, pixelsperdip, transform, usegdinatural, issideways, isrighttoleft, scriptanalysis, localename, features, featurerangelengths, featureranges, glyphadvances, glyphoffsets)
+  end
+  def apply_character_spacing(leadingspacing : Float32, trailingspacing : Float32, minimumadvancewidth : Float32, textlength : UInt32, glyphcount : UInt32, clustermap : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphproperties : DWRITE_SHAPING_GLYPH_PROPERTIES*, modifiedglyphadvances : Float32*, modifiedglyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.apply_character_spacing.unsafe_as(Proc(Float32, Float32, Float32, UInt32, UInt32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, DWRITE_SHAPING_GLYPH_PROPERTIES*, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)).call(leadingspacing, trailingspacing, minimumadvancewidth, textlength, glyphcount, clustermap, glyphadvances, glyphoffsets, glyphproperties, modifiedglyphadvances, modifiedglyphoffsets)
+  end
+  def get_baseline(fontface : IDWriteFontFace, baseline : DWRITE_BASELINE, isvertical : LibC::BOOL, issimulationallowed : LibC::BOOL, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, localename : LibC::LPWSTR, baselinecoordinate : Int32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_baseline.unsafe_as(Proc(IDWriteFontFace, DWRITE_BASELINE, LibC::BOOL, LibC::BOOL, DWRITE_SCRIPT_ANALYSIS, LibC::LPWSTR, Int32*, LibC::BOOL*, HRESULT)).call(fontface, baseline, isvertical, issimulationallowed, scriptanalysis, localename, baselinecoordinate, exists)
+  end
+  def analyze_vertical_glyph_orientation(analysissource : IDWriteTextAnalysisSource1, textposition : UInt32, textlength : UInt32, analysissink : IDWriteTextAnalysisSink1) : HRESULT
+    @lpVtbl.value.analyze_vertical_glyph_orientation.unsafe_as(Proc(IDWriteTextAnalysisSource1, UInt32, UInt32, IDWriteTextAnalysisSink1, HRESULT)).call(analysissource, textposition, textlength, analysissink)
+  end
+  def get_glyph_orientation_transform(glyphorientationangle : DWRITE_GLYPH_ORIENTATION_ANGLE, issideways : LibC::BOOL, transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.get_glyph_orientation_transform.unsafe_as(Proc(DWRITE_GLYPH_ORIENTATION_ANGLE, LibC::BOOL, DWRITE_MATRIX*, HRESULT)).call(glyphorientationangle, issideways, transform)
+  end
+  def get_script_properties(scriptanalysis : DWRITE_SCRIPT_ANALYSIS, scriptproperties : DWRITE_SCRIPT_PROPERTIES*) : HRESULT
+    @lpVtbl.value.get_script_properties.unsafe_as(Proc(DWRITE_SCRIPT_ANALYSIS, DWRITE_SCRIPT_PROPERTIES*, HRESULT)).call(scriptanalysis, scriptproperties)
+  end
+  def get_text_complexity(textstring : Char*, textlength : UInt32, fontface : IDWriteFontFace, istextsimple : LibC::BOOL*, textlengthread : UInt32*, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_text_complexity.unsafe_as(Proc(Char*, UInt32, IDWriteFontFace, LibC::BOOL*, UInt32*, UInt16*, HRESULT)).call(textstring, textlength, fontface, istextsimple, textlengthread, glyphindices)
+  end
+  def get_justification_opportunities(fontface : IDWriteFontFace, fontemsize : Float32, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, textlength : UInt32, glyphcount : UInt32, textstring : Char*, clustermap : UInt16*, glyphproperties : DWRITE_SHAPING_GLYPH_PROPERTIES*, justificationopportunities : DWRITE_JUSTIFICATION_OPPORTUNITY*) : HRESULT
+    @lpVtbl.value.get_justification_opportunities.unsafe_as(Proc(IDWriteFontFace, Float32, DWRITE_SCRIPT_ANALYSIS, UInt32, UInt32, Char*, UInt16*, DWRITE_SHAPING_GLYPH_PROPERTIES*, DWRITE_JUSTIFICATION_OPPORTUNITY*, HRESULT)).call(fontface, fontemsize, scriptanalysis, textlength, glyphcount, textstring, clustermap, glyphproperties, justificationopportunities)
+  end
+  def justify_glyph_advances(linewidth : Float32, glyphcount : UInt32, justificationopportunities : DWRITE_JUSTIFICATION_OPPORTUNITY*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, justifiedglyphadvances : Float32*, justifiedglyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.justify_glyph_advances.unsafe_as(Proc(Float32, UInt32, DWRITE_JUSTIFICATION_OPPORTUNITY*, Float32*, DWRITE_GLYPH_OFFSET*, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)).call(linewidth, glyphcount, justificationopportunities, glyphadvances, glyphoffsets, justifiedglyphadvances, justifiedglyphoffsets)
+  end
+  def get_justified_glyphs(fontface : IDWriteFontFace, fontemsize : Float32, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, textlength : UInt32, glyphcount : UInt32, maxglyphcount : UInt32, clustermap : UInt16*, glyphindices : UInt16*, glyphadvances : Float32*, justifiedglyphadvances : Float32*, justifiedglyphoffsets : DWRITE_GLYPH_OFFSET*, glyphproperties : DWRITE_SHAPING_GLYPH_PROPERTIES*, actualglyphcount : UInt32*, modifiedclustermap : UInt16*, modifiedglyphindices : UInt16*, modifiedglyphadvances : Float32*, modifiedglyphoffsets : DWRITE_GLYPH_OFFSET*) : HRESULT
+    @lpVtbl.value.get_justified_glyphs.unsafe_as(Proc(IDWriteFontFace, Float32, DWRITE_SCRIPT_ANALYSIS, UInt32, UInt32, UInt32, UInt16*, UInt16*, Float32*, Float32*, DWRITE_GLYPH_OFFSET*, DWRITE_SHAPING_GLYPH_PROPERTIES*, UInt32*, UInt16*, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, HRESULT)).call(fontface, fontemsize, scriptanalysis, textlength, glyphcount, maxglyphcount, clustermap, glyphindices, glyphadvances, justifiedglyphadvances, justifiedglyphoffsets, glyphproperties, actualglyphcount, modifiedclustermap, modifiedglyphindices, modifiedglyphadvances, modifiedglyphoffsets)
+  end
+  def get_glyph_orientation_transform2(glyphorientationangle : DWRITE_GLYPH_ORIENTATION_ANGLE, issideways : LibC::BOOL, originx : Float32, originy : Float32, transform : DWRITE_MATRIX*) : HRESULT
+    @lpVtbl.value.get_glyph_orientation_transform2.unsafe_as(Proc(DWRITE_GLYPH_ORIENTATION_ANGLE, LibC::BOOL, Float32, Float32, DWRITE_MATRIX*, HRESULT)).call(glyphorientationangle, issideways, originx, originy, transform)
+  end
+  def get_typographic_features(fontface : IDWriteFontFace, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, localename : LibC::LPWSTR, maxtagcount : UInt32, actualtagcount : UInt32*, tags : DWRITE_FONT_FEATURE_TAG*) : HRESULT
+    @lpVtbl.value.get_typographic_features.unsafe_as(Proc(IDWriteFontFace, DWRITE_SCRIPT_ANALYSIS, LibC::LPWSTR, UInt32, UInt32*, DWRITE_FONT_FEATURE_TAG*, HRESULT)).call(fontface, scriptanalysis, localename, maxtagcount, actualtagcount, tags)
+  end
+  def check_typographic_feature(fontface : IDWriteFontFace, scriptanalysis : DWRITE_SCRIPT_ANALYSIS, localename : LibC::LPWSTR, featuretag : DWRITE_FONT_FEATURE_TAG, glyphcount : UInt32, glyphindices : UInt16*, featureapplies : UInt8*) : HRESULT
+    @lpVtbl.value.check_typographic_feature.unsafe_as(Proc(IDWriteFontFace, DWRITE_SCRIPT_ANALYSIS, LibC::LPWSTR, DWRITE_FONT_FEATURE_TAG, UInt32, UInt16*, UInt8*, HRESULT)).call(fontface, scriptanalysis, localename, featuretag, glyphcount, glyphindices, featureapplies)
+  end
+end
+struct LibWin32::IDWriteFontFallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def map_characters(analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, basefontcollection : IDWriteFontCollection, basefamilyname : LibC::LPWSTR, baseweight : DWRITE_FONT_WEIGHT, basestyle : DWRITE_FONT_STYLE, basestretch : DWRITE_FONT_STRETCH, mappedlength : UInt32*, mappedfont : IDWriteFont*, scale : Float32*) : HRESULT
+    @lpVtbl.value.map_characters.unsafe_as(Proc(IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteFontCollection, LibC::LPWSTR, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, UInt32*, IDWriteFont*, Float32*, HRESULT)).call(analysissource, textposition, textlength, basefontcollection, basefamilyname, baseweight, basestyle, basestretch, mappedlength, mappedfont, scale)
+  end
+end
+struct LibWin32::IDWriteFontFallbackBuilder
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_mapping(ranges : DWRITE_UNICODE_RANGE*, rangescount : UInt32, targetfamilynames : UInt16**, targetfamilynamescount : UInt32, fontcollection : IDWriteFontCollection, localename : LibC::LPWSTR, basefamilyname : LibC::LPWSTR, scale : Float32) : HRESULT
+    @lpVtbl.value.add_mapping.unsafe_as(Proc(DWRITE_UNICODE_RANGE*, UInt32, UInt16**, UInt32, IDWriteFontCollection, LibC::LPWSTR, LibC::LPWSTR, Float32, HRESULT)).call(ranges, rangescount, targetfamilynames, targetfamilynamescount, fontcollection, localename, basefamilyname, scale)
+  end
+  def add_mappings(fontfallback : IDWriteFontFallback) : HRESULT
+    @lpVtbl.value.add_mappings.unsafe_as(Proc(IDWriteFontFallback, HRESULT)).call(fontfallback)
+  end
+  def create_font_fallback(fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.create_font_fallback.unsafe_as(Proc(IDWriteFontFallback*, HRESULT)).call(fontfallback)
+  end
+end
+struct LibWin32::IDWriteFont2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family(fontfamily : IDWriteFontFamily*) : HRESULT
+    @lpVtbl.value.get_font_family.unsafe_as(Proc(IDWriteFontFamily*, HRESULT)).call(fontfamily)
+  end
+  def get_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def is_symbol_font : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_face_names(names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names.unsafe_as(Proc(IDWriteLocalizedStrings*, HRESULT)).call(names)
+  end
+  def get_informational_strings(informationalstringid : DWRITE_INFORMATIONAL_STRING_ID, informationalstrings : IDWriteLocalizedStrings*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_informational_strings.unsafe_as(Proc(DWRITE_INFORMATIONAL_STRING_ID, IDWriteLocalizedStrings*, LibC::BOOL*, HRESULT)).call(informationalstringid, informationalstrings, exists)
+  end
+  def get_simulations : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS)).call
+  end
+  def get_metrics(fontmetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_FONT_METRICS*, Void)).call(fontmetrics)
+  end
+  def has_character(unicodevalue : UInt32, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_character.unsafe_as(Proc(UInt32, LibC::BOOL*, HRESULT)).call(unicodevalue, exists)
+  end
+  def create_font_face(fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(IDWriteFontFace*, HRESULT)).call(fontface)
+  end
+  def get_metrics2(fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.unsafe_as(Proc(DWRITE_FONT_METRICS1*, Void)).call(fontmetrics)
+  end
+  def get_panose(panose : DWRITE_PANOSE*) : Void
+    @lpVtbl.value.get_panose.unsafe_as(Proc(DWRITE_PANOSE*, Void)).call(panose)
+  end
+  def get_unicode_ranges(maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.unsafe_as(Proc(UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)).call(maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def is_color_font : LibC::BOOL
+    @lpVtbl.value.is_color_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+end
+struct LibWin32::IDWriteFontFace2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type : DWRITE_FONT_FACE_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(DWRITE_FONT_FACE_TYPE)).call
+  end
+  def get_files(numberoffiles : UInt32*, fontfiles : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_files.unsafe_as(Proc(UInt32*, IDWriteFontFile*, HRESULT)).call(numberoffiles, fontfiles)
+  end
+  def get_index : UInt32
+    @lpVtbl.value.get_index.unsafe_as(Proc(UInt32)).call
+  end
+  def get_simulations : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS)).call
+  end
+  def is_symbol_font : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_metrics(fontfacemetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_FONT_METRICS*, Void)).call(fontfacemetrics)
+  end
+  def get_glyph_count : UInt16
+    @lpVtbl.value.get_glyph_count.unsafe_as(Proc(UInt16)).call
+  end
+  def get_design_glyph_metrics(glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_metrics.unsafe_as(Proc(UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)).call(glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_glyph_indices(codepoints : UInt32*, codepointcount : UInt32, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.unsafe_as(Proc(UInt32*, UInt32, UInt16*, HRESULT)).call(codepoints, codepointcount, glyphindices)
+  end
+  def try_get_font_table(opentypetabletag : UInt32, tabledata : Void**, tablesize : UInt32*, tablecontext : Void**, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_get_font_table.unsafe_as(Proc(UInt32, Void**, UInt32*, Void**, LibC::BOOL*, HRESULT)).call(opentypetabletag, tabledata, tablesize, tablecontext, exists)
+  end
+  def release_font_table(tablecontext : Void*) : Void
+    @lpVtbl.value.release_font_table.unsafe_as(Proc(Void*, Void)).call(tablecontext)
+  end
+  def get_glyph_run_outline(emsize : Float32, glyphindices : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphcount : UInt32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.get_glyph_run_outline.unsafe_as(Proc(Float32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, UInt32, LibC::BOOL, LibC::BOOL, ID2D1SimplifiedGeometrySink, HRESULT)).call(emsize, glyphindices, glyphadvances, glyphoffsets, glyphcount, issideways, isrighttoleft, geometrysink)
+  end
+  def get_recommended_rendering_mode(emsize : Float32, pixelsperdip : Float32, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode.unsafe_as(Proc(Float32, Float32, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, HRESULT)).call(emsize, pixelsperdip, measuringmode, renderingparams, renderingmode)
+  end
+  def get_gdi_compatible_metrics(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontfacemetrics : DWRITE_FONT_METRICS*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS*, HRESULT)).call(emsize, pixelsperdip, transform, fontfacemetrics)
+  end
+  def get_gdi_compatible_glyph_metrics(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_metrics.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)).call(emsize, pixelsperdip, transform, usegdinatural, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_metrics2(fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.unsafe_as(Proc(DWRITE_FONT_METRICS1*, Void)).call(fontmetrics)
+  end
+  def get_gdi_compatible_metrics2(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontmetrics : DWRITE_FONT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics2.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS1*, HRESULT)).call(emsize, pixelsperdip, transform, fontmetrics)
+  end
+  def get_caret_metrics(caretmetrics : DWRITE_CARET_METRICS*) : Void
+    @lpVtbl.value.get_caret_metrics.unsafe_as(Proc(DWRITE_CARET_METRICS*, Void)).call(caretmetrics)
+  end
+  def get_unicode_ranges(maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.unsafe_as(Proc(UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)).call(maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_design_glyph_advances(glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_advances.unsafe_as(Proc(UInt32, UInt16*, Int32*, LibC::BOOL, HRESULT)).call(glyphcount, glyphindices, glyphadvances, issideways)
+  end
+  def get_gdi_compatible_glyph_advances(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_advances.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, UInt32, UInt16*, Int32*, HRESULT)).call(emsize, pixelsperdip, transform, usegdinatural, issideways, glyphcount, glyphindices, glyphadvances)
+  end
+  def get_kerning_pair_adjustments(glyphcount : UInt32, glyphindices : UInt16*, glyphadvanceadjustments : Int32*) : HRESULT
+    @lpVtbl.value.get_kerning_pair_adjustments.unsafe_as(Proc(UInt32, UInt16*, Int32*, HRESULT)).call(glyphcount, glyphindices, glyphadvanceadjustments)
+  end
+  def has_kerning_pairs : LibC::BOOL
+    @lpVtbl.value.has_kerning_pairs.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_recommended_rendering_mode2(fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode2.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, DWRITE_RENDERING_MODE*, HRESULT)).call(fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingmode)
+  end
+  def get_vertical_glyph_variants(glyphcount : UInt32, nominalglyphindices : UInt16*, verticalglyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_vertical_glyph_variants.unsafe_as(Proc(UInt32, UInt16*, UInt16*, HRESULT)).call(glyphcount, nominalglyphindices, verticalglyphindices)
+  end
+  def has_vertical_glyph_variants : LibC::BOOL
+    @lpVtbl.value.has_vertical_glyph_variants.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def is_color_font : LibC::BOOL
+    @lpVtbl.value.is_color_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_color_palette_count : UInt32
+    @lpVtbl.value.get_color_palette_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_palette_entry_count : UInt32
+    @lpVtbl.value.get_palette_entry_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_palette_entries(colorpaletteindex : UInt32, firstentryindex : UInt32, entrycount : UInt32, paletteentries : DWRITE_COLOR_F*) : HRESULT
+    @lpVtbl.value.get_palette_entries.unsafe_as(Proc(UInt32, UInt32, UInt32, DWRITE_COLOR_F*, HRESULT)).call(colorpaletteindex, firstentryindex, entrycount, paletteentries)
+  end
+  def get_recommended_rendering_mode3(fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode3.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, DWRITE_GRID_FIT_MODE*, HRESULT)).call(fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+end
+struct LibWin32::IDWriteColorGlyphRunEnumerator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def move_next(hasrun : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(hasrun)
+  end
+  def get_current_run(colorglyphrun : DWRITE_COLOR_GLYPH_RUN**) : HRESULT
+    @lpVtbl.value.get_current_run.unsafe_as(Proc(DWRITE_COLOR_GLYPH_RUN**, HRESULT)).call(colorglyphrun)
+  end
+end
+struct LibWin32::IDWriteRenderingParams2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_gamma : Float32
+    @lpVtbl.value.get_gamma.unsafe_as(Proc(Float32)).call
+  end
+  def get_enhanced_contrast : Float32
+    @lpVtbl.value.get_enhanced_contrast.unsafe_as(Proc(Float32)).call
+  end
+  def get_clear_type_level : Float32
+    @lpVtbl.value.get_clear_type_level.unsafe_as(Proc(Float32)).call
+  end
+  def get_pixel_geometry : DWRITE_PIXEL_GEOMETRY
+    @lpVtbl.value.get_pixel_geometry.unsafe_as(Proc(DWRITE_PIXEL_GEOMETRY)).call
+  end
+  def get_rendering_mode : DWRITE_RENDERING_MODE
+    @lpVtbl.value.get_rendering_mode.unsafe_as(Proc(DWRITE_RENDERING_MODE)).call
+  end
+  def get_grayscale_enhanced_contrast : Float32
+    @lpVtbl.value.get_grayscale_enhanced_contrast.unsafe_as(Proc(Float32)).call
+  end
+  def get_grid_fit_mode : DWRITE_GRID_FIT_MODE
+    @lpVtbl.value.get_grid_fit_mode.unsafe_as(Proc(DWRITE_GRID_FIT_MODE)).call
+  end
+end
+struct LibWin32::IDWriteFactory2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_system_font_collection(fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection.unsafe_as(Proc(IDWriteFontCollection*, LibC::BOOL, HRESULT)).call(fontcollection, checkforupdates)
+  end
+  def create_custom_font_collection(collectionloader : IDWriteFontCollectionLoader, collectionkey : Void*, collectionkeysize : UInt32, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.create_custom_font_collection.unsafe_as(Proc(IDWriteFontCollectionLoader, Void*, UInt32, IDWriteFontCollection*, HRESULT)).call(collectionloader, collectionkey, collectionkeysize, fontcollection)
+  end
+  def register_font_collection_loader(fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.register_font_collection_loader.unsafe_as(Proc(IDWriteFontCollectionLoader, HRESULT)).call(fontcollectionloader)
+  end
+  def unregister_font_collection_loader(fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.unregister_font_collection_loader.unsafe_as(Proc(IDWriteFontCollectionLoader, HRESULT)).call(fontcollectionloader)
+  end
+  def create_font_file_reference(filepath : LibC::LPWSTR, lastwritetime : FILETIME*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference.unsafe_as(Proc(LibC::LPWSTR, FILETIME*, IDWriteFontFile*, HRESULT)).call(filepath, lastwritetime, fontfile)
+  end
+  def create_custom_font_file_reference(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfileloader : IDWriteFontFileLoader, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_custom_font_file_reference.unsafe_as(Proc(Void*, UInt32, IDWriteFontFileLoader, IDWriteFontFile*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, fontfileloader, fontfile)
+  end
+  def create_font_face(fontfacetype : DWRITE_FONT_FACE_TYPE, numberoffiles : UInt32, fontfiles : IDWriteFontFile*, faceindex : UInt32, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(DWRITE_FONT_FACE_TYPE, UInt32, IDWriteFontFile*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFace*, HRESULT)).call(fontfacetype, numberoffiles, fontfiles, faceindex, fontfacesimulationflags, fontface)
+  end
+  def create_rendering_params(renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, HRESULT)).call(renderingparams)
+  end
+  def create_monitor_rendering_params(monitor : HMONITOR, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_monitor_rendering_params.unsafe_as(Proc(HMONITOR, IDWriteRenderingParams*, HRESULT)).call(monitor, renderingparams)
+  end
+  def create_custom_rendering_params(gamma : Float32, enhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams*, HRESULT)).call(gamma, enhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def register_font_file_loader(fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.register_font_file_loader.unsafe_as(Proc(IDWriteFontFileLoader, HRESULT)).call(fontfileloader)
+  end
+  def unregister_font_file_loader(fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.unregister_font_file_loader.unsafe_as(Proc(IDWriteFontFileLoader, HRESULT)).call(fontfileloader)
+  end
+  def create_text_format(fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontweight : DWRITE_FONT_WEIGHT, fontstyle : DWRITE_FONT_STYLE, fontstretch : DWRITE_FONT_STRETCH, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat*) : HRESULT
+    @lpVtbl.value.create_text_format.unsafe_as(Proc(LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, Float32, LibC::LPWSTR, IDWriteTextFormat*, HRESULT)).call(fontfamilyname, fontcollection, fontweight, fontstyle, fontstretch, fontsize, localename, textformat)
+  end
+  def create_typography(typography : IDWriteTypography*) : HRESULT
+    @lpVtbl.value.create_typography.unsafe_as(Proc(IDWriteTypography*, HRESULT)).call(typography)
+  end
+  def get_gdi_interop(gdiinterop : IDWriteGdiInterop*) : HRESULT
+    @lpVtbl.value.get_gdi_interop.unsafe_as(Proc(IDWriteGdiInterop*, HRESULT)).call(gdiinterop)
+  end
+  def create_text_layout(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, maxwidth : Float32, maxheight : Float32, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_text_layout.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, Float32, Float32, IDWriteTextLayout*, HRESULT)).call(string, stringlength, textformat, maxwidth, maxheight, textlayout)
+  end
+  def create_gdi_compatible_text_layout(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutwidth : Float32, layoutheight : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_gdi_compatible_text_layout.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, IDWriteTextLayout*, HRESULT)).call(string, stringlength, textformat, layoutwidth, layoutheight, pixelsperdip, transform, usegdinatural, textlayout)
+  end
+  def create_ellipsis_trimming_sign(textformat : IDWriteTextFormat, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.create_ellipsis_trimming_sign.unsafe_as(Proc(IDWriteTextFormat, IDWriteInlineObject*, HRESULT)).call(textformat, trimmingsign)
+  end
+  def create_text_analyzer(textanalyzer : IDWriteTextAnalyzer*) : HRESULT
+    @lpVtbl.value.create_text_analyzer.unsafe_as(Proc(IDWriteTextAnalyzer*, HRESULT)).call(textanalyzer)
+  end
+  def create_number_substitution(substitutionmethod : DWRITE_NUMBER_SUBSTITUTION_METHOD, localename : LibC::LPWSTR, ignoreuseroverride : LibC::BOOL, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.create_number_substitution.unsafe_as(Proc(DWRITE_NUMBER_SUBSTITUTION_METHOD, LibC::LPWSTR, LibC::BOOL, IDWriteNumberSubstitution*, HRESULT)).call(substitutionmethod, localename, ignoreuseroverride, numbersubstitution)
+  end
+  def create_glyph_run_analysis(glyphrun : DWRITE_GLYPH_RUN*, pixelsperdip : Float32, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis.unsafe_as(Proc(DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, pixelsperdip, transform, renderingmode, measuringmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def get_eudc_font_collection(fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_eudc_font_collection.unsafe_as(Proc(IDWriteFontCollection*, LibC::BOOL, HRESULT)).call(fontcollection, checkforupdates)
+  end
+  def create_custom_rendering_params2(gamma : Float32, enhancedcontrast : Float32, enhancedcontrastgrayscale : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams1*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params2.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams1*, HRESULT)).call(gamma, enhancedcontrast, enhancedcontrastgrayscale, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def get_system_font_fallback(fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_system_font_fallback.unsafe_as(Proc(IDWriteFontFallback*, HRESULT)).call(fontfallback)
+  end
+  def create_font_fallback_builder(fontfallbackbuilder : IDWriteFontFallbackBuilder*) : HRESULT
+    @lpVtbl.value.create_font_fallback_builder.unsafe_as(Proc(IDWriteFontFallbackBuilder*, HRESULT)).call(fontfallbackbuilder)
+  end
+  def translate_color_glyph_run(baselineoriginx : Float32, baselineoriginy : Float32, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, measuringmode : DWRITE_MEASURING_MODE, worldtodevicetransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run.unsafe_as(Proc(Float32, Float32, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator*, HRESULT)).call(baselineoriginx, baselineoriginy, glyphrun, glyphrundescription, measuringmode, worldtodevicetransform, colorpaletteindex, colorlayers)
+  end
+  def create_custom_rendering_params3(gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams2*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params3.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams2*, HRESULT)).call(gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_glyph_run_analysis2(glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis2.unsafe_as(Proc(DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+end
+struct LibWin32::IDWriteRenderingParams3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_gamma : Float32
+    @lpVtbl.value.get_gamma.unsafe_as(Proc(Float32)).call
+  end
+  def get_enhanced_contrast : Float32
+    @lpVtbl.value.get_enhanced_contrast.unsafe_as(Proc(Float32)).call
+  end
+  def get_clear_type_level : Float32
+    @lpVtbl.value.get_clear_type_level.unsafe_as(Proc(Float32)).call
+  end
+  def get_pixel_geometry : DWRITE_PIXEL_GEOMETRY
+    @lpVtbl.value.get_pixel_geometry.unsafe_as(Proc(DWRITE_PIXEL_GEOMETRY)).call
+  end
+  def get_rendering_mode : DWRITE_RENDERING_MODE
+    @lpVtbl.value.get_rendering_mode.unsafe_as(Proc(DWRITE_RENDERING_MODE)).call
+  end
+  def get_grayscale_enhanced_contrast : Float32
+    @lpVtbl.value.get_grayscale_enhanced_contrast.unsafe_as(Proc(Float32)).call
+  end
+  def get_grid_fit_mode : DWRITE_GRID_FIT_MODE
+    @lpVtbl.value.get_grid_fit_mode.unsafe_as(Proc(DWRITE_GRID_FIT_MODE)).call
+  end
+  def get_rendering_mode1 : DWRITE_RENDERING_MODE1
+    @lpVtbl.value.get_rendering_mode1.unsafe_as(Proc(DWRITE_RENDERING_MODE1)).call
+  end
+end
+struct LibWin32::IDWriteFactory3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_system_font_collection(fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection.unsafe_as(Proc(IDWriteFontCollection*, LibC::BOOL, HRESULT)).call(fontcollection, checkforupdates)
+  end
+  def create_custom_font_collection(collectionloader : IDWriteFontCollectionLoader, collectionkey : Void*, collectionkeysize : UInt32, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.create_custom_font_collection.unsafe_as(Proc(IDWriteFontCollectionLoader, Void*, UInt32, IDWriteFontCollection*, HRESULT)).call(collectionloader, collectionkey, collectionkeysize, fontcollection)
+  end
+  def register_font_collection_loader(fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.register_font_collection_loader.unsafe_as(Proc(IDWriteFontCollectionLoader, HRESULT)).call(fontcollectionloader)
+  end
+  def unregister_font_collection_loader(fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.unregister_font_collection_loader.unsafe_as(Proc(IDWriteFontCollectionLoader, HRESULT)).call(fontcollectionloader)
+  end
+  def create_font_file_reference(filepath : LibC::LPWSTR, lastwritetime : FILETIME*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference.unsafe_as(Proc(LibC::LPWSTR, FILETIME*, IDWriteFontFile*, HRESULT)).call(filepath, lastwritetime, fontfile)
+  end
+  def create_custom_font_file_reference(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfileloader : IDWriteFontFileLoader, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_custom_font_file_reference.unsafe_as(Proc(Void*, UInt32, IDWriteFontFileLoader, IDWriteFontFile*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, fontfileloader, fontfile)
+  end
+  def create_font_face(fontfacetype : DWRITE_FONT_FACE_TYPE, numberoffiles : UInt32, fontfiles : IDWriteFontFile*, faceindex : UInt32, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(DWRITE_FONT_FACE_TYPE, UInt32, IDWriteFontFile*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFace*, HRESULT)).call(fontfacetype, numberoffiles, fontfiles, faceindex, fontfacesimulationflags, fontface)
+  end
+  def create_rendering_params(renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, HRESULT)).call(renderingparams)
+  end
+  def create_monitor_rendering_params(monitor : HMONITOR, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_monitor_rendering_params.unsafe_as(Proc(HMONITOR, IDWriteRenderingParams*, HRESULT)).call(monitor, renderingparams)
+  end
+  def create_custom_rendering_params(gamma : Float32, enhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams*, HRESULT)).call(gamma, enhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def register_font_file_loader(fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.register_font_file_loader.unsafe_as(Proc(IDWriteFontFileLoader, HRESULT)).call(fontfileloader)
+  end
+  def unregister_font_file_loader(fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.unregister_font_file_loader.unsafe_as(Proc(IDWriteFontFileLoader, HRESULT)).call(fontfileloader)
+  end
+  def create_text_format(fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontweight : DWRITE_FONT_WEIGHT, fontstyle : DWRITE_FONT_STYLE, fontstretch : DWRITE_FONT_STRETCH, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat*) : HRESULT
+    @lpVtbl.value.create_text_format.unsafe_as(Proc(LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, Float32, LibC::LPWSTR, IDWriteTextFormat*, HRESULT)).call(fontfamilyname, fontcollection, fontweight, fontstyle, fontstretch, fontsize, localename, textformat)
+  end
+  def create_typography(typography : IDWriteTypography*) : HRESULT
+    @lpVtbl.value.create_typography.unsafe_as(Proc(IDWriteTypography*, HRESULT)).call(typography)
+  end
+  def get_gdi_interop(gdiinterop : IDWriteGdiInterop*) : HRESULT
+    @lpVtbl.value.get_gdi_interop.unsafe_as(Proc(IDWriteGdiInterop*, HRESULT)).call(gdiinterop)
+  end
+  def create_text_layout(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, maxwidth : Float32, maxheight : Float32, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_text_layout.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, Float32, Float32, IDWriteTextLayout*, HRESULT)).call(string, stringlength, textformat, maxwidth, maxheight, textlayout)
+  end
+  def create_gdi_compatible_text_layout(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutwidth : Float32, layoutheight : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_gdi_compatible_text_layout.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, IDWriteTextLayout*, HRESULT)).call(string, stringlength, textformat, layoutwidth, layoutheight, pixelsperdip, transform, usegdinatural, textlayout)
+  end
+  def create_ellipsis_trimming_sign(textformat : IDWriteTextFormat, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.create_ellipsis_trimming_sign.unsafe_as(Proc(IDWriteTextFormat, IDWriteInlineObject*, HRESULT)).call(textformat, trimmingsign)
+  end
+  def create_text_analyzer(textanalyzer : IDWriteTextAnalyzer*) : HRESULT
+    @lpVtbl.value.create_text_analyzer.unsafe_as(Proc(IDWriteTextAnalyzer*, HRESULT)).call(textanalyzer)
+  end
+  def create_number_substitution(substitutionmethod : DWRITE_NUMBER_SUBSTITUTION_METHOD, localename : LibC::LPWSTR, ignoreuseroverride : LibC::BOOL, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.create_number_substitution.unsafe_as(Proc(DWRITE_NUMBER_SUBSTITUTION_METHOD, LibC::LPWSTR, LibC::BOOL, IDWriteNumberSubstitution*, HRESULT)).call(substitutionmethod, localename, ignoreuseroverride, numbersubstitution)
+  end
+  def create_glyph_run_analysis(glyphrun : DWRITE_GLYPH_RUN*, pixelsperdip : Float32, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis.unsafe_as(Proc(DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, pixelsperdip, transform, renderingmode, measuringmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def get_eudc_font_collection(fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_eudc_font_collection.unsafe_as(Proc(IDWriteFontCollection*, LibC::BOOL, HRESULT)).call(fontcollection, checkforupdates)
+  end
+  def create_custom_rendering_params2(gamma : Float32, enhancedcontrast : Float32, enhancedcontrastgrayscale : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams1*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params2.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams1*, HRESULT)).call(gamma, enhancedcontrast, enhancedcontrastgrayscale, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def get_system_font_fallback(fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_system_font_fallback.unsafe_as(Proc(IDWriteFontFallback*, HRESULT)).call(fontfallback)
+  end
+  def create_font_fallback_builder(fontfallbackbuilder : IDWriteFontFallbackBuilder*) : HRESULT
+    @lpVtbl.value.create_font_fallback_builder.unsafe_as(Proc(IDWriteFontFallbackBuilder*, HRESULT)).call(fontfallbackbuilder)
+  end
+  def translate_color_glyph_run(baselineoriginx : Float32, baselineoriginy : Float32, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, measuringmode : DWRITE_MEASURING_MODE, worldtodevicetransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run.unsafe_as(Proc(Float32, Float32, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator*, HRESULT)).call(baselineoriginx, baselineoriginy, glyphrun, glyphrundescription, measuringmode, worldtodevicetransform, colorpaletteindex, colorlayers)
+  end
+  def create_custom_rendering_params3(gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams2*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params3.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams2*, HRESULT)).call(gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_glyph_run_analysis2(glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis2.unsafe_as(Proc(DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_glyph_run_analysis3(glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE1, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis3.unsafe_as(Proc(DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE1, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_custom_rendering_params4(gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE1, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams3*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params4.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE1, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams3*, HRESULT)).call(gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_font_face_reference(fontfile : IDWriteFontFile, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference.unsafe_as(Proc(IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)).call(fontfile, faceindex, fontsimulations, fontfacereference)
+  end
+  def create_font_face_reference2(filepath : LibC::LPWSTR, lastwritetime : FILETIME*, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference2.unsafe_as(Proc(LibC::LPWSTR, FILETIME*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)).call(filepath, lastwritetime, faceindex, fontsimulations, fontfacereference)
+  end
+  def get_system_font_set(fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_system_font_set.unsafe_as(Proc(IDWriteFontSet*, HRESULT)).call(fontset)
+  end
+  def create_font_set_builder(fontsetbuilder : IDWriteFontSetBuilder*) : HRESULT
+    @lpVtbl.value.create_font_set_builder.unsafe_as(Proc(IDWriteFontSetBuilder*, HRESULT)).call(fontsetbuilder)
+  end
+  def create_font_collection_from_font_set(fontset : IDWriteFontSet, fontcollection : IDWriteFontCollection1*) : HRESULT
+    @lpVtbl.value.create_font_collection_from_font_set.unsafe_as(Proc(IDWriteFontSet, IDWriteFontCollection1*, HRESULT)).call(fontset, fontcollection)
+  end
+  def get_system_font_collection2(includedownloadablefonts : LibC::BOOL, fontcollection : IDWriteFontCollection1*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection2.unsafe_as(Proc(LibC::BOOL, IDWriteFontCollection1*, LibC::BOOL, HRESULT)).call(includedownloadablefonts, fontcollection, checkforupdates)
+  end
+  def get_font_download_queue(fontdownloadqueue : IDWriteFontDownloadQueue*) : HRESULT
+    @lpVtbl.value.get_font_download_queue.unsafe_as(Proc(IDWriteFontDownloadQueue*, HRESULT)).call(fontdownloadqueue)
+  end
+end
+struct LibWin32::IDWriteFontSet
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_count : UInt32
+    @lpVtbl.value.get_font_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_face_reference(listindex : UInt32, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.unsafe_as(Proc(UInt32, IDWriteFontFaceReference*, HRESULT)).call(listindex, fontfacereference)
+  end
+  def find_font_face_reference(fontfacereference : IDWriteFontFaceReference, listindex : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_font_face_reference.unsafe_as(Proc(IDWriteFontFaceReference, UInt32*, LibC::BOOL*, HRESULT)).call(fontfacereference, listindex, exists)
+  end
+  def find_font_face(fontface : IDWriteFontFace, listindex : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_font_face.unsafe_as(Proc(IDWriteFontFace, UInt32*, LibC::BOOL*, HRESULT)).call(fontface, listindex, exists)
+  end
+  def get_property_values(propertyid : DWRITE_FONT_PROPERTY_ID, values : IDWriteStringList*) : HRESULT
+    @lpVtbl.value.get_property_values.unsafe_as(Proc(DWRITE_FONT_PROPERTY_ID, IDWriteStringList*, HRESULT)).call(propertyid, values)
+  end
+  def get_property_values2(propertyid : DWRITE_FONT_PROPERTY_ID, preferredlocalenames : LibC::LPWSTR, values : IDWriteStringList*) : HRESULT
+    @lpVtbl.value.get_property_values2.unsafe_as(Proc(DWRITE_FONT_PROPERTY_ID, LibC::LPWSTR, IDWriteStringList*, HRESULT)).call(propertyid, preferredlocalenames, values)
+  end
+  def get_property_values3(listindex : UInt32, propertyid : DWRITE_FONT_PROPERTY_ID, exists : LibC::BOOL*, values : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_property_values3.unsafe_as(Proc(UInt32, DWRITE_FONT_PROPERTY_ID, LibC::BOOL*, IDWriteLocalizedStrings*, HRESULT)).call(listindex, propertyid, exists, values)
+  end
+  def get_property_occurrence_count(property : DWRITE_FONT_PROPERTY*, propertyoccurrencecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_occurrence_count.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, UInt32*, HRESULT)).call(property, propertyoccurrencecount)
+  end
+  def get_matching_fonts(familyname : LibC::LPWSTR, fontweight : DWRITE_FONT_WEIGHT, fontstretch : DWRITE_FONT_STRETCH, fontstyle : DWRITE_FONT_STYLE, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.unsafe_as(Proc(LibC::LPWSTR, DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFontSet*, HRESULT)).call(familyname, fontweight, fontstretch, fontstyle, filteredset)
+  end
+  def get_matching_fonts2(properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts2.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, UInt32, IDWriteFontSet*, HRESULT)).call(properties, propertycount, filteredset)
+  end
+end
+struct LibWin32::IDWriteFontSetBuilder
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_font_face_reference(fontfacereference : IDWriteFontFaceReference, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32) : HRESULT
+    @lpVtbl.value.add_font_face_reference.unsafe_as(Proc(IDWriteFontFaceReference, DWRITE_FONT_PROPERTY*, UInt32, HRESULT)).call(fontfacereference, properties, propertycount)
+  end
+  def add_font_face_reference2(fontfacereference : IDWriteFontFaceReference) : HRESULT
+    @lpVtbl.value.add_font_face_reference2.unsafe_as(Proc(IDWriteFontFaceReference, HRESULT)).call(fontfacereference)
+  end
+  def add_font_set(fontset : IDWriteFontSet) : HRESULT
+    @lpVtbl.value.add_font_set.unsafe_as(Proc(IDWriteFontSet, HRESULT)).call(fontset)
+  end
+  def create_font_set(fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.create_font_set.unsafe_as(Proc(IDWriteFontSet*, HRESULT)).call(fontset)
+  end
+end
+struct LibWin32::IDWriteFontCollection1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family_count : UInt32
+    @lpVtbl.value.get_font_family_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family(index : UInt32, fontfamily : IDWriteFontFamily*) : HRESULT
+    @lpVtbl.value.get_font_family.unsafe_as(Proc(UInt32, IDWriteFontFamily*, HRESULT)).call(index, fontfamily)
+  end
+  def find_family_name(familyname : LibC::LPWSTR, index : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_family_name.unsafe_as(Proc(LibC::LPWSTR, UInt32*, LibC::BOOL*, HRESULT)).call(familyname, index, exists)
+  end
+  def get_font_from_font_face(fontface : IDWriteFontFace, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font_from_font_face.unsafe_as(Proc(IDWriteFontFace, IDWriteFont*, HRESULT)).call(fontface, font)
+  end
+  def get_font_set(fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_font_set.unsafe_as(Proc(IDWriteFontSet*, HRESULT)).call(fontset)
+  end
+  def get_font_family2(index : UInt32, fontfamily : IDWriteFontFamily1*) : HRESULT
+    @lpVtbl.value.get_font_family2.unsafe_as(Proc(UInt32, IDWriteFontFamily1*, HRESULT)).call(index, fontfamily)
+  end
+end
+struct LibWin32::IDWriteFontFamily1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_collection(fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.unsafe_as(Proc(IDWriteFontCollection*, HRESULT)).call(fontcollection)
+  end
+  def get_font_count : UInt32
+    @lpVtbl.value.get_font_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font(index : UInt32, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font.unsafe_as(Proc(UInt32, IDWriteFont*, HRESULT)).call(index, font)
+  end
+  def get_family_names(names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_family_names.unsafe_as(Proc(IDWriteLocalizedStrings*, HRESULT)).call(names)
+  end
+  def get_first_matching_font(weight : DWRITE_FONT_WEIGHT, stretch : DWRITE_FONT_STRETCH, style : DWRITE_FONT_STYLE, matchingfont : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_first_matching_font.unsafe_as(Proc(DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFont*, HRESULT)).call(weight, stretch, style, matchingfont)
+  end
+  def get_matching_fonts(weight : DWRITE_FONT_WEIGHT, stretch : DWRITE_FONT_STRETCH, style : DWRITE_FONT_STYLE, matchingfonts : IDWriteFontList*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.unsafe_as(Proc(DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFontList*, HRESULT)).call(weight, stretch, style, matchingfonts)
+  end
+  def get_font_locality(listindex : UInt32) : DWRITE_LOCALITY
+    @lpVtbl.value.get_font_locality.unsafe_as(Proc(UInt32, DWRITE_LOCALITY)).call(listindex)
+  end
+  def get_font2(listindex : UInt32, font : IDWriteFont3*) : HRESULT
+    @lpVtbl.value.get_font2.unsafe_as(Proc(UInt32, IDWriteFont3*, HRESULT)).call(listindex, font)
+  end
+  def get_font_face_reference(listindex : UInt32, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.unsafe_as(Proc(UInt32, IDWriteFontFaceReference*, HRESULT)).call(listindex, fontfacereference)
+  end
+end
+struct LibWin32::IDWriteFontList1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_collection(fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.unsafe_as(Proc(IDWriteFontCollection*, HRESULT)).call(fontcollection)
+  end
+  def get_font_count : UInt32
+    @lpVtbl.value.get_font_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font(index : UInt32, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font.unsafe_as(Proc(UInt32, IDWriteFont*, HRESULT)).call(index, font)
+  end
+  def get_font_locality(listindex : UInt32) : DWRITE_LOCALITY
+    @lpVtbl.value.get_font_locality.unsafe_as(Proc(UInt32, DWRITE_LOCALITY)).call(listindex)
+  end
+  def get_font2(listindex : UInt32, font : IDWriteFont3*) : HRESULT
+    @lpVtbl.value.get_font2.unsafe_as(Proc(UInt32, IDWriteFont3*, HRESULT)).call(listindex, font)
+  end
+  def get_font_face_reference(listindex : UInt32, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.unsafe_as(Proc(UInt32, IDWriteFontFaceReference*, HRESULT)).call(listindex, fontfacereference)
+  end
+end
+struct LibWin32::IDWriteFontFaceReference
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_font_face(fontface : IDWriteFontFace3*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(IDWriteFontFace3*, HRESULT)).call(fontface)
+  end
+  def create_font_face_with_simulations(fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace3*) : HRESULT
+    @lpVtbl.value.create_font_face_with_simulations.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS, IDWriteFontFace3*, HRESULT)).call(fontfacesimulationflags, fontface)
+  end
+  def equals(fontfacereference : IDWriteFontFaceReference) : LibC::BOOL
+    @lpVtbl.value.equals.unsafe_as(Proc(IDWriteFontFaceReference, LibC::BOOL)).call(fontfacereference)
+  end
+  def get_font_face_index : UInt32
+    @lpVtbl.value.get_font_face_index.unsafe_as(Proc(UInt32)).call
+  end
+  def get_simulations : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS)).call
+  end
+  def get_font_file(fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_font_file.unsafe_as(Proc(IDWriteFontFile*, HRESULT)).call(fontfile)
+  end
+  def get_local_file_size : UInt64
+    @lpVtbl.value.get_local_file_size.unsafe_as(Proc(UInt64)).call
+  end
+  def get_file_size : UInt64
+    @lpVtbl.value.get_file_size.unsafe_as(Proc(UInt64)).call
+  end
+  def get_file_time(lastwritetime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_file_time.unsafe_as(Proc(FILETIME*, HRESULT)).call(lastwritetime)
+  end
+  def get_locality : DWRITE_LOCALITY
+    @lpVtbl.value.get_locality.unsafe_as(Proc(DWRITE_LOCALITY)).call
+  end
+  def enqueue_font_download_request : HRESULT
+    @lpVtbl.value.enqueue_font_download_request.unsafe_as(Proc(HRESULT)).call
+  end
+  def enqueue_character_download_request(characters : Char*, charactercount : UInt32) : HRESULT
+    @lpVtbl.value.enqueue_character_download_request.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(characters, charactercount)
+  end
+  def enqueue_glyph_download_request(glyphindices : UInt16*, glyphcount : UInt32) : HRESULT
+    @lpVtbl.value.enqueue_glyph_download_request.unsafe_as(Proc(UInt16*, UInt32, HRESULT)).call(glyphindices, glyphcount)
+  end
+  def enqueue_file_fragment_download_request(fileoffset : UInt64, fragmentsize : UInt64) : HRESULT
+    @lpVtbl.value.enqueue_file_fragment_download_request.unsafe_as(Proc(UInt64, UInt64, HRESULT)).call(fileoffset, fragmentsize)
+  end
+end
+struct LibWin32::IDWriteFont3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family(fontfamily : IDWriteFontFamily*) : HRESULT
+    @lpVtbl.value.get_font_family.unsafe_as(Proc(IDWriteFontFamily*, HRESULT)).call(fontfamily)
+  end
+  def get_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def is_symbol_font : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_face_names(names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names.unsafe_as(Proc(IDWriteLocalizedStrings*, HRESULT)).call(names)
+  end
+  def get_informational_strings(informationalstringid : DWRITE_INFORMATIONAL_STRING_ID, informationalstrings : IDWriteLocalizedStrings*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_informational_strings.unsafe_as(Proc(DWRITE_INFORMATIONAL_STRING_ID, IDWriteLocalizedStrings*, LibC::BOOL*, HRESULT)).call(informationalstringid, informationalstrings, exists)
+  end
+  def get_simulations : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS)).call
+  end
+  def get_metrics(fontmetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_FONT_METRICS*, Void)).call(fontmetrics)
+  end
+  def has_character(unicodevalue : UInt32, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_character.unsafe_as(Proc(UInt32, LibC::BOOL*, HRESULT)).call(unicodevalue, exists)
+  end
+  def create_font_face(fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(IDWriteFontFace*, HRESULT)).call(fontface)
+  end
+  def get_metrics2(fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.unsafe_as(Proc(DWRITE_FONT_METRICS1*, Void)).call(fontmetrics)
+  end
+  def get_panose(panose : DWRITE_PANOSE*) : Void
+    @lpVtbl.value.get_panose.unsafe_as(Proc(DWRITE_PANOSE*, Void)).call(panose)
+  end
+  def get_unicode_ranges(maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.unsafe_as(Proc(UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)).call(maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def is_color_font : LibC::BOOL
+    @lpVtbl.value.is_color_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def create_font_face2(fontface : IDWriteFontFace3*) : HRESULT
+    @lpVtbl.value.create_font_face2.unsafe_as(Proc(IDWriteFontFace3*, HRESULT)).call(fontface)
+  end
+  def equals(font : IDWriteFont) : LibC::BOOL
+    @lpVtbl.value.equals.unsafe_as(Proc(IDWriteFont, LibC::BOOL)).call(font)
+  end
+  def get_font_face_reference(fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.unsafe_as(Proc(IDWriteFontFaceReference*, HRESULT)).call(fontfacereference)
+  end
+  def has_character2(unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.has_character2.unsafe_as(Proc(UInt32, LibC::BOOL)).call(unicodevalue)
+  end
+  def get_locality : DWRITE_LOCALITY
+    @lpVtbl.value.get_locality.unsafe_as(Proc(DWRITE_LOCALITY)).call
+  end
+end
+struct LibWin32::IDWriteFontFace3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type : DWRITE_FONT_FACE_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(DWRITE_FONT_FACE_TYPE)).call
+  end
+  def get_files(numberoffiles : UInt32*, fontfiles : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_files.unsafe_as(Proc(UInt32*, IDWriteFontFile*, HRESULT)).call(numberoffiles, fontfiles)
+  end
+  def get_index : UInt32
+    @lpVtbl.value.get_index.unsafe_as(Proc(UInt32)).call
+  end
+  def get_simulations : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS)).call
+  end
+  def is_symbol_font : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_metrics(fontfacemetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_FONT_METRICS*, Void)).call(fontfacemetrics)
+  end
+  def get_glyph_count : UInt16
+    @lpVtbl.value.get_glyph_count.unsafe_as(Proc(UInt16)).call
+  end
+  def get_design_glyph_metrics(glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_metrics.unsafe_as(Proc(UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)).call(glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_glyph_indices(codepoints : UInt32*, codepointcount : UInt32, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.unsafe_as(Proc(UInt32*, UInt32, UInt16*, HRESULT)).call(codepoints, codepointcount, glyphindices)
+  end
+  def try_get_font_table(opentypetabletag : UInt32, tabledata : Void**, tablesize : UInt32*, tablecontext : Void**, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_get_font_table.unsafe_as(Proc(UInt32, Void**, UInt32*, Void**, LibC::BOOL*, HRESULT)).call(opentypetabletag, tabledata, tablesize, tablecontext, exists)
+  end
+  def release_font_table(tablecontext : Void*) : Void
+    @lpVtbl.value.release_font_table.unsafe_as(Proc(Void*, Void)).call(tablecontext)
+  end
+  def get_glyph_run_outline(emsize : Float32, glyphindices : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphcount : UInt32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.get_glyph_run_outline.unsafe_as(Proc(Float32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, UInt32, LibC::BOOL, LibC::BOOL, ID2D1SimplifiedGeometrySink, HRESULT)).call(emsize, glyphindices, glyphadvances, glyphoffsets, glyphcount, issideways, isrighttoleft, geometrysink)
+  end
+  def get_recommended_rendering_mode(emsize : Float32, pixelsperdip : Float32, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode.unsafe_as(Proc(Float32, Float32, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, HRESULT)).call(emsize, pixelsperdip, measuringmode, renderingparams, renderingmode)
+  end
+  def get_gdi_compatible_metrics(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontfacemetrics : DWRITE_FONT_METRICS*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS*, HRESULT)).call(emsize, pixelsperdip, transform, fontfacemetrics)
+  end
+  def get_gdi_compatible_glyph_metrics(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_metrics.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)).call(emsize, pixelsperdip, transform, usegdinatural, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_metrics2(fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.unsafe_as(Proc(DWRITE_FONT_METRICS1*, Void)).call(fontmetrics)
+  end
+  def get_gdi_compatible_metrics2(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontmetrics : DWRITE_FONT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics2.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS1*, HRESULT)).call(emsize, pixelsperdip, transform, fontmetrics)
+  end
+  def get_caret_metrics(caretmetrics : DWRITE_CARET_METRICS*) : Void
+    @lpVtbl.value.get_caret_metrics.unsafe_as(Proc(DWRITE_CARET_METRICS*, Void)).call(caretmetrics)
+  end
+  def get_unicode_ranges(maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.unsafe_as(Proc(UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)).call(maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_design_glyph_advances(glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_advances.unsafe_as(Proc(UInt32, UInt16*, Int32*, LibC::BOOL, HRESULT)).call(glyphcount, glyphindices, glyphadvances, issideways)
+  end
+  def get_gdi_compatible_glyph_advances(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_advances.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, UInt32, UInt16*, Int32*, HRESULT)).call(emsize, pixelsperdip, transform, usegdinatural, issideways, glyphcount, glyphindices, glyphadvances)
+  end
+  def get_kerning_pair_adjustments(glyphcount : UInt32, glyphindices : UInt16*, glyphadvanceadjustments : Int32*) : HRESULT
+    @lpVtbl.value.get_kerning_pair_adjustments.unsafe_as(Proc(UInt32, UInt16*, Int32*, HRESULT)).call(glyphcount, glyphindices, glyphadvanceadjustments)
+  end
+  def has_kerning_pairs : LibC::BOOL
+    @lpVtbl.value.has_kerning_pairs.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_recommended_rendering_mode2(fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode2.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, DWRITE_RENDERING_MODE*, HRESULT)).call(fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingmode)
+  end
+  def get_vertical_glyph_variants(glyphcount : UInt32, nominalglyphindices : UInt16*, verticalglyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_vertical_glyph_variants.unsafe_as(Proc(UInt32, UInt16*, UInt16*, HRESULT)).call(glyphcount, nominalglyphindices, verticalglyphindices)
+  end
+  def has_vertical_glyph_variants : LibC::BOOL
+    @lpVtbl.value.has_vertical_glyph_variants.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def is_color_font : LibC::BOOL
+    @lpVtbl.value.is_color_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_color_palette_count : UInt32
+    @lpVtbl.value.get_color_palette_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_palette_entry_count : UInt32
+    @lpVtbl.value.get_palette_entry_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_palette_entries(colorpaletteindex : UInt32, firstentryindex : UInt32, entrycount : UInt32, paletteentries : DWRITE_COLOR_F*) : HRESULT
+    @lpVtbl.value.get_palette_entries.unsafe_as(Proc(UInt32, UInt32, UInt32, DWRITE_COLOR_F*, HRESULT)).call(colorpaletteindex, firstentryindex, entrycount, paletteentries)
+  end
+  def get_recommended_rendering_mode3(fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode3.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, DWRITE_GRID_FIT_MODE*, HRESULT)).call(fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+  def get_font_face_reference(fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.unsafe_as(Proc(IDWriteFontFaceReference*, HRESULT)).call(fontfacereference)
+  end
+  def get_panose(panose : DWRITE_PANOSE*) : Void
+    @lpVtbl.value.get_panose.unsafe_as(Proc(DWRITE_PANOSE*, Void)).call(panose)
+  end
+  def get_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def get_family_names(names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_family_names.unsafe_as(Proc(IDWriteLocalizedStrings*, HRESULT)).call(names)
+  end
+  def get_face_names(names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names.unsafe_as(Proc(IDWriteLocalizedStrings*, HRESULT)).call(names)
+  end
+  def get_informational_strings(informationalstringid : DWRITE_INFORMATIONAL_STRING_ID, informationalstrings : IDWriteLocalizedStrings*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_informational_strings.unsafe_as(Proc(DWRITE_INFORMATIONAL_STRING_ID, IDWriteLocalizedStrings*, LibC::BOOL*, HRESULT)).call(informationalstringid, informationalstrings, exists)
+  end
+  def has_character(unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.has_character.unsafe_as(Proc(UInt32, LibC::BOOL)).call(unicodevalue)
+  end
+  def get_recommended_rendering_mode4(fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE1*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode4.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE1*, DWRITE_GRID_FIT_MODE*, HRESULT)).call(fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+  def is_character_local(unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.is_character_local.unsafe_as(Proc(UInt32, LibC::BOOL)).call(unicodevalue)
+  end
+  def is_glyph_local(glyphid : UInt16) : LibC::BOOL
+    @lpVtbl.value.is_glyph_local.unsafe_as(Proc(UInt16, LibC::BOOL)).call(glyphid)
+  end
+  def are_characters_local(characters : Char*, charactercount : UInt32, enqueueifnotlocal : LibC::BOOL, islocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_characters_local.unsafe_as(Proc(Char*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)).call(characters, charactercount, enqueueifnotlocal, islocal)
+  end
+  def are_glyphs_local(glyphindices : UInt16*, glyphcount : UInt32, enqueueifnotlocal : LibC::BOOL, islocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_glyphs_local.unsafe_as(Proc(UInt16*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)).call(glyphindices, glyphcount, enqueueifnotlocal, islocal)
+  end
+end
+struct LibWin32::IDWriteStringList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count : UInt32
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_locale_name_length(listindex : UInt32, length : UInt32*) : HRESULT
+    @lpVtbl.value.get_locale_name_length.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(listindex, length)
+  end
+  def get_locale_name(listindex : UInt32, localename : Char*, size : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.unsafe_as(Proc(UInt32, Char*, UInt32, HRESULT)).call(listindex, localename, size)
+  end
+  def get_string_length(listindex : UInt32, length : UInt32*) : HRESULT
+    @lpVtbl.value.get_string_length.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(listindex, length)
+  end
+  def get_string(listindex : UInt32, stringbuffer : Char*, stringbuffersize : UInt32) : HRESULT
+    @lpVtbl.value.get_string.unsafe_as(Proc(UInt32, Char*, UInt32, HRESULT)).call(listindex, stringbuffer, stringbuffersize)
+  end
+end
+struct LibWin32::IDWriteFontDownloadListener
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def download_completed(downloadqueue : IDWriteFontDownloadQueue, context : IUnknown, downloadresult : HRESULT) : Void
+    @lpVtbl.value.download_completed.unsafe_as(Proc(IDWriteFontDownloadQueue, IUnknown, HRESULT, Void)).call(downloadqueue, context, downloadresult)
+  end
+end
+struct LibWin32::IDWriteFontDownloadQueue
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_listener(listener : IDWriteFontDownloadListener, token : UInt32*) : HRESULT
+    @lpVtbl.value.add_listener.unsafe_as(Proc(IDWriteFontDownloadListener, UInt32*, HRESULT)).call(listener, token)
+  end
+  def remove_listener(token : UInt32) : HRESULT
+    @lpVtbl.value.remove_listener.unsafe_as(Proc(UInt32, HRESULT)).call(token)
+  end
+  def is_empty : LibC::BOOL
+    @lpVtbl.value.is_empty.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def begin_download(context : IUnknown) : HRESULT
+    @lpVtbl.value.begin_download.unsafe_as(Proc(IUnknown, HRESULT)).call(context)
+  end
+  def cancel_download : HRESULT
+    @lpVtbl.value.cancel_download.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_generation_count : UInt64
+    @lpVtbl.value.get_generation_count.unsafe_as(Proc(UInt64)).call
+  end
+end
+struct LibWin32::IDWriteGdiInterop1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_font_from_logfont(logfont : LOGFONTW*, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.create_font_from_logfont.unsafe_as(Proc(LOGFONTW*, IDWriteFont*, HRESULT)).call(logfont, font)
+  end
+  def convert_font_to_logfont(font : IDWriteFont, logfont : LOGFONTW*, issystemfont : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.convert_font_to_logfont.unsafe_as(Proc(IDWriteFont, LOGFONTW*, LibC::BOOL*, HRESULT)).call(font, logfont, issystemfont)
+  end
+  def convert_font_face_to_logfont(font : IDWriteFontFace, logfont : LOGFONTW*) : HRESULT
+    @lpVtbl.value.convert_font_face_to_logfont.unsafe_as(Proc(IDWriteFontFace, LOGFONTW*, HRESULT)).call(font, logfont)
+  end
+  def create_font_face_from_hdc(hdc : HDC, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face_from_hdc.unsafe_as(Proc(HDC, IDWriteFontFace*, HRESULT)).call(hdc, fontface)
+  end
+  def create_bitmap_render_target(hdc : HDC, width : UInt32, height : UInt32, rendertarget : IDWriteBitmapRenderTarget*) : HRESULT
+    @lpVtbl.value.create_bitmap_render_target.unsafe_as(Proc(HDC, UInt32, UInt32, IDWriteBitmapRenderTarget*, HRESULT)).call(hdc, width, height, rendertarget)
+  end
+  def create_font_from_logfont2(logfont : LOGFONTW*, fontcollection : IDWriteFontCollection, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.create_font_from_logfont2.unsafe_as(Proc(LOGFONTW*, IDWriteFontCollection, IDWriteFont*, HRESULT)).call(logfont, fontcollection, font)
+  end
+  def get_font_signature(fontface : IDWriteFontFace, fontsignature : FONTSIGNATURE*) : HRESULT
+    @lpVtbl.value.get_font_signature.unsafe_as(Proc(IDWriteFontFace, FONTSIGNATURE*, HRESULT)).call(fontface, fontsignature)
+  end
+  def get_font_signature2(font : IDWriteFont, fontsignature : FONTSIGNATURE*) : HRESULT
+    @lpVtbl.value.get_font_signature2.unsafe_as(Proc(IDWriteFont, FONTSIGNATURE*, HRESULT)).call(font, fontsignature)
+  end
+  def get_matching_fonts_by_logfont(logfont : LOGFONTA*, fontset : IDWriteFontSet, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts_by_logfont.unsafe_as(Proc(LOGFONTA*, IDWriteFontSet, IDWriteFontSet*, HRESULT)).call(logfont, fontset, filteredset)
+  end
+end
+struct LibWin32::IDWriteTextFormat2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_text_alignment(textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT, HRESULT)).call(textalignment)
+  end
+  def set_paragraph_alignment(paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)).call(paragraphalignment)
+  end
+  def set_word_wrapping(wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING, HRESULT)).call(wordwrapping)
+  end
+  def set_reading_direction(readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION, HRESULT)).call(readingdirection)
+  end
+  def set_flow_direction(flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION, HRESULT)).call(flowdirection)
+  end
+  def set_incremental_tab_stop(incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.unsafe_as(Proc(Float32, HRESULT)).call(incrementaltabstop)
+  end
+  def set_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT)).call
+  end
+  def get_paragraph_alignment : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT)).call
+  end
+  def get_word_wrapping : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING)).call
+  end
+  def get_reading_direction : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION)).call
+  end
+  def get_flow_direction : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION)).call
+  end
+  def get_incremental_tab_stop : Float32
+    @lpVtbl.value.get_incremental_tab_stop.unsafe_as(Proc(Float32)).call
+  end
+  def get_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.unsafe_as(Proc(IDWriteFontCollection*, HRESULT)).call(fontcollection)
+  end
+  def get_font_family_name_length : UInt32
+    @lpVtbl.value.get_font_family_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family_name(fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(fontfamilyname, namesize)
+  end
+  def get_font_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_font_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def get_font_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_font_size : Float32
+    @lpVtbl.value.get_font_size.unsafe_as(Proc(Float32)).call
+  end
+  def get_locale_name_length : UInt32
+    @lpVtbl.value.get_locale_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_locale_name(localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(localename, namesize)
+  end
+  def set_vertical_glyph_orientation(glyphorientation : DWRITE_VERTICAL_GLYPH_ORIENTATION) : HRESULT
+    @lpVtbl.value.set_vertical_glyph_orientation.unsafe_as(Proc(DWRITE_VERTICAL_GLYPH_ORIENTATION, HRESULT)).call(glyphorientation)
+  end
+  def get_vertical_glyph_orientation : DWRITE_VERTICAL_GLYPH_ORIENTATION
+    @lpVtbl.value.get_vertical_glyph_orientation.unsafe_as(Proc(DWRITE_VERTICAL_GLYPH_ORIENTATION)).call
+  end
+  def set_last_line_wrapping(islastlinewrappingenabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_line_wrapping.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(islastlinewrappingenabled)
+  end
+  def get_last_line_wrapping : LibC::BOOL
+    @lpVtbl.value.get_last_line_wrapping.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def set_optical_alignment(opticalalignment : DWRITE_OPTICAL_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_optical_alignment.unsafe_as(Proc(DWRITE_OPTICAL_ALIGNMENT, HRESULT)).call(opticalalignment)
+  end
+  def get_optical_alignment : DWRITE_OPTICAL_ALIGNMENT
+    @lpVtbl.value.get_optical_alignment.unsafe_as(Proc(DWRITE_OPTICAL_ALIGNMENT)).call
+  end
+  def set_font_fallback(fontfallback : IDWriteFontFallback) : HRESULT
+    @lpVtbl.value.set_font_fallback.unsafe_as(Proc(IDWriteFontFallback, HRESULT)).call(fontfallback)
+  end
+  def get_font_fallback(fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_font_fallback.unsafe_as(Proc(IDWriteFontFallback*, HRESULT)).call(fontfallback)
+  end
+  def set_line_spacing2(linespacingoptions : DWRITE_LINE_SPACING*) : HRESULT
+    @lpVtbl.value.set_line_spacing2.unsafe_as(Proc(DWRITE_LINE_SPACING*, HRESULT)).call(linespacingoptions)
+  end
+  def get_line_spacing2(linespacingoptions : DWRITE_LINE_SPACING*) : HRESULT
+    @lpVtbl.value.get_line_spacing2.unsafe_as(Proc(DWRITE_LINE_SPACING*, HRESULT)).call(linespacingoptions)
+  end
+end
+struct LibWin32::IDWriteTextLayout3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_text_alignment(textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT, HRESULT)).call(textalignment)
+  end
+  def set_paragraph_alignment(paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)).call(paragraphalignment)
+  end
+  def set_word_wrapping(wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING, HRESULT)).call(wordwrapping)
+  end
+  def set_reading_direction(readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION, HRESULT)).call(readingdirection)
+  end
+  def set_flow_direction(flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION, HRESULT)).call(flowdirection)
+  end
+  def set_incremental_tab_stop(incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.unsafe_as(Proc(Float32, HRESULT)).call(incrementaltabstop)
+  end
+  def set_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT)).call
+  end
+  def get_paragraph_alignment : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT)).call
+  end
+  def get_word_wrapping : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING)).call
+  end
+  def get_reading_direction : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION)).call
+  end
+  def get_flow_direction : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION)).call
+  end
+  def get_incremental_tab_stop : Float32
+    @lpVtbl.value.get_incremental_tab_stop.unsafe_as(Proc(Float32)).call
+  end
+  def get_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.unsafe_as(Proc(IDWriteFontCollection*, HRESULT)).call(fontcollection)
+  end
+  def get_font_family_name_length : UInt32
+    @lpVtbl.value.get_font_family_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family_name(fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(fontfamilyname, namesize)
+  end
+  def get_font_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_font_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def get_font_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_font_size : Float32
+    @lpVtbl.value.get_font_size.unsafe_as(Proc(Float32)).call
+  end
+  def get_locale_name_length : UInt32
+    @lpVtbl.value.get_locale_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_locale_name(localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(localename, namesize)
+  end
+  def set_max_width(maxwidth : Float32) : HRESULT
+    @lpVtbl.value.set_max_width.unsafe_as(Proc(Float32, HRESULT)).call(maxwidth)
+  end
+  def set_max_height(maxheight : Float32) : HRESULT
+    @lpVtbl.value.set_max_height.unsafe_as(Proc(Float32, HRESULT)).call(maxheight)
+  end
+  def set_font_collection(fontcollection : IDWriteFontCollection, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_collection.unsafe_as(Proc(IDWriteFontCollection, DWRITE_TEXT_RANGE, HRESULT)).call(fontcollection, textrange)
+  end
+  def set_font_family_name(fontfamilyname : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_family_name.unsafe_as(Proc(LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)).call(fontfamilyname, textrange)
+  end
+  def set_font_weight(fontweight : DWRITE_FONT_WEIGHT, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT, DWRITE_TEXT_RANGE, HRESULT)).call(fontweight, textrange)
+  end
+  def set_font_style(fontstyle : DWRITE_FONT_STYLE, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_style.unsafe_as(Proc(DWRITE_FONT_STYLE, DWRITE_TEXT_RANGE, HRESULT)).call(fontstyle, textrange)
+  end
+  def set_font_stretch(fontstretch : DWRITE_FONT_STRETCH, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH, DWRITE_TEXT_RANGE, HRESULT)).call(fontstretch, textrange)
+  end
+  def set_font_size(fontsize : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_size.unsafe_as(Proc(Float32, DWRITE_TEXT_RANGE, HRESULT)).call(fontsize, textrange)
+  end
+  def set_underline(hasunderline : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_underline.unsafe_as(Proc(LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)).call(hasunderline, textrange)
+  end
+  def set_strikethrough(hasstrikethrough : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_strikethrough.unsafe_as(Proc(LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)).call(hasstrikethrough, textrange)
+  end
+  def set_drawing_effect(drawingeffect : IUnknown, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_drawing_effect.unsafe_as(Proc(IUnknown, DWRITE_TEXT_RANGE, HRESULT)).call(drawingeffect, textrange)
+  end
+  def set_inline_object(inlineobject : IDWriteInlineObject, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_inline_object.unsafe_as(Proc(IDWriteInlineObject, DWRITE_TEXT_RANGE, HRESULT)).call(inlineobject, textrange)
+  end
+  def set_typography(typography : IDWriteTypography, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_typography.unsafe_as(Proc(IDWriteTypography, DWRITE_TEXT_RANGE, HRESULT)).call(typography, textrange)
+  end
+  def set_locale_name(localename : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_locale_name.unsafe_as(Proc(LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)).call(localename, textrange)
+  end
+  def get_max_width : Float32
+    @lpVtbl.value.get_max_width.unsafe_as(Proc(Float32)).call
+  end
+  def get_max_height : Float32
+    @lpVtbl.value.get_max_height.unsafe_as(Proc(Float32)).call
+  end
+  def get_font_collection2(currentposition : UInt32, fontcollection : IDWriteFontCollection*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_collection2.unsafe_as(Proc(UInt32, IDWriteFontCollection*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontcollection, textrange)
+  end
+  def get_font_family_name_length2(currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name_length2.unsafe_as(Proc(UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, namelength, textrange)
+  end
+  def get_font_family_name2(currentposition : UInt32, fontfamilyname : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name2.unsafe_as(Proc(UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontfamilyname, namesize, textrange)
+  end
+  def get_font_weight2(currentposition : UInt32, fontweight : DWRITE_FONT_WEIGHT*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_weight2.unsafe_as(Proc(UInt32, DWRITE_FONT_WEIGHT*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontweight, textrange)
+  end
+  def get_font_style2(currentposition : UInt32, fontstyle : DWRITE_FONT_STYLE*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_style2.unsafe_as(Proc(UInt32, DWRITE_FONT_STYLE*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontstyle, textrange)
+  end
+  def get_font_stretch2(currentposition : UInt32, fontstretch : DWRITE_FONT_STRETCH*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_stretch2.unsafe_as(Proc(UInt32, DWRITE_FONT_STRETCH*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontstretch, textrange)
+  end
+  def get_font_size2(currentposition : UInt32, fontsize : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_size2.unsafe_as(Proc(UInt32, Float32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontsize, textrange)
+  end
+  def get_underline(currentposition : UInt32, hasunderline : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_underline.unsafe_as(Proc(UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, hasunderline, textrange)
+  end
+  def get_strikethrough(currentposition : UInt32, hasstrikethrough : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_strikethrough.unsafe_as(Proc(UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, hasstrikethrough, textrange)
+  end
+  def get_drawing_effect(currentposition : UInt32, drawingeffect : IUnknown*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_drawing_effect.unsafe_as(Proc(UInt32, IUnknown*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, drawingeffect, textrange)
+  end
+  def get_inline_object(currentposition : UInt32, inlineobject : IDWriteInlineObject*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_inline_object.unsafe_as(Proc(UInt32, IDWriteInlineObject*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, inlineobject, textrange)
+  end
+  def get_typography(currentposition : UInt32, typography : IDWriteTypography*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_typography.unsafe_as(Proc(UInt32, IDWriteTypography*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, typography, textrange)
+  end
+  def get_locale_name_length2(currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name_length2.unsafe_as(Proc(UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, namelength, textrange)
+  end
+  def get_locale_name2(currentposition : UInt32, localename : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name2.unsafe_as(Proc(UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, localename, namesize, textrange)
+  end
+  def draw(clientdrawingcontext : Void*, renderer : IDWriteTextRenderer, originx : Float32, originy : Float32) : HRESULT
+    @lpVtbl.value.draw.unsafe_as(Proc(Void*, IDWriteTextRenderer, Float32, Float32, HRESULT)).call(clientdrawingcontext, renderer, originx, originy)
+  end
+  def get_line_metrics(linemetrics : DWRITE_LINE_METRICS*, maxlinecount : UInt32, actuallinecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_metrics.unsafe_as(Proc(DWRITE_LINE_METRICS*, UInt32, UInt32*, HRESULT)).call(linemetrics, maxlinecount, actuallinecount)
+  end
+  def get_metrics(textmetrics : DWRITE_TEXT_METRICS*) : HRESULT
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_TEXT_METRICS*, HRESULT)).call(textmetrics)
+  end
+  def get_overhang_metrics(overhangs : DWRITE_OVERHANG_METRICS*) : HRESULT
+    @lpVtbl.value.get_overhang_metrics.unsafe_as(Proc(DWRITE_OVERHANG_METRICS*, HRESULT)).call(overhangs)
+  end
+  def get_cluster_metrics(clustermetrics : DWRITE_CLUSTER_METRICS*, maxclustercount : UInt32, actualclustercount : UInt32*) : HRESULT
+    @lpVtbl.value.get_cluster_metrics.unsafe_as(Proc(DWRITE_CLUSTER_METRICS*, UInt32, UInt32*, HRESULT)).call(clustermetrics, maxclustercount, actualclustercount)
+  end
+  def determine_min_width(minwidth : Float32*) : HRESULT
+    @lpVtbl.value.determine_min_width.unsafe_as(Proc(Float32*, HRESULT)).call(minwidth)
+  end
+  def hit_test_point(pointx : Float32, pointy : Float32, istrailinghit : LibC::BOOL*, isinside : LibC::BOOL*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_point.unsafe_as(Proc(Float32, Float32, LibC::BOOL*, LibC::BOOL*, DWRITE_HIT_TEST_METRICS*, HRESULT)).call(pointx, pointy, istrailinghit, isinside, hittestmetrics)
+  end
+  def hit_test_text_position(textposition : UInt32, istrailinghit : LibC::BOOL, pointx : Float32*, pointy : Float32*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_text_position.unsafe_as(Proc(UInt32, LibC::BOOL, Float32*, Float32*, DWRITE_HIT_TEST_METRICS*, HRESULT)).call(textposition, istrailinghit, pointx, pointy, hittestmetrics)
+  end
+  def hit_test_text_range(textposition : UInt32, textlength : UInt32, originx : Float32, originy : Float32, hittestmetrics : DWRITE_HIT_TEST_METRICS*, maxhittestmetricscount : UInt32, actualhittestmetricscount : UInt32*) : HRESULT
+    @lpVtbl.value.hit_test_text_range.unsafe_as(Proc(UInt32, UInt32, Float32, Float32, DWRITE_HIT_TEST_METRICS*, UInt32, UInt32*, HRESULT)).call(textposition, textlength, originx, originy, hittestmetrics, maxhittestmetricscount, actualhittestmetricscount)
+  end
+  def set_pair_kerning(ispairkerningenabled : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_pair_kerning.unsafe_as(Proc(LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)).call(ispairkerningenabled, textrange)
+  end
+  def get_pair_kerning(currentposition : UInt32, ispairkerningenabled : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_pair_kerning.unsafe_as(Proc(UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, ispairkerningenabled, textrange)
+  end
+  def set_character_spacing(leadingspacing : Float32, trailingspacing : Float32, minimumadvancewidth : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_character_spacing.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_TEXT_RANGE, HRESULT)).call(leadingspacing, trailingspacing, minimumadvancewidth, textrange)
+  end
+  def get_character_spacing(currentposition : UInt32, leadingspacing : Float32*, trailingspacing : Float32*, minimumadvancewidth : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_character_spacing.unsafe_as(Proc(UInt32, Float32*, Float32*, Float32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, leadingspacing, trailingspacing, minimumadvancewidth, textrange)
+  end
+  def get_metrics2(textmetrics : DWRITE_TEXT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_metrics2.unsafe_as(Proc(DWRITE_TEXT_METRICS1*, HRESULT)).call(textmetrics)
+  end
+  def set_vertical_glyph_orientation(glyphorientation : DWRITE_VERTICAL_GLYPH_ORIENTATION) : HRESULT
+    @lpVtbl.value.set_vertical_glyph_orientation.unsafe_as(Proc(DWRITE_VERTICAL_GLYPH_ORIENTATION, HRESULT)).call(glyphorientation)
+  end
+  def get_vertical_glyph_orientation : DWRITE_VERTICAL_GLYPH_ORIENTATION
+    @lpVtbl.value.get_vertical_glyph_orientation.unsafe_as(Proc(DWRITE_VERTICAL_GLYPH_ORIENTATION)).call
+  end
+  def set_last_line_wrapping(islastlinewrappingenabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_line_wrapping.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(islastlinewrappingenabled)
+  end
+  def get_last_line_wrapping : LibC::BOOL
+    @lpVtbl.value.get_last_line_wrapping.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def set_optical_alignment(opticalalignment : DWRITE_OPTICAL_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_optical_alignment.unsafe_as(Proc(DWRITE_OPTICAL_ALIGNMENT, HRESULT)).call(opticalalignment)
+  end
+  def get_optical_alignment : DWRITE_OPTICAL_ALIGNMENT
+    @lpVtbl.value.get_optical_alignment.unsafe_as(Proc(DWRITE_OPTICAL_ALIGNMENT)).call
+  end
+  def set_font_fallback(fontfallback : IDWriteFontFallback) : HRESULT
+    @lpVtbl.value.set_font_fallback.unsafe_as(Proc(IDWriteFontFallback, HRESULT)).call(fontfallback)
+  end
+  def get_font_fallback(fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_font_fallback.unsafe_as(Proc(IDWriteFontFallback*, HRESULT)).call(fontfallback)
+  end
+  def invalidate_layout : HRESULT
+    @lpVtbl.value.invalidate_layout.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_line_spacing2(linespacingoptions : DWRITE_LINE_SPACING*) : HRESULT
+    @lpVtbl.value.set_line_spacing2.unsafe_as(Proc(DWRITE_LINE_SPACING*, HRESULT)).call(linespacingoptions)
+  end
+  def get_line_spacing2(linespacingoptions : DWRITE_LINE_SPACING*) : HRESULT
+    @lpVtbl.value.get_line_spacing2.unsafe_as(Proc(DWRITE_LINE_SPACING*, HRESULT)).call(linespacingoptions)
+  end
+  def get_line_metrics2(linemetrics : DWRITE_LINE_METRICS1*, maxlinecount : UInt32, actuallinecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_metrics2.unsafe_as(Proc(DWRITE_LINE_METRICS1*, UInt32, UInt32*, HRESULT)).call(linemetrics, maxlinecount, actuallinecount)
+  end
+end
+struct LibWin32::IDWriteColorGlyphRunEnumerator1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def move_next(hasrun : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.move_next.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(hasrun)
+  end
+  def get_current_run(colorglyphrun : DWRITE_COLOR_GLYPH_RUN**) : HRESULT
+    @lpVtbl.value.get_current_run.unsafe_as(Proc(DWRITE_COLOR_GLYPH_RUN**, HRESULT)).call(colorglyphrun)
+  end
+  def get_current_run2(colorglyphrun : DWRITE_COLOR_GLYPH_RUN1**) : HRESULT
+    @lpVtbl.value.get_current_run2.unsafe_as(Proc(DWRITE_COLOR_GLYPH_RUN1**, HRESULT)).call(colorglyphrun)
+  end
+end
+struct LibWin32::IDWriteFontFace4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type : DWRITE_FONT_FACE_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(DWRITE_FONT_FACE_TYPE)).call
+  end
+  def get_files(numberoffiles : UInt32*, fontfiles : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_files.unsafe_as(Proc(UInt32*, IDWriteFontFile*, HRESULT)).call(numberoffiles, fontfiles)
+  end
+  def get_index : UInt32
+    @lpVtbl.value.get_index.unsafe_as(Proc(UInt32)).call
+  end
+  def get_simulations : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS)).call
+  end
+  def is_symbol_font : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_metrics(fontfacemetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_FONT_METRICS*, Void)).call(fontfacemetrics)
+  end
+  def get_glyph_count : UInt16
+    @lpVtbl.value.get_glyph_count.unsafe_as(Proc(UInt16)).call
+  end
+  def get_design_glyph_metrics(glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_metrics.unsafe_as(Proc(UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)).call(glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_glyph_indices(codepoints : UInt32*, codepointcount : UInt32, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.unsafe_as(Proc(UInt32*, UInt32, UInt16*, HRESULT)).call(codepoints, codepointcount, glyphindices)
+  end
+  def try_get_font_table(opentypetabletag : UInt32, tabledata : Void**, tablesize : UInt32*, tablecontext : Void**, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_get_font_table.unsafe_as(Proc(UInt32, Void**, UInt32*, Void**, LibC::BOOL*, HRESULT)).call(opentypetabletag, tabledata, tablesize, tablecontext, exists)
+  end
+  def release_font_table(tablecontext : Void*) : Void
+    @lpVtbl.value.release_font_table.unsafe_as(Proc(Void*, Void)).call(tablecontext)
+  end
+  def get_glyph_run_outline(emsize : Float32, glyphindices : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphcount : UInt32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.get_glyph_run_outline.unsafe_as(Proc(Float32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, UInt32, LibC::BOOL, LibC::BOOL, ID2D1SimplifiedGeometrySink, HRESULT)).call(emsize, glyphindices, glyphadvances, glyphoffsets, glyphcount, issideways, isrighttoleft, geometrysink)
+  end
+  def get_recommended_rendering_mode(emsize : Float32, pixelsperdip : Float32, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode.unsafe_as(Proc(Float32, Float32, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, HRESULT)).call(emsize, pixelsperdip, measuringmode, renderingparams, renderingmode)
+  end
+  def get_gdi_compatible_metrics(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontfacemetrics : DWRITE_FONT_METRICS*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS*, HRESULT)).call(emsize, pixelsperdip, transform, fontfacemetrics)
+  end
+  def get_gdi_compatible_glyph_metrics(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_metrics.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)).call(emsize, pixelsperdip, transform, usegdinatural, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_metrics2(fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.unsafe_as(Proc(DWRITE_FONT_METRICS1*, Void)).call(fontmetrics)
+  end
+  def get_gdi_compatible_metrics2(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontmetrics : DWRITE_FONT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics2.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS1*, HRESULT)).call(emsize, pixelsperdip, transform, fontmetrics)
+  end
+  def get_caret_metrics(caretmetrics : DWRITE_CARET_METRICS*) : Void
+    @lpVtbl.value.get_caret_metrics.unsafe_as(Proc(DWRITE_CARET_METRICS*, Void)).call(caretmetrics)
+  end
+  def get_unicode_ranges(maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.unsafe_as(Proc(UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)).call(maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_design_glyph_advances(glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_advances.unsafe_as(Proc(UInt32, UInt16*, Int32*, LibC::BOOL, HRESULT)).call(glyphcount, glyphindices, glyphadvances, issideways)
+  end
+  def get_gdi_compatible_glyph_advances(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_advances.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, UInt32, UInt16*, Int32*, HRESULT)).call(emsize, pixelsperdip, transform, usegdinatural, issideways, glyphcount, glyphindices, glyphadvances)
+  end
+  def get_kerning_pair_adjustments(glyphcount : UInt32, glyphindices : UInt16*, glyphadvanceadjustments : Int32*) : HRESULT
+    @lpVtbl.value.get_kerning_pair_adjustments.unsafe_as(Proc(UInt32, UInt16*, Int32*, HRESULT)).call(glyphcount, glyphindices, glyphadvanceadjustments)
+  end
+  def has_kerning_pairs : LibC::BOOL
+    @lpVtbl.value.has_kerning_pairs.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_recommended_rendering_mode2(fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode2.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, DWRITE_RENDERING_MODE*, HRESULT)).call(fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingmode)
+  end
+  def get_vertical_glyph_variants(glyphcount : UInt32, nominalglyphindices : UInt16*, verticalglyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_vertical_glyph_variants.unsafe_as(Proc(UInt32, UInt16*, UInt16*, HRESULT)).call(glyphcount, nominalglyphindices, verticalglyphindices)
+  end
+  def has_vertical_glyph_variants : LibC::BOOL
+    @lpVtbl.value.has_vertical_glyph_variants.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def is_color_font : LibC::BOOL
+    @lpVtbl.value.is_color_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_color_palette_count : UInt32
+    @lpVtbl.value.get_color_palette_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_palette_entry_count : UInt32
+    @lpVtbl.value.get_palette_entry_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_palette_entries(colorpaletteindex : UInt32, firstentryindex : UInt32, entrycount : UInt32, paletteentries : DWRITE_COLOR_F*) : HRESULT
+    @lpVtbl.value.get_palette_entries.unsafe_as(Proc(UInt32, UInt32, UInt32, DWRITE_COLOR_F*, HRESULT)).call(colorpaletteindex, firstentryindex, entrycount, paletteentries)
+  end
+  def get_recommended_rendering_mode3(fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode3.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, DWRITE_GRID_FIT_MODE*, HRESULT)).call(fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+  def get_font_face_reference(fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.unsafe_as(Proc(IDWriteFontFaceReference*, HRESULT)).call(fontfacereference)
+  end
+  def get_panose(panose : DWRITE_PANOSE*) : Void
+    @lpVtbl.value.get_panose.unsafe_as(Proc(DWRITE_PANOSE*, Void)).call(panose)
+  end
+  def get_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def get_family_names(names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_family_names.unsafe_as(Proc(IDWriteLocalizedStrings*, HRESULT)).call(names)
+  end
+  def get_face_names(names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names.unsafe_as(Proc(IDWriteLocalizedStrings*, HRESULT)).call(names)
+  end
+  def get_informational_strings(informationalstringid : DWRITE_INFORMATIONAL_STRING_ID, informationalstrings : IDWriteLocalizedStrings*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_informational_strings.unsafe_as(Proc(DWRITE_INFORMATIONAL_STRING_ID, IDWriteLocalizedStrings*, LibC::BOOL*, HRESULT)).call(informationalstringid, informationalstrings, exists)
+  end
+  def has_character(unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.has_character.unsafe_as(Proc(UInt32, LibC::BOOL)).call(unicodevalue)
+  end
+  def get_recommended_rendering_mode4(fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE1*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode4.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE1*, DWRITE_GRID_FIT_MODE*, HRESULT)).call(fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+  def is_character_local(unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.is_character_local.unsafe_as(Proc(UInt32, LibC::BOOL)).call(unicodevalue)
+  end
+  def is_glyph_local(glyphid : UInt16) : LibC::BOOL
+    @lpVtbl.value.is_glyph_local.unsafe_as(Proc(UInt16, LibC::BOOL)).call(glyphid)
+  end
+  def are_characters_local(characters : Char*, charactercount : UInt32, enqueueifnotlocal : LibC::BOOL, islocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_characters_local.unsafe_as(Proc(Char*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)).call(characters, charactercount, enqueueifnotlocal, islocal)
+  end
+  def are_glyphs_local(glyphindices : UInt16*, glyphcount : UInt32, enqueueifnotlocal : LibC::BOOL, islocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_glyphs_local.unsafe_as(Proc(UInt16*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)).call(glyphindices, glyphcount, enqueueifnotlocal, islocal)
+  end
+  def get_glyph_image_formats(glyphid : UInt16, pixelsperemfirst : UInt32, pixelsperemlast : UInt32, glyphimageformats : DWRITE_GLYPH_IMAGE_FORMATS*) : HRESULT
+    @lpVtbl.value.get_glyph_image_formats.unsafe_as(Proc(UInt16, UInt32, UInt32, DWRITE_GLYPH_IMAGE_FORMATS*, HRESULT)).call(glyphid, pixelsperemfirst, pixelsperemlast, glyphimageformats)
+  end
+  def get_glyph_image_formats2 : DWRITE_GLYPH_IMAGE_FORMATS
+    @lpVtbl.value.get_glyph_image_formats2.unsafe_as(Proc(DWRITE_GLYPH_IMAGE_FORMATS)).call
+  end
+  def get_glyph_image_data(glyphid : UInt16, pixelsperem : UInt32, glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, glyphdata : DWRITE_GLYPH_IMAGE_DATA*, glyphdatacontext : Void**) : HRESULT
+    @lpVtbl.value.get_glyph_image_data.unsafe_as(Proc(UInt16, UInt32, DWRITE_GLYPH_IMAGE_FORMATS, DWRITE_GLYPH_IMAGE_DATA*, Void**, HRESULT)).call(glyphid, pixelsperem, glyphimageformat, glyphdata, glyphdatacontext)
+  end
+  def release_glyph_image_data(glyphdatacontext : Void*) : Void
+    @lpVtbl.value.release_glyph_image_data.unsafe_as(Proc(Void*, Void)).call(glyphdatacontext)
+  end
+end
+struct LibWin32::IDWriteFactory4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_system_font_collection(fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection.unsafe_as(Proc(IDWriteFontCollection*, LibC::BOOL, HRESULT)).call(fontcollection, checkforupdates)
+  end
+  def create_custom_font_collection(collectionloader : IDWriteFontCollectionLoader, collectionkey : Void*, collectionkeysize : UInt32, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.create_custom_font_collection.unsafe_as(Proc(IDWriteFontCollectionLoader, Void*, UInt32, IDWriteFontCollection*, HRESULT)).call(collectionloader, collectionkey, collectionkeysize, fontcollection)
+  end
+  def register_font_collection_loader(fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.register_font_collection_loader.unsafe_as(Proc(IDWriteFontCollectionLoader, HRESULT)).call(fontcollectionloader)
+  end
+  def unregister_font_collection_loader(fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.unregister_font_collection_loader.unsafe_as(Proc(IDWriteFontCollectionLoader, HRESULT)).call(fontcollectionloader)
+  end
+  def create_font_file_reference(filepath : LibC::LPWSTR, lastwritetime : FILETIME*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference.unsafe_as(Proc(LibC::LPWSTR, FILETIME*, IDWriteFontFile*, HRESULT)).call(filepath, lastwritetime, fontfile)
+  end
+  def create_custom_font_file_reference(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfileloader : IDWriteFontFileLoader, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_custom_font_file_reference.unsafe_as(Proc(Void*, UInt32, IDWriteFontFileLoader, IDWriteFontFile*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, fontfileloader, fontfile)
+  end
+  def create_font_face(fontfacetype : DWRITE_FONT_FACE_TYPE, numberoffiles : UInt32, fontfiles : IDWriteFontFile*, faceindex : UInt32, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(DWRITE_FONT_FACE_TYPE, UInt32, IDWriteFontFile*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFace*, HRESULT)).call(fontfacetype, numberoffiles, fontfiles, faceindex, fontfacesimulationflags, fontface)
+  end
+  def create_rendering_params(renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, HRESULT)).call(renderingparams)
+  end
+  def create_monitor_rendering_params(monitor : HMONITOR, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_monitor_rendering_params.unsafe_as(Proc(HMONITOR, IDWriteRenderingParams*, HRESULT)).call(monitor, renderingparams)
+  end
+  def create_custom_rendering_params(gamma : Float32, enhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams*, HRESULT)).call(gamma, enhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def register_font_file_loader(fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.register_font_file_loader.unsafe_as(Proc(IDWriteFontFileLoader, HRESULT)).call(fontfileloader)
+  end
+  def unregister_font_file_loader(fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.unregister_font_file_loader.unsafe_as(Proc(IDWriteFontFileLoader, HRESULT)).call(fontfileloader)
+  end
+  def create_text_format(fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontweight : DWRITE_FONT_WEIGHT, fontstyle : DWRITE_FONT_STYLE, fontstretch : DWRITE_FONT_STRETCH, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat*) : HRESULT
+    @lpVtbl.value.create_text_format.unsafe_as(Proc(LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, Float32, LibC::LPWSTR, IDWriteTextFormat*, HRESULT)).call(fontfamilyname, fontcollection, fontweight, fontstyle, fontstretch, fontsize, localename, textformat)
+  end
+  def create_typography(typography : IDWriteTypography*) : HRESULT
+    @lpVtbl.value.create_typography.unsafe_as(Proc(IDWriteTypography*, HRESULT)).call(typography)
+  end
+  def get_gdi_interop(gdiinterop : IDWriteGdiInterop*) : HRESULT
+    @lpVtbl.value.get_gdi_interop.unsafe_as(Proc(IDWriteGdiInterop*, HRESULT)).call(gdiinterop)
+  end
+  def create_text_layout(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, maxwidth : Float32, maxheight : Float32, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_text_layout.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, Float32, Float32, IDWriteTextLayout*, HRESULT)).call(string, stringlength, textformat, maxwidth, maxheight, textlayout)
+  end
+  def create_gdi_compatible_text_layout(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutwidth : Float32, layoutheight : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_gdi_compatible_text_layout.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, IDWriteTextLayout*, HRESULT)).call(string, stringlength, textformat, layoutwidth, layoutheight, pixelsperdip, transform, usegdinatural, textlayout)
+  end
+  def create_ellipsis_trimming_sign(textformat : IDWriteTextFormat, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.create_ellipsis_trimming_sign.unsafe_as(Proc(IDWriteTextFormat, IDWriteInlineObject*, HRESULT)).call(textformat, trimmingsign)
+  end
+  def create_text_analyzer(textanalyzer : IDWriteTextAnalyzer*) : HRESULT
+    @lpVtbl.value.create_text_analyzer.unsafe_as(Proc(IDWriteTextAnalyzer*, HRESULT)).call(textanalyzer)
+  end
+  def create_number_substitution(substitutionmethod : DWRITE_NUMBER_SUBSTITUTION_METHOD, localename : LibC::LPWSTR, ignoreuseroverride : LibC::BOOL, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.create_number_substitution.unsafe_as(Proc(DWRITE_NUMBER_SUBSTITUTION_METHOD, LibC::LPWSTR, LibC::BOOL, IDWriteNumberSubstitution*, HRESULT)).call(substitutionmethod, localename, ignoreuseroverride, numbersubstitution)
+  end
+  def create_glyph_run_analysis(glyphrun : DWRITE_GLYPH_RUN*, pixelsperdip : Float32, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis.unsafe_as(Proc(DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, pixelsperdip, transform, renderingmode, measuringmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def get_eudc_font_collection(fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_eudc_font_collection.unsafe_as(Proc(IDWriteFontCollection*, LibC::BOOL, HRESULT)).call(fontcollection, checkforupdates)
+  end
+  def create_custom_rendering_params2(gamma : Float32, enhancedcontrast : Float32, enhancedcontrastgrayscale : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams1*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params2.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams1*, HRESULT)).call(gamma, enhancedcontrast, enhancedcontrastgrayscale, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def get_system_font_fallback(fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_system_font_fallback.unsafe_as(Proc(IDWriteFontFallback*, HRESULT)).call(fontfallback)
+  end
+  def create_font_fallback_builder(fontfallbackbuilder : IDWriteFontFallbackBuilder*) : HRESULT
+    @lpVtbl.value.create_font_fallback_builder.unsafe_as(Proc(IDWriteFontFallbackBuilder*, HRESULT)).call(fontfallbackbuilder)
+  end
+  def translate_color_glyph_run(baselineoriginx : Float32, baselineoriginy : Float32, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, measuringmode : DWRITE_MEASURING_MODE, worldtodevicetransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run.unsafe_as(Proc(Float32, Float32, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator*, HRESULT)).call(baselineoriginx, baselineoriginy, glyphrun, glyphrundescription, measuringmode, worldtodevicetransform, colorpaletteindex, colorlayers)
+  end
+  def create_custom_rendering_params3(gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams2*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params3.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams2*, HRESULT)).call(gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_glyph_run_analysis2(glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis2.unsafe_as(Proc(DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_glyph_run_analysis3(glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE1, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis3.unsafe_as(Proc(DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE1, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_custom_rendering_params4(gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE1, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams3*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params4.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE1, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams3*, HRESULT)).call(gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_font_face_reference(fontfile : IDWriteFontFile, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference.unsafe_as(Proc(IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)).call(fontfile, faceindex, fontsimulations, fontfacereference)
+  end
+  def create_font_face_reference2(filepath : LibC::LPWSTR, lastwritetime : FILETIME*, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference2.unsafe_as(Proc(LibC::LPWSTR, FILETIME*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)).call(filepath, lastwritetime, faceindex, fontsimulations, fontfacereference)
+  end
+  def get_system_font_set(fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_system_font_set.unsafe_as(Proc(IDWriteFontSet*, HRESULT)).call(fontset)
+  end
+  def create_font_set_builder(fontsetbuilder : IDWriteFontSetBuilder*) : HRESULT
+    @lpVtbl.value.create_font_set_builder.unsafe_as(Proc(IDWriteFontSetBuilder*, HRESULT)).call(fontsetbuilder)
+  end
+  def create_font_collection_from_font_set(fontset : IDWriteFontSet, fontcollection : IDWriteFontCollection1*) : HRESULT
+    @lpVtbl.value.create_font_collection_from_font_set.unsafe_as(Proc(IDWriteFontSet, IDWriteFontCollection1*, HRESULT)).call(fontset, fontcollection)
+  end
+  def get_system_font_collection2(includedownloadablefonts : LibC::BOOL, fontcollection : IDWriteFontCollection1*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection2.unsafe_as(Proc(LibC::BOOL, IDWriteFontCollection1*, LibC::BOOL, HRESULT)).call(includedownloadablefonts, fontcollection, checkforupdates)
+  end
+  def get_font_download_queue(fontdownloadqueue : IDWriteFontDownloadQueue*) : HRESULT
+    @lpVtbl.value.get_font_download_queue.unsafe_as(Proc(IDWriteFontDownloadQueue*, HRESULT)).call(fontdownloadqueue)
+  end
+  def translate_color_glyph_run2(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, desiredglyphimageformats : DWRITE_GLYPH_IMAGE_FORMATS, measuringmode : DWRITE_MEASURING_MODE, worldanddpitransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator1*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run2.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_GLYPH_IMAGE_FORMATS, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator1*, HRESULT)).call(baselineorigin, glyphrun, glyphrundescription, desiredglyphimageformats, measuringmode, worldanddpitransform, colorpaletteindex, colorlayers)
+  end
+  def compute_glyph_origins(glyphrun : DWRITE_GLYPH_RUN*, baselineorigin : D2D_POINT_2F, glyphorigins : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_glyph_origins.unsafe_as(Proc(DWRITE_GLYPH_RUN*, D2D_POINT_2F, D2D_POINT_2F*, HRESULT)).call(glyphrun, baselineorigin, glyphorigins)
+  end
+  def compute_glyph_origins2(glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, baselineorigin : D2D_POINT_2F, worldanddpitransform : DWRITE_MATRIX*, glyphorigins : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_glyph_origins2.unsafe_as(Proc(DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_POINT_2F, DWRITE_MATRIX*, D2D_POINT_2F*, HRESULT)).call(glyphrun, measuringmode, baselineorigin, worldanddpitransform, glyphorigins)
+  end
+end
+struct LibWin32::IDWriteFontSetBuilder1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_font_face_reference(fontfacereference : IDWriteFontFaceReference, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32) : HRESULT
+    @lpVtbl.value.add_font_face_reference.unsafe_as(Proc(IDWriteFontFaceReference, DWRITE_FONT_PROPERTY*, UInt32, HRESULT)).call(fontfacereference, properties, propertycount)
+  end
+  def add_font_face_reference2(fontfacereference : IDWriteFontFaceReference) : HRESULT
+    @lpVtbl.value.add_font_face_reference2.unsafe_as(Proc(IDWriteFontFaceReference, HRESULT)).call(fontfacereference)
+  end
+  def add_font_set(fontset : IDWriteFontSet) : HRESULT
+    @lpVtbl.value.add_font_set.unsafe_as(Proc(IDWriteFontSet, HRESULT)).call(fontset)
+  end
+  def create_font_set(fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.create_font_set.unsafe_as(Proc(IDWriteFontSet*, HRESULT)).call(fontset)
+  end
+  def add_font_file(fontfile : IDWriteFontFile) : HRESULT
+    @lpVtbl.value.add_font_file.unsafe_as(Proc(IDWriteFontFile, HRESULT)).call(fontfile)
+  end
+end
+struct LibWin32::IDWriteAsyncResult
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_wait_handle : LibC::HANDLE
+    @lpVtbl.value.get_wait_handle.unsafe_as(Proc(LibC::HANDLE)).call
+  end
+  def get_result : HRESULT
+    @lpVtbl.value.get_result.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IDWriteRemoteFontFileStream
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def read_file_fragment(fragmentstart : Void**, fileoffset : UInt64, fragmentsize : UInt64, fragmentcontext : Void**) : HRESULT
+    @lpVtbl.value.read_file_fragment.unsafe_as(Proc(Void**, UInt64, UInt64, Void**, HRESULT)).call(fragmentstart, fileoffset, fragmentsize, fragmentcontext)
+  end
+  def release_file_fragment(fragmentcontext : Void*) : Void
+    @lpVtbl.value.release_file_fragment.unsafe_as(Proc(Void*, Void)).call(fragmentcontext)
+  end
+  def get_file_size(filesize : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_size.unsafe_as(Proc(UInt64*, HRESULT)).call(filesize)
+  end
+  def get_last_write_time(lastwritetime : UInt64*) : HRESULT
+    @lpVtbl.value.get_last_write_time.unsafe_as(Proc(UInt64*, HRESULT)).call(lastwritetime)
+  end
+  def get_local_file_size(localfilesize : UInt64*) : HRESULT
+    @lpVtbl.value.get_local_file_size.unsafe_as(Proc(UInt64*, HRESULT)).call(localfilesize)
+  end
+  def get_file_fragment_locality(fileoffset : UInt64, fragmentsize : UInt64, islocal : LibC::BOOL*, partialsize : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_fragment_locality.unsafe_as(Proc(UInt64, UInt64, LibC::BOOL*, UInt64*, HRESULT)).call(fileoffset, fragmentsize, islocal, partialsize)
+  end
+  def get_locality : DWRITE_LOCALITY
+    @lpVtbl.value.get_locality.unsafe_as(Proc(DWRITE_LOCALITY)).call
+  end
+  def begin_download(downloadoperationid : Guid*, filefragments : DWRITE_FILE_FRAGMENT*, fragmentcount : UInt32, asyncresult : IDWriteAsyncResult*) : HRESULT
+    @lpVtbl.value.begin_download.unsafe_as(Proc(Guid*, DWRITE_FILE_FRAGMENT*, UInt32, IDWriteAsyncResult*, HRESULT)).call(downloadoperationid, filefragments, fragmentcount, asyncresult)
+  end
+end
+struct LibWin32::IDWriteRemoteFontFileLoader
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_stream_from_key(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfilestream : IDWriteFontFileStream*) : HRESULT
+    @lpVtbl.value.create_stream_from_key.unsafe_as(Proc(Void*, UInt32, IDWriteFontFileStream*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, fontfilestream)
+  end
+  def create_remote_stream_from_key(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfilestream : IDWriteRemoteFontFileStream*) : HRESULT
+    @lpVtbl.value.create_remote_stream_from_key.unsafe_as(Proc(Void*, UInt32, IDWriteRemoteFontFileStream*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, fontfilestream)
+  end
+  def get_locality_from_key(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, locality : DWRITE_LOCALITY*) : HRESULT
+    @lpVtbl.value.get_locality_from_key.unsafe_as(Proc(Void*, UInt32, DWRITE_LOCALITY*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, locality)
+  end
+  def create_font_file_reference_from_url(factory : IDWriteFactory, baseurl : LibC::LPWSTR, fontfileurl : LibC::LPWSTR, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference_from_url.unsafe_as(Proc(IDWriteFactory, LibC::LPWSTR, LibC::LPWSTR, IDWriteFontFile*, HRESULT)).call(factory, baseurl, fontfileurl, fontfile)
+  end
+end
+struct LibWin32::IDWriteInMemoryFontFileLoader
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_stream_from_key(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfilestream : IDWriteFontFileStream*) : HRESULT
+    @lpVtbl.value.create_stream_from_key.unsafe_as(Proc(Void*, UInt32, IDWriteFontFileStream*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, fontfilestream)
+  end
+  def create_in_memory_font_file_reference(factory : IDWriteFactory, fontdata : Void*, fontdatasize : UInt32, ownerobject : IUnknown, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_in_memory_font_file_reference.unsafe_as(Proc(IDWriteFactory, Void*, UInt32, IUnknown, IDWriteFontFile*, HRESULT)).call(factory, fontdata, fontdatasize, ownerobject, fontfile)
+  end
+  def get_file_count : UInt32
+    @lpVtbl.value.get_file_count.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::IDWriteFactory5
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_system_font_collection(fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection.unsafe_as(Proc(IDWriteFontCollection*, LibC::BOOL, HRESULT)).call(fontcollection, checkforupdates)
+  end
+  def create_custom_font_collection(collectionloader : IDWriteFontCollectionLoader, collectionkey : Void*, collectionkeysize : UInt32, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.create_custom_font_collection.unsafe_as(Proc(IDWriteFontCollectionLoader, Void*, UInt32, IDWriteFontCollection*, HRESULT)).call(collectionloader, collectionkey, collectionkeysize, fontcollection)
+  end
+  def register_font_collection_loader(fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.register_font_collection_loader.unsafe_as(Proc(IDWriteFontCollectionLoader, HRESULT)).call(fontcollectionloader)
+  end
+  def unregister_font_collection_loader(fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.unregister_font_collection_loader.unsafe_as(Proc(IDWriteFontCollectionLoader, HRESULT)).call(fontcollectionloader)
+  end
+  def create_font_file_reference(filepath : LibC::LPWSTR, lastwritetime : FILETIME*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference.unsafe_as(Proc(LibC::LPWSTR, FILETIME*, IDWriteFontFile*, HRESULT)).call(filepath, lastwritetime, fontfile)
+  end
+  def create_custom_font_file_reference(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfileloader : IDWriteFontFileLoader, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_custom_font_file_reference.unsafe_as(Proc(Void*, UInt32, IDWriteFontFileLoader, IDWriteFontFile*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, fontfileloader, fontfile)
+  end
+  def create_font_face(fontfacetype : DWRITE_FONT_FACE_TYPE, numberoffiles : UInt32, fontfiles : IDWriteFontFile*, faceindex : UInt32, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(DWRITE_FONT_FACE_TYPE, UInt32, IDWriteFontFile*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFace*, HRESULT)).call(fontfacetype, numberoffiles, fontfiles, faceindex, fontfacesimulationflags, fontface)
+  end
+  def create_rendering_params(renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, HRESULT)).call(renderingparams)
+  end
+  def create_monitor_rendering_params(monitor : HMONITOR, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_monitor_rendering_params.unsafe_as(Proc(HMONITOR, IDWriteRenderingParams*, HRESULT)).call(monitor, renderingparams)
+  end
+  def create_custom_rendering_params(gamma : Float32, enhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams*, HRESULT)).call(gamma, enhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def register_font_file_loader(fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.register_font_file_loader.unsafe_as(Proc(IDWriteFontFileLoader, HRESULT)).call(fontfileloader)
+  end
+  def unregister_font_file_loader(fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.unregister_font_file_loader.unsafe_as(Proc(IDWriteFontFileLoader, HRESULT)).call(fontfileloader)
+  end
+  def create_text_format(fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontweight : DWRITE_FONT_WEIGHT, fontstyle : DWRITE_FONT_STYLE, fontstretch : DWRITE_FONT_STRETCH, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat*) : HRESULT
+    @lpVtbl.value.create_text_format.unsafe_as(Proc(LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, Float32, LibC::LPWSTR, IDWriteTextFormat*, HRESULT)).call(fontfamilyname, fontcollection, fontweight, fontstyle, fontstretch, fontsize, localename, textformat)
+  end
+  def create_typography(typography : IDWriteTypography*) : HRESULT
+    @lpVtbl.value.create_typography.unsafe_as(Proc(IDWriteTypography*, HRESULT)).call(typography)
+  end
+  def get_gdi_interop(gdiinterop : IDWriteGdiInterop*) : HRESULT
+    @lpVtbl.value.get_gdi_interop.unsafe_as(Proc(IDWriteGdiInterop*, HRESULT)).call(gdiinterop)
+  end
+  def create_text_layout(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, maxwidth : Float32, maxheight : Float32, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_text_layout.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, Float32, Float32, IDWriteTextLayout*, HRESULT)).call(string, stringlength, textformat, maxwidth, maxheight, textlayout)
+  end
+  def create_gdi_compatible_text_layout(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutwidth : Float32, layoutheight : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_gdi_compatible_text_layout.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, IDWriteTextLayout*, HRESULT)).call(string, stringlength, textformat, layoutwidth, layoutheight, pixelsperdip, transform, usegdinatural, textlayout)
+  end
+  def create_ellipsis_trimming_sign(textformat : IDWriteTextFormat, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.create_ellipsis_trimming_sign.unsafe_as(Proc(IDWriteTextFormat, IDWriteInlineObject*, HRESULT)).call(textformat, trimmingsign)
+  end
+  def create_text_analyzer(textanalyzer : IDWriteTextAnalyzer*) : HRESULT
+    @lpVtbl.value.create_text_analyzer.unsafe_as(Proc(IDWriteTextAnalyzer*, HRESULT)).call(textanalyzer)
+  end
+  def create_number_substitution(substitutionmethod : DWRITE_NUMBER_SUBSTITUTION_METHOD, localename : LibC::LPWSTR, ignoreuseroverride : LibC::BOOL, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.create_number_substitution.unsafe_as(Proc(DWRITE_NUMBER_SUBSTITUTION_METHOD, LibC::LPWSTR, LibC::BOOL, IDWriteNumberSubstitution*, HRESULT)).call(substitutionmethod, localename, ignoreuseroverride, numbersubstitution)
+  end
+  def create_glyph_run_analysis(glyphrun : DWRITE_GLYPH_RUN*, pixelsperdip : Float32, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis.unsafe_as(Proc(DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, pixelsperdip, transform, renderingmode, measuringmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def get_eudc_font_collection(fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_eudc_font_collection.unsafe_as(Proc(IDWriteFontCollection*, LibC::BOOL, HRESULT)).call(fontcollection, checkforupdates)
+  end
+  def create_custom_rendering_params2(gamma : Float32, enhancedcontrast : Float32, enhancedcontrastgrayscale : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams1*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params2.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams1*, HRESULT)).call(gamma, enhancedcontrast, enhancedcontrastgrayscale, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def get_system_font_fallback(fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_system_font_fallback.unsafe_as(Proc(IDWriteFontFallback*, HRESULT)).call(fontfallback)
+  end
+  def create_font_fallback_builder(fontfallbackbuilder : IDWriteFontFallbackBuilder*) : HRESULT
+    @lpVtbl.value.create_font_fallback_builder.unsafe_as(Proc(IDWriteFontFallbackBuilder*, HRESULT)).call(fontfallbackbuilder)
+  end
+  def translate_color_glyph_run(baselineoriginx : Float32, baselineoriginy : Float32, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, measuringmode : DWRITE_MEASURING_MODE, worldtodevicetransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run.unsafe_as(Proc(Float32, Float32, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator*, HRESULT)).call(baselineoriginx, baselineoriginy, glyphrun, glyphrundescription, measuringmode, worldtodevicetransform, colorpaletteindex, colorlayers)
+  end
+  def create_custom_rendering_params3(gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams2*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params3.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams2*, HRESULT)).call(gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_glyph_run_analysis2(glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis2.unsafe_as(Proc(DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_glyph_run_analysis3(glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE1, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis3.unsafe_as(Proc(DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE1, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_custom_rendering_params4(gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE1, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams3*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params4.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE1, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams3*, HRESULT)).call(gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_font_face_reference(fontfile : IDWriteFontFile, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference.unsafe_as(Proc(IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)).call(fontfile, faceindex, fontsimulations, fontfacereference)
+  end
+  def create_font_face_reference2(filepath : LibC::LPWSTR, lastwritetime : FILETIME*, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference2.unsafe_as(Proc(LibC::LPWSTR, FILETIME*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)).call(filepath, lastwritetime, faceindex, fontsimulations, fontfacereference)
+  end
+  def get_system_font_set(fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_system_font_set.unsafe_as(Proc(IDWriteFontSet*, HRESULT)).call(fontset)
+  end
+  def create_font_set_builder(fontsetbuilder : IDWriteFontSetBuilder*) : HRESULT
+    @lpVtbl.value.create_font_set_builder.unsafe_as(Proc(IDWriteFontSetBuilder*, HRESULT)).call(fontsetbuilder)
+  end
+  def create_font_collection_from_font_set(fontset : IDWriteFontSet, fontcollection : IDWriteFontCollection1*) : HRESULT
+    @lpVtbl.value.create_font_collection_from_font_set.unsafe_as(Proc(IDWriteFontSet, IDWriteFontCollection1*, HRESULT)).call(fontset, fontcollection)
+  end
+  def get_system_font_collection2(includedownloadablefonts : LibC::BOOL, fontcollection : IDWriteFontCollection1*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection2.unsafe_as(Proc(LibC::BOOL, IDWriteFontCollection1*, LibC::BOOL, HRESULT)).call(includedownloadablefonts, fontcollection, checkforupdates)
+  end
+  def get_font_download_queue(fontdownloadqueue : IDWriteFontDownloadQueue*) : HRESULT
+    @lpVtbl.value.get_font_download_queue.unsafe_as(Proc(IDWriteFontDownloadQueue*, HRESULT)).call(fontdownloadqueue)
+  end
+  def translate_color_glyph_run2(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, desiredglyphimageformats : DWRITE_GLYPH_IMAGE_FORMATS, measuringmode : DWRITE_MEASURING_MODE, worldanddpitransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator1*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run2.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_GLYPH_IMAGE_FORMATS, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator1*, HRESULT)).call(baselineorigin, glyphrun, glyphrundescription, desiredglyphimageformats, measuringmode, worldanddpitransform, colorpaletteindex, colorlayers)
+  end
+  def compute_glyph_origins(glyphrun : DWRITE_GLYPH_RUN*, baselineorigin : D2D_POINT_2F, glyphorigins : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_glyph_origins.unsafe_as(Proc(DWRITE_GLYPH_RUN*, D2D_POINT_2F, D2D_POINT_2F*, HRESULT)).call(glyphrun, baselineorigin, glyphorigins)
+  end
+  def compute_glyph_origins2(glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, baselineorigin : D2D_POINT_2F, worldanddpitransform : DWRITE_MATRIX*, glyphorigins : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_glyph_origins2.unsafe_as(Proc(DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_POINT_2F, DWRITE_MATRIX*, D2D_POINT_2F*, HRESULT)).call(glyphrun, measuringmode, baselineorigin, worldanddpitransform, glyphorigins)
+  end
+  def create_font_set_builder2(fontsetbuilder : IDWriteFontSetBuilder1*) : HRESULT
+    @lpVtbl.value.create_font_set_builder2.unsafe_as(Proc(IDWriteFontSetBuilder1*, HRESULT)).call(fontsetbuilder)
+  end
+  def create_in_memory_font_file_loader(newloader : IDWriteInMemoryFontFileLoader*) : HRESULT
+    @lpVtbl.value.create_in_memory_font_file_loader.unsafe_as(Proc(IDWriteInMemoryFontFileLoader*, HRESULT)).call(newloader)
+  end
+  def create_http_font_file_loader(referrerurl : LibC::LPWSTR, extraheaders : LibC::LPWSTR, newloader : IDWriteRemoteFontFileLoader*) : HRESULT
+    @lpVtbl.value.create_http_font_file_loader.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, IDWriteRemoteFontFileLoader*, HRESULT)).call(referrerurl, extraheaders, newloader)
+  end
+  def analyze_container_type(filedata : Void*, filedatasize : UInt32) : DWRITE_CONTAINER_TYPE
+    @lpVtbl.value.analyze_container_type.unsafe_as(Proc(Void*, UInt32, DWRITE_CONTAINER_TYPE)).call(filedata, filedatasize)
+  end
+  def unpack_font_file(containertype : DWRITE_CONTAINER_TYPE, filedata : Void*, filedatasize : UInt32, unpackedfontstream : IDWriteFontFileStream*) : HRESULT
+    @lpVtbl.value.unpack_font_file.unsafe_as(Proc(DWRITE_CONTAINER_TYPE, Void*, UInt32, IDWriteFontFileStream*, HRESULT)).call(containertype, filedata, filedatasize, unpackedfontstream)
+  end
+end
+struct LibWin32::IDWriteFactory6
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_system_font_collection(fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection.unsafe_as(Proc(IDWriteFontCollection*, LibC::BOOL, HRESULT)).call(fontcollection, checkforupdates)
+  end
+  def create_custom_font_collection(collectionloader : IDWriteFontCollectionLoader, collectionkey : Void*, collectionkeysize : UInt32, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.create_custom_font_collection.unsafe_as(Proc(IDWriteFontCollectionLoader, Void*, UInt32, IDWriteFontCollection*, HRESULT)).call(collectionloader, collectionkey, collectionkeysize, fontcollection)
+  end
+  def register_font_collection_loader(fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.register_font_collection_loader.unsafe_as(Proc(IDWriteFontCollectionLoader, HRESULT)).call(fontcollectionloader)
+  end
+  def unregister_font_collection_loader(fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.unregister_font_collection_loader.unsafe_as(Proc(IDWriteFontCollectionLoader, HRESULT)).call(fontcollectionloader)
+  end
+  def create_font_file_reference(filepath : LibC::LPWSTR, lastwritetime : FILETIME*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference.unsafe_as(Proc(LibC::LPWSTR, FILETIME*, IDWriteFontFile*, HRESULT)).call(filepath, lastwritetime, fontfile)
+  end
+  def create_custom_font_file_reference(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfileloader : IDWriteFontFileLoader, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_custom_font_file_reference.unsafe_as(Proc(Void*, UInt32, IDWriteFontFileLoader, IDWriteFontFile*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, fontfileloader, fontfile)
+  end
+  def create_font_face(fontfacetype : DWRITE_FONT_FACE_TYPE, numberoffiles : UInt32, fontfiles : IDWriteFontFile*, faceindex : UInt32, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(DWRITE_FONT_FACE_TYPE, UInt32, IDWriteFontFile*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFace*, HRESULT)).call(fontfacetype, numberoffiles, fontfiles, faceindex, fontfacesimulationflags, fontface)
+  end
+  def create_rendering_params(renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, HRESULT)).call(renderingparams)
+  end
+  def create_monitor_rendering_params(monitor : HMONITOR, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_monitor_rendering_params.unsafe_as(Proc(HMONITOR, IDWriteRenderingParams*, HRESULT)).call(monitor, renderingparams)
+  end
+  def create_custom_rendering_params(gamma : Float32, enhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams*, HRESULT)).call(gamma, enhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def register_font_file_loader(fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.register_font_file_loader.unsafe_as(Proc(IDWriteFontFileLoader, HRESULT)).call(fontfileloader)
+  end
+  def unregister_font_file_loader(fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.unregister_font_file_loader.unsafe_as(Proc(IDWriteFontFileLoader, HRESULT)).call(fontfileloader)
+  end
+  def create_text_format(fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontweight : DWRITE_FONT_WEIGHT, fontstyle : DWRITE_FONT_STYLE, fontstretch : DWRITE_FONT_STRETCH, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat*) : HRESULT
+    @lpVtbl.value.create_text_format.unsafe_as(Proc(LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, Float32, LibC::LPWSTR, IDWriteTextFormat*, HRESULT)).call(fontfamilyname, fontcollection, fontweight, fontstyle, fontstretch, fontsize, localename, textformat)
+  end
+  def create_typography(typography : IDWriteTypography*) : HRESULT
+    @lpVtbl.value.create_typography.unsafe_as(Proc(IDWriteTypography*, HRESULT)).call(typography)
+  end
+  def get_gdi_interop(gdiinterop : IDWriteGdiInterop*) : HRESULT
+    @lpVtbl.value.get_gdi_interop.unsafe_as(Proc(IDWriteGdiInterop*, HRESULT)).call(gdiinterop)
+  end
+  def create_text_layout(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, maxwidth : Float32, maxheight : Float32, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_text_layout.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, Float32, Float32, IDWriteTextLayout*, HRESULT)).call(string, stringlength, textformat, maxwidth, maxheight, textlayout)
+  end
+  def create_gdi_compatible_text_layout(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutwidth : Float32, layoutheight : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_gdi_compatible_text_layout.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, IDWriteTextLayout*, HRESULT)).call(string, stringlength, textformat, layoutwidth, layoutheight, pixelsperdip, transform, usegdinatural, textlayout)
+  end
+  def create_ellipsis_trimming_sign(textformat : IDWriteTextFormat, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.create_ellipsis_trimming_sign.unsafe_as(Proc(IDWriteTextFormat, IDWriteInlineObject*, HRESULT)).call(textformat, trimmingsign)
+  end
+  def create_text_analyzer(textanalyzer : IDWriteTextAnalyzer*) : HRESULT
+    @lpVtbl.value.create_text_analyzer.unsafe_as(Proc(IDWriteTextAnalyzer*, HRESULT)).call(textanalyzer)
+  end
+  def create_number_substitution(substitutionmethod : DWRITE_NUMBER_SUBSTITUTION_METHOD, localename : LibC::LPWSTR, ignoreuseroverride : LibC::BOOL, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.create_number_substitution.unsafe_as(Proc(DWRITE_NUMBER_SUBSTITUTION_METHOD, LibC::LPWSTR, LibC::BOOL, IDWriteNumberSubstitution*, HRESULT)).call(substitutionmethod, localename, ignoreuseroverride, numbersubstitution)
+  end
+  def create_glyph_run_analysis(glyphrun : DWRITE_GLYPH_RUN*, pixelsperdip : Float32, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis.unsafe_as(Proc(DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, pixelsperdip, transform, renderingmode, measuringmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def get_eudc_font_collection(fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_eudc_font_collection.unsafe_as(Proc(IDWriteFontCollection*, LibC::BOOL, HRESULT)).call(fontcollection, checkforupdates)
+  end
+  def create_custom_rendering_params2(gamma : Float32, enhancedcontrast : Float32, enhancedcontrastgrayscale : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams1*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params2.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams1*, HRESULT)).call(gamma, enhancedcontrast, enhancedcontrastgrayscale, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def get_system_font_fallback(fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_system_font_fallback.unsafe_as(Proc(IDWriteFontFallback*, HRESULT)).call(fontfallback)
+  end
+  def create_font_fallback_builder(fontfallbackbuilder : IDWriteFontFallbackBuilder*) : HRESULT
+    @lpVtbl.value.create_font_fallback_builder.unsafe_as(Proc(IDWriteFontFallbackBuilder*, HRESULT)).call(fontfallbackbuilder)
+  end
+  def translate_color_glyph_run(baselineoriginx : Float32, baselineoriginy : Float32, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, measuringmode : DWRITE_MEASURING_MODE, worldtodevicetransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run.unsafe_as(Proc(Float32, Float32, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator*, HRESULT)).call(baselineoriginx, baselineoriginy, glyphrun, glyphrundescription, measuringmode, worldtodevicetransform, colorpaletteindex, colorlayers)
+  end
+  def create_custom_rendering_params3(gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams2*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params3.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams2*, HRESULT)).call(gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_glyph_run_analysis2(glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis2.unsafe_as(Proc(DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_glyph_run_analysis3(glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE1, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis3.unsafe_as(Proc(DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE1, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_custom_rendering_params4(gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE1, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams3*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params4.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE1, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams3*, HRESULT)).call(gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_font_face_reference(fontfile : IDWriteFontFile, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference.unsafe_as(Proc(IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)).call(fontfile, faceindex, fontsimulations, fontfacereference)
+  end
+  def create_font_face_reference2(filepath : LibC::LPWSTR, lastwritetime : FILETIME*, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference2.unsafe_as(Proc(LibC::LPWSTR, FILETIME*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)).call(filepath, lastwritetime, faceindex, fontsimulations, fontfacereference)
+  end
+  def get_system_font_set(fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_system_font_set.unsafe_as(Proc(IDWriteFontSet*, HRESULT)).call(fontset)
+  end
+  def create_font_set_builder(fontsetbuilder : IDWriteFontSetBuilder*) : HRESULT
+    @lpVtbl.value.create_font_set_builder.unsafe_as(Proc(IDWriteFontSetBuilder*, HRESULT)).call(fontsetbuilder)
+  end
+  def create_font_collection_from_font_set(fontset : IDWriteFontSet, fontcollection : IDWriteFontCollection1*) : HRESULT
+    @lpVtbl.value.create_font_collection_from_font_set.unsafe_as(Proc(IDWriteFontSet, IDWriteFontCollection1*, HRESULT)).call(fontset, fontcollection)
+  end
+  def get_system_font_collection2(includedownloadablefonts : LibC::BOOL, fontcollection : IDWriteFontCollection1*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection2.unsafe_as(Proc(LibC::BOOL, IDWriteFontCollection1*, LibC::BOOL, HRESULT)).call(includedownloadablefonts, fontcollection, checkforupdates)
+  end
+  def get_font_download_queue(fontdownloadqueue : IDWriteFontDownloadQueue*) : HRESULT
+    @lpVtbl.value.get_font_download_queue.unsafe_as(Proc(IDWriteFontDownloadQueue*, HRESULT)).call(fontdownloadqueue)
+  end
+  def translate_color_glyph_run2(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, desiredglyphimageformats : DWRITE_GLYPH_IMAGE_FORMATS, measuringmode : DWRITE_MEASURING_MODE, worldanddpitransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator1*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run2.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_GLYPH_IMAGE_FORMATS, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator1*, HRESULT)).call(baselineorigin, glyphrun, glyphrundescription, desiredglyphimageformats, measuringmode, worldanddpitransform, colorpaletteindex, colorlayers)
+  end
+  def compute_glyph_origins(glyphrun : DWRITE_GLYPH_RUN*, baselineorigin : D2D_POINT_2F, glyphorigins : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_glyph_origins.unsafe_as(Proc(DWRITE_GLYPH_RUN*, D2D_POINT_2F, D2D_POINT_2F*, HRESULT)).call(glyphrun, baselineorigin, glyphorigins)
+  end
+  def compute_glyph_origins2(glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, baselineorigin : D2D_POINT_2F, worldanddpitransform : DWRITE_MATRIX*, glyphorigins : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_glyph_origins2.unsafe_as(Proc(DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_POINT_2F, DWRITE_MATRIX*, D2D_POINT_2F*, HRESULT)).call(glyphrun, measuringmode, baselineorigin, worldanddpitransform, glyphorigins)
+  end
+  def create_font_set_builder2(fontsetbuilder : IDWriteFontSetBuilder1*) : HRESULT
+    @lpVtbl.value.create_font_set_builder2.unsafe_as(Proc(IDWriteFontSetBuilder1*, HRESULT)).call(fontsetbuilder)
+  end
+  def create_in_memory_font_file_loader(newloader : IDWriteInMemoryFontFileLoader*) : HRESULT
+    @lpVtbl.value.create_in_memory_font_file_loader.unsafe_as(Proc(IDWriteInMemoryFontFileLoader*, HRESULT)).call(newloader)
+  end
+  def create_http_font_file_loader(referrerurl : LibC::LPWSTR, extraheaders : LibC::LPWSTR, newloader : IDWriteRemoteFontFileLoader*) : HRESULT
+    @lpVtbl.value.create_http_font_file_loader.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, IDWriteRemoteFontFileLoader*, HRESULT)).call(referrerurl, extraheaders, newloader)
+  end
+  def analyze_container_type(filedata : Void*, filedatasize : UInt32) : DWRITE_CONTAINER_TYPE
+    @lpVtbl.value.analyze_container_type.unsafe_as(Proc(Void*, UInt32, DWRITE_CONTAINER_TYPE)).call(filedata, filedatasize)
+  end
+  def unpack_font_file(containertype : DWRITE_CONTAINER_TYPE, filedata : Void*, filedatasize : UInt32, unpackedfontstream : IDWriteFontFileStream*) : HRESULT
+    @lpVtbl.value.unpack_font_file.unsafe_as(Proc(DWRITE_CONTAINER_TYPE, Void*, UInt32, IDWriteFontFileStream*, HRESULT)).call(containertype, filedata, filedatasize, unpackedfontstream)
+  end
+  def create_font_face_reference3(fontfile : IDWriteFontFile, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontfacereference : IDWriteFontFaceReference1*) : HRESULT
+    @lpVtbl.value.create_font_face_reference3.unsafe_as(Proc(IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontFaceReference1*, HRESULT)).call(fontfile, faceindex, fontsimulations, fontaxisvalues, fontaxisvaluecount, fontfacereference)
+  end
+  def create_font_resource(fontfile : IDWriteFontFile, faceindex : UInt32, fontresource : IDWriteFontResource*) : HRESULT
+    @lpVtbl.value.create_font_resource.unsafe_as(Proc(IDWriteFontFile, UInt32, IDWriteFontResource*, HRESULT)).call(fontfile, faceindex, fontresource)
+  end
+  def get_system_font_set2(includedownloadablefonts : LibC::BOOL, fontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_system_font_set2.unsafe_as(Proc(LibC::BOOL, IDWriteFontSet1*, HRESULT)).call(includedownloadablefonts, fontset)
+  end
+  def get_system_font_collection3(includedownloadablefonts : LibC::BOOL, fontfamilymodel : DWRITE_FONT_FAMILY_MODEL, fontcollection : IDWriteFontCollection2*) : HRESULT
+    @lpVtbl.value.get_system_font_collection3.unsafe_as(Proc(LibC::BOOL, DWRITE_FONT_FAMILY_MODEL, IDWriteFontCollection2*, HRESULT)).call(includedownloadablefonts, fontfamilymodel, fontcollection)
+  end
+  def create_font_collection_from_font_set2(fontset : IDWriteFontSet, fontfamilymodel : DWRITE_FONT_FAMILY_MODEL, fontcollection : IDWriteFontCollection2*) : HRESULT
+    @lpVtbl.value.create_font_collection_from_font_set2.unsafe_as(Proc(IDWriteFontSet, DWRITE_FONT_FAMILY_MODEL, IDWriteFontCollection2*, HRESULT)).call(fontset, fontfamilymodel, fontcollection)
+  end
+  def create_font_set_builder3(fontsetbuilder : IDWriteFontSetBuilder2*) : HRESULT
+    @lpVtbl.value.create_font_set_builder3.unsafe_as(Proc(IDWriteFontSetBuilder2*, HRESULT)).call(fontsetbuilder)
+  end
+  def create_text_format2(fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat3*) : HRESULT
+    @lpVtbl.value.create_text_format2.unsafe_as(Proc(LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_AXIS_VALUE*, UInt32, Float32, LibC::LPWSTR, IDWriteTextFormat3*, HRESULT)).call(fontfamilyname, fontcollection, fontaxisvalues, fontaxisvaluecount, fontsize, localename, textformat)
+  end
+end
+struct LibWin32::IDWriteFontFace5
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type : DWRITE_FONT_FACE_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(DWRITE_FONT_FACE_TYPE)).call
+  end
+  def get_files(numberoffiles : UInt32*, fontfiles : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_files.unsafe_as(Proc(UInt32*, IDWriteFontFile*, HRESULT)).call(numberoffiles, fontfiles)
+  end
+  def get_index : UInt32
+    @lpVtbl.value.get_index.unsafe_as(Proc(UInt32)).call
+  end
+  def get_simulations : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS)).call
+  end
+  def is_symbol_font : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_metrics(fontfacemetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_FONT_METRICS*, Void)).call(fontfacemetrics)
+  end
+  def get_glyph_count : UInt16
+    @lpVtbl.value.get_glyph_count.unsafe_as(Proc(UInt16)).call
+  end
+  def get_design_glyph_metrics(glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_metrics.unsafe_as(Proc(UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)).call(glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_glyph_indices(codepoints : UInt32*, codepointcount : UInt32, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.unsafe_as(Proc(UInt32*, UInt32, UInt16*, HRESULT)).call(codepoints, codepointcount, glyphindices)
+  end
+  def try_get_font_table(opentypetabletag : UInt32, tabledata : Void**, tablesize : UInt32*, tablecontext : Void**, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_get_font_table.unsafe_as(Proc(UInt32, Void**, UInt32*, Void**, LibC::BOOL*, HRESULT)).call(opentypetabletag, tabledata, tablesize, tablecontext, exists)
+  end
+  def release_font_table(tablecontext : Void*) : Void
+    @lpVtbl.value.release_font_table.unsafe_as(Proc(Void*, Void)).call(tablecontext)
+  end
+  def get_glyph_run_outline(emsize : Float32, glyphindices : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphcount : UInt32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.get_glyph_run_outline.unsafe_as(Proc(Float32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, UInt32, LibC::BOOL, LibC::BOOL, ID2D1SimplifiedGeometrySink, HRESULT)).call(emsize, glyphindices, glyphadvances, glyphoffsets, glyphcount, issideways, isrighttoleft, geometrysink)
+  end
+  def get_recommended_rendering_mode(emsize : Float32, pixelsperdip : Float32, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode.unsafe_as(Proc(Float32, Float32, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, HRESULT)).call(emsize, pixelsperdip, measuringmode, renderingparams, renderingmode)
+  end
+  def get_gdi_compatible_metrics(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontfacemetrics : DWRITE_FONT_METRICS*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS*, HRESULT)).call(emsize, pixelsperdip, transform, fontfacemetrics)
+  end
+  def get_gdi_compatible_glyph_metrics(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_metrics.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)).call(emsize, pixelsperdip, transform, usegdinatural, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_metrics2(fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.unsafe_as(Proc(DWRITE_FONT_METRICS1*, Void)).call(fontmetrics)
+  end
+  def get_gdi_compatible_metrics2(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontmetrics : DWRITE_FONT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics2.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS1*, HRESULT)).call(emsize, pixelsperdip, transform, fontmetrics)
+  end
+  def get_caret_metrics(caretmetrics : DWRITE_CARET_METRICS*) : Void
+    @lpVtbl.value.get_caret_metrics.unsafe_as(Proc(DWRITE_CARET_METRICS*, Void)).call(caretmetrics)
+  end
+  def get_unicode_ranges(maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.unsafe_as(Proc(UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)).call(maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_design_glyph_advances(glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_advances.unsafe_as(Proc(UInt32, UInt16*, Int32*, LibC::BOOL, HRESULT)).call(glyphcount, glyphindices, glyphadvances, issideways)
+  end
+  def get_gdi_compatible_glyph_advances(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_advances.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, UInt32, UInt16*, Int32*, HRESULT)).call(emsize, pixelsperdip, transform, usegdinatural, issideways, glyphcount, glyphindices, glyphadvances)
+  end
+  def get_kerning_pair_adjustments(glyphcount : UInt32, glyphindices : UInt16*, glyphadvanceadjustments : Int32*) : HRESULT
+    @lpVtbl.value.get_kerning_pair_adjustments.unsafe_as(Proc(UInt32, UInt16*, Int32*, HRESULT)).call(glyphcount, glyphindices, glyphadvanceadjustments)
+  end
+  def has_kerning_pairs : LibC::BOOL
+    @lpVtbl.value.has_kerning_pairs.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_recommended_rendering_mode2(fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode2.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, DWRITE_RENDERING_MODE*, HRESULT)).call(fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingmode)
+  end
+  def get_vertical_glyph_variants(glyphcount : UInt32, nominalglyphindices : UInt16*, verticalglyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_vertical_glyph_variants.unsafe_as(Proc(UInt32, UInt16*, UInt16*, HRESULT)).call(glyphcount, nominalglyphindices, verticalglyphindices)
+  end
+  def has_vertical_glyph_variants : LibC::BOOL
+    @lpVtbl.value.has_vertical_glyph_variants.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def is_color_font : LibC::BOOL
+    @lpVtbl.value.is_color_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_color_palette_count : UInt32
+    @lpVtbl.value.get_color_palette_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_palette_entry_count : UInt32
+    @lpVtbl.value.get_palette_entry_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_palette_entries(colorpaletteindex : UInt32, firstentryindex : UInt32, entrycount : UInt32, paletteentries : DWRITE_COLOR_F*) : HRESULT
+    @lpVtbl.value.get_palette_entries.unsafe_as(Proc(UInt32, UInt32, UInt32, DWRITE_COLOR_F*, HRESULT)).call(colorpaletteindex, firstentryindex, entrycount, paletteentries)
+  end
+  def get_recommended_rendering_mode3(fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode3.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, DWRITE_GRID_FIT_MODE*, HRESULT)).call(fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+  def get_font_face_reference(fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.unsafe_as(Proc(IDWriteFontFaceReference*, HRESULT)).call(fontfacereference)
+  end
+  def get_panose(panose : DWRITE_PANOSE*) : Void
+    @lpVtbl.value.get_panose.unsafe_as(Proc(DWRITE_PANOSE*, Void)).call(panose)
+  end
+  def get_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def get_family_names(names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_family_names.unsafe_as(Proc(IDWriteLocalizedStrings*, HRESULT)).call(names)
+  end
+  def get_face_names(names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names.unsafe_as(Proc(IDWriteLocalizedStrings*, HRESULT)).call(names)
+  end
+  def get_informational_strings(informationalstringid : DWRITE_INFORMATIONAL_STRING_ID, informationalstrings : IDWriteLocalizedStrings*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_informational_strings.unsafe_as(Proc(DWRITE_INFORMATIONAL_STRING_ID, IDWriteLocalizedStrings*, LibC::BOOL*, HRESULT)).call(informationalstringid, informationalstrings, exists)
+  end
+  def has_character(unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.has_character.unsafe_as(Proc(UInt32, LibC::BOOL)).call(unicodevalue)
+  end
+  def get_recommended_rendering_mode4(fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE1*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode4.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE1*, DWRITE_GRID_FIT_MODE*, HRESULT)).call(fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+  def is_character_local(unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.is_character_local.unsafe_as(Proc(UInt32, LibC::BOOL)).call(unicodevalue)
+  end
+  def is_glyph_local(glyphid : UInt16) : LibC::BOOL
+    @lpVtbl.value.is_glyph_local.unsafe_as(Proc(UInt16, LibC::BOOL)).call(glyphid)
+  end
+  def are_characters_local(characters : Char*, charactercount : UInt32, enqueueifnotlocal : LibC::BOOL, islocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_characters_local.unsafe_as(Proc(Char*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)).call(characters, charactercount, enqueueifnotlocal, islocal)
+  end
+  def are_glyphs_local(glyphindices : UInt16*, glyphcount : UInt32, enqueueifnotlocal : LibC::BOOL, islocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_glyphs_local.unsafe_as(Proc(UInt16*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)).call(glyphindices, glyphcount, enqueueifnotlocal, islocal)
+  end
+  def get_glyph_image_formats(glyphid : UInt16, pixelsperemfirst : UInt32, pixelsperemlast : UInt32, glyphimageformats : DWRITE_GLYPH_IMAGE_FORMATS*) : HRESULT
+    @lpVtbl.value.get_glyph_image_formats.unsafe_as(Proc(UInt16, UInt32, UInt32, DWRITE_GLYPH_IMAGE_FORMATS*, HRESULT)).call(glyphid, pixelsperemfirst, pixelsperemlast, glyphimageformats)
+  end
+  def get_glyph_image_formats2 : DWRITE_GLYPH_IMAGE_FORMATS
+    @lpVtbl.value.get_glyph_image_formats2.unsafe_as(Proc(DWRITE_GLYPH_IMAGE_FORMATS)).call
+  end
+  def get_glyph_image_data(glyphid : UInt16, pixelsperem : UInt32, glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, glyphdata : DWRITE_GLYPH_IMAGE_DATA*, glyphdatacontext : Void**) : HRESULT
+    @lpVtbl.value.get_glyph_image_data.unsafe_as(Proc(UInt16, UInt32, DWRITE_GLYPH_IMAGE_FORMATS, DWRITE_GLYPH_IMAGE_DATA*, Void**, HRESULT)).call(glyphid, pixelsperem, glyphimageformat, glyphdata, glyphdatacontext)
+  end
+  def release_glyph_image_data(glyphdatacontext : Void*) : Void
+    @lpVtbl.value.release_glyph_image_data.unsafe_as(Proc(Void*, Void)).call(glyphdatacontext)
+  end
+  def get_font_axis_value_count : UInt32
+    @lpVtbl.value.get_font_axis_value_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_axis_values(fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32) : HRESULT
+    @lpVtbl.value.get_font_axis_values.unsafe_as(Proc(DWRITE_FONT_AXIS_VALUE*, UInt32, HRESULT)).call(fontaxisvalues, fontaxisvaluecount)
+  end
+  def has_variations : LibC::BOOL
+    @lpVtbl.value.has_variations.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_font_resource(fontresource : IDWriteFontResource*) : HRESULT
+    @lpVtbl.value.get_font_resource.unsafe_as(Proc(IDWriteFontResource*, HRESULT)).call(fontresource)
+  end
+  def equals(fontface : IDWriteFontFace) : LibC::BOOL
+    @lpVtbl.value.equals.unsafe_as(Proc(IDWriteFontFace, LibC::BOOL)).call(fontface)
+  end
+end
+struct LibWin32::IDWriteFontResource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_file(fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_font_file.unsafe_as(Proc(IDWriteFontFile*, HRESULT)).call(fontfile)
+  end
+  def get_font_face_index : UInt32
+    @lpVtbl.value.get_font_face_index.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_axis_count : UInt32
+    @lpVtbl.value.get_font_axis_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_default_font_axis_values(fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32) : HRESULT
+    @lpVtbl.value.get_default_font_axis_values.unsafe_as(Proc(DWRITE_FONT_AXIS_VALUE*, UInt32, HRESULT)).call(fontaxisvalues, fontaxisvaluecount)
+  end
+  def get_font_axis_ranges(fontaxisranges : DWRITE_FONT_AXIS_RANGE*, fontaxisrangecount : UInt32) : HRESULT
+    @lpVtbl.value.get_font_axis_ranges.unsafe_as(Proc(DWRITE_FONT_AXIS_RANGE*, UInt32, HRESULT)).call(fontaxisranges, fontaxisrangecount)
+  end
+  def get_font_axis_attributes(axisindex : UInt32) : DWRITE_FONT_AXIS_ATTRIBUTES
+    @lpVtbl.value.get_font_axis_attributes.unsafe_as(Proc(UInt32, DWRITE_FONT_AXIS_ATTRIBUTES)).call(axisindex)
+  end
+  def get_axis_names(axisindex : UInt32, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_axis_names.unsafe_as(Proc(UInt32, IDWriteLocalizedStrings*, HRESULT)).call(axisindex, names)
+  end
+  def get_axis_value_name_count(axisindex : UInt32) : UInt32
+    @lpVtbl.value.get_axis_value_name_count.unsafe_as(Proc(UInt32, UInt32)).call(axisindex)
+  end
+  def get_axis_value_names(axisindex : UInt32, axisvalueindex : UInt32, fontaxisrange : DWRITE_FONT_AXIS_RANGE*, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_axis_value_names.unsafe_as(Proc(UInt32, UInt32, DWRITE_FONT_AXIS_RANGE*, IDWriteLocalizedStrings*, HRESULT)).call(axisindex, axisvalueindex, fontaxisrange, names)
+  end
+  def has_variations : LibC::BOOL
+    @lpVtbl.value.has_variations.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def create_font_face(fontsimulations : DWRITE_FONT_SIMULATIONS, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontface : IDWriteFontFace5*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontFace5*, HRESULT)).call(fontsimulations, fontaxisvalues, fontaxisvaluecount, fontface)
+  end
+  def create_font_face_reference(fontsimulations : DWRITE_FONT_SIMULATIONS, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontfacereference : IDWriteFontFaceReference1*) : HRESULT
+    @lpVtbl.value.create_font_face_reference.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontFaceReference1*, HRESULT)).call(fontsimulations, fontaxisvalues, fontaxisvaluecount, fontfacereference)
+  end
+end
+struct LibWin32::IDWriteFontFaceReference1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_font_face(fontface : IDWriteFontFace3*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(IDWriteFontFace3*, HRESULT)).call(fontface)
+  end
+  def create_font_face_with_simulations(fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace3*) : HRESULT
+    @lpVtbl.value.create_font_face_with_simulations.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS, IDWriteFontFace3*, HRESULT)).call(fontfacesimulationflags, fontface)
+  end
+  def equals(fontfacereference : IDWriteFontFaceReference) : LibC::BOOL
+    @lpVtbl.value.equals.unsafe_as(Proc(IDWriteFontFaceReference, LibC::BOOL)).call(fontfacereference)
+  end
+  def get_font_face_index : UInt32
+    @lpVtbl.value.get_font_face_index.unsafe_as(Proc(UInt32)).call
+  end
+  def get_simulations : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS)).call
+  end
+  def get_font_file(fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_font_file.unsafe_as(Proc(IDWriteFontFile*, HRESULT)).call(fontfile)
+  end
+  def get_local_file_size : UInt64
+    @lpVtbl.value.get_local_file_size.unsafe_as(Proc(UInt64)).call
+  end
+  def get_file_size : UInt64
+    @lpVtbl.value.get_file_size.unsafe_as(Proc(UInt64)).call
+  end
+  def get_file_time(lastwritetime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_file_time.unsafe_as(Proc(FILETIME*, HRESULT)).call(lastwritetime)
+  end
+  def get_locality : DWRITE_LOCALITY
+    @lpVtbl.value.get_locality.unsafe_as(Proc(DWRITE_LOCALITY)).call
+  end
+  def enqueue_font_download_request : HRESULT
+    @lpVtbl.value.enqueue_font_download_request.unsafe_as(Proc(HRESULT)).call
+  end
+  def enqueue_character_download_request(characters : Char*, charactercount : UInt32) : HRESULT
+    @lpVtbl.value.enqueue_character_download_request.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(characters, charactercount)
+  end
+  def enqueue_glyph_download_request(glyphindices : UInt16*, glyphcount : UInt32) : HRESULT
+    @lpVtbl.value.enqueue_glyph_download_request.unsafe_as(Proc(UInt16*, UInt32, HRESULT)).call(glyphindices, glyphcount)
+  end
+  def enqueue_file_fragment_download_request(fileoffset : UInt64, fragmentsize : UInt64) : HRESULT
+    @lpVtbl.value.enqueue_file_fragment_download_request.unsafe_as(Proc(UInt64, UInt64, HRESULT)).call(fileoffset, fragmentsize)
+  end
+  def create_font_face2(fontface : IDWriteFontFace5*) : HRESULT
+    @lpVtbl.value.create_font_face2.unsafe_as(Proc(IDWriteFontFace5*, HRESULT)).call(fontface)
+  end
+  def get_font_axis_value_count : UInt32
+    @lpVtbl.value.get_font_axis_value_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_axis_values(fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32) : HRESULT
+    @lpVtbl.value.get_font_axis_values.unsafe_as(Proc(DWRITE_FONT_AXIS_VALUE*, UInt32, HRESULT)).call(fontaxisvalues, fontaxisvaluecount)
+  end
+end
+struct LibWin32::IDWriteFontSetBuilder2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_font_face_reference(fontfacereference : IDWriteFontFaceReference, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32) : HRESULT
+    @lpVtbl.value.add_font_face_reference.unsafe_as(Proc(IDWriteFontFaceReference, DWRITE_FONT_PROPERTY*, UInt32, HRESULT)).call(fontfacereference, properties, propertycount)
+  end
+  def add_font_face_reference2(fontfacereference : IDWriteFontFaceReference) : HRESULT
+    @lpVtbl.value.add_font_face_reference2.unsafe_as(Proc(IDWriteFontFaceReference, HRESULT)).call(fontfacereference)
+  end
+  def add_font_set(fontset : IDWriteFontSet) : HRESULT
+    @lpVtbl.value.add_font_set.unsafe_as(Proc(IDWriteFontSet, HRESULT)).call(fontset)
+  end
+  def create_font_set(fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.create_font_set.unsafe_as(Proc(IDWriteFontSet*, HRESULT)).call(fontset)
+  end
+  def add_font_file(fontfile : IDWriteFontFile) : HRESULT
+    @lpVtbl.value.add_font_file.unsafe_as(Proc(IDWriteFontFile, HRESULT)).call(fontfile)
+  end
+  def add_font(fontfile : IDWriteFontFile, fontfaceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, fontaxisrangecount : UInt32, properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32) : HRESULT
+    @lpVtbl.value.add_font.unsafe_as(Proc(IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, DWRITE_FONT_AXIS_VALUE*, UInt32, DWRITE_FONT_AXIS_RANGE*, UInt32, DWRITE_FONT_PROPERTY*, UInt32, HRESULT)).call(fontfile, fontfaceindex, fontsimulations, fontaxisvalues, fontaxisvaluecount, fontaxisranges, fontaxisrangecount, properties, propertycount)
+  end
+  def add_font_file2(filepath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_font_file2.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(filepath)
+  end
+end
+struct LibWin32::IDWriteFontSet1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_count : UInt32
+    @lpVtbl.value.get_font_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_face_reference(listindex : UInt32, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.unsafe_as(Proc(UInt32, IDWriteFontFaceReference*, HRESULT)).call(listindex, fontfacereference)
+  end
+  def find_font_face_reference(fontfacereference : IDWriteFontFaceReference, listindex : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_font_face_reference.unsafe_as(Proc(IDWriteFontFaceReference, UInt32*, LibC::BOOL*, HRESULT)).call(fontfacereference, listindex, exists)
+  end
+  def find_font_face(fontface : IDWriteFontFace, listindex : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_font_face.unsafe_as(Proc(IDWriteFontFace, UInt32*, LibC::BOOL*, HRESULT)).call(fontface, listindex, exists)
+  end
+  def get_property_values(propertyid : DWRITE_FONT_PROPERTY_ID, values : IDWriteStringList*) : HRESULT
+    @lpVtbl.value.get_property_values.unsafe_as(Proc(DWRITE_FONT_PROPERTY_ID, IDWriteStringList*, HRESULT)).call(propertyid, values)
+  end
+  def get_property_values2(propertyid : DWRITE_FONT_PROPERTY_ID, preferredlocalenames : LibC::LPWSTR, values : IDWriteStringList*) : HRESULT
+    @lpVtbl.value.get_property_values2.unsafe_as(Proc(DWRITE_FONT_PROPERTY_ID, LibC::LPWSTR, IDWriteStringList*, HRESULT)).call(propertyid, preferredlocalenames, values)
+  end
+  def get_property_values3(listindex : UInt32, propertyid : DWRITE_FONT_PROPERTY_ID, exists : LibC::BOOL*, values : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_property_values3.unsafe_as(Proc(UInt32, DWRITE_FONT_PROPERTY_ID, LibC::BOOL*, IDWriteLocalizedStrings*, HRESULT)).call(listindex, propertyid, exists, values)
+  end
+  def get_property_occurrence_count(property : DWRITE_FONT_PROPERTY*, propertyoccurrencecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_occurrence_count.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, UInt32*, HRESULT)).call(property, propertyoccurrencecount)
+  end
+  def get_matching_fonts(familyname : LibC::LPWSTR, fontweight : DWRITE_FONT_WEIGHT, fontstretch : DWRITE_FONT_STRETCH, fontstyle : DWRITE_FONT_STYLE, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.unsafe_as(Proc(LibC::LPWSTR, DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFontSet*, HRESULT)).call(familyname, fontweight, fontstretch, fontstyle, filteredset)
+  end
+  def get_matching_fonts2(properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts2.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, UInt32, IDWriteFontSet*, HRESULT)).call(properties, propertycount, filteredset)
+  end
+  def get_matching_fonts3(fontproperty : DWRITE_FONT_PROPERTY*, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, matchingfonts : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_matching_fonts3.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontSet1*, HRESULT)).call(fontproperty, fontaxisvalues, fontaxisvaluecount, matchingfonts)
+  end
+  def get_first_font_resources(filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_first_font_resources.unsafe_as(Proc(IDWriteFontSet1*, HRESULT)).call(filteredfontset)
+  end
+  def get_filtered_fonts(indices : UInt32*, indexcount : UInt32, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts.unsafe_as(Proc(UInt32*, UInt32, IDWriteFontSet1*, HRESULT)).call(indices, indexcount, filteredfontset)
+  end
+  def get_filtered_fonts2(fontaxisranges : DWRITE_FONT_AXIS_RANGE*, fontaxisrangecount : UInt32, selectanyrange : LibC::BOOL, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts2.unsafe_as(Proc(DWRITE_FONT_AXIS_RANGE*, UInt32, LibC::BOOL, IDWriteFontSet1*, HRESULT)).call(fontaxisranges, fontaxisrangecount, selectanyrange, filteredfontset)
+  end
+  def get_filtered_fonts3(properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, selectanyproperty : LibC::BOOL, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts3.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, UInt32, LibC::BOOL, IDWriteFontSet1*, HRESULT)).call(properties, propertycount, selectanyproperty, filteredfontset)
+  end
+  def get_filtered_font_indices(fontaxisranges : DWRITE_FONT_AXIS_RANGE*, fontaxisrangecount : UInt32, selectanyrange : LibC::BOOL, indices : UInt32*, maxindexcount : UInt32, actualindexcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_filtered_font_indices.unsafe_as(Proc(DWRITE_FONT_AXIS_RANGE*, UInt32, LibC::BOOL, UInt32*, UInt32, UInt32*, HRESULT)).call(fontaxisranges, fontaxisrangecount, selectanyrange, indices, maxindexcount, actualindexcount)
+  end
+  def get_filtered_font_indices2(properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, selectanyproperty : LibC::BOOL, indices : UInt32*, maxindexcount : UInt32, actualindexcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_filtered_font_indices2.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, UInt32, LibC::BOOL, UInt32*, UInt32, UInt32*, HRESULT)).call(properties, propertycount, selectanyproperty, indices, maxindexcount, actualindexcount)
+  end
+  def get_font_axis_ranges(listindex : UInt32, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, maxfontaxisrangecount : UInt32, actualfontaxisrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_font_axis_ranges.unsafe_as(Proc(UInt32, DWRITE_FONT_AXIS_RANGE*, UInt32, UInt32*, HRESULT)).call(listindex, fontaxisranges, maxfontaxisrangecount, actualfontaxisrangecount)
+  end
+  def get_font_axis_ranges2(fontaxisranges : DWRITE_FONT_AXIS_RANGE*, maxfontaxisrangecount : UInt32, actualfontaxisrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_font_axis_ranges2.unsafe_as(Proc(DWRITE_FONT_AXIS_RANGE*, UInt32, UInt32*, HRESULT)).call(fontaxisranges, maxfontaxisrangecount, actualfontaxisrangecount)
+  end
+  def get_font_face_reference2(listindex : UInt32, fontfacereference : IDWriteFontFaceReference1*) : HRESULT
+    @lpVtbl.value.get_font_face_reference2.unsafe_as(Proc(UInt32, IDWriteFontFaceReference1*, HRESULT)).call(listindex, fontfacereference)
+  end
+  def create_font_resource(listindex : UInt32, fontresource : IDWriteFontResource*) : HRESULT
+    @lpVtbl.value.create_font_resource.unsafe_as(Proc(UInt32, IDWriteFontResource*, HRESULT)).call(listindex, fontresource)
+  end
+  def create_font_face(listindex : UInt32, fontface : IDWriteFontFace5*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(UInt32, IDWriteFontFace5*, HRESULT)).call(listindex, fontface)
+  end
+  def get_font_locality(listindex : UInt32) : DWRITE_LOCALITY
+    @lpVtbl.value.get_font_locality.unsafe_as(Proc(UInt32, DWRITE_LOCALITY)).call(listindex)
+  end
+end
+struct LibWin32::IDWriteFontList2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_collection(fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.unsafe_as(Proc(IDWriteFontCollection*, HRESULT)).call(fontcollection)
+  end
+  def get_font_count : UInt32
+    @lpVtbl.value.get_font_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font(index : UInt32, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font.unsafe_as(Proc(UInt32, IDWriteFont*, HRESULT)).call(index, font)
+  end
+  def get_font_locality(listindex : UInt32) : DWRITE_LOCALITY
+    @lpVtbl.value.get_font_locality.unsafe_as(Proc(UInt32, DWRITE_LOCALITY)).call(listindex)
+  end
+  def get_font2(listindex : UInt32, font : IDWriteFont3*) : HRESULT
+    @lpVtbl.value.get_font2.unsafe_as(Proc(UInt32, IDWriteFont3*, HRESULT)).call(listindex, font)
+  end
+  def get_font_face_reference(listindex : UInt32, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.unsafe_as(Proc(UInt32, IDWriteFontFaceReference*, HRESULT)).call(listindex, fontfacereference)
+  end
+  def get_font_set(fontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_font_set.unsafe_as(Proc(IDWriteFontSet1*, HRESULT)).call(fontset)
+  end
+end
+struct LibWin32::IDWriteFontFamily2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_collection(fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.unsafe_as(Proc(IDWriteFontCollection*, HRESULT)).call(fontcollection)
+  end
+  def get_font_count : UInt32
+    @lpVtbl.value.get_font_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font(index : UInt32, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font.unsafe_as(Proc(UInt32, IDWriteFont*, HRESULT)).call(index, font)
+  end
+  def get_family_names(names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_family_names.unsafe_as(Proc(IDWriteLocalizedStrings*, HRESULT)).call(names)
+  end
+  def get_first_matching_font(weight : DWRITE_FONT_WEIGHT, stretch : DWRITE_FONT_STRETCH, style : DWRITE_FONT_STYLE, matchingfont : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_first_matching_font.unsafe_as(Proc(DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFont*, HRESULT)).call(weight, stretch, style, matchingfont)
+  end
+  def get_matching_fonts(weight : DWRITE_FONT_WEIGHT, stretch : DWRITE_FONT_STRETCH, style : DWRITE_FONT_STYLE, matchingfonts : IDWriteFontList*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.unsafe_as(Proc(DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFontList*, HRESULT)).call(weight, stretch, style, matchingfonts)
+  end
+  def get_font_locality(listindex : UInt32) : DWRITE_LOCALITY
+    @lpVtbl.value.get_font_locality.unsafe_as(Proc(UInt32, DWRITE_LOCALITY)).call(listindex)
+  end
+  def get_font2(listindex : UInt32, font : IDWriteFont3*) : HRESULT
+    @lpVtbl.value.get_font2.unsafe_as(Proc(UInt32, IDWriteFont3*, HRESULT)).call(listindex, font)
+  end
+  def get_font_face_reference(listindex : UInt32, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.unsafe_as(Proc(UInt32, IDWriteFontFaceReference*, HRESULT)).call(listindex, fontfacereference)
+  end
+  def get_matching_fonts2(fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, matchingfonts : IDWriteFontList2*) : HRESULT
+    @lpVtbl.value.get_matching_fonts2.unsafe_as(Proc(DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontList2*, HRESULT)).call(fontaxisvalues, fontaxisvaluecount, matchingfonts)
+  end
+  def get_font_set(fontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_font_set.unsafe_as(Proc(IDWriteFontSet1*, HRESULT)).call(fontset)
+  end
+end
+struct LibWin32::IDWriteFontCollection2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family_count : UInt32
+    @lpVtbl.value.get_font_family_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family(index : UInt32, fontfamily : IDWriteFontFamily*) : HRESULT
+    @lpVtbl.value.get_font_family.unsafe_as(Proc(UInt32, IDWriteFontFamily*, HRESULT)).call(index, fontfamily)
+  end
+  def find_family_name(familyname : LibC::LPWSTR, index : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_family_name.unsafe_as(Proc(LibC::LPWSTR, UInt32*, LibC::BOOL*, HRESULT)).call(familyname, index, exists)
+  end
+  def get_font_from_font_face(fontface : IDWriteFontFace, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font_from_font_face.unsafe_as(Proc(IDWriteFontFace, IDWriteFont*, HRESULT)).call(fontface, font)
+  end
+  def get_font_set(fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_font_set.unsafe_as(Proc(IDWriteFontSet*, HRESULT)).call(fontset)
+  end
+  def get_font_family2(index : UInt32, fontfamily : IDWriteFontFamily1*) : HRESULT
+    @lpVtbl.value.get_font_family2.unsafe_as(Proc(UInt32, IDWriteFontFamily1*, HRESULT)).call(index, fontfamily)
+  end
+  def get_font_family3(index : UInt32, fontfamily : IDWriteFontFamily2*) : HRESULT
+    @lpVtbl.value.get_font_family3.unsafe_as(Proc(UInt32, IDWriteFontFamily2*, HRESULT)).call(index, fontfamily)
+  end
+  def get_matching_fonts(familyname : LibC::LPWSTR, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontlist : IDWriteFontList2*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.unsafe_as(Proc(LibC::LPWSTR, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontList2*, HRESULT)).call(familyname, fontaxisvalues, fontaxisvaluecount, fontlist)
+  end
+  def get_font_family_model : DWRITE_FONT_FAMILY_MODEL
+    @lpVtbl.value.get_font_family_model.unsafe_as(Proc(DWRITE_FONT_FAMILY_MODEL)).call
+  end
+  def get_font_set2(fontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_font_set2.unsafe_as(Proc(IDWriteFontSet1*, HRESULT)).call(fontset)
+  end
+end
+struct LibWin32::IDWriteTextLayout4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_text_alignment(textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT, HRESULT)).call(textalignment)
+  end
+  def set_paragraph_alignment(paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)).call(paragraphalignment)
+  end
+  def set_word_wrapping(wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING, HRESULT)).call(wordwrapping)
+  end
+  def set_reading_direction(readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION, HRESULT)).call(readingdirection)
+  end
+  def set_flow_direction(flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION, HRESULT)).call(flowdirection)
+  end
+  def set_incremental_tab_stop(incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.unsafe_as(Proc(Float32, HRESULT)).call(incrementaltabstop)
+  end
+  def set_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT)).call
+  end
+  def get_paragraph_alignment : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT)).call
+  end
+  def get_word_wrapping : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING)).call
+  end
+  def get_reading_direction : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION)).call
+  end
+  def get_flow_direction : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION)).call
+  end
+  def get_incremental_tab_stop : Float32
+    @lpVtbl.value.get_incremental_tab_stop.unsafe_as(Proc(Float32)).call
+  end
+  def get_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.unsafe_as(Proc(IDWriteFontCollection*, HRESULT)).call(fontcollection)
+  end
+  def get_font_family_name_length : UInt32
+    @lpVtbl.value.get_font_family_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family_name(fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(fontfamilyname, namesize)
+  end
+  def get_font_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_font_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def get_font_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_font_size : Float32
+    @lpVtbl.value.get_font_size.unsafe_as(Proc(Float32)).call
+  end
+  def get_locale_name_length : UInt32
+    @lpVtbl.value.get_locale_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_locale_name(localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(localename, namesize)
+  end
+  def set_max_width(maxwidth : Float32) : HRESULT
+    @lpVtbl.value.set_max_width.unsafe_as(Proc(Float32, HRESULT)).call(maxwidth)
+  end
+  def set_max_height(maxheight : Float32) : HRESULT
+    @lpVtbl.value.set_max_height.unsafe_as(Proc(Float32, HRESULT)).call(maxheight)
+  end
+  def set_font_collection(fontcollection : IDWriteFontCollection, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_collection.unsafe_as(Proc(IDWriteFontCollection, DWRITE_TEXT_RANGE, HRESULT)).call(fontcollection, textrange)
+  end
+  def set_font_family_name(fontfamilyname : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_family_name.unsafe_as(Proc(LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)).call(fontfamilyname, textrange)
+  end
+  def set_font_weight(fontweight : DWRITE_FONT_WEIGHT, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT, DWRITE_TEXT_RANGE, HRESULT)).call(fontweight, textrange)
+  end
+  def set_font_style(fontstyle : DWRITE_FONT_STYLE, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_style.unsafe_as(Proc(DWRITE_FONT_STYLE, DWRITE_TEXT_RANGE, HRESULT)).call(fontstyle, textrange)
+  end
+  def set_font_stretch(fontstretch : DWRITE_FONT_STRETCH, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH, DWRITE_TEXT_RANGE, HRESULT)).call(fontstretch, textrange)
+  end
+  def set_font_size(fontsize : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_size.unsafe_as(Proc(Float32, DWRITE_TEXT_RANGE, HRESULT)).call(fontsize, textrange)
+  end
+  def set_underline(hasunderline : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_underline.unsafe_as(Proc(LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)).call(hasunderline, textrange)
+  end
+  def set_strikethrough(hasstrikethrough : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_strikethrough.unsafe_as(Proc(LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)).call(hasstrikethrough, textrange)
+  end
+  def set_drawing_effect(drawingeffect : IUnknown, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_drawing_effect.unsafe_as(Proc(IUnknown, DWRITE_TEXT_RANGE, HRESULT)).call(drawingeffect, textrange)
+  end
+  def set_inline_object(inlineobject : IDWriteInlineObject, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_inline_object.unsafe_as(Proc(IDWriteInlineObject, DWRITE_TEXT_RANGE, HRESULT)).call(inlineobject, textrange)
+  end
+  def set_typography(typography : IDWriteTypography, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_typography.unsafe_as(Proc(IDWriteTypography, DWRITE_TEXT_RANGE, HRESULT)).call(typography, textrange)
+  end
+  def set_locale_name(localename : LibC::LPWSTR, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_locale_name.unsafe_as(Proc(LibC::LPWSTR, DWRITE_TEXT_RANGE, HRESULT)).call(localename, textrange)
+  end
+  def get_max_width : Float32
+    @lpVtbl.value.get_max_width.unsafe_as(Proc(Float32)).call
+  end
+  def get_max_height : Float32
+    @lpVtbl.value.get_max_height.unsafe_as(Proc(Float32)).call
+  end
+  def get_font_collection2(currentposition : UInt32, fontcollection : IDWriteFontCollection*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_collection2.unsafe_as(Proc(UInt32, IDWriteFontCollection*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontcollection, textrange)
+  end
+  def get_font_family_name_length2(currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name_length2.unsafe_as(Proc(UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, namelength, textrange)
+  end
+  def get_font_family_name2(currentposition : UInt32, fontfamilyname : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_family_name2.unsafe_as(Proc(UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontfamilyname, namesize, textrange)
+  end
+  def get_font_weight2(currentposition : UInt32, fontweight : DWRITE_FONT_WEIGHT*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_weight2.unsafe_as(Proc(UInt32, DWRITE_FONT_WEIGHT*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontweight, textrange)
+  end
+  def get_font_style2(currentposition : UInt32, fontstyle : DWRITE_FONT_STYLE*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_style2.unsafe_as(Proc(UInt32, DWRITE_FONT_STYLE*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontstyle, textrange)
+  end
+  def get_font_stretch2(currentposition : UInt32, fontstretch : DWRITE_FONT_STRETCH*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_stretch2.unsafe_as(Proc(UInt32, DWRITE_FONT_STRETCH*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontstretch, textrange)
+  end
+  def get_font_size2(currentposition : UInt32, fontsize : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_size2.unsafe_as(Proc(UInt32, Float32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontsize, textrange)
+  end
+  def get_underline(currentposition : UInt32, hasunderline : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_underline.unsafe_as(Proc(UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, hasunderline, textrange)
+  end
+  def get_strikethrough(currentposition : UInt32, hasstrikethrough : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_strikethrough.unsafe_as(Proc(UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, hasstrikethrough, textrange)
+  end
+  def get_drawing_effect(currentposition : UInt32, drawingeffect : IUnknown*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_drawing_effect.unsafe_as(Proc(UInt32, IUnknown*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, drawingeffect, textrange)
+  end
+  def get_inline_object(currentposition : UInt32, inlineobject : IDWriteInlineObject*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_inline_object.unsafe_as(Proc(UInt32, IDWriteInlineObject*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, inlineobject, textrange)
+  end
+  def get_typography(currentposition : UInt32, typography : IDWriteTypography*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_typography.unsafe_as(Proc(UInt32, IDWriteTypography*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, typography, textrange)
+  end
+  def get_locale_name_length2(currentposition : UInt32, namelength : UInt32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name_length2.unsafe_as(Proc(UInt32, UInt32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, namelength, textrange)
+  end
+  def get_locale_name2(currentposition : UInt32, localename : Char*, namesize : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_locale_name2.unsafe_as(Proc(UInt32, Char*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, localename, namesize, textrange)
+  end
+  def draw(clientdrawingcontext : Void*, renderer : IDWriteTextRenderer, originx : Float32, originy : Float32) : HRESULT
+    @lpVtbl.value.draw.unsafe_as(Proc(Void*, IDWriteTextRenderer, Float32, Float32, HRESULT)).call(clientdrawingcontext, renderer, originx, originy)
+  end
+  def get_line_metrics(linemetrics : DWRITE_LINE_METRICS*, maxlinecount : UInt32, actuallinecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_metrics.unsafe_as(Proc(DWRITE_LINE_METRICS*, UInt32, UInt32*, HRESULT)).call(linemetrics, maxlinecount, actuallinecount)
+  end
+  def get_metrics(textmetrics : DWRITE_TEXT_METRICS*) : HRESULT
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_TEXT_METRICS*, HRESULT)).call(textmetrics)
+  end
+  def get_overhang_metrics(overhangs : DWRITE_OVERHANG_METRICS*) : HRESULT
+    @lpVtbl.value.get_overhang_metrics.unsafe_as(Proc(DWRITE_OVERHANG_METRICS*, HRESULT)).call(overhangs)
+  end
+  def get_cluster_metrics(clustermetrics : DWRITE_CLUSTER_METRICS*, maxclustercount : UInt32, actualclustercount : UInt32*) : HRESULT
+    @lpVtbl.value.get_cluster_metrics.unsafe_as(Proc(DWRITE_CLUSTER_METRICS*, UInt32, UInt32*, HRESULT)).call(clustermetrics, maxclustercount, actualclustercount)
+  end
+  def determine_min_width(minwidth : Float32*) : HRESULT
+    @lpVtbl.value.determine_min_width.unsafe_as(Proc(Float32*, HRESULT)).call(minwidth)
+  end
+  def hit_test_point(pointx : Float32, pointy : Float32, istrailinghit : LibC::BOOL*, isinside : LibC::BOOL*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_point.unsafe_as(Proc(Float32, Float32, LibC::BOOL*, LibC::BOOL*, DWRITE_HIT_TEST_METRICS*, HRESULT)).call(pointx, pointy, istrailinghit, isinside, hittestmetrics)
+  end
+  def hit_test_text_position(textposition : UInt32, istrailinghit : LibC::BOOL, pointx : Float32*, pointy : Float32*, hittestmetrics : DWRITE_HIT_TEST_METRICS*) : HRESULT
+    @lpVtbl.value.hit_test_text_position.unsafe_as(Proc(UInt32, LibC::BOOL, Float32*, Float32*, DWRITE_HIT_TEST_METRICS*, HRESULT)).call(textposition, istrailinghit, pointx, pointy, hittestmetrics)
+  end
+  def hit_test_text_range(textposition : UInt32, textlength : UInt32, originx : Float32, originy : Float32, hittestmetrics : DWRITE_HIT_TEST_METRICS*, maxhittestmetricscount : UInt32, actualhittestmetricscount : UInt32*) : HRESULT
+    @lpVtbl.value.hit_test_text_range.unsafe_as(Proc(UInt32, UInt32, Float32, Float32, DWRITE_HIT_TEST_METRICS*, UInt32, UInt32*, HRESULT)).call(textposition, textlength, originx, originy, hittestmetrics, maxhittestmetricscount, actualhittestmetricscount)
+  end
+  def set_pair_kerning(ispairkerningenabled : LibC::BOOL, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_pair_kerning.unsafe_as(Proc(LibC::BOOL, DWRITE_TEXT_RANGE, HRESULT)).call(ispairkerningenabled, textrange)
+  end
+  def get_pair_kerning(currentposition : UInt32, ispairkerningenabled : LibC::BOOL*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_pair_kerning.unsafe_as(Proc(UInt32, LibC::BOOL*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, ispairkerningenabled, textrange)
+  end
+  def set_character_spacing(leadingspacing : Float32, trailingspacing : Float32, minimumadvancewidth : Float32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_character_spacing.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_TEXT_RANGE, HRESULT)).call(leadingspacing, trailingspacing, minimumadvancewidth, textrange)
+  end
+  def get_character_spacing(currentposition : UInt32, leadingspacing : Float32*, trailingspacing : Float32*, minimumadvancewidth : Float32*, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_character_spacing.unsafe_as(Proc(UInt32, Float32*, Float32*, Float32*, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, leadingspacing, trailingspacing, minimumadvancewidth, textrange)
+  end
+  def get_metrics2(textmetrics : DWRITE_TEXT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_metrics2.unsafe_as(Proc(DWRITE_TEXT_METRICS1*, HRESULT)).call(textmetrics)
+  end
+  def set_vertical_glyph_orientation(glyphorientation : DWRITE_VERTICAL_GLYPH_ORIENTATION) : HRESULT
+    @lpVtbl.value.set_vertical_glyph_orientation.unsafe_as(Proc(DWRITE_VERTICAL_GLYPH_ORIENTATION, HRESULT)).call(glyphorientation)
+  end
+  def get_vertical_glyph_orientation : DWRITE_VERTICAL_GLYPH_ORIENTATION
+    @lpVtbl.value.get_vertical_glyph_orientation.unsafe_as(Proc(DWRITE_VERTICAL_GLYPH_ORIENTATION)).call
+  end
+  def set_last_line_wrapping(islastlinewrappingenabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_line_wrapping.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(islastlinewrappingenabled)
+  end
+  def get_last_line_wrapping : LibC::BOOL
+    @lpVtbl.value.get_last_line_wrapping.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def set_optical_alignment(opticalalignment : DWRITE_OPTICAL_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_optical_alignment.unsafe_as(Proc(DWRITE_OPTICAL_ALIGNMENT, HRESULT)).call(opticalalignment)
+  end
+  def get_optical_alignment : DWRITE_OPTICAL_ALIGNMENT
+    @lpVtbl.value.get_optical_alignment.unsafe_as(Proc(DWRITE_OPTICAL_ALIGNMENT)).call
+  end
+  def set_font_fallback(fontfallback : IDWriteFontFallback) : HRESULT
+    @lpVtbl.value.set_font_fallback.unsafe_as(Proc(IDWriteFontFallback, HRESULT)).call(fontfallback)
+  end
+  def get_font_fallback(fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_font_fallback.unsafe_as(Proc(IDWriteFontFallback*, HRESULT)).call(fontfallback)
+  end
+  def invalidate_layout : HRESULT
+    @lpVtbl.value.invalidate_layout.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_line_spacing2(linespacingoptions : DWRITE_LINE_SPACING*) : HRESULT
+    @lpVtbl.value.set_line_spacing2.unsafe_as(Proc(DWRITE_LINE_SPACING*, HRESULT)).call(linespacingoptions)
+  end
+  def get_line_spacing2(linespacingoptions : DWRITE_LINE_SPACING*) : HRESULT
+    @lpVtbl.value.get_line_spacing2.unsafe_as(Proc(DWRITE_LINE_SPACING*, HRESULT)).call(linespacingoptions)
+  end
+  def get_line_metrics2(linemetrics : DWRITE_LINE_METRICS1*, maxlinecount : UInt32, actuallinecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_metrics2.unsafe_as(Proc(DWRITE_LINE_METRICS1*, UInt32, UInt32*, HRESULT)).call(linemetrics, maxlinecount, actuallinecount)
+  end
+  def set_font_axis_values(fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, textrange : DWRITE_TEXT_RANGE) : HRESULT
+    @lpVtbl.value.set_font_axis_values.unsafe_as(Proc(DWRITE_FONT_AXIS_VALUE*, UInt32, DWRITE_TEXT_RANGE, HRESULT)).call(fontaxisvalues, fontaxisvaluecount, textrange)
+  end
+  def get_font_axis_value_count(currentposition : UInt32) : UInt32
+    @lpVtbl.value.get_font_axis_value_count.unsafe_as(Proc(UInt32, UInt32)).call(currentposition)
+  end
+  def get_font_axis_values(currentposition : UInt32, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, textrange : DWRITE_TEXT_RANGE*) : HRESULT
+    @lpVtbl.value.get_font_axis_values.unsafe_as(Proc(UInt32, DWRITE_FONT_AXIS_VALUE*, UInt32, DWRITE_TEXT_RANGE*, HRESULT)).call(currentposition, fontaxisvalues, fontaxisvaluecount, textrange)
+  end
+  def get_automatic_font_axes : DWRITE_AUTOMATIC_FONT_AXES
+    @lpVtbl.value.get_automatic_font_axes.unsafe_as(Proc(DWRITE_AUTOMATIC_FONT_AXES)).call
+  end
+  def set_automatic_font_axes(automaticfontaxes : DWRITE_AUTOMATIC_FONT_AXES) : HRESULT
+    @lpVtbl.value.set_automatic_font_axes.unsafe_as(Proc(DWRITE_AUTOMATIC_FONT_AXES, HRESULT)).call(automaticfontaxes)
+  end
+end
+struct LibWin32::IDWriteTextFormat3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_text_alignment(textalignment : DWRITE_TEXT_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT, HRESULT)).call(textalignment)
+  end
+  def set_paragraph_alignment(paragraphalignment : DWRITE_PARAGRAPH_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT, HRESULT)).call(paragraphalignment)
+  end
+  def set_word_wrapping(wordwrapping : DWRITE_WORD_WRAPPING) : HRESULT
+    @lpVtbl.value.set_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING, HRESULT)).call(wordwrapping)
+  end
+  def set_reading_direction(readingdirection : DWRITE_READING_DIRECTION) : HRESULT
+    @lpVtbl.value.set_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION, HRESULT)).call(readingdirection)
+  end
+  def set_flow_direction(flowdirection : DWRITE_FLOW_DIRECTION) : HRESULT
+    @lpVtbl.value.set_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION, HRESULT)).call(flowdirection)
+  end
+  def set_incremental_tab_stop(incrementaltabstop : Float32) : HRESULT
+    @lpVtbl.value.set_incremental_tab_stop.unsafe_as(Proc(Float32, HRESULT)).call(incrementaltabstop)
+  end
+  def set_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject) : HRESULT
+    @lpVtbl.value.set_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def set_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD, linespacing : Float32, baseline : Float32) : HRESULT
+    @lpVtbl.value.set_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD, Float32, Float32, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_text_alignment : DWRITE_TEXT_ALIGNMENT
+    @lpVtbl.value.get_text_alignment.unsafe_as(Proc(DWRITE_TEXT_ALIGNMENT)).call
+  end
+  def get_paragraph_alignment : DWRITE_PARAGRAPH_ALIGNMENT
+    @lpVtbl.value.get_paragraph_alignment.unsafe_as(Proc(DWRITE_PARAGRAPH_ALIGNMENT)).call
+  end
+  def get_word_wrapping : DWRITE_WORD_WRAPPING
+    @lpVtbl.value.get_word_wrapping.unsafe_as(Proc(DWRITE_WORD_WRAPPING)).call
+  end
+  def get_reading_direction : DWRITE_READING_DIRECTION
+    @lpVtbl.value.get_reading_direction.unsafe_as(Proc(DWRITE_READING_DIRECTION)).call
+  end
+  def get_flow_direction : DWRITE_FLOW_DIRECTION
+    @lpVtbl.value.get_flow_direction.unsafe_as(Proc(DWRITE_FLOW_DIRECTION)).call
+  end
+  def get_incremental_tab_stop : Float32
+    @lpVtbl.value.get_incremental_tab_stop.unsafe_as(Proc(Float32)).call
+  end
+  def get_trimming(trimmingoptions : DWRITE_TRIMMING*, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.get_trimming.unsafe_as(Proc(DWRITE_TRIMMING*, IDWriteInlineObject*, HRESULT)).call(trimmingoptions, trimmingsign)
+  end
+  def get_line_spacing(linespacingmethod : DWRITE_LINE_SPACING_METHOD*, linespacing : Float32*, baseline : Float32*) : HRESULT
+    @lpVtbl.value.get_line_spacing.unsafe_as(Proc(DWRITE_LINE_SPACING_METHOD*, Float32*, Float32*, HRESULT)).call(linespacingmethod, linespacing, baseline)
+  end
+  def get_font_collection(fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.get_font_collection.unsafe_as(Proc(IDWriteFontCollection*, HRESULT)).call(fontcollection)
+  end
+  def get_font_family_name_length : UInt32
+    @lpVtbl.value.get_font_family_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family_name(fontfamilyname : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_family_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(fontfamilyname, namesize)
+  end
+  def get_font_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_font_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_font_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_font_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def get_font_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_font_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_font_size : Float32
+    @lpVtbl.value.get_font_size.unsafe_as(Proc(Float32)).call
+  end
+  def get_locale_name_length : UInt32
+    @lpVtbl.value.get_locale_name_length.unsafe_as(Proc(UInt32)).call
+  end
+  def get_locale_name(localename : Char*, namesize : UInt32) : HRESULT
+    @lpVtbl.value.get_locale_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(localename, namesize)
+  end
+  def set_vertical_glyph_orientation(glyphorientation : DWRITE_VERTICAL_GLYPH_ORIENTATION) : HRESULT
+    @lpVtbl.value.set_vertical_glyph_orientation.unsafe_as(Proc(DWRITE_VERTICAL_GLYPH_ORIENTATION, HRESULT)).call(glyphorientation)
+  end
+  def get_vertical_glyph_orientation : DWRITE_VERTICAL_GLYPH_ORIENTATION
+    @lpVtbl.value.get_vertical_glyph_orientation.unsafe_as(Proc(DWRITE_VERTICAL_GLYPH_ORIENTATION)).call
+  end
+  def set_last_line_wrapping(islastlinewrappingenabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_line_wrapping.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(islastlinewrappingenabled)
+  end
+  def get_last_line_wrapping : LibC::BOOL
+    @lpVtbl.value.get_last_line_wrapping.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def set_optical_alignment(opticalalignment : DWRITE_OPTICAL_ALIGNMENT) : HRESULT
+    @lpVtbl.value.set_optical_alignment.unsafe_as(Proc(DWRITE_OPTICAL_ALIGNMENT, HRESULT)).call(opticalalignment)
+  end
+  def get_optical_alignment : DWRITE_OPTICAL_ALIGNMENT
+    @lpVtbl.value.get_optical_alignment.unsafe_as(Proc(DWRITE_OPTICAL_ALIGNMENT)).call
+  end
+  def set_font_fallback(fontfallback : IDWriteFontFallback) : HRESULT
+    @lpVtbl.value.set_font_fallback.unsafe_as(Proc(IDWriteFontFallback, HRESULT)).call(fontfallback)
+  end
+  def get_font_fallback(fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_font_fallback.unsafe_as(Proc(IDWriteFontFallback*, HRESULT)).call(fontfallback)
+  end
+  def set_line_spacing2(linespacingoptions : DWRITE_LINE_SPACING*) : HRESULT
+    @lpVtbl.value.set_line_spacing2.unsafe_as(Proc(DWRITE_LINE_SPACING*, HRESULT)).call(linespacingoptions)
+  end
+  def get_line_spacing2(linespacingoptions : DWRITE_LINE_SPACING*) : HRESULT
+    @lpVtbl.value.get_line_spacing2.unsafe_as(Proc(DWRITE_LINE_SPACING*, HRESULT)).call(linespacingoptions)
+  end
+  def set_font_axis_values(fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32) : HRESULT
+    @lpVtbl.value.set_font_axis_values.unsafe_as(Proc(DWRITE_FONT_AXIS_VALUE*, UInt32, HRESULT)).call(fontaxisvalues, fontaxisvaluecount)
+  end
+  def get_font_axis_value_count : UInt32
+    @lpVtbl.value.get_font_axis_value_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_axis_values(fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32) : HRESULT
+    @lpVtbl.value.get_font_axis_values.unsafe_as(Proc(DWRITE_FONT_AXIS_VALUE*, UInt32, HRESULT)).call(fontaxisvalues, fontaxisvaluecount)
+  end
+  def get_automatic_font_axes : DWRITE_AUTOMATIC_FONT_AXES
+    @lpVtbl.value.get_automatic_font_axes.unsafe_as(Proc(DWRITE_AUTOMATIC_FONT_AXES)).call
+  end
+  def set_automatic_font_axes(automaticfontaxes : DWRITE_AUTOMATIC_FONT_AXES) : HRESULT
+    @lpVtbl.value.set_automatic_font_axes.unsafe_as(Proc(DWRITE_AUTOMATIC_FONT_AXES, HRESULT)).call(automaticfontaxes)
+  end
+end
+struct LibWin32::IDWriteFontFallback1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def map_characters(analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, basefontcollection : IDWriteFontCollection, basefamilyname : LibC::LPWSTR, baseweight : DWRITE_FONT_WEIGHT, basestyle : DWRITE_FONT_STYLE, basestretch : DWRITE_FONT_STRETCH, mappedlength : UInt32*, mappedfont : IDWriteFont*, scale : Float32*) : HRESULT
+    @lpVtbl.value.map_characters.unsafe_as(Proc(IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteFontCollection, LibC::LPWSTR, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, UInt32*, IDWriteFont*, Float32*, HRESULT)).call(analysissource, textposition, textlength, basefontcollection, basefamilyname, baseweight, basestyle, basestretch, mappedlength, mappedfont, scale)
+  end
+  def map_characters2(analysissource : IDWriteTextAnalysisSource, textposition : UInt32, textlength : UInt32, basefontcollection : IDWriteFontCollection, basefamilyname : LibC::LPWSTR, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, mappedlength : UInt32*, scale : Float32*, mappedfontface : IDWriteFontFace5*) : HRESULT
+    @lpVtbl.value.map_characters2.unsafe_as(Proc(IDWriteTextAnalysisSource, UInt32, UInt32, IDWriteFontCollection, LibC::LPWSTR, DWRITE_FONT_AXIS_VALUE*, UInt32, UInt32*, Float32*, IDWriteFontFace5*, HRESULT)).call(analysissource, textposition, textlength, basefontcollection, basefamilyname, fontaxisvalues, fontaxisvaluecount, mappedlength, scale, mappedfontface)
+  end
+end
+struct LibWin32::IDWriteFontSet2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_count : UInt32
+    @lpVtbl.value.get_font_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_face_reference(listindex : UInt32, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.unsafe_as(Proc(UInt32, IDWriteFontFaceReference*, HRESULT)).call(listindex, fontfacereference)
+  end
+  def find_font_face_reference(fontfacereference : IDWriteFontFaceReference, listindex : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_font_face_reference.unsafe_as(Proc(IDWriteFontFaceReference, UInt32*, LibC::BOOL*, HRESULT)).call(fontfacereference, listindex, exists)
+  end
+  def find_font_face(fontface : IDWriteFontFace, listindex : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_font_face.unsafe_as(Proc(IDWriteFontFace, UInt32*, LibC::BOOL*, HRESULT)).call(fontface, listindex, exists)
+  end
+  def get_property_values(propertyid : DWRITE_FONT_PROPERTY_ID, values : IDWriteStringList*) : HRESULT
+    @lpVtbl.value.get_property_values.unsafe_as(Proc(DWRITE_FONT_PROPERTY_ID, IDWriteStringList*, HRESULT)).call(propertyid, values)
+  end
+  def get_property_values2(propertyid : DWRITE_FONT_PROPERTY_ID, preferredlocalenames : LibC::LPWSTR, values : IDWriteStringList*) : HRESULT
+    @lpVtbl.value.get_property_values2.unsafe_as(Proc(DWRITE_FONT_PROPERTY_ID, LibC::LPWSTR, IDWriteStringList*, HRESULT)).call(propertyid, preferredlocalenames, values)
+  end
+  def get_property_values3(listindex : UInt32, propertyid : DWRITE_FONT_PROPERTY_ID, exists : LibC::BOOL*, values : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_property_values3.unsafe_as(Proc(UInt32, DWRITE_FONT_PROPERTY_ID, LibC::BOOL*, IDWriteLocalizedStrings*, HRESULT)).call(listindex, propertyid, exists, values)
+  end
+  def get_property_occurrence_count(property : DWRITE_FONT_PROPERTY*, propertyoccurrencecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_occurrence_count.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, UInt32*, HRESULT)).call(property, propertyoccurrencecount)
+  end
+  def get_matching_fonts(familyname : LibC::LPWSTR, fontweight : DWRITE_FONT_WEIGHT, fontstretch : DWRITE_FONT_STRETCH, fontstyle : DWRITE_FONT_STYLE, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.unsafe_as(Proc(LibC::LPWSTR, DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFontSet*, HRESULT)).call(familyname, fontweight, fontstretch, fontstyle, filteredset)
+  end
+  def get_matching_fonts2(properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts2.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, UInt32, IDWriteFontSet*, HRESULT)).call(properties, propertycount, filteredset)
+  end
+  def get_matching_fonts3(fontproperty : DWRITE_FONT_PROPERTY*, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, matchingfonts : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_matching_fonts3.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontSet1*, HRESULT)).call(fontproperty, fontaxisvalues, fontaxisvaluecount, matchingfonts)
+  end
+  def get_first_font_resources(filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_first_font_resources.unsafe_as(Proc(IDWriteFontSet1*, HRESULT)).call(filteredfontset)
+  end
+  def get_filtered_fonts(indices : UInt32*, indexcount : UInt32, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts.unsafe_as(Proc(UInt32*, UInt32, IDWriteFontSet1*, HRESULT)).call(indices, indexcount, filteredfontset)
+  end
+  def get_filtered_fonts2(fontaxisranges : DWRITE_FONT_AXIS_RANGE*, fontaxisrangecount : UInt32, selectanyrange : LibC::BOOL, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts2.unsafe_as(Proc(DWRITE_FONT_AXIS_RANGE*, UInt32, LibC::BOOL, IDWriteFontSet1*, HRESULT)).call(fontaxisranges, fontaxisrangecount, selectanyrange, filteredfontset)
+  end
+  def get_filtered_fonts3(properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, selectanyproperty : LibC::BOOL, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts3.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, UInt32, LibC::BOOL, IDWriteFontSet1*, HRESULT)).call(properties, propertycount, selectanyproperty, filteredfontset)
+  end
+  def get_filtered_font_indices(fontaxisranges : DWRITE_FONT_AXIS_RANGE*, fontaxisrangecount : UInt32, selectanyrange : LibC::BOOL, indices : UInt32*, maxindexcount : UInt32, actualindexcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_filtered_font_indices.unsafe_as(Proc(DWRITE_FONT_AXIS_RANGE*, UInt32, LibC::BOOL, UInt32*, UInt32, UInt32*, HRESULT)).call(fontaxisranges, fontaxisrangecount, selectanyrange, indices, maxindexcount, actualindexcount)
+  end
+  def get_filtered_font_indices2(properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, selectanyproperty : LibC::BOOL, indices : UInt32*, maxindexcount : UInt32, actualindexcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_filtered_font_indices2.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, UInt32, LibC::BOOL, UInt32*, UInt32, UInt32*, HRESULT)).call(properties, propertycount, selectanyproperty, indices, maxindexcount, actualindexcount)
+  end
+  def get_font_axis_ranges(listindex : UInt32, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, maxfontaxisrangecount : UInt32, actualfontaxisrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_font_axis_ranges.unsafe_as(Proc(UInt32, DWRITE_FONT_AXIS_RANGE*, UInt32, UInt32*, HRESULT)).call(listindex, fontaxisranges, maxfontaxisrangecount, actualfontaxisrangecount)
+  end
+  def get_font_axis_ranges2(fontaxisranges : DWRITE_FONT_AXIS_RANGE*, maxfontaxisrangecount : UInt32, actualfontaxisrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_font_axis_ranges2.unsafe_as(Proc(DWRITE_FONT_AXIS_RANGE*, UInt32, UInt32*, HRESULT)).call(fontaxisranges, maxfontaxisrangecount, actualfontaxisrangecount)
+  end
+  def get_font_face_reference2(listindex : UInt32, fontfacereference : IDWriteFontFaceReference1*) : HRESULT
+    @lpVtbl.value.get_font_face_reference2.unsafe_as(Proc(UInt32, IDWriteFontFaceReference1*, HRESULT)).call(listindex, fontfacereference)
+  end
+  def create_font_resource(listindex : UInt32, fontresource : IDWriteFontResource*) : HRESULT
+    @lpVtbl.value.create_font_resource.unsafe_as(Proc(UInt32, IDWriteFontResource*, HRESULT)).call(listindex, fontresource)
+  end
+  def create_font_face(listindex : UInt32, fontface : IDWriteFontFace5*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(UInt32, IDWriteFontFace5*, HRESULT)).call(listindex, fontface)
+  end
+  def get_font_locality(listindex : UInt32) : DWRITE_LOCALITY
+    @lpVtbl.value.get_font_locality.unsafe_as(Proc(UInt32, DWRITE_LOCALITY)).call(listindex)
+  end
+  def get_expiration_event : LibC::HANDLE
+    @lpVtbl.value.get_expiration_event.unsafe_as(Proc(LibC::HANDLE)).call
+  end
+end
+struct LibWin32::IDWriteFontCollection3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family_count : UInt32
+    @lpVtbl.value.get_font_family_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_family(index : UInt32, fontfamily : IDWriteFontFamily*) : HRESULT
+    @lpVtbl.value.get_font_family.unsafe_as(Proc(UInt32, IDWriteFontFamily*, HRESULT)).call(index, fontfamily)
+  end
+  def find_family_name(familyname : LibC::LPWSTR, index : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_family_name.unsafe_as(Proc(LibC::LPWSTR, UInt32*, LibC::BOOL*, HRESULT)).call(familyname, index, exists)
+  end
+  def get_font_from_font_face(fontface : IDWriteFontFace, font : IDWriteFont*) : HRESULT
+    @lpVtbl.value.get_font_from_font_face.unsafe_as(Proc(IDWriteFontFace, IDWriteFont*, HRESULT)).call(fontface, font)
+  end
+  def get_font_set(fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_font_set.unsafe_as(Proc(IDWriteFontSet*, HRESULT)).call(fontset)
+  end
+  def get_font_family2(index : UInt32, fontfamily : IDWriteFontFamily1*) : HRESULT
+    @lpVtbl.value.get_font_family2.unsafe_as(Proc(UInt32, IDWriteFontFamily1*, HRESULT)).call(index, fontfamily)
+  end
+  def get_font_family3(index : UInt32, fontfamily : IDWriteFontFamily2*) : HRESULT
+    @lpVtbl.value.get_font_family3.unsafe_as(Proc(UInt32, IDWriteFontFamily2*, HRESULT)).call(index, fontfamily)
+  end
+  def get_matching_fonts(familyname : LibC::LPWSTR, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontlist : IDWriteFontList2*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.unsafe_as(Proc(LibC::LPWSTR, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontList2*, HRESULT)).call(familyname, fontaxisvalues, fontaxisvaluecount, fontlist)
+  end
+  def get_font_family_model : DWRITE_FONT_FAMILY_MODEL
+    @lpVtbl.value.get_font_family_model.unsafe_as(Proc(DWRITE_FONT_FAMILY_MODEL)).call
+  end
+  def get_font_set2(fontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_font_set2.unsafe_as(Proc(IDWriteFontSet1*, HRESULT)).call(fontset)
+  end
+  def get_expiration_event : LibC::HANDLE
+    @lpVtbl.value.get_expiration_event.unsafe_as(Proc(LibC::HANDLE)).call
+  end
+end
+struct LibWin32::IDWriteFactory7
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_system_font_collection(fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection.unsafe_as(Proc(IDWriteFontCollection*, LibC::BOOL, HRESULT)).call(fontcollection, checkforupdates)
+  end
+  def create_custom_font_collection(collectionloader : IDWriteFontCollectionLoader, collectionkey : Void*, collectionkeysize : UInt32, fontcollection : IDWriteFontCollection*) : HRESULT
+    @lpVtbl.value.create_custom_font_collection.unsafe_as(Proc(IDWriteFontCollectionLoader, Void*, UInt32, IDWriteFontCollection*, HRESULT)).call(collectionloader, collectionkey, collectionkeysize, fontcollection)
+  end
+  def register_font_collection_loader(fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.register_font_collection_loader.unsafe_as(Proc(IDWriteFontCollectionLoader, HRESULT)).call(fontcollectionloader)
+  end
+  def unregister_font_collection_loader(fontcollectionloader : IDWriteFontCollectionLoader) : HRESULT
+    @lpVtbl.value.unregister_font_collection_loader.unsafe_as(Proc(IDWriteFontCollectionLoader, HRESULT)).call(fontcollectionloader)
+  end
+  def create_font_file_reference(filepath : LibC::LPWSTR, lastwritetime : FILETIME*, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_font_file_reference.unsafe_as(Proc(LibC::LPWSTR, FILETIME*, IDWriteFontFile*, HRESULT)).call(filepath, lastwritetime, fontfile)
+  end
+  def create_custom_font_file_reference(fontfilereferencekey : Void*, fontfilereferencekeysize : UInt32, fontfileloader : IDWriteFontFileLoader, fontfile : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.create_custom_font_file_reference.unsafe_as(Proc(Void*, UInt32, IDWriteFontFileLoader, IDWriteFontFile*, HRESULT)).call(fontfilereferencekey, fontfilereferencekeysize, fontfileloader, fontfile)
+  end
+  def create_font_face(fontfacetype : DWRITE_FONT_FACE_TYPE, numberoffiles : UInt32, fontfiles : IDWriteFontFile*, faceindex : UInt32, fontfacesimulationflags : DWRITE_FONT_SIMULATIONS, fontface : IDWriteFontFace*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(DWRITE_FONT_FACE_TYPE, UInt32, IDWriteFontFile*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFace*, HRESULT)).call(fontfacetype, numberoffiles, fontfiles, faceindex, fontfacesimulationflags, fontface)
+  end
+  def create_rendering_params(renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_rendering_params.unsafe_as(Proc(IDWriteRenderingParams*, HRESULT)).call(renderingparams)
+  end
+  def create_monitor_rendering_params(monitor : HMONITOR, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_monitor_rendering_params.unsafe_as(Proc(HMONITOR, IDWriteRenderingParams*, HRESULT)).call(monitor, renderingparams)
+  end
+  def create_custom_rendering_params(gamma : Float32, enhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams*, HRESULT)).call(gamma, enhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def register_font_file_loader(fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.register_font_file_loader.unsafe_as(Proc(IDWriteFontFileLoader, HRESULT)).call(fontfileloader)
+  end
+  def unregister_font_file_loader(fontfileloader : IDWriteFontFileLoader) : HRESULT
+    @lpVtbl.value.unregister_font_file_loader.unsafe_as(Proc(IDWriteFontFileLoader, HRESULT)).call(fontfileloader)
+  end
+  def create_text_format(fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontweight : DWRITE_FONT_WEIGHT, fontstyle : DWRITE_FONT_STYLE, fontstretch : DWRITE_FONT_STRETCH, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat*) : HRESULT
+    @lpVtbl.value.create_text_format.unsafe_as(Proc(LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_WEIGHT, DWRITE_FONT_STYLE, DWRITE_FONT_STRETCH, Float32, LibC::LPWSTR, IDWriteTextFormat*, HRESULT)).call(fontfamilyname, fontcollection, fontweight, fontstyle, fontstretch, fontsize, localename, textformat)
+  end
+  def create_typography(typography : IDWriteTypography*) : HRESULT
+    @lpVtbl.value.create_typography.unsafe_as(Proc(IDWriteTypography*, HRESULT)).call(typography)
+  end
+  def get_gdi_interop(gdiinterop : IDWriteGdiInterop*) : HRESULT
+    @lpVtbl.value.get_gdi_interop.unsafe_as(Proc(IDWriteGdiInterop*, HRESULT)).call(gdiinterop)
+  end
+  def create_text_layout(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, maxwidth : Float32, maxheight : Float32, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_text_layout.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, Float32, Float32, IDWriteTextLayout*, HRESULT)).call(string, stringlength, textformat, maxwidth, maxheight, textlayout)
+  end
+  def create_gdi_compatible_text_layout(string : Char*, stringlength : UInt32, textformat : IDWriteTextFormat, layoutwidth : Float32, layoutheight : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, textlayout : IDWriteTextLayout*) : HRESULT
+    @lpVtbl.value.create_gdi_compatible_text_layout.unsafe_as(Proc(Char*, UInt32, IDWriteTextFormat, Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, IDWriteTextLayout*, HRESULT)).call(string, stringlength, textformat, layoutwidth, layoutheight, pixelsperdip, transform, usegdinatural, textlayout)
+  end
+  def create_ellipsis_trimming_sign(textformat : IDWriteTextFormat, trimmingsign : IDWriteInlineObject*) : HRESULT
+    @lpVtbl.value.create_ellipsis_trimming_sign.unsafe_as(Proc(IDWriteTextFormat, IDWriteInlineObject*, HRESULT)).call(textformat, trimmingsign)
+  end
+  def create_text_analyzer(textanalyzer : IDWriteTextAnalyzer*) : HRESULT
+    @lpVtbl.value.create_text_analyzer.unsafe_as(Proc(IDWriteTextAnalyzer*, HRESULT)).call(textanalyzer)
+  end
+  def create_number_substitution(substitutionmethod : DWRITE_NUMBER_SUBSTITUTION_METHOD, localename : LibC::LPWSTR, ignoreuseroverride : LibC::BOOL, numbersubstitution : IDWriteNumberSubstitution*) : HRESULT
+    @lpVtbl.value.create_number_substitution.unsafe_as(Proc(DWRITE_NUMBER_SUBSTITUTION_METHOD, LibC::LPWSTR, LibC::BOOL, IDWriteNumberSubstitution*, HRESULT)).call(substitutionmethod, localename, ignoreuseroverride, numbersubstitution)
+  end
+  def create_glyph_run_analysis(glyphrun : DWRITE_GLYPH_RUN*, pixelsperdip : Float32, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis.unsafe_as(Proc(DWRITE_GLYPH_RUN*, Float32, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, pixelsperdip, transform, renderingmode, measuringmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def get_eudc_font_collection(fontcollection : IDWriteFontCollection*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_eudc_font_collection.unsafe_as(Proc(IDWriteFontCollection*, LibC::BOOL, HRESULT)).call(fontcollection, checkforupdates)
+  end
+  def create_custom_rendering_params2(gamma : Float32, enhancedcontrast : Float32, enhancedcontrastgrayscale : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, renderingparams : IDWriteRenderingParams1*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params2.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, IDWriteRenderingParams1*, HRESULT)).call(gamma, enhancedcontrast, enhancedcontrastgrayscale, cleartypelevel, pixelgeometry, renderingmode, renderingparams)
+  end
+  def get_system_font_fallback(fontfallback : IDWriteFontFallback*) : HRESULT
+    @lpVtbl.value.get_system_font_fallback.unsafe_as(Proc(IDWriteFontFallback*, HRESULT)).call(fontfallback)
+  end
+  def create_font_fallback_builder(fontfallbackbuilder : IDWriteFontFallbackBuilder*) : HRESULT
+    @lpVtbl.value.create_font_fallback_builder.unsafe_as(Proc(IDWriteFontFallbackBuilder*, HRESULT)).call(fontfallbackbuilder)
+  end
+  def translate_color_glyph_run(baselineoriginx : Float32, baselineoriginy : Float32, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, measuringmode : DWRITE_MEASURING_MODE, worldtodevicetransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run.unsafe_as(Proc(Float32, Float32, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator*, HRESULT)).call(baselineoriginx, baselineoriginy, glyphrun, glyphrundescription, measuringmode, worldtodevicetransform, colorpaletteindex, colorlayers)
+  end
+  def create_custom_rendering_params3(gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams2*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params3.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams2*, HRESULT)).call(gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_glyph_run_analysis2(glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis2.unsafe_as(Proc(DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_glyph_run_analysis3(glyphrun : DWRITE_GLYPH_RUN*, transform : DWRITE_MATRIX*, renderingmode : DWRITE_RENDERING_MODE1, measuringmode : DWRITE_MEASURING_MODE, gridfitmode : DWRITE_GRID_FIT_MODE, antialiasmode : DWRITE_TEXT_ANTIALIAS_MODE, baselineoriginx : Float32, baselineoriginy : Float32, glyphrunanalysis : IDWriteGlyphRunAnalysis*) : HRESULT
+    @lpVtbl.value.create_glyph_run_analysis3.unsafe_as(Proc(DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE1, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Float32, Float32, IDWriteGlyphRunAnalysis*, HRESULT)).call(glyphrun, transform, renderingmode, measuringmode, gridfitmode, antialiasmode, baselineoriginx, baselineoriginy, glyphrunanalysis)
+  end
+  def create_custom_rendering_params4(gamma : Float32, enhancedcontrast : Float32, grayscaleenhancedcontrast : Float32, cleartypelevel : Float32, pixelgeometry : DWRITE_PIXEL_GEOMETRY, renderingmode : DWRITE_RENDERING_MODE1, gridfitmode : DWRITE_GRID_FIT_MODE, renderingparams : IDWriteRenderingParams3*) : HRESULT
+    @lpVtbl.value.create_custom_rendering_params4.unsafe_as(Proc(Float32, Float32, Float32, Float32, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE1, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams3*, HRESULT)).call(gamma, enhancedcontrast, grayscaleenhancedcontrast, cleartypelevel, pixelgeometry, renderingmode, gridfitmode, renderingparams)
+  end
+  def create_font_face_reference(fontfile : IDWriteFontFile, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference.unsafe_as(Proc(IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)).call(fontfile, faceindex, fontsimulations, fontfacereference)
+  end
+  def create_font_face_reference2(filepath : LibC::LPWSTR, lastwritetime : FILETIME*, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.create_font_face_reference2.unsafe_as(Proc(LibC::LPWSTR, FILETIME*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*, HRESULT)).call(filepath, lastwritetime, faceindex, fontsimulations, fontfacereference)
+  end
+  def get_system_font_set(fontset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_system_font_set.unsafe_as(Proc(IDWriteFontSet*, HRESULT)).call(fontset)
+  end
+  def create_font_set_builder(fontsetbuilder : IDWriteFontSetBuilder*) : HRESULT
+    @lpVtbl.value.create_font_set_builder.unsafe_as(Proc(IDWriteFontSetBuilder*, HRESULT)).call(fontsetbuilder)
+  end
+  def create_font_collection_from_font_set(fontset : IDWriteFontSet, fontcollection : IDWriteFontCollection1*) : HRESULT
+    @lpVtbl.value.create_font_collection_from_font_set.unsafe_as(Proc(IDWriteFontSet, IDWriteFontCollection1*, HRESULT)).call(fontset, fontcollection)
+  end
+  def get_system_font_collection2(includedownloadablefonts : LibC::BOOL, fontcollection : IDWriteFontCollection1*, checkforupdates : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_system_font_collection2.unsafe_as(Proc(LibC::BOOL, IDWriteFontCollection1*, LibC::BOOL, HRESULT)).call(includedownloadablefonts, fontcollection, checkforupdates)
+  end
+  def get_font_download_queue(fontdownloadqueue : IDWriteFontDownloadQueue*) : HRESULT
+    @lpVtbl.value.get_font_download_queue.unsafe_as(Proc(IDWriteFontDownloadQueue*, HRESULT)).call(fontdownloadqueue)
+  end
+  def translate_color_glyph_run2(baselineorigin : D2D_POINT_2F, glyphrun : DWRITE_GLYPH_RUN*, glyphrundescription : DWRITE_GLYPH_RUN_DESCRIPTION*, desiredglyphimageformats : DWRITE_GLYPH_IMAGE_FORMATS, measuringmode : DWRITE_MEASURING_MODE, worldanddpitransform : DWRITE_MATRIX*, colorpaletteindex : UInt32, colorlayers : IDWriteColorGlyphRunEnumerator1*) : HRESULT
+    @lpVtbl.value.translate_color_glyph_run2.unsafe_as(Proc(D2D_POINT_2F, DWRITE_GLYPH_RUN*, DWRITE_GLYPH_RUN_DESCRIPTION*, DWRITE_GLYPH_IMAGE_FORMATS, DWRITE_MEASURING_MODE, DWRITE_MATRIX*, UInt32, IDWriteColorGlyphRunEnumerator1*, HRESULT)).call(baselineorigin, glyphrun, glyphrundescription, desiredglyphimageformats, measuringmode, worldanddpitransform, colorpaletteindex, colorlayers)
+  end
+  def compute_glyph_origins(glyphrun : DWRITE_GLYPH_RUN*, baselineorigin : D2D_POINT_2F, glyphorigins : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_glyph_origins.unsafe_as(Proc(DWRITE_GLYPH_RUN*, D2D_POINT_2F, D2D_POINT_2F*, HRESULT)).call(glyphrun, baselineorigin, glyphorigins)
+  end
+  def compute_glyph_origins2(glyphrun : DWRITE_GLYPH_RUN*, measuringmode : DWRITE_MEASURING_MODE, baselineorigin : D2D_POINT_2F, worldanddpitransform : DWRITE_MATRIX*, glyphorigins : D2D_POINT_2F*) : HRESULT
+    @lpVtbl.value.compute_glyph_origins2.unsafe_as(Proc(DWRITE_GLYPH_RUN*, DWRITE_MEASURING_MODE, D2D_POINT_2F, DWRITE_MATRIX*, D2D_POINT_2F*, HRESULT)).call(glyphrun, measuringmode, baselineorigin, worldanddpitransform, glyphorigins)
+  end
+  def create_font_set_builder2(fontsetbuilder : IDWriteFontSetBuilder1*) : HRESULT
+    @lpVtbl.value.create_font_set_builder2.unsafe_as(Proc(IDWriteFontSetBuilder1*, HRESULT)).call(fontsetbuilder)
+  end
+  def create_in_memory_font_file_loader(newloader : IDWriteInMemoryFontFileLoader*) : HRESULT
+    @lpVtbl.value.create_in_memory_font_file_loader.unsafe_as(Proc(IDWriteInMemoryFontFileLoader*, HRESULT)).call(newloader)
+  end
+  def create_http_font_file_loader(referrerurl : LibC::LPWSTR, extraheaders : LibC::LPWSTR, newloader : IDWriteRemoteFontFileLoader*) : HRESULT
+    @lpVtbl.value.create_http_font_file_loader.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, IDWriteRemoteFontFileLoader*, HRESULT)).call(referrerurl, extraheaders, newloader)
+  end
+  def analyze_container_type(filedata : Void*, filedatasize : UInt32) : DWRITE_CONTAINER_TYPE
+    @lpVtbl.value.analyze_container_type.unsafe_as(Proc(Void*, UInt32, DWRITE_CONTAINER_TYPE)).call(filedata, filedatasize)
+  end
+  def unpack_font_file(containertype : DWRITE_CONTAINER_TYPE, filedata : Void*, filedatasize : UInt32, unpackedfontstream : IDWriteFontFileStream*) : HRESULT
+    @lpVtbl.value.unpack_font_file.unsafe_as(Proc(DWRITE_CONTAINER_TYPE, Void*, UInt32, IDWriteFontFileStream*, HRESULT)).call(containertype, filedata, filedatasize, unpackedfontstream)
+  end
+  def create_font_face_reference3(fontfile : IDWriteFontFile, faceindex : UInt32, fontsimulations : DWRITE_FONT_SIMULATIONS, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontfacereference : IDWriteFontFaceReference1*) : HRESULT
+    @lpVtbl.value.create_font_face_reference3.unsafe_as(Proc(IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontFaceReference1*, HRESULT)).call(fontfile, faceindex, fontsimulations, fontaxisvalues, fontaxisvaluecount, fontfacereference)
+  end
+  def create_font_resource(fontfile : IDWriteFontFile, faceindex : UInt32, fontresource : IDWriteFontResource*) : HRESULT
+    @lpVtbl.value.create_font_resource.unsafe_as(Proc(IDWriteFontFile, UInt32, IDWriteFontResource*, HRESULT)).call(fontfile, faceindex, fontresource)
+  end
+  def get_system_font_set2(includedownloadablefonts : LibC::BOOL, fontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_system_font_set2.unsafe_as(Proc(LibC::BOOL, IDWriteFontSet1*, HRESULT)).call(includedownloadablefonts, fontset)
+  end
+  def get_system_font_collection3(includedownloadablefonts : LibC::BOOL, fontfamilymodel : DWRITE_FONT_FAMILY_MODEL, fontcollection : IDWriteFontCollection2*) : HRESULT
+    @lpVtbl.value.get_system_font_collection3.unsafe_as(Proc(LibC::BOOL, DWRITE_FONT_FAMILY_MODEL, IDWriteFontCollection2*, HRESULT)).call(includedownloadablefonts, fontfamilymodel, fontcollection)
+  end
+  def create_font_collection_from_font_set2(fontset : IDWriteFontSet, fontfamilymodel : DWRITE_FONT_FAMILY_MODEL, fontcollection : IDWriteFontCollection2*) : HRESULT
+    @lpVtbl.value.create_font_collection_from_font_set2.unsafe_as(Proc(IDWriteFontSet, DWRITE_FONT_FAMILY_MODEL, IDWriteFontCollection2*, HRESULT)).call(fontset, fontfamilymodel, fontcollection)
+  end
+  def create_font_set_builder3(fontsetbuilder : IDWriteFontSetBuilder2*) : HRESULT
+    @lpVtbl.value.create_font_set_builder3.unsafe_as(Proc(IDWriteFontSetBuilder2*, HRESULT)).call(fontsetbuilder)
+  end
+  def create_text_format2(fontfamilyname : LibC::LPWSTR, fontcollection : IDWriteFontCollection, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, fontsize : Float32, localename : LibC::LPWSTR, textformat : IDWriteTextFormat3*) : HRESULT
+    @lpVtbl.value.create_text_format2.unsafe_as(Proc(LibC::LPWSTR, IDWriteFontCollection, DWRITE_FONT_AXIS_VALUE*, UInt32, Float32, LibC::LPWSTR, IDWriteTextFormat3*, HRESULT)).call(fontfamilyname, fontcollection, fontaxisvalues, fontaxisvaluecount, fontsize, localename, textformat)
+  end
+  def get_system_font_set3(includedownloadablefonts : LibC::BOOL, fontset : IDWriteFontSet2*) : HRESULT
+    @lpVtbl.value.get_system_font_set3.unsafe_as(Proc(LibC::BOOL, IDWriteFontSet2*, HRESULT)).call(includedownloadablefonts, fontset)
+  end
+  def get_system_font_collection4(includedownloadablefonts : LibC::BOOL, fontfamilymodel : DWRITE_FONT_FAMILY_MODEL, fontcollection : IDWriteFontCollection3*) : HRESULT
+    @lpVtbl.value.get_system_font_collection4.unsafe_as(Proc(LibC::BOOL, DWRITE_FONT_FAMILY_MODEL, IDWriteFontCollection3*, HRESULT)).call(includedownloadablefonts, fontfamilymodel, fontcollection)
+  end
+end
+struct LibWin32::IDWriteFontSet3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_count : UInt32
+    @lpVtbl.value.get_font_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_face_reference(listindex : UInt32, fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.unsafe_as(Proc(UInt32, IDWriteFontFaceReference*, HRESULT)).call(listindex, fontfacereference)
+  end
+  def find_font_face_reference(fontfacereference : IDWriteFontFaceReference, listindex : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_font_face_reference.unsafe_as(Proc(IDWriteFontFaceReference, UInt32*, LibC::BOOL*, HRESULT)).call(fontfacereference, listindex, exists)
+  end
+  def find_font_face(fontface : IDWriteFontFace, listindex : UInt32*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.find_font_face.unsafe_as(Proc(IDWriteFontFace, UInt32*, LibC::BOOL*, HRESULT)).call(fontface, listindex, exists)
+  end
+  def get_property_values(propertyid : DWRITE_FONT_PROPERTY_ID, values : IDWriteStringList*) : HRESULT
+    @lpVtbl.value.get_property_values.unsafe_as(Proc(DWRITE_FONT_PROPERTY_ID, IDWriteStringList*, HRESULT)).call(propertyid, values)
+  end
+  def get_property_values2(propertyid : DWRITE_FONT_PROPERTY_ID, preferredlocalenames : LibC::LPWSTR, values : IDWriteStringList*) : HRESULT
+    @lpVtbl.value.get_property_values2.unsafe_as(Proc(DWRITE_FONT_PROPERTY_ID, LibC::LPWSTR, IDWriteStringList*, HRESULT)).call(propertyid, preferredlocalenames, values)
+  end
+  def get_property_values3(listindex : UInt32, propertyid : DWRITE_FONT_PROPERTY_ID, exists : LibC::BOOL*, values : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_property_values3.unsafe_as(Proc(UInt32, DWRITE_FONT_PROPERTY_ID, LibC::BOOL*, IDWriteLocalizedStrings*, HRESULT)).call(listindex, propertyid, exists, values)
+  end
+  def get_property_occurrence_count(property : DWRITE_FONT_PROPERTY*, propertyoccurrencecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_occurrence_count.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, UInt32*, HRESULT)).call(property, propertyoccurrencecount)
+  end
+  def get_matching_fonts(familyname : LibC::LPWSTR, fontweight : DWRITE_FONT_WEIGHT, fontstretch : DWRITE_FONT_STRETCH, fontstyle : DWRITE_FONT_STYLE, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts.unsafe_as(Proc(LibC::LPWSTR, DWRITE_FONT_WEIGHT, DWRITE_FONT_STRETCH, DWRITE_FONT_STYLE, IDWriteFontSet*, HRESULT)).call(familyname, fontweight, fontstretch, fontstyle, filteredset)
+  end
+  def get_matching_fonts2(properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, filteredset : IDWriteFontSet*) : HRESULT
+    @lpVtbl.value.get_matching_fonts2.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, UInt32, IDWriteFontSet*, HRESULT)).call(properties, propertycount, filteredset)
+  end
+  def get_matching_fonts3(fontproperty : DWRITE_FONT_PROPERTY*, fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32, matchingfonts : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_matching_fonts3.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, DWRITE_FONT_AXIS_VALUE*, UInt32, IDWriteFontSet1*, HRESULT)).call(fontproperty, fontaxisvalues, fontaxisvaluecount, matchingfonts)
+  end
+  def get_first_font_resources(filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_first_font_resources.unsafe_as(Proc(IDWriteFontSet1*, HRESULT)).call(filteredfontset)
+  end
+  def get_filtered_fonts(indices : UInt32*, indexcount : UInt32, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts.unsafe_as(Proc(UInt32*, UInt32, IDWriteFontSet1*, HRESULT)).call(indices, indexcount, filteredfontset)
+  end
+  def get_filtered_fonts2(fontaxisranges : DWRITE_FONT_AXIS_RANGE*, fontaxisrangecount : UInt32, selectanyrange : LibC::BOOL, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts2.unsafe_as(Proc(DWRITE_FONT_AXIS_RANGE*, UInt32, LibC::BOOL, IDWriteFontSet1*, HRESULT)).call(fontaxisranges, fontaxisrangecount, selectanyrange, filteredfontset)
+  end
+  def get_filtered_fonts3(properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, selectanyproperty : LibC::BOOL, filteredfontset : IDWriteFontSet1*) : HRESULT
+    @lpVtbl.value.get_filtered_fonts3.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, UInt32, LibC::BOOL, IDWriteFontSet1*, HRESULT)).call(properties, propertycount, selectanyproperty, filteredfontset)
+  end
+  def get_filtered_font_indices(fontaxisranges : DWRITE_FONT_AXIS_RANGE*, fontaxisrangecount : UInt32, selectanyrange : LibC::BOOL, indices : UInt32*, maxindexcount : UInt32, actualindexcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_filtered_font_indices.unsafe_as(Proc(DWRITE_FONT_AXIS_RANGE*, UInt32, LibC::BOOL, UInt32*, UInt32, UInt32*, HRESULT)).call(fontaxisranges, fontaxisrangecount, selectanyrange, indices, maxindexcount, actualindexcount)
+  end
+  def get_filtered_font_indices2(properties : DWRITE_FONT_PROPERTY*, propertycount : UInt32, selectanyproperty : LibC::BOOL, indices : UInt32*, maxindexcount : UInt32, actualindexcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_filtered_font_indices2.unsafe_as(Proc(DWRITE_FONT_PROPERTY*, UInt32, LibC::BOOL, UInt32*, UInt32, UInt32*, HRESULT)).call(properties, propertycount, selectanyproperty, indices, maxindexcount, actualindexcount)
+  end
+  def get_font_axis_ranges(listindex : UInt32, fontaxisranges : DWRITE_FONT_AXIS_RANGE*, maxfontaxisrangecount : UInt32, actualfontaxisrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_font_axis_ranges.unsafe_as(Proc(UInt32, DWRITE_FONT_AXIS_RANGE*, UInt32, UInt32*, HRESULT)).call(listindex, fontaxisranges, maxfontaxisrangecount, actualfontaxisrangecount)
+  end
+  def get_font_axis_ranges2(fontaxisranges : DWRITE_FONT_AXIS_RANGE*, maxfontaxisrangecount : UInt32, actualfontaxisrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_font_axis_ranges2.unsafe_as(Proc(DWRITE_FONT_AXIS_RANGE*, UInt32, UInt32*, HRESULT)).call(fontaxisranges, maxfontaxisrangecount, actualfontaxisrangecount)
+  end
+  def get_font_face_reference2(listindex : UInt32, fontfacereference : IDWriteFontFaceReference1*) : HRESULT
+    @lpVtbl.value.get_font_face_reference2.unsafe_as(Proc(UInt32, IDWriteFontFaceReference1*, HRESULT)).call(listindex, fontfacereference)
+  end
+  def create_font_resource(listindex : UInt32, fontresource : IDWriteFontResource*) : HRESULT
+    @lpVtbl.value.create_font_resource.unsafe_as(Proc(UInt32, IDWriteFontResource*, HRESULT)).call(listindex, fontresource)
+  end
+  def create_font_face(listindex : UInt32, fontface : IDWriteFontFace5*) : HRESULT
+    @lpVtbl.value.create_font_face.unsafe_as(Proc(UInt32, IDWriteFontFace5*, HRESULT)).call(listindex, fontface)
+  end
+  def get_font_locality(listindex : UInt32) : DWRITE_LOCALITY
+    @lpVtbl.value.get_font_locality.unsafe_as(Proc(UInt32, DWRITE_LOCALITY)).call(listindex)
+  end
+  def get_expiration_event : LibC::HANDLE
+    @lpVtbl.value.get_expiration_event.unsafe_as(Proc(LibC::HANDLE)).call
+  end
+  def get_font_source_type(fontindex : UInt32) : DWRITE_FONT_SOURCE_TYPE
+    @lpVtbl.value.get_font_source_type.unsafe_as(Proc(UInt32, DWRITE_FONT_SOURCE_TYPE)).call(fontindex)
+  end
+  def get_font_source_name_length(listindex : UInt32) : UInt32
+    @lpVtbl.value.get_font_source_name_length.unsafe_as(Proc(UInt32, UInt32)).call(listindex)
+  end
+  def get_font_source_name(listindex : UInt32, stringbuffer : Char*, stringbuffersize : UInt32) : HRESULT
+    @lpVtbl.value.get_font_source_name.unsafe_as(Proc(UInt32, Char*, UInt32, HRESULT)).call(listindex, stringbuffer, stringbuffersize)
+  end
+end
+struct LibWin32::IDWriteFontFace6
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type : DWRITE_FONT_FACE_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(DWRITE_FONT_FACE_TYPE)).call
+  end
+  def get_files(numberoffiles : UInt32*, fontfiles : IDWriteFontFile*) : HRESULT
+    @lpVtbl.value.get_files.unsafe_as(Proc(UInt32*, IDWriteFontFile*, HRESULT)).call(numberoffiles, fontfiles)
+  end
+  def get_index : UInt32
+    @lpVtbl.value.get_index.unsafe_as(Proc(UInt32)).call
+  end
+  def get_simulations : DWRITE_FONT_SIMULATIONS
+    @lpVtbl.value.get_simulations.unsafe_as(Proc(DWRITE_FONT_SIMULATIONS)).call
+  end
+  def is_symbol_font : LibC::BOOL
+    @lpVtbl.value.is_symbol_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_metrics(fontfacemetrics : DWRITE_FONT_METRICS*) : Void
+    @lpVtbl.value.get_metrics.unsafe_as(Proc(DWRITE_FONT_METRICS*, Void)).call(fontfacemetrics)
+  end
+  def get_glyph_count : UInt16
+    @lpVtbl.value.get_glyph_count.unsafe_as(Proc(UInt16)).call
+  end
+  def get_design_glyph_metrics(glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_metrics.unsafe_as(Proc(UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)).call(glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_glyph_indices(codepoints : UInt32*, codepointcount : UInt32, glyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.unsafe_as(Proc(UInt32*, UInt32, UInt16*, HRESULT)).call(codepoints, codepointcount, glyphindices)
+  end
+  def try_get_font_table(opentypetabletag : UInt32, tabledata : Void**, tablesize : UInt32*, tablecontext : Void**, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.try_get_font_table.unsafe_as(Proc(UInt32, Void**, UInt32*, Void**, LibC::BOOL*, HRESULT)).call(opentypetabletag, tabledata, tablesize, tablecontext, exists)
+  end
+  def release_font_table(tablecontext : Void*) : Void
+    @lpVtbl.value.release_font_table.unsafe_as(Proc(Void*, Void)).call(tablecontext)
+  end
+  def get_glyph_run_outline(emsize : Float32, glyphindices : UInt16*, glyphadvances : Float32*, glyphoffsets : DWRITE_GLYPH_OFFSET*, glyphcount : UInt32, issideways : LibC::BOOL, isrighttoleft : LibC::BOOL, geometrysink : ID2D1SimplifiedGeometrySink) : HRESULT
+    @lpVtbl.value.get_glyph_run_outline.unsafe_as(Proc(Float32, UInt16*, Float32*, DWRITE_GLYPH_OFFSET*, UInt32, LibC::BOOL, LibC::BOOL, ID2D1SimplifiedGeometrySink, HRESULT)).call(emsize, glyphindices, glyphadvances, glyphoffsets, glyphcount, issideways, isrighttoleft, geometrysink)
+  end
+  def get_recommended_rendering_mode(emsize : Float32, pixelsperdip : Float32, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode.unsafe_as(Proc(Float32, Float32, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, HRESULT)).call(emsize, pixelsperdip, measuringmode, renderingparams, renderingmode)
+  end
+  def get_gdi_compatible_metrics(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontfacemetrics : DWRITE_FONT_METRICS*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS*, HRESULT)).call(emsize, pixelsperdip, transform, fontfacemetrics)
+  end
+  def get_gdi_compatible_glyph_metrics(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, glyphindices : UInt16*, glyphcount : UInt32, glyphmetrics : DWRITE_GLYPH_METRICS*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_metrics.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, UInt16*, UInt32, DWRITE_GLYPH_METRICS*, LibC::BOOL, HRESULT)).call(emsize, pixelsperdip, transform, usegdinatural, glyphindices, glyphcount, glyphmetrics, issideways)
+  end
+  def get_metrics2(fontmetrics : DWRITE_FONT_METRICS1*) : Void
+    @lpVtbl.value.get_metrics2.unsafe_as(Proc(DWRITE_FONT_METRICS1*, Void)).call(fontmetrics)
+  end
+  def get_gdi_compatible_metrics2(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, fontmetrics : DWRITE_FONT_METRICS1*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_metrics2.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, DWRITE_FONT_METRICS1*, HRESULT)).call(emsize, pixelsperdip, transform, fontmetrics)
+  end
+  def get_caret_metrics(caretmetrics : DWRITE_CARET_METRICS*) : Void
+    @lpVtbl.value.get_caret_metrics.unsafe_as(Proc(DWRITE_CARET_METRICS*, Void)).call(caretmetrics)
+  end
+  def get_unicode_ranges(maxrangecount : UInt32, unicoderanges : DWRITE_UNICODE_RANGE*, actualrangecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_unicode_ranges.unsafe_as(Proc(UInt32, DWRITE_UNICODE_RANGE*, UInt32*, HRESULT)).call(maxrangecount, unicoderanges, actualrangecount)
+  end
+  def is_monospaced_font : LibC::BOOL
+    @lpVtbl.value.is_monospaced_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_design_glyph_advances(glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*, issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_design_glyph_advances.unsafe_as(Proc(UInt32, UInt16*, Int32*, LibC::BOOL, HRESULT)).call(glyphcount, glyphindices, glyphadvances, issideways)
+  end
+  def get_gdi_compatible_glyph_advances(emsize : Float32, pixelsperdip : Float32, transform : DWRITE_MATRIX*, usegdinatural : LibC::BOOL, issideways : LibC::BOOL, glyphcount : UInt32, glyphindices : UInt16*, glyphadvances : Int32*) : HRESULT
+    @lpVtbl.value.get_gdi_compatible_glyph_advances.unsafe_as(Proc(Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, LibC::BOOL, UInt32, UInt16*, Int32*, HRESULT)).call(emsize, pixelsperdip, transform, usegdinatural, issideways, glyphcount, glyphindices, glyphadvances)
+  end
+  def get_kerning_pair_adjustments(glyphcount : UInt32, glyphindices : UInt16*, glyphadvanceadjustments : Int32*) : HRESULT
+    @lpVtbl.value.get_kerning_pair_adjustments.unsafe_as(Proc(UInt32, UInt16*, Int32*, HRESULT)).call(glyphcount, glyphindices, glyphadvanceadjustments)
+  end
+  def has_kerning_pairs : LibC::BOOL
+    @lpVtbl.value.has_kerning_pairs.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_recommended_rendering_mode2(fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingmode : DWRITE_RENDERING_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode2.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, DWRITE_RENDERING_MODE*, HRESULT)).call(fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingmode)
+  end
+  def get_vertical_glyph_variants(glyphcount : UInt32, nominalglyphindices : UInt16*, verticalglyphindices : UInt16*) : HRESULT
+    @lpVtbl.value.get_vertical_glyph_variants.unsafe_as(Proc(UInt32, UInt16*, UInt16*, HRESULT)).call(glyphcount, nominalglyphindices, verticalglyphindices)
+  end
+  def has_vertical_glyph_variants : LibC::BOOL
+    @lpVtbl.value.has_vertical_glyph_variants.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def is_color_font : LibC::BOOL
+    @lpVtbl.value.is_color_font.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_color_palette_count : UInt32
+    @lpVtbl.value.get_color_palette_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_palette_entry_count : UInt32
+    @lpVtbl.value.get_palette_entry_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_palette_entries(colorpaletteindex : UInt32, firstentryindex : UInt32, entrycount : UInt32, paletteentries : DWRITE_COLOR_F*) : HRESULT
+    @lpVtbl.value.get_palette_entries.unsafe_as(Proc(UInt32, UInt32, UInt32, DWRITE_COLOR_F*, HRESULT)).call(colorpaletteindex, firstentryindex, entrycount, paletteentries)
+  end
+  def get_recommended_rendering_mode3(fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode3.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE*, DWRITE_GRID_FIT_MODE*, HRESULT)).call(fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+  def get_font_face_reference(fontfacereference : IDWriteFontFaceReference*) : HRESULT
+    @lpVtbl.value.get_font_face_reference.unsafe_as(Proc(IDWriteFontFaceReference*, HRESULT)).call(fontfacereference)
+  end
+  def get_panose(panose : DWRITE_PANOSE*) : Void
+    @lpVtbl.value.get_panose.unsafe_as(Proc(DWRITE_PANOSE*, Void)).call(panose)
+  end
+  def get_weight : DWRITE_FONT_WEIGHT
+    @lpVtbl.value.get_weight.unsafe_as(Proc(DWRITE_FONT_WEIGHT)).call
+  end
+  def get_stretch : DWRITE_FONT_STRETCH
+    @lpVtbl.value.get_stretch.unsafe_as(Proc(DWRITE_FONT_STRETCH)).call
+  end
+  def get_style : DWRITE_FONT_STYLE
+    @lpVtbl.value.get_style.unsafe_as(Proc(DWRITE_FONT_STYLE)).call
+  end
+  def get_family_names(names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_family_names.unsafe_as(Proc(IDWriteLocalizedStrings*, HRESULT)).call(names)
+  end
+  def get_face_names(names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names.unsafe_as(Proc(IDWriteLocalizedStrings*, HRESULT)).call(names)
+  end
+  def get_informational_strings(informationalstringid : DWRITE_INFORMATIONAL_STRING_ID, informationalstrings : IDWriteLocalizedStrings*, exists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_informational_strings.unsafe_as(Proc(DWRITE_INFORMATIONAL_STRING_ID, IDWriteLocalizedStrings*, LibC::BOOL*, HRESULT)).call(informationalstringid, informationalstrings, exists)
+  end
+  def has_character(unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.has_character.unsafe_as(Proc(UInt32, LibC::BOOL)).call(unicodevalue)
+  end
+  def get_recommended_rendering_mode4(fontemsize : Float32, dpix : Float32, dpiy : Float32, transform : DWRITE_MATRIX*, issideways : LibC::BOOL, outlinethreshold : DWRITE_OUTLINE_THRESHOLD, measuringmode : DWRITE_MEASURING_MODE, renderingparams : IDWriteRenderingParams, renderingmode : DWRITE_RENDERING_MODE1*, gridfitmode : DWRITE_GRID_FIT_MODE*) : HRESULT
+    @lpVtbl.value.get_recommended_rendering_mode4.unsafe_as(Proc(Float32, Float32, Float32, DWRITE_MATRIX*, LibC::BOOL, DWRITE_OUTLINE_THRESHOLD, DWRITE_MEASURING_MODE, IDWriteRenderingParams, DWRITE_RENDERING_MODE1*, DWRITE_GRID_FIT_MODE*, HRESULT)).call(fontemsize, dpix, dpiy, transform, issideways, outlinethreshold, measuringmode, renderingparams, renderingmode, gridfitmode)
+  end
+  def is_character_local(unicodevalue : UInt32) : LibC::BOOL
+    @lpVtbl.value.is_character_local.unsafe_as(Proc(UInt32, LibC::BOOL)).call(unicodevalue)
+  end
+  def is_glyph_local(glyphid : UInt16) : LibC::BOOL
+    @lpVtbl.value.is_glyph_local.unsafe_as(Proc(UInt16, LibC::BOOL)).call(glyphid)
+  end
+  def are_characters_local(characters : Char*, charactercount : UInt32, enqueueifnotlocal : LibC::BOOL, islocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_characters_local.unsafe_as(Proc(Char*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)).call(characters, charactercount, enqueueifnotlocal, islocal)
+  end
+  def are_glyphs_local(glyphindices : UInt16*, glyphcount : UInt32, enqueueifnotlocal : LibC::BOOL, islocal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.are_glyphs_local.unsafe_as(Proc(UInt16*, UInt32, LibC::BOOL, LibC::BOOL*, HRESULT)).call(glyphindices, glyphcount, enqueueifnotlocal, islocal)
+  end
+  def get_glyph_image_formats(glyphid : UInt16, pixelsperemfirst : UInt32, pixelsperemlast : UInt32, glyphimageformats : DWRITE_GLYPH_IMAGE_FORMATS*) : HRESULT
+    @lpVtbl.value.get_glyph_image_formats.unsafe_as(Proc(UInt16, UInt32, UInt32, DWRITE_GLYPH_IMAGE_FORMATS*, HRESULT)).call(glyphid, pixelsperemfirst, pixelsperemlast, glyphimageformats)
+  end
+  def get_glyph_image_formats2 : DWRITE_GLYPH_IMAGE_FORMATS
+    @lpVtbl.value.get_glyph_image_formats2.unsafe_as(Proc(DWRITE_GLYPH_IMAGE_FORMATS)).call
+  end
+  def get_glyph_image_data(glyphid : UInt16, pixelsperem : UInt32, glyphimageformat : DWRITE_GLYPH_IMAGE_FORMATS, glyphdata : DWRITE_GLYPH_IMAGE_DATA*, glyphdatacontext : Void**) : HRESULT
+    @lpVtbl.value.get_glyph_image_data.unsafe_as(Proc(UInt16, UInt32, DWRITE_GLYPH_IMAGE_FORMATS, DWRITE_GLYPH_IMAGE_DATA*, Void**, HRESULT)).call(glyphid, pixelsperem, glyphimageformat, glyphdata, glyphdatacontext)
+  end
+  def release_glyph_image_data(glyphdatacontext : Void*) : Void
+    @lpVtbl.value.release_glyph_image_data.unsafe_as(Proc(Void*, Void)).call(glyphdatacontext)
+  end
+  def get_font_axis_value_count : UInt32
+    @lpVtbl.value.get_font_axis_value_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_axis_values(fontaxisvalues : DWRITE_FONT_AXIS_VALUE*, fontaxisvaluecount : UInt32) : HRESULT
+    @lpVtbl.value.get_font_axis_values.unsafe_as(Proc(DWRITE_FONT_AXIS_VALUE*, UInt32, HRESULT)).call(fontaxisvalues, fontaxisvaluecount)
+  end
+  def has_variations : LibC::BOOL
+    @lpVtbl.value.has_variations.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_font_resource(fontresource : IDWriteFontResource*) : HRESULT
+    @lpVtbl.value.get_font_resource.unsafe_as(Proc(IDWriteFontResource*, HRESULT)).call(fontresource)
+  end
+  def equals(fontface : IDWriteFontFace) : LibC::BOOL
+    @lpVtbl.value.equals.unsafe_as(Proc(IDWriteFontFace, LibC::BOOL)).call(fontface)
+  end
+  def get_family_names2(fontfamilymodel : DWRITE_FONT_FAMILY_MODEL, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_family_names2.unsafe_as(Proc(DWRITE_FONT_FAMILY_MODEL, IDWriteLocalizedStrings*, HRESULT)).call(fontfamilymodel, names)
+  end
+  def get_face_names2(fontfamilymodel : DWRITE_FONT_FAMILY_MODEL, names : IDWriteLocalizedStrings*) : HRESULT
+    @lpVtbl.value.get_face_names2.unsafe_as(Proc(DWRITE_FONT_FAMILY_MODEL, IDWriteLocalizedStrings*, HRESULT)).call(fontfamilymodel, names)
+  end
 end

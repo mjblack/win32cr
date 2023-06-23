@@ -751,7 +751,7 @@ lib LibWin32
   fun alljoyn_unity_deferred_callbacks_process : Int32
 
   # Params # mainthread_only : Int32 [In]
-  fun alljoyn_unity_set_deferred_callback_mainthread_only(mainthread_only : Int32)
+  fun alljoyn_unity_set_deferred_callback_mainthread_only(mainthread_only : Int32) : Void
 
   # Params # status : QStatus [In]
   fun QCC_StatusText(status : QStatus) : PSTR
@@ -763,7 +763,7 @@ lib LibWin32
   fun alljoyn_msgarg_create_and_set(signature : PSTR) : Alljoyn_msgarg
 
   # Params # arg : Alljoyn_msgarg [In]
-  fun alljoyn_msgarg_destroy(arg : Alljoyn_msgarg)
+  fun alljoyn_msgarg_destroy(arg : Alljoyn_msgarg) : Void
 
   # Params # size : LibC::UINT_PTR [In]
   fun alljoyn_msgarg_array_create(size : LibC::UINT_PTR) : Alljoyn_msgarg
@@ -781,7 +781,7 @@ lib LibWin32
   fun alljoyn_msgarg_copy(source : Alljoyn_msgarg) : Alljoyn_msgarg
 
   # Params # destination : Alljoyn_msgarg [In],source : Alljoyn_msgarg [In]
-  fun alljoyn_msgarg_clone(destination : Alljoyn_msgarg, source : Alljoyn_msgarg)
+  fun alljoyn_msgarg_clone(destination : Alljoyn_msgarg, source : Alljoyn_msgarg) : Void
 
   # Params # lhv : Alljoyn_msgarg [In],rhv : Alljoyn_msgarg [In]
   fun alljoyn_msgarg_equal(lhv : Alljoyn_msgarg, rhv : Alljoyn_msgarg) : Int32
@@ -814,10 +814,10 @@ lib LibWin32
   fun alljoyn_msgarg_gettype(arg : Alljoyn_msgarg) : Alljoyn_typeid
 
   # Params # arg : Alljoyn_msgarg [In]
-  fun alljoyn_msgarg_clear(arg : Alljoyn_msgarg)
+  fun alljoyn_msgarg_clear(arg : Alljoyn_msgarg) : Void
 
   # Params # arg : Alljoyn_msgarg [In]
-  fun alljoyn_msgarg_stabilize(arg : Alljoyn_msgarg)
+  fun alljoyn_msgarg_stabilize(arg : Alljoyn_msgarg) : Void
 
   # Params # args : Alljoyn_msgarg [In],argoffset : LibC::UINT_PTR [In],numargs : LibC::UINT_PTR* [In],signature : PSTR [In]
   fun alljoyn_msgarg_array_set_offset(args : Alljoyn_msgarg, argoffset : LibC::UINT_PTR, numargs : LibC::UINT_PTR*, signature : PSTR) : QStatus
@@ -970,7 +970,7 @@ lib LibWin32
   fun alljoyn_msgarg_get_array_numberofelements(arg : Alljoyn_msgarg) : LibC::UINT_PTR
 
   # Params # arg : Alljoyn_msgarg [In],index : LibC::UINT_PTR [In],element : Alljoyn_msgarg* [In]
-  fun alljoyn_msgarg_get_array_element(arg : Alljoyn_msgarg, index : LibC::UINT_PTR, element : Alljoyn_msgarg*)
+  fun alljoyn_msgarg_get_array_element(arg : Alljoyn_msgarg, index : LibC::UINT_PTR, element : Alljoyn_msgarg*) : Void
 
   # Params # arg : Alljoyn_msgarg [In],index : LibC::UINT_PTR [In]
   fun alljoyn_msgarg_get_array_elementsignature(arg : Alljoyn_msgarg, index : LibC::UINT_PTR) : PSTR
@@ -1003,7 +1003,7 @@ lib LibWin32
   fun alljoyn_aboutdata_create_full(arg : Alljoyn_msgarg, language : PSTR) : Alljoyn_aboutdata
 
   # Params # data : Alljoyn_aboutdata [In]
-  fun alljoyn_aboutdata_destroy(data : Alljoyn_aboutdata)
+  fun alljoyn_aboutdata_destroy(data : Alljoyn_aboutdata) : Void
 
   # Params # data : Alljoyn_aboutdata [In],aboutdataxml : PSTR [In]
   fun alljoyn_aboutdata_createfromxml(data : Alljoyn_aboutdata, aboutdataxml : PSTR) : QStatus
@@ -1129,22 +1129,22 @@ lib LibWin32
   fun alljoyn_abouticon_create : Alljoyn_abouticon_handle*
 
   # Params # icon : Alljoyn_abouticon_handle* [In]
-  fun alljoyn_abouticon_destroy(icon : Alljoyn_abouticon_handle*)
+  fun alljoyn_abouticon_destroy(icon : Alljoyn_abouticon_handle*) : Void
 
   # Params # icon : Alljoyn_abouticon_handle* [In],data : UInt8** [In],size : LibC::UINT_PTR* [In]
-  fun alljoyn_abouticon_getcontent(icon : Alljoyn_abouticon_handle*, data : UInt8**, size : LibC::UINT_PTR*)
+  fun alljoyn_abouticon_getcontent(icon : Alljoyn_abouticon_handle*, data : UInt8**, size : LibC::UINT_PTR*) : Void
 
   # Params # icon : Alljoyn_abouticon_handle* [In],type : PSTR [In],data : UInt8* [In],csize : LibC::UINT_PTR [In],ownsdata : UInt8 [In]
   fun alljoyn_abouticon_setcontent(icon : Alljoyn_abouticon_handle*, type : PSTR, data : UInt8*, csize : LibC::UINT_PTR, ownsdata : UInt8) : QStatus
 
   # Params # icon : Alljoyn_abouticon_handle* [In],type : Int8** [In],url : Int8** [In]
-  fun alljoyn_abouticon_geturl(icon : Alljoyn_abouticon_handle*, type : Int8**, url : Int8**)
+  fun alljoyn_abouticon_geturl(icon : Alljoyn_abouticon_handle*, type : Int8**, url : Int8**) : Void
 
   # Params # icon : Alljoyn_abouticon_handle* [In],type : PSTR [In],url : PSTR [In]
   fun alljoyn_abouticon_seturl(icon : Alljoyn_abouticon_handle*, type : PSTR, url : PSTR) : QStatus
 
   # Params # icon : Alljoyn_abouticon_handle* [In]
-  fun alljoyn_abouticon_clear(icon : Alljoyn_abouticon_handle*)
+  fun alljoyn_abouticon_clear(icon : Alljoyn_abouticon_handle*) : Void
 
   # Params # icon : Alljoyn_abouticon_handle* [In],arg : Alljoyn_msgarg [In]
   fun alljoyn_abouticon_setcontent_frommsgarg(icon : Alljoyn_abouticon_handle*, arg : Alljoyn_msgarg) : QStatus
@@ -1162,13 +1162,13 @@ lib LibWin32
   fun alljoyn_permissionconfigurator_getpublickey(configurator : Alljoyn_permissionconfigurator, publickey : Int8**) : QStatus
 
   # Params # publickey : Int8* [In]
-  fun alljoyn_permissionconfigurator_publickey_destroy(publickey : Int8*)
+  fun alljoyn_permissionconfigurator_publickey_destroy(publickey : Int8*) : Void
 
   # Params # configurator : Alljoyn_permissionconfigurator [In],manifesttemplatexml : Int8** [In]
   fun alljoyn_permissionconfigurator_getmanifesttemplate(configurator : Alljoyn_permissionconfigurator, manifesttemplatexml : Int8**) : QStatus
 
   # Params # manifesttemplatexml : Int8* [In]
-  fun alljoyn_permissionconfigurator_manifesttemplate_destroy(manifesttemplatexml : Int8*)
+  fun alljoyn_permissionconfigurator_manifesttemplate_destroy(manifesttemplatexml : Int8*) : Void
 
   # Params # configurator : Alljoyn_permissionconfigurator [In],manifesttemplatexml : Int8* [In]
   fun alljoyn_permissionconfigurator_setmanifesttemplatefromxml(configurator : Alljoyn_permissionconfigurator, manifesttemplatexml : Int8*) : QStatus
@@ -1198,13 +1198,13 @@ lib LibWin32
   fun alljoyn_permissionconfigurator_getidentity(configurator : Alljoyn_permissionconfigurator, identitycertificatechain : Int8**) : QStatus
 
   # Params # certificatechain : Int8* [In]
-  fun alljoyn_permissionconfigurator_certificatechain_destroy(certificatechain : Int8*)
+  fun alljoyn_permissionconfigurator_certificatechain_destroy(certificatechain : Int8*) : Void
 
   # Params # configurator : Alljoyn_permissionconfigurator [In],manifestarray : Alljoyn_manifestarray* [In]
   fun alljoyn_permissionconfigurator_getmanifests(configurator : Alljoyn_permissionconfigurator, manifestarray : Alljoyn_manifestarray*) : QStatus
 
   # Params # manifestarray : Alljoyn_manifestarray* [In]
-  fun alljoyn_permissionconfigurator_manifestarray_cleanup(manifestarray : Alljoyn_manifestarray*)
+  fun alljoyn_permissionconfigurator_manifestarray_cleanup(manifestarray : Alljoyn_manifestarray*) : Void
 
   # Params # configurator : Alljoyn_permissionconfigurator [In],manifestsxmls : Int8** [In],manifestscount : LibC::UINT_PTR [In],append : Int32 [In]
   fun alljoyn_permissionconfigurator_installmanifests(configurator : Alljoyn_permissionconfigurator, manifestsxmls : Int8**, manifestscount : LibC::UINT_PTR, append : Int32) : QStatus
@@ -1213,7 +1213,7 @@ lib LibWin32
   fun alljoyn_permissionconfigurator_getidentitycertificateid(configurator : Alljoyn_permissionconfigurator, certificateid : Alljoyn_certificateid*) : QStatus
 
   # Params # certificateid : Alljoyn_certificateid* [In]
-  fun alljoyn_permissionconfigurator_certificateid_cleanup(certificateid : Alljoyn_certificateid*)
+  fun alljoyn_permissionconfigurator_certificateid_cleanup(certificateid : Alljoyn_certificateid*) : Void
 
   # Params # configurator : Alljoyn_permissionconfigurator [In],policyxml : Int8* [In]
   fun alljoyn_permissionconfigurator_updatepolicy(configurator : Alljoyn_permissionconfigurator, policyxml : Int8*) : QStatus
@@ -1225,7 +1225,7 @@ lib LibWin32
   fun alljoyn_permissionconfigurator_getdefaultpolicy(configurator : Alljoyn_permissionconfigurator, policyxml : Int8**) : QStatus
 
   # Params # policyxml : Int8* [In]
-  fun alljoyn_permissionconfigurator_policy_destroy(policyxml : Int8*)
+  fun alljoyn_permissionconfigurator_policy_destroy(policyxml : Int8*) : Void
 
   # Params # configurator : Alljoyn_permissionconfigurator [In]
   fun alljoyn_permissionconfigurator_resetpolicy(configurator : Alljoyn_permissionconfigurator) : QStatus
@@ -1234,7 +1234,7 @@ lib LibWin32
   fun alljoyn_permissionconfigurator_getmembershipsummaries(configurator : Alljoyn_permissionconfigurator, certificateids : Alljoyn_certificateidarray*) : QStatus
 
   # Params # certificateidarray : Alljoyn_certificateidarray* [In]
-  fun alljoyn_permissionconfigurator_certificateidarray_cleanup(certificateidarray : Alljoyn_certificateidarray*)
+  fun alljoyn_permissionconfigurator_certificateidarray_cleanup(certificateidarray : Alljoyn_certificateidarray*) : Void
 
   # Params # configurator : Alljoyn_permissionconfigurator [In],membershipcertificatechain : Int8* [In]
   fun alljoyn_permissionconfigurator_installmembership(configurator : Alljoyn_permissionconfigurator, membershipcertificatechain : Int8*) : QStatus
@@ -1252,7 +1252,7 @@ lib LibWin32
   fun alljoyn_applicationstatelistener_create(callbacks : Alljoyn_applicationstatelistener_callbacks*, context : Void*) : Alljoyn_applicationstatelistener
 
   # Params # listener : Alljoyn_applicationstatelistener [In]
-  fun alljoyn_applicationstatelistener_destroy(listener : Alljoyn_applicationstatelistener)
+  fun alljoyn_applicationstatelistener_destroy(listener : Alljoyn_applicationstatelistener) : Void
 
   # Params # callbacks : Alljoyn_keystorelistener_callbacks* [In],context : Void* [In]
   fun alljoyn_keystorelistener_create(callbacks : Alljoyn_keystorelistener_callbacks*, context : Void*) : Alljoyn_keystorelistener
@@ -1261,7 +1261,7 @@ lib LibWin32
   fun alljoyn_keystorelistener_with_synchronization_create(callbacks : Alljoyn_keystorelistener_with_synchronization_callbacks*, context : Void*) : Alljoyn_keystorelistener
 
   # Params # listener : Alljoyn_keystorelistener [In]
-  fun alljoyn_keystorelistener_destroy(listener : Alljoyn_keystorelistener)
+  fun alljoyn_keystorelistener_destroy(listener : Alljoyn_keystorelistener) : Void
 
   # Params # listener : Alljoyn_keystorelistener [In],keystore : Alljoyn_keystore [In],source : PSTR [In],password : PSTR [In]
   fun alljoyn_keystorelistener_putkeys(listener : Alljoyn_keystorelistener, keystore : Alljoyn_keystore, source : PSTR, password : PSTR) : QStatus
@@ -1273,31 +1273,31 @@ lib LibWin32
   fun alljoyn_sessionopts_create(traffic : UInt8, ismultipoint : Int32, proximity : UInt8, transports : UInt16) : Alljoyn_sessionopts
 
   # Params # opts : Alljoyn_sessionopts [In]
-  fun alljoyn_sessionopts_destroy(opts : Alljoyn_sessionopts)
+  fun alljoyn_sessionopts_destroy(opts : Alljoyn_sessionopts) : Void
 
   # Params # opts : Alljoyn_sessionopts [In]
   fun alljoyn_sessionopts_get_traffic(opts : Alljoyn_sessionopts) : UInt8
 
   # Params # opts : Alljoyn_sessionopts [In],traffic : UInt8 [In]
-  fun alljoyn_sessionopts_set_traffic(opts : Alljoyn_sessionopts, traffic : UInt8)
+  fun alljoyn_sessionopts_set_traffic(opts : Alljoyn_sessionopts, traffic : UInt8) : Void
 
   # Params # opts : Alljoyn_sessionopts [In]
   fun alljoyn_sessionopts_get_multipoint(opts : Alljoyn_sessionopts) : Int32
 
   # Params # opts : Alljoyn_sessionopts [In],ismultipoint : Int32 [In]
-  fun alljoyn_sessionopts_set_multipoint(opts : Alljoyn_sessionopts, ismultipoint : Int32)
+  fun alljoyn_sessionopts_set_multipoint(opts : Alljoyn_sessionopts, ismultipoint : Int32) : Void
 
   # Params # opts : Alljoyn_sessionopts [In]
   fun alljoyn_sessionopts_get_proximity(opts : Alljoyn_sessionopts) : UInt8
 
   # Params # opts : Alljoyn_sessionopts [In],proximity : UInt8 [In]
-  fun alljoyn_sessionopts_set_proximity(opts : Alljoyn_sessionopts, proximity : UInt8)
+  fun alljoyn_sessionopts_set_proximity(opts : Alljoyn_sessionopts, proximity : UInt8) : Void
 
   # Params # opts : Alljoyn_sessionopts [In]
   fun alljoyn_sessionopts_get_transports(opts : Alljoyn_sessionopts) : UInt16
 
   # Params # opts : Alljoyn_sessionopts [In],transports : UInt16 [In]
-  fun alljoyn_sessionopts_set_transports(opts : Alljoyn_sessionopts, transports : UInt16)
+  fun alljoyn_sessionopts_set_transports(opts : Alljoyn_sessionopts, transports : UInt16) : Void
 
   # Params # one : Alljoyn_sessionopts [In],other : Alljoyn_sessionopts [In]
   fun alljoyn_sessionopts_iscompatible(one : Alljoyn_sessionopts, other : Alljoyn_sessionopts) : Int32
@@ -1309,7 +1309,7 @@ lib LibWin32
   fun alljoyn_message_create(bus : Alljoyn_busattachment) : Alljoyn_message
 
   # Params # msg : Alljoyn_message [In]
-  fun alljoyn_message_destroy(msg : Alljoyn_message)
+  fun alljoyn_message_destroy(msg : Alljoyn_message) : Void
 
   # Params # msg : Alljoyn_message [In]
   fun alljoyn_message_isbroadcastsignal(msg : Alljoyn_message) : Int32
@@ -1339,7 +1339,7 @@ lib LibWin32
   fun alljoyn_message_gettype(msg : Alljoyn_message) : Alljoyn_messagetype
 
   # Params # msg : Alljoyn_message [In],numargs : LibC::UINT_PTR* [In],args : Alljoyn_msgarg* [In]
-  fun alljoyn_message_getargs(msg : Alljoyn_message, numargs : LibC::UINT_PTR*, args : Alljoyn_msgarg*)
+  fun alljoyn_message_getargs(msg : Alljoyn_message, numargs : LibC::UINT_PTR*, args : Alljoyn_msgarg*) : Void
 
   # Params # msg : Alljoyn_message [In],argn : LibC::UINT_PTR [In]
   fun alljoyn_message_getarg(msg : Alljoyn_message, argn : LibC::UINT_PTR) : Alljoyn_msgarg
@@ -1396,7 +1396,7 @@ lib LibWin32
   fun alljoyn_message_eql(one : Alljoyn_message, other : Alljoyn_message) : Int32
 
   # Params # endian : Int8 [In]
-  fun alljoyn_message_setendianess(endian : Int8)
+  fun alljoyn_message_setendianess(endian : Int8) : Void
 
   # Params # listener : Alljoyn_authlistener [In],authcontext : Void* [In],accept : Int32 [In],credentials : Alljoyn_credentials [In]
   fun alljoyn_authlistener_requestcredentialsresponse(listener : Alljoyn_authlistener, authcontext : Void*, accept : Int32, credentials : Alljoyn_credentials) : QStatus
@@ -1411,10 +1411,10 @@ lib LibWin32
   fun alljoyn_authlistenerasync_create(callbacks : Alljoyn_authlistenerasync_callbacks*, context : Void*) : Alljoyn_authlistener
 
   # Params # listener : Alljoyn_authlistener [In]
-  fun alljoyn_authlistener_destroy(listener : Alljoyn_authlistener)
+  fun alljoyn_authlistener_destroy(listener : Alljoyn_authlistener) : Void
 
   # Params # listener : Alljoyn_authlistener [In]
-  fun alljoyn_authlistenerasync_destroy(listener : Alljoyn_authlistener)
+  fun alljoyn_authlistenerasync_destroy(listener : Alljoyn_authlistener) : Void
 
   # Params # listener : Alljoyn_authlistener [In],sharedsecret : UInt8* [In],sharedsecretsize : LibC::UINT_PTR [In]
   fun alljoyn_authlistener_setsharedsecret(listener : Alljoyn_authlistener, sharedsecret : UInt8*, sharedsecretsize : LibC::UINT_PTR) : QStatus
@@ -1423,28 +1423,28 @@ lib LibWin32
   fun alljoyn_credentials_create : Alljoyn_credentials
 
   # Params # cred : Alljoyn_credentials [In]
-  fun alljoyn_credentials_destroy(cred : Alljoyn_credentials)
+  fun alljoyn_credentials_destroy(cred : Alljoyn_credentials) : Void
 
   # Params # cred : Alljoyn_credentials [In],creds : UInt16 [In]
   fun alljoyn_credentials_isset(cred : Alljoyn_credentials, creds : UInt16) : Int32
 
   # Params # cred : Alljoyn_credentials [In],pwd : PSTR [In]
-  fun alljoyn_credentials_setpassword(cred : Alljoyn_credentials, pwd : PSTR)
+  fun alljoyn_credentials_setpassword(cred : Alljoyn_credentials, pwd : PSTR) : Void
 
   # Params # cred : Alljoyn_credentials [In],username : PSTR [In]
-  fun alljoyn_credentials_setusername(cred : Alljoyn_credentials, username : PSTR)
+  fun alljoyn_credentials_setusername(cred : Alljoyn_credentials, username : PSTR) : Void
 
   # Params # cred : Alljoyn_credentials [In],certchain : PSTR [In]
-  fun alljoyn_credentials_setcertchain(cred : Alljoyn_credentials, certchain : PSTR)
+  fun alljoyn_credentials_setcertchain(cred : Alljoyn_credentials, certchain : PSTR) : Void
 
   # Params # cred : Alljoyn_credentials [In],pk : PSTR [In]
-  fun alljoyn_credentials_setprivatekey(cred : Alljoyn_credentials, pk : PSTR)
+  fun alljoyn_credentials_setprivatekey(cred : Alljoyn_credentials, pk : PSTR) : Void
 
   # Params # cred : Alljoyn_credentials [In],logonentry : PSTR [In]
-  fun alljoyn_credentials_setlogonentry(cred : Alljoyn_credentials, logonentry : PSTR)
+  fun alljoyn_credentials_setlogonentry(cred : Alljoyn_credentials, logonentry : PSTR) : Void
 
   # Params # cred : Alljoyn_credentials [In],expiration : UInt32 [In]
-  fun alljoyn_credentials_setexpiration(cred : Alljoyn_credentials, expiration : UInt32)
+  fun alljoyn_credentials_setexpiration(cred : Alljoyn_credentials, expiration : UInt32) : Void
 
   # Params # cred : Alljoyn_credentials [In]
   fun alljoyn_credentials_getpassword(cred : Alljoyn_credentials) : PSTR
@@ -1465,19 +1465,19 @@ lib LibWin32
   fun alljoyn_credentials_getexpiration(cred : Alljoyn_credentials) : UInt32
 
   # Params # cred : Alljoyn_credentials [In]
-  fun alljoyn_credentials_clear(cred : Alljoyn_credentials)
+  fun alljoyn_credentials_clear(cred : Alljoyn_credentials) : Void
 
   # Params # callbacks : Alljoyn_buslistener_callbacks* [In],context : Void* [In]
   fun alljoyn_buslistener_create(callbacks : Alljoyn_buslistener_callbacks*, context : Void*) : Alljoyn_buslistener
 
   # Params # listener : Alljoyn_buslistener [In]
-  fun alljoyn_buslistener_destroy(listener : Alljoyn_buslistener)
+  fun alljoyn_buslistener_destroy(listener : Alljoyn_buslistener) : Void
 
   # Params # member : Alljoyn_interfacedescription_member [In]
   fun alljoyn_interfacedescription_member_getannotationscount(member : Alljoyn_interfacedescription_member) : LibC::UINT_PTR
 
   # Params # member : Alljoyn_interfacedescription_member [In],index : LibC::UINT_PTR [In],name : PSTR [In],name_size : LibC::UINT_PTR* [In],value : PSTR [In],value_size : LibC::UINT_PTR* [In]
-  fun alljoyn_interfacedescription_member_getannotationatindex(member : Alljoyn_interfacedescription_member, index : LibC::UINT_PTR, name : PSTR, name_size : LibC::UINT_PTR*, value : PSTR, value_size : LibC::UINT_PTR*)
+  fun alljoyn_interfacedescription_member_getannotationatindex(member : Alljoyn_interfacedescription_member, index : LibC::UINT_PTR, name : PSTR, name_size : LibC::UINT_PTR*, value : PSTR, value_size : LibC::UINT_PTR*) : Void
 
   # Params # member : Alljoyn_interfacedescription_member [In],name : PSTR [In],value : PSTR [In],value_size : LibC::UINT_PTR* [In]
   fun alljoyn_interfacedescription_member_getannotation(member : Alljoyn_interfacedescription_member, name : PSTR, value : PSTR, value_size : LibC::UINT_PTR*) : Int32
@@ -1486,7 +1486,7 @@ lib LibWin32
   fun alljoyn_interfacedescription_member_getargannotationscount(member : Alljoyn_interfacedescription_member, argname : PSTR) : LibC::UINT_PTR
 
   # Params # member : Alljoyn_interfacedescription_member [In],argname : PSTR [In],index : LibC::UINT_PTR [In],name : PSTR [In],name_size : LibC::UINT_PTR* [In],value : PSTR [In],value_size : LibC::UINT_PTR* [In]
-  fun alljoyn_interfacedescription_member_getargannotationatindex(member : Alljoyn_interfacedescription_member, argname : PSTR, index : LibC::UINT_PTR, name : PSTR, name_size : LibC::UINT_PTR*, value : PSTR, value_size : LibC::UINT_PTR*)
+  fun alljoyn_interfacedescription_member_getargannotationatindex(member : Alljoyn_interfacedescription_member, argname : PSTR, index : LibC::UINT_PTR, name : PSTR, name_size : LibC::UINT_PTR*, value : PSTR, value_size : LibC::UINT_PTR*) : Void
 
   # Params # member : Alljoyn_interfacedescription_member [In],argname : PSTR [In],name : PSTR [In],value : PSTR [In],value_size : LibC::UINT_PTR* [In]
   fun alljoyn_interfacedescription_member_getargannotation(member : Alljoyn_interfacedescription_member, argname : PSTR, name : PSTR, value : PSTR, value_size : LibC::UINT_PTR*) : Int32
@@ -1495,13 +1495,13 @@ lib LibWin32
   fun alljoyn_interfacedescription_property_getannotationscount(property : Alljoyn_interfacedescription_property) : LibC::UINT_PTR
 
   # Params # property : Alljoyn_interfacedescription_property [In],index : LibC::UINT_PTR [In],name : PSTR [In],name_size : LibC::UINT_PTR* [In],value : PSTR [In],value_size : LibC::UINT_PTR* [In]
-  fun alljoyn_interfacedescription_property_getannotationatindex(property : Alljoyn_interfacedescription_property, index : LibC::UINT_PTR, name : PSTR, name_size : LibC::UINT_PTR*, value : PSTR, value_size : LibC::UINT_PTR*)
+  fun alljoyn_interfacedescription_property_getannotationatindex(property : Alljoyn_interfacedescription_property, index : LibC::UINT_PTR, name : PSTR, name_size : LibC::UINT_PTR*, value : PSTR, value_size : LibC::UINT_PTR*) : Void
 
   # Params # property : Alljoyn_interfacedescription_property [In],name : PSTR [In],value : PSTR [In],value_size : LibC::UINT_PTR* [In]
   fun alljoyn_interfacedescription_property_getannotation(property : Alljoyn_interfacedescription_property, name : PSTR, value : PSTR, value_size : LibC::UINT_PTR*) : Int32
 
   # Params # iface : Alljoyn_interfacedescription [In]
-  fun alljoyn_interfacedescription_activate(iface : Alljoyn_interfacedescription)
+  fun alljoyn_interfacedescription_activate(iface : Alljoyn_interfacedescription) : Void
 
   # Params # iface : Alljoyn_interfacedescription [In],name : PSTR [In],value : PSTR [In]
   fun alljoyn_interfacedescription_addannotation(iface : Alljoyn_interfacedescription, name : PSTR, value : PSTR) : QStatus
@@ -1513,7 +1513,7 @@ lib LibWin32
   fun alljoyn_interfacedescription_getannotationscount(iface : Alljoyn_interfacedescription) : LibC::UINT_PTR
 
   # Params # iface : Alljoyn_interfacedescription [In],index : LibC::UINT_PTR [In],name : PSTR [In],name_size : LibC::UINT_PTR* [In],value : PSTR [In],value_size : LibC::UINT_PTR* [In]
-  fun alljoyn_interfacedescription_getannotationatindex(iface : Alljoyn_interfacedescription, index : LibC::UINT_PTR, name : PSTR, name_size : LibC::UINT_PTR*, value : PSTR, value_size : LibC::UINT_PTR*)
+  fun alljoyn_interfacedescription_getannotationatindex(iface : Alljoyn_interfacedescription, index : LibC::UINT_PTR, name : PSTR, name_size : LibC::UINT_PTR*, value : PSTR, value_size : LibC::UINT_PTR*) : Void
 
   # Params # iface : Alljoyn_interfacedescription [In],name : PSTR [In],member : Alljoyn_interfacedescription_member* [In]
   fun alljoyn_interfacedescription_getmember(iface : Alljoyn_interfacedescription, name : PSTR, member : Alljoyn_interfacedescription_member*) : Int32
@@ -1579,7 +1579,7 @@ lib LibWin32
   fun alljoyn_interfacedescription_getsecuritypolicy(iface : Alljoyn_interfacedescription) : Alljoyn_interfacedescription_securitypolicy
 
   # Params # iface : Alljoyn_interfacedescription [In],language : PSTR [In]
-  fun alljoyn_interfacedescription_setdescriptionlanguage(iface : Alljoyn_interfacedescription, language : PSTR)
+  fun alljoyn_interfacedescription_setdescriptionlanguage(iface : Alljoyn_interfacedescription, language : PSTR) : Void
 
   # Params # iface : Alljoyn_interfacedescription [In],languages : Int8** [In],size : LibC::UINT_PTR [In]
   fun alljoyn_interfacedescription_getdescriptionlanguages(iface : Alljoyn_interfacedescription, languages : Int8**, size : LibC::UINT_PTR) : LibC::UINT_PTR
@@ -1588,7 +1588,7 @@ lib LibWin32
   fun alljoyn_interfacedescription_getdescriptionlanguages2(iface : Alljoyn_interfacedescription, languages : PSTR, languagessize : LibC::UINT_PTR) : LibC::UINT_PTR
 
   # Params # iface : Alljoyn_interfacedescription [In],description : PSTR [In]
-  fun alljoyn_interfacedescription_setdescription(iface : Alljoyn_interfacedescription, description : PSTR)
+  fun alljoyn_interfacedescription_setdescription(iface : Alljoyn_interfacedescription, description : PSTR) : Void
 
   # Params # iface : Alljoyn_interfacedescription [In],description : PSTR [In],languagetag : PSTR [In]
   fun alljoyn_interfacedescription_setdescriptionforlanguage(iface : Alljoyn_interfacedescription, description : PSTR, languagetag : PSTR) : QStatus
@@ -1624,7 +1624,7 @@ lib LibWin32
   fun alljoyn_interfacedescription_getpropertydescriptionforlanguage(iface : Alljoyn_interfacedescription, property : PSTR, description : PSTR, maxlanguagelength : LibC::UINT_PTR, languagetag : PSTR) : LibC::UINT_PTR
 
   # Params # iface : Alljoyn_interfacedescription [In],translationcallback : Alljoyn_interfacedescription_translation_callback_ptr [In]
-  fun alljoyn_interfacedescription_setdescriptiontranslationcallback(iface : Alljoyn_interfacedescription, translationcallback : Alljoyn_interfacedescription_translation_callback_ptr)
+  fun alljoyn_interfacedescription_setdescriptiontranslationcallback(iface : Alljoyn_interfacedescription, translationcallback : Alljoyn_interfacedescription_translation_callback_ptr) : Void
 
   # Params # iface : Alljoyn_interfacedescription [In]
   fun alljoyn_interfacedescription_getdescriptiontranslationcallback(iface : Alljoyn_interfacedescription) : Alljoyn_interfacedescription_translation_callback_ptr
@@ -1651,16 +1651,16 @@ lib LibWin32
   fun alljoyn_busobject_create(path : PSTR, isplaceholder : Int32, callbacks_in : Alljoyn_busobject_callbacks*, context_in : Void*) : Alljoyn_busobject
 
   # Params # bus : Alljoyn_busobject [In]
-  fun alljoyn_busobject_destroy(bus : Alljoyn_busobject)
+  fun alljoyn_busobject_destroy(bus : Alljoyn_busobject) : Void
 
   # Params # bus : Alljoyn_busobject [In]
   fun alljoyn_busobject_getpath(bus : Alljoyn_busobject) : PSTR
 
   # Params # bus : Alljoyn_busobject [In],ifcname : PSTR [In],propname : PSTR [In],val : Alljoyn_msgarg [In],id : UInt32 [In]
-  fun alljoyn_busobject_emitpropertychanged(bus : Alljoyn_busobject, ifcname : PSTR, propname : PSTR, val : Alljoyn_msgarg, id : UInt32)
+  fun alljoyn_busobject_emitpropertychanged(bus : Alljoyn_busobject, ifcname : PSTR, propname : PSTR, val : Alljoyn_msgarg, id : UInt32) : Void
 
   # Params # bus : Alljoyn_busobject [In],ifcname : PSTR [In],propnames : Int8** [In],numprops : LibC::UINT_PTR [In],id : UInt32 [In]
-  fun alljoyn_busobject_emitpropertieschanged(bus : Alljoyn_busobject, ifcname : PSTR, propnames : Int8**, numprops : LibC::UINT_PTR, id : UInt32)
+  fun alljoyn_busobject_emitpropertieschanged(bus : Alljoyn_busobject, ifcname : PSTR, propnames : Int8**, numprops : LibC::UINT_PTR, id : UInt32) : Void
 
   # Params # bus : Alljoyn_busobject [In],buffer : PSTR [In],buffersz : LibC::UINT_PTR [In]
   fun alljoyn_busobject_getname(bus : Alljoyn_busobject, buffer : PSTR, buffersz : LibC::UINT_PTR) : LibC::UINT_PTR
@@ -1714,7 +1714,7 @@ lib LibWin32
   fun alljoyn_proxybusobject_create_secure(bus : Alljoyn_busattachment, service : PSTR, path : PSTR, sessionid : UInt32) : Alljoyn_proxybusobject
 
   # Params # proxyobj : Alljoyn_proxybusobject [In]
-  fun alljoyn_proxybusobject_destroy(proxyobj : Alljoyn_proxybusobject)
+  fun alljoyn_proxybusobject_destroy(proxyobj : Alljoyn_proxybusobject) : Void
 
   # Params # proxyobj : Alljoyn_proxybusobject [In],iface : Alljoyn_interfacedescription [In]
   fun alljoyn_proxybusobject_addinterface(proxyobj : Alljoyn_proxybusobject, iface : Alljoyn_interfacedescription) : QStatus
@@ -1822,31 +1822,31 @@ lib LibWin32
   fun alljoyn_proxybusobject_issecure(proxyobj : Alljoyn_proxybusobject) : Int32
 
   # Params # proxyobj : Alljoyn_proxybusobject [In]
-  fun alljoyn_proxybusobject_enablepropertycaching(proxyobj : Alljoyn_proxybusobject)
+  fun alljoyn_proxybusobject_enablepropertycaching(proxyobj : Alljoyn_proxybusobject) : Void
 
   # Params # callbacks : Alljoyn_permissionconfigurationlistener_callbacks* [In],context : Void* [In]
   fun alljoyn_permissionconfigurationlistener_create(callbacks : Alljoyn_permissionconfigurationlistener_callbacks*, context : Void*) : Alljoyn_permissionconfigurationlistener
 
   # Params # listener : Alljoyn_permissionconfigurationlistener [In]
-  fun alljoyn_permissionconfigurationlistener_destroy(listener : Alljoyn_permissionconfigurationlistener)
+  fun alljoyn_permissionconfigurationlistener_destroy(listener : Alljoyn_permissionconfigurationlistener) : Void
 
   # Params # callbacks : Alljoyn_sessionlistener_callbacks* [In],context : Void* [In]
   fun alljoyn_sessionlistener_create(callbacks : Alljoyn_sessionlistener_callbacks*, context : Void*) : Alljoyn_sessionlistener
 
   # Params # listener : Alljoyn_sessionlistener [In]
-  fun alljoyn_sessionlistener_destroy(listener : Alljoyn_sessionlistener)
+  fun alljoyn_sessionlistener_destroy(listener : Alljoyn_sessionlistener) : Void
 
   # Params # callbacks : Alljoyn_sessionportlistener_callbacks* [In],context : Void* [In]
   fun alljoyn_sessionportlistener_create(callbacks : Alljoyn_sessionportlistener_callbacks*, context : Void*) : Alljoyn_sessionportlistener
 
   # Params # listener : Alljoyn_sessionportlistener [In]
-  fun alljoyn_sessionportlistener_destroy(listener : Alljoyn_sessionportlistener)
+  fun alljoyn_sessionportlistener_destroy(listener : Alljoyn_sessionportlistener) : Void
 
   # Params # callback : Alljoyn_aboutlistener_callback* [In],context : Void* [In]
   fun alljoyn_aboutlistener_create(callback : Alljoyn_aboutlistener_callback*, context : Void*) : Alljoyn_aboutlistener
 
   # Params # listener : Alljoyn_aboutlistener [In]
-  fun alljoyn_aboutlistener_destroy(listener : Alljoyn_aboutlistener)
+  fun alljoyn_aboutlistener_destroy(listener : Alljoyn_aboutlistener) : Void
 
   # Params # applicationname : PSTR [In],allowremotemessages : Int32 [In]
   fun alljoyn_busattachment_create(applicationname : PSTR, allowremotemessages : Int32) : Alljoyn_busattachment
@@ -1855,7 +1855,7 @@ lib LibWin32
   fun alljoyn_busattachment_create_concurrency(applicationname : PSTR, allowremotemessages : Int32, concurrency : UInt32) : Alljoyn_busattachment
 
   # Params # bus : Alljoyn_busattachment [In]
-  fun alljoyn_busattachment_destroy(bus : Alljoyn_busattachment)
+  fun alljoyn_busattachment_destroy(bus : Alljoyn_busattachment) : Void
 
   # Params # bus : Alljoyn_busattachment [In]
   fun alljoyn_busattachment_start(bus : Alljoyn_busattachment) : QStatus
@@ -1873,7 +1873,7 @@ lib LibWin32
   fun alljoyn_busattachment_getconnectspec(bus : Alljoyn_busattachment) : PSTR
 
   # Params # bus : Alljoyn_busattachment [In]
-  fun alljoyn_busattachment_enableconcurrentcallbacks(bus : Alljoyn_busattachment)
+  fun alljoyn_busattachment_enableconcurrentcallbacks(bus : Alljoyn_busattachment) : Void
 
   # Params # bus : Alljoyn_busattachment [In],name : PSTR [In],iface : Alljoyn_interfacedescription* [In]
   fun alljoyn_busattachment_createinterface(bus : Alljoyn_busattachment, name : PSTR, iface : Alljoyn_interfacedescription*) : QStatus
@@ -1885,10 +1885,10 @@ lib LibWin32
   fun alljoyn_busattachment_connect(bus : Alljoyn_busattachment, connectspec : PSTR) : QStatus
 
   # Params # bus : Alljoyn_busattachment [In],listener : Alljoyn_buslistener [In]
-  fun alljoyn_busattachment_registerbuslistener(bus : Alljoyn_busattachment, listener : Alljoyn_buslistener)
+  fun alljoyn_busattachment_registerbuslistener(bus : Alljoyn_busattachment, listener : Alljoyn_buslistener) : Void
 
   # Params # bus : Alljoyn_busattachment [In],listener : Alljoyn_buslistener [In]
-  fun alljoyn_busattachment_unregisterbuslistener(bus : Alljoyn_busattachment, listener : Alljoyn_buslistener)
+  fun alljoyn_busattachment_unregisterbuslistener(bus : Alljoyn_busattachment, listener : Alljoyn_buslistener) : Void
 
   # Params # bus : Alljoyn_busattachment [In],nameprefix : PSTR [In]
   fun alljoyn_busattachment_findadvertisedname(bus : Alljoyn_busattachment, nameprefix : PSTR) : QStatus
@@ -1924,7 +1924,7 @@ lib LibWin32
   fun alljoyn_busattachment_registerbusobject_secure(bus : Alljoyn_busattachment, obj : Alljoyn_busobject) : QStatus
 
   # Params # bus : Alljoyn_busattachment [In],object : Alljoyn_busobject [In]
-  fun alljoyn_busattachment_unregisterbusobject(bus : Alljoyn_busattachment, object : Alljoyn_busobject)
+  fun alljoyn_busattachment_unregisterbusobject(bus : Alljoyn_busattachment, object : Alljoyn_busobject) : Void
 
   # Params # bus : Alljoyn_busattachment [In],requestedname : PSTR [In],flags : UInt32 [In]
   fun alljoyn_busattachment_requestname(bus : Alljoyn_busattachment, requestedname : PSTR, flags : UInt32) : QStatus
@@ -2005,7 +2005,7 @@ lib LibWin32
   fun alljoyn_busattachment_reloadkeystore(bus : Alljoyn_busattachment) : QStatus
 
   # Params # bus : Alljoyn_busattachment [In]
-  fun alljoyn_busattachment_clearkeystore(bus : Alljoyn_busattachment)
+  fun alljoyn_busattachment_clearkeystore(bus : Alljoyn_busattachment) : Void
 
   # Params # bus : Alljoyn_busattachment [In],guid : PSTR [In]
   fun alljoyn_busattachment_clearkeys(bus : Alljoyn_busattachment, guid : PSTR) : QStatus
@@ -2062,13 +2062,13 @@ lib LibWin32
   fun alljoyn_busattachment_ping(bus : Alljoyn_busattachment, name : PSTR, timeout : UInt32) : QStatus
 
   # Params # bus : Alljoyn_busattachment [In],aboutlistener : Alljoyn_aboutlistener [In]
-  fun alljoyn_busattachment_registeraboutlistener(bus : Alljoyn_busattachment, aboutlistener : Alljoyn_aboutlistener)
+  fun alljoyn_busattachment_registeraboutlistener(bus : Alljoyn_busattachment, aboutlistener : Alljoyn_aboutlistener) : Void
 
   # Params # bus : Alljoyn_busattachment [In],aboutlistener : Alljoyn_aboutlistener [In]
-  fun alljoyn_busattachment_unregisteraboutlistener(bus : Alljoyn_busattachment, aboutlistener : Alljoyn_aboutlistener)
+  fun alljoyn_busattachment_unregisteraboutlistener(bus : Alljoyn_busattachment, aboutlistener : Alljoyn_aboutlistener) : Void
 
   # Params # bus : Alljoyn_busattachment [In]
-  fun alljoyn_busattachment_unregisterallaboutlisteners(bus : Alljoyn_busattachment)
+  fun alljoyn_busattachment_unregisterallaboutlisteners(bus : Alljoyn_busattachment) : Void
 
   # Params # bus : Alljoyn_busattachment [In],implementsinterfaces : Int8** [In],numberinterfaces : LibC::UINT_PTR [In]
   fun alljoyn_busattachment_whoimplements_interfaces(bus : Alljoyn_busattachment, implementsinterfaces : Int8**, numberinterfaces : LibC::UINT_PTR) : QStatus
@@ -2098,13 +2098,13 @@ lib LibWin32
   fun alljoyn_abouticonobj_create(bus : Alljoyn_busattachment, icon : Alljoyn_abouticon_handle*) : Alljoyn_abouticonobj_handle*
 
   # Params # icon : Alljoyn_abouticonobj_handle* [In]
-  fun alljoyn_abouticonobj_destroy(icon : Alljoyn_abouticonobj_handle*)
+  fun alljoyn_abouticonobj_destroy(icon : Alljoyn_abouticonobj_handle*) : Void
 
   # Params # bus : Alljoyn_busattachment [In],busname : PSTR [In],sessionid : UInt32 [In]
   fun alljoyn_abouticonproxy_create(bus : Alljoyn_busattachment, busname : PSTR, sessionid : UInt32) : Alljoyn_abouticonproxy_handle*
 
   # Params # proxy : Alljoyn_abouticonproxy_handle* [In]
-  fun alljoyn_abouticonproxy_destroy(proxy : Alljoyn_abouticonproxy_handle*)
+  fun alljoyn_abouticonproxy_destroy(proxy : Alljoyn_abouticonproxy_handle*) : Void
 
   # Params # proxy : Alljoyn_abouticonproxy_handle* [In],icon : Alljoyn_abouticon_handle* [In]
   fun alljoyn_abouticonproxy_geticon(proxy : Alljoyn_abouticonproxy_handle*, icon : Alljoyn_abouticon_handle*) : QStatus
@@ -2116,13 +2116,13 @@ lib LibWin32
   fun alljoyn_aboutdatalistener_create(callbacks : Alljoyn_aboutdatalistener_callbacks*, context : Void*) : Alljoyn_aboutdatalistener
 
   # Params # listener : Alljoyn_aboutdatalistener [In]
-  fun alljoyn_aboutdatalistener_destroy(listener : Alljoyn_aboutdatalistener)
+  fun alljoyn_aboutdatalistener_destroy(listener : Alljoyn_aboutdatalistener) : Void
 
   # Params # bus : Alljoyn_busattachment [In],isannounced : Alljoyn_about_announceflag [In]
   fun alljoyn_aboutobj_create(bus : Alljoyn_busattachment, isannounced : Alljoyn_about_announceflag) : Alljoyn_aboutobj
 
   # Params # obj : Alljoyn_aboutobj [In]
-  fun alljoyn_aboutobj_destroy(obj : Alljoyn_aboutobj)
+  fun alljoyn_aboutobj_destroy(obj : Alljoyn_aboutobj) : Void
 
   # Params # obj : Alljoyn_aboutobj [In],sessionport : UInt16 [In],aboutdata : Alljoyn_aboutdata [In]
   fun alljoyn_aboutobj_announce(obj : Alljoyn_aboutobj, sessionport : UInt16, aboutdata : Alljoyn_aboutdata) : QStatus
@@ -2143,7 +2143,7 @@ lib LibWin32
   fun alljoyn_aboutobjectdescription_createfrommsgarg(description : Alljoyn_aboutobjectdescription, arg : Alljoyn_msgarg) : QStatus
 
   # Params # description : Alljoyn_aboutobjectdescription [In]
-  fun alljoyn_aboutobjectdescription_destroy(description : Alljoyn_aboutobjectdescription)
+  fun alljoyn_aboutobjectdescription_destroy(description : Alljoyn_aboutobjectdescription) : Void
 
   # Params # description : Alljoyn_aboutobjectdescription [In],paths : Int8** [In],numpaths : LibC::UINT_PTR [In]
   fun alljoyn_aboutobjectdescription_getpaths(description : Alljoyn_aboutobjectdescription, paths : Int8**, numpaths : LibC::UINT_PTR) : LibC::UINT_PTR
@@ -2155,7 +2155,7 @@ lib LibWin32
   fun alljoyn_aboutobjectdescription_getinterfacepaths(description : Alljoyn_aboutobjectdescription, interfacename : PSTR, paths : Int8**, numpaths : LibC::UINT_PTR) : LibC::UINT_PTR
 
   # Params # description : Alljoyn_aboutobjectdescription [In]
-  fun alljoyn_aboutobjectdescription_clear(description : Alljoyn_aboutobjectdescription)
+  fun alljoyn_aboutobjectdescription_clear(description : Alljoyn_aboutobjectdescription) : Void
 
   # Params # description : Alljoyn_aboutobjectdescription [In],path : PSTR [In]
   fun alljoyn_aboutobjectdescription_haspath(description : Alljoyn_aboutobjectdescription, path : PSTR) : UInt8
@@ -2173,7 +2173,7 @@ lib LibWin32
   fun alljoyn_aboutproxy_create(bus : Alljoyn_busattachment, busname : PSTR, sessionid : UInt32) : Alljoyn_aboutproxy
 
   # Params # proxy : Alljoyn_aboutproxy [In]
-  fun alljoyn_aboutproxy_destroy(proxy : Alljoyn_aboutproxy)
+  fun alljoyn_aboutproxy_destroy(proxy : Alljoyn_aboutproxy) : Void
 
   # Params # proxy : Alljoyn_aboutproxy [In],objectdesc : Alljoyn_msgarg [In]
   fun alljoyn_aboutproxy_getobjectdescription(proxy : Alljoyn_aboutproxy, objectdesc : Alljoyn_msgarg) : QStatus
@@ -2188,25 +2188,25 @@ lib LibWin32
   fun alljoyn_pinglistener_create(callback : Alljoyn_pinglistener_callback*, context : Void*) : Alljoyn_pinglistener
 
   # Params # listener : Alljoyn_pinglistener [In]
-  fun alljoyn_pinglistener_destroy(listener : Alljoyn_pinglistener)
+  fun alljoyn_pinglistener_destroy(listener : Alljoyn_pinglistener) : Void
 
   # Params # bus : Alljoyn_busattachment [In]
   fun alljoyn_autopinger_create(bus : Alljoyn_busattachment) : Alljoyn_autopinger
 
   # Params # autopinger : Alljoyn_autopinger [In]
-  fun alljoyn_autopinger_destroy(autopinger : Alljoyn_autopinger)
+  fun alljoyn_autopinger_destroy(autopinger : Alljoyn_autopinger) : Void
 
   # Params # autopinger : Alljoyn_autopinger [In]
-  fun alljoyn_autopinger_pause(autopinger : Alljoyn_autopinger)
+  fun alljoyn_autopinger_pause(autopinger : Alljoyn_autopinger) : Void
 
   # Params # autopinger : Alljoyn_autopinger [In]
-  fun alljoyn_autopinger_resume(autopinger : Alljoyn_autopinger)
+  fun alljoyn_autopinger_resume(autopinger : Alljoyn_autopinger) : Void
 
   # Params # autopinger : Alljoyn_autopinger [In],group : PSTR [In],listener : Alljoyn_pinglistener [In],pinginterval : UInt32 [In]
-  fun alljoyn_autopinger_addpinggroup(autopinger : Alljoyn_autopinger, group : PSTR, listener : Alljoyn_pinglistener, pinginterval : UInt32)
+  fun alljoyn_autopinger_addpinggroup(autopinger : Alljoyn_autopinger, group : PSTR, listener : Alljoyn_pinglistener, pinginterval : UInt32) : Void
 
   # Params # autopinger : Alljoyn_autopinger [In],group : PSTR [In]
-  fun alljoyn_autopinger_removepinggroup(autopinger : Alljoyn_autopinger, group : PSTR)
+  fun alljoyn_autopinger_removepinggroup(autopinger : Alljoyn_autopinger, group : PSTR) : Void
 
   # Params # autopinger : Alljoyn_autopinger [In],group : PSTR [In],pinginterval : UInt32 [In]
   fun alljoyn_autopinger_setpinginterval(autopinger : Alljoyn_autopinger, group : PSTR, pinginterval : UInt32) : QStatus
@@ -2248,31 +2248,31 @@ lib LibWin32
   fun alljoyn_proxybusobject_ref_get(ref : Alljoyn_proxybusobject_ref) : Alljoyn_proxybusobject
 
   # Params # ref : Alljoyn_proxybusobject_ref [In]
-  fun alljoyn_proxybusobject_ref_incref(ref : Alljoyn_proxybusobject_ref)
+  fun alljoyn_proxybusobject_ref_incref(ref : Alljoyn_proxybusobject_ref) : Void
 
   # Params # ref : Alljoyn_proxybusobject_ref [In]
-  fun alljoyn_proxybusobject_ref_decref(ref : Alljoyn_proxybusobject_ref)
+  fun alljoyn_proxybusobject_ref_decref(ref : Alljoyn_proxybusobject_ref) : Void
 
   # Params # callback : Alljoyn_observerlistener_callback* [In],context : Void* [In]
   fun alljoyn_observerlistener_create(callback : Alljoyn_observerlistener_callback*, context : Void*) : Alljoyn_observerlistener
 
   # Params # listener : Alljoyn_observerlistener [In]
-  fun alljoyn_observerlistener_destroy(listener : Alljoyn_observerlistener)
+  fun alljoyn_observerlistener_destroy(listener : Alljoyn_observerlistener) : Void
 
   # Params # bus : Alljoyn_busattachment [In],mandatoryinterfaces : Int8** [In],nummandatoryinterfaces : LibC::UINT_PTR [In]
   fun alljoyn_observer_create(bus : Alljoyn_busattachment, mandatoryinterfaces : Int8**, nummandatoryinterfaces : LibC::UINT_PTR) : Alljoyn_observer
 
   # Params # observer : Alljoyn_observer [In]
-  fun alljoyn_observer_destroy(observer : Alljoyn_observer)
+  fun alljoyn_observer_destroy(observer : Alljoyn_observer) : Void
 
   # Params # observer : Alljoyn_observer [In],listener : Alljoyn_observerlistener [In],triggeronexisting : Int32 [In]
-  fun alljoyn_observer_registerlistener(observer : Alljoyn_observer, listener : Alljoyn_observerlistener, triggeronexisting : Int32)
+  fun alljoyn_observer_registerlistener(observer : Alljoyn_observer, listener : Alljoyn_observerlistener, triggeronexisting : Int32) : Void
 
   # Params # observer : Alljoyn_observer [In],listener : Alljoyn_observerlistener [In]
-  fun alljoyn_observer_unregisterlistener(observer : Alljoyn_observer, listener : Alljoyn_observerlistener)
+  fun alljoyn_observer_unregisterlistener(observer : Alljoyn_observer, listener : Alljoyn_observerlistener) : Void
 
   # Params # observer : Alljoyn_observer [In]
-  fun alljoyn_observer_unregisteralllisteners(observer : Alljoyn_observer)
+  fun alljoyn_observer_unregisteralllisteners(observer : Alljoyn_observer) : Void
 
   # Params # observer : Alljoyn_observer [In],uniquebusname : PSTR [In],objectpath : PSTR [In]
   fun alljoyn_observer_get(observer : Alljoyn_observer, uniquebusname : PSTR, objectpath : PSTR) : Alljoyn_proxybusobject_ref
@@ -2293,7 +2293,7 @@ lib LibWin32
   fun alljoyn_securityapplicationproxy_create(bus : Alljoyn_busattachment, appbusname : Int8*, sessionid : UInt32) : Alljoyn_securityapplicationproxy
 
   # Params # proxy : Alljoyn_securityapplicationproxy [In]
-  fun alljoyn_securityapplicationproxy_destroy(proxy : Alljoyn_securityapplicationproxy)
+  fun alljoyn_securityapplicationproxy_destroy(proxy : Alljoyn_securityapplicationproxy) : Void
 
   # Params # proxy : Alljoyn_securityapplicationproxy [In],cakey : Int8* [In],identitycertificatechain : Int8* [In],groupid : UInt8* [In],groupsize : LibC::UINT_PTR [In],groupauthority : Int8* [In],manifestsxmls : Int8** [In],manifestscount : LibC::UINT_PTR [In]
   fun alljoyn_securityapplicationproxy_claim(proxy : Alljoyn_securityapplicationproxy, cakey : Int8*, identitycertificatechain : Int8*, groupid : UInt8*, groupsize : LibC::UINT_PTR, groupauthority : Int8*, manifestsxmls : Int8**, manifestscount : LibC::UINT_PTR) : QStatus
@@ -2302,7 +2302,7 @@ lib LibWin32
   fun alljoyn_securityapplicationproxy_getmanifesttemplate(proxy : Alljoyn_securityapplicationproxy, manifesttemplatexml : Int8**) : QStatus
 
   # Params # manifesttemplatexml : Int8* [In]
-  fun alljoyn_securityapplicationproxy_manifesttemplate_destroy(manifesttemplatexml : Int8*)
+  fun alljoyn_securityapplicationproxy_manifesttemplate_destroy(manifesttemplatexml : Int8*) : Void
 
   # Params # proxy : Alljoyn_securityapplicationproxy [In],applicationstate : Alljoyn_applicationstate* [In]
   fun alljoyn_securityapplicationproxy_getapplicationstate(proxy : Alljoyn_securityapplicationproxy, applicationstate : Alljoyn_applicationstate*) : QStatus
@@ -2320,7 +2320,7 @@ lib LibWin32
   fun alljoyn_securityapplicationproxy_getdefaultpolicy(proxy : Alljoyn_securityapplicationproxy, policyxml : Int8**) : QStatus
 
   # Params # policyxml : Int8* [In]
-  fun alljoyn_securityapplicationproxy_policy_destroy(policyxml : Int8*)
+  fun alljoyn_securityapplicationproxy_policy_destroy(policyxml : Int8*) : Void
 
   # Params # proxy : Alljoyn_securityapplicationproxy [In],policyxml : Int8* [In]
   fun alljoyn_securityapplicationproxy_updatepolicy(proxy : Alljoyn_securityapplicationproxy, policyxml : Int8*) : QStatus
@@ -2347,19 +2347,19 @@ lib LibWin32
   fun alljoyn_securityapplicationproxy_geteccpublickey(proxy : Alljoyn_securityapplicationproxy, eccpublickey : Int8**) : QStatus
 
   # Params # eccpublickey : Int8* [In]
-  fun alljoyn_securityapplicationproxy_eccpublickey_destroy(eccpublickey : Int8*)
+  fun alljoyn_securityapplicationproxy_eccpublickey_destroy(eccpublickey : Int8*) : Void
 
   # Params # unsignedmanifestxml : Int8* [In],identitycertificatepem : Int8* [In],signingprivatekeypem : Int8* [In],signedmanifestxml : Int8** [In]
   fun alljoyn_securityapplicationproxy_signmanifest(unsignedmanifestxml : Int8*, identitycertificatepem : Int8*, signingprivatekeypem : Int8*, signedmanifestxml : Int8**) : QStatus
 
   # Params # signedmanifestxml : Int8* [In]
-  fun alljoyn_securityapplicationproxy_manifest_destroy(signedmanifestxml : Int8*)
+  fun alljoyn_securityapplicationproxy_manifest_destroy(signedmanifestxml : Int8*) : Void
 
   # Params # unsignedmanifestxml : Int8* [In],identitycertificatepem : Int8* [In],digest : UInt8** [In],digestsize : LibC::UINT_PTR* [In]
   fun alljoyn_securityapplicationproxy_computemanifestdigest(unsignedmanifestxml : Int8*, identitycertificatepem : Int8*, digest : UInt8**, digestsize : LibC::UINT_PTR*) : QStatus
 
   # Params # digest : UInt8* [In]
-  fun alljoyn_securityapplicationproxy_digest_destroy(digest : UInt8*)
+  fun alljoyn_securityapplicationproxy_digest_destroy(digest : UInt8*) : Void
 
   # Params # unsignedmanifestxml : Int8* [In],identitycertificatepem : Int8* [In],signature : UInt8* [In],signaturesize : LibC::UINT_PTR [In],signedmanifestxml : Int8** [In]
   fun alljoyn_securityapplicationproxy_setmanifestsignature(unsignedmanifestxml : Int8*, identitycertificatepem : Int8*, signature : UInt8*, signaturesize : LibC::UINT_PTR, signedmanifestxml : Int8**) : QStatus

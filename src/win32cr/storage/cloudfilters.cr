@@ -665,7 +665,7 @@ lib LibWin32
   fun CfGetTransferKey(filehandle : LibC::HANDLE, transferkey : LARGE_INTEGER*) : HRESULT
 
   # Params # filehandle : LibC::HANDLE [In],transferkey : LARGE_INTEGER* [In]
-  fun CfReleaseTransferKey(filehandle : LibC::HANDLE, transferkey : LARGE_INTEGER*)
+  fun CfReleaseTransferKey(filehandle : LibC::HANDLE, transferkey : LARGE_INTEGER*) : Void
 
   # Params # opinfo : CF_OPERATION_INFO* [In],opparams : CF_OPERATION_PARAMETERS* [In]
   fun CfExecute(opinfo : CF_OPERATION_INFO*, opparams : CF_OPERATION_PARAMETERS*) : HRESULT
@@ -692,10 +692,10 @@ lib LibWin32
   fun CfGetWin32HandleFromProtectedHandle(protectedhandle : LibC::HANDLE) : LibC::HANDLE
 
   # Params # protectedhandle : LibC::HANDLE [In]
-  fun CfReleaseProtectedHandle(protectedhandle : LibC::HANDLE)
+  fun CfReleaseProtectedHandle(protectedhandle : LibC::HANDLE) : Void
 
   # Params # filehandle : LibC::HANDLE [In]
-  fun CfCloseHandle(filehandle : LibC::HANDLE)
+  fun CfCloseHandle(filehandle : LibC::HANDLE) : Void
 
   # Params # filehandle : LibC::HANDLE [In],fileidentity : Void* [In],fileidentitylength : UInt32 [In],convertflags : CF_CONVERT_FLAGS [In],convertusn : Int64* [In],overlapped : OVERLAPPED* [In]
   fun CfConvertToPlaceholder(filehandle : LibC::HANDLE, fileidentity : Void*, fileidentitylength : UInt32, convertflags : CF_CONVERT_FLAGS, convertusn : Int64*, overlapped : OVERLAPPED*) : HRESULT

@@ -817,35 +817,35 @@ lib LibWin32
 
 
   struct ITextStoreACPVTbl
-    query_interface : Proc(ITextStoreACP*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITextStoreACP*, UInt32)
-    release : Proc(ITextStoreACP*, UInt32)
-    advise_sink : Proc(ITextStoreACP*, Guid*, IUnknown, UInt32, HRESULT)
-    unadvise_sink : Proc(ITextStoreACP*, IUnknown, HRESULT)
-    request_lock : Proc(ITextStoreACP*, UInt32, HRESULT*, HRESULT)
-    get_status : Proc(ITextStoreACP*, TS_STATUS*, HRESULT)
-    query_insert : Proc(ITextStoreACP*, Int32, Int32, UInt32, Int32*, Int32*, HRESULT)
-    get_selection : Proc(ITextStoreACP*, UInt32, UInt32, TS_SELECTION_ACP*, UInt32*, HRESULT)
-    set_selection : Proc(ITextStoreACP*, UInt32, TS_SELECTION_ACP*, HRESULT)
-    get_text : Proc(ITextStoreACP*, Int32, Int32, Char*, UInt32, UInt32*, TS_RUNINFO*, UInt32, UInt32*, Int32*, HRESULT)
-    set_text : Proc(ITextStoreACP*, UInt32, Int32, Int32, Char*, UInt32, TS_TEXTCHANGE*, HRESULT)
-    get_formatted_text : Proc(ITextStoreACP*, Int32, Int32, IDataObject*, HRESULT)
-    get_embedded : Proc(ITextStoreACP*, Int32, Guid*, Guid*, IUnknown*, HRESULT)
-    query_insert_embedded : Proc(ITextStoreACP*, Guid*, FORMATETC*, LibC::BOOL*, HRESULT)
-    insert_embedded : Proc(ITextStoreACP*, UInt32, Int32, Int32, IDataObject, TS_TEXTCHANGE*, HRESULT)
-    insert_text_at_selection : Proc(ITextStoreACP*, UInt32, Char*, UInt32, Int32*, Int32*, TS_TEXTCHANGE*, HRESULT)
-    insert_embedded_at_selection : Proc(ITextStoreACP*, UInt32, IDataObject, Int32*, Int32*, TS_TEXTCHANGE*, HRESULT)
-    request_supported_attrs : Proc(ITextStoreACP*, UInt32, UInt32, Guid*, HRESULT)
-    request_attrs_at_position : Proc(ITextStoreACP*, Int32, UInt32, Guid*, UInt32, HRESULT)
-    request_attrs_transitioning_at_position : Proc(ITextStoreACP*, Int32, UInt32, Guid*, UInt32, HRESULT)
-    find_next_attr_transition : Proc(ITextStoreACP*, Int32, Int32, UInt32, Guid*, UInt32, Int32*, LibC::BOOL*, Int32*, HRESULT)
-    retrieve_requested_attrs : Proc(ITextStoreACP*, UInt32, TS_ATTRVAL*, UInt32*, HRESULT)
-    get_end_acp : Proc(ITextStoreACP*, Int32*, HRESULT)
-    get_active_view : Proc(ITextStoreACP*, UInt32*, HRESULT)
-    get_acp_from_point : Proc(ITextStoreACP*, UInt32, POINT*, UInt32, Int32*, HRESULT)
-    get_text_ext : Proc(ITextStoreACP*, UInt32, Int32, Int32, RECT*, LibC::BOOL*, HRESULT)
-    get_screen_ext : Proc(ITextStoreACP*, UInt32, RECT*, HRESULT)
-    get_wnd : Proc(ITextStoreACP*, UInt32, HANDLE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    advise_sink : UInt64
+    unadvise_sink : UInt64
+    request_lock : UInt64
+    get_status : UInt64
+    query_insert : UInt64
+    get_selection : UInt64
+    set_selection : UInt64
+    get_text : UInt64
+    set_text : UInt64
+    get_formatted_text : UInt64
+    get_embedded : UInt64
+    query_insert_embedded : UInt64
+    insert_embedded : UInt64
+    insert_text_at_selection : UInt64
+    insert_embedded_at_selection : UInt64
+    request_supported_attrs : UInt64
+    request_attrs_at_position : UInt64
+    request_attrs_transitioning_at_position : UInt64
+    find_next_attr_transition : UInt64
+    retrieve_requested_attrs : UInt64
+    get_end_acp : UInt64
+    get_active_view : UInt64
+    get_acp_from_point : UInt64
+    get_text_ext : UInt64
+    get_screen_ext : UInt64
+    get_wnd : UInt64
   end
 
   ITextStoreACP_GUID = "28888fe3-c2a0-483a-a3ea-8cb1ce51ff3d"
@@ -855,34 +855,34 @@ lib LibWin32
   end
 
   struct ITextStoreACP2VTbl
-    query_interface : Proc(ITextStoreACP2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITextStoreACP2*, UInt32)
-    release : Proc(ITextStoreACP2*, UInt32)
-    advise_sink : Proc(ITextStoreACP2*, Guid*, IUnknown, UInt32, HRESULT)
-    unadvise_sink : Proc(ITextStoreACP2*, IUnknown, HRESULT)
-    request_lock : Proc(ITextStoreACP2*, UInt32, HRESULT*, HRESULT)
-    get_status : Proc(ITextStoreACP2*, TS_STATUS*, HRESULT)
-    query_insert : Proc(ITextStoreACP2*, Int32, Int32, UInt32, Int32*, Int32*, HRESULT)
-    get_selection : Proc(ITextStoreACP2*, UInt32, UInt32, TS_SELECTION_ACP*, UInt32*, HRESULT)
-    set_selection : Proc(ITextStoreACP2*, UInt32, TS_SELECTION_ACP*, HRESULT)
-    get_text : Proc(ITextStoreACP2*, Int32, Int32, Char*, UInt32, UInt32*, TS_RUNINFO*, UInt32, UInt32*, Int32*, HRESULT)
-    set_text : Proc(ITextStoreACP2*, UInt32, Int32, Int32, Char*, UInt32, TS_TEXTCHANGE*, HRESULT)
-    get_formatted_text : Proc(ITextStoreACP2*, Int32, Int32, IDataObject*, HRESULT)
-    get_embedded : Proc(ITextStoreACP2*, Int32, Guid*, Guid*, IUnknown*, HRESULT)
-    query_insert_embedded : Proc(ITextStoreACP2*, Guid*, FORMATETC*, LibC::BOOL*, HRESULT)
-    insert_embedded : Proc(ITextStoreACP2*, UInt32, Int32, Int32, IDataObject, TS_TEXTCHANGE*, HRESULT)
-    insert_text_at_selection : Proc(ITextStoreACP2*, UInt32, Char*, UInt32, Int32*, Int32*, TS_TEXTCHANGE*, HRESULT)
-    insert_embedded_at_selection : Proc(ITextStoreACP2*, UInt32, IDataObject, Int32*, Int32*, TS_TEXTCHANGE*, HRESULT)
-    request_supported_attrs : Proc(ITextStoreACP2*, UInt32, UInt32, Guid*, HRESULT)
-    request_attrs_at_position : Proc(ITextStoreACP2*, Int32, UInt32, Guid*, UInt32, HRESULT)
-    request_attrs_transitioning_at_position : Proc(ITextStoreACP2*, Int32, UInt32, Guid*, UInt32, HRESULT)
-    find_next_attr_transition : Proc(ITextStoreACP2*, Int32, Int32, UInt32, Guid*, UInt32, Int32*, LibC::BOOL*, Int32*, HRESULT)
-    retrieve_requested_attrs : Proc(ITextStoreACP2*, UInt32, TS_ATTRVAL*, UInt32*, HRESULT)
-    get_end_acp : Proc(ITextStoreACP2*, Int32*, HRESULT)
-    get_active_view : Proc(ITextStoreACP2*, UInt32*, HRESULT)
-    get_acp_from_point : Proc(ITextStoreACP2*, UInt32, POINT*, UInt32, Int32*, HRESULT)
-    get_text_ext : Proc(ITextStoreACP2*, UInt32, Int32, Int32, RECT*, LibC::BOOL*, HRESULT)
-    get_screen_ext : Proc(ITextStoreACP2*, UInt32, RECT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    advise_sink : UInt64
+    unadvise_sink : UInt64
+    request_lock : UInt64
+    get_status : UInt64
+    query_insert : UInt64
+    get_selection : UInt64
+    set_selection : UInt64
+    get_text : UInt64
+    set_text : UInt64
+    get_formatted_text : UInt64
+    get_embedded : UInt64
+    query_insert_embedded : UInt64
+    insert_embedded : UInt64
+    insert_text_at_selection : UInt64
+    insert_embedded_at_selection : UInt64
+    request_supported_attrs : UInt64
+    request_attrs_at_position : UInt64
+    request_attrs_transitioning_at_position : UInt64
+    find_next_attr_transition : UInt64
+    retrieve_requested_attrs : UInt64
+    get_end_acp : UInt64
+    get_active_view : UInt64
+    get_acp_from_point : UInt64
+    get_text_ext : UInt64
+    get_screen_ext : UInt64
   end
 
   ITextStoreACP2_GUID = "f86ad89f-5fe4-4b8d-bb9f-ef3797a84f1f"
@@ -892,17 +892,17 @@ lib LibWin32
   end
 
   struct ITextStoreACPSinkVTbl
-    query_interface : Proc(ITextStoreACPSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITextStoreACPSink*, UInt32)
-    release : Proc(ITextStoreACPSink*, UInt32)
-    on_text_change : Proc(ITextStoreACPSink*, TEXT_STORE_TEXT_CHANGE_FLAGS, TS_TEXTCHANGE*, HRESULT)
-    on_selection_change : Proc(ITextStoreACPSink*, HRESULT)
-    on_layout_change : Proc(ITextStoreACPSink*, TsLayoutCode, UInt32, HRESULT)
-    on_status_change : Proc(ITextStoreACPSink*, UInt32, HRESULT)
-    on_attrs_change : Proc(ITextStoreACPSink*, Int32, Int32, UInt32, Guid*, HRESULT)
-    on_lock_granted : Proc(ITextStoreACPSink*, TEXT_STORE_LOCK_FLAGS, HRESULT)
-    on_start_edit_transaction : Proc(ITextStoreACPSink*, HRESULT)
-    on_end_edit_transaction : Proc(ITextStoreACPSink*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_text_change : UInt64
+    on_selection_change : UInt64
+    on_layout_change : UInt64
+    on_status_change : UInt64
+    on_attrs_change : UInt64
+    on_lock_granted : UInt64
+    on_start_edit_transaction : UInt64
+    on_end_edit_transaction : UInt64
   end
 
   ITextStoreACPSink_GUID = "22d44c94-a419-4542-a272-ae26093ececf"
@@ -912,20 +912,20 @@ lib LibWin32
   end
 
   struct IAnchorVTbl
-    query_interface : Proc(IAnchor*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAnchor*, UInt32)
-    release : Proc(IAnchor*, UInt32)
-    set_gravity : Proc(IAnchor*, TsGravity, HRESULT)
-    get_gravity : Proc(IAnchor*, TsGravity*, HRESULT)
-    is_equal : Proc(IAnchor*, IAnchor, LibC::BOOL*, HRESULT)
-    compare : Proc(IAnchor*, IAnchor, Int32*, HRESULT)
-    shift : Proc(IAnchor*, UInt32, Int32, Int32*, IAnchor, HRESULT)
-    shift_to : Proc(IAnchor*, IAnchor, HRESULT)
-    shift_region : Proc(IAnchor*, UInt32, TsShiftDir, LibC::BOOL*, HRESULT)
-    set_change_history_mask : Proc(IAnchor*, UInt32, HRESULT)
-    get_change_history : Proc(IAnchor*, ANCHOR_CHANGE_HISTORY_FLAGS*, HRESULT)
-    clear_change_history : Proc(IAnchor*, HRESULT)
-    clone : Proc(IAnchor*, IAnchor*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_gravity : UInt64
+    get_gravity : UInt64
+    is_equal : UInt64
+    compare : UInt64
+    shift : UInt64
+    shift_to : UInt64
+    shift_region : UInt64
+    set_change_history_mask : UInt64
+    get_change_history : UInt64
+    clear_change_history : UInt64
+    clone : UInt64
   end
 
   IAnchor_GUID = "0feb7e34-5a60-4356-8ef7-abdec2ff7cf8"
@@ -935,36 +935,36 @@ lib LibWin32
   end
 
   struct ITextStoreAnchorVTbl
-    query_interface : Proc(ITextStoreAnchor*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITextStoreAnchor*, UInt32)
-    release : Proc(ITextStoreAnchor*, UInt32)
-    advise_sink : Proc(ITextStoreAnchor*, Guid*, IUnknown, UInt32, HRESULT)
-    unadvise_sink : Proc(ITextStoreAnchor*, IUnknown, HRESULT)
-    request_lock : Proc(ITextStoreAnchor*, UInt32, HRESULT*, HRESULT)
-    get_status : Proc(ITextStoreAnchor*, TS_STATUS*, HRESULT)
-    query_insert : Proc(ITextStoreAnchor*, IAnchor, IAnchor, UInt32, IAnchor*, IAnchor*, HRESULT)
-    get_selection : Proc(ITextStoreAnchor*, UInt32, UInt32, TS_SELECTION_ANCHOR*, UInt32*, HRESULT)
-    set_selection : Proc(ITextStoreAnchor*, UInt32, TS_SELECTION_ANCHOR*, HRESULT)
-    get_text : Proc(ITextStoreAnchor*, UInt32, IAnchor, IAnchor, Char*, UInt32, UInt32*, LibC::BOOL, HRESULT)
-    set_text : Proc(ITextStoreAnchor*, UInt32, IAnchor, IAnchor, Char*, UInt32, HRESULT)
-    get_formatted_text : Proc(ITextStoreAnchor*, IAnchor, IAnchor, IDataObject*, HRESULT)
-    get_embedded : Proc(ITextStoreAnchor*, UInt32, IAnchor, Guid*, Guid*, IUnknown*, HRESULT)
-    insert_embedded : Proc(ITextStoreAnchor*, UInt32, IAnchor, IAnchor, IDataObject, HRESULT)
-    request_supported_attrs : Proc(ITextStoreAnchor*, UInt32, UInt32, Guid*, HRESULT)
-    request_attrs_at_position : Proc(ITextStoreAnchor*, IAnchor, UInt32, Guid*, UInt32, HRESULT)
-    request_attrs_transitioning_at_position : Proc(ITextStoreAnchor*, IAnchor, UInt32, Guid*, UInt32, HRESULT)
-    find_next_attr_transition : Proc(ITextStoreAnchor*, IAnchor, IAnchor, UInt32, Guid*, UInt32, LibC::BOOL*, Int32*, HRESULT)
-    retrieve_requested_attrs : Proc(ITextStoreAnchor*, UInt32, TS_ATTRVAL*, UInt32*, HRESULT)
-    get_start : Proc(ITextStoreAnchor*, IAnchor*, HRESULT)
-    get_end : Proc(ITextStoreAnchor*, IAnchor*, HRESULT)
-    get_active_view : Proc(ITextStoreAnchor*, UInt32*, HRESULT)
-    get_anchor_from_point : Proc(ITextStoreAnchor*, UInt32, POINT*, UInt32, IAnchor*, HRESULT)
-    get_text_ext : Proc(ITextStoreAnchor*, UInt32, IAnchor, IAnchor, RECT*, LibC::BOOL*, HRESULT)
-    get_screen_ext : Proc(ITextStoreAnchor*, UInt32, RECT*, HRESULT)
-    get_wnd : Proc(ITextStoreAnchor*, UInt32, HANDLE*, HRESULT)
-    query_insert_embedded : Proc(ITextStoreAnchor*, Guid*, FORMATETC*, LibC::BOOL*, HRESULT)
-    insert_text_at_selection : Proc(ITextStoreAnchor*, UInt32, Char*, UInt32, IAnchor*, IAnchor*, HRESULT)
-    insert_embedded_at_selection : Proc(ITextStoreAnchor*, UInt32, IDataObject, IAnchor*, IAnchor*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    advise_sink : UInt64
+    unadvise_sink : UInt64
+    request_lock : UInt64
+    get_status : UInt64
+    query_insert : UInt64
+    get_selection : UInt64
+    set_selection : UInt64
+    get_text : UInt64
+    set_text : UInt64
+    get_formatted_text : UInt64
+    get_embedded : UInt64
+    insert_embedded : UInt64
+    request_supported_attrs : UInt64
+    request_attrs_at_position : UInt64
+    request_attrs_transitioning_at_position : UInt64
+    find_next_attr_transition : UInt64
+    retrieve_requested_attrs : UInt64
+    get_start : UInt64
+    get_end : UInt64
+    get_active_view : UInt64
+    get_anchor_from_point : UInt64
+    get_text_ext : UInt64
+    get_screen_ext : UInt64
+    get_wnd : UInt64
+    query_insert_embedded : UInt64
+    insert_text_at_selection : UInt64
+    insert_embedded_at_selection : UInt64
   end
 
   ITextStoreAnchor_GUID = "9b2077b0-5f18-4dec-bee9-3cc722f5dfe0"
@@ -974,17 +974,17 @@ lib LibWin32
   end
 
   struct ITextStoreAnchorSinkVTbl
-    query_interface : Proc(ITextStoreAnchorSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITextStoreAnchorSink*, UInt32)
-    release : Proc(ITextStoreAnchorSink*, UInt32)
-    on_text_change : Proc(ITextStoreAnchorSink*, TEXT_STORE_CHANGE_FLAGS, IAnchor, IAnchor, HRESULT)
-    on_selection_change : Proc(ITextStoreAnchorSink*, HRESULT)
-    on_layout_change : Proc(ITextStoreAnchorSink*, TsLayoutCode, UInt32, HRESULT)
-    on_status_change : Proc(ITextStoreAnchorSink*, UInt32, HRESULT)
-    on_attrs_change : Proc(ITextStoreAnchorSink*, IAnchor, IAnchor, UInt32, Guid*, HRESULT)
-    on_lock_granted : Proc(ITextStoreAnchorSink*, TEXT_STORE_LOCK_FLAGS, HRESULT)
-    on_start_edit_transaction : Proc(ITextStoreAnchorSink*, HRESULT)
-    on_end_edit_transaction : Proc(ITextStoreAnchorSink*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_text_change : UInt64
+    on_selection_change : UInt64
+    on_layout_change : UInt64
+    on_status_change : UInt64
+    on_attrs_change : UInt64
+    on_lock_granted : UInt64
+    on_start_edit_transaction : UInt64
+    on_end_edit_transaction : UInt64
   end
 
   ITextStoreAnchorSink_GUID = "aa80e905-2021-11d2-93e0-0060b067b86e"
@@ -994,18 +994,18 @@ lib LibWin32
   end
 
   struct ITfLangBarMgrVTbl
-    query_interface : Proc(ITfLangBarMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfLangBarMgr*, UInt32)
-    release : Proc(ITfLangBarMgr*, UInt32)
-    advise_event_sink : Proc(ITfLangBarMgr*, ITfLangBarEventSink, LibC::HANDLE, UInt32, UInt32*, HRESULT)
-    unadvise_event_sink : Proc(ITfLangBarMgr*, UInt32, HRESULT)
-    get_thread_marshal_interface : Proc(ITfLangBarMgr*, UInt32, UInt32, Guid*, IUnknown*, HRESULT)
-    get_thread_lang_bar_item_mgr : Proc(ITfLangBarMgr*, UInt32, ITfLangBarItemMgr*, UInt32*, HRESULT)
-    get_input_processor_profiles : Proc(ITfLangBarMgr*, UInt32, ITfInputProcessorProfiles*, UInt32*, HRESULT)
-    restore_last_focus : Proc(ITfLangBarMgr*, UInt32*, LibC::BOOL, HRESULT)
-    set_modal_input : Proc(ITfLangBarMgr*, ITfLangBarEventSink, UInt32, UInt32, HRESULT)
-    show_floating : Proc(ITfLangBarMgr*, UInt32, HRESULT)
-    get_show_floating_status : Proc(ITfLangBarMgr*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    advise_event_sink : UInt64
+    unadvise_event_sink : UInt64
+    get_thread_marshal_interface : UInt64
+    get_thread_lang_bar_item_mgr : UInt64
+    get_input_processor_profiles : UInt64
+    restore_last_focus : UInt64
+    set_modal_input : UInt64
+    show_floating : UInt64
+    get_show_floating_status : UInt64
   end
 
   ITfLangBarMgr_GUID = "87955690-e627-11d2-8ddb-00105a2799b5"
@@ -1015,15 +1015,15 @@ lib LibWin32
   end
 
   struct ITfLangBarEventSinkVTbl
-    query_interface : Proc(ITfLangBarEventSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfLangBarEventSink*, UInt32)
-    release : Proc(ITfLangBarEventSink*, UInt32)
-    on_set_focus : Proc(ITfLangBarEventSink*, UInt32, HRESULT)
-    on_thread_terminate : Proc(ITfLangBarEventSink*, UInt32, HRESULT)
-    on_thread_item_change : Proc(ITfLangBarEventSink*, UInt32, HRESULT)
-    on_modal_input : Proc(ITfLangBarEventSink*, UInt32, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)
-    show_floating : Proc(ITfLangBarEventSink*, UInt32, HRESULT)
-    get_item_floating_rect : Proc(ITfLangBarEventSink*, UInt32, Guid*, RECT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_set_focus : UInt64
+    on_thread_terminate : UInt64
+    on_thread_item_change : UInt64
+    on_modal_input : UInt64
+    show_floating : UInt64
+    get_item_floating_rect : UInt64
   end
 
   ITfLangBarEventSink_GUID = "18a4e900-e0ae-11d2-afdd-00105a2799b5"
@@ -1033,10 +1033,10 @@ lib LibWin32
   end
 
   struct ITfLangBarItemSinkVTbl
-    query_interface : Proc(ITfLangBarItemSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfLangBarItemSink*, UInt32)
-    release : Proc(ITfLangBarItemSink*, UInt32)
-    on_update : Proc(ITfLangBarItemSink*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_update : UInt64
   end
 
   ITfLangBarItemSink_GUID = "57dbe1a0-de25-11d2-afdd-00105a2799b5"
@@ -1046,13 +1046,13 @@ lib LibWin32
   end
 
   struct IEnumTfLangBarItemsVTbl
-    query_interface : Proc(IEnumTfLangBarItems*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumTfLangBarItems*, UInt32)
-    release : Proc(IEnumTfLangBarItems*, UInt32)
-    clone : Proc(IEnumTfLangBarItems*, IEnumTfLangBarItems*, HRESULT)
-    next : Proc(IEnumTfLangBarItems*, UInt32, ITfLangBarItem*, UInt32*, HRESULT)
-    reset : Proc(IEnumTfLangBarItems*, HRESULT)
-    skip : Proc(IEnumTfLangBarItems*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumTfLangBarItems_GUID = "583f34d0-de25-11d2-afdd-00105a2799b5"
@@ -1062,21 +1062,21 @@ lib LibWin32
   end
 
   struct ITfLangBarItemMgrVTbl
-    query_interface : Proc(ITfLangBarItemMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfLangBarItemMgr*, UInt32)
-    release : Proc(ITfLangBarItemMgr*, UInt32)
-    enum_items : Proc(ITfLangBarItemMgr*, IEnumTfLangBarItems*, HRESULT)
-    get_item : Proc(ITfLangBarItemMgr*, Guid*, ITfLangBarItem*, HRESULT)
-    add_item : Proc(ITfLangBarItemMgr*, ITfLangBarItem, HRESULT)
-    remove_item : Proc(ITfLangBarItemMgr*, ITfLangBarItem, HRESULT)
-    advise_item_sink : Proc(ITfLangBarItemMgr*, ITfLangBarItemSink, UInt32*, Guid*, HRESULT)
-    unadvise_item_sink : Proc(ITfLangBarItemMgr*, UInt32, HRESULT)
-    get_item_floating_rect : Proc(ITfLangBarItemMgr*, UInt32, Guid*, RECT*, HRESULT)
-    get_items_status : Proc(ITfLangBarItemMgr*, UInt32, Guid*, UInt32*, HRESULT)
-    get_item_num : Proc(ITfLangBarItemMgr*, UInt32*, HRESULT)
-    get_items : Proc(ITfLangBarItemMgr*, UInt32, ITfLangBarItem*, TF_LANGBARITEMINFO*, UInt32*, UInt32*, HRESULT)
-    advise_items_sink : Proc(ITfLangBarItemMgr*, UInt32, ITfLangBarItemSink*, Guid*, UInt32*, HRESULT)
-    unadvise_items_sink : Proc(ITfLangBarItemMgr*, UInt32, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enum_items : UInt64
+    get_item : UInt64
+    add_item : UInt64
+    remove_item : UInt64
+    advise_item_sink : UInt64
+    unadvise_item_sink : UInt64
+    get_item_floating_rect : UInt64
+    get_items_status : UInt64
+    get_item_num : UInt64
+    get_items : UInt64
+    advise_items_sink : UInt64
+    unadvise_items_sink : UInt64
   end
 
   ITfLangBarItemMgr_GUID = "ba468c55-9956-4fb1-a59d-52a7dd7cc6aa"
@@ -1086,13 +1086,13 @@ lib LibWin32
   end
 
   struct ITfLangBarItemVTbl
-    query_interface : Proc(ITfLangBarItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfLangBarItem*, UInt32)
-    release : Proc(ITfLangBarItem*, UInt32)
-    get_info : Proc(ITfLangBarItem*, TF_LANGBARITEMINFO*, HRESULT)
-    get_status : Proc(ITfLangBarItem*, UInt32*, HRESULT)
-    show : Proc(ITfLangBarItem*, LibC::BOOL, HRESULT)
-    get_tooltip_string : Proc(ITfLangBarItem*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_info : UInt64
+    get_status : UInt64
+    show : UInt64
+    get_tooltip_string : UInt64
   end
 
   ITfLangBarItem_GUID = "73540d69-edeb-4ee9-96c9-23aa30b25916"
@@ -1102,11 +1102,11 @@ lib LibWin32
   end
 
   struct ITfSystemLangBarItemSinkVTbl
-    query_interface : Proc(ITfSystemLangBarItemSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfSystemLangBarItemSink*, UInt32)
-    release : Proc(ITfSystemLangBarItemSink*, UInt32)
-    init_menu : Proc(ITfSystemLangBarItemSink*, ITfMenu, HRESULT)
-    on_menu_select : Proc(ITfSystemLangBarItemSink*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    init_menu : UInt64
+    on_menu_select : UInt64
   end
 
   ITfSystemLangBarItemSink_GUID = "1449d9ab-13cf-4687-aa3e-8d8b18574396"
@@ -1116,11 +1116,11 @@ lib LibWin32
   end
 
   struct ITfSystemLangBarItemVTbl
-    query_interface : Proc(ITfSystemLangBarItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfSystemLangBarItem*, UInt32)
-    release : Proc(ITfSystemLangBarItem*, UInt32)
-    set_icon : Proc(ITfSystemLangBarItem*, LibC::HANDLE, HRESULT)
-    set_tooltip_string : Proc(ITfSystemLangBarItem*, Char*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_icon : UInt64
+    set_tooltip_string : UInt64
   end
 
   ITfSystemLangBarItem_GUID = "1e13e9ec-6b33-4d4a-b5eb-8a92f029f356"
@@ -1130,11 +1130,11 @@ lib LibWin32
   end
 
   struct ITfSystemLangBarItemTextVTbl
-    query_interface : Proc(ITfSystemLangBarItemText*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfSystemLangBarItemText*, UInt32)
-    release : Proc(ITfSystemLangBarItemText*, UInt32)
-    set_item_text : Proc(ITfSystemLangBarItemText*, Char*, UInt32, HRESULT)
-    get_item_text : Proc(ITfSystemLangBarItemText*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_item_text : UInt64
+    get_item_text : UInt64
   end
 
   ITfSystemLangBarItemText_GUID = "5c4ce0e5-ba49-4b52-ac6b-3b397b4f701f"
@@ -1144,11 +1144,11 @@ lib LibWin32
   end
 
   struct ITfSystemDeviceTypeLangBarItemVTbl
-    query_interface : Proc(ITfSystemDeviceTypeLangBarItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfSystemDeviceTypeLangBarItem*, UInt32)
-    release : Proc(ITfSystemDeviceTypeLangBarItem*, UInt32)
-    set_icon_mode : Proc(ITfSystemDeviceTypeLangBarItem*, LANG_BAR_ITEM_ICON_MODE_FLAGS, HRESULT)
-    get_icon_mode : Proc(ITfSystemDeviceTypeLangBarItem*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_icon_mode : UInt64
+    get_icon_mode : UInt64
   end
 
   ITfSystemDeviceTypeLangBarItem_GUID = "45672eb9-9059-46a2-838d-4530355f6a77"
@@ -1158,18 +1158,18 @@ lib LibWin32
   end
 
   struct ITfLangBarItemButtonVTbl
-    query_interface : Proc(ITfLangBarItemButton*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfLangBarItemButton*, UInt32)
-    release : Proc(ITfLangBarItemButton*, UInt32)
-    get_info : Proc(ITfLangBarItemButton*, TF_LANGBARITEMINFO*, HRESULT)
-    get_status : Proc(ITfLangBarItemButton*, UInt32*, HRESULT)
-    show : Proc(ITfLangBarItemButton*, LibC::BOOL, HRESULT)
-    get_tooltip_string : Proc(ITfLangBarItemButton*, UInt8**, HRESULT)
-    on_click : Proc(ITfLangBarItemButton*, TfLBIClick, POINT, RECT*, HRESULT)
-    init_menu : Proc(ITfLangBarItemButton*, ITfMenu, HRESULT)
-    on_menu_select : Proc(ITfLangBarItemButton*, UInt32, HRESULT)
-    get_icon : Proc(ITfLangBarItemButton*, HANDLE*, HRESULT)
-    get_text : Proc(ITfLangBarItemButton*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_info : UInt64
+    get_status : UInt64
+    show : UInt64
+    get_tooltip_string : UInt64
+    on_click : UInt64
+    init_menu : UInt64
+    on_menu_select : UInt64
+    get_icon : UInt64
+    get_text : UInt64
   end
 
   ITfLangBarItemButton_GUID = "28c7f1d0-de25-11d2-afdd-00105a2799b5"
@@ -1179,19 +1179,19 @@ lib LibWin32
   end
 
   struct ITfLangBarItemBitmapButtonVTbl
-    query_interface : Proc(ITfLangBarItemBitmapButton*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfLangBarItemBitmapButton*, UInt32)
-    release : Proc(ITfLangBarItemBitmapButton*, UInt32)
-    get_info : Proc(ITfLangBarItemBitmapButton*, TF_LANGBARITEMINFO*, HRESULT)
-    get_status : Proc(ITfLangBarItemBitmapButton*, UInt32*, HRESULT)
-    show : Proc(ITfLangBarItemBitmapButton*, LibC::BOOL, HRESULT)
-    get_tooltip_string : Proc(ITfLangBarItemBitmapButton*, UInt8**, HRESULT)
-    on_click : Proc(ITfLangBarItemBitmapButton*, TfLBIClick, POINT, RECT*, HRESULT)
-    init_menu : Proc(ITfLangBarItemBitmapButton*, ITfMenu, HRESULT)
-    on_menu_select : Proc(ITfLangBarItemBitmapButton*, UInt32, HRESULT)
-    get_preferred_size : Proc(ITfLangBarItemBitmapButton*, SIZE*, SIZE*, HRESULT)
-    draw_bitmap : Proc(ITfLangBarItemBitmapButton*, Int32, Int32, UInt32, HBITMAP*, HBITMAP*, HRESULT)
-    get_text : Proc(ITfLangBarItemBitmapButton*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_info : UInt64
+    get_status : UInt64
+    show : UInt64
+    get_tooltip_string : UInt64
+    on_click : UInt64
+    init_menu : UInt64
+    on_menu_select : UInt64
+    get_preferred_size : UInt64
+    draw_bitmap : UInt64
+    get_text : UInt64
   end
 
   ITfLangBarItemBitmapButton_GUID = "a26a0525-3fae-4fa0-89ee-88a964f9f1b5"
@@ -1201,16 +1201,16 @@ lib LibWin32
   end
 
   struct ITfLangBarItemBitmapVTbl
-    query_interface : Proc(ITfLangBarItemBitmap*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfLangBarItemBitmap*, UInt32)
-    release : Proc(ITfLangBarItemBitmap*, UInt32)
-    get_info : Proc(ITfLangBarItemBitmap*, TF_LANGBARITEMINFO*, HRESULT)
-    get_status : Proc(ITfLangBarItemBitmap*, UInt32*, HRESULT)
-    show : Proc(ITfLangBarItemBitmap*, LibC::BOOL, HRESULT)
-    get_tooltip_string : Proc(ITfLangBarItemBitmap*, UInt8**, HRESULT)
-    on_click : Proc(ITfLangBarItemBitmap*, TfLBIClick, POINT, RECT*, HRESULT)
-    get_preferred_size : Proc(ITfLangBarItemBitmap*, SIZE*, SIZE*, HRESULT)
-    draw_bitmap : Proc(ITfLangBarItemBitmap*, Int32, Int32, UInt32, HBITMAP*, HBITMAP*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_info : UInt64
+    get_status : UInt64
+    show : UInt64
+    get_tooltip_string : UInt64
+    on_click : UInt64
+    get_preferred_size : UInt64
+    draw_bitmap : UInt64
   end
 
   ITfLangBarItemBitmap_GUID = "73830352-d722-4179-ada5-f045c98df355"
@@ -1220,16 +1220,16 @@ lib LibWin32
   end
 
   struct ITfLangBarItemBalloonVTbl
-    query_interface : Proc(ITfLangBarItemBalloon*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfLangBarItemBalloon*, UInt32)
-    release : Proc(ITfLangBarItemBalloon*, UInt32)
-    get_info : Proc(ITfLangBarItemBalloon*, TF_LANGBARITEMINFO*, HRESULT)
-    get_status : Proc(ITfLangBarItemBalloon*, UInt32*, HRESULT)
-    show : Proc(ITfLangBarItemBalloon*, LibC::BOOL, HRESULT)
-    get_tooltip_string : Proc(ITfLangBarItemBalloon*, UInt8**, HRESULT)
-    on_click : Proc(ITfLangBarItemBalloon*, TfLBIClick, POINT, RECT*, HRESULT)
-    get_preferred_size : Proc(ITfLangBarItemBalloon*, SIZE*, SIZE*, HRESULT)
-    get_balloon_info : Proc(ITfLangBarItemBalloon*, TF_LBBALLOONINFO*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_info : UInt64
+    get_status : UInt64
+    show : UInt64
+    get_tooltip_string : UInt64
+    on_click : UInt64
+    get_preferred_size : UInt64
+    get_balloon_info : UInt64
   end
 
   ITfLangBarItemBalloon_GUID = "01c2d285-d3c7-4b7b-b5b5-d97411d0c283"
@@ -1239,10 +1239,10 @@ lib LibWin32
   end
 
   struct ITfMenuVTbl
-    query_interface : Proc(ITfMenu*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfMenu*, UInt32)
-    release : Proc(ITfMenu*, UInt32)
-    add_menu_item : Proc(ITfMenu*, UInt32, UInt32, HBITMAP, HBITMAP, Char*, UInt32, ITfMenu*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_menu_item : UInt64
   end
 
   ITfMenu_GUID = "6f8a98e4-aaa0-4f15-8c5b-07e0df0a3dd8"
@@ -1252,20 +1252,20 @@ lib LibWin32
   end
 
   struct ITfThreadMgrVTbl
-    query_interface : Proc(ITfThreadMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfThreadMgr*, UInt32)
-    release : Proc(ITfThreadMgr*, UInt32)
-    activate : Proc(ITfThreadMgr*, UInt32*, HRESULT)
-    deactivate : Proc(ITfThreadMgr*, HRESULT)
-    create_document_mgr : Proc(ITfThreadMgr*, ITfDocumentMgr*, HRESULT)
-    enum_document_mgrs : Proc(ITfThreadMgr*, IEnumTfDocumentMgrs*, HRESULT)
-    get_focus : Proc(ITfThreadMgr*, ITfDocumentMgr*, HRESULT)
-    set_focus : Proc(ITfThreadMgr*, ITfDocumentMgr, HRESULT)
-    associate_focus : Proc(ITfThreadMgr*, LibC::HANDLE, ITfDocumentMgr, ITfDocumentMgr*, HRESULT)
-    is_thread_focus : Proc(ITfThreadMgr*, LibC::BOOL*, HRESULT)
-    get_function_provider : Proc(ITfThreadMgr*, Guid*, ITfFunctionProvider*, HRESULT)
-    enum_function_providers : Proc(ITfThreadMgr*, IEnumTfFunctionProviders*, HRESULT)
-    get_global_compartment : Proc(ITfThreadMgr*, ITfCompartmentMgr*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    activate : UInt64
+    deactivate : UInt64
+    create_document_mgr : UInt64
+    enum_document_mgrs : UInt64
+    get_focus : UInt64
+    set_focus : UInt64
+    associate_focus : UInt64
+    is_thread_focus : UInt64
+    get_function_provider : UInt64
+    enum_function_providers : UInt64
+    get_global_compartment : UInt64
   end
 
   ITfThreadMgr_GUID = "aa80e801-2021-11d2-93e0-0060b067b86e"
@@ -1275,22 +1275,22 @@ lib LibWin32
   end
 
   struct ITfThreadMgrExVTbl
-    query_interface : Proc(ITfThreadMgrEx*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfThreadMgrEx*, UInt32)
-    release : Proc(ITfThreadMgrEx*, UInt32)
-    activate : Proc(ITfThreadMgrEx*, UInt32*, HRESULT)
-    deactivate : Proc(ITfThreadMgrEx*, HRESULT)
-    create_document_mgr : Proc(ITfThreadMgrEx*, ITfDocumentMgr*, HRESULT)
-    enum_document_mgrs : Proc(ITfThreadMgrEx*, IEnumTfDocumentMgrs*, HRESULT)
-    get_focus : Proc(ITfThreadMgrEx*, ITfDocumentMgr*, HRESULT)
-    set_focus : Proc(ITfThreadMgrEx*, ITfDocumentMgr, HRESULT)
-    associate_focus : Proc(ITfThreadMgrEx*, LibC::HANDLE, ITfDocumentMgr, ITfDocumentMgr*, HRESULT)
-    is_thread_focus : Proc(ITfThreadMgrEx*, LibC::BOOL*, HRESULT)
-    get_function_provider : Proc(ITfThreadMgrEx*, Guid*, ITfFunctionProvider*, HRESULT)
-    enum_function_providers : Proc(ITfThreadMgrEx*, IEnumTfFunctionProviders*, HRESULT)
-    get_global_compartment : Proc(ITfThreadMgrEx*, ITfCompartmentMgr*, HRESULT)
-    activate_ex : Proc(ITfThreadMgrEx*, UInt32*, UInt32, HRESULT)
-    get_active_flags : Proc(ITfThreadMgrEx*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    activate : UInt64
+    deactivate : UInt64
+    create_document_mgr : UInt64
+    enum_document_mgrs : UInt64
+    get_focus : UInt64
+    set_focus : UInt64
+    associate_focus : UInt64
+    is_thread_focus : UInt64
+    get_function_provider : UInt64
+    enum_function_providers : UInt64
+    get_global_compartment : UInt64
+    activate_ex : UInt64
+    get_active_flags : UInt64
   end
 
   ITfThreadMgrEx_GUID = "3e90ade3-7594-4cb0-bb58-69628f5f458c"
@@ -1300,23 +1300,23 @@ lib LibWin32
   end
 
   struct ITfThreadMgr2VTbl
-    query_interface : Proc(ITfThreadMgr2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfThreadMgr2*, UInt32)
-    release : Proc(ITfThreadMgr2*, UInt32)
-    activate : Proc(ITfThreadMgr2*, UInt32*, HRESULT)
-    deactivate : Proc(ITfThreadMgr2*, HRESULT)
-    create_document_mgr : Proc(ITfThreadMgr2*, ITfDocumentMgr*, HRESULT)
-    enum_document_mgrs : Proc(ITfThreadMgr2*, IEnumTfDocumentMgrs*, HRESULT)
-    get_focus : Proc(ITfThreadMgr2*, ITfDocumentMgr*, HRESULT)
-    set_focus : Proc(ITfThreadMgr2*, ITfDocumentMgr, HRESULT)
-    is_thread_focus : Proc(ITfThreadMgr2*, LibC::BOOL*, HRESULT)
-    get_function_provider : Proc(ITfThreadMgr2*, Guid*, ITfFunctionProvider*, HRESULT)
-    enum_function_providers : Proc(ITfThreadMgr2*, IEnumTfFunctionProviders*, HRESULT)
-    get_global_compartment : Proc(ITfThreadMgr2*, ITfCompartmentMgr*, HRESULT)
-    activate_ex : Proc(ITfThreadMgr2*, UInt32*, UInt32, HRESULT)
-    get_active_flags : Proc(ITfThreadMgr2*, UInt32*, HRESULT)
-    suspend_keystroke_handling : Proc(ITfThreadMgr2*, HRESULT)
-    resume_keystroke_handling : Proc(ITfThreadMgr2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    activate : UInt64
+    deactivate : UInt64
+    create_document_mgr : UInt64
+    enum_document_mgrs : UInt64
+    get_focus : UInt64
+    set_focus : UInt64
+    is_thread_focus : UInt64
+    get_function_provider : UInt64
+    enum_function_providers : UInt64
+    get_global_compartment : UInt64
+    activate_ex : UInt64
+    get_active_flags : UInt64
+    suspend_keystroke_handling : UInt64
+    resume_keystroke_handling : UInt64
   end
 
   ITfThreadMgr2_GUID = "0ab198ef-6477-4ee8-8812-6780edb82d5e"
@@ -1326,14 +1326,14 @@ lib LibWin32
   end
 
   struct ITfThreadMgrEventSinkVTbl
-    query_interface : Proc(ITfThreadMgrEventSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfThreadMgrEventSink*, UInt32)
-    release : Proc(ITfThreadMgrEventSink*, UInt32)
-    on_init_document_mgr : Proc(ITfThreadMgrEventSink*, ITfDocumentMgr, HRESULT)
-    on_uninit_document_mgr : Proc(ITfThreadMgrEventSink*, ITfDocumentMgr, HRESULT)
-    on_set_focus : Proc(ITfThreadMgrEventSink*, ITfDocumentMgr, ITfDocumentMgr, HRESULT)
-    on_push_context : Proc(ITfThreadMgrEventSink*, ITfContext, HRESULT)
-    on_pop_context : Proc(ITfThreadMgrEventSink*, ITfContext, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_init_document_mgr : UInt64
+    on_uninit_document_mgr : UInt64
+    on_set_focus : UInt64
+    on_push_context : UInt64
+    on_pop_context : UInt64
   end
 
   ITfThreadMgrEventSink_GUID = "aa80e80e-2021-11d2-93e0-0060b067b86e"
@@ -1343,11 +1343,11 @@ lib LibWin32
   end
 
   struct ITfConfigureSystemKeystrokeFeedVTbl
-    query_interface : Proc(ITfConfigureSystemKeystrokeFeed*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfConfigureSystemKeystrokeFeed*, UInt32)
-    release : Proc(ITfConfigureSystemKeystrokeFeed*, UInt32)
-    disable_system_keystroke_feed : Proc(ITfConfigureSystemKeystrokeFeed*, HRESULT)
-    enable_system_keystroke_feed : Proc(ITfConfigureSystemKeystrokeFeed*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    disable_system_keystroke_feed : UInt64
+    enable_system_keystroke_feed : UInt64
   end
 
   ITfConfigureSystemKeystrokeFeed_GUID = "0d2c969a-bc9c-437c-84ee-951c49b1a764"
@@ -1357,13 +1357,13 @@ lib LibWin32
   end
 
   struct IEnumTfDocumentMgrsVTbl
-    query_interface : Proc(IEnumTfDocumentMgrs*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumTfDocumentMgrs*, UInt32)
-    release : Proc(IEnumTfDocumentMgrs*, UInt32)
-    clone : Proc(IEnumTfDocumentMgrs*, IEnumTfDocumentMgrs*, HRESULT)
-    next : Proc(IEnumTfDocumentMgrs*, UInt32, ITfDocumentMgr*, UInt32*, HRESULT)
-    reset : Proc(IEnumTfDocumentMgrs*, HRESULT)
-    skip : Proc(IEnumTfDocumentMgrs*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumTfDocumentMgrs_GUID = "aa80e808-2021-11d2-93e0-0060b067b86e"
@@ -1373,15 +1373,15 @@ lib LibWin32
   end
 
   struct ITfDocumentMgrVTbl
-    query_interface : Proc(ITfDocumentMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfDocumentMgr*, UInt32)
-    release : Proc(ITfDocumentMgr*, UInt32)
-    create_context : Proc(ITfDocumentMgr*, UInt32, UInt32, IUnknown, ITfContext*, UInt32*, HRESULT)
-    push : Proc(ITfDocumentMgr*, ITfContext, HRESULT)
-    pop : Proc(ITfDocumentMgr*, UInt32, HRESULT)
-    get_top : Proc(ITfDocumentMgr*, ITfContext*, HRESULT)
-    get_base : Proc(ITfDocumentMgr*, ITfContext*, HRESULT)
-    enum_contexts : Proc(ITfDocumentMgr*, IEnumTfContexts*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_context : UInt64
+    push : UInt64
+    pop : UInt64
+    get_top : UInt64
+    get_base : UInt64
+    enum_contexts : UInt64
   end
 
   ITfDocumentMgr_GUID = "aa80e7f4-2021-11d2-93e0-0060b067b86e"
@@ -1391,13 +1391,13 @@ lib LibWin32
   end
 
   struct IEnumTfContextsVTbl
-    query_interface : Proc(IEnumTfContexts*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumTfContexts*, UInt32)
-    release : Proc(IEnumTfContexts*, UInt32)
-    clone : Proc(IEnumTfContexts*, IEnumTfContexts*, HRESULT)
-    next : Proc(IEnumTfContexts*, UInt32, ITfContext*, UInt32*, HRESULT)
-    reset : Proc(IEnumTfContexts*, HRESULT)
-    skip : Proc(IEnumTfContexts*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumTfContexts_GUID = "8f1a7ea6-1654-4502-a86e-b2902344d507"
@@ -1407,11 +1407,11 @@ lib LibWin32
   end
 
   struct ITfCompositionViewVTbl
-    query_interface : Proc(ITfCompositionView*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfCompositionView*, UInt32)
-    release : Proc(ITfCompositionView*, UInt32)
-    get_owner_clsid : Proc(ITfCompositionView*, Guid*, HRESULT)
-    get_range : Proc(ITfCompositionView*, ITfRange*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner_clsid : UInt64
+    get_range : UInt64
   end
 
   ITfCompositionView_GUID = "d7540241-f9a1-4364-befc-dbcd2c4395b7"
@@ -1421,13 +1421,13 @@ lib LibWin32
   end
 
   struct IEnumITfCompositionViewVTbl
-    query_interface : Proc(IEnumITfCompositionView*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumITfCompositionView*, UInt32)
-    release : Proc(IEnumITfCompositionView*, UInt32)
-    clone : Proc(IEnumITfCompositionView*, IEnumITfCompositionView*, HRESULT)
-    next : Proc(IEnumITfCompositionView*, UInt32, ITfCompositionView*, UInt32*, HRESULT)
-    reset : Proc(IEnumITfCompositionView*, HRESULT)
-    skip : Proc(IEnumITfCompositionView*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumITfCompositionView_GUID = "5efd22ba-7838-46cb-88e2-cadb14124f8f"
@@ -1437,13 +1437,13 @@ lib LibWin32
   end
 
   struct ITfCompositionVTbl
-    query_interface : Proc(ITfComposition*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfComposition*, UInt32)
-    release : Proc(ITfComposition*, UInt32)
-    get_range : Proc(ITfComposition*, ITfRange*, HRESULT)
-    shift_start : Proc(ITfComposition*, UInt32, ITfRange, HRESULT)
-    shift_end : Proc(ITfComposition*, UInt32, ITfRange, HRESULT)
-    end_composition : Proc(ITfComposition*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_range : UInt64
+    shift_start : UInt64
+    shift_end : UInt64
+    end_composition : UInt64
   end
 
   ITfComposition_GUID = "20168d64-5a8f-4a5a-b7bd-cfa29f4d0fd9"
@@ -1453,10 +1453,10 @@ lib LibWin32
   end
 
   struct ITfCompositionSinkVTbl
-    query_interface : Proc(ITfCompositionSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfCompositionSink*, UInt32)
-    release : Proc(ITfCompositionSink*, UInt32)
-    on_composition_terminated : Proc(ITfCompositionSink*, UInt32, ITfComposition, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_composition_terminated : UInt64
   end
 
   ITfCompositionSink_GUID = "a781718c-579a-4b15-a280-32b8577acc5e"
@@ -1466,13 +1466,13 @@ lib LibWin32
   end
 
   struct ITfContextCompositionVTbl
-    query_interface : Proc(ITfContextComposition*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfContextComposition*, UInt32)
-    release : Proc(ITfContextComposition*, UInt32)
-    start_composition : Proc(ITfContextComposition*, UInt32, ITfRange, ITfCompositionSink, ITfComposition*, HRESULT)
-    enum_compositions : Proc(ITfContextComposition*, IEnumITfCompositionView*, HRESULT)
-    find_composition : Proc(ITfContextComposition*, UInt32, ITfRange, IEnumITfCompositionView*, HRESULT)
-    take_ownership : Proc(ITfContextComposition*, UInt32, ITfCompositionView, ITfCompositionSink, ITfComposition*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    start_composition : UInt64
+    enum_compositions : UInt64
+    find_composition : UInt64
+    take_ownership : UInt64
   end
 
   ITfContextComposition_GUID = "d40c8aae-ac92-4fc7-9a11-0ee0e23aa39b"
@@ -1482,14 +1482,14 @@ lib LibWin32
   end
 
   struct ITfContextOwnerCompositionServicesVTbl
-    query_interface : Proc(ITfContextOwnerCompositionServices*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfContextOwnerCompositionServices*, UInt32)
-    release : Proc(ITfContextOwnerCompositionServices*, UInt32)
-    start_composition : Proc(ITfContextOwnerCompositionServices*, UInt32, ITfRange, ITfCompositionSink, ITfComposition*, HRESULT)
-    enum_compositions : Proc(ITfContextOwnerCompositionServices*, IEnumITfCompositionView*, HRESULT)
-    find_composition : Proc(ITfContextOwnerCompositionServices*, UInt32, ITfRange, IEnumITfCompositionView*, HRESULT)
-    take_ownership : Proc(ITfContextOwnerCompositionServices*, UInt32, ITfCompositionView, ITfCompositionSink, ITfComposition*, HRESULT)
-    terminate_composition : Proc(ITfContextOwnerCompositionServices*, ITfCompositionView, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    start_composition : UInt64
+    enum_compositions : UInt64
+    find_composition : UInt64
+    take_ownership : UInt64
+    terminate_composition : UInt64
   end
 
   ITfContextOwnerCompositionServices_GUID = "86462810-593b-4916-9764-19c08e9ce110"
@@ -1499,12 +1499,12 @@ lib LibWin32
   end
 
   struct ITfContextOwnerCompositionSinkVTbl
-    query_interface : Proc(ITfContextOwnerCompositionSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfContextOwnerCompositionSink*, UInt32)
-    release : Proc(ITfContextOwnerCompositionSink*, UInt32)
-    on_start_composition : Proc(ITfContextOwnerCompositionSink*, ITfCompositionView, LibC::BOOL*, HRESULT)
-    on_update_composition : Proc(ITfContextOwnerCompositionSink*, ITfCompositionView, ITfRange, HRESULT)
-    on_end_composition : Proc(ITfContextOwnerCompositionSink*, ITfCompositionView, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_start_composition : UInt64
+    on_update_composition : UInt64
+    on_end_composition : UInt64
   end
 
   ITfContextOwnerCompositionSink_GUID = "5f20aa40-b57a-4f34-96ab-3576f377cc79"
@@ -1514,13 +1514,13 @@ lib LibWin32
   end
 
   struct ITfContextViewVTbl
-    query_interface : Proc(ITfContextView*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfContextView*, UInt32)
-    release : Proc(ITfContextView*, UInt32)
-    get_range_from_point : Proc(ITfContextView*, UInt32, POINT*, UInt32, ITfRange*, HRESULT)
-    get_text_ext : Proc(ITfContextView*, UInt32, ITfRange, RECT*, LibC::BOOL*, HRESULT)
-    get_screen_ext : Proc(ITfContextView*, RECT*, HRESULT)
-    get_wnd : Proc(ITfContextView*, HANDLE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_range_from_point : UInt64
+    get_text_ext : UInt64
+    get_screen_ext : UInt64
+    get_wnd : UInt64
   end
 
   ITfContextView_GUID = "2433bf8e-0f9b-435c-ba2c-180611978c30"
@@ -1530,13 +1530,13 @@ lib LibWin32
   end
 
   struct IEnumTfContextViewsVTbl
-    query_interface : Proc(IEnumTfContextViews*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumTfContextViews*, UInt32)
-    release : Proc(IEnumTfContextViews*, UInt32)
-    clone : Proc(IEnumTfContextViews*, IEnumTfContextViews*, HRESULT)
-    next : Proc(IEnumTfContextViews*, UInt32, ITfContextView*, UInt32*, HRESULT)
-    reset : Proc(IEnumTfContextViews*, HRESULT)
-    skip : Proc(IEnumTfContextViews*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumTfContextViews_GUID = "f0c0f8dd-cf38-44e1-bb0f-68cf0d551c78"
@@ -1546,24 +1546,24 @@ lib LibWin32
   end
 
   struct ITfContextVTbl
-    query_interface : Proc(ITfContext*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfContext*, UInt32)
-    release : Proc(ITfContext*, UInt32)
-    request_edit_session : Proc(ITfContext*, UInt32, ITfEditSession, TF_CONTEXT_EDIT_CONTEXT_FLAGS, HRESULT*, HRESULT)
-    in_write_session : Proc(ITfContext*, UInt32, LibC::BOOL*, HRESULT)
-    get_selection : Proc(ITfContext*, UInt32, UInt32, UInt32, TF_SELECTION*, UInt32*, HRESULT)
-    set_selection : Proc(ITfContext*, UInt32, UInt32, TF_SELECTION*, HRESULT)
-    get_start : Proc(ITfContext*, UInt32, ITfRange*, HRESULT)
-    get_end : Proc(ITfContext*, UInt32, ITfRange*, HRESULT)
-    get_active_view : Proc(ITfContext*, ITfContextView*, HRESULT)
-    enum_views : Proc(ITfContext*, IEnumTfContextViews*, HRESULT)
-    get_status : Proc(ITfContext*, TS_STATUS*, HRESULT)
-    get_property : Proc(ITfContext*, Guid*, ITfProperty*, HRESULT)
-    get_app_property : Proc(ITfContext*, Guid*, ITfReadOnlyProperty*, HRESULT)
-    track_properties : Proc(ITfContext*, Guid**, UInt32, Guid**, UInt32, ITfReadOnlyProperty*, HRESULT)
-    enum_properties : Proc(ITfContext*, IEnumTfProperties*, HRESULT)
-    get_document_mgr : Proc(ITfContext*, ITfDocumentMgr*, HRESULT)
-    create_range_backup : Proc(ITfContext*, UInt32, ITfRange, ITfRangeBackup*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    request_edit_session : UInt64
+    in_write_session : UInt64
+    get_selection : UInt64
+    set_selection : UInt64
+    get_start : UInt64
+    get_end : UInt64
+    get_active_view : UInt64
+    enum_views : UInt64
+    get_status : UInt64
+    get_property : UInt64
+    get_app_property : UInt64
+    track_properties : UInt64
+    enum_properties : UInt64
+    get_document_mgr : UInt64
+    create_range_backup : UInt64
   end
 
   ITfContext_GUID = "aa80e7fd-2021-11d2-93e0-0060b067b86e"
@@ -1573,10 +1573,10 @@ lib LibWin32
   end
 
   struct ITfQueryEmbeddedVTbl
-    query_interface : Proc(ITfQueryEmbedded*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfQueryEmbedded*, UInt32)
-    release : Proc(ITfQueryEmbedded*, UInt32)
-    query_insert_embedded : Proc(ITfQueryEmbedded*, Guid*, FORMATETC*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    query_insert_embedded : UInt64
   end
 
   ITfQueryEmbedded_GUID = "0fab9bdb-d250-4169-84e5-6be118fdd7a8"
@@ -1586,11 +1586,11 @@ lib LibWin32
   end
 
   struct ITfInsertAtSelectionVTbl
-    query_interface : Proc(ITfInsertAtSelection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfInsertAtSelection*, UInt32)
-    release : Proc(ITfInsertAtSelection*, UInt32)
-    insert_text_at_selection : Proc(ITfInsertAtSelection*, UInt32, INSERT_TEXT_AT_SELECTION_FLAGS, Char*, Int32, ITfRange*, HRESULT)
-    insert_embedded_at_selection : Proc(ITfInsertAtSelection*, UInt32, UInt32, IDataObject, ITfRange*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    insert_text_at_selection : UInt64
+    insert_embedded_at_selection : UInt64
   end
 
   ITfInsertAtSelection_GUID = "55ce16ba-3014-41c1-9ceb-fade1446ac6c"
@@ -1600,10 +1600,10 @@ lib LibWin32
   end
 
   struct ITfCleanupContextSinkVTbl
-    query_interface : Proc(ITfCleanupContextSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfCleanupContextSink*, UInt32)
-    release : Proc(ITfCleanupContextSink*, UInt32)
-    on_cleanup_context : Proc(ITfCleanupContextSink*, UInt32, ITfContext, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_cleanup_context : UInt64
   end
 
   ITfCleanupContextSink_GUID = "01689689-7acb-4e9b-ab7c-7ea46b12b522"
@@ -1613,11 +1613,11 @@ lib LibWin32
   end
 
   struct ITfCleanupContextDurationSinkVTbl
-    query_interface : Proc(ITfCleanupContextDurationSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfCleanupContextDurationSink*, UInt32)
-    release : Proc(ITfCleanupContextDurationSink*, UInt32)
-    on_start_cleanup_context : Proc(ITfCleanupContextDurationSink*, HRESULT)
-    on_end_cleanup_context : Proc(ITfCleanupContextDurationSink*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_start_cleanup_context : UInt64
+    on_end_cleanup_context : UInt64
   end
 
   ITfCleanupContextDurationSink_GUID = "45c35144-154e-4797-bed8-d33ae7bf8794"
@@ -1627,13 +1627,13 @@ lib LibWin32
   end
 
   struct ITfReadOnlyPropertyVTbl
-    query_interface : Proc(ITfReadOnlyProperty*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfReadOnlyProperty*, UInt32)
-    release : Proc(ITfReadOnlyProperty*, UInt32)
-    get_type : Proc(ITfReadOnlyProperty*, Guid*, HRESULT)
-    enum_ranges : Proc(ITfReadOnlyProperty*, UInt32, IEnumTfRanges*, ITfRange, HRESULT)
-    get_value : Proc(ITfReadOnlyProperty*, UInt32, ITfRange, VARIANT*, HRESULT)
-    get_context : Proc(ITfReadOnlyProperty*, ITfContext*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type : UInt64
+    enum_ranges : UInt64
+    get_value : UInt64
+    get_context : UInt64
   end
 
   ITfReadOnlyProperty_GUID = "17d49a3d-f8b8-4b2f-b254-52319dd64c53"
@@ -1643,13 +1643,13 @@ lib LibWin32
   end
 
   struct IEnumTfPropertyValueVTbl
-    query_interface : Proc(IEnumTfPropertyValue*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumTfPropertyValue*, UInt32)
-    release : Proc(IEnumTfPropertyValue*, UInt32)
-    clone : Proc(IEnumTfPropertyValue*, IEnumTfPropertyValue*, HRESULT)
-    next : Proc(IEnumTfPropertyValue*, UInt32, TF_PROPERTYVAL*, UInt32*, HRESULT)
-    reset : Proc(IEnumTfPropertyValue*, HRESULT)
-    skip : Proc(IEnumTfPropertyValue*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumTfPropertyValue_GUID = "8ed8981b-7c10-4d7d-9fb3-ab72e9c75f72"
@@ -1659,11 +1659,11 @@ lib LibWin32
   end
 
   struct ITfMouseTrackerVTbl
-    query_interface : Proc(ITfMouseTracker*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfMouseTracker*, UInt32)
-    release : Proc(ITfMouseTracker*, UInt32)
-    advise_mouse_sink : Proc(ITfMouseTracker*, ITfRange, ITfMouseSink, UInt32*, HRESULT)
-    unadvise_mouse_sink : Proc(ITfMouseTracker*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    advise_mouse_sink : UInt64
+    unadvise_mouse_sink : UInt64
   end
 
   ITfMouseTracker_GUID = "09d146cd-a544-4132-925b-7afa8ef322d0"
@@ -1673,11 +1673,11 @@ lib LibWin32
   end
 
   struct ITfMouseTrackerACPVTbl
-    query_interface : Proc(ITfMouseTrackerACP*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfMouseTrackerACP*, UInt32)
-    release : Proc(ITfMouseTrackerACP*, UInt32)
-    advise_mouse_sink : Proc(ITfMouseTrackerACP*, ITfRangeACP, ITfMouseSink, UInt32*, HRESULT)
-    unadvise_mouse_sink : Proc(ITfMouseTrackerACP*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    advise_mouse_sink : UInt64
+    unadvise_mouse_sink : UInt64
   end
 
   ITfMouseTrackerACP_GUID = "3bdd78e2-c16e-47fd-b883-ce6facc1a208"
@@ -1687,10 +1687,10 @@ lib LibWin32
   end
 
   struct ITfMouseSinkVTbl
-    query_interface : Proc(ITfMouseSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfMouseSink*, UInt32)
-    release : Proc(ITfMouseSink*, UInt32)
-    on_mouse_event : Proc(ITfMouseSink*, UInt32, UInt32, UInt32, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_mouse_event : UInt64
   end
 
   ITfMouseSink_GUID = "a1adaaa2-3a24-449d-ac96-5183e7f5c217"
@@ -1700,11 +1700,11 @@ lib LibWin32
   end
 
   struct ITfEditRecordVTbl
-    query_interface : Proc(ITfEditRecord*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfEditRecord*, UInt32)
-    release : Proc(ITfEditRecord*, UInt32)
-    get_selection_status : Proc(ITfEditRecord*, LibC::BOOL*, HRESULT)
-    get_text_and_property_updates : Proc(ITfEditRecord*, GET_TEXT_AND_PROPERTY_UPDATES_FLAGS, Guid**, UInt32, IEnumTfRanges*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_selection_status : UInt64
+    get_text_and_property_updates : UInt64
   end
 
   ITfEditRecord_GUID = "42d4d099-7c1a-4a89-b836-6c6f22160df0"
@@ -1714,10 +1714,10 @@ lib LibWin32
   end
 
   struct ITfTextEditSinkVTbl
-    query_interface : Proc(ITfTextEditSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfTextEditSink*, UInt32)
-    release : Proc(ITfTextEditSink*, UInt32)
-    on_end_edit : Proc(ITfTextEditSink*, ITfContext, UInt32, ITfEditRecord, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_end_edit : UInt64
   end
 
   ITfTextEditSink_GUID = "8127d409-ccd3-4683-967a-b43d5b482bf7"
@@ -1727,10 +1727,10 @@ lib LibWin32
   end
 
   struct ITfTextLayoutSinkVTbl
-    query_interface : Proc(ITfTextLayoutSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfTextLayoutSink*, UInt32)
-    release : Proc(ITfTextLayoutSink*, UInt32)
-    on_layout_change : Proc(ITfTextLayoutSink*, ITfContext, TfLayoutCode, ITfContextView, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_layout_change : UInt64
   end
 
   ITfTextLayoutSink_GUID = "2af2d06a-dd5b-4927-a0b4-54f19c91fade"
@@ -1740,10 +1740,10 @@ lib LibWin32
   end
 
   struct ITfStatusSinkVTbl
-    query_interface : Proc(ITfStatusSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfStatusSink*, UInt32)
-    release : Proc(ITfStatusSink*, UInt32)
-    on_status_change : Proc(ITfStatusSink*, ITfContext, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_status_change : UInt64
   end
 
   ITfStatusSink_GUID = "6b7d8d73-b267-4f69-b32e-1ca321ce4f45"
@@ -1753,11 +1753,11 @@ lib LibWin32
   end
 
   struct ITfEditTransactionSinkVTbl
-    query_interface : Proc(ITfEditTransactionSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfEditTransactionSink*, UInt32)
-    release : Proc(ITfEditTransactionSink*, UInt32)
-    on_start_edit_transaction : Proc(ITfEditTransactionSink*, ITfContext, HRESULT)
-    on_end_edit_transaction : Proc(ITfEditTransactionSink*, ITfContext, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_start_edit_transaction : UInt64
+    on_end_edit_transaction : UInt64
   end
 
   ITfEditTransactionSink_GUID = "708fbf70-b520-416b-b06c-2c41ab44f8ba"
@@ -1767,15 +1767,15 @@ lib LibWin32
   end
 
   struct ITfContextOwnerVTbl
-    query_interface : Proc(ITfContextOwner*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfContextOwner*, UInt32)
-    release : Proc(ITfContextOwner*, UInt32)
-    get_acp_from_point : Proc(ITfContextOwner*, POINT*, UInt32, Int32*, HRESULT)
-    get_text_ext : Proc(ITfContextOwner*, Int32, Int32, RECT*, LibC::BOOL*, HRESULT)
-    get_screen_ext : Proc(ITfContextOwner*, RECT*, HRESULT)
-    get_status : Proc(ITfContextOwner*, TS_STATUS*, HRESULT)
-    get_wnd : Proc(ITfContextOwner*, HANDLE*, HRESULT)
-    get_attribute : Proc(ITfContextOwner*, Guid*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_acp_from_point : UInt64
+    get_text_ext : UInt64
+    get_screen_ext : UInt64
+    get_status : UInt64
+    get_wnd : UInt64
+    get_attribute : UInt64
   end
 
   ITfContextOwner_GUID = "aa80e80c-2021-11d2-93e0-0060b067b86e"
@@ -1785,16 +1785,16 @@ lib LibWin32
   end
 
   struct ITfContextOwnerServicesVTbl
-    query_interface : Proc(ITfContextOwnerServices*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfContextOwnerServices*, UInt32)
-    release : Proc(ITfContextOwnerServices*, UInt32)
-    on_layout_change : Proc(ITfContextOwnerServices*, HRESULT)
-    on_status_change : Proc(ITfContextOwnerServices*, UInt32, HRESULT)
-    on_attribute_change : Proc(ITfContextOwnerServices*, Guid*, HRESULT)
-    serialize : Proc(ITfContextOwnerServices*, ITfProperty, ITfRange, TF_PERSISTENT_PROPERTY_HEADER_ACP*, IStream, HRESULT)
-    unserialize : Proc(ITfContextOwnerServices*, ITfProperty, TF_PERSISTENT_PROPERTY_HEADER_ACP*, IStream, ITfPersistentPropertyLoaderACP, HRESULT)
-    force_load_property : Proc(ITfContextOwnerServices*, ITfProperty, HRESULT)
-    create_range : Proc(ITfContextOwnerServices*, Int32, Int32, ITfRangeACP*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_layout_change : UInt64
+    on_status_change : UInt64
+    on_attribute_change : UInt64
+    serialize : UInt64
+    unserialize : UInt64
+    force_load_property : UInt64
+    create_range : UInt64
   end
 
   ITfContextOwnerServices_GUID = "b23eb630-3e1c-11d3-a745-0050040ab407"
@@ -1804,13 +1804,13 @@ lib LibWin32
   end
 
   struct ITfContextKeyEventSinkVTbl
-    query_interface : Proc(ITfContextKeyEventSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfContextKeyEventSink*, UInt32)
-    release : Proc(ITfContextKeyEventSink*, UInt32)
-    on_key_down : Proc(ITfContextKeyEventSink*, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
-    on_key_up : Proc(ITfContextKeyEventSink*, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
-    on_test_key_down : Proc(ITfContextKeyEventSink*, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
-    on_test_key_up : Proc(ITfContextKeyEventSink*, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_key_down : UInt64
+    on_key_up : UInt64
+    on_test_key_down : UInt64
+    on_test_key_up : UInt64
   end
 
   ITfContextKeyEventSink_GUID = "0552ba5d-c835-4934-bf50-846aaa67432f"
@@ -1820,10 +1820,10 @@ lib LibWin32
   end
 
   struct ITfEditSessionVTbl
-    query_interface : Proc(ITfEditSession*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfEditSession*, UInt32)
-    release : Proc(ITfEditSession*, UInt32)
-    do_edit_session : Proc(ITfEditSession*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    do_edit_session : UInt64
   end
 
   ITfEditSession_GUID = "aa80e803-2021-11d2-93e0-0060b067b86e"
@@ -1833,31 +1833,31 @@ lib LibWin32
   end
 
   struct ITfRangeVTbl
-    query_interface : Proc(ITfRange*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfRange*, UInt32)
-    release : Proc(ITfRange*, UInt32)
-    get_text : Proc(ITfRange*, UInt32, UInt32, Char*, UInt32, UInt32*, HRESULT)
-    set_text : Proc(ITfRange*, UInt32, UInt32, Char*, Int32, HRESULT)
-    get_formatted_text : Proc(ITfRange*, UInt32, IDataObject*, HRESULT)
-    get_embedded : Proc(ITfRange*, UInt32, Guid*, Guid*, IUnknown*, HRESULT)
-    insert_embedded : Proc(ITfRange*, UInt32, UInt32, IDataObject, HRESULT)
-    shift_start : Proc(ITfRange*, UInt32, Int32, Int32*, TF_HALTCOND*, HRESULT)
-    shift_end : Proc(ITfRange*, UInt32, Int32, Int32*, TF_HALTCOND*, HRESULT)
-    shift_start_to_range : Proc(ITfRange*, UInt32, ITfRange, TfAnchor, HRESULT)
-    shift_end_to_range : Proc(ITfRange*, UInt32, ITfRange, TfAnchor, HRESULT)
-    shift_start_region : Proc(ITfRange*, UInt32, TfShiftDir, LibC::BOOL*, HRESULT)
-    shift_end_region : Proc(ITfRange*, UInt32, TfShiftDir, LibC::BOOL*, HRESULT)
-    is_empty : Proc(ITfRange*, UInt32, LibC::BOOL*, HRESULT)
-    collapse : Proc(ITfRange*, UInt32, TfAnchor, HRESULT)
-    is_equal_start : Proc(ITfRange*, UInt32, ITfRange, TfAnchor, LibC::BOOL*, HRESULT)
-    is_equal_end : Proc(ITfRange*, UInt32, ITfRange, TfAnchor, LibC::BOOL*, HRESULT)
-    compare_start : Proc(ITfRange*, UInt32, ITfRange, TfAnchor, Int32*, HRESULT)
-    compare_end : Proc(ITfRange*, UInt32, ITfRange, TfAnchor, Int32*, HRESULT)
-    adjust_for_insert : Proc(ITfRange*, UInt32, UInt32, LibC::BOOL*, HRESULT)
-    get_gravity : Proc(ITfRange*, TfGravity*, TfGravity*, HRESULT)
-    set_gravity : Proc(ITfRange*, UInt32, TfGravity, TfGravity, HRESULT)
-    clone : Proc(ITfRange*, ITfRange*, HRESULT)
-    get_context : Proc(ITfRange*, ITfContext*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_text : UInt64
+    set_text : UInt64
+    get_formatted_text : UInt64
+    get_embedded : UInt64
+    insert_embedded : UInt64
+    shift_start : UInt64
+    shift_end : UInt64
+    shift_start_to_range : UInt64
+    shift_end_to_range : UInt64
+    shift_start_region : UInt64
+    shift_end_region : UInt64
+    is_empty : UInt64
+    collapse : UInt64
+    is_equal_start : UInt64
+    is_equal_end : UInt64
+    compare_start : UInt64
+    compare_end : UInt64
+    adjust_for_insert : UInt64
+    get_gravity : UInt64
+    set_gravity : UInt64
+    clone : UInt64
+    get_context : UInt64
   end
 
   ITfRange_GUID = "aa80e7ff-2021-11d2-93e0-0060b067b86e"
@@ -1867,33 +1867,33 @@ lib LibWin32
   end
 
   struct ITfRangeACPVTbl
-    query_interface : Proc(ITfRangeACP*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfRangeACP*, UInt32)
-    release : Proc(ITfRangeACP*, UInt32)
-    get_text : Proc(ITfRangeACP*, UInt32, UInt32, Char*, UInt32, UInt32*, HRESULT)
-    set_text : Proc(ITfRangeACP*, UInt32, UInt32, Char*, Int32, HRESULT)
-    get_formatted_text : Proc(ITfRangeACP*, UInt32, IDataObject*, HRESULT)
-    get_embedded : Proc(ITfRangeACP*, UInt32, Guid*, Guid*, IUnknown*, HRESULT)
-    insert_embedded : Proc(ITfRangeACP*, UInt32, UInt32, IDataObject, HRESULT)
-    shift_start : Proc(ITfRangeACP*, UInt32, Int32, Int32*, TF_HALTCOND*, HRESULT)
-    shift_end : Proc(ITfRangeACP*, UInt32, Int32, Int32*, TF_HALTCOND*, HRESULT)
-    shift_start_to_range : Proc(ITfRangeACP*, UInt32, ITfRange, TfAnchor, HRESULT)
-    shift_end_to_range : Proc(ITfRangeACP*, UInt32, ITfRange, TfAnchor, HRESULT)
-    shift_start_region : Proc(ITfRangeACP*, UInt32, TfShiftDir, LibC::BOOL*, HRESULT)
-    shift_end_region : Proc(ITfRangeACP*, UInt32, TfShiftDir, LibC::BOOL*, HRESULT)
-    is_empty : Proc(ITfRangeACP*, UInt32, LibC::BOOL*, HRESULT)
-    collapse : Proc(ITfRangeACP*, UInt32, TfAnchor, HRESULT)
-    is_equal_start : Proc(ITfRangeACP*, UInt32, ITfRange, TfAnchor, LibC::BOOL*, HRESULT)
-    is_equal_end : Proc(ITfRangeACP*, UInt32, ITfRange, TfAnchor, LibC::BOOL*, HRESULT)
-    compare_start : Proc(ITfRangeACP*, UInt32, ITfRange, TfAnchor, Int32*, HRESULT)
-    compare_end : Proc(ITfRangeACP*, UInt32, ITfRange, TfAnchor, Int32*, HRESULT)
-    adjust_for_insert : Proc(ITfRangeACP*, UInt32, UInt32, LibC::BOOL*, HRESULT)
-    get_gravity : Proc(ITfRangeACP*, TfGravity*, TfGravity*, HRESULT)
-    set_gravity : Proc(ITfRangeACP*, UInt32, TfGravity, TfGravity, HRESULT)
-    clone : Proc(ITfRangeACP*, ITfRange*, HRESULT)
-    get_context : Proc(ITfRangeACP*, ITfContext*, HRESULT)
-    get_extent : Proc(ITfRangeACP*, Int32*, Int32*, HRESULT)
-    set_extent : Proc(ITfRangeACP*, Int32, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_text : UInt64
+    set_text : UInt64
+    get_formatted_text : UInt64
+    get_embedded : UInt64
+    insert_embedded : UInt64
+    shift_start : UInt64
+    shift_end : UInt64
+    shift_start_to_range : UInt64
+    shift_end_to_range : UInt64
+    shift_start_region : UInt64
+    shift_end_region : UInt64
+    is_empty : UInt64
+    collapse : UInt64
+    is_equal_start : UInt64
+    is_equal_end : UInt64
+    compare_start : UInt64
+    compare_end : UInt64
+    adjust_for_insert : UInt64
+    get_gravity : UInt64
+    set_gravity : UInt64
+    clone : UInt64
+    get_context : UInt64
+    get_extent : UInt64
+    set_extent : UInt64
   end
 
   ITfRangeACP_GUID = "057a6296-029b-4154-b79a-0d461d4ea94c"
@@ -1903,13 +1903,13 @@ lib LibWin32
   end
 
   struct ITextStoreACPServicesVTbl
-    query_interface : Proc(ITextStoreACPServices*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITextStoreACPServices*, UInt32)
-    release : Proc(ITextStoreACPServices*, UInt32)
-    serialize : Proc(ITextStoreACPServices*, ITfProperty, ITfRange, TF_PERSISTENT_PROPERTY_HEADER_ACP*, IStream, HRESULT)
-    unserialize : Proc(ITextStoreACPServices*, ITfProperty, TF_PERSISTENT_PROPERTY_HEADER_ACP*, IStream, ITfPersistentPropertyLoaderACP, HRESULT)
-    force_load_property : Proc(ITextStoreACPServices*, ITfProperty, HRESULT)
-    create_range : Proc(ITextStoreACPServices*, Int32, Int32, ITfRangeACP*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    serialize : UInt64
+    unserialize : UInt64
+    force_load_property : UInt64
+    create_range : UInt64
   end
 
   ITextStoreACPServices_GUID = "aa80e901-2021-11d2-93e0-0060b067b86e"
@@ -1919,10 +1919,10 @@ lib LibWin32
   end
 
   struct ITfRangeBackupVTbl
-    query_interface : Proc(ITfRangeBackup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfRangeBackup*, UInt32)
-    release : Proc(ITfRangeBackup*, UInt32)
-    restore : Proc(ITfRangeBackup*, UInt32, ITfRange, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    restore : UInt64
   end
 
   ITfRangeBackup_GUID = "463a506d-6992-49d2-9b88-93d55e70bb16"
@@ -1932,18 +1932,18 @@ lib LibWin32
   end
 
   struct ITfPropertyStoreVTbl
-    query_interface : Proc(ITfPropertyStore*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfPropertyStore*, UInt32)
-    release : Proc(ITfPropertyStore*, UInt32)
-    get_type : Proc(ITfPropertyStore*, Guid*, HRESULT)
-    get_data_type : Proc(ITfPropertyStore*, UInt32*, HRESULT)
-    get_data : Proc(ITfPropertyStore*, VARIANT*, HRESULT)
-    on_text_updated : Proc(ITfPropertyStore*, UInt32, ITfRange, LibC::BOOL*, HRESULT)
-    shrink : Proc(ITfPropertyStore*, ITfRange, LibC::BOOL*, HRESULT)
-    divide : Proc(ITfPropertyStore*, ITfRange, ITfRange, ITfPropertyStore*, HRESULT)
-    clone : Proc(ITfPropertyStore*, ITfPropertyStore*, HRESULT)
-    get_property_range_creator : Proc(ITfPropertyStore*, Guid*, HRESULT)
-    serialize : Proc(ITfPropertyStore*, IStream, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type : UInt64
+    get_data_type : UInt64
+    get_data : UInt64
+    on_text_updated : UInt64
+    shrink : UInt64
+    divide : UInt64
+    clone : UInt64
+    get_property_range_creator : UInt64
+    serialize : UInt64
   end
 
   ITfPropertyStore_GUID = "6834b120-88cb-11d2-bf45-00105a2799b5"
@@ -1953,13 +1953,13 @@ lib LibWin32
   end
 
   struct IEnumTfRangesVTbl
-    query_interface : Proc(IEnumTfRanges*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumTfRanges*, UInt32)
-    release : Proc(IEnumTfRanges*, UInt32)
-    clone : Proc(IEnumTfRanges*, IEnumTfRanges*, HRESULT)
-    next : Proc(IEnumTfRanges*, UInt32, ITfRange*, UInt32*, HRESULT)
-    reset : Proc(IEnumTfRanges*, HRESULT)
-    skip : Proc(IEnumTfRanges*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumTfRanges_GUID = "f99d3f40-8e32-11d2-bf46-00105a2799b5"
@@ -1969,11 +1969,11 @@ lib LibWin32
   end
 
   struct ITfCreatePropertyStoreVTbl
-    query_interface : Proc(ITfCreatePropertyStore*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfCreatePropertyStore*, UInt32)
-    release : Proc(ITfCreatePropertyStore*, UInt32)
-    is_store_serializable : Proc(ITfCreatePropertyStore*, Guid*, ITfRange, ITfPropertyStore, LibC::BOOL*, HRESULT)
-    create_property_store : Proc(ITfCreatePropertyStore*, Guid*, ITfRange, UInt32, IStream, ITfPropertyStore*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    is_store_serializable : UInt64
+    create_property_store : UInt64
   end
 
   ITfCreatePropertyStore_GUID = "2463fbf0-b0af-11d2-afc5-00105a2799b5"
@@ -1983,10 +1983,10 @@ lib LibWin32
   end
 
   struct ITfPersistentPropertyLoaderACPVTbl
-    query_interface : Proc(ITfPersistentPropertyLoaderACP*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfPersistentPropertyLoaderACP*, UInt32)
-    release : Proc(ITfPersistentPropertyLoaderACP*, UInt32)
-    load_property : Proc(ITfPersistentPropertyLoaderACP*, TF_PERSISTENT_PROPERTY_HEADER_ACP*, IStream*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    load_property : UInt64
   end
 
   ITfPersistentPropertyLoaderACP_GUID = "4ef89150-0807-11d3-8df0-00105a2799b5"
@@ -1996,17 +1996,17 @@ lib LibWin32
   end
 
   struct ITfPropertyVTbl
-    query_interface : Proc(ITfProperty*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfProperty*, UInt32)
-    release : Proc(ITfProperty*, UInt32)
-    get_type : Proc(ITfProperty*, Guid*, HRESULT)
-    enum_ranges : Proc(ITfProperty*, UInt32, IEnumTfRanges*, ITfRange, HRESULT)
-    get_value : Proc(ITfProperty*, UInt32, ITfRange, VARIANT*, HRESULT)
-    get_context : Proc(ITfProperty*, ITfContext*, HRESULT)
-    find_range : Proc(ITfProperty*, UInt32, ITfRange, ITfRange*, TfAnchor, HRESULT)
-    set_value_store : Proc(ITfProperty*, UInt32, ITfRange, ITfPropertyStore, HRESULT)
-    set_value : Proc(ITfProperty*, UInt32, ITfRange, VARIANT*, HRESULT)
-    clear : Proc(ITfProperty*, UInt32, ITfRange, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type : UInt64
+    enum_ranges : UInt64
+    get_value : UInt64
+    get_context : UInt64
+    find_range : UInt64
+    set_value_store : UInt64
+    set_value : UInt64
+    clear : UInt64
   end
 
   ITfProperty_GUID = "e2449660-9542-11d2-bf46-00105a2799b5"
@@ -2016,13 +2016,13 @@ lib LibWin32
   end
 
   struct IEnumTfPropertiesVTbl
-    query_interface : Proc(IEnumTfProperties*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumTfProperties*, UInt32)
-    release : Proc(IEnumTfProperties*, UInt32)
-    clone : Proc(IEnumTfProperties*, IEnumTfProperties*, HRESULT)
-    next : Proc(IEnumTfProperties*, UInt32, ITfProperty*, UInt32*, HRESULT)
-    reset : Proc(IEnumTfProperties*, HRESULT)
-    skip : Proc(IEnumTfProperties*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumTfProperties_GUID = "19188cb0-aca9-11d2-afc5-00105a2799b5"
@@ -2032,11 +2032,11 @@ lib LibWin32
   end
 
   struct ITfCompartmentVTbl
-    query_interface : Proc(ITfCompartment*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfCompartment*, UInt32)
-    release : Proc(ITfCompartment*, UInt32)
-    set_value : Proc(ITfCompartment*, UInt32, VARIANT*, HRESULT)
-    get_value : Proc(ITfCompartment*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_value : UInt64
+    get_value : UInt64
   end
 
   ITfCompartment_GUID = "bb08f7a9-607a-4384-8623-056892b64371"
@@ -2046,10 +2046,10 @@ lib LibWin32
   end
 
   struct ITfCompartmentEventSinkVTbl
-    query_interface : Proc(ITfCompartmentEventSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfCompartmentEventSink*, UInt32)
-    release : Proc(ITfCompartmentEventSink*, UInt32)
-    on_change : Proc(ITfCompartmentEventSink*, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_change : UInt64
   end
 
   ITfCompartmentEventSink_GUID = "743abd5f-f26d-48df-8cc5-238492419b64"
@@ -2059,12 +2059,12 @@ lib LibWin32
   end
 
   struct ITfCompartmentMgrVTbl
-    query_interface : Proc(ITfCompartmentMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfCompartmentMgr*, UInt32)
-    release : Proc(ITfCompartmentMgr*, UInt32)
-    get_compartment : Proc(ITfCompartmentMgr*, Guid*, ITfCompartment*, HRESULT)
-    clear_compartment : Proc(ITfCompartmentMgr*, UInt32, Guid*, HRESULT)
-    enum_compartments : Proc(ITfCompartmentMgr*, IEnumGUID*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_compartment : UInt64
+    clear_compartment : UInt64
+    enum_compartments : UInt64
   end
 
   ITfCompartmentMgr_GUID = "7dcf57ac-18ad-438b-824d-979bffb74b7c"
@@ -2074,10 +2074,10 @@ lib LibWin32
   end
 
   struct ITfFunctionVTbl
-    query_interface : Proc(ITfFunction*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFunction*, UInt32)
-    release : Proc(ITfFunction*, UInt32)
-    get_display_name : Proc(ITfFunction*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
   end
 
   ITfFunction_GUID = "db593490-098f-11d3-8df0-00105a2799b5"
@@ -2087,12 +2087,12 @@ lib LibWin32
   end
 
   struct ITfFunctionProviderVTbl
-    query_interface : Proc(ITfFunctionProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFunctionProvider*, UInt32)
-    release : Proc(ITfFunctionProvider*, UInt32)
-    get_type : Proc(ITfFunctionProvider*, Guid*, HRESULT)
-    get_description : Proc(ITfFunctionProvider*, UInt8**, HRESULT)
-    get_function : Proc(ITfFunctionProvider*, Guid*, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type : UInt64
+    get_description : UInt64
+    get_function : UInt64
   end
 
   ITfFunctionProvider_GUID = "101d6610-0990-11d3-8df0-00105a2799b5"
@@ -2102,13 +2102,13 @@ lib LibWin32
   end
 
   struct IEnumTfFunctionProvidersVTbl
-    query_interface : Proc(IEnumTfFunctionProviders*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumTfFunctionProviders*, UInt32)
-    release : Proc(IEnumTfFunctionProviders*, UInt32)
-    clone : Proc(IEnumTfFunctionProviders*, IEnumTfFunctionProviders*, HRESULT)
-    next : Proc(IEnumTfFunctionProviders*, UInt32, ITfFunctionProvider*, UInt32*, HRESULT)
-    reset : Proc(IEnumTfFunctionProviders*, HRESULT)
-    skip : Proc(IEnumTfFunctionProviders*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumTfFunctionProviders_GUID = "e4b24db0-0990-11d3-8df0-00105a2799b5"
@@ -2118,27 +2118,27 @@ lib LibWin32
   end
 
   struct ITfInputProcessorProfilesVTbl
-    query_interface : Proc(ITfInputProcessorProfiles*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfInputProcessorProfiles*, UInt32)
-    release : Proc(ITfInputProcessorProfiles*, UInt32)
-    register : Proc(ITfInputProcessorProfiles*, Guid*, HRESULT)
-    unregister : Proc(ITfInputProcessorProfiles*, Guid*, HRESULT)
-    add_language_profile : Proc(ITfInputProcessorProfiles*, Guid*, UInt16, Guid*, Char*, UInt32, Char*, UInt32, UInt32, HRESULT)
-    remove_language_profile : Proc(ITfInputProcessorProfiles*, Guid*, UInt16, Guid*, HRESULT)
-    enum_input_processor_info : Proc(ITfInputProcessorProfiles*, IEnumGUID*, HRESULT)
-    get_default_language_profile : Proc(ITfInputProcessorProfiles*, UInt16, Guid*, Guid*, Guid*, HRESULT)
-    set_default_language_profile : Proc(ITfInputProcessorProfiles*, UInt16, Guid*, Guid*, HRESULT)
-    activate_language_profile : Proc(ITfInputProcessorProfiles*, Guid*, UInt16, Guid*, HRESULT)
-    get_active_language_profile : Proc(ITfInputProcessorProfiles*, Guid*, UInt16*, Guid*, HRESULT)
-    get_language_profile_description : Proc(ITfInputProcessorProfiles*, Guid*, UInt16, Guid*, UInt8**, HRESULT)
-    get_current_language : Proc(ITfInputProcessorProfiles*, UInt16*, HRESULT)
-    change_current_language : Proc(ITfInputProcessorProfiles*, UInt16, HRESULT)
-    get_language_list : Proc(ITfInputProcessorProfiles*, UInt16**, UInt32*, HRESULT)
-    enum_language_profiles : Proc(ITfInputProcessorProfiles*, UInt16, IEnumTfLanguageProfiles*, HRESULT)
-    enable_language_profile : Proc(ITfInputProcessorProfiles*, Guid*, UInt16, Guid*, LibC::BOOL, HRESULT)
-    is_enabled_language_profile : Proc(ITfInputProcessorProfiles*, Guid*, UInt16, Guid*, LibC::BOOL*, HRESULT)
-    enable_language_profile_by_default : Proc(ITfInputProcessorProfiles*, Guid*, UInt16, Guid*, LibC::BOOL, HRESULT)
-    substitute_keyboard_layout : Proc(ITfInputProcessorProfiles*, Guid*, UInt16, Guid*, HKL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    register : UInt64
+    unregister : UInt64
+    add_language_profile : UInt64
+    remove_language_profile : UInt64
+    enum_input_processor_info : UInt64
+    get_default_language_profile : UInt64
+    set_default_language_profile : UInt64
+    activate_language_profile : UInt64
+    get_active_language_profile : UInt64
+    get_language_profile_description : UInt64
+    get_current_language : UInt64
+    change_current_language : UInt64
+    get_language_list : UInt64
+    enum_language_profiles : UInt64
+    enable_language_profile : UInt64
+    is_enabled_language_profile : UInt64
+    enable_language_profile_by_default : UInt64
+    substitute_keyboard_layout : UInt64
   end
 
   ITfInputProcessorProfiles_GUID = "1f02b6c5-7842-4ee6-8a0b-9a24183a95ca"
@@ -2148,28 +2148,28 @@ lib LibWin32
   end
 
   struct ITfInputProcessorProfilesExVTbl
-    query_interface : Proc(ITfInputProcessorProfilesEx*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfInputProcessorProfilesEx*, UInt32)
-    release : Proc(ITfInputProcessorProfilesEx*, UInt32)
-    register : Proc(ITfInputProcessorProfilesEx*, Guid*, HRESULT)
-    unregister : Proc(ITfInputProcessorProfilesEx*, Guid*, HRESULT)
-    add_language_profile : Proc(ITfInputProcessorProfilesEx*, Guid*, UInt16, Guid*, Char*, UInt32, Char*, UInt32, UInt32, HRESULT)
-    remove_language_profile : Proc(ITfInputProcessorProfilesEx*, Guid*, UInt16, Guid*, HRESULT)
-    enum_input_processor_info : Proc(ITfInputProcessorProfilesEx*, IEnumGUID*, HRESULT)
-    get_default_language_profile : Proc(ITfInputProcessorProfilesEx*, UInt16, Guid*, Guid*, Guid*, HRESULT)
-    set_default_language_profile : Proc(ITfInputProcessorProfilesEx*, UInt16, Guid*, Guid*, HRESULT)
-    activate_language_profile : Proc(ITfInputProcessorProfilesEx*, Guid*, UInt16, Guid*, HRESULT)
-    get_active_language_profile : Proc(ITfInputProcessorProfilesEx*, Guid*, UInt16*, Guid*, HRESULT)
-    get_language_profile_description : Proc(ITfInputProcessorProfilesEx*, Guid*, UInt16, Guid*, UInt8**, HRESULT)
-    get_current_language : Proc(ITfInputProcessorProfilesEx*, UInt16*, HRESULT)
-    change_current_language : Proc(ITfInputProcessorProfilesEx*, UInt16, HRESULT)
-    get_language_list : Proc(ITfInputProcessorProfilesEx*, UInt16**, UInt32*, HRESULT)
-    enum_language_profiles : Proc(ITfInputProcessorProfilesEx*, UInt16, IEnumTfLanguageProfiles*, HRESULT)
-    enable_language_profile : Proc(ITfInputProcessorProfilesEx*, Guid*, UInt16, Guid*, LibC::BOOL, HRESULT)
-    is_enabled_language_profile : Proc(ITfInputProcessorProfilesEx*, Guid*, UInt16, Guid*, LibC::BOOL*, HRESULT)
-    enable_language_profile_by_default : Proc(ITfInputProcessorProfilesEx*, Guid*, UInt16, Guid*, LibC::BOOL, HRESULT)
-    substitute_keyboard_layout : Proc(ITfInputProcessorProfilesEx*, Guid*, UInt16, Guid*, HKL, HRESULT)
-    set_language_profile_display_name : Proc(ITfInputProcessorProfilesEx*, Guid*, UInt16, Guid*, Char*, UInt32, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    register : UInt64
+    unregister : UInt64
+    add_language_profile : UInt64
+    remove_language_profile : UInt64
+    enum_input_processor_info : UInt64
+    get_default_language_profile : UInt64
+    set_default_language_profile : UInt64
+    activate_language_profile : UInt64
+    get_active_language_profile : UInt64
+    get_language_profile_description : UInt64
+    get_current_language : UInt64
+    change_current_language : UInt64
+    get_language_list : UInt64
+    enum_language_profiles : UInt64
+    enable_language_profile : UInt64
+    is_enabled_language_profile : UInt64
+    enable_language_profile_by_default : UInt64
+    substitute_keyboard_layout : UInt64
+    set_language_profile_display_name : UInt64
   end
 
   ITfInputProcessorProfilesEx_GUID = "892f230f-fe00-4a41-a98e-fcd6de0d35ef"
@@ -2179,10 +2179,10 @@ lib LibWin32
   end
 
   struct ITfInputProcessorProfileSubstituteLayoutVTbl
-    query_interface : Proc(ITfInputProcessorProfileSubstituteLayout*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfInputProcessorProfileSubstituteLayout*, UInt32)
-    release : Proc(ITfInputProcessorProfileSubstituteLayout*, UInt32)
-    get_substitute_keyboard_layout : Proc(ITfInputProcessorProfileSubstituteLayout*, Guid*, UInt16, Guid*, HKL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_substitute_keyboard_layout : UInt64
   end
 
   ITfInputProcessorProfileSubstituteLayout_GUID = "4fd67194-1002-4513-bff2-c0ddf6258552"
@@ -2192,10 +2192,10 @@ lib LibWin32
   end
 
   struct ITfActiveLanguageProfileNotifySinkVTbl
-    query_interface : Proc(ITfActiveLanguageProfileNotifySink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfActiveLanguageProfileNotifySink*, UInt32)
-    release : Proc(ITfActiveLanguageProfileNotifySink*, UInt32)
-    on_activated : Proc(ITfActiveLanguageProfileNotifySink*, Guid*, Guid*, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_activated : UInt64
   end
 
   ITfActiveLanguageProfileNotifySink_GUID = "b246cb75-a93e-4652-bf8c-b3fe0cfd7e57"
@@ -2205,13 +2205,13 @@ lib LibWin32
   end
 
   struct IEnumTfLanguageProfilesVTbl
-    query_interface : Proc(IEnumTfLanguageProfiles*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumTfLanguageProfiles*, UInt32)
-    release : Proc(IEnumTfLanguageProfiles*, UInt32)
-    clone : Proc(IEnumTfLanguageProfiles*, IEnumTfLanguageProfiles*, HRESULT)
-    next : Proc(IEnumTfLanguageProfiles*, UInt32, TF_LANGUAGEPROFILE*, UInt32*, HRESULT)
-    reset : Proc(IEnumTfLanguageProfiles*, HRESULT)
-    skip : Proc(IEnumTfLanguageProfiles*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumTfLanguageProfiles_GUID = "3d61bf11-ac5f-42c8-a4cb-931bcc28c744"
@@ -2221,11 +2221,11 @@ lib LibWin32
   end
 
   struct ITfLanguageProfileNotifySinkVTbl
-    query_interface : Proc(ITfLanguageProfileNotifySink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfLanguageProfileNotifySink*, UInt32)
-    release : Proc(ITfLanguageProfileNotifySink*, UInt32)
-    on_language_change : Proc(ITfLanguageProfileNotifySink*, UInt16, LibC::BOOL*, HRESULT)
-    on_language_changed : Proc(ITfLanguageProfileNotifySink*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_language_change : UInt64
+    on_language_changed : UInt64
   end
 
   ITfLanguageProfileNotifySink_GUID = "43c9fe15-f494-4c17-9de2-b8a4ac350aa8"
@@ -2235,17 +2235,17 @@ lib LibWin32
   end
 
   struct ITfInputProcessorProfileMgrVTbl
-    query_interface : Proc(ITfInputProcessorProfileMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfInputProcessorProfileMgr*, UInt32)
-    release : Proc(ITfInputProcessorProfileMgr*, UInt32)
-    activate_profile : Proc(ITfInputProcessorProfileMgr*, UInt32, UInt16, Guid*, Guid*, HKL, UInt32, HRESULT)
-    deactivate_profile : Proc(ITfInputProcessorProfileMgr*, UInt32, UInt16, Guid*, Guid*, HKL, UInt32, HRESULT)
-    get_profile : Proc(ITfInputProcessorProfileMgr*, UInt32, UInt16, Guid*, Guid*, HKL, TF_INPUTPROCESSORPROFILE*, HRESULT)
-    enum_profiles : Proc(ITfInputProcessorProfileMgr*, UInt16, IEnumTfInputProcessorProfiles*, HRESULT)
-    release_input_processor : Proc(ITfInputProcessorProfileMgr*, Guid*, UInt32, HRESULT)
-    register_profile : Proc(ITfInputProcessorProfileMgr*, Guid*, UInt16, Guid*, Char*, UInt32, Char*, UInt32, UInt32, HKL, UInt32, LibC::BOOL, UInt32, HRESULT)
-    unregister_profile : Proc(ITfInputProcessorProfileMgr*, Guid*, UInt16, Guid*, UInt32, HRESULT)
-    get_active_profile : Proc(ITfInputProcessorProfileMgr*, Guid*, TF_INPUTPROCESSORPROFILE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    activate_profile : UInt64
+    deactivate_profile : UInt64
+    get_profile : UInt64
+    enum_profiles : UInt64
+    release_input_processor : UInt64
+    register_profile : UInt64
+    unregister_profile : UInt64
+    get_active_profile : UInt64
   end
 
   ITfInputProcessorProfileMgr_GUID = "71c6e74c-0f28-11d8-a82a-00065b84435c"
@@ -2255,13 +2255,13 @@ lib LibWin32
   end
 
   struct IEnumTfInputProcessorProfilesVTbl
-    query_interface : Proc(IEnumTfInputProcessorProfiles*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumTfInputProcessorProfiles*, UInt32)
-    release : Proc(IEnumTfInputProcessorProfiles*, UInt32)
-    clone : Proc(IEnumTfInputProcessorProfiles*, IEnumTfInputProcessorProfiles*, HRESULT)
-    next : Proc(IEnumTfInputProcessorProfiles*, UInt32, TF_INPUTPROCESSORPROFILE*, UInt32*, HRESULT)
-    reset : Proc(IEnumTfInputProcessorProfiles*, HRESULT)
-    skip : Proc(IEnumTfInputProcessorProfiles*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumTfInputProcessorProfiles_GUID = "71c6e74d-0f28-11d8-a82a-00065b84435c"
@@ -2271,10 +2271,10 @@ lib LibWin32
   end
 
   struct ITfInputProcessorProfileActivationSinkVTbl
-    query_interface : Proc(ITfInputProcessorProfileActivationSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfInputProcessorProfileActivationSink*, UInt32)
-    release : Proc(ITfInputProcessorProfileActivationSink*, UInt32)
-    on_activated : Proc(ITfInputProcessorProfileActivationSink*, UInt32, UInt16, Guid*, Guid*, Guid*, HKL, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_activated : UInt64
   end
 
   ITfInputProcessorProfileActivationSink_GUID = "71c6e74e-0f28-11d8-a82a-00065b84435c"
@@ -2284,23 +2284,23 @@ lib LibWin32
   end
 
   struct ITfKeystrokeMgrVTbl
-    query_interface : Proc(ITfKeystrokeMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfKeystrokeMgr*, UInt32)
-    release : Proc(ITfKeystrokeMgr*, UInt32)
-    advise_key_event_sink : Proc(ITfKeystrokeMgr*, UInt32, ITfKeyEventSink, LibC::BOOL, HRESULT)
-    unadvise_key_event_sink : Proc(ITfKeystrokeMgr*, UInt32, HRESULT)
-    get_foreground : Proc(ITfKeystrokeMgr*, Guid*, HRESULT)
-    test_key_down : Proc(ITfKeystrokeMgr*, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
-    test_key_up : Proc(ITfKeystrokeMgr*, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
-    key_down : Proc(ITfKeystrokeMgr*, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
-    key_up : Proc(ITfKeystrokeMgr*, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
-    get_preserved_key : Proc(ITfKeystrokeMgr*, ITfContext, TF_PRESERVEDKEY*, Guid*, HRESULT)
-    is_preserved_key : Proc(ITfKeystrokeMgr*, Guid*, TF_PRESERVEDKEY*, LibC::BOOL*, HRESULT)
-    preserve_key : Proc(ITfKeystrokeMgr*, UInt32, Guid*, TF_PRESERVEDKEY*, Char*, UInt32, HRESULT)
-    unpreserve_key : Proc(ITfKeystrokeMgr*, Guid*, TF_PRESERVEDKEY*, HRESULT)
-    set_preserved_key_description : Proc(ITfKeystrokeMgr*, Guid*, Char*, UInt32, HRESULT)
-    get_preserved_key_description : Proc(ITfKeystrokeMgr*, Guid*, UInt8**, HRESULT)
-    simulate_preserved_key : Proc(ITfKeystrokeMgr*, ITfContext, Guid*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    advise_key_event_sink : UInt64
+    unadvise_key_event_sink : UInt64
+    get_foreground : UInt64
+    test_key_down : UInt64
+    test_key_up : UInt64
+    key_down : UInt64
+    key_up : UInt64
+    get_preserved_key : UInt64
+    is_preserved_key : UInt64
+    preserve_key : UInt64
+    unpreserve_key : UInt64
+    set_preserved_key_description : UInt64
+    get_preserved_key_description : UInt64
+    simulate_preserved_key : UInt64
   end
 
   ITfKeystrokeMgr_GUID = "aa80e7f0-2021-11d2-93e0-0060b067b86e"
@@ -2310,15 +2310,15 @@ lib LibWin32
   end
 
   struct ITfKeyEventSinkVTbl
-    query_interface : Proc(ITfKeyEventSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfKeyEventSink*, UInt32)
-    release : Proc(ITfKeyEventSink*, UInt32)
-    on_set_focus : Proc(ITfKeyEventSink*, LibC::BOOL, HRESULT)
-    on_test_key_down : Proc(ITfKeyEventSink*, ITfContext, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
-    on_test_key_up : Proc(ITfKeyEventSink*, ITfContext, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
-    on_key_down : Proc(ITfKeyEventSink*, ITfContext, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
-    on_key_up : Proc(ITfKeyEventSink*, ITfContext, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
-    on_preserved_key : Proc(ITfKeyEventSink*, ITfContext, Guid*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_set_focus : UInt64
+    on_test_key_down : UInt64
+    on_test_key_up : UInt64
+    on_key_down : UInt64
+    on_key_up : UInt64
+    on_preserved_key : UInt64
   end
 
   ITfKeyEventSink_GUID = "aa80e7f5-2021-11d2-93e0-0060b067b86e"
@@ -2328,11 +2328,11 @@ lib LibWin32
   end
 
   struct ITfKeyTraceEventSinkVTbl
-    query_interface : Proc(ITfKeyTraceEventSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfKeyTraceEventSink*, UInt32)
-    release : Proc(ITfKeyTraceEventSink*, UInt32)
-    on_key_trace_down : Proc(ITfKeyTraceEventSink*, LibC::UINT_PTR, LPARAM, HRESULT)
-    on_key_trace_up : Proc(ITfKeyTraceEventSink*, LibC::UINT_PTR, LPARAM, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_key_trace_down : UInt64
+    on_key_trace_up : UInt64
   end
 
   ITfKeyTraceEventSink_GUID = "1cd4c13b-1c36-4191-a70a-7f3e611f367d"
@@ -2342,10 +2342,10 @@ lib LibWin32
   end
 
   struct ITfPreservedKeyNotifySinkVTbl
-    query_interface : Proc(ITfPreservedKeyNotifySink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfPreservedKeyNotifySink*, UInt32)
-    release : Proc(ITfPreservedKeyNotifySink*, UInt32)
-    on_updated : Proc(ITfPreservedKeyNotifySink*, TF_PRESERVEDKEY*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_updated : UInt64
   end
 
   ITfPreservedKeyNotifySink_GUID = "6f77c993-d2b1-446e-853e-5912efc8a286"
@@ -2355,13 +2355,13 @@ lib LibWin32
   end
 
   struct ITfMessagePumpVTbl
-    query_interface : Proc(ITfMessagePump*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfMessagePump*, UInt32)
-    release : Proc(ITfMessagePump*, UInt32)
-    peek_message_a : Proc(ITfMessagePump*, MSG*, LibC::HANDLE, UInt32, UInt32, UInt32, LibC::BOOL*, HRESULT)
-    get_message_a : Proc(ITfMessagePump*, MSG*, LibC::HANDLE, UInt32, UInt32, LibC::BOOL*, HRESULT)
-    peek_message_w : Proc(ITfMessagePump*, MSG*, LibC::HANDLE, UInt32, UInt32, UInt32, LibC::BOOL*, HRESULT)
-    get_message_w : Proc(ITfMessagePump*, MSG*, LibC::HANDLE, UInt32, UInt32, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    peek_message_a : UInt64
+    get_message_a : UInt64
+    peek_message_w : UInt64
+    get_message_w : UInt64
   end
 
   ITfMessagePump_GUID = "8f1b8ad8-0b6b-4874-90c5-bd76011e8f7c"
@@ -2371,11 +2371,11 @@ lib LibWin32
   end
 
   struct ITfThreadFocusSinkVTbl
-    query_interface : Proc(ITfThreadFocusSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfThreadFocusSink*, UInt32)
-    release : Proc(ITfThreadFocusSink*, UInt32)
-    on_set_thread_focus : Proc(ITfThreadFocusSink*, HRESULT)
-    on_kill_thread_focus : Proc(ITfThreadFocusSink*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_set_thread_focus : UInt64
+    on_kill_thread_focus : UInt64
   end
 
   ITfThreadFocusSink_GUID = "c0f1db0c-3a20-405c-a303-96b6010a885f"
@@ -2385,11 +2385,11 @@ lib LibWin32
   end
 
   struct ITfTextInputProcessorVTbl
-    query_interface : Proc(ITfTextInputProcessor*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfTextInputProcessor*, UInt32)
-    release : Proc(ITfTextInputProcessor*, UInt32)
-    activate : Proc(ITfTextInputProcessor*, ITfThreadMgr, UInt32, HRESULT)
-    deactivate : Proc(ITfTextInputProcessor*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    activate : UInt64
+    deactivate : UInt64
   end
 
   ITfTextInputProcessor_GUID = "aa80e7f7-2021-11d2-93e0-0060b067b86e"
@@ -2399,12 +2399,12 @@ lib LibWin32
   end
 
   struct ITfTextInputProcessorExVTbl
-    query_interface : Proc(ITfTextInputProcessorEx*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfTextInputProcessorEx*, UInt32)
-    release : Proc(ITfTextInputProcessorEx*, UInt32)
-    activate : Proc(ITfTextInputProcessorEx*, ITfThreadMgr, UInt32, HRESULT)
-    deactivate : Proc(ITfTextInputProcessorEx*, HRESULT)
-    activate_ex : Proc(ITfTextInputProcessorEx*, ITfThreadMgr, UInt32, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    activate : UInt64
+    deactivate : UInt64
+    activate_ex : UInt64
   end
 
   ITfTextInputProcessorEx_GUID = "6e4e2102-f9cd-433d-b496-303ce03a6507"
@@ -2414,10 +2414,10 @@ lib LibWin32
   end
 
   struct ITfClientIdVTbl
-    query_interface : Proc(ITfClientId*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfClientId*, UInt32)
-    release : Proc(ITfClientId*, UInt32)
-    get_client_id : Proc(ITfClientId*, Guid*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_client_id : UInt64
   end
 
   ITfClientId_GUID = "d60a7b49-1b9f-4be2-b702-47e9dc05dec3"
@@ -2427,14 +2427,14 @@ lib LibWin32
   end
 
   struct ITfDisplayAttributeInfoVTbl
-    query_interface : Proc(ITfDisplayAttributeInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfDisplayAttributeInfo*, UInt32)
-    release : Proc(ITfDisplayAttributeInfo*, UInt32)
-    get_guid : Proc(ITfDisplayAttributeInfo*, Guid*, HRESULT)
-    get_description : Proc(ITfDisplayAttributeInfo*, UInt8**, HRESULT)
-    get_attribute_info : Proc(ITfDisplayAttributeInfo*, TF_DISPLAYATTRIBUTE*, HRESULT)
-    set_attribute_info : Proc(ITfDisplayAttributeInfo*, TF_DISPLAYATTRIBUTE*, HRESULT)
-    reset : Proc(ITfDisplayAttributeInfo*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_guid : UInt64
+    get_description : UInt64
+    get_attribute_info : UInt64
+    set_attribute_info : UInt64
+    reset : UInt64
   end
 
   ITfDisplayAttributeInfo_GUID = "70528852-2f26-4aea-8c96-215150578932"
@@ -2444,13 +2444,13 @@ lib LibWin32
   end
 
   struct IEnumTfDisplayAttributeInfoVTbl
-    query_interface : Proc(IEnumTfDisplayAttributeInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumTfDisplayAttributeInfo*, UInt32)
-    release : Proc(IEnumTfDisplayAttributeInfo*, UInt32)
-    clone : Proc(IEnumTfDisplayAttributeInfo*, IEnumTfDisplayAttributeInfo*, HRESULT)
-    next : Proc(IEnumTfDisplayAttributeInfo*, UInt32, ITfDisplayAttributeInfo*, UInt32*, HRESULT)
-    reset : Proc(IEnumTfDisplayAttributeInfo*, HRESULT)
-    skip : Proc(IEnumTfDisplayAttributeInfo*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumTfDisplayAttributeInfo_GUID = "7cef04d7-cb75-4e80-a7ab-5f5bc7d332de"
@@ -2460,11 +2460,11 @@ lib LibWin32
   end
 
   struct ITfDisplayAttributeProviderVTbl
-    query_interface : Proc(ITfDisplayAttributeProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfDisplayAttributeProvider*, UInt32)
-    release : Proc(ITfDisplayAttributeProvider*, UInt32)
-    enum_display_attribute_info : Proc(ITfDisplayAttributeProvider*, IEnumTfDisplayAttributeInfo*, HRESULT)
-    get_display_attribute_info : Proc(ITfDisplayAttributeProvider*, Guid*, ITfDisplayAttributeInfo*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enum_display_attribute_info : UInt64
+    get_display_attribute_info : UInt64
   end
 
   ITfDisplayAttributeProvider_GUID = "fee47777-163c-4769-996a-6e9c50ad8f54"
@@ -2474,12 +2474,12 @@ lib LibWin32
   end
 
   struct ITfDisplayAttributeMgrVTbl
-    query_interface : Proc(ITfDisplayAttributeMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfDisplayAttributeMgr*, UInt32)
-    release : Proc(ITfDisplayAttributeMgr*, UInt32)
-    on_update_info : Proc(ITfDisplayAttributeMgr*, HRESULT)
-    enum_display_attribute_info : Proc(ITfDisplayAttributeMgr*, IEnumTfDisplayAttributeInfo*, HRESULT)
-    get_display_attribute_info : Proc(ITfDisplayAttributeMgr*, Guid*, ITfDisplayAttributeInfo*, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_update_info : UInt64
+    enum_display_attribute_info : UInt64
+    get_display_attribute_info : UInt64
   end
 
   ITfDisplayAttributeMgr_GUID = "8ded7393-5db1-475c-9e71-a39111b0ff67"
@@ -2489,10 +2489,10 @@ lib LibWin32
   end
 
   struct ITfDisplayAttributeNotifySinkVTbl
-    query_interface : Proc(ITfDisplayAttributeNotifySink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfDisplayAttributeNotifySink*, UInt32)
-    release : Proc(ITfDisplayAttributeNotifySink*, UInt32)
-    on_update_info : Proc(ITfDisplayAttributeNotifySink*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_update_info : UInt64
   end
 
   ITfDisplayAttributeNotifySink_GUID = "ad56f402-e162-4f25-908f-7d577cf9bda9"
@@ -2502,23 +2502,23 @@ lib LibWin32
   end
 
   struct ITfCategoryMgrVTbl
-    query_interface : Proc(ITfCategoryMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfCategoryMgr*, UInt32)
-    release : Proc(ITfCategoryMgr*, UInt32)
-    register_category : Proc(ITfCategoryMgr*, Guid*, Guid*, Guid*, HRESULT)
-    unregister_category : Proc(ITfCategoryMgr*, Guid*, Guid*, Guid*, HRESULT)
-    enum_categories_in_item : Proc(ITfCategoryMgr*, Guid*, IEnumGUID*, HRESULT)
-    enum_items_in_category : Proc(ITfCategoryMgr*, Guid*, IEnumGUID*, HRESULT)
-    find_closest_category : Proc(ITfCategoryMgr*, Guid*, Guid*, Guid**, UInt32, HRESULT)
-    register_guid_description : Proc(ITfCategoryMgr*, Guid*, Guid*, Char*, UInt32, HRESULT)
-    unregister_guid_description : Proc(ITfCategoryMgr*, Guid*, Guid*, HRESULT)
-    get_guid_description : Proc(ITfCategoryMgr*, Guid*, UInt8**, HRESULT)
-    register_guiddword : Proc(ITfCategoryMgr*, Guid*, Guid*, UInt32, HRESULT)
-    unregister_guiddword : Proc(ITfCategoryMgr*, Guid*, Guid*, HRESULT)
-    get_guiddword : Proc(ITfCategoryMgr*, Guid*, UInt32*, HRESULT)
-    register_guid : Proc(ITfCategoryMgr*, Guid*, UInt32*, HRESULT)
-    get_guid : Proc(ITfCategoryMgr*, UInt32, Guid*, HRESULT)
-    is_equal_tf_guid_atom : Proc(ITfCategoryMgr*, UInt32, Guid*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    register_category : UInt64
+    unregister_category : UInt64
+    enum_categories_in_item : UInt64
+    enum_items_in_category : UInt64
+    find_closest_category : UInt64
+    register_guid_description : UInt64
+    unregister_guid_description : UInt64
+    get_guid_description : UInt64
+    register_guiddword : UInt64
+    unregister_guiddword : UInt64
+    get_guiddword : UInt64
+    register_guid : UInt64
+    get_guid : UInt64
+    is_equal_tf_guid_atom : UInt64
   end
 
   ITfCategoryMgr_GUID = "c3acefb5-f69d-4905-938f-fcadcf4be830"
@@ -2528,11 +2528,11 @@ lib LibWin32
   end
 
   struct ITfSourceVTbl
-    query_interface : Proc(ITfSource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfSource*, UInt32)
-    release : Proc(ITfSource*, UInt32)
-    advise_sink : Proc(ITfSource*, Guid*, IUnknown, UInt32*, HRESULT)
-    unadvise_sink : Proc(ITfSource*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    advise_sink : UInt64
+    unadvise_sink : UInt64
   end
 
   ITfSource_GUID = "4ea48a35-60ae-446f-8fd6-e6a8d82459f7"
@@ -2542,11 +2542,11 @@ lib LibWin32
   end
 
   struct ITfSourceSingleVTbl
-    query_interface : Proc(ITfSourceSingle*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfSourceSingle*, UInt32)
-    release : Proc(ITfSourceSingle*, UInt32)
-    advise_single_sink : Proc(ITfSourceSingle*, UInt32, Guid*, IUnknown, HRESULT)
-    unadvise_single_sink : Proc(ITfSourceSingle*, UInt32, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    advise_single_sink : UInt64
+    unadvise_single_sink : UInt64
   end
 
   ITfSourceSingle_GUID = "73131f9c-56a9-49dd-b0ee-d046633f7528"
@@ -2556,14 +2556,14 @@ lib LibWin32
   end
 
   struct ITfUIElementMgrVTbl
-    query_interface : Proc(ITfUIElementMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfUIElementMgr*, UInt32)
-    release : Proc(ITfUIElementMgr*, UInt32)
-    begin_ui_element : Proc(ITfUIElementMgr*, ITfUIElement, LibC::BOOL*, UInt32*, HRESULT)
-    update_ui_element : Proc(ITfUIElementMgr*, UInt32, HRESULT)
-    end_ui_element : Proc(ITfUIElementMgr*, UInt32, HRESULT)
-    get_ui_element : Proc(ITfUIElementMgr*, UInt32, ITfUIElement*, HRESULT)
-    enum_ui_elements : Proc(ITfUIElementMgr*, IEnumTfUIElements*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_ui_element : UInt64
+    update_ui_element : UInt64
+    end_ui_element : UInt64
+    get_ui_element : UInt64
+    enum_ui_elements : UInt64
   end
 
   ITfUIElementMgr_GUID = "ea1ea135-19df-11d7-a6d2-00065b84435c"
@@ -2573,13 +2573,13 @@ lib LibWin32
   end
 
   struct IEnumTfUIElementsVTbl
-    query_interface : Proc(IEnumTfUIElements*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumTfUIElements*, UInt32)
-    release : Proc(IEnumTfUIElements*, UInt32)
-    clone : Proc(IEnumTfUIElements*, IEnumTfUIElements*, HRESULT)
-    next : Proc(IEnumTfUIElements*, UInt32, ITfUIElement*, UInt32*, HRESULT)
-    reset : Proc(IEnumTfUIElements*, HRESULT)
-    skip : Proc(IEnumTfUIElements*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumTfUIElements_GUID = "887aa91e-acba-4931-84da-3c5208cf543f"
@@ -2589,12 +2589,12 @@ lib LibWin32
   end
 
   struct ITfUIElementSinkVTbl
-    query_interface : Proc(ITfUIElementSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfUIElementSink*, UInt32)
-    release : Proc(ITfUIElementSink*, UInt32)
-    begin_ui_element : Proc(ITfUIElementSink*, UInt32, LibC::BOOL*, HRESULT)
-    update_ui_element : Proc(ITfUIElementSink*, UInt32, HRESULT)
-    end_ui_element : Proc(ITfUIElementSink*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_ui_element : UInt64
+    update_ui_element : UInt64
+    end_ui_element : UInt64
   end
 
   ITfUIElementSink_GUID = "ea1ea136-19df-11d7-a6d2-00065b84435c"
@@ -2604,13 +2604,13 @@ lib LibWin32
   end
 
   struct ITfUIElementVTbl
-    query_interface : Proc(ITfUIElement*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfUIElement*, UInt32)
-    release : Proc(ITfUIElement*, UInt32)
-    get_description : Proc(ITfUIElement*, UInt8**, HRESULT)
-    get_guid : Proc(ITfUIElement*, Guid*, HRESULT)
-    show : Proc(ITfUIElement*, LibC::BOOL, HRESULT)
-    is_shown : Proc(ITfUIElement*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_description : UInt64
+    get_guid : UInt64
+    show : UInt64
+    is_shown : UInt64
   end
 
   ITfUIElement_GUID = "ea1ea137-19df-11d7-a6d2-00065b84435c"
@@ -2620,21 +2620,21 @@ lib LibWin32
   end
 
   struct ITfCandidateListUIElementVTbl
-    query_interface : Proc(ITfCandidateListUIElement*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfCandidateListUIElement*, UInt32)
-    release : Proc(ITfCandidateListUIElement*, UInt32)
-    get_description : Proc(ITfCandidateListUIElement*, UInt8**, HRESULT)
-    get_guid : Proc(ITfCandidateListUIElement*, Guid*, HRESULT)
-    show : Proc(ITfCandidateListUIElement*, LibC::BOOL, HRESULT)
-    is_shown : Proc(ITfCandidateListUIElement*, LibC::BOOL*, HRESULT)
-    get_updated_flags : Proc(ITfCandidateListUIElement*, UInt32*, HRESULT)
-    get_document_mgr : Proc(ITfCandidateListUIElement*, ITfDocumentMgr*, HRESULT)
-    get_count : Proc(ITfCandidateListUIElement*, UInt32*, HRESULT)
-    get_selection : Proc(ITfCandidateListUIElement*, UInt32*, HRESULT)
-    get_string : Proc(ITfCandidateListUIElement*, UInt32, UInt8**, HRESULT)
-    get_page_index : Proc(ITfCandidateListUIElement*, UInt32*, UInt32, UInt32*, HRESULT)
-    set_page_index : Proc(ITfCandidateListUIElement*, UInt32*, UInt32, HRESULT)
-    get_current_page : Proc(ITfCandidateListUIElement*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_description : UInt64
+    get_guid : UInt64
+    show : UInt64
+    is_shown : UInt64
+    get_updated_flags : UInt64
+    get_document_mgr : UInt64
+    get_count : UInt64
+    get_selection : UInt64
+    get_string : UInt64
+    get_page_index : UInt64
+    set_page_index : UInt64
+    get_current_page : UInt64
   end
 
   ITfCandidateListUIElement_GUID = "ea1ea138-19df-11d7-a6d2-00065b84435c"
@@ -2644,24 +2644,24 @@ lib LibWin32
   end
 
   struct ITfCandidateListUIElementBehaviorVTbl
-    query_interface : Proc(ITfCandidateListUIElementBehavior*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfCandidateListUIElementBehavior*, UInt32)
-    release : Proc(ITfCandidateListUIElementBehavior*, UInt32)
-    get_description : Proc(ITfCandidateListUIElementBehavior*, UInt8**, HRESULT)
-    get_guid : Proc(ITfCandidateListUIElementBehavior*, Guid*, HRESULT)
-    show : Proc(ITfCandidateListUIElementBehavior*, LibC::BOOL, HRESULT)
-    is_shown : Proc(ITfCandidateListUIElementBehavior*, LibC::BOOL*, HRESULT)
-    get_updated_flags : Proc(ITfCandidateListUIElementBehavior*, UInt32*, HRESULT)
-    get_document_mgr : Proc(ITfCandidateListUIElementBehavior*, ITfDocumentMgr*, HRESULT)
-    get_count : Proc(ITfCandidateListUIElementBehavior*, UInt32*, HRESULT)
-    get_selection : Proc(ITfCandidateListUIElementBehavior*, UInt32*, HRESULT)
-    get_string : Proc(ITfCandidateListUIElementBehavior*, UInt32, UInt8**, HRESULT)
-    get_page_index : Proc(ITfCandidateListUIElementBehavior*, UInt32*, UInt32, UInt32*, HRESULT)
-    set_page_index : Proc(ITfCandidateListUIElementBehavior*, UInt32*, UInt32, HRESULT)
-    get_current_page : Proc(ITfCandidateListUIElementBehavior*, UInt32*, HRESULT)
-    set_selection : Proc(ITfCandidateListUIElementBehavior*, UInt32, HRESULT)
-    finalize : Proc(ITfCandidateListUIElementBehavior*, HRESULT)
-    abort : Proc(ITfCandidateListUIElementBehavior*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_description : UInt64
+    get_guid : UInt64
+    show : UInt64
+    is_shown : UInt64
+    get_updated_flags : UInt64
+    get_document_mgr : UInt64
+    get_count : UInt64
+    get_selection : UInt64
+    get_string : UInt64
+    get_page_index : UInt64
+    set_page_index : UInt64
+    get_current_page : UInt64
+    set_selection : UInt64
+    finalize : UInt64
+    abort : UInt64
   end
 
   ITfCandidateListUIElementBehavior_GUID = "85fad185-58ce-497a-9460-355366b64b9a"
@@ -2671,19 +2671,19 @@ lib LibWin32
   end
 
   struct ITfReadingInformationUIElementVTbl
-    query_interface : Proc(ITfReadingInformationUIElement*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfReadingInformationUIElement*, UInt32)
-    release : Proc(ITfReadingInformationUIElement*, UInt32)
-    get_description : Proc(ITfReadingInformationUIElement*, UInt8**, HRESULT)
-    get_guid : Proc(ITfReadingInformationUIElement*, Guid*, HRESULT)
-    show : Proc(ITfReadingInformationUIElement*, LibC::BOOL, HRESULT)
-    is_shown : Proc(ITfReadingInformationUIElement*, LibC::BOOL*, HRESULT)
-    get_updated_flags : Proc(ITfReadingInformationUIElement*, UInt32*, HRESULT)
-    get_context : Proc(ITfReadingInformationUIElement*, ITfContext*, HRESULT)
-    get_string : Proc(ITfReadingInformationUIElement*, UInt8**, HRESULT)
-    get_max_reading_string_length : Proc(ITfReadingInformationUIElement*, UInt32*, HRESULT)
-    get_error_index : Proc(ITfReadingInformationUIElement*, UInt32*, HRESULT)
-    is_vertical_order_preferred : Proc(ITfReadingInformationUIElement*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_description : UInt64
+    get_guid : UInt64
+    show : UInt64
+    is_shown : UInt64
+    get_updated_flags : UInt64
+    get_context : UInt64
+    get_string : UInt64
+    get_max_reading_string_length : UInt64
+    get_error_index : UInt64
+    is_vertical_order_preferred : UInt64
   end
 
   ITfReadingInformationUIElement_GUID = "ea1ea139-19df-11d7-a6d2-00065b84435c"
@@ -2693,14 +2693,14 @@ lib LibWin32
   end
 
   struct ITfTransitoryExtensionUIElementVTbl
-    query_interface : Proc(ITfTransitoryExtensionUIElement*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfTransitoryExtensionUIElement*, UInt32)
-    release : Proc(ITfTransitoryExtensionUIElement*, UInt32)
-    get_description : Proc(ITfTransitoryExtensionUIElement*, UInt8**, HRESULT)
-    get_guid : Proc(ITfTransitoryExtensionUIElement*, Guid*, HRESULT)
-    show : Proc(ITfTransitoryExtensionUIElement*, LibC::BOOL, HRESULT)
-    is_shown : Proc(ITfTransitoryExtensionUIElement*, LibC::BOOL*, HRESULT)
-    get_document_mgr : Proc(ITfTransitoryExtensionUIElement*, ITfDocumentMgr*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_description : UInt64
+    get_guid : UInt64
+    show : UInt64
+    is_shown : UInt64
+    get_document_mgr : UInt64
   end
 
   ITfTransitoryExtensionUIElement_GUID = "858f956a-972f-42a2-a2f2-0321e1abe209"
@@ -2710,10 +2710,10 @@ lib LibWin32
   end
 
   struct ITfTransitoryExtensionSinkVTbl
-    query_interface : Proc(ITfTransitoryExtensionSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfTransitoryExtensionSink*, UInt32)
-    release : Proc(ITfTransitoryExtensionSink*, UInt32)
-    on_transitory_extension_updated : Proc(ITfTransitoryExtensionSink*, ITfContext, UInt32, ITfRange, ITfRange, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_transitory_extension_updated : UInt64
   end
 
   ITfTransitoryExtensionSink_GUID = "a615096f-1c57-4813-8a15-55ee6e5a839c"
@@ -2723,14 +2723,14 @@ lib LibWin32
   end
 
   struct ITfToolTipUIElementVTbl
-    query_interface : Proc(ITfToolTipUIElement*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfToolTipUIElement*, UInt32)
-    release : Proc(ITfToolTipUIElement*, UInt32)
-    get_description : Proc(ITfToolTipUIElement*, UInt8**, HRESULT)
-    get_guid : Proc(ITfToolTipUIElement*, Guid*, HRESULT)
-    show : Proc(ITfToolTipUIElement*, LibC::BOOL, HRESULT)
-    is_shown : Proc(ITfToolTipUIElement*, LibC::BOOL*, HRESULT)
-    get_string : Proc(ITfToolTipUIElement*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_description : UInt64
+    get_guid : UInt64
+    show : UInt64
+    is_shown : UInt64
+    get_string : UInt64
   end
 
   ITfToolTipUIElement_GUID = "52b18b5c-555d-46b2-b00a-fa680144fbdb"
@@ -2740,11 +2740,11 @@ lib LibWin32
   end
 
   struct ITfReverseConversionListVTbl
-    query_interface : Proc(ITfReverseConversionList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfReverseConversionList*, UInt32)
-    release : Proc(ITfReverseConversionList*, UInt32)
-    get_length : Proc(ITfReverseConversionList*, UInt32*, HRESULT)
-    get_string : Proc(ITfReverseConversionList*, UInt32, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_length : UInt64
+    get_string : UInt64
   end
 
   ITfReverseConversionList_GUID = "151d69f0-86f4-4674-b721-56911e797f47"
@@ -2754,10 +2754,10 @@ lib LibWin32
   end
 
   struct ITfReverseConversionVTbl
-    query_interface : Proc(ITfReverseConversion*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfReverseConversion*, UInt32)
-    release : Proc(ITfReverseConversion*, UInt32)
-    do_reverse_conversion : Proc(ITfReverseConversion*, LibC::LPWSTR, ITfReverseConversionList*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    do_reverse_conversion : UInt64
   end
 
   ITfReverseConversion_GUID = "a415e162-157d-417d-8a8c-0ab26c7d2781"
@@ -2767,10 +2767,10 @@ lib LibWin32
   end
 
   struct ITfReverseConversionMgrVTbl
-    query_interface : Proc(ITfReverseConversionMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfReverseConversionMgr*, UInt32)
-    release : Proc(ITfReverseConversionMgr*, UInt32)
-    get_reverse_conversion : Proc(ITfReverseConversionMgr*, UInt16, Guid*, UInt32, ITfReverseConversion*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_reverse_conversion : UInt64
   end
 
   ITfReverseConversionMgr_GUID = "b643c236-c493-41b6-abb3-692412775cc4"
@@ -2780,11 +2780,11 @@ lib LibWin32
   end
 
   struct ITfCandidateStringVTbl
-    query_interface : Proc(ITfCandidateString*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfCandidateString*, UInt32)
-    release : Proc(ITfCandidateString*, UInt32)
-    get_string : Proc(ITfCandidateString*, UInt8**, HRESULT)
-    get_index : Proc(ITfCandidateString*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_string : UInt64
+    get_index : UInt64
   end
 
   ITfCandidateString_GUID = "581f317e-fd9d-443f-b972-ed00467c5d40"
@@ -2794,13 +2794,13 @@ lib LibWin32
   end
 
   struct IEnumTfCandidatesVTbl
-    query_interface : Proc(IEnumTfCandidates*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumTfCandidates*, UInt32)
-    release : Proc(IEnumTfCandidates*, UInt32)
-    clone : Proc(IEnumTfCandidates*, IEnumTfCandidates*, HRESULT)
-    next : Proc(IEnumTfCandidates*, UInt32, ITfCandidateString*, UInt32*, HRESULT)
-    reset : Proc(IEnumTfCandidates*, HRESULT)
-    skip : Proc(IEnumTfCandidates*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumTfCandidates_GUID = "defb1926-6c80-4ce8-87d4-d6b72b812bde"
@@ -2810,13 +2810,13 @@ lib LibWin32
   end
 
   struct ITfCandidateListVTbl
-    query_interface : Proc(ITfCandidateList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfCandidateList*, UInt32)
-    release : Proc(ITfCandidateList*, UInt32)
-    enum_candidates : Proc(ITfCandidateList*, IEnumTfCandidates*, HRESULT)
-    get_candidate : Proc(ITfCandidateList*, UInt32, ITfCandidateString*, HRESULT)
-    get_candidate_num : Proc(ITfCandidateList*, UInt32*, HRESULT)
-    set_result : Proc(ITfCandidateList*, UInt32, TfCandidateResult, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enum_candidates : UInt64
+    get_candidate : UInt64
+    get_candidate_num : UInt64
+    set_result : UInt64
   end
 
   ITfCandidateList_GUID = "a3ad50fb-9bdb-49e3-a843-6c76520fbf5d"
@@ -2826,13 +2826,13 @@ lib LibWin32
   end
 
   struct ITfFnReconversionVTbl
-    query_interface : Proc(ITfFnReconversion*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnReconversion*, UInt32)
-    release : Proc(ITfFnReconversion*, UInt32)
-    get_display_name : Proc(ITfFnReconversion*, UInt8**, HRESULT)
-    query_range : Proc(ITfFnReconversion*, ITfRange, ITfRange*, LibC::BOOL*, HRESULT)
-    get_reconversion : Proc(ITfFnReconversion*, ITfRange, ITfCandidateList*, HRESULT)
-    reconvert : Proc(ITfFnReconversion*, ITfRange, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
+    query_range : UInt64
+    get_reconversion : UInt64
+    reconvert : UInt64
   end
 
   ITfFnReconversion_GUID = "4cea93c0-0a58-11d3-8df0-00105a2799b5"
@@ -2842,12 +2842,12 @@ lib LibWin32
   end
 
   struct ITfFnPlayBackVTbl
-    query_interface : Proc(ITfFnPlayBack*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnPlayBack*, UInt32)
-    release : Proc(ITfFnPlayBack*, UInt32)
-    get_display_name : Proc(ITfFnPlayBack*, UInt8**, HRESULT)
-    query_range : Proc(ITfFnPlayBack*, ITfRange, ITfRange*, LibC::BOOL*, HRESULT)
-    play : Proc(ITfFnPlayBack*, ITfRange, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
+    query_range : UInt64
+    play : UInt64
   end
 
   ITfFnPlayBack_GUID = "a3a416a4-0f64-11d3-b5b7-00c04fc324a1"
@@ -2857,12 +2857,12 @@ lib LibWin32
   end
 
   struct ITfFnLangProfileUtilVTbl
-    query_interface : Proc(ITfFnLangProfileUtil*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnLangProfileUtil*, UInt32)
-    release : Proc(ITfFnLangProfileUtil*, UInt32)
-    get_display_name : Proc(ITfFnLangProfileUtil*, UInt8**, HRESULT)
-    register_active_profiles : Proc(ITfFnLangProfileUtil*, HRESULT)
-    is_profile_available_for_lang : Proc(ITfFnLangProfileUtil*, UInt16, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
+    register_active_profiles : UInt64
+    is_profile_available_for_lang : UInt64
   end
 
   ITfFnLangProfileUtil_GUID = "a87a8574-a6c1-4e15-99f0-3d3965f548eb"
@@ -2872,11 +2872,11 @@ lib LibWin32
   end
 
   struct ITfFnConfigureVTbl
-    query_interface : Proc(ITfFnConfigure*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnConfigure*, UInt32)
-    release : Proc(ITfFnConfigure*, UInt32)
-    get_display_name : Proc(ITfFnConfigure*, UInt8**, HRESULT)
-    show : Proc(ITfFnConfigure*, LibC::HANDLE, UInt16, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
+    show : UInt64
   end
 
   ITfFnConfigure_GUID = "88f567c6-1757-49f8-a1b2-89234c1eeff9"
@@ -2886,11 +2886,11 @@ lib LibWin32
   end
 
   struct ITfFnConfigureRegisterWordVTbl
-    query_interface : Proc(ITfFnConfigureRegisterWord*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnConfigureRegisterWord*, UInt32)
-    release : Proc(ITfFnConfigureRegisterWord*, UInt32)
-    get_display_name : Proc(ITfFnConfigureRegisterWord*, UInt8**, HRESULT)
-    show : Proc(ITfFnConfigureRegisterWord*, LibC::HANDLE, UInt16, Guid*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
+    show : UInt64
   end
 
   ITfFnConfigureRegisterWord_GUID = "bb95808a-6d8f-4bca-8400-5390b586aedf"
@@ -2900,11 +2900,11 @@ lib LibWin32
   end
 
   struct ITfFnConfigureRegisterEudcVTbl
-    query_interface : Proc(ITfFnConfigureRegisterEudc*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnConfigureRegisterEudc*, UInt32)
-    release : Proc(ITfFnConfigureRegisterEudc*, UInt32)
-    get_display_name : Proc(ITfFnConfigureRegisterEudc*, UInt8**, HRESULT)
-    show : Proc(ITfFnConfigureRegisterEudc*, LibC::HANDLE, UInt16, Guid*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
+    show : UInt64
   end
 
   ITfFnConfigureRegisterEudc_GUID = "b5e26ff5-d7ad-4304-913f-21a2ed95a1b0"
@@ -2914,11 +2914,11 @@ lib LibWin32
   end
 
   struct ITfFnShowHelpVTbl
-    query_interface : Proc(ITfFnShowHelp*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnShowHelp*, UInt32)
-    release : Proc(ITfFnShowHelp*, UInt32)
-    get_display_name : Proc(ITfFnShowHelp*, UInt8**, HRESULT)
-    show : Proc(ITfFnShowHelp*, LibC::HANDLE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
+    show : UInt64
   end
 
   ITfFnShowHelp_GUID = "5ab1d30c-094d-4c29-8ea5-0bf59be87bf3"
@@ -2928,10 +2928,10 @@ lib LibWin32
   end
 
   struct ITfFnBalloonVTbl
-    query_interface : Proc(ITfFnBalloon*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnBalloon*, UInt32)
-    release : Proc(ITfFnBalloon*, UInt32)
-    update_balloon : Proc(ITfFnBalloon*, TfLBBalloonStyle, Char*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    update_balloon : UInt64
   end
 
   ITfFnBalloon_GUID = "3bab89e4-5fbe-45f4-a5bc-dca36ad225a8"
@@ -2941,11 +2941,11 @@ lib LibWin32
   end
 
   struct ITfFnGetSAPIObjectVTbl
-    query_interface : Proc(ITfFnGetSAPIObject*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnGetSAPIObject*, UInt32)
-    release : Proc(ITfFnGetSAPIObject*, UInt32)
-    get_display_name : Proc(ITfFnGetSAPIObject*, UInt8**, HRESULT)
-    get : Proc(ITfFnGetSAPIObject*, TfSapiObject, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
+    get : UInt64
   end
 
   ITfFnGetSAPIObject_GUID = "5c0ab7ea-167d-4f59-bfb5-4693755e90ca"
@@ -2955,12 +2955,12 @@ lib LibWin32
   end
 
   struct ITfFnPropertyUIStatusVTbl
-    query_interface : Proc(ITfFnPropertyUIStatus*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnPropertyUIStatus*, UInt32)
-    release : Proc(ITfFnPropertyUIStatus*, UInt32)
-    get_display_name : Proc(ITfFnPropertyUIStatus*, UInt8**, HRESULT)
-    get_status : Proc(ITfFnPropertyUIStatus*, Guid*, UInt32*, HRESULT)
-    set_status : Proc(ITfFnPropertyUIStatus*, Guid*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
+    get_status : UInt64
+    set_status : UInt64
   end
 
   ITfFnPropertyUIStatus_GUID = "2338ac6e-2b9d-44c0-a75e-ee64f256b3bd"
@@ -2970,13 +2970,13 @@ lib LibWin32
   end
 
   struct IEnumSpeechCommandsVTbl
-    query_interface : Proc(IEnumSpeechCommands*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumSpeechCommands*, UInt32)
-    release : Proc(IEnumSpeechCommands*, UInt32)
-    clone : Proc(IEnumSpeechCommands*, IEnumSpeechCommands*, HRESULT)
-    next : Proc(IEnumSpeechCommands*, UInt32, UInt16**, UInt32*, HRESULT)
-    reset : Proc(IEnumSpeechCommands*, HRESULT)
-    skip : Proc(IEnumSpeechCommands*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumSpeechCommands_GUID = "8c5dac4f-083c-4b85-a4c9-71746048adca"
@@ -2986,11 +2986,11 @@ lib LibWin32
   end
 
   struct ISpeechCommandProviderVTbl
-    query_interface : Proc(ISpeechCommandProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechCommandProvider*, UInt32)
-    release : Proc(ISpeechCommandProvider*, UInt32)
-    enum_speech_commands : Proc(ISpeechCommandProvider*, UInt16, IEnumSpeechCommands*, HRESULT)
-    process_command : Proc(ISpeechCommandProvider*, Char*, UInt32, UInt16, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enum_speech_commands : UInt64
+    process_command : UInt64
   end
 
   ISpeechCommandProvider_GUID = "38e09d4c-586d-435a-b592-c8a86691dec6"
@@ -3000,11 +3000,11 @@ lib LibWin32
   end
 
   struct ITfFnCustomSpeechCommandVTbl
-    query_interface : Proc(ITfFnCustomSpeechCommand*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnCustomSpeechCommand*, UInt32)
-    release : Proc(ITfFnCustomSpeechCommand*, UInt32)
-    get_display_name : Proc(ITfFnCustomSpeechCommand*, UInt8**, HRESULT)
-    set_speech_command_provider : Proc(ITfFnCustomSpeechCommand*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
+    set_speech_command_provider : UInt64
   end
 
   ITfFnCustomSpeechCommand_GUID = "fca6c349-a12f-43a3-8dd6-5a5a4282577b"
@@ -3014,17 +3014,17 @@ lib LibWin32
   end
 
   struct ITfFnLMProcessorVTbl
-    query_interface : Proc(ITfFnLMProcessor*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnLMProcessor*, UInt32)
-    release : Proc(ITfFnLMProcessor*, UInt32)
-    get_display_name : Proc(ITfFnLMProcessor*, UInt8**, HRESULT)
-    query_range : Proc(ITfFnLMProcessor*, ITfRange, ITfRange*, LibC::BOOL*, HRESULT)
-    query_lang_id : Proc(ITfFnLMProcessor*, UInt16, LibC::BOOL*, HRESULT)
-    get_reconversion : Proc(ITfFnLMProcessor*, ITfRange, ITfCandidateList*, HRESULT)
-    reconvert : Proc(ITfFnLMProcessor*, ITfRange, HRESULT)
-    query_key : Proc(ITfFnLMProcessor*, LibC::BOOL, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
-    invoke_key : Proc(ITfFnLMProcessor*, LibC::BOOL, LibC::UINT_PTR, LPARAM, HRESULT)
-    invoke_func : Proc(ITfFnLMProcessor*, ITfContext, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
+    query_range : UInt64
+    query_lang_id : UInt64
+    get_reconversion : UInt64
+    reconvert : UInt64
+    query_key : UInt64
+    invoke_key : UInt64
+    invoke_func : UInt64
   end
 
   ITfFnLMProcessor_GUID = "7afbf8e7-ac4b-4082-b058-890899d3a010"
@@ -3034,18 +3034,18 @@ lib LibWin32
   end
 
   struct ITfFnLMInternalVTbl
-    query_interface : Proc(ITfFnLMInternal*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnLMInternal*, UInt32)
-    release : Proc(ITfFnLMInternal*, UInt32)
-    get_display_name : Proc(ITfFnLMInternal*, UInt8**, HRESULT)
-    query_range : Proc(ITfFnLMInternal*, ITfRange, ITfRange*, LibC::BOOL*, HRESULT)
-    query_lang_id : Proc(ITfFnLMInternal*, UInt16, LibC::BOOL*, HRESULT)
-    get_reconversion : Proc(ITfFnLMInternal*, ITfRange, ITfCandidateList*, HRESULT)
-    reconvert : Proc(ITfFnLMInternal*, ITfRange, HRESULT)
-    query_key : Proc(ITfFnLMInternal*, LibC::BOOL, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
-    invoke_key : Proc(ITfFnLMInternal*, LibC::BOOL, LibC::UINT_PTR, LPARAM, HRESULT)
-    invoke_func : Proc(ITfFnLMInternal*, ITfContext, Guid*, HRESULT)
-    process_lattice : Proc(ITfFnLMInternal*, ITfRange, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
+    query_range : UInt64
+    query_lang_id : UInt64
+    get_reconversion : UInt64
+    reconvert : UInt64
+    query_key : UInt64
+    invoke_key : UInt64
+    invoke_func : UInt64
+    process_lattice : UInt64
   end
 
   ITfFnLMInternal_GUID = "04b825b1-ac9a-4f7b-b5ad-c7168f1ee445"
@@ -3055,13 +3055,13 @@ lib LibWin32
   end
 
   struct IEnumTfLatticeElementsVTbl
-    query_interface : Proc(IEnumTfLatticeElements*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumTfLatticeElements*, UInt32)
-    release : Proc(IEnumTfLatticeElements*, UInt32)
-    clone : Proc(IEnumTfLatticeElements*, IEnumTfLatticeElements*, HRESULT)
-    next : Proc(IEnumTfLatticeElements*, UInt32, TF_LMLATTELEMENT*, UInt32*, HRESULT)
-    reset : Proc(IEnumTfLatticeElements*, HRESULT)
-    skip : Proc(IEnumTfLatticeElements*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumTfLatticeElements_GUID = "56988052-47da-4a05-911a-e3d941f17145"
@@ -3071,11 +3071,11 @@ lib LibWin32
   end
 
   struct ITfLMLatticeVTbl
-    query_interface : Proc(ITfLMLattice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfLMLattice*, UInt32)
-    release : Proc(ITfLMLattice*, UInt32)
-    query_type : Proc(ITfLMLattice*, Guid*, LibC::BOOL*, HRESULT)
-    enum_lattice_elements : Proc(ITfLMLattice*, UInt32, Guid*, IEnumTfLatticeElements*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    query_type : UInt64
+    enum_lattice_elements : UInt64
   end
 
   ITfLMLattice_GUID = "d4236675-a5bf-4570-9d42-5d6d7b02d59b"
@@ -3085,12 +3085,12 @@ lib LibWin32
   end
 
   struct ITfFnAdviseTextVTbl
-    query_interface : Proc(ITfFnAdviseText*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnAdviseText*, UInt32)
-    release : Proc(ITfFnAdviseText*, UInt32)
-    get_display_name : Proc(ITfFnAdviseText*, UInt8**, HRESULT)
-    on_text_update : Proc(ITfFnAdviseText*, ITfRange, Char*, Int32, HRESULT)
-    on_lattice_update : Proc(ITfFnAdviseText*, ITfRange, ITfLMLattice, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
+    on_text_update : UInt64
+    on_lattice_update : UInt64
   end
 
   ITfFnAdviseText_GUID = "3527268b-7d53-4dd9-92b7-7296ae461249"
@@ -3100,12 +3100,12 @@ lib LibWin32
   end
 
   struct ITfFnSearchCandidateProviderVTbl
-    query_interface : Proc(ITfFnSearchCandidateProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnSearchCandidateProvider*, UInt32)
-    release : Proc(ITfFnSearchCandidateProvider*, UInt32)
-    get_display_name : Proc(ITfFnSearchCandidateProvider*, UInt8**, HRESULT)
-    get_search_candidates : Proc(ITfFnSearchCandidateProvider*, UInt8*, UInt8*, ITfCandidateList*, HRESULT)
-    set_result : Proc(ITfFnSearchCandidateProvider*, UInt8*, UInt8*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
+    get_search_candidates : UInt64
+    set_result : UInt64
   end
 
   ITfFnSearchCandidateProvider_GUID = "87a2ad8f-f27b-4920-8501-67602280175d"
@@ -3115,14 +3115,14 @@ lib LibWin32
   end
 
   struct ITfIntegratableCandidateListUIElementVTbl
-    query_interface : Proc(ITfIntegratableCandidateListUIElement*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfIntegratableCandidateListUIElement*, UInt32)
-    release : Proc(ITfIntegratableCandidateListUIElement*, UInt32)
-    set_integration_style : Proc(ITfIntegratableCandidateListUIElement*, Guid, HRESULT)
-    get_selection_style : Proc(ITfIntegratableCandidateListUIElement*, TfIntegratableCandidateListSelectionStyle*, HRESULT)
-    on_key_down : Proc(ITfIntegratableCandidateListUIElement*, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)
-    show_candidate_numbers : Proc(ITfIntegratableCandidateListUIElement*, LibC::BOOL*, HRESULT)
-    finalize_exact_composition_string : Proc(ITfIntegratableCandidateListUIElement*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_integration_style : UInt64
+    get_selection_style : UInt64
+    on_key_down : UInt64
+    show_candidate_numbers : UInt64
+    finalize_exact_composition_string : UInt64
   end
 
   ITfIntegratableCandidateListUIElement_GUID = "c7a6f54f-b180-416f-b2bf-7bf2e4683d7b"
@@ -3132,11 +3132,11 @@ lib LibWin32
   end
 
   struct ITfFnGetPreferredTouchKeyboardLayoutVTbl
-    query_interface : Proc(ITfFnGetPreferredTouchKeyboardLayout*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnGetPreferredTouchKeyboardLayout*, UInt32)
-    release : Proc(ITfFnGetPreferredTouchKeyboardLayout*, UInt32)
-    get_display_name : Proc(ITfFnGetPreferredTouchKeyboardLayout*, UInt8**, HRESULT)
-    get_layout : Proc(ITfFnGetPreferredTouchKeyboardLayout*, TKBLayoutType*, UInt16*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
+    get_layout : UInt64
   end
 
   ITfFnGetPreferredTouchKeyboardLayout_GUID = "5f309a41-590a-4acc-a97f-d8efff13fdfc"
@@ -3146,11 +3146,11 @@ lib LibWin32
   end
 
   struct ITfFnGetLinguisticAlternatesVTbl
-    query_interface : Proc(ITfFnGetLinguisticAlternates*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfFnGetLinguisticAlternates*, UInt32)
-    release : Proc(ITfFnGetLinguisticAlternates*, UInt32)
-    get_display_name : Proc(ITfFnGetLinguisticAlternates*, UInt8**, HRESULT)
-    get_alternates : Proc(ITfFnGetLinguisticAlternates*, ITfRange, ITfCandidateList*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_display_name : UInt64
+    get_alternates : UInt64
   end
 
   ITfFnGetLinguisticAlternates_GUID = "ea163ce2-7a65-4506-82a3-c528215da64e"
@@ -3160,15 +3160,15 @@ lib LibWin32
   end
 
   struct IUIManagerEventSinkVTbl
-    query_interface : Proc(IUIManagerEventSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIManagerEventSink*, UInt32)
-    release : Proc(IUIManagerEventSink*, UInt32)
-    on_window_opening : Proc(IUIManagerEventSink*, RECT*, HRESULT)
-    on_window_opened : Proc(IUIManagerEventSink*, RECT*, HRESULT)
-    on_window_updating : Proc(IUIManagerEventSink*, RECT*, HRESULT)
-    on_window_updated : Proc(IUIManagerEventSink*, RECT*, HRESULT)
-    on_window_closing : Proc(IUIManagerEventSink*, HRESULT)
-    on_window_closed : Proc(IUIManagerEventSink*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_window_opening : UInt64
+    on_window_opened : UInt64
+    on_window_updating : UInt64
+    on_window_updated : UInt64
+    on_window_closing : UInt64
+    on_window_closed : UInt64
   end
 
   IUIManagerEventSink_GUID = "cd91d690-a7e8-4265-9b38-8bb3bbaba7de"
@@ -3178,14 +3178,14 @@ lib LibWin32
   end
 
   struct ITfInputScopeVTbl
-    query_interface : Proc(ITfInputScope*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfInputScope*, UInt32)
-    release : Proc(ITfInputScope*, UInt32)
-    get_input_scopes : Proc(ITfInputScope*, InputScope**, UInt32*, HRESULT)
-    get_phrase : Proc(ITfInputScope*, UInt8***, UInt32*, HRESULT)
-    get_regular_expression : Proc(ITfInputScope*, UInt8**, HRESULT)
-    get_srgs : Proc(ITfInputScope*, UInt8**, HRESULT)
-    get_xml : Proc(ITfInputScope*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_input_scopes : UInt64
+    get_phrase : UInt64
+    get_regular_expression : UInt64
+    get_srgs : UInt64
+    get_xml : UInt64
   end
 
   ITfInputScope_GUID = "fde1eaee-6924-4cdf-91e7-da38cff5559d"
@@ -3195,15 +3195,15 @@ lib LibWin32
   end
 
   struct ITfInputScope2VTbl
-    query_interface : Proc(ITfInputScope2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfInputScope2*, UInt32)
-    release : Proc(ITfInputScope2*, UInt32)
-    get_input_scopes : Proc(ITfInputScope2*, InputScope**, UInt32*, HRESULT)
-    get_phrase : Proc(ITfInputScope2*, UInt8***, UInt32*, HRESULT)
-    get_regular_expression : Proc(ITfInputScope2*, UInt8**, HRESULT)
-    get_srgs : Proc(ITfInputScope2*, UInt8**, HRESULT)
-    get_xml : Proc(ITfInputScope2*, UInt8**, HRESULT)
-    enum_word_list : Proc(ITfInputScope2*, IEnumString*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_input_scopes : UInt64
+    get_phrase : UInt64
+    get_regular_expression : UInt64
+    get_srgs : UInt64
+    get_xml : UInt64
+    enum_word_list : UInt64
   end
 
   ITfInputScope2_GUID = "5731eaa0-6bc2-4681-a532-92fbb74d7c41"
@@ -3213,11 +3213,11 @@ lib LibWin32
   end
 
   struct ITfMSAAControlVTbl
-    query_interface : Proc(ITfMSAAControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfMSAAControl*, UInt32)
-    release : Proc(ITfMSAAControl*, UInt32)
-    system_enable_msaa : Proc(ITfMSAAControl*, HRESULT)
-    system_disable_msaa : Proc(ITfMSAAControl*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    system_enable_msaa : UInt64
+    system_disable_msaa : UInt64
   end
 
   ITfMSAAControl_GUID = "b5f8fb3b-393f-4f7c-84cb-504924c2705a"
@@ -3227,10 +3227,10 @@ lib LibWin32
   end
 
   struct IInternalDocWrapVTbl
-    query_interface : Proc(IInternalDocWrap*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IInternalDocWrap*, UInt32)
-    release : Proc(IInternalDocWrap*, UInt32)
-    notify_revoke : Proc(IInternalDocWrap*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    notify_revoke : UInt64
   end
 
   IInternalDocWrap_GUID = "e1aa6466-9db4-40ba-be03-77c38e8e60b2"
@@ -3240,10 +3240,10 @@ lib LibWin32
   end
 
   struct ITextStoreACPExVTbl
-    query_interface : Proc(ITextStoreACPEx*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITextStoreACPEx*, UInt32)
-    release : Proc(ITextStoreACPEx*, UInt32)
-    scroll_to_rect : Proc(ITextStoreACPEx*, Int32, Int32, RECT, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    scroll_to_rect : UInt64
   end
 
   ITextStoreACPEx_GUID = "a2de3bc2-3d8e-11d3-81a9-f753fbe61a00"
@@ -3253,10 +3253,10 @@ lib LibWin32
   end
 
   struct ITextStoreAnchorExVTbl
-    query_interface : Proc(ITextStoreAnchorEx*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITextStoreAnchorEx*, UInt32)
-    release : Proc(ITextStoreAnchorEx*, UInt32)
-    scroll_to_rect : Proc(ITextStoreAnchorEx*, IAnchor, IAnchor, RECT, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    scroll_to_rect : UInt64
   end
 
   ITextStoreAnchorEx_GUID = "a2de3bc1-3d8e-11d3-81a9-f753fbe61a00"
@@ -3266,18 +3266,18 @@ lib LibWin32
   end
 
   struct ITextStoreACPSinkExVTbl
-    query_interface : Proc(ITextStoreACPSinkEx*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITextStoreACPSinkEx*, UInt32)
-    release : Proc(ITextStoreACPSinkEx*, UInt32)
-    on_text_change : Proc(ITextStoreACPSinkEx*, TEXT_STORE_TEXT_CHANGE_FLAGS, TS_TEXTCHANGE*, HRESULT)
-    on_selection_change : Proc(ITextStoreACPSinkEx*, HRESULT)
-    on_layout_change : Proc(ITextStoreACPSinkEx*, TsLayoutCode, UInt32, HRESULT)
-    on_status_change : Proc(ITextStoreACPSinkEx*, UInt32, HRESULT)
-    on_attrs_change : Proc(ITextStoreACPSinkEx*, Int32, Int32, UInt32, Guid*, HRESULT)
-    on_lock_granted : Proc(ITextStoreACPSinkEx*, TEXT_STORE_LOCK_FLAGS, HRESULT)
-    on_start_edit_transaction : Proc(ITextStoreACPSinkEx*, HRESULT)
-    on_end_edit_transaction : Proc(ITextStoreACPSinkEx*, HRESULT)
-    on_disconnect : Proc(ITextStoreACPSinkEx*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_text_change : UInt64
+    on_selection_change : UInt64
+    on_layout_change : UInt64
+    on_status_change : UInt64
+    on_attrs_change : UInt64
+    on_lock_granted : UInt64
+    on_start_edit_transaction : UInt64
+    on_end_edit_transaction : UInt64
+    on_disconnect : UInt64
   end
 
   ITextStoreACPSinkEx_GUID = "2bdf9464-41e2-43e3-950c-a6865ba25cd4"
@@ -3287,18 +3287,18 @@ lib LibWin32
   end
 
   struct ITextStoreSinkAnchorExVTbl
-    query_interface : Proc(ITextStoreSinkAnchorEx*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITextStoreSinkAnchorEx*, UInt32)
-    release : Proc(ITextStoreSinkAnchorEx*, UInt32)
-    on_text_change : Proc(ITextStoreSinkAnchorEx*, TEXT_STORE_CHANGE_FLAGS, IAnchor, IAnchor, HRESULT)
-    on_selection_change : Proc(ITextStoreSinkAnchorEx*, HRESULT)
-    on_layout_change : Proc(ITextStoreSinkAnchorEx*, TsLayoutCode, UInt32, HRESULT)
-    on_status_change : Proc(ITextStoreSinkAnchorEx*, UInt32, HRESULT)
-    on_attrs_change : Proc(ITextStoreSinkAnchorEx*, IAnchor, IAnchor, UInt32, Guid*, HRESULT)
-    on_lock_granted : Proc(ITextStoreSinkAnchorEx*, TEXT_STORE_LOCK_FLAGS, HRESULT)
-    on_start_edit_transaction : Proc(ITextStoreSinkAnchorEx*, HRESULT)
-    on_end_edit_transaction : Proc(ITextStoreSinkAnchorEx*, HRESULT)
-    on_disconnect : Proc(ITextStoreSinkAnchorEx*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_text_change : UInt64
+    on_selection_change : UInt64
+    on_layout_change : UInt64
+    on_status_change : UInt64
+    on_attrs_change : UInt64
+    on_lock_granted : UInt64
+    on_start_edit_transaction : UInt64
+    on_end_edit_transaction : UInt64
+    on_disconnect : UInt64
   end
 
   ITextStoreSinkAnchorEx_GUID = "25642426-028d-4474-977b-111bb114fe3e"
@@ -3308,14 +3308,14 @@ lib LibWin32
   end
 
   struct IAccDictionaryVTbl
-    query_interface : Proc(IAccDictionary*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAccDictionary*, UInt32)
-    release : Proc(IAccDictionary*, UInt32)
-    get_localized_string : Proc(IAccDictionary*, Guid*, UInt32, UInt8**, UInt32*, HRESULT)
-    get_parent_term : Proc(IAccDictionary*, Guid*, Guid*, HRESULT)
-    get_mnemonic_string : Proc(IAccDictionary*, Guid*, UInt8**, HRESULT)
-    lookup_mnemonic_term : Proc(IAccDictionary*, UInt8*, Guid*, HRESULT)
-    convert_value_to_string : Proc(IAccDictionary*, Guid*, UInt32, VARIANT, UInt8**, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_localized_string : UInt64
+    get_parent_term : UInt64
+    get_mnemonic_string : UInt64
+    lookup_mnemonic_term : UInt64
+    convert_value_to_string : UInt64
   end
 
   IAccDictionary_GUID = "1dc4cb5f-d737-474d-ade9-5ccfc9bc1cc9"
@@ -3325,14 +3325,14 @@ lib LibWin32
   end
 
   struct IVersionInfoVTbl
-    query_interface : Proc(IVersionInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVersionInfo*, UInt32)
-    release : Proc(IVersionInfo*, UInt32)
-    get_subcomponent_count : Proc(IVersionInfo*, UInt32, UInt32*, HRESULT)
-    get_implementation_id : Proc(IVersionInfo*, UInt32, Guid*, HRESULT)
-    get_build_version : Proc(IVersionInfo*, UInt32, UInt32*, UInt32*, HRESULT)
-    get_component_description : Proc(IVersionInfo*, UInt32, UInt8**, HRESULT)
-    get_instance_description : Proc(IVersionInfo*, UInt32, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_subcomponent_count : UInt64
+    get_implementation_id : UInt64
+    get_build_version : UInt64
+    get_component_description : UInt64
+    get_instance_description : UInt64
   end
 
   IVersionInfo_GUID = "401518ec-db00-4611-9b29-2a0e4b9afa85"
@@ -3342,10 +3342,10 @@ lib LibWin32
   end
 
   struct ICoCreateLocallyVTbl
-    query_interface : Proc(ICoCreateLocally*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICoCreateLocally*, UInt32)
-    release : Proc(ICoCreateLocally*, UInt32)
-    co_create_locally : Proc(ICoCreateLocally*, Guid*, UInt32, Guid*, IUnknown*, Guid*, IUnknown, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    co_create_locally : UInt64
   end
 
   ICoCreateLocally_GUID = "03de00aa-f272-41e3-99cb-03c5e8114ea0"
@@ -3355,10 +3355,10 @@ lib LibWin32
   end
 
   struct ICoCreatedLocallyVTbl
-    query_interface : Proc(ICoCreatedLocally*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICoCreatedLocally*, UInt32)
-    release : Proc(ICoCreatedLocally*, UInt32)
-    local_init : Proc(ICoCreatedLocally*, IUnknown, Guid*, IUnknown, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    local_init : UInt64
   end
 
   ICoCreatedLocally_GUID = "0a53eb6c-1908-4742-8cff-2cee2e93f94c"
@@ -3368,16 +3368,16 @@ lib LibWin32
   end
 
   struct IAccStoreVTbl
-    query_interface : Proc(IAccStore*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAccStore*, UInt32)
-    release : Proc(IAccStore*, UInt32)
-    register : Proc(IAccStore*, Guid*, IUnknown, HRESULT)
-    unregister : Proc(IAccStore*, IUnknown, HRESULT)
-    get_documents : Proc(IAccStore*, IEnumUnknown*, HRESULT)
-    lookup_by_hwnd : Proc(IAccStore*, LibC::HANDLE, Guid*, IUnknown*, HRESULT)
-    lookup_by_point : Proc(IAccStore*, POINT, Guid*, IUnknown*, HRESULT)
-    on_document_focus : Proc(IAccStore*, IUnknown, HRESULT)
-    get_focused : Proc(IAccStore*, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    register : UInt64
+    unregister : UInt64
+    get_documents : UInt64
+    lookup_by_hwnd : UInt64
+    lookup_by_point : UInt64
+    on_document_focus : UInt64
+    get_focused : UInt64
   end
 
   IAccStore_GUID = "e2cd4a63-2b72-4d48-b739-95e4765195ba"
@@ -3387,12 +3387,12 @@ lib LibWin32
   end
 
   struct IAccServerDocMgrVTbl
-    query_interface : Proc(IAccServerDocMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAccServerDocMgr*, UInt32)
-    release : Proc(IAccServerDocMgr*, UInt32)
-    new_document : Proc(IAccServerDocMgr*, Guid*, IUnknown, HRESULT)
-    revoke_document : Proc(IAccServerDocMgr*, IUnknown, HRESULT)
-    on_document_focus : Proc(IAccServerDocMgr*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    new_document : UInt64
+    revoke_document : UInt64
+    on_document_focus : UInt64
   end
 
   IAccServerDocMgr_GUID = "ad7c73cf-6dd5-4855-abc2-b04bad5b9153"
@@ -3402,13 +3402,13 @@ lib LibWin32
   end
 
   struct IAccClientDocMgrVTbl
-    query_interface : Proc(IAccClientDocMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAccClientDocMgr*, UInt32)
-    release : Proc(IAccClientDocMgr*, UInt32)
-    get_documents : Proc(IAccClientDocMgr*, IEnumUnknown*, HRESULT)
-    lookup_by_hwnd : Proc(IAccClientDocMgr*, LibC::HANDLE, Guid*, IUnknown*, HRESULT)
-    lookup_by_point : Proc(IAccClientDocMgr*, POINT, Guid*, IUnknown*, HRESULT)
-    get_focused : Proc(IAccClientDocMgr*, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_documents : UInt64
+    lookup_by_hwnd : UInt64
+    lookup_by_point : UInt64
+    get_focused : UInt64
   end
 
   IAccClientDocMgr_GUID = "4c896039-7b6d-49e6-a8c1-45116a98292b"
@@ -3418,11 +3418,11 @@ lib LibWin32
   end
 
   struct IDocWrapVTbl
-    query_interface : Proc(IDocWrap*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDocWrap*, UInt32)
-    release : Proc(IDocWrap*, UInt32)
-    set_doc : Proc(IDocWrap*, Guid*, IUnknown, HRESULT)
-    get_wrapped_doc : Proc(IDocWrap*, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_doc : UInt64
+    get_wrapped_doc : UInt64
   end
 
   IDocWrap_GUID = "dcd285fe-0be0-43bd-99c9-aaaec513c555"
@@ -3432,10 +3432,10 @@ lib LibWin32
   end
 
   struct IClonableWrapperVTbl
-    query_interface : Proc(IClonableWrapper*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IClonableWrapper*, UInt32)
-    release : Proc(IClonableWrapper*, UInt32)
-    clone_new_wrapper : Proc(IClonableWrapper*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone_new_wrapper : UInt64
   end
 
   IClonableWrapper_GUID = "b33e75ff-e84c-4dca-a25c-33b8dc003374"
@@ -3445,12 +3445,12 @@ lib LibWin32
   end
 
   struct ITfSpeechUIServerVTbl
-    query_interface : Proc(ITfSpeechUIServer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITfSpeechUIServer*, UInt32)
-    release : Proc(ITfSpeechUIServer*, UInt32)
-    initialize : Proc(ITfSpeechUIServer*, HRESULT)
-    show_ui : Proc(ITfSpeechUIServer*, LibC::BOOL, HRESULT)
-    update_balloon : Proc(ITfSpeechUIServer*, TfLBBalloonStyle, Char*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    show_ui : UInt64
+    update_balloon : UInt64
   end
 
   ITfSpeechUIServer_GUID = "90e9a944-9244-489f-a78f-de67afc013a7"
@@ -3468,4 +3468,4033 @@ lib LibWin32
 
   # Params # 
   fun UninitLocalMsCtfMonitor : HRESULT
+end
+struct LibWin32::ITextStoreACP
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def advise_sink(riid : Guid*, punk : IUnknown, dwmask : UInt32) : HRESULT
+    @lpVtbl.value.advise_sink.unsafe_as(Proc(Guid*, IUnknown, UInt32, HRESULT)).call(riid, punk, dwmask)
+  end
+  def unadvise_sink(punk : IUnknown) : HRESULT
+    @lpVtbl.value.unadvise_sink.unsafe_as(Proc(IUnknown, HRESULT)).call(punk)
+  end
+  def request_lock(dwlockflags : UInt32, phrsession : HRESULT*) : HRESULT
+    @lpVtbl.value.request_lock.unsafe_as(Proc(UInt32, HRESULT*, HRESULT)).call(dwlockflags, phrsession)
+  end
+  def get_status(pdcs : TS_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(TS_STATUS*, HRESULT)).call(pdcs)
+  end
+  def query_insert(acpteststart : Int32, acptestend : Int32, cch : UInt32, pacpresultstart : Int32*, pacpresultend : Int32*) : HRESULT
+    @lpVtbl.value.query_insert.unsafe_as(Proc(Int32, Int32, UInt32, Int32*, Int32*, HRESULT)).call(acpteststart, acptestend, cch, pacpresultstart, pacpresultend)
+  end
+  def get_selection(ulindex : UInt32, ulcount : UInt32, pselection : TS_SELECTION_ACP*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.get_selection.unsafe_as(Proc(UInt32, UInt32, TS_SELECTION_ACP*, UInt32*, HRESULT)).call(ulindex, ulcount, pselection, pcfetched)
+  end
+  def set_selection(ulcount : UInt32, pselection : TS_SELECTION_ACP*) : HRESULT
+    @lpVtbl.value.set_selection.unsafe_as(Proc(UInt32, TS_SELECTION_ACP*, HRESULT)).call(ulcount, pselection)
+  end
+  def get_text(acpstart : Int32, acpend : Int32, pchplain : Char*, cchplainreq : UInt32, pcchplainret : UInt32*, prgruninfo : TS_RUNINFO*, cruninforeq : UInt32, pcruninforet : UInt32*, pacpnext : Int32*) : HRESULT
+    @lpVtbl.value.get_text.unsafe_as(Proc(Int32, Int32, Char*, UInt32, UInt32*, TS_RUNINFO*, UInt32, UInt32*, Int32*, HRESULT)).call(acpstart, acpend, pchplain, cchplainreq, pcchplainret, prgruninfo, cruninforeq, pcruninforet, pacpnext)
+  end
+  def set_text(dwflags : UInt32, acpstart : Int32, acpend : Int32, pchtext : Char*, cch : UInt32, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.set_text.unsafe_as(Proc(UInt32, Int32, Int32, Char*, UInt32, TS_TEXTCHANGE*, HRESULT)).call(dwflags, acpstart, acpend, pchtext, cch, pchange)
+  end
+  def get_formatted_text(acpstart : Int32, acpend : Int32, ppdataobject : IDataObject*) : HRESULT
+    @lpVtbl.value.get_formatted_text.unsafe_as(Proc(Int32, Int32, IDataObject*, HRESULT)).call(acpstart, acpend, ppdataobject)
+  end
+  def get_embedded(acppos : Int32, rguidservice : Guid*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_embedded.unsafe_as(Proc(Int32, Guid*, Guid*, IUnknown*, HRESULT)).call(acppos, rguidservice, riid, ppunk)
+  end
+  def query_insert_embedded(pguidservice : Guid*, pformatetc : FORMATETC*, pfinsertable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_insert_embedded.unsafe_as(Proc(Guid*, FORMATETC*, LibC::BOOL*, HRESULT)).call(pguidservice, pformatetc, pfinsertable)
+  end
+  def insert_embedded(dwflags : UInt32, acpstart : Int32, acpend : Int32, pdataobject : IDataObject, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.insert_embedded.unsafe_as(Proc(UInt32, Int32, Int32, IDataObject, TS_TEXTCHANGE*, HRESULT)).call(dwflags, acpstart, acpend, pdataobject, pchange)
+  end
+  def insert_text_at_selection(dwflags : UInt32, pchtext : Char*, cch : UInt32, pacpstart : Int32*, pacpend : Int32*, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.insert_text_at_selection.unsafe_as(Proc(UInt32, Char*, UInt32, Int32*, Int32*, TS_TEXTCHANGE*, HRESULT)).call(dwflags, pchtext, cch, pacpstart, pacpend, pchange)
+  end
+  def insert_embedded_at_selection(dwflags : UInt32, pdataobject : IDataObject, pacpstart : Int32*, pacpend : Int32*, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.insert_embedded_at_selection.unsafe_as(Proc(UInt32, IDataObject, Int32*, Int32*, TS_TEXTCHANGE*, HRESULT)).call(dwflags, pdataobject, pacpstart, pacpend, pchange)
+  end
+  def request_supported_attrs(dwflags : UInt32, cfilterattrs : UInt32, pafilterattrs : Guid*) : HRESULT
+    @lpVtbl.value.request_supported_attrs.unsafe_as(Proc(UInt32, UInt32, Guid*, HRESULT)).call(dwflags, cfilterattrs, pafilterattrs)
+  end
+  def request_attrs_at_position(acppos : Int32, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.request_attrs_at_position.unsafe_as(Proc(Int32, UInt32, Guid*, UInt32, HRESULT)).call(acppos, cfilterattrs, pafilterattrs, dwflags)
+  end
+  def request_attrs_transitioning_at_position(acppos : Int32, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.request_attrs_transitioning_at_position.unsafe_as(Proc(Int32, UInt32, Guid*, UInt32, HRESULT)).call(acppos, cfilterattrs, pafilterattrs, dwflags)
+  end
+  def find_next_attr_transition(acpstart : Int32, acphalt : Int32, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32, pacpnext : Int32*, pffound : LibC::BOOL*, plfoundoffset : Int32*) : HRESULT
+    @lpVtbl.value.find_next_attr_transition.unsafe_as(Proc(Int32, Int32, UInt32, Guid*, UInt32, Int32*, LibC::BOOL*, Int32*, HRESULT)).call(acpstart, acphalt, cfilterattrs, pafilterattrs, dwflags, pacpnext, pffound, plfoundoffset)
+  end
+  def retrieve_requested_attrs(ulcount : UInt32, paattrvals : TS_ATTRVAL*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.retrieve_requested_attrs.unsafe_as(Proc(UInt32, TS_ATTRVAL*, UInt32*, HRESULT)).call(ulcount, paattrvals, pcfetched)
+  end
+  def get_end_acp(pacp : Int32*) : HRESULT
+    @lpVtbl.value.get_end_acp.unsafe_as(Proc(Int32*, HRESULT)).call(pacp)
+  end
+  def get_active_view(pvcview : UInt32*) : HRESULT
+    @lpVtbl.value.get_active_view.unsafe_as(Proc(UInt32*, HRESULT)).call(pvcview)
+  end
+  def get_acp_from_point(vcview : UInt32, ptscreen : POINT*, dwflags : UInt32, pacp : Int32*) : HRESULT
+    @lpVtbl.value.get_acp_from_point.unsafe_as(Proc(UInt32, POINT*, UInt32, Int32*, HRESULT)).call(vcview, ptscreen, dwflags, pacp)
+  end
+  def get_text_ext(vcview : UInt32, acpstart : Int32, acpend : Int32, prc : RECT*, pfclipped : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_text_ext.unsafe_as(Proc(UInt32, Int32, Int32, RECT*, LibC::BOOL*, HRESULT)).call(vcview, acpstart, acpend, prc, pfclipped)
+  end
+  def get_screen_ext(vcview : UInt32, prc : RECT*) : HRESULT
+    @lpVtbl.value.get_screen_ext.unsafe_as(Proc(UInt32, RECT*, HRESULT)).call(vcview, prc)
+  end
+  def get_wnd(vcview : UInt32, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_wnd.unsafe_as(Proc(UInt32, HANDLE*, HRESULT)).call(vcview, phwnd)
+  end
+end
+struct LibWin32::ITextStoreACP2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def advise_sink(riid : Guid*, punk : IUnknown, dwmask : UInt32) : HRESULT
+    @lpVtbl.value.advise_sink.unsafe_as(Proc(Guid*, IUnknown, UInt32, HRESULT)).call(riid, punk, dwmask)
+  end
+  def unadvise_sink(punk : IUnknown) : HRESULT
+    @lpVtbl.value.unadvise_sink.unsafe_as(Proc(IUnknown, HRESULT)).call(punk)
+  end
+  def request_lock(dwlockflags : UInt32, phrsession : HRESULT*) : HRESULT
+    @lpVtbl.value.request_lock.unsafe_as(Proc(UInt32, HRESULT*, HRESULT)).call(dwlockflags, phrsession)
+  end
+  def get_status(pdcs : TS_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(TS_STATUS*, HRESULT)).call(pdcs)
+  end
+  def query_insert(acpteststart : Int32, acptestend : Int32, cch : UInt32, pacpresultstart : Int32*, pacpresultend : Int32*) : HRESULT
+    @lpVtbl.value.query_insert.unsafe_as(Proc(Int32, Int32, UInt32, Int32*, Int32*, HRESULT)).call(acpteststart, acptestend, cch, pacpresultstart, pacpresultend)
+  end
+  def get_selection(ulindex : UInt32, ulcount : UInt32, pselection : TS_SELECTION_ACP*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.get_selection.unsafe_as(Proc(UInt32, UInt32, TS_SELECTION_ACP*, UInt32*, HRESULT)).call(ulindex, ulcount, pselection, pcfetched)
+  end
+  def set_selection(ulcount : UInt32, pselection : TS_SELECTION_ACP*) : HRESULT
+    @lpVtbl.value.set_selection.unsafe_as(Proc(UInt32, TS_SELECTION_ACP*, HRESULT)).call(ulcount, pselection)
+  end
+  def get_text(acpstart : Int32, acpend : Int32, pchplain : Char*, cchplainreq : UInt32, pcchplainret : UInt32*, prgruninfo : TS_RUNINFO*, cruninforeq : UInt32, pcruninforet : UInt32*, pacpnext : Int32*) : HRESULT
+    @lpVtbl.value.get_text.unsafe_as(Proc(Int32, Int32, Char*, UInt32, UInt32*, TS_RUNINFO*, UInt32, UInt32*, Int32*, HRESULT)).call(acpstart, acpend, pchplain, cchplainreq, pcchplainret, prgruninfo, cruninforeq, pcruninforet, pacpnext)
+  end
+  def set_text(dwflags : UInt32, acpstart : Int32, acpend : Int32, pchtext : Char*, cch : UInt32, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.set_text.unsafe_as(Proc(UInt32, Int32, Int32, Char*, UInt32, TS_TEXTCHANGE*, HRESULT)).call(dwflags, acpstart, acpend, pchtext, cch, pchange)
+  end
+  def get_formatted_text(acpstart : Int32, acpend : Int32, ppdataobject : IDataObject*) : HRESULT
+    @lpVtbl.value.get_formatted_text.unsafe_as(Proc(Int32, Int32, IDataObject*, HRESULT)).call(acpstart, acpend, ppdataobject)
+  end
+  def get_embedded(acppos : Int32, rguidservice : Guid*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_embedded.unsafe_as(Proc(Int32, Guid*, Guid*, IUnknown*, HRESULT)).call(acppos, rguidservice, riid, ppunk)
+  end
+  def query_insert_embedded(pguidservice : Guid*, pformatetc : FORMATETC*, pfinsertable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_insert_embedded.unsafe_as(Proc(Guid*, FORMATETC*, LibC::BOOL*, HRESULT)).call(pguidservice, pformatetc, pfinsertable)
+  end
+  def insert_embedded(dwflags : UInt32, acpstart : Int32, acpend : Int32, pdataobject : IDataObject, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.insert_embedded.unsafe_as(Proc(UInt32, Int32, Int32, IDataObject, TS_TEXTCHANGE*, HRESULT)).call(dwflags, acpstart, acpend, pdataobject, pchange)
+  end
+  def insert_text_at_selection(dwflags : UInt32, pchtext : Char*, cch : UInt32, pacpstart : Int32*, pacpend : Int32*, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.insert_text_at_selection.unsafe_as(Proc(UInt32, Char*, UInt32, Int32*, Int32*, TS_TEXTCHANGE*, HRESULT)).call(dwflags, pchtext, cch, pacpstart, pacpend, pchange)
+  end
+  def insert_embedded_at_selection(dwflags : UInt32, pdataobject : IDataObject, pacpstart : Int32*, pacpend : Int32*, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.insert_embedded_at_selection.unsafe_as(Proc(UInt32, IDataObject, Int32*, Int32*, TS_TEXTCHANGE*, HRESULT)).call(dwflags, pdataobject, pacpstart, pacpend, pchange)
+  end
+  def request_supported_attrs(dwflags : UInt32, cfilterattrs : UInt32, pafilterattrs : Guid*) : HRESULT
+    @lpVtbl.value.request_supported_attrs.unsafe_as(Proc(UInt32, UInt32, Guid*, HRESULT)).call(dwflags, cfilterattrs, pafilterattrs)
+  end
+  def request_attrs_at_position(acppos : Int32, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.request_attrs_at_position.unsafe_as(Proc(Int32, UInt32, Guid*, UInt32, HRESULT)).call(acppos, cfilterattrs, pafilterattrs, dwflags)
+  end
+  def request_attrs_transitioning_at_position(acppos : Int32, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.request_attrs_transitioning_at_position.unsafe_as(Proc(Int32, UInt32, Guid*, UInt32, HRESULT)).call(acppos, cfilterattrs, pafilterattrs, dwflags)
+  end
+  def find_next_attr_transition(acpstart : Int32, acphalt : Int32, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32, pacpnext : Int32*, pffound : LibC::BOOL*, plfoundoffset : Int32*) : HRESULT
+    @lpVtbl.value.find_next_attr_transition.unsafe_as(Proc(Int32, Int32, UInt32, Guid*, UInt32, Int32*, LibC::BOOL*, Int32*, HRESULT)).call(acpstart, acphalt, cfilterattrs, pafilterattrs, dwflags, pacpnext, pffound, plfoundoffset)
+  end
+  def retrieve_requested_attrs(ulcount : UInt32, paattrvals : TS_ATTRVAL*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.retrieve_requested_attrs.unsafe_as(Proc(UInt32, TS_ATTRVAL*, UInt32*, HRESULT)).call(ulcount, paattrvals, pcfetched)
+  end
+  def get_end_acp(pacp : Int32*) : HRESULT
+    @lpVtbl.value.get_end_acp.unsafe_as(Proc(Int32*, HRESULT)).call(pacp)
+  end
+  def get_active_view(pvcview : UInt32*) : HRESULT
+    @lpVtbl.value.get_active_view.unsafe_as(Proc(UInt32*, HRESULT)).call(pvcview)
+  end
+  def get_acp_from_point(vcview : UInt32, ptscreen : POINT*, dwflags : UInt32, pacp : Int32*) : HRESULT
+    @lpVtbl.value.get_acp_from_point.unsafe_as(Proc(UInt32, POINT*, UInt32, Int32*, HRESULT)).call(vcview, ptscreen, dwflags, pacp)
+  end
+  def get_text_ext(vcview : UInt32, acpstart : Int32, acpend : Int32, prc : RECT*, pfclipped : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_text_ext.unsafe_as(Proc(UInt32, Int32, Int32, RECT*, LibC::BOOL*, HRESULT)).call(vcview, acpstart, acpend, prc, pfclipped)
+  end
+  def get_screen_ext(vcview : UInt32, prc : RECT*) : HRESULT
+    @lpVtbl.value.get_screen_ext.unsafe_as(Proc(UInt32, RECT*, HRESULT)).call(vcview, prc)
+  end
+end
+struct LibWin32::ITextStoreACPSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_text_change(dwflags : TEXT_STORE_TEXT_CHANGE_FLAGS, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.on_text_change.unsafe_as(Proc(TEXT_STORE_TEXT_CHANGE_FLAGS, TS_TEXTCHANGE*, HRESULT)).call(dwflags, pchange)
+  end
+  def on_selection_change : HRESULT
+    @lpVtbl.value.on_selection_change.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_layout_change(lcode : TsLayoutCode, vcview : UInt32) : HRESULT
+    @lpVtbl.value.on_layout_change.unsafe_as(Proc(TsLayoutCode, UInt32, HRESULT)).call(lcode, vcview)
+  end
+  def on_status_change(dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_status_change.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  end
+  def on_attrs_change(acpstart : Int32, acpend : Int32, cattrs : UInt32, paattrs : Guid*) : HRESULT
+    @lpVtbl.value.on_attrs_change.unsafe_as(Proc(Int32, Int32, UInt32, Guid*, HRESULT)).call(acpstart, acpend, cattrs, paattrs)
+  end
+  def on_lock_granted(dwlockflags : TEXT_STORE_LOCK_FLAGS) : HRESULT
+    @lpVtbl.value.on_lock_granted.unsafe_as(Proc(TEXT_STORE_LOCK_FLAGS, HRESULT)).call(dwlockflags)
+  end
+  def on_start_edit_transaction : HRESULT
+    @lpVtbl.value.on_start_edit_transaction.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_end_edit_transaction : HRESULT
+    @lpVtbl.value.on_end_edit_transaction.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IAnchor
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_gravity(gravity : TsGravity) : HRESULT
+    @lpVtbl.value.set_gravity.unsafe_as(Proc(TsGravity, HRESULT)).call(gravity)
+  end
+  def get_gravity(pgravity : TsGravity*) : HRESULT
+    @lpVtbl.value.get_gravity.unsafe_as(Proc(TsGravity*, HRESULT)).call(pgravity)
+  end
+  def is_equal(pawith : IAnchor, pfequal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_equal.unsafe_as(Proc(IAnchor, LibC::BOOL*, HRESULT)).call(pawith, pfequal)
+  end
+  def compare(pawith : IAnchor, plresult : Int32*) : HRESULT
+    @lpVtbl.value.compare.unsafe_as(Proc(IAnchor, Int32*, HRESULT)).call(pawith, plresult)
+  end
+  def shift(dwflags : UInt32, cchreq : Int32, pcch : Int32*, pahaltanchor : IAnchor) : HRESULT
+    @lpVtbl.value.shift.unsafe_as(Proc(UInt32, Int32, Int32*, IAnchor, HRESULT)).call(dwflags, cchreq, pcch, pahaltanchor)
+  end
+  def shift_to(pasite : IAnchor) : HRESULT
+    @lpVtbl.value.shift_to.unsafe_as(Proc(IAnchor, HRESULT)).call(pasite)
+  end
+  def shift_region(dwflags : UInt32, dir : TsShiftDir, pfnoregion : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.shift_region.unsafe_as(Proc(UInt32, TsShiftDir, LibC::BOOL*, HRESULT)).call(dwflags, dir, pfnoregion)
+  end
+  def set_change_history_mask(dwmask : UInt32) : HRESULT
+    @lpVtbl.value.set_change_history_mask.unsafe_as(Proc(UInt32, HRESULT)).call(dwmask)
+  end
+  def get_change_history(pdwhistory : ANCHOR_CHANGE_HISTORY_FLAGS*) : HRESULT
+    @lpVtbl.value.get_change_history.unsafe_as(Proc(ANCHOR_CHANGE_HISTORY_FLAGS*, HRESULT)).call(pdwhistory)
+  end
+  def clear_change_history : HRESULT
+    @lpVtbl.value.clear_change_history.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppaclone : IAnchor*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IAnchor*, HRESULT)).call(ppaclone)
+  end
+end
+struct LibWin32::ITextStoreAnchor
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def advise_sink(riid : Guid*, punk : IUnknown, dwmask : UInt32) : HRESULT
+    @lpVtbl.value.advise_sink.unsafe_as(Proc(Guid*, IUnknown, UInt32, HRESULT)).call(riid, punk, dwmask)
+  end
+  def unadvise_sink(punk : IUnknown) : HRESULT
+    @lpVtbl.value.unadvise_sink.unsafe_as(Proc(IUnknown, HRESULT)).call(punk)
+  end
+  def request_lock(dwlockflags : UInt32, phrsession : HRESULT*) : HRESULT
+    @lpVtbl.value.request_lock.unsafe_as(Proc(UInt32, HRESULT*, HRESULT)).call(dwlockflags, phrsession)
+  end
+  def get_status(pdcs : TS_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(TS_STATUS*, HRESULT)).call(pdcs)
+  end
+  def query_insert(pateststart : IAnchor, patestend : IAnchor, cch : UInt32, pparesultstart : IAnchor*, pparesultend : IAnchor*) : HRESULT
+    @lpVtbl.value.query_insert.unsafe_as(Proc(IAnchor, IAnchor, UInt32, IAnchor*, IAnchor*, HRESULT)).call(pateststart, patestend, cch, pparesultstart, pparesultend)
+  end
+  def get_selection(ulindex : UInt32, ulcount : UInt32, pselection : TS_SELECTION_ANCHOR*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.get_selection.unsafe_as(Proc(UInt32, UInt32, TS_SELECTION_ANCHOR*, UInt32*, HRESULT)).call(ulindex, ulcount, pselection, pcfetched)
+  end
+  def set_selection(ulcount : UInt32, pselection : TS_SELECTION_ANCHOR*) : HRESULT
+    @lpVtbl.value.set_selection.unsafe_as(Proc(UInt32, TS_SELECTION_ANCHOR*, HRESULT)).call(ulcount, pselection)
+  end
+  def get_text(dwflags : UInt32, pastart : IAnchor, paend : IAnchor, pchtext : Char*, cchreq : UInt32, pcch : UInt32*, fupdateanchor : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_text.unsafe_as(Proc(UInt32, IAnchor, IAnchor, Char*, UInt32, UInt32*, LibC::BOOL, HRESULT)).call(dwflags, pastart, paend, pchtext, cchreq, pcch, fupdateanchor)
+  end
+  def set_text(dwflags : UInt32, pastart : IAnchor, paend : IAnchor, pchtext : Char*, cch : UInt32) : HRESULT
+    @lpVtbl.value.set_text.unsafe_as(Proc(UInt32, IAnchor, IAnchor, Char*, UInt32, HRESULT)).call(dwflags, pastart, paend, pchtext, cch)
+  end
+  def get_formatted_text(pastart : IAnchor, paend : IAnchor, ppdataobject : IDataObject*) : HRESULT
+    @lpVtbl.value.get_formatted_text.unsafe_as(Proc(IAnchor, IAnchor, IDataObject*, HRESULT)).call(pastart, paend, ppdataobject)
+  end
+  def get_embedded(dwflags : UInt32, papos : IAnchor, rguidservice : Guid*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_embedded.unsafe_as(Proc(UInt32, IAnchor, Guid*, Guid*, IUnknown*, HRESULT)).call(dwflags, papos, rguidservice, riid, ppunk)
+  end
+  def insert_embedded(dwflags : UInt32, pastart : IAnchor, paend : IAnchor, pdataobject : IDataObject) : HRESULT
+    @lpVtbl.value.insert_embedded.unsafe_as(Proc(UInt32, IAnchor, IAnchor, IDataObject, HRESULT)).call(dwflags, pastart, paend, pdataobject)
+  end
+  def request_supported_attrs(dwflags : UInt32, cfilterattrs : UInt32, pafilterattrs : Guid*) : HRESULT
+    @lpVtbl.value.request_supported_attrs.unsafe_as(Proc(UInt32, UInt32, Guid*, HRESULT)).call(dwflags, cfilterattrs, pafilterattrs)
+  end
+  def request_attrs_at_position(papos : IAnchor, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.request_attrs_at_position.unsafe_as(Proc(IAnchor, UInt32, Guid*, UInt32, HRESULT)).call(papos, cfilterattrs, pafilterattrs, dwflags)
+  end
+  def request_attrs_transitioning_at_position(papos : IAnchor, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.request_attrs_transitioning_at_position.unsafe_as(Proc(IAnchor, UInt32, Guid*, UInt32, HRESULT)).call(papos, cfilterattrs, pafilterattrs, dwflags)
+  end
+  def find_next_attr_transition(pastart : IAnchor, pahalt : IAnchor, cfilterattrs : UInt32, pafilterattrs : Guid*, dwflags : UInt32, pffound : LibC::BOOL*, plfoundoffset : Int32*) : HRESULT
+    @lpVtbl.value.find_next_attr_transition.unsafe_as(Proc(IAnchor, IAnchor, UInt32, Guid*, UInt32, LibC::BOOL*, Int32*, HRESULT)).call(pastart, pahalt, cfilterattrs, pafilterattrs, dwflags, pffound, plfoundoffset)
+  end
+  def retrieve_requested_attrs(ulcount : UInt32, paattrvals : TS_ATTRVAL*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.retrieve_requested_attrs.unsafe_as(Proc(UInt32, TS_ATTRVAL*, UInt32*, HRESULT)).call(ulcount, paattrvals, pcfetched)
+  end
+  def get_start(ppastart : IAnchor*) : HRESULT
+    @lpVtbl.value.get_start.unsafe_as(Proc(IAnchor*, HRESULT)).call(ppastart)
+  end
+  def get_end(ppaend : IAnchor*) : HRESULT
+    @lpVtbl.value.get_end.unsafe_as(Proc(IAnchor*, HRESULT)).call(ppaend)
+  end
+  def get_active_view(pvcview : UInt32*) : HRESULT
+    @lpVtbl.value.get_active_view.unsafe_as(Proc(UInt32*, HRESULT)).call(pvcview)
+  end
+  def get_anchor_from_point(vcview : UInt32, ptscreen : POINT*, dwflags : UInt32, ppasite : IAnchor*) : HRESULT
+    @lpVtbl.value.get_anchor_from_point.unsafe_as(Proc(UInt32, POINT*, UInt32, IAnchor*, HRESULT)).call(vcview, ptscreen, dwflags, ppasite)
+  end
+  def get_text_ext(vcview : UInt32, pastart : IAnchor, paend : IAnchor, prc : RECT*, pfclipped : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_text_ext.unsafe_as(Proc(UInt32, IAnchor, IAnchor, RECT*, LibC::BOOL*, HRESULT)).call(vcview, pastart, paend, prc, pfclipped)
+  end
+  def get_screen_ext(vcview : UInt32, prc : RECT*) : HRESULT
+    @lpVtbl.value.get_screen_ext.unsafe_as(Proc(UInt32, RECT*, HRESULT)).call(vcview, prc)
+  end
+  def get_wnd(vcview : UInt32, phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_wnd.unsafe_as(Proc(UInt32, HANDLE*, HRESULT)).call(vcview, phwnd)
+  end
+  def query_insert_embedded(pguidservice : Guid*, pformatetc : FORMATETC*, pfinsertable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_insert_embedded.unsafe_as(Proc(Guid*, FORMATETC*, LibC::BOOL*, HRESULT)).call(pguidservice, pformatetc, pfinsertable)
+  end
+  def insert_text_at_selection(dwflags : UInt32, pchtext : Char*, cch : UInt32, ppastart : IAnchor*, ppaend : IAnchor*) : HRESULT
+    @lpVtbl.value.insert_text_at_selection.unsafe_as(Proc(UInt32, Char*, UInt32, IAnchor*, IAnchor*, HRESULT)).call(dwflags, pchtext, cch, ppastart, ppaend)
+  end
+  def insert_embedded_at_selection(dwflags : UInt32, pdataobject : IDataObject, ppastart : IAnchor*, ppaend : IAnchor*) : HRESULT
+    @lpVtbl.value.insert_embedded_at_selection.unsafe_as(Proc(UInt32, IDataObject, IAnchor*, IAnchor*, HRESULT)).call(dwflags, pdataobject, ppastart, ppaend)
+  end
+end
+struct LibWin32::ITextStoreAnchorSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_text_change(dwflags : TEXT_STORE_CHANGE_FLAGS, pastart : IAnchor, paend : IAnchor) : HRESULT
+    @lpVtbl.value.on_text_change.unsafe_as(Proc(TEXT_STORE_CHANGE_FLAGS, IAnchor, IAnchor, HRESULT)).call(dwflags, pastart, paend)
+  end
+  def on_selection_change : HRESULT
+    @lpVtbl.value.on_selection_change.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_layout_change(lcode : TsLayoutCode, vcview : UInt32) : HRESULT
+    @lpVtbl.value.on_layout_change.unsafe_as(Proc(TsLayoutCode, UInt32, HRESULT)).call(lcode, vcview)
+  end
+  def on_status_change(dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_status_change.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  end
+  def on_attrs_change(pastart : IAnchor, paend : IAnchor, cattrs : UInt32, paattrs : Guid*) : HRESULT
+    @lpVtbl.value.on_attrs_change.unsafe_as(Proc(IAnchor, IAnchor, UInt32, Guid*, HRESULT)).call(pastart, paend, cattrs, paattrs)
+  end
+  def on_lock_granted(dwlockflags : TEXT_STORE_LOCK_FLAGS) : HRESULT
+    @lpVtbl.value.on_lock_granted.unsafe_as(Proc(TEXT_STORE_LOCK_FLAGS, HRESULT)).call(dwlockflags)
+  end
+  def on_start_edit_transaction : HRESULT
+    @lpVtbl.value.on_start_edit_transaction.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_end_edit_transaction : HRESULT
+    @lpVtbl.value.on_end_edit_transaction.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITfLangBarMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def advise_event_sink(psink : ITfLangBarEventSink, hwnd : LibC::HANDLE, dwflags : UInt32, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise_event_sink.unsafe_as(Proc(ITfLangBarEventSink, LibC::HANDLE, UInt32, UInt32*, HRESULT)).call(psink, hwnd, dwflags, pdwcookie)
+  end
+  def unadvise_event_sink(dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.unadvise_event_sink.unsafe_as(Proc(UInt32, HRESULT)).call(dwcookie)
+  end
+  def get_thread_marshal_interface(dwthreadid : UInt32, dwtype : UInt32, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_thread_marshal_interface.unsafe_as(Proc(UInt32, UInt32, Guid*, IUnknown*, HRESULT)).call(dwthreadid, dwtype, riid, ppunk)
+  end
+  def get_thread_lang_bar_item_mgr(dwthreadid : UInt32, pplbi : ITfLangBarItemMgr*, pdwthreadid : UInt32*) : HRESULT
+    @lpVtbl.value.get_thread_lang_bar_item_mgr.unsafe_as(Proc(UInt32, ITfLangBarItemMgr*, UInt32*, HRESULT)).call(dwthreadid, pplbi, pdwthreadid)
+  end
+  def get_input_processor_profiles(dwthreadid : UInt32, ppaip : ITfInputProcessorProfiles*, pdwthreadid : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_processor_profiles.unsafe_as(Proc(UInt32, ITfInputProcessorProfiles*, UInt32*, HRESULT)).call(dwthreadid, ppaip, pdwthreadid)
+  end
+  def restore_last_focus(pdwthreadid : UInt32*, fprev : LibC::BOOL) : HRESULT
+    @lpVtbl.value.restore_last_focus.unsafe_as(Proc(UInt32*, LibC::BOOL, HRESULT)).call(pdwthreadid, fprev)
+  end
+  def set_modal_input(psink : ITfLangBarEventSink, dwthreadid : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.set_modal_input.unsafe_as(Proc(ITfLangBarEventSink, UInt32, UInt32, HRESULT)).call(psink, dwthreadid, dwflags)
+  end
+  def show_floating(dwflags : UInt32) : HRESULT
+    @lpVtbl.value.show_floating.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  end
+  def get_show_floating_status(pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_show_floating_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwflags)
+  end
+end
+struct LibWin32::ITfLangBarEventSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_set_focus(dwthreadid : UInt32) : HRESULT
+    @lpVtbl.value.on_set_focus.unsafe_as(Proc(UInt32, HRESULT)).call(dwthreadid)
+  end
+  def on_thread_terminate(dwthreadid : UInt32) : HRESULT
+    @lpVtbl.value.on_thread_terminate.unsafe_as(Proc(UInt32, HRESULT)).call(dwthreadid)
+  end
+  def on_thread_item_change(dwthreadid : UInt32) : HRESULT
+    @lpVtbl.value.on_thread_item_change.unsafe_as(Proc(UInt32, HRESULT)).call(dwthreadid)
+  end
+  def on_modal_input(dwthreadid : UInt32, umsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.on_modal_input.unsafe_as(Proc(UInt32, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)).call(dwthreadid, umsg, wparam, lparam)
+  end
+  def show_floating(dwflags : UInt32) : HRESULT
+    @lpVtbl.value.show_floating.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  end
+  def get_item_floating_rect(dwthreadid : UInt32, rguid : Guid*, prc : RECT*) : HRESULT
+    @lpVtbl.value.get_item_floating_rect.unsafe_as(Proc(UInt32, Guid*, RECT*, HRESULT)).call(dwthreadid, rguid, prc)
+  end
+end
+struct LibWin32::ITfLangBarItemSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_update(dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_update.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  end
+end
+struct LibWin32::IEnumTfLangBarItems
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumTfLangBarItems*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumTfLangBarItems*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, ppitem : ITfLangBarItem*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITfLangBarItem*, UInt32*, HRESULT)).call(ulcount, ppitem, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::ITfLangBarItemMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enum_items(ppenum : IEnumTfLangBarItems*) : HRESULT
+    @lpVtbl.value.enum_items.unsafe_as(Proc(IEnumTfLangBarItems*, HRESULT)).call(ppenum)
+  end
+  def get_item(rguid : Guid*, ppitem : ITfLangBarItem*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Guid*, ITfLangBarItem*, HRESULT)).call(rguid, ppitem)
+  end
+  def add_item(punk : ITfLangBarItem) : HRESULT
+    @lpVtbl.value.add_item.unsafe_as(Proc(ITfLangBarItem, HRESULT)).call(punk)
+  end
+  def remove_item(punk : ITfLangBarItem) : HRESULT
+    @lpVtbl.value.remove_item.unsafe_as(Proc(ITfLangBarItem, HRESULT)).call(punk)
+  end
+  def advise_item_sink(punk : ITfLangBarItemSink, pdwcookie : UInt32*, rguiditem : Guid*) : HRESULT
+    @lpVtbl.value.advise_item_sink.unsafe_as(Proc(ITfLangBarItemSink, UInt32*, Guid*, HRESULT)).call(punk, pdwcookie, rguiditem)
+  end
+  def unadvise_item_sink(dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.unadvise_item_sink.unsafe_as(Proc(UInt32, HRESULT)).call(dwcookie)
+  end
+  def get_item_floating_rect(dwthreadid : UInt32, rguid : Guid*, prc : RECT*) : HRESULT
+    @lpVtbl.value.get_item_floating_rect.unsafe_as(Proc(UInt32, Guid*, RECT*, HRESULT)).call(dwthreadid, rguid, prc)
+  end
+  def get_items_status(ulcount : UInt32, prgguid : Guid*, pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_items_status.unsafe_as(Proc(UInt32, Guid*, UInt32*, HRESULT)).call(ulcount, prgguid, pdwstatus)
+  end
+  def get_item_num(pulcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_item_num.unsafe_as(Proc(UInt32*, HRESULT)).call(pulcount)
+  end
+  def get_items(ulcount : UInt32, ppitem : ITfLangBarItem*, pinfo : TF_LANGBARITEMINFO*, pdwstatus : UInt32*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.get_items.unsafe_as(Proc(UInt32, ITfLangBarItem*, TF_LANGBARITEMINFO*, UInt32*, UInt32*, HRESULT)).call(ulcount, ppitem, pinfo, pdwstatus, pcfetched)
+  end
+  def advise_items_sink(ulcount : UInt32, ppunk : ITfLangBarItemSink*, pguiditem : Guid*, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise_items_sink.unsafe_as(Proc(UInt32, ITfLangBarItemSink*, Guid*, UInt32*, HRESULT)).call(ulcount, ppunk, pguiditem, pdwcookie)
+  end
+  def unadvise_items_sink(ulcount : UInt32, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.unadvise_items_sink.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(ulcount, pdwcookie)
+  end
+end
+struct LibWin32::ITfLangBarItem
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_info(pinfo : TF_LANGBARITEMINFO*) : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(TF_LANGBARITEMINFO*, HRESULT)).call(pinfo)
+  end
+  def get_status(pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  end
+  def show(fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fshow)
+  end
+  def get_tooltip_string(pbstrtooltip : UInt8**) : HRESULT
+    @lpVtbl.value.get_tooltip_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtooltip)
+  end
+end
+struct LibWin32::ITfSystemLangBarItemSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def init_menu(pmenu : ITfMenu) : HRESULT
+    @lpVtbl.value.init_menu.unsafe_as(Proc(ITfMenu, HRESULT)).call(pmenu)
+  end
+  def on_menu_select(wid : UInt32) : HRESULT
+    @lpVtbl.value.on_menu_select.unsafe_as(Proc(UInt32, HRESULT)).call(wid)
+  end
+end
+struct LibWin32::ITfSystemLangBarItem
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_icon(hicon : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_icon.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hicon)
+  end
+  def set_tooltip_string(pchtooltip : Char*, cch : UInt32) : HRESULT
+    @lpVtbl.value.set_tooltip_string.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pchtooltip, cch)
+  end
+end
+struct LibWin32::ITfSystemLangBarItemText
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_item_text(pch : Char*, cch : UInt32) : HRESULT
+    @lpVtbl.value.set_item_text.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pch, cch)
+  end
+  def get_item_text(pbstrtext : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_text.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtext)
+  end
+end
+struct LibWin32::ITfSystemDeviceTypeLangBarItem
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_icon_mode(dwflags : LANG_BAR_ITEM_ICON_MODE_FLAGS) : HRESULT
+    @lpVtbl.value.set_icon_mode.unsafe_as(Proc(LANG_BAR_ITEM_ICON_MODE_FLAGS, HRESULT)).call(dwflags)
+  end
+  def get_icon_mode(pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_icon_mode.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwflags)
+  end
+end
+struct LibWin32::ITfLangBarItemButton
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_info(pinfo : TF_LANGBARITEMINFO*) : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(TF_LANGBARITEMINFO*, HRESULT)).call(pinfo)
+  end
+  def get_status(pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  end
+  def show(fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fshow)
+  end
+  def get_tooltip_string(pbstrtooltip : UInt8**) : HRESULT
+    @lpVtbl.value.get_tooltip_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtooltip)
+  end
+  def on_click(click : TfLBIClick, pt : POINT, prcarea : RECT*) : HRESULT
+    @lpVtbl.value.on_click.unsafe_as(Proc(TfLBIClick, POINT, RECT*, HRESULT)).call(click, pt, prcarea)
+  end
+  def init_menu(pmenu : ITfMenu) : HRESULT
+    @lpVtbl.value.init_menu.unsafe_as(Proc(ITfMenu, HRESULT)).call(pmenu)
+  end
+  def on_menu_select(wid : UInt32) : HRESULT
+    @lpVtbl.value.on_menu_select.unsafe_as(Proc(UInt32, HRESULT)).call(wid)
+  end
+  def get_icon(phicon : HANDLE*) : HRESULT
+    @lpVtbl.value.get_icon.unsafe_as(Proc(HANDLE*, HRESULT)).call(phicon)
+  end
+  def get_text(pbstrtext : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtext)
+  end
+end
+struct LibWin32::ITfLangBarItemBitmapButton
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_info(pinfo : TF_LANGBARITEMINFO*) : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(TF_LANGBARITEMINFO*, HRESULT)).call(pinfo)
+  end
+  def get_status(pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  end
+  def show(fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fshow)
+  end
+  def get_tooltip_string(pbstrtooltip : UInt8**) : HRESULT
+    @lpVtbl.value.get_tooltip_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtooltip)
+  end
+  def on_click(click : TfLBIClick, pt : POINT, prcarea : RECT*) : HRESULT
+    @lpVtbl.value.on_click.unsafe_as(Proc(TfLBIClick, POINT, RECT*, HRESULT)).call(click, pt, prcarea)
+  end
+  def init_menu(pmenu : ITfMenu) : HRESULT
+    @lpVtbl.value.init_menu.unsafe_as(Proc(ITfMenu, HRESULT)).call(pmenu)
+  end
+  def on_menu_select(wid : UInt32) : HRESULT
+    @lpVtbl.value.on_menu_select.unsafe_as(Proc(UInt32, HRESULT)).call(wid)
+  end
+  def get_preferred_size(pszdefault : SIZE*, psz : SIZE*) : HRESULT
+    @lpVtbl.value.get_preferred_size.unsafe_as(Proc(SIZE*, SIZE*, HRESULT)).call(pszdefault, psz)
+  end
+  def draw_bitmap(bmwidth : Int32, bmheight : Int32, dwflags : UInt32, phbmp : HBITMAP*, phbmpmask : HBITMAP*) : HRESULT
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(Int32, Int32, UInt32, HBITMAP*, HBITMAP*, HRESULT)).call(bmwidth, bmheight, dwflags, phbmp, phbmpmask)
+  end
+  def get_text(pbstrtext : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtext)
+  end
+end
+struct LibWin32::ITfLangBarItemBitmap
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_info(pinfo : TF_LANGBARITEMINFO*) : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(TF_LANGBARITEMINFO*, HRESULT)).call(pinfo)
+  end
+  def get_status(pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  end
+  def show(fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fshow)
+  end
+  def get_tooltip_string(pbstrtooltip : UInt8**) : HRESULT
+    @lpVtbl.value.get_tooltip_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtooltip)
+  end
+  def on_click(click : TfLBIClick, pt : POINT, prcarea : RECT*) : HRESULT
+    @lpVtbl.value.on_click.unsafe_as(Proc(TfLBIClick, POINT, RECT*, HRESULT)).call(click, pt, prcarea)
+  end
+  def get_preferred_size(pszdefault : SIZE*, psz : SIZE*) : HRESULT
+    @lpVtbl.value.get_preferred_size.unsafe_as(Proc(SIZE*, SIZE*, HRESULT)).call(pszdefault, psz)
+  end
+  def draw_bitmap(bmwidth : Int32, bmheight : Int32, dwflags : UInt32, phbmp : HBITMAP*, phbmpmask : HBITMAP*) : HRESULT
+    @lpVtbl.value.draw_bitmap.unsafe_as(Proc(Int32, Int32, UInt32, HBITMAP*, HBITMAP*, HRESULT)).call(bmwidth, bmheight, dwflags, phbmp, phbmpmask)
+  end
+end
+struct LibWin32::ITfLangBarItemBalloon
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_info(pinfo : TF_LANGBARITEMINFO*) : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(TF_LANGBARITEMINFO*, HRESULT)).call(pinfo)
+  end
+  def get_status(pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  end
+  def show(fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fshow)
+  end
+  def get_tooltip_string(pbstrtooltip : UInt8**) : HRESULT
+    @lpVtbl.value.get_tooltip_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtooltip)
+  end
+  def on_click(click : TfLBIClick, pt : POINT, prcarea : RECT*) : HRESULT
+    @lpVtbl.value.on_click.unsafe_as(Proc(TfLBIClick, POINT, RECT*, HRESULT)).call(click, pt, prcarea)
+  end
+  def get_preferred_size(pszdefault : SIZE*, psz : SIZE*) : HRESULT
+    @lpVtbl.value.get_preferred_size.unsafe_as(Proc(SIZE*, SIZE*, HRESULT)).call(pszdefault, psz)
+  end
+  def get_balloon_info(pinfo : TF_LBBALLOONINFO*) : HRESULT
+    @lpVtbl.value.get_balloon_info.unsafe_as(Proc(TF_LBBALLOONINFO*, HRESULT)).call(pinfo)
+  end
+end
+struct LibWin32::ITfMenu
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_menu_item(uid : UInt32, dwflags : UInt32, hbmp : HBITMAP, hbmpmask : HBITMAP, pch : Char*, cch : UInt32, ppmenu : ITfMenu*) : HRESULT
+    @lpVtbl.value.add_menu_item.unsafe_as(Proc(UInt32, UInt32, HBITMAP, HBITMAP, Char*, UInt32, ITfMenu*, HRESULT)).call(uid, dwflags, hbmp, hbmpmask, pch, cch, ppmenu)
+  end
+end
+struct LibWin32::ITfThreadMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def activate(ptid : UInt32*) : HRESULT
+    @lpVtbl.value.activate.unsafe_as(Proc(UInt32*, HRESULT)).call(ptid)
+  end
+  def deactivate : HRESULT
+    @lpVtbl.value.deactivate.unsafe_as(Proc(HRESULT)).call
+  end
+  def create_document_mgr(ppdim : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.create_document_mgr.unsafe_as(Proc(ITfDocumentMgr*, HRESULT)).call(ppdim)
+  end
+  def enum_document_mgrs(ppenum : IEnumTfDocumentMgrs*) : HRESULT
+    @lpVtbl.value.enum_document_mgrs.unsafe_as(Proc(IEnumTfDocumentMgrs*, HRESULT)).call(ppenum)
+  end
+  def get_focus(ppdimfocus : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.get_focus.unsafe_as(Proc(ITfDocumentMgr*, HRESULT)).call(ppdimfocus)
+  end
+  def set_focus(pdimfocus : ITfDocumentMgr) : HRESULT
+    @lpVtbl.value.set_focus.unsafe_as(Proc(ITfDocumentMgr, HRESULT)).call(pdimfocus)
+  end
+  def associate_focus(hwnd : LibC::HANDLE, pdimnew : ITfDocumentMgr, ppdimprev : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.associate_focus.unsafe_as(Proc(LibC::HANDLE, ITfDocumentMgr, ITfDocumentMgr*, HRESULT)).call(hwnd, pdimnew, ppdimprev)
+  end
+  def is_thread_focus(pfthreadfocus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_thread_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfthreadfocus)
+  end
+  def get_function_provider(clsid : Guid*, ppfuncprov : ITfFunctionProvider*) : HRESULT
+    @lpVtbl.value.get_function_provider.unsafe_as(Proc(Guid*, ITfFunctionProvider*, HRESULT)).call(clsid, ppfuncprov)
+  end
+  def enum_function_providers(ppenum : IEnumTfFunctionProviders*) : HRESULT
+    @lpVtbl.value.enum_function_providers.unsafe_as(Proc(IEnumTfFunctionProviders*, HRESULT)).call(ppenum)
+  end
+  def get_global_compartment(ppcompmgr : ITfCompartmentMgr*) : HRESULT
+    @lpVtbl.value.get_global_compartment.unsafe_as(Proc(ITfCompartmentMgr*, HRESULT)).call(ppcompmgr)
+  end
+end
+struct LibWin32::ITfThreadMgrEx
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def activate(ptid : UInt32*) : HRESULT
+    @lpVtbl.value.activate.unsafe_as(Proc(UInt32*, HRESULT)).call(ptid)
+  end
+  def deactivate : HRESULT
+    @lpVtbl.value.deactivate.unsafe_as(Proc(HRESULT)).call
+  end
+  def create_document_mgr(ppdim : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.create_document_mgr.unsafe_as(Proc(ITfDocumentMgr*, HRESULT)).call(ppdim)
+  end
+  def enum_document_mgrs(ppenum : IEnumTfDocumentMgrs*) : HRESULT
+    @lpVtbl.value.enum_document_mgrs.unsafe_as(Proc(IEnumTfDocumentMgrs*, HRESULT)).call(ppenum)
+  end
+  def get_focus(ppdimfocus : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.get_focus.unsafe_as(Proc(ITfDocumentMgr*, HRESULT)).call(ppdimfocus)
+  end
+  def set_focus(pdimfocus : ITfDocumentMgr) : HRESULT
+    @lpVtbl.value.set_focus.unsafe_as(Proc(ITfDocumentMgr, HRESULT)).call(pdimfocus)
+  end
+  def associate_focus(hwnd : LibC::HANDLE, pdimnew : ITfDocumentMgr, ppdimprev : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.associate_focus.unsafe_as(Proc(LibC::HANDLE, ITfDocumentMgr, ITfDocumentMgr*, HRESULT)).call(hwnd, pdimnew, ppdimprev)
+  end
+  def is_thread_focus(pfthreadfocus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_thread_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfthreadfocus)
+  end
+  def get_function_provider(clsid : Guid*, ppfuncprov : ITfFunctionProvider*) : HRESULT
+    @lpVtbl.value.get_function_provider.unsafe_as(Proc(Guid*, ITfFunctionProvider*, HRESULT)).call(clsid, ppfuncprov)
+  end
+  def enum_function_providers(ppenum : IEnumTfFunctionProviders*) : HRESULT
+    @lpVtbl.value.enum_function_providers.unsafe_as(Proc(IEnumTfFunctionProviders*, HRESULT)).call(ppenum)
+  end
+  def get_global_compartment(ppcompmgr : ITfCompartmentMgr*) : HRESULT
+    @lpVtbl.value.get_global_compartment.unsafe_as(Proc(ITfCompartmentMgr*, HRESULT)).call(ppcompmgr)
+  end
+  def activate_ex(ptid : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.activate_ex.unsafe_as(Proc(UInt32*, UInt32, HRESULT)).call(ptid, dwflags)
+  end
+  def get_active_flags(lpdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_active_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(lpdwflags)
+  end
+end
+struct LibWin32::ITfThreadMgr2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def activate(ptid : UInt32*) : HRESULT
+    @lpVtbl.value.activate.unsafe_as(Proc(UInt32*, HRESULT)).call(ptid)
+  end
+  def deactivate : HRESULT
+    @lpVtbl.value.deactivate.unsafe_as(Proc(HRESULT)).call
+  end
+  def create_document_mgr(ppdim : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.create_document_mgr.unsafe_as(Proc(ITfDocumentMgr*, HRESULT)).call(ppdim)
+  end
+  def enum_document_mgrs(ppenum : IEnumTfDocumentMgrs*) : HRESULT
+    @lpVtbl.value.enum_document_mgrs.unsafe_as(Proc(IEnumTfDocumentMgrs*, HRESULT)).call(ppenum)
+  end
+  def get_focus(ppdimfocus : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.get_focus.unsafe_as(Proc(ITfDocumentMgr*, HRESULT)).call(ppdimfocus)
+  end
+  def set_focus(pdimfocus : ITfDocumentMgr) : HRESULT
+    @lpVtbl.value.set_focus.unsafe_as(Proc(ITfDocumentMgr, HRESULT)).call(pdimfocus)
+  end
+  def is_thread_focus(pfthreadfocus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_thread_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfthreadfocus)
+  end
+  def get_function_provider(clsid : Guid*, ppfuncprov : ITfFunctionProvider*) : HRESULT
+    @lpVtbl.value.get_function_provider.unsafe_as(Proc(Guid*, ITfFunctionProvider*, HRESULT)).call(clsid, ppfuncprov)
+  end
+  def enum_function_providers(ppenum : IEnumTfFunctionProviders*) : HRESULT
+    @lpVtbl.value.enum_function_providers.unsafe_as(Proc(IEnumTfFunctionProviders*, HRESULT)).call(ppenum)
+  end
+  def get_global_compartment(ppcompmgr : ITfCompartmentMgr*) : HRESULT
+    @lpVtbl.value.get_global_compartment.unsafe_as(Proc(ITfCompartmentMgr*, HRESULT)).call(ppcompmgr)
+  end
+  def activate_ex(ptid : UInt32*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.activate_ex.unsafe_as(Proc(UInt32*, UInt32, HRESULT)).call(ptid, dwflags)
+  end
+  def get_active_flags(lpdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_active_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(lpdwflags)
+  end
+  def suspend_keystroke_handling : HRESULT
+    @lpVtbl.value.suspend_keystroke_handling.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume_keystroke_handling : HRESULT
+    @lpVtbl.value.resume_keystroke_handling.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITfThreadMgrEventSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_init_document_mgr(pdim : ITfDocumentMgr) : HRESULT
+    @lpVtbl.value.on_init_document_mgr.unsafe_as(Proc(ITfDocumentMgr, HRESULT)).call(pdim)
+  end
+  def on_uninit_document_mgr(pdim : ITfDocumentMgr) : HRESULT
+    @lpVtbl.value.on_uninit_document_mgr.unsafe_as(Proc(ITfDocumentMgr, HRESULT)).call(pdim)
+  end
+  def on_set_focus(pdimfocus : ITfDocumentMgr, pdimprevfocus : ITfDocumentMgr) : HRESULT
+    @lpVtbl.value.on_set_focus.unsafe_as(Proc(ITfDocumentMgr, ITfDocumentMgr, HRESULT)).call(pdimfocus, pdimprevfocus)
+  end
+  def on_push_context(pic : ITfContext) : HRESULT
+    @lpVtbl.value.on_push_context.unsafe_as(Proc(ITfContext, HRESULT)).call(pic)
+  end
+  def on_pop_context(pic : ITfContext) : HRESULT
+    @lpVtbl.value.on_pop_context.unsafe_as(Proc(ITfContext, HRESULT)).call(pic)
+  end
+end
+struct LibWin32::ITfConfigureSystemKeystrokeFeed
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def disable_system_keystroke_feed : HRESULT
+    @lpVtbl.value.disable_system_keystroke_feed.unsafe_as(Proc(HRESULT)).call
+  end
+  def enable_system_keystroke_feed : HRESULT
+    @lpVtbl.value.enable_system_keystroke_feed.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IEnumTfDocumentMgrs
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumTfDocumentMgrs*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumTfDocumentMgrs*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, rgdocumentmgr : ITfDocumentMgr*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITfDocumentMgr*, UInt32*, HRESULT)).call(ulcount, rgdocumentmgr, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::ITfDocumentMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_context(tidowner : UInt32, dwflags : UInt32, punk : IUnknown, ppic : ITfContext*, pectextstore : UInt32*) : HRESULT
+    @lpVtbl.value.create_context.unsafe_as(Proc(UInt32, UInt32, IUnknown, ITfContext*, UInt32*, HRESULT)).call(tidowner, dwflags, punk, ppic, pectextstore)
+  end
+  def push(pic : ITfContext) : HRESULT
+    @lpVtbl.value.push.unsafe_as(Proc(ITfContext, HRESULT)).call(pic)
+  end
+  def pop(dwflags : UInt32) : HRESULT
+    @lpVtbl.value.pop.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  end
+  def get_top(ppic : ITfContext*) : HRESULT
+    @lpVtbl.value.get_top.unsafe_as(Proc(ITfContext*, HRESULT)).call(ppic)
+  end
+  def get_base(ppic : ITfContext*) : HRESULT
+    @lpVtbl.value.get_base.unsafe_as(Proc(ITfContext*, HRESULT)).call(ppic)
+  end
+  def enum_contexts(ppenum : IEnumTfContexts*) : HRESULT
+    @lpVtbl.value.enum_contexts.unsafe_as(Proc(IEnumTfContexts*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumTfContexts
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumTfContexts*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumTfContexts*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, rgcontext : ITfContext*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITfContext*, UInt32*, HRESULT)).call(ulcount, rgcontext, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::ITfCompositionView
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner_clsid(pclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_owner_clsid.unsafe_as(Proc(Guid*, HRESULT)).call(pclsid)
+  end
+  def get_range(pprange : ITfRange*) : HRESULT
+    @lpVtbl.value.get_range.unsafe_as(Proc(ITfRange*, HRESULT)).call(pprange)
+  end
+end
+struct LibWin32::IEnumITfCompositionView
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumITfCompositionView*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumITfCompositionView*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, rgcompositionview : ITfCompositionView*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITfCompositionView*, UInt32*, HRESULT)).call(ulcount, rgcompositionview, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::ITfComposition
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_range(pprange : ITfRange*) : HRESULT
+    @lpVtbl.value.get_range.unsafe_as(Proc(ITfRange*, HRESULT)).call(pprange)
+  end
+  def shift_start(ecwrite : UInt32, pnewstart : ITfRange) : HRESULT
+    @lpVtbl.value.shift_start.unsafe_as(Proc(UInt32, ITfRange, HRESULT)).call(ecwrite, pnewstart)
+  end
+  def shift_end(ecwrite : UInt32, pnewend : ITfRange) : HRESULT
+    @lpVtbl.value.shift_end.unsafe_as(Proc(UInt32, ITfRange, HRESULT)).call(ecwrite, pnewend)
+  end
+  def end_composition(ecwrite : UInt32) : HRESULT
+    @lpVtbl.value.end_composition.unsafe_as(Proc(UInt32, HRESULT)).call(ecwrite)
+  end
+end
+struct LibWin32::ITfCompositionSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_composition_terminated(ecwrite : UInt32, pcomposition : ITfComposition) : HRESULT
+    @lpVtbl.value.on_composition_terminated.unsafe_as(Proc(UInt32, ITfComposition, HRESULT)).call(ecwrite, pcomposition)
+  end
+end
+struct LibWin32::ITfContextComposition
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def start_composition(ecwrite : UInt32, pcompositionrange : ITfRange, psink : ITfCompositionSink, ppcomposition : ITfComposition*) : HRESULT
+    @lpVtbl.value.start_composition.unsafe_as(Proc(UInt32, ITfRange, ITfCompositionSink, ITfComposition*, HRESULT)).call(ecwrite, pcompositionrange, psink, ppcomposition)
+  end
+  def enum_compositions(ppenum : IEnumITfCompositionView*) : HRESULT
+    @lpVtbl.value.enum_compositions.unsafe_as(Proc(IEnumITfCompositionView*, HRESULT)).call(ppenum)
+  end
+  def find_composition(ecread : UInt32, ptestrange : ITfRange, ppenum : IEnumITfCompositionView*) : HRESULT
+    @lpVtbl.value.find_composition.unsafe_as(Proc(UInt32, ITfRange, IEnumITfCompositionView*, HRESULT)).call(ecread, ptestrange, ppenum)
+  end
+  def take_ownership(ecwrite : UInt32, pcomposition : ITfCompositionView, psink : ITfCompositionSink, ppcomposition : ITfComposition*) : HRESULT
+    @lpVtbl.value.take_ownership.unsafe_as(Proc(UInt32, ITfCompositionView, ITfCompositionSink, ITfComposition*, HRESULT)).call(ecwrite, pcomposition, psink, ppcomposition)
+  end
+end
+struct LibWin32::ITfContextOwnerCompositionServices
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def start_composition(ecwrite : UInt32, pcompositionrange : ITfRange, psink : ITfCompositionSink, ppcomposition : ITfComposition*) : HRESULT
+    @lpVtbl.value.start_composition.unsafe_as(Proc(UInt32, ITfRange, ITfCompositionSink, ITfComposition*, HRESULT)).call(ecwrite, pcompositionrange, psink, ppcomposition)
+  end
+  def enum_compositions(ppenum : IEnumITfCompositionView*) : HRESULT
+    @lpVtbl.value.enum_compositions.unsafe_as(Proc(IEnumITfCompositionView*, HRESULT)).call(ppenum)
+  end
+  def find_composition(ecread : UInt32, ptestrange : ITfRange, ppenum : IEnumITfCompositionView*) : HRESULT
+    @lpVtbl.value.find_composition.unsafe_as(Proc(UInt32, ITfRange, IEnumITfCompositionView*, HRESULT)).call(ecread, ptestrange, ppenum)
+  end
+  def take_ownership(ecwrite : UInt32, pcomposition : ITfCompositionView, psink : ITfCompositionSink, ppcomposition : ITfComposition*) : HRESULT
+    @lpVtbl.value.take_ownership.unsafe_as(Proc(UInt32, ITfCompositionView, ITfCompositionSink, ITfComposition*, HRESULT)).call(ecwrite, pcomposition, psink, ppcomposition)
+  end
+  def terminate_composition(pcomposition : ITfCompositionView) : HRESULT
+    @lpVtbl.value.terminate_composition.unsafe_as(Proc(ITfCompositionView, HRESULT)).call(pcomposition)
+  end
+end
+struct LibWin32::ITfContextOwnerCompositionSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_start_composition(pcomposition : ITfCompositionView, pfok : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_start_composition.unsafe_as(Proc(ITfCompositionView, LibC::BOOL*, HRESULT)).call(pcomposition, pfok)
+  end
+  def on_update_composition(pcomposition : ITfCompositionView, prangenew : ITfRange) : HRESULT
+    @lpVtbl.value.on_update_composition.unsafe_as(Proc(ITfCompositionView, ITfRange, HRESULT)).call(pcomposition, prangenew)
+  end
+  def on_end_composition(pcomposition : ITfCompositionView) : HRESULT
+    @lpVtbl.value.on_end_composition.unsafe_as(Proc(ITfCompositionView, HRESULT)).call(pcomposition)
+  end
+end
+struct LibWin32::ITfContextView
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_range_from_point(ec : UInt32, ppt : POINT*, dwflags : UInt32, pprange : ITfRange*) : HRESULT
+    @lpVtbl.value.get_range_from_point.unsafe_as(Proc(UInt32, POINT*, UInt32, ITfRange*, HRESULT)).call(ec, ppt, dwflags, pprange)
+  end
+  def get_text_ext(ec : UInt32, prange : ITfRange, prc : RECT*, pfclipped : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_text_ext.unsafe_as(Proc(UInt32, ITfRange, RECT*, LibC::BOOL*, HRESULT)).call(ec, prange, prc, pfclipped)
+  end
+  def get_screen_ext(prc : RECT*) : HRESULT
+    @lpVtbl.value.get_screen_ext.unsafe_as(Proc(RECT*, HRESULT)).call(prc)
+  end
+  def get_wnd(phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_wnd.unsafe_as(Proc(HANDLE*, HRESULT)).call(phwnd)
+  end
+end
+struct LibWin32::IEnumTfContextViews
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumTfContextViews*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumTfContextViews*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, rgviews : ITfContextView*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITfContextView*, UInt32*, HRESULT)).call(ulcount, rgviews, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::ITfContext
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def request_edit_session(tid : UInt32, pes : ITfEditSession, dwflags : TF_CONTEXT_EDIT_CONTEXT_FLAGS, phrsession : HRESULT*) : HRESULT
+    @lpVtbl.value.request_edit_session.unsafe_as(Proc(UInt32, ITfEditSession, TF_CONTEXT_EDIT_CONTEXT_FLAGS, HRESULT*, HRESULT)).call(tid, pes, dwflags, phrsession)
+  end
+  def in_write_session(tid : UInt32, pfwritesession : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.in_write_session.unsafe_as(Proc(UInt32, LibC::BOOL*, HRESULT)).call(tid, pfwritesession)
+  end
+  def get_selection(ec : UInt32, ulindex : UInt32, ulcount : UInt32, pselection : TF_SELECTION*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.get_selection.unsafe_as(Proc(UInt32, UInt32, UInt32, TF_SELECTION*, UInt32*, HRESULT)).call(ec, ulindex, ulcount, pselection, pcfetched)
+  end
+  def set_selection(ec : UInt32, ulcount : UInt32, pselection : TF_SELECTION*) : HRESULT
+    @lpVtbl.value.set_selection.unsafe_as(Proc(UInt32, UInt32, TF_SELECTION*, HRESULT)).call(ec, ulcount, pselection)
+  end
+  def get_start(ec : UInt32, ppstart : ITfRange*) : HRESULT
+    @lpVtbl.value.get_start.unsafe_as(Proc(UInt32, ITfRange*, HRESULT)).call(ec, ppstart)
+  end
+  def get_end(ec : UInt32, ppend : ITfRange*) : HRESULT
+    @lpVtbl.value.get_end.unsafe_as(Proc(UInt32, ITfRange*, HRESULT)).call(ec, ppend)
+  end
+  def get_active_view(ppview : ITfContextView*) : HRESULT
+    @lpVtbl.value.get_active_view.unsafe_as(Proc(ITfContextView*, HRESULT)).call(ppview)
+  end
+  def enum_views(ppenum : IEnumTfContextViews*) : HRESULT
+    @lpVtbl.value.enum_views.unsafe_as(Proc(IEnumTfContextViews*, HRESULT)).call(ppenum)
+  end
+  def get_status(pdcs : TS_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(TS_STATUS*, HRESULT)).call(pdcs)
+  end
+  def get_property(guidprop : Guid*, ppprop : ITfProperty*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Guid*, ITfProperty*, HRESULT)).call(guidprop, ppprop)
+  end
+  def get_app_property(guidprop : Guid*, ppprop : ITfReadOnlyProperty*) : HRESULT
+    @lpVtbl.value.get_app_property.unsafe_as(Proc(Guid*, ITfReadOnlyProperty*, HRESULT)).call(guidprop, ppprop)
+  end
+  def track_properties(prgprop : Guid**, cprop : UInt32, prgappprop : Guid**, cappprop : UInt32, ppproperty : ITfReadOnlyProperty*) : HRESULT
+    @lpVtbl.value.track_properties.unsafe_as(Proc(Guid**, UInt32, Guid**, UInt32, ITfReadOnlyProperty*, HRESULT)).call(prgprop, cprop, prgappprop, cappprop, ppproperty)
+  end
+  def enum_properties(ppenum : IEnumTfProperties*) : HRESULT
+    @lpVtbl.value.enum_properties.unsafe_as(Proc(IEnumTfProperties*, HRESULT)).call(ppenum)
+  end
+  def get_document_mgr(ppdm : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.get_document_mgr.unsafe_as(Proc(ITfDocumentMgr*, HRESULT)).call(ppdm)
+  end
+  def create_range_backup(ec : UInt32, prange : ITfRange, ppbackup : ITfRangeBackup*) : HRESULT
+    @lpVtbl.value.create_range_backup.unsafe_as(Proc(UInt32, ITfRange, ITfRangeBackup*, HRESULT)).call(ec, prange, ppbackup)
+  end
+end
+struct LibWin32::ITfQueryEmbedded
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def query_insert_embedded(pguidservice : Guid*, pformatetc : FORMATETC*, pfinsertable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_insert_embedded.unsafe_as(Proc(Guid*, FORMATETC*, LibC::BOOL*, HRESULT)).call(pguidservice, pformatetc, pfinsertable)
+  end
+end
+struct LibWin32::ITfInsertAtSelection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def insert_text_at_selection(ec : UInt32, dwflags : INSERT_TEXT_AT_SELECTION_FLAGS, pchtext : Char*, cch : Int32, pprange : ITfRange*) : HRESULT
+    @lpVtbl.value.insert_text_at_selection.unsafe_as(Proc(UInt32, INSERT_TEXT_AT_SELECTION_FLAGS, Char*, Int32, ITfRange*, HRESULT)).call(ec, dwflags, pchtext, cch, pprange)
+  end
+  def insert_embedded_at_selection(ec : UInt32, dwflags : UInt32, pdataobject : IDataObject, pprange : ITfRange*) : HRESULT
+    @lpVtbl.value.insert_embedded_at_selection.unsafe_as(Proc(UInt32, UInt32, IDataObject, ITfRange*, HRESULT)).call(ec, dwflags, pdataobject, pprange)
+  end
+end
+struct LibWin32::ITfCleanupContextSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_cleanup_context(ecwrite : UInt32, pic : ITfContext) : HRESULT
+    @lpVtbl.value.on_cleanup_context.unsafe_as(Proc(UInt32, ITfContext, HRESULT)).call(ecwrite, pic)
+  end
+end
+struct LibWin32::ITfCleanupContextDurationSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_start_cleanup_context : HRESULT
+    @lpVtbl.value.on_start_cleanup_context.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_end_cleanup_context : HRESULT
+    @lpVtbl.value.on_end_cleanup_context.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITfReadOnlyProperty
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type(pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  end
+  def enum_ranges(ec : UInt32, ppenum : IEnumTfRanges*, ptargetrange : ITfRange) : HRESULT
+    @lpVtbl.value.enum_ranges.unsafe_as(Proc(UInt32, IEnumTfRanges*, ITfRange, HRESULT)).call(ec, ppenum, ptargetrange)
+  end
+  def get_value(ec : UInt32, prange : ITfRange, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.unsafe_as(Proc(UInt32, ITfRange, VARIANT*, HRESULT)).call(ec, prange, pvarvalue)
+  end
+  def get_context(ppcontext : ITfContext*) : HRESULT
+    @lpVtbl.value.get_context.unsafe_as(Proc(ITfContext*, HRESULT)).call(ppcontext)
+  end
+end
+struct LibWin32::IEnumTfPropertyValue
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumTfPropertyValue*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumTfPropertyValue*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, rgvalues : TF_PROPERTYVAL*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, TF_PROPERTYVAL*, UInt32*, HRESULT)).call(ulcount, rgvalues, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::ITfMouseTracker
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def advise_mouse_sink(range : ITfRange, psink : ITfMouseSink, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise_mouse_sink.unsafe_as(Proc(ITfRange, ITfMouseSink, UInt32*, HRESULT)).call(range, psink, pdwcookie)
+  end
+  def unadvise_mouse_sink(dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.unadvise_mouse_sink.unsafe_as(Proc(UInt32, HRESULT)).call(dwcookie)
+  end
+end
+struct LibWin32::ITfMouseTrackerACP
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def advise_mouse_sink(range : ITfRangeACP, psink : ITfMouseSink, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise_mouse_sink.unsafe_as(Proc(ITfRangeACP, ITfMouseSink, UInt32*, HRESULT)).call(range, psink, pdwcookie)
+  end
+  def unadvise_mouse_sink(dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.unadvise_mouse_sink.unsafe_as(Proc(UInt32, HRESULT)).call(dwcookie)
+  end
+end
+struct LibWin32::ITfMouseSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_mouse_event(uedge : UInt32, uquadrant : UInt32, dwbtnstatus : UInt32, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_mouse_event.unsafe_as(Proc(UInt32, UInt32, UInt32, LibC::BOOL*, HRESULT)).call(uedge, uquadrant, dwbtnstatus, pfeaten)
+  end
+end
+struct LibWin32::ITfEditRecord
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_selection_status(pfchanged : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_selection_status.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfchanged)
+  end
+  def get_text_and_property_updates(dwflags : GET_TEXT_AND_PROPERTY_UPDATES_FLAGS, prgproperties : Guid**, cproperties : UInt32, ppenum : IEnumTfRanges*) : HRESULT
+    @lpVtbl.value.get_text_and_property_updates.unsafe_as(Proc(GET_TEXT_AND_PROPERTY_UPDATES_FLAGS, Guid**, UInt32, IEnumTfRanges*, HRESULT)).call(dwflags, prgproperties, cproperties, ppenum)
+  end
+end
+struct LibWin32::ITfTextEditSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_end_edit(pic : ITfContext, ecreadonly : UInt32, peditrecord : ITfEditRecord) : HRESULT
+    @lpVtbl.value.on_end_edit.unsafe_as(Proc(ITfContext, UInt32, ITfEditRecord, HRESULT)).call(pic, ecreadonly, peditrecord)
+  end
+end
+struct LibWin32::ITfTextLayoutSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_layout_change(pic : ITfContext, lcode : TfLayoutCode, pview : ITfContextView) : HRESULT
+    @lpVtbl.value.on_layout_change.unsafe_as(Proc(ITfContext, TfLayoutCode, ITfContextView, HRESULT)).call(pic, lcode, pview)
+  end
+end
+struct LibWin32::ITfStatusSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_status_change(pic : ITfContext, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_status_change.unsafe_as(Proc(ITfContext, UInt32, HRESULT)).call(pic, dwflags)
+  end
+end
+struct LibWin32::ITfEditTransactionSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_start_edit_transaction(pic : ITfContext) : HRESULT
+    @lpVtbl.value.on_start_edit_transaction.unsafe_as(Proc(ITfContext, HRESULT)).call(pic)
+  end
+  def on_end_edit_transaction(pic : ITfContext) : HRESULT
+    @lpVtbl.value.on_end_edit_transaction.unsafe_as(Proc(ITfContext, HRESULT)).call(pic)
+  end
+end
+struct LibWin32::ITfContextOwner
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_acp_from_point(ptscreen : POINT*, dwflags : UInt32, pacp : Int32*) : HRESULT
+    @lpVtbl.value.get_acp_from_point.unsafe_as(Proc(POINT*, UInt32, Int32*, HRESULT)).call(ptscreen, dwflags, pacp)
+  end
+  def get_text_ext(acpstart : Int32, acpend : Int32, prc : RECT*, pfclipped : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_text_ext.unsafe_as(Proc(Int32, Int32, RECT*, LibC::BOOL*, HRESULT)).call(acpstart, acpend, prc, pfclipped)
+  end
+  def get_screen_ext(prc : RECT*) : HRESULT
+    @lpVtbl.value.get_screen_ext.unsafe_as(Proc(RECT*, HRESULT)).call(prc)
+  end
+  def get_status(pdcs : TS_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(TS_STATUS*, HRESULT)).call(pdcs)
+  end
+  def get_wnd(phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_wnd.unsafe_as(Proc(HANDLE*, HRESULT)).call(phwnd)
+  end
+  def get_attribute(rguidattribute : Guid*, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute.unsafe_as(Proc(Guid*, VARIANT*, HRESULT)).call(rguidattribute, pvarvalue)
+  end
+end
+struct LibWin32::ITfContextOwnerServices
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_layout_change : HRESULT
+    @lpVtbl.value.on_layout_change.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_status_change(dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_status_change.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  end
+  def on_attribute_change(rguidattribute : Guid*) : HRESULT
+    @lpVtbl.value.on_attribute_change.unsafe_as(Proc(Guid*, HRESULT)).call(rguidattribute)
+  end
+  def serialize(pprop : ITfProperty, prange : ITfRange, phdr : TF_PERSISTENT_PROPERTY_HEADER_ACP*, pstream : IStream) : HRESULT
+    @lpVtbl.value.serialize.unsafe_as(Proc(ITfProperty, ITfRange, TF_PERSISTENT_PROPERTY_HEADER_ACP*, IStream, HRESULT)).call(pprop, prange, phdr, pstream)
+  end
+  def unserialize(pprop : ITfProperty, phdr : TF_PERSISTENT_PROPERTY_HEADER_ACP*, pstream : IStream, ploader : ITfPersistentPropertyLoaderACP) : HRESULT
+    @lpVtbl.value.unserialize.unsafe_as(Proc(ITfProperty, TF_PERSISTENT_PROPERTY_HEADER_ACP*, IStream, ITfPersistentPropertyLoaderACP, HRESULT)).call(pprop, phdr, pstream, ploader)
+  end
+  def force_load_property(pprop : ITfProperty) : HRESULT
+    @lpVtbl.value.force_load_property.unsafe_as(Proc(ITfProperty, HRESULT)).call(pprop)
+  end
+  def create_range(acpstart : Int32, acpend : Int32, pprange : ITfRangeACP*) : HRESULT
+    @lpVtbl.value.create_range.unsafe_as(Proc(Int32, Int32, ITfRangeACP*, HRESULT)).call(acpstart, acpend, pprange)
+  end
+end
+struct LibWin32::ITfContextKeyEventSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_key_down(wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_key_down.unsafe_as(Proc(LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)).call(wparam, lparam, pfeaten)
+  end
+  def on_key_up(wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_key_up.unsafe_as(Proc(LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)).call(wparam, lparam, pfeaten)
+  end
+  def on_test_key_down(wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_test_key_down.unsafe_as(Proc(LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)).call(wparam, lparam, pfeaten)
+  end
+  def on_test_key_up(wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_test_key_up.unsafe_as(Proc(LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)).call(wparam, lparam, pfeaten)
+  end
+end
+struct LibWin32::ITfEditSession
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def do_edit_session(ec : UInt32) : HRESULT
+    @lpVtbl.value.do_edit_session.unsafe_as(Proc(UInt32, HRESULT)).call(ec)
+  end
+end
+struct LibWin32::ITfRange
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_text(ec : UInt32, dwflags : UInt32, pchtext : Char*, cchmax : UInt32, pcch : UInt32*) : HRESULT
+    @lpVtbl.value.get_text.unsafe_as(Proc(UInt32, UInt32, Char*, UInt32, UInt32*, HRESULT)).call(ec, dwflags, pchtext, cchmax, pcch)
+  end
+  def set_text(ec : UInt32, dwflags : UInt32, pchtext : Char*, cch : Int32) : HRESULT
+    @lpVtbl.value.set_text.unsafe_as(Proc(UInt32, UInt32, Char*, Int32, HRESULT)).call(ec, dwflags, pchtext, cch)
+  end
+  def get_formatted_text(ec : UInt32, ppdataobject : IDataObject*) : HRESULT
+    @lpVtbl.value.get_formatted_text.unsafe_as(Proc(UInt32, IDataObject*, HRESULT)).call(ec, ppdataobject)
+  end
+  def get_embedded(ec : UInt32, rguidservice : Guid*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_embedded.unsafe_as(Proc(UInt32, Guid*, Guid*, IUnknown*, HRESULT)).call(ec, rguidservice, riid, ppunk)
+  end
+  def insert_embedded(ec : UInt32, dwflags : UInt32, pdataobject : IDataObject) : HRESULT
+    @lpVtbl.value.insert_embedded.unsafe_as(Proc(UInt32, UInt32, IDataObject, HRESULT)).call(ec, dwflags, pdataobject)
+  end
+  def shift_start(ec : UInt32, cchreq : Int32, pcch : Int32*, phalt : TF_HALTCOND*) : HRESULT
+    @lpVtbl.value.shift_start.unsafe_as(Proc(UInt32, Int32, Int32*, TF_HALTCOND*, HRESULT)).call(ec, cchreq, pcch, phalt)
+  end
+  def shift_end(ec : UInt32, cchreq : Int32, pcch : Int32*, phalt : TF_HALTCOND*) : HRESULT
+    @lpVtbl.value.shift_end.unsafe_as(Proc(UInt32, Int32, Int32*, TF_HALTCOND*, HRESULT)).call(ec, cchreq, pcch, phalt)
+  end
+  def shift_start_to_range(ec : UInt32, prange : ITfRange, apos : TfAnchor) : HRESULT
+    @lpVtbl.value.shift_start_to_range.unsafe_as(Proc(UInt32, ITfRange, TfAnchor, HRESULT)).call(ec, prange, apos)
+  end
+  def shift_end_to_range(ec : UInt32, prange : ITfRange, apos : TfAnchor) : HRESULT
+    @lpVtbl.value.shift_end_to_range.unsafe_as(Proc(UInt32, ITfRange, TfAnchor, HRESULT)).call(ec, prange, apos)
+  end
+  def shift_start_region(ec : UInt32, dir : TfShiftDir, pfnoregion : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.shift_start_region.unsafe_as(Proc(UInt32, TfShiftDir, LibC::BOOL*, HRESULT)).call(ec, dir, pfnoregion)
+  end
+  def shift_end_region(ec : UInt32, dir : TfShiftDir, pfnoregion : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.shift_end_region.unsafe_as(Proc(UInt32, TfShiftDir, LibC::BOOL*, HRESULT)).call(ec, dir, pfnoregion)
+  end
+  def is_empty(ec : UInt32, pfempty : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_empty.unsafe_as(Proc(UInt32, LibC::BOOL*, HRESULT)).call(ec, pfempty)
+  end
+  def collapse(ec : UInt32, apos : TfAnchor) : HRESULT
+    @lpVtbl.value.collapse.unsafe_as(Proc(UInt32, TfAnchor, HRESULT)).call(ec, apos)
+  end
+  def is_equal_start(ec : UInt32, pwith : ITfRange, apos : TfAnchor, pfequal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_equal_start.unsafe_as(Proc(UInt32, ITfRange, TfAnchor, LibC::BOOL*, HRESULT)).call(ec, pwith, apos, pfequal)
+  end
+  def is_equal_end(ec : UInt32, pwith : ITfRange, apos : TfAnchor, pfequal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_equal_end.unsafe_as(Proc(UInt32, ITfRange, TfAnchor, LibC::BOOL*, HRESULT)).call(ec, pwith, apos, pfequal)
+  end
+  def compare_start(ec : UInt32, pwith : ITfRange, apos : TfAnchor, plresult : Int32*) : HRESULT
+    @lpVtbl.value.compare_start.unsafe_as(Proc(UInt32, ITfRange, TfAnchor, Int32*, HRESULT)).call(ec, pwith, apos, plresult)
+  end
+  def compare_end(ec : UInt32, pwith : ITfRange, apos : TfAnchor, plresult : Int32*) : HRESULT
+    @lpVtbl.value.compare_end.unsafe_as(Proc(UInt32, ITfRange, TfAnchor, Int32*, HRESULT)).call(ec, pwith, apos, plresult)
+  end
+  def adjust_for_insert(ec : UInt32, cchinsert : UInt32, pfinsertok : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.adjust_for_insert.unsafe_as(Proc(UInt32, UInt32, LibC::BOOL*, HRESULT)).call(ec, cchinsert, pfinsertok)
+  end
+  def get_gravity(pgstart : TfGravity*, pgend : TfGravity*) : HRESULT
+    @lpVtbl.value.get_gravity.unsafe_as(Proc(TfGravity*, TfGravity*, HRESULT)).call(pgstart, pgend)
+  end
+  def set_gravity(ec : UInt32, gstart : TfGravity, gend : TfGravity) : HRESULT
+    @lpVtbl.value.set_gravity.unsafe_as(Proc(UInt32, TfGravity, TfGravity, HRESULT)).call(ec, gstart, gend)
+  end
+  def clone(ppclone : ITfRange*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(ITfRange*, HRESULT)).call(ppclone)
+  end
+  def get_context(ppcontext : ITfContext*) : HRESULT
+    @lpVtbl.value.get_context.unsafe_as(Proc(ITfContext*, HRESULT)).call(ppcontext)
+  end
+end
+struct LibWin32::ITfRangeACP
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_text(ec : UInt32, dwflags : UInt32, pchtext : Char*, cchmax : UInt32, pcch : UInt32*) : HRESULT
+    @lpVtbl.value.get_text.unsafe_as(Proc(UInt32, UInt32, Char*, UInt32, UInt32*, HRESULT)).call(ec, dwflags, pchtext, cchmax, pcch)
+  end
+  def set_text(ec : UInt32, dwflags : UInt32, pchtext : Char*, cch : Int32) : HRESULT
+    @lpVtbl.value.set_text.unsafe_as(Proc(UInt32, UInt32, Char*, Int32, HRESULT)).call(ec, dwflags, pchtext, cch)
+  end
+  def get_formatted_text(ec : UInt32, ppdataobject : IDataObject*) : HRESULT
+    @lpVtbl.value.get_formatted_text.unsafe_as(Proc(UInt32, IDataObject*, HRESULT)).call(ec, ppdataobject)
+  end
+  def get_embedded(ec : UInt32, rguidservice : Guid*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_embedded.unsafe_as(Proc(UInt32, Guid*, Guid*, IUnknown*, HRESULT)).call(ec, rguidservice, riid, ppunk)
+  end
+  def insert_embedded(ec : UInt32, dwflags : UInt32, pdataobject : IDataObject) : HRESULT
+    @lpVtbl.value.insert_embedded.unsafe_as(Proc(UInt32, UInt32, IDataObject, HRESULT)).call(ec, dwflags, pdataobject)
+  end
+  def shift_start(ec : UInt32, cchreq : Int32, pcch : Int32*, phalt : TF_HALTCOND*) : HRESULT
+    @lpVtbl.value.shift_start.unsafe_as(Proc(UInt32, Int32, Int32*, TF_HALTCOND*, HRESULT)).call(ec, cchreq, pcch, phalt)
+  end
+  def shift_end(ec : UInt32, cchreq : Int32, pcch : Int32*, phalt : TF_HALTCOND*) : HRESULT
+    @lpVtbl.value.shift_end.unsafe_as(Proc(UInt32, Int32, Int32*, TF_HALTCOND*, HRESULT)).call(ec, cchreq, pcch, phalt)
+  end
+  def shift_start_to_range(ec : UInt32, prange : ITfRange, apos : TfAnchor) : HRESULT
+    @lpVtbl.value.shift_start_to_range.unsafe_as(Proc(UInt32, ITfRange, TfAnchor, HRESULT)).call(ec, prange, apos)
+  end
+  def shift_end_to_range(ec : UInt32, prange : ITfRange, apos : TfAnchor) : HRESULT
+    @lpVtbl.value.shift_end_to_range.unsafe_as(Proc(UInt32, ITfRange, TfAnchor, HRESULT)).call(ec, prange, apos)
+  end
+  def shift_start_region(ec : UInt32, dir : TfShiftDir, pfnoregion : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.shift_start_region.unsafe_as(Proc(UInt32, TfShiftDir, LibC::BOOL*, HRESULT)).call(ec, dir, pfnoregion)
+  end
+  def shift_end_region(ec : UInt32, dir : TfShiftDir, pfnoregion : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.shift_end_region.unsafe_as(Proc(UInt32, TfShiftDir, LibC::BOOL*, HRESULT)).call(ec, dir, pfnoregion)
+  end
+  def is_empty(ec : UInt32, pfempty : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_empty.unsafe_as(Proc(UInt32, LibC::BOOL*, HRESULT)).call(ec, pfempty)
+  end
+  def collapse(ec : UInt32, apos : TfAnchor) : HRESULT
+    @lpVtbl.value.collapse.unsafe_as(Proc(UInt32, TfAnchor, HRESULT)).call(ec, apos)
+  end
+  def is_equal_start(ec : UInt32, pwith : ITfRange, apos : TfAnchor, pfequal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_equal_start.unsafe_as(Proc(UInt32, ITfRange, TfAnchor, LibC::BOOL*, HRESULT)).call(ec, pwith, apos, pfequal)
+  end
+  def is_equal_end(ec : UInt32, pwith : ITfRange, apos : TfAnchor, pfequal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_equal_end.unsafe_as(Proc(UInt32, ITfRange, TfAnchor, LibC::BOOL*, HRESULT)).call(ec, pwith, apos, pfequal)
+  end
+  def compare_start(ec : UInt32, pwith : ITfRange, apos : TfAnchor, plresult : Int32*) : HRESULT
+    @lpVtbl.value.compare_start.unsafe_as(Proc(UInt32, ITfRange, TfAnchor, Int32*, HRESULT)).call(ec, pwith, apos, plresult)
+  end
+  def compare_end(ec : UInt32, pwith : ITfRange, apos : TfAnchor, plresult : Int32*) : HRESULT
+    @lpVtbl.value.compare_end.unsafe_as(Proc(UInt32, ITfRange, TfAnchor, Int32*, HRESULT)).call(ec, pwith, apos, plresult)
+  end
+  def adjust_for_insert(ec : UInt32, cchinsert : UInt32, pfinsertok : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.adjust_for_insert.unsafe_as(Proc(UInt32, UInt32, LibC::BOOL*, HRESULT)).call(ec, cchinsert, pfinsertok)
+  end
+  def get_gravity(pgstart : TfGravity*, pgend : TfGravity*) : HRESULT
+    @lpVtbl.value.get_gravity.unsafe_as(Proc(TfGravity*, TfGravity*, HRESULT)).call(pgstart, pgend)
+  end
+  def set_gravity(ec : UInt32, gstart : TfGravity, gend : TfGravity) : HRESULT
+    @lpVtbl.value.set_gravity.unsafe_as(Proc(UInt32, TfGravity, TfGravity, HRESULT)).call(ec, gstart, gend)
+  end
+  def clone(ppclone : ITfRange*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(ITfRange*, HRESULT)).call(ppclone)
+  end
+  def get_context(ppcontext : ITfContext*) : HRESULT
+    @lpVtbl.value.get_context.unsafe_as(Proc(ITfContext*, HRESULT)).call(ppcontext)
+  end
+  def get_extent(pacpanchor : Int32*, pcch : Int32*) : HRESULT
+    @lpVtbl.value.get_extent.unsafe_as(Proc(Int32*, Int32*, HRESULT)).call(pacpanchor, pcch)
+  end
+  def set_extent(acpanchor : Int32, cch : Int32) : HRESULT
+    @lpVtbl.value.set_extent.unsafe_as(Proc(Int32, Int32, HRESULT)).call(acpanchor, cch)
+  end
+end
+struct LibWin32::ITextStoreACPServices
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def serialize(pprop : ITfProperty, prange : ITfRange, phdr : TF_PERSISTENT_PROPERTY_HEADER_ACP*, pstream : IStream) : HRESULT
+    @lpVtbl.value.serialize.unsafe_as(Proc(ITfProperty, ITfRange, TF_PERSISTENT_PROPERTY_HEADER_ACP*, IStream, HRESULT)).call(pprop, prange, phdr, pstream)
+  end
+  def unserialize(pprop : ITfProperty, phdr : TF_PERSISTENT_PROPERTY_HEADER_ACP*, pstream : IStream, ploader : ITfPersistentPropertyLoaderACP) : HRESULT
+    @lpVtbl.value.unserialize.unsafe_as(Proc(ITfProperty, TF_PERSISTENT_PROPERTY_HEADER_ACP*, IStream, ITfPersistentPropertyLoaderACP, HRESULT)).call(pprop, phdr, pstream, ploader)
+  end
+  def force_load_property(pprop : ITfProperty) : HRESULT
+    @lpVtbl.value.force_load_property.unsafe_as(Proc(ITfProperty, HRESULT)).call(pprop)
+  end
+  def create_range(acpstart : Int32, acpend : Int32, pprange : ITfRangeACP*) : HRESULT
+    @lpVtbl.value.create_range.unsafe_as(Proc(Int32, Int32, ITfRangeACP*, HRESULT)).call(acpstart, acpend, pprange)
+  end
+end
+struct LibWin32::ITfRangeBackup
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def restore(ec : UInt32, prange : ITfRange) : HRESULT
+    @lpVtbl.value.restore.unsafe_as(Proc(UInt32, ITfRange, HRESULT)).call(ec, prange)
+  end
+end
+struct LibWin32::ITfPropertyStore
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type(pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  end
+  def get_data_type(pdwreserved : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_type.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwreserved)
+  end
+  def get_data(pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_data.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarvalue)
+  end
+  def on_text_updated(dwflags : UInt32, prangenew : ITfRange, pfaccept : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_text_updated.unsafe_as(Proc(UInt32, ITfRange, LibC::BOOL*, HRESULT)).call(dwflags, prangenew, pfaccept)
+  end
+  def shrink(prangenew : ITfRange, pffree : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.shrink.unsafe_as(Proc(ITfRange, LibC::BOOL*, HRESULT)).call(prangenew, pffree)
+  end
+  def divide(prangethis : ITfRange, prangenew : ITfRange, pppropstore : ITfPropertyStore*) : HRESULT
+    @lpVtbl.value.divide.unsafe_as(Proc(ITfRange, ITfRange, ITfPropertyStore*, HRESULT)).call(prangethis, prangenew, pppropstore)
+  end
+  def clone(ppropstore : ITfPropertyStore*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(ITfPropertyStore*, HRESULT)).call(ppropstore)
+  end
+  def get_property_range_creator(pclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_property_range_creator.unsafe_as(Proc(Guid*, HRESULT)).call(pclsid)
+  end
+  def serialize(pstream : IStream, pcb : UInt32*) : HRESULT
+    @lpVtbl.value.serialize.unsafe_as(Proc(IStream, UInt32*, HRESULT)).call(pstream, pcb)
+  end
+end
+struct LibWin32::IEnumTfRanges
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumTfRanges*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumTfRanges*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, pprange : ITfRange*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITfRange*, UInt32*, HRESULT)).call(ulcount, pprange, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::ITfCreatePropertyStore
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def is_store_serializable(guidprop : Guid*, prange : ITfRange, ppropstore : ITfPropertyStore, pfserializable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_store_serializable.unsafe_as(Proc(Guid*, ITfRange, ITfPropertyStore, LibC::BOOL*, HRESULT)).call(guidprop, prange, ppropstore, pfserializable)
+  end
+  def create_property_store(guidprop : Guid*, prange : ITfRange, cb : UInt32, pstream : IStream, ppstore : ITfPropertyStore*) : HRESULT
+    @lpVtbl.value.create_property_store.unsafe_as(Proc(Guid*, ITfRange, UInt32, IStream, ITfPropertyStore*, HRESULT)).call(guidprop, prange, cb, pstream, ppstore)
+  end
+end
+struct LibWin32::ITfPersistentPropertyLoaderACP
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def load_property(phdr : TF_PERSISTENT_PROPERTY_HEADER_ACP*, ppstream : IStream*) : HRESULT
+    @lpVtbl.value.load_property.unsafe_as(Proc(TF_PERSISTENT_PROPERTY_HEADER_ACP*, IStream*, HRESULT)).call(phdr, ppstream)
+  end
+end
+struct LibWin32::ITfProperty
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type(pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  end
+  def enum_ranges(ec : UInt32, ppenum : IEnumTfRanges*, ptargetrange : ITfRange) : HRESULT
+    @lpVtbl.value.enum_ranges.unsafe_as(Proc(UInt32, IEnumTfRanges*, ITfRange, HRESULT)).call(ec, ppenum, ptargetrange)
+  end
+  def get_value(ec : UInt32, prange : ITfRange, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.unsafe_as(Proc(UInt32, ITfRange, VARIANT*, HRESULT)).call(ec, prange, pvarvalue)
+  end
+  def get_context(ppcontext : ITfContext*) : HRESULT
+    @lpVtbl.value.get_context.unsafe_as(Proc(ITfContext*, HRESULT)).call(ppcontext)
+  end
+  def find_range(ec : UInt32, prange : ITfRange, pprange : ITfRange*, apos : TfAnchor) : HRESULT
+    @lpVtbl.value.find_range.unsafe_as(Proc(UInt32, ITfRange, ITfRange*, TfAnchor, HRESULT)).call(ec, prange, pprange, apos)
+  end
+  def set_value_store(ec : UInt32, prange : ITfRange, ppropstore : ITfPropertyStore) : HRESULT
+    @lpVtbl.value.set_value_store.unsafe_as(Proc(UInt32, ITfRange, ITfPropertyStore, HRESULT)).call(ec, prange, ppropstore)
+  end
+  def set_value(ec : UInt32, prange : ITfRange, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.set_value.unsafe_as(Proc(UInt32, ITfRange, VARIANT*, HRESULT)).call(ec, prange, pvarvalue)
+  end
+  def clear(ec : UInt32, prange : ITfRange) : HRESULT
+    @lpVtbl.value.clear.unsafe_as(Proc(UInt32, ITfRange, HRESULT)).call(ec, prange)
+  end
+end
+struct LibWin32::IEnumTfProperties
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumTfProperties*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumTfProperties*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, ppprop : ITfProperty*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITfProperty*, UInt32*, HRESULT)).call(ulcount, ppprop, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::ITfCompartment
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_value(tid : UInt32, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.set_value.unsafe_as(Proc(UInt32, VARIANT*, HRESULT)).call(tid, pvarvalue)
+  end
+  def get_value(pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarvalue)
+  end
+end
+struct LibWin32::ITfCompartmentEventSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_change(rguid : Guid*) : HRESULT
+    @lpVtbl.value.on_change.unsafe_as(Proc(Guid*, HRESULT)).call(rguid)
+  end
+end
+struct LibWin32::ITfCompartmentMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_compartment(rguid : Guid*, ppcomp : ITfCompartment*) : HRESULT
+    @lpVtbl.value.get_compartment.unsafe_as(Proc(Guid*, ITfCompartment*, HRESULT)).call(rguid, ppcomp)
+  end
+  def clear_compartment(tid : UInt32, rguid : Guid*) : HRESULT
+    @lpVtbl.value.clear_compartment.unsafe_as(Proc(UInt32, Guid*, HRESULT)).call(tid, rguid)
+  end
+  def enum_compartments(ppenum : IEnumGUID*) : HRESULT
+    @lpVtbl.value.enum_compartments.unsafe_as(Proc(IEnumGUID*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::ITfFunction
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+end
+struct LibWin32::ITfFunctionProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type(pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  end
+  def get_description(pbstrdesc : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdesc)
+  end
+  def get_function(rguid : Guid*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_function.unsafe_as(Proc(Guid*, Guid*, IUnknown*, HRESULT)).call(rguid, riid, ppunk)
+  end
+end
+struct LibWin32::IEnumTfFunctionProviders
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumTfFunctionProviders*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumTfFunctionProviders*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, ppcmdobj : ITfFunctionProvider*, pcfetch : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITfFunctionProvider*, UInt32*, HRESULT)).call(ulcount, ppcmdobj, pcfetch)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::ITfInputProcessorProfiles
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def register(rclsid : Guid*) : HRESULT
+    @lpVtbl.value.register.unsafe_as(Proc(Guid*, HRESULT)).call(rclsid)
+  end
+  def unregister(rclsid : Guid*) : HRESULT
+    @lpVtbl.value.unregister.unsafe_as(Proc(Guid*, HRESULT)).call(rclsid)
+  end
+  def add_language_profile(rclsid : Guid*, langid : UInt16, guidprofile : Guid*, pchdesc : Char*, cchdesc : UInt32, pchiconfile : Char*, cchfile : UInt32, uiconindex : UInt32) : HRESULT
+    @lpVtbl.value.add_language_profile.unsafe_as(Proc(Guid*, UInt16, Guid*, Char*, UInt32, Char*, UInt32, UInt32, HRESULT)).call(rclsid, langid, guidprofile, pchdesc, cchdesc, pchiconfile, cchfile, uiconindex)
+  end
+  def remove_language_profile(rclsid : Guid*, langid : UInt16, guidprofile : Guid*) : HRESULT
+    @lpVtbl.value.remove_language_profile.unsafe_as(Proc(Guid*, UInt16, Guid*, HRESULT)).call(rclsid, langid, guidprofile)
+  end
+  def enum_input_processor_info(ppenum : IEnumGUID*) : HRESULT
+    @lpVtbl.value.enum_input_processor_info.unsafe_as(Proc(IEnumGUID*, HRESULT)).call(ppenum)
+  end
+  def get_default_language_profile(langid : UInt16, catid : Guid*, pclsid : Guid*, pguidprofile : Guid*) : HRESULT
+    @lpVtbl.value.get_default_language_profile.unsafe_as(Proc(UInt16, Guid*, Guid*, Guid*, HRESULT)).call(langid, catid, pclsid, pguidprofile)
+  end
+  def set_default_language_profile(langid : UInt16, rclsid : Guid*, guidprofiles : Guid*) : HRESULT
+    @lpVtbl.value.set_default_language_profile.unsafe_as(Proc(UInt16, Guid*, Guid*, HRESULT)).call(langid, rclsid, guidprofiles)
+  end
+  def activate_language_profile(rclsid : Guid*, langid : UInt16, guidprofiles : Guid*) : HRESULT
+    @lpVtbl.value.activate_language_profile.unsafe_as(Proc(Guid*, UInt16, Guid*, HRESULT)).call(rclsid, langid, guidprofiles)
+  end
+  def get_active_language_profile(rclsid : Guid*, plangid : UInt16*, pguidprofile : Guid*) : HRESULT
+    @lpVtbl.value.get_active_language_profile.unsafe_as(Proc(Guid*, UInt16*, Guid*, HRESULT)).call(rclsid, plangid, pguidprofile)
+  end
+  def get_language_profile_description(rclsid : Guid*, langid : UInt16, guidprofile : Guid*, pbstrprofile : UInt8**) : HRESULT
+    @lpVtbl.value.get_language_profile_description.unsafe_as(Proc(Guid*, UInt16, Guid*, UInt8**, HRESULT)).call(rclsid, langid, guidprofile, pbstrprofile)
+  end
+  def get_current_language(plangid : UInt16*) : HRESULT
+    @lpVtbl.value.get_current_language.unsafe_as(Proc(UInt16*, HRESULT)).call(plangid)
+  end
+  def change_current_language(langid : UInt16) : HRESULT
+    @lpVtbl.value.change_current_language.unsafe_as(Proc(UInt16, HRESULT)).call(langid)
+  end
+  def get_language_list(pplangid : UInt16**, pulcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_language_list.unsafe_as(Proc(UInt16**, UInt32*, HRESULT)).call(pplangid, pulcount)
+  end
+  def enum_language_profiles(langid : UInt16, ppenum : IEnumTfLanguageProfiles*) : HRESULT
+    @lpVtbl.value.enum_language_profiles.unsafe_as(Proc(UInt16, IEnumTfLanguageProfiles*, HRESULT)).call(langid, ppenum)
+  end
+  def enable_language_profile(rclsid : Guid*, langid : UInt16, guidprofile : Guid*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_language_profile.unsafe_as(Proc(Guid*, UInt16, Guid*, LibC::BOOL, HRESULT)).call(rclsid, langid, guidprofile, fenable)
+  end
+  def is_enabled_language_profile(rclsid : Guid*, langid : UInt16, guidprofile : Guid*, pfenable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_enabled_language_profile.unsafe_as(Proc(Guid*, UInt16, Guid*, LibC::BOOL*, HRESULT)).call(rclsid, langid, guidprofile, pfenable)
+  end
+  def enable_language_profile_by_default(rclsid : Guid*, langid : UInt16, guidprofile : Guid*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_language_profile_by_default.unsafe_as(Proc(Guid*, UInt16, Guid*, LibC::BOOL, HRESULT)).call(rclsid, langid, guidprofile, fenable)
+  end
+  def substitute_keyboard_layout(rclsid : Guid*, langid : UInt16, guidprofile : Guid*, hkl : HKL) : HRESULT
+    @lpVtbl.value.substitute_keyboard_layout.unsafe_as(Proc(Guid*, UInt16, Guid*, HKL, HRESULT)).call(rclsid, langid, guidprofile, hkl)
+  end
+end
+struct LibWin32::ITfInputProcessorProfilesEx
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def register(rclsid : Guid*) : HRESULT
+    @lpVtbl.value.register.unsafe_as(Proc(Guid*, HRESULT)).call(rclsid)
+  end
+  def unregister(rclsid : Guid*) : HRESULT
+    @lpVtbl.value.unregister.unsafe_as(Proc(Guid*, HRESULT)).call(rclsid)
+  end
+  def add_language_profile(rclsid : Guid*, langid : UInt16, guidprofile : Guid*, pchdesc : Char*, cchdesc : UInt32, pchiconfile : Char*, cchfile : UInt32, uiconindex : UInt32) : HRESULT
+    @lpVtbl.value.add_language_profile.unsafe_as(Proc(Guid*, UInt16, Guid*, Char*, UInt32, Char*, UInt32, UInt32, HRESULT)).call(rclsid, langid, guidprofile, pchdesc, cchdesc, pchiconfile, cchfile, uiconindex)
+  end
+  def remove_language_profile(rclsid : Guid*, langid : UInt16, guidprofile : Guid*) : HRESULT
+    @lpVtbl.value.remove_language_profile.unsafe_as(Proc(Guid*, UInt16, Guid*, HRESULT)).call(rclsid, langid, guidprofile)
+  end
+  def enum_input_processor_info(ppenum : IEnumGUID*) : HRESULT
+    @lpVtbl.value.enum_input_processor_info.unsafe_as(Proc(IEnumGUID*, HRESULT)).call(ppenum)
+  end
+  def get_default_language_profile(langid : UInt16, catid : Guid*, pclsid : Guid*, pguidprofile : Guid*) : HRESULT
+    @lpVtbl.value.get_default_language_profile.unsafe_as(Proc(UInt16, Guid*, Guid*, Guid*, HRESULT)).call(langid, catid, pclsid, pguidprofile)
+  end
+  def set_default_language_profile(langid : UInt16, rclsid : Guid*, guidprofiles : Guid*) : HRESULT
+    @lpVtbl.value.set_default_language_profile.unsafe_as(Proc(UInt16, Guid*, Guid*, HRESULT)).call(langid, rclsid, guidprofiles)
+  end
+  def activate_language_profile(rclsid : Guid*, langid : UInt16, guidprofiles : Guid*) : HRESULT
+    @lpVtbl.value.activate_language_profile.unsafe_as(Proc(Guid*, UInt16, Guid*, HRESULT)).call(rclsid, langid, guidprofiles)
+  end
+  def get_active_language_profile(rclsid : Guid*, plangid : UInt16*, pguidprofile : Guid*) : HRESULT
+    @lpVtbl.value.get_active_language_profile.unsafe_as(Proc(Guid*, UInt16*, Guid*, HRESULT)).call(rclsid, plangid, pguidprofile)
+  end
+  def get_language_profile_description(rclsid : Guid*, langid : UInt16, guidprofile : Guid*, pbstrprofile : UInt8**) : HRESULT
+    @lpVtbl.value.get_language_profile_description.unsafe_as(Proc(Guid*, UInt16, Guid*, UInt8**, HRESULT)).call(rclsid, langid, guidprofile, pbstrprofile)
+  end
+  def get_current_language(plangid : UInt16*) : HRESULT
+    @lpVtbl.value.get_current_language.unsafe_as(Proc(UInt16*, HRESULT)).call(plangid)
+  end
+  def change_current_language(langid : UInt16) : HRESULT
+    @lpVtbl.value.change_current_language.unsafe_as(Proc(UInt16, HRESULT)).call(langid)
+  end
+  def get_language_list(pplangid : UInt16**, pulcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_language_list.unsafe_as(Proc(UInt16**, UInt32*, HRESULT)).call(pplangid, pulcount)
+  end
+  def enum_language_profiles(langid : UInt16, ppenum : IEnumTfLanguageProfiles*) : HRESULT
+    @lpVtbl.value.enum_language_profiles.unsafe_as(Proc(UInt16, IEnumTfLanguageProfiles*, HRESULT)).call(langid, ppenum)
+  end
+  def enable_language_profile(rclsid : Guid*, langid : UInt16, guidprofile : Guid*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_language_profile.unsafe_as(Proc(Guid*, UInt16, Guid*, LibC::BOOL, HRESULT)).call(rclsid, langid, guidprofile, fenable)
+  end
+  def is_enabled_language_profile(rclsid : Guid*, langid : UInt16, guidprofile : Guid*, pfenable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_enabled_language_profile.unsafe_as(Proc(Guid*, UInt16, Guid*, LibC::BOOL*, HRESULT)).call(rclsid, langid, guidprofile, pfenable)
+  end
+  def enable_language_profile_by_default(rclsid : Guid*, langid : UInt16, guidprofile : Guid*, fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_language_profile_by_default.unsafe_as(Proc(Guid*, UInt16, Guid*, LibC::BOOL, HRESULT)).call(rclsid, langid, guidprofile, fenable)
+  end
+  def substitute_keyboard_layout(rclsid : Guid*, langid : UInt16, guidprofile : Guid*, hkl : HKL) : HRESULT
+    @lpVtbl.value.substitute_keyboard_layout.unsafe_as(Proc(Guid*, UInt16, Guid*, HKL, HRESULT)).call(rclsid, langid, guidprofile, hkl)
+  end
+  def set_language_profile_display_name(rclsid : Guid*, langid : UInt16, guidprofile : Guid*, pchfile : Char*, cchfile : UInt32, uresid : UInt32) : HRESULT
+    @lpVtbl.value.set_language_profile_display_name.unsafe_as(Proc(Guid*, UInt16, Guid*, Char*, UInt32, UInt32, HRESULT)).call(rclsid, langid, guidprofile, pchfile, cchfile, uresid)
+  end
+end
+struct LibWin32::ITfInputProcessorProfileSubstituteLayout
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_substitute_keyboard_layout(rclsid : Guid*, langid : UInt16, guidprofile : Guid*, phkl : HKL*) : HRESULT
+    @lpVtbl.value.get_substitute_keyboard_layout.unsafe_as(Proc(Guid*, UInt16, Guid*, HKL*, HRESULT)).call(rclsid, langid, guidprofile, phkl)
+  end
+end
+struct LibWin32::ITfActiveLanguageProfileNotifySink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_activated(clsid : Guid*, guidprofile : Guid*, factivated : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_activated.unsafe_as(Proc(Guid*, Guid*, LibC::BOOL, HRESULT)).call(clsid, guidprofile, factivated)
+  end
+end
+struct LibWin32::IEnumTfLanguageProfiles
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumTfLanguageProfiles*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumTfLanguageProfiles*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, pprofile : TF_LANGUAGEPROFILE*, pcfetch : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, TF_LANGUAGEPROFILE*, UInt32*, HRESULT)).call(ulcount, pprofile, pcfetch)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::ITfLanguageProfileNotifySink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_language_change(langid : UInt16, pfaccept : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_language_change.unsafe_as(Proc(UInt16, LibC::BOOL*, HRESULT)).call(langid, pfaccept)
+  end
+  def on_language_changed : HRESULT
+    @lpVtbl.value.on_language_changed.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITfInputProcessorProfileMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def activate_profile(dwprofiletype : UInt32, langid : UInt16, clsid : Guid*, guidprofile : Guid*, hkl : HKL, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.activate_profile.unsafe_as(Proc(UInt32, UInt16, Guid*, Guid*, HKL, UInt32, HRESULT)).call(dwprofiletype, langid, clsid, guidprofile, hkl, dwflags)
+  end
+  def deactivate_profile(dwprofiletype : UInt32, langid : UInt16, clsid : Guid*, guidprofile : Guid*, hkl : HKL, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.deactivate_profile.unsafe_as(Proc(UInt32, UInt16, Guid*, Guid*, HKL, UInt32, HRESULT)).call(dwprofiletype, langid, clsid, guidprofile, hkl, dwflags)
+  end
+  def get_profile(dwprofiletype : UInt32, langid : UInt16, clsid : Guid*, guidprofile : Guid*, hkl : HKL, pprofile : TF_INPUTPROCESSORPROFILE*) : HRESULT
+    @lpVtbl.value.get_profile.unsafe_as(Proc(UInt32, UInt16, Guid*, Guid*, HKL, TF_INPUTPROCESSORPROFILE*, HRESULT)).call(dwprofiletype, langid, clsid, guidprofile, hkl, pprofile)
+  end
+  def enum_profiles(langid : UInt16, ppenum : IEnumTfInputProcessorProfiles*) : HRESULT
+    @lpVtbl.value.enum_profiles.unsafe_as(Proc(UInt16, IEnumTfInputProcessorProfiles*, HRESULT)).call(langid, ppenum)
+  end
+  def release_input_processor(rclsid : Guid*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.release_input_processor.unsafe_as(Proc(Guid*, UInt32, HRESULT)).call(rclsid, dwflags)
+  end
+  def register_profile(rclsid : Guid*, langid : UInt16, guidprofile : Guid*, pchdesc : Char*, cchdesc : UInt32, pchiconfile : Char*, cchfile : UInt32, uiconindex : UInt32, hklsubstitute : HKL, dwpreferredlayout : UInt32, benabledbydefault : LibC::BOOL, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.register_profile.unsafe_as(Proc(Guid*, UInt16, Guid*, Char*, UInt32, Char*, UInt32, UInt32, HKL, UInt32, LibC::BOOL, UInt32, HRESULT)).call(rclsid, langid, guidprofile, pchdesc, cchdesc, pchiconfile, cchfile, uiconindex, hklsubstitute, dwpreferredlayout, benabledbydefault, dwflags)
+  end
+  def unregister_profile(rclsid : Guid*, langid : UInt16, guidprofile : Guid*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.unregister_profile.unsafe_as(Proc(Guid*, UInt16, Guid*, UInt32, HRESULT)).call(rclsid, langid, guidprofile, dwflags)
+  end
+  def get_active_profile(catid : Guid*, pprofile : TF_INPUTPROCESSORPROFILE*) : HRESULT
+    @lpVtbl.value.get_active_profile.unsafe_as(Proc(Guid*, TF_INPUTPROCESSORPROFILE*, HRESULT)).call(catid, pprofile)
+  end
+end
+struct LibWin32::IEnumTfInputProcessorProfiles
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumTfInputProcessorProfiles*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumTfInputProcessorProfiles*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, pprofile : TF_INPUTPROCESSORPROFILE*, pcfetch : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, TF_INPUTPROCESSORPROFILE*, UInt32*, HRESULT)).call(ulcount, pprofile, pcfetch)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::ITfInputProcessorProfileActivationSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_activated(dwprofiletype : UInt32, langid : UInt16, clsid : Guid*, catid : Guid*, guidprofile : Guid*, hkl : HKL, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_activated.unsafe_as(Proc(UInt32, UInt16, Guid*, Guid*, Guid*, HKL, UInt32, HRESULT)).call(dwprofiletype, langid, clsid, catid, guidprofile, hkl, dwflags)
+  end
+end
+struct LibWin32::ITfKeystrokeMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def advise_key_event_sink(tid : UInt32, psink : ITfKeyEventSink, fforeground : LibC::BOOL) : HRESULT
+    @lpVtbl.value.advise_key_event_sink.unsafe_as(Proc(UInt32, ITfKeyEventSink, LibC::BOOL, HRESULT)).call(tid, psink, fforeground)
+  end
+  def unadvise_key_event_sink(tid : UInt32) : HRESULT
+    @lpVtbl.value.unadvise_key_event_sink.unsafe_as(Proc(UInt32, HRESULT)).call(tid)
+  end
+  def get_foreground(pclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_foreground.unsafe_as(Proc(Guid*, HRESULT)).call(pclsid)
+  end
+  def test_key_down(wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.test_key_down.unsafe_as(Proc(LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)).call(wparam, lparam, pfeaten)
+  end
+  def test_key_up(wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.test_key_up.unsafe_as(Proc(LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)).call(wparam, lparam, pfeaten)
+  end
+  def key_down(wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.key_down.unsafe_as(Proc(LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)).call(wparam, lparam, pfeaten)
+  end
+  def key_up(wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.key_up.unsafe_as(Proc(LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)).call(wparam, lparam, pfeaten)
+  end
+  def get_preserved_key(pic : ITfContext, pprekey : TF_PRESERVEDKEY*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_preserved_key.unsafe_as(Proc(ITfContext, TF_PRESERVEDKEY*, Guid*, HRESULT)).call(pic, pprekey, pguid)
+  end
+  def is_preserved_key(rguid : Guid*, pprekey : TF_PRESERVEDKEY*, pfregistered : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_preserved_key.unsafe_as(Proc(Guid*, TF_PRESERVEDKEY*, LibC::BOOL*, HRESULT)).call(rguid, pprekey, pfregistered)
+  end
+  def preserve_key(tid : UInt32, rguid : Guid*, prekey : TF_PRESERVEDKEY*, pchdesc : Char*, cchdesc : UInt32) : HRESULT
+    @lpVtbl.value.preserve_key.unsafe_as(Proc(UInt32, Guid*, TF_PRESERVEDKEY*, Char*, UInt32, HRESULT)).call(tid, rguid, prekey, pchdesc, cchdesc)
+  end
+  def unpreserve_key(rguid : Guid*, pprekey : TF_PRESERVEDKEY*) : HRESULT
+    @lpVtbl.value.unpreserve_key.unsafe_as(Proc(Guid*, TF_PRESERVEDKEY*, HRESULT)).call(rguid, pprekey)
+  end
+  def set_preserved_key_description(rguid : Guid*, pchdesc : Char*, cchdesc : UInt32) : HRESULT
+    @lpVtbl.value.set_preserved_key_description.unsafe_as(Proc(Guid*, Char*, UInt32, HRESULT)).call(rguid, pchdesc, cchdesc)
+  end
+  def get_preserved_key_description(rguid : Guid*, pbstrdesc : UInt8**) : HRESULT
+    @lpVtbl.value.get_preserved_key_description.unsafe_as(Proc(Guid*, UInt8**, HRESULT)).call(rguid, pbstrdesc)
+  end
+  def simulate_preserved_key(pic : ITfContext, rguid : Guid*, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.simulate_preserved_key.unsafe_as(Proc(ITfContext, Guid*, LibC::BOOL*, HRESULT)).call(pic, rguid, pfeaten)
+  end
+end
+struct LibWin32::ITfKeyEventSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_set_focus(fforeground : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_set_focus.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fforeground)
+  end
+  def on_test_key_down(pic : ITfContext, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_test_key_down.unsafe_as(Proc(ITfContext, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)).call(pic, wparam, lparam, pfeaten)
+  end
+  def on_test_key_up(pic : ITfContext, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_test_key_up.unsafe_as(Proc(ITfContext, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)).call(pic, wparam, lparam, pfeaten)
+  end
+  def on_key_down(pic : ITfContext, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_key_down.unsafe_as(Proc(ITfContext, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)).call(pic, wparam, lparam, pfeaten)
+  end
+  def on_key_up(pic : ITfContext, wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_key_up.unsafe_as(Proc(ITfContext, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)).call(pic, wparam, lparam, pfeaten)
+  end
+  def on_preserved_key(pic : ITfContext, rguid : Guid*, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_preserved_key.unsafe_as(Proc(ITfContext, Guid*, LibC::BOOL*, HRESULT)).call(pic, rguid, pfeaten)
+  end
+end
+struct LibWin32::ITfKeyTraceEventSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_key_trace_down(wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.on_key_trace_down.unsafe_as(Proc(LibC::UINT_PTR, LPARAM, HRESULT)).call(wparam, lparam)
+  end
+  def on_key_trace_up(wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.on_key_trace_up.unsafe_as(Proc(LibC::UINT_PTR, LPARAM, HRESULT)).call(wparam, lparam)
+  end
+end
+struct LibWin32::ITfPreservedKeyNotifySink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_updated(pprekey : TF_PRESERVEDKEY*) : HRESULT
+    @lpVtbl.value.on_updated.unsafe_as(Proc(TF_PRESERVEDKEY*, HRESULT)).call(pprekey)
+  end
+end
+struct LibWin32::ITfMessagePump
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def peek_message_a(pmsg : MSG*, hwnd : LibC::HANDLE, wmsgfiltermin : UInt32, wmsgfiltermax : UInt32, wremovemsg : UInt32, pfresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.peek_message_a.unsafe_as(Proc(MSG*, LibC::HANDLE, UInt32, UInt32, UInt32, LibC::BOOL*, HRESULT)).call(pmsg, hwnd, wmsgfiltermin, wmsgfiltermax, wremovemsg, pfresult)
+  end
+  def get_message_a(pmsg : MSG*, hwnd : LibC::HANDLE, wmsgfiltermin : UInt32, wmsgfiltermax : UInt32, pfresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_message_a.unsafe_as(Proc(MSG*, LibC::HANDLE, UInt32, UInt32, LibC::BOOL*, HRESULT)).call(pmsg, hwnd, wmsgfiltermin, wmsgfiltermax, pfresult)
+  end
+  def peek_message_w(pmsg : MSG*, hwnd : LibC::HANDLE, wmsgfiltermin : UInt32, wmsgfiltermax : UInt32, wremovemsg : UInt32, pfresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.peek_message_w.unsafe_as(Proc(MSG*, LibC::HANDLE, UInt32, UInt32, UInt32, LibC::BOOL*, HRESULT)).call(pmsg, hwnd, wmsgfiltermin, wmsgfiltermax, wremovemsg, pfresult)
+  end
+  def get_message_w(pmsg : MSG*, hwnd : LibC::HANDLE, wmsgfiltermin : UInt32, wmsgfiltermax : UInt32, pfresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_message_w.unsafe_as(Proc(MSG*, LibC::HANDLE, UInt32, UInt32, LibC::BOOL*, HRESULT)).call(pmsg, hwnd, wmsgfiltermin, wmsgfiltermax, pfresult)
+  end
+end
+struct LibWin32::ITfThreadFocusSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_set_thread_focus : HRESULT
+    @lpVtbl.value.on_set_thread_focus.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_kill_thread_focus : HRESULT
+    @lpVtbl.value.on_kill_thread_focus.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITfTextInputProcessor
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def activate(ptim : ITfThreadMgr, tid : UInt32) : HRESULT
+    @lpVtbl.value.activate.unsafe_as(Proc(ITfThreadMgr, UInt32, HRESULT)).call(ptim, tid)
+  end
+  def deactivate : HRESULT
+    @lpVtbl.value.deactivate.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITfTextInputProcessorEx
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def activate(ptim : ITfThreadMgr, tid : UInt32) : HRESULT
+    @lpVtbl.value.activate.unsafe_as(Proc(ITfThreadMgr, UInt32, HRESULT)).call(ptim, tid)
+  end
+  def deactivate : HRESULT
+    @lpVtbl.value.deactivate.unsafe_as(Proc(HRESULT)).call
+  end
+  def activate_ex(ptim : ITfThreadMgr, tid : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.activate_ex.unsafe_as(Proc(ITfThreadMgr, UInt32, UInt32, HRESULT)).call(ptim, tid, dwflags)
+  end
+end
+struct LibWin32::ITfClientId
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_client_id(rclsid : Guid*, ptid : UInt32*) : HRESULT
+    @lpVtbl.value.get_client_id.unsafe_as(Proc(Guid*, UInt32*, HRESULT)).call(rclsid, ptid)
+  end
+end
+struct LibWin32::ITfDisplayAttributeInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_guid(pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  end
+  def get_description(pbstrdesc : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdesc)
+  end
+  def get_attribute_info(pda : TF_DISPLAYATTRIBUTE*) : HRESULT
+    @lpVtbl.value.get_attribute_info.unsafe_as(Proc(TF_DISPLAYATTRIBUTE*, HRESULT)).call(pda)
+  end
+  def set_attribute_info(pda : TF_DISPLAYATTRIBUTE*) : HRESULT
+    @lpVtbl.value.set_attribute_info.unsafe_as(Proc(TF_DISPLAYATTRIBUTE*, HRESULT)).call(pda)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IEnumTfDisplayAttributeInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumTfDisplayAttributeInfo*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumTfDisplayAttributeInfo*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, rginfo : ITfDisplayAttributeInfo*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITfDisplayAttributeInfo*, UInt32*, HRESULT)).call(ulcount, rginfo, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::ITfDisplayAttributeProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enum_display_attribute_info(ppenum : IEnumTfDisplayAttributeInfo*) : HRESULT
+    @lpVtbl.value.enum_display_attribute_info.unsafe_as(Proc(IEnumTfDisplayAttributeInfo*, HRESULT)).call(ppenum)
+  end
+  def get_display_attribute_info(guid : Guid*, ppinfo : ITfDisplayAttributeInfo*) : HRESULT
+    @lpVtbl.value.get_display_attribute_info.unsafe_as(Proc(Guid*, ITfDisplayAttributeInfo*, HRESULT)).call(guid, ppinfo)
+  end
+end
+struct LibWin32::ITfDisplayAttributeMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_update_info : HRESULT
+    @lpVtbl.value.on_update_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def enum_display_attribute_info(ppenum : IEnumTfDisplayAttributeInfo*) : HRESULT
+    @lpVtbl.value.enum_display_attribute_info.unsafe_as(Proc(IEnumTfDisplayAttributeInfo*, HRESULT)).call(ppenum)
+  end
+  def get_display_attribute_info(guid : Guid*, ppinfo : ITfDisplayAttributeInfo*, pclsidowner : Guid*) : HRESULT
+    @lpVtbl.value.get_display_attribute_info.unsafe_as(Proc(Guid*, ITfDisplayAttributeInfo*, Guid*, HRESULT)).call(guid, ppinfo, pclsidowner)
+  end
+end
+struct LibWin32::ITfDisplayAttributeNotifySink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_update_info : HRESULT
+    @lpVtbl.value.on_update_info.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITfCategoryMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def register_category(rclsid : Guid*, rcatid : Guid*, rguid : Guid*) : HRESULT
+    @lpVtbl.value.register_category.unsafe_as(Proc(Guid*, Guid*, Guid*, HRESULT)).call(rclsid, rcatid, rguid)
+  end
+  def unregister_category(rclsid : Guid*, rcatid : Guid*, rguid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_category.unsafe_as(Proc(Guid*, Guid*, Guid*, HRESULT)).call(rclsid, rcatid, rguid)
+  end
+  def enum_categories_in_item(rguid : Guid*, ppenum : IEnumGUID*) : HRESULT
+    @lpVtbl.value.enum_categories_in_item.unsafe_as(Proc(Guid*, IEnumGUID*, HRESULT)).call(rguid, ppenum)
+  end
+  def enum_items_in_category(rcatid : Guid*, ppenum : IEnumGUID*) : HRESULT
+    @lpVtbl.value.enum_items_in_category.unsafe_as(Proc(Guid*, IEnumGUID*, HRESULT)).call(rcatid, ppenum)
+  end
+  def find_closest_category(rguid : Guid*, pcatid : Guid*, ppcatidlist : Guid**, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.find_closest_category.unsafe_as(Proc(Guid*, Guid*, Guid**, UInt32, HRESULT)).call(rguid, pcatid, ppcatidlist, ulcount)
+  end
+  def register_guid_description(rclsid : Guid*, rguid : Guid*, pchdesc : Char*, cch : UInt32) : HRESULT
+    @lpVtbl.value.register_guid_description.unsafe_as(Proc(Guid*, Guid*, Char*, UInt32, HRESULT)).call(rclsid, rguid, pchdesc, cch)
+  end
+  def unregister_guid_description(rclsid : Guid*, rguid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_guid_description.unsafe_as(Proc(Guid*, Guid*, HRESULT)).call(rclsid, rguid)
+  end
+  def get_guid_description(rguid : Guid*, pbstrdesc : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid_description.unsafe_as(Proc(Guid*, UInt8**, HRESULT)).call(rguid, pbstrdesc)
+  end
+  def register_guiddword(rclsid : Guid*, rguid : Guid*, dw : UInt32) : HRESULT
+    @lpVtbl.value.register_guiddword.unsafe_as(Proc(Guid*, Guid*, UInt32, HRESULT)).call(rclsid, rguid, dw)
+  end
+  def unregister_guiddword(rclsid : Guid*, rguid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_guiddword.unsafe_as(Proc(Guid*, Guid*, HRESULT)).call(rclsid, rguid)
+  end
+  def get_guiddword(rguid : Guid*, pdw : UInt32*) : HRESULT
+    @lpVtbl.value.get_guiddword.unsafe_as(Proc(Guid*, UInt32*, HRESULT)).call(rguid, pdw)
+  end
+  def register_guid(rguid : Guid*, pguidatom : UInt32*) : HRESULT
+    @lpVtbl.value.register_guid.unsafe_as(Proc(Guid*, UInt32*, HRESULT)).call(rguid, pguidatom)
+  end
+  def get_guid(guidatom : UInt32, pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt32, Guid*, HRESULT)).call(guidatom, pguid)
+  end
+  def is_equal_tf_guid_atom(guidatom : UInt32, rguid : Guid*, pfequal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_equal_tf_guid_atom.unsafe_as(Proc(UInt32, Guid*, LibC::BOOL*, HRESULT)).call(guidatom, rguid, pfequal)
+  end
+end
+struct LibWin32::ITfSource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def advise_sink(riid : Guid*, punk : IUnknown, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise_sink.unsafe_as(Proc(Guid*, IUnknown, UInt32*, HRESULT)).call(riid, punk, pdwcookie)
+  end
+  def unadvise_sink(dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.unadvise_sink.unsafe_as(Proc(UInt32, HRESULT)).call(dwcookie)
+  end
+end
+struct LibWin32::ITfSourceSingle
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def advise_single_sink(tid : UInt32, riid : Guid*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.advise_single_sink.unsafe_as(Proc(UInt32, Guid*, IUnknown, HRESULT)).call(tid, riid, punk)
+  end
+  def unadvise_single_sink(tid : UInt32, riid : Guid*) : HRESULT
+    @lpVtbl.value.unadvise_single_sink.unsafe_as(Proc(UInt32, Guid*, HRESULT)).call(tid, riid)
+  end
+end
+struct LibWin32::ITfUIElementMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_ui_element(pelement : ITfUIElement, pbshow : LibC::BOOL*, pdwuielementid : UInt32*) : HRESULT
+    @lpVtbl.value.begin_ui_element.unsafe_as(Proc(ITfUIElement, LibC::BOOL*, UInt32*, HRESULT)).call(pelement, pbshow, pdwuielementid)
+  end
+  def update_ui_element(dwuielementid : UInt32) : HRESULT
+    @lpVtbl.value.update_ui_element.unsafe_as(Proc(UInt32, HRESULT)).call(dwuielementid)
+  end
+  def end_ui_element(dwuielementid : UInt32) : HRESULT
+    @lpVtbl.value.end_ui_element.unsafe_as(Proc(UInt32, HRESULT)).call(dwuielementid)
+  end
+  def get_ui_element(dwuielementid : UInt32, ppelement : ITfUIElement*) : HRESULT
+    @lpVtbl.value.get_ui_element.unsafe_as(Proc(UInt32, ITfUIElement*, HRESULT)).call(dwuielementid, ppelement)
+  end
+  def enum_ui_elements(ppenum : IEnumTfUIElements*) : HRESULT
+    @lpVtbl.value.enum_ui_elements.unsafe_as(Proc(IEnumTfUIElements*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumTfUIElements
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumTfUIElements*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumTfUIElements*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, ppelement : ITfUIElement*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITfUIElement*, UInt32*, HRESULT)).call(ulcount, ppelement, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::ITfUIElementSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_ui_element(dwuielementid : UInt32, pbshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.begin_ui_element.unsafe_as(Proc(UInt32, LibC::BOOL*, HRESULT)).call(dwuielementid, pbshow)
+  end
+  def update_ui_element(dwuielementid : UInt32) : HRESULT
+    @lpVtbl.value.update_ui_element.unsafe_as(Proc(UInt32, HRESULT)).call(dwuielementid)
+  end
+  def end_ui_element(dwuielementid : UInt32) : HRESULT
+    @lpVtbl.value.end_ui_element.unsafe_as(Proc(UInt32, HRESULT)).call(dwuielementid)
+  end
+end
+struct LibWin32::ITfUIElement
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def get_guid(pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  end
+  def show(bshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bshow)
+  end
+  def is_shown(pbshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_shown.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbshow)
+  end
+end
+struct LibWin32::ITfCandidateListUIElement
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def get_guid(pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  end
+  def show(bshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bshow)
+  end
+  def is_shown(pbshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_shown.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbshow)
+  end
+  def get_updated_flags(pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_updated_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwflags)
+  end
+  def get_document_mgr(ppdim : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.get_document_mgr.unsafe_as(Proc(ITfDocumentMgr*, HRESULT)).call(ppdim)
+  end
+  def get_count(pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pucount)
+  end
+  def get_selection(puindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_selection.unsafe_as(Proc(UInt32*, HRESULT)).call(puindex)
+  end
+  def get_string(uindex : UInt32, pstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_string.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(uindex, pstr)
+  end
+  def get_page_index(pindex : UInt32*, usize : UInt32, pupagecnt : UInt32*) : HRESULT
+    @lpVtbl.value.get_page_index.unsafe_as(Proc(UInt32*, UInt32, UInt32*, HRESULT)).call(pindex, usize, pupagecnt)
+  end
+  def set_page_index(pindex : UInt32*, upagecnt : UInt32) : HRESULT
+    @lpVtbl.value.set_page_index.unsafe_as(Proc(UInt32*, UInt32, HRESULT)).call(pindex, upagecnt)
+  end
+  def get_current_page(pupage : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_page.unsafe_as(Proc(UInt32*, HRESULT)).call(pupage)
+  end
+end
+struct LibWin32::ITfCandidateListUIElementBehavior
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def get_guid(pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  end
+  def show(bshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bshow)
+  end
+  def is_shown(pbshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_shown.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbshow)
+  end
+  def get_updated_flags(pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_updated_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwflags)
+  end
+  def get_document_mgr(ppdim : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.get_document_mgr.unsafe_as(Proc(ITfDocumentMgr*, HRESULT)).call(ppdim)
+  end
+  def get_count(pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pucount)
+  end
+  def get_selection(puindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_selection.unsafe_as(Proc(UInt32*, HRESULT)).call(puindex)
+  end
+  def get_string(uindex : UInt32, pstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_string.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(uindex, pstr)
+  end
+  def get_page_index(pindex : UInt32*, usize : UInt32, pupagecnt : UInt32*) : HRESULT
+    @lpVtbl.value.get_page_index.unsafe_as(Proc(UInt32*, UInt32, UInt32*, HRESULT)).call(pindex, usize, pupagecnt)
+  end
+  def set_page_index(pindex : UInt32*, upagecnt : UInt32) : HRESULT
+    @lpVtbl.value.set_page_index.unsafe_as(Proc(UInt32*, UInt32, HRESULT)).call(pindex, upagecnt)
+  end
+  def get_current_page(pupage : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_page.unsafe_as(Proc(UInt32*, HRESULT)).call(pupage)
+  end
+  def set_selection(nindex : UInt32) : HRESULT
+    @lpVtbl.value.set_selection.unsafe_as(Proc(UInt32, HRESULT)).call(nindex)
+  end
+  def finalize : HRESULT
+    @lpVtbl.value.finalize.unsafe_as(Proc(HRESULT)).call
+  end
+  def abort : HRESULT
+    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITfReadingInformationUIElement
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def get_guid(pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  end
+  def show(bshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bshow)
+  end
+  def is_shown(pbshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_shown.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbshow)
+  end
+  def get_updated_flags(pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_updated_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwflags)
+  end
+  def get_context(ppic : ITfContext*) : HRESULT
+    @lpVtbl.value.get_context.unsafe_as(Proc(ITfContext*, HRESULT)).call(ppic)
+  end
+  def get_string(pstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pstr)
+  end
+  def get_max_reading_string_length(pcchmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_reading_string_length.unsafe_as(Proc(UInt32*, HRESULT)).call(pcchmax)
+  end
+  def get_error_index(perrorindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_error_index.unsafe_as(Proc(UInt32*, HRESULT)).call(perrorindex)
+  end
+  def is_vertical_order_preferred(pfvertical : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_vertical_order_preferred.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfvertical)
+  end
+end
+struct LibWin32::ITfTransitoryExtensionUIElement
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def get_guid(pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  end
+  def show(bshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bshow)
+  end
+  def is_shown(pbshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_shown.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbshow)
+  end
+  def get_document_mgr(ppdim : ITfDocumentMgr*) : HRESULT
+    @lpVtbl.value.get_document_mgr.unsafe_as(Proc(ITfDocumentMgr*, HRESULT)).call(ppdim)
+  end
+end
+struct LibWin32::ITfTransitoryExtensionSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_transitory_extension_updated(pic : ITfContext, ecreadonly : UInt32, presultrange : ITfRange, pcompositionrange : ITfRange, pfdeleteresultrange : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_transitory_extension_updated.unsafe_as(Proc(ITfContext, UInt32, ITfRange, ITfRange, LibC::BOOL*, HRESULT)).call(pic, ecreadonly, presultrange, pcompositionrange, pfdeleteresultrange)
+  end
+end
+struct LibWin32::ITfToolTipUIElement
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def get_guid(pguid : Guid*) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(Guid*, HRESULT)).call(pguid)
+  end
+  def show(bshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bshow)
+  end
+  def is_shown(pbshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_shown.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbshow)
+  end
+  def get_string(pstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pstr)
+  end
+end
+struct LibWin32::ITfReverseConversionList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_length(puindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_length.unsafe_as(Proc(UInt32*, HRESULT)).call(puindex)
+  end
+  def get_string(uindex : UInt32, pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_string.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(uindex, pbstr)
+  end
+end
+struct LibWin32::ITfReverseConversion
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def do_reverse_conversion(lpstr : LibC::LPWSTR, pplist : ITfReverseConversionList*) : HRESULT
+    @lpVtbl.value.do_reverse_conversion.unsafe_as(Proc(LibC::LPWSTR, ITfReverseConversionList*, HRESULT)).call(lpstr, pplist)
+  end
+end
+struct LibWin32::ITfReverseConversionMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_reverse_conversion(langid : UInt16, guidprofile : Guid*, dwflag : UInt32, ppreverseconversion : ITfReverseConversion*) : HRESULT
+    @lpVtbl.value.get_reverse_conversion.unsafe_as(Proc(UInt16, Guid*, UInt32, ITfReverseConversion*, HRESULT)).call(langid, guidprofile, dwflag, ppreverseconversion)
+  end
+end
+struct LibWin32::ITfCandidateString
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_string(pbstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstr)
+  end
+  def get_index(pnindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_index.unsafe_as(Proc(UInt32*, HRESULT)).call(pnindex)
+  end
+end
+struct LibWin32::IEnumTfCandidates
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumTfCandidates*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumTfCandidates*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, ppcand : ITfCandidateString*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITfCandidateString*, UInt32*, HRESULT)).call(ulcount, ppcand, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::ITfCandidateList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enum_candidates(ppenum : IEnumTfCandidates*) : HRESULT
+    @lpVtbl.value.enum_candidates.unsafe_as(Proc(IEnumTfCandidates*, HRESULT)).call(ppenum)
+  end
+  def get_candidate(nindex : UInt32, ppcand : ITfCandidateString*) : HRESULT
+    @lpVtbl.value.get_candidate.unsafe_as(Proc(UInt32, ITfCandidateString*, HRESULT)).call(nindex, ppcand)
+  end
+  def get_candidate_num(pncnt : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_num.unsafe_as(Proc(UInt32*, HRESULT)).call(pncnt)
+  end
+  def set_result(nindex : UInt32, imcr : TfCandidateResult) : HRESULT
+    @lpVtbl.value.set_result.unsafe_as(Proc(UInt32, TfCandidateResult, HRESULT)).call(nindex, imcr)
+  end
+end
+struct LibWin32::ITfFnReconversion
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def query_range(prange : ITfRange, ppnewrange : ITfRange*, pfconvertable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_range.unsafe_as(Proc(ITfRange, ITfRange*, LibC::BOOL*, HRESULT)).call(prange, ppnewrange, pfconvertable)
+  end
+  def get_reconversion(prange : ITfRange, ppcandlist : ITfCandidateList*) : HRESULT
+    @lpVtbl.value.get_reconversion.unsafe_as(Proc(ITfRange, ITfCandidateList*, HRESULT)).call(prange, ppcandlist)
+  end
+  def reconvert(prange : ITfRange) : HRESULT
+    @lpVtbl.value.reconvert.unsafe_as(Proc(ITfRange, HRESULT)).call(prange)
+  end
+end
+struct LibWin32::ITfFnPlayBack
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def query_range(prange : ITfRange, ppnewrange : ITfRange*, pfplayable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_range.unsafe_as(Proc(ITfRange, ITfRange*, LibC::BOOL*, HRESULT)).call(prange, ppnewrange, pfplayable)
+  end
+  def play(prange : ITfRange) : HRESULT
+    @lpVtbl.value.play.unsafe_as(Proc(ITfRange, HRESULT)).call(prange)
+  end
+end
+struct LibWin32::ITfFnLangProfileUtil
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def register_active_profiles : HRESULT
+    @lpVtbl.value.register_active_profiles.unsafe_as(Proc(HRESULT)).call
+  end
+  def is_profile_available_for_lang(langid : UInt16, pfavailable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_profile_available_for_lang.unsafe_as(Proc(UInt16, LibC::BOOL*, HRESULT)).call(langid, pfavailable)
+  end
+end
+struct LibWin32::ITfFnConfigure
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def show(hwndparent : LibC::HANDLE, langid : UInt16, rguidprofile : Guid*) : HRESULT
+    @lpVtbl.value.show.unsafe_as(Proc(LibC::HANDLE, UInt16, Guid*, HRESULT)).call(hwndparent, langid, rguidprofile)
+  end
+end
+struct LibWin32::ITfFnConfigureRegisterWord
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def show(hwndparent : LibC::HANDLE, langid : UInt16, rguidprofile : Guid*, bstrregistered : UInt8*) : HRESULT
+    @lpVtbl.value.show.unsafe_as(Proc(LibC::HANDLE, UInt16, Guid*, UInt8*, HRESULT)).call(hwndparent, langid, rguidprofile, bstrregistered)
+  end
+end
+struct LibWin32::ITfFnConfigureRegisterEudc
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def show(hwndparent : LibC::HANDLE, langid : UInt16, rguidprofile : Guid*, bstrregistered : UInt8*) : HRESULT
+    @lpVtbl.value.show.unsafe_as(Proc(LibC::HANDLE, UInt16, Guid*, UInt8*, HRESULT)).call(hwndparent, langid, rguidprofile, bstrregistered)
+  end
+end
+struct LibWin32::ITfFnShowHelp
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def show(hwndparent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.show.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwndparent)
+  end
+end
+struct LibWin32::ITfFnBalloon
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def update_balloon(style : TfLBBalloonStyle, pch : Char*, cch : UInt32) : HRESULT
+    @lpVtbl.value.update_balloon.unsafe_as(Proc(TfLBBalloonStyle, Char*, UInt32, HRESULT)).call(style, pch, cch)
+  end
+end
+struct LibWin32::ITfFnGetSAPIObject
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def get(sobj : TfSapiObject, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get.unsafe_as(Proc(TfSapiObject, IUnknown*, HRESULT)).call(sobj, ppunk)
+  end
+end
+struct LibWin32::ITfFnPropertyUIStatus
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def get_status(refguidprop : Guid*, pdw : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(Guid*, UInt32*, HRESULT)).call(refguidprop, pdw)
+  end
+  def set_status(refguidprop : Guid*, dw : UInt32) : HRESULT
+    @lpVtbl.value.set_status.unsafe_as(Proc(Guid*, UInt32, HRESULT)).call(refguidprop, dw)
+  end
+end
+struct LibWin32::IEnumSpeechCommands
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumSpeechCommands*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumSpeechCommands*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, pspcmds : UInt16**, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, UInt16**, UInt32*, HRESULT)).call(ulcount, pspcmds, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::ISpeechCommandProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enum_speech_commands(langid : UInt16, ppenum : IEnumSpeechCommands*) : HRESULT
+    @lpVtbl.value.enum_speech_commands.unsafe_as(Proc(UInt16, IEnumSpeechCommands*, HRESULT)).call(langid, ppenum)
+  end
+  def process_command(pszcommand : Char*, cch : UInt32, langid : UInt16) : HRESULT
+    @lpVtbl.value.process_command.unsafe_as(Proc(Char*, UInt32, UInt16, HRESULT)).call(pszcommand, cch, langid)
+  end
+end
+struct LibWin32::ITfFnCustomSpeechCommand
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def set_speech_command_provider(pspcmdprovider : IUnknown) : HRESULT
+    @lpVtbl.value.set_speech_command_provider.unsafe_as(Proc(IUnknown, HRESULT)).call(pspcmdprovider)
+  end
+end
+struct LibWin32::ITfFnLMProcessor
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def query_range(prange : ITfRange, ppnewrange : ITfRange*, pfaccepted : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_range.unsafe_as(Proc(ITfRange, ITfRange*, LibC::BOOL*, HRESULT)).call(prange, ppnewrange, pfaccepted)
+  end
+  def query_lang_id(langid : UInt16, pfaccepted : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_lang_id.unsafe_as(Proc(UInt16, LibC::BOOL*, HRESULT)).call(langid, pfaccepted)
+  end
+  def get_reconversion(prange : ITfRange, ppcandlist : ITfCandidateList*) : HRESULT
+    @lpVtbl.value.get_reconversion.unsafe_as(Proc(ITfRange, ITfCandidateList*, HRESULT)).call(prange, ppcandlist)
+  end
+  def reconvert(prange : ITfRange) : HRESULT
+    @lpVtbl.value.reconvert.unsafe_as(Proc(ITfRange, HRESULT)).call(prange)
+  end
+  def query_key(fup : LibC::BOOL, vkey : LibC::UINT_PTR, lparamkeydata : LPARAM, pfinterested : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_key.unsafe_as(Proc(LibC::BOOL, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)).call(fup, vkey, lparamkeydata, pfinterested)
+  end
+  def invoke_key(fup : LibC::BOOL, vkey : LibC::UINT_PTR, lparamkeydata : LPARAM) : HRESULT
+    @lpVtbl.value.invoke_key.unsafe_as(Proc(LibC::BOOL, LibC::UINT_PTR, LPARAM, HRESULT)).call(fup, vkey, lparamkeydata)
+  end
+  def invoke_func(pic : ITfContext, refguidfunc : Guid*) : HRESULT
+    @lpVtbl.value.invoke_func.unsafe_as(Proc(ITfContext, Guid*, HRESULT)).call(pic, refguidfunc)
+  end
+end
+struct LibWin32::ITfFnLMInternal
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def query_range(prange : ITfRange, ppnewrange : ITfRange*, pfaccepted : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_range.unsafe_as(Proc(ITfRange, ITfRange*, LibC::BOOL*, HRESULT)).call(prange, ppnewrange, pfaccepted)
+  end
+  def query_lang_id(langid : UInt16, pfaccepted : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_lang_id.unsafe_as(Proc(UInt16, LibC::BOOL*, HRESULT)).call(langid, pfaccepted)
+  end
+  def get_reconversion(prange : ITfRange, ppcandlist : ITfCandidateList*) : HRESULT
+    @lpVtbl.value.get_reconversion.unsafe_as(Proc(ITfRange, ITfCandidateList*, HRESULT)).call(prange, ppcandlist)
+  end
+  def reconvert(prange : ITfRange) : HRESULT
+    @lpVtbl.value.reconvert.unsafe_as(Proc(ITfRange, HRESULT)).call(prange)
+  end
+  def query_key(fup : LibC::BOOL, vkey : LibC::UINT_PTR, lparamkeydata : LPARAM, pfinterested : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_key.unsafe_as(Proc(LibC::BOOL, LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)).call(fup, vkey, lparamkeydata, pfinterested)
+  end
+  def invoke_key(fup : LibC::BOOL, vkey : LibC::UINT_PTR, lparamkeydata : LPARAM) : HRESULT
+    @lpVtbl.value.invoke_key.unsafe_as(Proc(LibC::BOOL, LibC::UINT_PTR, LPARAM, HRESULT)).call(fup, vkey, lparamkeydata)
+  end
+  def invoke_func(pic : ITfContext, refguidfunc : Guid*) : HRESULT
+    @lpVtbl.value.invoke_func.unsafe_as(Proc(ITfContext, Guid*, HRESULT)).call(pic, refguidfunc)
+  end
+  def process_lattice(prange : ITfRange) : HRESULT
+    @lpVtbl.value.process_lattice.unsafe_as(Proc(ITfRange, HRESULT)).call(prange)
+  end
+end
+struct LibWin32::IEnumTfLatticeElements
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumTfLatticeElements*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumTfLatticeElements*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, rgselements : TF_LMLATTELEMENT*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, TF_LMLATTELEMENT*, UInt32*, HRESULT)).call(ulcount, rgselements, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::ITfLMLattice
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def query_type(rguidtype : Guid*, pfsupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.query_type.unsafe_as(Proc(Guid*, LibC::BOOL*, HRESULT)).call(rguidtype, pfsupported)
+  end
+  def enum_lattice_elements(dwframestart : UInt32, rguidtype : Guid*, ppenum : IEnumTfLatticeElements*) : HRESULT
+    @lpVtbl.value.enum_lattice_elements.unsafe_as(Proc(UInt32, Guid*, IEnumTfLatticeElements*, HRESULT)).call(dwframestart, rguidtype, ppenum)
+  end
+end
+struct LibWin32::ITfFnAdviseText
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def on_text_update(prange : ITfRange, pchtext : Char*, cch : Int32) : HRESULT
+    @lpVtbl.value.on_text_update.unsafe_as(Proc(ITfRange, Char*, Int32, HRESULT)).call(prange, pchtext, cch)
+  end
+  def on_lattice_update(prange : ITfRange, plattice : ITfLMLattice) : HRESULT
+    @lpVtbl.value.on_lattice_update.unsafe_as(Proc(ITfRange, ITfLMLattice, HRESULT)).call(prange, plattice)
+  end
+end
+struct LibWin32::ITfFnSearchCandidateProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def get_search_candidates(bstrquery : UInt8*, bstrapplicationid : UInt8*, pplist : ITfCandidateList*) : HRESULT
+    @lpVtbl.value.get_search_candidates.unsafe_as(Proc(UInt8*, UInt8*, ITfCandidateList*, HRESULT)).call(bstrquery, bstrapplicationid, pplist)
+  end
+  def set_result(bstrquery : UInt8*, bstrapplicationid : UInt8*, bstrresult : UInt8*) : HRESULT
+    @lpVtbl.value.set_result.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, HRESULT)).call(bstrquery, bstrapplicationid, bstrresult)
+  end
+end
+struct LibWin32::ITfIntegratableCandidateListUIElement
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_integration_style(guidintegrationstyle : Guid) : HRESULT
+    @lpVtbl.value.set_integration_style.unsafe_as(Proc(Guid, HRESULT)).call(guidintegrationstyle)
+  end
+  def get_selection_style(ptfselectionstyle : TfIntegratableCandidateListSelectionStyle*) : HRESULT
+    @lpVtbl.value.get_selection_style.unsafe_as(Proc(TfIntegratableCandidateListSelectionStyle*, HRESULT)).call(ptfselectionstyle)
+  end
+  def on_key_down(wparam : LibC::UINT_PTR, lparam : LPARAM, pfeaten : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_key_down.unsafe_as(Proc(LibC::UINT_PTR, LPARAM, LibC::BOOL*, HRESULT)).call(wparam, lparam, pfeaten)
+  end
+  def show_candidate_numbers(pfshow : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.show_candidate_numbers.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfshow)
+  end
+  def finalize_exact_composition_string : HRESULT
+    @lpVtbl.value.finalize_exact_composition_string.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITfFnGetPreferredTouchKeyboardLayout
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def get_layout(ptkblayouttype : TKBLayoutType*, pwpreferredlayoutid : UInt16*) : HRESULT
+    @lpVtbl.value.get_layout.unsafe_as(Proc(TKBLayoutType*, UInt16*, HRESULT)).call(ptkblayouttype, pwpreferredlayoutid)
+  end
+end
+struct LibWin32::ITfFnGetLinguisticAlternates
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_display_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def get_alternates(prange : ITfRange, ppcandidatelist : ITfCandidateList*) : HRESULT
+    @lpVtbl.value.get_alternates.unsafe_as(Proc(ITfRange, ITfCandidateList*, HRESULT)).call(prange, ppcandidatelist)
+  end
+end
+struct LibWin32::IUIManagerEventSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_window_opening(prcbounds : RECT*) : HRESULT
+    @lpVtbl.value.on_window_opening.unsafe_as(Proc(RECT*, HRESULT)).call(prcbounds)
+  end
+  def on_window_opened(prcbounds : RECT*) : HRESULT
+    @lpVtbl.value.on_window_opened.unsafe_as(Proc(RECT*, HRESULT)).call(prcbounds)
+  end
+  def on_window_updating(prcupdatedbounds : RECT*) : HRESULT
+    @lpVtbl.value.on_window_updating.unsafe_as(Proc(RECT*, HRESULT)).call(prcupdatedbounds)
+  end
+  def on_window_updated(prcupdatedbounds : RECT*) : HRESULT
+    @lpVtbl.value.on_window_updated.unsafe_as(Proc(RECT*, HRESULT)).call(prcupdatedbounds)
+  end
+  def on_window_closing : HRESULT
+    @lpVtbl.value.on_window_closing.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_window_closed : HRESULT
+    @lpVtbl.value.on_window_closed.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITfInputScope
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_input_scopes(pprginputscopes : InputScope**, pccount : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_scopes.unsafe_as(Proc(InputScope**, UInt32*, HRESULT)).call(pprginputscopes, pccount)
+  end
+  def get_phrase(ppbstrphrases : UInt8***, pccount : UInt32*) : HRESULT
+    @lpVtbl.value.get_phrase.unsafe_as(Proc(UInt8***, UInt32*, HRESULT)).call(ppbstrphrases, pccount)
+  end
+  def get_regular_expression(pbstrregexp : UInt8**) : HRESULT
+    @lpVtbl.value.get_regular_expression.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrregexp)
+  end
+  def get_srgs(pbstrsrgs : UInt8**) : HRESULT
+    @lpVtbl.value.get_srgs.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsrgs)
+  end
+  def get_xml(pbstrxml : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrxml)
+  end
+end
+struct LibWin32::ITfInputScope2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_input_scopes(pprginputscopes : InputScope**, pccount : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_scopes.unsafe_as(Proc(InputScope**, UInt32*, HRESULT)).call(pprginputscopes, pccount)
+  end
+  def get_phrase(ppbstrphrases : UInt8***, pccount : UInt32*) : HRESULT
+    @lpVtbl.value.get_phrase.unsafe_as(Proc(UInt8***, UInt32*, HRESULT)).call(ppbstrphrases, pccount)
+  end
+  def get_regular_expression(pbstrregexp : UInt8**) : HRESULT
+    @lpVtbl.value.get_regular_expression.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrregexp)
+  end
+  def get_srgs(pbstrsrgs : UInt8**) : HRESULT
+    @lpVtbl.value.get_srgs.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsrgs)
+  end
+  def get_xml(pbstrxml : UInt8**) : HRESULT
+    @lpVtbl.value.get_xml.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrxml)
+  end
+  def enum_word_list(ppenumstring : IEnumString*) : HRESULT
+    @lpVtbl.value.enum_word_list.unsafe_as(Proc(IEnumString*, HRESULT)).call(ppenumstring)
+  end
+end
+struct LibWin32::ITfMSAAControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def system_enable_msaa : HRESULT
+    @lpVtbl.value.system_enable_msaa.unsafe_as(Proc(HRESULT)).call
+  end
+  def system_disable_msaa : HRESULT
+    @lpVtbl.value.system_disable_msaa.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IInternalDocWrap
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def notify_revoke : HRESULT
+    @lpVtbl.value.notify_revoke.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITextStoreACPEx
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def scroll_to_rect(acpstart : Int32, acpend : Int32, rc : RECT, dwposition : UInt32) : HRESULT
+    @lpVtbl.value.scroll_to_rect.unsafe_as(Proc(Int32, Int32, RECT, UInt32, HRESULT)).call(acpstart, acpend, rc, dwposition)
+  end
+end
+struct LibWin32::ITextStoreAnchorEx
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def scroll_to_rect(pstart : IAnchor, pend : IAnchor, rc : RECT, dwposition : UInt32) : HRESULT
+    @lpVtbl.value.scroll_to_rect.unsafe_as(Proc(IAnchor, IAnchor, RECT, UInt32, HRESULT)).call(pstart, pend, rc, dwposition)
+  end
+end
+struct LibWin32::ITextStoreACPSinkEx
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_text_change(dwflags : TEXT_STORE_TEXT_CHANGE_FLAGS, pchange : TS_TEXTCHANGE*) : HRESULT
+    @lpVtbl.value.on_text_change.unsafe_as(Proc(TEXT_STORE_TEXT_CHANGE_FLAGS, TS_TEXTCHANGE*, HRESULT)).call(dwflags, pchange)
+  end
+  def on_selection_change : HRESULT
+    @lpVtbl.value.on_selection_change.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_layout_change(lcode : TsLayoutCode, vcview : UInt32) : HRESULT
+    @lpVtbl.value.on_layout_change.unsafe_as(Proc(TsLayoutCode, UInt32, HRESULT)).call(lcode, vcview)
+  end
+  def on_status_change(dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_status_change.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  end
+  def on_attrs_change(acpstart : Int32, acpend : Int32, cattrs : UInt32, paattrs : Guid*) : HRESULT
+    @lpVtbl.value.on_attrs_change.unsafe_as(Proc(Int32, Int32, UInt32, Guid*, HRESULT)).call(acpstart, acpend, cattrs, paattrs)
+  end
+  def on_lock_granted(dwlockflags : TEXT_STORE_LOCK_FLAGS) : HRESULT
+    @lpVtbl.value.on_lock_granted.unsafe_as(Proc(TEXT_STORE_LOCK_FLAGS, HRESULT)).call(dwlockflags)
+  end
+  def on_start_edit_transaction : HRESULT
+    @lpVtbl.value.on_start_edit_transaction.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_end_edit_transaction : HRESULT
+    @lpVtbl.value.on_end_edit_transaction.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_disconnect : HRESULT
+    @lpVtbl.value.on_disconnect.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITextStoreSinkAnchorEx
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_text_change(dwflags : TEXT_STORE_CHANGE_FLAGS, pastart : IAnchor, paend : IAnchor) : HRESULT
+    @lpVtbl.value.on_text_change.unsafe_as(Proc(TEXT_STORE_CHANGE_FLAGS, IAnchor, IAnchor, HRESULT)).call(dwflags, pastart, paend)
+  end
+  def on_selection_change : HRESULT
+    @lpVtbl.value.on_selection_change.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_layout_change(lcode : TsLayoutCode, vcview : UInt32) : HRESULT
+    @lpVtbl.value.on_layout_change.unsafe_as(Proc(TsLayoutCode, UInt32, HRESULT)).call(lcode, vcview)
+  end
+  def on_status_change(dwflags : UInt32) : HRESULT
+    @lpVtbl.value.on_status_change.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  end
+  def on_attrs_change(pastart : IAnchor, paend : IAnchor, cattrs : UInt32, paattrs : Guid*) : HRESULT
+    @lpVtbl.value.on_attrs_change.unsafe_as(Proc(IAnchor, IAnchor, UInt32, Guid*, HRESULT)).call(pastart, paend, cattrs, paattrs)
+  end
+  def on_lock_granted(dwlockflags : TEXT_STORE_LOCK_FLAGS) : HRESULT
+    @lpVtbl.value.on_lock_granted.unsafe_as(Proc(TEXT_STORE_LOCK_FLAGS, HRESULT)).call(dwlockflags)
+  end
+  def on_start_edit_transaction : HRESULT
+    @lpVtbl.value.on_start_edit_transaction.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_end_edit_transaction : HRESULT
+    @lpVtbl.value.on_end_edit_transaction.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_disconnect : HRESULT
+    @lpVtbl.value.on_disconnect.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IAccDictionary
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_localized_string(term : Guid*, lcid : UInt32, presult : UInt8**, plcid : UInt32*) : HRESULT
+    @lpVtbl.value.get_localized_string.unsafe_as(Proc(Guid*, UInt32, UInt8**, UInt32*, HRESULT)).call(term, lcid, presult, plcid)
+  end
+  def get_parent_term(term : Guid*, pparentterm : Guid*) : HRESULT
+    @lpVtbl.value.get_parent_term.unsafe_as(Proc(Guid*, Guid*, HRESULT)).call(term, pparentterm)
+  end
+  def get_mnemonic_string(term : Guid*, presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_mnemonic_string.unsafe_as(Proc(Guid*, UInt8**, HRESULT)).call(term, presult)
+  end
+  def lookup_mnemonic_term(bstrmnemonic : UInt8*, pterm : Guid*) : HRESULT
+    @lpVtbl.value.lookup_mnemonic_term.unsafe_as(Proc(UInt8*, Guid*, HRESULT)).call(bstrmnemonic, pterm)
+  end
+  def convert_value_to_string(term : Guid*, lcid : UInt32, varvalue : VARIANT, pbstrresult : UInt8**, plcid : UInt32*) : HRESULT
+    @lpVtbl.value.convert_value_to_string.unsafe_as(Proc(Guid*, UInt32, VARIANT, UInt8**, UInt32*, HRESULT)).call(term, lcid, varvalue, pbstrresult, plcid)
+  end
+end
+struct LibWin32::IVersionInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_subcomponent_count(ulsub : UInt32, ulcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_subcomponent_count.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(ulsub, ulcount)
+  end
+  def get_implementation_id(ulsub : UInt32, implid : Guid*) : HRESULT
+    @lpVtbl.value.get_implementation_id.unsafe_as(Proc(UInt32, Guid*, HRESULT)).call(ulsub, implid)
+  end
+  def get_build_version(ulsub : UInt32, pdwmajor : UInt32*, pdwminor : UInt32*) : HRESULT
+    @lpVtbl.value.get_build_version.unsafe_as(Proc(UInt32, UInt32*, UInt32*, HRESULT)).call(ulsub, pdwmajor, pdwminor)
+  end
+  def get_component_description(ulsub : UInt32, pimplstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_component_description.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(ulsub, pimplstr)
+  end
+  def get_instance_description(ulsub : UInt32, pimplstr : UInt8**) : HRESULT
+    @lpVtbl.value.get_instance_description.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(ulsub, pimplstr)
+  end
+end
+struct LibWin32::ICoCreateLocally
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def co_create_locally(rclsid : Guid*, dwclscontext : UInt32, riid : Guid*, punk : IUnknown*, riidparam : Guid*, punkparam : IUnknown, varparam : VARIANT) : HRESULT
+    @lpVtbl.value.co_create_locally.unsafe_as(Proc(Guid*, UInt32, Guid*, IUnknown*, Guid*, IUnknown, VARIANT, HRESULT)).call(rclsid, dwclscontext, riid, punk, riidparam, punkparam, varparam)
+  end
+end
+struct LibWin32::ICoCreatedLocally
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def local_init(punklocalobject : IUnknown, riidparam : Guid*, punkparam : IUnknown, varparam : VARIANT) : HRESULT
+    @lpVtbl.value.local_init.unsafe_as(Proc(IUnknown, Guid*, IUnknown, VARIANT, HRESULT)).call(punklocalobject, riidparam, punkparam, varparam)
+  end
+end
+struct LibWin32::IAccStore
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def register(riid : Guid*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.register.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(riid, punk)
+  end
+  def unregister(punk : IUnknown) : HRESULT
+    @lpVtbl.value.unregister.unsafe_as(Proc(IUnknown, HRESULT)).call(punk)
+  end
+  def get_documents(enumunknown : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.get_documents.unsafe_as(Proc(IEnumUnknown*, HRESULT)).call(enumunknown)
+  end
+  def lookup_by_hwnd(hwnd : LibC::HANDLE, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.lookup_by_hwnd.unsafe_as(Proc(LibC::HANDLE, Guid*, IUnknown*, HRESULT)).call(hwnd, riid, ppunk)
+  end
+  def lookup_by_point(pt : POINT, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.lookup_by_point.unsafe_as(Proc(POINT, Guid*, IUnknown*, HRESULT)).call(pt, riid, ppunk)
+  end
+  def on_document_focus(punk : IUnknown) : HRESULT
+    @lpVtbl.value.on_document_focus.unsafe_as(Proc(IUnknown, HRESULT)).call(punk)
+  end
+  def get_focused(riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_focused.unsafe_as(Proc(Guid*, IUnknown*, HRESULT)).call(riid, ppunk)
+  end
+end
+struct LibWin32::IAccServerDocMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def new_document(riid : Guid*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.new_document.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(riid, punk)
+  end
+  def revoke_document(punk : IUnknown) : HRESULT
+    @lpVtbl.value.revoke_document.unsafe_as(Proc(IUnknown, HRESULT)).call(punk)
+  end
+  def on_document_focus(punk : IUnknown) : HRESULT
+    @lpVtbl.value.on_document_focus.unsafe_as(Proc(IUnknown, HRESULT)).call(punk)
+  end
+end
+struct LibWin32::IAccClientDocMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_documents(enumunknown : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.get_documents.unsafe_as(Proc(IEnumUnknown*, HRESULT)).call(enumunknown)
+  end
+  def lookup_by_hwnd(hwnd : LibC::HANDLE, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.lookup_by_hwnd.unsafe_as(Proc(LibC::HANDLE, Guid*, IUnknown*, HRESULT)).call(hwnd, riid, ppunk)
+  end
+  def lookup_by_point(pt : POINT, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.lookup_by_point.unsafe_as(Proc(POINT, Guid*, IUnknown*, HRESULT)).call(pt, riid, ppunk)
+  end
+  def get_focused(riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_focused.unsafe_as(Proc(Guid*, IUnknown*, HRESULT)).call(riid, ppunk)
+  end
+end
+struct LibWin32::IDocWrap
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_doc(riid : Guid*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.set_doc.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(riid, punk)
+  end
+  def get_wrapped_doc(riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_wrapped_doc.unsafe_as(Proc(Guid*, IUnknown*, HRESULT)).call(riid, ppunk)
+  end
+end
+struct LibWin32::IClonableWrapper
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone_new_wrapper(riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.clone_new_wrapper.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  end
+end
+struct LibWin32::ITfSpeechUIServer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HRESULT)).call
+  end
+  def show_ui(fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show_ui.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fshow)
+  end
+  def update_balloon(style : TfLBBalloonStyle, pch : Char*, cch : UInt32) : HRESULT
+    @lpVtbl.value.update_balloon.unsafe_as(Proc(TfLBBalloonStyle, Char*, UInt32, HRESULT)).call(style, pch, cch)
+  end
 end

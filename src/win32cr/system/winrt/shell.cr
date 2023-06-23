@@ -19,10 +19,10 @@ lib LibWin32
 
 
   struct IDDEInitializerVTbl
-    query_interface : Proc(IDDEInitializer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDDEInitializer*, UInt32)
-    release : Proc(IDDEInitializer*, UInt32)
-    initialize : Proc(IDDEInitializer*, LibC::LPWSTR, CreateProcessMethod, LibC::LPWSTR, IShellItem, IUnknown, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
   end
 
   IDDEInitializer_GUID = "30dc931f-33fc-4ffd-a168-942258cf3ca4"
@@ -31,4 +31,18 @@ lib LibWin32
     lpVtbl : IDDEInitializerVTbl*
   end
 
+end
+struct LibWin32::IDDEInitializer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(fileextensionorprotocol : LibC::LPWSTR, method : CreateProcessMethod, currentdirectory : LibC::LPWSTR, exectarget : IShellItem, site : IUnknown, application : LibC::LPWSTR, targetfile : LibC::LPWSTR, arguments : LibC::LPWSTR, verb : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(LibC::LPWSTR, CreateProcessMethod, LibC::LPWSTR, IShellItem, IUnknown, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(fileextensionorprotocol, method, currentdirectory, exectarget, site, application, targetfile, arguments, verb)
+  end
 end

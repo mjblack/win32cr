@@ -130,7 +130,7 @@ lib LibWin32
   fun WcmSetProfileList(pprofilelist : WCM_PROFILE_INFO_LIST*, dwposition : UInt32, fignoreunknownprofiles : LibC::BOOL, preserved : Void*) : UInt32
 
   # Params # pmemory : Void* [In]
-  fun WcmFreeMemory(pmemory : Void*)
+  fun WcmFreeMemory(pmemory : Void*) : Void
 
   # Params # destinationhostname : LibC::LPWSTR [In],interfaceindex : UInt32* [In]
   fun OnDemandGetRoutingHint(destinationhostname : LibC::LPWSTR, interfaceindex : UInt32*) : HRESULT
@@ -145,5 +145,5 @@ lib LibWin32
   fun GetInterfaceContextTableForHostName(hostname : LibC::LPWSTR, proxyname : LibC::LPWSTR, flags : UInt32, connectionprofilefilterrawdata : UInt8*, connectionprofilefilterrawdatasize : UInt32, interfacecontexttable : NET_INTERFACE_CONTEXT_TABLE**) : HRESULT
 
   # Params # interfacecontexttable : NET_INTERFACE_CONTEXT_TABLE* [In]
-  fun FreeInterfaceContextTable(interfacecontexttable : NET_INTERFACE_CONTEXT_TABLE*)
+  fun FreeInterfaceContextTable(interfacecontexttable : NET_INTERFACE_CONTEXT_TABLE*) : Void
 end

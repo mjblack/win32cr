@@ -403,12 +403,12 @@ lib LibWin32
 
 
   struct IBackgroundCopyFileVTbl
-    query_interface : Proc(IBackgroundCopyFile*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyFile*, UInt32)
-    release : Proc(IBackgroundCopyFile*, UInt32)
-    get_remote_name : Proc(IBackgroundCopyFile*, LibC::LPWSTR*, HRESULT)
-    get_local_name : Proc(IBackgroundCopyFile*, LibC::LPWSTR*, HRESULT)
-    get_progress : Proc(IBackgroundCopyFile*, BG_FILE_PROGRESS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_remote_name : UInt64
+    get_local_name : UInt64
+    get_progress : UInt64
   end
 
   IBackgroundCopyFile_GUID = "01b7bd23-fb88-4a77-8490-5891d3e4653a"
@@ -418,14 +418,14 @@ lib LibWin32
   end
 
   struct IEnumBackgroundCopyFilesVTbl
-    query_interface : Proc(IEnumBackgroundCopyFiles*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumBackgroundCopyFiles*, UInt32)
-    release : Proc(IEnumBackgroundCopyFiles*, UInt32)
-    next : Proc(IEnumBackgroundCopyFiles*, UInt32, IBackgroundCopyFile*, UInt32*, HRESULT)
-    skip : Proc(IEnumBackgroundCopyFiles*, UInt32, HRESULT)
-    reset : Proc(IEnumBackgroundCopyFiles*, HRESULT)
-    clone : Proc(IEnumBackgroundCopyFiles*, IEnumBackgroundCopyFiles*, HRESULT)
-    get_count : Proc(IEnumBackgroundCopyFiles*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
+    get_count : UInt64
   end
 
   IEnumBackgroundCopyFiles_GUID = "ca51e165-c365-424c-8d41-24aaa4ff3c40"
@@ -435,14 +435,14 @@ lib LibWin32
   end
 
   struct IBackgroundCopyErrorVTbl
-    query_interface : Proc(IBackgroundCopyError*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyError*, UInt32)
-    release : Proc(IBackgroundCopyError*, UInt32)
-    get_error : Proc(IBackgroundCopyError*, BG_ERROR_CONTEXT*, HRESULT*, HRESULT)
-    get_file : Proc(IBackgroundCopyError*, IBackgroundCopyFile*, HRESULT)
-    get_error_description : Proc(IBackgroundCopyError*, UInt32, LibC::LPWSTR*, HRESULT)
-    get_error_context_description : Proc(IBackgroundCopyError*, UInt32, LibC::LPWSTR*, HRESULT)
-    get_protocol : Proc(IBackgroundCopyError*, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_error : UInt64
+    get_file : UInt64
+    get_error_description : UInt64
+    get_error_context_description : UInt64
+    get_protocol : UInt64
   end
 
   IBackgroundCopyError_GUID = "19c613a0-fcb8-4f28-81ae-897c3d078f81"
@@ -452,41 +452,41 @@ lib LibWin32
   end
 
   struct IBackgroundCopyJobVTbl
-    query_interface : Proc(IBackgroundCopyJob*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyJob*, UInt32)
-    release : Proc(IBackgroundCopyJob*, UInt32)
-    add_file_set : Proc(IBackgroundCopyJob*, UInt32, BG_FILE_INFO*, HRESULT)
-    add_file : Proc(IBackgroundCopyJob*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    enum_files : Proc(IBackgroundCopyJob*, IEnumBackgroundCopyFiles*, HRESULT)
-    suspend : Proc(IBackgroundCopyJob*, HRESULT)
-    resume : Proc(IBackgroundCopyJob*, HRESULT)
-    cancel : Proc(IBackgroundCopyJob*, HRESULT)
-    complete : Proc(IBackgroundCopyJob*, HRESULT)
-    get_id : Proc(IBackgroundCopyJob*, Guid*, HRESULT)
-    get_type : Proc(IBackgroundCopyJob*, BG_JOB_TYPE*, HRESULT)
-    get_progress : Proc(IBackgroundCopyJob*, BG_JOB_PROGRESS*, HRESULT)
-    get_times : Proc(IBackgroundCopyJob*, BG_JOB_TIMES*, HRESULT)
-    get_state : Proc(IBackgroundCopyJob*, BG_JOB_STATE*, HRESULT)
-    get_error : Proc(IBackgroundCopyJob*, IBackgroundCopyError*, HRESULT)
-    get_owner : Proc(IBackgroundCopyJob*, LibC::LPWSTR*, HRESULT)
-    set_display_name : Proc(IBackgroundCopyJob*, LibC::LPWSTR, HRESULT)
-    get_display_name : Proc(IBackgroundCopyJob*, LibC::LPWSTR*, HRESULT)
-    set_description : Proc(IBackgroundCopyJob*, LibC::LPWSTR, HRESULT)
-    get_description : Proc(IBackgroundCopyJob*, LibC::LPWSTR*, HRESULT)
-    set_priority : Proc(IBackgroundCopyJob*, BG_JOB_PRIORITY, HRESULT)
-    get_priority : Proc(IBackgroundCopyJob*, BG_JOB_PRIORITY*, HRESULT)
-    set_notify_flags : Proc(IBackgroundCopyJob*, UInt32, HRESULT)
-    get_notify_flags : Proc(IBackgroundCopyJob*, UInt32*, HRESULT)
-    set_notify_interface : Proc(IBackgroundCopyJob*, IUnknown, HRESULT)
-    get_notify_interface : Proc(IBackgroundCopyJob*, IUnknown*, HRESULT)
-    set_minimum_retry_delay : Proc(IBackgroundCopyJob*, UInt32, HRESULT)
-    get_minimum_retry_delay : Proc(IBackgroundCopyJob*, UInt32*, HRESULT)
-    set_no_progress_timeout : Proc(IBackgroundCopyJob*, UInt32, HRESULT)
-    get_no_progress_timeout : Proc(IBackgroundCopyJob*, UInt32*, HRESULT)
-    get_error_count : Proc(IBackgroundCopyJob*, UInt32*, HRESULT)
-    set_proxy_settings : Proc(IBackgroundCopyJob*, BG_JOB_PROXY_USAGE, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_proxy_settings : Proc(IBackgroundCopyJob*, BG_JOB_PROXY_USAGE*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
-    take_ownership : Proc(IBackgroundCopyJob*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_file_set : UInt64
+    add_file : UInt64
+    enum_files : UInt64
+    suspend : UInt64
+    resume : UInt64
+    cancel : UInt64
+    complete : UInt64
+    get_id : UInt64
+    get_type : UInt64
+    get_progress : UInt64
+    get_times : UInt64
+    get_state : UInt64
+    get_error : UInt64
+    get_owner : UInt64
+    set_display_name : UInt64
+    get_display_name : UInt64
+    set_description : UInt64
+    get_description : UInt64
+    set_priority : UInt64
+    get_priority : UInt64
+    set_notify_flags : UInt64
+    get_notify_flags : UInt64
+    set_notify_interface : UInt64
+    get_notify_interface : UInt64
+    set_minimum_retry_delay : UInt64
+    get_minimum_retry_delay : UInt64
+    set_no_progress_timeout : UInt64
+    get_no_progress_timeout : UInt64
+    get_error_count : UInt64
+    set_proxy_settings : UInt64
+    get_proxy_settings : UInt64
+    take_ownership : UInt64
   end
 
   IBackgroundCopyJob_GUID = "37668d37-507e-4160-9316-26306d150b12"
@@ -496,14 +496,14 @@ lib LibWin32
   end
 
   struct IEnumBackgroundCopyJobsVTbl
-    query_interface : Proc(IEnumBackgroundCopyJobs*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumBackgroundCopyJobs*, UInt32)
-    release : Proc(IEnumBackgroundCopyJobs*, UInt32)
-    next : Proc(IEnumBackgroundCopyJobs*, UInt32, IBackgroundCopyJob*, UInt32*, HRESULT)
-    skip : Proc(IEnumBackgroundCopyJobs*, UInt32, HRESULT)
-    reset : Proc(IEnumBackgroundCopyJobs*, HRESULT)
-    clone : Proc(IEnumBackgroundCopyJobs*, IEnumBackgroundCopyJobs*, HRESULT)
-    get_count : Proc(IEnumBackgroundCopyJobs*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
+    get_count : UInt64
   end
 
   IEnumBackgroundCopyJobs_GUID = "1af4f612-3b71-466f-8f58-7b6f73ac57ad"
@@ -513,12 +513,12 @@ lib LibWin32
   end
 
   struct IBackgroundCopyCallbackVTbl
-    query_interface : Proc(IBackgroundCopyCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyCallback*, UInt32)
-    release : Proc(IBackgroundCopyCallback*, UInt32)
-    job_transferred : Proc(IBackgroundCopyCallback*, IBackgroundCopyJob, HRESULT)
-    job_error : Proc(IBackgroundCopyCallback*, IBackgroundCopyJob, IBackgroundCopyError, HRESULT)
-    job_modification : Proc(IBackgroundCopyCallback*, IBackgroundCopyJob, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    job_transferred : UInt64
+    job_error : UInt64
+    job_modification : UInt64
   end
 
   IBackgroundCopyCallback_GUID = "97ea99c7-0186-4ad4-8df9-c5b4e0ed6b22"
@@ -528,15 +528,15 @@ lib LibWin32
   end
 
   struct AsyncIBackgroundCopyCallbackVTbl
-    query_interface : Proc(AsyncIBackgroundCopyCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AsyncIBackgroundCopyCallback*, UInt32)
-    release : Proc(AsyncIBackgroundCopyCallback*, UInt32)
-    begin_job_transferred : Proc(AsyncIBackgroundCopyCallback*, IBackgroundCopyJob, HRESULT)
-    finish_job_transferred : Proc(AsyncIBackgroundCopyCallback*, HRESULT)
-    begin_job_error : Proc(AsyncIBackgroundCopyCallback*, IBackgroundCopyJob, IBackgroundCopyError, HRESULT)
-    finish_job_error : Proc(AsyncIBackgroundCopyCallback*, HRESULT)
-    begin_job_modification : Proc(AsyncIBackgroundCopyCallback*, IBackgroundCopyJob, UInt32, HRESULT)
-    finish_job_modification : Proc(AsyncIBackgroundCopyCallback*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_job_transferred : UInt64
+    finish_job_transferred : UInt64
+    begin_job_error : UInt64
+    finish_job_error : UInt64
+    begin_job_modification : UInt64
+    finish_job_modification : UInt64
   end
 
   AsyncIBackgroundCopyCallback_GUID = "ca29d251-b4bb-4679-a3d9-ae8006119d54"
@@ -546,13 +546,13 @@ lib LibWin32
   end
 
   struct IBackgroundCopyManagerVTbl
-    query_interface : Proc(IBackgroundCopyManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyManager*, UInt32)
-    release : Proc(IBackgroundCopyManager*, UInt32)
-    create_job : Proc(IBackgroundCopyManager*, LibC::LPWSTR, BG_JOB_TYPE, Guid*, IBackgroundCopyJob*, HRESULT)
-    get_job : Proc(IBackgroundCopyManager*, Guid*, IBackgroundCopyJob*, HRESULT)
-    enum_jobs : Proc(IBackgroundCopyManager*, UInt32, IEnumBackgroundCopyJobs*, HRESULT)
-    get_error_description : Proc(IBackgroundCopyManager*, HRESULT, UInt32, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_job : UInt64
+    get_job : UInt64
+    enum_jobs : UInt64
+    get_error_description : UInt64
   end
 
   IBackgroundCopyManager_GUID = "5ce34c0d-0dc9-4c1f-897c-daa1b78cee7c"
@@ -562,49 +562,49 @@ lib LibWin32
   end
 
   struct IBackgroundCopyJob2VTbl
-    query_interface : Proc(IBackgroundCopyJob2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyJob2*, UInt32)
-    release : Proc(IBackgroundCopyJob2*, UInt32)
-    add_file_set : Proc(IBackgroundCopyJob2*, UInt32, BG_FILE_INFO*, HRESULT)
-    add_file : Proc(IBackgroundCopyJob2*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    enum_files : Proc(IBackgroundCopyJob2*, IEnumBackgroundCopyFiles*, HRESULT)
-    suspend : Proc(IBackgroundCopyJob2*, HRESULT)
-    resume : Proc(IBackgroundCopyJob2*, HRESULT)
-    cancel : Proc(IBackgroundCopyJob2*, HRESULT)
-    complete : Proc(IBackgroundCopyJob2*, HRESULT)
-    get_id : Proc(IBackgroundCopyJob2*, Guid*, HRESULT)
-    get_type : Proc(IBackgroundCopyJob2*, BG_JOB_TYPE*, HRESULT)
-    get_progress : Proc(IBackgroundCopyJob2*, BG_JOB_PROGRESS*, HRESULT)
-    get_times : Proc(IBackgroundCopyJob2*, BG_JOB_TIMES*, HRESULT)
-    get_state : Proc(IBackgroundCopyJob2*, BG_JOB_STATE*, HRESULT)
-    get_error : Proc(IBackgroundCopyJob2*, IBackgroundCopyError*, HRESULT)
-    get_owner : Proc(IBackgroundCopyJob2*, LibC::LPWSTR*, HRESULT)
-    set_display_name : Proc(IBackgroundCopyJob2*, LibC::LPWSTR, HRESULT)
-    get_display_name : Proc(IBackgroundCopyJob2*, LibC::LPWSTR*, HRESULT)
-    set_description : Proc(IBackgroundCopyJob2*, LibC::LPWSTR, HRESULT)
-    get_description : Proc(IBackgroundCopyJob2*, LibC::LPWSTR*, HRESULT)
-    set_priority : Proc(IBackgroundCopyJob2*, BG_JOB_PRIORITY, HRESULT)
-    get_priority : Proc(IBackgroundCopyJob2*, BG_JOB_PRIORITY*, HRESULT)
-    set_notify_flags : Proc(IBackgroundCopyJob2*, UInt32, HRESULT)
-    get_notify_flags : Proc(IBackgroundCopyJob2*, UInt32*, HRESULT)
-    set_notify_interface : Proc(IBackgroundCopyJob2*, IUnknown, HRESULT)
-    get_notify_interface : Proc(IBackgroundCopyJob2*, IUnknown*, HRESULT)
-    set_minimum_retry_delay : Proc(IBackgroundCopyJob2*, UInt32, HRESULT)
-    get_minimum_retry_delay : Proc(IBackgroundCopyJob2*, UInt32*, HRESULT)
-    set_no_progress_timeout : Proc(IBackgroundCopyJob2*, UInt32, HRESULT)
-    get_no_progress_timeout : Proc(IBackgroundCopyJob2*, UInt32*, HRESULT)
-    get_error_count : Proc(IBackgroundCopyJob2*, UInt32*, HRESULT)
-    set_proxy_settings : Proc(IBackgroundCopyJob2*, BG_JOB_PROXY_USAGE, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_proxy_settings : Proc(IBackgroundCopyJob2*, BG_JOB_PROXY_USAGE*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
-    take_ownership : Proc(IBackgroundCopyJob2*, HRESULT)
-    set_notify_cmd_line : Proc(IBackgroundCopyJob2*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_notify_cmd_line : Proc(IBackgroundCopyJob2*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
-    get_reply_progress : Proc(IBackgroundCopyJob2*, BG_JOB_REPLY_PROGRESS*, HRESULT)
-    get_reply_data : Proc(IBackgroundCopyJob2*, UInt8**, UInt64*, HRESULT)
-    set_reply_file_name : Proc(IBackgroundCopyJob2*, LibC::LPWSTR, HRESULT)
-    get_reply_file_name : Proc(IBackgroundCopyJob2*, LibC::LPWSTR*, HRESULT)
-    set_credentials : Proc(IBackgroundCopyJob2*, BG_AUTH_CREDENTIALS*, HRESULT)
-    remove_credentials : Proc(IBackgroundCopyJob2*, BG_AUTH_TARGET, BG_AUTH_SCHEME, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_file_set : UInt64
+    add_file : UInt64
+    enum_files : UInt64
+    suspend : UInt64
+    resume : UInt64
+    cancel : UInt64
+    complete : UInt64
+    get_id : UInt64
+    get_type : UInt64
+    get_progress : UInt64
+    get_times : UInt64
+    get_state : UInt64
+    get_error : UInt64
+    get_owner : UInt64
+    set_display_name : UInt64
+    get_display_name : UInt64
+    set_description : UInt64
+    get_description : UInt64
+    set_priority : UInt64
+    get_priority : UInt64
+    set_notify_flags : UInt64
+    get_notify_flags : UInt64
+    set_notify_interface : UInt64
+    get_notify_interface : UInt64
+    set_minimum_retry_delay : UInt64
+    get_minimum_retry_delay : UInt64
+    set_no_progress_timeout : UInt64
+    get_no_progress_timeout : UInt64
+    get_error_count : UInt64
+    set_proxy_settings : UInt64
+    get_proxy_settings : UInt64
+    take_ownership : UInt64
+    set_notify_cmd_line : UInt64
+    get_notify_cmd_line : UInt64
+    get_reply_progress : UInt64
+    get_reply_data : UInt64
+    set_reply_file_name : UInt64
+    get_reply_file_name : UInt64
+    set_credentials : UInt64
+    remove_credentials : UInt64
   end
 
   IBackgroundCopyJob2_GUID = "54b50739-686f-45eb-9dff-d6a9a0faa9af"
@@ -614,53 +614,53 @@ lib LibWin32
   end
 
   struct IBackgroundCopyJob3VTbl
-    query_interface : Proc(IBackgroundCopyJob3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyJob3*, UInt32)
-    release : Proc(IBackgroundCopyJob3*, UInt32)
-    add_file_set : Proc(IBackgroundCopyJob3*, UInt32, BG_FILE_INFO*, HRESULT)
-    add_file : Proc(IBackgroundCopyJob3*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    enum_files : Proc(IBackgroundCopyJob3*, IEnumBackgroundCopyFiles*, HRESULT)
-    suspend : Proc(IBackgroundCopyJob3*, HRESULT)
-    resume : Proc(IBackgroundCopyJob3*, HRESULT)
-    cancel : Proc(IBackgroundCopyJob3*, HRESULT)
-    complete : Proc(IBackgroundCopyJob3*, HRESULT)
-    get_id : Proc(IBackgroundCopyJob3*, Guid*, HRESULT)
-    get_type : Proc(IBackgroundCopyJob3*, BG_JOB_TYPE*, HRESULT)
-    get_progress : Proc(IBackgroundCopyJob3*, BG_JOB_PROGRESS*, HRESULT)
-    get_times : Proc(IBackgroundCopyJob3*, BG_JOB_TIMES*, HRESULT)
-    get_state : Proc(IBackgroundCopyJob3*, BG_JOB_STATE*, HRESULT)
-    get_error : Proc(IBackgroundCopyJob3*, IBackgroundCopyError*, HRESULT)
-    get_owner : Proc(IBackgroundCopyJob3*, LibC::LPWSTR*, HRESULT)
-    set_display_name : Proc(IBackgroundCopyJob3*, LibC::LPWSTR, HRESULT)
-    get_display_name : Proc(IBackgroundCopyJob3*, LibC::LPWSTR*, HRESULT)
-    set_description : Proc(IBackgroundCopyJob3*, LibC::LPWSTR, HRESULT)
-    get_description : Proc(IBackgroundCopyJob3*, LibC::LPWSTR*, HRESULT)
-    set_priority : Proc(IBackgroundCopyJob3*, BG_JOB_PRIORITY, HRESULT)
-    get_priority : Proc(IBackgroundCopyJob3*, BG_JOB_PRIORITY*, HRESULT)
-    set_notify_flags : Proc(IBackgroundCopyJob3*, UInt32, HRESULT)
-    get_notify_flags : Proc(IBackgroundCopyJob3*, UInt32*, HRESULT)
-    set_notify_interface : Proc(IBackgroundCopyJob3*, IUnknown, HRESULT)
-    get_notify_interface : Proc(IBackgroundCopyJob3*, IUnknown*, HRESULT)
-    set_minimum_retry_delay : Proc(IBackgroundCopyJob3*, UInt32, HRESULT)
-    get_minimum_retry_delay : Proc(IBackgroundCopyJob3*, UInt32*, HRESULT)
-    set_no_progress_timeout : Proc(IBackgroundCopyJob3*, UInt32, HRESULT)
-    get_no_progress_timeout : Proc(IBackgroundCopyJob3*, UInt32*, HRESULT)
-    get_error_count : Proc(IBackgroundCopyJob3*, UInt32*, HRESULT)
-    set_proxy_settings : Proc(IBackgroundCopyJob3*, BG_JOB_PROXY_USAGE, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_proxy_settings : Proc(IBackgroundCopyJob3*, BG_JOB_PROXY_USAGE*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
-    take_ownership : Proc(IBackgroundCopyJob3*, HRESULT)
-    set_notify_cmd_line : Proc(IBackgroundCopyJob3*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_notify_cmd_line : Proc(IBackgroundCopyJob3*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
-    get_reply_progress : Proc(IBackgroundCopyJob3*, BG_JOB_REPLY_PROGRESS*, HRESULT)
-    get_reply_data : Proc(IBackgroundCopyJob3*, UInt8**, UInt64*, HRESULT)
-    set_reply_file_name : Proc(IBackgroundCopyJob3*, LibC::LPWSTR, HRESULT)
-    get_reply_file_name : Proc(IBackgroundCopyJob3*, LibC::LPWSTR*, HRESULT)
-    set_credentials : Proc(IBackgroundCopyJob3*, BG_AUTH_CREDENTIALS*, HRESULT)
-    remove_credentials : Proc(IBackgroundCopyJob3*, BG_AUTH_TARGET, BG_AUTH_SCHEME, HRESULT)
-    replace_remote_prefix : Proc(IBackgroundCopyJob3*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    add_file_with_ranges : Proc(IBackgroundCopyJob3*, LibC::LPWSTR, LibC::LPWSTR, UInt32, BG_FILE_RANGE*, HRESULT)
-    set_file_acl_flags : Proc(IBackgroundCopyJob3*, UInt32, HRESULT)
-    get_file_acl_flags : Proc(IBackgroundCopyJob3*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_file_set : UInt64
+    add_file : UInt64
+    enum_files : UInt64
+    suspend : UInt64
+    resume : UInt64
+    cancel : UInt64
+    complete : UInt64
+    get_id : UInt64
+    get_type : UInt64
+    get_progress : UInt64
+    get_times : UInt64
+    get_state : UInt64
+    get_error : UInt64
+    get_owner : UInt64
+    set_display_name : UInt64
+    get_display_name : UInt64
+    set_description : UInt64
+    get_description : UInt64
+    set_priority : UInt64
+    get_priority : UInt64
+    set_notify_flags : UInt64
+    get_notify_flags : UInt64
+    set_notify_interface : UInt64
+    get_notify_interface : UInt64
+    set_minimum_retry_delay : UInt64
+    get_minimum_retry_delay : UInt64
+    set_no_progress_timeout : UInt64
+    get_no_progress_timeout : UInt64
+    get_error_count : UInt64
+    set_proxy_settings : UInt64
+    get_proxy_settings : UInt64
+    take_ownership : UInt64
+    set_notify_cmd_line : UInt64
+    get_notify_cmd_line : UInt64
+    get_reply_progress : UInt64
+    get_reply_data : UInt64
+    set_reply_file_name : UInt64
+    get_reply_file_name : UInt64
+    set_credentials : UInt64
+    remove_credentials : UInt64
+    replace_remote_prefix : UInt64
+    add_file_with_ranges : UInt64
+    set_file_acl_flags : UInt64
+    get_file_acl_flags : UInt64
   end
 
   IBackgroundCopyJob3_GUID = "443c8934-90ff-48ed-bcde-26f5c7450042"
@@ -670,14 +670,14 @@ lib LibWin32
   end
 
   struct IBackgroundCopyFile2VTbl
-    query_interface : Proc(IBackgroundCopyFile2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyFile2*, UInt32)
-    release : Proc(IBackgroundCopyFile2*, UInt32)
-    get_remote_name : Proc(IBackgroundCopyFile2*, LibC::LPWSTR*, HRESULT)
-    get_local_name : Proc(IBackgroundCopyFile2*, LibC::LPWSTR*, HRESULT)
-    get_progress : Proc(IBackgroundCopyFile2*, BG_FILE_PROGRESS*, HRESULT)
-    get_file_ranges : Proc(IBackgroundCopyFile2*, UInt32*, BG_FILE_RANGE**, HRESULT)
-    set_remote_name : Proc(IBackgroundCopyFile2*, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_remote_name : UInt64
+    get_local_name : UInt64
+    get_progress : UInt64
+    get_file_ranges : UInt64
+    set_remote_name : UInt64
   end
 
   IBackgroundCopyFile2_GUID = "83e81b93-0873-474d-8a8c-f2018b1a939c"
@@ -687,17 +687,17 @@ lib LibWin32
   end
 
   struct IBackgroundCopyJobHttpOptionsVTbl
-    query_interface : Proc(IBackgroundCopyJobHttpOptions*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyJobHttpOptions*, UInt32)
-    release : Proc(IBackgroundCopyJobHttpOptions*, UInt32)
-    set_client_certificate_by_id : Proc(IBackgroundCopyJobHttpOptions*, BG_CERT_STORE_LOCATION, LibC::LPWSTR, UInt8*, HRESULT)
-    set_client_certificate_by_name : Proc(IBackgroundCopyJobHttpOptions*, BG_CERT_STORE_LOCATION, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    remove_client_certificate : Proc(IBackgroundCopyJobHttpOptions*, HRESULT)
-    get_client_certificate : Proc(IBackgroundCopyJobHttpOptions*, BG_CERT_STORE_LOCATION*, LibC::LPWSTR*, UInt8**, LibC::LPWSTR*, HRESULT)
-    set_custom_headers : Proc(IBackgroundCopyJobHttpOptions*, LibC::LPWSTR, HRESULT)
-    get_custom_headers : Proc(IBackgroundCopyJobHttpOptions*, LibC::LPWSTR*, HRESULT)
-    set_security_flags : Proc(IBackgroundCopyJobHttpOptions*, UInt32, HRESULT)
-    get_security_flags : Proc(IBackgroundCopyJobHttpOptions*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_client_certificate_by_id : UInt64
+    set_client_certificate_by_name : UInt64
+    remove_client_certificate : UInt64
+    get_client_certificate : UInt64
+    set_custom_headers : UInt64
+    get_custom_headers : UInt64
+    set_security_flags : UInt64
+    get_security_flags : UInt64
   end
 
   IBackgroundCopyJobHttpOptions_GUID = "f1bd1079-9f01-4bdc-8036-f09b70095066"
@@ -707,16 +707,16 @@ lib LibWin32
   end
 
   struct IBitsPeerCacheRecordVTbl
-    query_interface : Proc(IBitsPeerCacheRecord*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBitsPeerCacheRecord*, UInt32)
-    release : Proc(IBitsPeerCacheRecord*, UInt32)
-    get_id : Proc(IBitsPeerCacheRecord*, Guid*, HRESULT)
-    get_origin_url : Proc(IBitsPeerCacheRecord*, LibC::LPWSTR*, HRESULT)
-    get_file_size : Proc(IBitsPeerCacheRecord*, UInt64*, HRESULT)
-    get_file_modification_time : Proc(IBitsPeerCacheRecord*, FILETIME*, HRESULT)
-    get_last_access_time : Proc(IBitsPeerCacheRecord*, FILETIME*, HRESULT)
-    is_file_validated : Proc(IBitsPeerCacheRecord*, HRESULT)
-    get_file_ranges : Proc(IBitsPeerCacheRecord*, UInt32*, BG_FILE_RANGE**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_id : UInt64
+    get_origin_url : UInt64
+    get_file_size : UInt64
+    get_file_modification_time : UInt64
+    get_last_access_time : UInt64
+    is_file_validated : UInt64
+    get_file_ranges : UInt64
   end
 
   IBitsPeerCacheRecord_GUID = "659cdeaf-489e-11d9-a9cd-000d56965251"
@@ -726,14 +726,14 @@ lib LibWin32
   end
 
   struct IEnumBitsPeerCacheRecordsVTbl
-    query_interface : Proc(IEnumBitsPeerCacheRecords*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumBitsPeerCacheRecords*, UInt32)
-    release : Proc(IEnumBitsPeerCacheRecords*, UInt32)
-    next : Proc(IEnumBitsPeerCacheRecords*, UInt32, IBitsPeerCacheRecord*, UInt32*, HRESULT)
-    skip : Proc(IEnumBitsPeerCacheRecords*, UInt32, HRESULT)
-    reset : Proc(IEnumBitsPeerCacheRecords*, HRESULT)
-    clone : Proc(IEnumBitsPeerCacheRecords*, IEnumBitsPeerCacheRecords*, HRESULT)
-    get_count : Proc(IEnumBitsPeerCacheRecords*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
+    get_count : UInt64
   end
 
   IEnumBitsPeerCacheRecords_GUID = "659cdea4-489e-11d9-a9cd-000d56965251"
@@ -743,12 +743,12 @@ lib LibWin32
   end
 
   struct IBitsPeerVTbl
-    query_interface : Proc(IBitsPeer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBitsPeer*, UInt32)
-    release : Proc(IBitsPeer*, UInt32)
-    get_peer_name : Proc(IBitsPeer*, LibC::LPWSTR*, HRESULT)
-    is_authenticated : Proc(IBitsPeer*, LibC::BOOL*, HRESULT)
-    is_available : Proc(IBitsPeer*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_peer_name : UInt64
+    is_authenticated : UInt64
+    is_available : UInt64
   end
 
   IBitsPeer_GUID = "659cdea2-489e-11d9-a9cd-000d56965251"
@@ -758,14 +758,14 @@ lib LibWin32
   end
 
   struct IEnumBitsPeersVTbl
-    query_interface : Proc(IEnumBitsPeers*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumBitsPeers*, UInt32)
-    release : Proc(IEnumBitsPeers*, UInt32)
-    next : Proc(IEnumBitsPeers*, UInt32, IBitsPeer*, UInt32*, HRESULT)
-    skip : Proc(IEnumBitsPeers*, UInt32, HRESULT)
-    reset : Proc(IEnumBitsPeers*, HRESULT)
-    clone : Proc(IEnumBitsPeers*, IEnumBitsPeers*, HRESULT)
-    get_count : Proc(IEnumBitsPeers*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
+    get_count : UInt64
   end
 
   IEnumBitsPeers_GUID = "659cdea5-489e-11d9-a9cd-000d56965251"
@@ -775,23 +775,23 @@ lib LibWin32
   end
 
   struct IBitsPeerCacheAdministrationVTbl
-    query_interface : Proc(IBitsPeerCacheAdministration*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBitsPeerCacheAdministration*, UInt32)
-    release : Proc(IBitsPeerCacheAdministration*, UInt32)
-    get_maximum_cache_size : Proc(IBitsPeerCacheAdministration*, UInt32*, HRESULT)
-    set_maximum_cache_size : Proc(IBitsPeerCacheAdministration*, UInt32, HRESULT)
-    get_maximum_content_age : Proc(IBitsPeerCacheAdministration*, UInt32*, HRESULT)
-    set_maximum_content_age : Proc(IBitsPeerCacheAdministration*, UInt32, HRESULT)
-    get_configuration_flags : Proc(IBitsPeerCacheAdministration*, UInt32*, HRESULT)
-    set_configuration_flags : Proc(IBitsPeerCacheAdministration*, UInt32, HRESULT)
-    enum_records : Proc(IBitsPeerCacheAdministration*, IEnumBitsPeerCacheRecords*, HRESULT)
-    get_record : Proc(IBitsPeerCacheAdministration*, Guid*, IBitsPeerCacheRecord*, HRESULT)
-    clear_records : Proc(IBitsPeerCacheAdministration*, HRESULT)
-    delete_record : Proc(IBitsPeerCacheAdministration*, Guid*, HRESULT)
-    delete_url : Proc(IBitsPeerCacheAdministration*, LibC::LPWSTR, HRESULT)
-    enum_peers : Proc(IBitsPeerCacheAdministration*, IEnumBitsPeers*, HRESULT)
-    clear_peers : Proc(IBitsPeerCacheAdministration*, HRESULT)
-    discover_peers : Proc(IBitsPeerCacheAdministration*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_maximum_cache_size : UInt64
+    set_maximum_cache_size : UInt64
+    get_maximum_content_age : UInt64
+    set_maximum_content_age : UInt64
+    get_configuration_flags : UInt64
+    set_configuration_flags : UInt64
+    enum_records : UInt64
+    get_record : UInt64
+    clear_records : UInt64
+    delete_record : UInt64
+    delete_url : UInt64
+    enum_peers : UInt64
+    clear_peers : UInt64
+    discover_peers : UInt64
   end
 
   IBitsPeerCacheAdministration_GUID = "659cdead-489e-11d9-a9cd-000d56965251"
@@ -801,59 +801,59 @@ lib LibWin32
   end
 
   struct IBackgroundCopyJob4VTbl
-    query_interface : Proc(IBackgroundCopyJob4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyJob4*, UInt32)
-    release : Proc(IBackgroundCopyJob4*, UInt32)
-    add_file_set : Proc(IBackgroundCopyJob4*, UInt32, BG_FILE_INFO*, HRESULT)
-    add_file : Proc(IBackgroundCopyJob4*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    enum_files : Proc(IBackgroundCopyJob4*, IEnumBackgroundCopyFiles*, HRESULT)
-    suspend : Proc(IBackgroundCopyJob4*, HRESULT)
-    resume : Proc(IBackgroundCopyJob4*, HRESULT)
-    cancel : Proc(IBackgroundCopyJob4*, HRESULT)
-    complete : Proc(IBackgroundCopyJob4*, HRESULT)
-    get_id : Proc(IBackgroundCopyJob4*, Guid*, HRESULT)
-    get_type : Proc(IBackgroundCopyJob4*, BG_JOB_TYPE*, HRESULT)
-    get_progress : Proc(IBackgroundCopyJob4*, BG_JOB_PROGRESS*, HRESULT)
-    get_times : Proc(IBackgroundCopyJob4*, BG_JOB_TIMES*, HRESULT)
-    get_state : Proc(IBackgroundCopyJob4*, BG_JOB_STATE*, HRESULT)
-    get_error : Proc(IBackgroundCopyJob4*, IBackgroundCopyError*, HRESULT)
-    get_owner : Proc(IBackgroundCopyJob4*, LibC::LPWSTR*, HRESULT)
-    set_display_name : Proc(IBackgroundCopyJob4*, LibC::LPWSTR, HRESULT)
-    get_display_name : Proc(IBackgroundCopyJob4*, LibC::LPWSTR*, HRESULT)
-    set_description : Proc(IBackgroundCopyJob4*, LibC::LPWSTR, HRESULT)
-    get_description : Proc(IBackgroundCopyJob4*, LibC::LPWSTR*, HRESULT)
-    set_priority : Proc(IBackgroundCopyJob4*, BG_JOB_PRIORITY, HRESULT)
-    get_priority : Proc(IBackgroundCopyJob4*, BG_JOB_PRIORITY*, HRESULT)
-    set_notify_flags : Proc(IBackgroundCopyJob4*, UInt32, HRESULT)
-    get_notify_flags : Proc(IBackgroundCopyJob4*, UInt32*, HRESULT)
-    set_notify_interface : Proc(IBackgroundCopyJob4*, IUnknown, HRESULT)
-    get_notify_interface : Proc(IBackgroundCopyJob4*, IUnknown*, HRESULT)
-    set_minimum_retry_delay : Proc(IBackgroundCopyJob4*, UInt32, HRESULT)
-    get_minimum_retry_delay : Proc(IBackgroundCopyJob4*, UInt32*, HRESULT)
-    set_no_progress_timeout : Proc(IBackgroundCopyJob4*, UInt32, HRESULT)
-    get_no_progress_timeout : Proc(IBackgroundCopyJob4*, UInt32*, HRESULT)
-    get_error_count : Proc(IBackgroundCopyJob4*, UInt32*, HRESULT)
-    set_proxy_settings : Proc(IBackgroundCopyJob4*, BG_JOB_PROXY_USAGE, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_proxy_settings : Proc(IBackgroundCopyJob4*, BG_JOB_PROXY_USAGE*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
-    take_ownership : Proc(IBackgroundCopyJob4*, HRESULT)
-    set_notify_cmd_line : Proc(IBackgroundCopyJob4*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_notify_cmd_line : Proc(IBackgroundCopyJob4*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
-    get_reply_progress : Proc(IBackgroundCopyJob4*, BG_JOB_REPLY_PROGRESS*, HRESULT)
-    get_reply_data : Proc(IBackgroundCopyJob4*, UInt8**, UInt64*, HRESULT)
-    set_reply_file_name : Proc(IBackgroundCopyJob4*, LibC::LPWSTR, HRESULT)
-    get_reply_file_name : Proc(IBackgroundCopyJob4*, LibC::LPWSTR*, HRESULT)
-    set_credentials : Proc(IBackgroundCopyJob4*, BG_AUTH_CREDENTIALS*, HRESULT)
-    remove_credentials : Proc(IBackgroundCopyJob4*, BG_AUTH_TARGET, BG_AUTH_SCHEME, HRESULT)
-    replace_remote_prefix : Proc(IBackgroundCopyJob4*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    add_file_with_ranges : Proc(IBackgroundCopyJob4*, LibC::LPWSTR, LibC::LPWSTR, UInt32, BG_FILE_RANGE*, HRESULT)
-    set_file_acl_flags : Proc(IBackgroundCopyJob4*, UInt32, HRESULT)
-    get_file_acl_flags : Proc(IBackgroundCopyJob4*, UInt32*, HRESULT)
-    set_peer_caching_flags : Proc(IBackgroundCopyJob4*, UInt32, HRESULT)
-    get_peer_caching_flags : Proc(IBackgroundCopyJob4*, UInt32*, HRESULT)
-    get_owner_integrity_level : Proc(IBackgroundCopyJob4*, UInt32*, HRESULT)
-    get_owner_elevation_state : Proc(IBackgroundCopyJob4*, LibC::BOOL*, HRESULT)
-    set_maximum_download_time : Proc(IBackgroundCopyJob4*, UInt32, HRESULT)
-    get_maximum_download_time : Proc(IBackgroundCopyJob4*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_file_set : UInt64
+    add_file : UInt64
+    enum_files : UInt64
+    suspend : UInt64
+    resume : UInt64
+    cancel : UInt64
+    complete : UInt64
+    get_id : UInt64
+    get_type : UInt64
+    get_progress : UInt64
+    get_times : UInt64
+    get_state : UInt64
+    get_error : UInt64
+    get_owner : UInt64
+    set_display_name : UInt64
+    get_display_name : UInt64
+    set_description : UInt64
+    get_description : UInt64
+    set_priority : UInt64
+    get_priority : UInt64
+    set_notify_flags : UInt64
+    get_notify_flags : UInt64
+    set_notify_interface : UInt64
+    get_notify_interface : UInt64
+    set_minimum_retry_delay : UInt64
+    get_minimum_retry_delay : UInt64
+    set_no_progress_timeout : UInt64
+    get_no_progress_timeout : UInt64
+    get_error_count : UInt64
+    set_proxy_settings : UInt64
+    get_proxy_settings : UInt64
+    take_ownership : UInt64
+    set_notify_cmd_line : UInt64
+    get_notify_cmd_line : UInt64
+    get_reply_progress : UInt64
+    get_reply_data : UInt64
+    set_reply_file_name : UInt64
+    get_reply_file_name : UInt64
+    set_credentials : UInt64
+    remove_credentials : UInt64
+    replace_remote_prefix : UInt64
+    add_file_with_ranges : UInt64
+    set_file_acl_flags : UInt64
+    get_file_acl_flags : UInt64
+    set_peer_caching_flags : UInt64
+    get_peer_caching_flags : UInt64
+    get_owner_integrity_level : UInt64
+    get_owner_elevation_state : UInt64
+    set_maximum_download_time : UInt64
+    get_maximum_download_time : UInt64
   end
 
   IBackgroundCopyJob4_GUID = "659cdeae-489e-11d9-a9cd-000d56965251"
@@ -863,18 +863,18 @@ lib LibWin32
   end
 
   struct IBackgroundCopyFile3VTbl
-    query_interface : Proc(IBackgroundCopyFile3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyFile3*, UInt32)
-    release : Proc(IBackgroundCopyFile3*, UInt32)
-    get_remote_name : Proc(IBackgroundCopyFile3*, LibC::LPWSTR*, HRESULT)
-    get_local_name : Proc(IBackgroundCopyFile3*, LibC::LPWSTR*, HRESULT)
-    get_progress : Proc(IBackgroundCopyFile3*, BG_FILE_PROGRESS*, HRESULT)
-    get_file_ranges : Proc(IBackgroundCopyFile3*, UInt32*, BG_FILE_RANGE**, HRESULT)
-    set_remote_name : Proc(IBackgroundCopyFile3*, LibC::LPWSTR, HRESULT)
-    get_temporary_name : Proc(IBackgroundCopyFile3*, LibC::LPWSTR*, HRESULT)
-    set_validation_state : Proc(IBackgroundCopyFile3*, LibC::BOOL, HRESULT)
-    get_validation_state : Proc(IBackgroundCopyFile3*, LibC::BOOL*, HRESULT)
-    is_downloaded_from_peer : Proc(IBackgroundCopyFile3*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_remote_name : UInt64
+    get_local_name : UInt64
+    get_progress : UInt64
+    get_file_ranges : UInt64
+    set_remote_name : UInt64
+    get_temporary_name : UInt64
+    set_validation_state : UInt64
+    get_validation_state : UInt64
+    is_downloaded_from_peer : UInt64
   end
 
   IBackgroundCopyFile3_GUID = "659cdeaa-489e-11d9-a9cd-000d56965251"
@@ -884,13 +884,13 @@ lib LibWin32
   end
 
   struct IBackgroundCopyCallback2VTbl
-    query_interface : Proc(IBackgroundCopyCallback2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyCallback2*, UInt32)
-    release : Proc(IBackgroundCopyCallback2*, UInt32)
-    job_transferred : Proc(IBackgroundCopyCallback2*, IBackgroundCopyJob, HRESULT)
-    job_error : Proc(IBackgroundCopyCallback2*, IBackgroundCopyJob, IBackgroundCopyError, HRESULT)
-    job_modification : Proc(IBackgroundCopyCallback2*, IBackgroundCopyJob, UInt32, HRESULT)
-    file_transferred : Proc(IBackgroundCopyCallback2*, IBackgroundCopyJob, IBackgroundCopyFile, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    job_transferred : UInt64
+    job_error : UInt64
+    job_modification : UInt64
+    file_transferred : UInt64
   end
 
   IBackgroundCopyCallback2_GUID = "659cdeac-489e-11d9-a9cd-000d56965251"
@@ -900,14 +900,14 @@ lib LibWin32
   end
 
   struct IBitsTokenOptionsVTbl
-    query_interface : Proc(IBitsTokenOptions*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBitsTokenOptions*, UInt32)
-    release : Proc(IBitsTokenOptions*, UInt32)
-    set_helper_token_flags : Proc(IBitsTokenOptions*, BG_TOKEN, HRESULT)
-    get_helper_token_flags : Proc(IBitsTokenOptions*, BG_TOKEN*, HRESULT)
-    set_helper_token : Proc(IBitsTokenOptions*, HRESULT)
-    clear_helper_token : Proc(IBitsTokenOptions*, HRESULT)
-    get_helper_token_sid : Proc(IBitsTokenOptions*, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_helper_token_flags : UInt64
+    get_helper_token_flags : UInt64
+    set_helper_token : UInt64
+    clear_helper_token : UInt64
+    get_helper_token_sid : UInt64
   end
 
   IBitsTokenOptions_GUID = "9a2584c3-f7d2-457a-9a5e-22b67bffc7d2"
@@ -917,19 +917,19 @@ lib LibWin32
   end
 
   struct IBackgroundCopyFile4VTbl
-    query_interface : Proc(IBackgroundCopyFile4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyFile4*, UInt32)
-    release : Proc(IBackgroundCopyFile4*, UInt32)
-    get_remote_name : Proc(IBackgroundCopyFile4*, LibC::LPWSTR*, HRESULT)
-    get_local_name : Proc(IBackgroundCopyFile4*, LibC::LPWSTR*, HRESULT)
-    get_progress : Proc(IBackgroundCopyFile4*, BG_FILE_PROGRESS*, HRESULT)
-    get_file_ranges : Proc(IBackgroundCopyFile4*, UInt32*, BG_FILE_RANGE**, HRESULT)
-    set_remote_name : Proc(IBackgroundCopyFile4*, LibC::LPWSTR, HRESULT)
-    get_temporary_name : Proc(IBackgroundCopyFile4*, LibC::LPWSTR*, HRESULT)
-    set_validation_state : Proc(IBackgroundCopyFile4*, LibC::BOOL, HRESULT)
-    get_validation_state : Proc(IBackgroundCopyFile4*, LibC::BOOL*, HRESULT)
-    is_downloaded_from_peer : Proc(IBackgroundCopyFile4*, LibC::BOOL*, HRESULT)
-    get_peer_download_stats : Proc(IBackgroundCopyFile4*, UInt64*, UInt64*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_remote_name : UInt64
+    get_local_name : UInt64
+    get_progress : UInt64
+    get_file_ranges : UInt64
+    set_remote_name : UInt64
+    get_temporary_name : UInt64
+    set_validation_state : UInt64
+    get_validation_state : UInt64
+    is_downloaded_from_peer : UInt64
+    get_peer_download_stats : UInt64
   end
 
   IBackgroundCopyFile4_GUID = "ef7e0655-7888-4960-b0e5-730846e03492"
@@ -939,61 +939,61 @@ lib LibWin32
   end
 
   struct IBackgroundCopyJob5VTbl
-    query_interface : Proc(IBackgroundCopyJob5*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyJob5*, UInt32)
-    release : Proc(IBackgroundCopyJob5*, UInt32)
-    add_file_set : Proc(IBackgroundCopyJob5*, UInt32, BG_FILE_INFO*, HRESULT)
-    add_file : Proc(IBackgroundCopyJob5*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    enum_files : Proc(IBackgroundCopyJob5*, IEnumBackgroundCopyFiles*, HRESULT)
-    suspend : Proc(IBackgroundCopyJob5*, HRESULT)
-    resume : Proc(IBackgroundCopyJob5*, HRESULT)
-    cancel : Proc(IBackgroundCopyJob5*, HRESULT)
-    complete : Proc(IBackgroundCopyJob5*, HRESULT)
-    get_id : Proc(IBackgroundCopyJob5*, Guid*, HRESULT)
-    get_type : Proc(IBackgroundCopyJob5*, BG_JOB_TYPE*, HRESULT)
-    get_progress : Proc(IBackgroundCopyJob5*, BG_JOB_PROGRESS*, HRESULT)
-    get_times : Proc(IBackgroundCopyJob5*, BG_JOB_TIMES*, HRESULT)
-    get_state : Proc(IBackgroundCopyJob5*, BG_JOB_STATE*, HRESULT)
-    get_error : Proc(IBackgroundCopyJob5*, IBackgroundCopyError*, HRESULT)
-    get_owner : Proc(IBackgroundCopyJob5*, LibC::LPWSTR*, HRESULT)
-    set_display_name : Proc(IBackgroundCopyJob5*, LibC::LPWSTR, HRESULT)
-    get_display_name : Proc(IBackgroundCopyJob5*, LibC::LPWSTR*, HRESULT)
-    set_description : Proc(IBackgroundCopyJob5*, LibC::LPWSTR, HRESULT)
-    get_description : Proc(IBackgroundCopyJob5*, LibC::LPWSTR*, HRESULT)
-    set_priority : Proc(IBackgroundCopyJob5*, BG_JOB_PRIORITY, HRESULT)
-    get_priority : Proc(IBackgroundCopyJob5*, BG_JOB_PRIORITY*, HRESULT)
-    set_notify_flags : Proc(IBackgroundCopyJob5*, UInt32, HRESULT)
-    get_notify_flags : Proc(IBackgroundCopyJob5*, UInt32*, HRESULT)
-    set_notify_interface : Proc(IBackgroundCopyJob5*, IUnknown, HRESULT)
-    get_notify_interface : Proc(IBackgroundCopyJob5*, IUnknown*, HRESULT)
-    set_minimum_retry_delay : Proc(IBackgroundCopyJob5*, UInt32, HRESULT)
-    get_minimum_retry_delay : Proc(IBackgroundCopyJob5*, UInt32*, HRESULT)
-    set_no_progress_timeout : Proc(IBackgroundCopyJob5*, UInt32, HRESULT)
-    get_no_progress_timeout : Proc(IBackgroundCopyJob5*, UInt32*, HRESULT)
-    get_error_count : Proc(IBackgroundCopyJob5*, UInt32*, HRESULT)
-    set_proxy_settings : Proc(IBackgroundCopyJob5*, BG_JOB_PROXY_USAGE, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_proxy_settings : Proc(IBackgroundCopyJob5*, BG_JOB_PROXY_USAGE*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
-    take_ownership : Proc(IBackgroundCopyJob5*, HRESULT)
-    set_notify_cmd_line : Proc(IBackgroundCopyJob5*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_notify_cmd_line : Proc(IBackgroundCopyJob5*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
-    get_reply_progress : Proc(IBackgroundCopyJob5*, BG_JOB_REPLY_PROGRESS*, HRESULT)
-    get_reply_data : Proc(IBackgroundCopyJob5*, UInt8**, UInt64*, HRESULT)
-    set_reply_file_name : Proc(IBackgroundCopyJob5*, LibC::LPWSTR, HRESULT)
-    get_reply_file_name : Proc(IBackgroundCopyJob5*, LibC::LPWSTR*, HRESULT)
-    set_credentials : Proc(IBackgroundCopyJob5*, BG_AUTH_CREDENTIALS*, HRESULT)
-    remove_credentials : Proc(IBackgroundCopyJob5*, BG_AUTH_TARGET, BG_AUTH_SCHEME, HRESULT)
-    replace_remote_prefix : Proc(IBackgroundCopyJob5*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    add_file_with_ranges : Proc(IBackgroundCopyJob5*, LibC::LPWSTR, LibC::LPWSTR, UInt32, BG_FILE_RANGE*, HRESULT)
-    set_file_acl_flags : Proc(IBackgroundCopyJob5*, UInt32, HRESULT)
-    get_file_acl_flags : Proc(IBackgroundCopyJob5*, UInt32*, HRESULT)
-    set_peer_caching_flags : Proc(IBackgroundCopyJob5*, UInt32, HRESULT)
-    get_peer_caching_flags : Proc(IBackgroundCopyJob5*, UInt32*, HRESULT)
-    get_owner_integrity_level : Proc(IBackgroundCopyJob5*, UInt32*, HRESULT)
-    get_owner_elevation_state : Proc(IBackgroundCopyJob5*, LibC::BOOL*, HRESULT)
-    set_maximum_download_time : Proc(IBackgroundCopyJob5*, UInt32, HRESULT)
-    get_maximum_download_time : Proc(IBackgroundCopyJob5*, UInt32*, HRESULT)
-    set_property : Proc(IBackgroundCopyJob5*, BITS_JOB_PROPERTY_ID, BITS_JOB_PROPERTY_VALUE, HRESULT)
-    get_property : Proc(IBackgroundCopyJob5*, BITS_JOB_PROPERTY_ID, BITS_JOB_PROPERTY_VALUE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_file_set : UInt64
+    add_file : UInt64
+    enum_files : UInt64
+    suspend : UInt64
+    resume : UInt64
+    cancel : UInt64
+    complete : UInt64
+    get_id : UInt64
+    get_type : UInt64
+    get_progress : UInt64
+    get_times : UInt64
+    get_state : UInt64
+    get_error : UInt64
+    get_owner : UInt64
+    set_display_name : UInt64
+    get_display_name : UInt64
+    set_description : UInt64
+    get_description : UInt64
+    set_priority : UInt64
+    get_priority : UInt64
+    set_notify_flags : UInt64
+    get_notify_flags : UInt64
+    set_notify_interface : UInt64
+    get_notify_interface : UInt64
+    set_minimum_retry_delay : UInt64
+    get_minimum_retry_delay : UInt64
+    set_no_progress_timeout : UInt64
+    get_no_progress_timeout : UInt64
+    get_error_count : UInt64
+    set_proxy_settings : UInt64
+    get_proxy_settings : UInt64
+    take_ownership : UInt64
+    set_notify_cmd_line : UInt64
+    get_notify_cmd_line : UInt64
+    get_reply_progress : UInt64
+    get_reply_data : UInt64
+    set_reply_file_name : UInt64
+    get_reply_file_name : UInt64
+    set_credentials : UInt64
+    remove_credentials : UInt64
+    replace_remote_prefix : UInt64
+    add_file_with_ranges : UInt64
+    set_file_acl_flags : UInt64
+    get_file_acl_flags : UInt64
+    set_peer_caching_flags : UInt64
+    get_peer_caching_flags : UInt64
+    get_owner_integrity_level : UInt64
+    get_owner_elevation_state : UInt64
+    set_maximum_download_time : UInt64
+    get_maximum_download_time : UInt64
+    set_property : UInt64
+    get_property : UInt64
   end
 
   IBackgroundCopyJob5_GUID = "e847030c-bbba-4657-af6d-484aa42bf1fe"
@@ -1003,21 +1003,21 @@ lib LibWin32
   end
 
   struct IBackgroundCopyFile5VTbl
-    query_interface : Proc(IBackgroundCopyFile5*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyFile5*, UInt32)
-    release : Proc(IBackgroundCopyFile5*, UInt32)
-    get_remote_name : Proc(IBackgroundCopyFile5*, LibC::LPWSTR*, HRESULT)
-    get_local_name : Proc(IBackgroundCopyFile5*, LibC::LPWSTR*, HRESULT)
-    get_progress : Proc(IBackgroundCopyFile5*, BG_FILE_PROGRESS*, HRESULT)
-    get_file_ranges : Proc(IBackgroundCopyFile5*, UInt32*, BG_FILE_RANGE**, HRESULT)
-    set_remote_name : Proc(IBackgroundCopyFile5*, LibC::LPWSTR, HRESULT)
-    get_temporary_name : Proc(IBackgroundCopyFile5*, LibC::LPWSTR*, HRESULT)
-    set_validation_state : Proc(IBackgroundCopyFile5*, LibC::BOOL, HRESULT)
-    get_validation_state : Proc(IBackgroundCopyFile5*, LibC::BOOL*, HRESULT)
-    is_downloaded_from_peer : Proc(IBackgroundCopyFile5*, LibC::BOOL*, HRESULT)
-    get_peer_download_stats : Proc(IBackgroundCopyFile5*, UInt64*, UInt64*, HRESULT)
-    set_property : Proc(IBackgroundCopyFile5*, BITS_FILE_PROPERTY_ID, BITS_FILE_PROPERTY_VALUE, HRESULT)
-    get_property : Proc(IBackgroundCopyFile5*, BITS_FILE_PROPERTY_ID, BITS_FILE_PROPERTY_VALUE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_remote_name : UInt64
+    get_local_name : UInt64
+    get_progress : UInt64
+    get_file_ranges : UInt64
+    set_remote_name : UInt64
+    get_temporary_name : UInt64
+    set_validation_state : UInt64
+    get_validation_state : UInt64
+    is_downloaded_from_peer : UInt64
+    get_peer_download_stats : UInt64
+    set_property : UInt64
+    get_property : UInt64
   end
 
   IBackgroundCopyFile5_GUID = "85c1657f-dafc-40e8-8834-df18ea25717e"
@@ -1027,14 +1027,14 @@ lib LibWin32
   end
 
   struct IBackgroundCopyCallback3VTbl
-    query_interface : Proc(IBackgroundCopyCallback3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyCallback3*, UInt32)
-    release : Proc(IBackgroundCopyCallback3*, UInt32)
-    job_transferred : Proc(IBackgroundCopyCallback3*, IBackgroundCopyJob, HRESULT)
-    job_error : Proc(IBackgroundCopyCallback3*, IBackgroundCopyJob, IBackgroundCopyError, HRESULT)
-    job_modification : Proc(IBackgroundCopyCallback3*, IBackgroundCopyJob, UInt32, HRESULT)
-    file_transferred : Proc(IBackgroundCopyCallback3*, IBackgroundCopyJob, IBackgroundCopyFile, HRESULT)
-    file_ranges_transferred : Proc(IBackgroundCopyCallback3*, IBackgroundCopyJob, IBackgroundCopyFile, UInt32, BG_FILE_RANGE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    job_transferred : UInt64
+    job_error : UInt64
+    job_modification : UInt64
+    file_transferred : UInt64
+    file_ranges_transferred : UInt64
   end
 
   IBackgroundCopyCallback3_GUID = "98c97bd2-e32b-4ad8-a528-95fd8b16bd42"
@@ -1044,24 +1044,24 @@ lib LibWin32
   end
 
   struct IBackgroundCopyFile6VTbl
-    query_interface : Proc(IBackgroundCopyFile6*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyFile6*, UInt32)
-    release : Proc(IBackgroundCopyFile6*, UInt32)
-    get_remote_name : Proc(IBackgroundCopyFile6*, LibC::LPWSTR*, HRESULT)
-    get_local_name : Proc(IBackgroundCopyFile6*, LibC::LPWSTR*, HRESULT)
-    get_progress : Proc(IBackgroundCopyFile6*, BG_FILE_PROGRESS*, HRESULT)
-    get_file_ranges : Proc(IBackgroundCopyFile6*, UInt32*, BG_FILE_RANGE**, HRESULT)
-    set_remote_name : Proc(IBackgroundCopyFile6*, LibC::LPWSTR, HRESULT)
-    get_temporary_name : Proc(IBackgroundCopyFile6*, LibC::LPWSTR*, HRESULT)
-    set_validation_state : Proc(IBackgroundCopyFile6*, LibC::BOOL, HRESULT)
-    get_validation_state : Proc(IBackgroundCopyFile6*, LibC::BOOL*, HRESULT)
-    is_downloaded_from_peer : Proc(IBackgroundCopyFile6*, LibC::BOOL*, HRESULT)
-    get_peer_download_stats : Proc(IBackgroundCopyFile6*, UInt64*, UInt64*, HRESULT)
-    set_property : Proc(IBackgroundCopyFile6*, BITS_FILE_PROPERTY_ID, BITS_FILE_PROPERTY_VALUE, HRESULT)
-    get_property : Proc(IBackgroundCopyFile6*, BITS_FILE_PROPERTY_ID, BITS_FILE_PROPERTY_VALUE*, HRESULT)
-    update_download_position : Proc(IBackgroundCopyFile6*, UInt64, HRESULT)
-    request_file_ranges : Proc(IBackgroundCopyFile6*, UInt32, BG_FILE_RANGE*, HRESULT)
-    get_filled_file_ranges : Proc(IBackgroundCopyFile6*, UInt32*, BG_FILE_RANGE**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_remote_name : UInt64
+    get_local_name : UInt64
+    get_progress : UInt64
+    get_file_ranges : UInt64
+    set_remote_name : UInt64
+    get_temporary_name : UInt64
+    set_validation_state : UInt64
+    get_validation_state : UInt64
+    is_downloaded_from_peer : UInt64
+    get_peer_download_stats : UInt64
+    set_property : UInt64
+    get_property : UInt64
+    update_download_position : UInt64
+    request_file_ranges : UInt64
+    get_filled_file_ranges : UInt64
   end
 
   IBackgroundCopyFile6_GUID = "cf6784f7-d677-49fd-9368-cb47aee9d1ad"
@@ -1071,19 +1071,19 @@ lib LibWin32
   end
 
   struct IBackgroundCopyJobHttpOptions2VTbl
-    query_interface : Proc(IBackgroundCopyJobHttpOptions2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyJobHttpOptions2*, UInt32)
-    release : Proc(IBackgroundCopyJobHttpOptions2*, UInt32)
-    set_client_certificate_by_id : Proc(IBackgroundCopyJobHttpOptions2*, BG_CERT_STORE_LOCATION, LibC::LPWSTR, UInt8*, HRESULT)
-    set_client_certificate_by_name : Proc(IBackgroundCopyJobHttpOptions2*, BG_CERT_STORE_LOCATION, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    remove_client_certificate : Proc(IBackgroundCopyJobHttpOptions2*, HRESULT)
-    get_client_certificate : Proc(IBackgroundCopyJobHttpOptions2*, BG_CERT_STORE_LOCATION*, LibC::LPWSTR*, UInt8**, LibC::LPWSTR*, HRESULT)
-    set_custom_headers : Proc(IBackgroundCopyJobHttpOptions2*, LibC::LPWSTR, HRESULT)
-    get_custom_headers : Proc(IBackgroundCopyJobHttpOptions2*, LibC::LPWSTR*, HRESULT)
-    set_security_flags : Proc(IBackgroundCopyJobHttpOptions2*, UInt32, HRESULT)
-    get_security_flags : Proc(IBackgroundCopyJobHttpOptions2*, UInt32*, HRESULT)
-    set_http_method : Proc(IBackgroundCopyJobHttpOptions2*, LibC::LPWSTR, HRESULT)
-    get_http_method : Proc(IBackgroundCopyJobHttpOptions2*, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_client_certificate_by_id : UInt64
+    set_client_certificate_by_name : UInt64
+    remove_client_certificate : UInt64
+    get_client_certificate : UInt64
+    set_custom_headers : UInt64
+    get_custom_headers : UInt64
+    set_security_flags : UInt64
+    get_security_flags : UInt64
+    set_http_method : UInt64
+    get_http_method : UInt64
   end
 
   IBackgroundCopyJobHttpOptions2_GUID = "b591a192-a405-4fc3-8323-4c5c542578fc"
@@ -1093,10 +1093,10 @@ lib LibWin32
   end
 
   struct IBackgroundCopyServerCertificateValidationCallbackVTbl
-    query_interface : Proc(IBackgroundCopyServerCertificateValidationCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyServerCertificateValidationCallback*, UInt32)
-    release : Proc(IBackgroundCopyServerCertificateValidationCallback*, UInt32)
-    validate_server_certificate : Proc(IBackgroundCopyServerCertificateValidationCallback*, IBackgroundCopyJob, IBackgroundCopyFile, UInt32, UInt8*, UInt32, UInt32, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    validate_server_certificate : UInt64
   end
 
   IBackgroundCopyServerCertificateValidationCallback_GUID = "4cec0d02-def7-4158-813a-c32a46945ff7"
@@ -1106,21 +1106,21 @@ lib LibWin32
   end
 
   struct IBackgroundCopyJobHttpOptions3VTbl
-    query_interface : Proc(IBackgroundCopyJobHttpOptions3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyJobHttpOptions3*, UInt32)
-    release : Proc(IBackgroundCopyJobHttpOptions3*, UInt32)
-    set_client_certificate_by_id : Proc(IBackgroundCopyJobHttpOptions3*, BG_CERT_STORE_LOCATION, LibC::LPWSTR, UInt8*, HRESULT)
-    set_client_certificate_by_name : Proc(IBackgroundCopyJobHttpOptions3*, BG_CERT_STORE_LOCATION, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    remove_client_certificate : Proc(IBackgroundCopyJobHttpOptions3*, HRESULT)
-    get_client_certificate : Proc(IBackgroundCopyJobHttpOptions3*, BG_CERT_STORE_LOCATION*, LibC::LPWSTR*, UInt8**, LibC::LPWSTR*, HRESULT)
-    set_custom_headers : Proc(IBackgroundCopyJobHttpOptions3*, LibC::LPWSTR, HRESULT)
-    get_custom_headers : Proc(IBackgroundCopyJobHttpOptions3*, LibC::LPWSTR*, HRESULT)
-    set_security_flags : Proc(IBackgroundCopyJobHttpOptions3*, UInt32, HRESULT)
-    get_security_flags : Proc(IBackgroundCopyJobHttpOptions3*, UInt32*, HRESULT)
-    set_http_method : Proc(IBackgroundCopyJobHttpOptions3*, LibC::LPWSTR, HRESULT)
-    get_http_method : Proc(IBackgroundCopyJobHttpOptions3*, LibC::LPWSTR*, HRESULT)
-    set_server_certificate_validation_interface : Proc(IBackgroundCopyJobHttpOptions3*, IUnknown, HRESULT)
-    make_custom_headers_write_only : Proc(IBackgroundCopyJobHttpOptions3*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_client_certificate_by_id : UInt64
+    set_client_certificate_by_name : UInt64
+    remove_client_certificate : UInt64
+    get_client_certificate : UInt64
+    set_custom_headers : UInt64
+    get_custom_headers : UInt64
+    set_security_flags : UInt64
+    get_security_flags : UInt64
+    set_http_method : UInt64
+    get_http_method : UInt64
+    set_server_certificate_validation_interface : UInt64
+    make_custom_headers_write_only : UInt64
   end
 
   IBackgroundCopyJobHttpOptions3_GUID = "8a9263d3-fd4c-4eda-9b28-30132a4d4e3c"
@@ -1130,17 +1130,17 @@ lib LibWin32
   end
 
   struct IBITSExtensionSetupVTbl
-    query_interface : Proc(IBITSExtensionSetup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBITSExtensionSetup*, UInt32)
-    release : Proc(IBITSExtensionSetup*, UInt32)
-    get_type_info_count : Proc(IBITSExtensionSetup*, UInt32*, HRESULT)
-    get_type_info : Proc(IBITSExtensionSetup*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IBITSExtensionSetup*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IBITSExtensionSetup*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    enable_bits_uploads : Proc(IBITSExtensionSetup*, HRESULT)
-    disable_bits_uploads : Proc(IBITSExtensionSetup*, HRESULT)
-    get_cleanup_task_name : Proc(IBITSExtensionSetup*, UInt8**, HRESULT)
-    get_cleanup_task : Proc(IBITSExtensionSetup*, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    enable_bits_uploads : UInt64
+    disable_bits_uploads : UInt64
+    get_cleanup_task_name : UInt64
+    get_cleanup_task : UInt64
   end
 
   IBITSExtensionSetup_GUID = "29cfbbf7-09e4-4b97-b0bc-f2287e3d8eb3"
@@ -1150,14 +1150,14 @@ lib LibWin32
   end
 
   struct IBITSExtensionSetupFactoryVTbl
-    query_interface : Proc(IBITSExtensionSetupFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBITSExtensionSetupFactory*, UInt32)
-    release : Proc(IBITSExtensionSetupFactory*, UInt32)
-    get_type_info_count : Proc(IBITSExtensionSetupFactory*, UInt32*, HRESULT)
-    get_type_info : Proc(IBITSExtensionSetupFactory*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IBITSExtensionSetupFactory*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IBITSExtensionSetupFactory*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_object : Proc(IBITSExtensionSetupFactory*, UInt8*, IBITSExtensionSetup*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_object : UInt64
   end
 
   IBITSExtensionSetupFactory_GUID = "d5d2d542-5503-4e64-8b48-72ef91a32ee1"
@@ -1167,17 +1167,17 @@ lib LibWin32
   end
 
   struct IBackgroundCopyJob1VTbl
-    query_interface : Proc(IBackgroundCopyJob1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyJob1*, UInt32)
-    release : Proc(IBackgroundCopyJob1*, UInt32)
-    cancel_job : Proc(IBackgroundCopyJob1*, HRESULT)
-    get_progress : Proc(IBackgroundCopyJob1*, UInt32, UInt32*, HRESULT)
-    get_status : Proc(IBackgroundCopyJob1*, UInt32*, UInt32*, UInt32*, UInt32*, HRESULT)
-    add_files : Proc(IBackgroundCopyJob1*, UInt32, FILESETINFO**, HRESULT)
-    get_file : Proc(IBackgroundCopyJob1*, UInt32, FILESETINFO*, HRESULT)
-    get_file_count : Proc(IBackgroundCopyJob1*, UInt32*, HRESULT)
-    switch_to_foreground : Proc(IBackgroundCopyJob1*, HRESULT)
-    get_job_id : Proc(IBackgroundCopyJob1*, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    cancel_job : UInt64
+    get_progress : UInt64
+    get_status : UInt64
+    add_files : UInt64
+    get_file : UInt64
+    get_file_count : UInt64
+    switch_to_foreground : UInt64
+    get_job_id : UInt64
   end
 
   IBackgroundCopyJob1_GUID = "59f5553c-2031-4629-bb18-2645a6970947"
@@ -1187,14 +1187,14 @@ lib LibWin32
   end
 
   struct IEnumBackgroundCopyJobs1VTbl
-    query_interface : Proc(IEnumBackgroundCopyJobs1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumBackgroundCopyJobs1*, UInt32)
-    release : Proc(IEnumBackgroundCopyJobs1*, UInt32)
-    next : Proc(IEnumBackgroundCopyJobs1*, UInt32, Guid*, UInt32*, HRESULT)
-    skip : Proc(IEnumBackgroundCopyJobs1*, UInt32, HRESULT)
-    reset : Proc(IEnumBackgroundCopyJobs1*, HRESULT)
-    clone : Proc(IEnumBackgroundCopyJobs1*, IEnumBackgroundCopyJobs1*, HRESULT)
-    get_count : Proc(IEnumBackgroundCopyJobs1*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
+    get_count : UInt64
   end
 
   IEnumBackgroundCopyJobs1_GUID = "8baeba9d-8f1c-42c4-b82c-09ae79980d25"
@@ -1204,24 +1204,24 @@ lib LibWin32
   end
 
   struct IBackgroundCopyGroupVTbl
-    query_interface : Proc(IBackgroundCopyGroup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyGroup*, UInt32)
-    release : Proc(IBackgroundCopyGroup*, UInt32)
-    get_prop : Proc(IBackgroundCopyGroup*, GROUPPROP, VARIANT*, HRESULT)
-    set_prop : Proc(IBackgroundCopyGroup*, GROUPPROP, VARIANT*, HRESULT)
-    get_progress : Proc(IBackgroundCopyGroup*, UInt32, UInt32*, HRESULT)
-    get_status : Proc(IBackgroundCopyGroup*, UInt32*, UInt32*, HRESULT)
-    get_job : Proc(IBackgroundCopyGroup*, Guid, IBackgroundCopyJob1*, HRESULT)
-    suspend_group : Proc(IBackgroundCopyGroup*, HRESULT)
-    resume_group : Proc(IBackgroundCopyGroup*, HRESULT)
-    cancel_group : Proc(IBackgroundCopyGroup*, HRESULT)
-    get_size : Proc(IBackgroundCopyGroup*, UInt32*, HRESULT)
-    get_group_id : Proc(IBackgroundCopyGroup*, Guid*, HRESULT)
-    create_job : Proc(IBackgroundCopyGroup*, Guid, IBackgroundCopyJob1*, HRESULT)
-    enum_jobs : Proc(IBackgroundCopyGroup*, UInt32, IEnumBackgroundCopyJobs1*, HRESULT)
-    switch_to_foreground : Proc(IBackgroundCopyGroup*, HRESULT)
-    query_new_job_interface : Proc(IBackgroundCopyGroup*, Guid*, IUnknown*, HRESULT)
-    set_notification_pointer : Proc(IBackgroundCopyGroup*, Guid*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_prop : UInt64
+    set_prop : UInt64
+    get_progress : UInt64
+    get_status : UInt64
+    get_job : UInt64
+    suspend_group : UInt64
+    resume_group : UInt64
+    cancel_group : UInt64
+    get_size : UInt64
+    get_group_id : UInt64
+    create_job : UInt64
+    enum_jobs : UInt64
+    switch_to_foreground : UInt64
+    query_new_job_interface : UInt64
+    set_notification_pointer : UInt64
   end
 
   IBackgroundCopyGroup_GUID = "1ded80a7-53ea-424f-8a04-17fea9adc4f5"
@@ -1231,14 +1231,14 @@ lib LibWin32
   end
 
   struct IEnumBackgroundCopyGroupsVTbl
-    query_interface : Proc(IEnumBackgroundCopyGroups*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumBackgroundCopyGroups*, UInt32)
-    release : Proc(IEnumBackgroundCopyGroups*, UInt32)
-    next : Proc(IEnumBackgroundCopyGroups*, UInt32, Guid*, UInt32*, HRESULT)
-    skip : Proc(IEnumBackgroundCopyGroups*, UInt32, HRESULT)
-    reset : Proc(IEnumBackgroundCopyGroups*, HRESULT)
-    clone : Proc(IEnumBackgroundCopyGroups*, IEnumBackgroundCopyGroups*, HRESULT)
-    get_count : Proc(IEnumBackgroundCopyGroups*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
+    get_count : UInt64
   end
 
   IEnumBackgroundCopyGroups_GUID = "d993e603-4aa4-47c5-8665-c20d39c2ba4f"
@@ -1248,12 +1248,12 @@ lib LibWin32
   end
 
   struct IBackgroundCopyCallback1VTbl
-    query_interface : Proc(IBackgroundCopyCallback1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyCallback1*, UInt32)
-    release : Proc(IBackgroundCopyCallback1*, UInt32)
-    on_status : Proc(IBackgroundCopyCallback1*, IBackgroundCopyGroup, IBackgroundCopyJob1, UInt32, UInt32, UInt32, UInt32, UInt32, HRESULT)
-    on_progress : Proc(IBackgroundCopyCallback1*, UInt32, IBackgroundCopyGroup, IBackgroundCopyJob1, UInt32, UInt32, HRESULT)
-    on_progress_ex : Proc(IBackgroundCopyCallback1*, UInt32, IBackgroundCopyGroup, IBackgroundCopyJob1, UInt32, UInt32, UInt32, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_status : UInt64
+    on_progress : UInt64
+    on_progress_ex : UInt64
   end
 
   IBackgroundCopyCallback1_GUID = "084f6593-3800-4e08-9b59-99fa59addf82"
@@ -1263,12 +1263,12 @@ lib LibWin32
   end
 
   struct IBackgroundCopyQMgrVTbl
-    query_interface : Proc(IBackgroundCopyQMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBackgroundCopyQMgr*, UInt32)
-    release : Proc(IBackgroundCopyQMgr*, UInt32)
-    create_group : Proc(IBackgroundCopyQMgr*, Guid, IBackgroundCopyGroup*, HRESULT)
-    get_group : Proc(IBackgroundCopyQMgr*, Guid, IBackgroundCopyGroup*, HRESULT)
-    enum_groups : Proc(IBackgroundCopyQMgr*, UInt32, IEnumBackgroundCopyGroups*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_group : UInt64
+    get_group : UInt64
+    enum_groups : UInt64
   end
 
   IBackgroundCopyQMgr_GUID = "16f41c69-09f5-41d2-8cd8-3c08c47bc8a8"
@@ -1277,4 +1277,1704 @@ lib LibWin32
     lpVtbl : IBackgroundCopyQMgrVTbl*
   end
 
+end
+struct LibWin32::IBackgroundCopyFile
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_remote_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_remote_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def get_local_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_local_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def get_progress(pval : BG_FILE_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.unsafe_as(Proc(BG_FILE_PROGRESS*, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::IEnumBackgroundCopyFiles
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : IBackgroundCopyFile*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IBackgroundCopyFile*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumBackgroundCopyFiles*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumBackgroundCopyFiles*, HRESULT)).call(ppenum)
+  end
+  def get_count(pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pucount)
+  end
+end
+struct LibWin32::IBackgroundCopyError
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_error(pcontext : BG_ERROR_CONTEXT*, pcode : HRESULT*) : HRESULT
+    @lpVtbl.value.get_error.unsafe_as(Proc(BG_ERROR_CONTEXT*, HRESULT*, HRESULT)).call(pcontext, pcode)
+  end
+  def get_file(pval : IBackgroundCopyFile*) : HRESULT
+    @lpVtbl.value.get_file.unsafe_as(Proc(IBackgroundCopyFile*, HRESULT)).call(pval)
+  end
+  def get_error_description(languageid : UInt32, perrordescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_error_description.unsafe_as(Proc(UInt32, LibC::LPWSTR*, HRESULT)).call(languageid, perrordescription)
+  end
+  def get_error_context_description(languageid : UInt32, pcontextdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_error_context_description.unsafe_as(Proc(UInt32, LibC::LPWSTR*, HRESULT)).call(languageid, pcontextdescription)
+  end
+  def get_protocol(pprotocol : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_protocol.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pprotocol)
+  end
+end
+struct LibWin32::IBackgroundCopyJob
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_file_set(cfilecount : UInt32, pfileset : BG_FILE_INFO*) : HRESULT
+    @lpVtbl.value.add_file_set.unsafe_as(Proc(UInt32, BG_FILE_INFO*, HRESULT)).call(cfilecount, pfileset)
+  end
+  def add_file(remoteurl : LibC::LPWSTR, localname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_file.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(remoteurl, localname)
+  end
+  def enum_files(penum : IEnumBackgroundCopyFiles*) : HRESULT
+    @lpVtbl.value.enum_files.unsafe_as(Proc(IEnumBackgroundCopyFiles*, HRESULT)).call(penum)
+  end
+  def suspend : HRESULT
+    @lpVtbl.value.suspend.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume : HRESULT
+    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+  def complete : HRESULT
+    @lpVtbl.value.complete.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_id(pval : Guid*) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(Guid*, HRESULT)).call(pval)
+  end
+  def get_type(pval : BG_JOB_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(BG_JOB_TYPE*, HRESULT)).call(pval)
+  end
+  def get_progress(pval : BG_JOB_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.unsafe_as(Proc(BG_JOB_PROGRESS*, HRESULT)).call(pval)
+  end
+  def get_times(pval : BG_JOB_TIMES*) : HRESULT
+    @lpVtbl.value.get_times.unsafe_as(Proc(BG_JOB_TIMES*, HRESULT)).call(pval)
+  end
+  def get_state(pval : BG_JOB_STATE*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(BG_JOB_STATE*, HRESULT)).call(pval)
+  end
+  def get_error(pperror : IBackgroundCopyError*) : HRESULT
+    @lpVtbl.value.get_error.unsafe_as(Proc(IBackgroundCopyError*, HRESULT)).call(pperror)
+  end
+  def get_owner(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def set_display_name(val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_display_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(val)
+  end
+  def get_display_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def set_description(val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(val)
+  end
+  def get_description(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def set_priority(val : BG_JOB_PRIORITY) : HRESULT
+    @lpVtbl.value.set_priority.unsafe_as(Proc(BG_JOB_PRIORITY, HRESULT)).call(val)
+  end
+  def get_priority(pval : BG_JOB_PRIORITY*) : HRESULT
+    @lpVtbl.value.get_priority.unsafe_as(Proc(BG_JOB_PRIORITY*, HRESULT)).call(pval)
+  end
+  def set_notify_flags(val : UInt32) : HRESULT
+    @lpVtbl.value.set_notify_flags.unsafe_as(Proc(UInt32, HRESULT)).call(val)
+  end
+  def get_notify_flags(pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_notify_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pval)
+  end
+  def set_notify_interface(val : IUnknown) : HRESULT
+    @lpVtbl.value.set_notify_interface.unsafe_as(Proc(IUnknown, HRESULT)).call(val)
+  end
+  def get_notify_interface(pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_notify_interface.unsafe_as(Proc(IUnknown*, HRESULT)).call(pval)
+  end
+  def set_minimum_retry_delay(seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_minimum_retry_delay.unsafe_as(Proc(UInt32, HRESULT)).call(seconds)
+  end
+  def get_minimum_retry_delay(seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_minimum_retry_delay.unsafe_as(Proc(UInt32*, HRESULT)).call(seconds)
+  end
+  def set_no_progress_timeout(seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_no_progress_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(seconds)
+  end
+  def get_no_progress_timeout(seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_no_progress_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(seconds)
+  end
+  def get_error_count(errors : UInt32*) : HRESULT
+    @lpVtbl.value.get_error_count.unsafe_as(Proc(UInt32*, HRESULT)).call(errors)
+  end
+  def set_proxy_settings(proxyusage : BG_JOB_PROXY_USAGE, proxylist : LibC::LPWSTR, proxybypasslist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_proxy_settings.unsafe_as(Proc(BG_JOB_PROXY_USAGE, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(proxyusage, proxylist, proxybypasslist)
+  end
+  def get_proxy_settings(pproxyusage : BG_JOB_PROXY_USAGE*, pproxylist : LibC::LPWSTR*, pproxybypasslist : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_proxy_settings.unsafe_as(Proc(BG_JOB_PROXY_USAGE*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(pproxyusage, pproxylist, pproxybypasslist)
+  end
+  def take_ownership : HRESULT
+    @lpVtbl.value.take_ownership.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IEnumBackgroundCopyJobs
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : IBackgroundCopyJob*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IBackgroundCopyJob*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumBackgroundCopyJobs*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumBackgroundCopyJobs*, HRESULT)).call(ppenum)
+  end
+  def get_count(pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pucount)
+  end
+end
+struct LibWin32::IBackgroundCopyCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def job_transferred(pjob : IBackgroundCopyJob) : HRESULT
+    @lpVtbl.value.job_transferred.unsafe_as(Proc(IBackgroundCopyJob, HRESULT)).call(pjob)
+  end
+  def job_error(pjob : IBackgroundCopyJob, perror : IBackgroundCopyError) : HRESULT
+    @lpVtbl.value.job_error.unsafe_as(Proc(IBackgroundCopyJob, IBackgroundCopyError, HRESULT)).call(pjob, perror)
+  end
+  def job_modification(pjob : IBackgroundCopyJob, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.job_modification.unsafe_as(Proc(IBackgroundCopyJob, UInt32, HRESULT)).call(pjob, dwreserved)
+  end
+end
+struct LibWin32::AsyncIBackgroundCopyCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_job_transferred(pjob : IBackgroundCopyJob) : HRESULT
+    @lpVtbl.value.begin_job_transferred.unsafe_as(Proc(IBackgroundCopyJob, HRESULT)).call(pjob)
+  end
+  def finish_job_transferred : HRESULT
+    @lpVtbl.value.finish_job_transferred.unsafe_as(Proc(HRESULT)).call
+  end
+  def begin_job_error(pjob : IBackgroundCopyJob, perror : IBackgroundCopyError) : HRESULT
+    @lpVtbl.value.begin_job_error.unsafe_as(Proc(IBackgroundCopyJob, IBackgroundCopyError, HRESULT)).call(pjob, perror)
+  end
+  def finish_job_error : HRESULT
+    @lpVtbl.value.finish_job_error.unsafe_as(Proc(HRESULT)).call
+  end
+  def begin_job_modification(pjob : IBackgroundCopyJob, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.begin_job_modification.unsafe_as(Proc(IBackgroundCopyJob, UInt32, HRESULT)).call(pjob, dwreserved)
+  end
+  def finish_job_modification : HRESULT
+    @lpVtbl.value.finish_job_modification.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IBackgroundCopyManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_job(displayname : LibC::LPWSTR, type : BG_JOB_TYPE, pjobid : Guid*, ppjob : IBackgroundCopyJob*) : HRESULT
+    @lpVtbl.value.create_job.unsafe_as(Proc(LibC::LPWSTR, BG_JOB_TYPE, Guid*, IBackgroundCopyJob*, HRESULT)).call(displayname, type, pjobid, ppjob)
+  end
+  def get_job(jobid : Guid*, ppjob : IBackgroundCopyJob*) : HRESULT
+    @lpVtbl.value.get_job.unsafe_as(Proc(Guid*, IBackgroundCopyJob*, HRESULT)).call(jobid, ppjob)
+  end
+  def enum_jobs(dwflags : UInt32, ppenum : IEnumBackgroundCopyJobs*) : HRESULT
+    @lpVtbl.value.enum_jobs.unsafe_as(Proc(UInt32, IEnumBackgroundCopyJobs*, HRESULT)).call(dwflags, ppenum)
+  end
+  def get_error_description(hresult : HRESULT, languageid : UInt32, perrordescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_error_description.unsafe_as(Proc(HRESULT, UInt32, LibC::LPWSTR*, HRESULT)).call(hresult, languageid, perrordescription)
+  end
+end
+struct LibWin32::IBackgroundCopyJob2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_file_set(cfilecount : UInt32, pfileset : BG_FILE_INFO*) : HRESULT
+    @lpVtbl.value.add_file_set.unsafe_as(Proc(UInt32, BG_FILE_INFO*, HRESULT)).call(cfilecount, pfileset)
+  end
+  def add_file(remoteurl : LibC::LPWSTR, localname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_file.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(remoteurl, localname)
+  end
+  def enum_files(penum : IEnumBackgroundCopyFiles*) : HRESULT
+    @lpVtbl.value.enum_files.unsafe_as(Proc(IEnumBackgroundCopyFiles*, HRESULT)).call(penum)
+  end
+  def suspend : HRESULT
+    @lpVtbl.value.suspend.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume : HRESULT
+    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+  def complete : HRESULT
+    @lpVtbl.value.complete.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_id(pval : Guid*) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(Guid*, HRESULT)).call(pval)
+  end
+  def get_type(pval : BG_JOB_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(BG_JOB_TYPE*, HRESULT)).call(pval)
+  end
+  def get_progress(pval : BG_JOB_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.unsafe_as(Proc(BG_JOB_PROGRESS*, HRESULT)).call(pval)
+  end
+  def get_times(pval : BG_JOB_TIMES*) : HRESULT
+    @lpVtbl.value.get_times.unsafe_as(Proc(BG_JOB_TIMES*, HRESULT)).call(pval)
+  end
+  def get_state(pval : BG_JOB_STATE*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(BG_JOB_STATE*, HRESULT)).call(pval)
+  end
+  def get_error(pperror : IBackgroundCopyError*) : HRESULT
+    @lpVtbl.value.get_error.unsafe_as(Proc(IBackgroundCopyError*, HRESULT)).call(pperror)
+  end
+  def get_owner(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def set_display_name(val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_display_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(val)
+  end
+  def get_display_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def set_description(val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(val)
+  end
+  def get_description(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def set_priority(val : BG_JOB_PRIORITY) : HRESULT
+    @lpVtbl.value.set_priority.unsafe_as(Proc(BG_JOB_PRIORITY, HRESULT)).call(val)
+  end
+  def get_priority(pval : BG_JOB_PRIORITY*) : HRESULT
+    @lpVtbl.value.get_priority.unsafe_as(Proc(BG_JOB_PRIORITY*, HRESULT)).call(pval)
+  end
+  def set_notify_flags(val : UInt32) : HRESULT
+    @lpVtbl.value.set_notify_flags.unsafe_as(Proc(UInt32, HRESULT)).call(val)
+  end
+  def get_notify_flags(pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_notify_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pval)
+  end
+  def set_notify_interface(val : IUnknown) : HRESULT
+    @lpVtbl.value.set_notify_interface.unsafe_as(Proc(IUnknown, HRESULT)).call(val)
+  end
+  def get_notify_interface(pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_notify_interface.unsafe_as(Proc(IUnknown*, HRESULT)).call(pval)
+  end
+  def set_minimum_retry_delay(seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_minimum_retry_delay.unsafe_as(Proc(UInt32, HRESULT)).call(seconds)
+  end
+  def get_minimum_retry_delay(seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_minimum_retry_delay.unsafe_as(Proc(UInt32*, HRESULT)).call(seconds)
+  end
+  def set_no_progress_timeout(seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_no_progress_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(seconds)
+  end
+  def get_no_progress_timeout(seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_no_progress_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(seconds)
+  end
+  def get_error_count(errors : UInt32*) : HRESULT
+    @lpVtbl.value.get_error_count.unsafe_as(Proc(UInt32*, HRESULT)).call(errors)
+  end
+  def set_proxy_settings(proxyusage : BG_JOB_PROXY_USAGE, proxylist : LibC::LPWSTR, proxybypasslist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_proxy_settings.unsafe_as(Proc(BG_JOB_PROXY_USAGE, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(proxyusage, proxylist, proxybypasslist)
+  end
+  def get_proxy_settings(pproxyusage : BG_JOB_PROXY_USAGE*, pproxylist : LibC::LPWSTR*, pproxybypasslist : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_proxy_settings.unsafe_as(Proc(BG_JOB_PROXY_USAGE*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(pproxyusage, pproxylist, pproxybypasslist)
+  end
+  def take_ownership : HRESULT
+    @lpVtbl.value.take_ownership.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_notify_cmd_line(program : LibC::LPWSTR, parameters : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_notify_cmd_line.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(program, parameters)
+  end
+  def get_notify_cmd_line(pprogram : LibC::LPWSTR*, pparameters : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_notify_cmd_line.unsafe_as(Proc(LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(pprogram, pparameters)
+  end
+  def get_reply_progress(pprogress : BG_JOB_REPLY_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_reply_progress.unsafe_as(Proc(BG_JOB_REPLY_PROGRESS*, HRESULT)).call(pprogress)
+  end
+  def get_reply_data(ppbuffer : UInt8**, plength : UInt64*) : HRESULT
+    @lpVtbl.value.get_reply_data.unsafe_as(Proc(UInt8**, UInt64*, HRESULT)).call(ppbuffer, plength)
+  end
+  def set_reply_file_name(replyfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_reply_file_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(replyfilename)
+  end
+  def get_reply_file_name(preplyfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_reply_file_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(preplyfilename)
+  end
+  def set_credentials(credentials : BG_AUTH_CREDENTIALS*) : HRESULT
+    @lpVtbl.value.set_credentials.unsafe_as(Proc(BG_AUTH_CREDENTIALS*, HRESULT)).call(credentials)
+  end
+  def remove_credentials(target : BG_AUTH_TARGET, scheme : BG_AUTH_SCHEME) : HRESULT
+    @lpVtbl.value.remove_credentials.unsafe_as(Proc(BG_AUTH_TARGET, BG_AUTH_SCHEME, HRESULT)).call(target, scheme)
+  end
+end
+struct LibWin32::IBackgroundCopyJob3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_file_set(cfilecount : UInt32, pfileset : BG_FILE_INFO*) : HRESULT
+    @lpVtbl.value.add_file_set.unsafe_as(Proc(UInt32, BG_FILE_INFO*, HRESULT)).call(cfilecount, pfileset)
+  end
+  def add_file(remoteurl : LibC::LPWSTR, localname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_file.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(remoteurl, localname)
+  end
+  def enum_files(penum : IEnumBackgroundCopyFiles*) : HRESULT
+    @lpVtbl.value.enum_files.unsafe_as(Proc(IEnumBackgroundCopyFiles*, HRESULT)).call(penum)
+  end
+  def suspend : HRESULT
+    @lpVtbl.value.suspend.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume : HRESULT
+    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+  def complete : HRESULT
+    @lpVtbl.value.complete.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_id(pval : Guid*) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(Guid*, HRESULT)).call(pval)
+  end
+  def get_type(pval : BG_JOB_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(BG_JOB_TYPE*, HRESULT)).call(pval)
+  end
+  def get_progress(pval : BG_JOB_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.unsafe_as(Proc(BG_JOB_PROGRESS*, HRESULT)).call(pval)
+  end
+  def get_times(pval : BG_JOB_TIMES*) : HRESULT
+    @lpVtbl.value.get_times.unsafe_as(Proc(BG_JOB_TIMES*, HRESULT)).call(pval)
+  end
+  def get_state(pval : BG_JOB_STATE*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(BG_JOB_STATE*, HRESULT)).call(pval)
+  end
+  def get_error(pperror : IBackgroundCopyError*) : HRESULT
+    @lpVtbl.value.get_error.unsafe_as(Proc(IBackgroundCopyError*, HRESULT)).call(pperror)
+  end
+  def get_owner(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def set_display_name(val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_display_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(val)
+  end
+  def get_display_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def set_description(val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(val)
+  end
+  def get_description(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def set_priority(val : BG_JOB_PRIORITY) : HRESULT
+    @lpVtbl.value.set_priority.unsafe_as(Proc(BG_JOB_PRIORITY, HRESULT)).call(val)
+  end
+  def get_priority(pval : BG_JOB_PRIORITY*) : HRESULT
+    @lpVtbl.value.get_priority.unsafe_as(Proc(BG_JOB_PRIORITY*, HRESULT)).call(pval)
+  end
+  def set_notify_flags(val : UInt32) : HRESULT
+    @lpVtbl.value.set_notify_flags.unsafe_as(Proc(UInt32, HRESULT)).call(val)
+  end
+  def get_notify_flags(pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_notify_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pval)
+  end
+  def set_notify_interface(val : IUnknown) : HRESULT
+    @lpVtbl.value.set_notify_interface.unsafe_as(Proc(IUnknown, HRESULT)).call(val)
+  end
+  def get_notify_interface(pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_notify_interface.unsafe_as(Proc(IUnknown*, HRESULT)).call(pval)
+  end
+  def set_minimum_retry_delay(seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_minimum_retry_delay.unsafe_as(Proc(UInt32, HRESULT)).call(seconds)
+  end
+  def get_minimum_retry_delay(seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_minimum_retry_delay.unsafe_as(Proc(UInt32*, HRESULT)).call(seconds)
+  end
+  def set_no_progress_timeout(seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_no_progress_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(seconds)
+  end
+  def get_no_progress_timeout(seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_no_progress_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(seconds)
+  end
+  def get_error_count(errors : UInt32*) : HRESULT
+    @lpVtbl.value.get_error_count.unsafe_as(Proc(UInt32*, HRESULT)).call(errors)
+  end
+  def set_proxy_settings(proxyusage : BG_JOB_PROXY_USAGE, proxylist : LibC::LPWSTR, proxybypasslist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_proxy_settings.unsafe_as(Proc(BG_JOB_PROXY_USAGE, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(proxyusage, proxylist, proxybypasslist)
+  end
+  def get_proxy_settings(pproxyusage : BG_JOB_PROXY_USAGE*, pproxylist : LibC::LPWSTR*, pproxybypasslist : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_proxy_settings.unsafe_as(Proc(BG_JOB_PROXY_USAGE*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(pproxyusage, pproxylist, pproxybypasslist)
+  end
+  def take_ownership : HRESULT
+    @lpVtbl.value.take_ownership.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_notify_cmd_line(program : LibC::LPWSTR, parameters : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_notify_cmd_line.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(program, parameters)
+  end
+  def get_notify_cmd_line(pprogram : LibC::LPWSTR*, pparameters : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_notify_cmd_line.unsafe_as(Proc(LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(pprogram, pparameters)
+  end
+  def get_reply_progress(pprogress : BG_JOB_REPLY_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_reply_progress.unsafe_as(Proc(BG_JOB_REPLY_PROGRESS*, HRESULT)).call(pprogress)
+  end
+  def get_reply_data(ppbuffer : UInt8**, plength : UInt64*) : HRESULT
+    @lpVtbl.value.get_reply_data.unsafe_as(Proc(UInt8**, UInt64*, HRESULT)).call(ppbuffer, plength)
+  end
+  def set_reply_file_name(replyfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_reply_file_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(replyfilename)
+  end
+  def get_reply_file_name(preplyfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_reply_file_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(preplyfilename)
+  end
+  def set_credentials(credentials : BG_AUTH_CREDENTIALS*) : HRESULT
+    @lpVtbl.value.set_credentials.unsafe_as(Proc(BG_AUTH_CREDENTIALS*, HRESULT)).call(credentials)
+  end
+  def remove_credentials(target : BG_AUTH_TARGET, scheme : BG_AUTH_SCHEME) : HRESULT
+    @lpVtbl.value.remove_credentials.unsafe_as(Proc(BG_AUTH_TARGET, BG_AUTH_SCHEME, HRESULT)).call(target, scheme)
+  end
+  def replace_remote_prefix(oldprefix : LibC::LPWSTR, newprefix : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.replace_remote_prefix.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(oldprefix, newprefix)
+  end
+  def add_file_with_ranges(remoteurl : LibC::LPWSTR, localname : LibC::LPWSTR, rangecount : UInt32, ranges : BG_FILE_RANGE*) : HRESULT
+    @lpVtbl.value.add_file_with_ranges.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, BG_FILE_RANGE*, HRESULT)).call(remoteurl, localname, rangecount, ranges)
+  end
+  def set_file_acl_flags(flags : UInt32) : HRESULT
+    @lpVtbl.value.set_file_acl_flags.unsafe_as(Proc(UInt32, HRESULT)).call(flags)
+  end
+  def get_file_acl_flags(flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_file_acl_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(flags)
+  end
+end
+struct LibWin32::IBackgroundCopyFile2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_remote_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_remote_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def get_local_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_local_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def get_progress(pval : BG_FILE_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.unsafe_as(Proc(BG_FILE_PROGRESS*, HRESULT)).call(pval)
+  end
+  def get_file_ranges(rangecount : UInt32*, ranges : BG_FILE_RANGE**) : HRESULT
+    @lpVtbl.value.get_file_ranges.unsafe_as(Proc(UInt32*, BG_FILE_RANGE**, HRESULT)).call(rangecount, ranges)
+  end
+  def set_remote_name(val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_remote_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(val)
+  end
+end
+struct LibWin32::IBackgroundCopyJobHttpOptions
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_client_certificate_by_id(storelocation : BG_CERT_STORE_LOCATION, storename : LibC::LPWSTR, pcerthashblob : UInt8*) : HRESULT
+    @lpVtbl.value.set_client_certificate_by_id.unsafe_as(Proc(BG_CERT_STORE_LOCATION, LibC::LPWSTR, UInt8*, HRESULT)).call(storelocation, storename, pcerthashblob)
+  end
+  def set_client_certificate_by_name(storelocation : BG_CERT_STORE_LOCATION, storename : LibC::LPWSTR, subjectname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_client_certificate_by_name.unsafe_as(Proc(BG_CERT_STORE_LOCATION, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(storelocation, storename, subjectname)
+  end
+  def remove_client_certificate : HRESULT
+    @lpVtbl.value.remove_client_certificate.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_client_certificate(pstorelocation : BG_CERT_STORE_LOCATION*, pstorename : LibC::LPWSTR*, ppcerthashblob : UInt8**, psubjectname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_client_certificate.unsafe_as(Proc(BG_CERT_STORE_LOCATION*, LibC::LPWSTR*, UInt8**, LibC::LPWSTR*, HRESULT)).call(pstorelocation, pstorename, ppcerthashblob, psubjectname)
+  end
+  def set_custom_headers(requestheaders : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_custom_headers.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(requestheaders)
+  end
+  def get_custom_headers(prequestheaders : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_custom_headers.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(prequestheaders)
+  end
+  def set_security_flags(flags : UInt32) : HRESULT
+    @lpVtbl.value.set_security_flags.unsafe_as(Proc(UInt32, HRESULT)).call(flags)
+  end
+  def get_security_flags(pflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_security_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pflags)
+  end
+end
+struct LibWin32::IBitsPeerCacheRecord
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_id(pval : Guid*) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(Guid*, HRESULT)).call(pval)
+  end
+  def get_origin_url(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_origin_url.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def get_file_size(pval : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_size.unsafe_as(Proc(UInt64*, HRESULT)).call(pval)
+  end
+  def get_file_modification_time(pval : FILETIME*) : HRESULT
+    @lpVtbl.value.get_file_modification_time.unsafe_as(Proc(FILETIME*, HRESULT)).call(pval)
+  end
+  def get_last_access_time(pval : FILETIME*) : HRESULT
+    @lpVtbl.value.get_last_access_time.unsafe_as(Proc(FILETIME*, HRESULT)).call(pval)
+  end
+  def is_file_validated : HRESULT
+    @lpVtbl.value.is_file_validated.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_file_ranges(prangecount : UInt32*, ppranges : BG_FILE_RANGE**) : HRESULT
+    @lpVtbl.value.get_file_ranges.unsafe_as(Proc(UInt32*, BG_FILE_RANGE**, HRESULT)).call(prangecount, ppranges)
+  end
+end
+struct LibWin32::IEnumBitsPeerCacheRecords
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : IBitsPeerCacheRecord*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IBitsPeerCacheRecord*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumBitsPeerCacheRecords*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumBitsPeerCacheRecords*, HRESULT)).call(ppenum)
+  end
+  def get_count(pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pucount)
+  end
+end
+struct LibWin32::IBitsPeer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_peer_name(pname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_peer_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pname)
+  end
+  def is_authenticated(pauth : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_authenticated.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pauth)
+  end
+  def is_available(ponline : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_available.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(ponline)
+  end
+end
+struct LibWin32::IEnumBitsPeers
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : IBitsPeer*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IBitsPeer*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumBitsPeers*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumBitsPeers*, HRESULT)).call(ppenum)
+  end
+  def get_count(pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pucount)
+  end
+end
+struct LibWin32::IBitsPeerCacheAdministration
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_maximum_cache_size(pbytes : UInt32*) : HRESULT
+    @lpVtbl.value.get_maximum_cache_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pbytes)
+  end
+  def set_maximum_cache_size(bytes : UInt32) : HRESULT
+    @lpVtbl.value.set_maximum_cache_size.unsafe_as(Proc(UInt32, HRESULT)).call(bytes)
+  end
+  def get_maximum_content_age(pseconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_maximum_content_age.unsafe_as(Proc(UInt32*, HRESULT)).call(pseconds)
+  end
+  def set_maximum_content_age(seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_maximum_content_age.unsafe_as(Proc(UInt32, HRESULT)).call(seconds)
+  end
+  def get_configuration_flags(pflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_configuration_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pflags)
+  end
+  def set_configuration_flags(flags : UInt32) : HRESULT
+    @lpVtbl.value.set_configuration_flags.unsafe_as(Proc(UInt32, HRESULT)).call(flags)
+  end
+  def enum_records(ppenum : IEnumBitsPeerCacheRecords*) : HRESULT
+    @lpVtbl.value.enum_records.unsafe_as(Proc(IEnumBitsPeerCacheRecords*, HRESULT)).call(ppenum)
+  end
+  def get_record(id : Guid*, pprecord : IBitsPeerCacheRecord*) : HRESULT
+    @lpVtbl.value.get_record.unsafe_as(Proc(Guid*, IBitsPeerCacheRecord*, HRESULT)).call(id, pprecord)
+  end
+  def clear_records : HRESULT
+    @lpVtbl.value.clear_records.unsafe_as(Proc(HRESULT)).call
+  end
+  def delete_record(id : Guid*) : HRESULT
+    @lpVtbl.value.delete_record.unsafe_as(Proc(Guid*, HRESULT)).call(id)
+  end
+  def delete_url(url : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_url.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(url)
+  end
+  def enum_peers(ppenum : IEnumBitsPeers*) : HRESULT
+    @lpVtbl.value.enum_peers.unsafe_as(Proc(IEnumBitsPeers*, HRESULT)).call(ppenum)
+  end
+  def clear_peers : HRESULT
+    @lpVtbl.value.clear_peers.unsafe_as(Proc(HRESULT)).call
+  end
+  def discover_peers : HRESULT
+    @lpVtbl.value.discover_peers.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IBackgroundCopyJob4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_file_set(cfilecount : UInt32, pfileset : BG_FILE_INFO*) : HRESULT
+    @lpVtbl.value.add_file_set.unsafe_as(Proc(UInt32, BG_FILE_INFO*, HRESULT)).call(cfilecount, pfileset)
+  end
+  def add_file(remoteurl : LibC::LPWSTR, localname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_file.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(remoteurl, localname)
+  end
+  def enum_files(penum : IEnumBackgroundCopyFiles*) : HRESULT
+    @lpVtbl.value.enum_files.unsafe_as(Proc(IEnumBackgroundCopyFiles*, HRESULT)).call(penum)
+  end
+  def suspend : HRESULT
+    @lpVtbl.value.suspend.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume : HRESULT
+    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+  def complete : HRESULT
+    @lpVtbl.value.complete.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_id(pval : Guid*) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(Guid*, HRESULT)).call(pval)
+  end
+  def get_type(pval : BG_JOB_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(BG_JOB_TYPE*, HRESULT)).call(pval)
+  end
+  def get_progress(pval : BG_JOB_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.unsafe_as(Proc(BG_JOB_PROGRESS*, HRESULT)).call(pval)
+  end
+  def get_times(pval : BG_JOB_TIMES*) : HRESULT
+    @lpVtbl.value.get_times.unsafe_as(Proc(BG_JOB_TIMES*, HRESULT)).call(pval)
+  end
+  def get_state(pval : BG_JOB_STATE*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(BG_JOB_STATE*, HRESULT)).call(pval)
+  end
+  def get_error(pperror : IBackgroundCopyError*) : HRESULT
+    @lpVtbl.value.get_error.unsafe_as(Proc(IBackgroundCopyError*, HRESULT)).call(pperror)
+  end
+  def get_owner(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def set_display_name(val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_display_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(val)
+  end
+  def get_display_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def set_description(val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(val)
+  end
+  def get_description(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def set_priority(val : BG_JOB_PRIORITY) : HRESULT
+    @lpVtbl.value.set_priority.unsafe_as(Proc(BG_JOB_PRIORITY, HRESULT)).call(val)
+  end
+  def get_priority(pval : BG_JOB_PRIORITY*) : HRESULT
+    @lpVtbl.value.get_priority.unsafe_as(Proc(BG_JOB_PRIORITY*, HRESULT)).call(pval)
+  end
+  def set_notify_flags(val : UInt32) : HRESULT
+    @lpVtbl.value.set_notify_flags.unsafe_as(Proc(UInt32, HRESULT)).call(val)
+  end
+  def get_notify_flags(pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_notify_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pval)
+  end
+  def set_notify_interface(val : IUnknown) : HRESULT
+    @lpVtbl.value.set_notify_interface.unsafe_as(Proc(IUnknown, HRESULT)).call(val)
+  end
+  def get_notify_interface(pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_notify_interface.unsafe_as(Proc(IUnknown*, HRESULT)).call(pval)
+  end
+  def set_minimum_retry_delay(seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_minimum_retry_delay.unsafe_as(Proc(UInt32, HRESULT)).call(seconds)
+  end
+  def get_minimum_retry_delay(seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_minimum_retry_delay.unsafe_as(Proc(UInt32*, HRESULT)).call(seconds)
+  end
+  def set_no_progress_timeout(seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_no_progress_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(seconds)
+  end
+  def get_no_progress_timeout(seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_no_progress_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(seconds)
+  end
+  def get_error_count(errors : UInt32*) : HRESULT
+    @lpVtbl.value.get_error_count.unsafe_as(Proc(UInt32*, HRESULT)).call(errors)
+  end
+  def set_proxy_settings(proxyusage : BG_JOB_PROXY_USAGE, proxylist : LibC::LPWSTR, proxybypasslist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_proxy_settings.unsafe_as(Proc(BG_JOB_PROXY_USAGE, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(proxyusage, proxylist, proxybypasslist)
+  end
+  def get_proxy_settings(pproxyusage : BG_JOB_PROXY_USAGE*, pproxylist : LibC::LPWSTR*, pproxybypasslist : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_proxy_settings.unsafe_as(Proc(BG_JOB_PROXY_USAGE*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(pproxyusage, pproxylist, pproxybypasslist)
+  end
+  def take_ownership : HRESULT
+    @lpVtbl.value.take_ownership.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_notify_cmd_line(program : LibC::LPWSTR, parameters : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_notify_cmd_line.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(program, parameters)
+  end
+  def get_notify_cmd_line(pprogram : LibC::LPWSTR*, pparameters : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_notify_cmd_line.unsafe_as(Proc(LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(pprogram, pparameters)
+  end
+  def get_reply_progress(pprogress : BG_JOB_REPLY_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_reply_progress.unsafe_as(Proc(BG_JOB_REPLY_PROGRESS*, HRESULT)).call(pprogress)
+  end
+  def get_reply_data(ppbuffer : UInt8**, plength : UInt64*) : HRESULT
+    @lpVtbl.value.get_reply_data.unsafe_as(Proc(UInt8**, UInt64*, HRESULT)).call(ppbuffer, plength)
+  end
+  def set_reply_file_name(replyfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_reply_file_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(replyfilename)
+  end
+  def get_reply_file_name(preplyfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_reply_file_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(preplyfilename)
+  end
+  def set_credentials(credentials : BG_AUTH_CREDENTIALS*) : HRESULT
+    @lpVtbl.value.set_credentials.unsafe_as(Proc(BG_AUTH_CREDENTIALS*, HRESULT)).call(credentials)
+  end
+  def remove_credentials(target : BG_AUTH_TARGET, scheme : BG_AUTH_SCHEME) : HRESULT
+    @lpVtbl.value.remove_credentials.unsafe_as(Proc(BG_AUTH_TARGET, BG_AUTH_SCHEME, HRESULT)).call(target, scheme)
+  end
+  def replace_remote_prefix(oldprefix : LibC::LPWSTR, newprefix : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.replace_remote_prefix.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(oldprefix, newprefix)
+  end
+  def add_file_with_ranges(remoteurl : LibC::LPWSTR, localname : LibC::LPWSTR, rangecount : UInt32, ranges : BG_FILE_RANGE*) : HRESULT
+    @lpVtbl.value.add_file_with_ranges.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, BG_FILE_RANGE*, HRESULT)).call(remoteurl, localname, rangecount, ranges)
+  end
+  def set_file_acl_flags(flags : UInt32) : HRESULT
+    @lpVtbl.value.set_file_acl_flags.unsafe_as(Proc(UInt32, HRESULT)).call(flags)
+  end
+  def get_file_acl_flags(flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_file_acl_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(flags)
+  end
+  def set_peer_caching_flags(flags : UInt32) : HRESULT
+    @lpVtbl.value.set_peer_caching_flags.unsafe_as(Proc(UInt32, HRESULT)).call(flags)
+  end
+  def get_peer_caching_flags(pflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_peer_caching_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pflags)
+  end
+  def get_owner_integrity_level(plevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_owner_integrity_level.unsafe_as(Proc(UInt32*, HRESULT)).call(plevel)
+  end
+  def get_owner_elevation_state(pelevated : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_owner_elevation_state.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pelevated)
+  end
+  def set_maximum_download_time(timeout : UInt32) : HRESULT
+    @lpVtbl.value.set_maximum_download_time.unsafe_as(Proc(UInt32, HRESULT)).call(timeout)
+  end
+  def get_maximum_download_time(ptimeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_maximum_download_time.unsafe_as(Proc(UInt32*, HRESULT)).call(ptimeout)
+  end
+end
+struct LibWin32::IBackgroundCopyFile3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_remote_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_remote_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def get_local_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_local_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def get_progress(pval : BG_FILE_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.unsafe_as(Proc(BG_FILE_PROGRESS*, HRESULT)).call(pval)
+  end
+  def get_file_ranges(rangecount : UInt32*, ranges : BG_FILE_RANGE**) : HRESULT
+    @lpVtbl.value.get_file_ranges.unsafe_as(Proc(UInt32*, BG_FILE_RANGE**, HRESULT)).call(rangecount, ranges)
+  end
+  def set_remote_name(val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_remote_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(val)
+  end
+  def get_temporary_name(pfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_temporary_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pfilename)
+  end
+  def set_validation_state(state : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_validation_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(state)
+  end
+  def get_validation_state(pstate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_validation_state.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pstate)
+  end
+  def is_downloaded_from_peer(pval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_downloaded_from_peer.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::IBackgroundCopyCallback2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def job_transferred(pjob : IBackgroundCopyJob) : HRESULT
+    @lpVtbl.value.job_transferred.unsafe_as(Proc(IBackgroundCopyJob, HRESULT)).call(pjob)
+  end
+  def job_error(pjob : IBackgroundCopyJob, perror : IBackgroundCopyError) : HRESULT
+    @lpVtbl.value.job_error.unsafe_as(Proc(IBackgroundCopyJob, IBackgroundCopyError, HRESULT)).call(pjob, perror)
+  end
+  def job_modification(pjob : IBackgroundCopyJob, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.job_modification.unsafe_as(Proc(IBackgroundCopyJob, UInt32, HRESULT)).call(pjob, dwreserved)
+  end
+  def file_transferred(pjob : IBackgroundCopyJob, pfile : IBackgroundCopyFile) : HRESULT
+    @lpVtbl.value.file_transferred.unsafe_as(Proc(IBackgroundCopyJob, IBackgroundCopyFile, HRESULT)).call(pjob, pfile)
+  end
+end
+struct LibWin32::IBitsTokenOptions
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_helper_token_flags(usageflags : BG_TOKEN) : HRESULT
+    @lpVtbl.value.set_helper_token_flags.unsafe_as(Proc(BG_TOKEN, HRESULT)).call(usageflags)
+  end
+  def get_helper_token_flags(pflags : BG_TOKEN*) : HRESULT
+    @lpVtbl.value.get_helper_token_flags.unsafe_as(Proc(BG_TOKEN*, HRESULT)).call(pflags)
+  end
+  def set_helper_token : HRESULT
+    @lpVtbl.value.set_helper_token.unsafe_as(Proc(HRESULT)).call
+  end
+  def clear_helper_token : HRESULT
+    @lpVtbl.value.clear_helper_token.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_helper_token_sid(psid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_helper_token_sid.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(psid)
+  end
+end
+struct LibWin32::IBackgroundCopyFile4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_remote_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_remote_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def get_local_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_local_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def get_progress(pval : BG_FILE_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.unsafe_as(Proc(BG_FILE_PROGRESS*, HRESULT)).call(pval)
+  end
+  def get_file_ranges(rangecount : UInt32*, ranges : BG_FILE_RANGE**) : HRESULT
+    @lpVtbl.value.get_file_ranges.unsafe_as(Proc(UInt32*, BG_FILE_RANGE**, HRESULT)).call(rangecount, ranges)
+  end
+  def set_remote_name(val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_remote_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(val)
+  end
+  def get_temporary_name(pfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_temporary_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pfilename)
+  end
+  def set_validation_state(state : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_validation_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(state)
+  end
+  def get_validation_state(pstate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_validation_state.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pstate)
+  end
+  def is_downloaded_from_peer(pval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_downloaded_from_peer.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pval)
+  end
+  def get_peer_download_stats(pfromorigin : UInt64*, pfrompeers : UInt64*) : HRESULT
+    @lpVtbl.value.get_peer_download_stats.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(pfromorigin, pfrompeers)
+  end
+end
+struct LibWin32::IBackgroundCopyJob5
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_file_set(cfilecount : UInt32, pfileset : BG_FILE_INFO*) : HRESULT
+    @lpVtbl.value.add_file_set.unsafe_as(Proc(UInt32, BG_FILE_INFO*, HRESULT)).call(cfilecount, pfileset)
+  end
+  def add_file(remoteurl : LibC::LPWSTR, localname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_file.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(remoteurl, localname)
+  end
+  def enum_files(penum : IEnumBackgroundCopyFiles*) : HRESULT
+    @lpVtbl.value.enum_files.unsafe_as(Proc(IEnumBackgroundCopyFiles*, HRESULT)).call(penum)
+  end
+  def suspend : HRESULT
+    @lpVtbl.value.suspend.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume : HRESULT
+    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+  def complete : HRESULT
+    @lpVtbl.value.complete.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_id(pval : Guid*) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(Guid*, HRESULT)).call(pval)
+  end
+  def get_type(pval : BG_JOB_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(BG_JOB_TYPE*, HRESULT)).call(pval)
+  end
+  def get_progress(pval : BG_JOB_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.unsafe_as(Proc(BG_JOB_PROGRESS*, HRESULT)).call(pval)
+  end
+  def get_times(pval : BG_JOB_TIMES*) : HRESULT
+    @lpVtbl.value.get_times.unsafe_as(Proc(BG_JOB_TIMES*, HRESULT)).call(pval)
+  end
+  def get_state(pval : BG_JOB_STATE*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(BG_JOB_STATE*, HRESULT)).call(pval)
+  end
+  def get_error(pperror : IBackgroundCopyError*) : HRESULT
+    @lpVtbl.value.get_error.unsafe_as(Proc(IBackgroundCopyError*, HRESULT)).call(pperror)
+  end
+  def get_owner(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def set_display_name(val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_display_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(val)
+  end
+  def get_display_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def set_description(val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(val)
+  end
+  def get_description(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def set_priority(val : BG_JOB_PRIORITY) : HRESULT
+    @lpVtbl.value.set_priority.unsafe_as(Proc(BG_JOB_PRIORITY, HRESULT)).call(val)
+  end
+  def get_priority(pval : BG_JOB_PRIORITY*) : HRESULT
+    @lpVtbl.value.get_priority.unsafe_as(Proc(BG_JOB_PRIORITY*, HRESULT)).call(pval)
+  end
+  def set_notify_flags(val : UInt32) : HRESULT
+    @lpVtbl.value.set_notify_flags.unsafe_as(Proc(UInt32, HRESULT)).call(val)
+  end
+  def get_notify_flags(pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_notify_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pval)
+  end
+  def set_notify_interface(val : IUnknown) : HRESULT
+    @lpVtbl.value.set_notify_interface.unsafe_as(Proc(IUnknown, HRESULT)).call(val)
+  end
+  def get_notify_interface(pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_notify_interface.unsafe_as(Proc(IUnknown*, HRESULT)).call(pval)
+  end
+  def set_minimum_retry_delay(seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_minimum_retry_delay.unsafe_as(Proc(UInt32, HRESULT)).call(seconds)
+  end
+  def get_minimum_retry_delay(seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_minimum_retry_delay.unsafe_as(Proc(UInt32*, HRESULT)).call(seconds)
+  end
+  def set_no_progress_timeout(seconds : UInt32) : HRESULT
+    @lpVtbl.value.set_no_progress_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(seconds)
+  end
+  def get_no_progress_timeout(seconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_no_progress_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(seconds)
+  end
+  def get_error_count(errors : UInt32*) : HRESULT
+    @lpVtbl.value.get_error_count.unsafe_as(Proc(UInt32*, HRESULT)).call(errors)
+  end
+  def set_proxy_settings(proxyusage : BG_JOB_PROXY_USAGE, proxylist : LibC::LPWSTR, proxybypasslist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_proxy_settings.unsafe_as(Proc(BG_JOB_PROXY_USAGE, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(proxyusage, proxylist, proxybypasslist)
+  end
+  def get_proxy_settings(pproxyusage : BG_JOB_PROXY_USAGE*, pproxylist : LibC::LPWSTR*, pproxybypasslist : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_proxy_settings.unsafe_as(Proc(BG_JOB_PROXY_USAGE*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(pproxyusage, pproxylist, pproxybypasslist)
+  end
+  def take_ownership : HRESULT
+    @lpVtbl.value.take_ownership.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_notify_cmd_line(program : LibC::LPWSTR, parameters : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_notify_cmd_line.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(program, parameters)
+  end
+  def get_notify_cmd_line(pprogram : LibC::LPWSTR*, pparameters : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_notify_cmd_line.unsafe_as(Proc(LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(pprogram, pparameters)
+  end
+  def get_reply_progress(pprogress : BG_JOB_REPLY_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_reply_progress.unsafe_as(Proc(BG_JOB_REPLY_PROGRESS*, HRESULT)).call(pprogress)
+  end
+  def get_reply_data(ppbuffer : UInt8**, plength : UInt64*) : HRESULT
+    @lpVtbl.value.get_reply_data.unsafe_as(Proc(UInt8**, UInt64*, HRESULT)).call(ppbuffer, plength)
+  end
+  def set_reply_file_name(replyfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_reply_file_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(replyfilename)
+  end
+  def get_reply_file_name(preplyfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_reply_file_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(preplyfilename)
+  end
+  def set_credentials(credentials : BG_AUTH_CREDENTIALS*) : HRESULT
+    @lpVtbl.value.set_credentials.unsafe_as(Proc(BG_AUTH_CREDENTIALS*, HRESULT)).call(credentials)
+  end
+  def remove_credentials(target : BG_AUTH_TARGET, scheme : BG_AUTH_SCHEME) : HRESULT
+    @lpVtbl.value.remove_credentials.unsafe_as(Proc(BG_AUTH_TARGET, BG_AUTH_SCHEME, HRESULT)).call(target, scheme)
+  end
+  def replace_remote_prefix(oldprefix : LibC::LPWSTR, newprefix : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.replace_remote_prefix.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(oldprefix, newprefix)
+  end
+  def add_file_with_ranges(remoteurl : LibC::LPWSTR, localname : LibC::LPWSTR, rangecount : UInt32, ranges : BG_FILE_RANGE*) : HRESULT
+    @lpVtbl.value.add_file_with_ranges.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, BG_FILE_RANGE*, HRESULT)).call(remoteurl, localname, rangecount, ranges)
+  end
+  def set_file_acl_flags(flags : UInt32) : HRESULT
+    @lpVtbl.value.set_file_acl_flags.unsafe_as(Proc(UInt32, HRESULT)).call(flags)
+  end
+  def get_file_acl_flags(flags : UInt32*) : HRESULT
+    @lpVtbl.value.get_file_acl_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(flags)
+  end
+  def set_peer_caching_flags(flags : UInt32) : HRESULT
+    @lpVtbl.value.set_peer_caching_flags.unsafe_as(Proc(UInt32, HRESULT)).call(flags)
+  end
+  def get_peer_caching_flags(pflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_peer_caching_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pflags)
+  end
+  def get_owner_integrity_level(plevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_owner_integrity_level.unsafe_as(Proc(UInt32*, HRESULT)).call(plevel)
+  end
+  def get_owner_elevation_state(pelevated : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_owner_elevation_state.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pelevated)
+  end
+  def set_maximum_download_time(timeout : UInt32) : HRESULT
+    @lpVtbl.value.set_maximum_download_time.unsafe_as(Proc(UInt32, HRESULT)).call(timeout)
+  end
+  def get_maximum_download_time(ptimeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_maximum_download_time.unsafe_as(Proc(UInt32*, HRESULT)).call(ptimeout)
+  end
+  def set_property(propertyid : BITS_JOB_PROPERTY_ID, propertyvalue : BITS_JOB_PROPERTY_VALUE) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(BITS_JOB_PROPERTY_ID, BITS_JOB_PROPERTY_VALUE, HRESULT)).call(propertyid, propertyvalue)
+  end
+  def get_property(propertyid : BITS_JOB_PROPERTY_ID, propertyvalue : BITS_JOB_PROPERTY_VALUE*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(BITS_JOB_PROPERTY_ID, BITS_JOB_PROPERTY_VALUE*, HRESULT)).call(propertyid, propertyvalue)
+  end
+end
+struct LibWin32::IBackgroundCopyFile5
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_remote_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_remote_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def get_local_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_local_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def get_progress(pval : BG_FILE_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.unsafe_as(Proc(BG_FILE_PROGRESS*, HRESULT)).call(pval)
+  end
+  def get_file_ranges(rangecount : UInt32*, ranges : BG_FILE_RANGE**) : HRESULT
+    @lpVtbl.value.get_file_ranges.unsafe_as(Proc(UInt32*, BG_FILE_RANGE**, HRESULT)).call(rangecount, ranges)
+  end
+  def set_remote_name(val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_remote_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(val)
+  end
+  def get_temporary_name(pfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_temporary_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pfilename)
+  end
+  def set_validation_state(state : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_validation_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(state)
+  end
+  def get_validation_state(pstate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_validation_state.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pstate)
+  end
+  def is_downloaded_from_peer(pval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_downloaded_from_peer.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pval)
+  end
+  def get_peer_download_stats(pfromorigin : UInt64*, pfrompeers : UInt64*) : HRESULT
+    @lpVtbl.value.get_peer_download_stats.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(pfromorigin, pfrompeers)
+  end
+  def set_property(propertyid : BITS_FILE_PROPERTY_ID, propertyvalue : BITS_FILE_PROPERTY_VALUE) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(BITS_FILE_PROPERTY_ID, BITS_FILE_PROPERTY_VALUE, HRESULT)).call(propertyid, propertyvalue)
+  end
+  def get_property(propertyid : BITS_FILE_PROPERTY_ID, propertyvalue : BITS_FILE_PROPERTY_VALUE*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(BITS_FILE_PROPERTY_ID, BITS_FILE_PROPERTY_VALUE*, HRESULT)).call(propertyid, propertyvalue)
+  end
+end
+struct LibWin32::IBackgroundCopyCallback3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def job_transferred(pjob : IBackgroundCopyJob) : HRESULT
+    @lpVtbl.value.job_transferred.unsafe_as(Proc(IBackgroundCopyJob, HRESULT)).call(pjob)
+  end
+  def job_error(pjob : IBackgroundCopyJob, perror : IBackgroundCopyError) : HRESULT
+    @lpVtbl.value.job_error.unsafe_as(Proc(IBackgroundCopyJob, IBackgroundCopyError, HRESULT)).call(pjob, perror)
+  end
+  def job_modification(pjob : IBackgroundCopyJob, dwreserved : UInt32) : HRESULT
+    @lpVtbl.value.job_modification.unsafe_as(Proc(IBackgroundCopyJob, UInt32, HRESULT)).call(pjob, dwreserved)
+  end
+  def file_transferred(pjob : IBackgroundCopyJob, pfile : IBackgroundCopyFile) : HRESULT
+    @lpVtbl.value.file_transferred.unsafe_as(Proc(IBackgroundCopyJob, IBackgroundCopyFile, HRESULT)).call(pjob, pfile)
+  end
+  def file_ranges_transferred(job : IBackgroundCopyJob, file : IBackgroundCopyFile, rangecount : UInt32, ranges : BG_FILE_RANGE*) : HRESULT
+    @lpVtbl.value.file_ranges_transferred.unsafe_as(Proc(IBackgroundCopyJob, IBackgroundCopyFile, UInt32, BG_FILE_RANGE*, HRESULT)).call(job, file, rangecount, ranges)
+  end
+end
+struct LibWin32::IBackgroundCopyFile6
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_remote_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_remote_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def get_local_name(pval : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_local_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pval)
+  end
+  def get_progress(pval : BG_FILE_PROGRESS*) : HRESULT
+    @lpVtbl.value.get_progress.unsafe_as(Proc(BG_FILE_PROGRESS*, HRESULT)).call(pval)
+  end
+  def get_file_ranges(rangecount : UInt32*, ranges : BG_FILE_RANGE**) : HRESULT
+    @lpVtbl.value.get_file_ranges.unsafe_as(Proc(UInt32*, BG_FILE_RANGE**, HRESULT)).call(rangecount, ranges)
+  end
+  def set_remote_name(val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_remote_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(val)
+  end
+  def get_temporary_name(pfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_temporary_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pfilename)
+  end
+  def set_validation_state(state : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_validation_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(state)
+  end
+  def get_validation_state(pstate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_validation_state.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pstate)
+  end
+  def is_downloaded_from_peer(pval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_downloaded_from_peer.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pval)
+  end
+  def get_peer_download_stats(pfromorigin : UInt64*, pfrompeers : UInt64*) : HRESULT
+    @lpVtbl.value.get_peer_download_stats.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(pfromorigin, pfrompeers)
+  end
+  def set_property(propertyid : BITS_FILE_PROPERTY_ID, propertyvalue : BITS_FILE_PROPERTY_VALUE) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(BITS_FILE_PROPERTY_ID, BITS_FILE_PROPERTY_VALUE, HRESULT)).call(propertyid, propertyvalue)
+  end
+  def get_property(propertyid : BITS_FILE_PROPERTY_ID, propertyvalue : BITS_FILE_PROPERTY_VALUE*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(BITS_FILE_PROPERTY_ID, BITS_FILE_PROPERTY_VALUE*, HRESULT)).call(propertyid, propertyvalue)
+  end
+  def update_download_position(offset : UInt64) : HRESULT
+    @lpVtbl.value.update_download_position.unsafe_as(Proc(UInt64, HRESULT)).call(offset)
+  end
+  def request_file_ranges(rangecount : UInt32, ranges : BG_FILE_RANGE*) : HRESULT
+    @lpVtbl.value.request_file_ranges.unsafe_as(Proc(UInt32, BG_FILE_RANGE*, HRESULT)).call(rangecount, ranges)
+  end
+  def get_filled_file_ranges(rangecount : UInt32*, ranges : BG_FILE_RANGE**) : HRESULT
+    @lpVtbl.value.get_filled_file_ranges.unsafe_as(Proc(UInt32*, BG_FILE_RANGE**, HRESULT)).call(rangecount, ranges)
+  end
+end
+struct LibWin32::IBackgroundCopyJobHttpOptions2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_client_certificate_by_id(storelocation : BG_CERT_STORE_LOCATION, storename : LibC::LPWSTR, pcerthashblob : UInt8*) : HRESULT
+    @lpVtbl.value.set_client_certificate_by_id.unsafe_as(Proc(BG_CERT_STORE_LOCATION, LibC::LPWSTR, UInt8*, HRESULT)).call(storelocation, storename, pcerthashblob)
+  end
+  def set_client_certificate_by_name(storelocation : BG_CERT_STORE_LOCATION, storename : LibC::LPWSTR, subjectname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_client_certificate_by_name.unsafe_as(Proc(BG_CERT_STORE_LOCATION, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(storelocation, storename, subjectname)
+  end
+  def remove_client_certificate : HRESULT
+    @lpVtbl.value.remove_client_certificate.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_client_certificate(pstorelocation : BG_CERT_STORE_LOCATION*, pstorename : LibC::LPWSTR*, ppcerthashblob : UInt8**, psubjectname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_client_certificate.unsafe_as(Proc(BG_CERT_STORE_LOCATION*, LibC::LPWSTR*, UInt8**, LibC::LPWSTR*, HRESULT)).call(pstorelocation, pstorename, ppcerthashblob, psubjectname)
+  end
+  def set_custom_headers(requestheaders : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_custom_headers.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(requestheaders)
+  end
+  def get_custom_headers(prequestheaders : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_custom_headers.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(prequestheaders)
+  end
+  def set_security_flags(flags : UInt32) : HRESULT
+    @lpVtbl.value.set_security_flags.unsafe_as(Proc(UInt32, HRESULT)).call(flags)
+  end
+  def get_security_flags(pflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_security_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pflags)
+  end
+  def set_http_method(method : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_http_method.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(method)
+  end
+  def get_http_method(method : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_http_method.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(method)
+  end
+end
+struct LibWin32::IBackgroundCopyServerCertificateValidationCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def validate_server_certificate(job : IBackgroundCopyJob, file : IBackgroundCopyFile, certlength : UInt32, certdata : UInt8*, certencodingtype : UInt32, certstorelength : UInt32, certstoredata : UInt8*) : HRESULT
+    @lpVtbl.value.validate_server_certificate.unsafe_as(Proc(IBackgroundCopyJob, IBackgroundCopyFile, UInt32, UInt8*, UInt32, UInt32, UInt8*, HRESULT)).call(job, file, certlength, certdata, certencodingtype, certstorelength, certstoredata)
+  end
+end
+struct LibWin32::IBackgroundCopyJobHttpOptions3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_client_certificate_by_id(storelocation : BG_CERT_STORE_LOCATION, storename : LibC::LPWSTR, pcerthashblob : UInt8*) : HRESULT
+    @lpVtbl.value.set_client_certificate_by_id.unsafe_as(Proc(BG_CERT_STORE_LOCATION, LibC::LPWSTR, UInt8*, HRESULT)).call(storelocation, storename, pcerthashblob)
+  end
+  def set_client_certificate_by_name(storelocation : BG_CERT_STORE_LOCATION, storename : LibC::LPWSTR, subjectname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_client_certificate_by_name.unsafe_as(Proc(BG_CERT_STORE_LOCATION, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(storelocation, storename, subjectname)
+  end
+  def remove_client_certificate : HRESULT
+    @lpVtbl.value.remove_client_certificate.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_client_certificate(pstorelocation : BG_CERT_STORE_LOCATION*, pstorename : LibC::LPWSTR*, ppcerthashblob : UInt8**, psubjectname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_client_certificate.unsafe_as(Proc(BG_CERT_STORE_LOCATION*, LibC::LPWSTR*, UInt8**, LibC::LPWSTR*, HRESULT)).call(pstorelocation, pstorename, ppcerthashblob, psubjectname)
+  end
+  def set_custom_headers(requestheaders : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_custom_headers.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(requestheaders)
+  end
+  def get_custom_headers(prequestheaders : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_custom_headers.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(prequestheaders)
+  end
+  def set_security_flags(flags : UInt32) : HRESULT
+    @lpVtbl.value.set_security_flags.unsafe_as(Proc(UInt32, HRESULT)).call(flags)
+  end
+  def get_security_flags(pflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_security_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pflags)
+  end
+  def set_http_method(method : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_http_method.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(method)
+  end
+  def get_http_method(method : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_http_method.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(method)
+  end
+  def set_server_certificate_validation_interface(certvalidationcallback : IUnknown) : HRESULT
+    @lpVtbl.value.set_server_certificate_validation_interface.unsafe_as(Proc(IUnknown, HRESULT)).call(certvalidationcallback)
+  end
+  def make_custom_headers_write_only : HRESULT
+    @lpVtbl.value.make_custom_headers_write_only.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IBITSExtensionSetup
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def enable_bits_uploads : HRESULT
+    @lpVtbl.value.enable_bits_uploads.unsafe_as(Proc(HRESULT)).call
+  end
+  def disable_bits_uploads : HRESULT
+    @lpVtbl.value.disable_bits_uploads.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_cleanup_task_name(ptaskname : UInt8**) : HRESULT
+    @lpVtbl.value.get_cleanup_task_name.unsafe_as(Proc(UInt8**, HRESULT)).call(ptaskname)
+  end
+  def get_cleanup_task(riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cleanup_task.unsafe_as(Proc(Guid*, IUnknown*, HRESULT)).call(riid, ppunk)
+  end
+end
+struct LibWin32::IBITSExtensionSetupFactory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_object(path : UInt8*, ppextensionsetup : IBITSExtensionSetup*) : HRESULT
+    @lpVtbl.value.get_object.unsafe_as(Proc(UInt8*, IBITSExtensionSetup*, HRESULT)).call(path, ppextensionsetup)
+  end
+end
+struct LibWin32::IBackgroundCopyJob1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def cancel_job : HRESULT
+    @lpVtbl.value.cancel_job.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_progress(dwflags : UInt32, pdwprogress : UInt32*) : HRESULT
+    @lpVtbl.value.get_progress.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(dwflags, pdwprogress)
+  end
+  def get_status(pdwstatus : UInt32*, pdwwin32result : UInt32*, pdwtransportresult : UInt32*, pdwnumofretries : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, UInt32*, UInt32*, UInt32*, HRESULT)).call(pdwstatus, pdwwin32result, pdwtransportresult, pdwnumofretries)
+  end
+  def add_files(cfilecount : UInt32, ppfileset : FILESETINFO**) : HRESULT
+    @lpVtbl.value.add_files.unsafe_as(Proc(UInt32, FILESETINFO**, HRESULT)).call(cfilecount, ppfileset)
+  end
+  def get_file(cfileindex : UInt32, pfileinfo : FILESETINFO*) : HRESULT
+    @lpVtbl.value.get_file.unsafe_as(Proc(UInt32, FILESETINFO*, HRESULT)).call(cfileindex, pfileinfo)
+  end
+  def get_file_count(pdwfilecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_file_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwfilecount)
+  end
+  def switch_to_foreground : HRESULT
+    @lpVtbl.value.switch_to_foreground.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_job_id(pguidjobid : Guid*) : HRESULT
+    @lpVtbl.value.get_job_id.unsafe_as(Proc(Guid*, HRESULT)).call(pguidjobid)
+  end
+end
+struct LibWin32::IEnumBackgroundCopyJobs1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : Guid*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, Guid*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumBackgroundCopyJobs1*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumBackgroundCopyJobs1*, HRESULT)).call(ppenum)
+  end
+  def get_count(pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pucount)
+  end
+end
+struct LibWin32::IBackgroundCopyGroup
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_prop(propid : GROUPPROP, pvarval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_prop.unsafe_as(Proc(GROUPPROP, VARIANT*, HRESULT)).call(propid, pvarval)
+  end
+  def set_prop(propid : GROUPPROP, pvarval : VARIANT*) : HRESULT
+    @lpVtbl.value.set_prop.unsafe_as(Proc(GROUPPROP, VARIANT*, HRESULT)).call(propid, pvarval)
+  end
+  def get_progress(dwflags : UInt32, pdwprogress : UInt32*) : HRESULT
+    @lpVtbl.value.get_progress.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(dwflags, pdwprogress)
+  end
+  def get_status(pdwstatus : UInt32*, pdwjobindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwstatus, pdwjobindex)
+  end
+  def get_job(jobid : Guid, ppjob : IBackgroundCopyJob1*) : HRESULT
+    @lpVtbl.value.get_job.unsafe_as(Proc(Guid, IBackgroundCopyJob1*, HRESULT)).call(jobid, ppjob)
+  end
+  def suspend_group : HRESULT
+    @lpVtbl.value.suspend_group.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume_group : HRESULT
+    @lpVtbl.value.resume_group.unsafe_as(Proc(HRESULT)).call
+  end
+  def cancel_group : HRESULT
+    @lpVtbl.value.cancel_group.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_size(pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwsize)
+  end
+  def get_group_id(pguidgroupid : Guid*) : HRESULT
+    @lpVtbl.value.get_group_id.unsafe_as(Proc(Guid*, HRESULT)).call(pguidgroupid)
+  end
+  def create_job(guidjobid : Guid, ppjob : IBackgroundCopyJob1*) : HRESULT
+    @lpVtbl.value.create_job.unsafe_as(Proc(Guid, IBackgroundCopyJob1*, HRESULT)).call(guidjobid, ppjob)
+  end
+  def enum_jobs(dwflags : UInt32, ppenumjobs : IEnumBackgroundCopyJobs1*) : HRESULT
+    @lpVtbl.value.enum_jobs.unsafe_as(Proc(UInt32, IEnumBackgroundCopyJobs1*, HRESULT)).call(dwflags, ppenumjobs)
+  end
+  def switch_to_foreground : HRESULT
+    @lpVtbl.value.switch_to_foreground.unsafe_as(Proc(HRESULT)).call
+  end
+  def query_new_job_interface(iid : Guid*, punk : IUnknown*) : HRESULT
+    @lpVtbl.value.query_new_job_interface.unsafe_as(Proc(Guid*, IUnknown*, HRESULT)).call(iid, punk)
+  end
+  def set_notification_pointer(iid : Guid*, punk : IUnknown) : HRESULT
+    @lpVtbl.value.set_notification_pointer.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(iid, punk)
+  end
+end
+struct LibWin32::IEnumBackgroundCopyGroups
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : Guid*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, Guid*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumBackgroundCopyGroups*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumBackgroundCopyGroups*, HRESULT)).call(ppenum)
+  end
+  def get_count(pucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pucount)
+  end
+end
+struct LibWin32::IBackgroundCopyCallback1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_status(pgroup : IBackgroundCopyGroup, pjob : IBackgroundCopyJob1, dwfileindex : UInt32, dwstatus : UInt32, dwnumofretries : UInt32, dwwin32result : UInt32, dwtransportresult : UInt32) : HRESULT
+    @lpVtbl.value.on_status.unsafe_as(Proc(IBackgroundCopyGroup, IBackgroundCopyJob1, UInt32, UInt32, UInt32, UInt32, UInt32, HRESULT)).call(pgroup, pjob, dwfileindex, dwstatus, dwnumofretries, dwwin32result, dwtransportresult)
+  end
+  def on_progress(progresstype : UInt32, pgroup : IBackgroundCopyGroup, pjob : IBackgroundCopyJob1, dwfileindex : UInt32, dwprogressvalue : UInt32) : HRESULT
+    @lpVtbl.value.on_progress.unsafe_as(Proc(UInt32, IBackgroundCopyGroup, IBackgroundCopyJob1, UInt32, UInt32, HRESULT)).call(progresstype, pgroup, pjob, dwfileindex, dwprogressvalue)
+  end
+  def on_progress_ex(progresstype : UInt32, pgroup : IBackgroundCopyGroup, pjob : IBackgroundCopyJob1, dwfileindex : UInt32, dwprogressvalue : UInt32, dwbytearraysize : UInt32, pbyte : UInt8*) : HRESULT
+    @lpVtbl.value.on_progress_ex.unsafe_as(Proc(UInt32, IBackgroundCopyGroup, IBackgroundCopyJob1, UInt32, UInt32, UInt32, UInt8*, HRESULT)).call(progresstype, pgroup, pjob, dwfileindex, dwprogressvalue, dwbytearraysize, pbyte)
+  end
+end
+struct LibWin32::IBackgroundCopyQMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_group(guidgroupid : Guid, ppgroup : IBackgroundCopyGroup*) : HRESULT
+    @lpVtbl.value.create_group.unsafe_as(Proc(Guid, IBackgroundCopyGroup*, HRESULT)).call(guidgroupid, ppgroup)
+  end
+  def get_group(groupid : Guid, ppgroup : IBackgroundCopyGroup*) : HRESULT
+    @lpVtbl.value.get_group.unsafe_as(Proc(Guid, IBackgroundCopyGroup*, HRESULT)).call(groupid, ppgroup)
+  end
+  def enum_groups(dwflags : UInt32, ppenumgroups : IEnumBackgroundCopyGroups*) : HRESULT
+    @lpVtbl.value.enum_groups.unsafe_as(Proc(UInt32, IEnumBackgroundCopyGroups*, HRESULT)).call(dwflags, ppenumgroups)
+  end
 end

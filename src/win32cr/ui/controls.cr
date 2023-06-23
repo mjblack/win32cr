@@ -4882,38 +4882,38 @@ lib LibWin32
 
 
   struct IImageListVTbl
-    query_interface : Proc(IImageList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IImageList*, UInt32)
-    release : Proc(IImageList*, UInt32)
-    add : Proc(IImageList*, HBITMAP, HBITMAP, Int32*, HRESULT)
-    replace_icon : Proc(IImageList*, Int32, LibC::HANDLE, Int32*, HRESULT)
-    set_overlay_image : Proc(IImageList*, Int32, Int32, HRESULT)
-    replace : Proc(IImageList*, Int32, HBITMAP, HBITMAP, HRESULT)
-    add_masked : Proc(IImageList*, HBITMAP, UInt32, Int32*, HRESULT)
-    draw : Proc(IImageList*, IMAGELISTDRAWPARAMS*, HRESULT)
-    remove : Proc(IImageList*, Int32, HRESULT)
-    get_icon : Proc(IImageList*, Int32, UInt32, HANDLE*, HRESULT)
-    get_image_info : Proc(IImageList*, Int32, IMAGEINFO*, HRESULT)
-    copy : Proc(IImageList*, Int32, IUnknown, Int32, UInt32, HRESULT)
-    merge : Proc(IImageList*, Int32, IUnknown, Int32, Int32, Int32, Guid*, Void**, HRESULT)
-    clone : Proc(IImageList*, Guid*, Void**, HRESULT)
-    get_image_rect : Proc(IImageList*, Int32, RECT*, HRESULT)
-    get_icon_size : Proc(IImageList*, Int32*, Int32*, HRESULT)
-    set_icon_size : Proc(IImageList*, Int32, Int32, HRESULT)
-    get_image_count : Proc(IImageList*, Int32*, HRESULT)
-    set_image_count : Proc(IImageList*, UInt32, HRESULT)
-    set_bk_color : Proc(IImageList*, UInt32, UInt32*, HRESULT)
-    get_bk_color : Proc(IImageList*, UInt32*, HRESULT)
-    begin_drag : Proc(IImageList*, Int32, Int32, Int32, HRESULT)
-    end_drag : Proc(IImageList*, HRESULT)
-    drag_enter : Proc(IImageList*, LibC::HANDLE, Int32, Int32, HRESULT)
-    drag_leave : Proc(IImageList*, LibC::HANDLE, HRESULT)
-    drag_move : Proc(IImageList*, Int32, Int32, HRESULT)
-    set_drag_cursor_image : Proc(IImageList*, IUnknown, Int32, Int32, Int32, HRESULT)
-    drag_show_nolock : Proc(IImageList*, LibC::BOOL, HRESULT)
-    get_drag_image : Proc(IImageList*, POINT*, POINT*, Guid*, Void**, HRESULT)
-    get_item_flags : Proc(IImageList*, Int32, IMAGE_LIST_ITEM_FLAGS*, HRESULT)
-    get_overlay_image : Proc(IImageList*, Int32, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add : UInt64
+    replace_icon : UInt64
+    set_overlay_image : UInt64
+    replace : UInt64
+    add_masked : UInt64
+    draw : UInt64
+    remove : UInt64
+    get_icon : UInt64
+    get_image_info : UInt64
+    copy : UInt64
+    merge : UInt64
+    clone : UInt64
+    get_image_rect : UInt64
+    get_icon_size : UInt64
+    set_icon_size : UInt64
+    get_image_count : UInt64
+    set_image_count : UInt64
+    set_bk_color : UInt64
+    get_bk_color : UInt64
+    begin_drag : UInt64
+    end_drag : UInt64
+    drag_enter : UInt64
+    drag_leave : UInt64
+    drag_move : UInt64
+    set_drag_cursor_image : UInt64
+    drag_show_nolock : UInt64
+    get_drag_image : UInt64
+    get_item_flags : UInt64
+    get_overlay_image : UInt64
   end
 
   IImageList_GUID = "46eb5926-582e-4017-9fdf-e8998daa0950"
@@ -4923,50 +4923,50 @@ lib LibWin32
   end
 
   struct IImageList2VTbl
-    query_interface : Proc(IImageList2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IImageList2*, UInt32)
-    release : Proc(IImageList2*, UInt32)
-    add : Proc(IImageList2*, HBITMAP, HBITMAP, Int32*, HRESULT)
-    replace_icon : Proc(IImageList2*, Int32, LibC::HANDLE, Int32*, HRESULT)
-    set_overlay_image : Proc(IImageList2*, Int32, Int32, HRESULT)
-    replace : Proc(IImageList2*, Int32, HBITMAP, HBITMAP, HRESULT)
-    add_masked : Proc(IImageList2*, HBITMAP, UInt32, Int32*, HRESULT)
-    draw : Proc(IImageList2*, IMAGELISTDRAWPARAMS*, HRESULT)
-    remove : Proc(IImageList2*, Int32, HRESULT)
-    get_icon : Proc(IImageList2*, Int32, UInt32, HANDLE*, HRESULT)
-    get_image_info : Proc(IImageList2*, Int32, IMAGEINFO*, HRESULT)
-    copy : Proc(IImageList2*, Int32, IUnknown, Int32, UInt32, HRESULT)
-    merge : Proc(IImageList2*, Int32, IUnknown, Int32, Int32, Int32, Guid*, Void**, HRESULT)
-    clone : Proc(IImageList2*, Guid*, Void**, HRESULT)
-    get_image_rect : Proc(IImageList2*, Int32, RECT*, HRESULT)
-    get_icon_size : Proc(IImageList2*, Int32*, Int32*, HRESULT)
-    set_icon_size : Proc(IImageList2*, Int32, Int32, HRESULT)
-    get_image_count : Proc(IImageList2*, Int32*, HRESULT)
-    set_image_count : Proc(IImageList2*, UInt32, HRESULT)
-    set_bk_color : Proc(IImageList2*, UInt32, UInt32*, HRESULT)
-    get_bk_color : Proc(IImageList2*, UInt32*, HRESULT)
-    begin_drag : Proc(IImageList2*, Int32, Int32, Int32, HRESULT)
-    end_drag : Proc(IImageList2*, HRESULT)
-    drag_enter : Proc(IImageList2*, LibC::HANDLE, Int32, Int32, HRESULT)
-    drag_leave : Proc(IImageList2*, LibC::HANDLE, HRESULT)
-    drag_move : Proc(IImageList2*, Int32, Int32, HRESULT)
-    set_drag_cursor_image : Proc(IImageList2*, IUnknown, Int32, Int32, Int32, HRESULT)
-    drag_show_nolock : Proc(IImageList2*, LibC::BOOL, HRESULT)
-    get_drag_image : Proc(IImageList2*, POINT*, POINT*, Guid*, Void**, HRESULT)
-    get_item_flags : Proc(IImageList2*, Int32, IMAGE_LIST_ITEM_FLAGS*, HRESULT)
-    get_overlay_image : Proc(IImageList2*, Int32, Int32*, HRESULT)
-    resize : Proc(IImageList2*, Int32, Int32, HRESULT)
-    get_original_size : Proc(IImageList2*, Int32, UInt32, Int32*, Int32*, HRESULT)
-    set_original_size : Proc(IImageList2*, Int32, Int32, Int32, HRESULT)
-    set_callback : Proc(IImageList2*, IUnknown, HRESULT)
-    get_callback : Proc(IImageList2*, Guid*, Void**, HRESULT)
-    force_image_present : Proc(IImageList2*, Int32, UInt32, HRESULT)
-    discard_images : Proc(IImageList2*, Int32, Int32, UInt32, HRESULT)
-    preload_images : Proc(IImageList2*, IMAGELISTDRAWPARAMS*, HRESULT)
-    get_statistics : Proc(IImageList2*, IMAGELISTSTATS*, HRESULT)
-    initialize : Proc(IImageList2*, Int32, Int32, IMAGELIST_CREATION_FLAGS, Int32, Int32, HRESULT)
-    replace2 : Proc(IImageList2*, Int32, HBITMAP, HBITMAP, IUnknown, UInt32, HRESULT)
-    replace_from_image_list : Proc(IImageList2*, Int32, IImageList, Int32, IUnknown, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add : UInt64
+    replace_icon : UInt64
+    set_overlay_image : UInt64
+    replace : UInt64
+    add_masked : UInt64
+    draw : UInt64
+    remove : UInt64
+    get_icon : UInt64
+    get_image_info : UInt64
+    copy : UInt64
+    merge : UInt64
+    clone : UInt64
+    get_image_rect : UInt64
+    get_icon_size : UInt64
+    set_icon_size : UInt64
+    get_image_count : UInt64
+    set_image_count : UInt64
+    set_bk_color : UInt64
+    get_bk_color : UInt64
+    begin_drag : UInt64
+    end_drag : UInt64
+    drag_enter : UInt64
+    drag_leave : UInt64
+    drag_move : UInt64
+    set_drag_cursor_image : UInt64
+    drag_show_nolock : UInt64
+    get_drag_image : UInt64
+    get_item_flags : UInt64
+    get_overlay_image : UInt64
+    resize : UInt64
+    get_original_size : UInt64
+    set_original_size : UInt64
+    set_callback : UInt64
+    get_callback : UInt64
+    force_image_present : UInt64
+    discard_images : UInt64
+    preload_images : UInt64
+    get_statistics : UInt64
+    initialize : UInt64
+    replace2 : UInt64
+    replace_from_image_list : UInt64
   end
 
   IImageList2_GUID = "192b9d83-50fc-457b-90a0-2b82a8b5dae1"
@@ -4992,7 +4992,7 @@ lib LibWin32
   fun PropertySheetW(param0 : PROPSHEETHEADERW_V2*) : LibC::IntPtrT
 
   # Params # 
-  fun InitCommonControls
+  fun InitCommonControls : Void
 
   # Params # picce : INITCOMMONCONTROLSEX* [In]
   fun InitCommonControlsEx(picce : INITCOMMONCONTROLSEX*) : LibC::BOOL
@@ -5058,7 +5058,7 @@ lib LibWin32
   fun ImageList_BeginDrag(himltrack : HIMAGELIST, itrack : Int32, dxhotspot : Int32, dyhotspot : Int32) : LibC::BOOL
 
   # Params # 
-  fun ImageList_EndDrag
+  fun ImageList_EndDrag : Void
 
   # Params # hwndlock : LibC::HANDLE [In],x : Int32 [In],y : Int32 [In]
   fun ImageList_DragEnter(hwndlock : LibC::HANDLE, x : Int32, y : Int32) : LibC::BOOL
@@ -5115,10 +5115,10 @@ lib LibWin32
   fun CreateMappedBitmap(hinstance : HINSTANCE, idbitmap : LibC::IntPtrT, wflags : UInt32, lpcolormap : COLORMAP*, inummaps : Int32) : HBITMAP
 
   # Params # hdc : HDC [In],lprc : RECT* [In],psztext : PSTR [In],uflags : UInt32 [In]
-  fun DrawStatusTextA(hdc : HDC, lprc : RECT*, psztext : PSTR, uflags : UInt32)
+  fun DrawStatusTextA(hdc : HDC, lprc : RECT*, psztext : PSTR, uflags : UInt32) : Void
 
   # Params # hdc : HDC [In],lprc : RECT* [In],psztext : LibC::LPWSTR [In],uflags : UInt32 [In]
-  fun DrawStatusTextW(hdc : HDC, lprc : RECT*, psztext : LibC::LPWSTR, uflags : UInt32)
+  fun DrawStatusTextW(hdc : HDC, lprc : RECT*, psztext : LibC::LPWSTR, uflags : UInt32) : Void
 
   # Params # style : Int32 [In],lpsztext : PSTR [In],hwndparent : LibC::HANDLE [In],wid : UInt32 [In]
   fun CreateStatusWindowA(style : Int32, lpsztext : PSTR, hwndparent : LibC::HANDLE, wid : UInt32) : HANDLE
@@ -5127,19 +5127,19 @@ lib LibWin32
   fun CreateStatusWindowW(style : Int32, lpsztext : LibC::LPWSTR, hwndparent : LibC::HANDLE, wid : UInt32) : HANDLE
 
   # Params # umsg : UInt32 [In],wparam : LibC::UINT_PTR [In],lparam : LPARAM [In],hmainmenu : LibC::HANDLE [In],hinst : HINSTANCE [In],hwndstatus : LibC::HANDLE [In],lpwids : UInt32* [In]
-  fun MenuHelp(umsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, hmainmenu : LibC::HANDLE, hinst : HINSTANCE, hwndstatus : LibC::HANDLE, lpwids : UInt32*)
+  fun MenuHelp(umsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, hmainmenu : LibC::HANDLE, hinst : HINSTANCE, hwndstatus : LibC::HANDLE, lpwids : UInt32*) : Void
 
   # Params # hwnd : LibC::HANDLE [In],uflags : LibC::UINT_PTR [In],lpinfo : Int32* [In]
   fun ShowHideMenuCtl(hwnd : LibC::HANDLE, uflags : LibC::UINT_PTR, lpinfo : Int32*) : LibC::BOOL
 
   # Params # hwnd : LibC::HANDLE [In],lprc : RECT* [In],lpinfo : Int32* [In]
-  fun GetEffectiveClientRect(hwnd : LibC::HANDLE, lprc : RECT*, lpinfo : Int32*)
+  fun GetEffectiveClientRect(hwnd : LibC::HANDLE, lprc : RECT*, lpinfo : Int32*) : Void
 
   # Params # hlb : LibC::HANDLE [In]
   fun MakeDragList(hlb : LibC::HANDLE) : LibC::BOOL
 
   # Params # handparent : LibC::HANDLE [In],hlb : LibC::HANDLE [In],nitem : Int32 [In]
-  fun DrawInsert(handparent : LibC::HANDLE, hlb : LibC::HANDLE, nitem : Int32)
+  fun DrawInsert(handparent : LibC::HANDLE, hlb : LibC::HANDLE, nitem : Int32) : Void
 
   # Params # hlb : LibC::HANDLE [In],pt : POINT [In],bautoscroll : LibC::BOOL [In]
   fun LBItemFromPt(hlb : LibC::HANDLE, pt : POINT, bautoscroll : LibC::BOOL) : Int32
@@ -5154,7 +5154,7 @@ lib LibWin32
   fun TaskDialog(hwndowner : LibC::HANDLE, hinstance : HINSTANCE, pszwindowtitle : LibC::LPWSTR, pszmaininstruction : LibC::LPWSTR, pszcontent : LibC::LPWSTR, dwcommonbuttons : TASKDIALOG_COMMON_BUTTON_FLAGS, pszicon : LibC::LPWSTR, pnbutton : Int32*) : HRESULT
 
   # Params # uilang : UInt16 [In]
-  fun InitMUILanguage(uilang : UInt16)
+  fun InitMUILanguage(uilang : UInt16) : Void
 
   # Params # 
   fun GetMUILanguage : UInt16
@@ -5166,7 +5166,7 @@ lib LibWin32
   fun DSA_Destroy(hdsa : HDSA) : LibC::BOOL
 
   # Params # hdsa : HDSA [In],pfncb : PFNDAENUMCALLBACK [In],pdata : Void* [In]
-  fun DSA_DestroyCallback(hdsa : HDSA, pfncb : PFNDAENUMCALLBACK, pdata : Void*)
+  fun DSA_DestroyCallback(hdsa : HDSA, pfncb : PFNDAENUMCALLBACK, pdata : Void*) : Void
 
   # Params # hdsa : HDSA [In],i : Int32 [In]
   fun DSA_DeleteItem(hdsa : HDSA, i : Int32) : LibC::BOOL
@@ -5175,7 +5175,7 @@ lib LibWin32
   fun DSA_DeleteAllItems(hdsa : HDSA) : LibC::BOOL
 
   # Params # hdsa : HDSA [In],pfncb : PFNDAENUMCALLBACK [In],pdata : Void* [In]
-  fun DSA_EnumCallback(hdsa : HDSA, pfncb : PFNDAENUMCALLBACK, pdata : Void*)
+  fun DSA_EnumCallback(hdsa : HDSA, pfncb : PFNDAENUMCALLBACK, pdata : Void*) : Void
 
   # Params # hdsa : HDSA [In],i : Int32 [In],pitem : Void* [In]
   fun DSA_InsertItem(hdsa : HDSA, i : Int32, pitem : Void*) : Int32
@@ -5211,7 +5211,7 @@ lib LibWin32
   fun DPA_Destroy(hdpa : HDPA) : LibC::BOOL
 
   # Params # hdpa : HDPA [In],pfncb : PFNDAENUMCALLBACK [In],pdata : Void* [In]
-  fun DPA_DestroyCallback(hdpa : HDPA, pfncb : PFNDAENUMCALLBACK, pdata : Void*)
+  fun DPA_DestroyCallback(hdpa : HDPA, pfncb : PFNDAENUMCALLBACK, pdata : Void*) : Void
 
   # Params # hdpa : HDPA [In],i : Int32 [In]
   fun DPA_DeletePtr(hdpa : HDPA, i : Int32) : Void*
@@ -5220,7 +5220,7 @@ lib LibWin32
   fun DPA_DeleteAllPtrs(hdpa : HDPA) : LibC::BOOL
 
   # Params # hdpa : HDPA [In],pfncb : PFNDAENUMCALLBACK [In],pdata : Void* [In]
-  fun DPA_EnumCallback(hdpa : HDPA, pfncb : PFNDAENUMCALLBACK, pdata : Void*)
+  fun DPA_EnumCallback(hdpa : HDPA, pfncb : PFNDAENUMCALLBACK, pdata : Void*) : Void
 
   # Params # pdpa : HDPA [In],cp : Int32 [In]
   fun DPA_Grow(pdpa : HDPA, cp : Int32) : LibC::BOOL
@@ -5457,7 +5457,7 @@ lib LibWin32
   fun GetThemeAppProperties : UInt32
 
   # Params # dwflags : UInt32 [In]
-  fun SetThemeAppProperties(dwflags : UInt32)
+  fun SetThemeAppProperties(dwflags : UInt32) : Void
 
   # Params # pszthemefilename : Char* [In],cchmaxnamechars : Int32 [In],pszcolorbuff : Char* [In],cchmaxcolorchars : Int32 [In],pszsizebuff : Char* [In],cchmaxsizechars : Int32 [In]
   fun GetCurrentThemeName(pszthemefilename : Char*, cchmaxnamechars : Int32, pszcolorbuff : Char*, cchmaxcolorchars : Int32, pszsizebuff : Char*, cchmaxsizechars : Int32) : HRESULT
@@ -5550,7 +5550,7 @@ lib LibWin32
   fun CreateSyntheticPointerDevice(pointertype : POINTER_INPUT_TYPE, maxcount : UInt32, mode : POINTER_FEEDBACK_MODE) : HSYNTHETICPOINTERDEVICE
 
   # Params # device : HSYNTHETICPOINTERDEVICE [In]
-  fun DestroySyntheticPointerDevice(device : HSYNTHETICPOINTERDEVICE)
+  fun DestroySyntheticPointerDevice(device : HSYNTHETICPOINTERDEVICE) : Void
 
   # Params # hwnd : LibC::HANDLE [In],value : UInt32 [In]
   fun RegisterTouchHitTestingWindow(hwnd : LibC::HANDLE, value : UInt32) : LibC::BOOL
@@ -5617,4 +5617,236 @@ lib LibWin32
 
   # Params # window : LibC::HANDLE [In],notifyrange : LibC::BOOL [In]
   fun RegisterPointerDeviceNotifications(window : LibC::HANDLE, notifyrange : LibC::BOOL) : LibC::BOOL
+end
+struct LibWin32::IImageList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add(hbmimage : HBITMAP, hbmmask : HBITMAP, pi : Int32*) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(HBITMAP, HBITMAP, Int32*, HRESULT)).call(hbmimage, hbmmask, pi)
+  end
+  def replace_icon(i : Int32, hicon : LibC::HANDLE, pi : Int32*) : HRESULT
+    @lpVtbl.value.replace_icon.unsafe_as(Proc(Int32, LibC::HANDLE, Int32*, HRESULT)).call(i, hicon, pi)
+  end
+  def set_overlay_image(iimage : Int32, ioverlay : Int32) : HRESULT
+    @lpVtbl.value.set_overlay_image.unsafe_as(Proc(Int32, Int32, HRESULT)).call(iimage, ioverlay)
+  end
+  def replace(i : Int32, hbmimage : HBITMAP, hbmmask : HBITMAP) : HRESULT
+    @lpVtbl.value.replace.unsafe_as(Proc(Int32, HBITMAP, HBITMAP, HRESULT)).call(i, hbmimage, hbmmask)
+  end
+  def add_masked(hbmimage : HBITMAP, crmask : UInt32, pi : Int32*) : HRESULT
+    @lpVtbl.value.add_masked.unsafe_as(Proc(HBITMAP, UInt32, Int32*, HRESULT)).call(hbmimage, crmask, pi)
+  end
+  def draw(pimldp : IMAGELISTDRAWPARAMS*) : HRESULT
+    @lpVtbl.value.draw.unsafe_as(Proc(IMAGELISTDRAWPARAMS*, HRESULT)).call(pimldp)
+  end
+  def remove(i : Int32) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(Int32, HRESULT)).call(i)
+  end
+  def get_icon(i : Int32, flags : UInt32, picon : HANDLE*) : HRESULT
+    @lpVtbl.value.get_icon.unsafe_as(Proc(Int32, UInt32, HANDLE*, HRESULT)).call(i, flags, picon)
+  end
+  def get_image_info(i : Int32, pimageinfo : IMAGEINFO*) : HRESULT
+    @lpVtbl.value.get_image_info.unsafe_as(Proc(Int32, IMAGEINFO*, HRESULT)).call(i, pimageinfo)
+  end
+  def copy(idst : Int32, punksrc : IUnknown, isrc : Int32, uflags : UInt32) : HRESULT
+    @lpVtbl.value.copy.unsafe_as(Proc(Int32, IUnknown, Int32, UInt32, HRESULT)).call(idst, punksrc, isrc, uflags)
+  end
+  def merge(i1 : Int32, punk2 : IUnknown, i2 : Int32, dx : Int32, dy : Int32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.merge.unsafe_as(Proc(Int32, IUnknown, Int32, Int32, Int32, Guid*, Void**, HRESULT)).call(i1, punk2, i2, dx, dy, riid, ppv)
+  end
+  def clone(riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  end
+  def get_image_rect(i : Int32, prc : RECT*) : HRESULT
+    @lpVtbl.value.get_image_rect.unsafe_as(Proc(Int32, RECT*, HRESULT)).call(i, prc)
+  end
+  def get_icon_size(cx : Int32*, cy : Int32*) : HRESULT
+    @lpVtbl.value.get_icon_size.unsafe_as(Proc(Int32*, Int32*, HRESULT)).call(cx, cy)
+  end
+  def set_icon_size(cx : Int32, cy : Int32) : HRESULT
+    @lpVtbl.value.set_icon_size.unsafe_as(Proc(Int32, Int32, HRESULT)).call(cx, cy)
+  end
+  def get_image_count(pi : Int32*) : HRESULT
+    @lpVtbl.value.get_image_count.unsafe_as(Proc(Int32*, HRESULT)).call(pi)
+  end
+  def set_image_count(unewcount : UInt32) : HRESULT
+    @lpVtbl.value.set_image_count.unsafe_as(Proc(UInt32, HRESULT)).call(unewcount)
+  end
+  def set_bk_color(clrbk : UInt32, pclr : UInt32*) : HRESULT
+    @lpVtbl.value.set_bk_color.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(clrbk, pclr)
+  end
+  def get_bk_color(pclr : UInt32*) : HRESULT
+    @lpVtbl.value.get_bk_color.unsafe_as(Proc(UInt32*, HRESULT)).call(pclr)
+  end
+  def begin_drag(itrack : Int32, dxhotspot : Int32, dyhotspot : Int32) : HRESULT
+    @lpVtbl.value.begin_drag.unsafe_as(Proc(Int32, Int32, Int32, HRESULT)).call(itrack, dxhotspot, dyhotspot)
+  end
+  def end_drag : HRESULT
+    @lpVtbl.value.end_drag.unsafe_as(Proc(HRESULT)).call
+  end
+  def drag_enter(hwndlock : LibC::HANDLE, x : Int32, y : Int32) : HRESULT
+    @lpVtbl.value.drag_enter.unsafe_as(Proc(LibC::HANDLE, Int32, Int32, HRESULT)).call(hwndlock, x, y)
+  end
+  def drag_leave(hwndlock : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.drag_leave.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwndlock)
+  end
+  def drag_move(x : Int32, y : Int32) : HRESULT
+    @lpVtbl.value.drag_move.unsafe_as(Proc(Int32, Int32, HRESULT)).call(x, y)
+  end
+  def set_drag_cursor_image(punk : IUnknown, idrag : Int32, dxhotspot : Int32, dyhotspot : Int32) : HRESULT
+    @lpVtbl.value.set_drag_cursor_image.unsafe_as(Proc(IUnknown, Int32, Int32, Int32, HRESULT)).call(punk, idrag, dxhotspot, dyhotspot)
+  end
+  def drag_show_nolock(fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.drag_show_nolock.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fshow)
+  end
+  def get_drag_image(ppt : POINT*, ppthotspot : POINT*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_drag_image.unsafe_as(Proc(POINT*, POINT*, Guid*, Void**, HRESULT)).call(ppt, ppthotspot, riid, ppv)
+  end
+  def get_item_flags(i : Int32, dwflags : IMAGE_LIST_ITEM_FLAGS*) : HRESULT
+    @lpVtbl.value.get_item_flags.unsafe_as(Proc(Int32, IMAGE_LIST_ITEM_FLAGS*, HRESULT)).call(i, dwflags)
+  end
+  def get_overlay_image(ioverlay : Int32, piindex : Int32*) : HRESULT
+    @lpVtbl.value.get_overlay_image.unsafe_as(Proc(Int32, Int32*, HRESULT)).call(ioverlay, piindex)
+  end
+end
+struct LibWin32::IImageList2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add(hbmimage : HBITMAP, hbmmask : HBITMAP, pi : Int32*) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(HBITMAP, HBITMAP, Int32*, HRESULT)).call(hbmimage, hbmmask, pi)
+  end
+  def replace_icon(i : Int32, hicon : LibC::HANDLE, pi : Int32*) : HRESULT
+    @lpVtbl.value.replace_icon.unsafe_as(Proc(Int32, LibC::HANDLE, Int32*, HRESULT)).call(i, hicon, pi)
+  end
+  def set_overlay_image(iimage : Int32, ioverlay : Int32) : HRESULT
+    @lpVtbl.value.set_overlay_image.unsafe_as(Proc(Int32, Int32, HRESULT)).call(iimage, ioverlay)
+  end
+  def replace(i : Int32, hbmimage : HBITMAP, hbmmask : HBITMAP) : HRESULT
+    @lpVtbl.value.replace.unsafe_as(Proc(Int32, HBITMAP, HBITMAP, HRESULT)).call(i, hbmimage, hbmmask)
+  end
+  def add_masked(hbmimage : HBITMAP, crmask : UInt32, pi : Int32*) : HRESULT
+    @lpVtbl.value.add_masked.unsafe_as(Proc(HBITMAP, UInt32, Int32*, HRESULT)).call(hbmimage, crmask, pi)
+  end
+  def draw(pimldp : IMAGELISTDRAWPARAMS*) : HRESULT
+    @lpVtbl.value.draw.unsafe_as(Proc(IMAGELISTDRAWPARAMS*, HRESULT)).call(pimldp)
+  end
+  def remove(i : Int32) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(Int32, HRESULT)).call(i)
+  end
+  def get_icon(i : Int32, flags : UInt32, picon : HANDLE*) : HRESULT
+    @lpVtbl.value.get_icon.unsafe_as(Proc(Int32, UInt32, HANDLE*, HRESULT)).call(i, flags, picon)
+  end
+  def get_image_info(i : Int32, pimageinfo : IMAGEINFO*) : HRESULT
+    @lpVtbl.value.get_image_info.unsafe_as(Proc(Int32, IMAGEINFO*, HRESULT)).call(i, pimageinfo)
+  end
+  def copy(idst : Int32, punksrc : IUnknown, isrc : Int32, uflags : UInt32) : HRESULT
+    @lpVtbl.value.copy.unsafe_as(Proc(Int32, IUnknown, Int32, UInt32, HRESULT)).call(idst, punksrc, isrc, uflags)
+  end
+  def merge(i1 : Int32, punk2 : IUnknown, i2 : Int32, dx : Int32, dy : Int32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.merge.unsafe_as(Proc(Int32, IUnknown, Int32, Int32, Int32, Guid*, Void**, HRESULT)).call(i1, punk2, i2, dx, dy, riid, ppv)
+  end
+  def clone(riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  end
+  def get_image_rect(i : Int32, prc : RECT*) : HRESULT
+    @lpVtbl.value.get_image_rect.unsafe_as(Proc(Int32, RECT*, HRESULT)).call(i, prc)
+  end
+  def get_icon_size(cx : Int32*, cy : Int32*) : HRESULT
+    @lpVtbl.value.get_icon_size.unsafe_as(Proc(Int32*, Int32*, HRESULT)).call(cx, cy)
+  end
+  def set_icon_size(cx : Int32, cy : Int32) : HRESULT
+    @lpVtbl.value.set_icon_size.unsafe_as(Proc(Int32, Int32, HRESULT)).call(cx, cy)
+  end
+  def get_image_count(pi : Int32*) : HRESULT
+    @lpVtbl.value.get_image_count.unsafe_as(Proc(Int32*, HRESULT)).call(pi)
+  end
+  def set_image_count(unewcount : UInt32) : HRESULT
+    @lpVtbl.value.set_image_count.unsafe_as(Proc(UInt32, HRESULT)).call(unewcount)
+  end
+  def set_bk_color(clrbk : UInt32, pclr : UInt32*) : HRESULT
+    @lpVtbl.value.set_bk_color.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(clrbk, pclr)
+  end
+  def get_bk_color(pclr : UInt32*) : HRESULT
+    @lpVtbl.value.get_bk_color.unsafe_as(Proc(UInt32*, HRESULT)).call(pclr)
+  end
+  def begin_drag(itrack : Int32, dxhotspot : Int32, dyhotspot : Int32) : HRESULT
+    @lpVtbl.value.begin_drag.unsafe_as(Proc(Int32, Int32, Int32, HRESULT)).call(itrack, dxhotspot, dyhotspot)
+  end
+  def end_drag : HRESULT
+    @lpVtbl.value.end_drag.unsafe_as(Proc(HRESULT)).call
+  end
+  def drag_enter(hwndlock : LibC::HANDLE, x : Int32, y : Int32) : HRESULT
+    @lpVtbl.value.drag_enter.unsafe_as(Proc(LibC::HANDLE, Int32, Int32, HRESULT)).call(hwndlock, x, y)
+  end
+  def drag_leave(hwndlock : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.drag_leave.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwndlock)
+  end
+  def drag_move(x : Int32, y : Int32) : HRESULT
+    @lpVtbl.value.drag_move.unsafe_as(Proc(Int32, Int32, HRESULT)).call(x, y)
+  end
+  def set_drag_cursor_image(punk : IUnknown, idrag : Int32, dxhotspot : Int32, dyhotspot : Int32) : HRESULT
+    @lpVtbl.value.set_drag_cursor_image.unsafe_as(Proc(IUnknown, Int32, Int32, Int32, HRESULT)).call(punk, idrag, dxhotspot, dyhotspot)
+  end
+  def drag_show_nolock(fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.drag_show_nolock.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fshow)
+  end
+  def get_drag_image(ppt : POINT*, ppthotspot : POINT*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_drag_image.unsafe_as(Proc(POINT*, POINT*, Guid*, Void**, HRESULT)).call(ppt, ppthotspot, riid, ppv)
+  end
+  def get_item_flags(i : Int32, dwflags : IMAGE_LIST_ITEM_FLAGS*) : HRESULT
+    @lpVtbl.value.get_item_flags.unsafe_as(Proc(Int32, IMAGE_LIST_ITEM_FLAGS*, HRESULT)).call(i, dwflags)
+  end
+  def get_overlay_image(ioverlay : Int32, piindex : Int32*) : HRESULT
+    @lpVtbl.value.get_overlay_image.unsafe_as(Proc(Int32, Int32*, HRESULT)).call(ioverlay, piindex)
+  end
+  def resize(cxnewiconsize : Int32, cynewiconsize : Int32) : HRESULT
+    @lpVtbl.value.resize.unsafe_as(Proc(Int32, Int32, HRESULT)).call(cxnewiconsize, cynewiconsize)
+  end
+  def get_original_size(iimage : Int32, dwflags : UInt32, pcx : Int32*, pcy : Int32*) : HRESULT
+    @lpVtbl.value.get_original_size.unsafe_as(Proc(Int32, UInt32, Int32*, Int32*, HRESULT)).call(iimage, dwflags, pcx, pcy)
+  end
+  def set_original_size(iimage : Int32, cx : Int32, cy : Int32) : HRESULT
+    @lpVtbl.value.set_original_size.unsafe_as(Proc(Int32, Int32, Int32, HRESULT)).call(iimage, cx, cy)
+  end
+  def set_callback(punk : IUnknown) : HRESULT
+    @lpVtbl.value.set_callback.unsafe_as(Proc(IUnknown, HRESULT)).call(punk)
+  end
+  def get_callback(riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_callback.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  end
+  def force_image_present(iimage : Int32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.force_image_present.unsafe_as(Proc(Int32, UInt32, HRESULT)).call(iimage, dwflags)
+  end
+  def discard_images(ifirstimage : Int32, ilastimage : Int32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.discard_images.unsafe_as(Proc(Int32, Int32, UInt32, HRESULT)).call(ifirstimage, ilastimage, dwflags)
+  end
+  def preload_images(pimldp : IMAGELISTDRAWPARAMS*) : HRESULT
+    @lpVtbl.value.preload_images.unsafe_as(Proc(IMAGELISTDRAWPARAMS*, HRESULT)).call(pimldp)
+  end
+  def get_statistics(pils : IMAGELISTSTATS*) : HRESULT
+    @lpVtbl.value.get_statistics.unsafe_as(Proc(IMAGELISTSTATS*, HRESULT)).call(pils)
+  end
+  def initialize(cx : Int32, cy : Int32, flags : IMAGELIST_CREATION_FLAGS, cinitial : Int32, cgrow : Int32) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(Int32, Int32, IMAGELIST_CREATION_FLAGS, Int32, Int32, HRESULT)).call(cx, cy, flags, cinitial, cgrow)
+  end
+  def replace2(i : Int32, hbmimage : HBITMAP, hbmmask : HBITMAP, punk : IUnknown, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.replace2.unsafe_as(Proc(Int32, HBITMAP, HBITMAP, IUnknown, UInt32, HRESULT)).call(i, hbmimage, hbmmask, punk, dwflags)
+  end
+  def replace_from_image_list(i : Int32, pil : IImageList, isrc : Int32, punk : IUnknown, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.replace_from_image_list.unsafe_as(Proc(Int32, IImageList, Int32, IUnknown, UInt32, HRESULT)).call(i, pil, isrc, punk, dwflags)
+  end
 end

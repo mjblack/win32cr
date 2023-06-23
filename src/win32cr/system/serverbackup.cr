@@ -50,10 +50,10 @@ lib LibWin32
 
 
   struct IWsbApplicationBackupSupportVTbl
-    query_interface : Proc(IWsbApplicationBackupSupport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWsbApplicationBackupSupport*, UInt32)
-    release : Proc(IWsbApplicationBackupSupport*, UInt32)
-    check_consistency : Proc(IWsbApplicationBackupSupport*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR*, LibC::LPWSTR*, IWsbApplicationAsync*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    check_consistency : UInt64
   end
 
   IWsbApplicationBackupSupport_GUID = "1eff3510-4a27-46ad-b9e0-08332f0f4f6d"
@@ -63,13 +63,13 @@ lib LibWin32
   end
 
   struct IWsbApplicationRestoreSupportVTbl
-    query_interface : Proc(IWsbApplicationRestoreSupport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWsbApplicationRestoreSupport*, UInt32)
-    release : Proc(IWsbApplicationRestoreSupport*, UInt32)
-    pre_restore : Proc(IWsbApplicationRestoreSupport*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, BOOLEAN, HRESULT)
-    post_restore : Proc(IWsbApplicationRestoreSupport*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, BOOLEAN, HRESULT)
-    order_components : Proc(IWsbApplicationRestoreSupport*, UInt32, LibC::LPWSTR*, LibC::LPWSTR*, LibC::LPWSTR**, LibC::LPWSTR**, HRESULT)
-    is_roll_forward_supported : Proc(IWsbApplicationRestoreSupport*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    pre_restore : UInt64
+    post_restore : UInt64
+    order_components : UInt64
+    is_roll_forward_supported : UInt64
   end
 
   IWsbApplicationRestoreSupport_GUID = "8d3bdb38-4ee8-4718-85f9-c7dbc4ab77aa"
@@ -79,11 +79,11 @@ lib LibWin32
   end
 
   struct IWsbApplicationAsyncVTbl
-    query_interface : Proc(IWsbApplicationAsync*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWsbApplicationAsync*, UInt32)
-    release : Proc(IWsbApplicationAsync*, UInt32)
-    query_status : Proc(IWsbApplicationAsync*, HRESULT*, HRESULT)
-    abort : Proc(IWsbApplicationAsync*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    query_status : UInt64
+    abort : UInt64
   end
 
   IWsbApplicationAsync_GUID = "0843f6f7-895c-44a6-b0c2-05a5022aa3a1"
@@ -92,4 +92,58 @@ lib LibWin32
     lpVtbl : IWsbApplicationAsyncVTbl*
   end
 
+end
+struct LibWin32::IWsbApplicationBackupSupport
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def check_consistency(wszwritermetadata : LibC::LPWSTR, wszcomponentname : LibC::LPWSTR, wszcomponentlogicalpath : LibC::LPWSTR, cvolumes : UInt32, rgwszsourcevolumepath : LibC::LPWSTR*, rgwszsnapshotvolumepath : LibC::LPWSTR*, ppasync : IWsbApplicationAsync*) : HRESULT
+    @lpVtbl.value.check_consistency.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR*, LibC::LPWSTR*, IWsbApplicationAsync*, HRESULT)).call(wszwritermetadata, wszcomponentname, wszcomponentlogicalpath, cvolumes, rgwszsourcevolumepath, rgwszsnapshotvolumepath, ppasync)
+  end
+end
+struct LibWin32::IWsbApplicationRestoreSupport
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def pre_restore(wszwritermetadata : LibC::LPWSTR, wszcomponentname : LibC::LPWSTR, wszcomponentlogicalpath : LibC::LPWSTR, bnorollforward : BOOLEAN) : HRESULT
+    @lpVtbl.value.pre_restore.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, BOOLEAN, HRESULT)).call(wszwritermetadata, wszcomponentname, wszcomponentlogicalpath, bnorollforward)
+  end
+  def post_restore(wszwritermetadata : LibC::LPWSTR, wszcomponentname : LibC::LPWSTR, wszcomponentlogicalpath : LibC::LPWSTR, bnorollforward : BOOLEAN) : HRESULT
+    @lpVtbl.value.post_restore.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, BOOLEAN, HRESULT)).call(wszwritermetadata, wszcomponentname, wszcomponentlogicalpath, bnorollforward)
+  end
+  def order_components(ccomponents : UInt32, rgcomponentname : LibC::LPWSTR*, rgcomponentlogicalpaths : LibC::LPWSTR*, prgcomponentname : LibC::LPWSTR**, prgcomponentlogicalpath : LibC::LPWSTR**) : HRESULT
+    @lpVtbl.value.order_components.unsafe_as(Proc(UInt32, LibC::LPWSTR*, LibC::LPWSTR*, LibC::LPWSTR**, LibC::LPWSTR**, HRESULT)).call(ccomponents, rgcomponentname, rgcomponentlogicalpaths, prgcomponentname, prgcomponentlogicalpath)
+  end
+  def is_roll_forward_supported(pbrollforwardsupported : UInt8*) : HRESULT
+    @lpVtbl.value.is_roll_forward_supported.unsafe_as(Proc(UInt8*, HRESULT)).call(pbrollforwardsupported)
+  end
+end
+struct LibWin32::IWsbApplicationAsync
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def query_status(phrresult : HRESULT*) : HRESULT
+    @lpVtbl.value.query_status.unsafe_as(Proc(HRESULT*, HRESULT)).call(phrresult)
+  end
+  def abort : HRESULT
+    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT)).call
+  end
 end

@@ -2357,7 +2357,7 @@ lib LibWin32
     flags : UInt64
     provisioned_capacity : UInt64
     media_type : STORAGE_TIER_MEDIA_TYPE
-    class : STORAGE_TIER_CLASS
+    class_ : STORAGE_TIER_CLASS
   end
   struct STORAGE_DEVICE_TIERING_DESCRIPTOR
     version : UInt32
@@ -3627,7 +3627,7 @@ lib LibWin32
   struct DISK_HISTOGRAM
     disk_size : LARGE_INTEGER
     start : LARGE_INTEGER
-    rend : LARGE_INTEGER
+    end_ : LARGE_INTEGER
     average : LARGE_INTEGER
     average_read : LARGE_INTEGER
     average_write : LARGE_INTEGER
@@ -4970,7 +4970,7 @@ lib LibWin32
     flags : FILE_STORAGE_TIER_FLAGS
     provisioned_capacity : UInt64
     media_type : FILE_STORAGE_TIER_MEDIA_TYPE
-    class : FILE_STORAGE_TIER_CLASS
+    class_ : FILE_STORAGE_TIER_CLASS
   end
   struct FSCTL_QUERY_STORAGE_CLASSES_OUTPUT
     version : UInt32
@@ -4992,7 +4992,7 @@ lib LibWin32
     reparse_data_offset : UInt32
   end
   struct STREAM_INFORMATION_ENTRY_StreamInformation_DesiredStorageClass
-    class : FILE_STORAGE_TIER_CLASS
+    class_ : FILE_STORAGE_TIER_CLASS
     flags : UInt32
   end
   struct STREAM_INFORMATION_ENTRY_StreamInformation_DataStream
@@ -5030,7 +5030,7 @@ lib LibWin32
     regions : FILE_STORAGE_TIER_REGION[0]*
   end
   struct FILE_DESIRED_STORAGE_CLASS_INFORMATION
-    class : FILE_STORAGE_TIER_CLASS
+    class_ : FILE_STORAGE_TIER_CLASS
     flags : UInt32
   end
   struct DUPLICATE_EXTENTS_DATA

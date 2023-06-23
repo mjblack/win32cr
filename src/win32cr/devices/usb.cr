@@ -1247,7 +1247,7 @@ lib LibWin32
     length : UInt16
     interface_number : UInt8
     alternate_setting : UInt8
-    class : UInt8
+    class_ : UInt8
     sub_class : UInt8
     protocol : UInt8
     reserved : UInt8

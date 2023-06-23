@@ -50,10 +50,10 @@ lib LibWin32
 
 
   struct IIdentityAdviseVTbl
-    query_interface : Proc(IIdentityAdvise*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IIdentityAdvise*, UInt32)
-    release : Proc(IIdentityAdvise*, UInt32)
-    identity_updated : Proc(IIdentityAdvise*, IdentityUpdateEvent, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    identity_updated : UInt64
   end
 
   IIdentityAdvise_GUID = "4e982fed-d14b-440c-b8d6-bb386453d386"
@@ -63,11 +63,11 @@ lib LibWin32
   end
 
   struct AsyncIIdentityAdviseVTbl
-    query_interface : Proc(AsyncIIdentityAdvise*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AsyncIIdentityAdvise*, UInt32)
-    release : Proc(AsyncIIdentityAdvise*, UInt32)
-    begin_identity_updated : Proc(AsyncIIdentityAdvise*, UInt32, LibC::LPWSTR, HRESULT)
-    finish_identity_updated : Proc(AsyncIIdentityAdvise*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_identity_updated : UInt64
+    finish_identity_updated : UInt64
   end
 
   AsyncIIdentityAdvise_GUID = "3ab4c8da-d038-4830-8dd9-3253c55a127f"
@@ -77,17 +77,17 @@ lib LibWin32
   end
 
   struct IIdentityProviderVTbl
-    query_interface : Proc(IIdentityProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IIdentityProvider*, UInt32)
-    release : Proc(IIdentityProvider*, UInt32)
-    get_identity_enum : Proc(IIdentityProvider*, IDENTITY_TYPE, PROPERTYKEY*, PROPVARIANT*, IEnumUnknown*, HRESULT)
-    create : Proc(IIdentityProvider*, LibC::LPWSTR, IPropertyStore*, PROPVARIANT*, HRESULT)
-    import : Proc(IIdentityProvider*, IPropertyStore, HRESULT)
-    delete : Proc(IIdentityProvider*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
-    find_by_unique_id : Proc(IIdentityProvider*, LibC::LPWSTR, IPropertyStore*, HRESULT)
-    get_provider_property_store : Proc(IIdentityProvider*, IPropertyStore*, HRESULT)
-    advise : Proc(IIdentityProvider*, IIdentityAdvise, IdentityUpdateEvent, UInt32*, HRESULT)
-    un_advise : Proc(IIdentityProvider*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_identity_enum : UInt64
+    create : UInt64
+    import : UInt64
+    delete : UInt64
+    find_by_unique_id : UInt64
+    get_provider_property_store : UInt64
+    advise : UInt64
+    un_advise : UInt64
   end
 
   IIdentityProvider_GUID = "0d1b9e0c-e8ba-4f55-a81b-bce934b948f5"
@@ -97,25 +97,25 @@ lib LibWin32
   end
 
   struct AsyncIIdentityProviderVTbl
-    query_interface : Proc(AsyncIIdentityProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AsyncIIdentityProvider*, UInt32)
-    release : Proc(AsyncIIdentityProvider*, UInt32)
-    begin_get_identity_enum : Proc(AsyncIIdentityProvider*, IDENTITY_TYPE, PROPERTYKEY*, PROPVARIANT*, HRESULT)
-    finish_get_identity_enum : Proc(AsyncIIdentityProvider*, IEnumUnknown*, HRESULT)
-    begin_create : Proc(AsyncIIdentityProvider*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
-    finish_create : Proc(AsyncIIdentityProvider*, IPropertyStore*, HRESULT)
-    begin_import : Proc(AsyncIIdentityProvider*, IPropertyStore, HRESULT)
-    finish_import : Proc(AsyncIIdentityProvider*, HRESULT)
-    begin_delete : Proc(AsyncIIdentityProvider*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
-    finish_delete : Proc(AsyncIIdentityProvider*, HRESULT)
-    begin_find_by_unique_id : Proc(AsyncIIdentityProvider*, LibC::LPWSTR, HRESULT)
-    finish_find_by_unique_id : Proc(AsyncIIdentityProvider*, IPropertyStore*, HRESULT)
-    begin_get_provider_property_store : Proc(AsyncIIdentityProvider*, HRESULT)
-    finish_get_provider_property_store : Proc(AsyncIIdentityProvider*, IPropertyStore*, HRESULT)
-    begin_advise : Proc(AsyncIIdentityProvider*, IIdentityAdvise, UInt32, HRESULT)
-    finish_advise : Proc(AsyncIIdentityProvider*, UInt32*, HRESULT)
-    begin_un_advise : Proc(AsyncIIdentityProvider*, UInt32, HRESULT)
-    finish_un_advise : Proc(AsyncIIdentityProvider*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_get_identity_enum : UInt64
+    finish_get_identity_enum : UInt64
+    begin_create : UInt64
+    finish_create : UInt64
+    begin_import : UInt64
+    finish_import : UInt64
+    begin_delete : UInt64
+    finish_delete : UInt64
+    begin_find_by_unique_id : UInt64
+    finish_find_by_unique_id : UInt64
+    begin_get_provider_property_store : UInt64
+    finish_get_provider_property_store : UInt64
+    begin_advise : UInt64
+    finish_advise : UInt64
+    begin_un_advise : UInt64
+    finish_un_advise : UInt64
   end
 
   AsyncIIdentityProvider_GUID = "c6fc9901-c433-4646-8f48-4e4687aae2a0"
@@ -125,12 +125,12 @@ lib LibWin32
   end
 
   struct IAssociatedIdentityProviderVTbl
-    query_interface : Proc(IAssociatedIdentityProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAssociatedIdentityProvider*, UInt32)
-    release : Proc(IAssociatedIdentityProvider*, UInt32)
-    associate_identity : Proc(IAssociatedIdentityProvider*, LibC::HANDLE, IPropertyStore*, HRESULT)
-    disassociate_identity : Proc(IAssociatedIdentityProvider*, LibC::HANDLE, LibC::LPWSTR, HRESULT)
-    change_credential : Proc(IAssociatedIdentityProvider*, LibC::HANDLE, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    associate_identity : UInt64
+    disassociate_identity : UInt64
+    change_credential : UInt64
   end
 
   IAssociatedIdentityProvider_GUID = "2af066b3-4cbb-4cba-a798-204b6af68cc0"
@@ -140,15 +140,15 @@ lib LibWin32
   end
 
   struct AsyncIAssociatedIdentityProviderVTbl
-    query_interface : Proc(AsyncIAssociatedIdentityProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AsyncIAssociatedIdentityProvider*, UInt32)
-    release : Proc(AsyncIAssociatedIdentityProvider*, UInt32)
-    begin_associate_identity : Proc(AsyncIAssociatedIdentityProvider*, LibC::HANDLE, HRESULT)
-    finish_associate_identity : Proc(AsyncIAssociatedIdentityProvider*, IPropertyStore*, HRESULT)
-    begin_disassociate_identity : Proc(AsyncIAssociatedIdentityProvider*, LibC::HANDLE, LibC::LPWSTR, HRESULT)
-    finish_disassociate_identity : Proc(AsyncIAssociatedIdentityProvider*, HRESULT)
-    begin_change_credential : Proc(AsyncIAssociatedIdentityProvider*, LibC::HANDLE, LibC::LPWSTR, HRESULT)
-    finish_change_credential : Proc(AsyncIAssociatedIdentityProvider*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_associate_identity : UInt64
+    finish_associate_identity : UInt64
+    begin_disassociate_identity : UInt64
+    finish_disassociate_identity : UInt64
+    begin_change_credential : UInt64
+    finish_change_credential : UInt64
   end
 
   AsyncIAssociatedIdentityProvider_GUID = "2834d6ed-297e-4e72-8a51-961e86f05152"
@@ -158,14 +158,14 @@ lib LibWin32
   end
 
   struct IConnectedIdentityProviderVTbl
-    query_interface : Proc(IConnectedIdentityProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IConnectedIdentityProvider*, UInt32)
-    release : Proc(IConnectedIdentityProvider*, UInt32)
-    connect_identity : Proc(IConnectedIdentityProvider*, UInt8*, UInt32, HRESULT)
-    disconnect_identity : Proc(IConnectedIdentityProvider*, HRESULT)
-    is_connected : Proc(IConnectedIdentityProvider*, LibC::BOOL*, HRESULT)
-    get_url : Proc(IConnectedIdentityProvider*, IDENTITY_URL, IBindCtx, VARIANT*, LibC::LPWSTR*, HRESULT)
-    get_account_state : Proc(IConnectedIdentityProvider*, ACCOUNT_STATE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    connect_identity : UInt64
+    disconnect_identity : UInt64
+    is_connected : UInt64
+    get_url : UInt64
+    get_account_state : UInt64
   end
 
   IConnectedIdentityProvider_GUID = "b7417b54-e08c-429b-96c8-678d1369ecb1"
@@ -175,19 +175,19 @@ lib LibWin32
   end
 
   struct AsyncIConnectedIdentityProviderVTbl
-    query_interface : Proc(AsyncIConnectedIdentityProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AsyncIConnectedIdentityProvider*, UInt32)
-    release : Proc(AsyncIConnectedIdentityProvider*, UInt32)
-    begin_connect_identity : Proc(AsyncIConnectedIdentityProvider*, UInt8*, UInt32, HRESULT)
-    finish_connect_identity : Proc(AsyncIConnectedIdentityProvider*, HRESULT)
-    begin_disconnect_identity : Proc(AsyncIConnectedIdentityProvider*, HRESULT)
-    finish_disconnect_identity : Proc(AsyncIConnectedIdentityProvider*, HRESULT)
-    begin_is_connected : Proc(AsyncIConnectedIdentityProvider*, HRESULT)
-    finish_is_connected : Proc(AsyncIConnectedIdentityProvider*, LibC::BOOL*, HRESULT)
-    begin_get_url : Proc(AsyncIConnectedIdentityProvider*, IDENTITY_URL, IBindCtx, HRESULT)
-    finish_get_url : Proc(AsyncIConnectedIdentityProvider*, VARIANT*, LibC::LPWSTR*, HRESULT)
-    begin_get_account_state : Proc(AsyncIConnectedIdentityProvider*, HRESULT)
-    finish_get_account_state : Proc(AsyncIConnectedIdentityProvider*, ACCOUNT_STATE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_connect_identity : UInt64
+    finish_connect_identity : UInt64
+    begin_disconnect_identity : UInt64
+    finish_disconnect_identity : UInt64
+    begin_is_connected : UInt64
+    finish_is_connected : UInt64
+    begin_get_url : UInt64
+    finish_get_url : UInt64
+    begin_get_account_state : UInt64
+    finish_get_account_state : UInt64
   end
 
   AsyncIConnectedIdentityProvider_GUID = "9ce55141-bce9-4e15-824d-43d79f512f93"
@@ -197,11 +197,11 @@ lib LibWin32
   end
 
   struct IIdentityAuthenticationVTbl
-    query_interface : Proc(IIdentityAuthentication*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IIdentityAuthentication*, UInt32)
-    release : Proc(IIdentityAuthentication*, UInt32)
-    set_identity_credential : Proc(IIdentityAuthentication*, UInt8*, UInt32, HRESULT)
-    validate_identity_credential : Proc(IIdentityAuthentication*, UInt8*, UInt32, IPropertyStore*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_identity_credential : UInt64
+    validate_identity_credential : UInt64
   end
 
   IIdentityAuthentication_GUID = "5e7ef254-979f-43b5-b74e-06e4eb7df0f9"
@@ -211,13 +211,13 @@ lib LibWin32
   end
 
   struct AsyncIIdentityAuthenticationVTbl
-    query_interface : Proc(AsyncIIdentityAuthentication*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AsyncIIdentityAuthentication*, UInt32)
-    release : Proc(AsyncIIdentityAuthentication*, UInt32)
-    begin_set_identity_credential : Proc(AsyncIIdentityAuthentication*, UInt8*, UInt32, HRESULT)
-    finish_set_identity_credential : Proc(AsyncIIdentityAuthentication*, HRESULT)
-    begin_validate_identity_credential : Proc(AsyncIIdentityAuthentication*, UInt8*, UInt32, IPropertyStore*, HRESULT)
-    finish_validate_identity_credential : Proc(AsyncIIdentityAuthentication*, IPropertyStore*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_set_identity_credential : UInt64
+    finish_set_identity_credential : UInt64
+    begin_validate_identity_credential : UInt64
+    finish_validate_identity_credential : UInt64
   end
 
   AsyncIIdentityAuthentication_GUID = "f9a2f918-feca-4e9c-9633-61cbf13ed34d"
@@ -227,15 +227,15 @@ lib LibWin32
   end
 
   struct IIdentityStoreVTbl
-    query_interface : Proc(IIdentityStore*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IIdentityStore*, UInt32)
-    release : Proc(IIdentityStore*, UInt32)
-    get_count : Proc(IIdentityStore*, UInt32*, HRESULT)
-    get_at : Proc(IIdentityStore*, UInt32, Guid*, IUnknown*, HRESULT)
-    add_to_cache : Proc(IIdentityStore*, LibC::LPWSTR, Guid*, HRESULT)
-    convert_to_sid : Proc(IIdentityStore*, LibC::LPWSTR, Guid*, UInt16, UInt8*, UInt16*, HRESULT)
-    enumerate_identities : Proc(IIdentityStore*, IDENTITY_TYPE, PROPERTYKEY*, PROPVARIANT*, IEnumUnknown*, HRESULT)
-    reset : Proc(IIdentityStore*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    add_to_cache : UInt64
+    convert_to_sid : UInt64
+    enumerate_identities : UInt64
+    reset : UInt64
   end
 
   IIdentityStore_GUID = "df586fa5-6f35-44f1-b209-b38e169772eb"
@@ -245,21 +245,21 @@ lib LibWin32
   end
 
   struct AsyncIIdentityStoreVTbl
-    query_interface : Proc(AsyncIIdentityStore*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AsyncIIdentityStore*, UInt32)
-    release : Proc(AsyncIIdentityStore*, UInt32)
-    begin_get_count : Proc(AsyncIIdentityStore*, HRESULT)
-    finish_get_count : Proc(AsyncIIdentityStore*, UInt32*, HRESULT)
-    begin_get_at : Proc(AsyncIIdentityStore*, UInt32, Guid*, HRESULT)
-    finish_get_at : Proc(AsyncIIdentityStore*, Guid*, IUnknown*, HRESULT)
-    begin_add_to_cache : Proc(AsyncIIdentityStore*, LibC::LPWSTR, Guid*, HRESULT)
-    finish_add_to_cache : Proc(AsyncIIdentityStore*, HRESULT)
-    begin_convert_to_sid : Proc(AsyncIIdentityStore*, LibC::LPWSTR, Guid*, UInt16, UInt8*, HRESULT)
-    finish_convert_to_sid : Proc(AsyncIIdentityStore*, UInt8*, UInt16*, HRESULT)
-    begin_enumerate_identities : Proc(AsyncIIdentityStore*, IDENTITY_TYPE, PROPERTYKEY*, PROPVARIANT*, HRESULT)
-    finish_enumerate_identities : Proc(AsyncIIdentityStore*, IEnumUnknown*, HRESULT)
-    begin_reset : Proc(AsyncIIdentityStore*, HRESULT)
-    finish_reset : Proc(AsyncIIdentityStore*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_get_count : UInt64
+    finish_get_count : UInt64
+    begin_get_at : UInt64
+    finish_get_at : UInt64
+    begin_add_to_cache : UInt64
+    finish_add_to_cache : UInt64
+    begin_convert_to_sid : UInt64
+    finish_convert_to_sid : UInt64
+    begin_enumerate_identities : UInt64
+    finish_enumerate_identities : UInt64
+    begin_reset : UInt64
+    finish_reset : UInt64
   end
 
   AsyncIIdentityStore_GUID = "eefa1616-48de-4872-aa64-6e6206535a51"
@@ -269,11 +269,11 @@ lib LibWin32
   end
 
   struct IIdentityStoreExVTbl
-    query_interface : Proc(IIdentityStoreEx*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IIdentityStoreEx*, UInt32)
-    release : Proc(IIdentityStoreEx*, UInt32)
-    create_connected_identity : Proc(IIdentityStoreEx*, LibC::LPWSTR, LibC::LPWSTR, Guid*, HRESULT)
-    delete_connected_identity : Proc(IIdentityStoreEx*, LibC::LPWSTR, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_connected_identity : UInt64
+    delete_connected_identity : UInt64
   end
 
   IIdentityStoreEx_GUID = "f9f9eb98-8f7f-4e38-9577-6980114ce32b"
@@ -283,13 +283,13 @@ lib LibWin32
   end
 
   struct AsyncIIdentityStoreExVTbl
-    query_interface : Proc(AsyncIIdentityStoreEx*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AsyncIIdentityStoreEx*, UInt32)
-    release : Proc(AsyncIIdentityStoreEx*, UInt32)
-    begin_create_connected_identity : Proc(AsyncIIdentityStoreEx*, LibC::LPWSTR, LibC::LPWSTR, Guid*, HRESULT)
-    finish_create_connected_identity : Proc(AsyncIIdentityStoreEx*, HRESULT)
-    begin_delete_connected_identity : Proc(AsyncIIdentityStoreEx*, LibC::LPWSTR, Guid*, HRESULT)
-    finish_delete_connected_identity : Proc(AsyncIIdentityStoreEx*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_create_connected_identity : UInt64
+    finish_create_connected_identity : UInt64
+    begin_delete_connected_identity : UInt64
+    finish_delete_connected_identity : UInt64
   end
 
   AsyncIIdentityStoreEx_GUID = "fca3af9a-8a07-4eae-8632-ec3de658a36a"
@@ -298,4 +298,401 @@ lib LibWin32
     lpVtbl : AsyncIIdentityStoreExVTbl*
   end
 
+end
+struct LibWin32::IIdentityAdvise
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def identity_updated(dwidentityupdateevents : IdentityUpdateEvent, lpszuniqueid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.identity_updated.unsafe_as(Proc(IdentityUpdateEvent, LibC::LPWSTR, HRESULT)).call(dwidentityupdateevents, lpszuniqueid)
+  end
+end
+struct LibWin32::AsyncIIdentityAdvise
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_identity_updated(dwidentityupdateevents : UInt32, lpszuniqueid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.begin_identity_updated.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(dwidentityupdateevents, lpszuniqueid)
+  end
+  def finish_identity_updated : HRESULT
+    @lpVtbl.value.finish_identity_updated.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IIdentityProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_identity_enum(eidentitytype : IDENTITY_TYPE, pfilterkey : PROPERTYKEY*, pfilterpropvarvalue : PROPVARIANT*, ppidentityenum : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.get_identity_enum.unsafe_as(Proc(IDENTITY_TYPE, PROPERTYKEY*, PROPVARIANT*, IEnumUnknown*, HRESULT)).call(eidentitytype, pfilterkey, pfilterpropvarvalue, ppidentityenum)
+  end
+  def create(lpszusername : LibC::LPWSTR, pppropertystore : IPropertyStore*, pkeywordstoadd : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.create.unsafe_as(Proc(LibC::LPWSTR, IPropertyStore*, PROPVARIANT*, HRESULT)).call(lpszusername, pppropertystore, pkeywordstoadd)
+  end
+  def import(ppropertystore : IPropertyStore) : HRESULT
+    @lpVtbl.value.import.unsafe_as(Proc(IPropertyStore, HRESULT)).call(ppropertystore)
+  end
+  def delete(lpszuniqueid : LibC::LPWSTR, pkeywordstodelete : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT*, HRESULT)).call(lpszuniqueid, pkeywordstodelete)
+  end
+  def find_by_unique_id(lpszuniqueid : LibC::LPWSTR, pppropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.find_by_unique_id.unsafe_as(Proc(LibC::LPWSTR, IPropertyStore*, HRESULT)).call(lpszuniqueid, pppropertystore)
+  end
+  def get_provider_property_store(pppropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.get_provider_property_store.unsafe_as(Proc(IPropertyStore*, HRESULT)).call(pppropertystore)
+  end
+  def advise(pidentityadvise : IIdentityAdvise, dwidentityupdateevents : IdentityUpdateEvent, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise.unsafe_as(Proc(IIdentityAdvise, IdentityUpdateEvent, UInt32*, HRESULT)).call(pidentityadvise, dwidentityupdateevents, pdwcookie)
+  end
+  def un_advise(dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.un_advise.unsafe_as(Proc(UInt32, HRESULT)).call(dwcookie)
+  end
+end
+struct LibWin32::AsyncIIdentityProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_get_identity_enum(eidentitytype : IDENTITY_TYPE, pfilterkey : PROPERTYKEY*, pfilterpropvarvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.begin_get_identity_enum.unsafe_as(Proc(IDENTITY_TYPE, PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(eidentitytype, pfilterkey, pfilterpropvarvalue)
+  end
+  def finish_get_identity_enum(ppidentityenum : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.finish_get_identity_enum.unsafe_as(Proc(IEnumUnknown*, HRESULT)).call(ppidentityenum)
+  end
+  def begin_create(lpszusername : LibC::LPWSTR, pkeywordstoadd : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.begin_create.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT*, HRESULT)).call(lpszusername, pkeywordstoadd)
+  end
+  def finish_create(pppropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.finish_create.unsafe_as(Proc(IPropertyStore*, HRESULT)).call(pppropertystore)
+  end
+  def begin_import(ppropertystore : IPropertyStore) : HRESULT
+    @lpVtbl.value.begin_import.unsafe_as(Proc(IPropertyStore, HRESULT)).call(ppropertystore)
+  end
+  def finish_import : HRESULT
+    @lpVtbl.value.finish_import.unsafe_as(Proc(HRESULT)).call
+  end
+  def begin_delete(lpszuniqueid : LibC::LPWSTR, pkeywordstodelete : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.begin_delete.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT*, HRESULT)).call(lpszuniqueid, pkeywordstodelete)
+  end
+  def finish_delete : HRESULT
+    @lpVtbl.value.finish_delete.unsafe_as(Proc(HRESULT)).call
+  end
+  def begin_find_by_unique_id(lpszuniqueid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.begin_find_by_unique_id.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(lpszuniqueid)
+  end
+  def finish_find_by_unique_id(pppropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.finish_find_by_unique_id.unsafe_as(Proc(IPropertyStore*, HRESULT)).call(pppropertystore)
+  end
+  def begin_get_provider_property_store : HRESULT
+    @lpVtbl.value.begin_get_provider_property_store.unsafe_as(Proc(HRESULT)).call
+  end
+  def finish_get_provider_property_store(pppropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.finish_get_provider_property_store.unsafe_as(Proc(IPropertyStore*, HRESULT)).call(pppropertystore)
+  end
+  def begin_advise(pidentityadvise : IIdentityAdvise, dwidentityupdateevents : UInt32) : HRESULT
+    @lpVtbl.value.begin_advise.unsafe_as(Proc(IIdentityAdvise, UInt32, HRESULT)).call(pidentityadvise, dwidentityupdateevents)
+  end
+  def finish_advise(pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.finish_advise.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcookie)
+  end
+  def begin_un_advise(dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.begin_un_advise.unsafe_as(Proc(UInt32, HRESULT)).call(dwcookie)
+  end
+  def finish_un_advise : HRESULT
+    @lpVtbl.value.finish_un_advise.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IAssociatedIdentityProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def associate_identity(hwndparent : LibC::HANDLE, pppropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.associate_identity.unsafe_as(Proc(LibC::HANDLE, IPropertyStore*, HRESULT)).call(hwndparent, pppropertystore)
+  end
+  def disassociate_identity(hwndparent : LibC::HANDLE, lpszuniqueid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.disassociate_identity.unsafe_as(Proc(LibC::HANDLE, LibC::LPWSTR, HRESULT)).call(hwndparent, lpszuniqueid)
+  end
+  def change_credential(hwndparent : LibC::HANDLE, lpszuniqueid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.change_credential.unsafe_as(Proc(LibC::HANDLE, LibC::LPWSTR, HRESULT)).call(hwndparent, lpszuniqueid)
+  end
+end
+struct LibWin32::AsyncIAssociatedIdentityProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_associate_identity(hwndparent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.begin_associate_identity.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwndparent)
+  end
+  def finish_associate_identity(pppropertystore : IPropertyStore*) : HRESULT
+    @lpVtbl.value.finish_associate_identity.unsafe_as(Proc(IPropertyStore*, HRESULT)).call(pppropertystore)
+  end
+  def begin_disassociate_identity(hwndparent : LibC::HANDLE, lpszuniqueid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.begin_disassociate_identity.unsafe_as(Proc(LibC::HANDLE, LibC::LPWSTR, HRESULT)).call(hwndparent, lpszuniqueid)
+  end
+  def finish_disassociate_identity : HRESULT
+    @lpVtbl.value.finish_disassociate_identity.unsafe_as(Proc(HRESULT)).call
+  end
+  def begin_change_credential(hwndparent : LibC::HANDLE, lpszuniqueid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.begin_change_credential.unsafe_as(Proc(LibC::HANDLE, LibC::LPWSTR, HRESULT)).call(hwndparent, lpszuniqueid)
+  end
+  def finish_change_credential : HRESULT
+    @lpVtbl.value.finish_change_credential.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IConnectedIdentityProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def connect_identity(authbuffer : UInt8*, authbuffersize : UInt32) : HRESULT
+    @lpVtbl.value.connect_identity.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(authbuffer, authbuffersize)
+  end
+  def disconnect_identity : HRESULT
+    @lpVtbl.value.disconnect_identity.unsafe_as(Proc(HRESULT)).call
+  end
+  def is_connected(connected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_connected.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(connected)
+  end
+  def get_url(identifier : IDENTITY_URL, context : IBindCtx, postdata : VARIANT*, url : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_url.unsafe_as(Proc(IDENTITY_URL, IBindCtx, VARIANT*, LibC::LPWSTR*, HRESULT)).call(identifier, context, postdata, url)
+  end
+  def get_account_state(pstate : ACCOUNT_STATE*) : HRESULT
+    @lpVtbl.value.get_account_state.unsafe_as(Proc(ACCOUNT_STATE*, HRESULT)).call(pstate)
+  end
+end
+struct LibWin32::AsyncIConnectedIdentityProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_connect_identity(authbuffer : UInt8*, authbuffersize : UInt32) : HRESULT
+    @lpVtbl.value.begin_connect_identity.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(authbuffer, authbuffersize)
+  end
+  def finish_connect_identity : HRESULT
+    @lpVtbl.value.finish_connect_identity.unsafe_as(Proc(HRESULT)).call
+  end
+  def begin_disconnect_identity : HRESULT
+    @lpVtbl.value.begin_disconnect_identity.unsafe_as(Proc(HRESULT)).call
+  end
+  def finish_disconnect_identity : HRESULT
+    @lpVtbl.value.finish_disconnect_identity.unsafe_as(Proc(HRESULT)).call
+  end
+  def begin_is_connected : HRESULT
+    @lpVtbl.value.begin_is_connected.unsafe_as(Proc(HRESULT)).call
+  end
+  def finish_is_connected(connected : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.finish_is_connected.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(connected)
+  end
+  def begin_get_url(identifier : IDENTITY_URL, context : IBindCtx) : HRESULT
+    @lpVtbl.value.begin_get_url.unsafe_as(Proc(IDENTITY_URL, IBindCtx, HRESULT)).call(identifier, context)
+  end
+  def finish_get_url(postdata : VARIANT*, url : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.finish_get_url.unsafe_as(Proc(VARIANT*, LibC::LPWSTR*, HRESULT)).call(postdata, url)
+  end
+  def begin_get_account_state : HRESULT
+    @lpVtbl.value.begin_get_account_state.unsafe_as(Proc(HRESULT)).call
+  end
+  def finish_get_account_state(pstate : ACCOUNT_STATE*) : HRESULT
+    @lpVtbl.value.finish_get_account_state.unsafe_as(Proc(ACCOUNT_STATE*, HRESULT)).call(pstate)
+  end
+end
+struct LibWin32::IIdentityAuthentication
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_identity_credential(credbuffer : UInt8*, credbufferlength : UInt32) : HRESULT
+    @lpVtbl.value.set_identity_credential.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(credbuffer, credbufferlength)
+  end
+  def validate_identity_credential(credbuffer : UInt8*, credbufferlength : UInt32, ppidentityproperties : IPropertyStore*) : HRESULT
+    @lpVtbl.value.validate_identity_credential.unsafe_as(Proc(UInt8*, UInt32, IPropertyStore*, HRESULT)).call(credbuffer, credbufferlength, ppidentityproperties)
+  end
+end
+struct LibWin32::AsyncIIdentityAuthentication
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_set_identity_credential(credbuffer : UInt8*, credbufferlength : UInt32) : HRESULT
+    @lpVtbl.value.begin_set_identity_credential.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(credbuffer, credbufferlength)
+  end
+  def finish_set_identity_credential : HRESULT
+    @lpVtbl.value.finish_set_identity_credential.unsafe_as(Proc(HRESULT)).call
+  end
+  def begin_validate_identity_credential(credbuffer : UInt8*, credbufferlength : UInt32, ppidentityproperties : IPropertyStore*) : HRESULT
+    @lpVtbl.value.begin_validate_identity_credential.unsafe_as(Proc(UInt8*, UInt32, IPropertyStore*, HRESULT)).call(credbuffer, credbufferlength, ppidentityproperties)
+  end
+  def finish_validate_identity_credential(ppidentityproperties : IPropertyStore*) : HRESULT
+    @lpVtbl.value.finish_validate_identity_credential.unsafe_as(Proc(IPropertyStore*, HRESULT)).call(ppidentityproperties)
+  end
+end
+struct LibWin32::IIdentityStore
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(pdwproviders : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwproviders)
+  end
+  def get_at(dwprovider : UInt32, pprovguid : Guid*, ppidentityprovider : IUnknown*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, Guid*, IUnknown*, HRESULT)).call(dwprovider, pprovguid, ppidentityprovider)
+  end
+  def add_to_cache(lpszuniqueid : LibC::LPWSTR, providerguid : Guid*) : HRESULT
+    @lpVtbl.value.add_to_cache.unsafe_as(Proc(LibC::LPWSTR, Guid*, HRESULT)).call(lpszuniqueid, providerguid)
+  end
+  def convert_to_sid(lpszuniqueid : LibC::LPWSTR, providerguid : Guid*, cbsid : UInt16, psid : UInt8*, pcbrequiredsid : UInt16*) : HRESULT
+    @lpVtbl.value.convert_to_sid.unsafe_as(Proc(LibC::LPWSTR, Guid*, UInt16, UInt8*, UInt16*, HRESULT)).call(lpszuniqueid, providerguid, cbsid, psid, pcbrequiredsid)
+  end
+  def enumerate_identities(eidentitytype : IDENTITY_TYPE, pfilterkey : PROPERTYKEY*, pfilterpropvarvalue : PROPVARIANT*, ppidentityenum : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.enumerate_identities.unsafe_as(Proc(IDENTITY_TYPE, PROPERTYKEY*, PROPVARIANT*, IEnumUnknown*, HRESULT)).call(eidentitytype, pfilterkey, pfilterpropvarvalue, ppidentityenum)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::AsyncIIdentityStore
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_get_count : HRESULT
+    @lpVtbl.value.begin_get_count.unsafe_as(Proc(HRESULT)).call
+  end
+  def finish_get_count(pdwproviders : UInt32*) : HRESULT
+    @lpVtbl.value.finish_get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwproviders)
+  end
+  def begin_get_at(dwprovider : UInt32, pprovguid : Guid*) : HRESULT
+    @lpVtbl.value.begin_get_at.unsafe_as(Proc(UInt32, Guid*, HRESULT)).call(dwprovider, pprovguid)
+  end
+  def finish_get_at(pprovguid : Guid*, ppidentityprovider : IUnknown*) : HRESULT
+    @lpVtbl.value.finish_get_at.unsafe_as(Proc(Guid*, IUnknown*, HRESULT)).call(pprovguid, ppidentityprovider)
+  end
+  def begin_add_to_cache(lpszuniqueid : LibC::LPWSTR, providerguid : Guid*) : HRESULT
+    @lpVtbl.value.begin_add_to_cache.unsafe_as(Proc(LibC::LPWSTR, Guid*, HRESULT)).call(lpszuniqueid, providerguid)
+  end
+  def finish_add_to_cache : HRESULT
+    @lpVtbl.value.finish_add_to_cache.unsafe_as(Proc(HRESULT)).call
+  end
+  def begin_convert_to_sid(lpszuniqueid : LibC::LPWSTR, providerguid : Guid*, cbsid : UInt16, psid : UInt8*) : HRESULT
+    @lpVtbl.value.begin_convert_to_sid.unsafe_as(Proc(LibC::LPWSTR, Guid*, UInt16, UInt8*, HRESULT)).call(lpszuniqueid, providerguid, cbsid, psid)
+  end
+  def finish_convert_to_sid(psid : UInt8*, pcbrequiredsid : UInt16*) : HRESULT
+    @lpVtbl.value.finish_convert_to_sid.unsafe_as(Proc(UInt8*, UInt16*, HRESULT)).call(psid, pcbrequiredsid)
+  end
+  def begin_enumerate_identities(eidentitytype : IDENTITY_TYPE, pfilterkey : PROPERTYKEY*, pfilterpropvarvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.begin_enumerate_identities.unsafe_as(Proc(IDENTITY_TYPE, PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(eidentitytype, pfilterkey, pfilterpropvarvalue)
+  end
+  def finish_enumerate_identities(ppidentityenum : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.finish_enumerate_identities.unsafe_as(Proc(IEnumUnknown*, HRESULT)).call(ppidentityenum)
+  end
+  def begin_reset : HRESULT
+    @lpVtbl.value.begin_reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def finish_reset : HRESULT
+    @lpVtbl.value.finish_reset.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IIdentityStoreEx
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_connected_identity(localname : LibC::LPWSTR, connectedname : LibC::LPWSTR, providerguid : Guid*) : HRESULT
+    @lpVtbl.value.create_connected_identity.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Guid*, HRESULT)).call(localname, connectedname, providerguid)
+  end
+  def delete_connected_identity(connectedname : LibC::LPWSTR, providerguid : Guid*) : HRESULT
+    @lpVtbl.value.delete_connected_identity.unsafe_as(Proc(LibC::LPWSTR, Guid*, HRESULT)).call(connectedname, providerguid)
+  end
+end
+struct LibWin32::AsyncIIdentityStoreEx
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_create_connected_identity(localname : LibC::LPWSTR, connectedname : LibC::LPWSTR, providerguid : Guid*) : HRESULT
+    @lpVtbl.value.begin_create_connected_identity.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Guid*, HRESULT)).call(localname, connectedname, providerguid)
+  end
+  def finish_create_connected_identity : HRESULT
+    @lpVtbl.value.finish_create_connected_identity.unsafe_as(Proc(HRESULT)).call
+  end
+  def begin_delete_connected_identity(connectedname : LibC::LPWSTR, providerguid : Guid*) : HRESULT
+    @lpVtbl.value.begin_delete_connected_identity.unsafe_as(Proc(LibC::LPWSTR, Guid*, HRESULT)).call(connectedname, providerguid)
+  end
+  def finish_delete_connected_identity : HRESULT
+    @lpVtbl.value.finish_delete_connected_identity.unsafe_as(Proc(HRESULT)).call
+  end
 end

@@ -80,11 +80,11 @@ lib LibWin32
 
 
   struct IDxcBlobVTbl
-    query_interface : Proc(IDxcBlob*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcBlob*, UInt32)
-    release : Proc(IDxcBlob*, UInt32)
-    get_buffer_pointer : Proc(IDxcBlob*, Void**)
-    get_buffer_size : Proc(IDxcBlob*, LibC::UINT_PTR)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_buffer_pointer : UInt64
+    get_buffer_size : UInt64
   end
 
   IDxcBlob_GUID = "8ba5fb08-5195-40e2-ac58-0d989c3a0102"
@@ -94,12 +94,12 @@ lib LibWin32
   end
 
   struct IDxcBlobEncodingVTbl
-    query_interface : Proc(IDxcBlobEncoding*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcBlobEncoding*, UInt32)
-    release : Proc(IDxcBlobEncoding*, UInt32)
-    get_buffer_pointer : Proc(IDxcBlobEncoding*, Void**)
-    get_buffer_size : Proc(IDxcBlobEncoding*, LibC::UINT_PTR)
-    get_encoding : Proc(IDxcBlobEncoding*, LibC::BOOL*, DXC_CP*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_buffer_pointer : UInt64
+    get_buffer_size : UInt64
+    get_encoding : UInt64
   end
 
   IDxcBlobEncoding_GUID = "7241d424-2646-4191-97c0-98e96e42fc68"
@@ -109,14 +109,14 @@ lib LibWin32
   end
 
   struct IDxcBlobUtf16VTbl
-    query_interface : Proc(IDxcBlobUtf16*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcBlobUtf16*, UInt32)
-    release : Proc(IDxcBlobUtf16*, UInt32)
-    get_buffer_pointer : Proc(IDxcBlobUtf16*, Void**)
-    get_buffer_size : Proc(IDxcBlobUtf16*, LibC::UINT_PTR)
-    get_encoding : Proc(IDxcBlobUtf16*, LibC::BOOL*, DXC_CP*, HRESULT)
-    get_string_pointer : Proc(IDxcBlobUtf16*, LibC::LPWSTR)
-    get_string_length : Proc(IDxcBlobUtf16*, LibC::UINT_PTR)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_buffer_pointer : UInt64
+    get_buffer_size : UInt64
+    get_encoding : UInt64
+    get_string_pointer : UInt64
+    get_string_length : UInt64
   end
 
   IDxcBlobUtf16_GUID = "a3f84eab-0faa-497e-a39c-ee6ed60b2d84"
@@ -126,14 +126,14 @@ lib LibWin32
   end
 
   struct IDxcBlobUtf8VTbl
-    query_interface : Proc(IDxcBlobUtf8*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcBlobUtf8*, UInt32)
-    release : Proc(IDxcBlobUtf8*, UInt32)
-    get_buffer_pointer : Proc(IDxcBlobUtf8*, Void**)
-    get_buffer_size : Proc(IDxcBlobUtf8*, LibC::UINT_PTR)
-    get_encoding : Proc(IDxcBlobUtf8*, LibC::BOOL*, DXC_CP*, HRESULT)
-    get_string_pointer : Proc(IDxcBlobUtf8*, PSTR)
-    get_string_length : Proc(IDxcBlobUtf8*, LibC::UINT_PTR)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_buffer_pointer : UInt64
+    get_buffer_size : UInt64
+    get_encoding : UInt64
+    get_string_pointer : UInt64
+    get_string_length : UInt64
   end
 
   IDxcBlobUtf8_GUID = "3da636c9-ba71-4024-a301-30cbf125305b"
@@ -143,10 +143,10 @@ lib LibWin32
   end
 
   struct IDxcIncludeHandlerVTbl
-    query_interface : Proc(IDxcIncludeHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcIncludeHandler*, UInt32)
-    release : Proc(IDxcIncludeHandler*, UInt32)
-    load_source : Proc(IDxcIncludeHandler*, LibC::LPWSTR, IDxcBlob*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    load_source : UInt64
   end
 
   IDxcIncludeHandler_GUID = "7f61fc7d-950d-467f-b3e3-3c02fb49187c"
@@ -156,14 +156,14 @@ lib LibWin32
   end
 
   struct IDxcCompilerArgsVTbl
-    query_interface : Proc(IDxcCompilerArgs*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcCompilerArgs*, UInt32)
-    release : Proc(IDxcCompilerArgs*, UInt32)
-    get_arguments : Proc(IDxcCompilerArgs*, LibC::LPWSTR**)
-    get_count : Proc(IDxcCompilerArgs*, UInt32)
-    add_arguments : Proc(IDxcCompilerArgs*, LibC::LPWSTR*, UInt32, HRESULT)
-    add_arguments_utf8 : Proc(IDxcCompilerArgs*, PSTR*, UInt32, HRESULT)
-    add_defines : Proc(IDxcCompilerArgs*, DxcDefine*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_arguments : UInt64
+    get_count : UInt64
+    add_arguments : UInt64
+    add_arguments_utf8 : UInt64
+    add_defines : UInt64
   end
 
   IDxcCompilerArgs_GUID = "73effe2a-70dc-45f8-9690-eff64c02429d"
@@ -173,19 +173,19 @@ lib LibWin32
   end
 
   struct IDxcLibraryVTbl
-    query_interface : Proc(IDxcLibrary*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcLibrary*, UInt32)
-    release : Proc(IDxcLibrary*, UInt32)
-    set_malloc : Proc(IDxcLibrary*, IMalloc, HRESULT)
-    create_blob_from_blob : Proc(IDxcLibrary*, IDxcBlob, UInt32, UInt32, IDxcBlob*, HRESULT)
-    create_blob_from_file : Proc(IDxcLibrary*, LibC::LPWSTR, DXC_CP*, IDxcBlobEncoding*, HRESULT)
-    create_blob_with_encoding_from_pinned : Proc(IDxcLibrary*, Void*, UInt32, DXC_CP, IDxcBlobEncoding*, HRESULT)
-    create_blob_with_encoding_on_heap_copy : Proc(IDxcLibrary*, Void*, UInt32, DXC_CP, IDxcBlobEncoding*, HRESULT)
-    create_blob_with_encoding_on_malloc : Proc(IDxcLibrary*, Void*, IMalloc, UInt32, DXC_CP, IDxcBlobEncoding*, HRESULT)
-    create_include_handler : Proc(IDxcLibrary*, IDxcIncludeHandler*, HRESULT)
-    create_stream_from_blob_read_only : Proc(IDxcLibrary*, IDxcBlob, IStream*, HRESULT)
-    get_blob_as_utf8 : Proc(IDxcLibrary*, IDxcBlob, IDxcBlobEncoding*, HRESULT)
-    get_blob_as_utf16 : Proc(IDxcLibrary*, IDxcBlob, IDxcBlobEncoding*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_malloc : UInt64
+    create_blob_from_blob : UInt64
+    create_blob_from_file : UInt64
+    create_blob_with_encoding_from_pinned : UInt64
+    create_blob_with_encoding_on_heap_copy : UInt64
+    create_blob_with_encoding_on_malloc : UInt64
+    create_include_handler : UInt64
+    create_stream_from_blob_read_only : UInt64
+    get_blob_as_utf8 : UInt64
+    get_blob_as_utf16 : UInt64
   end
 
   IDxcLibrary_GUID = "e5204dc7-d18c-4c3c-bdfb-851673980fe7"
@@ -195,12 +195,12 @@ lib LibWin32
   end
 
   struct IDxcOperationResultVTbl
-    query_interface : Proc(IDxcOperationResult*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcOperationResult*, UInt32)
-    release : Proc(IDxcOperationResult*, UInt32)
-    get_status : Proc(IDxcOperationResult*, HRESULT*, HRESULT)
-    get_result : Proc(IDxcOperationResult*, IDxcBlob*, HRESULT)
-    get_error_buffer : Proc(IDxcOperationResult*, IDxcBlobEncoding*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_status : UInt64
+    get_result : UInt64
+    get_error_buffer : UInt64
   end
 
   IDxcOperationResult_GUID = "cedb484a-d4e9-445a-b991-ca21ca157dc2"
@@ -210,12 +210,12 @@ lib LibWin32
   end
 
   struct IDxcCompilerVTbl
-    query_interface : Proc(IDxcCompiler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcCompiler*, UInt32)
-    release : Proc(IDxcCompiler*, UInt32)
-    compile : Proc(IDxcCompiler*, IDxcBlob, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, UInt32, DxcDefine*, UInt32, IDxcIncludeHandler, IDxcOperationResult*, HRESULT)
-    preprocess : Proc(IDxcCompiler*, IDxcBlob, LibC::LPWSTR, LibC::LPWSTR*, UInt32, DxcDefine*, UInt32, IDxcIncludeHandler, IDxcOperationResult*, HRESULT)
-    disassemble : Proc(IDxcCompiler*, IDxcBlob, IDxcBlobEncoding*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    compile : UInt64
+    preprocess : UInt64
+    disassemble : UInt64
   end
 
   IDxcCompiler_GUID = "8c210bf3-011f-4422-8d70-6f9acb8db617"
@@ -225,13 +225,13 @@ lib LibWin32
   end
 
   struct IDxcCompiler2VTbl
-    query_interface : Proc(IDxcCompiler2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcCompiler2*, UInt32)
-    release : Proc(IDxcCompiler2*, UInt32)
-    compile : Proc(IDxcCompiler2*, IDxcBlob, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, UInt32, DxcDefine*, UInt32, IDxcIncludeHandler, IDxcOperationResult*, HRESULT)
-    preprocess : Proc(IDxcCompiler2*, IDxcBlob, LibC::LPWSTR, LibC::LPWSTR*, UInt32, DxcDefine*, UInt32, IDxcIncludeHandler, IDxcOperationResult*, HRESULT)
-    disassemble : Proc(IDxcCompiler2*, IDxcBlob, IDxcBlobEncoding*, HRESULT)
-    compile_with_debug : Proc(IDxcCompiler2*, IDxcBlob, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, UInt32, DxcDefine*, UInt32, IDxcIncludeHandler, IDxcOperationResult*, LibC::LPWSTR*, IDxcBlob*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    compile : UInt64
+    preprocess : UInt64
+    disassemble : UInt64
+    compile_with_debug : UInt64
   end
 
   IDxcCompiler2_GUID = "a005a9d9-b8bb-4594-b5c9-0e633bec4d37"
@@ -241,11 +241,11 @@ lib LibWin32
   end
 
   struct IDxcLinkerVTbl
-    query_interface : Proc(IDxcLinker*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcLinker*, UInt32)
-    release : Proc(IDxcLinker*, UInt32)
-    register_library : Proc(IDxcLinker*, LibC::LPWSTR, IDxcBlob, HRESULT)
-    link : Proc(IDxcLinker*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, UInt32, LibC::LPWSTR*, UInt32, IDxcOperationResult*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    register_library : UInt64
+    link : UInt64
   end
 
   IDxcLinker_GUID = "f1b5be2a-62dd-4327-a1c2-42ac1e1e78e6"
@@ -255,22 +255,22 @@ lib LibWin32
   end
 
   struct IDxcUtilsVTbl
-    query_interface : Proc(IDxcUtils*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcUtils*, UInt32)
-    release : Proc(IDxcUtils*, UInt32)
-    create_blob_from_blob : Proc(IDxcUtils*, IDxcBlob, UInt32, UInt32, IDxcBlob*, HRESULT)
-    create_blob_from_pinned : Proc(IDxcUtils*, Void*, UInt32, DXC_CP, IDxcBlobEncoding*, HRESULT)
-    move_to_blob : Proc(IDxcUtils*, Void*, IMalloc, UInt32, DXC_CP, IDxcBlobEncoding*, HRESULT)
-    create_blob : Proc(IDxcUtils*, Void*, UInt32, DXC_CP, IDxcBlobEncoding*, HRESULT)
-    load_file : Proc(IDxcUtils*, LibC::LPWSTR, DXC_CP*, IDxcBlobEncoding*, HRESULT)
-    create_read_only_stream_from_blob : Proc(IDxcUtils*, IDxcBlob, IStream*, HRESULT)
-    create_default_include_handler : Proc(IDxcUtils*, IDxcIncludeHandler*, HRESULT)
-    get_blob_as_utf8 : Proc(IDxcUtils*, IDxcBlob, IDxcBlobUtf8*, HRESULT)
-    get_blob_as_utf16 : Proc(IDxcUtils*, IDxcBlob, IDxcBlobUtf16*, HRESULT)
-    get_dxil_container_part : Proc(IDxcUtils*, DxcBuffer*, UInt32, Void**, UInt32*, HRESULT)
-    create_reflection : Proc(IDxcUtils*, DxcBuffer*, Guid*, Void**, HRESULT)
-    build_arguments : Proc(IDxcUtils*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, UInt32, DxcDefine*, UInt32, IDxcCompilerArgs*, HRESULT)
-    get_pdb_contents : Proc(IDxcUtils*, IDxcBlob, IDxcBlob*, IDxcBlob*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_blob_from_blob : UInt64
+    create_blob_from_pinned : UInt64
+    move_to_blob : UInt64
+    create_blob : UInt64
+    load_file : UInt64
+    create_read_only_stream_from_blob : UInt64
+    create_default_include_handler : UInt64
+    get_blob_as_utf8 : UInt64
+    get_blob_as_utf16 : UInt64
+    get_dxil_container_part : UInt64
+    create_reflection : UInt64
+    build_arguments : UInt64
+    get_pdb_contents : UInt64
   end
 
   IDxcUtils_GUID = "4605c4cb-2019-492a-ada4-65f20bb7d67f"
@@ -280,17 +280,17 @@ lib LibWin32
   end
 
   struct IDxcResultVTbl
-    query_interface : Proc(IDxcResult*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcResult*, UInt32)
-    release : Proc(IDxcResult*, UInt32)
-    get_status : Proc(IDxcResult*, HRESULT*, HRESULT)
-    get_result : Proc(IDxcResult*, IDxcBlob*, HRESULT)
-    get_error_buffer : Proc(IDxcResult*, IDxcBlobEncoding*, HRESULT)
-    has_output : Proc(IDxcResult*, DXC_OUT_KIND, LibC::BOOL)
-    get_output : Proc(IDxcResult*, DXC_OUT_KIND, Guid*, Void**, IDxcBlobUtf16*, HRESULT)
-    get_num_outputs : Proc(IDxcResult*, UInt32)
-    get_output_by_index : Proc(IDxcResult*, UInt32, DXC_OUT_KIND)
-    primary_output : Proc(IDxcResult*, DXC_OUT_KIND)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_status : UInt64
+    get_result : UInt64
+    get_error_buffer : UInt64
+    has_output : UInt64
+    get_output : UInt64
+    get_num_outputs : UInt64
+    get_output_by_index : UInt64
+    primary_output : UInt64
   end
 
   IDxcResult_GUID = "58346cda-dde7-4497-9461-6f87af5e0659"
@@ -300,11 +300,11 @@ lib LibWin32
   end
 
   struct IDxcExtraOutputsVTbl
-    query_interface : Proc(IDxcExtraOutputs*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcExtraOutputs*, UInt32)
-    release : Proc(IDxcExtraOutputs*, UInt32)
-    get_output_count : Proc(IDxcExtraOutputs*, UInt32)
-    get_output : Proc(IDxcExtraOutputs*, UInt32, Guid*, Void**, IDxcBlobUtf16*, IDxcBlobUtf16*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_output_count : UInt64
+    get_output : UInt64
   end
 
   IDxcExtraOutputs_GUID = "319b37a2-a5c2-494a-a5de-4801b2faf989"
@@ -314,11 +314,11 @@ lib LibWin32
   end
 
   struct IDxcCompiler3VTbl
-    query_interface : Proc(IDxcCompiler3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcCompiler3*, UInt32)
-    release : Proc(IDxcCompiler3*, UInt32)
-    compile : Proc(IDxcCompiler3*, DxcBuffer*, LibC::LPWSTR*, UInt32, IDxcIncludeHandler, Guid*, Void**, HRESULT)
-    disassemble : Proc(IDxcCompiler3*, DxcBuffer*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    compile : UInt64
+    disassemble : UInt64
   end
 
   IDxcCompiler3_GUID = "228b4687-5a6a-4730-900c-9702b2203f54"
@@ -328,10 +328,10 @@ lib LibWin32
   end
 
   struct IDxcValidatorVTbl
-    query_interface : Proc(IDxcValidator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcValidator*, UInt32)
-    release : Proc(IDxcValidator*, UInt32)
-    validate : Proc(IDxcValidator*, IDxcBlob, UInt32, IDxcOperationResult*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    validate : UInt64
   end
 
   IDxcValidator_GUID = "a6e82bd2-1fd7-4826-9811-2857e797f49a"
@@ -341,11 +341,11 @@ lib LibWin32
   end
 
   struct IDxcValidator2VTbl
-    query_interface : Proc(IDxcValidator2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcValidator2*, UInt32)
-    release : Proc(IDxcValidator2*, UInt32)
-    validate : Proc(IDxcValidator2*, IDxcBlob, UInt32, IDxcOperationResult*, HRESULT)
-    validate_with_debug : Proc(IDxcValidator2*, IDxcBlob, UInt32, DxcBuffer*, IDxcOperationResult*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    validate : UInt64
+    validate_with_debug : UInt64
   end
 
   IDxcValidator2_GUID = "458e1fd1-b1b2-4750-a6e1-9c10f03bed92"
@@ -355,13 +355,13 @@ lib LibWin32
   end
 
   struct IDxcContainerBuilderVTbl
-    query_interface : Proc(IDxcContainerBuilder*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcContainerBuilder*, UInt32)
-    release : Proc(IDxcContainerBuilder*, UInt32)
-    load : Proc(IDxcContainerBuilder*, IDxcBlob, HRESULT)
-    add_part : Proc(IDxcContainerBuilder*, UInt32, IDxcBlob, HRESULT)
-    remove_part : Proc(IDxcContainerBuilder*, UInt32, HRESULT)
-    serialize_container : Proc(IDxcContainerBuilder*, IDxcOperationResult*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    load : UInt64
+    add_part : UInt64
+    remove_part : UInt64
+    serialize_container : UInt64
   end
 
   IDxcContainerBuilder_GUID = "334b1f50-2292-4b35-99a1-25588d8c17fe"
@@ -371,10 +371,10 @@ lib LibWin32
   end
 
   struct IDxcAssemblerVTbl
-    query_interface : Proc(IDxcAssembler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcAssembler*, UInt32)
-    release : Proc(IDxcAssembler*, UInt32)
-    assemble_to_container : Proc(IDxcAssembler*, IDxcBlob, IDxcOperationResult*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    assemble_to_container : UInt64
   end
 
   IDxcAssembler_GUID = "091f7a26-1c1f-4948-904b-e6e3a8a771d5"
@@ -384,15 +384,15 @@ lib LibWin32
   end
 
   struct IDxcContainerReflectionVTbl
-    query_interface : Proc(IDxcContainerReflection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcContainerReflection*, UInt32)
-    release : Proc(IDxcContainerReflection*, UInt32)
-    load : Proc(IDxcContainerReflection*, IDxcBlob, HRESULT)
-    get_part_count : Proc(IDxcContainerReflection*, UInt32*, HRESULT)
-    get_part_kind : Proc(IDxcContainerReflection*, UInt32, UInt32*, HRESULT)
-    get_part_content : Proc(IDxcContainerReflection*, UInt32, IDxcBlob*, HRESULT)
-    find_first_part_kind : Proc(IDxcContainerReflection*, UInt32, UInt32*, HRESULT)
-    get_part_reflection : Proc(IDxcContainerReflection*, UInt32, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    load : UInt64
+    get_part_count : UInt64
+    get_part_kind : UInt64
+    get_part_content : UInt64
+    find_first_part_kind : UInt64
+    get_part_reflection : UInt64
   end
 
   IDxcContainerReflection_GUID = "d2c21b26-8350-4bdc-976a-331ce6f4c54c"
@@ -402,14 +402,14 @@ lib LibWin32
   end
 
   struct IDxcOptimizerPassVTbl
-    query_interface : Proc(IDxcOptimizerPass*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcOptimizerPass*, UInt32)
-    release : Proc(IDxcOptimizerPass*, UInt32)
-    get_option_name : Proc(IDxcOptimizerPass*, LibC::LPWSTR*, HRESULT)
-    get_description : Proc(IDxcOptimizerPass*, LibC::LPWSTR*, HRESULT)
-    get_option_arg_count : Proc(IDxcOptimizerPass*, UInt32*, HRESULT)
-    get_option_arg_name : Proc(IDxcOptimizerPass*, UInt32, LibC::LPWSTR*, HRESULT)
-    get_option_arg_description : Proc(IDxcOptimizerPass*, UInt32, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_option_name : UInt64
+    get_description : UInt64
+    get_option_arg_count : UInt64
+    get_option_arg_name : UInt64
+    get_option_arg_description : UInt64
   end
 
   IDxcOptimizerPass_GUID = "ae2cd79f-cc22-453f-9b6b-b124e7a5204c"
@@ -419,12 +419,12 @@ lib LibWin32
   end
 
   struct IDxcOptimizerVTbl
-    query_interface : Proc(IDxcOptimizer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcOptimizer*, UInt32)
-    release : Proc(IDxcOptimizer*, UInt32)
-    get_available_pass_count : Proc(IDxcOptimizer*, UInt32*, HRESULT)
-    get_available_pass : Proc(IDxcOptimizer*, UInt32, IDxcOptimizerPass*, HRESULT)
-    run_optimizer : Proc(IDxcOptimizer*, IDxcBlob, LibC::LPWSTR*, UInt32, IDxcBlob*, IDxcBlobEncoding*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_available_pass_count : UInt64
+    get_available_pass : UInt64
+    run_optimizer : UInt64
   end
 
   IDxcOptimizer_GUID = "25740e2e-9cba-401b-9119-4fb42f39f270"
@@ -434,11 +434,11 @@ lib LibWin32
   end
 
   struct IDxcVersionInfoVTbl
-    query_interface : Proc(IDxcVersionInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcVersionInfo*, UInt32)
-    release : Proc(IDxcVersionInfo*, UInt32)
-    get_version : Proc(IDxcVersionInfo*, UInt32*, UInt32*, HRESULT)
-    get_flags : Proc(IDxcVersionInfo*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_version : UInt64
+    get_flags : UInt64
   end
 
   IDxcVersionInfo_GUID = "b04f5b50-2059-4f12-a8ff-a1e0cde1cc7e"
@@ -448,12 +448,12 @@ lib LibWin32
   end
 
   struct IDxcVersionInfo2VTbl
-    query_interface : Proc(IDxcVersionInfo2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcVersionInfo2*, UInt32)
-    release : Proc(IDxcVersionInfo2*, UInt32)
-    get_version : Proc(IDxcVersionInfo2*, UInt32*, UInt32*, HRESULT)
-    get_flags : Proc(IDxcVersionInfo2*, UInt32*, HRESULT)
-    get_commit_info : Proc(IDxcVersionInfo2*, UInt32*, Int8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_version : UInt64
+    get_flags : UInt64
+    get_commit_info : UInt64
   end
 
   IDxcVersionInfo2_GUID = "fb6904c4-42f0-4b62-9c46-983af7da7c83"
@@ -463,10 +463,10 @@ lib LibWin32
   end
 
   struct IDxcVersionInfo3VTbl
-    query_interface : Proc(IDxcVersionInfo3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcVersionInfo3*, UInt32)
-    release : Proc(IDxcVersionInfo3*, UInt32)
-    get_custom_version_string : Proc(IDxcVersionInfo3*, Int8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_custom_version_string : UInt64
   end
 
   IDxcVersionInfo3_GUID = "5e13e843-9d25-473c-9ad2-03b2d0b44b1e"
@@ -476,33 +476,33 @@ lib LibWin32
   end
 
   struct IDxcPdbUtilsVTbl
-    query_interface : Proc(IDxcPdbUtils*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDxcPdbUtils*, UInt32)
-    release : Proc(IDxcPdbUtils*, UInt32)
-    load : Proc(IDxcPdbUtils*, IDxcBlob, HRESULT)
-    get_source_count : Proc(IDxcPdbUtils*, UInt32*, HRESULT)
-    get_source : Proc(IDxcPdbUtils*, UInt32, IDxcBlobEncoding*, HRESULT)
-    get_source_name : Proc(IDxcPdbUtils*, UInt32, UInt8**, HRESULT)
-    get_flag_count : Proc(IDxcPdbUtils*, UInt32*, HRESULT)
-    get_flag : Proc(IDxcPdbUtils*, UInt32, UInt8**, HRESULT)
-    get_arg_count : Proc(IDxcPdbUtils*, UInt32*, HRESULT)
-    get_arg : Proc(IDxcPdbUtils*, UInt32, UInt8**, HRESULT)
-    get_arg_pair_count : Proc(IDxcPdbUtils*, UInt32*, HRESULT)
-    get_arg_pair : Proc(IDxcPdbUtils*, UInt32, UInt8**, UInt8**, HRESULT)
-    get_define_count : Proc(IDxcPdbUtils*, UInt32*, HRESULT)
-    get_define : Proc(IDxcPdbUtils*, UInt32, UInt8**, HRESULT)
-    get_target_profile : Proc(IDxcPdbUtils*, UInt8**, HRESULT)
-    get_entry_point : Proc(IDxcPdbUtils*, UInt8**, HRESULT)
-    get_main_file_name : Proc(IDxcPdbUtils*, UInt8**, HRESULT)
-    get_hash : Proc(IDxcPdbUtils*, IDxcBlob*, HRESULT)
-    get_name : Proc(IDxcPdbUtils*, UInt8**, HRESULT)
-    is_full_pdb : Proc(IDxcPdbUtils*, LibC::BOOL)
-    get_full_pdb : Proc(IDxcPdbUtils*, IDxcBlob*, HRESULT)
-    get_version_info : Proc(IDxcPdbUtils*, IDxcVersionInfo*, HRESULT)
-    set_compiler : Proc(IDxcPdbUtils*, IDxcCompiler3, HRESULT)
-    compile_for_full_pdb : Proc(IDxcPdbUtils*, IDxcResult*, HRESULT)
-    override_args : Proc(IDxcPdbUtils*, DxcArgPair*, UInt32, HRESULT)
-    override_root_signature : Proc(IDxcPdbUtils*, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    load : UInt64
+    get_source_count : UInt64
+    get_source : UInt64
+    get_source_name : UInt64
+    get_flag_count : UInt64
+    get_flag : UInt64
+    get_arg_count : UInt64
+    get_arg : UInt64
+    get_arg_pair_count : UInt64
+    get_arg_pair : UInt64
+    get_define_count : UInt64
+    get_define : UInt64
+    get_target_profile : UInt64
+    get_entry_point : UInt64
+    get_main_file_name : UInt64
+    get_hash : UInt64
+    get_name : UInt64
+    is_full_pdb : UInt64
+    get_full_pdb : UInt64
+    get_version_info : UInt64
+    set_compiler : UInt64
+    compile_for_full_pdb : UInt64
+    override_args : UInt64
+    override_root_signature : UInt64
   end
 
   IDxcPdbUtils_GUID = "e6c9647e-9d6a-4c3b-b94c-524b5a6c343d"
@@ -517,4 +517,650 @@ lib LibWin32
 
   # Params # pmalloc : IMalloc [In],rclsid : Guid* [In],riid : Guid* [In],ppv : Void** [In]
   fun DxcCreateInstance2(pmalloc : IMalloc, rclsid : Guid*, riid : Guid*, ppv : Void**) : HRESULT
+end
+struct LibWin32::IDxcBlob
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_buffer_pointer : Void*
+    @lpVtbl.value.get_buffer_pointer.unsafe_as(Proc(Void**)).call
+  end
+  def get_buffer_size : LibC::UINT_PTR
+    @lpVtbl.value.get_buffer_size.unsafe_as(Proc(LibC::UINT_PTR)).call
+  end
+end
+struct LibWin32::IDxcBlobEncoding
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_buffer_pointer : Void*
+    @lpVtbl.value.get_buffer_pointer.unsafe_as(Proc(Void**)).call
+  end
+  def get_buffer_size : LibC::UINT_PTR
+    @lpVtbl.value.get_buffer_size.unsafe_as(Proc(LibC::UINT_PTR)).call
+  end
+  def get_encoding(pknown : LibC::BOOL*, pcodepage : DXC_CP*) : HRESULT
+    @lpVtbl.value.get_encoding.unsafe_as(Proc(LibC::BOOL*, DXC_CP*, HRESULT)).call(pknown, pcodepage)
+  end
+end
+struct LibWin32::IDxcBlobUtf16
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_buffer_pointer : Void*
+    @lpVtbl.value.get_buffer_pointer.unsafe_as(Proc(Void**)).call
+  end
+  def get_buffer_size : LibC::UINT_PTR
+    @lpVtbl.value.get_buffer_size.unsafe_as(Proc(LibC::UINT_PTR)).call
+  end
+  def get_encoding(pknown : LibC::BOOL*, pcodepage : DXC_CP*) : HRESULT
+    @lpVtbl.value.get_encoding.unsafe_as(Proc(LibC::BOOL*, DXC_CP*, HRESULT)).call(pknown, pcodepage)
+  end
+  def get_string_pointer : LibC::LPWSTR
+    @lpVtbl.value.get_string_pointer.unsafe_as(Proc(LibC::LPWSTR)).call
+  end
+  def get_string_length : LibC::UINT_PTR
+    @lpVtbl.value.get_string_length.unsafe_as(Proc(LibC::UINT_PTR)).call
+  end
+end
+struct LibWin32::IDxcBlobUtf8
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_buffer_pointer : Void*
+    @lpVtbl.value.get_buffer_pointer.unsafe_as(Proc(Void**)).call
+  end
+  def get_buffer_size : LibC::UINT_PTR
+    @lpVtbl.value.get_buffer_size.unsafe_as(Proc(LibC::UINT_PTR)).call
+  end
+  def get_encoding(pknown : LibC::BOOL*, pcodepage : DXC_CP*) : HRESULT
+    @lpVtbl.value.get_encoding.unsafe_as(Proc(LibC::BOOL*, DXC_CP*, HRESULT)).call(pknown, pcodepage)
+  end
+  def get_string_pointer : PSTR
+    @lpVtbl.value.get_string_pointer.unsafe_as(Proc(PSTR)).call
+  end
+  def get_string_length : LibC::UINT_PTR
+    @lpVtbl.value.get_string_length.unsafe_as(Proc(LibC::UINT_PTR)).call
+  end
+end
+struct LibWin32::IDxcIncludeHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def load_source(pfilename : LibC::LPWSTR, ppincludesource : IDxcBlob*) : HRESULT
+    @lpVtbl.value.load_source.unsafe_as(Proc(LibC::LPWSTR, IDxcBlob*, HRESULT)).call(pfilename, ppincludesource)
+  end
+end
+struct LibWin32::IDxcCompilerArgs
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_arguments : LibC::LPWSTR*
+    @lpVtbl.value.get_arguments.unsafe_as(Proc(LibC::LPWSTR**)).call
+  end
+  def get_count : UInt32
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32)).call
+  end
+  def add_arguments(parguments : LibC::LPWSTR*, argcount : UInt32) : HRESULT
+    @lpVtbl.value.add_arguments.unsafe_as(Proc(LibC::LPWSTR*, UInt32, HRESULT)).call(parguments, argcount)
+  end
+  def add_arguments_utf8(parguments : PSTR*, argcount : UInt32) : HRESULT
+    @lpVtbl.value.add_arguments_utf8.unsafe_as(Proc(PSTR*, UInt32, HRESULT)).call(parguments, argcount)
+  end
+  def add_defines(pdefines : DxcDefine*, definecount : UInt32) : HRESULT
+    @lpVtbl.value.add_defines.unsafe_as(Proc(DxcDefine*, UInt32, HRESULT)).call(pdefines, definecount)
+  end
+end
+struct LibWin32::IDxcLibrary
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_malloc(pmalloc : IMalloc) : HRESULT
+    @lpVtbl.value.set_malloc.unsafe_as(Proc(IMalloc, HRESULT)).call(pmalloc)
+  end
+  def create_blob_from_blob(pblob : IDxcBlob, offset : UInt32, length : UInt32, ppresult : IDxcBlob*) : HRESULT
+    @lpVtbl.value.create_blob_from_blob.unsafe_as(Proc(IDxcBlob, UInt32, UInt32, IDxcBlob*, HRESULT)).call(pblob, offset, length, ppresult)
+  end
+  def create_blob_from_file(pfilename : LibC::LPWSTR, codepage : DXC_CP*, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.create_blob_from_file.unsafe_as(Proc(LibC::LPWSTR, DXC_CP*, IDxcBlobEncoding*, HRESULT)).call(pfilename, codepage, pblobencoding)
+  end
+  def create_blob_with_encoding_from_pinned(ptext : Void*, size : UInt32, codepage : DXC_CP, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.create_blob_with_encoding_from_pinned.unsafe_as(Proc(Void*, UInt32, DXC_CP, IDxcBlobEncoding*, HRESULT)).call(ptext, size, codepage, pblobencoding)
+  end
+  def create_blob_with_encoding_on_heap_copy(ptext : Void*, size : UInt32, codepage : DXC_CP, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.create_blob_with_encoding_on_heap_copy.unsafe_as(Proc(Void*, UInt32, DXC_CP, IDxcBlobEncoding*, HRESULT)).call(ptext, size, codepage, pblobencoding)
+  end
+  def create_blob_with_encoding_on_malloc(ptext : Void*, pimalloc : IMalloc, size : UInt32, codepage : DXC_CP, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.create_blob_with_encoding_on_malloc.unsafe_as(Proc(Void*, IMalloc, UInt32, DXC_CP, IDxcBlobEncoding*, HRESULT)).call(ptext, pimalloc, size, codepage, pblobencoding)
+  end
+  def create_include_handler(ppresult : IDxcIncludeHandler*) : HRESULT
+    @lpVtbl.value.create_include_handler.unsafe_as(Proc(IDxcIncludeHandler*, HRESULT)).call(ppresult)
+  end
+  def create_stream_from_blob_read_only(pblob : IDxcBlob, ppstream : IStream*) : HRESULT
+    @lpVtbl.value.create_stream_from_blob_read_only.unsafe_as(Proc(IDxcBlob, IStream*, HRESULT)).call(pblob, ppstream)
+  end
+  def get_blob_as_utf8(pblob : IDxcBlob, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.get_blob_as_utf8.unsafe_as(Proc(IDxcBlob, IDxcBlobEncoding*, HRESULT)).call(pblob, pblobencoding)
+  end
+  def get_blob_as_utf16(pblob : IDxcBlob, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.get_blob_as_utf16.unsafe_as(Proc(IDxcBlob, IDxcBlobEncoding*, HRESULT)).call(pblob, pblobencoding)
+  end
+end
+struct LibWin32::IDxcOperationResult
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_status(pstatus : HRESULT*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(HRESULT*, HRESULT)).call(pstatus)
+  end
+  def get_result(ppresult : IDxcBlob*) : HRESULT
+    @lpVtbl.value.get_result.unsafe_as(Proc(IDxcBlob*, HRESULT)).call(ppresult)
+  end
+  def get_error_buffer(pperrors : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.get_error_buffer.unsafe_as(Proc(IDxcBlobEncoding*, HRESULT)).call(pperrors)
+  end
+end
+struct LibWin32::IDxcCompiler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def compile(psource : IDxcBlob, psourcename : LibC::LPWSTR, pentrypoint : LibC::LPWSTR, ptargetprofile : LibC::LPWSTR, parguments : LibC::LPWSTR*, argcount : UInt32, pdefines : DxcDefine*, definecount : UInt32, pincludehandler : IDxcIncludeHandler, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.compile.unsafe_as(Proc(IDxcBlob, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, UInt32, DxcDefine*, UInt32, IDxcIncludeHandler, IDxcOperationResult*, HRESULT)).call(psource, psourcename, pentrypoint, ptargetprofile, parguments, argcount, pdefines, definecount, pincludehandler, ppresult)
+  end
+  def preprocess(psource : IDxcBlob, psourcename : LibC::LPWSTR, parguments : LibC::LPWSTR*, argcount : UInt32, pdefines : DxcDefine*, definecount : UInt32, pincludehandler : IDxcIncludeHandler, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.preprocess.unsafe_as(Proc(IDxcBlob, LibC::LPWSTR, LibC::LPWSTR*, UInt32, DxcDefine*, UInt32, IDxcIncludeHandler, IDxcOperationResult*, HRESULT)).call(psource, psourcename, parguments, argcount, pdefines, definecount, pincludehandler, ppresult)
+  end
+  def disassemble(psource : IDxcBlob, ppdisassembly : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.disassemble.unsafe_as(Proc(IDxcBlob, IDxcBlobEncoding*, HRESULT)).call(psource, ppdisassembly)
+  end
+end
+struct LibWin32::IDxcCompiler2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def compile(psource : IDxcBlob, psourcename : LibC::LPWSTR, pentrypoint : LibC::LPWSTR, ptargetprofile : LibC::LPWSTR, parguments : LibC::LPWSTR*, argcount : UInt32, pdefines : DxcDefine*, definecount : UInt32, pincludehandler : IDxcIncludeHandler, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.compile.unsafe_as(Proc(IDxcBlob, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, UInt32, DxcDefine*, UInt32, IDxcIncludeHandler, IDxcOperationResult*, HRESULT)).call(psource, psourcename, pentrypoint, ptargetprofile, parguments, argcount, pdefines, definecount, pincludehandler, ppresult)
+  end
+  def preprocess(psource : IDxcBlob, psourcename : LibC::LPWSTR, parguments : LibC::LPWSTR*, argcount : UInt32, pdefines : DxcDefine*, definecount : UInt32, pincludehandler : IDxcIncludeHandler, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.preprocess.unsafe_as(Proc(IDxcBlob, LibC::LPWSTR, LibC::LPWSTR*, UInt32, DxcDefine*, UInt32, IDxcIncludeHandler, IDxcOperationResult*, HRESULT)).call(psource, psourcename, parguments, argcount, pdefines, definecount, pincludehandler, ppresult)
+  end
+  def disassemble(psource : IDxcBlob, ppdisassembly : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.disassemble.unsafe_as(Proc(IDxcBlob, IDxcBlobEncoding*, HRESULT)).call(psource, ppdisassembly)
+  end
+  def compile_with_debug(psource : IDxcBlob, psourcename : LibC::LPWSTR, pentrypoint : LibC::LPWSTR, ptargetprofile : LibC::LPWSTR, parguments : LibC::LPWSTR*, argcount : UInt32, pdefines : DxcDefine*, definecount : UInt32, pincludehandler : IDxcIncludeHandler, ppresult : IDxcOperationResult*, ppdebugblobname : LibC::LPWSTR*, ppdebugblob : IDxcBlob*) : HRESULT
+    @lpVtbl.value.compile_with_debug.unsafe_as(Proc(IDxcBlob, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, UInt32, DxcDefine*, UInt32, IDxcIncludeHandler, IDxcOperationResult*, LibC::LPWSTR*, IDxcBlob*, HRESULT)).call(psource, psourcename, pentrypoint, ptargetprofile, parguments, argcount, pdefines, definecount, pincludehandler, ppresult, ppdebugblobname, ppdebugblob)
+  end
+end
+struct LibWin32::IDxcLinker
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def register_library(plibname : LibC::LPWSTR, plib : IDxcBlob) : HRESULT
+    @lpVtbl.value.register_library.unsafe_as(Proc(LibC::LPWSTR, IDxcBlob, HRESULT)).call(plibname, plib)
+  end
+  def link(pentryname : LibC::LPWSTR, ptargetprofile : LibC::LPWSTR, plibnames : LibC::LPWSTR*, libcount : UInt32, parguments : LibC::LPWSTR*, argcount : UInt32, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.link.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, UInt32, LibC::LPWSTR*, UInt32, IDxcOperationResult*, HRESULT)).call(pentryname, ptargetprofile, plibnames, libcount, parguments, argcount, ppresult)
+  end
+end
+struct LibWin32::IDxcUtils
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_blob_from_blob(pblob : IDxcBlob, offset : UInt32, length : UInt32, ppresult : IDxcBlob*) : HRESULT
+    @lpVtbl.value.create_blob_from_blob.unsafe_as(Proc(IDxcBlob, UInt32, UInt32, IDxcBlob*, HRESULT)).call(pblob, offset, length, ppresult)
+  end
+  def create_blob_from_pinned(pdata : Void*, size : UInt32, codepage : DXC_CP, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.create_blob_from_pinned.unsafe_as(Proc(Void*, UInt32, DXC_CP, IDxcBlobEncoding*, HRESULT)).call(pdata, size, codepage, pblobencoding)
+  end
+  def move_to_blob(pdata : Void*, pimalloc : IMalloc, size : UInt32, codepage : DXC_CP, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.move_to_blob.unsafe_as(Proc(Void*, IMalloc, UInt32, DXC_CP, IDxcBlobEncoding*, HRESULT)).call(pdata, pimalloc, size, codepage, pblobencoding)
+  end
+  def create_blob(pdata : Void*, size : UInt32, codepage : DXC_CP, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.create_blob.unsafe_as(Proc(Void*, UInt32, DXC_CP, IDxcBlobEncoding*, HRESULT)).call(pdata, size, codepage, pblobencoding)
+  end
+  def load_file(pfilename : LibC::LPWSTR, pcodepage : DXC_CP*, pblobencoding : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.load_file.unsafe_as(Proc(LibC::LPWSTR, DXC_CP*, IDxcBlobEncoding*, HRESULT)).call(pfilename, pcodepage, pblobencoding)
+  end
+  def create_read_only_stream_from_blob(pblob : IDxcBlob, ppstream : IStream*) : HRESULT
+    @lpVtbl.value.create_read_only_stream_from_blob.unsafe_as(Proc(IDxcBlob, IStream*, HRESULT)).call(pblob, ppstream)
+  end
+  def create_default_include_handler(ppresult : IDxcIncludeHandler*) : HRESULT
+    @lpVtbl.value.create_default_include_handler.unsafe_as(Proc(IDxcIncludeHandler*, HRESULT)).call(ppresult)
+  end
+  def get_blob_as_utf8(pblob : IDxcBlob, pblobencoding : IDxcBlobUtf8*) : HRESULT
+    @lpVtbl.value.get_blob_as_utf8.unsafe_as(Proc(IDxcBlob, IDxcBlobUtf8*, HRESULT)).call(pblob, pblobencoding)
+  end
+  def get_blob_as_utf16(pblob : IDxcBlob, pblobencoding : IDxcBlobUtf16*) : HRESULT
+    @lpVtbl.value.get_blob_as_utf16.unsafe_as(Proc(IDxcBlob, IDxcBlobUtf16*, HRESULT)).call(pblob, pblobencoding)
+  end
+  def get_dxil_container_part(pshader : DxcBuffer*, dxcpart : UInt32, pppartdata : Void**, ppartsizeinbytes : UInt32*) : HRESULT
+    @lpVtbl.value.get_dxil_container_part.unsafe_as(Proc(DxcBuffer*, UInt32, Void**, UInt32*, HRESULT)).call(pshader, dxcpart, pppartdata, ppartsizeinbytes)
+  end
+  def create_reflection(pdata : DxcBuffer*, iid : Guid*, ppvreflection : Void**) : HRESULT
+    @lpVtbl.value.create_reflection.unsafe_as(Proc(DxcBuffer*, Guid*, Void**, HRESULT)).call(pdata, iid, ppvreflection)
+  end
+  def build_arguments(psourcename : LibC::LPWSTR, pentrypoint : LibC::LPWSTR, ptargetprofile : LibC::LPWSTR, parguments : LibC::LPWSTR*, argcount : UInt32, pdefines : DxcDefine*, definecount : UInt32, ppargs : IDxcCompilerArgs*) : HRESULT
+    @lpVtbl.value.build_arguments.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, UInt32, DxcDefine*, UInt32, IDxcCompilerArgs*, HRESULT)).call(psourcename, pentrypoint, ptargetprofile, parguments, argcount, pdefines, definecount, ppargs)
+  end
+  def get_pdb_contents(ppdbblob : IDxcBlob, pphash : IDxcBlob*, ppcontainer : IDxcBlob*) : HRESULT
+    @lpVtbl.value.get_pdb_contents.unsafe_as(Proc(IDxcBlob, IDxcBlob*, IDxcBlob*, HRESULT)).call(ppdbblob, pphash, ppcontainer)
+  end
+end
+struct LibWin32::IDxcResult
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_status(pstatus : HRESULT*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(HRESULT*, HRESULT)).call(pstatus)
+  end
+  def get_result(ppresult : IDxcBlob*) : HRESULT
+    @lpVtbl.value.get_result.unsafe_as(Proc(IDxcBlob*, HRESULT)).call(ppresult)
+  end
+  def get_error_buffer(pperrors : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.get_error_buffer.unsafe_as(Proc(IDxcBlobEncoding*, HRESULT)).call(pperrors)
+  end
+  def has_output(dxcoutkind : DXC_OUT_KIND) : LibC::BOOL
+    @lpVtbl.value.has_output.unsafe_as(Proc(DXC_OUT_KIND, LibC::BOOL)).call(dxcoutkind)
+  end
+  def get_output(dxcoutkind : DXC_OUT_KIND, iid : Guid*, ppvobject : Void**, ppoutputname : IDxcBlobUtf16*) : HRESULT
+    @lpVtbl.value.get_output.unsafe_as(Proc(DXC_OUT_KIND, Guid*, Void**, IDxcBlobUtf16*, HRESULT)).call(dxcoutkind, iid, ppvobject, ppoutputname)
+  end
+  def get_num_outputs : UInt32
+    @lpVtbl.value.get_num_outputs.unsafe_as(Proc(UInt32)).call
+  end
+  def get_output_by_index(index : UInt32) : DXC_OUT_KIND
+    @lpVtbl.value.get_output_by_index.unsafe_as(Proc(UInt32, DXC_OUT_KIND)).call(index)
+  end
+  def primary_output : DXC_OUT_KIND
+    @lpVtbl.value.primary_output.unsafe_as(Proc(DXC_OUT_KIND)).call
+  end
+end
+struct LibWin32::IDxcExtraOutputs
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_output_count : UInt32
+    @lpVtbl.value.get_output_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_output(uindex : UInt32, iid : Guid*, ppvobject : Void**, ppoutputtype : IDxcBlobUtf16*, ppoutputname : IDxcBlobUtf16*) : HRESULT
+    @lpVtbl.value.get_output.unsafe_as(Proc(UInt32, Guid*, Void**, IDxcBlobUtf16*, IDxcBlobUtf16*, HRESULT)).call(uindex, iid, ppvobject, ppoutputtype, ppoutputname)
+  end
+end
+struct LibWin32::IDxcCompiler3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def compile(psource : DxcBuffer*, parguments : LibC::LPWSTR*, argcount : UInt32, pincludehandler : IDxcIncludeHandler, riid : Guid*, ppresult : Void**) : HRESULT
+    @lpVtbl.value.compile.unsafe_as(Proc(DxcBuffer*, LibC::LPWSTR*, UInt32, IDxcIncludeHandler, Guid*, Void**, HRESULT)).call(psource, parguments, argcount, pincludehandler, riid, ppresult)
+  end
+  def disassemble(pobject : DxcBuffer*, riid : Guid*, ppresult : Void**) : HRESULT
+    @lpVtbl.value.disassemble.unsafe_as(Proc(DxcBuffer*, Guid*, Void**, HRESULT)).call(pobject, riid, ppresult)
+  end
+end
+struct LibWin32::IDxcValidator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def validate(pshader : IDxcBlob, flags : UInt32, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.validate.unsafe_as(Proc(IDxcBlob, UInt32, IDxcOperationResult*, HRESULT)).call(pshader, flags, ppresult)
+  end
+end
+struct LibWin32::IDxcValidator2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def validate(pshader : IDxcBlob, flags : UInt32, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.validate.unsafe_as(Proc(IDxcBlob, UInt32, IDxcOperationResult*, HRESULT)).call(pshader, flags, ppresult)
+  end
+  def validate_with_debug(pshader : IDxcBlob, flags : UInt32, poptdebugbitcode : DxcBuffer*, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.validate_with_debug.unsafe_as(Proc(IDxcBlob, UInt32, DxcBuffer*, IDxcOperationResult*, HRESULT)).call(pshader, flags, poptdebugbitcode, ppresult)
+  end
+end
+struct LibWin32::IDxcContainerBuilder
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def load(pdxilcontainerheader : IDxcBlob) : HRESULT
+    @lpVtbl.value.load.unsafe_as(Proc(IDxcBlob, HRESULT)).call(pdxilcontainerheader)
+  end
+  def add_part(fourcc : UInt32, psource : IDxcBlob) : HRESULT
+    @lpVtbl.value.add_part.unsafe_as(Proc(UInt32, IDxcBlob, HRESULT)).call(fourcc, psource)
+  end
+  def remove_part(fourcc : UInt32) : HRESULT
+    @lpVtbl.value.remove_part.unsafe_as(Proc(UInt32, HRESULT)).call(fourcc)
+  end
+  def serialize_container(ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.serialize_container.unsafe_as(Proc(IDxcOperationResult*, HRESULT)).call(ppresult)
+  end
+end
+struct LibWin32::IDxcAssembler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def assemble_to_container(pshader : IDxcBlob, ppresult : IDxcOperationResult*) : HRESULT
+    @lpVtbl.value.assemble_to_container.unsafe_as(Proc(IDxcBlob, IDxcOperationResult*, HRESULT)).call(pshader, ppresult)
+  end
+end
+struct LibWin32::IDxcContainerReflection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def load(pcontainer : IDxcBlob) : HRESULT
+    @lpVtbl.value.load.unsafe_as(Proc(IDxcBlob, HRESULT)).call(pcontainer)
+  end
+  def get_part_count(presult : UInt32*) : HRESULT
+    @lpVtbl.value.get_part_count.unsafe_as(Proc(UInt32*, HRESULT)).call(presult)
+  end
+  def get_part_kind(idx : UInt32, presult : UInt32*) : HRESULT
+    @lpVtbl.value.get_part_kind.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(idx, presult)
+  end
+  def get_part_content(idx : UInt32, ppresult : IDxcBlob*) : HRESULT
+    @lpVtbl.value.get_part_content.unsafe_as(Proc(UInt32, IDxcBlob*, HRESULT)).call(idx, ppresult)
+  end
+  def find_first_part_kind(kind : UInt32, presult : UInt32*) : HRESULT
+    @lpVtbl.value.find_first_part_kind.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(kind, presult)
+  end
+  def get_part_reflection(idx : UInt32, iid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.get_part_reflection.unsafe_as(Proc(UInt32, Guid*, Void**, HRESULT)).call(idx, iid, ppvobject)
+  end
+end
+struct LibWin32::IDxcOptimizerPass
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_option_name(ppresult : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_option_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppresult)
+  end
+  def get_description(ppresult : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppresult)
+  end
+  def get_option_arg_count(pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_option_arg_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcount)
+  end
+  def get_option_arg_name(argindex : UInt32, ppresult : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_option_arg_name.unsafe_as(Proc(UInt32, LibC::LPWSTR*, HRESULT)).call(argindex, ppresult)
+  end
+  def get_option_arg_description(argindex : UInt32, ppresult : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_option_arg_description.unsafe_as(Proc(UInt32, LibC::LPWSTR*, HRESULT)).call(argindex, ppresult)
+  end
+end
+struct LibWin32::IDxcOptimizer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_available_pass_count(pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_available_pass_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcount)
+  end
+  def get_available_pass(index : UInt32, ppresult : IDxcOptimizerPass*) : HRESULT
+    @lpVtbl.value.get_available_pass.unsafe_as(Proc(UInt32, IDxcOptimizerPass*, HRESULT)).call(index, ppresult)
+  end
+  def run_optimizer(pblob : IDxcBlob, ppoptions : LibC::LPWSTR*, optioncount : UInt32, poutputmodule : IDxcBlob*, ppoutputtext : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.run_optimizer.unsafe_as(Proc(IDxcBlob, LibC::LPWSTR*, UInt32, IDxcBlob*, IDxcBlobEncoding*, HRESULT)).call(pblob, ppoptions, optioncount, poutputmodule, ppoutputtext)
+  end
+end
+struct LibWin32::IDxcVersionInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_version(pmajor : UInt32*, pminor : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pmajor, pminor)
+  end
+  def get_flags(pflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pflags)
+  end
+end
+struct LibWin32::IDxcVersionInfo2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_version(pmajor : UInt32*, pminor : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pmajor, pminor)
+  end
+  def get_flags(pflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pflags)
+  end
+  def get_commit_info(pcommitcount : UInt32*, pcommithash : Int8**) : HRESULT
+    @lpVtbl.value.get_commit_info.unsafe_as(Proc(UInt32*, Int8**, HRESULT)).call(pcommitcount, pcommithash)
+  end
+end
+struct LibWin32::IDxcVersionInfo3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_custom_version_string(pversionstring : Int8**) : HRESULT
+    @lpVtbl.value.get_custom_version_string.unsafe_as(Proc(Int8**, HRESULT)).call(pversionstring)
+  end
+end
+struct LibWin32::IDxcPdbUtils
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def load(ppdbordxil : IDxcBlob) : HRESULT
+    @lpVtbl.value.load.unsafe_as(Proc(IDxcBlob, HRESULT)).call(ppdbordxil)
+  end
+  def get_source_count(pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_source_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcount)
+  end
+  def get_source(uindex : UInt32, ppresult : IDxcBlobEncoding*) : HRESULT
+    @lpVtbl.value.get_source.unsafe_as(Proc(UInt32, IDxcBlobEncoding*, HRESULT)).call(uindex, ppresult)
+  end
+  def get_source_name(uindex : UInt32, presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_source_name.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(uindex, presult)
+  end
+  def get_flag_count(pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_flag_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcount)
+  end
+  def get_flag(uindex : UInt32, presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_flag.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(uindex, presult)
+  end
+  def get_arg_count(pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_arg_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcount)
+  end
+  def get_arg(uindex : UInt32, presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_arg.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(uindex, presult)
+  end
+  def get_arg_pair_count(pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_arg_pair_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcount)
+  end
+  def get_arg_pair(uindex : UInt32, pname : UInt8**, pvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_arg_pair.unsafe_as(Proc(UInt32, UInt8**, UInt8**, HRESULT)).call(uindex, pname, pvalue)
+  end
+  def get_define_count(pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_define_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcount)
+  end
+  def get_define(uindex : UInt32, presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_define.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(uindex, presult)
+  end
+  def get_target_profile(presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_profile.unsafe_as(Proc(UInt8**, HRESULT)).call(presult)
+  end
+  def get_entry_point(presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_entry_point.unsafe_as(Proc(UInt8**, HRESULT)).call(presult)
+  end
+  def get_main_file_name(presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_main_file_name.unsafe_as(Proc(UInt8**, HRESULT)).call(presult)
+  end
+  def get_hash(ppresult : IDxcBlob*) : HRESULT
+    @lpVtbl.value.get_hash.unsafe_as(Proc(IDxcBlob*, HRESULT)).call(ppresult)
+  end
+  def get_name(presult : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(presult)
+  end
+  def is_full_pdb : LibC::BOOL
+    @lpVtbl.value.is_full_pdb.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_full_pdb(ppfullpdb : IDxcBlob*) : HRESULT
+    @lpVtbl.value.get_full_pdb.unsafe_as(Proc(IDxcBlob*, HRESULT)).call(ppfullpdb)
+  end
+  def get_version_info(ppversioninfo : IDxcVersionInfo*) : HRESULT
+    @lpVtbl.value.get_version_info.unsafe_as(Proc(IDxcVersionInfo*, HRESULT)).call(ppversioninfo)
+  end
+  def set_compiler(pcompiler : IDxcCompiler3) : HRESULT
+    @lpVtbl.value.set_compiler.unsafe_as(Proc(IDxcCompiler3, HRESULT)).call(pcompiler)
+  end
+  def compile_for_full_pdb(ppresult : IDxcResult*) : HRESULT
+    @lpVtbl.value.compile_for_full_pdb.unsafe_as(Proc(IDxcResult*, HRESULT)).call(ppresult)
+  end
+  def override_args(pargpairs : DxcArgPair*, unumargpairs : UInt32) : HRESULT
+    @lpVtbl.value.override_args.unsafe_as(Proc(DxcArgPair*, UInt32, HRESULT)).call(pargpairs, unumargpairs)
+  end
+  def override_root_signature(prootsignature : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.override_root_signature.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(prootsignature)
+  end
 end

@@ -816,7 +816,7 @@ lib LibWin32
   end
   union EVENT_TRACE_HEADER_Anonymous2_e__Union
     version : UInt32
-    klass : EVENT_TRACE_HEADER_Anonymous2_e__Union_Class_e__Struct
+    class_ : EVENT_TRACE_HEADER_Anonymous2_e__Union_Class_e__Struct
   end
   union EVENT_TRACE_HEADER_Anonymous1_e__Union
     field_type_flags : UInt16
@@ -833,7 +833,7 @@ lib LibWin32
   end
   union EVENT_INSTANCE_HEADER_Anonymous2_e__Union
     version : UInt32
-    klass : EVENT_INSTANCE_HEADER_Anonymous2_e__Union_Class_e__Struct
+    class_ : EVENT_INSTANCE_HEADER_Anonymous2_e__Union_Class_e__Struct
   end
   union EVENT_INSTANCE_HEADER_Anonymous1_e__Union
     field_type_flags : UInt16
@@ -1628,21 +1628,21 @@ lib LibWin32
 
 
   struct ITraceEventVTbl
-    query_interface : Proc(ITraceEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITraceEvent*, UInt32)
-    release : Proc(ITraceEvent*, UInt32)
-    clone : Proc(ITraceEvent*, ITraceEvent*, HRESULT)
-    get_user_context : Proc(ITraceEvent*, Void**, HRESULT)
-    get_event_record : Proc(ITraceEvent*, EVENT_RECORD**, HRESULT)
-    set_payload : Proc(ITraceEvent*, UInt8*, UInt32, HRESULT)
-    set_event_descriptor : Proc(ITraceEvent*, EVENT_DESCRIPTOR*, HRESULT)
-    set_process_id : Proc(ITraceEvent*, UInt32, HRESULT)
-    set_processor_index : Proc(ITraceEvent*, UInt32, HRESULT)
-    set_thread_id : Proc(ITraceEvent*, UInt32, HRESULT)
-    set_thread_times : Proc(ITraceEvent*, UInt32, UInt32, HRESULT)
-    set_activity_id : Proc(ITraceEvent*, Guid*, HRESULT)
-    set_time_stamp : Proc(ITraceEvent*, LARGE_INTEGER*, HRESULT)
-    set_provider_id : Proc(ITraceEvent*, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    get_user_context : UInt64
+    get_event_record : UInt64
+    set_payload : UInt64
+    set_event_descriptor : UInt64
+    set_process_id : UInt64
+    set_processor_index : UInt64
+    set_thread_id : UInt64
+    set_thread_times : UInt64
+    set_activity_id : UInt64
+    set_time_stamp : UInt64
+    set_provider_id : UInt64
   end
 
   ITraceEvent_GUID = "8cc97f40-9028-4ff3-9b62-7d1f79ca7bcb"
@@ -1652,12 +1652,12 @@ lib LibWin32
   end
 
   struct ITraceEventCallbackVTbl
-    query_interface : Proc(ITraceEventCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITraceEventCallback*, UInt32)
-    release : Proc(ITraceEventCallback*, UInt32)
-    on_begin_process_trace : Proc(ITraceEventCallback*, ITraceEvent, ITraceRelogger, HRESULT)
-    on_finalize_process_trace : Proc(ITraceEventCallback*, ITraceRelogger, HRESULT)
-    on_event : Proc(ITraceEventCallback*, ITraceEvent, ITraceRelogger, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_begin_process_trace : UInt64
+    on_finalize_process_trace : UInt64
+    on_event : UInt64
   end
 
   ITraceEventCallback_GUID = "3ed25501-593f-43e9-8f38-3ab46f5a4a52"
@@ -1667,18 +1667,18 @@ lib LibWin32
   end
 
   struct ITraceReloggerVTbl
-    query_interface : Proc(ITraceRelogger*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITraceRelogger*, UInt32)
-    release : Proc(ITraceRelogger*, UInt32)
-    add_logfile_trace_stream : Proc(ITraceRelogger*, UInt8*, Void*, UInt64*, HRESULT)
-    add_realtime_trace_stream : Proc(ITraceRelogger*, UInt8*, Void*, UInt64*, HRESULT)
-    register_callback : Proc(ITraceRelogger*, ITraceEventCallback, HRESULT)
-    inject : Proc(ITraceRelogger*, ITraceEvent, HRESULT)
-    create_event_instance : Proc(ITraceRelogger*, UInt64, UInt32, ITraceEvent*, HRESULT)
-    process_trace : Proc(ITraceRelogger*, HRESULT)
-    set_output_filename : Proc(ITraceRelogger*, UInt8*, HRESULT)
-    set_compression_mode : Proc(ITraceRelogger*, BOOLEAN, HRESULT)
-    cancel : Proc(ITraceRelogger*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_logfile_trace_stream : UInt64
+    add_realtime_trace_stream : UInt64
+    register_callback : UInt64
+    inject : UInt64
+    create_event_instance : UInt64
+    process_trace : UInt64
+    set_output_filename : UInt64
+    set_compression_mode : UInt64
+    cancel : UInt64
   end
 
   ITraceRelogger_GUID = "f754ad43-3bcc-4286-8009-9c5da214e84e"
@@ -1927,4 +1927,109 @@ lib LibWin32
 
   # Params # cveid : LibC::LPWSTR [In],additionaldetails : LibC::LPWSTR [In]
   fun CveEventWrite(cveid : LibC::LPWSTR, additionaldetails : LibC::LPWSTR) : Int32
+end
+struct LibWin32::ITraceEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(newevent : ITraceEvent*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(ITraceEvent*, HRESULT)).call(newevent)
+  end
+  def get_user_context(usercontext : Void**) : HRESULT
+    @lpVtbl.value.get_user_context.unsafe_as(Proc(Void**, HRESULT)).call(usercontext)
+  end
+  def get_event_record(eventrecord : EVENT_RECORD**) : HRESULT
+    @lpVtbl.value.get_event_record.unsafe_as(Proc(EVENT_RECORD**, HRESULT)).call(eventrecord)
+  end
+  def set_payload(payload : UInt8*, payloadsize : UInt32) : HRESULT
+    @lpVtbl.value.set_payload.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(payload, payloadsize)
+  end
+  def set_event_descriptor(eventdescriptor : EVENT_DESCRIPTOR*) : HRESULT
+    @lpVtbl.value.set_event_descriptor.unsafe_as(Proc(EVENT_DESCRIPTOR*, HRESULT)).call(eventdescriptor)
+  end
+  def set_process_id(processid : UInt32) : HRESULT
+    @lpVtbl.value.set_process_id.unsafe_as(Proc(UInt32, HRESULT)).call(processid)
+  end
+  def set_processor_index(processorindex : UInt32) : HRESULT
+    @lpVtbl.value.set_processor_index.unsafe_as(Proc(UInt32, HRESULT)).call(processorindex)
+  end
+  def set_thread_id(threadid : UInt32) : HRESULT
+    @lpVtbl.value.set_thread_id.unsafe_as(Proc(UInt32, HRESULT)).call(threadid)
+  end
+  def set_thread_times(kerneltime : UInt32, usertime : UInt32) : HRESULT
+    @lpVtbl.value.set_thread_times.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(kerneltime, usertime)
+  end
+  def set_activity_id(activityid : Guid*) : HRESULT
+    @lpVtbl.value.set_activity_id.unsafe_as(Proc(Guid*, HRESULT)).call(activityid)
+  end
+  def set_time_stamp(timestamp : LARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.set_time_stamp.unsafe_as(Proc(LARGE_INTEGER*, HRESULT)).call(timestamp)
+  end
+  def set_provider_id(providerid : Guid*) : HRESULT
+    @lpVtbl.value.set_provider_id.unsafe_as(Proc(Guid*, HRESULT)).call(providerid)
+  end
+end
+struct LibWin32::ITraceEventCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_begin_process_trace(headerevent : ITraceEvent, relogger : ITraceRelogger) : HRESULT
+    @lpVtbl.value.on_begin_process_trace.unsafe_as(Proc(ITraceEvent, ITraceRelogger, HRESULT)).call(headerevent, relogger)
+  end
+  def on_finalize_process_trace(relogger : ITraceRelogger) : HRESULT
+    @lpVtbl.value.on_finalize_process_trace.unsafe_as(Proc(ITraceRelogger, HRESULT)).call(relogger)
+  end
+  def on_event(event : ITraceEvent, relogger : ITraceRelogger) : HRESULT
+    @lpVtbl.value.on_event.unsafe_as(Proc(ITraceEvent, ITraceRelogger, HRESULT)).call(event, relogger)
+  end
+end
+struct LibWin32::ITraceRelogger
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_logfile_trace_stream(logfilename : UInt8*, usercontext : Void*, tracehandle : UInt64*) : HRESULT
+    @lpVtbl.value.add_logfile_trace_stream.unsafe_as(Proc(UInt8*, Void*, UInt64*, HRESULT)).call(logfilename, usercontext, tracehandle)
+  end
+  def add_realtime_trace_stream(loggername : UInt8*, usercontext : Void*, tracehandle : UInt64*) : HRESULT
+    @lpVtbl.value.add_realtime_trace_stream.unsafe_as(Proc(UInt8*, Void*, UInt64*, HRESULT)).call(loggername, usercontext, tracehandle)
+  end
+  def register_callback(callback : ITraceEventCallback) : HRESULT
+    @lpVtbl.value.register_callback.unsafe_as(Proc(ITraceEventCallback, HRESULT)).call(callback)
+  end
+  def inject(event : ITraceEvent) : HRESULT
+    @lpVtbl.value.inject.unsafe_as(Proc(ITraceEvent, HRESULT)).call(event)
+  end
+  def create_event_instance(tracehandle : UInt64, flags : UInt32, event : ITraceEvent*) : HRESULT
+    @lpVtbl.value.create_event_instance.unsafe_as(Proc(UInt64, UInt32, ITraceEvent*, HRESULT)).call(tracehandle, flags, event)
+  end
+  def process_trace : HRESULT
+    @lpVtbl.value.process_trace.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_output_filename(logfilename : UInt8*) : HRESULT
+    @lpVtbl.value.set_output_filename.unsafe_as(Proc(UInt8*, HRESULT)).call(logfilename)
+  end
+  def set_compression_mode(compressionmode : BOOLEAN) : HRESULT
+    @lpVtbl.value.set_compression_mode.unsafe_as(Proc(BOOLEAN, HRESULT)).call(compressionmode)
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
 end

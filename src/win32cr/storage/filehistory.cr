@@ -124,11 +124,11 @@ lib LibWin32
 
 
   struct IFhTargetVTbl
-    query_interface : Proc(IFhTarget*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFhTarget*, UInt32)
-    release : Proc(IFhTarget*, UInt32)
-    get_string_property : Proc(IFhTarget*, FH_TARGET_PROPERTY_TYPE, UInt8**, HRESULT)
-    get_numerical_property : Proc(IFhTarget*, FH_TARGET_PROPERTY_TYPE, UInt64*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_string_property : UInt64
+    get_numerical_property : UInt64
   end
 
   IFhTarget_GUID = "d87965fd-2bad-4657-bd3b-9567eb300ced"
@@ -138,11 +138,11 @@ lib LibWin32
   end
 
   struct IFhScopeIteratorVTbl
-    query_interface : Proc(IFhScopeIterator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFhScopeIterator*, UInt32)
-    release : Proc(IFhScopeIterator*, UInt32)
-    move_to_next_item : Proc(IFhScopeIterator*, HRESULT)
-    get_item : Proc(IFhScopeIterator*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    move_to_next_item : UInt64
+    get_item : UInt64
   end
 
   IFhScopeIterator_GUID = "3197abce-532a-44c6-8615-f3666566a720"
@@ -152,23 +152,23 @@ lib LibWin32
   end
 
   struct IFhConfigMgrVTbl
-    query_interface : Proc(IFhConfigMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFhConfigMgr*, UInt32)
-    release : Proc(IFhConfigMgr*, UInt32)
-    load_configuration : Proc(IFhConfigMgr*, HRESULT)
-    create_default_configuration : Proc(IFhConfigMgr*, LibC::BOOL, HRESULT)
-    save_configuration : Proc(IFhConfigMgr*, HRESULT)
-    add_remove_exclude_rule : Proc(IFhConfigMgr*, LibC::BOOL, FH_PROTECTED_ITEM_CATEGORY, UInt8*, HRESULT)
-    get_include_exclude_rules : Proc(IFhConfigMgr*, LibC::BOOL, FH_PROTECTED_ITEM_CATEGORY, IFhScopeIterator*, HRESULT)
-    get_local_policy : Proc(IFhConfigMgr*, FH_LOCAL_POLICY_TYPE, UInt64*, HRESULT)
-    set_local_policy : Proc(IFhConfigMgr*, FH_LOCAL_POLICY_TYPE, UInt64, HRESULT)
-    get_backup_status : Proc(IFhConfigMgr*, FH_BACKUP_STATUS*, HRESULT)
-    set_backup_status : Proc(IFhConfigMgr*, FH_BACKUP_STATUS, HRESULT)
-    get_default_target : Proc(IFhConfigMgr*, IFhTarget*, HRESULT)
-    validate_target : Proc(IFhConfigMgr*, UInt8*, FH_DEVICE_VALIDATION_RESULT*, HRESULT)
-    provision_and_set_new_target : Proc(IFhConfigMgr*, UInt8*, UInt8*, HRESULT)
-    change_default_target_recommendation : Proc(IFhConfigMgr*, LibC::BOOL, HRESULT)
-    query_protection_status : Proc(IFhConfigMgr*, UInt32*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    load_configuration : UInt64
+    create_default_configuration : UInt64
+    save_configuration : UInt64
+    add_remove_exclude_rule : UInt64
+    get_include_exclude_rules : UInt64
+    get_local_policy : UInt64
+    set_local_policy : UInt64
+    get_backup_status : UInt64
+    set_backup_status : UInt64
+    get_default_target : UInt64
+    validate_target : UInt64
+    provision_and_set_new_target : UInt64
+    change_default_target_recommendation : UInt64
+    query_protection_status : UInt64
   end
 
   IFhConfigMgr_GUID = "6a5fea5b-bf8f-4ee5-b8c3-44d8a0d7331c"
@@ -178,14 +178,14 @@ lib LibWin32
   end
 
   struct IFhReassociationVTbl
-    query_interface : Proc(IFhReassociation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFhReassociation*, UInt32)
-    release : Proc(IFhReassociation*, UInt32)
-    validate_target : Proc(IFhReassociation*, UInt8*, FH_DEVICE_VALIDATION_RESULT*, HRESULT)
-    scan_target_for_configurations : Proc(IFhReassociation*, UInt8*, HRESULT)
-    get_configuration_details : Proc(IFhReassociation*, UInt32, UInt8**, UInt8**, FILETIME*, HRESULT)
-    select_configuration : Proc(IFhReassociation*, UInt32, HRESULT)
-    perform_reassociation : Proc(IFhReassociation*, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    validate_target : UInt64
+    scan_target_for_configurations : UInt64
+    get_configuration_details : UInt64
+    select_configuration : UInt64
+    perform_reassociation : UInt64
   end
 
   IFhReassociation_GUID = "6544a28a-f68d-47ac-91ef-16b2b36aa3ee"
@@ -215,4 +215,117 @@ lib LibWin32
 
   # Params # pipe : FH_SERVICE_PIPE_HANDLE [In]
   fun FhServiceUnblockBackup(pipe : FH_SERVICE_PIPE_HANDLE) : HRESULT
+end
+struct LibWin32::IFhTarget
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_string_property(propertytype : FH_TARGET_PROPERTY_TYPE, propertyvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_string_property.unsafe_as(Proc(FH_TARGET_PROPERTY_TYPE, UInt8**, HRESULT)).call(propertytype, propertyvalue)
+  end
+  def get_numerical_property(propertytype : FH_TARGET_PROPERTY_TYPE, propertyvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_numerical_property.unsafe_as(Proc(FH_TARGET_PROPERTY_TYPE, UInt64*, HRESULT)).call(propertytype, propertyvalue)
+  end
+end
+struct LibWin32::IFhScopeIterator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def move_to_next_item : HRESULT
+    @lpVtbl.value.move_to_next_item.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_item(item : UInt8**) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(UInt8**, HRESULT)).call(item)
+  end
+end
+struct LibWin32::IFhConfigMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def load_configuration : HRESULT
+    @lpVtbl.value.load_configuration.unsafe_as(Proc(HRESULT)).call
+  end
+  def create_default_configuration(overwriteifexists : LibC::BOOL) : HRESULT
+    @lpVtbl.value.create_default_configuration.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(overwriteifexists)
+  end
+  def save_configuration : HRESULT
+    @lpVtbl.value.save_configuration.unsafe_as(Proc(HRESULT)).call
+  end
+  def add_remove_exclude_rule(add : LibC::BOOL, category : FH_PROTECTED_ITEM_CATEGORY, item : UInt8*) : HRESULT
+    @lpVtbl.value.add_remove_exclude_rule.unsafe_as(Proc(LibC::BOOL, FH_PROTECTED_ITEM_CATEGORY, UInt8*, HRESULT)).call(add, category, item)
+  end
+  def get_include_exclude_rules(include : LibC::BOOL, category : FH_PROTECTED_ITEM_CATEGORY, iterator : IFhScopeIterator*) : HRESULT
+    @lpVtbl.value.get_include_exclude_rules.unsafe_as(Proc(LibC::BOOL, FH_PROTECTED_ITEM_CATEGORY, IFhScopeIterator*, HRESULT)).call(include, category, iterator)
+  end
+  def get_local_policy(localpolicytype : FH_LOCAL_POLICY_TYPE, policyvalue : UInt64*) : HRESULT
+    @lpVtbl.value.get_local_policy.unsafe_as(Proc(FH_LOCAL_POLICY_TYPE, UInt64*, HRESULT)).call(localpolicytype, policyvalue)
+  end
+  def set_local_policy(localpolicytype : FH_LOCAL_POLICY_TYPE, policyvalue : UInt64) : HRESULT
+    @lpVtbl.value.set_local_policy.unsafe_as(Proc(FH_LOCAL_POLICY_TYPE, UInt64, HRESULT)).call(localpolicytype, policyvalue)
+  end
+  def get_backup_status(backupstatus : FH_BACKUP_STATUS*) : HRESULT
+    @lpVtbl.value.get_backup_status.unsafe_as(Proc(FH_BACKUP_STATUS*, HRESULT)).call(backupstatus)
+  end
+  def set_backup_status(backupstatus : FH_BACKUP_STATUS) : HRESULT
+    @lpVtbl.value.set_backup_status.unsafe_as(Proc(FH_BACKUP_STATUS, HRESULT)).call(backupstatus)
+  end
+  def get_default_target(defaulttarget : IFhTarget*) : HRESULT
+    @lpVtbl.value.get_default_target.unsafe_as(Proc(IFhTarget*, HRESULT)).call(defaulttarget)
+  end
+  def validate_target(targeturl : UInt8*, validationresult : FH_DEVICE_VALIDATION_RESULT*) : HRESULT
+    @lpVtbl.value.validate_target.unsafe_as(Proc(UInt8*, FH_DEVICE_VALIDATION_RESULT*, HRESULT)).call(targeturl, validationresult)
+  end
+  def provision_and_set_new_target(targeturl : UInt8*, targetname : UInt8*) : HRESULT
+    @lpVtbl.value.provision_and_set_new_target.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(targeturl, targetname)
+  end
+  def change_default_target_recommendation(recommend : LibC::BOOL) : HRESULT
+    @lpVtbl.value.change_default_target_recommendation.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(recommend)
+  end
+  def query_protection_status(protectionstate : UInt32*, protecteduntiltime : UInt8**) : HRESULT
+    @lpVtbl.value.query_protection_status.unsafe_as(Proc(UInt32*, UInt8**, HRESULT)).call(protectionstate, protecteduntiltime)
+  end
+end
+struct LibWin32::IFhReassociation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def validate_target(targeturl : UInt8*, validationresult : FH_DEVICE_VALIDATION_RESULT*) : HRESULT
+    @lpVtbl.value.validate_target.unsafe_as(Proc(UInt8*, FH_DEVICE_VALIDATION_RESULT*, HRESULT)).call(targeturl, validationresult)
+  end
+  def scan_target_for_configurations(targeturl : UInt8*) : HRESULT
+    @lpVtbl.value.scan_target_for_configurations.unsafe_as(Proc(UInt8*, HRESULT)).call(targeturl)
+  end
+  def get_configuration_details(index : UInt32, username : UInt8**, pcname : UInt8**, backuptime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_configuration_details.unsafe_as(Proc(UInt32, UInt8**, UInt8**, FILETIME*, HRESULT)).call(index, username, pcname, backuptime)
+  end
+  def select_configuration(index : UInt32) : HRESULT
+    @lpVtbl.value.select_configuration.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+  def perform_reassociation(overwriteifexists : LibC::BOOL) : HRESULT
+    @lpVtbl.value.perform_reassociation.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(overwriteifexists)
+  end
 end

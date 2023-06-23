@@ -436,7 +436,7 @@ lib LibWin32
   fun WerStoreOpen(repstoretype : REPORT_STORE_TYPES, phreportstore : HREPORTSTORE*) : HRESULT
 
   # Params # hreportstore : HREPORTSTORE [In]
-  fun WerStoreClose(hreportstore : HREPORTSTORE)
+  fun WerStoreClose(hreportstore : HREPORTSTORE) : Void
 
   # Params # hreportstore : HREPORTSTORE [In],ppszreportkey : LibC::LPWSTR* [In]
   fun WerStoreGetFirstReportKey(hreportstore : HREPORTSTORE, ppszreportkey : LibC::LPWSTR*) : HRESULT
@@ -451,7 +451,7 @@ lib LibWin32
   fun WerStoreQueryReportMetadataV3(hreportstore : HREPORTSTORE, pszreportkey : LibC::LPWSTR, preportmetadata : WER_REPORT_METADATA_V3*) : HRESULT
 
   # Params # pwszstr : LibC::LPWSTR [In]
-  fun WerFreeString(pwszstr : LibC::LPWSTR)
+  fun WerFreeString(pwszstr : LibC::LPWSTR) : Void
 
   # Params # 
   fun WerStorePurge : HRESULT

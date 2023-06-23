@@ -1525,13 +1525,13 @@ lib LibWin32
 
 
   struct IEnumVdsObjectVTbl
-    query_interface : Proc(IEnumVdsObject*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumVdsObject*, UInt32)
-    release : Proc(IEnumVdsObject*, UInt32)
-    next : Proc(IEnumVdsObject*, UInt32, IUnknown*, UInt32*, HRESULT)
-    skip : Proc(IEnumVdsObject*, UInt32, HRESULT)
-    reset : Proc(IEnumVdsObject*, HRESULT)
-    clone : Proc(IEnumVdsObject*, IEnumVdsObject*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IEnumVdsObject_GUID = "118610b7-8d94-4030-b5b8-500889788e4e"
@@ -1541,12 +1541,12 @@ lib LibWin32
   end
 
   struct IVdsAsyncVTbl
-    query_interface : Proc(IVdsAsync*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsAsync*, UInt32)
-    release : Proc(IVdsAsync*, UInt32)
-    cancel : Proc(IVdsAsync*, HRESULT)
-    wait : Proc(IVdsAsync*, HRESULT*, VDS_ASYNC_OUTPUT*, HRESULT)
-    query_status : Proc(IVdsAsync*, HRESULT*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    cancel : UInt64
+    wait : UInt64
+    query_status : UInt64
   end
 
   IVdsAsync_GUID = "d5d23b6d-5a55-4492-9889-397a3c2d2dbc"
@@ -1556,10 +1556,10 @@ lib LibWin32
   end
 
   struct IVdsAdviseSinkVTbl
-    query_interface : Proc(IVdsAdviseSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsAdviseSink*, UInt32)
-    release : Proc(IVdsAdviseSink*, UInt32)
-    on_notify : Proc(IVdsAdviseSink*, Int32, VDS_NOTIFICATION*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_notify : UInt64
   end
 
   IVdsAdviseSink_GUID = "8326cd1d-cf59-4936-b786-5efc08798e25"
@@ -1569,10 +1569,10 @@ lib LibWin32
   end
 
   struct IVdsProviderVTbl
-    query_interface : Proc(IVdsProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsProvider*, UInt32)
-    release : Proc(IVdsProvider*, UInt32)
-    get_properties : Proc(IVdsProvider*, VDS_PROVIDER_PROP*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties : UInt64
   end
 
   IVdsProvider_GUID = "10c5e575-7984-4e81-a56b-431f5f92ae42"
@@ -1582,10 +1582,10 @@ lib LibWin32
   end
 
   struct IVdsProviderSupportVTbl
-    query_interface : Proc(IVdsProviderSupport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsProviderSupport*, UInt32)
-    release : Proc(IVdsProviderSupport*, UInt32)
-    get_version_support : Proc(IVdsProviderSupport*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_version_support : UInt64
   end
 
   IVdsProviderSupport_GUID = "1732be13-e8f9-4a03-bfbc-5f616aa66ce1"
@@ -1595,12 +1595,12 @@ lib LibWin32
   end
 
   struct IVdsProviderPrivateVTbl
-    query_interface : Proc(IVdsProviderPrivate*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsProviderPrivate*, UInt32)
-    release : Proc(IVdsProviderPrivate*, UInt32)
-    get_object : Proc(IVdsProviderPrivate*, Guid, VDS_OBJECT_TYPE, IUnknown*, HRESULT)
-    on_load : Proc(IVdsProviderPrivate*, LibC::LPWSTR, IUnknown, HRESULT)
-    on_unload : Proc(IVdsProviderPrivate*, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_object : UInt64
+    on_load : UInt64
+    on_unload : UInt64
   end
 
   IVdsProviderPrivate_GUID = "11f3cd41-b7e8-48ff-9472-9dff018aa292"
@@ -1610,12 +1610,12 @@ lib LibWin32
   end
 
   struct IVdsHwProviderVTbl
-    query_interface : Proc(IVdsHwProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsHwProvider*, UInt32)
-    release : Proc(IVdsHwProvider*, UInt32)
-    query_sub_systems : Proc(IVdsHwProvider*, IEnumVdsObject*, HRESULT)
-    reenumerate : Proc(IVdsHwProvider*, HRESULT)
-    refresh : Proc(IVdsHwProvider*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    query_sub_systems : UInt64
+    reenumerate : UInt64
+    refresh : UInt64
   end
 
   IVdsHwProvider_GUID = "d99bdaae-b13a-4178-9fdb-e27f16b4603e"
@@ -1625,10 +1625,10 @@ lib LibWin32
   end
 
   struct IVdsHwProviderTypeVTbl
-    query_interface : Proc(IVdsHwProviderType*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsHwProviderType*, UInt32)
-    release : Proc(IVdsHwProviderType*, UInt32)
-    get_provider_type : Proc(IVdsHwProviderType*, VDS_HWPROVIDER_TYPE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_provider_type : UInt64
   end
 
   IVdsHwProviderType_GUID = "3e0f5166-542d-4fc6-947a-012174240b7e"
@@ -1638,10 +1638,10 @@ lib LibWin32
   end
 
   struct IVdsHwProviderType2VTbl
-    query_interface : Proc(IVdsHwProviderType2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsHwProviderType2*, UInt32)
-    release : Proc(IVdsHwProviderType2*, UInt32)
-    get_provider_type2 : Proc(IVdsHwProviderType2*, VDS_HWPROVIDER_TYPE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_provider_type2 : UInt64
   end
 
   IVdsHwProviderType2_GUID = "8190236f-c4d0-4e81-8011-d69512fcc984"
@@ -1651,12 +1651,12 @@ lib LibWin32
   end
 
   struct IVdsHwProviderStoragePoolsVTbl
-    query_interface : Proc(IVdsHwProviderStoragePools*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsHwProviderStoragePools*, UInt32)
-    release : Proc(IVdsHwProviderStoragePools*, UInt32)
-    query_storage_pools : Proc(IVdsHwProviderStoragePools*, UInt32, UInt64, VDS_POOL_ATTRIBUTES*, IEnumVdsObject*, HRESULT)
-    create_lun_in_storage_pool : Proc(IVdsHwProviderStoragePools*, VDS_LUN_TYPE, UInt64, Guid, LibC::LPWSTR, VDS_HINTS2*, IVdsAsync*, HRESULT)
-    query_max_lun_create_size_in_storage_pool : Proc(IVdsHwProviderStoragePools*, VDS_LUN_TYPE, Guid, VDS_HINTS2*, UInt64*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    query_storage_pools : UInt64
+    create_lun_in_storage_pool : UInt64
+    query_max_lun_create_size_in_storage_pool : UInt64
   end
 
   IVdsHwProviderStoragePools_GUID = "d5b5937a-f188-4c79-b86c-11c920ad11b8"
@@ -1666,21 +1666,21 @@ lib LibWin32
   end
 
   struct IVdsSubSystemVTbl
-    query_interface : Proc(IVdsSubSystem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsSubSystem*, UInt32)
-    release : Proc(IVdsSubSystem*, UInt32)
-    get_properties : Proc(IVdsSubSystem*, VDS_SUB_SYSTEM_PROP*, HRESULT)
-    get_provider : Proc(IVdsSubSystem*, IVdsProvider*, HRESULT)
-    query_controllers : Proc(IVdsSubSystem*, IEnumVdsObject*, HRESULT)
-    query_luns : Proc(IVdsSubSystem*, IEnumVdsObject*, HRESULT)
-    query_drives : Proc(IVdsSubSystem*, IEnumVdsObject*, HRESULT)
-    get_drive : Proc(IVdsSubSystem*, Int16, Int16, IVdsDrive*, HRESULT)
-    reenumerate : Proc(IVdsSubSystem*, HRESULT)
-    set_controller_status : Proc(IVdsSubSystem*, Guid*, Int32, Guid*, Int32, HRESULT)
-    create_lun : Proc(IVdsSubSystem*, VDS_LUN_TYPE, UInt64, Guid*, Int32, LibC::LPWSTR, VDS_HINTS*, IVdsAsync*, HRESULT)
-    replace_drive : Proc(IVdsSubSystem*, Guid, Guid, HRESULT)
-    set_status : Proc(IVdsSubSystem*, VDS_SUB_SYSTEM_STATUS, HRESULT)
-    query_max_lun_create_size : Proc(IVdsSubSystem*, VDS_LUN_TYPE, Guid*, Int32, VDS_HINTS*, UInt64*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties : UInt64
+    get_provider : UInt64
+    query_controllers : UInt64
+    query_luns : UInt64
+    query_drives : UInt64
+    get_drive : UInt64
+    reenumerate : UInt64
+    set_controller_status : UInt64
+    create_lun : UInt64
+    replace_drive : UInt64
+    set_status : UInt64
+    query_max_lun_create_size : UInt64
   end
 
   IVdsSubSystem_GUID = "6fcee2d3-6d90-4f91-80e2-a5c7caaca9d8"
@@ -1690,13 +1690,13 @@ lib LibWin32
   end
 
   struct IVdsSubSystem2VTbl
-    query_interface : Proc(IVdsSubSystem2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsSubSystem2*, UInt32)
-    release : Proc(IVdsSubSystem2*, UInt32)
-    get_properties2 : Proc(IVdsSubSystem2*, VDS_SUB_SYSTEM_PROP2*, HRESULT)
-    get_drive2 : Proc(IVdsSubSystem2*, Int16, Int16, UInt32, IVdsDrive*, HRESULT)
-    create_lun2 : Proc(IVdsSubSystem2*, VDS_LUN_TYPE, UInt64, Guid*, Int32, LibC::LPWSTR, VDS_HINTS2*, IVdsAsync*, HRESULT)
-    query_max_lun_create_size2 : Proc(IVdsSubSystem2*, VDS_LUN_TYPE, Guid*, Int32, VDS_HINTS2*, UInt64*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties2 : UInt64
+    get_drive2 : UInt64
+    create_lun2 : UInt64
+    query_max_lun_create_size2 : UInt64
   end
 
   IVdsSubSystem2_GUID = "be666735-7800-4a77-9d9c-40f85b87e292"
@@ -1706,10 +1706,10 @@ lib LibWin32
   end
 
   struct IVdsSubSystemNamingVTbl
-    query_interface : Proc(IVdsSubSystemNaming*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsSubSystemNaming*, UInt32)
-    release : Proc(IVdsSubSystemNaming*, UInt32)
-    set_friendly_name : Proc(IVdsSubSystemNaming*, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_friendly_name : UInt64
   end
 
   IVdsSubSystemNaming_GUID = "0d70faa3-9cd4-4900-aa20-6981b6aafc75"
@@ -1719,13 +1719,13 @@ lib LibWin32
   end
 
   struct IVdsSubSystemIscsiVTbl
-    query_interface : Proc(IVdsSubSystemIscsi*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsSubSystemIscsi*, UInt32)
-    release : Proc(IVdsSubSystemIscsi*, UInt32)
-    query_targets : Proc(IVdsSubSystemIscsi*, IEnumVdsObject*, HRESULT)
-    query_portals : Proc(IVdsSubSystemIscsi*, IEnumVdsObject*, HRESULT)
-    create_target : Proc(IVdsSubSystemIscsi*, LibC::LPWSTR, LibC::LPWSTR, IVdsAsync*, HRESULT)
-    set_ipsec_group_preshared_key : Proc(IVdsSubSystemIscsi*, VDS_ISCSI_IPSEC_KEY*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    query_targets : UInt64
+    query_portals : UInt64
+    create_target : UInt64
+    set_ipsec_group_preshared_key : UInt64
   end
 
   IVdsSubSystemIscsi_GUID = "0027346f-40d0-4b45-8cec-5906dc0380c8"
@@ -1735,10 +1735,10 @@ lib LibWin32
   end
 
   struct IVdsSubSystemInterconnectVTbl
-    query_interface : Proc(IVdsSubSystemInterconnect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsSubSystemInterconnect*, UInt32)
-    release : Proc(IVdsSubSystemInterconnect*, UInt32)
-    get_supported_interconnects : Proc(IVdsSubSystemInterconnect*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_supported_interconnects : UInt64
   end
 
   IVdsSubSystemInterconnect_GUID = "9e6fa560-c141-477b-83ba-0b6c38f7febf"
@@ -1748,14 +1748,14 @@ lib LibWin32
   end
 
   struct IVdsControllerPortVTbl
-    query_interface : Proc(IVdsControllerPort*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsControllerPort*, UInt32)
-    release : Proc(IVdsControllerPort*, UInt32)
-    get_properties : Proc(IVdsControllerPort*, VDS_PORT_PROP*, HRESULT)
-    get_controller : Proc(IVdsControllerPort*, IVdsController*, HRESULT)
-    query_associated_luns : Proc(IVdsControllerPort*, IEnumVdsObject*, HRESULT)
-    reset : Proc(IVdsControllerPort*, HRESULT)
-    set_status : Proc(IVdsControllerPort*, VDS_PORT_STATUS, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties : UInt64
+    get_controller : UInt64
+    query_associated_luns : UInt64
+    reset : UInt64
+    set_status : UInt64
   end
 
   IVdsControllerPort_GUID = "18691d0d-4e7f-43e8-92e4-cf44beeed11c"
@@ -1765,17 +1765,17 @@ lib LibWin32
   end
 
   struct IVdsControllerVTbl
-    query_interface : Proc(IVdsController*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsController*, UInt32)
-    release : Proc(IVdsController*, UInt32)
-    get_properties : Proc(IVdsController*, VDS_CONTROLLER_PROP*, HRESULT)
-    get_sub_system : Proc(IVdsController*, IVdsSubSystem*, HRESULT)
-    get_port_properties : Proc(IVdsController*, Int16, VDS_PORT_PROP*, HRESULT)
-    flush_cache : Proc(IVdsController*, HRESULT)
-    invalidate_cache : Proc(IVdsController*, HRESULT)
-    reset : Proc(IVdsController*, HRESULT)
-    query_associated_luns : Proc(IVdsController*, IEnumVdsObject*, HRESULT)
-    set_status : Proc(IVdsController*, VDS_CONTROLLER_STATUS, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties : UInt64
+    get_sub_system : UInt64
+    get_port_properties : UInt64
+    flush_cache : UInt64
+    invalidate_cache : UInt64
+    reset : UInt64
+    query_associated_luns : UInt64
+    set_status : UInt64
   end
 
   IVdsController_GUID = "cb53d96e-dffb-474a-a078-790d1e2bc082"
@@ -1785,10 +1785,10 @@ lib LibWin32
   end
 
   struct IVdsControllerControllerPortVTbl
-    query_interface : Proc(IVdsControllerControllerPort*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsControllerControllerPort*, UInt32)
-    release : Proc(IVdsControllerControllerPort*, UInt32)
-    query_controller_ports : Proc(IVdsControllerControllerPort*, IEnumVdsObject*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    query_controller_ports : UInt64
   end
 
   IVdsControllerControllerPort_GUID = "ca5d735f-6bae-42c0-b30e-f2666045ce71"
@@ -1798,15 +1798,15 @@ lib LibWin32
   end
 
   struct IVdsDriveVTbl
-    query_interface : Proc(IVdsDrive*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsDrive*, UInt32)
-    release : Proc(IVdsDrive*, UInt32)
-    get_properties : Proc(IVdsDrive*, VDS_DRIVE_PROP*, HRESULT)
-    get_sub_system : Proc(IVdsDrive*, IVdsSubSystem*, HRESULT)
-    query_extents : Proc(IVdsDrive*, VDS_DRIVE_EXTENT**, Int32*, HRESULT)
-    set_flags : Proc(IVdsDrive*, UInt32, HRESULT)
-    clear_flags : Proc(IVdsDrive*, UInt32, HRESULT)
-    set_status : Proc(IVdsDrive*, VDS_DRIVE_STATUS, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties : UInt64
+    get_sub_system : UInt64
+    query_extents : UInt64
+    set_flags : UInt64
+    clear_flags : UInt64
+    set_status : UInt64
   end
 
   IVdsDrive_GUID = "ff24efa4-aade-4b6b-898b-eaa6a20887c7"
@@ -1816,10 +1816,10 @@ lib LibWin32
   end
 
   struct IVdsDrive2VTbl
-    query_interface : Proc(IVdsDrive2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsDrive2*, UInt32)
-    release : Proc(IVdsDrive2*, UInt32)
-    get_properties2 : Proc(IVdsDrive2*, VDS_DRIVE_PROP2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties2 : UInt64
   end
 
   IVdsDrive2_GUID = "60b5a730-addf-4436-8ca7-5769e2d1ffa4"
@@ -1829,26 +1829,26 @@ lib LibWin32
   end
 
   struct IVdsLunVTbl
-    query_interface : Proc(IVdsLun*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsLun*, UInt32)
-    release : Proc(IVdsLun*, UInt32)
-    get_properties : Proc(IVdsLun*, VDS_LUN_PROP*, HRESULT)
-    get_sub_system : Proc(IVdsLun*, IVdsSubSystem*, HRESULT)
-    get_identification_data : Proc(IVdsLun*, VDS_LUN_INFORMATION*, HRESULT)
-    query_active_controllers : Proc(IVdsLun*, IEnumVdsObject*, HRESULT)
-    extend : Proc(IVdsLun*, UInt64, Guid*, Int32, IVdsAsync*, HRESULT)
-    shrink : Proc(IVdsLun*, UInt64, IVdsAsync*, HRESULT)
-    query_plexes : Proc(IVdsLun*, IEnumVdsObject*, HRESULT)
-    add_plex : Proc(IVdsLun*, Guid, IVdsAsync*, HRESULT)
-    remove_plex : Proc(IVdsLun*, Guid, IVdsAsync*, HRESULT)
-    recover : Proc(IVdsLun*, IVdsAsync*, HRESULT)
-    set_mask : Proc(IVdsLun*, LibC::LPWSTR, HRESULT)
-    delete : Proc(IVdsLun*, HRESULT)
-    associate_controllers : Proc(IVdsLun*, Guid*, Int32, Guid*, Int32, HRESULT)
-    query_hints : Proc(IVdsLun*, VDS_HINTS*, HRESULT)
-    apply_hints : Proc(IVdsLun*, VDS_HINTS*, HRESULT)
-    set_status : Proc(IVdsLun*, VDS_LUN_STATUS, HRESULT)
-    query_max_lun_extend_size : Proc(IVdsLun*, Guid*, Int32, UInt64*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties : UInt64
+    get_sub_system : UInt64
+    get_identification_data : UInt64
+    query_active_controllers : UInt64
+    extend : UInt64
+    shrink : UInt64
+    query_plexes : UInt64
+    add_plex : UInt64
+    remove_plex : UInt64
+    recover : UInt64
+    set_mask : UInt64
+    delete : UInt64
+    associate_controllers : UInt64
+    query_hints : UInt64
+    apply_hints : UInt64
+    set_status : UInt64
+    query_max_lun_extend_size : UInt64
   end
 
   IVdsLun_GUID = "3540a9c7-e60f-4111-a840-8bba6c2c83d8"
@@ -1858,11 +1858,11 @@ lib LibWin32
   end
 
   struct IVdsLun2VTbl
-    query_interface : Proc(IVdsLun2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsLun2*, UInt32)
-    release : Proc(IVdsLun2*, UInt32)
-    query_hints2 : Proc(IVdsLun2*, VDS_HINTS2*, HRESULT)
-    apply_hints2 : Proc(IVdsLun2*, VDS_HINTS2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    query_hints2 : UInt64
+    apply_hints2 : UInt64
   end
 
   IVdsLun2_GUID = "e5b3a735-9efb-499a-8071-4394d9ee6fcb"
@@ -1872,10 +1872,10 @@ lib LibWin32
   end
 
   struct IVdsLunNamingVTbl
-    query_interface : Proc(IVdsLunNaming*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsLunNaming*, UInt32)
-    release : Proc(IVdsLunNaming*, UInt32)
-    set_friendly_name : Proc(IVdsLunNaming*, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_friendly_name : UInt64
   end
 
   IVdsLunNaming_GUID = "907504cb-6b4e-4d88-a34d-17ba661fbb06"
@@ -1885,10 +1885,10 @@ lib LibWin32
   end
 
   struct IVdsLunNumberVTbl
-    query_interface : Proc(IVdsLunNumber*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsLunNumber*, UInt32)
-    release : Proc(IVdsLunNumber*, UInt32)
-    get_lun_number : Proc(IVdsLunNumber*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_lun_number : UInt64
   end
 
   IVdsLunNumber_GUID = "d3f95e46-54b3-41f9-b678-0f1871443a08"
@@ -1898,11 +1898,11 @@ lib LibWin32
   end
 
   struct IVdsLunControllerPortsVTbl
-    query_interface : Proc(IVdsLunControllerPorts*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsLunControllerPorts*, UInt32)
-    release : Proc(IVdsLunControllerPorts*, UInt32)
-    associate_controller_ports : Proc(IVdsLunControllerPorts*, Guid*, Int32, Guid*, Int32, HRESULT)
-    query_active_controller_ports : Proc(IVdsLunControllerPorts*, IEnumVdsObject*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    associate_controller_ports : UInt64
+    query_active_controller_ports : UInt64
   end
 
   IVdsLunControllerPorts_GUID = "451fe266-da6d-406a-bb60-82e534f85aeb"
@@ -1912,13 +1912,13 @@ lib LibWin32
   end
 
   struct IVdsLunMpioVTbl
-    query_interface : Proc(IVdsLunMpio*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsLunMpio*, UInt32)
-    release : Proc(IVdsLunMpio*, UInt32)
-    get_path_info : Proc(IVdsLunMpio*, VDS_PATH_INFO**, Int32*, HRESULT)
-    get_load_balance_policy : Proc(IVdsLunMpio*, VDS_LOADBALANCE_POLICY_ENUM*, VDS_PATH_POLICY**, Int32*, HRESULT)
-    set_load_balance_policy : Proc(IVdsLunMpio*, VDS_LOADBALANCE_POLICY_ENUM, VDS_PATH_POLICY*, Int32, HRESULT)
-    get_supported_lb_policies : Proc(IVdsLunMpio*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_path_info : UInt64
+    get_load_balance_policy : UInt64
+    set_load_balance_policy : UInt64
+    get_supported_lb_policies : UInt64
   end
 
   IVdsLunMpio_GUID = "7c5fbae3-333a-48a1-a982-33c15788cde3"
@@ -1928,11 +1928,11 @@ lib LibWin32
   end
 
   struct IVdsLunIscsiVTbl
-    query_interface : Proc(IVdsLunIscsi*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsLunIscsi*, UInt32)
-    release : Proc(IVdsLunIscsi*, UInt32)
-    associate_targets : Proc(IVdsLunIscsi*, Guid*, Int32, HRESULT)
-    query_associated_targets : Proc(IVdsLunIscsi*, IEnumVdsObject*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    associate_targets : UInt64
+    query_associated_targets : UInt64
   end
 
   IVdsLunIscsi_GUID = "0d7c1e64-b59b-45ae-b86a-2c2cc6a42067"
@@ -1942,14 +1942,14 @@ lib LibWin32
   end
 
   struct IVdsLunPlexVTbl
-    query_interface : Proc(IVdsLunPlex*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsLunPlex*, UInt32)
-    release : Proc(IVdsLunPlex*, UInt32)
-    get_properties : Proc(IVdsLunPlex*, VDS_LUN_PLEX_PROP*, HRESULT)
-    get_lun : Proc(IVdsLunPlex*, IVdsLun*, HRESULT)
-    query_extents : Proc(IVdsLunPlex*, VDS_DRIVE_EXTENT**, Int32*, HRESULT)
-    query_hints : Proc(IVdsLunPlex*, VDS_HINTS*, HRESULT)
-    apply_hints : Proc(IVdsLunPlex*, VDS_HINTS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties : UInt64
+    get_lun : UInt64
+    query_extents : UInt64
+    query_hints : UInt64
+    apply_hints : UInt64
   end
 
   IVdsLunPlex_GUID = "0ee1a790-5d2e-4abb-8c99-c481e8be2138"
@@ -1959,16 +1959,16 @@ lib LibWin32
   end
 
   struct IVdsIscsiPortalVTbl
-    query_interface : Proc(IVdsIscsiPortal*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsIscsiPortal*, UInt32)
-    release : Proc(IVdsIscsiPortal*, UInt32)
-    get_properties : Proc(IVdsIscsiPortal*, VDS_ISCSI_PORTAL_PROP*, HRESULT)
-    get_sub_system : Proc(IVdsIscsiPortal*, IVdsSubSystem*, HRESULT)
-    query_associated_portal_groups : Proc(IVdsIscsiPortal*, IEnumVdsObject*, HRESULT)
-    set_status : Proc(IVdsIscsiPortal*, VDS_ISCSI_PORTAL_STATUS, HRESULT)
-    set_ipsec_tunnel_address : Proc(IVdsIscsiPortal*, VDS_IPADDRESS*, VDS_IPADDRESS*, HRESULT)
-    get_ipsec_security : Proc(IVdsIscsiPortal*, VDS_IPADDRESS*, UInt64*, HRESULT)
-    set_ipsec_security : Proc(IVdsIscsiPortal*, VDS_IPADDRESS*, UInt64, VDS_ISCSI_IPSEC_KEY*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties : UInt64
+    get_sub_system : UInt64
+    query_associated_portal_groups : UInt64
+    set_status : UInt64
+    set_ipsec_tunnel_address : UInt64
+    get_ipsec_security : UInt64
+    set_ipsec_security : UInt64
   end
 
   IVdsIscsiPortal_GUID = "7fa1499d-ec85-4a8a-a47b-ff69201fcd34"
@@ -1978,19 +1978,19 @@ lib LibWin32
   end
 
   struct IVdsIscsiTargetVTbl
-    query_interface : Proc(IVdsIscsiTarget*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsIscsiTarget*, UInt32)
-    release : Proc(IVdsIscsiTarget*, UInt32)
-    get_properties : Proc(IVdsIscsiTarget*, VDS_ISCSI_TARGET_PROP*, HRESULT)
-    get_sub_system : Proc(IVdsIscsiTarget*, IVdsSubSystem*, HRESULT)
-    query_portal_groups : Proc(IVdsIscsiTarget*, IEnumVdsObject*, HRESULT)
-    query_associated_luns : Proc(IVdsIscsiTarget*, IEnumVdsObject*, HRESULT)
-    create_portal_group : Proc(IVdsIscsiTarget*, IVdsAsync*, HRESULT)
-    delete : Proc(IVdsIscsiTarget*, IVdsAsync*, HRESULT)
-    set_friendly_name : Proc(IVdsIscsiTarget*, LibC::LPWSTR, HRESULT)
-    set_shared_secret : Proc(IVdsIscsiTarget*, VDS_ISCSI_SHARED_SECRET*, LibC::LPWSTR, HRESULT)
-    remember_initiator_shared_secret : Proc(IVdsIscsiTarget*, LibC::LPWSTR, VDS_ISCSI_SHARED_SECRET*, HRESULT)
-    get_connected_initiators : Proc(IVdsIscsiTarget*, LibC::LPWSTR**, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties : UInt64
+    get_sub_system : UInt64
+    query_portal_groups : UInt64
+    query_associated_luns : UInt64
+    create_portal_group : UInt64
+    delete : UInt64
+    set_friendly_name : UInt64
+    set_shared_secret : UInt64
+    remember_initiator_shared_secret : UInt64
+    get_connected_initiators : UInt64
   end
 
   IVdsIscsiTarget_GUID = "aa8f5055-83e5-4bcc-aa73-19851a36a849"
@@ -2000,15 +2000,15 @@ lib LibWin32
   end
 
   struct IVdsIscsiPortalGroupVTbl
-    query_interface : Proc(IVdsIscsiPortalGroup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsIscsiPortalGroup*, UInt32)
-    release : Proc(IVdsIscsiPortalGroup*, UInt32)
-    get_properties : Proc(IVdsIscsiPortalGroup*, VDS_ISCSI_PORTALGROUP_PROP*, HRESULT)
-    get_target : Proc(IVdsIscsiPortalGroup*, IVdsIscsiTarget*, HRESULT)
-    query_associated_portals : Proc(IVdsIscsiPortalGroup*, IEnumVdsObject*, HRESULT)
-    add_portal : Proc(IVdsIscsiPortalGroup*, Guid, IVdsAsync*, HRESULT)
-    remove_portal : Proc(IVdsIscsiPortalGroup*, Guid, IVdsAsync*, HRESULT)
-    delete : Proc(IVdsIscsiPortalGroup*, IVdsAsync*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties : UInt64
+    get_target : UInt64
+    query_associated_portals : UInt64
+    add_portal : UInt64
+    remove_portal : UInt64
+    delete : UInt64
   end
 
   IVdsIscsiPortalGroup_GUID = "fef5f89d-a3dd-4b36-bf28-e7dde045c593"
@@ -2018,15 +2018,15 @@ lib LibWin32
   end
 
   struct IVdsStoragePoolVTbl
-    query_interface : Proc(IVdsStoragePool*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsStoragePool*, UInt32)
-    release : Proc(IVdsStoragePool*, UInt32)
-    get_provider : Proc(IVdsStoragePool*, IVdsProvider*, HRESULT)
-    get_properties : Proc(IVdsStoragePool*, VDS_STORAGE_POOL_PROP*, HRESULT)
-    get_attributes : Proc(IVdsStoragePool*, VDS_POOL_ATTRIBUTES*, HRESULT)
-    query_drive_extents : Proc(IVdsStoragePool*, VDS_STORAGE_POOL_DRIVE_EXTENT**, Int32*, HRESULT)
-    query_allocated_luns : Proc(IVdsStoragePool*, IEnumVdsObject*, HRESULT)
-    query_allocated_storage_pools : Proc(IVdsStoragePool*, IEnumVdsObject*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_provider : UInt64
+    get_properties : UInt64
+    get_attributes : UInt64
+    query_drive_extents : UInt64
+    query_allocated_luns : UInt64
+    query_allocated_storage_pools : UInt64
   end
 
   IVdsStoragePool_GUID = "932ca8cf-0eb3-4ba8-9620-22665d7f8450"
@@ -2036,12 +2036,12 @@ lib LibWin32
   end
 
   struct IVdsMaintenanceVTbl
-    query_interface : Proc(IVdsMaintenance*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsMaintenance*, UInt32)
-    release : Proc(IVdsMaintenance*, UInt32)
-    start_maintenance : Proc(IVdsMaintenance*, VDS_MAINTENANCE_OPERATION, HRESULT)
-    stop_maintenance : Proc(IVdsMaintenance*, VDS_MAINTENANCE_OPERATION, HRESULT)
-    pulse_maintenance : Proc(IVdsMaintenance*, VDS_MAINTENANCE_OPERATION, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    start_maintenance : UInt64
+    stop_maintenance : UInt64
+    pulse_maintenance : UInt64
   end
 
   IVdsMaintenance_GUID = "daebeef3-8523-47ed-a2b9-05cecce2a1ae"
@@ -2051,10 +2051,10 @@ lib LibWin32
   end
 
   struct IVdsHwProviderPrivateVTbl
-    query_interface : Proc(IVdsHwProviderPrivate*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsHwProviderPrivate*, UInt32)
-    release : Proc(IVdsHwProviderPrivate*, UInt32)
-    query_if_created_lun : Proc(IVdsHwProviderPrivate*, LibC::LPWSTR, VDS_LUN_INFORMATION*, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    query_if_created_lun : UInt64
   end
 
   IVdsHwProviderPrivate_GUID = "98f17bf3-9f33-4f12-8714-8b4075092c2e"
@@ -2064,10 +2064,10 @@ lib LibWin32
   end
 
   struct IVdsHwProviderPrivateMpioVTbl
-    query_interface : Proc(IVdsHwProviderPrivateMpio*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsHwProviderPrivateMpio*, UInt32)
-    release : Proc(IVdsHwProviderPrivateMpio*, UInt32)
-    set_all_path_statuses_from_hba_port : Proc(IVdsHwProviderPrivateMpio*, VDS_HBAPORT_PROP, VDS_PATH_STATUS, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_all_path_statuses_from_hba_port : UInt64
   end
 
   IVdsHwProviderPrivateMpio_GUID = "310a7715-ac2b-4c6f-9827-3d742f351676"
@@ -2077,11 +2077,11 @@ lib LibWin32
   end
 
   struct IVdsAdminVTbl
-    query_interface : Proc(IVdsAdmin*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVdsAdmin*, UInt32)
-    release : Proc(IVdsAdmin*, UInt32)
-    register_provider : Proc(IVdsAdmin*, Guid, Guid, LibC::LPWSTR, VDS_PROVIDER_TYPE, LibC::LPWSTR, LibC::LPWSTR, Guid, HRESULT)
-    unregister_provider : Proc(IVdsAdmin*, Guid, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    register_provider : UInt64
+    unregister_provider : UInt64
   end
 
   IVdsAdmin_GUID = "d188e97d-85aa-4d33-abc6-26299a10ffc1"
@@ -2090,4 +2090,802 @@ lib LibWin32
     lpVtbl : IVdsAdminVTbl*
   end
 
+end
+struct LibWin32::IEnumVdsObject
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppobjectarray : IUnknown*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IUnknown*, UInt32*, HRESULT)).call(celt, ppobjectarray, pcfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IVdsAsync
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+  def wait(phrresult : HRESULT*, pasyncout : VDS_ASYNC_OUTPUT*) : HRESULT
+    @lpVtbl.value.wait.unsafe_as(Proc(HRESULT*, VDS_ASYNC_OUTPUT*, HRESULT)).call(phrresult, pasyncout)
+  end
+  def query_status(phrresult : HRESULT*, pulpercentcompleted : UInt32*) : HRESULT
+    @lpVtbl.value.query_status.unsafe_as(Proc(HRESULT*, UInt32*, HRESULT)).call(phrresult, pulpercentcompleted)
+  end
+end
+struct LibWin32::IVdsAdviseSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_notify(lnumberofnotifications : Int32, pnotificationarray : VDS_NOTIFICATION*) : HRESULT
+    @lpVtbl.value.on_notify.unsafe_as(Proc(Int32, VDS_NOTIFICATION*, HRESULT)).call(lnumberofnotifications, pnotificationarray)
+  end
+end
+struct LibWin32::IVdsProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties(pproviderprop : VDS_PROVIDER_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(VDS_PROVIDER_PROP*, HRESULT)).call(pproviderprop)
+  end
+end
+struct LibWin32::IVdsProviderSupport
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_version_support(ulversionsupport : UInt32*) : HRESULT
+    @lpVtbl.value.get_version_support.unsafe_as(Proc(UInt32*, HRESULT)).call(ulversionsupport)
+  end
+end
+struct LibWin32::IVdsProviderPrivate
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_object(objectid : Guid, type : VDS_OBJECT_TYPE, ppobjectunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_object.unsafe_as(Proc(Guid, VDS_OBJECT_TYPE, IUnknown*, HRESULT)).call(objectid, type, ppobjectunk)
+  end
+  def on_load(pwszmachinename : LibC::LPWSTR, pcallbackobject : IUnknown) : HRESULT
+    @lpVtbl.value.on_load.unsafe_as(Proc(LibC::LPWSTR, IUnknown, HRESULT)).call(pwszmachinename, pcallbackobject)
+  end
+  def on_unload(bforceunload : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_unload.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bforceunload)
+  end
+end
+struct LibWin32::IVdsHwProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def query_sub_systems(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_sub_systems.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+  def reenumerate : HRESULT
+    @lpVtbl.value.reenumerate.unsafe_as(Proc(HRESULT)).call
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IVdsHwProviderType
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_provider_type(ptype : VDS_HWPROVIDER_TYPE*) : HRESULT
+    @lpVtbl.value.get_provider_type.unsafe_as(Proc(VDS_HWPROVIDER_TYPE*, HRESULT)).call(ptype)
+  end
+end
+struct LibWin32::IVdsHwProviderType2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_provider_type2(ptype : VDS_HWPROVIDER_TYPE*) : HRESULT
+    @lpVtbl.value.get_provider_type2.unsafe_as(Proc(VDS_HWPROVIDER_TYPE*, HRESULT)).call(ptype)
+  end
+end
+struct LibWin32::IVdsHwProviderStoragePools
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def query_storage_pools(ulflags : UInt32, ullremainingfreespace : UInt64, ppoolattributes : VDS_POOL_ATTRIBUTES*, ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_storage_pools.unsafe_as(Proc(UInt32, UInt64, VDS_POOL_ATTRIBUTES*, IEnumVdsObject*, HRESULT)).call(ulflags, ullremainingfreespace, ppoolattributes, ppenum)
+  end
+  def create_lun_in_storage_pool(type : VDS_LUN_TYPE, ullsizeinbytes : UInt64, storagepoolid : Guid, pwszunmaskinglist : LibC::LPWSTR, phints2 : VDS_HINTS2*, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.create_lun_in_storage_pool.unsafe_as(Proc(VDS_LUN_TYPE, UInt64, Guid, LibC::LPWSTR, VDS_HINTS2*, IVdsAsync*, HRESULT)).call(type, ullsizeinbytes, storagepoolid, pwszunmaskinglist, phints2, ppasync)
+  end
+  def query_max_lun_create_size_in_storage_pool(type : VDS_LUN_TYPE, storagepoolid : Guid, phints2 : VDS_HINTS2*, pullmaxlunsize : UInt64*) : HRESULT
+    @lpVtbl.value.query_max_lun_create_size_in_storage_pool.unsafe_as(Proc(VDS_LUN_TYPE, Guid, VDS_HINTS2*, UInt64*, HRESULT)).call(type, storagepoolid, phints2, pullmaxlunsize)
+  end
+end
+struct LibWin32::IVdsSubSystem
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties(psubsystemprop : VDS_SUB_SYSTEM_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(VDS_SUB_SYSTEM_PROP*, HRESULT)).call(psubsystemprop)
+  end
+  def get_provider(ppprovider : IVdsProvider*) : HRESULT
+    @lpVtbl.value.get_provider.unsafe_as(Proc(IVdsProvider*, HRESULT)).call(ppprovider)
+  end
+  def query_controllers(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_controllers.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+  def query_luns(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_luns.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+  def query_drives(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_drives.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+  def get_drive(sbusnumber : Int16, sslotnumber : Int16, ppdrive : IVdsDrive*) : HRESULT
+    @lpVtbl.value.get_drive.unsafe_as(Proc(Int16, Int16, IVdsDrive*, HRESULT)).call(sbusnumber, sslotnumber, ppdrive)
+  end
+  def reenumerate : HRESULT
+    @lpVtbl.value.reenumerate.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_controller_status(ponlinecontrolleridarray : Guid*, lnumberofonlinecontrollers : Int32, pofflinecontrolleridarray : Guid*, lnumberofofflinecontrollers : Int32) : HRESULT
+    @lpVtbl.value.set_controller_status.unsafe_as(Proc(Guid*, Int32, Guid*, Int32, HRESULT)).call(ponlinecontrolleridarray, lnumberofonlinecontrollers, pofflinecontrolleridarray, lnumberofofflinecontrollers)
+  end
+  def create_lun(type : VDS_LUN_TYPE, ullsizeinbytes : UInt64, pdriveidarray : Guid*, lnumberofdrives : Int32, pwszunmaskinglist : LibC::LPWSTR, phints : VDS_HINTS*, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.create_lun.unsafe_as(Proc(VDS_LUN_TYPE, UInt64, Guid*, Int32, LibC::LPWSTR, VDS_HINTS*, IVdsAsync*, HRESULT)).call(type, ullsizeinbytes, pdriveidarray, lnumberofdrives, pwszunmaskinglist, phints, ppasync)
+  end
+  def replace_drive(drivetobereplaced : Guid, replacementdrive : Guid) : HRESULT
+    @lpVtbl.value.replace_drive.unsafe_as(Proc(Guid, Guid, HRESULT)).call(drivetobereplaced, replacementdrive)
+  end
+  def set_status(status : VDS_SUB_SYSTEM_STATUS) : HRESULT
+    @lpVtbl.value.set_status.unsafe_as(Proc(VDS_SUB_SYSTEM_STATUS, HRESULT)).call(status)
+  end
+  def query_max_lun_create_size(type : VDS_LUN_TYPE, pdriveidarray : Guid*, lnumberofdrives : Int32, phints : VDS_HINTS*, pullmaxlunsize : UInt64*) : HRESULT
+    @lpVtbl.value.query_max_lun_create_size.unsafe_as(Proc(VDS_LUN_TYPE, Guid*, Int32, VDS_HINTS*, UInt64*, HRESULT)).call(type, pdriveidarray, lnumberofdrives, phints, pullmaxlunsize)
+  end
+end
+struct LibWin32::IVdsSubSystem2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties2(psubsystemprop2 : VDS_SUB_SYSTEM_PROP2*) : HRESULT
+    @lpVtbl.value.get_properties2.unsafe_as(Proc(VDS_SUB_SYSTEM_PROP2*, HRESULT)).call(psubsystemprop2)
+  end
+  def get_drive2(sbusnumber : Int16, sslotnumber : Int16, ulenclosurenumber : UInt32, ppdrive : IVdsDrive*) : HRESULT
+    @lpVtbl.value.get_drive2.unsafe_as(Proc(Int16, Int16, UInt32, IVdsDrive*, HRESULT)).call(sbusnumber, sslotnumber, ulenclosurenumber, ppdrive)
+  end
+  def create_lun2(type : VDS_LUN_TYPE, ullsizeinbytes : UInt64, pdriveidarray : Guid*, lnumberofdrives : Int32, pwszunmaskinglist : LibC::LPWSTR, phints2 : VDS_HINTS2*, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.create_lun2.unsafe_as(Proc(VDS_LUN_TYPE, UInt64, Guid*, Int32, LibC::LPWSTR, VDS_HINTS2*, IVdsAsync*, HRESULT)).call(type, ullsizeinbytes, pdriveidarray, lnumberofdrives, pwszunmaskinglist, phints2, ppasync)
+  end
+  def query_max_lun_create_size2(type : VDS_LUN_TYPE, pdriveidarray : Guid*, lnumberofdrives : Int32, phints2 : VDS_HINTS2*, pullmaxlunsize : UInt64*) : HRESULT
+    @lpVtbl.value.query_max_lun_create_size2.unsafe_as(Proc(VDS_LUN_TYPE, Guid*, Int32, VDS_HINTS2*, UInt64*, HRESULT)).call(type, pdriveidarray, lnumberofdrives, phints2, pullmaxlunsize)
+  end
+end
+struct LibWin32::IVdsSubSystemNaming
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_friendly_name(pwszfriendlyname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_friendly_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszfriendlyname)
+  end
+end
+struct LibWin32::IVdsSubSystemIscsi
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def query_targets(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_targets.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+  def query_portals(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_portals.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+  def create_target(pwsziscsiname : LibC::LPWSTR, pwszfriendlyname : LibC::LPWSTR, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.create_target.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, IVdsAsync*, HRESULT)).call(pwsziscsiname, pwszfriendlyname, ppasync)
+  end
+  def set_ipsec_group_preshared_key(pipseckey : VDS_ISCSI_IPSEC_KEY*) : HRESULT
+    @lpVtbl.value.set_ipsec_group_preshared_key.unsafe_as(Proc(VDS_ISCSI_IPSEC_KEY*, HRESULT)).call(pipseckey)
+  end
+end
+struct LibWin32::IVdsSubSystemInterconnect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_supported_interconnects(pulsupportedinterconnectsflag : UInt32*) : HRESULT
+    @lpVtbl.value.get_supported_interconnects.unsafe_as(Proc(UInt32*, HRESULT)).call(pulsupportedinterconnectsflag)
+  end
+end
+struct LibWin32::IVdsControllerPort
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties(pportprop : VDS_PORT_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(VDS_PORT_PROP*, HRESULT)).call(pportprop)
+  end
+  def get_controller(ppcontroller : IVdsController*) : HRESULT
+    @lpVtbl.value.get_controller.unsafe_as(Proc(IVdsController*, HRESULT)).call(ppcontroller)
+  end
+  def query_associated_luns(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_associated_luns.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_status(status : VDS_PORT_STATUS) : HRESULT
+    @lpVtbl.value.set_status.unsafe_as(Proc(VDS_PORT_STATUS, HRESULT)).call(status)
+  end
+end
+struct LibWin32::IVdsController
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties(pcontrollerprop : VDS_CONTROLLER_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(VDS_CONTROLLER_PROP*, HRESULT)).call(pcontrollerprop)
+  end
+  def get_sub_system(ppsubsystem : IVdsSubSystem*) : HRESULT
+    @lpVtbl.value.get_sub_system.unsafe_as(Proc(IVdsSubSystem*, HRESULT)).call(ppsubsystem)
+  end
+  def get_port_properties(sportnumber : Int16, pportprop : VDS_PORT_PROP*) : HRESULT
+    @lpVtbl.value.get_port_properties.unsafe_as(Proc(Int16, VDS_PORT_PROP*, HRESULT)).call(sportnumber, pportprop)
+  end
+  def flush_cache : HRESULT
+    @lpVtbl.value.flush_cache.unsafe_as(Proc(HRESULT)).call
+  end
+  def invalidate_cache : HRESULT
+    @lpVtbl.value.invalidate_cache.unsafe_as(Proc(HRESULT)).call
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def query_associated_luns(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_associated_luns.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+  def set_status(status : VDS_CONTROLLER_STATUS) : HRESULT
+    @lpVtbl.value.set_status.unsafe_as(Proc(VDS_CONTROLLER_STATUS, HRESULT)).call(status)
+  end
+end
+struct LibWin32::IVdsControllerControllerPort
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def query_controller_ports(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_controller_ports.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IVdsDrive
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties(pdriveprop : VDS_DRIVE_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(VDS_DRIVE_PROP*, HRESULT)).call(pdriveprop)
+  end
+  def get_sub_system(ppsubsystem : IVdsSubSystem*) : HRESULT
+    @lpVtbl.value.get_sub_system.unsafe_as(Proc(IVdsSubSystem*, HRESULT)).call(ppsubsystem)
+  end
+  def query_extents(ppextentarray : VDS_DRIVE_EXTENT**, plnumberofextents : Int32*) : HRESULT
+    @lpVtbl.value.query_extents.unsafe_as(Proc(VDS_DRIVE_EXTENT**, Int32*, HRESULT)).call(ppextentarray, plnumberofextents)
+  end
+  def set_flags(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.set_flags.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+  def clear_flags(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.clear_flags.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+  def set_status(status : VDS_DRIVE_STATUS) : HRESULT
+    @lpVtbl.value.set_status.unsafe_as(Proc(VDS_DRIVE_STATUS, HRESULT)).call(status)
+  end
+end
+struct LibWin32::IVdsDrive2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties2(pdriveprop2 : VDS_DRIVE_PROP2*) : HRESULT
+    @lpVtbl.value.get_properties2.unsafe_as(Proc(VDS_DRIVE_PROP2*, HRESULT)).call(pdriveprop2)
+  end
+end
+struct LibWin32::IVdsLun
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties(plunprop : VDS_LUN_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(VDS_LUN_PROP*, HRESULT)).call(plunprop)
+  end
+  def get_sub_system(ppsubsystem : IVdsSubSystem*) : HRESULT
+    @lpVtbl.value.get_sub_system.unsafe_as(Proc(IVdsSubSystem*, HRESULT)).call(ppsubsystem)
+  end
+  def get_identification_data(pluninfo : VDS_LUN_INFORMATION*) : HRESULT
+    @lpVtbl.value.get_identification_data.unsafe_as(Proc(VDS_LUN_INFORMATION*, HRESULT)).call(pluninfo)
+  end
+  def query_active_controllers(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_active_controllers.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+  def extend(ullnumberofbytestoadd : UInt64, pdriveidarray : Guid*, lnumberofdrives : Int32, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.extend.unsafe_as(Proc(UInt64, Guid*, Int32, IVdsAsync*, HRESULT)).call(ullnumberofbytestoadd, pdriveidarray, lnumberofdrives, ppasync)
+  end
+  def shrink(ullnumberofbytestoremove : UInt64, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.shrink.unsafe_as(Proc(UInt64, IVdsAsync*, HRESULT)).call(ullnumberofbytestoremove, ppasync)
+  end
+  def query_plexes(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_plexes.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+  def add_plex(lunid : Guid, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.add_plex.unsafe_as(Proc(Guid, IVdsAsync*, HRESULT)).call(lunid, ppasync)
+  end
+  def remove_plex(plexid : Guid, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.remove_plex.unsafe_as(Proc(Guid, IVdsAsync*, HRESULT)).call(plexid, ppasync)
+  end
+  def recover(ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.recover.unsafe_as(Proc(IVdsAsync*, HRESULT)).call(ppasync)
+  end
+  def set_mask(pwszunmaskinglist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_mask.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszunmaskinglist)
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+  def associate_controllers(pactivecontrolleridarray : Guid*, lnumberofactivecontrollers : Int32, pinactivecontrolleridarray : Guid*, lnumberofinactivecontrollers : Int32) : HRESULT
+    @lpVtbl.value.associate_controllers.unsafe_as(Proc(Guid*, Int32, Guid*, Int32, HRESULT)).call(pactivecontrolleridarray, lnumberofactivecontrollers, pinactivecontrolleridarray, lnumberofinactivecontrollers)
+  end
+  def query_hints(phints : VDS_HINTS*) : HRESULT
+    @lpVtbl.value.query_hints.unsafe_as(Proc(VDS_HINTS*, HRESULT)).call(phints)
+  end
+  def apply_hints(phints : VDS_HINTS*) : HRESULT
+    @lpVtbl.value.apply_hints.unsafe_as(Proc(VDS_HINTS*, HRESULT)).call(phints)
+  end
+  def set_status(status : VDS_LUN_STATUS) : HRESULT
+    @lpVtbl.value.set_status.unsafe_as(Proc(VDS_LUN_STATUS, HRESULT)).call(status)
+  end
+  def query_max_lun_extend_size(pdriveidarray : Guid*, lnumberofdrives : Int32, pullmaxbytestobeadded : UInt64*) : HRESULT
+    @lpVtbl.value.query_max_lun_extend_size.unsafe_as(Proc(Guid*, Int32, UInt64*, HRESULT)).call(pdriveidarray, lnumberofdrives, pullmaxbytestobeadded)
+  end
+end
+struct LibWin32::IVdsLun2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def query_hints2(phints2 : VDS_HINTS2*) : HRESULT
+    @lpVtbl.value.query_hints2.unsafe_as(Proc(VDS_HINTS2*, HRESULT)).call(phints2)
+  end
+  def apply_hints2(phints2 : VDS_HINTS2*) : HRESULT
+    @lpVtbl.value.apply_hints2.unsafe_as(Proc(VDS_HINTS2*, HRESULT)).call(phints2)
+  end
+end
+struct LibWin32::IVdsLunNaming
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_friendly_name(pwszfriendlyname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_friendly_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszfriendlyname)
+  end
+end
+struct LibWin32::IVdsLunNumber
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_lun_number(pullunnumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_lun_number.unsafe_as(Proc(UInt32*, HRESULT)).call(pullunnumber)
+  end
+end
+struct LibWin32::IVdsLunControllerPorts
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def associate_controller_ports(pactivecontrollerportidarray : Guid*, lnumberofactivecontrollerports : Int32, pinactivecontrollerportidarray : Guid*, lnumberofinactivecontrollerports : Int32) : HRESULT
+    @lpVtbl.value.associate_controller_ports.unsafe_as(Proc(Guid*, Int32, Guid*, Int32, HRESULT)).call(pactivecontrollerportidarray, lnumberofactivecontrollerports, pinactivecontrollerportidarray, lnumberofinactivecontrollerports)
+  end
+  def query_active_controller_ports(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_active_controller_ports.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IVdsLunMpio
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_path_info(pppaths : VDS_PATH_INFO**, plnumberofpaths : Int32*) : HRESULT
+    @lpVtbl.value.get_path_info.unsafe_as(Proc(VDS_PATH_INFO**, Int32*, HRESULT)).call(pppaths, plnumberofpaths)
+  end
+  def get_load_balance_policy(ppolicy : VDS_LOADBALANCE_POLICY_ENUM*, pppaths : VDS_PATH_POLICY**, plnumberofpaths : Int32*) : HRESULT
+    @lpVtbl.value.get_load_balance_policy.unsafe_as(Proc(VDS_LOADBALANCE_POLICY_ENUM*, VDS_PATH_POLICY**, Int32*, HRESULT)).call(ppolicy, pppaths, plnumberofpaths)
+  end
+  def set_load_balance_policy(policy : VDS_LOADBALANCE_POLICY_ENUM, ppaths : VDS_PATH_POLICY*, lnumberofpaths : Int32) : HRESULT
+    @lpVtbl.value.set_load_balance_policy.unsafe_as(Proc(VDS_LOADBALANCE_POLICY_ENUM, VDS_PATH_POLICY*, Int32, HRESULT)).call(policy, ppaths, lnumberofpaths)
+  end
+  def get_supported_lb_policies(pullbflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_supported_lb_policies.unsafe_as(Proc(UInt32*, HRESULT)).call(pullbflags)
+  end
+end
+struct LibWin32::IVdsLunIscsi
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def associate_targets(ptargetidarray : Guid*, lnumberoftargets : Int32) : HRESULT
+    @lpVtbl.value.associate_targets.unsafe_as(Proc(Guid*, Int32, HRESULT)).call(ptargetidarray, lnumberoftargets)
+  end
+  def query_associated_targets(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_associated_targets.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IVdsLunPlex
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties(pplexprop : VDS_LUN_PLEX_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(VDS_LUN_PLEX_PROP*, HRESULT)).call(pplexprop)
+  end
+  def get_lun(pplun : IVdsLun*) : HRESULT
+    @lpVtbl.value.get_lun.unsafe_as(Proc(IVdsLun*, HRESULT)).call(pplun)
+  end
+  def query_extents(ppextentarray : VDS_DRIVE_EXTENT**, plnumberofextents : Int32*) : HRESULT
+    @lpVtbl.value.query_extents.unsafe_as(Proc(VDS_DRIVE_EXTENT**, Int32*, HRESULT)).call(ppextentarray, plnumberofextents)
+  end
+  def query_hints(phints : VDS_HINTS*) : HRESULT
+    @lpVtbl.value.query_hints.unsafe_as(Proc(VDS_HINTS*, HRESULT)).call(phints)
+  end
+  def apply_hints(phints : VDS_HINTS*) : HRESULT
+    @lpVtbl.value.apply_hints.unsafe_as(Proc(VDS_HINTS*, HRESULT)).call(phints)
+  end
+end
+struct LibWin32::IVdsIscsiPortal
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties(pportalprop : VDS_ISCSI_PORTAL_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(VDS_ISCSI_PORTAL_PROP*, HRESULT)).call(pportalprop)
+  end
+  def get_sub_system(ppsubsystem : IVdsSubSystem*) : HRESULT
+    @lpVtbl.value.get_sub_system.unsafe_as(Proc(IVdsSubSystem*, HRESULT)).call(ppsubsystem)
+  end
+  def query_associated_portal_groups(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_associated_portal_groups.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+  def set_status(status : VDS_ISCSI_PORTAL_STATUS) : HRESULT
+    @lpVtbl.value.set_status.unsafe_as(Proc(VDS_ISCSI_PORTAL_STATUS, HRESULT)).call(status)
+  end
+  def set_ipsec_tunnel_address(ptunneladdress : VDS_IPADDRESS*, pdestinationaddress : VDS_IPADDRESS*) : HRESULT
+    @lpVtbl.value.set_ipsec_tunnel_address.unsafe_as(Proc(VDS_IPADDRESS*, VDS_IPADDRESS*, HRESULT)).call(ptunneladdress, pdestinationaddress)
+  end
+  def get_ipsec_security(pinitiatorportaladdress : VDS_IPADDRESS*, pullsecurityflags : UInt64*) : HRESULT
+    @lpVtbl.value.get_ipsec_security.unsafe_as(Proc(VDS_IPADDRESS*, UInt64*, HRESULT)).call(pinitiatorportaladdress, pullsecurityflags)
+  end
+  def set_ipsec_security(pinitiatorportaladdress : VDS_IPADDRESS*, ullsecurityflags : UInt64, pipseckey : VDS_ISCSI_IPSEC_KEY*) : HRESULT
+    @lpVtbl.value.set_ipsec_security.unsafe_as(Proc(VDS_IPADDRESS*, UInt64, VDS_ISCSI_IPSEC_KEY*, HRESULT)).call(pinitiatorportaladdress, ullsecurityflags, pipseckey)
+  end
+end
+struct LibWin32::IVdsIscsiTarget
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties(ptargetprop : VDS_ISCSI_TARGET_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(VDS_ISCSI_TARGET_PROP*, HRESULT)).call(ptargetprop)
+  end
+  def get_sub_system(ppsubsystem : IVdsSubSystem*) : HRESULT
+    @lpVtbl.value.get_sub_system.unsafe_as(Proc(IVdsSubSystem*, HRESULT)).call(ppsubsystem)
+  end
+  def query_portal_groups(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_portal_groups.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+  def query_associated_luns(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_associated_luns.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+  def create_portal_group(ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.create_portal_group.unsafe_as(Proc(IVdsAsync*, HRESULT)).call(ppasync)
+  end
+  def delete(ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(IVdsAsync*, HRESULT)).call(ppasync)
+  end
+  def set_friendly_name(pwszfriendlyname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_friendly_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszfriendlyname)
+  end
+  def set_shared_secret(ptargetsharedsecret : VDS_ISCSI_SHARED_SECRET*, pwszinitiatorname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_shared_secret.unsafe_as(Proc(VDS_ISCSI_SHARED_SECRET*, LibC::LPWSTR, HRESULT)).call(ptargetsharedsecret, pwszinitiatorname)
+  end
+  def remember_initiator_shared_secret(pwszinitiatorname : LibC::LPWSTR, pinitiatorsharedsecret : VDS_ISCSI_SHARED_SECRET*) : HRESULT
+    @lpVtbl.value.remember_initiator_shared_secret.unsafe_as(Proc(LibC::LPWSTR, VDS_ISCSI_SHARED_SECRET*, HRESULT)).call(pwszinitiatorname, pinitiatorsharedsecret)
+  end
+  def get_connected_initiators(pppwszinitiatorlist : LibC::LPWSTR**, plnumberofinitiators : Int32*) : HRESULT
+    @lpVtbl.value.get_connected_initiators.unsafe_as(Proc(LibC::LPWSTR**, Int32*, HRESULT)).call(pppwszinitiatorlist, plnumberofinitiators)
+  end
+end
+struct LibWin32::IVdsIscsiPortalGroup
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties(pportalgroupprop : VDS_ISCSI_PORTALGROUP_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(VDS_ISCSI_PORTALGROUP_PROP*, HRESULT)).call(pportalgroupprop)
+  end
+  def get_target(pptarget : IVdsIscsiTarget*) : HRESULT
+    @lpVtbl.value.get_target.unsafe_as(Proc(IVdsIscsiTarget*, HRESULT)).call(pptarget)
+  end
+  def query_associated_portals(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_associated_portals.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+  def add_portal(portalid : Guid, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.add_portal.unsafe_as(Proc(Guid, IVdsAsync*, HRESULT)).call(portalid, ppasync)
+  end
+  def remove_portal(portalid : Guid, ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.remove_portal.unsafe_as(Proc(Guid, IVdsAsync*, HRESULT)).call(portalid, ppasync)
+  end
+  def delete(ppasync : IVdsAsync*) : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(IVdsAsync*, HRESULT)).call(ppasync)
+  end
+end
+struct LibWin32::IVdsStoragePool
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_provider(ppprovider : IVdsProvider*) : HRESULT
+    @lpVtbl.value.get_provider.unsafe_as(Proc(IVdsProvider*, HRESULT)).call(ppprovider)
+  end
+  def get_properties(pstoragepoolprop : VDS_STORAGE_POOL_PROP*) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(VDS_STORAGE_POOL_PROP*, HRESULT)).call(pstoragepoolprop)
+  end
+  def get_attributes(pstoragepoolattributes : VDS_POOL_ATTRIBUTES*) : HRESULT
+    @lpVtbl.value.get_attributes.unsafe_as(Proc(VDS_POOL_ATTRIBUTES*, HRESULT)).call(pstoragepoolattributes)
+  end
+  def query_drive_extents(ppextentarray : VDS_STORAGE_POOL_DRIVE_EXTENT**, plnumberofextents : Int32*) : HRESULT
+    @lpVtbl.value.query_drive_extents.unsafe_as(Proc(VDS_STORAGE_POOL_DRIVE_EXTENT**, Int32*, HRESULT)).call(ppextentarray, plnumberofextents)
+  end
+  def query_allocated_luns(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_allocated_luns.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+  def query_allocated_storage_pools(ppenum : IEnumVdsObject*) : HRESULT
+    @lpVtbl.value.query_allocated_storage_pools.unsafe_as(Proc(IEnumVdsObject*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IVdsMaintenance
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def start_maintenance(operation : VDS_MAINTENANCE_OPERATION) : HRESULT
+    @lpVtbl.value.start_maintenance.unsafe_as(Proc(VDS_MAINTENANCE_OPERATION, HRESULT)).call(operation)
+  end
+  def stop_maintenance(operation : VDS_MAINTENANCE_OPERATION) : HRESULT
+    @lpVtbl.value.stop_maintenance.unsafe_as(Proc(VDS_MAINTENANCE_OPERATION, HRESULT)).call(operation)
+  end
+  def pulse_maintenance(operation : VDS_MAINTENANCE_OPERATION, ulcount : UInt32) : HRESULT
+    @lpVtbl.value.pulse_maintenance.unsafe_as(Proc(VDS_MAINTENANCE_OPERATION, UInt32, HRESULT)).call(operation, ulcount)
+  end
+end
+struct LibWin32::IVdsHwProviderPrivate
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def query_if_created_lun(pwszdevicepath : LibC::LPWSTR, pvdsluninformation : VDS_LUN_INFORMATION*, plunid : Guid*) : HRESULT
+    @lpVtbl.value.query_if_created_lun.unsafe_as(Proc(LibC::LPWSTR, VDS_LUN_INFORMATION*, Guid*, HRESULT)).call(pwszdevicepath, pvdsluninformation, plunid)
+  end
+end
+struct LibWin32::IVdsHwProviderPrivateMpio
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_all_path_statuses_from_hba_port(hbaportprop : VDS_HBAPORT_PROP, status : VDS_PATH_STATUS) : HRESULT
+    @lpVtbl.value.set_all_path_statuses_from_hba_port.unsafe_as(Proc(VDS_HBAPORT_PROP, VDS_PATH_STATUS, HRESULT)).call(hbaportprop, status)
+  end
+end
+struct LibWin32::IVdsAdmin
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def register_provider(providerid : Guid, providerclsid : Guid, pwszname : LibC::LPWSTR, type : VDS_PROVIDER_TYPE, pwszmachinename : LibC::LPWSTR, pwszversion : LibC::LPWSTR, guidversionid : Guid) : HRESULT
+    @lpVtbl.value.register_provider.unsafe_as(Proc(Guid, Guid, LibC::LPWSTR, VDS_PROVIDER_TYPE, LibC::LPWSTR, LibC::LPWSTR, Guid, HRESULT)).call(providerid, providerclsid, pwszname, type, pwszmachinename, pwszversion, guidversionid)
+  end
+  def unregister_provider(providerid : Guid) : HRESULT
+    @lpVtbl.value.unregister_provider.unsafe_as(Proc(Guid, HRESULT)).call(providerid)
+  end
 end

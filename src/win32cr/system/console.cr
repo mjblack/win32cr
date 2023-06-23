@@ -277,7 +277,7 @@ lib LibWin32
   fun ResizePseudoConsole(hpc : HPCON, size : COORD) : HRESULT
 
   # Params # hpc : HPCON [In]
-  fun ClosePseudoConsole(hpc : HPCON)
+  fun ClosePseudoConsole(hpc : HPCON) : Void
 
   # Params # hconsoleoutput : LibC::HANDLE [In],ccharacter : CHAR [In],nlength : UInt32 [In],dwwritecoord : COORD [In],lpnumberofcharswritten : UInt32* [In]
   fun FillConsoleOutputCharacterA(hconsoleoutput : LibC::HANDLE, ccharacter : CHAR, nlength : UInt32, dwwritecoord : COORD, lpnumberofcharswritten : UInt32*) : LibC::BOOL
@@ -468,10 +468,10 @@ lib LibWin32
   fun GetConsoleAliasExesW(exenamebuffer : Char*, exenamebufferlength : UInt32) : UInt32
 
   # Params # exename : PSTR [In]
-  fun ExpungeConsoleCommandHistoryA(exename : PSTR)
+  fun ExpungeConsoleCommandHistoryA(exename : PSTR) : Void
 
   # Params # exename : LibC::LPWSTR [In]
-  fun ExpungeConsoleCommandHistoryW(exename : LibC::LPWSTR)
+  fun ExpungeConsoleCommandHistoryW(exename : LibC::LPWSTR) : Void
 
   # Params # number : UInt32 [In],exename : PSTR [In]
   fun SetConsoleNumberOfCommandsA(number : UInt32, exename : PSTR) : LibC::BOOL

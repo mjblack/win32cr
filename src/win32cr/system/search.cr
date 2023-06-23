@@ -5353,14 +5353,14 @@ lib LibWin32
 
 
   struct IWordSinkVTbl
-    query_interface : Proc(IWordSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWordSink*, UInt32)
-    release : Proc(IWordSink*, UInt32)
-    put_word : Proc(IWordSink*, UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)
-    put_alt_word : Proc(IWordSink*, UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)
-    start_alt_phrase : Proc(IWordSink*, HRESULT)
-    end_alt_phrase : Proc(IWordSink*, HRESULT)
-    put_break : Proc(IWordSink*, WORDREP_BREAK_TYPE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    put_word : UInt64
+    put_alt_word : UInt64
+    start_alt_phrase : UInt64
+    end_alt_phrase : UInt64
+    put_break : UInt64
   end
 
   IWordSink_GUID = "cc907054-c058-101a-b554-08002b33b0e6"
@@ -5370,13 +5370,13 @@ lib LibWin32
   end
 
   struct IWordBreakerVTbl
-    query_interface : Proc(IWordBreaker*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWordBreaker*, UInt32)
-    release : Proc(IWordBreaker*, UInt32)
-    init : Proc(IWordBreaker*, LibC::BOOL, UInt32, LibC::BOOL*, HRESULT)
-    break_text : Proc(IWordBreaker*, TEXT_SOURCE*, IWordSink, IPhraseSink, HRESULT)
-    compose_phrase : Proc(IWordBreaker*, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, UInt32, LibC::LPWSTR, UInt32*, HRESULT)
-    get_license_to_use : Proc(IWordBreaker*, UInt16**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    init : UInt64
+    break_text : UInt64
+    compose_phrase : UInt64
+    get_license_to_use : UInt64
   end
 
   IWordBreaker_GUID = "d53552c8-77e3-101a-b552-08002b33b0e6"
@@ -5386,11 +5386,11 @@ lib LibWin32
   end
 
   struct IWordFormSinkVTbl
-    query_interface : Proc(IWordFormSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWordFormSink*, UInt32)
-    release : Proc(IWordFormSink*, UInt32)
-    put_alt_word : Proc(IWordFormSink*, LibC::LPWSTR, UInt32, HRESULT)
-    put_word : Proc(IWordFormSink*, LibC::LPWSTR, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    put_alt_word : UInt64
+    put_word : UInt64
   end
 
   IWordFormSink_GUID = "fe77c330-7f42-11ce-be57-00aa0051fe20"
@@ -5400,12 +5400,12 @@ lib LibWin32
   end
 
   struct IStemmerVTbl
-    query_interface : Proc(IStemmer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IStemmer*, UInt32)
-    release : Proc(IStemmer*, UInt32)
-    init : Proc(IStemmer*, UInt32, LibC::BOOL*, HRESULT)
-    generate_word_forms : Proc(IStemmer*, LibC::LPWSTR, UInt32, IWordFormSink, HRESULT)
-    get_license_to_use : Proc(IStemmer*, UInt16**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    init : UInt64
+    generate_word_forms : UInt64
+    get_license_to_use : UInt64
   end
 
   IStemmer_GUID = "efbaf140-7f42-11ce-be57-00aa0051fe20"
@@ -5415,12 +5415,12 @@ lib LibWin32
   end
 
   struct ISimpleCommandCreatorVTbl
-    query_interface : Proc(ISimpleCommandCreator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISimpleCommandCreator*, UInt32)
-    release : Proc(ISimpleCommandCreator*, UInt32)
-    create_i_command : Proc(ISimpleCommandCreator*, IUnknown*, IUnknown, HRESULT)
-    verify_catalog : Proc(ISimpleCommandCreator*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_default_catalog : Proc(ISimpleCommandCreator*, LibC::LPWSTR, UInt32, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_i_command : UInt64
+    verify_catalog : UInt64
+    get_default_catalog : UInt64
   end
 
   ISimpleCommandCreator_GUID = "5e341ab7-02d0-11d1-900c-00a0c9063796"
@@ -5430,13 +5430,13 @@ lib LibWin32
   end
 
   struct IColumnMapperVTbl
-    query_interface : Proc(IColumnMapper*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IColumnMapper*, UInt32)
-    release : Proc(IColumnMapper*, UInt32)
-    get_prop_info_from_name : Proc(IColumnMapper*, LibC::LPWSTR, DBID**, UInt16*, UInt32*, HRESULT)
-    get_prop_info_from_id : Proc(IColumnMapper*, DBID*, UInt16**, UInt16*, UInt32*, HRESULT)
-    enum_prop_info : Proc(IColumnMapper*, UInt32, UInt16**, DBID**, UInt16*, UInt32*, HRESULT)
-    is_map_up_to_date : Proc(IColumnMapper*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_prop_info_from_name : UInt64
+    get_prop_info_from_id : UInt64
+    enum_prop_info : UInt64
+    is_map_up_to_date : UInt64
   end
 
   IColumnMapper_GUID = "0b63e37a-9ccc-11d0-bcdb-00805fccce04"
@@ -5446,10 +5446,10 @@ lib LibWin32
   end
 
   struct IColumnMapperCreatorVTbl
-    query_interface : Proc(IColumnMapperCreator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IColumnMapperCreator*, UInt32)
-    release : Proc(IColumnMapperCreator*, UInt32)
-    get_column_mapper : Proc(IColumnMapperCreator*, LibC::LPWSTR, LibC::LPWSTR, IColumnMapper*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_column_mapper : UInt64
   end
 
   IColumnMapperCreator_GUID = "0b63e37b-9ccc-11d0-bcdb-00805fccce04"
@@ -5459,12 +5459,12 @@ lib LibWin32
   end
 
   struct ILoadFilterVTbl
-    query_interface : Proc(ILoadFilter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILoadFilter*, UInt32)
-    release : Proc(ILoadFilter*, UInt32)
-    load_i_filter : Proc(ILoadFilter*, LibC::LPWSTR, FILTERED_DATA_SOURCES*, IUnknown, LibC::BOOL, Guid*, Int32*, UInt16**, IFilter*, HRESULT)
-    load_i_filter_from_storage : Proc(ILoadFilter*, IStorage, IUnknown, LibC::LPWSTR, LibC::BOOL, Guid*, Int32*, UInt16**, IFilter*, HRESULT)
-    load_i_filter_from_stream : Proc(ILoadFilter*, IStream, FILTERED_DATA_SOURCES*, IUnknown, LibC::BOOL, Guid*, Int32*, UInt16**, IFilter*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    load_i_filter : UInt64
+    load_i_filter_from_storage : UInt64
+    load_i_filter_from_stream : UInt64
   end
 
   ILoadFilter_GUID = "c7310722-ac80-11d1-8df3-00c04fb6ef4f"
@@ -5474,13 +5474,13 @@ lib LibWin32
   end
 
   struct ILoadFilterWithPrivateComActivationVTbl
-    query_interface : Proc(ILoadFilterWithPrivateComActivation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILoadFilterWithPrivateComActivation*, UInt32)
-    release : Proc(ILoadFilterWithPrivateComActivation*, UInt32)
-    load_i_filter : Proc(ILoadFilterWithPrivateComActivation*, LibC::LPWSTR, FILTERED_DATA_SOURCES*, IUnknown, LibC::BOOL, Guid*, Int32*, UInt16**, IFilter*, HRESULT)
-    load_i_filter_from_storage : Proc(ILoadFilterWithPrivateComActivation*, IStorage, IUnknown, LibC::LPWSTR, LibC::BOOL, Guid*, Int32*, UInt16**, IFilter*, HRESULT)
-    load_i_filter_from_stream : Proc(ILoadFilterWithPrivateComActivation*, IStream, FILTERED_DATA_SOURCES*, IUnknown, LibC::BOOL, Guid*, Int32*, UInt16**, IFilter*, HRESULT)
-    load_i_filter_with_private_com_activation : Proc(ILoadFilterWithPrivateComActivation*, FILTERED_DATA_SOURCES*, LibC::BOOL, Guid*, LibC::BOOL*, IFilter*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    load_i_filter : UInt64
+    load_i_filter_from_storage : UInt64
+    load_i_filter_from_stream : UInt64
+    load_i_filter_with_private_com_activation : UInt64
   end
 
   ILoadFilterWithPrivateComActivation_GUID = "40bdbd34-780b-48d3-9bb6-12ebd4ad2e75"
@@ -5490,10 +5490,10 @@ lib LibWin32
   end
 
   struct IRichChunkVTbl
-    query_interface : Proc(IRichChunk*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRichChunk*, UInt32)
-    release : Proc(IRichChunk*, UInt32)
-    get_data : Proc(IRichChunk*, UInt32*, UInt32*, LibC::LPWSTR*, PROPVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_data : UInt64
   end
 
   IRichChunk_GUID = "4fdef69c-dbc9-454e-9910-b34f3c64b510"
@@ -5503,21 +5503,21 @@ lib LibWin32
   end
 
   struct IConditionVTbl
-    query_interface : Proc(ICondition*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICondition*, UInt32)
-    release : Proc(ICondition*, UInt32)
-    get_class_id : Proc(ICondition*, Guid*, HRESULT)
-    is_dirty : Proc(ICondition*, HRESULT)
-    load : Proc(ICondition*, IStream, HRESULT)
-    save : Proc(ICondition*, IStream, LibC::BOOL, HRESULT)
-    get_size_max : Proc(ICondition*, ULARGE_INTEGER*, HRESULT)
-    get_condition_type : Proc(ICondition*, CONDITION_TYPE*, HRESULT)
-    get_sub_conditions : Proc(ICondition*, Guid*, Void**, HRESULT)
-    get_comparison_info : Proc(ICondition*, LibC::LPWSTR*, CONDITION_OPERATION*, PROPVARIANT*, HRESULT)
-    get_value_type : Proc(ICondition*, LibC::LPWSTR*, HRESULT)
-    get_value_normalization : Proc(ICondition*, LibC::LPWSTR*, HRESULT)
-    get_input_terms : Proc(ICondition*, IRichChunk*, IRichChunk*, IRichChunk*, HRESULT)
-    clone : Proc(ICondition*, ICondition*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_class_id : UInt64
+    is_dirty : UInt64
+    load : UInt64
+    save : UInt64
+    get_size_max : UInt64
+    get_condition_type : UInt64
+    get_sub_conditions : UInt64
+    get_comparison_info : UInt64
+    get_value_type : UInt64
+    get_value_normalization : UInt64
+    get_input_terms : UInt64
+    clone : UInt64
   end
 
   ICondition_GUID = "0fc988d4-c935-4b97-a973-46282ea175c8"
@@ -5527,23 +5527,23 @@ lib LibWin32
   end
 
   struct ICondition2VTbl
-    query_interface : Proc(ICondition2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICondition2*, UInt32)
-    release : Proc(ICondition2*, UInt32)
-    get_class_id : Proc(ICondition2*, Guid*, HRESULT)
-    is_dirty : Proc(ICondition2*, HRESULT)
-    load : Proc(ICondition2*, IStream, HRESULT)
-    save : Proc(ICondition2*, IStream, LibC::BOOL, HRESULT)
-    get_size_max : Proc(ICondition2*, ULARGE_INTEGER*, HRESULT)
-    get_condition_type : Proc(ICondition2*, CONDITION_TYPE*, HRESULT)
-    get_sub_conditions : Proc(ICondition2*, Guid*, Void**, HRESULT)
-    get_comparison_info : Proc(ICondition2*, LibC::LPWSTR*, CONDITION_OPERATION*, PROPVARIANT*, HRESULT)
-    get_value_type : Proc(ICondition2*, LibC::LPWSTR*, HRESULT)
-    get_value_normalization : Proc(ICondition2*, LibC::LPWSTR*, HRESULT)
-    get_input_terms : Proc(ICondition2*, IRichChunk*, IRichChunk*, IRichChunk*, HRESULT)
-    clone : Proc(ICondition2*, ICondition*, HRESULT)
-    get_locale : Proc(ICondition2*, LibC::LPWSTR*, HRESULT)
-    get_leaf_condition_info : Proc(ICondition2*, PROPERTYKEY*, CONDITION_OPERATION*, PROPVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_class_id : UInt64
+    is_dirty : UInt64
+    load : UInt64
+    save : UInt64
+    get_size_max : UInt64
+    get_condition_type : UInt64
+    get_sub_conditions : UInt64
+    get_comparison_info : UInt64
+    get_value_type : UInt64
+    get_value_normalization : UInt64
+    get_input_terms : UInt64
+    clone : UInt64
+    get_locale : UInt64
+    get_leaf_condition_info : UInt64
   end
 
   ICondition2_GUID = "0db8851d-2e5b-47eb-9208-d28c325a01d7"
@@ -5553,13 +5553,13 @@ lib LibWin32
   end
 
   struct IAccessorVTbl
-    query_interface : Proc(IAccessor*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAccessor*, UInt32)
-    release : Proc(IAccessor*, UInt32)
-    add_ref_accessor : Proc(IAccessor*, LibC::UINT_PTR, UInt32*, HRESULT)
-    create_accessor : Proc(IAccessor*, UInt32, LibC::UINT_PTR, DBBINDING*, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, HRESULT)
-    get_bindings : Proc(IAccessor*, LibC::UINT_PTR, UInt32*, LibC::UINT_PTR*, DBBINDING**, HRESULT)
-    release_accessor : Proc(IAccessor*, LibC::UINT_PTR, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_ref_accessor : UInt64
+    create_accessor : UInt64
+    get_bindings : UInt64
+    release_accessor : UInt64
   end
 
   IAccessor_GUID = "0c733a8c-2a1c-11ce-ade5-00aa0044773d"
@@ -5569,14 +5569,14 @@ lib LibWin32
   end
 
   struct IRowsetVTbl
-    query_interface : Proc(IRowset*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowset*, UInt32)
-    release : Proc(IRowset*, UInt32)
-    add_ref_rows : Proc(IRowset*, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, UInt32*, HRESULT)
-    get_data : Proc(IRowset*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)
-    get_next_rows : Proc(IRowset*, LibC::UINT_PTR, LibC::IntPtrT, LibC::IntPtrT, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)
-    release_rows : Proc(IRowset*, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, UInt32*, UInt32*, HRESULT)
-    restart_position : Proc(IRowset*, LibC::UINT_PTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_ref_rows : UInt64
+    get_data : UInt64
+    get_next_rows : UInt64
+    release_rows : UInt64
+    restart_position : UInt64
   end
 
   IRowset_GUID = "0c733a7c-2a1c-11ce-ade5-00aa0044773d"
@@ -5586,12 +5586,12 @@ lib LibWin32
   end
 
   struct IRowsetInfoVTbl
-    query_interface : Proc(IRowsetInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetInfo*, UInt32)
-    release : Proc(IRowsetInfo*, UInt32)
-    get_properties : Proc(IRowsetInfo*, UInt32, DBPROPIDSET*, UInt32*, DBPROPSET**, HRESULT)
-    get_referenced_rowset : Proc(IRowsetInfo*, LibC::UINT_PTR, Guid*, IUnknown*, HRESULT)
-    get_specification : Proc(IRowsetInfo*, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties : UInt64
+    get_referenced_rowset : UInt64
+    get_specification : UInt64
   end
 
   IRowsetInfo_GUID = "0c733a55-2a1c-11ce-ade5-00aa0044773d"
@@ -5601,18 +5601,18 @@ lib LibWin32
   end
 
   struct IRowsetLocateVTbl
-    query_interface : Proc(IRowsetLocate*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetLocate*, UInt32)
-    release : Proc(IRowsetLocate*, UInt32)
-    add_ref_rows : Proc(IRowsetLocate*, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, UInt32*, HRESULT)
-    get_data : Proc(IRowsetLocate*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)
-    get_next_rows : Proc(IRowsetLocate*, LibC::UINT_PTR, LibC::IntPtrT, LibC::IntPtrT, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)
-    release_rows : Proc(IRowsetLocate*, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, UInt32*, UInt32*, HRESULT)
-    restart_position : Proc(IRowsetLocate*, LibC::UINT_PTR, HRESULT)
-    compare : Proc(IRowsetLocate*, LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, LibC::UINT_PTR, UInt8*, UInt32*, HRESULT)
-    get_rows_at : Proc(IRowsetLocate*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, LibC::IntPtrT, LibC::IntPtrT, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)
-    get_rows_by_bookmark : Proc(IRowsetLocate*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt8**, LibC::UINT_PTR*, UInt32*, HRESULT)
-    hash : Proc(IRowsetLocate*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt8**, LibC::UINT_PTR*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_ref_rows : UInt64
+    get_data : UInt64
+    get_next_rows : UInt64
+    release_rows : UInt64
+    restart_position : UInt64
+    compare : UInt64
+    get_rows_at : UInt64
+    get_rows_by_bookmark : UInt64
+    hash : UInt64
   end
 
   IRowsetLocate_GUID = "0c733a7d-2a1c-11ce-ade5-00aa0044773d"
@@ -5622,11 +5622,11 @@ lib LibWin32
   end
 
   struct IRowsetResynchVTbl
-    query_interface : Proc(IRowsetResynch*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetResynch*, UInt32)
-    release : Proc(IRowsetResynch*, UInt32)
-    get_visible_data : Proc(IRowsetResynch*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)
-    resynch_rows : Proc(IRowsetResynch*, LibC::UINT_PTR, LibC::UINT_PTR*, LibC::UINT_PTR*, LibC::UINT_PTR**, UInt32**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_visible_data : UInt64
+    resynch_rows : UInt64
   end
 
   IRowsetResynch_GUID = "0c733a84-2a1c-11ce-ade5-00aa0044773d"
@@ -5636,20 +5636,20 @@ lib LibWin32
   end
 
   struct IRowsetScrollVTbl
-    query_interface : Proc(IRowsetScroll*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetScroll*, UInt32)
-    release : Proc(IRowsetScroll*, UInt32)
-    add_ref_rows : Proc(IRowsetScroll*, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, UInt32*, HRESULT)
-    get_data : Proc(IRowsetScroll*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)
-    get_next_rows : Proc(IRowsetScroll*, LibC::UINT_PTR, LibC::IntPtrT, LibC::IntPtrT, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)
-    release_rows : Proc(IRowsetScroll*, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, UInt32*, UInt32*, HRESULT)
-    restart_position : Proc(IRowsetScroll*, LibC::UINT_PTR, HRESULT)
-    compare : Proc(IRowsetScroll*, LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, LibC::UINT_PTR, UInt8*, UInt32*, HRESULT)
-    get_rows_at : Proc(IRowsetScroll*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, LibC::IntPtrT, LibC::IntPtrT, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)
-    get_rows_by_bookmark : Proc(IRowsetScroll*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt8**, LibC::UINT_PTR*, UInt32*, HRESULT)
-    hash : Proc(IRowsetScroll*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt8**, LibC::UINT_PTR*, UInt32*, HRESULT)
-    get_approximate_position : Proc(IRowsetScroll*, LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, LibC::UINT_PTR*, LibC::UINT_PTR*, HRESULT)
-    get_rows_at_ratio : Proc(IRowsetScroll*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, LibC::IntPtrT, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_ref_rows : UInt64
+    get_data : UInt64
+    get_next_rows : UInt64
+    release_rows : UInt64
+    restart_position : UInt64
+    compare : UInt64
+    get_rows_at : UInt64
+    get_rows_by_bookmark : UInt64
+    hash : UInt64
+    get_approximate_position : UInt64
+    get_rows_at_ratio : UInt64
   end
 
   IRowsetScroll_GUID = "0c733a7e-2a1c-11ce-ade5-00aa0044773d"
@@ -5659,11 +5659,11 @@ lib LibWin32
   end
 
   struct IChapteredRowsetVTbl
-    query_interface : Proc(IChapteredRowset*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IChapteredRowset*, UInt32)
-    release : Proc(IChapteredRowset*, UInt32)
-    add_ref_chapter : Proc(IChapteredRowset*, LibC::UINT_PTR, UInt32*, HRESULT)
-    release_chapter : Proc(IChapteredRowset*, LibC::UINT_PTR, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_ref_chapter : UInt64
+    release_chapter : UInt64
   end
 
   IChapteredRowset_GUID = "0c733a93-2a1c-11ce-ade5-00aa0044773d"
@@ -5673,10 +5673,10 @@ lib LibWin32
   end
 
   struct IRowsetFindVTbl
-    query_interface : Proc(IRowsetFind*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetFind*, UInt32)
-    release : Proc(IRowsetFind*, UInt32)
-    find_next_row : Proc(IRowsetFind*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, UInt32, LibC::UINT_PTR, UInt8*, LibC::IntPtrT, LibC::IntPtrT, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    find_next_row : UInt64
   end
 
   IRowsetFind_GUID = "0c733a9d-2a1c-11ce-ade5-00aa0044773d"
@@ -5686,14 +5686,14 @@ lib LibWin32
   end
 
   struct IRowPositionVTbl
-    query_interface : Proc(IRowPosition*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowPosition*, UInt32)
-    release : Proc(IRowPosition*, UInt32)
-    clear_row_position : Proc(IRowPosition*, HRESULT)
-    get_row_position : Proc(IRowPosition*, LibC::UINT_PTR*, LibC::UINT_PTR*, UInt32*, HRESULT)
-    get_rowset : Proc(IRowPosition*, Guid*, IUnknown*, HRESULT)
-    initialize : Proc(IRowPosition*, IUnknown, HRESULT)
-    set_row_position : Proc(IRowPosition*, LibC::UINT_PTR, LibC::UINT_PTR, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clear_row_position : UInt64
+    get_row_position : UInt64
+    get_rowset : UInt64
+    initialize : UInt64
+    set_row_position : UInt64
   end
 
   IRowPosition_GUID = "0c733a94-2a1c-11ce-ade5-00aa0044773d"
@@ -5703,10 +5703,10 @@ lib LibWin32
   end
 
   struct IRowPositionChangeVTbl
-    query_interface : Proc(IRowPositionChange*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowPositionChange*, UInt32)
-    release : Proc(IRowPositionChange*, UInt32)
-    on_row_position_change : Proc(IRowPositionChange*, UInt32, UInt32, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_row_position_change : UInt64
   end
 
   IRowPositionChange_GUID = "0997a571-126e-11d0-9f8a-00a0c9a0631e"
@@ -5716,11 +5716,11 @@ lib LibWin32
   end
 
   struct IViewRowsetVTbl
-    query_interface : Proc(IViewRowset*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IViewRowset*, UInt32)
-    release : Proc(IViewRowset*, UInt32)
-    get_specification : Proc(IViewRowset*, Guid*, IUnknown*, HRESULT)
-    open_view_rowset : Proc(IViewRowset*, IUnknown, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_specification : UInt64
+    open_view_rowset : UInt64
   end
 
   IViewRowset_GUID = "0c733a97-2a1c-11ce-ade5-00aa0044773d"
@@ -5730,11 +5730,11 @@ lib LibWin32
   end
 
   struct IViewChapterVTbl
-    query_interface : Proc(IViewChapter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IViewChapter*, UInt32)
-    release : Proc(IViewChapter*, UInt32)
-    get_specification : Proc(IViewChapter*, Guid*, IUnknown*, HRESULT)
-    open_view_chapter : Proc(IViewChapter*, LibC::UINT_PTR, LibC::UINT_PTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_specification : UInt64
+    open_view_chapter : UInt64
   end
 
   IViewChapter_GUID = "0c733a98-2a1c-11ce-ade5-00aa0044773d"
@@ -5744,11 +5744,11 @@ lib LibWin32
   end
 
   struct IViewSortVTbl
-    query_interface : Proc(IViewSort*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IViewSort*, UInt32)
-    release : Proc(IViewSort*, UInt32)
-    get_sort_order : Proc(IViewSort*, LibC::UINT_PTR*, LibC::UINT_PTR**, UInt32**, HRESULT)
-    set_sort_order : Proc(IViewSort*, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_sort_order : UInt64
+    set_sort_order : UInt64
   end
 
   IViewSort_GUID = "0c733a9a-2a1c-11ce-ade5-00aa0044773d"
@@ -5758,12 +5758,12 @@ lib LibWin32
   end
 
   struct IViewFilterVTbl
-    query_interface : Proc(IViewFilter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IViewFilter*, UInt32)
-    release : Proc(IViewFilter*, UInt32)
-    get_filter : Proc(IViewFilter*, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32**, Void*, HRESULT)
-    get_filter_bindings : Proc(IViewFilter*, LibC::UINT_PTR*, DBBINDING**, HRESULT)
-    set_filter : Proc(IViewFilter*, LibC::UINT_PTR, LibC::UINT_PTR, UInt32*, Void*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_filter : UInt64
+    get_filter_bindings : UInt64
+    set_filter : UInt64
   end
 
   IViewFilter_GUID = "0c733a9b-2a1c-11ce-ade5-00aa0044773d"
@@ -5773,11 +5773,11 @@ lib LibWin32
   end
 
   struct IRowsetViewVTbl
-    query_interface : Proc(IRowsetView*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetView*, UInt32)
-    release : Proc(IRowsetView*, UInt32)
-    create_view : Proc(IRowsetView*, IUnknown, Guid*, IUnknown*, HRESULT)
-    get_view : Proc(IRowsetView*, LibC::UINT_PTR, Guid*, LibC::UINT_PTR*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_view : UInt64
+    get_view : UInt64
   end
 
   IRowsetView_GUID = "0c733a99-2a1c-11ce-ade5-00aa0044773d"
@@ -5787,12 +5787,12 @@ lib LibWin32
   end
 
   struct IRowsetChangeVTbl
-    query_interface : Proc(IRowsetChange*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetChange*, UInt32)
-    release : Proc(IRowsetChange*, UInt32)
-    delete_rows : Proc(IRowsetChange*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, HRESULT)
-    set_data : Proc(IRowsetChange*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)
-    insert_row : Proc(IRowsetChange*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, LibC::UINT_PTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    delete_rows : UInt64
+    set_data : UInt64
+    insert_row : UInt64
   end
 
   IRowsetChange_GUID = "0c733a05-2a1c-11ce-ade5-00aa0044773d"
@@ -5802,17 +5802,17 @@ lib LibWin32
   end
 
   struct IRowsetUpdateVTbl
-    query_interface : Proc(IRowsetUpdate*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetUpdate*, UInt32)
-    release : Proc(IRowsetUpdate*, UInt32)
-    delete_rows : Proc(IRowsetUpdate*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, HRESULT)
-    set_data : Proc(IRowsetUpdate*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)
-    insert_row : Proc(IRowsetUpdate*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, LibC::UINT_PTR*, HRESULT)
-    get_original_data : Proc(IRowsetUpdate*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)
-    get_pending_rows : Proc(IRowsetUpdate*, LibC::UINT_PTR, UInt32, LibC::UINT_PTR*, LibC::UINT_PTR**, UInt32**, HRESULT)
-    get_row_status : Proc(IRowsetUpdate*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, HRESULT)
-    undo : Proc(IRowsetUpdate*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, LibC::UINT_PTR*, LibC::UINT_PTR**, UInt32**, HRESULT)
-    update : Proc(IRowsetUpdate*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, LibC::UINT_PTR*, LibC::UINT_PTR**, UInt32**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    delete_rows : UInt64
+    set_data : UInt64
+    insert_row : UInt64
+    get_original_data : UInt64
+    get_pending_rows : UInt64
+    get_row_status : UInt64
+    undo : UInt64
+    update : UInt64
   end
 
   IRowsetUpdate_GUID = "0c733a6d-2a1c-11ce-ade5-00aa0044773d"
@@ -5822,10 +5822,10 @@ lib LibWin32
   end
 
   struct IRowsetIdentityVTbl
-    query_interface : Proc(IRowsetIdentity*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetIdentity*, UInt32)
-    release : Proc(IRowsetIdentity*, UInt32)
-    is_same_row : Proc(IRowsetIdentity*, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    is_same_row : UInt64
   end
 
   IRowsetIdentity_GUID = "0c733a09-2a1c-11ce-ade5-00aa0044773d"
@@ -5835,12 +5835,12 @@ lib LibWin32
   end
 
   struct IRowsetNotifyVTbl
-    query_interface : Proc(IRowsetNotify*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetNotify*, UInt32)
-    release : Proc(IRowsetNotify*, UInt32)
-    on_field_change : Proc(IRowsetNotify*, IRowset, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32, UInt32, LibC::BOOL, HRESULT)
-    on_row_change : Proc(IRowsetNotify*, IRowset, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32, UInt32, LibC::BOOL, HRESULT)
-    on_rowset_change : Proc(IRowsetNotify*, IRowset, UInt32, UInt32, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_field_change : UInt64
+    on_row_change : UInt64
+    on_rowset_change : UInt64
   end
 
   IRowsetNotify_GUID = "0c733a83-2a1c-11ce-ade5-00aa0044773d"
@@ -5850,12 +5850,12 @@ lib LibWin32
   end
 
   struct IRowsetIndexVTbl
-    query_interface : Proc(IRowsetIndex*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetIndex*, UInt32)
-    release : Proc(IRowsetIndex*, UInt32)
-    get_index_info : Proc(IRowsetIndex*, LibC::UINT_PTR*, DBINDEXCOLUMNDESC**, UInt32*, DBPROPSET**, HRESULT)
-    seek : Proc(IRowsetIndex*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, UInt32, HRESULT)
-    set_range : Proc(IRowsetIndex*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, LibC::UINT_PTR, Void*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_index_info : UInt64
+    seek : UInt64
+    set_range : UInt64
   end
 
   IRowsetIndex_GUID = "0c733a82-2a1c-11ce-ade5-00aa0044773d"
@@ -5865,12 +5865,12 @@ lib LibWin32
   end
 
   struct ICommandVTbl
-    query_interface : Proc(ICommand*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICommand*, UInt32)
-    release : Proc(ICommand*, UInt32)
-    cancel : Proc(ICommand*, HRESULT)
-    execute : Proc(ICommand*, IUnknown, Guid*, DBPARAMS*, LibC::IntPtrT*, IUnknown*, HRESULT)
-    get_db_session : Proc(ICommand*, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    cancel : UInt64
+    execute : UInt64
+    get_db_session : UInt64
   end
 
   ICommand_GUID = "0c733a63-2a1c-11ce-ade5-00aa0044773d"
@@ -5880,10 +5880,10 @@ lib LibWin32
   end
 
   struct IMultipleResultsVTbl
-    query_interface : Proc(IMultipleResults*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMultipleResults*, UInt32)
-    release : Proc(IMultipleResults*, UInt32)
-    get_result : Proc(IMultipleResults*, IUnknown, LibC::IntPtrT, Guid*, LibC::IntPtrT*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_result : UInt64
   end
 
   IMultipleResults_GUID = "0c733a90-2a1c-11ce-ade5-00aa0044773d"
@@ -5893,10 +5893,10 @@ lib LibWin32
   end
 
   struct IConvertTypeVTbl
-    query_interface : Proc(IConvertType*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IConvertType*, UInt32)
-    release : Proc(IConvertType*, UInt32)
-    can_convert : Proc(IConvertType*, UInt16, UInt16, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    can_convert : UInt64
   end
 
   IConvertType_GUID = "0c733a88-2a1c-11ce-ade5-00aa0044773d"
@@ -5906,11 +5906,11 @@ lib LibWin32
   end
 
   struct ICommandPrepareVTbl
-    query_interface : Proc(ICommandPrepare*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICommandPrepare*, UInt32)
-    release : Proc(ICommandPrepare*, UInt32)
-    prepare : Proc(ICommandPrepare*, UInt32, HRESULT)
-    unprepare : Proc(ICommandPrepare*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    prepare : UInt64
+    unprepare : UInt64
   end
 
   ICommandPrepare_GUID = "0c733a26-2a1c-11ce-ade5-00aa0044773d"
@@ -5920,11 +5920,11 @@ lib LibWin32
   end
 
   struct ICommandPropertiesVTbl
-    query_interface : Proc(ICommandProperties*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICommandProperties*, UInt32)
-    release : Proc(ICommandProperties*, UInt32)
-    get_properties : Proc(ICommandProperties*, UInt32, DBPROPIDSET*, UInt32*, DBPROPSET**, HRESULT)
-    set_properties : Proc(ICommandProperties*, UInt32, DBPROPSET*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties : UInt64
+    set_properties : UInt64
   end
 
   ICommandProperties_GUID = "0c733a79-2a1c-11ce-ade5-00aa0044773d"
@@ -5934,14 +5934,14 @@ lib LibWin32
   end
 
   struct ICommandTextVTbl
-    query_interface : Proc(ICommandText*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICommandText*, UInt32)
-    release : Proc(ICommandText*, UInt32)
-    cancel : Proc(ICommandText*, HRESULT)
-    execute : Proc(ICommandText*, IUnknown, Guid*, DBPARAMS*, LibC::IntPtrT*, IUnknown*, HRESULT)
-    get_db_session : Proc(ICommandText*, Guid*, IUnknown*, HRESULT)
-    get_command_text : Proc(ICommandText*, Guid*, LibC::LPWSTR*, HRESULT)
-    set_command_text : Proc(ICommandText*, Guid*, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    cancel : UInt64
+    execute : UInt64
+    get_db_session : UInt64
+    get_command_text : UInt64
+    set_command_text : UInt64
   end
 
   ICommandText_GUID = "0c733a27-2a1c-11ce-ade5-00aa0044773d"
@@ -5951,12 +5951,12 @@ lib LibWin32
   end
 
   struct ICommandWithParametersVTbl
-    query_interface : Proc(ICommandWithParameters*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICommandWithParameters*, UInt32)
-    release : Proc(ICommandWithParameters*, UInt32)
-    get_parameter_info : Proc(ICommandWithParameters*, LibC::UINT_PTR*, DBPARAMINFO**, UInt16**, HRESULT)
-    map_parameter_names : Proc(ICommandWithParameters*, LibC::UINT_PTR, LibC::LPWSTR*, LibC::IntPtrT*, HRESULT)
-    set_parameter_info : Proc(ICommandWithParameters*, LibC::UINT_PTR, LibC::UINT_PTR*, DBPARAMBINDINFO*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_parameter_info : UInt64
+    map_parameter_names : UInt64
+    set_parameter_info : UInt64
   end
 
   ICommandWithParameters_GUID = "0c733a64-2a1c-11ce-ade5-00aa0044773d"
@@ -5966,11 +5966,11 @@ lib LibWin32
   end
 
   struct IColumnsRowsetVTbl
-    query_interface : Proc(IColumnsRowset*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IColumnsRowset*, UInt32)
-    release : Proc(IColumnsRowset*, UInt32)
-    get_available_columns : Proc(IColumnsRowset*, LibC::UINT_PTR*, DBID**, HRESULT)
-    get_columns_rowset : Proc(IColumnsRowset*, IUnknown, LibC::UINT_PTR, DBID*, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_available_columns : UInt64
+    get_columns_rowset : UInt64
   end
 
   IColumnsRowset_GUID = "0c733a10-2a1c-11ce-ade5-00aa0044773d"
@@ -5980,11 +5980,11 @@ lib LibWin32
   end
 
   struct IColumnsInfoVTbl
-    query_interface : Proc(IColumnsInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IColumnsInfo*, UInt32)
-    release : Proc(IColumnsInfo*, UInt32)
-    get_column_info : Proc(IColumnsInfo*, LibC::UINT_PTR*, DBCOLUMNINFO**, UInt16**, HRESULT)
-    map_column_i_ds : Proc(IColumnsInfo*, LibC::UINT_PTR, DBID*, LibC::UINT_PTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_column_info : UInt64
+    map_column_i_ds : UInt64
   end
 
   IColumnsInfo_GUID = "0c733a11-2a1c-11ce-ade5-00aa0044773d"
@@ -5994,10 +5994,10 @@ lib LibWin32
   end
 
   struct IDBCreateCommandVTbl
-    query_interface : Proc(IDBCreateCommand*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDBCreateCommand*, UInt32)
-    release : Proc(IDBCreateCommand*, UInt32)
-    create_command : Proc(IDBCreateCommand*, IUnknown, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_command : UInt64
   end
 
   IDBCreateCommand_GUID = "0c733a1d-2a1c-11ce-ade5-00aa0044773d"
@@ -6007,10 +6007,10 @@ lib LibWin32
   end
 
   struct IDBCreateSessionVTbl
-    query_interface : Proc(IDBCreateSession*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDBCreateSession*, UInt32)
-    release : Proc(IDBCreateSession*, UInt32)
-    create_session : Proc(IDBCreateSession*, IUnknown, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_session : UInt64
   end
 
   IDBCreateSession_GUID = "0c733a5d-2a1c-11ce-ade5-00aa0044773d"
@@ -6020,10 +6020,10 @@ lib LibWin32
   end
 
   struct ISourcesRowsetVTbl
-    query_interface : Proc(ISourcesRowset*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISourcesRowset*, UInt32)
-    release : Proc(ISourcesRowset*, UInt32)
-    get_sources_rowset : Proc(ISourcesRowset*, IUnknown, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_sources_rowset : UInt64
   end
 
   ISourcesRowset_GUID = "0c733a1e-2a1c-11ce-ade5-00aa0044773d"
@@ -6033,12 +6033,12 @@ lib LibWin32
   end
 
   struct IDBPropertiesVTbl
-    query_interface : Proc(IDBProperties*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDBProperties*, UInt32)
-    release : Proc(IDBProperties*, UInt32)
-    get_properties : Proc(IDBProperties*, UInt32, DBPROPIDSET*, UInt32*, DBPROPSET**, HRESULT)
-    get_property_info : Proc(IDBProperties*, UInt32, DBPROPIDSET*, UInt32*, DBPROPINFOSET**, UInt16**, HRESULT)
-    set_properties : Proc(IDBProperties*, UInt32, DBPROPSET*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties : UInt64
+    get_property_info : UInt64
+    set_properties : UInt64
   end
 
   IDBProperties_GUID = "0c733a8a-2a1c-11ce-ade5-00aa0044773d"
@@ -6048,11 +6048,11 @@ lib LibWin32
   end
 
   struct IDBInitializeVTbl
-    query_interface : Proc(IDBInitialize*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDBInitialize*, UInt32)
-    release : Proc(IDBInitialize*, UInt32)
-    initialize : Proc(IDBInitialize*, HRESULT)
-    uninitialize : Proc(IDBInitialize*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    uninitialize : UInt64
   end
 
   IDBInitialize_GUID = "0c733a8b-2a1c-11ce-ade5-00aa0044773d"
@@ -6062,11 +6062,11 @@ lib LibWin32
   end
 
   struct IDBInfoVTbl
-    query_interface : Proc(IDBInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDBInfo*, UInt32)
-    release : Proc(IDBInfo*, UInt32)
-    get_keywords : Proc(IDBInfo*, LibC::LPWSTR*, HRESULT)
-    get_literal_info : Proc(IDBInfo*, UInt32, UInt32*, UInt32*, DBLITERALINFO**, UInt16**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_keywords : UInt64
+    get_literal_info : UInt64
   end
 
   IDBInfo_GUID = "0c733a89-2a1c-11ce-ade5-00aa0044773d"
@@ -6076,13 +6076,13 @@ lib LibWin32
   end
 
   struct IDBDataSourceAdminVTbl
-    query_interface : Proc(IDBDataSourceAdmin*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDBDataSourceAdmin*, UInt32)
-    release : Proc(IDBDataSourceAdmin*, UInt32)
-    create_data_source : Proc(IDBDataSourceAdmin*, UInt32, DBPROPSET*, IUnknown, Guid*, IUnknown*, HRESULT)
-    destroy_data_source : Proc(IDBDataSourceAdmin*, HRESULT)
-    get_creation_properties : Proc(IDBDataSourceAdmin*, UInt32, DBPROPIDSET*, UInt32*, DBPROPINFOSET**, UInt16**, HRESULT)
-    modify_data_source : Proc(IDBDataSourceAdmin*, UInt32, DBPROPSET*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_data_source : UInt64
+    destroy_data_source : UInt64
+    get_creation_properties : UInt64
+    modify_data_source : UInt64
   end
 
   IDBDataSourceAdmin_GUID = "0c733a7a-2a1c-11ce-ade5-00aa0044773d"
@@ -6092,12 +6092,12 @@ lib LibWin32
   end
 
   struct IDBAsynchNotifyVTbl
-    query_interface : Proc(IDBAsynchNotify*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDBAsynchNotify*, UInt32)
-    release : Proc(IDBAsynchNotify*, UInt32)
-    on_low_resource : Proc(IDBAsynchNotify*, LibC::UINT_PTR, HRESULT)
-    on_progress : Proc(IDBAsynchNotify*, LibC::UINT_PTR, UInt32, LibC::UINT_PTR, LibC::UINT_PTR, UInt32, LibC::LPWSTR, HRESULT)
-    on_stop : Proc(IDBAsynchNotify*, LibC::UINT_PTR, UInt32, HRESULT, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_low_resource : UInt64
+    on_progress : UInt64
+    on_stop : UInt64
   end
 
   IDBAsynchNotify_GUID = "0c733a96-2a1c-11ce-ade5-00aa0044773d"
@@ -6107,11 +6107,11 @@ lib LibWin32
   end
 
   struct IDBAsynchStatusVTbl
-    query_interface : Proc(IDBAsynchStatus*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDBAsynchStatus*, UInt32)
-    release : Proc(IDBAsynchStatus*, UInt32)
-    abort : Proc(IDBAsynchStatus*, LibC::UINT_PTR, UInt32, HRESULT)
-    get_status : Proc(IDBAsynchStatus*, LibC::UINT_PTR, UInt32, LibC::UINT_PTR*, LibC::UINT_PTR*, UInt32*, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    abort : UInt64
+    get_status : UInt64
   end
 
   IDBAsynchStatus_GUID = "0c733a95-2a1c-11ce-ade5-00aa0044773d"
@@ -6121,11 +6121,11 @@ lib LibWin32
   end
 
   struct ISessionPropertiesVTbl
-    query_interface : Proc(ISessionProperties*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISessionProperties*, UInt32)
-    release : Proc(ISessionProperties*, UInt32)
-    get_properties : Proc(ISessionProperties*, UInt32, DBPROPIDSET*, UInt32*, DBPROPSET**, HRESULT)
-    set_properties : Proc(ISessionProperties*, UInt32, DBPROPSET*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties : UInt64
+    set_properties : UInt64
   end
 
   ISessionProperties_GUID = "0c733a85-2a1c-11ce-ade5-00aa0044773d"
@@ -6135,11 +6135,11 @@ lib LibWin32
   end
 
   struct IIndexDefinitionVTbl
-    query_interface : Proc(IIndexDefinition*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IIndexDefinition*, UInt32)
-    release : Proc(IIndexDefinition*, UInt32)
-    create_index : Proc(IIndexDefinition*, DBID*, DBID*, LibC::UINT_PTR, DBINDEXCOLUMNDESC*, UInt32, DBPROPSET*, DBID**, HRESULT)
-    drop_index : Proc(IIndexDefinition*, DBID*, DBID*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_index : UInt64
+    drop_index : UInt64
   end
 
   IIndexDefinition_GUID = "0c733a68-2a1c-11ce-ade5-00aa0044773d"
@@ -6149,13 +6149,13 @@ lib LibWin32
   end
 
   struct ITableDefinitionVTbl
-    query_interface : Proc(ITableDefinition*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITableDefinition*, UInt32)
-    release : Proc(ITableDefinition*, UInt32)
-    create_table : Proc(ITableDefinition*, IUnknown, DBID*, LibC::UINT_PTR, DBCOLUMNDESC*, Guid*, UInt32, DBPROPSET*, DBID**, IUnknown*, HRESULT)
-    drop_table : Proc(ITableDefinition*, DBID*, HRESULT)
-    add_column : Proc(ITableDefinition*, DBID*, DBCOLUMNDESC*, DBID**, HRESULT)
-    drop_column : Proc(ITableDefinition*, DBID*, DBID*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_table : UInt64
+    drop_table : UInt64
+    add_column : UInt64
+    drop_column : UInt64
   end
 
   ITableDefinition_GUID = "0c733a86-2a1c-11ce-ade5-00aa0044773d"
@@ -6165,10 +6165,10 @@ lib LibWin32
   end
 
   struct IOpenRowsetVTbl
-    query_interface : Proc(IOpenRowset*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IOpenRowset*, UInt32)
-    release : Proc(IOpenRowset*, UInt32)
-    open_rowset : Proc(IOpenRowset*, IUnknown, DBID*, DBID*, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    open_rowset : UInt64
   end
 
   IOpenRowset_GUID = "0c733a69-2a1c-11ce-ade5-00aa0044773d"
@@ -6178,11 +6178,11 @@ lib LibWin32
   end
 
   struct IDBSchemaRowsetVTbl
-    query_interface : Proc(IDBSchemaRowset*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDBSchemaRowset*, UInt32)
-    release : Proc(IDBSchemaRowset*, UInt32)
-    get_rowset : Proc(IDBSchemaRowset*, IUnknown, Guid*, UInt32, VARIANT*, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)
-    get_schemas : Proc(IDBSchemaRowset*, UInt32*, Guid**, UInt32**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_rowset : UInt64
+    get_schemas : UInt64
   end
 
   IDBSchemaRowset_GUID = "0c733a7b-2a1c-11ce-ade5-00aa0044773d"
@@ -6192,14 +6192,14 @@ lib LibWin32
   end
 
   struct IMDDatasetVTbl
-    query_interface : Proc(IMDDataset*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDDataset*, UInt32)
-    release : Proc(IMDDataset*, UInt32)
-    free_axis_info : Proc(IMDDataset*, LibC::UINT_PTR, MDAXISINFO*, HRESULT)
-    get_axis_info : Proc(IMDDataset*, LibC::UINT_PTR*, MDAXISINFO**, HRESULT)
-    get_axis_rowset : Proc(IMDDataset*, IUnknown, LibC::UINT_PTR, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)
-    get_cell_data : Proc(IMDDataset*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)
-    get_specification : Proc(IMDDataset*, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    free_axis_info : UInt64
+    get_axis_info : UInt64
+    get_axis_rowset : UInt64
+    get_cell_data : UInt64
+    get_specification : UInt64
   end
 
   IMDDataset_GUID = "a07cccd1-8148-11d0-87bb-00c04fc33942"
@@ -6209,11 +6209,11 @@ lib LibWin32
   end
 
   struct IMDFindVTbl
-    query_interface : Proc(IMDFind*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDFind*, UInt32)
-    release : Proc(IMDFind*, UInt32)
-    find_cell : Proc(IMDFind*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::LPWSTR*, LibC::UINT_PTR*, HRESULT)
-    find_tuple : Proc(IMDFind*, UInt32, LibC::UINT_PTR, LibC::UINT_PTR, LibC::LPWSTR*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    find_cell : UInt64
+    find_tuple : UInt64
   end
 
   IMDFind_GUID = "a07cccd2-8148-11d0-87bb-00c04fc33942"
@@ -6223,10 +6223,10 @@ lib LibWin32
   end
 
   struct IMDRangeRowsetVTbl
-    query_interface : Proc(IMDRangeRowset*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDRangeRowset*, UInt32)
-    release : Proc(IMDRangeRowset*, UInt32)
-    get_range_rowset : Proc(IMDRangeRowset*, IUnknown, LibC::UINT_PTR, LibC::UINT_PTR, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_range_rowset : UInt64
   end
 
   IMDRangeRowset_GUID = "0c733aa0-2a1c-11ce-ade5-00aa0044773d"
@@ -6236,11 +6236,11 @@ lib LibWin32
   end
 
   struct IAlterTableVTbl
-    query_interface : Proc(IAlterTable*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAlterTable*, UInt32)
-    release : Proc(IAlterTable*, UInt32)
-    alter_column : Proc(IAlterTable*, DBID*, DBID*, UInt32, DBCOLUMNDESC*, HRESULT)
-    alter_table : Proc(IAlterTable*, DBID*, DBID*, UInt32, DBPROPSET*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    alter_column : UInt64
+    alter_table : UInt64
   end
 
   IAlterTable_GUID = "0c733aa5-2a1c-11ce-ade5-00aa0044773d"
@@ -6250,10 +6250,10 @@ lib LibWin32
   end
 
   struct IAlterIndexVTbl
-    query_interface : Proc(IAlterIndex*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAlterIndex*, UInt32)
-    release : Proc(IAlterIndex*, UInt32)
-    alter_index : Proc(IAlterIndex*, DBID*, DBID*, DBID*, UInt32, DBPROPSET*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    alter_index : UInt64
   end
 
   IAlterIndex_GUID = "0c733aa6-2a1c-11ce-ade5-00aa0044773d"
@@ -6263,10 +6263,10 @@ lib LibWin32
   end
 
   struct IRowsetChapterMemberVTbl
-    query_interface : Proc(IRowsetChapterMember*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetChapterMember*, UInt32)
-    release : Proc(IRowsetChapterMember*, UInt32)
-    is_row_in_chapter : Proc(IRowsetChapterMember*, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    is_row_in_chapter : UInt64
   end
 
   IRowsetChapterMember_GUID = "0c733aa8-2a1c-11ce-ade5-00aa0044773d"
@@ -6276,13 +6276,13 @@ lib LibWin32
   end
 
   struct ICommandPersistVTbl
-    query_interface : Proc(ICommandPersist*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICommandPersist*, UInt32)
-    release : Proc(ICommandPersist*, UInt32)
-    delete_command : Proc(ICommandPersist*, DBID*, HRESULT)
-    get_current_command : Proc(ICommandPersist*, DBID**, HRESULT)
-    load_command : Proc(ICommandPersist*, DBID*, UInt32, HRESULT)
-    save_command : Proc(ICommandPersist*, DBID*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    delete_command : UInt64
+    get_current_command : UInt64
+    load_command : UInt64
+    save_command : UInt64
   end
 
   ICommandPersist_GUID = "0c733aa7-2a1c-11ce-ade5-00aa0044773d"
@@ -6292,11 +6292,11 @@ lib LibWin32
   end
 
   struct IRowsetRefreshVTbl
-    query_interface : Proc(IRowsetRefresh*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetRefresh*, UInt32)
-    release : Proc(IRowsetRefresh*, UInt32)
-    refresh_visible_data : Proc(IRowsetRefresh*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, LibC::BOOL, LibC::UINT_PTR*, LibC::UINT_PTR**, UInt32**, HRESULT)
-    get_last_visible_data : Proc(IRowsetRefresh*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    refresh_visible_data : UInt64
+    get_last_visible_data : UInt64
   end
 
   IRowsetRefresh_GUID = "0c733aa9-2a1c-11ce-ade5-00aa0044773d"
@@ -6306,10 +6306,10 @@ lib LibWin32
   end
 
   struct IParentRowsetVTbl
-    query_interface : Proc(IParentRowset*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IParentRowset*, UInt32)
-    release : Proc(IParentRowset*, UInt32)
-    get_child_rowset : Proc(IParentRowset*, IUnknown, LibC::UINT_PTR, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_child_rowset : UInt64
   end
 
   IParentRowset_GUID = "0c733aaa-2a1c-11ce-ade5-00aa0044773d"
@@ -6319,15 +6319,15 @@ lib LibWin32
   end
 
   struct IErrorRecordsVTbl
-    query_interface : Proc(IErrorRecords*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IErrorRecords*, UInt32)
-    release : Proc(IErrorRecords*, UInt32)
-    add_error_record : Proc(IErrorRecords*, ERRORINFO*, UInt32, DISPPARAMS*, IUnknown, UInt32, HRESULT)
-    get_basic_error_info : Proc(IErrorRecords*, UInt32, ERRORINFO*, HRESULT)
-    get_custom_error_object : Proc(IErrorRecords*, UInt32, Guid*, IUnknown*, HRESULT)
-    get_error_info : Proc(IErrorRecords*, UInt32, UInt32, IErrorInfo*, HRESULT)
-    get_error_parameters : Proc(IErrorRecords*, UInt32, DISPPARAMS*, HRESULT)
-    get_record_count : Proc(IErrorRecords*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_error_record : UInt64
+    get_basic_error_info : UInt64
+    get_custom_error_object : UInt64
+    get_error_info : UInt64
+    get_error_parameters : UInt64
+    get_record_count : UInt64
   end
 
   IErrorRecords_GUID = "0c733a67-2a1c-11ce-ade5-00aa0044773d"
@@ -6337,12 +6337,12 @@ lib LibWin32
   end
 
   struct IErrorLookupVTbl
-    query_interface : Proc(IErrorLookup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IErrorLookup*, UInt32)
-    release : Proc(IErrorLookup*, UInt32)
-    get_error_description : Proc(IErrorLookup*, HRESULT, UInt32, DISPPARAMS*, UInt32, UInt8**, UInt8**, HRESULT)
-    get_help_info : Proc(IErrorLookup*, HRESULT, UInt32, UInt32, UInt8**, UInt32*, HRESULT)
-    release_errors : Proc(IErrorLookup*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_error_description : UInt64
+    get_help_info : UInt64
+    release_errors : UInt64
   end
 
   IErrorLookup_GUID = "0c733a66-2a1c-11ce-ade5-00aa0044773d"
@@ -6352,10 +6352,10 @@ lib LibWin32
   end
 
   struct ISQLErrorInfoVTbl
-    query_interface : Proc(ISQLErrorInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISQLErrorInfo*, UInt32)
-    release : Proc(ISQLErrorInfo*, UInt32)
-    get_sql_info : Proc(ISQLErrorInfo*, UInt8**, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_sql_info : UInt64
   end
 
   ISQLErrorInfo_GUID = "0c733a74-2a1c-11ce-ade5-00aa0044773d"
@@ -6365,10 +6365,10 @@ lib LibWin32
   end
 
   struct IGetDataSourceVTbl
-    query_interface : Proc(IGetDataSource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGetDataSource*, UInt32)
-    release : Proc(IGetDataSource*, UInt32)
-    get_data_source : Proc(IGetDataSource*, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_data_source : UInt64
   end
 
   IGetDataSource_GUID = "0c733a75-2a1c-11ce-ade5-00aa0044773d"
@@ -6378,14 +6378,14 @@ lib LibWin32
   end
 
   struct ITransactionLocalVTbl
-    query_interface : Proc(ITransactionLocal*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITransactionLocal*, UInt32)
-    release : Proc(ITransactionLocal*, UInt32)
-    commit : Proc(ITransactionLocal*, LibC::BOOL, UInt32, UInt32, HRESULT)
-    abort : Proc(ITransactionLocal*, BOID*, LibC::BOOL, LibC::BOOL, HRESULT)
-    get_transaction_info : Proc(ITransactionLocal*, XACTTRANSINFO*, HRESULT)
-    get_options_object : Proc(ITransactionLocal*, ITransactionOptions*, HRESULT)
-    start_transaction : Proc(ITransactionLocal*, Int32, UInt32, ITransactionOptions, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    commit : UInt64
+    abort : UInt64
+    get_transaction_info : UInt64
+    get_options_object : UInt64
+    start_transaction : UInt64
   end
 
   ITransactionLocal_GUID = "0c733a5f-2a1c-11ce-ade5-00aa0044773d"
@@ -6395,11 +6395,11 @@ lib LibWin32
   end
 
   struct ITransactionJoinVTbl
-    query_interface : Proc(ITransactionJoin*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITransactionJoin*, UInt32)
-    release : Proc(ITransactionJoin*, UInt32)
-    get_options_object : Proc(ITransactionJoin*, ITransactionOptions*, HRESULT)
-    join_transaction : Proc(ITransactionJoin*, IUnknown, Int32, UInt32, ITransactionOptions, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_options_object : UInt64
+    join_transaction : UInt64
   end
 
   ITransactionJoin_GUID = "0c733a5e-2a1c-11ce-ade5-00aa0044773d"
@@ -6409,10 +6409,10 @@ lib LibWin32
   end
 
   struct ITransactionObjectVTbl
-    query_interface : Proc(ITransactionObject*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITransactionObject*, UInt32)
-    release : Proc(ITransactionObject*, UInt32)
-    get_transaction_object : Proc(ITransactionObject*, UInt32, ITransaction*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_transaction_object : UInt64
   end
 
   ITransactionObject_GUID = "0c733a60-2a1c-11ce-ade5-00aa0044773d"
@@ -6422,14 +6422,14 @@ lib LibWin32
   end
 
   struct ITrusteeAdminVTbl
-    query_interface : Proc(ITrusteeAdmin*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITrusteeAdmin*, UInt32)
-    release : Proc(ITrusteeAdmin*, UInt32)
-    compare_trustees : Proc(ITrusteeAdmin*, TRUSTEE_W*, TRUSTEE_W*, HRESULT)
-    create_trustee : Proc(ITrusteeAdmin*, TRUSTEE_W*, UInt32, DBPROPSET*, HRESULT)
-    delete_trustee : Proc(ITrusteeAdmin*, TRUSTEE_W*, HRESULT)
-    set_trustee_properties : Proc(ITrusteeAdmin*, TRUSTEE_W*, UInt32, DBPROPSET*, HRESULT)
-    get_trustee_properties : Proc(ITrusteeAdmin*, TRUSTEE_W*, UInt32, DBPROPIDSET*, UInt32*, DBPROPSET**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    compare_trustees : UInt64
+    create_trustee : UInt64
+    delete_trustee : UInt64
+    set_trustee_properties : UInt64
+    get_trustee_properties : UInt64
   end
 
   ITrusteeAdmin_GUID = "0c733aa1-2a1c-11ce-ade5-00aa0044773d"
@@ -6439,14 +6439,14 @@ lib LibWin32
   end
 
   struct ITrusteeGroupAdminVTbl
-    query_interface : Proc(ITrusteeGroupAdmin*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITrusteeGroupAdmin*, UInt32)
-    release : Proc(ITrusteeGroupAdmin*, UInt32)
-    add_member : Proc(ITrusteeGroupAdmin*, TRUSTEE_W*, TRUSTEE_W*, HRESULT)
-    delete_member : Proc(ITrusteeGroupAdmin*, TRUSTEE_W*, TRUSTEE_W*, HRESULT)
-    is_member : Proc(ITrusteeGroupAdmin*, TRUSTEE_W*, TRUSTEE_W*, LibC::BOOL*, HRESULT)
-    get_members : Proc(ITrusteeGroupAdmin*, TRUSTEE_W*, UInt32*, TRUSTEE_W**, HRESULT)
-    get_memberships : Proc(ITrusteeGroupAdmin*, TRUSTEE_W*, UInt32*, TRUSTEE_W**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_member : UInt64
+    delete_member : UInt64
+    is_member : UInt64
+    get_members : UInt64
+    get_memberships : UInt64
   end
 
   ITrusteeGroupAdmin_GUID = "0c733aa2-2a1c-11ce-ade5-00aa0044773d"
@@ -6456,14 +6456,14 @@ lib LibWin32
   end
 
   struct IObjectAccessControlVTbl
-    query_interface : Proc(IObjectAccessControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IObjectAccessControl*, UInt32)
-    release : Proc(IObjectAccessControl*, UInt32)
-    get_object_access_rights : Proc(IObjectAccessControl*, SEC_OBJECT*, UInt32*, EXPLICIT_ACCESS_W**, HRESULT)
-    get_object_owner : Proc(IObjectAccessControl*, SEC_OBJECT*, TRUSTEE_W**, HRESULT)
-    is_object_access_allowed : Proc(IObjectAccessControl*, SEC_OBJECT*, EXPLICIT_ACCESS_W*, LibC::BOOL*, HRESULT)
-    set_object_access_rights : Proc(IObjectAccessControl*, SEC_OBJECT*, UInt32, EXPLICIT_ACCESS_W*, HRESULT)
-    set_object_owner : Proc(IObjectAccessControl*, SEC_OBJECT*, TRUSTEE_W*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_object_access_rights : UInt64
+    get_object_owner : UInt64
+    is_object_access_allowed : UInt64
+    set_object_access_rights : UInt64
+    set_object_owner : UInt64
   end
 
   IObjectAccessControl_GUID = "0c733aa3-2a1c-11ce-ade5-00aa0044773d"
@@ -6473,12 +6473,12 @@ lib LibWin32
   end
 
   struct ISecurityInfoVTbl
-    query_interface : Proc(ISecurityInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISecurityInfo*, UInt32)
-    release : Proc(ISecurityInfo*, UInt32)
-    get_current_trustee : Proc(ISecurityInfo*, TRUSTEE_W**, HRESULT)
-    get_object_types : Proc(ISecurityInfo*, UInt32*, Guid**, HRESULT)
-    get_permissions : Proc(ISecurityInfo*, Guid, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_current_trustee : UInt64
+    get_object_types : UInt64
+    get_permissions : UInt64
   end
 
   ISecurityInfo_GUID = "0c733aa4-2a1c-11ce-ade5-00aa0044773d"
@@ -6488,14 +6488,14 @@ lib LibWin32
   end
 
   struct ITableCreationVTbl
-    query_interface : Proc(ITableCreation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITableCreation*, UInt32)
-    release : Proc(ITableCreation*, UInt32)
-    create_table : Proc(ITableCreation*, IUnknown, DBID*, LibC::UINT_PTR, DBCOLUMNDESC*, Guid*, UInt32, DBPROPSET*, DBID**, IUnknown*, HRESULT)
-    drop_table : Proc(ITableCreation*, DBID*, HRESULT)
-    add_column : Proc(ITableCreation*, DBID*, DBCOLUMNDESC*, DBID**, HRESULT)
-    drop_column : Proc(ITableCreation*, DBID*, DBID*, HRESULT)
-    get_table_definition : Proc(ITableCreation*, DBID*, LibC::UINT_PTR*, DBCOLUMNDESC**, UInt32*, DBPROPSET**, UInt32*, DBCONSTRAINTDESC**, UInt16**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_table : UInt64
+    drop_table : UInt64
+    add_column : UInt64
+    drop_column : UInt64
+    get_table_definition : UInt64
   end
 
   ITableCreation_GUID = "0c733abc-2a1c-11ce-ade5-00aa0044773d"
@@ -6505,17 +6505,17 @@ lib LibWin32
   end
 
   struct ITableDefinitionWithConstraintsVTbl
-    query_interface : Proc(ITableDefinitionWithConstraints*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITableDefinitionWithConstraints*, UInt32)
-    release : Proc(ITableDefinitionWithConstraints*, UInt32)
-    create_table : Proc(ITableDefinitionWithConstraints*, IUnknown, DBID*, LibC::UINT_PTR, DBCOLUMNDESC*, Guid*, UInt32, DBPROPSET*, DBID**, IUnknown*, HRESULT)
-    drop_table : Proc(ITableDefinitionWithConstraints*, DBID*, HRESULT)
-    add_column : Proc(ITableDefinitionWithConstraints*, DBID*, DBCOLUMNDESC*, DBID**, HRESULT)
-    drop_column : Proc(ITableDefinitionWithConstraints*, DBID*, DBID*, HRESULT)
-    get_table_definition : Proc(ITableDefinitionWithConstraints*, DBID*, LibC::UINT_PTR*, DBCOLUMNDESC**, UInt32*, DBPROPSET**, UInt32*, DBCONSTRAINTDESC**, UInt16**, HRESULT)
-    add_constraint : Proc(ITableDefinitionWithConstraints*, DBID*, DBCONSTRAINTDESC*, HRESULT)
-    create_table_with_constraints : Proc(ITableDefinitionWithConstraints*, IUnknown, DBID*, LibC::UINT_PTR, DBCOLUMNDESC*, UInt32, DBCONSTRAINTDESC*, Guid*, UInt32, DBPROPSET*, DBID**, IUnknown*, HRESULT)
-    drop_constraint : Proc(ITableDefinitionWithConstraints*, DBID*, DBID*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_table : UInt64
+    drop_table : UInt64
+    add_column : UInt64
+    drop_column : UInt64
+    get_table_definition : UInt64
+    add_constraint : UInt64
+    create_table_with_constraints : UInt64
+    drop_constraint : UInt64
   end
 
   ITableDefinitionWithConstraints_GUID = "0c733aab-2a1c-11ce-ade5-00aa0044773d"
@@ -6525,12 +6525,12 @@ lib LibWin32
   end
 
   struct IRowVTbl
-    query_interface : Proc(IRow*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRow*, UInt32)
-    release : Proc(IRow*, UInt32)
-    get_columns : Proc(IRow*, LibC::UINT_PTR, DBCOLUMNACCESS*, HRESULT)
-    get_source_rowset : Proc(IRow*, Guid*, IUnknown*, LibC::UINT_PTR*, HRESULT)
-    open : Proc(IRow*, IUnknown, DBID*, Guid*, UInt32, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_columns : UInt64
+    get_source_rowset : UInt64
+    open : UInt64
   end
 
   IRow_GUID = "0c733ab4-2a1c-11ce-ade5-00aa0044773d"
@@ -6540,10 +6540,10 @@ lib LibWin32
   end
 
   struct IRowChangeVTbl
-    query_interface : Proc(IRowChange*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowChange*, UInt32)
-    release : Proc(IRowChange*, UInt32)
-    set_columns : Proc(IRowChange*, LibC::UINT_PTR, DBCOLUMNACCESS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_columns : UInt64
   end
 
   IRowChange_GUID = "0c733ab5-2a1c-11ce-ade5-00aa0044773d"
@@ -6553,12 +6553,12 @@ lib LibWin32
   end
 
   struct IRowSchemaChangeVTbl
-    query_interface : Proc(IRowSchemaChange*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowSchemaChange*, UInt32)
-    release : Proc(IRowSchemaChange*, UInt32)
-    set_columns : Proc(IRowSchemaChange*, LibC::UINT_PTR, DBCOLUMNACCESS*, HRESULT)
-    delete_columns : Proc(IRowSchemaChange*, LibC::UINT_PTR, DBID*, UInt32*, HRESULT)
-    add_columns : Proc(IRowSchemaChange*, LibC::UINT_PTR, DBCOLUMNINFO*, DBCOLUMNACCESS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_columns : UInt64
+    delete_columns : UInt64
+    add_columns : UInt64
   end
 
   IRowSchemaChange_GUID = "0c733aae-2a1c-11ce-ade5-00aa0044773d"
@@ -6568,11 +6568,11 @@ lib LibWin32
   end
 
   struct IGetRowVTbl
-    query_interface : Proc(IGetRow*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGetRow*, UInt32)
-    release : Proc(IGetRow*, UInt32)
-    get_row_from_hrow : Proc(IGetRow*, IUnknown, LibC::UINT_PTR, Guid*, IUnknown*, HRESULT)
-    get_url_from_hrow : Proc(IGetRow*, LibC::UINT_PTR, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_row_from_hrow : UInt64
+    get_url_from_hrow : UInt64
   end
 
   IGetRow_GUID = "0c733aaf-2a1c-11ce-ade5-00aa0044773d"
@@ -6582,10 +6582,10 @@ lib LibWin32
   end
 
   struct IBindResourceVTbl
-    query_interface : Proc(IBindResource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBindResource*, UInt32)
-    release : Proc(IBindResource*, UInt32)
-    bind : Proc(IBindResource*, IUnknown, LibC::LPWSTR, UInt32, Guid*, Guid*, IAuthenticate, DBIMPLICITSESSION*, UInt32*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    bind : UInt64
   end
 
   IBindResource_GUID = "0c733ab1-2a1c-11ce-ade5-00aa0044773d"
@@ -6595,14 +6595,14 @@ lib LibWin32
   end
 
   struct IScopedOperationsVTbl
-    query_interface : Proc(IScopedOperations*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IScopedOperations*, UInt32)
-    release : Proc(IScopedOperations*, UInt32)
-    bind : Proc(IScopedOperations*, IUnknown, LibC::LPWSTR, UInt32, Guid*, Guid*, IAuthenticate, DBIMPLICITSESSION*, UInt32*, IUnknown*, HRESULT)
-    copy : Proc(IScopedOperations*, LibC::UINT_PTR, LibC::LPWSTR*, LibC::LPWSTR*, UInt32, IAuthenticate, UInt32*, LibC::LPWSTR*, UInt16**, HRESULT)
-    move : Proc(IScopedOperations*, LibC::UINT_PTR, LibC::LPWSTR*, LibC::LPWSTR*, UInt32, IAuthenticate, UInt32*, LibC::LPWSTR*, UInt16**, HRESULT)
-    delete : Proc(IScopedOperations*, LibC::UINT_PTR, LibC::LPWSTR*, UInt32, UInt32*, HRESULT)
-    open_rowset : Proc(IScopedOperations*, IUnknown, DBID*, DBID*, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    bind : UInt64
+    copy : UInt64
+    move : UInt64
+    delete : UInt64
+    open_rowset : UInt64
   end
 
   IScopedOperations_GUID = "0c733ab0-2a1c-11ce-ade5-00aa0044773d"
@@ -6612,10 +6612,10 @@ lib LibWin32
   end
 
   struct ICreateRowVTbl
-    query_interface : Proc(ICreateRow*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICreateRow*, UInt32)
-    release : Proc(ICreateRow*, UInt32)
-    create_row : Proc(ICreateRow*, IUnknown, LibC::LPWSTR, UInt32, Guid*, Guid*, IAuthenticate, DBIMPLICITSESSION*, UInt32*, LibC::LPWSTR*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_row : UInt64
   end
 
   ICreateRow_GUID = "0c733ab2-2a1c-11ce-ade5-00aa0044773d"
@@ -6625,13 +6625,13 @@ lib LibWin32
   end
 
   struct IDBBinderPropertiesVTbl
-    query_interface : Proc(IDBBinderProperties*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDBBinderProperties*, UInt32)
-    release : Proc(IDBBinderProperties*, UInt32)
-    get_properties : Proc(IDBBinderProperties*, UInt32, DBPROPIDSET*, UInt32*, DBPROPSET**, HRESULT)
-    get_property_info : Proc(IDBBinderProperties*, UInt32, DBPROPIDSET*, UInt32*, DBPROPINFOSET**, UInt16**, HRESULT)
-    set_properties : Proc(IDBBinderProperties*, UInt32, DBPROPSET*, HRESULT)
-    reset : Proc(IDBBinderProperties*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_properties : UInt64
+    get_property_info : UInt64
+    set_properties : UInt64
+    reset : UInt64
   end
 
   IDBBinderProperties_GUID = "0c733ab3-2a1c-11ce-ade5-00aa0044773d"
@@ -6641,12 +6641,12 @@ lib LibWin32
   end
 
   struct IColumnsInfo2VTbl
-    query_interface : Proc(IColumnsInfo2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IColumnsInfo2*, UInt32)
-    release : Proc(IColumnsInfo2*, UInt32)
-    get_column_info : Proc(IColumnsInfo2*, LibC::UINT_PTR*, DBCOLUMNINFO**, UInt16**, HRESULT)
-    map_column_i_ds : Proc(IColumnsInfo2*, LibC::UINT_PTR, DBID*, LibC::UINT_PTR*, HRESULT)
-    get_restricted_column_info : Proc(IColumnsInfo2*, LibC::UINT_PTR, DBID*, UInt32, LibC::UINT_PTR*, DBID**, DBCOLUMNINFO**, UInt16**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_column_info : UInt64
+    map_column_i_ds : UInt64
+    get_restricted_column_info : UInt64
   end
 
   IColumnsInfo2_GUID = "0c733ab8-2a1c-11ce-ade5-00aa0044773d"
@@ -6656,12 +6656,12 @@ lib LibWin32
   end
 
   struct IRegisterProviderVTbl
-    query_interface : Proc(IRegisterProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRegisterProvider*, UInt32)
-    release : Proc(IRegisterProvider*, UInt32)
-    get_url_mapping : Proc(IRegisterProvider*, LibC::LPWSTR, LibC::UINT_PTR, Guid*, HRESULT)
-    set_url_mapping : Proc(IRegisterProvider*, LibC::LPWSTR, LibC::UINT_PTR, Guid*, HRESULT)
-    unregister_provider : Proc(IRegisterProvider*, LibC::LPWSTR, LibC::UINT_PTR, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_url_mapping : UInt64
+    set_url_mapping : UInt64
+    unregister_provider : UInt64
   end
 
   IRegisterProvider_GUID = "0c733ab9-2a1c-11ce-ade5-00aa0044773d"
@@ -6671,10 +6671,10 @@ lib LibWin32
   end
 
   struct IGetSessionVTbl
-    query_interface : Proc(IGetSession*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGetSession*, UInt32)
-    release : Proc(IGetSession*, UInt32)
-    get_session : Proc(IGetSession*, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_session : UInt64
   end
 
   IGetSession_GUID = "0c733aba-2a1c-11ce-ade5-00aa0044773d"
@@ -6684,10 +6684,10 @@ lib LibWin32
   end
 
   struct IGetSourceRowVTbl
-    query_interface : Proc(IGetSourceRow*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGetSourceRow*, UInt32)
-    release : Proc(IGetSourceRow*, UInt32)
-    get_source_row : Proc(IGetSourceRow*, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_source_row : UInt64
   end
 
   IGetSourceRow_GUID = "0c733abb-2a1c-11ce-ade5-00aa0044773d"
@@ -6697,14 +6697,14 @@ lib LibWin32
   end
 
   struct IRowsetCurrentIndexVTbl
-    query_interface : Proc(IRowsetCurrentIndex*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetCurrentIndex*, UInt32)
-    release : Proc(IRowsetCurrentIndex*, UInt32)
-    get_index_info : Proc(IRowsetCurrentIndex*, LibC::UINT_PTR*, DBINDEXCOLUMNDESC**, UInt32*, DBPROPSET**, HRESULT)
-    seek : Proc(IRowsetCurrentIndex*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, UInt32, HRESULT)
-    set_range : Proc(IRowsetCurrentIndex*, LibC::UINT_PTR, LibC::UINT_PTR, Void*, LibC::UINT_PTR, Void*, UInt32, HRESULT)
-    get_index : Proc(IRowsetCurrentIndex*, DBID**, HRESULT)
-    set_index : Proc(IRowsetCurrentIndex*, DBID*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_index_info : UInt64
+    seek : UInt64
+    set_range : UInt64
+    get_index : UInt64
+    set_index : UInt64
   end
 
   IRowsetCurrentIndex_GUID = "0c733abd-2a1c-11ce-ade5-00aa0044773d"
@@ -6714,11 +6714,11 @@ lib LibWin32
   end
 
   struct ICommandStreamVTbl
-    query_interface : Proc(ICommandStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICommandStream*, UInt32)
-    release : Proc(ICommandStream*, UInt32)
-    get_command_stream : Proc(ICommandStream*, Guid*, Guid*, IUnknown*, HRESULT)
-    set_command_stream : Proc(ICommandStream*, Guid*, Guid*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_command_stream : UInt64
+    set_command_stream : UInt64
   end
 
   ICommandStream_GUID = "0c733abf-2a1c-11ce-ade5-00aa0044773d"
@@ -6728,10 +6728,10 @@ lib LibWin32
   end
 
   struct IRowsetBookmarkVTbl
-    query_interface : Proc(IRowsetBookmark*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetBookmark*, UInt32)
-    release : Proc(IRowsetBookmark*, UInt32)
-    position_on_bookmark : Proc(IRowsetBookmark*, LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    position_on_bookmark : UInt64
   end
 
   IRowsetBookmark_GUID = "0c733ac2-2a1c-11ce-ade5-00aa0044773d"
@@ -6741,17 +6741,17 @@ lib LibWin32
   end
 
   struct IQueryParserVTbl
-    query_interface : Proc(IQueryParser*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IQueryParser*, UInt32)
-    release : Proc(IQueryParser*, UInt32)
-    parse : Proc(IQueryParser*, LibC::LPWSTR, IEnumUnknown, IQuerySolution*, HRESULT)
-    set_option : Proc(IQueryParser*, STRUCTURED_QUERY_SINGLE_OPTION, PROPVARIANT*, HRESULT)
-    get_option : Proc(IQueryParser*, STRUCTURED_QUERY_SINGLE_OPTION, PROPVARIANT*, HRESULT)
-    set_multi_option : Proc(IQueryParser*, STRUCTURED_QUERY_MULTIOPTION, LibC::LPWSTR, PROPVARIANT*, HRESULT)
-    get_schema_provider : Proc(IQueryParser*, ISchemaProvider*, HRESULT)
-    restate_to_string : Proc(IQueryParser*, ICondition, LibC::BOOL, LibC::LPWSTR*, HRESULT)
-    parse_property_value : Proc(IQueryParser*, LibC::LPWSTR, LibC::LPWSTR, IQuerySolution*, HRESULT)
-    restate_property_value_to_string : Proc(IQueryParser*, ICondition, LibC::BOOL, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    parse : UInt64
+    set_option : UInt64
+    get_option : UInt64
+    set_multi_option : UInt64
+    get_schema_provider : UInt64
+    restate_to_string : UInt64
+    parse_property_value : UInt64
+    restate_property_value_to_string : UInt64
   end
 
   IQueryParser_GUID = "2ebdee67-3505-43f8-9946-ea44abc8e5b0"
@@ -6761,13 +6761,13 @@ lib LibWin32
   end
 
   struct IConditionFactoryVTbl
-    query_interface : Proc(IConditionFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IConditionFactory*, UInt32)
-    release : Proc(IConditionFactory*, UInt32)
-    make_not : Proc(IConditionFactory*, ICondition, LibC::BOOL, ICondition*, HRESULT)
-    make_and_or : Proc(IConditionFactory*, CONDITION_TYPE, IEnumUnknown, LibC::BOOL, ICondition*, HRESULT)
-    make_leaf : Proc(IConditionFactory*, LibC::LPWSTR, CONDITION_OPERATION, LibC::LPWSTR, PROPVARIANT*, IRichChunk, IRichChunk, IRichChunk, LibC::BOOL, ICondition*, HRESULT)
-    resolve : Proc(IConditionFactory*, ICondition, STRUCTURED_QUERY_RESOLVE_OPTION, SYSTEMTIME*, ICondition*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    make_not : UInt64
+    make_and_or : UInt64
+    make_leaf : UInt64
+    resolve : UInt64
   end
 
   IConditionFactory_GUID = "a5efe073-b16f-474f-9f3e-9f8b497a3e08"
@@ -6777,16 +6777,16 @@ lib LibWin32
   end
 
   struct IQuerySolutionVTbl
-    query_interface : Proc(IQuerySolution*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IQuerySolution*, UInt32)
-    release : Proc(IQuerySolution*, UInt32)
-    make_not : Proc(IQuerySolution*, ICondition, LibC::BOOL, ICondition*, HRESULT)
-    make_and_or : Proc(IQuerySolution*, CONDITION_TYPE, IEnumUnknown, LibC::BOOL, ICondition*, HRESULT)
-    make_leaf : Proc(IQuerySolution*, LibC::LPWSTR, CONDITION_OPERATION, LibC::LPWSTR, PROPVARIANT*, IRichChunk, IRichChunk, IRichChunk, LibC::BOOL, ICondition*, HRESULT)
-    resolve : Proc(IQuerySolution*, ICondition, STRUCTURED_QUERY_RESOLVE_OPTION, SYSTEMTIME*, ICondition*, HRESULT)
-    get_query : Proc(IQuerySolution*, ICondition*, IEntity*, HRESULT)
-    get_errors : Proc(IQuerySolution*, Guid*, Void**, HRESULT)
-    get_lexical_data : Proc(IQuerySolution*, LibC::LPWSTR*, ITokenCollection*, UInt32*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    make_not : UInt64
+    make_and_or : UInt64
+    make_leaf : UInt64
+    resolve : UInt64
+    get_query : UInt64
+    get_errors : UInt64
+    get_lexical_data : UInt64
   end
 
   IQuerySolution_GUID = "d6ebc66b-8921-4193-afdd-a1789fb7ff57"
@@ -6796,22 +6796,22 @@ lib LibWin32
   end
 
   struct IConditionFactory2VTbl
-    query_interface : Proc(IConditionFactory2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IConditionFactory2*, UInt32)
-    release : Proc(IConditionFactory2*, UInt32)
-    make_not : Proc(IConditionFactory2*, ICondition, LibC::BOOL, ICondition*, HRESULT)
-    make_and_or : Proc(IConditionFactory2*, CONDITION_TYPE, IEnumUnknown, LibC::BOOL, ICondition*, HRESULT)
-    make_leaf : Proc(IConditionFactory2*, LibC::LPWSTR, CONDITION_OPERATION, LibC::LPWSTR, PROPVARIANT*, IRichChunk, IRichChunk, IRichChunk, LibC::BOOL, ICondition*, HRESULT)
-    resolve : Proc(IConditionFactory2*, ICondition, STRUCTURED_QUERY_RESOLVE_OPTION, SYSTEMTIME*, ICondition*, HRESULT)
-    create_true_false : Proc(IConditionFactory2*, LibC::BOOL, CONDITION_CREATION_OPTIONS, Guid*, Void**, HRESULT)
-    create_negation : Proc(IConditionFactory2*, ICondition, CONDITION_CREATION_OPTIONS, Guid*, Void**, HRESULT)
-    create_compound_from_object_array : Proc(IConditionFactory2*, CONDITION_TYPE, IObjectArray, CONDITION_CREATION_OPTIONS, Guid*, Void**, HRESULT)
-    create_compound_from_array : Proc(IConditionFactory2*, CONDITION_TYPE, ICondition*, UInt32, CONDITION_CREATION_OPTIONS, Guid*, Void**, HRESULT)
-    create_string_leaf : Proc(IConditionFactory2*, PROPERTYKEY*, CONDITION_OPERATION, LibC::LPWSTR, LibC::LPWSTR, CONDITION_CREATION_OPTIONS, Guid*, Void**, HRESULT)
-    create_integer_leaf : Proc(IConditionFactory2*, PROPERTYKEY*, CONDITION_OPERATION, Int32, CONDITION_CREATION_OPTIONS, Guid*, Void**, HRESULT)
-    create_boolean_leaf : Proc(IConditionFactory2*, PROPERTYKEY*, CONDITION_OPERATION, LibC::BOOL, CONDITION_CREATION_OPTIONS, Guid*, Void**, HRESULT)
-    create_leaf : Proc(IConditionFactory2*, PROPERTYKEY*, CONDITION_OPERATION, PROPVARIANT*, LibC::LPWSTR, LibC::LPWSTR, IRichChunk, IRichChunk, IRichChunk, CONDITION_CREATION_OPTIONS, Guid*, Void**, HRESULT)
-    resolve_condition : Proc(IConditionFactory2*, ICondition, STRUCTURED_QUERY_RESOLVE_OPTION, SYSTEMTIME*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    make_not : UInt64
+    make_and_or : UInt64
+    make_leaf : UInt64
+    resolve : UInt64
+    create_true_false : UInt64
+    create_negation : UInt64
+    create_compound_from_object_array : UInt64
+    create_compound_from_array : UInt64
+    create_string_leaf : UInt64
+    create_integer_leaf : UInt64
+    create_boolean_leaf : UInt64
+    create_leaf : UInt64
+    resolve_condition : UInt64
   end
 
   IConditionFactory2_GUID = "71d222e1-432f-429e-8c13-b6dafde5077a"
@@ -6821,13 +6821,13 @@ lib LibWin32
   end
 
   struct IConditionGeneratorVTbl
-    query_interface : Proc(IConditionGenerator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IConditionGenerator*, UInt32)
-    release : Proc(IConditionGenerator*, UInt32)
-    initialize : Proc(IConditionGenerator*, ISchemaProvider, HRESULT)
-    recognize_named_entities : Proc(IConditionGenerator*, LibC::LPWSTR, UInt32, ITokenCollection, INamedEntityCollector, HRESULT)
-    generate_for_leaf : Proc(IConditionGenerator*, IConditionFactory, LibC::LPWSTR, CONDITION_OPERATION, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IRichChunk, IRichChunk, IRichChunk, LibC::BOOL, LibC::BOOL*, ICondition*, HRESULT)
-    default_phrase : Proc(IConditionGenerator*, LibC::LPWSTR, PROPVARIANT*, LibC::BOOL, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    recognize_named_entities : UInt64
+    generate_for_leaf : UInt64
+    default_phrase : UInt64
   end
 
   IConditionGenerator_GUID = "92d2cc58-4386-45a3-b98c-7e0ce64a4117"
@@ -6837,10 +6837,10 @@ lib LibWin32
   end
 
   struct IIntervalVTbl
-    query_interface : Proc(IInterval*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IInterval*, UInt32)
-    release : Proc(IInterval*, UInt32)
-    get_limits : Proc(IInterval*, INTERVAL_LIMIT_KIND*, PROPVARIANT*, INTERVAL_LIMIT_KIND*, PROPVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_limits : UInt64
   end
 
   IInterval_GUID = "6bf0a714-3c18-430b-8b5d-83b1c234d3db"
@@ -6850,10 +6850,10 @@ lib LibWin32
   end
 
   struct IMetaDataVTbl
-    query_interface : Proc(IMetaData*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMetaData*, UInt32)
-    release : Proc(IMetaData*, UInt32)
-    get_data : Proc(IMetaData*, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_data : UInt64
   end
 
   IMetaData_GUID = "780102b0-c43b-4876-bc7b-5e9ba5c88794"
@@ -6863,17 +6863,17 @@ lib LibWin32
   end
 
   struct IEntityVTbl
-    query_interface : Proc(IEntity*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEntity*, UInt32)
-    release : Proc(IEntity*, UInt32)
-    name : Proc(IEntity*, LibC::LPWSTR*, HRESULT)
-    base : Proc(IEntity*, IEntity*, HRESULT)
-    relationships : Proc(IEntity*, Guid*, Void**, HRESULT)
-    get_relationship : Proc(IEntity*, LibC::LPWSTR, IRelationship*, HRESULT)
-    meta_data : Proc(IEntity*, Guid*, Void**, HRESULT)
-    named_entities : Proc(IEntity*, Guid*, Void**, HRESULT)
-    get_named_entity : Proc(IEntity*, LibC::LPWSTR, INamedEntity*, HRESULT)
-    default_phrase : Proc(IEntity*, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    name : UInt64
+    base : UInt64
+    relationships : UInt64
+    get_relationship : UInt64
+    meta_data : UInt64
+    named_entities : UInt64
+    get_named_entity : UInt64
+    default_phrase : UInt64
   end
 
   IEntity_GUID = "24264891-e80b-4fd3-b7ce-4ff2fae8931f"
@@ -6883,14 +6883,14 @@ lib LibWin32
   end
 
   struct IRelationshipVTbl
-    query_interface : Proc(IRelationship*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRelationship*, UInt32)
-    release : Proc(IRelationship*, UInt32)
-    name : Proc(IRelationship*, LibC::LPWSTR*, HRESULT)
-    is_real : Proc(IRelationship*, LibC::BOOL*, HRESULT)
-    destination : Proc(IRelationship*, IEntity*, HRESULT)
-    meta_data : Proc(IRelationship*, Guid*, Void**, HRESULT)
-    default_phrase : Proc(IRelationship*, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    name : UInt64
+    is_real : UInt64
+    destination : UInt64
+    meta_data : UInt64
+    default_phrase : UInt64
   end
 
   IRelationship_GUID = "2769280b-5108-498c-9c7f-a51239b63147"
@@ -6900,11 +6900,11 @@ lib LibWin32
   end
 
   struct INamedEntityVTbl
-    query_interface : Proc(INamedEntity*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INamedEntity*, UInt32)
-    release : Proc(INamedEntity*, UInt32)
-    get_value : Proc(INamedEntity*, LibC::LPWSTR*, HRESULT)
-    default_phrase : Proc(INamedEntity*, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_value : UInt64
+    default_phrase : UInt64
   end
 
   INamedEntity_GUID = "abdbd0b1-7d54-49fb-ab5c-bff4130004cd"
@@ -6914,16 +6914,16 @@ lib LibWin32
   end
 
   struct ISchemaProviderVTbl
-    query_interface : Proc(ISchemaProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISchemaProvider*, UInt32)
-    release : Proc(ISchemaProvider*, UInt32)
-    entities : Proc(ISchemaProvider*, Guid*, Void**, HRESULT)
-    root_entity : Proc(ISchemaProvider*, IEntity*, HRESULT)
-    get_entity : Proc(ISchemaProvider*, LibC::LPWSTR, IEntity*, HRESULT)
-    meta_data : Proc(ISchemaProvider*, Guid*, Void**, HRESULT)
-    localize : Proc(ISchemaProvider*, UInt32, ISchemaLocalizerSupport, HRESULT)
-    save_binary : Proc(ISchemaProvider*, LibC::LPWSTR, HRESULT)
-    lookup_authored_named_entity : Proc(ISchemaProvider*, IEntity, LibC::LPWSTR, ITokenCollection, UInt32, UInt32*, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    entities : UInt64
+    root_entity : UInt64
+    get_entity : UInt64
+    meta_data : UInt64
+    localize : UInt64
+    save_binary : UInt64
+    lookup_authored_named_entity : UInt64
   end
 
   ISchemaProvider_GUID = "8cf89bcb-394c-49b2-ae28-a59dd4ed7f68"
@@ -6933,11 +6933,11 @@ lib LibWin32
   end
 
   struct ITokenCollectionVTbl
-    query_interface : Proc(ITokenCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITokenCollection*, UInt32)
-    release : Proc(ITokenCollection*, UInt32)
-    number_of_tokens : Proc(ITokenCollection*, UInt32*, HRESULT)
-    get_token : Proc(ITokenCollection*, UInt32, UInt32*, UInt32*, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    number_of_tokens : UInt64
+    get_token : UInt64
   end
 
   ITokenCollection_GUID = "22d8b4f2-f577-4adb-a335-c2ae88416fab"
@@ -6947,10 +6947,10 @@ lib LibWin32
   end
 
   struct INamedEntityCollectorVTbl
-    query_interface : Proc(INamedEntityCollector*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INamedEntityCollector*, UInt32)
-    release : Proc(INamedEntityCollector*, UInt32)
-    add : Proc(INamedEntityCollector*, UInt32, UInt32, UInt32, UInt32, IEntity, LibC::LPWSTR, NAMED_ENTITY_CERTAINTY, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add : UInt64
   end
 
   INamedEntityCollector_GUID = "af2440f6-8afc-47d0-9a7f-396a0acfb43d"
@@ -6960,10 +6960,10 @@ lib LibWin32
   end
 
   struct ISchemaLocalizerSupportVTbl
-    query_interface : Proc(ISchemaLocalizerSupport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISchemaLocalizerSupport*, UInt32)
-    release : Proc(ISchemaLocalizerSupport*, UInt32)
-    localize : Proc(ISchemaLocalizerSupport*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    localize : UInt64
   end
 
   ISchemaLocalizerSupport_GUID = "ca3fdca2-bfbe-4eed-90d7-0caef0a1bda1"
@@ -6973,12 +6973,12 @@ lib LibWin32
   end
 
   struct IQueryParserManagerVTbl
-    query_interface : Proc(IQueryParserManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IQueryParserManager*, UInt32)
-    release : Proc(IQueryParserManager*, UInt32)
-    create_loaded_parser : Proc(IQueryParserManager*, LibC::LPWSTR, UInt16, Guid*, Void**, HRESULT)
-    initialize_options : Proc(IQueryParserManager*, LibC::BOOL, LibC::BOOL, IQueryParser, HRESULT)
-    set_option : Proc(IQueryParserManager*, QUERY_PARSER_MANAGER_OPTION, PROPVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_loaded_parser : UInt64
+    initialize_options : UInt64
+    set_option : UInt64
   end
 
   IQueryParserManager_GUID = "a879e3c4-af77-44fb-8f37-ebd1487cf920"
@@ -6988,22 +6988,22 @@ lib LibWin32
   end
 
   struct IUrlAccessorVTbl
-    query_interface : Proc(IUrlAccessor*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUrlAccessor*, UInt32)
-    release : Proc(IUrlAccessor*, UInt32)
-    add_request_parameter : Proc(IUrlAccessor*, PROPSPEC*, PROPVARIANT*, HRESULT)
-    get_doc_format : Proc(IUrlAccessor*, Char*, UInt32, UInt32*, HRESULT)
-    get_clsid : Proc(IUrlAccessor*, Guid*, HRESULT)
-    get_host : Proc(IUrlAccessor*, Char*, UInt32, UInt32*, HRESULT)
-    is_directory : Proc(IUrlAccessor*, HRESULT)
-    get_size : Proc(IUrlAccessor*, UInt64*, HRESULT)
-    get_last_modified : Proc(IUrlAccessor*, FILETIME*, HRESULT)
-    get_file_name : Proc(IUrlAccessor*, Char*, UInt32, UInt32*, HRESULT)
-    get_security_descriptor : Proc(IUrlAccessor*, UInt8*, UInt32, UInt32*, HRESULT)
-    get_redirected_url : Proc(IUrlAccessor*, Char*, UInt32, UInt32*, HRESULT)
-    get_security_provider : Proc(IUrlAccessor*, Guid*, HRESULT)
-    bind_to_stream : Proc(IUrlAccessor*, IStream*, HRESULT)
-    bind_to_filter : Proc(IUrlAccessor*, IFilter*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_request_parameter : UInt64
+    get_doc_format : UInt64
+    get_clsid : UInt64
+    get_host : UInt64
+    is_directory : UInt64
+    get_size : UInt64
+    get_last_modified : UInt64
+    get_file_name : UInt64
+    get_security_descriptor : UInt64
+    get_redirected_url : UInt64
+    get_security_provider : UInt64
+    bind_to_stream : UInt64
+    bind_to_filter : UInt64
   end
 
   IUrlAccessor_GUID = "0b63e318-9ccc-11d0-bcdb-00805fccce04"
@@ -7013,25 +7013,25 @@ lib LibWin32
   end
 
   struct IUrlAccessor2VTbl
-    query_interface : Proc(IUrlAccessor2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUrlAccessor2*, UInt32)
-    release : Proc(IUrlAccessor2*, UInt32)
-    add_request_parameter : Proc(IUrlAccessor2*, PROPSPEC*, PROPVARIANT*, HRESULT)
-    get_doc_format : Proc(IUrlAccessor2*, Char*, UInt32, UInt32*, HRESULT)
-    get_clsid : Proc(IUrlAccessor2*, Guid*, HRESULT)
-    get_host : Proc(IUrlAccessor2*, Char*, UInt32, UInt32*, HRESULT)
-    is_directory : Proc(IUrlAccessor2*, HRESULT)
-    get_size : Proc(IUrlAccessor2*, UInt64*, HRESULT)
-    get_last_modified : Proc(IUrlAccessor2*, FILETIME*, HRESULT)
-    get_file_name : Proc(IUrlAccessor2*, Char*, UInt32, UInt32*, HRESULT)
-    get_security_descriptor : Proc(IUrlAccessor2*, UInt8*, UInt32, UInt32*, HRESULT)
-    get_redirected_url : Proc(IUrlAccessor2*, Char*, UInt32, UInt32*, HRESULT)
-    get_security_provider : Proc(IUrlAccessor2*, Guid*, HRESULT)
-    bind_to_stream : Proc(IUrlAccessor2*, IStream*, HRESULT)
-    bind_to_filter : Proc(IUrlAccessor2*, IFilter*, HRESULT)
-    get_display_url : Proc(IUrlAccessor2*, Char*, UInt32, UInt32*, HRESULT)
-    is_document : Proc(IUrlAccessor2*, HRESULT)
-    get_code_page : Proc(IUrlAccessor2*, Char*, UInt32, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_request_parameter : UInt64
+    get_doc_format : UInt64
+    get_clsid : UInt64
+    get_host : UInt64
+    is_directory : UInt64
+    get_size : UInt64
+    get_last_modified : UInt64
+    get_file_name : UInt64
+    get_security_descriptor : UInt64
+    get_redirected_url : UInt64
+    get_security_provider : UInt64
+    bind_to_stream : UInt64
+    bind_to_filter : UInt64
+    get_display_url : UInt64
+    is_document : UInt64
+    get_code_page : UInt64
   end
 
   IUrlAccessor2_GUID = "c7310734-ac80-11d1-8df3-00c04fb6ef4f"
@@ -7041,26 +7041,26 @@ lib LibWin32
   end
 
   struct IUrlAccessor3VTbl
-    query_interface : Proc(IUrlAccessor3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUrlAccessor3*, UInt32)
-    release : Proc(IUrlAccessor3*, UInt32)
-    add_request_parameter : Proc(IUrlAccessor3*, PROPSPEC*, PROPVARIANT*, HRESULT)
-    get_doc_format : Proc(IUrlAccessor3*, Char*, UInt32, UInt32*, HRESULT)
-    get_clsid : Proc(IUrlAccessor3*, Guid*, HRESULT)
-    get_host : Proc(IUrlAccessor3*, Char*, UInt32, UInt32*, HRESULT)
-    is_directory : Proc(IUrlAccessor3*, HRESULT)
-    get_size : Proc(IUrlAccessor3*, UInt64*, HRESULT)
-    get_last_modified : Proc(IUrlAccessor3*, FILETIME*, HRESULT)
-    get_file_name : Proc(IUrlAccessor3*, Char*, UInt32, UInt32*, HRESULT)
-    get_security_descriptor : Proc(IUrlAccessor3*, UInt8*, UInt32, UInt32*, HRESULT)
-    get_redirected_url : Proc(IUrlAccessor3*, Char*, UInt32, UInt32*, HRESULT)
-    get_security_provider : Proc(IUrlAccessor3*, Guid*, HRESULT)
-    bind_to_stream : Proc(IUrlAccessor3*, IStream*, HRESULT)
-    bind_to_filter : Proc(IUrlAccessor3*, IFilter*, HRESULT)
-    get_display_url : Proc(IUrlAccessor3*, Char*, UInt32, UInt32*, HRESULT)
-    is_document : Proc(IUrlAccessor3*, HRESULT)
-    get_code_page : Proc(IUrlAccessor3*, Char*, UInt32, UInt32*, HRESULT)
-    get_impersonation_sid_blobs : Proc(IUrlAccessor3*, LibC::LPWSTR, UInt32*, BLOB**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_request_parameter : UInt64
+    get_doc_format : UInt64
+    get_clsid : UInt64
+    get_host : UInt64
+    is_directory : UInt64
+    get_size : UInt64
+    get_last_modified : UInt64
+    get_file_name : UInt64
+    get_security_descriptor : UInt64
+    get_redirected_url : UInt64
+    get_security_provider : UInt64
+    bind_to_stream : UInt64
+    bind_to_filter : UInt64
+    get_display_url : UInt64
+    is_document : UInt64
+    get_code_page : UInt64
+    get_impersonation_sid_blobs : UInt64
   end
 
   IUrlAccessor3_GUID = "6fbc7005-0455-4874-b8ff-7439450241a3"
@@ -7070,28 +7070,28 @@ lib LibWin32
   end
 
   struct IUrlAccessor4VTbl
-    query_interface : Proc(IUrlAccessor4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUrlAccessor4*, UInt32)
-    release : Proc(IUrlAccessor4*, UInt32)
-    add_request_parameter : Proc(IUrlAccessor4*, PROPSPEC*, PROPVARIANT*, HRESULT)
-    get_doc_format : Proc(IUrlAccessor4*, Char*, UInt32, UInt32*, HRESULT)
-    get_clsid : Proc(IUrlAccessor4*, Guid*, HRESULT)
-    get_host : Proc(IUrlAccessor4*, Char*, UInt32, UInt32*, HRESULT)
-    is_directory : Proc(IUrlAccessor4*, HRESULT)
-    get_size : Proc(IUrlAccessor4*, UInt64*, HRESULT)
-    get_last_modified : Proc(IUrlAccessor4*, FILETIME*, HRESULT)
-    get_file_name : Proc(IUrlAccessor4*, Char*, UInt32, UInt32*, HRESULT)
-    get_security_descriptor : Proc(IUrlAccessor4*, UInt8*, UInt32, UInt32*, HRESULT)
-    get_redirected_url : Proc(IUrlAccessor4*, Char*, UInt32, UInt32*, HRESULT)
-    get_security_provider : Proc(IUrlAccessor4*, Guid*, HRESULT)
-    bind_to_stream : Proc(IUrlAccessor4*, IStream*, HRESULT)
-    bind_to_filter : Proc(IUrlAccessor4*, IFilter*, HRESULT)
-    get_display_url : Proc(IUrlAccessor4*, Char*, UInt32, UInt32*, HRESULT)
-    is_document : Proc(IUrlAccessor4*, HRESULT)
-    get_code_page : Proc(IUrlAccessor4*, Char*, UInt32, UInt32*, HRESULT)
-    get_impersonation_sid_blobs : Proc(IUrlAccessor4*, LibC::LPWSTR, UInt32*, BLOB**, HRESULT)
-    should_index_item_content : Proc(IUrlAccessor4*, LibC::BOOL*, HRESULT)
-    should_index_property : Proc(IUrlAccessor4*, PROPERTYKEY*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_request_parameter : UInt64
+    get_doc_format : UInt64
+    get_clsid : UInt64
+    get_host : UInt64
+    is_directory : UInt64
+    get_size : UInt64
+    get_last_modified : UInt64
+    get_file_name : UInt64
+    get_security_descriptor : UInt64
+    get_redirected_url : UInt64
+    get_security_provider : UInt64
+    bind_to_stream : UInt64
+    bind_to_filter : UInt64
+    get_display_url : UInt64
+    is_document : UInt64
+    get_code_page : UInt64
+    get_impersonation_sid_blobs : UInt64
+    should_index_item_content : UInt64
+    should_index_property : UInt64
   end
 
   IUrlAccessor4_GUID = "5cc51041-c8d2-41d7-bca3-9e9e286297dc"
@@ -7101,12 +7101,12 @@ lib LibWin32
   end
 
   struct IOpLockStatusVTbl
-    query_interface : Proc(IOpLockStatus*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IOpLockStatus*, UInt32)
-    release : Proc(IOpLockStatus*, UInt32)
-    is_oplock_valid : Proc(IOpLockStatus*, LibC::BOOL*, HRESULT)
-    is_oplock_broken : Proc(IOpLockStatus*, LibC::BOOL*, HRESULT)
-    get_oplock_event_handle : Proc(IOpLockStatus*, LibC::HANDLE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    is_oplock_valid : UInt64
+    is_oplock_broken : UInt64
+    get_oplock_event_handle : UInt64
   end
 
   IOpLockStatus_GUID = "c731065d-ac80-11d1-8df3-00c04fb6ef4f"
@@ -7116,12 +7116,12 @@ lib LibWin32
   end
 
   struct ISearchProtocolThreadContextVTbl
-    query_interface : Proc(ISearchProtocolThreadContext*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchProtocolThreadContext*, UInt32)
-    release : Proc(ISearchProtocolThreadContext*, UInt32)
-    thread_init : Proc(ISearchProtocolThreadContext*, HRESULT)
-    thread_shutdown : Proc(ISearchProtocolThreadContext*, HRESULT)
-    thread_idle : Proc(ISearchProtocolThreadContext*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    thread_init : UInt64
+    thread_shutdown : UInt64
+    thread_idle : UInt64
   end
 
   ISearchProtocolThreadContext_GUID = "c73106e1-ac80-11d1-8df3-00c04fb6ef4f"
@@ -7131,13 +7131,13 @@ lib LibWin32
   end
 
   struct ISearchProtocolVTbl
-    query_interface : Proc(ISearchProtocol*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchProtocol*, UInt32)
-    release : Proc(ISearchProtocol*, UInt32)
-    init : Proc(ISearchProtocol*, TIMEOUT_INFO*, IProtocolHandlerSite, PROXY_INFO*, HRESULT)
-    create_accessor : Proc(ISearchProtocol*, LibC::LPWSTR, AUTHENTICATION_INFO*, INCREMENTAL_ACCESS_INFO*, ITEM_INFO*, IUrlAccessor*, HRESULT)
-    close_accessor : Proc(ISearchProtocol*, IUrlAccessor, HRESULT)
-    shut_down : Proc(ISearchProtocol*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    init : UInt64
+    create_accessor : UInt64
+    close_accessor : UInt64
+    shut_down : UInt64
   end
 
   ISearchProtocol_GUID = "c73106ba-ac80-11d1-8df3-00c04fb6ef4f"
@@ -7147,14 +7147,14 @@ lib LibWin32
   end
 
   struct ISearchProtocol2VTbl
-    query_interface : Proc(ISearchProtocol2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchProtocol2*, UInt32)
-    release : Proc(ISearchProtocol2*, UInt32)
-    init : Proc(ISearchProtocol2*, TIMEOUT_INFO*, IProtocolHandlerSite, PROXY_INFO*, HRESULT)
-    create_accessor : Proc(ISearchProtocol2*, LibC::LPWSTR, AUTHENTICATION_INFO*, INCREMENTAL_ACCESS_INFO*, ITEM_INFO*, IUrlAccessor*, HRESULT)
-    close_accessor : Proc(ISearchProtocol2*, IUrlAccessor, HRESULT)
-    shut_down : Proc(ISearchProtocol2*, HRESULT)
-    create_accessor_ex : Proc(ISearchProtocol2*, LibC::LPWSTR, AUTHENTICATION_INFO*, INCREMENTAL_ACCESS_INFO*, ITEM_INFO*, BLOB*, IUrlAccessor*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    init : UInt64
+    create_accessor : UInt64
+    close_accessor : UInt64
+    shut_down : UInt64
+    create_accessor_ex : UInt64
   end
 
   ISearchProtocol2_GUID = "7789f0b2-b5b2-4722-8b65-5dbd150697a9"
@@ -7164,10 +7164,10 @@ lib LibWin32
   end
 
   struct IProtocolHandlerSiteVTbl
-    query_interface : Proc(IProtocolHandlerSite*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IProtocolHandlerSite*, UInt32)
-    release : Proc(IProtocolHandlerSite*, UInt32)
-    get_filter : Proc(IProtocolHandlerSite*, Guid*, LibC::LPWSTR, LibC::LPWSTR, IFilter*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_filter : UInt64
   end
 
   IProtocolHandlerSite_GUID = "0b63e385-9ccc-11d0-bcdb-00805fccce04"
@@ -7177,31 +7177,31 @@ lib LibWin32
   end
 
   struct ISearchRootVTbl
-    query_interface : Proc(ISearchRoot*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchRoot*, UInt32)
-    release : Proc(ISearchRoot*, UInt32)
-    put_schedule : Proc(ISearchRoot*, LibC::LPWSTR, HRESULT)
-    get_schedule : Proc(ISearchRoot*, LibC::LPWSTR*, HRESULT)
-    put_root_url : Proc(ISearchRoot*, LibC::LPWSTR, HRESULT)
-    get_root_url : Proc(ISearchRoot*, LibC::LPWSTR*, HRESULT)
-    put_is_hierarchical : Proc(ISearchRoot*, LibC::BOOL, HRESULT)
-    get_is_hierarchical : Proc(ISearchRoot*, LibC::BOOL*, HRESULT)
-    put_provides_notifications : Proc(ISearchRoot*, LibC::BOOL, HRESULT)
-    get_provides_notifications : Proc(ISearchRoot*, LibC::BOOL*, HRESULT)
-    put_use_notifications_only : Proc(ISearchRoot*, LibC::BOOL, HRESULT)
-    get_use_notifications_only : Proc(ISearchRoot*, LibC::BOOL*, HRESULT)
-    put_enumeration_depth : Proc(ISearchRoot*, UInt32, HRESULT)
-    get_enumeration_depth : Proc(ISearchRoot*, UInt32*, HRESULT)
-    put_host_depth : Proc(ISearchRoot*, UInt32, HRESULT)
-    get_host_depth : Proc(ISearchRoot*, UInt32*, HRESULT)
-    put_follow_directories : Proc(ISearchRoot*, LibC::BOOL, HRESULT)
-    get_follow_directories : Proc(ISearchRoot*, LibC::BOOL*, HRESULT)
-    put_authentication_type : Proc(ISearchRoot*, AUTH_TYPE, HRESULT)
-    get_authentication_type : Proc(ISearchRoot*, AUTH_TYPE*, HRESULT)
-    put_user : Proc(ISearchRoot*, LibC::LPWSTR, HRESULT)
-    get_user : Proc(ISearchRoot*, LibC::LPWSTR*, HRESULT)
-    put_password : Proc(ISearchRoot*, LibC::LPWSTR, HRESULT)
-    get_password : Proc(ISearchRoot*, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    put_schedule : UInt64
+    get_schedule : UInt64
+    put_root_url : UInt64
+    get_root_url : UInt64
+    put_is_hierarchical : UInt64
+    get_is_hierarchical : UInt64
+    put_provides_notifications : UInt64
+    get_provides_notifications : UInt64
+    put_use_notifications_only : UInt64
+    get_use_notifications_only : UInt64
+    put_enumeration_depth : UInt64
+    get_enumeration_depth : UInt64
+    put_host_depth : UInt64
+    get_host_depth : UInt64
+    put_follow_directories : UInt64
+    get_follow_directories : UInt64
+    put_authentication_type : UInt64
+    get_authentication_type : UInt64
+    put_user : UInt64
+    get_user : UInt64
+    put_password : UInt64
+    get_password : UInt64
   end
 
   ISearchRoot_GUID = "04c18ccf-1f57-4cbd-88cc-3900f5195ce3"
@@ -7211,13 +7211,13 @@ lib LibWin32
   end
 
   struct IEnumSearchRootsVTbl
-    query_interface : Proc(IEnumSearchRoots*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumSearchRoots*, UInt32)
-    release : Proc(IEnumSearchRoots*, UInt32)
-    next : Proc(IEnumSearchRoots*, UInt32, ISearchRoot*, UInt32*, HRESULT)
-    skip : Proc(IEnumSearchRoots*, UInt32, HRESULT)
-    reset : Proc(IEnumSearchRoots*, HRESULT)
-    clone : Proc(IEnumSearchRoots*, IEnumSearchRoots*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IEnumSearchRoots_GUID = "ab310581-ac80-11d1-8df3-00c04fb6ef52"
@@ -7227,13 +7227,13 @@ lib LibWin32
   end
 
   struct ISearchScopeRuleVTbl
-    query_interface : Proc(ISearchScopeRule*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchScopeRule*, UInt32)
-    release : Proc(ISearchScopeRule*, UInt32)
-    get_pattern_or_url : Proc(ISearchScopeRule*, LibC::LPWSTR*, HRESULT)
-    get_is_included : Proc(ISearchScopeRule*, LibC::BOOL*, HRESULT)
-    get_is_default : Proc(ISearchScopeRule*, LibC::BOOL*, HRESULT)
-    get_follow_flags : Proc(ISearchScopeRule*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_pattern_or_url : UInt64
+    get_is_included : UInt64
+    get_is_default : UInt64
+    get_follow_flags : UInt64
   end
 
   ISearchScopeRule_GUID = "ab310581-ac80-11d1-8df3-00c04fb6ef53"
@@ -7243,13 +7243,13 @@ lib LibWin32
   end
 
   struct IEnumSearchScopeRulesVTbl
-    query_interface : Proc(IEnumSearchScopeRules*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumSearchScopeRules*, UInt32)
-    release : Proc(IEnumSearchScopeRules*, UInt32)
-    next : Proc(IEnumSearchScopeRules*, UInt32, ISearchScopeRule*, UInt32*, HRESULT)
-    skip : Proc(IEnumSearchScopeRules*, UInt32, HRESULT)
-    reset : Proc(IEnumSearchScopeRules*, HRESULT)
-    clone : Proc(IEnumSearchScopeRules*, IEnumSearchScopeRules*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IEnumSearchScopeRules_GUID = "ab310581-ac80-11d1-8df3-00c04fb6ef54"
@@ -7259,25 +7259,25 @@ lib LibWin32
   end
 
   struct ISearchCrawlScopeManagerVTbl
-    query_interface : Proc(ISearchCrawlScopeManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchCrawlScopeManager*, UInt32)
-    release : Proc(ISearchCrawlScopeManager*, UInt32)
-    add_default_scope_rule : Proc(ISearchCrawlScopeManager*, LibC::LPWSTR, LibC::BOOL, UInt32, HRESULT)
-    add_root : Proc(ISearchCrawlScopeManager*, ISearchRoot, HRESULT)
-    remove_root : Proc(ISearchCrawlScopeManager*, LibC::LPWSTR, HRESULT)
-    enumerate_roots : Proc(ISearchCrawlScopeManager*, IEnumSearchRoots*, HRESULT)
-    add_hierarchical_scope : Proc(ISearchCrawlScopeManager*, LibC::LPWSTR, LibC::BOOL, LibC::BOOL, LibC::BOOL, HRESULT)
-    add_user_scope_rule : Proc(ISearchCrawlScopeManager*, LibC::LPWSTR, LibC::BOOL, LibC::BOOL, UInt32, HRESULT)
-    remove_scope_rule : Proc(ISearchCrawlScopeManager*, LibC::LPWSTR, HRESULT)
-    enumerate_scope_rules : Proc(ISearchCrawlScopeManager*, IEnumSearchScopeRules*, HRESULT)
-    has_parent_scope_rule : Proc(ISearchCrawlScopeManager*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
-    has_child_scope_rule : Proc(ISearchCrawlScopeManager*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
-    included_in_crawl_scope : Proc(ISearchCrawlScopeManager*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
-    included_in_crawl_scope_ex : Proc(ISearchCrawlScopeManager*, LibC::LPWSTR, LibC::BOOL*, CLUSION_REASON*, HRESULT)
-    revert_to_default_scopes : Proc(ISearchCrawlScopeManager*, HRESULT)
-    save_all : Proc(ISearchCrawlScopeManager*, HRESULT)
-    get_parent_scope_version_id : Proc(ISearchCrawlScopeManager*, LibC::LPWSTR, Int32*, HRESULT)
-    remove_default_scope_rule : Proc(ISearchCrawlScopeManager*, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_default_scope_rule : UInt64
+    add_root : UInt64
+    remove_root : UInt64
+    enumerate_roots : UInt64
+    add_hierarchical_scope : UInt64
+    add_user_scope_rule : UInt64
+    remove_scope_rule : UInt64
+    enumerate_scope_rules : UInt64
+    has_parent_scope_rule : UInt64
+    has_child_scope_rule : UInt64
+    included_in_crawl_scope : UInt64
+    included_in_crawl_scope_ex : UInt64
+    revert_to_default_scopes : UInt64
+    save_all : UInt64
+    get_parent_scope_version_id : UInt64
+    remove_default_scope_rule : UInt64
   end
 
   ISearchCrawlScopeManager_GUID = "ab310581-ac80-11d1-8df3-00c04fb6ef55"
@@ -7287,26 +7287,26 @@ lib LibWin32
   end
 
   struct ISearchCrawlScopeManager2VTbl
-    query_interface : Proc(ISearchCrawlScopeManager2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchCrawlScopeManager2*, UInt32)
-    release : Proc(ISearchCrawlScopeManager2*, UInt32)
-    add_default_scope_rule : Proc(ISearchCrawlScopeManager2*, LibC::LPWSTR, LibC::BOOL, UInt32, HRESULT)
-    add_root : Proc(ISearchCrawlScopeManager2*, ISearchRoot, HRESULT)
-    remove_root : Proc(ISearchCrawlScopeManager2*, LibC::LPWSTR, HRESULT)
-    enumerate_roots : Proc(ISearchCrawlScopeManager2*, IEnumSearchRoots*, HRESULT)
-    add_hierarchical_scope : Proc(ISearchCrawlScopeManager2*, LibC::LPWSTR, LibC::BOOL, LibC::BOOL, LibC::BOOL, HRESULT)
-    add_user_scope_rule : Proc(ISearchCrawlScopeManager2*, LibC::LPWSTR, LibC::BOOL, LibC::BOOL, UInt32, HRESULT)
-    remove_scope_rule : Proc(ISearchCrawlScopeManager2*, LibC::LPWSTR, HRESULT)
-    enumerate_scope_rules : Proc(ISearchCrawlScopeManager2*, IEnumSearchScopeRules*, HRESULT)
-    has_parent_scope_rule : Proc(ISearchCrawlScopeManager2*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
-    has_child_scope_rule : Proc(ISearchCrawlScopeManager2*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
-    included_in_crawl_scope : Proc(ISearchCrawlScopeManager2*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
-    included_in_crawl_scope_ex : Proc(ISearchCrawlScopeManager2*, LibC::LPWSTR, LibC::BOOL*, CLUSION_REASON*, HRESULT)
-    revert_to_default_scopes : Proc(ISearchCrawlScopeManager2*, HRESULT)
-    save_all : Proc(ISearchCrawlScopeManager2*, HRESULT)
-    get_parent_scope_version_id : Proc(ISearchCrawlScopeManager2*, LibC::LPWSTR, Int32*, HRESULT)
-    remove_default_scope_rule : Proc(ISearchCrawlScopeManager2*, LibC::LPWSTR, HRESULT)
-    get_version : Proc(ISearchCrawlScopeManager2*, Int32**, LibC::HANDLE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_default_scope_rule : UInt64
+    add_root : UInt64
+    remove_root : UInt64
+    enumerate_roots : UInt64
+    add_hierarchical_scope : UInt64
+    add_user_scope_rule : UInt64
+    remove_scope_rule : UInt64
+    enumerate_scope_rules : UInt64
+    has_parent_scope_rule : UInt64
+    has_child_scope_rule : UInt64
+    included_in_crawl_scope : UInt64
+    included_in_crawl_scope_ex : UInt64
+    revert_to_default_scopes : UInt64
+    save_all : UInt64
+    get_parent_scope_version_id : UInt64
+    remove_default_scope_rule : UInt64
+    get_version : UInt64
   end
 
   ISearchCrawlScopeManager2_GUID = "6292f7ad-4e19-4717-a534-8fc22bcd5ccd"
@@ -7316,12 +7316,12 @@ lib LibWin32
   end
 
   struct ISearchItemsChangedSinkVTbl
-    query_interface : Proc(ISearchItemsChangedSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchItemsChangedSink*, UInt32)
-    release : Proc(ISearchItemsChangedSink*, UInt32)
-    started_monitoring_scope : Proc(ISearchItemsChangedSink*, LibC::LPWSTR, HRESULT)
-    stopped_monitoring_scope : Proc(ISearchItemsChangedSink*, LibC::LPWSTR, HRESULT)
-    on_items_changed : Proc(ISearchItemsChangedSink*, UInt32, SEARCH_ITEM_CHANGE*, UInt32*, HRESULT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    started_monitoring_scope : UInt64
+    stopped_monitoring_scope : UInt64
+    on_items_changed : UInt64
   end
 
   ISearchItemsChangedSink_GUID = "ab310581-ac80-11d1-8df3-00c04fb6ef58"
@@ -7331,12 +7331,12 @@ lib LibWin32
   end
 
   struct ISearchPersistentItemsChangedSinkVTbl
-    query_interface : Proc(ISearchPersistentItemsChangedSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchPersistentItemsChangedSink*, UInt32)
-    release : Proc(ISearchPersistentItemsChangedSink*, UInt32)
-    started_monitoring_scope : Proc(ISearchPersistentItemsChangedSink*, LibC::LPWSTR, HRESULT)
-    stopped_monitoring_scope : Proc(ISearchPersistentItemsChangedSink*, LibC::LPWSTR, HRESULT)
-    on_items_changed : Proc(ISearchPersistentItemsChangedSink*, UInt32, SEARCH_ITEM_PERSISTENT_CHANGE*, HRESULT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    started_monitoring_scope : UInt64
+    stopped_monitoring_scope : UInt64
+    on_items_changed : UInt64
   end
 
   ISearchPersistentItemsChangedSink_GUID = "a2ffdf9b-4758-4f84-b729-df81a1a0612f"
@@ -7346,10 +7346,10 @@ lib LibWin32
   end
 
   struct ISearchViewChangedSinkVTbl
-    query_interface : Proc(ISearchViewChangedSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchViewChangedSink*, UInt32)
-    release : Proc(ISearchViewChangedSink*, UInt32)
-    on_change : Proc(ISearchViewChangedSink*, Int32*, SEARCH_ITEM_CHANGE*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_change : UInt64
   end
 
   ISearchViewChangedSink_GUID = "ab310581-ac80-11d1-8df3-00c04fb6ef65"
@@ -7359,11 +7359,11 @@ lib LibWin32
   end
 
   struct ISearchNotifyInlineSiteVTbl
-    query_interface : Proc(ISearchNotifyInlineSite*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchNotifyInlineSite*, UInt32)
-    release : Proc(ISearchNotifyInlineSite*, UInt32)
-    on_item_indexed_status_change : Proc(ISearchNotifyInlineSite*, SEARCH_INDEXING_PHASE, UInt32, SEARCH_ITEM_INDEXING_STATUS*, HRESULT)
-    on_catalog_status_change : Proc(ISearchNotifyInlineSite*, Guid*, Guid*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_item_indexed_status_change : UInt64
+    on_catalog_status_change : UInt64
   end
 
   ISearchNotifyInlineSite_GUID = "b5702e61-e75c-4b64-82a1-6cb4f832fccf"
@@ -7373,35 +7373,35 @@ lib LibWin32
   end
 
   struct ISearchCatalogManagerVTbl
-    query_interface : Proc(ISearchCatalogManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchCatalogManager*, UInt32)
-    release : Proc(ISearchCatalogManager*, UInt32)
-    get_name : Proc(ISearchCatalogManager*, LibC::LPWSTR*, HRESULT)
-    get_parameter : Proc(ISearchCatalogManager*, LibC::LPWSTR, PROPVARIANT**, HRESULT)
-    set_parameter : Proc(ISearchCatalogManager*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
-    get_catalog_status : Proc(ISearchCatalogManager*, CatalogStatus*, CatalogPausedReason*, HRESULT)
-    reset : Proc(ISearchCatalogManager*, HRESULT)
-    reindex : Proc(ISearchCatalogManager*, HRESULT)
-    reindex_matching_ur_ls : Proc(ISearchCatalogManager*, LibC::LPWSTR, HRESULT)
-    reindex_search_root : Proc(ISearchCatalogManager*, LibC::LPWSTR, HRESULT)
-    put_connect_timeout : Proc(ISearchCatalogManager*, UInt32, HRESULT)
-    get_connect_timeout : Proc(ISearchCatalogManager*, UInt32*, HRESULT)
-    put_data_timeout : Proc(ISearchCatalogManager*, UInt32, HRESULT)
-    get_data_timeout : Proc(ISearchCatalogManager*, UInt32*, HRESULT)
-    number_of_items : Proc(ISearchCatalogManager*, Int32*, HRESULT)
-    number_of_items_to_index : Proc(ISearchCatalogManager*, Int32*, Int32*, Int32*, HRESULT)
-    url_being_indexed : Proc(ISearchCatalogManager*, LibC::LPWSTR*, HRESULT)
-    get_url_indexing_state : Proc(ISearchCatalogManager*, LibC::LPWSTR, UInt32*, HRESULT)
-    get_persistent_items_changed_sink : Proc(ISearchCatalogManager*, ISearchPersistentItemsChangedSink*, HRESULT)
-    register_view_for_notification : Proc(ISearchCatalogManager*, LibC::LPWSTR, ISearchViewChangedSink, UInt32*, HRESULT)
-    get_items_changed_sink : Proc(ISearchCatalogManager*, ISearchNotifyInlineSite, Guid*, Void**, Guid*, Guid*, UInt32*, HRESULT)
-    unregister_view_for_notification : Proc(ISearchCatalogManager*, UInt32, HRESULT)
-    set_extension_clusion : Proc(ISearchCatalogManager*, LibC::LPWSTR, LibC::BOOL, HRESULT)
-    enumerate_excluded_extensions : Proc(ISearchCatalogManager*, IEnumString*, HRESULT)
-    get_query_helper : Proc(ISearchCatalogManager*, ISearchQueryHelper*, HRESULT)
-    put_diacritic_sensitivity : Proc(ISearchCatalogManager*, LibC::BOOL, HRESULT)
-    get_diacritic_sensitivity : Proc(ISearchCatalogManager*, LibC::BOOL*, HRESULT)
-    get_crawl_scope_manager : Proc(ISearchCatalogManager*, ISearchCrawlScopeManager*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_name : UInt64
+    get_parameter : UInt64
+    set_parameter : UInt64
+    get_catalog_status : UInt64
+    reset : UInt64
+    reindex : UInt64
+    reindex_matching_ur_ls : UInt64
+    reindex_search_root : UInt64
+    put_connect_timeout : UInt64
+    get_connect_timeout : UInt64
+    put_data_timeout : UInt64
+    get_data_timeout : UInt64
+    number_of_items : UInt64
+    number_of_items_to_index : UInt64
+    url_being_indexed : UInt64
+    get_url_indexing_state : UInt64
+    get_persistent_items_changed_sink : UInt64
+    register_view_for_notification : UInt64
+    get_items_changed_sink : UInt64
+    unregister_view_for_notification : UInt64
+    set_extension_clusion : UInt64
+    enumerate_excluded_extensions : UInt64
+    get_query_helper : UInt64
+    put_diacritic_sensitivity : UInt64
+    get_diacritic_sensitivity : UInt64
+    get_crawl_scope_manager : UInt64
   end
 
   ISearchCatalogManager_GUID = "ab310581-ac80-11d1-8df3-00c04fb6ef50"
@@ -7411,36 +7411,36 @@ lib LibWin32
   end
 
   struct ISearchCatalogManager2VTbl
-    query_interface : Proc(ISearchCatalogManager2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchCatalogManager2*, UInt32)
-    release : Proc(ISearchCatalogManager2*, UInt32)
-    get_name : Proc(ISearchCatalogManager2*, LibC::LPWSTR*, HRESULT)
-    get_parameter : Proc(ISearchCatalogManager2*, LibC::LPWSTR, PROPVARIANT**, HRESULT)
-    set_parameter : Proc(ISearchCatalogManager2*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
-    get_catalog_status : Proc(ISearchCatalogManager2*, CatalogStatus*, CatalogPausedReason*, HRESULT)
-    reset : Proc(ISearchCatalogManager2*, HRESULT)
-    reindex : Proc(ISearchCatalogManager2*, HRESULT)
-    reindex_matching_ur_ls : Proc(ISearchCatalogManager2*, LibC::LPWSTR, HRESULT)
-    reindex_search_root : Proc(ISearchCatalogManager2*, LibC::LPWSTR, HRESULT)
-    put_connect_timeout : Proc(ISearchCatalogManager2*, UInt32, HRESULT)
-    get_connect_timeout : Proc(ISearchCatalogManager2*, UInt32*, HRESULT)
-    put_data_timeout : Proc(ISearchCatalogManager2*, UInt32, HRESULT)
-    get_data_timeout : Proc(ISearchCatalogManager2*, UInt32*, HRESULT)
-    number_of_items : Proc(ISearchCatalogManager2*, Int32*, HRESULT)
-    number_of_items_to_index : Proc(ISearchCatalogManager2*, Int32*, Int32*, Int32*, HRESULT)
-    url_being_indexed : Proc(ISearchCatalogManager2*, LibC::LPWSTR*, HRESULT)
-    get_url_indexing_state : Proc(ISearchCatalogManager2*, LibC::LPWSTR, UInt32*, HRESULT)
-    get_persistent_items_changed_sink : Proc(ISearchCatalogManager2*, ISearchPersistentItemsChangedSink*, HRESULT)
-    register_view_for_notification : Proc(ISearchCatalogManager2*, LibC::LPWSTR, ISearchViewChangedSink, UInt32*, HRESULT)
-    get_items_changed_sink : Proc(ISearchCatalogManager2*, ISearchNotifyInlineSite, Guid*, Void**, Guid*, Guid*, UInt32*, HRESULT)
-    unregister_view_for_notification : Proc(ISearchCatalogManager2*, UInt32, HRESULT)
-    set_extension_clusion : Proc(ISearchCatalogManager2*, LibC::LPWSTR, LibC::BOOL, HRESULT)
-    enumerate_excluded_extensions : Proc(ISearchCatalogManager2*, IEnumString*, HRESULT)
-    get_query_helper : Proc(ISearchCatalogManager2*, ISearchQueryHelper*, HRESULT)
-    put_diacritic_sensitivity : Proc(ISearchCatalogManager2*, LibC::BOOL, HRESULT)
-    get_diacritic_sensitivity : Proc(ISearchCatalogManager2*, LibC::BOOL*, HRESULT)
-    get_crawl_scope_manager : Proc(ISearchCatalogManager2*, ISearchCrawlScopeManager*, HRESULT)
-    prioritize_matching_ur_ls : Proc(ISearchCatalogManager2*, LibC::LPWSTR, PRIORITIZE_FLAGS, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_name : UInt64
+    get_parameter : UInt64
+    set_parameter : UInt64
+    get_catalog_status : UInt64
+    reset : UInt64
+    reindex : UInt64
+    reindex_matching_ur_ls : UInt64
+    reindex_search_root : UInt64
+    put_connect_timeout : UInt64
+    get_connect_timeout : UInt64
+    put_data_timeout : UInt64
+    get_data_timeout : UInt64
+    number_of_items : UInt64
+    number_of_items_to_index : UInt64
+    url_being_indexed : UInt64
+    get_url_indexing_state : UInt64
+    get_persistent_items_changed_sink : UInt64
+    register_view_for_notification : UInt64
+    get_items_changed_sink : UInt64
+    unregister_view_for_notification : UInt64
+    set_extension_clusion : UInt64
+    enumerate_excluded_extensions : UInt64
+    get_query_helper : UInt64
+    put_diacritic_sensitivity : UInt64
+    get_diacritic_sensitivity : UInt64
+    get_crawl_scope_manager : UInt64
+    prioritize_matching_ur_ls : UInt64
   end
 
   ISearchCatalogManager2_GUID = "7ac3286d-4d1d-4817-84fc-c1c85e3af0d9"
@@ -7450,30 +7450,30 @@ lib LibWin32
   end
 
   struct ISearchQueryHelperVTbl
-    query_interface : Proc(ISearchQueryHelper*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchQueryHelper*, UInt32)
-    release : Proc(ISearchQueryHelper*, UInt32)
-    get_connection_string : Proc(ISearchQueryHelper*, LibC::LPWSTR*, HRESULT)
-    put_query_content_locale : Proc(ISearchQueryHelper*, UInt32, HRESULT)
-    get_query_content_locale : Proc(ISearchQueryHelper*, UInt32*, HRESULT)
-    put_query_keyword_locale : Proc(ISearchQueryHelper*, UInt32, HRESULT)
-    get_query_keyword_locale : Proc(ISearchQueryHelper*, UInt32*, HRESULT)
-    put_query_term_expansion : Proc(ISearchQueryHelper*, SEARCH_TERM_EXPANSION, HRESULT)
-    get_query_term_expansion : Proc(ISearchQueryHelper*, SEARCH_TERM_EXPANSION*, HRESULT)
-    put_query_syntax : Proc(ISearchQueryHelper*, SEARCH_QUERY_SYNTAX, HRESULT)
-    get_query_syntax : Proc(ISearchQueryHelper*, SEARCH_QUERY_SYNTAX*, HRESULT)
-    put_query_content_properties : Proc(ISearchQueryHelper*, LibC::LPWSTR, HRESULT)
-    get_query_content_properties : Proc(ISearchQueryHelper*, LibC::LPWSTR*, HRESULT)
-    put_query_select_columns : Proc(ISearchQueryHelper*, LibC::LPWSTR, HRESULT)
-    get_query_select_columns : Proc(ISearchQueryHelper*, LibC::LPWSTR*, HRESULT)
-    put_query_where_restrictions : Proc(ISearchQueryHelper*, LibC::LPWSTR, HRESULT)
-    get_query_where_restrictions : Proc(ISearchQueryHelper*, LibC::LPWSTR*, HRESULT)
-    put_query_sorting : Proc(ISearchQueryHelper*, LibC::LPWSTR, HRESULT)
-    get_query_sorting : Proc(ISearchQueryHelper*, LibC::LPWSTR*, HRESULT)
-    generate_sql_from_user_query : Proc(ISearchQueryHelper*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
-    write_properties : Proc(ISearchQueryHelper*, Int32, UInt32, PROPERTYKEY*, SEARCH_COLUMN_PROPERTIES*, FILETIME*, HRESULT)
-    put_query_max_results : Proc(ISearchQueryHelper*, Int32, HRESULT)
-    get_query_max_results : Proc(ISearchQueryHelper*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_connection_string : UInt64
+    put_query_content_locale : UInt64
+    get_query_content_locale : UInt64
+    put_query_keyword_locale : UInt64
+    get_query_keyword_locale : UInt64
+    put_query_term_expansion : UInt64
+    get_query_term_expansion : UInt64
+    put_query_syntax : UInt64
+    get_query_syntax : UInt64
+    put_query_content_properties : UInt64
+    get_query_content_properties : UInt64
+    put_query_select_columns : UInt64
+    get_query_select_columns : UInt64
+    put_query_where_restrictions : UInt64
+    get_query_where_restrictions : UInt64
+    put_query_sorting : UInt64
+    get_query_sorting : UInt64
+    generate_sql_from_user_query : UInt64
+    write_properties : UInt64
+    put_query_max_results : UInt64
+    get_query_max_results : UInt64
   end
 
   ISearchQueryHelper_GUID = "ab310581-ac80-11d1-8df3-00c04fb6ef63"
@@ -7483,12 +7483,12 @@ lib LibWin32
   end
 
   struct IRowsetPrioritizationVTbl
-    query_interface : Proc(IRowsetPrioritization*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetPrioritization*, UInt32)
-    release : Proc(IRowsetPrioritization*, UInt32)
-    set_scope_priority : Proc(IRowsetPrioritization*, PRIORITY_LEVEL, UInt32, HRESULT)
-    get_scope_priority : Proc(IRowsetPrioritization*, PRIORITY_LEVEL*, UInt32*, HRESULT)
-    get_scope_statistics : Proc(IRowsetPrioritization*, UInt32*, UInt32*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_scope_priority : UInt64
+    get_scope_priority : UInt64
+    get_scope_statistics : UInt64
   end
 
   IRowsetPrioritization_GUID = "42811652-079d-481b-87a2-09a69ecc5f44"
@@ -7498,13 +7498,13 @@ lib LibWin32
   end
 
   struct IRowsetEventsVTbl
-    query_interface : Proc(IRowsetEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetEvents*, UInt32)
-    release : Proc(IRowsetEvents*, UInt32)
-    on_new_item : Proc(IRowsetEvents*, PROPVARIANT*, ROWSETEVENT_ITEMSTATE, HRESULT)
-    on_changed_item : Proc(IRowsetEvents*, PROPVARIANT*, ROWSETEVENT_ITEMSTATE, ROWSETEVENT_ITEMSTATE, HRESULT)
-    on_deleted_item : Proc(IRowsetEvents*, PROPVARIANT*, ROWSETEVENT_ITEMSTATE, HRESULT)
-    on_rowset_event : Proc(IRowsetEvents*, ROWSETEVENT_TYPE, PROPVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_new_item : UInt64
+    on_changed_item : UInt64
+    on_deleted_item : UInt64
+    on_rowset_event : UInt64
   end
 
   IRowsetEvents_GUID = "1551aea5-5d66-4b11-86f5-d5634cb211b9"
@@ -7514,22 +7514,22 @@ lib LibWin32
   end
 
   struct ISearchManagerVTbl
-    query_interface : Proc(ISearchManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchManager*, UInt32)
-    release : Proc(ISearchManager*, UInt32)
-    get_indexer_version_str : Proc(ISearchManager*, LibC::LPWSTR*, HRESULT)
-    get_indexer_version : Proc(ISearchManager*, UInt32*, UInt32*, HRESULT)
-    get_parameter : Proc(ISearchManager*, LibC::LPWSTR, PROPVARIANT**, HRESULT)
-    set_parameter : Proc(ISearchManager*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
-    get_proxy_name : Proc(ISearchManager*, LibC::LPWSTR*, HRESULT)
-    get_bypass_list : Proc(ISearchManager*, LibC::LPWSTR*, HRESULT)
-    set_proxy : Proc(ISearchManager*, PROXY_ACCESS, LibC::BOOL, UInt32, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_catalog : Proc(ISearchManager*, LibC::LPWSTR, ISearchCatalogManager*, HRESULT)
-    get_user_agent : Proc(ISearchManager*, LibC::LPWSTR*, HRESULT)
-    put_user_agent : Proc(ISearchManager*, LibC::LPWSTR, HRESULT)
-    get_use_proxy : Proc(ISearchManager*, PROXY_ACCESS*, HRESULT)
-    get_local_bypass : Proc(ISearchManager*, LibC::BOOL*, HRESULT)
-    get_port_number : Proc(ISearchManager*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_indexer_version_str : UInt64
+    get_indexer_version : UInt64
+    get_parameter : UInt64
+    set_parameter : UInt64
+    get_proxy_name : UInt64
+    get_bypass_list : UInt64
+    set_proxy : UInt64
+    get_catalog : UInt64
+    get_user_agent : UInt64
+    put_user_agent : UInt64
+    get_use_proxy : UInt64
+    get_local_bypass : UInt64
+    get_port_number : UInt64
   end
 
   ISearchManager_GUID = "ab310581-ac80-11d1-8df3-00c04fb6ef69"
@@ -7539,24 +7539,24 @@ lib LibWin32
   end
 
   struct ISearchManager2VTbl
-    query_interface : Proc(ISearchManager2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchManager2*, UInt32)
-    release : Proc(ISearchManager2*, UInt32)
-    get_indexer_version_str : Proc(ISearchManager2*, LibC::LPWSTR*, HRESULT)
-    get_indexer_version : Proc(ISearchManager2*, UInt32*, UInt32*, HRESULT)
-    get_parameter : Proc(ISearchManager2*, LibC::LPWSTR, PROPVARIANT**, HRESULT)
-    set_parameter : Proc(ISearchManager2*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
-    get_proxy_name : Proc(ISearchManager2*, LibC::LPWSTR*, HRESULT)
-    get_bypass_list : Proc(ISearchManager2*, LibC::LPWSTR*, HRESULT)
-    set_proxy : Proc(ISearchManager2*, PROXY_ACCESS, LibC::BOOL, UInt32, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_catalog : Proc(ISearchManager2*, LibC::LPWSTR, ISearchCatalogManager*, HRESULT)
-    get_user_agent : Proc(ISearchManager2*, LibC::LPWSTR*, HRESULT)
-    put_user_agent : Proc(ISearchManager2*, LibC::LPWSTR, HRESULT)
-    get_use_proxy : Proc(ISearchManager2*, PROXY_ACCESS*, HRESULT)
-    get_local_bypass : Proc(ISearchManager2*, LibC::BOOL*, HRESULT)
-    get_port_number : Proc(ISearchManager2*, UInt32*, HRESULT)
-    create_catalog : Proc(ISearchManager2*, LibC::LPWSTR, ISearchCatalogManager*, HRESULT)
-    delete_catalog : Proc(ISearchManager2*, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_indexer_version_str : UInt64
+    get_indexer_version : UInt64
+    get_parameter : UInt64
+    set_parameter : UInt64
+    get_proxy_name : UInt64
+    get_bypass_list : UInt64
+    set_proxy : UInt64
+    get_catalog : UInt64
+    get_user_agent : UInt64
+    put_user_agent : UInt64
+    get_use_proxy : UInt64
+    get_local_bypass : UInt64
+    get_port_number : UInt64
+    create_catalog : UInt64
+    delete_catalog : UInt64
   end
 
   ISearchManager2_GUID = "dbab3f73-db19-4a79-bfc0-a61a93886ddf"
@@ -7566,14 +7566,14 @@ lib LibWin32
   end
 
   struct ISearchLanguageSupportVTbl
-    query_interface : Proc(ISearchLanguageSupport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchLanguageSupport*, UInt32)
-    release : Proc(ISearchLanguageSupport*, UInt32)
-    set_diacritic_sensitivity : Proc(ISearchLanguageSupport*, LibC::BOOL, HRESULT)
-    get_diacritic_sensitivity : Proc(ISearchLanguageSupport*, LibC::BOOL*, HRESULT)
-    load_word_breaker : Proc(ISearchLanguageSupport*, UInt32, Guid*, Void**, UInt32*, HRESULT)
-    load_stemmer : Proc(ISearchLanguageSupport*, UInt32, Guid*, Void**, UInt32*, HRESULT)
-    is_prefix_normalized : Proc(ISearchLanguageSupport*, Char*, UInt32, Char*, UInt32, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_diacritic_sensitivity : UInt64
+    get_diacritic_sensitivity : UInt64
+    load_word_breaker : UInt64
+    load_stemmer : UInt64
+    is_prefix_normalized : UInt64
   end
 
   ISearchLanguageSupport_GUID = "24c3cbaa-ebc1-491a-9ef1-9f6d8deb1b8f"
@@ -7583,14 +7583,14 @@ lib LibWin32
   end
 
   struct IEnumItemPropertiesVTbl
-    query_interface : Proc(IEnumItemProperties*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumItemProperties*, UInt32)
-    release : Proc(IEnumItemProperties*, UInt32)
-    next : Proc(IEnumItemProperties*, UInt32, ITEMPROP*, UInt32*, HRESULT)
-    skip : Proc(IEnumItemProperties*, UInt32, HRESULT)
-    reset : Proc(IEnumItemProperties*, HRESULT)
-    clone : Proc(IEnumItemProperties*, IEnumItemProperties*, HRESULT)
-    get_count : Proc(IEnumItemProperties*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
+    get_count : UInt64
   end
 
   IEnumItemProperties_GUID = "f72c8d96-6dbd-11d1-a1e8-00c04fc2fbe1"
@@ -7600,16 +7600,16 @@ lib LibWin32
   end
 
   struct ISubscriptionItemVTbl
-    query_interface : Proc(ISubscriptionItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISubscriptionItem*, UInt32)
-    release : Proc(ISubscriptionItem*, UInt32)
-    get_cookie : Proc(ISubscriptionItem*, Guid*, HRESULT)
-    get_subscription_item_info : Proc(ISubscriptionItem*, SUBSCRIPTIONITEMINFO*, HRESULT)
-    set_subscription_item_info : Proc(ISubscriptionItem*, SUBSCRIPTIONITEMINFO*, HRESULT)
-    read_properties : Proc(ISubscriptionItem*, UInt32, LibC::LPWSTR*, VARIANT*, HRESULT)
-    write_properties : Proc(ISubscriptionItem*, UInt32, LibC::LPWSTR*, VARIANT*, HRESULT)
-    enum_properties : Proc(ISubscriptionItem*, IEnumItemProperties*, HRESULT)
-    notify_changed : Proc(ISubscriptionItem*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_cookie : UInt64
+    get_subscription_item_info : UInt64
+    set_subscription_item_info : UInt64
+    read_properties : UInt64
+    write_properties : UInt64
+    enum_properties : UInt64
+    notify_changed : UInt64
   end
 
   ISubscriptionItem_GUID = "a97559f8-6c4a-11d1-a1e8-00c04fc2fbe1"
@@ -7619,14 +7619,14 @@ lib LibWin32
   end
 
   struct IEnumSubscriptionVTbl
-    query_interface : Proc(IEnumSubscription*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumSubscription*, UInt32)
-    release : Proc(IEnumSubscription*, UInt32)
-    next : Proc(IEnumSubscription*, UInt32, Guid*, UInt32*, HRESULT)
-    skip : Proc(IEnumSubscription*, UInt32, HRESULT)
-    reset : Proc(IEnumSubscription*, HRESULT)
-    clone : Proc(IEnumSubscription*, IEnumSubscription*, HRESULT)
-    get_count : Proc(IEnumSubscription*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
+    get_count : UInt64
   end
 
   IEnumSubscription_GUID = "f72c8d97-6dbd-11d1-a1e8-00c04fc2fbe1"
@@ -7636,17 +7636,17 @@ lib LibWin32
   end
 
   struct ISubscriptionMgrVTbl
-    query_interface : Proc(ISubscriptionMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISubscriptionMgr*, UInt32)
-    release : Proc(ISubscriptionMgr*, UInt32)
-    delete_subscription : Proc(ISubscriptionMgr*, LibC::LPWSTR, LibC::HANDLE, HRESULT)
-    update_subscription : Proc(ISubscriptionMgr*, LibC::LPWSTR, HRESULT)
-    update_all : Proc(ISubscriptionMgr*, HRESULT)
-    is_subscribed : Proc(ISubscriptionMgr*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
-    get_subscription_info : Proc(ISubscriptionMgr*, LibC::LPWSTR, SUBSCRIPTIONINFO*, HRESULT)
-    get_default_info : Proc(ISubscriptionMgr*, SUBSCRIPTIONTYPE, SUBSCRIPTIONINFO*, HRESULT)
-    show_subscription_properties : Proc(ISubscriptionMgr*, LibC::LPWSTR, LibC::HANDLE, HRESULT)
-    create_subscription : Proc(ISubscriptionMgr*, LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, UInt32, SUBSCRIPTIONTYPE, SUBSCRIPTIONINFO*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    delete_subscription : UInt64
+    update_subscription : UInt64
+    update_all : UInt64
+    is_subscribed : UInt64
+    get_subscription_info : UInt64
+    get_default_info : UInt64
+    show_subscription_properties : UInt64
+    create_subscription : UInt64
   end
 
   ISubscriptionMgr_GUID = "085fb2c0-0df8-11d1-8f4b-00a0c905413f"
@@ -7656,24 +7656,24 @@ lib LibWin32
   end
 
   struct ISubscriptionMgr2VTbl
-    query_interface : Proc(ISubscriptionMgr2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISubscriptionMgr2*, UInt32)
-    release : Proc(ISubscriptionMgr2*, UInt32)
-    delete_subscription : Proc(ISubscriptionMgr2*, LibC::LPWSTR, LibC::HANDLE, HRESULT)
-    update_subscription : Proc(ISubscriptionMgr2*, LibC::LPWSTR, HRESULT)
-    update_all : Proc(ISubscriptionMgr2*, HRESULT)
-    is_subscribed : Proc(ISubscriptionMgr2*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
-    get_subscription_info : Proc(ISubscriptionMgr2*, LibC::LPWSTR, SUBSCRIPTIONINFO*, HRESULT)
-    get_default_info : Proc(ISubscriptionMgr2*, SUBSCRIPTIONTYPE, SUBSCRIPTIONINFO*, HRESULT)
-    show_subscription_properties : Proc(ISubscriptionMgr2*, LibC::LPWSTR, LibC::HANDLE, HRESULT)
-    create_subscription : Proc(ISubscriptionMgr2*, LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, UInt32, SUBSCRIPTIONTYPE, SUBSCRIPTIONINFO*, HRESULT)
-    get_item_from_url : Proc(ISubscriptionMgr2*, LibC::LPWSTR, ISubscriptionItem*, HRESULT)
-    get_item_from_cookie : Proc(ISubscriptionMgr2*, Guid*, ISubscriptionItem*, HRESULT)
-    get_subscription_run_state : Proc(ISubscriptionMgr2*, UInt32, Guid*, UInt32*, HRESULT)
-    enum_subscriptions : Proc(ISubscriptionMgr2*, UInt32, IEnumSubscription*, HRESULT)
-    update_items : Proc(ISubscriptionMgr2*, UInt32, UInt32, Guid*, HRESULT)
-    abort_items : Proc(ISubscriptionMgr2*, UInt32, Guid*, HRESULT)
-    abort_all : Proc(ISubscriptionMgr2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    delete_subscription : UInt64
+    update_subscription : UInt64
+    update_all : UInt64
+    is_subscribed : UInt64
+    get_subscription_info : UInt64
+    get_default_info : UInt64
+    show_subscription_properties : UInt64
+    create_subscription : UInt64
+    get_item_from_url : UInt64
+    get_item_from_cookie : UInt64
+    get_subscription_run_state : UInt64
+    enum_subscriptions : UInt64
+    update_items : UInt64
+    abort_items : UInt64
+    abort_all : UInt64
   end
 
   ISubscriptionMgr2_GUID = "614bc270-aedf-11d1-a1f9-00c04fc2fbe1"
@@ -7683,12 +7683,12 @@ lib LibWin32
   end
 
   struct IDataConvertVTbl
-    query_interface : Proc(IDataConvert*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDataConvert*, UInt32)
-    release : Proc(IDataConvert*, UInt32)
-    data_convert : Proc(IDataConvert*, UInt16, UInt16, LibC::UINT_PTR, LibC::UINT_PTR*, Void*, Void*, LibC::UINT_PTR, UInt32, UInt32*, UInt8, UInt8, UInt32, HRESULT)
-    can_convert : Proc(IDataConvert*, UInt16, UInt16, HRESULT)
-    get_conversion_size : Proc(IDataConvert*, UInt16, UInt16, LibC::UINT_PTR*, LibC::UINT_PTR*, Void*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    data_convert : UInt64
+    can_convert : UInt64
+    get_conversion_size : UInt64
   end
 
   IDataConvert_GUID = "0c733a8d-2a1c-11ce-ade5-00aa0044773d"
@@ -7698,11 +7698,11 @@ lib LibWin32
   end
 
   struct IDCInfoVTbl
-    query_interface : Proc(IDCInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCInfo*, UInt32)
-    release : Proc(IDCInfo*, UInt32)
-    get_info : Proc(IDCInfo*, UInt32, UInt32*, DCINFO**, HRESULT)
-    set_info : Proc(IDCInfo*, UInt32, DCINFO*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_info : UInt64
+    set_info : UInt64
   end
 
   IDCInfo_GUID = "0c733a9c-2a1c-11ce-ade5-00aa0044773d"
@@ -7712,12 +7712,12 @@ lib LibWin32
   end
 
   struct DataSourceListenerVTbl
-    query_interface : Proc(DataSourceListener*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DataSourceListener*, UInt32)
-    release : Proc(DataSourceListener*, UInt32)
-    data_member_changed : Proc(DataSourceListener*, UInt16*, HRESULT)
-    data_member_added : Proc(DataSourceListener*, UInt16*, HRESULT)
-    data_member_removed : Proc(DataSourceListener*, UInt16*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    data_member_changed : UInt64
+    data_member_added : UInt64
+    data_member_removed : UInt64
   end
 
   DataSourceListener_GUID = "7c0ffab2-cd84-11d0-949a-00a0c91110ed"
@@ -7727,14 +7727,14 @@ lib LibWin32
   end
 
   struct DataSourceVTbl
-    query_interface : Proc(DataSource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DataSource*, UInt32)
-    release : Proc(DataSource*, UInt32)
-    get_data_member : Proc(DataSource*, UInt16*, Guid*, IUnknown*, HRESULT)
-    get_data_member_name : Proc(DataSource*, Int32, UInt16**, HRESULT)
-    get_data_member_count : Proc(DataSource*, Int32*, HRESULT)
-    add_data_source_listener : Proc(DataSource*, DataSourceListener, HRESULT)
-    remove_data_source_listener : Proc(DataSource*, DataSourceListener, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_data_member : UInt64
+    get_data_member_name : UInt64
+    get_data_member_count : UInt64
+    add_data_source_listener : UInt64
+    remove_data_source_listener : UInt64
   end
 
   DataSource_GUID = "7c0ffab3-cd84-11d0-949a-00a0c91110ed"
@@ -7744,17 +7744,17 @@ lib LibWin32
   end
 
   struct OLEDBSimpleProviderListenerVTbl
-    query_interface : Proc(OLEDBSimpleProviderListener*, Guid*, Void**, HRESULT)
-    add_ref : Proc(OLEDBSimpleProviderListener*, UInt32)
-    release : Proc(OLEDBSimpleProviderListener*, UInt32)
-    about_to_change_cell : Proc(OLEDBSimpleProviderListener*, LibC::IntPtrT, LibC::IntPtrT, HRESULT)
-    cell_changed : Proc(OLEDBSimpleProviderListener*, LibC::IntPtrT, LibC::IntPtrT, HRESULT)
-    about_to_delete_rows : Proc(OLEDBSimpleProviderListener*, LibC::IntPtrT, LibC::IntPtrT, HRESULT)
-    deleted_rows : Proc(OLEDBSimpleProviderListener*, LibC::IntPtrT, LibC::IntPtrT, HRESULT)
-    about_to_insert_rows : Proc(OLEDBSimpleProviderListener*, LibC::IntPtrT, LibC::IntPtrT, HRESULT)
-    inserted_rows : Proc(OLEDBSimpleProviderListener*, LibC::IntPtrT, LibC::IntPtrT, HRESULT)
-    rows_available : Proc(OLEDBSimpleProviderListener*, LibC::IntPtrT, LibC::IntPtrT, HRESULT)
-    transfer_complete : Proc(OLEDBSimpleProviderListener*, OSPXFER, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    about_to_change_cell : UInt64
+    cell_changed : UInt64
+    about_to_delete_rows : UInt64
+    deleted_rows : UInt64
+    about_to_insert_rows : UInt64
+    inserted_rows : UInt64
+    rows_available : UInt64
+    transfer_complete : UInt64
   end
 
   OLEDBSimpleProviderListener_GUID = "e0e270c1-c0be-11d0-8fe4-00a0c90a6341"
@@ -7764,23 +7764,23 @@ lib LibWin32
   end
 
   struct OLEDBSimpleProviderVTbl
-    query_interface : Proc(OLEDBSimpleProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(OLEDBSimpleProvider*, UInt32)
-    release : Proc(OLEDBSimpleProvider*, UInt32)
-    get_row_count : Proc(OLEDBSimpleProvider*, LibC::IntPtrT*, HRESULT)
-    get_column_count : Proc(OLEDBSimpleProvider*, LibC::IntPtrT*, HRESULT)
-    get_rw_status : Proc(OLEDBSimpleProvider*, LibC::IntPtrT, LibC::IntPtrT, OSPRW*, HRESULT)
-    get_variant : Proc(OLEDBSimpleProvider*, LibC::IntPtrT, LibC::IntPtrT, OSPFORMAT, VARIANT*, HRESULT)
-    set_variant : Proc(OLEDBSimpleProvider*, LibC::IntPtrT, LibC::IntPtrT, OSPFORMAT, VARIANT, HRESULT)
-    get_locale : Proc(OLEDBSimpleProvider*, UInt8**, HRESULT)
-    delete_rows : Proc(OLEDBSimpleProvider*, LibC::IntPtrT, LibC::IntPtrT, LibC::IntPtrT*, HRESULT)
-    insert_rows : Proc(OLEDBSimpleProvider*, LibC::IntPtrT, LibC::IntPtrT, LibC::IntPtrT*, HRESULT)
-    find : Proc(OLEDBSimpleProvider*, LibC::IntPtrT, LibC::IntPtrT, VARIANT, OSPFIND, OSPCOMP, LibC::IntPtrT*, HRESULT)
-    add_oledb_simple_provider_listener : Proc(OLEDBSimpleProvider*, OLEDBSimpleProviderListener, HRESULT)
-    remove_oledb_simple_provider_listener : Proc(OLEDBSimpleProvider*, OLEDBSimpleProviderListener, HRESULT)
-    is_async : Proc(OLEDBSimpleProvider*, LibC::BOOL*, HRESULT)
-    get_estimated_rows : Proc(OLEDBSimpleProvider*, LibC::IntPtrT*, HRESULT)
-    stop_transfer : Proc(OLEDBSimpleProvider*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_row_count : UInt64
+    get_column_count : UInt64
+    get_rw_status : UInt64
+    get_variant : UInt64
+    set_variant : UInt64
+    get_locale : UInt64
+    delete_rows : UInt64
+    insert_rows : UInt64
+    find : UInt64
+    add_oledb_simple_provider_listener : UInt64
+    remove_oledb_simple_provider_listener : UInt64
+    is_async : UInt64
+    get_estimated_rows : UInt64
+    stop_transfer : UInt64
   end
 
   OLEDBSimpleProvider_GUID = "e0e270c0-c0be-11d0-8fe4-00a0c90a6341"
@@ -7790,13 +7790,13 @@ lib LibWin32
   end
 
   struct DataSourceObjectVTbl
-    query_interface : Proc(DataSourceObject*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DataSourceObject*, UInt32)
-    release : Proc(DataSourceObject*, UInt32)
-    get_type_info_count : Proc(DataSourceObject*, UInt32*, HRESULT)
-    get_type_info : Proc(DataSourceObject*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(DataSourceObject*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(DataSourceObject*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
   end
 
   DataSourceObject_GUID = "0ae9a4e4-18d4-11d1-b3b3-00aa00c1a924"
@@ -7806,10 +7806,10 @@ lib LibWin32
   end
 
   struct IServiceVTbl
-    query_interface : Proc(IService*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IService*, UInt32)
-    release : Proc(IService*, UInt32)
-    invoke_service : Proc(IService*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    invoke_service : UInt64
   end
 
   IService_GUID = "06210e88-01f5-11d1-b512-0080c781c384"
@@ -7819,11 +7819,11 @@ lib LibWin32
   end
 
   struct IDBPromptInitializeVTbl
-    query_interface : Proc(IDBPromptInitialize*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDBPromptInitialize*, UInt32)
-    release : Proc(IDBPromptInitialize*, UInt32)
-    prompt_data_source : Proc(IDBPromptInitialize*, IUnknown, LibC::HANDLE, UInt32, UInt32, UInt32*, LibC::LPWSTR, Guid*, IUnknown*, HRESULT)
-    prompt_file_name : Proc(IDBPromptInitialize*, LibC::HANDLE, UInt32, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    prompt_data_source : UInt64
+    prompt_file_name : UInt64
   end
 
   IDBPromptInitialize_GUID = "2206ccb0-19c1-11d1-89e0-00c04fd7a829"
@@ -7833,15 +7833,15 @@ lib LibWin32
   end
 
   struct IDataInitializeVTbl
-    query_interface : Proc(IDataInitialize*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDataInitialize*, UInt32)
-    release : Proc(IDataInitialize*, UInt32)
-    get_data_source : Proc(IDataInitialize*, IUnknown, UInt32, LibC::LPWSTR, Guid*, IUnknown*, HRESULT)
-    get_initialization_string : Proc(IDataInitialize*, IUnknown, UInt8, LibC::LPWSTR*, HRESULT)
-    create_db_instance : Proc(IDataInitialize*, Guid*, IUnknown, UInt32, LibC::LPWSTR, Guid*, IUnknown*, HRESULT)
-    create_db_instance_ex : Proc(IDataInitialize*, Guid*, IUnknown, UInt32, LibC::LPWSTR, COSERVERINFO*, UInt32, MULTI_QI*, HRESULT)
-    load_string_from_storage : Proc(IDataInitialize*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
-    write_string_to_storage : Proc(IDataInitialize*, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_data_source : UInt64
+    get_initialization_string : UInt64
+    create_db_instance : UInt64
+    create_db_instance_ex : UInt64
+    load_string_from_storage : UInt64
+    write_string_to_storage : UInt64
   end
 
   IDataInitialize_GUID = "2206ccb1-19c1-11d1-89e0-00c04fd7a829"
@@ -7851,17 +7851,17 @@ lib LibWin32
   end
 
   struct IDataSourceLocatorVTbl
-    query_interface : Proc(IDataSourceLocator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDataSourceLocator*, UInt32)
-    release : Proc(IDataSourceLocator*, UInt32)
-    get_type_info_count : Proc(IDataSourceLocator*, UInt32*, HRESULT)
-    get_type_info : Proc(IDataSourceLocator*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDataSourceLocator*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDataSourceLocator*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_h_wnd : Proc(IDataSourceLocator*, Int64*, HRESULT)
-    put_h_wnd : Proc(IDataSourceLocator*, Int64, HRESULT)
-    prompt_new : Proc(IDataSourceLocator*, IDispatch*, HRESULT)
-    prompt_edit : Proc(IDataSourceLocator*, IDispatch*, Int16*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_h_wnd : UInt64
+    put_h_wnd : UInt64
+    prompt_new : UInt64
+    prompt_edit : UInt64
   end
 
   IDataSourceLocator_GUID = "2206ccb2-19c1-11d1-89e0-00c04fd7a829"
@@ -7871,11 +7871,11 @@ lib LibWin32
   end
 
   struct IRowsetChangeExtInfoVTbl
-    query_interface : Proc(IRowsetChangeExtInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetChangeExtInfo*, UInt32)
-    release : Proc(IRowsetChangeExtInfo*, UInt32)
-    get_original_row : Proc(IRowsetChangeExtInfo*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, HRESULT)
-    get_pending_columns : Proc(IRowsetChangeExtInfo*, LibC::UINT_PTR, LibC::UINT_PTR, UInt32, UInt32*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_original_row : UInt64
+    get_pending_columns : UInt64
   end
 
   IRowsetChangeExtInfo_GUID = "0c733a8f-2a1c-11ce-ade5-00aa0044773d"
@@ -7885,10 +7885,10 @@ lib LibWin32
   end
 
   struct ISQLRequestDiagFieldsVTbl
-    query_interface : Proc(ISQLRequestDiagFields*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISQLRequestDiagFields*, UInt32)
-    release : Proc(ISQLRequestDiagFields*, UInt32)
-    request_diag_fields : Proc(ISQLRequestDiagFields*, UInt32, KAGREQDIAG*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    request_diag_fields : UInt64
   end
 
   ISQLRequestDiagFields_GUID = "228972f0-b5ff-11d0-8a80-00c04fd611cd"
@@ -7898,10 +7898,10 @@ lib LibWin32
   end
 
   struct ISQLGetDiagFieldVTbl
-    query_interface : Proc(ISQLGetDiagField*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISQLGetDiagField*, UInt32)
-    release : Proc(ISQLGetDiagField*, UInt32)
-    get_diag_field : Proc(ISQLGetDiagField*, KAGGETDIAG*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_diag_field : UInt64
   end
 
   ISQLGetDiagField_GUID = "228972f1-b5ff-11d0-8a80-00c04fd611cd"
@@ -7911,10 +7911,10 @@ lib LibWin32
   end
 
   struct IRowsetNextRowsetVTbl
-    query_interface : Proc(IRowsetNextRowset*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetNextRowset*, UInt32)
-    release : Proc(IRowsetNextRowset*, UInt32)
-    get_next_rowset : Proc(IRowsetNextRowset*, IUnknown, Guid*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_next_rowset : UInt64
   end
 
   IRowsetNextRowset_GUID = "0c733a72-2a1c-11ce-ade5-00aa0044773d"
@@ -7924,10 +7924,10 @@ lib LibWin32
   end
 
   struct IRowsetNewRowAfterVTbl
-    query_interface : Proc(IRowsetNewRowAfter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetNewRowAfter*, UInt32)
-    release : Proc(IRowsetNewRowAfter*, UInt32)
-    set_new_data_after : Proc(IRowsetNewRowAfter*, LibC::UINT_PTR, UInt32, UInt8*, LibC::UINT_PTR, UInt8*, LibC::UINT_PTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_new_data_after : UInt64
   end
 
   IRowsetNewRowAfter_GUID = "0c733a71-2a1c-11ce-ade5-00aa0044773d"
@@ -7937,11 +7937,11 @@ lib LibWin32
   end
 
   struct IRowsetWithParametersVTbl
-    query_interface : Proc(IRowsetWithParameters*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetWithParameters*, UInt32)
-    release : Proc(IRowsetWithParameters*, UInt32)
-    get_parameter_info : Proc(IRowsetWithParameters*, LibC::UINT_PTR*, DBPARAMINFO**, UInt16**, HRESULT)
-    requery : Proc(IRowsetWithParameters*, DBPARAMS*, UInt32*, LibC::UINT_PTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_parameter_info : UInt64
+    requery : UInt64
   end
 
   IRowsetWithParameters_GUID = "0c733a6e-2a1c-11ce-ade5-00aa0044773d"
@@ -7951,11 +7951,11 @@ lib LibWin32
   end
 
   struct IRowsetAsynchVTbl
-    query_interface : Proc(IRowsetAsynch*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetAsynch*, UInt32)
-    release : Proc(IRowsetAsynch*, UInt32)
-    ratio_finished : Proc(IRowsetAsynch*, LibC::UINT_PTR*, LibC::UINT_PTR*, LibC::UINT_PTR*, LibC::BOOL*, HRESULT)
-    stop : Proc(IRowsetAsynch*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    ratio_finished : UInt64
+    stop : UInt64
   end
 
   IRowsetAsynch_GUID = "0c733a0f-2a1c-11ce-ade5-00aa0044773d"
@@ -7965,10 +7965,10 @@ lib LibWin32
   end
 
   struct IRowsetKeysVTbl
-    query_interface : Proc(IRowsetKeys*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetKeys*, UInt32)
-    release : Proc(IRowsetKeys*, UInt32)
-    list_keys : Proc(IRowsetKeys*, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    list_keys : UInt64
   end
 
   IRowsetKeys_GUID = "0c733a12-2a1c-11ce-ade5-00aa0044773d"
@@ -7978,12 +7978,12 @@ lib LibWin32
   end
 
   struct IRowsetWatchAllVTbl
-    query_interface : Proc(IRowsetWatchAll*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetWatchAll*, UInt32)
-    release : Proc(IRowsetWatchAll*, UInt32)
-    acknowledge : Proc(IRowsetWatchAll*, HRESULT)
-    start : Proc(IRowsetWatchAll*, HRESULT)
-    stop_watching : Proc(IRowsetWatchAll*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    acknowledge : UInt64
+    start : UInt64
+    stop_watching : UInt64
   end
 
   IRowsetWatchAll_GUID = "0c733a73-2a1c-11ce-ade5-00aa0044773d"
@@ -7993,10 +7993,10 @@ lib LibWin32
   end
 
   struct IRowsetWatchNotifyVTbl
-    query_interface : Proc(IRowsetWatchNotify*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetWatchNotify*, UInt32)
-    release : Proc(IRowsetWatchNotify*, UInt32)
-    on_change : Proc(IRowsetWatchNotify*, IRowset, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_change : UInt64
   end
 
   IRowsetWatchNotify_GUID = "0c733a44-2a1c-11ce-ade5-00aa0044773d"
@@ -8006,18 +8006,18 @@ lib LibWin32
   end
 
   struct IRowsetWatchRegionVTbl
-    query_interface : Proc(IRowsetWatchRegion*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetWatchRegion*, UInt32)
-    release : Proc(IRowsetWatchRegion*, UInt32)
-    acknowledge : Proc(IRowsetWatchRegion*, HRESULT)
-    start : Proc(IRowsetWatchRegion*, HRESULT)
-    stop_watching : Proc(IRowsetWatchRegion*, HRESULT)
-    create_watch_region : Proc(IRowsetWatchRegion*, UInt32, LibC::UINT_PTR*, HRESULT)
-    change_watch_mode : Proc(IRowsetWatchRegion*, LibC::UINT_PTR, UInt32, HRESULT)
-    delete_watch_region : Proc(IRowsetWatchRegion*, LibC::UINT_PTR, HRESULT)
-    get_watch_region_info : Proc(IRowsetWatchRegion*, LibC::UINT_PTR, UInt32*, LibC::UINT_PTR*, LibC::UINT_PTR*, UInt8**, LibC::IntPtrT*, HRESULT)
-    refresh : Proc(IRowsetWatchRegion*, LibC::UINT_PTR*, Tagdbrowwatchrange**, HRESULT)
-    shrink_watch_region : Proc(IRowsetWatchRegion*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, LibC::IntPtrT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    acknowledge : UInt64
+    start : UInt64
+    stop_watching : UInt64
+    create_watch_region : UInt64
+    change_watch_mode : UInt64
+    delete_watch_region : UInt64
+    get_watch_region_info : UInt64
+    refresh : UInt64
+    shrink_watch_region : UInt64
   end
 
   IRowsetWatchRegion_GUID = "0c733a45-2a1c-11ce-ade5-00aa0044773d"
@@ -8027,13 +8027,13 @@ lib LibWin32
   end
 
   struct IRowsetCopyRowsVTbl
-    query_interface : Proc(IRowsetCopyRows*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetCopyRows*, UInt32)
-    release : Proc(IRowsetCopyRows*, UInt32)
-    close_source : Proc(IRowsetCopyRows*, UInt16, HRESULT)
-    copy_by_hrows : Proc(IRowsetCopyRows*, UInt16, LibC::UINT_PTR, LibC::IntPtrT, LibC::UINT_PTR*, UInt32, HRESULT)
-    copy_rows : Proc(IRowsetCopyRows*, UInt16, LibC::UINT_PTR, LibC::IntPtrT, UInt32, LibC::UINT_PTR*, HRESULT)
-    define_source : Proc(IRowsetCopyRows*, IRowset, LibC::UINT_PTR, LibC::IntPtrT*, LibC::IntPtrT*, UInt16*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    close_source : UInt64
+    copy_by_hrows : UInt64
+    copy_rows : UInt64
+    define_source : UInt64
   end
 
   IRowsetCopyRows_GUID = "0c733a6b-2a1c-11ce-ade5-00aa0044773d"
@@ -8043,11 +8043,11 @@ lib LibWin32
   end
 
   struct IReadDataVTbl
-    query_interface : Proc(IReadData*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IReadData*, UInt32)
-    release : Proc(IReadData*, UInt32)
-    read_data : Proc(IReadData*, LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, LibC::IntPtrT, LibC::UINT_PTR, LibC::IntPtrT, LibC::UINT_PTR*, UInt8**, LibC::UINT_PTR*, UInt8**, HRESULT)
-    release_chapter : Proc(IReadData*, LibC::UINT_PTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    read_data : UInt64
+    release_chapter : UInt64
   end
 
   IReadData_GUID = "0c733a6a-2a1c-11ce-ade5-00aa0044773d"
@@ -8057,15 +8057,15 @@ lib LibWin32
   end
 
   struct ICommandCostVTbl
-    query_interface : Proc(ICommandCost*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICommandCost*, UInt32)
-    release : Proc(ICommandCost*, UInt32)
-    get_accumulated_cost : Proc(ICommandCost*, LibC::LPWSTR, UInt32*, DBCOST**, HRESULT)
-    get_cost_estimate : Proc(ICommandCost*, LibC::LPWSTR, UInt32*, DBCOST*, HRESULT)
-    get_cost_goals : Proc(ICommandCost*, LibC::LPWSTR, UInt32*, DBCOST*, HRESULT)
-    get_cost_limits : Proc(ICommandCost*, LibC::LPWSTR, UInt32*, DBCOST*, HRESULT)
-    set_cost_goals : Proc(ICommandCost*, LibC::LPWSTR, UInt32, DBCOST*, HRESULT)
-    set_cost_limits : Proc(ICommandCost*, LibC::LPWSTR, UInt32, DBCOST*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_accumulated_cost : UInt64
+    get_cost_estimate : UInt64
+    get_cost_goals : UInt64
+    get_cost_limits : UInt64
+    set_cost_goals : UInt64
+    set_cost_limits : UInt64
   end
 
   ICommandCost_GUID = "0c733a4e-2a1c-11ce-ade5-00aa0044773d"
@@ -8075,11 +8075,11 @@ lib LibWin32
   end
 
   struct ICommandValidateVTbl
-    query_interface : Proc(ICommandValidate*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICommandValidate*, UInt32)
-    release : Proc(ICommandValidate*, UInt32)
-    validate_completely : Proc(ICommandValidate*, HRESULT)
-    validate_syntax : Proc(ICommandValidate*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    validate_completely : UInt64
+    validate_syntax : UInt64
   end
 
   ICommandValidate_GUID = "0c733a18-2a1c-11ce-ade5-00aa0044773d"
@@ -8089,11 +8089,11 @@ lib LibWin32
   end
 
   struct ITableRenameVTbl
-    query_interface : Proc(ITableRename*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITableRename*, UInt32)
-    release : Proc(ITableRename*, UInt32)
-    rename_column : Proc(ITableRename*, DBID*, DBID*, DBID*, HRESULT)
-    rename_table : Proc(ITableRename*, DBID*, DBID*, DBID*, DBID*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    rename_column : UInt64
+    rename_table : UInt64
   end
 
   ITableRename_GUID = "0c733a77-2a1c-11ce-ade5-00aa0044773d"
@@ -8103,11 +8103,11 @@ lib LibWin32
   end
 
   struct IDBSchemaCommandVTbl
-    query_interface : Proc(IDBSchemaCommand*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDBSchemaCommand*, UInt32)
-    release : Proc(IDBSchemaCommand*, UInt32)
-    get_command : Proc(IDBSchemaCommand*, IUnknown, Guid*, ICommand*, HRESULT)
-    get_schemas : Proc(IDBSchemaCommand*, UInt32*, Guid**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_command : UInt64
+    get_schemas : UInt64
   end
 
   IDBSchemaCommand_GUID = "0c733a50-2a1c-11ce-ade5-00aa0044773d"
@@ -8117,10 +8117,10 @@ lib LibWin32
   end
 
   struct IProvideMonikerVTbl
-    query_interface : Proc(IProvideMoniker*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IProvideMoniker*, UInt32)
-    release : Proc(IProvideMoniker*, UInt32)
-    get_moniker : Proc(IProvideMoniker*, IMoniker*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_moniker : UInt64
   end
 
   IProvideMoniker_GUID = "0c733a4d-2a1c-11ce-ade5-00aa0044773d"
@@ -8130,12 +8130,12 @@ lib LibWin32
   end
 
   struct ISearchQueryHitsVTbl
-    query_interface : Proc(ISearchQueryHits*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISearchQueryHits*, UInt32)
-    release : Proc(ISearchQueryHits*, UInt32)
-    init : Proc(ISearchQueryHits*, IFilter, UInt32, Int32)
-    next_hit_moniker : Proc(ISearchQueryHits*, UInt32*, IMoniker**, Int32)
-    next_hit_offset : Proc(ISearchQueryHits*, UInt32*, FILTERREGION**, Int32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    init : UInt64
+    next_hit_moniker : UInt64
+    next_hit_offset : UInt64
   end
 
   ISearchQueryHits_GUID = "ed8ce7e0-106c-11ce-84e2-00aa004b9986"
@@ -8145,11 +8145,11 @@ lib LibWin32
   end
 
   struct IRowsetQueryStatusVTbl
-    query_interface : Proc(IRowsetQueryStatus*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetQueryStatus*, UInt32)
-    release : Proc(IRowsetQueryStatus*, UInt32)
-    get_status : Proc(IRowsetQueryStatus*, UInt32*, HRESULT)
-    get_status_ex : Proc(IRowsetQueryStatus*, UInt32*, UInt32*, UInt32*, LibC::UINT_PTR*, LibC::UINT_PTR*, LibC::UINT_PTR, UInt8*, LibC::UINT_PTR*, LibC::UINT_PTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_status : UInt64
+    get_status_ex : UInt64
   end
 
   IRowsetQueryStatus_GUID = "a7ac77ed-f8d7-11ce-a798-0020f8008024"
@@ -8159,10 +8159,10 @@ lib LibWin32
   end
 
   struct IUMSInitializeVTbl
-    query_interface : Proc(IUMSInitialize*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUMSInitialize*, UInt32)
-    release : Proc(IUMSInitialize*, UInt32)
-    initialize : Proc(IUMSInitialize*, Void*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
   end
 
   IUMSInitialize_GUID = "5cf4ca14-ef21-11d0-97e7-00c04fc2ad98"
@@ -8172,11 +8172,11 @@ lib LibWin32
   end
 
   struct IUMSVTbl
-    sql_ums_suspend : Proc(IUMS*, UInt32, Void)
-    sql_ums_yield : Proc(IUMS*, UInt32, Void)
-    sql_ums_switch_premptive : Proc(IUMS*, Void)
-    sql_ums_switch_non_premptive : Proc(IUMS*, Void)
-    sql_ums_f_is_premptive : Proc(IUMS*, LibC::BOOL)
+    sql_ums_suspend : UInt64
+    sql_ums_yield : UInt64
+    sql_ums_switch_premptive : UInt64
+    sql_ums_switch_non_premptive : UInt64
+    sql_ums_f_is_premptive : UInt64
   end
 
   struct IUMS
@@ -8184,10 +8184,10 @@ lib LibWin32
   end
 
   struct ISQLServerErrorInfoVTbl
-    query_interface : Proc(ISQLServerErrorInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISQLServerErrorInfo*, UInt32)
-    release : Proc(ISQLServerErrorInfo*, UInt32)
-    get_error_info : Proc(ISQLServerErrorInfo*, Tagsserrorinfo**, UInt16**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_error_info : UInt64
   end
 
   ISQLServerErrorInfo_GUID = "5cf4ca12-ef21-11d0-97e7-00c04fc2ad98"
@@ -8197,11 +8197,11 @@ lib LibWin32
   end
 
   struct IRowsetFastLoadVTbl
-    query_interface : Proc(IRowsetFastLoad*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRowsetFastLoad*, UInt32)
-    release : Proc(IRowsetFastLoad*, UInt32)
-    insert_row : Proc(IRowsetFastLoad*, LibC::UINT_PTR, Void*, HRESULT)
-    commit : Proc(IRowsetFastLoad*, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    insert_row : UInt64
+    commit : UInt64
   end
 
   IRowsetFastLoad_GUID = "5cf4ca13-ef21-11d0-97e7-00c04fc2ad98"
@@ -8211,11 +8211,11 @@ lib LibWin32
   end
 
   struct ISchemaLockVTbl
-    query_interface : Proc(ISchemaLock*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISchemaLock*, UInt32)
-    release : Proc(ISchemaLock*, UInt32)
-    get_schema_lock : Proc(ISchemaLock*, DBID*, UInt32, LibC::HANDLE*, UInt64*, HRESULT)
-    release_schema_lock : Proc(ISchemaLock*, LibC::HANDLE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_schema_lock : UInt64
+    release_schema_lock : UInt64
   end
 
   ISchemaLock_GUID = "4c2389fb-2511-11d4-b258-00c04f7971ce"
@@ -8767,4 +8767,4251 @@ lib LibWin32
 
   # Params # henv : Void* [In],fdirection : UInt16 [In],szdriverdesc : UInt8* [In],cbdriverdescmax : Int16 [In],pcbdriverdesc : Int16* [In],szdriverattributes : UInt8* [In],cbdrvrattrmax : Int16 [In],pcbdrvrattr : Int16* [In]
   fun SQLDriversA(henv : Void*, fdirection : UInt16, szdriverdesc : UInt8*, cbdriverdescmax : Int16, pcbdriverdesc : Int16*, szdriverattributes : UInt8*, cbdrvrattrmax : Int16, pcbdrvrattr : Int16*) : Int16
+end
+struct LibWin32::IWordSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def put_word(cwc : UInt32, pwcinbuf : LibC::LPWSTR, cwcsrclen : UInt32, cwcsrcpos : UInt32) : HRESULT
+    @lpVtbl.value.put_word.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)).call(cwc, pwcinbuf, cwcsrclen, cwcsrcpos)
+  end
+  def put_alt_word(cwc : UInt32, pwcinbuf : LibC::LPWSTR, cwcsrclen : UInt32, cwcsrcpos : UInt32) : HRESULT
+    @lpVtbl.value.put_alt_word.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)).call(cwc, pwcinbuf, cwcsrclen, cwcsrcpos)
+  end
+  def start_alt_phrase : HRESULT
+    @lpVtbl.value.start_alt_phrase.unsafe_as(Proc(HRESULT)).call
+  end
+  def end_alt_phrase : HRESULT
+    @lpVtbl.value.end_alt_phrase.unsafe_as(Proc(HRESULT)).call
+  end
+  def put_break(breaktype : WORDREP_BREAK_TYPE) : HRESULT
+    @lpVtbl.value.put_break.unsafe_as(Proc(WORDREP_BREAK_TYPE, HRESULT)).call(breaktype)
+  end
+end
+struct LibWin32::IWordBreaker
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def init(fquery : LibC::BOOL, ulmaxtokensize : UInt32, pflicense : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.init.unsafe_as(Proc(LibC::BOOL, UInt32, LibC::BOOL*, HRESULT)).call(fquery, ulmaxtokensize, pflicense)
+  end
+  def break_text(ptextsource : TEXT_SOURCE*, pwordsink : IWordSink, pphrasesink : IPhraseSink) : HRESULT
+    @lpVtbl.value.break_text.unsafe_as(Proc(TEXT_SOURCE*, IWordSink, IPhraseSink, HRESULT)).call(ptextsource, pwordsink, pphrasesink)
+  end
+  def compose_phrase(pwcnoun : LibC::LPWSTR, cwcnoun : UInt32, pwcmodifier : LibC::LPWSTR, cwcmodifier : UInt32, ulattachmenttype : UInt32, pwcphrase : LibC::LPWSTR, pcwcphrase : UInt32*) : HRESULT
+    @lpVtbl.value.compose_phrase.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, UInt32, LibC::LPWSTR, UInt32*, HRESULT)).call(pwcnoun, cwcnoun, pwcmodifier, cwcmodifier, ulattachmenttype, pwcphrase, pcwcphrase)
+  end
+  def get_license_to_use(ppwcslicense : UInt16**) : HRESULT
+    @lpVtbl.value.get_license_to_use.unsafe_as(Proc(UInt16**, HRESULT)).call(ppwcslicense)
+  end
+end
+struct LibWin32::IWordFormSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def put_alt_word(pwcinbuf : LibC::LPWSTR, cwc : UInt32) : HRESULT
+    @lpVtbl.value.put_alt_word.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(pwcinbuf, cwc)
+  end
+  def put_word(pwcinbuf : LibC::LPWSTR, cwc : UInt32) : HRESULT
+    @lpVtbl.value.put_word.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(pwcinbuf, cwc)
+  end
+end
+struct LibWin32::IStemmer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def init(ulmaxtokensize : UInt32, pflicense : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.init.unsafe_as(Proc(UInt32, LibC::BOOL*, HRESULT)).call(ulmaxtokensize, pflicense)
+  end
+  def generate_word_forms(pwcinbuf : LibC::LPWSTR, cwc : UInt32, pstemsink : IWordFormSink) : HRESULT
+    @lpVtbl.value.generate_word_forms.unsafe_as(Proc(LibC::LPWSTR, UInt32, IWordFormSink, HRESULT)).call(pwcinbuf, cwc, pstemsink)
+  end
+  def get_license_to_use(ppwcslicense : UInt16**) : HRESULT
+    @lpVtbl.value.get_license_to_use.unsafe_as(Proc(UInt16**, HRESULT)).call(ppwcslicense)
+  end
+end
+struct LibWin32::ISimpleCommandCreator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_i_command(ppiunknown : IUnknown*, pouterunk : IUnknown) : HRESULT
+    @lpVtbl.value.create_i_command.unsafe_as(Proc(IUnknown*, IUnknown, HRESULT)).call(ppiunknown, pouterunk)
+  end
+  def verify_catalog(pwszmachine : LibC::LPWSTR, pwszcatalogname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.verify_catalog.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszmachine, pwszcatalogname)
+  end
+  def get_default_catalog(pwszcatalogname : LibC::LPWSTR, cwcin : UInt32, pcwcout : UInt32*) : HRESULT
+    @lpVtbl.value.get_default_catalog.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32*, HRESULT)).call(pwszcatalogname, cwcin, pcwcout)
+  end
+end
+struct LibWin32::IColumnMapper
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_prop_info_from_name(wcspropname : LibC::LPWSTR, pppropid : DBID**, pproptype : UInt16*, puiwidth : UInt32*) : HRESULT
+    @lpVtbl.value.get_prop_info_from_name.unsafe_as(Proc(LibC::LPWSTR, DBID**, UInt16*, UInt32*, HRESULT)).call(wcspropname, pppropid, pproptype, puiwidth)
+  end
+  def get_prop_info_from_id(ppropid : DBID*, pwcsname : UInt16**, pproptype : UInt16*, puiwidth : UInt32*) : HRESULT
+    @lpVtbl.value.get_prop_info_from_id.unsafe_as(Proc(DBID*, UInt16**, UInt16*, UInt32*, HRESULT)).call(ppropid, pwcsname, pproptype, puiwidth)
+  end
+  def enum_prop_info(ientry : UInt32, pwcsname : UInt16**, pppropid : DBID**, pproptype : UInt16*, puiwidth : UInt32*) : HRESULT
+    @lpVtbl.value.enum_prop_info.unsafe_as(Proc(UInt32, UInt16**, DBID**, UInt16*, UInt32*, HRESULT)).call(ientry, pwcsname, pppropid, pproptype, puiwidth)
+  end
+  def is_map_up_to_date : HRESULT
+    @lpVtbl.value.is_map_up_to_date.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IColumnMapperCreator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_column_mapper(wcsmachinename : LibC::LPWSTR, wcscatalogname : LibC::LPWSTR, ppcolumnmapper : IColumnMapper*) : HRESULT
+    @lpVtbl.value.get_column_mapper.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, IColumnMapper*, HRESULT)).call(wcsmachinename, wcscatalogname, ppcolumnmapper)
+  end
+end
+struct LibWin32::ILoadFilter
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def load_i_filter(pwcspath : LibC::LPWSTR, pfilteredsources : FILTERED_DATA_SOURCES*, punkouter : IUnknown, fusedefault : LibC::BOOL, pfilterclsid : Guid*, searchdecsize : Int32*, pwcssearchdesc : UInt16**, ppifilt : IFilter*) : HRESULT
+    @lpVtbl.value.load_i_filter.unsafe_as(Proc(LibC::LPWSTR, FILTERED_DATA_SOURCES*, IUnknown, LibC::BOOL, Guid*, Int32*, UInt16**, IFilter*, HRESULT)).call(pwcspath, pfilteredsources, punkouter, fusedefault, pfilterclsid, searchdecsize, pwcssearchdesc, ppifilt)
+  end
+  def load_i_filter_from_storage(pstg : IStorage, punkouter : IUnknown, pwcsoverride : LibC::LPWSTR, fusedefault : LibC::BOOL, pfilterclsid : Guid*, searchdecsize : Int32*, pwcssearchdesc : UInt16**, ppifilt : IFilter*) : HRESULT
+    @lpVtbl.value.load_i_filter_from_storage.unsafe_as(Proc(IStorage, IUnknown, LibC::LPWSTR, LibC::BOOL, Guid*, Int32*, UInt16**, IFilter*, HRESULT)).call(pstg, punkouter, pwcsoverride, fusedefault, pfilterclsid, searchdecsize, pwcssearchdesc, ppifilt)
+  end
+  def load_i_filter_from_stream(pstm : IStream, pfilteredsources : FILTERED_DATA_SOURCES*, punkouter : IUnknown, fusedefault : LibC::BOOL, pfilterclsid : Guid*, searchdecsize : Int32*, pwcssearchdesc : UInt16**, ppifilt : IFilter*) : HRESULT
+    @lpVtbl.value.load_i_filter_from_stream.unsafe_as(Proc(IStream, FILTERED_DATA_SOURCES*, IUnknown, LibC::BOOL, Guid*, Int32*, UInt16**, IFilter*, HRESULT)).call(pstm, pfilteredsources, punkouter, fusedefault, pfilterclsid, searchdecsize, pwcssearchdesc, ppifilt)
+  end
+end
+struct LibWin32::ILoadFilterWithPrivateComActivation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def load_i_filter(pwcspath : LibC::LPWSTR, pfilteredsources : FILTERED_DATA_SOURCES*, punkouter : IUnknown, fusedefault : LibC::BOOL, pfilterclsid : Guid*, searchdecsize : Int32*, pwcssearchdesc : UInt16**, ppifilt : IFilter*) : HRESULT
+    @lpVtbl.value.load_i_filter.unsafe_as(Proc(LibC::LPWSTR, FILTERED_DATA_SOURCES*, IUnknown, LibC::BOOL, Guid*, Int32*, UInt16**, IFilter*, HRESULT)).call(pwcspath, pfilteredsources, punkouter, fusedefault, pfilterclsid, searchdecsize, pwcssearchdesc, ppifilt)
+  end
+  def load_i_filter_from_storage(pstg : IStorage, punkouter : IUnknown, pwcsoverride : LibC::LPWSTR, fusedefault : LibC::BOOL, pfilterclsid : Guid*, searchdecsize : Int32*, pwcssearchdesc : UInt16**, ppifilt : IFilter*) : HRESULT
+    @lpVtbl.value.load_i_filter_from_storage.unsafe_as(Proc(IStorage, IUnknown, LibC::LPWSTR, LibC::BOOL, Guid*, Int32*, UInt16**, IFilter*, HRESULT)).call(pstg, punkouter, pwcsoverride, fusedefault, pfilterclsid, searchdecsize, pwcssearchdesc, ppifilt)
+  end
+  def load_i_filter_from_stream(pstm : IStream, pfilteredsources : FILTERED_DATA_SOURCES*, punkouter : IUnknown, fusedefault : LibC::BOOL, pfilterclsid : Guid*, searchdecsize : Int32*, pwcssearchdesc : UInt16**, ppifilt : IFilter*) : HRESULT
+    @lpVtbl.value.load_i_filter_from_stream.unsafe_as(Proc(IStream, FILTERED_DATA_SOURCES*, IUnknown, LibC::BOOL, Guid*, Int32*, UInt16**, IFilter*, HRESULT)).call(pstm, pfilteredsources, punkouter, fusedefault, pfilterclsid, searchdecsize, pwcssearchdesc, ppifilt)
+  end
+  def load_i_filter_with_private_com_activation(filteredsources : FILTERED_DATA_SOURCES*, usedefault : LibC::BOOL, filterclsid : Guid*, isfilterprivatecomactivated : LibC::BOOL*, filterobj : IFilter*) : HRESULT
+    @lpVtbl.value.load_i_filter_with_private_com_activation.unsafe_as(Proc(FILTERED_DATA_SOURCES*, LibC::BOOL, Guid*, LibC::BOOL*, IFilter*, HRESULT)).call(filteredsources, usedefault, filterclsid, isfilterprivatecomactivated, filterobj)
+  end
+end
+struct LibWin32::IRichChunk
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_data(pfirstpos : UInt32*, plength : UInt32*, ppsz : LibC::LPWSTR*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_data.unsafe_as(Proc(UInt32*, UInt32*, LibC::LPWSTR*, PROPVARIANT*, HRESULT)).call(pfirstpos, plength, ppsz, pvalue)
+  end
+end
+struct LibWin32::ICondition
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_class_id(pclassid : Guid*) : HRESULT
+    @lpVtbl.value.get_class_id.unsafe_as(Proc(Guid*, HRESULT)).call(pclassid)
+  end
+  def is_dirty : HRESULT
+    @lpVtbl.value.is_dirty.unsafe_as(Proc(HRESULT)).call
+  end
+  def load(pstm : IStream) : HRESULT
+    @lpVtbl.value.load.unsafe_as(Proc(IStream, HRESULT)).call(pstm)
+  end
+  def save(pstm : IStream, fcleardirty : LibC::BOOL) : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(IStream, LibC::BOOL, HRESULT)).call(pstm, fcleardirty)
+  end
+  def get_size_max(pcbsize : ULARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.get_size_max.unsafe_as(Proc(ULARGE_INTEGER*, HRESULT)).call(pcbsize)
+  end
+  def get_condition_type(pnodetype : CONDITION_TYPE*) : HRESULT
+    @lpVtbl.value.get_condition_type.unsafe_as(Proc(CONDITION_TYPE*, HRESULT)).call(pnodetype)
+  end
+  def get_sub_conditions(riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_sub_conditions.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  end
+  def get_comparison_info(ppszpropertyname : LibC::LPWSTR*, pcop : CONDITION_OPERATION*, ppropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_comparison_info.unsafe_as(Proc(LibC::LPWSTR*, CONDITION_OPERATION*, PROPVARIANT*, HRESULT)).call(ppszpropertyname, pcop, ppropvar)
+  end
+  def get_value_type(ppszvaluetypename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_value_type.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszvaluetypename)
+  end
+  def get_value_normalization(ppsznormalization : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_value_normalization.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppsznormalization)
+  end
+  def get_input_terms(pppropertyterm : IRichChunk*, ppoperationterm : IRichChunk*, ppvalueterm : IRichChunk*) : HRESULT
+    @lpVtbl.value.get_input_terms.unsafe_as(Proc(IRichChunk*, IRichChunk*, IRichChunk*, HRESULT)).call(pppropertyterm, ppoperationterm, ppvalueterm)
+  end
+  def clone(ppc : ICondition*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(ICondition*, HRESULT)).call(ppc)
+  end
+end
+struct LibWin32::ICondition2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_class_id(pclassid : Guid*) : HRESULT
+    @lpVtbl.value.get_class_id.unsafe_as(Proc(Guid*, HRESULT)).call(pclassid)
+  end
+  def is_dirty : HRESULT
+    @lpVtbl.value.is_dirty.unsafe_as(Proc(HRESULT)).call
+  end
+  def load(pstm : IStream) : HRESULT
+    @lpVtbl.value.load.unsafe_as(Proc(IStream, HRESULT)).call(pstm)
+  end
+  def save(pstm : IStream, fcleardirty : LibC::BOOL) : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(IStream, LibC::BOOL, HRESULT)).call(pstm, fcleardirty)
+  end
+  def get_size_max(pcbsize : ULARGE_INTEGER*) : HRESULT
+    @lpVtbl.value.get_size_max.unsafe_as(Proc(ULARGE_INTEGER*, HRESULT)).call(pcbsize)
+  end
+  def get_condition_type(pnodetype : CONDITION_TYPE*) : HRESULT
+    @lpVtbl.value.get_condition_type.unsafe_as(Proc(CONDITION_TYPE*, HRESULT)).call(pnodetype)
+  end
+  def get_sub_conditions(riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_sub_conditions.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  end
+  def get_comparison_info(ppszpropertyname : LibC::LPWSTR*, pcop : CONDITION_OPERATION*, ppropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_comparison_info.unsafe_as(Proc(LibC::LPWSTR*, CONDITION_OPERATION*, PROPVARIANT*, HRESULT)).call(ppszpropertyname, pcop, ppropvar)
+  end
+  def get_value_type(ppszvaluetypename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_value_type.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszvaluetypename)
+  end
+  def get_value_normalization(ppsznormalization : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_value_normalization.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppsznormalization)
+  end
+  def get_input_terms(pppropertyterm : IRichChunk*, ppoperationterm : IRichChunk*, ppvalueterm : IRichChunk*) : HRESULT
+    @lpVtbl.value.get_input_terms.unsafe_as(Proc(IRichChunk*, IRichChunk*, IRichChunk*, HRESULT)).call(pppropertyterm, ppoperationterm, ppvalueterm)
+  end
+  def clone(ppc : ICondition*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(ICondition*, HRESULT)).call(ppc)
+  end
+  def get_locale(ppszlocalename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_locale.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszlocalename)
+  end
+  def get_leaf_condition_info(ppropkey : PROPERTYKEY*, pcop : CONDITION_OPERATION*, ppropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_leaf_condition_info.unsafe_as(Proc(PROPERTYKEY*, CONDITION_OPERATION*, PROPVARIANT*, HRESULT)).call(ppropkey, pcop, ppropvar)
+  end
+end
+struct LibWin32::IAccessor
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_ref_accessor(haccessor : LibC::UINT_PTR, pcrefcount : UInt32*) : HRESULT
+    @lpVtbl.value.add_ref_accessor.unsafe_as(Proc(LibC::UINT_PTR, UInt32*, HRESULT)).call(haccessor, pcrefcount)
+  end
+  def create_accessor(dwaccessorflags : UInt32, cbindings : LibC::UINT_PTR, rgbindings : DBBINDING*, cbrowsize : LibC::UINT_PTR, phaccessor : LibC::UINT_PTR*, rgstatus : UInt32*) : HRESULT
+    @lpVtbl.value.create_accessor.unsafe_as(Proc(UInt32, LibC::UINT_PTR, DBBINDING*, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, HRESULT)).call(dwaccessorflags, cbindings, rgbindings, cbrowsize, phaccessor, rgstatus)
+  end
+  def get_bindings(haccessor : LibC::UINT_PTR, pdwaccessorflags : UInt32*, pcbindings : LibC::UINT_PTR*, prgbindings : DBBINDING**) : HRESULT
+    @lpVtbl.value.get_bindings.unsafe_as(Proc(LibC::UINT_PTR, UInt32*, LibC::UINT_PTR*, DBBINDING**, HRESULT)).call(haccessor, pdwaccessorflags, pcbindings, prgbindings)
+  end
+  def release_accessor(haccessor : LibC::UINT_PTR, pcrefcount : UInt32*) : HRESULT
+    @lpVtbl.value.release_accessor.unsafe_as(Proc(LibC::UINT_PTR, UInt32*, HRESULT)).call(haccessor, pcrefcount)
+  end
+end
+struct LibWin32::IRowset
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_ref_rows(crows : LibC::UINT_PTR, rghrows : LibC::UINT_PTR*, rgrefcounts : UInt32*, rgrowstatus : UInt32*) : HRESULT
+    @lpVtbl.value.add_ref_rows.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, UInt32*, HRESULT)).call(crows, rghrows, rgrefcounts, rgrowstatus)
+  end
+  def get_data(hrow : LibC::UINT_PTR, haccessor : LibC::UINT_PTR, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_data.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)).call(hrow, haccessor, pdata)
+  end
+  def get_next_rows(hreserved : LibC::UINT_PTR, lrowsoffset : LibC::IntPtrT, crows : LibC::IntPtrT, pcrowsobtained : LibC::UINT_PTR*, prghrows : LibC::UINT_PTR**) : HRESULT
+    @lpVtbl.value.get_next_rows.unsafe_as(Proc(LibC::UINT_PTR, LibC::IntPtrT, LibC::IntPtrT, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)).call(hreserved, lrowsoffset, crows, pcrowsobtained, prghrows)
+  end
+  def release_rows(crows : LibC::UINT_PTR, rghrows : LibC::UINT_PTR*, rgrowoptions : UInt32*, rgrefcounts : UInt32*, rgrowstatus : UInt32*) : HRESULT
+    @lpVtbl.value.release_rows.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, UInt32*, UInt32*, HRESULT)).call(crows, rghrows, rgrowoptions, rgrefcounts, rgrowstatus)
+  end
+  def restart_position(hreserved : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.restart_position.unsafe_as(Proc(LibC::UINT_PTR, HRESULT)).call(hreserved)
+  end
+end
+struct LibWin32::IRowsetInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties(cpropertyidsets : UInt32, rgpropertyidsets : DBPROPIDSET*, pcpropertysets : UInt32*, prgpropertysets : DBPROPSET**) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(UInt32, DBPROPIDSET*, UInt32*, DBPROPSET**, HRESULT)).call(cpropertyidsets, rgpropertyidsets, pcpropertysets, prgpropertysets)
+  end
+  def get_referenced_rowset(iordinal : LibC::UINT_PTR, riid : Guid*, ppreferencedrowset : IUnknown*) : HRESULT
+    @lpVtbl.value.get_referenced_rowset.unsafe_as(Proc(LibC::UINT_PTR, Guid*, IUnknown*, HRESULT)).call(iordinal, riid, ppreferencedrowset)
+  end
+  def get_specification(riid : Guid*, ppspecification : IUnknown*) : HRESULT
+    @lpVtbl.value.get_specification.unsafe_as(Proc(Guid*, IUnknown*, HRESULT)).call(riid, ppspecification)
+  end
+end
+struct LibWin32::IRowsetLocate
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_ref_rows(crows : LibC::UINT_PTR, rghrows : LibC::UINT_PTR*, rgrefcounts : UInt32*, rgrowstatus : UInt32*) : HRESULT
+    @lpVtbl.value.add_ref_rows.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, UInt32*, HRESULT)).call(crows, rghrows, rgrefcounts, rgrowstatus)
+  end
+  def get_data(hrow : LibC::UINT_PTR, haccessor : LibC::UINT_PTR, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_data.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)).call(hrow, haccessor, pdata)
+  end
+  def get_next_rows(hreserved : LibC::UINT_PTR, lrowsoffset : LibC::IntPtrT, crows : LibC::IntPtrT, pcrowsobtained : LibC::UINT_PTR*, prghrows : LibC::UINT_PTR**) : HRESULT
+    @lpVtbl.value.get_next_rows.unsafe_as(Proc(LibC::UINT_PTR, LibC::IntPtrT, LibC::IntPtrT, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)).call(hreserved, lrowsoffset, crows, pcrowsobtained, prghrows)
+  end
+  def release_rows(crows : LibC::UINT_PTR, rghrows : LibC::UINT_PTR*, rgrowoptions : UInt32*, rgrefcounts : UInt32*, rgrowstatus : UInt32*) : HRESULT
+    @lpVtbl.value.release_rows.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, UInt32*, UInt32*, HRESULT)).call(crows, rghrows, rgrowoptions, rgrefcounts, rgrowstatus)
+  end
+  def restart_position(hreserved : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.restart_position.unsafe_as(Proc(LibC::UINT_PTR, HRESULT)).call(hreserved)
+  end
+  def compare(hreserved : LibC::UINT_PTR, cbbookmark1 : LibC::UINT_PTR, pbookmark1 : UInt8*, cbbookmark2 : LibC::UINT_PTR, pbookmark2 : UInt8*, pcomparison : UInt32*) : HRESULT
+    @lpVtbl.value.compare.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, LibC::UINT_PTR, UInt8*, UInt32*, HRESULT)).call(hreserved, cbbookmark1, pbookmark1, cbbookmark2, pbookmark2, pcomparison)
+  end
+  def get_rows_at(hreserved1 : LibC::UINT_PTR, hreserved2 : LibC::UINT_PTR, cbbookmark : LibC::UINT_PTR, pbookmark : UInt8*, lrowsoffset : LibC::IntPtrT, crows : LibC::IntPtrT, pcrowsobtained : LibC::UINT_PTR*, prghrows : LibC::UINT_PTR**) : HRESULT
+    @lpVtbl.value.get_rows_at.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, LibC::IntPtrT, LibC::IntPtrT, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)).call(hreserved1, hreserved2, cbbookmark, pbookmark, lrowsoffset, crows, pcrowsobtained, prghrows)
+  end
+  def get_rows_by_bookmark(hreserved : LibC::UINT_PTR, crows : LibC::UINT_PTR, rgcbbookmarks : LibC::UINT_PTR*, rgpbookmarks : UInt8**, rghrows : LibC::UINT_PTR*, rgrowstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_rows_by_bookmark.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt8**, LibC::UINT_PTR*, UInt32*, HRESULT)).call(hreserved, crows, rgcbbookmarks, rgpbookmarks, rghrows, rgrowstatus)
+  end
+  def hash(hreserved : LibC::UINT_PTR, cbookmarks : LibC::UINT_PTR, rgcbbookmarks : LibC::UINT_PTR*, rgpbookmarks : UInt8**, rghashedvalues : LibC::UINT_PTR*, rgbookmarkstatus : UInt32*) : HRESULT
+    @lpVtbl.value.hash.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt8**, LibC::UINT_PTR*, UInt32*, HRESULT)).call(hreserved, cbookmarks, rgcbbookmarks, rgpbookmarks, rghashedvalues, rgbookmarkstatus)
+  end
+end
+struct LibWin32::IRowsetResynch
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_visible_data(hrow : LibC::UINT_PTR, haccessor : LibC::UINT_PTR, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_visible_data.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)).call(hrow, haccessor, pdata)
+  end
+  def resynch_rows(crows : LibC::UINT_PTR, rghrows : LibC::UINT_PTR*, pcrowsresynched : LibC::UINT_PTR*, prghrowsresynched : LibC::UINT_PTR**, prgrowstatus : UInt32**) : HRESULT
+    @lpVtbl.value.resynch_rows.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR*, LibC::UINT_PTR*, LibC::UINT_PTR**, UInt32**, HRESULT)).call(crows, rghrows, pcrowsresynched, prghrowsresynched, prgrowstatus)
+  end
+end
+struct LibWin32::IRowsetScroll
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_ref_rows(crows : LibC::UINT_PTR, rghrows : LibC::UINT_PTR*, rgrefcounts : UInt32*, rgrowstatus : UInt32*) : HRESULT
+    @lpVtbl.value.add_ref_rows.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, UInt32*, HRESULT)).call(crows, rghrows, rgrefcounts, rgrowstatus)
+  end
+  def get_data(hrow : LibC::UINT_PTR, haccessor : LibC::UINT_PTR, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_data.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)).call(hrow, haccessor, pdata)
+  end
+  def get_next_rows(hreserved : LibC::UINT_PTR, lrowsoffset : LibC::IntPtrT, crows : LibC::IntPtrT, pcrowsobtained : LibC::UINT_PTR*, prghrows : LibC::UINT_PTR**) : HRESULT
+    @lpVtbl.value.get_next_rows.unsafe_as(Proc(LibC::UINT_PTR, LibC::IntPtrT, LibC::IntPtrT, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)).call(hreserved, lrowsoffset, crows, pcrowsobtained, prghrows)
+  end
+  def release_rows(crows : LibC::UINT_PTR, rghrows : LibC::UINT_PTR*, rgrowoptions : UInt32*, rgrefcounts : UInt32*, rgrowstatus : UInt32*) : HRESULT
+    @lpVtbl.value.release_rows.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, UInt32*, UInt32*, HRESULT)).call(crows, rghrows, rgrowoptions, rgrefcounts, rgrowstatus)
+  end
+  def restart_position(hreserved : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.restart_position.unsafe_as(Proc(LibC::UINT_PTR, HRESULT)).call(hreserved)
+  end
+  def compare(hreserved : LibC::UINT_PTR, cbbookmark1 : LibC::UINT_PTR, pbookmark1 : UInt8*, cbbookmark2 : LibC::UINT_PTR, pbookmark2 : UInt8*, pcomparison : UInt32*) : HRESULT
+    @lpVtbl.value.compare.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, LibC::UINT_PTR, UInt8*, UInt32*, HRESULT)).call(hreserved, cbbookmark1, pbookmark1, cbbookmark2, pbookmark2, pcomparison)
+  end
+  def get_rows_at(hreserved1 : LibC::UINT_PTR, hreserved2 : LibC::UINT_PTR, cbbookmark : LibC::UINT_PTR, pbookmark : UInt8*, lrowsoffset : LibC::IntPtrT, crows : LibC::IntPtrT, pcrowsobtained : LibC::UINT_PTR*, prghrows : LibC::UINT_PTR**) : HRESULT
+    @lpVtbl.value.get_rows_at.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, LibC::IntPtrT, LibC::IntPtrT, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)).call(hreserved1, hreserved2, cbbookmark, pbookmark, lrowsoffset, crows, pcrowsobtained, prghrows)
+  end
+  def get_rows_by_bookmark(hreserved : LibC::UINT_PTR, crows : LibC::UINT_PTR, rgcbbookmarks : LibC::UINT_PTR*, rgpbookmarks : UInt8**, rghrows : LibC::UINT_PTR*, rgrowstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_rows_by_bookmark.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt8**, LibC::UINT_PTR*, UInt32*, HRESULT)).call(hreserved, crows, rgcbbookmarks, rgpbookmarks, rghrows, rgrowstatus)
+  end
+  def hash(hreserved : LibC::UINT_PTR, cbookmarks : LibC::UINT_PTR, rgcbbookmarks : LibC::UINT_PTR*, rgpbookmarks : UInt8**, rghashedvalues : LibC::UINT_PTR*, rgbookmarkstatus : UInt32*) : HRESULT
+    @lpVtbl.value.hash.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt8**, LibC::UINT_PTR*, UInt32*, HRESULT)).call(hreserved, cbookmarks, rgcbbookmarks, rgpbookmarks, rghashedvalues, rgbookmarkstatus)
+  end
+  def get_approximate_position(hreserved : LibC::UINT_PTR, cbbookmark : LibC::UINT_PTR, pbookmark : UInt8*, pulposition : LibC::UINT_PTR*, pcrows : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_approximate_position.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, LibC::UINT_PTR*, LibC::UINT_PTR*, HRESULT)).call(hreserved, cbbookmark, pbookmark, pulposition, pcrows)
+  end
+  def get_rows_at_ratio(hreserved1 : LibC::UINT_PTR, hreserved2 : LibC::UINT_PTR, ulnumerator : LibC::UINT_PTR, uldenominator : LibC::UINT_PTR, crows : LibC::IntPtrT, pcrowsobtained : LibC::UINT_PTR*, prghrows : LibC::UINT_PTR**) : HRESULT
+    @lpVtbl.value.get_rows_at_ratio.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, LibC::IntPtrT, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)).call(hreserved1, hreserved2, ulnumerator, uldenominator, crows, pcrowsobtained, prghrows)
+  end
+end
+struct LibWin32::IChapteredRowset
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_ref_chapter(hchapter : LibC::UINT_PTR, pcrefcount : UInt32*) : HRESULT
+    @lpVtbl.value.add_ref_chapter.unsafe_as(Proc(LibC::UINT_PTR, UInt32*, HRESULT)).call(hchapter, pcrefcount)
+  end
+  def release_chapter(hchapter : LibC::UINT_PTR, pcrefcount : UInt32*) : HRESULT
+    @lpVtbl.value.release_chapter.unsafe_as(Proc(LibC::UINT_PTR, UInt32*, HRESULT)).call(hchapter, pcrefcount)
+  end
+end
+struct LibWin32::IRowsetFind
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def find_next_row(hchapter : LibC::UINT_PTR, haccessor : LibC::UINT_PTR, pfindvalue : Void*, compareop : UInt32, cbbookmark : LibC::UINT_PTR, pbookmark : UInt8*, lrowsoffset : LibC::IntPtrT, crows : LibC::IntPtrT, pcrowsobtained : LibC::UINT_PTR*, prghrows : LibC::UINT_PTR**) : HRESULT
+    @lpVtbl.value.find_next_row.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, Void*, UInt32, LibC::UINT_PTR, UInt8*, LibC::IntPtrT, LibC::IntPtrT, LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)).call(hchapter, haccessor, pfindvalue, compareop, cbbookmark, pbookmark, lrowsoffset, crows, pcrowsobtained, prghrows)
+  end
+end
+struct LibWin32::IRowPosition
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clear_row_position : HRESULT
+    @lpVtbl.value.clear_row_position.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_row_position(phchapter : LibC::UINT_PTR*, phrow : LibC::UINT_PTR*, pdwpositionflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_row_position.unsafe_as(Proc(LibC::UINT_PTR*, LibC::UINT_PTR*, UInt32*, HRESULT)).call(phchapter, phrow, pdwpositionflags)
+  end
+  def get_rowset(riid : Guid*, pprowset : IUnknown*) : HRESULT
+    @lpVtbl.value.get_rowset.unsafe_as(Proc(Guid*, IUnknown*, HRESULT)).call(riid, pprowset)
+  end
+  def initialize(prowset : IUnknown) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(IUnknown, HRESULT)).call(prowset)
+  end
+  def set_row_position(hchapter : LibC::UINT_PTR, hrow : LibC::UINT_PTR, dwpositionflags : UInt32) : HRESULT
+    @lpVtbl.value.set_row_position.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, UInt32, HRESULT)).call(hchapter, hrow, dwpositionflags)
+  end
+end
+struct LibWin32::IRowPositionChange
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_row_position_change(ereason : UInt32, ephase : UInt32, fcantdeny : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_row_position_change.unsafe_as(Proc(UInt32, UInt32, LibC::BOOL, HRESULT)).call(ereason, ephase, fcantdeny)
+  end
+end
+struct LibWin32::IViewRowset
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_specification(riid : Guid*, ppobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_specification.unsafe_as(Proc(Guid*, IUnknown*, HRESULT)).call(riid, ppobject)
+  end
+  def open_view_rowset(punkouter : IUnknown, riid : Guid*, pprowset : IUnknown*) : HRESULT
+    @lpVtbl.value.open_view_rowset.unsafe_as(Proc(IUnknown, Guid*, IUnknown*, HRESULT)).call(punkouter, riid, pprowset)
+  end
+end
+struct LibWin32::IViewChapter
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_specification(riid : Guid*, pprowset : IUnknown*) : HRESULT
+    @lpVtbl.value.get_specification.unsafe_as(Proc(Guid*, IUnknown*, HRESULT)).call(riid, pprowset)
+  end
+  def open_view_chapter(hsource : LibC::UINT_PTR, phviewchapter : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.open_view_chapter.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR*, HRESULT)).call(hsource, phviewchapter)
+  end
+end
+struct LibWin32::IViewSort
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_sort_order(pcvalues : LibC::UINT_PTR*, prgcolumns : LibC::UINT_PTR**, prgorders : UInt32**) : HRESULT
+    @lpVtbl.value.get_sort_order.unsafe_as(Proc(LibC::UINT_PTR*, LibC::UINT_PTR**, UInt32**, HRESULT)).call(pcvalues, prgcolumns, prgorders)
+  end
+  def set_sort_order(cvalues : LibC::UINT_PTR, rgcolumns : LibC::UINT_PTR*, rgorders : UInt32*) : HRESULT
+    @lpVtbl.value.set_sort_order.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, HRESULT)).call(cvalues, rgcolumns, rgorders)
+  end
+end
+struct LibWin32::IViewFilter
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_filter(haccessor : LibC::UINT_PTR, pcrows : LibC::UINT_PTR*, pcompareops : UInt32**, pcriteriadata : Void*) : HRESULT
+    @lpVtbl.value.get_filter.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR*, UInt32**, Void*, HRESULT)).call(haccessor, pcrows, pcompareops, pcriteriadata)
+  end
+  def get_filter_bindings(pcbindings : LibC::UINT_PTR*, prgbindings : DBBINDING**) : HRESULT
+    @lpVtbl.value.get_filter_bindings.unsafe_as(Proc(LibC::UINT_PTR*, DBBINDING**, HRESULT)).call(pcbindings, prgbindings)
+  end
+  def set_filter(haccessor : LibC::UINT_PTR, crows : LibC::UINT_PTR, compareops : UInt32*, pcriteriadata : Void*) : HRESULT
+    @lpVtbl.value.set_filter.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, UInt32*, Void*, HRESULT)).call(haccessor, crows, compareops, pcriteriadata)
+  end
+end
+struct LibWin32::IRowsetView
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_view(punkouter : IUnknown, riid : Guid*, ppview : IUnknown*) : HRESULT
+    @lpVtbl.value.create_view.unsafe_as(Proc(IUnknown, Guid*, IUnknown*, HRESULT)).call(punkouter, riid, ppview)
+  end
+  def get_view(hchapter : LibC::UINT_PTR, riid : Guid*, phchaptersource : LibC::UINT_PTR*, ppview : IUnknown*) : HRESULT
+    @lpVtbl.value.get_view.unsafe_as(Proc(LibC::UINT_PTR, Guid*, LibC::UINT_PTR*, IUnknown*, HRESULT)).call(hchapter, riid, phchaptersource, ppview)
+  end
+end
+struct LibWin32::IRowsetChange
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def delete_rows(hreserved : LibC::UINT_PTR, crows : LibC::UINT_PTR, rghrows : LibC::UINT_PTR*, rgrowstatus : UInt32*) : HRESULT
+    @lpVtbl.value.delete_rows.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, HRESULT)).call(hreserved, crows, rghrows, rgrowstatus)
+  end
+  def set_data(hrow : LibC::UINT_PTR, haccessor : LibC::UINT_PTR, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_data.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)).call(hrow, haccessor, pdata)
+  end
+  def insert_row(hreserved : LibC::UINT_PTR, haccessor : LibC::UINT_PTR, pdata : Void*, phrow : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.insert_row.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, Void*, LibC::UINT_PTR*, HRESULT)).call(hreserved, haccessor, pdata, phrow)
+  end
+end
+struct LibWin32::IRowsetUpdate
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def delete_rows(hreserved : LibC::UINT_PTR, crows : LibC::UINT_PTR, rghrows : LibC::UINT_PTR*, rgrowstatus : UInt32*) : HRESULT
+    @lpVtbl.value.delete_rows.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, HRESULT)).call(hreserved, crows, rghrows, rgrowstatus)
+  end
+  def set_data(hrow : LibC::UINT_PTR, haccessor : LibC::UINT_PTR, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_data.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)).call(hrow, haccessor, pdata)
+  end
+  def insert_row(hreserved : LibC::UINT_PTR, haccessor : LibC::UINT_PTR, pdata : Void*, phrow : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.insert_row.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, Void*, LibC::UINT_PTR*, HRESULT)).call(hreserved, haccessor, pdata, phrow)
+  end
+  def get_original_data(hrow : LibC::UINT_PTR, haccessor : LibC::UINT_PTR, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_original_data.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)).call(hrow, haccessor, pdata)
+  end
+  def get_pending_rows(hreserved : LibC::UINT_PTR, dwrowstatus : UInt32, pcpendingrows : LibC::UINT_PTR*, prgpendingrows : LibC::UINT_PTR**, prgpendingstatus : UInt32**) : HRESULT
+    @lpVtbl.value.get_pending_rows.unsafe_as(Proc(LibC::UINT_PTR, UInt32, LibC::UINT_PTR*, LibC::UINT_PTR**, UInt32**, HRESULT)).call(hreserved, dwrowstatus, pcpendingrows, prgpendingrows, prgpendingstatus)
+  end
+  def get_row_status(hreserved : LibC::UINT_PTR, crows : LibC::UINT_PTR, rghrows : LibC::UINT_PTR*, rgpendingstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_row_status.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32*, HRESULT)).call(hreserved, crows, rghrows, rgpendingstatus)
+  end
+  def undo(hreserved : LibC::UINT_PTR, crows : LibC::UINT_PTR, rghrows : LibC::UINT_PTR*, pcrowsundone : LibC::UINT_PTR*, prgrowsundone : LibC::UINT_PTR**, prgrowstatus : UInt32**) : HRESULT
+    @lpVtbl.value.undo.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, LibC::UINT_PTR*, LibC::UINT_PTR**, UInt32**, HRESULT)).call(hreserved, crows, rghrows, pcrowsundone, prgrowsundone, prgrowstatus)
+  end
+  def update(hreserved : LibC::UINT_PTR, crows : LibC::UINT_PTR, rghrows : LibC::UINT_PTR*, pcrows : LibC::UINT_PTR*, prgrows : LibC::UINT_PTR**, prgrowstatus : UInt32**) : HRESULT
+    @lpVtbl.value.update.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, LibC::UINT_PTR*, LibC::UINT_PTR**, UInt32**, HRESULT)).call(hreserved, crows, rghrows, pcrows, prgrows, prgrowstatus)
+  end
+end
+struct LibWin32::IRowsetIdentity
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def is_same_row(hthisrow : LibC::UINT_PTR, hthatrow : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.is_same_row.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)).call(hthisrow, hthatrow)
+  end
+end
+struct LibWin32::IRowsetNotify
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_field_change(prowset : IRowset, hrow : LibC::UINT_PTR, ccolumns : LibC::UINT_PTR, rgcolumns : LibC::UINT_PTR*, ereason : UInt32, ephase : UInt32, fcantdeny : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_field_change.unsafe_as(Proc(IRowset, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32, UInt32, LibC::BOOL, HRESULT)).call(prowset, hrow, ccolumns, rgcolumns, ereason, ephase, fcantdeny)
+  end
+  def on_row_change(prowset : IRowset, crows : LibC::UINT_PTR, rghrows : LibC::UINT_PTR*, ereason : UInt32, ephase : UInt32, fcantdeny : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_row_change.unsafe_as(Proc(IRowset, LibC::UINT_PTR, LibC::UINT_PTR*, UInt32, UInt32, LibC::BOOL, HRESULT)).call(prowset, crows, rghrows, ereason, ephase, fcantdeny)
+  end
+  def on_rowset_change(prowset : IRowset, ereason : UInt32, ephase : UInt32, fcantdeny : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_rowset_change.unsafe_as(Proc(IRowset, UInt32, UInt32, LibC::BOOL, HRESULT)).call(prowset, ereason, ephase, fcantdeny)
+  end
+end
+struct LibWin32::IRowsetIndex
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_index_info(pckeycolumns : LibC::UINT_PTR*, prgindexcolumndesc : DBINDEXCOLUMNDESC**, pcindexpropertysets : UInt32*, prgindexpropertysets : DBPROPSET**) : HRESULT
+    @lpVtbl.value.get_index_info.unsafe_as(Proc(LibC::UINT_PTR*, DBINDEXCOLUMNDESC**, UInt32*, DBPROPSET**, HRESULT)).call(pckeycolumns, prgindexcolumndesc, pcindexpropertysets, prgindexpropertysets)
+  end
+  def seek(haccessor : LibC::UINT_PTR, ckeyvalues : LibC::UINT_PTR, pdata : Void*, dwseekoptions : UInt32) : HRESULT
+    @lpVtbl.value.seek.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, Void*, UInt32, HRESULT)).call(haccessor, ckeyvalues, pdata, dwseekoptions)
+  end
+  def set_range(haccessor : LibC::UINT_PTR, cstartkeycolumns : LibC::UINT_PTR, pstartdata : Void*, cendkeycolumns : LibC::UINT_PTR, penddata : Void*, dwrangeoptions : UInt32) : HRESULT
+    @lpVtbl.value.set_range.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, Void*, LibC::UINT_PTR, Void*, UInt32, HRESULT)).call(haccessor, cstartkeycolumns, pstartdata, cendkeycolumns, penddata, dwrangeoptions)
+  end
+end
+struct LibWin32::ICommand
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+  def execute(punkouter : IUnknown, riid : Guid*, pparams : DBPARAMS*, pcrowsaffected : LibC::IntPtrT*, pprowset : IUnknown*) : HRESULT
+    @lpVtbl.value.execute.unsafe_as(Proc(IUnknown, Guid*, DBPARAMS*, LibC::IntPtrT*, IUnknown*, HRESULT)).call(punkouter, riid, pparams, pcrowsaffected, pprowset)
+  end
+  def get_db_session(riid : Guid*, ppsession : IUnknown*) : HRESULT
+    @lpVtbl.value.get_db_session.unsafe_as(Proc(Guid*, IUnknown*, HRESULT)).call(riid, ppsession)
+  end
+end
+struct LibWin32::IMultipleResults
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_result(punkouter : IUnknown, lresultflag : LibC::IntPtrT, riid : Guid*, pcrowsaffected : LibC::IntPtrT*, pprowset : IUnknown*) : HRESULT
+    @lpVtbl.value.get_result.unsafe_as(Proc(IUnknown, LibC::IntPtrT, Guid*, LibC::IntPtrT*, IUnknown*, HRESULT)).call(punkouter, lresultflag, riid, pcrowsaffected, pprowset)
+  end
+end
+struct LibWin32::IConvertType
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def can_convert(wfromtype : UInt16, wtotype : UInt16, dwconvertflags : UInt32) : HRESULT
+    @lpVtbl.value.can_convert.unsafe_as(Proc(UInt16, UInt16, UInt32, HRESULT)).call(wfromtype, wtotype, dwconvertflags)
+  end
+end
+struct LibWin32::ICommandPrepare
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def prepare(cexpectedruns : UInt32) : HRESULT
+    @lpVtbl.value.prepare.unsafe_as(Proc(UInt32, HRESULT)).call(cexpectedruns)
+  end
+  def unprepare : HRESULT
+    @lpVtbl.value.unprepare.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ICommandProperties
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties(cpropertyidsets : UInt32, rgpropertyidsets : DBPROPIDSET*, pcpropertysets : UInt32*, prgpropertysets : DBPROPSET**) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(UInt32, DBPROPIDSET*, UInt32*, DBPROPSET**, HRESULT)).call(cpropertyidsets, rgpropertyidsets, pcpropertysets, prgpropertysets)
+  end
+  def set_properties(cpropertysets : UInt32, rgpropertysets : DBPROPSET*) : HRESULT
+    @lpVtbl.value.set_properties.unsafe_as(Proc(UInt32, DBPROPSET*, HRESULT)).call(cpropertysets, rgpropertysets)
+  end
+end
+struct LibWin32::ICommandText
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+  def execute(punkouter : IUnknown, riid : Guid*, pparams : DBPARAMS*, pcrowsaffected : LibC::IntPtrT*, pprowset : IUnknown*) : HRESULT
+    @lpVtbl.value.execute.unsafe_as(Proc(IUnknown, Guid*, DBPARAMS*, LibC::IntPtrT*, IUnknown*, HRESULT)).call(punkouter, riid, pparams, pcrowsaffected, pprowset)
+  end
+  def get_db_session(riid : Guid*, ppsession : IUnknown*) : HRESULT
+    @lpVtbl.value.get_db_session.unsafe_as(Proc(Guid*, IUnknown*, HRESULT)).call(riid, ppsession)
+  end
+  def get_command_text(pguiddialect : Guid*, ppwszcommand : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_command_text.unsafe_as(Proc(Guid*, LibC::LPWSTR*, HRESULT)).call(pguiddialect, ppwszcommand)
+  end
+  def set_command_text(rguiddialect : Guid*, pwszcommand : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_command_text.unsafe_as(Proc(Guid*, LibC::LPWSTR, HRESULT)).call(rguiddialect, pwszcommand)
+  end
+end
+struct LibWin32::ICommandWithParameters
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_parameter_info(pcparams : LibC::UINT_PTR*, prgparaminfo : DBPARAMINFO**, ppnamesbuffer : UInt16**) : HRESULT
+    @lpVtbl.value.get_parameter_info.unsafe_as(Proc(LibC::UINT_PTR*, DBPARAMINFO**, UInt16**, HRESULT)).call(pcparams, prgparaminfo, ppnamesbuffer)
+  end
+  def map_parameter_names(cparamnames : LibC::UINT_PTR, rgparamnames : LibC::LPWSTR*, rgparamordinals : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.map_parameter_names.unsafe_as(Proc(LibC::UINT_PTR, LibC::LPWSTR*, LibC::IntPtrT*, HRESULT)).call(cparamnames, rgparamnames, rgparamordinals)
+  end
+  def set_parameter_info(cparams : LibC::UINT_PTR, rgparamordinals : LibC::UINT_PTR*, rgparambindinfo : DBPARAMBINDINFO*) : HRESULT
+    @lpVtbl.value.set_parameter_info.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR*, DBPARAMBINDINFO*, HRESULT)).call(cparams, rgparamordinals, rgparambindinfo)
+  end
+end
+struct LibWin32::IColumnsRowset
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_available_columns(pcoptcolumns : LibC::UINT_PTR*, prgoptcolumns : DBID**) : HRESULT
+    @lpVtbl.value.get_available_columns.unsafe_as(Proc(LibC::UINT_PTR*, DBID**, HRESULT)).call(pcoptcolumns, prgoptcolumns)
+  end
+  def get_columns_rowset(punkouter : IUnknown, coptcolumns : LibC::UINT_PTR, rgoptcolumns : DBID*, riid : Guid*, cpropertysets : UInt32, rgpropertysets : DBPROPSET*, ppcolrowset : IUnknown*) : HRESULT
+    @lpVtbl.value.get_columns_rowset.unsafe_as(Proc(IUnknown, LibC::UINT_PTR, DBID*, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)).call(punkouter, coptcolumns, rgoptcolumns, riid, cpropertysets, rgpropertysets, ppcolrowset)
+  end
+end
+struct LibWin32::IColumnsInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_column_info(pccolumns : LibC::UINT_PTR*, prginfo : DBCOLUMNINFO**, ppstringsbuffer : UInt16**) : HRESULT
+    @lpVtbl.value.get_column_info.unsafe_as(Proc(LibC::UINT_PTR*, DBCOLUMNINFO**, UInt16**, HRESULT)).call(pccolumns, prginfo, ppstringsbuffer)
+  end
+  def map_column_i_ds(ccolumnids : LibC::UINT_PTR, rgcolumnids : DBID*, rgcolumns : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.map_column_i_ds.unsafe_as(Proc(LibC::UINT_PTR, DBID*, LibC::UINT_PTR*, HRESULT)).call(ccolumnids, rgcolumnids, rgcolumns)
+  end
+end
+struct LibWin32::IDBCreateCommand
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_command(punkouter : IUnknown, riid : Guid*, ppcommand : IUnknown*) : HRESULT
+    @lpVtbl.value.create_command.unsafe_as(Proc(IUnknown, Guid*, IUnknown*, HRESULT)).call(punkouter, riid, ppcommand)
+  end
+end
+struct LibWin32::IDBCreateSession
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_session(punkouter : IUnknown, riid : Guid*, ppdbsession : IUnknown*) : HRESULT
+    @lpVtbl.value.create_session.unsafe_as(Proc(IUnknown, Guid*, IUnknown*, HRESULT)).call(punkouter, riid, ppdbsession)
+  end
+end
+struct LibWin32::ISourcesRowset
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_sources_rowset(punkouter : IUnknown, riid : Guid*, cpropertysets : UInt32, rgproperties : DBPROPSET*, ppsourcesrowset : IUnknown*) : HRESULT
+    @lpVtbl.value.get_sources_rowset.unsafe_as(Proc(IUnknown, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)).call(punkouter, riid, cpropertysets, rgproperties, ppsourcesrowset)
+  end
+end
+struct LibWin32::IDBProperties
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties(cpropertyidsets : UInt32, rgpropertyidsets : DBPROPIDSET*, pcpropertysets : UInt32*, prgpropertysets : DBPROPSET**) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(UInt32, DBPROPIDSET*, UInt32*, DBPROPSET**, HRESULT)).call(cpropertyidsets, rgpropertyidsets, pcpropertysets, prgpropertysets)
+  end
+  def get_property_info(cpropertyidsets : UInt32, rgpropertyidsets : DBPROPIDSET*, pcpropertyinfosets : UInt32*, prgpropertyinfosets : DBPROPINFOSET**, ppdescbuffer : UInt16**) : HRESULT
+    @lpVtbl.value.get_property_info.unsafe_as(Proc(UInt32, DBPROPIDSET*, UInt32*, DBPROPINFOSET**, UInt16**, HRESULT)).call(cpropertyidsets, rgpropertyidsets, pcpropertyinfosets, prgpropertyinfosets, ppdescbuffer)
+  end
+  def set_properties(cpropertysets : UInt32, rgpropertysets : DBPROPSET*) : HRESULT
+    @lpVtbl.value.set_properties.unsafe_as(Proc(UInt32, DBPROPSET*, HRESULT)).call(cpropertysets, rgpropertysets)
+  end
+end
+struct LibWin32::IDBInitialize
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HRESULT)).call
+  end
+  def uninitialize : HRESULT
+    @lpVtbl.value.uninitialize.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IDBInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_keywords(ppwszkeywords : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_keywords.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppwszkeywords)
+  end
+  def get_literal_info(cliterals : UInt32, rgliterals : UInt32*, pcliteralinfo : UInt32*, prgliteralinfo : DBLITERALINFO**, ppcharbuffer : UInt16**) : HRESULT
+    @lpVtbl.value.get_literal_info.unsafe_as(Proc(UInt32, UInt32*, UInt32*, DBLITERALINFO**, UInt16**, HRESULT)).call(cliterals, rgliterals, pcliteralinfo, prgliteralinfo, ppcharbuffer)
+  end
+end
+struct LibWin32::IDBDataSourceAdmin
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_data_source(cpropertysets : UInt32, rgpropertysets : DBPROPSET*, punkouter : IUnknown, riid : Guid*, ppdbsession : IUnknown*) : HRESULT
+    @lpVtbl.value.create_data_source.unsafe_as(Proc(UInt32, DBPROPSET*, IUnknown, Guid*, IUnknown*, HRESULT)).call(cpropertysets, rgpropertysets, punkouter, riid, ppdbsession)
+  end
+  def destroy_data_source : HRESULT
+    @lpVtbl.value.destroy_data_source.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_creation_properties(cpropertyidsets : UInt32, rgpropertyidsets : DBPROPIDSET*, pcpropertyinfosets : UInt32*, prgpropertyinfosets : DBPROPINFOSET**, ppdescbuffer : UInt16**) : HRESULT
+    @lpVtbl.value.get_creation_properties.unsafe_as(Proc(UInt32, DBPROPIDSET*, UInt32*, DBPROPINFOSET**, UInt16**, HRESULT)).call(cpropertyidsets, rgpropertyidsets, pcpropertyinfosets, prgpropertyinfosets, ppdescbuffer)
+  end
+  def modify_data_source(cpropertysets : UInt32, rgpropertysets : DBPROPSET*) : HRESULT
+    @lpVtbl.value.modify_data_source.unsafe_as(Proc(UInt32, DBPROPSET*, HRESULT)).call(cpropertysets, rgpropertysets)
+  end
+end
+struct LibWin32::IDBAsynchNotify
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_low_resource(dwreserved : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.on_low_resource.unsafe_as(Proc(LibC::UINT_PTR, HRESULT)).call(dwreserved)
+  end
+  def on_progress(hchapter : LibC::UINT_PTR, eoperation : UInt32, ulprogress : LibC::UINT_PTR, ulprogressmax : LibC::UINT_PTR, easynchphase : UInt32, pwszstatustext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.on_progress.unsafe_as(Proc(LibC::UINT_PTR, UInt32, LibC::UINT_PTR, LibC::UINT_PTR, UInt32, LibC::LPWSTR, HRESULT)).call(hchapter, eoperation, ulprogress, ulprogressmax, easynchphase, pwszstatustext)
+  end
+  def on_stop(hchapter : LibC::UINT_PTR, eoperation : UInt32, hrstatus : HRESULT, pwszstatustext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.on_stop.unsafe_as(Proc(LibC::UINT_PTR, UInt32, HRESULT, LibC::LPWSTR, HRESULT)).call(hchapter, eoperation, hrstatus, pwszstatustext)
+  end
+end
+struct LibWin32::IDBAsynchStatus
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def abort(hchapter : LibC::UINT_PTR, eoperation : UInt32) : HRESULT
+    @lpVtbl.value.abort.unsafe_as(Proc(LibC::UINT_PTR, UInt32, HRESULT)).call(hchapter, eoperation)
+  end
+  def get_status(hchapter : LibC::UINT_PTR, eoperation : UInt32, pulprogress : LibC::UINT_PTR*, pulprogressmax : LibC::UINT_PTR*, peasynchphase : UInt32*, ppwszstatustext : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(LibC::UINT_PTR, UInt32, LibC::UINT_PTR*, LibC::UINT_PTR*, UInt32*, LibC::LPWSTR*, HRESULT)).call(hchapter, eoperation, pulprogress, pulprogressmax, peasynchphase, ppwszstatustext)
+  end
+end
+struct LibWin32::ISessionProperties
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties(cpropertyidsets : UInt32, rgpropertyidsets : DBPROPIDSET*, pcpropertysets : UInt32*, prgpropertysets : DBPROPSET**) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(UInt32, DBPROPIDSET*, UInt32*, DBPROPSET**, HRESULT)).call(cpropertyidsets, rgpropertyidsets, pcpropertysets, prgpropertysets)
+  end
+  def set_properties(cpropertysets : UInt32, rgpropertysets : DBPROPSET*) : HRESULT
+    @lpVtbl.value.set_properties.unsafe_as(Proc(UInt32, DBPROPSET*, HRESULT)).call(cpropertysets, rgpropertysets)
+  end
+end
+struct LibWin32::IIndexDefinition
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_index(ptableid : DBID*, pindexid : DBID*, cindexcolumndescs : LibC::UINT_PTR, rgindexcolumndescs : DBINDEXCOLUMNDESC*, cpropertysets : UInt32, rgpropertysets : DBPROPSET*, ppindexid : DBID**) : HRESULT
+    @lpVtbl.value.create_index.unsafe_as(Proc(DBID*, DBID*, LibC::UINT_PTR, DBINDEXCOLUMNDESC*, UInt32, DBPROPSET*, DBID**, HRESULT)).call(ptableid, pindexid, cindexcolumndescs, rgindexcolumndescs, cpropertysets, rgpropertysets, ppindexid)
+  end
+  def drop_index(ptableid : DBID*, pindexid : DBID*) : HRESULT
+    @lpVtbl.value.drop_index.unsafe_as(Proc(DBID*, DBID*, HRESULT)).call(ptableid, pindexid)
+  end
+end
+struct LibWin32::ITableDefinition
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_table(punkouter : IUnknown, ptableid : DBID*, ccolumndescs : LibC::UINT_PTR, rgcolumndescs : DBCOLUMNDESC*, riid : Guid*, cpropertysets : UInt32, rgpropertysets : DBPROPSET*, pptableid : DBID**, pprowset : IUnknown*) : HRESULT
+    @lpVtbl.value.create_table.unsafe_as(Proc(IUnknown, DBID*, LibC::UINT_PTR, DBCOLUMNDESC*, Guid*, UInt32, DBPROPSET*, DBID**, IUnknown*, HRESULT)).call(punkouter, ptableid, ccolumndescs, rgcolumndescs, riid, cpropertysets, rgpropertysets, pptableid, pprowset)
+  end
+  def drop_table(ptableid : DBID*) : HRESULT
+    @lpVtbl.value.drop_table.unsafe_as(Proc(DBID*, HRESULT)).call(ptableid)
+  end
+  def add_column(ptableid : DBID*, pcolumndesc : DBCOLUMNDESC*, ppcolumnid : DBID**) : HRESULT
+    @lpVtbl.value.add_column.unsafe_as(Proc(DBID*, DBCOLUMNDESC*, DBID**, HRESULT)).call(ptableid, pcolumndesc, ppcolumnid)
+  end
+  def drop_column(ptableid : DBID*, pcolumnid : DBID*) : HRESULT
+    @lpVtbl.value.drop_column.unsafe_as(Proc(DBID*, DBID*, HRESULT)).call(ptableid, pcolumnid)
+  end
+end
+struct LibWin32::IOpenRowset
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def open_rowset(punkouter : IUnknown, ptableid : DBID*, pindexid : DBID*, riid : Guid*, cpropertysets : UInt32, rgpropertysets : DBPROPSET*, pprowset : IUnknown*) : HRESULT
+    @lpVtbl.value.open_rowset.unsafe_as(Proc(IUnknown, DBID*, DBID*, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)).call(punkouter, ptableid, pindexid, riid, cpropertysets, rgpropertysets, pprowset)
+  end
+end
+struct LibWin32::IDBSchemaRowset
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_rowset(punkouter : IUnknown, rguidschema : Guid*, crestrictions : UInt32, rgrestrictions : VARIANT*, riid : Guid*, cpropertysets : UInt32, rgpropertysets : DBPROPSET*, pprowset : IUnknown*) : HRESULT
+    @lpVtbl.value.get_rowset.unsafe_as(Proc(IUnknown, Guid*, UInt32, VARIANT*, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)).call(punkouter, rguidschema, crestrictions, rgrestrictions, riid, cpropertysets, rgpropertysets, pprowset)
+  end
+  def get_schemas(pcschemas : UInt32*, prgschemas : Guid**, prgrestrictionsupport : UInt32**) : HRESULT
+    @lpVtbl.value.get_schemas.unsafe_as(Proc(UInt32*, Guid**, UInt32**, HRESULT)).call(pcschemas, prgschemas, prgrestrictionsupport)
+  end
+end
+struct LibWin32::IMDDataset
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def free_axis_info(caxes : LibC::UINT_PTR, rgaxisinfo : MDAXISINFO*) : HRESULT
+    @lpVtbl.value.free_axis_info.unsafe_as(Proc(LibC::UINT_PTR, MDAXISINFO*, HRESULT)).call(caxes, rgaxisinfo)
+  end
+  def get_axis_info(pcaxes : LibC::UINT_PTR*, prgaxisinfo : MDAXISINFO**) : HRESULT
+    @lpVtbl.value.get_axis_info.unsafe_as(Proc(LibC::UINT_PTR*, MDAXISINFO**, HRESULT)).call(pcaxes, prgaxisinfo)
+  end
+  def get_axis_rowset(punkouter : IUnknown, iaxis : LibC::UINT_PTR, riid : Guid*, cpropertysets : UInt32, rgpropertysets : DBPROPSET*, pprowset : IUnknown*) : HRESULT
+    @lpVtbl.value.get_axis_rowset.unsafe_as(Proc(IUnknown, LibC::UINT_PTR, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)).call(punkouter, iaxis, riid, cpropertysets, rgpropertysets, pprowset)
+  end
+  def get_cell_data(haccessor : LibC::UINT_PTR, ulstartcell : LibC::UINT_PTR, ulendcell : LibC::UINT_PTR, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_cell_data.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)).call(haccessor, ulstartcell, ulendcell, pdata)
+  end
+  def get_specification(riid : Guid*, ppspecification : IUnknown*) : HRESULT
+    @lpVtbl.value.get_specification.unsafe_as(Proc(Guid*, IUnknown*, HRESULT)).call(riid, ppspecification)
+  end
+end
+struct LibWin32::IMDFind
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def find_cell(ulstartingordinal : LibC::UINT_PTR, cmembers : LibC::UINT_PTR, rgpwszmember : LibC::LPWSTR*, pulcellordinal : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.find_cell.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::LPWSTR*, LibC::UINT_PTR*, HRESULT)).call(ulstartingordinal, cmembers, rgpwszmember, pulcellordinal)
+  end
+  def find_tuple(ulaxisidentifier : UInt32, ulstartingordinal : LibC::UINT_PTR, cmembers : LibC::UINT_PTR, rgpwszmember : LibC::LPWSTR*, pultupleordinal : UInt32*) : HRESULT
+    @lpVtbl.value.find_tuple.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LibC::UINT_PTR, LibC::LPWSTR*, UInt32*, HRESULT)).call(ulaxisidentifier, ulstartingordinal, cmembers, rgpwszmember, pultupleordinal)
+  end
+end
+struct LibWin32::IMDRangeRowset
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_range_rowset(punkouter : IUnknown, ulstartcell : LibC::UINT_PTR, ulendcell : LibC::UINT_PTR, riid : Guid*, cpropertysets : UInt32, rgpropertysets : DBPROPSET*, pprowset : IUnknown*) : HRESULT
+    @lpVtbl.value.get_range_rowset.unsafe_as(Proc(IUnknown, LibC::UINT_PTR, LibC::UINT_PTR, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)).call(punkouter, ulstartcell, ulendcell, riid, cpropertysets, rgpropertysets, pprowset)
+  end
+end
+struct LibWin32::IAlterTable
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def alter_column(ptableid : DBID*, pcolumnid : DBID*, dwcolumndescflags : UInt32, pcolumndesc : DBCOLUMNDESC*) : HRESULT
+    @lpVtbl.value.alter_column.unsafe_as(Proc(DBID*, DBID*, UInt32, DBCOLUMNDESC*, HRESULT)).call(ptableid, pcolumnid, dwcolumndescflags, pcolumndesc)
+  end
+  def alter_table(ptableid : DBID*, pnewtableid : DBID*, cpropertysets : UInt32, rgpropertysets : DBPROPSET*) : HRESULT
+    @lpVtbl.value.alter_table.unsafe_as(Proc(DBID*, DBID*, UInt32, DBPROPSET*, HRESULT)).call(ptableid, pnewtableid, cpropertysets, rgpropertysets)
+  end
+end
+struct LibWin32::IAlterIndex
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def alter_index(ptableid : DBID*, pindexid : DBID*, pnewindexid : DBID*, cpropertysets : UInt32, rgpropertysets : DBPROPSET*) : HRESULT
+    @lpVtbl.value.alter_index.unsafe_as(Proc(DBID*, DBID*, DBID*, UInt32, DBPROPSET*, HRESULT)).call(ptableid, pindexid, pnewindexid, cpropertysets, rgpropertysets)
+  end
+end
+struct LibWin32::IRowsetChapterMember
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def is_row_in_chapter(hchapter : LibC::UINT_PTR, hrow : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.is_row_in_chapter.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)).call(hchapter, hrow)
+  end
+end
+struct LibWin32::ICommandPersist
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def delete_command(pcommandid : DBID*) : HRESULT
+    @lpVtbl.value.delete_command.unsafe_as(Proc(DBID*, HRESULT)).call(pcommandid)
+  end
+  def get_current_command(ppcommandid : DBID**) : HRESULT
+    @lpVtbl.value.get_current_command.unsafe_as(Proc(DBID**, HRESULT)).call(ppcommandid)
+  end
+  def load_command(pcommandid : DBID*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.load_command.unsafe_as(Proc(DBID*, UInt32, HRESULT)).call(pcommandid, dwflags)
+  end
+  def save_command(pcommandid : DBID*, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.save_command.unsafe_as(Proc(DBID*, UInt32, HRESULT)).call(pcommandid, dwflags)
+  end
+end
+struct LibWin32::IRowsetRefresh
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def refresh_visible_data(hchapter : LibC::UINT_PTR, crows : LibC::UINT_PTR, rghrows : LibC::UINT_PTR*, foverwrite : LibC::BOOL, pcrowsrefreshed : LibC::UINT_PTR*, prghrowsrefreshed : LibC::UINT_PTR**, prgrowstatus : UInt32**) : HRESULT
+    @lpVtbl.value.refresh_visible_data.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, LibC::BOOL, LibC::UINT_PTR*, LibC::UINT_PTR**, UInt32**, HRESULT)).call(hchapter, crows, rghrows, foverwrite, pcrowsrefreshed, prghrowsrefreshed, prgrowstatus)
+  end
+  def get_last_visible_data(hrow : LibC::UINT_PTR, haccessor : LibC::UINT_PTR, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_last_visible_data.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, Void*, HRESULT)).call(hrow, haccessor, pdata)
+  end
+end
+struct LibWin32::IParentRowset
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_child_rowset(punkouter : IUnknown, iordinal : LibC::UINT_PTR, riid : Guid*, pprowset : IUnknown*) : HRESULT
+    @lpVtbl.value.get_child_rowset.unsafe_as(Proc(IUnknown, LibC::UINT_PTR, Guid*, IUnknown*, HRESULT)).call(punkouter, iordinal, riid, pprowset)
+  end
+end
+struct LibWin32::IErrorRecords
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_error_record(perrorinfo : ERRORINFO*, dwlookupid : UInt32, pdispparams : DISPPARAMS*, punkcustomerror : IUnknown, dwdynamicerrorid : UInt32) : HRESULT
+    @lpVtbl.value.add_error_record.unsafe_as(Proc(ERRORINFO*, UInt32, DISPPARAMS*, IUnknown, UInt32, HRESULT)).call(perrorinfo, dwlookupid, pdispparams, punkcustomerror, dwdynamicerrorid)
+  end
+  def get_basic_error_info(ulrecordnum : UInt32, perrorinfo : ERRORINFO*) : HRESULT
+    @lpVtbl.value.get_basic_error_info.unsafe_as(Proc(UInt32, ERRORINFO*, HRESULT)).call(ulrecordnum, perrorinfo)
+  end
+  def get_custom_error_object(ulrecordnum : UInt32, riid : Guid*, ppobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_custom_error_object.unsafe_as(Proc(UInt32, Guid*, IUnknown*, HRESULT)).call(ulrecordnum, riid, ppobject)
+  end
+  def get_error_info(ulrecordnum : UInt32, lcid : UInt32, pperrorinfo : IErrorInfo*) : HRESULT
+    @lpVtbl.value.get_error_info.unsafe_as(Proc(UInt32, UInt32, IErrorInfo*, HRESULT)).call(ulrecordnum, lcid, pperrorinfo)
+  end
+  def get_error_parameters(ulrecordnum : UInt32, pdispparams : DISPPARAMS*) : HRESULT
+    @lpVtbl.value.get_error_parameters.unsafe_as(Proc(UInt32, DISPPARAMS*, HRESULT)).call(ulrecordnum, pdispparams)
+  end
+  def get_record_count(pcrecords : UInt32*) : HRESULT
+    @lpVtbl.value.get_record_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcrecords)
+  end
+end
+struct LibWin32::IErrorLookup
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_error_description(hrerror : HRESULT, dwlookupid : UInt32, pdispparams : DISPPARAMS*, lcid : UInt32, pbstrsource : UInt8**, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_description.unsafe_as(Proc(HRESULT, UInt32, DISPPARAMS*, UInt32, UInt8**, UInt8**, HRESULT)).call(hrerror, dwlookupid, pdispparams, lcid, pbstrsource, pbstrdescription)
+  end
+  def get_help_info(hrerror : HRESULT, dwlookupid : UInt32, lcid : UInt32, pbstrhelpfile : UInt8**, pdwhelpcontext : UInt32*) : HRESULT
+    @lpVtbl.value.get_help_info.unsafe_as(Proc(HRESULT, UInt32, UInt32, UInt8**, UInt32*, HRESULT)).call(hrerror, dwlookupid, lcid, pbstrhelpfile, pdwhelpcontext)
+  end
+  def release_errors(dwdynamicerrorid : UInt32) : HRESULT
+    @lpVtbl.value.release_errors.unsafe_as(Proc(UInt32, HRESULT)).call(dwdynamicerrorid)
+  end
+end
+struct LibWin32::ISQLErrorInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_sql_info(pbstrsqlstate : UInt8**, plnativeerror : Int32*) : HRESULT
+    @lpVtbl.value.get_sql_info.unsafe_as(Proc(UInt8**, Int32*, HRESULT)).call(pbstrsqlstate, plnativeerror)
+  end
+end
+struct LibWin32::IGetDataSource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_data_source(riid : Guid*, ppdatasource : IUnknown*) : HRESULT
+    @lpVtbl.value.get_data_source.unsafe_as(Proc(Guid*, IUnknown*, HRESULT)).call(riid, ppdatasource)
+  end
+end
+struct LibWin32::ITransactionLocal
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def commit(fretaining : LibC::BOOL, grftc : UInt32, grfrm : UInt32) : HRESULT
+    @lpVtbl.value.commit.unsafe_as(Proc(LibC::BOOL, UInt32, UInt32, HRESULT)).call(fretaining, grftc, grfrm)
+  end
+  def abort(pboidreason : BOID*, fretaining : LibC::BOOL, fasync : LibC::BOOL) : HRESULT
+    @lpVtbl.value.abort.unsafe_as(Proc(BOID*, LibC::BOOL, LibC::BOOL, HRESULT)).call(pboidreason, fretaining, fasync)
+  end
+  def get_transaction_info(pinfo : XACTTRANSINFO*) : HRESULT
+    @lpVtbl.value.get_transaction_info.unsafe_as(Proc(XACTTRANSINFO*, HRESULT)).call(pinfo)
+  end
+  def get_options_object(ppoptions : ITransactionOptions*) : HRESULT
+    @lpVtbl.value.get_options_object.unsafe_as(Proc(ITransactionOptions*, HRESULT)).call(ppoptions)
+  end
+  def start_transaction(isolevel : Int32, isoflags : UInt32, potheroptions : ITransactionOptions, pultransactionlevel : UInt32*) : HRESULT
+    @lpVtbl.value.start_transaction.unsafe_as(Proc(Int32, UInt32, ITransactionOptions, UInt32*, HRESULT)).call(isolevel, isoflags, potheroptions, pultransactionlevel)
+  end
+end
+struct LibWin32::ITransactionJoin
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_options_object(ppoptions : ITransactionOptions*) : HRESULT
+    @lpVtbl.value.get_options_object.unsafe_as(Proc(ITransactionOptions*, HRESULT)).call(ppoptions)
+  end
+  def join_transaction(punktransactioncoord : IUnknown, isolevel : Int32, isoflags : UInt32, potheroptions : ITransactionOptions) : HRESULT
+    @lpVtbl.value.join_transaction.unsafe_as(Proc(IUnknown, Int32, UInt32, ITransactionOptions, HRESULT)).call(punktransactioncoord, isolevel, isoflags, potheroptions)
+  end
+end
+struct LibWin32::ITransactionObject
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_transaction_object(ultransactionlevel : UInt32, pptransactionobject : ITransaction*) : HRESULT
+    @lpVtbl.value.get_transaction_object.unsafe_as(Proc(UInt32, ITransaction*, HRESULT)).call(ultransactionlevel, pptransactionobject)
+  end
+end
+struct LibWin32::ITrusteeAdmin
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def compare_trustees(ptrustee1 : TRUSTEE_W*, ptrustee2 : TRUSTEE_W*) : HRESULT
+    @lpVtbl.value.compare_trustees.unsafe_as(Proc(TRUSTEE_W*, TRUSTEE_W*, HRESULT)).call(ptrustee1, ptrustee2)
+  end
+  def create_trustee(ptrustee : TRUSTEE_W*, cpropertysets : UInt32, rgpropertysets : DBPROPSET*) : HRESULT
+    @lpVtbl.value.create_trustee.unsafe_as(Proc(TRUSTEE_W*, UInt32, DBPROPSET*, HRESULT)).call(ptrustee, cpropertysets, rgpropertysets)
+  end
+  def delete_trustee(ptrustee : TRUSTEE_W*) : HRESULT
+    @lpVtbl.value.delete_trustee.unsafe_as(Proc(TRUSTEE_W*, HRESULT)).call(ptrustee)
+  end
+  def set_trustee_properties(ptrustee : TRUSTEE_W*, cpropertysets : UInt32, rgpropertysets : DBPROPSET*) : HRESULT
+    @lpVtbl.value.set_trustee_properties.unsafe_as(Proc(TRUSTEE_W*, UInt32, DBPROPSET*, HRESULT)).call(ptrustee, cpropertysets, rgpropertysets)
+  end
+  def get_trustee_properties(ptrustee : TRUSTEE_W*, cpropertyidsets : UInt32, rgpropertyidsets : DBPROPIDSET*, pcpropertysets : UInt32*, prgpropertysets : DBPROPSET**) : HRESULT
+    @lpVtbl.value.get_trustee_properties.unsafe_as(Proc(TRUSTEE_W*, UInt32, DBPROPIDSET*, UInt32*, DBPROPSET**, HRESULT)).call(ptrustee, cpropertyidsets, rgpropertyidsets, pcpropertysets, prgpropertysets)
+  end
+end
+struct LibWin32::ITrusteeGroupAdmin
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_member(pmembershiptrustee : TRUSTEE_W*, pmembertrustee : TRUSTEE_W*) : HRESULT
+    @lpVtbl.value.add_member.unsafe_as(Proc(TRUSTEE_W*, TRUSTEE_W*, HRESULT)).call(pmembershiptrustee, pmembertrustee)
+  end
+  def delete_member(pmembershiptrustee : TRUSTEE_W*, pmembertrustee : TRUSTEE_W*) : HRESULT
+    @lpVtbl.value.delete_member.unsafe_as(Proc(TRUSTEE_W*, TRUSTEE_W*, HRESULT)).call(pmembershiptrustee, pmembertrustee)
+  end
+  def is_member(pmembershiptrustee : TRUSTEE_W*, pmembertrustee : TRUSTEE_W*, pfstatus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_member.unsafe_as(Proc(TRUSTEE_W*, TRUSTEE_W*, LibC::BOOL*, HRESULT)).call(pmembershiptrustee, pmembertrustee, pfstatus)
+  end
+  def get_members(pmembershiptrustee : TRUSTEE_W*, pcmembers : UInt32*, prgmembers : TRUSTEE_W**) : HRESULT
+    @lpVtbl.value.get_members.unsafe_as(Proc(TRUSTEE_W*, UInt32*, TRUSTEE_W**, HRESULT)).call(pmembershiptrustee, pcmembers, prgmembers)
+  end
+  def get_memberships(ptrustee : TRUSTEE_W*, pcmemberships : UInt32*, prgmemberships : TRUSTEE_W**) : HRESULT
+    @lpVtbl.value.get_memberships.unsafe_as(Proc(TRUSTEE_W*, UInt32*, TRUSTEE_W**, HRESULT)).call(ptrustee, pcmemberships, prgmemberships)
+  end
+end
+struct LibWin32::IObjectAccessControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_object_access_rights(pobject : SEC_OBJECT*, pcaccessentries : UInt32*, prgaccessentries : EXPLICIT_ACCESS_W**) : HRESULT
+    @lpVtbl.value.get_object_access_rights.unsafe_as(Proc(SEC_OBJECT*, UInt32*, EXPLICIT_ACCESS_W**, HRESULT)).call(pobject, pcaccessentries, prgaccessentries)
+  end
+  def get_object_owner(pobject : SEC_OBJECT*, ppowner : TRUSTEE_W**) : HRESULT
+    @lpVtbl.value.get_object_owner.unsafe_as(Proc(SEC_OBJECT*, TRUSTEE_W**, HRESULT)).call(pobject, ppowner)
+  end
+  def is_object_access_allowed(pobject : SEC_OBJECT*, paccessentry : EXPLICIT_ACCESS_W*, pfresult : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_object_access_allowed.unsafe_as(Proc(SEC_OBJECT*, EXPLICIT_ACCESS_W*, LibC::BOOL*, HRESULT)).call(pobject, paccessentry, pfresult)
+  end
+  def set_object_access_rights(pobject : SEC_OBJECT*, caccessentries : UInt32, prgaccessentries : EXPLICIT_ACCESS_W*) : HRESULT
+    @lpVtbl.value.set_object_access_rights.unsafe_as(Proc(SEC_OBJECT*, UInt32, EXPLICIT_ACCESS_W*, HRESULT)).call(pobject, caccessentries, prgaccessentries)
+  end
+  def set_object_owner(pobject : SEC_OBJECT*, powner : TRUSTEE_W*) : HRESULT
+    @lpVtbl.value.set_object_owner.unsafe_as(Proc(SEC_OBJECT*, TRUSTEE_W*, HRESULT)).call(pobject, powner)
+  end
+end
+struct LibWin32::ISecurityInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_current_trustee(pptrustee : TRUSTEE_W**) : HRESULT
+    @lpVtbl.value.get_current_trustee.unsafe_as(Proc(TRUSTEE_W**, HRESULT)).call(pptrustee)
+  end
+  def get_object_types(cobjecttypes : UInt32*, rgobjecttypes : Guid**) : HRESULT
+    @lpVtbl.value.get_object_types.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(cobjecttypes, rgobjecttypes)
+  end
+  def get_permissions(objecttype : Guid, ppermissions : UInt32*) : HRESULT
+    @lpVtbl.value.get_permissions.unsafe_as(Proc(Guid, UInt32*, HRESULT)).call(objecttype, ppermissions)
+  end
+end
+struct LibWin32::ITableCreation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_table(punkouter : IUnknown, ptableid : DBID*, ccolumndescs : LibC::UINT_PTR, rgcolumndescs : DBCOLUMNDESC*, riid : Guid*, cpropertysets : UInt32, rgpropertysets : DBPROPSET*, pptableid : DBID**, pprowset : IUnknown*) : HRESULT
+    @lpVtbl.value.create_table.unsafe_as(Proc(IUnknown, DBID*, LibC::UINT_PTR, DBCOLUMNDESC*, Guid*, UInt32, DBPROPSET*, DBID**, IUnknown*, HRESULT)).call(punkouter, ptableid, ccolumndescs, rgcolumndescs, riid, cpropertysets, rgpropertysets, pptableid, pprowset)
+  end
+  def drop_table(ptableid : DBID*) : HRESULT
+    @lpVtbl.value.drop_table.unsafe_as(Proc(DBID*, HRESULT)).call(ptableid)
+  end
+  def add_column(ptableid : DBID*, pcolumndesc : DBCOLUMNDESC*, ppcolumnid : DBID**) : HRESULT
+    @lpVtbl.value.add_column.unsafe_as(Proc(DBID*, DBCOLUMNDESC*, DBID**, HRESULT)).call(ptableid, pcolumndesc, ppcolumnid)
+  end
+  def drop_column(ptableid : DBID*, pcolumnid : DBID*) : HRESULT
+    @lpVtbl.value.drop_column.unsafe_as(Proc(DBID*, DBID*, HRESULT)).call(ptableid, pcolumnid)
+  end
+  def get_table_definition(ptableid : DBID*, pccolumndescs : LibC::UINT_PTR*, prgcolumndescs : DBCOLUMNDESC**, pcpropertysets : UInt32*, prgpropertysets : DBPROPSET**, pcconstraintdescs : UInt32*, prgconstraintdescs : DBCONSTRAINTDESC**, ppwszstringbuffer : UInt16**) : HRESULT
+    @lpVtbl.value.get_table_definition.unsafe_as(Proc(DBID*, LibC::UINT_PTR*, DBCOLUMNDESC**, UInt32*, DBPROPSET**, UInt32*, DBCONSTRAINTDESC**, UInt16**, HRESULT)).call(ptableid, pccolumndescs, prgcolumndescs, pcpropertysets, prgpropertysets, pcconstraintdescs, prgconstraintdescs, ppwszstringbuffer)
+  end
+end
+struct LibWin32::ITableDefinitionWithConstraints
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_table(punkouter : IUnknown, ptableid : DBID*, ccolumndescs : LibC::UINT_PTR, rgcolumndescs : DBCOLUMNDESC*, riid : Guid*, cpropertysets : UInt32, rgpropertysets : DBPROPSET*, pptableid : DBID**, pprowset : IUnknown*) : HRESULT
+    @lpVtbl.value.create_table.unsafe_as(Proc(IUnknown, DBID*, LibC::UINT_PTR, DBCOLUMNDESC*, Guid*, UInt32, DBPROPSET*, DBID**, IUnknown*, HRESULT)).call(punkouter, ptableid, ccolumndescs, rgcolumndescs, riid, cpropertysets, rgpropertysets, pptableid, pprowset)
+  end
+  def drop_table(ptableid : DBID*) : HRESULT
+    @lpVtbl.value.drop_table.unsafe_as(Proc(DBID*, HRESULT)).call(ptableid)
+  end
+  def add_column(ptableid : DBID*, pcolumndesc : DBCOLUMNDESC*, ppcolumnid : DBID**) : HRESULT
+    @lpVtbl.value.add_column.unsafe_as(Proc(DBID*, DBCOLUMNDESC*, DBID**, HRESULT)).call(ptableid, pcolumndesc, ppcolumnid)
+  end
+  def drop_column(ptableid : DBID*, pcolumnid : DBID*) : HRESULT
+    @lpVtbl.value.drop_column.unsafe_as(Proc(DBID*, DBID*, HRESULT)).call(ptableid, pcolumnid)
+  end
+  def get_table_definition(ptableid : DBID*, pccolumndescs : LibC::UINT_PTR*, prgcolumndescs : DBCOLUMNDESC**, pcpropertysets : UInt32*, prgpropertysets : DBPROPSET**, pcconstraintdescs : UInt32*, prgconstraintdescs : DBCONSTRAINTDESC**, ppwszstringbuffer : UInt16**) : HRESULT
+    @lpVtbl.value.get_table_definition.unsafe_as(Proc(DBID*, LibC::UINT_PTR*, DBCOLUMNDESC**, UInt32*, DBPROPSET**, UInt32*, DBCONSTRAINTDESC**, UInt16**, HRESULT)).call(ptableid, pccolumndescs, prgcolumndescs, pcpropertysets, prgpropertysets, pcconstraintdescs, prgconstraintdescs, ppwszstringbuffer)
+  end
+  def add_constraint(ptableid : DBID*, pconstraintdesc : DBCONSTRAINTDESC*) : HRESULT
+    @lpVtbl.value.add_constraint.unsafe_as(Proc(DBID*, DBCONSTRAINTDESC*, HRESULT)).call(ptableid, pconstraintdesc)
+  end
+  def create_table_with_constraints(punkouter : IUnknown, ptableid : DBID*, ccolumndescs : LibC::UINT_PTR, rgcolumndescs : DBCOLUMNDESC*, cconstraintdescs : UInt32, rgconstraintdescs : DBCONSTRAINTDESC*, riid : Guid*, cpropertysets : UInt32, rgpropertysets : DBPROPSET*, pptableid : DBID**, pprowset : IUnknown*) : HRESULT
+    @lpVtbl.value.create_table_with_constraints.unsafe_as(Proc(IUnknown, DBID*, LibC::UINT_PTR, DBCOLUMNDESC*, UInt32, DBCONSTRAINTDESC*, Guid*, UInt32, DBPROPSET*, DBID**, IUnknown*, HRESULT)).call(punkouter, ptableid, ccolumndescs, rgcolumndescs, cconstraintdescs, rgconstraintdescs, riid, cpropertysets, rgpropertysets, pptableid, pprowset)
+  end
+  def drop_constraint(ptableid : DBID*, pconstraintid : DBID*) : HRESULT
+    @lpVtbl.value.drop_constraint.unsafe_as(Proc(DBID*, DBID*, HRESULT)).call(ptableid, pconstraintid)
+  end
+end
+struct LibWin32::IRow
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_columns(ccolumns : LibC::UINT_PTR, rgcolumns : DBCOLUMNACCESS*) : HRESULT
+    @lpVtbl.value.get_columns.unsafe_as(Proc(LibC::UINT_PTR, DBCOLUMNACCESS*, HRESULT)).call(ccolumns, rgcolumns)
+  end
+  def get_source_rowset(riid : Guid*, pprowset : IUnknown*, phrow : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_source_rowset.unsafe_as(Proc(Guid*, IUnknown*, LibC::UINT_PTR*, HRESULT)).call(riid, pprowset, phrow)
+  end
+  def open(punkouter : IUnknown, pcolumnid : DBID*, rguidcolumntype : Guid*, dwbindflags : UInt32, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open.unsafe_as(Proc(IUnknown, DBID*, Guid*, UInt32, Guid*, IUnknown*, HRESULT)).call(punkouter, pcolumnid, rguidcolumntype, dwbindflags, riid, ppunk)
+  end
+end
+struct LibWin32::IRowChange
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_columns(ccolumns : LibC::UINT_PTR, rgcolumns : DBCOLUMNACCESS*) : HRESULT
+    @lpVtbl.value.set_columns.unsafe_as(Proc(LibC::UINT_PTR, DBCOLUMNACCESS*, HRESULT)).call(ccolumns, rgcolumns)
+  end
+end
+struct LibWin32::IRowSchemaChange
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_columns(ccolumns : LibC::UINT_PTR, rgcolumns : DBCOLUMNACCESS*) : HRESULT
+    @lpVtbl.value.set_columns.unsafe_as(Proc(LibC::UINT_PTR, DBCOLUMNACCESS*, HRESULT)).call(ccolumns, rgcolumns)
+  end
+  def delete_columns(ccolumns : LibC::UINT_PTR, rgcolumnids : DBID*, rgdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.delete_columns.unsafe_as(Proc(LibC::UINT_PTR, DBID*, UInt32*, HRESULT)).call(ccolumns, rgcolumnids, rgdwstatus)
+  end
+  def add_columns(ccolumns : LibC::UINT_PTR, rgnewcolumninfo : DBCOLUMNINFO*, rgcolumns : DBCOLUMNACCESS*) : HRESULT
+    @lpVtbl.value.add_columns.unsafe_as(Proc(LibC::UINT_PTR, DBCOLUMNINFO*, DBCOLUMNACCESS*, HRESULT)).call(ccolumns, rgnewcolumninfo, rgcolumns)
+  end
+end
+struct LibWin32::IGetRow
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_row_from_hrow(punkouter : IUnknown, hrow : LibC::UINT_PTR, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_row_from_hrow.unsafe_as(Proc(IUnknown, LibC::UINT_PTR, Guid*, IUnknown*, HRESULT)).call(punkouter, hrow, riid, ppunk)
+  end
+  def get_url_from_hrow(hrow : LibC::UINT_PTR, ppwszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_url_from_hrow.unsafe_as(Proc(LibC::UINT_PTR, LibC::LPWSTR*, HRESULT)).call(hrow, ppwszurl)
+  end
+end
+struct LibWin32::IBindResource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def bind(punkouter : IUnknown, pwszurl : LibC::LPWSTR, dwbindurlflags : UInt32, rguid : Guid*, riid : Guid*, pauthenticate : IAuthenticate, pimplsession : DBIMPLICITSESSION*, pdwbindstatus : UInt32*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.bind.unsafe_as(Proc(IUnknown, LibC::LPWSTR, UInt32, Guid*, Guid*, IAuthenticate, DBIMPLICITSESSION*, UInt32*, IUnknown*, HRESULT)).call(punkouter, pwszurl, dwbindurlflags, rguid, riid, pauthenticate, pimplsession, pdwbindstatus, ppunk)
+  end
+end
+struct LibWin32::IScopedOperations
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def bind(punkouter : IUnknown, pwszurl : LibC::LPWSTR, dwbindurlflags : UInt32, rguid : Guid*, riid : Guid*, pauthenticate : IAuthenticate, pimplsession : DBIMPLICITSESSION*, pdwbindstatus : UInt32*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.bind.unsafe_as(Proc(IUnknown, LibC::LPWSTR, UInt32, Guid*, Guid*, IAuthenticate, DBIMPLICITSESSION*, UInt32*, IUnknown*, HRESULT)).call(punkouter, pwszurl, dwbindurlflags, rguid, riid, pauthenticate, pimplsession, pdwbindstatus, ppunk)
+  end
+  def copy(crows : LibC::UINT_PTR, rgpwszsourceurls : LibC::LPWSTR*, rgpwszdesturls : LibC::LPWSTR*, dwcopyflags : UInt32, pauthenticate : IAuthenticate, rgdwstatus : UInt32*, rgpwsznewurls : LibC::LPWSTR*, ppstringsbuffer : UInt16**) : HRESULT
+    @lpVtbl.value.copy.unsafe_as(Proc(LibC::UINT_PTR, LibC::LPWSTR*, LibC::LPWSTR*, UInt32, IAuthenticate, UInt32*, LibC::LPWSTR*, UInt16**, HRESULT)).call(crows, rgpwszsourceurls, rgpwszdesturls, dwcopyflags, pauthenticate, rgdwstatus, rgpwsznewurls, ppstringsbuffer)
+  end
+  def move(crows : LibC::UINT_PTR, rgpwszsourceurls : LibC::LPWSTR*, rgpwszdesturls : LibC::LPWSTR*, dwmoveflags : UInt32, pauthenticate : IAuthenticate, rgdwstatus : UInt32*, rgpwsznewurls : LibC::LPWSTR*, ppstringsbuffer : UInt16**) : HRESULT
+    @lpVtbl.value.move.unsafe_as(Proc(LibC::UINT_PTR, LibC::LPWSTR*, LibC::LPWSTR*, UInt32, IAuthenticate, UInt32*, LibC::LPWSTR*, UInt16**, HRESULT)).call(crows, rgpwszsourceurls, rgpwszdesturls, dwmoveflags, pauthenticate, rgdwstatus, rgpwsznewurls, ppstringsbuffer)
+  end
+  def delete(crows : LibC::UINT_PTR, rgpwszurls : LibC::LPWSTR*, dwdeleteflags : UInt32, rgdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(LibC::UINT_PTR, LibC::LPWSTR*, UInt32, UInt32*, HRESULT)).call(crows, rgpwszurls, dwdeleteflags, rgdwstatus)
+  end
+  def open_rowset(punkouter : IUnknown, ptableid : DBID*, pindexid : DBID*, riid : Guid*, cpropertysets : UInt32, rgpropertysets : DBPROPSET*, pprowset : IUnknown*) : HRESULT
+    @lpVtbl.value.open_rowset.unsafe_as(Proc(IUnknown, DBID*, DBID*, Guid*, UInt32, DBPROPSET*, IUnknown*, HRESULT)).call(punkouter, ptableid, pindexid, riid, cpropertysets, rgpropertysets, pprowset)
+  end
+end
+struct LibWin32::ICreateRow
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_row(punkouter : IUnknown, pwszurl : LibC::LPWSTR, dwbindurlflags : UInt32, rguid : Guid*, riid : Guid*, pauthenticate : IAuthenticate, pimplsession : DBIMPLICITSESSION*, pdwbindstatus : UInt32*, ppwsznewurl : LibC::LPWSTR*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.create_row.unsafe_as(Proc(IUnknown, LibC::LPWSTR, UInt32, Guid*, Guid*, IAuthenticate, DBIMPLICITSESSION*, UInt32*, LibC::LPWSTR*, IUnknown*, HRESULT)).call(punkouter, pwszurl, dwbindurlflags, rguid, riid, pauthenticate, pimplsession, pdwbindstatus, ppwsznewurl, ppunk)
+  end
+end
+struct LibWin32::IDBBinderProperties
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_properties(cpropertyidsets : UInt32, rgpropertyidsets : DBPROPIDSET*, pcpropertysets : UInt32*, prgpropertysets : DBPROPSET**) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(UInt32, DBPROPIDSET*, UInt32*, DBPROPSET**, HRESULT)).call(cpropertyidsets, rgpropertyidsets, pcpropertysets, prgpropertysets)
+  end
+  def get_property_info(cpropertyidsets : UInt32, rgpropertyidsets : DBPROPIDSET*, pcpropertyinfosets : UInt32*, prgpropertyinfosets : DBPROPINFOSET**, ppdescbuffer : UInt16**) : HRESULT
+    @lpVtbl.value.get_property_info.unsafe_as(Proc(UInt32, DBPROPIDSET*, UInt32*, DBPROPINFOSET**, UInt16**, HRESULT)).call(cpropertyidsets, rgpropertyidsets, pcpropertyinfosets, prgpropertyinfosets, ppdescbuffer)
+  end
+  def set_properties(cpropertysets : UInt32, rgpropertysets : DBPROPSET*) : HRESULT
+    @lpVtbl.value.set_properties.unsafe_as(Proc(UInt32, DBPROPSET*, HRESULT)).call(cpropertysets, rgpropertysets)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IColumnsInfo2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_column_info(pccolumns : LibC::UINT_PTR*, prginfo : DBCOLUMNINFO**, ppstringsbuffer : UInt16**) : HRESULT
+    @lpVtbl.value.get_column_info.unsafe_as(Proc(LibC::UINT_PTR*, DBCOLUMNINFO**, UInt16**, HRESULT)).call(pccolumns, prginfo, ppstringsbuffer)
+  end
+  def map_column_i_ds(ccolumnids : LibC::UINT_PTR, rgcolumnids : DBID*, rgcolumns : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.map_column_i_ds.unsafe_as(Proc(LibC::UINT_PTR, DBID*, LibC::UINT_PTR*, HRESULT)).call(ccolumnids, rgcolumnids, rgcolumns)
+  end
+  def get_restricted_column_info(ccolumnidmasks : LibC::UINT_PTR, rgcolumnidmasks : DBID*, dwflags : UInt32, pccolumns : LibC::UINT_PTR*, prgcolumnids : DBID**, prgcolumninfo : DBCOLUMNINFO**, ppstringsbuffer : UInt16**) : HRESULT
+    @lpVtbl.value.get_restricted_column_info.unsafe_as(Proc(LibC::UINT_PTR, DBID*, UInt32, LibC::UINT_PTR*, DBID**, DBCOLUMNINFO**, UInt16**, HRESULT)).call(ccolumnidmasks, rgcolumnidmasks, dwflags, pccolumns, prgcolumnids, prgcolumninfo, ppstringsbuffer)
+  end
+end
+struct LibWin32::IRegisterProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_url_mapping(pwszurl : LibC::LPWSTR, dwreserved : LibC::UINT_PTR, pclsidprovider : Guid*) : HRESULT
+    @lpVtbl.value.get_url_mapping.unsafe_as(Proc(LibC::LPWSTR, LibC::UINT_PTR, Guid*, HRESULT)).call(pwszurl, dwreserved, pclsidprovider)
+  end
+  def set_url_mapping(pwszurl : LibC::LPWSTR, dwreserved : LibC::UINT_PTR, rclsidprovider : Guid*) : HRESULT
+    @lpVtbl.value.set_url_mapping.unsafe_as(Proc(LibC::LPWSTR, LibC::UINT_PTR, Guid*, HRESULT)).call(pwszurl, dwreserved, rclsidprovider)
+  end
+  def unregister_provider(pwszurl : LibC::LPWSTR, dwreserved : LibC::UINT_PTR, rclsidprovider : Guid*) : HRESULT
+    @lpVtbl.value.unregister_provider.unsafe_as(Proc(LibC::LPWSTR, LibC::UINT_PTR, Guid*, HRESULT)).call(pwszurl, dwreserved, rclsidprovider)
+  end
+end
+struct LibWin32::IGetSession
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_session(riid : Guid*, ppsession : IUnknown*) : HRESULT
+    @lpVtbl.value.get_session.unsafe_as(Proc(Guid*, IUnknown*, HRESULT)).call(riid, ppsession)
+  end
+end
+struct LibWin32::IGetSourceRow
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_source_row(riid : Guid*, pprow : IUnknown*) : HRESULT
+    @lpVtbl.value.get_source_row.unsafe_as(Proc(Guid*, IUnknown*, HRESULT)).call(riid, pprow)
+  end
+end
+struct LibWin32::IRowsetCurrentIndex
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_index_info(pckeycolumns : LibC::UINT_PTR*, prgindexcolumndesc : DBINDEXCOLUMNDESC**, pcindexpropertysets : UInt32*, prgindexpropertysets : DBPROPSET**) : HRESULT
+    @lpVtbl.value.get_index_info.unsafe_as(Proc(LibC::UINT_PTR*, DBINDEXCOLUMNDESC**, UInt32*, DBPROPSET**, HRESULT)).call(pckeycolumns, prgindexcolumndesc, pcindexpropertysets, prgindexpropertysets)
+  end
+  def seek(haccessor : LibC::UINT_PTR, ckeyvalues : LibC::UINT_PTR, pdata : Void*, dwseekoptions : UInt32) : HRESULT
+    @lpVtbl.value.seek.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, Void*, UInt32, HRESULT)).call(haccessor, ckeyvalues, pdata, dwseekoptions)
+  end
+  def set_range(haccessor : LibC::UINT_PTR, cstartkeycolumns : LibC::UINT_PTR, pstartdata : Void*, cendkeycolumns : LibC::UINT_PTR, penddata : Void*, dwrangeoptions : UInt32) : HRESULT
+    @lpVtbl.value.set_range.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, Void*, LibC::UINT_PTR, Void*, UInt32, HRESULT)).call(haccessor, cstartkeycolumns, pstartdata, cendkeycolumns, penddata, dwrangeoptions)
+  end
+  def get_index(ppindexid : DBID**) : HRESULT
+    @lpVtbl.value.get_index.unsafe_as(Proc(DBID**, HRESULT)).call(ppindexid)
+  end
+  def set_index(pindexid : DBID*) : HRESULT
+    @lpVtbl.value.set_index.unsafe_as(Proc(DBID*, HRESULT)).call(pindexid)
+  end
+end
+struct LibWin32::ICommandStream
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_command_stream(piid : Guid*, pguiddialect : Guid*, ppcommandstream : IUnknown*) : HRESULT
+    @lpVtbl.value.get_command_stream.unsafe_as(Proc(Guid*, Guid*, IUnknown*, HRESULT)).call(piid, pguiddialect, ppcommandstream)
+  end
+  def set_command_stream(riid : Guid*, rguiddialect : Guid*, pcommandstream : IUnknown) : HRESULT
+    @lpVtbl.value.set_command_stream.unsafe_as(Proc(Guid*, Guid*, IUnknown, HRESULT)).call(riid, rguiddialect, pcommandstream)
+  end
+end
+struct LibWin32::IRowsetBookmark
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def position_on_bookmark(hchapter : LibC::UINT_PTR, cbbookmark : LibC::UINT_PTR, pbookmark : UInt8*) : HRESULT
+    @lpVtbl.value.position_on_bookmark.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, HRESULT)).call(hchapter, cbbookmark, pbookmark)
+  end
+end
+struct LibWin32::IQueryParser
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def parse(pszinputstring : LibC::LPWSTR, pcustomproperties : IEnumUnknown, ppsolution : IQuerySolution*) : HRESULT
+    @lpVtbl.value.parse.unsafe_as(Proc(LibC::LPWSTR, IEnumUnknown, IQuerySolution*, HRESULT)).call(pszinputstring, pcustomproperties, ppsolution)
+  end
+  def set_option(option : STRUCTURED_QUERY_SINGLE_OPTION, poptionvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_option.unsafe_as(Proc(STRUCTURED_QUERY_SINGLE_OPTION, PROPVARIANT*, HRESULT)).call(option, poptionvalue)
+  end
+  def get_option(option : STRUCTURED_QUERY_SINGLE_OPTION, poptionvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_option.unsafe_as(Proc(STRUCTURED_QUERY_SINGLE_OPTION, PROPVARIANT*, HRESULT)).call(option, poptionvalue)
+  end
+  def set_multi_option(option : STRUCTURED_QUERY_MULTIOPTION, pszoptionkey : LibC::LPWSTR, poptionvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_multi_option.unsafe_as(Proc(STRUCTURED_QUERY_MULTIOPTION, LibC::LPWSTR, PROPVARIANT*, HRESULT)).call(option, pszoptionkey, poptionvalue)
+  end
+  def get_schema_provider(ppschemaprovider : ISchemaProvider*) : HRESULT
+    @lpVtbl.value.get_schema_provider.unsafe_as(Proc(ISchemaProvider*, HRESULT)).call(ppschemaprovider)
+  end
+  def restate_to_string(pcondition : ICondition, fuseenglish : LibC::BOOL, ppszquerystring : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.restate_to_string.unsafe_as(Proc(ICondition, LibC::BOOL, LibC::LPWSTR*, HRESULT)).call(pcondition, fuseenglish, ppszquerystring)
+  end
+  def parse_property_value(pszpropertyname : LibC::LPWSTR, pszinputstring : LibC::LPWSTR, ppsolution : IQuerySolution*) : HRESULT
+    @lpVtbl.value.parse_property_value.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, IQuerySolution*, HRESULT)).call(pszpropertyname, pszinputstring, ppsolution)
+  end
+  def restate_property_value_to_string(pcondition : ICondition, fuseenglish : LibC::BOOL, ppszpropertyname : LibC::LPWSTR*, ppszquerystring : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.restate_property_value_to_string.unsafe_as(Proc(ICondition, LibC::BOOL, LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(pcondition, fuseenglish, ppszpropertyname, ppszquerystring)
+  end
+end
+struct LibWin32::IConditionFactory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def make_not(pcsub : ICondition, fsimplify : LibC::BOOL, ppcresult : ICondition*) : HRESULT
+    @lpVtbl.value.make_not.unsafe_as(Proc(ICondition, LibC::BOOL, ICondition*, HRESULT)).call(pcsub, fsimplify, ppcresult)
+  end
+  def make_and_or(ct : CONDITION_TYPE, peusubs : IEnumUnknown, fsimplify : LibC::BOOL, ppcresult : ICondition*) : HRESULT
+    @lpVtbl.value.make_and_or.unsafe_as(Proc(CONDITION_TYPE, IEnumUnknown, LibC::BOOL, ICondition*, HRESULT)).call(ct, peusubs, fsimplify, ppcresult)
+  end
+  def make_leaf(pszpropertyname : LibC::LPWSTR, cop : CONDITION_OPERATION, pszvaluetype : LibC::LPWSTR, ppropvar : PROPVARIANT*, ppropertynameterm : IRichChunk, poperationterm : IRichChunk, pvalueterm : IRichChunk, fexpand : LibC::BOOL, ppcresult : ICondition*) : HRESULT
+    @lpVtbl.value.make_leaf.unsafe_as(Proc(LibC::LPWSTR, CONDITION_OPERATION, LibC::LPWSTR, PROPVARIANT*, IRichChunk, IRichChunk, IRichChunk, LibC::BOOL, ICondition*, HRESULT)).call(pszpropertyname, cop, pszvaluetype, ppropvar, ppropertynameterm, poperationterm, pvalueterm, fexpand, ppcresult)
+  end
+  def resolve(pc : ICondition, sqro : STRUCTURED_QUERY_RESOLVE_OPTION, pstreferencetime : SYSTEMTIME*, ppcresolved : ICondition*) : HRESULT
+    @lpVtbl.value.resolve.unsafe_as(Proc(ICondition, STRUCTURED_QUERY_RESOLVE_OPTION, SYSTEMTIME*, ICondition*, HRESULT)).call(pc, sqro, pstreferencetime, ppcresolved)
+  end
+end
+struct LibWin32::IQuerySolution
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def make_not(pcsub : ICondition, fsimplify : LibC::BOOL, ppcresult : ICondition*) : HRESULT
+    @lpVtbl.value.make_not.unsafe_as(Proc(ICondition, LibC::BOOL, ICondition*, HRESULT)).call(pcsub, fsimplify, ppcresult)
+  end
+  def make_and_or(ct : CONDITION_TYPE, peusubs : IEnumUnknown, fsimplify : LibC::BOOL, ppcresult : ICondition*) : HRESULT
+    @lpVtbl.value.make_and_or.unsafe_as(Proc(CONDITION_TYPE, IEnumUnknown, LibC::BOOL, ICondition*, HRESULT)).call(ct, peusubs, fsimplify, ppcresult)
+  end
+  def make_leaf(pszpropertyname : LibC::LPWSTR, cop : CONDITION_OPERATION, pszvaluetype : LibC::LPWSTR, ppropvar : PROPVARIANT*, ppropertynameterm : IRichChunk, poperationterm : IRichChunk, pvalueterm : IRichChunk, fexpand : LibC::BOOL, ppcresult : ICondition*) : HRESULT
+    @lpVtbl.value.make_leaf.unsafe_as(Proc(LibC::LPWSTR, CONDITION_OPERATION, LibC::LPWSTR, PROPVARIANT*, IRichChunk, IRichChunk, IRichChunk, LibC::BOOL, ICondition*, HRESULT)).call(pszpropertyname, cop, pszvaluetype, ppropvar, ppropertynameterm, poperationterm, pvalueterm, fexpand, ppcresult)
+  end
+  def resolve(pc : ICondition, sqro : STRUCTURED_QUERY_RESOLVE_OPTION, pstreferencetime : SYSTEMTIME*, ppcresolved : ICondition*) : HRESULT
+    @lpVtbl.value.resolve.unsafe_as(Proc(ICondition, STRUCTURED_QUERY_RESOLVE_OPTION, SYSTEMTIME*, ICondition*, HRESULT)).call(pc, sqro, pstreferencetime, ppcresolved)
+  end
+  def get_query(ppquerynode : ICondition*, ppmaintype : IEntity*) : HRESULT
+    @lpVtbl.value.get_query.unsafe_as(Proc(ICondition*, IEntity*, HRESULT)).call(ppquerynode, ppmaintype)
+  end
+  def get_errors(riid : Guid*, ppparseerrors : Void**) : HRESULT
+    @lpVtbl.value.get_errors.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppparseerrors)
+  end
+  def get_lexical_data(ppszinputstring : LibC::LPWSTR*, pptokens : ITokenCollection*, plcid : UInt32*, ppwordbreaker : IUnknown*) : HRESULT
+    @lpVtbl.value.get_lexical_data.unsafe_as(Proc(LibC::LPWSTR*, ITokenCollection*, UInt32*, IUnknown*, HRESULT)).call(ppszinputstring, pptokens, plcid, ppwordbreaker)
+  end
+end
+struct LibWin32::IConditionFactory2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def make_not(pcsub : ICondition, fsimplify : LibC::BOOL, ppcresult : ICondition*) : HRESULT
+    @lpVtbl.value.make_not.unsafe_as(Proc(ICondition, LibC::BOOL, ICondition*, HRESULT)).call(pcsub, fsimplify, ppcresult)
+  end
+  def make_and_or(ct : CONDITION_TYPE, peusubs : IEnumUnknown, fsimplify : LibC::BOOL, ppcresult : ICondition*) : HRESULT
+    @lpVtbl.value.make_and_or.unsafe_as(Proc(CONDITION_TYPE, IEnumUnknown, LibC::BOOL, ICondition*, HRESULT)).call(ct, peusubs, fsimplify, ppcresult)
+  end
+  def make_leaf(pszpropertyname : LibC::LPWSTR, cop : CONDITION_OPERATION, pszvaluetype : LibC::LPWSTR, ppropvar : PROPVARIANT*, ppropertynameterm : IRichChunk, poperationterm : IRichChunk, pvalueterm : IRichChunk, fexpand : LibC::BOOL, ppcresult : ICondition*) : HRESULT
+    @lpVtbl.value.make_leaf.unsafe_as(Proc(LibC::LPWSTR, CONDITION_OPERATION, LibC::LPWSTR, PROPVARIANT*, IRichChunk, IRichChunk, IRichChunk, LibC::BOOL, ICondition*, HRESULT)).call(pszpropertyname, cop, pszvaluetype, ppropvar, ppropertynameterm, poperationterm, pvalueterm, fexpand, ppcresult)
+  end
+  def resolve(pc : ICondition, sqro : STRUCTURED_QUERY_RESOLVE_OPTION, pstreferencetime : SYSTEMTIME*, ppcresolved : ICondition*) : HRESULT
+    @lpVtbl.value.resolve.unsafe_as(Proc(ICondition, STRUCTURED_QUERY_RESOLVE_OPTION, SYSTEMTIME*, ICondition*, HRESULT)).call(pc, sqro, pstreferencetime, ppcresolved)
+  end
+  def create_true_false(fval : LibC::BOOL, cco : CONDITION_CREATION_OPTIONS, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_true_false.unsafe_as(Proc(LibC::BOOL, CONDITION_CREATION_OPTIONS, Guid*, Void**, HRESULT)).call(fval, cco, riid, ppv)
+  end
+  def create_negation(pcsub : ICondition, cco : CONDITION_CREATION_OPTIONS, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_negation.unsafe_as(Proc(ICondition, CONDITION_CREATION_OPTIONS, Guid*, Void**, HRESULT)).call(pcsub, cco, riid, ppv)
+  end
+  def create_compound_from_object_array(ct : CONDITION_TYPE, poasubs : IObjectArray, cco : CONDITION_CREATION_OPTIONS, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_compound_from_object_array.unsafe_as(Proc(CONDITION_TYPE, IObjectArray, CONDITION_CREATION_OPTIONS, Guid*, Void**, HRESULT)).call(ct, poasubs, cco, riid, ppv)
+  end
+  def create_compound_from_array(ct : CONDITION_TYPE, ppcondsubs : ICondition*, csubs : UInt32, cco : CONDITION_CREATION_OPTIONS, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_compound_from_array.unsafe_as(Proc(CONDITION_TYPE, ICondition*, UInt32, CONDITION_CREATION_OPTIONS, Guid*, Void**, HRESULT)).call(ct, ppcondsubs, csubs, cco, riid, ppv)
+  end
+  def create_string_leaf(propkey : PROPERTYKEY*, cop : CONDITION_OPERATION, pszvalue : LibC::LPWSTR, pszlocalename : LibC::LPWSTR, cco : CONDITION_CREATION_OPTIONS, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_string_leaf.unsafe_as(Proc(PROPERTYKEY*, CONDITION_OPERATION, LibC::LPWSTR, LibC::LPWSTR, CONDITION_CREATION_OPTIONS, Guid*, Void**, HRESULT)).call(propkey, cop, pszvalue, pszlocalename, cco, riid, ppv)
+  end
+  def create_integer_leaf(propkey : PROPERTYKEY*, cop : CONDITION_OPERATION, lvalue : Int32, cco : CONDITION_CREATION_OPTIONS, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_integer_leaf.unsafe_as(Proc(PROPERTYKEY*, CONDITION_OPERATION, Int32, CONDITION_CREATION_OPTIONS, Guid*, Void**, HRESULT)).call(propkey, cop, lvalue, cco, riid, ppv)
+  end
+  def create_boolean_leaf(propkey : PROPERTYKEY*, cop : CONDITION_OPERATION, fvalue : LibC::BOOL, cco : CONDITION_CREATION_OPTIONS, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_boolean_leaf.unsafe_as(Proc(PROPERTYKEY*, CONDITION_OPERATION, LibC::BOOL, CONDITION_CREATION_OPTIONS, Guid*, Void**, HRESULT)).call(propkey, cop, fvalue, cco, riid, ppv)
+  end
+  def create_leaf(propkey : PROPERTYKEY*, cop : CONDITION_OPERATION, propvar : PROPVARIANT*, pszsemantictype : LibC::LPWSTR, pszlocalename : LibC::LPWSTR, ppropertynameterm : IRichChunk, poperationterm : IRichChunk, pvalueterm : IRichChunk, cco : CONDITION_CREATION_OPTIONS, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_leaf.unsafe_as(Proc(PROPERTYKEY*, CONDITION_OPERATION, PROPVARIANT*, LibC::LPWSTR, LibC::LPWSTR, IRichChunk, IRichChunk, IRichChunk, CONDITION_CREATION_OPTIONS, Guid*, Void**, HRESULT)).call(propkey, cop, propvar, pszsemantictype, pszlocalename, ppropertynameterm, poperationterm, pvalueterm, cco, riid, ppv)
+  end
+  def resolve_condition(pc : ICondition, sqro : STRUCTURED_QUERY_RESOLVE_OPTION, pstreferencetime : SYSTEMTIME*, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.resolve_condition.unsafe_as(Proc(ICondition, STRUCTURED_QUERY_RESOLVE_OPTION, SYSTEMTIME*, Guid*, Void**, HRESULT)).call(pc, sqro, pstreferencetime, riid, ppv)
+  end
+end
+struct LibWin32::IConditionGenerator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pschemaprovider : ISchemaProvider) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(ISchemaProvider, HRESULT)).call(pschemaprovider)
+  end
+  def recognize_named_entities(pszinputstring : LibC::LPWSTR, lciduserlocale : UInt32, ptokencollection : ITokenCollection, pnamedentities : INamedEntityCollector) : HRESULT
+    @lpVtbl.value.recognize_named_entities.unsafe_as(Proc(LibC::LPWSTR, UInt32, ITokenCollection, INamedEntityCollector, HRESULT)).call(pszinputstring, lciduserlocale, ptokencollection, pnamedentities)
+  end
+  def generate_for_leaf(pconditionfactory : IConditionFactory, pszpropertyname : LibC::LPWSTR, cop : CONDITION_OPERATION, pszvaluetype : LibC::LPWSTR, pszvalue : LibC::LPWSTR, pszvalue2 : LibC::LPWSTR, ppropertynameterm : IRichChunk, poperationterm : IRichChunk, pvalueterm : IRichChunk, automaticwildcard : LibC::BOOL, pnostringquery : LibC::BOOL*, ppqueryexpression : ICondition*) : HRESULT
+    @lpVtbl.value.generate_for_leaf.unsafe_as(Proc(IConditionFactory, LibC::LPWSTR, CONDITION_OPERATION, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IRichChunk, IRichChunk, IRichChunk, LibC::BOOL, LibC::BOOL*, ICondition*, HRESULT)).call(pconditionfactory, pszpropertyname, cop, pszvaluetype, pszvalue, pszvalue2, ppropertynameterm, poperationterm, pvalueterm, automaticwildcard, pnostringquery, ppqueryexpression)
+  end
+  def default_phrase(pszvaluetype : LibC::LPWSTR, ppropvar : PROPVARIANT*, fuseenglish : LibC::BOOL, ppszphrase : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.default_phrase.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT*, LibC::BOOL, LibC::LPWSTR*, HRESULT)).call(pszvaluetype, ppropvar, fuseenglish, ppszphrase)
+  end
+end
+struct LibWin32::IInterval
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_limits(pilklower : INTERVAL_LIMIT_KIND*, ppropvarlower : PROPVARIANT*, pilkupper : INTERVAL_LIMIT_KIND*, ppropvarupper : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_limits.unsafe_as(Proc(INTERVAL_LIMIT_KIND*, PROPVARIANT*, INTERVAL_LIMIT_KIND*, PROPVARIANT*, HRESULT)).call(pilklower, ppropvarlower, pilkupper, ppropvarupper)
+  end
+end
+struct LibWin32::IMetaData
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_data(ppszkey : LibC::LPWSTR*, ppszvalue : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_data.unsafe_as(Proc(LibC::LPWSTR*, LibC::LPWSTR*, HRESULT)).call(ppszkey, ppszvalue)
+  end
+end
+struct LibWin32::IEntity
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def name(ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszname)
+  end
+  def base(pbaseentity : IEntity*) : HRESULT
+    @lpVtbl.value.base.unsafe_as(Proc(IEntity*, HRESULT)).call(pbaseentity)
+  end
+  def relationships(riid : Guid*, prelationships : Void**) : HRESULT
+    @lpVtbl.value.relationships.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, prelationships)
+  end
+  def get_relationship(pszrelationname : LibC::LPWSTR, prelationship : IRelationship*) : HRESULT
+    @lpVtbl.value.get_relationship.unsafe_as(Proc(LibC::LPWSTR, IRelationship*, HRESULT)).call(pszrelationname, prelationship)
+  end
+  def meta_data(riid : Guid*, pmetadata : Void**) : HRESULT
+    @lpVtbl.value.meta_data.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, pmetadata)
+  end
+  def named_entities(riid : Guid*, pnamedentities : Void**) : HRESULT
+    @lpVtbl.value.named_entities.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, pnamedentities)
+  end
+  def get_named_entity(pszvalue : LibC::LPWSTR, ppnamedentity : INamedEntity*) : HRESULT
+    @lpVtbl.value.get_named_entity.unsafe_as(Proc(LibC::LPWSTR, INamedEntity*, HRESULT)).call(pszvalue, ppnamedentity)
+  end
+  def default_phrase(ppszphrase : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.default_phrase.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszphrase)
+  end
+end
+struct LibWin32::IRelationship
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def name(ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszname)
+  end
+  def is_real(pisreal : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_real.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisreal)
+  end
+  def destination(pdestinationentity : IEntity*) : HRESULT
+    @lpVtbl.value.destination.unsafe_as(Proc(IEntity*, HRESULT)).call(pdestinationentity)
+  end
+  def meta_data(riid : Guid*, pmetadata : Void**) : HRESULT
+    @lpVtbl.value.meta_data.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, pmetadata)
+  end
+  def default_phrase(ppszphrase : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.default_phrase.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszphrase)
+  end
+end
+struct LibWin32::INamedEntity
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_value(ppszvalue : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_value.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszvalue)
+  end
+  def default_phrase(ppszphrase : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.default_phrase.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszphrase)
+  end
+end
+struct LibWin32::ISchemaProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def entities(riid : Guid*, pentities : Void**) : HRESULT
+    @lpVtbl.value.entities.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, pentities)
+  end
+  def root_entity(prootentity : IEntity*) : HRESULT
+    @lpVtbl.value.root_entity.unsafe_as(Proc(IEntity*, HRESULT)).call(prootentity)
+  end
+  def get_entity(pszentityname : LibC::LPWSTR, pentity : IEntity*) : HRESULT
+    @lpVtbl.value.get_entity.unsafe_as(Proc(LibC::LPWSTR, IEntity*, HRESULT)).call(pszentityname, pentity)
+  end
+  def meta_data(riid : Guid*, pmetadata : Void**) : HRESULT
+    @lpVtbl.value.meta_data.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, pmetadata)
+  end
+  def localize(lcid : UInt32, pschemalocalizersupport : ISchemaLocalizerSupport) : HRESULT
+    @lpVtbl.value.localize.unsafe_as(Proc(UInt32, ISchemaLocalizerSupport, HRESULT)).call(lcid, pschemalocalizersupport)
+  end
+  def save_binary(pszschemabinarypath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.save_binary.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszschemabinarypath)
+  end
+  def lookup_authored_named_entity(pentity : IEntity, pszinputstring : LibC::LPWSTR, ptokencollection : ITokenCollection, ctokensbegin : UInt32, pctokenslength : UInt32*, ppszvalue : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.lookup_authored_named_entity.unsafe_as(Proc(IEntity, LibC::LPWSTR, ITokenCollection, UInt32, UInt32*, LibC::LPWSTR*, HRESULT)).call(pentity, pszinputstring, ptokencollection, ctokensbegin, pctokenslength, ppszvalue)
+  end
+end
+struct LibWin32::ITokenCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def number_of_tokens(pcount : UInt32*) : HRESULT
+    @lpVtbl.value.number_of_tokens.unsafe_as(Proc(UInt32*, HRESULT)).call(pcount)
+  end
+  def get_token(i : UInt32, pbegin : UInt32*, plength : UInt32*, ppsz : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_token.unsafe_as(Proc(UInt32, UInt32*, UInt32*, LibC::LPWSTR*, HRESULT)).call(i, pbegin, plength, ppsz)
+  end
+end
+struct LibWin32::INamedEntityCollector
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add(beginspan : UInt32, endspan : UInt32, beginactual : UInt32, endactual : UInt32, ptype : IEntity, pszvalue : LibC::LPWSTR, certainty : NAMED_ENTITY_CERTAINTY) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, IEntity, LibC::LPWSTR, NAMED_ENTITY_CERTAINTY, HRESULT)).call(beginspan, endspan, beginactual, endactual, ptype, pszvalue, certainty)
+  end
+end
+struct LibWin32::ISchemaLocalizerSupport
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def localize(pszglobalstring : LibC::LPWSTR, ppszlocalstring : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.localize.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR*, HRESULT)).call(pszglobalstring, ppszlocalstring)
+  end
+end
+struct LibWin32::IQueryParserManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_loaded_parser(pszcatalog : LibC::LPWSTR, langidforkeywords : UInt16, riid : Guid*, ppqueryparser : Void**) : HRESULT
+    @lpVtbl.value.create_loaded_parser.unsafe_as(Proc(LibC::LPWSTR, UInt16, Guid*, Void**, HRESULT)).call(pszcatalog, langidforkeywords, riid, ppqueryparser)
+  end
+  def initialize_options(funderstandnqs : LibC::BOOL, fautowildcard : LibC::BOOL, pqueryparser : IQueryParser) : HRESULT
+    @lpVtbl.value.initialize_options.unsafe_as(Proc(LibC::BOOL, LibC::BOOL, IQueryParser, HRESULT)).call(funderstandnqs, fautowildcard, pqueryparser)
+  end
+  def set_option(option : QUERY_PARSER_MANAGER_OPTION, poptionvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_option.unsafe_as(Proc(QUERY_PARSER_MANAGER_OPTION, PROPVARIANT*, HRESULT)).call(option, poptionvalue)
+  end
+end
+struct LibWin32::IUrlAccessor
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_request_parameter(pspec : PROPSPEC*, pvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.add_request_parameter.unsafe_as(Proc(PROPSPEC*, PROPVARIANT*, HRESULT)).call(pspec, pvar)
+  end
+  def get_doc_format(wszdocformat : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_doc_format.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszdocformat, dwsize, pdwlength)
+  end
+  def get_clsid(pclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_clsid.unsafe_as(Proc(Guid*, HRESULT)).call(pclsid)
+  end
+  def get_host(wszhost : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_host.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszhost, dwsize, pdwlength)
+  end
+  def is_directory : HRESULT
+    @lpVtbl.value.is_directory.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_size(pllsize : UInt64*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(UInt64*, HRESULT)).call(pllsize)
+  end
+  def get_last_modified(pftlastmodified : FILETIME*) : HRESULT
+    @lpVtbl.value.get_last_modified.unsafe_as(Proc(FILETIME*, HRESULT)).call(pftlastmodified)
+  end
+  def get_file_name(wszfilename : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_file_name.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszfilename, dwsize, pdwlength)
+  end
+  def get_security_descriptor(psd : UInt8*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_security_descriptor.unsafe_as(Proc(UInt8*, UInt32, UInt32*, HRESULT)).call(psd, dwsize, pdwlength)
+  end
+  def get_redirected_url(wszredirectedurl : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_redirected_url.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszredirectedurl, dwsize, pdwlength)
+  end
+  def get_security_provider(pspclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_security_provider.unsafe_as(Proc(Guid*, HRESULT)).call(pspclsid)
+  end
+  def bind_to_stream(ppstream : IStream*) : HRESULT
+    @lpVtbl.value.bind_to_stream.unsafe_as(Proc(IStream*, HRESULT)).call(ppstream)
+  end
+  def bind_to_filter(ppfilter : IFilter*) : HRESULT
+    @lpVtbl.value.bind_to_filter.unsafe_as(Proc(IFilter*, HRESULT)).call(ppfilter)
+  end
+end
+struct LibWin32::IUrlAccessor2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_request_parameter(pspec : PROPSPEC*, pvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.add_request_parameter.unsafe_as(Proc(PROPSPEC*, PROPVARIANT*, HRESULT)).call(pspec, pvar)
+  end
+  def get_doc_format(wszdocformat : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_doc_format.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszdocformat, dwsize, pdwlength)
+  end
+  def get_clsid(pclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_clsid.unsafe_as(Proc(Guid*, HRESULT)).call(pclsid)
+  end
+  def get_host(wszhost : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_host.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszhost, dwsize, pdwlength)
+  end
+  def is_directory : HRESULT
+    @lpVtbl.value.is_directory.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_size(pllsize : UInt64*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(UInt64*, HRESULT)).call(pllsize)
+  end
+  def get_last_modified(pftlastmodified : FILETIME*) : HRESULT
+    @lpVtbl.value.get_last_modified.unsafe_as(Proc(FILETIME*, HRESULT)).call(pftlastmodified)
+  end
+  def get_file_name(wszfilename : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_file_name.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszfilename, dwsize, pdwlength)
+  end
+  def get_security_descriptor(psd : UInt8*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_security_descriptor.unsafe_as(Proc(UInt8*, UInt32, UInt32*, HRESULT)).call(psd, dwsize, pdwlength)
+  end
+  def get_redirected_url(wszredirectedurl : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_redirected_url.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszredirectedurl, dwsize, pdwlength)
+  end
+  def get_security_provider(pspclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_security_provider.unsafe_as(Proc(Guid*, HRESULT)).call(pspclsid)
+  end
+  def bind_to_stream(ppstream : IStream*) : HRESULT
+    @lpVtbl.value.bind_to_stream.unsafe_as(Proc(IStream*, HRESULT)).call(ppstream)
+  end
+  def bind_to_filter(ppfilter : IFilter*) : HRESULT
+    @lpVtbl.value.bind_to_filter.unsafe_as(Proc(IFilter*, HRESULT)).call(ppfilter)
+  end
+  def get_display_url(wszdocurl : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_display_url.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszdocurl, dwsize, pdwlength)
+  end
+  def is_document : HRESULT
+    @lpVtbl.value.is_document.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_code_page(wszcodepage : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_page.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszcodepage, dwsize, pdwlength)
+  end
+end
+struct LibWin32::IUrlAccessor3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_request_parameter(pspec : PROPSPEC*, pvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.add_request_parameter.unsafe_as(Proc(PROPSPEC*, PROPVARIANT*, HRESULT)).call(pspec, pvar)
+  end
+  def get_doc_format(wszdocformat : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_doc_format.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszdocformat, dwsize, pdwlength)
+  end
+  def get_clsid(pclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_clsid.unsafe_as(Proc(Guid*, HRESULT)).call(pclsid)
+  end
+  def get_host(wszhost : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_host.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszhost, dwsize, pdwlength)
+  end
+  def is_directory : HRESULT
+    @lpVtbl.value.is_directory.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_size(pllsize : UInt64*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(UInt64*, HRESULT)).call(pllsize)
+  end
+  def get_last_modified(pftlastmodified : FILETIME*) : HRESULT
+    @lpVtbl.value.get_last_modified.unsafe_as(Proc(FILETIME*, HRESULT)).call(pftlastmodified)
+  end
+  def get_file_name(wszfilename : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_file_name.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszfilename, dwsize, pdwlength)
+  end
+  def get_security_descriptor(psd : UInt8*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_security_descriptor.unsafe_as(Proc(UInt8*, UInt32, UInt32*, HRESULT)).call(psd, dwsize, pdwlength)
+  end
+  def get_redirected_url(wszredirectedurl : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_redirected_url.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszredirectedurl, dwsize, pdwlength)
+  end
+  def get_security_provider(pspclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_security_provider.unsafe_as(Proc(Guid*, HRESULT)).call(pspclsid)
+  end
+  def bind_to_stream(ppstream : IStream*) : HRESULT
+    @lpVtbl.value.bind_to_stream.unsafe_as(Proc(IStream*, HRESULT)).call(ppstream)
+  end
+  def bind_to_filter(ppfilter : IFilter*) : HRESULT
+    @lpVtbl.value.bind_to_filter.unsafe_as(Proc(IFilter*, HRESULT)).call(ppfilter)
+  end
+  def get_display_url(wszdocurl : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_display_url.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszdocurl, dwsize, pdwlength)
+  end
+  def is_document : HRESULT
+    @lpVtbl.value.is_document.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_code_page(wszcodepage : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_page.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszcodepage, dwsize, pdwlength)
+  end
+  def get_impersonation_sid_blobs(pcwszurl : LibC::LPWSTR, pcsidcount : UInt32*, ppsidblobs : BLOB**) : HRESULT
+    @lpVtbl.value.get_impersonation_sid_blobs.unsafe_as(Proc(LibC::LPWSTR, UInt32*, BLOB**, HRESULT)).call(pcwszurl, pcsidcount, ppsidblobs)
+  end
+end
+struct LibWin32::IUrlAccessor4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_request_parameter(pspec : PROPSPEC*, pvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.add_request_parameter.unsafe_as(Proc(PROPSPEC*, PROPVARIANT*, HRESULT)).call(pspec, pvar)
+  end
+  def get_doc_format(wszdocformat : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_doc_format.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszdocformat, dwsize, pdwlength)
+  end
+  def get_clsid(pclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_clsid.unsafe_as(Proc(Guid*, HRESULT)).call(pclsid)
+  end
+  def get_host(wszhost : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_host.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszhost, dwsize, pdwlength)
+  end
+  def is_directory : HRESULT
+    @lpVtbl.value.is_directory.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_size(pllsize : UInt64*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(UInt64*, HRESULT)).call(pllsize)
+  end
+  def get_last_modified(pftlastmodified : FILETIME*) : HRESULT
+    @lpVtbl.value.get_last_modified.unsafe_as(Proc(FILETIME*, HRESULT)).call(pftlastmodified)
+  end
+  def get_file_name(wszfilename : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_file_name.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszfilename, dwsize, pdwlength)
+  end
+  def get_security_descriptor(psd : UInt8*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_security_descriptor.unsafe_as(Proc(UInt8*, UInt32, UInt32*, HRESULT)).call(psd, dwsize, pdwlength)
+  end
+  def get_redirected_url(wszredirectedurl : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_redirected_url.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszredirectedurl, dwsize, pdwlength)
+  end
+  def get_security_provider(pspclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_security_provider.unsafe_as(Proc(Guid*, HRESULT)).call(pspclsid)
+  end
+  def bind_to_stream(ppstream : IStream*) : HRESULT
+    @lpVtbl.value.bind_to_stream.unsafe_as(Proc(IStream*, HRESULT)).call(ppstream)
+  end
+  def bind_to_filter(ppfilter : IFilter*) : HRESULT
+    @lpVtbl.value.bind_to_filter.unsafe_as(Proc(IFilter*, HRESULT)).call(ppfilter)
+  end
+  def get_display_url(wszdocurl : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_display_url.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszdocurl, dwsize, pdwlength)
+  end
+  def is_document : HRESULT
+    @lpVtbl.value.is_document.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_code_page(wszcodepage : Char*, dwsize : UInt32, pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_page.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(wszcodepage, dwsize, pdwlength)
+  end
+  def get_impersonation_sid_blobs(pcwszurl : LibC::LPWSTR, pcsidcount : UInt32*, ppsidblobs : BLOB**) : HRESULT
+    @lpVtbl.value.get_impersonation_sid_blobs.unsafe_as(Proc(LibC::LPWSTR, UInt32*, BLOB**, HRESULT)).call(pcwszurl, pcsidcount, ppsidblobs)
+  end
+  def should_index_item_content(pfindexcontent : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.should_index_item_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfindexcontent)
+  end
+  def should_index_property(key : PROPERTYKEY*, pfindexproperty : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.should_index_property.unsafe_as(Proc(PROPERTYKEY*, LibC::BOOL*, HRESULT)).call(key, pfindexproperty)
+  end
+end
+struct LibWin32::IOpLockStatus
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def is_oplock_valid(pfisoplockvalid : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_oplock_valid.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfisoplockvalid)
+  end
+  def is_oplock_broken(pfisoplockbroken : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_oplock_broken.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfisoplockbroken)
+  end
+  def get_oplock_event_handle(phoplockev : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_oplock_event_handle.unsafe_as(Proc(LibC::HANDLE*, HRESULT)).call(phoplockev)
+  end
+end
+struct LibWin32::ISearchProtocolThreadContext
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def thread_init : HRESULT
+    @lpVtbl.value.thread_init.unsafe_as(Proc(HRESULT)).call
+  end
+  def thread_shutdown : HRESULT
+    @lpVtbl.value.thread_shutdown.unsafe_as(Proc(HRESULT)).call
+  end
+  def thread_idle(dwtimeelaspedsincelastcallinms : UInt32) : HRESULT
+    @lpVtbl.value.thread_idle.unsafe_as(Proc(UInt32, HRESULT)).call(dwtimeelaspedsincelastcallinms)
+  end
+end
+struct LibWin32::ISearchProtocol
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def init(ptimeoutinfo : TIMEOUT_INFO*, pprotocolhandlersite : IProtocolHandlerSite, pproxyinfo : PROXY_INFO*) : HRESULT
+    @lpVtbl.value.init.unsafe_as(Proc(TIMEOUT_INFO*, IProtocolHandlerSite, PROXY_INFO*, HRESULT)).call(ptimeoutinfo, pprotocolhandlersite, pproxyinfo)
+  end
+  def create_accessor(pcwszurl : LibC::LPWSTR, pauthenticationinfo : AUTHENTICATION_INFO*, pincrementalaccessinfo : INCREMENTAL_ACCESS_INFO*, piteminfo : ITEM_INFO*, ppaccessor : IUrlAccessor*) : HRESULT
+    @lpVtbl.value.create_accessor.unsafe_as(Proc(LibC::LPWSTR, AUTHENTICATION_INFO*, INCREMENTAL_ACCESS_INFO*, ITEM_INFO*, IUrlAccessor*, HRESULT)).call(pcwszurl, pauthenticationinfo, pincrementalaccessinfo, piteminfo, ppaccessor)
+  end
+  def close_accessor(paccessor : IUrlAccessor) : HRESULT
+    @lpVtbl.value.close_accessor.unsafe_as(Proc(IUrlAccessor, HRESULT)).call(paccessor)
+  end
+  def shut_down : HRESULT
+    @lpVtbl.value.shut_down.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ISearchProtocol2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def init(ptimeoutinfo : TIMEOUT_INFO*, pprotocolhandlersite : IProtocolHandlerSite, pproxyinfo : PROXY_INFO*) : HRESULT
+    @lpVtbl.value.init.unsafe_as(Proc(TIMEOUT_INFO*, IProtocolHandlerSite, PROXY_INFO*, HRESULT)).call(ptimeoutinfo, pprotocolhandlersite, pproxyinfo)
+  end
+  def create_accessor(pcwszurl : LibC::LPWSTR, pauthenticationinfo : AUTHENTICATION_INFO*, pincrementalaccessinfo : INCREMENTAL_ACCESS_INFO*, piteminfo : ITEM_INFO*, ppaccessor : IUrlAccessor*) : HRESULT
+    @lpVtbl.value.create_accessor.unsafe_as(Proc(LibC::LPWSTR, AUTHENTICATION_INFO*, INCREMENTAL_ACCESS_INFO*, ITEM_INFO*, IUrlAccessor*, HRESULT)).call(pcwszurl, pauthenticationinfo, pincrementalaccessinfo, piteminfo, ppaccessor)
+  end
+  def close_accessor(paccessor : IUrlAccessor) : HRESULT
+    @lpVtbl.value.close_accessor.unsafe_as(Proc(IUrlAccessor, HRESULT)).call(paccessor)
+  end
+  def shut_down : HRESULT
+    @lpVtbl.value.shut_down.unsafe_as(Proc(HRESULT)).call
+  end
+  def create_accessor_ex(pcwszurl : LibC::LPWSTR, pauthenticationinfo : AUTHENTICATION_INFO*, pincrementalaccessinfo : INCREMENTAL_ACCESS_INFO*, piteminfo : ITEM_INFO*, puserdata : BLOB*, ppaccessor : IUrlAccessor*) : HRESULT
+    @lpVtbl.value.create_accessor_ex.unsafe_as(Proc(LibC::LPWSTR, AUTHENTICATION_INFO*, INCREMENTAL_ACCESS_INFO*, ITEM_INFO*, BLOB*, IUrlAccessor*, HRESULT)).call(pcwszurl, pauthenticationinfo, pincrementalaccessinfo, piteminfo, puserdata, ppaccessor)
+  end
+end
+struct LibWin32::IProtocolHandlerSite
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_filter(pclsidobj : Guid*, pcwszcontenttype : LibC::LPWSTR, pcwszextension : LibC::LPWSTR, ppfilter : IFilter*) : HRESULT
+    @lpVtbl.value.get_filter.unsafe_as(Proc(Guid*, LibC::LPWSTR, LibC::LPWSTR, IFilter*, HRESULT)).call(pclsidobj, pcwszcontenttype, pcwszextension, ppfilter)
+  end
+end
+struct LibWin32::ISearchRoot
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def put_schedule(psztaskarg : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_schedule.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(psztaskarg)
+  end
+  def get_schedule(ppsztaskarg : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_schedule.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppsztaskarg)
+  end
+  def put_root_url(pszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_root_url.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszurl)
+  end
+  def get_root_url(ppszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_root_url.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszurl)
+  end
+  def put_is_hierarchical(fishierarchical : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_is_hierarchical.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fishierarchical)
+  end
+  def get_is_hierarchical(pfishierarchical : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_hierarchical.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfishierarchical)
+  end
+  def put_provides_notifications(fprovidesnotifications : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_provides_notifications.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fprovidesnotifications)
+  end
+  def get_provides_notifications(pfprovidesnotifications : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_provides_notifications.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprovidesnotifications)
+  end
+  def put_use_notifications_only(fusenotificationsonly : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_use_notifications_only.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fusenotificationsonly)
+  end
+  def get_use_notifications_only(pfusenotificationsonly : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_use_notifications_only.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfusenotificationsonly)
+  end
+  def put_enumeration_depth(dwdepth : UInt32) : HRESULT
+    @lpVtbl.value.put_enumeration_depth.unsafe_as(Proc(UInt32, HRESULT)).call(dwdepth)
+  end
+  def get_enumeration_depth(pdwdepth : UInt32*) : HRESULT
+    @lpVtbl.value.get_enumeration_depth.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwdepth)
+  end
+  def put_host_depth(dwdepth : UInt32) : HRESULT
+    @lpVtbl.value.put_host_depth.unsafe_as(Proc(UInt32, HRESULT)).call(dwdepth)
+  end
+  def get_host_depth(pdwdepth : UInt32*) : HRESULT
+    @lpVtbl.value.get_host_depth.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwdepth)
+  end
+  def put_follow_directories(ffollowdirectories : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_follow_directories.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(ffollowdirectories)
+  end
+  def get_follow_directories(pffollowdirectories : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_follow_directories.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pffollowdirectories)
+  end
+  def put_authentication_type(authtype : AUTH_TYPE) : HRESULT
+    @lpVtbl.value.put_authentication_type.unsafe_as(Proc(AUTH_TYPE, HRESULT)).call(authtype)
+  end
+  def get_authentication_type(pauthtype : AUTH_TYPE*) : HRESULT
+    @lpVtbl.value.get_authentication_type.unsafe_as(Proc(AUTH_TYPE*, HRESULT)).call(pauthtype)
+  end
+  def put_user(pszuser : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_user.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszuser)
+  end
+  def get_user(ppszuser : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_user.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszuser)
+  end
+  def put_password(pszpassword : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_password.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpassword)
+  end
+  def get_password(ppszpassword : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_password.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszpassword)
+  end
+end
+struct LibWin32::IEnumSearchRoots
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : ISearchRoot*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ISearchRoot*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumSearchRoots*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumSearchRoots*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::ISearchScopeRule
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_pattern_or_url(ppszpatternorurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_pattern_or_url.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszpatternorurl)
+  end
+  def get_is_included(pfisincluded : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_included.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfisincluded)
+  end
+  def get_is_default(pfisdefault : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_default.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfisdefault)
+  end
+  def get_follow_flags(pfollowflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_follow_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pfollowflags)
+  end
+end
+struct LibWin32::IEnumSearchScopeRules
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, pprgelt : ISearchScopeRule*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ISearchScopeRule*, UInt32*, HRESULT)).call(celt, pprgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumSearchScopeRules*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumSearchScopeRules*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::ISearchCrawlScopeManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_default_scope_rule(pszurl : LibC::LPWSTR, finclude : LibC::BOOL, ffollowflags : UInt32) : HRESULT
+    @lpVtbl.value.add_default_scope_rule.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, UInt32, HRESULT)).call(pszurl, finclude, ffollowflags)
+  end
+  def add_root(psearchroot : ISearchRoot) : HRESULT
+    @lpVtbl.value.add_root.unsafe_as(Proc(ISearchRoot, HRESULT)).call(psearchroot)
+  end
+  def remove_root(pszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_root.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszurl)
+  end
+  def enumerate_roots(ppsearchroots : IEnumSearchRoots*) : HRESULT
+    @lpVtbl.value.enumerate_roots.unsafe_as(Proc(IEnumSearchRoots*, HRESULT)).call(ppsearchroots)
+  end
+  def add_hierarchical_scope(pszurl : LibC::LPWSTR, finclude : LibC::BOOL, fdefault : LibC::BOOL, foverridechildren : LibC::BOOL) : HRESULT
+    @lpVtbl.value.add_hierarchical_scope.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, LibC::BOOL, LibC::BOOL, HRESULT)).call(pszurl, finclude, fdefault, foverridechildren)
+  end
+  def add_user_scope_rule(pszurl : LibC::LPWSTR, finclude : LibC::BOOL, foverridechildren : LibC::BOOL, ffollowflags : UInt32) : HRESULT
+    @lpVtbl.value.add_user_scope_rule.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, LibC::BOOL, UInt32, HRESULT)).call(pszurl, finclude, foverridechildren, ffollowflags)
+  end
+  def remove_scope_rule(pszrule : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_scope_rule.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszrule)
+  end
+  def enumerate_scope_rules(ppsearchscoperules : IEnumSearchScopeRules*) : HRESULT
+    @lpVtbl.value.enumerate_scope_rules.unsafe_as(Proc(IEnumSearchScopeRules*, HRESULT)).call(ppsearchscoperules)
+  end
+  def has_parent_scope_rule(pszurl : LibC::LPWSTR, pfhasparentrule : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_parent_scope_rule.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(pszurl, pfhasparentrule)
+  end
+  def has_child_scope_rule(pszurl : LibC::LPWSTR, pfhaschildrule : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_child_scope_rule.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(pszurl, pfhaschildrule)
+  end
+  def included_in_crawl_scope(pszurl : LibC::LPWSTR, pfisincluded : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.included_in_crawl_scope.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(pszurl, pfisincluded)
+  end
+  def included_in_crawl_scope_ex(pszurl : LibC::LPWSTR, pfisincluded : LibC::BOOL*, preason : CLUSION_REASON*) : HRESULT
+    @lpVtbl.value.included_in_crawl_scope_ex.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, CLUSION_REASON*, HRESULT)).call(pszurl, pfisincluded, preason)
+  end
+  def revert_to_default_scopes : HRESULT
+    @lpVtbl.value.revert_to_default_scopes.unsafe_as(Proc(HRESULT)).call
+  end
+  def save_all : HRESULT
+    @lpVtbl.value.save_all.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_parent_scope_version_id(pszurl : LibC::LPWSTR, plscopeid : Int32*) : HRESULT
+    @lpVtbl.value.get_parent_scope_version_id.unsafe_as(Proc(LibC::LPWSTR, Int32*, HRESULT)).call(pszurl, plscopeid)
+  end
+  def remove_default_scope_rule(pszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_default_scope_rule.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszurl)
+  end
+end
+struct LibWin32::ISearchCrawlScopeManager2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_default_scope_rule(pszurl : LibC::LPWSTR, finclude : LibC::BOOL, ffollowflags : UInt32) : HRESULT
+    @lpVtbl.value.add_default_scope_rule.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, UInt32, HRESULT)).call(pszurl, finclude, ffollowflags)
+  end
+  def add_root(psearchroot : ISearchRoot) : HRESULT
+    @lpVtbl.value.add_root.unsafe_as(Proc(ISearchRoot, HRESULT)).call(psearchroot)
+  end
+  def remove_root(pszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_root.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszurl)
+  end
+  def enumerate_roots(ppsearchroots : IEnumSearchRoots*) : HRESULT
+    @lpVtbl.value.enumerate_roots.unsafe_as(Proc(IEnumSearchRoots*, HRESULT)).call(ppsearchroots)
+  end
+  def add_hierarchical_scope(pszurl : LibC::LPWSTR, finclude : LibC::BOOL, fdefault : LibC::BOOL, foverridechildren : LibC::BOOL) : HRESULT
+    @lpVtbl.value.add_hierarchical_scope.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, LibC::BOOL, LibC::BOOL, HRESULT)).call(pszurl, finclude, fdefault, foverridechildren)
+  end
+  def add_user_scope_rule(pszurl : LibC::LPWSTR, finclude : LibC::BOOL, foverridechildren : LibC::BOOL, ffollowflags : UInt32) : HRESULT
+    @lpVtbl.value.add_user_scope_rule.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, LibC::BOOL, UInt32, HRESULT)).call(pszurl, finclude, foverridechildren, ffollowflags)
+  end
+  def remove_scope_rule(pszrule : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_scope_rule.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszrule)
+  end
+  def enumerate_scope_rules(ppsearchscoperules : IEnumSearchScopeRules*) : HRESULT
+    @lpVtbl.value.enumerate_scope_rules.unsafe_as(Proc(IEnumSearchScopeRules*, HRESULT)).call(ppsearchscoperules)
+  end
+  def has_parent_scope_rule(pszurl : LibC::LPWSTR, pfhasparentrule : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_parent_scope_rule.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(pszurl, pfhasparentrule)
+  end
+  def has_child_scope_rule(pszurl : LibC::LPWSTR, pfhaschildrule : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_child_scope_rule.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(pszurl, pfhaschildrule)
+  end
+  def included_in_crawl_scope(pszurl : LibC::LPWSTR, pfisincluded : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.included_in_crawl_scope.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(pszurl, pfisincluded)
+  end
+  def included_in_crawl_scope_ex(pszurl : LibC::LPWSTR, pfisincluded : LibC::BOOL*, preason : CLUSION_REASON*) : HRESULT
+    @lpVtbl.value.included_in_crawl_scope_ex.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, CLUSION_REASON*, HRESULT)).call(pszurl, pfisincluded, preason)
+  end
+  def revert_to_default_scopes : HRESULT
+    @lpVtbl.value.revert_to_default_scopes.unsafe_as(Proc(HRESULT)).call
+  end
+  def save_all : HRESULT
+    @lpVtbl.value.save_all.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_parent_scope_version_id(pszurl : LibC::LPWSTR, plscopeid : Int32*) : HRESULT
+    @lpVtbl.value.get_parent_scope_version_id.unsafe_as(Proc(LibC::LPWSTR, Int32*, HRESULT)).call(pszurl, plscopeid)
+  end
+  def remove_default_scope_rule(pszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.remove_default_scope_rule.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszurl)
+  end
+  def get_version(plversion : Int32**, phfilemapping : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(Int32**, LibC::HANDLE*, HRESULT)).call(plversion, phfilemapping)
+  end
+end
+struct LibWin32::ISearchItemsChangedSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def started_monitoring_scope(pszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.started_monitoring_scope.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszurl)
+  end
+  def stopped_monitoring_scope(pszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.stopped_monitoring_scope.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszurl)
+  end
+  def on_items_changed(dwnumberofchanges : UInt32, rgdatachangeentries : SEARCH_ITEM_CHANGE*, rgdwdocids : UInt32*, rghrcompletioncodes : HRESULT*) : HRESULT
+    @lpVtbl.value.on_items_changed.unsafe_as(Proc(UInt32, SEARCH_ITEM_CHANGE*, UInt32*, HRESULT*, HRESULT)).call(dwnumberofchanges, rgdatachangeentries, rgdwdocids, rghrcompletioncodes)
+  end
+end
+struct LibWin32::ISearchPersistentItemsChangedSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def started_monitoring_scope(pszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.started_monitoring_scope.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszurl)
+  end
+  def stopped_monitoring_scope(pszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.stopped_monitoring_scope.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszurl)
+  end
+  def on_items_changed(dwnumberofchanges : UInt32, datachangeentries : SEARCH_ITEM_PERSISTENT_CHANGE*, hrcompletioncodes : HRESULT*) : HRESULT
+    @lpVtbl.value.on_items_changed.unsafe_as(Proc(UInt32, SEARCH_ITEM_PERSISTENT_CHANGE*, HRESULT*, HRESULT)).call(dwnumberofchanges, datachangeentries, hrcompletioncodes)
+  end
+end
+struct LibWin32::ISearchViewChangedSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_change(pdwdocid : Int32*, pchange : SEARCH_ITEM_CHANGE*, pfinview : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.on_change.unsafe_as(Proc(Int32*, SEARCH_ITEM_CHANGE*, LibC::BOOL*, HRESULT)).call(pdwdocid, pchange, pfinview)
+  end
+end
+struct LibWin32::ISearchNotifyInlineSite
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_item_indexed_status_change(sipstatus : SEARCH_INDEXING_PHASE, dwnumentries : UInt32, rgitemstatusentries : SEARCH_ITEM_INDEXING_STATUS*) : HRESULT
+    @lpVtbl.value.on_item_indexed_status_change.unsafe_as(Proc(SEARCH_INDEXING_PHASE, UInt32, SEARCH_ITEM_INDEXING_STATUS*, HRESULT)).call(sipstatus, dwnumentries, rgitemstatusentries)
+  end
+  def on_catalog_status_change(guidcatalogresetsignature : Guid*, guidcheckpointsignature : Guid*, dwlastcheckpointnumber : UInt32) : HRESULT
+    @lpVtbl.value.on_catalog_status_change.unsafe_as(Proc(Guid*, Guid*, UInt32, HRESULT)).call(guidcatalogresetsignature, guidcheckpointsignature, dwlastcheckpointnumber)
+  end
+end
+struct LibWin32::ISearchCatalogManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_name(pszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pszname)
+  end
+  def get_parameter(pszname : LibC::LPWSTR, ppvalue : PROPVARIANT**) : HRESULT
+    @lpVtbl.value.get_parameter.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT**, HRESULT)).call(pszname, ppvalue)
+  end
+  def set_parameter(pszname : LibC::LPWSTR, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_parameter.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT*, HRESULT)).call(pszname, pvalue)
+  end
+  def get_catalog_status(pstatus : CatalogStatus*, ppausedreason : CatalogPausedReason*) : HRESULT
+    @lpVtbl.value.get_catalog_status.unsafe_as(Proc(CatalogStatus*, CatalogPausedReason*, HRESULT)).call(pstatus, ppausedreason)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def reindex : HRESULT
+    @lpVtbl.value.reindex.unsafe_as(Proc(HRESULT)).call
+  end
+  def reindex_matching_ur_ls(pszpattern : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.reindex_matching_ur_ls.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpattern)
+  end
+  def reindex_search_root(pszrooturl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.reindex_search_root.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszrooturl)
+  end
+  def put_connect_timeout(dwconnecttimeout : UInt32) : HRESULT
+    @lpVtbl.value.put_connect_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(dwconnecttimeout)
+  end
+  def get_connect_timeout(pdwconnecttimeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_connect_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwconnecttimeout)
+  end
+  def put_data_timeout(dwdatatimeout : UInt32) : HRESULT
+    @lpVtbl.value.put_data_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(dwdatatimeout)
+  end
+  def get_data_timeout(pdwdatatimeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwdatatimeout)
+  end
+  def number_of_items(plcount : Int32*) : HRESULT
+    @lpVtbl.value.number_of_items.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def number_of_items_to_index(plincrementalcount : Int32*, plnotificationqueue : Int32*, plhighpriorityqueue : Int32*) : HRESULT
+    @lpVtbl.value.number_of_items_to_index.unsafe_as(Proc(Int32*, Int32*, Int32*, HRESULT)).call(plincrementalcount, plnotificationqueue, plhighpriorityqueue)
+  end
+  def url_being_indexed(pszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.url_being_indexed.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pszurl)
+  end
+  def get_url_indexing_state(pszurl : LibC::LPWSTR, pdwstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_url_indexing_state.unsafe_as(Proc(LibC::LPWSTR, UInt32*, HRESULT)).call(pszurl, pdwstate)
+  end
+  def get_persistent_items_changed_sink(ppisearchpersistentitemschangedsink : ISearchPersistentItemsChangedSink*) : HRESULT
+    @lpVtbl.value.get_persistent_items_changed_sink.unsafe_as(Proc(ISearchPersistentItemsChangedSink*, HRESULT)).call(ppisearchpersistentitemschangedsink)
+  end
+  def register_view_for_notification(pszview : LibC::LPWSTR, pviewchangedsink : ISearchViewChangedSink, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.register_view_for_notification.unsafe_as(Proc(LibC::LPWSTR, ISearchViewChangedSink, UInt32*, HRESULT)).call(pszview, pviewchangedsink, pdwcookie)
+  end
+  def get_items_changed_sink(pisearchnotifyinlinesite : ISearchNotifyInlineSite, riid : Guid*, ppv : Void**, pguidcatalogresetsignature : Guid*, pguidcheckpointsignature : Guid*, pdwlastcheckpointnumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_items_changed_sink.unsafe_as(Proc(ISearchNotifyInlineSite, Guid*, Void**, Guid*, Guid*, UInt32*, HRESULT)).call(pisearchnotifyinlinesite, riid, ppv, pguidcatalogresetsignature, pguidcheckpointsignature, pdwlastcheckpointnumber)
+  end
+  def unregister_view_for_notification(dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.unregister_view_for_notification.unsafe_as(Proc(UInt32, HRESULT)).call(dwcookie)
+  end
+  def set_extension_clusion(pszextension : LibC::LPWSTR, fexclude : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_extension_clusion.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, HRESULT)).call(pszextension, fexclude)
+  end
+  def enumerate_excluded_extensions(ppextensions : IEnumString*) : HRESULT
+    @lpVtbl.value.enumerate_excluded_extensions.unsafe_as(Proc(IEnumString*, HRESULT)).call(ppextensions)
+  end
+  def get_query_helper(ppsearchqueryhelper : ISearchQueryHelper*) : HRESULT
+    @lpVtbl.value.get_query_helper.unsafe_as(Proc(ISearchQueryHelper*, HRESULT)).call(ppsearchqueryhelper)
+  end
+  def put_diacritic_sensitivity(fdiacriticsensitive : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_diacritic_sensitivity.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fdiacriticsensitive)
+  end
+  def get_diacritic_sensitivity(pfdiacriticsensitive : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_diacritic_sensitivity.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfdiacriticsensitive)
+  end
+  def get_crawl_scope_manager(ppcrawlscopemanager : ISearchCrawlScopeManager*) : HRESULT
+    @lpVtbl.value.get_crawl_scope_manager.unsafe_as(Proc(ISearchCrawlScopeManager*, HRESULT)).call(ppcrawlscopemanager)
+  end
+end
+struct LibWin32::ISearchCatalogManager2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_name(pszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pszname)
+  end
+  def get_parameter(pszname : LibC::LPWSTR, ppvalue : PROPVARIANT**) : HRESULT
+    @lpVtbl.value.get_parameter.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT**, HRESULT)).call(pszname, ppvalue)
+  end
+  def set_parameter(pszname : LibC::LPWSTR, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_parameter.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT*, HRESULT)).call(pszname, pvalue)
+  end
+  def get_catalog_status(pstatus : CatalogStatus*, ppausedreason : CatalogPausedReason*) : HRESULT
+    @lpVtbl.value.get_catalog_status.unsafe_as(Proc(CatalogStatus*, CatalogPausedReason*, HRESULT)).call(pstatus, ppausedreason)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def reindex : HRESULT
+    @lpVtbl.value.reindex.unsafe_as(Proc(HRESULT)).call
+  end
+  def reindex_matching_ur_ls(pszpattern : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.reindex_matching_ur_ls.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszpattern)
+  end
+  def reindex_search_root(pszrooturl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.reindex_search_root.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszrooturl)
+  end
+  def put_connect_timeout(dwconnecttimeout : UInt32) : HRESULT
+    @lpVtbl.value.put_connect_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(dwconnecttimeout)
+  end
+  def get_connect_timeout(pdwconnecttimeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_connect_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwconnecttimeout)
+  end
+  def put_data_timeout(dwdatatimeout : UInt32) : HRESULT
+    @lpVtbl.value.put_data_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(dwdatatimeout)
+  end
+  def get_data_timeout(pdwdatatimeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwdatatimeout)
+  end
+  def number_of_items(plcount : Int32*) : HRESULT
+    @lpVtbl.value.number_of_items.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def number_of_items_to_index(plincrementalcount : Int32*, plnotificationqueue : Int32*, plhighpriorityqueue : Int32*) : HRESULT
+    @lpVtbl.value.number_of_items_to_index.unsafe_as(Proc(Int32*, Int32*, Int32*, HRESULT)).call(plincrementalcount, plnotificationqueue, plhighpriorityqueue)
+  end
+  def url_being_indexed(pszurl : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.url_being_indexed.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pszurl)
+  end
+  def get_url_indexing_state(pszurl : LibC::LPWSTR, pdwstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_url_indexing_state.unsafe_as(Proc(LibC::LPWSTR, UInt32*, HRESULT)).call(pszurl, pdwstate)
+  end
+  def get_persistent_items_changed_sink(ppisearchpersistentitemschangedsink : ISearchPersistentItemsChangedSink*) : HRESULT
+    @lpVtbl.value.get_persistent_items_changed_sink.unsafe_as(Proc(ISearchPersistentItemsChangedSink*, HRESULT)).call(ppisearchpersistentitemschangedsink)
+  end
+  def register_view_for_notification(pszview : LibC::LPWSTR, pviewchangedsink : ISearchViewChangedSink, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.register_view_for_notification.unsafe_as(Proc(LibC::LPWSTR, ISearchViewChangedSink, UInt32*, HRESULT)).call(pszview, pviewchangedsink, pdwcookie)
+  end
+  def get_items_changed_sink(pisearchnotifyinlinesite : ISearchNotifyInlineSite, riid : Guid*, ppv : Void**, pguidcatalogresetsignature : Guid*, pguidcheckpointsignature : Guid*, pdwlastcheckpointnumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_items_changed_sink.unsafe_as(Proc(ISearchNotifyInlineSite, Guid*, Void**, Guid*, Guid*, UInt32*, HRESULT)).call(pisearchnotifyinlinesite, riid, ppv, pguidcatalogresetsignature, pguidcheckpointsignature, pdwlastcheckpointnumber)
+  end
+  def unregister_view_for_notification(dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.unregister_view_for_notification.unsafe_as(Proc(UInt32, HRESULT)).call(dwcookie)
+  end
+  def set_extension_clusion(pszextension : LibC::LPWSTR, fexclude : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_extension_clusion.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, HRESULT)).call(pszextension, fexclude)
+  end
+  def enumerate_excluded_extensions(ppextensions : IEnumString*) : HRESULT
+    @lpVtbl.value.enumerate_excluded_extensions.unsafe_as(Proc(IEnumString*, HRESULT)).call(ppextensions)
+  end
+  def get_query_helper(ppsearchqueryhelper : ISearchQueryHelper*) : HRESULT
+    @lpVtbl.value.get_query_helper.unsafe_as(Proc(ISearchQueryHelper*, HRESULT)).call(ppsearchqueryhelper)
+  end
+  def put_diacritic_sensitivity(fdiacriticsensitive : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_diacritic_sensitivity.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fdiacriticsensitive)
+  end
+  def get_diacritic_sensitivity(pfdiacriticsensitive : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_diacritic_sensitivity.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfdiacriticsensitive)
+  end
+  def get_crawl_scope_manager(ppcrawlscopemanager : ISearchCrawlScopeManager*) : HRESULT
+    @lpVtbl.value.get_crawl_scope_manager.unsafe_as(Proc(ISearchCrawlScopeManager*, HRESULT)).call(ppcrawlscopemanager)
+  end
+  def prioritize_matching_ur_ls(pszpattern : LibC::LPWSTR, dwprioritizeflags : PRIORITIZE_FLAGS) : HRESULT
+    @lpVtbl.value.prioritize_matching_ur_ls.unsafe_as(Proc(LibC::LPWSTR, PRIORITIZE_FLAGS, HRESULT)).call(pszpattern, dwprioritizeflags)
+  end
+end
+struct LibWin32::ISearchQueryHelper
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_connection_string(pszconnectionstring : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_connection_string.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(pszconnectionstring)
+  end
+  def put_query_content_locale(lcid : UInt32) : HRESULT
+    @lpVtbl.value.put_query_content_locale.unsafe_as(Proc(UInt32, HRESULT)).call(lcid)
+  end
+  def get_query_content_locale(plcid : UInt32*) : HRESULT
+    @lpVtbl.value.get_query_content_locale.unsafe_as(Proc(UInt32*, HRESULT)).call(plcid)
+  end
+  def put_query_keyword_locale(lcid : UInt32) : HRESULT
+    @lpVtbl.value.put_query_keyword_locale.unsafe_as(Proc(UInt32, HRESULT)).call(lcid)
+  end
+  def get_query_keyword_locale(plcid : UInt32*) : HRESULT
+    @lpVtbl.value.get_query_keyword_locale.unsafe_as(Proc(UInt32*, HRESULT)).call(plcid)
+  end
+  def put_query_term_expansion(expandterms : SEARCH_TERM_EXPANSION) : HRESULT
+    @lpVtbl.value.put_query_term_expansion.unsafe_as(Proc(SEARCH_TERM_EXPANSION, HRESULT)).call(expandterms)
+  end
+  def get_query_term_expansion(pexpandterms : SEARCH_TERM_EXPANSION*) : HRESULT
+    @lpVtbl.value.get_query_term_expansion.unsafe_as(Proc(SEARCH_TERM_EXPANSION*, HRESULT)).call(pexpandterms)
+  end
+  def put_query_syntax(querysyntax : SEARCH_QUERY_SYNTAX) : HRESULT
+    @lpVtbl.value.put_query_syntax.unsafe_as(Proc(SEARCH_QUERY_SYNTAX, HRESULT)).call(querysyntax)
+  end
+  def get_query_syntax(pquerysyntax : SEARCH_QUERY_SYNTAX*) : HRESULT
+    @lpVtbl.value.get_query_syntax.unsafe_as(Proc(SEARCH_QUERY_SYNTAX*, HRESULT)).call(pquerysyntax)
+  end
+  def put_query_content_properties(pszcontentproperties : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_query_content_properties.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszcontentproperties)
+  end
+  def get_query_content_properties(ppszcontentproperties : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_query_content_properties.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszcontentproperties)
+  end
+  def put_query_select_columns(pszselectcolumns : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_query_select_columns.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszselectcolumns)
+  end
+  def get_query_select_columns(ppszselectcolumns : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_query_select_columns.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszselectcolumns)
+  end
+  def put_query_where_restrictions(pszrestrictions : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_query_where_restrictions.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszrestrictions)
+  end
+  def get_query_where_restrictions(ppszrestrictions : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_query_where_restrictions.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszrestrictions)
+  end
+  def put_query_sorting(pszsorting : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_query_sorting.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszsorting)
+  end
+  def get_query_sorting(ppszsorting : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_query_sorting.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszsorting)
+  end
+  def generate_sql_from_user_query(pszquery : LibC::LPWSTR, ppszsql : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.generate_sql_from_user_query.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR*, HRESULT)).call(pszquery, ppszsql)
+  end
+  def write_properties(itemid : Int32, dwnumberofcolumns : UInt32, pcolumns : PROPERTYKEY*, pvalues : SEARCH_COLUMN_PROPERTIES*, pftgathermodifiedtime : FILETIME*) : HRESULT
+    @lpVtbl.value.write_properties.unsafe_as(Proc(Int32, UInt32, PROPERTYKEY*, SEARCH_COLUMN_PROPERTIES*, FILETIME*, HRESULT)).call(itemid, dwnumberofcolumns, pcolumns, pvalues, pftgathermodifiedtime)
+  end
+  def put_query_max_results(cmaxresults : Int32) : HRESULT
+    @lpVtbl.value.put_query_max_results.unsafe_as(Proc(Int32, HRESULT)).call(cmaxresults)
+  end
+  def get_query_max_results(pcmaxresults : Int32*) : HRESULT
+    @lpVtbl.value.get_query_max_results.unsafe_as(Proc(Int32*, HRESULT)).call(pcmaxresults)
+  end
+end
+struct LibWin32::IRowsetPrioritization
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_scope_priority(priority : PRIORITY_LEVEL, scopestatisticseventfrequency : UInt32) : HRESULT
+    @lpVtbl.value.set_scope_priority.unsafe_as(Proc(PRIORITY_LEVEL, UInt32, HRESULT)).call(priority, scopestatisticseventfrequency)
+  end
+  def get_scope_priority(priority : PRIORITY_LEVEL*, scopestatisticseventfrequency : UInt32*) : HRESULT
+    @lpVtbl.value.get_scope_priority.unsafe_as(Proc(PRIORITY_LEVEL*, UInt32*, HRESULT)).call(priority, scopestatisticseventfrequency)
+  end
+  def get_scope_statistics(indexeddocumentcount : UInt32*, oustandingaddcount : UInt32*, oustandingmodifycount : UInt32*) : HRESULT
+    @lpVtbl.value.get_scope_statistics.unsafe_as(Proc(UInt32*, UInt32*, UInt32*, HRESULT)).call(indexeddocumentcount, oustandingaddcount, oustandingmodifycount)
+  end
+end
+struct LibWin32::IRowsetEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_new_item(itemid : PROPVARIANT*, newitemstate : ROWSETEVENT_ITEMSTATE) : HRESULT
+    @lpVtbl.value.on_new_item.unsafe_as(Proc(PROPVARIANT*, ROWSETEVENT_ITEMSTATE, HRESULT)).call(itemid, newitemstate)
+  end
+  def on_changed_item(itemid : PROPVARIANT*, rowsetitemstate : ROWSETEVENT_ITEMSTATE, changeditemstate : ROWSETEVENT_ITEMSTATE) : HRESULT
+    @lpVtbl.value.on_changed_item.unsafe_as(Proc(PROPVARIANT*, ROWSETEVENT_ITEMSTATE, ROWSETEVENT_ITEMSTATE, HRESULT)).call(itemid, rowsetitemstate, changeditemstate)
+  end
+  def on_deleted_item(itemid : PROPVARIANT*, deleteditemstate : ROWSETEVENT_ITEMSTATE) : HRESULT
+    @lpVtbl.value.on_deleted_item.unsafe_as(Proc(PROPVARIANT*, ROWSETEVENT_ITEMSTATE, HRESULT)).call(itemid, deleteditemstate)
+  end
+  def on_rowset_event(eventtype : ROWSETEVENT_TYPE, eventdata : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.on_rowset_event.unsafe_as(Proc(ROWSETEVENT_TYPE, PROPVARIANT*, HRESULT)).call(eventtype, eventdata)
+  end
+end
+struct LibWin32::ISearchManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_indexer_version_str(ppszversionstring : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_indexer_version_str.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszversionstring)
+  end
+  def get_indexer_version(pdwmajor : UInt32*, pdwminor : UInt32*) : HRESULT
+    @lpVtbl.value.get_indexer_version.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwmajor, pdwminor)
+  end
+  def get_parameter(pszname : LibC::LPWSTR, ppvalue : PROPVARIANT**) : HRESULT
+    @lpVtbl.value.get_parameter.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT**, HRESULT)).call(pszname, ppvalue)
+  end
+  def set_parameter(pszname : LibC::LPWSTR, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_parameter.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT*, HRESULT)).call(pszname, pvalue)
+  end
+  def get_proxy_name(ppszproxyname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_proxy_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszproxyname)
+  end
+  def get_bypass_list(ppszbypasslist : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_bypass_list.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszbypasslist)
+  end
+  def set_proxy(suseproxy : PROXY_ACCESS, flocalbypassproxy : LibC::BOOL, dwportnumber : UInt32, pszproxyname : LibC::LPWSTR, pszbypasslist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_proxy.unsafe_as(Proc(PROXY_ACCESS, LibC::BOOL, UInt32, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(suseproxy, flocalbypassproxy, dwportnumber, pszproxyname, pszbypasslist)
+  end
+  def get_catalog(pszcatalog : LibC::LPWSTR, ppcatalogmanager : ISearchCatalogManager*) : HRESULT
+    @lpVtbl.value.get_catalog.unsafe_as(Proc(LibC::LPWSTR, ISearchCatalogManager*, HRESULT)).call(pszcatalog, ppcatalogmanager)
+  end
+  def get_user_agent(ppszuseragent : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_user_agent.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszuseragent)
+  end
+  def put_user_agent(pszuseragent : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_user_agent.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszuseragent)
+  end
+  def get_use_proxy(puseproxy : PROXY_ACCESS*) : HRESULT
+    @lpVtbl.value.get_use_proxy.unsafe_as(Proc(PROXY_ACCESS*, HRESULT)).call(puseproxy)
+  end
+  def get_local_bypass(pflocalbypass : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_local_bypass.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pflocalbypass)
+  end
+  def get_port_number(pdwportnumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_port_number.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwportnumber)
+  end
+end
+struct LibWin32::ISearchManager2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_indexer_version_str(ppszversionstring : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_indexer_version_str.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszversionstring)
+  end
+  def get_indexer_version(pdwmajor : UInt32*, pdwminor : UInt32*) : HRESULT
+    @lpVtbl.value.get_indexer_version.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwmajor, pdwminor)
+  end
+  def get_parameter(pszname : LibC::LPWSTR, ppvalue : PROPVARIANT**) : HRESULT
+    @lpVtbl.value.get_parameter.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT**, HRESULT)).call(pszname, ppvalue)
+  end
+  def set_parameter(pszname : LibC::LPWSTR, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_parameter.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT*, HRESULT)).call(pszname, pvalue)
+  end
+  def get_proxy_name(ppszproxyname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_proxy_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszproxyname)
+  end
+  def get_bypass_list(ppszbypasslist : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_bypass_list.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszbypasslist)
+  end
+  def set_proxy(suseproxy : PROXY_ACCESS, flocalbypassproxy : LibC::BOOL, dwportnumber : UInt32, pszproxyname : LibC::LPWSTR, pszbypasslist : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_proxy.unsafe_as(Proc(PROXY_ACCESS, LibC::BOOL, UInt32, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(suseproxy, flocalbypassproxy, dwportnumber, pszproxyname, pszbypasslist)
+  end
+  def get_catalog(pszcatalog : LibC::LPWSTR, ppcatalogmanager : ISearchCatalogManager*) : HRESULT
+    @lpVtbl.value.get_catalog.unsafe_as(Proc(LibC::LPWSTR, ISearchCatalogManager*, HRESULT)).call(pszcatalog, ppcatalogmanager)
+  end
+  def get_user_agent(ppszuseragent : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_user_agent.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszuseragent)
+  end
+  def put_user_agent(pszuseragent : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_user_agent.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszuseragent)
+  end
+  def get_use_proxy(puseproxy : PROXY_ACCESS*) : HRESULT
+    @lpVtbl.value.get_use_proxy.unsafe_as(Proc(PROXY_ACCESS*, HRESULT)).call(puseproxy)
+  end
+  def get_local_bypass(pflocalbypass : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_local_bypass.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pflocalbypass)
+  end
+  def get_port_number(pdwportnumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_port_number.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwportnumber)
+  end
+  def create_catalog(pszcatalog : LibC::LPWSTR, ppcatalogmanager : ISearchCatalogManager*) : HRESULT
+    @lpVtbl.value.create_catalog.unsafe_as(Proc(LibC::LPWSTR, ISearchCatalogManager*, HRESULT)).call(pszcatalog, ppcatalogmanager)
+  end
+  def delete_catalog(pszcatalog : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_catalog.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszcatalog)
+  end
+end
+struct LibWin32::ISearchLanguageSupport
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_diacritic_sensitivity(fdiacriticsensitive : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_diacritic_sensitivity.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fdiacriticsensitive)
+  end
+  def get_diacritic_sensitivity(pfdiacriticsensitive : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_diacritic_sensitivity.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfdiacriticsensitive)
+  end
+  def load_word_breaker(lcid : UInt32, riid : Guid*, ppwordbreaker : Void**, plcidused : UInt32*) : HRESULT
+    @lpVtbl.value.load_word_breaker.unsafe_as(Proc(UInt32, Guid*, Void**, UInt32*, HRESULT)).call(lcid, riid, ppwordbreaker, plcidused)
+  end
+  def load_stemmer(lcid : UInt32, riid : Guid*, ppstemmer : Void**, plcidused : UInt32*) : HRESULT
+    @lpVtbl.value.load_stemmer.unsafe_as(Proc(UInt32, Guid*, Void**, UInt32*, HRESULT)).call(lcid, riid, ppstemmer, plcidused)
+  end
+  def is_prefix_normalized(pwcsquerytoken : Char*, cwcquerytoken : UInt32, pwcsdocumenttoken : Char*, cwcdocumenttoken : UInt32, pulprefixlength : UInt32*) : HRESULT
+    @lpVtbl.value.is_prefix_normalized.unsafe_as(Proc(Char*, UInt32, Char*, UInt32, UInt32*, HRESULT)).call(pwcsquerytoken, cwcquerytoken, pwcsdocumenttoken, cwcdocumenttoken, pulprefixlength)
+  end
+end
+struct LibWin32::IEnumItemProperties
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : ITEMPROP*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITEMPROP*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumItemProperties*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumItemProperties*, HRESULT)).call(ppenum)
+  end
+  def get_count(pncount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pncount)
+  end
+end
+struct LibWin32::ISubscriptionItem
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_cookie(pcookie : Guid*) : HRESULT
+    @lpVtbl.value.get_cookie.unsafe_as(Proc(Guid*, HRESULT)).call(pcookie)
+  end
+  def get_subscription_item_info(psubscriptioniteminfo : SUBSCRIPTIONITEMINFO*) : HRESULT
+    @lpVtbl.value.get_subscription_item_info.unsafe_as(Proc(SUBSCRIPTIONITEMINFO*, HRESULT)).call(psubscriptioniteminfo)
+  end
+  def set_subscription_item_info(psubscriptioniteminfo : SUBSCRIPTIONITEMINFO*) : HRESULT
+    @lpVtbl.value.set_subscription_item_info.unsafe_as(Proc(SUBSCRIPTIONITEMINFO*, HRESULT)).call(psubscriptioniteminfo)
+  end
+  def read_properties(ncount : UInt32, rgwszname : LibC::LPWSTR*, rgvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.read_properties.unsafe_as(Proc(UInt32, LibC::LPWSTR*, VARIANT*, HRESULT)).call(ncount, rgwszname, rgvalue)
+  end
+  def write_properties(ncount : UInt32, rgwszname : LibC::LPWSTR*, rgvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.write_properties.unsafe_as(Proc(UInt32, LibC::LPWSTR*, VARIANT*, HRESULT)).call(ncount, rgwszname, rgvalue)
+  end
+  def enum_properties(ppenumitemproperties : IEnumItemProperties*) : HRESULT
+    @lpVtbl.value.enum_properties.unsafe_as(Proc(IEnumItemProperties*, HRESULT)).call(ppenumitemproperties)
+  end
+  def notify_changed : HRESULT
+    @lpVtbl.value.notify_changed.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IEnumSubscription
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : Guid*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, Guid*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumSubscription*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumSubscription*, HRESULT)).call(ppenum)
+  end
+  def get_count(pncount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pncount)
+  end
+end
+struct LibWin32::ISubscriptionMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def delete_subscription(pwszurl : LibC::LPWSTR, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.delete_subscription.unsafe_as(Proc(LibC::LPWSTR, LibC::HANDLE, HRESULT)).call(pwszurl, hwnd)
+  end
+  def update_subscription(pwszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.update_subscription.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszurl)
+  end
+  def update_all : HRESULT
+    @lpVtbl.value.update_all.unsafe_as(Proc(HRESULT)).call
+  end
+  def is_subscribed(pwszurl : LibC::LPWSTR, pfsubscribed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_subscribed.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(pwszurl, pfsubscribed)
+  end
+  def get_subscription_info(pwszurl : LibC::LPWSTR, pinfo : SUBSCRIPTIONINFO*) : HRESULT
+    @lpVtbl.value.get_subscription_info.unsafe_as(Proc(LibC::LPWSTR, SUBSCRIPTIONINFO*, HRESULT)).call(pwszurl, pinfo)
+  end
+  def get_default_info(subtype : SUBSCRIPTIONTYPE, pinfo : SUBSCRIPTIONINFO*) : HRESULT
+    @lpVtbl.value.get_default_info.unsafe_as(Proc(SUBSCRIPTIONTYPE, SUBSCRIPTIONINFO*, HRESULT)).call(subtype, pinfo)
+  end
+  def show_subscription_properties(pwszurl : LibC::LPWSTR, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.show_subscription_properties.unsafe_as(Proc(LibC::LPWSTR, LibC::HANDLE, HRESULT)).call(pwszurl, hwnd)
+  end
+  def create_subscription(hwnd : LibC::HANDLE, pwszurl : LibC::LPWSTR, pwszfriendlyname : LibC::LPWSTR, dwflags : UInt32, substype : SUBSCRIPTIONTYPE, pinfo : SUBSCRIPTIONINFO*) : HRESULT
+    @lpVtbl.value.create_subscription.unsafe_as(Proc(LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, UInt32, SUBSCRIPTIONTYPE, SUBSCRIPTIONINFO*, HRESULT)).call(hwnd, pwszurl, pwszfriendlyname, dwflags, substype, pinfo)
+  end
+end
+struct LibWin32::ISubscriptionMgr2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def delete_subscription(pwszurl : LibC::LPWSTR, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.delete_subscription.unsafe_as(Proc(LibC::LPWSTR, LibC::HANDLE, HRESULT)).call(pwszurl, hwnd)
+  end
+  def update_subscription(pwszurl : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.update_subscription.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszurl)
+  end
+  def update_all : HRESULT
+    @lpVtbl.value.update_all.unsafe_as(Proc(HRESULT)).call
+  end
+  def is_subscribed(pwszurl : LibC::LPWSTR, pfsubscribed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_subscribed.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(pwszurl, pfsubscribed)
+  end
+  def get_subscription_info(pwszurl : LibC::LPWSTR, pinfo : SUBSCRIPTIONINFO*) : HRESULT
+    @lpVtbl.value.get_subscription_info.unsafe_as(Proc(LibC::LPWSTR, SUBSCRIPTIONINFO*, HRESULT)).call(pwszurl, pinfo)
+  end
+  def get_default_info(subtype : SUBSCRIPTIONTYPE, pinfo : SUBSCRIPTIONINFO*) : HRESULT
+    @lpVtbl.value.get_default_info.unsafe_as(Proc(SUBSCRIPTIONTYPE, SUBSCRIPTIONINFO*, HRESULT)).call(subtype, pinfo)
+  end
+  def show_subscription_properties(pwszurl : LibC::LPWSTR, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.show_subscription_properties.unsafe_as(Proc(LibC::LPWSTR, LibC::HANDLE, HRESULT)).call(pwszurl, hwnd)
+  end
+  def create_subscription(hwnd : LibC::HANDLE, pwszurl : LibC::LPWSTR, pwszfriendlyname : LibC::LPWSTR, dwflags : UInt32, substype : SUBSCRIPTIONTYPE, pinfo : SUBSCRIPTIONINFO*) : HRESULT
+    @lpVtbl.value.create_subscription.unsafe_as(Proc(LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, UInt32, SUBSCRIPTIONTYPE, SUBSCRIPTIONINFO*, HRESULT)).call(hwnd, pwszurl, pwszfriendlyname, dwflags, substype, pinfo)
+  end
+  def get_item_from_url(pwszurl : LibC::LPWSTR, ppsubscriptionitem : ISubscriptionItem*) : HRESULT
+    @lpVtbl.value.get_item_from_url.unsafe_as(Proc(LibC::LPWSTR, ISubscriptionItem*, HRESULT)).call(pwszurl, ppsubscriptionitem)
+  end
+  def get_item_from_cookie(psubscriptioncookie : Guid*, ppsubscriptionitem : ISubscriptionItem*) : HRESULT
+    @lpVtbl.value.get_item_from_cookie.unsafe_as(Proc(Guid*, ISubscriptionItem*, HRESULT)).call(psubscriptioncookie, ppsubscriptionitem)
+  end
+  def get_subscription_run_state(dwnumcookies : UInt32, pcookies : Guid*, pdwrunstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_subscription_run_state.unsafe_as(Proc(UInt32, Guid*, UInt32*, HRESULT)).call(dwnumcookies, pcookies, pdwrunstate)
+  end
+  def enum_subscriptions(dwflags : UInt32, ppenumsubscriptions : IEnumSubscription*) : HRESULT
+    @lpVtbl.value.enum_subscriptions.unsafe_as(Proc(UInt32, IEnumSubscription*, HRESULT)).call(dwflags, ppenumsubscriptions)
+  end
+  def update_items(dwflags : UInt32, dwnumcookies : UInt32, pcookies : Guid*) : HRESULT
+    @lpVtbl.value.update_items.unsafe_as(Proc(UInt32, UInt32, Guid*, HRESULT)).call(dwflags, dwnumcookies, pcookies)
+  end
+  def abort_items(dwnumcookies : UInt32, pcookies : Guid*) : HRESULT
+    @lpVtbl.value.abort_items.unsafe_as(Proc(UInt32, Guid*, HRESULT)).call(dwnumcookies, pcookies)
+  end
+  def abort_all : HRESULT
+    @lpVtbl.value.abort_all.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IDataConvert
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def data_convert(wsrctype : UInt16, wdsttype : UInt16, cbsrclength : LibC::UINT_PTR, pcbdstlength : LibC::UINT_PTR*, psrc : Void*, pdst : Void*, cbdstmaxlength : LibC::UINT_PTR, dbssrcstatus : UInt32, pdbsstatus : UInt32*, bprecision : UInt8, bscale : UInt8, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.data_convert.unsafe_as(Proc(UInt16, UInt16, LibC::UINT_PTR, LibC::UINT_PTR*, Void*, Void*, LibC::UINT_PTR, UInt32, UInt32*, UInt8, UInt8, UInt32, HRESULT)).call(wsrctype, wdsttype, cbsrclength, pcbdstlength, psrc, pdst, cbdstmaxlength, dbssrcstatus, pdbsstatus, bprecision, bscale, dwflags)
+  end
+  def can_convert(wsrctype : UInt16, wdsttype : UInt16) : HRESULT
+    @lpVtbl.value.can_convert.unsafe_as(Proc(UInt16, UInt16, HRESULT)).call(wsrctype, wdsttype)
+  end
+  def get_conversion_size(wsrctype : UInt16, wdsttype : UInt16, pcbsrclength : LibC::UINT_PTR*, pcbdstlength : LibC::UINT_PTR*, psrc : Void*) : HRESULT
+    @lpVtbl.value.get_conversion_size.unsafe_as(Proc(UInt16, UInt16, LibC::UINT_PTR*, LibC::UINT_PTR*, Void*, HRESULT)).call(wsrctype, wdsttype, pcbsrclength, pcbdstlength, psrc)
+  end
+end
+struct LibWin32::IDCInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_info(cinfo : UInt32, rgeinfotype : UInt32*, prginfo : DCINFO**) : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(UInt32, UInt32*, DCINFO**, HRESULT)).call(cinfo, rgeinfotype, prginfo)
+  end
+  def set_info(cinfo : UInt32, rginfo : DCINFO*) : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(UInt32, DCINFO*, HRESULT)).call(cinfo, rginfo)
+  end
+end
+struct LibWin32::DataSourceListener
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def data_member_changed(bstrdm : UInt16*) : HRESULT
+    @lpVtbl.value.data_member_changed.unsafe_as(Proc(UInt16*, HRESULT)).call(bstrdm)
+  end
+  def data_member_added(bstrdm : UInt16*) : HRESULT
+    @lpVtbl.value.data_member_added.unsafe_as(Proc(UInt16*, HRESULT)).call(bstrdm)
+  end
+  def data_member_removed(bstrdm : UInt16*) : HRESULT
+    @lpVtbl.value.data_member_removed.unsafe_as(Proc(UInt16*, HRESULT)).call(bstrdm)
+  end
+end
+struct LibWin32::DataSource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_data_member(bstrdm : UInt16*, riid : Guid*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get_data_member.unsafe_as(Proc(UInt16*, Guid*, IUnknown*, HRESULT)).call(bstrdm, riid, ppunk)
+  end
+  def get_data_member_name(lindex : Int32, pbstrdm : UInt16**) : HRESULT
+    @lpVtbl.value.get_data_member_name.unsafe_as(Proc(Int32, UInt16**, HRESULT)).call(lindex, pbstrdm)
+  end
+  def get_data_member_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_data_member_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def add_data_source_listener(pdsl : DataSourceListener) : HRESULT
+    @lpVtbl.value.add_data_source_listener.unsafe_as(Proc(DataSourceListener, HRESULT)).call(pdsl)
+  end
+  def remove_data_source_listener(pdsl : DataSourceListener) : HRESULT
+    @lpVtbl.value.remove_data_source_listener.unsafe_as(Proc(DataSourceListener, HRESULT)).call(pdsl)
+  end
+end
+struct LibWin32::OLEDBSimpleProviderListener
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def about_to_change_cell(irow : LibC::IntPtrT, icolumn : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.about_to_change_cell.unsafe_as(Proc(LibC::IntPtrT, LibC::IntPtrT, HRESULT)).call(irow, icolumn)
+  end
+  def cell_changed(irow : LibC::IntPtrT, icolumn : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.cell_changed.unsafe_as(Proc(LibC::IntPtrT, LibC::IntPtrT, HRESULT)).call(irow, icolumn)
+  end
+  def about_to_delete_rows(irow : LibC::IntPtrT, crows : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.about_to_delete_rows.unsafe_as(Proc(LibC::IntPtrT, LibC::IntPtrT, HRESULT)).call(irow, crows)
+  end
+  def deleted_rows(irow : LibC::IntPtrT, crows : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.deleted_rows.unsafe_as(Proc(LibC::IntPtrT, LibC::IntPtrT, HRESULT)).call(irow, crows)
+  end
+  def about_to_insert_rows(irow : LibC::IntPtrT, crows : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.about_to_insert_rows.unsafe_as(Proc(LibC::IntPtrT, LibC::IntPtrT, HRESULT)).call(irow, crows)
+  end
+  def inserted_rows(irow : LibC::IntPtrT, crows : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.inserted_rows.unsafe_as(Proc(LibC::IntPtrT, LibC::IntPtrT, HRESULT)).call(irow, crows)
+  end
+  def rows_available(irow : LibC::IntPtrT, crows : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.rows_available.unsafe_as(Proc(LibC::IntPtrT, LibC::IntPtrT, HRESULT)).call(irow, crows)
+  end
+  def transfer_complete(xfer : OSPXFER) : HRESULT
+    @lpVtbl.value.transfer_complete.unsafe_as(Proc(OSPXFER, HRESULT)).call(xfer)
+  end
+end
+struct LibWin32::OLEDBSimpleProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_row_count(pcrows : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_row_count.unsafe_as(Proc(LibC::IntPtrT*, HRESULT)).call(pcrows)
+  end
+  def get_column_count(pccolumns : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_column_count.unsafe_as(Proc(LibC::IntPtrT*, HRESULT)).call(pccolumns)
+  end
+  def get_rw_status(irow : LibC::IntPtrT, icolumn : LibC::IntPtrT, prwstatus : OSPRW*) : HRESULT
+    @lpVtbl.value.get_rw_status.unsafe_as(Proc(LibC::IntPtrT, LibC::IntPtrT, OSPRW*, HRESULT)).call(irow, icolumn, prwstatus)
+  end
+  def get_variant(irow : LibC::IntPtrT, icolumn : LibC::IntPtrT, format : OSPFORMAT, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.get_variant.unsafe_as(Proc(LibC::IntPtrT, LibC::IntPtrT, OSPFORMAT, VARIANT*, HRESULT)).call(irow, icolumn, format, pvar)
+  end
+  def set_variant(irow : LibC::IntPtrT, icolumn : LibC::IntPtrT, format : OSPFORMAT, var : VARIANT) : HRESULT
+    @lpVtbl.value.set_variant.unsafe_as(Proc(LibC::IntPtrT, LibC::IntPtrT, OSPFORMAT, VARIANT, HRESULT)).call(irow, icolumn, format, var)
+  end
+  def get_locale(pbstrlocale : UInt8**) : HRESULT
+    @lpVtbl.value.get_locale.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrlocale)
+  end
+  def delete_rows(irow : LibC::IntPtrT, crows : LibC::IntPtrT, pcrowsdeleted : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.delete_rows.unsafe_as(Proc(LibC::IntPtrT, LibC::IntPtrT, LibC::IntPtrT*, HRESULT)).call(irow, crows, pcrowsdeleted)
+  end
+  def insert_rows(irow : LibC::IntPtrT, crows : LibC::IntPtrT, pcrowsinserted : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.insert_rows.unsafe_as(Proc(LibC::IntPtrT, LibC::IntPtrT, LibC::IntPtrT*, HRESULT)).call(irow, crows, pcrowsinserted)
+  end
+  def find(irowstart : LibC::IntPtrT, icolumn : LibC::IntPtrT, val : VARIANT, findflags : OSPFIND, comptype : OSPCOMP, pirowfound : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.find.unsafe_as(Proc(LibC::IntPtrT, LibC::IntPtrT, VARIANT, OSPFIND, OSPCOMP, LibC::IntPtrT*, HRESULT)).call(irowstart, icolumn, val, findflags, comptype, pirowfound)
+  end
+  def add_oledb_simple_provider_listener(pospilistener : OLEDBSimpleProviderListener) : HRESULT
+    @lpVtbl.value.add_oledb_simple_provider_listener.unsafe_as(Proc(OLEDBSimpleProviderListener, HRESULT)).call(pospilistener)
+  end
+  def remove_oledb_simple_provider_listener(pospilistener : OLEDBSimpleProviderListener) : HRESULT
+    @lpVtbl.value.remove_oledb_simple_provider_listener.unsafe_as(Proc(OLEDBSimpleProviderListener, HRESULT)).call(pospilistener)
+  end
+  def is_async(pbasynch : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_async.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbasynch)
+  end
+  def get_estimated_rows(pirows : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_estimated_rows.unsafe_as(Proc(LibC::IntPtrT*, HRESULT)).call(pirows)
+  end
+  def stop_transfer : HRESULT
+    @lpVtbl.value.stop_transfer.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::DataSourceObject
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IService
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def invoke_service(punkinner : IUnknown) : HRESULT
+    @lpVtbl.value.invoke_service.unsafe_as(Proc(IUnknown, HRESULT)).call(punkinner)
+  end
+end
+struct LibWin32::IDBPromptInitialize
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def prompt_data_source(punkouter : IUnknown, hwndparent : LibC::HANDLE, dwpromptoptions : UInt32, csourcetypefilter : UInt32, rgsourcetypefilter : UInt32*, pwszszzproviderfilter : LibC::LPWSTR, riid : Guid*, ppdatasource : IUnknown*) : HRESULT
+    @lpVtbl.value.prompt_data_source.unsafe_as(Proc(IUnknown, LibC::HANDLE, UInt32, UInt32, UInt32*, LibC::LPWSTR, Guid*, IUnknown*, HRESULT)).call(punkouter, hwndparent, dwpromptoptions, csourcetypefilter, rgsourcetypefilter, pwszszzproviderfilter, riid, ppdatasource)
+  end
+  def prompt_file_name(hwndparent : LibC::HANDLE, dwpromptoptions : UInt32, pwszinitialdirectory : LibC::LPWSTR, pwszinitialfile : LibC::LPWSTR, ppwszselectedfile : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.prompt_file_name.unsafe_as(Proc(LibC::HANDLE, UInt32, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)).call(hwndparent, dwpromptoptions, pwszinitialdirectory, pwszinitialfile, ppwszselectedfile)
+  end
+end
+struct LibWin32::IDataInitialize
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_data_source(punkouter : IUnknown, dwclsctx : UInt32, pwszinitializationstring : LibC::LPWSTR, riid : Guid*, ppdatasource : IUnknown*) : HRESULT
+    @lpVtbl.value.get_data_source.unsafe_as(Proc(IUnknown, UInt32, LibC::LPWSTR, Guid*, IUnknown*, HRESULT)).call(punkouter, dwclsctx, pwszinitializationstring, riid, ppdatasource)
+  end
+  def get_initialization_string(pdatasource : IUnknown, fincludepassword : UInt8, ppwszinitstring : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_initialization_string.unsafe_as(Proc(IUnknown, UInt8, LibC::LPWSTR*, HRESULT)).call(pdatasource, fincludepassword, ppwszinitstring)
+  end
+  def create_db_instance(clsidprovider : Guid*, punkouter : IUnknown, dwclsctx : UInt32, pwszreserved : LibC::LPWSTR, riid : Guid*, ppdatasource : IUnknown*) : HRESULT
+    @lpVtbl.value.create_db_instance.unsafe_as(Proc(Guid*, IUnknown, UInt32, LibC::LPWSTR, Guid*, IUnknown*, HRESULT)).call(clsidprovider, punkouter, dwclsctx, pwszreserved, riid, ppdatasource)
+  end
+  def create_db_instance_ex(clsidprovider : Guid*, punkouter : IUnknown, dwclsctx : UInt32, pwszreserved : LibC::LPWSTR, pserverinfo : COSERVERINFO*, cmq : UInt32, rgmqresults : MULTI_QI*) : HRESULT
+    @lpVtbl.value.create_db_instance_ex.unsafe_as(Proc(Guid*, IUnknown, UInt32, LibC::LPWSTR, COSERVERINFO*, UInt32, MULTI_QI*, HRESULT)).call(clsidprovider, punkouter, dwclsctx, pwszreserved, pserverinfo, cmq, rgmqresults)
+  end
+  def load_string_from_storage(pwszfilename : LibC::LPWSTR, ppwszinitializationstring : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.load_string_from_storage.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR*, HRESULT)).call(pwszfilename, ppwszinitializationstring)
+  end
+  def write_string_to_storage(pwszfilename : LibC::LPWSTR, pwszinitializationstring : LibC::LPWSTR, dwcreationdisposition : UInt32) : HRESULT
+    @lpVtbl.value.write_string_to_storage.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(pwszfilename, pwszinitializationstring, dwcreationdisposition)
+  end
+end
+struct LibWin32::IDataSourceLocator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_h_wnd(phwndparent : Int64*) : HRESULT
+    @lpVtbl.value.get_h_wnd.unsafe_as(Proc(Int64*, HRESULT)).call(phwndparent)
+  end
+  def put_h_wnd(hwndparent : Int64) : HRESULT
+    @lpVtbl.value.put_h_wnd.unsafe_as(Proc(Int64, HRESULT)).call(hwndparent)
+  end
+  def prompt_new(ppadoconnection : IDispatch*) : HRESULT
+    @lpVtbl.value.prompt_new.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppadoconnection)
+  end
+  def prompt_edit(ppadoconnection : IDispatch*, pbsuccess : Int16*) : HRESULT
+    @lpVtbl.value.prompt_edit.unsafe_as(Proc(IDispatch*, Int16*, HRESULT)).call(ppadoconnection, pbsuccess)
+  end
+end
+struct LibWin32::IRowsetChangeExtInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_original_row(hreserved : LibC::UINT_PTR, hrow : LibC::UINT_PTR, phroworiginal : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_original_row.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR*, HRESULT)).call(hreserved, hrow, phroworiginal)
+  end
+  def get_pending_columns(hreserved : LibC::UINT_PTR, hrow : LibC::UINT_PTR, ccolumnordinals : UInt32, rgiordinals : UInt32*, rgcolumnstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_pending_columns.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, UInt32, UInt32*, UInt32*, HRESULT)).call(hreserved, hrow, ccolumnordinals, rgiordinals, rgcolumnstatus)
+  end
+end
+struct LibWin32::ISQLRequestDiagFields
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def request_diag_fields(cdiagfields : UInt32, rgdiagfields : KAGREQDIAG*) : HRESULT
+    @lpVtbl.value.request_diag_fields.unsafe_as(Proc(UInt32, KAGREQDIAG*, HRESULT)).call(cdiagfields, rgdiagfields)
+  end
+end
+struct LibWin32::ISQLGetDiagField
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_diag_field(pdiaginfo : KAGGETDIAG*) : HRESULT
+    @lpVtbl.value.get_diag_field.unsafe_as(Proc(KAGGETDIAG*, HRESULT)).call(pdiaginfo)
+  end
+end
+struct LibWin32::IRowsetNextRowset
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_next_rowset(punkouter : IUnknown, riid : Guid*, ppnextrowset : IUnknown*) : HRESULT
+    @lpVtbl.value.get_next_rowset.unsafe_as(Proc(IUnknown, Guid*, IUnknown*, HRESULT)).call(punkouter, riid, ppnextrowset)
+  end
+end
+struct LibWin32::IRowsetNewRowAfter
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_new_data_after(hchapter : LibC::UINT_PTR, cbbmprevious : UInt32, pbmprevious : UInt8*, haccessor : LibC::UINT_PTR, pdata : UInt8*, phrow : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.set_new_data_after.unsafe_as(Proc(LibC::UINT_PTR, UInt32, UInt8*, LibC::UINT_PTR, UInt8*, LibC::UINT_PTR*, HRESULT)).call(hchapter, cbbmprevious, pbmprevious, haccessor, pdata, phrow)
+  end
+end
+struct LibWin32::IRowsetWithParameters
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_parameter_info(pcparams : LibC::UINT_PTR*, prgparaminfo : DBPARAMINFO**, ppnamesbuffer : UInt16**) : HRESULT
+    @lpVtbl.value.get_parameter_info.unsafe_as(Proc(LibC::UINT_PTR*, DBPARAMINFO**, UInt16**, HRESULT)).call(pcparams, prgparaminfo, ppnamesbuffer)
+  end
+  def requery(pparams : DBPARAMS*, pulerrorparam : UInt32*, phreserved : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.requery.unsafe_as(Proc(DBPARAMS*, UInt32*, LibC::UINT_PTR*, HRESULT)).call(pparams, pulerrorparam, phreserved)
+  end
+end
+struct LibWin32::IRowsetAsynch
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def ratio_finished(puldenominator : LibC::UINT_PTR*, pulnumerator : LibC::UINT_PTR*, pcrows : LibC::UINT_PTR*, pfnewrows : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.ratio_finished.unsafe_as(Proc(LibC::UINT_PTR*, LibC::UINT_PTR*, LibC::UINT_PTR*, LibC::BOOL*, HRESULT)).call(puldenominator, pulnumerator, pcrows, pfnewrows)
+  end
+  def stop : HRESULT
+    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IRowsetKeys
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def list_keys(pccolumns : LibC::UINT_PTR*, prgcolumns : LibC::UINT_PTR**) : HRESULT
+    @lpVtbl.value.list_keys.unsafe_as(Proc(LibC::UINT_PTR*, LibC::UINT_PTR**, HRESULT)).call(pccolumns, prgcolumns)
+  end
+end
+struct LibWin32::IRowsetWatchAll
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def acknowledge : HRESULT
+    @lpVtbl.value.acknowledge.unsafe_as(Proc(HRESULT)).call
+  end
+  def start : HRESULT
+    @lpVtbl.value.start.unsafe_as(Proc(HRESULT)).call
+  end
+  def stop_watching : HRESULT
+    @lpVtbl.value.stop_watching.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IRowsetWatchNotify
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_change(prowset : IRowset, echangereason : UInt32) : HRESULT
+    @lpVtbl.value.on_change.unsafe_as(Proc(IRowset, UInt32, HRESULT)).call(prowset, echangereason)
+  end
+end
+struct LibWin32::IRowsetWatchRegion
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def acknowledge : HRESULT
+    @lpVtbl.value.acknowledge.unsafe_as(Proc(HRESULT)).call
+  end
+  def start : HRESULT
+    @lpVtbl.value.start.unsafe_as(Proc(HRESULT)).call
+  end
+  def stop_watching : HRESULT
+    @lpVtbl.value.stop_watching.unsafe_as(Proc(HRESULT)).call
+  end
+  def create_watch_region(dwwatchmode : UInt32, phregion : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.create_watch_region.unsafe_as(Proc(UInt32, LibC::UINT_PTR*, HRESULT)).call(dwwatchmode, phregion)
+  end
+  def change_watch_mode(hregion : LibC::UINT_PTR, dwwatchmode : UInt32) : HRESULT
+    @lpVtbl.value.change_watch_mode.unsafe_as(Proc(LibC::UINT_PTR, UInt32, HRESULT)).call(hregion, dwwatchmode)
+  end
+  def delete_watch_region(hregion : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.delete_watch_region.unsafe_as(Proc(LibC::UINT_PTR, HRESULT)).call(hregion)
+  end
+  def get_watch_region_info(hregion : LibC::UINT_PTR, pdwwatchmode : UInt32*, phchapter : LibC::UINT_PTR*, pcbbookmark : LibC::UINT_PTR*, ppbookmark : UInt8**, pcrows : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_watch_region_info.unsafe_as(Proc(LibC::UINT_PTR, UInt32*, LibC::UINT_PTR*, LibC::UINT_PTR*, UInt8**, LibC::IntPtrT*, HRESULT)).call(hregion, pdwwatchmode, phchapter, pcbbookmark, ppbookmark, pcrows)
+  end
+  def refresh(pcchangesobtained : LibC::UINT_PTR*, prgchanges : Tagdbrowwatchrange**) : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(LibC::UINT_PTR*, Tagdbrowwatchrange**, HRESULT)).call(pcchangesobtained, prgchanges)
+  end
+  def shrink_watch_region(hregion : LibC::UINT_PTR, hchapter : LibC::UINT_PTR, cbbookmark : LibC::UINT_PTR, pbookmark : UInt8*, crows : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.shrink_watch_region.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, LibC::IntPtrT, HRESULT)).call(hregion, hchapter, cbbookmark, pbookmark, crows)
+  end
+end
+struct LibWin32::IRowsetCopyRows
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def close_source(hsourceid : UInt16) : HRESULT
+    @lpVtbl.value.close_source.unsafe_as(Proc(UInt16, HRESULT)).call(hsourceid)
+  end
+  def copy_by_hrows(hsourceid : UInt16, hreserved : LibC::UINT_PTR, crows : LibC::IntPtrT, rghrows : LibC::UINT_PTR*, bflags : UInt32) : HRESULT
+    @lpVtbl.value.copy_by_hrows.unsafe_as(Proc(UInt16, LibC::UINT_PTR, LibC::IntPtrT, LibC::UINT_PTR*, UInt32, HRESULT)).call(hsourceid, hreserved, crows, rghrows, bflags)
+  end
+  def copy_rows(hsourceid : UInt16, hreserved : LibC::UINT_PTR, crows : LibC::IntPtrT, bflags : UInt32, pcrowscopied : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.copy_rows.unsafe_as(Proc(UInt16, LibC::UINT_PTR, LibC::IntPtrT, UInt32, LibC::UINT_PTR*, HRESULT)).call(hsourceid, hreserved, crows, bflags, pcrowscopied)
+  end
+  def define_source(prowsetsource : IRowset, ccolids : LibC::UINT_PTR, rgsourcecolumns : LibC::IntPtrT*, rgtargetcolumns : LibC::IntPtrT*, phsourceid : UInt16*) : HRESULT
+    @lpVtbl.value.define_source.unsafe_as(Proc(IRowset, LibC::UINT_PTR, LibC::IntPtrT*, LibC::IntPtrT*, UInt16*, HRESULT)).call(prowsetsource, ccolids, rgsourcecolumns, rgtargetcolumns, phsourceid)
+  end
+end
+struct LibWin32::IReadData
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def read_data(hchapter : LibC::UINT_PTR, cbbookmark : LibC::UINT_PTR, pbookmark : UInt8*, lrowsoffset : LibC::IntPtrT, haccessor : LibC::UINT_PTR, crows : LibC::IntPtrT, pcrowsobtained : LibC::UINT_PTR*, ppfixeddata : UInt8**, pcbvariabletotal : LibC::UINT_PTR*, ppvariabledata : UInt8**) : HRESULT
+    @lpVtbl.value.read_data.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, UInt8*, LibC::IntPtrT, LibC::UINT_PTR, LibC::IntPtrT, LibC::UINT_PTR*, UInt8**, LibC::UINT_PTR*, UInt8**, HRESULT)).call(hchapter, cbbookmark, pbookmark, lrowsoffset, haccessor, crows, pcrowsobtained, ppfixeddata, pcbvariabletotal, ppvariabledata)
+  end
+  def release_chapter(hchapter : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.release_chapter.unsafe_as(Proc(LibC::UINT_PTR, HRESULT)).call(hchapter)
+  end
+end
+struct LibWin32::ICommandCost
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_accumulated_cost(pwszrowsetname : LibC::LPWSTR, pccostlimits : UInt32*, prgcostlimits : DBCOST**) : HRESULT
+    @lpVtbl.value.get_accumulated_cost.unsafe_as(Proc(LibC::LPWSTR, UInt32*, DBCOST**, HRESULT)).call(pwszrowsetname, pccostlimits, prgcostlimits)
+  end
+  def get_cost_estimate(pwszrowsetname : LibC::LPWSTR, pccostestimates : UInt32*, prgcostestimates : DBCOST*) : HRESULT
+    @lpVtbl.value.get_cost_estimate.unsafe_as(Proc(LibC::LPWSTR, UInt32*, DBCOST*, HRESULT)).call(pwszrowsetname, pccostestimates, prgcostestimates)
+  end
+  def get_cost_goals(pwszrowsetname : LibC::LPWSTR, pccostgoals : UInt32*, prgcostgoals : DBCOST*) : HRESULT
+    @lpVtbl.value.get_cost_goals.unsafe_as(Proc(LibC::LPWSTR, UInt32*, DBCOST*, HRESULT)).call(pwszrowsetname, pccostgoals, prgcostgoals)
+  end
+  def get_cost_limits(pwszrowsetname : LibC::LPWSTR, pccostlimits : UInt32*, prgcostlimits : DBCOST*) : HRESULT
+    @lpVtbl.value.get_cost_limits.unsafe_as(Proc(LibC::LPWSTR, UInt32*, DBCOST*, HRESULT)).call(pwszrowsetname, pccostlimits, prgcostlimits)
+  end
+  def set_cost_goals(pwszrowsetname : LibC::LPWSTR, ccostgoals : UInt32, rgcostgoals : DBCOST*) : HRESULT
+    @lpVtbl.value.set_cost_goals.unsafe_as(Proc(LibC::LPWSTR, UInt32, DBCOST*, HRESULT)).call(pwszrowsetname, ccostgoals, rgcostgoals)
+  end
+  def set_cost_limits(pwszrowsetname : LibC::LPWSTR, ccostlimits : UInt32, prgcostlimits : DBCOST*, dwexecutionflags : UInt32) : HRESULT
+    @lpVtbl.value.set_cost_limits.unsafe_as(Proc(LibC::LPWSTR, UInt32, DBCOST*, UInt32, HRESULT)).call(pwszrowsetname, ccostlimits, prgcostlimits, dwexecutionflags)
+  end
+end
+struct LibWin32::ICommandValidate
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def validate_completely : HRESULT
+    @lpVtbl.value.validate_completely.unsafe_as(Proc(HRESULT)).call
+  end
+  def validate_syntax : HRESULT
+    @lpVtbl.value.validate_syntax.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITableRename
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def rename_column(ptableid : DBID*, poldcolumnid : DBID*, pnewcolumnid : DBID*) : HRESULT
+    @lpVtbl.value.rename_column.unsafe_as(Proc(DBID*, DBID*, DBID*, HRESULT)).call(ptableid, poldcolumnid, pnewcolumnid)
+  end
+  def rename_table(poldtableid : DBID*, poldindexid : DBID*, pnewtableid : DBID*, pnewindexid : DBID*) : HRESULT
+    @lpVtbl.value.rename_table.unsafe_as(Proc(DBID*, DBID*, DBID*, DBID*, HRESULT)).call(poldtableid, poldindexid, pnewtableid, pnewindexid)
+  end
+end
+struct LibWin32::IDBSchemaCommand
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_command(punkouter : IUnknown, rguidschema : Guid*, ppcommand : ICommand*) : HRESULT
+    @lpVtbl.value.get_command.unsafe_as(Proc(IUnknown, Guid*, ICommand*, HRESULT)).call(punkouter, rguidschema, ppcommand)
+  end
+  def get_schemas(pcschemas : UInt32*, prgschemas : Guid**) : HRESULT
+    @lpVtbl.value.get_schemas.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(pcschemas, prgschemas)
+  end
+end
+struct LibWin32::IProvideMoniker
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_moniker(ppimoniker : IMoniker*) : HRESULT
+    @lpVtbl.value.get_moniker.unsafe_as(Proc(IMoniker*, HRESULT)).call(ppimoniker)
+  end
+end
+struct LibWin32::ISearchQueryHits
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def init(pflt : IFilter, ulflags : UInt32) : Int32
+    @lpVtbl.value.init.unsafe_as(Proc(IFilter, UInt32, Int32)).call(pflt, ulflags)
+  end
+  def next_hit_moniker(pcmnk : UInt32*, papmnk : IMoniker**) : Int32
+    @lpVtbl.value.next_hit_moniker.unsafe_as(Proc(UInt32*, IMoniker**, Int32)).call(pcmnk, papmnk)
+  end
+  def next_hit_offset(pcregion : UInt32*, paregion : FILTERREGION**) : Int32
+    @lpVtbl.value.next_hit_offset.unsafe_as(Proc(UInt32*, FILTERREGION**, Int32)).call(pcregion, paregion)
+  end
+end
+struct LibWin32::IRowsetQueryStatus
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_status(pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  end
+  def get_status_ex(pdwstatus : UInt32*, pcfiltereddocuments : UInt32*, pcdocumentstofilter : UInt32*, pdwratiofinisheddenominator : LibC::UINT_PTR*, pdwratiofinishednumerator : LibC::UINT_PTR*, cbbmk : LibC::UINT_PTR, pbmk : UInt8*, pirowbmk : LibC::UINT_PTR*, pcrowstotal : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_status_ex.unsafe_as(Proc(UInt32*, UInt32*, UInt32*, LibC::UINT_PTR*, LibC::UINT_PTR*, LibC::UINT_PTR, UInt8*, LibC::UINT_PTR*, LibC::UINT_PTR*, HRESULT)).call(pdwstatus, pcfiltereddocuments, pcdocumentstofilter, pdwratiofinisheddenominator, pdwratiofinishednumerator, cbbmk, pbmk, pirowbmk, pcrowstotal)
+  end
+end
+struct LibWin32::IUMSInitialize
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pums : Void*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(Void*, HRESULT)).call(pums)
+  end
+end
+struct LibWin32::IUMS
+  def sql_ums_suspend(ticks : UInt32) : Void
+    @lpVtbl.value.sql_ums_suspend.unsafe_as(Proc(UInt32, Void)).call(ticks)
+  end
+  def sql_ums_yield(ticks : UInt32) : Void
+    @lpVtbl.value.sql_ums_yield.unsafe_as(Proc(UInt32, Void)).call(ticks)
+  end
+  def sql_ums_switch_premptive : Void
+    @lpVtbl.value.sql_ums_switch_premptive.unsafe_as(Proc(Void)).call
+  end
+  def sql_ums_switch_non_premptive : Void
+    @lpVtbl.value.sql_ums_switch_non_premptive.unsafe_as(Proc(Void)).call
+  end
+  def sql_ums_f_is_premptive : LibC::BOOL
+    @lpVtbl.value.sql_ums_f_is_premptive.unsafe_as(Proc(LibC::BOOL)).call
+  end
+end
+struct LibWin32::ISQLServerErrorInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_error_info(pperrorinfo : Tagsserrorinfo**, ppstringsbuffer : UInt16**) : HRESULT
+    @lpVtbl.value.get_error_info.unsafe_as(Proc(Tagsserrorinfo**, UInt16**, HRESULT)).call(pperrorinfo, ppstringsbuffer)
+  end
+end
+struct LibWin32::IRowsetFastLoad
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def insert_row(haccessor : LibC::UINT_PTR, pdata : Void*) : HRESULT
+    @lpVtbl.value.insert_row.unsafe_as(Proc(LibC::UINT_PTR, Void*, HRESULT)).call(haccessor, pdata)
+  end
+  def commit(fdone : LibC::BOOL) : HRESULT
+    @lpVtbl.value.commit.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fdone)
+  end
+end
+struct LibWin32::ISchemaLock
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_schema_lock(ptableid : DBID*, lmmode : UInt32, phlockhandle : LibC::HANDLE*, ptableversion : UInt64*) : HRESULT
+    @lpVtbl.value.get_schema_lock.unsafe_as(Proc(DBID*, UInt32, LibC::HANDLE*, UInt64*, HRESULT)).call(ptableid, lmmode, phlockhandle, ptableversion)
+  end
+  def release_schema_lock(hlockhandle : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.release_schema_lock.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hlockhandle)
+  end
 end

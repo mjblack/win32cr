@@ -316,16 +316,16 @@ lib LibWin32
 
 
   struct IUPnPNATVTbl
-    query_interface : Proc(IUPnPNAT*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUPnPNAT*, UInt32)
-    release : Proc(IUPnPNAT*, UInt32)
-    get_type_info_count : Proc(IUPnPNAT*, UInt32*, HRESULT)
-    get_type_info : Proc(IUPnPNAT*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IUPnPNAT*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IUPnPNAT*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_static_port_mapping_collection : Proc(IUPnPNAT*, IStaticPortMappingCollection*, HRESULT)
-    get_dynamic_port_mapping_collection : Proc(IUPnPNAT*, IDynamicPortMappingCollection*, HRESULT)
-    get_nat_event_manager : Proc(IUPnPNAT*, INATEventManager*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_static_port_mapping_collection : UInt64
+    get_dynamic_port_mapping_collection : UInt64
+    get_nat_event_manager : UInt64
   end
 
   IUPnPNAT_GUID = "b171c812-cc76-485a-94d8-b6b3a2794e99"
@@ -335,15 +335,15 @@ lib LibWin32
   end
 
   struct INATEventManagerVTbl
-    query_interface : Proc(INATEventManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INATEventManager*, UInt32)
-    release : Proc(INATEventManager*, UInt32)
-    get_type_info_count : Proc(INATEventManager*, UInt32*, HRESULT)
-    get_type_info : Proc(INATEventManager*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INATEventManager*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INATEventManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    put_external_ip_address_callback : Proc(INATEventManager*, IUnknown, HRESULT)
-    put_number_of_entries_callback : Proc(INATEventManager*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    put_external_ip_address_callback : UInt64
+    put_number_of_entries_callback : UInt64
   end
 
   INATEventManager_GUID = "624bd588-9060-4109-b0b0-1adbbcac32df"
@@ -353,10 +353,10 @@ lib LibWin32
   end
 
   struct INATExternalIPAddressCallbackVTbl
-    query_interface : Proc(INATExternalIPAddressCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INATExternalIPAddressCallback*, UInt32)
-    release : Proc(INATExternalIPAddressCallback*, UInt32)
-    new_external_ip_address : Proc(INATExternalIPAddressCallback*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    new_external_ip_address : UInt64
   end
 
   INATExternalIPAddressCallback_GUID = "9c416740-a34e-446f-ba06-abd04c3149ae"
@@ -366,10 +366,10 @@ lib LibWin32
   end
 
   struct INATNumberOfEntriesCallbackVTbl
-    query_interface : Proc(INATNumberOfEntriesCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INATNumberOfEntriesCallback*, UInt32)
-    release : Proc(INATNumberOfEntriesCallback*, UInt32)
-    new_number_of_entries : Proc(INATNumberOfEntriesCallback*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    new_number_of_entries : UInt64
   end
 
   INATNumberOfEntriesCallback_GUID = "c83a0a74-91ee-41b6-b67a-67e0f00bbd78"
@@ -379,18 +379,18 @@ lib LibWin32
   end
 
   struct IDynamicPortMappingCollectionVTbl
-    query_interface : Proc(IDynamicPortMappingCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDynamicPortMappingCollection*, UInt32)
-    release : Proc(IDynamicPortMappingCollection*, UInt32)
-    get_type_info_count : Proc(IDynamicPortMappingCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IDynamicPortMappingCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDynamicPortMappingCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDynamicPortMappingCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IDynamicPortMappingCollection*, IUnknown*, HRESULT)
-    get_item : Proc(IDynamicPortMappingCollection*, UInt8*, Int32, UInt8*, IDynamicPortMapping*, HRESULT)
-    get_count : Proc(IDynamicPortMappingCollection*, Int32*, HRESULT)
-    remove : Proc(IDynamicPortMappingCollection*, UInt8*, Int32, UInt8*, HRESULT)
-    add : Proc(IDynamicPortMappingCollection*, UInt8*, Int32, UInt8*, Int32, UInt8*, Int16, UInt8*, Int32, IDynamicPortMapping*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_item : UInt64
+    get_count : UInt64
+    remove : UInt64
+    add : UInt64
   end
 
   IDynamicPortMappingCollection_GUID = "b60de00f-156e-4e8d-9ec1-3a2342c10899"
@@ -400,27 +400,27 @@ lib LibWin32
   end
 
   struct IDynamicPortMappingVTbl
-    query_interface : Proc(IDynamicPortMapping*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDynamicPortMapping*, UInt32)
-    release : Proc(IDynamicPortMapping*, UInt32)
-    get_type_info_count : Proc(IDynamicPortMapping*, UInt32*, HRESULT)
-    get_type_info : Proc(IDynamicPortMapping*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDynamicPortMapping*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDynamicPortMapping*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_external_ip_address : Proc(IDynamicPortMapping*, UInt8**, HRESULT)
-    get_remote_host : Proc(IDynamicPortMapping*, UInt8**, HRESULT)
-    get_external_port : Proc(IDynamicPortMapping*, Int32*, HRESULT)
-    get_protocol : Proc(IDynamicPortMapping*, UInt8**, HRESULT)
-    get_internal_port : Proc(IDynamicPortMapping*, Int32*, HRESULT)
-    get_internal_client : Proc(IDynamicPortMapping*, UInt8**, HRESULT)
-    get_enabled : Proc(IDynamicPortMapping*, Int16*, HRESULT)
-    get_description : Proc(IDynamicPortMapping*, UInt8**, HRESULT)
-    get_lease_duration : Proc(IDynamicPortMapping*, Int32*, HRESULT)
-    renew_lease : Proc(IDynamicPortMapping*, Int32, Int32*, HRESULT)
-    edit_internal_client : Proc(IDynamicPortMapping*, UInt8*, HRESULT)
-    enable : Proc(IDynamicPortMapping*, Int16, HRESULT)
-    edit_description : Proc(IDynamicPortMapping*, UInt8*, HRESULT)
-    edit_internal_port : Proc(IDynamicPortMapping*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_external_ip_address : UInt64
+    get_remote_host : UInt64
+    get_external_port : UInt64
+    get_protocol : UInt64
+    get_internal_port : UInt64
+    get_internal_client : UInt64
+    get_enabled : UInt64
+    get_description : UInt64
+    get_lease_duration : UInt64
+    renew_lease : UInt64
+    edit_internal_client : UInt64
+    enable : UInt64
+    edit_description : UInt64
+    edit_internal_port : UInt64
   end
 
   IDynamicPortMapping_GUID = "4fc80282-23b6-4378-9a27-cd8f17c9400c"
@@ -430,18 +430,18 @@ lib LibWin32
   end
 
   struct IStaticPortMappingCollectionVTbl
-    query_interface : Proc(IStaticPortMappingCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IStaticPortMappingCollection*, UInt32)
-    release : Proc(IStaticPortMappingCollection*, UInt32)
-    get_type_info_count : Proc(IStaticPortMappingCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IStaticPortMappingCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IStaticPortMappingCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IStaticPortMappingCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IStaticPortMappingCollection*, IUnknown*, HRESULT)
-    get_item : Proc(IStaticPortMappingCollection*, Int32, UInt8*, IStaticPortMapping*, HRESULT)
-    get_count : Proc(IStaticPortMappingCollection*, Int32*, HRESULT)
-    remove : Proc(IStaticPortMappingCollection*, Int32, UInt8*, HRESULT)
-    add : Proc(IStaticPortMappingCollection*, Int32, UInt8*, Int32, UInt8*, Int16, UInt8*, IStaticPortMapping*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_item : UInt64
+    get_count : UInt64
+    remove : UInt64
+    add : UInt64
   end
 
   IStaticPortMappingCollection_GUID = "cd1f3e77-66d6-4664-82c7-36dbb641d0f1"
@@ -451,24 +451,24 @@ lib LibWin32
   end
 
   struct IStaticPortMappingVTbl
-    query_interface : Proc(IStaticPortMapping*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IStaticPortMapping*, UInt32)
-    release : Proc(IStaticPortMapping*, UInt32)
-    get_type_info_count : Proc(IStaticPortMapping*, UInt32*, HRESULT)
-    get_type_info : Proc(IStaticPortMapping*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IStaticPortMapping*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IStaticPortMapping*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_external_ip_address : Proc(IStaticPortMapping*, UInt8**, HRESULT)
-    get_external_port : Proc(IStaticPortMapping*, Int32*, HRESULT)
-    get_internal_port : Proc(IStaticPortMapping*, Int32*, HRESULT)
-    get_protocol : Proc(IStaticPortMapping*, UInt8**, HRESULT)
-    get_internal_client : Proc(IStaticPortMapping*, UInt8**, HRESULT)
-    get_enabled : Proc(IStaticPortMapping*, Int16*, HRESULT)
-    get_description : Proc(IStaticPortMapping*, UInt8**, HRESULT)
-    edit_internal_client : Proc(IStaticPortMapping*, UInt8*, HRESULT)
-    enable : Proc(IStaticPortMapping*, Int16, HRESULT)
-    edit_description : Proc(IStaticPortMapping*, UInt8*, HRESULT)
-    edit_internal_port : Proc(IStaticPortMapping*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_external_ip_address : UInt64
+    get_external_port : UInt64
+    get_internal_port : UInt64
+    get_protocol : UInt64
+    get_internal_client : UInt64
+    get_enabled : UInt64
+    get_description : UInt64
+    edit_internal_client : UInt64
+    enable : UInt64
+    edit_description : UInt64
+    edit_internal_port : UInt64
   end
 
   IStaticPortMapping_GUID = "6f10711f-729b-41e5-93b8-f21d0f818df1"
@@ -478,13 +478,13 @@ lib LibWin32
   end
 
   struct IEnumNetConnectionVTbl
-    query_interface : Proc(IEnumNetConnection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumNetConnection*, UInt32)
-    release : Proc(IEnumNetConnection*, UInt32)
-    next : Proc(IEnumNetConnection*, UInt32, INetConnection*, UInt32*, HRESULT)
-    skip : Proc(IEnumNetConnection*, UInt32, HRESULT)
-    reset : Proc(IEnumNetConnection*, HRESULT)
-    clone : Proc(IEnumNetConnection*, IEnumNetConnection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IEnumNetConnection_GUID = "c08956a0-1cd3-11d1-b1c5-00805fc1270e"
@@ -494,16 +494,16 @@ lib LibWin32
   end
 
   struct INetConnectionVTbl
-    query_interface : Proc(INetConnection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetConnection*, UInt32)
-    release : Proc(INetConnection*, UInt32)
-    connect : Proc(INetConnection*, HRESULT)
-    disconnect : Proc(INetConnection*, HRESULT)
-    delete : Proc(INetConnection*, HRESULT)
-    duplicate : Proc(INetConnection*, LibC::LPWSTR, INetConnection*, HRESULT)
-    get_properties : Proc(INetConnection*, NETCON_PROPERTIES**, HRESULT)
-    get_ui_object_class_id : Proc(INetConnection*, Guid*, HRESULT)
-    rename : Proc(INetConnection*, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    connect : UInt64
+    disconnect : UInt64
+    delete : UInt64
+    duplicate : UInt64
+    get_properties : UInt64
+    get_ui_object_class_id : UInt64
+    rename : UInt64
   end
 
   INetConnection_GUID = "c08956a1-1cd3-11d1-b1c5-00805fc1270e"
@@ -513,10 +513,10 @@ lib LibWin32
   end
 
   struct INetConnectionManagerVTbl
-    query_interface : Proc(INetConnectionManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetConnectionManager*, UInt32)
-    release : Proc(INetConnectionManager*, UInt32)
-    enum_connections : Proc(INetConnectionManager*, NETCONMGR_ENUM_FLAGS, IEnumNetConnection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enum_connections : UInt64
   end
 
   INetConnectionManager_GUID = "c08956a2-1cd3-11d1-b1c5-00805fc1270e"
@@ -526,12 +526,12 @@ lib LibWin32
   end
 
   struct INetConnectionConnectUiVTbl
-    query_interface : Proc(INetConnectionConnectUi*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetConnectionConnectUi*, UInt32)
-    release : Proc(INetConnectionConnectUi*, UInt32)
-    set_connection : Proc(INetConnectionConnectUi*, INetConnection, HRESULT)
-    connect : Proc(INetConnectionConnectUi*, LibC::HANDLE, UInt32, HRESULT)
-    disconnect : Proc(INetConnectionConnectUi*, LibC::HANDLE, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_connection : UInt64
+    connect : UInt64
+    disconnect : UInt64
   end
 
   INetConnectionConnectUi_GUID = "c08956a3-1cd3-11d1-b1c5-00805fc1270e"
@@ -541,13 +541,13 @@ lib LibWin32
   end
 
   struct IEnumNetSharingPortMappingVTbl
-    query_interface : Proc(IEnumNetSharingPortMapping*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumNetSharingPortMapping*, UInt32)
-    release : Proc(IEnumNetSharingPortMapping*, UInt32)
-    next : Proc(IEnumNetSharingPortMapping*, UInt32, VARIANT*, UInt32*, HRESULT)
-    skip : Proc(IEnumNetSharingPortMapping*, UInt32, HRESULT)
-    reset : Proc(IEnumNetSharingPortMapping*, HRESULT)
-    clone : Proc(IEnumNetSharingPortMapping*, IEnumNetSharingPortMapping*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IEnumNetSharingPortMapping_GUID = "c08956b0-1cd3-11d1-b1c5-00805fc1270e"
@@ -557,21 +557,21 @@ lib LibWin32
   end
 
   struct INetSharingPortMappingPropsVTbl
-    query_interface : Proc(INetSharingPortMappingProps*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetSharingPortMappingProps*, UInt32)
-    release : Proc(INetSharingPortMappingProps*, UInt32)
-    get_type_info_count : Proc(INetSharingPortMappingProps*, UInt32*, HRESULT)
-    get_type_info : Proc(INetSharingPortMappingProps*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetSharingPortMappingProps*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetSharingPortMappingProps*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(INetSharingPortMappingProps*, UInt8**, HRESULT)
-    get_ip_protocol : Proc(INetSharingPortMappingProps*, UInt8*, HRESULT)
-    get_external_port : Proc(INetSharingPortMappingProps*, Int32*, HRESULT)
-    get_internal_port : Proc(INetSharingPortMappingProps*, Int32*, HRESULT)
-    get_options : Proc(INetSharingPortMappingProps*, Int32*, HRESULT)
-    get_target_name : Proc(INetSharingPortMappingProps*, UInt8**, HRESULT)
-    get_target_ip_address : Proc(INetSharingPortMappingProps*, UInt8**, HRESULT)
-    get_enabled : Proc(INetSharingPortMappingProps*, Int16*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_ip_protocol : UInt64
+    get_external_port : UInt64
+    get_internal_port : UInt64
+    get_options : UInt64
+    get_target_name : UInt64
+    get_target_ip_address : UInt64
+    get_enabled : UInt64
   end
 
   INetSharingPortMappingProps_GUID = "24b7e9b5-e38f-4685-851b-00892cf5f940"
@@ -581,17 +581,17 @@ lib LibWin32
   end
 
   struct INetSharingPortMappingVTbl
-    query_interface : Proc(INetSharingPortMapping*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetSharingPortMapping*, UInt32)
-    release : Proc(INetSharingPortMapping*, UInt32)
-    get_type_info_count : Proc(INetSharingPortMapping*, UInt32*, HRESULT)
-    get_type_info : Proc(INetSharingPortMapping*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetSharingPortMapping*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetSharingPortMapping*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    disable : Proc(INetSharingPortMapping*, HRESULT)
-    enable : Proc(INetSharingPortMapping*, HRESULT)
-    get_properties : Proc(INetSharingPortMapping*, INetSharingPortMappingProps*, HRESULT)
-    delete : Proc(INetSharingPortMapping*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    disable : UInt64
+    enable : UInt64
+    get_properties : UInt64
+    delete : UInt64
   end
 
   INetSharingPortMapping_GUID = "c08956b1-1cd3-11d1-b1c5-00805fc1270e"
@@ -601,13 +601,13 @@ lib LibWin32
   end
 
   struct IEnumNetSharingEveryConnectionVTbl
-    query_interface : Proc(IEnumNetSharingEveryConnection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumNetSharingEveryConnection*, UInt32)
-    release : Proc(IEnumNetSharingEveryConnection*, UInt32)
-    next : Proc(IEnumNetSharingEveryConnection*, UInt32, VARIANT*, UInt32*, HRESULT)
-    skip : Proc(IEnumNetSharingEveryConnection*, UInt32, HRESULT)
-    reset : Proc(IEnumNetSharingEveryConnection*, HRESULT)
-    clone : Proc(IEnumNetSharingEveryConnection*, IEnumNetSharingEveryConnection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IEnumNetSharingEveryConnection_GUID = "c08956b8-1cd3-11d1-b1c5-00805fc1270e"
@@ -617,13 +617,13 @@ lib LibWin32
   end
 
   struct IEnumNetSharingPublicConnectionVTbl
-    query_interface : Proc(IEnumNetSharingPublicConnection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumNetSharingPublicConnection*, UInt32)
-    release : Proc(IEnumNetSharingPublicConnection*, UInt32)
-    next : Proc(IEnumNetSharingPublicConnection*, UInt32, VARIANT*, UInt32*, HRESULT)
-    skip : Proc(IEnumNetSharingPublicConnection*, UInt32, HRESULT)
-    reset : Proc(IEnumNetSharingPublicConnection*, HRESULT)
-    clone : Proc(IEnumNetSharingPublicConnection*, IEnumNetSharingPublicConnection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IEnumNetSharingPublicConnection_GUID = "c08956b4-1cd3-11d1-b1c5-00805fc1270e"
@@ -633,13 +633,13 @@ lib LibWin32
   end
 
   struct IEnumNetSharingPrivateConnectionVTbl
-    query_interface : Proc(IEnumNetSharingPrivateConnection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumNetSharingPrivateConnection*, UInt32)
-    release : Proc(IEnumNetSharingPrivateConnection*, UInt32)
-    next : Proc(IEnumNetSharingPrivateConnection*, UInt32, VARIANT*, UInt32*, HRESULT)
-    skip : Proc(IEnumNetSharingPrivateConnection*, UInt32, HRESULT)
-    reset : Proc(IEnumNetSharingPrivateConnection*, HRESULT)
-    clone : Proc(IEnumNetSharingPrivateConnection*, IEnumNetSharingPrivateConnection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IEnumNetSharingPrivateConnection_GUID = "c08956b5-1cd3-11d1-b1c5-00805fc1270e"
@@ -649,15 +649,15 @@ lib LibWin32
   end
 
   struct INetSharingPortMappingCollectionVTbl
-    query_interface : Proc(INetSharingPortMappingCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetSharingPortMappingCollection*, UInt32)
-    release : Proc(INetSharingPortMappingCollection*, UInt32)
-    get_type_info_count : Proc(INetSharingPortMappingCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(INetSharingPortMappingCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetSharingPortMappingCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetSharingPortMappingCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(INetSharingPortMappingCollection*, IUnknown*, HRESULT)
-    get_count : Proc(INetSharingPortMappingCollection*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_count : UInt64
   end
 
   INetSharingPortMappingCollection_GUID = "02e4a2de-da20-4e34-89c8-ac22275a010b"
@@ -667,19 +667,19 @@ lib LibWin32
   end
 
   struct INetConnectionPropsVTbl
-    query_interface : Proc(INetConnectionProps*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetConnectionProps*, UInt32)
-    release : Proc(INetConnectionProps*, UInt32)
-    get_type_info_count : Proc(INetConnectionProps*, UInt32*, HRESULT)
-    get_type_info : Proc(INetConnectionProps*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetConnectionProps*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetConnectionProps*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_guid : Proc(INetConnectionProps*, UInt8**, HRESULT)
-    get_name : Proc(INetConnectionProps*, UInt8**, HRESULT)
-    get_device_name : Proc(INetConnectionProps*, UInt8**, HRESULT)
-    get_status : Proc(INetConnectionProps*, NETCON_STATUS*, HRESULT)
-    get_media_type : Proc(INetConnectionProps*, NETCON_MEDIATYPE*, HRESULT)
-    get_characteristics : Proc(INetConnectionProps*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_guid : UInt64
+    get_name : UInt64
+    get_device_name : UInt64
+    get_status : UInt64
+    get_media_type : UInt64
+    get_characteristics : UInt64
   end
 
   INetConnectionProps_GUID = "f4277c95-ce5b-463d-8167-5662d9bcaa72"
@@ -689,23 +689,23 @@ lib LibWin32
   end
 
   struct INetSharingConfigurationVTbl
-    query_interface : Proc(INetSharingConfiguration*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetSharingConfiguration*, UInt32)
-    release : Proc(INetSharingConfiguration*, UInt32)
-    get_type_info_count : Proc(INetSharingConfiguration*, UInt32*, HRESULT)
-    get_type_info : Proc(INetSharingConfiguration*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetSharingConfiguration*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetSharingConfiguration*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_sharing_enabled : Proc(INetSharingConfiguration*, Int16*, HRESULT)
-    get_sharing_connection_type : Proc(INetSharingConfiguration*, SHARINGCONNECTIONTYPE*, HRESULT)
-    disable_sharing : Proc(INetSharingConfiguration*, HRESULT)
-    enable_sharing : Proc(INetSharingConfiguration*, SHARINGCONNECTIONTYPE, HRESULT)
-    get_internet_firewall_enabled : Proc(INetSharingConfiguration*, Int16*, HRESULT)
-    disable_internet_firewall : Proc(INetSharingConfiguration*, HRESULT)
-    enable_internet_firewall : Proc(INetSharingConfiguration*, HRESULT)
-    get_enum_port_mappings : Proc(INetSharingConfiguration*, SHARINGCONNECTION_ENUM_FLAGS, INetSharingPortMappingCollection*, HRESULT)
-    add_port_mapping : Proc(INetSharingConfiguration*, UInt8*, UInt8, UInt16, UInt16, UInt32, UInt8*, ICS_TARGETTYPE, INetSharingPortMapping*, HRESULT)
-    remove_port_mapping : Proc(INetSharingConfiguration*, INetSharingPortMapping, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_sharing_enabled : UInt64
+    get_sharing_connection_type : UInt64
+    disable_sharing : UInt64
+    enable_sharing : UInt64
+    get_internet_firewall_enabled : UInt64
+    disable_internet_firewall : UInt64
+    enable_internet_firewall : UInt64
+    get_enum_port_mappings : UInt64
+    add_port_mapping : UInt64
+    remove_port_mapping : UInt64
   end
 
   INetSharingConfiguration_GUID = "c08956b6-1cd3-11d1-b1c5-00805fc1270e"
@@ -715,15 +715,15 @@ lib LibWin32
   end
 
   struct INetSharingEveryConnectionCollectionVTbl
-    query_interface : Proc(INetSharingEveryConnectionCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetSharingEveryConnectionCollection*, UInt32)
-    release : Proc(INetSharingEveryConnectionCollection*, UInt32)
-    get_type_info_count : Proc(INetSharingEveryConnectionCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(INetSharingEveryConnectionCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetSharingEveryConnectionCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetSharingEveryConnectionCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(INetSharingEveryConnectionCollection*, IUnknown*, HRESULT)
-    get_count : Proc(INetSharingEveryConnectionCollection*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_count : UInt64
   end
 
   INetSharingEveryConnectionCollection_GUID = "33c4643c-7811-46fa-a89a-768597bd7223"
@@ -733,15 +733,15 @@ lib LibWin32
   end
 
   struct INetSharingPublicConnectionCollectionVTbl
-    query_interface : Proc(INetSharingPublicConnectionCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetSharingPublicConnectionCollection*, UInt32)
-    release : Proc(INetSharingPublicConnectionCollection*, UInt32)
-    get_type_info_count : Proc(INetSharingPublicConnectionCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(INetSharingPublicConnectionCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetSharingPublicConnectionCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetSharingPublicConnectionCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(INetSharingPublicConnectionCollection*, IUnknown*, HRESULT)
-    get_count : Proc(INetSharingPublicConnectionCollection*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_count : UInt64
   end
 
   INetSharingPublicConnectionCollection_GUID = "7d7a6355-f372-4971-a149-bfc927be762a"
@@ -751,15 +751,15 @@ lib LibWin32
   end
 
   struct INetSharingPrivateConnectionCollectionVTbl
-    query_interface : Proc(INetSharingPrivateConnectionCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetSharingPrivateConnectionCollection*, UInt32)
-    release : Proc(INetSharingPrivateConnectionCollection*, UInt32)
-    get_type_info_count : Proc(INetSharingPrivateConnectionCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(INetSharingPrivateConnectionCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetSharingPrivateConnectionCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetSharingPrivateConnectionCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(INetSharingPrivateConnectionCollection*, IUnknown*, HRESULT)
-    get_count : Proc(INetSharingPrivateConnectionCollection*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_count : UInt64
   end
 
   INetSharingPrivateConnectionCollection_GUID = "38ae69e0-4409-402a-a2cb-e965c727f840"
@@ -769,19 +769,19 @@ lib LibWin32
   end
 
   struct INetSharingManagerVTbl
-    query_interface : Proc(INetSharingManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetSharingManager*, UInt32)
-    release : Proc(INetSharingManager*, UInt32)
-    get_type_info_count : Proc(INetSharingManager*, UInt32*, HRESULT)
-    get_type_info : Proc(INetSharingManager*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetSharingManager*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetSharingManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_sharing_installed : Proc(INetSharingManager*, Int16*, HRESULT)
-    get_enum_public_connections : Proc(INetSharingManager*, SHARINGCONNECTION_ENUM_FLAGS, INetSharingPublicConnectionCollection*, HRESULT)
-    get_enum_private_connections : Proc(INetSharingManager*, SHARINGCONNECTION_ENUM_FLAGS, INetSharingPrivateConnectionCollection*, HRESULT)
-    get_i_net_sharing_configuration_for_i_net_connection : Proc(INetSharingManager*, INetConnection, INetSharingConfiguration*, HRESULT)
-    get_enum_every_connection : Proc(INetSharingManager*, INetSharingEveryConnectionCollection*, HRESULT)
-    get_net_connection_props : Proc(INetSharingManager*, INetConnection, INetConnectionProps*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_sharing_installed : UInt64
+    get_enum_public_connections : UInt64
+    get_enum_private_connections : UInt64
+    get_i_net_sharing_configuration_for_i_net_connection : UInt64
+    get_enum_every_connection : UInt64
+    get_net_connection_props : UInt64
   end
 
   INetSharingManager_GUID = "c08956b7-1cd3-11d1-b1c5-00805fc1270e"
@@ -791,21 +791,21 @@ lib LibWin32
   end
 
   struct INetFwRemoteAdminSettingsVTbl
-    query_interface : Proc(INetFwRemoteAdminSettings*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwRemoteAdminSettings*, UInt32)
-    release : Proc(INetFwRemoteAdminSettings*, UInt32)
-    get_type_info_count : Proc(INetFwRemoteAdminSettings*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwRemoteAdminSettings*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwRemoteAdminSettings*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwRemoteAdminSettings*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_ip_version : Proc(INetFwRemoteAdminSettings*, NET_FW_IP_VERSION*, HRESULT)
-    put_ip_version : Proc(INetFwRemoteAdminSettings*, NET_FW_IP_VERSION, HRESULT)
-    get_scope : Proc(INetFwRemoteAdminSettings*, NET_FW_SCOPE*, HRESULT)
-    put_scope : Proc(INetFwRemoteAdminSettings*, NET_FW_SCOPE, HRESULT)
-    get_remote_addresses : Proc(INetFwRemoteAdminSettings*, UInt8**, HRESULT)
-    put_remote_addresses : Proc(INetFwRemoteAdminSettings*, UInt8*, HRESULT)
-    get_enabled : Proc(INetFwRemoteAdminSettings*, Int16*, HRESULT)
-    put_enabled : Proc(INetFwRemoteAdminSettings*, Int16, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_ip_version : UInt64
+    put_ip_version : UInt64
+    get_scope : UInt64
+    put_scope : UInt64
+    get_remote_addresses : UInt64
+    put_remote_addresses : UInt64
+    get_enabled : UInt64
+    put_enabled : UInt64
   end
 
   INetFwRemoteAdminSettings_GUID = "d4becddf-6f73-4a83-b832-9c66874cd20e"
@@ -815,33 +815,33 @@ lib LibWin32
   end
 
   struct INetFwIcmpSettingsVTbl
-    query_interface : Proc(INetFwIcmpSettings*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwIcmpSettings*, UInt32)
-    release : Proc(INetFwIcmpSettings*, UInt32)
-    get_type_info_count : Proc(INetFwIcmpSettings*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwIcmpSettings*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwIcmpSettings*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwIcmpSettings*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_allow_outbound_destination_unreachable : Proc(INetFwIcmpSettings*, Int16*, HRESULT)
-    put_allow_outbound_destination_unreachable : Proc(INetFwIcmpSettings*, Int16, HRESULT)
-    get_allow_redirect : Proc(INetFwIcmpSettings*, Int16*, HRESULT)
-    put_allow_redirect : Proc(INetFwIcmpSettings*, Int16, HRESULT)
-    get_allow_inbound_echo_request : Proc(INetFwIcmpSettings*, Int16*, HRESULT)
-    put_allow_inbound_echo_request : Proc(INetFwIcmpSettings*, Int16, HRESULT)
-    get_allow_outbound_time_exceeded : Proc(INetFwIcmpSettings*, Int16*, HRESULT)
-    put_allow_outbound_time_exceeded : Proc(INetFwIcmpSettings*, Int16, HRESULT)
-    get_allow_outbound_parameter_problem : Proc(INetFwIcmpSettings*, Int16*, HRESULT)
-    put_allow_outbound_parameter_problem : Proc(INetFwIcmpSettings*, Int16, HRESULT)
-    get_allow_outbound_source_quench : Proc(INetFwIcmpSettings*, Int16*, HRESULT)
-    put_allow_outbound_source_quench : Proc(INetFwIcmpSettings*, Int16, HRESULT)
-    get_allow_inbound_router_request : Proc(INetFwIcmpSettings*, Int16*, HRESULT)
-    put_allow_inbound_router_request : Proc(INetFwIcmpSettings*, Int16, HRESULT)
-    get_allow_inbound_timestamp_request : Proc(INetFwIcmpSettings*, Int16*, HRESULT)
-    put_allow_inbound_timestamp_request : Proc(INetFwIcmpSettings*, Int16, HRESULT)
-    get_allow_inbound_mask_request : Proc(INetFwIcmpSettings*, Int16*, HRESULT)
-    put_allow_inbound_mask_request : Proc(INetFwIcmpSettings*, Int16, HRESULT)
-    get_allow_outbound_packet_too_big : Proc(INetFwIcmpSettings*, Int16*, HRESULT)
-    put_allow_outbound_packet_too_big : Proc(INetFwIcmpSettings*, Int16, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_allow_outbound_destination_unreachable : UInt64
+    put_allow_outbound_destination_unreachable : UInt64
+    get_allow_redirect : UInt64
+    put_allow_redirect : UInt64
+    get_allow_inbound_echo_request : UInt64
+    put_allow_inbound_echo_request : UInt64
+    get_allow_outbound_time_exceeded : UInt64
+    put_allow_outbound_time_exceeded : UInt64
+    get_allow_outbound_parameter_problem : UInt64
+    put_allow_outbound_parameter_problem : UInt64
+    get_allow_outbound_source_quench : UInt64
+    put_allow_outbound_source_quench : UInt64
+    get_allow_inbound_router_request : UInt64
+    put_allow_inbound_router_request : UInt64
+    get_allow_inbound_timestamp_request : UInt64
+    put_allow_inbound_timestamp_request : UInt64
+    get_allow_inbound_mask_request : UInt64
+    put_allow_inbound_mask_request : UInt64
+    get_allow_outbound_packet_too_big : UInt64
+    put_allow_outbound_packet_too_big : UInt64
   end
 
   INetFwIcmpSettings_GUID = "a6207b2e-7cdd-426a-951e-5e1cbc5afead"
@@ -851,28 +851,28 @@ lib LibWin32
   end
 
   struct INetFwOpenPortVTbl
-    query_interface : Proc(INetFwOpenPort*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwOpenPort*, UInt32)
-    release : Proc(INetFwOpenPort*, UInt32)
-    get_type_info_count : Proc(INetFwOpenPort*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwOpenPort*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwOpenPort*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwOpenPort*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(INetFwOpenPort*, UInt8**, HRESULT)
-    put_name : Proc(INetFwOpenPort*, UInt8*, HRESULT)
-    get_ip_version : Proc(INetFwOpenPort*, NET_FW_IP_VERSION*, HRESULT)
-    put_ip_version : Proc(INetFwOpenPort*, NET_FW_IP_VERSION, HRESULT)
-    get_protocol : Proc(INetFwOpenPort*, NET_FW_IP_PROTOCOL*, HRESULT)
-    put_protocol : Proc(INetFwOpenPort*, NET_FW_IP_PROTOCOL, HRESULT)
-    get_port : Proc(INetFwOpenPort*, Int32*, HRESULT)
-    put_port : Proc(INetFwOpenPort*, Int32, HRESULT)
-    get_scope : Proc(INetFwOpenPort*, NET_FW_SCOPE*, HRESULT)
-    put_scope : Proc(INetFwOpenPort*, NET_FW_SCOPE, HRESULT)
-    get_remote_addresses : Proc(INetFwOpenPort*, UInt8**, HRESULT)
-    put_remote_addresses : Proc(INetFwOpenPort*, UInt8*, HRESULT)
-    get_enabled : Proc(INetFwOpenPort*, Int16*, HRESULT)
-    put_enabled : Proc(INetFwOpenPort*, Int16, HRESULT)
-    get_built_in : Proc(INetFwOpenPort*, Int16*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_ip_version : UInt64
+    put_ip_version : UInt64
+    get_protocol : UInt64
+    put_protocol : UInt64
+    get_port : UInt64
+    put_port : UInt64
+    get_scope : UInt64
+    put_scope : UInt64
+    get_remote_addresses : UInt64
+    put_remote_addresses : UInt64
+    get_enabled : UInt64
+    put_enabled : UInt64
+    get_built_in : UInt64
   end
 
   INetFwOpenPort_GUID = "e0483ba0-47ff-4d9c-a6d6-7741d0b195f7"
@@ -882,18 +882,18 @@ lib LibWin32
   end
 
   struct INetFwOpenPortsVTbl
-    query_interface : Proc(INetFwOpenPorts*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwOpenPorts*, UInt32)
-    release : Proc(INetFwOpenPorts*, UInt32)
-    get_type_info_count : Proc(INetFwOpenPorts*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwOpenPorts*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwOpenPorts*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwOpenPorts*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(INetFwOpenPorts*, Int32*, HRESULT)
-    add : Proc(INetFwOpenPorts*, INetFwOpenPort, HRESULT)
-    remove : Proc(INetFwOpenPorts*, Int32, NET_FW_IP_PROTOCOL, HRESULT)
-    item : Proc(INetFwOpenPorts*, Int32, NET_FW_IP_PROTOCOL, INetFwOpenPort*, HRESULT)
-    get__new_enum : Proc(INetFwOpenPorts*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    add : UInt64
+    remove : UInt64
+    item : UInt64
+    get__new_enum : UInt64
   end
 
   INetFwOpenPorts_GUID = "c0e9d7fa-e07e-430a-b19a-090ce82d92e2"
@@ -903,25 +903,25 @@ lib LibWin32
   end
 
   struct INetFwServiceVTbl
-    query_interface : Proc(INetFwService*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwService*, UInt32)
-    release : Proc(INetFwService*, UInt32)
-    get_type_info_count : Proc(INetFwService*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwService*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwService*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwService*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(INetFwService*, UInt8**, HRESULT)
-    get_type : Proc(INetFwService*, NET_FW_SERVICE_TYPE*, HRESULT)
-    get_customized : Proc(INetFwService*, Int16*, HRESULT)
-    get_ip_version : Proc(INetFwService*, NET_FW_IP_VERSION*, HRESULT)
-    put_ip_version : Proc(INetFwService*, NET_FW_IP_VERSION, HRESULT)
-    get_scope : Proc(INetFwService*, NET_FW_SCOPE*, HRESULT)
-    put_scope : Proc(INetFwService*, NET_FW_SCOPE, HRESULT)
-    get_remote_addresses : Proc(INetFwService*, UInt8**, HRESULT)
-    put_remote_addresses : Proc(INetFwService*, UInt8*, HRESULT)
-    get_enabled : Proc(INetFwService*, Int16*, HRESULT)
-    put_enabled : Proc(INetFwService*, Int16, HRESULT)
-    get_globally_open_ports : Proc(INetFwService*, INetFwOpenPorts*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_type : UInt64
+    get_customized : UInt64
+    get_ip_version : UInt64
+    put_ip_version : UInt64
+    get_scope : UInt64
+    put_scope : UInt64
+    get_remote_addresses : UInt64
+    put_remote_addresses : UInt64
+    get_enabled : UInt64
+    put_enabled : UInt64
+    get_globally_open_ports : UInt64
   end
 
   INetFwService_GUID = "79fd57c8-908e-4a36-9888-d5b3f0a444cf"
@@ -931,16 +931,16 @@ lib LibWin32
   end
 
   struct INetFwServicesVTbl
-    query_interface : Proc(INetFwServices*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwServices*, UInt32)
-    release : Proc(INetFwServices*, UInt32)
-    get_type_info_count : Proc(INetFwServices*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwServices*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwServices*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwServices*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(INetFwServices*, Int32*, HRESULT)
-    item : Proc(INetFwServices*, NET_FW_SERVICE_TYPE, INetFwService*, HRESULT)
-    get__new_enum : Proc(INetFwServices*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    item : UInt64
+    get__new_enum : UInt64
   end
 
   INetFwServices_GUID = "79649bb4-903e-421b-94c9-79848e79f6ee"
@@ -950,25 +950,25 @@ lib LibWin32
   end
 
   struct INetFwAuthorizedApplicationVTbl
-    query_interface : Proc(INetFwAuthorizedApplication*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwAuthorizedApplication*, UInt32)
-    release : Proc(INetFwAuthorizedApplication*, UInt32)
-    get_type_info_count : Proc(INetFwAuthorizedApplication*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwAuthorizedApplication*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwAuthorizedApplication*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwAuthorizedApplication*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(INetFwAuthorizedApplication*, UInt8**, HRESULT)
-    put_name : Proc(INetFwAuthorizedApplication*, UInt8*, HRESULT)
-    get_process_image_file_name : Proc(INetFwAuthorizedApplication*, UInt8**, HRESULT)
-    put_process_image_file_name : Proc(INetFwAuthorizedApplication*, UInt8*, HRESULT)
-    get_ip_version : Proc(INetFwAuthorizedApplication*, NET_FW_IP_VERSION*, HRESULT)
-    put_ip_version : Proc(INetFwAuthorizedApplication*, NET_FW_IP_VERSION, HRESULT)
-    get_scope : Proc(INetFwAuthorizedApplication*, NET_FW_SCOPE*, HRESULT)
-    put_scope : Proc(INetFwAuthorizedApplication*, NET_FW_SCOPE, HRESULT)
-    get_remote_addresses : Proc(INetFwAuthorizedApplication*, UInt8**, HRESULT)
-    put_remote_addresses : Proc(INetFwAuthorizedApplication*, UInt8*, HRESULT)
-    get_enabled : Proc(INetFwAuthorizedApplication*, Int16*, HRESULT)
-    put_enabled : Proc(INetFwAuthorizedApplication*, Int16, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_process_image_file_name : UInt64
+    put_process_image_file_name : UInt64
+    get_ip_version : UInt64
+    put_ip_version : UInt64
+    get_scope : UInt64
+    put_scope : UInt64
+    get_remote_addresses : UInt64
+    put_remote_addresses : UInt64
+    get_enabled : UInt64
+    put_enabled : UInt64
   end
 
   INetFwAuthorizedApplication_GUID = "b5e64ffa-c2c5-444e-a301-fb5e00018050"
@@ -978,18 +978,18 @@ lib LibWin32
   end
 
   struct INetFwAuthorizedApplicationsVTbl
-    query_interface : Proc(INetFwAuthorizedApplications*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwAuthorizedApplications*, UInt32)
-    release : Proc(INetFwAuthorizedApplications*, UInt32)
-    get_type_info_count : Proc(INetFwAuthorizedApplications*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwAuthorizedApplications*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwAuthorizedApplications*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwAuthorizedApplications*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(INetFwAuthorizedApplications*, Int32*, HRESULT)
-    add : Proc(INetFwAuthorizedApplications*, INetFwAuthorizedApplication, HRESULT)
-    remove : Proc(INetFwAuthorizedApplications*, UInt8*, HRESULT)
-    item : Proc(INetFwAuthorizedApplications*, UInt8*, INetFwAuthorizedApplication*, HRESULT)
-    get__new_enum : Proc(INetFwAuthorizedApplications*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    add : UInt64
+    remove : UInt64
+    item : UInt64
+    get__new_enum : UInt64
   end
 
   INetFwAuthorizedApplications_GUID = "644efd52-ccf9-486c-97a2-39f352570b30"
@@ -999,49 +999,49 @@ lib LibWin32
   end
 
   struct INetFwRuleVTbl
-    query_interface : Proc(INetFwRule*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwRule*, UInt32)
-    release : Proc(INetFwRule*, UInt32)
-    get_type_info_count : Proc(INetFwRule*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwRule*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwRule*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwRule*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(INetFwRule*, UInt8**, HRESULT)
-    put_name : Proc(INetFwRule*, UInt8*, HRESULT)
-    get_description : Proc(INetFwRule*, UInt8**, HRESULT)
-    put_description : Proc(INetFwRule*, UInt8*, HRESULT)
-    get_application_name : Proc(INetFwRule*, UInt8**, HRESULT)
-    put_application_name : Proc(INetFwRule*, UInt8*, HRESULT)
-    get_service_name : Proc(INetFwRule*, UInt8**, HRESULT)
-    put_service_name : Proc(INetFwRule*, UInt8*, HRESULT)
-    get_protocol : Proc(INetFwRule*, Int32*, HRESULT)
-    put_protocol : Proc(INetFwRule*, Int32, HRESULT)
-    get_local_ports : Proc(INetFwRule*, UInt8**, HRESULT)
-    put_local_ports : Proc(INetFwRule*, UInt8*, HRESULT)
-    get_remote_ports : Proc(INetFwRule*, UInt8**, HRESULT)
-    put_remote_ports : Proc(INetFwRule*, UInt8*, HRESULT)
-    get_local_addresses : Proc(INetFwRule*, UInt8**, HRESULT)
-    put_local_addresses : Proc(INetFwRule*, UInt8*, HRESULT)
-    get_remote_addresses : Proc(INetFwRule*, UInt8**, HRESULT)
-    put_remote_addresses : Proc(INetFwRule*, UInt8*, HRESULT)
-    get_icmp_types_and_codes : Proc(INetFwRule*, UInt8**, HRESULT)
-    put_icmp_types_and_codes : Proc(INetFwRule*, UInt8*, HRESULT)
-    get_direction : Proc(INetFwRule*, NET_FW_RULE_DIRECTION*, HRESULT)
-    put_direction : Proc(INetFwRule*, NET_FW_RULE_DIRECTION, HRESULT)
-    get_interfaces : Proc(INetFwRule*, VARIANT*, HRESULT)
-    put_interfaces : Proc(INetFwRule*, VARIANT, HRESULT)
-    get_interface_types : Proc(INetFwRule*, UInt8**, HRESULT)
-    put_interface_types : Proc(INetFwRule*, UInt8*, HRESULT)
-    get_enabled : Proc(INetFwRule*, Int16*, HRESULT)
-    put_enabled : Proc(INetFwRule*, Int16, HRESULT)
-    get_grouping : Proc(INetFwRule*, UInt8**, HRESULT)
-    put_grouping : Proc(INetFwRule*, UInt8*, HRESULT)
-    get_profiles : Proc(INetFwRule*, Int32*, HRESULT)
-    put_profiles : Proc(INetFwRule*, Int32, HRESULT)
-    get_edge_traversal : Proc(INetFwRule*, Int16*, HRESULT)
-    put_edge_traversal : Proc(INetFwRule*, Int16, HRESULT)
-    get_action : Proc(INetFwRule*, NET_FW_ACTION*, HRESULT)
-    put_action : Proc(INetFwRule*, NET_FW_ACTION, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_name : UInt64
+    put_application_name : UInt64
+    get_service_name : UInt64
+    put_service_name : UInt64
+    get_protocol : UInt64
+    put_protocol : UInt64
+    get_local_ports : UInt64
+    put_local_ports : UInt64
+    get_remote_ports : UInt64
+    put_remote_ports : UInt64
+    get_local_addresses : UInt64
+    put_local_addresses : UInt64
+    get_remote_addresses : UInt64
+    put_remote_addresses : UInt64
+    get_icmp_types_and_codes : UInt64
+    put_icmp_types_and_codes : UInt64
+    get_direction : UInt64
+    put_direction : UInt64
+    get_interfaces : UInt64
+    put_interfaces : UInt64
+    get_interface_types : UInt64
+    put_interface_types : UInt64
+    get_enabled : UInt64
+    put_enabled : UInt64
+    get_grouping : UInt64
+    put_grouping : UInt64
+    get_profiles : UInt64
+    put_profiles : UInt64
+    get_edge_traversal : UInt64
+    put_edge_traversal : UInt64
+    get_action : UInt64
+    put_action : UInt64
   end
 
   INetFwRule_GUID = "af230d27-baba-4e42-aced-f524f22cfce2"
@@ -1051,51 +1051,51 @@ lib LibWin32
   end
 
   struct INetFwRule2VTbl
-    query_interface : Proc(INetFwRule2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwRule2*, UInt32)
-    release : Proc(INetFwRule2*, UInt32)
-    get_type_info_count : Proc(INetFwRule2*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwRule2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwRule2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwRule2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(INetFwRule2*, UInt8**, HRESULT)
-    put_name : Proc(INetFwRule2*, UInt8*, HRESULT)
-    get_description : Proc(INetFwRule2*, UInt8**, HRESULT)
-    put_description : Proc(INetFwRule2*, UInt8*, HRESULT)
-    get_application_name : Proc(INetFwRule2*, UInt8**, HRESULT)
-    put_application_name : Proc(INetFwRule2*, UInt8*, HRESULT)
-    get_service_name : Proc(INetFwRule2*, UInt8**, HRESULT)
-    put_service_name : Proc(INetFwRule2*, UInt8*, HRESULT)
-    get_protocol : Proc(INetFwRule2*, Int32*, HRESULT)
-    put_protocol : Proc(INetFwRule2*, Int32, HRESULT)
-    get_local_ports : Proc(INetFwRule2*, UInt8**, HRESULT)
-    put_local_ports : Proc(INetFwRule2*, UInt8*, HRESULT)
-    get_remote_ports : Proc(INetFwRule2*, UInt8**, HRESULT)
-    put_remote_ports : Proc(INetFwRule2*, UInt8*, HRESULT)
-    get_local_addresses : Proc(INetFwRule2*, UInt8**, HRESULT)
-    put_local_addresses : Proc(INetFwRule2*, UInt8*, HRESULT)
-    get_remote_addresses : Proc(INetFwRule2*, UInt8**, HRESULT)
-    put_remote_addresses : Proc(INetFwRule2*, UInt8*, HRESULT)
-    get_icmp_types_and_codes : Proc(INetFwRule2*, UInt8**, HRESULT)
-    put_icmp_types_and_codes : Proc(INetFwRule2*, UInt8*, HRESULT)
-    get_direction : Proc(INetFwRule2*, NET_FW_RULE_DIRECTION*, HRESULT)
-    put_direction : Proc(INetFwRule2*, NET_FW_RULE_DIRECTION, HRESULT)
-    get_interfaces : Proc(INetFwRule2*, VARIANT*, HRESULT)
-    put_interfaces : Proc(INetFwRule2*, VARIANT, HRESULT)
-    get_interface_types : Proc(INetFwRule2*, UInt8**, HRESULT)
-    put_interface_types : Proc(INetFwRule2*, UInt8*, HRESULT)
-    get_enabled : Proc(INetFwRule2*, Int16*, HRESULT)
-    put_enabled : Proc(INetFwRule2*, Int16, HRESULT)
-    get_grouping : Proc(INetFwRule2*, UInt8**, HRESULT)
-    put_grouping : Proc(INetFwRule2*, UInt8*, HRESULT)
-    get_profiles : Proc(INetFwRule2*, Int32*, HRESULT)
-    put_profiles : Proc(INetFwRule2*, Int32, HRESULT)
-    get_edge_traversal : Proc(INetFwRule2*, Int16*, HRESULT)
-    put_edge_traversal : Proc(INetFwRule2*, Int16, HRESULT)
-    get_action : Proc(INetFwRule2*, NET_FW_ACTION*, HRESULT)
-    put_action : Proc(INetFwRule2*, NET_FW_ACTION, HRESULT)
-    get_edge_traversal_options : Proc(INetFwRule2*, Int32*, HRESULT)
-    put_edge_traversal_options : Proc(INetFwRule2*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_name : UInt64
+    put_application_name : UInt64
+    get_service_name : UInt64
+    put_service_name : UInt64
+    get_protocol : UInt64
+    put_protocol : UInt64
+    get_local_ports : UInt64
+    put_local_ports : UInt64
+    get_remote_ports : UInt64
+    put_remote_ports : UInt64
+    get_local_addresses : UInt64
+    put_local_addresses : UInt64
+    get_remote_addresses : UInt64
+    put_remote_addresses : UInt64
+    get_icmp_types_and_codes : UInt64
+    put_icmp_types_and_codes : UInt64
+    get_direction : UInt64
+    put_direction : UInt64
+    get_interfaces : UInt64
+    put_interfaces : UInt64
+    get_interface_types : UInt64
+    put_interface_types : UInt64
+    get_enabled : UInt64
+    put_enabled : UInt64
+    get_grouping : UInt64
+    put_grouping : UInt64
+    get_profiles : UInt64
+    put_profiles : UInt64
+    get_edge_traversal : UInt64
+    put_edge_traversal : UInt64
+    get_action : UInt64
+    put_action : UInt64
+    get_edge_traversal_options : UInt64
+    put_edge_traversal_options : UInt64
   end
 
   INetFwRule2_GUID = "9c27c8da-189b-4dde-89f7-8b39a316782c"
@@ -1105,63 +1105,63 @@ lib LibWin32
   end
 
   struct INetFwRule3VTbl
-    query_interface : Proc(INetFwRule3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwRule3*, UInt32)
-    release : Proc(INetFwRule3*, UInt32)
-    get_type_info_count : Proc(INetFwRule3*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwRule3*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwRule3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwRule3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(INetFwRule3*, UInt8**, HRESULT)
-    put_name : Proc(INetFwRule3*, UInt8*, HRESULT)
-    get_description : Proc(INetFwRule3*, UInt8**, HRESULT)
-    put_description : Proc(INetFwRule3*, UInt8*, HRESULT)
-    get_application_name : Proc(INetFwRule3*, UInt8**, HRESULT)
-    put_application_name : Proc(INetFwRule3*, UInt8*, HRESULT)
-    get_service_name : Proc(INetFwRule3*, UInt8**, HRESULT)
-    put_service_name : Proc(INetFwRule3*, UInt8*, HRESULT)
-    get_protocol : Proc(INetFwRule3*, Int32*, HRESULT)
-    put_protocol : Proc(INetFwRule3*, Int32, HRESULT)
-    get_local_ports : Proc(INetFwRule3*, UInt8**, HRESULT)
-    put_local_ports : Proc(INetFwRule3*, UInt8*, HRESULT)
-    get_remote_ports : Proc(INetFwRule3*, UInt8**, HRESULT)
-    put_remote_ports : Proc(INetFwRule3*, UInt8*, HRESULT)
-    get_local_addresses : Proc(INetFwRule3*, UInt8**, HRESULT)
-    put_local_addresses : Proc(INetFwRule3*, UInt8*, HRESULT)
-    get_remote_addresses : Proc(INetFwRule3*, UInt8**, HRESULT)
-    put_remote_addresses : Proc(INetFwRule3*, UInt8*, HRESULT)
-    get_icmp_types_and_codes : Proc(INetFwRule3*, UInt8**, HRESULT)
-    put_icmp_types_and_codes : Proc(INetFwRule3*, UInt8*, HRESULT)
-    get_direction : Proc(INetFwRule3*, NET_FW_RULE_DIRECTION*, HRESULT)
-    put_direction : Proc(INetFwRule3*, NET_FW_RULE_DIRECTION, HRESULT)
-    get_interfaces : Proc(INetFwRule3*, VARIANT*, HRESULT)
-    put_interfaces : Proc(INetFwRule3*, VARIANT, HRESULT)
-    get_interface_types : Proc(INetFwRule3*, UInt8**, HRESULT)
-    put_interface_types : Proc(INetFwRule3*, UInt8*, HRESULT)
-    get_enabled : Proc(INetFwRule3*, Int16*, HRESULT)
-    put_enabled : Proc(INetFwRule3*, Int16, HRESULT)
-    get_grouping : Proc(INetFwRule3*, UInt8**, HRESULT)
-    put_grouping : Proc(INetFwRule3*, UInt8*, HRESULT)
-    get_profiles : Proc(INetFwRule3*, Int32*, HRESULT)
-    put_profiles : Proc(INetFwRule3*, Int32, HRESULT)
-    get_edge_traversal : Proc(INetFwRule3*, Int16*, HRESULT)
-    put_edge_traversal : Proc(INetFwRule3*, Int16, HRESULT)
-    get_action : Proc(INetFwRule3*, NET_FW_ACTION*, HRESULT)
-    put_action : Proc(INetFwRule3*, NET_FW_ACTION, HRESULT)
-    get_edge_traversal_options : Proc(INetFwRule3*, Int32*, HRESULT)
-    put_edge_traversal_options : Proc(INetFwRule3*, Int32, HRESULT)
-    get_local_app_package_id : Proc(INetFwRule3*, UInt8**, HRESULT)
-    put_local_app_package_id : Proc(INetFwRule3*, UInt8*, HRESULT)
-    get_local_user_owner : Proc(INetFwRule3*, UInt8**, HRESULT)
-    put_local_user_owner : Proc(INetFwRule3*, UInt8*, HRESULT)
-    get_local_user_authorized_list : Proc(INetFwRule3*, UInt8**, HRESULT)
-    put_local_user_authorized_list : Proc(INetFwRule3*, UInt8*, HRESULT)
-    get_remote_user_authorized_list : Proc(INetFwRule3*, UInt8**, HRESULT)
-    put_remote_user_authorized_list : Proc(INetFwRule3*, UInt8*, HRESULT)
-    get_remote_machine_authorized_list : Proc(INetFwRule3*, UInt8**, HRESULT)
-    put_remote_machine_authorized_list : Proc(INetFwRule3*, UInt8*, HRESULT)
-    get_secure_flags : Proc(INetFwRule3*, Int32*, HRESULT)
-    put_secure_flags : Proc(INetFwRule3*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_name : UInt64
+    put_application_name : UInt64
+    get_service_name : UInt64
+    put_service_name : UInt64
+    get_protocol : UInt64
+    put_protocol : UInt64
+    get_local_ports : UInt64
+    put_local_ports : UInt64
+    get_remote_ports : UInt64
+    put_remote_ports : UInt64
+    get_local_addresses : UInt64
+    put_local_addresses : UInt64
+    get_remote_addresses : UInt64
+    put_remote_addresses : UInt64
+    get_icmp_types_and_codes : UInt64
+    put_icmp_types_and_codes : UInt64
+    get_direction : UInt64
+    put_direction : UInt64
+    get_interfaces : UInt64
+    put_interfaces : UInt64
+    get_interface_types : UInt64
+    put_interface_types : UInt64
+    get_enabled : UInt64
+    put_enabled : UInt64
+    get_grouping : UInt64
+    put_grouping : UInt64
+    get_profiles : UInt64
+    put_profiles : UInt64
+    get_edge_traversal : UInt64
+    put_edge_traversal : UInt64
+    get_action : UInt64
+    put_action : UInt64
+    get_edge_traversal_options : UInt64
+    put_edge_traversal_options : UInt64
+    get_local_app_package_id : UInt64
+    put_local_app_package_id : UInt64
+    get_local_user_owner : UInt64
+    put_local_user_owner : UInt64
+    get_local_user_authorized_list : UInt64
+    put_local_user_authorized_list : UInt64
+    get_remote_user_authorized_list : UInt64
+    put_remote_user_authorized_list : UInt64
+    get_remote_machine_authorized_list : UInt64
+    put_remote_machine_authorized_list : UInt64
+    get_secure_flags : UInt64
+    put_secure_flags : UInt64
   end
 
   INetFwRule3_GUID = "b21563ff-d696-4222-ab46-4e89b73ab34a"
@@ -1171,18 +1171,18 @@ lib LibWin32
   end
 
   struct INetFwRulesVTbl
-    query_interface : Proc(INetFwRules*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwRules*, UInt32)
-    release : Proc(INetFwRules*, UInt32)
-    get_type_info_count : Proc(INetFwRules*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwRules*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwRules*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwRules*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(INetFwRules*, Int32*, HRESULT)
-    add : Proc(INetFwRules*, INetFwRule, HRESULT)
-    remove : Proc(INetFwRules*, UInt8*, HRESULT)
-    item : Proc(INetFwRules*, UInt8*, INetFwRule*, HRESULT)
-    get__new_enum : Proc(INetFwRules*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    add : UInt64
+    remove : UInt64
+    item : UInt64
+    get__new_enum : UInt64
   end
 
   INetFwRules_GUID = "9c4c6277-5027-441e-afae-ca1f542da009"
@@ -1192,16 +1192,16 @@ lib LibWin32
   end
 
   struct INetFwServiceRestrictionVTbl
-    query_interface : Proc(INetFwServiceRestriction*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwServiceRestriction*, UInt32)
-    release : Proc(INetFwServiceRestriction*, UInt32)
-    get_type_info_count : Proc(INetFwServiceRestriction*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwServiceRestriction*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwServiceRestriction*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwServiceRestriction*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    restrict_service : Proc(INetFwServiceRestriction*, UInt8*, UInt8*, Int16, Int16, HRESULT)
-    service_restricted : Proc(INetFwServiceRestriction*, UInt8*, UInt8*, Int16*, HRESULT)
-    get_rules : Proc(INetFwServiceRestriction*, INetFwRules*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    restrict_service : UInt64
+    service_restricted : UInt64
+    get_rules : UInt64
   end
 
   INetFwServiceRestriction_GUID = "8267bbe3-f890-491c-b7b6-2db1ef0e5d2b"
@@ -1211,27 +1211,27 @@ lib LibWin32
   end
 
   struct INetFwProfileVTbl
-    query_interface : Proc(INetFwProfile*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwProfile*, UInt32)
-    release : Proc(INetFwProfile*, UInt32)
-    get_type_info_count : Proc(INetFwProfile*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwProfile*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwProfile*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwProfile*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_type : Proc(INetFwProfile*, NET_FW_PROFILE_TYPE*, HRESULT)
-    get_firewall_enabled : Proc(INetFwProfile*, Int16*, HRESULT)
-    put_firewall_enabled : Proc(INetFwProfile*, Int16, HRESULT)
-    get_exceptions_not_allowed : Proc(INetFwProfile*, Int16*, HRESULT)
-    put_exceptions_not_allowed : Proc(INetFwProfile*, Int16, HRESULT)
-    get_notifications_disabled : Proc(INetFwProfile*, Int16*, HRESULT)
-    put_notifications_disabled : Proc(INetFwProfile*, Int16, HRESULT)
-    get_unicast_responses_to_multicast_broadcast_disabled : Proc(INetFwProfile*, Int16*, HRESULT)
-    put_unicast_responses_to_multicast_broadcast_disabled : Proc(INetFwProfile*, Int16, HRESULT)
-    get_remote_admin_settings : Proc(INetFwProfile*, INetFwRemoteAdminSettings*, HRESULT)
-    get_icmp_settings : Proc(INetFwProfile*, INetFwIcmpSettings*, HRESULT)
-    get_globally_open_ports : Proc(INetFwProfile*, INetFwOpenPorts*, HRESULT)
-    get_services : Proc(INetFwProfile*, INetFwServices*, HRESULT)
-    get_authorized_applications : Proc(INetFwProfile*, INetFwAuthorizedApplications*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_type : UInt64
+    get_firewall_enabled : UInt64
+    put_firewall_enabled : UInt64
+    get_exceptions_not_allowed : UInt64
+    put_exceptions_not_allowed : UInt64
+    get_notifications_disabled : UInt64
+    put_notifications_disabled : UInt64
+    get_unicast_responses_to_multicast_broadcast_disabled : UInt64
+    put_unicast_responses_to_multicast_broadcast_disabled : UInt64
+    get_remote_admin_settings : UInt64
+    get_icmp_settings : UInt64
+    get_globally_open_ports : UInt64
+    get_services : UInt64
+    get_authorized_applications : UInt64
   end
 
   INetFwProfile_GUID = "174a0dda-e9f9-449d-993b-21ab667ca456"
@@ -1241,15 +1241,15 @@ lib LibWin32
   end
 
   struct INetFwPolicyVTbl
-    query_interface : Proc(INetFwPolicy*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwPolicy*, UInt32)
-    release : Proc(INetFwPolicy*, UInt32)
-    get_type_info_count : Proc(INetFwPolicy*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwPolicy*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwPolicy*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwPolicy*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_current_profile : Proc(INetFwPolicy*, INetFwProfile*, HRESULT)
-    get_profile_by_type : Proc(INetFwPolicy*, NET_FW_PROFILE_TYPE, INetFwProfile*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_current_profile : UInt64
+    get_profile_by_type : UInt64
   end
 
   INetFwPolicy_GUID = "d46d2478-9ac9-4008-9dc7-5563ce5536cc"
@@ -1259,35 +1259,35 @@ lib LibWin32
   end
 
   struct INetFwPolicy2VTbl
-    query_interface : Proc(INetFwPolicy2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwPolicy2*, UInt32)
-    release : Proc(INetFwPolicy2*, UInt32)
-    get_type_info_count : Proc(INetFwPolicy2*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwPolicy2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwPolicy2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwPolicy2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_current_profile_types : Proc(INetFwPolicy2*, Int32*, HRESULT)
-    get_firewall_enabled : Proc(INetFwPolicy2*, NET_FW_PROFILE_TYPE2, Int16*, HRESULT)
-    put_firewall_enabled : Proc(INetFwPolicy2*, NET_FW_PROFILE_TYPE2, Int16, HRESULT)
-    get_excluded_interfaces : Proc(INetFwPolicy2*, NET_FW_PROFILE_TYPE2, VARIANT*, HRESULT)
-    put_excluded_interfaces : Proc(INetFwPolicy2*, NET_FW_PROFILE_TYPE2, VARIANT, HRESULT)
-    get_block_all_inbound_traffic : Proc(INetFwPolicy2*, NET_FW_PROFILE_TYPE2, Int16*, HRESULT)
-    put_block_all_inbound_traffic : Proc(INetFwPolicy2*, NET_FW_PROFILE_TYPE2, Int16, HRESULT)
-    get_notifications_disabled : Proc(INetFwPolicy2*, NET_FW_PROFILE_TYPE2, Int16*, HRESULT)
-    put_notifications_disabled : Proc(INetFwPolicy2*, NET_FW_PROFILE_TYPE2, Int16, HRESULT)
-    get_unicast_responses_to_multicast_broadcast_disabled : Proc(INetFwPolicy2*, NET_FW_PROFILE_TYPE2, Int16*, HRESULT)
-    put_unicast_responses_to_multicast_broadcast_disabled : Proc(INetFwPolicy2*, NET_FW_PROFILE_TYPE2, Int16, HRESULT)
-    get_rules : Proc(INetFwPolicy2*, INetFwRules*, HRESULT)
-    get_service_restriction : Proc(INetFwPolicy2*, INetFwServiceRestriction*, HRESULT)
-    enable_rule_group : Proc(INetFwPolicy2*, Int32, UInt8*, Int16, HRESULT)
-    is_rule_group_enabled : Proc(INetFwPolicy2*, Int32, UInt8*, Int16*, HRESULT)
-    restore_local_firewall_defaults : Proc(INetFwPolicy2*, HRESULT)
-    get_default_inbound_action : Proc(INetFwPolicy2*, NET_FW_PROFILE_TYPE2, NET_FW_ACTION*, HRESULT)
-    put_default_inbound_action : Proc(INetFwPolicy2*, NET_FW_PROFILE_TYPE2, NET_FW_ACTION, HRESULT)
-    get_default_outbound_action : Proc(INetFwPolicy2*, NET_FW_PROFILE_TYPE2, NET_FW_ACTION*, HRESULT)
-    put_default_outbound_action : Proc(INetFwPolicy2*, NET_FW_PROFILE_TYPE2, NET_FW_ACTION, HRESULT)
-    get_is_rule_group_currently_enabled : Proc(INetFwPolicy2*, UInt8*, Int16*, HRESULT)
-    get_local_policy_modify_state : Proc(INetFwPolicy2*, NET_FW_MODIFY_STATE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_current_profile_types : UInt64
+    get_firewall_enabled : UInt64
+    put_firewall_enabled : UInt64
+    get_excluded_interfaces : UInt64
+    put_excluded_interfaces : UInt64
+    get_block_all_inbound_traffic : UInt64
+    put_block_all_inbound_traffic : UInt64
+    get_notifications_disabled : UInt64
+    put_notifications_disabled : UInt64
+    get_unicast_responses_to_multicast_broadcast_disabled : UInt64
+    put_unicast_responses_to_multicast_broadcast_disabled : UInt64
+    get_rules : UInt64
+    get_service_restriction : UInt64
+    enable_rule_group : UInt64
+    is_rule_group_enabled : UInt64
+    restore_local_firewall_defaults : UInt64
+    get_default_inbound_action : UInt64
+    put_default_inbound_action : UInt64
+    get_default_outbound_action : UInt64
+    put_default_outbound_action : UInt64
+    get_is_rule_group_currently_enabled : UInt64
+    get_local_policy_modify_state : UInt64
   end
 
   INetFwPolicy2_GUID = "98325047-c671-4174-8d81-defcd3f03186"
@@ -1297,18 +1297,18 @@ lib LibWin32
   end
 
   struct INetFwMgrVTbl
-    query_interface : Proc(INetFwMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwMgr*, UInt32)
-    release : Proc(INetFwMgr*, UInt32)
-    get_type_info_count : Proc(INetFwMgr*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwMgr*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwMgr*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwMgr*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_local_policy : Proc(INetFwMgr*, INetFwPolicy*, HRESULT)
-    get_current_profile_type : Proc(INetFwMgr*, NET_FW_PROFILE_TYPE*, HRESULT)
-    restore_defaults : Proc(INetFwMgr*, HRESULT)
-    is_port_allowed : Proc(INetFwMgr*, UInt8*, NET_FW_IP_VERSION, Int32, UInt8*, NET_FW_IP_PROTOCOL, VARIANT*, VARIANT*, HRESULT)
-    is_icmp_type_allowed : Proc(INetFwMgr*, NET_FW_IP_VERSION, UInt8*, UInt8, VARIANT*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_local_policy : UInt64
+    get_current_profile_type : UInt64
+    restore_defaults : UInt64
+    is_port_allowed : UInt64
+    is_icmp_type_allowed : UInt64
   end
 
   INetFwMgr_GUID = "f7898af5-cac4-4632-a2ec-da06e5111af2"
@@ -1318,18 +1318,18 @@ lib LibWin32
   end
 
   struct INetFwProductVTbl
-    query_interface : Proc(INetFwProduct*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwProduct*, UInt32)
-    release : Proc(INetFwProduct*, UInt32)
-    get_type_info_count : Proc(INetFwProduct*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwProduct*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwProduct*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwProduct*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_rule_categories : Proc(INetFwProduct*, VARIANT*, HRESULT)
-    put_rule_categories : Proc(INetFwProduct*, VARIANT, HRESULT)
-    get_display_name : Proc(INetFwProduct*, UInt8**, HRESULT)
-    put_display_name : Proc(INetFwProduct*, UInt8*, HRESULT)
-    get_path_to_signed_product_exe : Proc(INetFwProduct*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_rule_categories : UInt64
+    put_rule_categories : UInt64
+    get_display_name : UInt64
+    put_display_name : UInt64
+    get_path_to_signed_product_exe : UInt64
   end
 
   INetFwProduct_GUID = "71881699-18f4-458b-b892-3ffce5e07f75"
@@ -1339,17 +1339,17 @@ lib LibWin32
   end
 
   struct INetFwProductsVTbl
-    query_interface : Proc(INetFwProducts*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetFwProducts*, UInt32)
-    release : Proc(INetFwProducts*, UInt32)
-    get_type_info_count : Proc(INetFwProducts*, UInt32*, HRESULT)
-    get_type_info : Proc(INetFwProducts*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetFwProducts*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetFwProducts*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(INetFwProducts*, Int32*, HRESULT)
-    register : Proc(INetFwProducts*, INetFwProduct, IUnknown*, HRESULT)
-    item : Proc(INetFwProducts*, Int32, INetFwProduct*, HRESULT)
-    get__new_enum : Proc(INetFwProducts*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    register : UInt64
+    item : UInt64
+    get__new_enum : UInt64
   end
 
   INetFwProducts_GUID = "39eb36e0-2097-40bd-8af2-63a13b525362"
@@ -1382,4 +1382,2033 @@ lib LibWin32
 
   # Params # wszservername : LibC::LPWSTR [In],netisoerror : NETISO_ERROR_TYPE* [In]
   fun NetworkIsolationDiagnoseConnectFailureAndGetInfo(wszservername : LibC::LPWSTR, netisoerror : NETISO_ERROR_TYPE*) : UInt32
+end
+struct LibWin32::IUPnPNAT
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_static_port_mapping_collection(ppspms : IStaticPortMappingCollection*) : HRESULT
+    @lpVtbl.value.get_static_port_mapping_collection.unsafe_as(Proc(IStaticPortMappingCollection*, HRESULT)).call(ppspms)
+  end
+  def get_dynamic_port_mapping_collection(ppdpms : IDynamicPortMappingCollection*) : HRESULT
+    @lpVtbl.value.get_dynamic_port_mapping_collection.unsafe_as(Proc(IDynamicPortMappingCollection*, HRESULT)).call(ppdpms)
+  end
+  def get_nat_event_manager(ppnem : INATEventManager*) : HRESULT
+    @lpVtbl.value.get_nat_event_manager.unsafe_as(Proc(INATEventManager*, HRESULT)).call(ppnem)
+  end
+end
+struct LibWin32::INATEventManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def put_external_ip_address_callback(punk : IUnknown) : HRESULT
+    @lpVtbl.value.put_external_ip_address_callback.unsafe_as(Proc(IUnknown, HRESULT)).call(punk)
+  end
+  def put_number_of_entries_callback(punk : IUnknown) : HRESULT
+    @lpVtbl.value.put_number_of_entries_callback.unsafe_as(Proc(IUnknown, HRESULT)).call(punk)
+  end
+end
+struct LibWin32::INATExternalIPAddressCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def new_external_ip_address(bstrnewexternalipaddress : UInt8*) : HRESULT
+    @lpVtbl.value.new_external_ip_address.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrnewexternalipaddress)
+  end
+end
+struct LibWin32::INATNumberOfEntriesCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def new_number_of_entries(lnewnumberofentries : Int32) : HRESULT
+    @lpVtbl.value.new_number_of_entries.unsafe_as(Proc(Int32, HRESULT)).call(lnewnumberofentries)
+  end
+end
+struct LibWin32::IDynamicPortMappingCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(pval)
+  end
+  def get_item(bstrremotehost : UInt8*, lexternalport : Int32, bstrprotocol : UInt8*, ppdpm : IDynamicPortMapping*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(UInt8*, Int32, UInt8*, IDynamicPortMapping*, HRESULT)).call(bstrremotehost, lexternalport, bstrprotocol, ppdpm)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def remove(bstrremotehost : UInt8*, lexternalport : Int32, bstrprotocol : UInt8*) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(UInt8*, Int32, UInt8*, HRESULT)).call(bstrremotehost, lexternalport, bstrprotocol)
+  end
+  def add(bstrremotehost : UInt8*, lexternalport : Int32, bstrprotocol : UInt8*, linternalport : Int32, bstrinternalclient : UInt8*, benabled : Int16, bstrdescription : UInt8*, lleaseduration : Int32, ppdpm : IDynamicPortMapping*) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(UInt8*, Int32, UInt8*, Int32, UInt8*, Int16, UInt8*, Int32, IDynamicPortMapping*, HRESULT)).call(bstrremotehost, lexternalport, bstrprotocol, linternalport, bstrinternalclient, benabled, bstrdescription, lleaseduration, ppdpm)
+  end
+end
+struct LibWin32::IDynamicPortMapping
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_external_ip_address(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_external_ip_address.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_remote_host(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_host.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_external_port(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_external_port.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_protocol(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_protocol.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_internal_port(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_internal_port.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_internal_client(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_internal_client.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_enabled(pval : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pval)
+  end
+  def get_description(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_lease_duration(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_lease_duration.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def renew_lease(lleasedurationdesired : Int32, pleasedurationreturned : Int32*) : HRESULT
+    @lpVtbl.value.renew_lease.unsafe_as(Proc(Int32, Int32*, HRESULT)).call(lleasedurationdesired, pleasedurationreturned)
+  end
+  def edit_internal_client(bstrinternalclient : UInt8*) : HRESULT
+    @lpVtbl.value.edit_internal_client.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrinternalclient)
+  end
+  def enable(vb : Int16) : HRESULT
+    @lpVtbl.value.enable.unsafe_as(Proc(Int16, HRESULT)).call(vb)
+  end
+  def edit_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.edit_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def edit_internal_port(linternalport : Int32) : HRESULT
+    @lpVtbl.value.edit_internal_port.unsafe_as(Proc(Int32, HRESULT)).call(linternalport)
+  end
+end
+struct LibWin32::IStaticPortMappingCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(pval)
+  end
+  def get_item(lexternalport : Int32, bstrprotocol : UInt8*, ppspm : IStaticPortMapping*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, UInt8*, IStaticPortMapping*, HRESULT)).call(lexternalport, bstrprotocol, ppspm)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def remove(lexternalport : Int32, bstrprotocol : UInt8*) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(lexternalport, bstrprotocol)
+  end
+  def add(lexternalport : Int32, bstrprotocol : UInt8*, linternalport : Int32, bstrinternalclient : UInt8*, benabled : Int16, bstrdescription : UInt8*, ppspm : IStaticPortMapping*) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(Int32, UInt8*, Int32, UInt8*, Int16, UInt8*, IStaticPortMapping*, HRESULT)).call(lexternalport, bstrprotocol, linternalport, bstrinternalclient, benabled, bstrdescription, ppspm)
+  end
+end
+struct LibWin32::IStaticPortMapping
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_external_ip_address(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_external_ip_address.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_external_port(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_external_port.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_internal_port(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_internal_port.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_protocol(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_protocol.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_internal_client(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_internal_client.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_enabled(pval : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pval)
+  end
+  def get_description(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def edit_internal_client(bstrinternalclient : UInt8*) : HRESULT
+    @lpVtbl.value.edit_internal_client.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrinternalclient)
+  end
+  def enable(vb : Int16) : HRESULT
+    @lpVtbl.value.enable.unsafe_as(Proc(Int16, HRESULT)).call(vb)
+  end
+  def edit_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.edit_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def edit_internal_port(linternalport : Int32) : HRESULT
+    @lpVtbl.value.edit_internal_port.unsafe_as(Proc(Int32, HRESULT)).call(linternalport)
+  end
+end
+struct LibWin32::IEnumNetConnection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : INetConnection*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, INetConnection*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumNetConnection*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumNetConnection*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::INetConnection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def connect : HRESULT
+    @lpVtbl.value.connect.unsafe_as(Proc(HRESULT)).call
+  end
+  def disconnect : HRESULT
+    @lpVtbl.value.disconnect.unsafe_as(Proc(HRESULT)).call
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+  def duplicate(pszwduplicatename : LibC::LPWSTR, ppcon : INetConnection*) : HRESULT
+    @lpVtbl.value.duplicate.unsafe_as(Proc(LibC::LPWSTR, INetConnection*, HRESULT)).call(pszwduplicatename, ppcon)
+  end
+  def get_properties(ppprops : NETCON_PROPERTIES**) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(NETCON_PROPERTIES**, HRESULT)).call(ppprops)
+  end
+  def get_ui_object_class_id(pclsid : Guid*) : HRESULT
+    @lpVtbl.value.get_ui_object_class_id.unsafe_as(Proc(Guid*, HRESULT)).call(pclsid)
+  end
+  def rename(pszwnewname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.rename.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszwnewname)
+  end
+end
+struct LibWin32::INetConnectionManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enum_connections(flags : NETCONMGR_ENUM_FLAGS, ppenum : IEnumNetConnection*) : HRESULT
+    @lpVtbl.value.enum_connections.unsafe_as(Proc(NETCONMGR_ENUM_FLAGS, IEnumNetConnection*, HRESULT)).call(flags, ppenum)
+  end
+end
+struct LibWin32::INetConnectionConnectUi
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_connection(pcon : INetConnection) : HRESULT
+    @lpVtbl.value.set_connection.unsafe_as(Proc(INetConnection, HRESULT)).call(pcon)
+  end
+  def connect(hwndparent : LibC::HANDLE, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.connect.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(hwndparent, dwflags)
+  end
+  def disconnect(hwndparent : LibC::HANDLE, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.disconnect.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(hwndparent, dwflags)
+  end
+end
+struct LibWin32::IEnumNetSharingPortMapping
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgvar : VARIANT*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, VARIANT*, UInt32*, HRESULT)).call(celt, rgvar, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumNetSharingPortMapping*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumNetSharingPortMapping*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::INetSharingPortMappingProps
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def get_ip_protocol(pucipprot : UInt8*) : HRESULT
+    @lpVtbl.value.get_ip_protocol.unsafe_as(Proc(UInt8*, HRESULT)).call(pucipprot)
+  end
+  def get_external_port(pusport : Int32*) : HRESULT
+    @lpVtbl.value.get_external_port.unsafe_as(Proc(Int32*, HRESULT)).call(pusport)
+  end
+  def get_internal_port(pusport : Int32*) : HRESULT
+    @lpVtbl.value.get_internal_port.unsafe_as(Proc(Int32*, HRESULT)).call(pusport)
+  end
+  def get_options(pdwoptions : Int32*) : HRESULT
+    @lpVtbl.value.get_options.unsafe_as(Proc(Int32*, HRESULT)).call(pdwoptions)
+  end
+  def get_target_name(pbstrtargetname : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtargetname)
+  end
+  def get_target_ip_address(pbstrtargetipaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_ip_address.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtargetipaddress)
+  end
+  def get_enabled(pbool : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pbool)
+  end
+end
+struct LibWin32::INetSharingPortMapping
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def disable : HRESULT
+    @lpVtbl.value.disable.unsafe_as(Proc(HRESULT)).call
+  end
+  def enable : HRESULT
+    @lpVtbl.value.enable.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_properties(ppnspmp : INetSharingPortMappingProps*) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(INetSharingPortMappingProps*, HRESULT)).call(ppnspmp)
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IEnumNetSharingEveryConnection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgvar : VARIANT*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, VARIANT*, UInt32*, HRESULT)).call(celt, rgvar, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumNetSharingEveryConnection*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumNetSharingEveryConnection*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumNetSharingPublicConnection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgvar : VARIANT*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, VARIANT*, UInt32*, HRESULT)).call(celt, rgvar, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumNetSharingPublicConnection*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumNetSharingPublicConnection*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumNetSharingPrivateConnection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgvar : VARIANT*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, VARIANT*, UInt32*, HRESULT)).call(celt, rgvar, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumNetSharingPrivateConnection*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumNetSharingPrivateConnection*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::INetSharingPortMappingCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(pval)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::INetConnectionProps
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_guid(pbstrguid : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguid)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def get_device_name(pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdevicename)
+  end
+  def get_status(pstatus : NETCON_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(NETCON_STATUS*, HRESULT)).call(pstatus)
+  end
+  def get_media_type(pmediatype : NETCON_MEDIATYPE*) : HRESULT
+    @lpVtbl.value.get_media_type.unsafe_as(Proc(NETCON_MEDIATYPE*, HRESULT)).call(pmediatype)
+  end
+  def get_characteristics(pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_characteristics.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwflags)
+  end
+end
+struct LibWin32::INetSharingConfiguration
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_sharing_enabled(pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_sharing_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pbenabled)
+  end
+  def get_sharing_connection_type(ptype : SHARINGCONNECTIONTYPE*) : HRESULT
+    @lpVtbl.value.get_sharing_connection_type.unsafe_as(Proc(SHARINGCONNECTIONTYPE*, HRESULT)).call(ptype)
+  end
+  def disable_sharing : HRESULT
+    @lpVtbl.value.disable_sharing.unsafe_as(Proc(HRESULT)).call
+  end
+  def enable_sharing(type : SHARINGCONNECTIONTYPE) : HRESULT
+    @lpVtbl.value.enable_sharing.unsafe_as(Proc(SHARINGCONNECTIONTYPE, HRESULT)).call(type)
+  end
+  def get_internet_firewall_enabled(pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_internet_firewall_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pbenabled)
+  end
+  def disable_internet_firewall : HRESULT
+    @lpVtbl.value.disable_internet_firewall.unsafe_as(Proc(HRESULT)).call
+  end
+  def enable_internet_firewall : HRESULT
+    @lpVtbl.value.enable_internet_firewall.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_enum_port_mappings(flags : SHARINGCONNECTION_ENUM_FLAGS, ppcoll : INetSharingPortMappingCollection*) : HRESULT
+    @lpVtbl.value.get_enum_port_mappings.unsafe_as(Proc(SHARINGCONNECTION_ENUM_FLAGS, INetSharingPortMappingCollection*, HRESULT)).call(flags, ppcoll)
+  end
+  def add_port_mapping(bstrname : UInt8*, ucipprotocol : UInt8, usexternalport : UInt16, usinternalport : UInt16, dwoptions : UInt32, bstrtargetnameoripaddress : UInt8*, etargettype : ICS_TARGETTYPE, ppmapping : INetSharingPortMapping*) : HRESULT
+    @lpVtbl.value.add_port_mapping.unsafe_as(Proc(UInt8*, UInt8, UInt16, UInt16, UInt32, UInt8*, ICS_TARGETTYPE, INetSharingPortMapping*, HRESULT)).call(bstrname, ucipprotocol, usexternalport, usinternalport, dwoptions, bstrtargetnameoripaddress, etargettype, ppmapping)
+  end
+  def remove_port_mapping(pmapping : INetSharingPortMapping) : HRESULT
+    @lpVtbl.value.remove_port_mapping.unsafe_as(Proc(INetSharingPortMapping, HRESULT)).call(pmapping)
+  end
+end
+struct LibWin32::INetSharingEveryConnectionCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(pval)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::INetSharingPublicConnectionCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(pval)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::INetSharingPrivateConnectionCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(pval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(pval)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::INetSharingManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_sharing_installed(pbinstalled : Int16*) : HRESULT
+    @lpVtbl.value.get_sharing_installed.unsafe_as(Proc(Int16*, HRESULT)).call(pbinstalled)
+  end
+  def get_enum_public_connections(flags : SHARINGCONNECTION_ENUM_FLAGS, ppcoll : INetSharingPublicConnectionCollection*) : HRESULT
+    @lpVtbl.value.get_enum_public_connections.unsafe_as(Proc(SHARINGCONNECTION_ENUM_FLAGS, INetSharingPublicConnectionCollection*, HRESULT)).call(flags, ppcoll)
+  end
+  def get_enum_private_connections(flags : SHARINGCONNECTION_ENUM_FLAGS, ppcoll : INetSharingPrivateConnectionCollection*) : HRESULT
+    @lpVtbl.value.get_enum_private_connections.unsafe_as(Proc(SHARINGCONNECTION_ENUM_FLAGS, INetSharingPrivateConnectionCollection*, HRESULT)).call(flags, ppcoll)
+  end
+  def get_i_net_sharing_configuration_for_i_net_connection(pnetconnection : INetConnection, ppnetsharingconfiguration : INetSharingConfiguration*) : HRESULT
+    @lpVtbl.value.get_i_net_sharing_configuration_for_i_net_connection.unsafe_as(Proc(INetConnection, INetSharingConfiguration*, HRESULT)).call(pnetconnection, ppnetsharingconfiguration)
+  end
+  def get_enum_every_connection(ppcoll : INetSharingEveryConnectionCollection*) : HRESULT
+    @lpVtbl.value.get_enum_every_connection.unsafe_as(Proc(INetSharingEveryConnectionCollection*, HRESULT)).call(ppcoll)
+  end
+  def get_net_connection_props(pnetconnection : INetConnection, ppprops : INetConnectionProps*) : HRESULT
+    @lpVtbl.value.get_net_connection_props.unsafe_as(Proc(INetConnection, INetConnectionProps*, HRESULT)).call(pnetconnection, ppprops)
+  end
+end
+struct LibWin32::INetFwRemoteAdminSettings
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_ip_version(ipversion : NET_FW_IP_VERSION*) : HRESULT
+    @lpVtbl.value.get_ip_version.unsafe_as(Proc(NET_FW_IP_VERSION*, HRESULT)).call(ipversion)
+  end
+  def put_ip_version(ipversion : NET_FW_IP_VERSION) : HRESULT
+    @lpVtbl.value.put_ip_version.unsafe_as(Proc(NET_FW_IP_VERSION, HRESULT)).call(ipversion)
+  end
+  def get_scope(scope : NET_FW_SCOPE*) : HRESULT
+    @lpVtbl.value.get_scope.unsafe_as(Proc(NET_FW_SCOPE*, HRESULT)).call(scope)
+  end
+  def put_scope(scope : NET_FW_SCOPE) : HRESULT
+    @lpVtbl.value.put_scope.unsafe_as(Proc(NET_FW_SCOPE, HRESULT)).call(scope)
+  end
+  def get_remote_addresses(remoteaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_addresses.unsafe_as(Proc(UInt8**, HRESULT)).call(remoteaddrs)
+  end
+  def put_remote_addresses(remoteaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_addresses.unsafe_as(Proc(UInt8*, HRESULT)).call(remoteaddrs)
+  end
+  def get_enabled(enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(enabled)
+  end
+  def put_enabled(enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.unsafe_as(Proc(Int16, HRESULT)).call(enabled)
+  end
+end
+struct LibWin32::INetFwIcmpSettings
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_allow_outbound_destination_unreachable(allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_outbound_destination_unreachable.unsafe_as(Proc(Int16*, HRESULT)).call(allow)
+  end
+  def put_allow_outbound_destination_unreachable(allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_outbound_destination_unreachable.unsafe_as(Proc(Int16, HRESULT)).call(allow)
+  end
+  def get_allow_redirect(allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_redirect.unsafe_as(Proc(Int16*, HRESULT)).call(allow)
+  end
+  def put_allow_redirect(allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_redirect.unsafe_as(Proc(Int16, HRESULT)).call(allow)
+  end
+  def get_allow_inbound_echo_request(allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_inbound_echo_request.unsafe_as(Proc(Int16*, HRESULT)).call(allow)
+  end
+  def put_allow_inbound_echo_request(allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_inbound_echo_request.unsafe_as(Proc(Int16, HRESULT)).call(allow)
+  end
+  def get_allow_outbound_time_exceeded(allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_outbound_time_exceeded.unsafe_as(Proc(Int16*, HRESULT)).call(allow)
+  end
+  def put_allow_outbound_time_exceeded(allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_outbound_time_exceeded.unsafe_as(Proc(Int16, HRESULT)).call(allow)
+  end
+  def get_allow_outbound_parameter_problem(allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_outbound_parameter_problem.unsafe_as(Proc(Int16*, HRESULT)).call(allow)
+  end
+  def put_allow_outbound_parameter_problem(allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_outbound_parameter_problem.unsafe_as(Proc(Int16, HRESULT)).call(allow)
+  end
+  def get_allow_outbound_source_quench(allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_outbound_source_quench.unsafe_as(Proc(Int16*, HRESULT)).call(allow)
+  end
+  def put_allow_outbound_source_quench(allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_outbound_source_quench.unsafe_as(Proc(Int16, HRESULT)).call(allow)
+  end
+  def get_allow_inbound_router_request(allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_inbound_router_request.unsafe_as(Proc(Int16*, HRESULT)).call(allow)
+  end
+  def put_allow_inbound_router_request(allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_inbound_router_request.unsafe_as(Proc(Int16, HRESULT)).call(allow)
+  end
+  def get_allow_inbound_timestamp_request(allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_inbound_timestamp_request.unsafe_as(Proc(Int16*, HRESULT)).call(allow)
+  end
+  def put_allow_inbound_timestamp_request(allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_inbound_timestamp_request.unsafe_as(Proc(Int16, HRESULT)).call(allow)
+  end
+  def get_allow_inbound_mask_request(allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_inbound_mask_request.unsafe_as(Proc(Int16*, HRESULT)).call(allow)
+  end
+  def put_allow_inbound_mask_request(allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_inbound_mask_request.unsafe_as(Proc(Int16, HRESULT)).call(allow)
+  end
+  def get_allow_outbound_packet_too_big(allow : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_outbound_packet_too_big.unsafe_as(Proc(Int16*, HRESULT)).call(allow)
+  end
+  def put_allow_outbound_packet_too_big(allow : Int16) : HRESULT
+    @lpVtbl.value.put_allow_outbound_packet_too_big.unsafe_as(Proc(Int16, HRESULT)).call(allow)
+  end
+end
+struct LibWin32::INetFwOpenPort
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  end
+  def put_name(name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(name)
+  end
+  def get_ip_version(ipversion : NET_FW_IP_VERSION*) : HRESULT
+    @lpVtbl.value.get_ip_version.unsafe_as(Proc(NET_FW_IP_VERSION*, HRESULT)).call(ipversion)
+  end
+  def put_ip_version(ipversion : NET_FW_IP_VERSION) : HRESULT
+    @lpVtbl.value.put_ip_version.unsafe_as(Proc(NET_FW_IP_VERSION, HRESULT)).call(ipversion)
+  end
+  def get_protocol(ipprotocol : NET_FW_IP_PROTOCOL*) : HRESULT
+    @lpVtbl.value.get_protocol.unsafe_as(Proc(NET_FW_IP_PROTOCOL*, HRESULT)).call(ipprotocol)
+  end
+  def put_protocol(ipprotocol : NET_FW_IP_PROTOCOL) : HRESULT
+    @lpVtbl.value.put_protocol.unsafe_as(Proc(NET_FW_IP_PROTOCOL, HRESULT)).call(ipprotocol)
+  end
+  def get_port(portnumber : Int32*) : HRESULT
+    @lpVtbl.value.get_port.unsafe_as(Proc(Int32*, HRESULT)).call(portnumber)
+  end
+  def put_port(portnumber : Int32) : HRESULT
+    @lpVtbl.value.put_port.unsafe_as(Proc(Int32, HRESULT)).call(portnumber)
+  end
+  def get_scope(scope : NET_FW_SCOPE*) : HRESULT
+    @lpVtbl.value.get_scope.unsafe_as(Proc(NET_FW_SCOPE*, HRESULT)).call(scope)
+  end
+  def put_scope(scope : NET_FW_SCOPE) : HRESULT
+    @lpVtbl.value.put_scope.unsafe_as(Proc(NET_FW_SCOPE, HRESULT)).call(scope)
+  end
+  def get_remote_addresses(remoteaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_addresses.unsafe_as(Proc(UInt8**, HRESULT)).call(remoteaddrs)
+  end
+  def put_remote_addresses(remoteaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_addresses.unsafe_as(Proc(UInt8*, HRESULT)).call(remoteaddrs)
+  end
+  def get_enabled(enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(enabled)
+  end
+  def put_enabled(enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.unsafe_as(Proc(Int16, HRESULT)).call(enabled)
+  end
+  def get_built_in(builtin : Int16*) : HRESULT
+    @lpVtbl.value.get_built_in.unsafe_as(Proc(Int16*, HRESULT)).call(builtin)
+  end
+end
+struct LibWin32::INetFwOpenPorts
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  end
+  def add(port : INetFwOpenPort) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(INetFwOpenPort, HRESULT)).call(port)
+  end
+  def remove(portnumber : Int32, ipprotocol : NET_FW_IP_PROTOCOL) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(Int32, NET_FW_IP_PROTOCOL, HRESULT)).call(portnumber, ipprotocol)
+  end
+  def item(portnumber : Int32, ipprotocol : NET_FW_IP_PROTOCOL, openport : INetFwOpenPort*) : HRESULT
+    @lpVtbl.value.item.unsafe_as(Proc(Int32, NET_FW_IP_PROTOCOL, INetFwOpenPort*, HRESULT)).call(portnumber, ipprotocol, openport)
+  end
+  def get__new_enum(newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(newenum)
+  end
+end
+struct LibWin32::INetFwService
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  end
+  def get_type(type : NET_FW_SERVICE_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(NET_FW_SERVICE_TYPE*, HRESULT)).call(type)
+  end
+  def get_customized(customized : Int16*) : HRESULT
+    @lpVtbl.value.get_customized.unsafe_as(Proc(Int16*, HRESULT)).call(customized)
+  end
+  def get_ip_version(ipversion : NET_FW_IP_VERSION*) : HRESULT
+    @lpVtbl.value.get_ip_version.unsafe_as(Proc(NET_FW_IP_VERSION*, HRESULT)).call(ipversion)
+  end
+  def put_ip_version(ipversion : NET_FW_IP_VERSION) : HRESULT
+    @lpVtbl.value.put_ip_version.unsafe_as(Proc(NET_FW_IP_VERSION, HRESULT)).call(ipversion)
+  end
+  def get_scope(scope : NET_FW_SCOPE*) : HRESULT
+    @lpVtbl.value.get_scope.unsafe_as(Proc(NET_FW_SCOPE*, HRESULT)).call(scope)
+  end
+  def put_scope(scope : NET_FW_SCOPE) : HRESULT
+    @lpVtbl.value.put_scope.unsafe_as(Proc(NET_FW_SCOPE, HRESULT)).call(scope)
+  end
+  def get_remote_addresses(remoteaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_addresses.unsafe_as(Proc(UInt8**, HRESULT)).call(remoteaddrs)
+  end
+  def put_remote_addresses(remoteaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_addresses.unsafe_as(Proc(UInt8*, HRESULT)).call(remoteaddrs)
+  end
+  def get_enabled(enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(enabled)
+  end
+  def put_enabled(enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.unsafe_as(Proc(Int16, HRESULT)).call(enabled)
+  end
+  def get_globally_open_ports(openports : INetFwOpenPorts*) : HRESULT
+    @lpVtbl.value.get_globally_open_ports.unsafe_as(Proc(INetFwOpenPorts*, HRESULT)).call(openports)
+  end
+end
+struct LibWin32::INetFwServices
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  end
+  def item(svctype : NET_FW_SERVICE_TYPE, service : INetFwService*) : HRESULT
+    @lpVtbl.value.item.unsafe_as(Proc(NET_FW_SERVICE_TYPE, INetFwService*, HRESULT)).call(svctype, service)
+  end
+  def get__new_enum(newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(newenum)
+  end
+end
+struct LibWin32::INetFwAuthorizedApplication
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  end
+  def put_name(name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(name)
+  end
+  def get_process_image_file_name(imagefilename : UInt8**) : HRESULT
+    @lpVtbl.value.get_process_image_file_name.unsafe_as(Proc(UInt8**, HRESULT)).call(imagefilename)
+  end
+  def put_process_image_file_name(imagefilename : UInt8*) : HRESULT
+    @lpVtbl.value.put_process_image_file_name.unsafe_as(Proc(UInt8*, HRESULT)).call(imagefilename)
+  end
+  def get_ip_version(ipversion : NET_FW_IP_VERSION*) : HRESULT
+    @lpVtbl.value.get_ip_version.unsafe_as(Proc(NET_FW_IP_VERSION*, HRESULT)).call(ipversion)
+  end
+  def put_ip_version(ipversion : NET_FW_IP_VERSION) : HRESULT
+    @lpVtbl.value.put_ip_version.unsafe_as(Proc(NET_FW_IP_VERSION, HRESULT)).call(ipversion)
+  end
+  def get_scope(scope : NET_FW_SCOPE*) : HRESULT
+    @lpVtbl.value.get_scope.unsafe_as(Proc(NET_FW_SCOPE*, HRESULT)).call(scope)
+  end
+  def put_scope(scope : NET_FW_SCOPE) : HRESULT
+    @lpVtbl.value.put_scope.unsafe_as(Proc(NET_FW_SCOPE, HRESULT)).call(scope)
+  end
+  def get_remote_addresses(remoteaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_addresses.unsafe_as(Proc(UInt8**, HRESULT)).call(remoteaddrs)
+  end
+  def put_remote_addresses(remoteaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_addresses.unsafe_as(Proc(UInt8*, HRESULT)).call(remoteaddrs)
+  end
+  def get_enabled(enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(enabled)
+  end
+  def put_enabled(enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.unsafe_as(Proc(Int16, HRESULT)).call(enabled)
+  end
+end
+struct LibWin32::INetFwAuthorizedApplications
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  end
+  def add(app : INetFwAuthorizedApplication) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(INetFwAuthorizedApplication, HRESULT)).call(app)
+  end
+  def remove(imagefilename : UInt8*) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(UInt8*, HRESULT)).call(imagefilename)
+  end
+  def item(imagefilename : UInt8*, app : INetFwAuthorizedApplication*) : HRESULT
+    @lpVtbl.value.item.unsafe_as(Proc(UInt8*, INetFwAuthorizedApplication*, HRESULT)).call(imagefilename, app)
+  end
+  def get__new_enum(newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(newenum)
+  end
+end
+struct LibWin32::INetFwRule
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  end
+  def put_name(name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(name)
+  end
+  def get_description(desc : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(desc)
+  end
+  def put_description(desc : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(desc)
+  end
+  def get_application_name(imagefilename : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_name.unsafe_as(Proc(UInt8**, HRESULT)).call(imagefilename)
+  end
+  def put_application_name(imagefilename : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_name.unsafe_as(Proc(UInt8*, HRESULT)).call(imagefilename)
+  end
+  def get_service_name(servicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_name.unsafe_as(Proc(UInt8**, HRESULT)).call(servicename)
+  end
+  def put_service_name(servicename : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_name.unsafe_as(Proc(UInt8*, HRESULT)).call(servicename)
+  end
+  def get_protocol(protocol : Int32*) : HRESULT
+    @lpVtbl.value.get_protocol.unsafe_as(Proc(Int32*, HRESULT)).call(protocol)
+  end
+  def put_protocol(protocol : Int32) : HRESULT
+    @lpVtbl.value.put_protocol.unsafe_as(Proc(Int32, HRESULT)).call(protocol)
+  end
+  def get_local_ports(portnumbers : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_ports.unsafe_as(Proc(UInt8**, HRESULT)).call(portnumbers)
+  end
+  def put_local_ports(portnumbers : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_ports.unsafe_as(Proc(UInt8*, HRESULT)).call(portnumbers)
+  end
+  def get_remote_ports(portnumbers : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_ports.unsafe_as(Proc(UInt8**, HRESULT)).call(portnumbers)
+  end
+  def put_remote_ports(portnumbers : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_ports.unsafe_as(Proc(UInt8*, HRESULT)).call(portnumbers)
+  end
+  def get_local_addresses(localaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_addresses.unsafe_as(Proc(UInt8**, HRESULT)).call(localaddrs)
+  end
+  def put_local_addresses(localaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_addresses.unsafe_as(Proc(UInt8*, HRESULT)).call(localaddrs)
+  end
+  def get_remote_addresses(remoteaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_addresses.unsafe_as(Proc(UInt8**, HRESULT)).call(remoteaddrs)
+  end
+  def put_remote_addresses(remoteaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_addresses.unsafe_as(Proc(UInt8*, HRESULT)).call(remoteaddrs)
+  end
+  def get_icmp_types_and_codes(icmptypesandcodes : UInt8**) : HRESULT
+    @lpVtbl.value.get_icmp_types_and_codes.unsafe_as(Proc(UInt8**, HRESULT)).call(icmptypesandcodes)
+  end
+  def put_icmp_types_and_codes(icmptypesandcodes : UInt8*) : HRESULT
+    @lpVtbl.value.put_icmp_types_and_codes.unsafe_as(Proc(UInt8*, HRESULT)).call(icmptypesandcodes)
+  end
+  def get_direction(dir : NET_FW_RULE_DIRECTION*) : HRESULT
+    @lpVtbl.value.get_direction.unsafe_as(Proc(NET_FW_RULE_DIRECTION*, HRESULT)).call(dir)
+  end
+  def put_direction(dir : NET_FW_RULE_DIRECTION) : HRESULT
+    @lpVtbl.value.put_direction.unsafe_as(Proc(NET_FW_RULE_DIRECTION, HRESULT)).call(dir)
+  end
+  def get_interfaces(interfaces : VARIANT*) : HRESULT
+    @lpVtbl.value.get_interfaces.unsafe_as(Proc(VARIANT*, HRESULT)).call(interfaces)
+  end
+  def put_interfaces(interfaces : VARIANT) : HRESULT
+    @lpVtbl.value.put_interfaces.unsafe_as(Proc(VARIANT, HRESULT)).call(interfaces)
+  end
+  def get_interface_types(interfacetypes : UInt8**) : HRESULT
+    @lpVtbl.value.get_interface_types.unsafe_as(Proc(UInt8**, HRESULT)).call(interfacetypes)
+  end
+  def put_interface_types(interfacetypes : UInt8*) : HRESULT
+    @lpVtbl.value.put_interface_types.unsafe_as(Proc(UInt8*, HRESULT)).call(interfacetypes)
+  end
+  def get_enabled(enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(enabled)
+  end
+  def put_enabled(enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.unsafe_as(Proc(Int16, HRESULT)).call(enabled)
+  end
+  def get_grouping(context : UInt8**) : HRESULT
+    @lpVtbl.value.get_grouping.unsafe_as(Proc(UInt8**, HRESULT)).call(context)
+  end
+  def put_grouping(context : UInt8*) : HRESULT
+    @lpVtbl.value.put_grouping.unsafe_as(Proc(UInt8*, HRESULT)).call(context)
+  end
+  def get_profiles(profiletypesbitmask : Int32*) : HRESULT
+    @lpVtbl.value.get_profiles.unsafe_as(Proc(Int32*, HRESULT)).call(profiletypesbitmask)
+  end
+  def put_profiles(profiletypesbitmask : Int32) : HRESULT
+    @lpVtbl.value.put_profiles.unsafe_as(Proc(Int32, HRESULT)).call(profiletypesbitmask)
+  end
+  def get_edge_traversal(enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_edge_traversal.unsafe_as(Proc(Int16*, HRESULT)).call(enabled)
+  end
+  def put_edge_traversal(enabled : Int16) : HRESULT
+    @lpVtbl.value.put_edge_traversal.unsafe_as(Proc(Int16, HRESULT)).call(enabled)
+  end
+  def get_action(action : NET_FW_ACTION*) : HRESULT
+    @lpVtbl.value.get_action.unsafe_as(Proc(NET_FW_ACTION*, HRESULT)).call(action)
+  end
+  def put_action(action : NET_FW_ACTION) : HRESULT
+    @lpVtbl.value.put_action.unsafe_as(Proc(NET_FW_ACTION, HRESULT)).call(action)
+  end
+end
+struct LibWin32::INetFwRule2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  end
+  def put_name(name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(name)
+  end
+  def get_description(desc : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(desc)
+  end
+  def put_description(desc : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(desc)
+  end
+  def get_application_name(imagefilename : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_name.unsafe_as(Proc(UInt8**, HRESULT)).call(imagefilename)
+  end
+  def put_application_name(imagefilename : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_name.unsafe_as(Proc(UInt8*, HRESULT)).call(imagefilename)
+  end
+  def get_service_name(servicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_name.unsafe_as(Proc(UInt8**, HRESULT)).call(servicename)
+  end
+  def put_service_name(servicename : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_name.unsafe_as(Proc(UInt8*, HRESULT)).call(servicename)
+  end
+  def get_protocol(protocol : Int32*) : HRESULT
+    @lpVtbl.value.get_protocol.unsafe_as(Proc(Int32*, HRESULT)).call(protocol)
+  end
+  def put_protocol(protocol : Int32) : HRESULT
+    @lpVtbl.value.put_protocol.unsafe_as(Proc(Int32, HRESULT)).call(protocol)
+  end
+  def get_local_ports(portnumbers : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_ports.unsafe_as(Proc(UInt8**, HRESULT)).call(portnumbers)
+  end
+  def put_local_ports(portnumbers : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_ports.unsafe_as(Proc(UInt8*, HRESULT)).call(portnumbers)
+  end
+  def get_remote_ports(portnumbers : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_ports.unsafe_as(Proc(UInt8**, HRESULT)).call(portnumbers)
+  end
+  def put_remote_ports(portnumbers : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_ports.unsafe_as(Proc(UInt8*, HRESULT)).call(portnumbers)
+  end
+  def get_local_addresses(localaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_addresses.unsafe_as(Proc(UInt8**, HRESULT)).call(localaddrs)
+  end
+  def put_local_addresses(localaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_addresses.unsafe_as(Proc(UInt8*, HRESULT)).call(localaddrs)
+  end
+  def get_remote_addresses(remoteaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_addresses.unsafe_as(Proc(UInt8**, HRESULT)).call(remoteaddrs)
+  end
+  def put_remote_addresses(remoteaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_addresses.unsafe_as(Proc(UInt8*, HRESULT)).call(remoteaddrs)
+  end
+  def get_icmp_types_and_codes(icmptypesandcodes : UInt8**) : HRESULT
+    @lpVtbl.value.get_icmp_types_and_codes.unsafe_as(Proc(UInt8**, HRESULT)).call(icmptypesandcodes)
+  end
+  def put_icmp_types_and_codes(icmptypesandcodes : UInt8*) : HRESULT
+    @lpVtbl.value.put_icmp_types_and_codes.unsafe_as(Proc(UInt8*, HRESULT)).call(icmptypesandcodes)
+  end
+  def get_direction(dir : NET_FW_RULE_DIRECTION*) : HRESULT
+    @lpVtbl.value.get_direction.unsafe_as(Proc(NET_FW_RULE_DIRECTION*, HRESULT)).call(dir)
+  end
+  def put_direction(dir : NET_FW_RULE_DIRECTION) : HRESULT
+    @lpVtbl.value.put_direction.unsafe_as(Proc(NET_FW_RULE_DIRECTION, HRESULT)).call(dir)
+  end
+  def get_interfaces(interfaces : VARIANT*) : HRESULT
+    @lpVtbl.value.get_interfaces.unsafe_as(Proc(VARIANT*, HRESULT)).call(interfaces)
+  end
+  def put_interfaces(interfaces : VARIANT) : HRESULT
+    @lpVtbl.value.put_interfaces.unsafe_as(Proc(VARIANT, HRESULT)).call(interfaces)
+  end
+  def get_interface_types(interfacetypes : UInt8**) : HRESULT
+    @lpVtbl.value.get_interface_types.unsafe_as(Proc(UInt8**, HRESULT)).call(interfacetypes)
+  end
+  def put_interface_types(interfacetypes : UInt8*) : HRESULT
+    @lpVtbl.value.put_interface_types.unsafe_as(Proc(UInt8*, HRESULT)).call(interfacetypes)
+  end
+  def get_enabled(enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(enabled)
+  end
+  def put_enabled(enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.unsafe_as(Proc(Int16, HRESULT)).call(enabled)
+  end
+  def get_grouping(context : UInt8**) : HRESULT
+    @lpVtbl.value.get_grouping.unsafe_as(Proc(UInt8**, HRESULT)).call(context)
+  end
+  def put_grouping(context : UInt8*) : HRESULT
+    @lpVtbl.value.put_grouping.unsafe_as(Proc(UInt8*, HRESULT)).call(context)
+  end
+  def get_profiles(profiletypesbitmask : Int32*) : HRESULT
+    @lpVtbl.value.get_profiles.unsafe_as(Proc(Int32*, HRESULT)).call(profiletypesbitmask)
+  end
+  def put_profiles(profiletypesbitmask : Int32) : HRESULT
+    @lpVtbl.value.put_profiles.unsafe_as(Proc(Int32, HRESULT)).call(profiletypesbitmask)
+  end
+  def get_edge_traversal(enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_edge_traversal.unsafe_as(Proc(Int16*, HRESULT)).call(enabled)
+  end
+  def put_edge_traversal(enabled : Int16) : HRESULT
+    @lpVtbl.value.put_edge_traversal.unsafe_as(Proc(Int16, HRESULT)).call(enabled)
+  end
+  def get_action(action : NET_FW_ACTION*) : HRESULT
+    @lpVtbl.value.get_action.unsafe_as(Proc(NET_FW_ACTION*, HRESULT)).call(action)
+  end
+  def put_action(action : NET_FW_ACTION) : HRESULT
+    @lpVtbl.value.put_action.unsafe_as(Proc(NET_FW_ACTION, HRESULT)).call(action)
+  end
+  def get_edge_traversal_options(loptions : Int32*) : HRESULT
+    @lpVtbl.value.get_edge_traversal_options.unsafe_as(Proc(Int32*, HRESULT)).call(loptions)
+  end
+  def put_edge_traversal_options(loptions : Int32) : HRESULT
+    @lpVtbl.value.put_edge_traversal_options.unsafe_as(Proc(Int32, HRESULT)).call(loptions)
+  end
+end
+struct LibWin32::INetFwRule3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(name : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(name)
+  end
+  def put_name(name : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(name)
+  end
+  def get_description(desc : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(desc)
+  end
+  def put_description(desc : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(desc)
+  end
+  def get_application_name(imagefilename : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_name.unsafe_as(Proc(UInt8**, HRESULT)).call(imagefilename)
+  end
+  def put_application_name(imagefilename : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_name.unsafe_as(Proc(UInt8*, HRESULT)).call(imagefilename)
+  end
+  def get_service_name(servicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_name.unsafe_as(Proc(UInt8**, HRESULT)).call(servicename)
+  end
+  def put_service_name(servicename : UInt8*) : HRESULT
+    @lpVtbl.value.put_service_name.unsafe_as(Proc(UInt8*, HRESULT)).call(servicename)
+  end
+  def get_protocol(protocol : Int32*) : HRESULT
+    @lpVtbl.value.get_protocol.unsafe_as(Proc(Int32*, HRESULT)).call(protocol)
+  end
+  def put_protocol(protocol : Int32) : HRESULT
+    @lpVtbl.value.put_protocol.unsafe_as(Proc(Int32, HRESULT)).call(protocol)
+  end
+  def get_local_ports(portnumbers : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_ports.unsafe_as(Proc(UInt8**, HRESULT)).call(portnumbers)
+  end
+  def put_local_ports(portnumbers : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_ports.unsafe_as(Proc(UInt8*, HRESULT)).call(portnumbers)
+  end
+  def get_remote_ports(portnumbers : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_ports.unsafe_as(Proc(UInt8**, HRESULT)).call(portnumbers)
+  end
+  def put_remote_ports(portnumbers : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_ports.unsafe_as(Proc(UInt8*, HRESULT)).call(portnumbers)
+  end
+  def get_local_addresses(localaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_addresses.unsafe_as(Proc(UInt8**, HRESULT)).call(localaddrs)
+  end
+  def put_local_addresses(localaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_addresses.unsafe_as(Proc(UInt8*, HRESULT)).call(localaddrs)
+  end
+  def get_remote_addresses(remoteaddrs : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_addresses.unsafe_as(Proc(UInt8**, HRESULT)).call(remoteaddrs)
+  end
+  def put_remote_addresses(remoteaddrs : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_addresses.unsafe_as(Proc(UInt8*, HRESULT)).call(remoteaddrs)
+  end
+  def get_icmp_types_and_codes(icmptypesandcodes : UInt8**) : HRESULT
+    @lpVtbl.value.get_icmp_types_and_codes.unsafe_as(Proc(UInt8**, HRESULT)).call(icmptypesandcodes)
+  end
+  def put_icmp_types_and_codes(icmptypesandcodes : UInt8*) : HRESULT
+    @lpVtbl.value.put_icmp_types_and_codes.unsafe_as(Proc(UInt8*, HRESULT)).call(icmptypesandcodes)
+  end
+  def get_direction(dir : NET_FW_RULE_DIRECTION*) : HRESULT
+    @lpVtbl.value.get_direction.unsafe_as(Proc(NET_FW_RULE_DIRECTION*, HRESULT)).call(dir)
+  end
+  def put_direction(dir : NET_FW_RULE_DIRECTION) : HRESULT
+    @lpVtbl.value.put_direction.unsafe_as(Proc(NET_FW_RULE_DIRECTION, HRESULT)).call(dir)
+  end
+  def get_interfaces(interfaces : VARIANT*) : HRESULT
+    @lpVtbl.value.get_interfaces.unsafe_as(Proc(VARIANT*, HRESULT)).call(interfaces)
+  end
+  def put_interfaces(interfaces : VARIANT) : HRESULT
+    @lpVtbl.value.put_interfaces.unsafe_as(Proc(VARIANT, HRESULT)).call(interfaces)
+  end
+  def get_interface_types(interfacetypes : UInt8**) : HRESULT
+    @lpVtbl.value.get_interface_types.unsafe_as(Proc(UInt8**, HRESULT)).call(interfacetypes)
+  end
+  def put_interface_types(interfacetypes : UInt8*) : HRESULT
+    @lpVtbl.value.put_interface_types.unsafe_as(Proc(UInt8*, HRESULT)).call(interfacetypes)
+  end
+  def get_enabled(enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(enabled)
+  end
+  def put_enabled(enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.unsafe_as(Proc(Int16, HRESULT)).call(enabled)
+  end
+  def get_grouping(context : UInt8**) : HRESULT
+    @lpVtbl.value.get_grouping.unsafe_as(Proc(UInt8**, HRESULT)).call(context)
+  end
+  def put_grouping(context : UInt8*) : HRESULT
+    @lpVtbl.value.put_grouping.unsafe_as(Proc(UInt8*, HRESULT)).call(context)
+  end
+  def get_profiles(profiletypesbitmask : Int32*) : HRESULT
+    @lpVtbl.value.get_profiles.unsafe_as(Proc(Int32*, HRESULT)).call(profiletypesbitmask)
+  end
+  def put_profiles(profiletypesbitmask : Int32) : HRESULT
+    @lpVtbl.value.put_profiles.unsafe_as(Proc(Int32, HRESULT)).call(profiletypesbitmask)
+  end
+  def get_edge_traversal(enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_edge_traversal.unsafe_as(Proc(Int16*, HRESULT)).call(enabled)
+  end
+  def put_edge_traversal(enabled : Int16) : HRESULT
+    @lpVtbl.value.put_edge_traversal.unsafe_as(Proc(Int16, HRESULT)).call(enabled)
+  end
+  def get_action(action : NET_FW_ACTION*) : HRESULT
+    @lpVtbl.value.get_action.unsafe_as(Proc(NET_FW_ACTION*, HRESULT)).call(action)
+  end
+  def put_action(action : NET_FW_ACTION) : HRESULT
+    @lpVtbl.value.put_action.unsafe_as(Proc(NET_FW_ACTION, HRESULT)).call(action)
+  end
+  def get_edge_traversal_options(loptions : Int32*) : HRESULT
+    @lpVtbl.value.get_edge_traversal_options.unsafe_as(Proc(Int32*, HRESULT)).call(loptions)
+  end
+  def put_edge_traversal_options(loptions : Int32) : HRESULT
+    @lpVtbl.value.put_edge_traversal_options.unsafe_as(Proc(Int32, HRESULT)).call(loptions)
+  end
+  def get_local_app_package_id(wszpackageid : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_app_package_id.unsafe_as(Proc(UInt8**, HRESULT)).call(wszpackageid)
+  end
+  def put_local_app_package_id(wszpackageid : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_app_package_id.unsafe_as(Proc(UInt8*, HRESULT)).call(wszpackageid)
+  end
+  def get_local_user_owner(wszuserowner : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_user_owner.unsafe_as(Proc(UInt8**, HRESULT)).call(wszuserowner)
+  end
+  def put_local_user_owner(wszuserowner : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_user_owner.unsafe_as(Proc(UInt8*, HRESULT)).call(wszuserowner)
+  end
+  def get_local_user_authorized_list(wszuserauthlist : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_user_authorized_list.unsafe_as(Proc(UInt8**, HRESULT)).call(wszuserauthlist)
+  end
+  def put_local_user_authorized_list(wszuserauthlist : UInt8*) : HRESULT
+    @lpVtbl.value.put_local_user_authorized_list.unsafe_as(Proc(UInt8*, HRESULT)).call(wszuserauthlist)
+  end
+  def get_remote_user_authorized_list(wszuserauthlist : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_user_authorized_list.unsafe_as(Proc(UInt8**, HRESULT)).call(wszuserauthlist)
+  end
+  def put_remote_user_authorized_list(wszuserauthlist : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_user_authorized_list.unsafe_as(Proc(UInt8*, HRESULT)).call(wszuserauthlist)
+  end
+  def get_remote_machine_authorized_list(wszuserauthlist : UInt8**) : HRESULT
+    @lpVtbl.value.get_remote_machine_authorized_list.unsafe_as(Proc(UInt8**, HRESULT)).call(wszuserauthlist)
+  end
+  def put_remote_machine_authorized_list(wszuserauthlist : UInt8*) : HRESULT
+    @lpVtbl.value.put_remote_machine_authorized_list.unsafe_as(Proc(UInt8*, HRESULT)).call(wszuserauthlist)
+  end
+  def get_secure_flags(loptions : Int32*) : HRESULT
+    @lpVtbl.value.get_secure_flags.unsafe_as(Proc(Int32*, HRESULT)).call(loptions)
+  end
+  def put_secure_flags(loptions : Int32) : HRESULT
+    @lpVtbl.value.put_secure_flags.unsafe_as(Proc(Int32, HRESULT)).call(loptions)
+  end
+end
+struct LibWin32::INetFwRules
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  end
+  def add(rule : INetFwRule) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(INetFwRule, HRESULT)).call(rule)
+  end
+  def remove(name : UInt8*) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(UInt8*, HRESULT)).call(name)
+  end
+  def item(name : UInt8*, rule : INetFwRule*) : HRESULT
+    @lpVtbl.value.item.unsafe_as(Proc(UInt8*, INetFwRule*, HRESULT)).call(name, rule)
+  end
+  def get__new_enum(newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(newenum)
+  end
+end
+struct LibWin32::INetFwServiceRestriction
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def restrict_service(servicename : UInt8*, appname : UInt8*, restrictservice : Int16, servicesidrestricted : Int16) : HRESULT
+    @lpVtbl.value.restrict_service.unsafe_as(Proc(UInt8*, UInt8*, Int16, Int16, HRESULT)).call(servicename, appname, restrictservice, servicesidrestricted)
+  end
+  def service_restricted(servicename : UInt8*, appname : UInt8*, servicerestricted : Int16*) : HRESULT
+    @lpVtbl.value.service_restricted.unsafe_as(Proc(UInt8*, UInt8*, Int16*, HRESULT)).call(servicename, appname, servicerestricted)
+  end
+  def get_rules(rules : INetFwRules*) : HRESULT
+    @lpVtbl.value.get_rules.unsafe_as(Proc(INetFwRules*, HRESULT)).call(rules)
+  end
+end
+struct LibWin32::INetFwProfile
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(type : NET_FW_PROFILE_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(NET_FW_PROFILE_TYPE*, HRESULT)).call(type)
+  end
+  def get_firewall_enabled(enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_firewall_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(enabled)
+  end
+  def put_firewall_enabled(enabled : Int16) : HRESULT
+    @lpVtbl.value.put_firewall_enabled.unsafe_as(Proc(Int16, HRESULT)).call(enabled)
+  end
+  def get_exceptions_not_allowed(notallowed : Int16*) : HRESULT
+    @lpVtbl.value.get_exceptions_not_allowed.unsafe_as(Proc(Int16*, HRESULT)).call(notallowed)
+  end
+  def put_exceptions_not_allowed(notallowed : Int16) : HRESULT
+    @lpVtbl.value.put_exceptions_not_allowed.unsafe_as(Proc(Int16, HRESULT)).call(notallowed)
+  end
+  def get_notifications_disabled(disabled : Int16*) : HRESULT
+    @lpVtbl.value.get_notifications_disabled.unsafe_as(Proc(Int16*, HRESULT)).call(disabled)
+  end
+  def put_notifications_disabled(disabled : Int16) : HRESULT
+    @lpVtbl.value.put_notifications_disabled.unsafe_as(Proc(Int16, HRESULT)).call(disabled)
+  end
+  def get_unicast_responses_to_multicast_broadcast_disabled(disabled : Int16*) : HRESULT
+    @lpVtbl.value.get_unicast_responses_to_multicast_broadcast_disabled.unsafe_as(Proc(Int16*, HRESULT)).call(disabled)
+  end
+  def put_unicast_responses_to_multicast_broadcast_disabled(disabled : Int16) : HRESULT
+    @lpVtbl.value.put_unicast_responses_to_multicast_broadcast_disabled.unsafe_as(Proc(Int16, HRESULT)).call(disabled)
+  end
+  def get_remote_admin_settings(remoteadminsettings : INetFwRemoteAdminSettings*) : HRESULT
+    @lpVtbl.value.get_remote_admin_settings.unsafe_as(Proc(INetFwRemoteAdminSettings*, HRESULT)).call(remoteadminsettings)
+  end
+  def get_icmp_settings(icmpsettings : INetFwIcmpSettings*) : HRESULT
+    @lpVtbl.value.get_icmp_settings.unsafe_as(Proc(INetFwIcmpSettings*, HRESULT)).call(icmpsettings)
+  end
+  def get_globally_open_ports(openports : INetFwOpenPorts*) : HRESULT
+    @lpVtbl.value.get_globally_open_ports.unsafe_as(Proc(INetFwOpenPorts*, HRESULT)).call(openports)
+  end
+  def get_services(services : INetFwServices*) : HRESULT
+    @lpVtbl.value.get_services.unsafe_as(Proc(INetFwServices*, HRESULT)).call(services)
+  end
+  def get_authorized_applications(apps : INetFwAuthorizedApplications*) : HRESULT
+    @lpVtbl.value.get_authorized_applications.unsafe_as(Proc(INetFwAuthorizedApplications*, HRESULT)).call(apps)
+  end
+end
+struct LibWin32::INetFwPolicy
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_current_profile(profile : INetFwProfile*) : HRESULT
+    @lpVtbl.value.get_current_profile.unsafe_as(Proc(INetFwProfile*, HRESULT)).call(profile)
+  end
+  def get_profile_by_type(profiletype : NET_FW_PROFILE_TYPE, profile : INetFwProfile*) : HRESULT
+    @lpVtbl.value.get_profile_by_type.unsafe_as(Proc(NET_FW_PROFILE_TYPE, INetFwProfile*, HRESULT)).call(profiletype, profile)
+  end
+end
+struct LibWin32::INetFwPolicy2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_current_profile_types(profiletypesbitmask : Int32*) : HRESULT
+    @lpVtbl.value.get_current_profile_types.unsafe_as(Proc(Int32*, HRESULT)).call(profiletypesbitmask)
+  end
+  def get_firewall_enabled(profiletype : NET_FW_PROFILE_TYPE2, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_firewall_enabled.unsafe_as(Proc(NET_FW_PROFILE_TYPE2, Int16*, HRESULT)).call(profiletype, enabled)
+  end
+  def put_firewall_enabled(profiletype : NET_FW_PROFILE_TYPE2, enabled : Int16) : HRESULT
+    @lpVtbl.value.put_firewall_enabled.unsafe_as(Proc(NET_FW_PROFILE_TYPE2, Int16, HRESULT)).call(profiletype, enabled)
+  end
+  def get_excluded_interfaces(profiletype : NET_FW_PROFILE_TYPE2, interfaces : VARIANT*) : HRESULT
+    @lpVtbl.value.get_excluded_interfaces.unsafe_as(Proc(NET_FW_PROFILE_TYPE2, VARIANT*, HRESULT)).call(profiletype, interfaces)
+  end
+  def put_excluded_interfaces(profiletype : NET_FW_PROFILE_TYPE2, interfaces : VARIANT) : HRESULT
+    @lpVtbl.value.put_excluded_interfaces.unsafe_as(Proc(NET_FW_PROFILE_TYPE2, VARIANT, HRESULT)).call(profiletype, interfaces)
+  end
+  def get_block_all_inbound_traffic(profiletype : NET_FW_PROFILE_TYPE2, block : Int16*) : HRESULT
+    @lpVtbl.value.get_block_all_inbound_traffic.unsafe_as(Proc(NET_FW_PROFILE_TYPE2, Int16*, HRESULT)).call(profiletype, block)
+  end
+  def put_block_all_inbound_traffic(profiletype : NET_FW_PROFILE_TYPE2, block : Int16) : HRESULT
+    @lpVtbl.value.put_block_all_inbound_traffic.unsafe_as(Proc(NET_FW_PROFILE_TYPE2, Int16, HRESULT)).call(profiletype, block)
+  end
+  def get_notifications_disabled(profiletype : NET_FW_PROFILE_TYPE2, disabled : Int16*) : HRESULT
+    @lpVtbl.value.get_notifications_disabled.unsafe_as(Proc(NET_FW_PROFILE_TYPE2, Int16*, HRESULT)).call(profiletype, disabled)
+  end
+  def put_notifications_disabled(profiletype : NET_FW_PROFILE_TYPE2, disabled : Int16) : HRESULT
+    @lpVtbl.value.put_notifications_disabled.unsafe_as(Proc(NET_FW_PROFILE_TYPE2, Int16, HRESULT)).call(profiletype, disabled)
+  end
+  def get_unicast_responses_to_multicast_broadcast_disabled(profiletype : NET_FW_PROFILE_TYPE2, disabled : Int16*) : HRESULT
+    @lpVtbl.value.get_unicast_responses_to_multicast_broadcast_disabled.unsafe_as(Proc(NET_FW_PROFILE_TYPE2, Int16*, HRESULT)).call(profiletype, disabled)
+  end
+  def put_unicast_responses_to_multicast_broadcast_disabled(profiletype : NET_FW_PROFILE_TYPE2, disabled : Int16) : HRESULT
+    @lpVtbl.value.put_unicast_responses_to_multicast_broadcast_disabled.unsafe_as(Proc(NET_FW_PROFILE_TYPE2, Int16, HRESULT)).call(profiletype, disabled)
+  end
+  def get_rules(rules : INetFwRules*) : HRESULT
+    @lpVtbl.value.get_rules.unsafe_as(Proc(INetFwRules*, HRESULT)).call(rules)
+  end
+  def get_service_restriction(servicerestriction : INetFwServiceRestriction*) : HRESULT
+    @lpVtbl.value.get_service_restriction.unsafe_as(Proc(INetFwServiceRestriction*, HRESULT)).call(servicerestriction)
+  end
+  def enable_rule_group(profiletypesbitmask : Int32, group : UInt8*, enable : Int16) : HRESULT
+    @lpVtbl.value.enable_rule_group.unsafe_as(Proc(Int32, UInt8*, Int16, HRESULT)).call(profiletypesbitmask, group, enable)
+  end
+  def is_rule_group_enabled(profiletypesbitmask : Int32, group : UInt8*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.is_rule_group_enabled.unsafe_as(Proc(Int32, UInt8*, Int16*, HRESULT)).call(profiletypesbitmask, group, enabled)
+  end
+  def restore_local_firewall_defaults : HRESULT
+    @lpVtbl.value.restore_local_firewall_defaults.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_default_inbound_action(profiletype : NET_FW_PROFILE_TYPE2, action : NET_FW_ACTION*) : HRESULT
+    @lpVtbl.value.get_default_inbound_action.unsafe_as(Proc(NET_FW_PROFILE_TYPE2, NET_FW_ACTION*, HRESULT)).call(profiletype, action)
+  end
+  def put_default_inbound_action(profiletype : NET_FW_PROFILE_TYPE2, action : NET_FW_ACTION) : HRESULT
+    @lpVtbl.value.put_default_inbound_action.unsafe_as(Proc(NET_FW_PROFILE_TYPE2, NET_FW_ACTION, HRESULT)).call(profiletype, action)
+  end
+  def get_default_outbound_action(profiletype : NET_FW_PROFILE_TYPE2, action : NET_FW_ACTION*) : HRESULT
+    @lpVtbl.value.get_default_outbound_action.unsafe_as(Proc(NET_FW_PROFILE_TYPE2, NET_FW_ACTION*, HRESULT)).call(profiletype, action)
+  end
+  def put_default_outbound_action(profiletype : NET_FW_PROFILE_TYPE2, action : NET_FW_ACTION) : HRESULT
+    @lpVtbl.value.put_default_outbound_action.unsafe_as(Proc(NET_FW_PROFILE_TYPE2, NET_FW_ACTION, HRESULT)).call(profiletype, action)
+  end
+  def get_is_rule_group_currently_enabled(group : UInt8*, enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_is_rule_group_currently_enabled.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(group, enabled)
+  end
+  def get_local_policy_modify_state(modifystate : NET_FW_MODIFY_STATE*) : HRESULT
+    @lpVtbl.value.get_local_policy_modify_state.unsafe_as(Proc(NET_FW_MODIFY_STATE*, HRESULT)).call(modifystate)
+  end
+end
+struct LibWin32::INetFwMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_local_policy(localpolicy : INetFwPolicy*) : HRESULT
+    @lpVtbl.value.get_local_policy.unsafe_as(Proc(INetFwPolicy*, HRESULT)).call(localpolicy)
+  end
+  def get_current_profile_type(profiletype : NET_FW_PROFILE_TYPE*) : HRESULT
+    @lpVtbl.value.get_current_profile_type.unsafe_as(Proc(NET_FW_PROFILE_TYPE*, HRESULT)).call(profiletype)
+  end
+  def restore_defaults : HRESULT
+    @lpVtbl.value.restore_defaults.unsafe_as(Proc(HRESULT)).call
+  end
+  def is_port_allowed(imagefilename : UInt8*, ipversion : NET_FW_IP_VERSION, portnumber : Int32, localaddress : UInt8*, ipprotocol : NET_FW_IP_PROTOCOL, allowed : VARIANT*, restricted : VARIANT*) : HRESULT
+    @lpVtbl.value.is_port_allowed.unsafe_as(Proc(UInt8*, NET_FW_IP_VERSION, Int32, UInt8*, NET_FW_IP_PROTOCOL, VARIANT*, VARIANT*, HRESULT)).call(imagefilename, ipversion, portnumber, localaddress, ipprotocol, allowed, restricted)
+  end
+  def is_icmp_type_allowed(ipversion : NET_FW_IP_VERSION, localaddress : UInt8*, type : UInt8, allowed : VARIANT*, restricted : VARIANT*) : HRESULT
+    @lpVtbl.value.is_icmp_type_allowed.unsafe_as(Proc(NET_FW_IP_VERSION, UInt8*, UInt8, VARIANT*, VARIANT*, HRESULT)).call(ipversion, localaddress, type, allowed, restricted)
+  end
+end
+struct LibWin32::INetFwProduct
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_rule_categories(rulecategories : VARIANT*) : HRESULT
+    @lpVtbl.value.get_rule_categories.unsafe_as(Proc(VARIANT*, HRESULT)).call(rulecategories)
+  end
+  def put_rule_categories(rulecategories : VARIANT) : HRESULT
+    @lpVtbl.value.put_rule_categories.unsafe_as(Proc(VARIANT, HRESULT)).call(rulecategories)
+  end
+  def get_display_name(displayname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(displayname)
+  end
+  def put_display_name(displayname : UInt8*) : HRESULT
+    @lpVtbl.value.put_display_name.unsafe_as(Proc(UInt8*, HRESULT)).call(displayname)
+  end
+  def get_path_to_signed_product_exe(path : UInt8**) : HRESULT
+    @lpVtbl.value.get_path_to_signed_product_exe.unsafe_as(Proc(UInt8**, HRESULT)).call(path)
+  end
+end
+struct LibWin32::INetFwProducts
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(count : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(count)
+  end
+  def register(product : INetFwProduct, registration : IUnknown*) : HRESULT
+    @lpVtbl.value.register.unsafe_as(Proc(INetFwProduct, IUnknown*, HRESULT)).call(product, registration)
+  end
+  def item(index : Int32, product : INetFwProduct*) : HRESULT
+    @lpVtbl.value.item.unsafe_as(Proc(Int32, INetFwProduct*, HRESULT)).call(index, product)
+  end
+  def get__new_enum(newenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(newenum)
+  end
 end

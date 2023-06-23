@@ -898,7 +898,7 @@ lib LibWin32
   fun WinHttpQueryConnectionGroup(hinternet : Void*, pguidconnection : Guid*, ullflags : UInt64, ppresult : WINHTTP_QUERY_CONNECTION_GROUP_RESULT**) : UInt32
 
   # Params # presult : WINHTTP_QUERY_CONNECTION_GROUP_RESULT* [In]
-  fun WinHttpFreeQueryConnectionGroupResult(presult : WINHTTP_QUERY_CONNECTION_GROUP_RESULT*)
+  fun WinHttpFreeQueryConnectionGroupResult(presult : WINHTTP_QUERY_CONNECTION_GROUP_RESULT*) : Void
 
   # Params # dwautodetectflags : UInt32 [In],ppwstrautoconfigurl : LibC::LPWSTR* [In]
   fun WinHttpDetectAutoProxyConfigUrl(dwautodetectflags : UInt32, ppwstrautoconfigurl : LibC::LPWSTR*) : LibC::BOOL
@@ -922,10 +922,10 @@ lib LibWin32
   fun WinHttpGetProxyResultEx(hresolver : Void*, pproxyresultex : WINHTTP_PROXY_RESULT_EX*) : UInt32
 
   # Params # pproxyresult : WINHTTP_PROXY_RESULT* [In]
-  fun WinHttpFreeProxyResult(pproxyresult : WINHTTP_PROXY_RESULT*)
+  fun WinHttpFreeProxyResult(pproxyresult : WINHTTP_PROXY_RESULT*) : Void
 
   # Params # pproxyresultex : WINHTTP_PROXY_RESULT_EX* [In]
-  fun WinHttpFreeProxyResultEx(pproxyresultex : WINHTTP_PROXY_RESULT_EX*)
+  fun WinHttpFreeProxyResultEx(pproxyresultex : WINHTTP_PROXY_RESULT_EX*) : Void
 
   # Params # hsession : Void* [In],dwflags : UInt32 [In]
   fun WinHttpResetAutoProxy(hsession : Void*, dwflags : UInt32) : UInt32
@@ -940,7 +940,7 @@ lib LibWin32
   fun WinHttpReadProxySettings(hsession : Void*, pcwszconnectionname : LibC::LPWSTR, ffallbacktodefaultsettings : LibC::BOOL, fsetautodiscoverfordefaultsettings : LibC::BOOL, pdwsettingsversion : UInt32*, pfdefaultsettingsarereturned : LibC::BOOL*, pwinhttpproxysettings : WINHTTP_PROXY_SETTINGS*) : UInt32
 
   # Params # pwinhttpproxysettings : WINHTTP_PROXY_SETTINGS* [In]
-  fun WinHttpFreeProxySettings(pwinhttpproxysettings : WINHTTP_PROXY_SETTINGS*)
+  fun WinHttpFreeProxySettings(pwinhttpproxysettings : WINHTTP_PROXY_SETTINGS*) : Void
 
   # Params # hsession : Void* [In],pdwproxysettingsversion : UInt32* [In]
   fun WinHttpGetProxySettingsVersion(hsession : Void*, pdwproxysettingsversion : UInt32*) : UInt32

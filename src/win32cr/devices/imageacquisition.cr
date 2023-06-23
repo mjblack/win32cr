@@ -1344,18 +1344,18 @@ lib LibWin32
 
 
   struct IWiaDevMgrVTbl
-    query_interface : Proc(IWiaDevMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaDevMgr*, UInt32)
-    release : Proc(IWiaDevMgr*, UInt32)
-    enum_device_info : Proc(IWiaDevMgr*, Int32, IEnumWIA_DEV_INFO*, HRESULT)
-    create_device : Proc(IWiaDevMgr*, UInt8*, IWiaItem*, HRESULT)
-    select_device_dlg : Proc(IWiaDevMgr*, LibC::HANDLE, Int32, Int32, UInt8**, IWiaItem*, HRESULT)
-    select_device_dlg_id : Proc(IWiaDevMgr*, LibC::HANDLE, Int32, Int32, UInt8**, HRESULT)
-    get_image_dlg : Proc(IWiaDevMgr*, LibC::HANDLE, Int32, Int32, Int32, IWiaItem, UInt8*, Guid*, HRESULT)
-    register_event_callback_program : Proc(IWiaDevMgr*, Int32, UInt8*, Guid*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
-    register_event_callback_interface : Proc(IWiaDevMgr*, Int32, UInt8*, Guid*, IWiaEventCallback, IUnknown*, HRESULT)
-    register_event_callback_clsid : Proc(IWiaDevMgr*, Int32, UInt8*, Guid*, Guid*, UInt8*, UInt8*, UInt8*, HRESULT)
-    add_device_dlg : Proc(IWiaDevMgr*, LibC::HANDLE, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enum_device_info : UInt64
+    create_device : UInt64
+    select_device_dlg : UInt64
+    select_device_dlg_id : UInt64
+    get_image_dlg : UInt64
+    register_event_callback_program : UInt64
+    register_event_callback_interface : UInt64
+    register_event_callback_clsid : UInt64
+    add_device_dlg : UInt64
   end
 
   IWiaDevMgr_GUID = "5eb2502a-8cf1-11d1-bf92-0060081ed811"
@@ -1365,14 +1365,14 @@ lib LibWin32
   end
 
   struct IEnumWIA_DEV_INFOVTbl
-    query_interface : Proc(IEnumWIA_DEV_INFO*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumWIA_DEV_INFO*, UInt32)
-    release : Proc(IEnumWIA_DEV_INFO*, UInt32)
-    next : Proc(IEnumWIA_DEV_INFO*, UInt32, IWiaPropertyStorage*, UInt32*, HRESULT)
-    skip : Proc(IEnumWIA_DEV_INFO*, UInt32, HRESULT)
-    reset : Proc(IEnumWIA_DEV_INFO*, HRESULT)
-    clone : Proc(IEnumWIA_DEV_INFO*, IEnumWIA_DEV_INFO*, HRESULT)
-    get_count : Proc(IEnumWIA_DEV_INFO*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
+    get_count : UInt64
   end
 
   IEnumWIA_DEV_INFO_GUID = "5e38b83c-8cf1-11d1-bf92-0060081ed811"
@@ -1382,10 +1382,10 @@ lib LibWin32
   end
 
   struct IWiaEventCallbackVTbl
-    query_interface : Proc(IWiaEventCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaEventCallback*, UInt32)
-    release : Proc(IWiaEventCallback*, UInt32)
-    image_event_callback : Proc(IWiaEventCallback*, Guid*, UInt8*, UInt8*, UInt8*, UInt32, UInt8*, UInt32*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    image_event_callback : UInt64
   end
 
   IWiaEventCallback_GUID = "ae6287b0-0084-11d2-973b-00a0c9068f2e"
@@ -1395,10 +1395,10 @@ lib LibWin32
   end
 
   struct IWiaDataCallbackVTbl
-    query_interface : Proc(IWiaDataCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaDataCallback*, UInt32)
-    release : Proc(IWiaDataCallback*, UInt32)
-    banded_data_callback : Proc(IWiaDataCallback*, Int32, Int32, Int32, Int32, Int32, Int32, Int32, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    banded_data_callback : UInt64
   end
 
   IWiaDataCallback_GUID = "a558a866-a5b0-11d2-a08f-00c04f72dc3c"
@@ -1408,14 +1408,14 @@ lib LibWin32
   end
 
   struct IWiaDataTransferVTbl
-    query_interface : Proc(IWiaDataTransfer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaDataTransfer*, UInt32)
-    release : Proc(IWiaDataTransfer*, UInt32)
-    idt_get_data : Proc(IWiaDataTransfer*, STGMEDIUM*, IWiaDataCallback, HRESULT)
-    idt_get_banded_data : Proc(IWiaDataTransfer*, WIA_DATA_TRANSFER_INFO*, IWiaDataCallback, HRESULT)
-    idt_query_get_data : Proc(IWiaDataTransfer*, WIA_FORMAT_INFO*, HRESULT)
-    idt_enum_wia_format_info : Proc(IWiaDataTransfer*, IEnumWIA_FORMAT_INFO*, HRESULT)
-    idt_get_extended_transfer_info : Proc(IWiaDataTransfer*, WIA_EXTENDED_TRANSFER_INFO*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    idt_get_data : UInt64
+    idt_get_banded_data : UInt64
+    idt_query_get_data : UInt64
+    idt_enum_wia_format_info : UInt64
+    idt_get_extended_transfer_info : UInt64
   end
 
   IWiaDataTransfer_GUID = "a6cef998-a5b0-11d2-a08f-00c04f72dc3c"
@@ -1425,24 +1425,24 @@ lib LibWin32
   end
 
   struct IWiaItemVTbl
-    query_interface : Proc(IWiaItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaItem*, UInt32)
-    release : Proc(IWiaItem*, UInt32)
-    get_item_type : Proc(IWiaItem*, Int32*, HRESULT)
-    analyze_item : Proc(IWiaItem*, Int32, HRESULT)
-    enum_child_items : Proc(IWiaItem*, IEnumWiaItem*, HRESULT)
-    delete_item : Proc(IWiaItem*, Int32, HRESULT)
-    create_child_item : Proc(IWiaItem*, Int32, UInt8*, UInt8*, IWiaItem*, HRESULT)
-    enum_register_event_info : Proc(IWiaItem*, Int32, Guid*, IEnumWIA_DEV_CAPS*, HRESULT)
-    find_item_by_name : Proc(IWiaItem*, Int32, UInt8*, IWiaItem*, HRESULT)
-    device_dlg : Proc(IWiaItem*, LibC::HANDLE, Int32, Int32, Int32*, IWiaItem**, HRESULT)
-    device_command : Proc(IWiaItem*, Int32, Guid*, IWiaItem*, HRESULT)
-    get_root_item : Proc(IWiaItem*, IWiaItem*, HRESULT)
-    enum_device_capabilities : Proc(IWiaItem*, Int32, IEnumWIA_DEV_CAPS*, HRESULT)
-    dump_item_data : Proc(IWiaItem*, UInt8**, HRESULT)
-    dump_drv_item_data : Proc(IWiaItem*, UInt8**, HRESULT)
-    dump_tree_item_data : Proc(IWiaItem*, UInt8**, HRESULT)
-    diagnostic : Proc(IWiaItem*, UInt32, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_item_type : UInt64
+    analyze_item : UInt64
+    enum_child_items : UInt64
+    delete_item : UInt64
+    create_child_item : UInt64
+    enum_register_event_info : UInt64
+    find_item_by_name : UInt64
+    device_dlg : UInt64
+    device_command : UInt64
+    get_root_item : UInt64
+    enum_device_capabilities : UInt64
+    dump_item_data : UInt64
+    dump_drv_item_data : UInt64
+    dump_tree_item_data : UInt64
+    diagnostic : UInt64
   end
 
   IWiaItem_GUID = "4db1ad10-3391-11d2-9a33-00c04fa36145"
@@ -1452,25 +1452,25 @@ lib LibWin32
   end
 
   struct IWiaPropertyStorageVTbl
-    query_interface : Proc(IWiaPropertyStorage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaPropertyStorage*, UInt32)
-    release : Proc(IWiaPropertyStorage*, UInt32)
-    read_multiple : Proc(IWiaPropertyStorage*, UInt32, PROPSPEC*, PROPVARIANT*, HRESULT)
-    write_multiple : Proc(IWiaPropertyStorage*, UInt32, PROPSPEC*, PROPVARIANT*, UInt32, HRESULT)
-    delete_multiple : Proc(IWiaPropertyStorage*, UInt32, PROPSPEC*, HRESULT)
-    read_property_names : Proc(IWiaPropertyStorage*, UInt32, UInt32*, LibC::LPWSTR*, HRESULT)
-    write_property_names : Proc(IWiaPropertyStorage*, UInt32, UInt32*, LibC::LPWSTR*, HRESULT)
-    delete_property_names : Proc(IWiaPropertyStorage*, UInt32, UInt32*, HRESULT)
-    commit : Proc(IWiaPropertyStorage*, UInt32, HRESULT)
-    revert : Proc(IWiaPropertyStorage*, HRESULT)
-    enum : Proc(IWiaPropertyStorage*, IEnumSTATPROPSTG*, HRESULT)
-    set_times : Proc(IWiaPropertyStorage*, FILETIME*, FILETIME*, FILETIME*, HRESULT)
-    set_class : Proc(IWiaPropertyStorage*, Guid*, HRESULT)
-    stat : Proc(IWiaPropertyStorage*, STATPROPSETSTG*, HRESULT)
-    get_property_attributes : Proc(IWiaPropertyStorage*, UInt32, PROPSPEC*, UInt32*, PROPVARIANT*, HRESULT)
-    get_count : Proc(IWiaPropertyStorage*, UInt32*, HRESULT)
-    get_property_stream : Proc(IWiaPropertyStorage*, Guid*, IStream*, HRESULT)
-    set_property_stream : Proc(IWiaPropertyStorage*, Guid*, IStream, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    read_multiple : UInt64
+    write_multiple : UInt64
+    delete_multiple : UInt64
+    read_property_names : UInt64
+    write_property_names : UInt64
+    delete_property_names : UInt64
+    commit : UInt64
+    revert : UInt64
+    enum : UInt64
+    set_times : UInt64
+    set_class : UInt64
+    stat : UInt64
+    get_property_attributes : UInt64
+    get_count : UInt64
+    get_property_stream : UInt64
+    set_property_stream : UInt64
   end
 
   IWiaPropertyStorage_GUID = "98b5e8a0-29cc-491a-aac0-e6db4fdcceb6"
@@ -1480,14 +1480,14 @@ lib LibWin32
   end
 
   struct IEnumWiaItemVTbl
-    query_interface : Proc(IEnumWiaItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumWiaItem*, UInt32)
-    release : Proc(IEnumWiaItem*, UInt32)
-    next : Proc(IEnumWiaItem*, UInt32, IWiaItem*, UInt32*, HRESULT)
-    skip : Proc(IEnumWiaItem*, UInt32, HRESULT)
-    reset : Proc(IEnumWiaItem*, HRESULT)
-    clone : Proc(IEnumWiaItem*, IEnumWiaItem*, HRESULT)
-    get_count : Proc(IEnumWiaItem*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
+    get_count : UInt64
   end
 
   IEnumWiaItem_GUID = "5e8383fc-3391-11d2-9a33-00c04fa36145"
@@ -1497,14 +1497,14 @@ lib LibWin32
   end
 
   struct IEnumWIA_DEV_CAPSVTbl
-    query_interface : Proc(IEnumWIA_DEV_CAPS*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumWIA_DEV_CAPS*, UInt32)
-    release : Proc(IEnumWIA_DEV_CAPS*, UInt32)
-    next : Proc(IEnumWIA_DEV_CAPS*, UInt32, WIA_DEV_CAP*, UInt32*, HRESULT)
-    skip : Proc(IEnumWIA_DEV_CAPS*, UInt32, HRESULT)
-    reset : Proc(IEnumWIA_DEV_CAPS*, HRESULT)
-    clone : Proc(IEnumWIA_DEV_CAPS*, IEnumWIA_DEV_CAPS*, HRESULT)
-    get_count : Proc(IEnumWIA_DEV_CAPS*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
+    get_count : UInt64
   end
 
   IEnumWIA_DEV_CAPS_GUID = "1fcc4287-aca6-11d2-a093-00c04f72dc3c"
@@ -1514,14 +1514,14 @@ lib LibWin32
   end
 
   struct IEnumWIA_FORMAT_INFOVTbl
-    query_interface : Proc(IEnumWIA_FORMAT_INFO*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumWIA_FORMAT_INFO*, UInt32)
-    release : Proc(IEnumWIA_FORMAT_INFO*, UInt32)
-    next : Proc(IEnumWIA_FORMAT_INFO*, UInt32, WIA_FORMAT_INFO*, UInt32*, HRESULT)
-    skip : Proc(IEnumWIA_FORMAT_INFO*, UInt32, HRESULT)
-    reset : Proc(IEnumWIA_FORMAT_INFO*, HRESULT)
-    clone : Proc(IEnumWIA_FORMAT_INFO*, IEnumWIA_FORMAT_INFO*, HRESULT)
-    get_count : Proc(IEnumWIA_FORMAT_INFO*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
+    get_count : UInt64
   end
 
   IEnumWIA_FORMAT_INFO_GUID = "81befc5b-656d-44f1-b24c-d41d51b4dc81"
@@ -1531,12 +1531,12 @@ lib LibWin32
   end
 
   struct IWiaLogVTbl
-    query_interface : Proc(IWiaLog*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaLog*, UInt32)
-    release : Proc(IWiaLog*, UInt32)
-    initialize_log : Proc(IWiaLog*, Int32, HRESULT)
-    h_result : Proc(IWiaLog*, HRESULT, HRESULT)
-    log : Proc(IWiaLog*, Int32, Int32, Int32, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize_log : UInt64
+    h_result : UInt64
+    log : UInt64
   end
 
   IWiaLog_GUID = "a00c10b6-82a1-452f-8b6c-86062aad6890"
@@ -1546,14 +1546,14 @@ lib LibWin32
   end
 
   struct IWiaLogExVTbl
-    query_interface : Proc(IWiaLogEx*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaLogEx*, UInt32)
-    release : Proc(IWiaLogEx*, UInt32)
-    initialize_log_ex : Proc(IWiaLogEx*, UInt8*, HRESULT)
-    h_result : Proc(IWiaLogEx*, HRESULT, HRESULT)
-    log : Proc(IWiaLogEx*, Int32, Int32, Int32, UInt8*, HRESULT)
-    h_result_ex : Proc(IWiaLogEx*, Int32, HRESULT, HRESULT)
-    log_ex : Proc(IWiaLogEx*, Int32, Int32, Int32, Int32, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize_log_ex : UInt64
+    h_result : UInt64
+    log : UInt64
+    h_result_ex : UInt64
+    log_ex : UInt64
   end
 
   IWiaLogEx_GUID = "af1f22ac-7a40-4787-b421-aeb47a1fbd0b"
@@ -1563,10 +1563,10 @@ lib LibWin32
   end
 
   struct IWiaNotifyDevMgrVTbl
-    query_interface : Proc(IWiaNotifyDevMgr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaNotifyDevMgr*, UInt32)
-    release : Proc(IWiaNotifyDevMgr*, UInt32)
-    new_device_arrival : Proc(IWiaNotifyDevMgr*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    new_device_arrival : UInt64
   end
 
   IWiaNotifyDevMgr_GUID = "70681ea0-e7bf-4291-9fb1-4e8813a3f78e"
@@ -1576,12 +1576,12 @@ lib LibWin32
   end
 
   struct IWiaItemExtrasVTbl
-    query_interface : Proc(IWiaItemExtras*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaItemExtras*, UInt32)
-    release : Proc(IWiaItemExtras*, UInt32)
-    get_extended_error_info : Proc(IWiaItemExtras*, UInt8**, HRESULT)
-    escape : Proc(IWiaItemExtras*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32*, HRESULT)
-    cancel_pending_io : Proc(IWiaItemExtras*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_extended_error_info : UInt64
+    escape : UInt64
+    cancel_pending_io : UInt64
   end
 
   IWiaItemExtras_GUID = "6291ef2c-36ef-4532-876a-8e132593778d"
@@ -1591,11 +1591,11 @@ lib LibWin32
   end
 
   struct IWiaAppErrorHandlerVTbl
-    query_interface : Proc(IWiaAppErrorHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaAppErrorHandler*, UInt32)
-    release : Proc(IWiaAppErrorHandler*, UInt32)
-    get_window : Proc(IWiaAppErrorHandler*, HANDLE*, HRESULT)
-    report_status : Proc(IWiaAppErrorHandler*, Int32, IWiaItem2, HRESULT, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_window : UInt64
+    report_status : UInt64
   end
 
   IWiaAppErrorHandler_GUID = "6c16186c-d0a6-400c-80f4-d26986a0e734"
@@ -1605,11 +1605,11 @@ lib LibWin32
   end
 
   struct IWiaErrorHandlerVTbl
-    query_interface : Proc(IWiaErrorHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaErrorHandler*, UInt32)
-    release : Proc(IWiaErrorHandler*, UInt32)
-    report_status : Proc(IWiaErrorHandler*, Int32, LibC::HANDLE, IWiaItem2, HRESULT, Int32, HRESULT)
-    get_status_description : Proc(IWiaErrorHandler*, Int32, IWiaItem2, HRESULT, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    report_status : UInt64
+    get_status_description : UInt64
   end
 
   IWiaErrorHandler_GUID = "0e4a51b1-bc1f-443d-a835-72e890759ef3"
@@ -1619,13 +1619,13 @@ lib LibWin32
   end
 
   struct IWiaTransferVTbl
-    query_interface : Proc(IWiaTransfer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaTransfer*, UInt32)
-    release : Proc(IWiaTransfer*, UInt32)
-    download : Proc(IWiaTransfer*, Int32, IWiaTransferCallback, HRESULT)
-    upload : Proc(IWiaTransfer*, Int32, IStream, IWiaTransferCallback, HRESULT)
-    cancel : Proc(IWiaTransfer*, HRESULT)
-    enum_wia_format_info : Proc(IWiaTransfer*, IEnumWIA_FORMAT_INFO*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    download : UInt64
+    upload : UInt64
+    cancel : UInt64
+    enum_wia_format_info : UInt64
   end
 
   IWiaTransfer_GUID = "c39d6942-2f4e-4d04-92fe-4ef4d3a1de5a"
@@ -1635,11 +1635,11 @@ lib LibWin32
   end
 
   struct IWiaTransferCallbackVTbl
-    query_interface : Proc(IWiaTransferCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaTransferCallback*, UInt32)
-    release : Proc(IWiaTransferCallback*, UInt32)
-    transfer_callback : Proc(IWiaTransferCallback*, Int32, WiaTransferParams*, HRESULT)
-    get_next_stream : Proc(IWiaTransferCallback*, Int32, UInt8*, UInt8*, IStream*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    transfer_callback : UInt64
+    get_next_stream : UInt64
   end
 
   IWiaTransferCallback_GUID = "27d4eaaf-28a6-4ca5-9aab-e678168b9527"
@@ -1649,10 +1649,10 @@ lib LibWin32
   end
 
   struct IWiaSegmentationFilterVTbl
-    query_interface : Proc(IWiaSegmentationFilter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaSegmentationFilter*, UInt32)
-    release : Proc(IWiaSegmentationFilter*, UInt32)
-    detect_regions : Proc(IWiaSegmentationFilter*, Int32, IStream, IWiaItem2, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    detect_regions : UInt64
   end
 
   IWiaSegmentationFilter_GUID = "ec46a697-ac04-4447-8f65-ff63d5154b21"
@@ -1662,13 +1662,13 @@ lib LibWin32
   end
 
   struct IWiaImageFilterVTbl
-    query_interface : Proc(IWiaImageFilter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaImageFilter*, UInt32)
-    release : Proc(IWiaImageFilter*, UInt32)
-    initialize_filter : Proc(IWiaImageFilter*, IWiaItem2, IWiaTransferCallback, HRESULT)
-    set_new_callback : Proc(IWiaImageFilter*, IWiaTransferCallback, HRESULT)
-    filter_preview_image : Proc(IWiaImageFilter*, Int32, IWiaItem2, RECT, IStream, HRESULT)
-    apply_properties : Proc(IWiaImageFilter*, IWiaPropertyStorage, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize_filter : UInt64
+    set_new_callback : UInt64
+    filter_preview_image : UInt64
+    apply_properties : UInt64
   end
 
   IWiaImageFilter_GUID = "a8a79ffa-450b-41f1-8f87-849ccd94ebf6"
@@ -1678,13 +1678,13 @@ lib LibWin32
   end
 
   struct IWiaPreviewVTbl
-    query_interface : Proc(IWiaPreview*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaPreview*, UInt32)
-    release : Proc(IWiaPreview*, UInt32)
-    get_new_preview : Proc(IWiaPreview*, Int32, IWiaItem2, IWiaTransferCallback, HRESULT)
-    update_preview : Proc(IWiaPreview*, Int32, IWiaItem2, IWiaTransferCallback, HRESULT)
-    detect_regions : Proc(IWiaPreview*, Int32, HRESULT)
-    clear : Proc(IWiaPreview*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_new_preview : UInt64
+    update_preview : UInt64
+    detect_regions : UInt64
+    clear : UInt64
   end
 
   IWiaPreview_GUID = "95c2b4fd-33f2-4d86-ad40-9431f0df08f7"
@@ -1694,14 +1694,14 @@ lib LibWin32
   end
 
   struct IEnumWiaItem2VTbl
-    query_interface : Proc(IEnumWiaItem2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumWiaItem2*, UInt32)
-    release : Proc(IEnumWiaItem2*, UInt32)
-    next : Proc(IEnumWiaItem2*, UInt32, IWiaItem2*, UInt32*, HRESULT)
-    skip : Proc(IEnumWiaItem2*, UInt32, HRESULT)
-    reset : Proc(IEnumWiaItem2*, HRESULT)
-    clone : Proc(IEnumWiaItem2*, IEnumWiaItem2*, HRESULT)
-    get_count : Proc(IEnumWiaItem2*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
+    get_count : UInt64
   end
 
   IEnumWiaItem2_GUID = "59970af4-cd0d-44d9-ab24-52295630e582"
@@ -1711,25 +1711,25 @@ lib LibWin32
   end
 
   struct IWiaItem2VTbl
-    query_interface : Proc(IWiaItem2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaItem2*, UInt32)
-    release : Proc(IWiaItem2*, UInt32)
-    create_child_item : Proc(IWiaItem2*, Int32, Int32, UInt8*, IWiaItem2*, HRESULT)
-    delete_item : Proc(IWiaItem2*, Int32, HRESULT)
-    enum_child_items : Proc(IWiaItem2*, Guid*, IEnumWiaItem2*, HRESULT)
-    find_item_by_name : Proc(IWiaItem2*, Int32, UInt8*, IWiaItem2*, HRESULT)
-    get_item_category : Proc(IWiaItem2*, Guid*, HRESULT)
-    get_item_type : Proc(IWiaItem2*, Int32*, HRESULT)
-    device_dlg : Proc(IWiaItem2*, Int32, LibC::HANDLE, UInt8*, UInt8*, Int32*, UInt8***, IWiaItem2*, HRESULT)
-    device_command : Proc(IWiaItem2*, Int32, Guid*, IWiaItem2*, HRESULT)
-    enum_device_capabilities : Proc(IWiaItem2*, Int32, IEnumWIA_DEV_CAPS*, HRESULT)
-    check_extension : Proc(IWiaItem2*, Int32, UInt8*, Guid*, LibC::BOOL*, HRESULT)
-    get_extension : Proc(IWiaItem2*, Int32, UInt8*, Guid*, Void**, HRESULT)
-    get_parent_item : Proc(IWiaItem2*, IWiaItem2*, HRESULT)
-    get_root_item : Proc(IWiaItem2*, IWiaItem2*, HRESULT)
-    get_preview_component : Proc(IWiaItem2*, Int32, IWiaPreview*, HRESULT)
-    enum_register_event_info : Proc(IWiaItem2*, Int32, Guid*, IEnumWIA_DEV_CAPS*, HRESULT)
-    diagnostic : Proc(IWiaItem2*, UInt32, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_child_item : UInt64
+    delete_item : UInt64
+    enum_child_items : UInt64
+    find_item_by_name : UInt64
+    get_item_category : UInt64
+    get_item_type : UInt64
+    device_dlg : UInt64
+    device_command : UInt64
+    enum_device_capabilities : UInt64
+    check_extension : UInt64
+    get_extension : UInt64
+    get_parent_item : UInt64
+    get_root_item : UInt64
+    get_preview_component : UInt64
+    enum_register_event_info : UInt64
+    diagnostic : UInt64
   end
 
   IWiaItem2_GUID = "6cba0075-1287-407d-9b77-cf0e030435cc"
@@ -1739,17 +1739,17 @@ lib LibWin32
   end
 
   struct IWiaDevMgr2VTbl
-    query_interface : Proc(IWiaDevMgr2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaDevMgr2*, UInt32)
-    release : Proc(IWiaDevMgr2*, UInt32)
-    enum_device_info : Proc(IWiaDevMgr2*, Int32, IEnumWIA_DEV_INFO*, HRESULT)
-    create_device : Proc(IWiaDevMgr2*, Int32, UInt8*, IWiaItem2*, HRESULT)
-    select_device_dlg : Proc(IWiaDevMgr2*, LibC::HANDLE, Int32, Int32, UInt8**, IWiaItem2*, HRESULT)
-    select_device_dlg_id : Proc(IWiaDevMgr2*, LibC::HANDLE, Int32, Int32, UInt8**, HRESULT)
-    register_event_callback_interface : Proc(IWiaDevMgr2*, Int32, UInt8*, Guid*, IWiaEventCallback, IUnknown*, HRESULT)
-    register_event_callback_program : Proc(IWiaDevMgr2*, Int32, UInt8*, Guid*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
-    register_event_callback_clsid : Proc(IWiaDevMgr2*, Int32, UInt8*, Guid*, Guid*, UInt8*, UInt8*, UInt8*, HRESULT)
-    get_image_dlg : Proc(IWiaDevMgr2*, Int32, UInt8*, LibC::HANDLE, UInt8*, UInt8*, Int32*, UInt8***, IWiaItem2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enum_device_info : UInt64
+    create_device : UInt64
+    select_device_dlg : UInt64
+    select_device_dlg_id : UInt64
+    register_event_callback_interface : UInt64
+    register_event_callback_program : UInt64
+    register_event_callback_clsid : UInt64
+    get_image_dlg : UInt64
   end
 
   IWiaDevMgr2_GUID = "79c07cf1-cbdd-41ee-8ec3-f00080cada7a"
@@ -1759,26 +1759,26 @@ lib LibWin32
   end
 
   struct IWiaMiniDrvVTbl
-    query_interface : Proc(IWiaMiniDrv*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaMiniDrv*, UInt32)
-    release : Proc(IWiaMiniDrv*, UInt32)
-    drv_initialize_wia : Proc(IWiaMiniDrv*, UInt8*, Int32, UInt8*, UInt8*, IUnknown, IUnknown, IWiaDrvItem*, IUnknown*, Int32*, HRESULT)
-    drv_acquire_item_data : Proc(IWiaMiniDrv*, UInt8*, Int32, MINIDRV_TRANSFER_CONTEXT*, Int32*, HRESULT)
-    drv_init_item_properties : Proc(IWiaMiniDrv*, UInt8*, Int32, Int32*, HRESULT)
-    drv_validate_item_properties : Proc(IWiaMiniDrv*, UInt8*, Int32, UInt32, PROPSPEC*, Int32*, HRESULT)
-    drv_write_item_properties : Proc(IWiaMiniDrv*, UInt8*, Int32, MINIDRV_TRANSFER_CONTEXT*, Int32*, HRESULT)
-    drv_read_item_properties : Proc(IWiaMiniDrv*, UInt8*, Int32, UInt32, PROPSPEC*, Int32*, HRESULT)
-    drv_lock_wia_device : Proc(IWiaMiniDrv*, UInt8*, Int32, Int32*, HRESULT)
-    drv_un_lock_wia_device : Proc(IWiaMiniDrv*, UInt8*, Int32, Int32*, HRESULT)
-    drv_analyze_item : Proc(IWiaMiniDrv*, UInt8*, Int32, Int32*, HRESULT)
-    drv_get_device_error_str : Proc(IWiaMiniDrv*, Int32, Int32, LibC::LPWSTR*, Int32*, HRESULT)
-    drv_device_command : Proc(IWiaMiniDrv*, UInt8*, Int32, Guid*, IWiaDrvItem*, Int32*, HRESULT)
-    drv_get_capabilities : Proc(IWiaMiniDrv*, UInt8*, Int32, Int32*, WIA_DEV_CAP_DRV**, Int32*, HRESULT)
-    drv_delete_item : Proc(IWiaMiniDrv*, UInt8*, Int32, Int32*, HRESULT)
-    drv_free_drv_item_context : Proc(IWiaMiniDrv*, Int32, UInt8*, Int32*, HRESULT)
-    drv_get_wia_format_info : Proc(IWiaMiniDrv*, UInt8*, Int32, Int32*, WIA_FORMAT_INFO**, Int32*, HRESULT)
-    drv_notify_pnp_event : Proc(IWiaMiniDrv*, Guid*, UInt8*, UInt32, HRESULT)
-    drv_un_initialize_wia : Proc(IWiaMiniDrv*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    drv_initialize_wia : UInt64
+    drv_acquire_item_data : UInt64
+    drv_init_item_properties : UInt64
+    drv_validate_item_properties : UInt64
+    drv_write_item_properties : UInt64
+    drv_read_item_properties : UInt64
+    drv_lock_wia_device : UInt64
+    drv_un_lock_wia_device : UInt64
+    drv_analyze_item : UInt64
+    drv_get_device_error_str : UInt64
+    drv_device_command : UInt64
+    drv_get_capabilities : UInt64
+    drv_delete_item : UInt64
+    drv_free_drv_item_context : UInt64
+    drv_get_wia_format_info : UInt64
+    drv_notify_pnp_event : UInt64
+    drv_un_initialize_wia : UInt64
   end
 
   IWiaMiniDrv_GUID = "d8cdee14-3c6c-11d2-9a35-00c04fa36145"
@@ -1788,10 +1788,10 @@ lib LibWin32
   end
 
   struct IWiaMiniDrvCallBackVTbl
-    query_interface : Proc(IWiaMiniDrvCallBack*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaMiniDrvCallBack*, UInt32)
-    release : Proc(IWiaMiniDrvCallBack*, UInt32)
-    mini_drv_callback : Proc(IWiaMiniDrvCallBack*, Int32, Int32, Int32, Int32, Int32, MINIDRV_TRANSFER_CONTEXT*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    mini_drv_callback : UInt64
   end
 
   IWiaMiniDrvCallBack_GUID = "33a57d5a-3de8-11d2-9a36-00c04fa36145"
@@ -1801,11 +1801,11 @@ lib LibWin32
   end
 
   struct IWiaMiniDrvTransferCallbackVTbl
-    query_interface : Proc(IWiaMiniDrvTransferCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaMiniDrvTransferCallback*, UInt32)
-    release : Proc(IWiaMiniDrvTransferCallback*, UInt32)
-    get_next_stream : Proc(IWiaMiniDrvTransferCallback*, Int32, UInt8*, UInt8*, IStream*, HRESULT)
-    send_message : Proc(IWiaMiniDrvTransferCallback*, Int32, WiaTransferParams*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_next_stream : UInt64
+    send_message : UInt64
   end
 
   IWiaMiniDrvTransferCallback_GUID = "a9d2ee89-2ce5-4ff0-8adb-c961d1d774ca"
@@ -1815,22 +1815,22 @@ lib LibWin32
   end
 
   struct IWiaDrvItemVTbl
-    query_interface : Proc(IWiaDrvItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaDrvItem*, UInt32)
-    release : Proc(IWiaDrvItem*, UInt32)
-    get_item_flags : Proc(IWiaDrvItem*, Int32*, HRESULT)
-    get_device_spec_context : Proc(IWiaDrvItem*, UInt8**, HRESULT)
-    get_full_item_name : Proc(IWiaDrvItem*, UInt8**, HRESULT)
-    get_item_name : Proc(IWiaDrvItem*, UInt8**, HRESULT)
-    add_item_to_folder : Proc(IWiaDrvItem*, IWiaDrvItem, HRESULT)
-    unlink_item_tree : Proc(IWiaDrvItem*, Int32, HRESULT)
-    remove_item_from_folder : Proc(IWiaDrvItem*, Int32, HRESULT)
-    find_item_by_name : Proc(IWiaDrvItem*, Int32, UInt8*, IWiaDrvItem*, HRESULT)
-    find_child_item_by_name : Proc(IWiaDrvItem*, UInt8*, IWiaDrvItem*, HRESULT)
-    get_parent_item : Proc(IWiaDrvItem*, IWiaDrvItem*, HRESULT)
-    get_first_child_item : Proc(IWiaDrvItem*, IWiaDrvItem*, HRESULT)
-    get_next_sibling_item : Proc(IWiaDrvItem*, IWiaDrvItem*, HRESULT)
-    dump_item_data : Proc(IWiaDrvItem*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_item_flags : UInt64
+    get_device_spec_context : UInt64
+    get_full_item_name : UInt64
+    get_item_name : UInt64
+    add_item_to_folder : UInt64
+    unlink_item_tree : UInt64
+    remove_item_from_folder : UInt64
+    find_item_by_name : UInt64
+    find_child_item_by_name : UInt64
+    get_parent_item : UInt64
+    get_first_child_item : UInt64
+    get_next_sibling_item : UInt64
+    dump_item_data : UInt64
   end
 
   IWiaDrvItem_GUID = "1f02b5c5-b00c-11d2-a094-00c04f72dc3c"
@@ -1840,22 +1840,22 @@ lib LibWin32
   end
 
   struct IWiaVideoVTbl
-    query_interface : Proc(IWiaVideo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaVideo*, UInt32)
-    release : Proc(IWiaVideo*, UInt32)
-    get_preview_visible : Proc(IWiaVideo*, LibC::BOOL*, HRESULT)
-    put_preview_visible : Proc(IWiaVideo*, LibC::BOOL, HRESULT)
-    get_images_directory : Proc(IWiaVideo*, UInt8**, HRESULT)
-    put_images_directory : Proc(IWiaVideo*, UInt8*, HRESULT)
-    create_video_by_wia_dev_id : Proc(IWiaVideo*, UInt8*, LibC::HANDLE, LibC::BOOL, LibC::BOOL, HRESULT)
-    create_video_by_dev_num : Proc(IWiaVideo*, UInt32, LibC::HANDLE, LibC::BOOL, LibC::BOOL, HRESULT)
-    create_video_by_name : Proc(IWiaVideo*, UInt8*, LibC::HANDLE, LibC::BOOL, LibC::BOOL, HRESULT)
-    destroy_video : Proc(IWiaVideo*, HRESULT)
-    play : Proc(IWiaVideo*, HRESULT)
-    pause : Proc(IWiaVideo*, HRESULT)
-    take_picture : Proc(IWiaVideo*, UInt8**, HRESULT)
-    resize_video : Proc(IWiaVideo*, LibC::BOOL, HRESULT)
-    get_current_state : Proc(IWiaVideo*, WIAVIDEO_STATE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_preview_visible : UInt64
+    put_preview_visible : UInt64
+    get_images_directory : UInt64
+    put_images_directory : UInt64
+    create_video_by_wia_dev_id : UInt64
+    create_video_by_dev_num : UInt64
+    create_video_by_name : UInt64
+    destroy_video : UInt64
+    play : UInt64
+    pause : UInt64
+    take_picture : UInt64
+    resize_video : UInt64
+    get_current_state : UInt64
   end
 
   IWiaVideo_GUID = "d52920aa-db88-41f0-946c-e00dc0a19cfa"
@@ -1865,11 +1865,11 @@ lib LibWin32
   end
 
   struct IWiaUIExtension2VTbl
-    query_interface : Proc(IWiaUIExtension2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaUIExtension2*, UInt32)
-    release : Proc(IWiaUIExtension2*, UInt32)
-    device_dialog : Proc(IWiaUIExtension2*, DEVICEDIALOGDATA2*, HRESULT)
-    get_device_icon : Proc(IWiaUIExtension2*, UInt8*, HANDLE*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    device_dialog : UInt64
+    get_device_icon : UInt64
   end
 
   IWiaUIExtension2_GUID = "305600d7-5088-46d7-9a15-b77b09cdba7a"
@@ -1879,12 +1879,12 @@ lib LibWin32
   end
 
   struct IWiaUIExtensionVTbl
-    query_interface : Proc(IWiaUIExtension*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWiaUIExtension*, UInt32)
-    release : Proc(IWiaUIExtension*, UInt32)
-    device_dialog : Proc(IWiaUIExtension*, DEVICEDIALOGDATA*, HRESULT)
-    get_device_icon : Proc(IWiaUIExtension*, UInt8*, HANDLE*, UInt32, HRESULT)
-    get_device_bitmap_logo : Proc(IWiaUIExtension*, UInt8*, HBITMAP*, UInt32, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    device_dialog : UInt64
+    get_device_icon : UInt64
+    get_device_bitmap_logo : UInt64
   end
 
   IWiaUIExtension_GUID = "da319113-50ee-4c80-b460-57d005d44a2c"
@@ -1893,4 +1893,879 @@ lib LibWin32
     lpVtbl : IWiaUIExtensionVTbl*
   end
 
+end
+struct LibWin32::IWiaDevMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enum_device_info(lflag : Int32, ppienum : IEnumWIA_DEV_INFO*) : HRESULT
+    @lpVtbl.value.enum_device_info.unsafe_as(Proc(Int32, IEnumWIA_DEV_INFO*, HRESULT)).call(lflag, ppienum)
+  end
+  def create_device(bstrdeviceid : UInt8*, ppwiaitemroot : IWiaItem*) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(UInt8*, IWiaItem*, HRESULT)).call(bstrdeviceid, ppwiaitemroot)
+  end
+  def select_device_dlg(hwndparent : LibC::HANDLE, ldevicetype : Int32, lflags : Int32, pbstrdeviceid : UInt8**, ppitemroot : IWiaItem*) : HRESULT
+    @lpVtbl.value.select_device_dlg.unsafe_as(Proc(LibC::HANDLE, Int32, Int32, UInt8**, IWiaItem*, HRESULT)).call(hwndparent, ldevicetype, lflags, pbstrdeviceid, ppitemroot)
+  end
+  def select_device_dlg_id(hwndparent : LibC::HANDLE, ldevicetype : Int32, lflags : Int32, pbstrdeviceid : UInt8**) : HRESULT
+    @lpVtbl.value.select_device_dlg_id.unsafe_as(Proc(LibC::HANDLE, Int32, Int32, UInt8**, HRESULT)).call(hwndparent, ldevicetype, lflags, pbstrdeviceid)
+  end
+  def get_image_dlg(hwndparent : LibC::HANDLE, ldevicetype : Int32, lflags : Int32, lintent : Int32, pitemroot : IWiaItem, bstrfilename : UInt8*, pguidformat : Guid*) : HRESULT
+    @lpVtbl.value.get_image_dlg.unsafe_as(Proc(LibC::HANDLE, Int32, Int32, Int32, IWiaItem, UInt8*, Guid*, HRESULT)).call(hwndparent, ldevicetype, lflags, lintent, pitemroot, bstrfilename, pguidformat)
+  end
+  def register_event_callback_program(lflags : Int32, bstrdeviceid : UInt8*, peventguid : Guid*, bstrcommandline : UInt8*, bstrname : UInt8*, bstrdescription : UInt8*, bstricon : UInt8*) : HRESULT
+    @lpVtbl.value.register_event_callback_program.unsafe_as(Proc(Int32, UInt8*, Guid*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)).call(lflags, bstrdeviceid, peventguid, bstrcommandline, bstrname, bstrdescription, bstricon)
+  end
+  def register_event_callback_interface(lflags : Int32, bstrdeviceid : UInt8*, peventguid : Guid*, piwiaeventcallback : IWiaEventCallback, peventobject : IUnknown*) : HRESULT
+    @lpVtbl.value.register_event_callback_interface.unsafe_as(Proc(Int32, UInt8*, Guid*, IWiaEventCallback, IUnknown*, HRESULT)).call(lflags, bstrdeviceid, peventguid, piwiaeventcallback, peventobject)
+  end
+  def register_event_callback_clsid(lflags : Int32, bstrdeviceid : UInt8*, peventguid : Guid*, pclsid : Guid*, bstrname : UInt8*, bstrdescription : UInt8*, bstricon : UInt8*) : HRESULT
+    @lpVtbl.value.register_event_callback_clsid.unsafe_as(Proc(Int32, UInt8*, Guid*, Guid*, UInt8*, UInt8*, UInt8*, HRESULT)).call(lflags, bstrdeviceid, peventguid, pclsid, bstrname, bstrdescription, bstricon)
+  end
+  def add_device_dlg(hwndparent : LibC::HANDLE, lflags : Int32) : HRESULT
+    @lpVtbl.value.add_device_dlg.unsafe_as(Proc(LibC::HANDLE, Int32, HRESULT)).call(hwndparent, lflags)
+  end
+end
+struct LibWin32::IEnumWIA_DEV_INFO
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : IWiaPropertyStorage*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IWiaPropertyStorage*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppienum : IEnumWIA_DEV_INFO*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumWIA_DEV_INFO*, HRESULT)).call(ppienum)
+  end
+  def get_count(celt : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(celt)
+  end
+end
+struct LibWin32::IWiaEventCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def image_event_callback(peventguid : Guid*, bstreventdescription : UInt8*, bstrdeviceid : UInt8*, bstrdevicedescription : UInt8*, dwdevicetype : UInt32, bstrfullitemname : UInt8*, puleventtype : UInt32*, ulreserved : UInt32) : HRESULT
+    @lpVtbl.value.image_event_callback.unsafe_as(Proc(Guid*, UInt8*, UInt8*, UInt8*, UInt32, UInt8*, UInt32*, UInt32, HRESULT)).call(peventguid, bstreventdescription, bstrdeviceid, bstrdevicedescription, dwdevicetype, bstrfullitemname, puleventtype, ulreserved)
+  end
+end
+struct LibWin32::IWiaDataCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def banded_data_callback(lmessage : Int32, lstatus : Int32, lpercentcomplete : Int32, loffset : Int32, llength : Int32, lreserved : Int32, lreslength : Int32, pbbuffer : UInt8*) : HRESULT
+    @lpVtbl.value.banded_data_callback.unsafe_as(Proc(Int32, Int32, Int32, Int32, Int32, Int32, Int32, UInt8*, HRESULT)).call(lmessage, lstatus, lpercentcomplete, loffset, llength, lreserved, lreslength, pbbuffer)
+  end
+end
+struct LibWin32::IWiaDataTransfer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def idt_get_data(pmedium : STGMEDIUM*, piwiadatacallback : IWiaDataCallback) : HRESULT
+    @lpVtbl.value.idt_get_data.unsafe_as(Proc(STGMEDIUM*, IWiaDataCallback, HRESULT)).call(pmedium, piwiadatacallback)
+  end
+  def idt_get_banded_data(pwiadatatransinfo : WIA_DATA_TRANSFER_INFO*, piwiadatacallback : IWiaDataCallback) : HRESULT
+    @lpVtbl.value.idt_get_banded_data.unsafe_as(Proc(WIA_DATA_TRANSFER_INFO*, IWiaDataCallback, HRESULT)).call(pwiadatatransinfo, piwiadatacallback)
+  end
+  def idt_query_get_data(pfe : WIA_FORMAT_INFO*) : HRESULT
+    @lpVtbl.value.idt_query_get_data.unsafe_as(Proc(WIA_FORMAT_INFO*, HRESULT)).call(pfe)
+  end
+  def idt_enum_wia_format_info(ppenum : IEnumWIA_FORMAT_INFO*) : HRESULT
+    @lpVtbl.value.idt_enum_wia_format_info.unsafe_as(Proc(IEnumWIA_FORMAT_INFO*, HRESULT)).call(ppenum)
+  end
+  def idt_get_extended_transfer_info(pextendedtransferinfo : WIA_EXTENDED_TRANSFER_INFO*) : HRESULT
+    @lpVtbl.value.idt_get_extended_transfer_info.unsafe_as(Proc(WIA_EXTENDED_TRANSFER_INFO*, HRESULT)).call(pextendedtransferinfo)
+  end
+end
+struct LibWin32::IWiaItem
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_item_type(pitemtype : Int32*) : HRESULT
+    @lpVtbl.value.get_item_type.unsafe_as(Proc(Int32*, HRESULT)).call(pitemtype)
+  end
+  def analyze_item(lflags : Int32) : HRESULT
+    @lpVtbl.value.analyze_item.unsafe_as(Proc(Int32, HRESULT)).call(lflags)
+  end
+  def enum_child_items(ppienumwiaitem : IEnumWiaItem*) : HRESULT
+    @lpVtbl.value.enum_child_items.unsafe_as(Proc(IEnumWiaItem*, HRESULT)).call(ppienumwiaitem)
+  end
+  def delete_item(lflags : Int32) : HRESULT
+    @lpVtbl.value.delete_item.unsafe_as(Proc(Int32, HRESULT)).call(lflags)
+  end
+  def create_child_item(lflags : Int32, bstritemname : UInt8*, bstrfullitemname : UInt8*, ppiwiaitem : IWiaItem*) : HRESULT
+    @lpVtbl.value.create_child_item.unsafe_as(Proc(Int32, UInt8*, UInt8*, IWiaItem*, HRESULT)).call(lflags, bstritemname, bstrfullitemname, ppiwiaitem)
+  end
+  def enum_register_event_info(lflags : Int32, peventguid : Guid*, ppienum : IEnumWIA_DEV_CAPS*) : HRESULT
+    @lpVtbl.value.enum_register_event_info.unsafe_as(Proc(Int32, Guid*, IEnumWIA_DEV_CAPS*, HRESULT)).call(lflags, peventguid, ppienum)
+  end
+  def find_item_by_name(lflags : Int32, bstrfullitemname : UInt8*, ppiwiaitem : IWiaItem*) : HRESULT
+    @lpVtbl.value.find_item_by_name.unsafe_as(Proc(Int32, UInt8*, IWiaItem*, HRESULT)).call(lflags, bstrfullitemname, ppiwiaitem)
+  end
+  def device_dlg(hwndparent : LibC::HANDLE, lflags : Int32, lintent : Int32, plitemcount : Int32*, ppiwiaitem : IWiaItem**) : HRESULT
+    @lpVtbl.value.device_dlg.unsafe_as(Proc(LibC::HANDLE, Int32, Int32, Int32*, IWiaItem**, HRESULT)).call(hwndparent, lflags, lintent, plitemcount, ppiwiaitem)
+  end
+  def device_command(lflags : Int32, pcmdguid : Guid*, piwiaitem : IWiaItem*) : HRESULT
+    @lpVtbl.value.device_command.unsafe_as(Proc(Int32, Guid*, IWiaItem*, HRESULT)).call(lflags, pcmdguid, piwiaitem)
+  end
+  def get_root_item(ppiwiaitem : IWiaItem*) : HRESULT
+    @lpVtbl.value.get_root_item.unsafe_as(Proc(IWiaItem*, HRESULT)).call(ppiwiaitem)
+  end
+  def enum_device_capabilities(lflags : Int32, ppienumwia_dev_caps : IEnumWIA_DEV_CAPS*) : HRESULT
+    @lpVtbl.value.enum_device_capabilities.unsafe_as(Proc(Int32, IEnumWIA_DEV_CAPS*, HRESULT)).call(lflags, ppienumwia_dev_caps)
+  end
+  def dump_item_data(bstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.dump_item_data.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrdata)
+  end
+  def dump_drv_item_data(bstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.dump_drv_item_data.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrdata)
+  end
+  def dump_tree_item_data(bstrdata : UInt8**) : HRESULT
+    @lpVtbl.value.dump_tree_item_data.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrdata)
+  end
+  def diagnostic(ulsize : UInt32, pbuffer : UInt8*) : HRESULT
+    @lpVtbl.value.diagnostic.unsafe_as(Proc(UInt32, UInt8*, HRESULT)).call(ulsize, pbuffer)
+  end
+end
+struct LibWin32::IWiaPropertyStorage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def read_multiple(cpspec : UInt32, rgpspec : PROPSPEC*, rgpropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.read_multiple.unsafe_as(Proc(UInt32, PROPSPEC*, PROPVARIANT*, HRESULT)).call(cpspec, rgpspec, rgpropvar)
+  end
+  def write_multiple(cpspec : UInt32, rgpspec : PROPSPEC*, rgpropvar : PROPVARIANT*, propidnamefirst : UInt32) : HRESULT
+    @lpVtbl.value.write_multiple.unsafe_as(Proc(UInt32, PROPSPEC*, PROPVARIANT*, UInt32, HRESULT)).call(cpspec, rgpspec, rgpropvar, propidnamefirst)
+  end
+  def delete_multiple(cpspec : UInt32, rgpspec : PROPSPEC*) : HRESULT
+    @lpVtbl.value.delete_multiple.unsafe_as(Proc(UInt32, PROPSPEC*, HRESULT)).call(cpspec, rgpspec)
+  end
+  def read_property_names(cpropid : UInt32, rgpropid : UInt32*, rglpwstrname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.read_property_names.unsafe_as(Proc(UInt32, UInt32*, LibC::LPWSTR*, HRESULT)).call(cpropid, rgpropid, rglpwstrname)
+  end
+  def write_property_names(cpropid : UInt32, rgpropid : UInt32*, rglpwstrname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.write_property_names.unsafe_as(Proc(UInt32, UInt32*, LibC::LPWSTR*, HRESULT)).call(cpropid, rgpropid, rglpwstrname)
+  end
+  def delete_property_names(cpropid : UInt32, rgpropid : UInt32*) : HRESULT
+    @lpVtbl.value.delete_property_names.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(cpropid, rgpropid)
+  end
+  def commit(grfcommitflags : UInt32) : HRESULT
+    @lpVtbl.value.commit.unsafe_as(Proc(UInt32, HRESULT)).call(grfcommitflags)
+  end
+  def revert : HRESULT
+    @lpVtbl.value.revert.unsafe_as(Proc(HRESULT)).call
+  end
+  def enum(ppenum : IEnumSTATPROPSTG*) : HRESULT
+    @lpVtbl.value.enum.unsafe_as(Proc(IEnumSTATPROPSTG*, HRESULT)).call(ppenum)
+  end
+  def set_times(pctime : FILETIME*, patime : FILETIME*, pmtime : FILETIME*) : HRESULT
+    @lpVtbl.value.set_times.unsafe_as(Proc(FILETIME*, FILETIME*, FILETIME*, HRESULT)).call(pctime, patime, pmtime)
+  end
+  def set_class(clsid : Guid*) : HRESULT
+    @lpVtbl.value.set_class.unsafe_as(Proc(Guid*, HRESULT)).call(clsid)
+  end
+  def stat(pstatpsstg : STATPROPSETSTG*) : HRESULT
+    @lpVtbl.value.stat.unsafe_as(Proc(STATPROPSETSTG*, HRESULT)).call(pstatpsstg)
+  end
+  def get_property_attributes(cpspec : UInt32, rgpspec : PROPSPEC*, rgflags : UInt32*, rgpropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_property_attributes.unsafe_as(Proc(UInt32, PROPSPEC*, UInt32*, PROPVARIANT*, HRESULT)).call(cpspec, rgpspec, rgflags, rgpropvar)
+  end
+  def get_count(pulnumprops : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pulnumprops)
+  end
+  def get_property_stream(pcompatibilityid : Guid*, ppistream : IStream*) : HRESULT
+    @lpVtbl.value.get_property_stream.unsafe_as(Proc(Guid*, IStream*, HRESULT)).call(pcompatibilityid, ppistream)
+  end
+  def set_property_stream(pcompatibilityid : Guid*, pistream : IStream) : HRESULT
+    @lpVtbl.value.set_property_stream.unsafe_as(Proc(Guid*, IStream, HRESULT)).call(pcompatibilityid, pistream)
+  end
+end
+struct LibWin32::IEnumWiaItem
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppiwiaitem : IWiaItem*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IWiaItem*, UInt32*, HRESULT)).call(celt, ppiwiaitem, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppienum : IEnumWiaItem*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumWiaItem*, HRESULT)).call(ppienum)
+  end
+  def get_count(celt : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(celt)
+  end
+end
+struct LibWin32::IEnumWIA_DEV_CAPS
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : WIA_DEV_CAP*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, WIA_DEV_CAP*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppienum : IEnumWIA_DEV_CAPS*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumWIA_DEV_CAPS*, HRESULT)).call(ppienum)
+  end
+  def get_count(pcelt : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcelt)
+  end
+end
+struct LibWin32::IEnumWIA_FORMAT_INFO
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : WIA_FORMAT_INFO*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, WIA_FORMAT_INFO*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppienum : IEnumWIA_FORMAT_INFO*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumWIA_FORMAT_INFO*, HRESULT)).call(ppienum)
+  end
+  def get_count(pcelt : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcelt)
+  end
+end
+struct LibWin32::IWiaLog
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize_log(hinstance : Int32) : HRESULT
+    @lpVtbl.value.initialize_log.unsafe_as(Proc(Int32, HRESULT)).call(hinstance)
+  end
+  def h_result(hresult : HRESULT) : HRESULT
+    @lpVtbl.value.h_result.unsafe_as(Proc(HRESULT, HRESULT)).call(hresult)
+  end
+  def log(lflags : Int32, lresid : Int32, ldetail : Int32, bstrtext : UInt8*) : HRESULT
+    @lpVtbl.value.log.unsafe_as(Proc(Int32, Int32, Int32, UInt8*, HRESULT)).call(lflags, lresid, ldetail, bstrtext)
+  end
+end
+struct LibWin32::IWiaLogEx
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize_log_ex(hinstance : UInt8*) : HRESULT
+    @lpVtbl.value.initialize_log_ex.unsafe_as(Proc(UInt8*, HRESULT)).call(hinstance)
+  end
+  def h_result(hresult : HRESULT) : HRESULT
+    @lpVtbl.value.h_result.unsafe_as(Proc(HRESULT, HRESULT)).call(hresult)
+  end
+  def log(lflags : Int32, lresid : Int32, ldetail : Int32, bstrtext : UInt8*) : HRESULT
+    @lpVtbl.value.log.unsafe_as(Proc(Int32, Int32, Int32, UInt8*, HRESULT)).call(lflags, lresid, ldetail, bstrtext)
+  end
+  def h_result_ex(lmethodid : Int32, hresult : HRESULT) : HRESULT
+    @lpVtbl.value.h_result_ex.unsafe_as(Proc(Int32, HRESULT, HRESULT)).call(lmethodid, hresult)
+  end
+  def log_ex(lmethodid : Int32, lflags : Int32, lresid : Int32, ldetail : Int32, bstrtext : UInt8*) : HRESULT
+    @lpVtbl.value.log_ex.unsafe_as(Proc(Int32, Int32, Int32, Int32, UInt8*, HRESULT)).call(lmethodid, lflags, lresid, ldetail, bstrtext)
+  end
+end
+struct LibWin32::IWiaNotifyDevMgr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def new_device_arrival : HRESULT
+    @lpVtbl.value.new_device_arrival.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWiaItemExtras
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_extended_error_info(bstrerrortext : UInt8**) : HRESULT
+    @lpVtbl.value.get_extended_error_info.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrerrortext)
+  end
+  def escape(dwescapecode : UInt32, lpindata : UInt8*, cbindatasize : UInt32, poutdata : UInt8*, dwoutdatasize : UInt32, pdwactualdatasize : UInt32*) : HRESULT
+    @lpVtbl.value.escape.unsafe_as(Proc(UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32*, HRESULT)).call(dwescapecode, lpindata, cbindatasize, poutdata, dwoutdatasize, pdwactualdatasize)
+  end
+  def cancel_pending_io : HRESULT
+    @lpVtbl.value.cancel_pending_io.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWiaAppErrorHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_window(phwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.unsafe_as(Proc(HANDLE*, HRESULT)).call(phwnd)
+  end
+  def report_status(lflags : Int32, pwiaitem2 : IWiaItem2, hrstatus : HRESULT, lpercentcomplete : Int32) : HRESULT
+    @lpVtbl.value.report_status.unsafe_as(Proc(Int32, IWiaItem2, HRESULT, Int32, HRESULT)).call(lflags, pwiaitem2, hrstatus, lpercentcomplete)
+  end
+end
+struct LibWin32::IWiaErrorHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def report_status(lflags : Int32, hwndparent : LibC::HANDLE, pwiaitem2 : IWiaItem2, hrstatus : HRESULT, lpercentcomplete : Int32) : HRESULT
+    @lpVtbl.value.report_status.unsafe_as(Proc(Int32, LibC::HANDLE, IWiaItem2, HRESULT, Int32, HRESULT)).call(lflags, hwndparent, pwiaitem2, hrstatus, lpercentcomplete)
+  end
+  def get_status_description(lflags : Int32, pwiaitem2 : IWiaItem2, hrstatus : HRESULT, pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_status_description.unsafe_as(Proc(Int32, IWiaItem2, HRESULT, UInt8**, HRESULT)).call(lflags, pwiaitem2, hrstatus, pbstrdescription)
+  end
+end
+struct LibWin32::IWiaTransfer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def download(lflags : Int32, piwiatransfercallback : IWiaTransferCallback) : HRESULT
+    @lpVtbl.value.download.unsafe_as(Proc(Int32, IWiaTransferCallback, HRESULT)).call(lflags, piwiatransfercallback)
+  end
+  def upload(lflags : Int32, psource : IStream, piwiatransfercallback : IWiaTransferCallback) : HRESULT
+    @lpVtbl.value.upload.unsafe_as(Proc(Int32, IStream, IWiaTransferCallback, HRESULT)).call(lflags, psource, piwiatransfercallback)
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+  def enum_wia_format_info(ppenum : IEnumWIA_FORMAT_INFO*) : HRESULT
+    @lpVtbl.value.enum_wia_format_info.unsafe_as(Proc(IEnumWIA_FORMAT_INFO*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IWiaTransferCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def transfer_callback(lflags : Int32, pwiatransferparams : WiaTransferParams*) : HRESULT
+    @lpVtbl.value.transfer_callback.unsafe_as(Proc(Int32, WiaTransferParams*, HRESULT)).call(lflags, pwiatransferparams)
+  end
+  def get_next_stream(lflags : Int32, bstritemname : UInt8*, bstrfullitemname : UInt8*, ppdestination : IStream*) : HRESULT
+    @lpVtbl.value.get_next_stream.unsafe_as(Proc(Int32, UInt8*, UInt8*, IStream*, HRESULT)).call(lflags, bstritemname, bstrfullitemname, ppdestination)
+  end
+end
+struct LibWin32::IWiaSegmentationFilter
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def detect_regions(lflags : Int32, pinputstream : IStream, pwiaitem2 : IWiaItem2) : HRESULT
+    @lpVtbl.value.detect_regions.unsafe_as(Proc(Int32, IStream, IWiaItem2, HRESULT)).call(lflags, pinputstream, pwiaitem2)
+  end
+end
+struct LibWin32::IWiaImageFilter
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize_filter(pwiaitem2 : IWiaItem2, pwiatransfercallback : IWiaTransferCallback) : HRESULT
+    @lpVtbl.value.initialize_filter.unsafe_as(Proc(IWiaItem2, IWiaTransferCallback, HRESULT)).call(pwiaitem2, pwiatransfercallback)
+  end
+  def set_new_callback(pwiatransfercallback : IWiaTransferCallback) : HRESULT
+    @lpVtbl.value.set_new_callback.unsafe_as(Proc(IWiaTransferCallback, HRESULT)).call(pwiatransfercallback)
+  end
+  def filter_preview_image(lflags : Int32, pwiachilditem2 : IWiaItem2, inputimageextents : RECT, pinputstream : IStream) : HRESULT
+    @lpVtbl.value.filter_preview_image.unsafe_as(Proc(Int32, IWiaItem2, RECT, IStream, HRESULT)).call(lflags, pwiachilditem2, inputimageextents, pinputstream)
+  end
+  def apply_properties(pwiapropertystorage : IWiaPropertyStorage) : HRESULT
+    @lpVtbl.value.apply_properties.unsafe_as(Proc(IWiaPropertyStorage, HRESULT)).call(pwiapropertystorage)
+  end
+end
+struct LibWin32::IWiaPreview
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_new_preview(lflags : Int32, pwiaitem2 : IWiaItem2, pwiatransfercallback : IWiaTransferCallback) : HRESULT
+    @lpVtbl.value.get_new_preview.unsafe_as(Proc(Int32, IWiaItem2, IWiaTransferCallback, HRESULT)).call(lflags, pwiaitem2, pwiatransfercallback)
+  end
+  def update_preview(lflags : Int32, pchildwiaitem2 : IWiaItem2, pwiatransfercallback : IWiaTransferCallback) : HRESULT
+    @lpVtbl.value.update_preview.unsafe_as(Proc(Int32, IWiaItem2, IWiaTransferCallback, HRESULT)).call(lflags, pchildwiaitem2, pwiatransfercallback)
+  end
+  def detect_regions(lflags : Int32) : HRESULT
+    @lpVtbl.value.detect_regions.unsafe_as(Proc(Int32, HRESULT)).call(lflags)
+  end
+  def clear : HRESULT
+    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IEnumWiaItem2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppiwiaitem2 : IWiaItem2*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IWiaItem2*, UInt32*, HRESULT)).call(celt, ppiwiaitem2, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppienum : IEnumWiaItem2*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumWiaItem2*, HRESULT)).call(ppienum)
+  end
+  def get_count(celt : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(celt)
+  end
+end
+struct LibWin32::IWiaItem2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_child_item(litemflags : Int32, lcreationflags : Int32, bstritemname : UInt8*, ppiwiaitem2 : IWiaItem2*) : HRESULT
+    @lpVtbl.value.create_child_item.unsafe_as(Proc(Int32, Int32, UInt8*, IWiaItem2*, HRESULT)).call(litemflags, lcreationflags, bstritemname, ppiwiaitem2)
+  end
+  def delete_item(lflags : Int32) : HRESULT
+    @lpVtbl.value.delete_item.unsafe_as(Proc(Int32, HRESULT)).call(lflags)
+  end
+  def enum_child_items(pcategoryguid : Guid*, ppienumwiaitem2 : IEnumWiaItem2*) : HRESULT
+    @lpVtbl.value.enum_child_items.unsafe_as(Proc(Guid*, IEnumWiaItem2*, HRESULT)).call(pcategoryguid, ppienumwiaitem2)
+  end
+  def find_item_by_name(lflags : Int32, bstrfullitemname : UInt8*, ppiwiaitem2 : IWiaItem2*) : HRESULT
+    @lpVtbl.value.find_item_by_name.unsafe_as(Proc(Int32, UInt8*, IWiaItem2*, HRESULT)).call(lflags, bstrfullitemname, ppiwiaitem2)
+  end
+  def get_item_category(pitemcategoryguid : Guid*) : HRESULT
+    @lpVtbl.value.get_item_category.unsafe_as(Proc(Guid*, HRESULT)).call(pitemcategoryguid)
+  end
+  def get_item_type(pitemtype : Int32*) : HRESULT
+    @lpVtbl.value.get_item_type.unsafe_as(Proc(Int32*, HRESULT)).call(pitemtype)
+  end
+  def device_dlg(lflags : Int32, hwndparent : LibC::HANDLE, bstrfoldername : UInt8*, bstrfilename : UInt8*, plnumfiles : Int32*, ppbstrfilepaths : UInt8***, ppitem : IWiaItem2*) : HRESULT
+    @lpVtbl.value.device_dlg.unsafe_as(Proc(Int32, LibC::HANDLE, UInt8*, UInt8*, Int32*, UInt8***, IWiaItem2*, HRESULT)).call(lflags, hwndparent, bstrfoldername, bstrfilename, plnumfiles, ppbstrfilepaths, ppitem)
+  end
+  def device_command(lflags : Int32, pcmdguid : Guid*, ppiwiaitem2 : IWiaItem2*) : HRESULT
+    @lpVtbl.value.device_command.unsafe_as(Proc(Int32, Guid*, IWiaItem2*, HRESULT)).call(lflags, pcmdguid, ppiwiaitem2)
+  end
+  def enum_device_capabilities(lflags : Int32, ppienumwia_dev_caps : IEnumWIA_DEV_CAPS*) : HRESULT
+    @lpVtbl.value.enum_device_capabilities.unsafe_as(Proc(Int32, IEnumWIA_DEV_CAPS*, HRESULT)).call(lflags, ppienumwia_dev_caps)
+  end
+  def check_extension(lflags : Int32, bstrname : UInt8*, riidextensioninterface : Guid*, pbextensionexists : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_extension.unsafe_as(Proc(Int32, UInt8*, Guid*, LibC::BOOL*, HRESULT)).call(lflags, bstrname, riidextensioninterface, pbextensionexists)
+  end
+  def get_extension(lflags : Int32, bstrname : UInt8*, riidextensioninterface : Guid*, ppout : Void**) : HRESULT
+    @lpVtbl.value.get_extension.unsafe_as(Proc(Int32, UInt8*, Guid*, Void**, HRESULT)).call(lflags, bstrname, riidextensioninterface, ppout)
+  end
+  def get_parent_item(ppiwiaitem2 : IWiaItem2*) : HRESULT
+    @lpVtbl.value.get_parent_item.unsafe_as(Proc(IWiaItem2*, HRESULT)).call(ppiwiaitem2)
+  end
+  def get_root_item(ppiwiaitem2 : IWiaItem2*) : HRESULT
+    @lpVtbl.value.get_root_item.unsafe_as(Proc(IWiaItem2*, HRESULT)).call(ppiwiaitem2)
+  end
+  def get_preview_component(lflags : Int32, ppwiapreview : IWiaPreview*) : HRESULT
+    @lpVtbl.value.get_preview_component.unsafe_as(Proc(Int32, IWiaPreview*, HRESULT)).call(lflags, ppwiapreview)
+  end
+  def enum_register_event_info(lflags : Int32, peventguid : Guid*, ppienum : IEnumWIA_DEV_CAPS*) : HRESULT
+    @lpVtbl.value.enum_register_event_info.unsafe_as(Proc(Int32, Guid*, IEnumWIA_DEV_CAPS*, HRESULT)).call(lflags, peventguid, ppienum)
+  end
+  def diagnostic(ulsize : UInt32, pbuffer : UInt8*) : HRESULT
+    @lpVtbl.value.diagnostic.unsafe_as(Proc(UInt32, UInt8*, HRESULT)).call(ulsize, pbuffer)
+  end
+end
+struct LibWin32::IWiaDevMgr2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enum_device_info(lflags : Int32, ppienum : IEnumWIA_DEV_INFO*) : HRESULT
+    @lpVtbl.value.enum_device_info.unsafe_as(Proc(Int32, IEnumWIA_DEV_INFO*, HRESULT)).call(lflags, ppienum)
+  end
+  def create_device(lflags : Int32, bstrdeviceid : UInt8*, ppwiaitem2root : IWiaItem2*) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(Int32, UInt8*, IWiaItem2*, HRESULT)).call(lflags, bstrdeviceid, ppwiaitem2root)
+  end
+  def select_device_dlg(hwndparent : LibC::HANDLE, ldevicetype : Int32, lflags : Int32, pbstrdeviceid : UInt8**, ppitemroot : IWiaItem2*) : HRESULT
+    @lpVtbl.value.select_device_dlg.unsafe_as(Proc(LibC::HANDLE, Int32, Int32, UInt8**, IWiaItem2*, HRESULT)).call(hwndparent, ldevicetype, lflags, pbstrdeviceid, ppitemroot)
+  end
+  def select_device_dlg_id(hwndparent : LibC::HANDLE, ldevicetype : Int32, lflags : Int32, pbstrdeviceid : UInt8**) : HRESULT
+    @lpVtbl.value.select_device_dlg_id.unsafe_as(Proc(LibC::HANDLE, Int32, Int32, UInt8**, HRESULT)).call(hwndparent, ldevicetype, lflags, pbstrdeviceid)
+  end
+  def register_event_callback_interface(lflags : Int32, bstrdeviceid : UInt8*, peventguid : Guid*, piwiaeventcallback : IWiaEventCallback, peventobject : IUnknown*) : HRESULT
+    @lpVtbl.value.register_event_callback_interface.unsafe_as(Proc(Int32, UInt8*, Guid*, IWiaEventCallback, IUnknown*, HRESULT)).call(lflags, bstrdeviceid, peventguid, piwiaeventcallback, peventobject)
+  end
+  def register_event_callback_program(lflags : Int32, bstrdeviceid : UInt8*, peventguid : Guid*, bstrfullappname : UInt8*, bstrcommandlinearg : UInt8*, bstrname : UInt8*, bstrdescription : UInt8*, bstricon : UInt8*) : HRESULT
+    @lpVtbl.value.register_event_callback_program.unsafe_as(Proc(Int32, UInt8*, Guid*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)).call(lflags, bstrdeviceid, peventguid, bstrfullappname, bstrcommandlinearg, bstrname, bstrdescription, bstricon)
+  end
+  def register_event_callback_clsid(lflags : Int32, bstrdeviceid : UInt8*, peventguid : Guid*, pclsid : Guid*, bstrname : UInt8*, bstrdescription : UInt8*, bstricon : UInt8*) : HRESULT
+    @lpVtbl.value.register_event_callback_clsid.unsafe_as(Proc(Int32, UInt8*, Guid*, Guid*, UInt8*, UInt8*, UInt8*, HRESULT)).call(lflags, bstrdeviceid, peventguid, pclsid, bstrname, bstrdescription, bstricon)
+  end
+  def get_image_dlg(lflags : Int32, bstrdeviceid : UInt8*, hwndparent : LibC::HANDLE, bstrfoldername : UInt8*, bstrfilename : UInt8*, plnumfiles : Int32*, ppbstrfilepaths : UInt8***, ppitem : IWiaItem2*) : HRESULT
+    @lpVtbl.value.get_image_dlg.unsafe_as(Proc(Int32, UInt8*, LibC::HANDLE, UInt8*, UInt8*, Int32*, UInt8***, IWiaItem2*, HRESULT)).call(lflags, bstrdeviceid, hwndparent, bstrfoldername, bstrfilename, plnumfiles, ppbstrfilepaths, ppitem)
+  end
+end
+struct LibWin32::IWiaMiniDrv
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def drv_initialize_wia(midl__iwiaminidrv0000 : UInt8*, midl__iwiaminidrv0001 : Int32, midl__iwiaminidrv0002 : UInt8*, midl__iwiaminidrv0003 : UInt8*, midl__iwiaminidrv0004 : IUnknown, midl__iwiaminidrv0005 : IUnknown, midl__iwiaminidrv0006 : IWiaDrvItem*, midl__iwiaminidrv0007 : IUnknown*, midl__iwiaminidrv0008 : Int32*) : HRESULT
+    @lpVtbl.value.drv_initialize_wia.unsafe_as(Proc(UInt8*, Int32, UInt8*, UInt8*, IUnknown, IUnknown, IWiaDrvItem*, IUnknown*, Int32*, HRESULT)).call(midl__iwiaminidrv0000, midl__iwiaminidrv0001, midl__iwiaminidrv0002, midl__iwiaminidrv0003, midl__iwiaminidrv0004, midl__iwiaminidrv0005, midl__iwiaminidrv0006, midl__iwiaminidrv0007, midl__iwiaminidrv0008)
+  end
+  def drv_acquire_item_data(midl__iwiaminidrv0009 : UInt8*, midl__iwiaminidrv0010 : Int32, midl__iwiaminidrv0011 : MINIDRV_TRANSFER_CONTEXT*, midl__iwiaminidrv0012 : Int32*) : HRESULT
+    @lpVtbl.value.drv_acquire_item_data.unsafe_as(Proc(UInt8*, Int32, MINIDRV_TRANSFER_CONTEXT*, Int32*, HRESULT)).call(midl__iwiaminidrv0009, midl__iwiaminidrv0010, midl__iwiaminidrv0011, midl__iwiaminidrv0012)
+  end
+  def drv_init_item_properties(midl__iwiaminidrv0013 : UInt8*, midl__iwiaminidrv0014 : Int32, midl__iwiaminidrv0015 : Int32*) : HRESULT
+    @lpVtbl.value.drv_init_item_properties.unsafe_as(Proc(UInt8*, Int32, Int32*, HRESULT)).call(midl__iwiaminidrv0013, midl__iwiaminidrv0014, midl__iwiaminidrv0015)
+  end
+  def drv_validate_item_properties(midl__iwiaminidrv0016 : UInt8*, midl__iwiaminidrv0017 : Int32, midl__iwiaminidrv0018 : UInt32, midl__iwiaminidrv0019 : PROPSPEC*, midl__iwiaminidrv0020 : Int32*) : HRESULT
+    @lpVtbl.value.drv_validate_item_properties.unsafe_as(Proc(UInt8*, Int32, UInt32, PROPSPEC*, Int32*, HRESULT)).call(midl__iwiaminidrv0016, midl__iwiaminidrv0017, midl__iwiaminidrv0018, midl__iwiaminidrv0019, midl__iwiaminidrv0020)
+  end
+  def drv_write_item_properties(midl__iwiaminidrv0021 : UInt8*, midl__iwiaminidrv0022 : Int32, midl__iwiaminidrv0023 : MINIDRV_TRANSFER_CONTEXT*, midl__iwiaminidrv0024 : Int32*) : HRESULT
+    @lpVtbl.value.drv_write_item_properties.unsafe_as(Proc(UInt8*, Int32, MINIDRV_TRANSFER_CONTEXT*, Int32*, HRESULT)).call(midl__iwiaminidrv0021, midl__iwiaminidrv0022, midl__iwiaminidrv0023, midl__iwiaminidrv0024)
+  end
+  def drv_read_item_properties(midl__iwiaminidrv0025 : UInt8*, midl__iwiaminidrv0026 : Int32, midl__iwiaminidrv0027 : UInt32, midl__iwiaminidrv0028 : PROPSPEC*, midl__iwiaminidrv0029 : Int32*) : HRESULT
+    @lpVtbl.value.drv_read_item_properties.unsafe_as(Proc(UInt8*, Int32, UInt32, PROPSPEC*, Int32*, HRESULT)).call(midl__iwiaminidrv0025, midl__iwiaminidrv0026, midl__iwiaminidrv0027, midl__iwiaminidrv0028, midl__iwiaminidrv0029)
+  end
+  def drv_lock_wia_device(midl__iwiaminidrv0030 : UInt8*, midl__iwiaminidrv0031 : Int32, midl__iwiaminidrv0032 : Int32*) : HRESULT
+    @lpVtbl.value.drv_lock_wia_device.unsafe_as(Proc(UInt8*, Int32, Int32*, HRESULT)).call(midl__iwiaminidrv0030, midl__iwiaminidrv0031, midl__iwiaminidrv0032)
+  end
+  def drv_un_lock_wia_device(midl__iwiaminidrv0033 : UInt8*, midl__iwiaminidrv0034 : Int32, midl__iwiaminidrv0035 : Int32*) : HRESULT
+    @lpVtbl.value.drv_un_lock_wia_device.unsafe_as(Proc(UInt8*, Int32, Int32*, HRESULT)).call(midl__iwiaminidrv0033, midl__iwiaminidrv0034, midl__iwiaminidrv0035)
+  end
+  def drv_analyze_item(midl__iwiaminidrv0036 : UInt8*, midl__iwiaminidrv0037 : Int32, midl__iwiaminidrv0038 : Int32*) : HRESULT
+    @lpVtbl.value.drv_analyze_item.unsafe_as(Proc(UInt8*, Int32, Int32*, HRESULT)).call(midl__iwiaminidrv0036, midl__iwiaminidrv0037, midl__iwiaminidrv0038)
+  end
+  def drv_get_device_error_str(midl__iwiaminidrv0039 : Int32, midl__iwiaminidrv0040 : Int32, midl__iwiaminidrv0041 : LibC::LPWSTR*, midl__iwiaminidrv0042 : Int32*) : HRESULT
+    @lpVtbl.value.drv_get_device_error_str.unsafe_as(Proc(Int32, Int32, LibC::LPWSTR*, Int32*, HRESULT)).call(midl__iwiaminidrv0039, midl__iwiaminidrv0040, midl__iwiaminidrv0041, midl__iwiaminidrv0042)
+  end
+  def drv_device_command(midl__iwiaminidrv0043 : UInt8*, midl__iwiaminidrv0044 : Int32, midl__iwiaminidrv0045 : Guid*, midl__iwiaminidrv0046 : IWiaDrvItem*, midl__iwiaminidrv0047 : Int32*) : HRESULT
+    @lpVtbl.value.drv_device_command.unsafe_as(Proc(UInt8*, Int32, Guid*, IWiaDrvItem*, Int32*, HRESULT)).call(midl__iwiaminidrv0043, midl__iwiaminidrv0044, midl__iwiaminidrv0045, midl__iwiaminidrv0046, midl__iwiaminidrv0047)
+  end
+  def drv_get_capabilities(midl__iwiaminidrv0048 : UInt8*, midl__iwiaminidrv0049 : Int32, midl__iwiaminidrv0050 : Int32*, midl__iwiaminidrv0051 : WIA_DEV_CAP_DRV**, midl__iwiaminidrv0052 : Int32*) : HRESULT
+    @lpVtbl.value.drv_get_capabilities.unsafe_as(Proc(UInt8*, Int32, Int32*, WIA_DEV_CAP_DRV**, Int32*, HRESULT)).call(midl__iwiaminidrv0048, midl__iwiaminidrv0049, midl__iwiaminidrv0050, midl__iwiaminidrv0051, midl__iwiaminidrv0052)
+  end
+  def drv_delete_item(midl__iwiaminidrv0053 : UInt8*, midl__iwiaminidrv0054 : Int32, midl__iwiaminidrv0055 : Int32*) : HRESULT
+    @lpVtbl.value.drv_delete_item.unsafe_as(Proc(UInt8*, Int32, Int32*, HRESULT)).call(midl__iwiaminidrv0053, midl__iwiaminidrv0054, midl__iwiaminidrv0055)
+  end
+  def drv_free_drv_item_context(midl__iwiaminidrv0056 : Int32, midl__iwiaminidrv0057 : UInt8*, midl__iwiaminidrv0058 : Int32*) : HRESULT
+    @lpVtbl.value.drv_free_drv_item_context.unsafe_as(Proc(Int32, UInt8*, Int32*, HRESULT)).call(midl__iwiaminidrv0056, midl__iwiaminidrv0057, midl__iwiaminidrv0058)
+  end
+  def drv_get_wia_format_info(midl__iwiaminidrv0059 : UInt8*, midl__iwiaminidrv0060 : Int32, midl__iwiaminidrv0061 : Int32*, midl__iwiaminidrv0062 : WIA_FORMAT_INFO**, midl__iwiaminidrv0063 : Int32*) : HRESULT
+    @lpVtbl.value.drv_get_wia_format_info.unsafe_as(Proc(UInt8*, Int32, Int32*, WIA_FORMAT_INFO**, Int32*, HRESULT)).call(midl__iwiaminidrv0059, midl__iwiaminidrv0060, midl__iwiaminidrv0061, midl__iwiaminidrv0062, midl__iwiaminidrv0063)
+  end
+  def drv_notify_pnp_event(peventguid : Guid*, bstrdeviceid : UInt8*, ulreserved : UInt32) : HRESULT
+    @lpVtbl.value.drv_notify_pnp_event.unsafe_as(Proc(Guid*, UInt8*, UInt32, HRESULT)).call(peventguid, bstrdeviceid, ulreserved)
+  end
+  def drv_un_initialize_wia(midl__iwiaminidrv0064 : UInt8*) : HRESULT
+    @lpVtbl.value.drv_un_initialize_wia.unsafe_as(Proc(UInt8*, HRESULT)).call(midl__iwiaminidrv0064)
+  end
+end
+struct LibWin32::IWiaMiniDrvCallBack
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def mini_drv_callback(lreason : Int32, lstatus : Int32, lpercentcomplete : Int32, loffset : Int32, llength : Int32, ptranctx : MINIDRV_TRANSFER_CONTEXT*, lreserved : Int32) : HRESULT
+    @lpVtbl.value.mini_drv_callback.unsafe_as(Proc(Int32, Int32, Int32, Int32, Int32, MINIDRV_TRANSFER_CONTEXT*, Int32, HRESULT)).call(lreason, lstatus, lpercentcomplete, loffset, llength, ptranctx, lreserved)
+  end
+end
+struct LibWin32::IWiaMiniDrvTransferCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_next_stream(lflags : Int32, bstritemname : UInt8*, bstrfullitemname : UInt8*, ppistream : IStream*) : HRESULT
+    @lpVtbl.value.get_next_stream.unsafe_as(Proc(Int32, UInt8*, UInt8*, IStream*, HRESULT)).call(lflags, bstritemname, bstrfullitemname, ppistream)
+  end
+  def send_message(lflags : Int32, pwiatransferparams : WiaTransferParams*) : HRESULT
+    @lpVtbl.value.send_message.unsafe_as(Proc(Int32, WiaTransferParams*, HRESULT)).call(lflags, pwiatransferparams)
+  end
+end
+struct LibWin32::IWiaDrvItem
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_item_flags(midl__iwiadrvitem0000 : Int32*) : HRESULT
+    @lpVtbl.value.get_item_flags.unsafe_as(Proc(Int32*, HRESULT)).call(midl__iwiadrvitem0000)
+  end
+  def get_device_spec_context(midl__iwiadrvitem0001 : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_spec_context.unsafe_as(Proc(UInt8**, HRESULT)).call(midl__iwiadrvitem0001)
+  end
+  def get_full_item_name(midl__iwiadrvitem0002 : UInt8**) : HRESULT
+    @lpVtbl.value.get_full_item_name.unsafe_as(Proc(UInt8**, HRESULT)).call(midl__iwiadrvitem0002)
+  end
+  def get_item_name(midl__iwiadrvitem0003 : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_name.unsafe_as(Proc(UInt8**, HRESULT)).call(midl__iwiadrvitem0003)
+  end
+  def add_item_to_folder(midl__iwiadrvitem0004 : IWiaDrvItem) : HRESULT
+    @lpVtbl.value.add_item_to_folder.unsafe_as(Proc(IWiaDrvItem, HRESULT)).call(midl__iwiadrvitem0004)
+  end
+  def unlink_item_tree(midl__iwiadrvitem0005 : Int32) : HRESULT
+    @lpVtbl.value.unlink_item_tree.unsafe_as(Proc(Int32, HRESULT)).call(midl__iwiadrvitem0005)
+  end
+  def remove_item_from_folder(midl__iwiadrvitem0006 : Int32) : HRESULT
+    @lpVtbl.value.remove_item_from_folder.unsafe_as(Proc(Int32, HRESULT)).call(midl__iwiadrvitem0006)
+  end
+  def find_item_by_name(midl__iwiadrvitem0007 : Int32, midl__iwiadrvitem0008 : UInt8*, midl__iwiadrvitem0009 : IWiaDrvItem*) : HRESULT
+    @lpVtbl.value.find_item_by_name.unsafe_as(Proc(Int32, UInt8*, IWiaDrvItem*, HRESULT)).call(midl__iwiadrvitem0007, midl__iwiadrvitem0008, midl__iwiadrvitem0009)
+  end
+  def find_child_item_by_name(midl__iwiadrvitem0010 : UInt8*, midl__iwiadrvitem0011 : IWiaDrvItem*) : HRESULT
+    @lpVtbl.value.find_child_item_by_name.unsafe_as(Proc(UInt8*, IWiaDrvItem*, HRESULT)).call(midl__iwiadrvitem0010, midl__iwiadrvitem0011)
+  end
+  def get_parent_item(midl__iwiadrvitem0012 : IWiaDrvItem*) : HRESULT
+    @lpVtbl.value.get_parent_item.unsafe_as(Proc(IWiaDrvItem*, HRESULT)).call(midl__iwiadrvitem0012)
+  end
+  def get_first_child_item(midl__iwiadrvitem0013 : IWiaDrvItem*) : HRESULT
+    @lpVtbl.value.get_first_child_item.unsafe_as(Proc(IWiaDrvItem*, HRESULT)).call(midl__iwiadrvitem0013)
+  end
+  def get_next_sibling_item(midl__iwiadrvitem0014 : IWiaDrvItem*) : HRESULT
+    @lpVtbl.value.get_next_sibling_item.unsafe_as(Proc(IWiaDrvItem*, HRESULT)).call(midl__iwiadrvitem0014)
+  end
+  def dump_item_data(midl__iwiadrvitem0015 : UInt8**) : HRESULT
+    @lpVtbl.value.dump_item_data.unsafe_as(Proc(UInt8**, HRESULT)).call(midl__iwiadrvitem0015)
+  end
+end
+struct LibWin32::IWiaVideo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_preview_visible(pbpreviewvisible : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_preview_visible.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbpreviewvisible)
+  end
+  def put_preview_visible(bpreviewvisible : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_preview_visible.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bpreviewvisible)
+  end
+  def get_images_directory(pbstrimagedirectory : UInt8**) : HRESULT
+    @lpVtbl.value.get_images_directory.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrimagedirectory)
+  end
+  def put_images_directory(bstrimagedirectory : UInt8*) : HRESULT
+    @lpVtbl.value.put_images_directory.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrimagedirectory)
+  end
+  def create_video_by_wia_dev_id(bstrwiadeviceid : UInt8*, hwndparent : LibC::HANDLE, bstretchtofitparent : LibC::BOOL, bautobeginplayback : LibC::BOOL) : HRESULT
+    @lpVtbl.value.create_video_by_wia_dev_id.unsafe_as(Proc(UInt8*, LibC::HANDLE, LibC::BOOL, LibC::BOOL, HRESULT)).call(bstrwiadeviceid, hwndparent, bstretchtofitparent, bautobeginplayback)
+  end
+  def create_video_by_dev_num(uidevicenumber : UInt32, hwndparent : LibC::HANDLE, bstretchtofitparent : LibC::BOOL, bautobeginplayback : LibC::BOOL) : HRESULT
+    @lpVtbl.value.create_video_by_dev_num.unsafe_as(Proc(UInt32, LibC::HANDLE, LibC::BOOL, LibC::BOOL, HRESULT)).call(uidevicenumber, hwndparent, bstretchtofitparent, bautobeginplayback)
+  end
+  def create_video_by_name(bstrfriendlyname : UInt8*, hwndparent : LibC::HANDLE, bstretchtofitparent : LibC::BOOL, bautobeginplayback : LibC::BOOL) : HRESULT
+    @lpVtbl.value.create_video_by_name.unsafe_as(Proc(UInt8*, LibC::HANDLE, LibC::BOOL, LibC::BOOL, HRESULT)).call(bstrfriendlyname, hwndparent, bstretchtofitparent, bautobeginplayback)
+  end
+  def destroy_video : HRESULT
+    @lpVtbl.value.destroy_video.unsafe_as(Proc(HRESULT)).call
+  end
+  def play : HRESULT
+    @lpVtbl.value.play.unsafe_as(Proc(HRESULT)).call
+  end
+  def pause : HRESULT
+    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  end
+  def take_picture(pbstrnewimagefilename : UInt8**) : HRESULT
+    @lpVtbl.value.take_picture.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrnewimagefilename)
+  end
+  def resize_video(bstretchtofitparent : LibC::BOOL) : HRESULT
+    @lpVtbl.value.resize_video.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bstretchtofitparent)
+  end
+  def get_current_state(pstate : WIAVIDEO_STATE*) : HRESULT
+    @lpVtbl.value.get_current_state.unsafe_as(Proc(WIAVIDEO_STATE*, HRESULT)).call(pstate)
+  end
+end
+struct LibWin32::IWiaUIExtension2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def device_dialog(pdevicedialogdata : DEVICEDIALOGDATA2*) : HRESULT
+    @lpVtbl.value.device_dialog.unsafe_as(Proc(DEVICEDIALOGDATA2*, HRESULT)).call(pdevicedialogdata)
+  end
+  def get_device_icon(bstrdeviceid : UInt8*, phicon : HANDLE*, nsize : UInt32) : HRESULT
+    @lpVtbl.value.get_device_icon.unsafe_as(Proc(UInt8*, HANDLE*, UInt32, HRESULT)).call(bstrdeviceid, phicon, nsize)
+  end
+end
+struct LibWin32::IWiaUIExtension
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def device_dialog(pdevicedialogdata : DEVICEDIALOGDATA*) : HRESULT
+    @lpVtbl.value.device_dialog.unsafe_as(Proc(DEVICEDIALOGDATA*, HRESULT)).call(pdevicedialogdata)
+  end
+  def get_device_icon(bstrdeviceid : UInt8*, phicon : HANDLE*, nsize : UInt32) : HRESULT
+    @lpVtbl.value.get_device_icon.unsafe_as(Proc(UInt8*, HANDLE*, UInt32, HRESULT)).call(bstrdeviceid, phicon, nsize)
+  end
+  def get_device_bitmap_logo(bstrdeviceid : UInt8*, phbitmap : HBITMAP*, nmaxwidth : UInt32, nmaxheight : UInt32) : HRESULT
+    @lpVtbl.value.get_device_bitmap_logo.unsafe_as(Proc(UInt8*, HBITMAP*, UInt32, UInt32, HRESULT)).call(bstrdeviceid, phbitmap, nmaxwidth, nmaxheight)
+  end
 end

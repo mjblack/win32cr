@@ -670,12 +670,12 @@ lib LibWin32
 
 
   struct ILocationReportVTbl
-    query_interface : Proc(ILocationReport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILocationReport*, UInt32)
-    release : Proc(ILocationReport*, UInt32)
-    get_sensor_id : Proc(ILocationReport*, Guid*, HRESULT)
-    get_timestamp : Proc(ILocationReport*, SYSTEMTIME*, HRESULT)
-    get_value : Proc(ILocationReport*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_sensor_id : UInt64
+    get_timestamp : UInt64
+    get_value : UInt64
   end
 
   ILocationReport_GUID = "c8b7f7ee-75d0-4db9-b62d-7a0f369ca456"
@@ -685,17 +685,17 @@ lib LibWin32
   end
 
   struct ILatLongReportVTbl
-    query_interface : Proc(ILatLongReport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILatLongReport*, UInt32)
-    release : Proc(ILatLongReport*, UInt32)
-    get_sensor_id : Proc(ILatLongReport*, Guid*, HRESULT)
-    get_timestamp : Proc(ILatLongReport*, SYSTEMTIME*, HRESULT)
-    get_value : Proc(ILatLongReport*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
-    get_latitude : Proc(ILatLongReport*, Float64*, HRESULT)
-    get_longitude : Proc(ILatLongReport*, Float64*, HRESULT)
-    get_error_radius : Proc(ILatLongReport*, Float64*, HRESULT)
-    get_altitude : Proc(ILatLongReport*, Float64*, HRESULT)
-    get_altitude_error : Proc(ILatLongReport*, Float64*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_sensor_id : UInt64
+    get_timestamp : UInt64
+    get_value : UInt64
+    get_latitude : UInt64
+    get_longitude : UInt64
+    get_error_radius : UInt64
+    get_altitude : UInt64
+    get_altitude_error : UInt64
   end
 
   ILatLongReport_GUID = "7fed806d-0ef8-4f07-80ac-36a0beae3134"
@@ -705,19 +705,19 @@ lib LibWin32
   end
 
   struct ICivicAddressReportVTbl
-    query_interface : Proc(ICivicAddressReport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICivicAddressReport*, UInt32)
-    release : Proc(ICivicAddressReport*, UInt32)
-    get_sensor_id : Proc(ICivicAddressReport*, Guid*, HRESULT)
-    get_timestamp : Proc(ICivicAddressReport*, SYSTEMTIME*, HRESULT)
-    get_value : Proc(ICivicAddressReport*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
-    get_address_line1 : Proc(ICivicAddressReport*, UInt8**, HRESULT)
-    get_address_line2 : Proc(ICivicAddressReport*, UInt8**, HRESULT)
-    get_city : Proc(ICivicAddressReport*, UInt8**, HRESULT)
-    get_state_province : Proc(ICivicAddressReport*, UInt8**, HRESULT)
-    get_postal_code : Proc(ICivicAddressReport*, UInt8**, HRESULT)
-    get_country_region : Proc(ICivicAddressReport*, UInt8**, HRESULT)
-    get_detail_level : Proc(ICivicAddressReport*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_sensor_id : UInt64
+    get_timestamp : UInt64
+    get_value : UInt64
+    get_address_line1 : UInt64
+    get_address_line2 : UInt64
+    get_city : UInt64
+    get_state_province : UInt64
+    get_postal_code : UInt64
+    get_country_region : UInt64
+    get_detail_level : UInt64
   end
 
   ICivicAddressReport_GUID = "c0b19f70-4adf-445d-87f2-cad8fd711792"
@@ -727,18 +727,18 @@ lib LibWin32
   end
 
   struct ILocationVTbl
-    query_interface : Proc(ILocation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILocation*, UInt32)
-    release : Proc(ILocation*, UInt32)
-    register_for_report : Proc(ILocation*, ILocationEvents, Guid*, UInt32, HRESULT)
-    unregister_for_report : Proc(ILocation*, Guid*, HRESULT)
-    get_report : Proc(ILocation*, Guid*, ILocationReport*, HRESULT)
-    get_report_status : Proc(ILocation*, Guid*, LOCATION_REPORT_STATUS*, HRESULT)
-    get_report_interval : Proc(ILocation*, Guid*, UInt32*, HRESULT)
-    set_report_interval : Proc(ILocation*, Guid*, UInt32, HRESULT)
-    get_desired_accuracy : Proc(ILocation*, Guid*, LOCATION_DESIRED_ACCURACY*, HRESULT)
-    set_desired_accuracy : Proc(ILocation*, Guid*, LOCATION_DESIRED_ACCURACY, HRESULT)
-    request_permissions : Proc(ILocation*, LibC::HANDLE, Guid*, UInt32, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    register_for_report : UInt64
+    unregister_for_report : UInt64
+    get_report : UInt64
+    get_report_status : UInt64
+    get_report_interval : UInt64
+    set_report_interval : UInt64
+    get_desired_accuracy : UInt64
+    set_desired_accuracy : UInt64
+    request_permissions : UInt64
   end
 
   ILocation_GUID = "ab2ece69-56d9-4f28-b525-de1b0ee44237"
@@ -748,11 +748,11 @@ lib LibWin32
   end
 
   struct ILocationPowerVTbl
-    query_interface : Proc(ILocationPower*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILocationPower*, UInt32)
-    release : Proc(ILocationPower*, UInt32)
-    connect : Proc(ILocationPower*, HRESULT)
-    disconnect : Proc(ILocationPower*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    connect : UInt64
+    disconnect : UInt64
   end
 
   ILocationPower_GUID = "193e7729-ab6b-4b12-8617-7596e1bb191c"
@@ -762,11 +762,11 @@ lib LibWin32
   end
 
   struct IDefaultLocationVTbl
-    query_interface : Proc(IDefaultLocation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDefaultLocation*, UInt32)
-    release : Proc(IDefaultLocation*, UInt32)
-    set_report : Proc(IDefaultLocation*, Guid*, ILocationReport, HRESULT)
-    get_report : Proc(IDefaultLocation*, Guid*, ILocationReport*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_report : UInt64
+    get_report : UInt64
   end
 
   IDefaultLocation_GUID = "a65af77e-969a-4a2e-8aca-33bb7cbb1235"
@@ -776,11 +776,11 @@ lib LibWin32
   end
 
   struct ILocationEventsVTbl
-    query_interface : Proc(ILocationEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILocationEvents*, UInt32)
-    release : Proc(ILocationEvents*, UInt32)
-    on_location_changed : Proc(ILocationEvents*, Guid*, ILocationReport, HRESULT)
-    on_status_changed : Proc(ILocationEvents*, Guid*, LOCATION_REPORT_STATUS, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_location_changed : UInt64
+    on_status_changed : UInt64
   end
 
   ILocationEvents_GUID = "cae02bbf-798b-4508-a207-35a7906dc73d"
@@ -790,19 +790,19 @@ lib LibWin32
   end
 
   struct IDispLatLongReportVTbl
-    query_interface : Proc(IDispLatLongReport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDispLatLongReport*, UInt32)
-    release : Proc(IDispLatLongReport*, UInt32)
-    get_type_info_count : Proc(IDispLatLongReport*, UInt32*, HRESULT)
-    get_type_info : Proc(IDispLatLongReport*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDispLatLongReport*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDispLatLongReport*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_latitude : Proc(IDispLatLongReport*, Float64*, HRESULT)
-    get_longitude : Proc(IDispLatLongReport*, Float64*, HRESULT)
-    get_error_radius : Proc(IDispLatLongReport*, Float64*, HRESULT)
-    get_altitude : Proc(IDispLatLongReport*, Float64*, HRESULT)
-    get_altitude_error : Proc(IDispLatLongReport*, Float64*, HRESULT)
-    get_timestamp : Proc(IDispLatLongReport*, Float64*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_latitude : UInt64
+    get_longitude : UInt64
+    get_error_radius : UInt64
+    get_altitude : UInt64
+    get_altitude_error : UInt64
+    get_timestamp : UInt64
   end
 
   IDispLatLongReport_GUID = "8ae32723-389b-4a11-9957-5bdd48fc9617"
@@ -812,21 +812,21 @@ lib LibWin32
   end
 
   struct IDispCivicAddressReportVTbl
-    query_interface : Proc(IDispCivicAddressReport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDispCivicAddressReport*, UInt32)
-    release : Proc(IDispCivicAddressReport*, UInt32)
-    get_type_info_count : Proc(IDispCivicAddressReport*, UInt32*, HRESULT)
-    get_type_info : Proc(IDispCivicAddressReport*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDispCivicAddressReport*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDispCivicAddressReport*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_address_line1 : Proc(IDispCivicAddressReport*, UInt8**, HRESULT)
-    get_address_line2 : Proc(IDispCivicAddressReport*, UInt8**, HRESULT)
-    get_city : Proc(IDispCivicAddressReport*, UInt8**, HRESULT)
-    get_state_province : Proc(IDispCivicAddressReport*, UInt8**, HRESULT)
-    get_postal_code : Proc(IDispCivicAddressReport*, UInt8**, HRESULT)
-    get_country_region : Proc(IDispCivicAddressReport*, UInt8**, HRESULT)
-    get_detail_level : Proc(IDispCivicAddressReport*, UInt32*, HRESULT)
-    get_timestamp : Proc(IDispCivicAddressReport*, Float64*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_address_line1 : UInt64
+    get_address_line2 : UInt64
+    get_city : UInt64
+    get_state_province : UInt64
+    get_postal_code : UInt64
+    get_country_region : UInt64
+    get_detail_level : UInt64
+    get_timestamp : UInt64
   end
 
   IDispCivicAddressReport_GUID = "16ff1a34-9e30-42c3-b44d-e22513b5767a"
@@ -836,21 +836,21 @@ lib LibWin32
   end
 
   struct ILocationReportFactoryVTbl
-    query_interface : Proc(ILocationReportFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILocationReportFactory*, UInt32)
-    release : Proc(ILocationReportFactory*, UInt32)
-    get_type_info_count : Proc(ILocationReportFactory*, UInt32*, HRESULT)
-    get_type_info : Proc(ILocationReportFactory*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ILocationReportFactory*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ILocationReportFactory*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    listen_for_reports : Proc(ILocationReportFactory*, UInt32, HRESULT)
-    stop_listening_for_reports : Proc(ILocationReportFactory*, HRESULT)
-    get_status : Proc(ILocationReportFactory*, UInt32*, HRESULT)
-    get_report_interval : Proc(ILocationReportFactory*, UInt32*, HRESULT)
-    put_report_interval : Proc(ILocationReportFactory*, UInt32, HRESULT)
-    get_desired_accuracy : Proc(ILocationReportFactory*, UInt32*, HRESULT)
-    put_desired_accuracy : Proc(ILocationReportFactory*, UInt32, HRESULT)
-    request_permissions : Proc(ILocationReportFactory*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    listen_for_reports : UInt64
+    stop_listening_for_reports : UInt64
+    get_status : UInt64
+    get_report_interval : UInt64
+    put_report_interval : UInt64
+    get_desired_accuracy : UInt64
+    put_desired_accuracy : UInt64
+    request_permissions : UInt64
   end
 
   ILocationReportFactory_GUID = "2daec322-90b2-47e4-bb08-0da841935a6b"
@@ -860,22 +860,22 @@ lib LibWin32
   end
 
   struct ILatLongReportFactoryVTbl
-    query_interface : Proc(ILatLongReportFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILatLongReportFactory*, UInt32)
-    release : Proc(ILatLongReportFactory*, UInt32)
-    get_type_info_count : Proc(ILatLongReportFactory*, UInt32*, HRESULT)
-    get_type_info : Proc(ILatLongReportFactory*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ILatLongReportFactory*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ILatLongReportFactory*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    listen_for_reports : Proc(ILatLongReportFactory*, UInt32, HRESULT)
-    stop_listening_for_reports : Proc(ILatLongReportFactory*, HRESULT)
-    get_status : Proc(ILatLongReportFactory*, UInt32*, HRESULT)
-    get_report_interval : Proc(ILatLongReportFactory*, UInt32*, HRESULT)
-    put_report_interval : Proc(ILatLongReportFactory*, UInt32, HRESULT)
-    get_desired_accuracy : Proc(ILatLongReportFactory*, UInt32*, HRESULT)
-    put_desired_accuracy : Proc(ILatLongReportFactory*, UInt32, HRESULT)
-    request_permissions : Proc(ILatLongReportFactory*, UInt32*, HRESULT)
-    get_lat_long_report : Proc(ILatLongReportFactory*, IDispLatLongReport*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    listen_for_reports : UInt64
+    stop_listening_for_reports : UInt64
+    get_status : UInt64
+    get_report_interval : UInt64
+    put_report_interval : UInt64
+    get_desired_accuracy : UInt64
+    put_desired_accuracy : UInt64
+    request_permissions : UInt64
+    get_lat_long_report : UInt64
   end
 
   ILatLongReportFactory_GUID = "3f0804cb-b114-447d-83dd-390174ebb082"
@@ -885,22 +885,22 @@ lib LibWin32
   end
 
   struct ICivicAddressReportFactoryVTbl
-    query_interface : Proc(ICivicAddressReportFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICivicAddressReportFactory*, UInt32)
-    release : Proc(ICivicAddressReportFactory*, UInt32)
-    get_type_info_count : Proc(ICivicAddressReportFactory*, UInt32*, HRESULT)
-    get_type_info : Proc(ICivicAddressReportFactory*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ICivicAddressReportFactory*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ICivicAddressReportFactory*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    listen_for_reports : Proc(ICivicAddressReportFactory*, UInt32, HRESULT)
-    stop_listening_for_reports : Proc(ICivicAddressReportFactory*, HRESULT)
-    get_status : Proc(ICivicAddressReportFactory*, UInt32*, HRESULT)
-    get_report_interval : Proc(ICivicAddressReportFactory*, UInt32*, HRESULT)
-    put_report_interval : Proc(ICivicAddressReportFactory*, UInt32, HRESULT)
-    get_desired_accuracy : Proc(ICivicAddressReportFactory*, UInt32*, HRESULT)
-    put_desired_accuracy : Proc(ICivicAddressReportFactory*, UInt32, HRESULT)
-    request_permissions : Proc(ICivicAddressReportFactory*, UInt32*, HRESULT)
-    get_civic_address_report : Proc(ICivicAddressReportFactory*, IDispCivicAddressReport*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    listen_for_reports : UInt64
+    stop_listening_for_reports : UInt64
+    get_status : UInt64
+    get_report_interval : UInt64
+    put_report_interval : UInt64
+    get_desired_accuracy : UInt64
+    put_desired_accuracy : UInt64
+    request_permissions : UInt64
+    get_civic_address_report : UInt64
   end
 
   ICivicAddressReportFactory_GUID = "bf773b93-c64f-4bee-beb2-67c0b8df66e0"
@@ -910,13 +910,13 @@ lib LibWin32
   end
 
   struct IILatLongReportFactoryEventsVTbl
-    query_interface : Proc(IILatLongReportFactoryEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IILatLongReportFactoryEvents*, UInt32)
-    release : Proc(IILatLongReportFactoryEvents*, UInt32)
-    get_type_info_count : Proc(IILatLongReportFactoryEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IILatLongReportFactoryEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IILatLongReportFactoryEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IILatLongReportFactoryEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
   end
 
   IILatLongReportFactoryEvents_GUID = "16ee6cb7-ab3c-424b-849f-269be551fcbc"
@@ -926,13 +926,13 @@ lib LibWin32
   end
 
   struct IICivicAddressReportFactoryEventsVTbl
-    query_interface : Proc(IICivicAddressReportFactoryEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IICivicAddressReportFactoryEvents*, UInt32)
-    release : Proc(IICivicAddressReportFactoryEvents*, UInt32)
-    get_type_info_count : Proc(IICivicAddressReportFactoryEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IICivicAddressReportFactoryEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IICivicAddressReportFactoryEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IICivicAddressReportFactoryEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
   end
 
   IICivicAddressReportFactoryEvents_GUID = "c96039ff-72ec-4617-89bd-84d88bedc722"
@@ -941,4 +941,470 @@ lib LibWin32
     lpVtbl : IICivicAddressReportFactoryEventsVTbl*
   end
 
+end
+struct LibWin32::ILocationReport
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_sensor_id(psensorid : Guid*) : HRESULT
+    @lpVtbl.value.get_sensor_id.unsafe_as(Proc(Guid*, HRESULT)).call(psensorid)
+  end
+  def get_timestamp(pcreationtime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_timestamp.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pcreationtime)
+  end
+  def get_value(pkey : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_value.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(pkey, pvalue)
+  end
+end
+struct LibWin32::ILatLongReport
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_sensor_id(psensorid : Guid*) : HRESULT
+    @lpVtbl.value.get_sensor_id.unsafe_as(Proc(Guid*, HRESULT)).call(psensorid)
+  end
+  def get_timestamp(pcreationtime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_timestamp.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pcreationtime)
+  end
+  def get_value(pkey : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_value.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(pkey, pvalue)
+  end
+  def get_latitude(platitude : Float64*) : HRESULT
+    @lpVtbl.value.get_latitude.unsafe_as(Proc(Float64*, HRESULT)).call(platitude)
+  end
+  def get_longitude(plongitude : Float64*) : HRESULT
+    @lpVtbl.value.get_longitude.unsafe_as(Proc(Float64*, HRESULT)).call(plongitude)
+  end
+  def get_error_radius(perrorradius : Float64*) : HRESULT
+    @lpVtbl.value.get_error_radius.unsafe_as(Proc(Float64*, HRESULT)).call(perrorradius)
+  end
+  def get_altitude(paltitude : Float64*) : HRESULT
+    @lpVtbl.value.get_altitude.unsafe_as(Proc(Float64*, HRESULT)).call(paltitude)
+  end
+  def get_altitude_error(paltitudeerror : Float64*) : HRESULT
+    @lpVtbl.value.get_altitude_error.unsafe_as(Proc(Float64*, HRESULT)).call(paltitudeerror)
+  end
+end
+struct LibWin32::ICivicAddressReport
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_sensor_id(psensorid : Guid*) : HRESULT
+    @lpVtbl.value.get_sensor_id.unsafe_as(Proc(Guid*, HRESULT)).call(psensorid)
+  end
+  def get_timestamp(pcreationtime : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_timestamp.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(pcreationtime)
+  end
+  def get_value(pkey : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_value.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(pkey, pvalue)
+  end
+  def get_address_line1(pbstraddress1 : UInt8**) : HRESULT
+    @lpVtbl.value.get_address_line1.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstraddress1)
+  end
+  def get_address_line2(pbstraddress2 : UInt8**) : HRESULT
+    @lpVtbl.value.get_address_line2.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstraddress2)
+  end
+  def get_city(pbstrcity : UInt8**) : HRESULT
+    @lpVtbl.value.get_city.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcity)
+  end
+  def get_state_province(pbstrstateprovince : UInt8**) : HRESULT
+    @lpVtbl.value.get_state_province.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrstateprovince)
+  end
+  def get_postal_code(pbstrpostalcode : UInt8**) : HRESULT
+    @lpVtbl.value.get_postal_code.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrpostalcode)
+  end
+  def get_country_region(pbstrcountryregion : UInt8**) : HRESULT
+    @lpVtbl.value.get_country_region.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcountryregion)
+  end
+  def get_detail_level(pdetaillevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_detail_level.unsafe_as(Proc(UInt32*, HRESULT)).call(pdetaillevel)
+  end
+end
+struct LibWin32::ILocation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def register_for_report(pevents : ILocationEvents, reporttype : Guid*, dwrequestedreportinterval : UInt32) : HRESULT
+    @lpVtbl.value.register_for_report.unsafe_as(Proc(ILocationEvents, Guid*, UInt32, HRESULT)).call(pevents, reporttype, dwrequestedreportinterval)
+  end
+  def unregister_for_report(reporttype : Guid*) : HRESULT
+    @lpVtbl.value.unregister_for_report.unsafe_as(Proc(Guid*, HRESULT)).call(reporttype)
+  end
+  def get_report(reporttype : Guid*, pplocationreport : ILocationReport*) : HRESULT
+    @lpVtbl.value.get_report.unsafe_as(Proc(Guid*, ILocationReport*, HRESULT)).call(reporttype, pplocationreport)
+  end
+  def get_report_status(reporttype : Guid*, pstatus : LOCATION_REPORT_STATUS*) : HRESULT
+    @lpVtbl.value.get_report_status.unsafe_as(Proc(Guid*, LOCATION_REPORT_STATUS*, HRESULT)).call(reporttype, pstatus)
+  end
+  def get_report_interval(reporttype : Guid*, pmilliseconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_report_interval.unsafe_as(Proc(Guid*, UInt32*, HRESULT)).call(reporttype, pmilliseconds)
+  end
+  def set_report_interval(reporttype : Guid*, millisecondsrequested : UInt32) : HRESULT
+    @lpVtbl.value.set_report_interval.unsafe_as(Proc(Guid*, UInt32, HRESULT)).call(reporttype, millisecondsrequested)
+  end
+  def get_desired_accuracy(reporttype : Guid*, pdesiredaccuracy : LOCATION_DESIRED_ACCURACY*) : HRESULT
+    @lpVtbl.value.get_desired_accuracy.unsafe_as(Proc(Guid*, LOCATION_DESIRED_ACCURACY*, HRESULT)).call(reporttype, pdesiredaccuracy)
+  end
+  def set_desired_accuracy(reporttype : Guid*, desiredaccuracy : LOCATION_DESIRED_ACCURACY) : HRESULT
+    @lpVtbl.value.set_desired_accuracy.unsafe_as(Proc(Guid*, LOCATION_DESIRED_ACCURACY, HRESULT)).call(reporttype, desiredaccuracy)
+  end
+  def request_permissions(hparent : LibC::HANDLE, preporttypes : Guid*, count : UInt32, fmodal : LibC::BOOL) : HRESULT
+    @lpVtbl.value.request_permissions.unsafe_as(Proc(LibC::HANDLE, Guid*, UInt32, LibC::BOOL, HRESULT)).call(hparent, preporttypes, count, fmodal)
+  end
+end
+struct LibWin32::ILocationPower
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def connect : HRESULT
+    @lpVtbl.value.connect.unsafe_as(Proc(HRESULT)).call
+  end
+  def disconnect : HRESULT
+    @lpVtbl.value.disconnect.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IDefaultLocation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_report(reporttype : Guid*, plocationreport : ILocationReport) : HRESULT
+    @lpVtbl.value.set_report.unsafe_as(Proc(Guid*, ILocationReport, HRESULT)).call(reporttype, plocationreport)
+  end
+  def get_report(reporttype : Guid*, pplocationreport : ILocationReport*) : HRESULT
+    @lpVtbl.value.get_report.unsafe_as(Proc(Guid*, ILocationReport*, HRESULT)).call(reporttype, pplocationreport)
+  end
+end
+struct LibWin32::ILocationEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_location_changed(reporttype : Guid*, plocationreport : ILocationReport) : HRESULT
+    @lpVtbl.value.on_location_changed.unsafe_as(Proc(Guid*, ILocationReport, HRESULT)).call(reporttype, plocationreport)
+  end
+  def on_status_changed(reporttype : Guid*, newstatus : LOCATION_REPORT_STATUS) : HRESULT
+    @lpVtbl.value.on_status_changed.unsafe_as(Proc(Guid*, LOCATION_REPORT_STATUS, HRESULT)).call(reporttype, newstatus)
+  end
+end
+struct LibWin32::IDispLatLongReport
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_latitude(pval : Float64*) : HRESULT
+    @lpVtbl.value.get_latitude.unsafe_as(Proc(Float64*, HRESULT)).call(pval)
+  end
+  def get_longitude(pval : Float64*) : HRESULT
+    @lpVtbl.value.get_longitude.unsafe_as(Proc(Float64*, HRESULT)).call(pval)
+  end
+  def get_error_radius(pval : Float64*) : HRESULT
+    @lpVtbl.value.get_error_radius.unsafe_as(Proc(Float64*, HRESULT)).call(pval)
+  end
+  def get_altitude(pval : Float64*) : HRESULT
+    @lpVtbl.value.get_altitude.unsafe_as(Proc(Float64*, HRESULT)).call(pval)
+  end
+  def get_altitude_error(pval : Float64*) : HRESULT
+    @lpVtbl.value.get_altitude_error.unsafe_as(Proc(Float64*, HRESULT)).call(pval)
+  end
+  def get_timestamp(pval : Float64*) : HRESULT
+    @lpVtbl.value.get_timestamp.unsafe_as(Proc(Float64*, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::IDispCivicAddressReport
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_address_line1(paddress1 : UInt8**) : HRESULT
+    @lpVtbl.value.get_address_line1.unsafe_as(Proc(UInt8**, HRESULT)).call(paddress1)
+  end
+  def get_address_line2(paddress2 : UInt8**) : HRESULT
+    @lpVtbl.value.get_address_line2.unsafe_as(Proc(UInt8**, HRESULT)).call(paddress2)
+  end
+  def get_city(pcity : UInt8**) : HRESULT
+    @lpVtbl.value.get_city.unsafe_as(Proc(UInt8**, HRESULT)).call(pcity)
+  end
+  def get_state_province(pstateprovince : UInt8**) : HRESULT
+    @lpVtbl.value.get_state_province.unsafe_as(Proc(UInt8**, HRESULT)).call(pstateprovince)
+  end
+  def get_postal_code(ppostalcode : UInt8**) : HRESULT
+    @lpVtbl.value.get_postal_code.unsafe_as(Proc(UInt8**, HRESULT)).call(ppostalcode)
+  end
+  def get_country_region(pcountryregion : UInt8**) : HRESULT
+    @lpVtbl.value.get_country_region.unsafe_as(Proc(UInt8**, HRESULT)).call(pcountryregion)
+  end
+  def get_detail_level(pdetaillevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_detail_level.unsafe_as(Proc(UInt32*, HRESULT)).call(pdetaillevel)
+  end
+  def get_timestamp(pval : Float64*) : HRESULT
+    @lpVtbl.value.get_timestamp.unsafe_as(Proc(Float64*, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::ILocationReportFactory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def listen_for_reports(requestedreportinterval : UInt32) : HRESULT
+    @lpVtbl.value.listen_for_reports.unsafe_as(Proc(UInt32, HRESULT)).call(requestedreportinterval)
+  end
+  def stop_listening_for_reports : HRESULT
+    @lpVtbl.value.stop_listening_for_reports.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_status(pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pval)
+  end
+  def get_report_interval(pmilliseconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_report_interval.unsafe_as(Proc(UInt32*, HRESULT)).call(pmilliseconds)
+  end
+  def put_report_interval(millisecondsrequested : UInt32) : HRESULT
+    @lpVtbl.value.put_report_interval.unsafe_as(Proc(UInt32, HRESULT)).call(millisecondsrequested)
+  end
+  def get_desired_accuracy(pdesiredaccuracy : UInt32*) : HRESULT
+    @lpVtbl.value.get_desired_accuracy.unsafe_as(Proc(UInt32*, HRESULT)).call(pdesiredaccuracy)
+  end
+  def put_desired_accuracy(desiredaccuracy : UInt32) : HRESULT
+    @lpVtbl.value.put_desired_accuracy.unsafe_as(Proc(UInt32, HRESULT)).call(desiredaccuracy)
+  end
+  def request_permissions(hwnd : UInt32*) : HRESULT
+    @lpVtbl.value.request_permissions.unsafe_as(Proc(UInt32*, HRESULT)).call(hwnd)
+  end
+end
+struct LibWin32::ILatLongReportFactory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def listen_for_reports(requestedreportinterval : UInt32) : HRESULT
+    @lpVtbl.value.listen_for_reports.unsafe_as(Proc(UInt32, HRESULT)).call(requestedreportinterval)
+  end
+  def stop_listening_for_reports : HRESULT
+    @lpVtbl.value.stop_listening_for_reports.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_status(pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pval)
+  end
+  def get_report_interval(pmilliseconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_report_interval.unsafe_as(Proc(UInt32*, HRESULT)).call(pmilliseconds)
+  end
+  def put_report_interval(millisecondsrequested : UInt32) : HRESULT
+    @lpVtbl.value.put_report_interval.unsafe_as(Proc(UInt32, HRESULT)).call(millisecondsrequested)
+  end
+  def get_desired_accuracy(pdesiredaccuracy : UInt32*) : HRESULT
+    @lpVtbl.value.get_desired_accuracy.unsafe_as(Proc(UInt32*, HRESULT)).call(pdesiredaccuracy)
+  end
+  def put_desired_accuracy(desiredaccuracy : UInt32) : HRESULT
+    @lpVtbl.value.put_desired_accuracy.unsafe_as(Proc(UInt32, HRESULT)).call(desiredaccuracy)
+  end
+  def request_permissions(hwnd : UInt32*) : HRESULT
+    @lpVtbl.value.request_permissions.unsafe_as(Proc(UInt32*, HRESULT)).call(hwnd)
+  end
+  def get_lat_long_report(pval : IDispLatLongReport*) : HRESULT
+    @lpVtbl.value.get_lat_long_report.unsafe_as(Proc(IDispLatLongReport*, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::ICivicAddressReportFactory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def listen_for_reports(requestedreportinterval : UInt32) : HRESULT
+    @lpVtbl.value.listen_for_reports.unsafe_as(Proc(UInt32, HRESULT)).call(requestedreportinterval)
+  end
+  def stop_listening_for_reports : HRESULT
+    @lpVtbl.value.stop_listening_for_reports.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_status(pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pval)
+  end
+  def get_report_interval(pmilliseconds : UInt32*) : HRESULT
+    @lpVtbl.value.get_report_interval.unsafe_as(Proc(UInt32*, HRESULT)).call(pmilliseconds)
+  end
+  def put_report_interval(millisecondsrequested : UInt32) : HRESULT
+    @lpVtbl.value.put_report_interval.unsafe_as(Proc(UInt32, HRESULT)).call(millisecondsrequested)
+  end
+  def get_desired_accuracy(pdesiredaccuracy : UInt32*) : HRESULT
+    @lpVtbl.value.get_desired_accuracy.unsafe_as(Proc(UInt32*, HRESULT)).call(pdesiredaccuracy)
+  end
+  def put_desired_accuracy(desiredaccuracy : UInt32) : HRESULT
+    @lpVtbl.value.put_desired_accuracy.unsafe_as(Proc(UInt32, HRESULT)).call(desiredaccuracy)
+  end
+  def request_permissions(hwnd : UInt32*) : HRESULT
+    @lpVtbl.value.request_permissions.unsafe_as(Proc(UInt32*, HRESULT)).call(hwnd)
+  end
+  def get_civic_address_report(pval : IDispCivicAddressReport*) : HRESULT
+    @lpVtbl.value.get_civic_address_report.unsafe_as(Proc(IDispCivicAddressReport*, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::IILatLongReportFactoryEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IICivicAddressReportFactoryEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
 end

@@ -3152,12 +3152,12 @@ lib LibWin32
     anonymous : D3D12_CLEAR_VALUE_Anonymous_e__Union
   end
   struct D3D12_RANGE
-    rbegin : LibC::UINT_PTR
-    rend : LibC::UINT_PTR
+    begin_ : LibC::UINT_PTR
+    end_ : LibC::UINT_PTR
   end
   struct D3D12_RANGE_UINT64
-    rbegin : UInt64
-    rend : UInt64
+    begin_ : UInt64
+    end_ : UInt64
   end
   struct D3D12_SUBRESOURCE_RANGE_UINT64
     subresource : UInt32
@@ -4043,7 +4043,7 @@ lib LibWin32
     sampler_size : UInt32
   end
   struct D3D12_SHADER_TYPE_DESC
-    class : D3D_SHADER_VARIABLE_CLASS
+    class_ : D3D_SHADER_VARIABLE_CLASS
     type : D3D_SHADER_VARIABLE_TYPE
     rows : UInt32
     columns : UInt32
@@ -4148,7 +4148,7 @@ lib LibWin32
     name : PSTR
     semantic_name : PSTR
     type : D3D_SHADER_VARIABLE_TYPE
-    class : D3D_SHADER_VARIABLE_CLASS
+    class_ : D3D_SHADER_VARIABLE_CLASS
     rows : UInt32
     columns : UInt32
     interpolation_mode : D3D_INTERPOLATION_MODE
@@ -4161,13 +4161,13 @@ lib LibWin32
 
 
   struct ID3D12ObjectVTbl
-    query_interface : Proc(ID3D12Object*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Object*, UInt32)
-    release : Proc(ID3D12Object*, UInt32)
-    get_private_data : Proc(ID3D12Object*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Object*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Object*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Object*, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
   end
 
   ID3D12Object_GUID = "c4fec28f-7966-4e95-9f94-f431cb56c3b8"
@@ -4177,14 +4177,14 @@ lib LibWin32
   end
 
   struct ID3D12DeviceChildVTbl
-    query_interface : Proc(ID3D12DeviceChild*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12DeviceChild*, UInt32)
-    release : Proc(ID3D12DeviceChild*, UInt32)
-    get_private_data : Proc(ID3D12DeviceChild*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12DeviceChild*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12DeviceChild*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12DeviceChild*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12DeviceChild*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
   end
 
   ID3D12DeviceChild_GUID = "905db94b-a00c-4140-9df5-2b64ca9ea357"
@@ -4194,14 +4194,14 @@ lib LibWin32
   end
 
   struct ID3D12RootSignatureVTbl
-    query_interface : Proc(ID3D12RootSignature*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12RootSignature*, UInt32)
-    release : Proc(ID3D12RootSignature*, UInt32)
-    get_private_data : Proc(ID3D12RootSignature*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12RootSignature*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12RootSignature*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12RootSignature*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12RootSignature*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
   end
 
   ID3D12RootSignature_GUID = "c54a6b66-72df-4ee8-8be5-a946a1429214"
@@ -4211,10 +4211,10 @@ lib LibWin32
   end
 
   struct ID3D12RootSignatureDeserializerVTbl
-    query_interface : Proc(ID3D12RootSignatureDeserializer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12RootSignatureDeserializer*, UInt32)
-    release : Proc(ID3D12RootSignatureDeserializer*, UInt32)
-    get_root_signature_desc : Proc(ID3D12RootSignatureDeserializer*, D3D12_ROOT_SIGNATURE_DESC**)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_root_signature_desc : UInt64
   end
 
   ID3D12RootSignatureDeserializer_GUID = "34ab647b-3cc8-46ac-841b-c0965645c046"
@@ -4224,11 +4224,11 @@ lib LibWin32
   end
 
   struct ID3D12VersionedRootSignatureDeserializerVTbl
-    query_interface : Proc(ID3D12VersionedRootSignatureDeserializer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12VersionedRootSignatureDeserializer*, UInt32)
-    release : Proc(ID3D12VersionedRootSignatureDeserializer*, UInt32)
-    get_root_signature_desc_at_version : Proc(ID3D12VersionedRootSignatureDeserializer*, D3D_ROOT_SIGNATURE_VERSION, D3D12_VERSIONED_ROOT_SIGNATURE_DESC**, HRESULT)
-    get_unconverted_root_signature_desc : Proc(ID3D12VersionedRootSignatureDeserializer*, D3D12_VERSIONED_ROOT_SIGNATURE_DESC**)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_root_signature_desc_at_version : UInt64
+    get_unconverted_root_signature_desc : UInt64
   end
 
   ID3D12VersionedRootSignatureDeserializer_GUID = "7f91ce67-090c-4bb7-b78e-ed8ff2e31da0"
@@ -4238,14 +4238,14 @@ lib LibWin32
   end
 
   struct ID3D12PageableVTbl
-    query_interface : Proc(ID3D12Pageable*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Pageable*, UInt32)
-    release : Proc(ID3D12Pageable*, UInt32)
-    get_private_data : Proc(ID3D12Pageable*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Pageable*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Pageable*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Pageable*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12Pageable*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
   end
 
   ID3D12Pageable_GUID = "63ee58fb-1268-4835-86da-f008ce62f0d6"
@@ -4255,15 +4255,15 @@ lib LibWin32
   end
 
   struct ID3D12HeapVTbl
-    query_interface : Proc(ID3D12Heap*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Heap*, UInt32)
-    release : Proc(ID3D12Heap*, UInt32)
-    get_private_data : Proc(ID3D12Heap*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Heap*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Heap*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Heap*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12Heap*, Guid*, Void**, HRESULT)
-    get_desc : Proc(ID3D12Heap*, D3D12_HEAP_DESC)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_desc : UInt64
   end
 
   ID3D12Heap_GUID = "6b3b2502-6e51-45b3-90ee-9884265e8df3"
@@ -4273,21 +4273,21 @@ lib LibWin32
   end
 
   struct ID3D12ResourceVTbl
-    query_interface : Proc(ID3D12Resource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Resource*, UInt32)
-    release : Proc(ID3D12Resource*, UInt32)
-    get_private_data : Proc(ID3D12Resource*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Resource*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Resource*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Resource*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12Resource*, Guid*, Void**, HRESULT)
-    map : Proc(ID3D12Resource*, UInt32, D3D12_RANGE*, Void**, HRESULT)
-    unmap : Proc(ID3D12Resource*, UInt32, D3D12_RANGE*, Void)
-    get_desc : Proc(ID3D12Resource*, D3D12_RESOURCE_DESC)
-    get_gpu_virtual_address : Proc(ID3D12Resource*, UInt64)
-    write_to_subresource : Proc(ID3D12Resource*, UInt32, D3D12_BOX*, Void*, UInt32, UInt32, HRESULT)
-    read_from_subresource : Proc(ID3D12Resource*, Void*, UInt32, UInt32, UInt32, D3D12_BOX*, HRESULT)
-    get_heap_properties : Proc(ID3D12Resource*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    map : UInt64
+    unmap : UInt64
+    get_desc : UInt64
+    get_gpu_virtual_address : UInt64
+    write_to_subresource : UInt64
+    read_from_subresource : UInt64
+    get_heap_properties : UInt64
   end
 
   ID3D12Resource_GUID = "696442be-a72e-4059-bc79-5b5c98040fad"
@@ -4297,15 +4297,15 @@ lib LibWin32
   end
 
   struct ID3D12CommandAllocatorVTbl
-    query_interface : Proc(ID3D12CommandAllocator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12CommandAllocator*, UInt32)
-    release : Proc(ID3D12CommandAllocator*, UInt32)
-    get_private_data : Proc(ID3D12CommandAllocator*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12CommandAllocator*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12CommandAllocator*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12CommandAllocator*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12CommandAllocator*, Guid*, Void**, HRESULT)
-    reset : Proc(ID3D12CommandAllocator*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    reset : UInt64
   end
 
   ID3D12CommandAllocator_GUID = "6102dee4-af59-4b09-b999-b44d73f09b24"
@@ -4315,17 +4315,17 @@ lib LibWin32
   end
 
   struct ID3D12FenceVTbl
-    query_interface : Proc(ID3D12Fence*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Fence*, UInt32)
-    release : Proc(ID3D12Fence*, UInt32)
-    get_private_data : Proc(ID3D12Fence*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Fence*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Fence*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Fence*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12Fence*, Guid*, Void**, HRESULT)
-    get_completed_value : Proc(ID3D12Fence*, UInt64)
-    set_event_on_completion : Proc(ID3D12Fence*, UInt64, LibC::HANDLE, HRESULT)
-    signal : Proc(ID3D12Fence*, UInt64, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_completed_value : UInt64
+    set_event_on_completion : UInt64
+    signal : UInt64
   end
 
   ID3D12Fence_GUID = "0a753dcf-c4d8-4b91-adf6-be5a60d95a76"
@@ -4335,18 +4335,18 @@ lib LibWin32
   end
 
   struct ID3D12Fence1VTbl
-    query_interface : Proc(ID3D12Fence1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Fence1*, UInt32)
-    release : Proc(ID3D12Fence1*, UInt32)
-    get_private_data : Proc(ID3D12Fence1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Fence1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Fence1*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Fence1*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12Fence1*, Guid*, Void**, HRESULT)
-    get_completed_value : Proc(ID3D12Fence1*, UInt64)
-    set_event_on_completion : Proc(ID3D12Fence1*, UInt64, LibC::HANDLE, HRESULT)
-    signal : Proc(ID3D12Fence1*, UInt64, HRESULT)
-    get_creation_flags : Proc(ID3D12Fence1*, D3D12_FENCE_FLAGS)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_completed_value : UInt64
+    set_event_on_completion : UInt64
+    signal : UInt64
+    get_creation_flags : UInt64
   end
 
   ID3D12Fence1_GUID = "433685fe-e22b-4ca0-a8db-b5b4f4dd0e4a"
@@ -4356,15 +4356,15 @@ lib LibWin32
   end
 
   struct ID3D12PipelineStateVTbl
-    query_interface : Proc(ID3D12PipelineState*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12PipelineState*, UInt32)
-    release : Proc(ID3D12PipelineState*, UInt32)
-    get_private_data : Proc(ID3D12PipelineState*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12PipelineState*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12PipelineState*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12PipelineState*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12PipelineState*, Guid*, Void**, HRESULT)
-    get_cached_blob : Proc(ID3D12PipelineState*, ID3DBlob*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_cached_blob : UInt64
   end
 
   ID3D12PipelineState_GUID = "765a30f3-f624-4c6f-a828-ace948622445"
@@ -4374,17 +4374,17 @@ lib LibWin32
   end
 
   struct ID3D12DescriptorHeapVTbl
-    query_interface : Proc(ID3D12DescriptorHeap*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12DescriptorHeap*, UInt32)
-    release : Proc(ID3D12DescriptorHeap*, UInt32)
-    get_private_data : Proc(ID3D12DescriptorHeap*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12DescriptorHeap*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12DescriptorHeap*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12DescriptorHeap*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12DescriptorHeap*, Guid*, Void**, HRESULT)
-    get_desc : Proc(ID3D12DescriptorHeap*, D3D12_DESCRIPTOR_HEAP_DESC)
-    get_cpu_descriptor_handle_for_heap_start : Proc(ID3D12DescriptorHeap*, D3D12_CPU_DESCRIPTOR_HANDLE)
-    get_gpu_descriptor_handle_for_heap_start : Proc(ID3D12DescriptorHeap*, D3D12_GPU_DESCRIPTOR_HANDLE)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_desc : UInt64
+    get_cpu_descriptor_handle_for_heap_start : UInt64
+    get_gpu_descriptor_handle_for_heap_start : UInt64
   end
 
   ID3D12DescriptorHeap_GUID = "8efb471d-616c-4f49-90f7-127bb763fa51"
@@ -4394,14 +4394,14 @@ lib LibWin32
   end
 
   struct ID3D12QueryHeapVTbl
-    query_interface : Proc(ID3D12QueryHeap*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12QueryHeap*, UInt32)
-    release : Proc(ID3D12QueryHeap*, UInt32)
-    get_private_data : Proc(ID3D12QueryHeap*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12QueryHeap*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12QueryHeap*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12QueryHeap*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12QueryHeap*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
   end
 
   ID3D12QueryHeap_GUID = "0d9658ae-ed45-469e-a61d-970ec583cab4"
@@ -4411,14 +4411,14 @@ lib LibWin32
   end
 
   struct ID3D12CommandSignatureVTbl
-    query_interface : Proc(ID3D12CommandSignature*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12CommandSignature*, UInt32)
-    release : Proc(ID3D12CommandSignature*, UInt32)
-    get_private_data : Proc(ID3D12CommandSignature*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12CommandSignature*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12CommandSignature*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12CommandSignature*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12CommandSignature*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
   end
 
   ID3D12CommandSignature_GUID = "c36a797c-ec80-4f0a-8985-a7b2475082d1"
@@ -4428,15 +4428,15 @@ lib LibWin32
   end
 
   struct ID3D12CommandListVTbl
-    query_interface : Proc(ID3D12CommandList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12CommandList*, UInt32)
-    release : Proc(ID3D12CommandList*, UInt32)
-    get_private_data : Proc(ID3D12CommandList*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12CommandList*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12CommandList*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12CommandList*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12CommandList*, Guid*, Void**, HRESULT)
-    get_type : Proc(ID3D12CommandList*, D3D12_COMMAND_LIST_TYPE)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_type : UInt64
   end
 
   ID3D12CommandList_GUID = "7116d91c-e7e4-47ce-b8c6-ec8168f437e5"
@@ -4446,66 +4446,66 @@ lib LibWin32
   end
 
   struct ID3D12GraphicsCommandListVTbl
-    query_interface : Proc(ID3D12GraphicsCommandList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12GraphicsCommandList*, UInt32)
-    release : Proc(ID3D12GraphicsCommandList*, UInt32)
-    get_private_data : Proc(ID3D12GraphicsCommandList*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12GraphicsCommandList*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12GraphicsCommandList*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12GraphicsCommandList*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12GraphicsCommandList*, Guid*, Void**, HRESULT)
-    get_type : Proc(ID3D12GraphicsCommandList*, D3D12_COMMAND_LIST_TYPE)
-    close : Proc(ID3D12GraphicsCommandList*, HRESULT)
-    reset : Proc(ID3D12GraphicsCommandList*, ID3D12CommandAllocator, ID3D12PipelineState, HRESULT)
-    clear_state : Proc(ID3D12GraphicsCommandList*, ID3D12PipelineState, Void)
-    draw_instanced : Proc(ID3D12GraphicsCommandList*, UInt32, UInt32, UInt32, UInt32, Void)
-    draw_indexed_instanced : Proc(ID3D12GraphicsCommandList*, UInt32, UInt32, UInt32, Int32, UInt32, Void)
-    dispatch : Proc(ID3D12GraphicsCommandList*, UInt32, UInt32, UInt32, Void)
-    copy_buffer_region : Proc(ID3D12GraphicsCommandList*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt64, Void)
-    copy_texture_region : Proc(ID3D12GraphicsCommandList*, D3D12_TEXTURE_COPY_LOCATION*, UInt32, UInt32, UInt32, D3D12_TEXTURE_COPY_LOCATION*, D3D12_BOX*, Void)
-    copy_resource : Proc(ID3D12GraphicsCommandList*, ID3D12Resource, ID3D12Resource, Void)
-    copy_tiles : Proc(ID3D12GraphicsCommandList*, ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, ID3D12Resource, UInt64, D3D12_TILE_COPY_FLAGS, Void)
-    resolve_subresource : Proc(ID3D12GraphicsCommandList*, ID3D12Resource, UInt32, ID3D12Resource, UInt32, DXGI_FORMAT, Void)
-    ia_set_primitive_topology : Proc(ID3D12GraphicsCommandList*, D3D_PRIMITIVE_TOPOLOGY, Void)
-    rs_set_viewports : Proc(ID3D12GraphicsCommandList*, UInt32, D3D12_VIEWPORT*, Void)
-    rs_set_scissor_rects : Proc(ID3D12GraphicsCommandList*, UInt32, RECT*, Void)
-    om_set_blend_factor : Proc(ID3D12GraphicsCommandList*, Float32*, Void)
-    om_set_stencil_ref : Proc(ID3D12GraphicsCommandList*, UInt32, Void)
-    set_pipeline_state : Proc(ID3D12GraphicsCommandList*, ID3D12PipelineState, Void)
-    resource_barrier : Proc(ID3D12GraphicsCommandList*, UInt32, D3D12_RESOURCE_BARRIER*, Void)
-    execute_bundle : Proc(ID3D12GraphicsCommandList*, ID3D12GraphicsCommandList, Void)
-    set_descriptor_heaps : Proc(ID3D12GraphicsCommandList*, UInt32, ID3D12DescriptorHeap*, Void)
-    set_compute_root_signature : Proc(ID3D12GraphicsCommandList*, ID3D12RootSignature, Void)
-    set_graphics_root_signature : Proc(ID3D12GraphicsCommandList*, ID3D12RootSignature, Void)
-    set_compute_root_descriptor_table : Proc(ID3D12GraphicsCommandList*, UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)
-    set_graphics_root_descriptor_table : Proc(ID3D12GraphicsCommandList*, UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)
-    set_compute_root32_bit_constant : Proc(ID3D12GraphicsCommandList*, UInt32, UInt32, UInt32, Void)
-    set_graphics_root32_bit_constant : Proc(ID3D12GraphicsCommandList*, UInt32, UInt32, UInt32, Void)
-    set_compute_root32_bit_constants : Proc(ID3D12GraphicsCommandList*, UInt32, UInt32, Void*, UInt32, Void)
-    set_graphics_root32_bit_constants : Proc(ID3D12GraphicsCommandList*, UInt32, UInt32, Void*, UInt32, Void)
-    set_compute_root_constant_buffer_view : Proc(ID3D12GraphicsCommandList*, UInt32, UInt64, Void)
-    set_graphics_root_constant_buffer_view : Proc(ID3D12GraphicsCommandList*, UInt32, UInt64, Void)
-    set_compute_root_shader_resource_view : Proc(ID3D12GraphicsCommandList*, UInt32, UInt64, Void)
-    set_graphics_root_shader_resource_view : Proc(ID3D12GraphicsCommandList*, UInt32, UInt64, Void)
-    set_compute_root_unordered_access_view : Proc(ID3D12GraphicsCommandList*, UInt32, UInt64, Void)
-    set_graphics_root_unordered_access_view : Proc(ID3D12GraphicsCommandList*, UInt32, UInt64, Void)
-    ia_set_index_buffer : Proc(ID3D12GraphicsCommandList*, D3D12_INDEX_BUFFER_VIEW*, Void)
-    ia_set_vertex_buffers : Proc(ID3D12GraphicsCommandList*, UInt32, UInt32, D3D12_VERTEX_BUFFER_VIEW*, Void)
-    so_set_targets : Proc(ID3D12GraphicsCommandList*, UInt32, UInt32, D3D12_STREAM_OUTPUT_BUFFER_VIEW*, Void)
-    om_set_render_targets : Proc(ID3D12GraphicsCommandList*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, LibC::BOOL, D3D12_CPU_DESCRIPTOR_HANDLE*, Void)
-    clear_depth_stencil_view : Proc(ID3D12GraphicsCommandList*, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CLEAR_FLAGS, Float32, UInt8, UInt32, RECT*, Void)
-    clear_render_target_view : Proc(ID3D12GraphicsCommandList*, D3D12_CPU_DESCRIPTOR_HANDLE, Float32*, UInt32, RECT*, Void)
-    clear_unordered_access_view_uint : Proc(ID3D12GraphicsCommandList*, D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, UInt32*, UInt32, RECT*, Void)
-    clear_unordered_access_view_float : Proc(ID3D12GraphicsCommandList*, D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, Float32*, UInt32, RECT*, Void)
-    discard_resource : Proc(ID3D12GraphicsCommandList*, ID3D12Resource, D3D12_DISCARD_REGION*, Void)
-    begin_query : Proc(ID3D12GraphicsCommandList*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)
-    end_query : Proc(ID3D12GraphicsCommandList*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)
-    resolve_query_data : Proc(ID3D12GraphicsCommandList*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, UInt32, ID3D12Resource, UInt64, Void)
-    set_predication : Proc(ID3D12GraphicsCommandList*, ID3D12Resource, UInt64, D3D12_PREDICATION_OP, Void)
-    set_marker : Proc(ID3D12GraphicsCommandList*, UInt32, Void*, UInt32, Void)
-    begin_event : Proc(ID3D12GraphicsCommandList*, UInt32, Void*, UInt32, Void)
-    end_event : Proc(ID3D12GraphicsCommandList*, Void)
-    execute_indirect : Proc(ID3D12GraphicsCommandList*, ID3D12CommandSignature, UInt32, ID3D12Resource, UInt64, ID3D12Resource, UInt64, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_type : UInt64
+    close : UInt64
+    reset : UInt64
+    clear_state : UInt64
+    draw_instanced : UInt64
+    draw_indexed_instanced : UInt64
+    dispatch : UInt64
+    copy_buffer_region : UInt64
+    copy_texture_region : UInt64
+    copy_resource : UInt64
+    copy_tiles : UInt64
+    resolve_subresource : UInt64
+    ia_set_primitive_topology : UInt64
+    rs_set_viewports : UInt64
+    rs_set_scissor_rects : UInt64
+    om_set_blend_factor : UInt64
+    om_set_stencil_ref : UInt64
+    set_pipeline_state : UInt64
+    resource_barrier : UInt64
+    execute_bundle : UInt64
+    set_descriptor_heaps : UInt64
+    set_compute_root_signature : UInt64
+    set_graphics_root_signature : UInt64
+    set_compute_root_descriptor_table : UInt64
+    set_graphics_root_descriptor_table : UInt64
+    set_compute_root32_bit_constant : UInt64
+    set_graphics_root32_bit_constant : UInt64
+    set_compute_root32_bit_constants : UInt64
+    set_graphics_root32_bit_constants : UInt64
+    set_compute_root_constant_buffer_view : UInt64
+    set_graphics_root_constant_buffer_view : UInt64
+    set_compute_root_shader_resource_view : UInt64
+    set_graphics_root_shader_resource_view : UInt64
+    set_compute_root_unordered_access_view : UInt64
+    set_graphics_root_unordered_access_view : UInt64
+    ia_set_index_buffer : UInt64
+    ia_set_vertex_buffers : UInt64
+    so_set_targets : UInt64
+    om_set_render_targets : UInt64
+    clear_depth_stencil_view : UInt64
+    clear_render_target_view : UInt64
+    clear_unordered_access_view_uint : UInt64
+    clear_unordered_access_view_float : UInt64
+    discard_resource : UInt64
+    begin_query : UInt64
+    end_query : UInt64
+    resolve_query_data : UInt64
+    set_predication : UInt64
+    set_marker : UInt64
+    begin_event : UInt64
+    end_event : UInt64
+    execute_indirect : UInt64
   end
 
   ID3D12GraphicsCommandList_GUID = "5b160d0f-ac1b-4185-8ba8-b3ae42a5a455"
@@ -4515,72 +4515,72 @@ lib LibWin32
   end
 
   struct ID3D12GraphicsCommandList1VTbl
-    query_interface : Proc(ID3D12GraphicsCommandList1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12GraphicsCommandList1*, UInt32)
-    release : Proc(ID3D12GraphicsCommandList1*, UInt32)
-    get_private_data : Proc(ID3D12GraphicsCommandList1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12GraphicsCommandList1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12GraphicsCommandList1*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12GraphicsCommandList1*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12GraphicsCommandList1*, Guid*, Void**, HRESULT)
-    get_type : Proc(ID3D12GraphicsCommandList1*, D3D12_COMMAND_LIST_TYPE)
-    close : Proc(ID3D12GraphicsCommandList1*, HRESULT)
-    reset : Proc(ID3D12GraphicsCommandList1*, ID3D12CommandAllocator, ID3D12PipelineState, HRESULT)
-    clear_state : Proc(ID3D12GraphicsCommandList1*, ID3D12PipelineState, Void)
-    draw_instanced : Proc(ID3D12GraphicsCommandList1*, UInt32, UInt32, UInt32, UInt32, Void)
-    draw_indexed_instanced : Proc(ID3D12GraphicsCommandList1*, UInt32, UInt32, UInt32, Int32, UInt32, Void)
-    dispatch : Proc(ID3D12GraphicsCommandList1*, UInt32, UInt32, UInt32, Void)
-    copy_buffer_region : Proc(ID3D12GraphicsCommandList1*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt64, Void)
-    copy_texture_region : Proc(ID3D12GraphicsCommandList1*, D3D12_TEXTURE_COPY_LOCATION*, UInt32, UInt32, UInt32, D3D12_TEXTURE_COPY_LOCATION*, D3D12_BOX*, Void)
-    copy_resource : Proc(ID3D12GraphicsCommandList1*, ID3D12Resource, ID3D12Resource, Void)
-    copy_tiles : Proc(ID3D12GraphicsCommandList1*, ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, ID3D12Resource, UInt64, D3D12_TILE_COPY_FLAGS, Void)
-    resolve_subresource : Proc(ID3D12GraphicsCommandList1*, ID3D12Resource, UInt32, ID3D12Resource, UInt32, DXGI_FORMAT, Void)
-    ia_set_primitive_topology : Proc(ID3D12GraphicsCommandList1*, D3D_PRIMITIVE_TOPOLOGY, Void)
-    rs_set_viewports : Proc(ID3D12GraphicsCommandList1*, UInt32, D3D12_VIEWPORT*, Void)
-    rs_set_scissor_rects : Proc(ID3D12GraphicsCommandList1*, UInt32, RECT*, Void)
-    om_set_blend_factor : Proc(ID3D12GraphicsCommandList1*, Float32*, Void)
-    om_set_stencil_ref : Proc(ID3D12GraphicsCommandList1*, UInt32, Void)
-    set_pipeline_state : Proc(ID3D12GraphicsCommandList1*, ID3D12PipelineState, Void)
-    resource_barrier : Proc(ID3D12GraphicsCommandList1*, UInt32, D3D12_RESOURCE_BARRIER*, Void)
-    execute_bundle : Proc(ID3D12GraphicsCommandList1*, ID3D12GraphicsCommandList, Void)
-    set_descriptor_heaps : Proc(ID3D12GraphicsCommandList1*, UInt32, ID3D12DescriptorHeap*, Void)
-    set_compute_root_signature : Proc(ID3D12GraphicsCommandList1*, ID3D12RootSignature, Void)
-    set_graphics_root_signature : Proc(ID3D12GraphicsCommandList1*, ID3D12RootSignature, Void)
-    set_compute_root_descriptor_table : Proc(ID3D12GraphicsCommandList1*, UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)
-    set_graphics_root_descriptor_table : Proc(ID3D12GraphicsCommandList1*, UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)
-    set_compute_root32_bit_constant : Proc(ID3D12GraphicsCommandList1*, UInt32, UInt32, UInt32, Void)
-    set_graphics_root32_bit_constant : Proc(ID3D12GraphicsCommandList1*, UInt32, UInt32, UInt32, Void)
-    set_compute_root32_bit_constants : Proc(ID3D12GraphicsCommandList1*, UInt32, UInt32, Void*, UInt32, Void)
-    set_graphics_root32_bit_constants : Proc(ID3D12GraphicsCommandList1*, UInt32, UInt32, Void*, UInt32, Void)
-    set_compute_root_constant_buffer_view : Proc(ID3D12GraphicsCommandList1*, UInt32, UInt64, Void)
-    set_graphics_root_constant_buffer_view : Proc(ID3D12GraphicsCommandList1*, UInt32, UInt64, Void)
-    set_compute_root_shader_resource_view : Proc(ID3D12GraphicsCommandList1*, UInt32, UInt64, Void)
-    set_graphics_root_shader_resource_view : Proc(ID3D12GraphicsCommandList1*, UInt32, UInt64, Void)
-    set_compute_root_unordered_access_view : Proc(ID3D12GraphicsCommandList1*, UInt32, UInt64, Void)
-    set_graphics_root_unordered_access_view : Proc(ID3D12GraphicsCommandList1*, UInt32, UInt64, Void)
-    ia_set_index_buffer : Proc(ID3D12GraphicsCommandList1*, D3D12_INDEX_BUFFER_VIEW*, Void)
-    ia_set_vertex_buffers : Proc(ID3D12GraphicsCommandList1*, UInt32, UInt32, D3D12_VERTEX_BUFFER_VIEW*, Void)
-    so_set_targets : Proc(ID3D12GraphicsCommandList1*, UInt32, UInt32, D3D12_STREAM_OUTPUT_BUFFER_VIEW*, Void)
-    om_set_render_targets : Proc(ID3D12GraphicsCommandList1*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, LibC::BOOL, D3D12_CPU_DESCRIPTOR_HANDLE*, Void)
-    clear_depth_stencil_view : Proc(ID3D12GraphicsCommandList1*, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CLEAR_FLAGS, Float32, UInt8, UInt32, RECT*, Void)
-    clear_render_target_view : Proc(ID3D12GraphicsCommandList1*, D3D12_CPU_DESCRIPTOR_HANDLE, Float32*, UInt32, RECT*, Void)
-    clear_unordered_access_view_uint : Proc(ID3D12GraphicsCommandList1*, D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, UInt32*, UInt32, RECT*, Void)
-    clear_unordered_access_view_float : Proc(ID3D12GraphicsCommandList1*, D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, Float32*, UInt32, RECT*, Void)
-    discard_resource : Proc(ID3D12GraphicsCommandList1*, ID3D12Resource, D3D12_DISCARD_REGION*, Void)
-    begin_query : Proc(ID3D12GraphicsCommandList1*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)
-    end_query : Proc(ID3D12GraphicsCommandList1*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)
-    resolve_query_data : Proc(ID3D12GraphicsCommandList1*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, UInt32, ID3D12Resource, UInt64, Void)
-    set_predication : Proc(ID3D12GraphicsCommandList1*, ID3D12Resource, UInt64, D3D12_PREDICATION_OP, Void)
-    set_marker : Proc(ID3D12GraphicsCommandList1*, UInt32, Void*, UInt32, Void)
-    begin_event : Proc(ID3D12GraphicsCommandList1*, UInt32, Void*, UInt32, Void)
-    end_event : Proc(ID3D12GraphicsCommandList1*, Void)
-    execute_indirect : Proc(ID3D12GraphicsCommandList1*, ID3D12CommandSignature, UInt32, ID3D12Resource, UInt64, ID3D12Resource, UInt64, Void)
-    atomic_copy_buffer_uint : Proc(ID3D12GraphicsCommandList1*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)
-    atomic_copy_buffer_uint64 : Proc(ID3D12GraphicsCommandList1*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)
-    om_set_depth_bounds : Proc(ID3D12GraphicsCommandList1*, Float32, Float32, Void)
-    set_sample_positions : Proc(ID3D12GraphicsCommandList1*, UInt32, UInt32, D3D12_SAMPLE_POSITION*, Void)
-    resolve_subresource_region : Proc(ID3D12GraphicsCommandList1*, ID3D12Resource, UInt32, UInt32, UInt32, ID3D12Resource, UInt32, RECT*, DXGI_FORMAT, D3D12_RESOLVE_MODE, Void)
-    set_view_instance_mask : Proc(ID3D12GraphicsCommandList1*, UInt32, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_type : UInt64
+    close : UInt64
+    reset : UInt64
+    clear_state : UInt64
+    draw_instanced : UInt64
+    draw_indexed_instanced : UInt64
+    dispatch : UInt64
+    copy_buffer_region : UInt64
+    copy_texture_region : UInt64
+    copy_resource : UInt64
+    copy_tiles : UInt64
+    resolve_subresource : UInt64
+    ia_set_primitive_topology : UInt64
+    rs_set_viewports : UInt64
+    rs_set_scissor_rects : UInt64
+    om_set_blend_factor : UInt64
+    om_set_stencil_ref : UInt64
+    set_pipeline_state : UInt64
+    resource_barrier : UInt64
+    execute_bundle : UInt64
+    set_descriptor_heaps : UInt64
+    set_compute_root_signature : UInt64
+    set_graphics_root_signature : UInt64
+    set_compute_root_descriptor_table : UInt64
+    set_graphics_root_descriptor_table : UInt64
+    set_compute_root32_bit_constant : UInt64
+    set_graphics_root32_bit_constant : UInt64
+    set_compute_root32_bit_constants : UInt64
+    set_graphics_root32_bit_constants : UInt64
+    set_compute_root_constant_buffer_view : UInt64
+    set_graphics_root_constant_buffer_view : UInt64
+    set_compute_root_shader_resource_view : UInt64
+    set_graphics_root_shader_resource_view : UInt64
+    set_compute_root_unordered_access_view : UInt64
+    set_graphics_root_unordered_access_view : UInt64
+    ia_set_index_buffer : UInt64
+    ia_set_vertex_buffers : UInt64
+    so_set_targets : UInt64
+    om_set_render_targets : UInt64
+    clear_depth_stencil_view : UInt64
+    clear_render_target_view : UInt64
+    clear_unordered_access_view_uint : UInt64
+    clear_unordered_access_view_float : UInt64
+    discard_resource : UInt64
+    begin_query : UInt64
+    end_query : UInt64
+    resolve_query_data : UInt64
+    set_predication : UInt64
+    set_marker : UInt64
+    begin_event : UInt64
+    end_event : UInt64
+    execute_indirect : UInt64
+    atomic_copy_buffer_uint : UInt64
+    atomic_copy_buffer_uint64 : UInt64
+    om_set_depth_bounds : UInt64
+    set_sample_positions : UInt64
+    resolve_subresource_region : UInt64
+    set_view_instance_mask : UInt64
   end
 
   ID3D12GraphicsCommandList1_GUID = "553103fb-1fe7-4557-bb38-946d7d0e7ca7"
@@ -4590,73 +4590,73 @@ lib LibWin32
   end
 
   struct ID3D12GraphicsCommandList2VTbl
-    query_interface : Proc(ID3D12GraphicsCommandList2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12GraphicsCommandList2*, UInt32)
-    release : Proc(ID3D12GraphicsCommandList2*, UInt32)
-    get_private_data : Proc(ID3D12GraphicsCommandList2*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12GraphicsCommandList2*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12GraphicsCommandList2*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12GraphicsCommandList2*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12GraphicsCommandList2*, Guid*, Void**, HRESULT)
-    get_type : Proc(ID3D12GraphicsCommandList2*, D3D12_COMMAND_LIST_TYPE)
-    close : Proc(ID3D12GraphicsCommandList2*, HRESULT)
-    reset : Proc(ID3D12GraphicsCommandList2*, ID3D12CommandAllocator, ID3D12PipelineState, HRESULT)
-    clear_state : Proc(ID3D12GraphicsCommandList2*, ID3D12PipelineState, Void)
-    draw_instanced : Proc(ID3D12GraphicsCommandList2*, UInt32, UInt32, UInt32, UInt32, Void)
-    draw_indexed_instanced : Proc(ID3D12GraphicsCommandList2*, UInt32, UInt32, UInt32, Int32, UInt32, Void)
-    dispatch : Proc(ID3D12GraphicsCommandList2*, UInt32, UInt32, UInt32, Void)
-    copy_buffer_region : Proc(ID3D12GraphicsCommandList2*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt64, Void)
-    copy_texture_region : Proc(ID3D12GraphicsCommandList2*, D3D12_TEXTURE_COPY_LOCATION*, UInt32, UInt32, UInt32, D3D12_TEXTURE_COPY_LOCATION*, D3D12_BOX*, Void)
-    copy_resource : Proc(ID3D12GraphicsCommandList2*, ID3D12Resource, ID3D12Resource, Void)
-    copy_tiles : Proc(ID3D12GraphicsCommandList2*, ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, ID3D12Resource, UInt64, D3D12_TILE_COPY_FLAGS, Void)
-    resolve_subresource : Proc(ID3D12GraphicsCommandList2*, ID3D12Resource, UInt32, ID3D12Resource, UInt32, DXGI_FORMAT, Void)
-    ia_set_primitive_topology : Proc(ID3D12GraphicsCommandList2*, D3D_PRIMITIVE_TOPOLOGY, Void)
-    rs_set_viewports : Proc(ID3D12GraphicsCommandList2*, UInt32, D3D12_VIEWPORT*, Void)
-    rs_set_scissor_rects : Proc(ID3D12GraphicsCommandList2*, UInt32, RECT*, Void)
-    om_set_blend_factor : Proc(ID3D12GraphicsCommandList2*, Float32*, Void)
-    om_set_stencil_ref : Proc(ID3D12GraphicsCommandList2*, UInt32, Void)
-    set_pipeline_state : Proc(ID3D12GraphicsCommandList2*, ID3D12PipelineState, Void)
-    resource_barrier : Proc(ID3D12GraphicsCommandList2*, UInt32, D3D12_RESOURCE_BARRIER*, Void)
-    execute_bundle : Proc(ID3D12GraphicsCommandList2*, ID3D12GraphicsCommandList, Void)
-    set_descriptor_heaps : Proc(ID3D12GraphicsCommandList2*, UInt32, ID3D12DescriptorHeap*, Void)
-    set_compute_root_signature : Proc(ID3D12GraphicsCommandList2*, ID3D12RootSignature, Void)
-    set_graphics_root_signature : Proc(ID3D12GraphicsCommandList2*, ID3D12RootSignature, Void)
-    set_compute_root_descriptor_table : Proc(ID3D12GraphicsCommandList2*, UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)
-    set_graphics_root_descriptor_table : Proc(ID3D12GraphicsCommandList2*, UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)
-    set_compute_root32_bit_constant : Proc(ID3D12GraphicsCommandList2*, UInt32, UInt32, UInt32, Void)
-    set_graphics_root32_bit_constant : Proc(ID3D12GraphicsCommandList2*, UInt32, UInt32, UInt32, Void)
-    set_compute_root32_bit_constants : Proc(ID3D12GraphicsCommandList2*, UInt32, UInt32, Void*, UInt32, Void)
-    set_graphics_root32_bit_constants : Proc(ID3D12GraphicsCommandList2*, UInt32, UInt32, Void*, UInt32, Void)
-    set_compute_root_constant_buffer_view : Proc(ID3D12GraphicsCommandList2*, UInt32, UInt64, Void)
-    set_graphics_root_constant_buffer_view : Proc(ID3D12GraphicsCommandList2*, UInt32, UInt64, Void)
-    set_compute_root_shader_resource_view : Proc(ID3D12GraphicsCommandList2*, UInt32, UInt64, Void)
-    set_graphics_root_shader_resource_view : Proc(ID3D12GraphicsCommandList2*, UInt32, UInt64, Void)
-    set_compute_root_unordered_access_view : Proc(ID3D12GraphicsCommandList2*, UInt32, UInt64, Void)
-    set_graphics_root_unordered_access_view : Proc(ID3D12GraphicsCommandList2*, UInt32, UInt64, Void)
-    ia_set_index_buffer : Proc(ID3D12GraphicsCommandList2*, D3D12_INDEX_BUFFER_VIEW*, Void)
-    ia_set_vertex_buffers : Proc(ID3D12GraphicsCommandList2*, UInt32, UInt32, D3D12_VERTEX_BUFFER_VIEW*, Void)
-    so_set_targets : Proc(ID3D12GraphicsCommandList2*, UInt32, UInt32, D3D12_STREAM_OUTPUT_BUFFER_VIEW*, Void)
-    om_set_render_targets : Proc(ID3D12GraphicsCommandList2*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, LibC::BOOL, D3D12_CPU_DESCRIPTOR_HANDLE*, Void)
-    clear_depth_stencil_view : Proc(ID3D12GraphicsCommandList2*, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CLEAR_FLAGS, Float32, UInt8, UInt32, RECT*, Void)
-    clear_render_target_view : Proc(ID3D12GraphicsCommandList2*, D3D12_CPU_DESCRIPTOR_HANDLE, Float32*, UInt32, RECT*, Void)
-    clear_unordered_access_view_uint : Proc(ID3D12GraphicsCommandList2*, D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, UInt32*, UInt32, RECT*, Void)
-    clear_unordered_access_view_float : Proc(ID3D12GraphicsCommandList2*, D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, Float32*, UInt32, RECT*, Void)
-    discard_resource : Proc(ID3D12GraphicsCommandList2*, ID3D12Resource, D3D12_DISCARD_REGION*, Void)
-    begin_query : Proc(ID3D12GraphicsCommandList2*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)
-    end_query : Proc(ID3D12GraphicsCommandList2*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)
-    resolve_query_data : Proc(ID3D12GraphicsCommandList2*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, UInt32, ID3D12Resource, UInt64, Void)
-    set_predication : Proc(ID3D12GraphicsCommandList2*, ID3D12Resource, UInt64, D3D12_PREDICATION_OP, Void)
-    set_marker : Proc(ID3D12GraphicsCommandList2*, UInt32, Void*, UInt32, Void)
-    begin_event : Proc(ID3D12GraphicsCommandList2*, UInt32, Void*, UInt32, Void)
-    end_event : Proc(ID3D12GraphicsCommandList2*, Void)
-    execute_indirect : Proc(ID3D12GraphicsCommandList2*, ID3D12CommandSignature, UInt32, ID3D12Resource, UInt64, ID3D12Resource, UInt64, Void)
-    atomic_copy_buffer_uint : Proc(ID3D12GraphicsCommandList2*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)
-    atomic_copy_buffer_uint64 : Proc(ID3D12GraphicsCommandList2*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)
-    om_set_depth_bounds : Proc(ID3D12GraphicsCommandList2*, Float32, Float32, Void)
-    set_sample_positions : Proc(ID3D12GraphicsCommandList2*, UInt32, UInt32, D3D12_SAMPLE_POSITION*, Void)
-    resolve_subresource_region : Proc(ID3D12GraphicsCommandList2*, ID3D12Resource, UInt32, UInt32, UInt32, ID3D12Resource, UInt32, RECT*, DXGI_FORMAT, D3D12_RESOLVE_MODE, Void)
-    set_view_instance_mask : Proc(ID3D12GraphicsCommandList2*, UInt32, Void)
-    write_buffer_immediate : Proc(ID3D12GraphicsCommandList2*, UInt32, D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_type : UInt64
+    close : UInt64
+    reset : UInt64
+    clear_state : UInt64
+    draw_instanced : UInt64
+    draw_indexed_instanced : UInt64
+    dispatch : UInt64
+    copy_buffer_region : UInt64
+    copy_texture_region : UInt64
+    copy_resource : UInt64
+    copy_tiles : UInt64
+    resolve_subresource : UInt64
+    ia_set_primitive_topology : UInt64
+    rs_set_viewports : UInt64
+    rs_set_scissor_rects : UInt64
+    om_set_blend_factor : UInt64
+    om_set_stencil_ref : UInt64
+    set_pipeline_state : UInt64
+    resource_barrier : UInt64
+    execute_bundle : UInt64
+    set_descriptor_heaps : UInt64
+    set_compute_root_signature : UInt64
+    set_graphics_root_signature : UInt64
+    set_compute_root_descriptor_table : UInt64
+    set_graphics_root_descriptor_table : UInt64
+    set_compute_root32_bit_constant : UInt64
+    set_graphics_root32_bit_constant : UInt64
+    set_compute_root32_bit_constants : UInt64
+    set_graphics_root32_bit_constants : UInt64
+    set_compute_root_constant_buffer_view : UInt64
+    set_graphics_root_constant_buffer_view : UInt64
+    set_compute_root_shader_resource_view : UInt64
+    set_graphics_root_shader_resource_view : UInt64
+    set_compute_root_unordered_access_view : UInt64
+    set_graphics_root_unordered_access_view : UInt64
+    ia_set_index_buffer : UInt64
+    ia_set_vertex_buffers : UInt64
+    so_set_targets : UInt64
+    om_set_render_targets : UInt64
+    clear_depth_stencil_view : UInt64
+    clear_render_target_view : UInt64
+    clear_unordered_access_view_uint : UInt64
+    clear_unordered_access_view_float : UInt64
+    discard_resource : UInt64
+    begin_query : UInt64
+    end_query : UInt64
+    resolve_query_data : UInt64
+    set_predication : UInt64
+    set_marker : UInt64
+    begin_event : UInt64
+    end_event : UInt64
+    execute_indirect : UInt64
+    atomic_copy_buffer_uint : UInt64
+    atomic_copy_buffer_uint64 : UInt64
+    om_set_depth_bounds : UInt64
+    set_sample_positions : UInt64
+    resolve_subresource_region : UInt64
+    set_view_instance_mask : UInt64
+    write_buffer_immediate : UInt64
   end
 
   ID3D12GraphicsCommandList2_GUID = "38c3e585-ff17-412c-9150-4fc6f9d72a28"
@@ -4666,25 +4666,25 @@ lib LibWin32
   end
 
   struct ID3D12CommandQueueVTbl
-    query_interface : Proc(ID3D12CommandQueue*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12CommandQueue*, UInt32)
-    release : Proc(ID3D12CommandQueue*, UInt32)
-    get_private_data : Proc(ID3D12CommandQueue*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12CommandQueue*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12CommandQueue*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12CommandQueue*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12CommandQueue*, Guid*, Void**, HRESULT)
-    update_tile_mappings : Proc(ID3D12CommandQueue*, ID3D12Resource, UInt32, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, ID3D12Heap, UInt32, D3D12_TILE_RANGE_FLAGS*, UInt32*, UInt32*, D3D12_TILE_MAPPING_FLAGS, Void)
-    copy_tile_mappings : Proc(ID3D12CommandQueue*, ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, D3D12_TILE_MAPPING_FLAGS, Void)
-    execute_command_lists : Proc(ID3D12CommandQueue*, UInt32, ID3D12CommandList*, Void)
-    set_marker : Proc(ID3D12CommandQueue*, UInt32, Void*, UInt32, Void)
-    begin_event : Proc(ID3D12CommandQueue*, UInt32, Void*, UInt32, Void)
-    end_event : Proc(ID3D12CommandQueue*, Void)
-    signal : Proc(ID3D12CommandQueue*, ID3D12Fence, UInt64, HRESULT)
-    wait : Proc(ID3D12CommandQueue*, ID3D12Fence, UInt64, HRESULT)
-    get_timestamp_frequency : Proc(ID3D12CommandQueue*, UInt64*, HRESULT)
-    get_clock_calibration : Proc(ID3D12CommandQueue*, UInt64*, UInt64*, HRESULT)
-    get_desc : Proc(ID3D12CommandQueue*, D3D12_COMMAND_QUEUE_DESC)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    update_tile_mappings : UInt64
+    copy_tile_mappings : UInt64
+    execute_command_lists : UInt64
+    set_marker : UInt64
+    begin_event : UInt64
+    end_event : UInt64
+    signal : UInt64
+    wait : UInt64
+    get_timestamp_frequency : UInt64
+    get_clock_calibration : UInt64
+    get_desc : UInt64
   end
 
   ID3D12CommandQueue_GUID = "0ec870a6-5d7e-4c22-8cfc-5baae07616ed"
@@ -4694,50 +4694,50 @@ lib LibWin32
   end
 
   struct ID3D12DeviceVTbl
-    query_interface : Proc(ID3D12Device*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Device*, UInt32)
-    release : Proc(ID3D12Device*, UInt32)
-    get_private_data : Proc(ID3D12Device*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Device*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Device*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Device*, LibC::LPWSTR, HRESULT)
-    get_node_count : Proc(ID3D12Device*, UInt32)
-    create_command_queue : Proc(ID3D12Device*, D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)
-    create_command_allocator : Proc(ID3D12Device*, D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)
-    create_graphics_pipeline_state : Proc(ID3D12Device*, D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_compute_pipeline_state : Proc(ID3D12Device*, D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_command_list : Proc(ID3D12Device*, UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)
-    check_feature_support : Proc(ID3D12Device*, D3D12_FEATURE, Void*, UInt32, HRESULT)
-    create_descriptor_heap : Proc(ID3D12Device*, D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)
-    get_descriptor_handle_increment_size : Proc(ID3D12Device*, D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)
-    create_root_signature : Proc(ID3D12Device*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    create_constant_buffer_view : Proc(ID3D12Device*, D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_shader_resource_view : Proc(ID3D12Device*, ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_unordered_access_view : Proc(ID3D12Device*, ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_render_target_view : Proc(ID3D12Device*, ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_depth_stencil_view : Proc(ID3D12Device*, ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_sampler : Proc(ID3D12Device*, D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    copy_descriptors : Proc(ID3D12Device*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    copy_descriptors_simple : Proc(ID3D12Device*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    get_resource_allocation_info : Proc(ID3D12Device*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)
-    get_custom_heap_properties : Proc(ID3D12Device*, UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)
-    create_committed_resource : Proc(ID3D12Device*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_heap : Proc(ID3D12Device*, D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)
-    create_placed_resource : Proc(ID3D12Device*, ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_reserved_resource : Proc(ID3D12Device*, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_shared_handle : Proc(ID3D12Device*, ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)
-    open_shared_handle : Proc(ID3D12Device*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    open_shared_handle_by_name : Proc(ID3D12Device*, LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)
-    make_resident : Proc(ID3D12Device*, UInt32, ID3D12Pageable*, HRESULT)
-    evict : Proc(ID3D12Device*, UInt32, ID3D12Pageable*, HRESULT)
-    create_fence : Proc(ID3D12Device*, UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)
-    get_device_removed_reason : Proc(ID3D12Device*, HRESULT)
-    get_copyable_footprints : Proc(ID3D12Device*, D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)
-    create_query_heap : Proc(ID3D12Device*, D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)
-    set_stable_power_state : Proc(ID3D12Device*, LibC::BOOL, HRESULT)
-    create_command_signature : Proc(ID3D12Device*, D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)
-    get_resource_tiling : Proc(ID3D12Device*, ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)
-    get_adapter_luid : Proc(ID3D12Device*, LUID)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_node_count : UInt64
+    create_command_queue : UInt64
+    create_command_allocator : UInt64
+    create_graphics_pipeline_state : UInt64
+    create_compute_pipeline_state : UInt64
+    create_command_list : UInt64
+    check_feature_support : UInt64
+    create_descriptor_heap : UInt64
+    get_descriptor_handle_increment_size : UInt64
+    create_root_signature : UInt64
+    create_constant_buffer_view : UInt64
+    create_shader_resource_view : UInt64
+    create_unordered_access_view : UInt64
+    create_render_target_view : UInt64
+    create_depth_stencil_view : UInt64
+    create_sampler : UInt64
+    copy_descriptors : UInt64
+    copy_descriptors_simple : UInt64
+    get_resource_allocation_info : UInt64
+    get_custom_heap_properties : UInt64
+    create_committed_resource : UInt64
+    create_heap : UInt64
+    create_placed_resource : UInt64
+    create_reserved_resource : UInt64
+    create_shared_handle : UInt64
+    open_shared_handle : UInt64
+    open_shared_handle_by_name : UInt64
+    make_resident : UInt64
+    evict : UInt64
+    create_fence : UInt64
+    get_device_removed_reason : UInt64
+    get_copyable_footprints : UInt64
+    create_query_heap : UInt64
+    set_stable_power_state : UInt64
+    create_command_signature : UInt64
+    get_resource_tiling : UInt64
+    get_adapter_luid : UInt64
   end
 
   ID3D12Device_GUID = "189819f1-1db6-4b57-be54-1821339b85f7"
@@ -4747,19 +4747,19 @@ lib LibWin32
   end
 
   struct ID3D12PipelineLibraryVTbl
-    query_interface : Proc(ID3D12PipelineLibrary*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12PipelineLibrary*, UInt32)
-    release : Proc(ID3D12PipelineLibrary*, UInt32)
-    get_private_data : Proc(ID3D12PipelineLibrary*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12PipelineLibrary*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12PipelineLibrary*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12PipelineLibrary*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12PipelineLibrary*, Guid*, Void**, HRESULT)
-    store_pipeline : Proc(ID3D12PipelineLibrary*, LibC::LPWSTR, ID3D12PipelineState, HRESULT)
-    load_graphics_pipeline : Proc(ID3D12PipelineLibrary*, LibC::LPWSTR, D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    load_compute_pipeline : Proc(ID3D12PipelineLibrary*, LibC::LPWSTR, D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    get_serialized_size : Proc(ID3D12PipelineLibrary*, LibC::UINT_PTR)
-    serialize : Proc(ID3D12PipelineLibrary*, Void*, LibC::UINT_PTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    store_pipeline : UInt64
+    load_graphics_pipeline : UInt64
+    load_compute_pipeline : UInt64
+    get_serialized_size : UInt64
+    serialize : UInt64
   end
 
   ID3D12PipelineLibrary_GUID = "c64226a8-9201-46af-b4cc-53fb9ff7414f"
@@ -4769,20 +4769,20 @@ lib LibWin32
   end
 
   struct ID3D12PipelineLibrary1VTbl
-    query_interface : Proc(ID3D12PipelineLibrary1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12PipelineLibrary1*, UInt32)
-    release : Proc(ID3D12PipelineLibrary1*, UInt32)
-    get_private_data : Proc(ID3D12PipelineLibrary1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12PipelineLibrary1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12PipelineLibrary1*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12PipelineLibrary1*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12PipelineLibrary1*, Guid*, Void**, HRESULT)
-    store_pipeline : Proc(ID3D12PipelineLibrary1*, LibC::LPWSTR, ID3D12PipelineState, HRESULT)
-    load_graphics_pipeline : Proc(ID3D12PipelineLibrary1*, LibC::LPWSTR, D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    load_compute_pipeline : Proc(ID3D12PipelineLibrary1*, LibC::LPWSTR, D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    get_serialized_size : Proc(ID3D12PipelineLibrary1*, LibC::UINT_PTR)
-    serialize : Proc(ID3D12PipelineLibrary1*, Void*, LibC::UINT_PTR, HRESULT)
-    load_pipeline : Proc(ID3D12PipelineLibrary1*, LibC::LPWSTR, D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    store_pipeline : UInt64
+    load_graphics_pipeline : UInt64
+    load_compute_pipeline : UInt64
+    get_serialized_size : UInt64
+    serialize : UInt64
+    load_pipeline : UInt64
   end
 
   ID3D12PipelineLibrary1_GUID = "80eabf42-2568-4e5e-bd82-c37f86961dc3"
@@ -4792,53 +4792,53 @@ lib LibWin32
   end
 
   struct ID3D12Device1VTbl
-    query_interface : Proc(ID3D12Device1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Device1*, UInt32)
-    release : Proc(ID3D12Device1*, UInt32)
-    get_private_data : Proc(ID3D12Device1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Device1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Device1*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Device1*, LibC::LPWSTR, HRESULT)
-    get_node_count : Proc(ID3D12Device1*, UInt32)
-    create_command_queue : Proc(ID3D12Device1*, D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)
-    create_command_allocator : Proc(ID3D12Device1*, D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)
-    create_graphics_pipeline_state : Proc(ID3D12Device1*, D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_compute_pipeline_state : Proc(ID3D12Device1*, D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_command_list : Proc(ID3D12Device1*, UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)
-    check_feature_support : Proc(ID3D12Device1*, D3D12_FEATURE, Void*, UInt32, HRESULT)
-    create_descriptor_heap : Proc(ID3D12Device1*, D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)
-    get_descriptor_handle_increment_size : Proc(ID3D12Device1*, D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)
-    create_root_signature : Proc(ID3D12Device1*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    create_constant_buffer_view : Proc(ID3D12Device1*, D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_shader_resource_view : Proc(ID3D12Device1*, ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_unordered_access_view : Proc(ID3D12Device1*, ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_render_target_view : Proc(ID3D12Device1*, ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_depth_stencil_view : Proc(ID3D12Device1*, ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_sampler : Proc(ID3D12Device1*, D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    copy_descriptors : Proc(ID3D12Device1*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    copy_descriptors_simple : Proc(ID3D12Device1*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    get_resource_allocation_info : Proc(ID3D12Device1*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)
-    get_custom_heap_properties : Proc(ID3D12Device1*, UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)
-    create_committed_resource : Proc(ID3D12Device1*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_heap : Proc(ID3D12Device1*, D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)
-    create_placed_resource : Proc(ID3D12Device1*, ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_reserved_resource : Proc(ID3D12Device1*, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_shared_handle : Proc(ID3D12Device1*, ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)
-    open_shared_handle : Proc(ID3D12Device1*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    open_shared_handle_by_name : Proc(ID3D12Device1*, LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)
-    make_resident : Proc(ID3D12Device1*, UInt32, ID3D12Pageable*, HRESULT)
-    evict : Proc(ID3D12Device1*, UInt32, ID3D12Pageable*, HRESULT)
-    create_fence : Proc(ID3D12Device1*, UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)
-    get_device_removed_reason : Proc(ID3D12Device1*, HRESULT)
-    get_copyable_footprints : Proc(ID3D12Device1*, D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)
-    create_query_heap : Proc(ID3D12Device1*, D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)
-    set_stable_power_state : Proc(ID3D12Device1*, LibC::BOOL, HRESULT)
-    create_command_signature : Proc(ID3D12Device1*, D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)
-    get_resource_tiling : Proc(ID3D12Device1*, ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)
-    get_adapter_luid : Proc(ID3D12Device1*, LUID)
-    create_pipeline_library : Proc(ID3D12Device1*, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    set_event_on_multiple_fence_completion : Proc(ID3D12Device1*, ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)
-    set_residency_priority : Proc(ID3D12Device1*, UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_node_count : UInt64
+    create_command_queue : UInt64
+    create_command_allocator : UInt64
+    create_graphics_pipeline_state : UInt64
+    create_compute_pipeline_state : UInt64
+    create_command_list : UInt64
+    check_feature_support : UInt64
+    create_descriptor_heap : UInt64
+    get_descriptor_handle_increment_size : UInt64
+    create_root_signature : UInt64
+    create_constant_buffer_view : UInt64
+    create_shader_resource_view : UInt64
+    create_unordered_access_view : UInt64
+    create_render_target_view : UInt64
+    create_depth_stencil_view : UInt64
+    create_sampler : UInt64
+    copy_descriptors : UInt64
+    copy_descriptors_simple : UInt64
+    get_resource_allocation_info : UInt64
+    get_custom_heap_properties : UInt64
+    create_committed_resource : UInt64
+    create_heap : UInt64
+    create_placed_resource : UInt64
+    create_reserved_resource : UInt64
+    create_shared_handle : UInt64
+    open_shared_handle : UInt64
+    open_shared_handle_by_name : UInt64
+    make_resident : UInt64
+    evict : UInt64
+    create_fence : UInt64
+    get_device_removed_reason : UInt64
+    get_copyable_footprints : UInt64
+    create_query_heap : UInt64
+    set_stable_power_state : UInt64
+    create_command_signature : UInt64
+    get_resource_tiling : UInt64
+    get_adapter_luid : UInt64
+    create_pipeline_library : UInt64
+    set_event_on_multiple_fence_completion : UInt64
+    set_residency_priority : UInt64
   end
 
   ID3D12Device1_GUID = "77acce80-638e-4e65-8895-c1f23386863e"
@@ -4848,54 +4848,54 @@ lib LibWin32
   end
 
   struct ID3D12Device2VTbl
-    query_interface : Proc(ID3D12Device2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Device2*, UInt32)
-    release : Proc(ID3D12Device2*, UInt32)
-    get_private_data : Proc(ID3D12Device2*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Device2*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Device2*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Device2*, LibC::LPWSTR, HRESULT)
-    get_node_count : Proc(ID3D12Device2*, UInt32)
-    create_command_queue : Proc(ID3D12Device2*, D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)
-    create_command_allocator : Proc(ID3D12Device2*, D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)
-    create_graphics_pipeline_state : Proc(ID3D12Device2*, D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_compute_pipeline_state : Proc(ID3D12Device2*, D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_command_list : Proc(ID3D12Device2*, UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)
-    check_feature_support : Proc(ID3D12Device2*, D3D12_FEATURE, Void*, UInt32, HRESULT)
-    create_descriptor_heap : Proc(ID3D12Device2*, D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)
-    get_descriptor_handle_increment_size : Proc(ID3D12Device2*, D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)
-    create_root_signature : Proc(ID3D12Device2*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    create_constant_buffer_view : Proc(ID3D12Device2*, D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_shader_resource_view : Proc(ID3D12Device2*, ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_unordered_access_view : Proc(ID3D12Device2*, ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_render_target_view : Proc(ID3D12Device2*, ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_depth_stencil_view : Proc(ID3D12Device2*, ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_sampler : Proc(ID3D12Device2*, D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    copy_descriptors : Proc(ID3D12Device2*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    copy_descriptors_simple : Proc(ID3D12Device2*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    get_resource_allocation_info : Proc(ID3D12Device2*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)
-    get_custom_heap_properties : Proc(ID3D12Device2*, UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)
-    create_committed_resource : Proc(ID3D12Device2*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_heap : Proc(ID3D12Device2*, D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)
-    create_placed_resource : Proc(ID3D12Device2*, ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_reserved_resource : Proc(ID3D12Device2*, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_shared_handle : Proc(ID3D12Device2*, ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)
-    open_shared_handle : Proc(ID3D12Device2*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    open_shared_handle_by_name : Proc(ID3D12Device2*, LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)
-    make_resident : Proc(ID3D12Device2*, UInt32, ID3D12Pageable*, HRESULT)
-    evict : Proc(ID3D12Device2*, UInt32, ID3D12Pageable*, HRESULT)
-    create_fence : Proc(ID3D12Device2*, UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)
-    get_device_removed_reason : Proc(ID3D12Device2*, HRESULT)
-    get_copyable_footprints : Proc(ID3D12Device2*, D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)
-    create_query_heap : Proc(ID3D12Device2*, D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)
-    set_stable_power_state : Proc(ID3D12Device2*, LibC::BOOL, HRESULT)
-    create_command_signature : Proc(ID3D12Device2*, D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)
-    get_resource_tiling : Proc(ID3D12Device2*, ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)
-    get_adapter_luid : Proc(ID3D12Device2*, LUID)
-    create_pipeline_library : Proc(ID3D12Device2*, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    set_event_on_multiple_fence_completion : Proc(ID3D12Device2*, ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)
-    set_residency_priority : Proc(ID3D12Device2*, UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)
-    create_pipeline_state : Proc(ID3D12Device2*, D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_node_count : UInt64
+    create_command_queue : UInt64
+    create_command_allocator : UInt64
+    create_graphics_pipeline_state : UInt64
+    create_compute_pipeline_state : UInt64
+    create_command_list : UInt64
+    check_feature_support : UInt64
+    create_descriptor_heap : UInt64
+    get_descriptor_handle_increment_size : UInt64
+    create_root_signature : UInt64
+    create_constant_buffer_view : UInt64
+    create_shader_resource_view : UInt64
+    create_unordered_access_view : UInt64
+    create_render_target_view : UInt64
+    create_depth_stencil_view : UInt64
+    create_sampler : UInt64
+    copy_descriptors : UInt64
+    copy_descriptors_simple : UInt64
+    get_resource_allocation_info : UInt64
+    get_custom_heap_properties : UInt64
+    create_committed_resource : UInt64
+    create_heap : UInt64
+    create_placed_resource : UInt64
+    create_reserved_resource : UInt64
+    create_shared_handle : UInt64
+    open_shared_handle : UInt64
+    open_shared_handle_by_name : UInt64
+    make_resident : UInt64
+    evict : UInt64
+    create_fence : UInt64
+    get_device_removed_reason : UInt64
+    get_copyable_footprints : UInt64
+    create_query_heap : UInt64
+    set_stable_power_state : UInt64
+    create_command_signature : UInt64
+    get_resource_tiling : UInt64
+    get_adapter_luid : UInt64
+    create_pipeline_library : UInt64
+    set_event_on_multiple_fence_completion : UInt64
+    set_residency_priority : UInt64
+    create_pipeline_state : UInt64
   end
 
   ID3D12Device2_GUID = "30baa41e-b15b-475c-a0bb-1af5c5b64328"
@@ -4905,57 +4905,57 @@ lib LibWin32
   end
 
   struct ID3D12Device3VTbl
-    query_interface : Proc(ID3D12Device3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Device3*, UInt32)
-    release : Proc(ID3D12Device3*, UInt32)
-    get_private_data : Proc(ID3D12Device3*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Device3*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Device3*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Device3*, LibC::LPWSTR, HRESULT)
-    get_node_count : Proc(ID3D12Device3*, UInt32)
-    create_command_queue : Proc(ID3D12Device3*, D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)
-    create_command_allocator : Proc(ID3D12Device3*, D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)
-    create_graphics_pipeline_state : Proc(ID3D12Device3*, D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_compute_pipeline_state : Proc(ID3D12Device3*, D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_command_list : Proc(ID3D12Device3*, UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)
-    check_feature_support : Proc(ID3D12Device3*, D3D12_FEATURE, Void*, UInt32, HRESULT)
-    create_descriptor_heap : Proc(ID3D12Device3*, D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)
-    get_descriptor_handle_increment_size : Proc(ID3D12Device3*, D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)
-    create_root_signature : Proc(ID3D12Device3*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    create_constant_buffer_view : Proc(ID3D12Device3*, D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_shader_resource_view : Proc(ID3D12Device3*, ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_unordered_access_view : Proc(ID3D12Device3*, ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_render_target_view : Proc(ID3D12Device3*, ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_depth_stencil_view : Proc(ID3D12Device3*, ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_sampler : Proc(ID3D12Device3*, D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    copy_descriptors : Proc(ID3D12Device3*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    copy_descriptors_simple : Proc(ID3D12Device3*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    get_resource_allocation_info : Proc(ID3D12Device3*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)
-    get_custom_heap_properties : Proc(ID3D12Device3*, UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)
-    create_committed_resource : Proc(ID3D12Device3*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_heap : Proc(ID3D12Device3*, D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)
-    create_placed_resource : Proc(ID3D12Device3*, ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_reserved_resource : Proc(ID3D12Device3*, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_shared_handle : Proc(ID3D12Device3*, ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)
-    open_shared_handle : Proc(ID3D12Device3*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    open_shared_handle_by_name : Proc(ID3D12Device3*, LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)
-    make_resident : Proc(ID3D12Device3*, UInt32, ID3D12Pageable*, HRESULT)
-    evict : Proc(ID3D12Device3*, UInt32, ID3D12Pageable*, HRESULT)
-    create_fence : Proc(ID3D12Device3*, UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)
-    get_device_removed_reason : Proc(ID3D12Device3*, HRESULT)
-    get_copyable_footprints : Proc(ID3D12Device3*, D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)
-    create_query_heap : Proc(ID3D12Device3*, D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)
-    set_stable_power_state : Proc(ID3D12Device3*, LibC::BOOL, HRESULT)
-    create_command_signature : Proc(ID3D12Device3*, D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)
-    get_resource_tiling : Proc(ID3D12Device3*, ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)
-    get_adapter_luid : Proc(ID3D12Device3*, LUID)
-    create_pipeline_library : Proc(ID3D12Device3*, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    set_event_on_multiple_fence_completion : Proc(ID3D12Device3*, ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)
-    set_residency_priority : Proc(ID3D12Device3*, UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)
-    create_pipeline_state : Proc(ID3D12Device3*, D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)
-    open_existing_heap_from_address : Proc(ID3D12Device3*, Void*, Guid*, Void**, HRESULT)
-    open_existing_heap_from_file_mapping : Proc(ID3D12Device3*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    enqueue_make_resident : Proc(ID3D12Device3*, D3D12_RESIDENCY_FLAGS, UInt32, ID3D12Pageable*, ID3D12Fence, UInt64, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_node_count : UInt64
+    create_command_queue : UInt64
+    create_command_allocator : UInt64
+    create_graphics_pipeline_state : UInt64
+    create_compute_pipeline_state : UInt64
+    create_command_list : UInt64
+    check_feature_support : UInt64
+    create_descriptor_heap : UInt64
+    get_descriptor_handle_increment_size : UInt64
+    create_root_signature : UInt64
+    create_constant_buffer_view : UInt64
+    create_shader_resource_view : UInt64
+    create_unordered_access_view : UInt64
+    create_render_target_view : UInt64
+    create_depth_stencil_view : UInt64
+    create_sampler : UInt64
+    copy_descriptors : UInt64
+    copy_descriptors_simple : UInt64
+    get_resource_allocation_info : UInt64
+    get_custom_heap_properties : UInt64
+    create_committed_resource : UInt64
+    create_heap : UInt64
+    create_placed_resource : UInt64
+    create_reserved_resource : UInt64
+    create_shared_handle : UInt64
+    open_shared_handle : UInt64
+    open_shared_handle_by_name : UInt64
+    make_resident : UInt64
+    evict : UInt64
+    create_fence : UInt64
+    get_device_removed_reason : UInt64
+    get_copyable_footprints : UInt64
+    create_query_heap : UInt64
+    set_stable_power_state : UInt64
+    create_command_signature : UInt64
+    get_resource_tiling : UInt64
+    get_adapter_luid : UInt64
+    create_pipeline_library : UInt64
+    set_event_on_multiple_fence_completion : UInt64
+    set_residency_priority : UInt64
+    create_pipeline_state : UInt64
+    open_existing_heap_from_address : UInt64
+    open_existing_heap_from_file_mapping : UInt64
+    enqueue_make_resident : UInt64
   end
 
   ID3D12Device3_GUID = "81dadc15-2bad-4392-93c5-101345c4aa98"
@@ -4965,16 +4965,16 @@ lib LibWin32
   end
 
   struct ID3D12ProtectedSessionVTbl
-    query_interface : Proc(ID3D12ProtectedSession*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12ProtectedSession*, UInt32)
-    release : Proc(ID3D12ProtectedSession*, UInt32)
-    get_private_data : Proc(ID3D12ProtectedSession*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12ProtectedSession*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12ProtectedSession*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12ProtectedSession*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12ProtectedSession*, Guid*, Void**, HRESULT)
-    get_status_fence : Proc(ID3D12ProtectedSession*, Guid*, Void**, HRESULT)
-    get_session_status : Proc(ID3D12ProtectedSession*, D3D12_PROTECTED_SESSION_STATUS)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_status_fence : UInt64
+    get_session_status : UInt64
   end
 
   ID3D12ProtectedSession_GUID = "a1533d18-0ac1-4084-85b9-89a96116806b"
@@ -4984,17 +4984,17 @@ lib LibWin32
   end
 
   struct ID3D12ProtectedResourceSessionVTbl
-    query_interface : Proc(ID3D12ProtectedResourceSession*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12ProtectedResourceSession*, UInt32)
-    release : Proc(ID3D12ProtectedResourceSession*, UInt32)
-    get_private_data : Proc(ID3D12ProtectedResourceSession*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12ProtectedResourceSession*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12ProtectedResourceSession*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12ProtectedResourceSession*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12ProtectedResourceSession*, Guid*, Void**, HRESULT)
-    get_status_fence : Proc(ID3D12ProtectedResourceSession*, Guid*, Void**, HRESULT)
-    get_session_status : Proc(ID3D12ProtectedResourceSession*, D3D12_PROTECTED_SESSION_STATUS)
-    get_desc : Proc(ID3D12ProtectedResourceSession*, D3D12_PROTECTED_RESOURCE_SESSION_DESC)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_status_fence : UInt64
+    get_session_status : UInt64
+    get_desc : UInt64
   end
 
   ID3D12ProtectedResourceSession_GUID = "6cd696f4-f289-40cc-8091-5a6c0a099c3d"
@@ -5004,63 +5004,63 @@ lib LibWin32
   end
 
   struct ID3D12Device4VTbl
-    query_interface : Proc(ID3D12Device4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Device4*, UInt32)
-    release : Proc(ID3D12Device4*, UInt32)
-    get_private_data : Proc(ID3D12Device4*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Device4*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Device4*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Device4*, LibC::LPWSTR, HRESULT)
-    get_node_count : Proc(ID3D12Device4*, UInt32)
-    create_command_queue : Proc(ID3D12Device4*, D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)
-    create_command_allocator : Proc(ID3D12Device4*, D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)
-    create_graphics_pipeline_state : Proc(ID3D12Device4*, D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_compute_pipeline_state : Proc(ID3D12Device4*, D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_command_list : Proc(ID3D12Device4*, UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)
-    check_feature_support : Proc(ID3D12Device4*, D3D12_FEATURE, Void*, UInt32, HRESULT)
-    create_descriptor_heap : Proc(ID3D12Device4*, D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)
-    get_descriptor_handle_increment_size : Proc(ID3D12Device4*, D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)
-    create_root_signature : Proc(ID3D12Device4*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    create_constant_buffer_view : Proc(ID3D12Device4*, D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_shader_resource_view : Proc(ID3D12Device4*, ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_unordered_access_view : Proc(ID3D12Device4*, ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_render_target_view : Proc(ID3D12Device4*, ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_depth_stencil_view : Proc(ID3D12Device4*, ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_sampler : Proc(ID3D12Device4*, D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    copy_descriptors : Proc(ID3D12Device4*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    copy_descriptors_simple : Proc(ID3D12Device4*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    get_resource_allocation_info : Proc(ID3D12Device4*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)
-    get_custom_heap_properties : Proc(ID3D12Device4*, UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)
-    create_committed_resource : Proc(ID3D12Device4*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_heap : Proc(ID3D12Device4*, D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)
-    create_placed_resource : Proc(ID3D12Device4*, ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_reserved_resource : Proc(ID3D12Device4*, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_shared_handle : Proc(ID3D12Device4*, ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)
-    open_shared_handle : Proc(ID3D12Device4*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    open_shared_handle_by_name : Proc(ID3D12Device4*, LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)
-    make_resident : Proc(ID3D12Device4*, UInt32, ID3D12Pageable*, HRESULT)
-    evict : Proc(ID3D12Device4*, UInt32, ID3D12Pageable*, HRESULT)
-    create_fence : Proc(ID3D12Device4*, UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)
-    get_device_removed_reason : Proc(ID3D12Device4*, HRESULT)
-    get_copyable_footprints : Proc(ID3D12Device4*, D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)
-    create_query_heap : Proc(ID3D12Device4*, D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)
-    set_stable_power_state : Proc(ID3D12Device4*, LibC::BOOL, HRESULT)
-    create_command_signature : Proc(ID3D12Device4*, D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)
-    get_resource_tiling : Proc(ID3D12Device4*, ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)
-    get_adapter_luid : Proc(ID3D12Device4*, LUID)
-    create_pipeline_library : Proc(ID3D12Device4*, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    set_event_on_multiple_fence_completion : Proc(ID3D12Device4*, ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)
-    set_residency_priority : Proc(ID3D12Device4*, UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)
-    create_pipeline_state : Proc(ID3D12Device4*, D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)
-    open_existing_heap_from_address : Proc(ID3D12Device4*, Void*, Guid*, Void**, HRESULT)
-    open_existing_heap_from_file_mapping : Proc(ID3D12Device4*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    enqueue_make_resident : Proc(ID3D12Device4*, D3D12_RESIDENCY_FLAGS, UInt32, ID3D12Pageable*, ID3D12Fence, UInt64, HRESULT)
-    create_command_list1 : Proc(ID3D12Device4*, UInt32, D3D12_COMMAND_LIST_TYPE, D3D12_COMMAND_LIST_FLAGS, Guid*, Void**, HRESULT)
-    create_protected_resource_session : Proc(ID3D12Device4*, D3D12_PROTECTED_RESOURCE_SESSION_DESC*, Guid*, Void**, HRESULT)
-    create_committed_resource1 : Proc(ID3D12Device4*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    create_heap1 : Proc(ID3D12Device4*, D3D12_HEAP_DESC*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    create_reserved_resource1 : Proc(ID3D12Device4*, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    get_resource_allocation_info1 : Proc(ID3D12Device4*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_node_count : UInt64
+    create_command_queue : UInt64
+    create_command_allocator : UInt64
+    create_graphics_pipeline_state : UInt64
+    create_compute_pipeline_state : UInt64
+    create_command_list : UInt64
+    check_feature_support : UInt64
+    create_descriptor_heap : UInt64
+    get_descriptor_handle_increment_size : UInt64
+    create_root_signature : UInt64
+    create_constant_buffer_view : UInt64
+    create_shader_resource_view : UInt64
+    create_unordered_access_view : UInt64
+    create_render_target_view : UInt64
+    create_depth_stencil_view : UInt64
+    create_sampler : UInt64
+    copy_descriptors : UInt64
+    copy_descriptors_simple : UInt64
+    get_resource_allocation_info : UInt64
+    get_custom_heap_properties : UInt64
+    create_committed_resource : UInt64
+    create_heap : UInt64
+    create_placed_resource : UInt64
+    create_reserved_resource : UInt64
+    create_shared_handle : UInt64
+    open_shared_handle : UInt64
+    open_shared_handle_by_name : UInt64
+    make_resident : UInt64
+    evict : UInt64
+    create_fence : UInt64
+    get_device_removed_reason : UInt64
+    get_copyable_footprints : UInt64
+    create_query_heap : UInt64
+    set_stable_power_state : UInt64
+    create_command_signature : UInt64
+    get_resource_tiling : UInt64
+    get_adapter_luid : UInt64
+    create_pipeline_library : UInt64
+    set_event_on_multiple_fence_completion : UInt64
+    set_residency_priority : UInt64
+    create_pipeline_state : UInt64
+    open_existing_heap_from_address : UInt64
+    open_existing_heap_from_file_mapping : UInt64
+    enqueue_make_resident : UInt64
+    create_command_list1 : UInt64
+    create_protected_resource_session : UInt64
+    create_committed_resource1 : UInt64
+    create_heap1 : UInt64
+    create_reserved_resource1 : UInt64
+    get_resource_allocation_info1 : UInt64
   end
 
   ID3D12Device4_GUID = "e865df17-a9ee-46f9-a463-3098315aa2e5"
@@ -5070,10 +5070,10 @@ lib LibWin32
   end
 
   struct ID3D12LifetimeOwnerVTbl
-    query_interface : Proc(ID3D12LifetimeOwner*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12LifetimeOwner*, UInt32)
-    release : Proc(ID3D12LifetimeOwner*, UInt32)
-    lifetime_state_updated : Proc(ID3D12LifetimeOwner*, D3D12_LIFETIME_STATE, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    lifetime_state_updated : UInt64
   end
 
   ID3D12LifetimeOwner_GUID = "e667af9f-cd56-4f46-83ce-032e595d70a8"
@@ -5083,13 +5083,13 @@ lib LibWin32
   end
 
   struct ID3D12SwapChainAssistantVTbl
-    query_interface : Proc(ID3D12SwapChainAssistant*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12SwapChainAssistant*, UInt32)
-    release : Proc(ID3D12SwapChainAssistant*, UInt32)
-    get_luid : Proc(ID3D12SwapChainAssistant*, LUID)
-    get_swap_chain_object : Proc(ID3D12SwapChainAssistant*, Guid*, Void**, HRESULT)
-    get_current_resource_and_command_queue : Proc(ID3D12SwapChainAssistant*, Guid*, Void**, Guid*, Void**, HRESULT)
-    insert_implicit_sync : Proc(ID3D12SwapChainAssistant*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_luid : UInt64
+    get_swap_chain_object : UInt64
+    get_current_resource_and_command_queue : UInt64
+    insert_implicit_sync : UInt64
   end
 
   ID3D12SwapChainAssistant_GUID = "f1df64b6-57fd-49cd-8807-c0eb88b45c8f"
@@ -5099,15 +5099,15 @@ lib LibWin32
   end
 
   struct ID3D12LifetimeTrackerVTbl
-    query_interface : Proc(ID3D12LifetimeTracker*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12LifetimeTracker*, UInt32)
-    release : Proc(ID3D12LifetimeTracker*, UInt32)
-    get_private_data : Proc(ID3D12LifetimeTracker*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12LifetimeTracker*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12LifetimeTracker*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12LifetimeTracker*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12LifetimeTracker*, Guid*, Void**, HRESULT)
-    destroy_owned_object : Proc(ID3D12LifetimeTracker*, ID3D12DeviceChild, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    destroy_owned_object : UInt64
   end
 
   ID3D12LifetimeTracker_GUID = "3fd03d36-4eb1-424a-a582-494ecb8ba813"
@@ -5117,14 +5117,14 @@ lib LibWin32
   end
 
   struct ID3D12StateObjectVTbl
-    query_interface : Proc(ID3D12StateObject*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12StateObject*, UInt32)
-    release : Proc(ID3D12StateObject*, UInt32)
-    get_private_data : Proc(ID3D12StateObject*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12StateObject*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12StateObject*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12StateObject*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12StateObject*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
   end
 
   ID3D12StateObject_GUID = "47016943-fca8-4594-93ea-af258b55346d"
@@ -5134,13 +5134,13 @@ lib LibWin32
   end
 
   struct ID3D12StateObjectPropertiesVTbl
-    query_interface : Proc(ID3D12StateObjectProperties*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12StateObjectProperties*, UInt32)
-    release : Proc(ID3D12StateObjectProperties*, UInt32)
-    get_shader_identifier : Proc(ID3D12StateObjectProperties*, LibC::LPWSTR, Void**)
-    get_shader_stack_size : Proc(ID3D12StateObjectProperties*, LibC::LPWSTR, UInt64)
-    get_pipeline_stack_size : Proc(ID3D12StateObjectProperties*, UInt64)
-    set_pipeline_stack_size : Proc(ID3D12StateObjectProperties*, UInt64, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_shader_identifier : UInt64
+    get_shader_stack_size : UInt64
+    get_pipeline_stack_size : UInt64
+    set_pipeline_stack_size : UInt64
   end
 
   ID3D12StateObjectProperties_GUID = "de5fa827-9bf9-4f26-89ff-d7f56fde3860"
@@ -5150,71 +5150,71 @@ lib LibWin32
   end
 
   struct ID3D12Device5VTbl
-    query_interface : Proc(ID3D12Device5*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Device5*, UInt32)
-    release : Proc(ID3D12Device5*, UInt32)
-    get_private_data : Proc(ID3D12Device5*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Device5*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Device5*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Device5*, LibC::LPWSTR, HRESULT)
-    get_node_count : Proc(ID3D12Device5*, UInt32)
-    create_command_queue : Proc(ID3D12Device5*, D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)
-    create_command_allocator : Proc(ID3D12Device5*, D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)
-    create_graphics_pipeline_state : Proc(ID3D12Device5*, D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_compute_pipeline_state : Proc(ID3D12Device5*, D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_command_list : Proc(ID3D12Device5*, UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)
-    check_feature_support : Proc(ID3D12Device5*, D3D12_FEATURE, Void*, UInt32, HRESULT)
-    create_descriptor_heap : Proc(ID3D12Device5*, D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)
-    get_descriptor_handle_increment_size : Proc(ID3D12Device5*, D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)
-    create_root_signature : Proc(ID3D12Device5*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    create_constant_buffer_view : Proc(ID3D12Device5*, D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_shader_resource_view : Proc(ID3D12Device5*, ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_unordered_access_view : Proc(ID3D12Device5*, ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_render_target_view : Proc(ID3D12Device5*, ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_depth_stencil_view : Proc(ID3D12Device5*, ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_sampler : Proc(ID3D12Device5*, D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    copy_descriptors : Proc(ID3D12Device5*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    copy_descriptors_simple : Proc(ID3D12Device5*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    get_resource_allocation_info : Proc(ID3D12Device5*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)
-    get_custom_heap_properties : Proc(ID3D12Device5*, UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)
-    create_committed_resource : Proc(ID3D12Device5*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_heap : Proc(ID3D12Device5*, D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)
-    create_placed_resource : Proc(ID3D12Device5*, ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_reserved_resource : Proc(ID3D12Device5*, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_shared_handle : Proc(ID3D12Device5*, ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)
-    open_shared_handle : Proc(ID3D12Device5*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    open_shared_handle_by_name : Proc(ID3D12Device5*, LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)
-    make_resident : Proc(ID3D12Device5*, UInt32, ID3D12Pageable*, HRESULT)
-    evict : Proc(ID3D12Device5*, UInt32, ID3D12Pageable*, HRESULT)
-    create_fence : Proc(ID3D12Device5*, UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)
-    get_device_removed_reason : Proc(ID3D12Device5*, HRESULT)
-    get_copyable_footprints : Proc(ID3D12Device5*, D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)
-    create_query_heap : Proc(ID3D12Device5*, D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)
-    set_stable_power_state : Proc(ID3D12Device5*, LibC::BOOL, HRESULT)
-    create_command_signature : Proc(ID3D12Device5*, D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)
-    get_resource_tiling : Proc(ID3D12Device5*, ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)
-    get_adapter_luid : Proc(ID3D12Device5*, LUID)
-    create_pipeline_library : Proc(ID3D12Device5*, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    set_event_on_multiple_fence_completion : Proc(ID3D12Device5*, ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)
-    set_residency_priority : Proc(ID3D12Device5*, UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)
-    create_pipeline_state : Proc(ID3D12Device5*, D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)
-    open_existing_heap_from_address : Proc(ID3D12Device5*, Void*, Guid*, Void**, HRESULT)
-    open_existing_heap_from_file_mapping : Proc(ID3D12Device5*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    enqueue_make_resident : Proc(ID3D12Device5*, D3D12_RESIDENCY_FLAGS, UInt32, ID3D12Pageable*, ID3D12Fence, UInt64, HRESULT)
-    create_command_list1 : Proc(ID3D12Device5*, UInt32, D3D12_COMMAND_LIST_TYPE, D3D12_COMMAND_LIST_FLAGS, Guid*, Void**, HRESULT)
-    create_protected_resource_session : Proc(ID3D12Device5*, D3D12_PROTECTED_RESOURCE_SESSION_DESC*, Guid*, Void**, HRESULT)
-    create_committed_resource1 : Proc(ID3D12Device5*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    create_heap1 : Proc(ID3D12Device5*, D3D12_HEAP_DESC*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    create_reserved_resource1 : Proc(ID3D12Device5*, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    get_resource_allocation_info1 : Proc(ID3D12Device5*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)
-    create_lifetime_tracker : Proc(ID3D12Device5*, ID3D12LifetimeOwner, Guid*, Void**, HRESULT)
-    remove_device : Proc(ID3D12Device5*, Void)
-    enumerate_meta_commands : Proc(ID3D12Device5*, UInt32*, D3D12_META_COMMAND_DESC*, HRESULT)
-    enumerate_meta_command_parameters : Proc(ID3D12Device5*, Guid*, D3D12_META_COMMAND_PARAMETER_STAGE, UInt32*, UInt32*, D3D12_META_COMMAND_PARAMETER_DESC*, HRESULT)
-    create_meta_command : Proc(ID3D12Device5*, Guid*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    create_state_object : Proc(ID3D12Device5*, D3D12_STATE_OBJECT_DESC*, Guid*, Void**, HRESULT)
-    get_raytracing_acceleration_structure_prebuild_info : Proc(ID3D12Device5*, D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*, Void)
-    check_driver_matching_identifier : Proc(ID3D12Device5*, D3D12_SERIALIZED_DATA_TYPE, D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*, D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_node_count : UInt64
+    create_command_queue : UInt64
+    create_command_allocator : UInt64
+    create_graphics_pipeline_state : UInt64
+    create_compute_pipeline_state : UInt64
+    create_command_list : UInt64
+    check_feature_support : UInt64
+    create_descriptor_heap : UInt64
+    get_descriptor_handle_increment_size : UInt64
+    create_root_signature : UInt64
+    create_constant_buffer_view : UInt64
+    create_shader_resource_view : UInt64
+    create_unordered_access_view : UInt64
+    create_render_target_view : UInt64
+    create_depth_stencil_view : UInt64
+    create_sampler : UInt64
+    copy_descriptors : UInt64
+    copy_descriptors_simple : UInt64
+    get_resource_allocation_info : UInt64
+    get_custom_heap_properties : UInt64
+    create_committed_resource : UInt64
+    create_heap : UInt64
+    create_placed_resource : UInt64
+    create_reserved_resource : UInt64
+    create_shared_handle : UInt64
+    open_shared_handle : UInt64
+    open_shared_handle_by_name : UInt64
+    make_resident : UInt64
+    evict : UInt64
+    create_fence : UInt64
+    get_device_removed_reason : UInt64
+    get_copyable_footprints : UInt64
+    create_query_heap : UInt64
+    set_stable_power_state : UInt64
+    create_command_signature : UInt64
+    get_resource_tiling : UInt64
+    get_adapter_luid : UInt64
+    create_pipeline_library : UInt64
+    set_event_on_multiple_fence_completion : UInt64
+    set_residency_priority : UInt64
+    create_pipeline_state : UInt64
+    open_existing_heap_from_address : UInt64
+    open_existing_heap_from_file_mapping : UInt64
+    enqueue_make_resident : UInt64
+    create_command_list1 : UInt64
+    create_protected_resource_session : UInt64
+    create_committed_resource1 : UInt64
+    create_heap1 : UInt64
+    create_reserved_resource1 : UInt64
+    get_resource_allocation_info1 : UInt64
+    create_lifetime_tracker : UInt64
+    remove_device : UInt64
+    enumerate_meta_commands : UInt64
+    enumerate_meta_command_parameters : UInt64
+    create_meta_command : UInt64
+    create_state_object : UInt64
+    get_raytracing_acceleration_structure_prebuild_info : UInt64
+    check_driver_matching_identifier : UInt64
   end
 
   ID3D12Device5_GUID = "8b4f173b-2fea-4b80-8f58-4307191ab95d"
@@ -5224,12 +5224,12 @@ lib LibWin32
   end
 
   struct ID3D12DeviceRemovedExtendedDataSettingsVTbl
-    query_interface : Proc(ID3D12DeviceRemovedExtendedDataSettings*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12DeviceRemovedExtendedDataSettings*, UInt32)
-    release : Proc(ID3D12DeviceRemovedExtendedDataSettings*, UInt32)
-    set_auto_breadcrumbs_enablement : Proc(ID3D12DeviceRemovedExtendedDataSettings*, D3D12_DRED_ENABLEMENT, Void)
-    set_page_fault_enablement : Proc(ID3D12DeviceRemovedExtendedDataSettings*, D3D12_DRED_ENABLEMENT, Void)
-    set_watson_dump_enablement : Proc(ID3D12DeviceRemovedExtendedDataSettings*, D3D12_DRED_ENABLEMENT, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_auto_breadcrumbs_enablement : UInt64
+    set_page_fault_enablement : UInt64
+    set_watson_dump_enablement : UInt64
   end
 
   ID3D12DeviceRemovedExtendedDataSettings_GUID = "82bc481c-6b9b-4030-aedb-7ee3d1df1e63"
@@ -5239,13 +5239,13 @@ lib LibWin32
   end
 
   struct ID3D12DeviceRemovedExtendedDataSettings1VTbl
-    query_interface : Proc(ID3D12DeviceRemovedExtendedDataSettings1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12DeviceRemovedExtendedDataSettings1*, UInt32)
-    release : Proc(ID3D12DeviceRemovedExtendedDataSettings1*, UInt32)
-    set_auto_breadcrumbs_enablement : Proc(ID3D12DeviceRemovedExtendedDataSettings1*, D3D12_DRED_ENABLEMENT, Void)
-    set_page_fault_enablement : Proc(ID3D12DeviceRemovedExtendedDataSettings1*, D3D12_DRED_ENABLEMENT, Void)
-    set_watson_dump_enablement : Proc(ID3D12DeviceRemovedExtendedDataSettings1*, D3D12_DRED_ENABLEMENT, Void)
-    set_breadcrumb_context_enablement : Proc(ID3D12DeviceRemovedExtendedDataSettings1*, D3D12_DRED_ENABLEMENT, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_auto_breadcrumbs_enablement : UInt64
+    set_page_fault_enablement : UInt64
+    set_watson_dump_enablement : UInt64
+    set_breadcrumb_context_enablement : UInt64
   end
 
   ID3D12DeviceRemovedExtendedDataSettings1_GUID = "dbd5ae51-3317-4f0a-adf9-1d7cedcaae0b"
@@ -5255,11 +5255,11 @@ lib LibWin32
   end
 
   struct ID3D12DeviceRemovedExtendedDataVTbl
-    query_interface : Proc(ID3D12DeviceRemovedExtendedData*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12DeviceRemovedExtendedData*, UInt32)
-    release : Proc(ID3D12DeviceRemovedExtendedData*, UInt32)
-    get_auto_breadcrumbs_output : Proc(ID3D12DeviceRemovedExtendedData*, D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT*, HRESULT)
-    get_page_fault_allocation_output : Proc(ID3D12DeviceRemovedExtendedData*, D3D12_DRED_PAGE_FAULT_OUTPUT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_auto_breadcrumbs_output : UInt64
+    get_page_fault_allocation_output : UInt64
   end
 
   ID3D12DeviceRemovedExtendedData_GUID = "98931d33-5ae8-4791-aa3c-1a73a2934e71"
@@ -5269,13 +5269,13 @@ lib LibWin32
   end
 
   struct ID3D12DeviceRemovedExtendedData1VTbl
-    query_interface : Proc(ID3D12DeviceRemovedExtendedData1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12DeviceRemovedExtendedData1*, UInt32)
-    release : Proc(ID3D12DeviceRemovedExtendedData1*, UInt32)
-    get_auto_breadcrumbs_output : Proc(ID3D12DeviceRemovedExtendedData1*, D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT*, HRESULT)
-    get_page_fault_allocation_output : Proc(ID3D12DeviceRemovedExtendedData1*, D3D12_DRED_PAGE_FAULT_OUTPUT*, HRESULT)
-    get_auto_breadcrumbs_output1 : Proc(ID3D12DeviceRemovedExtendedData1*, D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT1*, HRESULT)
-    get_page_fault_allocation_output1 : Proc(ID3D12DeviceRemovedExtendedData1*, D3D12_DRED_PAGE_FAULT_OUTPUT1*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_auto_breadcrumbs_output : UInt64
+    get_page_fault_allocation_output : UInt64
+    get_auto_breadcrumbs_output1 : UInt64
+    get_page_fault_allocation_output1 : UInt64
   end
 
   ID3D12DeviceRemovedExtendedData1_GUID = "9727a022-cf1d-4dda-9eba-effa653fc506"
@@ -5285,15 +5285,15 @@ lib LibWin32
   end
 
   struct ID3D12DeviceRemovedExtendedData2VTbl
-    query_interface : Proc(ID3D12DeviceRemovedExtendedData2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12DeviceRemovedExtendedData2*, UInt32)
-    release : Proc(ID3D12DeviceRemovedExtendedData2*, UInt32)
-    get_auto_breadcrumbs_output : Proc(ID3D12DeviceRemovedExtendedData2*, D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT*, HRESULT)
-    get_page_fault_allocation_output : Proc(ID3D12DeviceRemovedExtendedData2*, D3D12_DRED_PAGE_FAULT_OUTPUT*, HRESULT)
-    get_auto_breadcrumbs_output1 : Proc(ID3D12DeviceRemovedExtendedData2*, D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT1*, HRESULT)
-    get_page_fault_allocation_output1 : Proc(ID3D12DeviceRemovedExtendedData2*, D3D12_DRED_PAGE_FAULT_OUTPUT1*, HRESULT)
-    get_page_fault_allocation_output2 : Proc(ID3D12DeviceRemovedExtendedData2*, D3D12_DRED_PAGE_FAULT_OUTPUT2*, HRESULT)
-    get_device_state : Proc(ID3D12DeviceRemovedExtendedData2*, D3D12_DRED_DEVICE_STATE)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_auto_breadcrumbs_output : UInt64
+    get_page_fault_allocation_output : UInt64
+    get_auto_breadcrumbs_output1 : UInt64
+    get_page_fault_allocation_output1 : UInt64
+    get_page_fault_allocation_output2 : UInt64
+    get_device_state : UInt64
   end
 
   ID3D12DeviceRemovedExtendedData2_GUID = "67fc5816-e4ca-4915-bf18-42541272da54"
@@ -5303,72 +5303,72 @@ lib LibWin32
   end
 
   struct ID3D12Device6VTbl
-    query_interface : Proc(ID3D12Device6*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Device6*, UInt32)
-    release : Proc(ID3D12Device6*, UInt32)
-    get_private_data : Proc(ID3D12Device6*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Device6*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Device6*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Device6*, LibC::LPWSTR, HRESULT)
-    get_node_count : Proc(ID3D12Device6*, UInt32)
-    create_command_queue : Proc(ID3D12Device6*, D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)
-    create_command_allocator : Proc(ID3D12Device6*, D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)
-    create_graphics_pipeline_state : Proc(ID3D12Device6*, D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_compute_pipeline_state : Proc(ID3D12Device6*, D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_command_list : Proc(ID3D12Device6*, UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)
-    check_feature_support : Proc(ID3D12Device6*, D3D12_FEATURE, Void*, UInt32, HRESULT)
-    create_descriptor_heap : Proc(ID3D12Device6*, D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)
-    get_descriptor_handle_increment_size : Proc(ID3D12Device6*, D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)
-    create_root_signature : Proc(ID3D12Device6*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    create_constant_buffer_view : Proc(ID3D12Device6*, D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_shader_resource_view : Proc(ID3D12Device6*, ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_unordered_access_view : Proc(ID3D12Device6*, ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_render_target_view : Proc(ID3D12Device6*, ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_depth_stencil_view : Proc(ID3D12Device6*, ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_sampler : Proc(ID3D12Device6*, D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    copy_descriptors : Proc(ID3D12Device6*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    copy_descriptors_simple : Proc(ID3D12Device6*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    get_resource_allocation_info : Proc(ID3D12Device6*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)
-    get_custom_heap_properties : Proc(ID3D12Device6*, UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)
-    create_committed_resource : Proc(ID3D12Device6*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_heap : Proc(ID3D12Device6*, D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)
-    create_placed_resource : Proc(ID3D12Device6*, ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_reserved_resource : Proc(ID3D12Device6*, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_shared_handle : Proc(ID3D12Device6*, ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)
-    open_shared_handle : Proc(ID3D12Device6*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    open_shared_handle_by_name : Proc(ID3D12Device6*, LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)
-    make_resident : Proc(ID3D12Device6*, UInt32, ID3D12Pageable*, HRESULT)
-    evict : Proc(ID3D12Device6*, UInt32, ID3D12Pageable*, HRESULT)
-    create_fence : Proc(ID3D12Device6*, UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)
-    get_device_removed_reason : Proc(ID3D12Device6*, HRESULT)
-    get_copyable_footprints : Proc(ID3D12Device6*, D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)
-    create_query_heap : Proc(ID3D12Device6*, D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)
-    set_stable_power_state : Proc(ID3D12Device6*, LibC::BOOL, HRESULT)
-    create_command_signature : Proc(ID3D12Device6*, D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)
-    get_resource_tiling : Proc(ID3D12Device6*, ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)
-    get_adapter_luid : Proc(ID3D12Device6*, LUID)
-    create_pipeline_library : Proc(ID3D12Device6*, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    set_event_on_multiple_fence_completion : Proc(ID3D12Device6*, ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)
-    set_residency_priority : Proc(ID3D12Device6*, UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)
-    create_pipeline_state : Proc(ID3D12Device6*, D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)
-    open_existing_heap_from_address : Proc(ID3D12Device6*, Void*, Guid*, Void**, HRESULT)
-    open_existing_heap_from_file_mapping : Proc(ID3D12Device6*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    enqueue_make_resident : Proc(ID3D12Device6*, D3D12_RESIDENCY_FLAGS, UInt32, ID3D12Pageable*, ID3D12Fence, UInt64, HRESULT)
-    create_command_list1 : Proc(ID3D12Device6*, UInt32, D3D12_COMMAND_LIST_TYPE, D3D12_COMMAND_LIST_FLAGS, Guid*, Void**, HRESULT)
-    create_protected_resource_session : Proc(ID3D12Device6*, D3D12_PROTECTED_RESOURCE_SESSION_DESC*, Guid*, Void**, HRESULT)
-    create_committed_resource1 : Proc(ID3D12Device6*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    create_heap1 : Proc(ID3D12Device6*, D3D12_HEAP_DESC*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    create_reserved_resource1 : Proc(ID3D12Device6*, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    get_resource_allocation_info1 : Proc(ID3D12Device6*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)
-    create_lifetime_tracker : Proc(ID3D12Device6*, ID3D12LifetimeOwner, Guid*, Void**, HRESULT)
-    remove_device : Proc(ID3D12Device6*, Void)
-    enumerate_meta_commands : Proc(ID3D12Device6*, UInt32*, D3D12_META_COMMAND_DESC*, HRESULT)
-    enumerate_meta_command_parameters : Proc(ID3D12Device6*, Guid*, D3D12_META_COMMAND_PARAMETER_STAGE, UInt32*, UInt32*, D3D12_META_COMMAND_PARAMETER_DESC*, HRESULT)
-    create_meta_command : Proc(ID3D12Device6*, Guid*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    create_state_object : Proc(ID3D12Device6*, D3D12_STATE_OBJECT_DESC*, Guid*, Void**, HRESULT)
-    get_raytracing_acceleration_structure_prebuild_info : Proc(ID3D12Device6*, D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*, Void)
-    check_driver_matching_identifier : Proc(ID3D12Device6*, D3D12_SERIALIZED_DATA_TYPE, D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*, D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS)
-    set_background_processing_mode : Proc(ID3D12Device6*, D3D12_BACKGROUND_PROCESSING_MODE, D3D12_MEASUREMENTS_ACTION, LibC::HANDLE, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_node_count : UInt64
+    create_command_queue : UInt64
+    create_command_allocator : UInt64
+    create_graphics_pipeline_state : UInt64
+    create_compute_pipeline_state : UInt64
+    create_command_list : UInt64
+    check_feature_support : UInt64
+    create_descriptor_heap : UInt64
+    get_descriptor_handle_increment_size : UInt64
+    create_root_signature : UInt64
+    create_constant_buffer_view : UInt64
+    create_shader_resource_view : UInt64
+    create_unordered_access_view : UInt64
+    create_render_target_view : UInt64
+    create_depth_stencil_view : UInt64
+    create_sampler : UInt64
+    copy_descriptors : UInt64
+    copy_descriptors_simple : UInt64
+    get_resource_allocation_info : UInt64
+    get_custom_heap_properties : UInt64
+    create_committed_resource : UInt64
+    create_heap : UInt64
+    create_placed_resource : UInt64
+    create_reserved_resource : UInt64
+    create_shared_handle : UInt64
+    open_shared_handle : UInt64
+    open_shared_handle_by_name : UInt64
+    make_resident : UInt64
+    evict : UInt64
+    create_fence : UInt64
+    get_device_removed_reason : UInt64
+    get_copyable_footprints : UInt64
+    create_query_heap : UInt64
+    set_stable_power_state : UInt64
+    create_command_signature : UInt64
+    get_resource_tiling : UInt64
+    get_adapter_luid : UInt64
+    create_pipeline_library : UInt64
+    set_event_on_multiple_fence_completion : UInt64
+    set_residency_priority : UInt64
+    create_pipeline_state : UInt64
+    open_existing_heap_from_address : UInt64
+    open_existing_heap_from_file_mapping : UInt64
+    enqueue_make_resident : UInt64
+    create_command_list1 : UInt64
+    create_protected_resource_session : UInt64
+    create_committed_resource1 : UInt64
+    create_heap1 : UInt64
+    create_reserved_resource1 : UInt64
+    get_resource_allocation_info1 : UInt64
+    create_lifetime_tracker : UInt64
+    remove_device : UInt64
+    enumerate_meta_commands : UInt64
+    enumerate_meta_command_parameters : UInt64
+    create_meta_command : UInt64
+    create_state_object : UInt64
+    get_raytracing_acceleration_structure_prebuild_info : UInt64
+    check_driver_matching_identifier : UInt64
+    set_background_processing_mode : UInt64
   end
 
   ID3D12Device6_GUID = "c70b221b-40e4-4a17-89af-025a0727a6dc"
@@ -5378,18 +5378,18 @@ lib LibWin32
   end
 
   struct ID3D12ProtectedResourceSession1VTbl
-    query_interface : Proc(ID3D12ProtectedResourceSession1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12ProtectedResourceSession1*, UInt32)
-    release : Proc(ID3D12ProtectedResourceSession1*, UInt32)
-    get_private_data : Proc(ID3D12ProtectedResourceSession1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12ProtectedResourceSession1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12ProtectedResourceSession1*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12ProtectedResourceSession1*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12ProtectedResourceSession1*, Guid*, Void**, HRESULT)
-    get_status_fence : Proc(ID3D12ProtectedResourceSession1*, Guid*, Void**, HRESULT)
-    get_session_status : Proc(ID3D12ProtectedResourceSession1*, D3D12_PROTECTED_SESSION_STATUS)
-    get_desc : Proc(ID3D12ProtectedResourceSession1*, D3D12_PROTECTED_RESOURCE_SESSION_DESC)
-    get_desc1 : Proc(ID3D12ProtectedResourceSession1*, D3D12_PROTECTED_RESOURCE_SESSION_DESC1)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_status_fence : UInt64
+    get_session_status : UInt64
+    get_desc : UInt64
+    get_desc1 : UInt64
   end
 
   ID3D12ProtectedResourceSession1_GUID = "d6f12dd6-76fb-406e-8961-4296eefc0409"
@@ -5399,74 +5399,74 @@ lib LibWin32
   end
 
   struct ID3D12Device7VTbl
-    query_interface : Proc(ID3D12Device7*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Device7*, UInt32)
-    release : Proc(ID3D12Device7*, UInt32)
-    get_private_data : Proc(ID3D12Device7*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Device7*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Device7*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Device7*, LibC::LPWSTR, HRESULT)
-    get_node_count : Proc(ID3D12Device7*, UInt32)
-    create_command_queue : Proc(ID3D12Device7*, D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)
-    create_command_allocator : Proc(ID3D12Device7*, D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)
-    create_graphics_pipeline_state : Proc(ID3D12Device7*, D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_compute_pipeline_state : Proc(ID3D12Device7*, D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_command_list : Proc(ID3D12Device7*, UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)
-    check_feature_support : Proc(ID3D12Device7*, D3D12_FEATURE, Void*, UInt32, HRESULT)
-    create_descriptor_heap : Proc(ID3D12Device7*, D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)
-    get_descriptor_handle_increment_size : Proc(ID3D12Device7*, D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)
-    create_root_signature : Proc(ID3D12Device7*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    create_constant_buffer_view : Proc(ID3D12Device7*, D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_shader_resource_view : Proc(ID3D12Device7*, ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_unordered_access_view : Proc(ID3D12Device7*, ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_render_target_view : Proc(ID3D12Device7*, ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_depth_stencil_view : Proc(ID3D12Device7*, ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_sampler : Proc(ID3D12Device7*, D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    copy_descriptors : Proc(ID3D12Device7*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    copy_descriptors_simple : Proc(ID3D12Device7*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    get_resource_allocation_info : Proc(ID3D12Device7*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)
-    get_custom_heap_properties : Proc(ID3D12Device7*, UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)
-    create_committed_resource : Proc(ID3D12Device7*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_heap : Proc(ID3D12Device7*, D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)
-    create_placed_resource : Proc(ID3D12Device7*, ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_reserved_resource : Proc(ID3D12Device7*, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_shared_handle : Proc(ID3D12Device7*, ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)
-    open_shared_handle : Proc(ID3D12Device7*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    open_shared_handle_by_name : Proc(ID3D12Device7*, LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)
-    make_resident : Proc(ID3D12Device7*, UInt32, ID3D12Pageable*, HRESULT)
-    evict : Proc(ID3D12Device7*, UInt32, ID3D12Pageable*, HRESULT)
-    create_fence : Proc(ID3D12Device7*, UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)
-    get_device_removed_reason : Proc(ID3D12Device7*, HRESULT)
-    get_copyable_footprints : Proc(ID3D12Device7*, D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)
-    create_query_heap : Proc(ID3D12Device7*, D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)
-    set_stable_power_state : Proc(ID3D12Device7*, LibC::BOOL, HRESULT)
-    create_command_signature : Proc(ID3D12Device7*, D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)
-    get_resource_tiling : Proc(ID3D12Device7*, ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)
-    get_adapter_luid : Proc(ID3D12Device7*, LUID)
-    create_pipeline_library : Proc(ID3D12Device7*, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    set_event_on_multiple_fence_completion : Proc(ID3D12Device7*, ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)
-    set_residency_priority : Proc(ID3D12Device7*, UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)
-    create_pipeline_state : Proc(ID3D12Device7*, D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)
-    open_existing_heap_from_address : Proc(ID3D12Device7*, Void*, Guid*, Void**, HRESULT)
-    open_existing_heap_from_file_mapping : Proc(ID3D12Device7*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    enqueue_make_resident : Proc(ID3D12Device7*, D3D12_RESIDENCY_FLAGS, UInt32, ID3D12Pageable*, ID3D12Fence, UInt64, HRESULT)
-    create_command_list1 : Proc(ID3D12Device7*, UInt32, D3D12_COMMAND_LIST_TYPE, D3D12_COMMAND_LIST_FLAGS, Guid*, Void**, HRESULT)
-    create_protected_resource_session : Proc(ID3D12Device7*, D3D12_PROTECTED_RESOURCE_SESSION_DESC*, Guid*, Void**, HRESULT)
-    create_committed_resource1 : Proc(ID3D12Device7*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    create_heap1 : Proc(ID3D12Device7*, D3D12_HEAP_DESC*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    create_reserved_resource1 : Proc(ID3D12Device7*, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    get_resource_allocation_info1 : Proc(ID3D12Device7*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)
-    create_lifetime_tracker : Proc(ID3D12Device7*, ID3D12LifetimeOwner, Guid*, Void**, HRESULT)
-    remove_device : Proc(ID3D12Device7*, Void)
-    enumerate_meta_commands : Proc(ID3D12Device7*, UInt32*, D3D12_META_COMMAND_DESC*, HRESULT)
-    enumerate_meta_command_parameters : Proc(ID3D12Device7*, Guid*, D3D12_META_COMMAND_PARAMETER_STAGE, UInt32*, UInt32*, D3D12_META_COMMAND_PARAMETER_DESC*, HRESULT)
-    create_meta_command : Proc(ID3D12Device7*, Guid*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    create_state_object : Proc(ID3D12Device7*, D3D12_STATE_OBJECT_DESC*, Guid*, Void**, HRESULT)
-    get_raytracing_acceleration_structure_prebuild_info : Proc(ID3D12Device7*, D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*, Void)
-    check_driver_matching_identifier : Proc(ID3D12Device7*, D3D12_SERIALIZED_DATA_TYPE, D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*, D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS)
-    set_background_processing_mode : Proc(ID3D12Device7*, D3D12_BACKGROUND_PROCESSING_MODE, D3D12_MEASUREMENTS_ACTION, LibC::HANDLE, LibC::BOOL*, HRESULT)
-    add_to_state_object : Proc(ID3D12Device7*, D3D12_STATE_OBJECT_DESC*, ID3D12StateObject, Guid*, Void**, HRESULT)
-    create_protected_resource_session1 : Proc(ID3D12Device7*, D3D12_PROTECTED_RESOURCE_SESSION_DESC1*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_node_count : UInt64
+    create_command_queue : UInt64
+    create_command_allocator : UInt64
+    create_graphics_pipeline_state : UInt64
+    create_compute_pipeline_state : UInt64
+    create_command_list : UInt64
+    check_feature_support : UInt64
+    create_descriptor_heap : UInt64
+    get_descriptor_handle_increment_size : UInt64
+    create_root_signature : UInt64
+    create_constant_buffer_view : UInt64
+    create_shader_resource_view : UInt64
+    create_unordered_access_view : UInt64
+    create_render_target_view : UInt64
+    create_depth_stencil_view : UInt64
+    create_sampler : UInt64
+    copy_descriptors : UInt64
+    copy_descriptors_simple : UInt64
+    get_resource_allocation_info : UInt64
+    get_custom_heap_properties : UInt64
+    create_committed_resource : UInt64
+    create_heap : UInt64
+    create_placed_resource : UInt64
+    create_reserved_resource : UInt64
+    create_shared_handle : UInt64
+    open_shared_handle : UInt64
+    open_shared_handle_by_name : UInt64
+    make_resident : UInt64
+    evict : UInt64
+    create_fence : UInt64
+    get_device_removed_reason : UInt64
+    get_copyable_footprints : UInt64
+    create_query_heap : UInt64
+    set_stable_power_state : UInt64
+    create_command_signature : UInt64
+    get_resource_tiling : UInt64
+    get_adapter_luid : UInt64
+    create_pipeline_library : UInt64
+    set_event_on_multiple_fence_completion : UInt64
+    set_residency_priority : UInt64
+    create_pipeline_state : UInt64
+    open_existing_heap_from_address : UInt64
+    open_existing_heap_from_file_mapping : UInt64
+    enqueue_make_resident : UInt64
+    create_command_list1 : UInt64
+    create_protected_resource_session : UInt64
+    create_committed_resource1 : UInt64
+    create_heap1 : UInt64
+    create_reserved_resource1 : UInt64
+    get_resource_allocation_info1 : UInt64
+    create_lifetime_tracker : UInt64
+    remove_device : UInt64
+    enumerate_meta_commands : UInt64
+    enumerate_meta_command_parameters : UInt64
+    create_meta_command : UInt64
+    create_state_object : UInt64
+    get_raytracing_acceleration_structure_prebuild_info : UInt64
+    check_driver_matching_identifier : UInt64
+    set_background_processing_mode : UInt64
+    add_to_state_object : UInt64
+    create_protected_resource_session1 : UInt64
   end
 
   ID3D12Device7_GUID = "5c014b53-68a1-4b9b-8bd1-dd6046b9358b"
@@ -5476,79 +5476,79 @@ lib LibWin32
   end
 
   struct ID3D12Device8VTbl
-    query_interface : Proc(ID3D12Device8*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Device8*, UInt32)
-    release : Proc(ID3D12Device8*, UInt32)
-    get_private_data : Proc(ID3D12Device8*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Device8*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Device8*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Device8*, LibC::LPWSTR, HRESULT)
-    get_node_count : Proc(ID3D12Device8*, UInt32)
-    create_command_queue : Proc(ID3D12Device8*, D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)
-    create_command_allocator : Proc(ID3D12Device8*, D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)
-    create_graphics_pipeline_state : Proc(ID3D12Device8*, D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_compute_pipeline_state : Proc(ID3D12Device8*, D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_command_list : Proc(ID3D12Device8*, UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)
-    check_feature_support : Proc(ID3D12Device8*, D3D12_FEATURE, Void*, UInt32, HRESULT)
-    create_descriptor_heap : Proc(ID3D12Device8*, D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)
-    get_descriptor_handle_increment_size : Proc(ID3D12Device8*, D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)
-    create_root_signature : Proc(ID3D12Device8*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    create_constant_buffer_view : Proc(ID3D12Device8*, D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_shader_resource_view : Proc(ID3D12Device8*, ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_unordered_access_view : Proc(ID3D12Device8*, ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_render_target_view : Proc(ID3D12Device8*, ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_depth_stencil_view : Proc(ID3D12Device8*, ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_sampler : Proc(ID3D12Device8*, D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    copy_descriptors : Proc(ID3D12Device8*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    copy_descriptors_simple : Proc(ID3D12Device8*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    get_resource_allocation_info : Proc(ID3D12Device8*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)
-    get_custom_heap_properties : Proc(ID3D12Device8*, UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)
-    create_committed_resource : Proc(ID3D12Device8*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_heap : Proc(ID3D12Device8*, D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)
-    create_placed_resource : Proc(ID3D12Device8*, ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_reserved_resource : Proc(ID3D12Device8*, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_shared_handle : Proc(ID3D12Device8*, ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)
-    open_shared_handle : Proc(ID3D12Device8*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    open_shared_handle_by_name : Proc(ID3D12Device8*, LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)
-    make_resident : Proc(ID3D12Device8*, UInt32, ID3D12Pageable*, HRESULT)
-    evict : Proc(ID3D12Device8*, UInt32, ID3D12Pageable*, HRESULT)
-    create_fence : Proc(ID3D12Device8*, UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)
-    get_device_removed_reason : Proc(ID3D12Device8*, HRESULT)
-    get_copyable_footprints : Proc(ID3D12Device8*, D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)
-    create_query_heap : Proc(ID3D12Device8*, D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)
-    set_stable_power_state : Proc(ID3D12Device8*, LibC::BOOL, HRESULT)
-    create_command_signature : Proc(ID3D12Device8*, D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)
-    get_resource_tiling : Proc(ID3D12Device8*, ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)
-    get_adapter_luid : Proc(ID3D12Device8*, LUID)
-    create_pipeline_library : Proc(ID3D12Device8*, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    set_event_on_multiple_fence_completion : Proc(ID3D12Device8*, ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)
-    set_residency_priority : Proc(ID3D12Device8*, UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)
-    create_pipeline_state : Proc(ID3D12Device8*, D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)
-    open_existing_heap_from_address : Proc(ID3D12Device8*, Void*, Guid*, Void**, HRESULT)
-    open_existing_heap_from_file_mapping : Proc(ID3D12Device8*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    enqueue_make_resident : Proc(ID3D12Device8*, D3D12_RESIDENCY_FLAGS, UInt32, ID3D12Pageable*, ID3D12Fence, UInt64, HRESULT)
-    create_command_list1 : Proc(ID3D12Device8*, UInt32, D3D12_COMMAND_LIST_TYPE, D3D12_COMMAND_LIST_FLAGS, Guid*, Void**, HRESULT)
-    create_protected_resource_session : Proc(ID3D12Device8*, D3D12_PROTECTED_RESOURCE_SESSION_DESC*, Guid*, Void**, HRESULT)
-    create_committed_resource1 : Proc(ID3D12Device8*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    create_heap1 : Proc(ID3D12Device8*, D3D12_HEAP_DESC*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    create_reserved_resource1 : Proc(ID3D12Device8*, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    get_resource_allocation_info1 : Proc(ID3D12Device8*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)
-    create_lifetime_tracker : Proc(ID3D12Device8*, ID3D12LifetimeOwner, Guid*, Void**, HRESULT)
-    remove_device : Proc(ID3D12Device8*, Void)
-    enumerate_meta_commands : Proc(ID3D12Device8*, UInt32*, D3D12_META_COMMAND_DESC*, HRESULT)
-    enumerate_meta_command_parameters : Proc(ID3D12Device8*, Guid*, D3D12_META_COMMAND_PARAMETER_STAGE, UInt32*, UInt32*, D3D12_META_COMMAND_PARAMETER_DESC*, HRESULT)
-    create_meta_command : Proc(ID3D12Device8*, Guid*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    create_state_object : Proc(ID3D12Device8*, D3D12_STATE_OBJECT_DESC*, Guid*, Void**, HRESULT)
-    get_raytracing_acceleration_structure_prebuild_info : Proc(ID3D12Device8*, D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*, Void)
-    check_driver_matching_identifier : Proc(ID3D12Device8*, D3D12_SERIALIZED_DATA_TYPE, D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*, D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS)
-    set_background_processing_mode : Proc(ID3D12Device8*, D3D12_BACKGROUND_PROCESSING_MODE, D3D12_MEASUREMENTS_ACTION, LibC::HANDLE, LibC::BOOL*, HRESULT)
-    add_to_state_object : Proc(ID3D12Device8*, D3D12_STATE_OBJECT_DESC*, ID3D12StateObject, Guid*, Void**, HRESULT)
-    create_protected_resource_session1 : Proc(ID3D12Device8*, D3D12_PROTECTED_RESOURCE_SESSION_DESC1*, Guid*, Void**, HRESULT)
-    get_resource_allocation_info2 : Proc(ID3D12Device8*, UInt32, UInt32, D3D12_RESOURCE_DESC1*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)
-    create_committed_resource2 : Proc(ID3D12Device8*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC1*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    create_placed_resource1 : Proc(ID3D12Device8*, ID3D12Heap, UInt64, D3D12_RESOURCE_DESC1*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_sampler_feedback_unordered_access_view : Proc(ID3D12Device8*, ID3D12Resource, ID3D12Resource, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    get_copyable_footprints1 : Proc(ID3D12Device8*, D3D12_RESOURCE_DESC1*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_node_count : UInt64
+    create_command_queue : UInt64
+    create_command_allocator : UInt64
+    create_graphics_pipeline_state : UInt64
+    create_compute_pipeline_state : UInt64
+    create_command_list : UInt64
+    check_feature_support : UInt64
+    create_descriptor_heap : UInt64
+    get_descriptor_handle_increment_size : UInt64
+    create_root_signature : UInt64
+    create_constant_buffer_view : UInt64
+    create_shader_resource_view : UInt64
+    create_unordered_access_view : UInt64
+    create_render_target_view : UInt64
+    create_depth_stencil_view : UInt64
+    create_sampler : UInt64
+    copy_descriptors : UInt64
+    copy_descriptors_simple : UInt64
+    get_resource_allocation_info : UInt64
+    get_custom_heap_properties : UInt64
+    create_committed_resource : UInt64
+    create_heap : UInt64
+    create_placed_resource : UInt64
+    create_reserved_resource : UInt64
+    create_shared_handle : UInt64
+    open_shared_handle : UInt64
+    open_shared_handle_by_name : UInt64
+    make_resident : UInt64
+    evict : UInt64
+    create_fence : UInt64
+    get_device_removed_reason : UInt64
+    get_copyable_footprints : UInt64
+    create_query_heap : UInt64
+    set_stable_power_state : UInt64
+    create_command_signature : UInt64
+    get_resource_tiling : UInt64
+    get_adapter_luid : UInt64
+    create_pipeline_library : UInt64
+    set_event_on_multiple_fence_completion : UInt64
+    set_residency_priority : UInt64
+    create_pipeline_state : UInt64
+    open_existing_heap_from_address : UInt64
+    open_existing_heap_from_file_mapping : UInt64
+    enqueue_make_resident : UInt64
+    create_command_list1 : UInt64
+    create_protected_resource_session : UInt64
+    create_committed_resource1 : UInt64
+    create_heap1 : UInt64
+    create_reserved_resource1 : UInt64
+    get_resource_allocation_info1 : UInt64
+    create_lifetime_tracker : UInt64
+    remove_device : UInt64
+    enumerate_meta_commands : UInt64
+    enumerate_meta_command_parameters : UInt64
+    create_meta_command : UInt64
+    create_state_object : UInt64
+    get_raytracing_acceleration_structure_prebuild_info : UInt64
+    check_driver_matching_identifier : UInt64
+    set_background_processing_mode : UInt64
+    add_to_state_object : UInt64
+    create_protected_resource_session1 : UInt64
+    get_resource_allocation_info2 : UInt64
+    create_committed_resource2 : UInt64
+    create_placed_resource1 : UInt64
+    create_sampler_feedback_unordered_access_view : UInt64
+    get_copyable_footprints1 : UInt64
   end
 
   ID3D12Device8_GUID = "9218e6bb-f944-4f7e-a75c-b1b2c7b701f3"
@@ -5558,22 +5558,22 @@ lib LibWin32
   end
 
   struct ID3D12Resource1VTbl
-    query_interface : Proc(ID3D12Resource1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Resource1*, UInt32)
-    release : Proc(ID3D12Resource1*, UInt32)
-    get_private_data : Proc(ID3D12Resource1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Resource1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Resource1*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Resource1*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12Resource1*, Guid*, Void**, HRESULT)
-    map : Proc(ID3D12Resource1*, UInt32, D3D12_RANGE*, Void**, HRESULT)
-    unmap : Proc(ID3D12Resource1*, UInt32, D3D12_RANGE*, Void)
-    get_desc : Proc(ID3D12Resource1*, D3D12_RESOURCE_DESC)
-    get_gpu_virtual_address : Proc(ID3D12Resource1*, UInt64)
-    write_to_subresource : Proc(ID3D12Resource1*, UInt32, D3D12_BOX*, Void*, UInt32, UInt32, HRESULT)
-    read_from_subresource : Proc(ID3D12Resource1*, Void*, UInt32, UInt32, UInt32, D3D12_BOX*, HRESULT)
-    get_heap_properties : Proc(ID3D12Resource1*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS*, HRESULT)
-    get_protected_resource_session : Proc(ID3D12Resource1*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    map : UInt64
+    unmap : UInt64
+    get_desc : UInt64
+    get_gpu_virtual_address : UInt64
+    write_to_subresource : UInt64
+    read_from_subresource : UInt64
+    get_heap_properties : UInt64
+    get_protected_resource_session : UInt64
   end
 
   ID3D12Resource1_GUID = "9d5e227a-4430-4161-88b3-3eca6bb16e19"
@@ -5583,23 +5583,23 @@ lib LibWin32
   end
 
   struct ID3D12Resource2VTbl
-    query_interface : Proc(ID3D12Resource2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Resource2*, UInt32)
-    release : Proc(ID3D12Resource2*, UInt32)
-    get_private_data : Proc(ID3D12Resource2*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Resource2*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Resource2*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Resource2*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12Resource2*, Guid*, Void**, HRESULT)
-    map : Proc(ID3D12Resource2*, UInt32, D3D12_RANGE*, Void**, HRESULT)
-    unmap : Proc(ID3D12Resource2*, UInt32, D3D12_RANGE*, Void)
-    get_desc : Proc(ID3D12Resource2*, D3D12_RESOURCE_DESC)
-    get_gpu_virtual_address : Proc(ID3D12Resource2*, UInt64)
-    write_to_subresource : Proc(ID3D12Resource2*, UInt32, D3D12_BOX*, Void*, UInt32, UInt32, HRESULT)
-    read_from_subresource : Proc(ID3D12Resource2*, Void*, UInt32, UInt32, UInt32, D3D12_BOX*, HRESULT)
-    get_heap_properties : Proc(ID3D12Resource2*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS*, HRESULT)
-    get_protected_resource_session : Proc(ID3D12Resource2*, Guid*, Void**, HRESULT)
-    get_desc1 : Proc(ID3D12Resource2*, D3D12_RESOURCE_DESC1)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    map : UInt64
+    unmap : UInt64
+    get_desc : UInt64
+    get_gpu_virtual_address : UInt64
+    write_to_subresource : UInt64
+    read_from_subresource : UInt64
+    get_heap_properties : UInt64
+    get_protected_resource_session : UInt64
+    get_desc1 : UInt64
   end
 
   ID3D12Resource2_GUID = "be36ec3b-ea85-4aeb-a45a-e9d76404a495"
@@ -5609,16 +5609,16 @@ lib LibWin32
   end
 
   struct ID3D12Heap1VTbl
-    query_interface : Proc(ID3D12Heap1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Heap1*, UInt32)
-    release : Proc(ID3D12Heap1*, UInt32)
-    get_private_data : Proc(ID3D12Heap1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Heap1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Heap1*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Heap1*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12Heap1*, Guid*, Void**, HRESULT)
-    get_desc : Proc(ID3D12Heap1*, D3D12_HEAP_DESC)
-    get_protected_resource_session : Proc(ID3D12Heap1*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_desc : UInt64
+    get_protected_resource_session : UInt64
   end
 
   ID3D12Heap1_GUID = "572f7389-2168-49e3-9693-d6df5871bf6d"
@@ -5628,74 +5628,74 @@ lib LibWin32
   end
 
   struct ID3D12GraphicsCommandList3VTbl
-    query_interface : Proc(ID3D12GraphicsCommandList3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12GraphicsCommandList3*, UInt32)
-    release : Proc(ID3D12GraphicsCommandList3*, UInt32)
-    get_private_data : Proc(ID3D12GraphicsCommandList3*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12GraphicsCommandList3*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12GraphicsCommandList3*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12GraphicsCommandList3*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12GraphicsCommandList3*, Guid*, Void**, HRESULT)
-    get_type : Proc(ID3D12GraphicsCommandList3*, D3D12_COMMAND_LIST_TYPE)
-    close : Proc(ID3D12GraphicsCommandList3*, HRESULT)
-    reset : Proc(ID3D12GraphicsCommandList3*, ID3D12CommandAllocator, ID3D12PipelineState, HRESULT)
-    clear_state : Proc(ID3D12GraphicsCommandList3*, ID3D12PipelineState, Void)
-    draw_instanced : Proc(ID3D12GraphicsCommandList3*, UInt32, UInt32, UInt32, UInt32, Void)
-    draw_indexed_instanced : Proc(ID3D12GraphicsCommandList3*, UInt32, UInt32, UInt32, Int32, UInt32, Void)
-    dispatch : Proc(ID3D12GraphicsCommandList3*, UInt32, UInt32, UInt32, Void)
-    copy_buffer_region : Proc(ID3D12GraphicsCommandList3*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt64, Void)
-    copy_texture_region : Proc(ID3D12GraphicsCommandList3*, D3D12_TEXTURE_COPY_LOCATION*, UInt32, UInt32, UInt32, D3D12_TEXTURE_COPY_LOCATION*, D3D12_BOX*, Void)
-    copy_resource : Proc(ID3D12GraphicsCommandList3*, ID3D12Resource, ID3D12Resource, Void)
-    copy_tiles : Proc(ID3D12GraphicsCommandList3*, ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, ID3D12Resource, UInt64, D3D12_TILE_COPY_FLAGS, Void)
-    resolve_subresource : Proc(ID3D12GraphicsCommandList3*, ID3D12Resource, UInt32, ID3D12Resource, UInt32, DXGI_FORMAT, Void)
-    ia_set_primitive_topology : Proc(ID3D12GraphicsCommandList3*, D3D_PRIMITIVE_TOPOLOGY, Void)
-    rs_set_viewports : Proc(ID3D12GraphicsCommandList3*, UInt32, D3D12_VIEWPORT*, Void)
-    rs_set_scissor_rects : Proc(ID3D12GraphicsCommandList3*, UInt32, RECT*, Void)
-    om_set_blend_factor : Proc(ID3D12GraphicsCommandList3*, Float32*, Void)
-    om_set_stencil_ref : Proc(ID3D12GraphicsCommandList3*, UInt32, Void)
-    set_pipeline_state : Proc(ID3D12GraphicsCommandList3*, ID3D12PipelineState, Void)
-    resource_barrier : Proc(ID3D12GraphicsCommandList3*, UInt32, D3D12_RESOURCE_BARRIER*, Void)
-    execute_bundle : Proc(ID3D12GraphicsCommandList3*, ID3D12GraphicsCommandList, Void)
-    set_descriptor_heaps : Proc(ID3D12GraphicsCommandList3*, UInt32, ID3D12DescriptorHeap*, Void)
-    set_compute_root_signature : Proc(ID3D12GraphicsCommandList3*, ID3D12RootSignature, Void)
-    set_graphics_root_signature : Proc(ID3D12GraphicsCommandList3*, ID3D12RootSignature, Void)
-    set_compute_root_descriptor_table : Proc(ID3D12GraphicsCommandList3*, UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)
-    set_graphics_root_descriptor_table : Proc(ID3D12GraphicsCommandList3*, UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)
-    set_compute_root32_bit_constant : Proc(ID3D12GraphicsCommandList3*, UInt32, UInt32, UInt32, Void)
-    set_graphics_root32_bit_constant : Proc(ID3D12GraphicsCommandList3*, UInt32, UInt32, UInt32, Void)
-    set_compute_root32_bit_constants : Proc(ID3D12GraphicsCommandList3*, UInt32, UInt32, Void*, UInt32, Void)
-    set_graphics_root32_bit_constants : Proc(ID3D12GraphicsCommandList3*, UInt32, UInt32, Void*, UInt32, Void)
-    set_compute_root_constant_buffer_view : Proc(ID3D12GraphicsCommandList3*, UInt32, UInt64, Void)
-    set_graphics_root_constant_buffer_view : Proc(ID3D12GraphicsCommandList3*, UInt32, UInt64, Void)
-    set_compute_root_shader_resource_view : Proc(ID3D12GraphicsCommandList3*, UInt32, UInt64, Void)
-    set_graphics_root_shader_resource_view : Proc(ID3D12GraphicsCommandList3*, UInt32, UInt64, Void)
-    set_compute_root_unordered_access_view : Proc(ID3D12GraphicsCommandList3*, UInt32, UInt64, Void)
-    set_graphics_root_unordered_access_view : Proc(ID3D12GraphicsCommandList3*, UInt32, UInt64, Void)
-    ia_set_index_buffer : Proc(ID3D12GraphicsCommandList3*, D3D12_INDEX_BUFFER_VIEW*, Void)
-    ia_set_vertex_buffers : Proc(ID3D12GraphicsCommandList3*, UInt32, UInt32, D3D12_VERTEX_BUFFER_VIEW*, Void)
-    so_set_targets : Proc(ID3D12GraphicsCommandList3*, UInt32, UInt32, D3D12_STREAM_OUTPUT_BUFFER_VIEW*, Void)
-    om_set_render_targets : Proc(ID3D12GraphicsCommandList3*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, LibC::BOOL, D3D12_CPU_DESCRIPTOR_HANDLE*, Void)
-    clear_depth_stencil_view : Proc(ID3D12GraphicsCommandList3*, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CLEAR_FLAGS, Float32, UInt8, UInt32, RECT*, Void)
-    clear_render_target_view : Proc(ID3D12GraphicsCommandList3*, D3D12_CPU_DESCRIPTOR_HANDLE, Float32*, UInt32, RECT*, Void)
-    clear_unordered_access_view_uint : Proc(ID3D12GraphicsCommandList3*, D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, UInt32*, UInt32, RECT*, Void)
-    clear_unordered_access_view_float : Proc(ID3D12GraphicsCommandList3*, D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, Float32*, UInt32, RECT*, Void)
-    discard_resource : Proc(ID3D12GraphicsCommandList3*, ID3D12Resource, D3D12_DISCARD_REGION*, Void)
-    begin_query : Proc(ID3D12GraphicsCommandList3*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)
-    end_query : Proc(ID3D12GraphicsCommandList3*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)
-    resolve_query_data : Proc(ID3D12GraphicsCommandList3*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, UInt32, ID3D12Resource, UInt64, Void)
-    set_predication : Proc(ID3D12GraphicsCommandList3*, ID3D12Resource, UInt64, D3D12_PREDICATION_OP, Void)
-    set_marker : Proc(ID3D12GraphicsCommandList3*, UInt32, Void*, UInt32, Void)
-    begin_event : Proc(ID3D12GraphicsCommandList3*, UInt32, Void*, UInt32, Void)
-    end_event : Proc(ID3D12GraphicsCommandList3*, Void)
-    execute_indirect : Proc(ID3D12GraphicsCommandList3*, ID3D12CommandSignature, UInt32, ID3D12Resource, UInt64, ID3D12Resource, UInt64, Void)
-    atomic_copy_buffer_uint : Proc(ID3D12GraphicsCommandList3*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)
-    atomic_copy_buffer_uint64 : Proc(ID3D12GraphicsCommandList3*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)
-    om_set_depth_bounds : Proc(ID3D12GraphicsCommandList3*, Float32, Float32, Void)
-    set_sample_positions : Proc(ID3D12GraphicsCommandList3*, UInt32, UInt32, D3D12_SAMPLE_POSITION*, Void)
-    resolve_subresource_region : Proc(ID3D12GraphicsCommandList3*, ID3D12Resource, UInt32, UInt32, UInt32, ID3D12Resource, UInt32, RECT*, DXGI_FORMAT, D3D12_RESOLVE_MODE, Void)
-    set_view_instance_mask : Proc(ID3D12GraphicsCommandList3*, UInt32, Void)
-    write_buffer_immediate : Proc(ID3D12GraphicsCommandList3*, UInt32, D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void)
-    set_protected_resource_session : Proc(ID3D12GraphicsCommandList3*, ID3D12ProtectedResourceSession, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_type : UInt64
+    close : UInt64
+    reset : UInt64
+    clear_state : UInt64
+    draw_instanced : UInt64
+    draw_indexed_instanced : UInt64
+    dispatch : UInt64
+    copy_buffer_region : UInt64
+    copy_texture_region : UInt64
+    copy_resource : UInt64
+    copy_tiles : UInt64
+    resolve_subresource : UInt64
+    ia_set_primitive_topology : UInt64
+    rs_set_viewports : UInt64
+    rs_set_scissor_rects : UInt64
+    om_set_blend_factor : UInt64
+    om_set_stencil_ref : UInt64
+    set_pipeline_state : UInt64
+    resource_barrier : UInt64
+    execute_bundle : UInt64
+    set_descriptor_heaps : UInt64
+    set_compute_root_signature : UInt64
+    set_graphics_root_signature : UInt64
+    set_compute_root_descriptor_table : UInt64
+    set_graphics_root_descriptor_table : UInt64
+    set_compute_root32_bit_constant : UInt64
+    set_graphics_root32_bit_constant : UInt64
+    set_compute_root32_bit_constants : UInt64
+    set_graphics_root32_bit_constants : UInt64
+    set_compute_root_constant_buffer_view : UInt64
+    set_graphics_root_constant_buffer_view : UInt64
+    set_compute_root_shader_resource_view : UInt64
+    set_graphics_root_shader_resource_view : UInt64
+    set_compute_root_unordered_access_view : UInt64
+    set_graphics_root_unordered_access_view : UInt64
+    ia_set_index_buffer : UInt64
+    ia_set_vertex_buffers : UInt64
+    so_set_targets : UInt64
+    om_set_render_targets : UInt64
+    clear_depth_stencil_view : UInt64
+    clear_render_target_view : UInt64
+    clear_unordered_access_view_uint : UInt64
+    clear_unordered_access_view_float : UInt64
+    discard_resource : UInt64
+    begin_query : UInt64
+    end_query : UInt64
+    resolve_query_data : UInt64
+    set_predication : UInt64
+    set_marker : UInt64
+    begin_event : UInt64
+    end_event : UInt64
+    execute_indirect : UInt64
+    atomic_copy_buffer_uint : UInt64
+    atomic_copy_buffer_uint64 : UInt64
+    om_set_depth_bounds : UInt64
+    set_sample_positions : UInt64
+    resolve_subresource_region : UInt64
+    set_view_instance_mask : UInt64
+    write_buffer_immediate : UInt64
+    set_protected_resource_session : UInt64
   end
 
   ID3D12GraphicsCommandList3_GUID = "6fda83a7-b84c-4e38-9ac8-c7bd22016b3d"
@@ -5705,15 +5705,15 @@ lib LibWin32
   end
 
   struct ID3D12MetaCommandVTbl
-    query_interface : Proc(ID3D12MetaCommand*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12MetaCommand*, UInt32)
-    release : Proc(ID3D12MetaCommand*, UInt32)
-    get_private_data : Proc(ID3D12MetaCommand*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12MetaCommand*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12MetaCommand*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12MetaCommand*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12MetaCommand*, Guid*, Void**, HRESULT)
-    get_required_parameter_resource_size : Proc(ID3D12MetaCommand*, D3D12_META_COMMAND_PARAMETER_STAGE, UInt32, UInt64)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_required_parameter_resource_size : UInt64
   end
 
   ID3D12MetaCommand_GUID = "dbb84c27-36ce-4fc9-b801-f048c46ac570"
@@ -5723,83 +5723,83 @@ lib LibWin32
   end
 
   struct ID3D12GraphicsCommandList4VTbl
-    query_interface : Proc(ID3D12GraphicsCommandList4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12GraphicsCommandList4*, UInt32)
-    release : Proc(ID3D12GraphicsCommandList4*, UInt32)
-    get_private_data : Proc(ID3D12GraphicsCommandList4*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12GraphicsCommandList4*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12GraphicsCommandList4*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12GraphicsCommandList4*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12GraphicsCommandList4*, Guid*, Void**, HRESULT)
-    get_type : Proc(ID3D12GraphicsCommandList4*, D3D12_COMMAND_LIST_TYPE)
-    close : Proc(ID3D12GraphicsCommandList4*, HRESULT)
-    reset : Proc(ID3D12GraphicsCommandList4*, ID3D12CommandAllocator, ID3D12PipelineState, HRESULT)
-    clear_state : Proc(ID3D12GraphicsCommandList4*, ID3D12PipelineState, Void)
-    draw_instanced : Proc(ID3D12GraphicsCommandList4*, UInt32, UInt32, UInt32, UInt32, Void)
-    draw_indexed_instanced : Proc(ID3D12GraphicsCommandList4*, UInt32, UInt32, UInt32, Int32, UInt32, Void)
-    dispatch : Proc(ID3D12GraphicsCommandList4*, UInt32, UInt32, UInt32, Void)
-    copy_buffer_region : Proc(ID3D12GraphicsCommandList4*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt64, Void)
-    copy_texture_region : Proc(ID3D12GraphicsCommandList4*, D3D12_TEXTURE_COPY_LOCATION*, UInt32, UInt32, UInt32, D3D12_TEXTURE_COPY_LOCATION*, D3D12_BOX*, Void)
-    copy_resource : Proc(ID3D12GraphicsCommandList4*, ID3D12Resource, ID3D12Resource, Void)
-    copy_tiles : Proc(ID3D12GraphicsCommandList4*, ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, ID3D12Resource, UInt64, D3D12_TILE_COPY_FLAGS, Void)
-    resolve_subresource : Proc(ID3D12GraphicsCommandList4*, ID3D12Resource, UInt32, ID3D12Resource, UInt32, DXGI_FORMAT, Void)
-    ia_set_primitive_topology : Proc(ID3D12GraphicsCommandList4*, D3D_PRIMITIVE_TOPOLOGY, Void)
-    rs_set_viewports : Proc(ID3D12GraphicsCommandList4*, UInt32, D3D12_VIEWPORT*, Void)
-    rs_set_scissor_rects : Proc(ID3D12GraphicsCommandList4*, UInt32, RECT*, Void)
-    om_set_blend_factor : Proc(ID3D12GraphicsCommandList4*, Float32*, Void)
-    om_set_stencil_ref : Proc(ID3D12GraphicsCommandList4*, UInt32, Void)
-    set_pipeline_state : Proc(ID3D12GraphicsCommandList4*, ID3D12PipelineState, Void)
-    resource_barrier : Proc(ID3D12GraphicsCommandList4*, UInt32, D3D12_RESOURCE_BARRIER*, Void)
-    execute_bundle : Proc(ID3D12GraphicsCommandList4*, ID3D12GraphicsCommandList, Void)
-    set_descriptor_heaps : Proc(ID3D12GraphicsCommandList4*, UInt32, ID3D12DescriptorHeap*, Void)
-    set_compute_root_signature : Proc(ID3D12GraphicsCommandList4*, ID3D12RootSignature, Void)
-    set_graphics_root_signature : Proc(ID3D12GraphicsCommandList4*, ID3D12RootSignature, Void)
-    set_compute_root_descriptor_table : Proc(ID3D12GraphicsCommandList4*, UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)
-    set_graphics_root_descriptor_table : Proc(ID3D12GraphicsCommandList4*, UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)
-    set_compute_root32_bit_constant : Proc(ID3D12GraphicsCommandList4*, UInt32, UInt32, UInt32, Void)
-    set_graphics_root32_bit_constant : Proc(ID3D12GraphicsCommandList4*, UInt32, UInt32, UInt32, Void)
-    set_compute_root32_bit_constants : Proc(ID3D12GraphicsCommandList4*, UInt32, UInt32, Void*, UInt32, Void)
-    set_graphics_root32_bit_constants : Proc(ID3D12GraphicsCommandList4*, UInt32, UInt32, Void*, UInt32, Void)
-    set_compute_root_constant_buffer_view : Proc(ID3D12GraphicsCommandList4*, UInt32, UInt64, Void)
-    set_graphics_root_constant_buffer_view : Proc(ID3D12GraphicsCommandList4*, UInt32, UInt64, Void)
-    set_compute_root_shader_resource_view : Proc(ID3D12GraphicsCommandList4*, UInt32, UInt64, Void)
-    set_graphics_root_shader_resource_view : Proc(ID3D12GraphicsCommandList4*, UInt32, UInt64, Void)
-    set_compute_root_unordered_access_view : Proc(ID3D12GraphicsCommandList4*, UInt32, UInt64, Void)
-    set_graphics_root_unordered_access_view : Proc(ID3D12GraphicsCommandList4*, UInt32, UInt64, Void)
-    ia_set_index_buffer : Proc(ID3D12GraphicsCommandList4*, D3D12_INDEX_BUFFER_VIEW*, Void)
-    ia_set_vertex_buffers : Proc(ID3D12GraphicsCommandList4*, UInt32, UInt32, D3D12_VERTEX_BUFFER_VIEW*, Void)
-    so_set_targets : Proc(ID3D12GraphicsCommandList4*, UInt32, UInt32, D3D12_STREAM_OUTPUT_BUFFER_VIEW*, Void)
-    om_set_render_targets : Proc(ID3D12GraphicsCommandList4*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, LibC::BOOL, D3D12_CPU_DESCRIPTOR_HANDLE*, Void)
-    clear_depth_stencil_view : Proc(ID3D12GraphicsCommandList4*, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CLEAR_FLAGS, Float32, UInt8, UInt32, RECT*, Void)
-    clear_render_target_view : Proc(ID3D12GraphicsCommandList4*, D3D12_CPU_DESCRIPTOR_HANDLE, Float32*, UInt32, RECT*, Void)
-    clear_unordered_access_view_uint : Proc(ID3D12GraphicsCommandList4*, D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, UInt32*, UInt32, RECT*, Void)
-    clear_unordered_access_view_float : Proc(ID3D12GraphicsCommandList4*, D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, Float32*, UInt32, RECT*, Void)
-    discard_resource : Proc(ID3D12GraphicsCommandList4*, ID3D12Resource, D3D12_DISCARD_REGION*, Void)
-    begin_query : Proc(ID3D12GraphicsCommandList4*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)
-    end_query : Proc(ID3D12GraphicsCommandList4*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)
-    resolve_query_data : Proc(ID3D12GraphicsCommandList4*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, UInt32, ID3D12Resource, UInt64, Void)
-    set_predication : Proc(ID3D12GraphicsCommandList4*, ID3D12Resource, UInt64, D3D12_PREDICATION_OP, Void)
-    set_marker : Proc(ID3D12GraphicsCommandList4*, UInt32, Void*, UInt32, Void)
-    begin_event : Proc(ID3D12GraphicsCommandList4*, UInt32, Void*, UInt32, Void)
-    end_event : Proc(ID3D12GraphicsCommandList4*, Void)
-    execute_indirect : Proc(ID3D12GraphicsCommandList4*, ID3D12CommandSignature, UInt32, ID3D12Resource, UInt64, ID3D12Resource, UInt64, Void)
-    atomic_copy_buffer_uint : Proc(ID3D12GraphicsCommandList4*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)
-    atomic_copy_buffer_uint64 : Proc(ID3D12GraphicsCommandList4*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)
-    om_set_depth_bounds : Proc(ID3D12GraphicsCommandList4*, Float32, Float32, Void)
-    set_sample_positions : Proc(ID3D12GraphicsCommandList4*, UInt32, UInt32, D3D12_SAMPLE_POSITION*, Void)
-    resolve_subresource_region : Proc(ID3D12GraphicsCommandList4*, ID3D12Resource, UInt32, UInt32, UInt32, ID3D12Resource, UInt32, RECT*, DXGI_FORMAT, D3D12_RESOLVE_MODE, Void)
-    set_view_instance_mask : Proc(ID3D12GraphicsCommandList4*, UInt32, Void)
-    write_buffer_immediate : Proc(ID3D12GraphicsCommandList4*, UInt32, D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void)
-    set_protected_resource_session : Proc(ID3D12GraphicsCommandList4*, ID3D12ProtectedResourceSession, Void)
-    begin_render_pass : Proc(ID3D12GraphicsCommandList4*, UInt32, D3D12_RENDER_PASS_RENDER_TARGET_DESC*, D3D12_RENDER_PASS_DEPTH_STENCIL_DESC*, D3D12_RENDER_PASS_FLAGS, Void)
-    end_render_pass : Proc(ID3D12GraphicsCommandList4*, Void)
-    initialize_meta_command : Proc(ID3D12GraphicsCommandList4*, ID3D12MetaCommand, Void*, LibC::UINT_PTR, Void)
-    execute_meta_command : Proc(ID3D12GraphicsCommandList4*, ID3D12MetaCommand, Void*, LibC::UINT_PTR, Void)
-    build_raytracing_acceleration_structure : Proc(ID3D12GraphicsCommandList4*, D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC*, UInt32, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*, Void)
-    emit_raytracing_acceleration_structure_postbuild_info : Proc(ID3D12GraphicsCommandList4*, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*, UInt32, UInt64*, Void)
-    copy_raytracing_acceleration_structure : Proc(ID3D12GraphicsCommandList4*, UInt64, UInt64, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE, Void)
-    set_pipeline_state1 : Proc(ID3D12GraphicsCommandList4*, ID3D12StateObject, Void)
-    dispatch_rays : Proc(ID3D12GraphicsCommandList4*, D3D12_DISPATCH_RAYS_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_type : UInt64
+    close : UInt64
+    reset : UInt64
+    clear_state : UInt64
+    draw_instanced : UInt64
+    draw_indexed_instanced : UInt64
+    dispatch : UInt64
+    copy_buffer_region : UInt64
+    copy_texture_region : UInt64
+    copy_resource : UInt64
+    copy_tiles : UInt64
+    resolve_subresource : UInt64
+    ia_set_primitive_topology : UInt64
+    rs_set_viewports : UInt64
+    rs_set_scissor_rects : UInt64
+    om_set_blend_factor : UInt64
+    om_set_stencil_ref : UInt64
+    set_pipeline_state : UInt64
+    resource_barrier : UInt64
+    execute_bundle : UInt64
+    set_descriptor_heaps : UInt64
+    set_compute_root_signature : UInt64
+    set_graphics_root_signature : UInt64
+    set_compute_root_descriptor_table : UInt64
+    set_graphics_root_descriptor_table : UInt64
+    set_compute_root32_bit_constant : UInt64
+    set_graphics_root32_bit_constant : UInt64
+    set_compute_root32_bit_constants : UInt64
+    set_graphics_root32_bit_constants : UInt64
+    set_compute_root_constant_buffer_view : UInt64
+    set_graphics_root_constant_buffer_view : UInt64
+    set_compute_root_shader_resource_view : UInt64
+    set_graphics_root_shader_resource_view : UInt64
+    set_compute_root_unordered_access_view : UInt64
+    set_graphics_root_unordered_access_view : UInt64
+    ia_set_index_buffer : UInt64
+    ia_set_vertex_buffers : UInt64
+    so_set_targets : UInt64
+    om_set_render_targets : UInt64
+    clear_depth_stencil_view : UInt64
+    clear_render_target_view : UInt64
+    clear_unordered_access_view_uint : UInt64
+    clear_unordered_access_view_float : UInt64
+    discard_resource : UInt64
+    begin_query : UInt64
+    end_query : UInt64
+    resolve_query_data : UInt64
+    set_predication : UInt64
+    set_marker : UInt64
+    begin_event : UInt64
+    end_event : UInt64
+    execute_indirect : UInt64
+    atomic_copy_buffer_uint : UInt64
+    atomic_copy_buffer_uint64 : UInt64
+    om_set_depth_bounds : UInt64
+    set_sample_positions : UInt64
+    resolve_subresource_region : UInt64
+    set_view_instance_mask : UInt64
+    write_buffer_immediate : UInt64
+    set_protected_resource_session : UInt64
+    begin_render_pass : UInt64
+    end_render_pass : UInt64
+    initialize_meta_command : UInt64
+    execute_meta_command : UInt64
+    build_raytracing_acceleration_structure : UInt64
+    emit_raytracing_acceleration_structure_postbuild_info : UInt64
+    copy_raytracing_acceleration_structure : UInt64
+    set_pipeline_state1 : UInt64
+    dispatch_rays : UInt64
   end
 
   ID3D12GraphicsCommandList4_GUID = "8754318e-d3a9-4541-98cf-645b50dc4874"
@@ -5809,18 +5809,18 @@ lib LibWin32
   end
 
   struct ID3D12ShaderCacheSessionVTbl
-    query_interface : Proc(ID3D12ShaderCacheSession*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12ShaderCacheSession*, UInt32)
-    release : Proc(ID3D12ShaderCacheSession*, UInt32)
-    get_private_data : Proc(ID3D12ShaderCacheSession*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12ShaderCacheSession*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12ShaderCacheSession*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12ShaderCacheSession*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12ShaderCacheSession*, Guid*, Void**, HRESULT)
-    find_value : Proc(ID3D12ShaderCacheSession*, Void*, UInt32, Void*, UInt32*, HRESULT)
-    store_value : Proc(ID3D12ShaderCacheSession*, Void*, UInt32, Void*, UInt32, HRESULT)
-    set_delete_on_destroy : Proc(ID3D12ShaderCacheSession*, Void)
-    get_desc : Proc(ID3D12ShaderCacheSession*, D3D12_SHADER_CACHE_SESSION_DESC)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    find_value : UInt64
+    store_value : UInt64
+    set_delete_on_destroy : UInt64
+    get_desc : UInt64
   end
 
   ID3D12ShaderCacheSession_GUID = "28e2495d-0f64-4ae4-a6ec-129255dc49a8"
@@ -5830,82 +5830,82 @@ lib LibWin32
   end
 
   struct ID3D12Device9VTbl
-    query_interface : Proc(ID3D12Device9*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Device9*, UInt32)
-    release : Proc(ID3D12Device9*, UInt32)
-    get_private_data : Proc(ID3D12Device9*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12Device9*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12Device9*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12Device9*, LibC::LPWSTR, HRESULT)
-    get_node_count : Proc(ID3D12Device9*, UInt32)
-    create_command_queue : Proc(ID3D12Device9*, D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)
-    create_command_allocator : Proc(ID3D12Device9*, D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)
-    create_graphics_pipeline_state : Proc(ID3D12Device9*, D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_compute_pipeline_state : Proc(ID3D12Device9*, D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)
-    create_command_list : Proc(ID3D12Device9*, UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)
-    check_feature_support : Proc(ID3D12Device9*, D3D12_FEATURE, Void*, UInt32, HRESULT)
-    create_descriptor_heap : Proc(ID3D12Device9*, D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)
-    get_descriptor_handle_increment_size : Proc(ID3D12Device9*, D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)
-    create_root_signature : Proc(ID3D12Device9*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    create_constant_buffer_view : Proc(ID3D12Device9*, D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_shader_resource_view : Proc(ID3D12Device9*, ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_unordered_access_view : Proc(ID3D12Device9*, ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_render_target_view : Proc(ID3D12Device9*, ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_depth_stencil_view : Proc(ID3D12Device9*, ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    create_sampler : Proc(ID3D12Device9*, D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    copy_descriptors : Proc(ID3D12Device9*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    copy_descriptors_simple : Proc(ID3D12Device9*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)
-    get_resource_allocation_info : Proc(ID3D12Device9*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)
-    get_custom_heap_properties : Proc(ID3D12Device9*, UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)
-    create_committed_resource : Proc(ID3D12Device9*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_heap : Proc(ID3D12Device9*, D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)
-    create_placed_resource : Proc(ID3D12Device9*, ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_reserved_resource : Proc(ID3D12Device9*, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_shared_handle : Proc(ID3D12Device9*, ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)
-    open_shared_handle : Proc(ID3D12Device9*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    open_shared_handle_by_name : Proc(ID3D12Device9*, LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)
-    make_resident : Proc(ID3D12Device9*, UInt32, ID3D12Pageable*, HRESULT)
-    evict : Proc(ID3D12Device9*, UInt32, ID3D12Pageable*, HRESULT)
-    create_fence : Proc(ID3D12Device9*, UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)
-    get_device_removed_reason : Proc(ID3D12Device9*, HRESULT)
-    get_copyable_footprints : Proc(ID3D12Device9*, D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)
-    create_query_heap : Proc(ID3D12Device9*, D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)
-    set_stable_power_state : Proc(ID3D12Device9*, LibC::BOOL, HRESULT)
-    create_command_signature : Proc(ID3D12Device9*, D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)
-    get_resource_tiling : Proc(ID3D12Device9*, ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)
-    get_adapter_luid : Proc(ID3D12Device9*, LUID)
-    create_pipeline_library : Proc(ID3D12Device9*, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    set_event_on_multiple_fence_completion : Proc(ID3D12Device9*, ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)
-    set_residency_priority : Proc(ID3D12Device9*, UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)
-    create_pipeline_state : Proc(ID3D12Device9*, D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)
-    open_existing_heap_from_address : Proc(ID3D12Device9*, Void*, Guid*, Void**, HRESULT)
-    open_existing_heap_from_file_mapping : Proc(ID3D12Device9*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    enqueue_make_resident : Proc(ID3D12Device9*, D3D12_RESIDENCY_FLAGS, UInt32, ID3D12Pageable*, ID3D12Fence, UInt64, HRESULT)
-    create_command_list1 : Proc(ID3D12Device9*, UInt32, D3D12_COMMAND_LIST_TYPE, D3D12_COMMAND_LIST_FLAGS, Guid*, Void**, HRESULT)
-    create_protected_resource_session : Proc(ID3D12Device9*, D3D12_PROTECTED_RESOURCE_SESSION_DESC*, Guid*, Void**, HRESULT)
-    create_committed_resource1 : Proc(ID3D12Device9*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    create_heap1 : Proc(ID3D12Device9*, D3D12_HEAP_DESC*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    create_reserved_resource1 : Proc(ID3D12Device9*, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    get_resource_allocation_info1 : Proc(ID3D12Device9*, UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)
-    create_lifetime_tracker : Proc(ID3D12Device9*, ID3D12LifetimeOwner, Guid*, Void**, HRESULT)
-    remove_device : Proc(ID3D12Device9*, Void)
-    enumerate_meta_commands : Proc(ID3D12Device9*, UInt32*, D3D12_META_COMMAND_DESC*, HRESULT)
-    enumerate_meta_command_parameters : Proc(ID3D12Device9*, Guid*, D3D12_META_COMMAND_PARAMETER_STAGE, UInt32*, UInt32*, D3D12_META_COMMAND_PARAMETER_DESC*, HRESULT)
-    create_meta_command : Proc(ID3D12Device9*, Guid*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)
-    create_state_object : Proc(ID3D12Device9*, D3D12_STATE_OBJECT_DESC*, Guid*, Void**, HRESULT)
-    get_raytracing_acceleration_structure_prebuild_info : Proc(ID3D12Device9*, D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*, Void)
-    check_driver_matching_identifier : Proc(ID3D12Device9*, D3D12_SERIALIZED_DATA_TYPE, D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*, D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS)
-    set_background_processing_mode : Proc(ID3D12Device9*, D3D12_BACKGROUND_PROCESSING_MODE, D3D12_MEASUREMENTS_ACTION, LibC::HANDLE, LibC::BOOL*, HRESULT)
-    add_to_state_object : Proc(ID3D12Device9*, D3D12_STATE_OBJECT_DESC*, ID3D12StateObject, Guid*, Void**, HRESULT)
-    create_protected_resource_session1 : Proc(ID3D12Device9*, D3D12_PROTECTED_RESOURCE_SESSION_DESC1*, Guid*, Void**, HRESULT)
-    get_resource_allocation_info2 : Proc(ID3D12Device9*, UInt32, UInt32, D3D12_RESOURCE_DESC1*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)
-    create_committed_resource2 : Proc(ID3D12Device9*, D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC1*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)
-    create_placed_resource1 : Proc(ID3D12Device9*, ID3D12Heap, UInt64, D3D12_RESOURCE_DESC1*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)
-    create_sampler_feedback_unordered_access_view : Proc(ID3D12Device9*, ID3D12Resource, ID3D12Resource, D3D12_CPU_DESCRIPTOR_HANDLE, Void)
-    get_copyable_footprints1 : Proc(ID3D12Device9*, D3D12_RESOURCE_DESC1*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)
-    create_shader_cache_session : Proc(ID3D12Device9*, D3D12_SHADER_CACHE_SESSION_DESC*, Guid*, Void**, HRESULT)
-    shader_cache_control : Proc(ID3D12Device9*, D3D12_SHADER_CACHE_KIND_FLAGS, D3D12_SHADER_CACHE_CONTROL_FLAGS, HRESULT)
-    create_command_queue1 : Proc(ID3D12Device9*, D3D12_COMMAND_QUEUE_DESC*, Guid*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_node_count : UInt64
+    create_command_queue : UInt64
+    create_command_allocator : UInt64
+    create_graphics_pipeline_state : UInt64
+    create_compute_pipeline_state : UInt64
+    create_command_list : UInt64
+    check_feature_support : UInt64
+    create_descriptor_heap : UInt64
+    get_descriptor_handle_increment_size : UInt64
+    create_root_signature : UInt64
+    create_constant_buffer_view : UInt64
+    create_shader_resource_view : UInt64
+    create_unordered_access_view : UInt64
+    create_render_target_view : UInt64
+    create_depth_stencil_view : UInt64
+    create_sampler : UInt64
+    copy_descriptors : UInt64
+    copy_descriptors_simple : UInt64
+    get_resource_allocation_info : UInt64
+    get_custom_heap_properties : UInt64
+    create_committed_resource : UInt64
+    create_heap : UInt64
+    create_placed_resource : UInt64
+    create_reserved_resource : UInt64
+    create_shared_handle : UInt64
+    open_shared_handle : UInt64
+    open_shared_handle_by_name : UInt64
+    make_resident : UInt64
+    evict : UInt64
+    create_fence : UInt64
+    get_device_removed_reason : UInt64
+    get_copyable_footprints : UInt64
+    create_query_heap : UInt64
+    set_stable_power_state : UInt64
+    create_command_signature : UInt64
+    get_resource_tiling : UInt64
+    get_adapter_luid : UInt64
+    create_pipeline_library : UInt64
+    set_event_on_multiple_fence_completion : UInt64
+    set_residency_priority : UInt64
+    create_pipeline_state : UInt64
+    open_existing_heap_from_address : UInt64
+    open_existing_heap_from_file_mapping : UInt64
+    enqueue_make_resident : UInt64
+    create_command_list1 : UInt64
+    create_protected_resource_session : UInt64
+    create_committed_resource1 : UInt64
+    create_heap1 : UInt64
+    create_reserved_resource1 : UInt64
+    get_resource_allocation_info1 : UInt64
+    create_lifetime_tracker : UInt64
+    remove_device : UInt64
+    enumerate_meta_commands : UInt64
+    enumerate_meta_command_parameters : UInt64
+    create_meta_command : UInt64
+    create_state_object : UInt64
+    get_raytracing_acceleration_structure_prebuild_info : UInt64
+    check_driver_matching_identifier : UInt64
+    set_background_processing_mode : UInt64
+    add_to_state_object : UInt64
+    create_protected_resource_session1 : UInt64
+    get_resource_allocation_info2 : UInt64
+    create_committed_resource2 : UInt64
+    create_placed_resource1 : UInt64
+    create_sampler_feedback_unordered_access_view : UInt64
+    get_copyable_footprints1 : UInt64
+    create_shader_cache_session : UInt64
+    shader_cache_control : UInt64
+    create_command_queue1 : UInt64
   end
 
   ID3D12Device9_GUID = "4c80e962-f032-4f60-bc9e-ebc2cfa1d83c"
@@ -5915,11 +5915,11 @@ lib LibWin32
   end
 
   struct ID3D12ToolsVTbl
-    query_interface : Proc(ID3D12Tools*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Tools*, UInt32)
-    release : Proc(ID3D12Tools*, UInt32)
-    enable_shader_instrumentation : Proc(ID3D12Tools*, LibC::BOOL, Void)
-    shader_instrumentation_enabled : Proc(ID3D12Tools*, LibC::BOOL)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enable_shader_instrumentation : UInt64
+    shader_instrumentation_enabled : UInt64
   end
 
   ID3D12Tools_GUID = "7071e1f0-e84b-4b33-974f-12fa49de65c5"
@@ -5929,10 +5929,10 @@ lib LibWin32
   end
 
   struct ID3D12DebugVTbl
-    query_interface : Proc(ID3D12Debug*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Debug*, UInt32)
-    release : Proc(ID3D12Debug*, UInt32)
-    enable_debug_layer : Proc(ID3D12Debug*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enable_debug_layer : UInt64
   end
 
   ID3D12Debug_GUID = "344488b7-6846-474b-b989-f027448245e0"
@@ -5942,12 +5942,12 @@ lib LibWin32
   end
 
   struct ID3D12Debug1VTbl
-    query_interface : Proc(ID3D12Debug1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Debug1*, UInt32)
-    release : Proc(ID3D12Debug1*, UInt32)
-    enable_debug_layer : Proc(ID3D12Debug1*, Void)
-    set_enable_gpu_based_validation : Proc(ID3D12Debug1*, LibC::BOOL, Void)
-    set_enable_synchronized_command_queue_validation : Proc(ID3D12Debug1*, LibC::BOOL, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enable_debug_layer : UInt64
+    set_enable_gpu_based_validation : UInt64
+    set_enable_synchronized_command_queue_validation : UInt64
   end
 
   ID3D12Debug1_GUID = "affaa4ca-63fe-4d8e-b8ad-159000af4304"
@@ -5957,10 +5957,10 @@ lib LibWin32
   end
 
   struct ID3D12Debug2VTbl
-    query_interface : Proc(ID3D12Debug2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Debug2*, UInt32)
-    release : Proc(ID3D12Debug2*, UInt32)
-    set_gpu_based_validation_flags : Proc(ID3D12Debug2*, D3D12_GPU_BASED_VALIDATION_FLAGS, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_gpu_based_validation_flags : UInt64
   end
 
   ID3D12Debug2_GUID = "93a665c4-a3b2-4e5d-b692-a26ae14e3374"
@@ -5970,13 +5970,13 @@ lib LibWin32
   end
 
   struct ID3D12Debug3VTbl
-    query_interface : Proc(ID3D12Debug3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Debug3*, UInt32)
-    release : Proc(ID3D12Debug3*, UInt32)
-    enable_debug_layer : Proc(ID3D12Debug3*, Void)
-    set_enable_gpu_based_validation : Proc(ID3D12Debug3*, LibC::BOOL, Void)
-    set_enable_synchronized_command_queue_validation : Proc(ID3D12Debug3*, LibC::BOOL, Void)
-    set_gpu_based_validation_flags : Proc(ID3D12Debug3*, D3D12_GPU_BASED_VALIDATION_FLAGS, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enable_debug_layer : UInt64
+    set_enable_gpu_based_validation : UInt64
+    set_enable_synchronized_command_queue_validation : UInt64
+    set_gpu_based_validation_flags : UInt64
   end
 
   ID3D12Debug3_GUID = "5cf4e58f-f671-4ff1-a542-3686e3d153d1"
@@ -5986,14 +5986,14 @@ lib LibWin32
   end
 
   struct ID3D12Debug4VTbl
-    query_interface : Proc(ID3D12Debug4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Debug4*, UInt32)
-    release : Proc(ID3D12Debug4*, UInt32)
-    enable_debug_layer : Proc(ID3D12Debug4*, Void)
-    set_enable_gpu_based_validation : Proc(ID3D12Debug4*, LibC::BOOL, Void)
-    set_enable_synchronized_command_queue_validation : Proc(ID3D12Debug4*, LibC::BOOL, Void)
-    set_gpu_based_validation_flags : Proc(ID3D12Debug4*, D3D12_GPU_BASED_VALIDATION_FLAGS, Void)
-    disable_debug_layer : Proc(ID3D12Debug4*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enable_debug_layer : UInt64
+    set_enable_gpu_based_validation : UInt64
+    set_enable_synchronized_command_queue_validation : UInt64
+    set_gpu_based_validation_flags : UInt64
+    disable_debug_layer : UInt64
   end
 
   ID3D12Debug4_GUID = "014b816e-9ec5-4a2f-a845-ffbe441ce13a"
@@ -6003,15 +6003,15 @@ lib LibWin32
   end
 
   struct ID3D12Debug5VTbl
-    query_interface : Proc(ID3D12Debug5*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12Debug5*, UInt32)
-    release : Proc(ID3D12Debug5*, UInt32)
-    enable_debug_layer : Proc(ID3D12Debug5*, Void)
-    set_enable_gpu_based_validation : Proc(ID3D12Debug5*, LibC::BOOL, Void)
-    set_enable_synchronized_command_queue_validation : Proc(ID3D12Debug5*, LibC::BOOL, Void)
-    set_gpu_based_validation_flags : Proc(ID3D12Debug5*, D3D12_GPU_BASED_VALIDATION_FLAGS, Void)
-    disable_debug_layer : Proc(ID3D12Debug5*, Void)
-    set_enable_auto_name : Proc(ID3D12Debug5*, LibC::BOOL, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enable_debug_layer : UInt64
+    set_enable_gpu_based_validation : UInt64
+    set_enable_synchronized_command_queue_validation : UInt64
+    set_gpu_based_validation_flags : UInt64
+    disable_debug_layer : UInt64
+    set_enable_auto_name : UInt64
   end
 
   ID3D12Debug5_GUID = "548d6b12-09fa-40e0-9069-5dcd589a52c9"
@@ -6021,12 +6021,12 @@ lib LibWin32
   end
 
   struct ID3D12DebugDevice1VTbl
-    query_interface : Proc(ID3D12DebugDevice1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12DebugDevice1*, UInt32)
-    release : Proc(ID3D12DebugDevice1*, UInt32)
-    set_debug_parameter : Proc(ID3D12DebugDevice1*, D3D12_DEBUG_DEVICE_PARAMETER_TYPE, Void*, UInt32, HRESULT)
-    get_debug_parameter : Proc(ID3D12DebugDevice1*, D3D12_DEBUG_DEVICE_PARAMETER_TYPE, Void*, UInt32, HRESULT)
-    report_live_device_objects : Proc(ID3D12DebugDevice1*, D3D12_RLDO_FLAGS, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_debug_parameter : UInt64
+    get_debug_parameter : UInt64
+    report_live_device_objects : UInt64
   end
 
   ID3D12DebugDevice1_GUID = "a9b71770-d099-4a65-a698-3dee10020f88"
@@ -6036,12 +6036,12 @@ lib LibWin32
   end
 
   struct ID3D12DebugDeviceVTbl
-    query_interface : Proc(ID3D12DebugDevice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12DebugDevice*, UInt32)
-    release : Proc(ID3D12DebugDevice*, UInt32)
-    set_feature_mask : Proc(ID3D12DebugDevice*, D3D12_DEBUG_FEATURE, HRESULT)
-    get_feature_mask : Proc(ID3D12DebugDevice*, D3D12_DEBUG_FEATURE)
-    report_live_device_objects : Proc(ID3D12DebugDevice*, D3D12_RLDO_FLAGS, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_feature_mask : UInt64
+    get_feature_mask : UInt64
+    report_live_device_objects : UInt64
   end
 
   ID3D12DebugDevice_GUID = "3febd6dd-4973-4787-8194-e45f9e28923e"
@@ -6051,14 +6051,14 @@ lib LibWin32
   end
 
   struct ID3D12DebugDevice2VTbl
-    query_interface : Proc(ID3D12DebugDevice2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12DebugDevice2*, UInt32)
-    release : Proc(ID3D12DebugDevice2*, UInt32)
-    set_feature_mask : Proc(ID3D12DebugDevice2*, D3D12_DEBUG_FEATURE, HRESULT)
-    get_feature_mask : Proc(ID3D12DebugDevice2*, D3D12_DEBUG_FEATURE)
-    report_live_device_objects : Proc(ID3D12DebugDevice2*, D3D12_RLDO_FLAGS, HRESULT)
-    set_debug_parameter : Proc(ID3D12DebugDevice2*, D3D12_DEBUG_DEVICE_PARAMETER_TYPE, Void*, UInt32, HRESULT)
-    get_debug_parameter : Proc(ID3D12DebugDevice2*, D3D12_DEBUG_DEVICE_PARAMETER_TYPE, Void*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_feature_mask : UInt64
+    get_feature_mask : UInt64
+    report_live_device_objects : UInt64
+    set_debug_parameter : UInt64
+    get_debug_parameter : UInt64
   end
 
   ID3D12DebugDevice2_GUID = "60eccbc1-378d-4df1-894c-f8ac5ce4d7dd"
@@ -6068,10 +6068,10 @@ lib LibWin32
   end
 
   struct ID3D12DebugCommandQueueVTbl
-    query_interface : Proc(ID3D12DebugCommandQueue*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12DebugCommandQueue*, UInt32)
-    release : Proc(ID3D12DebugCommandQueue*, UInt32)
-    assert_resource_state : Proc(ID3D12DebugCommandQueue*, ID3D12Resource, UInt32, UInt32, LibC::BOOL)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    assert_resource_state : UInt64
   end
 
   ID3D12DebugCommandQueue_GUID = "09e0bf36-54ac-484f-8847-4baeeab6053a"
@@ -6081,12 +6081,12 @@ lib LibWin32
   end
 
   struct ID3D12DebugCommandList1VTbl
-    query_interface : Proc(ID3D12DebugCommandList1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12DebugCommandList1*, UInt32)
-    release : Proc(ID3D12DebugCommandList1*, UInt32)
-    assert_resource_state : Proc(ID3D12DebugCommandList1*, ID3D12Resource, UInt32, UInt32, LibC::BOOL)
-    set_debug_parameter : Proc(ID3D12DebugCommandList1*, D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, Void*, UInt32, HRESULT)
-    get_debug_parameter : Proc(ID3D12DebugCommandList1*, D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, Void*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    assert_resource_state : UInt64
+    set_debug_parameter : UInt64
+    get_debug_parameter : UInt64
   end
 
   ID3D12DebugCommandList1_GUID = "102ca951-311b-4b01-b11f-ecb83e061b37"
@@ -6096,12 +6096,12 @@ lib LibWin32
   end
 
   struct ID3D12DebugCommandListVTbl
-    query_interface : Proc(ID3D12DebugCommandList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12DebugCommandList*, UInt32)
-    release : Proc(ID3D12DebugCommandList*, UInt32)
-    assert_resource_state : Proc(ID3D12DebugCommandList*, ID3D12Resource, UInt32, UInt32, LibC::BOOL)
-    set_feature_mask : Proc(ID3D12DebugCommandList*, D3D12_DEBUG_FEATURE, HRESULT)
-    get_feature_mask : Proc(ID3D12DebugCommandList*, D3D12_DEBUG_FEATURE)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    assert_resource_state : UInt64
+    set_feature_mask : UInt64
+    get_feature_mask : UInt64
   end
 
   ID3D12DebugCommandList_GUID = "09e0bf36-54ac-484f-8847-4baeeab6053f"
@@ -6111,14 +6111,14 @@ lib LibWin32
   end
 
   struct ID3D12DebugCommandList2VTbl
-    query_interface : Proc(ID3D12DebugCommandList2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12DebugCommandList2*, UInt32)
-    release : Proc(ID3D12DebugCommandList2*, UInt32)
-    assert_resource_state : Proc(ID3D12DebugCommandList2*, ID3D12Resource, UInt32, UInt32, LibC::BOOL)
-    set_feature_mask : Proc(ID3D12DebugCommandList2*, D3D12_DEBUG_FEATURE, HRESULT)
-    get_feature_mask : Proc(ID3D12DebugCommandList2*, D3D12_DEBUG_FEATURE)
-    set_debug_parameter : Proc(ID3D12DebugCommandList2*, D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, Void*, UInt32, HRESULT)
-    get_debug_parameter : Proc(ID3D12DebugCommandList2*, D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, Void*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    assert_resource_state : UInt64
+    set_feature_mask : UInt64
+    get_feature_mask : UInt64
+    set_debug_parameter : UInt64
+    get_debug_parameter : UInt64
   end
 
   ID3D12DebugCommandList2_GUID = "aeb575cf-4e06-48be-ba3b-c450fc96652e"
@@ -6128,13 +6128,13 @@ lib LibWin32
   end
 
   struct ID3D12SharingContractVTbl
-    query_interface : Proc(ID3D12SharingContract*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12SharingContract*, UInt32)
-    release : Proc(ID3D12SharingContract*, UInt32)
-    present : Proc(ID3D12SharingContract*, ID3D12Resource, UInt32, LibC::HANDLE, Void)
-    shared_fence_signal : Proc(ID3D12SharingContract*, ID3D12Fence, UInt64, Void)
-    begin_capturable_work : Proc(ID3D12SharingContract*, Guid*, Void)
-    end_capturable_work : Proc(ID3D12SharingContract*, Guid*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    present : UInt64
+    shared_fence_signal : UInt64
+    begin_capturable_work : UInt64
+    end_capturable_work : UInt64
   end
 
   ID3D12SharingContract_GUID = "0adf7d52-929c-4e61-addb-ffed30de66ef"
@@ -6144,44 +6144,44 @@ lib LibWin32
   end
 
   struct ID3D12InfoQueueVTbl
-    query_interface : Proc(ID3D12InfoQueue*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12InfoQueue*, UInt32)
-    release : Proc(ID3D12InfoQueue*, UInt32)
-    set_message_count_limit : Proc(ID3D12InfoQueue*, UInt64, HRESULT)
-    clear_stored_messages : Proc(ID3D12InfoQueue*, Void)
-    get_message : Proc(ID3D12InfoQueue*, UInt64, D3D12_MESSAGE*, LibC::UINT_PTR*, HRESULT)
-    get_num_messages_allowed_by_storage_filter : Proc(ID3D12InfoQueue*, UInt64)
-    get_num_messages_denied_by_storage_filter : Proc(ID3D12InfoQueue*, UInt64)
-    get_num_stored_messages : Proc(ID3D12InfoQueue*, UInt64)
-    get_num_stored_messages_allowed_by_retrieval_filter : Proc(ID3D12InfoQueue*, UInt64)
-    get_num_messages_discarded_by_message_count_limit : Proc(ID3D12InfoQueue*, UInt64)
-    get_message_count_limit : Proc(ID3D12InfoQueue*, UInt64)
-    add_storage_filter_entries : Proc(ID3D12InfoQueue*, D3D12_INFO_QUEUE_FILTER*, HRESULT)
-    get_storage_filter : Proc(ID3D12InfoQueue*, D3D12_INFO_QUEUE_FILTER*, LibC::UINT_PTR*, HRESULT)
-    clear_storage_filter : Proc(ID3D12InfoQueue*, Void)
-    push_empty_storage_filter : Proc(ID3D12InfoQueue*, HRESULT)
-    push_copy_of_storage_filter : Proc(ID3D12InfoQueue*, HRESULT)
-    push_storage_filter : Proc(ID3D12InfoQueue*, D3D12_INFO_QUEUE_FILTER*, HRESULT)
-    pop_storage_filter : Proc(ID3D12InfoQueue*, Void)
-    get_storage_filter_stack_size : Proc(ID3D12InfoQueue*, UInt32)
-    add_retrieval_filter_entries : Proc(ID3D12InfoQueue*, D3D12_INFO_QUEUE_FILTER*, HRESULT)
-    get_retrieval_filter : Proc(ID3D12InfoQueue*, D3D12_INFO_QUEUE_FILTER*, LibC::UINT_PTR*, HRESULT)
-    clear_retrieval_filter : Proc(ID3D12InfoQueue*, Void)
-    push_empty_retrieval_filter : Proc(ID3D12InfoQueue*, HRESULT)
-    push_copy_of_retrieval_filter : Proc(ID3D12InfoQueue*, HRESULT)
-    push_retrieval_filter : Proc(ID3D12InfoQueue*, D3D12_INFO_QUEUE_FILTER*, HRESULT)
-    pop_retrieval_filter : Proc(ID3D12InfoQueue*, Void)
-    get_retrieval_filter_stack_size : Proc(ID3D12InfoQueue*, UInt32)
-    add_message : Proc(ID3D12InfoQueue*, D3D12_MESSAGE_CATEGORY, D3D12_MESSAGE_SEVERITY, D3D12_MESSAGE_ID, PSTR, HRESULT)
-    add_application_message : Proc(ID3D12InfoQueue*, D3D12_MESSAGE_SEVERITY, PSTR, HRESULT)
-    set_break_on_category : Proc(ID3D12InfoQueue*, D3D12_MESSAGE_CATEGORY, LibC::BOOL, HRESULT)
-    set_break_on_severity : Proc(ID3D12InfoQueue*, D3D12_MESSAGE_SEVERITY, LibC::BOOL, HRESULT)
-    set_break_on_id : Proc(ID3D12InfoQueue*, D3D12_MESSAGE_ID, LibC::BOOL, HRESULT)
-    get_break_on_category : Proc(ID3D12InfoQueue*, D3D12_MESSAGE_CATEGORY, LibC::BOOL)
-    get_break_on_severity : Proc(ID3D12InfoQueue*, D3D12_MESSAGE_SEVERITY, LibC::BOOL)
-    get_break_on_id : Proc(ID3D12InfoQueue*, D3D12_MESSAGE_ID, LibC::BOOL)
-    set_mute_debug_output : Proc(ID3D12InfoQueue*, LibC::BOOL, Void)
-    get_mute_debug_output : Proc(ID3D12InfoQueue*, LibC::BOOL)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_message_count_limit : UInt64
+    clear_stored_messages : UInt64
+    get_message : UInt64
+    get_num_messages_allowed_by_storage_filter : UInt64
+    get_num_messages_denied_by_storage_filter : UInt64
+    get_num_stored_messages : UInt64
+    get_num_stored_messages_allowed_by_retrieval_filter : UInt64
+    get_num_messages_discarded_by_message_count_limit : UInt64
+    get_message_count_limit : UInt64
+    add_storage_filter_entries : UInt64
+    get_storage_filter : UInt64
+    clear_storage_filter : UInt64
+    push_empty_storage_filter : UInt64
+    push_copy_of_storage_filter : UInt64
+    push_storage_filter : UInt64
+    pop_storage_filter : UInt64
+    get_storage_filter_stack_size : UInt64
+    add_retrieval_filter_entries : UInt64
+    get_retrieval_filter : UInt64
+    clear_retrieval_filter : UInt64
+    push_empty_retrieval_filter : UInt64
+    push_copy_of_retrieval_filter : UInt64
+    push_retrieval_filter : UInt64
+    pop_retrieval_filter : UInt64
+    get_retrieval_filter_stack_size : UInt64
+    add_message : UInt64
+    add_application_message : UInt64
+    set_break_on_category : UInt64
+    set_break_on_severity : UInt64
+    set_break_on_id : UInt64
+    get_break_on_category : UInt64
+    get_break_on_severity : UInt64
+    get_break_on_id : UInt64
+    set_mute_debug_output : UInt64
+    get_mute_debug_output : UInt64
   end
 
   ID3D12InfoQueue_GUID = "0742a90b-c387-483f-b946-30a7e4e61458"
@@ -6191,46 +6191,46 @@ lib LibWin32
   end
 
   struct ID3D12InfoQueue1VTbl
-    query_interface : Proc(ID3D12InfoQueue1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12InfoQueue1*, UInt32)
-    release : Proc(ID3D12InfoQueue1*, UInt32)
-    set_message_count_limit : Proc(ID3D12InfoQueue1*, UInt64, HRESULT)
-    clear_stored_messages : Proc(ID3D12InfoQueue1*, Void)
-    get_message : Proc(ID3D12InfoQueue1*, UInt64, D3D12_MESSAGE*, LibC::UINT_PTR*, HRESULT)
-    get_num_messages_allowed_by_storage_filter : Proc(ID3D12InfoQueue1*, UInt64)
-    get_num_messages_denied_by_storage_filter : Proc(ID3D12InfoQueue1*, UInt64)
-    get_num_stored_messages : Proc(ID3D12InfoQueue1*, UInt64)
-    get_num_stored_messages_allowed_by_retrieval_filter : Proc(ID3D12InfoQueue1*, UInt64)
-    get_num_messages_discarded_by_message_count_limit : Proc(ID3D12InfoQueue1*, UInt64)
-    get_message_count_limit : Proc(ID3D12InfoQueue1*, UInt64)
-    add_storage_filter_entries : Proc(ID3D12InfoQueue1*, D3D12_INFO_QUEUE_FILTER*, HRESULT)
-    get_storage_filter : Proc(ID3D12InfoQueue1*, D3D12_INFO_QUEUE_FILTER*, LibC::UINT_PTR*, HRESULT)
-    clear_storage_filter : Proc(ID3D12InfoQueue1*, Void)
-    push_empty_storage_filter : Proc(ID3D12InfoQueue1*, HRESULT)
-    push_copy_of_storage_filter : Proc(ID3D12InfoQueue1*, HRESULT)
-    push_storage_filter : Proc(ID3D12InfoQueue1*, D3D12_INFO_QUEUE_FILTER*, HRESULT)
-    pop_storage_filter : Proc(ID3D12InfoQueue1*, Void)
-    get_storage_filter_stack_size : Proc(ID3D12InfoQueue1*, UInt32)
-    add_retrieval_filter_entries : Proc(ID3D12InfoQueue1*, D3D12_INFO_QUEUE_FILTER*, HRESULT)
-    get_retrieval_filter : Proc(ID3D12InfoQueue1*, D3D12_INFO_QUEUE_FILTER*, LibC::UINT_PTR*, HRESULT)
-    clear_retrieval_filter : Proc(ID3D12InfoQueue1*, Void)
-    push_empty_retrieval_filter : Proc(ID3D12InfoQueue1*, HRESULT)
-    push_copy_of_retrieval_filter : Proc(ID3D12InfoQueue1*, HRESULT)
-    push_retrieval_filter : Proc(ID3D12InfoQueue1*, D3D12_INFO_QUEUE_FILTER*, HRESULT)
-    pop_retrieval_filter : Proc(ID3D12InfoQueue1*, Void)
-    get_retrieval_filter_stack_size : Proc(ID3D12InfoQueue1*, UInt32)
-    add_message : Proc(ID3D12InfoQueue1*, D3D12_MESSAGE_CATEGORY, D3D12_MESSAGE_SEVERITY, D3D12_MESSAGE_ID, PSTR, HRESULT)
-    add_application_message : Proc(ID3D12InfoQueue1*, D3D12_MESSAGE_SEVERITY, PSTR, HRESULT)
-    set_break_on_category : Proc(ID3D12InfoQueue1*, D3D12_MESSAGE_CATEGORY, LibC::BOOL, HRESULT)
-    set_break_on_severity : Proc(ID3D12InfoQueue1*, D3D12_MESSAGE_SEVERITY, LibC::BOOL, HRESULT)
-    set_break_on_id : Proc(ID3D12InfoQueue1*, D3D12_MESSAGE_ID, LibC::BOOL, HRESULT)
-    get_break_on_category : Proc(ID3D12InfoQueue1*, D3D12_MESSAGE_CATEGORY, LibC::BOOL)
-    get_break_on_severity : Proc(ID3D12InfoQueue1*, D3D12_MESSAGE_SEVERITY, LibC::BOOL)
-    get_break_on_id : Proc(ID3D12InfoQueue1*, D3D12_MESSAGE_ID, LibC::BOOL)
-    set_mute_debug_output : Proc(ID3D12InfoQueue1*, LibC::BOOL, Void)
-    get_mute_debug_output : Proc(ID3D12InfoQueue1*, LibC::BOOL)
-    register_message_callback : Proc(ID3D12InfoQueue1*, D3D12MessageFunc, D3D12_MESSAGE_CALLBACK_FLAGS, Void*, UInt32*, HRESULT)
-    unregister_message_callback : Proc(ID3D12InfoQueue1*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_message_count_limit : UInt64
+    clear_stored_messages : UInt64
+    get_message : UInt64
+    get_num_messages_allowed_by_storage_filter : UInt64
+    get_num_messages_denied_by_storage_filter : UInt64
+    get_num_stored_messages : UInt64
+    get_num_stored_messages_allowed_by_retrieval_filter : UInt64
+    get_num_messages_discarded_by_message_count_limit : UInt64
+    get_message_count_limit : UInt64
+    add_storage_filter_entries : UInt64
+    get_storage_filter : UInt64
+    clear_storage_filter : UInt64
+    push_empty_storage_filter : UInt64
+    push_copy_of_storage_filter : UInt64
+    push_storage_filter : UInt64
+    pop_storage_filter : UInt64
+    get_storage_filter_stack_size : UInt64
+    add_retrieval_filter_entries : UInt64
+    get_retrieval_filter : UInt64
+    clear_retrieval_filter : UInt64
+    push_empty_retrieval_filter : UInt64
+    push_copy_of_retrieval_filter : UInt64
+    push_retrieval_filter : UInt64
+    pop_retrieval_filter : UInt64
+    get_retrieval_filter_stack_size : UInt64
+    add_message : UInt64
+    add_application_message : UInt64
+    set_break_on_category : UInt64
+    set_break_on_severity : UInt64
+    set_break_on_id : UInt64
+    get_break_on_category : UInt64
+    get_break_on_severity : UInt64
+    get_break_on_id : UInt64
+    set_mute_debug_output : UInt64
+    get_mute_debug_output : UInt64
+    register_message_callback : UInt64
+    unregister_message_callback : UInt64
   end
 
   ID3D12InfoQueue1_GUID = "2852dd88-b484-4c0c-b6b1-67168500e600"
@@ -6240,10 +6240,10 @@ lib LibWin32
   end
 
   struct ID3D12SDKConfigurationVTbl
-    query_interface : Proc(ID3D12SDKConfiguration*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12SDKConfiguration*, UInt32)
-    release : Proc(ID3D12SDKConfiguration*, UInt32)
-    set_sdk_version : Proc(ID3D12SDKConfiguration*, UInt32, PSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_sdk_version : UInt64
   end
 
   ID3D12SDKConfiguration_GUID = "e9eb5314-33aa-42b2-a718-d77f58b1f1c7"
@@ -6253,85 +6253,85 @@ lib LibWin32
   end
 
   struct ID3D12GraphicsCommandList5VTbl
-    query_interface : Proc(ID3D12GraphicsCommandList5*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12GraphicsCommandList5*, UInt32)
-    release : Proc(ID3D12GraphicsCommandList5*, UInt32)
-    get_private_data : Proc(ID3D12GraphicsCommandList5*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12GraphicsCommandList5*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12GraphicsCommandList5*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12GraphicsCommandList5*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12GraphicsCommandList5*, Guid*, Void**, HRESULT)
-    get_type : Proc(ID3D12GraphicsCommandList5*, D3D12_COMMAND_LIST_TYPE)
-    close : Proc(ID3D12GraphicsCommandList5*, HRESULT)
-    reset : Proc(ID3D12GraphicsCommandList5*, ID3D12CommandAllocator, ID3D12PipelineState, HRESULT)
-    clear_state : Proc(ID3D12GraphicsCommandList5*, ID3D12PipelineState, Void)
-    draw_instanced : Proc(ID3D12GraphicsCommandList5*, UInt32, UInt32, UInt32, UInt32, Void)
-    draw_indexed_instanced : Proc(ID3D12GraphicsCommandList5*, UInt32, UInt32, UInt32, Int32, UInt32, Void)
-    dispatch : Proc(ID3D12GraphicsCommandList5*, UInt32, UInt32, UInt32, Void)
-    copy_buffer_region : Proc(ID3D12GraphicsCommandList5*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt64, Void)
-    copy_texture_region : Proc(ID3D12GraphicsCommandList5*, D3D12_TEXTURE_COPY_LOCATION*, UInt32, UInt32, UInt32, D3D12_TEXTURE_COPY_LOCATION*, D3D12_BOX*, Void)
-    copy_resource : Proc(ID3D12GraphicsCommandList5*, ID3D12Resource, ID3D12Resource, Void)
-    copy_tiles : Proc(ID3D12GraphicsCommandList5*, ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, ID3D12Resource, UInt64, D3D12_TILE_COPY_FLAGS, Void)
-    resolve_subresource : Proc(ID3D12GraphicsCommandList5*, ID3D12Resource, UInt32, ID3D12Resource, UInt32, DXGI_FORMAT, Void)
-    ia_set_primitive_topology : Proc(ID3D12GraphicsCommandList5*, D3D_PRIMITIVE_TOPOLOGY, Void)
-    rs_set_viewports : Proc(ID3D12GraphicsCommandList5*, UInt32, D3D12_VIEWPORT*, Void)
-    rs_set_scissor_rects : Proc(ID3D12GraphicsCommandList5*, UInt32, RECT*, Void)
-    om_set_blend_factor : Proc(ID3D12GraphicsCommandList5*, Float32*, Void)
-    om_set_stencil_ref : Proc(ID3D12GraphicsCommandList5*, UInt32, Void)
-    set_pipeline_state : Proc(ID3D12GraphicsCommandList5*, ID3D12PipelineState, Void)
-    resource_barrier : Proc(ID3D12GraphicsCommandList5*, UInt32, D3D12_RESOURCE_BARRIER*, Void)
-    execute_bundle : Proc(ID3D12GraphicsCommandList5*, ID3D12GraphicsCommandList, Void)
-    set_descriptor_heaps : Proc(ID3D12GraphicsCommandList5*, UInt32, ID3D12DescriptorHeap*, Void)
-    set_compute_root_signature : Proc(ID3D12GraphicsCommandList5*, ID3D12RootSignature, Void)
-    set_graphics_root_signature : Proc(ID3D12GraphicsCommandList5*, ID3D12RootSignature, Void)
-    set_compute_root_descriptor_table : Proc(ID3D12GraphicsCommandList5*, UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)
-    set_graphics_root_descriptor_table : Proc(ID3D12GraphicsCommandList5*, UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)
-    set_compute_root32_bit_constant : Proc(ID3D12GraphicsCommandList5*, UInt32, UInt32, UInt32, Void)
-    set_graphics_root32_bit_constant : Proc(ID3D12GraphicsCommandList5*, UInt32, UInt32, UInt32, Void)
-    set_compute_root32_bit_constants : Proc(ID3D12GraphicsCommandList5*, UInt32, UInt32, Void*, UInt32, Void)
-    set_graphics_root32_bit_constants : Proc(ID3D12GraphicsCommandList5*, UInt32, UInt32, Void*, UInt32, Void)
-    set_compute_root_constant_buffer_view : Proc(ID3D12GraphicsCommandList5*, UInt32, UInt64, Void)
-    set_graphics_root_constant_buffer_view : Proc(ID3D12GraphicsCommandList5*, UInt32, UInt64, Void)
-    set_compute_root_shader_resource_view : Proc(ID3D12GraphicsCommandList5*, UInt32, UInt64, Void)
-    set_graphics_root_shader_resource_view : Proc(ID3D12GraphicsCommandList5*, UInt32, UInt64, Void)
-    set_compute_root_unordered_access_view : Proc(ID3D12GraphicsCommandList5*, UInt32, UInt64, Void)
-    set_graphics_root_unordered_access_view : Proc(ID3D12GraphicsCommandList5*, UInt32, UInt64, Void)
-    ia_set_index_buffer : Proc(ID3D12GraphicsCommandList5*, D3D12_INDEX_BUFFER_VIEW*, Void)
-    ia_set_vertex_buffers : Proc(ID3D12GraphicsCommandList5*, UInt32, UInt32, D3D12_VERTEX_BUFFER_VIEW*, Void)
-    so_set_targets : Proc(ID3D12GraphicsCommandList5*, UInt32, UInt32, D3D12_STREAM_OUTPUT_BUFFER_VIEW*, Void)
-    om_set_render_targets : Proc(ID3D12GraphicsCommandList5*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, LibC::BOOL, D3D12_CPU_DESCRIPTOR_HANDLE*, Void)
-    clear_depth_stencil_view : Proc(ID3D12GraphicsCommandList5*, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CLEAR_FLAGS, Float32, UInt8, UInt32, RECT*, Void)
-    clear_render_target_view : Proc(ID3D12GraphicsCommandList5*, D3D12_CPU_DESCRIPTOR_HANDLE, Float32*, UInt32, RECT*, Void)
-    clear_unordered_access_view_uint : Proc(ID3D12GraphicsCommandList5*, D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, UInt32*, UInt32, RECT*, Void)
-    clear_unordered_access_view_float : Proc(ID3D12GraphicsCommandList5*, D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, Float32*, UInt32, RECT*, Void)
-    discard_resource : Proc(ID3D12GraphicsCommandList5*, ID3D12Resource, D3D12_DISCARD_REGION*, Void)
-    begin_query : Proc(ID3D12GraphicsCommandList5*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)
-    end_query : Proc(ID3D12GraphicsCommandList5*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)
-    resolve_query_data : Proc(ID3D12GraphicsCommandList5*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, UInt32, ID3D12Resource, UInt64, Void)
-    set_predication : Proc(ID3D12GraphicsCommandList5*, ID3D12Resource, UInt64, D3D12_PREDICATION_OP, Void)
-    set_marker : Proc(ID3D12GraphicsCommandList5*, UInt32, Void*, UInt32, Void)
-    begin_event : Proc(ID3D12GraphicsCommandList5*, UInt32, Void*, UInt32, Void)
-    end_event : Proc(ID3D12GraphicsCommandList5*, Void)
-    execute_indirect : Proc(ID3D12GraphicsCommandList5*, ID3D12CommandSignature, UInt32, ID3D12Resource, UInt64, ID3D12Resource, UInt64, Void)
-    atomic_copy_buffer_uint : Proc(ID3D12GraphicsCommandList5*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)
-    atomic_copy_buffer_uint64 : Proc(ID3D12GraphicsCommandList5*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)
-    om_set_depth_bounds : Proc(ID3D12GraphicsCommandList5*, Float32, Float32, Void)
-    set_sample_positions : Proc(ID3D12GraphicsCommandList5*, UInt32, UInt32, D3D12_SAMPLE_POSITION*, Void)
-    resolve_subresource_region : Proc(ID3D12GraphicsCommandList5*, ID3D12Resource, UInt32, UInt32, UInt32, ID3D12Resource, UInt32, RECT*, DXGI_FORMAT, D3D12_RESOLVE_MODE, Void)
-    set_view_instance_mask : Proc(ID3D12GraphicsCommandList5*, UInt32, Void)
-    write_buffer_immediate : Proc(ID3D12GraphicsCommandList5*, UInt32, D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void)
-    set_protected_resource_session : Proc(ID3D12GraphicsCommandList5*, ID3D12ProtectedResourceSession, Void)
-    begin_render_pass : Proc(ID3D12GraphicsCommandList5*, UInt32, D3D12_RENDER_PASS_RENDER_TARGET_DESC*, D3D12_RENDER_PASS_DEPTH_STENCIL_DESC*, D3D12_RENDER_PASS_FLAGS, Void)
-    end_render_pass : Proc(ID3D12GraphicsCommandList5*, Void)
-    initialize_meta_command : Proc(ID3D12GraphicsCommandList5*, ID3D12MetaCommand, Void*, LibC::UINT_PTR, Void)
-    execute_meta_command : Proc(ID3D12GraphicsCommandList5*, ID3D12MetaCommand, Void*, LibC::UINT_PTR, Void)
-    build_raytracing_acceleration_structure : Proc(ID3D12GraphicsCommandList5*, D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC*, UInt32, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*, Void)
-    emit_raytracing_acceleration_structure_postbuild_info : Proc(ID3D12GraphicsCommandList5*, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*, UInt32, UInt64*, Void)
-    copy_raytracing_acceleration_structure : Proc(ID3D12GraphicsCommandList5*, UInt64, UInt64, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE, Void)
-    set_pipeline_state1 : Proc(ID3D12GraphicsCommandList5*, ID3D12StateObject, Void)
-    dispatch_rays : Proc(ID3D12GraphicsCommandList5*, D3D12_DISPATCH_RAYS_DESC*, Void)
-    rs_set_shading_rate : Proc(ID3D12GraphicsCommandList5*, D3D12_SHADING_RATE, D3D12_SHADING_RATE_COMBINER*, Void)
-    rs_set_shading_rate_image : Proc(ID3D12GraphicsCommandList5*, ID3D12Resource, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_type : UInt64
+    close : UInt64
+    reset : UInt64
+    clear_state : UInt64
+    draw_instanced : UInt64
+    draw_indexed_instanced : UInt64
+    dispatch : UInt64
+    copy_buffer_region : UInt64
+    copy_texture_region : UInt64
+    copy_resource : UInt64
+    copy_tiles : UInt64
+    resolve_subresource : UInt64
+    ia_set_primitive_topology : UInt64
+    rs_set_viewports : UInt64
+    rs_set_scissor_rects : UInt64
+    om_set_blend_factor : UInt64
+    om_set_stencil_ref : UInt64
+    set_pipeline_state : UInt64
+    resource_barrier : UInt64
+    execute_bundle : UInt64
+    set_descriptor_heaps : UInt64
+    set_compute_root_signature : UInt64
+    set_graphics_root_signature : UInt64
+    set_compute_root_descriptor_table : UInt64
+    set_graphics_root_descriptor_table : UInt64
+    set_compute_root32_bit_constant : UInt64
+    set_graphics_root32_bit_constant : UInt64
+    set_compute_root32_bit_constants : UInt64
+    set_graphics_root32_bit_constants : UInt64
+    set_compute_root_constant_buffer_view : UInt64
+    set_graphics_root_constant_buffer_view : UInt64
+    set_compute_root_shader_resource_view : UInt64
+    set_graphics_root_shader_resource_view : UInt64
+    set_compute_root_unordered_access_view : UInt64
+    set_graphics_root_unordered_access_view : UInt64
+    ia_set_index_buffer : UInt64
+    ia_set_vertex_buffers : UInt64
+    so_set_targets : UInt64
+    om_set_render_targets : UInt64
+    clear_depth_stencil_view : UInt64
+    clear_render_target_view : UInt64
+    clear_unordered_access_view_uint : UInt64
+    clear_unordered_access_view_float : UInt64
+    discard_resource : UInt64
+    begin_query : UInt64
+    end_query : UInt64
+    resolve_query_data : UInt64
+    set_predication : UInt64
+    set_marker : UInt64
+    begin_event : UInt64
+    end_event : UInt64
+    execute_indirect : UInt64
+    atomic_copy_buffer_uint : UInt64
+    atomic_copy_buffer_uint64 : UInt64
+    om_set_depth_bounds : UInt64
+    set_sample_positions : UInt64
+    resolve_subresource_region : UInt64
+    set_view_instance_mask : UInt64
+    write_buffer_immediate : UInt64
+    set_protected_resource_session : UInt64
+    begin_render_pass : UInt64
+    end_render_pass : UInt64
+    initialize_meta_command : UInt64
+    execute_meta_command : UInt64
+    build_raytracing_acceleration_structure : UInt64
+    emit_raytracing_acceleration_structure_postbuild_info : UInt64
+    copy_raytracing_acceleration_structure : UInt64
+    set_pipeline_state1 : UInt64
+    dispatch_rays : UInt64
+    rs_set_shading_rate : UInt64
+    rs_set_shading_rate_image : UInt64
   end
 
   ID3D12GraphicsCommandList5_GUID = "55050859-4024-474c-87f5-6472eaee44ea"
@@ -6341,86 +6341,86 @@ lib LibWin32
   end
 
   struct ID3D12GraphicsCommandList6VTbl
-    query_interface : Proc(ID3D12GraphicsCommandList6*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12GraphicsCommandList6*, UInt32)
-    release : Proc(ID3D12GraphicsCommandList6*, UInt32)
-    get_private_data : Proc(ID3D12GraphicsCommandList6*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D12GraphicsCommandList6*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D12GraphicsCommandList6*, Guid*, IUnknown, HRESULT)
-    set_name : Proc(ID3D12GraphicsCommandList6*, LibC::LPWSTR, HRESULT)
-    get_device : Proc(ID3D12GraphicsCommandList6*, Guid*, Void**, HRESULT)
-    get_type : Proc(ID3D12GraphicsCommandList6*, D3D12_COMMAND_LIST_TYPE)
-    close : Proc(ID3D12GraphicsCommandList6*, HRESULT)
-    reset : Proc(ID3D12GraphicsCommandList6*, ID3D12CommandAllocator, ID3D12PipelineState, HRESULT)
-    clear_state : Proc(ID3D12GraphicsCommandList6*, ID3D12PipelineState, Void)
-    draw_instanced : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt32, UInt32, UInt32, Void)
-    draw_indexed_instanced : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt32, UInt32, Int32, UInt32, Void)
-    dispatch : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt32, UInt32, Void)
-    copy_buffer_region : Proc(ID3D12GraphicsCommandList6*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt64, Void)
-    copy_texture_region : Proc(ID3D12GraphicsCommandList6*, D3D12_TEXTURE_COPY_LOCATION*, UInt32, UInt32, UInt32, D3D12_TEXTURE_COPY_LOCATION*, D3D12_BOX*, Void)
-    copy_resource : Proc(ID3D12GraphicsCommandList6*, ID3D12Resource, ID3D12Resource, Void)
-    copy_tiles : Proc(ID3D12GraphicsCommandList6*, ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, ID3D12Resource, UInt64, D3D12_TILE_COPY_FLAGS, Void)
-    resolve_subresource : Proc(ID3D12GraphicsCommandList6*, ID3D12Resource, UInt32, ID3D12Resource, UInt32, DXGI_FORMAT, Void)
-    ia_set_primitive_topology : Proc(ID3D12GraphicsCommandList6*, D3D_PRIMITIVE_TOPOLOGY, Void)
-    rs_set_viewports : Proc(ID3D12GraphicsCommandList6*, UInt32, D3D12_VIEWPORT*, Void)
-    rs_set_scissor_rects : Proc(ID3D12GraphicsCommandList6*, UInt32, RECT*, Void)
-    om_set_blend_factor : Proc(ID3D12GraphicsCommandList6*, Float32*, Void)
-    om_set_stencil_ref : Proc(ID3D12GraphicsCommandList6*, UInt32, Void)
-    set_pipeline_state : Proc(ID3D12GraphicsCommandList6*, ID3D12PipelineState, Void)
-    resource_barrier : Proc(ID3D12GraphicsCommandList6*, UInt32, D3D12_RESOURCE_BARRIER*, Void)
-    execute_bundle : Proc(ID3D12GraphicsCommandList6*, ID3D12GraphicsCommandList, Void)
-    set_descriptor_heaps : Proc(ID3D12GraphicsCommandList6*, UInt32, ID3D12DescriptorHeap*, Void)
-    set_compute_root_signature : Proc(ID3D12GraphicsCommandList6*, ID3D12RootSignature, Void)
-    set_graphics_root_signature : Proc(ID3D12GraphicsCommandList6*, ID3D12RootSignature, Void)
-    set_compute_root_descriptor_table : Proc(ID3D12GraphicsCommandList6*, UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)
-    set_graphics_root_descriptor_table : Proc(ID3D12GraphicsCommandList6*, UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)
-    set_compute_root32_bit_constant : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt32, UInt32, Void)
-    set_graphics_root32_bit_constant : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt32, UInt32, Void)
-    set_compute_root32_bit_constants : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt32, Void*, UInt32, Void)
-    set_graphics_root32_bit_constants : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt32, Void*, UInt32, Void)
-    set_compute_root_constant_buffer_view : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt64, Void)
-    set_graphics_root_constant_buffer_view : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt64, Void)
-    set_compute_root_shader_resource_view : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt64, Void)
-    set_graphics_root_shader_resource_view : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt64, Void)
-    set_compute_root_unordered_access_view : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt64, Void)
-    set_graphics_root_unordered_access_view : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt64, Void)
-    ia_set_index_buffer : Proc(ID3D12GraphicsCommandList6*, D3D12_INDEX_BUFFER_VIEW*, Void)
-    ia_set_vertex_buffers : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt32, D3D12_VERTEX_BUFFER_VIEW*, Void)
-    so_set_targets : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt32, D3D12_STREAM_OUTPUT_BUFFER_VIEW*, Void)
-    om_set_render_targets : Proc(ID3D12GraphicsCommandList6*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, LibC::BOOL, D3D12_CPU_DESCRIPTOR_HANDLE*, Void)
-    clear_depth_stencil_view : Proc(ID3D12GraphicsCommandList6*, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CLEAR_FLAGS, Float32, UInt8, UInt32, RECT*, Void)
-    clear_render_target_view : Proc(ID3D12GraphicsCommandList6*, D3D12_CPU_DESCRIPTOR_HANDLE, Float32*, UInt32, RECT*, Void)
-    clear_unordered_access_view_uint : Proc(ID3D12GraphicsCommandList6*, D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, UInt32*, UInt32, RECT*, Void)
-    clear_unordered_access_view_float : Proc(ID3D12GraphicsCommandList6*, D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, Float32*, UInt32, RECT*, Void)
-    discard_resource : Proc(ID3D12GraphicsCommandList6*, ID3D12Resource, D3D12_DISCARD_REGION*, Void)
-    begin_query : Proc(ID3D12GraphicsCommandList6*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)
-    end_query : Proc(ID3D12GraphicsCommandList6*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)
-    resolve_query_data : Proc(ID3D12GraphicsCommandList6*, ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, UInt32, ID3D12Resource, UInt64, Void)
-    set_predication : Proc(ID3D12GraphicsCommandList6*, ID3D12Resource, UInt64, D3D12_PREDICATION_OP, Void)
-    set_marker : Proc(ID3D12GraphicsCommandList6*, UInt32, Void*, UInt32, Void)
-    begin_event : Proc(ID3D12GraphicsCommandList6*, UInt32, Void*, UInt32, Void)
-    end_event : Proc(ID3D12GraphicsCommandList6*, Void)
-    execute_indirect : Proc(ID3D12GraphicsCommandList6*, ID3D12CommandSignature, UInt32, ID3D12Resource, UInt64, ID3D12Resource, UInt64, Void)
-    atomic_copy_buffer_uint : Proc(ID3D12GraphicsCommandList6*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)
-    atomic_copy_buffer_uint64 : Proc(ID3D12GraphicsCommandList6*, ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)
-    om_set_depth_bounds : Proc(ID3D12GraphicsCommandList6*, Float32, Float32, Void)
-    set_sample_positions : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt32, D3D12_SAMPLE_POSITION*, Void)
-    resolve_subresource_region : Proc(ID3D12GraphicsCommandList6*, ID3D12Resource, UInt32, UInt32, UInt32, ID3D12Resource, UInt32, RECT*, DXGI_FORMAT, D3D12_RESOLVE_MODE, Void)
-    set_view_instance_mask : Proc(ID3D12GraphicsCommandList6*, UInt32, Void)
-    write_buffer_immediate : Proc(ID3D12GraphicsCommandList6*, UInt32, D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void)
-    set_protected_resource_session : Proc(ID3D12GraphicsCommandList6*, ID3D12ProtectedResourceSession, Void)
-    begin_render_pass : Proc(ID3D12GraphicsCommandList6*, UInt32, D3D12_RENDER_PASS_RENDER_TARGET_DESC*, D3D12_RENDER_PASS_DEPTH_STENCIL_DESC*, D3D12_RENDER_PASS_FLAGS, Void)
-    end_render_pass : Proc(ID3D12GraphicsCommandList6*, Void)
-    initialize_meta_command : Proc(ID3D12GraphicsCommandList6*, ID3D12MetaCommand, Void*, LibC::UINT_PTR, Void)
-    execute_meta_command : Proc(ID3D12GraphicsCommandList6*, ID3D12MetaCommand, Void*, LibC::UINT_PTR, Void)
-    build_raytracing_acceleration_structure : Proc(ID3D12GraphicsCommandList6*, D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC*, UInt32, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*, Void)
-    emit_raytracing_acceleration_structure_postbuild_info : Proc(ID3D12GraphicsCommandList6*, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*, UInt32, UInt64*, Void)
-    copy_raytracing_acceleration_structure : Proc(ID3D12GraphicsCommandList6*, UInt64, UInt64, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE, Void)
-    set_pipeline_state1 : Proc(ID3D12GraphicsCommandList6*, ID3D12StateObject, Void)
-    dispatch_rays : Proc(ID3D12GraphicsCommandList6*, D3D12_DISPATCH_RAYS_DESC*, Void)
-    rs_set_shading_rate : Proc(ID3D12GraphicsCommandList6*, D3D12_SHADING_RATE, D3D12_SHADING_RATE_COMBINER*, Void)
-    rs_set_shading_rate_image : Proc(ID3D12GraphicsCommandList6*, ID3D12Resource, Void)
-    dispatch_mesh : Proc(ID3D12GraphicsCommandList6*, UInt32, UInt32, UInt32, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    set_name : UInt64
+    get_device : UInt64
+    get_type : UInt64
+    close : UInt64
+    reset : UInt64
+    clear_state : UInt64
+    draw_instanced : UInt64
+    draw_indexed_instanced : UInt64
+    dispatch : UInt64
+    copy_buffer_region : UInt64
+    copy_texture_region : UInt64
+    copy_resource : UInt64
+    copy_tiles : UInt64
+    resolve_subresource : UInt64
+    ia_set_primitive_topology : UInt64
+    rs_set_viewports : UInt64
+    rs_set_scissor_rects : UInt64
+    om_set_blend_factor : UInt64
+    om_set_stencil_ref : UInt64
+    set_pipeline_state : UInt64
+    resource_barrier : UInt64
+    execute_bundle : UInt64
+    set_descriptor_heaps : UInt64
+    set_compute_root_signature : UInt64
+    set_graphics_root_signature : UInt64
+    set_compute_root_descriptor_table : UInt64
+    set_graphics_root_descriptor_table : UInt64
+    set_compute_root32_bit_constant : UInt64
+    set_graphics_root32_bit_constant : UInt64
+    set_compute_root32_bit_constants : UInt64
+    set_graphics_root32_bit_constants : UInt64
+    set_compute_root_constant_buffer_view : UInt64
+    set_graphics_root_constant_buffer_view : UInt64
+    set_compute_root_shader_resource_view : UInt64
+    set_graphics_root_shader_resource_view : UInt64
+    set_compute_root_unordered_access_view : UInt64
+    set_graphics_root_unordered_access_view : UInt64
+    ia_set_index_buffer : UInt64
+    ia_set_vertex_buffers : UInt64
+    so_set_targets : UInt64
+    om_set_render_targets : UInt64
+    clear_depth_stencil_view : UInt64
+    clear_render_target_view : UInt64
+    clear_unordered_access_view_uint : UInt64
+    clear_unordered_access_view_float : UInt64
+    discard_resource : UInt64
+    begin_query : UInt64
+    end_query : UInt64
+    resolve_query_data : UInt64
+    set_predication : UInt64
+    set_marker : UInt64
+    begin_event : UInt64
+    end_event : UInt64
+    execute_indirect : UInt64
+    atomic_copy_buffer_uint : UInt64
+    atomic_copy_buffer_uint64 : UInt64
+    om_set_depth_bounds : UInt64
+    set_sample_positions : UInt64
+    resolve_subresource_region : UInt64
+    set_view_instance_mask : UInt64
+    write_buffer_immediate : UInt64
+    set_protected_resource_session : UInt64
+    begin_render_pass : UInt64
+    end_render_pass : UInt64
+    initialize_meta_command : UInt64
+    execute_meta_command : UInt64
+    build_raytracing_acceleration_structure : UInt64
+    emit_raytracing_acceleration_structure_postbuild_info : UInt64
+    copy_raytracing_acceleration_structure : UInt64
+    set_pipeline_state1 : UInt64
+    dispatch_rays : UInt64
+    rs_set_shading_rate : UInt64
+    rs_set_shading_rate_image : UInt64
+    dispatch_mesh : UInt64
   end
 
   ID3D12GraphicsCommandList6_GUID = "c3827890-e548-4cfa-96cf-5689a9370f80"
@@ -6430,17 +6430,17 @@ lib LibWin32
   end
 
   struct ID3D12ShaderReflectionTypeVTbl
-    get_desc : Proc(ID3D12ShaderReflectionType*, D3D12_SHADER_TYPE_DESC*, HRESULT)
-    get_member_type_by_index : Proc(ID3D12ShaderReflectionType*, UInt32, ID3D12ShaderReflectionType)
-    get_member_type_by_name : Proc(ID3D12ShaderReflectionType*, PSTR, ID3D12ShaderReflectionType)
-    get_member_type_name : Proc(ID3D12ShaderReflectionType*, UInt32, PSTR)
-    is_equal : Proc(ID3D12ShaderReflectionType*, ID3D12ShaderReflectionType, HRESULT)
-    get_sub_type : Proc(ID3D12ShaderReflectionType*, ID3D12ShaderReflectionType)
-    get_base_class : Proc(ID3D12ShaderReflectionType*, ID3D12ShaderReflectionType)
-    get_num_interfaces : Proc(ID3D12ShaderReflectionType*, UInt32)
-    get_interface_by_index : Proc(ID3D12ShaderReflectionType*, UInt32, ID3D12ShaderReflectionType)
-    is_of_type : Proc(ID3D12ShaderReflectionType*, ID3D12ShaderReflectionType, HRESULT)
-    implements_interface : Proc(ID3D12ShaderReflectionType*, ID3D12ShaderReflectionType, HRESULT)
+    get_desc : UInt64
+    get_member_type_by_index : UInt64
+    get_member_type_by_name : UInt64
+    get_member_type_name : UInt64
+    is_equal : UInt64
+    get_sub_type : UInt64
+    get_base_class : UInt64
+    get_num_interfaces : UInt64
+    get_interface_by_index : UInt64
+    is_of_type : UInt64
+    implements_interface : UInt64
   end
 
   ID3D12ShaderReflectionType_GUID = "e913c351-783d-48ca-a1d1-4f306284ad56"
@@ -6450,10 +6450,10 @@ lib LibWin32
   end
 
   struct ID3D12ShaderReflectionVariableVTbl
-    get_desc : Proc(ID3D12ShaderReflectionVariable*, D3D12_SHADER_VARIABLE_DESC*, HRESULT)
-    get_type : Proc(ID3D12ShaderReflectionVariable*, ID3D12ShaderReflectionType)
-    get_buffer : Proc(ID3D12ShaderReflectionVariable*, ID3D12ShaderReflectionConstantBuffer)
-    get_interface_slot : Proc(ID3D12ShaderReflectionVariable*, UInt32, UInt32)
+    get_desc : UInt64
+    get_type : UInt64
+    get_buffer : UInt64
+    get_interface_slot : UInt64
   end
 
   ID3D12ShaderReflectionVariable_GUID = "8337a8a6-a216-444a-b2f4-314733a73aea"
@@ -6463,9 +6463,9 @@ lib LibWin32
   end
 
   struct ID3D12ShaderReflectionConstantBufferVTbl
-    get_desc : Proc(ID3D12ShaderReflectionConstantBuffer*, D3D12_SHADER_BUFFER_DESC*, HRESULT)
-    get_variable_by_index : Proc(ID3D12ShaderReflectionConstantBuffer*, UInt32, ID3D12ShaderReflectionVariable)
-    get_variable_by_name : Proc(ID3D12ShaderReflectionConstantBuffer*, PSTR, ID3D12ShaderReflectionVariable)
+    get_desc : UInt64
+    get_variable_by_index : UInt64
+    get_variable_by_name : UInt64
   end
 
   ID3D12ShaderReflectionConstantBuffer_GUID = "c59598b4-48b3-4869-b9b1-b1618b14a8b7"
@@ -6475,28 +6475,28 @@ lib LibWin32
   end
 
   struct ID3D12ShaderReflectionVTbl
-    query_interface : Proc(ID3D12ShaderReflection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12ShaderReflection*, UInt32)
-    release : Proc(ID3D12ShaderReflection*, UInt32)
-    get_desc : Proc(ID3D12ShaderReflection*, D3D12_SHADER_DESC*, HRESULT)
-    get_constant_buffer_by_index : Proc(ID3D12ShaderReflection*, UInt32, ID3D12ShaderReflectionConstantBuffer)
-    get_constant_buffer_by_name : Proc(ID3D12ShaderReflection*, PSTR, ID3D12ShaderReflectionConstantBuffer)
-    get_resource_binding_desc : Proc(ID3D12ShaderReflection*, UInt32, D3D12_SHADER_INPUT_BIND_DESC*, HRESULT)
-    get_input_parameter_desc : Proc(ID3D12ShaderReflection*, UInt32, D3D12_SIGNATURE_PARAMETER_DESC*, HRESULT)
-    get_output_parameter_desc : Proc(ID3D12ShaderReflection*, UInt32, D3D12_SIGNATURE_PARAMETER_DESC*, HRESULT)
-    get_patch_constant_parameter_desc : Proc(ID3D12ShaderReflection*, UInt32, D3D12_SIGNATURE_PARAMETER_DESC*, HRESULT)
-    get_variable_by_name : Proc(ID3D12ShaderReflection*, PSTR, ID3D12ShaderReflectionVariable)
-    get_resource_binding_desc_by_name : Proc(ID3D12ShaderReflection*, PSTR, D3D12_SHADER_INPUT_BIND_DESC*, HRESULT)
-    get_mov_instruction_count : Proc(ID3D12ShaderReflection*, UInt32)
-    get_movc_instruction_count : Proc(ID3D12ShaderReflection*, UInt32)
-    get_conversion_instruction_count : Proc(ID3D12ShaderReflection*, UInt32)
-    get_bitwise_instruction_count : Proc(ID3D12ShaderReflection*, UInt32)
-    get_gs_input_primitive : Proc(ID3D12ShaderReflection*, D3D_PRIMITIVE)
-    is_sample_frequency_shader : Proc(ID3D12ShaderReflection*, LibC::BOOL)
-    get_num_interface_slots : Proc(ID3D12ShaderReflection*, UInt32)
-    get_min_feature_level : Proc(ID3D12ShaderReflection*, D3D_FEATURE_LEVEL*, HRESULT)
-    get_thread_group_size : Proc(ID3D12ShaderReflection*, UInt32*, UInt32*, UInt32*, UInt32)
-    get_requires_flags : Proc(ID3D12ShaderReflection*, UInt64)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_desc : UInt64
+    get_constant_buffer_by_index : UInt64
+    get_constant_buffer_by_name : UInt64
+    get_resource_binding_desc : UInt64
+    get_input_parameter_desc : UInt64
+    get_output_parameter_desc : UInt64
+    get_patch_constant_parameter_desc : UInt64
+    get_variable_by_name : UInt64
+    get_resource_binding_desc_by_name : UInt64
+    get_mov_instruction_count : UInt64
+    get_movc_instruction_count : UInt64
+    get_conversion_instruction_count : UInt64
+    get_bitwise_instruction_count : UInt64
+    get_gs_input_primitive : UInt64
+    is_sample_frequency_shader : UInt64
+    get_num_interface_slots : UInt64
+    get_min_feature_level : UInt64
+    get_thread_group_size : UInt64
+    get_requires_flags : UInt64
   end
 
   ID3D12ShaderReflection_GUID = "5a58797d-a72c-478d-8ba2-efc6b0efe88e"
@@ -6506,11 +6506,11 @@ lib LibWin32
   end
 
   struct ID3D12LibraryReflectionVTbl
-    query_interface : Proc(ID3D12LibraryReflection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D12LibraryReflection*, UInt32)
-    release : Proc(ID3D12LibraryReflection*, UInt32)
-    get_desc : Proc(ID3D12LibraryReflection*, D3D12_LIBRARY_DESC*, HRESULT)
-    get_function_by_index : Proc(ID3D12LibraryReflection*, Int32, ID3D12FunctionReflection)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_desc : UInt64
+    get_function_by_index : UInt64
   end
 
   ID3D12LibraryReflection_GUID = "8e349d19-54db-4a56-9dc9-119d87bdb804"
@@ -6520,13 +6520,13 @@ lib LibWin32
   end
 
   struct ID3D12FunctionReflectionVTbl
-    get_desc : Proc(ID3D12FunctionReflection*, D3D12_FUNCTION_DESC*, HRESULT)
-    get_constant_buffer_by_index : Proc(ID3D12FunctionReflection*, UInt32, ID3D12ShaderReflectionConstantBuffer)
-    get_constant_buffer_by_name : Proc(ID3D12FunctionReflection*, PSTR, ID3D12ShaderReflectionConstantBuffer)
-    get_resource_binding_desc : Proc(ID3D12FunctionReflection*, UInt32, D3D12_SHADER_INPUT_BIND_DESC*, HRESULT)
-    get_variable_by_name : Proc(ID3D12FunctionReflection*, PSTR, ID3D12ShaderReflectionVariable)
-    get_resource_binding_desc_by_name : Proc(ID3D12FunctionReflection*, PSTR, D3D12_SHADER_INPUT_BIND_DESC*, HRESULT)
-    get_function_parameter : Proc(ID3D12FunctionReflection*, Int32, ID3D12FunctionParameterReflection)
+    get_desc : UInt64
+    get_constant_buffer_by_index : UInt64
+    get_constant_buffer_by_name : UInt64
+    get_resource_binding_desc : UInt64
+    get_variable_by_name : UInt64
+    get_resource_binding_desc_by_name : UInt64
+    get_function_parameter : UInt64
   end
 
   ID3D12FunctionReflection_GUID = "1108795c-2772-4ba9-b2a8-d464dc7e2799"
@@ -6536,7 +6536,7 @@ lib LibWin32
   end
 
   struct ID3D12FunctionParameterReflectionVTbl
-    get_desc : Proc(ID3D12FunctionParameterReflection*, D3D12_PARAMETER_DESC*, HRESULT)
+    get_desc : UInt64
   end
 
   ID3D12FunctionParameterReflection_GUID = "ec25f42d-7006-4f2b-b33e-02cc3375733f"
@@ -6569,4 +6569,5184 @@ lib LibWin32
 
   # Params # rclsid : Guid* [In],riid : Guid* [In],ppvdebug : Void** [In]
   fun D3D12GetInterface(rclsid : Guid*, riid : Guid*, ppvdebug : Void**) : HRESULT
+end
+struct LibWin32::ID3D12Object
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+end
+struct LibWin32::ID3D12DeviceChild
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+end
+struct LibWin32::ID3D12RootSignature
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+end
+struct LibWin32::ID3D12RootSignatureDeserializer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_root_signature_desc : D3D12_ROOT_SIGNATURE_DESC*
+    @lpVtbl.value.get_root_signature_desc.unsafe_as(Proc(D3D12_ROOT_SIGNATURE_DESC**)).call
+  end
+end
+struct LibWin32::ID3D12VersionedRootSignatureDeserializer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_root_signature_desc_at_version(converttoversion : D3D_ROOT_SIGNATURE_VERSION, ppdesc : D3D12_VERSIONED_ROOT_SIGNATURE_DESC**) : HRESULT
+    @lpVtbl.value.get_root_signature_desc_at_version.unsafe_as(Proc(D3D_ROOT_SIGNATURE_VERSION, D3D12_VERSIONED_ROOT_SIGNATURE_DESC**, HRESULT)).call(converttoversion, ppdesc)
+  end
+  def get_unconverted_root_signature_desc : D3D12_VERSIONED_ROOT_SIGNATURE_DESC*
+    @lpVtbl.value.get_unconverted_root_signature_desc.unsafe_as(Proc(D3D12_VERSIONED_ROOT_SIGNATURE_DESC**)).call
+  end
+end
+struct LibWin32::ID3D12Pageable
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+end
+struct LibWin32::ID3D12Heap
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_desc : D3D12_HEAP_DESC
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_HEAP_DESC)).call
+  end
+end
+struct LibWin32::ID3D12Resource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def map(subresource : UInt32, preadrange : D3D12_RANGE*, ppdata : Void**) : HRESULT
+    @lpVtbl.value.map.unsafe_as(Proc(UInt32, D3D12_RANGE*, Void**, HRESULT)).call(subresource, preadrange, ppdata)
+  end
+  def unmap(subresource : UInt32, pwrittenrange : D3D12_RANGE*) : Void
+    @lpVtbl.value.unmap.unsafe_as(Proc(UInt32, D3D12_RANGE*, Void)).call(subresource, pwrittenrange)
+  end
+  def get_desc : D3D12_RESOURCE_DESC
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_RESOURCE_DESC)).call
+  end
+  def get_gpu_virtual_address : UInt64
+    @lpVtbl.value.get_gpu_virtual_address.unsafe_as(Proc(UInt64)).call
+  end
+  def write_to_subresource(dstsubresource : UInt32, pdstbox : D3D12_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32) : HRESULT
+    @lpVtbl.value.write_to_subresource.unsafe_as(Proc(UInt32, D3D12_BOX*, Void*, UInt32, UInt32, HRESULT)).call(dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch)
+  end
+  def read_from_subresource(pdstdata : Void*, dstrowpitch : UInt32, dstdepthpitch : UInt32, srcsubresource : UInt32, psrcbox : D3D12_BOX*) : HRESULT
+    @lpVtbl.value.read_from_subresource.unsafe_as(Proc(Void*, UInt32, UInt32, UInt32, D3D12_BOX*, HRESULT)).call(pdstdata, dstrowpitch, dstdepthpitch, srcsubresource, psrcbox)
+  end
+  def get_heap_properties(pheapproperties : D3D12_HEAP_PROPERTIES*, pheapflags : D3D12_HEAP_FLAGS*) : HRESULT
+    @lpVtbl.value.get_heap_properties.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS*, HRESULT)).call(pheapproperties, pheapflags)
+  end
+end
+struct LibWin32::ID3D12CommandAllocator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ID3D12Fence
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_completed_value : UInt64
+    @lpVtbl.value.get_completed_value.unsafe_as(Proc(UInt64)).call
+  end
+  def set_event_on_completion(value : UInt64, hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_on_completion.unsafe_as(Proc(UInt64, LibC::HANDLE, HRESULT)).call(value, hevent)
+  end
+  def signal(value : UInt64) : HRESULT
+    @lpVtbl.value.signal.unsafe_as(Proc(UInt64, HRESULT)).call(value)
+  end
+end
+struct LibWin32::ID3D12Fence1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_completed_value : UInt64
+    @lpVtbl.value.get_completed_value.unsafe_as(Proc(UInt64)).call
+  end
+  def set_event_on_completion(value : UInt64, hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_on_completion.unsafe_as(Proc(UInt64, LibC::HANDLE, HRESULT)).call(value, hevent)
+  end
+  def signal(value : UInt64) : HRESULT
+    @lpVtbl.value.signal.unsafe_as(Proc(UInt64, HRESULT)).call(value)
+  end
+  def get_creation_flags : D3D12_FENCE_FLAGS
+    @lpVtbl.value.get_creation_flags.unsafe_as(Proc(D3D12_FENCE_FLAGS)).call
+  end
+end
+struct LibWin32::ID3D12PipelineState
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_cached_blob(ppblob : ID3DBlob*) : HRESULT
+    @lpVtbl.value.get_cached_blob.unsafe_as(Proc(ID3DBlob*, HRESULT)).call(ppblob)
+  end
+end
+struct LibWin32::ID3D12DescriptorHeap
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_desc : D3D12_DESCRIPTOR_HEAP_DESC
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_DESC)).call
+  end
+  def get_cpu_descriptor_handle_for_heap_start : D3D12_CPU_DESCRIPTOR_HANDLE
+    @lpVtbl.value.get_cpu_descriptor_handle_for_heap_start.unsafe_as(Proc(D3D12_CPU_DESCRIPTOR_HANDLE)).call
+  end
+  def get_gpu_descriptor_handle_for_heap_start : D3D12_GPU_DESCRIPTOR_HANDLE
+    @lpVtbl.value.get_gpu_descriptor_handle_for_heap_start.unsafe_as(Proc(D3D12_GPU_DESCRIPTOR_HANDLE)).call
+  end
+end
+struct LibWin32::ID3D12QueryHeap
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+end
+struct LibWin32::ID3D12CommandSignature
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+end
+struct LibWin32::ID3D12CommandList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_type : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE)).call
+  end
+end
+struct LibWin32::ID3D12GraphicsCommandList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_type : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE)).call
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def reset(pallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState) : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(ID3D12CommandAllocator, ID3D12PipelineState, HRESULT)).call(pallocator, pinitialstate)
+  end
+  def clear_state(ppipelinestate : ID3D12PipelineState) : Void
+    @lpVtbl.value.clear_state.unsafe_as(Proc(ID3D12PipelineState, Void)).call(ppipelinestate)
+  end
+  def draw_instanced(vertexcountperinstance : UInt32, instancecount : UInt32, startvertexlocation : UInt32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, Void)).call(vertexcountperinstance, instancecount, startvertexlocation, startinstancelocation)
+  end
+  def draw_indexed_instanced(indexcountperinstance : UInt32, instancecount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, Int32, UInt32, Void)).call(indexcountperinstance, instancecount, startindexlocation, basevertexlocation, startinstancelocation)
+  end
+  def dispatch(threadgroupcountx : UInt32, threadgroupcounty : UInt32, threadgroupcountz : UInt32) : Void
+    @lpVtbl.value.dispatch.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(threadgroupcountx, threadgroupcounty, threadgroupcountz)
+  end
+  def copy_buffer_region(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, numbytes : UInt64) : Void
+    @lpVtbl.value.copy_buffer_region.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt64, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, numbytes)
+  end
+  def copy_texture_region(pdst : D3D12_TEXTURE_COPY_LOCATION*, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrc : D3D12_TEXTURE_COPY_LOCATION*, psrcbox : D3D12_BOX*) : Void
+    @lpVtbl.value.copy_texture_region.unsafe_as(Proc(D3D12_TEXTURE_COPY_LOCATION*, UInt32, UInt32, UInt32, D3D12_TEXTURE_COPY_LOCATION*, D3D12_BOX*, Void)).call(pdst, dstx, dsty, dstz, psrc, psrcbox)
+  end
+  def copy_resource(pdstresource : ID3D12Resource, psrcresource : ID3D12Resource) : Void
+    @lpVtbl.value.copy_resource.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, Void)).call(pdstresource, psrcresource)
+  end
+  def copy_tiles(ptiledresource : ID3D12Resource, ptileregionstartcoordinate : D3D12_TILED_RESOURCE_COORDINATE*, ptileregionsize : D3D12_TILE_REGION_SIZE*, pbuffer : ID3D12Resource, bufferstartoffsetinbytes : UInt64, flags : D3D12_TILE_COPY_FLAGS) : Void
+    @lpVtbl.value.copy_tiles.unsafe_as(Proc(ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, ID3D12Resource, UInt64, D3D12_TILE_COPY_FLAGS, Void)).call(ptiledresource, ptileregionstartcoordinate, ptileregionsize, pbuffer, bufferstartoffsetinbytes, flags)
+  end
+  def resolve_subresource(pdstresource : ID3D12Resource, dstsubresource : UInt32, psrcresource : ID3D12Resource, srcsubresource : UInt32, format : DXGI_FORMAT) : Void
+    @lpVtbl.value.resolve_subresource.unsafe_as(Proc(ID3D12Resource, UInt32, ID3D12Resource, UInt32, DXGI_FORMAT, Void)).call(pdstresource, dstsubresource, psrcresource, srcsubresource, format)
+  end
+  def ia_set_primitive_topology(primitivetopology : D3D_PRIMITIVE_TOPOLOGY) : Void
+    @lpVtbl.value.ia_set_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY, Void)).call(primitivetopology)
+  end
+  def rs_set_viewports(numviewports : UInt32, pviewports : D3D12_VIEWPORT*) : Void
+    @lpVtbl.value.rs_set_viewports.unsafe_as(Proc(UInt32, D3D12_VIEWPORT*, Void)).call(numviewports, pviewports)
+  end
+  def rs_set_scissor_rects(numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.rs_set_scissor_rects.unsafe_as(Proc(UInt32, RECT*, Void)).call(numrects, prects)
+  end
+  def om_set_blend_factor(blendfactor : Float32*) : Void
+    @lpVtbl.value.om_set_blend_factor.unsafe_as(Proc(Float32*, Void)).call(blendfactor)
+  end
+  def om_set_stencil_ref(stencilref : UInt32) : Void
+    @lpVtbl.value.om_set_stencil_ref.unsafe_as(Proc(UInt32, Void)).call(stencilref)
+  end
+  def set_pipeline_state(ppipelinestate : ID3D12PipelineState) : Void
+    @lpVtbl.value.set_pipeline_state.unsafe_as(Proc(ID3D12PipelineState, Void)).call(ppipelinestate)
+  end
+  def resource_barrier(numbarriers : UInt32, pbarriers : D3D12_RESOURCE_BARRIER*) : Void
+    @lpVtbl.value.resource_barrier.unsafe_as(Proc(UInt32, D3D12_RESOURCE_BARRIER*, Void)).call(numbarriers, pbarriers)
+  end
+  def execute_bundle(pcommandlist : ID3D12GraphicsCommandList) : Void
+    @lpVtbl.value.execute_bundle.unsafe_as(Proc(ID3D12GraphicsCommandList, Void)).call(pcommandlist)
+  end
+  def set_descriptor_heaps(numdescriptorheaps : UInt32, ppdescriptorheaps : ID3D12DescriptorHeap*) : Void
+    @lpVtbl.value.set_descriptor_heaps.unsafe_as(Proc(UInt32, ID3D12DescriptorHeap*, Void)).call(numdescriptorheaps, ppdescriptorheaps)
+  end
+  def set_compute_root_signature(prootsignature : ID3D12RootSignature) : Void
+    @lpVtbl.value.set_compute_root_signature.unsafe_as(Proc(ID3D12RootSignature, Void)).call(prootsignature)
+  end
+  def set_graphics_root_signature(prootsignature : ID3D12RootSignature) : Void
+    @lpVtbl.value.set_graphics_root_signature.unsafe_as(Proc(ID3D12RootSignature, Void)).call(prootsignature)
+  end
+  def set_compute_root_descriptor_table(rootparameterindex : UInt32, basedescriptor : D3D12_GPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.set_compute_root_descriptor_table.unsafe_as(Proc(UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)).call(rootparameterindex, basedescriptor)
+  end
+  def set_graphics_root_descriptor_table(rootparameterindex : UInt32, basedescriptor : D3D12_GPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.set_graphics_root_descriptor_table.unsafe_as(Proc(UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)).call(rootparameterindex, basedescriptor)
+  end
+  def set_compute_root32_bit_constant(rootparameterindex : UInt32, srcdata : UInt32, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_compute_root32_bit_constant.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(rootparameterindex, srcdata, destoffsetin32bitvalues)
+  end
+  def set_graphics_root32_bit_constant(rootparameterindex : UInt32, srcdata : UInt32, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_graphics_root32_bit_constant.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(rootparameterindex, srcdata, destoffsetin32bitvalues)
+  end
+  def set_compute_root32_bit_constants(rootparameterindex : UInt32, num32bitvaluestoset : UInt32, psrcdata : Void*, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_compute_root32_bit_constants.unsafe_as(Proc(UInt32, UInt32, Void*, UInt32, Void)).call(rootparameterindex, num32bitvaluestoset, psrcdata, destoffsetin32bitvalues)
+  end
+  def set_graphics_root32_bit_constants(rootparameterindex : UInt32, num32bitvaluestoset : UInt32, psrcdata : Void*, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_graphics_root32_bit_constants.unsafe_as(Proc(UInt32, UInt32, Void*, UInt32, Void)).call(rootparameterindex, num32bitvaluestoset, psrcdata, destoffsetin32bitvalues)
+  end
+  def set_compute_root_constant_buffer_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_constant_buffer_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_constant_buffer_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_constant_buffer_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_compute_root_shader_resource_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_shader_resource_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_shader_resource_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_shader_resource_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_compute_root_unordered_access_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_unordered_access_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_unordered_access_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_unordered_access_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def ia_set_index_buffer(pview : D3D12_INDEX_BUFFER_VIEW*) : Void
+    @lpVtbl.value.ia_set_index_buffer.unsafe_as(Proc(D3D12_INDEX_BUFFER_VIEW*, Void)).call(pview)
+  end
+  def ia_set_vertex_buffers(startslot : UInt32, numviews : UInt32, pviews : D3D12_VERTEX_BUFFER_VIEW*) : Void
+    @lpVtbl.value.ia_set_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, D3D12_VERTEX_BUFFER_VIEW*, Void)).call(startslot, numviews, pviews)
+  end
+  def so_set_targets(startslot : UInt32, numviews : UInt32, pviews : D3D12_STREAM_OUTPUT_BUFFER_VIEW*) : Void
+    @lpVtbl.value.so_set_targets.unsafe_as(Proc(UInt32, UInt32, D3D12_STREAM_OUTPUT_BUFFER_VIEW*, Void)).call(startslot, numviews, pviews)
+  end
+  def om_set_render_targets(numrendertargetdescriptors : UInt32, prendertargetdescriptors : D3D12_CPU_DESCRIPTOR_HANDLE*, rtssinglehandletodescriptorrange : LibC::BOOL, pdepthstencildescriptor : D3D12_CPU_DESCRIPTOR_HANDLE*) : Void
+    @lpVtbl.value.om_set_render_targets.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, LibC::BOOL, D3D12_CPU_DESCRIPTOR_HANDLE*, Void)).call(numrendertargetdescriptors, prendertargetdescriptors, rtssinglehandletodescriptorrange, pdepthstencildescriptor)
+  end
+  def clear_depth_stencil_view(depthstencilview : D3D12_CPU_DESCRIPTOR_HANDLE, clearflags : D3D12_CLEAR_FLAGS, depth : Float32, stencil : UInt8, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_depth_stencil_view.unsafe_as(Proc(D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CLEAR_FLAGS, Float32, UInt8, UInt32, RECT*, Void)).call(depthstencilview, clearflags, depth, stencil, numrects, prects)
+  end
+  def clear_render_target_view(rendertargetview : D3D12_CPU_DESCRIPTOR_HANDLE, colorrgba : Float32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_render_target_view.unsafe_as(Proc(D3D12_CPU_DESCRIPTOR_HANDLE, Float32*, UInt32, RECT*, Void)).call(rendertargetview, colorrgba, numrects, prects)
+  end
+  def clear_unordered_access_view_uint(viewgpuhandleincurrentheap : D3D12_GPU_DESCRIPTOR_HANDLE, viewcpuhandle : D3D12_CPU_DESCRIPTOR_HANDLE, presource : ID3D12Resource, values : UInt32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_unordered_access_view_uint.unsafe_as(Proc(D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, UInt32*, UInt32, RECT*, Void)).call(viewgpuhandleincurrentheap, viewcpuhandle, presource, values, numrects, prects)
+  end
+  def clear_unordered_access_view_float(viewgpuhandleincurrentheap : D3D12_GPU_DESCRIPTOR_HANDLE, viewcpuhandle : D3D12_CPU_DESCRIPTOR_HANDLE, presource : ID3D12Resource, values : Float32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_unordered_access_view_float.unsafe_as(Proc(D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, Float32*, UInt32, RECT*, Void)).call(viewgpuhandleincurrentheap, viewcpuhandle, presource, values, numrects, prects)
+  end
+  def discard_resource(presource : ID3D12Resource, pregion : D3D12_DISCARD_REGION*) : Void
+    @lpVtbl.value.discard_resource.unsafe_as(Proc(ID3D12Resource, D3D12_DISCARD_REGION*, Void)).call(presource, pregion)
+  end
+  def begin_query(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.begin_query.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)).call(pqueryheap, type, index)
+  end
+  def end_query(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.end_query.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)).call(pqueryheap, type, index)
+  end
+  def resolve_query_data(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, startindex : UInt32, numqueries : UInt32, pdestinationbuffer : ID3D12Resource, aligneddestinationbufferoffset : UInt64) : Void
+    @lpVtbl.value.resolve_query_data.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, UInt32, ID3D12Resource, UInt64, Void)).call(pqueryheap, type, startindex, numqueries, pdestinationbuffer, aligneddestinationbufferoffset)
+  end
+  def set_predication(pbuffer : ID3D12Resource, alignedbufferoffset : UInt64, operation : D3D12_PREDICATION_OP) : Void
+    @lpVtbl.value.set_predication.unsafe_as(Proc(ID3D12Resource, UInt64, D3D12_PREDICATION_OP, Void)).call(pbuffer, alignedbufferoffset, operation)
+  end
+  def set_marker(metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.unsafe_as(Proc(UInt32, Void*, UInt32, Void)).call(metadata, pdata, size)
+  end
+  def begin_event(metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.unsafe_as(Proc(UInt32, Void*, UInt32, Void)).call(metadata, pdata, size)
+  end
+  def end_event : Void
+    @lpVtbl.value.end_event.unsafe_as(Proc(Void)).call
+  end
+  def execute_indirect(pcommandsignature : ID3D12CommandSignature, maxcommandcount : UInt32, pargumentbuffer : ID3D12Resource, argumentbufferoffset : UInt64, pcountbuffer : ID3D12Resource, countbufferoffset : UInt64) : Void
+    @lpVtbl.value.execute_indirect.unsafe_as(Proc(ID3D12CommandSignature, UInt32, ID3D12Resource, UInt64, ID3D12Resource, UInt64, Void)).call(pcommandsignature, maxcommandcount, pargumentbuffer, argumentbufferoffset, pcountbuffer, countbufferoffset)
+  end
+end
+struct LibWin32::ID3D12GraphicsCommandList1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_type : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE)).call
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def reset(pallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState) : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(ID3D12CommandAllocator, ID3D12PipelineState, HRESULT)).call(pallocator, pinitialstate)
+  end
+  def clear_state(ppipelinestate : ID3D12PipelineState) : Void
+    @lpVtbl.value.clear_state.unsafe_as(Proc(ID3D12PipelineState, Void)).call(ppipelinestate)
+  end
+  def draw_instanced(vertexcountperinstance : UInt32, instancecount : UInt32, startvertexlocation : UInt32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, Void)).call(vertexcountperinstance, instancecount, startvertexlocation, startinstancelocation)
+  end
+  def draw_indexed_instanced(indexcountperinstance : UInt32, instancecount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, Int32, UInt32, Void)).call(indexcountperinstance, instancecount, startindexlocation, basevertexlocation, startinstancelocation)
+  end
+  def dispatch(threadgroupcountx : UInt32, threadgroupcounty : UInt32, threadgroupcountz : UInt32) : Void
+    @lpVtbl.value.dispatch.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(threadgroupcountx, threadgroupcounty, threadgroupcountz)
+  end
+  def copy_buffer_region(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, numbytes : UInt64) : Void
+    @lpVtbl.value.copy_buffer_region.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt64, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, numbytes)
+  end
+  def copy_texture_region(pdst : D3D12_TEXTURE_COPY_LOCATION*, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrc : D3D12_TEXTURE_COPY_LOCATION*, psrcbox : D3D12_BOX*) : Void
+    @lpVtbl.value.copy_texture_region.unsafe_as(Proc(D3D12_TEXTURE_COPY_LOCATION*, UInt32, UInt32, UInt32, D3D12_TEXTURE_COPY_LOCATION*, D3D12_BOX*, Void)).call(pdst, dstx, dsty, dstz, psrc, psrcbox)
+  end
+  def copy_resource(pdstresource : ID3D12Resource, psrcresource : ID3D12Resource) : Void
+    @lpVtbl.value.copy_resource.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, Void)).call(pdstresource, psrcresource)
+  end
+  def copy_tiles(ptiledresource : ID3D12Resource, ptileregionstartcoordinate : D3D12_TILED_RESOURCE_COORDINATE*, ptileregionsize : D3D12_TILE_REGION_SIZE*, pbuffer : ID3D12Resource, bufferstartoffsetinbytes : UInt64, flags : D3D12_TILE_COPY_FLAGS) : Void
+    @lpVtbl.value.copy_tiles.unsafe_as(Proc(ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, ID3D12Resource, UInt64, D3D12_TILE_COPY_FLAGS, Void)).call(ptiledresource, ptileregionstartcoordinate, ptileregionsize, pbuffer, bufferstartoffsetinbytes, flags)
+  end
+  def resolve_subresource(pdstresource : ID3D12Resource, dstsubresource : UInt32, psrcresource : ID3D12Resource, srcsubresource : UInt32, format : DXGI_FORMAT) : Void
+    @lpVtbl.value.resolve_subresource.unsafe_as(Proc(ID3D12Resource, UInt32, ID3D12Resource, UInt32, DXGI_FORMAT, Void)).call(pdstresource, dstsubresource, psrcresource, srcsubresource, format)
+  end
+  def ia_set_primitive_topology(primitivetopology : D3D_PRIMITIVE_TOPOLOGY) : Void
+    @lpVtbl.value.ia_set_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY, Void)).call(primitivetopology)
+  end
+  def rs_set_viewports(numviewports : UInt32, pviewports : D3D12_VIEWPORT*) : Void
+    @lpVtbl.value.rs_set_viewports.unsafe_as(Proc(UInt32, D3D12_VIEWPORT*, Void)).call(numviewports, pviewports)
+  end
+  def rs_set_scissor_rects(numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.rs_set_scissor_rects.unsafe_as(Proc(UInt32, RECT*, Void)).call(numrects, prects)
+  end
+  def om_set_blend_factor(blendfactor : Float32*) : Void
+    @lpVtbl.value.om_set_blend_factor.unsafe_as(Proc(Float32*, Void)).call(blendfactor)
+  end
+  def om_set_stencil_ref(stencilref : UInt32) : Void
+    @lpVtbl.value.om_set_stencil_ref.unsafe_as(Proc(UInt32, Void)).call(stencilref)
+  end
+  def set_pipeline_state(ppipelinestate : ID3D12PipelineState) : Void
+    @lpVtbl.value.set_pipeline_state.unsafe_as(Proc(ID3D12PipelineState, Void)).call(ppipelinestate)
+  end
+  def resource_barrier(numbarriers : UInt32, pbarriers : D3D12_RESOURCE_BARRIER*) : Void
+    @lpVtbl.value.resource_barrier.unsafe_as(Proc(UInt32, D3D12_RESOURCE_BARRIER*, Void)).call(numbarriers, pbarriers)
+  end
+  def execute_bundle(pcommandlist : ID3D12GraphicsCommandList) : Void
+    @lpVtbl.value.execute_bundle.unsafe_as(Proc(ID3D12GraphicsCommandList, Void)).call(pcommandlist)
+  end
+  def set_descriptor_heaps(numdescriptorheaps : UInt32, ppdescriptorheaps : ID3D12DescriptorHeap*) : Void
+    @lpVtbl.value.set_descriptor_heaps.unsafe_as(Proc(UInt32, ID3D12DescriptorHeap*, Void)).call(numdescriptorheaps, ppdescriptorheaps)
+  end
+  def set_compute_root_signature(prootsignature : ID3D12RootSignature) : Void
+    @lpVtbl.value.set_compute_root_signature.unsafe_as(Proc(ID3D12RootSignature, Void)).call(prootsignature)
+  end
+  def set_graphics_root_signature(prootsignature : ID3D12RootSignature) : Void
+    @lpVtbl.value.set_graphics_root_signature.unsafe_as(Proc(ID3D12RootSignature, Void)).call(prootsignature)
+  end
+  def set_compute_root_descriptor_table(rootparameterindex : UInt32, basedescriptor : D3D12_GPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.set_compute_root_descriptor_table.unsafe_as(Proc(UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)).call(rootparameterindex, basedescriptor)
+  end
+  def set_graphics_root_descriptor_table(rootparameterindex : UInt32, basedescriptor : D3D12_GPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.set_graphics_root_descriptor_table.unsafe_as(Proc(UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)).call(rootparameterindex, basedescriptor)
+  end
+  def set_compute_root32_bit_constant(rootparameterindex : UInt32, srcdata : UInt32, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_compute_root32_bit_constant.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(rootparameterindex, srcdata, destoffsetin32bitvalues)
+  end
+  def set_graphics_root32_bit_constant(rootparameterindex : UInt32, srcdata : UInt32, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_graphics_root32_bit_constant.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(rootparameterindex, srcdata, destoffsetin32bitvalues)
+  end
+  def set_compute_root32_bit_constants(rootparameterindex : UInt32, num32bitvaluestoset : UInt32, psrcdata : Void*, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_compute_root32_bit_constants.unsafe_as(Proc(UInt32, UInt32, Void*, UInt32, Void)).call(rootparameterindex, num32bitvaluestoset, psrcdata, destoffsetin32bitvalues)
+  end
+  def set_graphics_root32_bit_constants(rootparameterindex : UInt32, num32bitvaluestoset : UInt32, psrcdata : Void*, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_graphics_root32_bit_constants.unsafe_as(Proc(UInt32, UInt32, Void*, UInt32, Void)).call(rootparameterindex, num32bitvaluestoset, psrcdata, destoffsetin32bitvalues)
+  end
+  def set_compute_root_constant_buffer_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_constant_buffer_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_constant_buffer_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_constant_buffer_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_compute_root_shader_resource_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_shader_resource_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_shader_resource_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_shader_resource_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_compute_root_unordered_access_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_unordered_access_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_unordered_access_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_unordered_access_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def ia_set_index_buffer(pview : D3D12_INDEX_BUFFER_VIEW*) : Void
+    @lpVtbl.value.ia_set_index_buffer.unsafe_as(Proc(D3D12_INDEX_BUFFER_VIEW*, Void)).call(pview)
+  end
+  def ia_set_vertex_buffers(startslot : UInt32, numviews : UInt32, pviews : D3D12_VERTEX_BUFFER_VIEW*) : Void
+    @lpVtbl.value.ia_set_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, D3D12_VERTEX_BUFFER_VIEW*, Void)).call(startslot, numviews, pviews)
+  end
+  def so_set_targets(startslot : UInt32, numviews : UInt32, pviews : D3D12_STREAM_OUTPUT_BUFFER_VIEW*) : Void
+    @lpVtbl.value.so_set_targets.unsafe_as(Proc(UInt32, UInt32, D3D12_STREAM_OUTPUT_BUFFER_VIEW*, Void)).call(startslot, numviews, pviews)
+  end
+  def om_set_render_targets(numrendertargetdescriptors : UInt32, prendertargetdescriptors : D3D12_CPU_DESCRIPTOR_HANDLE*, rtssinglehandletodescriptorrange : LibC::BOOL, pdepthstencildescriptor : D3D12_CPU_DESCRIPTOR_HANDLE*) : Void
+    @lpVtbl.value.om_set_render_targets.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, LibC::BOOL, D3D12_CPU_DESCRIPTOR_HANDLE*, Void)).call(numrendertargetdescriptors, prendertargetdescriptors, rtssinglehandletodescriptorrange, pdepthstencildescriptor)
+  end
+  def clear_depth_stencil_view(depthstencilview : D3D12_CPU_DESCRIPTOR_HANDLE, clearflags : D3D12_CLEAR_FLAGS, depth : Float32, stencil : UInt8, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_depth_stencil_view.unsafe_as(Proc(D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CLEAR_FLAGS, Float32, UInt8, UInt32, RECT*, Void)).call(depthstencilview, clearflags, depth, stencil, numrects, prects)
+  end
+  def clear_render_target_view(rendertargetview : D3D12_CPU_DESCRIPTOR_HANDLE, colorrgba : Float32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_render_target_view.unsafe_as(Proc(D3D12_CPU_DESCRIPTOR_HANDLE, Float32*, UInt32, RECT*, Void)).call(rendertargetview, colorrgba, numrects, prects)
+  end
+  def clear_unordered_access_view_uint(viewgpuhandleincurrentheap : D3D12_GPU_DESCRIPTOR_HANDLE, viewcpuhandle : D3D12_CPU_DESCRIPTOR_HANDLE, presource : ID3D12Resource, values : UInt32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_unordered_access_view_uint.unsafe_as(Proc(D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, UInt32*, UInt32, RECT*, Void)).call(viewgpuhandleincurrentheap, viewcpuhandle, presource, values, numrects, prects)
+  end
+  def clear_unordered_access_view_float(viewgpuhandleincurrentheap : D3D12_GPU_DESCRIPTOR_HANDLE, viewcpuhandle : D3D12_CPU_DESCRIPTOR_HANDLE, presource : ID3D12Resource, values : Float32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_unordered_access_view_float.unsafe_as(Proc(D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, Float32*, UInt32, RECT*, Void)).call(viewgpuhandleincurrentheap, viewcpuhandle, presource, values, numrects, prects)
+  end
+  def discard_resource(presource : ID3D12Resource, pregion : D3D12_DISCARD_REGION*) : Void
+    @lpVtbl.value.discard_resource.unsafe_as(Proc(ID3D12Resource, D3D12_DISCARD_REGION*, Void)).call(presource, pregion)
+  end
+  def begin_query(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.begin_query.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)).call(pqueryheap, type, index)
+  end
+  def end_query(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.end_query.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)).call(pqueryheap, type, index)
+  end
+  def resolve_query_data(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, startindex : UInt32, numqueries : UInt32, pdestinationbuffer : ID3D12Resource, aligneddestinationbufferoffset : UInt64) : Void
+    @lpVtbl.value.resolve_query_data.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, UInt32, ID3D12Resource, UInt64, Void)).call(pqueryheap, type, startindex, numqueries, pdestinationbuffer, aligneddestinationbufferoffset)
+  end
+  def set_predication(pbuffer : ID3D12Resource, alignedbufferoffset : UInt64, operation : D3D12_PREDICATION_OP) : Void
+    @lpVtbl.value.set_predication.unsafe_as(Proc(ID3D12Resource, UInt64, D3D12_PREDICATION_OP, Void)).call(pbuffer, alignedbufferoffset, operation)
+  end
+  def set_marker(metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.unsafe_as(Proc(UInt32, Void*, UInt32, Void)).call(metadata, pdata, size)
+  end
+  def begin_event(metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.unsafe_as(Proc(UInt32, Void*, UInt32, Void)).call(metadata, pdata, size)
+  end
+  def end_event : Void
+    @lpVtbl.value.end_event.unsafe_as(Proc(Void)).call
+  end
+  def execute_indirect(pcommandsignature : ID3D12CommandSignature, maxcommandcount : UInt32, pargumentbuffer : ID3D12Resource, argumentbufferoffset : UInt64, pcountbuffer : ID3D12Resource, countbufferoffset : UInt64) : Void
+    @lpVtbl.value.execute_indirect.unsafe_as(Proc(ID3D12CommandSignature, UInt32, ID3D12Resource, UInt64, ID3D12Resource, UInt64, Void)).call(pcommandsignature, maxcommandcount, pargumentbuffer, argumentbufferoffset, pcountbuffer, countbufferoffset)
+  end
+  def atomic_copy_buffer_uint(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, dependencies : UInt32, ppdependentresources : ID3D12Resource*, pdependentsubresourceranges : D3D12_SUBRESOURCE_RANGE_UINT64*) : Void
+    @lpVtbl.value.atomic_copy_buffer_uint.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, dependencies, ppdependentresources, pdependentsubresourceranges)
+  end
+  def atomic_copy_buffer_uint64(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, dependencies : UInt32, ppdependentresources : ID3D12Resource*, pdependentsubresourceranges : D3D12_SUBRESOURCE_RANGE_UINT64*) : Void
+    @lpVtbl.value.atomic_copy_buffer_uint64.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, dependencies, ppdependentresources, pdependentsubresourceranges)
+  end
+  def om_set_depth_bounds(min : Float32, max : Float32) : Void
+    @lpVtbl.value.om_set_depth_bounds.unsafe_as(Proc(Float32, Float32, Void)).call(min, max)
+  end
+  def set_sample_positions(numsamplesperpixel : UInt32, numpixels : UInt32, psamplepositions : D3D12_SAMPLE_POSITION*) : Void
+    @lpVtbl.value.set_sample_positions.unsafe_as(Proc(UInt32, UInt32, D3D12_SAMPLE_POSITION*, Void)).call(numsamplesperpixel, numpixels, psamplepositions)
+  end
+  def resolve_subresource_region(pdstresource : ID3D12Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, psrcresource : ID3D12Resource, srcsubresource : UInt32, psrcrect : RECT*, format : DXGI_FORMAT, resolvemode : D3D12_RESOLVE_MODE) : Void
+    @lpVtbl.value.resolve_subresource_region.unsafe_as(Proc(ID3D12Resource, UInt32, UInt32, UInt32, ID3D12Resource, UInt32, RECT*, DXGI_FORMAT, D3D12_RESOLVE_MODE, Void)).call(pdstresource, dstsubresource, dstx, dsty, psrcresource, srcsubresource, psrcrect, format, resolvemode)
+  end
+  def set_view_instance_mask(mask : UInt32) : Void
+    @lpVtbl.value.set_view_instance_mask.unsafe_as(Proc(UInt32, Void)).call(mask)
+  end
+end
+struct LibWin32::ID3D12GraphicsCommandList2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_type : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE)).call
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def reset(pallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState) : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(ID3D12CommandAllocator, ID3D12PipelineState, HRESULT)).call(pallocator, pinitialstate)
+  end
+  def clear_state(ppipelinestate : ID3D12PipelineState) : Void
+    @lpVtbl.value.clear_state.unsafe_as(Proc(ID3D12PipelineState, Void)).call(ppipelinestate)
+  end
+  def draw_instanced(vertexcountperinstance : UInt32, instancecount : UInt32, startvertexlocation : UInt32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, Void)).call(vertexcountperinstance, instancecount, startvertexlocation, startinstancelocation)
+  end
+  def draw_indexed_instanced(indexcountperinstance : UInt32, instancecount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, Int32, UInt32, Void)).call(indexcountperinstance, instancecount, startindexlocation, basevertexlocation, startinstancelocation)
+  end
+  def dispatch(threadgroupcountx : UInt32, threadgroupcounty : UInt32, threadgroupcountz : UInt32) : Void
+    @lpVtbl.value.dispatch.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(threadgroupcountx, threadgroupcounty, threadgroupcountz)
+  end
+  def copy_buffer_region(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, numbytes : UInt64) : Void
+    @lpVtbl.value.copy_buffer_region.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt64, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, numbytes)
+  end
+  def copy_texture_region(pdst : D3D12_TEXTURE_COPY_LOCATION*, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrc : D3D12_TEXTURE_COPY_LOCATION*, psrcbox : D3D12_BOX*) : Void
+    @lpVtbl.value.copy_texture_region.unsafe_as(Proc(D3D12_TEXTURE_COPY_LOCATION*, UInt32, UInt32, UInt32, D3D12_TEXTURE_COPY_LOCATION*, D3D12_BOX*, Void)).call(pdst, dstx, dsty, dstz, psrc, psrcbox)
+  end
+  def copy_resource(pdstresource : ID3D12Resource, psrcresource : ID3D12Resource) : Void
+    @lpVtbl.value.copy_resource.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, Void)).call(pdstresource, psrcresource)
+  end
+  def copy_tiles(ptiledresource : ID3D12Resource, ptileregionstartcoordinate : D3D12_TILED_RESOURCE_COORDINATE*, ptileregionsize : D3D12_TILE_REGION_SIZE*, pbuffer : ID3D12Resource, bufferstartoffsetinbytes : UInt64, flags : D3D12_TILE_COPY_FLAGS) : Void
+    @lpVtbl.value.copy_tiles.unsafe_as(Proc(ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, ID3D12Resource, UInt64, D3D12_TILE_COPY_FLAGS, Void)).call(ptiledresource, ptileregionstartcoordinate, ptileregionsize, pbuffer, bufferstartoffsetinbytes, flags)
+  end
+  def resolve_subresource(pdstresource : ID3D12Resource, dstsubresource : UInt32, psrcresource : ID3D12Resource, srcsubresource : UInt32, format : DXGI_FORMAT) : Void
+    @lpVtbl.value.resolve_subresource.unsafe_as(Proc(ID3D12Resource, UInt32, ID3D12Resource, UInt32, DXGI_FORMAT, Void)).call(pdstresource, dstsubresource, psrcresource, srcsubresource, format)
+  end
+  def ia_set_primitive_topology(primitivetopology : D3D_PRIMITIVE_TOPOLOGY) : Void
+    @lpVtbl.value.ia_set_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY, Void)).call(primitivetopology)
+  end
+  def rs_set_viewports(numviewports : UInt32, pviewports : D3D12_VIEWPORT*) : Void
+    @lpVtbl.value.rs_set_viewports.unsafe_as(Proc(UInt32, D3D12_VIEWPORT*, Void)).call(numviewports, pviewports)
+  end
+  def rs_set_scissor_rects(numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.rs_set_scissor_rects.unsafe_as(Proc(UInt32, RECT*, Void)).call(numrects, prects)
+  end
+  def om_set_blend_factor(blendfactor : Float32*) : Void
+    @lpVtbl.value.om_set_blend_factor.unsafe_as(Proc(Float32*, Void)).call(blendfactor)
+  end
+  def om_set_stencil_ref(stencilref : UInt32) : Void
+    @lpVtbl.value.om_set_stencil_ref.unsafe_as(Proc(UInt32, Void)).call(stencilref)
+  end
+  def set_pipeline_state(ppipelinestate : ID3D12PipelineState) : Void
+    @lpVtbl.value.set_pipeline_state.unsafe_as(Proc(ID3D12PipelineState, Void)).call(ppipelinestate)
+  end
+  def resource_barrier(numbarriers : UInt32, pbarriers : D3D12_RESOURCE_BARRIER*) : Void
+    @lpVtbl.value.resource_barrier.unsafe_as(Proc(UInt32, D3D12_RESOURCE_BARRIER*, Void)).call(numbarriers, pbarriers)
+  end
+  def execute_bundle(pcommandlist : ID3D12GraphicsCommandList) : Void
+    @lpVtbl.value.execute_bundle.unsafe_as(Proc(ID3D12GraphicsCommandList, Void)).call(pcommandlist)
+  end
+  def set_descriptor_heaps(numdescriptorheaps : UInt32, ppdescriptorheaps : ID3D12DescriptorHeap*) : Void
+    @lpVtbl.value.set_descriptor_heaps.unsafe_as(Proc(UInt32, ID3D12DescriptorHeap*, Void)).call(numdescriptorheaps, ppdescriptorheaps)
+  end
+  def set_compute_root_signature(prootsignature : ID3D12RootSignature) : Void
+    @lpVtbl.value.set_compute_root_signature.unsafe_as(Proc(ID3D12RootSignature, Void)).call(prootsignature)
+  end
+  def set_graphics_root_signature(prootsignature : ID3D12RootSignature) : Void
+    @lpVtbl.value.set_graphics_root_signature.unsafe_as(Proc(ID3D12RootSignature, Void)).call(prootsignature)
+  end
+  def set_compute_root_descriptor_table(rootparameterindex : UInt32, basedescriptor : D3D12_GPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.set_compute_root_descriptor_table.unsafe_as(Proc(UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)).call(rootparameterindex, basedescriptor)
+  end
+  def set_graphics_root_descriptor_table(rootparameterindex : UInt32, basedescriptor : D3D12_GPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.set_graphics_root_descriptor_table.unsafe_as(Proc(UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)).call(rootparameterindex, basedescriptor)
+  end
+  def set_compute_root32_bit_constant(rootparameterindex : UInt32, srcdata : UInt32, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_compute_root32_bit_constant.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(rootparameterindex, srcdata, destoffsetin32bitvalues)
+  end
+  def set_graphics_root32_bit_constant(rootparameterindex : UInt32, srcdata : UInt32, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_graphics_root32_bit_constant.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(rootparameterindex, srcdata, destoffsetin32bitvalues)
+  end
+  def set_compute_root32_bit_constants(rootparameterindex : UInt32, num32bitvaluestoset : UInt32, psrcdata : Void*, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_compute_root32_bit_constants.unsafe_as(Proc(UInt32, UInt32, Void*, UInt32, Void)).call(rootparameterindex, num32bitvaluestoset, psrcdata, destoffsetin32bitvalues)
+  end
+  def set_graphics_root32_bit_constants(rootparameterindex : UInt32, num32bitvaluestoset : UInt32, psrcdata : Void*, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_graphics_root32_bit_constants.unsafe_as(Proc(UInt32, UInt32, Void*, UInt32, Void)).call(rootparameterindex, num32bitvaluestoset, psrcdata, destoffsetin32bitvalues)
+  end
+  def set_compute_root_constant_buffer_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_constant_buffer_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_constant_buffer_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_constant_buffer_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_compute_root_shader_resource_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_shader_resource_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_shader_resource_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_shader_resource_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_compute_root_unordered_access_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_unordered_access_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_unordered_access_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_unordered_access_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def ia_set_index_buffer(pview : D3D12_INDEX_BUFFER_VIEW*) : Void
+    @lpVtbl.value.ia_set_index_buffer.unsafe_as(Proc(D3D12_INDEX_BUFFER_VIEW*, Void)).call(pview)
+  end
+  def ia_set_vertex_buffers(startslot : UInt32, numviews : UInt32, pviews : D3D12_VERTEX_BUFFER_VIEW*) : Void
+    @lpVtbl.value.ia_set_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, D3D12_VERTEX_BUFFER_VIEW*, Void)).call(startslot, numviews, pviews)
+  end
+  def so_set_targets(startslot : UInt32, numviews : UInt32, pviews : D3D12_STREAM_OUTPUT_BUFFER_VIEW*) : Void
+    @lpVtbl.value.so_set_targets.unsafe_as(Proc(UInt32, UInt32, D3D12_STREAM_OUTPUT_BUFFER_VIEW*, Void)).call(startslot, numviews, pviews)
+  end
+  def om_set_render_targets(numrendertargetdescriptors : UInt32, prendertargetdescriptors : D3D12_CPU_DESCRIPTOR_HANDLE*, rtssinglehandletodescriptorrange : LibC::BOOL, pdepthstencildescriptor : D3D12_CPU_DESCRIPTOR_HANDLE*) : Void
+    @lpVtbl.value.om_set_render_targets.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, LibC::BOOL, D3D12_CPU_DESCRIPTOR_HANDLE*, Void)).call(numrendertargetdescriptors, prendertargetdescriptors, rtssinglehandletodescriptorrange, pdepthstencildescriptor)
+  end
+  def clear_depth_stencil_view(depthstencilview : D3D12_CPU_DESCRIPTOR_HANDLE, clearflags : D3D12_CLEAR_FLAGS, depth : Float32, stencil : UInt8, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_depth_stencil_view.unsafe_as(Proc(D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CLEAR_FLAGS, Float32, UInt8, UInt32, RECT*, Void)).call(depthstencilview, clearflags, depth, stencil, numrects, prects)
+  end
+  def clear_render_target_view(rendertargetview : D3D12_CPU_DESCRIPTOR_HANDLE, colorrgba : Float32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_render_target_view.unsafe_as(Proc(D3D12_CPU_DESCRIPTOR_HANDLE, Float32*, UInt32, RECT*, Void)).call(rendertargetview, colorrgba, numrects, prects)
+  end
+  def clear_unordered_access_view_uint(viewgpuhandleincurrentheap : D3D12_GPU_DESCRIPTOR_HANDLE, viewcpuhandle : D3D12_CPU_DESCRIPTOR_HANDLE, presource : ID3D12Resource, values : UInt32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_unordered_access_view_uint.unsafe_as(Proc(D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, UInt32*, UInt32, RECT*, Void)).call(viewgpuhandleincurrentheap, viewcpuhandle, presource, values, numrects, prects)
+  end
+  def clear_unordered_access_view_float(viewgpuhandleincurrentheap : D3D12_GPU_DESCRIPTOR_HANDLE, viewcpuhandle : D3D12_CPU_DESCRIPTOR_HANDLE, presource : ID3D12Resource, values : Float32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_unordered_access_view_float.unsafe_as(Proc(D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, Float32*, UInt32, RECT*, Void)).call(viewgpuhandleincurrentheap, viewcpuhandle, presource, values, numrects, prects)
+  end
+  def discard_resource(presource : ID3D12Resource, pregion : D3D12_DISCARD_REGION*) : Void
+    @lpVtbl.value.discard_resource.unsafe_as(Proc(ID3D12Resource, D3D12_DISCARD_REGION*, Void)).call(presource, pregion)
+  end
+  def begin_query(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.begin_query.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)).call(pqueryheap, type, index)
+  end
+  def end_query(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.end_query.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)).call(pqueryheap, type, index)
+  end
+  def resolve_query_data(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, startindex : UInt32, numqueries : UInt32, pdestinationbuffer : ID3D12Resource, aligneddestinationbufferoffset : UInt64) : Void
+    @lpVtbl.value.resolve_query_data.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, UInt32, ID3D12Resource, UInt64, Void)).call(pqueryheap, type, startindex, numqueries, pdestinationbuffer, aligneddestinationbufferoffset)
+  end
+  def set_predication(pbuffer : ID3D12Resource, alignedbufferoffset : UInt64, operation : D3D12_PREDICATION_OP) : Void
+    @lpVtbl.value.set_predication.unsafe_as(Proc(ID3D12Resource, UInt64, D3D12_PREDICATION_OP, Void)).call(pbuffer, alignedbufferoffset, operation)
+  end
+  def set_marker(metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.unsafe_as(Proc(UInt32, Void*, UInt32, Void)).call(metadata, pdata, size)
+  end
+  def begin_event(metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.unsafe_as(Proc(UInt32, Void*, UInt32, Void)).call(metadata, pdata, size)
+  end
+  def end_event : Void
+    @lpVtbl.value.end_event.unsafe_as(Proc(Void)).call
+  end
+  def execute_indirect(pcommandsignature : ID3D12CommandSignature, maxcommandcount : UInt32, pargumentbuffer : ID3D12Resource, argumentbufferoffset : UInt64, pcountbuffer : ID3D12Resource, countbufferoffset : UInt64) : Void
+    @lpVtbl.value.execute_indirect.unsafe_as(Proc(ID3D12CommandSignature, UInt32, ID3D12Resource, UInt64, ID3D12Resource, UInt64, Void)).call(pcommandsignature, maxcommandcount, pargumentbuffer, argumentbufferoffset, pcountbuffer, countbufferoffset)
+  end
+  def atomic_copy_buffer_uint(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, dependencies : UInt32, ppdependentresources : ID3D12Resource*, pdependentsubresourceranges : D3D12_SUBRESOURCE_RANGE_UINT64*) : Void
+    @lpVtbl.value.atomic_copy_buffer_uint.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, dependencies, ppdependentresources, pdependentsubresourceranges)
+  end
+  def atomic_copy_buffer_uint64(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, dependencies : UInt32, ppdependentresources : ID3D12Resource*, pdependentsubresourceranges : D3D12_SUBRESOURCE_RANGE_UINT64*) : Void
+    @lpVtbl.value.atomic_copy_buffer_uint64.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, dependencies, ppdependentresources, pdependentsubresourceranges)
+  end
+  def om_set_depth_bounds(min : Float32, max : Float32) : Void
+    @lpVtbl.value.om_set_depth_bounds.unsafe_as(Proc(Float32, Float32, Void)).call(min, max)
+  end
+  def set_sample_positions(numsamplesperpixel : UInt32, numpixels : UInt32, psamplepositions : D3D12_SAMPLE_POSITION*) : Void
+    @lpVtbl.value.set_sample_positions.unsafe_as(Proc(UInt32, UInt32, D3D12_SAMPLE_POSITION*, Void)).call(numsamplesperpixel, numpixels, psamplepositions)
+  end
+  def resolve_subresource_region(pdstresource : ID3D12Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, psrcresource : ID3D12Resource, srcsubresource : UInt32, psrcrect : RECT*, format : DXGI_FORMAT, resolvemode : D3D12_RESOLVE_MODE) : Void
+    @lpVtbl.value.resolve_subresource_region.unsafe_as(Proc(ID3D12Resource, UInt32, UInt32, UInt32, ID3D12Resource, UInt32, RECT*, DXGI_FORMAT, D3D12_RESOLVE_MODE, Void)).call(pdstresource, dstsubresource, dstx, dsty, psrcresource, srcsubresource, psrcrect, format, resolvemode)
+  end
+  def set_view_instance_mask(mask : UInt32) : Void
+    @lpVtbl.value.set_view_instance_mask.unsafe_as(Proc(UInt32, Void)).call(mask)
+  end
+  def write_buffer_immediate(count : UInt32, pparams : D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pmodes : D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    @lpVtbl.value.write_buffer_immediate.unsafe_as(Proc(UInt32, D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void)).call(count, pparams, pmodes)
+  end
+end
+struct LibWin32::ID3D12CommandQueue
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def update_tile_mappings(presource : ID3D12Resource, numresourceregions : UInt32, presourceregionstartcoordinates : D3D12_TILED_RESOURCE_COORDINATE*, presourceregionsizes : D3D12_TILE_REGION_SIZE*, pheap : ID3D12Heap, numranges : UInt32, prangeflags : D3D12_TILE_RANGE_FLAGS*, pheaprangestartoffsets : UInt32*, prangetilecounts : UInt32*, flags : D3D12_TILE_MAPPING_FLAGS) : Void
+    @lpVtbl.value.update_tile_mappings.unsafe_as(Proc(ID3D12Resource, UInt32, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, ID3D12Heap, UInt32, D3D12_TILE_RANGE_FLAGS*, UInt32*, UInt32*, D3D12_TILE_MAPPING_FLAGS, Void)).call(presource, numresourceregions, presourceregionstartcoordinates, presourceregionsizes, pheap, numranges, prangeflags, pheaprangestartoffsets, prangetilecounts, flags)
+  end
+  def copy_tile_mappings(pdstresource : ID3D12Resource, pdstregionstartcoordinate : D3D12_TILED_RESOURCE_COORDINATE*, psrcresource : ID3D12Resource, psrcregionstartcoordinate : D3D12_TILED_RESOURCE_COORDINATE*, pregionsize : D3D12_TILE_REGION_SIZE*, flags : D3D12_TILE_MAPPING_FLAGS) : Void
+    @lpVtbl.value.copy_tile_mappings.unsafe_as(Proc(ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, D3D12_TILE_MAPPING_FLAGS, Void)).call(pdstresource, pdstregionstartcoordinate, psrcresource, psrcregionstartcoordinate, pregionsize, flags)
+  end
+  def execute_command_lists(numcommandlists : UInt32, ppcommandlists : ID3D12CommandList*) : Void
+    @lpVtbl.value.execute_command_lists.unsafe_as(Proc(UInt32, ID3D12CommandList*, Void)).call(numcommandlists, ppcommandlists)
+  end
+  def set_marker(metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.unsafe_as(Proc(UInt32, Void*, UInt32, Void)).call(metadata, pdata, size)
+  end
+  def begin_event(metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.unsafe_as(Proc(UInt32, Void*, UInt32, Void)).call(metadata, pdata, size)
+  end
+  def end_event : Void
+    @lpVtbl.value.end_event.unsafe_as(Proc(Void)).call
+  end
+  def signal(pfence : ID3D12Fence, value : UInt64) : HRESULT
+    @lpVtbl.value.signal.unsafe_as(Proc(ID3D12Fence, UInt64, HRESULT)).call(pfence, value)
+  end
+  def wait(pfence : ID3D12Fence, value : UInt64) : HRESULT
+    @lpVtbl.value.wait.unsafe_as(Proc(ID3D12Fence, UInt64, HRESULT)).call(pfence, value)
+  end
+  def get_timestamp_frequency(pfrequency : UInt64*) : HRESULT
+    @lpVtbl.value.get_timestamp_frequency.unsafe_as(Proc(UInt64*, HRESULT)).call(pfrequency)
+  end
+  def get_clock_calibration(pgputimestamp : UInt64*, pcputimestamp : UInt64*) : HRESULT
+    @lpVtbl.value.get_clock_calibration.unsafe_as(Proc(UInt64*, UInt64*, HRESULT)).call(pgputimestamp, pcputimestamp)
+  end
+  def get_desc : D3D12_COMMAND_QUEUE_DESC
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_COMMAND_QUEUE_DESC)).call
+  end
+end
+struct LibWin32::ID3D12Device
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_node_count : UInt32
+    @lpVtbl.value.get_node_count.unsafe_as(Proc(UInt32)).call
+  end
+  def create_command_queue(pdesc : D3D12_COMMAND_QUEUE_DESC*, riid : Guid*, ppcommandqueue : Void**) : HRESULT
+    @lpVtbl.value.create_command_queue.unsafe_as(Proc(D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppcommandqueue)
+  end
+  def create_command_allocator(type : D3D12_COMMAND_LIST_TYPE, riid : Guid*, ppcommandallocator : Void**) : HRESULT
+    @lpVtbl.value.create_command_allocator.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)).call(type, riid, ppcommandallocator)
+  end
+  def create_graphics_pipeline_state(pdesc : D3D12_GRAPHICS_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_graphics_pipeline_state.unsafe_as(Proc(D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_compute_pipeline_state(pdesc : D3D12_COMPUTE_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_compute_pipeline_state.unsafe_as(Proc(D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_command_list(nodemask : UInt32, type : D3D12_COMMAND_LIST_TYPE, pcommandallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState, riid : Guid*, ppcommandlist : Void**) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)).call(nodemask, type, pcommandallocator, pinitialstate, riid, ppcommandlist)
+  end
+  def check_feature_support(feature : D3D12_FEATURE, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D12_FEATURE, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def create_descriptor_heap(pdescriptorheapdesc : D3D12_DESCRIPTOR_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_descriptor_heap.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdescriptorheapdesc, riid, ppvheap)
+  end
+  def get_descriptor_handle_increment_size(descriptorheaptype : D3D12_DESCRIPTOR_HEAP_TYPE) : UInt32
+    @lpVtbl.value.get_descriptor_handle_increment_size.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)).call(descriptorheaptype)
+  end
+  def create_root_signature(nodemask : UInt32, pblobwithrootsignature : Void*, bloblengthinbytes : LibC::UINT_PTR, riid : Guid*, ppvrootsignature : Void**) : HRESULT
+    @lpVtbl.value.create_root_signature.unsafe_as(Proc(UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(nodemask, pblobwithrootsignature, bloblengthinbytes, riid, ppvrootsignature)
+  end
+  def create_constant_buffer_view(pdesc : D3D12_CONSTANT_BUFFER_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_constant_buffer_view.unsafe_as(Proc(D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def create_shader_resource_view(presource : ID3D12Resource, pdesc : D3D12_SHADER_RESOURCE_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_unordered_access_view(presource : ID3D12Resource, pcounterresource : ID3D12Resource, pdesc : D3D12_UNORDERED_ACCESS_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_unordered_access_view.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pcounterresource, pdesc, destdescriptor)
+  end
+  def create_render_target_view(presource : ID3D12Resource, pdesc : D3D12_RENDER_TARGET_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_depth_stencil_view(presource : ID3D12Resource, pdesc : D3D12_DEPTH_STENCIL_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_sampler(pdesc : D3D12_SAMPLER_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_sampler.unsafe_as(Proc(D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def copy_descriptors(numdestdescriptorranges : UInt32, pdestdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, pdestdescriptorrangesizes : UInt32*, numsrcdescriptorranges : UInt32, psrcdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, psrcdescriptorrangesizes : UInt32*, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdestdescriptorranges, pdestdescriptorrangestarts, pdestdescriptorrangesizes, numsrcdescriptorranges, psrcdescriptorrangestarts, psrcdescriptorrangesizes, descriptorheapstype)
+  end
+  def copy_descriptors_simple(numdescriptors : UInt32, destdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, srcdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors_simple.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdescriptors, destdescriptorrangestart, srcdescriptorrangestart, descriptorheapstype)
+  end
+  def get_resource_allocation_info(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs)
+  end
+  def get_custom_heap_properties(nodemask : UInt32, heaptype : D3D12_HEAP_TYPE) : D3D12_HEAP_PROPERTIES
+    @lpVtbl.value.get_custom_heap_properties.unsafe_as(Proc(UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)).call(nodemask, heaptype)
+  end
+  def create_committed_resource(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, riidresource, ppvresource)
+  end
+  def create_heap(pdesc : D3D12_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_heap.unsafe_as(Proc(D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def create_placed_resource(pheap : ID3D12Heap, heapoffset : UInt64, pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_placed_resource.unsafe_as(Proc(ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheap, heapoffset, pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_reserved_resource(pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_reserved_resource.unsafe_as(Proc(D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_shared_handle(pobject : ID3D12DeviceChild, pattributes : SECURITY_ATTRIBUTES*, access : UInt32, name : LibC::LPWSTR, phandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_shared_handle.unsafe_as(Proc(ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)).call(pobject, pattributes, access, name, phandle)
+  end
+  def open_shared_handle(nthandle : LibC::HANDLE, riid : Guid*, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.open_shared_handle.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(nthandle, riid, ppvobj)
+  end
+  def open_shared_handle_by_name(name : LibC::LPWSTR, access : UInt32, pnthandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.open_shared_handle_by_name.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)).call(name, access, pnthandle)
+  end
+  def make_resident(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.make_resident.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def evict(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.evict.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def create_fence(initialvalue : UInt64, flags : D3D12_FENCE_FLAGS, riid : Guid*, ppfence : Void**) : HRESULT
+    @lpVtbl.value.create_fence.unsafe_as(Proc(UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)).call(initialvalue, flags, riid, ppfence)
+  end
+  def get_device_removed_reason : HRESULT
+    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_copyable_footprints(presourcedesc : D3D12_RESOURCE_DESC*, firstsubresource : UInt32, numsubresources : UInt32, baseoffset : UInt64, playouts : D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, pnumrows : UInt32*, prowsizeinbytes : UInt64*, ptotalbytes : UInt64*) : Void
+    @lpVtbl.value.get_copyable_footprints.unsafe_as(Proc(D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)).call(presourcedesc, firstsubresource, numsubresources, baseoffset, playouts, pnumrows, prowsizeinbytes, ptotalbytes)
+  end
+  def create_query_heap(pdesc : D3D12_QUERY_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_query_heap.unsafe_as(Proc(D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def set_stable_power_state(enable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stable_power_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(enable)
+  end
+  def create_command_signature(pdesc : D3D12_COMMAND_SIGNATURE_DESC*, prootsignature : ID3D12RootSignature, riid : Guid*, ppvcommandsignature : Void**) : HRESULT
+    @lpVtbl.value.create_command_signature.unsafe_as(Proc(D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)).call(pdesc, prootsignature, riid, ppvcommandsignature)
+  end
+  def get_resource_tiling(ptiledresource : ID3D12Resource, pnumtilesforentireresource : UInt32*, ppackedmipdesc : D3D12_PACKED_MIP_INFO*, pstandardtileshapefornonpackedmips : D3D12_TILE_SHAPE*, pnumsubresourcetilings : UInt32*, firstsubresourcetilingtoget : UInt32, psubresourcetilingsfornonpackedmips : D3D12_SUBRESOURCE_TILING*) : Void
+    @lpVtbl.value.get_resource_tiling.unsafe_as(Proc(ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)).call(ptiledresource, pnumtilesforentireresource, ppackedmipdesc, pstandardtileshapefornonpackedmips, pnumsubresourcetilings, firstsubresourcetilingtoget, psubresourcetilingsfornonpackedmips)
+  end
+  def get_adapter_luid : LUID
+    @lpVtbl.value.get_adapter_luid.unsafe_as(Proc(LUID)).call
+  end
+end
+struct LibWin32::ID3D12PipelineLibrary
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def store_pipeline(pname : LibC::LPWSTR, ppipeline : ID3D12PipelineState) : HRESULT
+    @lpVtbl.value.store_pipeline.unsafe_as(Proc(LibC::LPWSTR, ID3D12PipelineState, HRESULT)).call(pname, ppipeline)
+  end
+  def load_graphics_pipeline(pname : LibC::LPWSTR, pdesc : D3D12_GRAPHICS_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.load_graphics_pipeline.unsafe_as(Proc(LibC::LPWSTR, D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pname, pdesc, riid, pppipelinestate)
+  end
+  def load_compute_pipeline(pname : LibC::LPWSTR, pdesc : D3D12_COMPUTE_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.load_compute_pipeline.unsafe_as(Proc(LibC::LPWSTR, D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pname, pdesc, riid, pppipelinestate)
+  end
+  def get_serialized_size : LibC::UINT_PTR
+    @lpVtbl.value.get_serialized_size.unsafe_as(Proc(LibC::UINT_PTR)).call
+  end
+  def serialize(pdata : Void*, datasizeinbytes : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.serialize.unsafe_as(Proc(Void*, LibC::UINT_PTR, HRESULT)).call(pdata, datasizeinbytes)
+  end
+end
+struct LibWin32::ID3D12PipelineLibrary1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def store_pipeline(pname : LibC::LPWSTR, ppipeline : ID3D12PipelineState) : HRESULT
+    @lpVtbl.value.store_pipeline.unsafe_as(Proc(LibC::LPWSTR, ID3D12PipelineState, HRESULT)).call(pname, ppipeline)
+  end
+  def load_graphics_pipeline(pname : LibC::LPWSTR, pdesc : D3D12_GRAPHICS_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.load_graphics_pipeline.unsafe_as(Proc(LibC::LPWSTR, D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pname, pdesc, riid, pppipelinestate)
+  end
+  def load_compute_pipeline(pname : LibC::LPWSTR, pdesc : D3D12_COMPUTE_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.load_compute_pipeline.unsafe_as(Proc(LibC::LPWSTR, D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pname, pdesc, riid, pppipelinestate)
+  end
+  def get_serialized_size : LibC::UINT_PTR
+    @lpVtbl.value.get_serialized_size.unsafe_as(Proc(LibC::UINT_PTR)).call
+  end
+  def serialize(pdata : Void*, datasizeinbytes : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.serialize.unsafe_as(Proc(Void*, LibC::UINT_PTR, HRESULT)).call(pdata, datasizeinbytes)
+  end
+  def load_pipeline(pname : LibC::LPWSTR, pdesc : D3D12_PIPELINE_STATE_STREAM_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.load_pipeline.unsafe_as(Proc(LibC::LPWSTR, D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)).call(pname, pdesc, riid, pppipelinestate)
+  end
+end
+struct LibWin32::ID3D12Device1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_node_count : UInt32
+    @lpVtbl.value.get_node_count.unsafe_as(Proc(UInt32)).call
+  end
+  def create_command_queue(pdesc : D3D12_COMMAND_QUEUE_DESC*, riid : Guid*, ppcommandqueue : Void**) : HRESULT
+    @lpVtbl.value.create_command_queue.unsafe_as(Proc(D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppcommandqueue)
+  end
+  def create_command_allocator(type : D3D12_COMMAND_LIST_TYPE, riid : Guid*, ppcommandallocator : Void**) : HRESULT
+    @lpVtbl.value.create_command_allocator.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)).call(type, riid, ppcommandallocator)
+  end
+  def create_graphics_pipeline_state(pdesc : D3D12_GRAPHICS_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_graphics_pipeline_state.unsafe_as(Proc(D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_compute_pipeline_state(pdesc : D3D12_COMPUTE_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_compute_pipeline_state.unsafe_as(Proc(D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_command_list(nodemask : UInt32, type : D3D12_COMMAND_LIST_TYPE, pcommandallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState, riid : Guid*, ppcommandlist : Void**) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)).call(nodemask, type, pcommandallocator, pinitialstate, riid, ppcommandlist)
+  end
+  def check_feature_support(feature : D3D12_FEATURE, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D12_FEATURE, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def create_descriptor_heap(pdescriptorheapdesc : D3D12_DESCRIPTOR_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_descriptor_heap.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdescriptorheapdesc, riid, ppvheap)
+  end
+  def get_descriptor_handle_increment_size(descriptorheaptype : D3D12_DESCRIPTOR_HEAP_TYPE) : UInt32
+    @lpVtbl.value.get_descriptor_handle_increment_size.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)).call(descriptorheaptype)
+  end
+  def create_root_signature(nodemask : UInt32, pblobwithrootsignature : Void*, bloblengthinbytes : LibC::UINT_PTR, riid : Guid*, ppvrootsignature : Void**) : HRESULT
+    @lpVtbl.value.create_root_signature.unsafe_as(Proc(UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(nodemask, pblobwithrootsignature, bloblengthinbytes, riid, ppvrootsignature)
+  end
+  def create_constant_buffer_view(pdesc : D3D12_CONSTANT_BUFFER_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_constant_buffer_view.unsafe_as(Proc(D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def create_shader_resource_view(presource : ID3D12Resource, pdesc : D3D12_SHADER_RESOURCE_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_unordered_access_view(presource : ID3D12Resource, pcounterresource : ID3D12Resource, pdesc : D3D12_UNORDERED_ACCESS_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_unordered_access_view.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pcounterresource, pdesc, destdescriptor)
+  end
+  def create_render_target_view(presource : ID3D12Resource, pdesc : D3D12_RENDER_TARGET_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_depth_stencil_view(presource : ID3D12Resource, pdesc : D3D12_DEPTH_STENCIL_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_sampler(pdesc : D3D12_SAMPLER_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_sampler.unsafe_as(Proc(D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def copy_descriptors(numdestdescriptorranges : UInt32, pdestdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, pdestdescriptorrangesizes : UInt32*, numsrcdescriptorranges : UInt32, psrcdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, psrcdescriptorrangesizes : UInt32*, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdestdescriptorranges, pdestdescriptorrangestarts, pdestdescriptorrangesizes, numsrcdescriptorranges, psrcdescriptorrangestarts, psrcdescriptorrangesizes, descriptorheapstype)
+  end
+  def copy_descriptors_simple(numdescriptors : UInt32, destdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, srcdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors_simple.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdescriptors, destdescriptorrangestart, srcdescriptorrangestart, descriptorheapstype)
+  end
+  def get_resource_allocation_info(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs)
+  end
+  def get_custom_heap_properties(nodemask : UInt32, heaptype : D3D12_HEAP_TYPE) : D3D12_HEAP_PROPERTIES
+    @lpVtbl.value.get_custom_heap_properties.unsafe_as(Proc(UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)).call(nodemask, heaptype)
+  end
+  def create_committed_resource(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, riidresource, ppvresource)
+  end
+  def create_heap(pdesc : D3D12_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_heap.unsafe_as(Proc(D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def create_placed_resource(pheap : ID3D12Heap, heapoffset : UInt64, pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_placed_resource.unsafe_as(Proc(ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheap, heapoffset, pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_reserved_resource(pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_reserved_resource.unsafe_as(Proc(D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_shared_handle(pobject : ID3D12DeviceChild, pattributes : SECURITY_ATTRIBUTES*, access : UInt32, name : LibC::LPWSTR, phandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_shared_handle.unsafe_as(Proc(ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)).call(pobject, pattributes, access, name, phandle)
+  end
+  def open_shared_handle(nthandle : LibC::HANDLE, riid : Guid*, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.open_shared_handle.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(nthandle, riid, ppvobj)
+  end
+  def open_shared_handle_by_name(name : LibC::LPWSTR, access : UInt32, pnthandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.open_shared_handle_by_name.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)).call(name, access, pnthandle)
+  end
+  def make_resident(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.make_resident.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def evict(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.evict.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def create_fence(initialvalue : UInt64, flags : D3D12_FENCE_FLAGS, riid : Guid*, ppfence : Void**) : HRESULT
+    @lpVtbl.value.create_fence.unsafe_as(Proc(UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)).call(initialvalue, flags, riid, ppfence)
+  end
+  def get_device_removed_reason : HRESULT
+    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_copyable_footprints(presourcedesc : D3D12_RESOURCE_DESC*, firstsubresource : UInt32, numsubresources : UInt32, baseoffset : UInt64, playouts : D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, pnumrows : UInt32*, prowsizeinbytes : UInt64*, ptotalbytes : UInt64*) : Void
+    @lpVtbl.value.get_copyable_footprints.unsafe_as(Proc(D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)).call(presourcedesc, firstsubresource, numsubresources, baseoffset, playouts, pnumrows, prowsizeinbytes, ptotalbytes)
+  end
+  def create_query_heap(pdesc : D3D12_QUERY_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_query_heap.unsafe_as(Proc(D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def set_stable_power_state(enable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stable_power_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(enable)
+  end
+  def create_command_signature(pdesc : D3D12_COMMAND_SIGNATURE_DESC*, prootsignature : ID3D12RootSignature, riid : Guid*, ppvcommandsignature : Void**) : HRESULT
+    @lpVtbl.value.create_command_signature.unsafe_as(Proc(D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)).call(pdesc, prootsignature, riid, ppvcommandsignature)
+  end
+  def get_resource_tiling(ptiledresource : ID3D12Resource, pnumtilesforentireresource : UInt32*, ppackedmipdesc : D3D12_PACKED_MIP_INFO*, pstandardtileshapefornonpackedmips : D3D12_TILE_SHAPE*, pnumsubresourcetilings : UInt32*, firstsubresourcetilingtoget : UInt32, psubresourcetilingsfornonpackedmips : D3D12_SUBRESOURCE_TILING*) : Void
+    @lpVtbl.value.get_resource_tiling.unsafe_as(Proc(ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)).call(ptiledresource, pnumtilesforentireresource, ppackedmipdesc, pstandardtileshapefornonpackedmips, pnumsubresourcetilings, firstsubresourcetilingtoget, psubresourcetilingsfornonpackedmips)
+  end
+  def get_adapter_luid : LUID
+    @lpVtbl.value.get_adapter_luid.unsafe_as(Proc(LUID)).call
+  end
+  def create_pipeline_library(plibraryblob : Void*, bloblength : LibC::UINT_PTR, riid : Guid*, pppipelinelibrary : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_library.unsafe_as(Proc(Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(plibraryblob, bloblength, riid, pppipelinelibrary)
+  end
+  def set_event_on_multiple_fence_completion(ppfences : ID3D12Fence*, pfencevalues : UInt64*, numfences : UInt32, flags : D3D12_MULTIPLE_FENCE_WAIT_FLAGS, hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_on_multiple_fence_completion.unsafe_as(Proc(ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)).call(ppfences, pfencevalues, numfences, flags, hevent)
+  end
+  def set_residency_priority(numobjects : UInt32, ppobjects : ID3D12Pageable*, ppriorities : D3D12_RESIDENCY_PRIORITY*) : HRESULT
+    @lpVtbl.value.set_residency_priority.unsafe_as(Proc(UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)).call(numobjects, ppobjects, ppriorities)
+  end
+end
+struct LibWin32::ID3D12Device2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_node_count : UInt32
+    @lpVtbl.value.get_node_count.unsafe_as(Proc(UInt32)).call
+  end
+  def create_command_queue(pdesc : D3D12_COMMAND_QUEUE_DESC*, riid : Guid*, ppcommandqueue : Void**) : HRESULT
+    @lpVtbl.value.create_command_queue.unsafe_as(Proc(D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppcommandqueue)
+  end
+  def create_command_allocator(type : D3D12_COMMAND_LIST_TYPE, riid : Guid*, ppcommandallocator : Void**) : HRESULT
+    @lpVtbl.value.create_command_allocator.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)).call(type, riid, ppcommandallocator)
+  end
+  def create_graphics_pipeline_state(pdesc : D3D12_GRAPHICS_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_graphics_pipeline_state.unsafe_as(Proc(D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_compute_pipeline_state(pdesc : D3D12_COMPUTE_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_compute_pipeline_state.unsafe_as(Proc(D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_command_list(nodemask : UInt32, type : D3D12_COMMAND_LIST_TYPE, pcommandallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState, riid : Guid*, ppcommandlist : Void**) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)).call(nodemask, type, pcommandallocator, pinitialstate, riid, ppcommandlist)
+  end
+  def check_feature_support(feature : D3D12_FEATURE, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D12_FEATURE, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def create_descriptor_heap(pdescriptorheapdesc : D3D12_DESCRIPTOR_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_descriptor_heap.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdescriptorheapdesc, riid, ppvheap)
+  end
+  def get_descriptor_handle_increment_size(descriptorheaptype : D3D12_DESCRIPTOR_HEAP_TYPE) : UInt32
+    @lpVtbl.value.get_descriptor_handle_increment_size.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)).call(descriptorheaptype)
+  end
+  def create_root_signature(nodemask : UInt32, pblobwithrootsignature : Void*, bloblengthinbytes : LibC::UINT_PTR, riid : Guid*, ppvrootsignature : Void**) : HRESULT
+    @lpVtbl.value.create_root_signature.unsafe_as(Proc(UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(nodemask, pblobwithrootsignature, bloblengthinbytes, riid, ppvrootsignature)
+  end
+  def create_constant_buffer_view(pdesc : D3D12_CONSTANT_BUFFER_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_constant_buffer_view.unsafe_as(Proc(D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def create_shader_resource_view(presource : ID3D12Resource, pdesc : D3D12_SHADER_RESOURCE_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_unordered_access_view(presource : ID3D12Resource, pcounterresource : ID3D12Resource, pdesc : D3D12_UNORDERED_ACCESS_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_unordered_access_view.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pcounterresource, pdesc, destdescriptor)
+  end
+  def create_render_target_view(presource : ID3D12Resource, pdesc : D3D12_RENDER_TARGET_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_depth_stencil_view(presource : ID3D12Resource, pdesc : D3D12_DEPTH_STENCIL_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_sampler(pdesc : D3D12_SAMPLER_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_sampler.unsafe_as(Proc(D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def copy_descriptors(numdestdescriptorranges : UInt32, pdestdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, pdestdescriptorrangesizes : UInt32*, numsrcdescriptorranges : UInt32, psrcdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, psrcdescriptorrangesizes : UInt32*, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdestdescriptorranges, pdestdescriptorrangestarts, pdestdescriptorrangesizes, numsrcdescriptorranges, psrcdescriptorrangestarts, psrcdescriptorrangesizes, descriptorheapstype)
+  end
+  def copy_descriptors_simple(numdescriptors : UInt32, destdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, srcdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors_simple.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdescriptors, destdescriptorrangestart, srcdescriptorrangestart, descriptorheapstype)
+  end
+  def get_resource_allocation_info(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs)
+  end
+  def get_custom_heap_properties(nodemask : UInt32, heaptype : D3D12_HEAP_TYPE) : D3D12_HEAP_PROPERTIES
+    @lpVtbl.value.get_custom_heap_properties.unsafe_as(Proc(UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)).call(nodemask, heaptype)
+  end
+  def create_committed_resource(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, riidresource, ppvresource)
+  end
+  def create_heap(pdesc : D3D12_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_heap.unsafe_as(Proc(D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def create_placed_resource(pheap : ID3D12Heap, heapoffset : UInt64, pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_placed_resource.unsafe_as(Proc(ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheap, heapoffset, pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_reserved_resource(pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_reserved_resource.unsafe_as(Proc(D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_shared_handle(pobject : ID3D12DeviceChild, pattributes : SECURITY_ATTRIBUTES*, access : UInt32, name : LibC::LPWSTR, phandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_shared_handle.unsafe_as(Proc(ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)).call(pobject, pattributes, access, name, phandle)
+  end
+  def open_shared_handle(nthandle : LibC::HANDLE, riid : Guid*, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.open_shared_handle.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(nthandle, riid, ppvobj)
+  end
+  def open_shared_handle_by_name(name : LibC::LPWSTR, access : UInt32, pnthandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.open_shared_handle_by_name.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)).call(name, access, pnthandle)
+  end
+  def make_resident(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.make_resident.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def evict(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.evict.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def create_fence(initialvalue : UInt64, flags : D3D12_FENCE_FLAGS, riid : Guid*, ppfence : Void**) : HRESULT
+    @lpVtbl.value.create_fence.unsafe_as(Proc(UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)).call(initialvalue, flags, riid, ppfence)
+  end
+  def get_device_removed_reason : HRESULT
+    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_copyable_footprints(presourcedesc : D3D12_RESOURCE_DESC*, firstsubresource : UInt32, numsubresources : UInt32, baseoffset : UInt64, playouts : D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, pnumrows : UInt32*, prowsizeinbytes : UInt64*, ptotalbytes : UInt64*) : Void
+    @lpVtbl.value.get_copyable_footprints.unsafe_as(Proc(D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)).call(presourcedesc, firstsubresource, numsubresources, baseoffset, playouts, pnumrows, prowsizeinbytes, ptotalbytes)
+  end
+  def create_query_heap(pdesc : D3D12_QUERY_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_query_heap.unsafe_as(Proc(D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def set_stable_power_state(enable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stable_power_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(enable)
+  end
+  def create_command_signature(pdesc : D3D12_COMMAND_SIGNATURE_DESC*, prootsignature : ID3D12RootSignature, riid : Guid*, ppvcommandsignature : Void**) : HRESULT
+    @lpVtbl.value.create_command_signature.unsafe_as(Proc(D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)).call(pdesc, prootsignature, riid, ppvcommandsignature)
+  end
+  def get_resource_tiling(ptiledresource : ID3D12Resource, pnumtilesforentireresource : UInt32*, ppackedmipdesc : D3D12_PACKED_MIP_INFO*, pstandardtileshapefornonpackedmips : D3D12_TILE_SHAPE*, pnumsubresourcetilings : UInt32*, firstsubresourcetilingtoget : UInt32, psubresourcetilingsfornonpackedmips : D3D12_SUBRESOURCE_TILING*) : Void
+    @lpVtbl.value.get_resource_tiling.unsafe_as(Proc(ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)).call(ptiledresource, pnumtilesforentireresource, ppackedmipdesc, pstandardtileshapefornonpackedmips, pnumsubresourcetilings, firstsubresourcetilingtoget, psubresourcetilingsfornonpackedmips)
+  end
+  def get_adapter_luid : LUID
+    @lpVtbl.value.get_adapter_luid.unsafe_as(Proc(LUID)).call
+  end
+  def create_pipeline_library(plibraryblob : Void*, bloblength : LibC::UINT_PTR, riid : Guid*, pppipelinelibrary : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_library.unsafe_as(Proc(Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(plibraryblob, bloblength, riid, pppipelinelibrary)
+  end
+  def set_event_on_multiple_fence_completion(ppfences : ID3D12Fence*, pfencevalues : UInt64*, numfences : UInt32, flags : D3D12_MULTIPLE_FENCE_WAIT_FLAGS, hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_on_multiple_fence_completion.unsafe_as(Proc(ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)).call(ppfences, pfencevalues, numfences, flags, hevent)
+  end
+  def set_residency_priority(numobjects : UInt32, ppobjects : ID3D12Pageable*, ppriorities : D3D12_RESIDENCY_PRIORITY*) : HRESULT
+    @lpVtbl.value.set_residency_priority.unsafe_as(Proc(UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)).call(numobjects, ppobjects, ppriorities)
+  end
+  def create_pipeline_state(pdesc : D3D12_PIPELINE_STATE_STREAM_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_state.unsafe_as(Proc(D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+end
+struct LibWin32::ID3D12Device3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_node_count : UInt32
+    @lpVtbl.value.get_node_count.unsafe_as(Proc(UInt32)).call
+  end
+  def create_command_queue(pdesc : D3D12_COMMAND_QUEUE_DESC*, riid : Guid*, ppcommandqueue : Void**) : HRESULT
+    @lpVtbl.value.create_command_queue.unsafe_as(Proc(D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppcommandqueue)
+  end
+  def create_command_allocator(type : D3D12_COMMAND_LIST_TYPE, riid : Guid*, ppcommandallocator : Void**) : HRESULT
+    @lpVtbl.value.create_command_allocator.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)).call(type, riid, ppcommandallocator)
+  end
+  def create_graphics_pipeline_state(pdesc : D3D12_GRAPHICS_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_graphics_pipeline_state.unsafe_as(Proc(D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_compute_pipeline_state(pdesc : D3D12_COMPUTE_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_compute_pipeline_state.unsafe_as(Proc(D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_command_list(nodemask : UInt32, type : D3D12_COMMAND_LIST_TYPE, pcommandallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState, riid : Guid*, ppcommandlist : Void**) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)).call(nodemask, type, pcommandallocator, pinitialstate, riid, ppcommandlist)
+  end
+  def check_feature_support(feature : D3D12_FEATURE, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D12_FEATURE, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def create_descriptor_heap(pdescriptorheapdesc : D3D12_DESCRIPTOR_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_descriptor_heap.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdescriptorheapdesc, riid, ppvheap)
+  end
+  def get_descriptor_handle_increment_size(descriptorheaptype : D3D12_DESCRIPTOR_HEAP_TYPE) : UInt32
+    @lpVtbl.value.get_descriptor_handle_increment_size.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)).call(descriptorheaptype)
+  end
+  def create_root_signature(nodemask : UInt32, pblobwithrootsignature : Void*, bloblengthinbytes : LibC::UINT_PTR, riid : Guid*, ppvrootsignature : Void**) : HRESULT
+    @lpVtbl.value.create_root_signature.unsafe_as(Proc(UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(nodemask, pblobwithrootsignature, bloblengthinbytes, riid, ppvrootsignature)
+  end
+  def create_constant_buffer_view(pdesc : D3D12_CONSTANT_BUFFER_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_constant_buffer_view.unsafe_as(Proc(D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def create_shader_resource_view(presource : ID3D12Resource, pdesc : D3D12_SHADER_RESOURCE_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_unordered_access_view(presource : ID3D12Resource, pcounterresource : ID3D12Resource, pdesc : D3D12_UNORDERED_ACCESS_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_unordered_access_view.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pcounterresource, pdesc, destdescriptor)
+  end
+  def create_render_target_view(presource : ID3D12Resource, pdesc : D3D12_RENDER_TARGET_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_depth_stencil_view(presource : ID3D12Resource, pdesc : D3D12_DEPTH_STENCIL_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_sampler(pdesc : D3D12_SAMPLER_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_sampler.unsafe_as(Proc(D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def copy_descriptors(numdestdescriptorranges : UInt32, pdestdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, pdestdescriptorrangesizes : UInt32*, numsrcdescriptorranges : UInt32, psrcdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, psrcdescriptorrangesizes : UInt32*, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdestdescriptorranges, pdestdescriptorrangestarts, pdestdescriptorrangesizes, numsrcdescriptorranges, psrcdescriptorrangestarts, psrcdescriptorrangesizes, descriptorheapstype)
+  end
+  def copy_descriptors_simple(numdescriptors : UInt32, destdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, srcdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors_simple.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdescriptors, destdescriptorrangestart, srcdescriptorrangestart, descriptorheapstype)
+  end
+  def get_resource_allocation_info(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs)
+  end
+  def get_custom_heap_properties(nodemask : UInt32, heaptype : D3D12_HEAP_TYPE) : D3D12_HEAP_PROPERTIES
+    @lpVtbl.value.get_custom_heap_properties.unsafe_as(Proc(UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)).call(nodemask, heaptype)
+  end
+  def create_committed_resource(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, riidresource, ppvresource)
+  end
+  def create_heap(pdesc : D3D12_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_heap.unsafe_as(Proc(D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def create_placed_resource(pheap : ID3D12Heap, heapoffset : UInt64, pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_placed_resource.unsafe_as(Proc(ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheap, heapoffset, pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_reserved_resource(pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_reserved_resource.unsafe_as(Proc(D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_shared_handle(pobject : ID3D12DeviceChild, pattributes : SECURITY_ATTRIBUTES*, access : UInt32, name : LibC::LPWSTR, phandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_shared_handle.unsafe_as(Proc(ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)).call(pobject, pattributes, access, name, phandle)
+  end
+  def open_shared_handle(nthandle : LibC::HANDLE, riid : Guid*, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.open_shared_handle.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(nthandle, riid, ppvobj)
+  end
+  def open_shared_handle_by_name(name : LibC::LPWSTR, access : UInt32, pnthandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.open_shared_handle_by_name.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)).call(name, access, pnthandle)
+  end
+  def make_resident(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.make_resident.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def evict(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.evict.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def create_fence(initialvalue : UInt64, flags : D3D12_FENCE_FLAGS, riid : Guid*, ppfence : Void**) : HRESULT
+    @lpVtbl.value.create_fence.unsafe_as(Proc(UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)).call(initialvalue, flags, riid, ppfence)
+  end
+  def get_device_removed_reason : HRESULT
+    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_copyable_footprints(presourcedesc : D3D12_RESOURCE_DESC*, firstsubresource : UInt32, numsubresources : UInt32, baseoffset : UInt64, playouts : D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, pnumrows : UInt32*, prowsizeinbytes : UInt64*, ptotalbytes : UInt64*) : Void
+    @lpVtbl.value.get_copyable_footprints.unsafe_as(Proc(D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)).call(presourcedesc, firstsubresource, numsubresources, baseoffset, playouts, pnumrows, prowsizeinbytes, ptotalbytes)
+  end
+  def create_query_heap(pdesc : D3D12_QUERY_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_query_heap.unsafe_as(Proc(D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def set_stable_power_state(enable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stable_power_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(enable)
+  end
+  def create_command_signature(pdesc : D3D12_COMMAND_SIGNATURE_DESC*, prootsignature : ID3D12RootSignature, riid : Guid*, ppvcommandsignature : Void**) : HRESULT
+    @lpVtbl.value.create_command_signature.unsafe_as(Proc(D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)).call(pdesc, prootsignature, riid, ppvcommandsignature)
+  end
+  def get_resource_tiling(ptiledresource : ID3D12Resource, pnumtilesforentireresource : UInt32*, ppackedmipdesc : D3D12_PACKED_MIP_INFO*, pstandardtileshapefornonpackedmips : D3D12_TILE_SHAPE*, pnumsubresourcetilings : UInt32*, firstsubresourcetilingtoget : UInt32, psubresourcetilingsfornonpackedmips : D3D12_SUBRESOURCE_TILING*) : Void
+    @lpVtbl.value.get_resource_tiling.unsafe_as(Proc(ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)).call(ptiledresource, pnumtilesforentireresource, ppackedmipdesc, pstandardtileshapefornonpackedmips, pnumsubresourcetilings, firstsubresourcetilingtoget, psubresourcetilingsfornonpackedmips)
+  end
+  def get_adapter_luid : LUID
+    @lpVtbl.value.get_adapter_luid.unsafe_as(Proc(LUID)).call
+  end
+  def create_pipeline_library(plibraryblob : Void*, bloblength : LibC::UINT_PTR, riid : Guid*, pppipelinelibrary : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_library.unsafe_as(Proc(Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(plibraryblob, bloblength, riid, pppipelinelibrary)
+  end
+  def set_event_on_multiple_fence_completion(ppfences : ID3D12Fence*, pfencevalues : UInt64*, numfences : UInt32, flags : D3D12_MULTIPLE_FENCE_WAIT_FLAGS, hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_on_multiple_fence_completion.unsafe_as(Proc(ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)).call(ppfences, pfencevalues, numfences, flags, hevent)
+  end
+  def set_residency_priority(numobjects : UInt32, ppobjects : ID3D12Pageable*, ppriorities : D3D12_RESIDENCY_PRIORITY*) : HRESULT
+    @lpVtbl.value.set_residency_priority.unsafe_as(Proc(UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)).call(numobjects, ppobjects, ppriorities)
+  end
+  def create_pipeline_state(pdesc : D3D12_PIPELINE_STATE_STREAM_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_state.unsafe_as(Proc(D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def open_existing_heap_from_address(paddress : Void*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.open_existing_heap_from_address.unsafe_as(Proc(Void*, Guid*, Void**, HRESULT)).call(paddress, riid, ppvheap)
+  end
+  def open_existing_heap_from_file_mapping(hfilemapping : LibC::HANDLE, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.open_existing_heap_from_file_mapping.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hfilemapping, riid, ppvheap)
+  end
+  def enqueue_make_resident(flags : D3D12_RESIDENCY_FLAGS, numobjects : UInt32, ppobjects : ID3D12Pageable*, pfencetosignal : ID3D12Fence, fencevaluetosignal : UInt64) : HRESULT
+    @lpVtbl.value.enqueue_make_resident.unsafe_as(Proc(D3D12_RESIDENCY_FLAGS, UInt32, ID3D12Pageable*, ID3D12Fence, UInt64, HRESULT)).call(flags, numobjects, ppobjects, pfencetosignal, fencevaluetosignal)
+  end
+end
+struct LibWin32::ID3D12ProtectedSession
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_status_fence(riid : Guid*, ppfence : Void**) : HRESULT
+    @lpVtbl.value.get_status_fence.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppfence)
+  end
+  def get_session_status : D3D12_PROTECTED_SESSION_STATUS
+    @lpVtbl.value.get_session_status.unsafe_as(Proc(D3D12_PROTECTED_SESSION_STATUS)).call
+  end
+end
+struct LibWin32::ID3D12ProtectedResourceSession
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_status_fence(riid : Guid*, ppfence : Void**) : HRESULT
+    @lpVtbl.value.get_status_fence.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppfence)
+  end
+  def get_session_status : D3D12_PROTECTED_SESSION_STATUS
+    @lpVtbl.value.get_session_status.unsafe_as(Proc(D3D12_PROTECTED_SESSION_STATUS)).call
+  end
+  def get_desc : D3D12_PROTECTED_RESOURCE_SESSION_DESC
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_PROTECTED_RESOURCE_SESSION_DESC)).call
+  end
+end
+struct LibWin32::ID3D12Device4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_node_count : UInt32
+    @lpVtbl.value.get_node_count.unsafe_as(Proc(UInt32)).call
+  end
+  def create_command_queue(pdesc : D3D12_COMMAND_QUEUE_DESC*, riid : Guid*, ppcommandqueue : Void**) : HRESULT
+    @lpVtbl.value.create_command_queue.unsafe_as(Proc(D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppcommandqueue)
+  end
+  def create_command_allocator(type : D3D12_COMMAND_LIST_TYPE, riid : Guid*, ppcommandallocator : Void**) : HRESULT
+    @lpVtbl.value.create_command_allocator.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)).call(type, riid, ppcommandallocator)
+  end
+  def create_graphics_pipeline_state(pdesc : D3D12_GRAPHICS_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_graphics_pipeline_state.unsafe_as(Proc(D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_compute_pipeline_state(pdesc : D3D12_COMPUTE_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_compute_pipeline_state.unsafe_as(Proc(D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_command_list(nodemask : UInt32, type : D3D12_COMMAND_LIST_TYPE, pcommandallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState, riid : Guid*, ppcommandlist : Void**) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)).call(nodemask, type, pcommandallocator, pinitialstate, riid, ppcommandlist)
+  end
+  def check_feature_support(feature : D3D12_FEATURE, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D12_FEATURE, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def create_descriptor_heap(pdescriptorheapdesc : D3D12_DESCRIPTOR_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_descriptor_heap.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdescriptorheapdesc, riid, ppvheap)
+  end
+  def get_descriptor_handle_increment_size(descriptorheaptype : D3D12_DESCRIPTOR_HEAP_TYPE) : UInt32
+    @lpVtbl.value.get_descriptor_handle_increment_size.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)).call(descriptorheaptype)
+  end
+  def create_root_signature(nodemask : UInt32, pblobwithrootsignature : Void*, bloblengthinbytes : LibC::UINT_PTR, riid : Guid*, ppvrootsignature : Void**) : HRESULT
+    @lpVtbl.value.create_root_signature.unsafe_as(Proc(UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(nodemask, pblobwithrootsignature, bloblengthinbytes, riid, ppvrootsignature)
+  end
+  def create_constant_buffer_view(pdesc : D3D12_CONSTANT_BUFFER_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_constant_buffer_view.unsafe_as(Proc(D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def create_shader_resource_view(presource : ID3D12Resource, pdesc : D3D12_SHADER_RESOURCE_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_unordered_access_view(presource : ID3D12Resource, pcounterresource : ID3D12Resource, pdesc : D3D12_UNORDERED_ACCESS_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_unordered_access_view.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pcounterresource, pdesc, destdescriptor)
+  end
+  def create_render_target_view(presource : ID3D12Resource, pdesc : D3D12_RENDER_TARGET_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_depth_stencil_view(presource : ID3D12Resource, pdesc : D3D12_DEPTH_STENCIL_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_sampler(pdesc : D3D12_SAMPLER_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_sampler.unsafe_as(Proc(D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def copy_descriptors(numdestdescriptorranges : UInt32, pdestdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, pdestdescriptorrangesizes : UInt32*, numsrcdescriptorranges : UInt32, psrcdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, psrcdescriptorrangesizes : UInt32*, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdestdescriptorranges, pdestdescriptorrangestarts, pdestdescriptorrangesizes, numsrcdescriptorranges, psrcdescriptorrangestarts, psrcdescriptorrangesizes, descriptorheapstype)
+  end
+  def copy_descriptors_simple(numdescriptors : UInt32, destdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, srcdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors_simple.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdescriptors, destdescriptorrangestart, srcdescriptorrangestart, descriptorheapstype)
+  end
+  def get_resource_allocation_info(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs)
+  end
+  def get_custom_heap_properties(nodemask : UInt32, heaptype : D3D12_HEAP_TYPE) : D3D12_HEAP_PROPERTIES
+    @lpVtbl.value.get_custom_heap_properties.unsafe_as(Proc(UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)).call(nodemask, heaptype)
+  end
+  def create_committed_resource(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, riidresource, ppvresource)
+  end
+  def create_heap(pdesc : D3D12_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_heap.unsafe_as(Proc(D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def create_placed_resource(pheap : ID3D12Heap, heapoffset : UInt64, pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_placed_resource.unsafe_as(Proc(ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheap, heapoffset, pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_reserved_resource(pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_reserved_resource.unsafe_as(Proc(D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_shared_handle(pobject : ID3D12DeviceChild, pattributes : SECURITY_ATTRIBUTES*, access : UInt32, name : LibC::LPWSTR, phandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_shared_handle.unsafe_as(Proc(ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)).call(pobject, pattributes, access, name, phandle)
+  end
+  def open_shared_handle(nthandle : LibC::HANDLE, riid : Guid*, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.open_shared_handle.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(nthandle, riid, ppvobj)
+  end
+  def open_shared_handle_by_name(name : LibC::LPWSTR, access : UInt32, pnthandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.open_shared_handle_by_name.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)).call(name, access, pnthandle)
+  end
+  def make_resident(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.make_resident.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def evict(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.evict.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def create_fence(initialvalue : UInt64, flags : D3D12_FENCE_FLAGS, riid : Guid*, ppfence : Void**) : HRESULT
+    @lpVtbl.value.create_fence.unsafe_as(Proc(UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)).call(initialvalue, flags, riid, ppfence)
+  end
+  def get_device_removed_reason : HRESULT
+    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_copyable_footprints(presourcedesc : D3D12_RESOURCE_DESC*, firstsubresource : UInt32, numsubresources : UInt32, baseoffset : UInt64, playouts : D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, pnumrows : UInt32*, prowsizeinbytes : UInt64*, ptotalbytes : UInt64*) : Void
+    @lpVtbl.value.get_copyable_footprints.unsafe_as(Proc(D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)).call(presourcedesc, firstsubresource, numsubresources, baseoffset, playouts, pnumrows, prowsizeinbytes, ptotalbytes)
+  end
+  def create_query_heap(pdesc : D3D12_QUERY_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_query_heap.unsafe_as(Proc(D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def set_stable_power_state(enable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stable_power_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(enable)
+  end
+  def create_command_signature(pdesc : D3D12_COMMAND_SIGNATURE_DESC*, prootsignature : ID3D12RootSignature, riid : Guid*, ppvcommandsignature : Void**) : HRESULT
+    @lpVtbl.value.create_command_signature.unsafe_as(Proc(D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)).call(pdesc, prootsignature, riid, ppvcommandsignature)
+  end
+  def get_resource_tiling(ptiledresource : ID3D12Resource, pnumtilesforentireresource : UInt32*, ppackedmipdesc : D3D12_PACKED_MIP_INFO*, pstandardtileshapefornonpackedmips : D3D12_TILE_SHAPE*, pnumsubresourcetilings : UInt32*, firstsubresourcetilingtoget : UInt32, psubresourcetilingsfornonpackedmips : D3D12_SUBRESOURCE_TILING*) : Void
+    @lpVtbl.value.get_resource_tiling.unsafe_as(Proc(ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)).call(ptiledresource, pnumtilesforentireresource, ppackedmipdesc, pstandardtileshapefornonpackedmips, pnumsubresourcetilings, firstsubresourcetilingtoget, psubresourcetilingsfornonpackedmips)
+  end
+  def get_adapter_luid : LUID
+    @lpVtbl.value.get_adapter_luid.unsafe_as(Proc(LUID)).call
+  end
+  def create_pipeline_library(plibraryblob : Void*, bloblength : LibC::UINT_PTR, riid : Guid*, pppipelinelibrary : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_library.unsafe_as(Proc(Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(plibraryblob, bloblength, riid, pppipelinelibrary)
+  end
+  def set_event_on_multiple_fence_completion(ppfences : ID3D12Fence*, pfencevalues : UInt64*, numfences : UInt32, flags : D3D12_MULTIPLE_FENCE_WAIT_FLAGS, hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_on_multiple_fence_completion.unsafe_as(Proc(ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)).call(ppfences, pfencevalues, numfences, flags, hevent)
+  end
+  def set_residency_priority(numobjects : UInt32, ppobjects : ID3D12Pageable*, ppriorities : D3D12_RESIDENCY_PRIORITY*) : HRESULT
+    @lpVtbl.value.set_residency_priority.unsafe_as(Proc(UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)).call(numobjects, ppobjects, ppriorities)
+  end
+  def create_pipeline_state(pdesc : D3D12_PIPELINE_STATE_STREAM_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_state.unsafe_as(Proc(D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def open_existing_heap_from_address(paddress : Void*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.open_existing_heap_from_address.unsafe_as(Proc(Void*, Guid*, Void**, HRESULT)).call(paddress, riid, ppvheap)
+  end
+  def open_existing_heap_from_file_mapping(hfilemapping : LibC::HANDLE, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.open_existing_heap_from_file_mapping.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hfilemapping, riid, ppvheap)
+  end
+  def enqueue_make_resident(flags : D3D12_RESIDENCY_FLAGS, numobjects : UInt32, ppobjects : ID3D12Pageable*, pfencetosignal : ID3D12Fence, fencevaluetosignal : UInt64) : HRESULT
+    @lpVtbl.value.enqueue_make_resident.unsafe_as(Proc(D3D12_RESIDENCY_FLAGS, UInt32, ID3D12Pageable*, ID3D12Fence, UInt64, HRESULT)).call(flags, numobjects, ppobjects, pfencetosignal, fencevaluetosignal)
+  end
+  def create_command_list1(nodemask : UInt32, type : D3D12_COMMAND_LIST_TYPE, flags : D3D12_COMMAND_LIST_FLAGS, riid : Guid*, ppcommandlist : Void**) : HRESULT
+    @lpVtbl.value.create_command_list1.unsafe_as(Proc(UInt32, D3D12_COMMAND_LIST_TYPE, D3D12_COMMAND_LIST_FLAGS, Guid*, Void**, HRESULT)).call(nodemask, type, flags, riid, ppcommandlist)
+  end
+  def create_protected_resource_session(pdesc : D3D12_PROTECTED_RESOURCE_SESSION_DESC*, riid : Guid*, ppsession : Void**) : HRESULT
+    @lpVtbl.value.create_protected_resource_session.unsafe_as(Proc(D3D12_PROTECTED_RESOURCE_SESSION_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppsession)
+  end
+  def create_committed_resource1(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, pprotectedsession : ID3D12ProtectedResourceSession, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource1.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, pprotectedsession, riidresource, ppvresource)
+  end
+  def create_heap1(pdesc : D3D12_HEAP_DESC*, pprotectedsession : ID3D12ProtectedResourceSession, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_heap1.unsafe_as(Proc(D3D12_HEAP_DESC*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pdesc, pprotectedsession, riid, ppvheap)
+  end
+  def create_reserved_resource1(pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, pprotectedsession : ID3D12ProtectedResourceSession, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_reserved_resource1.unsafe_as(Proc(D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pdesc, initialstate, poptimizedclearvalue, pprotectedsession, riid, ppvresource)
+  end
+  def get_resource_allocation_info1(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC*, presourceallocationinfo1 : D3D12_RESOURCE_ALLOCATION_INFO1*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info1.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs, presourceallocationinfo1)
+  end
+end
+struct LibWin32::ID3D12LifetimeOwner
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def lifetime_state_updated(newstate : D3D12_LIFETIME_STATE) : Void
+    @lpVtbl.value.lifetime_state_updated.unsafe_as(Proc(D3D12_LIFETIME_STATE, Void)).call(newstate)
+  end
+end
+struct LibWin32::ID3D12SwapChainAssistant
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_luid : LUID
+    @lpVtbl.value.get_luid.unsafe_as(Proc(LUID)).call
+  end
+  def get_swap_chain_object(riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_swap_chain_object.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  end
+  def get_current_resource_and_command_queue(riidresource : Guid*, ppvresource : Void**, riidqueue : Guid*, ppvqueue : Void**) : HRESULT
+    @lpVtbl.value.get_current_resource_and_command_queue.unsafe_as(Proc(Guid*, Void**, Guid*, Void**, HRESULT)).call(riidresource, ppvresource, riidqueue, ppvqueue)
+  end
+  def insert_implicit_sync : HRESULT
+    @lpVtbl.value.insert_implicit_sync.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ID3D12LifetimeTracker
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def destroy_owned_object(pobject : ID3D12DeviceChild) : HRESULT
+    @lpVtbl.value.destroy_owned_object.unsafe_as(Proc(ID3D12DeviceChild, HRESULT)).call(pobject)
+  end
+end
+struct LibWin32::ID3D12StateObject
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+end
+struct LibWin32::ID3D12StateObjectProperties
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_shader_identifier(pexportname : LibC::LPWSTR) : Void*
+    @lpVtbl.value.get_shader_identifier.unsafe_as(Proc(LibC::LPWSTR, Void**)).call(pexportname)
+  end
+  def get_shader_stack_size(pexportname : LibC::LPWSTR) : UInt64
+    @lpVtbl.value.get_shader_stack_size.unsafe_as(Proc(LibC::LPWSTR, UInt64)).call(pexportname)
+  end
+  def get_pipeline_stack_size : UInt64
+    @lpVtbl.value.get_pipeline_stack_size.unsafe_as(Proc(UInt64)).call
+  end
+  def set_pipeline_stack_size(pipelinestacksizeinbytes : UInt64) : Void
+    @lpVtbl.value.set_pipeline_stack_size.unsafe_as(Proc(UInt64, Void)).call(pipelinestacksizeinbytes)
+  end
+end
+struct LibWin32::ID3D12Device5
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_node_count : UInt32
+    @lpVtbl.value.get_node_count.unsafe_as(Proc(UInt32)).call
+  end
+  def create_command_queue(pdesc : D3D12_COMMAND_QUEUE_DESC*, riid : Guid*, ppcommandqueue : Void**) : HRESULT
+    @lpVtbl.value.create_command_queue.unsafe_as(Proc(D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppcommandqueue)
+  end
+  def create_command_allocator(type : D3D12_COMMAND_LIST_TYPE, riid : Guid*, ppcommandallocator : Void**) : HRESULT
+    @lpVtbl.value.create_command_allocator.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)).call(type, riid, ppcommandallocator)
+  end
+  def create_graphics_pipeline_state(pdesc : D3D12_GRAPHICS_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_graphics_pipeline_state.unsafe_as(Proc(D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_compute_pipeline_state(pdesc : D3D12_COMPUTE_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_compute_pipeline_state.unsafe_as(Proc(D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_command_list(nodemask : UInt32, type : D3D12_COMMAND_LIST_TYPE, pcommandallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState, riid : Guid*, ppcommandlist : Void**) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)).call(nodemask, type, pcommandallocator, pinitialstate, riid, ppcommandlist)
+  end
+  def check_feature_support(feature : D3D12_FEATURE, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D12_FEATURE, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def create_descriptor_heap(pdescriptorheapdesc : D3D12_DESCRIPTOR_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_descriptor_heap.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdescriptorheapdesc, riid, ppvheap)
+  end
+  def get_descriptor_handle_increment_size(descriptorheaptype : D3D12_DESCRIPTOR_HEAP_TYPE) : UInt32
+    @lpVtbl.value.get_descriptor_handle_increment_size.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)).call(descriptorheaptype)
+  end
+  def create_root_signature(nodemask : UInt32, pblobwithrootsignature : Void*, bloblengthinbytes : LibC::UINT_PTR, riid : Guid*, ppvrootsignature : Void**) : HRESULT
+    @lpVtbl.value.create_root_signature.unsafe_as(Proc(UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(nodemask, pblobwithrootsignature, bloblengthinbytes, riid, ppvrootsignature)
+  end
+  def create_constant_buffer_view(pdesc : D3D12_CONSTANT_BUFFER_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_constant_buffer_view.unsafe_as(Proc(D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def create_shader_resource_view(presource : ID3D12Resource, pdesc : D3D12_SHADER_RESOURCE_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_unordered_access_view(presource : ID3D12Resource, pcounterresource : ID3D12Resource, pdesc : D3D12_UNORDERED_ACCESS_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_unordered_access_view.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pcounterresource, pdesc, destdescriptor)
+  end
+  def create_render_target_view(presource : ID3D12Resource, pdesc : D3D12_RENDER_TARGET_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_depth_stencil_view(presource : ID3D12Resource, pdesc : D3D12_DEPTH_STENCIL_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_sampler(pdesc : D3D12_SAMPLER_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_sampler.unsafe_as(Proc(D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def copy_descriptors(numdestdescriptorranges : UInt32, pdestdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, pdestdescriptorrangesizes : UInt32*, numsrcdescriptorranges : UInt32, psrcdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, psrcdescriptorrangesizes : UInt32*, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdestdescriptorranges, pdestdescriptorrangestarts, pdestdescriptorrangesizes, numsrcdescriptorranges, psrcdescriptorrangestarts, psrcdescriptorrangesizes, descriptorheapstype)
+  end
+  def copy_descriptors_simple(numdescriptors : UInt32, destdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, srcdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors_simple.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdescriptors, destdescriptorrangestart, srcdescriptorrangestart, descriptorheapstype)
+  end
+  def get_resource_allocation_info(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs)
+  end
+  def get_custom_heap_properties(nodemask : UInt32, heaptype : D3D12_HEAP_TYPE) : D3D12_HEAP_PROPERTIES
+    @lpVtbl.value.get_custom_heap_properties.unsafe_as(Proc(UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)).call(nodemask, heaptype)
+  end
+  def create_committed_resource(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, riidresource, ppvresource)
+  end
+  def create_heap(pdesc : D3D12_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_heap.unsafe_as(Proc(D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def create_placed_resource(pheap : ID3D12Heap, heapoffset : UInt64, pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_placed_resource.unsafe_as(Proc(ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheap, heapoffset, pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_reserved_resource(pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_reserved_resource.unsafe_as(Proc(D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_shared_handle(pobject : ID3D12DeviceChild, pattributes : SECURITY_ATTRIBUTES*, access : UInt32, name : LibC::LPWSTR, phandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_shared_handle.unsafe_as(Proc(ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)).call(pobject, pattributes, access, name, phandle)
+  end
+  def open_shared_handle(nthandle : LibC::HANDLE, riid : Guid*, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.open_shared_handle.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(nthandle, riid, ppvobj)
+  end
+  def open_shared_handle_by_name(name : LibC::LPWSTR, access : UInt32, pnthandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.open_shared_handle_by_name.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)).call(name, access, pnthandle)
+  end
+  def make_resident(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.make_resident.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def evict(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.evict.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def create_fence(initialvalue : UInt64, flags : D3D12_FENCE_FLAGS, riid : Guid*, ppfence : Void**) : HRESULT
+    @lpVtbl.value.create_fence.unsafe_as(Proc(UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)).call(initialvalue, flags, riid, ppfence)
+  end
+  def get_device_removed_reason : HRESULT
+    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_copyable_footprints(presourcedesc : D3D12_RESOURCE_DESC*, firstsubresource : UInt32, numsubresources : UInt32, baseoffset : UInt64, playouts : D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, pnumrows : UInt32*, prowsizeinbytes : UInt64*, ptotalbytes : UInt64*) : Void
+    @lpVtbl.value.get_copyable_footprints.unsafe_as(Proc(D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)).call(presourcedesc, firstsubresource, numsubresources, baseoffset, playouts, pnumrows, prowsizeinbytes, ptotalbytes)
+  end
+  def create_query_heap(pdesc : D3D12_QUERY_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_query_heap.unsafe_as(Proc(D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def set_stable_power_state(enable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stable_power_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(enable)
+  end
+  def create_command_signature(pdesc : D3D12_COMMAND_SIGNATURE_DESC*, prootsignature : ID3D12RootSignature, riid : Guid*, ppvcommandsignature : Void**) : HRESULT
+    @lpVtbl.value.create_command_signature.unsafe_as(Proc(D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)).call(pdesc, prootsignature, riid, ppvcommandsignature)
+  end
+  def get_resource_tiling(ptiledresource : ID3D12Resource, pnumtilesforentireresource : UInt32*, ppackedmipdesc : D3D12_PACKED_MIP_INFO*, pstandardtileshapefornonpackedmips : D3D12_TILE_SHAPE*, pnumsubresourcetilings : UInt32*, firstsubresourcetilingtoget : UInt32, psubresourcetilingsfornonpackedmips : D3D12_SUBRESOURCE_TILING*) : Void
+    @lpVtbl.value.get_resource_tiling.unsafe_as(Proc(ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)).call(ptiledresource, pnumtilesforentireresource, ppackedmipdesc, pstandardtileshapefornonpackedmips, pnumsubresourcetilings, firstsubresourcetilingtoget, psubresourcetilingsfornonpackedmips)
+  end
+  def get_adapter_luid : LUID
+    @lpVtbl.value.get_adapter_luid.unsafe_as(Proc(LUID)).call
+  end
+  def create_pipeline_library(plibraryblob : Void*, bloblength : LibC::UINT_PTR, riid : Guid*, pppipelinelibrary : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_library.unsafe_as(Proc(Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(plibraryblob, bloblength, riid, pppipelinelibrary)
+  end
+  def set_event_on_multiple_fence_completion(ppfences : ID3D12Fence*, pfencevalues : UInt64*, numfences : UInt32, flags : D3D12_MULTIPLE_FENCE_WAIT_FLAGS, hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_on_multiple_fence_completion.unsafe_as(Proc(ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)).call(ppfences, pfencevalues, numfences, flags, hevent)
+  end
+  def set_residency_priority(numobjects : UInt32, ppobjects : ID3D12Pageable*, ppriorities : D3D12_RESIDENCY_PRIORITY*) : HRESULT
+    @lpVtbl.value.set_residency_priority.unsafe_as(Proc(UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)).call(numobjects, ppobjects, ppriorities)
+  end
+  def create_pipeline_state(pdesc : D3D12_PIPELINE_STATE_STREAM_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_state.unsafe_as(Proc(D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def open_existing_heap_from_address(paddress : Void*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.open_existing_heap_from_address.unsafe_as(Proc(Void*, Guid*, Void**, HRESULT)).call(paddress, riid, ppvheap)
+  end
+  def open_existing_heap_from_file_mapping(hfilemapping : LibC::HANDLE, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.open_existing_heap_from_file_mapping.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hfilemapping, riid, ppvheap)
+  end
+  def enqueue_make_resident(flags : D3D12_RESIDENCY_FLAGS, numobjects : UInt32, ppobjects : ID3D12Pageable*, pfencetosignal : ID3D12Fence, fencevaluetosignal : UInt64) : HRESULT
+    @lpVtbl.value.enqueue_make_resident.unsafe_as(Proc(D3D12_RESIDENCY_FLAGS, UInt32, ID3D12Pageable*, ID3D12Fence, UInt64, HRESULT)).call(flags, numobjects, ppobjects, pfencetosignal, fencevaluetosignal)
+  end
+  def create_command_list1(nodemask : UInt32, type : D3D12_COMMAND_LIST_TYPE, flags : D3D12_COMMAND_LIST_FLAGS, riid : Guid*, ppcommandlist : Void**) : HRESULT
+    @lpVtbl.value.create_command_list1.unsafe_as(Proc(UInt32, D3D12_COMMAND_LIST_TYPE, D3D12_COMMAND_LIST_FLAGS, Guid*, Void**, HRESULT)).call(nodemask, type, flags, riid, ppcommandlist)
+  end
+  def create_protected_resource_session(pdesc : D3D12_PROTECTED_RESOURCE_SESSION_DESC*, riid : Guid*, ppsession : Void**) : HRESULT
+    @lpVtbl.value.create_protected_resource_session.unsafe_as(Proc(D3D12_PROTECTED_RESOURCE_SESSION_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppsession)
+  end
+  def create_committed_resource1(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, pprotectedsession : ID3D12ProtectedResourceSession, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource1.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, pprotectedsession, riidresource, ppvresource)
+  end
+  def create_heap1(pdesc : D3D12_HEAP_DESC*, pprotectedsession : ID3D12ProtectedResourceSession, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_heap1.unsafe_as(Proc(D3D12_HEAP_DESC*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pdesc, pprotectedsession, riid, ppvheap)
+  end
+  def create_reserved_resource1(pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, pprotectedsession : ID3D12ProtectedResourceSession, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_reserved_resource1.unsafe_as(Proc(D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pdesc, initialstate, poptimizedclearvalue, pprotectedsession, riid, ppvresource)
+  end
+  def get_resource_allocation_info1(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC*, presourceallocationinfo1 : D3D12_RESOURCE_ALLOCATION_INFO1*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info1.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs, presourceallocationinfo1)
+  end
+  def create_lifetime_tracker(powner : ID3D12LifetimeOwner, riid : Guid*, ppvtracker : Void**) : HRESULT
+    @lpVtbl.value.create_lifetime_tracker.unsafe_as(Proc(ID3D12LifetimeOwner, Guid*, Void**, HRESULT)).call(powner, riid, ppvtracker)
+  end
+  def remove_device : Void
+    @lpVtbl.value.remove_device.unsafe_as(Proc(Void)).call
+  end
+  def enumerate_meta_commands(pnummetacommands : UInt32*, pdescs : D3D12_META_COMMAND_DESC*) : HRESULT
+    @lpVtbl.value.enumerate_meta_commands.unsafe_as(Proc(UInt32*, D3D12_META_COMMAND_DESC*, HRESULT)).call(pnummetacommands, pdescs)
+  end
+  def enumerate_meta_command_parameters(commandid : Guid*, stage : D3D12_META_COMMAND_PARAMETER_STAGE, ptotalstructuresizeinbytes : UInt32*, pparametercount : UInt32*, pparameterdescs : D3D12_META_COMMAND_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.enumerate_meta_command_parameters.unsafe_as(Proc(Guid*, D3D12_META_COMMAND_PARAMETER_STAGE, UInt32*, UInt32*, D3D12_META_COMMAND_PARAMETER_DESC*, HRESULT)).call(commandid, stage, ptotalstructuresizeinbytes, pparametercount, pparameterdescs)
+  end
+  def create_meta_command(commandid : Guid*, nodemask : UInt32, pcreationparametersdata : Void*, creationparametersdatasizeinbytes : LibC::UINT_PTR, riid : Guid*, ppmetacommand : Void**) : HRESULT
+    @lpVtbl.value.create_meta_command.unsafe_as(Proc(Guid*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(commandid, nodemask, pcreationparametersdata, creationparametersdatasizeinbytes, riid, ppmetacommand)
+  end
+  def create_state_object(pdesc : D3D12_STATE_OBJECT_DESC*, riid : Guid*, ppstateobject : Void**) : HRESULT
+    @lpVtbl.value.create_state_object.unsafe_as(Proc(D3D12_STATE_OBJECT_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppstateobject)
+  end
+  def get_raytracing_acceleration_structure_prebuild_info(pdesc : D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, pinfo : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*) : Void
+    @lpVtbl.value.get_raytracing_acceleration_structure_prebuild_info.unsafe_as(Proc(D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*, Void)).call(pdesc, pinfo)
+  end
+  def check_driver_matching_identifier(serializeddatatype : D3D12_SERIALIZED_DATA_TYPE, pidentifiertocheck : D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*) : D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS
+    @lpVtbl.value.check_driver_matching_identifier.unsafe_as(Proc(D3D12_SERIALIZED_DATA_TYPE, D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*, D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS)).call(serializeddatatype, pidentifiertocheck)
+  end
+end
+struct LibWin32::ID3D12DeviceRemovedExtendedDataSettings
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_auto_breadcrumbs_enablement(enablement : D3D12_DRED_ENABLEMENT) : Void
+    @lpVtbl.value.set_auto_breadcrumbs_enablement.unsafe_as(Proc(D3D12_DRED_ENABLEMENT, Void)).call(enablement)
+  end
+  def set_page_fault_enablement(enablement : D3D12_DRED_ENABLEMENT) : Void
+    @lpVtbl.value.set_page_fault_enablement.unsafe_as(Proc(D3D12_DRED_ENABLEMENT, Void)).call(enablement)
+  end
+  def set_watson_dump_enablement(enablement : D3D12_DRED_ENABLEMENT) : Void
+    @lpVtbl.value.set_watson_dump_enablement.unsafe_as(Proc(D3D12_DRED_ENABLEMENT, Void)).call(enablement)
+  end
+end
+struct LibWin32::ID3D12DeviceRemovedExtendedDataSettings1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_auto_breadcrumbs_enablement(enablement : D3D12_DRED_ENABLEMENT) : Void
+    @lpVtbl.value.set_auto_breadcrumbs_enablement.unsafe_as(Proc(D3D12_DRED_ENABLEMENT, Void)).call(enablement)
+  end
+  def set_page_fault_enablement(enablement : D3D12_DRED_ENABLEMENT) : Void
+    @lpVtbl.value.set_page_fault_enablement.unsafe_as(Proc(D3D12_DRED_ENABLEMENT, Void)).call(enablement)
+  end
+  def set_watson_dump_enablement(enablement : D3D12_DRED_ENABLEMENT) : Void
+    @lpVtbl.value.set_watson_dump_enablement.unsafe_as(Proc(D3D12_DRED_ENABLEMENT, Void)).call(enablement)
+  end
+  def set_breadcrumb_context_enablement(enablement : D3D12_DRED_ENABLEMENT) : Void
+    @lpVtbl.value.set_breadcrumb_context_enablement.unsafe_as(Proc(D3D12_DRED_ENABLEMENT, Void)).call(enablement)
+  end
+end
+struct LibWin32::ID3D12DeviceRemovedExtendedData
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_auto_breadcrumbs_output(poutput : D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT*) : HRESULT
+    @lpVtbl.value.get_auto_breadcrumbs_output.unsafe_as(Proc(D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT*, HRESULT)).call(poutput)
+  end
+  def get_page_fault_allocation_output(poutput : D3D12_DRED_PAGE_FAULT_OUTPUT*) : HRESULT
+    @lpVtbl.value.get_page_fault_allocation_output.unsafe_as(Proc(D3D12_DRED_PAGE_FAULT_OUTPUT*, HRESULT)).call(poutput)
+  end
+end
+struct LibWin32::ID3D12DeviceRemovedExtendedData1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_auto_breadcrumbs_output(poutput : D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT*) : HRESULT
+    @lpVtbl.value.get_auto_breadcrumbs_output.unsafe_as(Proc(D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT*, HRESULT)).call(poutput)
+  end
+  def get_page_fault_allocation_output(poutput : D3D12_DRED_PAGE_FAULT_OUTPUT*) : HRESULT
+    @lpVtbl.value.get_page_fault_allocation_output.unsafe_as(Proc(D3D12_DRED_PAGE_FAULT_OUTPUT*, HRESULT)).call(poutput)
+  end
+  def get_auto_breadcrumbs_output1(poutput : D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT1*) : HRESULT
+    @lpVtbl.value.get_auto_breadcrumbs_output1.unsafe_as(Proc(D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT1*, HRESULT)).call(poutput)
+  end
+  def get_page_fault_allocation_output1(poutput : D3D12_DRED_PAGE_FAULT_OUTPUT1*) : HRESULT
+    @lpVtbl.value.get_page_fault_allocation_output1.unsafe_as(Proc(D3D12_DRED_PAGE_FAULT_OUTPUT1*, HRESULT)).call(poutput)
+  end
+end
+struct LibWin32::ID3D12DeviceRemovedExtendedData2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_auto_breadcrumbs_output(poutput : D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT*) : HRESULT
+    @lpVtbl.value.get_auto_breadcrumbs_output.unsafe_as(Proc(D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT*, HRESULT)).call(poutput)
+  end
+  def get_page_fault_allocation_output(poutput : D3D12_DRED_PAGE_FAULT_OUTPUT*) : HRESULT
+    @lpVtbl.value.get_page_fault_allocation_output.unsafe_as(Proc(D3D12_DRED_PAGE_FAULT_OUTPUT*, HRESULT)).call(poutput)
+  end
+  def get_auto_breadcrumbs_output1(poutput : D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT1*) : HRESULT
+    @lpVtbl.value.get_auto_breadcrumbs_output1.unsafe_as(Proc(D3D12_DRED_AUTO_BREADCRUMBS_OUTPUT1*, HRESULT)).call(poutput)
+  end
+  def get_page_fault_allocation_output1(poutput : D3D12_DRED_PAGE_FAULT_OUTPUT1*) : HRESULT
+    @lpVtbl.value.get_page_fault_allocation_output1.unsafe_as(Proc(D3D12_DRED_PAGE_FAULT_OUTPUT1*, HRESULT)).call(poutput)
+  end
+  def get_page_fault_allocation_output2(poutput : D3D12_DRED_PAGE_FAULT_OUTPUT2*) : HRESULT
+    @lpVtbl.value.get_page_fault_allocation_output2.unsafe_as(Proc(D3D12_DRED_PAGE_FAULT_OUTPUT2*, HRESULT)).call(poutput)
+  end
+  def get_device_state : D3D12_DRED_DEVICE_STATE
+    @lpVtbl.value.get_device_state.unsafe_as(Proc(D3D12_DRED_DEVICE_STATE)).call
+  end
+end
+struct LibWin32::ID3D12Device6
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_node_count : UInt32
+    @lpVtbl.value.get_node_count.unsafe_as(Proc(UInt32)).call
+  end
+  def create_command_queue(pdesc : D3D12_COMMAND_QUEUE_DESC*, riid : Guid*, ppcommandqueue : Void**) : HRESULT
+    @lpVtbl.value.create_command_queue.unsafe_as(Proc(D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppcommandqueue)
+  end
+  def create_command_allocator(type : D3D12_COMMAND_LIST_TYPE, riid : Guid*, ppcommandallocator : Void**) : HRESULT
+    @lpVtbl.value.create_command_allocator.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)).call(type, riid, ppcommandallocator)
+  end
+  def create_graphics_pipeline_state(pdesc : D3D12_GRAPHICS_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_graphics_pipeline_state.unsafe_as(Proc(D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_compute_pipeline_state(pdesc : D3D12_COMPUTE_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_compute_pipeline_state.unsafe_as(Proc(D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_command_list(nodemask : UInt32, type : D3D12_COMMAND_LIST_TYPE, pcommandallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState, riid : Guid*, ppcommandlist : Void**) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)).call(nodemask, type, pcommandallocator, pinitialstate, riid, ppcommandlist)
+  end
+  def check_feature_support(feature : D3D12_FEATURE, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D12_FEATURE, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def create_descriptor_heap(pdescriptorheapdesc : D3D12_DESCRIPTOR_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_descriptor_heap.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdescriptorheapdesc, riid, ppvheap)
+  end
+  def get_descriptor_handle_increment_size(descriptorheaptype : D3D12_DESCRIPTOR_HEAP_TYPE) : UInt32
+    @lpVtbl.value.get_descriptor_handle_increment_size.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)).call(descriptorheaptype)
+  end
+  def create_root_signature(nodemask : UInt32, pblobwithrootsignature : Void*, bloblengthinbytes : LibC::UINT_PTR, riid : Guid*, ppvrootsignature : Void**) : HRESULT
+    @lpVtbl.value.create_root_signature.unsafe_as(Proc(UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(nodemask, pblobwithrootsignature, bloblengthinbytes, riid, ppvrootsignature)
+  end
+  def create_constant_buffer_view(pdesc : D3D12_CONSTANT_BUFFER_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_constant_buffer_view.unsafe_as(Proc(D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def create_shader_resource_view(presource : ID3D12Resource, pdesc : D3D12_SHADER_RESOURCE_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_unordered_access_view(presource : ID3D12Resource, pcounterresource : ID3D12Resource, pdesc : D3D12_UNORDERED_ACCESS_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_unordered_access_view.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pcounterresource, pdesc, destdescriptor)
+  end
+  def create_render_target_view(presource : ID3D12Resource, pdesc : D3D12_RENDER_TARGET_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_depth_stencil_view(presource : ID3D12Resource, pdesc : D3D12_DEPTH_STENCIL_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_sampler(pdesc : D3D12_SAMPLER_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_sampler.unsafe_as(Proc(D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def copy_descriptors(numdestdescriptorranges : UInt32, pdestdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, pdestdescriptorrangesizes : UInt32*, numsrcdescriptorranges : UInt32, psrcdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, psrcdescriptorrangesizes : UInt32*, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdestdescriptorranges, pdestdescriptorrangestarts, pdestdescriptorrangesizes, numsrcdescriptorranges, psrcdescriptorrangestarts, psrcdescriptorrangesizes, descriptorheapstype)
+  end
+  def copy_descriptors_simple(numdescriptors : UInt32, destdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, srcdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors_simple.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdescriptors, destdescriptorrangestart, srcdescriptorrangestart, descriptorheapstype)
+  end
+  def get_resource_allocation_info(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs)
+  end
+  def get_custom_heap_properties(nodemask : UInt32, heaptype : D3D12_HEAP_TYPE) : D3D12_HEAP_PROPERTIES
+    @lpVtbl.value.get_custom_heap_properties.unsafe_as(Proc(UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)).call(nodemask, heaptype)
+  end
+  def create_committed_resource(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, riidresource, ppvresource)
+  end
+  def create_heap(pdesc : D3D12_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_heap.unsafe_as(Proc(D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def create_placed_resource(pheap : ID3D12Heap, heapoffset : UInt64, pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_placed_resource.unsafe_as(Proc(ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheap, heapoffset, pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_reserved_resource(pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_reserved_resource.unsafe_as(Proc(D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_shared_handle(pobject : ID3D12DeviceChild, pattributes : SECURITY_ATTRIBUTES*, access : UInt32, name : LibC::LPWSTR, phandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_shared_handle.unsafe_as(Proc(ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)).call(pobject, pattributes, access, name, phandle)
+  end
+  def open_shared_handle(nthandle : LibC::HANDLE, riid : Guid*, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.open_shared_handle.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(nthandle, riid, ppvobj)
+  end
+  def open_shared_handle_by_name(name : LibC::LPWSTR, access : UInt32, pnthandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.open_shared_handle_by_name.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)).call(name, access, pnthandle)
+  end
+  def make_resident(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.make_resident.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def evict(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.evict.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def create_fence(initialvalue : UInt64, flags : D3D12_FENCE_FLAGS, riid : Guid*, ppfence : Void**) : HRESULT
+    @lpVtbl.value.create_fence.unsafe_as(Proc(UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)).call(initialvalue, flags, riid, ppfence)
+  end
+  def get_device_removed_reason : HRESULT
+    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_copyable_footprints(presourcedesc : D3D12_RESOURCE_DESC*, firstsubresource : UInt32, numsubresources : UInt32, baseoffset : UInt64, playouts : D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, pnumrows : UInt32*, prowsizeinbytes : UInt64*, ptotalbytes : UInt64*) : Void
+    @lpVtbl.value.get_copyable_footprints.unsafe_as(Proc(D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)).call(presourcedesc, firstsubresource, numsubresources, baseoffset, playouts, pnumrows, prowsizeinbytes, ptotalbytes)
+  end
+  def create_query_heap(pdesc : D3D12_QUERY_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_query_heap.unsafe_as(Proc(D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def set_stable_power_state(enable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stable_power_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(enable)
+  end
+  def create_command_signature(pdesc : D3D12_COMMAND_SIGNATURE_DESC*, prootsignature : ID3D12RootSignature, riid : Guid*, ppvcommandsignature : Void**) : HRESULT
+    @lpVtbl.value.create_command_signature.unsafe_as(Proc(D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)).call(pdesc, prootsignature, riid, ppvcommandsignature)
+  end
+  def get_resource_tiling(ptiledresource : ID3D12Resource, pnumtilesforentireresource : UInt32*, ppackedmipdesc : D3D12_PACKED_MIP_INFO*, pstandardtileshapefornonpackedmips : D3D12_TILE_SHAPE*, pnumsubresourcetilings : UInt32*, firstsubresourcetilingtoget : UInt32, psubresourcetilingsfornonpackedmips : D3D12_SUBRESOURCE_TILING*) : Void
+    @lpVtbl.value.get_resource_tiling.unsafe_as(Proc(ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)).call(ptiledresource, pnumtilesforentireresource, ppackedmipdesc, pstandardtileshapefornonpackedmips, pnumsubresourcetilings, firstsubresourcetilingtoget, psubresourcetilingsfornonpackedmips)
+  end
+  def get_adapter_luid : LUID
+    @lpVtbl.value.get_adapter_luid.unsafe_as(Proc(LUID)).call
+  end
+  def create_pipeline_library(plibraryblob : Void*, bloblength : LibC::UINT_PTR, riid : Guid*, pppipelinelibrary : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_library.unsafe_as(Proc(Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(plibraryblob, bloblength, riid, pppipelinelibrary)
+  end
+  def set_event_on_multiple_fence_completion(ppfences : ID3D12Fence*, pfencevalues : UInt64*, numfences : UInt32, flags : D3D12_MULTIPLE_FENCE_WAIT_FLAGS, hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_on_multiple_fence_completion.unsafe_as(Proc(ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)).call(ppfences, pfencevalues, numfences, flags, hevent)
+  end
+  def set_residency_priority(numobjects : UInt32, ppobjects : ID3D12Pageable*, ppriorities : D3D12_RESIDENCY_PRIORITY*) : HRESULT
+    @lpVtbl.value.set_residency_priority.unsafe_as(Proc(UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)).call(numobjects, ppobjects, ppriorities)
+  end
+  def create_pipeline_state(pdesc : D3D12_PIPELINE_STATE_STREAM_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_state.unsafe_as(Proc(D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def open_existing_heap_from_address(paddress : Void*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.open_existing_heap_from_address.unsafe_as(Proc(Void*, Guid*, Void**, HRESULT)).call(paddress, riid, ppvheap)
+  end
+  def open_existing_heap_from_file_mapping(hfilemapping : LibC::HANDLE, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.open_existing_heap_from_file_mapping.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hfilemapping, riid, ppvheap)
+  end
+  def enqueue_make_resident(flags : D3D12_RESIDENCY_FLAGS, numobjects : UInt32, ppobjects : ID3D12Pageable*, pfencetosignal : ID3D12Fence, fencevaluetosignal : UInt64) : HRESULT
+    @lpVtbl.value.enqueue_make_resident.unsafe_as(Proc(D3D12_RESIDENCY_FLAGS, UInt32, ID3D12Pageable*, ID3D12Fence, UInt64, HRESULT)).call(flags, numobjects, ppobjects, pfencetosignal, fencevaluetosignal)
+  end
+  def create_command_list1(nodemask : UInt32, type : D3D12_COMMAND_LIST_TYPE, flags : D3D12_COMMAND_LIST_FLAGS, riid : Guid*, ppcommandlist : Void**) : HRESULT
+    @lpVtbl.value.create_command_list1.unsafe_as(Proc(UInt32, D3D12_COMMAND_LIST_TYPE, D3D12_COMMAND_LIST_FLAGS, Guid*, Void**, HRESULT)).call(nodemask, type, flags, riid, ppcommandlist)
+  end
+  def create_protected_resource_session(pdesc : D3D12_PROTECTED_RESOURCE_SESSION_DESC*, riid : Guid*, ppsession : Void**) : HRESULT
+    @lpVtbl.value.create_protected_resource_session.unsafe_as(Proc(D3D12_PROTECTED_RESOURCE_SESSION_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppsession)
+  end
+  def create_committed_resource1(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, pprotectedsession : ID3D12ProtectedResourceSession, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource1.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, pprotectedsession, riidresource, ppvresource)
+  end
+  def create_heap1(pdesc : D3D12_HEAP_DESC*, pprotectedsession : ID3D12ProtectedResourceSession, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_heap1.unsafe_as(Proc(D3D12_HEAP_DESC*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pdesc, pprotectedsession, riid, ppvheap)
+  end
+  def create_reserved_resource1(pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, pprotectedsession : ID3D12ProtectedResourceSession, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_reserved_resource1.unsafe_as(Proc(D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pdesc, initialstate, poptimizedclearvalue, pprotectedsession, riid, ppvresource)
+  end
+  def get_resource_allocation_info1(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC*, presourceallocationinfo1 : D3D12_RESOURCE_ALLOCATION_INFO1*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info1.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs, presourceallocationinfo1)
+  end
+  def create_lifetime_tracker(powner : ID3D12LifetimeOwner, riid : Guid*, ppvtracker : Void**) : HRESULT
+    @lpVtbl.value.create_lifetime_tracker.unsafe_as(Proc(ID3D12LifetimeOwner, Guid*, Void**, HRESULT)).call(powner, riid, ppvtracker)
+  end
+  def remove_device : Void
+    @lpVtbl.value.remove_device.unsafe_as(Proc(Void)).call
+  end
+  def enumerate_meta_commands(pnummetacommands : UInt32*, pdescs : D3D12_META_COMMAND_DESC*) : HRESULT
+    @lpVtbl.value.enumerate_meta_commands.unsafe_as(Proc(UInt32*, D3D12_META_COMMAND_DESC*, HRESULT)).call(pnummetacommands, pdescs)
+  end
+  def enumerate_meta_command_parameters(commandid : Guid*, stage : D3D12_META_COMMAND_PARAMETER_STAGE, ptotalstructuresizeinbytes : UInt32*, pparametercount : UInt32*, pparameterdescs : D3D12_META_COMMAND_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.enumerate_meta_command_parameters.unsafe_as(Proc(Guid*, D3D12_META_COMMAND_PARAMETER_STAGE, UInt32*, UInt32*, D3D12_META_COMMAND_PARAMETER_DESC*, HRESULT)).call(commandid, stage, ptotalstructuresizeinbytes, pparametercount, pparameterdescs)
+  end
+  def create_meta_command(commandid : Guid*, nodemask : UInt32, pcreationparametersdata : Void*, creationparametersdatasizeinbytes : LibC::UINT_PTR, riid : Guid*, ppmetacommand : Void**) : HRESULT
+    @lpVtbl.value.create_meta_command.unsafe_as(Proc(Guid*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(commandid, nodemask, pcreationparametersdata, creationparametersdatasizeinbytes, riid, ppmetacommand)
+  end
+  def create_state_object(pdesc : D3D12_STATE_OBJECT_DESC*, riid : Guid*, ppstateobject : Void**) : HRESULT
+    @lpVtbl.value.create_state_object.unsafe_as(Proc(D3D12_STATE_OBJECT_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppstateobject)
+  end
+  def get_raytracing_acceleration_structure_prebuild_info(pdesc : D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, pinfo : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*) : Void
+    @lpVtbl.value.get_raytracing_acceleration_structure_prebuild_info.unsafe_as(Proc(D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*, Void)).call(pdesc, pinfo)
+  end
+  def check_driver_matching_identifier(serializeddatatype : D3D12_SERIALIZED_DATA_TYPE, pidentifiertocheck : D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*) : D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS
+    @lpVtbl.value.check_driver_matching_identifier.unsafe_as(Proc(D3D12_SERIALIZED_DATA_TYPE, D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*, D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS)).call(serializeddatatype, pidentifiertocheck)
+  end
+  def set_background_processing_mode(mode : D3D12_BACKGROUND_PROCESSING_MODE, measurementsaction : D3D12_MEASUREMENTS_ACTION, heventtosignaluponcompletion : LibC::HANDLE, pbfurthermeasurementsdesired : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.set_background_processing_mode.unsafe_as(Proc(D3D12_BACKGROUND_PROCESSING_MODE, D3D12_MEASUREMENTS_ACTION, LibC::HANDLE, LibC::BOOL*, HRESULT)).call(mode, measurementsaction, heventtosignaluponcompletion, pbfurthermeasurementsdesired)
+  end
+end
+struct LibWin32::ID3D12ProtectedResourceSession1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_status_fence(riid : Guid*, ppfence : Void**) : HRESULT
+    @lpVtbl.value.get_status_fence.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppfence)
+  end
+  def get_session_status : D3D12_PROTECTED_SESSION_STATUS
+    @lpVtbl.value.get_session_status.unsafe_as(Proc(D3D12_PROTECTED_SESSION_STATUS)).call
+  end
+  def get_desc : D3D12_PROTECTED_RESOURCE_SESSION_DESC
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_PROTECTED_RESOURCE_SESSION_DESC)).call
+  end
+  def get_desc1 : D3D12_PROTECTED_RESOURCE_SESSION_DESC1
+    @lpVtbl.value.get_desc1.unsafe_as(Proc(D3D12_PROTECTED_RESOURCE_SESSION_DESC1)).call
+  end
+end
+struct LibWin32::ID3D12Device7
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_node_count : UInt32
+    @lpVtbl.value.get_node_count.unsafe_as(Proc(UInt32)).call
+  end
+  def create_command_queue(pdesc : D3D12_COMMAND_QUEUE_DESC*, riid : Guid*, ppcommandqueue : Void**) : HRESULT
+    @lpVtbl.value.create_command_queue.unsafe_as(Proc(D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppcommandqueue)
+  end
+  def create_command_allocator(type : D3D12_COMMAND_LIST_TYPE, riid : Guid*, ppcommandallocator : Void**) : HRESULT
+    @lpVtbl.value.create_command_allocator.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)).call(type, riid, ppcommandallocator)
+  end
+  def create_graphics_pipeline_state(pdesc : D3D12_GRAPHICS_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_graphics_pipeline_state.unsafe_as(Proc(D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_compute_pipeline_state(pdesc : D3D12_COMPUTE_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_compute_pipeline_state.unsafe_as(Proc(D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_command_list(nodemask : UInt32, type : D3D12_COMMAND_LIST_TYPE, pcommandallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState, riid : Guid*, ppcommandlist : Void**) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)).call(nodemask, type, pcommandallocator, pinitialstate, riid, ppcommandlist)
+  end
+  def check_feature_support(feature : D3D12_FEATURE, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D12_FEATURE, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def create_descriptor_heap(pdescriptorheapdesc : D3D12_DESCRIPTOR_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_descriptor_heap.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdescriptorheapdesc, riid, ppvheap)
+  end
+  def get_descriptor_handle_increment_size(descriptorheaptype : D3D12_DESCRIPTOR_HEAP_TYPE) : UInt32
+    @lpVtbl.value.get_descriptor_handle_increment_size.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)).call(descriptorheaptype)
+  end
+  def create_root_signature(nodemask : UInt32, pblobwithrootsignature : Void*, bloblengthinbytes : LibC::UINT_PTR, riid : Guid*, ppvrootsignature : Void**) : HRESULT
+    @lpVtbl.value.create_root_signature.unsafe_as(Proc(UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(nodemask, pblobwithrootsignature, bloblengthinbytes, riid, ppvrootsignature)
+  end
+  def create_constant_buffer_view(pdesc : D3D12_CONSTANT_BUFFER_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_constant_buffer_view.unsafe_as(Proc(D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def create_shader_resource_view(presource : ID3D12Resource, pdesc : D3D12_SHADER_RESOURCE_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_unordered_access_view(presource : ID3D12Resource, pcounterresource : ID3D12Resource, pdesc : D3D12_UNORDERED_ACCESS_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_unordered_access_view.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pcounterresource, pdesc, destdescriptor)
+  end
+  def create_render_target_view(presource : ID3D12Resource, pdesc : D3D12_RENDER_TARGET_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_depth_stencil_view(presource : ID3D12Resource, pdesc : D3D12_DEPTH_STENCIL_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_sampler(pdesc : D3D12_SAMPLER_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_sampler.unsafe_as(Proc(D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def copy_descriptors(numdestdescriptorranges : UInt32, pdestdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, pdestdescriptorrangesizes : UInt32*, numsrcdescriptorranges : UInt32, psrcdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, psrcdescriptorrangesizes : UInt32*, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdestdescriptorranges, pdestdescriptorrangestarts, pdestdescriptorrangesizes, numsrcdescriptorranges, psrcdescriptorrangestarts, psrcdescriptorrangesizes, descriptorheapstype)
+  end
+  def copy_descriptors_simple(numdescriptors : UInt32, destdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, srcdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors_simple.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdescriptors, destdescriptorrangestart, srcdescriptorrangestart, descriptorheapstype)
+  end
+  def get_resource_allocation_info(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs)
+  end
+  def get_custom_heap_properties(nodemask : UInt32, heaptype : D3D12_HEAP_TYPE) : D3D12_HEAP_PROPERTIES
+    @lpVtbl.value.get_custom_heap_properties.unsafe_as(Proc(UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)).call(nodemask, heaptype)
+  end
+  def create_committed_resource(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, riidresource, ppvresource)
+  end
+  def create_heap(pdesc : D3D12_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_heap.unsafe_as(Proc(D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def create_placed_resource(pheap : ID3D12Heap, heapoffset : UInt64, pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_placed_resource.unsafe_as(Proc(ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheap, heapoffset, pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_reserved_resource(pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_reserved_resource.unsafe_as(Proc(D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_shared_handle(pobject : ID3D12DeviceChild, pattributes : SECURITY_ATTRIBUTES*, access : UInt32, name : LibC::LPWSTR, phandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_shared_handle.unsafe_as(Proc(ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)).call(pobject, pattributes, access, name, phandle)
+  end
+  def open_shared_handle(nthandle : LibC::HANDLE, riid : Guid*, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.open_shared_handle.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(nthandle, riid, ppvobj)
+  end
+  def open_shared_handle_by_name(name : LibC::LPWSTR, access : UInt32, pnthandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.open_shared_handle_by_name.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)).call(name, access, pnthandle)
+  end
+  def make_resident(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.make_resident.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def evict(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.evict.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def create_fence(initialvalue : UInt64, flags : D3D12_FENCE_FLAGS, riid : Guid*, ppfence : Void**) : HRESULT
+    @lpVtbl.value.create_fence.unsafe_as(Proc(UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)).call(initialvalue, flags, riid, ppfence)
+  end
+  def get_device_removed_reason : HRESULT
+    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_copyable_footprints(presourcedesc : D3D12_RESOURCE_DESC*, firstsubresource : UInt32, numsubresources : UInt32, baseoffset : UInt64, playouts : D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, pnumrows : UInt32*, prowsizeinbytes : UInt64*, ptotalbytes : UInt64*) : Void
+    @lpVtbl.value.get_copyable_footprints.unsafe_as(Proc(D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)).call(presourcedesc, firstsubresource, numsubresources, baseoffset, playouts, pnumrows, prowsizeinbytes, ptotalbytes)
+  end
+  def create_query_heap(pdesc : D3D12_QUERY_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_query_heap.unsafe_as(Proc(D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def set_stable_power_state(enable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stable_power_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(enable)
+  end
+  def create_command_signature(pdesc : D3D12_COMMAND_SIGNATURE_DESC*, prootsignature : ID3D12RootSignature, riid : Guid*, ppvcommandsignature : Void**) : HRESULT
+    @lpVtbl.value.create_command_signature.unsafe_as(Proc(D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)).call(pdesc, prootsignature, riid, ppvcommandsignature)
+  end
+  def get_resource_tiling(ptiledresource : ID3D12Resource, pnumtilesforentireresource : UInt32*, ppackedmipdesc : D3D12_PACKED_MIP_INFO*, pstandardtileshapefornonpackedmips : D3D12_TILE_SHAPE*, pnumsubresourcetilings : UInt32*, firstsubresourcetilingtoget : UInt32, psubresourcetilingsfornonpackedmips : D3D12_SUBRESOURCE_TILING*) : Void
+    @lpVtbl.value.get_resource_tiling.unsafe_as(Proc(ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)).call(ptiledresource, pnumtilesforentireresource, ppackedmipdesc, pstandardtileshapefornonpackedmips, pnumsubresourcetilings, firstsubresourcetilingtoget, psubresourcetilingsfornonpackedmips)
+  end
+  def get_adapter_luid : LUID
+    @lpVtbl.value.get_adapter_luid.unsafe_as(Proc(LUID)).call
+  end
+  def create_pipeline_library(plibraryblob : Void*, bloblength : LibC::UINT_PTR, riid : Guid*, pppipelinelibrary : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_library.unsafe_as(Proc(Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(plibraryblob, bloblength, riid, pppipelinelibrary)
+  end
+  def set_event_on_multiple_fence_completion(ppfences : ID3D12Fence*, pfencevalues : UInt64*, numfences : UInt32, flags : D3D12_MULTIPLE_FENCE_WAIT_FLAGS, hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_on_multiple_fence_completion.unsafe_as(Proc(ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)).call(ppfences, pfencevalues, numfences, flags, hevent)
+  end
+  def set_residency_priority(numobjects : UInt32, ppobjects : ID3D12Pageable*, ppriorities : D3D12_RESIDENCY_PRIORITY*) : HRESULT
+    @lpVtbl.value.set_residency_priority.unsafe_as(Proc(UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)).call(numobjects, ppobjects, ppriorities)
+  end
+  def create_pipeline_state(pdesc : D3D12_PIPELINE_STATE_STREAM_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_state.unsafe_as(Proc(D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def open_existing_heap_from_address(paddress : Void*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.open_existing_heap_from_address.unsafe_as(Proc(Void*, Guid*, Void**, HRESULT)).call(paddress, riid, ppvheap)
+  end
+  def open_existing_heap_from_file_mapping(hfilemapping : LibC::HANDLE, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.open_existing_heap_from_file_mapping.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hfilemapping, riid, ppvheap)
+  end
+  def enqueue_make_resident(flags : D3D12_RESIDENCY_FLAGS, numobjects : UInt32, ppobjects : ID3D12Pageable*, pfencetosignal : ID3D12Fence, fencevaluetosignal : UInt64) : HRESULT
+    @lpVtbl.value.enqueue_make_resident.unsafe_as(Proc(D3D12_RESIDENCY_FLAGS, UInt32, ID3D12Pageable*, ID3D12Fence, UInt64, HRESULT)).call(flags, numobjects, ppobjects, pfencetosignal, fencevaluetosignal)
+  end
+  def create_command_list1(nodemask : UInt32, type : D3D12_COMMAND_LIST_TYPE, flags : D3D12_COMMAND_LIST_FLAGS, riid : Guid*, ppcommandlist : Void**) : HRESULT
+    @lpVtbl.value.create_command_list1.unsafe_as(Proc(UInt32, D3D12_COMMAND_LIST_TYPE, D3D12_COMMAND_LIST_FLAGS, Guid*, Void**, HRESULT)).call(nodemask, type, flags, riid, ppcommandlist)
+  end
+  def create_protected_resource_session(pdesc : D3D12_PROTECTED_RESOURCE_SESSION_DESC*, riid : Guid*, ppsession : Void**) : HRESULT
+    @lpVtbl.value.create_protected_resource_session.unsafe_as(Proc(D3D12_PROTECTED_RESOURCE_SESSION_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppsession)
+  end
+  def create_committed_resource1(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, pprotectedsession : ID3D12ProtectedResourceSession, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource1.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, pprotectedsession, riidresource, ppvresource)
+  end
+  def create_heap1(pdesc : D3D12_HEAP_DESC*, pprotectedsession : ID3D12ProtectedResourceSession, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_heap1.unsafe_as(Proc(D3D12_HEAP_DESC*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pdesc, pprotectedsession, riid, ppvheap)
+  end
+  def create_reserved_resource1(pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, pprotectedsession : ID3D12ProtectedResourceSession, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_reserved_resource1.unsafe_as(Proc(D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pdesc, initialstate, poptimizedclearvalue, pprotectedsession, riid, ppvresource)
+  end
+  def get_resource_allocation_info1(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC*, presourceallocationinfo1 : D3D12_RESOURCE_ALLOCATION_INFO1*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info1.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs, presourceallocationinfo1)
+  end
+  def create_lifetime_tracker(powner : ID3D12LifetimeOwner, riid : Guid*, ppvtracker : Void**) : HRESULT
+    @lpVtbl.value.create_lifetime_tracker.unsafe_as(Proc(ID3D12LifetimeOwner, Guid*, Void**, HRESULT)).call(powner, riid, ppvtracker)
+  end
+  def remove_device : Void
+    @lpVtbl.value.remove_device.unsafe_as(Proc(Void)).call
+  end
+  def enumerate_meta_commands(pnummetacommands : UInt32*, pdescs : D3D12_META_COMMAND_DESC*) : HRESULT
+    @lpVtbl.value.enumerate_meta_commands.unsafe_as(Proc(UInt32*, D3D12_META_COMMAND_DESC*, HRESULT)).call(pnummetacommands, pdescs)
+  end
+  def enumerate_meta_command_parameters(commandid : Guid*, stage : D3D12_META_COMMAND_PARAMETER_STAGE, ptotalstructuresizeinbytes : UInt32*, pparametercount : UInt32*, pparameterdescs : D3D12_META_COMMAND_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.enumerate_meta_command_parameters.unsafe_as(Proc(Guid*, D3D12_META_COMMAND_PARAMETER_STAGE, UInt32*, UInt32*, D3D12_META_COMMAND_PARAMETER_DESC*, HRESULT)).call(commandid, stage, ptotalstructuresizeinbytes, pparametercount, pparameterdescs)
+  end
+  def create_meta_command(commandid : Guid*, nodemask : UInt32, pcreationparametersdata : Void*, creationparametersdatasizeinbytes : LibC::UINT_PTR, riid : Guid*, ppmetacommand : Void**) : HRESULT
+    @lpVtbl.value.create_meta_command.unsafe_as(Proc(Guid*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(commandid, nodemask, pcreationparametersdata, creationparametersdatasizeinbytes, riid, ppmetacommand)
+  end
+  def create_state_object(pdesc : D3D12_STATE_OBJECT_DESC*, riid : Guid*, ppstateobject : Void**) : HRESULT
+    @lpVtbl.value.create_state_object.unsafe_as(Proc(D3D12_STATE_OBJECT_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppstateobject)
+  end
+  def get_raytracing_acceleration_structure_prebuild_info(pdesc : D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, pinfo : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*) : Void
+    @lpVtbl.value.get_raytracing_acceleration_structure_prebuild_info.unsafe_as(Proc(D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*, Void)).call(pdesc, pinfo)
+  end
+  def check_driver_matching_identifier(serializeddatatype : D3D12_SERIALIZED_DATA_TYPE, pidentifiertocheck : D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*) : D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS
+    @lpVtbl.value.check_driver_matching_identifier.unsafe_as(Proc(D3D12_SERIALIZED_DATA_TYPE, D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*, D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS)).call(serializeddatatype, pidentifiertocheck)
+  end
+  def set_background_processing_mode(mode : D3D12_BACKGROUND_PROCESSING_MODE, measurementsaction : D3D12_MEASUREMENTS_ACTION, heventtosignaluponcompletion : LibC::HANDLE, pbfurthermeasurementsdesired : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.set_background_processing_mode.unsafe_as(Proc(D3D12_BACKGROUND_PROCESSING_MODE, D3D12_MEASUREMENTS_ACTION, LibC::HANDLE, LibC::BOOL*, HRESULT)).call(mode, measurementsaction, heventtosignaluponcompletion, pbfurthermeasurementsdesired)
+  end
+  def add_to_state_object(paddition : D3D12_STATE_OBJECT_DESC*, pstateobjecttogrowfrom : ID3D12StateObject, riid : Guid*, ppnewstateobject : Void**) : HRESULT
+    @lpVtbl.value.add_to_state_object.unsafe_as(Proc(D3D12_STATE_OBJECT_DESC*, ID3D12StateObject, Guid*, Void**, HRESULT)).call(paddition, pstateobjecttogrowfrom, riid, ppnewstateobject)
+  end
+  def create_protected_resource_session1(pdesc : D3D12_PROTECTED_RESOURCE_SESSION_DESC1*, riid : Guid*, ppsession : Void**) : HRESULT
+    @lpVtbl.value.create_protected_resource_session1.unsafe_as(Proc(D3D12_PROTECTED_RESOURCE_SESSION_DESC1*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppsession)
+  end
+end
+struct LibWin32::ID3D12Device8
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_node_count : UInt32
+    @lpVtbl.value.get_node_count.unsafe_as(Proc(UInt32)).call
+  end
+  def create_command_queue(pdesc : D3D12_COMMAND_QUEUE_DESC*, riid : Guid*, ppcommandqueue : Void**) : HRESULT
+    @lpVtbl.value.create_command_queue.unsafe_as(Proc(D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppcommandqueue)
+  end
+  def create_command_allocator(type : D3D12_COMMAND_LIST_TYPE, riid : Guid*, ppcommandallocator : Void**) : HRESULT
+    @lpVtbl.value.create_command_allocator.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)).call(type, riid, ppcommandallocator)
+  end
+  def create_graphics_pipeline_state(pdesc : D3D12_GRAPHICS_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_graphics_pipeline_state.unsafe_as(Proc(D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_compute_pipeline_state(pdesc : D3D12_COMPUTE_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_compute_pipeline_state.unsafe_as(Proc(D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_command_list(nodemask : UInt32, type : D3D12_COMMAND_LIST_TYPE, pcommandallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState, riid : Guid*, ppcommandlist : Void**) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)).call(nodemask, type, pcommandallocator, pinitialstate, riid, ppcommandlist)
+  end
+  def check_feature_support(feature : D3D12_FEATURE, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D12_FEATURE, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def create_descriptor_heap(pdescriptorheapdesc : D3D12_DESCRIPTOR_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_descriptor_heap.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdescriptorheapdesc, riid, ppvheap)
+  end
+  def get_descriptor_handle_increment_size(descriptorheaptype : D3D12_DESCRIPTOR_HEAP_TYPE) : UInt32
+    @lpVtbl.value.get_descriptor_handle_increment_size.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)).call(descriptorheaptype)
+  end
+  def create_root_signature(nodemask : UInt32, pblobwithrootsignature : Void*, bloblengthinbytes : LibC::UINT_PTR, riid : Guid*, ppvrootsignature : Void**) : HRESULT
+    @lpVtbl.value.create_root_signature.unsafe_as(Proc(UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(nodemask, pblobwithrootsignature, bloblengthinbytes, riid, ppvrootsignature)
+  end
+  def create_constant_buffer_view(pdesc : D3D12_CONSTANT_BUFFER_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_constant_buffer_view.unsafe_as(Proc(D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def create_shader_resource_view(presource : ID3D12Resource, pdesc : D3D12_SHADER_RESOURCE_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_unordered_access_view(presource : ID3D12Resource, pcounterresource : ID3D12Resource, pdesc : D3D12_UNORDERED_ACCESS_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_unordered_access_view.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pcounterresource, pdesc, destdescriptor)
+  end
+  def create_render_target_view(presource : ID3D12Resource, pdesc : D3D12_RENDER_TARGET_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_depth_stencil_view(presource : ID3D12Resource, pdesc : D3D12_DEPTH_STENCIL_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_sampler(pdesc : D3D12_SAMPLER_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_sampler.unsafe_as(Proc(D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def copy_descriptors(numdestdescriptorranges : UInt32, pdestdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, pdestdescriptorrangesizes : UInt32*, numsrcdescriptorranges : UInt32, psrcdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, psrcdescriptorrangesizes : UInt32*, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdestdescriptorranges, pdestdescriptorrangestarts, pdestdescriptorrangesizes, numsrcdescriptorranges, psrcdescriptorrangestarts, psrcdescriptorrangesizes, descriptorheapstype)
+  end
+  def copy_descriptors_simple(numdescriptors : UInt32, destdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, srcdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors_simple.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdescriptors, destdescriptorrangestart, srcdescriptorrangestart, descriptorheapstype)
+  end
+  def get_resource_allocation_info(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs)
+  end
+  def get_custom_heap_properties(nodemask : UInt32, heaptype : D3D12_HEAP_TYPE) : D3D12_HEAP_PROPERTIES
+    @lpVtbl.value.get_custom_heap_properties.unsafe_as(Proc(UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)).call(nodemask, heaptype)
+  end
+  def create_committed_resource(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, riidresource, ppvresource)
+  end
+  def create_heap(pdesc : D3D12_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_heap.unsafe_as(Proc(D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def create_placed_resource(pheap : ID3D12Heap, heapoffset : UInt64, pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_placed_resource.unsafe_as(Proc(ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheap, heapoffset, pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_reserved_resource(pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_reserved_resource.unsafe_as(Proc(D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_shared_handle(pobject : ID3D12DeviceChild, pattributes : SECURITY_ATTRIBUTES*, access : UInt32, name : LibC::LPWSTR, phandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_shared_handle.unsafe_as(Proc(ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)).call(pobject, pattributes, access, name, phandle)
+  end
+  def open_shared_handle(nthandle : LibC::HANDLE, riid : Guid*, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.open_shared_handle.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(nthandle, riid, ppvobj)
+  end
+  def open_shared_handle_by_name(name : LibC::LPWSTR, access : UInt32, pnthandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.open_shared_handle_by_name.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)).call(name, access, pnthandle)
+  end
+  def make_resident(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.make_resident.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def evict(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.evict.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def create_fence(initialvalue : UInt64, flags : D3D12_FENCE_FLAGS, riid : Guid*, ppfence : Void**) : HRESULT
+    @lpVtbl.value.create_fence.unsafe_as(Proc(UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)).call(initialvalue, flags, riid, ppfence)
+  end
+  def get_device_removed_reason : HRESULT
+    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_copyable_footprints(presourcedesc : D3D12_RESOURCE_DESC*, firstsubresource : UInt32, numsubresources : UInt32, baseoffset : UInt64, playouts : D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, pnumrows : UInt32*, prowsizeinbytes : UInt64*, ptotalbytes : UInt64*) : Void
+    @lpVtbl.value.get_copyable_footprints.unsafe_as(Proc(D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)).call(presourcedesc, firstsubresource, numsubresources, baseoffset, playouts, pnumrows, prowsizeinbytes, ptotalbytes)
+  end
+  def create_query_heap(pdesc : D3D12_QUERY_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_query_heap.unsafe_as(Proc(D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def set_stable_power_state(enable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stable_power_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(enable)
+  end
+  def create_command_signature(pdesc : D3D12_COMMAND_SIGNATURE_DESC*, prootsignature : ID3D12RootSignature, riid : Guid*, ppvcommandsignature : Void**) : HRESULT
+    @lpVtbl.value.create_command_signature.unsafe_as(Proc(D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)).call(pdesc, prootsignature, riid, ppvcommandsignature)
+  end
+  def get_resource_tiling(ptiledresource : ID3D12Resource, pnumtilesforentireresource : UInt32*, ppackedmipdesc : D3D12_PACKED_MIP_INFO*, pstandardtileshapefornonpackedmips : D3D12_TILE_SHAPE*, pnumsubresourcetilings : UInt32*, firstsubresourcetilingtoget : UInt32, psubresourcetilingsfornonpackedmips : D3D12_SUBRESOURCE_TILING*) : Void
+    @lpVtbl.value.get_resource_tiling.unsafe_as(Proc(ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)).call(ptiledresource, pnumtilesforentireresource, ppackedmipdesc, pstandardtileshapefornonpackedmips, pnumsubresourcetilings, firstsubresourcetilingtoget, psubresourcetilingsfornonpackedmips)
+  end
+  def get_adapter_luid : LUID
+    @lpVtbl.value.get_adapter_luid.unsafe_as(Proc(LUID)).call
+  end
+  def create_pipeline_library(plibraryblob : Void*, bloblength : LibC::UINT_PTR, riid : Guid*, pppipelinelibrary : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_library.unsafe_as(Proc(Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(plibraryblob, bloblength, riid, pppipelinelibrary)
+  end
+  def set_event_on_multiple_fence_completion(ppfences : ID3D12Fence*, pfencevalues : UInt64*, numfences : UInt32, flags : D3D12_MULTIPLE_FENCE_WAIT_FLAGS, hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_on_multiple_fence_completion.unsafe_as(Proc(ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)).call(ppfences, pfencevalues, numfences, flags, hevent)
+  end
+  def set_residency_priority(numobjects : UInt32, ppobjects : ID3D12Pageable*, ppriorities : D3D12_RESIDENCY_PRIORITY*) : HRESULT
+    @lpVtbl.value.set_residency_priority.unsafe_as(Proc(UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)).call(numobjects, ppobjects, ppriorities)
+  end
+  def create_pipeline_state(pdesc : D3D12_PIPELINE_STATE_STREAM_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_state.unsafe_as(Proc(D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def open_existing_heap_from_address(paddress : Void*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.open_existing_heap_from_address.unsafe_as(Proc(Void*, Guid*, Void**, HRESULT)).call(paddress, riid, ppvheap)
+  end
+  def open_existing_heap_from_file_mapping(hfilemapping : LibC::HANDLE, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.open_existing_heap_from_file_mapping.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hfilemapping, riid, ppvheap)
+  end
+  def enqueue_make_resident(flags : D3D12_RESIDENCY_FLAGS, numobjects : UInt32, ppobjects : ID3D12Pageable*, pfencetosignal : ID3D12Fence, fencevaluetosignal : UInt64) : HRESULT
+    @lpVtbl.value.enqueue_make_resident.unsafe_as(Proc(D3D12_RESIDENCY_FLAGS, UInt32, ID3D12Pageable*, ID3D12Fence, UInt64, HRESULT)).call(flags, numobjects, ppobjects, pfencetosignal, fencevaluetosignal)
+  end
+  def create_command_list1(nodemask : UInt32, type : D3D12_COMMAND_LIST_TYPE, flags : D3D12_COMMAND_LIST_FLAGS, riid : Guid*, ppcommandlist : Void**) : HRESULT
+    @lpVtbl.value.create_command_list1.unsafe_as(Proc(UInt32, D3D12_COMMAND_LIST_TYPE, D3D12_COMMAND_LIST_FLAGS, Guid*, Void**, HRESULT)).call(nodemask, type, flags, riid, ppcommandlist)
+  end
+  def create_protected_resource_session(pdesc : D3D12_PROTECTED_RESOURCE_SESSION_DESC*, riid : Guid*, ppsession : Void**) : HRESULT
+    @lpVtbl.value.create_protected_resource_session.unsafe_as(Proc(D3D12_PROTECTED_RESOURCE_SESSION_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppsession)
+  end
+  def create_committed_resource1(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, pprotectedsession : ID3D12ProtectedResourceSession, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource1.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, pprotectedsession, riidresource, ppvresource)
+  end
+  def create_heap1(pdesc : D3D12_HEAP_DESC*, pprotectedsession : ID3D12ProtectedResourceSession, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_heap1.unsafe_as(Proc(D3D12_HEAP_DESC*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pdesc, pprotectedsession, riid, ppvheap)
+  end
+  def create_reserved_resource1(pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, pprotectedsession : ID3D12ProtectedResourceSession, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_reserved_resource1.unsafe_as(Proc(D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pdesc, initialstate, poptimizedclearvalue, pprotectedsession, riid, ppvresource)
+  end
+  def get_resource_allocation_info1(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC*, presourceallocationinfo1 : D3D12_RESOURCE_ALLOCATION_INFO1*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info1.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs, presourceallocationinfo1)
+  end
+  def create_lifetime_tracker(powner : ID3D12LifetimeOwner, riid : Guid*, ppvtracker : Void**) : HRESULT
+    @lpVtbl.value.create_lifetime_tracker.unsafe_as(Proc(ID3D12LifetimeOwner, Guid*, Void**, HRESULT)).call(powner, riid, ppvtracker)
+  end
+  def remove_device : Void
+    @lpVtbl.value.remove_device.unsafe_as(Proc(Void)).call
+  end
+  def enumerate_meta_commands(pnummetacommands : UInt32*, pdescs : D3D12_META_COMMAND_DESC*) : HRESULT
+    @lpVtbl.value.enumerate_meta_commands.unsafe_as(Proc(UInt32*, D3D12_META_COMMAND_DESC*, HRESULT)).call(pnummetacommands, pdescs)
+  end
+  def enumerate_meta_command_parameters(commandid : Guid*, stage : D3D12_META_COMMAND_PARAMETER_STAGE, ptotalstructuresizeinbytes : UInt32*, pparametercount : UInt32*, pparameterdescs : D3D12_META_COMMAND_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.enumerate_meta_command_parameters.unsafe_as(Proc(Guid*, D3D12_META_COMMAND_PARAMETER_STAGE, UInt32*, UInt32*, D3D12_META_COMMAND_PARAMETER_DESC*, HRESULT)).call(commandid, stage, ptotalstructuresizeinbytes, pparametercount, pparameterdescs)
+  end
+  def create_meta_command(commandid : Guid*, nodemask : UInt32, pcreationparametersdata : Void*, creationparametersdatasizeinbytes : LibC::UINT_PTR, riid : Guid*, ppmetacommand : Void**) : HRESULT
+    @lpVtbl.value.create_meta_command.unsafe_as(Proc(Guid*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(commandid, nodemask, pcreationparametersdata, creationparametersdatasizeinbytes, riid, ppmetacommand)
+  end
+  def create_state_object(pdesc : D3D12_STATE_OBJECT_DESC*, riid : Guid*, ppstateobject : Void**) : HRESULT
+    @lpVtbl.value.create_state_object.unsafe_as(Proc(D3D12_STATE_OBJECT_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppstateobject)
+  end
+  def get_raytracing_acceleration_structure_prebuild_info(pdesc : D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, pinfo : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*) : Void
+    @lpVtbl.value.get_raytracing_acceleration_structure_prebuild_info.unsafe_as(Proc(D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*, Void)).call(pdesc, pinfo)
+  end
+  def check_driver_matching_identifier(serializeddatatype : D3D12_SERIALIZED_DATA_TYPE, pidentifiertocheck : D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*) : D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS
+    @lpVtbl.value.check_driver_matching_identifier.unsafe_as(Proc(D3D12_SERIALIZED_DATA_TYPE, D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*, D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS)).call(serializeddatatype, pidentifiertocheck)
+  end
+  def set_background_processing_mode(mode : D3D12_BACKGROUND_PROCESSING_MODE, measurementsaction : D3D12_MEASUREMENTS_ACTION, heventtosignaluponcompletion : LibC::HANDLE, pbfurthermeasurementsdesired : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.set_background_processing_mode.unsafe_as(Proc(D3D12_BACKGROUND_PROCESSING_MODE, D3D12_MEASUREMENTS_ACTION, LibC::HANDLE, LibC::BOOL*, HRESULT)).call(mode, measurementsaction, heventtosignaluponcompletion, pbfurthermeasurementsdesired)
+  end
+  def add_to_state_object(paddition : D3D12_STATE_OBJECT_DESC*, pstateobjecttogrowfrom : ID3D12StateObject, riid : Guid*, ppnewstateobject : Void**) : HRESULT
+    @lpVtbl.value.add_to_state_object.unsafe_as(Proc(D3D12_STATE_OBJECT_DESC*, ID3D12StateObject, Guid*, Void**, HRESULT)).call(paddition, pstateobjecttogrowfrom, riid, ppnewstateobject)
+  end
+  def create_protected_resource_session1(pdesc : D3D12_PROTECTED_RESOURCE_SESSION_DESC1*, riid : Guid*, ppsession : Void**) : HRESULT
+    @lpVtbl.value.create_protected_resource_session1.unsafe_as(Proc(D3D12_PROTECTED_RESOURCE_SESSION_DESC1*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppsession)
+  end
+  def get_resource_allocation_info2(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC1*, presourceallocationinfo1 : D3D12_RESOURCE_ALLOCATION_INFO1*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info2.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC1*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs, presourceallocationinfo1)
+  end
+  def create_committed_resource2(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC1*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, pprotectedsession : ID3D12ProtectedResourceSession, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource2.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC1*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, pprotectedsession, riidresource, ppvresource)
+  end
+  def create_placed_resource1(pheap : ID3D12Heap, heapoffset : UInt64, pdesc : D3D12_RESOURCE_DESC1*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_placed_resource1.unsafe_as(Proc(ID3D12Heap, UInt64, D3D12_RESOURCE_DESC1*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheap, heapoffset, pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_sampler_feedback_unordered_access_view(ptargetedresource : ID3D12Resource, pfeedbackresource : ID3D12Resource, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_sampler_feedback_unordered_access_view.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(ptargetedresource, pfeedbackresource, destdescriptor)
+  end
+  def get_copyable_footprints1(presourcedesc : D3D12_RESOURCE_DESC1*, firstsubresource : UInt32, numsubresources : UInt32, baseoffset : UInt64, playouts : D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, pnumrows : UInt32*, prowsizeinbytes : UInt64*, ptotalbytes : UInt64*) : Void
+    @lpVtbl.value.get_copyable_footprints1.unsafe_as(Proc(D3D12_RESOURCE_DESC1*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)).call(presourcedesc, firstsubresource, numsubresources, baseoffset, playouts, pnumrows, prowsizeinbytes, ptotalbytes)
+  end
+end
+struct LibWin32::ID3D12Resource1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def map(subresource : UInt32, preadrange : D3D12_RANGE*, ppdata : Void**) : HRESULT
+    @lpVtbl.value.map.unsafe_as(Proc(UInt32, D3D12_RANGE*, Void**, HRESULT)).call(subresource, preadrange, ppdata)
+  end
+  def unmap(subresource : UInt32, pwrittenrange : D3D12_RANGE*) : Void
+    @lpVtbl.value.unmap.unsafe_as(Proc(UInt32, D3D12_RANGE*, Void)).call(subresource, pwrittenrange)
+  end
+  def get_desc : D3D12_RESOURCE_DESC
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_RESOURCE_DESC)).call
+  end
+  def get_gpu_virtual_address : UInt64
+    @lpVtbl.value.get_gpu_virtual_address.unsafe_as(Proc(UInt64)).call
+  end
+  def write_to_subresource(dstsubresource : UInt32, pdstbox : D3D12_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32) : HRESULT
+    @lpVtbl.value.write_to_subresource.unsafe_as(Proc(UInt32, D3D12_BOX*, Void*, UInt32, UInt32, HRESULT)).call(dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch)
+  end
+  def read_from_subresource(pdstdata : Void*, dstrowpitch : UInt32, dstdepthpitch : UInt32, srcsubresource : UInt32, psrcbox : D3D12_BOX*) : HRESULT
+    @lpVtbl.value.read_from_subresource.unsafe_as(Proc(Void*, UInt32, UInt32, UInt32, D3D12_BOX*, HRESULT)).call(pdstdata, dstrowpitch, dstdepthpitch, srcsubresource, psrcbox)
+  end
+  def get_heap_properties(pheapproperties : D3D12_HEAP_PROPERTIES*, pheapflags : D3D12_HEAP_FLAGS*) : HRESULT
+    @lpVtbl.value.get_heap_properties.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS*, HRESULT)).call(pheapproperties, pheapflags)
+  end
+  def get_protected_resource_session(riid : Guid*, ppprotectedsession : Void**) : HRESULT
+    @lpVtbl.value.get_protected_resource_session.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppprotectedsession)
+  end
+end
+struct LibWin32::ID3D12Resource2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def map(subresource : UInt32, preadrange : D3D12_RANGE*, ppdata : Void**) : HRESULT
+    @lpVtbl.value.map.unsafe_as(Proc(UInt32, D3D12_RANGE*, Void**, HRESULT)).call(subresource, preadrange, ppdata)
+  end
+  def unmap(subresource : UInt32, pwrittenrange : D3D12_RANGE*) : Void
+    @lpVtbl.value.unmap.unsafe_as(Proc(UInt32, D3D12_RANGE*, Void)).call(subresource, pwrittenrange)
+  end
+  def get_desc : D3D12_RESOURCE_DESC
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_RESOURCE_DESC)).call
+  end
+  def get_gpu_virtual_address : UInt64
+    @lpVtbl.value.get_gpu_virtual_address.unsafe_as(Proc(UInt64)).call
+  end
+  def write_to_subresource(dstsubresource : UInt32, pdstbox : D3D12_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32) : HRESULT
+    @lpVtbl.value.write_to_subresource.unsafe_as(Proc(UInt32, D3D12_BOX*, Void*, UInt32, UInt32, HRESULT)).call(dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch)
+  end
+  def read_from_subresource(pdstdata : Void*, dstrowpitch : UInt32, dstdepthpitch : UInt32, srcsubresource : UInt32, psrcbox : D3D12_BOX*) : HRESULT
+    @lpVtbl.value.read_from_subresource.unsafe_as(Proc(Void*, UInt32, UInt32, UInt32, D3D12_BOX*, HRESULT)).call(pdstdata, dstrowpitch, dstdepthpitch, srcsubresource, psrcbox)
+  end
+  def get_heap_properties(pheapproperties : D3D12_HEAP_PROPERTIES*, pheapflags : D3D12_HEAP_FLAGS*) : HRESULT
+    @lpVtbl.value.get_heap_properties.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS*, HRESULT)).call(pheapproperties, pheapflags)
+  end
+  def get_protected_resource_session(riid : Guid*, ppprotectedsession : Void**) : HRESULT
+    @lpVtbl.value.get_protected_resource_session.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppprotectedsession)
+  end
+  def get_desc1 : D3D12_RESOURCE_DESC1
+    @lpVtbl.value.get_desc1.unsafe_as(Proc(D3D12_RESOURCE_DESC1)).call
+  end
+end
+struct LibWin32::ID3D12Heap1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_desc : D3D12_HEAP_DESC
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_HEAP_DESC)).call
+  end
+  def get_protected_resource_session(riid : Guid*, ppprotectedsession : Void**) : HRESULT
+    @lpVtbl.value.get_protected_resource_session.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppprotectedsession)
+  end
+end
+struct LibWin32::ID3D12GraphicsCommandList3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_type : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE)).call
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def reset(pallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState) : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(ID3D12CommandAllocator, ID3D12PipelineState, HRESULT)).call(pallocator, pinitialstate)
+  end
+  def clear_state(ppipelinestate : ID3D12PipelineState) : Void
+    @lpVtbl.value.clear_state.unsafe_as(Proc(ID3D12PipelineState, Void)).call(ppipelinestate)
+  end
+  def draw_instanced(vertexcountperinstance : UInt32, instancecount : UInt32, startvertexlocation : UInt32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, Void)).call(vertexcountperinstance, instancecount, startvertexlocation, startinstancelocation)
+  end
+  def draw_indexed_instanced(indexcountperinstance : UInt32, instancecount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, Int32, UInt32, Void)).call(indexcountperinstance, instancecount, startindexlocation, basevertexlocation, startinstancelocation)
+  end
+  def dispatch(threadgroupcountx : UInt32, threadgroupcounty : UInt32, threadgroupcountz : UInt32) : Void
+    @lpVtbl.value.dispatch.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(threadgroupcountx, threadgroupcounty, threadgroupcountz)
+  end
+  def copy_buffer_region(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, numbytes : UInt64) : Void
+    @lpVtbl.value.copy_buffer_region.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt64, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, numbytes)
+  end
+  def copy_texture_region(pdst : D3D12_TEXTURE_COPY_LOCATION*, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrc : D3D12_TEXTURE_COPY_LOCATION*, psrcbox : D3D12_BOX*) : Void
+    @lpVtbl.value.copy_texture_region.unsafe_as(Proc(D3D12_TEXTURE_COPY_LOCATION*, UInt32, UInt32, UInt32, D3D12_TEXTURE_COPY_LOCATION*, D3D12_BOX*, Void)).call(pdst, dstx, dsty, dstz, psrc, psrcbox)
+  end
+  def copy_resource(pdstresource : ID3D12Resource, psrcresource : ID3D12Resource) : Void
+    @lpVtbl.value.copy_resource.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, Void)).call(pdstresource, psrcresource)
+  end
+  def copy_tiles(ptiledresource : ID3D12Resource, ptileregionstartcoordinate : D3D12_TILED_RESOURCE_COORDINATE*, ptileregionsize : D3D12_TILE_REGION_SIZE*, pbuffer : ID3D12Resource, bufferstartoffsetinbytes : UInt64, flags : D3D12_TILE_COPY_FLAGS) : Void
+    @lpVtbl.value.copy_tiles.unsafe_as(Proc(ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, ID3D12Resource, UInt64, D3D12_TILE_COPY_FLAGS, Void)).call(ptiledresource, ptileregionstartcoordinate, ptileregionsize, pbuffer, bufferstartoffsetinbytes, flags)
+  end
+  def resolve_subresource(pdstresource : ID3D12Resource, dstsubresource : UInt32, psrcresource : ID3D12Resource, srcsubresource : UInt32, format : DXGI_FORMAT) : Void
+    @lpVtbl.value.resolve_subresource.unsafe_as(Proc(ID3D12Resource, UInt32, ID3D12Resource, UInt32, DXGI_FORMAT, Void)).call(pdstresource, dstsubresource, psrcresource, srcsubresource, format)
+  end
+  def ia_set_primitive_topology(primitivetopology : D3D_PRIMITIVE_TOPOLOGY) : Void
+    @lpVtbl.value.ia_set_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY, Void)).call(primitivetopology)
+  end
+  def rs_set_viewports(numviewports : UInt32, pviewports : D3D12_VIEWPORT*) : Void
+    @lpVtbl.value.rs_set_viewports.unsafe_as(Proc(UInt32, D3D12_VIEWPORT*, Void)).call(numviewports, pviewports)
+  end
+  def rs_set_scissor_rects(numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.rs_set_scissor_rects.unsafe_as(Proc(UInt32, RECT*, Void)).call(numrects, prects)
+  end
+  def om_set_blend_factor(blendfactor : Float32*) : Void
+    @lpVtbl.value.om_set_blend_factor.unsafe_as(Proc(Float32*, Void)).call(blendfactor)
+  end
+  def om_set_stencil_ref(stencilref : UInt32) : Void
+    @lpVtbl.value.om_set_stencil_ref.unsafe_as(Proc(UInt32, Void)).call(stencilref)
+  end
+  def set_pipeline_state(ppipelinestate : ID3D12PipelineState) : Void
+    @lpVtbl.value.set_pipeline_state.unsafe_as(Proc(ID3D12PipelineState, Void)).call(ppipelinestate)
+  end
+  def resource_barrier(numbarriers : UInt32, pbarriers : D3D12_RESOURCE_BARRIER*) : Void
+    @lpVtbl.value.resource_barrier.unsafe_as(Proc(UInt32, D3D12_RESOURCE_BARRIER*, Void)).call(numbarriers, pbarriers)
+  end
+  def execute_bundle(pcommandlist : ID3D12GraphicsCommandList) : Void
+    @lpVtbl.value.execute_bundle.unsafe_as(Proc(ID3D12GraphicsCommandList, Void)).call(pcommandlist)
+  end
+  def set_descriptor_heaps(numdescriptorheaps : UInt32, ppdescriptorheaps : ID3D12DescriptorHeap*) : Void
+    @lpVtbl.value.set_descriptor_heaps.unsafe_as(Proc(UInt32, ID3D12DescriptorHeap*, Void)).call(numdescriptorheaps, ppdescriptorheaps)
+  end
+  def set_compute_root_signature(prootsignature : ID3D12RootSignature) : Void
+    @lpVtbl.value.set_compute_root_signature.unsafe_as(Proc(ID3D12RootSignature, Void)).call(prootsignature)
+  end
+  def set_graphics_root_signature(prootsignature : ID3D12RootSignature) : Void
+    @lpVtbl.value.set_graphics_root_signature.unsafe_as(Proc(ID3D12RootSignature, Void)).call(prootsignature)
+  end
+  def set_compute_root_descriptor_table(rootparameterindex : UInt32, basedescriptor : D3D12_GPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.set_compute_root_descriptor_table.unsafe_as(Proc(UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)).call(rootparameterindex, basedescriptor)
+  end
+  def set_graphics_root_descriptor_table(rootparameterindex : UInt32, basedescriptor : D3D12_GPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.set_graphics_root_descriptor_table.unsafe_as(Proc(UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)).call(rootparameterindex, basedescriptor)
+  end
+  def set_compute_root32_bit_constant(rootparameterindex : UInt32, srcdata : UInt32, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_compute_root32_bit_constant.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(rootparameterindex, srcdata, destoffsetin32bitvalues)
+  end
+  def set_graphics_root32_bit_constant(rootparameterindex : UInt32, srcdata : UInt32, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_graphics_root32_bit_constant.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(rootparameterindex, srcdata, destoffsetin32bitvalues)
+  end
+  def set_compute_root32_bit_constants(rootparameterindex : UInt32, num32bitvaluestoset : UInt32, psrcdata : Void*, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_compute_root32_bit_constants.unsafe_as(Proc(UInt32, UInt32, Void*, UInt32, Void)).call(rootparameterindex, num32bitvaluestoset, psrcdata, destoffsetin32bitvalues)
+  end
+  def set_graphics_root32_bit_constants(rootparameterindex : UInt32, num32bitvaluestoset : UInt32, psrcdata : Void*, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_graphics_root32_bit_constants.unsafe_as(Proc(UInt32, UInt32, Void*, UInt32, Void)).call(rootparameterindex, num32bitvaluestoset, psrcdata, destoffsetin32bitvalues)
+  end
+  def set_compute_root_constant_buffer_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_constant_buffer_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_constant_buffer_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_constant_buffer_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_compute_root_shader_resource_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_shader_resource_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_shader_resource_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_shader_resource_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_compute_root_unordered_access_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_unordered_access_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_unordered_access_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_unordered_access_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def ia_set_index_buffer(pview : D3D12_INDEX_BUFFER_VIEW*) : Void
+    @lpVtbl.value.ia_set_index_buffer.unsafe_as(Proc(D3D12_INDEX_BUFFER_VIEW*, Void)).call(pview)
+  end
+  def ia_set_vertex_buffers(startslot : UInt32, numviews : UInt32, pviews : D3D12_VERTEX_BUFFER_VIEW*) : Void
+    @lpVtbl.value.ia_set_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, D3D12_VERTEX_BUFFER_VIEW*, Void)).call(startslot, numviews, pviews)
+  end
+  def so_set_targets(startslot : UInt32, numviews : UInt32, pviews : D3D12_STREAM_OUTPUT_BUFFER_VIEW*) : Void
+    @lpVtbl.value.so_set_targets.unsafe_as(Proc(UInt32, UInt32, D3D12_STREAM_OUTPUT_BUFFER_VIEW*, Void)).call(startslot, numviews, pviews)
+  end
+  def om_set_render_targets(numrendertargetdescriptors : UInt32, prendertargetdescriptors : D3D12_CPU_DESCRIPTOR_HANDLE*, rtssinglehandletodescriptorrange : LibC::BOOL, pdepthstencildescriptor : D3D12_CPU_DESCRIPTOR_HANDLE*) : Void
+    @lpVtbl.value.om_set_render_targets.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, LibC::BOOL, D3D12_CPU_DESCRIPTOR_HANDLE*, Void)).call(numrendertargetdescriptors, prendertargetdescriptors, rtssinglehandletodescriptorrange, pdepthstencildescriptor)
+  end
+  def clear_depth_stencil_view(depthstencilview : D3D12_CPU_DESCRIPTOR_HANDLE, clearflags : D3D12_CLEAR_FLAGS, depth : Float32, stencil : UInt8, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_depth_stencil_view.unsafe_as(Proc(D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CLEAR_FLAGS, Float32, UInt8, UInt32, RECT*, Void)).call(depthstencilview, clearflags, depth, stencil, numrects, prects)
+  end
+  def clear_render_target_view(rendertargetview : D3D12_CPU_DESCRIPTOR_HANDLE, colorrgba : Float32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_render_target_view.unsafe_as(Proc(D3D12_CPU_DESCRIPTOR_HANDLE, Float32*, UInt32, RECT*, Void)).call(rendertargetview, colorrgba, numrects, prects)
+  end
+  def clear_unordered_access_view_uint(viewgpuhandleincurrentheap : D3D12_GPU_DESCRIPTOR_HANDLE, viewcpuhandle : D3D12_CPU_DESCRIPTOR_HANDLE, presource : ID3D12Resource, values : UInt32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_unordered_access_view_uint.unsafe_as(Proc(D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, UInt32*, UInt32, RECT*, Void)).call(viewgpuhandleincurrentheap, viewcpuhandle, presource, values, numrects, prects)
+  end
+  def clear_unordered_access_view_float(viewgpuhandleincurrentheap : D3D12_GPU_DESCRIPTOR_HANDLE, viewcpuhandle : D3D12_CPU_DESCRIPTOR_HANDLE, presource : ID3D12Resource, values : Float32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_unordered_access_view_float.unsafe_as(Proc(D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, Float32*, UInt32, RECT*, Void)).call(viewgpuhandleincurrentheap, viewcpuhandle, presource, values, numrects, prects)
+  end
+  def discard_resource(presource : ID3D12Resource, pregion : D3D12_DISCARD_REGION*) : Void
+    @lpVtbl.value.discard_resource.unsafe_as(Proc(ID3D12Resource, D3D12_DISCARD_REGION*, Void)).call(presource, pregion)
+  end
+  def begin_query(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.begin_query.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)).call(pqueryheap, type, index)
+  end
+  def end_query(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.end_query.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)).call(pqueryheap, type, index)
+  end
+  def resolve_query_data(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, startindex : UInt32, numqueries : UInt32, pdestinationbuffer : ID3D12Resource, aligneddestinationbufferoffset : UInt64) : Void
+    @lpVtbl.value.resolve_query_data.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, UInt32, ID3D12Resource, UInt64, Void)).call(pqueryheap, type, startindex, numqueries, pdestinationbuffer, aligneddestinationbufferoffset)
+  end
+  def set_predication(pbuffer : ID3D12Resource, alignedbufferoffset : UInt64, operation : D3D12_PREDICATION_OP) : Void
+    @lpVtbl.value.set_predication.unsafe_as(Proc(ID3D12Resource, UInt64, D3D12_PREDICATION_OP, Void)).call(pbuffer, alignedbufferoffset, operation)
+  end
+  def set_marker(metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.unsafe_as(Proc(UInt32, Void*, UInt32, Void)).call(metadata, pdata, size)
+  end
+  def begin_event(metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.unsafe_as(Proc(UInt32, Void*, UInt32, Void)).call(metadata, pdata, size)
+  end
+  def end_event : Void
+    @lpVtbl.value.end_event.unsafe_as(Proc(Void)).call
+  end
+  def execute_indirect(pcommandsignature : ID3D12CommandSignature, maxcommandcount : UInt32, pargumentbuffer : ID3D12Resource, argumentbufferoffset : UInt64, pcountbuffer : ID3D12Resource, countbufferoffset : UInt64) : Void
+    @lpVtbl.value.execute_indirect.unsafe_as(Proc(ID3D12CommandSignature, UInt32, ID3D12Resource, UInt64, ID3D12Resource, UInt64, Void)).call(pcommandsignature, maxcommandcount, pargumentbuffer, argumentbufferoffset, pcountbuffer, countbufferoffset)
+  end
+  def atomic_copy_buffer_uint(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, dependencies : UInt32, ppdependentresources : ID3D12Resource*, pdependentsubresourceranges : D3D12_SUBRESOURCE_RANGE_UINT64*) : Void
+    @lpVtbl.value.atomic_copy_buffer_uint.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, dependencies, ppdependentresources, pdependentsubresourceranges)
+  end
+  def atomic_copy_buffer_uint64(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, dependencies : UInt32, ppdependentresources : ID3D12Resource*, pdependentsubresourceranges : D3D12_SUBRESOURCE_RANGE_UINT64*) : Void
+    @lpVtbl.value.atomic_copy_buffer_uint64.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, dependencies, ppdependentresources, pdependentsubresourceranges)
+  end
+  def om_set_depth_bounds(min : Float32, max : Float32) : Void
+    @lpVtbl.value.om_set_depth_bounds.unsafe_as(Proc(Float32, Float32, Void)).call(min, max)
+  end
+  def set_sample_positions(numsamplesperpixel : UInt32, numpixels : UInt32, psamplepositions : D3D12_SAMPLE_POSITION*) : Void
+    @lpVtbl.value.set_sample_positions.unsafe_as(Proc(UInt32, UInt32, D3D12_SAMPLE_POSITION*, Void)).call(numsamplesperpixel, numpixels, psamplepositions)
+  end
+  def resolve_subresource_region(pdstresource : ID3D12Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, psrcresource : ID3D12Resource, srcsubresource : UInt32, psrcrect : RECT*, format : DXGI_FORMAT, resolvemode : D3D12_RESOLVE_MODE) : Void
+    @lpVtbl.value.resolve_subresource_region.unsafe_as(Proc(ID3D12Resource, UInt32, UInt32, UInt32, ID3D12Resource, UInt32, RECT*, DXGI_FORMAT, D3D12_RESOLVE_MODE, Void)).call(pdstresource, dstsubresource, dstx, dsty, psrcresource, srcsubresource, psrcrect, format, resolvemode)
+  end
+  def set_view_instance_mask(mask : UInt32) : Void
+    @lpVtbl.value.set_view_instance_mask.unsafe_as(Proc(UInt32, Void)).call(mask)
+  end
+  def write_buffer_immediate(count : UInt32, pparams : D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pmodes : D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    @lpVtbl.value.write_buffer_immediate.unsafe_as(Proc(UInt32, D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void)).call(count, pparams, pmodes)
+  end
+  def set_protected_resource_session(pprotectedresourcesession : ID3D12ProtectedResourceSession) : Void
+    @lpVtbl.value.set_protected_resource_session.unsafe_as(Proc(ID3D12ProtectedResourceSession, Void)).call(pprotectedresourcesession)
+  end
+end
+struct LibWin32::ID3D12MetaCommand
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_required_parameter_resource_size(stage : D3D12_META_COMMAND_PARAMETER_STAGE, parameterindex : UInt32) : UInt64
+    @lpVtbl.value.get_required_parameter_resource_size.unsafe_as(Proc(D3D12_META_COMMAND_PARAMETER_STAGE, UInt32, UInt64)).call(stage, parameterindex)
+  end
+end
+struct LibWin32::ID3D12GraphicsCommandList4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_type : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE)).call
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def reset(pallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState) : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(ID3D12CommandAllocator, ID3D12PipelineState, HRESULT)).call(pallocator, pinitialstate)
+  end
+  def clear_state(ppipelinestate : ID3D12PipelineState) : Void
+    @lpVtbl.value.clear_state.unsafe_as(Proc(ID3D12PipelineState, Void)).call(ppipelinestate)
+  end
+  def draw_instanced(vertexcountperinstance : UInt32, instancecount : UInt32, startvertexlocation : UInt32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, Void)).call(vertexcountperinstance, instancecount, startvertexlocation, startinstancelocation)
+  end
+  def draw_indexed_instanced(indexcountperinstance : UInt32, instancecount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, Int32, UInt32, Void)).call(indexcountperinstance, instancecount, startindexlocation, basevertexlocation, startinstancelocation)
+  end
+  def dispatch(threadgroupcountx : UInt32, threadgroupcounty : UInt32, threadgroupcountz : UInt32) : Void
+    @lpVtbl.value.dispatch.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(threadgroupcountx, threadgroupcounty, threadgroupcountz)
+  end
+  def copy_buffer_region(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, numbytes : UInt64) : Void
+    @lpVtbl.value.copy_buffer_region.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt64, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, numbytes)
+  end
+  def copy_texture_region(pdst : D3D12_TEXTURE_COPY_LOCATION*, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrc : D3D12_TEXTURE_COPY_LOCATION*, psrcbox : D3D12_BOX*) : Void
+    @lpVtbl.value.copy_texture_region.unsafe_as(Proc(D3D12_TEXTURE_COPY_LOCATION*, UInt32, UInt32, UInt32, D3D12_TEXTURE_COPY_LOCATION*, D3D12_BOX*, Void)).call(pdst, dstx, dsty, dstz, psrc, psrcbox)
+  end
+  def copy_resource(pdstresource : ID3D12Resource, psrcresource : ID3D12Resource) : Void
+    @lpVtbl.value.copy_resource.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, Void)).call(pdstresource, psrcresource)
+  end
+  def copy_tiles(ptiledresource : ID3D12Resource, ptileregionstartcoordinate : D3D12_TILED_RESOURCE_COORDINATE*, ptileregionsize : D3D12_TILE_REGION_SIZE*, pbuffer : ID3D12Resource, bufferstartoffsetinbytes : UInt64, flags : D3D12_TILE_COPY_FLAGS) : Void
+    @lpVtbl.value.copy_tiles.unsafe_as(Proc(ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, ID3D12Resource, UInt64, D3D12_TILE_COPY_FLAGS, Void)).call(ptiledresource, ptileregionstartcoordinate, ptileregionsize, pbuffer, bufferstartoffsetinbytes, flags)
+  end
+  def resolve_subresource(pdstresource : ID3D12Resource, dstsubresource : UInt32, psrcresource : ID3D12Resource, srcsubresource : UInt32, format : DXGI_FORMAT) : Void
+    @lpVtbl.value.resolve_subresource.unsafe_as(Proc(ID3D12Resource, UInt32, ID3D12Resource, UInt32, DXGI_FORMAT, Void)).call(pdstresource, dstsubresource, psrcresource, srcsubresource, format)
+  end
+  def ia_set_primitive_topology(primitivetopology : D3D_PRIMITIVE_TOPOLOGY) : Void
+    @lpVtbl.value.ia_set_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY, Void)).call(primitivetopology)
+  end
+  def rs_set_viewports(numviewports : UInt32, pviewports : D3D12_VIEWPORT*) : Void
+    @lpVtbl.value.rs_set_viewports.unsafe_as(Proc(UInt32, D3D12_VIEWPORT*, Void)).call(numviewports, pviewports)
+  end
+  def rs_set_scissor_rects(numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.rs_set_scissor_rects.unsafe_as(Proc(UInt32, RECT*, Void)).call(numrects, prects)
+  end
+  def om_set_blend_factor(blendfactor : Float32*) : Void
+    @lpVtbl.value.om_set_blend_factor.unsafe_as(Proc(Float32*, Void)).call(blendfactor)
+  end
+  def om_set_stencil_ref(stencilref : UInt32) : Void
+    @lpVtbl.value.om_set_stencil_ref.unsafe_as(Proc(UInt32, Void)).call(stencilref)
+  end
+  def set_pipeline_state(ppipelinestate : ID3D12PipelineState) : Void
+    @lpVtbl.value.set_pipeline_state.unsafe_as(Proc(ID3D12PipelineState, Void)).call(ppipelinestate)
+  end
+  def resource_barrier(numbarriers : UInt32, pbarriers : D3D12_RESOURCE_BARRIER*) : Void
+    @lpVtbl.value.resource_barrier.unsafe_as(Proc(UInt32, D3D12_RESOURCE_BARRIER*, Void)).call(numbarriers, pbarriers)
+  end
+  def execute_bundle(pcommandlist : ID3D12GraphicsCommandList) : Void
+    @lpVtbl.value.execute_bundle.unsafe_as(Proc(ID3D12GraphicsCommandList, Void)).call(pcommandlist)
+  end
+  def set_descriptor_heaps(numdescriptorheaps : UInt32, ppdescriptorheaps : ID3D12DescriptorHeap*) : Void
+    @lpVtbl.value.set_descriptor_heaps.unsafe_as(Proc(UInt32, ID3D12DescriptorHeap*, Void)).call(numdescriptorheaps, ppdescriptorheaps)
+  end
+  def set_compute_root_signature(prootsignature : ID3D12RootSignature) : Void
+    @lpVtbl.value.set_compute_root_signature.unsafe_as(Proc(ID3D12RootSignature, Void)).call(prootsignature)
+  end
+  def set_graphics_root_signature(prootsignature : ID3D12RootSignature) : Void
+    @lpVtbl.value.set_graphics_root_signature.unsafe_as(Proc(ID3D12RootSignature, Void)).call(prootsignature)
+  end
+  def set_compute_root_descriptor_table(rootparameterindex : UInt32, basedescriptor : D3D12_GPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.set_compute_root_descriptor_table.unsafe_as(Proc(UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)).call(rootparameterindex, basedescriptor)
+  end
+  def set_graphics_root_descriptor_table(rootparameterindex : UInt32, basedescriptor : D3D12_GPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.set_graphics_root_descriptor_table.unsafe_as(Proc(UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)).call(rootparameterindex, basedescriptor)
+  end
+  def set_compute_root32_bit_constant(rootparameterindex : UInt32, srcdata : UInt32, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_compute_root32_bit_constant.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(rootparameterindex, srcdata, destoffsetin32bitvalues)
+  end
+  def set_graphics_root32_bit_constant(rootparameterindex : UInt32, srcdata : UInt32, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_graphics_root32_bit_constant.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(rootparameterindex, srcdata, destoffsetin32bitvalues)
+  end
+  def set_compute_root32_bit_constants(rootparameterindex : UInt32, num32bitvaluestoset : UInt32, psrcdata : Void*, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_compute_root32_bit_constants.unsafe_as(Proc(UInt32, UInt32, Void*, UInt32, Void)).call(rootparameterindex, num32bitvaluestoset, psrcdata, destoffsetin32bitvalues)
+  end
+  def set_graphics_root32_bit_constants(rootparameterindex : UInt32, num32bitvaluestoset : UInt32, psrcdata : Void*, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_graphics_root32_bit_constants.unsafe_as(Proc(UInt32, UInt32, Void*, UInt32, Void)).call(rootparameterindex, num32bitvaluestoset, psrcdata, destoffsetin32bitvalues)
+  end
+  def set_compute_root_constant_buffer_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_constant_buffer_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_constant_buffer_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_constant_buffer_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_compute_root_shader_resource_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_shader_resource_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_shader_resource_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_shader_resource_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_compute_root_unordered_access_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_unordered_access_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_unordered_access_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_unordered_access_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def ia_set_index_buffer(pview : D3D12_INDEX_BUFFER_VIEW*) : Void
+    @lpVtbl.value.ia_set_index_buffer.unsafe_as(Proc(D3D12_INDEX_BUFFER_VIEW*, Void)).call(pview)
+  end
+  def ia_set_vertex_buffers(startslot : UInt32, numviews : UInt32, pviews : D3D12_VERTEX_BUFFER_VIEW*) : Void
+    @lpVtbl.value.ia_set_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, D3D12_VERTEX_BUFFER_VIEW*, Void)).call(startslot, numviews, pviews)
+  end
+  def so_set_targets(startslot : UInt32, numviews : UInt32, pviews : D3D12_STREAM_OUTPUT_BUFFER_VIEW*) : Void
+    @lpVtbl.value.so_set_targets.unsafe_as(Proc(UInt32, UInt32, D3D12_STREAM_OUTPUT_BUFFER_VIEW*, Void)).call(startslot, numviews, pviews)
+  end
+  def om_set_render_targets(numrendertargetdescriptors : UInt32, prendertargetdescriptors : D3D12_CPU_DESCRIPTOR_HANDLE*, rtssinglehandletodescriptorrange : LibC::BOOL, pdepthstencildescriptor : D3D12_CPU_DESCRIPTOR_HANDLE*) : Void
+    @lpVtbl.value.om_set_render_targets.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, LibC::BOOL, D3D12_CPU_DESCRIPTOR_HANDLE*, Void)).call(numrendertargetdescriptors, prendertargetdescriptors, rtssinglehandletodescriptorrange, pdepthstencildescriptor)
+  end
+  def clear_depth_stencil_view(depthstencilview : D3D12_CPU_DESCRIPTOR_HANDLE, clearflags : D3D12_CLEAR_FLAGS, depth : Float32, stencil : UInt8, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_depth_stencil_view.unsafe_as(Proc(D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CLEAR_FLAGS, Float32, UInt8, UInt32, RECT*, Void)).call(depthstencilview, clearflags, depth, stencil, numrects, prects)
+  end
+  def clear_render_target_view(rendertargetview : D3D12_CPU_DESCRIPTOR_HANDLE, colorrgba : Float32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_render_target_view.unsafe_as(Proc(D3D12_CPU_DESCRIPTOR_HANDLE, Float32*, UInt32, RECT*, Void)).call(rendertargetview, colorrgba, numrects, prects)
+  end
+  def clear_unordered_access_view_uint(viewgpuhandleincurrentheap : D3D12_GPU_DESCRIPTOR_HANDLE, viewcpuhandle : D3D12_CPU_DESCRIPTOR_HANDLE, presource : ID3D12Resource, values : UInt32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_unordered_access_view_uint.unsafe_as(Proc(D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, UInt32*, UInt32, RECT*, Void)).call(viewgpuhandleincurrentheap, viewcpuhandle, presource, values, numrects, prects)
+  end
+  def clear_unordered_access_view_float(viewgpuhandleincurrentheap : D3D12_GPU_DESCRIPTOR_HANDLE, viewcpuhandle : D3D12_CPU_DESCRIPTOR_HANDLE, presource : ID3D12Resource, values : Float32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_unordered_access_view_float.unsafe_as(Proc(D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, Float32*, UInt32, RECT*, Void)).call(viewgpuhandleincurrentheap, viewcpuhandle, presource, values, numrects, prects)
+  end
+  def discard_resource(presource : ID3D12Resource, pregion : D3D12_DISCARD_REGION*) : Void
+    @lpVtbl.value.discard_resource.unsafe_as(Proc(ID3D12Resource, D3D12_DISCARD_REGION*, Void)).call(presource, pregion)
+  end
+  def begin_query(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.begin_query.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)).call(pqueryheap, type, index)
+  end
+  def end_query(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.end_query.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)).call(pqueryheap, type, index)
+  end
+  def resolve_query_data(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, startindex : UInt32, numqueries : UInt32, pdestinationbuffer : ID3D12Resource, aligneddestinationbufferoffset : UInt64) : Void
+    @lpVtbl.value.resolve_query_data.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, UInt32, ID3D12Resource, UInt64, Void)).call(pqueryheap, type, startindex, numqueries, pdestinationbuffer, aligneddestinationbufferoffset)
+  end
+  def set_predication(pbuffer : ID3D12Resource, alignedbufferoffset : UInt64, operation : D3D12_PREDICATION_OP) : Void
+    @lpVtbl.value.set_predication.unsafe_as(Proc(ID3D12Resource, UInt64, D3D12_PREDICATION_OP, Void)).call(pbuffer, alignedbufferoffset, operation)
+  end
+  def set_marker(metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.unsafe_as(Proc(UInt32, Void*, UInt32, Void)).call(metadata, pdata, size)
+  end
+  def begin_event(metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.unsafe_as(Proc(UInt32, Void*, UInt32, Void)).call(metadata, pdata, size)
+  end
+  def end_event : Void
+    @lpVtbl.value.end_event.unsafe_as(Proc(Void)).call
+  end
+  def execute_indirect(pcommandsignature : ID3D12CommandSignature, maxcommandcount : UInt32, pargumentbuffer : ID3D12Resource, argumentbufferoffset : UInt64, pcountbuffer : ID3D12Resource, countbufferoffset : UInt64) : Void
+    @lpVtbl.value.execute_indirect.unsafe_as(Proc(ID3D12CommandSignature, UInt32, ID3D12Resource, UInt64, ID3D12Resource, UInt64, Void)).call(pcommandsignature, maxcommandcount, pargumentbuffer, argumentbufferoffset, pcountbuffer, countbufferoffset)
+  end
+  def atomic_copy_buffer_uint(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, dependencies : UInt32, ppdependentresources : ID3D12Resource*, pdependentsubresourceranges : D3D12_SUBRESOURCE_RANGE_UINT64*) : Void
+    @lpVtbl.value.atomic_copy_buffer_uint.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, dependencies, ppdependentresources, pdependentsubresourceranges)
+  end
+  def atomic_copy_buffer_uint64(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, dependencies : UInt32, ppdependentresources : ID3D12Resource*, pdependentsubresourceranges : D3D12_SUBRESOURCE_RANGE_UINT64*) : Void
+    @lpVtbl.value.atomic_copy_buffer_uint64.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, dependencies, ppdependentresources, pdependentsubresourceranges)
+  end
+  def om_set_depth_bounds(min : Float32, max : Float32) : Void
+    @lpVtbl.value.om_set_depth_bounds.unsafe_as(Proc(Float32, Float32, Void)).call(min, max)
+  end
+  def set_sample_positions(numsamplesperpixel : UInt32, numpixels : UInt32, psamplepositions : D3D12_SAMPLE_POSITION*) : Void
+    @lpVtbl.value.set_sample_positions.unsafe_as(Proc(UInt32, UInt32, D3D12_SAMPLE_POSITION*, Void)).call(numsamplesperpixel, numpixels, psamplepositions)
+  end
+  def resolve_subresource_region(pdstresource : ID3D12Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, psrcresource : ID3D12Resource, srcsubresource : UInt32, psrcrect : RECT*, format : DXGI_FORMAT, resolvemode : D3D12_RESOLVE_MODE) : Void
+    @lpVtbl.value.resolve_subresource_region.unsafe_as(Proc(ID3D12Resource, UInt32, UInt32, UInt32, ID3D12Resource, UInt32, RECT*, DXGI_FORMAT, D3D12_RESOLVE_MODE, Void)).call(pdstresource, dstsubresource, dstx, dsty, psrcresource, srcsubresource, psrcrect, format, resolvemode)
+  end
+  def set_view_instance_mask(mask : UInt32) : Void
+    @lpVtbl.value.set_view_instance_mask.unsafe_as(Proc(UInt32, Void)).call(mask)
+  end
+  def write_buffer_immediate(count : UInt32, pparams : D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pmodes : D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    @lpVtbl.value.write_buffer_immediate.unsafe_as(Proc(UInt32, D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void)).call(count, pparams, pmodes)
+  end
+  def set_protected_resource_session(pprotectedresourcesession : ID3D12ProtectedResourceSession) : Void
+    @lpVtbl.value.set_protected_resource_session.unsafe_as(Proc(ID3D12ProtectedResourceSession, Void)).call(pprotectedresourcesession)
+  end
+  def begin_render_pass(numrendertargets : UInt32, prendertargets : D3D12_RENDER_PASS_RENDER_TARGET_DESC*, pdepthstencil : D3D12_RENDER_PASS_DEPTH_STENCIL_DESC*, flags : D3D12_RENDER_PASS_FLAGS) : Void
+    @lpVtbl.value.begin_render_pass.unsafe_as(Proc(UInt32, D3D12_RENDER_PASS_RENDER_TARGET_DESC*, D3D12_RENDER_PASS_DEPTH_STENCIL_DESC*, D3D12_RENDER_PASS_FLAGS, Void)).call(numrendertargets, prendertargets, pdepthstencil, flags)
+  end
+  def end_render_pass : Void
+    @lpVtbl.value.end_render_pass.unsafe_as(Proc(Void)).call
+  end
+  def initialize_meta_command(pmetacommand : ID3D12MetaCommand, pinitializationparametersdata : Void*, initializationparametersdatasizeinbytes : LibC::UINT_PTR) : Void
+    @lpVtbl.value.initialize_meta_command.unsafe_as(Proc(ID3D12MetaCommand, Void*, LibC::UINT_PTR, Void)).call(pmetacommand, pinitializationparametersdata, initializationparametersdatasizeinbytes)
+  end
+  def execute_meta_command(pmetacommand : ID3D12MetaCommand, pexecutionparametersdata : Void*, executionparametersdatasizeinbytes : LibC::UINT_PTR) : Void
+    @lpVtbl.value.execute_meta_command.unsafe_as(Proc(ID3D12MetaCommand, Void*, LibC::UINT_PTR, Void)).call(pmetacommand, pexecutionparametersdata, executionparametersdatasizeinbytes)
+  end
+  def build_raytracing_acceleration_structure(pdesc : D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC*, numpostbuildinfodescs : UInt32, ppostbuildinfodescs : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*) : Void
+    @lpVtbl.value.build_raytracing_acceleration_structure.unsafe_as(Proc(D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC*, UInt32, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*, Void)).call(pdesc, numpostbuildinfodescs, ppostbuildinfodescs)
+  end
+  def emit_raytracing_acceleration_structure_postbuild_info(pdesc : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*, numsourceaccelerationstructures : UInt32, psourceaccelerationstructuredata : UInt64*) : Void
+    @lpVtbl.value.emit_raytracing_acceleration_structure_postbuild_info.unsafe_as(Proc(D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*, UInt32, UInt64*, Void)).call(pdesc, numsourceaccelerationstructures, psourceaccelerationstructuredata)
+  end
+  def copy_raytracing_acceleration_structure(destaccelerationstructuredata : UInt64, sourceaccelerationstructuredata : UInt64, mode : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE) : Void
+    @lpVtbl.value.copy_raytracing_acceleration_structure.unsafe_as(Proc(UInt64, UInt64, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE, Void)).call(destaccelerationstructuredata, sourceaccelerationstructuredata, mode)
+  end
+  def set_pipeline_state1(pstateobject : ID3D12StateObject) : Void
+    @lpVtbl.value.set_pipeline_state1.unsafe_as(Proc(ID3D12StateObject, Void)).call(pstateobject)
+  end
+  def dispatch_rays(pdesc : D3D12_DISPATCH_RAYS_DESC*) : Void
+    @lpVtbl.value.dispatch_rays.unsafe_as(Proc(D3D12_DISPATCH_RAYS_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D12ShaderCacheSession
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def find_value(pkey : Void*, keysize : UInt32, pvalue : Void*, pvaluesize : UInt32*) : HRESULT
+    @lpVtbl.value.find_value.unsafe_as(Proc(Void*, UInt32, Void*, UInt32*, HRESULT)).call(pkey, keysize, pvalue, pvaluesize)
+  end
+  def store_value(pkey : Void*, keysize : UInt32, pvalue : Void*, valuesize : UInt32) : HRESULT
+    @lpVtbl.value.store_value.unsafe_as(Proc(Void*, UInt32, Void*, UInt32, HRESULT)).call(pkey, keysize, pvalue, valuesize)
+  end
+  def set_delete_on_destroy : Void
+    @lpVtbl.value.set_delete_on_destroy.unsafe_as(Proc(Void)).call
+  end
+  def get_desc : D3D12_SHADER_CACHE_SESSION_DESC
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_SHADER_CACHE_SESSION_DESC)).call
+  end
+end
+struct LibWin32::ID3D12Device9
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_node_count : UInt32
+    @lpVtbl.value.get_node_count.unsafe_as(Proc(UInt32)).call
+  end
+  def create_command_queue(pdesc : D3D12_COMMAND_QUEUE_DESC*, riid : Guid*, ppcommandqueue : Void**) : HRESULT
+    @lpVtbl.value.create_command_queue.unsafe_as(Proc(D3D12_COMMAND_QUEUE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppcommandqueue)
+  end
+  def create_command_allocator(type : D3D12_COMMAND_LIST_TYPE, riid : Guid*, ppcommandallocator : Void**) : HRESULT
+    @lpVtbl.value.create_command_allocator.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE, Guid*, Void**, HRESULT)).call(type, riid, ppcommandallocator)
+  end
+  def create_graphics_pipeline_state(pdesc : D3D12_GRAPHICS_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_graphics_pipeline_state.unsafe_as(Proc(D3D12_GRAPHICS_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_compute_pipeline_state(pdesc : D3D12_COMPUTE_PIPELINE_STATE_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_compute_pipeline_state.unsafe_as(Proc(D3D12_COMPUTE_PIPELINE_STATE_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def create_command_list(nodemask : UInt32, type : D3D12_COMMAND_LIST_TYPE, pcommandallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState, riid : Guid*, ppcommandlist : Void**) : HRESULT
+    @lpVtbl.value.create_command_list.unsafe_as(Proc(UInt32, D3D12_COMMAND_LIST_TYPE, ID3D12CommandAllocator, ID3D12PipelineState, Guid*, Void**, HRESULT)).call(nodemask, type, pcommandallocator, pinitialstate, riid, ppcommandlist)
+  end
+  def check_feature_support(feature : D3D12_FEATURE, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D12_FEATURE, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def create_descriptor_heap(pdescriptorheapdesc : D3D12_DESCRIPTOR_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_descriptor_heap.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdescriptorheapdesc, riid, ppvheap)
+  end
+  def get_descriptor_handle_increment_size(descriptorheaptype : D3D12_DESCRIPTOR_HEAP_TYPE) : UInt32
+    @lpVtbl.value.get_descriptor_handle_increment_size.unsafe_as(Proc(D3D12_DESCRIPTOR_HEAP_TYPE, UInt32)).call(descriptorheaptype)
+  end
+  def create_root_signature(nodemask : UInt32, pblobwithrootsignature : Void*, bloblengthinbytes : LibC::UINT_PTR, riid : Guid*, ppvrootsignature : Void**) : HRESULT
+    @lpVtbl.value.create_root_signature.unsafe_as(Proc(UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(nodemask, pblobwithrootsignature, bloblengthinbytes, riid, ppvrootsignature)
+  end
+  def create_constant_buffer_view(pdesc : D3D12_CONSTANT_BUFFER_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_constant_buffer_view.unsafe_as(Proc(D3D12_CONSTANT_BUFFER_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def create_shader_resource_view(presource : ID3D12Resource, pdesc : D3D12_SHADER_RESOURCE_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D12Resource, D3D12_SHADER_RESOURCE_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_unordered_access_view(presource : ID3D12Resource, pcounterresource : ID3D12Resource, pdesc : D3D12_UNORDERED_ACCESS_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_unordered_access_view.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, D3D12_UNORDERED_ACCESS_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pcounterresource, pdesc, destdescriptor)
+  end
+  def create_render_target_view(presource : ID3D12Resource, pdesc : D3D12_RENDER_TARGET_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D12Resource, D3D12_RENDER_TARGET_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_depth_stencil_view(presource : ID3D12Resource, pdesc : D3D12_DEPTH_STENCIL_VIEW_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D12Resource, D3D12_DEPTH_STENCIL_VIEW_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(presource, pdesc, destdescriptor)
+  end
+  def create_sampler(pdesc : D3D12_SAMPLER_DESC*, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_sampler.unsafe_as(Proc(D3D12_SAMPLER_DESC*, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(pdesc, destdescriptor)
+  end
+  def copy_descriptors(numdestdescriptorranges : UInt32, pdestdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, pdestdescriptorrangesizes : UInt32*, numsrcdescriptorranges : UInt32, psrcdescriptorrangestarts : D3D12_CPU_DESCRIPTOR_HANDLE*, psrcdescriptorrangesizes : UInt32*, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, UInt32*, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdestdescriptorranges, pdestdescriptorrangestarts, pdestdescriptorrangesizes, numsrcdescriptorranges, psrcdescriptorrangestarts, psrcdescriptorrangesizes, descriptorheapstype)
+  end
+  def copy_descriptors_simple(numdescriptors : UInt32, destdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, srcdescriptorrangestart : D3D12_CPU_DESCRIPTOR_HANDLE, descriptorheapstype : D3D12_DESCRIPTOR_HEAP_TYPE) : Void
+    @lpVtbl.value.copy_descriptors_simple.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_DESCRIPTOR_HEAP_TYPE, Void)).call(numdescriptors, destdescriptorrangestart, srcdescriptorrangestart, descriptorheapstype)
+  end
+  def get_resource_allocation_info(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs)
+  end
+  def get_custom_heap_properties(nodemask : UInt32, heaptype : D3D12_HEAP_TYPE) : D3D12_HEAP_PROPERTIES
+    @lpVtbl.value.get_custom_heap_properties.unsafe_as(Proc(UInt32, D3D12_HEAP_TYPE, D3D12_HEAP_PROPERTIES)).call(nodemask, heaptype)
+  end
+  def create_committed_resource(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, riidresource, ppvresource)
+  end
+  def create_heap(pdesc : D3D12_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_heap.unsafe_as(Proc(D3D12_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def create_placed_resource(pheap : ID3D12Heap, heapoffset : UInt64, pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_placed_resource.unsafe_as(Proc(ID3D12Heap, UInt64, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheap, heapoffset, pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_reserved_resource(pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_reserved_resource.unsafe_as(Proc(D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_shared_handle(pobject : ID3D12DeviceChild, pattributes : SECURITY_ATTRIBUTES*, access : UInt32, name : LibC::LPWSTR, phandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_shared_handle.unsafe_as(Proc(ID3D12DeviceChild, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)).call(pobject, pattributes, access, name, phandle)
+  end
+  def open_shared_handle(nthandle : LibC::HANDLE, riid : Guid*, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.open_shared_handle.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(nthandle, riid, ppvobj)
+  end
+  def open_shared_handle_by_name(name : LibC::LPWSTR, access : UInt32, pnthandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.open_shared_handle_by_name.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::HANDLE*, HRESULT)).call(name, access, pnthandle)
+  end
+  def make_resident(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.make_resident.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def evict(numobjects : UInt32, ppobjects : ID3D12Pageable*) : HRESULT
+    @lpVtbl.value.evict.unsafe_as(Proc(UInt32, ID3D12Pageable*, HRESULT)).call(numobjects, ppobjects)
+  end
+  def create_fence(initialvalue : UInt64, flags : D3D12_FENCE_FLAGS, riid : Guid*, ppfence : Void**) : HRESULT
+    @lpVtbl.value.create_fence.unsafe_as(Proc(UInt64, D3D12_FENCE_FLAGS, Guid*, Void**, HRESULT)).call(initialvalue, flags, riid, ppfence)
+  end
+  def get_device_removed_reason : HRESULT
+    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_copyable_footprints(presourcedesc : D3D12_RESOURCE_DESC*, firstsubresource : UInt32, numsubresources : UInt32, baseoffset : UInt64, playouts : D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, pnumrows : UInt32*, prowsizeinbytes : UInt64*, ptotalbytes : UInt64*) : Void
+    @lpVtbl.value.get_copyable_footprints.unsafe_as(Proc(D3D12_RESOURCE_DESC*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)).call(presourcedesc, firstsubresource, numsubresources, baseoffset, playouts, pnumrows, prowsizeinbytes, ptotalbytes)
+  end
+  def create_query_heap(pdesc : D3D12_QUERY_HEAP_DESC*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_query_heap.unsafe_as(Proc(D3D12_QUERY_HEAP_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvheap)
+  end
+  def set_stable_power_state(enable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stable_power_state.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(enable)
+  end
+  def create_command_signature(pdesc : D3D12_COMMAND_SIGNATURE_DESC*, prootsignature : ID3D12RootSignature, riid : Guid*, ppvcommandsignature : Void**) : HRESULT
+    @lpVtbl.value.create_command_signature.unsafe_as(Proc(D3D12_COMMAND_SIGNATURE_DESC*, ID3D12RootSignature, Guid*, Void**, HRESULT)).call(pdesc, prootsignature, riid, ppvcommandsignature)
+  end
+  def get_resource_tiling(ptiledresource : ID3D12Resource, pnumtilesforentireresource : UInt32*, ppackedmipdesc : D3D12_PACKED_MIP_INFO*, pstandardtileshapefornonpackedmips : D3D12_TILE_SHAPE*, pnumsubresourcetilings : UInt32*, firstsubresourcetilingtoget : UInt32, psubresourcetilingsfornonpackedmips : D3D12_SUBRESOURCE_TILING*) : Void
+    @lpVtbl.value.get_resource_tiling.unsafe_as(Proc(ID3D12Resource, UInt32*, D3D12_PACKED_MIP_INFO*, D3D12_TILE_SHAPE*, UInt32*, UInt32, D3D12_SUBRESOURCE_TILING*, Void)).call(ptiledresource, pnumtilesforentireresource, ppackedmipdesc, pstandardtileshapefornonpackedmips, pnumsubresourcetilings, firstsubresourcetilingtoget, psubresourcetilingsfornonpackedmips)
+  end
+  def get_adapter_luid : LUID
+    @lpVtbl.value.get_adapter_luid.unsafe_as(Proc(LUID)).call
+  end
+  def create_pipeline_library(plibraryblob : Void*, bloblength : LibC::UINT_PTR, riid : Guid*, pppipelinelibrary : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_library.unsafe_as(Proc(Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(plibraryblob, bloblength, riid, pppipelinelibrary)
+  end
+  def set_event_on_multiple_fence_completion(ppfences : ID3D12Fence*, pfencevalues : UInt64*, numfences : UInt32, flags : D3D12_MULTIPLE_FENCE_WAIT_FLAGS, hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_on_multiple_fence_completion.unsafe_as(Proc(ID3D12Fence*, UInt64*, UInt32, D3D12_MULTIPLE_FENCE_WAIT_FLAGS, LibC::HANDLE, HRESULT)).call(ppfences, pfencevalues, numfences, flags, hevent)
+  end
+  def set_residency_priority(numobjects : UInt32, ppobjects : ID3D12Pageable*, ppriorities : D3D12_RESIDENCY_PRIORITY*) : HRESULT
+    @lpVtbl.value.set_residency_priority.unsafe_as(Proc(UInt32, ID3D12Pageable*, D3D12_RESIDENCY_PRIORITY*, HRESULT)).call(numobjects, ppobjects, ppriorities)
+  end
+  def create_pipeline_state(pdesc : D3D12_PIPELINE_STATE_STREAM_DESC*, riid : Guid*, pppipelinestate : Void**) : HRESULT
+    @lpVtbl.value.create_pipeline_state.unsafe_as(Proc(D3D12_PIPELINE_STATE_STREAM_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, pppipelinestate)
+  end
+  def open_existing_heap_from_address(paddress : Void*, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.open_existing_heap_from_address.unsafe_as(Proc(Void*, Guid*, Void**, HRESULT)).call(paddress, riid, ppvheap)
+  end
+  def open_existing_heap_from_file_mapping(hfilemapping : LibC::HANDLE, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.open_existing_heap_from_file_mapping.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hfilemapping, riid, ppvheap)
+  end
+  def enqueue_make_resident(flags : D3D12_RESIDENCY_FLAGS, numobjects : UInt32, ppobjects : ID3D12Pageable*, pfencetosignal : ID3D12Fence, fencevaluetosignal : UInt64) : HRESULT
+    @lpVtbl.value.enqueue_make_resident.unsafe_as(Proc(D3D12_RESIDENCY_FLAGS, UInt32, ID3D12Pageable*, ID3D12Fence, UInt64, HRESULT)).call(flags, numobjects, ppobjects, pfencetosignal, fencevaluetosignal)
+  end
+  def create_command_list1(nodemask : UInt32, type : D3D12_COMMAND_LIST_TYPE, flags : D3D12_COMMAND_LIST_FLAGS, riid : Guid*, ppcommandlist : Void**) : HRESULT
+    @lpVtbl.value.create_command_list1.unsafe_as(Proc(UInt32, D3D12_COMMAND_LIST_TYPE, D3D12_COMMAND_LIST_FLAGS, Guid*, Void**, HRESULT)).call(nodemask, type, flags, riid, ppcommandlist)
+  end
+  def create_protected_resource_session(pdesc : D3D12_PROTECTED_RESOURCE_SESSION_DESC*, riid : Guid*, ppsession : Void**) : HRESULT
+    @lpVtbl.value.create_protected_resource_session.unsafe_as(Proc(D3D12_PROTECTED_RESOURCE_SESSION_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppsession)
+  end
+  def create_committed_resource1(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, pprotectedsession : ID3D12ProtectedResourceSession, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource1.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, pprotectedsession, riidresource, ppvresource)
+  end
+  def create_heap1(pdesc : D3D12_HEAP_DESC*, pprotectedsession : ID3D12ProtectedResourceSession, riid : Guid*, ppvheap : Void**) : HRESULT
+    @lpVtbl.value.create_heap1.unsafe_as(Proc(D3D12_HEAP_DESC*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pdesc, pprotectedsession, riid, ppvheap)
+  end
+  def create_reserved_resource1(pdesc : D3D12_RESOURCE_DESC*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, pprotectedsession : ID3D12ProtectedResourceSession, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_reserved_resource1.unsafe_as(Proc(D3D12_RESOURCE_DESC*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pdesc, initialstate, poptimizedclearvalue, pprotectedsession, riid, ppvresource)
+  end
+  def get_resource_allocation_info1(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC*, presourceallocationinfo1 : D3D12_RESOURCE_ALLOCATION_INFO1*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info1.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs, presourceallocationinfo1)
+  end
+  def create_lifetime_tracker(powner : ID3D12LifetimeOwner, riid : Guid*, ppvtracker : Void**) : HRESULT
+    @lpVtbl.value.create_lifetime_tracker.unsafe_as(Proc(ID3D12LifetimeOwner, Guid*, Void**, HRESULT)).call(powner, riid, ppvtracker)
+  end
+  def remove_device : Void
+    @lpVtbl.value.remove_device.unsafe_as(Proc(Void)).call
+  end
+  def enumerate_meta_commands(pnummetacommands : UInt32*, pdescs : D3D12_META_COMMAND_DESC*) : HRESULT
+    @lpVtbl.value.enumerate_meta_commands.unsafe_as(Proc(UInt32*, D3D12_META_COMMAND_DESC*, HRESULT)).call(pnummetacommands, pdescs)
+  end
+  def enumerate_meta_command_parameters(commandid : Guid*, stage : D3D12_META_COMMAND_PARAMETER_STAGE, ptotalstructuresizeinbytes : UInt32*, pparametercount : UInt32*, pparameterdescs : D3D12_META_COMMAND_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.enumerate_meta_command_parameters.unsafe_as(Proc(Guid*, D3D12_META_COMMAND_PARAMETER_STAGE, UInt32*, UInt32*, D3D12_META_COMMAND_PARAMETER_DESC*, HRESULT)).call(commandid, stage, ptotalstructuresizeinbytes, pparametercount, pparameterdescs)
+  end
+  def create_meta_command(commandid : Guid*, nodemask : UInt32, pcreationparametersdata : Void*, creationparametersdatasizeinbytes : LibC::UINT_PTR, riid : Guid*, ppmetacommand : Void**) : HRESULT
+    @lpVtbl.value.create_meta_command.unsafe_as(Proc(Guid*, UInt32, Void*, LibC::UINT_PTR, Guid*, Void**, HRESULT)).call(commandid, nodemask, pcreationparametersdata, creationparametersdatasizeinbytes, riid, ppmetacommand)
+  end
+  def create_state_object(pdesc : D3D12_STATE_OBJECT_DESC*, riid : Guid*, ppstateobject : Void**) : HRESULT
+    @lpVtbl.value.create_state_object.unsafe_as(Proc(D3D12_STATE_OBJECT_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppstateobject)
+  end
+  def get_raytracing_acceleration_structure_prebuild_info(pdesc : D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, pinfo : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*) : Void
+    @lpVtbl.value.get_raytracing_acceleration_structure_prebuild_info.unsafe_as(Proc(D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS*, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_PREBUILD_INFO*, Void)).call(pdesc, pinfo)
+  end
+  def check_driver_matching_identifier(serializeddatatype : D3D12_SERIALIZED_DATA_TYPE, pidentifiertocheck : D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*) : D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS
+    @lpVtbl.value.check_driver_matching_identifier.unsafe_as(Proc(D3D12_SERIALIZED_DATA_TYPE, D3D12_SERIALIZED_DATA_DRIVER_MATCHING_IDENTIFIER*, D3D12_DRIVER_MATCHING_IDENTIFIER_STATUS)).call(serializeddatatype, pidentifiertocheck)
+  end
+  def set_background_processing_mode(mode : D3D12_BACKGROUND_PROCESSING_MODE, measurementsaction : D3D12_MEASUREMENTS_ACTION, heventtosignaluponcompletion : LibC::HANDLE, pbfurthermeasurementsdesired : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.set_background_processing_mode.unsafe_as(Proc(D3D12_BACKGROUND_PROCESSING_MODE, D3D12_MEASUREMENTS_ACTION, LibC::HANDLE, LibC::BOOL*, HRESULT)).call(mode, measurementsaction, heventtosignaluponcompletion, pbfurthermeasurementsdesired)
+  end
+  def add_to_state_object(paddition : D3D12_STATE_OBJECT_DESC*, pstateobjecttogrowfrom : ID3D12StateObject, riid : Guid*, ppnewstateobject : Void**) : HRESULT
+    @lpVtbl.value.add_to_state_object.unsafe_as(Proc(D3D12_STATE_OBJECT_DESC*, ID3D12StateObject, Guid*, Void**, HRESULT)).call(paddition, pstateobjecttogrowfrom, riid, ppnewstateobject)
+  end
+  def create_protected_resource_session1(pdesc : D3D12_PROTECTED_RESOURCE_SESSION_DESC1*, riid : Guid*, ppsession : Void**) : HRESULT
+    @lpVtbl.value.create_protected_resource_session1.unsafe_as(Proc(D3D12_PROTECTED_RESOURCE_SESSION_DESC1*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppsession)
+  end
+  def get_resource_allocation_info2(visiblemask : UInt32, numresourcedescs : UInt32, presourcedescs : D3D12_RESOURCE_DESC1*, presourceallocationinfo1 : D3D12_RESOURCE_ALLOCATION_INFO1*) : D3D12_RESOURCE_ALLOCATION_INFO
+    @lpVtbl.value.get_resource_allocation_info2.unsafe_as(Proc(UInt32, UInt32, D3D12_RESOURCE_DESC1*, D3D12_RESOURCE_ALLOCATION_INFO1*, D3D12_RESOURCE_ALLOCATION_INFO)).call(visiblemask, numresourcedescs, presourcedescs, presourceallocationinfo1)
+  end
+  def create_committed_resource2(pheapproperties : D3D12_HEAP_PROPERTIES*, heapflags : D3D12_HEAP_FLAGS, pdesc : D3D12_RESOURCE_DESC1*, initialresourcestate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, pprotectedsession : ID3D12ProtectedResourceSession, riidresource : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_committed_resource2.unsafe_as(Proc(D3D12_HEAP_PROPERTIES*, D3D12_HEAP_FLAGS, D3D12_RESOURCE_DESC1*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, ID3D12ProtectedResourceSession, Guid*, Void**, HRESULT)).call(pheapproperties, heapflags, pdesc, initialresourcestate, poptimizedclearvalue, pprotectedsession, riidresource, ppvresource)
+  end
+  def create_placed_resource1(pheap : ID3D12Heap, heapoffset : UInt64, pdesc : D3D12_RESOURCE_DESC1*, initialstate : D3D12_RESOURCE_STATES, poptimizedclearvalue : D3D12_CLEAR_VALUE*, riid : Guid*, ppvresource : Void**) : HRESULT
+    @lpVtbl.value.create_placed_resource1.unsafe_as(Proc(ID3D12Heap, UInt64, D3D12_RESOURCE_DESC1*, D3D12_RESOURCE_STATES, D3D12_CLEAR_VALUE*, Guid*, Void**, HRESULT)).call(pheap, heapoffset, pdesc, initialstate, poptimizedclearvalue, riid, ppvresource)
+  end
+  def create_sampler_feedback_unordered_access_view(ptargetedresource : ID3D12Resource, pfeedbackresource : ID3D12Resource, destdescriptor : D3D12_CPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.create_sampler_feedback_unordered_access_view.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, D3D12_CPU_DESCRIPTOR_HANDLE, Void)).call(ptargetedresource, pfeedbackresource, destdescriptor)
+  end
+  def get_copyable_footprints1(presourcedesc : D3D12_RESOURCE_DESC1*, firstsubresource : UInt32, numsubresources : UInt32, baseoffset : UInt64, playouts : D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, pnumrows : UInt32*, prowsizeinbytes : UInt64*, ptotalbytes : UInt64*) : Void
+    @lpVtbl.value.get_copyable_footprints1.unsafe_as(Proc(D3D12_RESOURCE_DESC1*, UInt32, UInt32, UInt64, D3D12_PLACED_SUBRESOURCE_FOOTPRINT*, UInt32*, UInt64*, UInt64*, Void)).call(presourcedesc, firstsubresource, numsubresources, baseoffset, playouts, pnumrows, prowsizeinbytes, ptotalbytes)
+  end
+  def create_shader_cache_session(pdesc : D3D12_SHADER_CACHE_SESSION_DESC*, riid : Guid*, ppvsession : Void**) : HRESULT
+    @lpVtbl.value.create_shader_cache_session.unsafe_as(Proc(D3D12_SHADER_CACHE_SESSION_DESC*, Guid*, Void**, HRESULT)).call(pdesc, riid, ppvsession)
+  end
+  def shader_cache_control(kinds : D3D12_SHADER_CACHE_KIND_FLAGS, control : D3D12_SHADER_CACHE_CONTROL_FLAGS) : HRESULT
+    @lpVtbl.value.shader_cache_control.unsafe_as(Proc(D3D12_SHADER_CACHE_KIND_FLAGS, D3D12_SHADER_CACHE_CONTROL_FLAGS, HRESULT)).call(kinds, control)
+  end
+  def create_command_queue1(pdesc : D3D12_COMMAND_QUEUE_DESC*, creatorid : Guid*, riid : Guid*, ppcommandqueue : Void**) : HRESULT
+    @lpVtbl.value.create_command_queue1.unsafe_as(Proc(D3D12_COMMAND_QUEUE_DESC*, Guid*, Guid*, Void**, HRESULT)).call(pdesc, creatorid, riid, ppcommandqueue)
+  end
+end
+struct LibWin32::ID3D12Tools
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enable_shader_instrumentation(benable : LibC::BOOL) : Void
+    @lpVtbl.value.enable_shader_instrumentation.unsafe_as(Proc(LibC::BOOL, Void)).call(benable)
+  end
+  def shader_instrumentation_enabled : LibC::BOOL
+    @lpVtbl.value.shader_instrumentation_enabled.unsafe_as(Proc(LibC::BOOL)).call
+  end
+end
+struct LibWin32::ID3D12Debug
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enable_debug_layer : Void
+    @lpVtbl.value.enable_debug_layer.unsafe_as(Proc(Void)).call
+  end
+end
+struct LibWin32::ID3D12Debug1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enable_debug_layer : Void
+    @lpVtbl.value.enable_debug_layer.unsafe_as(Proc(Void)).call
+  end
+  def set_enable_gpu_based_validation(enable : LibC::BOOL) : Void
+    @lpVtbl.value.set_enable_gpu_based_validation.unsafe_as(Proc(LibC::BOOL, Void)).call(enable)
+  end
+  def set_enable_synchronized_command_queue_validation(enable : LibC::BOOL) : Void
+    @lpVtbl.value.set_enable_synchronized_command_queue_validation.unsafe_as(Proc(LibC::BOOL, Void)).call(enable)
+  end
+end
+struct LibWin32::ID3D12Debug2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_gpu_based_validation_flags(flags : D3D12_GPU_BASED_VALIDATION_FLAGS) : Void
+    @lpVtbl.value.set_gpu_based_validation_flags.unsafe_as(Proc(D3D12_GPU_BASED_VALIDATION_FLAGS, Void)).call(flags)
+  end
+end
+struct LibWin32::ID3D12Debug3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enable_debug_layer : Void
+    @lpVtbl.value.enable_debug_layer.unsafe_as(Proc(Void)).call
+  end
+  def set_enable_gpu_based_validation(enable : LibC::BOOL) : Void
+    @lpVtbl.value.set_enable_gpu_based_validation.unsafe_as(Proc(LibC::BOOL, Void)).call(enable)
+  end
+  def set_enable_synchronized_command_queue_validation(enable : LibC::BOOL) : Void
+    @lpVtbl.value.set_enable_synchronized_command_queue_validation.unsafe_as(Proc(LibC::BOOL, Void)).call(enable)
+  end
+  def set_gpu_based_validation_flags(flags : D3D12_GPU_BASED_VALIDATION_FLAGS) : Void
+    @lpVtbl.value.set_gpu_based_validation_flags.unsafe_as(Proc(D3D12_GPU_BASED_VALIDATION_FLAGS, Void)).call(flags)
+  end
+end
+struct LibWin32::ID3D12Debug4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enable_debug_layer : Void
+    @lpVtbl.value.enable_debug_layer.unsafe_as(Proc(Void)).call
+  end
+  def set_enable_gpu_based_validation(enable : LibC::BOOL) : Void
+    @lpVtbl.value.set_enable_gpu_based_validation.unsafe_as(Proc(LibC::BOOL, Void)).call(enable)
+  end
+  def set_enable_synchronized_command_queue_validation(enable : LibC::BOOL) : Void
+    @lpVtbl.value.set_enable_synchronized_command_queue_validation.unsafe_as(Proc(LibC::BOOL, Void)).call(enable)
+  end
+  def set_gpu_based_validation_flags(flags : D3D12_GPU_BASED_VALIDATION_FLAGS) : Void
+    @lpVtbl.value.set_gpu_based_validation_flags.unsafe_as(Proc(D3D12_GPU_BASED_VALIDATION_FLAGS, Void)).call(flags)
+  end
+  def disable_debug_layer : Void
+    @lpVtbl.value.disable_debug_layer.unsafe_as(Proc(Void)).call
+  end
+end
+struct LibWin32::ID3D12Debug5
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enable_debug_layer : Void
+    @lpVtbl.value.enable_debug_layer.unsafe_as(Proc(Void)).call
+  end
+  def set_enable_gpu_based_validation(enable : LibC::BOOL) : Void
+    @lpVtbl.value.set_enable_gpu_based_validation.unsafe_as(Proc(LibC::BOOL, Void)).call(enable)
+  end
+  def set_enable_synchronized_command_queue_validation(enable : LibC::BOOL) : Void
+    @lpVtbl.value.set_enable_synchronized_command_queue_validation.unsafe_as(Proc(LibC::BOOL, Void)).call(enable)
+  end
+  def set_gpu_based_validation_flags(flags : D3D12_GPU_BASED_VALIDATION_FLAGS) : Void
+    @lpVtbl.value.set_gpu_based_validation_flags.unsafe_as(Proc(D3D12_GPU_BASED_VALIDATION_FLAGS, Void)).call(flags)
+  end
+  def disable_debug_layer : Void
+    @lpVtbl.value.disable_debug_layer.unsafe_as(Proc(Void)).call
+  end
+  def set_enable_auto_name(enable : LibC::BOOL) : Void
+    @lpVtbl.value.set_enable_auto_name.unsafe_as(Proc(LibC::BOOL, Void)).call(enable)
+  end
+end
+struct LibWin32::ID3D12DebugDevice1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_debug_parameter(type : D3D12_DEBUG_DEVICE_PARAMETER_TYPE, pdata : Void*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.set_debug_parameter.unsafe_as(Proc(D3D12_DEBUG_DEVICE_PARAMETER_TYPE, Void*, UInt32, HRESULT)).call(type, pdata, datasize)
+  end
+  def get_debug_parameter(type : D3D12_DEBUG_DEVICE_PARAMETER_TYPE, pdata : Void*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.get_debug_parameter.unsafe_as(Proc(D3D12_DEBUG_DEVICE_PARAMETER_TYPE, Void*, UInt32, HRESULT)).call(type, pdata, datasize)
+  end
+  def report_live_device_objects(flags : D3D12_RLDO_FLAGS) : HRESULT
+    @lpVtbl.value.report_live_device_objects.unsafe_as(Proc(D3D12_RLDO_FLAGS, HRESULT)).call(flags)
+  end
+end
+struct LibWin32::ID3D12DebugDevice
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_feature_mask(mask : D3D12_DEBUG_FEATURE) : HRESULT
+    @lpVtbl.value.set_feature_mask.unsafe_as(Proc(D3D12_DEBUG_FEATURE, HRESULT)).call(mask)
+  end
+  def get_feature_mask : D3D12_DEBUG_FEATURE
+    @lpVtbl.value.get_feature_mask.unsafe_as(Proc(D3D12_DEBUG_FEATURE)).call
+  end
+  def report_live_device_objects(flags : D3D12_RLDO_FLAGS) : HRESULT
+    @lpVtbl.value.report_live_device_objects.unsafe_as(Proc(D3D12_RLDO_FLAGS, HRESULT)).call(flags)
+  end
+end
+struct LibWin32::ID3D12DebugDevice2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_feature_mask(mask : D3D12_DEBUG_FEATURE) : HRESULT
+    @lpVtbl.value.set_feature_mask.unsafe_as(Proc(D3D12_DEBUG_FEATURE, HRESULT)).call(mask)
+  end
+  def get_feature_mask : D3D12_DEBUG_FEATURE
+    @lpVtbl.value.get_feature_mask.unsafe_as(Proc(D3D12_DEBUG_FEATURE)).call
+  end
+  def report_live_device_objects(flags : D3D12_RLDO_FLAGS) : HRESULT
+    @lpVtbl.value.report_live_device_objects.unsafe_as(Proc(D3D12_RLDO_FLAGS, HRESULT)).call(flags)
+  end
+  def set_debug_parameter(type : D3D12_DEBUG_DEVICE_PARAMETER_TYPE, pdata : Void*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.set_debug_parameter.unsafe_as(Proc(D3D12_DEBUG_DEVICE_PARAMETER_TYPE, Void*, UInt32, HRESULT)).call(type, pdata, datasize)
+  end
+  def get_debug_parameter(type : D3D12_DEBUG_DEVICE_PARAMETER_TYPE, pdata : Void*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.get_debug_parameter.unsafe_as(Proc(D3D12_DEBUG_DEVICE_PARAMETER_TYPE, Void*, UInt32, HRESULT)).call(type, pdata, datasize)
+  end
+end
+struct LibWin32::ID3D12DebugCommandQueue
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def assert_resource_state(presource : ID3D12Resource, subresource : UInt32, state : UInt32) : LibC::BOOL
+    @lpVtbl.value.assert_resource_state.unsafe_as(Proc(ID3D12Resource, UInt32, UInt32, LibC::BOOL)).call(presource, subresource, state)
+  end
+end
+struct LibWin32::ID3D12DebugCommandList1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def assert_resource_state(presource : ID3D12Resource, subresource : UInt32, state : UInt32) : LibC::BOOL
+    @lpVtbl.value.assert_resource_state.unsafe_as(Proc(ID3D12Resource, UInt32, UInt32, LibC::BOOL)).call(presource, subresource, state)
+  end
+  def set_debug_parameter(type : D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, pdata : Void*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.set_debug_parameter.unsafe_as(Proc(D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, Void*, UInt32, HRESULT)).call(type, pdata, datasize)
+  end
+  def get_debug_parameter(type : D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, pdata : Void*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.get_debug_parameter.unsafe_as(Proc(D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, Void*, UInt32, HRESULT)).call(type, pdata, datasize)
+  end
+end
+struct LibWin32::ID3D12DebugCommandList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def assert_resource_state(presource : ID3D12Resource, subresource : UInt32, state : UInt32) : LibC::BOOL
+    @lpVtbl.value.assert_resource_state.unsafe_as(Proc(ID3D12Resource, UInt32, UInt32, LibC::BOOL)).call(presource, subresource, state)
+  end
+  def set_feature_mask(mask : D3D12_DEBUG_FEATURE) : HRESULT
+    @lpVtbl.value.set_feature_mask.unsafe_as(Proc(D3D12_DEBUG_FEATURE, HRESULT)).call(mask)
+  end
+  def get_feature_mask : D3D12_DEBUG_FEATURE
+    @lpVtbl.value.get_feature_mask.unsafe_as(Proc(D3D12_DEBUG_FEATURE)).call
+  end
+end
+struct LibWin32::ID3D12DebugCommandList2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def assert_resource_state(presource : ID3D12Resource, subresource : UInt32, state : UInt32) : LibC::BOOL
+    @lpVtbl.value.assert_resource_state.unsafe_as(Proc(ID3D12Resource, UInt32, UInt32, LibC::BOOL)).call(presource, subresource, state)
+  end
+  def set_feature_mask(mask : D3D12_DEBUG_FEATURE) : HRESULT
+    @lpVtbl.value.set_feature_mask.unsafe_as(Proc(D3D12_DEBUG_FEATURE, HRESULT)).call(mask)
+  end
+  def get_feature_mask : D3D12_DEBUG_FEATURE
+    @lpVtbl.value.get_feature_mask.unsafe_as(Proc(D3D12_DEBUG_FEATURE)).call
+  end
+  def set_debug_parameter(type : D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, pdata : Void*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.set_debug_parameter.unsafe_as(Proc(D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, Void*, UInt32, HRESULT)).call(type, pdata, datasize)
+  end
+  def get_debug_parameter(type : D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, pdata : Void*, datasize : UInt32) : HRESULT
+    @lpVtbl.value.get_debug_parameter.unsafe_as(Proc(D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, Void*, UInt32, HRESULT)).call(type, pdata, datasize)
+  end
+end
+struct LibWin32::ID3D12SharingContract
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def present(presource : ID3D12Resource, subresource : UInt32, window : LibC::HANDLE) : Void
+    @lpVtbl.value.present.unsafe_as(Proc(ID3D12Resource, UInt32, LibC::HANDLE, Void)).call(presource, subresource, window)
+  end
+  def shared_fence_signal(pfence : ID3D12Fence, fencevalue : UInt64) : Void
+    @lpVtbl.value.shared_fence_signal.unsafe_as(Proc(ID3D12Fence, UInt64, Void)).call(pfence, fencevalue)
+  end
+  def begin_capturable_work(guid : Guid*) : Void
+    @lpVtbl.value.begin_capturable_work.unsafe_as(Proc(Guid*, Void)).call(guid)
+  end
+  def end_capturable_work(guid : Guid*) : Void
+    @lpVtbl.value.end_capturable_work.unsafe_as(Proc(Guid*, Void)).call(guid)
+  end
+end
+struct LibWin32::ID3D12InfoQueue
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_message_count_limit(messagecountlimit : UInt64) : HRESULT
+    @lpVtbl.value.set_message_count_limit.unsafe_as(Proc(UInt64, HRESULT)).call(messagecountlimit)
+  end
+  def clear_stored_messages : Void
+    @lpVtbl.value.clear_stored_messages.unsafe_as(Proc(Void)).call
+  end
+  def get_message(messageindex : UInt64, pmessage : D3D12_MESSAGE*, pmessagebytelength : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_message.unsafe_as(Proc(UInt64, D3D12_MESSAGE*, LibC::UINT_PTR*, HRESULT)).call(messageindex, pmessage, pmessagebytelength)
+  end
+  def get_num_messages_allowed_by_storage_filter : UInt64
+    @lpVtbl.value.get_num_messages_allowed_by_storage_filter.unsafe_as(Proc(UInt64)).call
+  end
+  def get_num_messages_denied_by_storage_filter : UInt64
+    @lpVtbl.value.get_num_messages_denied_by_storage_filter.unsafe_as(Proc(UInt64)).call
+  end
+  def get_num_stored_messages : UInt64
+    @lpVtbl.value.get_num_stored_messages.unsafe_as(Proc(UInt64)).call
+  end
+  def get_num_stored_messages_allowed_by_retrieval_filter : UInt64
+    @lpVtbl.value.get_num_stored_messages_allowed_by_retrieval_filter.unsafe_as(Proc(UInt64)).call
+  end
+  def get_num_messages_discarded_by_message_count_limit : UInt64
+    @lpVtbl.value.get_num_messages_discarded_by_message_count_limit.unsafe_as(Proc(UInt64)).call
+  end
+  def get_message_count_limit : UInt64
+    @lpVtbl.value.get_message_count_limit.unsafe_as(Proc(UInt64)).call
+  end
+  def add_storage_filter_entries(pfilter : D3D12_INFO_QUEUE_FILTER*) : HRESULT
+    @lpVtbl.value.add_storage_filter_entries.unsafe_as(Proc(D3D12_INFO_QUEUE_FILTER*, HRESULT)).call(pfilter)
+  end
+  def get_storage_filter(pfilter : D3D12_INFO_QUEUE_FILTER*, pfilterbytelength : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_storage_filter.unsafe_as(Proc(D3D12_INFO_QUEUE_FILTER*, LibC::UINT_PTR*, HRESULT)).call(pfilter, pfilterbytelength)
+  end
+  def clear_storage_filter : Void
+    @lpVtbl.value.clear_storage_filter.unsafe_as(Proc(Void)).call
+  end
+  def push_empty_storage_filter : HRESULT
+    @lpVtbl.value.push_empty_storage_filter.unsafe_as(Proc(HRESULT)).call
+  end
+  def push_copy_of_storage_filter : HRESULT
+    @lpVtbl.value.push_copy_of_storage_filter.unsafe_as(Proc(HRESULT)).call
+  end
+  def push_storage_filter(pfilter : D3D12_INFO_QUEUE_FILTER*) : HRESULT
+    @lpVtbl.value.push_storage_filter.unsafe_as(Proc(D3D12_INFO_QUEUE_FILTER*, HRESULT)).call(pfilter)
+  end
+  def pop_storage_filter : Void
+    @lpVtbl.value.pop_storage_filter.unsafe_as(Proc(Void)).call
+  end
+  def get_storage_filter_stack_size : UInt32
+    @lpVtbl.value.get_storage_filter_stack_size.unsafe_as(Proc(UInt32)).call
+  end
+  def add_retrieval_filter_entries(pfilter : D3D12_INFO_QUEUE_FILTER*) : HRESULT
+    @lpVtbl.value.add_retrieval_filter_entries.unsafe_as(Proc(D3D12_INFO_QUEUE_FILTER*, HRESULT)).call(pfilter)
+  end
+  def get_retrieval_filter(pfilter : D3D12_INFO_QUEUE_FILTER*, pfilterbytelength : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_retrieval_filter.unsafe_as(Proc(D3D12_INFO_QUEUE_FILTER*, LibC::UINT_PTR*, HRESULT)).call(pfilter, pfilterbytelength)
+  end
+  def clear_retrieval_filter : Void
+    @lpVtbl.value.clear_retrieval_filter.unsafe_as(Proc(Void)).call
+  end
+  def push_empty_retrieval_filter : HRESULT
+    @lpVtbl.value.push_empty_retrieval_filter.unsafe_as(Proc(HRESULT)).call
+  end
+  def push_copy_of_retrieval_filter : HRESULT
+    @lpVtbl.value.push_copy_of_retrieval_filter.unsafe_as(Proc(HRESULT)).call
+  end
+  def push_retrieval_filter(pfilter : D3D12_INFO_QUEUE_FILTER*) : HRESULT
+    @lpVtbl.value.push_retrieval_filter.unsafe_as(Proc(D3D12_INFO_QUEUE_FILTER*, HRESULT)).call(pfilter)
+  end
+  def pop_retrieval_filter : Void
+    @lpVtbl.value.pop_retrieval_filter.unsafe_as(Proc(Void)).call
+  end
+  def get_retrieval_filter_stack_size : UInt32
+    @lpVtbl.value.get_retrieval_filter_stack_size.unsafe_as(Proc(UInt32)).call
+  end
+  def add_message(category : D3D12_MESSAGE_CATEGORY, severity : D3D12_MESSAGE_SEVERITY, id : D3D12_MESSAGE_ID, pdescription : PSTR) : HRESULT
+    @lpVtbl.value.add_message.unsafe_as(Proc(D3D12_MESSAGE_CATEGORY, D3D12_MESSAGE_SEVERITY, D3D12_MESSAGE_ID, PSTR, HRESULT)).call(category, severity, id, pdescription)
+  end
+  def add_application_message(severity : D3D12_MESSAGE_SEVERITY, pdescription : PSTR) : HRESULT
+    @lpVtbl.value.add_application_message.unsafe_as(Proc(D3D12_MESSAGE_SEVERITY, PSTR, HRESULT)).call(severity, pdescription)
+  end
+  def set_break_on_category(category : D3D12_MESSAGE_CATEGORY, benable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_break_on_category.unsafe_as(Proc(D3D12_MESSAGE_CATEGORY, LibC::BOOL, HRESULT)).call(category, benable)
+  end
+  def set_break_on_severity(severity : D3D12_MESSAGE_SEVERITY, benable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_break_on_severity.unsafe_as(Proc(D3D12_MESSAGE_SEVERITY, LibC::BOOL, HRESULT)).call(severity, benable)
+  end
+  def set_break_on_id(id : D3D12_MESSAGE_ID, benable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_break_on_id.unsafe_as(Proc(D3D12_MESSAGE_ID, LibC::BOOL, HRESULT)).call(id, benable)
+  end
+  def get_break_on_category(category : D3D12_MESSAGE_CATEGORY) : LibC::BOOL
+    @lpVtbl.value.get_break_on_category.unsafe_as(Proc(D3D12_MESSAGE_CATEGORY, LibC::BOOL)).call(category)
+  end
+  def get_break_on_severity(severity : D3D12_MESSAGE_SEVERITY) : LibC::BOOL
+    @lpVtbl.value.get_break_on_severity.unsafe_as(Proc(D3D12_MESSAGE_SEVERITY, LibC::BOOL)).call(severity)
+  end
+  def get_break_on_id(id : D3D12_MESSAGE_ID) : LibC::BOOL
+    @lpVtbl.value.get_break_on_id.unsafe_as(Proc(D3D12_MESSAGE_ID, LibC::BOOL)).call(id)
+  end
+  def set_mute_debug_output(bmute : LibC::BOOL) : Void
+    @lpVtbl.value.set_mute_debug_output.unsafe_as(Proc(LibC::BOOL, Void)).call(bmute)
+  end
+  def get_mute_debug_output : LibC::BOOL
+    @lpVtbl.value.get_mute_debug_output.unsafe_as(Proc(LibC::BOOL)).call
+  end
+end
+struct LibWin32::ID3D12InfoQueue1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_message_count_limit(messagecountlimit : UInt64) : HRESULT
+    @lpVtbl.value.set_message_count_limit.unsafe_as(Proc(UInt64, HRESULT)).call(messagecountlimit)
+  end
+  def clear_stored_messages : Void
+    @lpVtbl.value.clear_stored_messages.unsafe_as(Proc(Void)).call
+  end
+  def get_message(messageindex : UInt64, pmessage : D3D12_MESSAGE*, pmessagebytelength : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_message.unsafe_as(Proc(UInt64, D3D12_MESSAGE*, LibC::UINT_PTR*, HRESULT)).call(messageindex, pmessage, pmessagebytelength)
+  end
+  def get_num_messages_allowed_by_storage_filter : UInt64
+    @lpVtbl.value.get_num_messages_allowed_by_storage_filter.unsafe_as(Proc(UInt64)).call
+  end
+  def get_num_messages_denied_by_storage_filter : UInt64
+    @lpVtbl.value.get_num_messages_denied_by_storage_filter.unsafe_as(Proc(UInt64)).call
+  end
+  def get_num_stored_messages : UInt64
+    @lpVtbl.value.get_num_stored_messages.unsafe_as(Proc(UInt64)).call
+  end
+  def get_num_stored_messages_allowed_by_retrieval_filter : UInt64
+    @lpVtbl.value.get_num_stored_messages_allowed_by_retrieval_filter.unsafe_as(Proc(UInt64)).call
+  end
+  def get_num_messages_discarded_by_message_count_limit : UInt64
+    @lpVtbl.value.get_num_messages_discarded_by_message_count_limit.unsafe_as(Proc(UInt64)).call
+  end
+  def get_message_count_limit : UInt64
+    @lpVtbl.value.get_message_count_limit.unsafe_as(Proc(UInt64)).call
+  end
+  def add_storage_filter_entries(pfilter : D3D12_INFO_QUEUE_FILTER*) : HRESULT
+    @lpVtbl.value.add_storage_filter_entries.unsafe_as(Proc(D3D12_INFO_QUEUE_FILTER*, HRESULT)).call(pfilter)
+  end
+  def get_storage_filter(pfilter : D3D12_INFO_QUEUE_FILTER*, pfilterbytelength : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_storage_filter.unsafe_as(Proc(D3D12_INFO_QUEUE_FILTER*, LibC::UINT_PTR*, HRESULT)).call(pfilter, pfilterbytelength)
+  end
+  def clear_storage_filter : Void
+    @lpVtbl.value.clear_storage_filter.unsafe_as(Proc(Void)).call
+  end
+  def push_empty_storage_filter : HRESULT
+    @lpVtbl.value.push_empty_storage_filter.unsafe_as(Proc(HRESULT)).call
+  end
+  def push_copy_of_storage_filter : HRESULT
+    @lpVtbl.value.push_copy_of_storage_filter.unsafe_as(Proc(HRESULT)).call
+  end
+  def push_storage_filter(pfilter : D3D12_INFO_QUEUE_FILTER*) : HRESULT
+    @lpVtbl.value.push_storage_filter.unsafe_as(Proc(D3D12_INFO_QUEUE_FILTER*, HRESULT)).call(pfilter)
+  end
+  def pop_storage_filter : Void
+    @lpVtbl.value.pop_storage_filter.unsafe_as(Proc(Void)).call
+  end
+  def get_storage_filter_stack_size : UInt32
+    @lpVtbl.value.get_storage_filter_stack_size.unsafe_as(Proc(UInt32)).call
+  end
+  def add_retrieval_filter_entries(pfilter : D3D12_INFO_QUEUE_FILTER*) : HRESULT
+    @lpVtbl.value.add_retrieval_filter_entries.unsafe_as(Proc(D3D12_INFO_QUEUE_FILTER*, HRESULT)).call(pfilter)
+  end
+  def get_retrieval_filter(pfilter : D3D12_INFO_QUEUE_FILTER*, pfilterbytelength : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_retrieval_filter.unsafe_as(Proc(D3D12_INFO_QUEUE_FILTER*, LibC::UINT_PTR*, HRESULT)).call(pfilter, pfilterbytelength)
+  end
+  def clear_retrieval_filter : Void
+    @lpVtbl.value.clear_retrieval_filter.unsafe_as(Proc(Void)).call
+  end
+  def push_empty_retrieval_filter : HRESULT
+    @lpVtbl.value.push_empty_retrieval_filter.unsafe_as(Proc(HRESULT)).call
+  end
+  def push_copy_of_retrieval_filter : HRESULT
+    @lpVtbl.value.push_copy_of_retrieval_filter.unsafe_as(Proc(HRESULT)).call
+  end
+  def push_retrieval_filter(pfilter : D3D12_INFO_QUEUE_FILTER*) : HRESULT
+    @lpVtbl.value.push_retrieval_filter.unsafe_as(Proc(D3D12_INFO_QUEUE_FILTER*, HRESULT)).call(pfilter)
+  end
+  def pop_retrieval_filter : Void
+    @lpVtbl.value.pop_retrieval_filter.unsafe_as(Proc(Void)).call
+  end
+  def get_retrieval_filter_stack_size : UInt32
+    @lpVtbl.value.get_retrieval_filter_stack_size.unsafe_as(Proc(UInt32)).call
+  end
+  def add_message(category : D3D12_MESSAGE_CATEGORY, severity : D3D12_MESSAGE_SEVERITY, id : D3D12_MESSAGE_ID, pdescription : PSTR) : HRESULT
+    @lpVtbl.value.add_message.unsafe_as(Proc(D3D12_MESSAGE_CATEGORY, D3D12_MESSAGE_SEVERITY, D3D12_MESSAGE_ID, PSTR, HRESULT)).call(category, severity, id, pdescription)
+  end
+  def add_application_message(severity : D3D12_MESSAGE_SEVERITY, pdescription : PSTR) : HRESULT
+    @lpVtbl.value.add_application_message.unsafe_as(Proc(D3D12_MESSAGE_SEVERITY, PSTR, HRESULT)).call(severity, pdescription)
+  end
+  def set_break_on_category(category : D3D12_MESSAGE_CATEGORY, benable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_break_on_category.unsafe_as(Proc(D3D12_MESSAGE_CATEGORY, LibC::BOOL, HRESULT)).call(category, benable)
+  end
+  def set_break_on_severity(severity : D3D12_MESSAGE_SEVERITY, benable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_break_on_severity.unsafe_as(Proc(D3D12_MESSAGE_SEVERITY, LibC::BOOL, HRESULT)).call(severity, benable)
+  end
+  def set_break_on_id(id : D3D12_MESSAGE_ID, benable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_break_on_id.unsafe_as(Proc(D3D12_MESSAGE_ID, LibC::BOOL, HRESULT)).call(id, benable)
+  end
+  def get_break_on_category(category : D3D12_MESSAGE_CATEGORY) : LibC::BOOL
+    @lpVtbl.value.get_break_on_category.unsafe_as(Proc(D3D12_MESSAGE_CATEGORY, LibC::BOOL)).call(category)
+  end
+  def get_break_on_severity(severity : D3D12_MESSAGE_SEVERITY) : LibC::BOOL
+    @lpVtbl.value.get_break_on_severity.unsafe_as(Proc(D3D12_MESSAGE_SEVERITY, LibC::BOOL)).call(severity)
+  end
+  def get_break_on_id(id : D3D12_MESSAGE_ID) : LibC::BOOL
+    @lpVtbl.value.get_break_on_id.unsafe_as(Proc(D3D12_MESSAGE_ID, LibC::BOOL)).call(id)
+  end
+  def set_mute_debug_output(bmute : LibC::BOOL) : Void
+    @lpVtbl.value.set_mute_debug_output.unsafe_as(Proc(LibC::BOOL, Void)).call(bmute)
+  end
+  def get_mute_debug_output : LibC::BOOL
+    @lpVtbl.value.get_mute_debug_output.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def register_message_callback(callbackfunc : D3D12MessageFunc, callbackfilterflags : D3D12_MESSAGE_CALLBACK_FLAGS, pcontext : Void*, pcallbackcookie : UInt32*) : HRESULT
+    @lpVtbl.value.register_message_callback.unsafe_as(Proc(D3D12MessageFunc, D3D12_MESSAGE_CALLBACK_FLAGS, Void*, UInt32*, HRESULT)).call(callbackfunc, callbackfilterflags, pcontext, pcallbackcookie)
+  end
+  def unregister_message_callback(callbackcookie : UInt32) : HRESULT
+    @lpVtbl.value.unregister_message_callback.unsafe_as(Proc(UInt32, HRESULT)).call(callbackcookie)
+  end
+end
+struct LibWin32::ID3D12SDKConfiguration
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_sdk_version(sdkversion : UInt32, sdkpath : PSTR) : HRESULT
+    @lpVtbl.value.set_sdk_version.unsafe_as(Proc(UInt32, PSTR, HRESULT)).call(sdkversion, sdkpath)
+  end
+end
+struct LibWin32::ID3D12GraphicsCommandList5
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_type : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE)).call
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def reset(pallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState) : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(ID3D12CommandAllocator, ID3D12PipelineState, HRESULT)).call(pallocator, pinitialstate)
+  end
+  def clear_state(ppipelinestate : ID3D12PipelineState) : Void
+    @lpVtbl.value.clear_state.unsafe_as(Proc(ID3D12PipelineState, Void)).call(ppipelinestate)
+  end
+  def draw_instanced(vertexcountperinstance : UInt32, instancecount : UInt32, startvertexlocation : UInt32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, Void)).call(vertexcountperinstance, instancecount, startvertexlocation, startinstancelocation)
+  end
+  def draw_indexed_instanced(indexcountperinstance : UInt32, instancecount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, Int32, UInt32, Void)).call(indexcountperinstance, instancecount, startindexlocation, basevertexlocation, startinstancelocation)
+  end
+  def dispatch(threadgroupcountx : UInt32, threadgroupcounty : UInt32, threadgroupcountz : UInt32) : Void
+    @lpVtbl.value.dispatch.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(threadgroupcountx, threadgroupcounty, threadgroupcountz)
+  end
+  def copy_buffer_region(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, numbytes : UInt64) : Void
+    @lpVtbl.value.copy_buffer_region.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt64, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, numbytes)
+  end
+  def copy_texture_region(pdst : D3D12_TEXTURE_COPY_LOCATION*, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrc : D3D12_TEXTURE_COPY_LOCATION*, psrcbox : D3D12_BOX*) : Void
+    @lpVtbl.value.copy_texture_region.unsafe_as(Proc(D3D12_TEXTURE_COPY_LOCATION*, UInt32, UInt32, UInt32, D3D12_TEXTURE_COPY_LOCATION*, D3D12_BOX*, Void)).call(pdst, dstx, dsty, dstz, psrc, psrcbox)
+  end
+  def copy_resource(pdstresource : ID3D12Resource, psrcresource : ID3D12Resource) : Void
+    @lpVtbl.value.copy_resource.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, Void)).call(pdstresource, psrcresource)
+  end
+  def copy_tiles(ptiledresource : ID3D12Resource, ptileregionstartcoordinate : D3D12_TILED_RESOURCE_COORDINATE*, ptileregionsize : D3D12_TILE_REGION_SIZE*, pbuffer : ID3D12Resource, bufferstartoffsetinbytes : UInt64, flags : D3D12_TILE_COPY_FLAGS) : Void
+    @lpVtbl.value.copy_tiles.unsafe_as(Proc(ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, ID3D12Resource, UInt64, D3D12_TILE_COPY_FLAGS, Void)).call(ptiledresource, ptileregionstartcoordinate, ptileregionsize, pbuffer, bufferstartoffsetinbytes, flags)
+  end
+  def resolve_subresource(pdstresource : ID3D12Resource, dstsubresource : UInt32, psrcresource : ID3D12Resource, srcsubresource : UInt32, format : DXGI_FORMAT) : Void
+    @lpVtbl.value.resolve_subresource.unsafe_as(Proc(ID3D12Resource, UInt32, ID3D12Resource, UInt32, DXGI_FORMAT, Void)).call(pdstresource, dstsubresource, psrcresource, srcsubresource, format)
+  end
+  def ia_set_primitive_topology(primitivetopology : D3D_PRIMITIVE_TOPOLOGY) : Void
+    @lpVtbl.value.ia_set_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY, Void)).call(primitivetopology)
+  end
+  def rs_set_viewports(numviewports : UInt32, pviewports : D3D12_VIEWPORT*) : Void
+    @lpVtbl.value.rs_set_viewports.unsafe_as(Proc(UInt32, D3D12_VIEWPORT*, Void)).call(numviewports, pviewports)
+  end
+  def rs_set_scissor_rects(numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.rs_set_scissor_rects.unsafe_as(Proc(UInt32, RECT*, Void)).call(numrects, prects)
+  end
+  def om_set_blend_factor(blendfactor : Float32*) : Void
+    @lpVtbl.value.om_set_blend_factor.unsafe_as(Proc(Float32*, Void)).call(blendfactor)
+  end
+  def om_set_stencil_ref(stencilref : UInt32) : Void
+    @lpVtbl.value.om_set_stencil_ref.unsafe_as(Proc(UInt32, Void)).call(stencilref)
+  end
+  def set_pipeline_state(ppipelinestate : ID3D12PipelineState) : Void
+    @lpVtbl.value.set_pipeline_state.unsafe_as(Proc(ID3D12PipelineState, Void)).call(ppipelinestate)
+  end
+  def resource_barrier(numbarriers : UInt32, pbarriers : D3D12_RESOURCE_BARRIER*) : Void
+    @lpVtbl.value.resource_barrier.unsafe_as(Proc(UInt32, D3D12_RESOURCE_BARRIER*, Void)).call(numbarriers, pbarriers)
+  end
+  def execute_bundle(pcommandlist : ID3D12GraphicsCommandList) : Void
+    @lpVtbl.value.execute_bundle.unsafe_as(Proc(ID3D12GraphicsCommandList, Void)).call(pcommandlist)
+  end
+  def set_descriptor_heaps(numdescriptorheaps : UInt32, ppdescriptorheaps : ID3D12DescriptorHeap*) : Void
+    @lpVtbl.value.set_descriptor_heaps.unsafe_as(Proc(UInt32, ID3D12DescriptorHeap*, Void)).call(numdescriptorheaps, ppdescriptorheaps)
+  end
+  def set_compute_root_signature(prootsignature : ID3D12RootSignature) : Void
+    @lpVtbl.value.set_compute_root_signature.unsafe_as(Proc(ID3D12RootSignature, Void)).call(prootsignature)
+  end
+  def set_graphics_root_signature(prootsignature : ID3D12RootSignature) : Void
+    @lpVtbl.value.set_graphics_root_signature.unsafe_as(Proc(ID3D12RootSignature, Void)).call(prootsignature)
+  end
+  def set_compute_root_descriptor_table(rootparameterindex : UInt32, basedescriptor : D3D12_GPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.set_compute_root_descriptor_table.unsafe_as(Proc(UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)).call(rootparameterindex, basedescriptor)
+  end
+  def set_graphics_root_descriptor_table(rootparameterindex : UInt32, basedescriptor : D3D12_GPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.set_graphics_root_descriptor_table.unsafe_as(Proc(UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)).call(rootparameterindex, basedescriptor)
+  end
+  def set_compute_root32_bit_constant(rootparameterindex : UInt32, srcdata : UInt32, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_compute_root32_bit_constant.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(rootparameterindex, srcdata, destoffsetin32bitvalues)
+  end
+  def set_graphics_root32_bit_constant(rootparameterindex : UInt32, srcdata : UInt32, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_graphics_root32_bit_constant.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(rootparameterindex, srcdata, destoffsetin32bitvalues)
+  end
+  def set_compute_root32_bit_constants(rootparameterindex : UInt32, num32bitvaluestoset : UInt32, psrcdata : Void*, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_compute_root32_bit_constants.unsafe_as(Proc(UInt32, UInt32, Void*, UInt32, Void)).call(rootparameterindex, num32bitvaluestoset, psrcdata, destoffsetin32bitvalues)
+  end
+  def set_graphics_root32_bit_constants(rootparameterindex : UInt32, num32bitvaluestoset : UInt32, psrcdata : Void*, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_graphics_root32_bit_constants.unsafe_as(Proc(UInt32, UInt32, Void*, UInt32, Void)).call(rootparameterindex, num32bitvaluestoset, psrcdata, destoffsetin32bitvalues)
+  end
+  def set_compute_root_constant_buffer_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_constant_buffer_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_constant_buffer_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_constant_buffer_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_compute_root_shader_resource_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_shader_resource_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_shader_resource_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_shader_resource_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_compute_root_unordered_access_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_unordered_access_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_unordered_access_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_unordered_access_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def ia_set_index_buffer(pview : D3D12_INDEX_BUFFER_VIEW*) : Void
+    @lpVtbl.value.ia_set_index_buffer.unsafe_as(Proc(D3D12_INDEX_BUFFER_VIEW*, Void)).call(pview)
+  end
+  def ia_set_vertex_buffers(startslot : UInt32, numviews : UInt32, pviews : D3D12_VERTEX_BUFFER_VIEW*) : Void
+    @lpVtbl.value.ia_set_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, D3D12_VERTEX_BUFFER_VIEW*, Void)).call(startslot, numviews, pviews)
+  end
+  def so_set_targets(startslot : UInt32, numviews : UInt32, pviews : D3D12_STREAM_OUTPUT_BUFFER_VIEW*) : Void
+    @lpVtbl.value.so_set_targets.unsafe_as(Proc(UInt32, UInt32, D3D12_STREAM_OUTPUT_BUFFER_VIEW*, Void)).call(startslot, numviews, pviews)
+  end
+  def om_set_render_targets(numrendertargetdescriptors : UInt32, prendertargetdescriptors : D3D12_CPU_DESCRIPTOR_HANDLE*, rtssinglehandletodescriptorrange : LibC::BOOL, pdepthstencildescriptor : D3D12_CPU_DESCRIPTOR_HANDLE*) : Void
+    @lpVtbl.value.om_set_render_targets.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, LibC::BOOL, D3D12_CPU_DESCRIPTOR_HANDLE*, Void)).call(numrendertargetdescriptors, prendertargetdescriptors, rtssinglehandletodescriptorrange, pdepthstencildescriptor)
+  end
+  def clear_depth_stencil_view(depthstencilview : D3D12_CPU_DESCRIPTOR_HANDLE, clearflags : D3D12_CLEAR_FLAGS, depth : Float32, stencil : UInt8, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_depth_stencil_view.unsafe_as(Proc(D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CLEAR_FLAGS, Float32, UInt8, UInt32, RECT*, Void)).call(depthstencilview, clearflags, depth, stencil, numrects, prects)
+  end
+  def clear_render_target_view(rendertargetview : D3D12_CPU_DESCRIPTOR_HANDLE, colorrgba : Float32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_render_target_view.unsafe_as(Proc(D3D12_CPU_DESCRIPTOR_HANDLE, Float32*, UInt32, RECT*, Void)).call(rendertargetview, colorrgba, numrects, prects)
+  end
+  def clear_unordered_access_view_uint(viewgpuhandleincurrentheap : D3D12_GPU_DESCRIPTOR_HANDLE, viewcpuhandle : D3D12_CPU_DESCRIPTOR_HANDLE, presource : ID3D12Resource, values : UInt32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_unordered_access_view_uint.unsafe_as(Proc(D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, UInt32*, UInt32, RECT*, Void)).call(viewgpuhandleincurrentheap, viewcpuhandle, presource, values, numrects, prects)
+  end
+  def clear_unordered_access_view_float(viewgpuhandleincurrentheap : D3D12_GPU_DESCRIPTOR_HANDLE, viewcpuhandle : D3D12_CPU_DESCRIPTOR_HANDLE, presource : ID3D12Resource, values : Float32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_unordered_access_view_float.unsafe_as(Proc(D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, Float32*, UInt32, RECT*, Void)).call(viewgpuhandleincurrentheap, viewcpuhandle, presource, values, numrects, prects)
+  end
+  def discard_resource(presource : ID3D12Resource, pregion : D3D12_DISCARD_REGION*) : Void
+    @lpVtbl.value.discard_resource.unsafe_as(Proc(ID3D12Resource, D3D12_DISCARD_REGION*, Void)).call(presource, pregion)
+  end
+  def begin_query(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.begin_query.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)).call(pqueryheap, type, index)
+  end
+  def end_query(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.end_query.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)).call(pqueryheap, type, index)
+  end
+  def resolve_query_data(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, startindex : UInt32, numqueries : UInt32, pdestinationbuffer : ID3D12Resource, aligneddestinationbufferoffset : UInt64) : Void
+    @lpVtbl.value.resolve_query_data.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, UInt32, ID3D12Resource, UInt64, Void)).call(pqueryheap, type, startindex, numqueries, pdestinationbuffer, aligneddestinationbufferoffset)
+  end
+  def set_predication(pbuffer : ID3D12Resource, alignedbufferoffset : UInt64, operation : D3D12_PREDICATION_OP) : Void
+    @lpVtbl.value.set_predication.unsafe_as(Proc(ID3D12Resource, UInt64, D3D12_PREDICATION_OP, Void)).call(pbuffer, alignedbufferoffset, operation)
+  end
+  def set_marker(metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.unsafe_as(Proc(UInt32, Void*, UInt32, Void)).call(metadata, pdata, size)
+  end
+  def begin_event(metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.unsafe_as(Proc(UInt32, Void*, UInt32, Void)).call(metadata, pdata, size)
+  end
+  def end_event : Void
+    @lpVtbl.value.end_event.unsafe_as(Proc(Void)).call
+  end
+  def execute_indirect(pcommandsignature : ID3D12CommandSignature, maxcommandcount : UInt32, pargumentbuffer : ID3D12Resource, argumentbufferoffset : UInt64, pcountbuffer : ID3D12Resource, countbufferoffset : UInt64) : Void
+    @lpVtbl.value.execute_indirect.unsafe_as(Proc(ID3D12CommandSignature, UInt32, ID3D12Resource, UInt64, ID3D12Resource, UInt64, Void)).call(pcommandsignature, maxcommandcount, pargumentbuffer, argumentbufferoffset, pcountbuffer, countbufferoffset)
+  end
+  def atomic_copy_buffer_uint(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, dependencies : UInt32, ppdependentresources : ID3D12Resource*, pdependentsubresourceranges : D3D12_SUBRESOURCE_RANGE_UINT64*) : Void
+    @lpVtbl.value.atomic_copy_buffer_uint.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, dependencies, ppdependentresources, pdependentsubresourceranges)
+  end
+  def atomic_copy_buffer_uint64(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, dependencies : UInt32, ppdependentresources : ID3D12Resource*, pdependentsubresourceranges : D3D12_SUBRESOURCE_RANGE_UINT64*) : Void
+    @lpVtbl.value.atomic_copy_buffer_uint64.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, dependencies, ppdependentresources, pdependentsubresourceranges)
+  end
+  def om_set_depth_bounds(min : Float32, max : Float32) : Void
+    @lpVtbl.value.om_set_depth_bounds.unsafe_as(Proc(Float32, Float32, Void)).call(min, max)
+  end
+  def set_sample_positions(numsamplesperpixel : UInt32, numpixels : UInt32, psamplepositions : D3D12_SAMPLE_POSITION*) : Void
+    @lpVtbl.value.set_sample_positions.unsafe_as(Proc(UInt32, UInt32, D3D12_SAMPLE_POSITION*, Void)).call(numsamplesperpixel, numpixels, psamplepositions)
+  end
+  def resolve_subresource_region(pdstresource : ID3D12Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, psrcresource : ID3D12Resource, srcsubresource : UInt32, psrcrect : RECT*, format : DXGI_FORMAT, resolvemode : D3D12_RESOLVE_MODE) : Void
+    @lpVtbl.value.resolve_subresource_region.unsafe_as(Proc(ID3D12Resource, UInt32, UInt32, UInt32, ID3D12Resource, UInt32, RECT*, DXGI_FORMAT, D3D12_RESOLVE_MODE, Void)).call(pdstresource, dstsubresource, dstx, dsty, psrcresource, srcsubresource, psrcrect, format, resolvemode)
+  end
+  def set_view_instance_mask(mask : UInt32) : Void
+    @lpVtbl.value.set_view_instance_mask.unsafe_as(Proc(UInt32, Void)).call(mask)
+  end
+  def write_buffer_immediate(count : UInt32, pparams : D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pmodes : D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    @lpVtbl.value.write_buffer_immediate.unsafe_as(Proc(UInt32, D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void)).call(count, pparams, pmodes)
+  end
+  def set_protected_resource_session(pprotectedresourcesession : ID3D12ProtectedResourceSession) : Void
+    @lpVtbl.value.set_protected_resource_session.unsafe_as(Proc(ID3D12ProtectedResourceSession, Void)).call(pprotectedresourcesession)
+  end
+  def begin_render_pass(numrendertargets : UInt32, prendertargets : D3D12_RENDER_PASS_RENDER_TARGET_DESC*, pdepthstencil : D3D12_RENDER_PASS_DEPTH_STENCIL_DESC*, flags : D3D12_RENDER_PASS_FLAGS) : Void
+    @lpVtbl.value.begin_render_pass.unsafe_as(Proc(UInt32, D3D12_RENDER_PASS_RENDER_TARGET_DESC*, D3D12_RENDER_PASS_DEPTH_STENCIL_DESC*, D3D12_RENDER_PASS_FLAGS, Void)).call(numrendertargets, prendertargets, pdepthstencil, flags)
+  end
+  def end_render_pass : Void
+    @lpVtbl.value.end_render_pass.unsafe_as(Proc(Void)).call
+  end
+  def initialize_meta_command(pmetacommand : ID3D12MetaCommand, pinitializationparametersdata : Void*, initializationparametersdatasizeinbytes : LibC::UINT_PTR) : Void
+    @lpVtbl.value.initialize_meta_command.unsafe_as(Proc(ID3D12MetaCommand, Void*, LibC::UINT_PTR, Void)).call(pmetacommand, pinitializationparametersdata, initializationparametersdatasizeinbytes)
+  end
+  def execute_meta_command(pmetacommand : ID3D12MetaCommand, pexecutionparametersdata : Void*, executionparametersdatasizeinbytes : LibC::UINT_PTR) : Void
+    @lpVtbl.value.execute_meta_command.unsafe_as(Proc(ID3D12MetaCommand, Void*, LibC::UINT_PTR, Void)).call(pmetacommand, pexecutionparametersdata, executionparametersdatasizeinbytes)
+  end
+  def build_raytracing_acceleration_structure(pdesc : D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC*, numpostbuildinfodescs : UInt32, ppostbuildinfodescs : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*) : Void
+    @lpVtbl.value.build_raytracing_acceleration_structure.unsafe_as(Proc(D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC*, UInt32, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*, Void)).call(pdesc, numpostbuildinfodescs, ppostbuildinfodescs)
+  end
+  def emit_raytracing_acceleration_structure_postbuild_info(pdesc : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*, numsourceaccelerationstructures : UInt32, psourceaccelerationstructuredata : UInt64*) : Void
+    @lpVtbl.value.emit_raytracing_acceleration_structure_postbuild_info.unsafe_as(Proc(D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*, UInt32, UInt64*, Void)).call(pdesc, numsourceaccelerationstructures, psourceaccelerationstructuredata)
+  end
+  def copy_raytracing_acceleration_structure(destaccelerationstructuredata : UInt64, sourceaccelerationstructuredata : UInt64, mode : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE) : Void
+    @lpVtbl.value.copy_raytracing_acceleration_structure.unsafe_as(Proc(UInt64, UInt64, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE, Void)).call(destaccelerationstructuredata, sourceaccelerationstructuredata, mode)
+  end
+  def set_pipeline_state1(pstateobject : ID3D12StateObject) : Void
+    @lpVtbl.value.set_pipeline_state1.unsafe_as(Proc(ID3D12StateObject, Void)).call(pstateobject)
+  end
+  def dispatch_rays(pdesc : D3D12_DISPATCH_RAYS_DESC*) : Void
+    @lpVtbl.value.dispatch_rays.unsafe_as(Proc(D3D12_DISPATCH_RAYS_DESC*, Void)).call(pdesc)
+  end
+  def rs_set_shading_rate(baseshadingrate : D3D12_SHADING_RATE, combiners : D3D12_SHADING_RATE_COMBINER*) : Void
+    @lpVtbl.value.rs_set_shading_rate.unsafe_as(Proc(D3D12_SHADING_RATE, D3D12_SHADING_RATE_COMBINER*, Void)).call(baseshadingrate, combiners)
+  end
+  def rs_set_shading_rate_image(shadingrateimage : ID3D12Resource) : Void
+    @lpVtbl.value.rs_set_shading_rate_image.unsafe_as(Proc(ID3D12Resource, Void)).call(shadingrateimage)
+  end
+end
+struct LibWin32::ID3D12GraphicsCommandList6
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def get_type : D3D12_COMMAND_LIST_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D12_COMMAND_LIST_TYPE)).call
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def reset(pallocator : ID3D12CommandAllocator, pinitialstate : ID3D12PipelineState) : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(ID3D12CommandAllocator, ID3D12PipelineState, HRESULT)).call(pallocator, pinitialstate)
+  end
+  def clear_state(ppipelinestate : ID3D12PipelineState) : Void
+    @lpVtbl.value.clear_state.unsafe_as(Proc(ID3D12PipelineState, Void)).call(ppipelinestate)
+  end
+  def draw_instanced(vertexcountperinstance : UInt32, instancecount : UInt32, startvertexlocation : UInt32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, Void)).call(vertexcountperinstance, instancecount, startvertexlocation, startinstancelocation)
+  end
+  def draw_indexed_instanced(indexcountperinstance : UInt32, instancecount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, Int32, UInt32, Void)).call(indexcountperinstance, instancecount, startindexlocation, basevertexlocation, startinstancelocation)
+  end
+  def dispatch(threadgroupcountx : UInt32, threadgroupcounty : UInt32, threadgroupcountz : UInt32) : Void
+    @lpVtbl.value.dispatch.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(threadgroupcountx, threadgroupcounty, threadgroupcountz)
+  end
+  def copy_buffer_region(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, numbytes : UInt64) : Void
+    @lpVtbl.value.copy_buffer_region.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt64, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, numbytes)
+  end
+  def copy_texture_region(pdst : D3D12_TEXTURE_COPY_LOCATION*, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrc : D3D12_TEXTURE_COPY_LOCATION*, psrcbox : D3D12_BOX*) : Void
+    @lpVtbl.value.copy_texture_region.unsafe_as(Proc(D3D12_TEXTURE_COPY_LOCATION*, UInt32, UInt32, UInt32, D3D12_TEXTURE_COPY_LOCATION*, D3D12_BOX*, Void)).call(pdst, dstx, dsty, dstz, psrc, psrcbox)
+  end
+  def copy_resource(pdstresource : ID3D12Resource, psrcresource : ID3D12Resource) : Void
+    @lpVtbl.value.copy_resource.unsafe_as(Proc(ID3D12Resource, ID3D12Resource, Void)).call(pdstresource, psrcresource)
+  end
+  def copy_tiles(ptiledresource : ID3D12Resource, ptileregionstartcoordinate : D3D12_TILED_RESOURCE_COORDINATE*, ptileregionsize : D3D12_TILE_REGION_SIZE*, pbuffer : ID3D12Resource, bufferstartoffsetinbytes : UInt64, flags : D3D12_TILE_COPY_FLAGS) : Void
+    @lpVtbl.value.copy_tiles.unsafe_as(Proc(ID3D12Resource, D3D12_TILED_RESOURCE_COORDINATE*, D3D12_TILE_REGION_SIZE*, ID3D12Resource, UInt64, D3D12_TILE_COPY_FLAGS, Void)).call(ptiledresource, ptileregionstartcoordinate, ptileregionsize, pbuffer, bufferstartoffsetinbytes, flags)
+  end
+  def resolve_subresource(pdstresource : ID3D12Resource, dstsubresource : UInt32, psrcresource : ID3D12Resource, srcsubresource : UInt32, format : DXGI_FORMAT) : Void
+    @lpVtbl.value.resolve_subresource.unsafe_as(Proc(ID3D12Resource, UInt32, ID3D12Resource, UInt32, DXGI_FORMAT, Void)).call(pdstresource, dstsubresource, psrcresource, srcsubresource, format)
+  end
+  def ia_set_primitive_topology(primitivetopology : D3D_PRIMITIVE_TOPOLOGY) : Void
+    @lpVtbl.value.ia_set_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY, Void)).call(primitivetopology)
+  end
+  def rs_set_viewports(numviewports : UInt32, pviewports : D3D12_VIEWPORT*) : Void
+    @lpVtbl.value.rs_set_viewports.unsafe_as(Proc(UInt32, D3D12_VIEWPORT*, Void)).call(numviewports, pviewports)
+  end
+  def rs_set_scissor_rects(numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.rs_set_scissor_rects.unsafe_as(Proc(UInt32, RECT*, Void)).call(numrects, prects)
+  end
+  def om_set_blend_factor(blendfactor : Float32*) : Void
+    @lpVtbl.value.om_set_blend_factor.unsafe_as(Proc(Float32*, Void)).call(blendfactor)
+  end
+  def om_set_stencil_ref(stencilref : UInt32) : Void
+    @lpVtbl.value.om_set_stencil_ref.unsafe_as(Proc(UInt32, Void)).call(stencilref)
+  end
+  def set_pipeline_state(ppipelinestate : ID3D12PipelineState) : Void
+    @lpVtbl.value.set_pipeline_state.unsafe_as(Proc(ID3D12PipelineState, Void)).call(ppipelinestate)
+  end
+  def resource_barrier(numbarriers : UInt32, pbarriers : D3D12_RESOURCE_BARRIER*) : Void
+    @lpVtbl.value.resource_barrier.unsafe_as(Proc(UInt32, D3D12_RESOURCE_BARRIER*, Void)).call(numbarriers, pbarriers)
+  end
+  def execute_bundle(pcommandlist : ID3D12GraphicsCommandList) : Void
+    @lpVtbl.value.execute_bundle.unsafe_as(Proc(ID3D12GraphicsCommandList, Void)).call(pcommandlist)
+  end
+  def set_descriptor_heaps(numdescriptorheaps : UInt32, ppdescriptorheaps : ID3D12DescriptorHeap*) : Void
+    @lpVtbl.value.set_descriptor_heaps.unsafe_as(Proc(UInt32, ID3D12DescriptorHeap*, Void)).call(numdescriptorheaps, ppdescriptorheaps)
+  end
+  def set_compute_root_signature(prootsignature : ID3D12RootSignature) : Void
+    @lpVtbl.value.set_compute_root_signature.unsafe_as(Proc(ID3D12RootSignature, Void)).call(prootsignature)
+  end
+  def set_graphics_root_signature(prootsignature : ID3D12RootSignature) : Void
+    @lpVtbl.value.set_graphics_root_signature.unsafe_as(Proc(ID3D12RootSignature, Void)).call(prootsignature)
+  end
+  def set_compute_root_descriptor_table(rootparameterindex : UInt32, basedescriptor : D3D12_GPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.set_compute_root_descriptor_table.unsafe_as(Proc(UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)).call(rootparameterindex, basedescriptor)
+  end
+  def set_graphics_root_descriptor_table(rootparameterindex : UInt32, basedescriptor : D3D12_GPU_DESCRIPTOR_HANDLE) : Void
+    @lpVtbl.value.set_graphics_root_descriptor_table.unsafe_as(Proc(UInt32, D3D12_GPU_DESCRIPTOR_HANDLE, Void)).call(rootparameterindex, basedescriptor)
+  end
+  def set_compute_root32_bit_constant(rootparameterindex : UInt32, srcdata : UInt32, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_compute_root32_bit_constant.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(rootparameterindex, srcdata, destoffsetin32bitvalues)
+  end
+  def set_graphics_root32_bit_constant(rootparameterindex : UInt32, srcdata : UInt32, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_graphics_root32_bit_constant.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(rootparameterindex, srcdata, destoffsetin32bitvalues)
+  end
+  def set_compute_root32_bit_constants(rootparameterindex : UInt32, num32bitvaluestoset : UInt32, psrcdata : Void*, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_compute_root32_bit_constants.unsafe_as(Proc(UInt32, UInt32, Void*, UInt32, Void)).call(rootparameterindex, num32bitvaluestoset, psrcdata, destoffsetin32bitvalues)
+  end
+  def set_graphics_root32_bit_constants(rootparameterindex : UInt32, num32bitvaluestoset : UInt32, psrcdata : Void*, destoffsetin32bitvalues : UInt32) : Void
+    @lpVtbl.value.set_graphics_root32_bit_constants.unsafe_as(Proc(UInt32, UInt32, Void*, UInt32, Void)).call(rootparameterindex, num32bitvaluestoset, psrcdata, destoffsetin32bitvalues)
+  end
+  def set_compute_root_constant_buffer_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_constant_buffer_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_constant_buffer_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_constant_buffer_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_compute_root_shader_resource_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_shader_resource_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_shader_resource_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_shader_resource_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_compute_root_unordered_access_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_compute_root_unordered_access_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def set_graphics_root_unordered_access_view(rootparameterindex : UInt32, bufferlocation : UInt64) : Void
+    @lpVtbl.value.set_graphics_root_unordered_access_view.unsafe_as(Proc(UInt32, UInt64, Void)).call(rootparameterindex, bufferlocation)
+  end
+  def ia_set_index_buffer(pview : D3D12_INDEX_BUFFER_VIEW*) : Void
+    @lpVtbl.value.ia_set_index_buffer.unsafe_as(Proc(D3D12_INDEX_BUFFER_VIEW*, Void)).call(pview)
+  end
+  def ia_set_vertex_buffers(startslot : UInt32, numviews : UInt32, pviews : D3D12_VERTEX_BUFFER_VIEW*) : Void
+    @lpVtbl.value.ia_set_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, D3D12_VERTEX_BUFFER_VIEW*, Void)).call(startslot, numviews, pviews)
+  end
+  def so_set_targets(startslot : UInt32, numviews : UInt32, pviews : D3D12_STREAM_OUTPUT_BUFFER_VIEW*) : Void
+    @lpVtbl.value.so_set_targets.unsafe_as(Proc(UInt32, UInt32, D3D12_STREAM_OUTPUT_BUFFER_VIEW*, Void)).call(startslot, numviews, pviews)
+  end
+  def om_set_render_targets(numrendertargetdescriptors : UInt32, prendertargetdescriptors : D3D12_CPU_DESCRIPTOR_HANDLE*, rtssinglehandletodescriptorrange : LibC::BOOL, pdepthstencildescriptor : D3D12_CPU_DESCRIPTOR_HANDLE*) : Void
+    @lpVtbl.value.om_set_render_targets.unsafe_as(Proc(UInt32, D3D12_CPU_DESCRIPTOR_HANDLE*, LibC::BOOL, D3D12_CPU_DESCRIPTOR_HANDLE*, Void)).call(numrendertargetdescriptors, prendertargetdescriptors, rtssinglehandletodescriptorrange, pdepthstencildescriptor)
+  end
+  def clear_depth_stencil_view(depthstencilview : D3D12_CPU_DESCRIPTOR_HANDLE, clearflags : D3D12_CLEAR_FLAGS, depth : Float32, stencil : UInt8, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_depth_stencil_view.unsafe_as(Proc(D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_CLEAR_FLAGS, Float32, UInt8, UInt32, RECT*, Void)).call(depthstencilview, clearflags, depth, stencil, numrects, prects)
+  end
+  def clear_render_target_view(rendertargetview : D3D12_CPU_DESCRIPTOR_HANDLE, colorrgba : Float32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_render_target_view.unsafe_as(Proc(D3D12_CPU_DESCRIPTOR_HANDLE, Float32*, UInt32, RECT*, Void)).call(rendertargetview, colorrgba, numrects, prects)
+  end
+  def clear_unordered_access_view_uint(viewgpuhandleincurrentheap : D3D12_GPU_DESCRIPTOR_HANDLE, viewcpuhandle : D3D12_CPU_DESCRIPTOR_HANDLE, presource : ID3D12Resource, values : UInt32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_unordered_access_view_uint.unsafe_as(Proc(D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, UInt32*, UInt32, RECT*, Void)).call(viewgpuhandleincurrentheap, viewcpuhandle, presource, values, numrects, prects)
+  end
+  def clear_unordered_access_view_float(viewgpuhandleincurrentheap : D3D12_GPU_DESCRIPTOR_HANDLE, viewcpuhandle : D3D12_CPU_DESCRIPTOR_HANDLE, presource : ID3D12Resource, values : Float32*, numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.clear_unordered_access_view_float.unsafe_as(Proc(D3D12_GPU_DESCRIPTOR_HANDLE, D3D12_CPU_DESCRIPTOR_HANDLE, ID3D12Resource, Float32*, UInt32, RECT*, Void)).call(viewgpuhandleincurrentheap, viewcpuhandle, presource, values, numrects, prects)
+  end
+  def discard_resource(presource : ID3D12Resource, pregion : D3D12_DISCARD_REGION*) : Void
+    @lpVtbl.value.discard_resource.unsafe_as(Proc(ID3D12Resource, D3D12_DISCARD_REGION*, Void)).call(presource, pregion)
+  end
+  def begin_query(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.begin_query.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)).call(pqueryheap, type, index)
+  end
+  def end_query(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, index : UInt32) : Void
+    @lpVtbl.value.end_query.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, Void)).call(pqueryheap, type, index)
+  end
+  def resolve_query_data(pqueryheap : ID3D12QueryHeap, type : D3D12_QUERY_TYPE, startindex : UInt32, numqueries : UInt32, pdestinationbuffer : ID3D12Resource, aligneddestinationbufferoffset : UInt64) : Void
+    @lpVtbl.value.resolve_query_data.unsafe_as(Proc(ID3D12QueryHeap, D3D12_QUERY_TYPE, UInt32, UInt32, ID3D12Resource, UInt64, Void)).call(pqueryheap, type, startindex, numqueries, pdestinationbuffer, aligneddestinationbufferoffset)
+  end
+  def set_predication(pbuffer : ID3D12Resource, alignedbufferoffset : UInt64, operation : D3D12_PREDICATION_OP) : Void
+    @lpVtbl.value.set_predication.unsafe_as(Proc(ID3D12Resource, UInt64, D3D12_PREDICATION_OP, Void)).call(pbuffer, alignedbufferoffset, operation)
+  end
+  def set_marker(metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.set_marker.unsafe_as(Proc(UInt32, Void*, UInt32, Void)).call(metadata, pdata, size)
+  end
+  def begin_event(metadata : UInt32, pdata : Void*, size : UInt32) : Void
+    @lpVtbl.value.begin_event.unsafe_as(Proc(UInt32, Void*, UInt32, Void)).call(metadata, pdata, size)
+  end
+  def end_event : Void
+    @lpVtbl.value.end_event.unsafe_as(Proc(Void)).call
+  end
+  def execute_indirect(pcommandsignature : ID3D12CommandSignature, maxcommandcount : UInt32, pargumentbuffer : ID3D12Resource, argumentbufferoffset : UInt64, pcountbuffer : ID3D12Resource, countbufferoffset : UInt64) : Void
+    @lpVtbl.value.execute_indirect.unsafe_as(Proc(ID3D12CommandSignature, UInt32, ID3D12Resource, UInt64, ID3D12Resource, UInt64, Void)).call(pcommandsignature, maxcommandcount, pargumentbuffer, argumentbufferoffset, pcountbuffer, countbufferoffset)
+  end
+  def atomic_copy_buffer_uint(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, dependencies : UInt32, ppdependentresources : ID3D12Resource*, pdependentsubresourceranges : D3D12_SUBRESOURCE_RANGE_UINT64*) : Void
+    @lpVtbl.value.atomic_copy_buffer_uint.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, dependencies, ppdependentresources, pdependentsubresourceranges)
+  end
+  def atomic_copy_buffer_uint64(pdstbuffer : ID3D12Resource, dstoffset : UInt64, psrcbuffer : ID3D12Resource, srcoffset : UInt64, dependencies : UInt32, ppdependentresources : ID3D12Resource*, pdependentsubresourceranges : D3D12_SUBRESOURCE_RANGE_UINT64*) : Void
+    @lpVtbl.value.atomic_copy_buffer_uint64.unsafe_as(Proc(ID3D12Resource, UInt64, ID3D12Resource, UInt64, UInt32, ID3D12Resource*, D3D12_SUBRESOURCE_RANGE_UINT64*, Void)).call(pdstbuffer, dstoffset, psrcbuffer, srcoffset, dependencies, ppdependentresources, pdependentsubresourceranges)
+  end
+  def om_set_depth_bounds(min : Float32, max : Float32) : Void
+    @lpVtbl.value.om_set_depth_bounds.unsafe_as(Proc(Float32, Float32, Void)).call(min, max)
+  end
+  def set_sample_positions(numsamplesperpixel : UInt32, numpixels : UInt32, psamplepositions : D3D12_SAMPLE_POSITION*) : Void
+    @lpVtbl.value.set_sample_positions.unsafe_as(Proc(UInt32, UInt32, D3D12_SAMPLE_POSITION*, Void)).call(numsamplesperpixel, numpixels, psamplepositions)
+  end
+  def resolve_subresource_region(pdstresource : ID3D12Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, psrcresource : ID3D12Resource, srcsubresource : UInt32, psrcrect : RECT*, format : DXGI_FORMAT, resolvemode : D3D12_RESOLVE_MODE) : Void
+    @lpVtbl.value.resolve_subresource_region.unsafe_as(Proc(ID3D12Resource, UInt32, UInt32, UInt32, ID3D12Resource, UInt32, RECT*, DXGI_FORMAT, D3D12_RESOLVE_MODE, Void)).call(pdstresource, dstsubresource, dstx, dsty, psrcresource, srcsubresource, psrcrect, format, resolvemode)
+  end
+  def set_view_instance_mask(mask : UInt32) : Void
+    @lpVtbl.value.set_view_instance_mask.unsafe_as(Proc(UInt32, Void)).call(mask)
+  end
+  def write_buffer_immediate(count : UInt32, pparams : D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, pmodes : D3D12_WRITEBUFFERIMMEDIATE_MODE*) : Void
+    @lpVtbl.value.write_buffer_immediate.unsafe_as(Proc(UInt32, D3D12_WRITEBUFFERIMMEDIATE_PARAMETER*, D3D12_WRITEBUFFERIMMEDIATE_MODE*, Void)).call(count, pparams, pmodes)
+  end
+  def set_protected_resource_session(pprotectedresourcesession : ID3D12ProtectedResourceSession) : Void
+    @lpVtbl.value.set_protected_resource_session.unsafe_as(Proc(ID3D12ProtectedResourceSession, Void)).call(pprotectedresourcesession)
+  end
+  def begin_render_pass(numrendertargets : UInt32, prendertargets : D3D12_RENDER_PASS_RENDER_TARGET_DESC*, pdepthstencil : D3D12_RENDER_PASS_DEPTH_STENCIL_DESC*, flags : D3D12_RENDER_PASS_FLAGS) : Void
+    @lpVtbl.value.begin_render_pass.unsafe_as(Proc(UInt32, D3D12_RENDER_PASS_RENDER_TARGET_DESC*, D3D12_RENDER_PASS_DEPTH_STENCIL_DESC*, D3D12_RENDER_PASS_FLAGS, Void)).call(numrendertargets, prendertargets, pdepthstencil, flags)
+  end
+  def end_render_pass : Void
+    @lpVtbl.value.end_render_pass.unsafe_as(Proc(Void)).call
+  end
+  def initialize_meta_command(pmetacommand : ID3D12MetaCommand, pinitializationparametersdata : Void*, initializationparametersdatasizeinbytes : LibC::UINT_PTR) : Void
+    @lpVtbl.value.initialize_meta_command.unsafe_as(Proc(ID3D12MetaCommand, Void*, LibC::UINT_PTR, Void)).call(pmetacommand, pinitializationparametersdata, initializationparametersdatasizeinbytes)
+  end
+  def execute_meta_command(pmetacommand : ID3D12MetaCommand, pexecutionparametersdata : Void*, executionparametersdatasizeinbytes : LibC::UINT_PTR) : Void
+    @lpVtbl.value.execute_meta_command.unsafe_as(Proc(ID3D12MetaCommand, Void*, LibC::UINT_PTR, Void)).call(pmetacommand, pexecutionparametersdata, executionparametersdatasizeinbytes)
+  end
+  def build_raytracing_acceleration_structure(pdesc : D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC*, numpostbuildinfodescs : UInt32, ppostbuildinfodescs : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*) : Void
+    @lpVtbl.value.build_raytracing_acceleration_structure.unsafe_as(Proc(D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC*, UInt32, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*, Void)).call(pdesc, numpostbuildinfodescs, ppostbuildinfodescs)
+  end
+  def emit_raytracing_acceleration_structure_postbuild_info(pdesc : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*, numsourceaccelerationstructures : UInt32, psourceaccelerationstructuredata : UInt64*) : Void
+    @lpVtbl.value.emit_raytracing_acceleration_structure_postbuild_info.unsafe_as(Proc(D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC*, UInt32, UInt64*, Void)).call(pdesc, numsourceaccelerationstructures, psourceaccelerationstructuredata)
+  end
+  def copy_raytracing_acceleration_structure(destaccelerationstructuredata : UInt64, sourceaccelerationstructuredata : UInt64, mode : D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE) : Void
+    @lpVtbl.value.copy_raytracing_acceleration_structure.unsafe_as(Proc(UInt64, UInt64, D3D12_RAYTRACING_ACCELERATION_STRUCTURE_COPY_MODE, Void)).call(destaccelerationstructuredata, sourceaccelerationstructuredata, mode)
+  end
+  def set_pipeline_state1(pstateobject : ID3D12StateObject) : Void
+    @lpVtbl.value.set_pipeline_state1.unsafe_as(Proc(ID3D12StateObject, Void)).call(pstateobject)
+  end
+  def dispatch_rays(pdesc : D3D12_DISPATCH_RAYS_DESC*) : Void
+    @lpVtbl.value.dispatch_rays.unsafe_as(Proc(D3D12_DISPATCH_RAYS_DESC*, Void)).call(pdesc)
+  end
+  def rs_set_shading_rate(baseshadingrate : D3D12_SHADING_RATE, combiners : D3D12_SHADING_RATE_COMBINER*) : Void
+    @lpVtbl.value.rs_set_shading_rate.unsafe_as(Proc(D3D12_SHADING_RATE, D3D12_SHADING_RATE_COMBINER*, Void)).call(baseshadingrate, combiners)
+  end
+  def rs_set_shading_rate_image(shadingrateimage : ID3D12Resource) : Void
+    @lpVtbl.value.rs_set_shading_rate_image.unsafe_as(Proc(ID3D12Resource, Void)).call(shadingrateimage)
+  end
+  def dispatch_mesh(threadgroupcountx : UInt32, threadgroupcounty : UInt32, threadgroupcountz : UInt32) : Void
+    @lpVtbl.value.dispatch_mesh.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(threadgroupcountx, threadgroupcounty, threadgroupcountz)
+  end
+end
+struct LibWin32::ID3D12ShaderReflectionType
+  def get_desc(pdesc : D3D12_SHADER_TYPE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_SHADER_TYPE_DESC*, HRESULT)).call(pdesc)
+  end
+  def get_member_type_by_index(index : UInt32) : ID3D12ShaderReflectionType
+    @lpVtbl.value.get_member_type_by_index.unsafe_as(Proc(UInt32, ID3D12ShaderReflectionType)).call(index)
+  end
+  def get_member_type_by_name(name : PSTR) : ID3D12ShaderReflectionType
+    @lpVtbl.value.get_member_type_by_name.unsafe_as(Proc(PSTR, ID3D12ShaderReflectionType)).call(name)
+  end
+  def get_member_type_name(index : UInt32) : PSTR
+    @lpVtbl.value.get_member_type_name.unsafe_as(Proc(UInt32, PSTR)).call(index)
+  end
+  def is_equal(ptype : ID3D12ShaderReflectionType) : HRESULT
+    @lpVtbl.value.is_equal.unsafe_as(Proc(ID3D12ShaderReflectionType, HRESULT)).call(ptype)
+  end
+  def get_sub_type : ID3D12ShaderReflectionType
+    @lpVtbl.value.get_sub_type.unsafe_as(Proc(ID3D12ShaderReflectionType)).call
+  end
+  def get_base_class : ID3D12ShaderReflectionType
+    @lpVtbl.value.get_base_class.unsafe_as(Proc(ID3D12ShaderReflectionType)).call
+  end
+  def get_num_interfaces : UInt32
+    @lpVtbl.value.get_num_interfaces.unsafe_as(Proc(UInt32)).call
+  end
+  def get_interface_by_index(uindex : UInt32) : ID3D12ShaderReflectionType
+    @lpVtbl.value.get_interface_by_index.unsafe_as(Proc(UInt32, ID3D12ShaderReflectionType)).call(uindex)
+  end
+  def is_of_type(ptype : ID3D12ShaderReflectionType) : HRESULT
+    @lpVtbl.value.is_of_type.unsafe_as(Proc(ID3D12ShaderReflectionType, HRESULT)).call(ptype)
+  end
+  def implements_interface(pbase : ID3D12ShaderReflectionType) : HRESULT
+    @lpVtbl.value.implements_interface.unsafe_as(Proc(ID3D12ShaderReflectionType, HRESULT)).call(pbase)
+  end
+end
+struct LibWin32::ID3D12ShaderReflectionVariable
+  def get_desc(pdesc : D3D12_SHADER_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_SHADER_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  end
+  def get_type : ID3D12ShaderReflectionType
+    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D12ShaderReflectionType)).call
+  end
+  def get_buffer : ID3D12ShaderReflectionConstantBuffer
+    @lpVtbl.value.get_buffer.unsafe_as(Proc(ID3D12ShaderReflectionConstantBuffer)).call
+  end
+  def get_interface_slot(uarrayindex : UInt32) : UInt32
+    @lpVtbl.value.get_interface_slot.unsafe_as(Proc(UInt32, UInt32)).call(uarrayindex)
+  end
+end
+struct LibWin32::ID3D12ShaderReflectionConstantBuffer
+  def get_desc(pdesc : D3D12_SHADER_BUFFER_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_SHADER_BUFFER_DESC*, HRESULT)).call(pdesc)
+  end
+  def get_variable_by_index(index : UInt32) : ID3D12ShaderReflectionVariable
+    @lpVtbl.value.get_variable_by_index.unsafe_as(Proc(UInt32, ID3D12ShaderReflectionVariable)).call(index)
+  end
+  def get_variable_by_name(name : PSTR) : ID3D12ShaderReflectionVariable
+    @lpVtbl.value.get_variable_by_name.unsafe_as(Proc(PSTR, ID3D12ShaderReflectionVariable)).call(name)
+  end
+end
+struct LibWin32::ID3D12ShaderReflection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_desc(pdesc : D3D12_SHADER_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_SHADER_DESC*, HRESULT)).call(pdesc)
+  end
+  def get_constant_buffer_by_index(index : UInt32) : ID3D12ShaderReflectionConstantBuffer
+    @lpVtbl.value.get_constant_buffer_by_index.unsafe_as(Proc(UInt32, ID3D12ShaderReflectionConstantBuffer)).call(index)
+  end
+  def get_constant_buffer_by_name(name : PSTR) : ID3D12ShaderReflectionConstantBuffer
+    @lpVtbl.value.get_constant_buffer_by_name.unsafe_as(Proc(PSTR, ID3D12ShaderReflectionConstantBuffer)).call(name)
+  end
+  def get_resource_binding_desc(resourceindex : UInt32, pdesc : D3D12_SHADER_INPUT_BIND_DESC*) : HRESULT
+    @lpVtbl.value.get_resource_binding_desc.unsafe_as(Proc(UInt32, D3D12_SHADER_INPUT_BIND_DESC*, HRESULT)).call(resourceindex, pdesc)
+  end
+  def get_input_parameter_desc(parameterindex : UInt32, pdesc : D3D12_SIGNATURE_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.get_input_parameter_desc.unsafe_as(Proc(UInt32, D3D12_SIGNATURE_PARAMETER_DESC*, HRESULT)).call(parameterindex, pdesc)
+  end
+  def get_output_parameter_desc(parameterindex : UInt32, pdesc : D3D12_SIGNATURE_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.get_output_parameter_desc.unsafe_as(Proc(UInt32, D3D12_SIGNATURE_PARAMETER_DESC*, HRESULT)).call(parameterindex, pdesc)
+  end
+  def get_patch_constant_parameter_desc(parameterindex : UInt32, pdesc : D3D12_SIGNATURE_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.get_patch_constant_parameter_desc.unsafe_as(Proc(UInt32, D3D12_SIGNATURE_PARAMETER_DESC*, HRESULT)).call(parameterindex, pdesc)
+  end
+  def get_variable_by_name(name : PSTR) : ID3D12ShaderReflectionVariable
+    @lpVtbl.value.get_variable_by_name.unsafe_as(Proc(PSTR, ID3D12ShaderReflectionVariable)).call(name)
+  end
+  def get_resource_binding_desc_by_name(name : PSTR, pdesc : D3D12_SHADER_INPUT_BIND_DESC*) : HRESULT
+    @lpVtbl.value.get_resource_binding_desc_by_name.unsafe_as(Proc(PSTR, D3D12_SHADER_INPUT_BIND_DESC*, HRESULT)).call(name, pdesc)
+  end
+  def get_mov_instruction_count : UInt32
+    @lpVtbl.value.get_mov_instruction_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_movc_instruction_count : UInt32
+    @lpVtbl.value.get_movc_instruction_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_conversion_instruction_count : UInt32
+    @lpVtbl.value.get_conversion_instruction_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_bitwise_instruction_count : UInt32
+    @lpVtbl.value.get_bitwise_instruction_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_gs_input_primitive : D3D_PRIMITIVE
+    @lpVtbl.value.get_gs_input_primitive.unsafe_as(Proc(D3D_PRIMITIVE)).call
+  end
+  def is_sample_frequency_shader : LibC::BOOL
+    @lpVtbl.value.is_sample_frequency_shader.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_num_interface_slots : UInt32
+    @lpVtbl.value.get_num_interface_slots.unsafe_as(Proc(UInt32)).call
+  end
+  def get_min_feature_level(plevel : D3D_FEATURE_LEVEL*) : HRESULT
+    @lpVtbl.value.get_min_feature_level.unsafe_as(Proc(D3D_FEATURE_LEVEL*, HRESULT)).call(plevel)
+  end
+  def get_thread_group_size(psizex : UInt32*, psizey : UInt32*, psizez : UInt32*) : UInt32
+    @lpVtbl.value.get_thread_group_size.unsafe_as(Proc(UInt32*, UInt32*, UInt32*, UInt32)).call(psizex, psizey, psizez)
+  end
+  def get_requires_flags : UInt64
+    @lpVtbl.value.get_requires_flags.unsafe_as(Proc(UInt64)).call
+  end
+end
+struct LibWin32::ID3D12LibraryReflection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_desc(pdesc : D3D12_LIBRARY_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_LIBRARY_DESC*, HRESULT)).call(pdesc)
+  end
+  def get_function_by_index(functionindex : Int32) : ID3D12FunctionReflection
+    @lpVtbl.value.get_function_by_index.unsafe_as(Proc(Int32, ID3D12FunctionReflection)).call(functionindex)
+  end
+end
+struct LibWin32::ID3D12FunctionReflection
+  def get_desc(pdesc : D3D12_FUNCTION_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_FUNCTION_DESC*, HRESULT)).call(pdesc)
+  end
+  def get_constant_buffer_by_index(bufferindex : UInt32) : ID3D12ShaderReflectionConstantBuffer
+    @lpVtbl.value.get_constant_buffer_by_index.unsafe_as(Proc(UInt32, ID3D12ShaderReflectionConstantBuffer)).call(bufferindex)
+  end
+  def get_constant_buffer_by_name(name : PSTR) : ID3D12ShaderReflectionConstantBuffer
+    @lpVtbl.value.get_constant_buffer_by_name.unsafe_as(Proc(PSTR, ID3D12ShaderReflectionConstantBuffer)).call(name)
+  end
+  def get_resource_binding_desc(resourceindex : UInt32, pdesc : D3D12_SHADER_INPUT_BIND_DESC*) : HRESULT
+    @lpVtbl.value.get_resource_binding_desc.unsafe_as(Proc(UInt32, D3D12_SHADER_INPUT_BIND_DESC*, HRESULT)).call(resourceindex, pdesc)
+  end
+  def get_variable_by_name(name : PSTR) : ID3D12ShaderReflectionVariable
+    @lpVtbl.value.get_variable_by_name.unsafe_as(Proc(PSTR, ID3D12ShaderReflectionVariable)).call(name)
+  end
+  def get_resource_binding_desc_by_name(name : PSTR, pdesc : D3D12_SHADER_INPUT_BIND_DESC*) : HRESULT
+    @lpVtbl.value.get_resource_binding_desc_by_name.unsafe_as(Proc(PSTR, D3D12_SHADER_INPUT_BIND_DESC*, HRESULT)).call(name, pdesc)
+  end
+  def get_function_parameter(parameterindex : Int32) : ID3D12FunctionParameterReflection
+    @lpVtbl.value.get_function_parameter.unsafe_as(Proc(Int32, ID3D12FunctionParameterReflection)).call(parameterindex)
+  end
+end
+struct LibWin32::ID3D12FunctionParameterReflection
+  def get_desc(pdesc : D3D12_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D12_PARAMETER_DESC*, HRESULT)).call(pdesc)
+  end
 end

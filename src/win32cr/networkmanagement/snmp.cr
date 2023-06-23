@@ -302,7 +302,7 @@ lib LibWin32
   fun SnmpUtilOidCmp(poid1 : AsnObjectIdentifier*, poid2 : AsnObjectIdentifier*) : Int32
 
   # Params # poid : AsnObjectIdentifier* [In]
-  fun SnmpUtilOidFree(poid : AsnObjectIdentifier*)
+  fun SnmpUtilOidFree(poid : AsnObjectIdentifier*) : Void
 
   # Params # poctets1 : AsnOctetString* [In],poctets2 : AsnOctetString* [In]
   fun SnmpUtilOctetsCmp(poctets1 : AsnOctetString*, poctets2 : AsnOctetString*) : Int32
@@ -314,28 +314,28 @@ lib LibWin32
   fun SnmpUtilOctetsCpy(poctetsdst : AsnOctetString*, poctetssrc : AsnOctetString*) : Int32
 
   # Params # poctets : AsnOctetString* [In]
-  fun SnmpUtilOctetsFree(poctets : AsnOctetString*)
+  fun SnmpUtilOctetsFree(poctets : AsnOctetString*) : Void
 
   # Params # panydst : AsnAny* [In],panysrc : AsnAny* [In]
   fun SnmpUtilAsnAnyCpy(panydst : AsnAny*, panysrc : AsnAny*) : Int32
 
   # Params # pany : AsnAny* [In]
-  fun SnmpUtilAsnAnyFree(pany : AsnAny*)
+  fun SnmpUtilAsnAnyFree(pany : AsnAny*) : Void
 
   # Params # pvbdst : SnmpVarBind* [In],pvbsrc : SnmpVarBind* [In]
   fun SnmpUtilVarBindCpy(pvbdst : SnmpVarBind*, pvbsrc : SnmpVarBind*) : Int32
 
   # Params # pvb : SnmpVarBind* [In]
-  fun SnmpUtilVarBindFree(pvb : SnmpVarBind*)
+  fun SnmpUtilVarBindFree(pvb : SnmpVarBind*) : Void
 
   # Params # pvbldst : SnmpVarBindList* [In],pvblsrc : SnmpVarBindList* [In]
   fun SnmpUtilVarBindListCpy(pvbldst : SnmpVarBindList*, pvblsrc : SnmpVarBindList*) : Int32
 
   # Params # pvbl : SnmpVarBindList* [In]
-  fun SnmpUtilVarBindListFree(pvbl : SnmpVarBindList*)
+  fun SnmpUtilVarBindListFree(pvbl : SnmpVarBindList*) : Void
 
   # Params # pmem : Void* [In]
-  fun SnmpUtilMemFree(pmem : Void*)
+  fun SnmpUtilMemFree(pmem : Void*) : Void
 
   # Params # nbytes : UInt32 [In]
   fun SnmpUtilMemAlloc(nbytes : UInt32) : Void*
@@ -350,22 +350,22 @@ lib LibWin32
   fun SnmpUtilIdsToA(ids : UInt32*, idlength : UInt32) : PSTR
 
   # Params # oid : AsnObjectIdentifier* [In]
-  fun SnmpUtilPrintOid(oid : AsnObjectIdentifier*)
+  fun SnmpUtilPrintOid(oid : AsnObjectIdentifier*) : Void
 
   # Params # pany : AsnAny* [In]
-  fun SnmpUtilPrintAsnAny(pany : AsnAny*)
+  fun SnmpUtilPrintAsnAny(pany : AsnAny*) : Void
 
   # Params # 
   fun SnmpSvcGetUptime : UInt32
 
   # Params # nloglevel : SNMP_LOG [In]
-  fun SnmpSvcSetLogLevel(nloglevel : SNMP_LOG)
+  fun SnmpSvcSetLogLevel(nloglevel : SNMP_LOG) : Void
 
   # Params # nlogtype : SNMP_OUTPUT_LOG_TYPE [In]
-  fun SnmpSvcSetLogType(nlogtype : SNMP_OUTPUT_LOG_TYPE)
+  fun SnmpSvcSetLogType(nlogtype : SNMP_OUTPUT_LOG_TYPE) : Void
 
   # Params # nloglevel : SNMP_LOG [In],szformat : PSTR [In]
-  fun SnmpUtilDbgPrint(nloglevel : SNMP_LOG, szformat : PSTR)
+  fun SnmpUtilDbgPrint(nloglevel : SNMP_LOG, szformat : PSTR) : Void
 
   # Params # lpagentaddress : PSTR [In],lpagentcommunity : PSTR [In],ntimeout : Int32 [In],nretries : Int32 [In]
   fun SnmpMgrOpen(lpagentaddress : PSTR, lpagentcommunity : PSTR, ntimeout : Int32, nretries : Int32) : Void*

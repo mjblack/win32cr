@@ -574,7 +574,7 @@ lib LibWin32
     data_flow : DIRECTSOUNDDEVICE_DATAFLOW
     device_id : Guid
     description : PSTR
-    mmodule : PSTR
+    module_ : PSTR
     interface : PSTR
     wave_device_id : UInt32
   end
@@ -583,7 +583,7 @@ lib LibWin32
     data_flow : DIRECTSOUNDDEVICE_DATAFLOW
     device_id : Guid
     description : LibC::LPWSTR
-    mmodule : LibC::LPWSTR
+    module_ : LibC::LPWSTR
     interface : LibC::LPWSTR
     wave_device_id : UInt32
   end
@@ -623,18 +623,18 @@ lib LibWin32
 
 
   struct IDirectMusicVTbl
-    query_interface : Proc(IDirectMusic*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectMusic*, UInt32)
-    release : Proc(IDirectMusic*, UInt32)
-    enum_port : Proc(IDirectMusic*, UInt32, DMUS_PORTCAPS*, HRESULT)
-    create_music_buffer : Proc(IDirectMusic*, DMUS_BUFFERDESC*, IDirectMusicBuffer*, IUnknown, HRESULT)
-    create_port : Proc(IDirectMusic*, Guid*, DMUS_PORTPARAMS8*, IDirectMusicPort*, IUnknown, HRESULT)
-    enum_master_clock : Proc(IDirectMusic*, UInt32, DMUS_CLOCKINFO8*, HRESULT)
-    get_master_clock : Proc(IDirectMusic*, Guid*, IReferenceClock*, HRESULT)
-    set_master_clock : Proc(IDirectMusic*, Guid*, HRESULT)
-    activate : Proc(IDirectMusic*, LibC::BOOL, HRESULT)
-    get_default_port : Proc(IDirectMusic*, Guid*, HRESULT)
-    set_direct_sound : Proc(IDirectMusic*, IDirectSound, LibC::HANDLE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enum_port : UInt64
+    create_music_buffer : UInt64
+    create_port : UInt64
+    enum_master_clock : UInt64
+    get_master_clock : UInt64
+    set_master_clock : UInt64
+    activate : UInt64
+    get_default_port : UInt64
+    set_direct_sound : UInt64
   end
 
   IDirectMusic_GUID = "6536115a-7b2d-11d2-ba18-0000f875ac12"
@@ -644,19 +644,19 @@ lib LibWin32
   end
 
   struct IDirectMusic8VTbl
-    query_interface : Proc(IDirectMusic8*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectMusic8*, UInt32)
-    release : Proc(IDirectMusic8*, UInt32)
-    enum_port : Proc(IDirectMusic8*, UInt32, DMUS_PORTCAPS*, HRESULT)
-    create_music_buffer : Proc(IDirectMusic8*, DMUS_BUFFERDESC*, IDirectMusicBuffer*, IUnknown, HRESULT)
-    create_port : Proc(IDirectMusic8*, Guid*, DMUS_PORTPARAMS8*, IDirectMusicPort*, IUnknown, HRESULT)
-    enum_master_clock : Proc(IDirectMusic8*, UInt32, DMUS_CLOCKINFO8*, HRESULT)
-    get_master_clock : Proc(IDirectMusic8*, Guid*, IReferenceClock*, HRESULT)
-    set_master_clock : Proc(IDirectMusic8*, Guid*, HRESULT)
-    activate : Proc(IDirectMusic8*, LibC::BOOL, HRESULT)
-    get_default_port : Proc(IDirectMusic8*, Guid*, HRESULT)
-    set_direct_sound : Proc(IDirectMusic8*, IDirectSound, LibC::HANDLE, HRESULT)
-    set_external_master_clock : Proc(IDirectMusic8*, IReferenceClock, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enum_port : UInt64
+    create_music_buffer : UInt64
+    create_port : UInt64
+    enum_master_clock : UInt64
+    get_master_clock : UInt64
+    set_master_clock : UInt64
+    activate : UInt64
+    get_default_port : UInt64
+    set_direct_sound : UInt64
+    set_external_master_clock : UInt64
   end
 
   IDirectMusic8_GUID = "2d3629f7-813d-4939-8508-f05c6b75fd97"
@@ -666,22 +666,22 @@ lib LibWin32
   end
 
   struct IDirectMusicBufferVTbl
-    query_interface : Proc(IDirectMusicBuffer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectMusicBuffer*, UInt32)
-    release : Proc(IDirectMusicBuffer*, UInt32)
-    flush : Proc(IDirectMusicBuffer*, HRESULT)
-    total_time : Proc(IDirectMusicBuffer*, Int64*, HRESULT)
-    pack_structured : Proc(IDirectMusicBuffer*, Int64, UInt32, UInt32, HRESULT)
-    pack_unstructured : Proc(IDirectMusicBuffer*, Int64, UInt32, UInt32, UInt8*, HRESULT)
-    reset_read_ptr : Proc(IDirectMusicBuffer*, HRESULT)
-    get_next_event : Proc(IDirectMusicBuffer*, Int64*, UInt32*, UInt32*, UInt8**, HRESULT)
-    get_raw_buffer_ptr : Proc(IDirectMusicBuffer*, UInt8**, HRESULT)
-    get_start_time : Proc(IDirectMusicBuffer*, Int64*, HRESULT)
-    get_used_bytes : Proc(IDirectMusicBuffer*, UInt32*, HRESULT)
-    get_max_bytes : Proc(IDirectMusicBuffer*, UInt32*, HRESULT)
-    get_buffer_format : Proc(IDirectMusicBuffer*, Guid*, HRESULT)
-    set_start_time : Proc(IDirectMusicBuffer*, Int64, HRESULT)
-    set_used_bytes : Proc(IDirectMusicBuffer*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    flush : UInt64
+    total_time : UInt64
+    pack_structured : UInt64
+    pack_unstructured : UInt64
+    reset_read_ptr : UInt64
+    get_next_event : UInt64
+    get_raw_buffer_ptr : UInt64
+    get_start_time : UInt64
+    get_used_bytes : UInt64
+    get_max_bytes : UInt64
+    get_buffer_format : UInt64
+    set_start_time : UInt64
+    set_used_bytes : UInt64
   end
 
   IDirectMusicBuffer_GUID = "d2ac2878-b39b-11d1-8704-00600893b1bd"
@@ -691,11 +691,11 @@ lib LibWin32
   end
 
   struct IDirectMusicInstrumentVTbl
-    query_interface : Proc(IDirectMusicInstrument*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectMusicInstrument*, UInt32)
-    release : Proc(IDirectMusicInstrument*, UInt32)
-    get_patch : Proc(IDirectMusicInstrument*, UInt32*, HRESULT)
-    set_patch : Proc(IDirectMusicInstrument*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_patch : UInt64
+    set_patch : UInt64
   end
 
   IDirectMusicInstrument_GUID = "d2ac287d-b39b-11d1-8704-00600893b1bd"
@@ -705,9 +705,9 @@ lib LibWin32
   end
 
   struct IDirectMusicDownloadedInstrumentVTbl
-    query_interface : Proc(IDirectMusicDownloadedInstrument*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectMusicDownloadedInstrument*, UInt32)
-    release : Proc(IDirectMusicDownloadedInstrument*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
   end
 
   IDirectMusicDownloadedInstrument_GUID = "d2ac287e-b39b-11d1-8704-00600893b1bd"
@@ -717,11 +717,11 @@ lib LibWin32
   end
 
   struct IDirectMusicCollectionVTbl
-    query_interface : Proc(IDirectMusicCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectMusicCollection*, UInt32)
-    release : Proc(IDirectMusicCollection*, UInt32)
-    get_instrument : Proc(IDirectMusicCollection*, UInt32, IDirectMusicInstrument*, HRESULT)
-    enum_instrument : Proc(IDirectMusicCollection*, UInt32, UInt32*, LibC::LPWSTR, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_instrument : UInt64
+    enum_instrument : UInt64
   end
 
   IDirectMusicCollection_GUID = "d2ac287c-b39b-11d1-8704-00600893b1bd"
@@ -731,10 +731,10 @@ lib LibWin32
   end
 
   struct IDirectMusicDownloadVTbl
-    query_interface : Proc(IDirectMusicDownload*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectMusicDownload*, UInt32)
-    release : Proc(IDirectMusicDownload*, UInt32)
-    get_buffer : Proc(IDirectMusicDownload*, Void**, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_buffer : UInt64
   end
 
   IDirectMusicDownload_GUID = "d2ac287b-b39b-11d1-8704-00600893b1bd"
@@ -744,15 +744,15 @@ lib LibWin32
   end
 
   struct IDirectMusicPortDownloadVTbl
-    query_interface : Proc(IDirectMusicPortDownload*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectMusicPortDownload*, UInt32)
-    release : Proc(IDirectMusicPortDownload*, UInt32)
-    get_buffer : Proc(IDirectMusicPortDownload*, UInt32, IDirectMusicDownload*, HRESULT)
-    allocate_buffer : Proc(IDirectMusicPortDownload*, UInt32, IDirectMusicDownload*, HRESULT)
-    get_dl_id : Proc(IDirectMusicPortDownload*, UInt32*, UInt32, HRESULT)
-    get_append : Proc(IDirectMusicPortDownload*, UInt32*, HRESULT)
-    download : Proc(IDirectMusicPortDownload*, IDirectMusicDownload, HRESULT)
-    unload : Proc(IDirectMusicPortDownload*, IDirectMusicDownload, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_buffer : UInt64
+    allocate_buffer : UInt64
+    get_dl_id : UInt64
+    get_append : UInt64
+    download : UInt64
+    unload : UInt64
   end
 
   IDirectMusicPortDownload_GUID = "d2ac287a-b39b-11d1-8704-00600893b1bd"
@@ -762,26 +762,26 @@ lib LibWin32
   end
 
   struct IDirectMusicPortVTbl
-    query_interface : Proc(IDirectMusicPort*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectMusicPort*, UInt32)
-    release : Proc(IDirectMusicPort*, UInt32)
-    play_buffer : Proc(IDirectMusicPort*, IDirectMusicBuffer, HRESULT)
-    set_read_notification_handle : Proc(IDirectMusicPort*, LibC::HANDLE, HRESULT)
-    read : Proc(IDirectMusicPort*, IDirectMusicBuffer, HRESULT)
-    download_instrument : Proc(IDirectMusicPort*, IDirectMusicInstrument, IDirectMusicDownloadedInstrument*, DMUS_NOTERANGE*, UInt32, HRESULT)
-    unload_instrument : Proc(IDirectMusicPort*, IDirectMusicDownloadedInstrument, HRESULT)
-    get_latency_clock : Proc(IDirectMusicPort*, IReferenceClock*, HRESULT)
-    get_running_stats : Proc(IDirectMusicPort*, DMUS_SYNTHSTATS*, HRESULT)
-    compact : Proc(IDirectMusicPort*, HRESULT)
-    get_caps : Proc(IDirectMusicPort*, DMUS_PORTCAPS*, HRESULT)
-    device_io_control : Proc(IDirectMusicPort*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, OVERLAPPED*, HRESULT)
-    set_num_channel_groups : Proc(IDirectMusicPort*, UInt32, HRESULT)
-    get_num_channel_groups : Proc(IDirectMusicPort*, UInt32*, HRESULT)
-    activate : Proc(IDirectMusicPort*, LibC::BOOL, HRESULT)
-    set_channel_priority : Proc(IDirectMusicPort*, UInt32, UInt32, UInt32, HRESULT)
-    get_channel_priority : Proc(IDirectMusicPort*, UInt32, UInt32, UInt32*, HRESULT)
-    set_direct_sound : Proc(IDirectMusicPort*, IDirectSound, IDirectSoundBuffer, HRESULT)
-    get_format : Proc(IDirectMusicPort*, WAVEFORMATEX*, UInt32*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    play_buffer : UInt64
+    set_read_notification_handle : UInt64
+    read : UInt64
+    download_instrument : UInt64
+    unload_instrument : UInt64
+    get_latency_clock : UInt64
+    get_running_stats : UInt64
+    compact : UInt64
+    get_caps : UInt64
+    device_io_control : UInt64
+    set_num_channel_groups : UInt64
+    get_num_channel_groups : UInt64
+    activate : UInt64
+    set_channel_priority : UInt64
+    get_channel_priority : UInt64
+    set_direct_sound : UInt64
+    get_format : UInt64
   end
 
   IDirectMusicPort_GUID = "08f2d8c9-37c2-11d2-b9f9-0000f875ac12"
@@ -791,10 +791,10 @@ lib LibWin32
   end
 
   struct IDirectMusicThruVTbl
-    query_interface : Proc(IDirectMusicThru*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectMusicThru*, UInt32)
-    release : Proc(IDirectMusicThru*, UInt32)
-    thru_channel : Proc(IDirectMusicThru*, UInt32, UInt32, UInt32, UInt32, IDirectMusicPort, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    thru_channel : UInt64
   end
 
   IDirectMusicThru_GUID = "ced153e7-3606-11d2-b9f9-0000f875ac12"
@@ -804,26 +804,26 @@ lib LibWin32
   end
 
   struct IDirectMusicSynthVTbl
-    query_interface : Proc(IDirectMusicSynth*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectMusicSynth*, UInt32)
-    release : Proc(IDirectMusicSynth*, UInt32)
-    open : Proc(IDirectMusicSynth*, DMUS_PORTPARAMS8*, HRESULT)
-    close : Proc(IDirectMusicSynth*, HRESULT)
-    set_num_channel_groups : Proc(IDirectMusicSynth*, UInt32, HRESULT)
-    download : Proc(IDirectMusicSynth*, LibC::HANDLE*, Void*, Int32*, HRESULT)
-    unload : Proc(IDirectMusicSynth*, LibC::HANDLE, LibC::IntPtrT, LibC::HANDLE, HRESULT)
-    play_buffer : Proc(IDirectMusicSynth*, Int64, UInt8*, UInt32, HRESULT)
-    get_running_stats : Proc(IDirectMusicSynth*, DMUS_SYNTHSTATS*, HRESULT)
-    get_port_caps : Proc(IDirectMusicSynth*, DMUS_PORTCAPS*, HRESULT)
-    set_master_clock : Proc(IDirectMusicSynth*, IReferenceClock, HRESULT)
-    get_latency_clock : Proc(IDirectMusicSynth*, IReferenceClock*, HRESULT)
-    activate : Proc(IDirectMusicSynth*, LibC::BOOL, HRESULT)
-    set_synth_sink : Proc(IDirectMusicSynth*, IDirectMusicSynthSink, HRESULT)
-    render : Proc(IDirectMusicSynth*, Int16*, UInt32, Int64, HRESULT)
-    set_channel_priority : Proc(IDirectMusicSynth*, UInt32, UInt32, UInt32, HRESULT)
-    get_channel_priority : Proc(IDirectMusicSynth*, UInt32, UInt32, UInt32*, HRESULT)
-    get_format : Proc(IDirectMusicSynth*, WAVEFORMATEX*, UInt32*, HRESULT)
-    get_append : Proc(IDirectMusicSynth*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    open : UInt64
+    close : UInt64
+    set_num_channel_groups : UInt64
+    download : UInt64
+    unload : UInt64
+    play_buffer : UInt64
+    get_running_stats : UInt64
+    get_port_caps : UInt64
+    set_master_clock : UInt64
+    get_latency_clock : UInt64
+    activate : UInt64
+    set_synth_sink : UInt64
+    render : UInt64
+    set_channel_priority : UInt64
+    get_channel_priority : UInt64
+    get_format : UInt64
+    get_append : UInt64
   end
 
   IDirectMusicSynth_GUID = "09823661-5c85-11d2-afa6-00aa0024d8b6"
@@ -833,31 +833,31 @@ lib LibWin32
   end
 
   struct IDirectMusicSynth8VTbl
-    query_interface : Proc(IDirectMusicSynth8*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectMusicSynth8*, UInt32)
-    release : Proc(IDirectMusicSynth8*, UInt32)
-    open : Proc(IDirectMusicSynth8*, DMUS_PORTPARAMS8*, HRESULT)
-    close : Proc(IDirectMusicSynth8*, HRESULT)
-    set_num_channel_groups : Proc(IDirectMusicSynth8*, UInt32, HRESULT)
-    download : Proc(IDirectMusicSynth8*, LibC::HANDLE*, Void*, Int32*, HRESULT)
-    unload : Proc(IDirectMusicSynth8*, LibC::HANDLE, LibC::IntPtrT, LibC::HANDLE, HRESULT)
-    play_buffer : Proc(IDirectMusicSynth8*, Int64, UInt8*, UInt32, HRESULT)
-    get_running_stats : Proc(IDirectMusicSynth8*, DMUS_SYNTHSTATS*, HRESULT)
-    get_port_caps : Proc(IDirectMusicSynth8*, DMUS_PORTCAPS*, HRESULT)
-    set_master_clock : Proc(IDirectMusicSynth8*, IReferenceClock, HRESULT)
-    get_latency_clock : Proc(IDirectMusicSynth8*, IReferenceClock*, HRESULT)
-    activate : Proc(IDirectMusicSynth8*, LibC::BOOL, HRESULT)
-    set_synth_sink : Proc(IDirectMusicSynth8*, IDirectMusicSynthSink, HRESULT)
-    render : Proc(IDirectMusicSynth8*, Int16*, UInt32, Int64, HRESULT)
-    set_channel_priority : Proc(IDirectMusicSynth8*, UInt32, UInt32, UInt32, HRESULT)
-    get_channel_priority : Proc(IDirectMusicSynth8*, UInt32, UInt32, UInt32*, HRESULT)
-    get_format : Proc(IDirectMusicSynth8*, WAVEFORMATEX*, UInt32*, HRESULT)
-    get_append : Proc(IDirectMusicSynth8*, UInt32*, HRESULT)
-    play_voice : Proc(IDirectMusicSynth8*, Int64, UInt32, UInt32, UInt32, UInt32, Int32, Int32, UInt64, UInt64, UInt64, HRESULT)
-    stop_voice : Proc(IDirectMusicSynth8*, Int64, UInt32, HRESULT)
-    get_voice_state : Proc(IDirectMusicSynth8*, UInt32*, UInt32, DMUS_VOICE_STATE*, HRESULT)
-    refresh : Proc(IDirectMusicSynth8*, UInt32, UInt32, HRESULT)
-    assign_channel_to_buses : Proc(IDirectMusicSynth8*, UInt32, UInt32, UInt32*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    open : UInt64
+    close : UInt64
+    set_num_channel_groups : UInt64
+    download : UInt64
+    unload : UInt64
+    play_buffer : UInt64
+    get_running_stats : UInt64
+    get_port_caps : UInt64
+    set_master_clock : UInt64
+    get_latency_clock : UInt64
+    activate : UInt64
+    set_synth_sink : UInt64
+    render : UInt64
+    set_channel_priority : UInt64
+    get_channel_priority : UInt64
+    get_format : UInt64
+    get_append : UInt64
+    play_voice : UInt64
+    stop_voice : UInt64
+    get_voice_state : UInt64
+    refresh : UInt64
+    assign_channel_to_buses : UInt64
   end
 
   IDirectMusicSynth8_GUID = "53cab625-2711-4c9f-9de7-1b7f925f6fc8"
@@ -867,17 +867,17 @@ lib LibWin32
   end
 
   struct IDirectMusicSynthSinkVTbl
-    query_interface : Proc(IDirectMusicSynthSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectMusicSynthSink*, UInt32)
-    release : Proc(IDirectMusicSynthSink*, UInt32)
-    init : Proc(IDirectMusicSynthSink*, IDirectMusicSynth, HRESULT)
-    set_master_clock : Proc(IDirectMusicSynthSink*, IReferenceClock, HRESULT)
-    get_latency_clock : Proc(IDirectMusicSynthSink*, IReferenceClock*, HRESULT)
-    activate : Proc(IDirectMusicSynthSink*, LibC::BOOL, HRESULT)
-    sample_to_ref_time : Proc(IDirectMusicSynthSink*, Int64, Int64*, HRESULT)
-    ref_time_to_sample : Proc(IDirectMusicSynthSink*, Int64, Int64*, HRESULT)
-    set_direct_sound : Proc(IDirectMusicSynthSink*, IDirectSound, IDirectSoundBuffer, HRESULT)
-    get_desired_buffer_size : Proc(IDirectMusicSynthSink*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    init : UInt64
+    set_master_clock : UInt64
+    get_latency_clock : UInt64
+    activate : UInt64
+    sample_to_ref_time : UInt64
+    ref_time_to_sample : UInt64
+    set_direct_sound : UInt64
+    get_desired_buffer_size : UInt64
   end
 
   IDirectMusicSynthSink_GUID = "09823663-5c85-11d2-afa6-00aa0024d8b6"
@@ -886,4 +886,471 @@ lib LibWin32
     lpVtbl : IDirectMusicSynthSinkVTbl*
   end
 
+end
+struct LibWin32::IDirectMusic
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enum_port(dwindex : UInt32, pportcaps : DMUS_PORTCAPS*) : HRESULT
+    @lpVtbl.value.enum_port.unsafe_as(Proc(UInt32, DMUS_PORTCAPS*, HRESULT)).call(dwindex, pportcaps)
+  end
+  def create_music_buffer(pbufferdesc : DMUS_BUFFERDESC*, ppbuffer : IDirectMusicBuffer*, punkouter : IUnknown) : HRESULT
+    @lpVtbl.value.create_music_buffer.unsafe_as(Proc(DMUS_BUFFERDESC*, IDirectMusicBuffer*, IUnknown, HRESULT)).call(pbufferdesc, ppbuffer, punkouter)
+  end
+  def create_port(rclsidport : Guid*, pportparams : DMUS_PORTPARAMS8*, ppport : IDirectMusicPort*, punkouter : IUnknown) : HRESULT
+    @lpVtbl.value.create_port.unsafe_as(Proc(Guid*, DMUS_PORTPARAMS8*, IDirectMusicPort*, IUnknown, HRESULT)).call(rclsidport, pportparams, ppport, punkouter)
+  end
+  def enum_master_clock(dwindex : UInt32, lpclockinfo : DMUS_CLOCKINFO8*) : HRESULT
+    @lpVtbl.value.enum_master_clock.unsafe_as(Proc(UInt32, DMUS_CLOCKINFO8*, HRESULT)).call(dwindex, lpclockinfo)
+  end
+  def get_master_clock(pguidclock : Guid*, ppreferenceclock : IReferenceClock*) : HRESULT
+    @lpVtbl.value.get_master_clock.unsafe_as(Proc(Guid*, IReferenceClock*, HRESULT)).call(pguidclock, ppreferenceclock)
+  end
+  def set_master_clock(rguidclock : Guid*) : HRESULT
+    @lpVtbl.value.set_master_clock.unsafe_as(Proc(Guid*, HRESULT)).call(rguidclock)
+  end
+  def activate(fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.activate.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fenable)
+  end
+  def get_default_port(pguidport : Guid*) : HRESULT
+    @lpVtbl.value.get_default_port.unsafe_as(Proc(Guid*, HRESULT)).call(pguidport)
+  end
+  def set_direct_sound(pdirectsound : IDirectSound, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_direct_sound.unsafe_as(Proc(IDirectSound, LibC::HANDLE, HRESULT)).call(pdirectsound, hwnd)
+  end
+end
+struct LibWin32::IDirectMusic8
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enum_port(dwindex : UInt32, pportcaps : DMUS_PORTCAPS*) : HRESULT
+    @lpVtbl.value.enum_port.unsafe_as(Proc(UInt32, DMUS_PORTCAPS*, HRESULT)).call(dwindex, pportcaps)
+  end
+  def create_music_buffer(pbufferdesc : DMUS_BUFFERDESC*, ppbuffer : IDirectMusicBuffer*, punkouter : IUnknown) : HRESULT
+    @lpVtbl.value.create_music_buffer.unsafe_as(Proc(DMUS_BUFFERDESC*, IDirectMusicBuffer*, IUnknown, HRESULT)).call(pbufferdesc, ppbuffer, punkouter)
+  end
+  def create_port(rclsidport : Guid*, pportparams : DMUS_PORTPARAMS8*, ppport : IDirectMusicPort*, punkouter : IUnknown) : HRESULT
+    @lpVtbl.value.create_port.unsafe_as(Proc(Guid*, DMUS_PORTPARAMS8*, IDirectMusicPort*, IUnknown, HRESULT)).call(rclsidport, pportparams, ppport, punkouter)
+  end
+  def enum_master_clock(dwindex : UInt32, lpclockinfo : DMUS_CLOCKINFO8*) : HRESULT
+    @lpVtbl.value.enum_master_clock.unsafe_as(Proc(UInt32, DMUS_CLOCKINFO8*, HRESULT)).call(dwindex, lpclockinfo)
+  end
+  def get_master_clock(pguidclock : Guid*, ppreferenceclock : IReferenceClock*) : HRESULT
+    @lpVtbl.value.get_master_clock.unsafe_as(Proc(Guid*, IReferenceClock*, HRESULT)).call(pguidclock, ppreferenceclock)
+  end
+  def set_master_clock(rguidclock : Guid*) : HRESULT
+    @lpVtbl.value.set_master_clock.unsafe_as(Proc(Guid*, HRESULT)).call(rguidclock)
+  end
+  def activate(fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.activate.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fenable)
+  end
+  def get_default_port(pguidport : Guid*) : HRESULT
+    @lpVtbl.value.get_default_port.unsafe_as(Proc(Guid*, HRESULT)).call(pguidport)
+  end
+  def set_direct_sound(pdirectsound : IDirectSound, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_direct_sound.unsafe_as(Proc(IDirectSound, LibC::HANDLE, HRESULT)).call(pdirectsound, hwnd)
+  end
+  def set_external_master_clock(pclock : IReferenceClock) : HRESULT
+    @lpVtbl.value.set_external_master_clock.unsafe_as(Proc(IReferenceClock, HRESULT)).call(pclock)
+  end
+end
+struct LibWin32::IDirectMusicBuffer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def flush : HRESULT
+    @lpVtbl.value.flush.unsafe_as(Proc(HRESULT)).call
+  end
+  def total_time(prttime : Int64*) : HRESULT
+    @lpVtbl.value.total_time.unsafe_as(Proc(Int64*, HRESULT)).call(prttime)
+  end
+  def pack_structured(rt : Int64, dwchannelgroup : UInt32, dwchannelmessage : UInt32) : HRESULT
+    @lpVtbl.value.pack_structured.unsafe_as(Proc(Int64, UInt32, UInt32, HRESULT)).call(rt, dwchannelgroup, dwchannelmessage)
+  end
+  def pack_unstructured(rt : Int64, dwchannelgroup : UInt32, cb : UInt32, lpb : UInt8*) : HRESULT
+    @lpVtbl.value.pack_unstructured.unsafe_as(Proc(Int64, UInt32, UInt32, UInt8*, HRESULT)).call(rt, dwchannelgroup, cb, lpb)
+  end
+  def reset_read_ptr : HRESULT
+    @lpVtbl.value.reset_read_ptr.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_next_event(prt : Int64*, pdwchannelgroup : UInt32*, pdwlength : UInt32*, ppdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_next_event.unsafe_as(Proc(Int64*, UInt32*, UInt32*, UInt8**, HRESULT)).call(prt, pdwchannelgroup, pdwlength, ppdata)
+  end
+  def get_raw_buffer_ptr(ppdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_raw_buffer_ptr.unsafe_as(Proc(UInt8**, HRESULT)).call(ppdata)
+  end
+  def get_start_time(prt : Int64*) : HRESULT
+    @lpVtbl.value.get_start_time.unsafe_as(Proc(Int64*, HRESULT)).call(prt)
+  end
+  def get_used_bytes(pcb : UInt32*) : HRESULT
+    @lpVtbl.value.get_used_bytes.unsafe_as(Proc(UInt32*, HRESULT)).call(pcb)
+  end
+  def get_max_bytes(pcb : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_bytes.unsafe_as(Proc(UInt32*, HRESULT)).call(pcb)
+  end
+  def get_buffer_format(pguidformat : Guid*) : HRESULT
+    @lpVtbl.value.get_buffer_format.unsafe_as(Proc(Guid*, HRESULT)).call(pguidformat)
+  end
+  def set_start_time(rt : Int64) : HRESULT
+    @lpVtbl.value.set_start_time.unsafe_as(Proc(Int64, HRESULT)).call(rt)
+  end
+  def set_used_bytes(cb : UInt32) : HRESULT
+    @lpVtbl.value.set_used_bytes.unsafe_as(Proc(UInt32, HRESULT)).call(cb)
+  end
+end
+struct LibWin32::IDirectMusicInstrument
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_patch(pdwpatch : UInt32*) : HRESULT
+    @lpVtbl.value.get_patch.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwpatch)
+  end
+  def set_patch(dwpatch : UInt32) : HRESULT
+    @lpVtbl.value.set_patch.unsafe_as(Proc(UInt32, HRESULT)).call(dwpatch)
+  end
+end
+struct LibWin32::IDirectMusicDownloadedInstrument
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::IDirectMusicCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_instrument(dwpatch : UInt32, ppinstrument : IDirectMusicInstrument*) : HRESULT
+    @lpVtbl.value.get_instrument.unsafe_as(Proc(UInt32, IDirectMusicInstrument*, HRESULT)).call(dwpatch, ppinstrument)
+  end
+  def enum_instrument(dwindex : UInt32, pdwpatch : UInt32*, pwszname : LibC::LPWSTR, dwnamelen : UInt32) : HRESULT
+    @lpVtbl.value.enum_instrument.unsafe_as(Proc(UInt32, UInt32*, LibC::LPWSTR, UInt32, HRESULT)).call(dwindex, pdwpatch, pwszname, dwnamelen)
+  end
+end
+struct LibWin32::IDirectMusicDownload
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_buffer(ppvbuffer : Void**, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer.unsafe_as(Proc(Void**, UInt32*, HRESULT)).call(ppvbuffer, pdwsize)
+  end
+end
+struct LibWin32::IDirectMusicPortDownload
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_buffer(dwdlid : UInt32, ppidmdownload : IDirectMusicDownload*) : HRESULT
+    @lpVtbl.value.get_buffer.unsafe_as(Proc(UInt32, IDirectMusicDownload*, HRESULT)).call(dwdlid, ppidmdownload)
+  end
+  def allocate_buffer(dwsize : UInt32, ppidmdownload : IDirectMusicDownload*) : HRESULT
+    @lpVtbl.value.allocate_buffer.unsafe_as(Proc(UInt32, IDirectMusicDownload*, HRESULT)).call(dwsize, ppidmdownload)
+  end
+  def get_dl_id(pdwstartdlid : UInt32*, dwcount : UInt32) : HRESULT
+    @lpVtbl.value.get_dl_id.unsafe_as(Proc(UInt32*, UInt32, HRESULT)).call(pdwstartdlid, dwcount)
+  end
+  def get_append(pdwappend : UInt32*) : HRESULT
+    @lpVtbl.value.get_append.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwappend)
+  end
+  def download(pidmdownload : IDirectMusicDownload) : HRESULT
+    @lpVtbl.value.download.unsafe_as(Proc(IDirectMusicDownload, HRESULT)).call(pidmdownload)
+  end
+  def unload(pidmdownload : IDirectMusicDownload) : HRESULT
+    @lpVtbl.value.unload.unsafe_as(Proc(IDirectMusicDownload, HRESULT)).call(pidmdownload)
+  end
+end
+struct LibWin32::IDirectMusicPort
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def play_buffer(pbuffer : IDirectMusicBuffer) : HRESULT
+    @lpVtbl.value.play_buffer.unsafe_as(Proc(IDirectMusicBuffer, HRESULT)).call(pbuffer)
+  end
+  def set_read_notification_handle(hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_read_notification_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hevent)
+  end
+  def read(pbuffer : IDirectMusicBuffer) : HRESULT
+    @lpVtbl.value.read.unsafe_as(Proc(IDirectMusicBuffer, HRESULT)).call(pbuffer)
+  end
+  def download_instrument(pinstrument : IDirectMusicInstrument, ppdownloadedinstrument : IDirectMusicDownloadedInstrument*, pnoteranges : DMUS_NOTERANGE*, dwnumnoteranges : UInt32) : HRESULT
+    @lpVtbl.value.download_instrument.unsafe_as(Proc(IDirectMusicInstrument, IDirectMusicDownloadedInstrument*, DMUS_NOTERANGE*, UInt32, HRESULT)).call(pinstrument, ppdownloadedinstrument, pnoteranges, dwnumnoteranges)
+  end
+  def unload_instrument(pdownloadedinstrument : IDirectMusicDownloadedInstrument) : HRESULT
+    @lpVtbl.value.unload_instrument.unsafe_as(Proc(IDirectMusicDownloadedInstrument, HRESULT)).call(pdownloadedinstrument)
+  end
+  def get_latency_clock(ppclock : IReferenceClock*) : HRESULT
+    @lpVtbl.value.get_latency_clock.unsafe_as(Proc(IReferenceClock*, HRESULT)).call(ppclock)
+  end
+  def get_running_stats(pstats : DMUS_SYNTHSTATS*) : HRESULT
+    @lpVtbl.value.get_running_stats.unsafe_as(Proc(DMUS_SYNTHSTATS*, HRESULT)).call(pstats)
+  end
+  def compact : HRESULT
+    @lpVtbl.value.compact.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_caps(pportcaps : DMUS_PORTCAPS*) : HRESULT
+    @lpVtbl.value.get_caps.unsafe_as(Proc(DMUS_PORTCAPS*, HRESULT)).call(pportcaps)
+  end
+  def device_io_control(dwiocontrolcode : UInt32, lpinbuffer : Void*, ninbuffersize : UInt32, lpoutbuffer : Void*, noutbuffersize : UInt32, lpbytesreturned : UInt32*, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.device_io_control.unsafe_as(Proc(UInt32, Void*, UInt32, Void*, UInt32, UInt32*, OVERLAPPED*, HRESULT)).call(dwiocontrolcode, lpinbuffer, ninbuffersize, lpoutbuffer, noutbuffersize, lpbytesreturned, lpoverlapped)
+  end
+  def set_num_channel_groups(dwchannelgroups : UInt32) : HRESULT
+    @lpVtbl.value.set_num_channel_groups.unsafe_as(Proc(UInt32, HRESULT)).call(dwchannelgroups)
+  end
+  def get_num_channel_groups(pdwchannelgroups : UInt32*) : HRESULT
+    @lpVtbl.value.get_num_channel_groups.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwchannelgroups)
+  end
+  def activate(factive : LibC::BOOL) : HRESULT
+    @lpVtbl.value.activate.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(factive)
+  end
+  def set_channel_priority(dwchannelgroup : UInt32, dwchannel : UInt32, dwpriority : UInt32) : HRESULT
+    @lpVtbl.value.set_channel_priority.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(dwchannelgroup, dwchannel, dwpriority)
+  end
+  def get_channel_priority(dwchannelgroup : UInt32, dwchannel : UInt32, pdwpriority : UInt32*) : HRESULT
+    @lpVtbl.value.get_channel_priority.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(dwchannelgroup, dwchannel, pdwpriority)
+  end
+  def set_direct_sound(pdirectsound : IDirectSound, pdirectsoundbuffer : IDirectSoundBuffer) : HRESULT
+    @lpVtbl.value.set_direct_sound.unsafe_as(Proc(IDirectSound, IDirectSoundBuffer, HRESULT)).call(pdirectsound, pdirectsoundbuffer)
+  end
+  def get_format(pwaveformatex : WAVEFORMATEX*, pdwwaveformatexsize : UInt32*, pdwbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_format.unsafe_as(Proc(WAVEFORMATEX*, UInt32*, UInt32*, HRESULT)).call(pwaveformatex, pdwwaveformatexsize, pdwbuffersize)
+  end
+end
+struct LibWin32::IDirectMusicThru
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def thru_channel(dwsourcechannelgroup : UInt32, dwsourcechannel : UInt32, dwdestinationchannelgroup : UInt32, dwdestinationchannel : UInt32, pdestinationport : IDirectMusicPort) : HRESULT
+    @lpVtbl.value.thru_channel.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, IDirectMusicPort, HRESULT)).call(dwsourcechannelgroup, dwsourcechannel, dwdestinationchannelgroup, dwdestinationchannel, pdestinationport)
+  end
+end
+struct LibWin32::IDirectMusicSynth
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def open(pportparams : DMUS_PORTPARAMS8*) : HRESULT
+    @lpVtbl.value.open.unsafe_as(Proc(DMUS_PORTPARAMS8*, HRESULT)).call(pportparams)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_num_channel_groups(dwgroups : UInt32) : HRESULT
+    @lpVtbl.value.set_num_channel_groups.unsafe_as(Proc(UInt32, HRESULT)).call(dwgroups)
+  end
+  def download(phdownload : LibC::HANDLE*, pvdata : Void*, pbfree : Int32*) : HRESULT
+    @lpVtbl.value.download.unsafe_as(Proc(LibC::HANDLE*, Void*, Int32*, HRESULT)).call(phdownload, pvdata, pbfree)
+  end
+  def unload(hdownload : LibC::HANDLE, lpfreehandle : LibC::IntPtrT, huserdata : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.unload.unsafe_as(Proc(LibC::HANDLE, LibC::IntPtrT, LibC::HANDLE, HRESULT)).call(hdownload, lpfreehandle, huserdata)
+  end
+  def play_buffer(rt : Int64, pbbuffer : UInt8*, cbbuffer : UInt32) : HRESULT
+    @lpVtbl.value.play_buffer.unsafe_as(Proc(Int64, UInt8*, UInt32, HRESULT)).call(rt, pbbuffer, cbbuffer)
+  end
+  def get_running_stats(pstats : DMUS_SYNTHSTATS*) : HRESULT
+    @lpVtbl.value.get_running_stats.unsafe_as(Proc(DMUS_SYNTHSTATS*, HRESULT)).call(pstats)
+  end
+  def get_port_caps(pcaps : DMUS_PORTCAPS*) : HRESULT
+    @lpVtbl.value.get_port_caps.unsafe_as(Proc(DMUS_PORTCAPS*, HRESULT)).call(pcaps)
+  end
+  def set_master_clock(pclock : IReferenceClock) : HRESULT
+    @lpVtbl.value.set_master_clock.unsafe_as(Proc(IReferenceClock, HRESULT)).call(pclock)
+  end
+  def get_latency_clock(ppclock : IReferenceClock*) : HRESULT
+    @lpVtbl.value.get_latency_clock.unsafe_as(Proc(IReferenceClock*, HRESULT)).call(ppclock)
+  end
+  def activate(fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.activate.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fenable)
+  end
+  def set_synth_sink(psynthsink : IDirectMusicSynthSink) : HRESULT
+    @lpVtbl.value.set_synth_sink.unsafe_as(Proc(IDirectMusicSynthSink, HRESULT)).call(psynthsink)
+  end
+  def render(pbuffer : Int16*, dwlength : UInt32, llposition : Int64) : HRESULT
+    @lpVtbl.value.render.unsafe_as(Proc(Int16*, UInt32, Int64, HRESULT)).call(pbuffer, dwlength, llposition)
+  end
+  def set_channel_priority(dwchannelgroup : UInt32, dwchannel : UInt32, dwpriority : UInt32) : HRESULT
+    @lpVtbl.value.set_channel_priority.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(dwchannelgroup, dwchannel, dwpriority)
+  end
+  def get_channel_priority(dwchannelgroup : UInt32, dwchannel : UInt32, pdwpriority : UInt32*) : HRESULT
+    @lpVtbl.value.get_channel_priority.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(dwchannelgroup, dwchannel, pdwpriority)
+  end
+  def get_format(pwaveformatex : WAVEFORMATEX*, pdwwaveformatexsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_format.unsafe_as(Proc(WAVEFORMATEX*, UInt32*, HRESULT)).call(pwaveformatex, pdwwaveformatexsize)
+  end
+  def get_append(pdwappend : UInt32*) : HRESULT
+    @lpVtbl.value.get_append.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwappend)
+  end
+end
+struct LibWin32::IDirectMusicSynth8
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def open(pportparams : DMUS_PORTPARAMS8*) : HRESULT
+    @lpVtbl.value.open.unsafe_as(Proc(DMUS_PORTPARAMS8*, HRESULT)).call(pportparams)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_num_channel_groups(dwgroups : UInt32) : HRESULT
+    @lpVtbl.value.set_num_channel_groups.unsafe_as(Proc(UInt32, HRESULT)).call(dwgroups)
+  end
+  def download(phdownload : LibC::HANDLE*, pvdata : Void*, pbfree : Int32*) : HRESULT
+    @lpVtbl.value.download.unsafe_as(Proc(LibC::HANDLE*, Void*, Int32*, HRESULT)).call(phdownload, pvdata, pbfree)
+  end
+  def unload(hdownload : LibC::HANDLE, lpfreehandle : LibC::IntPtrT, huserdata : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.unload.unsafe_as(Proc(LibC::HANDLE, LibC::IntPtrT, LibC::HANDLE, HRESULT)).call(hdownload, lpfreehandle, huserdata)
+  end
+  def play_buffer(rt : Int64, pbbuffer : UInt8*, cbbuffer : UInt32) : HRESULT
+    @lpVtbl.value.play_buffer.unsafe_as(Proc(Int64, UInt8*, UInt32, HRESULT)).call(rt, pbbuffer, cbbuffer)
+  end
+  def get_running_stats(pstats : DMUS_SYNTHSTATS*) : HRESULT
+    @lpVtbl.value.get_running_stats.unsafe_as(Proc(DMUS_SYNTHSTATS*, HRESULT)).call(pstats)
+  end
+  def get_port_caps(pcaps : DMUS_PORTCAPS*) : HRESULT
+    @lpVtbl.value.get_port_caps.unsafe_as(Proc(DMUS_PORTCAPS*, HRESULT)).call(pcaps)
+  end
+  def set_master_clock(pclock : IReferenceClock) : HRESULT
+    @lpVtbl.value.set_master_clock.unsafe_as(Proc(IReferenceClock, HRESULT)).call(pclock)
+  end
+  def get_latency_clock(ppclock : IReferenceClock*) : HRESULT
+    @lpVtbl.value.get_latency_clock.unsafe_as(Proc(IReferenceClock*, HRESULT)).call(ppclock)
+  end
+  def activate(fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.activate.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fenable)
+  end
+  def set_synth_sink(psynthsink : IDirectMusicSynthSink) : HRESULT
+    @lpVtbl.value.set_synth_sink.unsafe_as(Proc(IDirectMusicSynthSink, HRESULT)).call(psynthsink)
+  end
+  def render(pbuffer : Int16*, dwlength : UInt32, llposition : Int64) : HRESULT
+    @lpVtbl.value.render.unsafe_as(Proc(Int16*, UInt32, Int64, HRESULT)).call(pbuffer, dwlength, llposition)
+  end
+  def set_channel_priority(dwchannelgroup : UInt32, dwchannel : UInt32, dwpriority : UInt32) : HRESULT
+    @lpVtbl.value.set_channel_priority.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(dwchannelgroup, dwchannel, dwpriority)
+  end
+  def get_channel_priority(dwchannelgroup : UInt32, dwchannel : UInt32, pdwpriority : UInt32*) : HRESULT
+    @lpVtbl.value.get_channel_priority.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(dwchannelgroup, dwchannel, pdwpriority)
+  end
+  def get_format(pwaveformatex : WAVEFORMATEX*, pdwwaveformatexsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_format.unsafe_as(Proc(WAVEFORMATEX*, UInt32*, HRESULT)).call(pwaveformatex, pdwwaveformatexsize)
+  end
+  def get_append(pdwappend : UInt32*) : HRESULT
+    @lpVtbl.value.get_append.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwappend)
+  end
+  def play_voice(rt : Int64, dwvoiceid : UInt32, dwchannelgroup : UInt32, dwchannel : UInt32, dwdlid : UInt32, prpitch : Int32, vrvolume : Int32, stvoicestart : UInt64, stloopstart : UInt64, stloopend : UInt64) : HRESULT
+    @lpVtbl.value.play_voice.unsafe_as(Proc(Int64, UInt32, UInt32, UInt32, UInt32, Int32, Int32, UInt64, UInt64, UInt64, HRESULT)).call(rt, dwvoiceid, dwchannelgroup, dwchannel, dwdlid, prpitch, vrvolume, stvoicestart, stloopstart, stloopend)
+  end
+  def stop_voice(rt : Int64, dwvoiceid : UInt32) : HRESULT
+    @lpVtbl.value.stop_voice.unsafe_as(Proc(Int64, UInt32, HRESULT)).call(rt, dwvoiceid)
+  end
+  def get_voice_state(dwvoice : UInt32*, cbvoice : UInt32, dwvoicestate : DMUS_VOICE_STATE*) : HRESULT
+    @lpVtbl.value.get_voice_state.unsafe_as(Proc(UInt32*, UInt32, DMUS_VOICE_STATE*, HRESULT)).call(dwvoice, cbvoice, dwvoicestate)
+  end
+  def refresh(dwdownloadid : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(dwdownloadid, dwflags)
+  end
+  def assign_channel_to_buses(dwchannelgroup : UInt32, dwchannel : UInt32, pdwbuses : UInt32*, cbuses : UInt32) : HRESULT
+    @lpVtbl.value.assign_channel_to_buses.unsafe_as(Proc(UInt32, UInt32, UInt32*, UInt32, HRESULT)).call(dwchannelgroup, dwchannel, pdwbuses, cbuses)
+  end
+end
+struct LibWin32::IDirectMusicSynthSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def init(psynth : IDirectMusicSynth) : HRESULT
+    @lpVtbl.value.init.unsafe_as(Proc(IDirectMusicSynth, HRESULT)).call(psynth)
+  end
+  def set_master_clock(pclock : IReferenceClock) : HRESULT
+    @lpVtbl.value.set_master_clock.unsafe_as(Proc(IReferenceClock, HRESULT)).call(pclock)
+  end
+  def get_latency_clock(ppclock : IReferenceClock*) : HRESULT
+    @lpVtbl.value.get_latency_clock.unsafe_as(Proc(IReferenceClock*, HRESULT)).call(ppclock)
+  end
+  def activate(fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.activate.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fenable)
+  end
+  def sample_to_ref_time(llsampletime : Int64, prftime : Int64*) : HRESULT
+    @lpVtbl.value.sample_to_ref_time.unsafe_as(Proc(Int64, Int64*, HRESULT)).call(llsampletime, prftime)
+  end
+  def ref_time_to_sample(rftime : Int64, pllsampletime : Int64*) : HRESULT
+    @lpVtbl.value.ref_time_to_sample.unsafe_as(Proc(Int64, Int64*, HRESULT)).call(rftime, pllsampletime)
+  end
+  def set_direct_sound(pdirectsound : IDirectSound, pdirectsoundbuffer : IDirectSoundBuffer) : HRESULT
+    @lpVtbl.value.set_direct_sound.unsafe_as(Proc(IDirectSound, IDirectSoundBuffer, HRESULT)).call(pdirectsound, pdirectsoundbuffer)
+  end
+  def get_desired_buffer_size(pdwbuffersizeinsamples : UInt32*) : HRESULT
+    @lpVtbl.value.get_desired_buffer_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwbuffersizeinsamples)
+  end
 end

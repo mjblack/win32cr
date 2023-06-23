@@ -12,17 +12,17 @@ require "../../graphics/direct3d12.cr"
 lib LibWin32
 
   struct IHolographicCameraInteropVTbl
-    query_interface : Proc(IHolographicCameraInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IHolographicCameraInterop*, UInt32)
-    release : Proc(IHolographicCameraInterop*, UInt32)
-    get_iids : Proc(IHolographicCameraInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IHolographicCameraInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IHolographicCameraInterop*, TrustLevel*, HRESULT)
-    create_direct3_d12_back_buffer_resource : Proc(IHolographicCameraInterop*, ID3D12Device, D3D12_RESOURCE_DESC*, ID3D12Resource*, HRESULT)
-    create_direct3_d12_hardware_protected_back_buffer_resource : Proc(IHolographicCameraInterop*, ID3D12Device, D3D12_RESOURCE_DESC*, ID3D12ProtectedResourceSession, ID3D12Resource*, HRESULT)
-    acquire_direct3_d12_buffer_resource : Proc(IHolographicCameraInterop*, ID3D12Resource, ID3D12CommandQueue, HRESULT)
-    acquire_direct3_d12_buffer_resource_with_timeout : Proc(IHolographicCameraInterop*, ID3D12Resource, ID3D12CommandQueue, UInt64, HRESULT)
-    unacquire_direct3_d12_buffer_resource : Proc(IHolographicCameraInterop*, ID3D12Resource, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    create_direct3_d12_back_buffer_resource : UInt64
+    create_direct3_d12_hardware_protected_back_buffer_resource : UInt64
+    acquire_direct3_d12_buffer_resource : UInt64
+    acquire_direct3_d12_buffer_resource_with_timeout : UInt64
+    unacquire_direct3_d12_buffer_resource : UInt64
   end
 
   IHolographicCameraInterop_GUID = "7cc1f9c5-6d02-41fa-9500-e1809eb48eec"
@@ -32,14 +32,14 @@ lib LibWin32
   end
 
   struct IHolographicCameraRenderingParametersInteropVTbl
-    query_interface : Proc(IHolographicCameraRenderingParametersInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IHolographicCameraRenderingParametersInterop*, UInt32)
-    release : Proc(IHolographicCameraRenderingParametersInterop*, UInt32)
-    get_iids : Proc(IHolographicCameraRenderingParametersInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IHolographicCameraRenderingParametersInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IHolographicCameraRenderingParametersInterop*, TrustLevel*, HRESULT)
-    commit_direct3_d12_resource : Proc(IHolographicCameraRenderingParametersInterop*, ID3D12Resource, ID3D12Fence, UInt64, HRESULT)
-    commit_direct3_d12_resource_with_depth_data : Proc(IHolographicCameraRenderingParametersInterop*, ID3D12Resource, ID3D12Fence, UInt64, ID3D12Resource, ID3D12Fence, UInt64, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    commit_direct3_d12_resource : UInt64
+    commit_direct3_d12_resource_with_depth_data : UInt64
   end
 
   IHolographicCameraRenderingParametersInterop_GUID = "f75b68d6-d1fd-4707-aafd-fa6f4c0e3bf4"
@@ -49,17 +49,17 @@ lib LibWin32
   end
 
   struct IHolographicQuadLayerInteropVTbl
-    query_interface : Proc(IHolographicQuadLayerInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IHolographicQuadLayerInterop*, UInt32)
-    release : Proc(IHolographicQuadLayerInterop*, UInt32)
-    get_iids : Proc(IHolographicQuadLayerInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IHolographicQuadLayerInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IHolographicQuadLayerInterop*, TrustLevel*, HRESULT)
-    create_direct3_d12_content_buffer_resource : Proc(IHolographicQuadLayerInterop*, ID3D12Device, D3D12_RESOURCE_DESC*, ID3D12Resource*, HRESULT)
-    create_direct3_d12_hardware_protected_content_buffer_resource : Proc(IHolographicQuadLayerInterop*, ID3D12Device, D3D12_RESOURCE_DESC*, ID3D12ProtectedResourceSession, ID3D12Resource*, HRESULT)
-    acquire_direct3_d12_buffer_resource : Proc(IHolographicQuadLayerInterop*, ID3D12Resource, ID3D12CommandQueue, HRESULT)
-    acquire_direct3_d12_buffer_resource_with_timeout : Proc(IHolographicQuadLayerInterop*, ID3D12Resource, ID3D12CommandQueue, UInt64, HRESULT)
-    unacquire_direct3_d12_buffer_resource : Proc(IHolographicQuadLayerInterop*, ID3D12Resource, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    create_direct3_d12_content_buffer_resource : UInt64
+    create_direct3_d12_hardware_protected_content_buffer_resource : UInt64
+    acquire_direct3_d12_buffer_resource : UInt64
+    acquire_direct3_d12_buffer_resource_with_timeout : UInt64
+    unacquire_direct3_d12_buffer_resource : UInt64
   end
 
   IHolographicQuadLayerInterop_GUID = "cfa688f0-639e-4a47-83d7-6b7f5ebf7fed"
@@ -69,13 +69,13 @@ lib LibWin32
   end
 
   struct IHolographicQuadLayerUpdateParametersInteropVTbl
-    query_interface : Proc(IHolographicQuadLayerUpdateParametersInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IHolographicQuadLayerUpdateParametersInterop*, UInt32)
-    release : Proc(IHolographicQuadLayerUpdateParametersInterop*, UInt32)
-    get_iids : Proc(IHolographicQuadLayerUpdateParametersInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IHolographicQuadLayerUpdateParametersInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IHolographicQuadLayerUpdateParametersInterop*, TrustLevel*, HRESULT)
-    commit_direct3_d12_resource : Proc(IHolographicQuadLayerUpdateParametersInterop*, ID3D12Resource, ID3D12Fence, UInt64, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    commit_direct3_d12_resource : UInt64
   end
 
   IHolographicQuadLayerUpdateParametersInterop_GUID = "e5f549cd-c909-444f-8809-7cc18a9c8920"
@@ -84,4 +84,123 @@ lib LibWin32
     lpVtbl : IHolographicQuadLayerUpdateParametersInteropVTbl*
   end
 
+end
+struct LibWin32::IHolographicCameraInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def create_direct3_d12_back_buffer_resource(pdevice : ID3D12Device, ptexture2ddesc : D3D12_RESOURCE_DESC*, ppcreatedtexture2dresource : ID3D12Resource*) : HRESULT
+    @lpVtbl.value.create_direct3_d12_back_buffer_resource.unsafe_as(Proc(ID3D12Device, D3D12_RESOURCE_DESC*, ID3D12Resource*, HRESULT)).call(pdevice, ptexture2ddesc, ppcreatedtexture2dresource)
+  end
+  def create_direct3_d12_hardware_protected_back_buffer_resource(pdevice : ID3D12Device, ptexture2ddesc : D3D12_RESOURCE_DESC*, pprotectedresourcesession : ID3D12ProtectedResourceSession, ppcreatedtexture2dresource : ID3D12Resource*) : HRESULT
+    @lpVtbl.value.create_direct3_d12_hardware_protected_back_buffer_resource.unsafe_as(Proc(ID3D12Device, D3D12_RESOURCE_DESC*, ID3D12ProtectedResourceSession, ID3D12Resource*, HRESULT)).call(pdevice, ptexture2ddesc, pprotectedresourcesession, ppcreatedtexture2dresource)
+  end
+  def acquire_direct3_d12_buffer_resource(presourcetoacquire : ID3D12Resource, pcommandqueue : ID3D12CommandQueue) : HRESULT
+    @lpVtbl.value.acquire_direct3_d12_buffer_resource.unsafe_as(Proc(ID3D12Resource, ID3D12CommandQueue, HRESULT)).call(presourcetoacquire, pcommandqueue)
+  end
+  def acquire_direct3_d12_buffer_resource_with_timeout(presourcetoacquire : ID3D12Resource, pcommandqueue : ID3D12CommandQueue, duration : UInt64) : HRESULT
+    @lpVtbl.value.acquire_direct3_d12_buffer_resource_with_timeout.unsafe_as(Proc(ID3D12Resource, ID3D12CommandQueue, UInt64, HRESULT)).call(presourcetoacquire, pcommandqueue, duration)
+  end
+  def unacquire_direct3_d12_buffer_resource(presourcetounacquire : ID3D12Resource) : HRESULT
+    @lpVtbl.value.unacquire_direct3_d12_buffer_resource.unsafe_as(Proc(ID3D12Resource, HRESULT)).call(presourcetounacquire)
+  end
+end
+struct LibWin32::IHolographicCameraRenderingParametersInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def commit_direct3_d12_resource(pcolorresourcetocommit : ID3D12Resource, pcolorresourcefence : ID3D12Fence, colorresourcefencesignalvalue : UInt64) : HRESULT
+    @lpVtbl.value.commit_direct3_d12_resource.unsafe_as(Proc(ID3D12Resource, ID3D12Fence, UInt64, HRESULT)).call(pcolorresourcetocommit, pcolorresourcefence, colorresourcefencesignalvalue)
+  end
+  def commit_direct3_d12_resource_with_depth_data(pcolorresourcetocommit : ID3D12Resource, pcolorresourcefence : ID3D12Fence, colorresourcefencesignalvalue : UInt64, pdepthresourcetocommit : ID3D12Resource, pdepthresourcefence : ID3D12Fence, depthresourcefencesignalvalue : UInt64) : HRESULT
+    @lpVtbl.value.commit_direct3_d12_resource_with_depth_data.unsafe_as(Proc(ID3D12Resource, ID3D12Fence, UInt64, ID3D12Resource, ID3D12Fence, UInt64, HRESULT)).call(pcolorresourcetocommit, pcolorresourcefence, colorresourcefencesignalvalue, pdepthresourcetocommit, pdepthresourcefence, depthresourcefencesignalvalue)
+  end
+end
+struct LibWin32::IHolographicQuadLayerInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def create_direct3_d12_content_buffer_resource(pdevice : ID3D12Device, ptexture2ddesc : D3D12_RESOURCE_DESC*, pptexture2dresource : ID3D12Resource*) : HRESULT
+    @lpVtbl.value.create_direct3_d12_content_buffer_resource.unsafe_as(Proc(ID3D12Device, D3D12_RESOURCE_DESC*, ID3D12Resource*, HRESULT)).call(pdevice, ptexture2ddesc, pptexture2dresource)
+  end
+  def create_direct3_d12_hardware_protected_content_buffer_resource(pdevice : ID3D12Device, ptexture2ddesc : D3D12_RESOURCE_DESC*, pprotectedresourcesession : ID3D12ProtectedResourceSession, ppcreatedtexture2dresource : ID3D12Resource*) : HRESULT
+    @lpVtbl.value.create_direct3_d12_hardware_protected_content_buffer_resource.unsafe_as(Proc(ID3D12Device, D3D12_RESOURCE_DESC*, ID3D12ProtectedResourceSession, ID3D12Resource*, HRESULT)).call(pdevice, ptexture2ddesc, pprotectedresourcesession, ppcreatedtexture2dresource)
+  end
+  def acquire_direct3_d12_buffer_resource(presourcetoacquire : ID3D12Resource, pcommandqueue : ID3D12CommandQueue) : HRESULT
+    @lpVtbl.value.acquire_direct3_d12_buffer_resource.unsafe_as(Proc(ID3D12Resource, ID3D12CommandQueue, HRESULT)).call(presourcetoacquire, pcommandqueue)
+  end
+  def acquire_direct3_d12_buffer_resource_with_timeout(presourcetoacquire : ID3D12Resource, pcommandqueue : ID3D12CommandQueue, duration : UInt64) : HRESULT
+    @lpVtbl.value.acquire_direct3_d12_buffer_resource_with_timeout.unsafe_as(Proc(ID3D12Resource, ID3D12CommandQueue, UInt64, HRESULT)).call(presourcetoacquire, pcommandqueue, duration)
+  end
+  def unacquire_direct3_d12_buffer_resource(presourcetounacquire : ID3D12Resource) : HRESULT
+    @lpVtbl.value.unacquire_direct3_d12_buffer_resource.unsafe_as(Proc(ID3D12Resource, HRESULT)).call(presourcetounacquire)
+  end
+end
+struct LibWin32::IHolographicQuadLayerUpdateParametersInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def commit_direct3_d12_resource(pcolorresourcetocommit : ID3D12Resource, pcolorresourcefence : ID3D12Fence, colorresourcefencesignalvalue : UInt64) : HRESULT
+    @lpVtbl.value.commit_direct3_d12_resource.unsafe_as(Proc(ID3D12Resource, ID3D12Fence, UInt64, HRESULT)).call(pcolorresourcetocommit, pcolorresourcefence, colorresourcefencesignalvalue)
+  end
 end

@@ -2033,7 +2033,7 @@ lib LibWin32
   fun RpcServerUseProtseqIfExW(protseq : UInt16*, maxcalls : UInt32, ifspec : Void*, securitydescriptor : Void*, policy : RPC_POLICY*) : RPC_STATUS
 
   # Params # 
-  fun RpcServerYield
+  fun RpcServerYield : Void
 
   # Params # statsvector : RPC_STATS_VECTOR** [In]
   fun RpcMgmtStatsVectorFree(statsvector : RPC_STATS_VECTOR**) : RPC_STATUS
@@ -2054,7 +2054,7 @@ lib LibWin32
   fun RpcMgmtSetServerStackSize(threadstacksize : UInt32) : RPC_STATUS
 
   # Params # 
-  fun RpcSsDontSerializeContext
+  fun RpcSsDontSerializeContext : Void
 
   # Params # 
   fun RpcMgmtEnableIdleCleanup : RPC_STATUS
@@ -2162,7 +2162,7 @@ lib LibWin32
   fun RpcBindingServerFromClient(clientbinding : Void*, serverbinding : Void**) : RPC_STATUS
 
   # Params # exception : RPC_STATUS [In]
-  fun RpcRaiseException(exception : RPC_STATUS)
+  fun RpcRaiseException(exception : RPC_STATUS) : Void
 
   # Params # 
   fun RpcTestCancel : RPC_STATUS
@@ -2297,22 +2297,22 @@ lib LibWin32
   fun I_RpcReallocPipeBuffer(message : RPC_MESSAGE*, newsize : UInt32) : RPC_STATUS
 
   # Params # mutex : Void** [In]
-  fun I_RpcRequestMutex(mutex : Void**)
+  fun I_RpcRequestMutex(mutex : Void**) : Void
 
   # Params # mutex : Void* [In]
-  fun I_RpcClearMutex(mutex : Void*)
+  fun I_RpcClearMutex(mutex : Void*) : Void
 
   # Params # mutex : Void* [In]
-  fun I_RpcDeleteMutex(mutex : Void*)
+  fun I_RpcDeleteMutex(mutex : Void*) : Void
 
   # Params # size : UInt32 [In]
   fun I_RpcAllocate(size : UInt32) : Void*
 
   # Params # object : Void* [In]
-  fun I_RpcFree(object : Void*)
+  fun I_RpcFree(object : Void*) : Void
 
   # Params # milliseconds : UInt32 [In]
-  fun I_RpcPauseExecution(milliseconds : UInt32)
+  fun I_RpcPauseExecution(milliseconds : UInt32) : Void
 
   # Params # 
   fun I_RpcGetExtendedError : RPC_STATUS
@@ -2399,7 +2399,7 @@ lib LibWin32
   fun I_RpcBindingCreateNP(servername : UInt16*, servicename : UInt16*, networkoptions : UInt16*, binding : Void**) : RPC_STATUS
 
   # Params # 
-  fun I_RpcSsDontSerializeContext
+  fun I_RpcSsDontSerializeContext : Void
 
   # Params # pforwardfunction : RPC_FORWARD_FUNCTION* [In]
   fun I_RpcServerRegisterForwardFunction(pforwardfunction : RPC_FORWARD_FUNCTION*) : RPC_STATUS
@@ -2417,7 +2417,7 @@ lib LibWin32
   fun I_RpcServerInqRemoteConnAddress(binding : Void*, buffer : Void*, buffersize : UInt32*, addressformat : UInt32*) : RPC_STATUS
 
   # Params # 
-  fun I_RpcSessionStrictContextHandle
+  fun I_RpcSessionStrictContextHandle : Void
 
   # Params # 
   fun I_RpcTurnOnEEInfoPropagation : RPC_STATUS
@@ -2429,7 +2429,7 @@ lib LibWin32
   fun I_RpcMapWin32Status(status : RPC_STATUS) : Int32
 
   # Params # rpcstatus : RPC_STATUS [In],calloutstate : RDR_CALLOUT_STATE* [In],dllname : UInt16* [In]
-  fun I_RpcRecordCalloutFailure(rpcstatus : RPC_STATUS, calloutstate : RDR_CALLOUT_STATE*, dllname : UInt16*)
+  fun I_RpcRecordCalloutFailure(rpcstatus : RPC_STATUS, calloutstate : RDR_CALLOUT_STATE*, dllname : UInt16*) : Void
 
   # Params # 
   fun I_RpcMgmtEnableDedicatedThreadPool : RPC_STATUS
@@ -2672,7 +2672,7 @@ lib LibWin32
   fun RpcErrorAddRecord(errorinfo : RPC_EXTENDED_ERROR_INFO*) : RPC_STATUS
 
   # Params # 
-  fun RpcErrorClearInformation
+  fun RpcErrorClearInformation : Void
 
   # Params # clientbinding : Void* [In],impersonateonreturn : LibC::BOOL [In],reserved1 : Void* [In],pexpirationtime : LARGE_INTEGER* [In],reserved2 : LUID [In],reserved3 : UInt32 [In],reserved4 : Void* [In],pauthzclientcontext : Void** [In]
   fun RpcGetAuthorizationContextForClient(clientbinding : Void*, impersonateonreturn : LibC::BOOL, reserved1 : Void*, pexpirationtime : LARGE_INTEGER*, reserved2 : LUID, reserved3 : UInt32, reserved4 : Void*, pauthzclientcontext : Void**) : RPC_STATUS
@@ -2723,7 +2723,7 @@ lib LibWin32
   fun I_RpcNsSendReceive(message : RPC_MESSAGE*, handle : Void**) : RPC_STATUS
 
   # Params # message : RPC_MESSAGE* [In],status : RPC_STATUS [In]
-  fun I_RpcNsRaiseException(message : RPC_MESSAGE*, status : RPC_STATUS)
+  fun I_RpcNsRaiseException(message : RPC_MESSAGE*, status : RPC_STATUS) : Void
 
   # Params # message : RPC_MESSAGE* [In]
   fun I_RpcReBindBuffer(message : RPC_MESSAGE*) : RPC_STATUS
@@ -2732,22 +2732,22 @@ lib LibWin32
   fun NDRCContextBinding(ccontext : LibC::IntPtrT) : Void*
 
   # Params # ccontext : LibC::IntPtrT [In],pbuff : Void* [In]
-  fun NDRCContextMarshall(ccontext : LibC::IntPtrT, pbuff : Void*)
+  fun NDRCContextMarshall(ccontext : LibC::IntPtrT, pbuff : Void*) : Void
 
   # Params # pccontext : LibC::IntPtrT* [In],hbinding : Void* [In],pbuff : Void* [In],datarepresentation : UInt32 [In]
-  fun NDRCContextUnmarshall(pccontext : LibC::IntPtrT*, hbinding : Void*, pbuff : Void*, datarepresentation : UInt32)
+  fun NDRCContextUnmarshall(pccontext : LibC::IntPtrT*, hbinding : Void*, pbuff : Void*, datarepresentation : UInt32) : Void
 
   # Params # ccontext : NDR_SCONTEXT_1* [In],pbuff : Void* [In],userrundownin : NDR_RUNDOWN [In]
-  fun NDRSContextMarshall(ccontext : NDR_SCONTEXT_1*, pbuff : Void*, userrundownin : NDR_RUNDOWN)
+  fun NDRSContextMarshall(ccontext : NDR_SCONTEXT_1*, pbuff : Void*, userrundownin : NDR_RUNDOWN) : Void
 
   # Params # pbuff : Void* [In],datarepresentation : UInt32 [In]
   fun NDRSContextUnmarshall(pbuff : Void*, datarepresentation : UInt32) : NDR_SCONTEXT_1*
 
   # Params # bindinghandle : Void* [In],ccontext : NDR_SCONTEXT_1* [In],pbuff : Void* [In],userrundownin : NDR_RUNDOWN [In]
-  fun NDRSContextMarshallEx(bindinghandle : Void*, ccontext : NDR_SCONTEXT_1*, pbuff : Void*, userrundownin : NDR_RUNDOWN)
+  fun NDRSContextMarshallEx(bindinghandle : Void*, ccontext : NDR_SCONTEXT_1*, pbuff : Void*, userrundownin : NDR_RUNDOWN) : Void
 
   # Params # bindinghandle : Void* [In],ccontext : NDR_SCONTEXT_1* [In],pbuff : Void* [In],userrundownin : NDR_RUNDOWN [In],ctxguard : Void* [In],flags : UInt32 [In]
-  fun NDRSContextMarshall2(bindinghandle : Void*, ccontext : NDR_SCONTEXT_1*, pbuff : Void*, userrundownin : NDR_RUNDOWN, ctxguard : Void*, flags : UInt32)
+  fun NDRSContextMarshall2(bindinghandle : Void*, ccontext : NDR_SCONTEXT_1*, pbuff : Void*, userrundownin : NDR_RUNDOWN, ctxguard : Void*, flags : UInt32) : Void
 
   # Params # bindinghandle : Void* [In],pbuff : Void* [In],datarepresentation : UInt32 [In]
   fun NDRSContextUnmarshallEx(bindinghandle : Void*, pbuff : Void*, datarepresentation : UInt32) : NDR_SCONTEXT_1*
@@ -2756,10 +2756,10 @@ lib LibWin32
   fun NDRSContextUnmarshall2(bindinghandle : Void*, pbuff : Void*, datarepresentation : UInt32, ctxguard : Void*, flags : UInt32) : NDR_SCONTEXT_1*
 
   # Params # contexthandle : Void** [In]
-  fun RpcSsDestroyClientContext(contexthandle : Void**)
+  fun RpcSsDestroyClientContext(contexthandle : Void**) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],formatchar : UInt8 [In]
-  fun NdrSimpleTypeMarshall(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, formatchar : UInt8)
+  fun NdrSimpleTypeMarshall(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, formatchar : UInt8) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
   fun NdrPointerMarshall(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : UInt8*
@@ -2816,28 +2816,28 @@ lib LibWin32
   fun NdrInterfacePointerMarshall(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : UInt8*
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],contexthandle : LibC::IntPtrT [In],fcheck : Int32 [In]
-  fun NdrClientContextMarshall(pstubmsg : MIDL_STUB_MESSAGE*, contexthandle : LibC::IntPtrT, fcheck : Int32)
+  fun NdrClientContextMarshall(pstubmsg : MIDL_STUB_MESSAGE*, contexthandle : LibC::IntPtrT, fcheck : Int32) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],contexthandle : NDR_SCONTEXT_1* [In],rundownroutine : NDR_RUNDOWN [In]
-  fun NdrServerContextMarshall(pstubmsg : MIDL_STUB_MESSAGE*, contexthandle : NDR_SCONTEXT_1*, rundownroutine : NDR_RUNDOWN)
+  fun NdrServerContextMarshall(pstubmsg : MIDL_STUB_MESSAGE*, contexthandle : NDR_SCONTEXT_1*, rundownroutine : NDR_RUNDOWN) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],contexthandle : NDR_SCONTEXT_1* [In],rundownroutine : NDR_RUNDOWN [In],pformat : UInt8* [In]
-  fun NdrServerContextNewMarshall(pstubmsg : MIDL_STUB_MESSAGE*, contexthandle : NDR_SCONTEXT_1*, rundownroutine : NDR_RUNDOWN, pformat : UInt8*)
+  fun NdrServerContextNewMarshall(pstubmsg : MIDL_STUB_MESSAGE*, contexthandle : NDR_SCONTEXT_1*, rundownroutine : NDR_RUNDOWN, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],formatchar : UInt8 [In]
-  fun NdrSimpleTypeUnmarshall(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, formatchar : UInt8)
+  fun NdrSimpleTypeUnmarshall(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, formatchar : UInt8) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],ppmemory : UInt8** [In],pformat : UInt8* [In],fmustalloc : UInt8 [In]
   fun NdrRangeUnmarshall(pstubmsg : MIDL_STUB_MESSAGE*, ppmemory : UInt8**, pformat : UInt8*, fmustalloc : UInt8) : UInt8*
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : Void* [In],cachesize : UInt32 [In],flags : UInt32 [In]
-  fun NdrCorrelationInitialize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : Void*, cachesize : UInt32, flags : UInt32)
+  fun NdrCorrelationInitialize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : Void*, cachesize : UInt32, flags : UInt32) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In]
-  fun NdrCorrelationPass(pstubmsg : MIDL_STUB_MESSAGE*)
+  fun NdrCorrelationPass(pstubmsg : MIDL_STUB_MESSAGE*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In]
-  fun NdrCorrelationFree(pstubmsg : MIDL_STUB_MESSAGE*)
+  fun NdrCorrelationFree(pstubmsg : MIDL_STUB_MESSAGE*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],ppmemory : UInt8** [In],pformat : UInt8* [In],fmustalloc : UInt8 [In]
   fun NdrPointerUnmarshall(pstubmsg : MIDL_STUB_MESSAGE*, ppmemory : UInt8**, pformat : UInt8*, fmustalloc : UInt8) : UInt8*
@@ -2894,7 +2894,7 @@ lib LibWin32
   fun NdrInterfacePointerUnmarshall(pstubmsg : MIDL_STUB_MESSAGE*, ppmemory : UInt8**, pformat : UInt8*, fmustalloc : UInt8) : UInt8*
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pcontexthandle : LibC::IntPtrT* [In],bindhandle : Void* [In]
-  fun NdrClientContextUnmarshall(pstubmsg : MIDL_STUB_MESSAGE*, pcontexthandle : LibC::IntPtrT*, bindhandle : Void*)
+  fun NdrClientContextUnmarshall(pstubmsg : MIDL_STUB_MESSAGE*, pcontexthandle : LibC::IntPtrT*, bindhandle : Void*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In]
   fun NdrServerContextUnmarshall(pstubmsg : MIDL_STUB_MESSAGE*) : NDR_SCONTEXT_1*
@@ -2906,61 +2906,61 @@ lib LibWin32
   fun NdrServerContextNewUnmarshall(pstubmsg : MIDL_STUB_MESSAGE*, pformat : UInt8*) : NDR_SCONTEXT_1*
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrPointerBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrPointerBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrSimpleStructBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrSimpleStructBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrConformantStructBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrConformantStructBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrConformantVaryingStructBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrConformantVaryingStructBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrComplexStructBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrComplexStructBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrFixedArrayBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrFixedArrayBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrConformantArrayBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrConformantArrayBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrConformantVaryingArrayBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrConformantVaryingArrayBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrVaryingArrayBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrVaryingArrayBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrComplexArrayBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrComplexArrayBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrConformantStringBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrConformantStringBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrNonConformantStringBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrNonConformantStringBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrEncapsulatedUnionBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrEncapsulatedUnionBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrNonEncapsulatedUnionBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrNonEncapsulatedUnionBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrByteCountPointerBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrByteCountPointerBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrXmitOrRepAsBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrXmitOrRepAsBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrUserMarshalBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrUserMarshalBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrInterfacePointerBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrInterfacePointerBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrContextHandleSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrContextHandleSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pformat : UInt8* [In]
   fun NdrPointerMemorySize(pstubmsg : MIDL_STUB_MESSAGE*, pformat : UInt8*) : UInt32
@@ -3014,73 +3014,73 @@ lib LibWin32
   fun NdrInterfacePointerMemorySize(pstubmsg : MIDL_STUB_MESSAGE*, pformat : UInt8*) : UInt32
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrPointerFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrPointerFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrSimpleStructFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrSimpleStructFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrConformantStructFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrConformantStructFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrConformantVaryingStructFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrConformantVaryingStructFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrComplexStructFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrComplexStructFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrFixedArrayFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrFixedArrayFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrConformantArrayFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrConformantArrayFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrConformantVaryingArrayFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrConformantVaryingArrayFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrVaryingArrayFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrVaryingArrayFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrComplexArrayFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrComplexArrayFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrEncapsulatedUnionFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrEncapsulatedUnionFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrNonEncapsulatedUnionFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrNonEncapsulatedUnionFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrByteCountPointerFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrByteCountPointerFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrXmitOrRepAsFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrXmitOrRepAsFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrUserMarshalFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrUserMarshalFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : UInt8* [In],pformat : UInt8* [In]
-  fun NdrInterfacePointerFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*)
+  fun NdrInterfacePointerFree(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : UInt8*, pformat : UInt8*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pformat : UInt8* [In],numberparams : Int32 [In]
-  fun NdrConvert2(pstubmsg : MIDL_STUB_MESSAGE*, pformat : UInt8*, numberparams : Int32)
+  fun NdrConvert2(pstubmsg : MIDL_STUB_MESSAGE*, pformat : UInt8*, numberparams : Int32) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pformat : UInt8* [In]
-  fun NdrConvert(pstubmsg : MIDL_STUB_MESSAGE*, pformat : UInt8*)
+  fun NdrConvert(pstubmsg : MIDL_STUB_MESSAGE*, pformat : UInt8*) : Void
 
   # Params # pflags : UInt32* [In],pbuffer : UInt8* [In],formatchar : UInt8 [In]
   fun NdrUserMarshalSimpleTypeConvert(pflags : UInt32*, pbuffer : UInt8*, formatchar : UInt8) : UInt8*
 
   # Params # prpcmsg : RPC_MESSAGE* [In],pstubmsg : MIDL_STUB_MESSAGE* [In],pstubdescriptor : MIDL_STUB_DESC* [In],procnum : UInt32 [In]
-  fun NdrClientInitializeNew(prpcmsg : RPC_MESSAGE*, pstubmsg : MIDL_STUB_MESSAGE*, pstubdescriptor : MIDL_STUB_DESC*, procnum : UInt32)
+  fun NdrClientInitializeNew(prpcmsg : RPC_MESSAGE*, pstubmsg : MIDL_STUB_MESSAGE*, pstubdescriptor : MIDL_STUB_DESC*, procnum : UInt32) : Void
 
   # Params # prpcmsg : RPC_MESSAGE* [In],pstubmsg : MIDL_STUB_MESSAGE* [In],pstubdescriptor : MIDL_STUB_DESC* [In]
   fun NdrServerInitializeNew(prpcmsg : RPC_MESSAGE*, pstubmsg : MIDL_STUB_MESSAGE*, pstubdescriptor : MIDL_STUB_DESC*) : UInt8*
 
   # Params # prpcmsg : RPC_MESSAGE* [In],pstubmsg : MIDL_STUB_MESSAGE* [In],pstubdescriptor : MIDL_STUB_DESC* [In],requestedbuffersize : UInt32 [In]
-  fun NdrServerInitializePartial(prpcmsg : RPC_MESSAGE*, pstubmsg : MIDL_STUB_MESSAGE*, pstubdescriptor : MIDL_STUB_DESC*, requestedbuffersize : UInt32)
+  fun NdrServerInitializePartial(prpcmsg : RPC_MESSAGE*, pstubmsg : MIDL_STUB_MESSAGE*, pstubdescriptor : MIDL_STUB_DESC*, requestedbuffersize : UInt32) : Void
 
   # Params # prpcmsg : RPC_MESSAGE* [In],pstubmsg : MIDL_STUB_MESSAGE* [In],pstubdescriptor : MIDL_STUB_DESC* [In],procnum : UInt32 [In]
-  fun NdrClientInitialize(prpcmsg : RPC_MESSAGE*, pstubmsg : MIDL_STUB_MESSAGE*, pstubdescriptor : MIDL_STUB_DESC*, procnum : UInt32)
+  fun NdrClientInitialize(prpcmsg : RPC_MESSAGE*, pstubmsg : MIDL_STUB_MESSAGE*, pstubdescriptor : MIDL_STUB_DESC*, procnum : UInt32) : Void
 
   # Params # prpcmsg : RPC_MESSAGE* [In],pstubmsg : MIDL_STUB_MESSAGE* [In],pstubdescriptor : MIDL_STUB_DESC* [In]
   fun NdrServerInitialize(prpcmsg : RPC_MESSAGE*, pstubmsg : MIDL_STUB_MESSAGE*, pstubdescriptor : MIDL_STUB_DESC*) : UInt8*
@@ -3089,7 +3089,7 @@ lib LibWin32
   fun NdrServerInitializeUnmarshall(pstubmsg : MIDL_STUB_MESSAGE*, pstubdescriptor : MIDL_STUB_DESC*, prpcmsg : RPC_MESSAGE*) : UInt8*
 
   # Params # prpcmsg : RPC_MESSAGE* [In],pstubmsg : MIDL_STUB_MESSAGE* [In]
-  fun NdrServerInitializeMarshall(prpcmsg : RPC_MESSAGE*, pstubmsg : MIDL_STUB_MESSAGE*)
+  fun NdrServerInitializeMarshall(prpcmsg : RPC_MESSAGE*, pstubmsg : MIDL_STUB_MESSAGE*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],bufferlength : UInt32 [In],handle : Void* [In]
   fun NdrGetBuffer(pstubmsg : MIDL_STUB_MESSAGE*, bufferlength : UInt32, handle : Void*) : UInt8*
@@ -3104,7 +3104,7 @@ lib LibWin32
   fun NdrNsSendReceive(pstubmsg : MIDL_STUB_MESSAGE*, pbufferend : UInt8*, pautohandle : Void**) : UInt8*
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In]
-  fun NdrFreeBuffer(pstubmsg : MIDL_STUB_MESSAGE*)
+  fun NdrFreeBuffer(pstubmsg : MIDL_STUB_MESSAGE*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pversion : RPC_VERSION* [In]
   fun NdrGetDcomProtocolVersion(pstubmsg : MIDL_STUB_MESSAGE*, pversion : RPC_VERSION*) : HRESULT
@@ -3119,7 +3119,7 @@ lib LibWin32
   fun NdrDcomAsyncClientCall(pstubdescriptor : MIDL_STUB_DESC*, pformat : UInt8*) : CLIENT_CALL_RETURN
 
   # Params # prpcmsg : RPC_MESSAGE* [In]
-  fun NdrAsyncServerCall(prpcmsg : RPC_MESSAGE*)
+  fun NdrAsyncServerCall(prpcmsg : RPC_MESSAGE*) : Void
 
   # Params # pthis : IRpcStubBuffer [In],pchannel : IRpcChannelBuffer [In],prpcmsg : RPC_MESSAGE* [In],pdwstubphase : UInt32* [In]
   fun NdrDcomAsyncStubCall(pthis : IRpcStubBuffer, pchannel : IRpcChannelBuffer, prpcmsg : RPC_MESSAGE*, pdwstubphase : UInt32*) : Int32
@@ -3128,7 +3128,7 @@ lib LibWin32
   fun NdrStubCall2(pthis : Void*, pchannel : Void*, prpcmsg : RPC_MESSAGE*, pdwstubphase : UInt32*) : Int32
 
   # Params # prpcmsg : RPC_MESSAGE* [In]
-  fun NdrServerCall2(prpcmsg : RPC_MESSAGE*)
+  fun NdrServerCall2(prpcmsg : RPC_MESSAGE*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pcommstatus : UInt32* [In],pfaultstatus : UInt32* [In],status : RPC_STATUS [In]
   fun NdrMapCommAndFaultStatus(pstubmsg : MIDL_STUB_MESSAGE*, pcommstatus : UInt32*, pfaultstatus : UInt32*, status : RPC_STATUS) : RPC_STATUS
@@ -3137,25 +3137,25 @@ lib LibWin32
   fun RpcSsAllocate(size : LibC::UINT_PTR) : Void*
 
   # Params # 
-  fun RpcSsDisableAllocate
+  fun RpcSsDisableAllocate : Void
 
   # Params # 
-  fun RpcSsEnableAllocate
+  fun RpcSsEnableAllocate : Void
 
   # Params # nodetofree : Void* [In]
-  fun RpcSsFree(nodetofree : Void*)
+  fun RpcSsFree(nodetofree : Void*) : Void
 
   # Params # 
   fun RpcSsGetThreadHandle : Void*
 
   # Params # clientalloc : RPC_CLIENT_ALLOC [In],clientfree : RPC_CLIENT_FREE [In]
-  fun RpcSsSetClientAllocFree(clientalloc : RPC_CLIENT_ALLOC, clientfree : RPC_CLIENT_FREE)
+  fun RpcSsSetClientAllocFree(clientalloc : RPC_CLIENT_ALLOC, clientfree : RPC_CLIENT_FREE) : Void
 
   # Params # id : Void* [In]
-  fun RpcSsSetThreadHandle(id : Void*)
+  fun RpcSsSetThreadHandle(id : Void*) : Void
 
   # Params # clientalloc : RPC_CLIENT_ALLOC [In],clientfree : RPC_CLIENT_FREE [In],oldclientalloc : RPC_CLIENT_ALLOC* [In],oldclientfree : RPC_CLIENT_FREE* [In]
-  fun RpcSsSwapClientAllocFree(clientalloc : RPC_CLIENT_ALLOC, clientfree : RPC_CLIENT_FREE, oldclientalloc : RPC_CLIENT_ALLOC*, oldclientfree : RPC_CLIENT_FREE*)
+  fun RpcSsSwapClientAllocFree(clientalloc : RPC_CLIENT_ALLOC, clientfree : RPC_CLIENT_FREE, oldclientalloc : RPC_CLIENT_ALLOC*, oldclientfree : RPC_CLIENT_FREE*) : Void
 
   # Params # size : LibC::UINT_PTR [In],pstatus : RPC_STATUS* [In]
   fun RpcSmAllocate(size : LibC::UINT_PTR, pstatus : RPC_STATUS*) : Void*
@@ -3188,43 +3188,43 @@ lib LibWin32
   fun RpcSmSwapClientAllocFree(clientalloc : RPC_CLIENT_ALLOC, clientfree : RPC_CLIENT_FREE, oldclientalloc : RPC_CLIENT_ALLOC*, oldclientfree : RPC_CLIENT_FREE*) : RPC_STATUS
 
   # Params # pmessage : MIDL_STUB_MESSAGE* [In]
-  fun NdrRpcSsEnableAllocate(pmessage : MIDL_STUB_MESSAGE*)
+  fun NdrRpcSsEnableAllocate(pmessage : MIDL_STUB_MESSAGE*) : Void
 
   # Params # pmessage : MIDL_STUB_MESSAGE* [In]
-  fun NdrRpcSsDisableAllocate(pmessage : MIDL_STUB_MESSAGE*)
+  fun NdrRpcSsDisableAllocate(pmessage : MIDL_STUB_MESSAGE*) : Void
 
   # Params # pmessage : MIDL_STUB_MESSAGE* [In]
-  fun NdrRpcSmSetClientToOsf(pmessage : MIDL_STUB_MESSAGE*)
+  fun NdrRpcSmSetClientToOsf(pmessage : MIDL_STUB_MESSAGE*) : Void
 
   # Params # size : LibC::UINT_PTR [In]
   fun NdrRpcSmClientAllocate(size : LibC::UINT_PTR) : Void*
 
   # Params # nodetofree : Void* [In]
-  fun NdrRpcSmClientFree(nodetofree : Void*)
+  fun NdrRpcSmClientFree(nodetofree : Void*) : Void
 
   # Params # size : LibC::UINT_PTR [In]
   fun NdrRpcSsDefaultAllocate(size : LibC::UINT_PTR) : Void*
 
   # Params # nodetofree : Void* [In]
-  fun NdrRpcSsDefaultFree(nodetofree : Void*)
+  fun NdrRpcSsDefaultFree(nodetofree : Void*) : Void
 
   # Params # numberofpointers : UInt32 [In],xlatside : XLAT_SIDE [In]
   fun NdrFullPointerXlatInit(numberofpointers : UInt32, xlatside : XLAT_SIDE) : FULL_PTR_XLAT_TABLES*
 
   # Params # pxlattables : FULL_PTR_XLAT_TABLES* [In]
-  fun NdrFullPointerXlatFree(pxlattables : FULL_PTR_XLAT_TABLES*)
+  fun NdrFullPointerXlatFree(pxlattables : FULL_PTR_XLAT_TABLES*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],len : LibC::UINT_PTR [In]
   fun NdrAllocate(pstubmsg : MIDL_STUB_MESSAGE*, len : LibC::UINT_PTR) : Void*
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pformat : UInt8* [In],argaddr : Void* [In]
-  fun NdrClearOutParameters(pstubmsg : MIDL_STUB_MESSAGE*, pformat : UInt8*, argaddr : Void*)
+  fun NdrClearOutParameters(pstubmsg : MIDL_STUB_MESSAGE*, pformat : UInt8*, argaddr : Void*) : Void
 
   # Params # size : LibC::UINT_PTR [In]
   fun NdrOleAllocate(size : LibC::UINT_PTR) : Void*
 
   # Params # nodetofree : Void* [In]
-  fun NdrOleFree(nodetofree : Void*)
+  fun NdrOleFree(nodetofree : Void*) : Void
 
   # Params # pflags : UInt32* [In],informationlevel : UInt32 [In],pmarshalinfo : NDR_USER_MARSHAL_INFO* [In]
   fun NdrGetUserMarshalInfo(pflags : UInt32*, informationlevel : UInt32, pmarshalinfo : NDR_USER_MARSHAL_INFO*) : RPC_STATUS
@@ -3242,10 +3242,10 @@ lib LibWin32
   fun Ndr64DcomAsyncClientCall(pproxyinfo : MIDL_STUBLESS_PROXY_INFO*, nprocnum : UInt32, preturnvalue : Void*) : CLIENT_CALL_RETURN
 
   # Params # prpcmsg : RPC_MESSAGE* [In]
-  fun Ndr64AsyncServerCall64(prpcmsg : RPC_MESSAGE*)
+  fun Ndr64AsyncServerCall64(prpcmsg : RPC_MESSAGE*) : Void
 
   # Params # prpcmsg : RPC_MESSAGE* [In]
-  fun Ndr64AsyncServerCallAll(prpcmsg : RPC_MESSAGE*)
+  fun Ndr64AsyncServerCallAll(prpcmsg : RPC_MESSAGE*) : Void
 
   # Params # pthis : IRpcStubBuffer [In],pchannel : IRpcChannelBuffer [In],prpcmsg : RPC_MESSAGE* [In],pdwstubphase : UInt32* [In]
   fun Ndr64DcomAsyncStubCall(pthis : IRpcStubBuffer, pchannel : IRpcChannelBuffer, prpcmsg : RPC_MESSAGE*, pdwstubphase : UInt32*) : Int32
@@ -3254,25 +3254,25 @@ lib LibWin32
   fun NdrStubCall3(pthis : Void*, pchannel : Void*, prpcmsg : RPC_MESSAGE*, pdwstubphase : UInt32*) : Int32
 
   # Params # prpcmsg : RPC_MESSAGE* [In]
-  fun NdrServerCallAll(prpcmsg : RPC_MESSAGE*)
+  fun NdrServerCallAll(prpcmsg : RPC_MESSAGE*) : Void
 
   # Params # prpcmsg : RPC_MESSAGE* [In]
-  fun NdrServerCallNdr64(prpcmsg : RPC_MESSAGE*)
+  fun NdrServerCallNdr64(prpcmsg : RPC_MESSAGE*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : Void* [In]
-  fun NdrPartialIgnoreClientMarshall(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : Void*)
+  fun NdrPartialIgnoreClientMarshall(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : Void*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],ppmemory : Void** [In]
-  fun NdrPartialIgnoreServerUnmarshall(pstubmsg : MIDL_STUB_MESSAGE*, ppmemory : Void**)
+  fun NdrPartialIgnoreServerUnmarshall(pstubmsg : MIDL_STUB_MESSAGE*, ppmemory : Void**) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],pmemory : Void* [In]
-  fun NdrPartialIgnoreClientBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : Void*)
+  fun NdrPartialIgnoreClientBufferSize(pstubmsg : MIDL_STUB_MESSAGE*, pmemory : Void*) : Void
 
   # Params # pstubmsg : MIDL_STUB_MESSAGE* [In],ppmemory : Void** [In],pformat : UInt8* [In]
-  fun NdrPartialIgnoreServerInitialize(pstubmsg : MIDL_STUB_MESSAGE*, ppmemory : Void**, pformat : UInt8*)
+  fun NdrPartialIgnoreServerInitialize(pstubmsg : MIDL_STUB_MESSAGE*, ppmemory : Void**, pformat : UInt8*) : Void
 
   # Params # asynchandle : Void* [In],pbuffer : Void* [In]
-  fun RpcUserFree(asynchandle : Void*, pbuffer : Void*)
+  fun RpcUserFree(asynchandle : Void*, pbuffer : Void*) : Void
 
   # Params # userstate : Void* [In],allocfn : MIDL_ES_ALLOC [In],writefn : MIDL_ES_WRITE [In],phandle : Void** [In]
   fun MesEncodeIncrementalHandleCreate(userstate : Void*, allocfn : MIDL_ES_ALLOC, writefn : MIDL_ES_WRITE, phandle : Void**) : RPC_STATUS
@@ -3305,34 +3305,34 @@ lib LibWin32
   fun NdrMesSimpleTypeAlignSize(param0 : Void*) : LibC::UINT_PTR
 
   # Params # handle : Void* [In],pobject : Void* [In],size : Int16 [In]
-  fun NdrMesSimpleTypeDecode(handle : Void*, pobject : Void*, size : Int16)
+  fun NdrMesSimpleTypeDecode(handle : Void*, pobject : Void*, size : Int16) : Void
 
   # Params # handle : Void* [In],pstubdesc : MIDL_STUB_DESC* [In],pobject : Void* [In],size : Int16 [In]
-  fun NdrMesSimpleTypeEncode(handle : Void*, pstubdesc : MIDL_STUB_DESC*, pobject : Void*, size : Int16)
+  fun NdrMesSimpleTypeEncode(handle : Void*, pstubdesc : MIDL_STUB_DESC*, pobject : Void*, size : Int16) : Void
 
   # Params # handle : Void* [In],pstubdesc : MIDL_STUB_DESC* [In],pformatstring : UInt8* [In],pobject : Void* [In]
   fun NdrMesTypeAlignSize(handle : Void*, pstubdesc : MIDL_STUB_DESC*, pformatstring : UInt8*, pobject : Void*) : LibC::UINT_PTR
 
   # Params # handle : Void* [In],pstubdesc : MIDL_STUB_DESC* [In],pformatstring : UInt8* [In],pobject : Void* [In]
-  fun NdrMesTypeEncode(handle : Void*, pstubdesc : MIDL_STUB_DESC*, pformatstring : UInt8*, pobject : Void*)
+  fun NdrMesTypeEncode(handle : Void*, pstubdesc : MIDL_STUB_DESC*, pformatstring : UInt8*, pobject : Void*) : Void
 
   # Params # handle : Void* [In],pstubdesc : MIDL_STUB_DESC* [In],pformatstring : UInt8* [In],pobject : Void* [In]
-  fun NdrMesTypeDecode(handle : Void*, pstubdesc : MIDL_STUB_DESC*, pformatstring : UInt8*, pobject : Void*)
+  fun NdrMesTypeDecode(handle : Void*, pstubdesc : MIDL_STUB_DESC*, pformatstring : UInt8*, pobject : Void*) : Void
 
   # Params # handle : Void* [In],ppicklinginfo : MIDL_TYPE_PICKLING_INFO* [In],pstubdesc : MIDL_STUB_DESC* [In],pformatstring : UInt8* [In],pobject : Void* [In]
   fun NdrMesTypeAlignSize2(handle : Void*, ppicklinginfo : MIDL_TYPE_PICKLING_INFO*, pstubdesc : MIDL_STUB_DESC*, pformatstring : UInt8*, pobject : Void*) : LibC::UINT_PTR
 
   # Params # handle : Void* [In],ppicklinginfo : MIDL_TYPE_PICKLING_INFO* [In],pstubdesc : MIDL_STUB_DESC* [In],pformatstring : UInt8* [In],pobject : Void* [In]
-  fun NdrMesTypeEncode2(handle : Void*, ppicklinginfo : MIDL_TYPE_PICKLING_INFO*, pstubdesc : MIDL_STUB_DESC*, pformatstring : UInt8*, pobject : Void*)
+  fun NdrMesTypeEncode2(handle : Void*, ppicklinginfo : MIDL_TYPE_PICKLING_INFO*, pstubdesc : MIDL_STUB_DESC*, pformatstring : UInt8*, pobject : Void*) : Void
 
   # Params # handle : Void* [In],ppicklinginfo : MIDL_TYPE_PICKLING_INFO* [In],pstubdesc : MIDL_STUB_DESC* [In],pformatstring : UInt8* [In],pobject : Void* [In]
-  fun NdrMesTypeDecode2(handle : Void*, ppicklinginfo : MIDL_TYPE_PICKLING_INFO*, pstubdesc : MIDL_STUB_DESC*, pformatstring : UInt8*, pobject : Void*)
+  fun NdrMesTypeDecode2(handle : Void*, ppicklinginfo : MIDL_TYPE_PICKLING_INFO*, pstubdesc : MIDL_STUB_DESC*, pformatstring : UInt8*, pobject : Void*) : Void
 
   # Params # handle : Void* [In],ppicklinginfo : MIDL_TYPE_PICKLING_INFO* [In],pstubdesc : MIDL_STUB_DESC* [In],pformatstring : UInt8* [In],pobject : Void* [In]
-  fun NdrMesTypeFree2(handle : Void*, ppicklinginfo : MIDL_TYPE_PICKLING_INFO*, pstubdesc : MIDL_STUB_DESC*, pformatstring : UInt8*, pobject : Void*)
+  fun NdrMesTypeFree2(handle : Void*, ppicklinginfo : MIDL_TYPE_PICKLING_INFO*, pstubdesc : MIDL_STUB_DESC*, pformatstring : UInt8*, pobject : Void*) : Void
 
   # Params # handle : Void* [In],pstubdesc : MIDL_STUB_DESC* [In],pformatstring : UInt8* [In]
-  fun NdrMesProcEncodeDecode(handle : Void*, pstubdesc : MIDL_STUB_DESC*, pformatstring : UInt8*)
+  fun NdrMesProcEncodeDecode(handle : Void*, pstubdesc : MIDL_STUB_DESC*, pformatstring : UInt8*) : Void
 
   # Params # handle : Void* [In],pstubdesc : MIDL_STUB_DESC* [In],pformatstring : UInt8* [In]
   fun NdrMesProcEncodeDecode2(handle : Void*, pstubdesc : MIDL_STUB_DESC*, pformatstring : UInt8*) : CLIENT_CALL_RETURN
@@ -3341,22 +3341,22 @@ lib LibWin32
   fun NdrMesTypeAlignSize3(handle : Void*, ppicklinginfo : MIDL_TYPE_PICKLING_INFO*, pproxyinfo : MIDL_STUBLESS_PROXY_INFO*, arrtypeoffset : UInt32**, ntypeindex : UInt32, pobject : Void*) : LibC::UINT_PTR
 
   # Params # handle : Void* [In],ppicklinginfo : MIDL_TYPE_PICKLING_INFO* [In],pproxyinfo : MIDL_STUBLESS_PROXY_INFO* [In],arrtypeoffset : UInt32** [In],ntypeindex : UInt32 [In],pobject : Void* [In]
-  fun NdrMesTypeEncode3(handle : Void*, ppicklinginfo : MIDL_TYPE_PICKLING_INFO*, pproxyinfo : MIDL_STUBLESS_PROXY_INFO*, arrtypeoffset : UInt32**, ntypeindex : UInt32, pobject : Void*)
+  fun NdrMesTypeEncode3(handle : Void*, ppicklinginfo : MIDL_TYPE_PICKLING_INFO*, pproxyinfo : MIDL_STUBLESS_PROXY_INFO*, arrtypeoffset : UInt32**, ntypeindex : UInt32, pobject : Void*) : Void
 
   # Params # handle : Void* [In],ppicklinginfo : MIDL_TYPE_PICKLING_INFO* [In],pproxyinfo : MIDL_STUBLESS_PROXY_INFO* [In],arrtypeoffset : UInt32** [In],ntypeindex : UInt32 [In],pobject : Void* [In]
-  fun NdrMesTypeDecode3(handle : Void*, ppicklinginfo : MIDL_TYPE_PICKLING_INFO*, pproxyinfo : MIDL_STUBLESS_PROXY_INFO*, arrtypeoffset : UInt32**, ntypeindex : UInt32, pobject : Void*)
+  fun NdrMesTypeDecode3(handle : Void*, ppicklinginfo : MIDL_TYPE_PICKLING_INFO*, pproxyinfo : MIDL_STUBLESS_PROXY_INFO*, arrtypeoffset : UInt32**, ntypeindex : UInt32, pobject : Void*) : Void
 
   # Params # handle : Void* [In],ppicklinginfo : MIDL_TYPE_PICKLING_INFO* [In],pproxyinfo : MIDL_STUBLESS_PROXY_INFO* [In],arrtypeoffset : UInt32** [In],ntypeindex : UInt32 [In],pobject : Void* [In]
-  fun NdrMesTypeFree3(handle : Void*, ppicklinginfo : MIDL_TYPE_PICKLING_INFO*, pproxyinfo : MIDL_STUBLESS_PROXY_INFO*, arrtypeoffset : UInt32**, ntypeindex : UInt32, pobject : Void*)
+  fun NdrMesTypeFree3(handle : Void*, ppicklinginfo : MIDL_TYPE_PICKLING_INFO*, pproxyinfo : MIDL_STUBLESS_PROXY_INFO*, arrtypeoffset : UInt32**, ntypeindex : UInt32, pobject : Void*) : Void
 
   # Params # handle : Void* [In],pproxyinfo : MIDL_STUBLESS_PROXY_INFO* [In],nprocnum : UInt32 [In],preturnvalue : Void* [In]
   fun NdrMesProcEncodeDecode3(handle : Void*, pproxyinfo : MIDL_STUBLESS_PROXY_INFO*, nprocnum : UInt32, preturnvalue : Void*) : CLIENT_CALL_RETURN
 
   # Params # handle : Void* [In],pproxyinfo : MIDL_STUBLESS_PROXY_INFO* [In],pobject : Void* [In],size : Int16 [In]
-  fun NdrMesSimpleTypeDecodeAll(handle : Void*, pproxyinfo : MIDL_STUBLESS_PROXY_INFO*, pobject : Void*, size : Int16)
+  fun NdrMesSimpleTypeDecodeAll(handle : Void*, pproxyinfo : MIDL_STUBLESS_PROXY_INFO*, pobject : Void*, size : Int16) : Void
 
   # Params # handle : Void* [In],pproxyinfo : MIDL_STUBLESS_PROXY_INFO* [In],pobject : Void* [In],size : Int16 [In]
-  fun NdrMesSimpleTypeEncodeAll(handle : Void*, pproxyinfo : MIDL_STUBLESS_PROXY_INFO*, pobject : Void*, size : Int16)
+  fun NdrMesSimpleTypeEncodeAll(handle : Void*, pproxyinfo : MIDL_STUBLESS_PROXY_INFO*, pobject : Void*, size : Int16) : Void
 
   # Params # handle : Void* [In],pproxyinfo : MIDL_STUBLESS_PROXY_INFO* [In]
   fun NdrMesSimpleTypeAlignSizeAll(handle : Void*, pproxyinfo : MIDL_STUBLESS_PROXY_INFO*) : LibC::UINT_PTR

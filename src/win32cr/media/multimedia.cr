@@ -5889,20 +5889,20 @@ lib LibWin32
 
 
   struct IAVIStreamVTbl
-    query_interface : Proc(IAVIStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAVIStream*, UInt32)
-    release : Proc(IAVIStream*, UInt32)
-    create : Proc(IAVIStream*, LPARAM, LPARAM, HRESULT)
-    info : Proc(IAVIStream*, AVISTREAMINFOW*, Int32, HRESULT)
-    find_sample : Proc(IAVIStream*, Int32, Int32, Int32)
-    read_format : Proc(IAVIStream*, Int32, Void*, Int32*, HRESULT)
-    set_format : Proc(IAVIStream*, Int32, Void*, Int32, HRESULT)
-    read : Proc(IAVIStream*, Int32, Int32, Void*, Int32, Int32*, Int32*, HRESULT)
-    write : Proc(IAVIStream*, Int32, Int32, Void*, Int32, UInt32, Int32*, Int32*, HRESULT)
-    delete : Proc(IAVIStream*, Int32, Int32, HRESULT)
-    read_data : Proc(IAVIStream*, UInt32, Void*, Int32*, HRESULT)
-    write_data : Proc(IAVIStream*, UInt32, Void*, Int32, HRESULT)
-    set_info : Proc(IAVIStream*, AVISTREAMINFOW*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create : UInt64
+    info : UInt64
+    find_sample : UInt64
+    read_format : UInt64
+    set_format : UInt64
+    read : UInt64
+    write : UInt64
+    delete : UInt64
+    read_data : UInt64
+    write_data : UInt64
+    set_info : UInt64
   end
 
   IAVIStream_GUID = "00020021-0000-0000-c000-000000000046"
@@ -5912,11 +5912,11 @@ lib LibWin32
   end
 
   struct IAVIStreamingVTbl
-    query_interface : Proc(IAVIStreaming*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAVIStreaming*, UInt32)
-    release : Proc(IAVIStreaming*, UInt32)
-    rbegin : Proc(IAVIStreaming*, Int32, Int32, Int32, HRESULT)
-    rend : Proc(IAVIStreaming*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_ : UInt64
+    end_ : UInt64
   end
 
   IAVIStreaming_GUID = "00020022-0000-0000-c000-000000000046"
@@ -5926,14 +5926,14 @@ lib LibWin32
   end
 
   struct IAVIEditStreamVTbl
-    query_interface : Proc(IAVIEditStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAVIEditStream*, UInt32)
-    release : Proc(IAVIEditStream*, UInt32)
-    cut : Proc(IAVIEditStream*, Int32*, Int32*, IAVIStream*, HRESULT)
-    copy : Proc(IAVIEditStream*, Int32*, Int32*, IAVIStream*, HRESULT)
-    paste : Proc(IAVIEditStream*, Int32*, Int32*, IAVIStream, Int32, Int32, HRESULT)
-    clone : Proc(IAVIEditStream*, IAVIStream*, HRESULT)
-    set_info : Proc(IAVIEditStream*, AVISTREAMINFOW*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    cut : UInt64
+    copy : UInt64
+    paste : UInt64
+    clone : UInt64
+    set_info : UInt64
   end
 
   IAVIEditStream_GUID = "00020024-0000-0000-c000-000000000046"
@@ -5943,16 +5943,16 @@ lib LibWin32
   end
 
   struct IAVIPersistFileVTbl
-    query_interface : Proc(IAVIPersistFile*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAVIPersistFile*, UInt32)
-    release : Proc(IAVIPersistFile*, UInt32)
-    get_class_id : Proc(IAVIPersistFile*, Guid*, HRESULT)
-    is_dirty : Proc(IAVIPersistFile*, HRESULT)
-    load : Proc(IAVIPersistFile*, LibC::LPWSTR, UInt32, HRESULT)
-    save : Proc(IAVIPersistFile*, LibC::LPWSTR, LibC::BOOL, HRESULT)
-    save_completed : Proc(IAVIPersistFile*, LibC::LPWSTR, HRESULT)
-    get_cur_file : Proc(IAVIPersistFile*, LibC::LPWSTR*, HRESULT)
-    reserved1 : Proc(IAVIPersistFile*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_class_id : UInt64
+    is_dirty : UInt64
+    load : UInt64
+    save : UInt64
+    save_completed : UInt64
+    get_cur_file : UInt64
+    reserved1 : UInt64
   end
 
   IAVIPersistFile_GUID = "00020025-0000-0000-c000-000000000046"
@@ -5962,16 +5962,16 @@ lib LibWin32
   end
 
   struct IAVIFileVTbl
-    query_interface : Proc(IAVIFile*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAVIFile*, UInt32)
-    release : Proc(IAVIFile*, UInt32)
-    info : Proc(IAVIFile*, AVIFILEINFOW*, Int32, HRESULT)
-    get_stream : Proc(IAVIFile*, IAVIStream*, UInt32, Int32, HRESULT)
-    create_stream : Proc(IAVIFile*, IAVIStream*, AVISTREAMINFOW*, HRESULT)
-    write_data : Proc(IAVIFile*, UInt32, Void*, Int32, HRESULT)
-    read_data : Proc(IAVIFile*, UInt32, Void*, Int32*, HRESULT)
-    end_record : Proc(IAVIFile*, HRESULT)
-    delete_stream : Proc(IAVIFile*, UInt32, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    info : UInt64
+    get_stream : UInt64
+    create_stream : UInt64
+    write_data : UInt64
+    read_data : UInt64
+    end_record : UInt64
+    delete_stream : UInt64
   end
 
   IAVIFile_GUID = "00020020-0000-0000-c000-000000000046"
@@ -5981,13 +5981,13 @@ lib LibWin32
   end
 
   struct IGetFrameVTbl
-    query_interface : Proc(IGetFrame*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGetFrame*, UInt32)
-    release : Proc(IGetFrame*, UInt32)
-    get_frame : Proc(IGetFrame*, Int32, Void**)
-    rbegin : Proc(IGetFrame*, Int32, Int32, Int32, HRESULT)
-    rend : Proc(IGetFrame*, HRESULT)
-    set_format : Proc(IGetFrame*, BITMAPINFOHEADER*, Void*, Int32, Int32, Int32, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_frame : UInt64
+    begin_ : UInt64
+    end_ : UInt64
+    set_format : UInt64
   end
 
   IGetFrame_GUID = "00020023-0000-0000-c000-000000000046"
@@ -6229,13 +6229,13 @@ lib LibWin32
   fun ICSeqCompressFrameStart(pc : COMPVARS*, lpbiin : BITMAPINFO*) : LibC::BOOL
 
   # Params # pc : COMPVARS* [In]
-  fun ICSeqCompressFrameEnd(pc : COMPVARS*)
+  fun ICSeqCompressFrameEnd(pc : COMPVARS*) : Void
 
   # Params # pc : COMPVARS* [In],uiflags : UInt32 [In],lpbits : Void* [In],pfkey : LibC::BOOL* [In],plsize : Int32* [In]
   fun ICSeqCompressFrame(pc : COMPVARS*, uiflags : UInt32, lpbits : Void*, pfkey : LibC::BOOL*, plsize : Int32*) : Void*
 
   # Params # pc : COMPVARS* [In]
-  fun ICCompressorFree(pc : COMPVARS*)
+  fun ICCompressorFree(pc : COMPVARS*) : Void
 
   # Params # 
   fun DrawDibOpen : LibC::IntPtrT
@@ -6280,10 +6280,10 @@ lib LibWin32
   fun DrawDibProfileDisplay(lpbi : BITMAPINFOHEADER*) : LRESULT
 
   # Params # 
-  fun AVIFileInit
+  fun AVIFileInit : Void
 
   # Params # 
-  fun AVIFileExit
+  fun AVIFileExit : Void
 
   # Params # pfile : IAVIFile [In]
   fun AVIFileAddRef(pfile : IAVIFile) : UInt32
@@ -6496,14 +6496,188 @@ lib LibWin32
   fun mmTaskCreate(lpfn : LPTASKCALLBACK, lph : LibC::HANDLE*, dwinst : LibC::UINT_PTR) : UInt32
 
   # Params # h : UInt32 [In]
-  fun mmTaskBlock(h : UInt32)
+  fun mmTaskBlock(h : UInt32) : Void
 
   # Params # h : UInt32 [In]
   fun mmTaskSignal(h : UInt32) : LibC::BOOL
 
   # Params # 
-  fun mmTaskYield
+  fun mmTaskYield : Void
 
   # Params # 
   fun mmGetCurrentTask : UInt32
+end
+struct LibWin32::IAVIStream
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create(lparam1 : LPARAM, lparam2 : LPARAM) : HRESULT
+    @lpVtbl.value.create.unsafe_as(Proc(LPARAM, LPARAM, HRESULT)).call(lparam1, lparam2)
+  end
+  def info(psi : AVISTREAMINFOW*, lsize : Int32) : HRESULT
+    @lpVtbl.value.info.unsafe_as(Proc(AVISTREAMINFOW*, Int32, HRESULT)).call(psi, lsize)
+  end
+  def find_sample(lpos : Int32, lflags : Int32) : Int32
+    @lpVtbl.value.find_sample.unsafe_as(Proc(Int32, Int32, Int32)).call(lpos, lflags)
+  end
+  def read_format(lpos : Int32, lpformat : Void*, lpcbformat : Int32*) : HRESULT
+    @lpVtbl.value.read_format.unsafe_as(Proc(Int32, Void*, Int32*, HRESULT)).call(lpos, lpformat, lpcbformat)
+  end
+  def set_format(lpos : Int32, lpformat : Void*, cbformat : Int32) : HRESULT
+    @lpVtbl.value.set_format.unsafe_as(Proc(Int32, Void*, Int32, HRESULT)).call(lpos, lpformat, cbformat)
+  end
+  def read(lstart : Int32, lsamples : Int32, lpbuffer : Void*, cbbuffer : Int32, plbytes : Int32*, plsamples : Int32*) : HRESULT
+    @lpVtbl.value.read.unsafe_as(Proc(Int32, Int32, Void*, Int32, Int32*, Int32*, HRESULT)).call(lstart, lsamples, lpbuffer, cbbuffer, plbytes, plsamples)
+  end
+  def write(lstart : Int32, lsamples : Int32, lpbuffer : Void*, cbbuffer : Int32, dwflags : UInt32, plsampwritten : Int32*, plbyteswritten : Int32*) : HRESULT
+    @lpVtbl.value.write.unsafe_as(Proc(Int32, Int32, Void*, Int32, UInt32, Int32*, Int32*, HRESULT)).call(lstart, lsamples, lpbuffer, cbbuffer, dwflags, plsampwritten, plbyteswritten)
+  end
+  def delete(lstart : Int32, lsamples : Int32) : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(Int32, Int32, HRESULT)).call(lstart, lsamples)
+  end
+  def read_data(fcc : UInt32, lp : Void*, lpcb : Int32*) : HRESULT
+    @lpVtbl.value.read_data.unsafe_as(Proc(UInt32, Void*, Int32*, HRESULT)).call(fcc, lp, lpcb)
+  end
+  def write_data(fcc : UInt32, lp : Void*, cb : Int32) : HRESULT
+    @lpVtbl.value.write_data.unsafe_as(Proc(UInt32, Void*, Int32, HRESULT)).call(fcc, lp, cb)
+  end
+  def set_info(lpinfo : AVISTREAMINFOW*, cbinfo : Int32) : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(AVISTREAMINFOW*, Int32, HRESULT)).call(lpinfo, cbinfo)
+  end
+end
+struct LibWin32::IAVIStreaming
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_(lstart : Int32, lend : Int32, lrate : Int32) : HRESULT
+    @lpVtbl.value.begin_.unsafe_as(Proc(Int32, Int32, Int32, HRESULT)).call(lstart, lend, lrate)
+  end
+  def end_ : HRESULT
+    @lpVtbl.value.end_.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IAVIEditStream
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def cut(plstart : Int32*, pllength : Int32*, ppresult : IAVIStream*) : HRESULT
+    @lpVtbl.value.cut.unsafe_as(Proc(Int32*, Int32*, IAVIStream*, HRESULT)).call(plstart, pllength, ppresult)
+  end
+  def copy(plstart : Int32*, pllength : Int32*, ppresult : IAVIStream*) : HRESULT
+    @lpVtbl.value.copy.unsafe_as(Proc(Int32*, Int32*, IAVIStream*, HRESULT)).call(plstart, pllength, ppresult)
+  end
+  def paste(plpos : Int32*, pllength : Int32*, pstream : IAVIStream, lstart : Int32, lend : Int32) : HRESULT
+    @lpVtbl.value.paste.unsafe_as(Proc(Int32*, Int32*, IAVIStream, Int32, Int32, HRESULT)).call(plpos, pllength, pstream, lstart, lend)
+  end
+  def clone(ppresult : IAVIStream*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IAVIStream*, HRESULT)).call(ppresult)
+  end
+  def set_info(lpinfo : AVISTREAMINFOW*, cbinfo : Int32) : HRESULT
+    @lpVtbl.value.set_info.unsafe_as(Proc(AVISTREAMINFOW*, Int32, HRESULT)).call(lpinfo, cbinfo)
+  end
+end
+struct LibWin32::IAVIPersistFile
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_class_id(pclassid : Guid*) : HRESULT
+    @lpVtbl.value.get_class_id.unsafe_as(Proc(Guid*, HRESULT)).call(pclassid)
+  end
+  def is_dirty : HRESULT
+    @lpVtbl.value.is_dirty.unsafe_as(Proc(HRESULT)).call
+  end
+  def load(pszfilename : LibC::LPWSTR, dwmode : UInt32) : HRESULT
+    @lpVtbl.value.load.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(pszfilename, dwmode)
+  end
+  def save(pszfilename : LibC::LPWSTR, fremember : LibC::BOOL) : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, HRESULT)).call(pszfilename, fremember)
+  end
+  def save_completed(pszfilename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.save_completed.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszfilename)
+  end
+  def get_cur_file(ppszfilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_cur_file.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszfilename)
+  end
+  def reserved1 : HRESULT
+    @lpVtbl.value.reserved1.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IAVIFile
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def info(pfi : AVIFILEINFOW*, lsize : Int32) : HRESULT
+    @lpVtbl.value.info.unsafe_as(Proc(AVIFILEINFOW*, Int32, HRESULT)).call(pfi, lsize)
+  end
+  def get_stream(ppstream : IAVIStream*, fcctype : UInt32, lparam : Int32) : HRESULT
+    @lpVtbl.value.get_stream.unsafe_as(Proc(IAVIStream*, UInt32, Int32, HRESULT)).call(ppstream, fcctype, lparam)
+  end
+  def create_stream(ppstream : IAVIStream*, psi : AVISTREAMINFOW*) : HRESULT
+    @lpVtbl.value.create_stream.unsafe_as(Proc(IAVIStream*, AVISTREAMINFOW*, HRESULT)).call(ppstream, psi)
+  end
+  def write_data(ckid : UInt32, lpdata : Void*, cbdata : Int32) : HRESULT
+    @lpVtbl.value.write_data.unsafe_as(Proc(UInt32, Void*, Int32, HRESULT)).call(ckid, lpdata, cbdata)
+  end
+  def read_data(ckid : UInt32, lpdata : Void*, lpcbdata : Int32*) : HRESULT
+    @lpVtbl.value.read_data.unsafe_as(Proc(UInt32, Void*, Int32*, HRESULT)).call(ckid, lpdata, lpcbdata)
+  end
+  def end_record : HRESULT
+    @lpVtbl.value.end_record.unsafe_as(Proc(HRESULT)).call
+  end
+  def delete_stream(fcctype : UInt32, lparam : Int32) : HRESULT
+    @lpVtbl.value.delete_stream.unsafe_as(Proc(UInt32, Int32, HRESULT)).call(fcctype, lparam)
+  end
+end
+struct LibWin32::IGetFrame
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_frame(lpos : Int32) : Void*
+    @lpVtbl.value.get_frame.unsafe_as(Proc(Int32, Void**)).call(lpos)
+  end
+  def begin_(lstart : Int32, lend : Int32, lrate : Int32) : HRESULT
+    @lpVtbl.value.begin_.unsafe_as(Proc(Int32, Int32, Int32, HRESULT)).call(lstart, lend, lrate)
+  end
+  def end_ : HRESULT
+    @lpVtbl.value.end_.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_format(lpbi : BITMAPINFOHEADER*, lpbits : Void*, x : Int32, y : Int32, dx : Int32, dy : Int32) : HRESULT
+    @lpVtbl.value.set_format.unsafe_as(Proc(BITMAPINFOHEADER*, Void*, Int32, Int32, Int32, Int32, HRESULT)).call(lpbi, lpbits, x, y, dx, dy)
+  end
 end

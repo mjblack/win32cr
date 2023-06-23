@@ -506,8 +506,8 @@ lib LibWin32
   fun NPFormatNetworkName(lpremotename : LibC::LPWSTR, lpformattedname : Char*, lpnlength : UInt32*, dwflags : NETWORK_NAME_FORMAT_FLAGS, dwavecharperline : UInt32) : UInt32
 
   # Params # err : UInt32 [In],lperror : PSTR [In],lpproviders : PSTR [In]
-  fun WNetSetLastErrorA(err : UInt32, lperror : PSTR, lpproviders : PSTR)
+  fun WNetSetLastErrorA(err : UInt32, lperror : PSTR, lpproviders : PSTR) : Void
 
   # Params # err : UInt32 [In],lperror : LibC::LPWSTR [In],lpproviders : LibC::LPWSTR [In]
-  fun WNetSetLastErrorW(err : UInt32, lperror : LibC::LPWSTR, lpproviders : LibC::LPWSTR)
+  fun WNetSetLastErrorW(err : UInt32, lperror : LibC::LPWSTR, lpproviders : LibC::LPWSTR) : Void
 end

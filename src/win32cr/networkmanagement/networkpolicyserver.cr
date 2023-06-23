@@ -775,22 +775,22 @@ lib LibWin32
 
 
   struct ISdoMachineVTbl
-    query_interface : Proc(ISdoMachine*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISdoMachine*, UInt32)
-    release : Proc(ISdoMachine*, UInt32)
-    get_type_info_count : Proc(ISdoMachine*, UInt32*, HRESULT)
-    get_type_info : Proc(ISdoMachine*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISdoMachine*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISdoMachine*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    attach : Proc(ISdoMachine*, UInt8*, HRESULT)
-    get_dictionary_sdo : Proc(ISdoMachine*, IUnknown*, HRESULT)
-    get_service_sdo : Proc(ISdoMachine*, IASDATASTORE, UInt8*, IUnknown*, HRESULT)
-    get_user_sdo : Proc(ISdoMachine*, IASDATASTORE, UInt8*, IUnknown*, HRESULT)
-    get_os_type : Proc(ISdoMachine*, IASOSTYPE*, HRESULT)
-    get_domain_type : Proc(ISdoMachine*, IASDOMAINTYPE*, HRESULT)
-    is_directory_available : Proc(ISdoMachine*, Int16*, HRESULT)
-    get_attached_computer : Proc(ISdoMachine*, UInt8**, HRESULT)
-    get_sdo_schema : Proc(ISdoMachine*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    attach : UInt64
+    get_dictionary_sdo : UInt64
+    get_service_sdo : UInt64
+    get_user_sdo : UInt64
+    get_os_type : UInt64
+    get_domain_type : UInt64
+    is_directory_available : UInt64
+    get_attached_computer : UInt64
+    get_sdo_schema : UInt64
   end
 
   ISdoMachine_GUID = "479f6e75-49a2-11d2-8eca-00c04fc2f519"
@@ -800,27 +800,27 @@ lib LibWin32
   end
 
   struct ISdoMachine2VTbl
-    query_interface : Proc(ISdoMachine2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISdoMachine2*, UInt32)
-    release : Proc(ISdoMachine2*, UInt32)
-    get_type_info_count : Proc(ISdoMachine2*, UInt32*, HRESULT)
-    get_type_info : Proc(ISdoMachine2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISdoMachine2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISdoMachine2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    attach : Proc(ISdoMachine2*, UInt8*, HRESULT)
-    get_dictionary_sdo : Proc(ISdoMachine2*, IUnknown*, HRESULT)
-    get_service_sdo : Proc(ISdoMachine2*, IASDATASTORE, UInt8*, IUnknown*, HRESULT)
-    get_user_sdo : Proc(ISdoMachine2*, IASDATASTORE, UInt8*, IUnknown*, HRESULT)
-    get_os_type : Proc(ISdoMachine2*, IASOSTYPE*, HRESULT)
-    get_domain_type : Proc(ISdoMachine2*, IASDOMAINTYPE*, HRESULT)
-    is_directory_available : Proc(ISdoMachine2*, Int16*, HRESULT)
-    get_attached_computer : Proc(ISdoMachine2*, UInt8**, HRESULT)
-    get_sdo_schema : Proc(ISdoMachine2*, IUnknown*, HRESULT)
-    get_templates_sdo : Proc(ISdoMachine2*, UInt8*, IUnknown*, HRESULT)
-    enable_templates : Proc(ISdoMachine2*, HRESULT)
-    sync_config_against_templates : Proc(ISdoMachine2*, UInt8*, IUnknown*, IUnknown*, Int16, HRESULT)
-    import_remote_templates : Proc(ISdoMachine2*, IUnknown, UInt8*, HRESULT)
-    reload : Proc(ISdoMachine2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    attach : UInt64
+    get_dictionary_sdo : UInt64
+    get_service_sdo : UInt64
+    get_user_sdo : UInt64
+    get_os_type : UInt64
+    get_domain_type : UInt64
+    is_directory_available : UInt64
+    get_attached_computer : UInt64
+    get_sdo_schema : UInt64
+    get_templates_sdo : UInt64
+    enable_templates : UInt64
+    sync_config_against_templates : UInt64
+    import_remote_templates : UInt64
+    reload : UInt64
   end
 
   ISdoMachine2_GUID = "518e5ffe-d8ce-4f7e-a5db-b40a35419d3b"
@@ -830,17 +830,17 @@ lib LibWin32
   end
 
   struct ISdoServiceControlVTbl
-    query_interface : Proc(ISdoServiceControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISdoServiceControl*, UInt32)
-    release : Proc(ISdoServiceControl*, UInt32)
-    get_type_info_count : Proc(ISdoServiceControl*, UInt32*, HRESULT)
-    get_type_info : Proc(ISdoServiceControl*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISdoServiceControl*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISdoServiceControl*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    start_service : Proc(ISdoServiceControl*, HRESULT)
-    stop_service : Proc(ISdoServiceControl*, HRESULT)
-    get_service_status : Proc(ISdoServiceControl*, Int32*, HRESULT)
-    reset_service : Proc(ISdoServiceControl*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    start_service : UInt64
+    stop_service : UInt64
+    get_service_status : UInt64
+    reset_service : UInt64
   end
 
   ISdoServiceControl_GUID = "479f6e74-49a2-11d2-8eca-00c04fc2f519"
@@ -850,20 +850,20 @@ lib LibWin32
   end
 
   struct ISdoVTbl
-    query_interface : Proc(ISdo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISdo*, UInt32)
-    release : Proc(ISdo*, UInt32)
-    get_type_info_count : Proc(ISdo*, UInt32*, HRESULT)
-    get_type_info : Proc(ISdo*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISdo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISdo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_property_info : Proc(ISdo*, Int32, IUnknown*, HRESULT)
-    get_property : Proc(ISdo*, Int32, VARIANT*, HRESULT)
-    put_property : Proc(ISdo*, Int32, VARIANT*, HRESULT)
-    reset_property : Proc(ISdo*, Int32, HRESULT)
-    apply : Proc(ISdo*, HRESULT)
-    restore : Proc(ISdo*, HRESULT)
-    get__new_enum : Proc(ISdo*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_property_info : UInt64
+    get_property : UInt64
+    put_property : UInt64
+    reset_property : UInt64
+    apply : UInt64
+    restore : UInt64
+    get__new_enum : UInt64
   end
 
   ISdo_GUID = "56bc53de-96db-11d1-bf3f-000000000000"
@@ -873,21 +873,21 @@ lib LibWin32
   end
 
   struct ISdoCollectionVTbl
-    query_interface : Proc(ISdoCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISdoCollection*, UInt32)
-    release : Proc(ISdoCollection*, UInt32)
-    get_type_info_count : Proc(ISdoCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(ISdoCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISdoCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISdoCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(ISdoCollection*, Int32*, HRESULT)
-    add : Proc(ISdoCollection*, UInt8*, IDispatch*, HRESULT)
-    remove : Proc(ISdoCollection*, IDispatch, HRESULT)
-    remove_all : Proc(ISdoCollection*, HRESULT)
-    reload : Proc(ISdoCollection*, HRESULT)
-    is_name_unique : Proc(ISdoCollection*, UInt8*, Int16*, HRESULT)
-    item : Proc(ISdoCollection*, VARIANT*, IDispatch*, HRESULT)
-    get__new_enum : Proc(ISdoCollection*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    add : UInt64
+    remove : UInt64
+    remove_all : UInt64
+    reload : UInt64
+    is_name_unique : UInt64
+    item : UInt64
+    get__new_enum : UInt64
   end
 
   ISdoCollection_GUID = "56bc53e2-96db-11d1-bf3f-000000000000"
@@ -897,23 +897,23 @@ lib LibWin32
   end
 
   struct ITemplateSdoVTbl
-    query_interface : Proc(ITemplateSdo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITemplateSdo*, UInt32)
-    release : Proc(ITemplateSdo*, UInt32)
-    get_type_info_count : Proc(ITemplateSdo*, UInt32*, HRESULT)
-    get_type_info : Proc(ITemplateSdo*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITemplateSdo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITemplateSdo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_property_info : Proc(ITemplateSdo*, Int32, IUnknown*, HRESULT)
-    get_property : Proc(ITemplateSdo*, Int32, VARIANT*, HRESULT)
-    put_property : Proc(ITemplateSdo*, Int32, VARIANT*, HRESULT)
-    reset_property : Proc(ITemplateSdo*, Int32, HRESULT)
-    apply : Proc(ITemplateSdo*, HRESULT)
-    restore : Proc(ITemplateSdo*, HRESULT)
-    get__new_enum : Proc(ITemplateSdo*, IUnknown*, HRESULT)
-    add_to_collection : Proc(ITemplateSdo*, UInt8*, IDispatch, IDispatch*, HRESULT)
-    add_to_sdo : Proc(ITemplateSdo*, UInt8*, IDispatch, IDispatch*, HRESULT)
-    add_to_sdo_as_property : Proc(ITemplateSdo*, IDispatch, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_property_info : UInt64
+    get_property : UInt64
+    put_property : UInt64
+    reset_property : UInt64
+    apply : UInt64
+    restore : UInt64
+    get__new_enum : UInt64
+    add_to_collection : UInt64
+    add_to_sdo : UInt64
+    add_to_sdo_as_property : UInt64
   end
 
   ITemplateSdo_GUID = "8aa85302-d2e2-4e20-8b1f-a571e437d6c9"
@@ -923,18 +923,18 @@ lib LibWin32
   end
 
   struct ISdoDictionaryOldVTbl
-    query_interface : Proc(ISdoDictionaryOld*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISdoDictionaryOld*, UInt32)
-    release : Proc(ISdoDictionaryOld*, UInt32)
-    get_type_info_count : Proc(ISdoDictionaryOld*, UInt32*, HRESULT)
-    get_type_info : Proc(ISdoDictionaryOld*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISdoDictionaryOld*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISdoDictionaryOld*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    enum_attributes : Proc(ISdoDictionaryOld*, VARIANT*, VARIANT*, HRESULT)
-    get_attribute_info : Proc(ISdoDictionaryOld*, ATTRIBUTEID, VARIANT*, VARIANT*, HRESULT)
-    enum_attribute_values : Proc(ISdoDictionaryOld*, ATTRIBUTEID, VARIANT*, VARIANT*, HRESULT)
-    create_attribute : Proc(ISdoDictionaryOld*, ATTRIBUTEID, IDispatch*, HRESULT)
-    get_attribute_id : Proc(ISdoDictionaryOld*, UInt8*, ATTRIBUTEID*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    enum_attributes : UInt64
+    get_attribute_info : UInt64
+    enum_attribute_values : UInt64
+    create_attribute : UInt64
+    get_attribute_id : UInt64
   end
 
   ISdoDictionaryOld_GUID = "d432e5f4-53d8-11d2-9a3a-00c04fb998ac"
@@ -943,4 +943,336 @@ lib LibWin32
     lpVtbl : ISdoDictionaryOldVTbl*
   end
 
+end
+struct LibWin32::ISdoMachine
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def attach(bstrcomputername : UInt8*) : HRESULT
+    @lpVtbl.value.attach.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrcomputername)
+  end
+  def get_dictionary_sdo(ppdictionarysdo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_dictionary_sdo.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppdictionarysdo)
+  end
+  def get_service_sdo(edatastore : IASDATASTORE, bstrservicename : UInt8*, ppservicesdo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_service_sdo.unsafe_as(Proc(IASDATASTORE, UInt8*, IUnknown*, HRESULT)).call(edatastore, bstrservicename, ppservicesdo)
+  end
+  def get_user_sdo(edatastore : IASDATASTORE, bstrusername : UInt8*, ppusersdo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_user_sdo.unsafe_as(Proc(IASDATASTORE, UInt8*, IUnknown*, HRESULT)).call(edatastore, bstrusername, ppusersdo)
+  end
+  def get_os_type(eostype : IASOSTYPE*) : HRESULT
+    @lpVtbl.value.get_os_type.unsafe_as(Proc(IASOSTYPE*, HRESULT)).call(eostype)
+  end
+  def get_domain_type(edomaintype : IASDOMAINTYPE*) : HRESULT
+    @lpVtbl.value.get_domain_type.unsafe_as(Proc(IASDOMAINTYPE*, HRESULT)).call(edomaintype)
+  end
+  def is_directory_available(booldirectoryavailable : Int16*) : HRESULT
+    @lpVtbl.value.is_directory_available.unsafe_as(Proc(Int16*, HRESULT)).call(booldirectoryavailable)
+  end
+  def get_attached_computer(bstrcomputername : UInt8**) : HRESULT
+    @lpVtbl.value.get_attached_computer.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrcomputername)
+  end
+  def get_sdo_schema(ppsdoschema : IUnknown*) : HRESULT
+    @lpVtbl.value.get_sdo_schema.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppsdoschema)
+  end
+end
+struct LibWin32::ISdoMachine2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def attach(bstrcomputername : UInt8*) : HRESULT
+    @lpVtbl.value.attach.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrcomputername)
+  end
+  def get_dictionary_sdo(ppdictionarysdo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_dictionary_sdo.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppdictionarysdo)
+  end
+  def get_service_sdo(edatastore : IASDATASTORE, bstrservicename : UInt8*, ppservicesdo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_service_sdo.unsafe_as(Proc(IASDATASTORE, UInt8*, IUnknown*, HRESULT)).call(edatastore, bstrservicename, ppservicesdo)
+  end
+  def get_user_sdo(edatastore : IASDATASTORE, bstrusername : UInt8*, ppusersdo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_user_sdo.unsafe_as(Proc(IASDATASTORE, UInt8*, IUnknown*, HRESULT)).call(edatastore, bstrusername, ppusersdo)
+  end
+  def get_os_type(eostype : IASOSTYPE*) : HRESULT
+    @lpVtbl.value.get_os_type.unsafe_as(Proc(IASOSTYPE*, HRESULT)).call(eostype)
+  end
+  def get_domain_type(edomaintype : IASDOMAINTYPE*) : HRESULT
+    @lpVtbl.value.get_domain_type.unsafe_as(Proc(IASDOMAINTYPE*, HRESULT)).call(edomaintype)
+  end
+  def is_directory_available(booldirectoryavailable : Int16*) : HRESULT
+    @lpVtbl.value.is_directory_available.unsafe_as(Proc(Int16*, HRESULT)).call(booldirectoryavailable)
+  end
+  def get_attached_computer(bstrcomputername : UInt8**) : HRESULT
+    @lpVtbl.value.get_attached_computer.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrcomputername)
+  end
+  def get_sdo_schema(ppsdoschema : IUnknown*) : HRESULT
+    @lpVtbl.value.get_sdo_schema.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppsdoschema)
+  end
+  def get_templates_sdo(bstrservicename : UInt8*, pptemplatessdo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_templates_sdo.unsafe_as(Proc(UInt8*, IUnknown*, HRESULT)).call(bstrservicename, pptemplatessdo)
+  end
+  def enable_templates : HRESULT
+    @lpVtbl.value.enable_templates.unsafe_as(Proc(HRESULT)).call
+  end
+  def sync_config_against_templates(bstrservicename : UInt8*, ppconfigroot : IUnknown*, pptemplatesroot : IUnknown*, bforcedsync : Int16) : HRESULT
+    @lpVtbl.value.sync_config_against_templates.unsafe_as(Proc(UInt8*, IUnknown*, IUnknown*, Int16, HRESULT)).call(bstrservicename, ppconfigroot, pptemplatesroot, bforcedsync)
+  end
+  def import_remote_templates(plocaltemplatesroot : IUnknown, bstrremotemachinename : UInt8*) : HRESULT
+    @lpVtbl.value.import_remote_templates.unsafe_as(Proc(IUnknown, UInt8*, HRESULT)).call(plocaltemplatesroot, bstrremotemachinename)
+  end
+  def reload : HRESULT
+    @lpVtbl.value.reload.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ISdoServiceControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def start_service : HRESULT
+    @lpVtbl.value.start_service.unsafe_as(Proc(HRESULT)).call
+  end
+  def stop_service : HRESULT
+    @lpVtbl.value.stop_service.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_service_status(status : Int32*) : HRESULT
+    @lpVtbl.value.get_service_status.unsafe_as(Proc(Int32*, HRESULT)).call(status)
+  end
+  def reset_service : HRESULT
+    @lpVtbl.value.reset_service.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ISdo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_property_info(id : Int32, pppropertyinfo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_property_info.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(id, pppropertyinfo)
+  end
+  def get_property(id : Int32, pvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(id, pvalue)
+  end
+  def put_property(id : Int32, pvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.put_property.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(id, pvalue)
+  end
+  def reset_property(id : Int32) : HRESULT
+    @lpVtbl.value.reset_property.unsafe_as(Proc(Int32, HRESULT)).call(id)
+  end
+  def apply : HRESULT
+    @lpVtbl.value.apply.unsafe_as(Proc(HRESULT)).call
+  end
+  def restore : HRESULT
+    @lpVtbl.value.restore.unsafe_as(Proc(HRESULT)).call
+  end
+  def get__new_enum(ppenumvariant : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppenumvariant)
+  end
+end
+struct LibWin32::ISdoCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pcount)
+  end
+  def add(bstrname : UInt8*, ppitem : IDispatch*) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(UInt8*, IDispatch*, HRESULT)).call(bstrname, ppitem)
+  end
+  def remove(pitem : IDispatch) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(IDispatch, HRESULT)).call(pitem)
+  end
+  def remove_all : HRESULT
+    @lpVtbl.value.remove_all.unsafe_as(Proc(HRESULT)).call
+  end
+  def reload : HRESULT
+    @lpVtbl.value.reload.unsafe_as(Proc(HRESULT)).call
+  end
+  def is_name_unique(bstrname : UInt8*, pbool : Int16*) : HRESULT
+    @lpVtbl.value.is_name_unique.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstrname, pbool)
+  end
+  def item(name : VARIANT*, pitem : IDispatch*) : HRESULT
+    @lpVtbl.value.item.unsafe_as(Proc(VARIANT*, IDispatch*, HRESULT)).call(name, pitem)
+  end
+  def get__new_enum(ppenumvariant : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppenumvariant)
+  end
+end
+struct LibWin32::ITemplateSdo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_property_info(id : Int32, pppropertyinfo : IUnknown*) : HRESULT
+    @lpVtbl.value.get_property_info.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(id, pppropertyinfo)
+  end
+  def get_property(id : Int32, pvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(id, pvalue)
+  end
+  def put_property(id : Int32, pvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.put_property.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(id, pvalue)
+  end
+  def reset_property(id : Int32) : HRESULT
+    @lpVtbl.value.reset_property.unsafe_as(Proc(Int32, HRESULT)).call(id)
+  end
+  def apply : HRESULT
+    @lpVtbl.value.apply.unsafe_as(Proc(HRESULT)).call
+  end
+  def restore : HRESULT
+    @lpVtbl.value.restore.unsafe_as(Proc(HRESULT)).call
+  end
+  def get__new_enum(ppenumvariant : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppenumvariant)
+  end
+  def add_to_collection(bstrname : UInt8*, pcollection : IDispatch, ppitem : IDispatch*) : HRESULT
+    @lpVtbl.value.add_to_collection.unsafe_as(Proc(UInt8*, IDispatch, IDispatch*, HRESULT)).call(bstrname, pcollection, ppitem)
+  end
+  def add_to_sdo(bstrname : UInt8*, psdotarget : IDispatch, ppitem : IDispatch*) : HRESULT
+    @lpVtbl.value.add_to_sdo.unsafe_as(Proc(UInt8*, IDispatch, IDispatch*, HRESULT)).call(bstrname, psdotarget, ppitem)
+  end
+  def add_to_sdo_as_property(psdotarget : IDispatch, id : Int32) : HRESULT
+    @lpVtbl.value.add_to_sdo_as_property.unsafe_as(Proc(IDispatch, Int32, HRESULT)).call(psdotarget, id)
+  end
+end
+struct LibWin32::ISdoDictionaryOld
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def enum_attributes(id : VARIANT*, pvalues : VARIANT*) : HRESULT
+    @lpVtbl.value.enum_attributes.unsafe_as(Proc(VARIANT*, VARIANT*, HRESULT)).call(id, pvalues)
+  end
+  def get_attribute_info(id : ATTRIBUTEID, pinfoids : VARIANT*, pinfovalues : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute_info.unsafe_as(Proc(ATTRIBUTEID, VARIANT*, VARIANT*, HRESULT)).call(id, pinfoids, pinfovalues)
+  end
+  def enum_attribute_values(id : ATTRIBUTEID, pvalueids : VARIANT*, pvaluesdesc : VARIANT*) : HRESULT
+    @lpVtbl.value.enum_attribute_values.unsafe_as(Proc(ATTRIBUTEID, VARIANT*, VARIANT*, HRESULT)).call(id, pvalueids, pvaluesdesc)
+  end
+  def create_attribute(id : ATTRIBUTEID, ppattributeobject : IDispatch*) : HRESULT
+    @lpVtbl.value.create_attribute.unsafe_as(Proc(ATTRIBUTEID, IDispatch*, HRESULT)).call(id, ppattributeobject)
+  end
+  def get_attribute_id(bstrattributename : UInt8*, pid : ATTRIBUTEID*) : HRESULT
+    @lpVtbl.value.get_attribute_id.unsafe_as(Proc(UInt8*, ATTRIBUTEID*, HRESULT)).call(bstrattributename, pid)
+  end
 end

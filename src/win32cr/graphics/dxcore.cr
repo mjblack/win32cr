@@ -89,19 +89,19 @@ lib LibWin32
 
 
   struct IDXCoreAdapterVTbl
-    query_interface : Proc(IDXCoreAdapter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDXCoreAdapter*, UInt32)
-    release : Proc(IDXCoreAdapter*, UInt32)
-    is_valid : Proc(IDXCoreAdapter*, Bool)
-    is_attribute_supported : Proc(IDXCoreAdapter*, Guid*, Bool)
-    is_property_supported : Proc(IDXCoreAdapter*, DXCoreAdapterProperty, Bool)
-    get_property : Proc(IDXCoreAdapter*, DXCoreAdapterProperty, LibC::UINT_PTR, Void*, HRESULT)
-    get_property_size : Proc(IDXCoreAdapter*, DXCoreAdapterProperty, LibC::UINT_PTR*, HRESULT)
-    is_query_state_supported : Proc(IDXCoreAdapter*, DXCoreAdapterState, Bool)
-    query_state : Proc(IDXCoreAdapter*, DXCoreAdapterState, LibC::UINT_PTR, Void*, LibC::UINT_PTR, Void*, HRESULT)
-    is_set_state_supported : Proc(IDXCoreAdapter*, DXCoreAdapterState, Bool)
-    set_state : Proc(IDXCoreAdapter*, DXCoreAdapterState, LibC::UINT_PTR, Void*, LibC::UINT_PTR, Void*, HRESULT)
-    get_factory : Proc(IDXCoreAdapter*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    is_valid : UInt64
+    is_attribute_supported : UInt64
+    is_property_supported : UInt64
+    get_property : UInt64
+    get_property_size : UInt64
+    is_query_state_supported : UInt64
+    query_state : UInt64
+    is_set_state_supported : UInt64
+    set_state : UInt64
+    get_factory : UInt64
   end
 
   IDXCoreAdapter_GUID = "f0db4c7f-fe5a-42a2-bd62-f2a6cf6fc83e"
@@ -111,15 +111,15 @@ lib LibWin32
   end
 
   struct IDXCoreAdapterListVTbl
-    query_interface : Proc(IDXCoreAdapterList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDXCoreAdapterList*, UInt32)
-    release : Proc(IDXCoreAdapterList*, UInt32)
-    get_adapter : Proc(IDXCoreAdapterList*, UInt32, Guid*, Void**, HRESULT)
-    get_adapter_count : Proc(IDXCoreAdapterList*, UInt32)
-    is_stale : Proc(IDXCoreAdapterList*, Bool)
-    get_factory : Proc(IDXCoreAdapterList*, Guid*, Void**, HRESULT)
-    sort : Proc(IDXCoreAdapterList*, UInt32, DXCoreAdapterPreference*, HRESULT)
-    is_adapter_preference_supported : Proc(IDXCoreAdapterList*, DXCoreAdapterPreference, Bool)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_adapter : UInt64
+    get_adapter_count : UInt64
+    is_stale : UInt64
+    get_factory : UInt64
+    sort : UInt64
+    is_adapter_preference_supported : UInt64
   end
 
   IDXCoreAdapterList_GUID = "526c7776-40e9-459b-b711-f32ad76dfc28"
@@ -129,14 +129,14 @@ lib LibWin32
   end
 
   struct IDXCoreAdapterFactoryVTbl
-    query_interface : Proc(IDXCoreAdapterFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDXCoreAdapterFactory*, UInt32)
-    release : Proc(IDXCoreAdapterFactory*, UInt32)
-    create_adapter_list : Proc(IDXCoreAdapterFactory*, UInt32, Guid*, Guid*, Void**, HRESULT)
-    get_adapter_by_luid : Proc(IDXCoreAdapterFactory*, LUID*, Guid*, Void**, HRESULT)
-    is_notification_type_supported : Proc(IDXCoreAdapterFactory*, DXCoreNotificationType, Bool)
-    register_event_notification : Proc(IDXCoreAdapterFactory*, IUnknown, DXCoreNotificationType, PFN_DXCORE_NOTIFICATION_CALLBACK, Void*, UInt32*, HRESULT)
-    unregister_event_notification : Proc(IDXCoreAdapterFactory*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_adapter_list : UInt64
+    get_adapter_by_luid : UInt64
+    is_notification_type_supported : UInt64
+    register_event_notification : UInt64
+    unregister_event_notification : UInt64
   end
 
   IDXCoreAdapterFactory_GUID = "78ee5945-c36e-4b13-a669-005dd11c0f06"
@@ -148,4 +148,100 @@ lib LibWin32
 
   # Params # riid : Guid* [In],ppvfactory : Void** [In]
   fun DXCoreCreateAdapterFactory(riid : Guid*, ppvfactory : Void**) : HRESULT
+end
+struct LibWin32::IDXCoreAdapter
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def is_valid : Bool
+    @lpVtbl.value.is_valid.unsafe_as(Proc(Bool)).call
+  end
+  def is_attribute_supported(attributeguid : Guid*) : Bool
+    @lpVtbl.value.is_attribute_supported.unsafe_as(Proc(Guid*, Bool)).call(attributeguid)
+  end
+  def is_property_supported(property : DXCoreAdapterProperty) : Bool
+    @lpVtbl.value.is_property_supported.unsafe_as(Proc(DXCoreAdapterProperty, Bool)).call(property)
+  end
+  def get_property(property : DXCoreAdapterProperty, buffersize : LibC::UINT_PTR, propertydata : Void*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(DXCoreAdapterProperty, LibC::UINT_PTR, Void*, HRESULT)).call(property, buffersize, propertydata)
+  end
+  def get_property_size(property : DXCoreAdapterProperty, buffersize : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_property_size.unsafe_as(Proc(DXCoreAdapterProperty, LibC::UINT_PTR*, HRESULT)).call(property, buffersize)
+  end
+  def is_query_state_supported(property : DXCoreAdapterState) : Bool
+    @lpVtbl.value.is_query_state_supported.unsafe_as(Proc(DXCoreAdapterState, Bool)).call(property)
+  end
+  def query_state(state : DXCoreAdapterState, inputstatedetailssize : LibC::UINT_PTR, inputstatedetails : Void*, outputbuffersize : LibC::UINT_PTR, outputbuffer : Void*) : HRESULT
+    @lpVtbl.value.query_state.unsafe_as(Proc(DXCoreAdapterState, LibC::UINT_PTR, Void*, LibC::UINT_PTR, Void*, HRESULT)).call(state, inputstatedetailssize, inputstatedetails, outputbuffersize, outputbuffer)
+  end
+  def is_set_state_supported(property : DXCoreAdapterState) : Bool
+    @lpVtbl.value.is_set_state_supported.unsafe_as(Proc(DXCoreAdapterState, Bool)).call(property)
+  end
+  def set_state(state : DXCoreAdapterState, inputstatedetailssize : LibC::UINT_PTR, inputstatedetails : Void*, inputdatasize : LibC::UINT_PTR, inputdata : Void*) : HRESULT
+    @lpVtbl.value.set_state.unsafe_as(Proc(DXCoreAdapterState, LibC::UINT_PTR, Void*, LibC::UINT_PTR, Void*, HRESULT)).call(state, inputstatedetailssize, inputstatedetails, inputdatasize, inputdata)
+  end
+  def get_factory(riid : Guid*, ppvfactory : Void**) : HRESULT
+    @lpVtbl.value.get_factory.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvfactory)
+  end
+end
+struct LibWin32::IDXCoreAdapterList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_adapter(index : UInt32, riid : Guid*, ppvadapter : Void**) : HRESULT
+    @lpVtbl.value.get_adapter.unsafe_as(Proc(UInt32, Guid*, Void**, HRESULT)).call(index, riid, ppvadapter)
+  end
+  def get_adapter_count : UInt32
+    @lpVtbl.value.get_adapter_count.unsafe_as(Proc(UInt32)).call
+  end
+  def is_stale : Bool
+    @lpVtbl.value.is_stale.unsafe_as(Proc(Bool)).call
+  end
+  def get_factory(riid : Guid*, ppvfactory : Void**) : HRESULT
+    @lpVtbl.value.get_factory.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvfactory)
+  end
+  def sort(numpreferences : UInt32, preferences : DXCoreAdapterPreference*) : HRESULT
+    @lpVtbl.value.sort.unsafe_as(Proc(UInt32, DXCoreAdapterPreference*, HRESULT)).call(numpreferences, preferences)
+  end
+  def is_adapter_preference_supported(preference : DXCoreAdapterPreference) : Bool
+    @lpVtbl.value.is_adapter_preference_supported.unsafe_as(Proc(DXCoreAdapterPreference, Bool)).call(preference)
+  end
+end
+struct LibWin32::IDXCoreAdapterFactory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_adapter_list(numattributes : UInt32, filterattributes : Guid*, riid : Guid*, ppvadapterlist : Void**) : HRESULT
+    @lpVtbl.value.create_adapter_list.unsafe_as(Proc(UInt32, Guid*, Guid*, Void**, HRESULT)).call(numattributes, filterattributes, riid, ppvadapterlist)
+  end
+  def get_adapter_by_luid(adapterluid : LUID*, riid : Guid*, ppvadapter : Void**) : HRESULT
+    @lpVtbl.value.get_adapter_by_luid.unsafe_as(Proc(LUID*, Guid*, Void**, HRESULT)).call(adapterluid, riid, ppvadapter)
+  end
+  def is_notification_type_supported(notificationtype : DXCoreNotificationType) : Bool
+    @lpVtbl.value.is_notification_type_supported.unsafe_as(Proc(DXCoreNotificationType, Bool)).call(notificationtype)
+  end
+  def register_event_notification(dxcoreobject : IUnknown, notificationtype : DXCoreNotificationType, callbackfunction : PFN_DXCORE_NOTIFICATION_CALLBACK, callbackcontext : Void*, eventcookie : UInt32*) : HRESULT
+    @lpVtbl.value.register_event_notification.unsafe_as(Proc(IUnknown, DXCoreNotificationType, PFN_DXCORE_NOTIFICATION_CALLBACK, Void*, UInt32*, HRESULT)).call(dxcoreobject, notificationtype, callbackfunction, callbackcontext, eventcookie)
+  end
+  def unregister_event_notification(eventcookie : UInt32) : HRESULT
+    @lpVtbl.value.unregister_event_notification.unsafe_as(Proc(UInt32, HRESULT)).call(eventcookie)
+  end
 end

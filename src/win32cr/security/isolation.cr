@@ -29,10 +29,10 @@ lib LibWin32
 
 
   struct IIsolatedAppLauncherVTbl
-    query_interface : Proc(IIsolatedAppLauncher*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IIsolatedAppLauncher*, UInt32)
-    release : Proc(IIsolatedAppLauncher*, UInt32)
-    launch : Proc(IIsolatedAppLauncher*, LibC::LPWSTR, LibC::LPWSTR, IsolatedAppLauncherTelemetryParameters*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    launch : UInt64
   end
 
   IIsolatedAppLauncher_GUID = "f686878f-7b42-4cc4-96fb-f4f3b6e3d24d"
@@ -71,4 +71,18 @@ lib LibWin32
 
   # Params # pszappcontainername : LibC::LPWSTR [In],ppsidappcontainersid : PSID* [In]
   fun DeriveAppContainerSidFromAppContainerName(pszappcontainername : LibC::LPWSTR, ppsidappcontainersid : PSID*) : HRESULT
+end
+struct LibWin32::IIsolatedAppLauncher
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def launch(appusermodelid : LibC::LPWSTR, arguments : LibC::LPWSTR, telemetryparameters : IsolatedAppLauncherTelemetryParameters*) : HRESULT
+    @lpVtbl.value.launch.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, IsolatedAppLauncherTelemetryParameters*, HRESULT)).call(appusermodelid, arguments, telemetryparameters)
+  end
 end

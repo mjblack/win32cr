@@ -1683,10 +1683,10 @@ lib LibWin32
 
 
   struct IRicheditWindowlessAccessibilityVTbl
-    query_interface : Proc(IRicheditWindowlessAccessibility*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRicheditWindowlessAccessibility*, UInt32)
-    release : Proc(IRicheditWindowlessAccessibility*, UInt32)
-    create_provider : Proc(IRicheditWindowlessAccessibility*, IRawElementProviderWindowlessSite, IRawElementProviderSimple*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_provider : UInt64
   end
 
   struct IRicheditWindowlessAccessibility
@@ -1694,11 +1694,11 @@ lib LibWin32
   end
 
   struct IRichEditUiaInformationVTbl
-    query_interface : Proc(IRichEditUiaInformation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRichEditUiaInformation*, UInt32)
-    release : Proc(IRichEditUiaInformation*, UInt32)
-    get_boundary_rectangle : Proc(IRichEditUiaInformation*, UiaRect*, HRESULT)
-    is_visible : Proc(IRichEditUiaInformation*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_boundary_rectangle : UInt64
+    is_visible : UInt64
   end
 
   struct IRichEditUiaInformation
@@ -1706,34 +1706,34 @@ lib LibWin32
   end
 
   struct IAccessibleVTbl
-    query_interface : Proc(IAccessible*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAccessible*, UInt32)
-    release : Proc(IAccessible*, UInt32)
-    get_type_info_count : Proc(IAccessible*, UInt32*, HRESULT)
-    get_type_info : Proc(IAccessible*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAccessible*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAccessible*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_acc_parent : Proc(IAccessible*, IDispatch*, HRESULT)
-    get_acc_child_count : Proc(IAccessible*, Int32*, HRESULT)
-    get_acc_child : Proc(IAccessible*, VARIANT, IDispatch*, HRESULT)
-    get_acc_name : Proc(IAccessible*, VARIANT, UInt8**, HRESULT)
-    get_acc_value : Proc(IAccessible*, VARIANT, UInt8**, HRESULT)
-    get_acc_description : Proc(IAccessible*, VARIANT, UInt8**, HRESULT)
-    get_acc_role : Proc(IAccessible*, VARIANT, VARIANT*, HRESULT)
-    get_acc_state : Proc(IAccessible*, VARIANT, VARIANT*, HRESULT)
-    get_acc_help : Proc(IAccessible*, VARIANT, UInt8**, HRESULT)
-    get_acc_help_topic : Proc(IAccessible*, UInt8**, VARIANT, Int32*, HRESULT)
-    get_acc_keyboard_shortcut : Proc(IAccessible*, VARIANT, UInt8**, HRESULT)
-    get_acc_focus : Proc(IAccessible*, VARIANT*, HRESULT)
-    get_acc_selection : Proc(IAccessible*, VARIANT*, HRESULT)
-    get_acc_default_action : Proc(IAccessible*, VARIANT, UInt8**, HRESULT)
-    acc_select : Proc(IAccessible*, Int32, VARIANT, HRESULT)
-    acc_location : Proc(IAccessible*, Int32*, Int32*, Int32*, Int32*, VARIANT, HRESULT)
-    acc_navigate : Proc(IAccessible*, Int32, VARIANT, VARIANT*, HRESULT)
-    acc_hit_test : Proc(IAccessible*, Int32, Int32, VARIANT*, HRESULT)
-    acc_do_default_action : Proc(IAccessible*, VARIANT, HRESULT)
-    put_acc_name : Proc(IAccessible*, VARIANT, UInt8*, HRESULT)
-    put_acc_value : Proc(IAccessible*, VARIANT, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_acc_parent : UInt64
+    get_acc_child_count : UInt64
+    get_acc_child : UInt64
+    get_acc_name : UInt64
+    get_acc_value : UInt64
+    get_acc_description : UInt64
+    get_acc_role : UInt64
+    get_acc_state : UInt64
+    get_acc_help : UInt64
+    get_acc_help_topic : UInt64
+    get_acc_keyboard_shortcut : UInt64
+    get_acc_focus : UInt64
+    get_acc_selection : UInt64
+    get_acc_default_action : UInt64
+    acc_select : UInt64
+    acc_location : UInt64
+    acc_navigate : UInt64
+    acc_hit_test : UInt64
+    acc_do_default_action : UInt64
+    put_acc_name : UInt64
+    put_acc_value : UInt64
   end
 
   IAccessible_GUID = "618736e0-3c3d-11cf-810c-00aa00389b71"
@@ -1743,10 +1743,10 @@ lib LibWin32
   end
 
   struct IAccessibleHandlerVTbl
-    query_interface : Proc(IAccessibleHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAccessibleHandler*, UInt32)
-    release : Proc(IAccessibleHandler*, UInt32)
-    accessible_object_from_id : Proc(IAccessibleHandler*, Int32, Int32, IAccessible*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    accessible_object_from_id : UInt64
   end
 
   IAccessibleHandler_GUID = "03022430-abc4-11d0-bde2-00aa001a1953"
@@ -1756,13 +1756,13 @@ lib LibWin32
   end
 
   struct IAccessibleWindowlessSiteVTbl
-    query_interface : Proc(IAccessibleWindowlessSite*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAccessibleWindowlessSite*, UInt32)
-    release : Proc(IAccessibleWindowlessSite*, UInt32)
-    acquire_object_id_range : Proc(IAccessibleWindowlessSite*, Int32, IAccessibleHandler, Int32*, HRESULT)
-    release_object_id_range : Proc(IAccessibleWindowlessSite*, Int32, IAccessibleHandler, HRESULT)
-    query_object_id_ranges : Proc(IAccessibleWindowlessSite*, IAccessibleHandler, SAFEARRAY**, HRESULT)
-    get_parent_accessible : Proc(IAccessibleWindowlessSite*, IAccessible*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    acquire_object_id_range : UInt64
+    release_object_id_range : UInt64
+    query_object_id_ranges : UInt64
+    get_parent_accessible : UInt64
   end
 
   IAccessibleWindowlessSite_GUID = "bf3abd9c-76da-4389-9eb6-1427d25abab7"
@@ -1772,10 +1772,10 @@ lib LibWin32
   end
 
   struct IAccIdentityVTbl
-    query_interface : Proc(IAccIdentity*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAccIdentity*, UInt32)
-    release : Proc(IAccIdentity*, UInt32)
-    get_identity_string : Proc(IAccIdentity*, UInt32, UInt8**, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_identity_string : UInt64
   end
 
   IAccIdentity_GUID = "7852b78d-1cfd-41c1-a615-9c0c85960b5f"
@@ -1785,10 +1785,10 @@ lib LibWin32
   end
 
   struct IAccPropServerVTbl
-    query_interface : Proc(IAccPropServer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAccPropServer*, UInt32)
-    release : Proc(IAccPropServer*, UInt32)
-    get_prop_value : Proc(IAccPropServer*, UInt8*, UInt32, Guid, VARIANT*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_prop_value : UInt64
   end
 
   IAccPropServer_GUID = "76c0dbbb-15e0-4e7b-b61b-20eeea2001e0"
@@ -1798,24 +1798,24 @@ lib LibWin32
   end
 
   struct IAccPropServicesVTbl
-    query_interface : Proc(IAccPropServices*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAccPropServices*, UInt32)
-    release : Proc(IAccPropServices*, UInt32)
-    set_prop_value : Proc(IAccPropServices*, UInt8*, UInt32, Guid, VARIANT, HRESULT)
-    set_prop_server : Proc(IAccPropServices*, UInt8*, UInt32, Guid*, Int32, IAccPropServer, AnnoScope, HRESULT)
-    clear_props : Proc(IAccPropServices*, UInt8*, UInt32, Guid*, Int32, HRESULT)
-    set_hwnd_prop : Proc(IAccPropServices*, LibC::HANDLE, UInt32, UInt32, Guid, VARIANT, HRESULT)
-    set_hwnd_prop_str : Proc(IAccPropServices*, LibC::HANDLE, UInt32, UInt32, Guid, LibC::LPWSTR, HRESULT)
-    set_hwnd_prop_server : Proc(IAccPropServices*, LibC::HANDLE, UInt32, UInt32, Guid*, Int32, IAccPropServer, AnnoScope, HRESULT)
-    clear_hwnd_props : Proc(IAccPropServices*, LibC::HANDLE, UInt32, UInt32, Guid*, Int32, HRESULT)
-    compose_hwnd_identity_string : Proc(IAccPropServices*, LibC::HANDLE, UInt32, UInt32, UInt8**, UInt32*, HRESULT)
-    decompose_hwnd_identity_string : Proc(IAccPropServices*, UInt8*, UInt32, HANDLE*, UInt32*, UInt32*, HRESULT)
-    set_hmenu_prop : Proc(IAccPropServices*, LibC::HANDLE, UInt32, Guid, VARIANT, HRESULT)
-    set_hmenu_prop_str : Proc(IAccPropServices*, LibC::HANDLE, UInt32, Guid, LibC::LPWSTR, HRESULT)
-    set_hmenu_prop_server : Proc(IAccPropServices*, LibC::HANDLE, UInt32, Guid*, Int32, IAccPropServer, AnnoScope, HRESULT)
-    clear_hmenu_props : Proc(IAccPropServices*, LibC::HANDLE, UInt32, Guid*, Int32, HRESULT)
-    compose_hmenu_identity_string : Proc(IAccPropServices*, LibC::HANDLE, UInt32, UInt8**, UInt32*, HRESULT)
-    decompose_hmenu_identity_string : Proc(IAccPropServices*, UInt8*, UInt32, HANDLE*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_prop_value : UInt64
+    set_prop_server : UInt64
+    clear_props : UInt64
+    set_hwnd_prop : UInt64
+    set_hwnd_prop_str : UInt64
+    set_hwnd_prop_server : UInt64
+    clear_hwnd_props : UInt64
+    compose_hwnd_identity_string : UInt64
+    decompose_hwnd_identity_string : UInt64
+    set_hmenu_prop : UInt64
+    set_hmenu_prop_str : UInt64
+    set_hmenu_prop_server : UInt64
+    clear_hmenu_props : UInt64
+    compose_hmenu_identity_string : UInt64
+    decompose_hmenu_identity_string : UInt64
   end
 
   IAccPropServices_GUID = "6e26e776-04f0-495d-80e4-3330352e3169"
@@ -1825,13 +1825,13 @@ lib LibWin32
   end
 
   struct IRawElementProviderSimpleVTbl
-    query_interface : Proc(IRawElementProviderSimple*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRawElementProviderSimple*, UInt32)
-    release : Proc(IRawElementProviderSimple*, UInt32)
-    get_provider_options : Proc(IRawElementProviderSimple*, ProviderOptions*, HRESULT)
-    get_pattern_provider : Proc(IRawElementProviderSimple*, Int32, IUnknown*, HRESULT)
-    get_property_value : Proc(IRawElementProviderSimple*, Int32, VARIANT*, HRESULT)
-    get_host_raw_element_provider : Proc(IRawElementProviderSimple*, IRawElementProviderSimple*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_provider_options : UInt64
+    get_pattern_provider : UInt64
+    get_property_value : UInt64
+    get_host_raw_element_provider : UInt64
   end
 
   IRawElementProviderSimple_GUID = "d6dd68d1-86fd-4332-8666-9abedea2d24c"
@@ -1841,13 +1841,13 @@ lib LibWin32
   end
 
   struct IAccessibleExVTbl
-    query_interface : Proc(IAccessibleEx*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAccessibleEx*, UInt32)
-    release : Proc(IAccessibleEx*, UInt32)
-    get_object_for_child : Proc(IAccessibleEx*, Int32, IAccessibleEx*, HRESULT)
-    get_i_accessible_pair : Proc(IAccessibleEx*, IAccessible*, Int32*, HRESULT)
-    get_runtime_id : Proc(IAccessibleEx*, SAFEARRAY**, HRESULT)
-    convert_returned_element : Proc(IAccessibleEx*, IRawElementProviderSimple, IAccessibleEx*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_object_for_child : UInt64
+    get_i_accessible_pair : UInt64
+    get_runtime_id : UInt64
+    convert_returned_element : UInt64
   end
 
   IAccessibleEx_GUID = "f8b80ada-2c44-48d0-89be-5ff23c9cd875"
@@ -1857,14 +1857,14 @@ lib LibWin32
   end
 
   struct IRawElementProviderSimple2VTbl
-    query_interface : Proc(IRawElementProviderSimple2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRawElementProviderSimple2*, UInt32)
-    release : Proc(IRawElementProviderSimple2*, UInt32)
-    get_provider_options : Proc(IRawElementProviderSimple2*, ProviderOptions*, HRESULT)
-    get_pattern_provider : Proc(IRawElementProviderSimple2*, Int32, IUnknown*, HRESULT)
-    get_property_value : Proc(IRawElementProviderSimple2*, Int32, VARIANT*, HRESULT)
-    get_host_raw_element_provider : Proc(IRawElementProviderSimple2*, IRawElementProviderSimple*, HRESULT)
-    show_context_menu : Proc(IRawElementProviderSimple2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_provider_options : UInt64
+    get_pattern_provider : UInt64
+    get_property_value : UInt64
+    get_host_raw_element_provider : UInt64
+    show_context_menu : UInt64
   end
 
   IRawElementProviderSimple2_GUID = "a0a839a9-8da1-4a82-806a-8e0d44e79f56"
@@ -1874,15 +1874,15 @@ lib LibWin32
   end
 
   struct IRawElementProviderSimple3VTbl
-    query_interface : Proc(IRawElementProviderSimple3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRawElementProviderSimple3*, UInt32)
-    release : Proc(IRawElementProviderSimple3*, UInt32)
-    get_provider_options : Proc(IRawElementProviderSimple3*, ProviderOptions*, HRESULT)
-    get_pattern_provider : Proc(IRawElementProviderSimple3*, Int32, IUnknown*, HRESULT)
-    get_property_value : Proc(IRawElementProviderSimple3*, Int32, VARIANT*, HRESULT)
-    get_host_raw_element_provider : Proc(IRawElementProviderSimple3*, IRawElementProviderSimple*, HRESULT)
-    show_context_menu : Proc(IRawElementProviderSimple3*, HRESULT)
-    get_metadata_value : Proc(IRawElementProviderSimple3*, Int32, Int32, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_provider_options : UInt64
+    get_pattern_provider : UInt64
+    get_property_value : UInt64
+    get_host_raw_element_provider : UInt64
+    show_context_menu : UInt64
+    get_metadata_value : UInt64
   end
 
   IRawElementProviderSimple3_GUID = "fcf5d820-d7ec-4613-bdf6-42a84ce7daaf"
@@ -1892,11 +1892,11 @@ lib LibWin32
   end
 
   struct IRawElementProviderFragmentRootVTbl
-    query_interface : Proc(IRawElementProviderFragmentRoot*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRawElementProviderFragmentRoot*, UInt32)
-    release : Proc(IRawElementProviderFragmentRoot*, UInt32)
-    element_provider_from_point : Proc(IRawElementProviderFragmentRoot*, Float64, Float64, IRawElementProviderFragment*, HRESULT)
-    get_focus : Proc(IRawElementProviderFragmentRoot*, IRawElementProviderFragment*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    element_provider_from_point : UInt64
+    get_focus : UInt64
   end
 
   IRawElementProviderFragmentRoot_GUID = "620ce2a5-ab8f-40a9-86cb-de3c75599b58"
@@ -1906,15 +1906,15 @@ lib LibWin32
   end
 
   struct IRawElementProviderFragmentVTbl
-    query_interface : Proc(IRawElementProviderFragment*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRawElementProviderFragment*, UInt32)
-    release : Proc(IRawElementProviderFragment*, UInt32)
-    navigate : Proc(IRawElementProviderFragment*, NavigateDirection, IRawElementProviderFragment*, HRESULT)
-    get_runtime_id : Proc(IRawElementProviderFragment*, SAFEARRAY**, HRESULT)
-    get_bounding_rectangle : Proc(IRawElementProviderFragment*, UiaRect*, HRESULT)
-    get_embedded_fragment_roots : Proc(IRawElementProviderFragment*, SAFEARRAY**, HRESULT)
-    set_focus : Proc(IRawElementProviderFragment*, HRESULT)
-    get_fragment_root : Proc(IRawElementProviderFragment*, IRawElementProviderFragmentRoot*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    navigate : UInt64
+    get_runtime_id : UInt64
+    get_bounding_rectangle : UInt64
+    get_embedded_fragment_roots : UInt64
+    set_focus : UInt64
+    get_fragment_root : UInt64
   end
 
   IRawElementProviderFragment_GUID = "f7063da8-8359-439c-9297-bbc5299a7d87"
@@ -1924,11 +1924,11 @@ lib LibWin32
   end
 
   struct IRawElementProviderAdviseEventsVTbl
-    query_interface : Proc(IRawElementProviderAdviseEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRawElementProviderAdviseEvents*, UInt32)
-    release : Proc(IRawElementProviderAdviseEvents*, UInt32)
-    advise_event_added : Proc(IRawElementProviderAdviseEvents*, Int32, SAFEARRAY*, HRESULT)
-    advise_event_removed : Proc(IRawElementProviderAdviseEvents*, Int32, SAFEARRAY*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    advise_event_added : UInt64
+    advise_event_removed : UInt64
   end
 
   IRawElementProviderAdviseEvents_GUID = "a407b27b-0f6d-4427-9292-473c7bf93258"
@@ -1938,10 +1938,10 @@ lib LibWin32
   end
 
   struct IRawElementProviderHwndOverrideVTbl
-    query_interface : Proc(IRawElementProviderHwndOverride*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRawElementProviderHwndOverride*, UInt32)
-    release : Proc(IRawElementProviderHwndOverride*, UInt32)
-    get_override_provider_for_hwnd : Proc(IRawElementProviderHwndOverride*, LibC::HANDLE, IRawElementProviderSimple*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_override_provider_for_hwnd : UInt64
   end
 
   IRawElementProviderHwndOverride_GUID = "1d5df27c-8947-4425-b8d9-79787bb460b8"
@@ -1951,12 +1951,12 @@ lib LibWin32
   end
 
   struct IProxyProviderWinEventSinkVTbl
-    query_interface : Proc(IProxyProviderWinEventSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IProxyProviderWinEventSink*, UInt32)
-    release : Proc(IProxyProviderWinEventSink*, UInt32)
-    add_automation_property_changed_event : Proc(IProxyProviderWinEventSink*, IRawElementProviderSimple, Int32, VARIANT, HRESULT)
-    add_automation_event : Proc(IProxyProviderWinEventSink*, IRawElementProviderSimple, Int32, HRESULT)
-    add_structure_changed_event : Proc(IProxyProviderWinEventSink*, IRawElementProviderSimple, StructureChangeType, SAFEARRAY*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_automation_property_changed_event : UInt64
+    add_automation_event : UInt64
+    add_structure_changed_event : UInt64
   end
 
   IProxyProviderWinEventSink_GUID = "4fd82b78-a43e-46ac-9803-0a6969c7c183"
@@ -1966,10 +1966,10 @@ lib LibWin32
   end
 
   struct IProxyProviderWinEventHandlerVTbl
-    query_interface : Proc(IProxyProviderWinEventHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IProxyProviderWinEventHandler*, UInt32)
-    release : Proc(IProxyProviderWinEventHandler*, UInt32)
-    respond_to_win_event : Proc(IProxyProviderWinEventHandler*, UInt32, LibC::HANDLE, Int32, Int32, IProxyProviderWinEventSink, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    respond_to_win_event : UInt64
   end
 
   IProxyProviderWinEventHandler_GUID = "89592ad4-f4e0-43d5-a3b6-bad7e111b435"
@@ -1979,11 +1979,11 @@ lib LibWin32
   end
 
   struct IRawElementProviderWindowlessSiteVTbl
-    query_interface : Proc(IRawElementProviderWindowlessSite*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRawElementProviderWindowlessSite*, UInt32)
-    release : Proc(IRawElementProviderWindowlessSite*, UInt32)
-    get_adjacent_fragment : Proc(IRawElementProviderWindowlessSite*, NavigateDirection, IRawElementProviderFragment*, HRESULT)
-    get_runtime_id_prefix : Proc(IRawElementProviderWindowlessSite*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_adjacent_fragment : UInt64
+    get_runtime_id_prefix : UInt64
   end
 
   IRawElementProviderWindowlessSite_GUID = "0a2a93cc-bfad-42ac-9b2e-0991fb0d3ea0"
@@ -1993,11 +1993,11 @@ lib LibWin32
   end
 
   struct IAccessibleHostingElementProvidersVTbl
-    query_interface : Proc(IAccessibleHostingElementProviders*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAccessibleHostingElementProviders*, UInt32)
-    release : Proc(IAccessibleHostingElementProviders*, UInt32)
-    get_embedded_fragment_roots : Proc(IAccessibleHostingElementProviders*, SAFEARRAY**, HRESULT)
-    get_object_id_for_provider : Proc(IAccessibleHostingElementProviders*, IRawElementProviderSimple, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_embedded_fragment_roots : UInt64
+    get_object_id_for_provider : UInt64
   end
 
   IAccessibleHostingElementProviders_GUID = "33ac331b-943e-4020-b295-db37784974a3"
@@ -2007,10 +2007,10 @@ lib LibWin32
   end
 
   struct IRawElementProviderHostingAccessiblesVTbl
-    query_interface : Proc(IRawElementProviderHostingAccessibles*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRawElementProviderHostingAccessibles*, UInt32)
-    release : Proc(IRawElementProviderHostingAccessibles*, UInt32)
-    get_embedded_accessibles : Proc(IRawElementProviderHostingAccessibles*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_embedded_accessibles : UInt64
   end
 
   IRawElementProviderHostingAccessibles_GUID = "24be0b07-d37d-487a-98cf-a13ed465e9b3"
@@ -2020,11 +2020,11 @@ lib LibWin32
   end
 
   struct IDockProviderVTbl
-    query_interface : Proc(IDockProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDockProvider*, UInt32)
-    release : Proc(IDockProvider*, UInt32)
-    set_dock_position : Proc(IDockProvider*, DockPosition, HRESULT)
-    get_dock_position : Proc(IDockProvider*, DockPosition*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_dock_position : UInt64
+    get_dock_position : UInt64
   end
 
   IDockProvider_GUID = "159bc72c-4ad3-485e-9637-d7052edf0146"
@@ -2034,12 +2034,12 @@ lib LibWin32
   end
 
   struct IExpandCollapseProviderVTbl
-    query_interface : Proc(IExpandCollapseProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IExpandCollapseProvider*, UInt32)
-    release : Proc(IExpandCollapseProvider*, UInt32)
-    expand : Proc(IExpandCollapseProvider*, HRESULT)
-    collapse : Proc(IExpandCollapseProvider*, HRESULT)
-    get_expand_collapse_state : Proc(IExpandCollapseProvider*, ExpandCollapseState*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    expand : UInt64
+    collapse : UInt64
+    get_expand_collapse_state : UInt64
   end
 
   IExpandCollapseProvider_GUID = "d847d3a5-cab0-4a98-8c32-ecb45c59ad24"
@@ -2049,12 +2049,12 @@ lib LibWin32
   end
 
   struct IGridProviderVTbl
-    query_interface : Proc(IGridProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGridProvider*, UInt32)
-    release : Proc(IGridProvider*, UInt32)
-    get_item : Proc(IGridProvider*, Int32, Int32, IRawElementProviderSimple*, HRESULT)
-    get_row_count : Proc(IGridProvider*, Int32*, HRESULT)
-    get_column_count : Proc(IGridProvider*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_item : UInt64
+    get_row_count : UInt64
+    get_column_count : UInt64
   end
 
   IGridProvider_GUID = "b17d6187-0907-464b-a168-0ef17a1572b1"
@@ -2064,14 +2064,14 @@ lib LibWin32
   end
 
   struct IGridItemProviderVTbl
-    query_interface : Proc(IGridItemProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGridItemProvider*, UInt32)
-    release : Proc(IGridItemProvider*, UInt32)
-    get_row : Proc(IGridItemProvider*, Int32*, HRESULT)
-    get_column : Proc(IGridItemProvider*, Int32*, HRESULT)
-    get_row_span : Proc(IGridItemProvider*, Int32*, HRESULT)
-    get_column_span : Proc(IGridItemProvider*, Int32*, HRESULT)
-    get_containing_grid : Proc(IGridItemProvider*, IRawElementProviderSimple*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_row : UInt64
+    get_column : UInt64
+    get_row_span : UInt64
+    get_column_span : UInt64
+    get_containing_grid : UInt64
   end
 
   IGridItemProvider_GUID = "d02541f1-fb81-4d64-ae32-f520f8a6dbd1"
@@ -2081,10 +2081,10 @@ lib LibWin32
   end
 
   struct IInvokeProviderVTbl
-    query_interface : Proc(IInvokeProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IInvokeProvider*, UInt32)
-    release : Proc(IInvokeProvider*, UInt32)
-    invoke : Proc(IInvokeProvider*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    invoke : UInt64
   end
 
   IInvokeProvider_GUID = "54fcb24b-e18e-47a2-b4d3-eccbe77599a2"
@@ -2094,13 +2094,13 @@ lib LibWin32
   end
 
   struct IMultipleViewProviderVTbl
-    query_interface : Proc(IMultipleViewProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMultipleViewProvider*, UInt32)
-    release : Proc(IMultipleViewProvider*, UInt32)
-    get_view_name : Proc(IMultipleViewProvider*, Int32, UInt8**, HRESULT)
-    set_current_view : Proc(IMultipleViewProvider*, Int32, HRESULT)
-    get_current_view : Proc(IMultipleViewProvider*, Int32*, HRESULT)
-    get_supported_views : Proc(IMultipleViewProvider*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_view_name : UInt64
+    set_current_view : UInt64
+    get_current_view : UInt64
+    get_supported_views : UInt64
   end
 
   IMultipleViewProvider_GUID = "6278cab1-b556-4a1a-b4e0-418acc523201"
@@ -2110,16 +2110,16 @@ lib LibWin32
   end
 
   struct IRangeValueProviderVTbl
-    query_interface : Proc(IRangeValueProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRangeValueProvider*, UInt32)
-    release : Proc(IRangeValueProvider*, UInt32)
-    set_value : Proc(IRangeValueProvider*, Float64, HRESULT)
-    get_value : Proc(IRangeValueProvider*, Float64*, HRESULT)
-    get_is_read_only : Proc(IRangeValueProvider*, LibC::BOOL*, HRESULT)
-    get_maximum : Proc(IRangeValueProvider*, Float64*, HRESULT)
-    get_minimum : Proc(IRangeValueProvider*, Float64*, HRESULT)
-    get_large_change : Proc(IRangeValueProvider*, Float64*, HRESULT)
-    get_small_change : Proc(IRangeValueProvider*, Float64*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_value : UInt64
+    get_value : UInt64
+    get_is_read_only : UInt64
+    get_maximum : UInt64
+    get_minimum : UInt64
+    get_large_change : UInt64
+    get_small_change : UInt64
   end
 
   IRangeValueProvider_GUID = "36dc7aef-33e6-4691-afe1-2be7274b3d33"
@@ -2129,10 +2129,10 @@ lib LibWin32
   end
 
   struct IScrollItemProviderVTbl
-    query_interface : Proc(IScrollItemProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IScrollItemProvider*, UInt32)
-    release : Proc(IScrollItemProvider*, UInt32)
-    scroll_into_view : Proc(IScrollItemProvider*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    scroll_into_view : UInt64
   end
 
   IScrollItemProvider_GUID = "2360c714-4bf1-4b26-ba65-9b21316127eb"
@@ -2142,12 +2142,12 @@ lib LibWin32
   end
 
   struct ISelectionProviderVTbl
-    query_interface : Proc(ISelectionProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISelectionProvider*, UInt32)
-    release : Proc(ISelectionProvider*, UInt32)
-    get_selection : Proc(ISelectionProvider*, SAFEARRAY**, HRESULT)
-    get_can_select_multiple : Proc(ISelectionProvider*, LibC::BOOL*, HRESULT)
-    get_is_selection_required : Proc(ISelectionProvider*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_selection : UInt64
+    get_can_select_multiple : UInt64
+    get_is_selection_required : UInt64
   end
 
   ISelectionProvider_GUID = "fb8b03af-3bdf-48d4-bd36-1a65793be168"
@@ -2157,16 +2157,16 @@ lib LibWin32
   end
 
   struct ISelectionProvider2VTbl
-    query_interface : Proc(ISelectionProvider2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISelectionProvider2*, UInt32)
-    release : Proc(ISelectionProvider2*, UInt32)
-    get_selection : Proc(ISelectionProvider2*, SAFEARRAY**, HRESULT)
-    get_can_select_multiple : Proc(ISelectionProvider2*, LibC::BOOL*, HRESULT)
-    get_is_selection_required : Proc(ISelectionProvider2*, LibC::BOOL*, HRESULT)
-    get_first_selected_item : Proc(ISelectionProvider2*, IRawElementProviderSimple*, HRESULT)
-    get_last_selected_item : Proc(ISelectionProvider2*, IRawElementProviderSimple*, HRESULT)
-    get_current_selected_item : Proc(ISelectionProvider2*, IRawElementProviderSimple*, HRESULT)
-    get_item_count : Proc(ISelectionProvider2*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_selection : UInt64
+    get_can_select_multiple : UInt64
+    get_is_selection_required : UInt64
+    get_first_selected_item : UInt64
+    get_last_selected_item : UInt64
+    get_current_selected_item : UInt64
+    get_item_count : UInt64
   end
 
   ISelectionProvider2_GUID = "14f68475-ee1c-44f6-a869-d239381f0fe7"
@@ -2176,17 +2176,17 @@ lib LibWin32
   end
 
   struct IScrollProviderVTbl
-    query_interface : Proc(IScrollProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IScrollProvider*, UInt32)
-    release : Proc(IScrollProvider*, UInt32)
-    scroll : Proc(IScrollProvider*, ScrollAmount, ScrollAmount, HRESULT)
-    set_scroll_percent : Proc(IScrollProvider*, Float64, Float64, HRESULT)
-    get_horizontal_scroll_percent : Proc(IScrollProvider*, Float64*, HRESULT)
-    get_vertical_scroll_percent : Proc(IScrollProvider*, Float64*, HRESULT)
-    get_horizontal_view_size : Proc(IScrollProvider*, Float64*, HRESULT)
-    get_vertical_view_size : Proc(IScrollProvider*, Float64*, HRESULT)
-    get_horizontally_scrollable : Proc(IScrollProvider*, LibC::BOOL*, HRESULT)
-    get_vertically_scrollable : Proc(IScrollProvider*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    scroll : UInt64
+    set_scroll_percent : UInt64
+    get_horizontal_scroll_percent : UInt64
+    get_vertical_scroll_percent : UInt64
+    get_horizontal_view_size : UInt64
+    get_vertical_view_size : UInt64
+    get_horizontally_scrollable : UInt64
+    get_vertically_scrollable : UInt64
   end
 
   IScrollProvider_GUID = "b38b8077-1fc3-42a5-8cae-d40c2215055a"
@@ -2196,14 +2196,14 @@ lib LibWin32
   end
 
   struct ISelectionItemProviderVTbl
-    query_interface : Proc(ISelectionItemProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISelectionItemProvider*, UInt32)
-    release : Proc(ISelectionItemProvider*, UInt32)
-    select : Proc(ISelectionItemProvider*, HRESULT)
-    add_to_selection : Proc(ISelectionItemProvider*, HRESULT)
-    remove_from_selection : Proc(ISelectionItemProvider*, HRESULT)
-    get_is_selected : Proc(ISelectionItemProvider*, LibC::BOOL*, HRESULT)
-    get_selection_container : Proc(ISelectionItemProvider*, IRawElementProviderSimple*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    select : UInt64
+    add_to_selection : UInt64
+    remove_from_selection : UInt64
+    get_is_selected : UInt64
+    get_selection_container : UInt64
   end
 
   ISelectionItemProvider_GUID = "2acad808-b2d4-452d-a407-91ff1ad167b2"
@@ -2213,11 +2213,11 @@ lib LibWin32
   end
 
   struct ISynchronizedInputProviderVTbl
-    query_interface : Proc(ISynchronizedInputProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISynchronizedInputProvider*, UInt32)
-    release : Proc(ISynchronizedInputProvider*, UInt32)
-    start_listening : Proc(ISynchronizedInputProvider*, SynchronizedInputType, HRESULT)
-    cancel : Proc(ISynchronizedInputProvider*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    start_listening : UInt64
+    cancel : UInt64
   end
 
   ISynchronizedInputProvider_GUID = "29db1a06-02ce-4cf7-9b42-565d4fab20ee"
@@ -2227,12 +2227,12 @@ lib LibWin32
   end
 
   struct ITableProviderVTbl
-    query_interface : Proc(ITableProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITableProvider*, UInt32)
-    release : Proc(ITableProvider*, UInt32)
-    get_row_headers : Proc(ITableProvider*, SAFEARRAY**, HRESULT)
-    get_column_headers : Proc(ITableProvider*, SAFEARRAY**, HRESULT)
-    get_row_or_column_major : Proc(ITableProvider*, RowOrColumnMajor*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_row_headers : UInt64
+    get_column_headers : UInt64
+    get_row_or_column_major : UInt64
   end
 
   ITableProvider_GUID = "9c860395-97b3-490a-b52a-858cc22af166"
@@ -2242,11 +2242,11 @@ lib LibWin32
   end
 
   struct ITableItemProviderVTbl
-    query_interface : Proc(ITableItemProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITableItemProvider*, UInt32)
-    release : Proc(ITableItemProvider*, UInt32)
-    get_row_header_items : Proc(ITableItemProvider*, SAFEARRAY**, HRESULT)
-    get_column_header_items : Proc(ITableItemProvider*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_row_header_items : UInt64
+    get_column_header_items : UInt64
   end
 
   ITableItemProvider_GUID = "b9734fa6-771f-4d78-9c90-2517999349cd"
@@ -2256,11 +2256,11 @@ lib LibWin32
   end
 
   struct IToggleProviderVTbl
-    query_interface : Proc(IToggleProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IToggleProvider*, UInt32)
-    release : Proc(IToggleProvider*, UInt32)
-    toggle : Proc(IToggleProvider*, HRESULT)
-    get_toggle_state : Proc(IToggleProvider*, ToggleState*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    toggle : UInt64
+    get_toggle_state : UInt64
   end
 
   IToggleProvider_GUID = "56d00bd0-c4f4-433c-a836-1a52a57e0892"
@@ -2270,15 +2270,15 @@ lib LibWin32
   end
 
   struct ITransformProviderVTbl
-    query_interface : Proc(ITransformProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITransformProvider*, UInt32)
-    release : Proc(ITransformProvider*, UInt32)
-    move : Proc(ITransformProvider*, Float64, Float64, HRESULT)
-    resize : Proc(ITransformProvider*, Float64, Float64, HRESULT)
-    rotate : Proc(ITransformProvider*, Float64, HRESULT)
-    get_can_move : Proc(ITransformProvider*, LibC::BOOL*, HRESULT)
-    get_can_resize : Proc(ITransformProvider*, LibC::BOOL*, HRESULT)
-    get_can_rotate : Proc(ITransformProvider*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    move : UInt64
+    resize : UInt64
+    rotate : UInt64
+    get_can_move : UInt64
+    get_can_resize : UInt64
+    get_can_rotate : UInt64
   end
 
   ITransformProvider_GUID = "6829ddc4-4f91-4ffa-b86f-bd3e2987cb4c"
@@ -2288,12 +2288,12 @@ lib LibWin32
   end
 
   struct IValueProviderVTbl
-    query_interface : Proc(IValueProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IValueProvider*, UInt32)
-    release : Proc(IValueProvider*, UInt32)
-    set_value : Proc(IValueProvider*, LibC::LPWSTR, HRESULT)
-    get_value : Proc(IValueProvider*, UInt8**, HRESULT)
-    get_is_read_only : Proc(IValueProvider*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_value : UInt64
+    get_value : UInt64
+    get_is_read_only : UInt64
   end
 
   IValueProvider_GUID = "c7935180-6fb3-4201-b174-7df73adbf64a"
@@ -2303,18 +2303,18 @@ lib LibWin32
   end
 
   struct IWindowProviderVTbl
-    query_interface : Proc(IWindowProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWindowProvider*, UInt32)
-    release : Proc(IWindowProvider*, UInt32)
-    set_visual_state : Proc(IWindowProvider*, WindowVisualState, HRESULT)
-    close : Proc(IWindowProvider*, HRESULT)
-    wait_for_input_idle : Proc(IWindowProvider*, Int32, LibC::BOOL*, HRESULT)
-    get_can_maximize : Proc(IWindowProvider*, LibC::BOOL*, HRESULT)
-    get_can_minimize : Proc(IWindowProvider*, LibC::BOOL*, HRESULT)
-    get_is_modal : Proc(IWindowProvider*, LibC::BOOL*, HRESULT)
-    get_window_visual_state : Proc(IWindowProvider*, WindowVisualState*, HRESULT)
-    get_window_interaction_state : Proc(IWindowProvider*, WindowInteractionState*, HRESULT)
-    get_is_topmost : Proc(IWindowProvider*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_visual_state : UInt64
+    close : UInt64
+    wait_for_input_idle : UInt64
+    get_can_maximize : UInt64
+    get_can_minimize : UInt64
+    get_is_modal : UInt64
+    get_window_visual_state : UInt64
+    get_window_interaction_state : UInt64
+    get_is_topmost : UInt64
   end
 
   IWindowProvider_GUID = "987df77b-db06-4d77-8f8a-86a9c3bb90b9"
@@ -2324,23 +2324,23 @@ lib LibWin32
   end
 
   struct ILegacyIAccessibleProviderVTbl
-    query_interface : Proc(ILegacyIAccessibleProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILegacyIAccessibleProvider*, UInt32)
-    release : Proc(ILegacyIAccessibleProvider*, UInt32)
-    select : Proc(ILegacyIAccessibleProvider*, Int32, HRESULT)
-    do_default_action : Proc(ILegacyIAccessibleProvider*, HRESULT)
-    set_value : Proc(ILegacyIAccessibleProvider*, LibC::LPWSTR, HRESULT)
-    get_i_accessible : Proc(ILegacyIAccessibleProvider*, IAccessible*, HRESULT)
-    get_child_id : Proc(ILegacyIAccessibleProvider*, Int32*, HRESULT)
-    get_name : Proc(ILegacyIAccessibleProvider*, UInt8**, HRESULT)
-    get_value : Proc(ILegacyIAccessibleProvider*, UInt8**, HRESULT)
-    get_description : Proc(ILegacyIAccessibleProvider*, UInt8**, HRESULT)
-    get_role : Proc(ILegacyIAccessibleProvider*, UInt32*, HRESULT)
-    get_state : Proc(ILegacyIAccessibleProvider*, UInt32*, HRESULT)
-    get_help : Proc(ILegacyIAccessibleProvider*, UInt8**, HRESULT)
-    get_keyboard_shortcut : Proc(ILegacyIAccessibleProvider*, UInt8**, HRESULT)
-    get_selection : Proc(ILegacyIAccessibleProvider*, SAFEARRAY**, HRESULT)
-    get_default_action : Proc(ILegacyIAccessibleProvider*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    select : UInt64
+    do_default_action : UInt64
+    set_value : UInt64
+    get_i_accessible : UInt64
+    get_child_id : UInt64
+    get_name : UInt64
+    get_value : UInt64
+    get_description : UInt64
+    get_role : UInt64
+    get_state : UInt64
+    get_help : UInt64
+    get_keyboard_shortcut : UInt64
+    get_selection : UInt64
+    get_default_action : UInt64
   end
 
   ILegacyIAccessibleProvider_GUID = "e44c3566-915d-4070-99c6-047bff5a08f5"
@@ -2350,10 +2350,10 @@ lib LibWin32
   end
 
   struct IItemContainerProviderVTbl
-    query_interface : Proc(IItemContainerProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IItemContainerProvider*, UInt32)
-    release : Proc(IItemContainerProvider*, UInt32)
-    find_item_by_property : Proc(IItemContainerProvider*, IRawElementProviderSimple, Int32, VARIANT, IRawElementProviderSimple*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    find_item_by_property : UInt64
   end
 
   IItemContainerProvider_GUID = "e747770b-39ce-4382-ab30-d8fb3f336f24"
@@ -2363,10 +2363,10 @@ lib LibWin32
   end
 
   struct IVirtualizedItemProviderVTbl
-    query_interface : Proc(IVirtualizedItemProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IVirtualizedItemProvider*, UInt32)
-    release : Proc(IVirtualizedItemProvider*, UInt32)
-    realize : Proc(IVirtualizedItemProvider*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    realize : UInt64
   end
 
   IVirtualizedItemProvider_GUID = "cb98b665-2d35-4fac-ad35-f3c60d0c0b8b"
@@ -2376,10 +2376,10 @@ lib LibWin32
   end
 
   struct IObjectModelProviderVTbl
-    query_interface : Proc(IObjectModelProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IObjectModelProvider*, UInt32)
-    release : Proc(IObjectModelProvider*, UInt32)
-    get_underlying_object_model : Proc(IObjectModelProvider*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_underlying_object_model : UInt64
   end
 
   IObjectModelProvider_GUID = "3ad86ebd-f5ef-483d-bb18-b1042a475d64"
@@ -2389,14 +2389,14 @@ lib LibWin32
   end
 
   struct IAnnotationProviderVTbl
-    query_interface : Proc(IAnnotationProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAnnotationProvider*, UInt32)
-    release : Proc(IAnnotationProvider*, UInt32)
-    get_annotation_type_id : Proc(IAnnotationProvider*, Int32*, HRESULT)
-    get_annotation_type_name : Proc(IAnnotationProvider*, UInt8**, HRESULT)
-    get_author : Proc(IAnnotationProvider*, UInt8**, HRESULT)
-    get_date_time : Proc(IAnnotationProvider*, UInt8**, HRESULT)
-    get_target : Proc(IAnnotationProvider*, IRawElementProviderSimple*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_annotation_type_id : UInt64
+    get_annotation_type_name : UInt64
+    get_author : UInt64
+    get_date_time : UInt64
+    get_target : UInt64
   end
 
   IAnnotationProvider_GUID = "f95c7e80-bd63-4601-9782-445ebff011fc"
@@ -2406,16 +2406,16 @@ lib LibWin32
   end
 
   struct IStylesProviderVTbl
-    query_interface : Proc(IStylesProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IStylesProvider*, UInt32)
-    release : Proc(IStylesProvider*, UInt32)
-    get_style_id : Proc(IStylesProvider*, Int32*, HRESULT)
-    get_style_name : Proc(IStylesProvider*, UInt8**, HRESULT)
-    get_fill_color : Proc(IStylesProvider*, Int32*, HRESULT)
-    get_fill_pattern_style : Proc(IStylesProvider*, UInt8**, HRESULT)
-    get_shape : Proc(IStylesProvider*, UInt8**, HRESULT)
-    get_fill_pattern_color : Proc(IStylesProvider*, Int32*, HRESULT)
-    get_extended_properties : Proc(IStylesProvider*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_style_id : UInt64
+    get_style_name : UInt64
+    get_fill_color : UInt64
+    get_fill_pattern_style : UInt64
+    get_shape : UInt64
+    get_fill_pattern_color : UInt64
+    get_extended_properties : UInt64
   end
 
   IStylesProvider_GUID = "19b6b649-f5d7-4a6d-bdcb-129252be588a"
@@ -2425,10 +2425,10 @@ lib LibWin32
   end
 
   struct ISpreadsheetProviderVTbl
-    query_interface : Proc(ISpreadsheetProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpreadsheetProvider*, UInt32)
-    release : Proc(ISpreadsheetProvider*, UInt32)
-    get_item_by_name : Proc(ISpreadsheetProvider*, LibC::LPWSTR, IRawElementProviderSimple*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_item_by_name : UInt64
   end
 
   ISpreadsheetProvider_GUID = "6f6b5d35-5525-4f80-b758-85473832ffc7"
@@ -2438,12 +2438,12 @@ lib LibWin32
   end
 
   struct ISpreadsheetItemProviderVTbl
-    query_interface : Proc(ISpreadsheetItemProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpreadsheetItemProvider*, UInt32)
-    release : Proc(ISpreadsheetItemProvider*, UInt32)
-    get_formula : Proc(ISpreadsheetItemProvider*, UInt8**, HRESULT)
-    get_annotation_objects : Proc(ISpreadsheetItemProvider*, SAFEARRAY**, HRESULT)
-    get_annotation_types : Proc(ISpreadsheetItemProvider*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_formula : UInt64
+    get_annotation_objects : UInt64
+    get_annotation_types : UInt64
   end
 
   ISpreadsheetItemProvider_GUID = "eaed4660-7b3d-4879-a2e6-365ce603f3d0"
@@ -2453,21 +2453,21 @@ lib LibWin32
   end
 
   struct ITransformProvider2VTbl
-    query_interface : Proc(ITransformProvider2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITransformProvider2*, UInt32)
-    release : Proc(ITransformProvider2*, UInt32)
-    move : Proc(ITransformProvider2*, Float64, Float64, HRESULT)
-    resize : Proc(ITransformProvider2*, Float64, Float64, HRESULT)
-    rotate : Proc(ITransformProvider2*, Float64, HRESULT)
-    get_can_move : Proc(ITransformProvider2*, LibC::BOOL*, HRESULT)
-    get_can_resize : Proc(ITransformProvider2*, LibC::BOOL*, HRESULT)
-    get_can_rotate : Proc(ITransformProvider2*, LibC::BOOL*, HRESULT)
-    zoom : Proc(ITransformProvider2*, Float64, HRESULT)
-    get_can_zoom : Proc(ITransformProvider2*, LibC::BOOL*, HRESULT)
-    get_zoom_level : Proc(ITransformProvider2*, Float64*, HRESULT)
-    get_zoom_minimum : Proc(ITransformProvider2*, Float64*, HRESULT)
-    get_zoom_maximum : Proc(ITransformProvider2*, Float64*, HRESULT)
-    zoom_by_unit : Proc(ITransformProvider2*, ZoomUnit, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    move : UInt64
+    resize : UInt64
+    rotate : UInt64
+    get_can_move : UInt64
+    get_can_resize : UInt64
+    get_can_rotate : UInt64
+    zoom : UInt64
+    get_can_zoom : UInt64
+    get_zoom_level : UInt64
+    get_zoom_minimum : UInt64
+    get_zoom_maximum : UInt64
+    zoom_by_unit : UInt64
   end
 
   ITransformProvider2_GUID = "4758742f-7ac2-460c-bc48-09fc09308a93"
@@ -2477,13 +2477,13 @@ lib LibWin32
   end
 
   struct IDragProviderVTbl
-    query_interface : Proc(IDragProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDragProvider*, UInt32)
-    release : Proc(IDragProvider*, UInt32)
-    get_is_grabbed : Proc(IDragProvider*, LibC::BOOL*, HRESULT)
-    get_drop_effect : Proc(IDragProvider*, UInt8**, HRESULT)
-    get_drop_effects : Proc(IDragProvider*, SAFEARRAY**, HRESULT)
-    get_grabbed_items : Proc(IDragProvider*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_is_grabbed : UInt64
+    get_drop_effect : UInt64
+    get_drop_effects : UInt64
+    get_grabbed_items : UInt64
   end
 
   IDragProvider_GUID = "6aa7bbbb-7ff9-497d-904f-d20b897929d8"
@@ -2493,11 +2493,11 @@ lib LibWin32
   end
 
   struct IDropTargetProviderVTbl
-    query_interface : Proc(IDropTargetProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDropTargetProvider*, UInt32)
-    release : Proc(IDropTargetProvider*, UInt32)
-    get_drop_target_effect : Proc(IDropTargetProvider*, UInt8**, HRESULT)
-    get_drop_target_effects : Proc(IDropTargetProvider*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_drop_target_effect : UInt64
+    get_drop_target_effects : UInt64
   end
 
   IDropTargetProvider_GUID = "bae82bfd-358a-481c-85a0-d8b4d90a5d61"
@@ -2507,27 +2507,27 @@ lib LibWin32
   end
 
   struct ITextRangeProviderVTbl
-    query_interface : Proc(ITextRangeProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITextRangeProvider*, UInt32)
-    release : Proc(ITextRangeProvider*, UInt32)
-    clone : Proc(ITextRangeProvider*, ITextRangeProvider*, HRESULT)
-    compare : Proc(ITextRangeProvider*, ITextRangeProvider, LibC::BOOL*, HRESULT)
-    compare_endpoints : Proc(ITextRangeProvider*, TextPatternRangeEndpoint, ITextRangeProvider, TextPatternRangeEndpoint, Int32*, HRESULT)
-    expand_to_enclosing_unit : Proc(ITextRangeProvider*, TextUnit, HRESULT)
-    find_attribute : Proc(ITextRangeProvider*, Int32, VARIANT, LibC::BOOL, ITextRangeProvider*, HRESULT)
-    find_text : Proc(ITextRangeProvider*, UInt8*, LibC::BOOL, LibC::BOOL, ITextRangeProvider*, HRESULT)
-    get_attribute_value : Proc(ITextRangeProvider*, Int32, VARIANT*, HRESULT)
-    get_bounding_rectangles : Proc(ITextRangeProvider*, SAFEARRAY**, HRESULT)
-    get_enclosing_element : Proc(ITextRangeProvider*, IRawElementProviderSimple*, HRESULT)
-    get_text : Proc(ITextRangeProvider*, Int32, UInt8**, HRESULT)
-    move : Proc(ITextRangeProvider*, TextUnit, Int32, Int32*, HRESULT)
-    move_endpoint_by_unit : Proc(ITextRangeProvider*, TextPatternRangeEndpoint, TextUnit, Int32, Int32*, HRESULT)
-    move_endpoint_by_range : Proc(ITextRangeProvider*, TextPatternRangeEndpoint, ITextRangeProvider, TextPatternRangeEndpoint, HRESULT)
-    select : Proc(ITextRangeProvider*, HRESULT)
-    add_to_selection : Proc(ITextRangeProvider*, HRESULT)
-    remove_from_selection : Proc(ITextRangeProvider*, HRESULT)
-    scroll_into_view : Proc(ITextRangeProvider*, LibC::BOOL, HRESULT)
-    get_children : Proc(ITextRangeProvider*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    compare : UInt64
+    compare_endpoints : UInt64
+    expand_to_enclosing_unit : UInt64
+    find_attribute : UInt64
+    find_text : UInt64
+    get_attribute_value : UInt64
+    get_bounding_rectangles : UInt64
+    get_enclosing_element : UInt64
+    get_text : UInt64
+    move : UInt64
+    move_endpoint_by_unit : UInt64
+    move_endpoint_by_range : UInt64
+    select : UInt64
+    add_to_selection : UInt64
+    remove_from_selection : UInt64
+    scroll_into_view : UInt64
+    get_children : UInt64
   end
 
   ITextRangeProvider_GUID = "5347ad7b-c355-46f8-aff5-909033582f63"
@@ -2537,15 +2537,15 @@ lib LibWin32
   end
 
   struct ITextProviderVTbl
-    query_interface : Proc(ITextProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITextProvider*, UInt32)
-    release : Proc(ITextProvider*, UInt32)
-    get_selection : Proc(ITextProvider*, SAFEARRAY**, HRESULT)
-    get_visible_ranges : Proc(ITextProvider*, SAFEARRAY**, HRESULT)
-    range_from_child : Proc(ITextProvider*, IRawElementProviderSimple, ITextRangeProvider*, HRESULT)
-    range_from_point : Proc(ITextProvider*, UiaPoint, ITextRangeProvider*, HRESULT)
-    get_document_range : Proc(ITextProvider*, ITextRangeProvider*, HRESULT)
-    get_supported_text_selection : Proc(ITextProvider*, SupportedTextSelection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_selection : UInt64
+    get_visible_ranges : UInt64
+    range_from_child : UInt64
+    range_from_point : UInt64
+    get_document_range : UInt64
+    get_supported_text_selection : UInt64
   end
 
   ITextProvider_GUID = "3589c92c-63f3-4367-99bb-ada653b77cf2"
@@ -2555,17 +2555,17 @@ lib LibWin32
   end
 
   struct ITextProvider2VTbl
-    query_interface : Proc(ITextProvider2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITextProvider2*, UInt32)
-    release : Proc(ITextProvider2*, UInt32)
-    get_selection : Proc(ITextProvider2*, SAFEARRAY**, HRESULT)
-    get_visible_ranges : Proc(ITextProvider2*, SAFEARRAY**, HRESULT)
-    range_from_child : Proc(ITextProvider2*, IRawElementProviderSimple, ITextRangeProvider*, HRESULT)
-    range_from_point : Proc(ITextProvider2*, UiaPoint, ITextRangeProvider*, HRESULT)
-    get_document_range : Proc(ITextProvider2*, ITextRangeProvider*, HRESULT)
-    get_supported_text_selection : Proc(ITextProvider2*, SupportedTextSelection*, HRESULT)
-    range_from_annotation : Proc(ITextProvider2*, IRawElementProviderSimple, ITextRangeProvider*, HRESULT)
-    get_caret_range : Proc(ITextProvider2*, LibC::BOOL*, ITextRangeProvider*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_selection : UInt64
+    get_visible_ranges : UInt64
+    range_from_child : UInt64
+    range_from_point : UInt64
+    get_document_range : UInt64
+    get_supported_text_selection : UInt64
+    range_from_annotation : UInt64
+    get_caret_range : UInt64
   end
 
   ITextProvider2_GUID = "0dc5e6ed-3e16-4bf1-8f9a-a979878bc195"
@@ -2575,17 +2575,17 @@ lib LibWin32
   end
 
   struct ITextEditProviderVTbl
-    query_interface : Proc(ITextEditProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITextEditProvider*, UInt32)
-    release : Proc(ITextEditProvider*, UInt32)
-    get_selection : Proc(ITextEditProvider*, SAFEARRAY**, HRESULT)
-    get_visible_ranges : Proc(ITextEditProvider*, SAFEARRAY**, HRESULT)
-    range_from_child : Proc(ITextEditProvider*, IRawElementProviderSimple, ITextRangeProvider*, HRESULT)
-    range_from_point : Proc(ITextEditProvider*, UiaPoint, ITextRangeProvider*, HRESULT)
-    get_document_range : Proc(ITextEditProvider*, ITextRangeProvider*, HRESULT)
-    get_supported_text_selection : Proc(ITextEditProvider*, SupportedTextSelection*, HRESULT)
-    get_active_composition : Proc(ITextEditProvider*, ITextRangeProvider*, HRESULT)
-    get_conversion_target : Proc(ITextEditProvider*, ITextRangeProvider*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_selection : UInt64
+    get_visible_ranges : UInt64
+    range_from_child : UInt64
+    range_from_point : UInt64
+    get_document_range : UInt64
+    get_supported_text_selection : UInt64
+    get_active_composition : UInt64
+    get_conversion_target : UInt64
   end
 
   ITextEditProvider_GUID = "ea3605b4-3a05-400e-b5f9-4e91b40f6176"
@@ -2595,28 +2595,28 @@ lib LibWin32
   end
 
   struct ITextRangeProvider2VTbl
-    query_interface : Proc(ITextRangeProvider2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITextRangeProvider2*, UInt32)
-    release : Proc(ITextRangeProvider2*, UInt32)
-    clone : Proc(ITextRangeProvider2*, ITextRangeProvider*, HRESULT)
-    compare : Proc(ITextRangeProvider2*, ITextRangeProvider, LibC::BOOL*, HRESULT)
-    compare_endpoints : Proc(ITextRangeProvider2*, TextPatternRangeEndpoint, ITextRangeProvider, TextPatternRangeEndpoint, Int32*, HRESULT)
-    expand_to_enclosing_unit : Proc(ITextRangeProvider2*, TextUnit, HRESULT)
-    find_attribute : Proc(ITextRangeProvider2*, Int32, VARIANT, LibC::BOOL, ITextRangeProvider*, HRESULT)
-    find_text : Proc(ITextRangeProvider2*, UInt8*, LibC::BOOL, LibC::BOOL, ITextRangeProvider*, HRESULT)
-    get_attribute_value : Proc(ITextRangeProvider2*, Int32, VARIANT*, HRESULT)
-    get_bounding_rectangles : Proc(ITextRangeProvider2*, SAFEARRAY**, HRESULT)
-    get_enclosing_element : Proc(ITextRangeProvider2*, IRawElementProviderSimple*, HRESULT)
-    get_text : Proc(ITextRangeProvider2*, Int32, UInt8**, HRESULT)
-    move : Proc(ITextRangeProvider2*, TextUnit, Int32, Int32*, HRESULT)
-    move_endpoint_by_unit : Proc(ITextRangeProvider2*, TextPatternRangeEndpoint, TextUnit, Int32, Int32*, HRESULT)
-    move_endpoint_by_range : Proc(ITextRangeProvider2*, TextPatternRangeEndpoint, ITextRangeProvider, TextPatternRangeEndpoint, HRESULT)
-    select : Proc(ITextRangeProvider2*, HRESULT)
-    add_to_selection : Proc(ITextRangeProvider2*, HRESULT)
-    remove_from_selection : Proc(ITextRangeProvider2*, HRESULT)
-    scroll_into_view : Proc(ITextRangeProvider2*, LibC::BOOL, HRESULT)
-    get_children : Proc(ITextRangeProvider2*, SAFEARRAY**, HRESULT)
-    show_context_menu : Proc(ITextRangeProvider2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    compare : UInt64
+    compare_endpoints : UInt64
+    expand_to_enclosing_unit : UInt64
+    find_attribute : UInt64
+    find_text : UInt64
+    get_attribute_value : UInt64
+    get_bounding_rectangles : UInt64
+    get_enclosing_element : UInt64
+    get_text : UInt64
+    move : UInt64
+    move_endpoint_by_unit : UInt64
+    move_endpoint_by_range : UInt64
+    select : UInt64
+    add_to_selection : UInt64
+    remove_from_selection : UInt64
+    scroll_into_view : UInt64
+    get_children : UInt64
+    show_context_menu : UInt64
   end
 
   ITextRangeProvider2_GUID = "9bbce42c-1921-4f18-89ca-dba1910a0386"
@@ -2626,11 +2626,11 @@ lib LibWin32
   end
 
   struct ITextChildProviderVTbl
-    query_interface : Proc(ITextChildProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITextChildProvider*, UInt32)
-    release : Proc(ITextChildProvider*, UInt32)
-    get_text_container : Proc(ITextChildProvider*, IRawElementProviderSimple*, HRESULT)
-    get_text_range : Proc(ITextChildProvider*, ITextRangeProvider*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_text_container : UInt64
+    get_text_range : UInt64
   end
 
   ITextChildProvider_GUID = "4c2de2b9-c88f-4f88-a111-f1d336b7d1a9"
@@ -2640,10 +2640,10 @@ lib LibWin32
   end
 
   struct ICustomNavigationProviderVTbl
-    query_interface : Proc(ICustomNavigationProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICustomNavigationProvider*, UInt32)
-    release : Proc(ICustomNavigationProvider*, UInt32)
-    navigate : Proc(ICustomNavigationProvider*, NavigateDirection, IRawElementProviderSimple*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    navigate : UInt64
   end
 
   ICustomNavigationProvider_GUID = "2062a28a-8c07-4b94-8e12-7037c622aeb8"
@@ -2653,11 +2653,11 @@ lib LibWin32
   end
 
   struct IUIAutomationPatternInstanceVTbl
-    query_interface : Proc(IUIAutomationPatternInstance*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationPatternInstance*, UInt32)
-    release : Proc(IUIAutomationPatternInstance*, UInt32)
-    get_property : Proc(IUIAutomationPatternInstance*, UInt32, LibC::BOOL, UIAutomationType, Void*, HRESULT)
-    call_method : Proc(IUIAutomationPatternInstance*, UInt32, UIAutomationParameter*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_property : UInt64
+    call_method : UInt64
   end
 
   IUIAutomationPatternInstance_GUID = "c03a7fe4-9431-409f-bed8-ae7c2299bc8d"
@@ -2667,11 +2667,11 @@ lib LibWin32
   end
 
   struct IUIAutomationPatternHandlerVTbl
-    query_interface : Proc(IUIAutomationPatternHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationPatternHandler*, UInt32)
-    release : Proc(IUIAutomationPatternHandler*, UInt32)
-    create_client_wrapper : Proc(IUIAutomationPatternHandler*, IUIAutomationPatternInstance, IUnknown*, HRESULT)
-    dispatch : Proc(IUIAutomationPatternHandler*, IUnknown, UInt32, UIAutomationParameter*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_client_wrapper : UInt64
+    dispatch : UInt64
   end
 
   IUIAutomationPatternHandler_GUID = "d97022f3-a947-465e-8b2a-ac4315fa54e8"
@@ -2681,12 +2681,12 @@ lib LibWin32
   end
 
   struct IUIAutomationRegistrarVTbl
-    query_interface : Proc(IUIAutomationRegistrar*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationRegistrar*, UInt32)
-    release : Proc(IUIAutomationRegistrar*, UInt32)
-    register_property : Proc(IUIAutomationRegistrar*, UIAutomationPropertyInfo*, Int32*, HRESULT)
-    register_event : Proc(IUIAutomationRegistrar*, UIAutomationEventInfo*, Int32*, HRESULT)
-    register_pattern : Proc(IUIAutomationRegistrar*, UIAutomationPatternInfo*, Int32*, Int32*, UInt32, Int32*, UInt32, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    register_property : UInt64
+    register_event : UInt64
+    register_pattern : UInt64
   end
 
   IUIAutomationRegistrar_GUID = "8609c4ec-4a1a-4d88-a357-5a66e060e1cf"
@@ -2696,91 +2696,91 @@ lib LibWin32
   end
 
   struct IUIAutomationElementVTbl
-    query_interface : Proc(IUIAutomationElement*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationElement*, UInt32)
-    release : Proc(IUIAutomationElement*, UInt32)
-    set_focus : Proc(IUIAutomationElement*, HRESULT)
-    get_runtime_id : Proc(IUIAutomationElement*, SAFEARRAY**, HRESULT)
-    find_first : Proc(IUIAutomationElement*, TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)
-    find_all : Proc(IUIAutomationElement*, TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)
-    find_first_build_cache : Proc(IUIAutomationElement*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    find_all_build_cache : Proc(IUIAutomationElement*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)
-    build_updated_cache : Proc(IUIAutomationElement*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_current_property_value : Proc(IUIAutomationElement*, Int32, VARIANT*, HRESULT)
-    get_current_property_value_ex : Proc(IUIAutomationElement*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_cached_property_value : Proc(IUIAutomationElement*, Int32, VARIANT*, HRESULT)
-    get_cached_property_value_ex : Proc(IUIAutomationElement*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_current_pattern_as : Proc(IUIAutomationElement*, Int32, Guid*, Void**, HRESULT)
-    get_cached_pattern_as : Proc(IUIAutomationElement*, Int32, Guid*, Void**, HRESULT)
-    get_current_pattern : Proc(IUIAutomationElement*, Int32, IUnknown*, HRESULT)
-    get_cached_pattern : Proc(IUIAutomationElement*, Int32, IUnknown*, HRESULT)
-    get_cached_parent : Proc(IUIAutomationElement*, IUIAutomationElement*, HRESULT)
-    get_cached_children : Proc(IUIAutomationElement*, IUIAutomationElementArray*, HRESULT)
-    get_current_process_id : Proc(IUIAutomationElement*, Int32*, HRESULT)
-    get_current_control_type : Proc(IUIAutomationElement*, Int32*, HRESULT)
-    get_current_localized_control_type : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_current_name : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_current_accelerator_key : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_current_access_key : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_current_has_keyboard_focus : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_current_is_keyboard_focusable : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_current_is_enabled : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_current_automation_id : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_current_class_name : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_current_help_text : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_current_culture : Proc(IUIAutomationElement*, Int32*, HRESULT)
-    get_current_is_control_element : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_current_is_content_element : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_current_is_password : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_current_native_window_handle : Proc(IUIAutomationElement*, LibC::HANDLE, HRESULT)
-    get_current_item_type : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_current_is_offscreen : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_current_orientation : Proc(IUIAutomationElement*, OrientationType*, HRESULT)
-    get_current_framework_id : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_current_is_required_for_form : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_current_item_status : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_current_bounding_rectangle : Proc(IUIAutomationElement*, RECT*, HRESULT)
-    get_current_labeled_by : Proc(IUIAutomationElement*, IUIAutomationElement*, HRESULT)
-    get_current_aria_role : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_current_aria_properties : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_current_is_data_valid_for_form : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_current_controller_for : Proc(IUIAutomationElement*, IUIAutomationElementArray*, HRESULT)
-    get_current_described_by : Proc(IUIAutomationElement*, IUIAutomationElementArray*, HRESULT)
-    get_current_flows_to : Proc(IUIAutomationElement*, IUIAutomationElementArray*, HRESULT)
-    get_current_provider_description : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_cached_process_id : Proc(IUIAutomationElement*, Int32*, HRESULT)
-    get_cached_control_type : Proc(IUIAutomationElement*, Int32*, HRESULT)
-    get_cached_localized_control_type : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_cached_name : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_cached_accelerator_key : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_cached_access_key : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_cached_has_keyboard_focus : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_cached_is_keyboard_focusable : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_cached_is_enabled : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_cached_automation_id : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_cached_class_name : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_cached_help_text : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_cached_culture : Proc(IUIAutomationElement*, Int32*, HRESULT)
-    get_cached_is_control_element : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_cached_is_content_element : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_cached_is_password : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_cached_native_window_handle : Proc(IUIAutomationElement*, LibC::HANDLE, HRESULT)
-    get_cached_item_type : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_cached_is_offscreen : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_cached_orientation : Proc(IUIAutomationElement*, OrientationType*, HRESULT)
-    get_cached_framework_id : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_cached_is_required_for_form : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_cached_item_status : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_cached_bounding_rectangle : Proc(IUIAutomationElement*, RECT*, HRESULT)
-    get_cached_labeled_by : Proc(IUIAutomationElement*, IUIAutomationElement*, HRESULT)
-    get_cached_aria_role : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_cached_aria_properties : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_cached_is_data_valid_for_form : Proc(IUIAutomationElement*, LibC::BOOL*, HRESULT)
-    get_cached_controller_for : Proc(IUIAutomationElement*, IUIAutomationElementArray*, HRESULT)
-    get_cached_described_by : Proc(IUIAutomationElement*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_to : Proc(IUIAutomationElement*, IUIAutomationElementArray*, HRESULT)
-    get_cached_provider_description : Proc(IUIAutomationElement*, UInt8**, HRESULT)
-    get_clickable_point : Proc(IUIAutomationElement*, POINT*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_focus : UInt64
+    get_runtime_id : UInt64
+    find_first : UInt64
+    find_all : UInt64
+    find_first_build_cache : UInt64
+    find_all_build_cache : UInt64
+    build_updated_cache : UInt64
+    get_current_property_value : UInt64
+    get_current_property_value_ex : UInt64
+    get_cached_property_value : UInt64
+    get_cached_property_value_ex : UInt64
+    get_current_pattern_as : UInt64
+    get_cached_pattern_as : UInt64
+    get_current_pattern : UInt64
+    get_cached_pattern : UInt64
+    get_cached_parent : UInt64
+    get_cached_children : UInt64
+    get_current_process_id : UInt64
+    get_current_control_type : UInt64
+    get_current_localized_control_type : UInt64
+    get_current_name : UInt64
+    get_current_accelerator_key : UInt64
+    get_current_access_key : UInt64
+    get_current_has_keyboard_focus : UInt64
+    get_current_is_keyboard_focusable : UInt64
+    get_current_is_enabled : UInt64
+    get_current_automation_id : UInt64
+    get_current_class_name : UInt64
+    get_current_help_text : UInt64
+    get_current_culture : UInt64
+    get_current_is_control_element : UInt64
+    get_current_is_content_element : UInt64
+    get_current_is_password : UInt64
+    get_current_native_window_handle : UInt64
+    get_current_item_type : UInt64
+    get_current_is_offscreen : UInt64
+    get_current_orientation : UInt64
+    get_current_framework_id : UInt64
+    get_current_is_required_for_form : UInt64
+    get_current_item_status : UInt64
+    get_current_bounding_rectangle : UInt64
+    get_current_labeled_by : UInt64
+    get_current_aria_role : UInt64
+    get_current_aria_properties : UInt64
+    get_current_is_data_valid_for_form : UInt64
+    get_current_controller_for : UInt64
+    get_current_described_by : UInt64
+    get_current_flows_to : UInt64
+    get_current_provider_description : UInt64
+    get_cached_process_id : UInt64
+    get_cached_control_type : UInt64
+    get_cached_localized_control_type : UInt64
+    get_cached_name : UInt64
+    get_cached_accelerator_key : UInt64
+    get_cached_access_key : UInt64
+    get_cached_has_keyboard_focus : UInt64
+    get_cached_is_keyboard_focusable : UInt64
+    get_cached_is_enabled : UInt64
+    get_cached_automation_id : UInt64
+    get_cached_class_name : UInt64
+    get_cached_help_text : UInt64
+    get_cached_culture : UInt64
+    get_cached_is_control_element : UInt64
+    get_cached_is_content_element : UInt64
+    get_cached_is_password : UInt64
+    get_cached_native_window_handle : UInt64
+    get_cached_item_type : UInt64
+    get_cached_is_offscreen : UInt64
+    get_cached_orientation : UInt64
+    get_cached_framework_id : UInt64
+    get_cached_is_required_for_form : UInt64
+    get_cached_item_status : UInt64
+    get_cached_bounding_rectangle : UInt64
+    get_cached_labeled_by : UInt64
+    get_cached_aria_role : UInt64
+    get_cached_aria_properties : UInt64
+    get_cached_is_data_valid_for_form : UInt64
+    get_cached_controller_for : UInt64
+    get_cached_described_by : UInt64
+    get_cached_flows_to : UInt64
+    get_cached_provider_description : UInt64
+    get_clickable_point : UInt64
   end
 
   IUIAutomationElement_GUID = "d22108aa-8ac5-49a5-837b-37bbb3d7591e"
@@ -2790,11 +2790,11 @@ lib LibWin32
   end
 
   struct IUIAutomationElementArrayVTbl
-    query_interface : Proc(IUIAutomationElementArray*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationElementArray*, UInt32)
-    release : Proc(IUIAutomationElementArray*, UInt32)
-    get_length : Proc(IUIAutomationElementArray*, Int32*, HRESULT)
-    get_element : Proc(IUIAutomationElementArray*, Int32, IUIAutomationElement*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_length : UInt64
+    get_element : UInt64
   end
 
   IUIAutomationElementArray_GUID = "14314595-b4bc-4055-95f2-58f2e42c9855"
@@ -2804,9 +2804,9 @@ lib LibWin32
   end
 
   struct IUIAutomationConditionVTbl
-    query_interface : Proc(IUIAutomationCondition*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationCondition*, UInt32)
-    release : Proc(IUIAutomationCondition*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
   end
 
   IUIAutomationCondition_GUID = "352ffba8-0973-437c-a61f-f64cafd81df9"
@@ -2816,10 +2816,10 @@ lib LibWin32
   end
 
   struct IUIAutomationBoolConditionVTbl
-    query_interface : Proc(IUIAutomationBoolCondition*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationBoolCondition*, UInt32)
-    release : Proc(IUIAutomationBoolCondition*, UInt32)
-    get_boolean_value : Proc(IUIAutomationBoolCondition*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_boolean_value : UInt64
   end
 
   IUIAutomationBoolCondition_GUID = "1b4e1f2e-75eb-4d0b-8952-5a69988e2307"
@@ -2829,12 +2829,12 @@ lib LibWin32
   end
 
   struct IUIAutomationPropertyConditionVTbl
-    query_interface : Proc(IUIAutomationPropertyCondition*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationPropertyCondition*, UInt32)
-    release : Proc(IUIAutomationPropertyCondition*, UInt32)
-    get_property_id : Proc(IUIAutomationPropertyCondition*, Int32*, HRESULT)
-    get_property_value : Proc(IUIAutomationPropertyCondition*, VARIANT*, HRESULT)
-    get_property_condition_flags : Proc(IUIAutomationPropertyCondition*, PropertyConditionFlags*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_property_id : UInt64
+    get_property_value : UInt64
+    get_property_condition_flags : UInt64
   end
 
   IUIAutomationPropertyCondition_GUID = "99ebf2cb-5578-4267-9ad4-afd6ea77e94b"
@@ -2844,12 +2844,12 @@ lib LibWin32
   end
 
   struct IUIAutomationAndConditionVTbl
-    query_interface : Proc(IUIAutomationAndCondition*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationAndCondition*, UInt32)
-    release : Proc(IUIAutomationAndCondition*, UInt32)
-    get_child_count : Proc(IUIAutomationAndCondition*, Int32*, HRESULT)
-    get_children_as_native_array : Proc(IUIAutomationAndCondition*, IUIAutomationCondition**, Int32*, HRESULT)
-    get_children : Proc(IUIAutomationAndCondition*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_child_count : UInt64
+    get_children_as_native_array : UInt64
+    get_children : UInt64
   end
 
   IUIAutomationAndCondition_GUID = "a7d0af36-b912-45fe-9855-091ddc174aec"
@@ -2859,12 +2859,12 @@ lib LibWin32
   end
 
   struct IUIAutomationOrConditionVTbl
-    query_interface : Proc(IUIAutomationOrCondition*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationOrCondition*, UInt32)
-    release : Proc(IUIAutomationOrCondition*, UInt32)
-    get_child_count : Proc(IUIAutomationOrCondition*, Int32*, HRESULT)
-    get_children_as_native_array : Proc(IUIAutomationOrCondition*, IUIAutomationCondition**, Int32*, HRESULT)
-    get_children : Proc(IUIAutomationOrCondition*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_child_count : UInt64
+    get_children_as_native_array : UInt64
+    get_children : UInt64
   end
 
   IUIAutomationOrCondition_GUID = "8753f032-3db1-47b5-a1fc-6e34a266c712"
@@ -2874,10 +2874,10 @@ lib LibWin32
   end
 
   struct IUIAutomationNotConditionVTbl
-    query_interface : Proc(IUIAutomationNotCondition*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationNotCondition*, UInt32)
-    release : Proc(IUIAutomationNotCondition*, UInt32)
-    get_child : Proc(IUIAutomationNotCondition*, IUIAutomationCondition*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_child : UInt64
   end
 
   IUIAutomationNotCondition_GUID = "f528b657-847b-498c-8896-d52b565407a1"
@@ -2887,18 +2887,18 @@ lib LibWin32
   end
 
   struct IUIAutomationCacheRequestVTbl
-    query_interface : Proc(IUIAutomationCacheRequest*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationCacheRequest*, UInt32)
-    release : Proc(IUIAutomationCacheRequest*, UInt32)
-    add_property : Proc(IUIAutomationCacheRequest*, Int32, HRESULT)
-    add_pattern : Proc(IUIAutomationCacheRequest*, Int32, HRESULT)
-    clone : Proc(IUIAutomationCacheRequest*, IUIAutomationCacheRequest*, HRESULT)
-    get_tree_scope : Proc(IUIAutomationCacheRequest*, TreeScope*, HRESULT)
-    put_tree_scope : Proc(IUIAutomationCacheRequest*, TreeScope, HRESULT)
-    get_tree_filter : Proc(IUIAutomationCacheRequest*, IUIAutomationCondition*, HRESULT)
-    put_tree_filter : Proc(IUIAutomationCacheRequest*, IUIAutomationCondition, HRESULT)
-    get_automation_element_mode : Proc(IUIAutomationCacheRequest*, AutomationElementMode*, HRESULT)
-    put_automation_element_mode : Proc(IUIAutomationCacheRequest*, AutomationElementMode, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_property : UInt64
+    add_pattern : UInt64
+    clone : UInt64
+    get_tree_scope : UInt64
+    put_tree_scope : UInt64
+    get_tree_filter : UInt64
+    put_tree_filter : UInt64
+    get_automation_element_mode : UInt64
+    put_automation_element_mode : UInt64
   end
 
   IUIAutomationCacheRequest_GUID = "b32a92b5-bc25-4078-9c08-d7ee95c48e03"
@@ -2908,22 +2908,22 @@ lib LibWin32
   end
 
   struct IUIAutomationTreeWalkerVTbl
-    query_interface : Proc(IUIAutomationTreeWalker*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationTreeWalker*, UInt32)
-    release : Proc(IUIAutomationTreeWalker*, UInt32)
-    get_parent_element : Proc(IUIAutomationTreeWalker*, IUIAutomationElement, IUIAutomationElement*, HRESULT)
-    get_first_child_element : Proc(IUIAutomationTreeWalker*, IUIAutomationElement, IUIAutomationElement*, HRESULT)
-    get_last_child_element : Proc(IUIAutomationTreeWalker*, IUIAutomationElement, IUIAutomationElement*, HRESULT)
-    get_next_sibling_element : Proc(IUIAutomationTreeWalker*, IUIAutomationElement, IUIAutomationElement*, HRESULT)
-    get_previous_sibling_element : Proc(IUIAutomationTreeWalker*, IUIAutomationElement, IUIAutomationElement*, HRESULT)
-    normalize_element : Proc(IUIAutomationTreeWalker*, IUIAutomationElement, IUIAutomationElement*, HRESULT)
-    get_parent_element_build_cache : Proc(IUIAutomationTreeWalker*, IUIAutomationElement, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_first_child_element_build_cache : Proc(IUIAutomationTreeWalker*, IUIAutomationElement, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_last_child_element_build_cache : Proc(IUIAutomationTreeWalker*, IUIAutomationElement, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_next_sibling_element_build_cache : Proc(IUIAutomationTreeWalker*, IUIAutomationElement, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_previous_sibling_element_build_cache : Proc(IUIAutomationTreeWalker*, IUIAutomationElement, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    normalize_element_build_cache : Proc(IUIAutomationTreeWalker*, IUIAutomationElement, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_condition : Proc(IUIAutomationTreeWalker*, IUIAutomationCondition*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_parent_element : UInt64
+    get_first_child_element : UInt64
+    get_last_child_element : UInt64
+    get_next_sibling_element : UInt64
+    get_previous_sibling_element : UInt64
+    normalize_element : UInt64
+    get_parent_element_build_cache : UInt64
+    get_first_child_element_build_cache : UInt64
+    get_last_child_element_build_cache : UInt64
+    get_next_sibling_element_build_cache : UInt64
+    get_previous_sibling_element_build_cache : UInt64
+    normalize_element_build_cache : UInt64
+    get_condition : UInt64
   end
 
   IUIAutomationTreeWalker_GUID = "4042c624-389c-4afc-a630-9df854a541fc"
@@ -2933,10 +2933,10 @@ lib LibWin32
   end
 
   struct IUIAutomationEventHandlerVTbl
-    query_interface : Proc(IUIAutomationEventHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationEventHandler*, UInt32)
-    release : Proc(IUIAutomationEventHandler*, UInt32)
-    handle_automation_event : Proc(IUIAutomationEventHandler*, IUIAutomationElement, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    handle_automation_event : UInt64
   end
 
   IUIAutomationEventHandler_GUID = "146c3c17-f12e-4e22-8c27-f894b9b79c69"
@@ -2946,10 +2946,10 @@ lib LibWin32
   end
 
   struct IUIAutomationPropertyChangedEventHandlerVTbl
-    query_interface : Proc(IUIAutomationPropertyChangedEventHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationPropertyChangedEventHandler*, UInt32)
-    release : Proc(IUIAutomationPropertyChangedEventHandler*, UInt32)
-    handle_property_changed_event : Proc(IUIAutomationPropertyChangedEventHandler*, IUIAutomationElement, Int32, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    handle_property_changed_event : UInt64
   end
 
   IUIAutomationPropertyChangedEventHandler_GUID = "40cd37d4-c756-4b0c-8c6f-bddfeeb13b50"
@@ -2959,10 +2959,10 @@ lib LibWin32
   end
 
   struct IUIAutomationStructureChangedEventHandlerVTbl
-    query_interface : Proc(IUIAutomationStructureChangedEventHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationStructureChangedEventHandler*, UInt32)
-    release : Proc(IUIAutomationStructureChangedEventHandler*, UInt32)
-    handle_structure_changed_event : Proc(IUIAutomationStructureChangedEventHandler*, IUIAutomationElement, StructureChangeType, SAFEARRAY*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    handle_structure_changed_event : UInt64
   end
 
   IUIAutomationStructureChangedEventHandler_GUID = "e81d1b4e-11c5-42f8-9754-e7036c79f054"
@@ -2972,10 +2972,10 @@ lib LibWin32
   end
 
   struct IUIAutomationFocusChangedEventHandlerVTbl
-    query_interface : Proc(IUIAutomationFocusChangedEventHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationFocusChangedEventHandler*, UInt32)
-    release : Proc(IUIAutomationFocusChangedEventHandler*, UInt32)
-    handle_focus_changed_event : Proc(IUIAutomationFocusChangedEventHandler*, IUIAutomationElement, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    handle_focus_changed_event : UInt64
   end
 
   IUIAutomationFocusChangedEventHandler_GUID = "c270f6b5-5c69-4290-9745-7a7f97169468"
@@ -2985,10 +2985,10 @@ lib LibWin32
   end
 
   struct IUIAutomationTextEditTextChangedEventHandlerVTbl
-    query_interface : Proc(IUIAutomationTextEditTextChangedEventHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationTextEditTextChangedEventHandler*, UInt32)
-    release : Proc(IUIAutomationTextEditTextChangedEventHandler*, UInt32)
-    handle_text_edit_text_changed_event : Proc(IUIAutomationTextEditTextChangedEventHandler*, IUIAutomationElement, TextEditChangeType, SAFEARRAY*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    handle_text_edit_text_changed_event : UInt64
   end
 
   IUIAutomationTextEditTextChangedEventHandler_GUID = "92faa680-e704-4156-931a-e32d5bb38f3f"
@@ -2998,10 +2998,10 @@ lib LibWin32
   end
 
   struct IUIAutomationChangesEventHandlerVTbl
-    query_interface : Proc(IUIAutomationChangesEventHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationChangesEventHandler*, UInt32)
-    release : Proc(IUIAutomationChangesEventHandler*, UInt32)
-    handle_changes_event : Proc(IUIAutomationChangesEventHandler*, IUIAutomationElement, UiaChangeInfo*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    handle_changes_event : UInt64
   end
 
   IUIAutomationChangesEventHandler_GUID = "58edca55-2c3e-4980-b1b9-56c17f27a2a0"
@@ -3011,10 +3011,10 @@ lib LibWin32
   end
 
   struct IUIAutomationNotificationEventHandlerVTbl
-    query_interface : Proc(IUIAutomationNotificationEventHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationNotificationEventHandler*, UInt32)
-    release : Proc(IUIAutomationNotificationEventHandler*, UInt32)
-    handle_notification_event : Proc(IUIAutomationNotificationEventHandler*, IUIAutomationElement, NotificationKind, NotificationProcessing, UInt8*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    handle_notification_event : UInt64
   end
 
   IUIAutomationNotificationEventHandler_GUID = "c7cb2637-e6c2-4d0c-85de-4948c02175c7"
@@ -3024,10 +3024,10 @@ lib LibWin32
   end
 
   struct IUIAutomationInvokePatternVTbl
-    query_interface : Proc(IUIAutomationInvokePattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationInvokePattern*, UInt32)
-    release : Proc(IUIAutomationInvokePattern*, UInt32)
-    invoke : Proc(IUIAutomationInvokePattern*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    invoke : UInt64
   end
 
   IUIAutomationInvokePattern_GUID = "fb377fbe-8ea6-46d5-9c73-6499642d3059"
@@ -3037,12 +3037,12 @@ lib LibWin32
   end
 
   struct IUIAutomationDockPatternVTbl
-    query_interface : Proc(IUIAutomationDockPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationDockPattern*, UInt32)
-    release : Proc(IUIAutomationDockPattern*, UInt32)
-    set_dock_position : Proc(IUIAutomationDockPattern*, DockPosition, HRESULT)
-    get_current_dock_position : Proc(IUIAutomationDockPattern*, DockPosition*, HRESULT)
-    get_cached_dock_position : Proc(IUIAutomationDockPattern*, DockPosition*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_dock_position : UInt64
+    get_current_dock_position : UInt64
+    get_cached_dock_position : UInt64
   end
 
   IUIAutomationDockPattern_GUID = "fde5ef97-1464-48f6-90bf-43d0948e86ec"
@@ -3052,13 +3052,13 @@ lib LibWin32
   end
 
   struct IUIAutomationExpandCollapsePatternVTbl
-    query_interface : Proc(IUIAutomationExpandCollapsePattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationExpandCollapsePattern*, UInt32)
-    release : Proc(IUIAutomationExpandCollapsePattern*, UInt32)
-    expand : Proc(IUIAutomationExpandCollapsePattern*, HRESULT)
-    collapse : Proc(IUIAutomationExpandCollapsePattern*, HRESULT)
-    get_current_expand_collapse_state : Proc(IUIAutomationExpandCollapsePattern*, ExpandCollapseState*, HRESULT)
-    get_cached_expand_collapse_state : Proc(IUIAutomationExpandCollapsePattern*, ExpandCollapseState*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    expand : UInt64
+    collapse : UInt64
+    get_current_expand_collapse_state : UInt64
+    get_cached_expand_collapse_state : UInt64
   end
 
   IUIAutomationExpandCollapsePattern_GUID = "619be086-1f4e-4ee4-bafa-210128738730"
@@ -3068,14 +3068,14 @@ lib LibWin32
   end
 
   struct IUIAutomationGridPatternVTbl
-    query_interface : Proc(IUIAutomationGridPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationGridPattern*, UInt32)
-    release : Proc(IUIAutomationGridPattern*, UInt32)
-    get_item : Proc(IUIAutomationGridPattern*, Int32, Int32, IUIAutomationElement*, HRESULT)
-    get_current_row_count : Proc(IUIAutomationGridPattern*, Int32*, HRESULT)
-    get_current_column_count : Proc(IUIAutomationGridPattern*, Int32*, HRESULT)
-    get_cached_row_count : Proc(IUIAutomationGridPattern*, Int32*, HRESULT)
-    get_cached_column_count : Proc(IUIAutomationGridPattern*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_item : UInt64
+    get_current_row_count : UInt64
+    get_current_column_count : UInt64
+    get_cached_row_count : UInt64
+    get_cached_column_count : UInt64
   end
 
   IUIAutomationGridPattern_GUID = "414c3cdc-856b-4f5b-8538-3131c6302550"
@@ -3085,19 +3085,19 @@ lib LibWin32
   end
 
   struct IUIAutomationGridItemPatternVTbl
-    query_interface : Proc(IUIAutomationGridItemPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationGridItemPattern*, UInt32)
-    release : Proc(IUIAutomationGridItemPattern*, UInt32)
-    get_current_containing_grid : Proc(IUIAutomationGridItemPattern*, IUIAutomationElement*, HRESULT)
-    get_current_row : Proc(IUIAutomationGridItemPattern*, Int32*, HRESULT)
-    get_current_column : Proc(IUIAutomationGridItemPattern*, Int32*, HRESULT)
-    get_current_row_span : Proc(IUIAutomationGridItemPattern*, Int32*, HRESULT)
-    get_current_column_span : Proc(IUIAutomationGridItemPattern*, Int32*, HRESULT)
-    get_cached_containing_grid : Proc(IUIAutomationGridItemPattern*, IUIAutomationElement*, HRESULT)
-    get_cached_row : Proc(IUIAutomationGridItemPattern*, Int32*, HRESULT)
-    get_cached_column : Proc(IUIAutomationGridItemPattern*, Int32*, HRESULT)
-    get_cached_row_span : Proc(IUIAutomationGridItemPattern*, Int32*, HRESULT)
-    get_cached_column_span : Proc(IUIAutomationGridItemPattern*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_current_containing_grid : UInt64
+    get_current_row : UInt64
+    get_current_column : UInt64
+    get_current_row_span : UInt64
+    get_current_column_span : UInt64
+    get_cached_containing_grid : UInt64
+    get_cached_row : UInt64
+    get_cached_column : UInt64
+    get_cached_row_span : UInt64
+    get_cached_column_span : UInt64
   end
 
   IUIAutomationGridItemPattern_GUID = "78f8ef57-66c3-4e09-bd7c-e79b2004894d"
@@ -3107,15 +3107,15 @@ lib LibWin32
   end
 
   struct IUIAutomationMultipleViewPatternVTbl
-    query_interface : Proc(IUIAutomationMultipleViewPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationMultipleViewPattern*, UInt32)
-    release : Proc(IUIAutomationMultipleViewPattern*, UInt32)
-    get_view_name : Proc(IUIAutomationMultipleViewPattern*, Int32, UInt8**, HRESULT)
-    set_current_view : Proc(IUIAutomationMultipleViewPattern*, Int32, HRESULT)
-    get_current_current_view : Proc(IUIAutomationMultipleViewPattern*, Int32*, HRESULT)
-    get_current_supported_views : Proc(IUIAutomationMultipleViewPattern*, SAFEARRAY**, HRESULT)
-    get_cached_current_view : Proc(IUIAutomationMultipleViewPattern*, Int32*, HRESULT)
-    get_cached_supported_views : Proc(IUIAutomationMultipleViewPattern*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_view_name : UInt64
+    set_current_view : UInt64
+    get_current_current_view : UInt64
+    get_current_supported_views : UInt64
+    get_cached_current_view : UInt64
+    get_cached_supported_views : UInt64
   end
 
   IUIAutomationMultipleViewPattern_GUID = "8d253c91-1dc5-4bb5-b18f-ade16fa495e8"
@@ -3125,10 +3125,10 @@ lib LibWin32
   end
 
   struct IUIAutomationObjectModelPatternVTbl
-    query_interface : Proc(IUIAutomationObjectModelPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationObjectModelPattern*, UInt32)
-    release : Proc(IUIAutomationObjectModelPattern*, UInt32)
-    get_underlying_object_model : Proc(IUIAutomationObjectModelPattern*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_underlying_object_model : UInt64
   end
 
   IUIAutomationObjectModelPattern_GUID = "71c284b3-c14d-4d14-981e-19751b0d756d"
@@ -3138,22 +3138,22 @@ lib LibWin32
   end
 
   struct IUIAutomationRangeValuePatternVTbl
-    query_interface : Proc(IUIAutomationRangeValuePattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationRangeValuePattern*, UInt32)
-    release : Proc(IUIAutomationRangeValuePattern*, UInt32)
-    set_value : Proc(IUIAutomationRangeValuePattern*, Float64, HRESULT)
-    get_current_value : Proc(IUIAutomationRangeValuePattern*, Float64*, HRESULT)
-    get_current_is_read_only : Proc(IUIAutomationRangeValuePattern*, LibC::BOOL*, HRESULT)
-    get_current_maximum : Proc(IUIAutomationRangeValuePattern*, Float64*, HRESULT)
-    get_current_minimum : Proc(IUIAutomationRangeValuePattern*, Float64*, HRESULT)
-    get_current_large_change : Proc(IUIAutomationRangeValuePattern*, Float64*, HRESULT)
-    get_current_small_change : Proc(IUIAutomationRangeValuePattern*, Float64*, HRESULT)
-    get_cached_value : Proc(IUIAutomationRangeValuePattern*, Float64*, HRESULT)
-    get_cached_is_read_only : Proc(IUIAutomationRangeValuePattern*, LibC::BOOL*, HRESULT)
-    get_cached_maximum : Proc(IUIAutomationRangeValuePattern*, Float64*, HRESULT)
-    get_cached_minimum : Proc(IUIAutomationRangeValuePattern*, Float64*, HRESULT)
-    get_cached_large_change : Proc(IUIAutomationRangeValuePattern*, Float64*, HRESULT)
-    get_cached_small_change : Proc(IUIAutomationRangeValuePattern*, Float64*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_value : UInt64
+    get_current_value : UInt64
+    get_current_is_read_only : UInt64
+    get_current_maximum : UInt64
+    get_current_minimum : UInt64
+    get_current_large_change : UInt64
+    get_current_small_change : UInt64
+    get_cached_value : UInt64
+    get_cached_is_read_only : UInt64
+    get_cached_maximum : UInt64
+    get_cached_minimum : UInt64
+    get_cached_large_change : UInt64
+    get_cached_small_change : UInt64
   end
 
   IUIAutomationRangeValuePattern_GUID = "59213f4f-7346-49e5-b120-80555987a148"
@@ -3163,23 +3163,23 @@ lib LibWin32
   end
 
   struct IUIAutomationScrollPatternVTbl
-    query_interface : Proc(IUIAutomationScrollPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationScrollPattern*, UInt32)
-    release : Proc(IUIAutomationScrollPattern*, UInt32)
-    scroll : Proc(IUIAutomationScrollPattern*, ScrollAmount, ScrollAmount, HRESULT)
-    set_scroll_percent : Proc(IUIAutomationScrollPattern*, Float64, Float64, HRESULT)
-    get_current_horizontal_scroll_percent : Proc(IUIAutomationScrollPattern*, Float64*, HRESULT)
-    get_current_vertical_scroll_percent : Proc(IUIAutomationScrollPattern*, Float64*, HRESULT)
-    get_current_horizontal_view_size : Proc(IUIAutomationScrollPattern*, Float64*, HRESULT)
-    get_current_vertical_view_size : Proc(IUIAutomationScrollPattern*, Float64*, HRESULT)
-    get_current_horizontally_scrollable : Proc(IUIAutomationScrollPattern*, LibC::BOOL*, HRESULT)
-    get_current_vertically_scrollable : Proc(IUIAutomationScrollPattern*, LibC::BOOL*, HRESULT)
-    get_cached_horizontal_scroll_percent : Proc(IUIAutomationScrollPattern*, Float64*, HRESULT)
-    get_cached_vertical_scroll_percent : Proc(IUIAutomationScrollPattern*, Float64*, HRESULT)
-    get_cached_horizontal_view_size : Proc(IUIAutomationScrollPattern*, Float64*, HRESULT)
-    get_cached_vertical_view_size : Proc(IUIAutomationScrollPattern*, Float64*, HRESULT)
-    get_cached_horizontally_scrollable : Proc(IUIAutomationScrollPattern*, LibC::BOOL*, HRESULT)
-    get_cached_vertically_scrollable : Proc(IUIAutomationScrollPattern*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    scroll : UInt64
+    set_scroll_percent : UInt64
+    get_current_horizontal_scroll_percent : UInt64
+    get_current_vertical_scroll_percent : UInt64
+    get_current_horizontal_view_size : UInt64
+    get_current_vertical_view_size : UInt64
+    get_current_horizontally_scrollable : UInt64
+    get_current_vertically_scrollable : UInt64
+    get_cached_horizontal_scroll_percent : UInt64
+    get_cached_vertical_scroll_percent : UInt64
+    get_cached_horizontal_view_size : UInt64
+    get_cached_vertical_view_size : UInt64
+    get_cached_horizontally_scrollable : UInt64
+    get_cached_vertically_scrollable : UInt64
   end
 
   IUIAutomationScrollPattern_GUID = "88f4d42a-e881-459d-a77c-73bbbb7e02dc"
@@ -3189,10 +3189,10 @@ lib LibWin32
   end
 
   struct IUIAutomationScrollItemPatternVTbl
-    query_interface : Proc(IUIAutomationScrollItemPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationScrollItemPattern*, UInt32)
-    release : Proc(IUIAutomationScrollItemPattern*, UInt32)
-    scroll_into_view : Proc(IUIAutomationScrollItemPattern*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    scroll_into_view : UInt64
   end
 
   IUIAutomationScrollItemPattern_GUID = "b488300f-d015-4f19-9c29-bb595e3645ef"
@@ -3202,15 +3202,15 @@ lib LibWin32
   end
 
   struct IUIAutomationSelectionPatternVTbl
-    query_interface : Proc(IUIAutomationSelectionPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationSelectionPattern*, UInt32)
-    release : Proc(IUIAutomationSelectionPattern*, UInt32)
-    get_current_selection : Proc(IUIAutomationSelectionPattern*, IUIAutomationElementArray*, HRESULT)
-    get_current_can_select_multiple : Proc(IUIAutomationSelectionPattern*, LibC::BOOL*, HRESULT)
-    get_current_is_selection_required : Proc(IUIAutomationSelectionPattern*, LibC::BOOL*, HRESULT)
-    get_cached_selection : Proc(IUIAutomationSelectionPattern*, IUIAutomationElementArray*, HRESULT)
-    get_cached_can_select_multiple : Proc(IUIAutomationSelectionPattern*, LibC::BOOL*, HRESULT)
-    get_cached_is_selection_required : Proc(IUIAutomationSelectionPattern*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_current_selection : UInt64
+    get_current_can_select_multiple : UInt64
+    get_current_is_selection_required : UInt64
+    get_cached_selection : UInt64
+    get_cached_can_select_multiple : UInt64
+    get_cached_is_selection_required : UInt64
   end
 
   IUIAutomationSelectionPattern_GUID = "5ed5202e-b2ac-47a6-b638-4b0bf140d78e"
@@ -3220,23 +3220,23 @@ lib LibWin32
   end
 
   struct IUIAutomationSelectionPattern2VTbl
-    query_interface : Proc(IUIAutomationSelectionPattern2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationSelectionPattern2*, UInt32)
-    release : Proc(IUIAutomationSelectionPattern2*, UInt32)
-    get_current_selection : Proc(IUIAutomationSelectionPattern2*, IUIAutomationElementArray*, HRESULT)
-    get_current_can_select_multiple : Proc(IUIAutomationSelectionPattern2*, LibC::BOOL*, HRESULT)
-    get_current_is_selection_required : Proc(IUIAutomationSelectionPattern2*, LibC::BOOL*, HRESULT)
-    get_cached_selection : Proc(IUIAutomationSelectionPattern2*, IUIAutomationElementArray*, HRESULT)
-    get_cached_can_select_multiple : Proc(IUIAutomationSelectionPattern2*, LibC::BOOL*, HRESULT)
-    get_cached_is_selection_required : Proc(IUIAutomationSelectionPattern2*, LibC::BOOL*, HRESULT)
-    get_current_first_selected_item : Proc(IUIAutomationSelectionPattern2*, IUIAutomationElement*, HRESULT)
-    get_current_last_selected_item : Proc(IUIAutomationSelectionPattern2*, IUIAutomationElement*, HRESULT)
-    get_current_current_selected_item : Proc(IUIAutomationSelectionPattern2*, IUIAutomationElement*, HRESULT)
-    get_current_item_count : Proc(IUIAutomationSelectionPattern2*, Int32*, HRESULT)
-    get_cached_first_selected_item : Proc(IUIAutomationSelectionPattern2*, IUIAutomationElement*, HRESULT)
-    get_cached_last_selected_item : Proc(IUIAutomationSelectionPattern2*, IUIAutomationElement*, HRESULT)
-    get_cached_current_selected_item : Proc(IUIAutomationSelectionPattern2*, IUIAutomationElement*, HRESULT)
-    get_cached_item_count : Proc(IUIAutomationSelectionPattern2*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_current_selection : UInt64
+    get_current_can_select_multiple : UInt64
+    get_current_is_selection_required : UInt64
+    get_cached_selection : UInt64
+    get_cached_can_select_multiple : UInt64
+    get_cached_is_selection_required : UInt64
+    get_current_first_selected_item : UInt64
+    get_current_last_selected_item : UInt64
+    get_current_current_selected_item : UInt64
+    get_current_item_count : UInt64
+    get_cached_first_selected_item : UInt64
+    get_cached_last_selected_item : UInt64
+    get_cached_current_selected_item : UInt64
+    get_cached_item_count : UInt64
   end
 
   IUIAutomationSelectionPattern2_GUID = "0532bfae-c011-4e32-a343-6d642d798555"
@@ -3246,16 +3246,16 @@ lib LibWin32
   end
 
   struct IUIAutomationSelectionItemPatternVTbl
-    query_interface : Proc(IUIAutomationSelectionItemPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationSelectionItemPattern*, UInt32)
-    release : Proc(IUIAutomationSelectionItemPattern*, UInt32)
-    select : Proc(IUIAutomationSelectionItemPattern*, HRESULT)
-    add_to_selection : Proc(IUIAutomationSelectionItemPattern*, HRESULT)
-    remove_from_selection : Proc(IUIAutomationSelectionItemPattern*, HRESULT)
-    get_current_is_selected : Proc(IUIAutomationSelectionItemPattern*, LibC::BOOL*, HRESULT)
-    get_current_selection_container : Proc(IUIAutomationSelectionItemPattern*, IUIAutomationElement*, HRESULT)
-    get_cached_is_selected : Proc(IUIAutomationSelectionItemPattern*, LibC::BOOL*, HRESULT)
-    get_cached_selection_container : Proc(IUIAutomationSelectionItemPattern*, IUIAutomationElement*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    select : UInt64
+    add_to_selection : UInt64
+    remove_from_selection : UInt64
+    get_current_is_selected : UInt64
+    get_current_selection_container : UInt64
+    get_cached_is_selected : UInt64
+    get_cached_selection_container : UInt64
   end
 
   IUIAutomationSelectionItemPattern_GUID = "a8efa66a-0fda-421a-9194-38021f3578ea"
@@ -3265,11 +3265,11 @@ lib LibWin32
   end
 
   struct IUIAutomationSynchronizedInputPatternVTbl
-    query_interface : Proc(IUIAutomationSynchronizedInputPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationSynchronizedInputPattern*, UInt32)
-    release : Proc(IUIAutomationSynchronizedInputPattern*, UInt32)
-    start_listening : Proc(IUIAutomationSynchronizedInputPattern*, SynchronizedInputType, HRESULT)
-    cancel : Proc(IUIAutomationSynchronizedInputPattern*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    start_listening : UInt64
+    cancel : UInt64
   end
 
   IUIAutomationSynchronizedInputPattern_GUID = "2233be0b-afb7-448b-9fda-3b378aa5eae1"
@@ -3279,15 +3279,15 @@ lib LibWin32
   end
 
   struct IUIAutomationTablePatternVTbl
-    query_interface : Proc(IUIAutomationTablePattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationTablePattern*, UInt32)
-    release : Proc(IUIAutomationTablePattern*, UInt32)
-    get_current_row_headers : Proc(IUIAutomationTablePattern*, IUIAutomationElementArray*, HRESULT)
-    get_current_column_headers : Proc(IUIAutomationTablePattern*, IUIAutomationElementArray*, HRESULT)
-    get_current_row_or_column_major : Proc(IUIAutomationTablePattern*, RowOrColumnMajor*, HRESULT)
-    get_cached_row_headers : Proc(IUIAutomationTablePattern*, IUIAutomationElementArray*, HRESULT)
-    get_cached_column_headers : Proc(IUIAutomationTablePattern*, IUIAutomationElementArray*, HRESULT)
-    get_cached_row_or_column_major : Proc(IUIAutomationTablePattern*, RowOrColumnMajor*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_current_row_headers : UInt64
+    get_current_column_headers : UInt64
+    get_current_row_or_column_major : UInt64
+    get_cached_row_headers : UInt64
+    get_cached_column_headers : UInt64
+    get_cached_row_or_column_major : UInt64
   end
 
   IUIAutomationTablePattern_GUID = "620e691c-ea96-4710-a850-754b24ce2417"
@@ -3297,13 +3297,13 @@ lib LibWin32
   end
 
   struct IUIAutomationTableItemPatternVTbl
-    query_interface : Proc(IUIAutomationTableItemPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationTableItemPattern*, UInt32)
-    release : Proc(IUIAutomationTableItemPattern*, UInt32)
-    get_current_row_header_items : Proc(IUIAutomationTableItemPattern*, IUIAutomationElementArray*, HRESULT)
-    get_current_column_header_items : Proc(IUIAutomationTableItemPattern*, IUIAutomationElementArray*, HRESULT)
-    get_cached_row_header_items : Proc(IUIAutomationTableItemPattern*, IUIAutomationElementArray*, HRESULT)
-    get_cached_column_header_items : Proc(IUIAutomationTableItemPattern*, IUIAutomationElementArray*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_current_row_header_items : UInt64
+    get_current_column_header_items : UInt64
+    get_cached_row_header_items : UInt64
+    get_cached_column_header_items : UInt64
   end
 
   IUIAutomationTableItemPattern_GUID = "0b964eb3-ef2e-4464-9c79-61d61737a27e"
@@ -3313,12 +3313,12 @@ lib LibWin32
   end
 
   struct IUIAutomationTogglePatternVTbl
-    query_interface : Proc(IUIAutomationTogglePattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationTogglePattern*, UInt32)
-    release : Proc(IUIAutomationTogglePattern*, UInt32)
-    toggle : Proc(IUIAutomationTogglePattern*, HRESULT)
-    get_current_toggle_state : Proc(IUIAutomationTogglePattern*, ToggleState*, HRESULT)
-    get_cached_toggle_state : Proc(IUIAutomationTogglePattern*, ToggleState*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    toggle : UInt64
+    get_current_toggle_state : UInt64
+    get_cached_toggle_state : UInt64
   end
 
   IUIAutomationTogglePattern_GUID = "94cf8058-9b8d-4ab9-8bfd-4cd0a33c8c70"
@@ -3328,18 +3328,18 @@ lib LibWin32
   end
 
   struct IUIAutomationTransformPatternVTbl
-    query_interface : Proc(IUIAutomationTransformPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationTransformPattern*, UInt32)
-    release : Proc(IUIAutomationTransformPattern*, UInt32)
-    move : Proc(IUIAutomationTransformPattern*, Float64, Float64, HRESULT)
-    resize : Proc(IUIAutomationTransformPattern*, Float64, Float64, HRESULT)
-    rotate : Proc(IUIAutomationTransformPattern*, Float64, HRESULT)
-    get_current_can_move : Proc(IUIAutomationTransformPattern*, LibC::BOOL*, HRESULT)
-    get_current_can_resize : Proc(IUIAutomationTransformPattern*, LibC::BOOL*, HRESULT)
-    get_current_can_rotate : Proc(IUIAutomationTransformPattern*, LibC::BOOL*, HRESULT)
-    get_cached_can_move : Proc(IUIAutomationTransformPattern*, LibC::BOOL*, HRESULT)
-    get_cached_can_resize : Proc(IUIAutomationTransformPattern*, LibC::BOOL*, HRESULT)
-    get_cached_can_rotate : Proc(IUIAutomationTransformPattern*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    move : UInt64
+    resize : UInt64
+    rotate : UInt64
+    get_current_can_move : UInt64
+    get_current_can_resize : UInt64
+    get_current_can_rotate : UInt64
+    get_cached_can_move : UInt64
+    get_cached_can_resize : UInt64
+    get_cached_can_rotate : UInt64
   end
 
   IUIAutomationTransformPattern_GUID = "a9b55844-a55d-4ef0-926d-569c16ff89bb"
@@ -3349,14 +3349,14 @@ lib LibWin32
   end
 
   struct IUIAutomationValuePatternVTbl
-    query_interface : Proc(IUIAutomationValuePattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationValuePattern*, UInt32)
-    release : Proc(IUIAutomationValuePattern*, UInt32)
-    set_value : Proc(IUIAutomationValuePattern*, UInt8*, HRESULT)
-    get_current_value : Proc(IUIAutomationValuePattern*, UInt8**, HRESULT)
-    get_current_is_read_only : Proc(IUIAutomationValuePattern*, LibC::BOOL*, HRESULT)
-    get_cached_value : Proc(IUIAutomationValuePattern*, UInt8**, HRESULT)
-    get_cached_is_read_only : Proc(IUIAutomationValuePattern*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_value : UInt64
+    get_current_value : UInt64
+    get_current_is_read_only : UInt64
+    get_cached_value : UInt64
+    get_cached_is_read_only : UInt64
   end
 
   IUIAutomationValuePattern_GUID = "a94cd8b1-0844-4cd6-9d2d-640537ab39e9"
@@ -3366,24 +3366,24 @@ lib LibWin32
   end
 
   struct IUIAutomationWindowPatternVTbl
-    query_interface : Proc(IUIAutomationWindowPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationWindowPattern*, UInt32)
-    release : Proc(IUIAutomationWindowPattern*, UInt32)
-    close : Proc(IUIAutomationWindowPattern*, HRESULT)
-    wait_for_input_idle : Proc(IUIAutomationWindowPattern*, Int32, LibC::BOOL*, HRESULT)
-    set_window_visual_state : Proc(IUIAutomationWindowPattern*, WindowVisualState, HRESULT)
-    get_current_can_maximize : Proc(IUIAutomationWindowPattern*, LibC::BOOL*, HRESULT)
-    get_current_can_minimize : Proc(IUIAutomationWindowPattern*, LibC::BOOL*, HRESULT)
-    get_current_is_modal : Proc(IUIAutomationWindowPattern*, LibC::BOOL*, HRESULT)
-    get_current_is_topmost : Proc(IUIAutomationWindowPattern*, LibC::BOOL*, HRESULT)
-    get_current_window_visual_state : Proc(IUIAutomationWindowPattern*, WindowVisualState*, HRESULT)
-    get_current_window_interaction_state : Proc(IUIAutomationWindowPattern*, WindowInteractionState*, HRESULT)
-    get_cached_can_maximize : Proc(IUIAutomationWindowPattern*, LibC::BOOL*, HRESULT)
-    get_cached_can_minimize : Proc(IUIAutomationWindowPattern*, LibC::BOOL*, HRESULT)
-    get_cached_is_modal : Proc(IUIAutomationWindowPattern*, LibC::BOOL*, HRESULT)
-    get_cached_is_topmost : Proc(IUIAutomationWindowPattern*, LibC::BOOL*, HRESULT)
-    get_cached_window_visual_state : Proc(IUIAutomationWindowPattern*, WindowVisualState*, HRESULT)
-    get_cached_window_interaction_state : Proc(IUIAutomationWindowPattern*, WindowInteractionState*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    close : UInt64
+    wait_for_input_idle : UInt64
+    set_window_visual_state : UInt64
+    get_current_can_maximize : UInt64
+    get_current_can_minimize : UInt64
+    get_current_is_modal : UInt64
+    get_current_is_topmost : UInt64
+    get_current_window_visual_state : UInt64
+    get_current_window_interaction_state : UInt64
+    get_cached_can_maximize : UInt64
+    get_cached_can_minimize : UInt64
+    get_cached_is_modal : UInt64
+    get_cached_is_topmost : UInt64
+    get_cached_window_visual_state : UInt64
+    get_cached_window_interaction_state : UInt64
   end
 
   IUIAutomationWindowPattern_GUID = "0faef453-9208-43ef-bbb2-3b485177864f"
@@ -3393,27 +3393,27 @@ lib LibWin32
   end
 
   struct IUIAutomationTextRangeVTbl
-    query_interface : Proc(IUIAutomationTextRange*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationTextRange*, UInt32)
-    release : Proc(IUIAutomationTextRange*, UInt32)
-    clone : Proc(IUIAutomationTextRange*, IUIAutomationTextRange*, HRESULT)
-    compare : Proc(IUIAutomationTextRange*, IUIAutomationTextRange, LibC::BOOL*, HRESULT)
-    compare_endpoints : Proc(IUIAutomationTextRange*, TextPatternRangeEndpoint, IUIAutomationTextRange, TextPatternRangeEndpoint, Int32*, HRESULT)
-    expand_to_enclosing_unit : Proc(IUIAutomationTextRange*, TextUnit, HRESULT)
-    find_attribute : Proc(IUIAutomationTextRange*, Int32, VARIANT, LibC::BOOL, IUIAutomationTextRange*, HRESULT)
-    find_text : Proc(IUIAutomationTextRange*, UInt8*, LibC::BOOL, LibC::BOOL, IUIAutomationTextRange*, HRESULT)
-    get_attribute_value : Proc(IUIAutomationTextRange*, Int32, VARIANT*, HRESULT)
-    get_bounding_rectangles : Proc(IUIAutomationTextRange*, SAFEARRAY**, HRESULT)
-    get_enclosing_element : Proc(IUIAutomationTextRange*, IUIAutomationElement*, HRESULT)
-    get_text : Proc(IUIAutomationTextRange*, Int32, UInt8**, HRESULT)
-    move : Proc(IUIAutomationTextRange*, TextUnit, Int32, Int32*, HRESULT)
-    move_endpoint_by_unit : Proc(IUIAutomationTextRange*, TextPatternRangeEndpoint, TextUnit, Int32, Int32*, HRESULT)
-    move_endpoint_by_range : Proc(IUIAutomationTextRange*, TextPatternRangeEndpoint, IUIAutomationTextRange, TextPatternRangeEndpoint, HRESULT)
-    select : Proc(IUIAutomationTextRange*, HRESULT)
-    add_to_selection : Proc(IUIAutomationTextRange*, HRESULT)
-    remove_from_selection : Proc(IUIAutomationTextRange*, HRESULT)
-    scroll_into_view : Proc(IUIAutomationTextRange*, LibC::BOOL, HRESULT)
-    get_children : Proc(IUIAutomationTextRange*, IUIAutomationElementArray*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    compare : UInt64
+    compare_endpoints : UInt64
+    expand_to_enclosing_unit : UInt64
+    find_attribute : UInt64
+    find_text : UInt64
+    get_attribute_value : UInt64
+    get_bounding_rectangles : UInt64
+    get_enclosing_element : UInt64
+    get_text : UInt64
+    move : UInt64
+    move_endpoint_by_unit : UInt64
+    move_endpoint_by_range : UInt64
+    select : UInt64
+    add_to_selection : UInt64
+    remove_from_selection : UInt64
+    scroll_into_view : UInt64
+    get_children : UInt64
   end
 
   IUIAutomationTextRange_GUID = "a543cc6a-f4ae-494b-8239-c814481187a8"
@@ -3423,28 +3423,28 @@ lib LibWin32
   end
 
   struct IUIAutomationTextRange2VTbl
-    query_interface : Proc(IUIAutomationTextRange2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationTextRange2*, UInt32)
-    release : Proc(IUIAutomationTextRange2*, UInt32)
-    clone : Proc(IUIAutomationTextRange2*, IUIAutomationTextRange*, HRESULT)
-    compare : Proc(IUIAutomationTextRange2*, IUIAutomationTextRange, LibC::BOOL*, HRESULT)
-    compare_endpoints : Proc(IUIAutomationTextRange2*, TextPatternRangeEndpoint, IUIAutomationTextRange, TextPatternRangeEndpoint, Int32*, HRESULT)
-    expand_to_enclosing_unit : Proc(IUIAutomationTextRange2*, TextUnit, HRESULT)
-    find_attribute : Proc(IUIAutomationTextRange2*, Int32, VARIANT, LibC::BOOL, IUIAutomationTextRange*, HRESULT)
-    find_text : Proc(IUIAutomationTextRange2*, UInt8*, LibC::BOOL, LibC::BOOL, IUIAutomationTextRange*, HRESULT)
-    get_attribute_value : Proc(IUIAutomationTextRange2*, Int32, VARIANT*, HRESULT)
-    get_bounding_rectangles : Proc(IUIAutomationTextRange2*, SAFEARRAY**, HRESULT)
-    get_enclosing_element : Proc(IUIAutomationTextRange2*, IUIAutomationElement*, HRESULT)
-    get_text : Proc(IUIAutomationTextRange2*, Int32, UInt8**, HRESULT)
-    move : Proc(IUIAutomationTextRange2*, TextUnit, Int32, Int32*, HRESULT)
-    move_endpoint_by_unit : Proc(IUIAutomationTextRange2*, TextPatternRangeEndpoint, TextUnit, Int32, Int32*, HRESULT)
-    move_endpoint_by_range : Proc(IUIAutomationTextRange2*, TextPatternRangeEndpoint, IUIAutomationTextRange, TextPatternRangeEndpoint, HRESULT)
-    select : Proc(IUIAutomationTextRange2*, HRESULT)
-    add_to_selection : Proc(IUIAutomationTextRange2*, HRESULT)
-    remove_from_selection : Proc(IUIAutomationTextRange2*, HRESULT)
-    scroll_into_view : Proc(IUIAutomationTextRange2*, LibC::BOOL, HRESULT)
-    get_children : Proc(IUIAutomationTextRange2*, IUIAutomationElementArray*, HRESULT)
-    show_context_menu : Proc(IUIAutomationTextRange2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    compare : UInt64
+    compare_endpoints : UInt64
+    expand_to_enclosing_unit : UInt64
+    find_attribute : UInt64
+    find_text : UInt64
+    get_attribute_value : UInt64
+    get_bounding_rectangles : UInt64
+    get_enclosing_element : UInt64
+    get_text : UInt64
+    move : UInt64
+    move_endpoint_by_unit : UInt64
+    move_endpoint_by_range : UInt64
+    select : UInt64
+    add_to_selection : UInt64
+    remove_from_selection : UInt64
+    scroll_into_view : UInt64
+    get_children : UInt64
+    show_context_menu : UInt64
   end
 
   IUIAutomationTextRange2_GUID = "bb9b40e0-5e04-46bd-9be0-4b601b9afad4"
@@ -3454,31 +3454,31 @@ lib LibWin32
   end
 
   struct IUIAutomationTextRange3VTbl
-    query_interface : Proc(IUIAutomationTextRange3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationTextRange3*, UInt32)
-    release : Proc(IUIAutomationTextRange3*, UInt32)
-    clone : Proc(IUIAutomationTextRange3*, IUIAutomationTextRange*, HRESULT)
-    compare : Proc(IUIAutomationTextRange3*, IUIAutomationTextRange, LibC::BOOL*, HRESULT)
-    compare_endpoints : Proc(IUIAutomationTextRange3*, TextPatternRangeEndpoint, IUIAutomationTextRange, TextPatternRangeEndpoint, Int32*, HRESULT)
-    expand_to_enclosing_unit : Proc(IUIAutomationTextRange3*, TextUnit, HRESULT)
-    find_attribute : Proc(IUIAutomationTextRange3*, Int32, VARIANT, LibC::BOOL, IUIAutomationTextRange*, HRESULT)
-    find_text : Proc(IUIAutomationTextRange3*, UInt8*, LibC::BOOL, LibC::BOOL, IUIAutomationTextRange*, HRESULT)
-    get_attribute_value : Proc(IUIAutomationTextRange3*, Int32, VARIANT*, HRESULT)
-    get_bounding_rectangles : Proc(IUIAutomationTextRange3*, SAFEARRAY**, HRESULT)
-    get_enclosing_element : Proc(IUIAutomationTextRange3*, IUIAutomationElement*, HRESULT)
-    get_text : Proc(IUIAutomationTextRange3*, Int32, UInt8**, HRESULT)
-    move : Proc(IUIAutomationTextRange3*, TextUnit, Int32, Int32*, HRESULT)
-    move_endpoint_by_unit : Proc(IUIAutomationTextRange3*, TextPatternRangeEndpoint, TextUnit, Int32, Int32*, HRESULT)
-    move_endpoint_by_range : Proc(IUIAutomationTextRange3*, TextPatternRangeEndpoint, IUIAutomationTextRange, TextPatternRangeEndpoint, HRESULT)
-    select : Proc(IUIAutomationTextRange3*, HRESULT)
-    add_to_selection : Proc(IUIAutomationTextRange3*, HRESULT)
-    remove_from_selection : Proc(IUIAutomationTextRange3*, HRESULT)
-    scroll_into_view : Proc(IUIAutomationTextRange3*, LibC::BOOL, HRESULT)
-    get_children : Proc(IUIAutomationTextRange3*, IUIAutomationElementArray*, HRESULT)
-    show_context_menu : Proc(IUIAutomationTextRange3*, HRESULT)
-    get_enclosing_element_build_cache : Proc(IUIAutomationTextRange3*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_children_build_cache : Proc(IUIAutomationTextRange3*, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)
-    get_attribute_values : Proc(IUIAutomationTextRange3*, Int32*, Int32, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    compare : UInt64
+    compare_endpoints : UInt64
+    expand_to_enclosing_unit : UInt64
+    find_attribute : UInt64
+    find_text : UInt64
+    get_attribute_value : UInt64
+    get_bounding_rectangles : UInt64
+    get_enclosing_element : UInt64
+    get_text : UInt64
+    move : UInt64
+    move_endpoint_by_unit : UInt64
+    move_endpoint_by_range : UInt64
+    select : UInt64
+    add_to_selection : UInt64
+    remove_from_selection : UInt64
+    scroll_into_view : UInt64
+    get_children : UInt64
+    show_context_menu : UInt64
+    get_enclosing_element_build_cache : UInt64
+    get_children_build_cache : UInt64
+    get_attribute_values : UInt64
   end
 
   IUIAutomationTextRange3_GUID = "6a315d69-5512-4c2e-85f0-53fce6dd4bc2"
@@ -3488,11 +3488,11 @@ lib LibWin32
   end
 
   struct IUIAutomationTextRangeArrayVTbl
-    query_interface : Proc(IUIAutomationTextRangeArray*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationTextRangeArray*, UInt32)
-    release : Proc(IUIAutomationTextRangeArray*, UInt32)
-    get_length : Proc(IUIAutomationTextRangeArray*, Int32*, HRESULT)
-    get_element : Proc(IUIAutomationTextRangeArray*, Int32, IUIAutomationTextRange*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_length : UInt64
+    get_element : UInt64
   end
 
   IUIAutomationTextRangeArray_GUID = "ce4ae76a-e717-4c98-81ea-47371d028eb6"
@@ -3502,15 +3502,15 @@ lib LibWin32
   end
 
   struct IUIAutomationTextPatternVTbl
-    query_interface : Proc(IUIAutomationTextPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationTextPattern*, UInt32)
-    release : Proc(IUIAutomationTextPattern*, UInt32)
-    range_from_point : Proc(IUIAutomationTextPattern*, POINT, IUIAutomationTextRange*, HRESULT)
-    range_from_child : Proc(IUIAutomationTextPattern*, IUIAutomationElement, IUIAutomationTextRange*, HRESULT)
-    get_selection : Proc(IUIAutomationTextPattern*, IUIAutomationTextRangeArray*, HRESULT)
-    get_visible_ranges : Proc(IUIAutomationTextPattern*, IUIAutomationTextRangeArray*, HRESULT)
-    get_document_range : Proc(IUIAutomationTextPattern*, IUIAutomationTextRange*, HRESULT)
-    get_supported_text_selection : Proc(IUIAutomationTextPattern*, SupportedTextSelection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    range_from_point : UInt64
+    range_from_child : UInt64
+    get_selection : UInt64
+    get_visible_ranges : UInt64
+    get_document_range : UInt64
+    get_supported_text_selection : UInt64
   end
 
   IUIAutomationTextPattern_GUID = "32eba289-3583-42c9-9c59-3b6d9a1e9b6a"
@@ -3520,17 +3520,17 @@ lib LibWin32
   end
 
   struct IUIAutomationTextPattern2VTbl
-    query_interface : Proc(IUIAutomationTextPattern2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationTextPattern2*, UInt32)
-    release : Proc(IUIAutomationTextPattern2*, UInt32)
-    range_from_point : Proc(IUIAutomationTextPattern2*, POINT, IUIAutomationTextRange*, HRESULT)
-    range_from_child : Proc(IUIAutomationTextPattern2*, IUIAutomationElement, IUIAutomationTextRange*, HRESULT)
-    get_selection : Proc(IUIAutomationTextPattern2*, IUIAutomationTextRangeArray*, HRESULT)
-    get_visible_ranges : Proc(IUIAutomationTextPattern2*, IUIAutomationTextRangeArray*, HRESULT)
-    get_document_range : Proc(IUIAutomationTextPattern2*, IUIAutomationTextRange*, HRESULT)
-    get_supported_text_selection : Proc(IUIAutomationTextPattern2*, SupportedTextSelection*, HRESULT)
-    range_from_annotation : Proc(IUIAutomationTextPattern2*, IUIAutomationElement, IUIAutomationTextRange*, HRESULT)
-    get_caret_range : Proc(IUIAutomationTextPattern2*, LibC::BOOL*, IUIAutomationTextRange*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    range_from_point : UInt64
+    range_from_child : UInt64
+    get_selection : UInt64
+    get_visible_ranges : UInt64
+    get_document_range : UInt64
+    get_supported_text_selection : UInt64
+    range_from_annotation : UInt64
+    get_caret_range : UInt64
   end
 
   IUIAutomationTextPattern2_GUID = "506a921a-fcc9-409f-b23b-37eb74106872"
@@ -3540,17 +3540,17 @@ lib LibWin32
   end
 
   struct IUIAutomationTextEditPatternVTbl
-    query_interface : Proc(IUIAutomationTextEditPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationTextEditPattern*, UInt32)
-    release : Proc(IUIAutomationTextEditPattern*, UInt32)
-    range_from_point : Proc(IUIAutomationTextEditPattern*, POINT, IUIAutomationTextRange*, HRESULT)
-    range_from_child : Proc(IUIAutomationTextEditPattern*, IUIAutomationElement, IUIAutomationTextRange*, HRESULT)
-    get_selection : Proc(IUIAutomationTextEditPattern*, IUIAutomationTextRangeArray*, HRESULT)
-    get_visible_ranges : Proc(IUIAutomationTextEditPattern*, IUIAutomationTextRangeArray*, HRESULT)
-    get_document_range : Proc(IUIAutomationTextEditPattern*, IUIAutomationTextRange*, HRESULT)
-    get_supported_text_selection : Proc(IUIAutomationTextEditPattern*, SupportedTextSelection*, HRESULT)
-    get_active_composition : Proc(IUIAutomationTextEditPattern*, IUIAutomationTextRange*, HRESULT)
-    get_conversion_target : Proc(IUIAutomationTextEditPattern*, IUIAutomationTextRange*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    range_from_point : UInt64
+    range_from_child : UInt64
+    get_selection : UInt64
+    get_visible_ranges : UInt64
+    get_document_range : UInt64
+    get_supported_text_selection : UInt64
+    get_active_composition : UInt64
+    get_conversion_target : UInt64
   end
 
   IUIAutomationTextEditPattern_GUID = "17e21576-996c-4870-99d9-bff323380c06"
@@ -3560,10 +3560,10 @@ lib LibWin32
   end
 
   struct IUIAutomationCustomNavigationPatternVTbl
-    query_interface : Proc(IUIAutomationCustomNavigationPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationCustomNavigationPattern*, UInt32)
-    release : Proc(IUIAutomationCustomNavigationPattern*, UInt32)
-    navigate : Proc(IUIAutomationCustomNavigationPattern*, NavigateDirection, IUIAutomationElement*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    navigate : UInt64
   end
 
   IUIAutomationCustomNavigationPattern_GUID = "01ea217a-1766-47ed-a6cc-acf492854b1f"
@@ -3573,10 +3573,10 @@ lib LibWin32
   end
 
   struct IUIAutomationActiveTextPositionChangedEventHandlerVTbl
-    query_interface : Proc(IUIAutomationActiveTextPositionChangedEventHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationActiveTextPositionChangedEventHandler*, UInt32)
-    release : Proc(IUIAutomationActiveTextPositionChangedEventHandler*, UInt32)
-    handle_active_text_position_changed_event : Proc(IUIAutomationActiveTextPositionChangedEventHandler*, IUIAutomationElement, IUIAutomationTextRange, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    handle_active_text_position_changed_event : UInt64
   end
 
   IUIAutomationActiveTextPositionChangedEventHandler_GUID = "f97933b0-8dae-4496-8997-5ba015fe0d82"
@@ -3586,33 +3586,33 @@ lib LibWin32
   end
 
   struct IUIAutomationLegacyIAccessiblePatternVTbl
-    query_interface : Proc(IUIAutomationLegacyIAccessiblePattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt32)
-    release : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt32)
-    select : Proc(IUIAutomationLegacyIAccessiblePattern*, Int32, HRESULT)
-    do_default_action : Proc(IUIAutomationLegacyIAccessiblePattern*, HRESULT)
-    set_value : Proc(IUIAutomationLegacyIAccessiblePattern*, LibC::LPWSTR, HRESULT)
-    get_current_child_id : Proc(IUIAutomationLegacyIAccessiblePattern*, Int32*, HRESULT)
-    get_current_name : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt8**, HRESULT)
-    get_current_value : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt8**, HRESULT)
-    get_current_description : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt8**, HRESULT)
-    get_current_role : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt32*, HRESULT)
-    get_current_state : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt32*, HRESULT)
-    get_current_help : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt8**, HRESULT)
-    get_current_keyboard_shortcut : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt8**, HRESULT)
-    get_current_selection : Proc(IUIAutomationLegacyIAccessiblePattern*, IUIAutomationElementArray*, HRESULT)
-    get_current_default_action : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt8**, HRESULT)
-    get_cached_child_id : Proc(IUIAutomationLegacyIAccessiblePattern*, Int32*, HRESULT)
-    get_cached_name : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt8**, HRESULT)
-    get_cached_value : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt8**, HRESULT)
-    get_cached_description : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt8**, HRESULT)
-    get_cached_role : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt32*, HRESULT)
-    get_cached_state : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt32*, HRESULT)
-    get_cached_help : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt8**, HRESULT)
-    get_cached_keyboard_shortcut : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt8**, HRESULT)
-    get_cached_selection : Proc(IUIAutomationLegacyIAccessiblePattern*, IUIAutomationElementArray*, HRESULT)
-    get_cached_default_action : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt8**, HRESULT)
-    get_i_accessible : Proc(IUIAutomationLegacyIAccessiblePattern*, IAccessible*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    select : UInt64
+    do_default_action : UInt64
+    set_value : UInt64
+    get_current_child_id : UInt64
+    get_current_name : UInt64
+    get_current_value : UInt64
+    get_current_description : UInt64
+    get_current_role : UInt64
+    get_current_state : UInt64
+    get_current_help : UInt64
+    get_current_keyboard_shortcut : UInt64
+    get_current_selection : UInt64
+    get_current_default_action : UInt64
+    get_cached_child_id : UInt64
+    get_cached_name : UInt64
+    get_cached_value : UInt64
+    get_cached_description : UInt64
+    get_cached_role : UInt64
+    get_cached_state : UInt64
+    get_cached_help : UInt64
+    get_cached_keyboard_shortcut : UInt64
+    get_cached_selection : UInt64
+    get_cached_default_action : UInt64
+    get_i_accessible : UInt64
   end
 
   IUIAutomationLegacyIAccessiblePattern_GUID = "828055ad-355b-4435-86d5-3b51c14a9b1b"
@@ -3622,10 +3622,10 @@ lib LibWin32
   end
 
   struct IUIAutomationItemContainerPatternVTbl
-    query_interface : Proc(IUIAutomationItemContainerPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationItemContainerPattern*, UInt32)
-    release : Proc(IUIAutomationItemContainerPattern*, UInt32)
-    find_item_by_property : Proc(IUIAutomationItemContainerPattern*, IUIAutomationElement, Int32, VARIANT, IUIAutomationElement*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    find_item_by_property : UInt64
   end
 
   IUIAutomationItemContainerPattern_GUID = "c690fdb2-27a8-423c-812d-429773c9084e"
@@ -3635,10 +3635,10 @@ lib LibWin32
   end
 
   struct IUIAutomationVirtualizedItemPatternVTbl
-    query_interface : Proc(IUIAutomationVirtualizedItemPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationVirtualizedItemPattern*, UInt32)
-    release : Proc(IUIAutomationVirtualizedItemPattern*, UInt32)
-    realize : Proc(IUIAutomationVirtualizedItemPattern*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    realize : UInt64
   end
 
   IUIAutomationVirtualizedItemPattern_GUID = "6ba3d7a6-04cf-4f11-8793-a8d1cde9969f"
@@ -3648,19 +3648,19 @@ lib LibWin32
   end
 
   struct IUIAutomationAnnotationPatternVTbl
-    query_interface : Proc(IUIAutomationAnnotationPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationAnnotationPattern*, UInt32)
-    release : Proc(IUIAutomationAnnotationPattern*, UInt32)
-    get_current_annotation_type_id : Proc(IUIAutomationAnnotationPattern*, Int32*, HRESULT)
-    get_current_annotation_type_name : Proc(IUIAutomationAnnotationPattern*, UInt8**, HRESULT)
-    get_current_author : Proc(IUIAutomationAnnotationPattern*, UInt8**, HRESULT)
-    get_current_date_time : Proc(IUIAutomationAnnotationPattern*, UInt8**, HRESULT)
-    get_current_target : Proc(IUIAutomationAnnotationPattern*, IUIAutomationElement*, HRESULT)
-    get_cached_annotation_type_id : Proc(IUIAutomationAnnotationPattern*, Int32*, HRESULT)
-    get_cached_annotation_type_name : Proc(IUIAutomationAnnotationPattern*, UInt8**, HRESULT)
-    get_cached_author : Proc(IUIAutomationAnnotationPattern*, UInt8**, HRESULT)
-    get_cached_date_time : Proc(IUIAutomationAnnotationPattern*, UInt8**, HRESULT)
-    get_cached_target : Proc(IUIAutomationAnnotationPattern*, IUIAutomationElement*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_current_annotation_type_id : UInt64
+    get_current_annotation_type_name : UInt64
+    get_current_author : UInt64
+    get_current_date_time : UInt64
+    get_current_target : UInt64
+    get_cached_annotation_type_id : UInt64
+    get_cached_annotation_type_name : UInt64
+    get_cached_author : UInt64
+    get_cached_date_time : UInt64
+    get_cached_target : UInt64
   end
 
   IUIAutomationAnnotationPattern_GUID = "9a175b21-339e-41b1-8e8b-623f6b681098"
@@ -3670,25 +3670,25 @@ lib LibWin32
   end
 
   struct IUIAutomationStylesPatternVTbl
-    query_interface : Proc(IUIAutomationStylesPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationStylesPattern*, UInt32)
-    release : Proc(IUIAutomationStylesPattern*, UInt32)
-    get_current_style_id : Proc(IUIAutomationStylesPattern*, Int32*, HRESULT)
-    get_current_style_name : Proc(IUIAutomationStylesPattern*, UInt8**, HRESULT)
-    get_current_fill_color : Proc(IUIAutomationStylesPattern*, Int32*, HRESULT)
-    get_current_fill_pattern_style : Proc(IUIAutomationStylesPattern*, UInt8**, HRESULT)
-    get_current_shape : Proc(IUIAutomationStylesPattern*, UInt8**, HRESULT)
-    get_current_fill_pattern_color : Proc(IUIAutomationStylesPattern*, Int32*, HRESULT)
-    get_current_extended_properties : Proc(IUIAutomationStylesPattern*, UInt8**, HRESULT)
-    get_current_extended_properties_as_array : Proc(IUIAutomationStylesPattern*, ExtendedProperty**, Int32*, HRESULT)
-    get_cached_style_id : Proc(IUIAutomationStylesPattern*, Int32*, HRESULT)
-    get_cached_style_name : Proc(IUIAutomationStylesPattern*, UInt8**, HRESULT)
-    get_cached_fill_color : Proc(IUIAutomationStylesPattern*, Int32*, HRESULT)
-    get_cached_fill_pattern_style : Proc(IUIAutomationStylesPattern*, UInt8**, HRESULT)
-    get_cached_shape : Proc(IUIAutomationStylesPattern*, UInt8**, HRESULT)
-    get_cached_fill_pattern_color : Proc(IUIAutomationStylesPattern*, Int32*, HRESULT)
-    get_cached_extended_properties : Proc(IUIAutomationStylesPattern*, UInt8**, HRESULT)
-    get_cached_extended_properties_as_array : Proc(IUIAutomationStylesPattern*, ExtendedProperty**, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_current_style_id : UInt64
+    get_current_style_name : UInt64
+    get_current_fill_color : UInt64
+    get_current_fill_pattern_style : UInt64
+    get_current_shape : UInt64
+    get_current_fill_pattern_color : UInt64
+    get_current_extended_properties : UInt64
+    get_current_extended_properties_as_array : UInt64
+    get_cached_style_id : UInt64
+    get_cached_style_name : UInt64
+    get_cached_fill_color : UInt64
+    get_cached_fill_pattern_style : UInt64
+    get_cached_shape : UInt64
+    get_cached_fill_pattern_color : UInt64
+    get_cached_extended_properties : UInt64
+    get_cached_extended_properties_as_array : UInt64
   end
 
   IUIAutomationStylesPattern_GUID = "85b5f0a2-bd79-484a-ad2b-388c9838d5fb"
@@ -3698,10 +3698,10 @@ lib LibWin32
   end
 
   struct IUIAutomationSpreadsheetPatternVTbl
-    query_interface : Proc(IUIAutomationSpreadsheetPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationSpreadsheetPattern*, UInt32)
-    release : Proc(IUIAutomationSpreadsheetPattern*, UInt32)
-    get_item_by_name : Proc(IUIAutomationSpreadsheetPattern*, UInt8*, IUIAutomationElement*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_item_by_name : UInt64
   end
 
   IUIAutomationSpreadsheetPattern_GUID = "7517a7c8-faae-4de9-9f08-29b91e8595c1"
@@ -3711,15 +3711,15 @@ lib LibWin32
   end
 
   struct IUIAutomationSpreadsheetItemPatternVTbl
-    query_interface : Proc(IUIAutomationSpreadsheetItemPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationSpreadsheetItemPattern*, UInt32)
-    release : Proc(IUIAutomationSpreadsheetItemPattern*, UInt32)
-    get_current_formula : Proc(IUIAutomationSpreadsheetItemPattern*, UInt8**, HRESULT)
-    get_current_annotation_objects : Proc(IUIAutomationSpreadsheetItemPattern*, IUIAutomationElementArray*, HRESULT)
-    get_current_annotation_types : Proc(IUIAutomationSpreadsheetItemPattern*, SAFEARRAY**, HRESULT)
-    get_cached_formula : Proc(IUIAutomationSpreadsheetItemPattern*, UInt8**, HRESULT)
-    get_cached_annotation_objects : Proc(IUIAutomationSpreadsheetItemPattern*, IUIAutomationElementArray*, HRESULT)
-    get_cached_annotation_types : Proc(IUIAutomationSpreadsheetItemPattern*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_current_formula : UInt64
+    get_current_annotation_objects : UInt64
+    get_current_annotation_types : UInt64
+    get_cached_formula : UInt64
+    get_cached_annotation_objects : UInt64
+    get_cached_annotation_types : UInt64
   end
 
   IUIAutomationSpreadsheetItemPattern_GUID = "7d4fb86c-8d34-40e1-8e83-62c15204e335"
@@ -3729,28 +3729,28 @@ lib LibWin32
   end
 
   struct IUIAutomationTransformPattern2VTbl
-    query_interface : Proc(IUIAutomationTransformPattern2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationTransformPattern2*, UInt32)
-    release : Proc(IUIAutomationTransformPattern2*, UInt32)
-    move : Proc(IUIAutomationTransformPattern2*, Float64, Float64, HRESULT)
-    resize : Proc(IUIAutomationTransformPattern2*, Float64, Float64, HRESULT)
-    rotate : Proc(IUIAutomationTransformPattern2*, Float64, HRESULT)
-    get_current_can_move : Proc(IUIAutomationTransformPattern2*, LibC::BOOL*, HRESULT)
-    get_current_can_resize : Proc(IUIAutomationTransformPattern2*, LibC::BOOL*, HRESULT)
-    get_current_can_rotate : Proc(IUIAutomationTransformPattern2*, LibC::BOOL*, HRESULT)
-    get_cached_can_move : Proc(IUIAutomationTransformPattern2*, LibC::BOOL*, HRESULT)
-    get_cached_can_resize : Proc(IUIAutomationTransformPattern2*, LibC::BOOL*, HRESULT)
-    get_cached_can_rotate : Proc(IUIAutomationTransformPattern2*, LibC::BOOL*, HRESULT)
-    zoom : Proc(IUIAutomationTransformPattern2*, Float64, HRESULT)
-    zoom_by_unit : Proc(IUIAutomationTransformPattern2*, ZoomUnit, HRESULT)
-    get_current_can_zoom : Proc(IUIAutomationTransformPattern2*, LibC::BOOL*, HRESULT)
-    get_cached_can_zoom : Proc(IUIAutomationTransformPattern2*, LibC::BOOL*, HRESULT)
-    get_current_zoom_level : Proc(IUIAutomationTransformPattern2*, Float64*, HRESULT)
-    get_cached_zoom_level : Proc(IUIAutomationTransformPattern2*, Float64*, HRESULT)
-    get_current_zoom_minimum : Proc(IUIAutomationTransformPattern2*, Float64*, HRESULT)
-    get_cached_zoom_minimum : Proc(IUIAutomationTransformPattern2*, Float64*, HRESULT)
-    get_current_zoom_maximum : Proc(IUIAutomationTransformPattern2*, Float64*, HRESULT)
-    get_cached_zoom_maximum : Proc(IUIAutomationTransformPattern2*, Float64*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    move : UInt64
+    resize : UInt64
+    rotate : UInt64
+    get_current_can_move : UInt64
+    get_current_can_resize : UInt64
+    get_current_can_rotate : UInt64
+    get_cached_can_move : UInt64
+    get_cached_can_resize : UInt64
+    get_cached_can_rotate : UInt64
+    zoom : UInt64
+    zoom_by_unit : UInt64
+    get_current_can_zoom : UInt64
+    get_cached_can_zoom : UInt64
+    get_current_zoom_level : UInt64
+    get_cached_zoom_level : UInt64
+    get_current_zoom_minimum : UInt64
+    get_cached_zoom_minimum : UInt64
+    get_current_zoom_maximum : UInt64
+    get_cached_zoom_maximum : UInt64
   end
 
   IUIAutomationTransformPattern2_GUID = "6d74d017-6ecb-4381-b38b-3c17a48ff1c2"
@@ -3760,11 +3760,11 @@ lib LibWin32
   end
 
   struct IUIAutomationTextChildPatternVTbl
-    query_interface : Proc(IUIAutomationTextChildPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationTextChildPattern*, UInt32)
-    release : Proc(IUIAutomationTextChildPattern*, UInt32)
-    get_text_container : Proc(IUIAutomationTextChildPattern*, IUIAutomationElement*, HRESULT)
-    get_text_range : Proc(IUIAutomationTextChildPattern*, IUIAutomationTextRange*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_text_container : UInt64
+    get_text_range : UInt64
   end
 
   IUIAutomationTextChildPattern_GUID = "6552b038-ae05-40c8-abfd-aa08352aab86"
@@ -3774,17 +3774,17 @@ lib LibWin32
   end
 
   struct IUIAutomationDragPatternVTbl
-    query_interface : Proc(IUIAutomationDragPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationDragPattern*, UInt32)
-    release : Proc(IUIAutomationDragPattern*, UInt32)
-    get_current_is_grabbed : Proc(IUIAutomationDragPattern*, LibC::BOOL*, HRESULT)
-    get_cached_is_grabbed : Proc(IUIAutomationDragPattern*, LibC::BOOL*, HRESULT)
-    get_current_drop_effect : Proc(IUIAutomationDragPattern*, UInt8**, HRESULT)
-    get_cached_drop_effect : Proc(IUIAutomationDragPattern*, UInt8**, HRESULT)
-    get_current_drop_effects : Proc(IUIAutomationDragPattern*, SAFEARRAY**, HRESULT)
-    get_cached_drop_effects : Proc(IUIAutomationDragPattern*, SAFEARRAY**, HRESULT)
-    get_current_grabbed_items : Proc(IUIAutomationDragPattern*, IUIAutomationElementArray*, HRESULT)
-    get_cached_grabbed_items : Proc(IUIAutomationDragPattern*, IUIAutomationElementArray*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_current_is_grabbed : UInt64
+    get_cached_is_grabbed : UInt64
+    get_current_drop_effect : UInt64
+    get_cached_drop_effect : UInt64
+    get_current_drop_effects : UInt64
+    get_cached_drop_effects : UInt64
+    get_current_grabbed_items : UInt64
+    get_cached_grabbed_items : UInt64
   end
 
   IUIAutomationDragPattern_GUID = "1dc7b570-1f54-4bad-bcda-d36a722fb7bd"
@@ -3794,13 +3794,13 @@ lib LibWin32
   end
 
   struct IUIAutomationDropTargetPatternVTbl
-    query_interface : Proc(IUIAutomationDropTargetPattern*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationDropTargetPattern*, UInt32)
-    release : Proc(IUIAutomationDropTargetPattern*, UInt32)
-    get_current_drop_target_effect : Proc(IUIAutomationDropTargetPattern*, UInt8**, HRESULT)
-    get_cached_drop_target_effect : Proc(IUIAutomationDropTargetPattern*, UInt8**, HRESULT)
-    get_current_drop_target_effects : Proc(IUIAutomationDropTargetPattern*, SAFEARRAY**, HRESULT)
-    get_cached_drop_target_effects : Proc(IUIAutomationDropTargetPattern*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_current_drop_target_effect : UInt64
+    get_cached_drop_target_effect : UInt64
+    get_current_drop_target_effects : UInt64
+    get_cached_drop_target_effects : UInt64
   end
 
   IUIAutomationDropTargetPattern_GUID = "69a095f7-eee4-430e-a46b-fb73b1ae39a5"
@@ -3810,97 +3810,97 @@ lib LibWin32
   end
 
   struct IUIAutomationElement2VTbl
-    query_interface : Proc(IUIAutomationElement2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationElement2*, UInt32)
-    release : Proc(IUIAutomationElement2*, UInt32)
-    set_focus : Proc(IUIAutomationElement2*, HRESULT)
-    get_runtime_id : Proc(IUIAutomationElement2*, SAFEARRAY**, HRESULT)
-    find_first : Proc(IUIAutomationElement2*, TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)
-    find_all : Proc(IUIAutomationElement2*, TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)
-    find_first_build_cache : Proc(IUIAutomationElement2*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    find_all_build_cache : Proc(IUIAutomationElement2*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)
-    build_updated_cache : Proc(IUIAutomationElement2*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_current_property_value : Proc(IUIAutomationElement2*, Int32, VARIANT*, HRESULT)
-    get_current_property_value_ex : Proc(IUIAutomationElement2*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_cached_property_value : Proc(IUIAutomationElement2*, Int32, VARIANT*, HRESULT)
-    get_cached_property_value_ex : Proc(IUIAutomationElement2*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_current_pattern_as : Proc(IUIAutomationElement2*, Int32, Guid*, Void**, HRESULT)
-    get_cached_pattern_as : Proc(IUIAutomationElement2*, Int32, Guid*, Void**, HRESULT)
-    get_current_pattern : Proc(IUIAutomationElement2*, Int32, IUnknown*, HRESULT)
-    get_cached_pattern : Proc(IUIAutomationElement2*, Int32, IUnknown*, HRESULT)
-    get_cached_parent : Proc(IUIAutomationElement2*, IUIAutomationElement*, HRESULT)
-    get_cached_children : Proc(IUIAutomationElement2*, IUIAutomationElementArray*, HRESULT)
-    get_current_process_id : Proc(IUIAutomationElement2*, Int32*, HRESULT)
-    get_current_control_type : Proc(IUIAutomationElement2*, Int32*, HRESULT)
-    get_current_localized_control_type : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_current_name : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_current_accelerator_key : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_current_access_key : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_current_has_keyboard_focus : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_current_is_keyboard_focusable : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_current_is_enabled : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_current_automation_id : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_current_class_name : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_current_help_text : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_current_culture : Proc(IUIAutomationElement2*, Int32*, HRESULT)
-    get_current_is_control_element : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_current_is_content_element : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_current_is_password : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_current_native_window_handle : Proc(IUIAutomationElement2*, LibC::HANDLE, HRESULT)
-    get_current_item_type : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_current_is_offscreen : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_current_orientation : Proc(IUIAutomationElement2*, OrientationType*, HRESULT)
-    get_current_framework_id : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_current_is_required_for_form : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_current_item_status : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_current_bounding_rectangle : Proc(IUIAutomationElement2*, RECT*, HRESULT)
-    get_current_labeled_by : Proc(IUIAutomationElement2*, IUIAutomationElement*, HRESULT)
-    get_current_aria_role : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_current_aria_properties : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_current_is_data_valid_for_form : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_current_controller_for : Proc(IUIAutomationElement2*, IUIAutomationElementArray*, HRESULT)
-    get_current_described_by : Proc(IUIAutomationElement2*, IUIAutomationElementArray*, HRESULT)
-    get_current_flows_to : Proc(IUIAutomationElement2*, IUIAutomationElementArray*, HRESULT)
-    get_current_provider_description : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_cached_process_id : Proc(IUIAutomationElement2*, Int32*, HRESULT)
-    get_cached_control_type : Proc(IUIAutomationElement2*, Int32*, HRESULT)
-    get_cached_localized_control_type : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_cached_name : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_cached_accelerator_key : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_cached_access_key : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_cached_has_keyboard_focus : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_cached_is_keyboard_focusable : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_cached_is_enabled : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_cached_automation_id : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_cached_class_name : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_cached_help_text : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_cached_culture : Proc(IUIAutomationElement2*, Int32*, HRESULT)
-    get_cached_is_control_element : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_cached_is_content_element : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_cached_is_password : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_cached_native_window_handle : Proc(IUIAutomationElement2*, LibC::HANDLE, HRESULT)
-    get_cached_item_type : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_cached_is_offscreen : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_cached_orientation : Proc(IUIAutomationElement2*, OrientationType*, HRESULT)
-    get_cached_framework_id : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_cached_is_required_for_form : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_cached_item_status : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_cached_bounding_rectangle : Proc(IUIAutomationElement2*, RECT*, HRESULT)
-    get_cached_labeled_by : Proc(IUIAutomationElement2*, IUIAutomationElement*, HRESULT)
-    get_cached_aria_role : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_cached_aria_properties : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_cached_is_data_valid_for_form : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_cached_controller_for : Proc(IUIAutomationElement2*, IUIAutomationElementArray*, HRESULT)
-    get_cached_described_by : Proc(IUIAutomationElement2*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_to : Proc(IUIAutomationElement2*, IUIAutomationElementArray*, HRESULT)
-    get_cached_provider_description : Proc(IUIAutomationElement2*, UInt8**, HRESULT)
-    get_clickable_point : Proc(IUIAutomationElement2*, POINT*, LibC::BOOL*, HRESULT)
-    get_current_optimize_for_visual_content : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_cached_optimize_for_visual_content : Proc(IUIAutomationElement2*, LibC::BOOL*, HRESULT)
-    get_current_live_setting : Proc(IUIAutomationElement2*, LiveSetting*, HRESULT)
-    get_cached_live_setting : Proc(IUIAutomationElement2*, LiveSetting*, HRESULT)
-    get_current_flows_from : Proc(IUIAutomationElement2*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_from : Proc(IUIAutomationElement2*, IUIAutomationElementArray*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_focus : UInt64
+    get_runtime_id : UInt64
+    find_first : UInt64
+    find_all : UInt64
+    find_first_build_cache : UInt64
+    find_all_build_cache : UInt64
+    build_updated_cache : UInt64
+    get_current_property_value : UInt64
+    get_current_property_value_ex : UInt64
+    get_cached_property_value : UInt64
+    get_cached_property_value_ex : UInt64
+    get_current_pattern_as : UInt64
+    get_cached_pattern_as : UInt64
+    get_current_pattern : UInt64
+    get_cached_pattern : UInt64
+    get_cached_parent : UInt64
+    get_cached_children : UInt64
+    get_current_process_id : UInt64
+    get_current_control_type : UInt64
+    get_current_localized_control_type : UInt64
+    get_current_name : UInt64
+    get_current_accelerator_key : UInt64
+    get_current_access_key : UInt64
+    get_current_has_keyboard_focus : UInt64
+    get_current_is_keyboard_focusable : UInt64
+    get_current_is_enabled : UInt64
+    get_current_automation_id : UInt64
+    get_current_class_name : UInt64
+    get_current_help_text : UInt64
+    get_current_culture : UInt64
+    get_current_is_control_element : UInt64
+    get_current_is_content_element : UInt64
+    get_current_is_password : UInt64
+    get_current_native_window_handle : UInt64
+    get_current_item_type : UInt64
+    get_current_is_offscreen : UInt64
+    get_current_orientation : UInt64
+    get_current_framework_id : UInt64
+    get_current_is_required_for_form : UInt64
+    get_current_item_status : UInt64
+    get_current_bounding_rectangle : UInt64
+    get_current_labeled_by : UInt64
+    get_current_aria_role : UInt64
+    get_current_aria_properties : UInt64
+    get_current_is_data_valid_for_form : UInt64
+    get_current_controller_for : UInt64
+    get_current_described_by : UInt64
+    get_current_flows_to : UInt64
+    get_current_provider_description : UInt64
+    get_cached_process_id : UInt64
+    get_cached_control_type : UInt64
+    get_cached_localized_control_type : UInt64
+    get_cached_name : UInt64
+    get_cached_accelerator_key : UInt64
+    get_cached_access_key : UInt64
+    get_cached_has_keyboard_focus : UInt64
+    get_cached_is_keyboard_focusable : UInt64
+    get_cached_is_enabled : UInt64
+    get_cached_automation_id : UInt64
+    get_cached_class_name : UInt64
+    get_cached_help_text : UInt64
+    get_cached_culture : UInt64
+    get_cached_is_control_element : UInt64
+    get_cached_is_content_element : UInt64
+    get_cached_is_password : UInt64
+    get_cached_native_window_handle : UInt64
+    get_cached_item_type : UInt64
+    get_cached_is_offscreen : UInt64
+    get_cached_orientation : UInt64
+    get_cached_framework_id : UInt64
+    get_cached_is_required_for_form : UInt64
+    get_cached_item_status : UInt64
+    get_cached_bounding_rectangle : UInt64
+    get_cached_labeled_by : UInt64
+    get_cached_aria_role : UInt64
+    get_cached_aria_properties : UInt64
+    get_cached_is_data_valid_for_form : UInt64
+    get_cached_controller_for : UInt64
+    get_cached_described_by : UInt64
+    get_cached_flows_to : UInt64
+    get_cached_provider_description : UInt64
+    get_clickable_point : UInt64
+    get_current_optimize_for_visual_content : UInt64
+    get_cached_optimize_for_visual_content : UInt64
+    get_current_live_setting : UInt64
+    get_cached_live_setting : UInt64
+    get_current_flows_from : UInt64
+    get_cached_flows_from : UInt64
   end
 
   IUIAutomationElement2_GUID = "6749c683-f70d-4487-a698-5f79d55290d6"
@@ -3910,100 +3910,100 @@ lib LibWin32
   end
 
   struct IUIAutomationElement3VTbl
-    query_interface : Proc(IUIAutomationElement3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationElement3*, UInt32)
-    release : Proc(IUIAutomationElement3*, UInt32)
-    set_focus : Proc(IUIAutomationElement3*, HRESULT)
-    get_runtime_id : Proc(IUIAutomationElement3*, SAFEARRAY**, HRESULT)
-    find_first : Proc(IUIAutomationElement3*, TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)
-    find_all : Proc(IUIAutomationElement3*, TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)
-    find_first_build_cache : Proc(IUIAutomationElement3*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    find_all_build_cache : Proc(IUIAutomationElement3*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)
-    build_updated_cache : Proc(IUIAutomationElement3*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_current_property_value : Proc(IUIAutomationElement3*, Int32, VARIANT*, HRESULT)
-    get_current_property_value_ex : Proc(IUIAutomationElement3*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_cached_property_value : Proc(IUIAutomationElement3*, Int32, VARIANT*, HRESULT)
-    get_cached_property_value_ex : Proc(IUIAutomationElement3*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_current_pattern_as : Proc(IUIAutomationElement3*, Int32, Guid*, Void**, HRESULT)
-    get_cached_pattern_as : Proc(IUIAutomationElement3*, Int32, Guid*, Void**, HRESULT)
-    get_current_pattern : Proc(IUIAutomationElement3*, Int32, IUnknown*, HRESULT)
-    get_cached_pattern : Proc(IUIAutomationElement3*, Int32, IUnknown*, HRESULT)
-    get_cached_parent : Proc(IUIAutomationElement3*, IUIAutomationElement*, HRESULT)
-    get_cached_children : Proc(IUIAutomationElement3*, IUIAutomationElementArray*, HRESULT)
-    get_current_process_id : Proc(IUIAutomationElement3*, Int32*, HRESULT)
-    get_current_control_type : Proc(IUIAutomationElement3*, Int32*, HRESULT)
-    get_current_localized_control_type : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_current_name : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_current_accelerator_key : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_current_access_key : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_current_has_keyboard_focus : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_current_is_keyboard_focusable : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_current_is_enabled : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_current_automation_id : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_current_class_name : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_current_help_text : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_current_culture : Proc(IUIAutomationElement3*, Int32*, HRESULT)
-    get_current_is_control_element : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_current_is_content_element : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_current_is_password : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_current_native_window_handle : Proc(IUIAutomationElement3*, LibC::HANDLE, HRESULT)
-    get_current_item_type : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_current_is_offscreen : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_current_orientation : Proc(IUIAutomationElement3*, OrientationType*, HRESULT)
-    get_current_framework_id : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_current_is_required_for_form : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_current_item_status : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_current_bounding_rectangle : Proc(IUIAutomationElement3*, RECT*, HRESULT)
-    get_current_labeled_by : Proc(IUIAutomationElement3*, IUIAutomationElement*, HRESULT)
-    get_current_aria_role : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_current_aria_properties : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_current_is_data_valid_for_form : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_current_controller_for : Proc(IUIAutomationElement3*, IUIAutomationElementArray*, HRESULT)
-    get_current_described_by : Proc(IUIAutomationElement3*, IUIAutomationElementArray*, HRESULT)
-    get_current_flows_to : Proc(IUIAutomationElement3*, IUIAutomationElementArray*, HRESULT)
-    get_current_provider_description : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_cached_process_id : Proc(IUIAutomationElement3*, Int32*, HRESULT)
-    get_cached_control_type : Proc(IUIAutomationElement3*, Int32*, HRESULT)
-    get_cached_localized_control_type : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_cached_name : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_cached_accelerator_key : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_cached_access_key : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_cached_has_keyboard_focus : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_cached_is_keyboard_focusable : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_cached_is_enabled : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_cached_automation_id : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_cached_class_name : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_cached_help_text : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_cached_culture : Proc(IUIAutomationElement3*, Int32*, HRESULT)
-    get_cached_is_control_element : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_cached_is_content_element : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_cached_is_password : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_cached_native_window_handle : Proc(IUIAutomationElement3*, LibC::HANDLE, HRESULT)
-    get_cached_item_type : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_cached_is_offscreen : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_cached_orientation : Proc(IUIAutomationElement3*, OrientationType*, HRESULT)
-    get_cached_framework_id : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_cached_is_required_for_form : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_cached_item_status : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_cached_bounding_rectangle : Proc(IUIAutomationElement3*, RECT*, HRESULT)
-    get_cached_labeled_by : Proc(IUIAutomationElement3*, IUIAutomationElement*, HRESULT)
-    get_cached_aria_role : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_cached_aria_properties : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_cached_is_data_valid_for_form : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_cached_controller_for : Proc(IUIAutomationElement3*, IUIAutomationElementArray*, HRESULT)
-    get_cached_described_by : Proc(IUIAutomationElement3*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_to : Proc(IUIAutomationElement3*, IUIAutomationElementArray*, HRESULT)
-    get_cached_provider_description : Proc(IUIAutomationElement3*, UInt8**, HRESULT)
-    get_clickable_point : Proc(IUIAutomationElement3*, POINT*, LibC::BOOL*, HRESULT)
-    get_current_optimize_for_visual_content : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_cached_optimize_for_visual_content : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_current_live_setting : Proc(IUIAutomationElement3*, LiveSetting*, HRESULT)
-    get_cached_live_setting : Proc(IUIAutomationElement3*, LiveSetting*, HRESULT)
-    get_current_flows_from : Proc(IUIAutomationElement3*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_from : Proc(IUIAutomationElement3*, IUIAutomationElementArray*, HRESULT)
-    show_context_menu : Proc(IUIAutomationElement3*, HRESULT)
-    get_current_is_peripheral : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
-    get_cached_is_peripheral : Proc(IUIAutomationElement3*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_focus : UInt64
+    get_runtime_id : UInt64
+    find_first : UInt64
+    find_all : UInt64
+    find_first_build_cache : UInt64
+    find_all_build_cache : UInt64
+    build_updated_cache : UInt64
+    get_current_property_value : UInt64
+    get_current_property_value_ex : UInt64
+    get_cached_property_value : UInt64
+    get_cached_property_value_ex : UInt64
+    get_current_pattern_as : UInt64
+    get_cached_pattern_as : UInt64
+    get_current_pattern : UInt64
+    get_cached_pattern : UInt64
+    get_cached_parent : UInt64
+    get_cached_children : UInt64
+    get_current_process_id : UInt64
+    get_current_control_type : UInt64
+    get_current_localized_control_type : UInt64
+    get_current_name : UInt64
+    get_current_accelerator_key : UInt64
+    get_current_access_key : UInt64
+    get_current_has_keyboard_focus : UInt64
+    get_current_is_keyboard_focusable : UInt64
+    get_current_is_enabled : UInt64
+    get_current_automation_id : UInt64
+    get_current_class_name : UInt64
+    get_current_help_text : UInt64
+    get_current_culture : UInt64
+    get_current_is_control_element : UInt64
+    get_current_is_content_element : UInt64
+    get_current_is_password : UInt64
+    get_current_native_window_handle : UInt64
+    get_current_item_type : UInt64
+    get_current_is_offscreen : UInt64
+    get_current_orientation : UInt64
+    get_current_framework_id : UInt64
+    get_current_is_required_for_form : UInt64
+    get_current_item_status : UInt64
+    get_current_bounding_rectangle : UInt64
+    get_current_labeled_by : UInt64
+    get_current_aria_role : UInt64
+    get_current_aria_properties : UInt64
+    get_current_is_data_valid_for_form : UInt64
+    get_current_controller_for : UInt64
+    get_current_described_by : UInt64
+    get_current_flows_to : UInt64
+    get_current_provider_description : UInt64
+    get_cached_process_id : UInt64
+    get_cached_control_type : UInt64
+    get_cached_localized_control_type : UInt64
+    get_cached_name : UInt64
+    get_cached_accelerator_key : UInt64
+    get_cached_access_key : UInt64
+    get_cached_has_keyboard_focus : UInt64
+    get_cached_is_keyboard_focusable : UInt64
+    get_cached_is_enabled : UInt64
+    get_cached_automation_id : UInt64
+    get_cached_class_name : UInt64
+    get_cached_help_text : UInt64
+    get_cached_culture : UInt64
+    get_cached_is_control_element : UInt64
+    get_cached_is_content_element : UInt64
+    get_cached_is_password : UInt64
+    get_cached_native_window_handle : UInt64
+    get_cached_item_type : UInt64
+    get_cached_is_offscreen : UInt64
+    get_cached_orientation : UInt64
+    get_cached_framework_id : UInt64
+    get_cached_is_required_for_form : UInt64
+    get_cached_item_status : UInt64
+    get_cached_bounding_rectangle : UInt64
+    get_cached_labeled_by : UInt64
+    get_cached_aria_role : UInt64
+    get_cached_aria_properties : UInt64
+    get_cached_is_data_valid_for_form : UInt64
+    get_cached_controller_for : UInt64
+    get_cached_described_by : UInt64
+    get_cached_flows_to : UInt64
+    get_cached_provider_description : UInt64
+    get_clickable_point : UInt64
+    get_current_optimize_for_visual_content : UInt64
+    get_cached_optimize_for_visual_content : UInt64
+    get_current_live_setting : UInt64
+    get_cached_live_setting : UInt64
+    get_current_flows_from : UInt64
+    get_cached_flows_from : UInt64
+    show_context_menu : UInt64
+    get_current_is_peripheral : UInt64
+    get_cached_is_peripheral : UInt64
   end
 
   IUIAutomationElement3_GUID = "8471df34-aee0-4a01-a7de-7db9af12c296"
@@ -4013,110 +4013,110 @@ lib LibWin32
   end
 
   struct IUIAutomationElement4VTbl
-    query_interface : Proc(IUIAutomationElement4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationElement4*, UInt32)
-    release : Proc(IUIAutomationElement4*, UInt32)
-    set_focus : Proc(IUIAutomationElement4*, HRESULT)
-    get_runtime_id : Proc(IUIAutomationElement4*, SAFEARRAY**, HRESULT)
-    find_first : Proc(IUIAutomationElement4*, TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)
-    find_all : Proc(IUIAutomationElement4*, TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)
-    find_first_build_cache : Proc(IUIAutomationElement4*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    find_all_build_cache : Proc(IUIAutomationElement4*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)
-    build_updated_cache : Proc(IUIAutomationElement4*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_current_property_value : Proc(IUIAutomationElement4*, Int32, VARIANT*, HRESULT)
-    get_current_property_value_ex : Proc(IUIAutomationElement4*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_cached_property_value : Proc(IUIAutomationElement4*, Int32, VARIANT*, HRESULT)
-    get_cached_property_value_ex : Proc(IUIAutomationElement4*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_current_pattern_as : Proc(IUIAutomationElement4*, Int32, Guid*, Void**, HRESULT)
-    get_cached_pattern_as : Proc(IUIAutomationElement4*, Int32, Guid*, Void**, HRESULT)
-    get_current_pattern : Proc(IUIAutomationElement4*, Int32, IUnknown*, HRESULT)
-    get_cached_pattern : Proc(IUIAutomationElement4*, Int32, IUnknown*, HRESULT)
-    get_cached_parent : Proc(IUIAutomationElement4*, IUIAutomationElement*, HRESULT)
-    get_cached_children : Proc(IUIAutomationElement4*, IUIAutomationElementArray*, HRESULT)
-    get_current_process_id : Proc(IUIAutomationElement4*, Int32*, HRESULT)
-    get_current_control_type : Proc(IUIAutomationElement4*, Int32*, HRESULT)
-    get_current_localized_control_type : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_current_name : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_current_accelerator_key : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_current_access_key : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_current_has_keyboard_focus : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_current_is_keyboard_focusable : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_current_is_enabled : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_current_automation_id : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_current_class_name : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_current_help_text : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_current_culture : Proc(IUIAutomationElement4*, Int32*, HRESULT)
-    get_current_is_control_element : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_current_is_content_element : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_current_is_password : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_current_native_window_handle : Proc(IUIAutomationElement4*, LibC::HANDLE, HRESULT)
-    get_current_item_type : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_current_is_offscreen : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_current_orientation : Proc(IUIAutomationElement4*, OrientationType*, HRESULT)
-    get_current_framework_id : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_current_is_required_for_form : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_current_item_status : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_current_bounding_rectangle : Proc(IUIAutomationElement4*, RECT*, HRESULT)
-    get_current_labeled_by : Proc(IUIAutomationElement4*, IUIAutomationElement*, HRESULT)
-    get_current_aria_role : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_current_aria_properties : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_current_is_data_valid_for_form : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_current_controller_for : Proc(IUIAutomationElement4*, IUIAutomationElementArray*, HRESULT)
-    get_current_described_by : Proc(IUIAutomationElement4*, IUIAutomationElementArray*, HRESULT)
-    get_current_flows_to : Proc(IUIAutomationElement4*, IUIAutomationElementArray*, HRESULT)
-    get_current_provider_description : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_cached_process_id : Proc(IUIAutomationElement4*, Int32*, HRESULT)
-    get_cached_control_type : Proc(IUIAutomationElement4*, Int32*, HRESULT)
-    get_cached_localized_control_type : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_cached_name : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_cached_accelerator_key : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_cached_access_key : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_cached_has_keyboard_focus : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_cached_is_keyboard_focusable : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_cached_is_enabled : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_cached_automation_id : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_cached_class_name : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_cached_help_text : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_cached_culture : Proc(IUIAutomationElement4*, Int32*, HRESULT)
-    get_cached_is_control_element : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_cached_is_content_element : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_cached_is_password : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_cached_native_window_handle : Proc(IUIAutomationElement4*, LibC::HANDLE, HRESULT)
-    get_cached_item_type : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_cached_is_offscreen : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_cached_orientation : Proc(IUIAutomationElement4*, OrientationType*, HRESULT)
-    get_cached_framework_id : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_cached_is_required_for_form : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_cached_item_status : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_cached_bounding_rectangle : Proc(IUIAutomationElement4*, RECT*, HRESULT)
-    get_cached_labeled_by : Proc(IUIAutomationElement4*, IUIAutomationElement*, HRESULT)
-    get_cached_aria_role : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_cached_aria_properties : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_cached_is_data_valid_for_form : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_cached_controller_for : Proc(IUIAutomationElement4*, IUIAutomationElementArray*, HRESULT)
-    get_cached_described_by : Proc(IUIAutomationElement4*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_to : Proc(IUIAutomationElement4*, IUIAutomationElementArray*, HRESULT)
-    get_cached_provider_description : Proc(IUIAutomationElement4*, UInt8**, HRESULT)
-    get_clickable_point : Proc(IUIAutomationElement4*, POINT*, LibC::BOOL*, HRESULT)
-    get_current_optimize_for_visual_content : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_cached_optimize_for_visual_content : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_current_live_setting : Proc(IUIAutomationElement4*, LiveSetting*, HRESULT)
-    get_cached_live_setting : Proc(IUIAutomationElement4*, LiveSetting*, HRESULT)
-    get_current_flows_from : Proc(IUIAutomationElement4*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_from : Proc(IUIAutomationElement4*, IUIAutomationElementArray*, HRESULT)
-    show_context_menu : Proc(IUIAutomationElement4*, HRESULT)
-    get_current_is_peripheral : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_cached_is_peripheral : Proc(IUIAutomationElement4*, LibC::BOOL*, HRESULT)
-    get_current_position_in_set : Proc(IUIAutomationElement4*, Int32*, HRESULT)
-    get_current_size_of_set : Proc(IUIAutomationElement4*, Int32*, HRESULT)
-    get_current_level : Proc(IUIAutomationElement4*, Int32*, HRESULT)
-    get_current_annotation_types : Proc(IUIAutomationElement4*, SAFEARRAY**, HRESULT)
-    get_current_annotation_objects : Proc(IUIAutomationElement4*, IUIAutomationElementArray*, HRESULT)
-    get_cached_position_in_set : Proc(IUIAutomationElement4*, Int32*, HRESULT)
-    get_cached_size_of_set : Proc(IUIAutomationElement4*, Int32*, HRESULT)
-    get_cached_level : Proc(IUIAutomationElement4*, Int32*, HRESULT)
-    get_cached_annotation_types : Proc(IUIAutomationElement4*, SAFEARRAY**, HRESULT)
-    get_cached_annotation_objects : Proc(IUIAutomationElement4*, IUIAutomationElementArray*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_focus : UInt64
+    get_runtime_id : UInt64
+    find_first : UInt64
+    find_all : UInt64
+    find_first_build_cache : UInt64
+    find_all_build_cache : UInt64
+    build_updated_cache : UInt64
+    get_current_property_value : UInt64
+    get_current_property_value_ex : UInt64
+    get_cached_property_value : UInt64
+    get_cached_property_value_ex : UInt64
+    get_current_pattern_as : UInt64
+    get_cached_pattern_as : UInt64
+    get_current_pattern : UInt64
+    get_cached_pattern : UInt64
+    get_cached_parent : UInt64
+    get_cached_children : UInt64
+    get_current_process_id : UInt64
+    get_current_control_type : UInt64
+    get_current_localized_control_type : UInt64
+    get_current_name : UInt64
+    get_current_accelerator_key : UInt64
+    get_current_access_key : UInt64
+    get_current_has_keyboard_focus : UInt64
+    get_current_is_keyboard_focusable : UInt64
+    get_current_is_enabled : UInt64
+    get_current_automation_id : UInt64
+    get_current_class_name : UInt64
+    get_current_help_text : UInt64
+    get_current_culture : UInt64
+    get_current_is_control_element : UInt64
+    get_current_is_content_element : UInt64
+    get_current_is_password : UInt64
+    get_current_native_window_handle : UInt64
+    get_current_item_type : UInt64
+    get_current_is_offscreen : UInt64
+    get_current_orientation : UInt64
+    get_current_framework_id : UInt64
+    get_current_is_required_for_form : UInt64
+    get_current_item_status : UInt64
+    get_current_bounding_rectangle : UInt64
+    get_current_labeled_by : UInt64
+    get_current_aria_role : UInt64
+    get_current_aria_properties : UInt64
+    get_current_is_data_valid_for_form : UInt64
+    get_current_controller_for : UInt64
+    get_current_described_by : UInt64
+    get_current_flows_to : UInt64
+    get_current_provider_description : UInt64
+    get_cached_process_id : UInt64
+    get_cached_control_type : UInt64
+    get_cached_localized_control_type : UInt64
+    get_cached_name : UInt64
+    get_cached_accelerator_key : UInt64
+    get_cached_access_key : UInt64
+    get_cached_has_keyboard_focus : UInt64
+    get_cached_is_keyboard_focusable : UInt64
+    get_cached_is_enabled : UInt64
+    get_cached_automation_id : UInt64
+    get_cached_class_name : UInt64
+    get_cached_help_text : UInt64
+    get_cached_culture : UInt64
+    get_cached_is_control_element : UInt64
+    get_cached_is_content_element : UInt64
+    get_cached_is_password : UInt64
+    get_cached_native_window_handle : UInt64
+    get_cached_item_type : UInt64
+    get_cached_is_offscreen : UInt64
+    get_cached_orientation : UInt64
+    get_cached_framework_id : UInt64
+    get_cached_is_required_for_form : UInt64
+    get_cached_item_status : UInt64
+    get_cached_bounding_rectangle : UInt64
+    get_cached_labeled_by : UInt64
+    get_cached_aria_role : UInt64
+    get_cached_aria_properties : UInt64
+    get_cached_is_data_valid_for_form : UInt64
+    get_cached_controller_for : UInt64
+    get_cached_described_by : UInt64
+    get_cached_flows_to : UInt64
+    get_cached_provider_description : UInt64
+    get_clickable_point : UInt64
+    get_current_optimize_for_visual_content : UInt64
+    get_cached_optimize_for_visual_content : UInt64
+    get_current_live_setting : UInt64
+    get_cached_live_setting : UInt64
+    get_current_flows_from : UInt64
+    get_cached_flows_from : UInt64
+    show_context_menu : UInt64
+    get_current_is_peripheral : UInt64
+    get_cached_is_peripheral : UInt64
+    get_current_position_in_set : UInt64
+    get_current_size_of_set : UInt64
+    get_current_level : UInt64
+    get_current_annotation_types : UInt64
+    get_current_annotation_objects : UInt64
+    get_cached_position_in_set : UInt64
+    get_cached_size_of_set : UInt64
+    get_cached_level : UInt64
+    get_cached_annotation_types : UInt64
+    get_cached_annotation_objects : UInt64
   end
 
   IUIAutomationElement4_GUID = "3b6e233c-52fb-4063-a4c9-77c075c2a06b"
@@ -4126,114 +4126,114 @@ lib LibWin32
   end
 
   struct IUIAutomationElement5VTbl
-    query_interface : Proc(IUIAutomationElement5*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationElement5*, UInt32)
-    release : Proc(IUIAutomationElement5*, UInt32)
-    set_focus : Proc(IUIAutomationElement5*, HRESULT)
-    get_runtime_id : Proc(IUIAutomationElement5*, SAFEARRAY**, HRESULT)
-    find_first : Proc(IUIAutomationElement5*, TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)
-    find_all : Proc(IUIAutomationElement5*, TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)
-    find_first_build_cache : Proc(IUIAutomationElement5*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    find_all_build_cache : Proc(IUIAutomationElement5*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)
-    build_updated_cache : Proc(IUIAutomationElement5*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_current_property_value : Proc(IUIAutomationElement5*, Int32, VARIANT*, HRESULT)
-    get_current_property_value_ex : Proc(IUIAutomationElement5*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_cached_property_value : Proc(IUIAutomationElement5*, Int32, VARIANT*, HRESULT)
-    get_cached_property_value_ex : Proc(IUIAutomationElement5*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_current_pattern_as : Proc(IUIAutomationElement5*, Int32, Guid*, Void**, HRESULT)
-    get_cached_pattern_as : Proc(IUIAutomationElement5*, Int32, Guid*, Void**, HRESULT)
-    get_current_pattern : Proc(IUIAutomationElement5*, Int32, IUnknown*, HRESULT)
-    get_cached_pattern : Proc(IUIAutomationElement5*, Int32, IUnknown*, HRESULT)
-    get_cached_parent : Proc(IUIAutomationElement5*, IUIAutomationElement*, HRESULT)
-    get_cached_children : Proc(IUIAutomationElement5*, IUIAutomationElementArray*, HRESULT)
-    get_current_process_id : Proc(IUIAutomationElement5*, Int32*, HRESULT)
-    get_current_control_type : Proc(IUIAutomationElement5*, Int32*, HRESULT)
-    get_current_localized_control_type : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_current_name : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_current_accelerator_key : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_current_access_key : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_current_has_keyboard_focus : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_current_is_keyboard_focusable : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_current_is_enabled : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_current_automation_id : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_current_class_name : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_current_help_text : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_current_culture : Proc(IUIAutomationElement5*, Int32*, HRESULT)
-    get_current_is_control_element : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_current_is_content_element : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_current_is_password : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_current_native_window_handle : Proc(IUIAutomationElement5*, LibC::HANDLE, HRESULT)
-    get_current_item_type : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_current_is_offscreen : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_current_orientation : Proc(IUIAutomationElement5*, OrientationType*, HRESULT)
-    get_current_framework_id : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_current_is_required_for_form : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_current_item_status : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_current_bounding_rectangle : Proc(IUIAutomationElement5*, RECT*, HRESULT)
-    get_current_labeled_by : Proc(IUIAutomationElement5*, IUIAutomationElement*, HRESULT)
-    get_current_aria_role : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_current_aria_properties : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_current_is_data_valid_for_form : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_current_controller_for : Proc(IUIAutomationElement5*, IUIAutomationElementArray*, HRESULT)
-    get_current_described_by : Proc(IUIAutomationElement5*, IUIAutomationElementArray*, HRESULT)
-    get_current_flows_to : Proc(IUIAutomationElement5*, IUIAutomationElementArray*, HRESULT)
-    get_current_provider_description : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_cached_process_id : Proc(IUIAutomationElement5*, Int32*, HRESULT)
-    get_cached_control_type : Proc(IUIAutomationElement5*, Int32*, HRESULT)
-    get_cached_localized_control_type : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_cached_name : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_cached_accelerator_key : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_cached_access_key : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_cached_has_keyboard_focus : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_cached_is_keyboard_focusable : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_cached_is_enabled : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_cached_automation_id : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_cached_class_name : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_cached_help_text : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_cached_culture : Proc(IUIAutomationElement5*, Int32*, HRESULT)
-    get_cached_is_control_element : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_cached_is_content_element : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_cached_is_password : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_cached_native_window_handle : Proc(IUIAutomationElement5*, LibC::HANDLE, HRESULT)
-    get_cached_item_type : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_cached_is_offscreen : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_cached_orientation : Proc(IUIAutomationElement5*, OrientationType*, HRESULT)
-    get_cached_framework_id : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_cached_is_required_for_form : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_cached_item_status : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_cached_bounding_rectangle : Proc(IUIAutomationElement5*, RECT*, HRESULT)
-    get_cached_labeled_by : Proc(IUIAutomationElement5*, IUIAutomationElement*, HRESULT)
-    get_cached_aria_role : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_cached_aria_properties : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_cached_is_data_valid_for_form : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_cached_controller_for : Proc(IUIAutomationElement5*, IUIAutomationElementArray*, HRESULT)
-    get_cached_described_by : Proc(IUIAutomationElement5*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_to : Proc(IUIAutomationElement5*, IUIAutomationElementArray*, HRESULT)
-    get_cached_provider_description : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_clickable_point : Proc(IUIAutomationElement5*, POINT*, LibC::BOOL*, HRESULT)
-    get_current_optimize_for_visual_content : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_cached_optimize_for_visual_content : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_current_live_setting : Proc(IUIAutomationElement5*, LiveSetting*, HRESULT)
-    get_cached_live_setting : Proc(IUIAutomationElement5*, LiveSetting*, HRESULT)
-    get_current_flows_from : Proc(IUIAutomationElement5*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_from : Proc(IUIAutomationElement5*, IUIAutomationElementArray*, HRESULT)
-    show_context_menu : Proc(IUIAutomationElement5*, HRESULT)
-    get_current_is_peripheral : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_cached_is_peripheral : Proc(IUIAutomationElement5*, LibC::BOOL*, HRESULT)
-    get_current_position_in_set : Proc(IUIAutomationElement5*, Int32*, HRESULT)
-    get_current_size_of_set : Proc(IUIAutomationElement5*, Int32*, HRESULT)
-    get_current_level : Proc(IUIAutomationElement5*, Int32*, HRESULT)
-    get_current_annotation_types : Proc(IUIAutomationElement5*, SAFEARRAY**, HRESULT)
-    get_current_annotation_objects : Proc(IUIAutomationElement5*, IUIAutomationElementArray*, HRESULT)
-    get_cached_position_in_set : Proc(IUIAutomationElement5*, Int32*, HRESULT)
-    get_cached_size_of_set : Proc(IUIAutomationElement5*, Int32*, HRESULT)
-    get_cached_level : Proc(IUIAutomationElement5*, Int32*, HRESULT)
-    get_cached_annotation_types : Proc(IUIAutomationElement5*, SAFEARRAY**, HRESULT)
-    get_cached_annotation_objects : Proc(IUIAutomationElement5*, IUIAutomationElementArray*, HRESULT)
-    get_current_landmark_type : Proc(IUIAutomationElement5*, Int32*, HRESULT)
-    get_current_localized_landmark_type : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
-    get_cached_landmark_type : Proc(IUIAutomationElement5*, Int32*, HRESULT)
-    get_cached_localized_landmark_type : Proc(IUIAutomationElement5*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_focus : UInt64
+    get_runtime_id : UInt64
+    find_first : UInt64
+    find_all : UInt64
+    find_first_build_cache : UInt64
+    find_all_build_cache : UInt64
+    build_updated_cache : UInt64
+    get_current_property_value : UInt64
+    get_current_property_value_ex : UInt64
+    get_cached_property_value : UInt64
+    get_cached_property_value_ex : UInt64
+    get_current_pattern_as : UInt64
+    get_cached_pattern_as : UInt64
+    get_current_pattern : UInt64
+    get_cached_pattern : UInt64
+    get_cached_parent : UInt64
+    get_cached_children : UInt64
+    get_current_process_id : UInt64
+    get_current_control_type : UInt64
+    get_current_localized_control_type : UInt64
+    get_current_name : UInt64
+    get_current_accelerator_key : UInt64
+    get_current_access_key : UInt64
+    get_current_has_keyboard_focus : UInt64
+    get_current_is_keyboard_focusable : UInt64
+    get_current_is_enabled : UInt64
+    get_current_automation_id : UInt64
+    get_current_class_name : UInt64
+    get_current_help_text : UInt64
+    get_current_culture : UInt64
+    get_current_is_control_element : UInt64
+    get_current_is_content_element : UInt64
+    get_current_is_password : UInt64
+    get_current_native_window_handle : UInt64
+    get_current_item_type : UInt64
+    get_current_is_offscreen : UInt64
+    get_current_orientation : UInt64
+    get_current_framework_id : UInt64
+    get_current_is_required_for_form : UInt64
+    get_current_item_status : UInt64
+    get_current_bounding_rectangle : UInt64
+    get_current_labeled_by : UInt64
+    get_current_aria_role : UInt64
+    get_current_aria_properties : UInt64
+    get_current_is_data_valid_for_form : UInt64
+    get_current_controller_for : UInt64
+    get_current_described_by : UInt64
+    get_current_flows_to : UInt64
+    get_current_provider_description : UInt64
+    get_cached_process_id : UInt64
+    get_cached_control_type : UInt64
+    get_cached_localized_control_type : UInt64
+    get_cached_name : UInt64
+    get_cached_accelerator_key : UInt64
+    get_cached_access_key : UInt64
+    get_cached_has_keyboard_focus : UInt64
+    get_cached_is_keyboard_focusable : UInt64
+    get_cached_is_enabled : UInt64
+    get_cached_automation_id : UInt64
+    get_cached_class_name : UInt64
+    get_cached_help_text : UInt64
+    get_cached_culture : UInt64
+    get_cached_is_control_element : UInt64
+    get_cached_is_content_element : UInt64
+    get_cached_is_password : UInt64
+    get_cached_native_window_handle : UInt64
+    get_cached_item_type : UInt64
+    get_cached_is_offscreen : UInt64
+    get_cached_orientation : UInt64
+    get_cached_framework_id : UInt64
+    get_cached_is_required_for_form : UInt64
+    get_cached_item_status : UInt64
+    get_cached_bounding_rectangle : UInt64
+    get_cached_labeled_by : UInt64
+    get_cached_aria_role : UInt64
+    get_cached_aria_properties : UInt64
+    get_cached_is_data_valid_for_form : UInt64
+    get_cached_controller_for : UInt64
+    get_cached_described_by : UInt64
+    get_cached_flows_to : UInt64
+    get_cached_provider_description : UInt64
+    get_clickable_point : UInt64
+    get_current_optimize_for_visual_content : UInt64
+    get_cached_optimize_for_visual_content : UInt64
+    get_current_live_setting : UInt64
+    get_cached_live_setting : UInt64
+    get_current_flows_from : UInt64
+    get_cached_flows_from : UInt64
+    show_context_menu : UInt64
+    get_current_is_peripheral : UInt64
+    get_cached_is_peripheral : UInt64
+    get_current_position_in_set : UInt64
+    get_current_size_of_set : UInt64
+    get_current_level : UInt64
+    get_current_annotation_types : UInt64
+    get_current_annotation_objects : UInt64
+    get_cached_position_in_set : UInt64
+    get_cached_size_of_set : UInt64
+    get_cached_level : UInt64
+    get_cached_annotation_types : UInt64
+    get_cached_annotation_objects : UInt64
+    get_current_landmark_type : UInt64
+    get_current_localized_landmark_type : UInt64
+    get_cached_landmark_type : UInt64
+    get_cached_localized_landmark_type : UInt64
   end
 
   IUIAutomationElement5_GUID = "98141c1d-0d0e-4175-bbe2-6bff455842a7"
@@ -4243,116 +4243,116 @@ lib LibWin32
   end
 
   struct IUIAutomationElement6VTbl
-    query_interface : Proc(IUIAutomationElement6*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationElement6*, UInt32)
-    release : Proc(IUIAutomationElement6*, UInt32)
-    set_focus : Proc(IUIAutomationElement6*, HRESULT)
-    get_runtime_id : Proc(IUIAutomationElement6*, SAFEARRAY**, HRESULT)
-    find_first : Proc(IUIAutomationElement6*, TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)
-    find_all : Proc(IUIAutomationElement6*, TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)
-    find_first_build_cache : Proc(IUIAutomationElement6*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    find_all_build_cache : Proc(IUIAutomationElement6*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)
-    build_updated_cache : Proc(IUIAutomationElement6*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_current_property_value : Proc(IUIAutomationElement6*, Int32, VARIANT*, HRESULT)
-    get_current_property_value_ex : Proc(IUIAutomationElement6*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_cached_property_value : Proc(IUIAutomationElement6*, Int32, VARIANT*, HRESULT)
-    get_cached_property_value_ex : Proc(IUIAutomationElement6*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_current_pattern_as : Proc(IUIAutomationElement6*, Int32, Guid*, Void**, HRESULT)
-    get_cached_pattern_as : Proc(IUIAutomationElement6*, Int32, Guid*, Void**, HRESULT)
-    get_current_pattern : Proc(IUIAutomationElement6*, Int32, IUnknown*, HRESULT)
-    get_cached_pattern : Proc(IUIAutomationElement6*, Int32, IUnknown*, HRESULT)
-    get_cached_parent : Proc(IUIAutomationElement6*, IUIAutomationElement*, HRESULT)
-    get_cached_children : Proc(IUIAutomationElement6*, IUIAutomationElementArray*, HRESULT)
-    get_current_process_id : Proc(IUIAutomationElement6*, Int32*, HRESULT)
-    get_current_control_type : Proc(IUIAutomationElement6*, Int32*, HRESULT)
-    get_current_localized_control_type : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_current_name : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_current_accelerator_key : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_current_access_key : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_current_has_keyboard_focus : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_current_is_keyboard_focusable : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_current_is_enabled : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_current_automation_id : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_current_class_name : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_current_help_text : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_current_culture : Proc(IUIAutomationElement6*, Int32*, HRESULT)
-    get_current_is_control_element : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_current_is_content_element : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_current_is_password : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_current_native_window_handle : Proc(IUIAutomationElement6*, LibC::HANDLE, HRESULT)
-    get_current_item_type : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_current_is_offscreen : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_current_orientation : Proc(IUIAutomationElement6*, OrientationType*, HRESULT)
-    get_current_framework_id : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_current_is_required_for_form : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_current_item_status : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_current_bounding_rectangle : Proc(IUIAutomationElement6*, RECT*, HRESULT)
-    get_current_labeled_by : Proc(IUIAutomationElement6*, IUIAutomationElement*, HRESULT)
-    get_current_aria_role : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_current_aria_properties : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_current_is_data_valid_for_form : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_current_controller_for : Proc(IUIAutomationElement6*, IUIAutomationElementArray*, HRESULT)
-    get_current_described_by : Proc(IUIAutomationElement6*, IUIAutomationElementArray*, HRESULT)
-    get_current_flows_to : Proc(IUIAutomationElement6*, IUIAutomationElementArray*, HRESULT)
-    get_current_provider_description : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_cached_process_id : Proc(IUIAutomationElement6*, Int32*, HRESULT)
-    get_cached_control_type : Proc(IUIAutomationElement6*, Int32*, HRESULT)
-    get_cached_localized_control_type : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_cached_name : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_cached_accelerator_key : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_cached_access_key : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_cached_has_keyboard_focus : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_cached_is_keyboard_focusable : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_cached_is_enabled : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_cached_automation_id : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_cached_class_name : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_cached_help_text : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_cached_culture : Proc(IUIAutomationElement6*, Int32*, HRESULT)
-    get_cached_is_control_element : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_cached_is_content_element : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_cached_is_password : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_cached_native_window_handle : Proc(IUIAutomationElement6*, LibC::HANDLE, HRESULT)
-    get_cached_item_type : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_cached_is_offscreen : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_cached_orientation : Proc(IUIAutomationElement6*, OrientationType*, HRESULT)
-    get_cached_framework_id : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_cached_is_required_for_form : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_cached_item_status : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_cached_bounding_rectangle : Proc(IUIAutomationElement6*, RECT*, HRESULT)
-    get_cached_labeled_by : Proc(IUIAutomationElement6*, IUIAutomationElement*, HRESULT)
-    get_cached_aria_role : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_cached_aria_properties : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_cached_is_data_valid_for_form : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_cached_controller_for : Proc(IUIAutomationElement6*, IUIAutomationElementArray*, HRESULT)
-    get_cached_described_by : Proc(IUIAutomationElement6*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_to : Proc(IUIAutomationElement6*, IUIAutomationElementArray*, HRESULT)
-    get_cached_provider_description : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_clickable_point : Proc(IUIAutomationElement6*, POINT*, LibC::BOOL*, HRESULT)
-    get_current_optimize_for_visual_content : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_cached_optimize_for_visual_content : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_current_live_setting : Proc(IUIAutomationElement6*, LiveSetting*, HRESULT)
-    get_cached_live_setting : Proc(IUIAutomationElement6*, LiveSetting*, HRESULT)
-    get_current_flows_from : Proc(IUIAutomationElement6*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_from : Proc(IUIAutomationElement6*, IUIAutomationElementArray*, HRESULT)
-    show_context_menu : Proc(IUIAutomationElement6*, HRESULT)
-    get_current_is_peripheral : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_cached_is_peripheral : Proc(IUIAutomationElement6*, LibC::BOOL*, HRESULT)
-    get_current_position_in_set : Proc(IUIAutomationElement6*, Int32*, HRESULT)
-    get_current_size_of_set : Proc(IUIAutomationElement6*, Int32*, HRESULT)
-    get_current_level : Proc(IUIAutomationElement6*, Int32*, HRESULT)
-    get_current_annotation_types : Proc(IUIAutomationElement6*, SAFEARRAY**, HRESULT)
-    get_current_annotation_objects : Proc(IUIAutomationElement6*, IUIAutomationElementArray*, HRESULT)
-    get_cached_position_in_set : Proc(IUIAutomationElement6*, Int32*, HRESULT)
-    get_cached_size_of_set : Proc(IUIAutomationElement6*, Int32*, HRESULT)
-    get_cached_level : Proc(IUIAutomationElement6*, Int32*, HRESULT)
-    get_cached_annotation_types : Proc(IUIAutomationElement6*, SAFEARRAY**, HRESULT)
-    get_cached_annotation_objects : Proc(IUIAutomationElement6*, IUIAutomationElementArray*, HRESULT)
-    get_current_landmark_type : Proc(IUIAutomationElement6*, Int32*, HRESULT)
-    get_current_localized_landmark_type : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_cached_landmark_type : Proc(IUIAutomationElement6*, Int32*, HRESULT)
-    get_cached_localized_landmark_type : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_current_full_description : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
-    get_cached_full_description : Proc(IUIAutomationElement6*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_focus : UInt64
+    get_runtime_id : UInt64
+    find_first : UInt64
+    find_all : UInt64
+    find_first_build_cache : UInt64
+    find_all_build_cache : UInt64
+    build_updated_cache : UInt64
+    get_current_property_value : UInt64
+    get_current_property_value_ex : UInt64
+    get_cached_property_value : UInt64
+    get_cached_property_value_ex : UInt64
+    get_current_pattern_as : UInt64
+    get_cached_pattern_as : UInt64
+    get_current_pattern : UInt64
+    get_cached_pattern : UInt64
+    get_cached_parent : UInt64
+    get_cached_children : UInt64
+    get_current_process_id : UInt64
+    get_current_control_type : UInt64
+    get_current_localized_control_type : UInt64
+    get_current_name : UInt64
+    get_current_accelerator_key : UInt64
+    get_current_access_key : UInt64
+    get_current_has_keyboard_focus : UInt64
+    get_current_is_keyboard_focusable : UInt64
+    get_current_is_enabled : UInt64
+    get_current_automation_id : UInt64
+    get_current_class_name : UInt64
+    get_current_help_text : UInt64
+    get_current_culture : UInt64
+    get_current_is_control_element : UInt64
+    get_current_is_content_element : UInt64
+    get_current_is_password : UInt64
+    get_current_native_window_handle : UInt64
+    get_current_item_type : UInt64
+    get_current_is_offscreen : UInt64
+    get_current_orientation : UInt64
+    get_current_framework_id : UInt64
+    get_current_is_required_for_form : UInt64
+    get_current_item_status : UInt64
+    get_current_bounding_rectangle : UInt64
+    get_current_labeled_by : UInt64
+    get_current_aria_role : UInt64
+    get_current_aria_properties : UInt64
+    get_current_is_data_valid_for_form : UInt64
+    get_current_controller_for : UInt64
+    get_current_described_by : UInt64
+    get_current_flows_to : UInt64
+    get_current_provider_description : UInt64
+    get_cached_process_id : UInt64
+    get_cached_control_type : UInt64
+    get_cached_localized_control_type : UInt64
+    get_cached_name : UInt64
+    get_cached_accelerator_key : UInt64
+    get_cached_access_key : UInt64
+    get_cached_has_keyboard_focus : UInt64
+    get_cached_is_keyboard_focusable : UInt64
+    get_cached_is_enabled : UInt64
+    get_cached_automation_id : UInt64
+    get_cached_class_name : UInt64
+    get_cached_help_text : UInt64
+    get_cached_culture : UInt64
+    get_cached_is_control_element : UInt64
+    get_cached_is_content_element : UInt64
+    get_cached_is_password : UInt64
+    get_cached_native_window_handle : UInt64
+    get_cached_item_type : UInt64
+    get_cached_is_offscreen : UInt64
+    get_cached_orientation : UInt64
+    get_cached_framework_id : UInt64
+    get_cached_is_required_for_form : UInt64
+    get_cached_item_status : UInt64
+    get_cached_bounding_rectangle : UInt64
+    get_cached_labeled_by : UInt64
+    get_cached_aria_role : UInt64
+    get_cached_aria_properties : UInt64
+    get_cached_is_data_valid_for_form : UInt64
+    get_cached_controller_for : UInt64
+    get_cached_described_by : UInt64
+    get_cached_flows_to : UInt64
+    get_cached_provider_description : UInt64
+    get_clickable_point : UInt64
+    get_current_optimize_for_visual_content : UInt64
+    get_cached_optimize_for_visual_content : UInt64
+    get_current_live_setting : UInt64
+    get_cached_live_setting : UInt64
+    get_current_flows_from : UInt64
+    get_cached_flows_from : UInt64
+    show_context_menu : UInt64
+    get_current_is_peripheral : UInt64
+    get_cached_is_peripheral : UInt64
+    get_current_position_in_set : UInt64
+    get_current_size_of_set : UInt64
+    get_current_level : UInt64
+    get_current_annotation_types : UInt64
+    get_current_annotation_objects : UInt64
+    get_cached_position_in_set : UInt64
+    get_cached_size_of_set : UInt64
+    get_cached_level : UInt64
+    get_cached_annotation_types : UInt64
+    get_cached_annotation_objects : UInt64
+    get_current_landmark_type : UInt64
+    get_current_localized_landmark_type : UInt64
+    get_cached_landmark_type : UInt64
+    get_cached_localized_landmark_type : UInt64
+    get_current_full_description : UInt64
+    get_cached_full_description : UInt64
   end
 
   IUIAutomationElement6_GUID = "4780d450-8bca-4977-afa5-a4a517f555e3"
@@ -4362,121 +4362,121 @@ lib LibWin32
   end
 
   struct IUIAutomationElement7VTbl
-    query_interface : Proc(IUIAutomationElement7*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationElement7*, UInt32)
-    release : Proc(IUIAutomationElement7*, UInt32)
-    set_focus : Proc(IUIAutomationElement7*, HRESULT)
-    get_runtime_id : Proc(IUIAutomationElement7*, SAFEARRAY**, HRESULT)
-    find_first : Proc(IUIAutomationElement7*, TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)
-    find_all : Proc(IUIAutomationElement7*, TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)
-    find_first_build_cache : Proc(IUIAutomationElement7*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    find_all_build_cache : Proc(IUIAutomationElement7*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)
-    build_updated_cache : Proc(IUIAutomationElement7*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_current_property_value : Proc(IUIAutomationElement7*, Int32, VARIANT*, HRESULT)
-    get_current_property_value_ex : Proc(IUIAutomationElement7*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_cached_property_value : Proc(IUIAutomationElement7*, Int32, VARIANT*, HRESULT)
-    get_cached_property_value_ex : Proc(IUIAutomationElement7*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_current_pattern_as : Proc(IUIAutomationElement7*, Int32, Guid*, Void**, HRESULT)
-    get_cached_pattern_as : Proc(IUIAutomationElement7*, Int32, Guid*, Void**, HRESULT)
-    get_current_pattern : Proc(IUIAutomationElement7*, Int32, IUnknown*, HRESULT)
-    get_cached_pattern : Proc(IUIAutomationElement7*, Int32, IUnknown*, HRESULT)
-    get_cached_parent : Proc(IUIAutomationElement7*, IUIAutomationElement*, HRESULT)
-    get_cached_children : Proc(IUIAutomationElement7*, IUIAutomationElementArray*, HRESULT)
-    get_current_process_id : Proc(IUIAutomationElement7*, Int32*, HRESULT)
-    get_current_control_type : Proc(IUIAutomationElement7*, Int32*, HRESULT)
-    get_current_localized_control_type : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_current_name : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_current_accelerator_key : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_current_access_key : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_current_has_keyboard_focus : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_current_is_keyboard_focusable : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_current_is_enabled : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_current_automation_id : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_current_class_name : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_current_help_text : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_current_culture : Proc(IUIAutomationElement7*, Int32*, HRESULT)
-    get_current_is_control_element : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_current_is_content_element : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_current_is_password : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_current_native_window_handle : Proc(IUIAutomationElement7*, LibC::HANDLE, HRESULT)
-    get_current_item_type : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_current_is_offscreen : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_current_orientation : Proc(IUIAutomationElement7*, OrientationType*, HRESULT)
-    get_current_framework_id : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_current_is_required_for_form : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_current_item_status : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_current_bounding_rectangle : Proc(IUIAutomationElement7*, RECT*, HRESULT)
-    get_current_labeled_by : Proc(IUIAutomationElement7*, IUIAutomationElement*, HRESULT)
-    get_current_aria_role : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_current_aria_properties : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_current_is_data_valid_for_form : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_current_controller_for : Proc(IUIAutomationElement7*, IUIAutomationElementArray*, HRESULT)
-    get_current_described_by : Proc(IUIAutomationElement7*, IUIAutomationElementArray*, HRESULT)
-    get_current_flows_to : Proc(IUIAutomationElement7*, IUIAutomationElementArray*, HRESULT)
-    get_current_provider_description : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_cached_process_id : Proc(IUIAutomationElement7*, Int32*, HRESULT)
-    get_cached_control_type : Proc(IUIAutomationElement7*, Int32*, HRESULT)
-    get_cached_localized_control_type : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_cached_name : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_cached_accelerator_key : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_cached_access_key : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_cached_has_keyboard_focus : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_cached_is_keyboard_focusable : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_cached_is_enabled : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_cached_automation_id : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_cached_class_name : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_cached_help_text : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_cached_culture : Proc(IUIAutomationElement7*, Int32*, HRESULT)
-    get_cached_is_control_element : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_cached_is_content_element : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_cached_is_password : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_cached_native_window_handle : Proc(IUIAutomationElement7*, LibC::HANDLE, HRESULT)
-    get_cached_item_type : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_cached_is_offscreen : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_cached_orientation : Proc(IUIAutomationElement7*, OrientationType*, HRESULT)
-    get_cached_framework_id : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_cached_is_required_for_form : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_cached_item_status : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_cached_bounding_rectangle : Proc(IUIAutomationElement7*, RECT*, HRESULT)
-    get_cached_labeled_by : Proc(IUIAutomationElement7*, IUIAutomationElement*, HRESULT)
-    get_cached_aria_role : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_cached_aria_properties : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_cached_is_data_valid_for_form : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_cached_controller_for : Proc(IUIAutomationElement7*, IUIAutomationElementArray*, HRESULT)
-    get_cached_described_by : Proc(IUIAutomationElement7*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_to : Proc(IUIAutomationElement7*, IUIAutomationElementArray*, HRESULT)
-    get_cached_provider_description : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_clickable_point : Proc(IUIAutomationElement7*, POINT*, LibC::BOOL*, HRESULT)
-    get_current_optimize_for_visual_content : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_cached_optimize_for_visual_content : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_current_live_setting : Proc(IUIAutomationElement7*, LiveSetting*, HRESULT)
-    get_cached_live_setting : Proc(IUIAutomationElement7*, LiveSetting*, HRESULT)
-    get_current_flows_from : Proc(IUIAutomationElement7*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_from : Proc(IUIAutomationElement7*, IUIAutomationElementArray*, HRESULT)
-    show_context_menu : Proc(IUIAutomationElement7*, HRESULT)
-    get_current_is_peripheral : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_cached_is_peripheral : Proc(IUIAutomationElement7*, LibC::BOOL*, HRESULT)
-    get_current_position_in_set : Proc(IUIAutomationElement7*, Int32*, HRESULT)
-    get_current_size_of_set : Proc(IUIAutomationElement7*, Int32*, HRESULT)
-    get_current_level : Proc(IUIAutomationElement7*, Int32*, HRESULT)
-    get_current_annotation_types : Proc(IUIAutomationElement7*, SAFEARRAY**, HRESULT)
-    get_current_annotation_objects : Proc(IUIAutomationElement7*, IUIAutomationElementArray*, HRESULT)
-    get_cached_position_in_set : Proc(IUIAutomationElement7*, Int32*, HRESULT)
-    get_cached_size_of_set : Proc(IUIAutomationElement7*, Int32*, HRESULT)
-    get_cached_level : Proc(IUIAutomationElement7*, Int32*, HRESULT)
-    get_cached_annotation_types : Proc(IUIAutomationElement7*, SAFEARRAY**, HRESULT)
-    get_cached_annotation_objects : Proc(IUIAutomationElement7*, IUIAutomationElementArray*, HRESULT)
-    get_current_landmark_type : Proc(IUIAutomationElement7*, Int32*, HRESULT)
-    get_current_localized_landmark_type : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_cached_landmark_type : Proc(IUIAutomationElement7*, Int32*, HRESULT)
-    get_cached_localized_landmark_type : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_current_full_description : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    get_cached_full_description : Proc(IUIAutomationElement7*, UInt8**, HRESULT)
-    find_first_with_options : Proc(IUIAutomationElement7*, TreeScope, IUIAutomationCondition, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElement*, HRESULT)
-    find_all_with_options : Proc(IUIAutomationElement7*, TreeScope, IUIAutomationCondition, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElementArray*, HRESULT)
-    find_first_with_options_build_cache : Proc(IUIAutomationElement7*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElement*, HRESULT)
-    find_all_with_options_build_cache : Proc(IUIAutomationElement7*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElementArray*, HRESULT)
-    get_current_metadata_value : Proc(IUIAutomationElement7*, Int32, Int32, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_focus : UInt64
+    get_runtime_id : UInt64
+    find_first : UInt64
+    find_all : UInt64
+    find_first_build_cache : UInt64
+    find_all_build_cache : UInt64
+    build_updated_cache : UInt64
+    get_current_property_value : UInt64
+    get_current_property_value_ex : UInt64
+    get_cached_property_value : UInt64
+    get_cached_property_value_ex : UInt64
+    get_current_pattern_as : UInt64
+    get_cached_pattern_as : UInt64
+    get_current_pattern : UInt64
+    get_cached_pattern : UInt64
+    get_cached_parent : UInt64
+    get_cached_children : UInt64
+    get_current_process_id : UInt64
+    get_current_control_type : UInt64
+    get_current_localized_control_type : UInt64
+    get_current_name : UInt64
+    get_current_accelerator_key : UInt64
+    get_current_access_key : UInt64
+    get_current_has_keyboard_focus : UInt64
+    get_current_is_keyboard_focusable : UInt64
+    get_current_is_enabled : UInt64
+    get_current_automation_id : UInt64
+    get_current_class_name : UInt64
+    get_current_help_text : UInt64
+    get_current_culture : UInt64
+    get_current_is_control_element : UInt64
+    get_current_is_content_element : UInt64
+    get_current_is_password : UInt64
+    get_current_native_window_handle : UInt64
+    get_current_item_type : UInt64
+    get_current_is_offscreen : UInt64
+    get_current_orientation : UInt64
+    get_current_framework_id : UInt64
+    get_current_is_required_for_form : UInt64
+    get_current_item_status : UInt64
+    get_current_bounding_rectangle : UInt64
+    get_current_labeled_by : UInt64
+    get_current_aria_role : UInt64
+    get_current_aria_properties : UInt64
+    get_current_is_data_valid_for_form : UInt64
+    get_current_controller_for : UInt64
+    get_current_described_by : UInt64
+    get_current_flows_to : UInt64
+    get_current_provider_description : UInt64
+    get_cached_process_id : UInt64
+    get_cached_control_type : UInt64
+    get_cached_localized_control_type : UInt64
+    get_cached_name : UInt64
+    get_cached_accelerator_key : UInt64
+    get_cached_access_key : UInt64
+    get_cached_has_keyboard_focus : UInt64
+    get_cached_is_keyboard_focusable : UInt64
+    get_cached_is_enabled : UInt64
+    get_cached_automation_id : UInt64
+    get_cached_class_name : UInt64
+    get_cached_help_text : UInt64
+    get_cached_culture : UInt64
+    get_cached_is_control_element : UInt64
+    get_cached_is_content_element : UInt64
+    get_cached_is_password : UInt64
+    get_cached_native_window_handle : UInt64
+    get_cached_item_type : UInt64
+    get_cached_is_offscreen : UInt64
+    get_cached_orientation : UInt64
+    get_cached_framework_id : UInt64
+    get_cached_is_required_for_form : UInt64
+    get_cached_item_status : UInt64
+    get_cached_bounding_rectangle : UInt64
+    get_cached_labeled_by : UInt64
+    get_cached_aria_role : UInt64
+    get_cached_aria_properties : UInt64
+    get_cached_is_data_valid_for_form : UInt64
+    get_cached_controller_for : UInt64
+    get_cached_described_by : UInt64
+    get_cached_flows_to : UInt64
+    get_cached_provider_description : UInt64
+    get_clickable_point : UInt64
+    get_current_optimize_for_visual_content : UInt64
+    get_cached_optimize_for_visual_content : UInt64
+    get_current_live_setting : UInt64
+    get_cached_live_setting : UInt64
+    get_current_flows_from : UInt64
+    get_cached_flows_from : UInt64
+    show_context_menu : UInt64
+    get_current_is_peripheral : UInt64
+    get_cached_is_peripheral : UInt64
+    get_current_position_in_set : UInt64
+    get_current_size_of_set : UInt64
+    get_current_level : UInt64
+    get_current_annotation_types : UInt64
+    get_current_annotation_objects : UInt64
+    get_cached_position_in_set : UInt64
+    get_cached_size_of_set : UInt64
+    get_cached_level : UInt64
+    get_cached_annotation_types : UInt64
+    get_cached_annotation_objects : UInt64
+    get_current_landmark_type : UInt64
+    get_current_localized_landmark_type : UInt64
+    get_cached_landmark_type : UInt64
+    get_cached_localized_landmark_type : UInt64
+    get_current_full_description : UInt64
+    get_cached_full_description : UInt64
+    find_first_with_options : UInt64
+    find_all_with_options : UInt64
+    find_first_with_options_build_cache : UInt64
+    find_all_with_options_build_cache : UInt64
+    get_current_metadata_value : UInt64
   end
 
   IUIAutomationElement7_GUID = "204e8572-cfc3-4c11-b0c8-7da7420750b7"
@@ -4486,123 +4486,123 @@ lib LibWin32
   end
 
   struct IUIAutomationElement8VTbl
-    query_interface : Proc(IUIAutomationElement8*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationElement8*, UInt32)
-    release : Proc(IUIAutomationElement8*, UInt32)
-    set_focus : Proc(IUIAutomationElement8*, HRESULT)
-    get_runtime_id : Proc(IUIAutomationElement8*, SAFEARRAY**, HRESULT)
-    find_first : Proc(IUIAutomationElement8*, TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)
-    find_all : Proc(IUIAutomationElement8*, TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)
-    find_first_build_cache : Proc(IUIAutomationElement8*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    find_all_build_cache : Proc(IUIAutomationElement8*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)
-    build_updated_cache : Proc(IUIAutomationElement8*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_current_property_value : Proc(IUIAutomationElement8*, Int32, VARIANT*, HRESULT)
-    get_current_property_value_ex : Proc(IUIAutomationElement8*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_cached_property_value : Proc(IUIAutomationElement8*, Int32, VARIANT*, HRESULT)
-    get_cached_property_value_ex : Proc(IUIAutomationElement8*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_current_pattern_as : Proc(IUIAutomationElement8*, Int32, Guid*, Void**, HRESULT)
-    get_cached_pattern_as : Proc(IUIAutomationElement8*, Int32, Guid*, Void**, HRESULT)
-    get_current_pattern : Proc(IUIAutomationElement8*, Int32, IUnknown*, HRESULT)
-    get_cached_pattern : Proc(IUIAutomationElement8*, Int32, IUnknown*, HRESULT)
-    get_cached_parent : Proc(IUIAutomationElement8*, IUIAutomationElement*, HRESULT)
-    get_cached_children : Proc(IUIAutomationElement8*, IUIAutomationElementArray*, HRESULT)
-    get_current_process_id : Proc(IUIAutomationElement8*, Int32*, HRESULT)
-    get_current_control_type : Proc(IUIAutomationElement8*, Int32*, HRESULT)
-    get_current_localized_control_type : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_current_name : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_current_accelerator_key : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_current_access_key : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_current_has_keyboard_focus : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_current_is_keyboard_focusable : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_current_is_enabled : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_current_automation_id : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_current_class_name : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_current_help_text : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_current_culture : Proc(IUIAutomationElement8*, Int32*, HRESULT)
-    get_current_is_control_element : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_current_is_content_element : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_current_is_password : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_current_native_window_handle : Proc(IUIAutomationElement8*, LibC::HANDLE, HRESULT)
-    get_current_item_type : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_current_is_offscreen : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_current_orientation : Proc(IUIAutomationElement8*, OrientationType*, HRESULT)
-    get_current_framework_id : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_current_is_required_for_form : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_current_item_status : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_current_bounding_rectangle : Proc(IUIAutomationElement8*, RECT*, HRESULT)
-    get_current_labeled_by : Proc(IUIAutomationElement8*, IUIAutomationElement*, HRESULT)
-    get_current_aria_role : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_current_aria_properties : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_current_is_data_valid_for_form : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_current_controller_for : Proc(IUIAutomationElement8*, IUIAutomationElementArray*, HRESULT)
-    get_current_described_by : Proc(IUIAutomationElement8*, IUIAutomationElementArray*, HRESULT)
-    get_current_flows_to : Proc(IUIAutomationElement8*, IUIAutomationElementArray*, HRESULT)
-    get_current_provider_description : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_cached_process_id : Proc(IUIAutomationElement8*, Int32*, HRESULT)
-    get_cached_control_type : Proc(IUIAutomationElement8*, Int32*, HRESULT)
-    get_cached_localized_control_type : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_cached_name : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_cached_accelerator_key : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_cached_access_key : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_cached_has_keyboard_focus : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_cached_is_keyboard_focusable : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_cached_is_enabled : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_cached_automation_id : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_cached_class_name : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_cached_help_text : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_cached_culture : Proc(IUIAutomationElement8*, Int32*, HRESULT)
-    get_cached_is_control_element : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_cached_is_content_element : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_cached_is_password : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_cached_native_window_handle : Proc(IUIAutomationElement8*, LibC::HANDLE, HRESULT)
-    get_cached_item_type : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_cached_is_offscreen : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_cached_orientation : Proc(IUIAutomationElement8*, OrientationType*, HRESULT)
-    get_cached_framework_id : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_cached_is_required_for_form : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_cached_item_status : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_cached_bounding_rectangle : Proc(IUIAutomationElement8*, RECT*, HRESULT)
-    get_cached_labeled_by : Proc(IUIAutomationElement8*, IUIAutomationElement*, HRESULT)
-    get_cached_aria_role : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_cached_aria_properties : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_cached_is_data_valid_for_form : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_cached_controller_for : Proc(IUIAutomationElement8*, IUIAutomationElementArray*, HRESULT)
-    get_cached_described_by : Proc(IUIAutomationElement8*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_to : Proc(IUIAutomationElement8*, IUIAutomationElementArray*, HRESULT)
-    get_cached_provider_description : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_clickable_point : Proc(IUIAutomationElement8*, POINT*, LibC::BOOL*, HRESULT)
-    get_current_optimize_for_visual_content : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_cached_optimize_for_visual_content : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_current_live_setting : Proc(IUIAutomationElement8*, LiveSetting*, HRESULT)
-    get_cached_live_setting : Proc(IUIAutomationElement8*, LiveSetting*, HRESULT)
-    get_current_flows_from : Proc(IUIAutomationElement8*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_from : Proc(IUIAutomationElement8*, IUIAutomationElementArray*, HRESULT)
-    show_context_menu : Proc(IUIAutomationElement8*, HRESULT)
-    get_current_is_peripheral : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_cached_is_peripheral : Proc(IUIAutomationElement8*, LibC::BOOL*, HRESULT)
-    get_current_position_in_set : Proc(IUIAutomationElement8*, Int32*, HRESULT)
-    get_current_size_of_set : Proc(IUIAutomationElement8*, Int32*, HRESULT)
-    get_current_level : Proc(IUIAutomationElement8*, Int32*, HRESULT)
-    get_current_annotation_types : Proc(IUIAutomationElement8*, SAFEARRAY**, HRESULT)
-    get_current_annotation_objects : Proc(IUIAutomationElement8*, IUIAutomationElementArray*, HRESULT)
-    get_cached_position_in_set : Proc(IUIAutomationElement8*, Int32*, HRESULT)
-    get_cached_size_of_set : Proc(IUIAutomationElement8*, Int32*, HRESULT)
-    get_cached_level : Proc(IUIAutomationElement8*, Int32*, HRESULT)
-    get_cached_annotation_types : Proc(IUIAutomationElement8*, SAFEARRAY**, HRESULT)
-    get_cached_annotation_objects : Proc(IUIAutomationElement8*, IUIAutomationElementArray*, HRESULT)
-    get_current_landmark_type : Proc(IUIAutomationElement8*, Int32*, HRESULT)
-    get_current_localized_landmark_type : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_cached_landmark_type : Proc(IUIAutomationElement8*, Int32*, HRESULT)
-    get_cached_localized_landmark_type : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_current_full_description : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    get_cached_full_description : Proc(IUIAutomationElement8*, UInt8**, HRESULT)
-    find_first_with_options : Proc(IUIAutomationElement8*, TreeScope, IUIAutomationCondition, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElement*, HRESULT)
-    find_all_with_options : Proc(IUIAutomationElement8*, TreeScope, IUIAutomationCondition, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElementArray*, HRESULT)
-    find_first_with_options_build_cache : Proc(IUIAutomationElement8*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElement*, HRESULT)
-    find_all_with_options_build_cache : Proc(IUIAutomationElement8*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElementArray*, HRESULT)
-    get_current_metadata_value : Proc(IUIAutomationElement8*, Int32, Int32, VARIANT*, HRESULT)
-    get_current_heading_level : Proc(IUIAutomationElement8*, Int32*, HRESULT)
-    get_cached_heading_level : Proc(IUIAutomationElement8*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_focus : UInt64
+    get_runtime_id : UInt64
+    find_first : UInt64
+    find_all : UInt64
+    find_first_build_cache : UInt64
+    find_all_build_cache : UInt64
+    build_updated_cache : UInt64
+    get_current_property_value : UInt64
+    get_current_property_value_ex : UInt64
+    get_cached_property_value : UInt64
+    get_cached_property_value_ex : UInt64
+    get_current_pattern_as : UInt64
+    get_cached_pattern_as : UInt64
+    get_current_pattern : UInt64
+    get_cached_pattern : UInt64
+    get_cached_parent : UInt64
+    get_cached_children : UInt64
+    get_current_process_id : UInt64
+    get_current_control_type : UInt64
+    get_current_localized_control_type : UInt64
+    get_current_name : UInt64
+    get_current_accelerator_key : UInt64
+    get_current_access_key : UInt64
+    get_current_has_keyboard_focus : UInt64
+    get_current_is_keyboard_focusable : UInt64
+    get_current_is_enabled : UInt64
+    get_current_automation_id : UInt64
+    get_current_class_name : UInt64
+    get_current_help_text : UInt64
+    get_current_culture : UInt64
+    get_current_is_control_element : UInt64
+    get_current_is_content_element : UInt64
+    get_current_is_password : UInt64
+    get_current_native_window_handle : UInt64
+    get_current_item_type : UInt64
+    get_current_is_offscreen : UInt64
+    get_current_orientation : UInt64
+    get_current_framework_id : UInt64
+    get_current_is_required_for_form : UInt64
+    get_current_item_status : UInt64
+    get_current_bounding_rectangle : UInt64
+    get_current_labeled_by : UInt64
+    get_current_aria_role : UInt64
+    get_current_aria_properties : UInt64
+    get_current_is_data_valid_for_form : UInt64
+    get_current_controller_for : UInt64
+    get_current_described_by : UInt64
+    get_current_flows_to : UInt64
+    get_current_provider_description : UInt64
+    get_cached_process_id : UInt64
+    get_cached_control_type : UInt64
+    get_cached_localized_control_type : UInt64
+    get_cached_name : UInt64
+    get_cached_accelerator_key : UInt64
+    get_cached_access_key : UInt64
+    get_cached_has_keyboard_focus : UInt64
+    get_cached_is_keyboard_focusable : UInt64
+    get_cached_is_enabled : UInt64
+    get_cached_automation_id : UInt64
+    get_cached_class_name : UInt64
+    get_cached_help_text : UInt64
+    get_cached_culture : UInt64
+    get_cached_is_control_element : UInt64
+    get_cached_is_content_element : UInt64
+    get_cached_is_password : UInt64
+    get_cached_native_window_handle : UInt64
+    get_cached_item_type : UInt64
+    get_cached_is_offscreen : UInt64
+    get_cached_orientation : UInt64
+    get_cached_framework_id : UInt64
+    get_cached_is_required_for_form : UInt64
+    get_cached_item_status : UInt64
+    get_cached_bounding_rectangle : UInt64
+    get_cached_labeled_by : UInt64
+    get_cached_aria_role : UInt64
+    get_cached_aria_properties : UInt64
+    get_cached_is_data_valid_for_form : UInt64
+    get_cached_controller_for : UInt64
+    get_cached_described_by : UInt64
+    get_cached_flows_to : UInt64
+    get_cached_provider_description : UInt64
+    get_clickable_point : UInt64
+    get_current_optimize_for_visual_content : UInt64
+    get_cached_optimize_for_visual_content : UInt64
+    get_current_live_setting : UInt64
+    get_cached_live_setting : UInt64
+    get_current_flows_from : UInt64
+    get_cached_flows_from : UInt64
+    show_context_menu : UInt64
+    get_current_is_peripheral : UInt64
+    get_cached_is_peripheral : UInt64
+    get_current_position_in_set : UInt64
+    get_current_size_of_set : UInt64
+    get_current_level : UInt64
+    get_current_annotation_types : UInt64
+    get_current_annotation_objects : UInt64
+    get_cached_position_in_set : UInt64
+    get_cached_size_of_set : UInt64
+    get_cached_level : UInt64
+    get_cached_annotation_types : UInt64
+    get_cached_annotation_objects : UInt64
+    get_current_landmark_type : UInt64
+    get_current_localized_landmark_type : UInt64
+    get_cached_landmark_type : UInt64
+    get_cached_localized_landmark_type : UInt64
+    get_current_full_description : UInt64
+    get_cached_full_description : UInt64
+    find_first_with_options : UInt64
+    find_all_with_options : UInt64
+    find_first_with_options_build_cache : UInt64
+    find_all_with_options_build_cache : UInt64
+    get_current_metadata_value : UInt64
+    get_current_heading_level : UInt64
+    get_cached_heading_level : UInt64
   end
 
   IUIAutomationElement8_GUID = "8c60217d-5411-4cde-bcc0-1ceda223830c"
@@ -4612,125 +4612,125 @@ lib LibWin32
   end
 
   struct IUIAutomationElement9VTbl
-    query_interface : Proc(IUIAutomationElement9*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationElement9*, UInt32)
-    release : Proc(IUIAutomationElement9*, UInt32)
-    set_focus : Proc(IUIAutomationElement9*, HRESULT)
-    get_runtime_id : Proc(IUIAutomationElement9*, SAFEARRAY**, HRESULT)
-    find_first : Proc(IUIAutomationElement9*, TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)
-    find_all : Proc(IUIAutomationElement9*, TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)
-    find_first_build_cache : Proc(IUIAutomationElement9*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    find_all_build_cache : Proc(IUIAutomationElement9*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)
-    build_updated_cache : Proc(IUIAutomationElement9*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_current_property_value : Proc(IUIAutomationElement9*, Int32, VARIANT*, HRESULT)
-    get_current_property_value_ex : Proc(IUIAutomationElement9*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_cached_property_value : Proc(IUIAutomationElement9*, Int32, VARIANT*, HRESULT)
-    get_cached_property_value_ex : Proc(IUIAutomationElement9*, Int32, LibC::BOOL, VARIANT*, HRESULT)
-    get_current_pattern_as : Proc(IUIAutomationElement9*, Int32, Guid*, Void**, HRESULT)
-    get_cached_pattern_as : Proc(IUIAutomationElement9*, Int32, Guid*, Void**, HRESULT)
-    get_current_pattern : Proc(IUIAutomationElement9*, Int32, IUnknown*, HRESULT)
-    get_cached_pattern : Proc(IUIAutomationElement9*, Int32, IUnknown*, HRESULT)
-    get_cached_parent : Proc(IUIAutomationElement9*, IUIAutomationElement*, HRESULT)
-    get_cached_children : Proc(IUIAutomationElement9*, IUIAutomationElementArray*, HRESULT)
-    get_current_process_id : Proc(IUIAutomationElement9*, Int32*, HRESULT)
-    get_current_control_type : Proc(IUIAutomationElement9*, Int32*, HRESULT)
-    get_current_localized_control_type : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_current_name : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_current_accelerator_key : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_current_access_key : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_current_has_keyboard_focus : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_current_is_keyboard_focusable : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_current_is_enabled : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_current_automation_id : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_current_class_name : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_current_help_text : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_current_culture : Proc(IUIAutomationElement9*, Int32*, HRESULT)
-    get_current_is_control_element : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_current_is_content_element : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_current_is_password : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_current_native_window_handle : Proc(IUIAutomationElement9*, LibC::HANDLE, HRESULT)
-    get_current_item_type : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_current_is_offscreen : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_current_orientation : Proc(IUIAutomationElement9*, OrientationType*, HRESULT)
-    get_current_framework_id : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_current_is_required_for_form : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_current_item_status : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_current_bounding_rectangle : Proc(IUIAutomationElement9*, RECT*, HRESULT)
-    get_current_labeled_by : Proc(IUIAutomationElement9*, IUIAutomationElement*, HRESULT)
-    get_current_aria_role : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_current_aria_properties : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_current_is_data_valid_for_form : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_current_controller_for : Proc(IUIAutomationElement9*, IUIAutomationElementArray*, HRESULT)
-    get_current_described_by : Proc(IUIAutomationElement9*, IUIAutomationElementArray*, HRESULT)
-    get_current_flows_to : Proc(IUIAutomationElement9*, IUIAutomationElementArray*, HRESULT)
-    get_current_provider_description : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_cached_process_id : Proc(IUIAutomationElement9*, Int32*, HRESULT)
-    get_cached_control_type : Proc(IUIAutomationElement9*, Int32*, HRESULT)
-    get_cached_localized_control_type : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_cached_name : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_cached_accelerator_key : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_cached_access_key : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_cached_has_keyboard_focus : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_cached_is_keyboard_focusable : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_cached_is_enabled : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_cached_automation_id : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_cached_class_name : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_cached_help_text : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_cached_culture : Proc(IUIAutomationElement9*, Int32*, HRESULT)
-    get_cached_is_control_element : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_cached_is_content_element : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_cached_is_password : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_cached_native_window_handle : Proc(IUIAutomationElement9*, LibC::HANDLE, HRESULT)
-    get_cached_item_type : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_cached_is_offscreen : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_cached_orientation : Proc(IUIAutomationElement9*, OrientationType*, HRESULT)
-    get_cached_framework_id : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_cached_is_required_for_form : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_cached_item_status : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_cached_bounding_rectangle : Proc(IUIAutomationElement9*, RECT*, HRESULT)
-    get_cached_labeled_by : Proc(IUIAutomationElement9*, IUIAutomationElement*, HRESULT)
-    get_cached_aria_role : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_cached_aria_properties : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_cached_is_data_valid_for_form : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_cached_controller_for : Proc(IUIAutomationElement9*, IUIAutomationElementArray*, HRESULT)
-    get_cached_described_by : Proc(IUIAutomationElement9*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_to : Proc(IUIAutomationElement9*, IUIAutomationElementArray*, HRESULT)
-    get_cached_provider_description : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_clickable_point : Proc(IUIAutomationElement9*, POINT*, LibC::BOOL*, HRESULT)
-    get_current_optimize_for_visual_content : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_cached_optimize_for_visual_content : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_current_live_setting : Proc(IUIAutomationElement9*, LiveSetting*, HRESULT)
-    get_cached_live_setting : Proc(IUIAutomationElement9*, LiveSetting*, HRESULT)
-    get_current_flows_from : Proc(IUIAutomationElement9*, IUIAutomationElementArray*, HRESULT)
-    get_cached_flows_from : Proc(IUIAutomationElement9*, IUIAutomationElementArray*, HRESULT)
-    show_context_menu : Proc(IUIAutomationElement9*, HRESULT)
-    get_current_is_peripheral : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_cached_is_peripheral : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_current_position_in_set : Proc(IUIAutomationElement9*, Int32*, HRESULT)
-    get_current_size_of_set : Proc(IUIAutomationElement9*, Int32*, HRESULT)
-    get_current_level : Proc(IUIAutomationElement9*, Int32*, HRESULT)
-    get_current_annotation_types : Proc(IUIAutomationElement9*, SAFEARRAY**, HRESULT)
-    get_current_annotation_objects : Proc(IUIAutomationElement9*, IUIAutomationElementArray*, HRESULT)
-    get_cached_position_in_set : Proc(IUIAutomationElement9*, Int32*, HRESULT)
-    get_cached_size_of_set : Proc(IUIAutomationElement9*, Int32*, HRESULT)
-    get_cached_level : Proc(IUIAutomationElement9*, Int32*, HRESULT)
-    get_cached_annotation_types : Proc(IUIAutomationElement9*, SAFEARRAY**, HRESULT)
-    get_cached_annotation_objects : Proc(IUIAutomationElement9*, IUIAutomationElementArray*, HRESULT)
-    get_current_landmark_type : Proc(IUIAutomationElement9*, Int32*, HRESULT)
-    get_current_localized_landmark_type : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_cached_landmark_type : Proc(IUIAutomationElement9*, Int32*, HRESULT)
-    get_cached_localized_landmark_type : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_current_full_description : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    get_cached_full_description : Proc(IUIAutomationElement9*, UInt8**, HRESULT)
-    find_first_with_options : Proc(IUIAutomationElement9*, TreeScope, IUIAutomationCondition, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElement*, HRESULT)
-    find_all_with_options : Proc(IUIAutomationElement9*, TreeScope, IUIAutomationCondition, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElementArray*, HRESULT)
-    find_first_with_options_build_cache : Proc(IUIAutomationElement9*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElement*, HRESULT)
-    find_all_with_options_build_cache : Proc(IUIAutomationElement9*, TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElementArray*, HRESULT)
-    get_current_metadata_value : Proc(IUIAutomationElement9*, Int32, Int32, VARIANT*, HRESULT)
-    get_current_heading_level : Proc(IUIAutomationElement9*, Int32*, HRESULT)
-    get_cached_heading_level : Proc(IUIAutomationElement9*, Int32*, HRESULT)
-    get_current_is_dialog : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
-    get_cached_is_dialog : Proc(IUIAutomationElement9*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_focus : UInt64
+    get_runtime_id : UInt64
+    find_first : UInt64
+    find_all : UInt64
+    find_first_build_cache : UInt64
+    find_all_build_cache : UInt64
+    build_updated_cache : UInt64
+    get_current_property_value : UInt64
+    get_current_property_value_ex : UInt64
+    get_cached_property_value : UInt64
+    get_cached_property_value_ex : UInt64
+    get_current_pattern_as : UInt64
+    get_cached_pattern_as : UInt64
+    get_current_pattern : UInt64
+    get_cached_pattern : UInt64
+    get_cached_parent : UInt64
+    get_cached_children : UInt64
+    get_current_process_id : UInt64
+    get_current_control_type : UInt64
+    get_current_localized_control_type : UInt64
+    get_current_name : UInt64
+    get_current_accelerator_key : UInt64
+    get_current_access_key : UInt64
+    get_current_has_keyboard_focus : UInt64
+    get_current_is_keyboard_focusable : UInt64
+    get_current_is_enabled : UInt64
+    get_current_automation_id : UInt64
+    get_current_class_name : UInt64
+    get_current_help_text : UInt64
+    get_current_culture : UInt64
+    get_current_is_control_element : UInt64
+    get_current_is_content_element : UInt64
+    get_current_is_password : UInt64
+    get_current_native_window_handle : UInt64
+    get_current_item_type : UInt64
+    get_current_is_offscreen : UInt64
+    get_current_orientation : UInt64
+    get_current_framework_id : UInt64
+    get_current_is_required_for_form : UInt64
+    get_current_item_status : UInt64
+    get_current_bounding_rectangle : UInt64
+    get_current_labeled_by : UInt64
+    get_current_aria_role : UInt64
+    get_current_aria_properties : UInt64
+    get_current_is_data_valid_for_form : UInt64
+    get_current_controller_for : UInt64
+    get_current_described_by : UInt64
+    get_current_flows_to : UInt64
+    get_current_provider_description : UInt64
+    get_cached_process_id : UInt64
+    get_cached_control_type : UInt64
+    get_cached_localized_control_type : UInt64
+    get_cached_name : UInt64
+    get_cached_accelerator_key : UInt64
+    get_cached_access_key : UInt64
+    get_cached_has_keyboard_focus : UInt64
+    get_cached_is_keyboard_focusable : UInt64
+    get_cached_is_enabled : UInt64
+    get_cached_automation_id : UInt64
+    get_cached_class_name : UInt64
+    get_cached_help_text : UInt64
+    get_cached_culture : UInt64
+    get_cached_is_control_element : UInt64
+    get_cached_is_content_element : UInt64
+    get_cached_is_password : UInt64
+    get_cached_native_window_handle : UInt64
+    get_cached_item_type : UInt64
+    get_cached_is_offscreen : UInt64
+    get_cached_orientation : UInt64
+    get_cached_framework_id : UInt64
+    get_cached_is_required_for_form : UInt64
+    get_cached_item_status : UInt64
+    get_cached_bounding_rectangle : UInt64
+    get_cached_labeled_by : UInt64
+    get_cached_aria_role : UInt64
+    get_cached_aria_properties : UInt64
+    get_cached_is_data_valid_for_form : UInt64
+    get_cached_controller_for : UInt64
+    get_cached_described_by : UInt64
+    get_cached_flows_to : UInt64
+    get_cached_provider_description : UInt64
+    get_clickable_point : UInt64
+    get_current_optimize_for_visual_content : UInt64
+    get_cached_optimize_for_visual_content : UInt64
+    get_current_live_setting : UInt64
+    get_cached_live_setting : UInt64
+    get_current_flows_from : UInt64
+    get_cached_flows_from : UInt64
+    show_context_menu : UInt64
+    get_current_is_peripheral : UInt64
+    get_cached_is_peripheral : UInt64
+    get_current_position_in_set : UInt64
+    get_current_size_of_set : UInt64
+    get_current_level : UInt64
+    get_current_annotation_types : UInt64
+    get_current_annotation_objects : UInt64
+    get_cached_position_in_set : UInt64
+    get_cached_size_of_set : UInt64
+    get_cached_level : UInt64
+    get_cached_annotation_types : UInt64
+    get_cached_annotation_objects : UInt64
+    get_current_landmark_type : UInt64
+    get_current_localized_landmark_type : UInt64
+    get_cached_landmark_type : UInt64
+    get_cached_localized_landmark_type : UInt64
+    get_current_full_description : UInt64
+    get_cached_full_description : UInt64
+    find_first_with_options : UInt64
+    find_all_with_options : UInt64
+    find_first_with_options_build_cache : UInt64
+    find_all_with_options_build_cache : UInt64
+    get_current_metadata_value : UInt64
+    get_current_heading_level : UInt64
+    get_cached_heading_level : UInt64
+    get_current_is_dialog : UInt64
+    get_cached_is_dialog : UInt64
   end
 
   IUIAutomationElement9_GUID = "39325fac-039d-440e-a3a3-5eb81a5cecc3"
@@ -4740,11 +4740,11 @@ lib LibWin32
   end
 
   struct IUIAutomationProxyFactoryVTbl
-    query_interface : Proc(IUIAutomationProxyFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationProxyFactory*, UInt32)
-    release : Proc(IUIAutomationProxyFactory*, UInt32)
-    create_provider : Proc(IUIAutomationProxyFactory*, LibC::HANDLE, Int32, Int32, IRawElementProviderSimple*, HRESULT)
-    get_proxy_factory_id : Proc(IUIAutomationProxyFactory*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_provider : UInt64
+    get_proxy_factory_id : UInt64
   end
 
   IUIAutomationProxyFactory_GUID = "85b94ecd-849d-42b6-b94d-d6db23fdf5a4"
@@ -4754,22 +4754,22 @@ lib LibWin32
   end
 
   struct IUIAutomationProxyFactoryEntryVTbl
-    query_interface : Proc(IUIAutomationProxyFactoryEntry*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationProxyFactoryEntry*, UInt32)
-    release : Proc(IUIAutomationProxyFactoryEntry*, UInt32)
-    get_proxy_factory : Proc(IUIAutomationProxyFactoryEntry*, IUIAutomationProxyFactory*, HRESULT)
-    get_class_name : Proc(IUIAutomationProxyFactoryEntry*, UInt8**, HRESULT)
-    get_image_name : Proc(IUIAutomationProxyFactoryEntry*, UInt8**, HRESULT)
-    get_allow_substring_match : Proc(IUIAutomationProxyFactoryEntry*, LibC::BOOL*, HRESULT)
-    get_can_check_base_class : Proc(IUIAutomationProxyFactoryEntry*, LibC::BOOL*, HRESULT)
-    get_needs_advise_events : Proc(IUIAutomationProxyFactoryEntry*, LibC::BOOL*, HRESULT)
-    put_class_name : Proc(IUIAutomationProxyFactoryEntry*, LibC::LPWSTR, HRESULT)
-    put_image_name : Proc(IUIAutomationProxyFactoryEntry*, LibC::LPWSTR, HRESULT)
-    put_allow_substring_match : Proc(IUIAutomationProxyFactoryEntry*, LibC::BOOL, HRESULT)
-    put_can_check_base_class : Proc(IUIAutomationProxyFactoryEntry*, LibC::BOOL, HRESULT)
-    put_needs_advise_events : Proc(IUIAutomationProxyFactoryEntry*, LibC::BOOL, HRESULT)
-    set_win_events_for_automation_event : Proc(IUIAutomationProxyFactoryEntry*, Int32, Int32, SAFEARRAY*, HRESULT)
-    get_win_events_for_automation_event : Proc(IUIAutomationProxyFactoryEntry*, Int32, Int32, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_proxy_factory : UInt64
+    get_class_name : UInt64
+    get_image_name : UInt64
+    get_allow_substring_match : UInt64
+    get_can_check_base_class : UInt64
+    get_needs_advise_events : UInt64
+    put_class_name : UInt64
+    put_image_name : UInt64
+    put_allow_substring_match : UInt64
+    put_can_check_base_class : UInt64
+    put_needs_advise_events : UInt64
+    set_win_events_for_automation_event : UInt64
+    get_win_events_for_automation_event : UInt64
   end
 
   IUIAutomationProxyFactoryEntry_GUID = "d50e472e-b64b-490c-bca1-d30696f9f289"
@@ -4779,18 +4779,18 @@ lib LibWin32
   end
 
   struct IUIAutomationProxyFactoryMappingVTbl
-    query_interface : Proc(IUIAutomationProxyFactoryMapping*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationProxyFactoryMapping*, UInt32)
-    release : Proc(IUIAutomationProxyFactoryMapping*, UInt32)
-    get_count : Proc(IUIAutomationProxyFactoryMapping*, UInt32*, HRESULT)
-    get_table : Proc(IUIAutomationProxyFactoryMapping*, SAFEARRAY**, HRESULT)
-    get_entry : Proc(IUIAutomationProxyFactoryMapping*, UInt32, IUIAutomationProxyFactoryEntry*, HRESULT)
-    set_table : Proc(IUIAutomationProxyFactoryMapping*, SAFEARRAY*, HRESULT)
-    insert_entries : Proc(IUIAutomationProxyFactoryMapping*, UInt32, SAFEARRAY*, HRESULT)
-    insert_entry : Proc(IUIAutomationProxyFactoryMapping*, UInt32, IUIAutomationProxyFactoryEntry, HRESULT)
-    remove_entry : Proc(IUIAutomationProxyFactoryMapping*, UInt32, HRESULT)
-    clear_table : Proc(IUIAutomationProxyFactoryMapping*, HRESULT)
-    restore_default_table : Proc(IUIAutomationProxyFactoryMapping*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_table : UInt64
+    get_entry : UInt64
+    set_table : UInt64
+    insert_entries : UInt64
+    insert_entry : UInt64
+    remove_entry : UInt64
+    clear_table : UInt64
+    restore_default_table : UInt64
   end
 
   IUIAutomationProxyFactoryMapping_GUID = "09e31e18-872d-4873-93d1-1e541ec133fd"
@@ -4800,16 +4800,16 @@ lib LibWin32
   end
 
   struct IUIAutomationEventHandlerGroupVTbl
-    query_interface : Proc(IUIAutomationEventHandlerGroup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomationEventHandlerGroup*, UInt32)
-    release : Proc(IUIAutomationEventHandlerGroup*, UInt32)
-    add_active_text_position_changed_event_handler : Proc(IUIAutomationEventHandlerGroup*, TreeScope, IUIAutomationCacheRequest, IUIAutomationActiveTextPositionChangedEventHandler, HRESULT)
-    add_automation_event_handler : Proc(IUIAutomationEventHandlerGroup*, Int32, TreeScope, IUIAutomationCacheRequest, IUIAutomationEventHandler, HRESULT)
-    add_changes_event_handler : Proc(IUIAutomationEventHandlerGroup*, TreeScope, Int32*, Int32, IUIAutomationCacheRequest, IUIAutomationChangesEventHandler, HRESULT)
-    add_notification_event_handler : Proc(IUIAutomationEventHandlerGroup*, TreeScope, IUIAutomationCacheRequest, IUIAutomationNotificationEventHandler, HRESULT)
-    add_property_changed_event_handler : Proc(IUIAutomationEventHandlerGroup*, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, Int32*, Int32, HRESULT)
-    add_structure_changed_event_handler : Proc(IUIAutomationEventHandlerGroup*, TreeScope, IUIAutomationCacheRequest, IUIAutomationStructureChangedEventHandler, HRESULT)
-    add_text_edit_text_changed_event_handler : Proc(IUIAutomationEventHandlerGroup*, TreeScope, TextEditChangeType, IUIAutomationCacheRequest, IUIAutomationTextEditTextChangedEventHandler, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_active_text_position_changed_event_handler : UInt64
+    add_automation_event_handler : UInt64
+    add_changes_event_handler : UInt64
+    add_notification_event_handler : UInt64
+    add_property_changed_event_handler : UInt64
+    add_structure_changed_event_handler : UInt64
+    add_text_edit_text_changed_event_handler : UInt64
   end
 
   IUIAutomationEventHandlerGroup_GUID = "c9ee12f2-c13b-4408-997c-639914377f4e"
@@ -4819,64 +4819,64 @@ lib LibWin32
   end
 
   struct IUIAutomationVTbl
-    query_interface : Proc(IUIAutomation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomation*, UInt32)
-    release : Proc(IUIAutomation*, UInt32)
-    compare_elements : Proc(IUIAutomation*, IUIAutomationElement, IUIAutomationElement, LibC::BOOL*, HRESULT)
-    compare_runtime_ids : Proc(IUIAutomation*, SAFEARRAY*, SAFEARRAY*, LibC::BOOL*, HRESULT)
-    get_root_element : Proc(IUIAutomation*, IUIAutomationElement*, HRESULT)
-    element_from_handle : Proc(IUIAutomation*, LibC::HANDLE, IUIAutomationElement*, HRESULT)
-    element_from_point : Proc(IUIAutomation*, POINT, IUIAutomationElement*, HRESULT)
-    get_focused_element : Proc(IUIAutomation*, IUIAutomationElement*, HRESULT)
-    get_root_element_build_cache : Proc(IUIAutomation*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    element_from_handle_build_cache : Proc(IUIAutomation*, LibC::HANDLE, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    element_from_point_build_cache : Proc(IUIAutomation*, POINT, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_focused_element_build_cache : Proc(IUIAutomation*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    create_tree_walker : Proc(IUIAutomation*, IUIAutomationCondition, IUIAutomationTreeWalker*, HRESULT)
-    get_control_view_walker : Proc(IUIAutomation*, IUIAutomationTreeWalker*, HRESULT)
-    get_content_view_walker : Proc(IUIAutomation*, IUIAutomationTreeWalker*, HRESULT)
-    get_raw_view_walker : Proc(IUIAutomation*, IUIAutomationTreeWalker*, HRESULT)
-    get_raw_view_condition : Proc(IUIAutomation*, IUIAutomationCondition*, HRESULT)
-    get_control_view_condition : Proc(IUIAutomation*, IUIAutomationCondition*, HRESULT)
-    get_content_view_condition : Proc(IUIAutomation*, IUIAutomationCondition*, HRESULT)
-    create_cache_request : Proc(IUIAutomation*, IUIAutomationCacheRequest*, HRESULT)
-    create_true_condition : Proc(IUIAutomation*, IUIAutomationCondition*, HRESULT)
-    create_false_condition : Proc(IUIAutomation*, IUIAutomationCondition*, HRESULT)
-    create_property_condition : Proc(IUIAutomation*, Int32, VARIANT, IUIAutomationCondition*, HRESULT)
-    create_property_condition_ex : Proc(IUIAutomation*, Int32, VARIANT, PropertyConditionFlags, IUIAutomationCondition*, HRESULT)
-    create_and_condition : Proc(IUIAutomation*, IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    create_and_condition_from_array : Proc(IUIAutomation*, SAFEARRAY*, IUIAutomationCondition*, HRESULT)
-    create_and_condition_from_native_array : Proc(IUIAutomation*, IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)
-    create_or_condition : Proc(IUIAutomation*, IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    create_or_condition_from_array : Proc(IUIAutomation*, SAFEARRAY*, IUIAutomationCondition*, HRESULT)
-    create_or_condition_from_native_array : Proc(IUIAutomation*, IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)
-    create_not_condition : Proc(IUIAutomation*, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    add_automation_event_handler : Proc(IUIAutomation*, Int32, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationEventHandler, HRESULT)
-    remove_automation_event_handler : Proc(IUIAutomation*, Int32, IUIAutomationElement, IUIAutomationEventHandler, HRESULT)
-    add_property_changed_event_handler_native_array : Proc(IUIAutomation*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, Int32*, Int32, HRESULT)
-    add_property_changed_event_handler : Proc(IUIAutomation*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, SAFEARRAY*, HRESULT)
-    remove_property_changed_event_handler : Proc(IUIAutomation*, IUIAutomationElement, IUIAutomationPropertyChangedEventHandler, HRESULT)
-    add_structure_changed_event_handler : Proc(IUIAutomation*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationStructureChangedEventHandler, HRESULT)
-    remove_structure_changed_event_handler : Proc(IUIAutomation*, IUIAutomationElement, IUIAutomationStructureChangedEventHandler, HRESULT)
-    add_focus_changed_event_handler : Proc(IUIAutomation*, IUIAutomationCacheRequest, IUIAutomationFocusChangedEventHandler, HRESULT)
-    remove_focus_changed_event_handler : Proc(IUIAutomation*, IUIAutomationFocusChangedEventHandler, HRESULT)
-    remove_all_event_handlers : Proc(IUIAutomation*, HRESULT)
-    int_native_array_to_safe_array : Proc(IUIAutomation*, Int32*, Int32, SAFEARRAY**, HRESULT)
-    int_safe_array_to_native_array : Proc(IUIAutomation*, SAFEARRAY*, Int32**, Int32*, HRESULT)
-    rect_to_variant : Proc(IUIAutomation*, RECT, VARIANT*, HRESULT)
-    variant_to_rect : Proc(IUIAutomation*, VARIANT, RECT*, HRESULT)
-    safe_array_to_rect_native_array : Proc(IUIAutomation*, SAFEARRAY*, RECT**, Int32*, HRESULT)
-    create_proxy_factory_entry : Proc(IUIAutomation*, IUIAutomationProxyFactory, IUIAutomationProxyFactoryEntry*, HRESULT)
-    get_proxy_factory_mapping : Proc(IUIAutomation*, IUIAutomationProxyFactoryMapping*, HRESULT)
-    get_property_programmatic_name : Proc(IUIAutomation*, Int32, UInt8**, HRESULT)
-    get_pattern_programmatic_name : Proc(IUIAutomation*, Int32, UInt8**, HRESULT)
-    poll_for_potential_supported_patterns : Proc(IUIAutomation*, IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    poll_for_potential_supported_properties : Proc(IUIAutomation*, IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    check_not_supported : Proc(IUIAutomation*, VARIANT, LibC::BOOL*, HRESULT)
-    get_reserved_not_supported_value : Proc(IUIAutomation*, IUnknown*, HRESULT)
-    get_reserved_mixed_attribute_value : Proc(IUIAutomation*, IUnknown*, HRESULT)
-    element_from_i_accessible : Proc(IUIAutomation*, IAccessible, Int32, IUIAutomationElement*, HRESULT)
-    element_from_i_accessible_build_cache : Proc(IUIAutomation*, IAccessible, Int32, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    compare_elements : UInt64
+    compare_runtime_ids : UInt64
+    get_root_element : UInt64
+    element_from_handle : UInt64
+    element_from_point : UInt64
+    get_focused_element : UInt64
+    get_root_element_build_cache : UInt64
+    element_from_handle_build_cache : UInt64
+    element_from_point_build_cache : UInt64
+    get_focused_element_build_cache : UInt64
+    create_tree_walker : UInt64
+    get_control_view_walker : UInt64
+    get_content_view_walker : UInt64
+    get_raw_view_walker : UInt64
+    get_raw_view_condition : UInt64
+    get_control_view_condition : UInt64
+    get_content_view_condition : UInt64
+    create_cache_request : UInt64
+    create_true_condition : UInt64
+    create_false_condition : UInt64
+    create_property_condition : UInt64
+    create_property_condition_ex : UInt64
+    create_and_condition : UInt64
+    create_and_condition_from_array : UInt64
+    create_and_condition_from_native_array : UInt64
+    create_or_condition : UInt64
+    create_or_condition_from_array : UInt64
+    create_or_condition_from_native_array : UInt64
+    create_not_condition : UInt64
+    add_automation_event_handler : UInt64
+    remove_automation_event_handler : UInt64
+    add_property_changed_event_handler_native_array : UInt64
+    add_property_changed_event_handler : UInt64
+    remove_property_changed_event_handler : UInt64
+    add_structure_changed_event_handler : UInt64
+    remove_structure_changed_event_handler : UInt64
+    add_focus_changed_event_handler : UInt64
+    remove_focus_changed_event_handler : UInt64
+    remove_all_event_handlers : UInt64
+    int_native_array_to_safe_array : UInt64
+    int_safe_array_to_native_array : UInt64
+    rect_to_variant : UInt64
+    variant_to_rect : UInt64
+    safe_array_to_rect_native_array : UInt64
+    create_proxy_factory_entry : UInt64
+    get_proxy_factory_mapping : UInt64
+    get_property_programmatic_name : UInt64
+    get_pattern_programmatic_name : UInt64
+    poll_for_potential_supported_patterns : UInt64
+    poll_for_potential_supported_properties : UInt64
+    check_not_supported : UInt64
+    get_reserved_not_supported_value : UInt64
+    get_reserved_mixed_attribute_value : UInt64
+    element_from_i_accessible : UInt64
+    element_from_i_accessible_build_cache : UInt64
   end
 
   IUIAutomation_GUID = "30cbe57d-d9d0-452a-ab13-7ac5ac4825ee"
@@ -4886,70 +4886,70 @@ lib LibWin32
   end
 
   struct IUIAutomation2VTbl
-    query_interface : Proc(IUIAutomation2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomation2*, UInt32)
-    release : Proc(IUIAutomation2*, UInt32)
-    compare_elements : Proc(IUIAutomation2*, IUIAutomationElement, IUIAutomationElement, LibC::BOOL*, HRESULT)
-    compare_runtime_ids : Proc(IUIAutomation2*, SAFEARRAY*, SAFEARRAY*, LibC::BOOL*, HRESULT)
-    get_root_element : Proc(IUIAutomation2*, IUIAutomationElement*, HRESULT)
-    element_from_handle : Proc(IUIAutomation2*, LibC::HANDLE, IUIAutomationElement*, HRESULT)
-    element_from_point : Proc(IUIAutomation2*, POINT, IUIAutomationElement*, HRESULT)
-    get_focused_element : Proc(IUIAutomation2*, IUIAutomationElement*, HRESULT)
-    get_root_element_build_cache : Proc(IUIAutomation2*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    element_from_handle_build_cache : Proc(IUIAutomation2*, LibC::HANDLE, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    element_from_point_build_cache : Proc(IUIAutomation2*, POINT, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_focused_element_build_cache : Proc(IUIAutomation2*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    create_tree_walker : Proc(IUIAutomation2*, IUIAutomationCondition, IUIAutomationTreeWalker*, HRESULT)
-    get_control_view_walker : Proc(IUIAutomation2*, IUIAutomationTreeWalker*, HRESULT)
-    get_content_view_walker : Proc(IUIAutomation2*, IUIAutomationTreeWalker*, HRESULT)
-    get_raw_view_walker : Proc(IUIAutomation2*, IUIAutomationTreeWalker*, HRESULT)
-    get_raw_view_condition : Proc(IUIAutomation2*, IUIAutomationCondition*, HRESULT)
-    get_control_view_condition : Proc(IUIAutomation2*, IUIAutomationCondition*, HRESULT)
-    get_content_view_condition : Proc(IUIAutomation2*, IUIAutomationCondition*, HRESULT)
-    create_cache_request : Proc(IUIAutomation2*, IUIAutomationCacheRequest*, HRESULT)
-    create_true_condition : Proc(IUIAutomation2*, IUIAutomationCondition*, HRESULT)
-    create_false_condition : Proc(IUIAutomation2*, IUIAutomationCondition*, HRESULT)
-    create_property_condition : Proc(IUIAutomation2*, Int32, VARIANT, IUIAutomationCondition*, HRESULT)
-    create_property_condition_ex : Proc(IUIAutomation2*, Int32, VARIANT, PropertyConditionFlags, IUIAutomationCondition*, HRESULT)
-    create_and_condition : Proc(IUIAutomation2*, IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    create_and_condition_from_array : Proc(IUIAutomation2*, SAFEARRAY*, IUIAutomationCondition*, HRESULT)
-    create_and_condition_from_native_array : Proc(IUIAutomation2*, IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)
-    create_or_condition : Proc(IUIAutomation2*, IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    create_or_condition_from_array : Proc(IUIAutomation2*, SAFEARRAY*, IUIAutomationCondition*, HRESULT)
-    create_or_condition_from_native_array : Proc(IUIAutomation2*, IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)
-    create_not_condition : Proc(IUIAutomation2*, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    add_automation_event_handler : Proc(IUIAutomation2*, Int32, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationEventHandler, HRESULT)
-    remove_automation_event_handler : Proc(IUIAutomation2*, Int32, IUIAutomationElement, IUIAutomationEventHandler, HRESULT)
-    add_property_changed_event_handler_native_array : Proc(IUIAutomation2*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, Int32*, Int32, HRESULT)
-    add_property_changed_event_handler : Proc(IUIAutomation2*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, SAFEARRAY*, HRESULT)
-    remove_property_changed_event_handler : Proc(IUIAutomation2*, IUIAutomationElement, IUIAutomationPropertyChangedEventHandler, HRESULT)
-    add_structure_changed_event_handler : Proc(IUIAutomation2*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationStructureChangedEventHandler, HRESULT)
-    remove_structure_changed_event_handler : Proc(IUIAutomation2*, IUIAutomationElement, IUIAutomationStructureChangedEventHandler, HRESULT)
-    add_focus_changed_event_handler : Proc(IUIAutomation2*, IUIAutomationCacheRequest, IUIAutomationFocusChangedEventHandler, HRESULT)
-    remove_focus_changed_event_handler : Proc(IUIAutomation2*, IUIAutomationFocusChangedEventHandler, HRESULT)
-    remove_all_event_handlers : Proc(IUIAutomation2*, HRESULT)
-    int_native_array_to_safe_array : Proc(IUIAutomation2*, Int32*, Int32, SAFEARRAY**, HRESULT)
-    int_safe_array_to_native_array : Proc(IUIAutomation2*, SAFEARRAY*, Int32**, Int32*, HRESULT)
-    rect_to_variant : Proc(IUIAutomation2*, RECT, VARIANT*, HRESULT)
-    variant_to_rect : Proc(IUIAutomation2*, VARIANT, RECT*, HRESULT)
-    safe_array_to_rect_native_array : Proc(IUIAutomation2*, SAFEARRAY*, RECT**, Int32*, HRESULT)
-    create_proxy_factory_entry : Proc(IUIAutomation2*, IUIAutomationProxyFactory, IUIAutomationProxyFactoryEntry*, HRESULT)
-    get_proxy_factory_mapping : Proc(IUIAutomation2*, IUIAutomationProxyFactoryMapping*, HRESULT)
-    get_property_programmatic_name : Proc(IUIAutomation2*, Int32, UInt8**, HRESULT)
-    get_pattern_programmatic_name : Proc(IUIAutomation2*, Int32, UInt8**, HRESULT)
-    poll_for_potential_supported_patterns : Proc(IUIAutomation2*, IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    poll_for_potential_supported_properties : Proc(IUIAutomation2*, IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    check_not_supported : Proc(IUIAutomation2*, VARIANT, LibC::BOOL*, HRESULT)
-    get_reserved_not_supported_value : Proc(IUIAutomation2*, IUnknown*, HRESULT)
-    get_reserved_mixed_attribute_value : Proc(IUIAutomation2*, IUnknown*, HRESULT)
-    element_from_i_accessible : Proc(IUIAutomation2*, IAccessible, Int32, IUIAutomationElement*, HRESULT)
-    element_from_i_accessible_build_cache : Proc(IUIAutomation2*, IAccessible, Int32, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_auto_set_focus : Proc(IUIAutomation2*, LibC::BOOL*, HRESULT)
-    put_auto_set_focus : Proc(IUIAutomation2*, LibC::BOOL, HRESULT)
-    get_connection_timeout : Proc(IUIAutomation2*, UInt32*, HRESULT)
-    put_connection_timeout : Proc(IUIAutomation2*, UInt32, HRESULT)
-    get_transaction_timeout : Proc(IUIAutomation2*, UInt32*, HRESULT)
-    put_transaction_timeout : Proc(IUIAutomation2*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    compare_elements : UInt64
+    compare_runtime_ids : UInt64
+    get_root_element : UInt64
+    element_from_handle : UInt64
+    element_from_point : UInt64
+    get_focused_element : UInt64
+    get_root_element_build_cache : UInt64
+    element_from_handle_build_cache : UInt64
+    element_from_point_build_cache : UInt64
+    get_focused_element_build_cache : UInt64
+    create_tree_walker : UInt64
+    get_control_view_walker : UInt64
+    get_content_view_walker : UInt64
+    get_raw_view_walker : UInt64
+    get_raw_view_condition : UInt64
+    get_control_view_condition : UInt64
+    get_content_view_condition : UInt64
+    create_cache_request : UInt64
+    create_true_condition : UInt64
+    create_false_condition : UInt64
+    create_property_condition : UInt64
+    create_property_condition_ex : UInt64
+    create_and_condition : UInt64
+    create_and_condition_from_array : UInt64
+    create_and_condition_from_native_array : UInt64
+    create_or_condition : UInt64
+    create_or_condition_from_array : UInt64
+    create_or_condition_from_native_array : UInt64
+    create_not_condition : UInt64
+    add_automation_event_handler : UInt64
+    remove_automation_event_handler : UInt64
+    add_property_changed_event_handler_native_array : UInt64
+    add_property_changed_event_handler : UInt64
+    remove_property_changed_event_handler : UInt64
+    add_structure_changed_event_handler : UInt64
+    remove_structure_changed_event_handler : UInt64
+    add_focus_changed_event_handler : UInt64
+    remove_focus_changed_event_handler : UInt64
+    remove_all_event_handlers : UInt64
+    int_native_array_to_safe_array : UInt64
+    int_safe_array_to_native_array : UInt64
+    rect_to_variant : UInt64
+    variant_to_rect : UInt64
+    safe_array_to_rect_native_array : UInt64
+    create_proxy_factory_entry : UInt64
+    get_proxy_factory_mapping : UInt64
+    get_property_programmatic_name : UInt64
+    get_pattern_programmatic_name : UInt64
+    poll_for_potential_supported_patterns : UInt64
+    poll_for_potential_supported_properties : UInt64
+    check_not_supported : UInt64
+    get_reserved_not_supported_value : UInt64
+    get_reserved_mixed_attribute_value : UInt64
+    element_from_i_accessible : UInt64
+    element_from_i_accessible_build_cache : UInt64
+    get_auto_set_focus : UInt64
+    put_auto_set_focus : UInt64
+    get_connection_timeout : UInt64
+    put_connection_timeout : UInt64
+    get_transaction_timeout : UInt64
+    put_transaction_timeout : UInt64
   end
 
   IUIAutomation2_GUID = "34723aff-0c9d-49d0-9896-7ab52df8cd8a"
@@ -4959,72 +4959,72 @@ lib LibWin32
   end
 
   struct IUIAutomation3VTbl
-    query_interface : Proc(IUIAutomation3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomation3*, UInt32)
-    release : Proc(IUIAutomation3*, UInt32)
-    compare_elements : Proc(IUIAutomation3*, IUIAutomationElement, IUIAutomationElement, LibC::BOOL*, HRESULT)
-    compare_runtime_ids : Proc(IUIAutomation3*, SAFEARRAY*, SAFEARRAY*, LibC::BOOL*, HRESULT)
-    get_root_element : Proc(IUIAutomation3*, IUIAutomationElement*, HRESULT)
-    element_from_handle : Proc(IUIAutomation3*, LibC::HANDLE, IUIAutomationElement*, HRESULT)
-    element_from_point : Proc(IUIAutomation3*, POINT, IUIAutomationElement*, HRESULT)
-    get_focused_element : Proc(IUIAutomation3*, IUIAutomationElement*, HRESULT)
-    get_root_element_build_cache : Proc(IUIAutomation3*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    element_from_handle_build_cache : Proc(IUIAutomation3*, LibC::HANDLE, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    element_from_point_build_cache : Proc(IUIAutomation3*, POINT, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_focused_element_build_cache : Proc(IUIAutomation3*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    create_tree_walker : Proc(IUIAutomation3*, IUIAutomationCondition, IUIAutomationTreeWalker*, HRESULT)
-    get_control_view_walker : Proc(IUIAutomation3*, IUIAutomationTreeWalker*, HRESULT)
-    get_content_view_walker : Proc(IUIAutomation3*, IUIAutomationTreeWalker*, HRESULT)
-    get_raw_view_walker : Proc(IUIAutomation3*, IUIAutomationTreeWalker*, HRESULT)
-    get_raw_view_condition : Proc(IUIAutomation3*, IUIAutomationCondition*, HRESULT)
-    get_control_view_condition : Proc(IUIAutomation3*, IUIAutomationCondition*, HRESULT)
-    get_content_view_condition : Proc(IUIAutomation3*, IUIAutomationCondition*, HRESULT)
-    create_cache_request : Proc(IUIAutomation3*, IUIAutomationCacheRequest*, HRESULT)
-    create_true_condition : Proc(IUIAutomation3*, IUIAutomationCondition*, HRESULT)
-    create_false_condition : Proc(IUIAutomation3*, IUIAutomationCondition*, HRESULT)
-    create_property_condition : Proc(IUIAutomation3*, Int32, VARIANT, IUIAutomationCondition*, HRESULT)
-    create_property_condition_ex : Proc(IUIAutomation3*, Int32, VARIANT, PropertyConditionFlags, IUIAutomationCondition*, HRESULT)
-    create_and_condition : Proc(IUIAutomation3*, IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    create_and_condition_from_array : Proc(IUIAutomation3*, SAFEARRAY*, IUIAutomationCondition*, HRESULT)
-    create_and_condition_from_native_array : Proc(IUIAutomation3*, IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)
-    create_or_condition : Proc(IUIAutomation3*, IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    create_or_condition_from_array : Proc(IUIAutomation3*, SAFEARRAY*, IUIAutomationCondition*, HRESULT)
-    create_or_condition_from_native_array : Proc(IUIAutomation3*, IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)
-    create_not_condition : Proc(IUIAutomation3*, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    add_automation_event_handler : Proc(IUIAutomation3*, Int32, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationEventHandler, HRESULT)
-    remove_automation_event_handler : Proc(IUIAutomation3*, Int32, IUIAutomationElement, IUIAutomationEventHandler, HRESULT)
-    add_property_changed_event_handler_native_array : Proc(IUIAutomation3*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, Int32*, Int32, HRESULT)
-    add_property_changed_event_handler : Proc(IUIAutomation3*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, SAFEARRAY*, HRESULT)
-    remove_property_changed_event_handler : Proc(IUIAutomation3*, IUIAutomationElement, IUIAutomationPropertyChangedEventHandler, HRESULT)
-    add_structure_changed_event_handler : Proc(IUIAutomation3*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationStructureChangedEventHandler, HRESULT)
-    remove_structure_changed_event_handler : Proc(IUIAutomation3*, IUIAutomationElement, IUIAutomationStructureChangedEventHandler, HRESULT)
-    add_focus_changed_event_handler : Proc(IUIAutomation3*, IUIAutomationCacheRequest, IUIAutomationFocusChangedEventHandler, HRESULT)
-    remove_focus_changed_event_handler : Proc(IUIAutomation3*, IUIAutomationFocusChangedEventHandler, HRESULT)
-    remove_all_event_handlers : Proc(IUIAutomation3*, HRESULT)
-    int_native_array_to_safe_array : Proc(IUIAutomation3*, Int32*, Int32, SAFEARRAY**, HRESULT)
-    int_safe_array_to_native_array : Proc(IUIAutomation3*, SAFEARRAY*, Int32**, Int32*, HRESULT)
-    rect_to_variant : Proc(IUIAutomation3*, RECT, VARIANT*, HRESULT)
-    variant_to_rect : Proc(IUIAutomation3*, VARIANT, RECT*, HRESULT)
-    safe_array_to_rect_native_array : Proc(IUIAutomation3*, SAFEARRAY*, RECT**, Int32*, HRESULT)
-    create_proxy_factory_entry : Proc(IUIAutomation3*, IUIAutomationProxyFactory, IUIAutomationProxyFactoryEntry*, HRESULT)
-    get_proxy_factory_mapping : Proc(IUIAutomation3*, IUIAutomationProxyFactoryMapping*, HRESULT)
-    get_property_programmatic_name : Proc(IUIAutomation3*, Int32, UInt8**, HRESULT)
-    get_pattern_programmatic_name : Proc(IUIAutomation3*, Int32, UInt8**, HRESULT)
-    poll_for_potential_supported_patterns : Proc(IUIAutomation3*, IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    poll_for_potential_supported_properties : Proc(IUIAutomation3*, IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    check_not_supported : Proc(IUIAutomation3*, VARIANT, LibC::BOOL*, HRESULT)
-    get_reserved_not_supported_value : Proc(IUIAutomation3*, IUnknown*, HRESULT)
-    get_reserved_mixed_attribute_value : Proc(IUIAutomation3*, IUnknown*, HRESULT)
-    element_from_i_accessible : Proc(IUIAutomation3*, IAccessible, Int32, IUIAutomationElement*, HRESULT)
-    element_from_i_accessible_build_cache : Proc(IUIAutomation3*, IAccessible, Int32, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_auto_set_focus : Proc(IUIAutomation3*, LibC::BOOL*, HRESULT)
-    put_auto_set_focus : Proc(IUIAutomation3*, LibC::BOOL, HRESULT)
-    get_connection_timeout : Proc(IUIAutomation3*, UInt32*, HRESULT)
-    put_connection_timeout : Proc(IUIAutomation3*, UInt32, HRESULT)
-    get_transaction_timeout : Proc(IUIAutomation3*, UInt32*, HRESULT)
-    put_transaction_timeout : Proc(IUIAutomation3*, UInt32, HRESULT)
-    add_text_edit_text_changed_event_handler : Proc(IUIAutomation3*, IUIAutomationElement, TreeScope, TextEditChangeType, IUIAutomationCacheRequest, IUIAutomationTextEditTextChangedEventHandler, HRESULT)
-    remove_text_edit_text_changed_event_handler : Proc(IUIAutomation3*, IUIAutomationElement, IUIAutomationTextEditTextChangedEventHandler, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    compare_elements : UInt64
+    compare_runtime_ids : UInt64
+    get_root_element : UInt64
+    element_from_handle : UInt64
+    element_from_point : UInt64
+    get_focused_element : UInt64
+    get_root_element_build_cache : UInt64
+    element_from_handle_build_cache : UInt64
+    element_from_point_build_cache : UInt64
+    get_focused_element_build_cache : UInt64
+    create_tree_walker : UInt64
+    get_control_view_walker : UInt64
+    get_content_view_walker : UInt64
+    get_raw_view_walker : UInt64
+    get_raw_view_condition : UInt64
+    get_control_view_condition : UInt64
+    get_content_view_condition : UInt64
+    create_cache_request : UInt64
+    create_true_condition : UInt64
+    create_false_condition : UInt64
+    create_property_condition : UInt64
+    create_property_condition_ex : UInt64
+    create_and_condition : UInt64
+    create_and_condition_from_array : UInt64
+    create_and_condition_from_native_array : UInt64
+    create_or_condition : UInt64
+    create_or_condition_from_array : UInt64
+    create_or_condition_from_native_array : UInt64
+    create_not_condition : UInt64
+    add_automation_event_handler : UInt64
+    remove_automation_event_handler : UInt64
+    add_property_changed_event_handler_native_array : UInt64
+    add_property_changed_event_handler : UInt64
+    remove_property_changed_event_handler : UInt64
+    add_structure_changed_event_handler : UInt64
+    remove_structure_changed_event_handler : UInt64
+    add_focus_changed_event_handler : UInt64
+    remove_focus_changed_event_handler : UInt64
+    remove_all_event_handlers : UInt64
+    int_native_array_to_safe_array : UInt64
+    int_safe_array_to_native_array : UInt64
+    rect_to_variant : UInt64
+    variant_to_rect : UInt64
+    safe_array_to_rect_native_array : UInt64
+    create_proxy_factory_entry : UInt64
+    get_proxy_factory_mapping : UInt64
+    get_property_programmatic_name : UInt64
+    get_pattern_programmatic_name : UInt64
+    poll_for_potential_supported_patterns : UInt64
+    poll_for_potential_supported_properties : UInt64
+    check_not_supported : UInt64
+    get_reserved_not_supported_value : UInt64
+    get_reserved_mixed_attribute_value : UInt64
+    element_from_i_accessible : UInt64
+    element_from_i_accessible_build_cache : UInt64
+    get_auto_set_focus : UInt64
+    put_auto_set_focus : UInt64
+    get_connection_timeout : UInt64
+    put_connection_timeout : UInt64
+    get_transaction_timeout : UInt64
+    put_transaction_timeout : UInt64
+    add_text_edit_text_changed_event_handler : UInt64
+    remove_text_edit_text_changed_event_handler : UInt64
   end
 
   IUIAutomation3_GUID = "73d768da-9b51-4b89-936e-c209290973e7"
@@ -5034,74 +5034,74 @@ lib LibWin32
   end
 
   struct IUIAutomation4VTbl
-    query_interface : Proc(IUIAutomation4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomation4*, UInt32)
-    release : Proc(IUIAutomation4*, UInt32)
-    compare_elements : Proc(IUIAutomation4*, IUIAutomationElement, IUIAutomationElement, LibC::BOOL*, HRESULT)
-    compare_runtime_ids : Proc(IUIAutomation4*, SAFEARRAY*, SAFEARRAY*, LibC::BOOL*, HRESULT)
-    get_root_element : Proc(IUIAutomation4*, IUIAutomationElement*, HRESULT)
-    element_from_handle : Proc(IUIAutomation4*, LibC::HANDLE, IUIAutomationElement*, HRESULT)
-    element_from_point : Proc(IUIAutomation4*, POINT, IUIAutomationElement*, HRESULT)
-    get_focused_element : Proc(IUIAutomation4*, IUIAutomationElement*, HRESULT)
-    get_root_element_build_cache : Proc(IUIAutomation4*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    element_from_handle_build_cache : Proc(IUIAutomation4*, LibC::HANDLE, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    element_from_point_build_cache : Proc(IUIAutomation4*, POINT, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_focused_element_build_cache : Proc(IUIAutomation4*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    create_tree_walker : Proc(IUIAutomation4*, IUIAutomationCondition, IUIAutomationTreeWalker*, HRESULT)
-    get_control_view_walker : Proc(IUIAutomation4*, IUIAutomationTreeWalker*, HRESULT)
-    get_content_view_walker : Proc(IUIAutomation4*, IUIAutomationTreeWalker*, HRESULT)
-    get_raw_view_walker : Proc(IUIAutomation4*, IUIAutomationTreeWalker*, HRESULT)
-    get_raw_view_condition : Proc(IUIAutomation4*, IUIAutomationCondition*, HRESULT)
-    get_control_view_condition : Proc(IUIAutomation4*, IUIAutomationCondition*, HRESULT)
-    get_content_view_condition : Proc(IUIAutomation4*, IUIAutomationCondition*, HRESULT)
-    create_cache_request : Proc(IUIAutomation4*, IUIAutomationCacheRequest*, HRESULT)
-    create_true_condition : Proc(IUIAutomation4*, IUIAutomationCondition*, HRESULT)
-    create_false_condition : Proc(IUIAutomation4*, IUIAutomationCondition*, HRESULT)
-    create_property_condition : Proc(IUIAutomation4*, Int32, VARIANT, IUIAutomationCondition*, HRESULT)
-    create_property_condition_ex : Proc(IUIAutomation4*, Int32, VARIANT, PropertyConditionFlags, IUIAutomationCondition*, HRESULT)
-    create_and_condition : Proc(IUIAutomation4*, IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    create_and_condition_from_array : Proc(IUIAutomation4*, SAFEARRAY*, IUIAutomationCondition*, HRESULT)
-    create_and_condition_from_native_array : Proc(IUIAutomation4*, IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)
-    create_or_condition : Proc(IUIAutomation4*, IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    create_or_condition_from_array : Proc(IUIAutomation4*, SAFEARRAY*, IUIAutomationCondition*, HRESULT)
-    create_or_condition_from_native_array : Proc(IUIAutomation4*, IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)
-    create_not_condition : Proc(IUIAutomation4*, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    add_automation_event_handler : Proc(IUIAutomation4*, Int32, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationEventHandler, HRESULT)
-    remove_automation_event_handler : Proc(IUIAutomation4*, Int32, IUIAutomationElement, IUIAutomationEventHandler, HRESULT)
-    add_property_changed_event_handler_native_array : Proc(IUIAutomation4*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, Int32*, Int32, HRESULT)
-    add_property_changed_event_handler : Proc(IUIAutomation4*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, SAFEARRAY*, HRESULT)
-    remove_property_changed_event_handler : Proc(IUIAutomation4*, IUIAutomationElement, IUIAutomationPropertyChangedEventHandler, HRESULT)
-    add_structure_changed_event_handler : Proc(IUIAutomation4*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationStructureChangedEventHandler, HRESULT)
-    remove_structure_changed_event_handler : Proc(IUIAutomation4*, IUIAutomationElement, IUIAutomationStructureChangedEventHandler, HRESULT)
-    add_focus_changed_event_handler : Proc(IUIAutomation4*, IUIAutomationCacheRequest, IUIAutomationFocusChangedEventHandler, HRESULT)
-    remove_focus_changed_event_handler : Proc(IUIAutomation4*, IUIAutomationFocusChangedEventHandler, HRESULT)
-    remove_all_event_handlers : Proc(IUIAutomation4*, HRESULT)
-    int_native_array_to_safe_array : Proc(IUIAutomation4*, Int32*, Int32, SAFEARRAY**, HRESULT)
-    int_safe_array_to_native_array : Proc(IUIAutomation4*, SAFEARRAY*, Int32**, Int32*, HRESULT)
-    rect_to_variant : Proc(IUIAutomation4*, RECT, VARIANT*, HRESULT)
-    variant_to_rect : Proc(IUIAutomation4*, VARIANT, RECT*, HRESULT)
-    safe_array_to_rect_native_array : Proc(IUIAutomation4*, SAFEARRAY*, RECT**, Int32*, HRESULT)
-    create_proxy_factory_entry : Proc(IUIAutomation4*, IUIAutomationProxyFactory, IUIAutomationProxyFactoryEntry*, HRESULT)
-    get_proxy_factory_mapping : Proc(IUIAutomation4*, IUIAutomationProxyFactoryMapping*, HRESULT)
-    get_property_programmatic_name : Proc(IUIAutomation4*, Int32, UInt8**, HRESULT)
-    get_pattern_programmatic_name : Proc(IUIAutomation4*, Int32, UInt8**, HRESULT)
-    poll_for_potential_supported_patterns : Proc(IUIAutomation4*, IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    poll_for_potential_supported_properties : Proc(IUIAutomation4*, IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    check_not_supported : Proc(IUIAutomation4*, VARIANT, LibC::BOOL*, HRESULT)
-    get_reserved_not_supported_value : Proc(IUIAutomation4*, IUnknown*, HRESULT)
-    get_reserved_mixed_attribute_value : Proc(IUIAutomation4*, IUnknown*, HRESULT)
-    element_from_i_accessible : Proc(IUIAutomation4*, IAccessible, Int32, IUIAutomationElement*, HRESULT)
-    element_from_i_accessible_build_cache : Proc(IUIAutomation4*, IAccessible, Int32, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_auto_set_focus : Proc(IUIAutomation4*, LibC::BOOL*, HRESULT)
-    put_auto_set_focus : Proc(IUIAutomation4*, LibC::BOOL, HRESULT)
-    get_connection_timeout : Proc(IUIAutomation4*, UInt32*, HRESULT)
-    put_connection_timeout : Proc(IUIAutomation4*, UInt32, HRESULT)
-    get_transaction_timeout : Proc(IUIAutomation4*, UInt32*, HRESULT)
-    put_transaction_timeout : Proc(IUIAutomation4*, UInt32, HRESULT)
-    add_text_edit_text_changed_event_handler : Proc(IUIAutomation4*, IUIAutomationElement, TreeScope, TextEditChangeType, IUIAutomationCacheRequest, IUIAutomationTextEditTextChangedEventHandler, HRESULT)
-    remove_text_edit_text_changed_event_handler : Proc(IUIAutomation4*, IUIAutomationElement, IUIAutomationTextEditTextChangedEventHandler, HRESULT)
-    add_changes_event_handler : Proc(IUIAutomation4*, IUIAutomationElement, TreeScope, Int32*, Int32, IUIAutomationCacheRequest, IUIAutomationChangesEventHandler, HRESULT)
-    remove_changes_event_handler : Proc(IUIAutomation4*, IUIAutomationElement, IUIAutomationChangesEventHandler, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    compare_elements : UInt64
+    compare_runtime_ids : UInt64
+    get_root_element : UInt64
+    element_from_handle : UInt64
+    element_from_point : UInt64
+    get_focused_element : UInt64
+    get_root_element_build_cache : UInt64
+    element_from_handle_build_cache : UInt64
+    element_from_point_build_cache : UInt64
+    get_focused_element_build_cache : UInt64
+    create_tree_walker : UInt64
+    get_control_view_walker : UInt64
+    get_content_view_walker : UInt64
+    get_raw_view_walker : UInt64
+    get_raw_view_condition : UInt64
+    get_control_view_condition : UInt64
+    get_content_view_condition : UInt64
+    create_cache_request : UInt64
+    create_true_condition : UInt64
+    create_false_condition : UInt64
+    create_property_condition : UInt64
+    create_property_condition_ex : UInt64
+    create_and_condition : UInt64
+    create_and_condition_from_array : UInt64
+    create_and_condition_from_native_array : UInt64
+    create_or_condition : UInt64
+    create_or_condition_from_array : UInt64
+    create_or_condition_from_native_array : UInt64
+    create_not_condition : UInt64
+    add_automation_event_handler : UInt64
+    remove_automation_event_handler : UInt64
+    add_property_changed_event_handler_native_array : UInt64
+    add_property_changed_event_handler : UInt64
+    remove_property_changed_event_handler : UInt64
+    add_structure_changed_event_handler : UInt64
+    remove_structure_changed_event_handler : UInt64
+    add_focus_changed_event_handler : UInt64
+    remove_focus_changed_event_handler : UInt64
+    remove_all_event_handlers : UInt64
+    int_native_array_to_safe_array : UInt64
+    int_safe_array_to_native_array : UInt64
+    rect_to_variant : UInt64
+    variant_to_rect : UInt64
+    safe_array_to_rect_native_array : UInt64
+    create_proxy_factory_entry : UInt64
+    get_proxy_factory_mapping : UInt64
+    get_property_programmatic_name : UInt64
+    get_pattern_programmatic_name : UInt64
+    poll_for_potential_supported_patterns : UInt64
+    poll_for_potential_supported_properties : UInt64
+    check_not_supported : UInt64
+    get_reserved_not_supported_value : UInt64
+    get_reserved_mixed_attribute_value : UInt64
+    element_from_i_accessible : UInt64
+    element_from_i_accessible_build_cache : UInt64
+    get_auto_set_focus : UInt64
+    put_auto_set_focus : UInt64
+    get_connection_timeout : UInt64
+    put_connection_timeout : UInt64
+    get_transaction_timeout : UInt64
+    put_transaction_timeout : UInt64
+    add_text_edit_text_changed_event_handler : UInt64
+    remove_text_edit_text_changed_event_handler : UInt64
+    add_changes_event_handler : UInt64
+    remove_changes_event_handler : UInt64
   end
 
   IUIAutomation4_GUID = "1189c02a-05f8-4319-8e21-e817e3db2860"
@@ -5111,76 +5111,76 @@ lib LibWin32
   end
 
   struct IUIAutomation5VTbl
-    query_interface : Proc(IUIAutomation5*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomation5*, UInt32)
-    release : Proc(IUIAutomation5*, UInt32)
-    compare_elements : Proc(IUIAutomation5*, IUIAutomationElement, IUIAutomationElement, LibC::BOOL*, HRESULT)
-    compare_runtime_ids : Proc(IUIAutomation5*, SAFEARRAY*, SAFEARRAY*, LibC::BOOL*, HRESULT)
-    get_root_element : Proc(IUIAutomation5*, IUIAutomationElement*, HRESULT)
-    element_from_handle : Proc(IUIAutomation5*, LibC::HANDLE, IUIAutomationElement*, HRESULT)
-    element_from_point : Proc(IUIAutomation5*, POINT, IUIAutomationElement*, HRESULT)
-    get_focused_element : Proc(IUIAutomation5*, IUIAutomationElement*, HRESULT)
-    get_root_element_build_cache : Proc(IUIAutomation5*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    element_from_handle_build_cache : Proc(IUIAutomation5*, LibC::HANDLE, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    element_from_point_build_cache : Proc(IUIAutomation5*, POINT, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_focused_element_build_cache : Proc(IUIAutomation5*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    create_tree_walker : Proc(IUIAutomation5*, IUIAutomationCondition, IUIAutomationTreeWalker*, HRESULT)
-    get_control_view_walker : Proc(IUIAutomation5*, IUIAutomationTreeWalker*, HRESULT)
-    get_content_view_walker : Proc(IUIAutomation5*, IUIAutomationTreeWalker*, HRESULT)
-    get_raw_view_walker : Proc(IUIAutomation5*, IUIAutomationTreeWalker*, HRESULT)
-    get_raw_view_condition : Proc(IUIAutomation5*, IUIAutomationCondition*, HRESULT)
-    get_control_view_condition : Proc(IUIAutomation5*, IUIAutomationCondition*, HRESULT)
-    get_content_view_condition : Proc(IUIAutomation5*, IUIAutomationCondition*, HRESULT)
-    create_cache_request : Proc(IUIAutomation5*, IUIAutomationCacheRequest*, HRESULT)
-    create_true_condition : Proc(IUIAutomation5*, IUIAutomationCondition*, HRESULT)
-    create_false_condition : Proc(IUIAutomation5*, IUIAutomationCondition*, HRESULT)
-    create_property_condition : Proc(IUIAutomation5*, Int32, VARIANT, IUIAutomationCondition*, HRESULT)
-    create_property_condition_ex : Proc(IUIAutomation5*, Int32, VARIANT, PropertyConditionFlags, IUIAutomationCondition*, HRESULT)
-    create_and_condition : Proc(IUIAutomation5*, IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    create_and_condition_from_array : Proc(IUIAutomation5*, SAFEARRAY*, IUIAutomationCondition*, HRESULT)
-    create_and_condition_from_native_array : Proc(IUIAutomation5*, IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)
-    create_or_condition : Proc(IUIAutomation5*, IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    create_or_condition_from_array : Proc(IUIAutomation5*, SAFEARRAY*, IUIAutomationCondition*, HRESULT)
-    create_or_condition_from_native_array : Proc(IUIAutomation5*, IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)
-    create_not_condition : Proc(IUIAutomation5*, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    add_automation_event_handler : Proc(IUIAutomation5*, Int32, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationEventHandler, HRESULT)
-    remove_automation_event_handler : Proc(IUIAutomation5*, Int32, IUIAutomationElement, IUIAutomationEventHandler, HRESULT)
-    add_property_changed_event_handler_native_array : Proc(IUIAutomation5*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, Int32*, Int32, HRESULT)
-    add_property_changed_event_handler : Proc(IUIAutomation5*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, SAFEARRAY*, HRESULT)
-    remove_property_changed_event_handler : Proc(IUIAutomation5*, IUIAutomationElement, IUIAutomationPropertyChangedEventHandler, HRESULT)
-    add_structure_changed_event_handler : Proc(IUIAutomation5*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationStructureChangedEventHandler, HRESULT)
-    remove_structure_changed_event_handler : Proc(IUIAutomation5*, IUIAutomationElement, IUIAutomationStructureChangedEventHandler, HRESULT)
-    add_focus_changed_event_handler : Proc(IUIAutomation5*, IUIAutomationCacheRequest, IUIAutomationFocusChangedEventHandler, HRESULT)
-    remove_focus_changed_event_handler : Proc(IUIAutomation5*, IUIAutomationFocusChangedEventHandler, HRESULT)
-    remove_all_event_handlers : Proc(IUIAutomation5*, HRESULT)
-    int_native_array_to_safe_array : Proc(IUIAutomation5*, Int32*, Int32, SAFEARRAY**, HRESULT)
-    int_safe_array_to_native_array : Proc(IUIAutomation5*, SAFEARRAY*, Int32**, Int32*, HRESULT)
-    rect_to_variant : Proc(IUIAutomation5*, RECT, VARIANT*, HRESULT)
-    variant_to_rect : Proc(IUIAutomation5*, VARIANT, RECT*, HRESULT)
-    safe_array_to_rect_native_array : Proc(IUIAutomation5*, SAFEARRAY*, RECT**, Int32*, HRESULT)
-    create_proxy_factory_entry : Proc(IUIAutomation5*, IUIAutomationProxyFactory, IUIAutomationProxyFactoryEntry*, HRESULT)
-    get_proxy_factory_mapping : Proc(IUIAutomation5*, IUIAutomationProxyFactoryMapping*, HRESULT)
-    get_property_programmatic_name : Proc(IUIAutomation5*, Int32, UInt8**, HRESULT)
-    get_pattern_programmatic_name : Proc(IUIAutomation5*, Int32, UInt8**, HRESULT)
-    poll_for_potential_supported_patterns : Proc(IUIAutomation5*, IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    poll_for_potential_supported_properties : Proc(IUIAutomation5*, IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    check_not_supported : Proc(IUIAutomation5*, VARIANT, LibC::BOOL*, HRESULT)
-    get_reserved_not_supported_value : Proc(IUIAutomation5*, IUnknown*, HRESULT)
-    get_reserved_mixed_attribute_value : Proc(IUIAutomation5*, IUnknown*, HRESULT)
-    element_from_i_accessible : Proc(IUIAutomation5*, IAccessible, Int32, IUIAutomationElement*, HRESULT)
-    element_from_i_accessible_build_cache : Proc(IUIAutomation5*, IAccessible, Int32, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_auto_set_focus : Proc(IUIAutomation5*, LibC::BOOL*, HRESULT)
-    put_auto_set_focus : Proc(IUIAutomation5*, LibC::BOOL, HRESULT)
-    get_connection_timeout : Proc(IUIAutomation5*, UInt32*, HRESULT)
-    put_connection_timeout : Proc(IUIAutomation5*, UInt32, HRESULT)
-    get_transaction_timeout : Proc(IUIAutomation5*, UInt32*, HRESULT)
-    put_transaction_timeout : Proc(IUIAutomation5*, UInt32, HRESULT)
-    add_text_edit_text_changed_event_handler : Proc(IUIAutomation5*, IUIAutomationElement, TreeScope, TextEditChangeType, IUIAutomationCacheRequest, IUIAutomationTextEditTextChangedEventHandler, HRESULT)
-    remove_text_edit_text_changed_event_handler : Proc(IUIAutomation5*, IUIAutomationElement, IUIAutomationTextEditTextChangedEventHandler, HRESULT)
-    add_changes_event_handler : Proc(IUIAutomation5*, IUIAutomationElement, TreeScope, Int32*, Int32, IUIAutomationCacheRequest, IUIAutomationChangesEventHandler, HRESULT)
-    remove_changes_event_handler : Proc(IUIAutomation5*, IUIAutomationElement, IUIAutomationChangesEventHandler, HRESULT)
-    add_notification_event_handler : Proc(IUIAutomation5*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationNotificationEventHandler, HRESULT)
-    remove_notification_event_handler : Proc(IUIAutomation5*, IUIAutomationElement, IUIAutomationNotificationEventHandler, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    compare_elements : UInt64
+    compare_runtime_ids : UInt64
+    get_root_element : UInt64
+    element_from_handle : UInt64
+    element_from_point : UInt64
+    get_focused_element : UInt64
+    get_root_element_build_cache : UInt64
+    element_from_handle_build_cache : UInt64
+    element_from_point_build_cache : UInt64
+    get_focused_element_build_cache : UInt64
+    create_tree_walker : UInt64
+    get_control_view_walker : UInt64
+    get_content_view_walker : UInt64
+    get_raw_view_walker : UInt64
+    get_raw_view_condition : UInt64
+    get_control_view_condition : UInt64
+    get_content_view_condition : UInt64
+    create_cache_request : UInt64
+    create_true_condition : UInt64
+    create_false_condition : UInt64
+    create_property_condition : UInt64
+    create_property_condition_ex : UInt64
+    create_and_condition : UInt64
+    create_and_condition_from_array : UInt64
+    create_and_condition_from_native_array : UInt64
+    create_or_condition : UInt64
+    create_or_condition_from_array : UInt64
+    create_or_condition_from_native_array : UInt64
+    create_not_condition : UInt64
+    add_automation_event_handler : UInt64
+    remove_automation_event_handler : UInt64
+    add_property_changed_event_handler_native_array : UInt64
+    add_property_changed_event_handler : UInt64
+    remove_property_changed_event_handler : UInt64
+    add_structure_changed_event_handler : UInt64
+    remove_structure_changed_event_handler : UInt64
+    add_focus_changed_event_handler : UInt64
+    remove_focus_changed_event_handler : UInt64
+    remove_all_event_handlers : UInt64
+    int_native_array_to_safe_array : UInt64
+    int_safe_array_to_native_array : UInt64
+    rect_to_variant : UInt64
+    variant_to_rect : UInt64
+    safe_array_to_rect_native_array : UInt64
+    create_proxy_factory_entry : UInt64
+    get_proxy_factory_mapping : UInt64
+    get_property_programmatic_name : UInt64
+    get_pattern_programmatic_name : UInt64
+    poll_for_potential_supported_patterns : UInt64
+    poll_for_potential_supported_properties : UInt64
+    check_not_supported : UInt64
+    get_reserved_not_supported_value : UInt64
+    get_reserved_mixed_attribute_value : UInt64
+    element_from_i_accessible : UInt64
+    element_from_i_accessible_build_cache : UInt64
+    get_auto_set_focus : UInt64
+    put_auto_set_focus : UInt64
+    get_connection_timeout : UInt64
+    put_connection_timeout : UInt64
+    get_transaction_timeout : UInt64
+    put_transaction_timeout : UInt64
+    add_text_edit_text_changed_event_handler : UInt64
+    remove_text_edit_text_changed_event_handler : UInt64
+    add_changes_event_handler : UInt64
+    remove_changes_event_handler : UInt64
+    add_notification_event_handler : UInt64
+    remove_notification_event_handler : UInt64
   end
 
   IUIAutomation5_GUID = "25f700c8-d816-4057-a9dc-3cbdee77e256"
@@ -5190,85 +5190,85 @@ lib LibWin32
   end
 
   struct IUIAutomation6VTbl
-    query_interface : Proc(IUIAutomation6*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAutomation6*, UInt32)
-    release : Proc(IUIAutomation6*, UInt32)
-    compare_elements : Proc(IUIAutomation6*, IUIAutomationElement, IUIAutomationElement, LibC::BOOL*, HRESULT)
-    compare_runtime_ids : Proc(IUIAutomation6*, SAFEARRAY*, SAFEARRAY*, LibC::BOOL*, HRESULT)
-    get_root_element : Proc(IUIAutomation6*, IUIAutomationElement*, HRESULT)
-    element_from_handle : Proc(IUIAutomation6*, LibC::HANDLE, IUIAutomationElement*, HRESULT)
-    element_from_point : Proc(IUIAutomation6*, POINT, IUIAutomationElement*, HRESULT)
-    get_focused_element : Proc(IUIAutomation6*, IUIAutomationElement*, HRESULT)
-    get_root_element_build_cache : Proc(IUIAutomation6*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    element_from_handle_build_cache : Proc(IUIAutomation6*, LibC::HANDLE, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    element_from_point_build_cache : Proc(IUIAutomation6*, POINT, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_focused_element_build_cache : Proc(IUIAutomation6*, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    create_tree_walker : Proc(IUIAutomation6*, IUIAutomationCondition, IUIAutomationTreeWalker*, HRESULT)
-    get_control_view_walker : Proc(IUIAutomation6*, IUIAutomationTreeWalker*, HRESULT)
-    get_content_view_walker : Proc(IUIAutomation6*, IUIAutomationTreeWalker*, HRESULT)
-    get_raw_view_walker : Proc(IUIAutomation6*, IUIAutomationTreeWalker*, HRESULT)
-    get_raw_view_condition : Proc(IUIAutomation6*, IUIAutomationCondition*, HRESULT)
-    get_control_view_condition : Proc(IUIAutomation6*, IUIAutomationCondition*, HRESULT)
-    get_content_view_condition : Proc(IUIAutomation6*, IUIAutomationCondition*, HRESULT)
-    create_cache_request : Proc(IUIAutomation6*, IUIAutomationCacheRequest*, HRESULT)
-    create_true_condition : Proc(IUIAutomation6*, IUIAutomationCondition*, HRESULT)
-    create_false_condition : Proc(IUIAutomation6*, IUIAutomationCondition*, HRESULT)
-    create_property_condition : Proc(IUIAutomation6*, Int32, VARIANT, IUIAutomationCondition*, HRESULT)
-    create_property_condition_ex : Proc(IUIAutomation6*, Int32, VARIANT, PropertyConditionFlags, IUIAutomationCondition*, HRESULT)
-    create_and_condition : Proc(IUIAutomation6*, IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    create_and_condition_from_array : Proc(IUIAutomation6*, SAFEARRAY*, IUIAutomationCondition*, HRESULT)
-    create_and_condition_from_native_array : Proc(IUIAutomation6*, IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)
-    create_or_condition : Proc(IUIAutomation6*, IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    create_or_condition_from_array : Proc(IUIAutomation6*, SAFEARRAY*, IUIAutomationCondition*, HRESULT)
-    create_or_condition_from_native_array : Proc(IUIAutomation6*, IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)
-    create_not_condition : Proc(IUIAutomation6*, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)
-    add_automation_event_handler : Proc(IUIAutomation6*, Int32, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationEventHandler, HRESULT)
-    remove_automation_event_handler : Proc(IUIAutomation6*, Int32, IUIAutomationElement, IUIAutomationEventHandler, HRESULT)
-    add_property_changed_event_handler_native_array : Proc(IUIAutomation6*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, Int32*, Int32, HRESULT)
-    add_property_changed_event_handler : Proc(IUIAutomation6*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, SAFEARRAY*, HRESULT)
-    remove_property_changed_event_handler : Proc(IUIAutomation6*, IUIAutomationElement, IUIAutomationPropertyChangedEventHandler, HRESULT)
-    add_structure_changed_event_handler : Proc(IUIAutomation6*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationStructureChangedEventHandler, HRESULT)
-    remove_structure_changed_event_handler : Proc(IUIAutomation6*, IUIAutomationElement, IUIAutomationStructureChangedEventHandler, HRESULT)
-    add_focus_changed_event_handler : Proc(IUIAutomation6*, IUIAutomationCacheRequest, IUIAutomationFocusChangedEventHandler, HRESULT)
-    remove_focus_changed_event_handler : Proc(IUIAutomation6*, IUIAutomationFocusChangedEventHandler, HRESULT)
-    remove_all_event_handlers : Proc(IUIAutomation6*, HRESULT)
-    int_native_array_to_safe_array : Proc(IUIAutomation6*, Int32*, Int32, SAFEARRAY**, HRESULT)
-    int_safe_array_to_native_array : Proc(IUIAutomation6*, SAFEARRAY*, Int32**, Int32*, HRESULT)
-    rect_to_variant : Proc(IUIAutomation6*, RECT, VARIANT*, HRESULT)
-    variant_to_rect : Proc(IUIAutomation6*, VARIANT, RECT*, HRESULT)
-    safe_array_to_rect_native_array : Proc(IUIAutomation6*, SAFEARRAY*, RECT**, Int32*, HRESULT)
-    create_proxy_factory_entry : Proc(IUIAutomation6*, IUIAutomationProxyFactory, IUIAutomationProxyFactoryEntry*, HRESULT)
-    get_proxy_factory_mapping : Proc(IUIAutomation6*, IUIAutomationProxyFactoryMapping*, HRESULT)
-    get_property_programmatic_name : Proc(IUIAutomation6*, Int32, UInt8**, HRESULT)
-    get_pattern_programmatic_name : Proc(IUIAutomation6*, Int32, UInt8**, HRESULT)
-    poll_for_potential_supported_patterns : Proc(IUIAutomation6*, IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    poll_for_potential_supported_properties : Proc(IUIAutomation6*, IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    check_not_supported : Proc(IUIAutomation6*, VARIANT, LibC::BOOL*, HRESULT)
-    get_reserved_not_supported_value : Proc(IUIAutomation6*, IUnknown*, HRESULT)
-    get_reserved_mixed_attribute_value : Proc(IUIAutomation6*, IUnknown*, HRESULT)
-    element_from_i_accessible : Proc(IUIAutomation6*, IAccessible, Int32, IUIAutomationElement*, HRESULT)
-    element_from_i_accessible_build_cache : Proc(IUIAutomation6*, IAccessible, Int32, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)
-    get_auto_set_focus : Proc(IUIAutomation6*, LibC::BOOL*, HRESULT)
-    put_auto_set_focus : Proc(IUIAutomation6*, LibC::BOOL, HRESULT)
-    get_connection_timeout : Proc(IUIAutomation6*, UInt32*, HRESULT)
-    put_connection_timeout : Proc(IUIAutomation6*, UInt32, HRESULT)
-    get_transaction_timeout : Proc(IUIAutomation6*, UInt32*, HRESULT)
-    put_transaction_timeout : Proc(IUIAutomation6*, UInt32, HRESULT)
-    add_text_edit_text_changed_event_handler : Proc(IUIAutomation6*, IUIAutomationElement, TreeScope, TextEditChangeType, IUIAutomationCacheRequest, IUIAutomationTextEditTextChangedEventHandler, HRESULT)
-    remove_text_edit_text_changed_event_handler : Proc(IUIAutomation6*, IUIAutomationElement, IUIAutomationTextEditTextChangedEventHandler, HRESULT)
-    add_changes_event_handler : Proc(IUIAutomation6*, IUIAutomationElement, TreeScope, Int32*, Int32, IUIAutomationCacheRequest, IUIAutomationChangesEventHandler, HRESULT)
-    remove_changes_event_handler : Proc(IUIAutomation6*, IUIAutomationElement, IUIAutomationChangesEventHandler, HRESULT)
-    add_notification_event_handler : Proc(IUIAutomation6*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationNotificationEventHandler, HRESULT)
-    remove_notification_event_handler : Proc(IUIAutomation6*, IUIAutomationElement, IUIAutomationNotificationEventHandler, HRESULT)
-    create_event_handler_group : Proc(IUIAutomation6*, IUIAutomationEventHandlerGroup*, HRESULT)
-    add_event_handler_group : Proc(IUIAutomation6*, IUIAutomationElement, IUIAutomationEventHandlerGroup, HRESULT)
-    remove_event_handler_group : Proc(IUIAutomation6*, IUIAutomationElement, IUIAutomationEventHandlerGroup, HRESULT)
-    get_connection_recovery_behavior : Proc(IUIAutomation6*, ConnectionRecoveryBehaviorOptions*, HRESULT)
-    put_connection_recovery_behavior : Proc(IUIAutomation6*, ConnectionRecoveryBehaviorOptions, HRESULT)
-    get_coalesce_events : Proc(IUIAutomation6*, CoalesceEventsOptions*, HRESULT)
-    put_coalesce_events : Proc(IUIAutomation6*, CoalesceEventsOptions, HRESULT)
-    add_active_text_position_changed_event_handler : Proc(IUIAutomation6*, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationActiveTextPositionChangedEventHandler, HRESULT)
-    remove_active_text_position_changed_event_handler : Proc(IUIAutomation6*, IUIAutomationElement, IUIAutomationActiveTextPositionChangedEventHandler, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    compare_elements : UInt64
+    compare_runtime_ids : UInt64
+    get_root_element : UInt64
+    element_from_handle : UInt64
+    element_from_point : UInt64
+    get_focused_element : UInt64
+    get_root_element_build_cache : UInt64
+    element_from_handle_build_cache : UInt64
+    element_from_point_build_cache : UInt64
+    get_focused_element_build_cache : UInt64
+    create_tree_walker : UInt64
+    get_control_view_walker : UInt64
+    get_content_view_walker : UInt64
+    get_raw_view_walker : UInt64
+    get_raw_view_condition : UInt64
+    get_control_view_condition : UInt64
+    get_content_view_condition : UInt64
+    create_cache_request : UInt64
+    create_true_condition : UInt64
+    create_false_condition : UInt64
+    create_property_condition : UInt64
+    create_property_condition_ex : UInt64
+    create_and_condition : UInt64
+    create_and_condition_from_array : UInt64
+    create_and_condition_from_native_array : UInt64
+    create_or_condition : UInt64
+    create_or_condition_from_array : UInt64
+    create_or_condition_from_native_array : UInt64
+    create_not_condition : UInt64
+    add_automation_event_handler : UInt64
+    remove_automation_event_handler : UInt64
+    add_property_changed_event_handler_native_array : UInt64
+    add_property_changed_event_handler : UInt64
+    remove_property_changed_event_handler : UInt64
+    add_structure_changed_event_handler : UInt64
+    remove_structure_changed_event_handler : UInt64
+    add_focus_changed_event_handler : UInt64
+    remove_focus_changed_event_handler : UInt64
+    remove_all_event_handlers : UInt64
+    int_native_array_to_safe_array : UInt64
+    int_safe_array_to_native_array : UInt64
+    rect_to_variant : UInt64
+    variant_to_rect : UInt64
+    safe_array_to_rect_native_array : UInt64
+    create_proxy_factory_entry : UInt64
+    get_proxy_factory_mapping : UInt64
+    get_property_programmatic_name : UInt64
+    get_pattern_programmatic_name : UInt64
+    poll_for_potential_supported_patterns : UInt64
+    poll_for_potential_supported_properties : UInt64
+    check_not_supported : UInt64
+    get_reserved_not_supported_value : UInt64
+    get_reserved_mixed_attribute_value : UInt64
+    element_from_i_accessible : UInt64
+    element_from_i_accessible_build_cache : UInt64
+    get_auto_set_focus : UInt64
+    put_auto_set_focus : UInt64
+    get_connection_timeout : UInt64
+    put_connection_timeout : UInt64
+    get_transaction_timeout : UInt64
+    put_transaction_timeout : UInt64
+    add_text_edit_text_changed_event_handler : UInt64
+    remove_text_edit_text_changed_event_handler : UInt64
+    add_changes_event_handler : UInt64
+    remove_changes_event_handler : UInt64
+    add_notification_event_handler : UInt64
+    remove_notification_event_handler : UInt64
+    create_event_handler_group : UInt64
+    add_event_handler_group : UInt64
+    remove_event_handler_group : UInt64
+    get_connection_recovery_behavior : UInt64
+    put_connection_recovery_behavior : UInt64
+    get_coalesce_events : UInt64
+    put_coalesce_events : UInt64
+    add_active_text_position_changed_event_handler : UInt64
+    remove_active_text_position_changed_event_handler : UInt64
   end
 
   IUIAutomation6_GUID = "aae072da-29e3-413d-87a7-192dbf81ed10"
@@ -5312,7 +5312,7 @@ lib LibWin32
   fun GetStateTextW(lstatebit : UInt32, lpszstate : Char*, cchstate : UInt32) : UInt32
 
   # Params # pver : UInt32* [In],pbuild : UInt32* [In]
-  fun GetOleaccVersionInfo(pver : UInt32*, pbuild : UInt32*)
+  fun GetOleaccVersionInfo(pver : UInt32*, pbuild : UInt32*) : Void
 
   # Params # hwnd : LibC::HANDLE [In],idobject : Int32 [In],riid : Guid* [In],ppvobject : Void** [In]
   fun CreateStdAccessibleObject(hwnd : LibC::HANDLE, idobject : Int32, riid : Guid*, ppvobject : Void**) : HRESULT
@@ -5381,7 +5381,7 @@ lib LibWin32
   fun UiaGetRootNode(phnode : HUIANODE*) : HRESULT
 
   # Params # pcallback : UiaProviderCallback* [In]
-  fun UiaRegisterProviderCallback(pcallback : UiaProviderCallback*)
+  fun UiaRegisterProviderCallback(pcallback : UiaProviderCallback*) : Void
 
   # Params # type : AutomationIdentifierType [In],pguid : Guid* [In]
   fun UiaLookupId(type : AutomationIdentifierType, pguid : Guid*) : Int32
@@ -5636,7 +5636,7 @@ lib LibWin32
   fun UnregisterPointerInputTargetEx(hwnd : LibC::HANDLE, pointertype : POINTER_INPUT_TYPE) : LibC::BOOL
 
   # Params # event : UInt32 [In],hwnd : LibC::HANDLE [In],idobject : Int32 [In],idchild : Int32 [In]
-  fun NotifyWinEvent(event : UInt32, hwnd : LibC::HANDLE, idobject : Int32, idchild : Int32)
+  fun NotifyWinEvent(event : UInt32, hwnd : LibC::HANDLE, idobject : Int32, idchild : Int32) : Void
 
   # Params # eventmin : UInt32 [In],eventmax : UInt32 [In],hmodwineventproc : HINSTANCE [In],pfnwineventproc : WINEVENTPROC [In],idprocess : UInt32 [In],idthread : UInt32 [In],dwflags : UInt32 [In]
   fun SetWinEventHook(eventmin : UInt32, eventmax : UInt32, hmodwineventproc : HINSTANCE, pfnwineventproc : WINEVENTPROC, idprocess : UInt32, idthread : UInt32, dwflags : UInt32) : HWINEVENTHOOK
@@ -5646,4 +5646,7401 @@ lib LibWin32
 
   # Params # hwineventhook : HWINEVENTHOOK [In]
   fun UnhookWinEvent(hwineventhook : HWINEVENTHOOK) : LibC::BOOL
+end
+struct LibWin32::IRicheditWindowlessAccessibility
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_provider(psite : IRawElementProviderWindowlessSite, ppprovider : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.create_provider.unsafe_as(Proc(IRawElementProviderWindowlessSite, IRawElementProviderSimple*, HRESULT)).call(psite, ppprovider)
+  end
+end
+struct LibWin32::IRichEditUiaInformation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_boundary_rectangle(puiarect : UiaRect*) : HRESULT
+    @lpVtbl.value.get_boundary_rectangle.unsafe_as(Proc(UiaRect*, HRESULT)).call(puiarect)
+  end
+  def is_visible : HRESULT
+    @lpVtbl.value.is_visible.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IAccessible
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_acc_parent(ppdispparent : IDispatch*) : HRESULT
+    @lpVtbl.value.get_acc_parent.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppdispparent)
+  end
+  def get_acc_child_count(pcountchildren : Int32*) : HRESULT
+    @lpVtbl.value.get_acc_child_count.unsafe_as(Proc(Int32*, HRESULT)).call(pcountchildren)
+  end
+  def get_acc_child(varchild : VARIANT, ppdispchild : IDispatch*) : HRESULT
+    @lpVtbl.value.get_acc_child.unsafe_as(Proc(VARIANT, IDispatch*, HRESULT)).call(varchild, ppdispchild)
+  end
+  def get_acc_name(varchild : VARIANT, pszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_name.unsafe_as(Proc(VARIANT, UInt8**, HRESULT)).call(varchild, pszname)
+  end
+  def get_acc_value(varchild : VARIANT, pszvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_value.unsafe_as(Proc(VARIANT, UInt8**, HRESULT)).call(varchild, pszvalue)
+  end
+  def get_acc_description(varchild : VARIANT, pszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_description.unsafe_as(Proc(VARIANT, UInt8**, HRESULT)).call(varchild, pszdescription)
+  end
+  def get_acc_role(varchild : VARIANT, pvarrole : VARIANT*) : HRESULT
+    @lpVtbl.value.get_acc_role.unsafe_as(Proc(VARIANT, VARIANT*, HRESULT)).call(varchild, pvarrole)
+  end
+  def get_acc_state(varchild : VARIANT, pvarstate : VARIANT*) : HRESULT
+    @lpVtbl.value.get_acc_state.unsafe_as(Proc(VARIANT, VARIANT*, HRESULT)).call(varchild, pvarstate)
+  end
+  def get_acc_help(varchild : VARIANT, pszhelp : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_help.unsafe_as(Proc(VARIANT, UInt8**, HRESULT)).call(varchild, pszhelp)
+  end
+  def get_acc_help_topic(pszhelpfile : UInt8**, varchild : VARIANT, pidtopic : Int32*) : HRESULT
+    @lpVtbl.value.get_acc_help_topic.unsafe_as(Proc(UInt8**, VARIANT, Int32*, HRESULT)).call(pszhelpfile, varchild, pidtopic)
+  end
+  def get_acc_keyboard_shortcut(varchild : VARIANT, pszkeyboardshortcut : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_keyboard_shortcut.unsafe_as(Proc(VARIANT, UInt8**, HRESULT)).call(varchild, pszkeyboardshortcut)
+  end
+  def get_acc_focus(pvarchild : VARIANT*) : HRESULT
+    @lpVtbl.value.get_acc_focus.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarchild)
+  end
+  def get_acc_selection(pvarchildren : VARIANT*) : HRESULT
+    @lpVtbl.value.get_acc_selection.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarchildren)
+  end
+  def get_acc_default_action(varchild : VARIANT, pszdefaultaction : UInt8**) : HRESULT
+    @lpVtbl.value.get_acc_default_action.unsafe_as(Proc(VARIANT, UInt8**, HRESULT)).call(varchild, pszdefaultaction)
+  end
+  def acc_select(flagsselect : Int32, varchild : VARIANT) : HRESULT
+    @lpVtbl.value.acc_select.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(flagsselect, varchild)
+  end
+  def acc_location(pxleft : Int32*, pytop : Int32*, pcxwidth : Int32*, pcyheight : Int32*, varchild : VARIANT) : HRESULT
+    @lpVtbl.value.acc_location.unsafe_as(Proc(Int32*, Int32*, Int32*, Int32*, VARIANT, HRESULT)).call(pxleft, pytop, pcxwidth, pcyheight, varchild)
+  end
+  def acc_navigate(navdir : Int32, varstart : VARIANT, pvarendupat : VARIANT*) : HRESULT
+    @lpVtbl.value.acc_navigate.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(navdir, varstart, pvarendupat)
+  end
+  def acc_hit_test(xleft : Int32, ytop : Int32, pvarchild : VARIANT*) : HRESULT
+    @lpVtbl.value.acc_hit_test.unsafe_as(Proc(Int32, Int32, VARIANT*, HRESULT)).call(xleft, ytop, pvarchild)
+  end
+  def acc_do_default_action(varchild : VARIANT) : HRESULT
+    @lpVtbl.value.acc_do_default_action.unsafe_as(Proc(VARIANT, HRESULT)).call(varchild)
+  end
+  def put_acc_name(varchild : VARIANT, szname : UInt8*) : HRESULT
+    @lpVtbl.value.put_acc_name.unsafe_as(Proc(VARIANT, UInt8*, HRESULT)).call(varchild, szname)
+  end
+  def put_acc_value(varchild : VARIANT, szvalue : UInt8*) : HRESULT
+    @lpVtbl.value.put_acc_value.unsafe_as(Proc(VARIANT, UInt8*, HRESULT)).call(varchild, szvalue)
+  end
+end
+struct LibWin32::IAccessibleHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def accessible_object_from_id(hwnd : Int32, lobjectid : Int32, piaccessible : IAccessible*) : HRESULT
+    @lpVtbl.value.accessible_object_from_id.unsafe_as(Proc(Int32, Int32, IAccessible*, HRESULT)).call(hwnd, lobjectid, piaccessible)
+  end
+end
+struct LibWin32::IAccessibleWindowlessSite
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def acquire_object_id_range(rangesize : Int32, prangeowner : IAccessibleHandler, prangebase : Int32*) : HRESULT
+    @lpVtbl.value.acquire_object_id_range.unsafe_as(Proc(Int32, IAccessibleHandler, Int32*, HRESULT)).call(rangesize, prangeowner, prangebase)
+  end
+  def release_object_id_range(rangebase : Int32, prangeowner : IAccessibleHandler) : HRESULT
+    @lpVtbl.value.release_object_id_range.unsafe_as(Proc(Int32, IAccessibleHandler, HRESULT)).call(rangebase, prangeowner)
+  end
+  def query_object_id_ranges(prangesowner : IAccessibleHandler, psaranges : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.query_object_id_ranges.unsafe_as(Proc(IAccessibleHandler, SAFEARRAY**, HRESULT)).call(prangesowner, psaranges)
+  end
+  def get_parent_accessible(ppparent : IAccessible*) : HRESULT
+    @lpVtbl.value.get_parent_accessible.unsafe_as(Proc(IAccessible*, HRESULT)).call(ppparent)
+  end
+end
+struct LibWin32::IAccIdentity
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_identity_string(dwidchild : UInt32, ppidstring : UInt8**, pdwidstringlen : UInt32*) : HRESULT
+    @lpVtbl.value.get_identity_string.unsafe_as(Proc(UInt32, UInt8**, UInt32*, HRESULT)).call(dwidchild, ppidstring, pdwidstringlen)
+  end
+end
+struct LibWin32::IAccPropServer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_prop_value(pidstring : UInt8*, dwidstringlen : UInt32, idprop : Guid, pvarvalue : VARIANT*, pfhasprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_prop_value.unsafe_as(Proc(UInt8*, UInt32, Guid, VARIANT*, LibC::BOOL*, HRESULT)).call(pidstring, dwidstringlen, idprop, pvarvalue, pfhasprop)
+  end
+end
+struct LibWin32::IAccPropServices
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_prop_value(pidstring : UInt8*, dwidstringlen : UInt32, idprop : Guid, var : VARIANT) : HRESULT
+    @lpVtbl.value.set_prop_value.unsafe_as(Proc(UInt8*, UInt32, Guid, VARIANT, HRESULT)).call(pidstring, dwidstringlen, idprop, var)
+  end
+  def set_prop_server(pidstring : UInt8*, dwidstringlen : UInt32, paprops : Guid*, cprops : Int32, pserver : IAccPropServer, annoscope : AnnoScope) : HRESULT
+    @lpVtbl.value.set_prop_server.unsafe_as(Proc(UInt8*, UInt32, Guid*, Int32, IAccPropServer, AnnoScope, HRESULT)).call(pidstring, dwidstringlen, paprops, cprops, pserver, annoscope)
+  end
+  def clear_props(pidstring : UInt8*, dwidstringlen : UInt32, paprops : Guid*, cprops : Int32) : HRESULT
+    @lpVtbl.value.clear_props.unsafe_as(Proc(UInt8*, UInt32, Guid*, Int32, HRESULT)).call(pidstring, dwidstringlen, paprops, cprops)
+  end
+  def set_hwnd_prop(hwnd : LibC::HANDLE, idobject : UInt32, idchild : UInt32, idprop : Guid, var : VARIANT) : HRESULT
+    @lpVtbl.value.set_hwnd_prop.unsafe_as(Proc(LibC::HANDLE, UInt32, UInt32, Guid, VARIANT, HRESULT)).call(hwnd, idobject, idchild, idprop, var)
+  end
+  def set_hwnd_prop_str(hwnd : LibC::HANDLE, idobject : UInt32, idchild : UInt32, idprop : Guid, str : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_hwnd_prop_str.unsafe_as(Proc(LibC::HANDLE, UInt32, UInt32, Guid, LibC::LPWSTR, HRESULT)).call(hwnd, idobject, idchild, idprop, str)
+  end
+  def set_hwnd_prop_server(hwnd : LibC::HANDLE, idobject : UInt32, idchild : UInt32, paprops : Guid*, cprops : Int32, pserver : IAccPropServer, annoscope : AnnoScope) : HRESULT
+    @lpVtbl.value.set_hwnd_prop_server.unsafe_as(Proc(LibC::HANDLE, UInt32, UInt32, Guid*, Int32, IAccPropServer, AnnoScope, HRESULT)).call(hwnd, idobject, idchild, paprops, cprops, pserver, annoscope)
+  end
+  def clear_hwnd_props(hwnd : LibC::HANDLE, idobject : UInt32, idchild : UInt32, paprops : Guid*, cprops : Int32) : HRESULT
+    @lpVtbl.value.clear_hwnd_props.unsafe_as(Proc(LibC::HANDLE, UInt32, UInt32, Guid*, Int32, HRESULT)).call(hwnd, idobject, idchild, paprops, cprops)
+  end
+  def compose_hwnd_identity_string(hwnd : LibC::HANDLE, idobject : UInt32, idchild : UInt32, ppidstring : UInt8**, pdwidstringlen : UInt32*) : HRESULT
+    @lpVtbl.value.compose_hwnd_identity_string.unsafe_as(Proc(LibC::HANDLE, UInt32, UInt32, UInt8**, UInt32*, HRESULT)).call(hwnd, idobject, idchild, ppidstring, pdwidstringlen)
+  end
+  def decompose_hwnd_identity_string(pidstring : UInt8*, dwidstringlen : UInt32, phwnd : HANDLE*, pidobject : UInt32*, pidchild : UInt32*) : HRESULT
+    @lpVtbl.value.decompose_hwnd_identity_string.unsafe_as(Proc(UInt8*, UInt32, HANDLE*, UInt32*, UInt32*, HRESULT)).call(pidstring, dwidstringlen, phwnd, pidobject, pidchild)
+  end
+  def set_hmenu_prop(hmenu : LibC::HANDLE, idchild : UInt32, idprop : Guid, var : VARIANT) : HRESULT
+    @lpVtbl.value.set_hmenu_prop.unsafe_as(Proc(LibC::HANDLE, UInt32, Guid, VARIANT, HRESULT)).call(hmenu, idchild, idprop, var)
+  end
+  def set_hmenu_prop_str(hmenu : LibC::HANDLE, idchild : UInt32, idprop : Guid, str : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_hmenu_prop_str.unsafe_as(Proc(LibC::HANDLE, UInt32, Guid, LibC::LPWSTR, HRESULT)).call(hmenu, idchild, idprop, str)
+  end
+  def set_hmenu_prop_server(hmenu : LibC::HANDLE, idchild : UInt32, paprops : Guid*, cprops : Int32, pserver : IAccPropServer, annoscope : AnnoScope) : HRESULT
+    @lpVtbl.value.set_hmenu_prop_server.unsafe_as(Proc(LibC::HANDLE, UInt32, Guid*, Int32, IAccPropServer, AnnoScope, HRESULT)).call(hmenu, idchild, paprops, cprops, pserver, annoscope)
+  end
+  def clear_hmenu_props(hmenu : LibC::HANDLE, idchild : UInt32, paprops : Guid*, cprops : Int32) : HRESULT
+    @lpVtbl.value.clear_hmenu_props.unsafe_as(Proc(LibC::HANDLE, UInt32, Guid*, Int32, HRESULT)).call(hmenu, idchild, paprops, cprops)
+  end
+  def compose_hmenu_identity_string(hmenu : LibC::HANDLE, idchild : UInt32, ppidstring : UInt8**, pdwidstringlen : UInt32*) : HRESULT
+    @lpVtbl.value.compose_hmenu_identity_string.unsafe_as(Proc(LibC::HANDLE, UInt32, UInt8**, UInt32*, HRESULT)).call(hmenu, idchild, ppidstring, pdwidstringlen)
+  end
+  def decompose_hmenu_identity_string(pidstring : UInt8*, dwidstringlen : UInt32, phmenu : HANDLE*, pidchild : UInt32*) : HRESULT
+    @lpVtbl.value.decompose_hmenu_identity_string.unsafe_as(Proc(UInt8*, UInt32, HANDLE*, UInt32*, HRESULT)).call(pidstring, dwidstringlen, phmenu, pidchild)
+  end
+end
+struct LibWin32::IRawElementProviderSimple
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_provider_options(pretval : ProviderOptions*) : HRESULT
+    @lpVtbl.value.get_provider_options.unsafe_as(Proc(ProviderOptions*, HRESULT)).call(pretval)
+  end
+  def get_pattern_provider(patternid : Int32, pretval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_pattern_provider.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, pretval)
+  end
+  def get_property_value(propertyid : Int32, pretval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, pretval)
+  end
+  def get_host_raw_element_provider(pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_host_raw_element_provider.unsafe_as(Proc(IRawElementProviderSimple*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::IAccessibleEx
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_object_for_child(idchild : Int32, pretval : IAccessibleEx*) : HRESULT
+    @lpVtbl.value.get_object_for_child.unsafe_as(Proc(Int32, IAccessibleEx*, HRESULT)).call(idchild, pretval)
+  end
+  def get_i_accessible_pair(ppacc : IAccessible*, pidchild : Int32*) : HRESULT
+    @lpVtbl.value.get_i_accessible_pair.unsafe_as(Proc(IAccessible*, Int32*, HRESULT)).call(ppacc, pidchild)
+  end
+  def get_runtime_id(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def convert_returned_element(pin : IRawElementProviderSimple, ppretvalout : IAccessibleEx*) : HRESULT
+    @lpVtbl.value.convert_returned_element.unsafe_as(Proc(IRawElementProviderSimple, IAccessibleEx*, HRESULT)).call(pin, ppretvalout)
+  end
+end
+struct LibWin32::IRawElementProviderSimple2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_provider_options(pretval : ProviderOptions*) : HRESULT
+    @lpVtbl.value.get_provider_options.unsafe_as(Proc(ProviderOptions*, HRESULT)).call(pretval)
+  end
+  def get_pattern_provider(patternid : Int32, pretval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_pattern_provider.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, pretval)
+  end
+  def get_property_value(propertyid : Int32, pretval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, pretval)
+  end
+  def get_host_raw_element_provider(pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_host_raw_element_provider.unsafe_as(Proc(IRawElementProviderSimple*, HRESULT)).call(pretval)
+  end
+  def show_context_menu : HRESULT
+    @lpVtbl.value.show_context_menu.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IRawElementProviderSimple3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_provider_options(pretval : ProviderOptions*) : HRESULT
+    @lpVtbl.value.get_provider_options.unsafe_as(Proc(ProviderOptions*, HRESULT)).call(pretval)
+  end
+  def get_pattern_provider(patternid : Int32, pretval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_pattern_provider.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, pretval)
+  end
+  def get_property_value(propertyid : Int32, pretval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, pretval)
+  end
+  def get_host_raw_element_provider(pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_host_raw_element_provider.unsafe_as(Proc(IRawElementProviderSimple*, HRESULT)).call(pretval)
+  end
+  def show_context_menu : HRESULT
+    @lpVtbl.value.show_context_menu.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_metadata_value(targetid : Int32, metadataid : Int32, returnval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_metadata_value.unsafe_as(Proc(Int32, Int32, VARIANT*, HRESULT)).call(targetid, metadataid, returnval)
+  end
+end
+struct LibWin32::IRawElementProviderFragmentRoot
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def element_provider_from_point(x : Float64, y : Float64, pretval : IRawElementProviderFragment*) : HRESULT
+    @lpVtbl.value.element_provider_from_point.unsafe_as(Proc(Float64, Float64, IRawElementProviderFragment*, HRESULT)).call(x, y, pretval)
+  end
+  def get_focus(pretval : IRawElementProviderFragment*) : HRESULT
+    @lpVtbl.value.get_focus.unsafe_as(Proc(IRawElementProviderFragment*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::IRawElementProviderFragment
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def navigate(direction : NavigateDirection, pretval : IRawElementProviderFragment*) : HRESULT
+    @lpVtbl.value.navigate.unsafe_as(Proc(NavigateDirection, IRawElementProviderFragment*, HRESULT)).call(direction, pretval)
+  end
+  def get_runtime_id(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def get_bounding_rectangle(pretval : UiaRect*) : HRESULT
+    @lpVtbl.value.get_bounding_rectangle.unsafe_as(Proc(UiaRect*, HRESULT)).call(pretval)
+  end
+  def get_embedded_fragment_roots(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_embedded_fragment_roots.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def set_focus : HRESULT
+    @lpVtbl.value.set_focus.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_fragment_root(pretval : IRawElementProviderFragmentRoot*) : HRESULT
+    @lpVtbl.value.get_fragment_root.unsafe_as(Proc(IRawElementProviderFragmentRoot*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::IRawElementProviderAdviseEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def advise_event_added(eventid : Int32, propertyids : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.advise_event_added.unsafe_as(Proc(Int32, SAFEARRAY*, HRESULT)).call(eventid, propertyids)
+  end
+  def advise_event_removed(eventid : Int32, propertyids : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.advise_event_removed.unsafe_as(Proc(Int32, SAFEARRAY*, HRESULT)).call(eventid, propertyids)
+  end
+end
+struct LibWin32::IRawElementProviderHwndOverride
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_override_provider_for_hwnd(hwnd : LibC::HANDLE, pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_override_provider_for_hwnd.unsafe_as(Proc(LibC::HANDLE, IRawElementProviderSimple*, HRESULT)).call(hwnd, pretval)
+  end
+end
+struct LibWin32::IProxyProviderWinEventSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_automation_property_changed_event(pprovider : IRawElementProviderSimple, id : Int32, newvalue : VARIANT) : HRESULT
+    @lpVtbl.value.add_automation_property_changed_event.unsafe_as(Proc(IRawElementProviderSimple, Int32, VARIANT, HRESULT)).call(pprovider, id, newvalue)
+  end
+  def add_automation_event(pprovider : IRawElementProviderSimple, id : Int32) : HRESULT
+    @lpVtbl.value.add_automation_event.unsafe_as(Proc(IRawElementProviderSimple, Int32, HRESULT)).call(pprovider, id)
+  end
+  def add_structure_changed_event(pprovider : IRawElementProviderSimple, structurechangetype : StructureChangeType, runtimeid : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.add_structure_changed_event.unsafe_as(Proc(IRawElementProviderSimple, StructureChangeType, SAFEARRAY*, HRESULT)).call(pprovider, structurechangetype, runtimeid)
+  end
+end
+struct LibWin32::IProxyProviderWinEventHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def respond_to_win_event(idwinevent : UInt32, hwnd : LibC::HANDLE, idobject : Int32, idchild : Int32, psink : IProxyProviderWinEventSink) : HRESULT
+    @lpVtbl.value.respond_to_win_event.unsafe_as(Proc(UInt32, LibC::HANDLE, Int32, Int32, IProxyProviderWinEventSink, HRESULT)).call(idwinevent, hwnd, idobject, idchild, psink)
+  end
+end
+struct LibWin32::IRawElementProviderWindowlessSite
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_adjacent_fragment(direction : NavigateDirection, ppparent : IRawElementProviderFragment*) : HRESULT
+    @lpVtbl.value.get_adjacent_fragment.unsafe_as(Proc(NavigateDirection, IRawElementProviderFragment*, HRESULT)).call(direction, ppparent)
+  end
+  def get_runtime_id_prefix(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id_prefix.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::IAccessibleHostingElementProviders
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_embedded_fragment_roots(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_embedded_fragment_roots.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def get_object_id_for_provider(pprovider : IRawElementProviderSimple, pidobject : Int32*) : HRESULT
+    @lpVtbl.value.get_object_id_for_provider.unsafe_as(Proc(IRawElementProviderSimple, Int32*, HRESULT)).call(pprovider, pidobject)
+  end
+end
+struct LibWin32::IRawElementProviderHostingAccessibles
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_embedded_accessibles(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_embedded_accessibles.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::IDockProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_dock_position(dockposition : DockPosition) : HRESULT
+    @lpVtbl.value.set_dock_position.unsafe_as(Proc(DockPosition, HRESULT)).call(dockposition)
+  end
+  def get_dock_position(pretval : DockPosition*) : HRESULT
+    @lpVtbl.value.get_dock_position.unsafe_as(Proc(DockPosition*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::IExpandCollapseProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def expand : HRESULT
+    @lpVtbl.value.expand.unsafe_as(Proc(HRESULT)).call
+  end
+  def collapse : HRESULT
+    @lpVtbl.value.collapse.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_expand_collapse_state(pretval : ExpandCollapseState*) : HRESULT
+    @lpVtbl.value.get_expand_collapse_state.unsafe_as(Proc(ExpandCollapseState*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::IGridProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_item(row : Int32, column : Int32, pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, Int32, IRawElementProviderSimple*, HRESULT)).call(row, column, pretval)
+  end
+  def get_row_count(pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_row_count.unsafe_as(Proc(Int32*, HRESULT)).call(pretval)
+  end
+  def get_column_count(pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_column_count.unsafe_as(Proc(Int32*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::IGridItemProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_row(pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_row.unsafe_as(Proc(Int32*, HRESULT)).call(pretval)
+  end
+  def get_column(pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_column.unsafe_as(Proc(Int32*, HRESULT)).call(pretval)
+  end
+  def get_row_span(pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_row_span.unsafe_as(Proc(Int32*, HRESULT)).call(pretval)
+  end
+  def get_column_span(pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_column_span.unsafe_as(Proc(Int32*, HRESULT)).call(pretval)
+  end
+  def get_containing_grid(pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_containing_grid.unsafe_as(Proc(IRawElementProviderSimple*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::IInvokeProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def invoke : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IMultipleViewProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_view_name(viewid : Int32, pretval : UInt8**) : HRESULT
+    @lpVtbl.value.get_view_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(viewid, pretval)
+  end
+  def set_current_view(viewid : Int32) : HRESULT
+    @lpVtbl.value.set_current_view.unsafe_as(Proc(Int32, HRESULT)).call(viewid)
+  end
+  def get_current_view(pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_view.unsafe_as(Proc(Int32*, HRESULT)).call(pretval)
+  end
+  def get_supported_views(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_supported_views.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::IRangeValueProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_value(val : Float64) : HRESULT
+    @lpVtbl.value.set_value.unsafe_as(Proc(Float64, HRESULT)).call(val)
+  end
+  def get_value(pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_value.unsafe_as(Proc(Float64*, HRESULT)).call(pretval)
+  end
+  def get_is_read_only(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_read_only.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+  def get_maximum(pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_maximum.unsafe_as(Proc(Float64*, HRESULT)).call(pretval)
+  end
+  def get_minimum(pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_minimum.unsafe_as(Proc(Float64*, HRESULT)).call(pretval)
+  end
+  def get_large_change(pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_large_change.unsafe_as(Proc(Float64*, HRESULT)).call(pretval)
+  end
+  def get_small_change(pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_small_change.unsafe_as(Proc(Float64*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::IScrollItemProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def scroll_into_view : HRESULT
+    @lpVtbl.value.scroll_into_view.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ISelectionProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_selection(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_selection.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def get_can_select_multiple(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_select_multiple.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+  def get_is_selection_required(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_selection_required.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::ISelectionProvider2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_selection(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_selection.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def get_can_select_multiple(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_select_multiple.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+  def get_is_selection_required(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_selection_required.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+  def get_first_selected_item(retval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_first_selected_item.unsafe_as(Proc(IRawElementProviderSimple*, HRESULT)).call(retval)
+  end
+  def get_last_selected_item(retval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_last_selected_item.unsafe_as(Proc(IRawElementProviderSimple*, HRESULT)).call(retval)
+  end
+  def get_current_selected_item(retval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_current_selected_item.unsafe_as(Proc(IRawElementProviderSimple*, HRESULT)).call(retval)
+  end
+  def get_item_count(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_item_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IScrollProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def scroll(horizontalamount : ScrollAmount, verticalamount : ScrollAmount) : HRESULT
+    @lpVtbl.value.scroll.unsafe_as(Proc(ScrollAmount, ScrollAmount, HRESULT)).call(horizontalamount, verticalamount)
+  end
+  def set_scroll_percent(horizontalpercent : Float64, verticalpercent : Float64) : HRESULT
+    @lpVtbl.value.set_scroll_percent.unsafe_as(Proc(Float64, Float64, HRESULT)).call(horizontalpercent, verticalpercent)
+  end
+  def get_horizontal_scroll_percent(pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_horizontal_scroll_percent.unsafe_as(Proc(Float64*, HRESULT)).call(pretval)
+  end
+  def get_vertical_scroll_percent(pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_vertical_scroll_percent.unsafe_as(Proc(Float64*, HRESULT)).call(pretval)
+  end
+  def get_horizontal_view_size(pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_horizontal_view_size.unsafe_as(Proc(Float64*, HRESULT)).call(pretval)
+  end
+  def get_vertical_view_size(pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_vertical_view_size.unsafe_as(Proc(Float64*, HRESULT)).call(pretval)
+  end
+  def get_horizontally_scrollable(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_horizontally_scrollable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+  def get_vertically_scrollable(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_vertically_scrollable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::ISelectionItemProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def select : HRESULT
+    @lpVtbl.value.select.unsafe_as(Proc(HRESULT)).call
+  end
+  def add_to_selection : HRESULT
+    @lpVtbl.value.add_to_selection.unsafe_as(Proc(HRESULT)).call
+  end
+  def remove_from_selection : HRESULT
+    @lpVtbl.value.remove_from_selection.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_is_selected(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_selected.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+  def get_selection_container(pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_selection_container.unsafe_as(Proc(IRawElementProviderSimple*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::ISynchronizedInputProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def start_listening(inputtype : SynchronizedInputType) : HRESULT
+    @lpVtbl.value.start_listening.unsafe_as(Proc(SynchronizedInputType, HRESULT)).call(inputtype)
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITableProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_row_headers(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_row_headers.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def get_column_headers(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_column_headers.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def get_row_or_column_major(pretval : RowOrColumnMajor*) : HRESULT
+    @lpVtbl.value.get_row_or_column_major.unsafe_as(Proc(RowOrColumnMajor*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::ITableItemProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_row_header_items(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_row_header_items.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def get_column_header_items(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_column_header_items.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::IToggleProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def toggle : HRESULT
+    @lpVtbl.value.toggle.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_toggle_state(pretval : ToggleState*) : HRESULT
+    @lpVtbl.value.get_toggle_state.unsafe_as(Proc(ToggleState*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::ITransformProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def move(x : Float64, y : Float64) : HRESULT
+    @lpVtbl.value.move.unsafe_as(Proc(Float64, Float64, HRESULT)).call(x, y)
+  end
+  def resize(width : Float64, height : Float64) : HRESULT
+    @lpVtbl.value.resize.unsafe_as(Proc(Float64, Float64, HRESULT)).call(width, height)
+  end
+  def rotate(degrees : Float64) : HRESULT
+    @lpVtbl.value.rotate.unsafe_as(Proc(Float64, HRESULT)).call(degrees)
+  end
+  def get_can_move(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_move.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+  def get_can_resize(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_resize.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+  def get_can_rotate(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_rotate.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::IValueProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_value(val : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_value.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(val)
+  end
+  def get_value(pretval : UInt8**) : HRESULT
+    @lpVtbl.value.get_value.unsafe_as(Proc(UInt8**, HRESULT)).call(pretval)
+  end
+  def get_is_read_only(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_read_only.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::IWindowProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_visual_state(state : WindowVisualState) : HRESULT
+    @lpVtbl.value.set_visual_state.unsafe_as(Proc(WindowVisualState, HRESULT)).call(state)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def wait_for_input_idle(milliseconds : Int32, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.wait_for_input_idle.unsafe_as(Proc(Int32, LibC::BOOL*, HRESULT)).call(milliseconds, pretval)
+  end
+  def get_can_maximize(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_maximize.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+  def get_can_minimize(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_minimize.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+  def get_is_modal(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_modal.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+  def get_window_visual_state(pretval : WindowVisualState*) : HRESULT
+    @lpVtbl.value.get_window_visual_state.unsafe_as(Proc(WindowVisualState*, HRESULT)).call(pretval)
+  end
+  def get_window_interaction_state(pretval : WindowInteractionState*) : HRESULT
+    @lpVtbl.value.get_window_interaction_state.unsafe_as(Proc(WindowInteractionState*, HRESULT)).call(pretval)
+  end
+  def get_is_topmost(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_topmost.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::ILegacyIAccessibleProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def select(flagsselect : Int32) : HRESULT
+    @lpVtbl.value.select.unsafe_as(Proc(Int32, HRESULT)).call(flagsselect)
+  end
+  def do_default_action : HRESULT
+    @lpVtbl.value.do_default_action.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_value(szvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_value.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(szvalue)
+  end
+  def get_i_accessible(ppaccessible : IAccessible*) : HRESULT
+    @lpVtbl.value.get_i_accessible.unsafe_as(Proc(IAccessible*, HRESULT)).call(ppaccessible)
+  end
+  def get_child_id(pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_child_id.unsafe_as(Proc(Int32*, HRESULT)).call(pretval)
+  end
+  def get_name(pszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pszname)
+  end
+  def get_value(pszvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_value.unsafe_as(Proc(UInt8**, HRESULT)).call(pszvalue)
+  end
+  def get_description(pszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pszdescription)
+  end
+  def get_role(pdwrole : UInt32*) : HRESULT
+    @lpVtbl.value.get_role.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwrole)
+  end
+  def get_state(pdwstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstate)
+  end
+  def get_help(pszhelp : UInt8**) : HRESULT
+    @lpVtbl.value.get_help.unsafe_as(Proc(UInt8**, HRESULT)).call(pszhelp)
+  end
+  def get_keyboard_shortcut(pszkeyboardshortcut : UInt8**) : HRESULT
+    @lpVtbl.value.get_keyboard_shortcut.unsafe_as(Proc(UInt8**, HRESULT)).call(pszkeyboardshortcut)
+  end
+  def get_selection(pvarselectedchildren : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_selection.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pvarselectedchildren)
+  end
+  def get_default_action(pszdefaultaction : UInt8**) : HRESULT
+    @lpVtbl.value.get_default_action.unsafe_as(Proc(UInt8**, HRESULT)).call(pszdefaultaction)
+  end
+end
+struct LibWin32::IItemContainerProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def find_item_by_property(pstartafter : IRawElementProviderSimple, propertyid : Int32, value : VARIANT, pfound : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.find_item_by_property.unsafe_as(Proc(IRawElementProviderSimple, Int32, VARIANT, IRawElementProviderSimple*, HRESULT)).call(pstartafter, propertyid, value, pfound)
+  end
+end
+struct LibWin32::IVirtualizedItemProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def realize : HRESULT
+    @lpVtbl.value.realize.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IObjectModelProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_underlying_object_model(ppunknown : IUnknown*) : HRESULT
+    @lpVtbl.value.get_underlying_object_model.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunknown)
+  end
+end
+struct LibWin32::IAnnotationProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_annotation_type_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_annotation_type_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_annotation_type_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_annotation_type_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_author(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_author.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_date_time(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_date_time.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_target(retval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_target.unsafe_as(Proc(IRawElementProviderSimple*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IStylesProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_style_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_style_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_style_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_style_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_fill_color(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_fill_color.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_fill_pattern_style(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_fill_pattern_style.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_shape(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_shape.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_fill_pattern_color(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_fill_pattern_color.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_extended_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_extended_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::ISpreadsheetProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_item_by_name(name : LibC::LPWSTR, pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_item_by_name.unsafe_as(Proc(LibC::LPWSTR, IRawElementProviderSimple*, HRESULT)).call(name, pretval)
+  end
+end
+struct LibWin32::ISpreadsheetItemProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_formula(pretval : UInt8**) : HRESULT
+    @lpVtbl.value.get_formula.unsafe_as(Proc(UInt8**, HRESULT)).call(pretval)
+  end
+  def get_annotation_objects(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_annotation_objects.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def get_annotation_types(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_annotation_types.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::ITransformProvider2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def move(x : Float64, y : Float64) : HRESULT
+    @lpVtbl.value.move.unsafe_as(Proc(Float64, Float64, HRESULT)).call(x, y)
+  end
+  def resize(width : Float64, height : Float64) : HRESULT
+    @lpVtbl.value.resize.unsafe_as(Proc(Float64, Float64, HRESULT)).call(width, height)
+  end
+  def rotate(degrees : Float64) : HRESULT
+    @lpVtbl.value.rotate.unsafe_as(Proc(Float64, HRESULT)).call(degrees)
+  end
+  def get_can_move(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_move.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+  def get_can_resize(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_resize.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+  def get_can_rotate(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_rotate.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+  def zoom(zoom : Float64) : HRESULT
+    @lpVtbl.value.zoom.unsafe_as(Proc(Float64, HRESULT)).call(zoom)
+  end
+  def get_can_zoom(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_zoom.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+  def get_zoom_level(pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_zoom_level.unsafe_as(Proc(Float64*, HRESULT)).call(pretval)
+  end
+  def get_zoom_minimum(pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_zoom_minimum.unsafe_as(Proc(Float64*, HRESULT)).call(pretval)
+  end
+  def get_zoom_maximum(pretval : Float64*) : HRESULT
+    @lpVtbl.value.get_zoom_maximum.unsafe_as(Proc(Float64*, HRESULT)).call(pretval)
+  end
+  def zoom_by_unit(zoomunit : ZoomUnit) : HRESULT
+    @lpVtbl.value.zoom_by_unit.unsafe_as(Proc(ZoomUnit, HRESULT)).call(zoomunit)
+  end
+end
+struct LibWin32::IDragProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_is_grabbed(pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_grabbed.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pretval)
+  end
+  def get_drop_effect(pretval : UInt8**) : HRESULT
+    @lpVtbl.value.get_drop_effect.unsafe_as(Proc(UInt8**, HRESULT)).call(pretval)
+  end
+  def get_drop_effects(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_drop_effects.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def get_grabbed_items(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_grabbed_items.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::IDropTargetProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_drop_target_effect(pretval : UInt8**) : HRESULT
+    @lpVtbl.value.get_drop_target_effect.unsafe_as(Proc(UInt8**, HRESULT)).call(pretval)
+  end
+  def get_drop_target_effects(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_drop_target_effects.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::ITextRangeProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(ITextRangeProvider*, HRESULT)).call(pretval)
+  end
+  def compare(range : ITextRangeProvider, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.unsafe_as(Proc(ITextRangeProvider, LibC::BOOL*, HRESULT)).call(range, pretval)
+  end
+  def compare_endpoints(endpoint : TextPatternRangeEndpoint, targetrange : ITextRangeProvider, targetendpoint : TextPatternRangeEndpoint, pretval : Int32*) : HRESULT
+    @lpVtbl.value.compare_endpoints.unsafe_as(Proc(TextPatternRangeEndpoint, ITextRangeProvider, TextPatternRangeEndpoint, Int32*, HRESULT)).call(endpoint, targetrange, targetendpoint, pretval)
+  end
+  def expand_to_enclosing_unit(unit : TextUnit) : HRESULT
+    @lpVtbl.value.expand_to_enclosing_unit.unsafe_as(Proc(TextUnit, HRESULT)).call(unit)
+  end
+  def find_attribute(attributeid : Int32, val : VARIANT, backward : LibC::BOOL, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.find_attribute.unsafe_as(Proc(Int32, VARIANT, LibC::BOOL, ITextRangeProvider*, HRESULT)).call(attributeid, val, backward, pretval)
+  end
+  def find_text(text : UInt8*, backward : LibC::BOOL, ignorecase : LibC::BOOL, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.find_text.unsafe_as(Proc(UInt8*, LibC::BOOL, LibC::BOOL, ITextRangeProvider*, HRESULT)).call(text, backward, ignorecase, pretval)
+  end
+  def get_attribute_value(attributeid : Int32, pretval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(attributeid, pretval)
+  end
+  def get_bounding_rectangles(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_bounding_rectangles.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def get_enclosing_element(pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_enclosing_element.unsafe_as(Proc(IRawElementProviderSimple*, HRESULT)).call(pretval)
+  end
+  def get_text(maxlength : Int32, pretval : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(maxlength, pretval)
+  end
+  def move(unit : TextUnit, count : Int32, pretval : Int32*) : HRESULT
+    @lpVtbl.value.move.unsafe_as(Proc(TextUnit, Int32, Int32*, HRESULT)).call(unit, count, pretval)
+  end
+  def move_endpoint_by_unit(endpoint : TextPatternRangeEndpoint, unit : TextUnit, count : Int32, pretval : Int32*) : HRESULT
+    @lpVtbl.value.move_endpoint_by_unit.unsafe_as(Proc(TextPatternRangeEndpoint, TextUnit, Int32, Int32*, HRESULT)).call(endpoint, unit, count, pretval)
+  end
+  def move_endpoint_by_range(endpoint : TextPatternRangeEndpoint, targetrange : ITextRangeProvider, targetendpoint : TextPatternRangeEndpoint) : HRESULT
+    @lpVtbl.value.move_endpoint_by_range.unsafe_as(Proc(TextPatternRangeEndpoint, ITextRangeProvider, TextPatternRangeEndpoint, HRESULT)).call(endpoint, targetrange, targetendpoint)
+  end
+  def select : HRESULT
+    @lpVtbl.value.select.unsafe_as(Proc(HRESULT)).call
+  end
+  def add_to_selection : HRESULT
+    @lpVtbl.value.add_to_selection.unsafe_as(Proc(HRESULT)).call
+  end
+  def remove_from_selection : HRESULT
+    @lpVtbl.value.remove_from_selection.unsafe_as(Proc(HRESULT)).call
+  end
+  def scroll_into_view(aligntotop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.scroll_into_view.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(aligntotop)
+  end
+  def get_children(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_children.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::ITextProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_selection(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_selection.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def get_visible_ranges(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_visible_ranges.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def range_from_child(childelement : IRawElementProviderSimple, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.range_from_child.unsafe_as(Proc(IRawElementProviderSimple, ITextRangeProvider*, HRESULT)).call(childelement, pretval)
+  end
+  def range_from_point(point : UiaPoint, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.range_from_point.unsafe_as(Proc(UiaPoint, ITextRangeProvider*, HRESULT)).call(point, pretval)
+  end
+  def get_document_range(pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.get_document_range.unsafe_as(Proc(ITextRangeProvider*, HRESULT)).call(pretval)
+  end
+  def get_supported_text_selection(pretval : SupportedTextSelection*) : HRESULT
+    @lpVtbl.value.get_supported_text_selection.unsafe_as(Proc(SupportedTextSelection*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::ITextProvider2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_selection(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_selection.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def get_visible_ranges(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_visible_ranges.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def range_from_child(childelement : IRawElementProviderSimple, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.range_from_child.unsafe_as(Proc(IRawElementProviderSimple, ITextRangeProvider*, HRESULT)).call(childelement, pretval)
+  end
+  def range_from_point(point : UiaPoint, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.range_from_point.unsafe_as(Proc(UiaPoint, ITextRangeProvider*, HRESULT)).call(point, pretval)
+  end
+  def get_document_range(pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.get_document_range.unsafe_as(Proc(ITextRangeProvider*, HRESULT)).call(pretval)
+  end
+  def get_supported_text_selection(pretval : SupportedTextSelection*) : HRESULT
+    @lpVtbl.value.get_supported_text_selection.unsafe_as(Proc(SupportedTextSelection*, HRESULT)).call(pretval)
+  end
+  def range_from_annotation(annotationelement : IRawElementProviderSimple, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.range_from_annotation.unsafe_as(Proc(IRawElementProviderSimple, ITextRangeProvider*, HRESULT)).call(annotationelement, pretval)
+  end
+  def get_caret_range(isactive : LibC::BOOL*, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.get_caret_range.unsafe_as(Proc(LibC::BOOL*, ITextRangeProvider*, HRESULT)).call(isactive, pretval)
+  end
+end
+struct LibWin32::ITextEditProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_selection(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_selection.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def get_visible_ranges(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_visible_ranges.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def range_from_child(childelement : IRawElementProviderSimple, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.range_from_child.unsafe_as(Proc(IRawElementProviderSimple, ITextRangeProvider*, HRESULT)).call(childelement, pretval)
+  end
+  def range_from_point(point : UiaPoint, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.range_from_point.unsafe_as(Proc(UiaPoint, ITextRangeProvider*, HRESULT)).call(point, pretval)
+  end
+  def get_document_range(pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.get_document_range.unsafe_as(Proc(ITextRangeProvider*, HRESULT)).call(pretval)
+  end
+  def get_supported_text_selection(pretval : SupportedTextSelection*) : HRESULT
+    @lpVtbl.value.get_supported_text_selection.unsafe_as(Proc(SupportedTextSelection*, HRESULT)).call(pretval)
+  end
+  def get_active_composition(pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.get_active_composition.unsafe_as(Proc(ITextRangeProvider*, HRESULT)).call(pretval)
+  end
+  def get_conversion_target(pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.get_conversion_target.unsafe_as(Proc(ITextRangeProvider*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::ITextRangeProvider2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(ITextRangeProvider*, HRESULT)).call(pretval)
+  end
+  def compare(range : ITextRangeProvider, pretval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.unsafe_as(Proc(ITextRangeProvider, LibC::BOOL*, HRESULT)).call(range, pretval)
+  end
+  def compare_endpoints(endpoint : TextPatternRangeEndpoint, targetrange : ITextRangeProvider, targetendpoint : TextPatternRangeEndpoint, pretval : Int32*) : HRESULT
+    @lpVtbl.value.compare_endpoints.unsafe_as(Proc(TextPatternRangeEndpoint, ITextRangeProvider, TextPatternRangeEndpoint, Int32*, HRESULT)).call(endpoint, targetrange, targetendpoint, pretval)
+  end
+  def expand_to_enclosing_unit(unit : TextUnit) : HRESULT
+    @lpVtbl.value.expand_to_enclosing_unit.unsafe_as(Proc(TextUnit, HRESULT)).call(unit)
+  end
+  def find_attribute(attributeid : Int32, val : VARIANT, backward : LibC::BOOL, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.find_attribute.unsafe_as(Proc(Int32, VARIANT, LibC::BOOL, ITextRangeProvider*, HRESULT)).call(attributeid, val, backward, pretval)
+  end
+  def find_text(text : UInt8*, backward : LibC::BOOL, ignorecase : LibC::BOOL, pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.find_text.unsafe_as(Proc(UInt8*, LibC::BOOL, LibC::BOOL, ITextRangeProvider*, HRESULT)).call(text, backward, ignorecase, pretval)
+  end
+  def get_attribute_value(attributeid : Int32, pretval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(attributeid, pretval)
+  end
+  def get_bounding_rectangles(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_bounding_rectangles.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def get_enclosing_element(pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_enclosing_element.unsafe_as(Proc(IRawElementProviderSimple*, HRESULT)).call(pretval)
+  end
+  def get_text(maxlength : Int32, pretval : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(maxlength, pretval)
+  end
+  def move(unit : TextUnit, count : Int32, pretval : Int32*) : HRESULT
+    @lpVtbl.value.move.unsafe_as(Proc(TextUnit, Int32, Int32*, HRESULT)).call(unit, count, pretval)
+  end
+  def move_endpoint_by_unit(endpoint : TextPatternRangeEndpoint, unit : TextUnit, count : Int32, pretval : Int32*) : HRESULT
+    @lpVtbl.value.move_endpoint_by_unit.unsafe_as(Proc(TextPatternRangeEndpoint, TextUnit, Int32, Int32*, HRESULT)).call(endpoint, unit, count, pretval)
+  end
+  def move_endpoint_by_range(endpoint : TextPatternRangeEndpoint, targetrange : ITextRangeProvider, targetendpoint : TextPatternRangeEndpoint) : HRESULT
+    @lpVtbl.value.move_endpoint_by_range.unsafe_as(Proc(TextPatternRangeEndpoint, ITextRangeProvider, TextPatternRangeEndpoint, HRESULT)).call(endpoint, targetrange, targetendpoint)
+  end
+  def select : HRESULT
+    @lpVtbl.value.select.unsafe_as(Proc(HRESULT)).call
+  end
+  def add_to_selection : HRESULT
+    @lpVtbl.value.add_to_selection.unsafe_as(Proc(HRESULT)).call
+  end
+  def remove_from_selection : HRESULT
+    @lpVtbl.value.remove_from_selection.unsafe_as(Proc(HRESULT)).call
+  end
+  def scroll_into_view(aligntotop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.scroll_into_view.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(aligntotop)
+  end
+  def get_children(pretval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_children.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pretval)
+  end
+  def show_context_menu : HRESULT
+    @lpVtbl.value.show_context_menu.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITextChildProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_text_container(pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.get_text_container.unsafe_as(Proc(IRawElementProviderSimple*, HRESULT)).call(pretval)
+  end
+  def get_text_range(pretval : ITextRangeProvider*) : HRESULT
+    @lpVtbl.value.get_text_range.unsafe_as(Proc(ITextRangeProvider*, HRESULT)).call(pretval)
+  end
+end
+struct LibWin32::ICustomNavigationProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def navigate(direction : NavigateDirection, pretval : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.navigate.unsafe_as(Proc(NavigateDirection, IRawElementProviderSimple*, HRESULT)).call(direction, pretval)
+  end
+end
+struct LibWin32::IUIAutomationPatternInstance
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_property(index : UInt32, cached : LibC::BOOL, type : UIAutomationType, pptr : Void*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(UInt32, LibC::BOOL, UIAutomationType, Void*, HRESULT)).call(index, cached, type, pptr)
+  end
+  def call_method(index : UInt32, pparams : UIAutomationParameter*, cparams : UInt32) : HRESULT
+    @lpVtbl.value.call_method.unsafe_as(Proc(UInt32, UIAutomationParameter*, UInt32, HRESULT)).call(index, pparams, cparams)
+  end
+end
+struct LibWin32::IUIAutomationPatternHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_client_wrapper(ppatterninstance : IUIAutomationPatternInstance, pclientwrapper : IUnknown*) : HRESULT
+    @lpVtbl.value.create_client_wrapper.unsafe_as(Proc(IUIAutomationPatternInstance, IUnknown*, HRESULT)).call(ppatterninstance, pclientwrapper)
+  end
+  def dispatch(ptarget : IUnknown, index : UInt32, pparams : UIAutomationParameter*, cparams : UInt32) : HRESULT
+    @lpVtbl.value.dispatch.unsafe_as(Proc(IUnknown, UInt32, UIAutomationParameter*, UInt32, HRESULT)).call(ptarget, index, pparams, cparams)
+  end
+end
+struct LibWin32::IUIAutomationRegistrar
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def register_property(property : UIAutomationPropertyInfo*, propertyid : Int32*) : HRESULT
+    @lpVtbl.value.register_property.unsafe_as(Proc(UIAutomationPropertyInfo*, Int32*, HRESULT)).call(property, propertyid)
+  end
+  def register_event(event : UIAutomationEventInfo*, eventid : Int32*) : HRESULT
+    @lpVtbl.value.register_event.unsafe_as(Proc(UIAutomationEventInfo*, Int32*, HRESULT)).call(event, eventid)
+  end
+  def register_pattern(pattern : UIAutomationPatternInfo*, ppatternid : Int32*, ppatternavailablepropertyid : Int32*, propertyidcount : UInt32, ppropertyids : Int32*, eventidcount : UInt32, peventids : Int32*) : HRESULT
+    @lpVtbl.value.register_pattern.unsafe_as(Proc(UIAutomationPatternInfo*, Int32*, Int32*, UInt32, Int32*, UInt32, Int32*, HRESULT)).call(pattern, ppatternid, ppatternavailablepropertyid, propertyidcount, ppropertyids, eventidcount, peventids)
+  end
+end
+struct LibWin32::IUIAutomationElement
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_focus : HRESULT
+    @lpVtbl.value.set_focus.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_runtime_id(runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(runtimeid)
+  end
+  def find_first(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)).call(scope, condition, found)
+  end
+  def find_all(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)).call(scope, condition, found)
+  end
+  def find_first_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, updatedelement)
+  end
+  def get_current_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_current_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_cached_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_current_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_parent(parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(parent)
+  end
+  def get_cached_children(children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(children)
+  end
+  def get_current_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_current_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_current_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_current_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_current_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_cached_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_cached_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_cached_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_cached_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_clickable_point(clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.unsafe_as(Proc(POINT*, LibC::BOOL*, HRESULT)).call(clickable, gotclickable)
+  end
+end
+struct LibWin32::IUIAutomationElementArray
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_length(length : Int32*) : HRESULT
+    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(length)
+  end
+  def get_element(index : Int32, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_element.unsafe_as(Proc(Int32, IUIAutomationElement*, HRESULT)).call(index, element)
+  end
+end
+struct LibWin32::IUIAutomationCondition
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::IUIAutomationBoolCondition
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_boolean_value(boolval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_boolean_value.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(boolval)
+  end
+end
+struct LibWin32::IUIAutomationPropertyCondition
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_property_id(propertyid : Int32*) : HRESULT
+    @lpVtbl.value.get_property_id.unsafe_as(Proc(Int32*, HRESULT)).call(propertyid)
+  end
+  def get_property_value(propertyvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property_value.unsafe_as(Proc(VARIANT*, HRESULT)).call(propertyvalue)
+  end
+  def get_property_condition_flags(flags : PropertyConditionFlags*) : HRESULT
+    @lpVtbl.value.get_property_condition_flags.unsafe_as(Proc(PropertyConditionFlags*, HRESULT)).call(flags)
+  end
+end
+struct LibWin32::IUIAutomationAndCondition
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_child_count(childcount : Int32*) : HRESULT
+    @lpVtbl.value.get_child_count.unsafe_as(Proc(Int32*, HRESULT)).call(childcount)
+  end
+  def get_children_as_native_array(childarray : IUIAutomationCondition**, childarraycount : Int32*) : HRESULT
+    @lpVtbl.value.get_children_as_native_array.unsafe_as(Proc(IUIAutomationCondition**, Int32*, HRESULT)).call(childarray, childarraycount)
+  end
+  def get_children(childarray : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_children.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(childarray)
+  end
+end
+struct LibWin32::IUIAutomationOrCondition
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_child_count(childcount : Int32*) : HRESULT
+    @lpVtbl.value.get_child_count.unsafe_as(Proc(Int32*, HRESULT)).call(childcount)
+  end
+  def get_children_as_native_array(childarray : IUIAutomationCondition**, childarraycount : Int32*) : HRESULT
+    @lpVtbl.value.get_children_as_native_array.unsafe_as(Proc(IUIAutomationCondition**, Int32*, HRESULT)).call(childarray, childarraycount)
+  end
+  def get_children(childarray : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_children.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(childarray)
+  end
+end
+struct LibWin32::IUIAutomationNotCondition
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_child(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_child.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+end
+struct LibWin32::IUIAutomationCacheRequest
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_property(propertyid : Int32) : HRESULT
+    @lpVtbl.value.add_property.unsafe_as(Proc(Int32, HRESULT)).call(propertyid)
+  end
+  def add_pattern(patternid : Int32) : HRESULT
+    @lpVtbl.value.add_pattern.unsafe_as(Proc(Int32, HRESULT)).call(patternid)
+  end
+  def clone(clonedrequest : IUIAutomationCacheRequest*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IUIAutomationCacheRequest*, HRESULT)).call(clonedrequest)
+  end
+  def get_tree_scope(scope : TreeScope*) : HRESULT
+    @lpVtbl.value.get_tree_scope.unsafe_as(Proc(TreeScope*, HRESULT)).call(scope)
+  end
+  def put_tree_scope(scope : TreeScope) : HRESULT
+    @lpVtbl.value.put_tree_scope.unsafe_as(Proc(TreeScope, HRESULT)).call(scope)
+  end
+  def get_tree_filter(filter : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_tree_filter.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(filter)
+  end
+  def put_tree_filter(filter : IUIAutomationCondition) : HRESULT
+    @lpVtbl.value.put_tree_filter.unsafe_as(Proc(IUIAutomationCondition, HRESULT)).call(filter)
+  end
+  def get_automation_element_mode(mode : AutomationElementMode*) : HRESULT
+    @lpVtbl.value.get_automation_element_mode.unsafe_as(Proc(AutomationElementMode*, HRESULT)).call(mode)
+  end
+  def put_automation_element_mode(mode : AutomationElementMode) : HRESULT
+    @lpVtbl.value.put_automation_element_mode.unsafe_as(Proc(AutomationElementMode, HRESULT)).call(mode)
+  end
+end
+struct LibWin32::IUIAutomationTreeWalker
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_parent_element(element : IUIAutomationElement, parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_parent_element.unsafe_as(Proc(IUIAutomationElement, IUIAutomationElement*, HRESULT)).call(element, parent)
+  end
+  def get_first_child_element(element : IUIAutomationElement, first : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_first_child_element.unsafe_as(Proc(IUIAutomationElement, IUIAutomationElement*, HRESULT)).call(element, first)
+  end
+  def get_last_child_element(element : IUIAutomationElement, last : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_last_child_element.unsafe_as(Proc(IUIAutomationElement, IUIAutomationElement*, HRESULT)).call(element, last)
+  end
+  def get_next_sibling_element(element : IUIAutomationElement, next : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_next_sibling_element.unsafe_as(Proc(IUIAutomationElement, IUIAutomationElement*, HRESULT)).call(element, next)
+  end
+  def get_previous_sibling_element(element : IUIAutomationElement, previous : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_previous_sibling_element.unsafe_as(Proc(IUIAutomationElement, IUIAutomationElement*, HRESULT)).call(element, previous)
+  end
+  def normalize_element(element : IUIAutomationElement, normalized : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.normalize_element.unsafe_as(Proc(IUIAutomationElement, IUIAutomationElement*, HRESULT)).call(element, normalized)
+  end
+  def get_parent_element_build_cache(element : IUIAutomationElement, cacherequest : IUIAutomationCacheRequest, parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_parent_element_build_cache.unsafe_as(Proc(IUIAutomationElement, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(element, cacherequest, parent)
+  end
+  def get_first_child_element_build_cache(element : IUIAutomationElement, cacherequest : IUIAutomationCacheRequest, first : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_first_child_element_build_cache.unsafe_as(Proc(IUIAutomationElement, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(element, cacherequest, first)
+  end
+  def get_last_child_element_build_cache(element : IUIAutomationElement, cacherequest : IUIAutomationCacheRequest, last : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_last_child_element_build_cache.unsafe_as(Proc(IUIAutomationElement, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(element, cacherequest, last)
+  end
+  def get_next_sibling_element_build_cache(element : IUIAutomationElement, cacherequest : IUIAutomationCacheRequest, next : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_next_sibling_element_build_cache.unsafe_as(Proc(IUIAutomationElement, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(element, cacherequest, next)
+  end
+  def get_previous_sibling_element_build_cache(element : IUIAutomationElement, cacherequest : IUIAutomationCacheRequest, previous : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_previous_sibling_element_build_cache.unsafe_as(Proc(IUIAutomationElement, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(element, cacherequest, previous)
+  end
+  def normalize_element_build_cache(element : IUIAutomationElement, cacherequest : IUIAutomationCacheRequest, normalized : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.normalize_element_build_cache.unsafe_as(Proc(IUIAutomationElement, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(element, cacherequest, normalized)
+  end
+  def get_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+end
+struct LibWin32::IUIAutomationEventHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def handle_automation_event(sender : IUIAutomationElement, eventid : Int32) : HRESULT
+    @lpVtbl.value.handle_automation_event.unsafe_as(Proc(IUIAutomationElement, Int32, HRESULT)).call(sender, eventid)
+  end
+end
+struct LibWin32::IUIAutomationPropertyChangedEventHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def handle_property_changed_event(sender : IUIAutomationElement, propertyid : Int32, newvalue : VARIANT) : HRESULT
+    @lpVtbl.value.handle_property_changed_event.unsafe_as(Proc(IUIAutomationElement, Int32, VARIANT, HRESULT)).call(sender, propertyid, newvalue)
+  end
+end
+struct LibWin32::IUIAutomationStructureChangedEventHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def handle_structure_changed_event(sender : IUIAutomationElement, changetype : StructureChangeType, runtimeid : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.handle_structure_changed_event.unsafe_as(Proc(IUIAutomationElement, StructureChangeType, SAFEARRAY*, HRESULT)).call(sender, changetype, runtimeid)
+  end
+end
+struct LibWin32::IUIAutomationFocusChangedEventHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def handle_focus_changed_event(sender : IUIAutomationElement) : HRESULT
+    @lpVtbl.value.handle_focus_changed_event.unsafe_as(Proc(IUIAutomationElement, HRESULT)).call(sender)
+  end
+end
+struct LibWin32::IUIAutomationTextEditTextChangedEventHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def handle_text_edit_text_changed_event(sender : IUIAutomationElement, texteditchangetype : TextEditChangeType, eventstrings : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.handle_text_edit_text_changed_event.unsafe_as(Proc(IUIAutomationElement, TextEditChangeType, SAFEARRAY*, HRESULT)).call(sender, texteditchangetype, eventstrings)
+  end
+end
+struct LibWin32::IUIAutomationChangesEventHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def handle_changes_event(sender : IUIAutomationElement, uiachanges : UiaChangeInfo*, changescount : Int32) : HRESULT
+    @lpVtbl.value.handle_changes_event.unsafe_as(Proc(IUIAutomationElement, UiaChangeInfo*, Int32, HRESULT)).call(sender, uiachanges, changescount)
+  end
+end
+struct LibWin32::IUIAutomationNotificationEventHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def handle_notification_event(sender : IUIAutomationElement, notificationkind : NotificationKind, notificationprocessing : NotificationProcessing, displaystring : UInt8*, activityid : UInt8*) : HRESULT
+    @lpVtbl.value.handle_notification_event.unsafe_as(Proc(IUIAutomationElement, NotificationKind, NotificationProcessing, UInt8*, UInt8*, HRESULT)).call(sender, notificationkind, notificationprocessing, displaystring, activityid)
+  end
+end
+struct LibWin32::IUIAutomationInvokePattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def invoke : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IUIAutomationDockPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_dock_position(dockpos : DockPosition) : HRESULT
+    @lpVtbl.value.set_dock_position.unsafe_as(Proc(DockPosition, HRESULT)).call(dockpos)
+  end
+  def get_current_dock_position(retval : DockPosition*) : HRESULT
+    @lpVtbl.value.get_current_dock_position.unsafe_as(Proc(DockPosition*, HRESULT)).call(retval)
+  end
+  def get_cached_dock_position(retval : DockPosition*) : HRESULT
+    @lpVtbl.value.get_cached_dock_position.unsafe_as(Proc(DockPosition*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationExpandCollapsePattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def expand : HRESULT
+    @lpVtbl.value.expand.unsafe_as(Proc(HRESULT)).call
+  end
+  def collapse : HRESULT
+    @lpVtbl.value.collapse.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_current_expand_collapse_state(retval : ExpandCollapseState*) : HRESULT
+    @lpVtbl.value.get_current_expand_collapse_state.unsafe_as(Proc(ExpandCollapseState*, HRESULT)).call(retval)
+  end
+  def get_cached_expand_collapse_state(retval : ExpandCollapseState*) : HRESULT
+    @lpVtbl.value.get_cached_expand_collapse_state.unsafe_as(Proc(ExpandCollapseState*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationGridPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_item(row : Int32, column : Int32, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, Int32, IUIAutomationElement*, HRESULT)).call(row, column, element)
+  end
+  def get_current_row_count(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_row_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_column_count(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_column_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_row_count(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_row_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_column_count(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_column_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationGridItemPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_current_containing_grid(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_containing_grid.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_current_row(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_row.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_column(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_column.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_row_span(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_row_span.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_column_span(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_column_span.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_containing_grid(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_containing_grid.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_cached_row(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_row.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_column(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_column.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_row_span(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_row_span.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_column_span(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_column_span.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationMultipleViewPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_view_name(view : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_view_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(view, name)
+  end
+  def set_current_view(view : Int32) : HRESULT
+    @lpVtbl.value.set_current_view.unsafe_as(Proc(Int32, HRESULT)).call(view)
+  end
+  def get_current_current_view(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_current_view.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_supported_views(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_supported_views.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_cached_current_view(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_current_view.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_supported_views(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_supported_views.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationObjectModelPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_underlying_object_model(retval : IUnknown*) : HRESULT
+    @lpVtbl.value.get_underlying_object_model.unsafe_as(Proc(IUnknown*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationRangeValuePattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_value(val : Float64) : HRESULT
+    @lpVtbl.value.set_value.unsafe_as(Proc(Float64, HRESULT)).call(val)
+  end
+  def get_current_value(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_value.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_current_is_read_only(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_read_only.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_maximum(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_maximum.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_current_minimum(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_minimum.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_current_large_change(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_large_change.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_current_small_change(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_small_change.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_cached_value(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_value.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_cached_is_read_only(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_read_only.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_maximum(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_maximum.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_cached_minimum(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_minimum.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_cached_large_change(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_large_change.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_cached_small_change(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_small_change.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationScrollPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def scroll(horizontalamount : ScrollAmount, verticalamount : ScrollAmount) : HRESULT
+    @lpVtbl.value.scroll.unsafe_as(Proc(ScrollAmount, ScrollAmount, HRESULT)).call(horizontalamount, verticalamount)
+  end
+  def set_scroll_percent(horizontalpercent : Float64, verticalpercent : Float64) : HRESULT
+    @lpVtbl.value.set_scroll_percent.unsafe_as(Proc(Float64, Float64, HRESULT)).call(horizontalpercent, verticalpercent)
+  end
+  def get_current_horizontal_scroll_percent(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_horizontal_scroll_percent.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_current_vertical_scroll_percent(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_vertical_scroll_percent.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_current_horizontal_view_size(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_horizontal_view_size.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_current_vertical_view_size(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_vertical_view_size.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_current_horizontally_scrollable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_horizontally_scrollable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_vertically_scrollable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_vertically_scrollable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_horizontal_scroll_percent(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_horizontal_scroll_percent.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_cached_vertical_scroll_percent(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_vertical_scroll_percent.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_cached_horizontal_view_size(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_horizontal_view_size.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_cached_vertical_view_size(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_vertical_view_size.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_cached_horizontally_scrollable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_horizontally_scrollable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_vertically_scrollable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_vertically_scrollable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationScrollItemPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def scroll_into_view : HRESULT
+    @lpVtbl.value.scroll_into_view.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IUIAutomationSelectionPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_current_selection(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_selection.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_can_select_multiple(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_select_multiple.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_selection_required(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_selection_required.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_selection(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_selection.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_can_select_multiple(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_select_multiple.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_selection_required(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_selection_required.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationSelectionPattern2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_current_selection(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_selection.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_can_select_multiple(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_select_multiple.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_selection_required(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_selection_required.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_selection(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_selection.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_can_select_multiple(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_select_multiple.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_selection_required(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_selection_required.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_first_selected_item(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_first_selected_item.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_current_last_selected_item(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_last_selected_item.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_current_current_selected_item(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_current_selected_item.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_current_item_count(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_item_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_first_selected_item(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_first_selected_item.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_cached_last_selected_item(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_last_selected_item.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_cached_current_selected_item(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_current_selected_item.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_cached_item_count(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_item_count.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationSelectionItemPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def select : HRESULT
+    @lpVtbl.value.select.unsafe_as(Proc(HRESULT)).call
+  end
+  def add_to_selection : HRESULT
+    @lpVtbl.value.add_to_selection.unsafe_as(Proc(HRESULT)).call
+  end
+  def remove_from_selection : HRESULT
+    @lpVtbl.value.remove_from_selection.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_current_is_selected(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_selected.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_selection_container(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_selection_container.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_cached_is_selected(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_selected.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_selection_container(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_selection_container.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationSynchronizedInputPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def start_listening(inputtype : SynchronizedInputType) : HRESULT
+    @lpVtbl.value.start_listening.unsafe_as(Proc(SynchronizedInputType, HRESULT)).call(inputtype)
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IUIAutomationTablePattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_current_row_headers(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_row_headers.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_column_headers(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_column_headers.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_row_or_column_major(retval : RowOrColumnMajor*) : HRESULT
+    @lpVtbl.value.get_current_row_or_column_major.unsafe_as(Proc(RowOrColumnMajor*, HRESULT)).call(retval)
+  end
+  def get_cached_row_headers(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_row_headers.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_column_headers(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_column_headers.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_row_or_column_major(retval : RowOrColumnMajor*) : HRESULT
+    @lpVtbl.value.get_cached_row_or_column_major.unsafe_as(Proc(RowOrColumnMajor*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationTableItemPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_current_row_header_items(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_row_header_items.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_column_header_items(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_column_header_items.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_row_header_items(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_row_header_items.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_column_header_items(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_column_header_items.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationTogglePattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def toggle : HRESULT
+    @lpVtbl.value.toggle.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_current_toggle_state(retval : ToggleState*) : HRESULT
+    @lpVtbl.value.get_current_toggle_state.unsafe_as(Proc(ToggleState*, HRESULT)).call(retval)
+  end
+  def get_cached_toggle_state(retval : ToggleState*) : HRESULT
+    @lpVtbl.value.get_cached_toggle_state.unsafe_as(Proc(ToggleState*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationTransformPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def move(x : Float64, y : Float64) : HRESULT
+    @lpVtbl.value.move.unsafe_as(Proc(Float64, Float64, HRESULT)).call(x, y)
+  end
+  def resize(width : Float64, height : Float64) : HRESULT
+    @lpVtbl.value.resize.unsafe_as(Proc(Float64, Float64, HRESULT)).call(width, height)
+  end
+  def rotate(degrees : Float64) : HRESULT
+    @lpVtbl.value.rotate.unsafe_as(Proc(Float64, HRESULT)).call(degrees)
+  end
+  def get_current_can_move(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_move.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_can_resize(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_resize.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_can_rotate(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_rotate.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_can_move(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_move.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_can_resize(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_resize.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_can_rotate(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_rotate.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationValuePattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_value(val : UInt8*) : HRESULT
+    @lpVtbl.value.set_value.unsafe_as(Proc(UInt8*, HRESULT)).call(val)
+  end
+  def get_current_value(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_value.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_read_only(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_read_only.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_value(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_value.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_read_only(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_read_only.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationWindowPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def wait_for_input_idle(milliseconds : Int32, success : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.wait_for_input_idle.unsafe_as(Proc(Int32, LibC::BOOL*, HRESULT)).call(milliseconds, success)
+  end
+  def set_window_visual_state(state : WindowVisualState) : HRESULT
+    @lpVtbl.value.set_window_visual_state.unsafe_as(Proc(WindowVisualState, HRESULT)).call(state)
+  end
+  def get_current_can_maximize(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_maximize.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_can_minimize(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_minimize.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_modal(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_modal.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_topmost(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_topmost.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_window_visual_state(retval : WindowVisualState*) : HRESULT
+    @lpVtbl.value.get_current_window_visual_state.unsafe_as(Proc(WindowVisualState*, HRESULT)).call(retval)
+  end
+  def get_current_window_interaction_state(retval : WindowInteractionState*) : HRESULT
+    @lpVtbl.value.get_current_window_interaction_state.unsafe_as(Proc(WindowInteractionState*, HRESULT)).call(retval)
+  end
+  def get_cached_can_maximize(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_maximize.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_can_minimize(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_minimize.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_modal(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_modal.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_topmost(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_topmost.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_window_visual_state(retval : WindowVisualState*) : HRESULT
+    @lpVtbl.value.get_cached_window_visual_state.unsafe_as(Proc(WindowVisualState*, HRESULT)).call(retval)
+  end
+  def get_cached_window_interaction_state(retval : WindowInteractionState*) : HRESULT
+    @lpVtbl.value.get_cached_window_interaction_state.unsafe_as(Proc(WindowInteractionState*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationTextRange
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(clonedrange : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IUIAutomationTextRange*, HRESULT)).call(clonedrange)
+  end
+  def compare(range : IUIAutomationTextRange, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.unsafe_as(Proc(IUIAutomationTextRange, LibC::BOOL*, HRESULT)).call(range, aresame)
+  end
+  def compare_endpoints(srcendpoint : TextPatternRangeEndpoint, range : IUIAutomationTextRange, targetendpoint : TextPatternRangeEndpoint, compvalue : Int32*) : HRESULT
+    @lpVtbl.value.compare_endpoints.unsafe_as(Proc(TextPatternRangeEndpoint, IUIAutomationTextRange, TextPatternRangeEndpoint, Int32*, HRESULT)).call(srcendpoint, range, targetendpoint, compvalue)
+  end
+  def expand_to_enclosing_unit(textunit : TextUnit) : HRESULT
+    @lpVtbl.value.expand_to_enclosing_unit.unsafe_as(Proc(TextUnit, HRESULT)).call(textunit)
+  end
+  def find_attribute(attr : Int32, val : VARIANT, backward : LibC::BOOL, found : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.find_attribute.unsafe_as(Proc(Int32, VARIANT, LibC::BOOL, IUIAutomationTextRange*, HRESULT)).call(attr, val, backward, found)
+  end
+  def find_text(text : UInt8*, backward : LibC::BOOL, ignorecase : LibC::BOOL, found : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.find_text.unsafe_as(Proc(UInt8*, LibC::BOOL, LibC::BOOL, IUIAutomationTextRange*, HRESULT)).call(text, backward, ignorecase, found)
+  end
+  def get_attribute_value(attr : Int32, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(attr, value)
+  end
+  def get_bounding_rectangles(boundingrects : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_bounding_rectangles.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(boundingrects)
+  end
+  def get_enclosing_element(enclosingelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_enclosing_element.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(enclosingelement)
+  end
+  def get_text(maxlength : Int32, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(maxlength, text)
+  end
+  def move(unit : TextUnit, count : Int32, moved : Int32*) : HRESULT
+    @lpVtbl.value.move.unsafe_as(Proc(TextUnit, Int32, Int32*, HRESULT)).call(unit, count, moved)
+  end
+  def move_endpoint_by_unit(endpoint : TextPatternRangeEndpoint, unit : TextUnit, count : Int32, moved : Int32*) : HRESULT
+    @lpVtbl.value.move_endpoint_by_unit.unsafe_as(Proc(TextPatternRangeEndpoint, TextUnit, Int32, Int32*, HRESULT)).call(endpoint, unit, count, moved)
+  end
+  def move_endpoint_by_range(srcendpoint : TextPatternRangeEndpoint, range : IUIAutomationTextRange, targetendpoint : TextPatternRangeEndpoint) : HRESULT
+    @lpVtbl.value.move_endpoint_by_range.unsafe_as(Proc(TextPatternRangeEndpoint, IUIAutomationTextRange, TextPatternRangeEndpoint, HRESULT)).call(srcendpoint, range, targetendpoint)
+  end
+  def select : HRESULT
+    @lpVtbl.value.select.unsafe_as(Proc(HRESULT)).call
+  end
+  def add_to_selection : HRESULT
+    @lpVtbl.value.add_to_selection.unsafe_as(Proc(HRESULT)).call
+  end
+  def remove_from_selection : HRESULT
+    @lpVtbl.value.remove_from_selection.unsafe_as(Proc(HRESULT)).call
+  end
+  def scroll_into_view(aligntotop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.scroll_into_view.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(aligntotop)
+  end
+  def get_children(children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_children.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(children)
+  end
+end
+struct LibWin32::IUIAutomationTextRange2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(clonedrange : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IUIAutomationTextRange*, HRESULT)).call(clonedrange)
+  end
+  def compare(range : IUIAutomationTextRange, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.unsafe_as(Proc(IUIAutomationTextRange, LibC::BOOL*, HRESULT)).call(range, aresame)
+  end
+  def compare_endpoints(srcendpoint : TextPatternRangeEndpoint, range : IUIAutomationTextRange, targetendpoint : TextPatternRangeEndpoint, compvalue : Int32*) : HRESULT
+    @lpVtbl.value.compare_endpoints.unsafe_as(Proc(TextPatternRangeEndpoint, IUIAutomationTextRange, TextPatternRangeEndpoint, Int32*, HRESULT)).call(srcendpoint, range, targetendpoint, compvalue)
+  end
+  def expand_to_enclosing_unit(textunit : TextUnit) : HRESULT
+    @lpVtbl.value.expand_to_enclosing_unit.unsafe_as(Proc(TextUnit, HRESULT)).call(textunit)
+  end
+  def find_attribute(attr : Int32, val : VARIANT, backward : LibC::BOOL, found : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.find_attribute.unsafe_as(Proc(Int32, VARIANT, LibC::BOOL, IUIAutomationTextRange*, HRESULT)).call(attr, val, backward, found)
+  end
+  def find_text(text : UInt8*, backward : LibC::BOOL, ignorecase : LibC::BOOL, found : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.find_text.unsafe_as(Proc(UInt8*, LibC::BOOL, LibC::BOOL, IUIAutomationTextRange*, HRESULT)).call(text, backward, ignorecase, found)
+  end
+  def get_attribute_value(attr : Int32, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(attr, value)
+  end
+  def get_bounding_rectangles(boundingrects : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_bounding_rectangles.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(boundingrects)
+  end
+  def get_enclosing_element(enclosingelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_enclosing_element.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(enclosingelement)
+  end
+  def get_text(maxlength : Int32, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(maxlength, text)
+  end
+  def move(unit : TextUnit, count : Int32, moved : Int32*) : HRESULT
+    @lpVtbl.value.move.unsafe_as(Proc(TextUnit, Int32, Int32*, HRESULT)).call(unit, count, moved)
+  end
+  def move_endpoint_by_unit(endpoint : TextPatternRangeEndpoint, unit : TextUnit, count : Int32, moved : Int32*) : HRESULT
+    @lpVtbl.value.move_endpoint_by_unit.unsafe_as(Proc(TextPatternRangeEndpoint, TextUnit, Int32, Int32*, HRESULT)).call(endpoint, unit, count, moved)
+  end
+  def move_endpoint_by_range(srcendpoint : TextPatternRangeEndpoint, range : IUIAutomationTextRange, targetendpoint : TextPatternRangeEndpoint) : HRESULT
+    @lpVtbl.value.move_endpoint_by_range.unsafe_as(Proc(TextPatternRangeEndpoint, IUIAutomationTextRange, TextPatternRangeEndpoint, HRESULT)).call(srcendpoint, range, targetendpoint)
+  end
+  def select : HRESULT
+    @lpVtbl.value.select.unsafe_as(Proc(HRESULT)).call
+  end
+  def add_to_selection : HRESULT
+    @lpVtbl.value.add_to_selection.unsafe_as(Proc(HRESULT)).call
+  end
+  def remove_from_selection : HRESULT
+    @lpVtbl.value.remove_from_selection.unsafe_as(Proc(HRESULT)).call
+  end
+  def scroll_into_view(aligntotop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.scroll_into_view.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(aligntotop)
+  end
+  def get_children(children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_children.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(children)
+  end
+  def show_context_menu : HRESULT
+    @lpVtbl.value.show_context_menu.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IUIAutomationTextRange3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(clonedrange : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IUIAutomationTextRange*, HRESULT)).call(clonedrange)
+  end
+  def compare(range : IUIAutomationTextRange, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare.unsafe_as(Proc(IUIAutomationTextRange, LibC::BOOL*, HRESULT)).call(range, aresame)
+  end
+  def compare_endpoints(srcendpoint : TextPatternRangeEndpoint, range : IUIAutomationTextRange, targetendpoint : TextPatternRangeEndpoint, compvalue : Int32*) : HRESULT
+    @lpVtbl.value.compare_endpoints.unsafe_as(Proc(TextPatternRangeEndpoint, IUIAutomationTextRange, TextPatternRangeEndpoint, Int32*, HRESULT)).call(srcendpoint, range, targetendpoint, compvalue)
+  end
+  def expand_to_enclosing_unit(textunit : TextUnit) : HRESULT
+    @lpVtbl.value.expand_to_enclosing_unit.unsafe_as(Proc(TextUnit, HRESULT)).call(textunit)
+  end
+  def find_attribute(attr : Int32, val : VARIANT, backward : LibC::BOOL, found : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.find_attribute.unsafe_as(Proc(Int32, VARIANT, LibC::BOOL, IUIAutomationTextRange*, HRESULT)).call(attr, val, backward, found)
+  end
+  def find_text(text : UInt8*, backward : LibC::BOOL, ignorecase : LibC::BOOL, found : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.find_text.unsafe_as(Proc(UInt8*, LibC::BOOL, LibC::BOOL, IUIAutomationTextRange*, HRESULT)).call(text, backward, ignorecase, found)
+  end
+  def get_attribute_value(attr : Int32, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_attribute_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(attr, value)
+  end
+  def get_bounding_rectangles(boundingrects : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_bounding_rectangles.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(boundingrects)
+  end
+  def get_enclosing_element(enclosingelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_enclosing_element.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(enclosingelement)
+  end
+  def get_text(maxlength : Int32, text : UInt8**) : HRESULT
+    @lpVtbl.value.get_text.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(maxlength, text)
+  end
+  def move(unit : TextUnit, count : Int32, moved : Int32*) : HRESULT
+    @lpVtbl.value.move.unsafe_as(Proc(TextUnit, Int32, Int32*, HRESULT)).call(unit, count, moved)
+  end
+  def move_endpoint_by_unit(endpoint : TextPatternRangeEndpoint, unit : TextUnit, count : Int32, moved : Int32*) : HRESULT
+    @lpVtbl.value.move_endpoint_by_unit.unsafe_as(Proc(TextPatternRangeEndpoint, TextUnit, Int32, Int32*, HRESULT)).call(endpoint, unit, count, moved)
+  end
+  def move_endpoint_by_range(srcendpoint : TextPatternRangeEndpoint, range : IUIAutomationTextRange, targetendpoint : TextPatternRangeEndpoint) : HRESULT
+    @lpVtbl.value.move_endpoint_by_range.unsafe_as(Proc(TextPatternRangeEndpoint, IUIAutomationTextRange, TextPatternRangeEndpoint, HRESULT)).call(srcendpoint, range, targetendpoint)
+  end
+  def select : HRESULT
+    @lpVtbl.value.select.unsafe_as(Proc(HRESULT)).call
+  end
+  def add_to_selection : HRESULT
+    @lpVtbl.value.add_to_selection.unsafe_as(Proc(HRESULT)).call
+  end
+  def remove_from_selection : HRESULT
+    @lpVtbl.value.remove_from_selection.unsafe_as(Proc(HRESULT)).call
+  end
+  def scroll_into_view(aligntotop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.scroll_into_view.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(aligntotop)
+  end
+  def get_children(children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_children.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(children)
+  end
+  def show_context_menu : HRESULT
+    @lpVtbl.value.show_context_menu.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_enclosing_element_build_cache(cacherequest : IUIAutomationCacheRequest, enclosingelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_enclosing_element_build_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, enclosingelement)
+  end
+  def get_children_build_cache(cacherequest : IUIAutomationCacheRequest, children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_children_build_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)).call(cacherequest, children)
+  end
+  def get_attribute_values(attributeids : Int32*, attributeidcount : Int32, attributevalues : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_attribute_values.unsafe_as(Proc(Int32*, Int32, SAFEARRAY**, HRESULT)).call(attributeids, attributeidcount, attributevalues)
+  end
+end
+struct LibWin32::IUIAutomationTextRangeArray
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_length(length : Int32*) : HRESULT
+    @lpVtbl.value.get_length.unsafe_as(Proc(Int32*, HRESULT)).call(length)
+  end
+  def get_element(index : Int32, element : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.get_element.unsafe_as(Proc(Int32, IUIAutomationTextRange*, HRESULT)).call(index, element)
+  end
+end
+struct LibWin32::IUIAutomationTextPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def range_from_point(pt : POINT, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.range_from_point.unsafe_as(Proc(POINT, IUIAutomationTextRange*, HRESULT)).call(pt, range)
+  end
+  def range_from_child(child : IUIAutomationElement, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.range_from_child.unsafe_as(Proc(IUIAutomationElement, IUIAutomationTextRange*, HRESULT)).call(child, range)
+  end
+  def get_selection(ranges : IUIAutomationTextRangeArray*) : HRESULT
+    @lpVtbl.value.get_selection.unsafe_as(Proc(IUIAutomationTextRangeArray*, HRESULT)).call(ranges)
+  end
+  def get_visible_ranges(ranges : IUIAutomationTextRangeArray*) : HRESULT
+    @lpVtbl.value.get_visible_ranges.unsafe_as(Proc(IUIAutomationTextRangeArray*, HRESULT)).call(ranges)
+  end
+  def get_document_range(range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.get_document_range.unsafe_as(Proc(IUIAutomationTextRange*, HRESULT)).call(range)
+  end
+  def get_supported_text_selection(supportedtextselection : SupportedTextSelection*) : HRESULT
+    @lpVtbl.value.get_supported_text_selection.unsafe_as(Proc(SupportedTextSelection*, HRESULT)).call(supportedtextselection)
+  end
+end
+struct LibWin32::IUIAutomationTextPattern2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def range_from_point(pt : POINT, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.range_from_point.unsafe_as(Proc(POINT, IUIAutomationTextRange*, HRESULT)).call(pt, range)
+  end
+  def range_from_child(child : IUIAutomationElement, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.range_from_child.unsafe_as(Proc(IUIAutomationElement, IUIAutomationTextRange*, HRESULT)).call(child, range)
+  end
+  def get_selection(ranges : IUIAutomationTextRangeArray*) : HRESULT
+    @lpVtbl.value.get_selection.unsafe_as(Proc(IUIAutomationTextRangeArray*, HRESULT)).call(ranges)
+  end
+  def get_visible_ranges(ranges : IUIAutomationTextRangeArray*) : HRESULT
+    @lpVtbl.value.get_visible_ranges.unsafe_as(Proc(IUIAutomationTextRangeArray*, HRESULT)).call(ranges)
+  end
+  def get_document_range(range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.get_document_range.unsafe_as(Proc(IUIAutomationTextRange*, HRESULT)).call(range)
+  end
+  def get_supported_text_selection(supportedtextselection : SupportedTextSelection*) : HRESULT
+    @lpVtbl.value.get_supported_text_selection.unsafe_as(Proc(SupportedTextSelection*, HRESULT)).call(supportedtextselection)
+  end
+  def range_from_annotation(annotation : IUIAutomationElement, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.range_from_annotation.unsafe_as(Proc(IUIAutomationElement, IUIAutomationTextRange*, HRESULT)).call(annotation, range)
+  end
+  def get_caret_range(isactive : LibC::BOOL*, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.get_caret_range.unsafe_as(Proc(LibC::BOOL*, IUIAutomationTextRange*, HRESULT)).call(isactive, range)
+  end
+end
+struct LibWin32::IUIAutomationTextEditPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def range_from_point(pt : POINT, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.range_from_point.unsafe_as(Proc(POINT, IUIAutomationTextRange*, HRESULT)).call(pt, range)
+  end
+  def range_from_child(child : IUIAutomationElement, range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.range_from_child.unsafe_as(Proc(IUIAutomationElement, IUIAutomationTextRange*, HRESULT)).call(child, range)
+  end
+  def get_selection(ranges : IUIAutomationTextRangeArray*) : HRESULT
+    @lpVtbl.value.get_selection.unsafe_as(Proc(IUIAutomationTextRangeArray*, HRESULT)).call(ranges)
+  end
+  def get_visible_ranges(ranges : IUIAutomationTextRangeArray*) : HRESULT
+    @lpVtbl.value.get_visible_ranges.unsafe_as(Proc(IUIAutomationTextRangeArray*, HRESULT)).call(ranges)
+  end
+  def get_document_range(range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.get_document_range.unsafe_as(Proc(IUIAutomationTextRange*, HRESULT)).call(range)
+  end
+  def get_supported_text_selection(supportedtextselection : SupportedTextSelection*) : HRESULT
+    @lpVtbl.value.get_supported_text_selection.unsafe_as(Proc(SupportedTextSelection*, HRESULT)).call(supportedtextselection)
+  end
+  def get_active_composition(range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.get_active_composition.unsafe_as(Proc(IUIAutomationTextRange*, HRESULT)).call(range)
+  end
+  def get_conversion_target(range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.get_conversion_target.unsafe_as(Proc(IUIAutomationTextRange*, HRESULT)).call(range)
+  end
+end
+struct LibWin32::IUIAutomationCustomNavigationPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def navigate(direction : NavigateDirection, pretval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.navigate.unsafe_as(Proc(NavigateDirection, IUIAutomationElement*, HRESULT)).call(direction, pretval)
+  end
+end
+struct LibWin32::IUIAutomationActiveTextPositionChangedEventHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def handle_active_text_position_changed_event(sender : IUIAutomationElement, range : IUIAutomationTextRange) : HRESULT
+    @lpVtbl.value.handle_active_text_position_changed_event.unsafe_as(Proc(IUIAutomationElement, IUIAutomationTextRange, HRESULT)).call(sender, range)
+  end
+end
+struct LibWin32::IUIAutomationLegacyIAccessiblePattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def select(flagsselect : Int32) : HRESULT
+    @lpVtbl.value.select.unsafe_as(Proc(Int32, HRESULT)).call(flagsselect)
+  end
+  def do_default_action : HRESULT
+    @lpVtbl.value.do_default_action.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_value(szvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_value.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(szvalue)
+  end
+  def get_current_child_id(pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_child_id.unsafe_as(Proc(Int32*, HRESULT)).call(pretval)
+  end
+  def get_current_name(pszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pszname)
+  end
+  def get_current_value(pszvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_value.unsafe_as(Proc(UInt8**, HRESULT)).call(pszvalue)
+  end
+  def get_current_description(pszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pszdescription)
+  end
+  def get_current_role(pdwrole : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_role.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwrole)
+  end
+  def get_current_state(pdwstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_state.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstate)
+  end
+  def get_current_help(pszhelp : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help.unsafe_as(Proc(UInt8**, HRESULT)).call(pszhelp)
+  end
+  def get_current_keyboard_shortcut(pszkeyboardshortcut : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_keyboard_shortcut.unsafe_as(Proc(UInt8**, HRESULT)).call(pszkeyboardshortcut)
+  end
+  def get_current_selection(pvarselectedchildren : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_selection.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(pvarselectedchildren)
+  end
+  def get_current_default_action(pszdefaultaction : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_default_action.unsafe_as(Proc(UInt8**, HRESULT)).call(pszdefaultaction)
+  end
+  def get_cached_child_id(pretval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_child_id.unsafe_as(Proc(Int32*, HRESULT)).call(pretval)
+  end
+  def get_cached_name(pszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pszname)
+  end
+  def get_cached_value(pszvalue : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_value.unsafe_as(Proc(UInt8**, HRESULT)).call(pszvalue)
+  end
+  def get_cached_description(pszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pszdescription)
+  end
+  def get_cached_role(pdwrole : UInt32*) : HRESULT
+    @lpVtbl.value.get_cached_role.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwrole)
+  end
+  def get_cached_state(pdwstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_cached_state.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstate)
+  end
+  def get_cached_help(pszhelp : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help.unsafe_as(Proc(UInt8**, HRESULT)).call(pszhelp)
+  end
+  def get_cached_keyboard_shortcut(pszkeyboardshortcut : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_keyboard_shortcut.unsafe_as(Proc(UInt8**, HRESULT)).call(pszkeyboardshortcut)
+  end
+  def get_cached_selection(pvarselectedchildren : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_selection.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(pvarselectedchildren)
+  end
+  def get_cached_default_action(pszdefaultaction : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_default_action.unsafe_as(Proc(UInt8**, HRESULT)).call(pszdefaultaction)
+  end
+  def get_i_accessible(ppaccessible : IAccessible*) : HRESULT
+    @lpVtbl.value.get_i_accessible.unsafe_as(Proc(IAccessible*, HRESULT)).call(ppaccessible)
+  end
+end
+struct LibWin32::IUIAutomationItemContainerPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def find_item_by_property(pstartafter : IUIAutomationElement, propertyid : Int32, value : VARIANT, pfound : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_item_by_property.unsafe_as(Proc(IUIAutomationElement, Int32, VARIANT, IUIAutomationElement*, HRESULT)).call(pstartafter, propertyid, value, pfound)
+  end
+end
+struct LibWin32::IUIAutomationVirtualizedItemPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def realize : HRESULT
+    @lpVtbl.value.realize.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IUIAutomationAnnotationPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_current_annotation_type_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_annotation_type_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_annotation_type_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_annotation_type_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_author(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_author.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_date_time(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_date_time.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_target(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_target.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_cached_annotation_type_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_annotation_type_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_annotation_type_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_annotation_type_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_author(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_author.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_date_time(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_date_time.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_target(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_target.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationStylesPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_current_style_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_style_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_style_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_style_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_fill_color(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_fill_color.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_fill_pattern_style(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_fill_pattern_style.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_shape(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_shape.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_fill_pattern_color(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_fill_pattern_color.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_extended_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_extended_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_extended_properties_as_array(propertyarray : ExtendedProperty**, propertycount : Int32*) : HRESULT
+    @lpVtbl.value.get_current_extended_properties_as_array.unsafe_as(Proc(ExtendedProperty**, Int32*, HRESULT)).call(propertyarray, propertycount)
+  end
+  def get_cached_style_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_style_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_style_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_style_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_fill_color(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_fill_color.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_fill_pattern_style(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_fill_pattern_style.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_shape(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_shape.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_fill_pattern_color(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_fill_pattern_color.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_extended_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_extended_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_extended_properties_as_array(propertyarray : ExtendedProperty**, propertycount : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_extended_properties_as_array.unsafe_as(Proc(ExtendedProperty**, Int32*, HRESULT)).call(propertyarray, propertycount)
+  end
+end
+struct LibWin32::IUIAutomationSpreadsheetPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_item_by_name(name : UInt8*, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_item_by_name.unsafe_as(Proc(UInt8*, IUIAutomationElement*, HRESULT)).call(name, element)
+  end
+end
+struct LibWin32::IUIAutomationSpreadsheetItemPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_current_formula(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_formula.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_annotation_objects(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_annotation_objects.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_annotation_types(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_annotation_types.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_cached_formula(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_formula.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_annotation_objects(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_annotation_objects.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_annotation_types(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_annotation_types.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationTransformPattern2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def move(x : Float64, y : Float64) : HRESULT
+    @lpVtbl.value.move.unsafe_as(Proc(Float64, Float64, HRESULT)).call(x, y)
+  end
+  def resize(width : Float64, height : Float64) : HRESULT
+    @lpVtbl.value.resize.unsafe_as(Proc(Float64, Float64, HRESULT)).call(width, height)
+  end
+  def rotate(degrees : Float64) : HRESULT
+    @lpVtbl.value.rotate.unsafe_as(Proc(Float64, HRESULT)).call(degrees)
+  end
+  def get_current_can_move(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_move.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_can_resize(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_resize.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_can_rotate(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_rotate.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_can_move(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_move.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_can_resize(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_resize.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_can_rotate(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_rotate.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def zoom(zoomvalue : Float64) : HRESULT
+    @lpVtbl.value.zoom.unsafe_as(Proc(Float64, HRESULT)).call(zoomvalue)
+  end
+  def zoom_by_unit(zoomunit : ZoomUnit) : HRESULT
+    @lpVtbl.value.zoom_by_unit.unsafe_as(Proc(ZoomUnit, HRESULT)).call(zoomunit)
+  end
+  def get_current_can_zoom(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_can_zoom.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_can_zoom(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_can_zoom.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_zoom_level(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_zoom_level.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_cached_zoom_level(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_zoom_level.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_current_zoom_minimum(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_zoom_minimum.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_cached_zoom_minimum(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_zoom_minimum.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_current_zoom_maximum(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_current_zoom_maximum.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+  def get_cached_zoom_maximum(retval : Float64*) : HRESULT
+    @lpVtbl.value.get_cached_zoom_maximum.unsafe_as(Proc(Float64*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationTextChildPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_text_container(container : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_text_container.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(container)
+  end
+  def get_text_range(range : IUIAutomationTextRange*) : HRESULT
+    @lpVtbl.value.get_text_range.unsafe_as(Proc(IUIAutomationTextRange*, HRESULT)).call(range)
+  end
+end
+struct LibWin32::IUIAutomationDragPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_current_is_grabbed(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_grabbed.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_grabbed(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_grabbed.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_drop_effect(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_drop_effect.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_drop_effect(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_drop_effect.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_drop_effects(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_drop_effects.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_cached_drop_effects(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_drop_effects.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_current_grabbed_items(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_grabbed_items.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_grabbed_items(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_grabbed_items.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationDropTargetPattern
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_current_drop_target_effect(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_drop_target_effect.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_drop_target_effect(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_drop_target_effect.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_drop_target_effects(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_drop_target_effects.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_cached_drop_target_effects(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_drop_target_effects.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationElement2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_focus : HRESULT
+    @lpVtbl.value.set_focus.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_runtime_id(runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(runtimeid)
+  end
+  def find_first(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)).call(scope, condition, found)
+  end
+  def find_all(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)).call(scope, condition, found)
+  end
+  def find_first_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, updatedelement)
+  end
+  def get_current_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_current_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_cached_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_current_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_parent(parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(parent)
+  end
+  def get_cached_children(children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(children)
+  end
+  def get_current_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_current_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_current_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_current_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_current_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_cached_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_cached_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_cached_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_cached_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_clickable_point(clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.unsafe_as(Proc(POINT*, LibC::BOOL*, HRESULT)).call(clickable, gotclickable)
+  end
+  def get_current_optimize_for_visual_content(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_optimize_for_visual_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_optimize_for_visual_content(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_optimize_for_visual_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_live_setting(retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_current_live_setting.unsafe_as(Proc(LiveSetting*, HRESULT)).call(retval)
+  end
+  def get_cached_live_setting(retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_cached_live_setting.unsafe_as(Proc(LiveSetting*, HRESULT)).call(retval)
+  end
+  def get_current_flows_from(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_from.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_from(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_from.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationElement3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_focus : HRESULT
+    @lpVtbl.value.set_focus.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_runtime_id(runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(runtimeid)
+  end
+  def find_first(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)).call(scope, condition, found)
+  end
+  def find_all(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)).call(scope, condition, found)
+  end
+  def find_first_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, updatedelement)
+  end
+  def get_current_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_current_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_cached_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_current_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_parent(parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(parent)
+  end
+  def get_cached_children(children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(children)
+  end
+  def get_current_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_current_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_current_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_current_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_current_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_cached_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_cached_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_cached_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_cached_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_clickable_point(clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.unsafe_as(Proc(POINT*, LibC::BOOL*, HRESULT)).call(clickable, gotclickable)
+  end
+  def get_current_optimize_for_visual_content(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_optimize_for_visual_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_optimize_for_visual_content(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_optimize_for_visual_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_live_setting(retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_current_live_setting.unsafe_as(Proc(LiveSetting*, HRESULT)).call(retval)
+  end
+  def get_cached_live_setting(retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_cached_live_setting.unsafe_as(Proc(LiveSetting*, HRESULT)).call(retval)
+  end
+  def get_current_flows_from(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_from.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_from(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_from.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def show_context_menu : HRESULT
+    @lpVtbl.value.show_context_menu.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_current_is_peripheral(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_peripheral.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_peripheral(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_peripheral.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationElement4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_focus : HRESULT
+    @lpVtbl.value.set_focus.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_runtime_id(runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(runtimeid)
+  end
+  def find_first(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)).call(scope, condition, found)
+  end
+  def find_all(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)).call(scope, condition, found)
+  end
+  def find_first_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, updatedelement)
+  end
+  def get_current_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_current_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_cached_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_current_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_parent(parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(parent)
+  end
+  def get_cached_children(children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(children)
+  end
+  def get_current_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_current_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_current_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_current_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_current_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_cached_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_cached_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_cached_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_cached_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_clickable_point(clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.unsafe_as(Proc(POINT*, LibC::BOOL*, HRESULT)).call(clickable, gotclickable)
+  end
+  def get_current_optimize_for_visual_content(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_optimize_for_visual_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_optimize_for_visual_content(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_optimize_for_visual_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_live_setting(retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_current_live_setting.unsafe_as(Proc(LiveSetting*, HRESULT)).call(retval)
+  end
+  def get_cached_live_setting(retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_cached_live_setting.unsafe_as(Proc(LiveSetting*, HRESULT)).call(retval)
+  end
+  def get_current_flows_from(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_from.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_from(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_from.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def show_context_menu : HRESULT
+    @lpVtbl.value.show_context_menu.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_current_is_peripheral(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_peripheral.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_peripheral(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_peripheral.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_position_in_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_position_in_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_size_of_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_size_of_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_annotation_types(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_annotation_types.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_current_annotation_objects(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_annotation_objects.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_position_in_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_position_in_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_size_of_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_size_of_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_annotation_types(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_annotation_types.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_cached_annotation_objects(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_annotation_objects.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationElement5
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_focus : HRESULT
+    @lpVtbl.value.set_focus.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_runtime_id(runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(runtimeid)
+  end
+  def find_first(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)).call(scope, condition, found)
+  end
+  def find_all(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)).call(scope, condition, found)
+  end
+  def find_first_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, updatedelement)
+  end
+  def get_current_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_current_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_cached_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_current_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_parent(parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(parent)
+  end
+  def get_cached_children(children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(children)
+  end
+  def get_current_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_current_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_current_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_current_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_current_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_cached_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_cached_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_cached_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_cached_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_clickable_point(clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.unsafe_as(Proc(POINT*, LibC::BOOL*, HRESULT)).call(clickable, gotclickable)
+  end
+  def get_current_optimize_for_visual_content(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_optimize_for_visual_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_optimize_for_visual_content(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_optimize_for_visual_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_live_setting(retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_current_live_setting.unsafe_as(Proc(LiveSetting*, HRESULT)).call(retval)
+  end
+  def get_cached_live_setting(retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_cached_live_setting.unsafe_as(Proc(LiveSetting*, HRESULT)).call(retval)
+  end
+  def get_current_flows_from(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_from.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_from(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_from.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def show_context_menu : HRESULT
+    @lpVtbl.value.show_context_menu.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_current_is_peripheral(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_peripheral.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_peripheral(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_peripheral.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_position_in_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_position_in_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_size_of_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_size_of_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_annotation_types(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_annotation_types.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_current_annotation_objects(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_annotation_objects.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_position_in_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_position_in_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_size_of_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_size_of_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_annotation_types(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_annotation_types.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_cached_annotation_objects(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_annotation_objects.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_landmark_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_landmark_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_localized_landmark_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_landmark_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_landmark_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_landmark_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_localized_landmark_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_landmark_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationElement6
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_focus : HRESULT
+    @lpVtbl.value.set_focus.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_runtime_id(runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(runtimeid)
+  end
+  def find_first(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)).call(scope, condition, found)
+  end
+  def find_all(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)).call(scope, condition, found)
+  end
+  def find_first_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, updatedelement)
+  end
+  def get_current_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_current_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_cached_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_current_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_parent(parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(parent)
+  end
+  def get_cached_children(children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(children)
+  end
+  def get_current_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_current_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_current_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_current_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_current_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_cached_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_cached_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_cached_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_cached_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_clickable_point(clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.unsafe_as(Proc(POINT*, LibC::BOOL*, HRESULT)).call(clickable, gotclickable)
+  end
+  def get_current_optimize_for_visual_content(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_optimize_for_visual_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_optimize_for_visual_content(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_optimize_for_visual_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_live_setting(retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_current_live_setting.unsafe_as(Proc(LiveSetting*, HRESULT)).call(retval)
+  end
+  def get_cached_live_setting(retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_cached_live_setting.unsafe_as(Proc(LiveSetting*, HRESULT)).call(retval)
+  end
+  def get_current_flows_from(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_from.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_from(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_from.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def show_context_menu : HRESULT
+    @lpVtbl.value.show_context_menu.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_current_is_peripheral(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_peripheral.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_peripheral(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_peripheral.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_position_in_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_position_in_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_size_of_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_size_of_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_annotation_types(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_annotation_types.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_current_annotation_objects(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_annotation_objects.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_position_in_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_position_in_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_size_of_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_size_of_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_annotation_types(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_annotation_types.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_cached_annotation_objects(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_annotation_objects.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_landmark_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_landmark_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_localized_landmark_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_landmark_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_landmark_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_landmark_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_localized_landmark_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_landmark_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_full_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_full_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_full_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_full_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationElement7
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_focus : HRESULT
+    @lpVtbl.value.set_focus.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_runtime_id(runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(runtimeid)
+  end
+  def find_first(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)).call(scope, condition, found)
+  end
+  def find_all(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)).call(scope, condition, found)
+  end
+  def find_first_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, updatedelement)
+  end
+  def get_current_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_current_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_cached_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_current_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_parent(parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(parent)
+  end
+  def get_cached_children(children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(children)
+  end
+  def get_current_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_current_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_current_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_current_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_current_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_cached_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_cached_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_cached_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_cached_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_clickable_point(clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.unsafe_as(Proc(POINT*, LibC::BOOL*, HRESULT)).call(clickable, gotclickable)
+  end
+  def get_current_optimize_for_visual_content(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_optimize_for_visual_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_optimize_for_visual_content(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_optimize_for_visual_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_live_setting(retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_current_live_setting.unsafe_as(Proc(LiveSetting*, HRESULT)).call(retval)
+  end
+  def get_cached_live_setting(retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_cached_live_setting.unsafe_as(Proc(LiveSetting*, HRESULT)).call(retval)
+  end
+  def get_current_flows_from(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_from.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_from(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_from.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def show_context_menu : HRESULT
+    @lpVtbl.value.show_context_menu.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_current_is_peripheral(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_peripheral.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_peripheral(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_peripheral.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_position_in_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_position_in_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_size_of_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_size_of_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_annotation_types(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_annotation_types.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_current_annotation_objects(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_annotation_objects.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_position_in_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_position_in_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_size_of_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_size_of_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_annotation_types(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_annotation_types.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_cached_annotation_objects(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_annotation_objects.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_landmark_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_landmark_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_localized_landmark_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_landmark_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_landmark_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_landmark_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_localized_landmark_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_landmark_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_full_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_full_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_full_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_full_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def find_first_with_options(scope : TreeScope, condition : IUIAutomationCondition, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_with_options.unsafe_as(Proc(TreeScope, IUIAutomationCondition, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElement*, HRESULT)).call(scope, condition, traversaloptions, root, found)
+  end
+  def find_all_with_options(scope : TreeScope, condition : IUIAutomationCondition, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_with_options.unsafe_as(Proc(TreeScope, IUIAutomationCondition, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElementArray*, HRESULT)).call(scope, condition, traversaloptions, root, found)
+  end
+  def find_first_with_options_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_with_options_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElement*, HRESULT)).call(scope, condition, cacherequest, traversaloptions, root, found)
+  end
+  def find_all_with_options_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_with_options_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElementArray*, HRESULT)).call(scope, condition, cacherequest, traversaloptions, root, found)
+  end
+  def get_current_metadata_value(targetid : Int32, metadataid : Int32, returnval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_metadata_value.unsafe_as(Proc(Int32, Int32, VARIANT*, HRESULT)).call(targetid, metadataid, returnval)
+  end
+end
+struct LibWin32::IUIAutomationElement8
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_focus : HRESULT
+    @lpVtbl.value.set_focus.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_runtime_id(runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(runtimeid)
+  end
+  def find_first(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)).call(scope, condition, found)
+  end
+  def find_all(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)).call(scope, condition, found)
+  end
+  def find_first_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, updatedelement)
+  end
+  def get_current_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_current_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_cached_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_current_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_parent(parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(parent)
+  end
+  def get_cached_children(children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(children)
+  end
+  def get_current_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_current_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_current_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_current_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_current_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_cached_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_cached_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_cached_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_cached_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_clickable_point(clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.unsafe_as(Proc(POINT*, LibC::BOOL*, HRESULT)).call(clickable, gotclickable)
+  end
+  def get_current_optimize_for_visual_content(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_optimize_for_visual_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_optimize_for_visual_content(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_optimize_for_visual_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_live_setting(retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_current_live_setting.unsafe_as(Proc(LiveSetting*, HRESULT)).call(retval)
+  end
+  def get_cached_live_setting(retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_cached_live_setting.unsafe_as(Proc(LiveSetting*, HRESULT)).call(retval)
+  end
+  def get_current_flows_from(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_from.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_from(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_from.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def show_context_menu : HRESULT
+    @lpVtbl.value.show_context_menu.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_current_is_peripheral(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_peripheral.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_peripheral(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_peripheral.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_position_in_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_position_in_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_size_of_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_size_of_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_annotation_types(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_annotation_types.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_current_annotation_objects(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_annotation_objects.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_position_in_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_position_in_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_size_of_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_size_of_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_annotation_types(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_annotation_types.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_cached_annotation_objects(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_annotation_objects.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_landmark_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_landmark_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_localized_landmark_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_landmark_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_landmark_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_landmark_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_localized_landmark_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_landmark_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_full_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_full_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_full_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_full_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def find_first_with_options(scope : TreeScope, condition : IUIAutomationCondition, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_with_options.unsafe_as(Proc(TreeScope, IUIAutomationCondition, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElement*, HRESULT)).call(scope, condition, traversaloptions, root, found)
+  end
+  def find_all_with_options(scope : TreeScope, condition : IUIAutomationCondition, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_with_options.unsafe_as(Proc(TreeScope, IUIAutomationCondition, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElementArray*, HRESULT)).call(scope, condition, traversaloptions, root, found)
+  end
+  def find_first_with_options_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_with_options_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElement*, HRESULT)).call(scope, condition, cacherequest, traversaloptions, root, found)
+  end
+  def find_all_with_options_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_with_options_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElementArray*, HRESULT)).call(scope, condition, cacherequest, traversaloptions, root, found)
+  end
+  def get_current_metadata_value(targetid : Int32, metadataid : Int32, returnval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_metadata_value.unsafe_as(Proc(Int32, Int32, VARIANT*, HRESULT)).call(targetid, metadataid, returnval)
+  end
+  def get_current_heading_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_heading_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_heading_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_heading_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationElement9
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_focus : HRESULT
+    @lpVtbl.value.set_focus.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_runtime_id(runtimeid : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_runtime_id.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(runtimeid)
+  end
+  def find_first(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElement*, HRESULT)).call(scope, condition, found)
+  end
+  def find_all(scope : TreeScope, condition : IUIAutomationCondition, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationElementArray*, HRESULT)).call(scope, condition, found)
+  end
+  def find_first_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def find_all_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, IUIAutomationElementArray*, HRESULT)).call(scope, condition, cacherequest, found)
+  end
+  def build_updated_cache(cacherequest : IUIAutomationCacheRequest, updatedelement : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.build_updated_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, updatedelement)
+  end
+  def get_current_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_current_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_cached_property_value(propertyid : Int32, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(propertyid, retval)
+  end
+  def get_cached_property_value_ex(propertyid : Int32, ignoredefaultvalue : LibC::BOOL, retval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_cached_property_value_ex.unsafe_as(Proc(Int32, LibC::BOOL, VARIANT*, HRESULT)).call(propertyid, ignoredefaultvalue, retval)
+  end
+  def get_current_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_current_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_cached_pattern_as(patternid : Int32, riid : Guid*, patternobject : Void**) : HRESULT
+    @lpVtbl.value.get_cached_pattern_as.unsafe_as(Proc(Int32, Guid*, Void**, HRESULT)).call(patternid, riid, patternobject)
+  end
+  def get_current_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_current_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_pattern(patternid : Int32, patternobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_cached_pattern.unsafe_as(Proc(Int32, IUnknown*, HRESULT)).call(patternid, patternobject)
+  end
+  def get_cached_parent(parent : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_parent.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(parent)
+  end
+  def get_cached_children(children : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_children.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(children)
+  end
+  def get_current_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_current_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_current_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_current_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_current_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_current_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_current_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_current_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_current_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_process_id(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_process_id.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_control_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_control_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_localized_control_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_control_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_accelerator_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_accelerator_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_access_key(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_access_key.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_has_keyboard_focus(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_has_keyboard_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_keyboard_focusable(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_keyboard_focusable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_enabled(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_automation_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_automation_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_class_name(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_help_text(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_help_text.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_culture(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_culture.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_is_control_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_control_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_content_element(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_content_element.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_password(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_password.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_native_window_handle(retval : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_cached_native_window_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(retval)
+  end
+  def get_cached_item_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_offscreen(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_offscreen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_orientation(retval : OrientationType*) : HRESULT
+    @lpVtbl.value.get_cached_orientation.unsafe_as(Proc(OrientationType*, HRESULT)).call(retval)
+  end
+  def get_cached_framework_id(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_framework_id.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_required_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_required_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_item_status(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_item_status.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_bounding_rectangle(retval : RECT*) : HRESULT
+    @lpVtbl.value.get_cached_bounding_rectangle.unsafe_as(Proc(RECT*, HRESULT)).call(retval)
+  end
+  def get_cached_labeled_by(retval : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_cached_labeled_by.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(retval)
+  end
+  def get_cached_aria_role(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_role.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_aria_properties(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_aria_properties.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_is_data_valid_for_form(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_data_valid_for_form.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_controller_for(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_controller_for.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_described_by(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_described_by.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_to(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_to.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_provider_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_provider_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_clickable_point(clickable : POINT*, gotclickable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_clickable_point.unsafe_as(Proc(POINT*, LibC::BOOL*, HRESULT)).call(clickable, gotclickable)
+  end
+  def get_current_optimize_for_visual_content(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_optimize_for_visual_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_optimize_for_visual_content(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_optimize_for_visual_content.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_live_setting(retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_current_live_setting.unsafe_as(Proc(LiveSetting*, HRESULT)).call(retval)
+  end
+  def get_cached_live_setting(retval : LiveSetting*) : HRESULT
+    @lpVtbl.value.get_cached_live_setting.unsafe_as(Proc(LiveSetting*, HRESULT)).call(retval)
+  end
+  def get_current_flows_from(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_flows_from.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_flows_from(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_flows_from.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def show_context_menu : HRESULT
+    @lpVtbl.value.show_context_menu.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_current_is_peripheral(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_peripheral.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_peripheral(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_peripheral.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_current_position_in_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_position_in_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_size_of_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_size_of_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_annotation_types(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_current_annotation_types.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_current_annotation_objects(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_current_annotation_objects.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_cached_position_in_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_position_in_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_size_of_set(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_size_of_set.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_annotation_types(retval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_cached_annotation_types.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(retval)
+  end
+  def get_cached_annotation_objects(retval : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.get_cached_annotation_objects.unsafe_as(Proc(IUIAutomationElementArray*, HRESULT)).call(retval)
+  end
+  def get_current_landmark_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_landmark_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_localized_landmark_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_localized_landmark_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_landmark_type(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_landmark_type.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_localized_landmark_type(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_localized_landmark_type.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_current_full_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_current_full_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def get_cached_full_description(retval : UInt8**) : HRESULT
+    @lpVtbl.value.get_cached_full_description.unsafe_as(Proc(UInt8**, HRESULT)).call(retval)
+  end
+  def find_first_with_options(scope : TreeScope, condition : IUIAutomationCondition, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_with_options.unsafe_as(Proc(TreeScope, IUIAutomationCondition, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElement*, HRESULT)).call(scope, condition, traversaloptions, root, found)
+  end
+  def find_all_with_options(scope : TreeScope, condition : IUIAutomationCondition, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_with_options.unsafe_as(Proc(TreeScope, IUIAutomationCondition, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElementArray*, HRESULT)).call(scope, condition, traversaloptions, root, found)
+  end
+  def find_first_with_options_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.find_first_with_options_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElement*, HRESULT)).call(scope, condition, cacherequest, traversaloptions, root, found)
+  end
+  def find_all_with_options_build_cache(scope : TreeScope, condition : IUIAutomationCondition, cacherequest : IUIAutomationCacheRequest, traversaloptions : TreeTraversalOptions, root : IUIAutomationElement, found : IUIAutomationElementArray*) : HRESULT
+    @lpVtbl.value.find_all_with_options_build_cache.unsafe_as(Proc(TreeScope, IUIAutomationCondition, IUIAutomationCacheRequest, TreeTraversalOptions, IUIAutomationElement, IUIAutomationElementArray*, HRESULT)).call(scope, condition, cacherequest, traversaloptions, root, found)
+  end
+  def get_current_metadata_value(targetid : Int32, metadataid : Int32, returnval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_current_metadata_value.unsafe_as(Proc(Int32, Int32, VARIANT*, HRESULT)).call(targetid, metadataid, returnval)
+  end
+  def get_current_heading_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_current_heading_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_cached_heading_level(retval : Int32*) : HRESULT
+    @lpVtbl.value.get_cached_heading_level.unsafe_as(Proc(Int32*, HRESULT)).call(retval)
+  end
+  def get_current_is_dialog(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_current_is_dialog.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+  def get_cached_is_dialog(retval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_cached_is_dialog.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(retval)
+  end
+end
+struct LibWin32::IUIAutomationProxyFactory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_provider(hwnd : LibC::HANDLE, idobject : Int32, idchild : Int32, provider : IRawElementProviderSimple*) : HRESULT
+    @lpVtbl.value.create_provider.unsafe_as(Proc(LibC::HANDLE, Int32, Int32, IRawElementProviderSimple*, HRESULT)).call(hwnd, idobject, idchild, provider)
+  end
+  def get_proxy_factory_id(factoryid : UInt8**) : HRESULT
+    @lpVtbl.value.get_proxy_factory_id.unsafe_as(Proc(UInt8**, HRESULT)).call(factoryid)
+  end
+end
+struct LibWin32::IUIAutomationProxyFactoryEntry
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_proxy_factory(factory : IUIAutomationProxyFactory*) : HRESULT
+    @lpVtbl.value.get_proxy_factory.unsafe_as(Proc(IUIAutomationProxyFactory*, HRESULT)).call(factory)
+  end
+  def get_class_name(classname : UInt8**) : HRESULT
+    @lpVtbl.value.get_class_name.unsafe_as(Proc(UInt8**, HRESULT)).call(classname)
+  end
+  def get_image_name(imagename : UInt8**) : HRESULT
+    @lpVtbl.value.get_image_name.unsafe_as(Proc(UInt8**, HRESULT)).call(imagename)
+  end
+  def get_allow_substring_match(allowsubstringmatch : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_allow_substring_match.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(allowsubstringmatch)
+  end
+  def get_can_check_base_class(cancheckbaseclass : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_check_base_class.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(cancheckbaseclass)
+  end
+  def get_needs_advise_events(adviseevents : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_needs_advise_events.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(adviseevents)
+  end
+  def put_class_name(classname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_class_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(classname)
+  end
+  def put_image_name(imagename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_image_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(imagename)
+  end
+  def put_allow_substring_match(allowsubstringmatch : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_allow_substring_match.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(allowsubstringmatch)
+  end
+  def put_can_check_base_class(cancheckbaseclass : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_can_check_base_class.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(cancheckbaseclass)
+  end
+  def put_needs_advise_events(adviseevents : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_needs_advise_events.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(adviseevents)
+  end
+  def set_win_events_for_automation_event(eventid : Int32, propertyid : Int32, winevents : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.set_win_events_for_automation_event.unsafe_as(Proc(Int32, Int32, SAFEARRAY*, HRESULT)).call(eventid, propertyid, winevents)
+  end
+  def get_win_events_for_automation_event(eventid : Int32, propertyid : Int32, winevents : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_win_events_for_automation_event.unsafe_as(Proc(Int32, Int32, SAFEARRAY**, HRESULT)).call(eventid, propertyid, winevents)
+  end
+end
+struct LibWin32::IUIAutomationProxyFactoryMapping
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_table(table : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_table.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(table)
+  end
+  def get_entry(index : UInt32, entry : IUIAutomationProxyFactoryEntry*) : HRESULT
+    @lpVtbl.value.get_entry.unsafe_as(Proc(UInt32, IUIAutomationProxyFactoryEntry*, HRESULT)).call(index, entry)
+  end
+  def set_table(factorylist : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.set_table.unsafe_as(Proc(SAFEARRAY*, HRESULT)).call(factorylist)
+  end
+  def insert_entries(before : UInt32, factorylist : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.insert_entries.unsafe_as(Proc(UInt32, SAFEARRAY*, HRESULT)).call(before, factorylist)
+  end
+  def insert_entry(before : UInt32, factory : IUIAutomationProxyFactoryEntry) : HRESULT
+    @lpVtbl.value.insert_entry.unsafe_as(Proc(UInt32, IUIAutomationProxyFactoryEntry, HRESULT)).call(before, factory)
+  end
+  def remove_entry(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_entry.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+  def clear_table : HRESULT
+    @lpVtbl.value.clear_table.unsafe_as(Proc(HRESULT)).call
+  end
+  def restore_default_table : HRESULT
+    @lpVtbl.value.restore_default_table.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IUIAutomationEventHandlerGroup
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_active_text_position_changed_event_handler(scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationActiveTextPositionChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_active_text_position_changed_event_handler.unsafe_as(Proc(TreeScope, IUIAutomationCacheRequest, IUIAutomationActiveTextPositionChangedEventHandler, HRESULT)).call(scope, cacherequest, handler)
+  end
+  def add_automation_event_handler(eventid : Int32, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.add_automation_event_handler.unsafe_as(Proc(Int32, TreeScope, IUIAutomationCacheRequest, IUIAutomationEventHandler, HRESULT)).call(eventid, scope, cacherequest, handler)
+  end
+  def add_changes_event_handler(scope : TreeScope, changetypes : Int32*, changescount : Int32, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationChangesEventHandler) : HRESULT
+    @lpVtbl.value.add_changes_event_handler.unsafe_as(Proc(TreeScope, Int32*, Int32, IUIAutomationCacheRequest, IUIAutomationChangesEventHandler, HRESULT)).call(scope, changetypes, changescount, cacherequest, handler)
+  end
+  def add_notification_event_handler(scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationNotificationEventHandler) : HRESULT
+    @lpVtbl.value.add_notification_event_handler.unsafe_as(Proc(TreeScope, IUIAutomationCacheRequest, IUIAutomationNotificationEventHandler, HRESULT)).call(scope, cacherequest, handler)
+  end
+  def add_property_changed_event_handler(scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : Int32*, propertycount : Int32) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler.unsafe_as(Proc(TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, Int32*, Int32, HRESULT)).call(scope, cacherequest, handler, propertyarray, propertycount)
+  end
+  def add_structure_changed_event_handler(scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_structure_changed_event_handler.unsafe_as(Proc(TreeScope, IUIAutomationCacheRequest, IUIAutomationStructureChangedEventHandler, HRESULT)).call(scope, cacherequest, handler)
+  end
+  def add_text_edit_text_changed_event_handler(scope : TreeScope, texteditchangetype : TextEditChangeType, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_text_edit_text_changed_event_handler.unsafe_as(Proc(TreeScope, TextEditChangeType, IUIAutomationCacheRequest, IUIAutomationTextEditTextChangedEventHandler, HRESULT)).call(scope, texteditchangetype, cacherequest, handler)
+  end
+end
+struct LibWin32::IUIAutomation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def compare_elements(el1 : IUIAutomationElement, el2 : IUIAutomationElement, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_elements.unsafe_as(Proc(IUIAutomationElement, IUIAutomationElement, LibC::BOOL*, HRESULT)).call(el1, el2, aresame)
+  end
+  def compare_runtime_ids(runtimeid1 : SAFEARRAY*, runtimeid2 : SAFEARRAY*, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_runtime_ids.unsafe_as(Proc(SAFEARRAY*, SAFEARRAY*, LibC::BOOL*, HRESULT)).call(runtimeid1, runtimeid2, aresame)
+  end
+  def get_root_element(root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(root)
+  end
+  def element_from_handle(hwnd : LibC::HANDLE, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle.unsafe_as(Proc(LibC::HANDLE, IUIAutomationElement*, HRESULT)).call(hwnd, element)
+  end
+  def element_from_point(pt : POINT, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point.unsafe_as(Proc(POINT, IUIAutomationElement*, HRESULT)).call(pt, element)
+  end
+  def get_focused_element(element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(element)
+  end
+  def get_root_element_build_cache(cacherequest : IUIAutomationCacheRequest, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element_build_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, root)
+  end
+  def element_from_handle_build_cache(hwnd : LibC::HANDLE, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle_build_cache.unsafe_as(Proc(LibC::HANDLE, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(hwnd, cacherequest, element)
+  end
+  def element_from_point_build_cache(pt : POINT, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point_build_cache.unsafe_as(Proc(POINT, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(pt, cacherequest, element)
+  end
+  def get_focused_element_build_cache(cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element_build_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, element)
+  end
+  def create_tree_walker(pcondition : IUIAutomationCondition, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.create_tree_walker.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationTreeWalker*, HRESULT)).call(pcondition, walker)
+  end
+  def get_control_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_control_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_content_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_content_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_raw_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_raw_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_raw_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_raw_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def get_control_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_control_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def get_content_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_content_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def create_cache_request(cacherequest : IUIAutomationCacheRequest*) : HRESULT
+    @lpVtbl.value.create_cache_request.unsafe_as(Proc(IUIAutomationCacheRequest*, HRESULT)).call(cacherequest)
+  end
+  def create_true_condition(newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_true_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(newcondition)
+  end
+  def create_false_condition(newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_false_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(newcondition)
+  end
+  def create_property_condition(propertyid : Int32, value : VARIANT, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition.unsafe_as(Proc(Int32, VARIANT, IUIAutomationCondition*, HRESULT)).call(propertyid, value, newcondition)
+  end
+  def create_property_condition_ex(propertyid : Int32, value : VARIANT, flags : PropertyConditionFlags, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition_ex.unsafe_as(Proc(Int32, VARIANT, PropertyConditionFlags, IUIAutomationCondition*, HRESULT)).call(propertyid, value, flags, newcondition)
+  end
+  def create_and_condition(condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition1, condition2, newcondition)
+  end
+  def create_and_condition_from_array(conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_array.unsafe_as(Proc(SAFEARRAY*, IUIAutomationCondition*, HRESULT)).call(conditions, newcondition)
+  end
+  def create_and_condition_from_native_array(conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_native_array.unsafe_as(Proc(IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)).call(conditions, conditioncount, newcondition)
+  end
+  def create_or_condition(condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition1, condition2, newcondition)
+  end
+  def create_or_condition_from_array(conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_array.unsafe_as(Proc(SAFEARRAY*, IUIAutomationCondition*, HRESULT)).call(conditions, newcondition)
+  end
+  def create_or_condition_from_native_array(conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_native_array.unsafe_as(Proc(IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)).call(conditions, conditioncount, newcondition)
+  end
+  def create_not_condition(condition : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_not_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition, newcondition)
+  end
+  def add_automation_event_handler(eventid : Int32, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.add_automation_event_handler.unsafe_as(Proc(Int32, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationEventHandler, HRESULT)).call(eventid, element, scope, cacherequest, handler)
+  end
+  def remove_automation_event_handler(eventid : Int32, element : IUIAutomationElement, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.remove_automation_event_handler.unsafe_as(Proc(Int32, IUIAutomationElement, IUIAutomationEventHandler, HRESULT)).call(eventid, element, handler)
+  end
+  def add_property_changed_event_handler_native_array(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : Int32*, propertycount : Int32) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler_native_array.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, Int32*, Int32, HRESULT)).call(element, scope, cacherequest, handler, propertyarray, propertycount)
+  end
+  def add_property_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, SAFEARRAY*, HRESULT)).call(element, scope, cacherequest, handler, propertyarray)
+  end
+  def remove_property_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationPropertyChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_property_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationPropertyChangedEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_structure_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_structure_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationStructureChangedEventHandler, HRESULT)).call(element, scope, cacherequest, handler)
+  end
+  def remove_structure_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_structure_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationStructureChangedEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_focus_changed_event_handler(cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_focus_changed_event_handler.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationFocusChangedEventHandler, HRESULT)).call(cacherequest, handler)
+  end
+  def remove_focus_changed_event_handler(handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_focus_changed_event_handler.unsafe_as(Proc(IUIAutomationFocusChangedEventHandler, HRESULT)).call(handler)
+  end
+  def remove_all_event_handlers : HRESULT
+    @lpVtbl.value.remove_all_event_handlers.unsafe_as(Proc(HRESULT)).call
+  end
+  def int_native_array_to_safe_array(array : Int32*, arraycount : Int32, safearray : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.int_native_array_to_safe_array.unsafe_as(Proc(Int32*, Int32, SAFEARRAY**, HRESULT)).call(array, arraycount, safearray)
+  end
+  def int_safe_array_to_native_array(intarray : SAFEARRAY*, array : Int32**, arraycount : Int32*) : HRESULT
+    @lpVtbl.value.int_safe_array_to_native_array.unsafe_as(Proc(SAFEARRAY*, Int32**, Int32*, HRESULT)).call(intarray, array, arraycount)
+  end
+  def rect_to_variant(rc : RECT, var : VARIANT*) : HRESULT
+    @lpVtbl.value.rect_to_variant.unsafe_as(Proc(RECT, VARIANT*, HRESULT)).call(rc, var)
+  end
+  def variant_to_rect(var : VARIANT, rc : RECT*) : HRESULT
+    @lpVtbl.value.variant_to_rect.unsafe_as(Proc(VARIANT, RECT*, HRESULT)).call(var, rc)
+  end
+  def safe_array_to_rect_native_array(rects : SAFEARRAY*, rectarray : RECT**, rectarraycount : Int32*) : HRESULT
+    @lpVtbl.value.safe_array_to_rect_native_array.unsafe_as(Proc(SAFEARRAY*, RECT**, Int32*, HRESULT)).call(rects, rectarray, rectarraycount)
+  end
+  def create_proxy_factory_entry(factory : IUIAutomationProxyFactory, factoryentry : IUIAutomationProxyFactoryEntry*) : HRESULT
+    @lpVtbl.value.create_proxy_factory_entry.unsafe_as(Proc(IUIAutomationProxyFactory, IUIAutomationProxyFactoryEntry*, HRESULT)).call(factory, factoryentry)
+  end
+  def get_proxy_factory_mapping(factorymapping : IUIAutomationProxyFactoryMapping*) : HRESULT
+    @lpVtbl.value.get_proxy_factory_mapping.unsafe_as(Proc(IUIAutomationProxyFactoryMapping*, HRESULT)).call(factorymapping)
+  end
+  def get_property_programmatic_name(property : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_programmatic_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(property, name)
+  end
+  def get_pattern_programmatic_name(pattern : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_pattern_programmatic_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(pattern, name)
+  end
+  def poll_for_potential_supported_patterns(pelement : IUIAutomationElement, patternids : SAFEARRAY**, patternnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_patterns.unsafe_as(Proc(IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)).call(pelement, patternids, patternnames)
+  end
+  def poll_for_potential_supported_properties(pelement : IUIAutomationElement, propertyids : SAFEARRAY**, propertynames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_properties.unsafe_as(Proc(IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)).call(pelement, propertyids, propertynames)
+  end
+  def check_not_supported(value : VARIANT, isnotsupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_not_supported.unsafe_as(Proc(VARIANT, LibC::BOOL*, HRESULT)).call(value, isnotsupported)
+  end
+  def get_reserved_not_supported_value(notsupportedvalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_not_supported_value.unsafe_as(Proc(IUnknown*, HRESULT)).call(notsupportedvalue)
+  end
+  def get_reserved_mixed_attribute_value(mixedattributevalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_mixed_attribute_value.unsafe_as(Proc(IUnknown*, HRESULT)).call(mixedattributevalue)
+  end
+  def element_from_i_accessible(accessible : IAccessible, childid : Int32, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible.unsafe_as(Proc(IAccessible, Int32, IUIAutomationElement*, HRESULT)).call(accessible, childid, element)
+  end
+  def element_from_i_accessible_build_cache(accessible : IAccessible, childid : Int32, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible_build_cache.unsafe_as(Proc(IAccessible, Int32, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(accessible, childid, cacherequest, element)
+  end
+end
+struct LibWin32::IUIAutomation2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def compare_elements(el1 : IUIAutomationElement, el2 : IUIAutomationElement, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_elements.unsafe_as(Proc(IUIAutomationElement, IUIAutomationElement, LibC::BOOL*, HRESULT)).call(el1, el2, aresame)
+  end
+  def compare_runtime_ids(runtimeid1 : SAFEARRAY*, runtimeid2 : SAFEARRAY*, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_runtime_ids.unsafe_as(Proc(SAFEARRAY*, SAFEARRAY*, LibC::BOOL*, HRESULT)).call(runtimeid1, runtimeid2, aresame)
+  end
+  def get_root_element(root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(root)
+  end
+  def element_from_handle(hwnd : LibC::HANDLE, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle.unsafe_as(Proc(LibC::HANDLE, IUIAutomationElement*, HRESULT)).call(hwnd, element)
+  end
+  def element_from_point(pt : POINT, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point.unsafe_as(Proc(POINT, IUIAutomationElement*, HRESULT)).call(pt, element)
+  end
+  def get_focused_element(element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(element)
+  end
+  def get_root_element_build_cache(cacherequest : IUIAutomationCacheRequest, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element_build_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, root)
+  end
+  def element_from_handle_build_cache(hwnd : LibC::HANDLE, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle_build_cache.unsafe_as(Proc(LibC::HANDLE, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(hwnd, cacherequest, element)
+  end
+  def element_from_point_build_cache(pt : POINT, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point_build_cache.unsafe_as(Proc(POINT, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(pt, cacherequest, element)
+  end
+  def get_focused_element_build_cache(cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element_build_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, element)
+  end
+  def create_tree_walker(pcondition : IUIAutomationCondition, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.create_tree_walker.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationTreeWalker*, HRESULT)).call(pcondition, walker)
+  end
+  def get_control_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_control_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_content_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_content_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_raw_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_raw_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_raw_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_raw_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def get_control_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_control_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def get_content_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_content_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def create_cache_request(cacherequest : IUIAutomationCacheRequest*) : HRESULT
+    @lpVtbl.value.create_cache_request.unsafe_as(Proc(IUIAutomationCacheRequest*, HRESULT)).call(cacherequest)
+  end
+  def create_true_condition(newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_true_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(newcondition)
+  end
+  def create_false_condition(newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_false_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(newcondition)
+  end
+  def create_property_condition(propertyid : Int32, value : VARIANT, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition.unsafe_as(Proc(Int32, VARIANT, IUIAutomationCondition*, HRESULT)).call(propertyid, value, newcondition)
+  end
+  def create_property_condition_ex(propertyid : Int32, value : VARIANT, flags : PropertyConditionFlags, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition_ex.unsafe_as(Proc(Int32, VARIANT, PropertyConditionFlags, IUIAutomationCondition*, HRESULT)).call(propertyid, value, flags, newcondition)
+  end
+  def create_and_condition(condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition1, condition2, newcondition)
+  end
+  def create_and_condition_from_array(conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_array.unsafe_as(Proc(SAFEARRAY*, IUIAutomationCondition*, HRESULT)).call(conditions, newcondition)
+  end
+  def create_and_condition_from_native_array(conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_native_array.unsafe_as(Proc(IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)).call(conditions, conditioncount, newcondition)
+  end
+  def create_or_condition(condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition1, condition2, newcondition)
+  end
+  def create_or_condition_from_array(conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_array.unsafe_as(Proc(SAFEARRAY*, IUIAutomationCondition*, HRESULT)).call(conditions, newcondition)
+  end
+  def create_or_condition_from_native_array(conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_native_array.unsafe_as(Proc(IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)).call(conditions, conditioncount, newcondition)
+  end
+  def create_not_condition(condition : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_not_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition, newcondition)
+  end
+  def add_automation_event_handler(eventid : Int32, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.add_automation_event_handler.unsafe_as(Proc(Int32, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationEventHandler, HRESULT)).call(eventid, element, scope, cacherequest, handler)
+  end
+  def remove_automation_event_handler(eventid : Int32, element : IUIAutomationElement, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.remove_automation_event_handler.unsafe_as(Proc(Int32, IUIAutomationElement, IUIAutomationEventHandler, HRESULT)).call(eventid, element, handler)
+  end
+  def add_property_changed_event_handler_native_array(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : Int32*, propertycount : Int32) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler_native_array.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, Int32*, Int32, HRESULT)).call(element, scope, cacherequest, handler, propertyarray, propertycount)
+  end
+  def add_property_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, SAFEARRAY*, HRESULT)).call(element, scope, cacherequest, handler, propertyarray)
+  end
+  def remove_property_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationPropertyChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_property_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationPropertyChangedEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_structure_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_structure_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationStructureChangedEventHandler, HRESULT)).call(element, scope, cacherequest, handler)
+  end
+  def remove_structure_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_structure_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationStructureChangedEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_focus_changed_event_handler(cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_focus_changed_event_handler.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationFocusChangedEventHandler, HRESULT)).call(cacherequest, handler)
+  end
+  def remove_focus_changed_event_handler(handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_focus_changed_event_handler.unsafe_as(Proc(IUIAutomationFocusChangedEventHandler, HRESULT)).call(handler)
+  end
+  def remove_all_event_handlers : HRESULT
+    @lpVtbl.value.remove_all_event_handlers.unsafe_as(Proc(HRESULT)).call
+  end
+  def int_native_array_to_safe_array(array : Int32*, arraycount : Int32, safearray : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.int_native_array_to_safe_array.unsafe_as(Proc(Int32*, Int32, SAFEARRAY**, HRESULT)).call(array, arraycount, safearray)
+  end
+  def int_safe_array_to_native_array(intarray : SAFEARRAY*, array : Int32**, arraycount : Int32*) : HRESULT
+    @lpVtbl.value.int_safe_array_to_native_array.unsafe_as(Proc(SAFEARRAY*, Int32**, Int32*, HRESULT)).call(intarray, array, arraycount)
+  end
+  def rect_to_variant(rc : RECT, var : VARIANT*) : HRESULT
+    @lpVtbl.value.rect_to_variant.unsafe_as(Proc(RECT, VARIANT*, HRESULT)).call(rc, var)
+  end
+  def variant_to_rect(var : VARIANT, rc : RECT*) : HRESULT
+    @lpVtbl.value.variant_to_rect.unsafe_as(Proc(VARIANT, RECT*, HRESULT)).call(var, rc)
+  end
+  def safe_array_to_rect_native_array(rects : SAFEARRAY*, rectarray : RECT**, rectarraycount : Int32*) : HRESULT
+    @lpVtbl.value.safe_array_to_rect_native_array.unsafe_as(Proc(SAFEARRAY*, RECT**, Int32*, HRESULT)).call(rects, rectarray, rectarraycount)
+  end
+  def create_proxy_factory_entry(factory : IUIAutomationProxyFactory, factoryentry : IUIAutomationProxyFactoryEntry*) : HRESULT
+    @lpVtbl.value.create_proxy_factory_entry.unsafe_as(Proc(IUIAutomationProxyFactory, IUIAutomationProxyFactoryEntry*, HRESULT)).call(factory, factoryentry)
+  end
+  def get_proxy_factory_mapping(factorymapping : IUIAutomationProxyFactoryMapping*) : HRESULT
+    @lpVtbl.value.get_proxy_factory_mapping.unsafe_as(Proc(IUIAutomationProxyFactoryMapping*, HRESULT)).call(factorymapping)
+  end
+  def get_property_programmatic_name(property : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_programmatic_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(property, name)
+  end
+  def get_pattern_programmatic_name(pattern : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_pattern_programmatic_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(pattern, name)
+  end
+  def poll_for_potential_supported_patterns(pelement : IUIAutomationElement, patternids : SAFEARRAY**, patternnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_patterns.unsafe_as(Proc(IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)).call(pelement, patternids, patternnames)
+  end
+  def poll_for_potential_supported_properties(pelement : IUIAutomationElement, propertyids : SAFEARRAY**, propertynames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_properties.unsafe_as(Proc(IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)).call(pelement, propertyids, propertynames)
+  end
+  def check_not_supported(value : VARIANT, isnotsupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_not_supported.unsafe_as(Proc(VARIANT, LibC::BOOL*, HRESULT)).call(value, isnotsupported)
+  end
+  def get_reserved_not_supported_value(notsupportedvalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_not_supported_value.unsafe_as(Proc(IUnknown*, HRESULT)).call(notsupportedvalue)
+  end
+  def get_reserved_mixed_attribute_value(mixedattributevalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_mixed_attribute_value.unsafe_as(Proc(IUnknown*, HRESULT)).call(mixedattributevalue)
+  end
+  def element_from_i_accessible(accessible : IAccessible, childid : Int32, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible.unsafe_as(Proc(IAccessible, Int32, IUIAutomationElement*, HRESULT)).call(accessible, childid, element)
+  end
+  def element_from_i_accessible_build_cache(accessible : IAccessible, childid : Int32, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible_build_cache.unsafe_as(Proc(IAccessible, Int32, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(accessible, childid, cacherequest, element)
+  end
+  def get_auto_set_focus(autosetfocus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_auto_set_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(autosetfocus)
+  end
+  def put_auto_set_focus(autosetfocus : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_auto_set_focus.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(autosetfocus)
+  end
+  def get_connection_timeout(timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_connection_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(timeout)
+  end
+  def put_connection_timeout(timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_connection_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(timeout)
+  end
+  def get_transaction_timeout(timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_transaction_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(timeout)
+  end
+  def put_transaction_timeout(timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_transaction_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(timeout)
+  end
+end
+struct LibWin32::IUIAutomation3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def compare_elements(el1 : IUIAutomationElement, el2 : IUIAutomationElement, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_elements.unsafe_as(Proc(IUIAutomationElement, IUIAutomationElement, LibC::BOOL*, HRESULT)).call(el1, el2, aresame)
+  end
+  def compare_runtime_ids(runtimeid1 : SAFEARRAY*, runtimeid2 : SAFEARRAY*, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_runtime_ids.unsafe_as(Proc(SAFEARRAY*, SAFEARRAY*, LibC::BOOL*, HRESULT)).call(runtimeid1, runtimeid2, aresame)
+  end
+  def get_root_element(root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(root)
+  end
+  def element_from_handle(hwnd : LibC::HANDLE, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle.unsafe_as(Proc(LibC::HANDLE, IUIAutomationElement*, HRESULT)).call(hwnd, element)
+  end
+  def element_from_point(pt : POINT, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point.unsafe_as(Proc(POINT, IUIAutomationElement*, HRESULT)).call(pt, element)
+  end
+  def get_focused_element(element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(element)
+  end
+  def get_root_element_build_cache(cacherequest : IUIAutomationCacheRequest, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element_build_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, root)
+  end
+  def element_from_handle_build_cache(hwnd : LibC::HANDLE, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle_build_cache.unsafe_as(Proc(LibC::HANDLE, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(hwnd, cacherequest, element)
+  end
+  def element_from_point_build_cache(pt : POINT, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point_build_cache.unsafe_as(Proc(POINT, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(pt, cacherequest, element)
+  end
+  def get_focused_element_build_cache(cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element_build_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, element)
+  end
+  def create_tree_walker(pcondition : IUIAutomationCondition, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.create_tree_walker.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationTreeWalker*, HRESULT)).call(pcondition, walker)
+  end
+  def get_control_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_control_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_content_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_content_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_raw_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_raw_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_raw_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_raw_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def get_control_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_control_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def get_content_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_content_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def create_cache_request(cacherequest : IUIAutomationCacheRequest*) : HRESULT
+    @lpVtbl.value.create_cache_request.unsafe_as(Proc(IUIAutomationCacheRequest*, HRESULT)).call(cacherequest)
+  end
+  def create_true_condition(newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_true_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(newcondition)
+  end
+  def create_false_condition(newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_false_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(newcondition)
+  end
+  def create_property_condition(propertyid : Int32, value : VARIANT, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition.unsafe_as(Proc(Int32, VARIANT, IUIAutomationCondition*, HRESULT)).call(propertyid, value, newcondition)
+  end
+  def create_property_condition_ex(propertyid : Int32, value : VARIANT, flags : PropertyConditionFlags, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition_ex.unsafe_as(Proc(Int32, VARIANT, PropertyConditionFlags, IUIAutomationCondition*, HRESULT)).call(propertyid, value, flags, newcondition)
+  end
+  def create_and_condition(condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition1, condition2, newcondition)
+  end
+  def create_and_condition_from_array(conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_array.unsafe_as(Proc(SAFEARRAY*, IUIAutomationCondition*, HRESULT)).call(conditions, newcondition)
+  end
+  def create_and_condition_from_native_array(conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_native_array.unsafe_as(Proc(IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)).call(conditions, conditioncount, newcondition)
+  end
+  def create_or_condition(condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition1, condition2, newcondition)
+  end
+  def create_or_condition_from_array(conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_array.unsafe_as(Proc(SAFEARRAY*, IUIAutomationCondition*, HRESULT)).call(conditions, newcondition)
+  end
+  def create_or_condition_from_native_array(conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_native_array.unsafe_as(Proc(IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)).call(conditions, conditioncount, newcondition)
+  end
+  def create_not_condition(condition : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_not_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition, newcondition)
+  end
+  def add_automation_event_handler(eventid : Int32, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.add_automation_event_handler.unsafe_as(Proc(Int32, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationEventHandler, HRESULT)).call(eventid, element, scope, cacherequest, handler)
+  end
+  def remove_automation_event_handler(eventid : Int32, element : IUIAutomationElement, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.remove_automation_event_handler.unsafe_as(Proc(Int32, IUIAutomationElement, IUIAutomationEventHandler, HRESULT)).call(eventid, element, handler)
+  end
+  def add_property_changed_event_handler_native_array(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : Int32*, propertycount : Int32) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler_native_array.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, Int32*, Int32, HRESULT)).call(element, scope, cacherequest, handler, propertyarray, propertycount)
+  end
+  def add_property_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, SAFEARRAY*, HRESULT)).call(element, scope, cacherequest, handler, propertyarray)
+  end
+  def remove_property_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationPropertyChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_property_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationPropertyChangedEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_structure_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_structure_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationStructureChangedEventHandler, HRESULT)).call(element, scope, cacherequest, handler)
+  end
+  def remove_structure_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_structure_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationStructureChangedEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_focus_changed_event_handler(cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_focus_changed_event_handler.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationFocusChangedEventHandler, HRESULT)).call(cacherequest, handler)
+  end
+  def remove_focus_changed_event_handler(handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_focus_changed_event_handler.unsafe_as(Proc(IUIAutomationFocusChangedEventHandler, HRESULT)).call(handler)
+  end
+  def remove_all_event_handlers : HRESULT
+    @lpVtbl.value.remove_all_event_handlers.unsafe_as(Proc(HRESULT)).call
+  end
+  def int_native_array_to_safe_array(array : Int32*, arraycount : Int32, safearray : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.int_native_array_to_safe_array.unsafe_as(Proc(Int32*, Int32, SAFEARRAY**, HRESULT)).call(array, arraycount, safearray)
+  end
+  def int_safe_array_to_native_array(intarray : SAFEARRAY*, array : Int32**, arraycount : Int32*) : HRESULT
+    @lpVtbl.value.int_safe_array_to_native_array.unsafe_as(Proc(SAFEARRAY*, Int32**, Int32*, HRESULT)).call(intarray, array, arraycount)
+  end
+  def rect_to_variant(rc : RECT, var : VARIANT*) : HRESULT
+    @lpVtbl.value.rect_to_variant.unsafe_as(Proc(RECT, VARIANT*, HRESULT)).call(rc, var)
+  end
+  def variant_to_rect(var : VARIANT, rc : RECT*) : HRESULT
+    @lpVtbl.value.variant_to_rect.unsafe_as(Proc(VARIANT, RECT*, HRESULT)).call(var, rc)
+  end
+  def safe_array_to_rect_native_array(rects : SAFEARRAY*, rectarray : RECT**, rectarraycount : Int32*) : HRESULT
+    @lpVtbl.value.safe_array_to_rect_native_array.unsafe_as(Proc(SAFEARRAY*, RECT**, Int32*, HRESULT)).call(rects, rectarray, rectarraycount)
+  end
+  def create_proxy_factory_entry(factory : IUIAutomationProxyFactory, factoryentry : IUIAutomationProxyFactoryEntry*) : HRESULT
+    @lpVtbl.value.create_proxy_factory_entry.unsafe_as(Proc(IUIAutomationProxyFactory, IUIAutomationProxyFactoryEntry*, HRESULT)).call(factory, factoryentry)
+  end
+  def get_proxy_factory_mapping(factorymapping : IUIAutomationProxyFactoryMapping*) : HRESULT
+    @lpVtbl.value.get_proxy_factory_mapping.unsafe_as(Proc(IUIAutomationProxyFactoryMapping*, HRESULT)).call(factorymapping)
+  end
+  def get_property_programmatic_name(property : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_programmatic_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(property, name)
+  end
+  def get_pattern_programmatic_name(pattern : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_pattern_programmatic_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(pattern, name)
+  end
+  def poll_for_potential_supported_patterns(pelement : IUIAutomationElement, patternids : SAFEARRAY**, patternnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_patterns.unsafe_as(Proc(IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)).call(pelement, patternids, patternnames)
+  end
+  def poll_for_potential_supported_properties(pelement : IUIAutomationElement, propertyids : SAFEARRAY**, propertynames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_properties.unsafe_as(Proc(IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)).call(pelement, propertyids, propertynames)
+  end
+  def check_not_supported(value : VARIANT, isnotsupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_not_supported.unsafe_as(Proc(VARIANT, LibC::BOOL*, HRESULT)).call(value, isnotsupported)
+  end
+  def get_reserved_not_supported_value(notsupportedvalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_not_supported_value.unsafe_as(Proc(IUnknown*, HRESULT)).call(notsupportedvalue)
+  end
+  def get_reserved_mixed_attribute_value(mixedattributevalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_mixed_attribute_value.unsafe_as(Proc(IUnknown*, HRESULT)).call(mixedattributevalue)
+  end
+  def element_from_i_accessible(accessible : IAccessible, childid : Int32, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible.unsafe_as(Proc(IAccessible, Int32, IUIAutomationElement*, HRESULT)).call(accessible, childid, element)
+  end
+  def element_from_i_accessible_build_cache(accessible : IAccessible, childid : Int32, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible_build_cache.unsafe_as(Proc(IAccessible, Int32, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(accessible, childid, cacherequest, element)
+  end
+  def get_auto_set_focus(autosetfocus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_auto_set_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(autosetfocus)
+  end
+  def put_auto_set_focus(autosetfocus : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_auto_set_focus.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(autosetfocus)
+  end
+  def get_connection_timeout(timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_connection_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(timeout)
+  end
+  def put_connection_timeout(timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_connection_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(timeout)
+  end
+  def get_transaction_timeout(timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_transaction_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(timeout)
+  end
+  def put_transaction_timeout(timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_transaction_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(timeout)
+  end
+  def add_text_edit_text_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, texteditchangetype : TextEditChangeType, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_text_edit_text_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, TextEditChangeType, IUIAutomationCacheRequest, IUIAutomationTextEditTextChangedEventHandler, HRESULT)).call(element, scope, texteditchangetype, cacherequest, handler)
+  end
+  def remove_text_edit_text_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_text_edit_text_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationTextEditTextChangedEventHandler, HRESULT)).call(element, handler)
+  end
+end
+struct LibWin32::IUIAutomation4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def compare_elements(el1 : IUIAutomationElement, el2 : IUIAutomationElement, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_elements.unsafe_as(Proc(IUIAutomationElement, IUIAutomationElement, LibC::BOOL*, HRESULT)).call(el1, el2, aresame)
+  end
+  def compare_runtime_ids(runtimeid1 : SAFEARRAY*, runtimeid2 : SAFEARRAY*, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_runtime_ids.unsafe_as(Proc(SAFEARRAY*, SAFEARRAY*, LibC::BOOL*, HRESULT)).call(runtimeid1, runtimeid2, aresame)
+  end
+  def get_root_element(root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(root)
+  end
+  def element_from_handle(hwnd : LibC::HANDLE, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle.unsafe_as(Proc(LibC::HANDLE, IUIAutomationElement*, HRESULT)).call(hwnd, element)
+  end
+  def element_from_point(pt : POINT, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point.unsafe_as(Proc(POINT, IUIAutomationElement*, HRESULT)).call(pt, element)
+  end
+  def get_focused_element(element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(element)
+  end
+  def get_root_element_build_cache(cacherequest : IUIAutomationCacheRequest, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element_build_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, root)
+  end
+  def element_from_handle_build_cache(hwnd : LibC::HANDLE, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle_build_cache.unsafe_as(Proc(LibC::HANDLE, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(hwnd, cacherequest, element)
+  end
+  def element_from_point_build_cache(pt : POINT, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point_build_cache.unsafe_as(Proc(POINT, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(pt, cacherequest, element)
+  end
+  def get_focused_element_build_cache(cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element_build_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, element)
+  end
+  def create_tree_walker(pcondition : IUIAutomationCondition, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.create_tree_walker.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationTreeWalker*, HRESULT)).call(pcondition, walker)
+  end
+  def get_control_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_control_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_content_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_content_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_raw_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_raw_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_raw_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_raw_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def get_control_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_control_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def get_content_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_content_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def create_cache_request(cacherequest : IUIAutomationCacheRequest*) : HRESULT
+    @lpVtbl.value.create_cache_request.unsafe_as(Proc(IUIAutomationCacheRequest*, HRESULT)).call(cacherequest)
+  end
+  def create_true_condition(newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_true_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(newcondition)
+  end
+  def create_false_condition(newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_false_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(newcondition)
+  end
+  def create_property_condition(propertyid : Int32, value : VARIANT, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition.unsafe_as(Proc(Int32, VARIANT, IUIAutomationCondition*, HRESULT)).call(propertyid, value, newcondition)
+  end
+  def create_property_condition_ex(propertyid : Int32, value : VARIANT, flags : PropertyConditionFlags, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition_ex.unsafe_as(Proc(Int32, VARIANT, PropertyConditionFlags, IUIAutomationCondition*, HRESULT)).call(propertyid, value, flags, newcondition)
+  end
+  def create_and_condition(condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition1, condition2, newcondition)
+  end
+  def create_and_condition_from_array(conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_array.unsafe_as(Proc(SAFEARRAY*, IUIAutomationCondition*, HRESULT)).call(conditions, newcondition)
+  end
+  def create_and_condition_from_native_array(conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_native_array.unsafe_as(Proc(IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)).call(conditions, conditioncount, newcondition)
+  end
+  def create_or_condition(condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition1, condition2, newcondition)
+  end
+  def create_or_condition_from_array(conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_array.unsafe_as(Proc(SAFEARRAY*, IUIAutomationCondition*, HRESULT)).call(conditions, newcondition)
+  end
+  def create_or_condition_from_native_array(conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_native_array.unsafe_as(Proc(IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)).call(conditions, conditioncount, newcondition)
+  end
+  def create_not_condition(condition : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_not_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition, newcondition)
+  end
+  def add_automation_event_handler(eventid : Int32, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.add_automation_event_handler.unsafe_as(Proc(Int32, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationEventHandler, HRESULT)).call(eventid, element, scope, cacherequest, handler)
+  end
+  def remove_automation_event_handler(eventid : Int32, element : IUIAutomationElement, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.remove_automation_event_handler.unsafe_as(Proc(Int32, IUIAutomationElement, IUIAutomationEventHandler, HRESULT)).call(eventid, element, handler)
+  end
+  def add_property_changed_event_handler_native_array(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : Int32*, propertycount : Int32) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler_native_array.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, Int32*, Int32, HRESULT)).call(element, scope, cacherequest, handler, propertyarray, propertycount)
+  end
+  def add_property_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, SAFEARRAY*, HRESULT)).call(element, scope, cacherequest, handler, propertyarray)
+  end
+  def remove_property_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationPropertyChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_property_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationPropertyChangedEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_structure_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_structure_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationStructureChangedEventHandler, HRESULT)).call(element, scope, cacherequest, handler)
+  end
+  def remove_structure_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_structure_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationStructureChangedEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_focus_changed_event_handler(cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_focus_changed_event_handler.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationFocusChangedEventHandler, HRESULT)).call(cacherequest, handler)
+  end
+  def remove_focus_changed_event_handler(handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_focus_changed_event_handler.unsafe_as(Proc(IUIAutomationFocusChangedEventHandler, HRESULT)).call(handler)
+  end
+  def remove_all_event_handlers : HRESULT
+    @lpVtbl.value.remove_all_event_handlers.unsafe_as(Proc(HRESULT)).call
+  end
+  def int_native_array_to_safe_array(array : Int32*, arraycount : Int32, safearray : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.int_native_array_to_safe_array.unsafe_as(Proc(Int32*, Int32, SAFEARRAY**, HRESULT)).call(array, arraycount, safearray)
+  end
+  def int_safe_array_to_native_array(intarray : SAFEARRAY*, array : Int32**, arraycount : Int32*) : HRESULT
+    @lpVtbl.value.int_safe_array_to_native_array.unsafe_as(Proc(SAFEARRAY*, Int32**, Int32*, HRESULT)).call(intarray, array, arraycount)
+  end
+  def rect_to_variant(rc : RECT, var : VARIANT*) : HRESULT
+    @lpVtbl.value.rect_to_variant.unsafe_as(Proc(RECT, VARIANT*, HRESULT)).call(rc, var)
+  end
+  def variant_to_rect(var : VARIANT, rc : RECT*) : HRESULT
+    @lpVtbl.value.variant_to_rect.unsafe_as(Proc(VARIANT, RECT*, HRESULT)).call(var, rc)
+  end
+  def safe_array_to_rect_native_array(rects : SAFEARRAY*, rectarray : RECT**, rectarraycount : Int32*) : HRESULT
+    @lpVtbl.value.safe_array_to_rect_native_array.unsafe_as(Proc(SAFEARRAY*, RECT**, Int32*, HRESULT)).call(rects, rectarray, rectarraycount)
+  end
+  def create_proxy_factory_entry(factory : IUIAutomationProxyFactory, factoryentry : IUIAutomationProxyFactoryEntry*) : HRESULT
+    @lpVtbl.value.create_proxy_factory_entry.unsafe_as(Proc(IUIAutomationProxyFactory, IUIAutomationProxyFactoryEntry*, HRESULT)).call(factory, factoryentry)
+  end
+  def get_proxy_factory_mapping(factorymapping : IUIAutomationProxyFactoryMapping*) : HRESULT
+    @lpVtbl.value.get_proxy_factory_mapping.unsafe_as(Proc(IUIAutomationProxyFactoryMapping*, HRESULT)).call(factorymapping)
+  end
+  def get_property_programmatic_name(property : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_programmatic_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(property, name)
+  end
+  def get_pattern_programmatic_name(pattern : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_pattern_programmatic_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(pattern, name)
+  end
+  def poll_for_potential_supported_patterns(pelement : IUIAutomationElement, patternids : SAFEARRAY**, patternnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_patterns.unsafe_as(Proc(IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)).call(pelement, patternids, patternnames)
+  end
+  def poll_for_potential_supported_properties(pelement : IUIAutomationElement, propertyids : SAFEARRAY**, propertynames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_properties.unsafe_as(Proc(IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)).call(pelement, propertyids, propertynames)
+  end
+  def check_not_supported(value : VARIANT, isnotsupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_not_supported.unsafe_as(Proc(VARIANT, LibC::BOOL*, HRESULT)).call(value, isnotsupported)
+  end
+  def get_reserved_not_supported_value(notsupportedvalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_not_supported_value.unsafe_as(Proc(IUnknown*, HRESULT)).call(notsupportedvalue)
+  end
+  def get_reserved_mixed_attribute_value(mixedattributevalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_mixed_attribute_value.unsafe_as(Proc(IUnknown*, HRESULT)).call(mixedattributevalue)
+  end
+  def element_from_i_accessible(accessible : IAccessible, childid : Int32, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible.unsafe_as(Proc(IAccessible, Int32, IUIAutomationElement*, HRESULT)).call(accessible, childid, element)
+  end
+  def element_from_i_accessible_build_cache(accessible : IAccessible, childid : Int32, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible_build_cache.unsafe_as(Proc(IAccessible, Int32, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(accessible, childid, cacherequest, element)
+  end
+  def get_auto_set_focus(autosetfocus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_auto_set_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(autosetfocus)
+  end
+  def put_auto_set_focus(autosetfocus : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_auto_set_focus.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(autosetfocus)
+  end
+  def get_connection_timeout(timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_connection_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(timeout)
+  end
+  def put_connection_timeout(timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_connection_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(timeout)
+  end
+  def get_transaction_timeout(timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_transaction_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(timeout)
+  end
+  def put_transaction_timeout(timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_transaction_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(timeout)
+  end
+  def add_text_edit_text_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, texteditchangetype : TextEditChangeType, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_text_edit_text_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, TextEditChangeType, IUIAutomationCacheRequest, IUIAutomationTextEditTextChangedEventHandler, HRESULT)).call(element, scope, texteditchangetype, cacherequest, handler)
+  end
+  def remove_text_edit_text_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_text_edit_text_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationTextEditTextChangedEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_changes_event_handler(element : IUIAutomationElement, scope : TreeScope, changetypes : Int32*, changescount : Int32, pcacherequest : IUIAutomationCacheRequest, handler : IUIAutomationChangesEventHandler) : HRESULT
+    @lpVtbl.value.add_changes_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, Int32*, Int32, IUIAutomationCacheRequest, IUIAutomationChangesEventHandler, HRESULT)).call(element, scope, changetypes, changescount, pcacherequest, handler)
+  end
+  def remove_changes_event_handler(element : IUIAutomationElement, handler : IUIAutomationChangesEventHandler) : HRESULT
+    @lpVtbl.value.remove_changes_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationChangesEventHandler, HRESULT)).call(element, handler)
+  end
+end
+struct LibWin32::IUIAutomation5
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def compare_elements(el1 : IUIAutomationElement, el2 : IUIAutomationElement, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_elements.unsafe_as(Proc(IUIAutomationElement, IUIAutomationElement, LibC::BOOL*, HRESULT)).call(el1, el2, aresame)
+  end
+  def compare_runtime_ids(runtimeid1 : SAFEARRAY*, runtimeid2 : SAFEARRAY*, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_runtime_ids.unsafe_as(Proc(SAFEARRAY*, SAFEARRAY*, LibC::BOOL*, HRESULT)).call(runtimeid1, runtimeid2, aresame)
+  end
+  def get_root_element(root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(root)
+  end
+  def element_from_handle(hwnd : LibC::HANDLE, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle.unsafe_as(Proc(LibC::HANDLE, IUIAutomationElement*, HRESULT)).call(hwnd, element)
+  end
+  def element_from_point(pt : POINT, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point.unsafe_as(Proc(POINT, IUIAutomationElement*, HRESULT)).call(pt, element)
+  end
+  def get_focused_element(element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(element)
+  end
+  def get_root_element_build_cache(cacherequest : IUIAutomationCacheRequest, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element_build_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, root)
+  end
+  def element_from_handle_build_cache(hwnd : LibC::HANDLE, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle_build_cache.unsafe_as(Proc(LibC::HANDLE, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(hwnd, cacherequest, element)
+  end
+  def element_from_point_build_cache(pt : POINT, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point_build_cache.unsafe_as(Proc(POINT, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(pt, cacherequest, element)
+  end
+  def get_focused_element_build_cache(cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element_build_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, element)
+  end
+  def create_tree_walker(pcondition : IUIAutomationCondition, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.create_tree_walker.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationTreeWalker*, HRESULT)).call(pcondition, walker)
+  end
+  def get_control_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_control_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_content_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_content_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_raw_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_raw_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_raw_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_raw_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def get_control_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_control_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def get_content_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_content_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def create_cache_request(cacherequest : IUIAutomationCacheRequest*) : HRESULT
+    @lpVtbl.value.create_cache_request.unsafe_as(Proc(IUIAutomationCacheRequest*, HRESULT)).call(cacherequest)
+  end
+  def create_true_condition(newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_true_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(newcondition)
+  end
+  def create_false_condition(newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_false_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(newcondition)
+  end
+  def create_property_condition(propertyid : Int32, value : VARIANT, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition.unsafe_as(Proc(Int32, VARIANT, IUIAutomationCondition*, HRESULT)).call(propertyid, value, newcondition)
+  end
+  def create_property_condition_ex(propertyid : Int32, value : VARIANT, flags : PropertyConditionFlags, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition_ex.unsafe_as(Proc(Int32, VARIANT, PropertyConditionFlags, IUIAutomationCondition*, HRESULT)).call(propertyid, value, flags, newcondition)
+  end
+  def create_and_condition(condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition1, condition2, newcondition)
+  end
+  def create_and_condition_from_array(conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_array.unsafe_as(Proc(SAFEARRAY*, IUIAutomationCondition*, HRESULT)).call(conditions, newcondition)
+  end
+  def create_and_condition_from_native_array(conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_native_array.unsafe_as(Proc(IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)).call(conditions, conditioncount, newcondition)
+  end
+  def create_or_condition(condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition1, condition2, newcondition)
+  end
+  def create_or_condition_from_array(conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_array.unsafe_as(Proc(SAFEARRAY*, IUIAutomationCondition*, HRESULT)).call(conditions, newcondition)
+  end
+  def create_or_condition_from_native_array(conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_native_array.unsafe_as(Proc(IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)).call(conditions, conditioncount, newcondition)
+  end
+  def create_not_condition(condition : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_not_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition, newcondition)
+  end
+  def add_automation_event_handler(eventid : Int32, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.add_automation_event_handler.unsafe_as(Proc(Int32, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationEventHandler, HRESULT)).call(eventid, element, scope, cacherequest, handler)
+  end
+  def remove_automation_event_handler(eventid : Int32, element : IUIAutomationElement, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.remove_automation_event_handler.unsafe_as(Proc(Int32, IUIAutomationElement, IUIAutomationEventHandler, HRESULT)).call(eventid, element, handler)
+  end
+  def add_property_changed_event_handler_native_array(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : Int32*, propertycount : Int32) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler_native_array.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, Int32*, Int32, HRESULT)).call(element, scope, cacherequest, handler, propertyarray, propertycount)
+  end
+  def add_property_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, SAFEARRAY*, HRESULT)).call(element, scope, cacherequest, handler, propertyarray)
+  end
+  def remove_property_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationPropertyChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_property_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationPropertyChangedEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_structure_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_structure_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationStructureChangedEventHandler, HRESULT)).call(element, scope, cacherequest, handler)
+  end
+  def remove_structure_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_structure_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationStructureChangedEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_focus_changed_event_handler(cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_focus_changed_event_handler.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationFocusChangedEventHandler, HRESULT)).call(cacherequest, handler)
+  end
+  def remove_focus_changed_event_handler(handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_focus_changed_event_handler.unsafe_as(Proc(IUIAutomationFocusChangedEventHandler, HRESULT)).call(handler)
+  end
+  def remove_all_event_handlers : HRESULT
+    @lpVtbl.value.remove_all_event_handlers.unsafe_as(Proc(HRESULT)).call
+  end
+  def int_native_array_to_safe_array(array : Int32*, arraycount : Int32, safearray : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.int_native_array_to_safe_array.unsafe_as(Proc(Int32*, Int32, SAFEARRAY**, HRESULT)).call(array, arraycount, safearray)
+  end
+  def int_safe_array_to_native_array(intarray : SAFEARRAY*, array : Int32**, arraycount : Int32*) : HRESULT
+    @lpVtbl.value.int_safe_array_to_native_array.unsafe_as(Proc(SAFEARRAY*, Int32**, Int32*, HRESULT)).call(intarray, array, arraycount)
+  end
+  def rect_to_variant(rc : RECT, var : VARIANT*) : HRESULT
+    @lpVtbl.value.rect_to_variant.unsafe_as(Proc(RECT, VARIANT*, HRESULT)).call(rc, var)
+  end
+  def variant_to_rect(var : VARIANT, rc : RECT*) : HRESULT
+    @lpVtbl.value.variant_to_rect.unsafe_as(Proc(VARIANT, RECT*, HRESULT)).call(var, rc)
+  end
+  def safe_array_to_rect_native_array(rects : SAFEARRAY*, rectarray : RECT**, rectarraycount : Int32*) : HRESULT
+    @lpVtbl.value.safe_array_to_rect_native_array.unsafe_as(Proc(SAFEARRAY*, RECT**, Int32*, HRESULT)).call(rects, rectarray, rectarraycount)
+  end
+  def create_proxy_factory_entry(factory : IUIAutomationProxyFactory, factoryentry : IUIAutomationProxyFactoryEntry*) : HRESULT
+    @lpVtbl.value.create_proxy_factory_entry.unsafe_as(Proc(IUIAutomationProxyFactory, IUIAutomationProxyFactoryEntry*, HRESULT)).call(factory, factoryentry)
+  end
+  def get_proxy_factory_mapping(factorymapping : IUIAutomationProxyFactoryMapping*) : HRESULT
+    @lpVtbl.value.get_proxy_factory_mapping.unsafe_as(Proc(IUIAutomationProxyFactoryMapping*, HRESULT)).call(factorymapping)
+  end
+  def get_property_programmatic_name(property : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_programmatic_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(property, name)
+  end
+  def get_pattern_programmatic_name(pattern : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_pattern_programmatic_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(pattern, name)
+  end
+  def poll_for_potential_supported_patterns(pelement : IUIAutomationElement, patternids : SAFEARRAY**, patternnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_patterns.unsafe_as(Proc(IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)).call(pelement, patternids, patternnames)
+  end
+  def poll_for_potential_supported_properties(pelement : IUIAutomationElement, propertyids : SAFEARRAY**, propertynames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_properties.unsafe_as(Proc(IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)).call(pelement, propertyids, propertynames)
+  end
+  def check_not_supported(value : VARIANT, isnotsupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_not_supported.unsafe_as(Proc(VARIANT, LibC::BOOL*, HRESULT)).call(value, isnotsupported)
+  end
+  def get_reserved_not_supported_value(notsupportedvalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_not_supported_value.unsafe_as(Proc(IUnknown*, HRESULT)).call(notsupportedvalue)
+  end
+  def get_reserved_mixed_attribute_value(mixedattributevalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_mixed_attribute_value.unsafe_as(Proc(IUnknown*, HRESULT)).call(mixedattributevalue)
+  end
+  def element_from_i_accessible(accessible : IAccessible, childid : Int32, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible.unsafe_as(Proc(IAccessible, Int32, IUIAutomationElement*, HRESULT)).call(accessible, childid, element)
+  end
+  def element_from_i_accessible_build_cache(accessible : IAccessible, childid : Int32, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible_build_cache.unsafe_as(Proc(IAccessible, Int32, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(accessible, childid, cacherequest, element)
+  end
+  def get_auto_set_focus(autosetfocus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_auto_set_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(autosetfocus)
+  end
+  def put_auto_set_focus(autosetfocus : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_auto_set_focus.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(autosetfocus)
+  end
+  def get_connection_timeout(timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_connection_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(timeout)
+  end
+  def put_connection_timeout(timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_connection_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(timeout)
+  end
+  def get_transaction_timeout(timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_transaction_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(timeout)
+  end
+  def put_transaction_timeout(timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_transaction_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(timeout)
+  end
+  def add_text_edit_text_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, texteditchangetype : TextEditChangeType, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_text_edit_text_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, TextEditChangeType, IUIAutomationCacheRequest, IUIAutomationTextEditTextChangedEventHandler, HRESULT)).call(element, scope, texteditchangetype, cacherequest, handler)
+  end
+  def remove_text_edit_text_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_text_edit_text_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationTextEditTextChangedEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_changes_event_handler(element : IUIAutomationElement, scope : TreeScope, changetypes : Int32*, changescount : Int32, pcacherequest : IUIAutomationCacheRequest, handler : IUIAutomationChangesEventHandler) : HRESULT
+    @lpVtbl.value.add_changes_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, Int32*, Int32, IUIAutomationCacheRequest, IUIAutomationChangesEventHandler, HRESULT)).call(element, scope, changetypes, changescount, pcacherequest, handler)
+  end
+  def remove_changes_event_handler(element : IUIAutomationElement, handler : IUIAutomationChangesEventHandler) : HRESULT
+    @lpVtbl.value.remove_changes_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationChangesEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_notification_event_handler(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationNotificationEventHandler) : HRESULT
+    @lpVtbl.value.add_notification_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationNotificationEventHandler, HRESULT)).call(element, scope, cacherequest, handler)
+  end
+  def remove_notification_event_handler(element : IUIAutomationElement, handler : IUIAutomationNotificationEventHandler) : HRESULT
+    @lpVtbl.value.remove_notification_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationNotificationEventHandler, HRESULT)).call(element, handler)
+  end
+end
+struct LibWin32::IUIAutomation6
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def compare_elements(el1 : IUIAutomationElement, el2 : IUIAutomationElement, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_elements.unsafe_as(Proc(IUIAutomationElement, IUIAutomationElement, LibC::BOOL*, HRESULT)).call(el1, el2, aresame)
+  end
+  def compare_runtime_ids(runtimeid1 : SAFEARRAY*, runtimeid2 : SAFEARRAY*, aresame : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.compare_runtime_ids.unsafe_as(Proc(SAFEARRAY*, SAFEARRAY*, LibC::BOOL*, HRESULT)).call(runtimeid1, runtimeid2, aresame)
+  end
+  def get_root_element(root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(root)
+  end
+  def element_from_handle(hwnd : LibC::HANDLE, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle.unsafe_as(Proc(LibC::HANDLE, IUIAutomationElement*, HRESULT)).call(hwnd, element)
+  end
+  def element_from_point(pt : POINT, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point.unsafe_as(Proc(POINT, IUIAutomationElement*, HRESULT)).call(pt, element)
+  end
+  def get_focused_element(element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element.unsafe_as(Proc(IUIAutomationElement*, HRESULT)).call(element)
+  end
+  def get_root_element_build_cache(cacherequest : IUIAutomationCacheRequest, root : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_root_element_build_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, root)
+  end
+  def element_from_handle_build_cache(hwnd : LibC::HANDLE, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_handle_build_cache.unsafe_as(Proc(LibC::HANDLE, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(hwnd, cacherequest, element)
+  end
+  def element_from_point_build_cache(pt : POINT, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_point_build_cache.unsafe_as(Proc(POINT, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(pt, cacherequest, element)
+  end
+  def get_focused_element_build_cache(cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.get_focused_element_build_cache.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(cacherequest, element)
+  end
+  def create_tree_walker(pcondition : IUIAutomationCondition, walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.create_tree_walker.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationTreeWalker*, HRESULT)).call(pcondition, walker)
+  end
+  def get_control_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_control_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_content_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_content_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_raw_view_walker(walker : IUIAutomationTreeWalker*) : HRESULT
+    @lpVtbl.value.get_raw_view_walker.unsafe_as(Proc(IUIAutomationTreeWalker*, HRESULT)).call(walker)
+  end
+  def get_raw_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_raw_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def get_control_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_control_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def get_content_view_condition(condition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.get_content_view_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(condition)
+  end
+  def create_cache_request(cacherequest : IUIAutomationCacheRequest*) : HRESULT
+    @lpVtbl.value.create_cache_request.unsafe_as(Proc(IUIAutomationCacheRequest*, HRESULT)).call(cacherequest)
+  end
+  def create_true_condition(newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_true_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(newcondition)
+  end
+  def create_false_condition(newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_false_condition.unsafe_as(Proc(IUIAutomationCondition*, HRESULT)).call(newcondition)
+  end
+  def create_property_condition(propertyid : Int32, value : VARIANT, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition.unsafe_as(Proc(Int32, VARIANT, IUIAutomationCondition*, HRESULT)).call(propertyid, value, newcondition)
+  end
+  def create_property_condition_ex(propertyid : Int32, value : VARIANT, flags : PropertyConditionFlags, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_property_condition_ex.unsafe_as(Proc(Int32, VARIANT, PropertyConditionFlags, IUIAutomationCondition*, HRESULT)).call(propertyid, value, flags, newcondition)
+  end
+  def create_and_condition(condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition1, condition2, newcondition)
+  end
+  def create_and_condition_from_array(conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_array.unsafe_as(Proc(SAFEARRAY*, IUIAutomationCondition*, HRESULT)).call(conditions, newcondition)
+  end
+  def create_and_condition_from_native_array(conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_and_condition_from_native_array.unsafe_as(Proc(IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)).call(conditions, conditioncount, newcondition)
+  end
+  def create_or_condition(condition1 : IUIAutomationCondition, condition2 : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition1, condition2, newcondition)
+  end
+  def create_or_condition_from_array(conditions : SAFEARRAY*, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_array.unsafe_as(Proc(SAFEARRAY*, IUIAutomationCondition*, HRESULT)).call(conditions, newcondition)
+  end
+  def create_or_condition_from_native_array(conditions : IUIAutomationCondition*, conditioncount : Int32, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_or_condition_from_native_array.unsafe_as(Proc(IUIAutomationCondition*, Int32, IUIAutomationCondition*, HRESULT)).call(conditions, conditioncount, newcondition)
+  end
+  def create_not_condition(condition : IUIAutomationCondition, newcondition : IUIAutomationCondition*) : HRESULT
+    @lpVtbl.value.create_not_condition.unsafe_as(Proc(IUIAutomationCondition, IUIAutomationCondition*, HRESULT)).call(condition, newcondition)
+  end
+  def add_automation_event_handler(eventid : Int32, element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.add_automation_event_handler.unsafe_as(Proc(Int32, IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationEventHandler, HRESULT)).call(eventid, element, scope, cacherequest, handler)
+  end
+  def remove_automation_event_handler(eventid : Int32, element : IUIAutomationElement, handler : IUIAutomationEventHandler) : HRESULT
+    @lpVtbl.value.remove_automation_event_handler.unsafe_as(Proc(Int32, IUIAutomationElement, IUIAutomationEventHandler, HRESULT)).call(eventid, element, handler)
+  end
+  def add_property_changed_event_handler_native_array(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : Int32*, propertycount : Int32) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler_native_array.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, Int32*, Int32, HRESULT)).call(element, scope, cacherequest, handler, propertyarray, propertycount)
+  end
+  def add_property_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationPropertyChangedEventHandler, propertyarray : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.add_property_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationPropertyChangedEventHandler, SAFEARRAY*, HRESULT)).call(element, scope, cacherequest, handler, propertyarray)
+  end
+  def remove_property_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationPropertyChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_property_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationPropertyChangedEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_structure_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_structure_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationStructureChangedEventHandler, HRESULT)).call(element, scope, cacherequest, handler)
+  end
+  def remove_structure_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationStructureChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_structure_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationStructureChangedEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_focus_changed_event_handler(cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_focus_changed_event_handler.unsafe_as(Proc(IUIAutomationCacheRequest, IUIAutomationFocusChangedEventHandler, HRESULT)).call(cacherequest, handler)
+  end
+  def remove_focus_changed_event_handler(handler : IUIAutomationFocusChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_focus_changed_event_handler.unsafe_as(Proc(IUIAutomationFocusChangedEventHandler, HRESULT)).call(handler)
+  end
+  def remove_all_event_handlers : HRESULT
+    @lpVtbl.value.remove_all_event_handlers.unsafe_as(Proc(HRESULT)).call
+  end
+  def int_native_array_to_safe_array(array : Int32*, arraycount : Int32, safearray : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.int_native_array_to_safe_array.unsafe_as(Proc(Int32*, Int32, SAFEARRAY**, HRESULT)).call(array, arraycount, safearray)
+  end
+  def int_safe_array_to_native_array(intarray : SAFEARRAY*, array : Int32**, arraycount : Int32*) : HRESULT
+    @lpVtbl.value.int_safe_array_to_native_array.unsafe_as(Proc(SAFEARRAY*, Int32**, Int32*, HRESULT)).call(intarray, array, arraycount)
+  end
+  def rect_to_variant(rc : RECT, var : VARIANT*) : HRESULT
+    @lpVtbl.value.rect_to_variant.unsafe_as(Proc(RECT, VARIANT*, HRESULT)).call(rc, var)
+  end
+  def variant_to_rect(var : VARIANT, rc : RECT*) : HRESULT
+    @lpVtbl.value.variant_to_rect.unsafe_as(Proc(VARIANT, RECT*, HRESULT)).call(var, rc)
+  end
+  def safe_array_to_rect_native_array(rects : SAFEARRAY*, rectarray : RECT**, rectarraycount : Int32*) : HRESULT
+    @lpVtbl.value.safe_array_to_rect_native_array.unsafe_as(Proc(SAFEARRAY*, RECT**, Int32*, HRESULT)).call(rects, rectarray, rectarraycount)
+  end
+  def create_proxy_factory_entry(factory : IUIAutomationProxyFactory, factoryentry : IUIAutomationProxyFactoryEntry*) : HRESULT
+    @lpVtbl.value.create_proxy_factory_entry.unsafe_as(Proc(IUIAutomationProxyFactory, IUIAutomationProxyFactoryEntry*, HRESULT)).call(factory, factoryentry)
+  end
+  def get_proxy_factory_mapping(factorymapping : IUIAutomationProxyFactoryMapping*) : HRESULT
+    @lpVtbl.value.get_proxy_factory_mapping.unsafe_as(Proc(IUIAutomationProxyFactoryMapping*, HRESULT)).call(factorymapping)
+  end
+  def get_property_programmatic_name(property : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_property_programmatic_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(property, name)
+  end
+  def get_pattern_programmatic_name(pattern : Int32, name : UInt8**) : HRESULT
+    @lpVtbl.value.get_pattern_programmatic_name.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(pattern, name)
+  end
+  def poll_for_potential_supported_patterns(pelement : IUIAutomationElement, patternids : SAFEARRAY**, patternnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_patterns.unsafe_as(Proc(IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)).call(pelement, patternids, patternnames)
+  end
+  def poll_for_potential_supported_properties(pelement : IUIAutomationElement, propertyids : SAFEARRAY**, propertynames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.poll_for_potential_supported_properties.unsafe_as(Proc(IUIAutomationElement, SAFEARRAY**, SAFEARRAY**, HRESULT)).call(pelement, propertyids, propertynames)
+  end
+  def check_not_supported(value : VARIANT, isnotsupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_not_supported.unsafe_as(Proc(VARIANT, LibC::BOOL*, HRESULT)).call(value, isnotsupported)
+  end
+  def get_reserved_not_supported_value(notsupportedvalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_not_supported_value.unsafe_as(Proc(IUnknown*, HRESULT)).call(notsupportedvalue)
+  end
+  def get_reserved_mixed_attribute_value(mixedattributevalue : IUnknown*) : HRESULT
+    @lpVtbl.value.get_reserved_mixed_attribute_value.unsafe_as(Proc(IUnknown*, HRESULT)).call(mixedattributevalue)
+  end
+  def element_from_i_accessible(accessible : IAccessible, childid : Int32, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible.unsafe_as(Proc(IAccessible, Int32, IUIAutomationElement*, HRESULT)).call(accessible, childid, element)
+  end
+  def element_from_i_accessible_build_cache(accessible : IAccessible, childid : Int32, cacherequest : IUIAutomationCacheRequest, element : IUIAutomationElement*) : HRESULT
+    @lpVtbl.value.element_from_i_accessible_build_cache.unsafe_as(Proc(IAccessible, Int32, IUIAutomationCacheRequest, IUIAutomationElement*, HRESULT)).call(accessible, childid, cacherequest, element)
+  end
+  def get_auto_set_focus(autosetfocus : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_auto_set_focus.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(autosetfocus)
+  end
+  def put_auto_set_focus(autosetfocus : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_auto_set_focus.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(autosetfocus)
+  end
+  def get_connection_timeout(timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_connection_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(timeout)
+  end
+  def put_connection_timeout(timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_connection_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(timeout)
+  end
+  def get_transaction_timeout(timeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_transaction_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(timeout)
+  end
+  def put_transaction_timeout(timeout : UInt32) : HRESULT
+    @lpVtbl.value.put_transaction_timeout.unsafe_as(Proc(UInt32, HRESULT)).call(timeout)
+  end
+  def add_text_edit_text_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, texteditchangetype : TextEditChangeType, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_text_edit_text_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, TextEditChangeType, IUIAutomationCacheRequest, IUIAutomationTextEditTextChangedEventHandler, HRESULT)).call(element, scope, texteditchangetype, cacherequest, handler)
+  end
+  def remove_text_edit_text_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationTextEditTextChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_text_edit_text_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationTextEditTextChangedEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_changes_event_handler(element : IUIAutomationElement, scope : TreeScope, changetypes : Int32*, changescount : Int32, pcacherequest : IUIAutomationCacheRequest, handler : IUIAutomationChangesEventHandler) : HRESULT
+    @lpVtbl.value.add_changes_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, Int32*, Int32, IUIAutomationCacheRequest, IUIAutomationChangesEventHandler, HRESULT)).call(element, scope, changetypes, changescount, pcacherequest, handler)
+  end
+  def remove_changes_event_handler(element : IUIAutomationElement, handler : IUIAutomationChangesEventHandler) : HRESULT
+    @lpVtbl.value.remove_changes_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationChangesEventHandler, HRESULT)).call(element, handler)
+  end
+  def add_notification_event_handler(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationNotificationEventHandler) : HRESULT
+    @lpVtbl.value.add_notification_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationNotificationEventHandler, HRESULT)).call(element, scope, cacherequest, handler)
+  end
+  def remove_notification_event_handler(element : IUIAutomationElement, handler : IUIAutomationNotificationEventHandler) : HRESULT
+    @lpVtbl.value.remove_notification_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationNotificationEventHandler, HRESULT)).call(element, handler)
+  end
+  def create_event_handler_group(handlergroup : IUIAutomationEventHandlerGroup*) : HRESULT
+    @lpVtbl.value.create_event_handler_group.unsafe_as(Proc(IUIAutomationEventHandlerGroup*, HRESULT)).call(handlergroup)
+  end
+  def add_event_handler_group(element : IUIAutomationElement, handlergroup : IUIAutomationEventHandlerGroup) : HRESULT
+    @lpVtbl.value.add_event_handler_group.unsafe_as(Proc(IUIAutomationElement, IUIAutomationEventHandlerGroup, HRESULT)).call(element, handlergroup)
+  end
+  def remove_event_handler_group(element : IUIAutomationElement, handlergroup : IUIAutomationEventHandlerGroup) : HRESULT
+    @lpVtbl.value.remove_event_handler_group.unsafe_as(Proc(IUIAutomationElement, IUIAutomationEventHandlerGroup, HRESULT)).call(element, handlergroup)
+  end
+  def get_connection_recovery_behavior(connectionrecoverybehavioroptions : ConnectionRecoveryBehaviorOptions*) : HRESULT
+    @lpVtbl.value.get_connection_recovery_behavior.unsafe_as(Proc(ConnectionRecoveryBehaviorOptions*, HRESULT)).call(connectionrecoverybehavioroptions)
+  end
+  def put_connection_recovery_behavior(connectionrecoverybehavioroptions : ConnectionRecoveryBehaviorOptions) : HRESULT
+    @lpVtbl.value.put_connection_recovery_behavior.unsafe_as(Proc(ConnectionRecoveryBehaviorOptions, HRESULT)).call(connectionrecoverybehavioroptions)
+  end
+  def get_coalesce_events(coalesceeventsoptions : CoalesceEventsOptions*) : HRESULT
+    @lpVtbl.value.get_coalesce_events.unsafe_as(Proc(CoalesceEventsOptions*, HRESULT)).call(coalesceeventsoptions)
+  end
+  def put_coalesce_events(coalesceeventsoptions : CoalesceEventsOptions) : HRESULT
+    @lpVtbl.value.put_coalesce_events.unsafe_as(Proc(CoalesceEventsOptions, HRESULT)).call(coalesceeventsoptions)
+  end
+  def add_active_text_position_changed_event_handler(element : IUIAutomationElement, scope : TreeScope, cacherequest : IUIAutomationCacheRequest, handler : IUIAutomationActiveTextPositionChangedEventHandler) : HRESULT
+    @lpVtbl.value.add_active_text_position_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, TreeScope, IUIAutomationCacheRequest, IUIAutomationActiveTextPositionChangedEventHandler, HRESULT)).call(element, scope, cacherequest, handler)
+  end
+  def remove_active_text_position_changed_event_handler(element : IUIAutomationElement, handler : IUIAutomationActiveTextPositionChangedEventHandler) : HRESULT
+    @lpVtbl.value.remove_active_text_position_changed_event_handler.unsafe_as(Proc(IUIAutomationElement, IUIAutomationActiveTextPositionChangedEventHandler, HRESULT)).call(element, handler)
+  end
 end

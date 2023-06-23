@@ -641,13 +641,13 @@ lib LibWin32
 
 
   struct IWMDMMetaDataVTbl
-    query_interface : Proc(IWMDMMetaData*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMMetaData*, UInt32)
-    release : Proc(IWMDMMetaData*, UInt32)
-    add_item : Proc(IWMDMMetaData*, WMDM_TAG_DATATYPE, LibC::LPWSTR, UInt8*, UInt32, HRESULT)
-    query_by_name : Proc(IWMDMMetaData*, LibC::LPWSTR, WMDM_TAG_DATATYPE*, UInt8**, UInt32*, HRESULT)
-    query_by_index : Proc(IWMDMMetaData*, UInt32, UInt16**, WMDM_TAG_DATATYPE*, UInt8**, UInt32*, HRESULT)
-    get_item_count : Proc(IWMDMMetaData*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_item : UInt64
+    query_by_name : UInt64
+    query_by_index : UInt64
+    get_item_count : UInt64
   end
 
   IWMDMMetaData_GUID = "ec3b0663-0951-460a-9a80-0dceed3c043c"
@@ -657,12 +657,12 @@ lib LibWin32
   end
 
   struct IWMDeviceManagerVTbl
-    query_interface : Proc(IWMDeviceManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDeviceManager*, UInt32)
-    release : Proc(IWMDeviceManager*, UInt32)
-    get_revision : Proc(IWMDeviceManager*, UInt32*, HRESULT)
-    get_device_count : Proc(IWMDeviceManager*, UInt32*, HRESULT)
-    enum_devices : Proc(IWMDeviceManager*, IWMDMEnumDevice*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_revision : UInt64
+    get_device_count : UInt64
+    enum_devices : UInt64
   end
 
   IWMDeviceManager_GUID = "1dcb3a00-33ed-11d3-8470-00c04f79dbc0"
@@ -672,15 +672,15 @@ lib LibWin32
   end
 
   struct IWMDeviceManager2VTbl
-    query_interface : Proc(IWMDeviceManager2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDeviceManager2*, UInt32)
-    release : Proc(IWMDeviceManager2*, UInt32)
-    get_revision : Proc(IWMDeviceManager2*, UInt32*, HRESULT)
-    get_device_count : Proc(IWMDeviceManager2*, UInt32*, HRESULT)
-    enum_devices : Proc(IWMDeviceManager2*, IWMDMEnumDevice*, HRESULT)
-    get_device_from_canonical_name : Proc(IWMDeviceManager2*, LibC::LPWSTR, IWMDMDevice*, HRESULT)
-    enum_devices2 : Proc(IWMDeviceManager2*, IWMDMEnumDevice*, HRESULT)
-    reinitialize : Proc(IWMDeviceManager2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_revision : UInt64
+    get_device_count : UInt64
+    enum_devices : UInt64
+    get_device_from_canonical_name : UInt64
+    enum_devices2 : UInt64
+    reinitialize : UInt64
   end
 
   IWMDeviceManager2_GUID = "923e5249-8731-4c5b-9b1c-b8b60b6e46af"
@@ -690,16 +690,16 @@ lib LibWin32
   end
 
   struct IWMDeviceManager3VTbl
-    query_interface : Proc(IWMDeviceManager3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDeviceManager3*, UInt32)
-    release : Proc(IWMDeviceManager3*, UInt32)
-    get_revision : Proc(IWMDeviceManager3*, UInt32*, HRESULT)
-    get_device_count : Proc(IWMDeviceManager3*, UInt32*, HRESULT)
-    enum_devices : Proc(IWMDeviceManager3*, IWMDMEnumDevice*, HRESULT)
-    get_device_from_canonical_name : Proc(IWMDeviceManager3*, LibC::LPWSTR, IWMDMDevice*, HRESULT)
-    enum_devices2 : Proc(IWMDeviceManager3*, IWMDMEnumDevice*, HRESULT)
-    reinitialize : Proc(IWMDeviceManager3*, HRESULT)
-    set_device_enum_preference : Proc(IWMDeviceManager3*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_revision : UInt64
+    get_device_count : UInt64
+    enum_devices : UInt64
+    get_device_from_canonical_name : UInt64
+    enum_devices2 : UInt64
+    reinitialize : UInt64
+    set_device_enum_preference : UInt64
   end
 
   IWMDeviceManager3_GUID = "af185c41-100d-46ed-be2e-9ce8c44594ef"
@@ -709,16 +709,16 @@ lib LibWin32
   end
 
   struct IWMDMStorageGlobalsVTbl
-    query_interface : Proc(IWMDMStorageGlobals*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMStorageGlobals*, UInt32)
-    release : Proc(IWMDMStorageGlobals*, UInt32)
-    get_capabilities : Proc(IWMDMStorageGlobals*, UInt32*, HRESULT)
-    get_serial_number : Proc(IWMDMStorageGlobals*, WMDMID*, UInt8*, HRESULT)
-    get_total_size : Proc(IWMDMStorageGlobals*, UInt32*, UInt32*, HRESULT)
-    get_total_free : Proc(IWMDMStorageGlobals*, UInt32*, UInt32*, HRESULT)
-    get_total_bad : Proc(IWMDMStorageGlobals*, UInt32*, UInt32*, HRESULT)
-    get_status : Proc(IWMDMStorageGlobals*, UInt32*, HRESULT)
-    initialize : Proc(IWMDMStorageGlobals*, UInt32, IWMDMProgress, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_capabilities : UInt64
+    get_serial_number : UInt64
+    get_total_size : UInt64
+    get_total_free : UInt64
+    get_total_bad : UInt64
+    get_status : UInt64
+    initialize : UInt64
   end
 
   IWMDMStorageGlobals_GUID = "1dcb3a07-33ed-11d3-8470-00c04f79dbc0"
@@ -728,18 +728,18 @@ lib LibWin32
   end
 
   struct IWMDMStorageVTbl
-    query_interface : Proc(IWMDMStorage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMStorage*, UInt32)
-    release : Proc(IWMDMStorage*, UInt32)
-    set_attributes : Proc(IWMDMStorage*, UInt32, WAVEFORMATEX*, HRESULT)
-    get_storage_globals : Proc(IWMDMStorage*, IWMDMStorageGlobals*, HRESULT)
-    get_attributes : Proc(IWMDMStorage*, UInt32*, WAVEFORMATEX*, HRESULT)
-    get_name : Proc(IWMDMStorage*, Char*, UInt32, HRESULT)
-    get_date : Proc(IWMDMStorage*, WMDMDATETIME*, HRESULT)
-    get_size : Proc(IWMDMStorage*, UInt32*, UInt32*, HRESULT)
-    get_rights : Proc(IWMDMStorage*, WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)
-    enum_storage : Proc(IWMDMStorage*, IWMDMEnumStorage*, HRESULT)
-    send_opaque_command : Proc(IWMDMStorage*, OPAQUECOMMAND*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_attributes : UInt64
+    get_storage_globals : UInt64
+    get_attributes : UInt64
+    get_name : UInt64
+    get_date : UInt64
+    get_size : UInt64
+    get_rights : UInt64
+    enum_storage : UInt64
+    send_opaque_command : UInt64
   end
 
   IWMDMStorage_GUID = "1dcb3a06-33ed-11d3-8470-00c04f79dbc0"
@@ -749,21 +749,21 @@ lib LibWin32
   end
 
   struct IWMDMStorage2VTbl
-    query_interface : Proc(IWMDMStorage2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMStorage2*, UInt32)
-    release : Proc(IWMDMStorage2*, UInt32)
-    set_attributes : Proc(IWMDMStorage2*, UInt32, WAVEFORMATEX*, HRESULT)
-    get_storage_globals : Proc(IWMDMStorage2*, IWMDMStorageGlobals*, HRESULT)
-    get_attributes : Proc(IWMDMStorage2*, UInt32*, WAVEFORMATEX*, HRESULT)
-    get_name : Proc(IWMDMStorage2*, Char*, UInt32, HRESULT)
-    get_date : Proc(IWMDMStorage2*, WMDMDATETIME*, HRESULT)
-    get_size : Proc(IWMDMStorage2*, UInt32*, UInt32*, HRESULT)
-    get_rights : Proc(IWMDMStorage2*, WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)
-    enum_storage : Proc(IWMDMStorage2*, IWMDMEnumStorage*, HRESULT)
-    send_opaque_command : Proc(IWMDMStorage2*, OPAQUECOMMAND*, HRESULT)
-    get_storage : Proc(IWMDMStorage2*, LibC::LPWSTR, IWMDMStorage*, HRESULT)
-    set_attributes2 : Proc(IWMDMStorage2*, UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
-    get_attributes2 : Proc(IWMDMStorage2*, UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_attributes : UInt64
+    get_storage_globals : UInt64
+    get_attributes : UInt64
+    get_name : UInt64
+    get_date : UInt64
+    get_size : UInt64
+    get_rights : UInt64
+    enum_storage : UInt64
+    send_opaque_command : UInt64
+    get_storage : UInt64
+    set_attributes2 : UInt64
+    get_attributes2 : UInt64
   end
 
   IWMDMStorage2_GUID = "1ed5a144-5cd5-4683-9eff-72cbdb2d9533"
@@ -773,25 +773,25 @@ lib LibWin32
   end
 
   struct IWMDMStorage3VTbl
-    query_interface : Proc(IWMDMStorage3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMStorage3*, UInt32)
-    release : Proc(IWMDMStorage3*, UInt32)
-    set_attributes : Proc(IWMDMStorage3*, UInt32, WAVEFORMATEX*, HRESULT)
-    get_storage_globals : Proc(IWMDMStorage3*, IWMDMStorageGlobals*, HRESULT)
-    get_attributes : Proc(IWMDMStorage3*, UInt32*, WAVEFORMATEX*, HRESULT)
-    get_name : Proc(IWMDMStorage3*, Char*, UInt32, HRESULT)
-    get_date : Proc(IWMDMStorage3*, WMDMDATETIME*, HRESULT)
-    get_size : Proc(IWMDMStorage3*, UInt32*, UInt32*, HRESULT)
-    get_rights : Proc(IWMDMStorage3*, WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)
-    enum_storage : Proc(IWMDMStorage3*, IWMDMEnumStorage*, HRESULT)
-    send_opaque_command : Proc(IWMDMStorage3*, OPAQUECOMMAND*, HRESULT)
-    get_storage : Proc(IWMDMStorage3*, LibC::LPWSTR, IWMDMStorage*, HRESULT)
-    set_attributes2 : Proc(IWMDMStorage3*, UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
-    get_attributes2 : Proc(IWMDMStorage3*, UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
-    get_metadata : Proc(IWMDMStorage3*, IWMDMMetaData*, HRESULT)
-    set_metadata : Proc(IWMDMStorage3*, IWMDMMetaData, HRESULT)
-    create_empty_metadata_object : Proc(IWMDMStorage3*, IWMDMMetaData*, HRESULT)
-    set_enum_preference : Proc(IWMDMStorage3*, WMDM_STORAGE_ENUM_MODE*, UInt32, WMDMMetadataView*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_attributes : UInt64
+    get_storage_globals : UInt64
+    get_attributes : UInt64
+    get_name : UInt64
+    get_date : UInt64
+    get_size : UInt64
+    get_rights : UInt64
+    enum_storage : UInt64
+    send_opaque_command : UInt64
+    get_storage : UInt64
+    set_attributes2 : UInt64
+    get_attributes2 : UInt64
+    get_metadata : UInt64
+    set_metadata : UInt64
+    create_empty_metadata_object : UInt64
+    set_enum_preference : UInt64
   end
 
   IWMDMStorage3_GUID = "97717eea-926a-464e-96a4-247b0216026e"
@@ -801,31 +801,31 @@ lib LibWin32
   end
 
   struct IWMDMStorage4VTbl
-    query_interface : Proc(IWMDMStorage4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMStorage4*, UInt32)
-    release : Proc(IWMDMStorage4*, UInt32)
-    set_attributes : Proc(IWMDMStorage4*, UInt32, WAVEFORMATEX*, HRESULT)
-    get_storage_globals : Proc(IWMDMStorage4*, IWMDMStorageGlobals*, HRESULT)
-    get_attributes : Proc(IWMDMStorage4*, UInt32*, WAVEFORMATEX*, HRESULT)
-    get_name : Proc(IWMDMStorage4*, Char*, UInt32, HRESULT)
-    get_date : Proc(IWMDMStorage4*, WMDMDATETIME*, HRESULT)
-    get_size : Proc(IWMDMStorage4*, UInt32*, UInt32*, HRESULT)
-    get_rights : Proc(IWMDMStorage4*, WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)
-    enum_storage : Proc(IWMDMStorage4*, IWMDMEnumStorage*, HRESULT)
-    send_opaque_command : Proc(IWMDMStorage4*, OPAQUECOMMAND*, HRESULT)
-    get_storage : Proc(IWMDMStorage4*, LibC::LPWSTR, IWMDMStorage*, HRESULT)
-    set_attributes2 : Proc(IWMDMStorage4*, UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
-    get_attributes2 : Proc(IWMDMStorage4*, UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
-    get_metadata : Proc(IWMDMStorage4*, IWMDMMetaData*, HRESULT)
-    set_metadata : Proc(IWMDMStorage4*, IWMDMMetaData, HRESULT)
-    create_empty_metadata_object : Proc(IWMDMStorage4*, IWMDMMetaData*, HRESULT)
-    set_enum_preference : Proc(IWMDMStorage4*, WMDM_STORAGE_ENUM_MODE*, UInt32, WMDMMetadataView*, HRESULT)
-    set_references : Proc(IWMDMStorage4*, UInt32, IWMDMStorage*, HRESULT)
-    get_references : Proc(IWMDMStorage4*, UInt32*, IWMDMStorage**, HRESULT)
-    get_rights_with_progress : Proc(IWMDMStorage4*, IWMDMProgress3, WMDMRIGHTS**, UInt32*, HRESULT)
-    get_specified_metadata : Proc(IWMDMStorage4*, UInt32, LibC::LPWSTR*, IWMDMMetaData*, HRESULT)
-    find_storage : Proc(IWMDMStorage4*, WMDM_FIND_SCOPE, LibC::LPWSTR, IWMDMStorage*, HRESULT)
-    get_parent : Proc(IWMDMStorage4*, IWMDMStorage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_attributes : UInt64
+    get_storage_globals : UInt64
+    get_attributes : UInt64
+    get_name : UInt64
+    get_date : UInt64
+    get_size : UInt64
+    get_rights : UInt64
+    enum_storage : UInt64
+    send_opaque_command : UInt64
+    get_storage : UInt64
+    set_attributes2 : UInt64
+    get_attributes2 : UInt64
+    get_metadata : UInt64
+    set_metadata : UInt64
+    create_empty_metadata_object : UInt64
+    set_enum_preference : UInt64
+    set_references : UInt64
+    get_references : UInt64
+    get_rights_with_progress : UInt64
+    get_specified_metadata : UInt64
+    find_storage : UInt64
+    get_parent : UInt64
   end
 
   IWMDMStorage4_GUID = "c225bac5-a03a-40b8-9a23-91cf478c64a6"
@@ -835,19 +835,19 @@ lib LibWin32
   end
 
   struct IWMDMOperationVTbl
-    query_interface : Proc(IWMDMOperation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMOperation*, UInt32)
-    release : Proc(IWMDMOperation*, UInt32)
-    begin_read : Proc(IWMDMOperation*, HRESULT)
-    begin_write : Proc(IWMDMOperation*, HRESULT)
-    get_object_name : Proc(IWMDMOperation*, Char*, UInt32, HRESULT)
-    set_object_name : Proc(IWMDMOperation*, Char*, UInt32, HRESULT)
-    get_object_attributes : Proc(IWMDMOperation*, UInt32*, WAVEFORMATEX*, HRESULT)
-    set_object_attributes : Proc(IWMDMOperation*, UInt32, WAVEFORMATEX*, HRESULT)
-    get_object_total_size : Proc(IWMDMOperation*, UInt32*, UInt32*, HRESULT)
-    set_object_total_size : Proc(IWMDMOperation*, UInt32, UInt32, HRESULT)
-    transfer_object_data : Proc(IWMDMOperation*, UInt8*, UInt32*, UInt8*, HRESULT)
-    rend : Proc(IWMDMOperation*, HRESULT*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_read : UInt64
+    begin_write : UInt64
+    get_object_name : UInt64
+    set_object_name : UInt64
+    get_object_attributes : UInt64
+    set_object_attributes : UInt64
+    get_object_total_size : UInt64
+    set_object_total_size : UInt64
+    transfer_object_data : UInt64
+    end_ : UInt64
   end
 
   IWMDMOperation_GUID = "1dcb3a0b-33ed-11d3-8470-00c04f79dbc0"
@@ -857,21 +857,21 @@ lib LibWin32
   end
 
   struct IWMDMOperation2VTbl
-    query_interface : Proc(IWMDMOperation2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMOperation2*, UInt32)
-    release : Proc(IWMDMOperation2*, UInt32)
-    begin_read : Proc(IWMDMOperation2*, HRESULT)
-    begin_write : Proc(IWMDMOperation2*, HRESULT)
-    get_object_name : Proc(IWMDMOperation2*, Char*, UInt32, HRESULT)
-    set_object_name : Proc(IWMDMOperation2*, Char*, UInt32, HRESULT)
-    get_object_attributes : Proc(IWMDMOperation2*, UInt32*, WAVEFORMATEX*, HRESULT)
-    set_object_attributes : Proc(IWMDMOperation2*, UInt32, WAVEFORMATEX*, HRESULT)
-    get_object_total_size : Proc(IWMDMOperation2*, UInt32*, UInt32*, HRESULT)
-    set_object_total_size : Proc(IWMDMOperation2*, UInt32, UInt32, HRESULT)
-    transfer_object_data : Proc(IWMDMOperation2*, UInt8*, UInt32*, UInt8*, HRESULT)
-    rend : Proc(IWMDMOperation2*, HRESULT*, IUnknown, HRESULT)
-    set_object_attributes2 : Proc(IWMDMOperation2*, UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
-    get_object_attributes2 : Proc(IWMDMOperation2*, UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_read : UInt64
+    begin_write : UInt64
+    get_object_name : UInt64
+    set_object_name : UInt64
+    get_object_attributes : UInt64
+    set_object_attributes : UInt64
+    get_object_total_size : UInt64
+    set_object_total_size : UInt64
+    transfer_object_data : UInt64
+    end_ : UInt64
+    set_object_attributes2 : UInt64
+    get_object_attributes2 : UInt64
   end
 
   IWMDMOperation2_GUID = "33445b48-7df7-425c-ad8f-0fc6d82f9f75"
@@ -881,20 +881,20 @@ lib LibWin32
   end
 
   struct IWMDMOperation3VTbl
-    query_interface : Proc(IWMDMOperation3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMOperation3*, UInt32)
-    release : Proc(IWMDMOperation3*, UInt32)
-    begin_read : Proc(IWMDMOperation3*, HRESULT)
-    begin_write : Proc(IWMDMOperation3*, HRESULT)
-    get_object_name : Proc(IWMDMOperation3*, Char*, UInt32, HRESULT)
-    set_object_name : Proc(IWMDMOperation3*, Char*, UInt32, HRESULT)
-    get_object_attributes : Proc(IWMDMOperation3*, UInt32*, WAVEFORMATEX*, HRESULT)
-    set_object_attributes : Proc(IWMDMOperation3*, UInt32, WAVEFORMATEX*, HRESULT)
-    get_object_total_size : Proc(IWMDMOperation3*, UInt32*, UInt32*, HRESULT)
-    set_object_total_size : Proc(IWMDMOperation3*, UInt32, UInt32, HRESULT)
-    transfer_object_data : Proc(IWMDMOperation3*, UInt8*, UInt32*, UInt8*, HRESULT)
-    rend : Proc(IWMDMOperation3*, HRESULT*, IUnknown, HRESULT)
-    transfer_object_data_on_clear_channel : Proc(IWMDMOperation3*, UInt8*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_read : UInt64
+    begin_write : UInt64
+    get_object_name : UInt64
+    set_object_name : UInt64
+    get_object_attributes : UInt64
+    set_object_attributes : UInt64
+    get_object_total_size : UInt64
+    set_object_total_size : UInt64
+    transfer_object_data : UInt64
+    end_ : UInt64
+    transfer_object_data_on_clear_channel : UInt64
   end
 
   IWMDMOperation3_GUID = "d1f9b46a-9ca8-46d8-9d0f-1ec9bae54919"
@@ -904,12 +904,12 @@ lib LibWin32
   end
 
   struct IWMDMProgressVTbl
-    query_interface : Proc(IWMDMProgress*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMProgress*, UInt32)
-    release : Proc(IWMDMProgress*, UInt32)
-    rbegin : Proc(IWMDMProgress*, UInt32, HRESULT)
-    progress : Proc(IWMDMProgress*, UInt32, HRESULT)
-    rend : Proc(IWMDMProgress*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_ : UInt64
+    progress : UInt64
+    end_ : UInt64
   end
 
   IWMDMProgress_GUID = "1dcb3a0c-33ed-11d3-8470-00c04f79dbc0"
@@ -919,13 +919,13 @@ lib LibWin32
   end
 
   struct IWMDMProgress2VTbl
-    query_interface : Proc(IWMDMProgress2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMProgress2*, UInt32)
-    release : Proc(IWMDMProgress2*, UInt32)
-    rbegin : Proc(IWMDMProgress2*, UInt32, HRESULT)
-    progress : Proc(IWMDMProgress2*, UInt32, HRESULT)
-    rend : Proc(IWMDMProgress2*, HRESULT)
-    end2 : Proc(IWMDMProgress2*, HRESULT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_ : UInt64
+    progress : UInt64
+    end_ : UInt64
+    end2 : UInt64
   end
 
   IWMDMProgress2_GUID = "3a43f550-b383-4e92-b04a-e6bbc660fefc"
@@ -935,16 +935,16 @@ lib LibWin32
   end
 
   struct IWMDMProgress3VTbl
-    query_interface : Proc(IWMDMProgress3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMProgress3*, UInt32)
-    release : Proc(IWMDMProgress3*, UInt32)
-    rbegin : Proc(IWMDMProgress3*, UInt32, HRESULT)
-    progress : Proc(IWMDMProgress3*, UInt32, HRESULT)
-    rend : Proc(IWMDMProgress3*, HRESULT)
-    end2 : Proc(IWMDMProgress3*, HRESULT, HRESULT)
-    begin3 : Proc(IWMDMProgress3*, Guid, UInt32, OPAQUECOMMAND*, HRESULT)
-    progress3 : Proc(IWMDMProgress3*, Guid, UInt32, OPAQUECOMMAND*, HRESULT)
-    end3 : Proc(IWMDMProgress3*, Guid, HRESULT, OPAQUECOMMAND*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_ : UInt64
+    progress : UInt64
+    end_ : UInt64
+    end2 : UInt64
+    begin3 : UInt64
+    progress3 : UInt64
+    end3 : UInt64
   end
 
   IWMDMProgress3_GUID = "21de01cb-3bb4-4929-b21a-17af3f80f658"
@@ -954,20 +954,20 @@ lib LibWin32
   end
 
   struct IWMDMDeviceVTbl
-    query_interface : Proc(IWMDMDevice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMDevice*, UInt32)
-    release : Proc(IWMDMDevice*, UInt32)
-    get_name : Proc(IWMDMDevice*, Char*, UInt32, HRESULT)
-    get_manufacturer : Proc(IWMDMDevice*, Char*, UInt32, HRESULT)
-    get_version : Proc(IWMDMDevice*, UInt32*, HRESULT)
-    get_type : Proc(IWMDMDevice*, UInt32*, HRESULT)
-    get_serial_number : Proc(IWMDMDevice*, WMDMID*, UInt8*, HRESULT)
-    get_power_source : Proc(IWMDMDevice*, UInt32*, UInt32*, HRESULT)
-    get_status : Proc(IWMDMDevice*, UInt32*, HRESULT)
-    get_device_icon : Proc(IWMDMDevice*, UInt32*, HRESULT)
-    enum_storage : Proc(IWMDMDevice*, IWMDMEnumStorage*, HRESULT)
-    get_format_support : Proc(IWMDMDevice*, WAVEFORMATEX**, UInt32*, LibC::LPWSTR**, UInt32*, HRESULT)
-    send_opaque_command : Proc(IWMDMDevice*, OPAQUECOMMAND*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_name : UInt64
+    get_manufacturer : UInt64
+    get_version : UInt64
+    get_type : UInt64
+    get_serial_number : UInt64
+    get_power_source : UInt64
+    get_status : UInt64
+    get_device_icon : UInt64
+    enum_storage : UInt64
+    get_format_support : UInt64
+    send_opaque_command : UInt64
   end
 
   IWMDMDevice_GUID = "1dcb3a02-33ed-11d3-8470-00c04f79dbc0"
@@ -977,24 +977,24 @@ lib LibWin32
   end
 
   struct IWMDMDevice2VTbl
-    query_interface : Proc(IWMDMDevice2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMDevice2*, UInt32)
-    release : Proc(IWMDMDevice2*, UInt32)
-    get_name : Proc(IWMDMDevice2*, Char*, UInt32, HRESULT)
-    get_manufacturer : Proc(IWMDMDevice2*, Char*, UInt32, HRESULT)
-    get_version : Proc(IWMDMDevice2*, UInt32*, HRESULT)
-    get_type : Proc(IWMDMDevice2*, UInt32*, HRESULT)
-    get_serial_number : Proc(IWMDMDevice2*, WMDMID*, UInt8*, HRESULT)
-    get_power_source : Proc(IWMDMDevice2*, UInt32*, UInt32*, HRESULT)
-    get_status : Proc(IWMDMDevice2*, UInt32*, HRESULT)
-    get_device_icon : Proc(IWMDMDevice2*, UInt32*, HRESULT)
-    enum_storage : Proc(IWMDMDevice2*, IWMDMEnumStorage*, HRESULT)
-    get_format_support : Proc(IWMDMDevice2*, WAVEFORMATEX**, UInt32*, LibC::LPWSTR**, UInt32*, HRESULT)
-    send_opaque_command : Proc(IWMDMDevice2*, OPAQUECOMMAND*, HRESULT)
-    get_storage : Proc(IWMDMDevice2*, LibC::LPWSTR, IWMDMStorage*, HRESULT)
-    get_format_support2 : Proc(IWMDMDevice2*, UInt32, WAVEFORMATEX**, UInt32*, VIDEOINFOHEADER**, UInt32*, WMFILECAPABILITIES**, UInt32*, HRESULT)
-    get_specify_property_pages : Proc(IWMDMDevice2*, ISpecifyPropertyPages*, IUnknown**, UInt32*, HRESULT)
-    get_canonical_name : Proc(IWMDMDevice2*, Char*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_name : UInt64
+    get_manufacturer : UInt64
+    get_version : UInt64
+    get_type : UInt64
+    get_serial_number : UInt64
+    get_power_source : UInt64
+    get_status : UInt64
+    get_device_icon : UInt64
+    enum_storage : UInt64
+    get_format_support : UInt64
+    send_opaque_command : UInt64
+    get_storage : UInt64
+    get_format_support2 : UInt64
+    get_specify_property_pages : UInt64
+    get_canonical_name : UInt64
   end
 
   IWMDMDevice2_GUID = "e34f3d37-9d67-4fc1-9252-62d28b2f8b55"
@@ -1004,29 +1004,29 @@ lib LibWin32
   end
 
   struct IWMDMDevice3VTbl
-    query_interface : Proc(IWMDMDevice3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMDevice3*, UInt32)
-    release : Proc(IWMDMDevice3*, UInt32)
-    get_name : Proc(IWMDMDevice3*, Char*, UInt32, HRESULT)
-    get_manufacturer : Proc(IWMDMDevice3*, Char*, UInt32, HRESULT)
-    get_version : Proc(IWMDMDevice3*, UInt32*, HRESULT)
-    get_type : Proc(IWMDMDevice3*, UInt32*, HRESULT)
-    get_serial_number : Proc(IWMDMDevice3*, WMDMID*, UInt8*, HRESULT)
-    get_power_source : Proc(IWMDMDevice3*, UInt32*, UInt32*, HRESULT)
-    get_status : Proc(IWMDMDevice3*, UInt32*, HRESULT)
-    get_device_icon : Proc(IWMDMDevice3*, UInt32*, HRESULT)
-    enum_storage : Proc(IWMDMDevice3*, IWMDMEnumStorage*, HRESULT)
-    get_format_support : Proc(IWMDMDevice3*, WAVEFORMATEX**, UInt32*, LibC::LPWSTR**, UInt32*, HRESULT)
-    send_opaque_command : Proc(IWMDMDevice3*, OPAQUECOMMAND*, HRESULT)
-    get_storage : Proc(IWMDMDevice3*, LibC::LPWSTR, IWMDMStorage*, HRESULT)
-    get_format_support2 : Proc(IWMDMDevice3*, UInt32, WAVEFORMATEX**, UInt32*, VIDEOINFOHEADER**, UInt32*, WMFILECAPABILITIES**, UInt32*, HRESULT)
-    get_specify_property_pages : Proc(IWMDMDevice3*, ISpecifyPropertyPages*, IUnknown**, UInt32*, HRESULT)
-    get_canonical_name : Proc(IWMDMDevice3*, Char*, UInt32, HRESULT)
-    get_property : Proc(IWMDMDevice3*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
-    set_property : Proc(IWMDMDevice3*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
-    get_format_capability : Proc(IWMDMDevice3*, WMDM_FORMATCODE, WMDM_FORMAT_CAPABILITY*, HRESULT)
-    device_io_control : Proc(IWMDMDevice3*, UInt32, UInt8*, UInt32, UInt8*, UInt32*, HRESULT)
-    find_storage : Proc(IWMDMDevice3*, WMDM_FIND_SCOPE, LibC::LPWSTR, IWMDMStorage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_name : UInt64
+    get_manufacturer : UInt64
+    get_version : UInt64
+    get_type : UInt64
+    get_serial_number : UInt64
+    get_power_source : UInt64
+    get_status : UInt64
+    get_device_icon : UInt64
+    enum_storage : UInt64
+    get_format_support : UInt64
+    send_opaque_command : UInt64
+    get_storage : UInt64
+    get_format_support2 : UInt64
+    get_specify_property_pages : UInt64
+    get_canonical_name : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    get_format_capability : UInt64
+    device_io_control : UInt64
+    find_storage : UInt64
   end
 
   IWMDMDevice3_GUID = "6c03e4fe-05db-4dda-9e3c-06233a6d5d65"
@@ -1036,11 +1036,11 @@ lib LibWin32
   end
 
   struct IWMDMDeviceSessionVTbl
-    query_interface : Proc(IWMDMDeviceSession*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMDeviceSession*, UInt32)
-    release : Proc(IWMDMDeviceSession*, UInt32)
-    begin_session : Proc(IWMDMDeviceSession*, WMDM_SESSION_TYPE, UInt8*, UInt32, HRESULT)
-    end_session : Proc(IWMDMDeviceSession*, WMDM_SESSION_TYPE, UInt8*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_session : UInt64
+    end_session : UInt64
   end
 
   IWMDMDeviceSession_GUID = "82af0a65-9d96-412c-83e5-3c43e4b06cc7"
@@ -1050,13 +1050,13 @@ lib LibWin32
   end
 
   struct IWMDMEnumDeviceVTbl
-    query_interface : Proc(IWMDMEnumDevice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMEnumDevice*, UInt32)
-    release : Proc(IWMDMEnumDevice*, UInt32)
-    next : Proc(IWMDMEnumDevice*, UInt32, IWMDMDevice*, UInt32*, HRESULT)
-    skip : Proc(IWMDMEnumDevice*, UInt32, UInt32*, HRESULT)
-    reset : Proc(IWMDMEnumDevice*, HRESULT)
-    clone : Proc(IWMDMEnumDevice*, IWMDMEnumDevice*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IWMDMEnumDevice_GUID = "1dcb3a01-33ed-11d3-8470-00c04f79dbc0"
@@ -1066,17 +1066,17 @@ lib LibWin32
   end
 
   struct IWMDMDeviceControlVTbl
-    query_interface : Proc(IWMDMDeviceControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMDeviceControl*, UInt32)
-    release : Proc(IWMDMDeviceControl*, UInt32)
-    get_status : Proc(IWMDMDeviceControl*, UInt32*, HRESULT)
-    get_capabilities : Proc(IWMDMDeviceControl*, UInt32*, HRESULT)
-    play : Proc(IWMDMDeviceControl*, HRESULT)
-    record : Proc(IWMDMDeviceControl*, WAVEFORMATEX*, HRESULT)
-    pause : Proc(IWMDMDeviceControl*, HRESULT)
-    resume : Proc(IWMDMDeviceControl*, HRESULT)
-    stop : Proc(IWMDMDeviceControl*, HRESULT)
-    seek : Proc(IWMDMDeviceControl*, UInt32, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_status : UInt64
+    get_capabilities : UInt64
+    play : UInt64
+    record : UInt64
+    pause : UInt64
+    resume : UInt64
+    stop : UInt64
+    seek : UInt64
   end
 
   IWMDMDeviceControl_GUID = "1dcb3a04-33ed-11d3-8470-00c04f79dbc0"
@@ -1086,13 +1086,13 @@ lib LibWin32
   end
 
   struct IWMDMEnumStorageVTbl
-    query_interface : Proc(IWMDMEnumStorage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMEnumStorage*, UInt32)
-    release : Proc(IWMDMEnumStorage*, UInt32)
-    next : Proc(IWMDMEnumStorage*, UInt32, IWMDMStorage*, UInt32*, HRESULT)
-    skip : Proc(IWMDMEnumStorage*, UInt32, UInt32*, HRESULT)
-    reset : Proc(IWMDMEnumStorage*, HRESULT)
-    clone : Proc(IWMDMEnumStorage*, IWMDMEnumStorage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IWMDMEnumStorage_GUID = "1dcb3a05-33ed-11d3-8470-00c04f79dbc0"
@@ -1102,14 +1102,14 @@ lib LibWin32
   end
 
   struct IWMDMStorageControlVTbl
-    query_interface : Proc(IWMDMStorageControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMStorageControl*, UInt32)
-    release : Proc(IWMDMStorageControl*, UInt32)
-    insert : Proc(IWMDMStorageControl*, UInt32, LibC::LPWSTR, IWMDMOperation, IWMDMProgress, IWMDMStorage*, HRESULT)
-    delete : Proc(IWMDMStorageControl*, UInt32, IWMDMProgress, HRESULT)
-    rename : Proc(IWMDMStorageControl*, UInt32, LibC::LPWSTR, IWMDMProgress, HRESULT)
-    read : Proc(IWMDMStorageControl*, UInt32, LibC::LPWSTR, IWMDMProgress, IWMDMOperation, HRESULT)
-    move : Proc(IWMDMStorageControl*, UInt32, IWMDMStorage, IWMDMProgress, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    insert : UInt64
+    delete : UInt64
+    rename : UInt64
+    read : UInt64
+    move : UInt64
   end
 
   IWMDMStorageControl_GUID = "1dcb3a08-33ed-11d3-8470-00c04f79dbc0"
@@ -1119,15 +1119,15 @@ lib LibWin32
   end
 
   struct IWMDMStorageControl2VTbl
-    query_interface : Proc(IWMDMStorageControl2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMStorageControl2*, UInt32)
-    release : Proc(IWMDMStorageControl2*, UInt32)
-    insert : Proc(IWMDMStorageControl2*, UInt32, LibC::LPWSTR, IWMDMOperation, IWMDMProgress, IWMDMStorage*, HRESULT)
-    delete : Proc(IWMDMStorageControl2*, UInt32, IWMDMProgress, HRESULT)
-    rename : Proc(IWMDMStorageControl2*, UInt32, LibC::LPWSTR, IWMDMProgress, HRESULT)
-    read : Proc(IWMDMStorageControl2*, UInt32, LibC::LPWSTR, IWMDMProgress, IWMDMOperation, HRESULT)
-    move : Proc(IWMDMStorageControl2*, UInt32, IWMDMStorage, IWMDMProgress, HRESULT)
-    insert2 : Proc(IWMDMStorageControl2*, UInt32, LibC::LPWSTR, LibC::LPWSTR, IWMDMOperation, IWMDMProgress, IUnknown, IWMDMStorage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    insert : UInt64
+    delete : UInt64
+    rename : UInt64
+    read : UInt64
+    move : UInt64
+    insert2 : UInt64
   end
 
   IWMDMStorageControl2_GUID = "972c2e88-bd6c-4125-8e09-84f837e637b6"
@@ -1137,16 +1137,16 @@ lib LibWin32
   end
 
   struct IWMDMStorageControl3VTbl
-    query_interface : Proc(IWMDMStorageControl3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMStorageControl3*, UInt32)
-    release : Proc(IWMDMStorageControl3*, UInt32)
-    insert : Proc(IWMDMStorageControl3*, UInt32, LibC::LPWSTR, IWMDMOperation, IWMDMProgress, IWMDMStorage*, HRESULT)
-    delete : Proc(IWMDMStorageControl3*, UInt32, IWMDMProgress, HRESULT)
-    rename : Proc(IWMDMStorageControl3*, UInt32, LibC::LPWSTR, IWMDMProgress, HRESULT)
-    read : Proc(IWMDMStorageControl3*, UInt32, LibC::LPWSTR, IWMDMProgress, IWMDMOperation, HRESULT)
-    move : Proc(IWMDMStorageControl3*, UInt32, IWMDMStorage, IWMDMProgress, HRESULT)
-    insert2 : Proc(IWMDMStorageControl3*, UInt32, LibC::LPWSTR, LibC::LPWSTR, IWMDMOperation, IWMDMProgress, IUnknown, IWMDMStorage*, HRESULT)
-    insert3 : Proc(IWMDMStorageControl3*, UInt32, UInt32, LibC::LPWSTR, LibC::LPWSTR, IWMDMOperation, IWMDMProgress, IWMDMMetaData, IUnknown, IWMDMStorage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    insert : UInt64
+    delete : UInt64
+    rename : UInt64
+    read : UInt64
+    move : UInt64
+    insert2 : UInt64
+    insert3 : UInt64
   end
 
   IWMDMStorageControl3_GUID = "b3266365-d4f3-4696-8d53-bd27ec60993a"
@@ -1156,16 +1156,16 @@ lib LibWin32
   end
 
   struct IWMDMObjectInfoVTbl
-    query_interface : Proc(IWMDMObjectInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMObjectInfo*, UInt32)
-    release : Proc(IWMDMObjectInfo*, UInt32)
-    get_play_length : Proc(IWMDMObjectInfo*, UInt32*, HRESULT)
-    set_play_length : Proc(IWMDMObjectInfo*, UInt32, HRESULT)
-    get_play_offset : Proc(IWMDMObjectInfo*, UInt32*, HRESULT)
-    set_play_offset : Proc(IWMDMObjectInfo*, UInt32, HRESULT)
-    get_total_length : Proc(IWMDMObjectInfo*, UInt32*, HRESULT)
-    get_last_play_position : Proc(IWMDMObjectInfo*, UInt32*, HRESULT)
-    get_longest_play_position : Proc(IWMDMObjectInfo*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_play_length : UInt64
+    set_play_length : UInt64
+    get_play_offset : UInt64
+    set_play_offset : UInt64
+    get_total_length : UInt64
+    get_last_play_position : UInt64
+    get_longest_play_position : UInt64
   end
 
   IWMDMObjectInfo_GUID = "1dcb3a09-33ed-11d3-8470-00c04f79dbc0"
@@ -1175,10 +1175,10 @@ lib LibWin32
   end
 
   struct IWMDMRevokedVTbl
-    query_interface : Proc(IWMDMRevoked*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMRevoked*, UInt32)
-    release : Proc(IWMDMRevoked*, UInt32)
-    get_revocation_url : Proc(IWMDMRevoked*, LibC::LPWSTR*, UInt32*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_revocation_url : UInt64
   end
 
   IWMDMRevoked_GUID = "ebeccedb-88ee-4e55-b6a4-8d9f07d696aa"
@@ -1188,10 +1188,10 @@ lib LibWin32
   end
 
   struct IWMDMNotificationVTbl
-    query_interface : Proc(IWMDMNotification*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMNotification*, UInt32)
-    release : Proc(IWMDMNotification*, UInt32)
-    wmdm_message : Proc(IWMDMNotification*, UInt32, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    wmdm_message : UInt64
   end
 
   IWMDMNotification_GUID = "3f5e95c0-0f43-4ed4-93d2-c89a45d59b81"
@@ -1201,11 +1201,11 @@ lib LibWin32
   end
 
   struct IMDServiceProviderVTbl
-    query_interface : Proc(IMDServiceProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDServiceProvider*, UInt32)
-    release : Proc(IMDServiceProvider*, UInt32)
-    get_device_count : Proc(IMDServiceProvider*, UInt32*, HRESULT)
-    enum_devices : Proc(IMDServiceProvider*, IMDSPEnumDevice*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device_count : UInt64
+    enum_devices : UInt64
   end
 
   IMDServiceProvider_GUID = "1dcb3a10-33ed-11d3-8470-00c04f79dbc0"
@@ -1215,12 +1215,12 @@ lib LibWin32
   end
 
   struct IMDServiceProvider2VTbl
-    query_interface : Proc(IMDServiceProvider2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDServiceProvider2*, UInt32)
-    release : Proc(IMDServiceProvider2*, UInt32)
-    get_device_count : Proc(IMDServiceProvider2*, UInt32*, HRESULT)
-    enum_devices : Proc(IMDServiceProvider2*, IMDSPEnumDevice*, HRESULT)
-    create_device : Proc(IMDServiceProvider2*, LibC::LPWSTR, UInt32*, IMDSPDevice**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device_count : UInt64
+    enum_devices : UInt64
+    create_device : UInt64
   end
 
   IMDServiceProvider2_GUID = "b2fa24b7-cda3-4694-9862-413ae1a34819"
@@ -1230,13 +1230,13 @@ lib LibWin32
   end
 
   struct IMDServiceProvider3VTbl
-    query_interface : Proc(IMDServiceProvider3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDServiceProvider3*, UInt32)
-    release : Proc(IMDServiceProvider3*, UInt32)
-    get_device_count : Proc(IMDServiceProvider3*, UInt32*, HRESULT)
-    enum_devices : Proc(IMDServiceProvider3*, IMDSPEnumDevice*, HRESULT)
-    create_device : Proc(IMDServiceProvider3*, LibC::LPWSTR, UInt32*, IMDSPDevice**, HRESULT)
-    set_device_enum_preference : Proc(IMDServiceProvider3*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device_count : UInt64
+    enum_devices : UInt64
+    create_device : UInt64
+    set_device_enum_preference : UInt64
   end
 
   IMDServiceProvider3_GUID = "4ed13ef3-a971-4d19-9f51-0e1826b2da57"
@@ -1246,13 +1246,13 @@ lib LibWin32
   end
 
   struct IMDSPEnumDeviceVTbl
-    query_interface : Proc(IMDSPEnumDevice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDSPEnumDevice*, UInt32)
-    release : Proc(IMDSPEnumDevice*, UInt32)
-    next : Proc(IMDSPEnumDevice*, UInt32, IMDSPDevice*, UInt32*, HRESULT)
-    skip : Proc(IMDSPEnumDevice*, UInt32, UInt32*, HRESULT)
-    reset : Proc(IMDSPEnumDevice*, HRESULT)
-    clone : Proc(IMDSPEnumDevice*, IMDSPEnumDevice*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IMDSPEnumDevice_GUID = "1dcb3a11-33ed-11d3-8470-00c04f79dbc0"
@@ -1262,20 +1262,20 @@ lib LibWin32
   end
 
   struct IMDSPDeviceVTbl
-    query_interface : Proc(IMDSPDevice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDSPDevice*, UInt32)
-    release : Proc(IMDSPDevice*, UInt32)
-    get_name : Proc(IMDSPDevice*, Char*, UInt32, HRESULT)
-    get_manufacturer : Proc(IMDSPDevice*, Char*, UInt32, HRESULT)
-    get_version : Proc(IMDSPDevice*, UInt32*, HRESULT)
-    get_type : Proc(IMDSPDevice*, UInt32*, HRESULT)
-    get_serial_number : Proc(IMDSPDevice*, WMDMID*, UInt8*, HRESULT)
-    get_power_source : Proc(IMDSPDevice*, UInt32*, UInt32*, HRESULT)
-    get_status : Proc(IMDSPDevice*, UInt32*, HRESULT)
-    get_device_icon : Proc(IMDSPDevice*, UInt32*, HRESULT)
-    enum_storage : Proc(IMDSPDevice*, IMDSPEnumStorage*, HRESULT)
-    get_format_support : Proc(IMDSPDevice*, WAVEFORMATEX**, UInt32*, LibC::LPWSTR**, UInt32*, HRESULT)
-    send_opaque_command : Proc(IMDSPDevice*, OPAQUECOMMAND*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_name : UInt64
+    get_manufacturer : UInt64
+    get_version : UInt64
+    get_type : UInt64
+    get_serial_number : UInt64
+    get_power_source : UInt64
+    get_status : UInt64
+    get_device_icon : UInt64
+    enum_storage : UInt64
+    get_format_support : UInt64
+    send_opaque_command : UInt64
   end
 
   IMDSPDevice_GUID = "1dcb3a12-33ed-11d3-8470-00c04f79dbc0"
@@ -1285,24 +1285,24 @@ lib LibWin32
   end
 
   struct IMDSPDevice2VTbl
-    query_interface : Proc(IMDSPDevice2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDSPDevice2*, UInt32)
-    release : Proc(IMDSPDevice2*, UInt32)
-    get_name : Proc(IMDSPDevice2*, Char*, UInt32, HRESULT)
-    get_manufacturer : Proc(IMDSPDevice2*, Char*, UInt32, HRESULT)
-    get_version : Proc(IMDSPDevice2*, UInt32*, HRESULT)
-    get_type : Proc(IMDSPDevice2*, UInt32*, HRESULT)
-    get_serial_number : Proc(IMDSPDevice2*, WMDMID*, UInt8*, HRESULT)
-    get_power_source : Proc(IMDSPDevice2*, UInt32*, UInt32*, HRESULT)
-    get_status : Proc(IMDSPDevice2*, UInt32*, HRESULT)
-    get_device_icon : Proc(IMDSPDevice2*, UInt32*, HRESULT)
-    enum_storage : Proc(IMDSPDevice2*, IMDSPEnumStorage*, HRESULT)
-    get_format_support : Proc(IMDSPDevice2*, WAVEFORMATEX**, UInt32*, LibC::LPWSTR**, UInt32*, HRESULT)
-    send_opaque_command : Proc(IMDSPDevice2*, OPAQUECOMMAND*, HRESULT)
-    get_storage : Proc(IMDSPDevice2*, LibC::LPWSTR, IMDSPStorage*, HRESULT)
-    get_format_support2 : Proc(IMDSPDevice2*, UInt32, WAVEFORMATEX**, UInt32*, VIDEOINFOHEADER**, UInt32*, WMFILECAPABILITIES**, UInt32*, HRESULT)
-    get_specify_property_pages : Proc(IMDSPDevice2*, ISpecifyPropertyPages*, IUnknown**, UInt32*, HRESULT)
-    get_canonical_name : Proc(IMDSPDevice2*, Char*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_name : UInt64
+    get_manufacturer : UInt64
+    get_version : UInt64
+    get_type : UInt64
+    get_serial_number : UInt64
+    get_power_source : UInt64
+    get_status : UInt64
+    get_device_icon : UInt64
+    enum_storage : UInt64
+    get_format_support : UInt64
+    send_opaque_command : UInt64
+    get_storage : UInt64
+    get_format_support2 : UInt64
+    get_specify_property_pages : UInt64
+    get_canonical_name : UInt64
   end
 
   IMDSPDevice2_GUID = "420d16ad-c97d-4e00-82aa-00e9f4335ddd"
@@ -1312,29 +1312,29 @@ lib LibWin32
   end
 
   struct IMDSPDevice3VTbl
-    query_interface : Proc(IMDSPDevice3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDSPDevice3*, UInt32)
-    release : Proc(IMDSPDevice3*, UInt32)
-    get_name : Proc(IMDSPDevice3*, Char*, UInt32, HRESULT)
-    get_manufacturer : Proc(IMDSPDevice3*, Char*, UInt32, HRESULT)
-    get_version : Proc(IMDSPDevice3*, UInt32*, HRESULT)
-    get_type : Proc(IMDSPDevice3*, UInt32*, HRESULT)
-    get_serial_number : Proc(IMDSPDevice3*, WMDMID*, UInt8*, HRESULT)
-    get_power_source : Proc(IMDSPDevice3*, UInt32*, UInt32*, HRESULT)
-    get_status : Proc(IMDSPDevice3*, UInt32*, HRESULT)
-    get_device_icon : Proc(IMDSPDevice3*, UInt32*, HRESULT)
-    enum_storage : Proc(IMDSPDevice3*, IMDSPEnumStorage*, HRESULT)
-    get_format_support : Proc(IMDSPDevice3*, WAVEFORMATEX**, UInt32*, LibC::LPWSTR**, UInt32*, HRESULT)
-    send_opaque_command : Proc(IMDSPDevice3*, OPAQUECOMMAND*, HRESULT)
-    get_storage : Proc(IMDSPDevice3*, LibC::LPWSTR, IMDSPStorage*, HRESULT)
-    get_format_support2 : Proc(IMDSPDevice3*, UInt32, WAVEFORMATEX**, UInt32*, VIDEOINFOHEADER**, UInt32*, WMFILECAPABILITIES**, UInt32*, HRESULT)
-    get_specify_property_pages : Proc(IMDSPDevice3*, ISpecifyPropertyPages*, IUnknown**, UInt32*, HRESULT)
-    get_canonical_name : Proc(IMDSPDevice3*, Char*, UInt32, HRESULT)
-    get_property : Proc(IMDSPDevice3*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
-    set_property : Proc(IMDSPDevice3*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
-    get_format_capability : Proc(IMDSPDevice3*, WMDM_FORMATCODE, WMDM_FORMAT_CAPABILITY*, HRESULT)
-    device_io_control : Proc(IMDSPDevice3*, UInt32, UInt8*, UInt32, UInt8*, UInt32*, HRESULT)
-    find_storage : Proc(IMDSPDevice3*, WMDM_FIND_SCOPE, LibC::LPWSTR, IMDSPStorage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_name : UInt64
+    get_manufacturer : UInt64
+    get_version : UInt64
+    get_type : UInt64
+    get_serial_number : UInt64
+    get_power_source : UInt64
+    get_status : UInt64
+    get_device_icon : UInt64
+    enum_storage : UInt64
+    get_format_support : UInt64
+    send_opaque_command : UInt64
+    get_storage : UInt64
+    get_format_support2 : UInt64
+    get_specify_property_pages : UInt64
+    get_canonical_name : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    get_format_capability : UInt64
+    device_io_control : UInt64
+    find_storage : UInt64
   end
 
   IMDSPDevice3_GUID = "1a839845-fc55-487c-976f-ee38ac0e8c4e"
@@ -1344,17 +1344,17 @@ lib LibWin32
   end
 
   struct IMDSPDeviceControlVTbl
-    query_interface : Proc(IMDSPDeviceControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDSPDeviceControl*, UInt32)
-    release : Proc(IMDSPDeviceControl*, UInt32)
-    get_dc_status : Proc(IMDSPDeviceControl*, UInt32*, HRESULT)
-    get_capabilities : Proc(IMDSPDeviceControl*, UInt32*, HRESULT)
-    play : Proc(IMDSPDeviceControl*, HRESULT)
-    record : Proc(IMDSPDeviceControl*, WAVEFORMATEX*, HRESULT)
-    pause : Proc(IMDSPDeviceControl*, HRESULT)
-    resume : Proc(IMDSPDeviceControl*, HRESULT)
-    stop : Proc(IMDSPDeviceControl*, HRESULT)
-    seek : Proc(IMDSPDeviceControl*, UInt32, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_dc_status : UInt64
+    get_capabilities : UInt64
+    play : UInt64
+    record : UInt64
+    pause : UInt64
+    resume : UInt64
+    stop : UInt64
+    seek : UInt64
   end
 
   IMDSPDeviceControl_GUID = "1dcb3a14-33ed-11d3-8470-00c04f79dbc0"
@@ -1364,13 +1364,13 @@ lib LibWin32
   end
 
   struct IMDSPEnumStorageVTbl
-    query_interface : Proc(IMDSPEnumStorage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDSPEnumStorage*, UInt32)
-    release : Proc(IMDSPEnumStorage*, UInt32)
-    next : Proc(IMDSPEnumStorage*, UInt32, IMDSPStorage*, UInt32*, HRESULT)
-    skip : Proc(IMDSPEnumStorage*, UInt32, UInt32*, HRESULT)
-    reset : Proc(IMDSPEnumStorage*, HRESULT)
-    clone : Proc(IMDSPEnumStorage*, IMDSPEnumStorage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IMDSPEnumStorage_GUID = "1dcb3a15-33ed-11d3-8470-00c04f79dbc0"
@@ -1380,19 +1380,19 @@ lib LibWin32
   end
 
   struct IMDSPStorageVTbl
-    query_interface : Proc(IMDSPStorage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDSPStorage*, UInt32)
-    release : Proc(IMDSPStorage*, UInt32)
-    set_attributes : Proc(IMDSPStorage*, UInt32, WAVEFORMATEX*, HRESULT)
-    get_storage_globals : Proc(IMDSPStorage*, IMDSPStorageGlobals*, HRESULT)
-    get_attributes : Proc(IMDSPStorage*, UInt32*, WAVEFORMATEX*, HRESULT)
-    get_name : Proc(IMDSPStorage*, Char*, UInt32, HRESULT)
-    get_date : Proc(IMDSPStorage*, WMDMDATETIME*, HRESULT)
-    get_size : Proc(IMDSPStorage*, UInt32*, UInt32*, HRESULT)
-    get_rights : Proc(IMDSPStorage*, WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)
-    create_storage : Proc(IMDSPStorage*, UInt32, WAVEFORMATEX*, LibC::LPWSTR, IMDSPStorage*, HRESULT)
-    enum_storage : Proc(IMDSPStorage*, IMDSPEnumStorage*, HRESULT)
-    send_opaque_command : Proc(IMDSPStorage*, OPAQUECOMMAND*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_attributes : UInt64
+    get_storage_globals : UInt64
+    get_attributes : UInt64
+    get_name : UInt64
+    get_date : UInt64
+    get_size : UInt64
+    get_rights : UInt64
+    create_storage : UInt64
+    enum_storage : UInt64
+    send_opaque_command : UInt64
   end
 
   IMDSPStorage_GUID = "1dcb3a16-33ed-11d3-8470-00c04f79dbc0"
@@ -1402,23 +1402,23 @@ lib LibWin32
   end
 
   struct IMDSPStorage2VTbl
-    query_interface : Proc(IMDSPStorage2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDSPStorage2*, UInt32)
-    release : Proc(IMDSPStorage2*, UInt32)
-    set_attributes : Proc(IMDSPStorage2*, UInt32, WAVEFORMATEX*, HRESULT)
-    get_storage_globals : Proc(IMDSPStorage2*, IMDSPStorageGlobals*, HRESULT)
-    get_attributes : Proc(IMDSPStorage2*, UInt32*, WAVEFORMATEX*, HRESULT)
-    get_name : Proc(IMDSPStorage2*, Char*, UInt32, HRESULT)
-    get_date : Proc(IMDSPStorage2*, WMDMDATETIME*, HRESULT)
-    get_size : Proc(IMDSPStorage2*, UInt32*, UInt32*, HRESULT)
-    get_rights : Proc(IMDSPStorage2*, WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)
-    create_storage : Proc(IMDSPStorage2*, UInt32, WAVEFORMATEX*, LibC::LPWSTR, IMDSPStorage*, HRESULT)
-    enum_storage : Proc(IMDSPStorage2*, IMDSPEnumStorage*, HRESULT)
-    send_opaque_command : Proc(IMDSPStorage2*, OPAQUECOMMAND*, HRESULT)
-    get_storage : Proc(IMDSPStorage2*, LibC::LPWSTR, IMDSPStorage*, HRESULT)
-    create_storage2 : Proc(IMDSPStorage2*, UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, LibC::LPWSTR, UInt64, IMDSPStorage*, HRESULT)
-    set_attributes2 : Proc(IMDSPStorage2*, UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
-    get_attributes2 : Proc(IMDSPStorage2*, UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_attributes : UInt64
+    get_storage_globals : UInt64
+    get_attributes : UInt64
+    get_name : UInt64
+    get_date : UInt64
+    get_size : UInt64
+    get_rights : UInt64
+    create_storage : UInt64
+    enum_storage : UInt64
+    send_opaque_command : UInt64
+    get_storage : UInt64
+    create_storage2 : UInt64
+    set_attributes2 : UInt64
+    get_attributes2 : UInt64
   end
 
   IMDSPStorage2_GUID = "0a5e07a5-6454-4451-9c36-1c6ae7e2b1d6"
@@ -1428,25 +1428,25 @@ lib LibWin32
   end
 
   struct IMDSPStorage3VTbl
-    query_interface : Proc(IMDSPStorage3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDSPStorage3*, UInt32)
-    release : Proc(IMDSPStorage3*, UInt32)
-    set_attributes : Proc(IMDSPStorage3*, UInt32, WAVEFORMATEX*, HRESULT)
-    get_storage_globals : Proc(IMDSPStorage3*, IMDSPStorageGlobals*, HRESULT)
-    get_attributes : Proc(IMDSPStorage3*, UInt32*, WAVEFORMATEX*, HRESULT)
-    get_name : Proc(IMDSPStorage3*, Char*, UInt32, HRESULT)
-    get_date : Proc(IMDSPStorage3*, WMDMDATETIME*, HRESULT)
-    get_size : Proc(IMDSPStorage3*, UInt32*, UInt32*, HRESULT)
-    get_rights : Proc(IMDSPStorage3*, WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)
-    create_storage : Proc(IMDSPStorage3*, UInt32, WAVEFORMATEX*, LibC::LPWSTR, IMDSPStorage*, HRESULT)
-    enum_storage : Proc(IMDSPStorage3*, IMDSPEnumStorage*, HRESULT)
-    send_opaque_command : Proc(IMDSPStorage3*, OPAQUECOMMAND*, HRESULT)
-    get_storage : Proc(IMDSPStorage3*, LibC::LPWSTR, IMDSPStorage*, HRESULT)
-    create_storage2 : Proc(IMDSPStorage3*, UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, LibC::LPWSTR, UInt64, IMDSPStorage*, HRESULT)
-    set_attributes2 : Proc(IMDSPStorage3*, UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
-    get_attributes2 : Proc(IMDSPStorage3*, UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
-    get_metadata : Proc(IMDSPStorage3*, IWMDMMetaData, HRESULT)
-    set_metadata : Proc(IMDSPStorage3*, IWMDMMetaData, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_attributes : UInt64
+    get_storage_globals : UInt64
+    get_attributes : UInt64
+    get_name : UInt64
+    get_date : UInt64
+    get_size : UInt64
+    get_rights : UInt64
+    create_storage : UInt64
+    enum_storage : UInt64
+    send_opaque_command : UInt64
+    get_storage : UInt64
+    create_storage2 : UInt64
+    set_attributes2 : UInt64
+    get_attributes2 : UInt64
+    get_metadata : UInt64
+    set_metadata : UInt64
   end
 
   IMDSPStorage3_GUID = "6c669867-97ed-4a67-9706-1c5529d2a414"
@@ -1456,31 +1456,31 @@ lib LibWin32
   end
 
   struct IMDSPStorage4VTbl
-    query_interface : Proc(IMDSPStorage4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDSPStorage4*, UInt32)
-    release : Proc(IMDSPStorage4*, UInt32)
-    set_attributes : Proc(IMDSPStorage4*, UInt32, WAVEFORMATEX*, HRESULT)
-    get_storage_globals : Proc(IMDSPStorage4*, IMDSPStorageGlobals*, HRESULT)
-    get_attributes : Proc(IMDSPStorage4*, UInt32*, WAVEFORMATEX*, HRESULT)
-    get_name : Proc(IMDSPStorage4*, Char*, UInt32, HRESULT)
-    get_date : Proc(IMDSPStorage4*, WMDMDATETIME*, HRESULT)
-    get_size : Proc(IMDSPStorage4*, UInt32*, UInt32*, HRESULT)
-    get_rights : Proc(IMDSPStorage4*, WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)
-    create_storage : Proc(IMDSPStorage4*, UInt32, WAVEFORMATEX*, LibC::LPWSTR, IMDSPStorage*, HRESULT)
-    enum_storage : Proc(IMDSPStorage4*, IMDSPEnumStorage*, HRESULT)
-    send_opaque_command : Proc(IMDSPStorage4*, OPAQUECOMMAND*, HRESULT)
-    get_storage : Proc(IMDSPStorage4*, LibC::LPWSTR, IMDSPStorage*, HRESULT)
-    create_storage2 : Proc(IMDSPStorage4*, UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, LibC::LPWSTR, UInt64, IMDSPStorage*, HRESULT)
-    set_attributes2 : Proc(IMDSPStorage4*, UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
-    get_attributes2 : Proc(IMDSPStorage4*, UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)
-    get_metadata : Proc(IMDSPStorage4*, IWMDMMetaData, HRESULT)
-    set_metadata : Proc(IMDSPStorage4*, IWMDMMetaData, HRESULT)
-    set_references : Proc(IMDSPStorage4*, UInt32, IMDSPStorage*, HRESULT)
-    get_references : Proc(IMDSPStorage4*, UInt32*, IMDSPStorage**, HRESULT)
-    create_storage_with_metadata : Proc(IMDSPStorage4*, UInt32, LibC::LPWSTR, IWMDMMetaData, UInt64, IMDSPStorage*, HRESULT)
-    get_specified_metadata : Proc(IMDSPStorage4*, UInt32, LibC::LPWSTR*, IWMDMMetaData, HRESULT)
-    find_storage : Proc(IMDSPStorage4*, WMDM_FIND_SCOPE, LibC::LPWSTR, IMDSPStorage*, HRESULT)
-    get_parent : Proc(IMDSPStorage4*, IMDSPStorage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_attributes : UInt64
+    get_storage_globals : UInt64
+    get_attributes : UInt64
+    get_name : UInt64
+    get_date : UInt64
+    get_size : UInt64
+    get_rights : UInt64
+    create_storage : UInt64
+    enum_storage : UInt64
+    send_opaque_command : UInt64
+    get_storage : UInt64
+    create_storage2 : UInt64
+    set_attributes2 : UInt64
+    get_attributes2 : UInt64
+    get_metadata : UInt64
+    set_metadata : UInt64
+    set_references : UInt64
+    get_references : UInt64
+    create_storage_with_metadata : UInt64
+    get_specified_metadata : UInt64
+    find_storage : UInt64
+    get_parent : UInt64
   end
 
   IMDSPStorage4_GUID = "3133b2c4-515c-481b-b1ce-39327ecb4f74"
@@ -1490,18 +1490,18 @@ lib LibWin32
   end
 
   struct IMDSPStorageGlobalsVTbl
-    query_interface : Proc(IMDSPStorageGlobals*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDSPStorageGlobals*, UInt32)
-    release : Proc(IMDSPStorageGlobals*, UInt32)
-    get_capabilities : Proc(IMDSPStorageGlobals*, UInt32*, HRESULT)
-    get_serial_number : Proc(IMDSPStorageGlobals*, WMDMID*, UInt8*, HRESULT)
-    get_total_size : Proc(IMDSPStorageGlobals*, UInt32*, UInt32*, HRESULT)
-    get_total_free : Proc(IMDSPStorageGlobals*, UInt32*, UInt32*, HRESULT)
-    get_total_bad : Proc(IMDSPStorageGlobals*, UInt32*, UInt32*, HRESULT)
-    get_status : Proc(IMDSPStorageGlobals*, UInt32*, HRESULT)
-    initialize : Proc(IMDSPStorageGlobals*, UInt32, IWMDMProgress, HRESULT)
-    get_device : Proc(IMDSPStorageGlobals*, IMDSPDevice*, HRESULT)
-    get_root_storage : Proc(IMDSPStorageGlobals*, IMDSPStorage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_capabilities : UInt64
+    get_serial_number : UInt64
+    get_total_size : UInt64
+    get_total_free : UInt64
+    get_total_bad : UInt64
+    get_status : UInt64
+    initialize : UInt64
+    get_device : UInt64
+    get_root_storage : UInt64
   end
 
   IMDSPStorageGlobals_GUID = "1dcb3a17-33ed-11d3-8470-00c04f79dbc0"
@@ -1511,16 +1511,16 @@ lib LibWin32
   end
 
   struct IMDSPObjectInfoVTbl
-    query_interface : Proc(IMDSPObjectInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDSPObjectInfo*, UInt32)
-    release : Proc(IMDSPObjectInfo*, UInt32)
-    get_play_length : Proc(IMDSPObjectInfo*, UInt32*, HRESULT)
-    set_play_length : Proc(IMDSPObjectInfo*, UInt32, HRESULT)
-    get_play_offset : Proc(IMDSPObjectInfo*, UInt32*, HRESULT)
-    set_play_offset : Proc(IMDSPObjectInfo*, UInt32, HRESULT)
-    get_total_length : Proc(IMDSPObjectInfo*, UInt32*, HRESULT)
-    get_last_play_position : Proc(IMDSPObjectInfo*, UInt32*, HRESULT)
-    get_longest_play_position : Proc(IMDSPObjectInfo*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_play_length : UInt64
+    set_play_length : UInt64
+    get_play_offset : UInt64
+    set_play_offset : UInt64
+    get_total_length : UInt64
+    get_last_play_position : UInt64
+    get_longest_play_position : UInt64
   end
 
   IMDSPObjectInfo_GUID = "1dcb3a19-33ed-11d3-8470-00c04f79dbc0"
@@ -1530,17 +1530,17 @@ lib LibWin32
   end
 
   struct IMDSPObjectVTbl
-    query_interface : Proc(IMDSPObject*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDSPObject*, UInt32)
-    release : Proc(IMDSPObject*, UInt32)
-    open : Proc(IMDSPObject*, UInt32, HRESULT)
-    read : Proc(IMDSPObject*, UInt8*, UInt32*, UInt8*, HRESULT)
-    write : Proc(IMDSPObject*, UInt8*, UInt32*, UInt8*, HRESULT)
-    delete : Proc(IMDSPObject*, UInt32, IWMDMProgress, HRESULT)
-    seek : Proc(IMDSPObject*, UInt32, UInt32, HRESULT)
-    rename : Proc(IMDSPObject*, LibC::LPWSTR, IWMDMProgress, HRESULT)
-    move : Proc(IMDSPObject*, UInt32, IWMDMProgress, IMDSPStorage, HRESULT)
-    close : Proc(IMDSPObject*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    open : UInt64
+    read : UInt64
+    write : UInt64
+    delete : UInt64
+    seek : UInt64
+    rename : UInt64
+    move : UInt64
+    close : UInt64
   end
 
   IMDSPObject_GUID = "1dcb3a18-33ed-11d3-8470-00c04f79dbc0"
@@ -1550,19 +1550,19 @@ lib LibWin32
   end
 
   struct IMDSPObject2VTbl
-    query_interface : Proc(IMDSPObject2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDSPObject2*, UInt32)
-    release : Proc(IMDSPObject2*, UInt32)
-    open : Proc(IMDSPObject2*, UInt32, HRESULT)
-    read : Proc(IMDSPObject2*, UInt8*, UInt32*, UInt8*, HRESULT)
-    write : Proc(IMDSPObject2*, UInt8*, UInt32*, UInt8*, HRESULT)
-    delete : Proc(IMDSPObject2*, UInt32, IWMDMProgress, HRESULT)
-    seek : Proc(IMDSPObject2*, UInt32, UInt32, HRESULT)
-    rename : Proc(IMDSPObject2*, LibC::LPWSTR, IWMDMProgress, HRESULT)
-    move : Proc(IMDSPObject2*, UInt32, IWMDMProgress, IMDSPStorage, HRESULT)
-    close : Proc(IMDSPObject2*, HRESULT)
-    read_on_clear_channel : Proc(IMDSPObject2*, UInt8*, UInt32*, HRESULT)
-    write_on_clear_channel : Proc(IMDSPObject2*, UInt8*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    open : UInt64
+    read : UInt64
+    write : UInt64
+    delete : UInt64
+    seek : UInt64
+    rename : UInt64
+    move : UInt64
+    close : UInt64
+    read_on_clear_channel : UInt64
+    write_on_clear_channel : UInt64
   end
 
   IMDSPObject2_GUID = "3f34cd3e-5907-4341-9af9-97f4187c3aa5"
@@ -1572,10 +1572,10 @@ lib LibWin32
   end
 
   struct IMDSPDirectTransferVTbl
-    query_interface : Proc(IMDSPDirectTransfer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDSPDirectTransfer*, UInt32)
-    release : Proc(IMDSPDirectTransfer*, UInt32)
-    transfer_to_device : Proc(IMDSPDirectTransfer*, LibC::LPWSTR, IWMDMOperation, UInt32, LibC::LPWSTR, IWMDMMetaData, IWMDMProgress, IMDSPStorage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    transfer_to_device : UInt64
   end
 
   IMDSPDirectTransfer_GUID = "c2fe57a8-9304-478c-9ee4-47e397b912d7"
@@ -1585,10 +1585,10 @@ lib LibWin32
   end
 
   struct IMDSPRevokedVTbl
-    query_interface : Proc(IMDSPRevoked*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMDSPRevoked*, UInt32)
-    release : Proc(IMDSPRevoked*, UInt32)
-    get_revocation_url : Proc(IMDSPRevoked*, LibC::LPWSTR*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_revocation_url : UInt64
   end
 
   IMDSPRevoked_GUID = "a4e8f2d4-3f31-464d-b53d-4fc335998184"
@@ -1598,10 +1598,10 @@ lib LibWin32
   end
 
   struct ISCPSecureAuthenticateVTbl
-    query_interface : Proc(ISCPSecureAuthenticate*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISCPSecureAuthenticate*, UInt32)
-    release : Proc(ISCPSecureAuthenticate*, UInt32)
-    get_secure_query : Proc(ISCPSecureAuthenticate*, ISCPSecureQuery*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_secure_query : UInt64
   end
 
   ISCPSecureAuthenticate_GUID = "1dcb3a0f-33ed-11d3-8470-00c04f79dbc0"
@@ -1611,11 +1611,11 @@ lib LibWin32
   end
 
   struct ISCPSecureAuthenticate2VTbl
-    query_interface : Proc(ISCPSecureAuthenticate2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISCPSecureAuthenticate2*, UInt32)
-    release : Proc(ISCPSecureAuthenticate2*, UInt32)
-    get_secure_query : Proc(ISCPSecureAuthenticate2*, ISCPSecureQuery*, HRESULT)
-    get_scp_session : Proc(ISCPSecureAuthenticate2*, ISCPSession*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_secure_query : UInt64
+    get_scp_session : UInt64
   end
 
   ISCPSecureAuthenticate2_GUID = "b580cfae-1672-47e2-acaa-44bbecbcae5b"
@@ -1625,13 +1625,13 @@ lib LibWin32
   end
 
   struct ISCPSecureQueryVTbl
-    query_interface : Proc(ISCPSecureQuery*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISCPSecureQuery*, UInt32)
-    release : Proc(ISCPSecureQuery*, UInt32)
-    get_data_demands : Proc(ISCPSecureQuery*, UInt32*, UInt32*, UInt32*, UInt32*, UInt8*, HRESULT)
-    examine_data : Proc(ISCPSecureQuery*, UInt32, LibC::LPWSTR, UInt8*, UInt32, UInt8*, HRESULT)
-    make_decision : Proc(ISCPSecureQuery*, UInt32, UInt8*, UInt32, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, ISCPSecureExchange*, UInt8*, HRESULT)
-    get_rights : Proc(ISCPSecureQuery*, UInt8*, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_data_demands : UInt64
+    examine_data : UInt64
+    make_decision : UInt64
+    get_rights : UInt64
   end
 
   ISCPSecureQuery_GUID = "1dcb3a0d-33ed-11d3-8470-00c04f79dbc0"
@@ -1641,14 +1641,14 @@ lib LibWin32
   end
 
   struct ISCPSecureQuery2VTbl
-    query_interface : Proc(ISCPSecureQuery2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISCPSecureQuery2*, UInt32)
-    release : Proc(ISCPSecureQuery2*, UInt32)
-    get_data_demands : Proc(ISCPSecureQuery2*, UInt32*, UInt32*, UInt32*, UInt32*, UInt8*, HRESULT)
-    examine_data : Proc(ISCPSecureQuery2*, UInt32, LibC::LPWSTR, UInt8*, UInt32, UInt8*, HRESULT)
-    make_decision : Proc(ISCPSecureQuery2*, UInt32, UInt8*, UInt32, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, ISCPSecureExchange*, UInt8*, HRESULT)
-    get_rights : Proc(ISCPSecureQuery2*, UInt8*, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)
-    make_decision2 : Proc(ISCPSecureQuery2*, UInt32, UInt8*, UInt32, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR*, UInt32*, UInt32*, UInt64*, IUnknown, ISCPSecureExchange*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_data_demands : UInt64
+    examine_data : UInt64
+    make_decision : UInt64
+    get_rights : UInt64
+    make_decision2 : UInt64
   end
 
   ISCPSecureQuery2_GUID = "ebe17e25-4fd7-4632-af46-6d93d4fcc72e"
@@ -1658,12 +1658,12 @@ lib LibWin32
   end
 
   struct ISCPSecureExchangeVTbl
-    query_interface : Proc(ISCPSecureExchange*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISCPSecureExchange*, UInt32)
-    release : Proc(ISCPSecureExchange*, UInt32)
-    transfer_container_data : Proc(ISCPSecureExchange*, UInt8*, UInt32, UInt32*, UInt8*, HRESULT)
-    object_data : Proc(ISCPSecureExchange*, UInt8*, UInt32*, UInt8*, HRESULT)
-    transfer_complete : Proc(ISCPSecureExchange*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    transfer_container_data : UInt64
+    object_data : UInt64
+    transfer_complete : UInt64
   end
 
   ISCPSecureExchange_GUID = "1dcb3a0e-33ed-11d3-8470-00c04f79dbc0"
@@ -1673,13 +1673,13 @@ lib LibWin32
   end
 
   struct ISCPSecureExchange2VTbl
-    query_interface : Proc(ISCPSecureExchange2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISCPSecureExchange2*, UInt32)
-    release : Proc(ISCPSecureExchange2*, UInt32)
-    transfer_container_data : Proc(ISCPSecureExchange2*, UInt8*, UInt32, UInt32*, UInt8*, HRESULT)
-    object_data : Proc(ISCPSecureExchange2*, UInt8*, UInt32*, UInt8*, HRESULT)
-    transfer_complete : Proc(ISCPSecureExchange2*, HRESULT)
-    transfer_container_data2 : Proc(ISCPSecureExchange2*, UInt8*, UInt32, IWMDMProgress3, UInt32*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    transfer_container_data : UInt64
+    object_data : UInt64
+    transfer_complete : UInt64
+    transfer_container_data2 : UInt64
   end
 
   ISCPSecureExchange2_GUID = "6c62fc7b-2690-483f-9d44-0a20cb35577c"
@@ -1689,16 +1689,16 @@ lib LibWin32
   end
 
   struct ISCPSecureExchange3VTbl
-    query_interface : Proc(ISCPSecureExchange3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISCPSecureExchange3*, UInt32)
-    release : Proc(ISCPSecureExchange3*, UInt32)
-    transfer_container_data : Proc(ISCPSecureExchange3*, UInt8*, UInt32, UInt32*, UInt8*, HRESULT)
-    object_data : Proc(ISCPSecureExchange3*, UInt8*, UInt32*, UInt8*, HRESULT)
-    transfer_complete : Proc(ISCPSecureExchange3*, HRESULT)
-    transfer_container_data2 : Proc(ISCPSecureExchange3*, UInt8*, UInt32, IWMDMProgress3, UInt32*, UInt8*, HRESULT)
-    transfer_container_data_on_clear_channel : Proc(ISCPSecureExchange3*, IMDSPDevice, UInt8*, UInt32, IWMDMProgress3, UInt32*, HRESULT)
-    get_object_data_on_clear_channel : Proc(ISCPSecureExchange3*, IMDSPDevice, UInt8*, UInt32*, HRESULT)
-    transfer_complete_for_device : Proc(ISCPSecureExchange3*, IMDSPDevice, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    transfer_container_data : UInt64
+    object_data : UInt64
+    transfer_complete : UInt64
+    transfer_container_data2 : UInt64
+    transfer_container_data_on_clear_channel : UInt64
+    get_object_data_on_clear_channel : UInt64
+    transfer_complete_for_device : UInt64
   end
 
   ISCPSecureExchange3_GUID = "ab4e77e4-8908-4b17-bd2a-b1dbe6dd69e1"
@@ -1708,12 +1708,12 @@ lib LibWin32
   end
 
   struct ISCPSessionVTbl
-    query_interface : Proc(ISCPSession*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISCPSession*, UInt32)
-    release : Proc(ISCPSession*, UInt32)
-    begin_session : Proc(ISCPSession*, IMDSPDevice, UInt8*, UInt32, HRESULT)
-    end_session : Proc(ISCPSession*, UInt8*, UInt32, HRESULT)
-    get_secure_query : Proc(ISCPSession*, ISCPSecureQuery*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_session : UInt64
+    end_session : UInt64
+    get_secure_query : UInt64
   end
 
   ISCPSession_GUID = "88a3e6ed-eee4-4619-bbb3-fd4fb62715d1"
@@ -1723,16 +1723,16 @@ lib LibWin32
   end
 
   struct ISCPSecureQuery3VTbl
-    query_interface : Proc(ISCPSecureQuery3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISCPSecureQuery3*, UInt32)
-    release : Proc(ISCPSecureQuery3*, UInt32)
-    get_data_demands : Proc(ISCPSecureQuery3*, UInt32*, UInt32*, UInt32*, UInt32*, UInt8*, HRESULT)
-    examine_data : Proc(ISCPSecureQuery3*, UInt32, LibC::LPWSTR, UInt8*, UInt32, UInt8*, HRESULT)
-    make_decision : Proc(ISCPSecureQuery3*, UInt32, UInt8*, UInt32, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, ISCPSecureExchange*, UInt8*, HRESULT)
-    get_rights : Proc(ISCPSecureQuery3*, UInt8*, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)
-    make_decision2 : Proc(ISCPSecureQuery3*, UInt32, UInt8*, UInt32, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR*, UInt32*, UInt32*, UInt64*, IUnknown, ISCPSecureExchange*, UInt8*, HRESULT)
-    get_rights_on_clear_channel : Proc(ISCPSecureQuery3*, UInt8*, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, IWMDMProgress3, WMDMRIGHTS**, UInt32*, HRESULT)
-    make_decision_on_clear_channel : Proc(ISCPSecureQuery3*, UInt32, UInt8*, UInt32, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, IWMDMProgress3, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR*, UInt32*, UInt32*, UInt64*, IUnknown, ISCPSecureExchange*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_data_demands : UInt64
+    examine_data : UInt64
+    make_decision : UInt64
+    get_rights : UInt64
+    make_decision2 : UInt64
+    get_rights_on_clear_channel : UInt64
+    make_decision_on_clear_channel : UInt64
   end
 
   ISCPSecureQuery3_GUID = "b7edd1a2-4dab-484b-b3c5-ad39b8b4c0b1"
@@ -1742,11 +1742,11 @@ lib LibWin32
   end
 
   struct IComponentAuthenticateVTbl
-    query_interface : Proc(IComponentAuthenticate*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IComponentAuthenticate*, UInt32)
-    release : Proc(IComponentAuthenticate*, UInt32)
-    sac_auth : Proc(IComponentAuthenticate*, UInt32, UInt32, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)
-    sac_get_protocols : Proc(IComponentAuthenticate*, UInt32**, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    sac_auth : UInt64
+    sac_get_protocols : UInt64
   end
 
   IComponentAuthenticate_GUID = "a9889c00-6d2b-11d3-8496-00c04f79dbc0"
@@ -1756,18 +1756,18 @@ lib LibWin32
   end
 
   struct IWMDMLoggerVTbl
-    query_interface : Proc(IWMDMLogger*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWMDMLogger*, UInt32)
-    release : Proc(IWMDMLogger*, UInt32)
-    is_enabled : Proc(IWMDMLogger*, LibC::BOOL*, HRESULT)
-    enable : Proc(IWMDMLogger*, LibC::BOOL, HRESULT)
-    get_log_file_name : Proc(IWMDMLogger*, PSTR, UInt32, HRESULT)
-    set_log_file_name : Proc(IWMDMLogger*, PSTR, HRESULT)
-    log_string : Proc(IWMDMLogger*, UInt32, PSTR, PSTR, HRESULT)
-    log_dword : Proc(IWMDMLogger*, UInt32, PSTR, PSTR, UInt32, HRESULT)
-    reset : Proc(IWMDMLogger*, HRESULT)
-    get_size_params : Proc(IWMDMLogger*, UInt32*, UInt32*, HRESULT)
-    set_size_params : Proc(IWMDMLogger*, UInt32, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    is_enabled : UInt64
+    enable : UInt64
+    get_log_file_name : UInt64
+    set_log_file_name : UInt64
+    log_string : UInt64
+    log_dword : UInt64
+    reset : UInt64
+    get_size_params : UInt64
+    set_size_params : UInt64
   end
 
   IWMDMLogger_GUID = "110a3200-5a79-11d3-8d78-444553540000"
@@ -1776,4 +1776,1962 @@ lib LibWin32
     lpVtbl : IWMDMLoggerVTbl*
   end
 
+end
+struct LibWin32::IWMDMMetaData
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_item(type : WMDM_TAG_DATATYPE, pwsztagname : LibC::LPWSTR, pvalue : UInt8*, ilength : UInt32) : HRESULT
+    @lpVtbl.value.add_item.unsafe_as(Proc(WMDM_TAG_DATATYPE, LibC::LPWSTR, UInt8*, UInt32, HRESULT)).call(type, pwsztagname, pvalue, ilength)
+  end
+  def query_by_name(pwsztagname : LibC::LPWSTR, ptype : WMDM_TAG_DATATYPE*, pvalue : UInt8**, pcblength : UInt32*) : HRESULT
+    @lpVtbl.value.query_by_name.unsafe_as(Proc(LibC::LPWSTR, WMDM_TAG_DATATYPE*, UInt8**, UInt32*, HRESULT)).call(pwsztagname, ptype, pvalue, pcblength)
+  end
+  def query_by_index(iindex : UInt32, ppwszname : UInt16**, ptype : WMDM_TAG_DATATYPE*, ppvalue : UInt8**, pcblength : UInt32*) : HRESULT
+    @lpVtbl.value.query_by_index.unsafe_as(Proc(UInt32, UInt16**, WMDM_TAG_DATATYPE*, UInt8**, UInt32*, HRESULT)).call(iindex, ppwszname, ptype, ppvalue, pcblength)
+  end
+  def get_item_count(icount : UInt32*) : HRESULT
+    @lpVtbl.value.get_item_count.unsafe_as(Proc(UInt32*, HRESULT)).call(icount)
+  end
+end
+struct LibWin32::IWMDeviceManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_revision(pdwrevision : UInt32*) : HRESULT
+    @lpVtbl.value.get_revision.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwrevision)
+  end
+  def get_device_count(pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcount)
+  end
+  def enum_devices(ppenumdevice : IWMDMEnumDevice*) : HRESULT
+    @lpVtbl.value.enum_devices.unsafe_as(Proc(IWMDMEnumDevice*, HRESULT)).call(ppenumdevice)
+  end
+end
+struct LibWin32::IWMDeviceManager2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_revision(pdwrevision : UInt32*) : HRESULT
+    @lpVtbl.value.get_revision.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwrevision)
+  end
+  def get_device_count(pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcount)
+  end
+  def enum_devices(ppenumdevice : IWMDMEnumDevice*) : HRESULT
+    @lpVtbl.value.enum_devices.unsafe_as(Proc(IWMDMEnumDevice*, HRESULT)).call(ppenumdevice)
+  end
+  def get_device_from_canonical_name(pwszcanonicalname : LibC::LPWSTR, ppdevice : IWMDMDevice*) : HRESULT
+    @lpVtbl.value.get_device_from_canonical_name.unsafe_as(Proc(LibC::LPWSTR, IWMDMDevice*, HRESULT)).call(pwszcanonicalname, ppdevice)
+  end
+  def enum_devices2(ppenumdevice : IWMDMEnumDevice*) : HRESULT
+    @lpVtbl.value.enum_devices2.unsafe_as(Proc(IWMDMEnumDevice*, HRESULT)).call(ppenumdevice)
+  end
+  def reinitialize : HRESULT
+    @lpVtbl.value.reinitialize.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWMDeviceManager3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_revision(pdwrevision : UInt32*) : HRESULT
+    @lpVtbl.value.get_revision.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwrevision)
+  end
+  def get_device_count(pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcount)
+  end
+  def enum_devices(ppenumdevice : IWMDMEnumDevice*) : HRESULT
+    @lpVtbl.value.enum_devices.unsafe_as(Proc(IWMDMEnumDevice*, HRESULT)).call(ppenumdevice)
+  end
+  def get_device_from_canonical_name(pwszcanonicalname : LibC::LPWSTR, ppdevice : IWMDMDevice*) : HRESULT
+    @lpVtbl.value.get_device_from_canonical_name.unsafe_as(Proc(LibC::LPWSTR, IWMDMDevice*, HRESULT)).call(pwszcanonicalname, ppdevice)
+  end
+  def enum_devices2(ppenumdevice : IWMDMEnumDevice*) : HRESULT
+    @lpVtbl.value.enum_devices2.unsafe_as(Proc(IWMDMEnumDevice*, HRESULT)).call(ppenumdevice)
+  end
+  def reinitialize : HRESULT
+    @lpVtbl.value.reinitialize.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_device_enum_preference(dwenumpref : UInt32) : HRESULT
+    @lpVtbl.value.set_device_enum_preference.unsafe_as(Proc(UInt32, HRESULT)).call(dwenumpref)
+  end
+end
+struct LibWin32::IWMDMStorageGlobals
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_capabilities(pdwcapabilities : UInt32*) : HRESULT
+    @lpVtbl.value.get_capabilities.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcapabilities)
+  end
+  def get_serial_number(pserialnum : WMDMID*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_serial_number.unsafe_as(Proc(WMDMID*, UInt8*, HRESULT)).call(pserialnum, abmac)
+  end
+  def get_total_size(pdwtotalsizelow : UInt32*, pdwtotalsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_size.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwtotalsizelow, pdwtotalsizehigh)
+  end
+  def get_total_free(pdwfreelow : UInt32*, pdwfreehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_free.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwfreelow, pdwfreehigh)
+  end
+  def get_total_bad(pdwbadlow : UInt32*, pdwbadhigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_bad.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwbadlow, pdwbadhigh)
+  end
+  def get_status(pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  end
+  def initialize(fumode : UInt32, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(UInt32, IWMDMProgress, HRESULT)).call(fumode, pprogress)
+  end
+end
+struct LibWin32::IWMDMStorage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_attributes(dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_attributes.unsafe_as(Proc(UInt32, WAVEFORMATEX*, HRESULT)).call(dwattributes, pformat)
+  end
+  def get_storage_globals(ppstorageglobals : IWMDMStorageGlobals*) : HRESULT
+    @lpVtbl.value.get_storage_globals.unsafe_as(Proc(IWMDMStorageGlobals*, HRESULT)).call(ppstorageglobals)
+  end
+  def get_attributes(pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_attributes.unsafe_as(Proc(UInt32*, WAVEFORMATEX*, HRESULT)).call(pdwattributes, pformat)
+  end
+  def get_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_date(pdatetimeutc : WMDMDATETIME*) : HRESULT
+    @lpVtbl.value.get_date.unsafe_as(Proc(WMDMDATETIME*, HRESULT)).call(pdatetimeutc)
+  end
+  def get_size(pdwsizelow : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwsizelow, pdwsizehigh)
+  end
+  def get_rights(pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.unsafe_as(Proc(WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)).call(pprights, pnrightscount, abmac)
+  end
+  def enum_storage(penumstorage : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.unsafe_as(Proc(IWMDMEnumStorage*, HRESULT)).call(penumstorage)
+  end
+  def send_opaque_command(pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.unsafe_as(Proc(OPAQUECOMMAND*, HRESULT)).call(pcommand)
+  end
+end
+struct LibWin32::IWMDMStorage2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_attributes(dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_attributes.unsafe_as(Proc(UInt32, WAVEFORMATEX*, HRESULT)).call(dwattributes, pformat)
+  end
+  def get_storage_globals(ppstorageglobals : IWMDMStorageGlobals*) : HRESULT
+    @lpVtbl.value.get_storage_globals.unsafe_as(Proc(IWMDMStorageGlobals*, HRESULT)).call(ppstorageglobals)
+  end
+  def get_attributes(pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_attributes.unsafe_as(Proc(UInt32*, WAVEFORMATEX*, HRESULT)).call(pdwattributes, pformat)
+  end
+  def get_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_date(pdatetimeutc : WMDMDATETIME*) : HRESULT
+    @lpVtbl.value.get_date.unsafe_as(Proc(WMDMDATETIME*, HRESULT)).call(pdatetimeutc)
+  end
+  def get_size(pdwsizelow : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwsizelow, pdwsizehigh)
+  end
+  def get_rights(pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.unsafe_as(Proc(WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)).call(pprights, pnrightscount, abmac)
+  end
+  def enum_storage(penumstorage : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.unsafe_as(Proc(IWMDMEnumStorage*, HRESULT)).call(penumstorage)
+  end
+  def send_opaque_command(pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.unsafe_as(Proc(OPAQUECOMMAND*, HRESULT)).call(pcommand)
+  end
+  def get_storage(pszstoragename : LibC::LPWSTR, ppstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.get_storage.unsafe_as(Proc(LibC::LPWSTR, IWMDMStorage*, HRESULT)).call(pszstoragename, ppstorage)
+  end
+  def set_attributes2(dwattributes : UInt32, dwattributesex : UInt32, pformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.set_attributes2.unsafe_as(Proc(UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)).call(dwattributes, dwattributesex, pformat, pvideoformat)
+  end
+  def get_attributes2(pdwattributes : UInt32*, pdwattributesex : UInt32*, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.get_attributes2.unsafe_as(Proc(UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)).call(pdwattributes, pdwattributesex, paudioformat, pvideoformat)
+  end
+end
+struct LibWin32::IWMDMStorage3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_attributes(dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_attributes.unsafe_as(Proc(UInt32, WAVEFORMATEX*, HRESULT)).call(dwattributes, pformat)
+  end
+  def get_storage_globals(ppstorageglobals : IWMDMStorageGlobals*) : HRESULT
+    @lpVtbl.value.get_storage_globals.unsafe_as(Proc(IWMDMStorageGlobals*, HRESULT)).call(ppstorageglobals)
+  end
+  def get_attributes(pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_attributes.unsafe_as(Proc(UInt32*, WAVEFORMATEX*, HRESULT)).call(pdwattributes, pformat)
+  end
+  def get_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_date(pdatetimeutc : WMDMDATETIME*) : HRESULT
+    @lpVtbl.value.get_date.unsafe_as(Proc(WMDMDATETIME*, HRESULT)).call(pdatetimeutc)
+  end
+  def get_size(pdwsizelow : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwsizelow, pdwsizehigh)
+  end
+  def get_rights(pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.unsafe_as(Proc(WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)).call(pprights, pnrightscount, abmac)
+  end
+  def enum_storage(penumstorage : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.unsafe_as(Proc(IWMDMEnumStorage*, HRESULT)).call(penumstorage)
+  end
+  def send_opaque_command(pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.unsafe_as(Proc(OPAQUECOMMAND*, HRESULT)).call(pcommand)
+  end
+  def get_storage(pszstoragename : LibC::LPWSTR, ppstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.get_storage.unsafe_as(Proc(LibC::LPWSTR, IWMDMStorage*, HRESULT)).call(pszstoragename, ppstorage)
+  end
+  def set_attributes2(dwattributes : UInt32, dwattributesex : UInt32, pformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.set_attributes2.unsafe_as(Proc(UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)).call(dwattributes, dwattributesex, pformat, pvideoformat)
+  end
+  def get_attributes2(pdwattributes : UInt32*, pdwattributesex : UInt32*, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.get_attributes2.unsafe_as(Proc(UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)).call(pdwattributes, pdwattributesex, paudioformat, pvideoformat)
+  end
+  def get_metadata(ppmetadata : IWMDMMetaData*) : HRESULT
+    @lpVtbl.value.get_metadata.unsafe_as(Proc(IWMDMMetaData*, HRESULT)).call(ppmetadata)
+  end
+  def set_metadata(pmetadata : IWMDMMetaData) : HRESULT
+    @lpVtbl.value.set_metadata.unsafe_as(Proc(IWMDMMetaData, HRESULT)).call(pmetadata)
+  end
+  def create_empty_metadata_object(ppmetadata : IWMDMMetaData*) : HRESULT
+    @lpVtbl.value.create_empty_metadata_object.unsafe_as(Proc(IWMDMMetaData*, HRESULT)).call(ppmetadata)
+  end
+  def set_enum_preference(pmode : WMDM_STORAGE_ENUM_MODE*, nviews : UInt32, pviews : WMDMMetadataView*) : HRESULT
+    @lpVtbl.value.set_enum_preference.unsafe_as(Proc(WMDM_STORAGE_ENUM_MODE*, UInt32, WMDMMetadataView*, HRESULT)).call(pmode, nviews, pviews)
+  end
+end
+struct LibWin32::IWMDMStorage4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_attributes(dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_attributes.unsafe_as(Proc(UInt32, WAVEFORMATEX*, HRESULT)).call(dwattributes, pformat)
+  end
+  def get_storage_globals(ppstorageglobals : IWMDMStorageGlobals*) : HRESULT
+    @lpVtbl.value.get_storage_globals.unsafe_as(Proc(IWMDMStorageGlobals*, HRESULT)).call(ppstorageglobals)
+  end
+  def get_attributes(pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_attributes.unsafe_as(Proc(UInt32*, WAVEFORMATEX*, HRESULT)).call(pdwattributes, pformat)
+  end
+  def get_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_date(pdatetimeutc : WMDMDATETIME*) : HRESULT
+    @lpVtbl.value.get_date.unsafe_as(Proc(WMDMDATETIME*, HRESULT)).call(pdatetimeutc)
+  end
+  def get_size(pdwsizelow : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwsizelow, pdwsizehigh)
+  end
+  def get_rights(pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.unsafe_as(Proc(WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)).call(pprights, pnrightscount, abmac)
+  end
+  def enum_storage(penumstorage : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.unsafe_as(Proc(IWMDMEnumStorage*, HRESULT)).call(penumstorage)
+  end
+  def send_opaque_command(pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.unsafe_as(Proc(OPAQUECOMMAND*, HRESULT)).call(pcommand)
+  end
+  def get_storage(pszstoragename : LibC::LPWSTR, ppstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.get_storage.unsafe_as(Proc(LibC::LPWSTR, IWMDMStorage*, HRESULT)).call(pszstoragename, ppstorage)
+  end
+  def set_attributes2(dwattributes : UInt32, dwattributesex : UInt32, pformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.set_attributes2.unsafe_as(Proc(UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)).call(dwattributes, dwattributesex, pformat, pvideoformat)
+  end
+  def get_attributes2(pdwattributes : UInt32*, pdwattributesex : UInt32*, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.get_attributes2.unsafe_as(Proc(UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)).call(pdwattributes, pdwattributesex, paudioformat, pvideoformat)
+  end
+  def get_metadata(ppmetadata : IWMDMMetaData*) : HRESULT
+    @lpVtbl.value.get_metadata.unsafe_as(Proc(IWMDMMetaData*, HRESULT)).call(ppmetadata)
+  end
+  def set_metadata(pmetadata : IWMDMMetaData) : HRESULT
+    @lpVtbl.value.set_metadata.unsafe_as(Proc(IWMDMMetaData, HRESULT)).call(pmetadata)
+  end
+  def create_empty_metadata_object(ppmetadata : IWMDMMetaData*) : HRESULT
+    @lpVtbl.value.create_empty_metadata_object.unsafe_as(Proc(IWMDMMetaData*, HRESULT)).call(ppmetadata)
+  end
+  def set_enum_preference(pmode : WMDM_STORAGE_ENUM_MODE*, nviews : UInt32, pviews : WMDMMetadataView*) : HRESULT
+    @lpVtbl.value.set_enum_preference.unsafe_as(Proc(WMDM_STORAGE_ENUM_MODE*, UInt32, WMDMMetadataView*, HRESULT)).call(pmode, nviews, pviews)
+  end
+  def set_references(dwrefs : UInt32, ppiwmdmstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.set_references.unsafe_as(Proc(UInt32, IWMDMStorage*, HRESULT)).call(dwrefs, ppiwmdmstorage)
+  end
+  def get_references(pdwrefs : UInt32*, pppiwmdmstorage : IWMDMStorage**) : HRESULT
+    @lpVtbl.value.get_references.unsafe_as(Proc(UInt32*, IWMDMStorage**, HRESULT)).call(pdwrefs, pppiwmdmstorage)
+  end
+  def get_rights_with_progress(piprogresscallback : IWMDMProgress3, pprights : WMDMRIGHTS**, pnrightscount : UInt32*) : HRESULT
+    @lpVtbl.value.get_rights_with_progress.unsafe_as(Proc(IWMDMProgress3, WMDMRIGHTS**, UInt32*, HRESULT)).call(piprogresscallback, pprights, pnrightscount)
+  end
+  def get_specified_metadata(cproperties : UInt32, ppwszpropnames : LibC::LPWSTR*, ppmetadata : IWMDMMetaData*) : HRESULT
+    @lpVtbl.value.get_specified_metadata.unsafe_as(Proc(UInt32, LibC::LPWSTR*, IWMDMMetaData*, HRESULT)).call(cproperties, ppwszpropnames, ppmetadata)
+  end
+  def find_storage(findscope : WMDM_FIND_SCOPE, pwszuniqueid : LibC::LPWSTR, ppstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.find_storage.unsafe_as(Proc(WMDM_FIND_SCOPE, LibC::LPWSTR, IWMDMStorage*, HRESULT)).call(findscope, pwszuniqueid, ppstorage)
+  end
+  def get_parent(ppstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(IWMDMStorage*, HRESULT)).call(ppstorage)
+  end
+end
+struct LibWin32::IWMDMOperation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_read : HRESULT
+    @lpVtbl.value.begin_read.unsafe_as(Proc(HRESULT)).call
+  end
+  def begin_write : HRESULT
+    @lpVtbl.value.begin_write.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_object_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_object_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def set_object_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.set_object_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_object_attributes(pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_object_attributes.unsafe_as(Proc(UInt32*, WAVEFORMATEX*, HRESULT)).call(pdwattributes, pformat)
+  end
+  def set_object_attributes(dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_object_attributes.unsafe_as(Proc(UInt32, WAVEFORMATEX*, HRESULT)).call(dwattributes, pformat)
+  end
+  def get_object_total_size(pdwsize : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_object_total_size.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwsize, pdwsizehigh)
+  end
+  def set_object_total_size(dwsize : UInt32, dwsizehigh : UInt32) : HRESULT
+    @lpVtbl.value.set_object_total_size.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(dwsize, dwsizehigh)
+  end
+  def transfer_object_data(pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.transfer_object_data.unsafe_as(Proc(UInt8*, UInt32*, UInt8*, HRESULT)).call(pdata, pdwsize, abmac)
+  end
+  def end_(phcompletioncode : HRESULT*, pnewobject : IUnknown) : HRESULT
+    @lpVtbl.value.end_.unsafe_as(Proc(HRESULT*, IUnknown, HRESULT)).call(phcompletioncode, pnewobject)
+  end
+end
+struct LibWin32::IWMDMOperation2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_read : HRESULT
+    @lpVtbl.value.begin_read.unsafe_as(Proc(HRESULT)).call
+  end
+  def begin_write : HRESULT
+    @lpVtbl.value.begin_write.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_object_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_object_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def set_object_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.set_object_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_object_attributes(pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_object_attributes.unsafe_as(Proc(UInt32*, WAVEFORMATEX*, HRESULT)).call(pdwattributes, pformat)
+  end
+  def set_object_attributes(dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_object_attributes.unsafe_as(Proc(UInt32, WAVEFORMATEX*, HRESULT)).call(dwattributes, pformat)
+  end
+  def get_object_total_size(pdwsize : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_object_total_size.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwsize, pdwsizehigh)
+  end
+  def set_object_total_size(dwsize : UInt32, dwsizehigh : UInt32) : HRESULT
+    @lpVtbl.value.set_object_total_size.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(dwsize, dwsizehigh)
+  end
+  def transfer_object_data(pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.transfer_object_data.unsafe_as(Proc(UInt8*, UInt32*, UInt8*, HRESULT)).call(pdata, pdwsize, abmac)
+  end
+  def end_(phcompletioncode : HRESULT*, pnewobject : IUnknown) : HRESULT
+    @lpVtbl.value.end_.unsafe_as(Proc(HRESULT*, IUnknown, HRESULT)).call(phcompletioncode, pnewobject)
+  end
+  def set_object_attributes2(dwattributes : UInt32, dwattributesex : UInt32, pformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.set_object_attributes2.unsafe_as(Proc(UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)).call(dwattributes, dwattributesex, pformat, pvideoformat)
+  end
+  def get_object_attributes2(pdwattributes : UInt32*, pdwattributesex : UInt32*, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.get_object_attributes2.unsafe_as(Proc(UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)).call(pdwattributes, pdwattributesex, paudioformat, pvideoformat)
+  end
+end
+struct LibWin32::IWMDMOperation3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_read : HRESULT
+    @lpVtbl.value.begin_read.unsafe_as(Proc(HRESULT)).call
+  end
+  def begin_write : HRESULT
+    @lpVtbl.value.begin_write.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_object_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_object_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def set_object_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.set_object_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_object_attributes(pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_object_attributes.unsafe_as(Proc(UInt32*, WAVEFORMATEX*, HRESULT)).call(pdwattributes, pformat)
+  end
+  def set_object_attributes(dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_object_attributes.unsafe_as(Proc(UInt32, WAVEFORMATEX*, HRESULT)).call(dwattributes, pformat)
+  end
+  def get_object_total_size(pdwsize : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_object_total_size.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwsize, pdwsizehigh)
+  end
+  def set_object_total_size(dwsize : UInt32, dwsizehigh : UInt32) : HRESULT
+    @lpVtbl.value.set_object_total_size.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(dwsize, dwsizehigh)
+  end
+  def transfer_object_data(pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.transfer_object_data.unsafe_as(Proc(UInt8*, UInt32*, UInt8*, HRESULT)).call(pdata, pdwsize, abmac)
+  end
+  def end_(phcompletioncode : HRESULT*, pnewobject : IUnknown) : HRESULT
+    @lpVtbl.value.end_.unsafe_as(Proc(HRESULT*, IUnknown, HRESULT)).call(phcompletioncode, pnewobject)
+  end
+  def transfer_object_data_on_clear_channel(pdata : UInt8*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.transfer_object_data_on_clear_channel.unsafe_as(Proc(UInt8*, UInt32*, HRESULT)).call(pdata, pdwsize)
+  end
+end
+struct LibWin32::IWMDMProgress
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_(dwestimatedticks : UInt32) : HRESULT
+    @lpVtbl.value.begin_.unsafe_as(Proc(UInt32, HRESULT)).call(dwestimatedticks)
+  end
+  def progress(dwtranspiredticks : UInt32) : HRESULT
+    @lpVtbl.value.progress.unsafe_as(Proc(UInt32, HRESULT)).call(dwtranspiredticks)
+  end
+  def end_ : HRESULT
+    @lpVtbl.value.end_.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWMDMProgress2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_(dwestimatedticks : UInt32) : HRESULT
+    @lpVtbl.value.begin_.unsafe_as(Proc(UInt32, HRESULT)).call(dwestimatedticks)
+  end
+  def progress(dwtranspiredticks : UInt32) : HRESULT
+    @lpVtbl.value.progress.unsafe_as(Proc(UInt32, HRESULT)).call(dwtranspiredticks)
+  end
+  def end_ : HRESULT
+    @lpVtbl.value.end_.unsafe_as(Proc(HRESULT)).call
+  end
+  def end2(hrcompletioncode : HRESULT) : HRESULT
+    @lpVtbl.value.end2.unsafe_as(Proc(HRESULT, HRESULT)).call(hrcompletioncode)
+  end
+end
+struct LibWin32::IWMDMProgress3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_(dwestimatedticks : UInt32) : HRESULT
+    @lpVtbl.value.begin_.unsafe_as(Proc(UInt32, HRESULT)).call(dwestimatedticks)
+  end
+  def progress(dwtranspiredticks : UInt32) : HRESULT
+    @lpVtbl.value.progress.unsafe_as(Proc(UInt32, HRESULT)).call(dwtranspiredticks)
+  end
+  def end_ : HRESULT
+    @lpVtbl.value.end_.unsafe_as(Proc(HRESULT)).call
+  end
+  def end2(hrcompletioncode : HRESULT) : HRESULT
+    @lpVtbl.value.end2.unsafe_as(Proc(HRESULT, HRESULT)).call(hrcompletioncode)
+  end
+  def begin3(eventid : Guid, dwestimatedticks : UInt32, pcontext : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.begin3.unsafe_as(Proc(Guid, UInt32, OPAQUECOMMAND*, HRESULT)).call(eventid, dwestimatedticks, pcontext)
+  end
+  def progress3(eventid : Guid, dwtranspiredticks : UInt32, pcontext : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.progress3.unsafe_as(Proc(Guid, UInt32, OPAQUECOMMAND*, HRESULT)).call(eventid, dwtranspiredticks, pcontext)
+  end
+  def end3(eventid : Guid, hrcompletioncode : HRESULT, pcontext : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.end3.unsafe_as(Proc(Guid, HRESULT, OPAQUECOMMAND*, HRESULT)).call(eventid, hrcompletioncode, pcontext)
+  end
+end
+struct LibWin32::IWMDMDevice
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_manufacturer(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_manufacturer.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_version(pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwversion)
+  end
+  def get_type(pdwtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwtype)
+  end
+  def get_serial_number(pserialnumber : WMDMID*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_serial_number.unsafe_as(Proc(WMDMID*, UInt8*, HRESULT)).call(pserialnumber, abmac)
+  end
+  def get_power_source(pdwpowersource : UInt32*, pdwpercentremaining : UInt32*) : HRESULT
+    @lpVtbl.value.get_power_source.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwpowersource, pdwpercentremaining)
+  end
+  def get_status(pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  end
+  def get_device_icon(hicon : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_icon.unsafe_as(Proc(UInt32*, HRESULT)).call(hicon)
+  end
+  def enum_storage(ppenumstorage : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.unsafe_as(Proc(IWMDMEnumStorage*, HRESULT)).call(ppenumstorage)
+  end
+  def get_format_support(ppformatex : WAVEFORMATEX**, pnformatcount : UInt32*, pppwszmimetype : LibC::LPWSTR**, pnmimetypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support.unsafe_as(Proc(WAVEFORMATEX**, UInt32*, LibC::LPWSTR**, UInt32*, HRESULT)).call(ppformatex, pnformatcount, pppwszmimetype, pnmimetypecount)
+  end
+  def send_opaque_command(pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.unsafe_as(Proc(OPAQUECOMMAND*, HRESULT)).call(pcommand)
+  end
+end
+struct LibWin32::IWMDMDevice2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_manufacturer(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_manufacturer.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_version(pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwversion)
+  end
+  def get_type(pdwtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwtype)
+  end
+  def get_serial_number(pserialnumber : WMDMID*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_serial_number.unsafe_as(Proc(WMDMID*, UInt8*, HRESULT)).call(pserialnumber, abmac)
+  end
+  def get_power_source(pdwpowersource : UInt32*, pdwpercentremaining : UInt32*) : HRESULT
+    @lpVtbl.value.get_power_source.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwpowersource, pdwpercentremaining)
+  end
+  def get_status(pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  end
+  def get_device_icon(hicon : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_icon.unsafe_as(Proc(UInt32*, HRESULT)).call(hicon)
+  end
+  def enum_storage(ppenumstorage : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.unsafe_as(Proc(IWMDMEnumStorage*, HRESULT)).call(ppenumstorage)
+  end
+  def get_format_support(ppformatex : WAVEFORMATEX**, pnformatcount : UInt32*, pppwszmimetype : LibC::LPWSTR**, pnmimetypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support.unsafe_as(Proc(WAVEFORMATEX**, UInt32*, LibC::LPWSTR**, UInt32*, HRESULT)).call(ppformatex, pnformatcount, pppwszmimetype, pnmimetypecount)
+  end
+  def send_opaque_command(pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.unsafe_as(Proc(OPAQUECOMMAND*, HRESULT)).call(pcommand)
+  end
+  def get_storage(pszstoragename : LibC::LPWSTR, ppstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.get_storage.unsafe_as(Proc(LibC::LPWSTR, IWMDMStorage*, HRESULT)).call(pszstoragename, ppstorage)
+  end
+  def get_format_support2(dwflags : UInt32, ppaudioformatex : WAVEFORMATEX**, pnaudioformatcount : UInt32*, ppvideoformatex : VIDEOINFOHEADER**, pnvideoformatcount : UInt32*, ppfiletype : WMFILECAPABILITIES**, pnfiletypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support2.unsafe_as(Proc(UInt32, WAVEFORMATEX**, UInt32*, VIDEOINFOHEADER**, UInt32*, WMFILECAPABILITIES**, UInt32*, HRESULT)).call(dwflags, ppaudioformatex, pnaudioformatcount, ppvideoformatex, pnvideoformatcount, ppfiletype, pnfiletypecount)
+  end
+  def get_specify_property_pages(ppspecifyproppages : ISpecifyPropertyPages*, pppunknowns : IUnknown**, pcunks : UInt32*) : HRESULT
+    @lpVtbl.value.get_specify_property_pages.unsafe_as(Proc(ISpecifyPropertyPages*, IUnknown**, UInt32*, HRESULT)).call(ppspecifyproppages, pppunknowns, pcunks)
+  end
+  def get_canonical_name(pwszpnpname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_canonical_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszpnpname, nmaxchars)
+  end
+end
+struct LibWin32::IWMDMDevice3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_manufacturer(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_manufacturer.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_version(pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwversion)
+  end
+  def get_type(pdwtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwtype)
+  end
+  def get_serial_number(pserialnumber : WMDMID*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_serial_number.unsafe_as(Proc(WMDMID*, UInt8*, HRESULT)).call(pserialnumber, abmac)
+  end
+  def get_power_source(pdwpowersource : UInt32*, pdwpercentremaining : UInt32*) : HRESULT
+    @lpVtbl.value.get_power_source.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwpowersource, pdwpercentremaining)
+  end
+  def get_status(pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  end
+  def get_device_icon(hicon : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_icon.unsafe_as(Proc(UInt32*, HRESULT)).call(hicon)
+  end
+  def enum_storage(ppenumstorage : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.unsafe_as(Proc(IWMDMEnumStorage*, HRESULT)).call(ppenumstorage)
+  end
+  def get_format_support(ppformatex : WAVEFORMATEX**, pnformatcount : UInt32*, pppwszmimetype : LibC::LPWSTR**, pnmimetypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support.unsafe_as(Proc(WAVEFORMATEX**, UInt32*, LibC::LPWSTR**, UInt32*, HRESULT)).call(ppformatex, pnformatcount, pppwszmimetype, pnmimetypecount)
+  end
+  def send_opaque_command(pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.unsafe_as(Proc(OPAQUECOMMAND*, HRESULT)).call(pcommand)
+  end
+  def get_storage(pszstoragename : LibC::LPWSTR, ppstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.get_storage.unsafe_as(Proc(LibC::LPWSTR, IWMDMStorage*, HRESULT)).call(pszstoragename, ppstorage)
+  end
+  def get_format_support2(dwflags : UInt32, ppaudioformatex : WAVEFORMATEX**, pnaudioformatcount : UInt32*, ppvideoformatex : VIDEOINFOHEADER**, pnvideoformatcount : UInt32*, ppfiletype : WMFILECAPABILITIES**, pnfiletypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support2.unsafe_as(Proc(UInt32, WAVEFORMATEX**, UInt32*, VIDEOINFOHEADER**, UInt32*, WMFILECAPABILITIES**, UInt32*, HRESULT)).call(dwflags, ppaudioformatex, pnaudioformatcount, ppvideoformatex, pnvideoformatcount, ppfiletype, pnfiletypecount)
+  end
+  def get_specify_property_pages(ppspecifyproppages : ISpecifyPropertyPages*, pppunknowns : IUnknown**, pcunks : UInt32*) : HRESULT
+    @lpVtbl.value.get_specify_property_pages.unsafe_as(Proc(ISpecifyPropertyPages*, IUnknown**, UInt32*, HRESULT)).call(ppspecifyproppages, pppunknowns, pcunks)
+  end
+  def get_canonical_name(pwszpnpname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_canonical_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszpnpname, nmaxchars)
+  end
+  def get_property(pwszpropname : LibC::LPWSTR, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT*, HRESULT)).call(pwszpropname, pvalue)
+  end
+  def set_property(pwszpropname : LibC::LPWSTR, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT*, HRESULT)).call(pwszpropname, pvalue)
+  end
+  def get_format_capability(format : WMDM_FORMATCODE, pformatsupport : WMDM_FORMAT_CAPABILITY*) : HRESULT
+    @lpVtbl.value.get_format_capability.unsafe_as(Proc(WMDM_FORMATCODE, WMDM_FORMAT_CAPABILITY*, HRESULT)).call(format, pformatsupport)
+  end
+  def device_io_control(dwiocontrolcode : UInt32, lpinbuffer : UInt8*, ninbuffersize : UInt32, lpoutbuffer : UInt8*, pnoutbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.device_io_control.unsafe_as(Proc(UInt32, UInt8*, UInt32, UInt8*, UInt32*, HRESULT)).call(dwiocontrolcode, lpinbuffer, ninbuffersize, lpoutbuffer, pnoutbuffersize)
+  end
+  def find_storage(findscope : WMDM_FIND_SCOPE, pwszuniqueid : LibC::LPWSTR, ppstorage : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.find_storage.unsafe_as(Proc(WMDM_FIND_SCOPE, LibC::LPWSTR, IWMDMStorage*, HRESULT)).call(findscope, pwszuniqueid, ppstorage)
+  end
+end
+struct LibWin32::IWMDMDeviceSession
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_session(type : WMDM_SESSION_TYPE, pctx : UInt8*, dwsizectx : UInt32) : HRESULT
+    @lpVtbl.value.begin_session.unsafe_as(Proc(WMDM_SESSION_TYPE, UInt8*, UInt32, HRESULT)).call(type, pctx, dwsizectx)
+  end
+  def end_session(type : WMDM_SESSION_TYPE, pctx : UInt8*, dwsizectx : UInt32) : HRESULT
+    @lpVtbl.value.end_session.unsafe_as(Proc(WMDM_SESSION_TYPE, UInt8*, UInt32, HRESULT)).call(type, pctx, dwsizectx)
+  end
+end
+struct LibWin32::IWMDMEnumDevice
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppdevice : IWMDMDevice*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IWMDMDevice*, UInt32*, HRESULT)).call(celt, ppdevice, pceltfetched)
+  end
+  def skip(celt : UInt32, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(celt, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenumdevice : IWMDMEnumDevice*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IWMDMEnumDevice*, HRESULT)).call(ppenumdevice)
+  end
+end
+struct LibWin32::IWMDMDeviceControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_status(pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  end
+  def get_capabilities(pdwcapabilitiesmask : UInt32*) : HRESULT
+    @lpVtbl.value.get_capabilities.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcapabilitiesmask)
+  end
+  def play : HRESULT
+    @lpVtbl.value.play.unsafe_as(Proc(HRESULT)).call
+  end
+  def record(pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.record.unsafe_as(Proc(WAVEFORMATEX*, HRESULT)).call(pformat)
+  end
+  def pause : HRESULT
+    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume : HRESULT
+    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  end
+  def stop : HRESULT
+    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  end
+  def seek(fumode : UInt32, noffset : Int32) : HRESULT
+    @lpVtbl.value.seek.unsafe_as(Proc(UInt32, Int32, HRESULT)).call(fumode, noffset)
+  end
+end
+struct LibWin32::IWMDMEnumStorage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppstorage : IWMDMStorage*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IWMDMStorage*, UInt32*, HRESULT)).call(celt, ppstorage, pceltfetched)
+  end
+  def skip(celt : UInt32, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(celt, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenumstorage : IWMDMEnumStorage*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IWMDMEnumStorage*, HRESULT)).call(ppenumstorage)
+  end
+end
+struct LibWin32::IWMDMStorageControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def insert(fumode : UInt32, pwszfile : LibC::LPWSTR, poperation : IWMDMOperation, pprogress : IWMDMProgress, ppnewobject : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.insert.unsafe_as(Proc(UInt32, LibC::LPWSTR, IWMDMOperation, IWMDMProgress, IWMDMStorage*, HRESULT)).call(fumode, pwszfile, poperation, pprogress, ppnewobject)
+  end
+  def delete(fumode : UInt32, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(UInt32, IWMDMProgress, HRESULT)).call(fumode, pprogress)
+  end
+  def rename(fumode : UInt32, pwsznewname : LibC::LPWSTR, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.rename.unsafe_as(Proc(UInt32, LibC::LPWSTR, IWMDMProgress, HRESULT)).call(fumode, pwsznewname, pprogress)
+  end
+  def read(fumode : UInt32, pwszfile : LibC::LPWSTR, pprogress : IWMDMProgress, poperation : IWMDMOperation) : HRESULT
+    @lpVtbl.value.read.unsafe_as(Proc(UInt32, LibC::LPWSTR, IWMDMProgress, IWMDMOperation, HRESULT)).call(fumode, pwszfile, pprogress, poperation)
+  end
+  def move(fumode : UInt32, ptargetobject : IWMDMStorage, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.move.unsafe_as(Proc(UInt32, IWMDMStorage, IWMDMProgress, HRESULT)).call(fumode, ptargetobject, pprogress)
+  end
+end
+struct LibWin32::IWMDMStorageControl2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def insert(fumode : UInt32, pwszfile : LibC::LPWSTR, poperation : IWMDMOperation, pprogress : IWMDMProgress, ppnewobject : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.insert.unsafe_as(Proc(UInt32, LibC::LPWSTR, IWMDMOperation, IWMDMProgress, IWMDMStorage*, HRESULT)).call(fumode, pwszfile, poperation, pprogress, ppnewobject)
+  end
+  def delete(fumode : UInt32, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(UInt32, IWMDMProgress, HRESULT)).call(fumode, pprogress)
+  end
+  def rename(fumode : UInt32, pwsznewname : LibC::LPWSTR, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.rename.unsafe_as(Proc(UInt32, LibC::LPWSTR, IWMDMProgress, HRESULT)).call(fumode, pwsznewname, pprogress)
+  end
+  def read(fumode : UInt32, pwszfile : LibC::LPWSTR, pprogress : IWMDMProgress, poperation : IWMDMOperation) : HRESULT
+    @lpVtbl.value.read.unsafe_as(Proc(UInt32, LibC::LPWSTR, IWMDMProgress, IWMDMOperation, HRESULT)).call(fumode, pwszfile, pprogress, poperation)
+  end
+  def move(fumode : UInt32, ptargetobject : IWMDMStorage, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.move.unsafe_as(Proc(UInt32, IWMDMStorage, IWMDMProgress, HRESULT)).call(fumode, ptargetobject, pprogress)
+  end
+  def insert2(fumode : UInt32, pwszfilesource : LibC::LPWSTR, pwszfiledest : LibC::LPWSTR, poperation : IWMDMOperation, pprogress : IWMDMProgress, punknown : IUnknown, ppnewobject : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.insert2.unsafe_as(Proc(UInt32, LibC::LPWSTR, LibC::LPWSTR, IWMDMOperation, IWMDMProgress, IUnknown, IWMDMStorage*, HRESULT)).call(fumode, pwszfilesource, pwszfiledest, poperation, pprogress, punknown, ppnewobject)
+  end
+end
+struct LibWin32::IWMDMStorageControl3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def insert(fumode : UInt32, pwszfile : LibC::LPWSTR, poperation : IWMDMOperation, pprogress : IWMDMProgress, ppnewobject : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.insert.unsafe_as(Proc(UInt32, LibC::LPWSTR, IWMDMOperation, IWMDMProgress, IWMDMStorage*, HRESULT)).call(fumode, pwszfile, poperation, pprogress, ppnewobject)
+  end
+  def delete(fumode : UInt32, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(UInt32, IWMDMProgress, HRESULT)).call(fumode, pprogress)
+  end
+  def rename(fumode : UInt32, pwsznewname : LibC::LPWSTR, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.rename.unsafe_as(Proc(UInt32, LibC::LPWSTR, IWMDMProgress, HRESULT)).call(fumode, pwsznewname, pprogress)
+  end
+  def read(fumode : UInt32, pwszfile : LibC::LPWSTR, pprogress : IWMDMProgress, poperation : IWMDMOperation) : HRESULT
+    @lpVtbl.value.read.unsafe_as(Proc(UInt32, LibC::LPWSTR, IWMDMProgress, IWMDMOperation, HRESULT)).call(fumode, pwszfile, pprogress, poperation)
+  end
+  def move(fumode : UInt32, ptargetobject : IWMDMStorage, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.move.unsafe_as(Proc(UInt32, IWMDMStorage, IWMDMProgress, HRESULT)).call(fumode, ptargetobject, pprogress)
+  end
+  def insert2(fumode : UInt32, pwszfilesource : LibC::LPWSTR, pwszfiledest : LibC::LPWSTR, poperation : IWMDMOperation, pprogress : IWMDMProgress, punknown : IUnknown, ppnewobject : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.insert2.unsafe_as(Proc(UInt32, LibC::LPWSTR, LibC::LPWSTR, IWMDMOperation, IWMDMProgress, IUnknown, IWMDMStorage*, HRESULT)).call(fumode, pwszfilesource, pwszfiledest, poperation, pprogress, punknown, ppnewobject)
+  end
+  def insert3(fumode : UInt32, futype : UInt32, pwszfilesource : LibC::LPWSTR, pwszfiledest : LibC::LPWSTR, poperation : IWMDMOperation, pprogress : IWMDMProgress, pmetadata : IWMDMMetaData, punknown : IUnknown, ppnewobject : IWMDMStorage*) : HRESULT
+    @lpVtbl.value.insert3.unsafe_as(Proc(UInt32, UInt32, LibC::LPWSTR, LibC::LPWSTR, IWMDMOperation, IWMDMProgress, IWMDMMetaData, IUnknown, IWMDMStorage*, HRESULT)).call(fumode, futype, pwszfilesource, pwszfiledest, poperation, pprogress, pmetadata, punknown, ppnewobject)
+  end
+end
+struct LibWin32::IWMDMObjectInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_play_length(pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_play_length.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwlength)
+  end
+  def set_play_length(dwlength : UInt32) : HRESULT
+    @lpVtbl.value.set_play_length.unsafe_as(Proc(UInt32, HRESULT)).call(dwlength)
+  end
+  def get_play_offset(pdwoffset : UInt32*) : HRESULT
+    @lpVtbl.value.get_play_offset.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwoffset)
+  end
+  def set_play_offset(dwoffset : UInt32) : HRESULT
+    @lpVtbl.value.set_play_offset.unsafe_as(Proc(UInt32, HRESULT)).call(dwoffset)
+  end
+  def get_total_length(pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_length.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwlength)
+  end
+  def get_last_play_position(pdwlastpos : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_play_position.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwlastpos)
+  end
+  def get_longest_play_position(pdwlongestpos : UInt32*) : HRESULT
+    @lpVtbl.value.get_longest_play_position.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwlongestpos)
+  end
+end
+struct LibWin32::IWMDMRevoked
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_revocation_url(ppwszrevocationurl : LibC::LPWSTR*, pdwbufferlen : UInt32*, pdwrevokedbitflag : UInt32*) : HRESULT
+    @lpVtbl.value.get_revocation_url.unsafe_as(Proc(LibC::LPWSTR*, UInt32*, UInt32*, HRESULT)).call(ppwszrevocationurl, pdwbufferlen, pdwrevokedbitflag)
+  end
+end
+struct LibWin32::IWMDMNotification
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def wmdm_message(dwmessagetype : UInt32, pwszcanonicalname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.wmdm_message.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(dwmessagetype, pwszcanonicalname)
+  end
+end
+struct LibWin32::IMDServiceProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device_count(pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcount)
+  end
+  def enum_devices(ppenumdevice : IMDSPEnumDevice*) : HRESULT
+    @lpVtbl.value.enum_devices.unsafe_as(Proc(IMDSPEnumDevice*, HRESULT)).call(ppenumdevice)
+  end
+end
+struct LibWin32::IMDServiceProvider2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device_count(pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcount)
+  end
+  def enum_devices(ppenumdevice : IMDSPEnumDevice*) : HRESULT
+    @lpVtbl.value.enum_devices.unsafe_as(Proc(IMDSPEnumDevice*, HRESULT)).call(ppenumdevice)
+  end
+  def create_device(pwszdevicepath : LibC::LPWSTR, pdwcount : UInt32*, pppdevicearray : IMDSPDevice**) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(LibC::LPWSTR, UInt32*, IMDSPDevice**, HRESULT)).call(pwszdevicepath, pdwcount, pppdevicearray)
+  end
+end
+struct LibWin32::IMDServiceProvider3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device_count(pdwcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcount)
+  end
+  def enum_devices(ppenumdevice : IMDSPEnumDevice*) : HRESULT
+    @lpVtbl.value.enum_devices.unsafe_as(Proc(IMDSPEnumDevice*, HRESULT)).call(ppenumdevice)
+  end
+  def create_device(pwszdevicepath : LibC::LPWSTR, pdwcount : UInt32*, pppdevicearray : IMDSPDevice**) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(LibC::LPWSTR, UInt32*, IMDSPDevice**, HRESULT)).call(pwszdevicepath, pdwcount, pppdevicearray)
+  end
+  def set_device_enum_preference(dwenumpref : UInt32) : HRESULT
+    @lpVtbl.value.set_device_enum_preference.unsafe_as(Proc(UInt32, HRESULT)).call(dwenumpref)
+  end
+end
+struct LibWin32::IMDSPEnumDevice
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppdevice : IMDSPDevice*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IMDSPDevice*, UInt32*, HRESULT)).call(celt, ppdevice, pceltfetched)
+  end
+  def skip(celt : UInt32, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(celt, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenumdevice : IMDSPEnumDevice*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IMDSPEnumDevice*, HRESULT)).call(ppenumdevice)
+  end
+end
+struct LibWin32::IMDSPDevice
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_manufacturer(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_manufacturer.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_version(pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwversion)
+  end
+  def get_type(pdwtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwtype)
+  end
+  def get_serial_number(pserialnumber : WMDMID*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_serial_number.unsafe_as(Proc(WMDMID*, UInt8*, HRESULT)).call(pserialnumber, abmac)
+  end
+  def get_power_source(pdwpowersource : UInt32*, pdwpercentremaining : UInt32*) : HRESULT
+    @lpVtbl.value.get_power_source.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwpowersource, pdwpercentremaining)
+  end
+  def get_status(pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  end
+  def get_device_icon(hicon : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_icon.unsafe_as(Proc(UInt32*, HRESULT)).call(hicon)
+  end
+  def enum_storage(ppenumstorage : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.unsafe_as(Proc(IMDSPEnumStorage*, HRESULT)).call(ppenumstorage)
+  end
+  def get_format_support(pformatex : WAVEFORMATEX**, pnformatcount : UInt32*, pppwszmimetype : LibC::LPWSTR**, pnmimetypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support.unsafe_as(Proc(WAVEFORMATEX**, UInt32*, LibC::LPWSTR**, UInt32*, HRESULT)).call(pformatex, pnformatcount, pppwszmimetype, pnmimetypecount)
+  end
+  def send_opaque_command(pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.unsafe_as(Proc(OPAQUECOMMAND*, HRESULT)).call(pcommand)
+  end
+end
+struct LibWin32::IMDSPDevice2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_manufacturer(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_manufacturer.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_version(pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwversion)
+  end
+  def get_type(pdwtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwtype)
+  end
+  def get_serial_number(pserialnumber : WMDMID*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_serial_number.unsafe_as(Proc(WMDMID*, UInt8*, HRESULT)).call(pserialnumber, abmac)
+  end
+  def get_power_source(pdwpowersource : UInt32*, pdwpercentremaining : UInt32*) : HRESULT
+    @lpVtbl.value.get_power_source.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwpowersource, pdwpercentremaining)
+  end
+  def get_status(pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  end
+  def get_device_icon(hicon : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_icon.unsafe_as(Proc(UInt32*, HRESULT)).call(hicon)
+  end
+  def enum_storage(ppenumstorage : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.unsafe_as(Proc(IMDSPEnumStorage*, HRESULT)).call(ppenumstorage)
+  end
+  def get_format_support(pformatex : WAVEFORMATEX**, pnformatcount : UInt32*, pppwszmimetype : LibC::LPWSTR**, pnmimetypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support.unsafe_as(Proc(WAVEFORMATEX**, UInt32*, LibC::LPWSTR**, UInt32*, HRESULT)).call(pformatex, pnformatcount, pppwszmimetype, pnmimetypecount)
+  end
+  def send_opaque_command(pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.unsafe_as(Proc(OPAQUECOMMAND*, HRESULT)).call(pcommand)
+  end
+  def get_storage(pszstoragename : LibC::LPWSTR, ppstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.get_storage.unsafe_as(Proc(LibC::LPWSTR, IMDSPStorage*, HRESULT)).call(pszstoragename, ppstorage)
+  end
+  def get_format_support2(dwflags : UInt32, ppaudioformatex : WAVEFORMATEX**, pnaudioformatcount : UInt32*, ppvideoformatex : VIDEOINFOHEADER**, pnvideoformatcount : UInt32*, ppfiletype : WMFILECAPABILITIES**, pnfiletypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support2.unsafe_as(Proc(UInt32, WAVEFORMATEX**, UInt32*, VIDEOINFOHEADER**, UInt32*, WMFILECAPABILITIES**, UInt32*, HRESULT)).call(dwflags, ppaudioformatex, pnaudioformatcount, ppvideoformatex, pnvideoformatcount, ppfiletype, pnfiletypecount)
+  end
+  def get_specify_property_pages(ppspecifyproppages : ISpecifyPropertyPages*, pppunknowns : IUnknown**, pcunks : UInt32*) : HRESULT
+    @lpVtbl.value.get_specify_property_pages.unsafe_as(Proc(ISpecifyPropertyPages*, IUnknown**, UInt32*, HRESULT)).call(ppspecifyproppages, pppunknowns, pcunks)
+  end
+  def get_canonical_name(pwszpnpname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_canonical_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszpnpname, nmaxchars)
+  end
+end
+struct LibWin32::IMDSPDevice3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_manufacturer(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_manufacturer.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_version(pdwversion : UInt32*) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwversion)
+  end
+  def get_type(pdwtype : UInt32*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwtype)
+  end
+  def get_serial_number(pserialnumber : WMDMID*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_serial_number.unsafe_as(Proc(WMDMID*, UInt8*, HRESULT)).call(pserialnumber, abmac)
+  end
+  def get_power_source(pdwpowersource : UInt32*, pdwpercentremaining : UInt32*) : HRESULT
+    @lpVtbl.value.get_power_source.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwpowersource, pdwpercentremaining)
+  end
+  def get_status(pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  end
+  def get_device_icon(hicon : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_icon.unsafe_as(Proc(UInt32*, HRESULT)).call(hicon)
+  end
+  def enum_storage(ppenumstorage : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.unsafe_as(Proc(IMDSPEnumStorage*, HRESULT)).call(ppenumstorage)
+  end
+  def get_format_support(pformatex : WAVEFORMATEX**, pnformatcount : UInt32*, pppwszmimetype : LibC::LPWSTR**, pnmimetypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support.unsafe_as(Proc(WAVEFORMATEX**, UInt32*, LibC::LPWSTR**, UInt32*, HRESULT)).call(pformatex, pnformatcount, pppwszmimetype, pnmimetypecount)
+  end
+  def send_opaque_command(pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.unsafe_as(Proc(OPAQUECOMMAND*, HRESULT)).call(pcommand)
+  end
+  def get_storage(pszstoragename : LibC::LPWSTR, ppstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.get_storage.unsafe_as(Proc(LibC::LPWSTR, IMDSPStorage*, HRESULT)).call(pszstoragename, ppstorage)
+  end
+  def get_format_support2(dwflags : UInt32, ppaudioformatex : WAVEFORMATEX**, pnaudioformatcount : UInt32*, ppvideoformatex : VIDEOINFOHEADER**, pnvideoformatcount : UInt32*, ppfiletype : WMFILECAPABILITIES**, pnfiletypecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_support2.unsafe_as(Proc(UInt32, WAVEFORMATEX**, UInt32*, VIDEOINFOHEADER**, UInt32*, WMFILECAPABILITIES**, UInt32*, HRESULT)).call(dwflags, ppaudioformatex, pnaudioformatcount, ppvideoformatex, pnvideoformatcount, ppfiletype, pnfiletypecount)
+  end
+  def get_specify_property_pages(ppspecifyproppages : ISpecifyPropertyPages*, pppunknowns : IUnknown**, pcunks : UInt32*) : HRESULT
+    @lpVtbl.value.get_specify_property_pages.unsafe_as(Proc(ISpecifyPropertyPages*, IUnknown**, UInt32*, HRESULT)).call(ppspecifyproppages, pppunknowns, pcunks)
+  end
+  def get_canonical_name(pwszpnpname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_canonical_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszpnpname, nmaxchars)
+  end
+  def get_property(pwszpropname : LibC::LPWSTR, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT*, HRESULT)).call(pwszpropname, pvalue)
+  end
+  def set_property(pwszpropname : LibC::LPWSTR, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(LibC::LPWSTR, PROPVARIANT*, HRESULT)).call(pwszpropname, pvalue)
+  end
+  def get_format_capability(format : WMDM_FORMATCODE, pformatsupport : WMDM_FORMAT_CAPABILITY*) : HRESULT
+    @lpVtbl.value.get_format_capability.unsafe_as(Proc(WMDM_FORMATCODE, WMDM_FORMAT_CAPABILITY*, HRESULT)).call(format, pformatsupport)
+  end
+  def device_io_control(dwiocontrolcode : UInt32, lpinbuffer : UInt8*, ninbuffersize : UInt32, lpoutbuffer : UInt8*, pnoutbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.device_io_control.unsafe_as(Proc(UInt32, UInt8*, UInt32, UInt8*, UInt32*, HRESULT)).call(dwiocontrolcode, lpinbuffer, ninbuffersize, lpoutbuffer, pnoutbuffersize)
+  end
+  def find_storage(findscope : WMDM_FIND_SCOPE, pwszuniqueid : LibC::LPWSTR, ppstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.find_storage.unsafe_as(Proc(WMDM_FIND_SCOPE, LibC::LPWSTR, IMDSPStorage*, HRESULT)).call(findscope, pwszuniqueid, ppstorage)
+  end
+end
+struct LibWin32::IMDSPDeviceControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_dc_status(pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_dc_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  end
+  def get_capabilities(pdwcapabilitiesmask : UInt32*) : HRESULT
+    @lpVtbl.value.get_capabilities.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcapabilitiesmask)
+  end
+  def play : HRESULT
+    @lpVtbl.value.play.unsafe_as(Proc(HRESULT)).call
+  end
+  def record(pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.record.unsafe_as(Proc(WAVEFORMATEX*, HRESULT)).call(pformat)
+  end
+  def pause : HRESULT
+    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume : HRESULT
+    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  end
+  def stop : HRESULT
+    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  end
+  def seek(fumode : UInt32, noffset : Int32) : HRESULT
+    @lpVtbl.value.seek.unsafe_as(Proc(UInt32, Int32, HRESULT)).call(fumode, noffset)
+  end
+end
+struct LibWin32::IMDSPEnumStorage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppstorage : IMDSPStorage*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IMDSPStorage*, UInt32*, HRESULT)).call(celt, ppstorage, pceltfetched)
+  end
+  def skip(celt : UInt32, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(celt, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenumstorage : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IMDSPEnumStorage*, HRESULT)).call(ppenumstorage)
+  end
+end
+struct LibWin32::IMDSPStorage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_attributes(dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_attributes.unsafe_as(Proc(UInt32, WAVEFORMATEX*, HRESULT)).call(dwattributes, pformat)
+  end
+  def get_storage_globals(ppstorageglobals : IMDSPStorageGlobals*) : HRESULT
+    @lpVtbl.value.get_storage_globals.unsafe_as(Proc(IMDSPStorageGlobals*, HRESULT)).call(ppstorageglobals)
+  end
+  def get_attributes(pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_attributes.unsafe_as(Proc(UInt32*, WAVEFORMATEX*, HRESULT)).call(pdwattributes, pformat)
+  end
+  def get_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_date(pdatetimeutc : WMDMDATETIME*) : HRESULT
+    @lpVtbl.value.get_date.unsafe_as(Proc(WMDMDATETIME*, HRESULT)).call(pdatetimeutc)
+  end
+  def get_size(pdwsizelow : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwsizelow, pdwsizehigh)
+  end
+  def get_rights(pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.unsafe_as(Proc(WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)).call(pprights, pnrightscount, abmac)
+  end
+  def create_storage(dwattributes : UInt32, pformat : WAVEFORMATEX*, pwszname : LibC::LPWSTR, ppnewstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.create_storage.unsafe_as(Proc(UInt32, WAVEFORMATEX*, LibC::LPWSTR, IMDSPStorage*, HRESULT)).call(dwattributes, pformat, pwszname, ppnewstorage)
+  end
+  def enum_storage(ppenumstorage : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.unsafe_as(Proc(IMDSPEnumStorage*, HRESULT)).call(ppenumstorage)
+  end
+  def send_opaque_command(pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.unsafe_as(Proc(OPAQUECOMMAND*, HRESULT)).call(pcommand)
+  end
+end
+struct LibWin32::IMDSPStorage2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_attributes(dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_attributes.unsafe_as(Proc(UInt32, WAVEFORMATEX*, HRESULT)).call(dwattributes, pformat)
+  end
+  def get_storage_globals(ppstorageglobals : IMDSPStorageGlobals*) : HRESULT
+    @lpVtbl.value.get_storage_globals.unsafe_as(Proc(IMDSPStorageGlobals*, HRESULT)).call(ppstorageglobals)
+  end
+  def get_attributes(pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_attributes.unsafe_as(Proc(UInt32*, WAVEFORMATEX*, HRESULT)).call(pdwattributes, pformat)
+  end
+  def get_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_date(pdatetimeutc : WMDMDATETIME*) : HRESULT
+    @lpVtbl.value.get_date.unsafe_as(Proc(WMDMDATETIME*, HRESULT)).call(pdatetimeutc)
+  end
+  def get_size(pdwsizelow : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwsizelow, pdwsizehigh)
+  end
+  def get_rights(pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.unsafe_as(Proc(WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)).call(pprights, pnrightscount, abmac)
+  end
+  def create_storage(dwattributes : UInt32, pformat : WAVEFORMATEX*, pwszname : LibC::LPWSTR, ppnewstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.create_storage.unsafe_as(Proc(UInt32, WAVEFORMATEX*, LibC::LPWSTR, IMDSPStorage*, HRESULT)).call(dwattributes, pformat, pwszname, ppnewstorage)
+  end
+  def enum_storage(ppenumstorage : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.unsafe_as(Proc(IMDSPEnumStorage*, HRESULT)).call(ppenumstorage)
+  end
+  def send_opaque_command(pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.unsafe_as(Proc(OPAQUECOMMAND*, HRESULT)).call(pcommand)
+  end
+  def get_storage(pszstoragename : LibC::LPWSTR, ppstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.get_storage.unsafe_as(Proc(LibC::LPWSTR, IMDSPStorage*, HRESULT)).call(pszstoragename, ppstorage)
+  end
+  def create_storage2(dwattributes : UInt32, dwattributesex : UInt32, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*, pwszname : LibC::LPWSTR, qwfilesize : UInt64, ppnewstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.create_storage2.unsafe_as(Proc(UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, LibC::LPWSTR, UInt64, IMDSPStorage*, HRESULT)).call(dwattributes, dwattributesex, paudioformat, pvideoformat, pwszname, qwfilesize, ppnewstorage)
+  end
+  def set_attributes2(dwattributes : UInt32, dwattributesex : UInt32, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.set_attributes2.unsafe_as(Proc(UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)).call(dwattributes, dwattributesex, paudioformat, pvideoformat)
+  end
+  def get_attributes2(pdwattributes : UInt32*, pdwattributesex : UInt32*, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.get_attributes2.unsafe_as(Proc(UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)).call(pdwattributes, pdwattributesex, paudioformat, pvideoformat)
+  end
+end
+struct LibWin32::IMDSPStorage3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_attributes(dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_attributes.unsafe_as(Proc(UInt32, WAVEFORMATEX*, HRESULT)).call(dwattributes, pformat)
+  end
+  def get_storage_globals(ppstorageglobals : IMDSPStorageGlobals*) : HRESULT
+    @lpVtbl.value.get_storage_globals.unsafe_as(Proc(IMDSPStorageGlobals*, HRESULT)).call(ppstorageglobals)
+  end
+  def get_attributes(pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_attributes.unsafe_as(Proc(UInt32*, WAVEFORMATEX*, HRESULT)).call(pdwattributes, pformat)
+  end
+  def get_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_date(pdatetimeutc : WMDMDATETIME*) : HRESULT
+    @lpVtbl.value.get_date.unsafe_as(Proc(WMDMDATETIME*, HRESULT)).call(pdatetimeutc)
+  end
+  def get_size(pdwsizelow : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwsizelow, pdwsizehigh)
+  end
+  def get_rights(pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.unsafe_as(Proc(WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)).call(pprights, pnrightscount, abmac)
+  end
+  def create_storage(dwattributes : UInt32, pformat : WAVEFORMATEX*, pwszname : LibC::LPWSTR, ppnewstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.create_storage.unsafe_as(Proc(UInt32, WAVEFORMATEX*, LibC::LPWSTR, IMDSPStorage*, HRESULT)).call(dwattributes, pformat, pwszname, ppnewstorage)
+  end
+  def enum_storage(ppenumstorage : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.unsafe_as(Proc(IMDSPEnumStorage*, HRESULT)).call(ppenumstorage)
+  end
+  def send_opaque_command(pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.unsafe_as(Proc(OPAQUECOMMAND*, HRESULT)).call(pcommand)
+  end
+  def get_storage(pszstoragename : LibC::LPWSTR, ppstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.get_storage.unsafe_as(Proc(LibC::LPWSTR, IMDSPStorage*, HRESULT)).call(pszstoragename, ppstorage)
+  end
+  def create_storage2(dwattributes : UInt32, dwattributesex : UInt32, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*, pwszname : LibC::LPWSTR, qwfilesize : UInt64, ppnewstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.create_storage2.unsafe_as(Proc(UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, LibC::LPWSTR, UInt64, IMDSPStorage*, HRESULT)).call(dwattributes, dwattributesex, paudioformat, pvideoformat, pwszname, qwfilesize, ppnewstorage)
+  end
+  def set_attributes2(dwattributes : UInt32, dwattributesex : UInt32, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.set_attributes2.unsafe_as(Proc(UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)).call(dwattributes, dwattributesex, paudioformat, pvideoformat)
+  end
+  def get_attributes2(pdwattributes : UInt32*, pdwattributesex : UInt32*, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.get_attributes2.unsafe_as(Proc(UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)).call(pdwattributes, pdwattributesex, paudioformat, pvideoformat)
+  end
+  def get_metadata(pmetadata : IWMDMMetaData) : HRESULT
+    @lpVtbl.value.get_metadata.unsafe_as(Proc(IWMDMMetaData, HRESULT)).call(pmetadata)
+  end
+  def set_metadata(pmetadata : IWMDMMetaData) : HRESULT
+    @lpVtbl.value.set_metadata.unsafe_as(Proc(IWMDMMetaData, HRESULT)).call(pmetadata)
+  end
+end
+struct LibWin32::IMDSPStorage4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_attributes(dwattributes : UInt32, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.set_attributes.unsafe_as(Proc(UInt32, WAVEFORMATEX*, HRESULT)).call(dwattributes, pformat)
+  end
+  def get_storage_globals(ppstorageglobals : IMDSPStorageGlobals*) : HRESULT
+    @lpVtbl.value.get_storage_globals.unsafe_as(Proc(IMDSPStorageGlobals*, HRESULT)).call(ppstorageglobals)
+  end
+  def get_attributes(pdwattributes : UInt32*, pformat : WAVEFORMATEX*) : HRESULT
+    @lpVtbl.value.get_attributes.unsafe_as(Proc(UInt32*, WAVEFORMATEX*, HRESULT)).call(pdwattributes, pformat)
+  end
+  def get_name(pwszname : Char*, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszname, nmaxchars)
+  end
+  def get_date(pdatetimeutc : WMDMDATETIME*) : HRESULT
+    @lpVtbl.value.get_date.unsafe_as(Proc(WMDMDATETIME*, HRESULT)).call(pdatetimeutc)
+  end
+  def get_size(pdwsizelow : UInt32*, pdwsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwsizelow, pdwsizehigh)
+  end
+  def get_rights(pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.unsafe_as(Proc(WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)).call(pprights, pnrightscount, abmac)
+  end
+  def create_storage(dwattributes : UInt32, pformat : WAVEFORMATEX*, pwszname : LibC::LPWSTR, ppnewstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.create_storage.unsafe_as(Proc(UInt32, WAVEFORMATEX*, LibC::LPWSTR, IMDSPStorage*, HRESULT)).call(dwattributes, pformat, pwszname, ppnewstorage)
+  end
+  def enum_storage(ppenumstorage : IMDSPEnumStorage*) : HRESULT
+    @lpVtbl.value.enum_storage.unsafe_as(Proc(IMDSPEnumStorage*, HRESULT)).call(ppenumstorage)
+  end
+  def send_opaque_command(pcommand : OPAQUECOMMAND*) : HRESULT
+    @lpVtbl.value.send_opaque_command.unsafe_as(Proc(OPAQUECOMMAND*, HRESULT)).call(pcommand)
+  end
+  def get_storage(pszstoragename : LibC::LPWSTR, ppstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.get_storage.unsafe_as(Proc(LibC::LPWSTR, IMDSPStorage*, HRESULT)).call(pszstoragename, ppstorage)
+  end
+  def create_storage2(dwattributes : UInt32, dwattributesex : UInt32, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*, pwszname : LibC::LPWSTR, qwfilesize : UInt64, ppnewstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.create_storage2.unsafe_as(Proc(UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, LibC::LPWSTR, UInt64, IMDSPStorage*, HRESULT)).call(dwattributes, dwattributesex, paudioformat, pvideoformat, pwszname, qwfilesize, ppnewstorage)
+  end
+  def set_attributes2(dwattributes : UInt32, dwattributesex : UInt32, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.set_attributes2.unsafe_as(Proc(UInt32, UInt32, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)).call(dwattributes, dwattributesex, paudioformat, pvideoformat)
+  end
+  def get_attributes2(pdwattributes : UInt32*, pdwattributesex : UInt32*, paudioformat : WAVEFORMATEX*, pvideoformat : VIDEOINFOHEADER*) : HRESULT
+    @lpVtbl.value.get_attributes2.unsafe_as(Proc(UInt32*, UInt32*, WAVEFORMATEX*, VIDEOINFOHEADER*, HRESULT)).call(pdwattributes, pdwattributesex, paudioformat, pvideoformat)
+  end
+  def get_metadata(pmetadata : IWMDMMetaData) : HRESULT
+    @lpVtbl.value.get_metadata.unsafe_as(Proc(IWMDMMetaData, HRESULT)).call(pmetadata)
+  end
+  def set_metadata(pmetadata : IWMDMMetaData) : HRESULT
+    @lpVtbl.value.set_metadata.unsafe_as(Proc(IWMDMMetaData, HRESULT)).call(pmetadata)
+  end
+  def set_references(dwrefs : UInt32, ppispstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.set_references.unsafe_as(Proc(UInt32, IMDSPStorage*, HRESULT)).call(dwrefs, ppispstorage)
+  end
+  def get_references(pdwrefs : UInt32*, pppispstorage : IMDSPStorage**) : HRESULT
+    @lpVtbl.value.get_references.unsafe_as(Proc(UInt32*, IMDSPStorage**, HRESULT)).call(pdwrefs, pppispstorage)
+  end
+  def create_storage_with_metadata(dwattributes : UInt32, pwszname : LibC::LPWSTR, pmetadata : IWMDMMetaData, qwfilesize : UInt64, ppnewstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.create_storage_with_metadata.unsafe_as(Proc(UInt32, LibC::LPWSTR, IWMDMMetaData, UInt64, IMDSPStorage*, HRESULT)).call(dwattributes, pwszname, pmetadata, qwfilesize, ppnewstorage)
+  end
+  def get_specified_metadata(cproperties : UInt32, ppwszpropnames : LibC::LPWSTR*, pmetadata : IWMDMMetaData) : HRESULT
+    @lpVtbl.value.get_specified_metadata.unsafe_as(Proc(UInt32, LibC::LPWSTR*, IWMDMMetaData, HRESULT)).call(cproperties, ppwszpropnames, pmetadata)
+  end
+  def find_storage(findscope : WMDM_FIND_SCOPE, pwszuniqueid : LibC::LPWSTR, ppstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.find_storage.unsafe_as(Proc(WMDM_FIND_SCOPE, LibC::LPWSTR, IMDSPStorage*, HRESULT)).call(findscope, pwszuniqueid, ppstorage)
+  end
+  def get_parent(ppstorage : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.get_parent.unsafe_as(Proc(IMDSPStorage*, HRESULT)).call(ppstorage)
+  end
+end
+struct LibWin32::IMDSPStorageGlobals
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_capabilities(pdwcapabilities : UInt32*) : HRESULT
+    @lpVtbl.value.get_capabilities.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcapabilities)
+  end
+  def get_serial_number(pserialnum : WMDMID*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_serial_number.unsafe_as(Proc(WMDMID*, UInt8*, HRESULT)).call(pserialnum, abmac)
+  end
+  def get_total_size(pdwtotalsizelow : UInt32*, pdwtotalsizehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_size.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwtotalsizelow, pdwtotalsizehigh)
+  end
+  def get_total_free(pdwfreelow : UInt32*, pdwfreehigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_free.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwfreelow, pdwfreehigh)
+  end
+  def get_total_bad(pdwbadlow : UInt32*, pdwbadhigh : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_bad.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwbadlow, pdwbadhigh)
+  end
+  def get_status(pdwstatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwstatus)
+  end
+  def initialize(fumode : UInt32, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(UInt32, IWMDMProgress, HRESULT)).call(fumode, pprogress)
+  end
+  def get_device(ppdevice : IMDSPDevice*) : HRESULT
+    @lpVtbl.value.get_device.unsafe_as(Proc(IMDSPDevice*, HRESULT)).call(ppdevice)
+  end
+  def get_root_storage(pproot : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.get_root_storage.unsafe_as(Proc(IMDSPStorage*, HRESULT)).call(pproot)
+  end
+end
+struct LibWin32::IMDSPObjectInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_play_length(pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_play_length.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwlength)
+  end
+  def set_play_length(dwlength : UInt32) : HRESULT
+    @lpVtbl.value.set_play_length.unsafe_as(Proc(UInt32, HRESULT)).call(dwlength)
+  end
+  def get_play_offset(pdwoffset : UInt32*) : HRESULT
+    @lpVtbl.value.get_play_offset.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwoffset)
+  end
+  def set_play_offset(dwoffset : UInt32) : HRESULT
+    @lpVtbl.value.set_play_offset.unsafe_as(Proc(UInt32, HRESULT)).call(dwoffset)
+  end
+  def get_total_length(pdwlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_total_length.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwlength)
+  end
+  def get_last_play_position(pdwlastpos : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_play_position.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwlastpos)
+  end
+  def get_longest_play_position(pdwlongestpos : UInt32*) : HRESULT
+    @lpVtbl.value.get_longest_play_position.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwlongestpos)
+  end
+end
+struct LibWin32::IMDSPObject
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def open(fumode : UInt32) : HRESULT
+    @lpVtbl.value.open.unsafe_as(Proc(UInt32, HRESULT)).call(fumode)
+  end
+  def read(pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.read.unsafe_as(Proc(UInt8*, UInt32*, UInt8*, HRESULT)).call(pdata, pdwsize, abmac)
+  end
+  def write(pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.write.unsafe_as(Proc(UInt8*, UInt32*, UInt8*, HRESULT)).call(pdata, pdwsize, abmac)
+  end
+  def delete(fumode : UInt32, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(UInt32, IWMDMProgress, HRESULT)).call(fumode, pprogress)
+  end
+  def seek(fuflags : UInt32, dwoffset : UInt32) : HRESULT
+    @lpVtbl.value.seek.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(fuflags, dwoffset)
+  end
+  def rename(pwsznewname : LibC::LPWSTR, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.rename.unsafe_as(Proc(LibC::LPWSTR, IWMDMProgress, HRESULT)).call(pwsznewname, pprogress)
+  end
+  def move(fumode : UInt32, pprogress : IWMDMProgress, ptarget : IMDSPStorage) : HRESULT
+    @lpVtbl.value.move.unsafe_as(Proc(UInt32, IWMDMProgress, IMDSPStorage, HRESULT)).call(fumode, pprogress, ptarget)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IMDSPObject2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def open(fumode : UInt32) : HRESULT
+    @lpVtbl.value.open.unsafe_as(Proc(UInt32, HRESULT)).call(fumode)
+  end
+  def read(pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.read.unsafe_as(Proc(UInt8*, UInt32*, UInt8*, HRESULT)).call(pdata, pdwsize, abmac)
+  end
+  def write(pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.write.unsafe_as(Proc(UInt8*, UInt32*, UInt8*, HRESULT)).call(pdata, pdwsize, abmac)
+  end
+  def delete(fumode : UInt32, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(UInt32, IWMDMProgress, HRESULT)).call(fumode, pprogress)
+  end
+  def seek(fuflags : UInt32, dwoffset : UInt32) : HRESULT
+    @lpVtbl.value.seek.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(fuflags, dwoffset)
+  end
+  def rename(pwsznewname : LibC::LPWSTR, pprogress : IWMDMProgress) : HRESULT
+    @lpVtbl.value.rename.unsafe_as(Proc(LibC::LPWSTR, IWMDMProgress, HRESULT)).call(pwsznewname, pprogress)
+  end
+  def move(fumode : UInt32, pprogress : IWMDMProgress, ptarget : IMDSPStorage) : HRESULT
+    @lpVtbl.value.move.unsafe_as(Proc(UInt32, IWMDMProgress, IMDSPStorage, HRESULT)).call(fumode, pprogress, ptarget)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def read_on_clear_channel(pdata : UInt8*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.read_on_clear_channel.unsafe_as(Proc(UInt8*, UInt32*, HRESULT)).call(pdata, pdwsize)
+  end
+  def write_on_clear_channel(pdata : UInt8*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.write_on_clear_channel.unsafe_as(Proc(UInt8*, UInt32*, HRESULT)).call(pdata, pdwsize)
+  end
+end
+struct LibWin32::IMDSPDirectTransfer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def transfer_to_device(pwszsourcefilepath : LibC::LPWSTR, psourceoperation : IWMDMOperation, fuflags : UInt32, pwszdestinationname : LibC::LPWSTR, psourcemetadata : IWMDMMetaData, ptransferprogress : IWMDMProgress, ppnewobject : IMDSPStorage*) : HRESULT
+    @lpVtbl.value.transfer_to_device.unsafe_as(Proc(LibC::LPWSTR, IWMDMOperation, UInt32, LibC::LPWSTR, IWMDMMetaData, IWMDMProgress, IMDSPStorage*, HRESULT)).call(pwszsourcefilepath, psourceoperation, fuflags, pwszdestinationname, psourcemetadata, ptransferprogress, ppnewobject)
+  end
+end
+struct LibWin32::IMDSPRevoked
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_revocation_url(ppwszrevocationurl : LibC::LPWSTR*, pdwbufferlen : UInt32*) : HRESULT
+    @lpVtbl.value.get_revocation_url.unsafe_as(Proc(LibC::LPWSTR*, UInt32*, HRESULT)).call(ppwszrevocationurl, pdwbufferlen)
+  end
+end
+struct LibWin32::ISCPSecureAuthenticate
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_secure_query(ppsecurequery : ISCPSecureQuery*) : HRESULT
+    @lpVtbl.value.get_secure_query.unsafe_as(Proc(ISCPSecureQuery*, HRESULT)).call(ppsecurequery)
+  end
+end
+struct LibWin32::ISCPSecureAuthenticate2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_secure_query(ppsecurequery : ISCPSecureQuery*) : HRESULT
+    @lpVtbl.value.get_secure_query.unsafe_as(Proc(ISCPSecureQuery*, HRESULT)).call(ppsecurequery)
+  end
+  def get_scp_session(ppscpsession : ISCPSession*) : HRESULT
+    @lpVtbl.value.get_scp_session.unsafe_as(Proc(ISCPSession*, HRESULT)).call(ppscpsession)
+  end
+end
+struct LibWin32::ISCPSecureQuery
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_data_demands(pfuflags : UInt32*, pdwminrightsdata : UInt32*, pdwminexaminedata : UInt32*, pdwmindecidedata : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_data_demands.unsafe_as(Proc(UInt32*, UInt32*, UInt32*, UInt32*, UInt8*, HRESULT)).call(pfuflags, pdwminrightsdata, pdwminexaminedata, pdwmindecidedata, abmac)
+  end
+  def examine_data(fuflags : UInt32, pwszextension : LibC::LPWSTR, pdata : UInt8*, dwsize : UInt32, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.examine_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt8*, UInt32, UInt8*, HRESULT)).call(fuflags, pwszextension, pdata, dwsize, abmac)
+  end
+  def make_decision(fuflags : UInt32, pdata : UInt8*, dwsize : UInt32, dwappsec : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstorageglobals : IMDSPStorageGlobals, ppexchange : ISCPSecureExchange*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.make_decision.unsafe_as(Proc(UInt32, UInt8*, UInt32, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, ISCPSecureExchange*, UInt8*, HRESULT)).call(fuflags, pdata, dwsize, dwappsec, pbspsessionkey, dwsessionkeylen, pstorageglobals, ppexchange, abmac)
+  end
+  def get_rights(pdata : UInt8*, dwsize : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstgglobals : IMDSPStorageGlobals, pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.unsafe_as(Proc(UInt8*, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)).call(pdata, dwsize, pbspsessionkey, dwsessionkeylen, pstgglobals, pprights, pnrightscount, abmac)
+  end
+end
+struct LibWin32::ISCPSecureQuery2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_data_demands(pfuflags : UInt32*, pdwminrightsdata : UInt32*, pdwminexaminedata : UInt32*, pdwmindecidedata : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_data_demands.unsafe_as(Proc(UInt32*, UInt32*, UInt32*, UInt32*, UInt8*, HRESULT)).call(pfuflags, pdwminrightsdata, pdwminexaminedata, pdwmindecidedata, abmac)
+  end
+  def examine_data(fuflags : UInt32, pwszextension : LibC::LPWSTR, pdata : UInt8*, dwsize : UInt32, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.examine_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt8*, UInt32, UInt8*, HRESULT)).call(fuflags, pwszextension, pdata, dwsize, abmac)
+  end
+  def make_decision(fuflags : UInt32, pdata : UInt8*, dwsize : UInt32, dwappsec : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstorageglobals : IMDSPStorageGlobals, ppexchange : ISCPSecureExchange*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.make_decision.unsafe_as(Proc(UInt32, UInt8*, UInt32, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, ISCPSecureExchange*, UInt8*, HRESULT)).call(fuflags, pdata, dwsize, dwappsec, pbspsessionkey, dwsessionkeylen, pstorageglobals, ppexchange, abmac)
+  end
+  def get_rights(pdata : UInt8*, dwsize : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstgglobals : IMDSPStorageGlobals, pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.unsafe_as(Proc(UInt8*, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)).call(pdata, dwsize, pbspsessionkey, dwsessionkeylen, pstgglobals, pprights, pnrightscount, abmac)
+  end
+  def make_decision2(fuflags : UInt32, pdata : UInt8*, dwsize : UInt32, dwappsec : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstorageglobals : IMDSPStorageGlobals, pappcertapp : UInt8*, dwappcertapplen : UInt32, pappcertsp : UInt8*, dwappcertsplen : UInt32, pszrevocationurl : LibC::LPWSTR*, pdwrevocationurllen : UInt32*, pdwrevocationbitflag : UInt32*, pqwfilesize : UInt64*, punknown : IUnknown, ppexchange : ISCPSecureExchange*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.make_decision2.unsafe_as(Proc(UInt32, UInt8*, UInt32, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR*, UInt32*, UInt32*, UInt64*, IUnknown, ISCPSecureExchange*, UInt8*, HRESULT)).call(fuflags, pdata, dwsize, dwappsec, pbspsessionkey, dwsessionkeylen, pstorageglobals, pappcertapp, dwappcertapplen, pappcertsp, dwappcertsplen, pszrevocationurl, pdwrevocationurllen, pdwrevocationbitflag, pqwfilesize, punknown, ppexchange, abmac)
+  end
+end
+struct LibWin32::ISCPSecureExchange
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def transfer_container_data(pdata : UInt8*, dwsize : UInt32, pfureadyflags : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.transfer_container_data.unsafe_as(Proc(UInt8*, UInt32, UInt32*, UInt8*, HRESULT)).call(pdata, dwsize, pfureadyflags, abmac)
+  end
+  def object_data(pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.object_data.unsafe_as(Proc(UInt8*, UInt32*, UInt8*, HRESULT)).call(pdata, pdwsize, abmac)
+  end
+  def transfer_complete : HRESULT
+    @lpVtbl.value.transfer_complete.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ISCPSecureExchange2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def transfer_container_data(pdata : UInt8*, dwsize : UInt32, pfureadyflags : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.transfer_container_data.unsafe_as(Proc(UInt8*, UInt32, UInt32*, UInt8*, HRESULT)).call(pdata, dwsize, pfureadyflags, abmac)
+  end
+  def object_data(pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.object_data.unsafe_as(Proc(UInt8*, UInt32*, UInt8*, HRESULT)).call(pdata, pdwsize, abmac)
+  end
+  def transfer_complete : HRESULT
+    @lpVtbl.value.transfer_complete.unsafe_as(Proc(HRESULT)).call
+  end
+  def transfer_container_data2(pdata : UInt8*, dwsize : UInt32, pprogresscallback : IWMDMProgress3, pfureadyflags : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.transfer_container_data2.unsafe_as(Proc(UInt8*, UInt32, IWMDMProgress3, UInt32*, UInt8*, HRESULT)).call(pdata, dwsize, pprogresscallback, pfureadyflags, abmac)
+  end
+end
+struct LibWin32::ISCPSecureExchange3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def transfer_container_data(pdata : UInt8*, dwsize : UInt32, pfureadyflags : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.transfer_container_data.unsafe_as(Proc(UInt8*, UInt32, UInt32*, UInt8*, HRESULT)).call(pdata, dwsize, pfureadyflags, abmac)
+  end
+  def object_data(pdata : UInt8*, pdwsize : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.object_data.unsafe_as(Proc(UInt8*, UInt32*, UInt8*, HRESULT)).call(pdata, pdwsize, abmac)
+  end
+  def transfer_complete : HRESULT
+    @lpVtbl.value.transfer_complete.unsafe_as(Proc(HRESULT)).call
+  end
+  def transfer_container_data2(pdata : UInt8*, dwsize : UInt32, pprogresscallback : IWMDMProgress3, pfureadyflags : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.transfer_container_data2.unsafe_as(Proc(UInt8*, UInt32, IWMDMProgress3, UInt32*, UInt8*, HRESULT)).call(pdata, dwsize, pprogresscallback, pfureadyflags, abmac)
+  end
+  def transfer_container_data_on_clear_channel(pdevice : IMDSPDevice, pdata : UInt8*, dwsize : UInt32, pprogresscallback : IWMDMProgress3, pfureadyflags : UInt32*) : HRESULT
+    @lpVtbl.value.transfer_container_data_on_clear_channel.unsafe_as(Proc(IMDSPDevice, UInt8*, UInt32, IWMDMProgress3, UInt32*, HRESULT)).call(pdevice, pdata, dwsize, pprogresscallback, pfureadyflags)
+  end
+  def get_object_data_on_clear_channel(pdevice : IMDSPDevice, pdata : UInt8*, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_object_data_on_clear_channel.unsafe_as(Proc(IMDSPDevice, UInt8*, UInt32*, HRESULT)).call(pdevice, pdata, pdwsize)
+  end
+  def transfer_complete_for_device(pdevice : IMDSPDevice) : HRESULT
+    @lpVtbl.value.transfer_complete_for_device.unsafe_as(Proc(IMDSPDevice, HRESULT)).call(pdevice)
+  end
+end
+struct LibWin32::ISCPSession
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_session(pidevice : IMDSPDevice, pctx : UInt8*, dwsizectx : UInt32) : HRESULT
+    @lpVtbl.value.begin_session.unsafe_as(Proc(IMDSPDevice, UInt8*, UInt32, HRESULT)).call(pidevice, pctx, dwsizectx)
+  end
+  def end_session(pctx : UInt8*, dwsizectx : UInt32) : HRESULT
+    @lpVtbl.value.end_session.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(pctx, dwsizectx)
+  end
+  def get_secure_query(ppsecurequery : ISCPSecureQuery*) : HRESULT
+    @lpVtbl.value.get_secure_query.unsafe_as(Proc(ISCPSecureQuery*, HRESULT)).call(ppsecurequery)
+  end
+end
+struct LibWin32::ISCPSecureQuery3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_data_demands(pfuflags : UInt32*, pdwminrightsdata : UInt32*, pdwminexaminedata : UInt32*, pdwmindecidedata : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_data_demands.unsafe_as(Proc(UInt32*, UInt32*, UInt32*, UInt32*, UInt8*, HRESULT)).call(pfuflags, pdwminrightsdata, pdwminexaminedata, pdwmindecidedata, abmac)
+  end
+  def examine_data(fuflags : UInt32, pwszextension : LibC::LPWSTR, pdata : UInt8*, dwsize : UInt32, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.examine_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt8*, UInt32, UInt8*, HRESULT)).call(fuflags, pwszextension, pdata, dwsize, abmac)
+  end
+  def make_decision(fuflags : UInt32, pdata : UInt8*, dwsize : UInt32, dwappsec : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstorageglobals : IMDSPStorageGlobals, ppexchange : ISCPSecureExchange*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.make_decision.unsafe_as(Proc(UInt32, UInt8*, UInt32, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, ISCPSecureExchange*, UInt8*, HRESULT)).call(fuflags, pdata, dwsize, dwappsec, pbspsessionkey, dwsessionkeylen, pstorageglobals, ppexchange, abmac)
+  end
+  def get_rights(pdata : UInt8*, dwsize : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstgglobals : IMDSPStorageGlobals, pprights : WMDMRIGHTS**, pnrightscount : UInt32*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.get_rights.unsafe_as(Proc(UInt8*, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, WMDMRIGHTS**, UInt32*, UInt8*, HRESULT)).call(pdata, dwsize, pbspsessionkey, dwsessionkeylen, pstgglobals, pprights, pnrightscount, abmac)
+  end
+  def make_decision2(fuflags : UInt32, pdata : UInt8*, dwsize : UInt32, dwappsec : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstorageglobals : IMDSPStorageGlobals, pappcertapp : UInt8*, dwappcertapplen : UInt32, pappcertsp : UInt8*, dwappcertsplen : UInt32, pszrevocationurl : LibC::LPWSTR*, pdwrevocationurllen : UInt32*, pdwrevocationbitflag : UInt32*, pqwfilesize : UInt64*, punknown : IUnknown, ppexchange : ISCPSecureExchange*, abmac : UInt8*) : HRESULT
+    @lpVtbl.value.make_decision2.unsafe_as(Proc(UInt32, UInt8*, UInt32, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR*, UInt32*, UInt32*, UInt64*, IUnknown, ISCPSecureExchange*, UInt8*, HRESULT)).call(fuflags, pdata, dwsize, dwappsec, pbspsessionkey, dwsessionkeylen, pstorageglobals, pappcertapp, dwappcertapplen, pappcertsp, dwappcertsplen, pszrevocationurl, pdwrevocationurllen, pdwrevocationbitflag, pqwfilesize, punknown, ppexchange, abmac)
+  end
+  def get_rights_on_clear_channel(pdata : UInt8*, dwsize : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstgglobals : IMDSPStorageGlobals, pprogresscallback : IWMDMProgress3, pprights : WMDMRIGHTS**, pnrightscount : UInt32*) : HRESULT
+    @lpVtbl.value.get_rights_on_clear_channel.unsafe_as(Proc(UInt8*, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, IWMDMProgress3, WMDMRIGHTS**, UInt32*, HRESULT)).call(pdata, dwsize, pbspsessionkey, dwsessionkeylen, pstgglobals, pprogresscallback, pprights, pnrightscount)
+  end
+  def make_decision_on_clear_channel(fuflags : UInt32, pdata : UInt8*, dwsize : UInt32, dwappsec : UInt32, pbspsessionkey : UInt8*, dwsessionkeylen : UInt32, pstorageglobals : IMDSPStorageGlobals, pprogresscallback : IWMDMProgress3, pappcertapp : UInt8*, dwappcertapplen : UInt32, pappcertsp : UInt8*, dwappcertsplen : UInt32, pszrevocationurl : LibC::LPWSTR*, pdwrevocationurllen : UInt32*, pdwrevocationbitflag : UInt32*, pqwfilesize : UInt64*, punknown : IUnknown, ppexchange : ISCPSecureExchange*) : HRESULT
+    @lpVtbl.value.make_decision_on_clear_channel.unsafe_as(Proc(UInt32, UInt8*, UInt32, UInt32, UInt8*, UInt32, IMDSPStorageGlobals, IWMDMProgress3, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR*, UInt32*, UInt32*, UInt64*, IUnknown, ISCPSecureExchange*, HRESULT)).call(fuflags, pdata, dwsize, dwappsec, pbspsessionkey, dwsessionkeylen, pstorageglobals, pprogresscallback, pappcertapp, dwappcertapplen, pappcertsp, dwappcertsplen, pszrevocationurl, pdwrevocationurllen, pdwrevocationbitflag, pqwfilesize, punknown, ppexchange)
+  end
+end
+struct LibWin32::IComponentAuthenticate
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def sac_auth(dwprotocolid : UInt32, dwpass : UInt32, pbdatain : UInt8*, dwdatainlen : UInt32, ppbdataout : UInt8**, pdwdataoutlen : UInt32*) : HRESULT
+    @lpVtbl.value.sac_auth.unsafe_as(Proc(UInt32, UInt32, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)).call(dwprotocolid, dwpass, pbdatain, dwdatainlen, ppbdataout, pdwdataoutlen)
+  end
+  def sac_get_protocols(ppdwprotocols : UInt32**, pdwprotocolcount : UInt32*) : HRESULT
+    @lpVtbl.value.sac_get_protocols.unsafe_as(Proc(UInt32**, UInt32*, HRESULT)).call(ppdwprotocols, pdwprotocolcount)
+  end
+end
+struct LibWin32::IWMDMLogger
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def is_enabled(pfenabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfenabled)
+  end
+  def enable(fenable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fenable)
+  end
+  def get_log_file_name(pszfilename : PSTR, nmaxchars : UInt32) : HRESULT
+    @lpVtbl.value.get_log_file_name.unsafe_as(Proc(PSTR, UInt32, HRESULT)).call(pszfilename, nmaxchars)
+  end
+  def set_log_file_name(pszfilename : PSTR) : HRESULT
+    @lpVtbl.value.set_log_file_name.unsafe_as(Proc(PSTR, HRESULT)).call(pszfilename)
+  end
+  def log_string(dwflags : UInt32, pszsrcname : PSTR, pszlog : PSTR) : HRESULT
+    @lpVtbl.value.log_string.unsafe_as(Proc(UInt32, PSTR, PSTR, HRESULT)).call(dwflags, pszsrcname, pszlog)
+  end
+  def log_dword(dwflags : UInt32, pszsrcname : PSTR, pszlogformat : PSTR, dwlog : UInt32) : HRESULT
+    @lpVtbl.value.log_dword.unsafe_as(Proc(UInt32, PSTR, PSTR, UInt32, HRESULT)).call(dwflags, pszsrcname, pszlogformat, dwlog)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_size_params(pdwmaxsize : UInt32*, pdwshrinktosize : UInt32*) : HRESULT
+    @lpVtbl.value.get_size_params.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pdwmaxsize, pdwshrinktosize)
+  end
+  def set_size_params(dwmaxsize : UInt32, dwshrinktosize : UInt32) : HRESULT
+    @lpVtbl.value.set_size_params.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(dwmaxsize, dwshrinktosize)
+  end
 end

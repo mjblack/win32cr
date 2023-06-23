@@ -1366,11 +1366,11 @@ lib LibWin32
 
 
   struct IEnumEnhancedStorageACTVTbl
-    query_interface : Proc(IEnumEnhancedStorageACT*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumEnhancedStorageACT*, UInt32)
-    release : Proc(IEnumEnhancedStorageACT*, UInt32)
-    get_ac_ts : Proc(IEnumEnhancedStorageACT*, IEnhancedStorageACT**, UInt32*, HRESULT)
-    get_matching_act : Proc(IEnumEnhancedStorageACT*, LibC::LPWSTR, IEnhancedStorageACT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_ac_ts : UInt64
+    get_matching_act : UInt64
   end
 
   IEnumEnhancedStorageACT_GUID = "09b224bd-1335-4631-a7ff-cfd3a92646d7"
@@ -1380,15 +1380,15 @@ lib LibWin32
   end
 
   struct IEnhancedStorageACTVTbl
-    query_interface : Proc(IEnhancedStorageACT*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnhancedStorageACT*, UInt32)
-    release : Proc(IEnhancedStorageACT*, UInt32)
-    authorize : Proc(IEnhancedStorageACT*, UInt32, UInt32, HRESULT)
-    unauthorize : Proc(IEnhancedStorageACT*, HRESULT)
-    get_authorization_state : Proc(IEnhancedStorageACT*, ACT_AUTHORIZATION_STATE*, HRESULT)
-    get_matching_volume : Proc(IEnhancedStorageACT*, LibC::LPWSTR*, HRESULT)
-    get_unique_identity : Proc(IEnhancedStorageACT*, LibC::LPWSTR*, HRESULT)
-    get_silos : Proc(IEnhancedStorageACT*, IEnhancedStorageSilo**, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    authorize : UInt64
+    unauthorize : UInt64
+    get_authorization_state : UInt64
+    get_matching_volume : UInt64
+    get_unique_identity : UInt64
+    get_silos : UInt64
   end
 
   IEnhancedStorageACT_GUID = "6e7781f4-e0f2-4239-b976-a01abab52930"
@@ -1398,17 +1398,17 @@ lib LibWin32
   end
 
   struct IEnhancedStorageACT2VTbl
-    query_interface : Proc(IEnhancedStorageACT2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnhancedStorageACT2*, UInt32)
-    release : Proc(IEnhancedStorageACT2*, UInt32)
-    authorize : Proc(IEnhancedStorageACT2*, UInt32, UInt32, HRESULT)
-    unauthorize : Proc(IEnhancedStorageACT2*, HRESULT)
-    get_authorization_state : Proc(IEnhancedStorageACT2*, ACT_AUTHORIZATION_STATE*, HRESULT)
-    get_matching_volume : Proc(IEnhancedStorageACT2*, LibC::LPWSTR*, HRESULT)
-    get_unique_identity : Proc(IEnhancedStorageACT2*, LibC::LPWSTR*, HRESULT)
-    get_silos : Proc(IEnhancedStorageACT2*, IEnhancedStorageSilo**, UInt32*, HRESULT)
-    get_device_name : Proc(IEnhancedStorageACT2*, LibC::LPWSTR*, HRESULT)
-    is_device_removable : Proc(IEnhancedStorageACT2*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    authorize : UInt64
+    unauthorize : UInt64
+    get_authorization_state : UInt64
+    get_matching_volume : UInt64
+    get_unique_identity : UInt64
+    get_silos : UInt64
+    get_device_name : UInt64
+    is_device_removable : UInt64
   end
 
   IEnhancedStorageACT2_GUID = "4da57d2e-8eb3-41f6-a07e-98b52b88242b"
@@ -1418,20 +1418,20 @@ lib LibWin32
   end
 
   struct IEnhancedStorageACT3VTbl
-    query_interface : Proc(IEnhancedStorageACT3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnhancedStorageACT3*, UInt32)
-    release : Proc(IEnhancedStorageACT3*, UInt32)
-    authorize : Proc(IEnhancedStorageACT3*, UInt32, UInt32, HRESULT)
-    unauthorize : Proc(IEnhancedStorageACT3*, HRESULT)
-    get_authorization_state : Proc(IEnhancedStorageACT3*, ACT_AUTHORIZATION_STATE*, HRESULT)
-    get_matching_volume : Proc(IEnhancedStorageACT3*, LibC::LPWSTR*, HRESULT)
-    get_unique_identity : Proc(IEnhancedStorageACT3*, LibC::LPWSTR*, HRESULT)
-    get_silos : Proc(IEnhancedStorageACT3*, IEnhancedStorageSilo**, UInt32*, HRESULT)
-    get_device_name : Proc(IEnhancedStorageACT3*, LibC::LPWSTR*, HRESULT)
-    is_device_removable : Proc(IEnhancedStorageACT3*, LibC::BOOL*, HRESULT)
-    unauthorize_ex : Proc(IEnhancedStorageACT3*, UInt32, HRESULT)
-    is_queue_frozen : Proc(IEnhancedStorageACT3*, LibC::BOOL*, HRESULT)
-    get_shell_ext_support : Proc(IEnhancedStorageACT3*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    authorize : UInt64
+    unauthorize : UInt64
+    get_authorization_state : UInt64
+    get_matching_volume : UInt64
+    get_unique_identity : UInt64
+    get_silos : UInt64
+    get_device_name : UInt64
+    is_device_removable : UInt64
+    unauthorize_ex : UInt64
+    is_queue_frozen : UInt64
+    get_shell_ext_support : UInt64
   end
 
   IEnhancedStorageACT3_GUID = "022150a1-113d-11df-bb61-001aa01bbc58"
@@ -1441,14 +1441,14 @@ lib LibWin32
   end
 
   struct IEnhancedStorageSiloVTbl
-    query_interface : Proc(IEnhancedStorageSilo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnhancedStorageSilo*, UInt32)
-    release : Proc(IEnhancedStorageSilo*, UInt32)
-    get_info : Proc(IEnhancedStorageSilo*, SILO_INFO*, HRESULT)
-    get_actions : Proc(IEnhancedStorageSilo*, IEnhancedStorageSiloAction**, UInt32*, HRESULT)
-    send_command : Proc(IEnhancedStorageSilo*, UInt8, UInt8*, UInt32, UInt8*, UInt32*, HRESULT)
-    get_portable_device : Proc(IEnhancedStorageSilo*, IPortableDevice*, HRESULT)
-    get_device_path : Proc(IEnhancedStorageSilo*, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_info : UInt64
+    get_actions : UInt64
+    send_command : UInt64
+    get_portable_device : UInt64
+    get_device_path : UInt64
   end
 
   IEnhancedStorageSilo_GUID = "5aef78c6-2242-4703-bf49-44b29357a359"
@@ -1458,12 +1458,12 @@ lib LibWin32
   end
 
   struct IEnhancedStorageSiloActionVTbl
-    query_interface : Proc(IEnhancedStorageSiloAction*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnhancedStorageSiloAction*, UInt32)
-    release : Proc(IEnhancedStorageSiloAction*, UInt32)
-    get_name : Proc(IEnhancedStorageSiloAction*, LibC::LPWSTR*, HRESULT)
-    get_description : Proc(IEnhancedStorageSiloAction*, LibC::LPWSTR*, HRESULT)
-    invoke : Proc(IEnhancedStorageSiloAction*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_name : UInt64
+    get_description : UInt64
+    invoke : UInt64
   end
 
   IEnhancedStorageSiloAction_GUID = "b6f7f311-206f-4ff8-9c4b-27efee77a86f"
@@ -1472,4 +1472,175 @@ lib LibWin32
     lpVtbl : IEnhancedStorageSiloActionVTbl*
   end
 
+end
+struct LibWin32::IEnumEnhancedStorageACT
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_ac_ts(pppienhancedstorageacts : IEnhancedStorageACT**, pcenhancedstorageacts : UInt32*) : HRESULT
+    @lpVtbl.value.get_ac_ts.unsafe_as(Proc(IEnhancedStorageACT**, UInt32*, HRESULT)).call(pppienhancedstorageacts, pcenhancedstorageacts)
+  end
+  def get_matching_act(szvolume : LibC::LPWSTR, ppienhancedstorageact : IEnhancedStorageACT*) : HRESULT
+    @lpVtbl.value.get_matching_act.unsafe_as(Proc(LibC::LPWSTR, IEnhancedStorageACT*, HRESULT)).call(szvolume, ppienhancedstorageact)
+  end
+end
+struct LibWin32::IEnhancedStorageACT
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def authorize(hwndparent : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.authorize.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(hwndparent, dwflags)
+  end
+  def unauthorize : HRESULT
+    @lpVtbl.value.unauthorize.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_authorization_state(pstate : ACT_AUTHORIZATION_STATE*) : HRESULT
+    @lpVtbl.value.get_authorization_state.unsafe_as(Proc(ACT_AUTHORIZATION_STATE*, HRESULT)).call(pstate)
+  end
+  def get_matching_volume(ppwszvolume : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_matching_volume.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppwszvolume)
+  end
+  def get_unique_identity(ppwszidentity : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_unique_identity.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppwszidentity)
+  end
+  def get_silos(pppienhancedstoragesilos : IEnhancedStorageSilo**, pcenhancedstoragesilos : UInt32*) : HRESULT
+    @lpVtbl.value.get_silos.unsafe_as(Proc(IEnhancedStorageSilo**, UInt32*, HRESULT)).call(pppienhancedstoragesilos, pcenhancedstoragesilos)
+  end
+end
+struct LibWin32::IEnhancedStorageACT2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def authorize(hwndparent : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.authorize.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(hwndparent, dwflags)
+  end
+  def unauthorize : HRESULT
+    @lpVtbl.value.unauthorize.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_authorization_state(pstate : ACT_AUTHORIZATION_STATE*) : HRESULT
+    @lpVtbl.value.get_authorization_state.unsafe_as(Proc(ACT_AUTHORIZATION_STATE*, HRESULT)).call(pstate)
+  end
+  def get_matching_volume(ppwszvolume : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_matching_volume.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppwszvolume)
+  end
+  def get_unique_identity(ppwszidentity : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_unique_identity.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppwszidentity)
+  end
+  def get_silos(pppienhancedstoragesilos : IEnhancedStorageSilo**, pcenhancedstoragesilos : UInt32*) : HRESULT
+    @lpVtbl.value.get_silos.unsafe_as(Proc(IEnhancedStorageSilo**, UInt32*, HRESULT)).call(pppienhancedstoragesilos, pcenhancedstoragesilos)
+  end
+  def get_device_name(ppwszdevicename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_device_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppwszdevicename)
+  end
+  def is_device_removable(pisdeviceremovable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_device_removable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisdeviceremovable)
+  end
+end
+struct LibWin32::IEnhancedStorageACT3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def authorize(hwndparent : UInt32, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.authorize.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(hwndparent, dwflags)
+  end
+  def unauthorize : HRESULT
+    @lpVtbl.value.unauthorize.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_authorization_state(pstate : ACT_AUTHORIZATION_STATE*) : HRESULT
+    @lpVtbl.value.get_authorization_state.unsafe_as(Proc(ACT_AUTHORIZATION_STATE*, HRESULT)).call(pstate)
+  end
+  def get_matching_volume(ppwszvolume : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_matching_volume.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppwszvolume)
+  end
+  def get_unique_identity(ppwszidentity : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_unique_identity.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppwszidentity)
+  end
+  def get_silos(pppienhancedstoragesilos : IEnhancedStorageSilo**, pcenhancedstoragesilos : UInt32*) : HRESULT
+    @lpVtbl.value.get_silos.unsafe_as(Proc(IEnhancedStorageSilo**, UInt32*, HRESULT)).call(pppienhancedstoragesilos, pcenhancedstoragesilos)
+  end
+  def get_device_name(ppwszdevicename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_device_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppwszdevicename)
+  end
+  def is_device_removable(pisdeviceremovable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_device_removable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisdeviceremovable)
+  end
+  def unauthorize_ex(dwflags : UInt32) : HRESULT
+    @lpVtbl.value.unauthorize_ex.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  end
+  def is_queue_frozen(pisqueuefrozen : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_queue_frozen.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pisqueuefrozen)
+  end
+  def get_shell_ext_support(pshellextsupport : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_shell_ext_support.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pshellextsupport)
+  end
+end
+struct LibWin32::IEnhancedStorageSilo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_info(psiloinfo : SILO_INFO*) : HRESULT
+    @lpVtbl.value.get_info.unsafe_as(Proc(SILO_INFO*, HRESULT)).call(psiloinfo)
+  end
+  def get_actions(pppienhancedstoragesiloactions : IEnhancedStorageSiloAction**, pcenhancedstoragesiloactions : UInt32*) : HRESULT
+    @lpVtbl.value.get_actions.unsafe_as(Proc(IEnhancedStorageSiloAction**, UInt32*, HRESULT)).call(pppienhancedstoragesiloactions, pcenhancedstoragesiloactions)
+  end
+  def send_command(command : UInt8, pbcommandbuffer : UInt8*, cbcommandbuffer : UInt32, pbresponsebuffer : UInt8*, pcbresponsebuffer : UInt32*) : HRESULT
+    @lpVtbl.value.send_command.unsafe_as(Proc(UInt8, UInt8*, UInt32, UInt8*, UInt32*, HRESULT)).call(command, pbcommandbuffer, cbcommandbuffer, pbresponsebuffer, pcbresponsebuffer)
+  end
+  def get_portable_device(ppiportabledevice : IPortableDevice*) : HRESULT
+    @lpVtbl.value.get_portable_device.unsafe_as(Proc(IPortableDevice*, HRESULT)).call(ppiportabledevice)
+  end
+  def get_device_path(ppwszsilodevicepath : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_device_path.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppwszsilodevicepath)
+  end
+end
+struct LibWin32::IEnhancedStorageSiloAction
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_name(ppwszactionname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppwszactionname)
+  end
+  def get_description(ppwszactiondescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppwszactiondescription)
+  end
+  def invoke : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(HRESULT)).call
+  end
 end

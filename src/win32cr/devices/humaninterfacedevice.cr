@@ -3357,19 +3357,19 @@ lib LibWin32
 
 
   struct IDirectInputEffectVTbl
-    query_interface : Proc(IDirectInputEffect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInputEffect*, UInt32)
-    release : Proc(IDirectInputEffect*, UInt32)
-    initialize : Proc(IDirectInputEffect*, HINSTANCE, UInt32, Guid*, HRESULT)
-    get_effect_guid : Proc(IDirectInputEffect*, Guid*, HRESULT)
-    get_parameters : Proc(IDirectInputEffect*, DIEFFECT*, UInt32, HRESULT)
-    set_parameters : Proc(IDirectInputEffect*, DIEFFECT*, UInt32, HRESULT)
-    start : Proc(IDirectInputEffect*, UInt32, UInt32, HRESULT)
-    stop : Proc(IDirectInputEffect*, HRESULT)
-    get_effect_status : Proc(IDirectInputEffect*, UInt32*, HRESULT)
-    download : Proc(IDirectInputEffect*, HRESULT)
-    unload : Proc(IDirectInputEffect*, HRESULT)
-    escape : Proc(IDirectInputEffect*, DIEFFESCAPE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    get_effect_guid : UInt64
+    get_parameters : UInt64
+    set_parameters : UInt64
+    start : UInt64
+    stop : UInt64
+    get_effect_status : UInt64
+    download : UInt64
+    unload : UInt64
+    escape : UInt64
   end
 
   IDirectInputEffect_GUID = "e7e1f7c0-88d2-11d0-9ad0-00a0c9a06e35"
@@ -3379,24 +3379,24 @@ lib LibWin32
   end
 
   struct IDirectInputDeviceWVTbl
-    query_interface : Proc(IDirectInputDeviceW*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInputDeviceW*, UInt32)
-    release : Proc(IDirectInputDeviceW*, UInt32)
-    get_capabilities : Proc(IDirectInputDeviceW*, DIDEVCAPS*, HRESULT)
-    enum_objects : Proc(IDirectInputDeviceW*, LPDIENUMDEVICEOBJECTSCALLBACKW, Void*, UInt32, HRESULT)
-    get_property : Proc(IDirectInputDeviceW*, Guid*, DIPROPHEADER*, HRESULT)
-    set_property : Proc(IDirectInputDeviceW*, Guid*, DIPROPHEADER*, HRESULT)
-    acquire : Proc(IDirectInputDeviceW*, HRESULT)
-    unacquire : Proc(IDirectInputDeviceW*, HRESULT)
-    get_device_state : Proc(IDirectInputDeviceW*, UInt32, Void*, HRESULT)
-    get_device_data : Proc(IDirectInputDeviceW*, UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)
-    set_data_format : Proc(IDirectInputDeviceW*, DIDATAFORMAT*, HRESULT)
-    set_event_notification : Proc(IDirectInputDeviceW*, LibC::HANDLE, HRESULT)
-    set_cooperative_level : Proc(IDirectInputDeviceW*, LibC::HANDLE, UInt32, HRESULT)
-    get_object_info : Proc(IDirectInputDeviceW*, DIDEVICEOBJECTINSTANCEW*, UInt32, UInt32, HRESULT)
-    get_device_info : Proc(IDirectInputDeviceW*, DIDEVICEINSTANCEW*, HRESULT)
-    run_control_panel : Proc(IDirectInputDeviceW*, LibC::HANDLE, UInt32, HRESULT)
-    initialize : Proc(IDirectInputDeviceW*, HINSTANCE, UInt32, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_capabilities : UInt64
+    enum_objects : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    acquire : UInt64
+    unacquire : UInt64
+    get_device_state : UInt64
+    get_device_data : UInt64
+    set_data_format : UInt64
+    set_event_notification : UInt64
+    set_cooperative_level : UInt64
+    get_object_info : UInt64
+    get_device_info : UInt64
+    run_control_panel : UInt64
+    initialize : UInt64
   end
 
   IDirectInputDeviceW_GUID = "5944e681-c92e-11cf-bfc7-444553540000"
@@ -3406,24 +3406,24 @@ lib LibWin32
   end
 
   struct IDirectInputDeviceAVTbl
-    query_interface : Proc(IDirectInputDeviceA*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInputDeviceA*, UInt32)
-    release : Proc(IDirectInputDeviceA*, UInt32)
-    get_capabilities : Proc(IDirectInputDeviceA*, DIDEVCAPS*, HRESULT)
-    enum_objects : Proc(IDirectInputDeviceA*, LPDIENUMDEVICEOBJECTSCALLBACKA, Void*, UInt32, HRESULT)
-    get_property : Proc(IDirectInputDeviceA*, Guid*, DIPROPHEADER*, HRESULT)
-    set_property : Proc(IDirectInputDeviceA*, Guid*, DIPROPHEADER*, HRESULT)
-    acquire : Proc(IDirectInputDeviceA*, HRESULT)
-    unacquire : Proc(IDirectInputDeviceA*, HRESULT)
-    get_device_state : Proc(IDirectInputDeviceA*, UInt32, Void*, HRESULT)
-    get_device_data : Proc(IDirectInputDeviceA*, UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)
-    set_data_format : Proc(IDirectInputDeviceA*, DIDATAFORMAT*, HRESULT)
-    set_event_notification : Proc(IDirectInputDeviceA*, LibC::HANDLE, HRESULT)
-    set_cooperative_level : Proc(IDirectInputDeviceA*, LibC::HANDLE, UInt32, HRESULT)
-    get_object_info : Proc(IDirectInputDeviceA*, DIDEVICEOBJECTINSTANCEA*, UInt32, UInt32, HRESULT)
-    get_device_info : Proc(IDirectInputDeviceA*, DIDEVICEINSTANCEA*, HRESULT)
-    run_control_panel : Proc(IDirectInputDeviceA*, LibC::HANDLE, UInt32, HRESULT)
-    initialize : Proc(IDirectInputDeviceA*, HINSTANCE, UInt32, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_capabilities : UInt64
+    enum_objects : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    acquire : UInt64
+    unacquire : UInt64
+    get_device_state : UInt64
+    get_device_data : UInt64
+    set_data_format : UInt64
+    set_event_notification : UInt64
+    set_cooperative_level : UInt64
+    get_object_info : UInt64
+    get_device_info : UInt64
+    run_control_panel : UInt64
+    initialize : UInt64
   end
 
   IDirectInputDeviceA_GUID = "5944e680-c92e-11cf-bfc7-444553540000"
@@ -3433,33 +3433,33 @@ lib LibWin32
   end
 
   struct IDirectInputDevice2WVTbl
-    query_interface : Proc(IDirectInputDevice2W*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInputDevice2W*, UInt32)
-    release : Proc(IDirectInputDevice2W*, UInt32)
-    get_capabilities : Proc(IDirectInputDevice2W*, DIDEVCAPS*, HRESULT)
-    enum_objects : Proc(IDirectInputDevice2W*, LPDIENUMDEVICEOBJECTSCALLBACKW, Void*, UInt32, HRESULT)
-    get_property : Proc(IDirectInputDevice2W*, Guid*, DIPROPHEADER*, HRESULT)
-    set_property : Proc(IDirectInputDevice2W*, Guid*, DIPROPHEADER*, HRESULT)
-    acquire : Proc(IDirectInputDevice2W*, HRESULT)
-    unacquire : Proc(IDirectInputDevice2W*, HRESULT)
-    get_device_state : Proc(IDirectInputDevice2W*, UInt32, Void*, HRESULT)
-    get_device_data : Proc(IDirectInputDevice2W*, UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)
-    set_data_format : Proc(IDirectInputDevice2W*, DIDATAFORMAT*, HRESULT)
-    set_event_notification : Proc(IDirectInputDevice2W*, LibC::HANDLE, HRESULT)
-    set_cooperative_level : Proc(IDirectInputDevice2W*, LibC::HANDLE, UInt32, HRESULT)
-    get_object_info : Proc(IDirectInputDevice2W*, DIDEVICEOBJECTINSTANCEW*, UInt32, UInt32, HRESULT)
-    get_device_info : Proc(IDirectInputDevice2W*, DIDEVICEINSTANCEW*, HRESULT)
-    run_control_panel : Proc(IDirectInputDevice2W*, LibC::HANDLE, UInt32, HRESULT)
-    initialize : Proc(IDirectInputDevice2W*, HINSTANCE, UInt32, Guid*, HRESULT)
-    create_effect : Proc(IDirectInputDevice2W*, Guid*, DIEFFECT*, IDirectInputEffect*, IUnknown, HRESULT)
-    enum_effects : Proc(IDirectInputDevice2W*, LPDIENUMEFFECTSCALLBACKW, Void*, UInt32, HRESULT)
-    get_effect_info : Proc(IDirectInputDevice2W*, DIEFFECTINFOW*, Guid*, HRESULT)
-    get_force_feedback_state : Proc(IDirectInputDevice2W*, UInt32*, HRESULT)
-    send_force_feedback_command : Proc(IDirectInputDevice2W*, UInt32, HRESULT)
-    enum_created_effect_objects : Proc(IDirectInputDevice2W*, LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, Void*, UInt32, HRESULT)
-    escape : Proc(IDirectInputDevice2W*, DIEFFESCAPE*, HRESULT)
-    poll : Proc(IDirectInputDevice2W*, HRESULT)
-    send_device_data : Proc(IDirectInputDevice2W*, UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_capabilities : UInt64
+    enum_objects : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    acquire : UInt64
+    unacquire : UInt64
+    get_device_state : UInt64
+    get_device_data : UInt64
+    set_data_format : UInt64
+    set_event_notification : UInt64
+    set_cooperative_level : UInt64
+    get_object_info : UInt64
+    get_device_info : UInt64
+    run_control_panel : UInt64
+    initialize : UInt64
+    create_effect : UInt64
+    enum_effects : UInt64
+    get_effect_info : UInt64
+    get_force_feedback_state : UInt64
+    send_force_feedback_command : UInt64
+    enum_created_effect_objects : UInt64
+    escape : UInt64
+    poll : UInt64
+    send_device_data : UInt64
   end
 
   IDirectInputDevice2W_GUID = "5944e683-c92e-11cf-bfc7-444553540000"
@@ -3469,33 +3469,33 @@ lib LibWin32
   end
 
   struct IDirectInputDevice2AVTbl
-    query_interface : Proc(IDirectInputDevice2A*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInputDevice2A*, UInt32)
-    release : Proc(IDirectInputDevice2A*, UInt32)
-    get_capabilities : Proc(IDirectInputDevice2A*, DIDEVCAPS*, HRESULT)
-    enum_objects : Proc(IDirectInputDevice2A*, LPDIENUMDEVICEOBJECTSCALLBACKA, Void*, UInt32, HRESULT)
-    get_property : Proc(IDirectInputDevice2A*, Guid*, DIPROPHEADER*, HRESULT)
-    set_property : Proc(IDirectInputDevice2A*, Guid*, DIPROPHEADER*, HRESULT)
-    acquire : Proc(IDirectInputDevice2A*, HRESULT)
-    unacquire : Proc(IDirectInputDevice2A*, HRESULT)
-    get_device_state : Proc(IDirectInputDevice2A*, UInt32, Void*, HRESULT)
-    get_device_data : Proc(IDirectInputDevice2A*, UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)
-    set_data_format : Proc(IDirectInputDevice2A*, DIDATAFORMAT*, HRESULT)
-    set_event_notification : Proc(IDirectInputDevice2A*, LibC::HANDLE, HRESULT)
-    set_cooperative_level : Proc(IDirectInputDevice2A*, LibC::HANDLE, UInt32, HRESULT)
-    get_object_info : Proc(IDirectInputDevice2A*, DIDEVICEOBJECTINSTANCEA*, UInt32, UInt32, HRESULT)
-    get_device_info : Proc(IDirectInputDevice2A*, DIDEVICEINSTANCEA*, HRESULT)
-    run_control_panel : Proc(IDirectInputDevice2A*, LibC::HANDLE, UInt32, HRESULT)
-    initialize : Proc(IDirectInputDevice2A*, HINSTANCE, UInt32, Guid*, HRESULT)
-    create_effect : Proc(IDirectInputDevice2A*, Guid*, DIEFFECT*, IDirectInputEffect*, IUnknown, HRESULT)
-    enum_effects : Proc(IDirectInputDevice2A*, LPDIENUMEFFECTSCALLBACKA, Void*, UInt32, HRESULT)
-    get_effect_info : Proc(IDirectInputDevice2A*, DIEFFECTINFOA*, Guid*, HRESULT)
-    get_force_feedback_state : Proc(IDirectInputDevice2A*, UInt32*, HRESULT)
-    send_force_feedback_command : Proc(IDirectInputDevice2A*, UInt32, HRESULT)
-    enum_created_effect_objects : Proc(IDirectInputDevice2A*, LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, Void*, UInt32, HRESULT)
-    escape : Proc(IDirectInputDevice2A*, DIEFFESCAPE*, HRESULT)
-    poll : Proc(IDirectInputDevice2A*, HRESULT)
-    send_device_data : Proc(IDirectInputDevice2A*, UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_capabilities : UInt64
+    enum_objects : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    acquire : UInt64
+    unacquire : UInt64
+    get_device_state : UInt64
+    get_device_data : UInt64
+    set_data_format : UInt64
+    set_event_notification : UInt64
+    set_cooperative_level : UInt64
+    get_object_info : UInt64
+    get_device_info : UInt64
+    run_control_panel : UInt64
+    initialize : UInt64
+    create_effect : UInt64
+    enum_effects : UInt64
+    get_effect_info : UInt64
+    get_force_feedback_state : UInt64
+    send_force_feedback_command : UInt64
+    enum_created_effect_objects : UInt64
+    escape : UInt64
+    poll : UInt64
+    send_device_data : UInt64
   end
 
   IDirectInputDevice2A_GUID = "5944e682-c92e-11cf-bfc7-444553540000"
@@ -3505,35 +3505,35 @@ lib LibWin32
   end
 
   struct IDirectInputDevice7WVTbl
-    query_interface : Proc(IDirectInputDevice7W*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInputDevice7W*, UInt32)
-    release : Proc(IDirectInputDevice7W*, UInt32)
-    get_capabilities : Proc(IDirectInputDevice7W*, DIDEVCAPS*, HRESULT)
-    enum_objects : Proc(IDirectInputDevice7W*, LPDIENUMDEVICEOBJECTSCALLBACKW, Void*, UInt32, HRESULT)
-    get_property : Proc(IDirectInputDevice7W*, Guid*, DIPROPHEADER*, HRESULT)
-    set_property : Proc(IDirectInputDevice7W*, Guid*, DIPROPHEADER*, HRESULT)
-    acquire : Proc(IDirectInputDevice7W*, HRESULT)
-    unacquire : Proc(IDirectInputDevice7W*, HRESULT)
-    get_device_state : Proc(IDirectInputDevice7W*, UInt32, Void*, HRESULT)
-    get_device_data : Proc(IDirectInputDevice7W*, UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)
-    set_data_format : Proc(IDirectInputDevice7W*, DIDATAFORMAT*, HRESULT)
-    set_event_notification : Proc(IDirectInputDevice7W*, LibC::HANDLE, HRESULT)
-    set_cooperative_level : Proc(IDirectInputDevice7W*, LibC::HANDLE, UInt32, HRESULT)
-    get_object_info : Proc(IDirectInputDevice7W*, DIDEVICEOBJECTINSTANCEW*, UInt32, UInt32, HRESULT)
-    get_device_info : Proc(IDirectInputDevice7W*, DIDEVICEINSTANCEW*, HRESULT)
-    run_control_panel : Proc(IDirectInputDevice7W*, LibC::HANDLE, UInt32, HRESULT)
-    initialize : Proc(IDirectInputDevice7W*, HINSTANCE, UInt32, Guid*, HRESULT)
-    create_effect : Proc(IDirectInputDevice7W*, Guid*, DIEFFECT*, IDirectInputEffect*, IUnknown, HRESULT)
-    enum_effects : Proc(IDirectInputDevice7W*, LPDIENUMEFFECTSCALLBACKW, Void*, UInt32, HRESULT)
-    get_effect_info : Proc(IDirectInputDevice7W*, DIEFFECTINFOW*, Guid*, HRESULT)
-    get_force_feedback_state : Proc(IDirectInputDevice7W*, UInt32*, HRESULT)
-    send_force_feedback_command : Proc(IDirectInputDevice7W*, UInt32, HRESULT)
-    enum_created_effect_objects : Proc(IDirectInputDevice7W*, LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, Void*, UInt32, HRESULT)
-    escape : Proc(IDirectInputDevice7W*, DIEFFESCAPE*, HRESULT)
-    poll : Proc(IDirectInputDevice7W*, HRESULT)
-    send_device_data : Proc(IDirectInputDevice7W*, UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)
-    enum_effects_in_file : Proc(IDirectInputDevice7W*, LibC::LPWSTR, LPDIENUMEFFECTSINFILECALLBACK, Void*, UInt32, HRESULT)
-    write_effect_to_file : Proc(IDirectInputDevice7W*, LibC::LPWSTR, UInt32, DIFILEEFFECT*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_capabilities : UInt64
+    enum_objects : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    acquire : UInt64
+    unacquire : UInt64
+    get_device_state : UInt64
+    get_device_data : UInt64
+    set_data_format : UInt64
+    set_event_notification : UInt64
+    set_cooperative_level : UInt64
+    get_object_info : UInt64
+    get_device_info : UInt64
+    run_control_panel : UInt64
+    initialize : UInt64
+    create_effect : UInt64
+    enum_effects : UInt64
+    get_effect_info : UInt64
+    get_force_feedback_state : UInt64
+    send_force_feedback_command : UInt64
+    enum_created_effect_objects : UInt64
+    escape : UInt64
+    poll : UInt64
+    send_device_data : UInt64
+    enum_effects_in_file : UInt64
+    write_effect_to_file : UInt64
   end
 
   IDirectInputDevice7W_GUID = "57d7c6bd-2356-11d3-8e9d-00c04f6844ae"
@@ -3543,35 +3543,35 @@ lib LibWin32
   end
 
   struct IDirectInputDevice7AVTbl
-    query_interface : Proc(IDirectInputDevice7A*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInputDevice7A*, UInt32)
-    release : Proc(IDirectInputDevice7A*, UInt32)
-    get_capabilities : Proc(IDirectInputDevice7A*, DIDEVCAPS*, HRESULT)
-    enum_objects : Proc(IDirectInputDevice7A*, LPDIENUMDEVICEOBJECTSCALLBACKA, Void*, UInt32, HRESULT)
-    get_property : Proc(IDirectInputDevice7A*, Guid*, DIPROPHEADER*, HRESULT)
-    set_property : Proc(IDirectInputDevice7A*, Guid*, DIPROPHEADER*, HRESULT)
-    acquire : Proc(IDirectInputDevice7A*, HRESULT)
-    unacquire : Proc(IDirectInputDevice7A*, HRESULT)
-    get_device_state : Proc(IDirectInputDevice7A*, UInt32, Void*, HRESULT)
-    get_device_data : Proc(IDirectInputDevice7A*, UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)
-    set_data_format : Proc(IDirectInputDevice7A*, DIDATAFORMAT*, HRESULT)
-    set_event_notification : Proc(IDirectInputDevice7A*, LibC::HANDLE, HRESULT)
-    set_cooperative_level : Proc(IDirectInputDevice7A*, LibC::HANDLE, UInt32, HRESULT)
-    get_object_info : Proc(IDirectInputDevice7A*, DIDEVICEOBJECTINSTANCEA*, UInt32, UInt32, HRESULT)
-    get_device_info : Proc(IDirectInputDevice7A*, DIDEVICEINSTANCEA*, HRESULT)
-    run_control_panel : Proc(IDirectInputDevice7A*, LibC::HANDLE, UInt32, HRESULT)
-    initialize : Proc(IDirectInputDevice7A*, HINSTANCE, UInt32, Guid*, HRESULT)
-    create_effect : Proc(IDirectInputDevice7A*, Guid*, DIEFFECT*, IDirectInputEffect*, IUnknown, HRESULT)
-    enum_effects : Proc(IDirectInputDevice7A*, LPDIENUMEFFECTSCALLBACKA, Void*, UInt32, HRESULT)
-    get_effect_info : Proc(IDirectInputDevice7A*, DIEFFECTINFOA*, Guid*, HRESULT)
-    get_force_feedback_state : Proc(IDirectInputDevice7A*, UInt32*, HRESULT)
-    send_force_feedback_command : Proc(IDirectInputDevice7A*, UInt32, HRESULT)
-    enum_created_effect_objects : Proc(IDirectInputDevice7A*, LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, Void*, UInt32, HRESULT)
-    escape : Proc(IDirectInputDevice7A*, DIEFFESCAPE*, HRESULT)
-    poll : Proc(IDirectInputDevice7A*, HRESULT)
-    send_device_data : Proc(IDirectInputDevice7A*, UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)
-    enum_effects_in_file : Proc(IDirectInputDevice7A*, PSTR, LPDIENUMEFFECTSINFILECALLBACK, Void*, UInt32, HRESULT)
-    write_effect_to_file : Proc(IDirectInputDevice7A*, PSTR, UInt32, DIFILEEFFECT*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_capabilities : UInt64
+    enum_objects : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    acquire : UInt64
+    unacquire : UInt64
+    get_device_state : UInt64
+    get_device_data : UInt64
+    set_data_format : UInt64
+    set_event_notification : UInt64
+    set_cooperative_level : UInt64
+    get_object_info : UInt64
+    get_device_info : UInt64
+    run_control_panel : UInt64
+    initialize : UInt64
+    create_effect : UInt64
+    enum_effects : UInt64
+    get_effect_info : UInt64
+    get_force_feedback_state : UInt64
+    send_force_feedback_command : UInt64
+    enum_created_effect_objects : UInt64
+    escape : UInt64
+    poll : UInt64
+    send_device_data : UInt64
+    enum_effects_in_file : UInt64
+    write_effect_to_file : UInt64
   end
 
   IDirectInputDevice7A_GUID = "57d7c6bc-2356-11d3-8e9d-00c04f6844ae"
@@ -3581,38 +3581,38 @@ lib LibWin32
   end
 
   struct IDirectInputDevice8WVTbl
-    query_interface : Proc(IDirectInputDevice8W*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInputDevice8W*, UInt32)
-    release : Proc(IDirectInputDevice8W*, UInt32)
-    get_capabilities : Proc(IDirectInputDevice8W*, DIDEVCAPS*, HRESULT)
-    enum_objects : Proc(IDirectInputDevice8W*, LPDIENUMDEVICEOBJECTSCALLBACKW, Void*, UInt32, HRESULT)
-    get_property : Proc(IDirectInputDevice8W*, Guid*, DIPROPHEADER*, HRESULT)
-    set_property : Proc(IDirectInputDevice8W*, Guid*, DIPROPHEADER*, HRESULT)
-    acquire : Proc(IDirectInputDevice8W*, HRESULT)
-    unacquire : Proc(IDirectInputDevice8W*, HRESULT)
-    get_device_state : Proc(IDirectInputDevice8W*, UInt32, Void*, HRESULT)
-    get_device_data : Proc(IDirectInputDevice8W*, UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)
-    set_data_format : Proc(IDirectInputDevice8W*, DIDATAFORMAT*, HRESULT)
-    set_event_notification : Proc(IDirectInputDevice8W*, LibC::HANDLE, HRESULT)
-    set_cooperative_level : Proc(IDirectInputDevice8W*, LibC::HANDLE, UInt32, HRESULT)
-    get_object_info : Proc(IDirectInputDevice8W*, DIDEVICEOBJECTINSTANCEW*, UInt32, UInt32, HRESULT)
-    get_device_info : Proc(IDirectInputDevice8W*, DIDEVICEINSTANCEW*, HRESULT)
-    run_control_panel : Proc(IDirectInputDevice8W*, LibC::HANDLE, UInt32, HRESULT)
-    initialize : Proc(IDirectInputDevice8W*, HINSTANCE, UInt32, Guid*, HRESULT)
-    create_effect : Proc(IDirectInputDevice8W*, Guid*, DIEFFECT*, IDirectInputEffect*, IUnknown, HRESULT)
-    enum_effects : Proc(IDirectInputDevice8W*, LPDIENUMEFFECTSCALLBACKW, Void*, UInt32, HRESULT)
-    get_effect_info : Proc(IDirectInputDevice8W*, DIEFFECTINFOW*, Guid*, HRESULT)
-    get_force_feedback_state : Proc(IDirectInputDevice8W*, UInt32*, HRESULT)
-    send_force_feedback_command : Proc(IDirectInputDevice8W*, UInt32, HRESULT)
-    enum_created_effect_objects : Proc(IDirectInputDevice8W*, LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, Void*, UInt32, HRESULT)
-    escape : Proc(IDirectInputDevice8W*, DIEFFESCAPE*, HRESULT)
-    poll : Proc(IDirectInputDevice8W*, HRESULT)
-    send_device_data : Proc(IDirectInputDevice8W*, UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)
-    enum_effects_in_file : Proc(IDirectInputDevice8W*, LibC::LPWSTR, LPDIENUMEFFECTSINFILECALLBACK, Void*, UInt32, HRESULT)
-    write_effect_to_file : Proc(IDirectInputDevice8W*, LibC::LPWSTR, UInt32, DIFILEEFFECT*, UInt32, HRESULT)
-    build_action_map : Proc(IDirectInputDevice8W*, DIACTIONFORMATW*, LibC::LPWSTR, UInt32, HRESULT)
-    set_action_map : Proc(IDirectInputDevice8W*, DIACTIONFORMATW*, LibC::LPWSTR, UInt32, HRESULT)
-    get_image_info : Proc(IDirectInputDevice8W*, DIDEVICEIMAGEINFOHEADERW*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_capabilities : UInt64
+    enum_objects : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    acquire : UInt64
+    unacquire : UInt64
+    get_device_state : UInt64
+    get_device_data : UInt64
+    set_data_format : UInt64
+    set_event_notification : UInt64
+    set_cooperative_level : UInt64
+    get_object_info : UInt64
+    get_device_info : UInt64
+    run_control_panel : UInt64
+    initialize : UInt64
+    create_effect : UInt64
+    enum_effects : UInt64
+    get_effect_info : UInt64
+    get_force_feedback_state : UInt64
+    send_force_feedback_command : UInt64
+    enum_created_effect_objects : UInt64
+    escape : UInt64
+    poll : UInt64
+    send_device_data : UInt64
+    enum_effects_in_file : UInt64
+    write_effect_to_file : UInt64
+    build_action_map : UInt64
+    set_action_map : UInt64
+    get_image_info : UInt64
   end
 
   IDirectInputDevice8W_GUID = "54d41081-dc15-4833-a41b-748f73a38179"
@@ -3622,38 +3622,38 @@ lib LibWin32
   end
 
   struct IDirectInputDevice8AVTbl
-    query_interface : Proc(IDirectInputDevice8A*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInputDevice8A*, UInt32)
-    release : Proc(IDirectInputDevice8A*, UInt32)
-    get_capabilities : Proc(IDirectInputDevice8A*, DIDEVCAPS*, HRESULT)
-    enum_objects : Proc(IDirectInputDevice8A*, LPDIENUMDEVICEOBJECTSCALLBACKA, Void*, UInt32, HRESULT)
-    get_property : Proc(IDirectInputDevice8A*, Guid*, DIPROPHEADER*, HRESULT)
-    set_property : Proc(IDirectInputDevice8A*, Guid*, DIPROPHEADER*, HRESULT)
-    acquire : Proc(IDirectInputDevice8A*, HRESULT)
-    unacquire : Proc(IDirectInputDevice8A*, HRESULT)
-    get_device_state : Proc(IDirectInputDevice8A*, UInt32, Void*, HRESULT)
-    get_device_data : Proc(IDirectInputDevice8A*, UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)
-    set_data_format : Proc(IDirectInputDevice8A*, DIDATAFORMAT*, HRESULT)
-    set_event_notification : Proc(IDirectInputDevice8A*, LibC::HANDLE, HRESULT)
-    set_cooperative_level : Proc(IDirectInputDevice8A*, LibC::HANDLE, UInt32, HRESULT)
-    get_object_info : Proc(IDirectInputDevice8A*, DIDEVICEOBJECTINSTANCEA*, UInt32, UInt32, HRESULT)
-    get_device_info : Proc(IDirectInputDevice8A*, DIDEVICEINSTANCEA*, HRESULT)
-    run_control_panel : Proc(IDirectInputDevice8A*, LibC::HANDLE, UInt32, HRESULT)
-    initialize : Proc(IDirectInputDevice8A*, HINSTANCE, UInt32, Guid*, HRESULT)
-    create_effect : Proc(IDirectInputDevice8A*, Guid*, DIEFFECT*, IDirectInputEffect*, IUnknown, HRESULT)
-    enum_effects : Proc(IDirectInputDevice8A*, LPDIENUMEFFECTSCALLBACKA, Void*, UInt32, HRESULT)
-    get_effect_info : Proc(IDirectInputDevice8A*, DIEFFECTINFOA*, Guid*, HRESULT)
-    get_force_feedback_state : Proc(IDirectInputDevice8A*, UInt32*, HRESULT)
-    send_force_feedback_command : Proc(IDirectInputDevice8A*, UInt32, HRESULT)
-    enum_created_effect_objects : Proc(IDirectInputDevice8A*, LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, Void*, UInt32, HRESULT)
-    escape : Proc(IDirectInputDevice8A*, DIEFFESCAPE*, HRESULT)
-    poll : Proc(IDirectInputDevice8A*, HRESULT)
-    send_device_data : Proc(IDirectInputDevice8A*, UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)
-    enum_effects_in_file : Proc(IDirectInputDevice8A*, PSTR, LPDIENUMEFFECTSINFILECALLBACK, Void*, UInt32, HRESULT)
-    write_effect_to_file : Proc(IDirectInputDevice8A*, PSTR, UInt32, DIFILEEFFECT*, UInt32, HRESULT)
-    build_action_map : Proc(IDirectInputDevice8A*, DIACTIONFORMATA*, PSTR, UInt32, HRESULT)
-    set_action_map : Proc(IDirectInputDevice8A*, DIACTIONFORMATA*, PSTR, UInt32, HRESULT)
-    get_image_info : Proc(IDirectInputDevice8A*, DIDEVICEIMAGEINFOHEADERA*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_capabilities : UInt64
+    enum_objects : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    acquire : UInt64
+    unacquire : UInt64
+    get_device_state : UInt64
+    get_device_data : UInt64
+    set_data_format : UInt64
+    set_event_notification : UInt64
+    set_cooperative_level : UInt64
+    get_object_info : UInt64
+    get_device_info : UInt64
+    run_control_panel : UInt64
+    initialize : UInt64
+    create_effect : UInt64
+    enum_effects : UInt64
+    get_effect_info : UInt64
+    get_force_feedback_state : UInt64
+    send_force_feedback_command : UInt64
+    enum_created_effect_objects : UInt64
+    escape : UInt64
+    poll : UInt64
+    send_device_data : UInt64
+    enum_effects_in_file : UInt64
+    write_effect_to_file : UInt64
+    build_action_map : UInt64
+    set_action_map : UInt64
+    get_image_info : UInt64
   end
 
   IDirectInputDevice8A_GUID = "54d41080-dc15-4833-a41b-748f73a38179"
@@ -3663,14 +3663,14 @@ lib LibWin32
   end
 
   struct IDirectInputWVTbl
-    query_interface : Proc(IDirectInputW*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInputW*, UInt32)
-    release : Proc(IDirectInputW*, UInt32)
-    create_device : Proc(IDirectInputW*, Guid*, IDirectInputDeviceW*, IUnknown, HRESULT)
-    enum_devices : Proc(IDirectInputW*, UInt32, LPDIENUMDEVICESCALLBACKW, Void*, UInt32, HRESULT)
-    get_device_status : Proc(IDirectInputW*, Guid*, HRESULT)
-    run_control_panel : Proc(IDirectInputW*, LibC::HANDLE, UInt32, HRESULT)
-    initialize : Proc(IDirectInputW*, HINSTANCE, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_device : UInt64
+    enum_devices : UInt64
+    get_device_status : UInt64
+    run_control_panel : UInt64
+    initialize : UInt64
   end
 
   IDirectInputW_GUID = "89521361-aa8a-11cf-bfc7-444553540000"
@@ -3680,14 +3680,14 @@ lib LibWin32
   end
 
   struct IDirectInputAVTbl
-    query_interface : Proc(IDirectInputA*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInputA*, UInt32)
-    release : Proc(IDirectInputA*, UInt32)
-    create_device : Proc(IDirectInputA*, Guid*, IDirectInputDeviceA*, IUnknown, HRESULT)
-    enum_devices : Proc(IDirectInputA*, UInt32, LPDIENUMDEVICESCALLBACKA, Void*, UInt32, HRESULT)
-    get_device_status : Proc(IDirectInputA*, Guid*, HRESULT)
-    run_control_panel : Proc(IDirectInputA*, LibC::HANDLE, UInt32, HRESULT)
-    initialize : Proc(IDirectInputA*, HINSTANCE, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_device : UInt64
+    enum_devices : UInt64
+    get_device_status : UInt64
+    run_control_panel : UInt64
+    initialize : UInt64
   end
 
   IDirectInputA_GUID = "89521360-aa8a-11cf-bfc7-444553540000"
@@ -3697,15 +3697,15 @@ lib LibWin32
   end
 
   struct IDirectInput2WVTbl
-    query_interface : Proc(IDirectInput2W*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInput2W*, UInt32)
-    release : Proc(IDirectInput2W*, UInt32)
-    create_device : Proc(IDirectInput2W*, Guid*, IDirectInputDeviceW*, IUnknown, HRESULT)
-    enum_devices : Proc(IDirectInput2W*, UInt32, LPDIENUMDEVICESCALLBACKW, Void*, UInt32, HRESULT)
-    get_device_status : Proc(IDirectInput2W*, Guid*, HRESULT)
-    run_control_panel : Proc(IDirectInput2W*, LibC::HANDLE, UInt32, HRESULT)
-    initialize : Proc(IDirectInput2W*, HINSTANCE, UInt32, HRESULT)
-    find_device : Proc(IDirectInput2W*, Guid*, LibC::LPWSTR, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_device : UInt64
+    enum_devices : UInt64
+    get_device_status : UInt64
+    run_control_panel : UInt64
+    initialize : UInt64
+    find_device : UInt64
   end
 
   IDirectInput2W_GUID = "5944e663-aa8a-11cf-bfc7-444553540000"
@@ -3715,15 +3715,15 @@ lib LibWin32
   end
 
   struct IDirectInput2AVTbl
-    query_interface : Proc(IDirectInput2A*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInput2A*, UInt32)
-    release : Proc(IDirectInput2A*, UInt32)
-    create_device : Proc(IDirectInput2A*, Guid*, IDirectInputDeviceA*, IUnknown, HRESULT)
-    enum_devices : Proc(IDirectInput2A*, UInt32, LPDIENUMDEVICESCALLBACKA, Void*, UInt32, HRESULT)
-    get_device_status : Proc(IDirectInput2A*, Guid*, HRESULT)
-    run_control_panel : Proc(IDirectInput2A*, LibC::HANDLE, UInt32, HRESULT)
-    initialize : Proc(IDirectInput2A*, HINSTANCE, UInt32, HRESULT)
-    find_device : Proc(IDirectInput2A*, Guid*, PSTR, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_device : UInt64
+    enum_devices : UInt64
+    get_device_status : UInt64
+    run_control_panel : UInt64
+    initialize : UInt64
+    find_device : UInt64
   end
 
   IDirectInput2A_GUID = "5944e662-aa8a-11cf-bfc7-444553540000"
@@ -3733,16 +3733,16 @@ lib LibWin32
   end
 
   struct IDirectInput7WVTbl
-    query_interface : Proc(IDirectInput7W*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInput7W*, UInt32)
-    release : Proc(IDirectInput7W*, UInt32)
-    create_device : Proc(IDirectInput7W*, Guid*, IDirectInputDeviceW*, IUnknown, HRESULT)
-    enum_devices : Proc(IDirectInput7W*, UInt32, LPDIENUMDEVICESCALLBACKW, Void*, UInt32, HRESULT)
-    get_device_status : Proc(IDirectInput7W*, Guid*, HRESULT)
-    run_control_panel : Proc(IDirectInput7W*, LibC::HANDLE, UInt32, HRESULT)
-    initialize : Proc(IDirectInput7W*, HINSTANCE, UInt32, HRESULT)
-    find_device : Proc(IDirectInput7W*, Guid*, LibC::LPWSTR, Guid*, HRESULT)
-    create_device_ex : Proc(IDirectInput7W*, Guid*, Guid*, Void**, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_device : UInt64
+    enum_devices : UInt64
+    get_device_status : UInt64
+    run_control_panel : UInt64
+    initialize : UInt64
+    find_device : UInt64
+    create_device_ex : UInt64
   end
 
   IDirectInput7W_GUID = "9a4cb685-236d-11d3-8e9d-00c04f6844ae"
@@ -3752,16 +3752,16 @@ lib LibWin32
   end
 
   struct IDirectInput7AVTbl
-    query_interface : Proc(IDirectInput7A*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInput7A*, UInt32)
-    release : Proc(IDirectInput7A*, UInt32)
-    create_device : Proc(IDirectInput7A*, Guid*, IDirectInputDeviceA*, IUnknown, HRESULT)
-    enum_devices : Proc(IDirectInput7A*, UInt32, LPDIENUMDEVICESCALLBACKA, Void*, UInt32, HRESULT)
-    get_device_status : Proc(IDirectInput7A*, Guid*, HRESULT)
-    run_control_panel : Proc(IDirectInput7A*, LibC::HANDLE, UInt32, HRESULT)
-    initialize : Proc(IDirectInput7A*, HINSTANCE, UInt32, HRESULT)
-    find_device : Proc(IDirectInput7A*, Guid*, PSTR, Guid*, HRESULT)
-    create_device_ex : Proc(IDirectInput7A*, Guid*, Guid*, Void**, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_device : UInt64
+    enum_devices : UInt64
+    get_device_status : UInt64
+    run_control_panel : UInt64
+    initialize : UInt64
+    find_device : UInt64
+    create_device_ex : UInt64
   end
 
   IDirectInput7A_GUID = "9a4cb684-236d-11d3-8e9d-00c04f6844ae"
@@ -3771,17 +3771,17 @@ lib LibWin32
   end
 
   struct IDirectInput8WVTbl
-    query_interface : Proc(IDirectInput8W*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInput8W*, UInt32)
-    release : Proc(IDirectInput8W*, UInt32)
-    create_device : Proc(IDirectInput8W*, Guid*, IDirectInputDevice8W*, IUnknown, HRESULT)
-    enum_devices : Proc(IDirectInput8W*, UInt32, LPDIENUMDEVICESCALLBACKW, Void*, UInt32, HRESULT)
-    get_device_status : Proc(IDirectInput8W*, Guid*, HRESULT)
-    run_control_panel : Proc(IDirectInput8W*, LibC::HANDLE, UInt32, HRESULT)
-    initialize : Proc(IDirectInput8W*, HINSTANCE, UInt32, HRESULT)
-    find_device : Proc(IDirectInput8W*, Guid*, LibC::LPWSTR, Guid*, HRESULT)
-    enum_devices_by_semantics : Proc(IDirectInput8W*, LibC::LPWSTR, DIACTIONFORMATW*, LPDIENUMDEVICESBYSEMANTICSCBW, Void*, UInt32, HRESULT)
-    configure_devices : Proc(IDirectInput8W*, LPDICONFIGUREDEVICESCALLBACK, DICONFIGUREDEVICESPARAMSW*, UInt32, Void*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_device : UInt64
+    enum_devices : UInt64
+    get_device_status : UInt64
+    run_control_panel : UInt64
+    initialize : UInt64
+    find_device : UInt64
+    enum_devices_by_semantics : UInt64
+    configure_devices : UInt64
   end
 
   IDirectInput8W_GUID = "bf798031-483a-4da2-aa99-5d64ed369700"
@@ -3791,17 +3791,17 @@ lib LibWin32
   end
 
   struct IDirectInput8AVTbl
-    query_interface : Proc(IDirectInput8A*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInput8A*, UInt32)
-    release : Proc(IDirectInput8A*, UInt32)
-    create_device : Proc(IDirectInput8A*, Guid*, IDirectInputDevice8A*, IUnknown, HRESULT)
-    enum_devices : Proc(IDirectInput8A*, UInt32, LPDIENUMDEVICESCALLBACKA, Void*, UInt32, HRESULT)
-    get_device_status : Proc(IDirectInput8A*, Guid*, HRESULT)
-    run_control_panel : Proc(IDirectInput8A*, LibC::HANDLE, UInt32, HRESULT)
-    initialize : Proc(IDirectInput8A*, HINSTANCE, UInt32, HRESULT)
-    find_device : Proc(IDirectInput8A*, Guid*, PSTR, Guid*, HRESULT)
-    enum_devices_by_semantics : Proc(IDirectInput8A*, PSTR, DIACTIONFORMATA*, LPDIENUMDEVICESBYSEMANTICSCBA, Void*, UInt32, HRESULT)
-    configure_devices : Proc(IDirectInput8A*, LPDICONFIGUREDEVICESCALLBACK, DICONFIGUREDEVICESPARAMSA*, UInt32, Void*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_device : UInt64
+    enum_devices : UInt64
+    get_device_status : UInt64
+    run_control_panel : UInt64
+    initialize : UInt64
+    find_device : UInt64
+    enum_devices_by_semantics : UInt64
+    configure_devices : UInt64
   end
 
   IDirectInput8A_GUID = "bf798030-483a-4da2-aa99-5d64ed369700"
@@ -3811,20 +3811,20 @@ lib LibWin32
   end
 
   struct IDirectInputEffectDriverVTbl
-    query_interface : Proc(IDirectInputEffectDriver*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInputEffectDriver*, UInt32)
-    release : Proc(IDirectInputEffectDriver*, UInt32)
-    device_id : Proc(IDirectInputEffectDriver*, UInt32, UInt32, UInt32, UInt32, Void*, HRESULT)
-    get_versions : Proc(IDirectInputEffectDriver*, DIDRIVERVERSIONS*, HRESULT)
-    escape : Proc(IDirectInputEffectDriver*, UInt32, UInt32, DIEFFESCAPE*, HRESULT)
-    set_gain : Proc(IDirectInputEffectDriver*, UInt32, UInt32, HRESULT)
-    send_force_feedback_command : Proc(IDirectInputEffectDriver*, UInt32, UInt32, HRESULT)
-    get_force_feedback_state : Proc(IDirectInputEffectDriver*, UInt32, DIDEVICESTATE*, HRESULT)
-    download_effect : Proc(IDirectInputEffectDriver*, UInt32, UInt32, UInt32*, DIEFFECT*, UInt32, HRESULT)
-    destroy_effect : Proc(IDirectInputEffectDriver*, UInt32, UInt32, HRESULT)
-    start_effect : Proc(IDirectInputEffectDriver*, UInt32, UInt32, UInt32, UInt32, HRESULT)
-    stop_effect : Proc(IDirectInputEffectDriver*, UInt32, UInt32, HRESULT)
-    get_effect_status : Proc(IDirectInputEffectDriver*, UInt32, UInt32, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    device_id : UInt64
+    get_versions : UInt64
+    escape : UInt64
+    set_gain : UInt64
+    send_force_feedback_command : UInt64
+    get_force_feedback_state : UInt64
+    download_effect : UInt64
+    destroy_effect : UInt64
+    start_effect : UInt64
+    stop_effect : UInt64
+    get_effect_status : UInt64
   end
 
   IDirectInputEffectDriver_GUID = "02538130-898f-11d0-9ad0-00a0c9a06e35"
@@ -3834,25 +3834,25 @@ lib LibWin32
   end
 
   struct IDirectInputJoyConfigVTbl
-    query_interface : Proc(IDirectInputJoyConfig*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInputJoyConfig*, UInt32)
-    release : Proc(IDirectInputJoyConfig*, UInt32)
-    acquire : Proc(IDirectInputJoyConfig*, HRESULT)
-    unacquire : Proc(IDirectInputJoyConfig*, HRESULT)
-    set_cooperative_level : Proc(IDirectInputJoyConfig*, LibC::HANDLE, UInt32, HRESULT)
-    send_notify : Proc(IDirectInputJoyConfig*, HRESULT)
-    enum_types : Proc(IDirectInputJoyConfig*, LPDIJOYTYPECALLBACK, Void*, HRESULT)
-    get_type_info : Proc(IDirectInputJoyConfig*, LibC::LPWSTR, DIJOYTYPEINFO*, UInt32, HRESULT)
-    set_type_info : Proc(IDirectInputJoyConfig*, LibC::LPWSTR, DIJOYTYPEINFO*, UInt32, HRESULT)
-    delete_type : Proc(IDirectInputJoyConfig*, LibC::LPWSTR, HRESULT)
-    get_config : Proc(IDirectInputJoyConfig*, UInt32, DIJOYCONFIG*, UInt32, HRESULT)
-    set_config : Proc(IDirectInputJoyConfig*, UInt32, DIJOYCONFIG*, UInt32, HRESULT)
-    delete_config : Proc(IDirectInputJoyConfig*, UInt32, HRESULT)
-    get_user_values : Proc(IDirectInputJoyConfig*, DIJOYUSERVALUES*, UInt32, HRESULT)
-    set_user_values : Proc(IDirectInputJoyConfig*, DIJOYUSERVALUES*, UInt32, HRESULT)
-    add_new_hardware : Proc(IDirectInputJoyConfig*, LibC::HANDLE, Guid*, HRESULT)
-    open_type_key : Proc(IDirectInputJoyConfig*, LibC::LPWSTR, UInt32, HKEY*, HRESULT)
-    open_config_key : Proc(IDirectInputJoyConfig*, UInt32, UInt32, HKEY*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    acquire : UInt64
+    unacquire : UInt64
+    set_cooperative_level : UInt64
+    send_notify : UInt64
+    enum_types : UInt64
+    get_type_info : UInt64
+    set_type_info : UInt64
+    delete_type : UInt64
+    get_config : UInt64
+    set_config : UInt64
+    delete_config : UInt64
+    get_user_values : UInt64
+    set_user_values : UInt64
+    add_new_hardware : UInt64
+    open_type_key : UInt64
+    open_config_key : UInt64
   end
 
   IDirectInputJoyConfig_GUID = "1de12ab1-c9f5-11cf-bfc7-444553540000"
@@ -3862,25 +3862,25 @@ lib LibWin32
   end
 
   struct IDirectInputJoyConfig8VTbl
-    query_interface : Proc(IDirectInputJoyConfig8*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectInputJoyConfig8*, UInt32)
-    release : Proc(IDirectInputJoyConfig8*, UInt32)
-    acquire : Proc(IDirectInputJoyConfig8*, HRESULT)
-    unacquire : Proc(IDirectInputJoyConfig8*, HRESULT)
-    set_cooperative_level : Proc(IDirectInputJoyConfig8*, LibC::HANDLE, UInt32, HRESULT)
-    send_notify : Proc(IDirectInputJoyConfig8*, HRESULT)
-    enum_types : Proc(IDirectInputJoyConfig8*, LPDIJOYTYPECALLBACK, Void*, HRESULT)
-    get_type_info : Proc(IDirectInputJoyConfig8*, LibC::LPWSTR, DIJOYTYPEINFO*, UInt32, HRESULT)
-    set_type_info : Proc(IDirectInputJoyConfig8*, LibC::LPWSTR, DIJOYTYPEINFO*, UInt32, LibC::LPWSTR, HRESULT)
-    delete_type : Proc(IDirectInputJoyConfig8*, LibC::LPWSTR, HRESULT)
-    get_config : Proc(IDirectInputJoyConfig8*, UInt32, DIJOYCONFIG*, UInt32, HRESULT)
-    set_config : Proc(IDirectInputJoyConfig8*, UInt32, DIJOYCONFIG*, UInt32, HRESULT)
-    delete_config : Proc(IDirectInputJoyConfig8*, UInt32, HRESULT)
-    get_user_values : Proc(IDirectInputJoyConfig8*, DIJOYUSERVALUES*, UInt32, HRESULT)
-    set_user_values : Proc(IDirectInputJoyConfig8*, DIJOYUSERVALUES*, UInt32, HRESULT)
-    add_new_hardware : Proc(IDirectInputJoyConfig8*, LibC::HANDLE, Guid*, HRESULT)
-    open_type_key : Proc(IDirectInputJoyConfig8*, LibC::LPWSTR, UInt32, HKEY*, HRESULT)
-    open_app_status_key : Proc(IDirectInputJoyConfig8*, HKEY*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    acquire : UInt64
+    unacquire : UInt64
+    set_cooperative_level : UInt64
+    send_notify : UInt64
+    enum_types : UInt64
+    get_type_info : UInt64
+    set_type_info : UInt64
+    delete_type : UInt64
+    get_config : UInt64
+    set_config : UInt64
+    delete_config : UInt64
+    get_user_values : UInt64
+    set_user_values : UInt64
+    add_new_hardware : UInt64
+    open_type_key : UInt64
+    open_app_status_key : UInt64
   end
 
   IDirectInputJoyConfig8_GUID = "eb0d7dfa-1990-4f27-b4d6-edf2eec4a44c"
@@ -3978,7 +3978,7 @@ lib LibWin32
   fun HidD_GetAttributes(hiddeviceobject : LibC::HANDLE, attributes : HIDD_ATTRIBUTES*) : BOOLEAN
 
   # Params # hidguid : Guid* [In]
-  fun HidD_GetHidGuid(hidguid : Guid*)
+  fun HidD_GetHidGuid(hidguid : Guid*) : Void
 
   # Params # hiddeviceobject : LibC::HANDLE [In],preparseddata : LibC::IntPtrT* [In]
   fun HidD_GetPreparsedData(hiddeviceobject : LibC::HANDLE, preparseddata : LibC::IntPtrT*) : BOOLEAN
@@ -4030,4 +4030,1103 @@ lib LibWin32
 
   # Params # hiddeviceobject : LibC::HANDLE [In],buffer : Void* [In],bufferlength : UInt32 [In]
   fun HidD_GetMsGenreDescriptor(hiddeviceobject : LibC::HANDLE, buffer : Void*, bufferlength : UInt32) : BOOLEAN
+end
+struct LibWin32::IDirectInputEffect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, Guid*, HRESULT)).call(param0, param1, param2)
+  end
+  def get_effect_guid(param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_effect_guid.unsafe_as(Proc(Guid*, HRESULT)).call(param0)
+  end
+  def get_parameters(param0 : DIEFFECT*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.get_parameters.unsafe_as(Proc(DIEFFECT*, UInt32, HRESULT)).call(param0, param1)
+  end
+  def set_parameters(param0 : DIEFFECT*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_parameters.unsafe_as(Proc(DIEFFECT*, UInt32, HRESULT)).call(param0, param1)
+  end
+  def start(param0 : UInt32, param1 : UInt32) : HRESULT
+    @lpVtbl.value.start.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(param0, param1)
+  end
+  def stop : HRESULT
+    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_effect_status(param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_status.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  end
+  def download : HRESULT
+    @lpVtbl.value.download.unsafe_as(Proc(HRESULT)).call
+  end
+  def unload : HRESULT
+    @lpVtbl.value.unload.unsafe_as(Proc(HRESULT)).call
+  end
+  def escape(param0 : DIEFFESCAPE*) : HRESULT
+    @lpVtbl.value.escape.unsafe_as(Proc(DIEFFESCAPE*, HRESULT)).call(param0)
+  end
+end
+struct LibWin32::IDirectInputDeviceW
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_capabilities(param0 : DIDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.unsafe_as(Proc(DIDEVCAPS*, HRESULT)).call(param0)
+  end
+  def enum_objects(param0 : LPDIENUMDEVICEOBJECTSCALLBACKW, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_objects.unsafe_as(Proc(LPDIENUMDEVICEOBJECTSCALLBACKW, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_property(param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Guid*, DIPROPHEADER*, HRESULT)).call(param0, param1)
+  end
+  def set_property(param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Guid*, DIPROPHEADER*, HRESULT)).call(param0, param1)
+  end
+  def acquire : HRESULT
+    @lpVtbl.value.acquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def unacquire : HRESULT
+    @lpVtbl.value.unacquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_device_state(param0 : UInt32, param1 : Void*) : HRESULT
+    @lpVtbl.value.get_device_state.unsafe_as(Proc(UInt32, Void*, HRESULT)).call(param0, param1)
+  end
+  def get_device_data(param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_data.unsafe_as(Proc(UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def set_data_format(param0 : DIDATAFORMAT*) : HRESULT
+    @lpVtbl.value.set_data_format.unsafe_as(Proc(DIDATAFORMAT*, HRESULT)).call(param0)
+  end
+  def set_event_notification(param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_notification.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(param0)
+  end
+  def set_cooperative_level(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def get_object_info(param0 : DIDEVICEOBJECTINSTANCEW*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_object_info.unsafe_as(Proc(DIDEVICEOBJECTINSTANCEW*, UInt32, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_device_info(param0 : DIDEVICEINSTANCEW*) : HRESULT
+    @lpVtbl.value.get_device_info.unsafe_as(Proc(DIDEVICEINSTANCEW*, HRESULT)).call(param0)
+  end
+  def run_control_panel(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, Guid*, HRESULT)).call(param0, param1, param2)
+  end
+end
+struct LibWin32::IDirectInputDeviceA
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_capabilities(param0 : DIDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.unsafe_as(Proc(DIDEVCAPS*, HRESULT)).call(param0)
+  end
+  def enum_objects(param0 : LPDIENUMDEVICEOBJECTSCALLBACKA, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_objects.unsafe_as(Proc(LPDIENUMDEVICEOBJECTSCALLBACKA, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_property(param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Guid*, DIPROPHEADER*, HRESULT)).call(param0, param1)
+  end
+  def set_property(param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Guid*, DIPROPHEADER*, HRESULT)).call(param0, param1)
+  end
+  def acquire : HRESULT
+    @lpVtbl.value.acquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def unacquire : HRESULT
+    @lpVtbl.value.unacquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_device_state(param0 : UInt32, param1 : Void*) : HRESULT
+    @lpVtbl.value.get_device_state.unsafe_as(Proc(UInt32, Void*, HRESULT)).call(param0, param1)
+  end
+  def get_device_data(param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_data.unsafe_as(Proc(UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def set_data_format(param0 : DIDATAFORMAT*) : HRESULT
+    @lpVtbl.value.set_data_format.unsafe_as(Proc(DIDATAFORMAT*, HRESULT)).call(param0)
+  end
+  def set_event_notification(param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_notification.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(param0)
+  end
+  def set_cooperative_level(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def get_object_info(param0 : DIDEVICEOBJECTINSTANCEA*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_object_info.unsafe_as(Proc(DIDEVICEOBJECTINSTANCEA*, UInt32, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_device_info(param0 : DIDEVICEINSTANCEA*) : HRESULT
+    @lpVtbl.value.get_device_info.unsafe_as(Proc(DIDEVICEINSTANCEA*, HRESULT)).call(param0)
+  end
+  def run_control_panel(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, Guid*, HRESULT)).call(param0, param1, param2)
+  end
+end
+struct LibWin32::IDirectInputDevice2W
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_capabilities(param0 : DIDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.unsafe_as(Proc(DIDEVCAPS*, HRESULT)).call(param0)
+  end
+  def enum_objects(param0 : LPDIENUMDEVICEOBJECTSCALLBACKW, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_objects.unsafe_as(Proc(LPDIENUMDEVICEOBJECTSCALLBACKW, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_property(param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Guid*, DIPROPHEADER*, HRESULT)).call(param0, param1)
+  end
+  def set_property(param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Guid*, DIPROPHEADER*, HRESULT)).call(param0, param1)
+  end
+  def acquire : HRESULT
+    @lpVtbl.value.acquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def unacquire : HRESULT
+    @lpVtbl.value.unacquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_device_state(param0 : UInt32, param1 : Void*) : HRESULT
+    @lpVtbl.value.get_device_state.unsafe_as(Proc(UInt32, Void*, HRESULT)).call(param0, param1)
+  end
+  def get_device_data(param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_data.unsafe_as(Proc(UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def set_data_format(param0 : DIDATAFORMAT*) : HRESULT
+    @lpVtbl.value.set_data_format.unsafe_as(Proc(DIDATAFORMAT*, HRESULT)).call(param0)
+  end
+  def set_event_notification(param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_notification.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(param0)
+  end
+  def set_cooperative_level(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def get_object_info(param0 : DIDEVICEOBJECTINSTANCEW*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_object_info.unsafe_as(Proc(DIDEVICEOBJECTINSTANCEW*, UInt32, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_device_info(param0 : DIDEVICEINSTANCEW*) : HRESULT
+    @lpVtbl.value.get_device_info.unsafe_as(Proc(DIDEVICEINSTANCEW*, HRESULT)).call(param0)
+  end
+  def run_control_panel(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, Guid*, HRESULT)).call(param0, param1, param2)
+  end
+  def create_effect(param0 : Guid*, param1 : DIEFFECT*, param2 : IDirectInputEffect*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_effect.unsafe_as(Proc(Guid*, DIEFFECT*, IDirectInputEffect*, IUnknown, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def enum_effects(param0 : LPDIENUMEFFECTSCALLBACKW, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects.unsafe_as(Proc(LPDIENUMEFFECTSCALLBACKW, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_effect_info(param0 : DIEFFECTINFOW*, param1 : Guid*) : HRESULT
+    @lpVtbl.value.get_effect_info.unsafe_as(Proc(DIEFFECTINFOW*, Guid*, HRESULT)).call(param0, param1)
+  end
+  def get_force_feedback_state(param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_force_feedback_state.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  end
+  def send_force_feedback_command(param0 : UInt32) : HRESULT
+    @lpVtbl.value.send_force_feedback_command.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  end
+  def enum_created_effect_objects(param0 : LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_created_effect_objects.unsafe_as(Proc(LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def escape(param0 : DIEFFESCAPE*) : HRESULT
+    @lpVtbl.value.escape.unsafe_as(Proc(DIEFFESCAPE*, HRESULT)).call(param0)
+  end
+  def poll : HRESULT
+    @lpVtbl.value.poll.unsafe_as(Proc(HRESULT)).call
+  end
+  def send_device_data(param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.send_device_data.unsafe_as(Proc(UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+end
+struct LibWin32::IDirectInputDevice2A
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_capabilities(param0 : DIDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.unsafe_as(Proc(DIDEVCAPS*, HRESULT)).call(param0)
+  end
+  def enum_objects(param0 : LPDIENUMDEVICEOBJECTSCALLBACKA, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_objects.unsafe_as(Proc(LPDIENUMDEVICEOBJECTSCALLBACKA, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_property(param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Guid*, DIPROPHEADER*, HRESULT)).call(param0, param1)
+  end
+  def set_property(param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Guid*, DIPROPHEADER*, HRESULT)).call(param0, param1)
+  end
+  def acquire : HRESULT
+    @lpVtbl.value.acquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def unacquire : HRESULT
+    @lpVtbl.value.unacquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_device_state(param0 : UInt32, param1 : Void*) : HRESULT
+    @lpVtbl.value.get_device_state.unsafe_as(Proc(UInt32, Void*, HRESULT)).call(param0, param1)
+  end
+  def get_device_data(param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_data.unsafe_as(Proc(UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def set_data_format(param0 : DIDATAFORMAT*) : HRESULT
+    @lpVtbl.value.set_data_format.unsafe_as(Proc(DIDATAFORMAT*, HRESULT)).call(param0)
+  end
+  def set_event_notification(param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_notification.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(param0)
+  end
+  def set_cooperative_level(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def get_object_info(param0 : DIDEVICEOBJECTINSTANCEA*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_object_info.unsafe_as(Proc(DIDEVICEOBJECTINSTANCEA*, UInt32, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_device_info(param0 : DIDEVICEINSTANCEA*) : HRESULT
+    @lpVtbl.value.get_device_info.unsafe_as(Proc(DIDEVICEINSTANCEA*, HRESULT)).call(param0)
+  end
+  def run_control_panel(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, Guid*, HRESULT)).call(param0, param1, param2)
+  end
+  def create_effect(param0 : Guid*, param1 : DIEFFECT*, param2 : IDirectInputEffect*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_effect.unsafe_as(Proc(Guid*, DIEFFECT*, IDirectInputEffect*, IUnknown, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def enum_effects(param0 : LPDIENUMEFFECTSCALLBACKA, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects.unsafe_as(Proc(LPDIENUMEFFECTSCALLBACKA, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_effect_info(param0 : DIEFFECTINFOA*, param1 : Guid*) : HRESULT
+    @lpVtbl.value.get_effect_info.unsafe_as(Proc(DIEFFECTINFOA*, Guid*, HRESULT)).call(param0, param1)
+  end
+  def get_force_feedback_state(param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_force_feedback_state.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  end
+  def send_force_feedback_command(param0 : UInt32) : HRESULT
+    @lpVtbl.value.send_force_feedback_command.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  end
+  def enum_created_effect_objects(param0 : LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_created_effect_objects.unsafe_as(Proc(LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def escape(param0 : DIEFFESCAPE*) : HRESULT
+    @lpVtbl.value.escape.unsafe_as(Proc(DIEFFESCAPE*, HRESULT)).call(param0)
+  end
+  def poll : HRESULT
+    @lpVtbl.value.poll.unsafe_as(Proc(HRESULT)).call
+  end
+  def send_device_data(param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.send_device_data.unsafe_as(Proc(UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+end
+struct LibWin32::IDirectInputDevice7W
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_capabilities(param0 : DIDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.unsafe_as(Proc(DIDEVCAPS*, HRESULT)).call(param0)
+  end
+  def enum_objects(param0 : LPDIENUMDEVICEOBJECTSCALLBACKW, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_objects.unsafe_as(Proc(LPDIENUMDEVICEOBJECTSCALLBACKW, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_property(param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Guid*, DIPROPHEADER*, HRESULT)).call(param0, param1)
+  end
+  def set_property(param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Guid*, DIPROPHEADER*, HRESULT)).call(param0, param1)
+  end
+  def acquire : HRESULT
+    @lpVtbl.value.acquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def unacquire : HRESULT
+    @lpVtbl.value.unacquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_device_state(param0 : UInt32, param1 : Void*) : HRESULT
+    @lpVtbl.value.get_device_state.unsafe_as(Proc(UInt32, Void*, HRESULT)).call(param0, param1)
+  end
+  def get_device_data(param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_data.unsafe_as(Proc(UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def set_data_format(param0 : DIDATAFORMAT*) : HRESULT
+    @lpVtbl.value.set_data_format.unsafe_as(Proc(DIDATAFORMAT*, HRESULT)).call(param0)
+  end
+  def set_event_notification(param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_notification.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(param0)
+  end
+  def set_cooperative_level(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def get_object_info(param0 : DIDEVICEOBJECTINSTANCEW*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_object_info.unsafe_as(Proc(DIDEVICEOBJECTINSTANCEW*, UInt32, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_device_info(param0 : DIDEVICEINSTANCEW*) : HRESULT
+    @lpVtbl.value.get_device_info.unsafe_as(Proc(DIDEVICEINSTANCEW*, HRESULT)).call(param0)
+  end
+  def run_control_panel(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, Guid*, HRESULT)).call(param0, param1, param2)
+  end
+  def create_effect(param0 : Guid*, param1 : DIEFFECT*, param2 : IDirectInputEffect*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_effect.unsafe_as(Proc(Guid*, DIEFFECT*, IDirectInputEffect*, IUnknown, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def enum_effects(param0 : LPDIENUMEFFECTSCALLBACKW, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects.unsafe_as(Proc(LPDIENUMEFFECTSCALLBACKW, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_effect_info(param0 : DIEFFECTINFOW*, param1 : Guid*) : HRESULT
+    @lpVtbl.value.get_effect_info.unsafe_as(Proc(DIEFFECTINFOW*, Guid*, HRESULT)).call(param0, param1)
+  end
+  def get_force_feedback_state(param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_force_feedback_state.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  end
+  def send_force_feedback_command(param0 : UInt32) : HRESULT
+    @lpVtbl.value.send_force_feedback_command.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  end
+  def enum_created_effect_objects(param0 : LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_created_effect_objects.unsafe_as(Proc(LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def escape(param0 : DIEFFESCAPE*) : HRESULT
+    @lpVtbl.value.escape.unsafe_as(Proc(DIEFFESCAPE*, HRESULT)).call(param0)
+  end
+  def poll : HRESULT
+    @lpVtbl.value.poll.unsafe_as(Proc(HRESULT)).call
+  end
+  def send_device_data(param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.send_device_data.unsafe_as(Proc(UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def enum_effects_in_file(param0 : LibC::LPWSTR, param1 : LPDIENUMEFFECTSINFILECALLBACK, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects_in_file.unsafe_as(Proc(LibC::LPWSTR, LPDIENUMEFFECTSINFILECALLBACK, Void*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def write_effect_to_file(param0 : LibC::LPWSTR, param1 : UInt32, param2 : DIFILEEFFECT*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.write_effect_to_file.unsafe_as(Proc(LibC::LPWSTR, UInt32, DIFILEEFFECT*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+end
+struct LibWin32::IDirectInputDevice7A
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_capabilities(param0 : DIDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.unsafe_as(Proc(DIDEVCAPS*, HRESULT)).call(param0)
+  end
+  def enum_objects(param0 : LPDIENUMDEVICEOBJECTSCALLBACKA, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_objects.unsafe_as(Proc(LPDIENUMDEVICEOBJECTSCALLBACKA, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_property(param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Guid*, DIPROPHEADER*, HRESULT)).call(param0, param1)
+  end
+  def set_property(param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Guid*, DIPROPHEADER*, HRESULT)).call(param0, param1)
+  end
+  def acquire : HRESULT
+    @lpVtbl.value.acquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def unacquire : HRESULT
+    @lpVtbl.value.unacquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_device_state(param0 : UInt32, param1 : Void*) : HRESULT
+    @lpVtbl.value.get_device_state.unsafe_as(Proc(UInt32, Void*, HRESULT)).call(param0, param1)
+  end
+  def get_device_data(param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_data.unsafe_as(Proc(UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def set_data_format(param0 : DIDATAFORMAT*) : HRESULT
+    @lpVtbl.value.set_data_format.unsafe_as(Proc(DIDATAFORMAT*, HRESULT)).call(param0)
+  end
+  def set_event_notification(param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_notification.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(param0)
+  end
+  def set_cooperative_level(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def get_object_info(param0 : DIDEVICEOBJECTINSTANCEA*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_object_info.unsafe_as(Proc(DIDEVICEOBJECTINSTANCEA*, UInt32, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_device_info(param0 : DIDEVICEINSTANCEA*) : HRESULT
+    @lpVtbl.value.get_device_info.unsafe_as(Proc(DIDEVICEINSTANCEA*, HRESULT)).call(param0)
+  end
+  def run_control_panel(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, Guid*, HRESULT)).call(param0, param1, param2)
+  end
+  def create_effect(param0 : Guid*, param1 : DIEFFECT*, param2 : IDirectInputEffect*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_effect.unsafe_as(Proc(Guid*, DIEFFECT*, IDirectInputEffect*, IUnknown, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def enum_effects(param0 : LPDIENUMEFFECTSCALLBACKA, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects.unsafe_as(Proc(LPDIENUMEFFECTSCALLBACKA, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_effect_info(param0 : DIEFFECTINFOA*, param1 : Guid*) : HRESULT
+    @lpVtbl.value.get_effect_info.unsafe_as(Proc(DIEFFECTINFOA*, Guid*, HRESULT)).call(param0, param1)
+  end
+  def get_force_feedback_state(param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_force_feedback_state.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  end
+  def send_force_feedback_command(param0 : UInt32) : HRESULT
+    @lpVtbl.value.send_force_feedback_command.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  end
+  def enum_created_effect_objects(param0 : LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_created_effect_objects.unsafe_as(Proc(LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def escape(param0 : DIEFFESCAPE*) : HRESULT
+    @lpVtbl.value.escape.unsafe_as(Proc(DIEFFESCAPE*, HRESULT)).call(param0)
+  end
+  def poll : HRESULT
+    @lpVtbl.value.poll.unsafe_as(Proc(HRESULT)).call
+  end
+  def send_device_data(param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.send_device_data.unsafe_as(Proc(UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def enum_effects_in_file(param0 : PSTR, param1 : LPDIENUMEFFECTSINFILECALLBACK, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects_in_file.unsafe_as(Proc(PSTR, LPDIENUMEFFECTSINFILECALLBACK, Void*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def write_effect_to_file(param0 : PSTR, param1 : UInt32, param2 : DIFILEEFFECT*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.write_effect_to_file.unsafe_as(Proc(PSTR, UInt32, DIFILEEFFECT*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+end
+struct LibWin32::IDirectInputDevice8W
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_capabilities(param0 : DIDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.unsafe_as(Proc(DIDEVCAPS*, HRESULT)).call(param0)
+  end
+  def enum_objects(param0 : LPDIENUMDEVICEOBJECTSCALLBACKW, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_objects.unsafe_as(Proc(LPDIENUMDEVICEOBJECTSCALLBACKW, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_property(param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Guid*, DIPROPHEADER*, HRESULT)).call(param0, param1)
+  end
+  def set_property(param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Guid*, DIPROPHEADER*, HRESULT)).call(param0, param1)
+  end
+  def acquire : HRESULT
+    @lpVtbl.value.acquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def unacquire : HRESULT
+    @lpVtbl.value.unacquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_device_state(param0 : UInt32, param1 : Void*) : HRESULT
+    @lpVtbl.value.get_device_state.unsafe_as(Proc(UInt32, Void*, HRESULT)).call(param0, param1)
+  end
+  def get_device_data(param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_data.unsafe_as(Proc(UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def set_data_format(param0 : DIDATAFORMAT*) : HRESULT
+    @lpVtbl.value.set_data_format.unsafe_as(Proc(DIDATAFORMAT*, HRESULT)).call(param0)
+  end
+  def set_event_notification(param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_notification.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(param0)
+  end
+  def set_cooperative_level(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def get_object_info(param0 : DIDEVICEOBJECTINSTANCEW*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_object_info.unsafe_as(Proc(DIDEVICEOBJECTINSTANCEW*, UInt32, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_device_info(param0 : DIDEVICEINSTANCEW*) : HRESULT
+    @lpVtbl.value.get_device_info.unsafe_as(Proc(DIDEVICEINSTANCEW*, HRESULT)).call(param0)
+  end
+  def run_control_panel(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, Guid*, HRESULT)).call(param0, param1, param2)
+  end
+  def create_effect(param0 : Guid*, param1 : DIEFFECT*, param2 : IDirectInputEffect*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_effect.unsafe_as(Proc(Guid*, DIEFFECT*, IDirectInputEffect*, IUnknown, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def enum_effects(param0 : LPDIENUMEFFECTSCALLBACKW, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects.unsafe_as(Proc(LPDIENUMEFFECTSCALLBACKW, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_effect_info(param0 : DIEFFECTINFOW*, param1 : Guid*) : HRESULT
+    @lpVtbl.value.get_effect_info.unsafe_as(Proc(DIEFFECTINFOW*, Guid*, HRESULT)).call(param0, param1)
+  end
+  def get_force_feedback_state(param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_force_feedback_state.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  end
+  def send_force_feedback_command(param0 : UInt32) : HRESULT
+    @lpVtbl.value.send_force_feedback_command.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  end
+  def enum_created_effect_objects(param0 : LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_created_effect_objects.unsafe_as(Proc(LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def escape(param0 : DIEFFESCAPE*) : HRESULT
+    @lpVtbl.value.escape.unsafe_as(Proc(DIEFFESCAPE*, HRESULT)).call(param0)
+  end
+  def poll : HRESULT
+    @lpVtbl.value.poll.unsafe_as(Proc(HRESULT)).call
+  end
+  def send_device_data(param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.send_device_data.unsafe_as(Proc(UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def enum_effects_in_file(param0 : LibC::LPWSTR, param1 : LPDIENUMEFFECTSINFILECALLBACK, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects_in_file.unsafe_as(Proc(LibC::LPWSTR, LPDIENUMEFFECTSINFILECALLBACK, Void*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def write_effect_to_file(param0 : LibC::LPWSTR, param1 : UInt32, param2 : DIFILEEFFECT*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.write_effect_to_file.unsafe_as(Proc(LibC::LPWSTR, UInt32, DIFILEEFFECT*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def build_action_map(param0 : DIACTIONFORMATW*, param1 : LibC::LPWSTR, param2 : UInt32) : HRESULT
+    @lpVtbl.value.build_action_map.unsafe_as(Proc(DIACTIONFORMATW*, LibC::LPWSTR, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def set_action_map(param0 : DIACTIONFORMATW*, param1 : LibC::LPWSTR, param2 : UInt32) : HRESULT
+    @lpVtbl.value.set_action_map.unsafe_as(Proc(DIACTIONFORMATW*, LibC::LPWSTR, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_image_info(param0 : DIDEVICEIMAGEINFOHEADERW*) : HRESULT
+    @lpVtbl.value.get_image_info.unsafe_as(Proc(DIDEVICEIMAGEINFOHEADERW*, HRESULT)).call(param0)
+  end
+end
+struct LibWin32::IDirectInputDevice8A
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_capabilities(param0 : DIDEVCAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.unsafe_as(Proc(DIDEVCAPS*, HRESULT)).call(param0)
+  end
+  def enum_objects(param0 : LPDIENUMDEVICEOBJECTSCALLBACKA, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_objects.unsafe_as(Proc(LPDIENUMDEVICEOBJECTSCALLBACKA, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_property(param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Guid*, DIPROPHEADER*, HRESULT)).call(param0, param1)
+  end
+  def set_property(param0 : Guid*, param1 : DIPROPHEADER*) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Guid*, DIPROPHEADER*, HRESULT)).call(param0, param1)
+  end
+  def acquire : HRESULT
+    @lpVtbl.value.acquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def unacquire : HRESULT
+    @lpVtbl.value.unacquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_device_state(param0 : UInt32, param1 : Void*) : HRESULT
+    @lpVtbl.value.get_device_state.unsafe_as(Proc(UInt32, Void*, HRESULT)).call(param0, param1)
+  end
+  def get_device_data(param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.get_device_data.unsafe_as(Proc(UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def set_data_format(param0 : DIDATAFORMAT*) : HRESULT
+    @lpVtbl.value.set_data_format.unsafe_as(Proc(DIDATAFORMAT*, HRESULT)).call(param0)
+  end
+  def set_event_notification(param0 : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_notification.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(param0)
+  end
+  def set_cooperative_level(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def get_object_info(param0 : DIDEVICEOBJECTINSTANCEA*, param1 : UInt32, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_object_info.unsafe_as(Proc(DIDEVICEOBJECTINSTANCEA*, UInt32, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_device_info(param0 : DIDEVICEINSTANCEA*) : HRESULT
+    @lpVtbl.value.get_device_info.unsafe_as(Proc(DIDEVICEINSTANCEA*, HRESULT)).call(param0)
+  end
+  def run_control_panel(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32, param2 : Guid*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, Guid*, HRESULT)).call(param0, param1, param2)
+  end
+  def create_effect(param0 : Guid*, param1 : DIEFFECT*, param2 : IDirectInputEffect*, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_effect.unsafe_as(Proc(Guid*, DIEFFECT*, IDirectInputEffect*, IUnknown, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def enum_effects(param0 : LPDIENUMEFFECTSCALLBACKA, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects.unsafe_as(Proc(LPDIENUMEFFECTSCALLBACKA, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_effect_info(param0 : DIEFFECTINFOA*, param1 : Guid*) : HRESULT
+    @lpVtbl.value.get_effect_info.unsafe_as(Proc(DIEFFECTINFOA*, Guid*, HRESULT)).call(param0, param1)
+  end
+  def get_force_feedback_state(param0 : UInt32*) : HRESULT
+    @lpVtbl.value.get_force_feedback_state.unsafe_as(Proc(UInt32*, HRESULT)).call(param0)
+  end
+  def send_force_feedback_command(param0 : UInt32) : HRESULT
+    @lpVtbl.value.send_force_feedback_command.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  end
+  def enum_created_effect_objects(param0 : LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, param1 : Void*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.enum_created_effect_objects.unsafe_as(Proc(LPDIENUMCREATEDEFFECTOBJECTSCALLBACK, Void*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def escape(param0 : DIEFFESCAPE*) : HRESULT
+    @lpVtbl.value.escape.unsafe_as(Proc(DIEFFESCAPE*, HRESULT)).call(param0)
+  end
+  def poll : HRESULT
+    @lpVtbl.value.poll.unsafe_as(Proc(HRESULT)).call
+  end
+  def send_device_data(param0 : UInt32, param1 : DIDEVICEOBJECTDATA*, param2 : UInt32*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.send_device_data.unsafe_as(Proc(UInt32, DIDEVICEOBJECTDATA*, UInt32*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def enum_effects_in_file(param0 : PSTR, param1 : LPDIENUMEFFECTSINFILECALLBACK, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_effects_in_file.unsafe_as(Proc(PSTR, LPDIENUMEFFECTSINFILECALLBACK, Void*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def write_effect_to_file(param0 : PSTR, param1 : UInt32, param2 : DIFILEEFFECT*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.write_effect_to_file.unsafe_as(Proc(PSTR, UInt32, DIFILEEFFECT*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def build_action_map(param0 : DIACTIONFORMATA*, param1 : PSTR, param2 : UInt32) : HRESULT
+    @lpVtbl.value.build_action_map.unsafe_as(Proc(DIACTIONFORMATA*, PSTR, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def set_action_map(param0 : DIACTIONFORMATA*, param1 : PSTR, param2 : UInt32) : HRESULT
+    @lpVtbl.value.set_action_map.unsafe_as(Proc(DIACTIONFORMATA*, PSTR, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def get_image_info(param0 : DIDEVICEIMAGEINFOHEADERA*) : HRESULT
+    @lpVtbl.value.get_image_info.unsafe_as(Proc(DIDEVICEIMAGEINFOHEADERA*, HRESULT)).call(param0)
+  end
+end
+struct LibWin32::IDirectInputW
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_device(param0 : Guid*, param1 : IDirectInputDeviceW*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(Guid*, IDirectInputDeviceW*, IUnknown, HRESULT)).call(param0, param1, param2)
+  end
+  def enum_devices(param0 : UInt32, param1 : LPDIENUMDEVICESCALLBACKW, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices.unsafe_as(Proc(UInt32, LPDIENUMDEVICESCALLBACKW, Void*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def get_device_status(param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_device_status.unsafe_as(Proc(Guid*, HRESULT)).call(param0)
+  end
+  def run_control_panel(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, HRESULT)).call(param0, param1)
+  end
+end
+struct LibWin32::IDirectInputA
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_device(param0 : Guid*, param1 : IDirectInputDeviceA*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(Guid*, IDirectInputDeviceA*, IUnknown, HRESULT)).call(param0, param1, param2)
+  end
+  def enum_devices(param0 : UInt32, param1 : LPDIENUMDEVICESCALLBACKA, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices.unsafe_as(Proc(UInt32, LPDIENUMDEVICESCALLBACKA, Void*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def get_device_status(param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_device_status.unsafe_as(Proc(Guid*, HRESULT)).call(param0)
+  end
+  def run_control_panel(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, HRESULT)).call(param0, param1)
+  end
+end
+struct LibWin32::IDirectInput2W
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_device(param0 : Guid*, param1 : IDirectInputDeviceW*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(Guid*, IDirectInputDeviceW*, IUnknown, HRESULT)).call(param0, param1, param2)
+  end
+  def enum_devices(param0 : UInt32, param1 : LPDIENUMDEVICESCALLBACKW, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices.unsafe_as(Proc(UInt32, LPDIENUMDEVICESCALLBACKW, Void*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def get_device_status(param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_device_status.unsafe_as(Proc(Guid*, HRESULT)).call(param0)
+  end
+  def run_control_panel(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def find_device(param0 : Guid*, param1 : LibC::LPWSTR, param2 : Guid*) : HRESULT
+    @lpVtbl.value.find_device.unsafe_as(Proc(Guid*, LibC::LPWSTR, Guid*, HRESULT)).call(param0, param1, param2)
+  end
+end
+struct LibWin32::IDirectInput2A
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_device(param0 : Guid*, param1 : IDirectInputDeviceA*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(Guid*, IDirectInputDeviceA*, IUnknown, HRESULT)).call(param0, param1, param2)
+  end
+  def enum_devices(param0 : UInt32, param1 : LPDIENUMDEVICESCALLBACKA, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices.unsafe_as(Proc(UInt32, LPDIENUMDEVICESCALLBACKA, Void*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def get_device_status(param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_device_status.unsafe_as(Proc(Guid*, HRESULT)).call(param0)
+  end
+  def run_control_panel(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def find_device(param0 : Guid*, param1 : PSTR, param2 : Guid*) : HRESULT
+    @lpVtbl.value.find_device.unsafe_as(Proc(Guid*, PSTR, Guid*, HRESULT)).call(param0, param1, param2)
+  end
+end
+struct LibWin32::IDirectInput7W
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_device(param0 : Guid*, param1 : IDirectInputDeviceW*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(Guid*, IDirectInputDeviceW*, IUnknown, HRESULT)).call(param0, param1, param2)
+  end
+  def enum_devices(param0 : UInt32, param1 : LPDIENUMDEVICESCALLBACKW, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices.unsafe_as(Proc(UInt32, LPDIENUMDEVICESCALLBACKW, Void*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def get_device_status(param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_device_status.unsafe_as(Proc(Guid*, HRESULT)).call(param0)
+  end
+  def run_control_panel(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def find_device(param0 : Guid*, param1 : LibC::LPWSTR, param2 : Guid*) : HRESULT
+    @lpVtbl.value.find_device.unsafe_as(Proc(Guid*, LibC::LPWSTR, Guid*, HRESULT)).call(param0, param1, param2)
+  end
+  def create_device_ex(param0 : Guid*, param1 : Guid*, param2 : Void**, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device_ex.unsafe_as(Proc(Guid*, Guid*, Void**, IUnknown, HRESULT)).call(param0, param1, param2, param3)
+  end
+end
+struct LibWin32::IDirectInput7A
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_device(param0 : Guid*, param1 : IDirectInputDeviceA*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(Guid*, IDirectInputDeviceA*, IUnknown, HRESULT)).call(param0, param1, param2)
+  end
+  def enum_devices(param0 : UInt32, param1 : LPDIENUMDEVICESCALLBACKA, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices.unsafe_as(Proc(UInt32, LPDIENUMDEVICESCALLBACKA, Void*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def get_device_status(param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_device_status.unsafe_as(Proc(Guid*, HRESULT)).call(param0)
+  end
+  def run_control_panel(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def find_device(param0 : Guid*, param1 : PSTR, param2 : Guid*) : HRESULT
+    @lpVtbl.value.find_device.unsafe_as(Proc(Guid*, PSTR, Guid*, HRESULT)).call(param0, param1, param2)
+  end
+  def create_device_ex(param0 : Guid*, param1 : Guid*, param2 : Void**, param3 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device_ex.unsafe_as(Proc(Guid*, Guid*, Void**, IUnknown, HRESULT)).call(param0, param1, param2, param3)
+  end
+end
+struct LibWin32::IDirectInput8W
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_device(param0 : Guid*, param1 : IDirectInputDevice8W*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(Guid*, IDirectInputDevice8W*, IUnknown, HRESULT)).call(param0, param1, param2)
+  end
+  def enum_devices(param0 : UInt32, param1 : LPDIENUMDEVICESCALLBACKW, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices.unsafe_as(Proc(UInt32, LPDIENUMDEVICESCALLBACKW, Void*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def get_device_status(param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_device_status.unsafe_as(Proc(Guid*, HRESULT)).call(param0)
+  end
+  def run_control_panel(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def find_device(param0 : Guid*, param1 : LibC::LPWSTR, param2 : Guid*) : HRESULT
+    @lpVtbl.value.find_device.unsafe_as(Proc(Guid*, LibC::LPWSTR, Guid*, HRESULT)).call(param0, param1, param2)
+  end
+  def enum_devices_by_semantics(param0 : LibC::LPWSTR, param1 : DIACTIONFORMATW*, param2 : LPDIENUMDEVICESBYSEMANTICSCBW, param3 : Void*, param4 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices_by_semantics.unsafe_as(Proc(LibC::LPWSTR, DIACTIONFORMATW*, LPDIENUMDEVICESBYSEMANTICSCBW, Void*, UInt32, HRESULT)).call(param0, param1, param2, param3, param4)
+  end
+  def configure_devices(param0 : LPDICONFIGUREDEVICESCALLBACK, param1 : DICONFIGUREDEVICESPARAMSW*, param2 : UInt32, param3 : Void*) : HRESULT
+    @lpVtbl.value.configure_devices.unsafe_as(Proc(LPDICONFIGUREDEVICESCALLBACK, DICONFIGUREDEVICESPARAMSW*, UInt32, Void*, HRESULT)).call(param0, param1, param2, param3)
+  end
+end
+struct LibWin32::IDirectInput8A
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_device(param0 : Guid*, param1 : IDirectInputDevice8A*, param2 : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(Guid*, IDirectInputDevice8A*, IUnknown, HRESULT)).call(param0, param1, param2)
+  end
+  def enum_devices(param0 : UInt32, param1 : LPDIENUMDEVICESCALLBACKA, param2 : Void*, param3 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices.unsafe_as(Proc(UInt32, LPDIENUMDEVICESCALLBACKA, Void*, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def get_device_status(param0 : Guid*) : HRESULT
+    @lpVtbl.value.get_device_status.unsafe_as(Proc(Guid*, HRESULT)).call(param0)
+  end
+  def run_control_panel(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.run_control_panel.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def initialize(param0 : HINSTANCE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def find_device(param0 : Guid*, param1 : PSTR, param2 : Guid*) : HRESULT
+    @lpVtbl.value.find_device.unsafe_as(Proc(Guid*, PSTR, Guid*, HRESULT)).call(param0, param1, param2)
+  end
+  def enum_devices_by_semantics(param0 : PSTR, param1 : DIACTIONFORMATA*, param2 : LPDIENUMDEVICESBYSEMANTICSCBA, param3 : Void*, param4 : UInt32) : HRESULT
+    @lpVtbl.value.enum_devices_by_semantics.unsafe_as(Proc(PSTR, DIACTIONFORMATA*, LPDIENUMDEVICESBYSEMANTICSCBA, Void*, UInt32, HRESULT)).call(param0, param1, param2, param3, param4)
+  end
+  def configure_devices(param0 : LPDICONFIGUREDEVICESCALLBACK, param1 : DICONFIGUREDEVICESPARAMSA*, param2 : UInt32, param3 : Void*) : HRESULT
+    @lpVtbl.value.configure_devices.unsafe_as(Proc(LPDICONFIGUREDEVICESCALLBACK, DICONFIGUREDEVICESPARAMSA*, UInt32, Void*, HRESULT)).call(param0, param1, param2, param3)
+  end
+end
+struct LibWin32::IDirectInputEffectDriver
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def device_id(param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : UInt32, param4 : Void*) : HRESULT
+    @lpVtbl.value.device_id.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, Void*, HRESULT)).call(param0, param1, param2, param3, param4)
+  end
+  def get_versions(param0 : DIDRIVERVERSIONS*) : HRESULT
+    @lpVtbl.value.get_versions.unsafe_as(Proc(DIDRIVERVERSIONS*, HRESULT)).call(param0)
+  end
+  def escape(param0 : UInt32, param1 : UInt32, param2 : DIEFFESCAPE*) : HRESULT
+    @lpVtbl.value.escape.unsafe_as(Proc(UInt32, UInt32, DIEFFESCAPE*, HRESULT)).call(param0, param1, param2)
+  end
+  def set_gain(param0 : UInt32, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_gain.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(param0, param1)
+  end
+  def send_force_feedback_command(param0 : UInt32, param1 : UInt32) : HRESULT
+    @lpVtbl.value.send_force_feedback_command.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(param0, param1)
+  end
+  def get_force_feedback_state(param0 : UInt32, param1 : DIDEVICESTATE*) : HRESULT
+    @lpVtbl.value.get_force_feedback_state.unsafe_as(Proc(UInt32, DIDEVICESTATE*, HRESULT)).call(param0, param1)
+  end
+  def download_effect(param0 : UInt32, param1 : UInt32, param2 : UInt32*, param3 : DIEFFECT*, param4 : UInt32) : HRESULT
+    @lpVtbl.value.download_effect.unsafe_as(Proc(UInt32, UInt32, UInt32*, DIEFFECT*, UInt32, HRESULT)).call(param0, param1, param2, param3, param4)
+  end
+  def destroy_effect(param0 : UInt32, param1 : UInt32) : HRESULT
+    @lpVtbl.value.destroy_effect.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(param0, param1)
+  end
+  def start_effect(param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : UInt32) : HRESULT
+    @lpVtbl.value.start_effect.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def stop_effect(param0 : UInt32, param1 : UInt32) : HRESULT
+    @lpVtbl.value.stop_effect.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(param0, param1)
+  end
+  def get_effect_status(param0 : UInt32, param1 : UInt32, param2 : UInt32*) : HRESULT
+    @lpVtbl.value.get_effect_status.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(param0, param1, param2)
+  end
+end
+struct LibWin32::IDirectInputJoyConfig
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def acquire : HRESULT
+    @lpVtbl.value.acquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def unacquire : HRESULT
+    @lpVtbl.value.unacquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_cooperative_level(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def send_notify : HRESULT
+    @lpVtbl.value.send_notify.unsafe_as(Proc(HRESULT)).call
+  end
+  def enum_types(param0 : LPDIJOYTYPECALLBACK, param1 : Void*) : HRESULT
+    @lpVtbl.value.enum_types.unsafe_as(Proc(LPDIJOYTYPECALLBACK, Void*, HRESULT)).call(param0, param1)
+  end
+  def get_type_info(param0 : LibC::LPWSTR, param1 : DIJOYTYPEINFO*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(LibC::LPWSTR, DIJOYTYPEINFO*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def set_type_info(param0 : LibC::LPWSTR, param1 : DIJOYTYPEINFO*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.set_type_info.unsafe_as(Proc(LibC::LPWSTR, DIJOYTYPEINFO*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def delete_type(param0 : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_type.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(param0)
+  end
+  def get_config(param0 : UInt32, param1 : DIJOYCONFIG*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_config.unsafe_as(Proc(UInt32, DIJOYCONFIG*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def set_config(param0 : UInt32, param1 : DIJOYCONFIG*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.set_config.unsafe_as(Proc(UInt32, DIJOYCONFIG*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def delete_config(param0 : UInt32) : HRESULT
+    @lpVtbl.value.delete_config.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  end
+  def get_user_values(param0 : DIJOYUSERVALUES*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.get_user_values.unsafe_as(Proc(DIJOYUSERVALUES*, UInt32, HRESULT)).call(param0, param1)
+  end
+  def set_user_values(param0 : DIJOYUSERVALUES*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_user_values.unsafe_as(Proc(DIJOYUSERVALUES*, UInt32, HRESULT)).call(param0, param1)
+  end
+  def add_new_hardware(param0 : LibC::HANDLE, param1 : Guid*) : HRESULT
+    @lpVtbl.value.add_new_hardware.unsafe_as(Proc(LibC::HANDLE, Guid*, HRESULT)).call(param0, param1)
+  end
+  def open_type_key(param0 : LibC::LPWSTR, param1 : UInt32, param2 : HKEY*) : HRESULT
+    @lpVtbl.value.open_type_key.unsafe_as(Proc(LibC::LPWSTR, UInt32, HKEY*, HRESULT)).call(param0, param1, param2)
+  end
+  def open_config_key(param0 : UInt32, param1 : UInt32, param2 : HKEY*) : HRESULT
+    @lpVtbl.value.open_config_key.unsafe_as(Proc(UInt32, UInt32, HKEY*, HRESULT)).call(param0, param1, param2)
+  end
+end
+struct LibWin32::IDirectInputJoyConfig8
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def acquire : HRESULT
+    @lpVtbl.value.acquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def unacquire : HRESULT
+    @lpVtbl.value.unacquire.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_cooperative_level(param0 : LibC::HANDLE, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_cooperative_level.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(param0, param1)
+  end
+  def send_notify : HRESULT
+    @lpVtbl.value.send_notify.unsafe_as(Proc(HRESULT)).call
+  end
+  def enum_types(param0 : LPDIJOYTYPECALLBACK, param1 : Void*) : HRESULT
+    @lpVtbl.value.enum_types.unsafe_as(Proc(LPDIJOYTYPECALLBACK, Void*, HRESULT)).call(param0, param1)
+  end
+  def get_type_info(param0 : LibC::LPWSTR, param1 : DIJOYTYPEINFO*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(LibC::LPWSTR, DIJOYTYPEINFO*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def set_type_info(param0 : LibC::LPWSTR, param1 : DIJOYTYPEINFO*, param2 : UInt32, param3 : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_type_info.unsafe_as(Proc(LibC::LPWSTR, DIJOYTYPEINFO*, UInt32, LibC::LPWSTR, HRESULT)).call(param0, param1, param2, param3)
+  end
+  def delete_type(param0 : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_type.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(param0)
+  end
+  def get_config(param0 : UInt32, param1 : DIJOYCONFIG*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.get_config.unsafe_as(Proc(UInt32, DIJOYCONFIG*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def set_config(param0 : UInt32, param1 : DIJOYCONFIG*, param2 : UInt32) : HRESULT
+    @lpVtbl.value.set_config.unsafe_as(Proc(UInt32, DIJOYCONFIG*, UInt32, HRESULT)).call(param0, param1, param2)
+  end
+  def delete_config(param0 : UInt32) : HRESULT
+    @lpVtbl.value.delete_config.unsafe_as(Proc(UInt32, HRESULT)).call(param0)
+  end
+  def get_user_values(param0 : DIJOYUSERVALUES*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.get_user_values.unsafe_as(Proc(DIJOYUSERVALUES*, UInt32, HRESULT)).call(param0, param1)
+  end
+  def set_user_values(param0 : DIJOYUSERVALUES*, param1 : UInt32) : HRESULT
+    @lpVtbl.value.set_user_values.unsafe_as(Proc(DIJOYUSERVALUES*, UInt32, HRESULT)).call(param0, param1)
+  end
+  def add_new_hardware(param0 : LibC::HANDLE, param1 : Guid*) : HRESULT
+    @lpVtbl.value.add_new_hardware.unsafe_as(Proc(LibC::HANDLE, Guid*, HRESULT)).call(param0, param1)
+  end
+  def open_type_key(param0 : LibC::LPWSTR, param1 : UInt32, param2 : HKEY*) : HRESULT
+    @lpVtbl.value.open_type_key.unsafe_as(Proc(LibC::LPWSTR, UInt32, HKEY*, HRESULT)).call(param0, param1, param2)
+  end
+  def open_app_status_key(param0 : HKEY*) : HRESULT
+    @lpVtbl.value.open_app_status_key.unsafe_as(Proc(HKEY*, HRESULT)).call(param0)
+  end
 end

@@ -431,11 +431,11 @@ lib LibWin32
 
 
   struct IXpsOMShareableVTbl
-    query_interface : Proc(IXpsOMShareable*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMShareable*, UInt32)
-    release : Proc(IXpsOMShareable*, UInt32)
-    get_owner : Proc(IXpsOMShareable*, IUnknown*, HRESULT)
-    get_type : Proc(IXpsOMShareable*, XPS_OBJECT_TYPE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_type : UInt64
   end
 
   IXpsOMShareable_GUID = "7137398f-2fc1-454d-8c6a-2c3115a16ece"
@@ -445,36 +445,36 @@ lib LibWin32
   end
 
   struct IXpsOMVisualVTbl
-    query_interface : Proc(IXpsOMVisual*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMVisual*, UInt32)
-    release : Proc(IXpsOMVisual*, UInt32)
-    get_owner : Proc(IXpsOMVisual*, IUnknown*, HRESULT)
-    get_type : Proc(IXpsOMVisual*, XPS_OBJECT_TYPE*, HRESULT)
-    get_transform : Proc(IXpsOMVisual*, IXpsOMMatrixTransform*, HRESULT)
-    get_transform_local : Proc(IXpsOMVisual*, IXpsOMMatrixTransform*, HRESULT)
-    set_transform_local : Proc(IXpsOMVisual*, IXpsOMMatrixTransform, HRESULT)
-    get_transform_lookup : Proc(IXpsOMVisual*, LibC::LPWSTR*, HRESULT)
-    set_transform_lookup : Proc(IXpsOMVisual*, LibC::LPWSTR, HRESULT)
-    get_clip_geometry : Proc(IXpsOMVisual*, IXpsOMGeometry*, HRESULT)
-    get_clip_geometry_local : Proc(IXpsOMVisual*, IXpsOMGeometry*, HRESULT)
-    set_clip_geometry_local : Proc(IXpsOMVisual*, IXpsOMGeometry, HRESULT)
-    get_clip_geometry_lookup : Proc(IXpsOMVisual*, LibC::LPWSTR*, HRESULT)
-    set_clip_geometry_lookup : Proc(IXpsOMVisual*, LibC::LPWSTR, HRESULT)
-    get_opacity : Proc(IXpsOMVisual*, Float32*, HRESULT)
-    set_opacity : Proc(IXpsOMVisual*, Float32, HRESULT)
-    get_opacity_mask_brush : Proc(IXpsOMVisual*, IXpsOMBrush*, HRESULT)
-    get_opacity_mask_brush_local : Proc(IXpsOMVisual*, IXpsOMBrush*, HRESULT)
-    set_opacity_mask_brush_local : Proc(IXpsOMVisual*, IXpsOMBrush, HRESULT)
-    get_opacity_mask_brush_lookup : Proc(IXpsOMVisual*, LibC::LPWSTR*, HRESULT)
-    set_opacity_mask_brush_lookup : Proc(IXpsOMVisual*, LibC::LPWSTR, HRESULT)
-    get_name : Proc(IXpsOMVisual*, LibC::LPWSTR*, HRESULT)
-    set_name : Proc(IXpsOMVisual*, LibC::LPWSTR, HRESULT)
-    get_is_hyperlink_target : Proc(IXpsOMVisual*, LibC::BOOL*, HRESULT)
-    set_is_hyperlink_target : Proc(IXpsOMVisual*, LibC::BOOL, HRESULT)
-    get_hyperlink_navigate_uri : Proc(IXpsOMVisual*, IUri*, HRESULT)
-    set_hyperlink_navigate_uri : Proc(IXpsOMVisual*, IUri, HRESULT)
-    get_language : Proc(IXpsOMVisual*, LibC::LPWSTR*, HRESULT)
-    set_language : Proc(IXpsOMVisual*, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_type : UInt64
+    get_transform : UInt64
+    get_transform_local : UInt64
+    set_transform_local : UInt64
+    get_transform_lookup : UInt64
+    set_transform_lookup : UInt64
+    get_clip_geometry : UInt64
+    get_clip_geometry_local : UInt64
+    set_clip_geometry_local : UInt64
+    get_clip_geometry_lookup : UInt64
+    set_clip_geometry_lookup : UInt64
+    get_opacity : UInt64
+    set_opacity : UInt64
+    get_opacity_mask_brush : UInt64
+    get_opacity_mask_brush_local : UInt64
+    set_opacity_mask_brush_local : UInt64
+    get_opacity_mask_brush_lookup : UInt64
+    set_opacity_mask_brush_lookup : UInt64
+    get_name : UInt64
+    set_name : UInt64
+    get_is_hyperlink_target : UInt64
+    set_is_hyperlink_target : UInt64
+    get_hyperlink_navigate_uri : UInt64
+    set_hyperlink_navigate_uri : UInt64
+    get_language : UInt64
+    set_language : UInt64
   end
 
   IXpsOMVisual_GUID = "bc3e7333-fb0b-4af3-a819-0b4eaad0d2fd"
@@ -484,11 +484,11 @@ lib LibWin32
   end
 
   struct IXpsOMPartVTbl
-    query_interface : Proc(IXpsOMPart*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMPart*, UInt32)
-    release : Proc(IXpsOMPart*, UInt32)
-    get_part_name : Proc(IXpsOMPart*, IOpcPartUri*, HRESULT)
-    set_part_name : Proc(IXpsOMPart*, IOpcPartUri, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_part_name : UInt64
+    set_part_name : UInt64
   end
 
   IXpsOMPart_GUID = "74eb2f0b-a91e-4486-afac-0fabeca3dfc6"
@@ -498,27 +498,27 @@ lib LibWin32
   end
 
   struct IXpsOMGlyphsEditorVTbl
-    query_interface : Proc(IXpsOMGlyphsEditor*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMGlyphsEditor*, UInt32)
-    release : Proc(IXpsOMGlyphsEditor*, UInt32)
-    apply_edits : Proc(IXpsOMGlyphsEditor*, HRESULT)
-    get_unicode_string : Proc(IXpsOMGlyphsEditor*, LibC::LPWSTR*, HRESULT)
-    set_unicode_string : Proc(IXpsOMGlyphsEditor*, LibC::LPWSTR, HRESULT)
-    get_glyph_index_count : Proc(IXpsOMGlyphsEditor*, UInt32*, HRESULT)
-    get_glyph_indices : Proc(IXpsOMGlyphsEditor*, UInt32*, XPS_GLYPH_INDEX*, HRESULT)
-    set_glyph_indices : Proc(IXpsOMGlyphsEditor*, UInt32, XPS_GLYPH_INDEX*, HRESULT)
-    get_glyph_mapping_count : Proc(IXpsOMGlyphsEditor*, UInt32*, HRESULT)
-    get_glyph_mappings : Proc(IXpsOMGlyphsEditor*, UInt32*, XPS_GLYPH_MAPPING*, HRESULT)
-    set_glyph_mappings : Proc(IXpsOMGlyphsEditor*, UInt32, XPS_GLYPH_MAPPING*, HRESULT)
-    get_prohibited_caret_stop_count : Proc(IXpsOMGlyphsEditor*, UInt32*, HRESULT)
-    get_prohibited_caret_stops : Proc(IXpsOMGlyphsEditor*, UInt32*, UInt32*, HRESULT)
-    set_prohibited_caret_stops : Proc(IXpsOMGlyphsEditor*, UInt32, UInt32*, HRESULT)
-    get_bidi_level : Proc(IXpsOMGlyphsEditor*, UInt32*, HRESULT)
-    set_bidi_level : Proc(IXpsOMGlyphsEditor*, UInt32, HRESULT)
-    get_is_sideways : Proc(IXpsOMGlyphsEditor*, LibC::BOOL*, HRESULT)
-    set_is_sideways : Proc(IXpsOMGlyphsEditor*, LibC::BOOL, HRESULT)
-    get_device_font_name : Proc(IXpsOMGlyphsEditor*, LibC::LPWSTR*, HRESULT)
-    set_device_font_name : Proc(IXpsOMGlyphsEditor*, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    apply_edits : UInt64
+    get_unicode_string : UInt64
+    set_unicode_string : UInt64
+    get_glyph_index_count : UInt64
+    get_glyph_indices : UInt64
+    set_glyph_indices : UInt64
+    get_glyph_mapping_count : UInt64
+    get_glyph_mappings : UInt64
+    set_glyph_mappings : UInt64
+    get_prohibited_caret_stop_count : UInt64
+    get_prohibited_caret_stops : UInt64
+    set_prohibited_caret_stops : UInt64
+    get_bidi_level : UInt64
+    set_bidi_level : UInt64
+    get_is_sideways : UInt64
+    set_is_sideways : UInt64
+    get_device_font_name : UInt64
+    set_device_font_name : UInt64
   end
 
   IXpsOMGlyphsEditor_GUID = "a5ab8616-5b16-4b9f-9629-89b323ed7909"
@@ -528,63 +528,63 @@ lib LibWin32
   end
 
   struct IXpsOMGlyphsVTbl
-    query_interface : Proc(IXpsOMGlyphs*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMGlyphs*, UInt32)
-    release : Proc(IXpsOMGlyphs*, UInt32)
-    get_owner : Proc(IXpsOMGlyphs*, IUnknown*, HRESULT)
-    get_type : Proc(IXpsOMGlyphs*, XPS_OBJECT_TYPE*, HRESULT)
-    get_transform : Proc(IXpsOMGlyphs*, IXpsOMMatrixTransform*, HRESULT)
-    get_transform_local : Proc(IXpsOMGlyphs*, IXpsOMMatrixTransform*, HRESULT)
-    set_transform_local : Proc(IXpsOMGlyphs*, IXpsOMMatrixTransform, HRESULT)
-    get_transform_lookup : Proc(IXpsOMGlyphs*, LibC::LPWSTR*, HRESULT)
-    set_transform_lookup : Proc(IXpsOMGlyphs*, LibC::LPWSTR, HRESULT)
-    get_clip_geometry : Proc(IXpsOMGlyphs*, IXpsOMGeometry*, HRESULT)
-    get_clip_geometry_local : Proc(IXpsOMGlyphs*, IXpsOMGeometry*, HRESULT)
-    set_clip_geometry_local : Proc(IXpsOMGlyphs*, IXpsOMGeometry, HRESULT)
-    get_clip_geometry_lookup : Proc(IXpsOMGlyphs*, LibC::LPWSTR*, HRESULT)
-    set_clip_geometry_lookup : Proc(IXpsOMGlyphs*, LibC::LPWSTR, HRESULT)
-    get_opacity : Proc(IXpsOMGlyphs*, Float32*, HRESULT)
-    set_opacity : Proc(IXpsOMGlyphs*, Float32, HRESULT)
-    get_opacity_mask_brush : Proc(IXpsOMGlyphs*, IXpsOMBrush*, HRESULT)
-    get_opacity_mask_brush_local : Proc(IXpsOMGlyphs*, IXpsOMBrush*, HRESULT)
-    set_opacity_mask_brush_local : Proc(IXpsOMGlyphs*, IXpsOMBrush, HRESULT)
-    get_opacity_mask_brush_lookup : Proc(IXpsOMGlyphs*, LibC::LPWSTR*, HRESULT)
-    set_opacity_mask_brush_lookup : Proc(IXpsOMGlyphs*, LibC::LPWSTR, HRESULT)
-    get_name : Proc(IXpsOMGlyphs*, LibC::LPWSTR*, HRESULT)
-    set_name : Proc(IXpsOMGlyphs*, LibC::LPWSTR, HRESULT)
-    get_is_hyperlink_target : Proc(IXpsOMGlyphs*, LibC::BOOL*, HRESULT)
-    set_is_hyperlink_target : Proc(IXpsOMGlyphs*, LibC::BOOL, HRESULT)
-    get_hyperlink_navigate_uri : Proc(IXpsOMGlyphs*, IUri*, HRESULT)
-    set_hyperlink_navigate_uri : Proc(IXpsOMGlyphs*, IUri, HRESULT)
-    get_language : Proc(IXpsOMGlyphs*, LibC::LPWSTR*, HRESULT)
-    set_language : Proc(IXpsOMGlyphs*, LibC::LPWSTR, HRESULT)
-    get_unicode_string : Proc(IXpsOMGlyphs*, LibC::LPWSTR*, HRESULT)
-    get_glyph_index_count : Proc(IXpsOMGlyphs*, UInt32*, HRESULT)
-    get_glyph_indices : Proc(IXpsOMGlyphs*, UInt32*, XPS_GLYPH_INDEX*, HRESULT)
-    get_glyph_mapping_count : Proc(IXpsOMGlyphs*, UInt32*, HRESULT)
-    get_glyph_mappings : Proc(IXpsOMGlyphs*, UInt32*, XPS_GLYPH_MAPPING*, HRESULT)
-    get_prohibited_caret_stop_count : Proc(IXpsOMGlyphs*, UInt32*, HRESULT)
-    get_prohibited_caret_stops : Proc(IXpsOMGlyphs*, UInt32*, UInt32*, HRESULT)
-    get_bidi_level : Proc(IXpsOMGlyphs*, UInt32*, HRESULT)
-    get_is_sideways : Proc(IXpsOMGlyphs*, LibC::BOOL*, HRESULT)
-    get_device_font_name : Proc(IXpsOMGlyphs*, LibC::LPWSTR*, HRESULT)
-    get_style_simulations : Proc(IXpsOMGlyphs*, XPS_STYLE_SIMULATION*, HRESULT)
-    set_style_simulations : Proc(IXpsOMGlyphs*, XPS_STYLE_SIMULATION, HRESULT)
-    get_origin : Proc(IXpsOMGlyphs*, XPS_POINT*, HRESULT)
-    set_origin : Proc(IXpsOMGlyphs*, XPS_POINT*, HRESULT)
-    get_font_rendering_em_size : Proc(IXpsOMGlyphs*, Float32*, HRESULT)
-    set_font_rendering_em_size : Proc(IXpsOMGlyphs*, Float32, HRESULT)
-    get_font_resource : Proc(IXpsOMGlyphs*, IXpsOMFontResource*, HRESULT)
-    set_font_resource : Proc(IXpsOMGlyphs*, IXpsOMFontResource, HRESULT)
-    get_font_face_index : Proc(IXpsOMGlyphs*, Int16*, HRESULT)
-    set_font_face_index : Proc(IXpsOMGlyphs*, Int16, HRESULT)
-    get_fill_brush : Proc(IXpsOMGlyphs*, IXpsOMBrush*, HRESULT)
-    get_fill_brush_local : Proc(IXpsOMGlyphs*, IXpsOMBrush*, HRESULT)
-    set_fill_brush_local : Proc(IXpsOMGlyphs*, IXpsOMBrush, HRESULT)
-    get_fill_brush_lookup : Proc(IXpsOMGlyphs*, LibC::LPWSTR*, HRESULT)
-    set_fill_brush_lookup : Proc(IXpsOMGlyphs*, LibC::LPWSTR, HRESULT)
-    get_glyphs_editor : Proc(IXpsOMGlyphs*, IXpsOMGlyphsEditor*, HRESULT)
-    clone : Proc(IXpsOMGlyphs*, IXpsOMGlyphs*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_type : UInt64
+    get_transform : UInt64
+    get_transform_local : UInt64
+    set_transform_local : UInt64
+    get_transform_lookup : UInt64
+    set_transform_lookup : UInt64
+    get_clip_geometry : UInt64
+    get_clip_geometry_local : UInt64
+    set_clip_geometry_local : UInt64
+    get_clip_geometry_lookup : UInt64
+    set_clip_geometry_lookup : UInt64
+    get_opacity : UInt64
+    set_opacity : UInt64
+    get_opacity_mask_brush : UInt64
+    get_opacity_mask_brush_local : UInt64
+    set_opacity_mask_brush_local : UInt64
+    get_opacity_mask_brush_lookup : UInt64
+    set_opacity_mask_brush_lookup : UInt64
+    get_name : UInt64
+    set_name : UInt64
+    get_is_hyperlink_target : UInt64
+    set_is_hyperlink_target : UInt64
+    get_hyperlink_navigate_uri : UInt64
+    set_hyperlink_navigate_uri : UInt64
+    get_language : UInt64
+    set_language : UInt64
+    get_unicode_string : UInt64
+    get_glyph_index_count : UInt64
+    get_glyph_indices : UInt64
+    get_glyph_mapping_count : UInt64
+    get_glyph_mappings : UInt64
+    get_prohibited_caret_stop_count : UInt64
+    get_prohibited_caret_stops : UInt64
+    get_bidi_level : UInt64
+    get_is_sideways : UInt64
+    get_device_font_name : UInt64
+    get_style_simulations : UInt64
+    set_style_simulations : UInt64
+    get_origin : UInt64
+    set_origin : UInt64
+    get_font_rendering_em_size : UInt64
+    set_font_rendering_em_size : UInt64
+    get_font_resource : UInt64
+    set_font_resource : UInt64
+    get_font_face_index : UInt64
+    set_font_face_index : UInt64
+    get_fill_brush : UInt64
+    get_fill_brush_local : UInt64
+    set_fill_brush_local : UInt64
+    get_fill_brush_lookup : UInt64
+    set_fill_brush_lookup : UInt64
+    get_glyphs_editor : UInt64
+    clone : UInt64
   end
 
   IXpsOMGlyphs_GUID = "819b3199-0a5a-4b64-bec7-a9e17e780de2"
@@ -594,15 +594,15 @@ lib LibWin32
   end
 
   struct IXpsOMDashCollectionVTbl
-    query_interface : Proc(IXpsOMDashCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMDashCollection*, UInt32)
-    release : Proc(IXpsOMDashCollection*, UInt32)
-    get_count : Proc(IXpsOMDashCollection*, UInt32*, HRESULT)
-    get_at : Proc(IXpsOMDashCollection*, UInt32, XPS_DASH*, HRESULT)
-    insert_at : Proc(IXpsOMDashCollection*, UInt32, XPS_DASH*, HRESULT)
-    remove_at : Proc(IXpsOMDashCollection*, UInt32, HRESULT)
-    set_at : Proc(IXpsOMDashCollection*, UInt32, XPS_DASH*, HRESULT)
-    append : Proc(IXpsOMDashCollection*, XPS_DASH*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    insert_at : UInt64
+    remove_at : UInt64
+    set_at : UInt64
+    append : UInt64
   end
 
   IXpsOMDashCollection_GUID = "081613f4-74eb-48f2-83b3-37a9ce2d7dc6"
@@ -612,14 +612,14 @@ lib LibWin32
   end
 
   struct IXpsOMMatrixTransformVTbl
-    query_interface : Proc(IXpsOMMatrixTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMMatrixTransform*, UInt32)
-    release : Proc(IXpsOMMatrixTransform*, UInt32)
-    get_owner : Proc(IXpsOMMatrixTransform*, IUnknown*, HRESULT)
-    get_type : Proc(IXpsOMMatrixTransform*, XPS_OBJECT_TYPE*, HRESULT)
-    get_matrix : Proc(IXpsOMMatrixTransform*, XPS_MATRIX*, HRESULT)
-    set_matrix : Proc(IXpsOMMatrixTransform*, XPS_MATRIX*, HRESULT)
-    clone : Proc(IXpsOMMatrixTransform*, IXpsOMMatrixTransform*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_type : UInt64
+    get_matrix : UInt64
+    set_matrix : UInt64
+    clone : UInt64
   end
 
   IXpsOMMatrixTransform_GUID = "b77330ff-bb37-4501-a93e-f1b1e50bfc46"
@@ -629,20 +629,20 @@ lib LibWin32
   end
 
   struct IXpsOMGeometryVTbl
-    query_interface : Proc(IXpsOMGeometry*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMGeometry*, UInt32)
-    release : Proc(IXpsOMGeometry*, UInt32)
-    get_owner : Proc(IXpsOMGeometry*, IUnknown*, HRESULT)
-    get_type : Proc(IXpsOMGeometry*, XPS_OBJECT_TYPE*, HRESULT)
-    get_figures : Proc(IXpsOMGeometry*, IXpsOMGeometryFigureCollection*, HRESULT)
-    get_fill_rule : Proc(IXpsOMGeometry*, XPS_FILL_RULE*, HRESULT)
-    set_fill_rule : Proc(IXpsOMGeometry*, XPS_FILL_RULE, HRESULT)
-    get_transform : Proc(IXpsOMGeometry*, IXpsOMMatrixTransform*, HRESULT)
-    get_transform_local : Proc(IXpsOMGeometry*, IXpsOMMatrixTransform*, HRESULT)
-    set_transform_local : Proc(IXpsOMGeometry*, IXpsOMMatrixTransform, HRESULT)
-    get_transform_lookup : Proc(IXpsOMGeometry*, LibC::LPWSTR*, HRESULT)
-    set_transform_lookup : Proc(IXpsOMGeometry*, LibC::LPWSTR, HRESULT)
-    clone : Proc(IXpsOMGeometry*, IXpsOMGeometry*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_type : UInt64
+    get_figures : UInt64
+    get_fill_rule : UInt64
+    set_fill_rule : UInt64
+    get_transform : UInt64
+    get_transform_local : UInt64
+    set_transform_local : UInt64
+    get_transform_lookup : UInt64
+    set_transform_lookup : UInt64
+    clone : UInt64
   end
 
   IXpsOMGeometry_GUID = "64fcf3d7-4d58-44ba-ad73-a13af6492072"
@@ -652,24 +652,24 @@ lib LibWin32
   end
 
   struct IXpsOMGeometryFigureVTbl
-    query_interface : Proc(IXpsOMGeometryFigure*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMGeometryFigure*, UInt32)
-    release : Proc(IXpsOMGeometryFigure*, UInt32)
-    get_owner : Proc(IXpsOMGeometryFigure*, IXpsOMGeometry*, HRESULT)
-    get_segment_data : Proc(IXpsOMGeometryFigure*, UInt32*, Float32*, HRESULT)
-    get_segment_types : Proc(IXpsOMGeometryFigure*, UInt32*, XPS_SEGMENT_TYPE*, HRESULT)
-    get_segment_strokes : Proc(IXpsOMGeometryFigure*, UInt32*, LibC::BOOL*, HRESULT)
-    set_segments : Proc(IXpsOMGeometryFigure*, UInt32, UInt32, XPS_SEGMENT_TYPE*, Float32*, LibC::BOOL*, HRESULT)
-    get_start_point : Proc(IXpsOMGeometryFigure*, XPS_POINT*, HRESULT)
-    set_start_point : Proc(IXpsOMGeometryFigure*, XPS_POINT*, HRESULT)
-    get_is_closed : Proc(IXpsOMGeometryFigure*, LibC::BOOL*, HRESULT)
-    set_is_closed : Proc(IXpsOMGeometryFigure*, LibC::BOOL, HRESULT)
-    get_is_filled : Proc(IXpsOMGeometryFigure*, LibC::BOOL*, HRESULT)
-    set_is_filled : Proc(IXpsOMGeometryFigure*, LibC::BOOL, HRESULT)
-    get_segment_count : Proc(IXpsOMGeometryFigure*, UInt32*, HRESULT)
-    get_segment_data_count : Proc(IXpsOMGeometryFigure*, UInt32*, HRESULT)
-    get_segment_stroke_pattern : Proc(IXpsOMGeometryFigure*, XPS_SEGMENT_STROKE_PATTERN*, HRESULT)
-    clone : Proc(IXpsOMGeometryFigure*, IXpsOMGeometryFigure*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_segment_data : UInt64
+    get_segment_types : UInt64
+    get_segment_strokes : UInt64
+    set_segments : UInt64
+    get_start_point : UInt64
+    set_start_point : UInt64
+    get_is_closed : UInt64
+    set_is_closed : UInt64
+    get_is_filled : UInt64
+    set_is_filled : UInt64
+    get_segment_count : UInt64
+    get_segment_data_count : UInt64
+    get_segment_stroke_pattern : UInt64
+    clone : UInt64
   end
 
   IXpsOMGeometryFigure_GUID = "d410dc83-908c-443e-8947-b1795d3c165a"
@@ -679,15 +679,15 @@ lib LibWin32
   end
 
   struct IXpsOMGeometryFigureCollectionVTbl
-    query_interface : Proc(IXpsOMGeometryFigureCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMGeometryFigureCollection*, UInt32)
-    release : Proc(IXpsOMGeometryFigureCollection*, UInt32)
-    get_count : Proc(IXpsOMGeometryFigureCollection*, UInt32*, HRESULT)
-    get_at : Proc(IXpsOMGeometryFigureCollection*, UInt32, IXpsOMGeometryFigure*, HRESULT)
-    insert_at : Proc(IXpsOMGeometryFigureCollection*, UInt32, IXpsOMGeometryFigure, HRESULT)
-    remove_at : Proc(IXpsOMGeometryFigureCollection*, UInt32, HRESULT)
-    set_at : Proc(IXpsOMGeometryFigureCollection*, UInt32, IXpsOMGeometryFigure, HRESULT)
-    append : Proc(IXpsOMGeometryFigureCollection*, IXpsOMGeometryFigure, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    insert_at : UInt64
+    remove_at : UInt64
+    set_at : UInt64
+    append : UInt64
   end
 
   IXpsOMGeometryFigureCollection_GUID = "fd48c3f3-a58e-4b5a-8826-1de54abe72b2"
@@ -697,73 +697,73 @@ lib LibWin32
   end
 
   struct IXpsOMPathVTbl
-    query_interface : Proc(IXpsOMPath*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMPath*, UInt32)
-    release : Proc(IXpsOMPath*, UInt32)
-    get_owner : Proc(IXpsOMPath*, IUnknown*, HRESULT)
-    get_type : Proc(IXpsOMPath*, XPS_OBJECT_TYPE*, HRESULT)
-    get_transform : Proc(IXpsOMPath*, IXpsOMMatrixTransform*, HRESULT)
-    get_transform_local : Proc(IXpsOMPath*, IXpsOMMatrixTransform*, HRESULT)
-    set_transform_local : Proc(IXpsOMPath*, IXpsOMMatrixTransform, HRESULT)
-    get_transform_lookup : Proc(IXpsOMPath*, LibC::LPWSTR*, HRESULT)
-    set_transform_lookup : Proc(IXpsOMPath*, LibC::LPWSTR, HRESULT)
-    get_clip_geometry : Proc(IXpsOMPath*, IXpsOMGeometry*, HRESULT)
-    get_clip_geometry_local : Proc(IXpsOMPath*, IXpsOMGeometry*, HRESULT)
-    set_clip_geometry_local : Proc(IXpsOMPath*, IXpsOMGeometry, HRESULT)
-    get_clip_geometry_lookup : Proc(IXpsOMPath*, LibC::LPWSTR*, HRESULT)
-    set_clip_geometry_lookup : Proc(IXpsOMPath*, LibC::LPWSTR, HRESULT)
-    get_opacity : Proc(IXpsOMPath*, Float32*, HRESULT)
-    set_opacity : Proc(IXpsOMPath*, Float32, HRESULT)
-    get_opacity_mask_brush : Proc(IXpsOMPath*, IXpsOMBrush*, HRESULT)
-    get_opacity_mask_brush_local : Proc(IXpsOMPath*, IXpsOMBrush*, HRESULT)
-    set_opacity_mask_brush_local : Proc(IXpsOMPath*, IXpsOMBrush, HRESULT)
-    get_opacity_mask_brush_lookup : Proc(IXpsOMPath*, LibC::LPWSTR*, HRESULT)
-    set_opacity_mask_brush_lookup : Proc(IXpsOMPath*, LibC::LPWSTR, HRESULT)
-    get_name : Proc(IXpsOMPath*, LibC::LPWSTR*, HRESULT)
-    set_name : Proc(IXpsOMPath*, LibC::LPWSTR, HRESULT)
-    get_is_hyperlink_target : Proc(IXpsOMPath*, LibC::BOOL*, HRESULT)
-    set_is_hyperlink_target : Proc(IXpsOMPath*, LibC::BOOL, HRESULT)
-    get_hyperlink_navigate_uri : Proc(IXpsOMPath*, IUri*, HRESULT)
-    set_hyperlink_navigate_uri : Proc(IXpsOMPath*, IUri, HRESULT)
-    get_language : Proc(IXpsOMPath*, LibC::LPWSTR*, HRESULT)
-    set_language : Proc(IXpsOMPath*, LibC::LPWSTR, HRESULT)
-    get_geometry : Proc(IXpsOMPath*, IXpsOMGeometry*, HRESULT)
-    get_geometry_local : Proc(IXpsOMPath*, IXpsOMGeometry*, HRESULT)
-    set_geometry_local : Proc(IXpsOMPath*, IXpsOMGeometry, HRESULT)
-    get_geometry_lookup : Proc(IXpsOMPath*, LibC::LPWSTR*, HRESULT)
-    set_geometry_lookup : Proc(IXpsOMPath*, LibC::LPWSTR, HRESULT)
-    get_accessibility_short_description : Proc(IXpsOMPath*, LibC::LPWSTR*, HRESULT)
-    set_accessibility_short_description : Proc(IXpsOMPath*, LibC::LPWSTR, HRESULT)
-    get_accessibility_long_description : Proc(IXpsOMPath*, LibC::LPWSTR*, HRESULT)
-    set_accessibility_long_description : Proc(IXpsOMPath*, LibC::LPWSTR, HRESULT)
-    get_snaps_to_pixels : Proc(IXpsOMPath*, LibC::BOOL*, HRESULT)
-    set_snaps_to_pixels : Proc(IXpsOMPath*, LibC::BOOL, HRESULT)
-    get_stroke_brush : Proc(IXpsOMPath*, IXpsOMBrush*, HRESULT)
-    get_stroke_brush_local : Proc(IXpsOMPath*, IXpsOMBrush*, HRESULT)
-    set_stroke_brush_local : Proc(IXpsOMPath*, IXpsOMBrush, HRESULT)
-    get_stroke_brush_lookup : Proc(IXpsOMPath*, LibC::LPWSTR*, HRESULT)
-    set_stroke_brush_lookup : Proc(IXpsOMPath*, LibC::LPWSTR, HRESULT)
-    get_stroke_dashes : Proc(IXpsOMPath*, IXpsOMDashCollection*, HRESULT)
-    get_stroke_dash_cap : Proc(IXpsOMPath*, XPS_DASH_CAP*, HRESULT)
-    set_stroke_dash_cap : Proc(IXpsOMPath*, XPS_DASH_CAP, HRESULT)
-    get_stroke_dash_offset : Proc(IXpsOMPath*, Float32*, HRESULT)
-    set_stroke_dash_offset : Proc(IXpsOMPath*, Float32, HRESULT)
-    get_stroke_start_line_cap : Proc(IXpsOMPath*, XPS_LINE_CAP*, HRESULT)
-    set_stroke_start_line_cap : Proc(IXpsOMPath*, XPS_LINE_CAP, HRESULT)
-    get_stroke_end_line_cap : Proc(IXpsOMPath*, XPS_LINE_CAP*, HRESULT)
-    set_stroke_end_line_cap : Proc(IXpsOMPath*, XPS_LINE_CAP, HRESULT)
-    get_stroke_line_join : Proc(IXpsOMPath*, XPS_LINE_JOIN*, HRESULT)
-    set_stroke_line_join : Proc(IXpsOMPath*, XPS_LINE_JOIN, HRESULT)
-    get_stroke_miter_limit : Proc(IXpsOMPath*, Float32*, HRESULT)
-    set_stroke_miter_limit : Proc(IXpsOMPath*, Float32, HRESULT)
-    get_stroke_thickness : Proc(IXpsOMPath*, Float32*, HRESULT)
-    set_stroke_thickness : Proc(IXpsOMPath*, Float32, HRESULT)
-    get_fill_brush : Proc(IXpsOMPath*, IXpsOMBrush*, HRESULT)
-    get_fill_brush_local : Proc(IXpsOMPath*, IXpsOMBrush*, HRESULT)
-    set_fill_brush_local : Proc(IXpsOMPath*, IXpsOMBrush, HRESULT)
-    get_fill_brush_lookup : Proc(IXpsOMPath*, LibC::LPWSTR*, HRESULT)
-    set_fill_brush_lookup : Proc(IXpsOMPath*, LibC::LPWSTR, HRESULT)
-    clone : Proc(IXpsOMPath*, IXpsOMPath*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_type : UInt64
+    get_transform : UInt64
+    get_transform_local : UInt64
+    set_transform_local : UInt64
+    get_transform_lookup : UInt64
+    set_transform_lookup : UInt64
+    get_clip_geometry : UInt64
+    get_clip_geometry_local : UInt64
+    set_clip_geometry_local : UInt64
+    get_clip_geometry_lookup : UInt64
+    set_clip_geometry_lookup : UInt64
+    get_opacity : UInt64
+    set_opacity : UInt64
+    get_opacity_mask_brush : UInt64
+    get_opacity_mask_brush_local : UInt64
+    set_opacity_mask_brush_local : UInt64
+    get_opacity_mask_brush_lookup : UInt64
+    set_opacity_mask_brush_lookup : UInt64
+    get_name : UInt64
+    set_name : UInt64
+    get_is_hyperlink_target : UInt64
+    set_is_hyperlink_target : UInt64
+    get_hyperlink_navigate_uri : UInt64
+    set_hyperlink_navigate_uri : UInt64
+    get_language : UInt64
+    set_language : UInt64
+    get_geometry : UInt64
+    get_geometry_local : UInt64
+    set_geometry_local : UInt64
+    get_geometry_lookup : UInt64
+    set_geometry_lookup : UInt64
+    get_accessibility_short_description : UInt64
+    set_accessibility_short_description : UInt64
+    get_accessibility_long_description : UInt64
+    set_accessibility_long_description : UInt64
+    get_snaps_to_pixels : UInt64
+    set_snaps_to_pixels : UInt64
+    get_stroke_brush : UInt64
+    get_stroke_brush_local : UInt64
+    set_stroke_brush_local : UInt64
+    get_stroke_brush_lookup : UInt64
+    set_stroke_brush_lookup : UInt64
+    get_stroke_dashes : UInt64
+    get_stroke_dash_cap : UInt64
+    set_stroke_dash_cap : UInt64
+    get_stroke_dash_offset : UInt64
+    set_stroke_dash_offset : UInt64
+    get_stroke_start_line_cap : UInt64
+    set_stroke_start_line_cap : UInt64
+    get_stroke_end_line_cap : UInt64
+    set_stroke_end_line_cap : UInt64
+    get_stroke_line_join : UInt64
+    set_stroke_line_join : UInt64
+    get_stroke_miter_limit : UInt64
+    set_stroke_miter_limit : UInt64
+    get_stroke_thickness : UInt64
+    set_stroke_thickness : UInt64
+    get_fill_brush : UInt64
+    get_fill_brush_local : UInt64
+    set_fill_brush_local : UInt64
+    get_fill_brush_lookup : UInt64
+    set_fill_brush_lookup : UInt64
+    clone : UInt64
   end
 
   IXpsOMPath_GUID = "37d38bb6-3ee9-4110-9312-14b194163337"
@@ -773,13 +773,13 @@ lib LibWin32
   end
 
   struct IXpsOMBrushVTbl
-    query_interface : Proc(IXpsOMBrush*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMBrush*, UInt32)
-    release : Proc(IXpsOMBrush*, UInt32)
-    get_owner : Proc(IXpsOMBrush*, IUnknown*, HRESULT)
-    get_type : Proc(IXpsOMBrush*, XPS_OBJECT_TYPE*, HRESULT)
-    get_opacity : Proc(IXpsOMBrush*, Float32*, HRESULT)
-    set_opacity : Proc(IXpsOMBrush*, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_type : UInt64
+    get_opacity : UInt64
+    set_opacity : UInt64
   end
 
   IXpsOMBrush_GUID = "56a3f80c-ea4c-4187-a57b-a2a473b2b42b"
@@ -789,15 +789,15 @@ lib LibWin32
   end
 
   struct IXpsOMGradientStopCollectionVTbl
-    query_interface : Proc(IXpsOMGradientStopCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMGradientStopCollection*, UInt32)
-    release : Proc(IXpsOMGradientStopCollection*, UInt32)
-    get_count : Proc(IXpsOMGradientStopCollection*, UInt32*, HRESULT)
-    get_at : Proc(IXpsOMGradientStopCollection*, UInt32, IXpsOMGradientStop*, HRESULT)
-    insert_at : Proc(IXpsOMGradientStopCollection*, UInt32, IXpsOMGradientStop, HRESULT)
-    remove_at : Proc(IXpsOMGradientStopCollection*, UInt32, HRESULT)
-    set_at : Proc(IXpsOMGradientStopCollection*, UInt32, IXpsOMGradientStop, HRESULT)
-    append : Proc(IXpsOMGradientStopCollection*, IXpsOMGradientStop, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    insert_at : UInt64
+    remove_at : UInt64
+    set_at : UInt64
+    append : UInt64
   end
 
   IXpsOMGradientStopCollection_GUID = "c9174c3a-3cd3-4319-bda4-11a39392ceef"
@@ -807,16 +807,16 @@ lib LibWin32
   end
 
   struct IXpsOMSolidColorBrushVTbl
-    query_interface : Proc(IXpsOMSolidColorBrush*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMSolidColorBrush*, UInt32)
-    release : Proc(IXpsOMSolidColorBrush*, UInt32)
-    get_owner : Proc(IXpsOMSolidColorBrush*, IUnknown*, HRESULT)
-    get_type : Proc(IXpsOMSolidColorBrush*, XPS_OBJECT_TYPE*, HRESULT)
-    get_opacity : Proc(IXpsOMSolidColorBrush*, Float32*, HRESULT)
-    set_opacity : Proc(IXpsOMSolidColorBrush*, Float32, HRESULT)
-    get_color : Proc(IXpsOMSolidColorBrush*, XPS_COLOR*, IXpsOMColorProfileResource*, HRESULT)
-    set_color : Proc(IXpsOMSolidColorBrush*, XPS_COLOR*, IXpsOMColorProfileResource, HRESULT)
-    clone : Proc(IXpsOMSolidColorBrush*, IXpsOMSolidColorBrush*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_type : UInt64
+    get_opacity : UInt64
+    set_opacity : UInt64
+    get_color : UInt64
+    set_color : UInt64
+    clone : UInt64
   end
 
   IXpsOMSolidColorBrush_GUID = "a06f9f05-3be9-4763-98a8-094fc672e488"
@@ -826,24 +826,24 @@ lib LibWin32
   end
 
   struct IXpsOMTileBrushVTbl
-    query_interface : Proc(IXpsOMTileBrush*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMTileBrush*, UInt32)
-    release : Proc(IXpsOMTileBrush*, UInt32)
-    get_owner : Proc(IXpsOMTileBrush*, IUnknown*, HRESULT)
-    get_type : Proc(IXpsOMTileBrush*, XPS_OBJECT_TYPE*, HRESULT)
-    get_opacity : Proc(IXpsOMTileBrush*, Float32*, HRESULT)
-    set_opacity : Proc(IXpsOMTileBrush*, Float32, HRESULT)
-    get_transform : Proc(IXpsOMTileBrush*, IXpsOMMatrixTransform*, HRESULT)
-    get_transform_local : Proc(IXpsOMTileBrush*, IXpsOMMatrixTransform*, HRESULT)
-    set_transform_local : Proc(IXpsOMTileBrush*, IXpsOMMatrixTransform, HRESULT)
-    get_transform_lookup : Proc(IXpsOMTileBrush*, LibC::LPWSTR*, HRESULT)
-    set_transform_lookup : Proc(IXpsOMTileBrush*, LibC::LPWSTR, HRESULT)
-    get_viewbox : Proc(IXpsOMTileBrush*, XPS_RECT*, HRESULT)
-    set_viewbox : Proc(IXpsOMTileBrush*, XPS_RECT*, HRESULT)
-    get_viewport : Proc(IXpsOMTileBrush*, XPS_RECT*, HRESULT)
-    set_viewport : Proc(IXpsOMTileBrush*, XPS_RECT*, HRESULT)
-    get_tile_mode : Proc(IXpsOMTileBrush*, XPS_TILE_MODE*, HRESULT)
-    set_tile_mode : Proc(IXpsOMTileBrush*, XPS_TILE_MODE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_type : UInt64
+    get_opacity : UInt64
+    set_opacity : UInt64
+    get_transform : UInt64
+    get_transform_local : UInt64
+    set_transform_local : UInt64
+    get_transform_lookup : UInt64
+    set_transform_lookup : UInt64
+    get_viewbox : UInt64
+    set_viewbox : UInt64
+    get_viewport : UInt64
+    set_viewport : UInt64
+    get_tile_mode : UInt64
+    set_tile_mode : UInt64
   end
 
   IXpsOMTileBrush_GUID = "0fc2328d-d722-4a54-b2ec-be90218a789e"
@@ -853,30 +853,30 @@ lib LibWin32
   end
 
   struct IXpsOMVisualBrushVTbl
-    query_interface : Proc(IXpsOMVisualBrush*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMVisualBrush*, UInt32)
-    release : Proc(IXpsOMVisualBrush*, UInt32)
-    get_owner : Proc(IXpsOMVisualBrush*, IUnknown*, HRESULT)
-    get_type : Proc(IXpsOMVisualBrush*, XPS_OBJECT_TYPE*, HRESULT)
-    get_opacity : Proc(IXpsOMVisualBrush*, Float32*, HRESULT)
-    set_opacity : Proc(IXpsOMVisualBrush*, Float32, HRESULT)
-    get_transform : Proc(IXpsOMVisualBrush*, IXpsOMMatrixTransform*, HRESULT)
-    get_transform_local : Proc(IXpsOMVisualBrush*, IXpsOMMatrixTransform*, HRESULT)
-    set_transform_local : Proc(IXpsOMVisualBrush*, IXpsOMMatrixTransform, HRESULT)
-    get_transform_lookup : Proc(IXpsOMVisualBrush*, LibC::LPWSTR*, HRESULT)
-    set_transform_lookup : Proc(IXpsOMVisualBrush*, LibC::LPWSTR, HRESULT)
-    get_viewbox : Proc(IXpsOMVisualBrush*, XPS_RECT*, HRESULT)
-    set_viewbox : Proc(IXpsOMVisualBrush*, XPS_RECT*, HRESULT)
-    get_viewport : Proc(IXpsOMVisualBrush*, XPS_RECT*, HRESULT)
-    set_viewport : Proc(IXpsOMVisualBrush*, XPS_RECT*, HRESULT)
-    get_tile_mode : Proc(IXpsOMVisualBrush*, XPS_TILE_MODE*, HRESULT)
-    set_tile_mode : Proc(IXpsOMVisualBrush*, XPS_TILE_MODE, HRESULT)
-    get_visual : Proc(IXpsOMVisualBrush*, IXpsOMVisual*, HRESULT)
-    get_visual_local : Proc(IXpsOMVisualBrush*, IXpsOMVisual*, HRESULT)
-    set_visual_local : Proc(IXpsOMVisualBrush*, IXpsOMVisual, HRESULT)
-    get_visual_lookup : Proc(IXpsOMVisualBrush*, LibC::LPWSTR*, HRESULT)
-    set_visual_lookup : Proc(IXpsOMVisualBrush*, LibC::LPWSTR, HRESULT)
-    clone : Proc(IXpsOMVisualBrush*, IXpsOMVisualBrush*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_type : UInt64
+    get_opacity : UInt64
+    set_opacity : UInt64
+    get_transform : UInt64
+    get_transform_local : UInt64
+    set_transform_local : UInt64
+    get_transform_lookup : UInt64
+    set_transform_lookup : UInt64
+    get_viewbox : UInt64
+    set_viewbox : UInt64
+    get_viewport : UInt64
+    set_viewport : UInt64
+    get_tile_mode : UInt64
+    set_tile_mode : UInt64
+    get_visual : UInt64
+    get_visual_local : UInt64
+    set_visual_local : UInt64
+    get_visual_lookup : UInt64
+    set_visual_lookup : UInt64
+    clone : UInt64
   end
 
   IXpsOMVisualBrush_GUID = "97e294af-5b37-46b4-8057-874d2f64119b"
@@ -886,29 +886,29 @@ lib LibWin32
   end
 
   struct IXpsOMImageBrushVTbl
-    query_interface : Proc(IXpsOMImageBrush*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMImageBrush*, UInt32)
-    release : Proc(IXpsOMImageBrush*, UInt32)
-    get_owner : Proc(IXpsOMImageBrush*, IUnknown*, HRESULT)
-    get_type : Proc(IXpsOMImageBrush*, XPS_OBJECT_TYPE*, HRESULT)
-    get_opacity : Proc(IXpsOMImageBrush*, Float32*, HRESULT)
-    set_opacity : Proc(IXpsOMImageBrush*, Float32, HRESULT)
-    get_transform : Proc(IXpsOMImageBrush*, IXpsOMMatrixTransform*, HRESULT)
-    get_transform_local : Proc(IXpsOMImageBrush*, IXpsOMMatrixTransform*, HRESULT)
-    set_transform_local : Proc(IXpsOMImageBrush*, IXpsOMMatrixTransform, HRESULT)
-    get_transform_lookup : Proc(IXpsOMImageBrush*, LibC::LPWSTR*, HRESULT)
-    set_transform_lookup : Proc(IXpsOMImageBrush*, LibC::LPWSTR, HRESULT)
-    get_viewbox : Proc(IXpsOMImageBrush*, XPS_RECT*, HRESULT)
-    set_viewbox : Proc(IXpsOMImageBrush*, XPS_RECT*, HRESULT)
-    get_viewport : Proc(IXpsOMImageBrush*, XPS_RECT*, HRESULT)
-    set_viewport : Proc(IXpsOMImageBrush*, XPS_RECT*, HRESULT)
-    get_tile_mode : Proc(IXpsOMImageBrush*, XPS_TILE_MODE*, HRESULT)
-    set_tile_mode : Proc(IXpsOMImageBrush*, XPS_TILE_MODE, HRESULT)
-    get_image_resource : Proc(IXpsOMImageBrush*, IXpsOMImageResource*, HRESULT)
-    set_image_resource : Proc(IXpsOMImageBrush*, IXpsOMImageResource, HRESULT)
-    get_color_profile_resource : Proc(IXpsOMImageBrush*, IXpsOMColorProfileResource*, HRESULT)
-    set_color_profile_resource : Proc(IXpsOMImageBrush*, IXpsOMColorProfileResource, HRESULT)
-    clone : Proc(IXpsOMImageBrush*, IXpsOMImageBrush*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_type : UInt64
+    get_opacity : UInt64
+    set_opacity : UInt64
+    get_transform : UInt64
+    get_transform_local : UInt64
+    set_transform_local : UInt64
+    get_transform_lookup : UInt64
+    set_transform_lookup : UInt64
+    get_viewbox : UInt64
+    set_viewbox : UInt64
+    get_viewport : UInt64
+    set_viewport : UInt64
+    get_tile_mode : UInt64
+    set_tile_mode : UInt64
+    get_image_resource : UInt64
+    set_image_resource : UInt64
+    get_color_profile_resource : UInt64
+    set_color_profile_resource : UInt64
+    clone : UInt64
   end
 
   IXpsOMImageBrush_GUID = "3df0b466-d382-49ef-8550-dd94c80242e4"
@@ -918,15 +918,15 @@ lib LibWin32
   end
 
   struct IXpsOMGradientStopVTbl
-    query_interface : Proc(IXpsOMGradientStop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMGradientStop*, UInt32)
-    release : Proc(IXpsOMGradientStop*, UInt32)
-    get_owner : Proc(IXpsOMGradientStop*, IXpsOMGradientBrush*, HRESULT)
-    get_offset : Proc(IXpsOMGradientStop*, Float32*, HRESULT)
-    set_offset : Proc(IXpsOMGradientStop*, Float32, HRESULT)
-    get_color : Proc(IXpsOMGradientStop*, XPS_COLOR*, IXpsOMColorProfileResource*, HRESULT)
-    set_color : Proc(IXpsOMGradientStop*, XPS_COLOR*, IXpsOMColorProfileResource, HRESULT)
-    clone : Proc(IXpsOMGradientStop*, IXpsOMGradientStop*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_offset : UInt64
+    set_offset : UInt64
+    get_color : UInt64
+    set_color : UInt64
+    clone : UInt64
   end
 
   IXpsOMGradientStop_GUID = "5cf4f5cc-3969-49b5-a70a-5550b618fe49"
@@ -936,23 +936,23 @@ lib LibWin32
   end
 
   struct IXpsOMGradientBrushVTbl
-    query_interface : Proc(IXpsOMGradientBrush*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMGradientBrush*, UInt32)
-    release : Proc(IXpsOMGradientBrush*, UInt32)
-    get_owner : Proc(IXpsOMGradientBrush*, IUnknown*, HRESULT)
-    get_type : Proc(IXpsOMGradientBrush*, XPS_OBJECT_TYPE*, HRESULT)
-    get_opacity : Proc(IXpsOMGradientBrush*, Float32*, HRESULT)
-    set_opacity : Proc(IXpsOMGradientBrush*, Float32, HRESULT)
-    get_gradient_stops : Proc(IXpsOMGradientBrush*, IXpsOMGradientStopCollection*, HRESULT)
-    get_transform : Proc(IXpsOMGradientBrush*, IXpsOMMatrixTransform*, HRESULT)
-    get_transform_local : Proc(IXpsOMGradientBrush*, IXpsOMMatrixTransform*, HRESULT)
-    set_transform_local : Proc(IXpsOMGradientBrush*, IXpsOMMatrixTransform, HRESULT)
-    get_transform_lookup : Proc(IXpsOMGradientBrush*, LibC::LPWSTR*, HRESULT)
-    set_transform_lookup : Proc(IXpsOMGradientBrush*, LibC::LPWSTR, HRESULT)
-    get_spread_method : Proc(IXpsOMGradientBrush*, XPS_SPREAD_METHOD*, HRESULT)
-    set_spread_method : Proc(IXpsOMGradientBrush*, XPS_SPREAD_METHOD, HRESULT)
-    get_color_interpolation_mode : Proc(IXpsOMGradientBrush*, XPS_COLOR_INTERPOLATION*, HRESULT)
-    set_color_interpolation_mode : Proc(IXpsOMGradientBrush*, XPS_COLOR_INTERPOLATION, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_type : UInt64
+    get_opacity : UInt64
+    set_opacity : UInt64
+    get_gradient_stops : UInt64
+    get_transform : UInt64
+    get_transform_local : UInt64
+    set_transform_local : UInt64
+    get_transform_lookup : UInt64
+    set_transform_lookup : UInt64
+    get_spread_method : UInt64
+    set_spread_method : UInt64
+    get_color_interpolation_mode : UInt64
+    set_color_interpolation_mode : UInt64
   end
 
   IXpsOMGradientBrush_GUID = "edb59622-61a2-42c3-bace-acf2286c06bf"
@@ -962,28 +962,28 @@ lib LibWin32
   end
 
   struct IXpsOMLinearGradientBrushVTbl
-    query_interface : Proc(IXpsOMLinearGradientBrush*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMLinearGradientBrush*, UInt32)
-    release : Proc(IXpsOMLinearGradientBrush*, UInt32)
-    get_owner : Proc(IXpsOMLinearGradientBrush*, IUnknown*, HRESULT)
-    get_type : Proc(IXpsOMLinearGradientBrush*, XPS_OBJECT_TYPE*, HRESULT)
-    get_opacity : Proc(IXpsOMLinearGradientBrush*, Float32*, HRESULT)
-    set_opacity : Proc(IXpsOMLinearGradientBrush*, Float32, HRESULT)
-    get_gradient_stops : Proc(IXpsOMLinearGradientBrush*, IXpsOMGradientStopCollection*, HRESULT)
-    get_transform : Proc(IXpsOMLinearGradientBrush*, IXpsOMMatrixTransform*, HRESULT)
-    get_transform_local : Proc(IXpsOMLinearGradientBrush*, IXpsOMMatrixTransform*, HRESULT)
-    set_transform_local : Proc(IXpsOMLinearGradientBrush*, IXpsOMMatrixTransform, HRESULT)
-    get_transform_lookup : Proc(IXpsOMLinearGradientBrush*, LibC::LPWSTR*, HRESULT)
-    set_transform_lookup : Proc(IXpsOMLinearGradientBrush*, LibC::LPWSTR, HRESULT)
-    get_spread_method : Proc(IXpsOMLinearGradientBrush*, XPS_SPREAD_METHOD*, HRESULT)
-    set_spread_method : Proc(IXpsOMLinearGradientBrush*, XPS_SPREAD_METHOD, HRESULT)
-    get_color_interpolation_mode : Proc(IXpsOMLinearGradientBrush*, XPS_COLOR_INTERPOLATION*, HRESULT)
-    set_color_interpolation_mode : Proc(IXpsOMLinearGradientBrush*, XPS_COLOR_INTERPOLATION, HRESULT)
-    get_start_point : Proc(IXpsOMLinearGradientBrush*, XPS_POINT*, HRESULT)
-    set_start_point : Proc(IXpsOMLinearGradientBrush*, XPS_POINT*, HRESULT)
-    get_end_point : Proc(IXpsOMLinearGradientBrush*, XPS_POINT*, HRESULT)
-    set_end_point : Proc(IXpsOMLinearGradientBrush*, XPS_POINT*, HRESULT)
-    clone : Proc(IXpsOMLinearGradientBrush*, IXpsOMLinearGradientBrush*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_type : UInt64
+    get_opacity : UInt64
+    set_opacity : UInt64
+    get_gradient_stops : UInt64
+    get_transform : UInt64
+    get_transform_local : UInt64
+    set_transform_local : UInt64
+    get_transform_lookup : UInt64
+    set_transform_lookup : UInt64
+    get_spread_method : UInt64
+    set_spread_method : UInt64
+    get_color_interpolation_mode : UInt64
+    set_color_interpolation_mode : UInt64
+    get_start_point : UInt64
+    set_start_point : UInt64
+    get_end_point : UInt64
+    set_end_point : UInt64
+    clone : UInt64
   end
 
   IXpsOMLinearGradientBrush_GUID = "005e279f-c30d-40ff-93ec-1950d3c528db"
@@ -993,30 +993,30 @@ lib LibWin32
   end
 
   struct IXpsOMRadialGradientBrushVTbl
-    query_interface : Proc(IXpsOMRadialGradientBrush*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMRadialGradientBrush*, UInt32)
-    release : Proc(IXpsOMRadialGradientBrush*, UInt32)
-    get_owner : Proc(IXpsOMRadialGradientBrush*, IUnknown*, HRESULT)
-    get_type : Proc(IXpsOMRadialGradientBrush*, XPS_OBJECT_TYPE*, HRESULT)
-    get_opacity : Proc(IXpsOMRadialGradientBrush*, Float32*, HRESULT)
-    set_opacity : Proc(IXpsOMRadialGradientBrush*, Float32, HRESULT)
-    get_gradient_stops : Proc(IXpsOMRadialGradientBrush*, IXpsOMGradientStopCollection*, HRESULT)
-    get_transform : Proc(IXpsOMRadialGradientBrush*, IXpsOMMatrixTransform*, HRESULT)
-    get_transform_local : Proc(IXpsOMRadialGradientBrush*, IXpsOMMatrixTransform*, HRESULT)
-    set_transform_local : Proc(IXpsOMRadialGradientBrush*, IXpsOMMatrixTransform, HRESULT)
-    get_transform_lookup : Proc(IXpsOMRadialGradientBrush*, LibC::LPWSTR*, HRESULT)
-    set_transform_lookup : Proc(IXpsOMRadialGradientBrush*, LibC::LPWSTR, HRESULT)
-    get_spread_method : Proc(IXpsOMRadialGradientBrush*, XPS_SPREAD_METHOD*, HRESULT)
-    set_spread_method : Proc(IXpsOMRadialGradientBrush*, XPS_SPREAD_METHOD, HRESULT)
-    get_color_interpolation_mode : Proc(IXpsOMRadialGradientBrush*, XPS_COLOR_INTERPOLATION*, HRESULT)
-    set_color_interpolation_mode : Proc(IXpsOMRadialGradientBrush*, XPS_COLOR_INTERPOLATION, HRESULT)
-    get_center : Proc(IXpsOMRadialGradientBrush*, XPS_POINT*, HRESULT)
-    set_center : Proc(IXpsOMRadialGradientBrush*, XPS_POINT*, HRESULT)
-    get_radii_sizes : Proc(IXpsOMRadialGradientBrush*, XPS_SIZE*, HRESULT)
-    set_radii_sizes : Proc(IXpsOMRadialGradientBrush*, XPS_SIZE*, HRESULT)
-    get_gradient_origin : Proc(IXpsOMRadialGradientBrush*, XPS_POINT*, HRESULT)
-    set_gradient_origin : Proc(IXpsOMRadialGradientBrush*, XPS_POINT*, HRESULT)
-    clone : Proc(IXpsOMRadialGradientBrush*, IXpsOMRadialGradientBrush*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_type : UInt64
+    get_opacity : UInt64
+    set_opacity : UInt64
+    get_gradient_stops : UInt64
+    get_transform : UInt64
+    get_transform_local : UInt64
+    set_transform_local : UInt64
+    get_transform_lookup : UInt64
+    set_transform_lookup : UInt64
+    get_spread_method : UInt64
+    set_spread_method : UInt64
+    get_color_interpolation_mode : UInt64
+    set_color_interpolation_mode : UInt64
+    get_center : UInt64
+    set_center : UInt64
+    get_radii_sizes : UInt64
+    set_radii_sizes : UInt64
+    get_gradient_origin : UInt64
+    set_gradient_origin : UInt64
+    clone : UInt64
   end
 
   IXpsOMRadialGradientBrush_GUID = "75f207e5-08bf-413c-96b1-b82b4064176b"
@@ -1026,11 +1026,11 @@ lib LibWin32
   end
 
   struct IXpsOMResourceVTbl
-    query_interface : Proc(IXpsOMResource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMResource*, UInt32)
-    release : Proc(IXpsOMResource*, UInt32)
-    get_part_name : Proc(IXpsOMResource*, IOpcPartUri*, HRESULT)
-    set_part_name : Proc(IXpsOMResource*, IOpcPartUri, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_part_name : UInt64
+    set_part_name : UInt64
   end
 
   IXpsOMResource_GUID = "da2ac0a2-73a2-4975-ad14-74097c3ff3a5"
@@ -1040,13 +1040,13 @@ lib LibWin32
   end
 
   struct IXpsOMPartResourcesVTbl
-    query_interface : Proc(IXpsOMPartResources*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMPartResources*, UInt32)
-    release : Proc(IXpsOMPartResources*, UInt32)
-    get_font_resources : Proc(IXpsOMPartResources*, IXpsOMFontResourceCollection*, HRESULT)
-    get_image_resources : Proc(IXpsOMPartResources*, IXpsOMImageResourceCollection*, HRESULT)
-    get_color_profile_resources : Proc(IXpsOMPartResources*, IXpsOMColorProfileResourceCollection*, HRESULT)
-    get_remote_dictionary_resources : Proc(IXpsOMPartResources*, IXpsOMRemoteDictionaryResourceCollection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_font_resources : UInt64
+    get_image_resources : UInt64
+    get_color_profile_resources : UInt64
+    get_remote_dictionary_resources : UInt64
   end
 
   IXpsOMPartResources_GUID = "f4cf7729-4864-4275-99b3-a8717163ecaf"
@@ -1056,19 +1056,19 @@ lib LibWin32
   end
 
   struct IXpsOMDictionaryVTbl
-    query_interface : Proc(IXpsOMDictionary*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMDictionary*, UInt32)
-    release : Proc(IXpsOMDictionary*, UInt32)
-    get_owner : Proc(IXpsOMDictionary*, IUnknown*, HRESULT)
-    get_count : Proc(IXpsOMDictionary*, UInt32*, HRESULT)
-    get_at : Proc(IXpsOMDictionary*, UInt32, LibC::LPWSTR*, IXpsOMShareable*, HRESULT)
-    get_by_key : Proc(IXpsOMDictionary*, LibC::LPWSTR, IXpsOMShareable, IXpsOMShareable*, HRESULT)
-    get_index : Proc(IXpsOMDictionary*, IXpsOMShareable, UInt32*, HRESULT)
-    append : Proc(IXpsOMDictionary*, LibC::LPWSTR, IXpsOMShareable, HRESULT)
-    insert_at : Proc(IXpsOMDictionary*, UInt32, LibC::LPWSTR, IXpsOMShareable, HRESULT)
-    remove_at : Proc(IXpsOMDictionary*, UInt32, HRESULT)
-    set_at : Proc(IXpsOMDictionary*, UInt32, LibC::LPWSTR, IXpsOMShareable, HRESULT)
-    clone : Proc(IXpsOMDictionary*, IXpsOMDictionary*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    get_by_key : UInt64
+    get_index : UInt64
+    append : UInt64
+    insert_at : UInt64
+    remove_at : UInt64
+    set_at : UInt64
+    clone : UInt64
   end
 
   IXpsOMDictionary_GUID = "897c86b8-8eaf-4ae3-bdde-56419fcf4236"
@@ -1078,14 +1078,14 @@ lib LibWin32
   end
 
   struct IXpsOMFontResourceVTbl
-    query_interface : Proc(IXpsOMFontResource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMFontResource*, UInt32)
-    release : Proc(IXpsOMFontResource*, UInt32)
-    get_part_name : Proc(IXpsOMFontResource*, IOpcPartUri*, HRESULT)
-    set_part_name : Proc(IXpsOMFontResource*, IOpcPartUri, HRESULT)
-    get_stream : Proc(IXpsOMFontResource*, IStream*, HRESULT)
-    set_content : Proc(IXpsOMFontResource*, IStream, XPS_FONT_EMBEDDING, IOpcPartUri, HRESULT)
-    get_embedding_option : Proc(IXpsOMFontResource*, XPS_FONT_EMBEDDING*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_part_name : UInt64
+    set_part_name : UInt64
+    get_stream : UInt64
+    set_content : UInt64
+    get_embedding_option : UInt64
   end
 
   IXpsOMFontResource_GUID = "a8c45708-47d9-4af4-8d20-33b48c9b8485"
@@ -1095,16 +1095,16 @@ lib LibWin32
   end
 
   struct IXpsOMFontResourceCollectionVTbl
-    query_interface : Proc(IXpsOMFontResourceCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMFontResourceCollection*, UInt32)
-    release : Proc(IXpsOMFontResourceCollection*, UInt32)
-    get_count : Proc(IXpsOMFontResourceCollection*, UInt32*, HRESULT)
-    get_at : Proc(IXpsOMFontResourceCollection*, UInt32, IXpsOMFontResource*, HRESULT)
-    set_at : Proc(IXpsOMFontResourceCollection*, UInt32, IXpsOMFontResource, HRESULT)
-    insert_at : Proc(IXpsOMFontResourceCollection*, UInt32, IXpsOMFontResource, HRESULT)
-    append : Proc(IXpsOMFontResourceCollection*, IXpsOMFontResource, HRESULT)
-    remove_at : Proc(IXpsOMFontResourceCollection*, UInt32, HRESULT)
-    get_by_part_name : Proc(IXpsOMFontResourceCollection*, IOpcPartUri, IXpsOMFontResource*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    set_at : UInt64
+    insert_at : UInt64
+    append : UInt64
+    remove_at : UInt64
+    get_by_part_name : UInt64
   end
 
   IXpsOMFontResourceCollection_GUID = "70b4a6bb-88d4-4fa8-aaf9-6d9c596fdbad"
@@ -1114,14 +1114,14 @@ lib LibWin32
   end
 
   struct IXpsOMImageResourceVTbl
-    query_interface : Proc(IXpsOMImageResource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMImageResource*, UInt32)
-    release : Proc(IXpsOMImageResource*, UInt32)
-    get_part_name : Proc(IXpsOMImageResource*, IOpcPartUri*, HRESULT)
-    set_part_name : Proc(IXpsOMImageResource*, IOpcPartUri, HRESULT)
-    get_stream : Proc(IXpsOMImageResource*, IStream*, HRESULT)
-    set_content : Proc(IXpsOMImageResource*, IStream, XPS_IMAGE_TYPE, IOpcPartUri, HRESULT)
-    get_image_type : Proc(IXpsOMImageResource*, XPS_IMAGE_TYPE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_part_name : UInt64
+    set_part_name : UInt64
+    get_stream : UInt64
+    set_content : UInt64
+    get_image_type : UInt64
   end
 
   IXpsOMImageResource_GUID = "3db8417d-ae50-485e-9a44-d7758f78a23f"
@@ -1131,16 +1131,16 @@ lib LibWin32
   end
 
   struct IXpsOMImageResourceCollectionVTbl
-    query_interface : Proc(IXpsOMImageResourceCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMImageResourceCollection*, UInt32)
-    release : Proc(IXpsOMImageResourceCollection*, UInt32)
-    get_count : Proc(IXpsOMImageResourceCollection*, UInt32*, HRESULT)
-    get_at : Proc(IXpsOMImageResourceCollection*, UInt32, IXpsOMImageResource*, HRESULT)
-    insert_at : Proc(IXpsOMImageResourceCollection*, UInt32, IXpsOMImageResource, HRESULT)
-    remove_at : Proc(IXpsOMImageResourceCollection*, UInt32, HRESULT)
-    set_at : Proc(IXpsOMImageResourceCollection*, UInt32, IXpsOMImageResource, HRESULT)
-    append : Proc(IXpsOMImageResourceCollection*, IXpsOMImageResource, HRESULT)
-    get_by_part_name : Proc(IXpsOMImageResourceCollection*, IOpcPartUri, IXpsOMImageResource*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    insert_at : UInt64
+    remove_at : UInt64
+    set_at : UInt64
+    append : UInt64
+    get_by_part_name : UInt64
   end
 
   IXpsOMImageResourceCollection_GUID = "7a4a1a71-9cde-4b71-b33f-62de843eabfe"
@@ -1150,13 +1150,13 @@ lib LibWin32
   end
 
   struct IXpsOMColorProfileResourceVTbl
-    query_interface : Proc(IXpsOMColorProfileResource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMColorProfileResource*, UInt32)
-    release : Proc(IXpsOMColorProfileResource*, UInt32)
-    get_part_name : Proc(IXpsOMColorProfileResource*, IOpcPartUri*, HRESULT)
-    set_part_name : Proc(IXpsOMColorProfileResource*, IOpcPartUri, HRESULT)
-    get_stream : Proc(IXpsOMColorProfileResource*, IStream*, HRESULT)
-    set_content : Proc(IXpsOMColorProfileResource*, IStream, IOpcPartUri, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_part_name : UInt64
+    set_part_name : UInt64
+    get_stream : UInt64
+    set_content : UInt64
   end
 
   IXpsOMColorProfileResource_GUID = "67bd7d69-1eef-4bb1-b5e7-6f4f87be8abe"
@@ -1166,16 +1166,16 @@ lib LibWin32
   end
 
   struct IXpsOMColorProfileResourceCollectionVTbl
-    query_interface : Proc(IXpsOMColorProfileResourceCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMColorProfileResourceCollection*, UInt32)
-    release : Proc(IXpsOMColorProfileResourceCollection*, UInt32)
-    get_count : Proc(IXpsOMColorProfileResourceCollection*, UInt32*, HRESULT)
-    get_at : Proc(IXpsOMColorProfileResourceCollection*, UInt32, IXpsOMColorProfileResource*, HRESULT)
-    insert_at : Proc(IXpsOMColorProfileResourceCollection*, UInt32, IXpsOMColorProfileResource, HRESULT)
-    remove_at : Proc(IXpsOMColorProfileResourceCollection*, UInt32, HRESULT)
-    set_at : Proc(IXpsOMColorProfileResourceCollection*, UInt32, IXpsOMColorProfileResource, HRESULT)
-    append : Proc(IXpsOMColorProfileResourceCollection*, IXpsOMColorProfileResource, HRESULT)
-    get_by_part_name : Proc(IXpsOMColorProfileResourceCollection*, IOpcPartUri, IXpsOMColorProfileResource*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    insert_at : UInt64
+    remove_at : UInt64
+    set_at : UInt64
+    append : UInt64
+    get_by_part_name : UInt64
   end
 
   IXpsOMColorProfileResourceCollection_GUID = "12759630-5fba-4283-8f7d-cca849809edb"
@@ -1185,13 +1185,13 @@ lib LibWin32
   end
 
   struct IXpsOMPrintTicketResourceVTbl
-    query_interface : Proc(IXpsOMPrintTicketResource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMPrintTicketResource*, UInt32)
-    release : Proc(IXpsOMPrintTicketResource*, UInt32)
-    get_part_name : Proc(IXpsOMPrintTicketResource*, IOpcPartUri*, HRESULT)
-    set_part_name : Proc(IXpsOMPrintTicketResource*, IOpcPartUri, HRESULT)
-    get_stream : Proc(IXpsOMPrintTicketResource*, IStream*, HRESULT)
-    set_content : Proc(IXpsOMPrintTicketResource*, IStream, IOpcPartUri, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_part_name : UInt64
+    set_part_name : UInt64
+    get_stream : UInt64
+    set_content : UInt64
   end
 
   IXpsOMPrintTicketResource_GUID = "e7ff32d2-34aa-499b-bbe9-9cd4ee6c59f7"
@@ -1201,13 +1201,13 @@ lib LibWin32
   end
 
   struct IXpsOMRemoteDictionaryResourceVTbl
-    query_interface : Proc(IXpsOMRemoteDictionaryResource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMRemoteDictionaryResource*, UInt32)
-    release : Proc(IXpsOMRemoteDictionaryResource*, UInt32)
-    get_part_name : Proc(IXpsOMRemoteDictionaryResource*, IOpcPartUri*, HRESULT)
-    set_part_name : Proc(IXpsOMRemoteDictionaryResource*, IOpcPartUri, HRESULT)
-    get_dictionary : Proc(IXpsOMRemoteDictionaryResource*, IXpsOMDictionary*, HRESULT)
-    set_dictionary : Proc(IXpsOMRemoteDictionaryResource*, IXpsOMDictionary, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_part_name : UInt64
+    set_part_name : UInt64
+    get_dictionary : UInt64
+    set_dictionary : UInt64
   end
 
   IXpsOMRemoteDictionaryResource_GUID = "c9bd7cd4-e16a-4bf8-8c84-c950af7a3061"
@@ -1217,16 +1217,16 @@ lib LibWin32
   end
 
   struct IXpsOMRemoteDictionaryResourceCollectionVTbl
-    query_interface : Proc(IXpsOMRemoteDictionaryResourceCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMRemoteDictionaryResourceCollection*, UInt32)
-    release : Proc(IXpsOMRemoteDictionaryResourceCollection*, UInt32)
-    get_count : Proc(IXpsOMRemoteDictionaryResourceCollection*, UInt32*, HRESULT)
-    get_at : Proc(IXpsOMRemoteDictionaryResourceCollection*, UInt32, IXpsOMRemoteDictionaryResource*, HRESULT)
-    insert_at : Proc(IXpsOMRemoteDictionaryResourceCollection*, UInt32, IXpsOMRemoteDictionaryResource, HRESULT)
-    remove_at : Proc(IXpsOMRemoteDictionaryResourceCollection*, UInt32, HRESULT)
-    set_at : Proc(IXpsOMRemoteDictionaryResourceCollection*, UInt32, IXpsOMRemoteDictionaryResource, HRESULT)
-    append : Proc(IXpsOMRemoteDictionaryResourceCollection*, IXpsOMRemoteDictionaryResource, HRESULT)
-    get_by_part_name : Proc(IXpsOMRemoteDictionaryResourceCollection*, IOpcPartUri, IXpsOMRemoteDictionaryResource*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    insert_at : UInt64
+    remove_at : UInt64
+    set_at : UInt64
+    append : UInt64
+    get_by_part_name : UInt64
   end
 
   IXpsOMRemoteDictionaryResourceCollection_GUID = "5c38db61-7fec-464a-87bd-41e3bef018be"
@@ -1236,16 +1236,16 @@ lib LibWin32
   end
 
   struct IXpsOMSignatureBlockResourceCollectionVTbl
-    query_interface : Proc(IXpsOMSignatureBlockResourceCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMSignatureBlockResourceCollection*, UInt32)
-    release : Proc(IXpsOMSignatureBlockResourceCollection*, UInt32)
-    get_count : Proc(IXpsOMSignatureBlockResourceCollection*, UInt32*, HRESULT)
-    get_at : Proc(IXpsOMSignatureBlockResourceCollection*, UInt32, IXpsOMSignatureBlockResource*, HRESULT)
-    insert_at : Proc(IXpsOMSignatureBlockResourceCollection*, UInt32, IXpsOMSignatureBlockResource, HRESULT)
-    remove_at : Proc(IXpsOMSignatureBlockResourceCollection*, UInt32, HRESULT)
-    set_at : Proc(IXpsOMSignatureBlockResourceCollection*, UInt32, IXpsOMSignatureBlockResource, HRESULT)
-    append : Proc(IXpsOMSignatureBlockResourceCollection*, IXpsOMSignatureBlockResource, HRESULT)
-    get_by_part_name : Proc(IXpsOMSignatureBlockResourceCollection*, IOpcPartUri, IXpsOMSignatureBlockResource*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    insert_at : UInt64
+    remove_at : UInt64
+    set_at : UInt64
+    append : UInt64
+    get_by_part_name : UInt64
   end
 
   IXpsOMSignatureBlockResourceCollection_GUID = "ab8f5d8e-351b-4d33-aaed-fa56f0022931"
@@ -1255,14 +1255,14 @@ lib LibWin32
   end
 
   struct IXpsOMDocumentStructureResourceVTbl
-    query_interface : Proc(IXpsOMDocumentStructureResource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMDocumentStructureResource*, UInt32)
-    release : Proc(IXpsOMDocumentStructureResource*, UInt32)
-    get_part_name : Proc(IXpsOMDocumentStructureResource*, IOpcPartUri*, HRESULT)
-    set_part_name : Proc(IXpsOMDocumentStructureResource*, IOpcPartUri, HRESULT)
-    get_owner : Proc(IXpsOMDocumentStructureResource*, IXpsOMDocument*, HRESULT)
-    get_stream : Proc(IXpsOMDocumentStructureResource*, IStream*, HRESULT)
-    set_content : Proc(IXpsOMDocumentStructureResource*, IStream, IOpcPartUri, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_part_name : UInt64
+    set_part_name : UInt64
+    get_owner : UInt64
+    get_stream : UInt64
+    set_content : UInt64
   end
 
   IXpsOMDocumentStructureResource_GUID = "85febc8a-6b63-48a9-af07-7064e4ecff30"
@@ -1272,14 +1272,14 @@ lib LibWin32
   end
 
   struct IXpsOMStoryFragmentsResourceVTbl
-    query_interface : Proc(IXpsOMStoryFragmentsResource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMStoryFragmentsResource*, UInt32)
-    release : Proc(IXpsOMStoryFragmentsResource*, UInt32)
-    get_part_name : Proc(IXpsOMStoryFragmentsResource*, IOpcPartUri*, HRESULT)
-    set_part_name : Proc(IXpsOMStoryFragmentsResource*, IOpcPartUri, HRESULT)
-    get_owner : Proc(IXpsOMStoryFragmentsResource*, IXpsOMPageReference*, HRESULT)
-    get_stream : Proc(IXpsOMStoryFragmentsResource*, IStream*, HRESULT)
-    set_content : Proc(IXpsOMStoryFragmentsResource*, IStream, IOpcPartUri, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_part_name : UInt64
+    set_part_name : UInt64
+    get_owner : UInt64
+    get_stream : UInt64
+    set_content : UInt64
   end
 
   IXpsOMStoryFragmentsResource_GUID = "c2b3ca09-0473-4282-87ae-1780863223f0"
@@ -1289,14 +1289,14 @@ lib LibWin32
   end
 
   struct IXpsOMSignatureBlockResourceVTbl
-    query_interface : Proc(IXpsOMSignatureBlockResource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMSignatureBlockResource*, UInt32)
-    release : Proc(IXpsOMSignatureBlockResource*, UInt32)
-    get_part_name : Proc(IXpsOMSignatureBlockResource*, IOpcPartUri*, HRESULT)
-    set_part_name : Proc(IXpsOMSignatureBlockResource*, IOpcPartUri, HRESULT)
-    get_owner : Proc(IXpsOMSignatureBlockResource*, IXpsOMDocument*, HRESULT)
-    get_stream : Proc(IXpsOMSignatureBlockResource*, IStream*, HRESULT)
-    set_content : Proc(IXpsOMSignatureBlockResource*, IStream, IOpcPartUri, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_part_name : UInt64
+    set_part_name : UInt64
+    get_owner : UInt64
+    get_stream : UInt64
+    set_content : UInt64
   end
 
   IXpsOMSignatureBlockResource_GUID = "4776ad35-2e04-4357-8743-ebf6c171a905"
@@ -1306,15 +1306,15 @@ lib LibWin32
   end
 
   struct IXpsOMVisualCollectionVTbl
-    query_interface : Proc(IXpsOMVisualCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMVisualCollection*, UInt32)
-    release : Proc(IXpsOMVisualCollection*, UInt32)
-    get_count : Proc(IXpsOMVisualCollection*, UInt32*, HRESULT)
-    get_at : Proc(IXpsOMVisualCollection*, UInt32, IXpsOMVisual*, HRESULT)
-    insert_at : Proc(IXpsOMVisualCollection*, UInt32, IXpsOMVisual, HRESULT)
-    remove_at : Proc(IXpsOMVisualCollection*, UInt32, HRESULT)
-    set_at : Proc(IXpsOMVisualCollection*, UInt32, IXpsOMVisual, HRESULT)
-    append : Proc(IXpsOMVisualCollection*, IXpsOMVisual, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    insert_at : UInt64
+    remove_at : UInt64
+    set_at : UInt64
+    append : UInt64
   end
 
   IXpsOMVisualCollection_GUID = "94d8abde-ab91-46a8-82b7-f5b05ef01a96"
@@ -1324,49 +1324,49 @@ lib LibWin32
   end
 
   struct IXpsOMCanvasVTbl
-    query_interface : Proc(IXpsOMCanvas*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMCanvas*, UInt32)
-    release : Proc(IXpsOMCanvas*, UInt32)
-    get_owner : Proc(IXpsOMCanvas*, IUnknown*, HRESULT)
-    get_type : Proc(IXpsOMCanvas*, XPS_OBJECT_TYPE*, HRESULT)
-    get_transform : Proc(IXpsOMCanvas*, IXpsOMMatrixTransform*, HRESULT)
-    get_transform_local : Proc(IXpsOMCanvas*, IXpsOMMatrixTransform*, HRESULT)
-    set_transform_local : Proc(IXpsOMCanvas*, IXpsOMMatrixTransform, HRESULT)
-    get_transform_lookup : Proc(IXpsOMCanvas*, LibC::LPWSTR*, HRESULT)
-    set_transform_lookup : Proc(IXpsOMCanvas*, LibC::LPWSTR, HRESULT)
-    get_clip_geometry : Proc(IXpsOMCanvas*, IXpsOMGeometry*, HRESULT)
-    get_clip_geometry_local : Proc(IXpsOMCanvas*, IXpsOMGeometry*, HRESULT)
-    set_clip_geometry_local : Proc(IXpsOMCanvas*, IXpsOMGeometry, HRESULT)
-    get_clip_geometry_lookup : Proc(IXpsOMCanvas*, LibC::LPWSTR*, HRESULT)
-    set_clip_geometry_lookup : Proc(IXpsOMCanvas*, LibC::LPWSTR, HRESULT)
-    get_opacity : Proc(IXpsOMCanvas*, Float32*, HRESULT)
-    set_opacity : Proc(IXpsOMCanvas*, Float32, HRESULT)
-    get_opacity_mask_brush : Proc(IXpsOMCanvas*, IXpsOMBrush*, HRESULT)
-    get_opacity_mask_brush_local : Proc(IXpsOMCanvas*, IXpsOMBrush*, HRESULT)
-    set_opacity_mask_brush_local : Proc(IXpsOMCanvas*, IXpsOMBrush, HRESULT)
-    get_opacity_mask_brush_lookup : Proc(IXpsOMCanvas*, LibC::LPWSTR*, HRESULT)
-    set_opacity_mask_brush_lookup : Proc(IXpsOMCanvas*, LibC::LPWSTR, HRESULT)
-    get_name : Proc(IXpsOMCanvas*, LibC::LPWSTR*, HRESULT)
-    set_name : Proc(IXpsOMCanvas*, LibC::LPWSTR, HRESULT)
-    get_is_hyperlink_target : Proc(IXpsOMCanvas*, LibC::BOOL*, HRESULT)
-    set_is_hyperlink_target : Proc(IXpsOMCanvas*, LibC::BOOL, HRESULT)
-    get_hyperlink_navigate_uri : Proc(IXpsOMCanvas*, IUri*, HRESULT)
-    set_hyperlink_navigate_uri : Proc(IXpsOMCanvas*, IUri, HRESULT)
-    get_language : Proc(IXpsOMCanvas*, LibC::LPWSTR*, HRESULT)
-    set_language : Proc(IXpsOMCanvas*, LibC::LPWSTR, HRESULT)
-    get_visuals : Proc(IXpsOMCanvas*, IXpsOMVisualCollection*, HRESULT)
-    get_use_aliased_edge_mode : Proc(IXpsOMCanvas*, LibC::BOOL*, HRESULT)
-    set_use_aliased_edge_mode : Proc(IXpsOMCanvas*, LibC::BOOL, HRESULT)
-    get_accessibility_short_description : Proc(IXpsOMCanvas*, LibC::LPWSTR*, HRESULT)
-    set_accessibility_short_description : Proc(IXpsOMCanvas*, LibC::LPWSTR, HRESULT)
-    get_accessibility_long_description : Proc(IXpsOMCanvas*, LibC::LPWSTR*, HRESULT)
-    set_accessibility_long_description : Proc(IXpsOMCanvas*, LibC::LPWSTR, HRESULT)
-    get_dictionary : Proc(IXpsOMCanvas*, IXpsOMDictionary*, HRESULT)
-    get_dictionary_local : Proc(IXpsOMCanvas*, IXpsOMDictionary*, HRESULT)
-    set_dictionary_local : Proc(IXpsOMCanvas*, IXpsOMDictionary, HRESULT)
-    get_dictionary_resource : Proc(IXpsOMCanvas*, IXpsOMRemoteDictionaryResource*, HRESULT)
-    set_dictionary_resource : Proc(IXpsOMCanvas*, IXpsOMRemoteDictionaryResource, HRESULT)
-    clone : Proc(IXpsOMCanvas*, IXpsOMCanvas*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_type : UInt64
+    get_transform : UInt64
+    get_transform_local : UInt64
+    set_transform_local : UInt64
+    get_transform_lookup : UInt64
+    set_transform_lookup : UInt64
+    get_clip_geometry : UInt64
+    get_clip_geometry_local : UInt64
+    set_clip_geometry_local : UInt64
+    get_clip_geometry_lookup : UInt64
+    set_clip_geometry_lookup : UInt64
+    get_opacity : UInt64
+    set_opacity : UInt64
+    get_opacity_mask_brush : UInt64
+    get_opacity_mask_brush_local : UInt64
+    set_opacity_mask_brush_local : UInt64
+    get_opacity_mask_brush_lookup : UInt64
+    set_opacity_mask_brush_lookup : UInt64
+    get_name : UInt64
+    set_name : UInt64
+    get_is_hyperlink_target : UInt64
+    set_is_hyperlink_target : UInt64
+    get_hyperlink_navigate_uri : UInt64
+    set_hyperlink_navigate_uri : UInt64
+    get_language : UInt64
+    set_language : UInt64
+    get_visuals : UInt64
+    get_use_aliased_edge_mode : UInt64
+    set_use_aliased_edge_mode : UInt64
+    get_accessibility_short_description : UInt64
+    set_accessibility_short_description : UInt64
+    get_accessibility_long_description : UInt64
+    set_accessibility_long_description : UInt64
+    get_dictionary : UInt64
+    get_dictionary_local : UInt64
+    set_dictionary_local : UInt64
+    get_dictionary_resource : UInt64
+    set_dictionary_resource : UInt64
+    clone : UInt64
   end
 
   IXpsOMCanvas_GUID = "221d1452-331e-47c6-87e9-6ccefb9b5ba3"
@@ -1376,33 +1376,33 @@ lib LibWin32
   end
 
   struct IXpsOMPageVTbl
-    query_interface : Proc(IXpsOMPage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMPage*, UInt32)
-    release : Proc(IXpsOMPage*, UInt32)
-    get_part_name : Proc(IXpsOMPage*, IOpcPartUri*, HRESULT)
-    set_part_name : Proc(IXpsOMPage*, IOpcPartUri, HRESULT)
-    get_owner : Proc(IXpsOMPage*, IXpsOMPageReference*, HRESULT)
-    get_visuals : Proc(IXpsOMPage*, IXpsOMVisualCollection*, HRESULT)
-    get_page_dimensions : Proc(IXpsOMPage*, XPS_SIZE*, HRESULT)
-    set_page_dimensions : Proc(IXpsOMPage*, XPS_SIZE*, HRESULT)
-    get_content_box : Proc(IXpsOMPage*, XPS_RECT*, HRESULT)
-    set_content_box : Proc(IXpsOMPage*, XPS_RECT*, HRESULT)
-    get_bleed_box : Proc(IXpsOMPage*, XPS_RECT*, HRESULT)
-    set_bleed_box : Proc(IXpsOMPage*, XPS_RECT*, HRESULT)
-    get_language : Proc(IXpsOMPage*, LibC::LPWSTR*, HRESULT)
-    set_language : Proc(IXpsOMPage*, LibC::LPWSTR, HRESULT)
-    get_name : Proc(IXpsOMPage*, LibC::LPWSTR*, HRESULT)
-    set_name : Proc(IXpsOMPage*, LibC::LPWSTR, HRESULT)
-    get_is_hyperlink_target : Proc(IXpsOMPage*, LibC::BOOL*, HRESULT)
-    set_is_hyperlink_target : Proc(IXpsOMPage*, LibC::BOOL, HRESULT)
-    get_dictionary : Proc(IXpsOMPage*, IXpsOMDictionary*, HRESULT)
-    get_dictionary_local : Proc(IXpsOMPage*, IXpsOMDictionary*, HRESULT)
-    set_dictionary_local : Proc(IXpsOMPage*, IXpsOMDictionary, HRESULT)
-    get_dictionary_resource : Proc(IXpsOMPage*, IXpsOMRemoteDictionaryResource*, HRESULT)
-    set_dictionary_resource : Proc(IXpsOMPage*, IXpsOMRemoteDictionaryResource, HRESULT)
-    write : Proc(IXpsOMPage*, ISequentialStream, LibC::BOOL, HRESULT)
-    generate_unused_lookup_key : Proc(IXpsOMPage*, XPS_OBJECT_TYPE, LibC::LPWSTR*, HRESULT)
-    clone : Proc(IXpsOMPage*, IXpsOMPage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_part_name : UInt64
+    set_part_name : UInt64
+    get_owner : UInt64
+    get_visuals : UInt64
+    get_page_dimensions : UInt64
+    set_page_dimensions : UInt64
+    get_content_box : UInt64
+    set_content_box : UInt64
+    get_bleed_box : UInt64
+    set_bleed_box : UInt64
+    get_language : UInt64
+    set_language : UInt64
+    get_name : UInt64
+    set_name : UInt64
+    get_is_hyperlink_target : UInt64
+    set_is_hyperlink_target : UInt64
+    get_dictionary : UInt64
+    get_dictionary_local : UInt64
+    set_dictionary_local : UInt64
+    get_dictionary_resource : UInt64
+    set_dictionary_resource : UInt64
+    write : UInt64
+    generate_unused_lookup_key : UInt64
+    clone : UInt64
   end
 
   IXpsOMPage_GUID = "d3e18888-f120-4fee-8c68-35296eae91d4"
@@ -1412,26 +1412,26 @@ lib LibWin32
   end
 
   struct IXpsOMPageReferenceVTbl
-    query_interface : Proc(IXpsOMPageReference*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMPageReference*, UInt32)
-    release : Proc(IXpsOMPageReference*, UInt32)
-    get_owner : Proc(IXpsOMPageReference*, IXpsOMDocument*, HRESULT)
-    get_page : Proc(IXpsOMPageReference*, IXpsOMPage*, HRESULT)
-    set_page : Proc(IXpsOMPageReference*, IXpsOMPage, HRESULT)
-    discard_page : Proc(IXpsOMPageReference*, HRESULT)
-    is_page_loaded : Proc(IXpsOMPageReference*, LibC::BOOL*, HRESULT)
-    get_advisory_page_dimensions : Proc(IXpsOMPageReference*, XPS_SIZE*, HRESULT)
-    set_advisory_page_dimensions : Proc(IXpsOMPageReference*, XPS_SIZE*, HRESULT)
-    get_story_fragments_resource : Proc(IXpsOMPageReference*, IXpsOMStoryFragmentsResource*, HRESULT)
-    set_story_fragments_resource : Proc(IXpsOMPageReference*, IXpsOMStoryFragmentsResource, HRESULT)
-    get_print_ticket_resource : Proc(IXpsOMPageReference*, IXpsOMPrintTicketResource*, HRESULT)
-    set_print_ticket_resource : Proc(IXpsOMPageReference*, IXpsOMPrintTicketResource, HRESULT)
-    get_thumbnail_resource : Proc(IXpsOMPageReference*, IXpsOMImageResource*, HRESULT)
-    set_thumbnail_resource : Proc(IXpsOMPageReference*, IXpsOMImageResource, HRESULT)
-    collect_link_targets : Proc(IXpsOMPageReference*, IXpsOMNameCollection*, HRESULT)
-    collect_part_resources : Proc(IXpsOMPageReference*, IXpsOMPartResources*, HRESULT)
-    has_restricted_fonts : Proc(IXpsOMPageReference*, LibC::BOOL*, HRESULT)
-    clone : Proc(IXpsOMPageReference*, IXpsOMPageReference*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_owner : UInt64
+    get_page : UInt64
+    set_page : UInt64
+    discard_page : UInt64
+    is_page_loaded : UInt64
+    get_advisory_page_dimensions : UInt64
+    set_advisory_page_dimensions : UInt64
+    get_story_fragments_resource : UInt64
+    set_story_fragments_resource : UInt64
+    get_print_ticket_resource : UInt64
+    set_print_ticket_resource : UInt64
+    get_thumbnail_resource : UInt64
+    set_thumbnail_resource : UInt64
+    collect_link_targets : UInt64
+    collect_part_resources : UInt64
+    has_restricted_fonts : UInt64
+    clone : UInt64
   end
 
   IXpsOMPageReference_GUID = "ed360180-6f92-4998-890d-2f208531a0a0"
@@ -1441,15 +1441,15 @@ lib LibWin32
   end
 
   struct IXpsOMPageReferenceCollectionVTbl
-    query_interface : Proc(IXpsOMPageReferenceCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMPageReferenceCollection*, UInt32)
-    release : Proc(IXpsOMPageReferenceCollection*, UInt32)
-    get_count : Proc(IXpsOMPageReferenceCollection*, UInt32*, HRESULT)
-    get_at : Proc(IXpsOMPageReferenceCollection*, UInt32, IXpsOMPageReference*, HRESULT)
-    insert_at : Proc(IXpsOMPageReferenceCollection*, UInt32, IXpsOMPageReference, HRESULT)
-    remove_at : Proc(IXpsOMPageReferenceCollection*, UInt32, HRESULT)
-    set_at : Proc(IXpsOMPageReferenceCollection*, UInt32, IXpsOMPageReference, HRESULT)
-    append : Proc(IXpsOMPageReferenceCollection*, IXpsOMPageReference, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    insert_at : UInt64
+    remove_at : UInt64
+    set_at : UInt64
+    append : UInt64
   end
 
   IXpsOMPageReferenceCollection_GUID = "ca16ba4d-e7b9-45c5-958b-f98022473745"
@@ -1459,19 +1459,19 @@ lib LibWin32
   end
 
   struct IXpsOMDocumentVTbl
-    query_interface : Proc(IXpsOMDocument*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMDocument*, UInt32)
-    release : Proc(IXpsOMDocument*, UInt32)
-    get_part_name : Proc(IXpsOMDocument*, IOpcPartUri*, HRESULT)
-    set_part_name : Proc(IXpsOMDocument*, IOpcPartUri, HRESULT)
-    get_owner : Proc(IXpsOMDocument*, IXpsOMDocumentSequence*, HRESULT)
-    get_page_references : Proc(IXpsOMDocument*, IXpsOMPageReferenceCollection*, HRESULT)
-    get_print_ticket_resource : Proc(IXpsOMDocument*, IXpsOMPrintTicketResource*, HRESULT)
-    set_print_ticket_resource : Proc(IXpsOMDocument*, IXpsOMPrintTicketResource, HRESULT)
-    get_document_structure_resource : Proc(IXpsOMDocument*, IXpsOMDocumentStructureResource*, HRESULT)
-    set_document_structure_resource : Proc(IXpsOMDocument*, IXpsOMDocumentStructureResource, HRESULT)
-    get_signature_block_resources : Proc(IXpsOMDocument*, IXpsOMSignatureBlockResourceCollection*, HRESULT)
-    clone : Proc(IXpsOMDocument*, IXpsOMDocument*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_part_name : UInt64
+    set_part_name : UInt64
+    get_owner : UInt64
+    get_page_references : UInt64
+    get_print_ticket_resource : UInt64
+    set_print_ticket_resource : UInt64
+    get_document_structure_resource : UInt64
+    set_document_structure_resource : UInt64
+    get_signature_block_resources : UInt64
+    clone : UInt64
   end
 
   IXpsOMDocument_GUID = "2c2c94cb-ac5f-4254-8ee9-23948309d9f0"
@@ -1481,15 +1481,15 @@ lib LibWin32
   end
 
   struct IXpsOMDocumentCollectionVTbl
-    query_interface : Proc(IXpsOMDocumentCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMDocumentCollection*, UInt32)
-    release : Proc(IXpsOMDocumentCollection*, UInt32)
-    get_count : Proc(IXpsOMDocumentCollection*, UInt32*, HRESULT)
-    get_at : Proc(IXpsOMDocumentCollection*, UInt32, IXpsOMDocument*, HRESULT)
-    insert_at : Proc(IXpsOMDocumentCollection*, UInt32, IXpsOMDocument, HRESULT)
-    remove_at : Proc(IXpsOMDocumentCollection*, UInt32, HRESULT)
-    set_at : Proc(IXpsOMDocumentCollection*, UInt32, IXpsOMDocument, HRESULT)
-    append : Proc(IXpsOMDocumentCollection*, IXpsOMDocument, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    insert_at : UInt64
+    remove_at : UInt64
+    set_at : UInt64
+    append : UInt64
   end
 
   IXpsOMDocumentCollection_GUID = "d1c87f0d-e947-4754-8a25-971478f7e83e"
@@ -1499,15 +1499,15 @@ lib LibWin32
   end
 
   struct IXpsOMDocumentSequenceVTbl
-    query_interface : Proc(IXpsOMDocumentSequence*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMDocumentSequence*, UInt32)
-    release : Proc(IXpsOMDocumentSequence*, UInt32)
-    get_part_name : Proc(IXpsOMDocumentSequence*, IOpcPartUri*, HRESULT)
-    set_part_name : Proc(IXpsOMDocumentSequence*, IOpcPartUri, HRESULT)
-    get_owner : Proc(IXpsOMDocumentSequence*, IXpsOMPackage*, HRESULT)
-    get_documents : Proc(IXpsOMDocumentSequence*, IXpsOMDocumentCollection*, HRESULT)
-    get_print_ticket_resource : Proc(IXpsOMDocumentSequence*, IXpsOMPrintTicketResource*, HRESULT)
-    set_print_ticket_resource : Proc(IXpsOMDocumentSequence*, IXpsOMPrintTicketResource, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_part_name : UInt64
+    set_part_name : UInt64
+    get_owner : UInt64
+    get_documents : UInt64
+    get_print_ticket_resource : UInt64
+    set_print_ticket_resource : UInt64
   end
 
   IXpsOMDocumentSequence_GUID = "56492eb4-d8d5-425e-8256-4c2b64ad0264"
@@ -1517,45 +1517,45 @@ lib LibWin32
   end
 
   struct IXpsOMCorePropertiesVTbl
-    query_interface : Proc(IXpsOMCoreProperties*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMCoreProperties*, UInt32)
-    release : Proc(IXpsOMCoreProperties*, UInt32)
-    get_part_name : Proc(IXpsOMCoreProperties*, IOpcPartUri*, HRESULT)
-    set_part_name : Proc(IXpsOMCoreProperties*, IOpcPartUri, HRESULT)
-    get_owner : Proc(IXpsOMCoreProperties*, IXpsOMPackage*, HRESULT)
-    get_category : Proc(IXpsOMCoreProperties*, LibC::LPWSTR*, HRESULT)
-    set_category : Proc(IXpsOMCoreProperties*, LibC::LPWSTR, HRESULT)
-    get_content_status : Proc(IXpsOMCoreProperties*, LibC::LPWSTR*, HRESULT)
-    set_content_status : Proc(IXpsOMCoreProperties*, LibC::LPWSTR, HRESULT)
-    get_content_type : Proc(IXpsOMCoreProperties*, LibC::LPWSTR*, HRESULT)
-    set_content_type : Proc(IXpsOMCoreProperties*, LibC::LPWSTR, HRESULT)
-    get_created : Proc(IXpsOMCoreProperties*, SYSTEMTIME*, HRESULT)
-    set_created : Proc(IXpsOMCoreProperties*, SYSTEMTIME*, HRESULT)
-    get_creator : Proc(IXpsOMCoreProperties*, LibC::LPWSTR*, HRESULT)
-    set_creator : Proc(IXpsOMCoreProperties*, LibC::LPWSTR, HRESULT)
-    get_description : Proc(IXpsOMCoreProperties*, LibC::LPWSTR*, HRESULT)
-    set_description : Proc(IXpsOMCoreProperties*, LibC::LPWSTR, HRESULT)
-    get_identifier : Proc(IXpsOMCoreProperties*, LibC::LPWSTR*, HRESULT)
-    set_identifier : Proc(IXpsOMCoreProperties*, LibC::LPWSTR, HRESULT)
-    get_keywords : Proc(IXpsOMCoreProperties*, LibC::LPWSTR*, HRESULT)
-    set_keywords : Proc(IXpsOMCoreProperties*, LibC::LPWSTR, HRESULT)
-    get_language : Proc(IXpsOMCoreProperties*, LibC::LPWSTR*, HRESULT)
-    set_language : Proc(IXpsOMCoreProperties*, LibC::LPWSTR, HRESULT)
-    get_last_modified_by : Proc(IXpsOMCoreProperties*, LibC::LPWSTR*, HRESULT)
-    set_last_modified_by : Proc(IXpsOMCoreProperties*, LibC::LPWSTR, HRESULT)
-    get_last_printed : Proc(IXpsOMCoreProperties*, SYSTEMTIME*, HRESULT)
-    set_last_printed : Proc(IXpsOMCoreProperties*, SYSTEMTIME*, HRESULT)
-    get_modified : Proc(IXpsOMCoreProperties*, SYSTEMTIME*, HRESULT)
-    set_modified : Proc(IXpsOMCoreProperties*, SYSTEMTIME*, HRESULT)
-    get_revision : Proc(IXpsOMCoreProperties*, LibC::LPWSTR*, HRESULT)
-    set_revision : Proc(IXpsOMCoreProperties*, LibC::LPWSTR, HRESULT)
-    get_subject : Proc(IXpsOMCoreProperties*, LibC::LPWSTR*, HRESULT)
-    set_subject : Proc(IXpsOMCoreProperties*, LibC::LPWSTR, HRESULT)
-    get_title : Proc(IXpsOMCoreProperties*, LibC::LPWSTR*, HRESULT)
-    set_title : Proc(IXpsOMCoreProperties*, LibC::LPWSTR, HRESULT)
-    get_version : Proc(IXpsOMCoreProperties*, LibC::LPWSTR*, HRESULT)
-    set_version : Proc(IXpsOMCoreProperties*, LibC::LPWSTR, HRESULT)
-    clone : Proc(IXpsOMCoreProperties*, IXpsOMCoreProperties*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_part_name : UInt64
+    set_part_name : UInt64
+    get_owner : UInt64
+    get_category : UInt64
+    set_category : UInt64
+    get_content_status : UInt64
+    set_content_status : UInt64
+    get_content_type : UInt64
+    set_content_type : UInt64
+    get_created : UInt64
+    set_created : UInt64
+    get_creator : UInt64
+    set_creator : UInt64
+    get_description : UInt64
+    set_description : UInt64
+    get_identifier : UInt64
+    set_identifier : UInt64
+    get_keywords : UInt64
+    set_keywords : UInt64
+    get_language : UInt64
+    set_language : UInt64
+    get_last_modified_by : UInt64
+    set_last_modified_by : UInt64
+    get_last_printed : UInt64
+    set_last_printed : UInt64
+    get_modified : UInt64
+    set_modified : UInt64
+    get_revision : UInt64
+    set_revision : UInt64
+    get_subject : UInt64
+    set_subject : UInt64
+    get_title : UInt64
+    set_title : UInt64
+    get_version : UInt64
+    set_version : UInt64
+    clone : UInt64
   end
 
   IXpsOMCoreProperties_GUID = "3340fe8f-4027-4aa1-8f5f-d35ae45fe597"
@@ -1565,19 +1565,19 @@ lib LibWin32
   end
 
   struct IXpsOMPackageVTbl
-    query_interface : Proc(IXpsOMPackage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMPackage*, UInt32)
-    release : Proc(IXpsOMPackage*, UInt32)
-    get_document_sequence : Proc(IXpsOMPackage*, IXpsOMDocumentSequence*, HRESULT)
-    set_document_sequence : Proc(IXpsOMPackage*, IXpsOMDocumentSequence, HRESULT)
-    get_core_properties : Proc(IXpsOMPackage*, IXpsOMCoreProperties*, HRESULT)
-    set_core_properties : Proc(IXpsOMPackage*, IXpsOMCoreProperties, HRESULT)
-    get_discard_control_part_name : Proc(IXpsOMPackage*, IOpcPartUri*, HRESULT)
-    set_discard_control_part_name : Proc(IXpsOMPackage*, IOpcPartUri, HRESULT)
-    get_thumbnail_resource : Proc(IXpsOMPackage*, IXpsOMImageResource*, HRESULT)
-    set_thumbnail_resource : Proc(IXpsOMPackage*, IXpsOMImageResource, HRESULT)
-    write_to_file : Proc(IXpsOMPackage*, LibC::LPWSTR, SECURITY_ATTRIBUTES*, UInt32, LibC::BOOL, HRESULT)
-    write_to_stream : Proc(IXpsOMPackage*, ISequentialStream, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_document_sequence : UInt64
+    set_document_sequence : UInt64
+    get_core_properties : UInt64
+    set_core_properties : UInt64
+    get_discard_control_part_name : UInt64
+    set_discard_control_part_name : UInt64
+    get_thumbnail_resource : UInt64
+    set_thumbnail_resource : UInt64
+    write_to_file : UInt64
+    write_to_stream : UInt64
   end
 
   IXpsOMPackage_GUID = "18c3df65-81e1-4674-91dc-fc452f5a416f"
@@ -1587,46 +1587,46 @@ lib LibWin32
   end
 
   struct IXpsOMObjectFactoryVTbl
-    query_interface : Proc(IXpsOMObjectFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMObjectFactory*, UInt32)
-    release : Proc(IXpsOMObjectFactory*, UInt32)
-    create_package : Proc(IXpsOMObjectFactory*, IXpsOMPackage*, HRESULT)
-    create_package_from_file : Proc(IXpsOMObjectFactory*, LibC::LPWSTR, LibC::BOOL, IXpsOMPackage*, HRESULT)
-    create_package_from_stream : Proc(IXpsOMObjectFactory*, IStream, LibC::BOOL, IXpsOMPackage*, HRESULT)
-    create_story_fragments_resource : Proc(IXpsOMObjectFactory*, IStream, IOpcPartUri, IXpsOMStoryFragmentsResource*, HRESULT)
-    create_document_structure_resource : Proc(IXpsOMObjectFactory*, IStream, IOpcPartUri, IXpsOMDocumentStructureResource*, HRESULT)
-    create_signature_block_resource : Proc(IXpsOMObjectFactory*, IStream, IOpcPartUri, IXpsOMSignatureBlockResource*, HRESULT)
-    create_remote_dictionary_resource : Proc(IXpsOMObjectFactory*, IXpsOMDictionary, IOpcPartUri, IXpsOMRemoteDictionaryResource*, HRESULT)
-    create_remote_dictionary_resource_from_stream : Proc(IXpsOMObjectFactory*, IStream, IOpcPartUri, IXpsOMPartResources, IXpsOMRemoteDictionaryResource*, HRESULT)
-    create_part_resources : Proc(IXpsOMObjectFactory*, IXpsOMPartResources*, HRESULT)
-    create_document_sequence : Proc(IXpsOMObjectFactory*, IOpcPartUri, IXpsOMDocumentSequence*, HRESULT)
-    create_document : Proc(IXpsOMObjectFactory*, IOpcPartUri, IXpsOMDocument*, HRESULT)
-    create_page_reference : Proc(IXpsOMObjectFactory*, XPS_SIZE*, IXpsOMPageReference*, HRESULT)
-    create_page : Proc(IXpsOMObjectFactory*, XPS_SIZE*, LibC::LPWSTR, IOpcPartUri, IXpsOMPage*, HRESULT)
-    create_page_from_stream : Proc(IXpsOMObjectFactory*, IStream, IOpcPartUri, IXpsOMPartResources, LibC::BOOL, IXpsOMPage*, HRESULT)
-    create_canvas : Proc(IXpsOMObjectFactory*, IXpsOMCanvas*, HRESULT)
-    create_glyphs : Proc(IXpsOMObjectFactory*, IXpsOMFontResource, IXpsOMGlyphs*, HRESULT)
-    create_path : Proc(IXpsOMObjectFactory*, IXpsOMPath*, HRESULT)
-    create_geometry : Proc(IXpsOMObjectFactory*, IXpsOMGeometry*, HRESULT)
-    create_geometry_figure : Proc(IXpsOMObjectFactory*, XPS_POINT*, IXpsOMGeometryFigure*, HRESULT)
-    create_matrix_transform : Proc(IXpsOMObjectFactory*, XPS_MATRIX*, IXpsOMMatrixTransform*, HRESULT)
-    create_solid_color_brush : Proc(IXpsOMObjectFactory*, XPS_COLOR*, IXpsOMColorProfileResource, IXpsOMSolidColorBrush*, HRESULT)
-    create_color_profile_resource : Proc(IXpsOMObjectFactory*, IStream, IOpcPartUri, IXpsOMColorProfileResource*, HRESULT)
-    create_image_brush : Proc(IXpsOMObjectFactory*, IXpsOMImageResource, XPS_RECT*, XPS_RECT*, IXpsOMImageBrush*, HRESULT)
-    create_visual_brush : Proc(IXpsOMObjectFactory*, XPS_RECT*, XPS_RECT*, IXpsOMVisualBrush*, HRESULT)
-    create_image_resource : Proc(IXpsOMObjectFactory*, IStream, XPS_IMAGE_TYPE, IOpcPartUri, IXpsOMImageResource*, HRESULT)
-    create_print_ticket_resource : Proc(IXpsOMObjectFactory*, IStream, IOpcPartUri, IXpsOMPrintTicketResource*, HRESULT)
-    create_font_resource : Proc(IXpsOMObjectFactory*, IStream, XPS_FONT_EMBEDDING, IOpcPartUri, LibC::BOOL, IXpsOMFontResource*, HRESULT)
-    create_gradient_stop : Proc(IXpsOMObjectFactory*, XPS_COLOR*, IXpsOMColorProfileResource, Float32, IXpsOMGradientStop*, HRESULT)
-    create_linear_gradient_brush : Proc(IXpsOMObjectFactory*, IXpsOMGradientStop, IXpsOMGradientStop, XPS_POINT*, XPS_POINT*, IXpsOMLinearGradientBrush*, HRESULT)
-    create_radial_gradient_brush : Proc(IXpsOMObjectFactory*, IXpsOMGradientStop, IXpsOMGradientStop, XPS_POINT*, XPS_POINT*, XPS_SIZE*, IXpsOMRadialGradientBrush*, HRESULT)
-    create_core_properties : Proc(IXpsOMObjectFactory*, IOpcPartUri, IXpsOMCoreProperties*, HRESULT)
-    create_dictionary : Proc(IXpsOMObjectFactory*, IXpsOMDictionary*, HRESULT)
-    create_part_uri_collection : Proc(IXpsOMObjectFactory*, IXpsOMPartUriCollection*, HRESULT)
-    create_package_writer_on_file : Proc(IXpsOMObjectFactory*, LibC::LPWSTR, SECURITY_ATTRIBUTES*, UInt32, LibC::BOOL, XPS_INTERLEAVING, IOpcPartUri, IXpsOMCoreProperties, IXpsOMImageResource, IXpsOMPrintTicketResource, IOpcPartUri, IXpsOMPackageWriter*, HRESULT)
-    create_package_writer_on_stream : Proc(IXpsOMObjectFactory*, ISequentialStream, LibC::BOOL, XPS_INTERLEAVING, IOpcPartUri, IXpsOMCoreProperties, IXpsOMImageResource, IXpsOMPrintTicketResource, IOpcPartUri, IXpsOMPackageWriter*, HRESULT)
-    create_part_uri : Proc(IXpsOMObjectFactory*, LibC::LPWSTR, IOpcPartUri*, HRESULT)
-    create_read_only_stream_on_file : Proc(IXpsOMObjectFactory*, LibC::LPWSTR, IStream*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_package : UInt64
+    create_package_from_file : UInt64
+    create_package_from_stream : UInt64
+    create_story_fragments_resource : UInt64
+    create_document_structure_resource : UInt64
+    create_signature_block_resource : UInt64
+    create_remote_dictionary_resource : UInt64
+    create_remote_dictionary_resource_from_stream : UInt64
+    create_part_resources : UInt64
+    create_document_sequence : UInt64
+    create_document : UInt64
+    create_page_reference : UInt64
+    create_page : UInt64
+    create_page_from_stream : UInt64
+    create_canvas : UInt64
+    create_glyphs : UInt64
+    create_path : UInt64
+    create_geometry : UInt64
+    create_geometry_figure : UInt64
+    create_matrix_transform : UInt64
+    create_solid_color_brush : UInt64
+    create_color_profile_resource : UInt64
+    create_image_brush : UInt64
+    create_visual_brush : UInt64
+    create_image_resource : UInt64
+    create_print_ticket_resource : UInt64
+    create_font_resource : UInt64
+    create_gradient_stop : UInt64
+    create_linear_gradient_brush : UInt64
+    create_radial_gradient_brush : UInt64
+    create_core_properties : UInt64
+    create_dictionary : UInt64
+    create_part_uri_collection : UInt64
+    create_package_writer_on_file : UInt64
+    create_package_writer_on_stream : UInt64
+    create_part_uri : UInt64
+    create_read_only_stream_on_file : UInt64
   end
 
   IXpsOMObjectFactory_GUID = "f9b2a685-a50d-4fc2-b764-b56e093ea0ca"
@@ -1636,11 +1636,11 @@ lib LibWin32
   end
 
   struct IXpsOMNameCollectionVTbl
-    query_interface : Proc(IXpsOMNameCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMNameCollection*, UInt32)
-    release : Proc(IXpsOMNameCollection*, UInt32)
-    get_count : Proc(IXpsOMNameCollection*, UInt32*, HRESULT)
-    get_at : Proc(IXpsOMNameCollection*, UInt32, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
   end
 
   IXpsOMNameCollection_GUID = "4bddf8ec-c915-421b-a166-d173d25653d2"
@@ -1650,15 +1650,15 @@ lib LibWin32
   end
 
   struct IXpsOMPartUriCollectionVTbl
-    query_interface : Proc(IXpsOMPartUriCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMPartUriCollection*, UInt32)
-    release : Proc(IXpsOMPartUriCollection*, UInt32)
-    get_count : Proc(IXpsOMPartUriCollection*, UInt32*, HRESULT)
-    get_at : Proc(IXpsOMPartUriCollection*, UInt32, IOpcPartUri*, HRESULT)
-    insert_at : Proc(IXpsOMPartUriCollection*, UInt32, IOpcPartUri, HRESULT)
-    remove_at : Proc(IXpsOMPartUriCollection*, UInt32, HRESULT)
-    set_at : Proc(IXpsOMPartUriCollection*, UInt32, IOpcPartUri, HRESULT)
-    append : Proc(IXpsOMPartUriCollection*, IOpcPartUri, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    insert_at : UInt64
+    remove_at : UInt64
+    set_at : UInt64
+    append : UInt64
   end
 
   IXpsOMPartUriCollection_GUID = "57c650d4-067c-4893-8c33-f62a0633730f"
@@ -1668,14 +1668,14 @@ lib LibWin32
   end
 
   struct IXpsOMPackageWriterVTbl
-    query_interface : Proc(IXpsOMPackageWriter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMPackageWriter*, UInt32)
-    release : Proc(IXpsOMPackageWriter*, UInt32)
-    start_new_document : Proc(IXpsOMPackageWriter*, IOpcPartUri, IXpsOMPrintTicketResource, IXpsOMDocumentStructureResource, IXpsOMSignatureBlockResourceCollection, IXpsOMPartUriCollection, HRESULT)
-    add_page : Proc(IXpsOMPackageWriter*, IXpsOMPage, XPS_SIZE*, IXpsOMPartUriCollection, IXpsOMStoryFragmentsResource, IXpsOMPrintTicketResource, IXpsOMImageResource, HRESULT)
-    add_resource : Proc(IXpsOMPackageWriter*, IXpsOMResource, HRESULT)
-    close : Proc(IXpsOMPackageWriter*, HRESULT)
-    is_closed : Proc(IXpsOMPackageWriter*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    start_new_document : UInt64
+    add_page : UInt64
+    add_resource : UInt64
+    close : UInt64
+    is_closed : UInt64
   end
 
   IXpsOMPackageWriter_GUID = "4e2aa182-a443-42c6-b41b-4f8e9de73ff9"
@@ -1685,10 +1685,10 @@ lib LibWin32
   end
 
   struct IXpsOMPackageTargetVTbl
-    query_interface : Proc(IXpsOMPackageTarget*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMPackageTarget*, UInt32)
-    release : Proc(IXpsOMPackageTarget*, UInt32)
-    create_xps_om_package_writer : Proc(IXpsOMPackageTarget*, IOpcPartUri, IXpsOMPrintTicketResource, IOpcPartUri, IXpsOMPackageWriter*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_xps_om_package_writer : UInt64
   end
 
   IXpsOMPackageTarget_GUID = "219a9db0-4959-47d0-8034-b1ce84f41a4d"
@@ -1698,10 +1698,10 @@ lib LibWin32
   end
 
   struct IXpsOMThumbnailGeneratorVTbl
-    query_interface : Proc(IXpsOMThumbnailGenerator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMThumbnailGenerator*, UInt32)
-    release : Proc(IXpsOMThumbnailGenerator*, UInt32)
-    generate_thumbnail : Proc(IXpsOMThumbnailGenerator*, IXpsOMPage, XPS_IMAGE_TYPE, XPS_THUMBNAIL_SIZE, IOpcPartUri, IXpsOMImageResource*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    generate_thumbnail : UInt64
   end
 
   IXpsOMThumbnailGenerator_GUID = "15b873d5-1971-41e8-83a3-6578403064c7"
@@ -1711,58 +1711,58 @@ lib LibWin32
   end
 
   struct IXpsOMObjectFactory1VTbl
-    query_interface : Proc(IXpsOMObjectFactory1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMObjectFactory1*, UInt32)
-    release : Proc(IXpsOMObjectFactory1*, UInt32)
-    create_package : Proc(IXpsOMObjectFactory1*, IXpsOMPackage*, HRESULT)
-    create_package_from_file : Proc(IXpsOMObjectFactory1*, LibC::LPWSTR, LibC::BOOL, IXpsOMPackage*, HRESULT)
-    create_package_from_stream : Proc(IXpsOMObjectFactory1*, IStream, LibC::BOOL, IXpsOMPackage*, HRESULT)
-    create_story_fragments_resource : Proc(IXpsOMObjectFactory1*, IStream, IOpcPartUri, IXpsOMStoryFragmentsResource*, HRESULT)
-    create_document_structure_resource : Proc(IXpsOMObjectFactory1*, IStream, IOpcPartUri, IXpsOMDocumentStructureResource*, HRESULT)
-    create_signature_block_resource : Proc(IXpsOMObjectFactory1*, IStream, IOpcPartUri, IXpsOMSignatureBlockResource*, HRESULT)
-    create_remote_dictionary_resource : Proc(IXpsOMObjectFactory1*, IXpsOMDictionary, IOpcPartUri, IXpsOMRemoteDictionaryResource*, HRESULT)
-    create_remote_dictionary_resource_from_stream : Proc(IXpsOMObjectFactory1*, IStream, IOpcPartUri, IXpsOMPartResources, IXpsOMRemoteDictionaryResource*, HRESULT)
-    create_part_resources : Proc(IXpsOMObjectFactory1*, IXpsOMPartResources*, HRESULT)
-    create_document_sequence : Proc(IXpsOMObjectFactory1*, IOpcPartUri, IXpsOMDocumentSequence*, HRESULT)
-    create_document : Proc(IXpsOMObjectFactory1*, IOpcPartUri, IXpsOMDocument*, HRESULT)
-    create_page_reference : Proc(IXpsOMObjectFactory1*, XPS_SIZE*, IXpsOMPageReference*, HRESULT)
-    create_page : Proc(IXpsOMObjectFactory1*, XPS_SIZE*, LibC::LPWSTR, IOpcPartUri, IXpsOMPage*, HRESULT)
-    create_page_from_stream : Proc(IXpsOMObjectFactory1*, IStream, IOpcPartUri, IXpsOMPartResources, LibC::BOOL, IXpsOMPage*, HRESULT)
-    create_canvas : Proc(IXpsOMObjectFactory1*, IXpsOMCanvas*, HRESULT)
-    create_glyphs : Proc(IXpsOMObjectFactory1*, IXpsOMFontResource, IXpsOMGlyphs*, HRESULT)
-    create_path : Proc(IXpsOMObjectFactory1*, IXpsOMPath*, HRESULT)
-    create_geometry : Proc(IXpsOMObjectFactory1*, IXpsOMGeometry*, HRESULT)
-    create_geometry_figure : Proc(IXpsOMObjectFactory1*, XPS_POINT*, IXpsOMGeometryFigure*, HRESULT)
-    create_matrix_transform : Proc(IXpsOMObjectFactory1*, XPS_MATRIX*, IXpsOMMatrixTransform*, HRESULT)
-    create_solid_color_brush : Proc(IXpsOMObjectFactory1*, XPS_COLOR*, IXpsOMColorProfileResource, IXpsOMSolidColorBrush*, HRESULT)
-    create_color_profile_resource : Proc(IXpsOMObjectFactory1*, IStream, IOpcPartUri, IXpsOMColorProfileResource*, HRESULT)
-    create_image_brush : Proc(IXpsOMObjectFactory1*, IXpsOMImageResource, XPS_RECT*, XPS_RECT*, IXpsOMImageBrush*, HRESULT)
-    create_visual_brush : Proc(IXpsOMObjectFactory1*, XPS_RECT*, XPS_RECT*, IXpsOMVisualBrush*, HRESULT)
-    create_image_resource : Proc(IXpsOMObjectFactory1*, IStream, XPS_IMAGE_TYPE, IOpcPartUri, IXpsOMImageResource*, HRESULT)
-    create_print_ticket_resource : Proc(IXpsOMObjectFactory1*, IStream, IOpcPartUri, IXpsOMPrintTicketResource*, HRESULT)
-    create_font_resource : Proc(IXpsOMObjectFactory1*, IStream, XPS_FONT_EMBEDDING, IOpcPartUri, LibC::BOOL, IXpsOMFontResource*, HRESULT)
-    create_gradient_stop : Proc(IXpsOMObjectFactory1*, XPS_COLOR*, IXpsOMColorProfileResource, Float32, IXpsOMGradientStop*, HRESULT)
-    create_linear_gradient_brush : Proc(IXpsOMObjectFactory1*, IXpsOMGradientStop, IXpsOMGradientStop, XPS_POINT*, XPS_POINT*, IXpsOMLinearGradientBrush*, HRESULT)
-    create_radial_gradient_brush : Proc(IXpsOMObjectFactory1*, IXpsOMGradientStop, IXpsOMGradientStop, XPS_POINT*, XPS_POINT*, XPS_SIZE*, IXpsOMRadialGradientBrush*, HRESULT)
-    create_core_properties : Proc(IXpsOMObjectFactory1*, IOpcPartUri, IXpsOMCoreProperties*, HRESULT)
-    create_dictionary : Proc(IXpsOMObjectFactory1*, IXpsOMDictionary*, HRESULT)
-    create_part_uri_collection : Proc(IXpsOMObjectFactory1*, IXpsOMPartUriCollection*, HRESULT)
-    create_package_writer_on_file : Proc(IXpsOMObjectFactory1*, LibC::LPWSTR, SECURITY_ATTRIBUTES*, UInt32, LibC::BOOL, XPS_INTERLEAVING, IOpcPartUri, IXpsOMCoreProperties, IXpsOMImageResource, IXpsOMPrintTicketResource, IOpcPartUri, IXpsOMPackageWriter*, HRESULT)
-    create_package_writer_on_stream : Proc(IXpsOMObjectFactory1*, ISequentialStream, LibC::BOOL, XPS_INTERLEAVING, IOpcPartUri, IXpsOMCoreProperties, IXpsOMImageResource, IXpsOMPrintTicketResource, IOpcPartUri, IXpsOMPackageWriter*, HRESULT)
-    create_part_uri : Proc(IXpsOMObjectFactory1*, LibC::LPWSTR, IOpcPartUri*, HRESULT)
-    create_read_only_stream_on_file : Proc(IXpsOMObjectFactory1*, LibC::LPWSTR, IStream*, HRESULT)
-    get_document_type_from_file : Proc(IXpsOMObjectFactory1*, LibC::LPWSTR, XPS_DOCUMENT_TYPE*, HRESULT)
-    get_document_type_from_stream : Proc(IXpsOMObjectFactory1*, IStream, XPS_DOCUMENT_TYPE*, HRESULT)
-    convert_hd_photo_to_jpeg_xr : Proc(IXpsOMObjectFactory1*, IXpsOMImageResource, HRESULT)
-    convert_jpeg_xr_to_hd_photo : Proc(IXpsOMObjectFactory1*, IXpsOMImageResource, HRESULT)
-    create_package_writer_on_file1 : Proc(IXpsOMObjectFactory1*, LibC::LPWSTR, SECURITY_ATTRIBUTES*, UInt32, LibC::BOOL, XPS_INTERLEAVING, IOpcPartUri, IXpsOMCoreProperties, IXpsOMImageResource, IXpsOMPrintTicketResource, IOpcPartUri, XPS_DOCUMENT_TYPE, IXpsOMPackageWriter*, HRESULT)
-    create_package_writer_on_stream1 : Proc(IXpsOMObjectFactory1*, ISequentialStream, LibC::BOOL, XPS_INTERLEAVING, IOpcPartUri, IXpsOMCoreProperties, IXpsOMImageResource, IXpsOMPrintTicketResource, IOpcPartUri, XPS_DOCUMENT_TYPE, IXpsOMPackageWriter*, HRESULT)
-    create_package1 : Proc(IXpsOMObjectFactory1*, IXpsOMPackage1*, HRESULT)
-    create_package_from_stream1 : Proc(IXpsOMObjectFactory1*, IStream, LibC::BOOL, IXpsOMPackage1*, HRESULT)
-    create_package_from_file1 : Proc(IXpsOMObjectFactory1*, LibC::LPWSTR, LibC::BOOL, IXpsOMPackage1*, HRESULT)
-    create_page1 : Proc(IXpsOMObjectFactory1*, XPS_SIZE*, LibC::LPWSTR, IOpcPartUri, IXpsOMPage1*, HRESULT)
-    create_page_from_stream1 : Proc(IXpsOMObjectFactory1*, IStream, IOpcPartUri, IXpsOMPartResources, LibC::BOOL, IXpsOMPage1*, HRESULT)
-    create_remote_dictionary_resource_from_stream1 : Proc(IXpsOMObjectFactory1*, IStream, IOpcPartUri, IXpsOMPartResources, IXpsOMRemoteDictionaryResource*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_package : UInt64
+    create_package_from_file : UInt64
+    create_package_from_stream : UInt64
+    create_story_fragments_resource : UInt64
+    create_document_structure_resource : UInt64
+    create_signature_block_resource : UInt64
+    create_remote_dictionary_resource : UInt64
+    create_remote_dictionary_resource_from_stream : UInt64
+    create_part_resources : UInt64
+    create_document_sequence : UInt64
+    create_document : UInt64
+    create_page_reference : UInt64
+    create_page : UInt64
+    create_page_from_stream : UInt64
+    create_canvas : UInt64
+    create_glyphs : UInt64
+    create_path : UInt64
+    create_geometry : UInt64
+    create_geometry_figure : UInt64
+    create_matrix_transform : UInt64
+    create_solid_color_brush : UInt64
+    create_color_profile_resource : UInt64
+    create_image_brush : UInt64
+    create_visual_brush : UInt64
+    create_image_resource : UInt64
+    create_print_ticket_resource : UInt64
+    create_font_resource : UInt64
+    create_gradient_stop : UInt64
+    create_linear_gradient_brush : UInt64
+    create_radial_gradient_brush : UInt64
+    create_core_properties : UInt64
+    create_dictionary : UInt64
+    create_part_uri_collection : UInt64
+    create_package_writer_on_file : UInt64
+    create_package_writer_on_stream : UInt64
+    create_part_uri : UInt64
+    create_read_only_stream_on_file : UInt64
+    get_document_type_from_file : UInt64
+    get_document_type_from_stream : UInt64
+    convert_hd_photo_to_jpeg_xr : UInt64
+    convert_jpeg_xr_to_hd_photo : UInt64
+    create_package_writer_on_file1 : UInt64
+    create_package_writer_on_stream1 : UInt64
+    create_package1 : UInt64
+    create_package_from_stream1 : UInt64
+    create_package_from_file1 : UInt64
+    create_page1 : UInt64
+    create_page_from_stream1 : UInt64
+    create_remote_dictionary_resource_from_stream1 : UInt64
   end
 
   IXpsOMObjectFactory1_GUID = "0a91b617-d612-4181-bf7c-be5824e9cc8f"
@@ -1772,22 +1772,22 @@ lib LibWin32
   end
 
   struct IXpsOMPackage1VTbl
-    query_interface : Proc(IXpsOMPackage1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMPackage1*, UInt32)
-    release : Proc(IXpsOMPackage1*, UInt32)
-    get_document_sequence : Proc(IXpsOMPackage1*, IXpsOMDocumentSequence*, HRESULT)
-    set_document_sequence : Proc(IXpsOMPackage1*, IXpsOMDocumentSequence, HRESULT)
-    get_core_properties : Proc(IXpsOMPackage1*, IXpsOMCoreProperties*, HRESULT)
-    set_core_properties : Proc(IXpsOMPackage1*, IXpsOMCoreProperties, HRESULT)
-    get_discard_control_part_name : Proc(IXpsOMPackage1*, IOpcPartUri*, HRESULT)
-    set_discard_control_part_name : Proc(IXpsOMPackage1*, IOpcPartUri, HRESULT)
-    get_thumbnail_resource : Proc(IXpsOMPackage1*, IXpsOMImageResource*, HRESULT)
-    set_thumbnail_resource : Proc(IXpsOMPackage1*, IXpsOMImageResource, HRESULT)
-    write_to_file : Proc(IXpsOMPackage1*, LibC::LPWSTR, SECURITY_ATTRIBUTES*, UInt32, LibC::BOOL, HRESULT)
-    write_to_stream : Proc(IXpsOMPackage1*, ISequentialStream, LibC::BOOL, HRESULT)
-    get_document_type : Proc(IXpsOMPackage1*, XPS_DOCUMENT_TYPE*, HRESULT)
-    write_to_file1 : Proc(IXpsOMPackage1*, LibC::LPWSTR, SECURITY_ATTRIBUTES*, UInt32, LibC::BOOL, XPS_DOCUMENT_TYPE, HRESULT)
-    write_to_stream1 : Proc(IXpsOMPackage1*, ISequentialStream, LibC::BOOL, XPS_DOCUMENT_TYPE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_document_sequence : UInt64
+    set_document_sequence : UInt64
+    get_core_properties : UInt64
+    set_core_properties : UInt64
+    get_discard_control_part_name : UInt64
+    set_discard_control_part_name : UInt64
+    get_thumbnail_resource : UInt64
+    set_thumbnail_resource : UInt64
+    write_to_file : UInt64
+    write_to_stream : UInt64
+    get_document_type : UInt64
+    write_to_file1 : UInt64
+    write_to_stream1 : UInt64
   end
 
   IXpsOMPackage1_GUID = "95a9435e-12bb-461b-8e7f-c6adb04cd96a"
@@ -1797,35 +1797,35 @@ lib LibWin32
   end
 
   struct IXpsOMPage1VTbl
-    query_interface : Proc(IXpsOMPage1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMPage1*, UInt32)
-    release : Proc(IXpsOMPage1*, UInt32)
-    get_part_name : Proc(IXpsOMPage1*, IOpcPartUri*, HRESULT)
-    set_part_name : Proc(IXpsOMPage1*, IOpcPartUri, HRESULT)
-    get_owner : Proc(IXpsOMPage1*, IXpsOMPageReference*, HRESULT)
-    get_visuals : Proc(IXpsOMPage1*, IXpsOMVisualCollection*, HRESULT)
-    get_page_dimensions : Proc(IXpsOMPage1*, XPS_SIZE*, HRESULT)
-    set_page_dimensions : Proc(IXpsOMPage1*, XPS_SIZE*, HRESULT)
-    get_content_box : Proc(IXpsOMPage1*, XPS_RECT*, HRESULT)
-    set_content_box : Proc(IXpsOMPage1*, XPS_RECT*, HRESULT)
-    get_bleed_box : Proc(IXpsOMPage1*, XPS_RECT*, HRESULT)
-    set_bleed_box : Proc(IXpsOMPage1*, XPS_RECT*, HRESULT)
-    get_language : Proc(IXpsOMPage1*, LibC::LPWSTR*, HRESULT)
-    set_language : Proc(IXpsOMPage1*, LibC::LPWSTR, HRESULT)
-    get_name : Proc(IXpsOMPage1*, LibC::LPWSTR*, HRESULT)
-    set_name : Proc(IXpsOMPage1*, LibC::LPWSTR, HRESULT)
-    get_is_hyperlink_target : Proc(IXpsOMPage1*, LibC::BOOL*, HRESULT)
-    set_is_hyperlink_target : Proc(IXpsOMPage1*, LibC::BOOL, HRESULT)
-    get_dictionary : Proc(IXpsOMPage1*, IXpsOMDictionary*, HRESULT)
-    get_dictionary_local : Proc(IXpsOMPage1*, IXpsOMDictionary*, HRESULT)
-    set_dictionary_local : Proc(IXpsOMPage1*, IXpsOMDictionary, HRESULT)
-    get_dictionary_resource : Proc(IXpsOMPage1*, IXpsOMRemoteDictionaryResource*, HRESULT)
-    set_dictionary_resource : Proc(IXpsOMPage1*, IXpsOMRemoteDictionaryResource, HRESULT)
-    write : Proc(IXpsOMPage1*, ISequentialStream, LibC::BOOL, HRESULT)
-    generate_unused_lookup_key : Proc(IXpsOMPage1*, XPS_OBJECT_TYPE, LibC::LPWSTR*, HRESULT)
-    clone : Proc(IXpsOMPage1*, IXpsOMPage*, HRESULT)
-    get_document_type : Proc(IXpsOMPage1*, XPS_DOCUMENT_TYPE*, HRESULT)
-    write1 : Proc(IXpsOMPage1*, ISequentialStream, LibC::BOOL, XPS_DOCUMENT_TYPE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_part_name : UInt64
+    set_part_name : UInt64
+    get_owner : UInt64
+    get_visuals : UInt64
+    get_page_dimensions : UInt64
+    set_page_dimensions : UInt64
+    get_content_box : UInt64
+    set_content_box : UInt64
+    get_bleed_box : UInt64
+    set_bleed_box : UInt64
+    get_language : UInt64
+    set_language : UInt64
+    get_name : UInt64
+    set_name : UInt64
+    get_is_hyperlink_target : UInt64
+    set_is_hyperlink_target : UInt64
+    get_dictionary : UInt64
+    get_dictionary_local : UInt64
+    set_dictionary_local : UInt64
+    get_dictionary_resource : UInt64
+    set_dictionary_resource : UInt64
+    write : UInt64
+    generate_unused_lookup_key : UInt64
+    clone : UInt64
+    get_document_type : UInt64
+    write1 : UInt64
   end
 
   IXpsOMPage1_GUID = "305b60ef-6892-4dda-9cbb-3aa65974508a"
@@ -1835,12 +1835,12 @@ lib LibWin32
   end
 
   struct IXpsDocumentPackageTargetVTbl
-    query_interface : Proc(IXpsDocumentPackageTarget*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsDocumentPackageTarget*, UInt32)
-    release : Proc(IXpsDocumentPackageTarget*, UInt32)
-    get_xps_om_package_writer : Proc(IXpsDocumentPackageTarget*, IOpcPartUri, IOpcPartUri, IXpsOMPackageWriter*, HRESULT)
-    get_xps_om_factory : Proc(IXpsDocumentPackageTarget*, IXpsOMObjectFactory*, HRESULT)
-    get_xps_type : Proc(IXpsDocumentPackageTarget*, XPS_DOCUMENT_TYPE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_xps_om_package_writer : UInt64
+    get_xps_om_factory : UInt64
+    get_xps_type : UInt64
   end
 
   IXpsDocumentPackageTarget_GUID = "3b0b6d38-53ad-41da-b212-d37637a6714e"
@@ -1850,15 +1850,15 @@ lib LibWin32
   end
 
   struct IXpsOMRemoteDictionaryResource1VTbl
-    query_interface : Proc(IXpsOMRemoteDictionaryResource1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMRemoteDictionaryResource1*, UInt32)
-    release : Proc(IXpsOMRemoteDictionaryResource1*, UInt32)
-    get_part_name : Proc(IXpsOMRemoteDictionaryResource1*, IOpcPartUri*, HRESULT)
-    set_part_name : Proc(IXpsOMRemoteDictionaryResource1*, IOpcPartUri, HRESULT)
-    get_dictionary : Proc(IXpsOMRemoteDictionaryResource1*, IXpsOMDictionary*, HRESULT)
-    set_dictionary : Proc(IXpsOMRemoteDictionaryResource1*, IXpsOMDictionary, HRESULT)
-    get_document_type : Proc(IXpsOMRemoteDictionaryResource1*, XPS_DOCUMENT_TYPE*, HRESULT)
-    write1 : Proc(IXpsOMRemoteDictionaryResource1*, ISequentialStream, XPS_DOCUMENT_TYPE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_part_name : UInt64
+    set_part_name : UInt64
+    get_dictionary : UInt64
+    set_dictionary : UInt64
+    get_document_type : UInt64
+    write1 : UInt64
   end
 
   IXpsOMRemoteDictionaryResource1_GUID = "bf8fc1d4-9d46-4141-ba5f-94bb9250d041"
@@ -1868,16 +1868,16 @@ lib LibWin32
   end
 
   struct IXpsOMPackageWriter3DVTbl
-    query_interface : Proc(IXpsOMPackageWriter3D*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsOMPackageWriter3D*, UInt32)
-    release : Proc(IXpsOMPackageWriter3D*, UInt32)
-    start_new_document : Proc(IXpsOMPackageWriter3D*, IOpcPartUri, IXpsOMPrintTicketResource, IXpsOMDocumentStructureResource, IXpsOMSignatureBlockResourceCollection, IXpsOMPartUriCollection, HRESULT)
-    add_page : Proc(IXpsOMPackageWriter3D*, IXpsOMPage, XPS_SIZE*, IXpsOMPartUriCollection, IXpsOMStoryFragmentsResource, IXpsOMPrintTicketResource, IXpsOMImageResource, HRESULT)
-    add_resource : Proc(IXpsOMPackageWriter3D*, IXpsOMResource, HRESULT)
-    close : Proc(IXpsOMPackageWriter3D*, HRESULT)
-    is_closed : Proc(IXpsOMPackageWriter3D*, LibC::BOOL*, HRESULT)
-    add_model_texture : Proc(IXpsOMPackageWriter3D*, IOpcPartUri, IStream, HRESULT)
-    set_model_print_ticket : Proc(IXpsOMPackageWriter3D*, IOpcPartUri, IStream, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    start_new_document : UInt64
+    add_page : UInt64
+    add_resource : UInt64
+    close : UInt64
+    is_closed : UInt64
+    add_model_texture : UInt64
+    set_model_print_ticket : UInt64
   end
 
   IXpsOMPackageWriter3D_GUID = "e8a45033-640e-43fa-9bdf-fddeaa31c6a0"
@@ -1887,11 +1887,11 @@ lib LibWin32
   end
 
   struct IXpsDocumentPackageTarget3DVTbl
-    query_interface : Proc(IXpsDocumentPackageTarget3D*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsDocumentPackageTarget3D*, UInt32)
-    release : Proc(IXpsDocumentPackageTarget3D*, UInt32)
-    get_xps_om_package_writer3_d : Proc(IXpsDocumentPackageTarget3D*, IOpcPartUri, IOpcPartUri, IOpcPartUri, IStream, IXpsOMPackageWriter3D*, HRESULT)
-    get_xps_om_factory : Proc(IXpsDocumentPackageTarget3D*, IXpsOMObjectFactory*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_xps_om_package_writer3_d : UInt64
+    get_xps_om_factory : UInt64
   end
 
   IXpsDocumentPackageTarget3D_GUID = "60ba71b8-3101-4984-9199-f4ea775ff01d"
@@ -1901,26 +1901,26 @@ lib LibWin32
   end
 
   struct IXpsSigningOptionsVTbl
-    query_interface : Proc(IXpsSigningOptions*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsSigningOptions*, UInt32)
-    release : Proc(IXpsSigningOptions*, UInt32)
-    get_signature_id : Proc(IXpsSigningOptions*, LibC::LPWSTR*, HRESULT)
-    set_signature_id : Proc(IXpsSigningOptions*, LibC::LPWSTR, HRESULT)
-    get_signature_method : Proc(IXpsSigningOptions*, LibC::LPWSTR*, HRESULT)
-    set_signature_method : Proc(IXpsSigningOptions*, LibC::LPWSTR, HRESULT)
-    get_digest_method : Proc(IXpsSigningOptions*, LibC::LPWSTR*, HRESULT)
-    set_digest_method : Proc(IXpsSigningOptions*, LibC::LPWSTR, HRESULT)
-    get_signature_part_name : Proc(IXpsSigningOptions*, IOpcPartUri*, HRESULT)
-    set_signature_part_name : Proc(IXpsSigningOptions*, IOpcPartUri, HRESULT)
-    get_policy : Proc(IXpsSigningOptions*, XPS_SIGN_POLICY*, HRESULT)
-    set_policy : Proc(IXpsSigningOptions*, XPS_SIGN_POLICY, HRESULT)
-    get_signing_time_format : Proc(IXpsSigningOptions*, OPC_SIGNATURE_TIME_FORMAT*, HRESULT)
-    set_signing_time_format : Proc(IXpsSigningOptions*, OPC_SIGNATURE_TIME_FORMAT, HRESULT)
-    get_custom_objects : Proc(IXpsSigningOptions*, IOpcSignatureCustomObjectSet*, HRESULT)
-    get_custom_references : Proc(IXpsSigningOptions*, IOpcSignatureReferenceSet*, HRESULT)
-    get_certificate_set : Proc(IXpsSigningOptions*, IOpcCertificateSet*, HRESULT)
-    get_flags : Proc(IXpsSigningOptions*, XPS_SIGN_FLAGS*, HRESULT)
-    set_flags : Proc(IXpsSigningOptions*, XPS_SIGN_FLAGS, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_signature_id : UInt64
+    set_signature_id : UInt64
+    get_signature_method : UInt64
+    set_signature_method : UInt64
+    get_digest_method : UInt64
+    set_digest_method : UInt64
+    get_signature_part_name : UInt64
+    set_signature_part_name : UInt64
+    get_policy : UInt64
+    set_policy : UInt64
+    get_signing_time_format : UInt64
+    set_signing_time_format : UInt64
+    get_custom_objects : UInt64
+    get_custom_references : UInt64
+    get_certificate_set : UInt64
+    get_flags : UInt64
+    set_flags : UInt64
   end
 
   IXpsSigningOptions_GUID = "7718eae4-3215-49be-af5b-594fef7fcfa6"
@@ -1930,12 +1930,12 @@ lib LibWin32
   end
 
   struct IXpsSignatureCollectionVTbl
-    query_interface : Proc(IXpsSignatureCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsSignatureCollection*, UInt32)
-    release : Proc(IXpsSignatureCollection*, UInt32)
-    get_count : Proc(IXpsSignatureCollection*, UInt32*, HRESULT)
-    get_at : Proc(IXpsSignatureCollection*, UInt32, IXpsSignature*, HRESULT)
-    remove_at : Proc(IXpsSignatureCollection*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    remove_at : UInt64
   end
 
   IXpsSignatureCollection_GUID = "a2d1d95d-add2-4dff-ab27-6b9c645ff322"
@@ -1945,21 +1945,21 @@ lib LibWin32
   end
 
   struct IXpsSignatureVTbl
-    query_interface : Proc(IXpsSignature*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsSignature*, UInt32)
-    release : Proc(IXpsSignature*, UInt32)
-    get_signature_id : Proc(IXpsSignature*, LibC::LPWSTR*, HRESULT)
-    get_signature_value : Proc(IXpsSignature*, UInt8**, UInt32*, HRESULT)
-    get_certificate_enumerator : Proc(IXpsSignature*, IOpcCertificateEnumerator*, HRESULT)
-    get_signing_time : Proc(IXpsSignature*, LibC::LPWSTR*, HRESULT)
-    get_signing_time_format : Proc(IXpsSignature*, OPC_SIGNATURE_TIME_FORMAT*, HRESULT)
-    get_signature_part_name : Proc(IXpsSignature*, IOpcPartUri*, HRESULT)
-    verify : Proc(IXpsSignature*, CERT_CONTEXT*, XPS_SIGNATURE_STATUS*, HRESULT)
-    get_policy : Proc(IXpsSignature*, XPS_SIGN_POLICY*, HRESULT)
-    get_custom_object_enumerator : Proc(IXpsSignature*, IOpcSignatureCustomObjectEnumerator*, HRESULT)
-    get_custom_reference_enumerator : Proc(IXpsSignature*, IOpcSignatureReferenceEnumerator*, HRESULT)
-    get_signature_xml : Proc(IXpsSignature*, UInt8**, UInt32*, HRESULT)
-    set_signature_xml : Proc(IXpsSignature*, UInt8*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_signature_id : UInt64
+    get_signature_value : UInt64
+    get_certificate_enumerator : UInt64
+    get_signing_time : UInt64
+    get_signing_time_format : UInt64
+    get_signature_part_name : UInt64
+    verify : UInt64
+    get_policy : UInt64
+    get_custom_object_enumerator : UInt64
+    get_custom_reference_enumerator : UInt64
+    get_signature_xml : UInt64
+    set_signature_xml : UInt64
   end
 
   IXpsSignature_GUID = "6ae4c93e-1ade-42fb-898b-3a5658284857"
@@ -1969,12 +1969,12 @@ lib LibWin32
   end
 
   struct IXpsSignatureBlockCollectionVTbl
-    query_interface : Proc(IXpsSignatureBlockCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsSignatureBlockCollection*, UInt32)
-    release : Proc(IXpsSignatureBlockCollection*, UInt32)
-    get_count : Proc(IXpsSignatureBlockCollection*, UInt32*, HRESULT)
-    get_at : Proc(IXpsSignatureBlockCollection*, UInt32, IXpsSignatureBlock*, HRESULT)
-    remove_at : Proc(IXpsSignatureBlockCollection*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    remove_at : UInt64
   end
 
   IXpsSignatureBlockCollection_GUID = "23397050-fe99-467a-8dce-9237f074ffe4"
@@ -1984,14 +1984,14 @@ lib LibWin32
   end
 
   struct IXpsSignatureBlockVTbl
-    query_interface : Proc(IXpsSignatureBlock*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsSignatureBlock*, UInt32)
-    release : Proc(IXpsSignatureBlock*, UInt32)
-    get_requests : Proc(IXpsSignatureBlock*, IXpsSignatureRequestCollection*, HRESULT)
-    get_part_name : Proc(IXpsSignatureBlock*, IOpcPartUri*, HRESULT)
-    get_document_index : Proc(IXpsSignatureBlock*, UInt32*, HRESULT)
-    get_document_name : Proc(IXpsSignatureBlock*, IOpcPartUri*, HRESULT)
-    create_request : Proc(IXpsSignatureBlock*, LibC::LPWSTR, IXpsSignatureRequest*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_requests : UInt64
+    get_part_name : UInt64
+    get_document_index : UInt64
+    get_document_name : UInt64
+    create_request : UInt64
   end
 
   IXpsSignatureBlock_GUID = "151fac09-0b97-4ac6-a323-5e4297d4322b"
@@ -2001,12 +2001,12 @@ lib LibWin32
   end
 
   struct IXpsSignatureRequestCollectionVTbl
-    query_interface : Proc(IXpsSignatureRequestCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsSignatureRequestCollection*, UInt32)
-    release : Proc(IXpsSignatureRequestCollection*, UInt32)
-    get_count : Proc(IXpsSignatureRequestCollection*, UInt32*, HRESULT)
-    get_at : Proc(IXpsSignatureRequestCollection*, UInt32, IXpsSignatureRequest*, HRESULT)
-    remove_at : Proc(IXpsSignatureRequestCollection*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    remove_at : UInt64
   end
 
   IXpsSignatureRequestCollection_GUID = "f0253e68-9f19-412e-9b4f-54d3b0ac6cd9"
@@ -2016,21 +2016,21 @@ lib LibWin32
   end
 
   struct IXpsSignatureRequestVTbl
-    query_interface : Proc(IXpsSignatureRequest*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsSignatureRequest*, UInt32)
-    release : Proc(IXpsSignatureRequest*, UInt32)
-    get_intent : Proc(IXpsSignatureRequest*, LibC::LPWSTR*, HRESULT)
-    set_intent : Proc(IXpsSignatureRequest*, LibC::LPWSTR, HRESULT)
-    get_requested_signer : Proc(IXpsSignatureRequest*, LibC::LPWSTR*, HRESULT)
-    set_requested_signer : Proc(IXpsSignatureRequest*, LibC::LPWSTR, HRESULT)
-    get_request_sign_by_date : Proc(IXpsSignatureRequest*, LibC::LPWSTR*, HRESULT)
-    set_request_sign_by_date : Proc(IXpsSignatureRequest*, LibC::LPWSTR, HRESULT)
-    get_signing_locale : Proc(IXpsSignatureRequest*, LibC::LPWSTR*, HRESULT)
-    set_signing_locale : Proc(IXpsSignatureRequest*, LibC::LPWSTR, HRESULT)
-    get_spot_location : Proc(IXpsSignatureRequest*, Int32*, IOpcPartUri*, Float32*, Float32*, HRESULT)
-    set_spot_location : Proc(IXpsSignatureRequest*, Int32, Float32, Float32, HRESULT)
-    get_request_id : Proc(IXpsSignatureRequest*, LibC::LPWSTR*, HRESULT)
-    get_signature : Proc(IXpsSignatureRequest*, IXpsSignature*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_intent : UInt64
+    set_intent : UInt64
+    get_requested_signer : UInt64
+    set_requested_signer : UInt64
+    get_request_sign_by_date : UInt64
+    set_request_sign_by_date : UInt64
+    get_signing_locale : UInt64
+    set_signing_locale : UInt64
+    get_spot_location : UInt64
+    set_spot_location : UInt64
+    get_request_id : UInt64
+    get_signature : UInt64
   end
 
   IXpsSignatureRequest_GUID = "ac58950b-7208-4b2d-b2c4-951083d3b8eb"
@@ -2040,20 +2040,20 @@ lib LibWin32
   end
 
   struct IXpsSignatureManagerVTbl
-    query_interface : Proc(IXpsSignatureManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsSignatureManager*, UInt32)
-    release : Proc(IXpsSignatureManager*, UInt32)
-    load_package_file : Proc(IXpsSignatureManager*, LibC::LPWSTR, HRESULT)
-    load_package_stream : Proc(IXpsSignatureManager*, IStream, HRESULT)
-    sign : Proc(IXpsSignatureManager*, IXpsSigningOptions, CERT_CONTEXT*, IXpsSignature*, HRESULT)
-    get_signature_origin_part_name : Proc(IXpsSignatureManager*, IOpcPartUri*, HRESULT)
-    set_signature_origin_part_name : Proc(IXpsSignatureManager*, IOpcPartUri, HRESULT)
-    get_signatures : Proc(IXpsSignatureManager*, IXpsSignatureCollection*, HRESULT)
-    add_signature_block : Proc(IXpsSignatureManager*, IOpcPartUri, UInt32, IXpsSignatureBlock*, HRESULT)
-    get_signature_blocks : Proc(IXpsSignatureManager*, IXpsSignatureBlockCollection*, HRESULT)
-    create_signing_options : Proc(IXpsSignatureManager*, IXpsSigningOptions*, HRESULT)
-    save_package_to_file : Proc(IXpsSignatureManager*, LibC::LPWSTR, SECURITY_ATTRIBUTES*, UInt32, HRESULT)
-    save_package_to_stream : Proc(IXpsSignatureManager*, IStream, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    load_package_file : UInt64
+    load_package_stream : UInt64
+    sign : UInt64
+    get_signature_origin_part_name : UInt64
+    set_signature_origin_part_name : UInt64
+    get_signatures : UInt64
+    add_signature_block : UInt64
+    get_signature_blocks : UInt64
+    create_signing_options : UInt64
+    save_package_to_file : UInt64
+    save_package_to_stream : UInt64
   end
 
   IXpsSignatureManager_GUID = "d3e8d338-fdc4-4afc-80b5-d532a1782ee1"
@@ -2098,4 +2098,3200 @@ lib LibWin32
 
   # Params # hwnd : LibC::HANDLE [In],hdcblt : HDC [In],nflags : PRINT_WINDOW_FLAGS [In]
   fun PrintWindow(hwnd : LibC::HANDLE, hdcblt : HDC, nflags : PRINT_WINDOW_FLAGS) : LibC::BOOL
+end
+struct LibWin32::IXpsOMShareable
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IUnknown*, HRESULT)).call(owner)
+  end
+  def get_type(type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(XPS_OBJECT_TYPE*, HRESULT)).call(type)
+  end
+end
+struct LibWin32::IXpsOMVisual
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IUnknown*, HRESULT)).call(owner)
+  end
+  def get_type(type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(XPS_OBJECT_TYPE*, HRESULT)).call(type)
+  end
+  def get_transform(matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(matrixtransform)
+  end
+  def get_transform_local(matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(matrixtransform)
+  end
+  def set_transform_local(matrixtransform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform, HRESULT)).call(matrixtransform)
+  end
+  def get_transform_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_transform_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_clip_geometry(clipgeometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_clip_geometry.unsafe_as(Proc(IXpsOMGeometry*, HRESULT)).call(clipgeometry)
+  end
+  def get_clip_geometry_local(clipgeometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_clip_geometry_local.unsafe_as(Proc(IXpsOMGeometry*, HRESULT)).call(clipgeometry)
+  end
+  def set_clip_geometry_local(clipgeometry : IXpsOMGeometry) : HRESULT
+    @lpVtbl.value.set_clip_geometry_local.unsafe_as(Proc(IXpsOMGeometry, HRESULT)).call(clipgeometry)
+  end
+  def get_clip_geometry_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_clip_geometry_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_clip_geometry_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_clip_geometry_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_opacity(opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32*, HRESULT)).call(opacity)
+  end
+  def set_opacity(opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, HRESULT)).call(opacity)
+  end
+  def get_opacity_mask_brush(opacitymaskbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush.unsafe_as(Proc(IXpsOMBrush*, HRESULT)).call(opacitymaskbrush)
+  end
+  def get_opacity_mask_brush_local(opacitymaskbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush_local.unsafe_as(Proc(IXpsOMBrush*, HRESULT)).call(opacitymaskbrush)
+  end
+  def set_opacity_mask_brush_local(opacitymaskbrush : IXpsOMBrush) : HRESULT
+    @lpVtbl.value.set_opacity_mask_brush_local.unsafe_as(Proc(IXpsOMBrush, HRESULT)).call(opacitymaskbrush)
+  end
+  def get_opacity_mask_brush_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_opacity_mask_brush_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_opacity_mask_brush_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_name(name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(name)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_is_hyperlink_target(ishyperlink : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_hyperlink_target.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(ishyperlink)
+  end
+  def set_is_hyperlink_target(ishyperlink : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_hyperlink_target.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(ishyperlink)
+  end
+  def get_hyperlink_navigate_uri(hyperlinkuri : IUri*) : HRESULT
+    @lpVtbl.value.get_hyperlink_navigate_uri.unsafe_as(Proc(IUri*, HRESULT)).call(hyperlinkuri)
+  end
+  def set_hyperlink_navigate_uri(hyperlinkuri : IUri) : HRESULT
+    @lpVtbl.value.set_hyperlink_navigate_uri.unsafe_as(Proc(IUri, HRESULT)).call(hyperlinkuri)
+  end
+  def get_language(language : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(language)
+  end
+  def set_language(language : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_language.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(language)
+  end
+end
+struct LibWin32::IXpsOMPart
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_part_name(parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(parturi)
+  end
+  def set_part_name(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+end
+struct LibWin32::IXpsOMGlyphsEditor
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def apply_edits : HRESULT
+    @lpVtbl.value.apply_edits.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_unicode_string(unicodestring : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_unicode_string.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(unicodestring)
+  end
+  def set_unicode_string(unicodestring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_unicode_string.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(unicodestring)
+  end
+  def get_glyph_index_count(indexcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_glyph_index_count.unsafe_as(Proc(UInt32*, HRESULT)).call(indexcount)
+  end
+  def get_glyph_indices(indexcount : UInt32*, glyphindices : XPS_GLYPH_INDEX*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.unsafe_as(Proc(UInt32*, XPS_GLYPH_INDEX*, HRESULT)).call(indexcount, glyphindices)
+  end
+  def set_glyph_indices(indexcount : UInt32, glyphindices : XPS_GLYPH_INDEX*) : HRESULT
+    @lpVtbl.value.set_glyph_indices.unsafe_as(Proc(UInt32, XPS_GLYPH_INDEX*, HRESULT)).call(indexcount, glyphindices)
+  end
+  def get_glyph_mapping_count(glyphmappingcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_glyph_mapping_count.unsafe_as(Proc(UInt32*, HRESULT)).call(glyphmappingcount)
+  end
+  def get_glyph_mappings(glyphmappingcount : UInt32*, glyphmappings : XPS_GLYPH_MAPPING*) : HRESULT
+    @lpVtbl.value.get_glyph_mappings.unsafe_as(Proc(UInt32*, XPS_GLYPH_MAPPING*, HRESULT)).call(glyphmappingcount, glyphmappings)
+  end
+  def set_glyph_mappings(glyphmappingcount : UInt32, glyphmappings : XPS_GLYPH_MAPPING*) : HRESULT
+    @lpVtbl.value.set_glyph_mappings.unsafe_as(Proc(UInt32, XPS_GLYPH_MAPPING*, HRESULT)).call(glyphmappingcount, glyphmappings)
+  end
+  def get_prohibited_caret_stop_count(prohibitedcaretstopcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_prohibited_caret_stop_count.unsafe_as(Proc(UInt32*, HRESULT)).call(prohibitedcaretstopcount)
+  end
+  def get_prohibited_caret_stops(count : UInt32*, prohibitedcaretstops : UInt32*) : HRESULT
+    @lpVtbl.value.get_prohibited_caret_stops.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(count, prohibitedcaretstops)
+  end
+  def set_prohibited_caret_stops(count : UInt32, prohibitedcaretstops : UInt32*) : HRESULT
+    @lpVtbl.value.set_prohibited_caret_stops.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(count, prohibitedcaretstops)
+  end
+  def get_bidi_level(bidilevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_bidi_level.unsafe_as(Proc(UInt32*, HRESULT)).call(bidilevel)
+  end
+  def set_bidi_level(bidilevel : UInt32) : HRESULT
+    @lpVtbl.value.set_bidi_level.unsafe_as(Proc(UInt32, HRESULT)).call(bidilevel)
+  end
+  def get_is_sideways(issideways : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_sideways.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(issideways)
+  end
+  def set_is_sideways(issideways : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_sideways.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(issideways)
+  end
+  def get_device_font_name(devicefontname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_device_font_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(devicefontname)
+  end
+  def set_device_font_name(devicefontname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_device_font_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(devicefontname)
+  end
+end
+struct LibWin32::IXpsOMGlyphs
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IUnknown*, HRESULT)).call(owner)
+  end
+  def get_type(type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(XPS_OBJECT_TYPE*, HRESULT)).call(type)
+  end
+  def get_transform(matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(matrixtransform)
+  end
+  def get_transform_local(matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(matrixtransform)
+  end
+  def set_transform_local(matrixtransform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform, HRESULT)).call(matrixtransform)
+  end
+  def get_transform_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_transform_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_clip_geometry(clipgeometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_clip_geometry.unsafe_as(Proc(IXpsOMGeometry*, HRESULT)).call(clipgeometry)
+  end
+  def get_clip_geometry_local(clipgeometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_clip_geometry_local.unsafe_as(Proc(IXpsOMGeometry*, HRESULT)).call(clipgeometry)
+  end
+  def set_clip_geometry_local(clipgeometry : IXpsOMGeometry) : HRESULT
+    @lpVtbl.value.set_clip_geometry_local.unsafe_as(Proc(IXpsOMGeometry, HRESULT)).call(clipgeometry)
+  end
+  def get_clip_geometry_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_clip_geometry_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_clip_geometry_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_clip_geometry_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_opacity(opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32*, HRESULT)).call(opacity)
+  end
+  def set_opacity(opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, HRESULT)).call(opacity)
+  end
+  def get_opacity_mask_brush(opacitymaskbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush.unsafe_as(Proc(IXpsOMBrush*, HRESULT)).call(opacitymaskbrush)
+  end
+  def get_opacity_mask_brush_local(opacitymaskbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush_local.unsafe_as(Proc(IXpsOMBrush*, HRESULT)).call(opacitymaskbrush)
+  end
+  def set_opacity_mask_brush_local(opacitymaskbrush : IXpsOMBrush) : HRESULT
+    @lpVtbl.value.set_opacity_mask_brush_local.unsafe_as(Proc(IXpsOMBrush, HRESULT)).call(opacitymaskbrush)
+  end
+  def get_opacity_mask_brush_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_opacity_mask_brush_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_opacity_mask_brush_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_name(name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(name)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_is_hyperlink_target(ishyperlink : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_hyperlink_target.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(ishyperlink)
+  end
+  def set_is_hyperlink_target(ishyperlink : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_hyperlink_target.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(ishyperlink)
+  end
+  def get_hyperlink_navigate_uri(hyperlinkuri : IUri*) : HRESULT
+    @lpVtbl.value.get_hyperlink_navigate_uri.unsafe_as(Proc(IUri*, HRESULT)).call(hyperlinkuri)
+  end
+  def set_hyperlink_navigate_uri(hyperlinkuri : IUri) : HRESULT
+    @lpVtbl.value.set_hyperlink_navigate_uri.unsafe_as(Proc(IUri, HRESULT)).call(hyperlinkuri)
+  end
+  def get_language(language : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(language)
+  end
+  def set_language(language : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_language.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(language)
+  end
+  def get_unicode_string(unicodestring : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_unicode_string.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(unicodestring)
+  end
+  def get_glyph_index_count(indexcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_glyph_index_count.unsafe_as(Proc(UInt32*, HRESULT)).call(indexcount)
+  end
+  def get_glyph_indices(indexcount : UInt32*, glyphindices : XPS_GLYPH_INDEX*) : HRESULT
+    @lpVtbl.value.get_glyph_indices.unsafe_as(Proc(UInt32*, XPS_GLYPH_INDEX*, HRESULT)).call(indexcount, glyphindices)
+  end
+  def get_glyph_mapping_count(glyphmappingcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_glyph_mapping_count.unsafe_as(Proc(UInt32*, HRESULT)).call(glyphmappingcount)
+  end
+  def get_glyph_mappings(glyphmappingcount : UInt32*, glyphmappings : XPS_GLYPH_MAPPING*) : HRESULT
+    @lpVtbl.value.get_glyph_mappings.unsafe_as(Proc(UInt32*, XPS_GLYPH_MAPPING*, HRESULT)).call(glyphmappingcount, glyphmappings)
+  end
+  def get_prohibited_caret_stop_count(prohibitedcaretstopcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_prohibited_caret_stop_count.unsafe_as(Proc(UInt32*, HRESULT)).call(prohibitedcaretstopcount)
+  end
+  def get_prohibited_caret_stops(prohibitedcaretstopcount : UInt32*, prohibitedcaretstops : UInt32*) : HRESULT
+    @lpVtbl.value.get_prohibited_caret_stops.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(prohibitedcaretstopcount, prohibitedcaretstops)
+  end
+  def get_bidi_level(bidilevel : UInt32*) : HRESULT
+    @lpVtbl.value.get_bidi_level.unsafe_as(Proc(UInt32*, HRESULT)).call(bidilevel)
+  end
+  def get_is_sideways(issideways : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_sideways.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(issideways)
+  end
+  def get_device_font_name(devicefontname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_device_font_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(devicefontname)
+  end
+  def get_style_simulations(stylesimulations : XPS_STYLE_SIMULATION*) : HRESULT
+    @lpVtbl.value.get_style_simulations.unsafe_as(Proc(XPS_STYLE_SIMULATION*, HRESULT)).call(stylesimulations)
+  end
+  def set_style_simulations(stylesimulations : XPS_STYLE_SIMULATION) : HRESULT
+    @lpVtbl.value.set_style_simulations.unsafe_as(Proc(XPS_STYLE_SIMULATION, HRESULT)).call(stylesimulations)
+  end
+  def get_origin(origin : XPS_POINT*) : HRESULT
+    @lpVtbl.value.get_origin.unsafe_as(Proc(XPS_POINT*, HRESULT)).call(origin)
+  end
+  def set_origin(origin : XPS_POINT*) : HRESULT
+    @lpVtbl.value.set_origin.unsafe_as(Proc(XPS_POINT*, HRESULT)).call(origin)
+  end
+  def get_font_rendering_em_size(fontrenderingemsize : Float32*) : HRESULT
+    @lpVtbl.value.get_font_rendering_em_size.unsafe_as(Proc(Float32*, HRESULT)).call(fontrenderingemsize)
+  end
+  def set_font_rendering_em_size(fontrenderingemsize : Float32) : HRESULT
+    @lpVtbl.value.set_font_rendering_em_size.unsafe_as(Proc(Float32, HRESULT)).call(fontrenderingemsize)
+  end
+  def get_font_resource(fontresource : IXpsOMFontResource*) : HRESULT
+    @lpVtbl.value.get_font_resource.unsafe_as(Proc(IXpsOMFontResource*, HRESULT)).call(fontresource)
+  end
+  def set_font_resource(fontresource : IXpsOMFontResource) : HRESULT
+    @lpVtbl.value.set_font_resource.unsafe_as(Proc(IXpsOMFontResource, HRESULT)).call(fontresource)
+  end
+  def get_font_face_index(fontfaceindex : Int16*) : HRESULT
+    @lpVtbl.value.get_font_face_index.unsafe_as(Proc(Int16*, HRESULT)).call(fontfaceindex)
+  end
+  def set_font_face_index(fontfaceindex : Int16) : HRESULT
+    @lpVtbl.value.set_font_face_index.unsafe_as(Proc(Int16, HRESULT)).call(fontfaceindex)
+  end
+  def get_fill_brush(fillbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_fill_brush.unsafe_as(Proc(IXpsOMBrush*, HRESULT)).call(fillbrush)
+  end
+  def get_fill_brush_local(fillbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_fill_brush_local.unsafe_as(Proc(IXpsOMBrush*, HRESULT)).call(fillbrush)
+  end
+  def set_fill_brush_local(fillbrush : IXpsOMBrush) : HRESULT
+    @lpVtbl.value.set_fill_brush_local.unsafe_as(Proc(IXpsOMBrush, HRESULT)).call(fillbrush)
+  end
+  def get_fill_brush_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_fill_brush_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_fill_brush_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_fill_brush_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_glyphs_editor(editor : IXpsOMGlyphsEditor*) : HRESULT
+    @lpVtbl.value.get_glyphs_editor.unsafe_as(Proc(IXpsOMGlyphsEditor*, HRESULT)).call(editor)
+  end
+  def clone(glyphs : IXpsOMGlyphs*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMGlyphs*, HRESULT)).call(glyphs)
+  end
+end
+struct LibWin32::IXpsOMDashCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, dash : XPS_DASH*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, XPS_DASH*, HRESULT)).call(index, dash)
+  end
+  def insert_at(index : UInt32, dash : XPS_DASH*) : HRESULT
+    @lpVtbl.value.insert_at.unsafe_as(Proc(UInt32, XPS_DASH*, HRESULT)).call(index, dash)
+  end
+  def remove_at(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+  def set_at(index : UInt32, dash : XPS_DASH*) : HRESULT
+    @lpVtbl.value.set_at.unsafe_as(Proc(UInt32, XPS_DASH*, HRESULT)).call(index, dash)
+  end
+  def append(dash : XPS_DASH*) : HRESULT
+    @lpVtbl.value.append.unsafe_as(Proc(XPS_DASH*, HRESULT)).call(dash)
+  end
+end
+struct LibWin32::IXpsOMMatrixTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IUnknown*, HRESULT)).call(owner)
+  end
+  def get_type(type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(XPS_OBJECT_TYPE*, HRESULT)).call(type)
+  end
+  def get_matrix(matrix : XPS_MATRIX*) : HRESULT
+    @lpVtbl.value.get_matrix.unsafe_as(Proc(XPS_MATRIX*, HRESULT)).call(matrix)
+  end
+  def set_matrix(matrix : XPS_MATRIX*) : HRESULT
+    @lpVtbl.value.set_matrix.unsafe_as(Proc(XPS_MATRIX*, HRESULT)).call(matrix)
+  end
+  def clone(matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(matrixtransform)
+  end
+end
+struct LibWin32::IXpsOMGeometry
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IUnknown*, HRESULT)).call(owner)
+  end
+  def get_type(type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(XPS_OBJECT_TYPE*, HRESULT)).call(type)
+  end
+  def get_figures(figures : IXpsOMGeometryFigureCollection*) : HRESULT
+    @lpVtbl.value.get_figures.unsafe_as(Proc(IXpsOMGeometryFigureCollection*, HRESULT)).call(figures)
+  end
+  def get_fill_rule(fillrule : XPS_FILL_RULE*) : HRESULT
+    @lpVtbl.value.get_fill_rule.unsafe_as(Proc(XPS_FILL_RULE*, HRESULT)).call(fillrule)
+  end
+  def set_fill_rule(fillrule : XPS_FILL_RULE) : HRESULT
+    @lpVtbl.value.set_fill_rule.unsafe_as(Proc(XPS_FILL_RULE, HRESULT)).call(fillrule)
+  end
+  def get_transform(transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(transform)
+  end
+  def get_transform_local(transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(transform)
+  end
+  def set_transform_local(transform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform, HRESULT)).call(transform)
+  end
+  def get_transform_lookup(lookup : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(lookup)
+  end
+  def set_transform_lookup(lookup : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(lookup)
+  end
+  def clone(geometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMGeometry*, HRESULT)).call(geometry)
+  end
+end
+struct LibWin32::IXpsOMGeometryFigure
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IXpsOMGeometry*, HRESULT)).call(owner)
+  end
+  def get_segment_data(datacount : UInt32*, segmentdata : Float32*) : HRESULT
+    @lpVtbl.value.get_segment_data.unsafe_as(Proc(UInt32*, Float32*, HRESULT)).call(datacount, segmentdata)
+  end
+  def get_segment_types(segmentcount : UInt32*, segmenttypes : XPS_SEGMENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_segment_types.unsafe_as(Proc(UInt32*, XPS_SEGMENT_TYPE*, HRESULT)).call(segmentcount, segmenttypes)
+  end
+  def get_segment_strokes(segmentcount : UInt32*, segmentstrokes : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_segment_strokes.unsafe_as(Proc(UInt32*, LibC::BOOL*, HRESULT)).call(segmentcount, segmentstrokes)
+  end
+  def set_segments(segmentcount : UInt32, segmentdatacount : UInt32, segmenttypes : XPS_SEGMENT_TYPE*, segmentdata : Float32*, segmentstrokes : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.set_segments.unsafe_as(Proc(UInt32, UInt32, XPS_SEGMENT_TYPE*, Float32*, LibC::BOOL*, HRESULT)).call(segmentcount, segmentdatacount, segmenttypes, segmentdata, segmentstrokes)
+  end
+  def get_start_point(startpoint : XPS_POINT*) : HRESULT
+    @lpVtbl.value.get_start_point.unsafe_as(Proc(XPS_POINT*, HRESULT)).call(startpoint)
+  end
+  def set_start_point(startpoint : XPS_POINT*) : HRESULT
+    @lpVtbl.value.set_start_point.unsafe_as(Proc(XPS_POINT*, HRESULT)).call(startpoint)
+  end
+  def get_is_closed(isclosed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_closed.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(isclosed)
+  end
+  def set_is_closed(isclosed : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_closed.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(isclosed)
+  end
+  def get_is_filled(isfilled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_filled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(isfilled)
+  end
+  def set_is_filled(isfilled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_filled.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(isfilled)
+  end
+  def get_segment_count(segmentcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_segment_count.unsafe_as(Proc(UInt32*, HRESULT)).call(segmentcount)
+  end
+  def get_segment_data_count(segmentdatacount : UInt32*) : HRESULT
+    @lpVtbl.value.get_segment_data_count.unsafe_as(Proc(UInt32*, HRESULT)).call(segmentdatacount)
+  end
+  def get_segment_stroke_pattern(segmentstrokepattern : XPS_SEGMENT_STROKE_PATTERN*) : HRESULT
+    @lpVtbl.value.get_segment_stroke_pattern.unsafe_as(Proc(XPS_SEGMENT_STROKE_PATTERN*, HRESULT)).call(segmentstrokepattern)
+  end
+  def clone(geometryfigure : IXpsOMGeometryFigure*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMGeometryFigure*, HRESULT)).call(geometryfigure)
+  end
+end
+struct LibWin32::IXpsOMGeometryFigureCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, geometryfigure : IXpsOMGeometryFigure*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IXpsOMGeometryFigure*, HRESULT)).call(index, geometryfigure)
+  end
+  def insert_at(index : UInt32, geometryfigure : IXpsOMGeometryFigure) : HRESULT
+    @lpVtbl.value.insert_at.unsafe_as(Proc(UInt32, IXpsOMGeometryFigure, HRESULT)).call(index, geometryfigure)
+  end
+  def remove_at(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+  def set_at(index : UInt32, geometryfigure : IXpsOMGeometryFigure) : HRESULT
+    @lpVtbl.value.set_at.unsafe_as(Proc(UInt32, IXpsOMGeometryFigure, HRESULT)).call(index, geometryfigure)
+  end
+  def append(geometryfigure : IXpsOMGeometryFigure) : HRESULT
+    @lpVtbl.value.append.unsafe_as(Proc(IXpsOMGeometryFigure, HRESULT)).call(geometryfigure)
+  end
+end
+struct LibWin32::IXpsOMPath
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IUnknown*, HRESULT)).call(owner)
+  end
+  def get_type(type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(XPS_OBJECT_TYPE*, HRESULT)).call(type)
+  end
+  def get_transform(matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(matrixtransform)
+  end
+  def get_transform_local(matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(matrixtransform)
+  end
+  def set_transform_local(matrixtransform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform, HRESULT)).call(matrixtransform)
+  end
+  def get_transform_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_transform_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_clip_geometry(clipgeometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_clip_geometry.unsafe_as(Proc(IXpsOMGeometry*, HRESULT)).call(clipgeometry)
+  end
+  def get_clip_geometry_local(clipgeometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_clip_geometry_local.unsafe_as(Proc(IXpsOMGeometry*, HRESULT)).call(clipgeometry)
+  end
+  def set_clip_geometry_local(clipgeometry : IXpsOMGeometry) : HRESULT
+    @lpVtbl.value.set_clip_geometry_local.unsafe_as(Proc(IXpsOMGeometry, HRESULT)).call(clipgeometry)
+  end
+  def get_clip_geometry_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_clip_geometry_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_clip_geometry_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_clip_geometry_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_opacity(opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32*, HRESULT)).call(opacity)
+  end
+  def set_opacity(opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, HRESULT)).call(opacity)
+  end
+  def get_opacity_mask_brush(opacitymaskbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush.unsafe_as(Proc(IXpsOMBrush*, HRESULT)).call(opacitymaskbrush)
+  end
+  def get_opacity_mask_brush_local(opacitymaskbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush_local.unsafe_as(Proc(IXpsOMBrush*, HRESULT)).call(opacitymaskbrush)
+  end
+  def set_opacity_mask_brush_local(opacitymaskbrush : IXpsOMBrush) : HRESULT
+    @lpVtbl.value.set_opacity_mask_brush_local.unsafe_as(Proc(IXpsOMBrush, HRESULT)).call(opacitymaskbrush)
+  end
+  def get_opacity_mask_brush_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_opacity_mask_brush_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_opacity_mask_brush_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_name(name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(name)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_is_hyperlink_target(ishyperlink : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_hyperlink_target.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(ishyperlink)
+  end
+  def set_is_hyperlink_target(ishyperlink : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_hyperlink_target.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(ishyperlink)
+  end
+  def get_hyperlink_navigate_uri(hyperlinkuri : IUri*) : HRESULT
+    @lpVtbl.value.get_hyperlink_navigate_uri.unsafe_as(Proc(IUri*, HRESULT)).call(hyperlinkuri)
+  end
+  def set_hyperlink_navigate_uri(hyperlinkuri : IUri) : HRESULT
+    @lpVtbl.value.set_hyperlink_navigate_uri.unsafe_as(Proc(IUri, HRESULT)).call(hyperlinkuri)
+  end
+  def get_language(language : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(language)
+  end
+  def set_language(language : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_language.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(language)
+  end
+  def get_geometry(geometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_geometry.unsafe_as(Proc(IXpsOMGeometry*, HRESULT)).call(geometry)
+  end
+  def get_geometry_local(geometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_geometry_local.unsafe_as(Proc(IXpsOMGeometry*, HRESULT)).call(geometry)
+  end
+  def set_geometry_local(geometry : IXpsOMGeometry) : HRESULT
+    @lpVtbl.value.set_geometry_local.unsafe_as(Proc(IXpsOMGeometry, HRESULT)).call(geometry)
+  end
+  def get_geometry_lookup(lookup : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_geometry_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(lookup)
+  end
+  def set_geometry_lookup(lookup : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_geometry_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(lookup)
+  end
+  def get_accessibility_short_description(shortdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_accessibility_short_description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(shortdescription)
+  end
+  def set_accessibility_short_description(shortdescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_accessibility_short_description.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(shortdescription)
+  end
+  def get_accessibility_long_description(longdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_accessibility_long_description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(longdescription)
+  end
+  def set_accessibility_long_description(longdescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_accessibility_long_description.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(longdescription)
+  end
+  def get_snaps_to_pixels(snapstopixels : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_snaps_to_pixels.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(snapstopixels)
+  end
+  def set_snaps_to_pixels(snapstopixels : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_snaps_to_pixels.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(snapstopixels)
+  end
+  def get_stroke_brush(brush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_stroke_brush.unsafe_as(Proc(IXpsOMBrush*, HRESULT)).call(brush)
+  end
+  def get_stroke_brush_local(brush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_stroke_brush_local.unsafe_as(Proc(IXpsOMBrush*, HRESULT)).call(brush)
+  end
+  def set_stroke_brush_local(brush : IXpsOMBrush) : HRESULT
+    @lpVtbl.value.set_stroke_brush_local.unsafe_as(Proc(IXpsOMBrush, HRESULT)).call(brush)
+  end
+  def get_stroke_brush_lookup(lookup : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_stroke_brush_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(lookup)
+  end
+  def set_stroke_brush_lookup(lookup : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_stroke_brush_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(lookup)
+  end
+  def get_stroke_dashes(strokedashes : IXpsOMDashCollection*) : HRESULT
+    @lpVtbl.value.get_stroke_dashes.unsafe_as(Proc(IXpsOMDashCollection*, HRESULT)).call(strokedashes)
+  end
+  def get_stroke_dash_cap(strokedashcap : XPS_DASH_CAP*) : HRESULT
+    @lpVtbl.value.get_stroke_dash_cap.unsafe_as(Proc(XPS_DASH_CAP*, HRESULT)).call(strokedashcap)
+  end
+  def set_stroke_dash_cap(strokedashcap : XPS_DASH_CAP) : HRESULT
+    @lpVtbl.value.set_stroke_dash_cap.unsafe_as(Proc(XPS_DASH_CAP, HRESULT)).call(strokedashcap)
+  end
+  def get_stroke_dash_offset(strokedashoffset : Float32*) : HRESULT
+    @lpVtbl.value.get_stroke_dash_offset.unsafe_as(Proc(Float32*, HRESULT)).call(strokedashoffset)
+  end
+  def set_stroke_dash_offset(strokedashoffset : Float32) : HRESULT
+    @lpVtbl.value.set_stroke_dash_offset.unsafe_as(Proc(Float32, HRESULT)).call(strokedashoffset)
+  end
+  def get_stroke_start_line_cap(strokestartlinecap : XPS_LINE_CAP*) : HRESULT
+    @lpVtbl.value.get_stroke_start_line_cap.unsafe_as(Proc(XPS_LINE_CAP*, HRESULT)).call(strokestartlinecap)
+  end
+  def set_stroke_start_line_cap(strokestartlinecap : XPS_LINE_CAP) : HRESULT
+    @lpVtbl.value.set_stroke_start_line_cap.unsafe_as(Proc(XPS_LINE_CAP, HRESULT)).call(strokestartlinecap)
+  end
+  def get_stroke_end_line_cap(strokeendlinecap : XPS_LINE_CAP*) : HRESULT
+    @lpVtbl.value.get_stroke_end_line_cap.unsafe_as(Proc(XPS_LINE_CAP*, HRESULT)).call(strokeendlinecap)
+  end
+  def set_stroke_end_line_cap(strokeendlinecap : XPS_LINE_CAP) : HRESULT
+    @lpVtbl.value.set_stroke_end_line_cap.unsafe_as(Proc(XPS_LINE_CAP, HRESULT)).call(strokeendlinecap)
+  end
+  def get_stroke_line_join(strokelinejoin : XPS_LINE_JOIN*) : HRESULT
+    @lpVtbl.value.get_stroke_line_join.unsafe_as(Proc(XPS_LINE_JOIN*, HRESULT)).call(strokelinejoin)
+  end
+  def set_stroke_line_join(strokelinejoin : XPS_LINE_JOIN) : HRESULT
+    @lpVtbl.value.set_stroke_line_join.unsafe_as(Proc(XPS_LINE_JOIN, HRESULT)).call(strokelinejoin)
+  end
+  def get_stroke_miter_limit(strokemiterlimit : Float32*) : HRESULT
+    @lpVtbl.value.get_stroke_miter_limit.unsafe_as(Proc(Float32*, HRESULT)).call(strokemiterlimit)
+  end
+  def set_stroke_miter_limit(strokemiterlimit : Float32) : HRESULT
+    @lpVtbl.value.set_stroke_miter_limit.unsafe_as(Proc(Float32, HRESULT)).call(strokemiterlimit)
+  end
+  def get_stroke_thickness(strokethickness : Float32*) : HRESULT
+    @lpVtbl.value.get_stroke_thickness.unsafe_as(Proc(Float32*, HRESULT)).call(strokethickness)
+  end
+  def set_stroke_thickness(strokethickness : Float32) : HRESULT
+    @lpVtbl.value.set_stroke_thickness.unsafe_as(Proc(Float32, HRESULT)).call(strokethickness)
+  end
+  def get_fill_brush(brush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_fill_brush.unsafe_as(Proc(IXpsOMBrush*, HRESULT)).call(brush)
+  end
+  def get_fill_brush_local(brush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_fill_brush_local.unsafe_as(Proc(IXpsOMBrush*, HRESULT)).call(brush)
+  end
+  def set_fill_brush_local(brush : IXpsOMBrush) : HRESULT
+    @lpVtbl.value.set_fill_brush_local.unsafe_as(Proc(IXpsOMBrush, HRESULT)).call(brush)
+  end
+  def get_fill_brush_lookup(lookup : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_fill_brush_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(lookup)
+  end
+  def set_fill_brush_lookup(lookup : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_fill_brush_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(lookup)
+  end
+  def clone(path : IXpsOMPath*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMPath*, HRESULT)).call(path)
+  end
+end
+struct LibWin32::IXpsOMBrush
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IUnknown*, HRESULT)).call(owner)
+  end
+  def get_type(type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(XPS_OBJECT_TYPE*, HRESULT)).call(type)
+  end
+  def get_opacity(opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32*, HRESULT)).call(opacity)
+  end
+  def set_opacity(opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, HRESULT)).call(opacity)
+  end
+end
+struct LibWin32::IXpsOMGradientStopCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, stop : IXpsOMGradientStop*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IXpsOMGradientStop*, HRESULT)).call(index, stop)
+  end
+  def insert_at(index : UInt32, stop : IXpsOMGradientStop) : HRESULT
+    @lpVtbl.value.insert_at.unsafe_as(Proc(UInt32, IXpsOMGradientStop, HRESULT)).call(index, stop)
+  end
+  def remove_at(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+  def set_at(index : UInt32, stop : IXpsOMGradientStop) : HRESULT
+    @lpVtbl.value.set_at.unsafe_as(Proc(UInt32, IXpsOMGradientStop, HRESULT)).call(index, stop)
+  end
+  def append(stop : IXpsOMGradientStop) : HRESULT
+    @lpVtbl.value.append.unsafe_as(Proc(IXpsOMGradientStop, HRESULT)).call(stop)
+  end
+end
+struct LibWin32::IXpsOMSolidColorBrush
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IUnknown*, HRESULT)).call(owner)
+  end
+  def get_type(type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(XPS_OBJECT_TYPE*, HRESULT)).call(type)
+  end
+  def get_opacity(opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32*, HRESULT)).call(opacity)
+  end
+  def set_opacity(opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, HRESULT)).call(opacity)
+  end
+  def get_color(color : XPS_COLOR*, colorprofile : IXpsOMColorProfileResource*) : HRESULT
+    @lpVtbl.value.get_color.unsafe_as(Proc(XPS_COLOR*, IXpsOMColorProfileResource*, HRESULT)).call(color, colorprofile)
+  end
+  def set_color(color : XPS_COLOR*, colorprofile : IXpsOMColorProfileResource) : HRESULT
+    @lpVtbl.value.set_color.unsafe_as(Proc(XPS_COLOR*, IXpsOMColorProfileResource, HRESULT)).call(color, colorprofile)
+  end
+  def clone(solidcolorbrush : IXpsOMSolidColorBrush*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMSolidColorBrush*, HRESULT)).call(solidcolorbrush)
+  end
+end
+struct LibWin32::IXpsOMTileBrush
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IUnknown*, HRESULT)).call(owner)
+  end
+  def get_type(type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(XPS_OBJECT_TYPE*, HRESULT)).call(type)
+  end
+  def get_opacity(opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32*, HRESULT)).call(opacity)
+  end
+  def set_opacity(opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, HRESULT)).call(opacity)
+  end
+  def get_transform(transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(transform)
+  end
+  def get_transform_local(transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(transform)
+  end
+  def set_transform_local(transform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform, HRESULT)).call(transform)
+  end
+  def get_transform_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_transform_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_viewbox(viewbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_viewbox.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(viewbox)
+  end
+  def set_viewbox(viewbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_viewbox.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(viewbox)
+  end
+  def get_viewport(viewport : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_viewport.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(viewport)
+  end
+  def set_viewport(viewport : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_viewport.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(viewport)
+  end
+  def get_tile_mode(tilemode : XPS_TILE_MODE*) : HRESULT
+    @lpVtbl.value.get_tile_mode.unsafe_as(Proc(XPS_TILE_MODE*, HRESULT)).call(tilemode)
+  end
+  def set_tile_mode(tilemode : XPS_TILE_MODE) : HRESULT
+    @lpVtbl.value.set_tile_mode.unsafe_as(Proc(XPS_TILE_MODE, HRESULT)).call(tilemode)
+  end
+end
+struct LibWin32::IXpsOMVisualBrush
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IUnknown*, HRESULT)).call(owner)
+  end
+  def get_type(type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(XPS_OBJECT_TYPE*, HRESULT)).call(type)
+  end
+  def get_opacity(opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32*, HRESULT)).call(opacity)
+  end
+  def set_opacity(opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, HRESULT)).call(opacity)
+  end
+  def get_transform(transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(transform)
+  end
+  def get_transform_local(transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(transform)
+  end
+  def set_transform_local(transform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform, HRESULT)).call(transform)
+  end
+  def get_transform_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_transform_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_viewbox(viewbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_viewbox.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(viewbox)
+  end
+  def set_viewbox(viewbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_viewbox.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(viewbox)
+  end
+  def get_viewport(viewport : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_viewport.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(viewport)
+  end
+  def set_viewport(viewport : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_viewport.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(viewport)
+  end
+  def get_tile_mode(tilemode : XPS_TILE_MODE*) : HRESULT
+    @lpVtbl.value.get_tile_mode.unsafe_as(Proc(XPS_TILE_MODE*, HRESULT)).call(tilemode)
+  end
+  def set_tile_mode(tilemode : XPS_TILE_MODE) : HRESULT
+    @lpVtbl.value.set_tile_mode.unsafe_as(Proc(XPS_TILE_MODE, HRESULT)).call(tilemode)
+  end
+  def get_visual(visual : IXpsOMVisual*) : HRESULT
+    @lpVtbl.value.get_visual.unsafe_as(Proc(IXpsOMVisual*, HRESULT)).call(visual)
+  end
+  def get_visual_local(visual : IXpsOMVisual*) : HRESULT
+    @lpVtbl.value.get_visual_local.unsafe_as(Proc(IXpsOMVisual*, HRESULT)).call(visual)
+  end
+  def set_visual_local(visual : IXpsOMVisual) : HRESULT
+    @lpVtbl.value.set_visual_local.unsafe_as(Proc(IXpsOMVisual, HRESULT)).call(visual)
+  end
+  def get_visual_lookup(lookup : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_visual_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(lookup)
+  end
+  def set_visual_lookup(lookup : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_visual_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(lookup)
+  end
+  def clone(visualbrush : IXpsOMVisualBrush*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMVisualBrush*, HRESULT)).call(visualbrush)
+  end
+end
+struct LibWin32::IXpsOMImageBrush
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IUnknown*, HRESULT)).call(owner)
+  end
+  def get_type(type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(XPS_OBJECT_TYPE*, HRESULT)).call(type)
+  end
+  def get_opacity(opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32*, HRESULT)).call(opacity)
+  end
+  def set_opacity(opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, HRESULT)).call(opacity)
+  end
+  def get_transform(transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(transform)
+  end
+  def get_transform_local(transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(transform)
+  end
+  def set_transform_local(transform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform, HRESULT)).call(transform)
+  end
+  def get_transform_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_transform_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_viewbox(viewbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_viewbox.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(viewbox)
+  end
+  def set_viewbox(viewbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_viewbox.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(viewbox)
+  end
+  def get_viewport(viewport : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_viewport.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(viewport)
+  end
+  def set_viewport(viewport : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_viewport.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(viewport)
+  end
+  def get_tile_mode(tilemode : XPS_TILE_MODE*) : HRESULT
+    @lpVtbl.value.get_tile_mode.unsafe_as(Proc(XPS_TILE_MODE*, HRESULT)).call(tilemode)
+  end
+  def set_tile_mode(tilemode : XPS_TILE_MODE) : HRESULT
+    @lpVtbl.value.set_tile_mode.unsafe_as(Proc(XPS_TILE_MODE, HRESULT)).call(tilemode)
+  end
+  def get_image_resource(imageresource : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.get_image_resource.unsafe_as(Proc(IXpsOMImageResource*, HRESULT)).call(imageresource)
+  end
+  def set_image_resource(imageresource : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.set_image_resource.unsafe_as(Proc(IXpsOMImageResource, HRESULT)).call(imageresource)
+  end
+  def get_color_profile_resource(colorprofileresource : IXpsOMColorProfileResource*) : HRESULT
+    @lpVtbl.value.get_color_profile_resource.unsafe_as(Proc(IXpsOMColorProfileResource*, HRESULT)).call(colorprofileresource)
+  end
+  def set_color_profile_resource(colorprofileresource : IXpsOMColorProfileResource) : HRESULT
+    @lpVtbl.value.set_color_profile_resource.unsafe_as(Proc(IXpsOMColorProfileResource, HRESULT)).call(colorprofileresource)
+  end
+  def clone(imagebrush : IXpsOMImageBrush*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMImageBrush*, HRESULT)).call(imagebrush)
+  end
+end
+struct LibWin32::IXpsOMGradientStop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IXpsOMGradientBrush*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IXpsOMGradientBrush*, HRESULT)).call(owner)
+  end
+  def get_offset(offset : Float32*) : HRESULT
+    @lpVtbl.value.get_offset.unsafe_as(Proc(Float32*, HRESULT)).call(offset)
+  end
+  def set_offset(offset : Float32) : HRESULT
+    @lpVtbl.value.set_offset.unsafe_as(Proc(Float32, HRESULT)).call(offset)
+  end
+  def get_color(color : XPS_COLOR*, colorprofile : IXpsOMColorProfileResource*) : HRESULT
+    @lpVtbl.value.get_color.unsafe_as(Proc(XPS_COLOR*, IXpsOMColorProfileResource*, HRESULT)).call(color, colorprofile)
+  end
+  def set_color(color : XPS_COLOR*, colorprofile : IXpsOMColorProfileResource) : HRESULT
+    @lpVtbl.value.set_color.unsafe_as(Proc(XPS_COLOR*, IXpsOMColorProfileResource, HRESULT)).call(color, colorprofile)
+  end
+  def clone(gradientstop : IXpsOMGradientStop*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMGradientStop*, HRESULT)).call(gradientstop)
+  end
+end
+struct LibWin32::IXpsOMGradientBrush
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IUnknown*, HRESULT)).call(owner)
+  end
+  def get_type(type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(XPS_OBJECT_TYPE*, HRESULT)).call(type)
+  end
+  def get_opacity(opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32*, HRESULT)).call(opacity)
+  end
+  def set_opacity(opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, HRESULT)).call(opacity)
+  end
+  def get_gradient_stops(gradientstops : IXpsOMGradientStopCollection*) : HRESULT
+    @lpVtbl.value.get_gradient_stops.unsafe_as(Proc(IXpsOMGradientStopCollection*, HRESULT)).call(gradientstops)
+  end
+  def get_transform(transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(transform)
+  end
+  def get_transform_local(transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(transform)
+  end
+  def set_transform_local(transform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform, HRESULT)).call(transform)
+  end
+  def get_transform_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_transform_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_spread_method(spreadmethod : XPS_SPREAD_METHOD*) : HRESULT
+    @lpVtbl.value.get_spread_method.unsafe_as(Proc(XPS_SPREAD_METHOD*, HRESULT)).call(spreadmethod)
+  end
+  def set_spread_method(spreadmethod : XPS_SPREAD_METHOD) : HRESULT
+    @lpVtbl.value.set_spread_method.unsafe_as(Proc(XPS_SPREAD_METHOD, HRESULT)).call(spreadmethod)
+  end
+  def get_color_interpolation_mode(colorinterpolationmode : XPS_COLOR_INTERPOLATION*) : HRESULT
+    @lpVtbl.value.get_color_interpolation_mode.unsafe_as(Proc(XPS_COLOR_INTERPOLATION*, HRESULT)).call(colorinterpolationmode)
+  end
+  def set_color_interpolation_mode(colorinterpolationmode : XPS_COLOR_INTERPOLATION) : HRESULT
+    @lpVtbl.value.set_color_interpolation_mode.unsafe_as(Proc(XPS_COLOR_INTERPOLATION, HRESULT)).call(colorinterpolationmode)
+  end
+end
+struct LibWin32::IXpsOMLinearGradientBrush
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IUnknown*, HRESULT)).call(owner)
+  end
+  def get_type(type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(XPS_OBJECT_TYPE*, HRESULT)).call(type)
+  end
+  def get_opacity(opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32*, HRESULT)).call(opacity)
+  end
+  def set_opacity(opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, HRESULT)).call(opacity)
+  end
+  def get_gradient_stops(gradientstops : IXpsOMGradientStopCollection*) : HRESULT
+    @lpVtbl.value.get_gradient_stops.unsafe_as(Proc(IXpsOMGradientStopCollection*, HRESULT)).call(gradientstops)
+  end
+  def get_transform(transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(transform)
+  end
+  def get_transform_local(transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(transform)
+  end
+  def set_transform_local(transform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform, HRESULT)).call(transform)
+  end
+  def get_transform_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_transform_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_spread_method(spreadmethod : XPS_SPREAD_METHOD*) : HRESULT
+    @lpVtbl.value.get_spread_method.unsafe_as(Proc(XPS_SPREAD_METHOD*, HRESULT)).call(spreadmethod)
+  end
+  def set_spread_method(spreadmethod : XPS_SPREAD_METHOD) : HRESULT
+    @lpVtbl.value.set_spread_method.unsafe_as(Proc(XPS_SPREAD_METHOD, HRESULT)).call(spreadmethod)
+  end
+  def get_color_interpolation_mode(colorinterpolationmode : XPS_COLOR_INTERPOLATION*) : HRESULT
+    @lpVtbl.value.get_color_interpolation_mode.unsafe_as(Proc(XPS_COLOR_INTERPOLATION*, HRESULT)).call(colorinterpolationmode)
+  end
+  def set_color_interpolation_mode(colorinterpolationmode : XPS_COLOR_INTERPOLATION) : HRESULT
+    @lpVtbl.value.set_color_interpolation_mode.unsafe_as(Proc(XPS_COLOR_INTERPOLATION, HRESULT)).call(colorinterpolationmode)
+  end
+  def get_start_point(startpoint : XPS_POINT*) : HRESULT
+    @lpVtbl.value.get_start_point.unsafe_as(Proc(XPS_POINT*, HRESULT)).call(startpoint)
+  end
+  def set_start_point(startpoint : XPS_POINT*) : HRESULT
+    @lpVtbl.value.set_start_point.unsafe_as(Proc(XPS_POINT*, HRESULT)).call(startpoint)
+  end
+  def get_end_point(endpoint : XPS_POINT*) : HRESULT
+    @lpVtbl.value.get_end_point.unsafe_as(Proc(XPS_POINT*, HRESULT)).call(endpoint)
+  end
+  def set_end_point(endpoint : XPS_POINT*) : HRESULT
+    @lpVtbl.value.set_end_point.unsafe_as(Proc(XPS_POINT*, HRESULT)).call(endpoint)
+  end
+  def clone(lineargradientbrush : IXpsOMLinearGradientBrush*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMLinearGradientBrush*, HRESULT)).call(lineargradientbrush)
+  end
+end
+struct LibWin32::IXpsOMRadialGradientBrush
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IUnknown*, HRESULT)).call(owner)
+  end
+  def get_type(type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(XPS_OBJECT_TYPE*, HRESULT)).call(type)
+  end
+  def get_opacity(opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32*, HRESULT)).call(opacity)
+  end
+  def set_opacity(opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, HRESULT)).call(opacity)
+  end
+  def get_gradient_stops(gradientstops : IXpsOMGradientStopCollection*) : HRESULT
+    @lpVtbl.value.get_gradient_stops.unsafe_as(Proc(IXpsOMGradientStopCollection*, HRESULT)).call(gradientstops)
+  end
+  def get_transform(transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(transform)
+  end
+  def get_transform_local(transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(transform)
+  end
+  def set_transform_local(transform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform, HRESULT)).call(transform)
+  end
+  def get_transform_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_transform_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_spread_method(spreadmethod : XPS_SPREAD_METHOD*) : HRESULT
+    @lpVtbl.value.get_spread_method.unsafe_as(Proc(XPS_SPREAD_METHOD*, HRESULT)).call(spreadmethod)
+  end
+  def set_spread_method(spreadmethod : XPS_SPREAD_METHOD) : HRESULT
+    @lpVtbl.value.set_spread_method.unsafe_as(Proc(XPS_SPREAD_METHOD, HRESULT)).call(spreadmethod)
+  end
+  def get_color_interpolation_mode(colorinterpolationmode : XPS_COLOR_INTERPOLATION*) : HRESULT
+    @lpVtbl.value.get_color_interpolation_mode.unsafe_as(Proc(XPS_COLOR_INTERPOLATION*, HRESULT)).call(colorinterpolationmode)
+  end
+  def set_color_interpolation_mode(colorinterpolationmode : XPS_COLOR_INTERPOLATION) : HRESULT
+    @lpVtbl.value.set_color_interpolation_mode.unsafe_as(Proc(XPS_COLOR_INTERPOLATION, HRESULT)).call(colorinterpolationmode)
+  end
+  def get_center(center : XPS_POINT*) : HRESULT
+    @lpVtbl.value.get_center.unsafe_as(Proc(XPS_POINT*, HRESULT)).call(center)
+  end
+  def set_center(center : XPS_POINT*) : HRESULT
+    @lpVtbl.value.set_center.unsafe_as(Proc(XPS_POINT*, HRESULT)).call(center)
+  end
+  def get_radii_sizes(radiisizes : XPS_SIZE*) : HRESULT
+    @lpVtbl.value.get_radii_sizes.unsafe_as(Proc(XPS_SIZE*, HRESULT)).call(radiisizes)
+  end
+  def set_radii_sizes(radiisizes : XPS_SIZE*) : HRESULT
+    @lpVtbl.value.set_radii_sizes.unsafe_as(Proc(XPS_SIZE*, HRESULT)).call(radiisizes)
+  end
+  def get_gradient_origin(origin : XPS_POINT*) : HRESULT
+    @lpVtbl.value.get_gradient_origin.unsafe_as(Proc(XPS_POINT*, HRESULT)).call(origin)
+  end
+  def set_gradient_origin(origin : XPS_POINT*) : HRESULT
+    @lpVtbl.value.set_gradient_origin.unsafe_as(Proc(XPS_POINT*, HRESULT)).call(origin)
+  end
+  def clone(radialgradientbrush : IXpsOMRadialGradientBrush*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMRadialGradientBrush*, HRESULT)).call(radialgradientbrush)
+  end
+end
+struct LibWin32::IXpsOMResource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_part_name(parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(parturi)
+  end
+  def set_part_name(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+end
+struct LibWin32::IXpsOMPartResources
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_font_resources(fontresources : IXpsOMFontResourceCollection*) : HRESULT
+    @lpVtbl.value.get_font_resources.unsafe_as(Proc(IXpsOMFontResourceCollection*, HRESULT)).call(fontresources)
+  end
+  def get_image_resources(imageresources : IXpsOMImageResourceCollection*) : HRESULT
+    @lpVtbl.value.get_image_resources.unsafe_as(Proc(IXpsOMImageResourceCollection*, HRESULT)).call(imageresources)
+  end
+  def get_color_profile_resources(colorprofileresources : IXpsOMColorProfileResourceCollection*) : HRESULT
+    @lpVtbl.value.get_color_profile_resources.unsafe_as(Proc(IXpsOMColorProfileResourceCollection*, HRESULT)).call(colorprofileresources)
+  end
+  def get_remote_dictionary_resources(dictionaryresources : IXpsOMRemoteDictionaryResourceCollection*) : HRESULT
+    @lpVtbl.value.get_remote_dictionary_resources.unsafe_as(Proc(IXpsOMRemoteDictionaryResourceCollection*, HRESULT)).call(dictionaryresources)
+  end
+end
+struct LibWin32::IXpsOMDictionary
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IUnknown*, HRESULT)).call(owner)
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, key : LibC::LPWSTR*, entry : IXpsOMShareable*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, LibC::LPWSTR*, IXpsOMShareable*, HRESULT)).call(index, key, entry)
+  end
+  def get_by_key(key : LibC::LPWSTR, beforeentry : IXpsOMShareable, entry : IXpsOMShareable*) : HRESULT
+    @lpVtbl.value.get_by_key.unsafe_as(Proc(LibC::LPWSTR, IXpsOMShareable, IXpsOMShareable*, HRESULT)).call(key, beforeentry, entry)
+  end
+  def get_index(entry : IXpsOMShareable, index : UInt32*) : HRESULT
+    @lpVtbl.value.get_index.unsafe_as(Proc(IXpsOMShareable, UInt32*, HRESULT)).call(entry, index)
+  end
+  def append(key : LibC::LPWSTR, entry : IXpsOMShareable) : HRESULT
+    @lpVtbl.value.append.unsafe_as(Proc(LibC::LPWSTR, IXpsOMShareable, HRESULT)).call(key, entry)
+  end
+  def insert_at(index : UInt32, key : LibC::LPWSTR, entry : IXpsOMShareable) : HRESULT
+    @lpVtbl.value.insert_at.unsafe_as(Proc(UInt32, LibC::LPWSTR, IXpsOMShareable, HRESULT)).call(index, key, entry)
+  end
+  def remove_at(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+  def set_at(index : UInt32, key : LibC::LPWSTR, entry : IXpsOMShareable) : HRESULT
+    @lpVtbl.value.set_at.unsafe_as(Proc(UInt32, LibC::LPWSTR, IXpsOMShareable, HRESULT)).call(index, key, entry)
+  end
+  def clone(dictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMDictionary*, HRESULT)).call(dictionary)
+  end
+end
+struct LibWin32::IXpsOMFontResource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_part_name(parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(parturi)
+  end
+  def set_part_name(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+  def get_stream(readerstream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.unsafe_as(Proc(IStream*, HRESULT)).call(readerstream)
+  end
+  def set_content(sourcestream : IStream, embeddingoption : XPS_FONT_EMBEDDING, partname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_content.unsafe_as(Proc(IStream, XPS_FONT_EMBEDDING, IOpcPartUri, HRESULT)).call(sourcestream, embeddingoption, partname)
+  end
+  def get_embedding_option(embeddingoption : XPS_FONT_EMBEDDING*) : HRESULT
+    @lpVtbl.value.get_embedding_option.unsafe_as(Proc(XPS_FONT_EMBEDDING*, HRESULT)).call(embeddingoption)
+  end
+end
+struct LibWin32::IXpsOMFontResourceCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, value : IXpsOMFontResource*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IXpsOMFontResource*, HRESULT)).call(index, value)
+  end
+  def set_at(index : UInt32, value : IXpsOMFontResource) : HRESULT
+    @lpVtbl.value.set_at.unsafe_as(Proc(UInt32, IXpsOMFontResource, HRESULT)).call(index, value)
+  end
+  def insert_at(index : UInt32, value : IXpsOMFontResource) : HRESULT
+    @lpVtbl.value.insert_at.unsafe_as(Proc(UInt32, IXpsOMFontResource, HRESULT)).call(index, value)
+  end
+  def append(value : IXpsOMFontResource) : HRESULT
+    @lpVtbl.value.append.unsafe_as(Proc(IXpsOMFontResource, HRESULT)).call(value)
+  end
+  def remove_at(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+  def get_by_part_name(partname : IOpcPartUri, part : IXpsOMFontResource*) : HRESULT
+    @lpVtbl.value.get_by_part_name.unsafe_as(Proc(IOpcPartUri, IXpsOMFontResource*, HRESULT)).call(partname, part)
+  end
+end
+struct LibWin32::IXpsOMImageResource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_part_name(parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(parturi)
+  end
+  def set_part_name(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+  def get_stream(readerstream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.unsafe_as(Proc(IStream*, HRESULT)).call(readerstream)
+  end
+  def set_content(sourcestream : IStream, imagetype : XPS_IMAGE_TYPE, partname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_content.unsafe_as(Proc(IStream, XPS_IMAGE_TYPE, IOpcPartUri, HRESULT)).call(sourcestream, imagetype, partname)
+  end
+  def get_image_type(imagetype : XPS_IMAGE_TYPE*) : HRESULT
+    @lpVtbl.value.get_image_type.unsafe_as(Proc(XPS_IMAGE_TYPE*, HRESULT)).call(imagetype)
+  end
+end
+struct LibWin32::IXpsOMImageResourceCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, object : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IXpsOMImageResource*, HRESULT)).call(index, object)
+  end
+  def insert_at(index : UInt32, object : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.insert_at.unsafe_as(Proc(UInt32, IXpsOMImageResource, HRESULT)).call(index, object)
+  end
+  def remove_at(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+  def set_at(index : UInt32, object : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.set_at.unsafe_as(Proc(UInt32, IXpsOMImageResource, HRESULT)).call(index, object)
+  end
+  def append(object : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.append.unsafe_as(Proc(IXpsOMImageResource, HRESULT)).call(object)
+  end
+  def get_by_part_name(partname : IOpcPartUri, part : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.get_by_part_name.unsafe_as(Proc(IOpcPartUri, IXpsOMImageResource*, HRESULT)).call(partname, part)
+  end
+end
+struct LibWin32::IXpsOMColorProfileResource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_part_name(parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(parturi)
+  end
+  def set_part_name(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+  def get_stream(stream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.unsafe_as(Proc(IStream*, HRESULT)).call(stream)
+  end
+  def set_content(sourcestream : IStream, partname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_content.unsafe_as(Proc(IStream, IOpcPartUri, HRESULT)).call(sourcestream, partname)
+  end
+end
+struct LibWin32::IXpsOMColorProfileResourceCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, object : IXpsOMColorProfileResource*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IXpsOMColorProfileResource*, HRESULT)).call(index, object)
+  end
+  def insert_at(index : UInt32, object : IXpsOMColorProfileResource) : HRESULT
+    @lpVtbl.value.insert_at.unsafe_as(Proc(UInt32, IXpsOMColorProfileResource, HRESULT)).call(index, object)
+  end
+  def remove_at(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+  def set_at(index : UInt32, object : IXpsOMColorProfileResource) : HRESULT
+    @lpVtbl.value.set_at.unsafe_as(Proc(UInt32, IXpsOMColorProfileResource, HRESULT)).call(index, object)
+  end
+  def append(object : IXpsOMColorProfileResource) : HRESULT
+    @lpVtbl.value.append.unsafe_as(Proc(IXpsOMColorProfileResource, HRESULT)).call(object)
+  end
+  def get_by_part_name(partname : IOpcPartUri, part : IXpsOMColorProfileResource*) : HRESULT
+    @lpVtbl.value.get_by_part_name.unsafe_as(Proc(IOpcPartUri, IXpsOMColorProfileResource*, HRESULT)).call(partname, part)
+  end
+end
+struct LibWin32::IXpsOMPrintTicketResource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_part_name(parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(parturi)
+  end
+  def set_part_name(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+  def get_stream(stream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.unsafe_as(Proc(IStream*, HRESULT)).call(stream)
+  end
+  def set_content(sourcestream : IStream, partname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_content.unsafe_as(Proc(IStream, IOpcPartUri, HRESULT)).call(sourcestream, partname)
+  end
+end
+struct LibWin32::IXpsOMRemoteDictionaryResource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_part_name(parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(parturi)
+  end
+  def set_part_name(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+  def get_dictionary(dictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.get_dictionary.unsafe_as(Proc(IXpsOMDictionary*, HRESULT)).call(dictionary)
+  end
+  def set_dictionary(dictionary : IXpsOMDictionary) : HRESULT
+    @lpVtbl.value.set_dictionary.unsafe_as(Proc(IXpsOMDictionary, HRESULT)).call(dictionary)
+  end
+end
+struct LibWin32::IXpsOMRemoteDictionaryResourceCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, object : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IXpsOMRemoteDictionaryResource*, HRESULT)).call(index, object)
+  end
+  def insert_at(index : UInt32, object : IXpsOMRemoteDictionaryResource) : HRESULT
+    @lpVtbl.value.insert_at.unsafe_as(Proc(UInt32, IXpsOMRemoteDictionaryResource, HRESULT)).call(index, object)
+  end
+  def remove_at(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+  def set_at(index : UInt32, object : IXpsOMRemoteDictionaryResource) : HRESULT
+    @lpVtbl.value.set_at.unsafe_as(Proc(UInt32, IXpsOMRemoteDictionaryResource, HRESULT)).call(index, object)
+  end
+  def append(object : IXpsOMRemoteDictionaryResource) : HRESULT
+    @lpVtbl.value.append.unsafe_as(Proc(IXpsOMRemoteDictionaryResource, HRESULT)).call(object)
+  end
+  def get_by_part_name(partname : IOpcPartUri, remotedictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.get_by_part_name.unsafe_as(Proc(IOpcPartUri, IXpsOMRemoteDictionaryResource*, HRESULT)).call(partname, remotedictionaryresource)
+  end
+end
+struct LibWin32::IXpsOMSignatureBlockResourceCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, signatureblockresource : IXpsOMSignatureBlockResource*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IXpsOMSignatureBlockResource*, HRESULT)).call(index, signatureblockresource)
+  end
+  def insert_at(index : UInt32, signatureblockresource : IXpsOMSignatureBlockResource) : HRESULT
+    @lpVtbl.value.insert_at.unsafe_as(Proc(UInt32, IXpsOMSignatureBlockResource, HRESULT)).call(index, signatureblockresource)
+  end
+  def remove_at(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+  def set_at(index : UInt32, signatureblockresource : IXpsOMSignatureBlockResource) : HRESULT
+    @lpVtbl.value.set_at.unsafe_as(Proc(UInt32, IXpsOMSignatureBlockResource, HRESULT)).call(index, signatureblockresource)
+  end
+  def append(signatureblockresource : IXpsOMSignatureBlockResource) : HRESULT
+    @lpVtbl.value.append.unsafe_as(Proc(IXpsOMSignatureBlockResource, HRESULT)).call(signatureblockresource)
+  end
+  def get_by_part_name(partname : IOpcPartUri, signatureblockresource : IXpsOMSignatureBlockResource*) : HRESULT
+    @lpVtbl.value.get_by_part_name.unsafe_as(Proc(IOpcPartUri, IXpsOMSignatureBlockResource*, HRESULT)).call(partname, signatureblockresource)
+  end
+end
+struct LibWin32::IXpsOMDocumentStructureResource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_part_name(parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(parturi)
+  end
+  def set_part_name(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+  def get_owner(owner : IXpsOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IXpsOMDocument*, HRESULT)).call(owner)
+  end
+  def get_stream(stream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.unsafe_as(Proc(IStream*, HRESULT)).call(stream)
+  end
+  def set_content(sourcestream : IStream, partname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_content.unsafe_as(Proc(IStream, IOpcPartUri, HRESULT)).call(sourcestream, partname)
+  end
+end
+struct LibWin32::IXpsOMStoryFragmentsResource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_part_name(parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(parturi)
+  end
+  def set_part_name(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+  def get_owner(owner : IXpsOMPageReference*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IXpsOMPageReference*, HRESULT)).call(owner)
+  end
+  def get_stream(stream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.unsafe_as(Proc(IStream*, HRESULT)).call(stream)
+  end
+  def set_content(sourcestream : IStream, partname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_content.unsafe_as(Proc(IStream, IOpcPartUri, HRESULT)).call(sourcestream, partname)
+  end
+end
+struct LibWin32::IXpsOMSignatureBlockResource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_part_name(parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(parturi)
+  end
+  def set_part_name(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+  def get_owner(owner : IXpsOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IXpsOMDocument*, HRESULT)).call(owner)
+  end
+  def get_stream(stream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.unsafe_as(Proc(IStream*, HRESULT)).call(stream)
+  end
+  def set_content(sourcestream : IStream, partname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_content.unsafe_as(Proc(IStream, IOpcPartUri, HRESULT)).call(sourcestream, partname)
+  end
+end
+struct LibWin32::IXpsOMVisualCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, object : IXpsOMVisual*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IXpsOMVisual*, HRESULT)).call(index, object)
+  end
+  def insert_at(index : UInt32, object : IXpsOMVisual) : HRESULT
+    @lpVtbl.value.insert_at.unsafe_as(Proc(UInt32, IXpsOMVisual, HRESULT)).call(index, object)
+  end
+  def remove_at(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+  def set_at(index : UInt32, object : IXpsOMVisual) : HRESULT
+    @lpVtbl.value.set_at.unsafe_as(Proc(UInt32, IXpsOMVisual, HRESULT)).call(index, object)
+  end
+  def append(object : IXpsOMVisual) : HRESULT
+    @lpVtbl.value.append.unsafe_as(Proc(IXpsOMVisual, HRESULT)).call(object)
+  end
+end
+struct LibWin32::IXpsOMCanvas
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(owner : IUnknown*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IUnknown*, HRESULT)).call(owner)
+  end
+  def get_type(type : XPS_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(XPS_OBJECT_TYPE*, HRESULT)).call(type)
+  end
+  def get_transform(matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(matrixtransform)
+  end
+  def get_transform_local(matrixtransform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.get_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform*, HRESULT)).call(matrixtransform)
+  end
+  def set_transform_local(matrixtransform : IXpsOMMatrixTransform) : HRESULT
+    @lpVtbl.value.set_transform_local.unsafe_as(Proc(IXpsOMMatrixTransform, HRESULT)).call(matrixtransform)
+  end
+  def get_transform_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_transform_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_transform_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_transform_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_clip_geometry(clipgeometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_clip_geometry.unsafe_as(Proc(IXpsOMGeometry*, HRESULT)).call(clipgeometry)
+  end
+  def get_clip_geometry_local(clipgeometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.get_clip_geometry_local.unsafe_as(Proc(IXpsOMGeometry*, HRESULT)).call(clipgeometry)
+  end
+  def set_clip_geometry_local(clipgeometry : IXpsOMGeometry) : HRESULT
+    @lpVtbl.value.set_clip_geometry_local.unsafe_as(Proc(IXpsOMGeometry, HRESULT)).call(clipgeometry)
+  end
+  def get_clip_geometry_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_clip_geometry_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_clip_geometry_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_clip_geometry_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_opacity(opacity : Float32*) : HRESULT
+    @lpVtbl.value.get_opacity.unsafe_as(Proc(Float32*, HRESULT)).call(opacity)
+  end
+  def set_opacity(opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(Float32, HRESULT)).call(opacity)
+  end
+  def get_opacity_mask_brush(opacitymaskbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush.unsafe_as(Proc(IXpsOMBrush*, HRESULT)).call(opacitymaskbrush)
+  end
+  def get_opacity_mask_brush_local(opacitymaskbrush : IXpsOMBrush*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush_local.unsafe_as(Proc(IXpsOMBrush*, HRESULT)).call(opacitymaskbrush)
+  end
+  def set_opacity_mask_brush_local(opacitymaskbrush : IXpsOMBrush) : HRESULT
+    @lpVtbl.value.set_opacity_mask_brush_local.unsafe_as(Proc(IXpsOMBrush, HRESULT)).call(opacitymaskbrush)
+  end
+  def get_opacity_mask_brush_lookup(key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_opacity_mask_brush_lookup.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(key)
+  end
+  def set_opacity_mask_brush_lookup(key : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_opacity_mask_brush_lookup.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(key)
+  end
+  def get_name(name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(name)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_is_hyperlink_target(ishyperlink : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_hyperlink_target.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(ishyperlink)
+  end
+  def set_is_hyperlink_target(ishyperlink : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_hyperlink_target.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(ishyperlink)
+  end
+  def get_hyperlink_navigate_uri(hyperlinkuri : IUri*) : HRESULT
+    @lpVtbl.value.get_hyperlink_navigate_uri.unsafe_as(Proc(IUri*, HRESULT)).call(hyperlinkuri)
+  end
+  def set_hyperlink_navigate_uri(hyperlinkuri : IUri) : HRESULT
+    @lpVtbl.value.set_hyperlink_navigate_uri.unsafe_as(Proc(IUri, HRESULT)).call(hyperlinkuri)
+  end
+  def get_language(language : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(language)
+  end
+  def set_language(language : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_language.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(language)
+  end
+  def get_visuals(visuals : IXpsOMVisualCollection*) : HRESULT
+    @lpVtbl.value.get_visuals.unsafe_as(Proc(IXpsOMVisualCollection*, HRESULT)).call(visuals)
+  end
+  def get_use_aliased_edge_mode(usealiasededgemode : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_use_aliased_edge_mode.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(usealiasededgemode)
+  end
+  def set_use_aliased_edge_mode(usealiasededgemode : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_use_aliased_edge_mode.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(usealiasededgemode)
+  end
+  def get_accessibility_short_description(shortdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_accessibility_short_description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(shortdescription)
+  end
+  def set_accessibility_short_description(shortdescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_accessibility_short_description.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(shortdescription)
+  end
+  def get_accessibility_long_description(longdescription : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_accessibility_long_description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(longdescription)
+  end
+  def set_accessibility_long_description(longdescription : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_accessibility_long_description.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(longdescription)
+  end
+  def get_dictionary(resourcedictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.get_dictionary.unsafe_as(Proc(IXpsOMDictionary*, HRESULT)).call(resourcedictionary)
+  end
+  def get_dictionary_local(resourcedictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.get_dictionary_local.unsafe_as(Proc(IXpsOMDictionary*, HRESULT)).call(resourcedictionary)
+  end
+  def set_dictionary_local(resourcedictionary : IXpsOMDictionary) : HRESULT
+    @lpVtbl.value.set_dictionary_local.unsafe_as(Proc(IXpsOMDictionary, HRESULT)).call(resourcedictionary)
+  end
+  def get_dictionary_resource(remotedictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.get_dictionary_resource.unsafe_as(Proc(IXpsOMRemoteDictionaryResource*, HRESULT)).call(remotedictionaryresource)
+  end
+  def set_dictionary_resource(remotedictionaryresource : IXpsOMRemoteDictionaryResource) : HRESULT
+    @lpVtbl.value.set_dictionary_resource.unsafe_as(Proc(IXpsOMRemoteDictionaryResource, HRESULT)).call(remotedictionaryresource)
+  end
+  def clone(canvas : IXpsOMCanvas*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMCanvas*, HRESULT)).call(canvas)
+  end
+end
+struct LibWin32::IXpsOMPage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_part_name(parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(parturi)
+  end
+  def set_part_name(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+  def get_owner(pagereference : IXpsOMPageReference*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IXpsOMPageReference*, HRESULT)).call(pagereference)
+  end
+  def get_visuals(visuals : IXpsOMVisualCollection*) : HRESULT
+    @lpVtbl.value.get_visuals.unsafe_as(Proc(IXpsOMVisualCollection*, HRESULT)).call(visuals)
+  end
+  def get_page_dimensions(pagedimensions : XPS_SIZE*) : HRESULT
+    @lpVtbl.value.get_page_dimensions.unsafe_as(Proc(XPS_SIZE*, HRESULT)).call(pagedimensions)
+  end
+  def set_page_dimensions(pagedimensions : XPS_SIZE*) : HRESULT
+    @lpVtbl.value.set_page_dimensions.unsafe_as(Proc(XPS_SIZE*, HRESULT)).call(pagedimensions)
+  end
+  def get_content_box(contentbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_content_box.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(contentbox)
+  end
+  def set_content_box(contentbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_content_box.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(contentbox)
+  end
+  def get_bleed_box(bleedbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_bleed_box.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(bleedbox)
+  end
+  def set_bleed_box(bleedbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_bleed_box.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(bleedbox)
+  end
+  def get_language(language : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(language)
+  end
+  def set_language(language : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_language.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(language)
+  end
+  def get_name(name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(name)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_is_hyperlink_target(ishyperlinktarget : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_hyperlink_target.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(ishyperlinktarget)
+  end
+  def set_is_hyperlink_target(ishyperlinktarget : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_hyperlink_target.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(ishyperlinktarget)
+  end
+  def get_dictionary(resourcedictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.get_dictionary.unsafe_as(Proc(IXpsOMDictionary*, HRESULT)).call(resourcedictionary)
+  end
+  def get_dictionary_local(resourcedictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.get_dictionary_local.unsafe_as(Proc(IXpsOMDictionary*, HRESULT)).call(resourcedictionary)
+  end
+  def set_dictionary_local(resourcedictionary : IXpsOMDictionary) : HRESULT
+    @lpVtbl.value.set_dictionary_local.unsafe_as(Proc(IXpsOMDictionary, HRESULT)).call(resourcedictionary)
+  end
+  def get_dictionary_resource(remotedictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.get_dictionary_resource.unsafe_as(Proc(IXpsOMRemoteDictionaryResource*, HRESULT)).call(remotedictionaryresource)
+  end
+  def set_dictionary_resource(remotedictionaryresource : IXpsOMRemoteDictionaryResource) : HRESULT
+    @lpVtbl.value.set_dictionary_resource.unsafe_as(Proc(IXpsOMRemoteDictionaryResource, HRESULT)).call(remotedictionaryresource)
+  end
+  def write(stream : ISequentialStream, optimizemarkupsize : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write.unsafe_as(Proc(ISequentialStream, LibC::BOOL, HRESULT)).call(stream, optimizemarkupsize)
+  end
+  def generate_unused_lookup_key(type : XPS_OBJECT_TYPE, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.generate_unused_lookup_key.unsafe_as(Proc(XPS_OBJECT_TYPE, LibC::LPWSTR*, HRESULT)).call(type, key)
+  end
+  def clone(page : IXpsOMPage*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMPage*, HRESULT)).call(page)
+  end
+end
+struct LibWin32::IXpsOMPageReference
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_owner(document : IXpsOMDocument*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IXpsOMDocument*, HRESULT)).call(document)
+  end
+  def get_page(page : IXpsOMPage*) : HRESULT
+    @lpVtbl.value.get_page.unsafe_as(Proc(IXpsOMPage*, HRESULT)).call(page)
+  end
+  def set_page(page : IXpsOMPage) : HRESULT
+    @lpVtbl.value.set_page.unsafe_as(Proc(IXpsOMPage, HRESULT)).call(page)
+  end
+  def discard_page : HRESULT
+    @lpVtbl.value.discard_page.unsafe_as(Proc(HRESULT)).call
+  end
+  def is_page_loaded(ispageloaded : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_page_loaded.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(ispageloaded)
+  end
+  def get_advisory_page_dimensions(pagedimensions : XPS_SIZE*) : HRESULT
+    @lpVtbl.value.get_advisory_page_dimensions.unsafe_as(Proc(XPS_SIZE*, HRESULT)).call(pagedimensions)
+  end
+  def set_advisory_page_dimensions(pagedimensions : XPS_SIZE*) : HRESULT
+    @lpVtbl.value.set_advisory_page_dimensions.unsafe_as(Proc(XPS_SIZE*, HRESULT)).call(pagedimensions)
+  end
+  def get_story_fragments_resource(storyfragmentsresource : IXpsOMStoryFragmentsResource*) : HRESULT
+    @lpVtbl.value.get_story_fragments_resource.unsafe_as(Proc(IXpsOMStoryFragmentsResource*, HRESULT)).call(storyfragmentsresource)
+  end
+  def set_story_fragments_resource(storyfragmentsresource : IXpsOMStoryFragmentsResource) : HRESULT
+    @lpVtbl.value.set_story_fragments_resource.unsafe_as(Proc(IXpsOMStoryFragmentsResource, HRESULT)).call(storyfragmentsresource)
+  end
+  def get_print_ticket_resource(printticketresource : IXpsOMPrintTicketResource*) : HRESULT
+    @lpVtbl.value.get_print_ticket_resource.unsafe_as(Proc(IXpsOMPrintTicketResource*, HRESULT)).call(printticketresource)
+  end
+  def set_print_ticket_resource(printticketresource : IXpsOMPrintTicketResource) : HRESULT
+    @lpVtbl.value.set_print_ticket_resource.unsafe_as(Proc(IXpsOMPrintTicketResource, HRESULT)).call(printticketresource)
+  end
+  def get_thumbnail_resource(imageresource : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.get_thumbnail_resource.unsafe_as(Proc(IXpsOMImageResource*, HRESULT)).call(imageresource)
+  end
+  def set_thumbnail_resource(imageresource : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.set_thumbnail_resource.unsafe_as(Proc(IXpsOMImageResource, HRESULT)).call(imageresource)
+  end
+  def collect_link_targets(linktargets : IXpsOMNameCollection*) : HRESULT
+    @lpVtbl.value.collect_link_targets.unsafe_as(Proc(IXpsOMNameCollection*, HRESULT)).call(linktargets)
+  end
+  def collect_part_resources(partresources : IXpsOMPartResources*) : HRESULT
+    @lpVtbl.value.collect_part_resources.unsafe_as(Proc(IXpsOMPartResources*, HRESULT)).call(partresources)
+  end
+  def has_restricted_fonts(restrictedfonts : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.has_restricted_fonts.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(restrictedfonts)
+  end
+  def clone(pagereference : IXpsOMPageReference*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMPageReference*, HRESULT)).call(pagereference)
+  end
+end
+struct LibWin32::IXpsOMPageReferenceCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, pagereference : IXpsOMPageReference*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IXpsOMPageReference*, HRESULT)).call(index, pagereference)
+  end
+  def insert_at(index : UInt32, pagereference : IXpsOMPageReference) : HRESULT
+    @lpVtbl.value.insert_at.unsafe_as(Proc(UInt32, IXpsOMPageReference, HRESULT)).call(index, pagereference)
+  end
+  def remove_at(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+  def set_at(index : UInt32, pagereference : IXpsOMPageReference) : HRESULT
+    @lpVtbl.value.set_at.unsafe_as(Proc(UInt32, IXpsOMPageReference, HRESULT)).call(index, pagereference)
+  end
+  def append(pagereference : IXpsOMPageReference) : HRESULT
+    @lpVtbl.value.append.unsafe_as(Proc(IXpsOMPageReference, HRESULT)).call(pagereference)
+  end
+end
+struct LibWin32::IXpsOMDocument
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_part_name(parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(parturi)
+  end
+  def set_part_name(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+  def get_owner(documentsequence : IXpsOMDocumentSequence*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IXpsOMDocumentSequence*, HRESULT)).call(documentsequence)
+  end
+  def get_page_references(pagereferences : IXpsOMPageReferenceCollection*) : HRESULT
+    @lpVtbl.value.get_page_references.unsafe_as(Proc(IXpsOMPageReferenceCollection*, HRESULT)).call(pagereferences)
+  end
+  def get_print_ticket_resource(printticketresource : IXpsOMPrintTicketResource*) : HRESULT
+    @lpVtbl.value.get_print_ticket_resource.unsafe_as(Proc(IXpsOMPrintTicketResource*, HRESULT)).call(printticketresource)
+  end
+  def set_print_ticket_resource(printticketresource : IXpsOMPrintTicketResource) : HRESULT
+    @lpVtbl.value.set_print_ticket_resource.unsafe_as(Proc(IXpsOMPrintTicketResource, HRESULT)).call(printticketresource)
+  end
+  def get_document_structure_resource(documentstructureresource : IXpsOMDocumentStructureResource*) : HRESULT
+    @lpVtbl.value.get_document_structure_resource.unsafe_as(Proc(IXpsOMDocumentStructureResource*, HRESULT)).call(documentstructureresource)
+  end
+  def set_document_structure_resource(documentstructureresource : IXpsOMDocumentStructureResource) : HRESULT
+    @lpVtbl.value.set_document_structure_resource.unsafe_as(Proc(IXpsOMDocumentStructureResource, HRESULT)).call(documentstructureresource)
+  end
+  def get_signature_block_resources(signatureblockresources : IXpsOMSignatureBlockResourceCollection*) : HRESULT
+    @lpVtbl.value.get_signature_block_resources.unsafe_as(Proc(IXpsOMSignatureBlockResourceCollection*, HRESULT)).call(signatureblockresources)
+  end
+  def clone(document : IXpsOMDocument*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMDocument*, HRESULT)).call(document)
+  end
+end
+struct LibWin32::IXpsOMDocumentCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, document : IXpsOMDocument*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IXpsOMDocument*, HRESULT)).call(index, document)
+  end
+  def insert_at(index : UInt32, document : IXpsOMDocument) : HRESULT
+    @lpVtbl.value.insert_at.unsafe_as(Proc(UInt32, IXpsOMDocument, HRESULT)).call(index, document)
+  end
+  def remove_at(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+  def set_at(index : UInt32, document : IXpsOMDocument) : HRESULT
+    @lpVtbl.value.set_at.unsafe_as(Proc(UInt32, IXpsOMDocument, HRESULT)).call(index, document)
+  end
+  def append(document : IXpsOMDocument) : HRESULT
+    @lpVtbl.value.append.unsafe_as(Proc(IXpsOMDocument, HRESULT)).call(document)
+  end
+end
+struct LibWin32::IXpsOMDocumentSequence
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_part_name(parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(parturi)
+  end
+  def set_part_name(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+  def get_owner(package : IXpsOMPackage*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IXpsOMPackage*, HRESULT)).call(package)
+  end
+  def get_documents(documents : IXpsOMDocumentCollection*) : HRESULT
+    @lpVtbl.value.get_documents.unsafe_as(Proc(IXpsOMDocumentCollection*, HRESULT)).call(documents)
+  end
+  def get_print_ticket_resource(printticketresource : IXpsOMPrintTicketResource*) : HRESULT
+    @lpVtbl.value.get_print_ticket_resource.unsafe_as(Proc(IXpsOMPrintTicketResource*, HRESULT)).call(printticketresource)
+  end
+  def set_print_ticket_resource(printticketresource : IXpsOMPrintTicketResource) : HRESULT
+    @lpVtbl.value.set_print_ticket_resource.unsafe_as(Proc(IXpsOMPrintTicketResource, HRESULT)).call(printticketresource)
+  end
+end
+struct LibWin32::IXpsOMCoreProperties
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_part_name(parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(parturi)
+  end
+  def set_part_name(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+  def get_owner(package : IXpsOMPackage*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IXpsOMPackage*, HRESULT)).call(package)
+  end
+  def get_category(category : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_category.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(category)
+  end
+  def set_category(category : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_category.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(category)
+  end
+  def get_content_status(contentstatus : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_content_status.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(contentstatus)
+  end
+  def set_content_status(contentstatus : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_content_status.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(contentstatus)
+  end
+  def get_content_type(contenttype : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_content_type.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(contenttype)
+  end
+  def set_content_type(contenttype : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_content_type.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(contenttype)
+  end
+  def get_created(created : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_created.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(created)
+  end
+  def set_created(created : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.set_created.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(created)
+  end
+  def get_creator(creator : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_creator.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(creator)
+  end
+  def set_creator(creator : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_creator.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(creator)
+  end
+  def get_description(description : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(description)
+  end
+  def set_description(description : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_description.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(description)
+  end
+  def get_identifier(identifier : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_identifier.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(identifier)
+  end
+  def set_identifier(identifier : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_identifier.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(identifier)
+  end
+  def get_keywords(keywords : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_keywords.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(keywords)
+  end
+  def set_keywords(keywords : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_keywords.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(keywords)
+  end
+  def get_language(language : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(language)
+  end
+  def set_language(language : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_language.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(language)
+  end
+  def get_last_modified_by(lastmodifiedby : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_last_modified_by.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(lastmodifiedby)
+  end
+  def set_last_modified_by(lastmodifiedby : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_last_modified_by.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(lastmodifiedby)
+  end
+  def get_last_printed(lastprinted : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_last_printed.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(lastprinted)
+  end
+  def set_last_printed(lastprinted : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.set_last_printed.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(lastprinted)
+  end
+  def get_modified(modified : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_modified.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(modified)
+  end
+  def set_modified(modified : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.set_modified.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(modified)
+  end
+  def get_revision(revision : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_revision.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(revision)
+  end
+  def set_revision(revision : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_revision.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(revision)
+  end
+  def get_subject(subject : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_subject.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(subject)
+  end
+  def set_subject(subject : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_subject.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(subject)
+  end
+  def get_title(title : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_title.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(title)
+  end
+  def set_title(title : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_title.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(title)
+  end
+  def get_version(version : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(version)
+  end
+  def set_version(version : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_version.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(version)
+  end
+  def clone(coreproperties : IXpsOMCoreProperties*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMCoreProperties*, HRESULT)).call(coreproperties)
+  end
+end
+struct LibWin32::IXpsOMPackage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_document_sequence(documentsequence : IXpsOMDocumentSequence*) : HRESULT
+    @lpVtbl.value.get_document_sequence.unsafe_as(Proc(IXpsOMDocumentSequence*, HRESULT)).call(documentsequence)
+  end
+  def set_document_sequence(documentsequence : IXpsOMDocumentSequence) : HRESULT
+    @lpVtbl.value.set_document_sequence.unsafe_as(Proc(IXpsOMDocumentSequence, HRESULT)).call(documentsequence)
+  end
+  def get_core_properties(coreproperties : IXpsOMCoreProperties*) : HRESULT
+    @lpVtbl.value.get_core_properties.unsafe_as(Proc(IXpsOMCoreProperties*, HRESULT)).call(coreproperties)
+  end
+  def set_core_properties(coreproperties : IXpsOMCoreProperties) : HRESULT
+    @lpVtbl.value.set_core_properties.unsafe_as(Proc(IXpsOMCoreProperties, HRESULT)).call(coreproperties)
+  end
+  def get_discard_control_part_name(discardcontrolparturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_discard_control_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(discardcontrolparturi)
+  end
+  def set_discard_control_part_name(discardcontrolparturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_discard_control_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(discardcontrolparturi)
+  end
+  def get_thumbnail_resource(imageresource : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.get_thumbnail_resource.unsafe_as(Proc(IXpsOMImageResource*, HRESULT)).call(imageresource)
+  end
+  def set_thumbnail_resource(imageresource : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.set_thumbnail_resource.unsafe_as(Proc(IXpsOMImageResource, HRESULT)).call(imageresource)
+  end
+  def write_to_file(filename : LibC::LPWSTR, securityattributes : SECURITY_ATTRIBUTES*, flagsandattributes : UInt32, optimizemarkupsize : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_to_file.unsafe_as(Proc(LibC::LPWSTR, SECURITY_ATTRIBUTES*, UInt32, LibC::BOOL, HRESULT)).call(filename, securityattributes, flagsandattributes, optimizemarkupsize)
+  end
+  def write_to_stream(stream : ISequentialStream, optimizemarkupsize : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_to_stream.unsafe_as(Proc(ISequentialStream, LibC::BOOL, HRESULT)).call(stream, optimizemarkupsize)
+  end
+end
+struct LibWin32::IXpsOMObjectFactory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_package(package : IXpsOMPackage*) : HRESULT
+    @lpVtbl.value.create_package.unsafe_as(Proc(IXpsOMPackage*, HRESULT)).call(package)
+  end
+  def create_package_from_file(filename : LibC::LPWSTR, reuseobjects : LibC::BOOL, package : IXpsOMPackage*) : HRESULT
+    @lpVtbl.value.create_package_from_file.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, IXpsOMPackage*, HRESULT)).call(filename, reuseobjects, package)
+  end
+  def create_package_from_stream(stream : IStream, reuseobjects : LibC::BOOL, package : IXpsOMPackage*) : HRESULT
+    @lpVtbl.value.create_package_from_stream.unsafe_as(Proc(IStream, LibC::BOOL, IXpsOMPackage*, HRESULT)).call(stream, reuseobjects, package)
+  end
+  def create_story_fragments_resource(acquiredstream : IStream, parturi : IOpcPartUri, storyfragmentsresource : IXpsOMStoryFragmentsResource*) : HRESULT
+    @lpVtbl.value.create_story_fragments_resource.unsafe_as(Proc(IStream, IOpcPartUri, IXpsOMStoryFragmentsResource*, HRESULT)).call(acquiredstream, parturi, storyfragmentsresource)
+  end
+  def create_document_structure_resource(acquiredstream : IStream, parturi : IOpcPartUri, documentstructureresource : IXpsOMDocumentStructureResource*) : HRESULT
+    @lpVtbl.value.create_document_structure_resource.unsafe_as(Proc(IStream, IOpcPartUri, IXpsOMDocumentStructureResource*, HRESULT)).call(acquiredstream, parturi, documentstructureresource)
+  end
+  def create_signature_block_resource(acquiredstream : IStream, parturi : IOpcPartUri, signatureblockresource : IXpsOMSignatureBlockResource*) : HRESULT
+    @lpVtbl.value.create_signature_block_resource.unsafe_as(Proc(IStream, IOpcPartUri, IXpsOMSignatureBlockResource*, HRESULT)).call(acquiredstream, parturi, signatureblockresource)
+  end
+  def create_remote_dictionary_resource(dictionary : IXpsOMDictionary, parturi : IOpcPartUri, remotedictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.create_remote_dictionary_resource.unsafe_as(Proc(IXpsOMDictionary, IOpcPartUri, IXpsOMRemoteDictionaryResource*, HRESULT)).call(dictionary, parturi, remotedictionaryresource)
+  end
+  def create_remote_dictionary_resource_from_stream(dictionarymarkupstream : IStream, dictionaryparturi : IOpcPartUri, resources : IXpsOMPartResources, dictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.create_remote_dictionary_resource_from_stream.unsafe_as(Proc(IStream, IOpcPartUri, IXpsOMPartResources, IXpsOMRemoteDictionaryResource*, HRESULT)).call(dictionarymarkupstream, dictionaryparturi, resources, dictionaryresource)
+  end
+  def create_part_resources(partresources : IXpsOMPartResources*) : HRESULT
+    @lpVtbl.value.create_part_resources.unsafe_as(Proc(IXpsOMPartResources*, HRESULT)).call(partresources)
+  end
+  def create_document_sequence(parturi : IOpcPartUri, documentsequence : IXpsOMDocumentSequence*) : HRESULT
+    @lpVtbl.value.create_document_sequence.unsafe_as(Proc(IOpcPartUri, IXpsOMDocumentSequence*, HRESULT)).call(parturi, documentsequence)
+  end
+  def create_document(parturi : IOpcPartUri, document : IXpsOMDocument*) : HRESULT
+    @lpVtbl.value.create_document.unsafe_as(Proc(IOpcPartUri, IXpsOMDocument*, HRESULT)).call(parturi, document)
+  end
+  def create_page_reference(advisorypagedimensions : XPS_SIZE*, pagereference : IXpsOMPageReference*) : HRESULT
+    @lpVtbl.value.create_page_reference.unsafe_as(Proc(XPS_SIZE*, IXpsOMPageReference*, HRESULT)).call(advisorypagedimensions, pagereference)
+  end
+  def create_page(pagedimensions : XPS_SIZE*, language : LibC::LPWSTR, parturi : IOpcPartUri, page : IXpsOMPage*) : HRESULT
+    @lpVtbl.value.create_page.unsafe_as(Proc(XPS_SIZE*, LibC::LPWSTR, IOpcPartUri, IXpsOMPage*, HRESULT)).call(pagedimensions, language, parturi, page)
+  end
+  def create_page_from_stream(pagemarkupstream : IStream, parturi : IOpcPartUri, resources : IXpsOMPartResources, reuseobjects : LibC::BOOL, page : IXpsOMPage*) : HRESULT
+    @lpVtbl.value.create_page_from_stream.unsafe_as(Proc(IStream, IOpcPartUri, IXpsOMPartResources, LibC::BOOL, IXpsOMPage*, HRESULT)).call(pagemarkupstream, parturi, resources, reuseobjects, page)
+  end
+  def create_canvas(canvas : IXpsOMCanvas*) : HRESULT
+    @lpVtbl.value.create_canvas.unsafe_as(Proc(IXpsOMCanvas*, HRESULT)).call(canvas)
+  end
+  def create_glyphs(fontresource : IXpsOMFontResource, glyphs : IXpsOMGlyphs*) : HRESULT
+    @lpVtbl.value.create_glyphs.unsafe_as(Proc(IXpsOMFontResource, IXpsOMGlyphs*, HRESULT)).call(fontresource, glyphs)
+  end
+  def create_path(path : IXpsOMPath*) : HRESULT
+    @lpVtbl.value.create_path.unsafe_as(Proc(IXpsOMPath*, HRESULT)).call(path)
+  end
+  def create_geometry(geometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.create_geometry.unsafe_as(Proc(IXpsOMGeometry*, HRESULT)).call(geometry)
+  end
+  def create_geometry_figure(startpoint : XPS_POINT*, figure : IXpsOMGeometryFigure*) : HRESULT
+    @lpVtbl.value.create_geometry_figure.unsafe_as(Proc(XPS_POINT*, IXpsOMGeometryFigure*, HRESULT)).call(startpoint, figure)
+  end
+  def create_matrix_transform(matrix : XPS_MATRIX*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.create_matrix_transform.unsafe_as(Proc(XPS_MATRIX*, IXpsOMMatrixTransform*, HRESULT)).call(matrix, transform)
+  end
+  def create_solid_color_brush(color : XPS_COLOR*, colorprofile : IXpsOMColorProfileResource, solidcolorbrush : IXpsOMSolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.unsafe_as(Proc(XPS_COLOR*, IXpsOMColorProfileResource, IXpsOMSolidColorBrush*, HRESULT)).call(color, colorprofile, solidcolorbrush)
+  end
+  def create_color_profile_resource(acquiredstream : IStream, parturi : IOpcPartUri, colorprofileresource : IXpsOMColorProfileResource*) : HRESULT
+    @lpVtbl.value.create_color_profile_resource.unsafe_as(Proc(IStream, IOpcPartUri, IXpsOMColorProfileResource*, HRESULT)).call(acquiredstream, parturi, colorprofileresource)
+  end
+  def create_image_brush(image : IXpsOMImageResource, viewbox : XPS_RECT*, viewport : XPS_RECT*, imagebrush : IXpsOMImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.unsafe_as(Proc(IXpsOMImageResource, XPS_RECT*, XPS_RECT*, IXpsOMImageBrush*, HRESULT)).call(image, viewbox, viewport, imagebrush)
+  end
+  def create_visual_brush(viewbox : XPS_RECT*, viewport : XPS_RECT*, visualbrush : IXpsOMVisualBrush*) : HRESULT
+    @lpVtbl.value.create_visual_brush.unsafe_as(Proc(XPS_RECT*, XPS_RECT*, IXpsOMVisualBrush*, HRESULT)).call(viewbox, viewport, visualbrush)
+  end
+  def create_image_resource(acquiredstream : IStream, contenttype : XPS_IMAGE_TYPE, parturi : IOpcPartUri, imageresource : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.create_image_resource.unsafe_as(Proc(IStream, XPS_IMAGE_TYPE, IOpcPartUri, IXpsOMImageResource*, HRESULT)).call(acquiredstream, contenttype, parturi, imageresource)
+  end
+  def create_print_ticket_resource(acquiredstream : IStream, parturi : IOpcPartUri, printticketresource : IXpsOMPrintTicketResource*) : HRESULT
+    @lpVtbl.value.create_print_ticket_resource.unsafe_as(Proc(IStream, IOpcPartUri, IXpsOMPrintTicketResource*, HRESULT)).call(acquiredstream, parturi, printticketresource)
+  end
+  def create_font_resource(acquiredstream : IStream, fontembedding : XPS_FONT_EMBEDDING, parturi : IOpcPartUri, isobfsourcestream : LibC::BOOL, fontresource : IXpsOMFontResource*) : HRESULT
+    @lpVtbl.value.create_font_resource.unsafe_as(Proc(IStream, XPS_FONT_EMBEDDING, IOpcPartUri, LibC::BOOL, IXpsOMFontResource*, HRESULT)).call(acquiredstream, fontembedding, parturi, isobfsourcestream, fontresource)
+  end
+  def create_gradient_stop(color : XPS_COLOR*, colorprofile : IXpsOMColorProfileResource, offset : Float32, gradientstop : IXpsOMGradientStop*) : HRESULT
+    @lpVtbl.value.create_gradient_stop.unsafe_as(Proc(XPS_COLOR*, IXpsOMColorProfileResource, Float32, IXpsOMGradientStop*, HRESULT)).call(color, colorprofile, offset, gradientstop)
+  end
+  def create_linear_gradient_brush(gradstop1 : IXpsOMGradientStop, gradstop2 : IXpsOMGradientStop, startpoint : XPS_POINT*, endpoint : XPS_POINT*, lineargradientbrush : IXpsOMLinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.unsafe_as(Proc(IXpsOMGradientStop, IXpsOMGradientStop, XPS_POINT*, XPS_POINT*, IXpsOMLinearGradientBrush*, HRESULT)).call(gradstop1, gradstop2, startpoint, endpoint, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(gradstop1 : IXpsOMGradientStop, gradstop2 : IXpsOMGradientStop, centerpoint : XPS_POINT*, gradientorigin : XPS_POINT*, radiisizes : XPS_SIZE*, radialgradientbrush : IXpsOMRadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.unsafe_as(Proc(IXpsOMGradientStop, IXpsOMGradientStop, XPS_POINT*, XPS_POINT*, XPS_SIZE*, IXpsOMRadialGradientBrush*, HRESULT)).call(gradstop1, gradstop2, centerpoint, gradientorigin, radiisizes, radialgradientbrush)
+  end
+  def create_core_properties(parturi : IOpcPartUri, coreproperties : IXpsOMCoreProperties*) : HRESULT
+    @lpVtbl.value.create_core_properties.unsafe_as(Proc(IOpcPartUri, IXpsOMCoreProperties*, HRESULT)).call(parturi, coreproperties)
+  end
+  def create_dictionary(dictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.create_dictionary.unsafe_as(Proc(IXpsOMDictionary*, HRESULT)).call(dictionary)
+  end
+  def create_part_uri_collection(parturicollection : IXpsOMPartUriCollection*) : HRESULT
+    @lpVtbl.value.create_part_uri_collection.unsafe_as(Proc(IXpsOMPartUriCollection*, HRESULT)).call(parturicollection)
+  end
+  def create_package_writer_on_file(filename : LibC::LPWSTR, securityattributes : SECURITY_ATTRIBUTES*, flagsandattributes : UInt32, optimizemarkupsize : LibC::BOOL, interleaving : XPS_INTERLEAVING, documentsequencepartname : IOpcPartUri, coreproperties : IXpsOMCoreProperties, packagethumbnail : IXpsOMImageResource, documentsequenceprintticket : IXpsOMPrintTicketResource, discardcontrolpartname : IOpcPartUri, packagewriter : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.create_package_writer_on_file.unsafe_as(Proc(LibC::LPWSTR, SECURITY_ATTRIBUTES*, UInt32, LibC::BOOL, XPS_INTERLEAVING, IOpcPartUri, IXpsOMCoreProperties, IXpsOMImageResource, IXpsOMPrintTicketResource, IOpcPartUri, IXpsOMPackageWriter*, HRESULT)).call(filename, securityattributes, flagsandattributes, optimizemarkupsize, interleaving, documentsequencepartname, coreproperties, packagethumbnail, documentsequenceprintticket, discardcontrolpartname, packagewriter)
+  end
+  def create_package_writer_on_stream(outputstream : ISequentialStream, optimizemarkupsize : LibC::BOOL, interleaving : XPS_INTERLEAVING, documentsequencepartname : IOpcPartUri, coreproperties : IXpsOMCoreProperties, packagethumbnail : IXpsOMImageResource, documentsequenceprintticket : IXpsOMPrintTicketResource, discardcontrolpartname : IOpcPartUri, packagewriter : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.create_package_writer_on_stream.unsafe_as(Proc(ISequentialStream, LibC::BOOL, XPS_INTERLEAVING, IOpcPartUri, IXpsOMCoreProperties, IXpsOMImageResource, IXpsOMPrintTicketResource, IOpcPartUri, IXpsOMPackageWriter*, HRESULT)).call(outputstream, optimizemarkupsize, interleaving, documentsequencepartname, coreproperties, packagethumbnail, documentsequenceprintticket, discardcontrolpartname, packagewriter)
+  end
+  def create_part_uri(uri : LibC::LPWSTR, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.create_part_uri.unsafe_as(Proc(LibC::LPWSTR, IOpcPartUri*, HRESULT)).call(uri, parturi)
+  end
+  def create_read_only_stream_on_file(filename : LibC::LPWSTR, stream : IStream*) : HRESULT
+    @lpVtbl.value.create_read_only_stream_on_file.unsafe_as(Proc(LibC::LPWSTR, IStream*, HRESULT)).call(filename, stream)
+  end
+end
+struct LibWin32::IXpsOMNameCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, LibC::LPWSTR*, HRESULT)).call(index, name)
+  end
+end
+struct LibWin32::IXpsOMPartUriCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IOpcPartUri*, HRESULT)).call(index, parturi)
+  end
+  def insert_at(index : UInt32, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.insert_at.unsafe_as(Proc(UInt32, IOpcPartUri, HRESULT)).call(index, parturi)
+  end
+  def remove_at(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+  def set_at(index : UInt32, parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_at.unsafe_as(Proc(UInt32, IOpcPartUri, HRESULT)).call(index, parturi)
+  end
+  def append(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.append.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+end
+struct LibWin32::IXpsOMPackageWriter
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def start_new_document(documentpartname : IOpcPartUri, documentprintticket : IXpsOMPrintTicketResource, documentstructure : IXpsOMDocumentStructureResource, signatureblockresources : IXpsOMSignatureBlockResourceCollection, restrictedfonts : IXpsOMPartUriCollection) : HRESULT
+    @lpVtbl.value.start_new_document.unsafe_as(Proc(IOpcPartUri, IXpsOMPrintTicketResource, IXpsOMDocumentStructureResource, IXpsOMSignatureBlockResourceCollection, IXpsOMPartUriCollection, HRESULT)).call(documentpartname, documentprintticket, documentstructure, signatureblockresources, restrictedfonts)
+  end
+  def add_page(page : IXpsOMPage, advisorypagedimensions : XPS_SIZE*, discardableresourceparts : IXpsOMPartUriCollection, storyfragments : IXpsOMStoryFragmentsResource, pageprintticket : IXpsOMPrintTicketResource, pagethumbnail : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.add_page.unsafe_as(Proc(IXpsOMPage, XPS_SIZE*, IXpsOMPartUriCollection, IXpsOMStoryFragmentsResource, IXpsOMPrintTicketResource, IXpsOMImageResource, HRESULT)).call(page, advisorypagedimensions, discardableresourceparts, storyfragments, pageprintticket, pagethumbnail)
+  end
+  def add_resource(resource : IXpsOMResource) : HRESULT
+    @lpVtbl.value.add_resource.unsafe_as(Proc(IXpsOMResource, HRESULT)).call(resource)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def is_closed(isclosed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_closed.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(isclosed)
+  end
+end
+struct LibWin32::IXpsOMPackageTarget
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_xps_om_package_writer(documentsequencepartname : IOpcPartUri, documentsequenceprintticket : IXpsOMPrintTicketResource, discardcontrolpartname : IOpcPartUri, packagewriter : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.create_xps_om_package_writer.unsafe_as(Proc(IOpcPartUri, IXpsOMPrintTicketResource, IOpcPartUri, IXpsOMPackageWriter*, HRESULT)).call(documentsequencepartname, documentsequenceprintticket, discardcontrolpartname, packagewriter)
+  end
+end
+struct LibWin32::IXpsOMThumbnailGenerator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def generate_thumbnail(page : IXpsOMPage, thumbnailtype : XPS_IMAGE_TYPE, thumbnailsize : XPS_THUMBNAIL_SIZE, imageresourcepartname : IOpcPartUri, imageresource : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.generate_thumbnail.unsafe_as(Proc(IXpsOMPage, XPS_IMAGE_TYPE, XPS_THUMBNAIL_SIZE, IOpcPartUri, IXpsOMImageResource*, HRESULT)).call(page, thumbnailtype, thumbnailsize, imageresourcepartname, imageresource)
+  end
+end
+struct LibWin32::IXpsOMObjectFactory1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_package(package : IXpsOMPackage*) : HRESULT
+    @lpVtbl.value.create_package.unsafe_as(Proc(IXpsOMPackage*, HRESULT)).call(package)
+  end
+  def create_package_from_file(filename : LibC::LPWSTR, reuseobjects : LibC::BOOL, package : IXpsOMPackage*) : HRESULT
+    @lpVtbl.value.create_package_from_file.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, IXpsOMPackage*, HRESULT)).call(filename, reuseobjects, package)
+  end
+  def create_package_from_stream(stream : IStream, reuseobjects : LibC::BOOL, package : IXpsOMPackage*) : HRESULT
+    @lpVtbl.value.create_package_from_stream.unsafe_as(Proc(IStream, LibC::BOOL, IXpsOMPackage*, HRESULT)).call(stream, reuseobjects, package)
+  end
+  def create_story_fragments_resource(acquiredstream : IStream, parturi : IOpcPartUri, storyfragmentsresource : IXpsOMStoryFragmentsResource*) : HRESULT
+    @lpVtbl.value.create_story_fragments_resource.unsafe_as(Proc(IStream, IOpcPartUri, IXpsOMStoryFragmentsResource*, HRESULT)).call(acquiredstream, parturi, storyfragmentsresource)
+  end
+  def create_document_structure_resource(acquiredstream : IStream, parturi : IOpcPartUri, documentstructureresource : IXpsOMDocumentStructureResource*) : HRESULT
+    @lpVtbl.value.create_document_structure_resource.unsafe_as(Proc(IStream, IOpcPartUri, IXpsOMDocumentStructureResource*, HRESULT)).call(acquiredstream, parturi, documentstructureresource)
+  end
+  def create_signature_block_resource(acquiredstream : IStream, parturi : IOpcPartUri, signatureblockresource : IXpsOMSignatureBlockResource*) : HRESULT
+    @lpVtbl.value.create_signature_block_resource.unsafe_as(Proc(IStream, IOpcPartUri, IXpsOMSignatureBlockResource*, HRESULT)).call(acquiredstream, parturi, signatureblockresource)
+  end
+  def create_remote_dictionary_resource(dictionary : IXpsOMDictionary, parturi : IOpcPartUri, remotedictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.create_remote_dictionary_resource.unsafe_as(Proc(IXpsOMDictionary, IOpcPartUri, IXpsOMRemoteDictionaryResource*, HRESULT)).call(dictionary, parturi, remotedictionaryresource)
+  end
+  def create_remote_dictionary_resource_from_stream(dictionarymarkupstream : IStream, dictionaryparturi : IOpcPartUri, resources : IXpsOMPartResources, dictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.create_remote_dictionary_resource_from_stream.unsafe_as(Proc(IStream, IOpcPartUri, IXpsOMPartResources, IXpsOMRemoteDictionaryResource*, HRESULT)).call(dictionarymarkupstream, dictionaryparturi, resources, dictionaryresource)
+  end
+  def create_part_resources(partresources : IXpsOMPartResources*) : HRESULT
+    @lpVtbl.value.create_part_resources.unsafe_as(Proc(IXpsOMPartResources*, HRESULT)).call(partresources)
+  end
+  def create_document_sequence(parturi : IOpcPartUri, documentsequence : IXpsOMDocumentSequence*) : HRESULT
+    @lpVtbl.value.create_document_sequence.unsafe_as(Proc(IOpcPartUri, IXpsOMDocumentSequence*, HRESULT)).call(parturi, documentsequence)
+  end
+  def create_document(parturi : IOpcPartUri, document : IXpsOMDocument*) : HRESULT
+    @lpVtbl.value.create_document.unsafe_as(Proc(IOpcPartUri, IXpsOMDocument*, HRESULT)).call(parturi, document)
+  end
+  def create_page_reference(advisorypagedimensions : XPS_SIZE*, pagereference : IXpsOMPageReference*) : HRESULT
+    @lpVtbl.value.create_page_reference.unsafe_as(Proc(XPS_SIZE*, IXpsOMPageReference*, HRESULT)).call(advisorypagedimensions, pagereference)
+  end
+  def create_page(pagedimensions : XPS_SIZE*, language : LibC::LPWSTR, parturi : IOpcPartUri, page : IXpsOMPage*) : HRESULT
+    @lpVtbl.value.create_page.unsafe_as(Proc(XPS_SIZE*, LibC::LPWSTR, IOpcPartUri, IXpsOMPage*, HRESULT)).call(pagedimensions, language, parturi, page)
+  end
+  def create_page_from_stream(pagemarkupstream : IStream, parturi : IOpcPartUri, resources : IXpsOMPartResources, reuseobjects : LibC::BOOL, page : IXpsOMPage*) : HRESULT
+    @lpVtbl.value.create_page_from_stream.unsafe_as(Proc(IStream, IOpcPartUri, IXpsOMPartResources, LibC::BOOL, IXpsOMPage*, HRESULT)).call(pagemarkupstream, parturi, resources, reuseobjects, page)
+  end
+  def create_canvas(canvas : IXpsOMCanvas*) : HRESULT
+    @lpVtbl.value.create_canvas.unsafe_as(Proc(IXpsOMCanvas*, HRESULT)).call(canvas)
+  end
+  def create_glyphs(fontresource : IXpsOMFontResource, glyphs : IXpsOMGlyphs*) : HRESULT
+    @lpVtbl.value.create_glyphs.unsafe_as(Proc(IXpsOMFontResource, IXpsOMGlyphs*, HRESULT)).call(fontresource, glyphs)
+  end
+  def create_path(path : IXpsOMPath*) : HRESULT
+    @lpVtbl.value.create_path.unsafe_as(Proc(IXpsOMPath*, HRESULT)).call(path)
+  end
+  def create_geometry(geometry : IXpsOMGeometry*) : HRESULT
+    @lpVtbl.value.create_geometry.unsafe_as(Proc(IXpsOMGeometry*, HRESULT)).call(geometry)
+  end
+  def create_geometry_figure(startpoint : XPS_POINT*, figure : IXpsOMGeometryFigure*) : HRESULT
+    @lpVtbl.value.create_geometry_figure.unsafe_as(Proc(XPS_POINT*, IXpsOMGeometryFigure*, HRESULT)).call(startpoint, figure)
+  end
+  def create_matrix_transform(matrix : XPS_MATRIX*, transform : IXpsOMMatrixTransform*) : HRESULT
+    @lpVtbl.value.create_matrix_transform.unsafe_as(Proc(XPS_MATRIX*, IXpsOMMatrixTransform*, HRESULT)).call(matrix, transform)
+  end
+  def create_solid_color_brush(color : XPS_COLOR*, colorprofile : IXpsOMColorProfileResource, solidcolorbrush : IXpsOMSolidColorBrush*) : HRESULT
+    @lpVtbl.value.create_solid_color_brush.unsafe_as(Proc(XPS_COLOR*, IXpsOMColorProfileResource, IXpsOMSolidColorBrush*, HRESULT)).call(color, colorprofile, solidcolorbrush)
+  end
+  def create_color_profile_resource(acquiredstream : IStream, parturi : IOpcPartUri, colorprofileresource : IXpsOMColorProfileResource*) : HRESULT
+    @lpVtbl.value.create_color_profile_resource.unsafe_as(Proc(IStream, IOpcPartUri, IXpsOMColorProfileResource*, HRESULT)).call(acquiredstream, parturi, colorprofileresource)
+  end
+  def create_image_brush(image : IXpsOMImageResource, viewbox : XPS_RECT*, viewport : XPS_RECT*, imagebrush : IXpsOMImageBrush*) : HRESULT
+    @lpVtbl.value.create_image_brush.unsafe_as(Proc(IXpsOMImageResource, XPS_RECT*, XPS_RECT*, IXpsOMImageBrush*, HRESULT)).call(image, viewbox, viewport, imagebrush)
+  end
+  def create_visual_brush(viewbox : XPS_RECT*, viewport : XPS_RECT*, visualbrush : IXpsOMVisualBrush*) : HRESULT
+    @lpVtbl.value.create_visual_brush.unsafe_as(Proc(XPS_RECT*, XPS_RECT*, IXpsOMVisualBrush*, HRESULT)).call(viewbox, viewport, visualbrush)
+  end
+  def create_image_resource(acquiredstream : IStream, contenttype : XPS_IMAGE_TYPE, parturi : IOpcPartUri, imageresource : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.create_image_resource.unsafe_as(Proc(IStream, XPS_IMAGE_TYPE, IOpcPartUri, IXpsOMImageResource*, HRESULT)).call(acquiredstream, contenttype, parturi, imageresource)
+  end
+  def create_print_ticket_resource(acquiredstream : IStream, parturi : IOpcPartUri, printticketresource : IXpsOMPrintTicketResource*) : HRESULT
+    @lpVtbl.value.create_print_ticket_resource.unsafe_as(Proc(IStream, IOpcPartUri, IXpsOMPrintTicketResource*, HRESULT)).call(acquiredstream, parturi, printticketresource)
+  end
+  def create_font_resource(acquiredstream : IStream, fontembedding : XPS_FONT_EMBEDDING, parturi : IOpcPartUri, isobfsourcestream : LibC::BOOL, fontresource : IXpsOMFontResource*) : HRESULT
+    @lpVtbl.value.create_font_resource.unsafe_as(Proc(IStream, XPS_FONT_EMBEDDING, IOpcPartUri, LibC::BOOL, IXpsOMFontResource*, HRESULT)).call(acquiredstream, fontembedding, parturi, isobfsourcestream, fontresource)
+  end
+  def create_gradient_stop(color : XPS_COLOR*, colorprofile : IXpsOMColorProfileResource, offset : Float32, gradientstop : IXpsOMGradientStop*) : HRESULT
+    @lpVtbl.value.create_gradient_stop.unsafe_as(Proc(XPS_COLOR*, IXpsOMColorProfileResource, Float32, IXpsOMGradientStop*, HRESULT)).call(color, colorprofile, offset, gradientstop)
+  end
+  def create_linear_gradient_brush(gradstop1 : IXpsOMGradientStop, gradstop2 : IXpsOMGradientStop, startpoint : XPS_POINT*, endpoint : XPS_POINT*, lineargradientbrush : IXpsOMLinearGradientBrush*) : HRESULT
+    @lpVtbl.value.create_linear_gradient_brush.unsafe_as(Proc(IXpsOMGradientStop, IXpsOMGradientStop, XPS_POINT*, XPS_POINT*, IXpsOMLinearGradientBrush*, HRESULT)).call(gradstop1, gradstop2, startpoint, endpoint, lineargradientbrush)
+  end
+  def create_radial_gradient_brush(gradstop1 : IXpsOMGradientStop, gradstop2 : IXpsOMGradientStop, centerpoint : XPS_POINT*, gradientorigin : XPS_POINT*, radiisizes : XPS_SIZE*, radialgradientbrush : IXpsOMRadialGradientBrush*) : HRESULT
+    @lpVtbl.value.create_radial_gradient_brush.unsafe_as(Proc(IXpsOMGradientStop, IXpsOMGradientStop, XPS_POINT*, XPS_POINT*, XPS_SIZE*, IXpsOMRadialGradientBrush*, HRESULT)).call(gradstop1, gradstop2, centerpoint, gradientorigin, radiisizes, radialgradientbrush)
+  end
+  def create_core_properties(parturi : IOpcPartUri, coreproperties : IXpsOMCoreProperties*) : HRESULT
+    @lpVtbl.value.create_core_properties.unsafe_as(Proc(IOpcPartUri, IXpsOMCoreProperties*, HRESULT)).call(parturi, coreproperties)
+  end
+  def create_dictionary(dictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.create_dictionary.unsafe_as(Proc(IXpsOMDictionary*, HRESULT)).call(dictionary)
+  end
+  def create_part_uri_collection(parturicollection : IXpsOMPartUriCollection*) : HRESULT
+    @lpVtbl.value.create_part_uri_collection.unsafe_as(Proc(IXpsOMPartUriCollection*, HRESULT)).call(parturicollection)
+  end
+  def create_package_writer_on_file(filename : LibC::LPWSTR, securityattributes : SECURITY_ATTRIBUTES*, flagsandattributes : UInt32, optimizemarkupsize : LibC::BOOL, interleaving : XPS_INTERLEAVING, documentsequencepartname : IOpcPartUri, coreproperties : IXpsOMCoreProperties, packagethumbnail : IXpsOMImageResource, documentsequenceprintticket : IXpsOMPrintTicketResource, discardcontrolpartname : IOpcPartUri, packagewriter : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.create_package_writer_on_file.unsafe_as(Proc(LibC::LPWSTR, SECURITY_ATTRIBUTES*, UInt32, LibC::BOOL, XPS_INTERLEAVING, IOpcPartUri, IXpsOMCoreProperties, IXpsOMImageResource, IXpsOMPrintTicketResource, IOpcPartUri, IXpsOMPackageWriter*, HRESULT)).call(filename, securityattributes, flagsandattributes, optimizemarkupsize, interleaving, documentsequencepartname, coreproperties, packagethumbnail, documentsequenceprintticket, discardcontrolpartname, packagewriter)
+  end
+  def create_package_writer_on_stream(outputstream : ISequentialStream, optimizemarkupsize : LibC::BOOL, interleaving : XPS_INTERLEAVING, documentsequencepartname : IOpcPartUri, coreproperties : IXpsOMCoreProperties, packagethumbnail : IXpsOMImageResource, documentsequenceprintticket : IXpsOMPrintTicketResource, discardcontrolpartname : IOpcPartUri, packagewriter : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.create_package_writer_on_stream.unsafe_as(Proc(ISequentialStream, LibC::BOOL, XPS_INTERLEAVING, IOpcPartUri, IXpsOMCoreProperties, IXpsOMImageResource, IXpsOMPrintTicketResource, IOpcPartUri, IXpsOMPackageWriter*, HRESULT)).call(outputstream, optimizemarkupsize, interleaving, documentsequencepartname, coreproperties, packagethumbnail, documentsequenceprintticket, discardcontrolpartname, packagewriter)
+  end
+  def create_part_uri(uri : LibC::LPWSTR, parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.create_part_uri.unsafe_as(Proc(LibC::LPWSTR, IOpcPartUri*, HRESULT)).call(uri, parturi)
+  end
+  def create_read_only_stream_on_file(filename : LibC::LPWSTR, stream : IStream*) : HRESULT
+    @lpVtbl.value.create_read_only_stream_on_file.unsafe_as(Proc(LibC::LPWSTR, IStream*, HRESULT)).call(filename, stream)
+  end
+  def get_document_type_from_file(filename : LibC::LPWSTR, documenttype : XPS_DOCUMENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_document_type_from_file.unsafe_as(Proc(LibC::LPWSTR, XPS_DOCUMENT_TYPE*, HRESULT)).call(filename, documenttype)
+  end
+  def get_document_type_from_stream(xpsdocumentstream : IStream, documenttype : XPS_DOCUMENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_document_type_from_stream.unsafe_as(Proc(IStream, XPS_DOCUMENT_TYPE*, HRESULT)).call(xpsdocumentstream, documenttype)
+  end
+  def convert_hd_photo_to_jpeg_xr(imageresource : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.convert_hd_photo_to_jpeg_xr.unsafe_as(Proc(IXpsOMImageResource, HRESULT)).call(imageresource)
+  end
+  def convert_jpeg_xr_to_hd_photo(imageresource : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.convert_jpeg_xr_to_hd_photo.unsafe_as(Proc(IXpsOMImageResource, HRESULT)).call(imageresource)
+  end
+  def create_package_writer_on_file1(filename : LibC::LPWSTR, securityattributes : SECURITY_ATTRIBUTES*, flagsandattributes : UInt32, optimizemarkupsize : LibC::BOOL, interleaving : XPS_INTERLEAVING, documentsequencepartname : IOpcPartUri, coreproperties : IXpsOMCoreProperties, packagethumbnail : IXpsOMImageResource, documentsequenceprintticket : IXpsOMPrintTicketResource, discardcontrolpartname : IOpcPartUri, documenttype : XPS_DOCUMENT_TYPE, packagewriter : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.create_package_writer_on_file1.unsafe_as(Proc(LibC::LPWSTR, SECURITY_ATTRIBUTES*, UInt32, LibC::BOOL, XPS_INTERLEAVING, IOpcPartUri, IXpsOMCoreProperties, IXpsOMImageResource, IXpsOMPrintTicketResource, IOpcPartUri, XPS_DOCUMENT_TYPE, IXpsOMPackageWriter*, HRESULT)).call(filename, securityattributes, flagsandattributes, optimizemarkupsize, interleaving, documentsequencepartname, coreproperties, packagethumbnail, documentsequenceprintticket, discardcontrolpartname, documenttype, packagewriter)
+  end
+  def create_package_writer_on_stream1(outputstream : ISequentialStream, optimizemarkupsize : LibC::BOOL, interleaving : XPS_INTERLEAVING, documentsequencepartname : IOpcPartUri, coreproperties : IXpsOMCoreProperties, packagethumbnail : IXpsOMImageResource, documentsequenceprintticket : IXpsOMPrintTicketResource, discardcontrolpartname : IOpcPartUri, documenttype : XPS_DOCUMENT_TYPE, packagewriter : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.create_package_writer_on_stream1.unsafe_as(Proc(ISequentialStream, LibC::BOOL, XPS_INTERLEAVING, IOpcPartUri, IXpsOMCoreProperties, IXpsOMImageResource, IXpsOMPrintTicketResource, IOpcPartUri, XPS_DOCUMENT_TYPE, IXpsOMPackageWriter*, HRESULT)).call(outputstream, optimizemarkupsize, interleaving, documentsequencepartname, coreproperties, packagethumbnail, documentsequenceprintticket, discardcontrolpartname, documenttype, packagewriter)
+  end
+  def create_package1(package : IXpsOMPackage1*) : HRESULT
+    @lpVtbl.value.create_package1.unsafe_as(Proc(IXpsOMPackage1*, HRESULT)).call(package)
+  end
+  def create_package_from_stream1(stream : IStream, reuseobjects : LibC::BOOL, package : IXpsOMPackage1*) : HRESULT
+    @lpVtbl.value.create_package_from_stream1.unsafe_as(Proc(IStream, LibC::BOOL, IXpsOMPackage1*, HRESULT)).call(stream, reuseobjects, package)
+  end
+  def create_package_from_file1(filename : LibC::LPWSTR, reuseobjects : LibC::BOOL, package : IXpsOMPackage1*) : HRESULT
+    @lpVtbl.value.create_package_from_file1.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, IXpsOMPackage1*, HRESULT)).call(filename, reuseobjects, package)
+  end
+  def create_page1(pagedimensions : XPS_SIZE*, language : LibC::LPWSTR, parturi : IOpcPartUri, page : IXpsOMPage1*) : HRESULT
+    @lpVtbl.value.create_page1.unsafe_as(Proc(XPS_SIZE*, LibC::LPWSTR, IOpcPartUri, IXpsOMPage1*, HRESULT)).call(pagedimensions, language, parturi, page)
+  end
+  def create_page_from_stream1(pagemarkupstream : IStream, parturi : IOpcPartUri, resources : IXpsOMPartResources, reuseobjects : LibC::BOOL, page : IXpsOMPage1*) : HRESULT
+    @lpVtbl.value.create_page_from_stream1.unsafe_as(Proc(IStream, IOpcPartUri, IXpsOMPartResources, LibC::BOOL, IXpsOMPage1*, HRESULT)).call(pagemarkupstream, parturi, resources, reuseobjects, page)
+  end
+  def create_remote_dictionary_resource_from_stream1(dictionarymarkupstream : IStream, parturi : IOpcPartUri, resources : IXpsOMPartResources, dictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.create_remote_dictionary_resource_from_stream1.unsafe_as(Proc(IStream, IOpcPartUri, IXpsOMPartResources, IXpsOMRemoteDictionaryResource*, HRESULT)).call(dictionarymarkupstream, parturi, resources, dictionaryresource)
+  end
+end
+struct LibWin32::IXpsOMPackage1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_document_sequence(documentsequence : IXpsOMDocumentSequence*) : HRESULT
+    @lpVtbl.value.get_document_sequence.unsafe_as(Proc(IXpsOMDocumentSequence*, HRESULT)).call(documentsequence)
+  end
+  def set_document_sequence(documentsequence : IXpsOMDocumentSequence) : HRESULT
+    @lpVtbl.value.set_document_sequence.unsafe_as(Proc(IXpsOMDocumentSequence, HRESULT)).call(documentsequence)
+  end
+  def get_core_properties(coreproperties : IXpsOMCoreProperties*) : HRESULT
+    @lpVtbl.value.get_core_properties.unsafe_as(Proc(IXpsOMCoreProperties*, HRESULT)).call(coreproperties)
+  end
+  def set_core_properties(coreproperties : IXpsOMCoreProperties) : HRESULT
+    @lpVtbl.value.set_core_properties.unsafe_as(Proc(IXpsOMCoreProperties, HRESULT)).call(coreproperties)
+  end
+  def get_discard_control_part_name(discardcontrolparturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_discard_control_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(discardcontrolparturi)
+  end
+  def set_discard_control_part_name(discardcontrolparturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_discard_control_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(discardcontrolparturi)
+  end
+  def get_thumbnail_resource(imageresource : IXpsOMImageResource*) : HRESULT
+    @lpVtbl.value.get_thumbnail_resource.unsafe_as(Proc(IXpsOMImageResource*, HRESULT)).call(imageresource)
+  end
+  def set_thumbnail_resource(imageresource : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.set_thumbnail_resource.unsafe_as(Proc(IXpsOMImageResource, HRESULT)).call(imageresource)
+  end
+  def write_to_file(filename : LibC::LPWSTR, securityattributes : SECURITY_ATTRIBUTES*, flagsandattributes : UInt32, optimizemarkupsize : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_to_file.unsafe_as(Proc(LibC::LPWSTR, SECURITY_ATTRIBUTES*, UInt32, LibC::BOOL, HRESULT)).call(filename, securityattributes, flagsandattributes, optimizemarkupsize)
+  end
+  def write_to_stream(stream : ISequentialStream, optimizemarkupsize : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_to_stream.unsafe_as(Proc(ISequentialStream, LibC::BOOL, HRESULT)).call(stream, optimizemarkupsize)
+  end
+  def get_document_type(documenttype : XPS_DOCUMENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_document_type.unsafe_as(Proc(XPS_DOCUMENT_TYPE*, HRESULT)).call(documenttype)
+  end
+  def write_to_file1(filename : LibC::LPWSTR, securityattributes : SECURITY_ATTRIBUTES*, flagsandattributes : UInt32, optimizemarkupsize : LibC::BOOL, documenttype : XPS_DOCUMENT_TYPE) : HRESULT
+    @lpVtbl.value.write_to_file1.unsafe_as(Proc(LibC::LPWSTR, SECURITY_ATTRIBUTES*, UInt32, LibC::BOOL, XPS_DOCUMENT_TYPE, HRESULT)).call(filename, securityattributes, flagsandattributes, optimizemarkupsize, documenttype)
+  end
+  def write_to_stream1(outputstream : ISequentialStream, optimizemarkupsize : LibC::BOOL, documenttype : XPS_DOCUMENT_TYPE) : HRESULT
+    @lpVtbl.value.write_to_stream1.unsafe_as(Proc(ISequentialStream, LibC::BOOL, XPS_DOCUMENT_TYPE, HRESULT)).call(outputstream, optimizemarkupsize, documenttype)
+  end
+end
+struct LibWin32::IXpsOMPage1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_part_name(parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(parturi)
+  end
+  def set_part_name(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+  def get_owner(pagereference : IXpsOMPageReference*) : HRESULT
+    @lpVtbl.value.get_owner.unsafe_as(Proc(IXpsOMPageReference*, HRESULT)).call(pagereference)
+  end
+  def get_visuals(visuals : IXpsOMVisualCollection*) : HRESULT
+    @lpVtbl.value.get_visuals.unsafe_as(Proc(IXpsOMVisualCollection*, HRESULT)).call(visuals)
+  end
+  def get_page_dimensions(pagedimensions : XPS_SIZE*) : HRESULT
+    @lpVtbl.value.get_page_dimensions.unsafe_as(Proc(XPS_SIZE*, HRESULT)).call(pagedimensions)
+  end
+  def set_page_dimensions(pagedimensions : XPS_SIZE*) : HRESULT
+    @lpVtbl.value.set_page_dimensions.unsafe_as(Proc(XPS_SIZE*, HRESULT)).call(pagedimensions)
+  end
+  def get_content_box(contentbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_content_box.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(contentbox)
+  end
+  def set_content_box(contentbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_content_box.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(contentbox)
+  end
+  def get_bleed_box(bleedbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.get_bleed_box.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(bleedbox)
+  end
+  def set_bleed_box(bleedbox : XPS_RECT*) : HRESULT
+    @lpVtbl.value.set_bleed_box.unsafe_as(Proc(XPS_RECT*, HRESULT)).call(bleedbox)
+  end
+  def get_language(language : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_language.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(language)
+  end
+  def set_language(language : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_language.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(language)
+  end
+  def get_name(name : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(name)
+  end
+  def set_name(name : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(name)
+  end
+  def get_is_hyperlink_target(ishyperlinktarget : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_hyperlink_target.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(ishyperlinktarget)
+  end
+  def set_is_hyperlink_target(ishyperlinktarget : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_is_hyperlink_target.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(ishyperlinktarget)
+  end
+  def get_dictionary(resourcedictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.get_dictionary.unsafe_as(Proc(IXpsOMDictionary*, HRESULT)).call(resourcedictionary)
+  end
+  def get_dictionary_local(resourcedictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.get_dictionary_local.unsafe_as(Proc(IXpsOMDictionary*, HRESULT)).call(resourcedictionary)
+  end
+  def set_dictionary_local(resourcedictionary : IXpsOMDictionary) : HRESULT
+    @lpVtbl.value.set_dictionary_local.unsafe_as(Proc(IXpsOMDictionary, HRESULT)).call(resourcedictionary)
+  end
+  def get_dictionary_resource(remotedictionaryresource : IXpsOMRemoteDictionaryResource*) : HRESULT
+    @lpVtbl.value.get_dictionary_resource.unsafe_as(Proc(IXpsOMRemoteDictionaryResource*, HRESULT)).call(remotedictionaryresource)
+  end
+  def set_dictionary_resource(remotedictionaryresource : IXpsOMRemoteDictionaryResource) : HRESULT
+    @lpVtbl.value.set_dictionary_resource.unsafe_as(Proc(IXpsOMRemoteDictionaryResource, HRESULT)).call(remotedictionaryresource)
+  end
+  def write(stream : ISequentialStream, optimizemarkupsize : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write.unsafe_as(Proc(ISequentialStream, LibC::BOOL, HRESULT)).call(stream, optimizemarkupsize)
+  end
+  def generate_unused_lookup_key(type : XPS_OBJECT_TYPE, key : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.generate_unused_lookup_key.unsafe_as(Proc(XPS_OBJECT_TYPE, LibC::LPWSTR*, HRESULT)).call(type, key)
+  end
+  def clone(page : IXpsOMPage*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IXpsOMPage*, HRESULT)).call(page)
+  end
+  def get_document_type(documenttype : XPS_DOCUMENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_document_type.unsafe_as(Proc(XPS_DOCUMENT_TYPE*, HRESULT)).call(documenttype)
+  end
+  def write1(stream : ISequentialStream, optimizemarkupsize : LibC::BOOL, documenttype : XPS_DOCUMENT_TYPE) : HRESULT
+    @lpVtbl.value.write1.unsafe_as(Proc(ISequentialStream, LibC::BOOL, XPS_DOCUMENT_TYPE, HRESULT)).call(stream, optimizemarkupsize, documenttype)
+  end
+end
+struct LibWin32::IXpsDocumentPackageTarget
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_xps_om_package_writer(documentsequencepartname : IOpcPartUri, discardcontrolpartname : IOpcPartUri, packagewriter : IXpsOMPackageWriter*) : HRESULT
+    @lpVtbl.value.get_xps_om_package_writer.unsafe_as(Proc(IOpcPartUri, IOpcPartUri, IXpsOMPackageWriter*, HRESULT)).call(documentsequencepartname, discardcontrolpartname, packagewriter)
+  end
+  def get_xps_om_factory(xpsfactory : IXpsOMObjectFactory*) : HRESULT
+    @lpVtbl.value.get_xps_om_factory.unsafe_as(Proc(IXpsOMObjectFactory*, HRESULT)).call(xpsfactory)
+  end
+  def get_xps_type(documenttype : XPS_DOCUMENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_xps_type.unsafe_as(Proc(XPS_DOCUMENT_TYPE*, HRESULT)).call(documenttype)
+  end
+end
+struct LibWin32::IXpsOMRemoteDictionaryResource1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_part_name(parturi : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(parturi)
+  end
+  def set_part_name(parturi : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(parturi)
+  end
+  def get_dictionary(dictionary : IXpsOMDictionary*) : HRESULT
+    @lpVtbl.value.get_dictionary.unsafe_as(Proc(IXpsOMDictionary*, HRESULT)).call(dictionary)
+  end
+  def set_dictionary(dictionary : IXpsOMDictionary) : HRESULT
+    @lpVtbl.value.set_dictionary.unsafe_as(Proc(IXpsOMDictionary, HRESULT)).call(dictionary)
+  end
+  def get_document_type(documenttype : XPS_DOCUMENT_TYPE*) : HRESULT
+    @lpVtbl.value.get_document_type.unsafe_as(Proc(XPS_DOCUMENT_TYPE*, HRESULT)).call(documenttype)
+  end
+  def write1(stream : ISequentialStream, documenttype : XPS_DOCUMENT_TYPE) : HRESULT
+    @lpVtbl.value.write1.unsafe_as(Proc(ISequentialStream, XPS_DOCUMENT_TYPE, HRESULT)).call(stream, documenttype)
+  end
+end
+struct LibWin32::IXpsOMPackageWriter3D
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def start_new_document(documentpartname : IOpcPartUri, documentprintticket : IXpsOMPrintTicketResource, documentstructure : IXpsOMDocumentStructureResource, signatureblockresources : IXpsOMSignatureBlockResourceCollection, restrictedfonts : IXpsOMPartUriCollection) : HRESULT
+    @lpVtbl.value.start_new_document.unsafe_as(Proc(IOpcPartUri, IXpsOMPrintTicketResource, IXpsOMDocumentStructureResource, IXpsOMSignatureBlockResourceCollection, IXpsOMPartUriCollection, HRESULT)).call(documentpartname, documentprintticket, documentstructure, signatureblockresources, restrictedfonts)
+  end
+  def add_page(page : IXpsOMPage, advisorypagedimensions : XPS_SIZE*, discardableresourceparts : IXpsOMPartUriCollection, storyfragments : IXpsOMStoryFragmentsResource, pageprintticket : IXpsOMPrintTicketResource, pagethumbnail : IXpsOMImageResource) : HRESULT
+    @lpVtbl.value.add_page.unsafe_as(Proc(IXpsOMPage, XPS_SIZE*, IXpsOMPartUriCollection, IXpsOMStoryFragmentsResource, IXpsOMPrintTicketResource, IXpsOMImageResource, HRESULT)).call(page, advisorypagedimensions, discardableresourceparts, storyfragments, pageprintticket, pagethumbnail)
+  end
+  def add_resource(resource : IXpsOMResource) : HRESULT
+    @lpVtbl.value.add_resource.unsafe_as(Proc(IXpsOMResource, HRESULT)).call(resource)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def is_closed(isclosed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_closed.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(isclosed)
+  end
+  def add_model_texture(texturepartname : IOpcPartUri, texturedata : IStream) : HRESULT
+    @lpVtbl.value.add_model_texture.unsafe_as(Proc(IOpcPartUri, IStream, HRESULT)).call(texturepartname, texturedata)
+  end
+  def set_model_print_ticket(printticketpartname : IOpcPartUri, printticketdata : IStream) : HRESULT
+    @lpVtbl.value.set_model_print_ticket.unsafe_as(Proc(IOpcPartUri, IStream, HRESULT)).call(printticketpartname, printticketdata)
+  end
+end
+struct LibWin32::IXpsDocumentPackageTarget3D
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_xps_om_package_writer3_d(documentsequencepartname : IOpcPartUri, discardcontrolpartname : IOpcPartUri, modelpartname : IOpcPartUri, modeldata : IStream, packagewriter : IXpsOMPackageWriter3D*) : HRESULT
+    @lpVtbl.value.get_xps_om_package_writer3_d.unsafe_as(Proc(IOpcPartUri, IOpcPartUri, IOpcPartUri, IStream, IXpsOMPackageWriter3D*, HRESULT)).call(documentsequencepartname, discardcontrolpartname, modelpartname, modeldata, packagewriter)
+  end
+  def get_xps_om_factory(xpsfactory : IXpsOMObjectFactory*) : HRESULT
+    @lpVtbl.value.get_xps_om_factory.unsafe_as(Proc(IXpsOMObjectFactory*, HRESULT)).call(xpsfactory)
+  end
+end
+struct LibWin32::IXpsSigningOptions
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_signature_id(signatureid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signature_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(signatureid)
+  end
+  def set_signature_id(signatureid : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_signature_id.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(signatureid)
+  end
+  def get_signature_method(signaturemethod : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signature_method.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(signaturemethod)
+  end
+  def set_signature_method(signaturemethod : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_signature_method.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(signaturemethod)
+  end
+  def get_digest_method(digestmethod : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_digest_method.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(digestmethod)
+  end
+  def set_digest_method(digestmethod : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_digest_method.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(digestmethod)
+  end
+  def get_signature_part_name(signaturepartname : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_signature_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(signaturepartname)
+  end
+  def set_signature_part_name(signaturepartname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_signature_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(signaturepartname)
+  end
+  def get_policy(policy : XPS_SIGN_POLICY*) : HRESULT
+    @lpVtbl.value.get_policy.unsafe_as(Proc(XPS_SIGN_POLICY*, HRESULT)).call(policy)
+  end
+  def set_policy(policy : XPS_SIGN_POLICY) : HRESULT
+    @lpVtbl.value.set_policy.unsafe_as(Proc(XPS_SIGN_POLICY, HRESULT)).call(policy)
+  end
+  def get_signing_time_format(timeformat : OPC_SIGNATURE_TIME_FORMAT*) : HRESULT
+    @lpVtbl.value.get_signing_time_format.unsafe_as(Proc(OPC_SIGNATURE_TIME_FORMAT*, HRESULT)).call(timeformat)
+  end
+  def set_signing_time_format(timeformat : OPC_SIGNATURE_TIME_FORMAT) : HRESULT
+    @lpVtbl.value.set_signing_time_format.unsafe_as(Proc(OPC_SIGNATURE_TIME_FORMAT, HRESULT)).call(timeformat)
+  end
+  def get_custom_objects(customobjectset : IOpcSignatureCustomObjectSet*) : HRESULT
+    @lpVtbl.value.get_custom_objects.unsafe_as(Proc(IOpcSignatureCustomObjectSet*, HRESULT)).call(customobjectset)
+  end
+  def get_custom_references(customreferenceset : IOpcSignatureReferenceSet*) : HRESULT
+    @lpVtbl.value.get_custom_references.unsafe_as(Proc(IOpcSignatureReferenceSet*, HRESULT)).call(customreferenceset)
+  end
+  def get_certificate_set(certificateset : IOpcCertificateSet*) : HRESULT
+    @lpVtbl.value.get_certificate_set.unsafe_as(Proc(IOpcCertificateSet*, HRESULT)).call(certificateset)
+  end
+  def get_flags(flags : XPS_SIGN_FLAGS*) : HRESULT
+    @lpVtbl.value.get_flags.unsafe_as(Proc(XPS_SIGN_FLAGS*, HRESULT)).call(flags)
+  end
+  def set_flags(flags : XPS_SIGN_FLAGS) : HRESULT
+    @lpVtbl.value.set_flags.unsafe_as(Proc(XPS_SIGN_FLAGS, HRESULT)).call(flags)
+  end
+end
+struct LibWin32::IXpsSignatureCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, signature : IXpsSignature*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IXpsSignature*, HRESULT)).call(index, signature)
+  end
+  def remove_at(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+end
+struct LibWin32::IXpsSignature
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_signature_id(sigid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signature_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(sigid)
+  end
+  def get_signature_value(signaturehashvalue : UInt8**, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_signature_value.unsafe_as(Proc(UInt8**, UInt32*, HRESULT)).call(signaturehashvalue, count)
+  end
+  def get_certificate_enumerator(certificateenumerator : IOpcCertificateEnumerator*) : HRESULT
+    @lpVtbl.value.get_certificate_enumerator.unsafe_as(Proc(IOpcCertificateEnumerator*, HRESULT)).call(certificateenumerator)
+  end
+  def get_signing_time(sigdatetimestring : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signing_time.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(sigdatetimestring)
+  end
+  def get_signing_time_format(timeformat : OPC_SIGNATURE_TIME_FORMAT*) : HRESULT
+    @lpVtbl.value.get_signing_time_format.unsafe_as(Proc(OPC_SIGNATURE_TIME_FORMAT*, HRESULT)).call(timeformat)
+  end
+  def get_signature_part_name(signaturepartname : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_signature_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(signaturepartname)
+  end
+  def verify(x509certificate : CERT_CONTEXT*, sigstatus : XPS_SIGNATURE_STATUS*) : HRESULT
+    @lpVtbl.value.verify.unsafe_as(Proc(CERT_CONTEXT*, XPS_SIGNATURE_STATUS*, HRESULT)).call(x509certificate, sigstatus)
+  end
+  def get_policy(policy : XPS_SIGN_POLICY*) : HRESULT
+    @lpVtbl.value.get_policy.unsafe_as(Proc(XPS_SIGN_POLICY*, HRESULT)).call(policy)
+  end
+  def get_custom_object_enumerator(customobjectenumerator : IOpcSignatureCustomObjectEnumerator*) : HRESULT
+    @lpVtbl.value.get_custom_object_enumerator.unsafe_as(Proc(IOpcSignatureCustomObjectEnumerator*, HRESULT)).call(customobjectenumerator)
+  end
+  def get_custom_reference_enumerator(customreferenceenumerator : IOpcSignatureReferenceEnumerator*) : HRESULT
+    @lpVtbl.value.get_custom_reference_enumerator.unsafe_as(Proc(IOpcSignatureReferenceEnumerator*, HRESULT)).call(customreferenceenumerator)
+  end
+  def get_signature_xml(signaturexml : UInt8**, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_signature_xml.unsafe_as(Proc(UInt8**, UInt32*, HRESULT)).call(signaturexml, count)
+  end
+  def set_signature_xml(signaturexml : UInt8*, count : UInt32) : HRESULT
+    @lpVtbl.value.set_signature_xml.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(signaturexml, count)
+  end
+end
+struct LibWin32::IXpsSignatureBlockCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, signatureblock : IXpsSignatureBlock*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IXpsSignatureBlock*, HRESULT)).call(index, signatureblock)
+  end
+  def remove_at(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+end
+struct LibWin32::IXpsSignatureBlock
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_requests(requests : IXpsSignatureRequestCollection*) : HRESULT
+    @lpVtbl.value.get_requests.unsafe_as(Proc(IXpsSignatureRequestCollection*, HRESULT)).call(requests)
+  end
+  def get_part_name(partname : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(partname)
+  end
+  def get_document_index(fixeddocumentindex : UInt32*) : HRESULT
+    @lpVtbl.value.get_document_index.unsafe_as(Proc(UInt32*, HRESULT)).call(fixeddocumentindex)
+  end
+  def get_document_name(fixeddocumentname : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_document_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(fixeddocumentname)
+  end
+  def create_request(requestid : LibC::LPWSTR, signaturerequest : IXpsSignatureRequest*) : HRESULT
+    @lpVtbl.value.create_request.unsafe_as(Proc(LibC::LPWSTR, IXpsSignatureRequest*, HRESULT)).call(requestid, signaturerequest)
+  end
+end
+struct LibWin32::IXpsSignatureRequestCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(count : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(count)
+  end
+  def get_at(index : UInt32, signaturerequest : IXpsSignatureRequest*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, IXpsSignatureRequest*, HRESULT)).call(index, signaturerequest)
+  end
+  def remove_at(index : UInt32) : HRESULT
+    @lpVtbl.value.remove_at.unsafe_as(Proc(UInt32, HRESULT)).call(index)
+  end
+end
+struct LibWin32::IXpsSignatureRequest
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_intent(intent : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_intent.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(intent)
+  end
+  def set_intent(intent : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_intent.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(intent)
+  end
+  def get_requested_signer(signername : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_requested_signer.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(signername)
+  end
+  def set_requested_signer(signername : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_requested_signer.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(signername)
+  end
+  def get_request_sign_by_date(datestring : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_request_sign_by_date.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(datestring)
+  end
+  def set_request_sign_by_date(datestring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_request_sign_by_date.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(datestring)
+  end
+  def get_signing_locale(place : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_signing_locale.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(place)
+  end
+  def set_signing_locale(place : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_signing_locale.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(place)
+  end
+  def get_spot_location(pageindex : Int32*, pagepartname : IOpcPartUri*, x : Float32*, y : Float32*) : HRESULT
+    @lpVtbl.value.get_spot_location.unsafe_as(Proc(Int32*, IOpcPartUri*, Float32*, Float32*, HRESULT)).call(pageindex, pagepartname, x, y)
+  end
+  def set_spot_location(pageindex : Int32, x : Float32, y : Float32) : HRESULT
+    @lpVtbl.value.set_spot_location.unsafe_as(Proc(Int32, Float32, Float32, HRESULT)).call(pageindex, x, y)
+  end
+  def get_request_id(requestid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_request_id.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(requestid)
+  end
+  def get_signature(signature : IXpsSignature*) : HRESULT
+    @lpVtbl.value.get_signature.unsafe_as(Proc(IXpsSignature*, HRESULT)).call(signature)
+  end
+end
+struct LibWin32::IXpsSignatureManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def load_package_file(filename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.load_package_file.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(filename)
+  end
+  def load_package_stream(stream : IStream) : HRESULT
+    @lpVtbl.value.load_package_stream.unsafe_as(Proc(IStream, HRESULT)).call(stream)
+  end
+  def sign(signoptions : IXpsSigningOptions, x509certificate : CERT_CONTEXT*, signature : IXpsSignature*) : HRESULT
+    @lpVtbl.value.sign.unsafe_as(Proc(IXpsSigningOptions, CERT_CONTEXT*, IXpsSignature*, HRESULT)).call(signoptions, x509certificate, signature)
+  end
+  def get_signature_origin_part_name(signatureoriginpartname : IOpcPartUri*) : HRESULT
+    @lpVtbl.value.get_signature_origin_part_name.unsafe_as(Proc(IOpcPartUri*, HRESULT)).call(signatureoriginpartname)
+  end
+  def set_signature_origin_part_name(signatureoriginpartname : IOpcPartUri) : HRESULT
+    @lpVtbl.value.set_signature_origin_part_name.unsafe_as(Proc(IOpcPartUri, HRESULT)).call(signatureoriginpartname)
+  end
+  def get_signatures(signatures : IXpsSignatureCollection*) : HRESULT
+    @lpVtbl.value.get_signatures.unsafe_as(Proc(IXpsSignatureCollection*, HRESULT)).call(signatures)
+  end
+  def add_signature_block(partname : IOpcPartUri, fixeddocumentindex : UInt32, signatureblock : IXpsSignatureBlock*) : HRESULT
+    @lpVtbl.value.add_signature_block.unsafe_as(Proc(IOpcPartUri, UInt32, IXpsSignatureBlock*, HRESULT)).call(partname, fixeddocumentindex, signatureblock)
+  end
+  def get_signature_blocks(signatureblocks : IXpsSignatureBlockCollection*) : HRESULT
+    @lpVtbl.value.get_signature_blocks.unsafe_as(Proc(IXpsSignatureBlockCollection*, HRESULT)).call(signatureblocks)
+  end
+  def create_signing_options(signingoptions : IXpsSigningOptions*) : HRESULT
+    @lpVtbl.value.create_signing_options.unsafe_as(Proc(IXpsSigningOptions*, HRESULT)).call(signingoptions)
+  end
+  def save_package_to_file(filename : LibC::LPWSTR, securityattributes : SECURITY_ATTRIBUTES*, flagsandattributes : UInt32) : HRESULT
+    @lpVtbl.value.save_package_to_file.unsafe_as(Proc(LibC::LPWSTR, SECURITY_ATTRIBUTES*, UInt32, HRESULT)).call(filename, securityattributes, flagsandattributes)
+  end
+  def save_package_to_stream(stream : IStream) : HRESULT
+    @lpVtbl.value.save_package_to_stream.unsafe_as(Proc(IStream, HRESULT)).call(stream)
+  end
 end

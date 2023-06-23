@@ -148,7 +148,7 @@ lib LibWin32
   fun XInputGetCapabilities(dwuserindex : UInt32, dwflags : UInt32, pcapabilities : XINPUT_CAPABILITIES*) : UInt32
 
   # Params # enable : LibC::BOOL [In]
-  fun XInputEnable(enable : LibC::BOOL)
+  fun XInputEnable(enable : LibC::BOOL) : Void
 
   # Params # dwuserindex : UInt32 [In],prenderdeviceid : Char* [In],prendercount : UInt32* [In],pcapturedeviceid : Char* [In],pcapturecount : UInt32* [In]
   fun XInputGetAudioDeviceIds(dwuserindex : UInt32, prenderdeviceid : Char*, prendercount : UInt32*, pcapturedeviceid : Char*, pcapturecount : UInt32*) : UInt32

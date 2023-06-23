@@ -871,11 +871,11 @@ lib LibWin32
 
 
   struct IRouterProtocolConfigVTbl
-    query_interface : Proc(IRouterProtocolConfig*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRouterProtocolConfig*, UInt32)
-    release : Proc(IRouterProtocolConfig*, UInt32)
-    add_protocol : Proc(IRouterProtocolConfig*, LibC::LPWSTR, UInt32, UInt32, LibC::HANDLE, UInt32, IUnknown, LibC::UINT_PTR, HRESULT)
-    remove_protocol : Proc(IRouterProtocolConfig*, LibC::LPWSTR, UInt32, UInt32, LibC::HANDLE, UInt32, IUnknown, LibC::UINT_PTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_protocol : UInt64
+    remove_protocol : UInt64
   end
 
   IRouterProtocolConfig_GUID = "66a2db16-d706-11d0-a37b-00c04fc9da04"
@@ -885,14 +885,14 @@ lib LibWin32
   end
 
   struct IAuthenticationProviderConfigVTbl
-    query_interface : Proc(IAuthenticationProviderConfig*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAuthenticationProviderConfig*, UInt32)
-    release : Proc(IAuthenticationProviderConfig*, UInt32)
-    initialize : Proc(IAuthenticationProviderConfig*, LibC::LPWSTR, LibC::UINT_PTR*, HRESULT)
-    uninitialize : Proc(IAuthenticationProviderConfig*, LibC::UINT_PTR, HRESULT)
-    configure : Proc(IAuthenticationProviderConfig*, LibC::UINT_PTR, LibC::HANDLE, UInt32, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
-    activate : Proc(IAuthenticationProviderConfig*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
-    deactivate : Proc(IAuthenticationProviderConfig*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    uninitialize : UInt64
+    configure : UInt64
+    activate : UInt64
+    deactivate : UInt64
   end
 
   IAuthenticationProviderConfig_GUID = "66a2db17-d706-11d0-a37b-00c04fc9da04"
@@ -902,14 +902,14 @@ lib LibWin32
   end
 
   struct IAccountingProviderConfigVTbl
-    query_interface : Proc(IAccountingProviderConfig*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAccountingProviderConfig*, UInt32)
-    release : Proc(IAccountingProviderConfig*, UInt32)
-    initialize : Proc(IAccountingProviderConfig*, LibC::LPWSTR, LibC::UINT_PTR*, HRESULT)
-    uninitialize : Proc(IAccountingProviderConfig*, LibC::UINT_PTR, HRESULT)
-    configure : Proc(IAccountingProviderConfig*, LibC::UINT_PTR, LibC::HANDLE, UInt32, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
-    activate : Proc(IAccountingProviderConfig*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
-    deactivate : Proc(IAccountingProviderConfig*, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    uninitialize : UInt64
+    configure : UInt64
+    activate : UInt64
+    deactivate : UInt64
   end
 
   IAccountingProviderConfig_GUID = "66a2db18-d706-11d0-a37b-00c04fc9da04"
@@ -919,14 +919,14 @@ lib LibWin32
   end
 
   struct IEAPProviderConfigVTbl
-    query_interface : Proc(IEAPProviderConfig*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEAPProviderConfig*, UInt32)
-    release : Proc(IEAPProviderConfig*, UInt32)
-    initialize : Proc(IEAPProviderConfig*, LibC::LPWSTR, UInt32, LibC::UINT_PTR*, HRESULT)
-    uninitialize : Proc(IEAPProviderConfig*, UInt32, LibC::UINT_PTR, HRESULT)
-    server_invoke_config_ui : Proc(IEAPProviderConfig*, UInt32, LibC::UINT_PTR, LibC::HANDLE, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
-    router_invoke_config_ui : Proc(IEAPProviderConfig*, UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)
-    router_invoke_credentials_ui : Proc(IEAPProviderConfig*, UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    uninitialize : UInt64
+    server_invoke_config_ui : UInt64
+    router_invoke_config_ui : UInt64
+    router_invoke_credentials_ui : UInt64
   end
 
   IEAPProviderConfig_GUID = "66a2db19-d706-11d0-a37b-00c04fc9da04"
@@ -936,16 +936,16 @@ lib LibWin32
   end
 
   struct IEAPProviderConfig2VTbl
-    query_interface : Proc(IEAPProviderConfig2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEAPProviderConfig2*, UInt32)
-    release : Proc(IEAPProviderConfig2*, UInt32)
-    initialize : Proc(IEAPProviderConfig2*, LibC::LPWSTR, UInt32, LibC::UINT_PTR*, HRESULT)
-    uninitialize : Proc(IEAPProviderConfig2*, UInt32, LibC::UINT_PTR, HRESULT)
-    server_invoke_config_ui : Proc(IEAPProviderConfig2*, UInt32, LibC::UINT_PTR, LibC::HANDLE, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
-    router_invoke_config_ui : Proc(IEAPProviderConfig2*, UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)
-    router_invoke_credentials_ui : Proc(IEAPProviderConfig2*, UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)
-    server_invoke_config_ui2 : Proc(IEAPProviderConfig2*, UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)
-    get_global_config : Proc(IEAPProviderConfig2*, UInt32, UInt8**, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    uninitialize : UInt64
+    server_invoke_config_ui : UInt64
+    router_invoke_config_ui : UInt64
+    router_invoke_credentials_ui : UInt64
+    server_invoke_config_ui2 : UInt64
+    get_global_config : UInt64
   end
 
   IEAPProviderConfig2_GUID = "d565917a-85c4-4466-856e-671c3742ea9a"
@@ -955,17 +955,17 @@ lib LibWin32
   end
 
   struct IEAPProviderConfig3VTbl
-    query_interface : Proc(IEAPProviderConfig3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEAPProviderConfig3*, UInt32)
-    release : Proc(IEAPProviderConfig3*, UInt32)
-    initialize : Proc(IEAPProviderConfig3*, LibC::LPWSTR, UInt32, LibC::UINT_PTR*, HRESULT)
-    uninitialize : Proc(IEAPProviderConfig3*, UInt32, LibC::UINT_PTR, HRESULT)
-    server_invoke_config_ui : Proc(IEAPProviderConfig3*, UInt32, LibC::UINT_PTR, LibC::HANDLE, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)
-    router_invoke_config_ui : Proc(IEAPProviderConfig3*, UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)
-    router_invoke_credentials_ui : Proc(IEAPProviderConfig3*, UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)
-    server_invoke_config_ui2 : Proc(IEAPProviderConfig3*, UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)
-    get_global_config : Proc(IEAPProviderConfig3*, UInt32, UInt8**, UInt32*, HRESULT)
-    server_invoke_certificate_config_ui : Proc(IEAPProviderConfig3*, UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt8*, UInt32, UInt8**, UInt32*, LibC::UINT_PTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    uninitialize : UInt64
+    server_invoke_config_ui : UInt64
+    router_invoke_config_ui : UInt64
+    router_invoke_credentials_ui : UInt64
+    server_invoke_config_ui2 : UInt64
+    get_global_config : UInt64
+    server_invoke_certificate_config_ui : UInt64
   end
 
   IEAPProviderConfig3_GUID = "b78ecd12-68bb-4f86-9bf0-8438dd3be982"
@@ -1012,16 +1012,16 @@ lib LibWin32
   fun EapHostPeerConfigBlob2Xml(dwflags : UInt32, eapmethodtype : EAP_METHOD_TYPE, dwsizeofconfigin : UInt32, pconfigin : UInt8*, ppconfigdoc : IXMLDOMDocument2*, ppeaperror : EAP_ERROR**) : UInt32
 
   # Params # pdata : UInt8* [In]
-  fun EapHostPeerFreeMemory(pdata : UInt8*)
+  fun EapHostPeerFreeMemory(pdata : UInt8*) : Void
 
   # Params # peaperror : EAP_ERROR* [In]
-  fun EapHostPeerFreeErrorMemory(peaperror : EAP_ERROR*)
+  fun EapHostPeerFreeErrorMemory(peaperror : EAP_ERROR*) : Void
 
   # Params # 
   fun EapHostPeerInitialize : UInt32
 
   # Params # 
-  fun EapHostPeerUninitialize
+  fun EapHostPeerUninitialize : Void
 
   # Params # dwflags : UInt32 [In],eaptype : EAP_METHOD_TYPE [In],pattributearray : EAP_ATTRIBUTES* [In],htokenimpersonateuser : LibC::HANDLE [In],dwsizeofconnectiondata : UInt32 [In],pconnectiondata : UInt8* [In],dwsizeofuserdata : UInt32 [In],puserdata : UInt8* [In],dwmaxsendpacketsize : UInt32 [In],pconnectionid : Guid* [In],func : NotificationHandler [In],pcontextdata : Void* [In],psessionid : UInt32* [In],ppeaperror : EAP_ERROR** [In]
   fun EapHostPeerBeginSession(dwflags : UInt32, eaptype : EAP_METHOD_TYPE, pattributearray : EAP_ATTRIBUTES*, htokenimpersonateuser : LibC::HANDLE, dwsizeofconnectiondata : UInt32, pconnectiondata : UInt8*, dwsizeofuserdata : UInt32, puserdata : UInt8*, dwmaxsendpacketsize : UInt32, pconnectionid : Guid*, func : NotificationHandler, pcontextdata : Void*, psessionid : UInt32*, ppeaperror : EAP_ERROR**) : UInt32
@@ -1060,7 +1060,7 @@ lib LibWin32
   fun EapHostPeerClearConnection(pconnectionid : Guid*, ppeaperror : EAP_ERROR**) : UInt32
 
   # Params # peaperror : EAP_ERROR* [In]
-  fun EapHostPeerFreeEapError(peaperror : EAP_ERROR*)
+  fun EapHostPeerFreeEapError(peaperror : EAP_ERROR*) : Void
 
   # Params # dwversion : UInt32 [In],dwflags : UInt32 [In],eapmethodtype : EAP_METHOD_TYPE [In],dwsizeofconnectiondata : UInt32 [In],pconnectiondata : UInt8* [In],dwsizeofuserdata : UInt32 [In],puserdata : UInt8* [In],htokenimpersonateuser : LibC::HANDLE [In],pfinvokeui : LibC::BOOL* [In],pdwsizeofuserdataout : UInt32* [In],ppuserdataout : UInt8** [In],ppwszidentity : LibC::LPWSTR* [In],ppeaperror : EAP_ERROR** [In],ppvreserved : UInt8** [In]
   fun EapHostPeerGetIdentity(dwversion : UInt32, dwflags : UInt32, eapmethodtype : EAP_METHOD_TYPE, dwsizeofconnectiondata : UInt32, pconnectiondata : UInt8*, dwsizeofuserdata : UInt32, puserdata : UInt8*, htokenimpersonateuser : LibC::HANDLE, pfinvokeui : LibC::BOOL*, pdwsizeofuserdataout : UInt32*, ppuserdataout : UInt8**, ppwszidentity : LibC::LPWSTR*, ppeaperror : EAP_ERROR**, ppvreserved : UInt8**) : UInt32
@@ -1069,5 +1069,167 @@ lib LibWin32
   fun EapHostPeerGetEncryptedPassword(dwsizeofpassword : UInt32, szpassword : LibC::LPWSTR, ppszencpassword : LibC::LPWSTR*) : UInt32
 
   # Params # pdata : UInt8* [In]
-  fun EapHostPeerFreeRuntimeMemory(pdata : UInt8*)
+  fun EapHostPeerFreeRuntimeMemory(pdata : UInt8*) : Void
+end
+struct LibWin32::IRouterProtocolConfig
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_protocol(pszmachinename : LibC::LPWSTR, dwtransportid : UInt32, dwprotocolid : UInt32, hwnd : LibC::HANDLE, dwflags : UInt32, prouter : IUnknown, ureserved1 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.add_protocol.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, LibC::HANDLE, UInt32, IUnknown, LibC::UINT_PTR, HRESULT)).call(pszmachinename, dwtransportid, dwprotocolid, hwnd, dwflags, prouter, ureserved1)
+  end
+  def remove_protocol(pszmachinename : LibC::LPWSTR, dwtransportid : UInt32, dwprotocolid : UInt32, hwnd : LibC::HANDLE, dwflags : UInt32, prouter : IUnknown, ureserved1 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.remove_protocol.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, LibC::HANDLE, UInt32, IUnknown, LibC::UINT_PTR, HRESULT)).call(pszmachinename, dwtransportid, dwprotocolid, hwnd, dwflags, prouter, ureserved1)
+  end
+end
+struct LibWin32::IAuthenticationProviderConfig
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pszmachinename : LibC::LPWSTR, puconnectionparam : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(LibC::LPWSTR, LibC::UINT_PTR*, HRESULT)).call(pszmachinename, puconnectionparam)
+  end
+  def uninitialize(uconnectionparam : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.uninitialize.unsafe_as(Proc(LibC::UINT_PTR, HRESULT)).call(uconnectionparam)
+  end
+  def configure(uconnectionparam : LibC::UINT_PTR, hwnd : LibC::HANDLE, dwflags : UInt32, ureserved1 : LibC::UINT_PTR, ureserved2 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.configure.unsafe_as(Proc(LibC::UINT_PTR, LibC::HANDLE, UInt32, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)).call(uconnectionparam, hwnd, dwflags, ureserved1, ureserved2)
+  end
+  def activate(uconnectionparam : LibC::UINT_PTR, ureserved1 : LibC::UINT_PTR, ureserved2 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.activate.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)).call(uconnectionparam, ureserved1, ureserved2)
+  end
+  def deactivate(uconnectionparam : LibC::UINT_PTR, ureserved1 : LibC::UINT_PTR, ureserved2 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.deactivate.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)).call(uconnectionparam, ureserved1, ureserved2)
+  end
+end
+struct LibWin32::IAccountingProviderConfig
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pszmachinename : LibC::LPWSTR, puconnectionparam : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(LibC::LPWSTR, LibC::UINT_PTR*, HRESULT)).call(pszmachinename, puconnectionparam)
+  end
+  def uninitialize(uconnectionparam : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.uninitialize.unsafe_as(Proc(LibC::UINT_PTR, HRESULT)).call(uconnectionparam)
+  end
+  def configure(uconnectionparam : LibC::UINT_PTR, hwnd : LibC::HANDLE, dwflags : UInt32, ureserved1 : LibC::UINT_PTR, ureserved2 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.configure.unsafe_as(Proc(LibC::UINT_PTR, LibC::HANDLE, UInt32, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)).call(uconnectionparam, hwnd, dwflags, ureserved1, ureserved2)
+  end
+  def activate(uconnectionparam : LibC::UINT_PTR, ureserved1 : LibC::UINT_PTR, ureserved2 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.activate.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)).call(uconnectionparam, ureserved1, ureserved2)
+  end
+  def deactivate(uconnectionparam : LibC::UINT_PTR, ureserved1 : LibC::UINT_PTR, ureserved2 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.deactivate.unsafe_as(Proc(LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)).call(uconnectionparam, ureserved1, ureserved2)
+  end
+end
+struct LibWin32::IEAPProviderConfig
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pszmachinename : LibC::LPWSTR, dweaptypeid : UInt32, puconnectionparam : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::UINT_PTR*, HRESULT)).call(pszmachinename, dweaptypeid, puconnectionparam)
+  end
+  def uninitialize(dweaptypeid : UInt32, uconnectionparam : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.uninitialize.unsafe_as(Proc(UInt32, LibC::UINT_PTR, HRESULT)).call(dweaptypeid, uconnectionparam)
+  end
+  def server_invoke_config_ui(dweaptypeid : UInt32, uconnectionparam : LibC::UINT_PTR, hwnd : LibC::HANDLE, ureserved1 : LibC::UINT_PTR, ureserved2 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.server_invoke_config_ui.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LibC::HANDLE, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)).call(dweaptypeid, uconnectionparam, hwnd, ureserved1, ureserved2)
+  end
+  def router_invoke_config_ui(dweaptypeid : UInt32, uconnectionparam : LibC::UINT_PTR, hwndparent : LibC::HANDLE, dwflags : UInt32, pconnectiondatain : UInt8*, dwsizeofconnectiondatain : UInt32, ppconnectiondataout : UInt8**, pdwsizeofconnectiondataout : UInt32*) : HRESULT
+    @lpVtbl.value.router_invoke_config_ui.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)).call(dweaptypeid, uconnectionparam, hwndparent, dwflags, pconnectiondatain, dwsizeofconnectiondatain, ppconnectiondataout, pdwsizeofconnectiondataout)
+  end
+  def router_invoke_credentials_ui(dweaptypeid : UInt32, uconnectionparam : LibC::UINT_PTR, hwndparent : LibC::HANDLE, dwflags : UInt32, pconnectiondatain : UInt8*, dwsizeofconnectiondatain : UInt32, puserdatain : UInt8*, dwsizeofuserdatain : UInt32, ppuserdataout : UInt8**, pdwsizeofuserdataout : UInt32*) : HRESULT
+    @lpVtbl.value.router_invoke_credentials_ui.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)).call(dweaptypeid, uconnectionparam, hwndparent, dwflags, pconnectiondatain, dwsizeofconnectiondatain, puserdatain, dwsizeofuserdatain, ppuserdataout, pdwsizeofuserdataout)
+  end
+end
+struct LibWin32::IEAPProviderConfig2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pszmachinename : LibC::LPWSTR, dweaptypeid : UInt32, puconnectionparam : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::UINT_PTR*, HRESULT)).call(pszmachinename, dweaptypeid, puconnectionparam)
+  end
+  def uninitialize(dweaptypeid : UInt32, uconnectionparam : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.uninitialize.unsafe_as(Proc(UInt32, LibC::UINT_PTR, HRESULT)).call(dweaptypeid, uconnectionparam)
+  end
+  def server_invoke_config_ui(dweaptypeid : UInt32, uconnectionparam : LibC::UINT_PTR, hwnd : LibC::HANDLE, ureserved1 : LibC::UINT_PTR, ureserved2 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.server_invoke_config_ui.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LibC::HANDLE, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)).call(dweaptypeid, uconnectionparam, hwnd, ureserved1, ureserved2)
+  end
+  def router_invoke_config_ui(dweaptypeid : UInt32, uconnectionparam : LibC::UINT_PTR, hwndparent : LibC::HANDLE, dwflags : UInt32, pconnectiondatain : UInt8*, dwsizeofconnectiondatain : UInt32, ppconnectiondataout : UInt8**, pdwsizeofconnectiondataout : UInt32*) : HRESULT
+    @lpVtbl.value.router_invoke_config_ui.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)).call(dweaptypeid, uconnectionparam, hwndparent, dwflags, pconnectiondatain, dwsizeofconnectiondatain, ppconnectiondataout, pdwsizeofconnectiondataout)
+  end
+  def router_invoke_credentials_ui(dweaptypeid : UInt32, uconnectionparam : LibC::UINT_PTR, hwndparent : LibC::HANDLE, dwflags : UInt32, pconnectiondatain : UInt8*, dwsizeofconnectiondatain : UInt32, puserdatain : UInt8*, dwsizeofuserdatain : UInt32, ppuserdataout : UInt8**, pdwsizeofuserdataout : UInt32*) : HRESULT
+    @lpVtbl.value.router_invoke_credentials_ui.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)).call(dweaptypeid, uconnectionparam, hwndparent, dwflags, pconnectiondatain, dwsizeofconnectiondatain, puserdatain, dwsizeofuserdatain, ppuserdataout, pdwsizeofuserdataout)
+  end
+  def server_invoke_config_ui2(dweaptypeid : UInt32, uconnectionparam : LibC::UINT_PTR, hwnd : LibC::HANDLE, pconfigdatain : UInt8*, dwsizeofconfigdatain : UInt32, ppconfigdataout : UInt8**, pdwsizeofconfigdataout : UInt32*) : HRESULT
+    @lpVtbl.value.server_invoke_config_ui2.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)).call(dweaptypeid, uconnectionparam, hwnd, pconfigdatain, dwsizeofconfigdatain, ppconfigdataout, pdwsizeofconfigdataout)
+  end
+  def get_global_config(dweaptypeid : UInt32, ppconfigdataout : UInt8**, pdwsizeofconfigdataout : UInt32*) : HRESULT
+    @lpVtbl.value.get_global_config.unsafe_as(Proc(UInt32, UInt8**, UInt32*, HRESULT)).call(dweaptypeid, ppconfigdataout, pdwsizeofconfigdataout)
+  end
+end
+struct LibWin32::IEAPProviderConfig3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pszmachinename : LibC::LPWSTR, dweaptypeid : UInt32, puconnectionparam : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::UINT_PTR*, HRESULT)).call(pszmachinename, dweaptypeid, puconnectionparam)
+  end
+  def uninitialize(dweaptypeid : UInt32, uconnectionparam : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.uninitialize.unsafe_as(Proc(UInt32, LibC::UINT_PTR, HRESULT)).call(dweaptypeid, uconnectionparam)
+  end
+  def server_invoke_config_ui(dweaptypeid : UInt32, uconnectionparam : LibC::UINT_PTR, hwnd : LibC::HANDLE, ureserved1 : LibC::UINT_PTR, ureserved2 : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.server_invoke_config_ui.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LibC::HANDLE, LibC::UINT_PTR, LibC::UINT_PTR, HRESULT)).call(dweaptypeid, uconnectionparam, hwnd, ureserved1, ureserved2)
+  end
+  def router_invoke_config_ui(dweaptypeid : UInt32, uconnectionparam : LibC::UINT_PTR, hwndparent : LibC::HANDLE, dwflags : UInt32, pconnectiondatain : UInt8*, dwsizeofconnectiondatain : UInt32, ppconnectiondataout : UInt8**, pdwsizeofconnectiondataout : UInt32*) : HRESULT
+    @lpVtbl.value.router_invoke_config_ui.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)).call(dweaptypeid, uconnectionparam, hwndparent, dwflags, pconnectiondatain, dwsizeofconnectiondatain, ppconnectiondataout, pdwsizeofconnectiondataout)
+  end
+  def router_invoke_credentials_ui(dweaptypeid : UInt32, uconnectionparam : LibC::UINT_PTR, hwndparent : LibC::HANDLE, dwflags : UInt32, pconnectiondatain : UInt8*, dwsizeofconnectiondatain : UInt32, puserdatain : UInt8*, dwsizeofuserdatain : UInt32, ppuserdataout : UInt8**, pdwsizeofuserdataout : UInt32*) : HRESULT
+    @lpVtbl.value.router_invoke_credentials_ui.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)).call(dweaptypeid, uconnectionparam, hwndparent, dwflags, pconnectiondatain, dwsizeofconnectiondatain, puserdatain, dwsizeofuserdatain, ppuserdataout, pdwsizeofuserdataout)
+  end
+  def server_invoke_config_ui2(dweaptypeid : UInt32, uconnectionparam : LibC::UINT_PTR, hwnd : LibC::HANDLE, pconfigdatain : UInt8*, dwsizeofconfigdatain : UInt32, ppconfigdataout : UInt8**, pdwsizeofconfigdataout : UInt32*) : HRESULT
+    @lpVtbl.value.server_invoke_config_ui2.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt8*, UInt32, UInt8**, UInt32*, HRESULT)).call(dweaptypeid, uconnectionparam, hwnd, pconfigdatain, dwsizeofconfigdatain, ppconfigdataout, pdwsizeofconfigdataout)
+  end
+  def get_global_config(dweaptypeid : UInt32, ppconfigdataout : UInt8**, pdwsizeofconfigdataout : UInt32*) : HRESULT
+    @lpVtbl.value.get_global_config.unsafe_as(Proc(UInt32, UInt8**, UInt32*, HRESULT)).call(dweaptypeid, ppconfigdataout, pdwsizeofconfigdataout)
+  end
+  def server_invoke_certificate_config_ui(dweaptypeid : UInt32, uconnectionparam : LibC::UINT_PTR, hwnd : LibC::HANDLE, pconfigdatain : UInt8*, dwsizeofconfigdatain : UInt32, ppconfigdataout : UInt8**, pdwsizeofconfigdataout : UInt32*, ureserved : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.server_invoke_certificate_config_ui.unsafe_as(Proc(UInt32, LibC::UINT_PTR, LibC::HANDLE, UInt8*, UInt32, UInt8**, UInt32*, LibC::UINT_PTR, HRESULT)).call(dweaptypeid, uconnectionparam, hwnd, pconfigdatain, dwsizeofconfigdatain, ppconfigdataout, pdwsizeofconfigdataout, ureserved)
+  end
 end

@@ -115,11 +115,11 @@ lib LibWin32
 
 
   struct IObjectArrayVTbl
-    query_interface : Proc(IObjectArray*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IObjectArray*, UInt32)
-    release : Proc(IObjectArray*, UInt32)
-    get_count : Proc(IObjectArray*, UInt32*, HRESULT)
-    get_at : Proc(IObjectArray*, UInt32, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
   end
 
   IObjectArray_GUID = "92ca9dcd-5622-4bba-a805-5e9f541bd8c9"
@@ -129,15 +129,15 @@ lib LibWin32
   end
 
   struct IObjectCollectionVTbl
-    query_interface : Proc(IObjectCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IObjectCollection*, UInt32)
-    release : Proc(IObjectCollection*, UInt32)
-    get_count : Proc(IObjectCollection*, UInt32*, HRESULT)
-    get_at : Proc(IObjectCollection*, UInt32, Guid*, Void**, HRESULT)
-    add_object : Proc(IObjectCollection*, IUnknown, HRESULT)
-    add_from_array : Proc(IObjectCollection*, IObjectArray, HRESULT)
-    remove_object_at : Proc(IObjectCollection*, UInt32, HRESULT)
-    clear : Proc(IObjectCollection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_count : UInt64
+    get_at : UInt64
+    add_object : UInt64
+    add_from_array : UInt64
+    remove_object_at : UInt64
+    clear : UInt64
   end
 
   IObjectCollection_GUID = "5632b1a4-e38a-400a-928a-d4cd63230295"
@@ -146,4 +146,50 @@ lib LibWin32
     lpVtbl : IObjectCollectionVTbl*
   end
 
+end
+struct LibWin32::IObjectArray
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(pcobjects : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcobjects)
+  end
+  def get_at(uiindex : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, Guid*, Void**, HRESULT)).call(uiindex, riid, ppv)
+  end
+end
+struct LibWin32::IObjectCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_count(pcobjects : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcobjects)
+  end
+  def get_at(uiindex : UInt32, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, Guid*, Void**, HRESULT)).call(uiindex, riid, ppv)
+  end
+  def add_object(punk : IUnknown) : HRESULT
+    @lpVtbl.value.add_object.unsafe_as(Proc(IUnknown, HRESULT)).call(punk)
+  end
+  def add_from_array(poasource : IObjectArray) : HRESULT
+    @lpVtbl.value.add_from_array.unsafe_as(Proc(IObjectArray, HRESULT)).call(poasource)
+  end
+  def remove_object_at(uiindex : UInt32) : HRESULT
+    @lpVtbl.value.remove_object_at.unsafe_as(Proc(UInt32, HRESULT)).call(uiindex)
+  end
+  def clear : HRESULT
+    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  end
 end

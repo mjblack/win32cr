@@ -148,7 +148,7 @@ lib LibWin32
   fun DevCreateObjectQueryFromIdsEx(objecttype : DEV_OBJECT_TYPE, pszzobjectids : LibC::LPWSTR, queryflags : UInt32, crequestedproperties : UInt32, prequestedproperties : DEVPROPCOMPKEY*, cfilterexpressioncount : UInt32, pfilter : DEVPROP_FILTER_EXPRESSION*, cextendedparametercount : UInt32, pextendedparameters : DEV_QUERY_PARAMETER*, pcallback : PDEV_QUERY_RESULT_CALLBACK, pcontext : Void*, phdevquery : HDEVQUERY__**) : HRESULT
 
   # Params # hdevquery : HDEVQUERY__* [In]
-  fun DevCloseObjectQuery(hdevquery : HDEVQUERY__*)
+  fun DevCloseObjectQuery(hdevquery : HDEVQUERY__*) : Void
 
   # Params # objecttype : DEV_OBJECT_TYPE [In],queryflags : UInt32 [In],crequestedproperties : UInt32 [In],prequestedproperties : DEVPROPCOMPKEY* [In],cfilterexpressioncount : UInt32 [In],pfilter : DEVPROP_FILTER_EXPRESSION* [In],pcobjectcount : UInt32* [In],ppobjects : DEV_OBJECT** [In]
   fun DevGetObjects(objecttype : DEV_OBJECT_TYPE, queryflags : UInt32, crequestedproperties : UInt32, prequestedproperties : DEVPROPCOMPKEY*, cfilterexpressioncount : UInt32, pfilter : DEVPROP_FILTER_EXPRESSION*, pcobjectcount : UInt32*, ppobjects : DEV_OBJECT**) : HRESULT
@@ -157,7 +157,7 @@ lib LibWin32
   fun DevGetObjectsEx(objecttype : DEV_OBJECT_TYPE, queryflags : UInt32, crequestedproperties : UInt32, prequestedproperties : DEVPROPCOMPKEY*, cfilterexpressioncount : UInt32, pfilter : DEVPROP_FILTER_EXPRESSION*, cextendedparametercount : UInt32, pextendedparameters : DEV_QUERY_PARAMETER*, pcobjectcount : UInt32*, ppobjects : DEV_OBJECT**) : HRESULT
 
   # Params # cobjectcount : UInt32 [In],pobjects : DEV_OBJECT* [In]
-  fun DevFreeObjects(cobjectcount : UInt32, pobjects : DEV_OBJECT*)
+  fun DevFreeObjects(cobjectcount : UInt32, pobjects : DEV_OBJECT*) : Void
 
   # Params # objecttype : DEV_OBJECT_TYPE [In],pszobjectid : LibC::LPWSTR [In],queryflags : UInt32 [In],crequestedproperties : UInt32 [In],prequestedproperties : DEVPROPCOMPKEY* [In],pcpropertycount : UInt32* [In],ppproperties : DEVPROPERTY** [In]
   fun DevGetObjectProperties(objecttype : DEV_OBJECT_TYPE, pszobjectid : LibC::LPWSTR, queryflags : UInt32, crequestedproperties : UInt32, prequestedproperties : DEVPROPCOMPKEY*, pcpropertycount : UInt32*, ppproperties : DEVPROPERTY**) : HRESULT
@@ -166,7 +166,7 @@ lib LibWin32
   fun DevGetObjectPropertiesEx(objecttype : DEV_OBJECT_TYPE, pszobjectid : LibC::LPWSTR, queryflags : UInt32, crequestedproperties : UInt32, prequestedproperties : DEVPROPCOMPKEY*, cextendedparametercount : UInt32, pextendedparameters : DEV_QUERY_PARAMETER*, pcpropertycount : UInt32*, ppproperties : DEVPROPERTY**) : HRESULT
 
   # Params # cpropertycount : UInt32 [In],pproperties : DEVPROPERTY* [In]
-  fun DevFreeObjectProperties(cpropertycount : UInt32, pproperties : DEVPROPERTY*)
+  fun DevFreeObjectProperties(cpropertycount : UInt32, pproperties : DEVPROPERTY*) : Void
 
   # Params # pkey : DEVPROPKEY* [In],store : DEVPROPSTORE [In],pszlocalename : LibC::LPWSTR [In],cproperties : UInt32 [In],pproperties : DEVPROPERTY* [In]
   fun DevFindProperty(pkey : DEVPROPKEY*, store : DEVPROPSTORE, pszlocalename : LibC::LPWSTR, cproperties : UInt32, pproperties : DEVPROPERTY*) : DEVPROPERTY*

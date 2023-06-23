@@ -409,25 +409,25 @@ lib LibWin32
 
 
   struct IGPMVTbl
-    query_interface : Proc(IGPM*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPM*, UInt32)
-    release : Proc(IGPM*, UInt32)
-    get_type_info_count : Proc(IGPM*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPM*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPM*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPM*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_domain : Proc(IGPM*, UInt8*, UInt8*, Int32, IGPMDomain*, HRESULT)
-    get_backup_dir : Proc(IGPM*, UInt8*, IGPMBackupDir*, HRESULT)
-    get_sites_container : Proc(IGPM*, UInt8*, UInt8*, UInt8*, Int32, IGPMSitesContainer*, HRESULT)
-    get_rsop : Proc(IGPM*, GPMRSOPMode, UInt8*, Int32, IGPMRSOP*, HRESULT)
-    create_permission : Proc(IGPM*, UInt8*, GPMPermissionType, Int16, IGPMPermission*, HRESULT)
-    create_search_criteria : Proc(IGPM*, IGPMSearchCriteria*, HRESULT)
-    create_trustee : Proc(IGPM*, UInt8*, IGPMTrustee*, HRESULT)
-    get_client_side_extensions : Proc(IGPM*, IGPMCSECollection*, HRESULT)
-    get_constants : Proc(IGPM*, IGPMConstants*, HRESULT)
-    get_migration_table : Proc(IGPM*, UInt8*, IGPMMigrationTable*, HRESULT)
-    create_migration_table : Proc(IGPM*, IGPMMigrationTable*, HRESULT)
-    initialize_reporting : Proc(IGPM*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_domain : UInt64
+    get_backup_dir : UInt64
+    get_sites_container : UInt64
+    get_rsop : UInt64
+    create_permission : UInt64
+    create_search_criteria : UInt64
+    create_trustee : UInt64
+    get_client_side_extensions : UInt64
+    get_constants : UInt64
+    get_migration_table : UInt64
+    create_migration_table : UInt64
+    initialize_reporting : UInt64
   end
 
   IGPM_GUID = "f5fae809-3bd6-4da9-a65e-17665b41d763"
@@ -437,23 +437,23 @@ lib LibWin32
   end
 
   struct IGPMDomainVTbl
-    query_interface : Proc(IGPMDomain*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMDomain*, UInt32)
-    release : Proc(IGPMDomain*, UInt32)
-    get_type_info_count : Proc(IGPMDomain*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMDomain*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMDomain*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMDomain*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_domain_controller : Proc(IGPMDomain*, UInt8**, HRESULT)
-    get_domain : Proc(IGPMDomain*, UInt8**, HRESULT)
-    create_gpo : Proc(IGPMDomain*, IGPMGPO*, HRESULT)
-    get_gpo : Proc(IGPMDomain*, UInt8*, IGPMGPO*, HRESULT)
-    search_gp_os : Proc(IGPMDomain*, IGPMSearchCriteria, IGPMGPOCollection*, HRESULT)
-    restore_gpo : Proc(IGPMDomain*, IGPMBackup, Int32, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    get_som : Proc(IGPMDomain*, UInt8*, IGPMSOM*, HRESULT)
-    search_so_ms : Proc(IGPMDomain*, IGPMSearchCriteria, IGPMSOMCollection*, HRESULT)
-    get_wmi_filter : Proc(IGPMDomain*, UInt8*, IGPMWMIFilter*, HRESULT)
-    search_wmi_filters : Proc(IGPMDomain*, IGPMSearchCriteria, IGPMWMIFilterCollection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_domain_controller : UInt64
+    get_domain : UInt64
+    create_gpo : UInt64
+    get_gpo : UInt64
+    search_gp_os : UInt64
+    restore_gpo : UInt64
+    get_som : UInt64
+    search_so_ms : UInt64
+    get_wmi_filter : UInt64
+    search_wmi_filters : UInt64
   end
 
   IGPMDomain_GUID = "6b21cc14-5a00-4f44-a738-feec8a94c7e3"
@@ -463,16 +463,16 @@ lib LibWin32
   end
 
   struct IGPMBackupDirVTbl
-    query_interface : Proc(IGPMBackupDir*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMBackupDir*, UInt32)
-    release : Proc(IGPMBackupDir*, UInt32)
-    get_type_info_count : Proc(IGPMBackupDir*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMBackupDir*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMBackupDir*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMBackupDir*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_backup_directory : Proc(IGPMBackupDir*, UInt8**, HRESULT)
-    get_backup : Proc(IGPMBackupDir*, UInt8*, IGPMBackup*, HRESULT)
-    search_backups : Proc(IGPMBackupDir*, IGPMSearchCriteria, IGPMBackupCollection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_backup_directory : UInt64
+    get_backup : UInt64
+    search_backups : UInt64
   end
 
   IGPMBackupDir_GUID = "b1568bed-0a93-4acc-810f-afe7081019b9"
@@ -482,18 +482,18 @@ lib LibWin32
   end
 
   struct IGPMSitesContainerVTbl
-    query_interface : Proc(IGPMSitesContainer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMSitesContainer*, UInt32)
-    release : Proc(IGPMSitesContainer*, UInt32)
-    get_type_info_count : Proc(IGPMSitesContainer*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMSitesContainer*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMSitesContainer*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMSitesContainer*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_domain_controller : Proc(IGPMSitesContainer*, UInt8**, HRESULT)
-    get_domain : Proc(IGPMSitesContainer*, UInt8**, HRESULT)
-    get_forest : Proc(IGPMSitesContainer*, UInt8**, HRESULT)
-    get_site : Proc(IGPMSitesContainer*, UInt8*, IGPMSOM*, HRESULT)
-    search_sites : Proc(IGPMSitesContainer*, IGPMSearchCriteria, IGPMSOMCollection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_domain_controller : UInt64
+    get_domain : UInt64
+    get_forest : UInt64
+    get_site : UInt64
+    search_sites : UInt64
   end
 
   IGPMSitesContainer_GUID = "4725a899-2782-4d27-a6bb-d499246ffd72"
@@ -503,14 +503,14 @@ lib LibWin32
   end
 
   struct IGPMSearchCriteriaVTbl
-    query_interface : Proc(IGPMSearchCriteria*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMSearchCriteria*, UInt32)
-    release : Proc(IGPMSearchCriteria*, UInt32)
-    get_type_info_count : Proc(IGPMSearchCriteria*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMSearchCriteria*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMSearchCriteria*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMSearchCriteria*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    add : Proc(IGPMSearchCriteria*, GPMSearchProperty, GPMSearchOperation, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    add : UInt64
   end
 
   IGPMSearchCriteria_GUID = "d6f11c42-829b-48d4-83f5-3615b67dfc22"
@@ -520,18 +520,18 @@ lib LibWin32
   end
 
   struct IGPMTrusteeVTbl
-    query_interface : Proc(IGPMTrustee*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMTrustee*, UInt32)
-    release : Proc(IGPMTrustee*, UInt32)
-    get_type_info_count : Proc(IGPMTrustee*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMTrustee*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMTrustee*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMTrustee*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_trustee_sid : Proc(IGPMTrustee*, UInt8**, HRESULT)
-    get_trustee_name : Proc(IGPMTrustee*, UInt8**, HRESULT)
-    get_trustee_domain : Proc(IGPMTrustee*, UInt8**, HRESULT)
-    get_trustee_ds_path : Proc(IGPMTrustee*, UInt8**, HRESULT)
-    get_trustee_type : Proc(IGPMTrustee*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_trustee_sid : UInt64
+    get_trustee_name : UInt64
+    get_trustee_domain : UInt64
+    get_trustee_ds_path : UInt64
+    get_trustee_type : UInt64
   end
 
   IGPMTrustee_GUID = "3b466da8-c1a4-4b2a-999a-befcdd56cefb"
@@ -541,18 +541,18 @@ lib LibWin32
   end
 
   struct IGPMPermissionVTbl
-    query_interface : Proc(IGPMPermission*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMPermission*, UInt32)
-    release : Proc(IGPMPermission*, UInt32)
-    get_type_info_count : Proc(IGPMPermission*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMPermission*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMPermission*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMPermission*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_inherited : Proc(IGPMPermission*, Int16*, HRESULT)
-    get_inheritable : Proc(IGPMPermission*, Int16*, HRESULT)
-    get_denied : Proc(IGPMPermission*, Int16*, HRESULT)
-    get_permission : Proc(IGPMPermission*, GPMPermissionType*, HRESULT)
-    get_trustee : Proc(IGPMPermission*, IGPMTrustee*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_inherited : UInt64
+    get_inheritable : UInt64
+    get_denied : UInt64
+    get_permission : UInt64
+    get_trustee : UInt64
   end
 
   IGPMPermission_GUID = "35ebca40-e1a1-4a02-8905-d79416fb464a"
@@ -562,19 +562,19 @@ lib LibWin32
   end
 
   struct IGPMSecurityInfoVTbl
-    query_interface : Proc(IGPMSecurityInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMSecurityInfo*, UInt32)
-    release : Proc(IGPMSecurityInfo*, UInt32)
-    get_type_info_count : Proc(IGPMSecurityInfo*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMSecurityInfo*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMSecurityInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMSecurityInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IGPMSecurityInfo*, Int32*, HRESULT)
-    get_item : Proc(IGPMSecurityInfo*, Int32, VARIANT*, HRESULT)
-    get__new_enum : Proc(IGPMSecurityInfo*, IEnumVARIANT*, HRESULT)
-    add : Proc(IGPMSecurityInfo*, IGPMPermission, HRESULT)
-    remove : Proc(IGPMSecurityInfo*, IGPMPermission, HRESULT)
-    remove_trustee : Proc(IGPMSecurityInfo*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    get_item : UInt64
+    get__new_enum : UInt64
+    add : UInt64
+    remove : UInt64
+    remove_trustee : UInt64
   end
 
   IGPMSecurityInfo_GUID = "b6c31ed4-1c93-4d3e-ae84-eb6d61161b60"
@@ -584,23 +584,23 @@ lib LibWin32
   end
 
   struct IGPMBackupVTbl
-    query_interface : Proc(IGPMBackup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMBackup*, UInt32)
-    release : Proc(IGPMBackup*, UInt32)
-    get_type_info_count : Proc(IGPMBackup*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMBackup*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMBackup*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMBackup*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_id : Proc(IGPMBackup*, UInt8**, HRESULT)
-    get_gpoid : Proc(IGPMBackup*, UInt8**, HRESULT)
-    get_gpo_domain : Proc(IGPMBackup*, UInt8**, HRESULT)
-    get_gpo_display_name : Proc(IGPMBackup*, UInt8**, HRESULT)
-    get_timestamp : Proc(IGPMBackup*, Float64*, HRESULT)
-    get_comment : Proc(IGPMBackup*, UInt8**, HRESULT)
-    get_backup_dir : Proc(IGPMBackup*, UInt8**, HRESULT)
-    delete : Proc(IGPMBackup*, HRESULT)
-    generate_report : Proc(IGPMBackup*, GPMReportType, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    generate_report_to_file : Proc(IGPMBackup*, GPMReportType, UInt8*, IGPMResult*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_id : UInt64
+    get_gpoid : UInt64
+    get_gpo_domain : UInt64
+    get_gpo_display_name : UInt64
+    get_timestamp : UInt64
+    get_comment : UInt64
+    get_backup_dir : UInt64
+    delete : UInt64
+    generate_report : UInt64
+    generate_report_to_file : UInt64
   end
 
   IGPMBackup_GUID = "d8a16a35-3b0d-416b-8d02-4df6f95a7119"
@@ -610,16 +610,16 @@ lib LibWin32
   end
 
   struct IGPMBackupCollectionVTbl
-    query_interface : Proc(IGPMBackupCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMBackupCollection*, UInt32)
-    release : Proc(IGPMBackupCollection*, UInt32)
-    get_type_info_count : Proc(IGPMBackupCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMBackupCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMBackupCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMBackupCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IGPMBackupCollection*, Int32*, HRESULT)
-    get_item : Proc(IGPMBackupCollection*, Int32, VARIANT*, HRESULT)
-    get__new_enum : Proc(IGPMBackupCollection*, IEnumVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    get_item : UInt64
+    get__new_enum : UInt64
   end
 
   IGPMBackupCollection_GUID = "c786fc0f-26d8-4bab-a745-39ca7e800cac"
@@ -629,23 +629,23 @@ lib LibWin32
   end
 
   struct IGPMSOMVTbl
-    query_interface : Proc(IGPMSOM*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMSOM*, UInt32)
-    release : Proc(IGPMSOM*, UInt32)
-    get_type_info_count : Proc(IGPMSOM*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMSOM*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMSOM*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMSOM*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_gpo_inheritance_blocked : Proc(IGPMSOM*, Int16*, HRESULT)
-    put_gpo_inheritance_blocked : Proc(IGPMSOM*, Int16, HRESULT)
-    get_name : Proc(IGPMSOM*, UInt8**, HRESULT)
-    get_path : Proc(IGPMSOM*, UInt8**, HRESULT)
-    create_gpo_link : Proc(IGPMSOM*, Int32, IGPMGPO, IGPMGPOLink*, HRESULT)
-    get_type : Proc(IGPMSOM*, GPMSOMType*, HRESULT)
-    get_gpo_links : Proc(IGPMSOM*, IGPMGPOLinksCollection*, HRESULT)
-    get_inherited_gpo_links : Proc(IGPMSOM*, IGPMGPOLinksCollection*, HRESULT)
-    get_security_info : Proc(IGPMSOM*, IGPMSecurityInfo*, HRESULT)
-    set_security_info : Proc(IGPMSOM*, IGPMSecurityInfo, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_gpo_inheritance_blocked : UInt64
+    put_gpo_inheritance_blocked : UInt64
+    get_name : UInt64
+    get_path : UInt64
+    create_gpo_link : UInt64
+    get_type : UInt64
+    get_gpo_links : UInt64
+    get_inherited_gpo_links : UInt64
+    get_security_info : UInt64
+    set_security_info : UInt64
   end
 
   IGPMSOM_GUID = "c0a7f09e-05a1-4f0c-8158-9e5c33684f6b"
@@ -655,16 +655,16 @@ lib LibWin32
   end
 
   struct IGPMSOMCollectionVTbl
-    query_interface : Proc(IGPMSOMCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMSOMCollection*, UInt32)
-    release : Proc(IGPMSOMCollection*, UInt32)
-    get_type_info_count : Proc(IGPMSOMCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMSOMCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMSOMCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMSOMCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IGPMSOMCollection*, Int32*, HRESULT)
-    get_item : Proc(IGPMSOMCollection*, Int32, VARIANT*, HRESULT)
-    get__new_enum : Proc(IGPMSOMCollection*, IEnumVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    get_item : UInt64
+    get__new_enum : UInt64
   end
 
   IGPMSOMCollection_GUID = "adc1688e-00e4-4495-abba-bed200df0cab"
@@ -674,21 +674,21 @@ lib LibWin32
   end
 
   struct IGPMWMIFilterVTbl
-    query_interface : Proc(IGPMWMIFilter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMWMIFilter*, UInt32)
-    release : Proc(IGPMWMIFilter*, UInt32)
-    get_type_info_count : Proc(IGPMWMIFilter*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMWMIFilter*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMWMIFilter*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMWMIFilter*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_path : Proc(IGPMWMIFilter*, UInt8**, HRESULT)
-    put_name : Proc(IGPMWMIFilter*, UInt8*, HRESULT)
-    get_name : Proc(IGPMWMIFilter*, UInt8**, HRESULT)
-    put_description : Proc(IGPMWMIFilter*, UInt8*, HRESULT)
-    get_description : Proc(IGPMWMIFilter*, UInt8**, HRESULT)
-    get_query_list : Proc(IGPMWMIFilter*, VARIANT*, HRESULT)
-    get_security_info : Proc(IGPMWMIFilter*, IGPMSecurityInfo*, HRESULT)
-    set_security_info : Proc(IGPMWMIFilter*, IGPMSecurityInfo, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_path : UInt64
+    put_name : UInt64
+    get_name : UInt64
+    put_description : UInt64
+    get_description : UInt64
+    get_query_list : UInt64
+    get_security_info : UInt64
+    set_security_info : UInt64
   end
 
   IGPMWMIFilter_GUID = "ef2ff9b4-3c27-459a-b979-038305cec75d"
@@ -698,16 +698,16 @@ lib LibWin32
   end
 
   struct IGPMWMIFilterCollectionVTbl
-    query_interface : Proc(IGPMWMIFilterCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMWMIFilterCollection*, UInt32)
-    release : Proc(IGPMWMIFilterCollection*, UInt32)
-    get_type_info_count : Proc(IGPMWMIFilterCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMWMIFilterCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMWMIFilterCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMWMIFilterCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IGPMWMIFilterCollection*, Int32*, HRESULT)
-    get_item : Proc(IGPMWMIFilterCollection*, Int32, VARIANT*, HRESULT)
-    get__new_enum : Proc(IGPMWMIFilterCollection*, IEnumVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    get_item : UInt64
+    get__new_enum : UInt64
   end
 
   IGPMWMIFilterCollection_GUID = "5782d582-1a36-4661-8a94-c3c32551945b"
@@ -717,48 +717,48 @@ lib LibWin32
   end
 
   struct IGPMRSOPVTbl
-    query_interface : Proc(IGPMRSOP*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMRSOP*, UInt32)
-    release : Proc(IGPMRSOP*, UInt32)
-    get_type_info_count : Proc(IGPMRSOP*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMRSOP*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMRSOP*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMRSOP*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_mode : Proc(IGPMRSOP*, GPMRSOPMode*, HRESULT)
-    get_namespace : Proc(IGPMRSOP*, UInt8**, HRESULT)
-    put_logging_computer : Proc(IGPMRSOP*, UInt8*, HRESULT)
-    get_logging_computer : Proc(IGPMRSOP*, UInt8**, HRESULT)
-    put_logging_user : Proc(IGPMRSOP*, UInt8*, HRESULT)
-    get_logging_user : Proc(IGPMRSOP*, UInt8**, HRESULT)
-    put_logging_flags : Proc(IGPMRSOP*, Int32, HRESULT)
-    get_logging_flags : Proc(IGPMRSOP*, Int32*, HRESULT)
-    put_planning_flags : Proc(IGPMRSOP*, Int32, HRESULT)
-    get_planning_flags : Proc(IGPMRSOP*, Int32*, HRESULT)
-    put_planning_domain_controller : Proc(IGPMRSOP*, UInt8*, HRESULT)
-    get_planning_domain_controller : Proc(IGPMRSOP*, UInt8**, HRESULT)
-    put_planning_site_name : Proc(IGPMRSOP*, UInt8*, HRESULT)
-    get_planning_site_name : Proc(IGPMRSOP*, UInt8**, HRESULT)
-    put_planning_user : Proc(IGPMRSOP*, UInt8*, HRESULT)
-    get_planning_user : Proc(IGPMRSOP*, UInt8**, HRESULT)
-    put_planning_user_som : Proc(IGPMRSOP*, UInt8*, HRESULT)
-    get_planning_user_som : Proc(IGPMRSOP*, UInt8**, HRESULT)
-    put_planning_user_wmi_filters : Proc(IGPMRSOP*, VARIANT, HRESULT)
-    get_planning_user_wmi_filters : Proc(IGPMRSOP*, VARIANT*, HRESULT)
-    put_planning_user_security_groups : Proc(IGPMRSOP*, VARIANT, HRESULT)
-    get_planning_user_security_groups : Proc(IGPMRSOP*, VARIANT*, HRESULT)
-    put_planning_computer : Proc(IGPMRSOP*, UInt8*, HRESULT)
-    get_planning_computer : Proc(IGPMRSOP*, UInt8**, HRESULT)
-    put_planning_computer_som : Proc(IGPMRSOP*, UInt8*, HRESULT)
-    get_planning_computer_som : Proc(IGPMRSOP*, UInt8**, HRESULT)
-    put_planning_computer_wmi_filters : Proc(IGPMRSOP*, VARIANT, HRESULT)
-    get_planning_computer_wmi_filters : Proc(IGPMRSOP*, VARIANT*, HRESULT)
-    put_planning_computer_security_groups : Proc(IGPMRSOP*, VARIANT, HRESULT)
-    get_planning_computer_security_groups : Proc(IGPMRSOP*, VARIANT*, HRESULT)
-    logging_enumerate_users : Proc(IGPMRSOP*, VARIANT*, HRESULT)
-    create_query_results : Proc(IGPMRSOP*, HRESULT)
-    release_query_results : Proc(IGPMRSOP*, HRESULT)
-    generate_report : Proc(IGPMRSOP*, GPMReportType, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    generate_report_to_file : Proc(IGPMRSOP*, GPMReportType, UInt8*, IGPMResult*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_mode : UInt64
+    get_namespace : UInt64
+    put_logging_computer : UInt64
+    get_logging_computer : UInt64
+    put_logging_user : UInt64
+    get_logging_user : UInt64
+    put_logging_flags : UInt64
+    get_logging_flags : UInt64
+    put_planning_flags : UInt64
+    get_planning_flags : UInt64
+    put_planning_domain_controller : UInt64
+    get_planning_domain_controller : UInt64
+    put_planning_site_name : UInt64
+    get_planning_site_name : UInt64
+    put_planning_user : UInt64
+    get_planning_user : UInt64
+    put_planning_user_som : UInt64
+    get_planning_user_som : UInt64
+    put_planning_user_wmi_filters : UInt64
+    get_planning_user_wmi_filters : UInt64
+    put_planning_user_security_groups : UInt64
+    get_planning_user_security_groups : UInt64
+    put_planning_computer : UInt64
+    get_planning_computer : UInt64
+    put_planning_computer_som : UInt64
+    get_planning_computer_som : UInt64
+    put_planning_computer_wmi_filters : UInt64
+    get_planning_computer_wmi_filters : UInt64
+    put_planning_computer_security_groups : UInt64
+    get_planning_computer_security_groups : UInt64
+    logging_enumerate_users : UInt64
+    create_query_results : UInt64
+    release_query_results : UInt64
+    generate_report : UInt64
+    generate_report_to_file : UInt64
   end
 
   IGPMRSOP_GUID = "49ed785a-3237-4ff2-b1f0-fdf5a8d5a1ee"
@@ -768,42 +768,42 @@ lib LibWin32
   end
 
   struct IGPMGPOVTbl
-    query_interface : Proc(IGPMGPO*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMGPO*, UInt32)
-    release : Proc(IGPMGPO*, UInt32)
-    get_type_info_count : Proc(IGPMGPO*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMGPO*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMGPO*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMGPO*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_display_name : Proc(IGPMGPO*, UInt8**, HRESULT)
-    put_display_name : Proc(IGPMGPO*, UInt8*, HRESULT)
-    get_path : Proc(IGPMGPO*, UInt8**, HRESULT)
-    get_id : Proc(IGPMGPO*, UInt8**, HRESULT)
-    get_domain_name : Proc(IGPMGPO*, UInt8**, HRESULT)
-    get_creation_time : Proc(IGPMGPO*, Float64*, HRESULT)
-    get_modification_time : Proc(IGPMGPO*, Float64*, HRESULT)
-    get_user_ds_version_number : Proc(IGPMGPO*, Int32*, HRESULT)
-    get_computer_ds_version_number : Proc(IGPMGPO*, Int32*, HRESULT)
-    get_user_sysvol_version_number : Proc(IGPMGPO*, Int32*, HRESULT)
-    get_computer_sysvol_version_number : Proc(IGPMGPO*, Int32*, HRESULT)
-    get_wmi_filter : Proc(IGPMGPO*, IGPMWMIFilter*, HRESULT)
-    set_wmi_filter : Proc(IGPMGPO*, IGPMWMIFilter, HRESULT)
-    set_user_enabled : Proc(IGPMGPO*, Int16, HRESULT)
-    set_computer_enabled : Proc(IGPMGPO*, Int16, HRESULT)
-    is_user_enabled : Proc(IGPMGPO*, Int16*, HRESULT)
-    is_computer_enabled : Proc(IGPMGPO*, Int16*, HRESULT)
-    get_security_info : Proc(IGPMGPO*, IGPMSecurityInfo*, HRESULT)
-    set_security_info : Proc(IGPMGPO*, IGPMSecurityInfo, HRESULT)
-    delete : Proc(IGPMGPO*, HRESULT)
-    backup : Proc(IGPMGPO*, UInt8*, UInt8*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    import : Proc(IGPMGPO*, Int32, IGPMBackup, VARIANT*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    generate_report : Proc(IGPMGPO*, GPMReportType, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    generate_report_to_file : Proc(IGPMGPO*, GPMReportType, UInt8*, IGPMResult*, HRESULT)
-    copy_to : Proc(IGPMGPO*, Int32, IGPMDomain, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    set_security_descriptor : Proc(IGPMGPO*, Int32, IDispatch, HRESULT)
-    get_security_descriptor : Proc(IGPMGPO*, Int32, IDispatch*, HRESULT)
-    is_acl_consistent : Proc(IGPMGPO*, Int16*, HRESULT)
-    make_acl_consistent : Proc(IGPMGPO*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_display_name : UInt64
+    put_display_name : UInt64
+    get_path : UInt64
+    get_id : UInt64
+    get_domain_name : UInt64
+    get_creation_time : UInt64
+    get_modification_time : UInt64
+    get_user_ds_version_number : UInt64
+    get_computer_ds_version_number : UInt64
+    get_user_sysvol_version_number : UInt64
+    get_computer_sysvol_version_number : UInt64
+    get_wmi_filter : UInt64
+    set_wmi_filter : UInt64
+    set_user_enabled : UInt64
+    set_computer_enabled : UInt64
+    is_user_enabled : UInt64
+    is_computer_enabled : UInt64
+    get_security_info : UInt64
+    set_security_info : UInt64
+    delete : UInt64
+    backup : UInt64
+    import : UInt64
+    generate_report : UInt64
+    generate_report_to_file : UInt64
+    copy_to : UInt64
+    set_security_descriptor : UInt64
+    get_security_descriptor : UInt64
+    is_acl_consistent : UInt64
+    make_acl_consistent : UInt64
   end
 
   IGPMGPO_GUID = "58cc4352-1ca3-48e5-9864-1da4d6e0d60f"
@@ -813,16 +813,16 @@ lib LibWin32
   end
 
   struct IGPMGPOCollectionVTbl
-    query_interface : Proc(IGPMGPOCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMGPOCollection*, UInt32)
-    release : Proc(IGPMGPOCollection*, UInt32)
-    get_type_info_count : Proc(IGPMGPOCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMGPOCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMGPOCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMGPOCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IGPMGPOCollection*, Int32*, HRESULT)
-    get_item : Proc(IGPMGPOCollection*, Int32, VARIANT*, HRESULT)
-    get__new_enum : Proc(IGPMGPOCollection*, IEnumVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    get_item : UInt64
+    get__new_enum : UInt64
   end
 
   IGPMGPOCollection_GUID = "f0f0d5cf-70ca-4c39-9e29-b642f8726c01"
@@ -832,22 +832,22 @@ lib LibWin32
   end
 
   struct IGPMGPOLinkVTbl
-    query_interface : Proc(IGPMGPOLink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMGPOLink*, UInt32)
-    release : Proc(IGPMGPOLink*, UInt32)
-    get_type_info_count : Proc(IGPMGPOLink*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMGPOLink*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMGPOLink*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMGPOLink*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_gpoid : Proc(IGPMGPOLink*, UInt8**, HRESULT)
-    get_gpo_domain : Proc(IGPMGPOLink*, UInt8**, HRESULT)
-    get_enabled : Proc(IGPMGPOLink*, Int16*, HRESULT)
-    put_enabled : Proc(IGPMGPOLink*, Int16, HRESULT)
-    get_enforced : Proc(IGPMGPOLink*, Int16*, HRESULT)
-    put_enforced : Proc(IGPMGPOLink*, Int16, HRESULT)
-    get_som_link_order : Proc(IGPMGPOLink*, Int32*, HRESULT)
-    get_som : Proc(IGPMGPOLink*, IGPMSOM*, HRESULT)
-    delete : Proc(IGPMGPOLink*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_gpoid : UInt64
+    get_gpo_domain : UInt64
+    get_enabled : UInt64
+    put_enabled : UInt64
+    get_enforced : UInt64
+    put_enforced : UInt64
+    get_som_link_order : UInt64
+    get_som : UInt64
+    delete : UInt64
   end
 
   IGPMGPOLink_GUID = "434b99bd-5de7-478a-809c-c251721df70c"
@@ -857,16 +857,16 @@ lib LibWin32
   end
 
   struct IGPMGPOLinksCollectionVTbl
-    query_interface : Proc(IGPMGPOLinksCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMGPOLinksCollection*, UInt32)
-    release : Proc(IGPMGPOLinksCollection*, UInt32)
-    get_type_info_count : Proc(IGPMGPOLinksCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMGPOLinksCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMGPOLinksCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMGPOLinksCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IGPMGPOLinksCollection*, Int32*, HRESULT)
-    get_item : Proc(IGPMGPOLinksCollection*, Int32, VARIANT*, HRESULT)
-    get__new_enum : Proc(IGPMGPOLinksCollection*, IEnumVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    get_item : UInt64
+    get__new_enum : UInt64
   end
 
   IGPMGPOLinksCollection_GUID = "189d7b68-16bd-4d0d-a2ec-2e6aa2288c7f"
@@ -876,16 +876,16 @@ lib LibWin32
   end
 
   struct IGPMCSECollectionVTbl
-    query_interface : Proc(IGPMCSECollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMCSECollection*, UInt32)
-    release : Proc(IGPMCSECollection*, UInt32)
-    get_type_info_count : Proc(IGPMCSECollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMCSECollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMCSECollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMCSECollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IGPMCSECollection*, Int32*, HRESULT)
-    get_item : Proc(IGPMCSECollection*, Int32, VARIANT*, HRESULT)
-    get__new_enum : Proc(IGPMCSECollection*, IEnumVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    get_item : UInt64
+    get__new_enum : UInt64
   end
 
   IGPMCSECollection_GUID = "2e52a97d-0a4a-4a6f-85db-201622455da0"
@@ -895,17 +895,17 @@ lib LibWin32
   end
 
   struct IGPMClientSideExtensionVTbl
-    query_interface : Proc(IGPMClientSideExtension*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMClientSideExtension*, UInt32)
-    release : Proc(IGPMClientSideExtension*, UInt32)
-    get_type_info_count : Proc(IGPMClientSideExtension*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMClientSideExtension*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMClientSideExtension*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMClientSideExtension*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_id : Proc(IGPMClientSideExtension*, UInt8**, HRESULT)
-    get_display_name : Proc(IGPMClientSideExtension*, UInt8**, HRESULT)
-    is_user_enabled : Proc(IGPMClientSideExtension*, Int16*, HRESULT)
-    is_computer_enabled : Proc(IGPMClientSideExtension*, Int16*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_id : UInt64
+    get_display_name : UInt64
+    is_user_enabled : UInt64
+    is_computer_enabled : UInt64
   end
 
   IGPMClientSideExtension_GUID = "69da7488-b8db-415e-9266-901be4d49928"
@@ -915,14 +915,14 @@ lib LibWin32
   end
 
   struct IGPMAsyncCancelVTbl
-    query_interface : Proc(IGPMAsyncCancel*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMAsyncCancel*, UInt32)
-    release : Proc(IGPMAsyncCancel*, UInt32)
-    get_type_info_count : Proc(IGPMAsyncCancel*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMAsyncCancel*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMAsyncCancel*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMAsyncCancel*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    cancel : Proc(IGPMAsyncCancel*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    cancel : UInt64
   end
 
   IGPMAsyncCancel_GUID = "ddc67754-be67-4541-8166-f48166868c9c"
@@ -932,14 +932,14 @@ lib LibWin32
   end
 
   struct IGPMAsyncProgressVTbl
-    query_interface : Proc(IGPMAsyncProgress*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMAsyncProgress*, UInt32)
-    release : Proc(IGPMAsyncProgress*, UInt32)
-    get_type_info_count : Proc(IGPMAsyncProgress*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMAsyncProgress*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMAsyncProgress*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMAsyncProgress*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    status : Proc(IGPMAsyncProgress*, Int32, Int32, HRESULT, VARIANT*, IGPMStatusMsgCollection, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    status : UInt64
   end
 
   IGPMAsyncProgress_GUID = "6aac29f8-5948-4324-bf70-423818942dbc"
@@ -949,16 +949,16 @@ lib LibWin32
   end
 
   struct IGPMStatusMsgCollectionVTbl
-    query_interface : Proc(IGPMStatusMsgCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMStatusMsgCollection*, UInt32)
-    release : Proc(IGPMStatusMsgCollection*, UInt32)
-    get_type_info_count : Proc(IGPMStatusMsgCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMStatusMsgCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMStatusMsgCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMStatusMsgCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IGPMStatusMsgCollection*, Int32*, HRESULT)
-    get_item : Proc(IGPMStatusMsgCollection*, Int32, VARIANT*, HRESULT)
-    get__new_enum : Proc(IGPMStatusMsgCollection*, IEnumVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    get_item : UInt64
+    get__new_enum : UInt64
   end
 
   IGPMStatusMsgCollection_GUID = "9b6e1af0-1a92-40f3-a59d-f36ac1f728b7"
@@ -968,19 +968,19 @@ lib LibWin32
   end
 
   struct IGPMStatusMessageVTbl
-    query_interface : Proc(IGPMStatusMessage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMStatusMessage*, UInt32)
-    release : Proc(IGPMStatusMessage*, UInt32)
-    get_type_info_count : Proc(IGPMStatusMessage*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMStatusMessage*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMStatusMessage*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMStatusMessage*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_object_path : Proc(IGPMStatusMessage*, UInt8**, HRESULT)
-    error_code : Proc(IGPMStatusMessage*, HRESULT)
-    get_extension_name : Proc(IGPMStatusMessage*, UInt8**, HRESULT)
-    get_settings_name : Proc(IGPMStatusMessage*, UInt8**, HRESULT)
-    operation_code : Proc(IGPMStatusMessage*, HRESULT)
-    get_message : Proc(IGPMStatusMessage*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_object_path : UInt64
+    error_code : UInt64
+    get_extension_name : UInt64
+    get_settings_name : UInt64
+    operation_code : UInt64
+    get_message : UInt64
   end
 
   IGPMStatusMessage_GUID = "8496c22f-f3de-4a1f-8f58-603caaa93d7b"
@@ -990,73 +990,73 @@ lib LibWin32
   end
 
   struct IGPMConstantsVTbl
-    query_interface : Proc(IGPMConstants*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMConstants*, UInt32)
-    release : Proc(IGPMConstants*, UInt32)
-    get_type_info_count : Proc(IGPMConstants*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMConstants*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMConstants*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMConstants*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_perm_gpo_apply : Proc(IGPMConstants*, GPMPermissionType*, HRESULT)
-    get_perm_gpo_read : Proc(IGPMConstants*, GPMPermissionType*, HRESULT)
-    get_perm_gpo_edit : Proc(IGPMConstants*, GPMPermissionType*, HRESULT)
-    get_perm_gpo_edit_security_and_delete : Proc(IGPMConstants*, GPMPermissionType*, HRESULT)
-    get_perm_gpo_custom : Proc(IGPMConstants*, GPMPermissionType*, HRESULT)
-    get_perm_wmi_filter_edit : Proc(IGPMConstants*, GPMPermissionType*, HRESULT)
-    get_perm_wmi_filter_full_control : Proc(IGPMConstants*, GPMPermissionType*, HRESULT)
-    get_perm_wmi_filter_custom : Proc(IGPMConstants*, GPMPermissionType*, HRESULT)
-    get_perm_som_link : Proc(IGPMConstants*, GPMPermissionType*, HRESULT)
-    get_perm_som_logging : Proc(IGPMConstants*, GPMPermissionType*, HRESULT)
-    get_perm_som_planning : Proc(IGPMConstants*, GPMPermissionType*, HRESULT)
-    get_perm_somgpo_create : Proc(IGPMConstants*, GPMPermissionType*, HRESULT)
-    get_perm_somwmi_create : Proc(IGPMConstants*, GPMPermissionType*, HRESULT)
-    get_perm_somwmi_full_control : Proc(IGPMConstants*, GPMPermissionType*, HRESULT)
-    get_search_property_gpo_permissions : Proc(IGPMConstants*, GPMSearchProperty*, HRESULT)
-    get_search_property_gpo_effective_permissions : Proc(IGPMConstants*, GPMSearchProperty*, HRESULT)
-    get_search_property_gpo_display_name : Proc(IGPMConstants*, GPMSearchProperty*, HRESULT)
-    get_search_property_gpowmi_filter : Proc(IGPMConstants*, GPMSearchProperty*, HRESULT)
-    get_search_property_gpoid : Proc(IGPMConstants*, GPMSearchProperty*, HRESULT)
-    get_search_property_gpo_computer_extensions : Proc(IGPMConstants*, GPMSearchProperty*, HRESULT)
-    get_search_property_gpo_user_extensions : Proc(IGPMConstants*, GPMSearchProperty*, HRESULT)
-    get_search_property_som_links : Proc(IGPMConstants*, GPMSearchProperty*, HRESULT)
-    get_search_property_gpo_domain : Proc(IGPMConstants*, GPMSearchProperty*, HRESULT)
-    get_search_property_backup_most_recent : Proc(IGPMConstants*, GPMSearchProperty*, HRESULT)
-    get_search_op_equals : Proc(IGPMConstants*, GPMSearchOperation*, HRESULT)
-    get_search_op_contains : Proc(IGPMConstants*, GPMSearchOperation*, HRESULT)
-    get_search_op_not_contains : Proc(IGPMConstants*, GPMSearchOperation*, HRESULT)
-    get_search_op_not_equals : Proc(IGPMConstants*, GPMSearchOperation*, HRESULT)
-    get_use_pdc : Proc(IGPMConstants*, Int32*, HRESULT)
-    get_use_any_dc : Proc(IGPMConstants*, Int32*, HRESULT)
-    get_do_not_use_w2_kdc : Proc(IGPMConstants*, Int32*, HRESULT)
-    get_som_site : Proc(IGPMConstants*, GPMSOMType*, HRESULT)
-    get_som_domain : Proc(IGPMConstants*, GPMSOMType*, HRESULT)
-    get_somou : Proc(IGPMConstants*, GPMSOMType*, HRESULT)
-    get_security_flags : Proc(IGPMConstants*, Int16, Int16, Int16, Int16, Int32*, HRESULT)
-    get_do_not_validate_dc : Proc(IGPMConstants*, Int32*, HRESULT)
-    get_report_html : Proc(IGPMConstants*, GPMReportType*, HRESULT)
-    get_report_xml : Proc(IGPMConstants*, GPMReportType*, HRESULT)
-    get_rsop_mode_unknown : Proc(IGPMConstants*, GPMRSOPMode*, HRESULT)
-    get_rsop_mode_planning : Proc(IGPMConstants*, GPMRSOPMode*, HRESULT)
-    get_rsop_mode_logging : Proc(IGPMConstants*, GPMRSOPMode*, HRESULT)
-    get_entry_type_user : Proc(IGPMConstants*, GPMEntryType*, HRESULT)
-    get_entry_type_computer : Proc(IGPMConstants*, GPMEntryType*, HRESULT)
-    get_entry_type_local_group : Proc(IGPMConstants*, GPMEntryType*, HRESULT)
-    get_entry_type_global_group : Proc(IGPMConstants*, GPMEntryType*, HRESULT)
-    get_entry_type_universal_group : Proc(IGPMConstants*, GPMEntryType*, HRESULT)
-    get_entry_type_unc_path : Proc(IGPMConstants*, GPMEntryType*, HRESULT)
-    get_entry_type_unknown : Proc(IGPMConstants*, GPMEntryType*, HRESULT)
-    get_destination_option_same_as_source : Proc(IGPMConstants*, GPMDestinationOption*, HRESULT)
-    get_destination_option_none : Proc(IGPMConstants*, GPMDestinationOption*, HRESULT)
-    get_destination_option_by_relative_name : Proc(IGPMConstants*, GPMDestinationOption*, HRESULT)
-    get_destination_option_set : Proc(IGPMConstants*, GPMDestinationOption*, HRESULT)
-    get_migration_table_only : Proc(IGPMConstants*, Int32*, HRESULT)
-    get_process_security : Proc(IGPMConstants*, Int32*, HRESULT)
-    get_rsop_logging_no_computer : Proc(IGPMConstants*, Int32*, HRESULT)
-    get_rsop_logging_no_user : Proc(IGPMConstants*, Int32*, HRESULT)
-    get_rsop_planning_assume_slow_link : Proc(IGPMConstants*, Int32*, HRESULT)
-    get_rsop_planning_loopback_option : Proc(IGPMConstants*, Int16, Int32*, HRESULT)
-    get_rsop_planning_assume_user_wql_filter_true : Proc(IGPMConstants*, Int32*, HRESULT)
-    get_rsop_planning_assume_comp_wql_filter_true : Proc(IGPMConstants*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_perm_gpo_apply : UInt64
+    get_perm_gpo_read : UInt64
+    get_perm_gpo_edit : UInt64
+    get_perm_gpo_edit_security_and_delete : UInt64
+    get_perm_gpo_custom : UInt64
+    get_perm_wmi_filter_edit : UInt64
+    get_perm_wmi_filter_full_control : UInt64
+    get_perm_wmi_filter_custom : UInt64
+    get_perm_som_link : UInt64
+    get_perm_som_logging : UInt64
+    get_perm_som_planning : UInt64
+    get_perm_somgpo_create : UInt64
+    get_perm_somwmi_create : UInt64
+    get_perm_somwmi_full_control : UInt64
+    get_search_property_gpo_permissions : UInt64
+    get_search_property_gpo_effective_permissions : UInt64
+    get_search_property_gpo_display_name : UInt64
+    get_search_property_gpowmi_filter : UInt64
+    get_search_property_gpoid : UInt64
+    get_search_property_gpo_computer_extensions : UInt64
+    get_search_property_gpo_user_extensions : UInt64
+    get_search_property_som_links : UInt64
+    get_search_property_gpo_domain : UInt64
+    get_search_property_backup_most_recent : UInt64
+    get_search_op_equals : UInt64
+    get_search_op_contains : UInt64
+    get_search_op_not_contains : UInt64
+    get_search_op_not_equals : UInt64
+    get_use_pdc : UInt64
+    get_use_any_dc : UInt64
+    get_do_not_use_w2_kdc : UInt64
+    get_som_site : UInt64
+    get_som_domain : UInt64
+    get_somou : UInt64
+    get_security_flags : UInt64
+    get_do_not_validate_dc : UInt64
+    get_report_html : UInt64
+    get_report_xml : UInt64
+    get_rsop_mode_unknown : UInt64
+    get_rsop_mode_planning : UInt64
+    get_rsop_mode_logging : UInt64
+    get_entry_type_user : UInt64
+    get_entry_type_computer : UInt64
+    get_entry_type_local_group : UInt64
+    get_entry_type_global_group : UInt64
+    get_entry_type_universal_group : UInt64
+    get_entry_type_unc_path : UInt64
+    get_entry_type_unknown : UInt64
+    get_destination_option_same_as_source : UInt64
+    get_destination_option_none : UInt64
+    get_destination_option_by_relative_name : UInt64
+    get_destination_option_set : UInt64
+    get_migration_table_only : UInt64
+    get_process_security : UInt64
+    get_rsop_logging_no_computer : UInt64
+    get_rsop_logging_no_user : UInt64
+    get_rsop_planning_assume_slow_link : UInt64
+    get_rsop_planning_loopback_option : UInt64
+    get_rsop_planning_assume_user_wql_filter_true : UInt64
+    get_rsop_planning_assume_comp_wql_filter_true : UInt64
   end
 
   IGPMConstants_GUID = "50ef73e6-d35c-4c8d-be63-7ea5d2aac5c4"
@@ -1066,16 +1066,16 @@ lib LibWin32
   end
 
   struct IGPMResultVTbl
-    query_interface : Proc(IGPMResult*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMResult*, UInt32)
-    release : Proc(IGPMResult*, UInt32)
-    get_type_info_count : Proc(IGPMResult*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMResult*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMResult*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMResult*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_status : Proc(IGPMResult*, IGPMStatusMsgCollection*, HRESULT)
-    get_result : Proc(IGPMResult*, VARIANT*, HRESULT)
-    overall_status : Proc(IGPMResult*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_status : UInt64
+    get_result : UInt64
+    overall_status : UInt64
   end
 
   IGPMResult_GUID = "86dff7e9-f76f-42ab-9570-cebc6be8a52d"
@@ -1085,16 +1085,16 @@ lib LibWin32
   end
 
   struct IGPMMapEntryCollectionVTbl
-    query_interface : Proc(IGPMMapEntryCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMMapEntryCollection*, UInt32)
-    release : Proc(IGPMMapEntryCollection*, UInt32)
-    get_type_info_count : Proc(IGPMMapEntryCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMMapEntryCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMMapEntryCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMMapEntryCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IGPMMapEntryCollection*, Int32*, HRESULT)
-    get_item : Proc(IGPMMapEntryCollection*, Int32, VARIANT*, HRESULT)
-    get__new_enum : Proc(IGPMMapEntryCollection*, IEnumVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    get_item : UInt64
+    get__new_enum : UInt64
   end
 
   IGPMMapEntryCollection_GUID = "bb0bf49b-e53f-443f-b807-8be22bfb6d42"
@@ -1104,17 +1104,17 @@ lib LibWin32
   end
 
   struct IGPMMapEntryVTbl
-    query_interface : Proc(IGPMMapEntry*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMMapEntry*, UInt32)
-    release : Proc(IGPMMapEntry*, UInt32)
-    get_type_info_count : Proc(IGPMMapEntry*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMMapEntry*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMMapEntry*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMMapEntry*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_source : Proc(IGPMMapEntry*, UInt8**, HRESULT)
-    get_destination : Proc(IGPMMapEntry*, UInt8**, HRESULT)
-    get_destination_option : Proc(IGPMMapEntry*, GPMDestinationOption*, HRESULT)
-    get_entry_type : Proc(IGPMMapEntry*, GPMEntryType*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_source : UInt64
+    get_destination : UInt64
+    get_destination_option : UInt64
+    get_entry_type : UInt64
   end
 
   IGPMMapEntry_GUID = "8e79ad06-2381-4444-be4c-ff693e6e6f2b"
@@ -1124,21 +1124,21 @@ lib LibWin32
   end
 
   struct IGPMMigrationTableVTbl
-    query_interface : Proc(IGPMMigrationTable*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMMigrationTable*, UInt32)
-    release : Proc(IGPMMigrationTable*, UInt32)
-    get_type_info_count : Proc(IGPMMigrationTable*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMMigrationTable*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMMigrationTable*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMMigrationTable*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    save : Proc(IGPMMigrationTable*, UInt8*, HRESULT)
-    add : Proc(IGPMMigrationTable*, Int32, VARIANT, HRESULT)
-    add_entry : Proc(IGPMMigrationTable*, UInt8*, GPMEntryType, VARIANT*, IGPMMapEntry*, HRESULT)
-    get_entry : Proc(IGPMMigrationTable*, UInt8*, IGPMMapEntry*, HRESULT)
-    delete_entry : Proc(IGPMMigrationTable*, UInt8*, HRESULT)
-    update_destination : Proc(IGPMMigrationTable*, UInt8*, VARIANT*, IGPMMapEntry*, HRESULT)
-    validate : Proc(IGPMMigrationTable*, IGPMResult*, HRESULT)
-    get_entries : Proc(IGPMMigrationTable*, IGPMMapEntryCollection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    save : UInt64
+    add : UInt64
+    add_entry : UInt64
+    get_entry : UInt64
+    delete_entry : UInt64
+    update_destination : UInt64
+    validate : UInt64
+    get_entries : UInt64
   end
 
   IGPMMigrationTable_GUID = "48f823b1-efaf-470b-b6ed-40d14ee1a4ec"
@@ -1148,17 +1148,17 @@ lib LibWin32
   end
 
   struct IGPMBackupDirExVTbl
-    query_interface : Proc(IGPMBackupDirEx*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMBackupDirEx*, UInt32)
-    release : Proc(IGPMBackupDirEx*, UInt32)
-    get_type_info_count : Proc(IGPMBackupDirEx*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMBackupDirEx*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMBackupDirEx*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMBackupDirEx*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_backup_dir : Proc(IGPMBackupDirEx*, UInt8**, HRESULT)
-    get_backup_type : Proc(IGPMBackupDirEx*, GPMBackupType*, HRESULT)
-    get_backup : Proc(IGPMBackupDirEx*, UInt8*, VARIANT*, HRESULT)
-    search_backups : Proc(IGPMBackupDirEx*, IGPMSearchCriteria, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_backup_dir : UInt64
+    get_backup_type : UInt64
+    get_backup : UInt64
+    search_backups : UInt64
   end
 
   IGPMBackupDirEx_GUID = "f8dc55ed-3ba0-4864-aad4-d365189ee1d5"
@@ -1168,16 +1168,16 @@ lib LibWin32
   end
 
   struct IGPMStarterGPOBackupCollectionVTbl
-    query_interface : Proc(IGPMStarterGPOBackupCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMStarterGPOBackupCollection*, UInt32)
-    release : Proc(IGPMStarterGPOBackupCollection*, UInt32)
-    get_type_info_count : Proc(IGPMStarterGPOBackupCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMStarterGPOBackupCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMStarterGPOBackupCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMStarterGPOBackupCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IGPMStarterGPOBackupCollection*, Int32*, HRESULT)
-    get_item : Proc(IGPMStarterGPOBackupCollection*, Int32, VARIANT*, HRESULT)
-    get__new_enum : Proc(IGPMStarterGPOBackupCollection*, IEnumVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    get_item : UInt64
+    get__new_enum : UInt64
   end
 
   IGPMStarterGPOBackupCollection_GUID = "c998031d-add0-4bb5-8dea-298505d8423b"
@@ -1187,24 +1187,24 @@ lib LibWin32
   end
 
   struct IGPMStarterGPOBackupVTbl
-    query_interface : Proc(IGPMStarterGPOBackup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMStarterGPOBackup*, UInt32)
-    release : Proc(IGPMStarterGPOBackup*, UInt32)
-    get_type_info_count : Proc(IGPMStarterGPOBackup*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMStarterGPOBackup*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMStarterGPOBackup*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMStarterGPOBackup*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_backup_dir : Proc(IGPMStarterGPOBackup*, UInt8**, HRESULT)
-    get_comment : Proc(IGPMStarterGPOBackup*, UInt8**, HRESULT)
-    get_display_name : Proc(IGPMStarterGPOBackup*, UInt8**, HRESULT)
-    get_domain : Proc(IGPMStarterGPOBackup*, UInt8**, HRESULT)
-    get_starter_gpoid : Proc(IGPMStarterGPOBackup*, UInt8**, HRESULT)
-    get_id : Proc(IGPMStarterGPOBackup*, UInt8**, HRESULT)
-    get_timestamp : Proc(IGPMStarterGPOBackup*, Float64*, HRESULT)
-    get_type : Proc(IGPMStarterGPOBackup*, GPMStarterGPOType*, HRESULT)
-    delete : Proc(IGPMStarterGPOBackup*, HRESULT)
-    generate_report : Proc(IGPMStarterGPOBackup*, GPMReportType, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    generate_report_to_file : Proc(IGPMStarterGPOBackup*, GPMReportType, UInt8*, IGPMResult*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_backup_dir : UInt64
+    get_comment : UInt64
+    get_display_name : UInt64
+    get_domain : UInt64
+    get_starter_gpoid : UInt64
+    get_id : UInt64
+    get_timestamp : UInt64
+    get_type : UInt64
+    delete : UInt64
+    generate_report : UInt64
+    generate_report_to_file : UInt64
   end
 
   IGPMStarterGPOBackup_GUID = "51d98eda-a87e-43dd-b80a-0b66ef1938d6"
@@ -1214,27 +1214,27 @@ lib LibWin32
   end
 
   struct IGPM2VTbl
-    query_interface : Proc(IGPM2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPM2*, UInt32)
-    release : Proc(IGPM2*, UInt32)
-    get_type_info_count : Proc(IGPM2*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPM2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPM2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPM2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_domain : Proc(IGPM2*, UInt8*, UInt8*, Int32, IGPMDomain*, HRESULT)
-    get_backup_dir : Proc(IGPM2*, UInt8*, IGPMBackupDir*, HRESULT)
-    get_sites_container : Proc(IGPM2*, UInt8*, UInt8*, UInt8*, Int32, IGPMSitesContainer*, HRESULT)
-    get_rsop : Proc(IGPM2*, GPMRSOPMode, UInt8*, Int32, IGPMRSOP*, HRESULT)
-    create_permission : Proc(IGPM2*, UInt8*, GPMPermissionType, Int16, IGPMPermission*, HRESULT)
-    create_search_criteria : Proc(IGPM2*, IGPMSearchCriteria*, HRESULT)
-    create_trustee : Proc(IGPM2*, UInt8*, IGPMTrustee*, HRESULT)
-    get_client_side_extensions : Proc(IGPM2*, IGPMCSECollection*, HRESULT)
-    get_constants : Proc(IGPM2*, IGPMConstants*, HRESULT)
-    get_migration_table : Proc(IGPM2*, UInt8*, IGPMMigrationTable*, HRESULT)
-    create_migration_table : Proc(IGPM2*, IGPMMigrationTable*, HRESULT)
-    initialize_reporting : Proc(IGPM2*, UInt8*, HRESULT)
-    get_backup_dir_ex : Proc(IGPM2*, UInt8*, GPMBackupType, IGPMBackupDirEx*, HRESULT)
-    initialize_reporting_ex : Proc(IGPM2*, UInt8*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_domain : UInt64
+    get_backup_dir : UInt64
+    get_sites_container : UInt64
+    get_rsop : UInt64
+    create_permission : UInt64
+    create_search_criteria : UInt64
+    create_trustee : UInt64
+    get_client_side_extensions : UInt64
+    get_constants : UInt64
+    get_migration_table : UInt64
+    create_migration_table : UInt64
+    initialize_reporting : UInt64
+    get_backup_dir_ex : UInt64
+    initialize_reporting_ex : UInt64
   end
 
   IGPM2_GUID = "00238f8a-3d86-41ac-8f5e-06a6638a634a"
@@ -1244,34 +1244,34 @@ lib LibWin32
   end
 
   struct IGPMStarterGPOVTbl
-    query_interface : Proc(IGPMStarterGPO*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMStarterGPO*, UInt32)
-    release : Proc(IGPMStarterGPO*, UInt32)
-    get_type_info_count : Proc(IGPMStarterGPO*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMStarterGPO*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMStarterGPO*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMStarterGPO*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_display_name : Proc(IGPMStarterGPO*, UInt8**, HRESULT)
-    put_display_name : Proc(IGPMStarterGPO*, UInt8*, HRESULT)
-    get_description : Proc(IGPMStarterGPO*, UInt8**, HRESULT)
-    put_description : Proc(IGPMStarterGPO*, UInt8*, HRESULT)
-    get_author : Proc(IGPMStarterGPO*, UInt8**, HRESULT)
-    get_product : Proc(IGPMStarterGPO*, UInt8**, HRESULT)
-    get_creation_time : Proc(IGPMStarterGPO*, Float64*, HRESULT)
-    get_id : Proc(IGPMStarterGPO*, UInt8**, HRESULT)
-    get_modified_time : Proc(IGPMStarterGPO*, Float64*, HRESULT)
-    get_type : Proc(IGPMStarterGPO*, GPMStarterGPOType*, HRESULT)
-    get_computer_version : Proc(IGPMStarterGPO*, UInt16*, HRESULT)
-    get_user_version : Proc(IGPMStarterGPO*, UInt16*, HRESULT)
-    get_starter_gpo_version : Proc(IGPMStarterGPO*, UInt8**, HRESULT)
-    delete : Proc(IGPMStarterGPO*, HRESULT)
-    save : Proc(IGPMStarterGPO*, UInt8*, Int16, Int16, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    backup : Proc(IGPMStarterGPO*, UInt8*, UInt8*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    copy_to : Proc(IGPMStarterGPO*, VARIANT*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    generate_report : Proc(IGPMStarterGPO*, GPMReportType, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    generate_report_to_file : Proc(IGPMStarterGPO*, GPMReportType, UInt8*, IGPMResult*, HRESULT)
-    get_security_info : Proc(IGPMStarterGPO*, IGPMSecurityInfo*, HRESULT)
-    set_security_info : Proc(IGPMStarterGPO*, IGPMSecurityInfo, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_display_name : UInt64
+    put_display_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_author : UInt64
+    get_product : UInt64
+    get_creation_time : UInt64
+    get_id : UInt64
+    get_modified_time : UInt64
+    get_type : UInt64
+    get_computer_version : UInt64
+    get_user_version : UInt64
+    get_starter_gpo_version : UInt64
+    delete : UInt64
+    save : UInt64
+    backup : UInt64
+    copy_to : UInt64
+    generate_report : UInt64
+    generate_report_to_file : UInt64
+    get_security_info : UInt64
+    set_security_info : UInt64
   end
 
   IGPMStarterGPO_GUID = "dfc3f61b-8880-4490-9337-d29c7ba8c2f0"
@@ -1281,16 +1281,16 @@ lib LibWin32
   end
 
   struct IGPMStarterGPOCollectionVTbl
-    query_interface : Proc(IGPMStarterGPOCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMStarterGPOCollection*, UInt32)
-    release : Proc(IGPMStarterGPOCollection*, UInt32)
-    get_type_info_count : Proc(IGPMStarterGPOCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMStarterGPOCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMStarterGPOCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMStarterGPOCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IGPMStarterGPOCollection*, Int32*, HRESULT)
-    get_item : Proc(IGPMStarterGPOCollection*, Int32, VARIANT*, HRESULT)
-    get__new_enum : Proc(IGPMStarterGPOCollection*, IEnumVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    get_item : UInt64
+    get__new_enum : UInt64
   end
 
   IGPMStarterGPOCollection_GUID = "2e522729-2219-44ad-933a-64dfd650c423"
@@ -1300,29 +1300,29 @@ lib LibWin32
   end
 
   struct IGPMDomain2VTbl
-    query_interface : Proc(IGPMDomain2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMDomain2*, UInt32)
-    release : Proc(IGPMDomain2*, UInt32)
-    get_type_info_count : Proc(IGPMDomain2*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMDomain2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMDomain2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMDomain2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_domain_controller : Proc(IGPMDomain2*, UInt8**, HRESULT)
-    get_domain : Proc(IGPMDomain2*, UInt8**, HRESULT)
-    create_gpo : Proc(IGPMDomain2*, IGPMGPO*, HRESULT)
-    get_gpo : Proc(IGPMDomain2*, UInt8*, IGPMGPO*, HRESULT)
-    search_gp_os : Proc(IGPMDomain2*, IGPMSearchCriteria, IGPMGPOCollection*, HRESULT)
-    restore_gpo : Proc(IGPMDomain2*, IGPMBackup, Int32, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    get_som : Proc(IGPMDomain2*, UInt8*, IGPMSOM*, HRESULT)
-    search_so_ms : Proc(IGPMDomain2*, IGPMSearchCriteria, IGPMSOMCollection*, HRESULT)
-    get_wmi_filter : Proc(IGPMDomain2*, UInt8*, IGPMWMIFilter*, HRESULT)
-    search_wmi_filters : Proc(IGPMDomain2*, IGPMSearchCriteria, IGPMWMIFilterCollection*, HRESULT)
-    create_starter_gpo : Proc(IGPMDomain2*, IGPMStarterGPO*, HRESULT)
-    create_gpo_from_starter_gpo : Proc(IGPMDomain2*, IGPMStarterGPO, IGPMGPO*, HRESULT)
-    get_starter_gpo : Proc(IGPMDomain2*, UInt8*, IGPMStarterGPO*, HRESULT)
-    search_starter_gp_os : Proc(IGPMDomain2*, IGPMSearchCriteria, IGPMStarterGPOCollection*, HRESULT)
-    load_starter_gpo : Proc(IGPMDomain2*, UInt8*, Int16, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    restore_starter_gpo : Proc(IGPMDomain2*, IGPMStarterGPOBackup, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_domain_controller : UInt64
+    get_domain : UInt64
+    create_gpo : UInt64
+    get_gpo : UInt64
+    search_gp_os : UInt64
+    restore_gpo : UInt64
+    get_som : UInt64
+    search_so_ms : UInt64
+    get_wmi_filter : UInt64
+    search_wmi_filters : UInt64
+    create_starter_gpo : UInt64
+    create_gpo_from_starter_gpo : UInt64
+    get_starter_gpo : UInt64
+    search_starter_gp_os : UInt64
+    load_starter_gpo : UInt64
+    restore_starter_gpo : UInt64
   end
 
   IGPMDomain2_GUID = "7ca6bb8b-f1eb-490a-938d-3c4e51c768e6"
@@ -1332,88 +1332,88 @@ lib LibWin32
   end
 
   struct IGPMConstants2VTbl
-    query_interface : Proc(IGPMConstants2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMConstants2*, UInt32)
-    release : Proc(IGPMConstants2*, UInt32)
-    get_type_info_count : Proc(IGPMConstants2*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMConstants2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMConstants2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMConstants2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_perm_gpo_apply : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_perm_gpo_read : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_perm_gpo_edit : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_perm_gpo_edit_security_and_delete : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_perm_gpo_custom : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_perm_wmi_filter_edit : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_perm_wmi_filter_full_control : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_perm_wmi_filter_custom : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_perm_som_link : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_perm_som_logging : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_perm_som_planning : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_perm_somgpo_create : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_perm_somwmi_create : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_perm_somwmi_full_control : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_search_property_gpo_permissions : Proc(IGPMConstants2*, GPMSearchProperty*, HRESULT)
-    get_search_property_gpo_effective_permissions : Proc(IGPMConstants2*, GPMSearchProperty*, HRESULT)
-    get_search_property_gpo_display_name : Proc(IGPMConstants2*, GPMSearchProperty*, HRESULT)
-    get_search_property_gpowmi_filter : Proc(IGPMConstants2*, GPMSearchProperty*, HRESULT)
-    get_search_property_gpoid : Proc(IGPMConstants2*, GPMSearchProperty*, HRESULT)
-    get_search_property_gpo_computer_extensions : Proc(IGPMConstants2*, GPMSearchProperty*, HRESULT)
-    get_search_property_gpo_user_extensions : Proc(IGPMConstants2*, GPMSearchProperty*, HRESULT)
-    get_search_property_som_links : Proc(IGPMConstants2*, GPMSearchProperty*, HRESULT)
-    get_search_property_gpo_domain : Proc(IGPMConstants2*, GPMSearchProperty*, HRESULT)
-    get_search_property_backup_most_recent : Proc(IGPMConstants2*, GPMSearchProperty*, HRESULT)
-    get_search_op_equals : Proc(IGPMConstants2*, GPMSearchOperation*, HRESULT)
-    get_search_op_contains : Proc(IGPMConstants2*, GPMSearchOperation*, HRESULT)
-    get_search_op_not_contains : Proc(IGPMConstants2*, GPMSearchOperation*, HRESULT)
-    get_search_op_not_equals : Proc(IGPMConstants2*, GPMSearchOperation*, HRESULT)
-    get_use_pdc : Proc(IGPMConstants2*, Int32*, HRESULT)
-    get_use_any_dc : Proc(IGPMConstants2*, Int32*, HRESULT)
-    get_do_not_use_w2_kdc : Proc(IGPMConstants2*, Int32*, HRESULT)
-    get_som_site : Proc(IGPMConstants2*, GPMSOMType*, HRESULT)
-    get_som_domain : Proc(IGPMConstants2*, GPMSOMType*, HRESULT)
-    get_somou : Proc(IGPMConstants2*, GPMSOMType*, HRESULT)
-    get_security_flags : Proc(IGPMConstants2*, Int16, Int16, Int16, Int16, Int32*, HRESULT)
-    get_do_not_validate_dc : Proc(IGPMConstants2*, Int32*, HRESULT)
-    get_report_html : Proc(IGPMConstants2*, GPMReportType*, HRESULT)
-    get_report_xml : Proc(IGPMConstants2*, GPMReportType*, HRESULT)
-    get_rsop_mode_unknown : Proc(IGPMConstants2*, GPMRSOPMode*, HRESULT)
-    get_rsop_mode_planning : Proc(IGPMConstants2*, GPMRSOPMode*, HRESULT)
-    get_rsop_mode_logging : Proc(IGPMConstants2*, GPMRSOPMode*, HRESULT)
-    get_entry_type_user : Proc(IGPMConstants2*, GPMEntryType*, HRESULT)
-    get_entry_type_computer : Proc(IGPMConstants2*, GPMEntryType*, HRESULT)
-    get_entry_type_local_group : Proc(IGPMConstants2*, GPMEntryType*, HRESULT)
-    get_entry_type_global_group : Proc(IGPMConstants2*, GPMEntryType*, HRESULT)
-    get_entry_type_universal_group : Proc(IGPMConstants2*, GPMEntryType*, HRESULT)
-    get_entry_type_unc_path : Proc(IGPMConstants2*, GPMEntryType*, HRESULT)
-    get_entry_type_unknown : Proc(IGPMConstants2*, GPMEntryType*, HRESULT)
-    get_destination_option_same_as_source : Proc(IGPMConstants2*, GPMDestinationOption*, HRESULT)
-    get_destination_option_none : Proc(IGPMConstants2*, GPMDestinationOption*, HRESULT)
-    get_destination_option_by_relative_name : Proc(IGPMConstants2*, GPMDestinationOption*, HRESULT)
-    get_destination_option_set : Proc(IGPMConstants2*, GPMDestinationOption*, HRESULT)
-    get_migration_table_only : Proc(IGPMConstants2*, Int32*, HRESULT)
-    get_process_security : Proc(IGPMConstants2*, Int32*, HRESULT)
-    get_rsop_logging_no_computer : Proc(IGPMConstants2*, Int32*, HRESULT)
-    get_rsop_logging_no_user : Proc(IGPMConstants2*, Int32*, HRESULT)
-    get_rsop_planning_assume_slow_link : Proc(IGPMConstants2*, Int32*, HRESULT)
-    get_rsop_planning_loopback_option : Proc(IGPMConstants2*, Int16, Int32*, HRESULT)
-    get_rsop_planning_assume_user_wql_filter_true : Proc(IGPMConstants2*, Int32*, HRESULT)
-    get_rsop_planning_assume_comp_wql_filter_true : Proc(IGPMConstants2*, Int32*, HRESULT)
-    get_backup_type_gpo : Proc(IGPMConstants2*, GPMBackupType*, HRESULT)
-    get_backup_type_starter_gpo : Proc(IGPMConstants2*, GPMBackupType*, HRESULT)
-    get_starter_gpo_type_system : Proc(IGPMConstants2*, GPMStarterGPOType*, HRESULT)
-    get_starter_gpo_type_custom : Proc(IGPMConstants2*, GPMStarterGPOType*, HRESULT)
-    get_search_property_starter_gpo_permissions : Proc(IGPMConstants2*, GPMSearchProperty*, HRESULT)
-    get_search_property_starter_gpo_effective_permissions : Proc(IGPMConstants2*, GPMSearchProperty*, HRESULT)
-    get_search_property_starter_gpo_display_name : Proc(IGPMConstants2*, GPMSearchProperty*, HRESULT)
-    get_search_property_starter_gpoid : Proc(IGPMConstants2*, GPMSearchProperty*, HRESULT)
-    get_search_property_starter_gpo_domain : Proc(IGPMConstants2*, GPMSearchProperty*, HRESULT)
-    get_perm_starter_gpo_read : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_perm_starter_gpo_edit : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_perm_starter_gpo_full_control : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_perm_starter_gpo_custom : Proc(IGPMConstants2*, GPMPermissionType*, HRESULT)
-    get_report_legacy : Proc(IGPMConstants2*, GPMReportingOptions*, HRESULT)
-    get_report_comments : Proc(IGPMConstants2*, GPMReportingOptions*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_perm_gpo_apply : UInt64
+    get_perm_gpo_read : UInt64
+    get_perm_gpo_edit : UInt64
+    get_perm_gpo_edit_security_and_delete : UInt64
+    get_perm_gpo_custom : UInt64
+    get_perm_wmi_filter_edit : UInt64
+    get_perm_wmi_filter_full_control : UInt64
+    get_perm_wmi_filter_custom : UInt64
+    get_perm_som_link : UInt64
+    get_perm_som_logging : UInt64
+    get_perm_som_planning : UInt64
+    get_perm_somgpo_create : UInt64
+    get_perm_somwmi_create : UInt64
+    get_perm_somwmi_full_control : UInt64
+    get_search_property_gpo_permissions : UInt64
+    get_search_property_gpo_effective_permissions : UInt64
+    get_search_property_gpo_display_name : UInt64
+    get_search_property_gpowmi_filter : UInt64
+    get_search_property_gpoid : UInt64
+    get_search_property_gpo_computer_extensions : UInt64
+    get_search_property_gpo_user_extensions : UInt64
+    get_search_property_som_links : UInt64
+    get_search_property_gpo_domain : UInt64
+    get_search_property_backup_most_recent : UInt64
+    get_search_op_equals : UInt64
+    get_search_op_contains : UInt64
+    get_search_op_not_contains : UInt64
+    get_search_op_not_equals : UInt64
+    get_use_pdc : UInt64
+    get_use_any_dc : UInt64
+    get_do_not_use_w2_kdc : UInt64
+    get_som_site : UInt64
+    get_som_domain : UInt64
+    get_somou : UInt64
+    get_security_flags : UInt64
+    get_do_not_validate_dc : UInt64
+    get_report_html : UInt64
+    get_report_xml : UInt64
+    get_rsop_mode_unknown : UInt64
+    get_rsop_mode_planning : UInt64
+    get_rsop_mode_logging : UInt64
+    get_entry_type_user : UInt64
+    get_entry_type_computer : UInt64
+    get_entry_type_local_group : UInt64
+    get_entry_type_global_group : UInt64
+    get_entry_type_universal_group : UInt64
+    get_entry_type_unc_path : UInt64
+    get_entry_type_unknown : UInt64
+    get_destination_option_same_as_source : UInt64
+    get_destination_option_none : UInt64
+    get_destination_option_by_relative_name : UInt64
+    get_destination_option_set : UInt64
+    get_migration_table_only : UInt64
+    get_process_security : UInt64
+    get_rsop_logging_no_computer : UInt64
+    get_rsop_logging_no_user : UInt64
+    get_rsop_planning_assume_slow_link : UInt64
+    get_rsop_planning_loopback_option : UInt64
+    get_rsop_planning_assume_user_wql_filter_true : UInt64
+    get_rsop_planning_assume_comp_wql_filter_true : UInt64
+    get_backup_type_gpo : UInt64
+    get_backup_type_starter_gpo : UInt64
+    get_starter_gpo_type_system : UInt64
+    get_starter_gpo_type_custom : UInt64
+    get_search_property_starter_gpo_permissions : UInt64
+    get_search_property_starter_gpo_effective_permissions : UInt64
+    get_search_property_starter_gpo_display_name : UInt64
+    get_search_property_starter_gpoid : UInt64
+    get_search_property_starter_gpo_domain : UInt64
+    get_perm_starter_gpo_read : UInt64
+    get_perm_starter_gpo_edit : UInt64
+    get_perm_starter_gpo_full_control : UInt64
+    get_perm_starter_gpo_custom : UInt64
+    get_report_legacy : UInt64
+    get_report_comments : UInt64
   end
 
   IGPMConstants2_GUID = "05ae21b0-ac09-4032-a26f-9e7da786dc19"
@@ -1423,44 +1423,44 @@ lib LibWin32
   end
 
   struct IGPMGPO2VTbl
-    query_interface : Proc(IGPMGPO2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMGPO2*, UInt32)
-    release : Proc(IGPMGPO2*, UInt32)
-    get_type_info_count : Proc(IGPMGPO2*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMGPO2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMGPO2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMGPO2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_display_name : Proc(IGPMGPO2*, UInt8**, HRESULT)
-    put_display_name : Proc(IGPMGPO2*, UInt8*, HRESULT)
-    get_path : Proc(IGPMGPO2*, UInt8**, HRESULT)
-    get_id : Proc(IGPMGPO2*, UInt8**, HRESULT)
-    get_domain_name : Proc(IGPMGPO2*, UInt8**, HRESULT)
-    get_creation_time : Proc(IGPMGPO2*, Float64*, HRESULT)
-    get_modification_time : Proc(IGPMGPO2*, Float64*, HRESULT)
-    get_user_ds_version_number : Proc(IGPMGPO2*, Int32*, HRESULT)
-    get_computer_ds_version_number : Proc(IGPMGPO2*, Int32*, HRESULT)
-    get_user_sysvol_version_number : Proc(IGPMGPO2*, Int32*, HRESULT)
-    get_computer_sysvol_version_number : Proc(IGPMGPO2*, Int32*, HRESULT)
-    get_wmi_filter : Proc(IGPMGPO2*, IGPMWMIFilter*, HRESULT)
-    set_wmi_filter : Proc(IGPMGPO2*, IGPMWMIFilter, HRESULT)
-    set_user_enabled : Proc(IGPMGPO2*, Int16, HRESULT)
-    set_computer_enabled : Proc(IGPMGPO2*, Int16, HRESULT)
-    is_user_enabled : Proc(IGPMGPO2*, Int16*, HRESULT)
-    is_computer_enabled : Proc(IGPMGPO2*, Int16*, HRESULT)
-    get_security_info : Proc(IGPMGPO2*, IGPMSecurityInfo*, HRESULT)
-    set_security_info : Proc(IGPMGPO2*, IGPMSecurityInfo, HRESULT)
-    delete : Proc(IGPMGPO2*, HRESULT)
-    backup : Proc(IGPMGPO2*, UInt8*, UInt8*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    import : Proc(IGPMGPO2*, Int32, IGPMBackup, VARIANT*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    generate_report : Proc(IGPMGPO2*, GPMReportType, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    generate_report_to_file : Proc(IGPMGPO2*, GPMReportType, UInt8*, IGPMResult*, HRESULT)
-    copy_to : Proc(IGPMGPO2*, Int32, IGPMDomain, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    set_security_descriptor : Proc(IGPMGPO2*, Int32, IDispatch, HRESULT)
-    get_security_descriptor : Proc(IGPMGPO2*, Int32, IDispatch*, HRESULT)
-    is_acl_consistent : Proc(IGPMGPO2*, Int16*, HRESULT)
-    make_acl_consistent : Proc(IGPMGPO2*, HRESULT)
-    get_description : Proc(IGPMGPO2*, UInt8**, HRESULT)
-    put_description : Proc(IGPMGPO2*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_display_name : UInt64
+    put_display_name : UInt64
+    get_path : UInt64
+    get_id : UInt64
+    get_domain_name : UInt64
+    get_creation_time : UInt64
+    get_modification_time : UInt64
+    get_user_ds_version_number : UInt64
+    get_computer_ds_version_number : UInt64
+    get_user_sysvol_version_number : UInt64
+    get_computer_sysvol_version_number : UInt64
+    get_wmi_filter : UInt64
+    set_wmi_filter : UInt64
+    set_user_enabled : UInt64
+    set_computer_enabled : UInt64
+    is_user_enabled : UInt64
+    is_computer_enabled : UInt64
+    get_security_info : UInt64
+    set_security_info : UInt64
+    delete : UInt64
+    backup : UInt64
+    import : UInt64
+    generate_report : UInt64
+    generate_report_to_file : UInt64
+    copy_to : UInt64
+    set_security_descriptor : UInt64
+    get_security_descriptor : UInt64
+    is_acl_consistent : UInt64
+    make_acl_consistent : UInt64
+    get_description : UInt64
+    put_description : UInt64
   end
 
   IGPMGPO2_GUID = "8a66a210-b78b-4d99-88e2-c306a817c925"
@@ -1470,33 +1470,33 @@ lib LibWin32
   end
 
   struct IGPMDomain3VTbl
-    query_interface : Proc(IGPMDomain3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMDomain3*, UInt32)
-    release : Proc(IGPMDomain3*, UInt32)
-    get_type_info_count : Proc(IGPMDomain3*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMDomain3*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMDomain3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMDomain3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_domain_controller : Proc(IGPMDomain3*, UInt8**, HRESULT)
-    get_domain : Proc(IGPMDomain3*, UInt8**, HRESULT)
-    create_gpo : Proc(IGPMDomain3*, IGPMGPO*, HRESULT)
-    get_gpo : Proc(IGPMDomain3*, UInt8*, IGPMGPO*, HRESULT)
-    search_gp_os : Proc(IGPMDomain3*, IGPMSearchCriteria, IGPMGPOCollection*, HRESULT)
-    restore_gpo : Proc(IGPMDomain3*, IGPMBackup, Int32, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    get_som : Proc(IGPMDomain3*, UInt8*, IGPMSOM*, HRESULT)
-    search_so_ms : Proc(IGPMDomain3*, IGPMSearchCriteria, IGPMSOMCollection*, HRESULT)
-    get_wmi_filter : Proc(IGPMDomain3*, UInt8*, IGPMWMIFilter*, HRESULT)
-    search_wmi_filters : Proc(IGPMDomain3*, IGPMSearchCriteria, IGPMWMIFilterCollection*, HRESULT)
-    create_starter_gpo : Proc(IGPMDomain3*, IGPMStarterGPO*, HRESULT)
-    create_gpo_from_starter_gpo : Proc(IGPMDomain3*, IGPMStarterGPO, IGPMGPO*, HRESULT)
-    get_starter_gpo : Proc(IGPMDomain3*, UInt8*, IGPMStarterGPO*, HRESULT)
-    search_starter_gp_os : Proc(IGPMDomain3*, IGPMSearchCriteria, IGPMStarterGPOCollection*, HRESULT)
-    load_starter_gpo : Proc(IGPMDomain3*, UInt8*, Int16, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    restore_starter_gpo : Proc(IGPMDomain3*, IGPMStarterGPOBackup, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    generate_report : Proc(IGPMDomain3*, GPMReportType, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    get_infrastructure_dc : Proc(IGPMDomain3*, UInt8**, HRESULT)
-    put_infrastructure_dc : Proc(IGPMDomain3*, UInt8*, HRESULT)
-    put_infrastructure_flags : Proc(IGPMDomain3*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_domain_controller : UInt64
+    get_domain : UInt64
+    create_gpo : UInt64
+    get_gpo : UInt64
+    search_gp_os : UInt64
+    restore_gpo : UInt64
+    get_som : UInt64
+    search_so_ms : UInt64
+    get_wmi_filter : UInt64
+    search_wmi_filters : UInt64
+    create_starter_gpo : UInt64
+    create_gpo_from_starter_gpo : UInt64
+    get_starter_gpo : UInt64
+    search_starter_gp_os : UInt64
+    load_starter_gpo : UInt64
+    restore_starter_gpo : UInt64
+    generate_report : UInt64
+    get_infrastructure_dc : UInt64
+    put_infrastructure_dc : UInt64
+    put_infrastructure_flags : UInt64
   end
 
   IGPMDomain3_GUID = "0077fdfe-88c7-4acf-a11d-d10a7c310a03"
@@ -1506,47 +1506,47 @@ lib LibWin32
   end
 
   struct IGPMGPO3VTbl
-    query_interface : Proc(IGPMGPO3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPMGPO3*, UInt32)
-    release : Proc(IGPMGPO3*, UInt32)
-    get_type_info_count : Proc(IGPMGPO3*, UInt32*, HRESULT)
-    get_type_info : Proc(IGPMGPO3*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IGPMGPO3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IGPMGPO3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_display_name : Proc(IGPMGPO3*, UInt8**, HRESULT)
-    put_display_name : Proc(IGPMGPO3*, UInt8*, HRESULT)
-    get_path : Proc(IGPMGPO3*, UInt8**, HRESULT)
-    get_id : Proc(IGPMGPO3*, UInt8**, HRESULT)
-    get_domain_name : Proc(IGPMGPO3*, UInt8**, HRESULT)
-    get_creation_time : Proc(IGPMGPO3*, Float64*, HRESULT)
-    get_modification_time : Proc(IGPMGPO3*, Float64*, HRESULT)
-    get_user_ds_version_number : Proc(IGPMGPO3*, Int32*, HRESULT)
-    get_computer_ds_version_number : Proc(IGPMGPO3*, Int32*, HRESULT)
-    get_user_sysvol_version_number : Proc(IGPMGPO3*, Int32*, HRESULT)
-    get_computer_sysvol_version_number : Proc(IGPMGPO3*, Int32*, HRESULT)
-    get_wmi_filter : Proc(IGPMGPO3*, IGPMWMIFilter*, HRESULT)
-    set_wmi_filter : Proc(IGPMGPO3*, IGPMWMIFilter, HRESULT)
-    set_user_enabled : Proc(IGPMGPO3*, Int16, HRESULT)
-    set_computer_enabled : Proc(IGPMGPO3*, Int16, HRESULT)
-    is_user_enabled : Proc(IGPMGPO3*, Int16*, HRESULT)
-    is_computer_enabled : Proc(IGPMGPO3*, Int16*, HRESULT)
-    get_security_info : Proc(IGPMGPO3*, IGPMSecurityInfo*, HRESULT)
-    set_security_info : Proc(IGPMGPO3*, IGPMSecurityInfo, HRESULT)
-    delete : Proc(IGPMGPO3*, HRESULT)
-    backup : Proc(IGPMGPO3*, UInt8*, UInt8*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    import : Proc(IGPMGPO3*, Int32, IGPMBackup, VARIANT*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    generate_report : Proc(IGPMGPO3*, GPMReportType, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    generate_report_to_file : Proc(IGPMGPO3*, GPMReportType, UInt8*, IGPMResult*, HRESULT)
-    copy_to : Proc(IGPMGPO3*, Int32, IGPMDomain, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)
-    set_security_descriptor : Proc(IGPMGPO3*, Int32, IDispatch, HRESULT)
-    get_security_descriptor : Proc(IGPMGPO3*, Int32, IDispatch*, HRESULT)
-    is_acl_consistent : Proc(IGPMGPO3*, Int16*, HRESULT)
-    make_acl_consistent : Proc(IGPMGPO3*, HRESULT)
-    get_description : Proc(IGPMGPO3*, UInt8**, HRESULT)
-    put_description : Proc(IGPMGPO3*, UInt8*, HRESULT)
-    get_infrastructure_dc : Proc(IGPMGPO3*, UInt8**, HRESULT)
-    put_infrastructure_dc : Proc(IGPMGPO3*, UInt8*, HRESULT)
-    put_infrastructure_flags : Proc(IGPMGPO3*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_display_name : UInt64
+    put_display_name : UInt64
+    get_path : UInt64
+    get_id : UInt64
+    get_domain_name : UInt64
+    get_creation_time : UInt64
+    get_modification_time : UInt64
+    get_user_ds_version_number : UInt64
+    get_computer_ds_version_number : UInt64
+    get_user_sysvol_version_number : UInt64
+    get_computer_sysvol_version_number : UInt64
+    get_wmi_filter : UInt64
+    set_wmi_filter : UInt64
+    set_user_enabled : UInt64
+    set_computer_enabled : UInt64
+    is_user_enabled : UInt64
+    is_computer_enabled : UInt64
+    get_security_info : UInt64
+    set_security_info : UInt64
+    delete : UInt64
+    backup : UInt64
+    import : UInt64
+    generate_report : UInt64
+    generate_report_to_file : UInt64
+    copy_to : UInt64
+    set_security_descriptor : UInt64
+    get_security_descriptor : UInt64
+    is_acl_consistent : UInt64
+    make_acl_consistent : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_infrastructure_dc : UInt64
+    put_infrastructure_dc : UInt64
+    put_infrastructure_flags : UInt64
   end
 
   IGPMGPO3_GUID = "7cf123a1-f94a-4112-bfae-6aa1db9cb248"
@@ -1556,18 +1556,18 @@ lib LibWin32
   end
 
   struct IGPEInformationVTbl
-    query_interface : Proc(IGPEInformation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGPEInformation*, UInt32)
-    release : Proc(IGPEInformation*, UInt32)
-    get_name : Proc(IGPEInformation*, Char*, Int32, HRESULT)
-    get_display_name : Proc(IGPEInformation*, Char*, Int32, HRESULT)
-    get_registry_key : Proc(IGPEInformation*, UInt32, HKEY*, HRESULT)
-    get_ds_path : Proc(IGPEInformation*, UInt32, Char*, Int32, HRESULT)
-    get_file_sys_path : Proc(IGPEInformation*, UInt32, Char*, Int32, HRESULT)
-    get_options : Proc(IGPEInformation*, UInt32*, HRESULT)
-    get_type : Proc(IGPEInformation*, GROUP_POLICY_OBJECT_TYPE*, HRESULT)
-    get_hint : Proc(IGPEInformation*, GROUP_POLICY_HINT_TYPE*, HRESULT)
-    policy_changed : Proc(IGPEInformation*, LibC::BOOL, LibC::BOOL, Guid*, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_name : UInt64
+    get_display_name : UInt64
+    get_registry_key : UInt64
+    get_ds_path : UInt64
+    get_file_sys_path : UInt64
+    get_options : UInt64
+    get_type : UInt64
+    get_hint : UInt64
+    policy_changed : UInt64
   end
 
   IGPEInformation_GUID = "8fc0b735-a0e1-11d1-a7d3-0000f87571e3"
@@ -1577,27 +1577,27 @@ lib LibWin32
   end
 
   struct IGroupPolicyObjectVTbl
-    query_interface : Proc(IGroupPolicyObject*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGroupPolicyObject*, UInt32)
-    release : Proc(IGroupPolicyObject*, UInt32)
-    new : Proc(IGroupPolicyObject*, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
-    open_dsgpo : Proc(IGroupPolicyObject*, LibC::LPWSTR, UInt32, HRESULT)
-    open_local_machine_gpo : Proc(IGroupPolicyObject*, UInt32, HRESULT)
-    open_remote_machine_gpo : Proc(IGroupPolicyObject*, LibC::LPWSTR, UInt32, HRESULT)
-    save : Proc(IGroupPolicyObject*, LibC::BOOL, LibC::BOOL, Guid*, Guid*, HRESULT)
-    delete : Proc(IGroupPolicyObject*, HRESULT)
-    get_name : Proc(IGroupPolicyObject*, Char*, Int32, HRESULT)
-    get_display_name : Proc(IGroupPolicyObject*, Char*, Int32, HRESULT)
-    set_display_name : Proc(IGroupPolicyObject*, LibC::LPWSTR, HRESULT)
-    get_path : Proc(IGroupPolicyObject*, Char*, Int32, HRESULT)
-    get_ds_path : Proc(IGroupPolicyObject*, UInt32, Char*, Int32, HRESULT)
-    get_file_sys_path : Proc(IGroupPolicyObject*, UInt32, Char*, Int32, HRESULT)
-    get_registry_key : Proc(IGroupPolicyObject*, UInt32, HKEY*, HRESULT)
-    get_options : Proc(IGroupPolicyObject*, UInt32*, HRESULT)
-    set_options : Proc(IGroupPolicyObject*, UInt32, UInt32, HRESULT)
-    get_type : Proc(IGroupPolicyObject*, GROUP_POLICY_OBJECT_TYPE*, HRESULT)
-    get_machine_name : Proc(IGroupPolicyObject*, Char*, Int32, HRESULT)
-    get_property_sheet_pages : Proc(IGroupPolicyObject*, HPROPSHEETPAGE**, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    new : UInt64
+    open_dsgpo : UInt64
+    open_local_machine_gpo : UInt64
+    open_remote_machine_gpo : UInt64
+    save : UInt64
+    delete : UInt64
+    get_name : UInt64
+    get_display_name : UInt64
+    set_display_name : UInt64
+    get_path : UInt64
+    get_ds_path : UInt64
+    get_file_sys_path : UInt64
+    get_registry_key : UInt64
+    get_options : UInt64
+    set_options : UInt64
+    get_type : UInt64
+    get_machine_name : UInt64
+    get_property_sheet_pages : UInt64
   end
 
   IGroupPolicyObject_GUID = "ea502723-a23d-11d1-a7d3-0000f87571e3"
@@ -1607,12 +1607,12 @@ lib LibWin32
   end
 
   struct IRSOPInformationVTbl
-    query_interface : Proc(IRSOPInformation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRSOPInformation*, UInt32)
-    release : Proc(IRSOPInformation*, UInt32)
-    get_namespace : Proc(IRSOPInformation*, UInt32, Char*, Int32, HRESULT)
-    get_flags : Proc(IRSOPInformation*, UInt32*, HRESULT)
-    get_event_log_entry_text : Proc(IRSOPInformation*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_namespace : UInt64
+    get_flags : UInt64
+    get_event_log_entry_text : UInt64
   end
 
   IRSOPInformation_GUID = "9a5a81b5-d9c7-49ef-9d11-ddf50968c48d"
@@ -1695,7 +1695,7 @@ lib LibWin32
   fun GetLocalManagedApplications(buserapps : LibC::BOOL, pdwapps : UInt32*, prglocalapps : LOCALMANAGEDAPPLICATION**) : UInt32
 
   # Params # productcode : LibC::LPWSTR [In],displayname : LibC::LPWSTR* [In],supporturl : LibC::LPWSTR* [In]
-  fun GetLocalManagedApplicationData(productcode : LibC::LPWSTR, displayname : LibC::LPWSTR*, supporturl : LibC::LPWSTR*)
+  fun GetLocalManagedApplicationData(productcode : LibC::LPWSTR, displayname : LibC::LPWSTR*, supporturl : LibC::LPWSTR*) : Void
 
   # Params # dwreserved : UInt32 [In],pappcategory : APPCATEGORYINFOLIST* [In]
   fun GetManagedApplicationCategories(dwreserved : UInt32, pappcategory : APPCATEGORYINFOLIST*) : UInt32
@@ -1717,4 +1717,2543 @@ lib LibWin32
 
   # Params # lpnamespace : LibC::LPWSTR [In],lpfilename : LibC::LPWSTR [In]
   fun ExportRSoPData(lpnamespace : LibC::LPWSTR, lpfilename : LibC::LPWSTR) : HRESULT
+end
+struct LibWin32::IGPM
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_domain(bstrdomain : UInt8*, bstrdomaincontroller : UInt8*, ldcflags : Int32, pigpmdomain : IGPMDomain*) : HRESULT
+    @lpVtbl.value.get_domain.unsafe_as(Proc(UInt8*, UInt8*, Int32, IGPMDomain*, HRESULT)).call(bstrdomain, bstrdomaincontroller, ldcflags, pigpmdomain)
+  end
+  def get_backup_dir(bstrbackupdir : UInt8*, pigpmbackupdir : IGPMBackupDir*) : HRESULT
+    @lpVtbl.value.get_backup_dir.unsafe_as(Proc(UInt8*, IGPMBackupDir*, HRESULT)).call(bstrbackupdir, pigpmbackupdir)
+  end
+  def get_sites_container(bstrforest : UInt8*, bstrdomain : UInt8*, bstrdomaincontroller : UInt8*, ldcflags : Int32, ppigpmsitescontainer : IGPMSitesContainer*) : HRESULT
+    @lpVtbl.value.get_sites_container.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, Int32, IGPMSitesContainer*, HRESULT)).call(bstrforest, bstrdomain, bstrdomaincontroller, ldcflags, ppigpmsitescontainer)
+  end
+  def get_rsop(gpmrsopmode : GPMRSOPMode, bstrnamespace : UInt8*, lflags : Int32, ppigpmrsop : IGPMRSOP*) : HRESULT
+    @lpVtbl.value.get_rsop.unsafe_as(Proc(GPMRSOPMode, UInt8*, Int32, IGPMRSOP*, HRESULT)).call(gpmrsopmode, bstrnamespace, lflags, ppigpmrsop)
+  end
+  def create_permission(bstrtrustee : UInt8*, perm : GPMPermissionType, binheritable : Int16, ppperm : IGPMPermission*) : HRESULT
+    @lpVtbl.value.create_permission.unsafe_as(Proc(UInt8*, GPMPermissionType, Int16, IGPMPermission*, HRESULT)).call(bstrtrustee, perm, binheritable, ppperm)
+  end
+  def create_search_criteria(ppigpmsearchcriteria : IGPMSearchCriteria*) : HRESULT
+    @lpVtbl.value.create_search_criteria.unsafe_as(Proc(IGPMSearchCriteria*, HRESULT)).call(ppigpmsearchcriteria)
+  end
+  def create_trustee(bstrtrustee : UInt8*, ppigpmtrustee : IGPMTrustee*) : HRESULT
+    @lpVtbl.value.create_trustee.unsafe_as(Proc(UInt8*, IGPMTrustee*, HRESULT)).call(bstrtrustee, ppigpmtrustee)
+  end
+  def get_client_side_extensions(ppigpmcsecollection : IGPMCSECollection*) : HRESULT
+    @lpVtbl.value.get_client_side_extensions.unsafe_as(Proc(IGPMCSECollection*, HRESULT)).call(ppigpmcsecollection)
+  end
+  def get_constants(ppigpmconstants : IGPMConstants*) : HRESULT
+    @lpVtbl.value.get_constants.unsafe_as(Proc(IGPMConstants*, HRESULT)).call(ppigpmconstants)
+  end
+  def get_migration_table(bstrmigrationtablepath : UInt8*, ppmigrationtable : IGPMMigrationTable*) : HRESULT
+    @lpVtbl.value.get_migration_table.unsafe_as(Proc(UInt8*, IGPMMigrationTable*, HRESULT)).call(bstrmigrationtablepath, ppmigrationtable)
+  end
+  def create_migration_table(ppmigrationtable : IGPMMigrationTable*) : HRESULT
+    @lpVtbl.value.create_migration_table.unsafe_as(Proc(IGPMMigrationTable*, HRESULT)).call(ppmigrationtable)
+  end
+  def initialize_reporting(bstradmpath : UInt8*) : HRESULT
+    @lpVtbl.value.initialize_reporting.unsafe_as(Proc(UInt8*, HRESULT)).call(bstradmpath)
+  end
+end
+struct LibWin32::IGPMDomain
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_domain_controller(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain_controller.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_domain(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def create_gpo(ppnewgpo : IGPMGPO*) : HRESULT
+    @lpVtbl.value.create_gpo.unsafe_as(Proc(IGPMGPO*, HRESULT)).call(ppnewgpo)
+  end
+  def get_gpo(bstrguid : UInt8*, ppgpo : IGPMGPO*) : HRESULT
+    @lpVtbl.value.get_gpo.unsafe_as(Proc(UInt8*, IGPMGPO*, HRESULT)).call(bstrguid, ppgpo)
+  end
+  def search_gp_os(pigpmsearchcriteria : IGPMSearchCriteria, ppigpmgpocollection : IGPMGPOCollection*) : HRESULT
+    @lpVtbl.value.search_gp_os.unsafe_as(Proc(IGPMSearchCriteria, IGPMGPOCollection*, HRESULT)).call(pigpmsearchcriteria, ppigpmgpocollection)
+  end
+  def restore_gpo(pigpmbackup : IGPMBackup, ldcflags : Int32, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.restore_gpo.unsafe_as(Proc(IGPMBackup, Int32, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(pigpmbackup, ldcflags, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def get_som(bstrpath : UInt8*, ppsom : IGPMSOM*) : HRESULT
+    @lpVtbl.value.get_som.unsafe_as(Proc(UInt8*, IGPMSOM*, HRESULT)).call(bstrpath, ppsom)
+  end
+  def search_so_ms(pigpmsearchcriteria : IGPMSearchCriteria, ppigpmsomcollection : IGPMSOMCollection*) : HRESULT
+    @lpVtbl.value.search_so_ms.unsafe_as(Proc(IGPMSearchCriteria, IGPMSOMCollection*, HRESULT)).call(pigpmsearchcriteria, ppigpmsomcollection)
+  end
+  def get_wmi_filter(bstrpath : UInt8*, ppwmifilter : IGPMWMIFilter*) : HRESULT
+    @lpVtbl.value.get_wmi_filter.unsafe_as(Proc(UInt8*, IGPMWMIFilter*, HRESULT)).call(bstrpath, ppwmifilter)
+  end
+  def search_wmi_filters(pigpmsearchcriteria : IGPMSearchCriteria, ppigpmwmifiltercollection : IGPMWMIFilterCollection*) : HRESULT
+    @lpVtbl.value.search_wmi_filters.unsafe_as(Proc(IGPMSearchCriteria, IGPMWMIFilterCollection*, HRESULT)).call(pigpmsearchcriteria, ppigpmwmifiltercollection)
+  end
+end
+struct LibWin32::IGPMBackupDir
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_backup_directory(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_backup_directory.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_backup(bstrid : UInt8*, ppbackup : IGPMBackup*) : HRESULT
+    @lpVtbl.value.get_backup.unsafe_as(Proc(UInt8*, IGPMBackup*, HRESULT)).call(bstrid, ppbackup)
+  end
+  def search_backups(pigpmsearchcriteria : IGPMSearchCriteria, ppigpmbackupcollection : IGPMBackupCollection*) : HRESULT
+    @lpVtbl.value.search_backups.unsafe_as(Proc(IGPMSearchCriteria, IGPMBackupCollection*, HRESULT)).call(pigpmsearchcriteria, ppigpmbackupcollection)
+  end
+end
+struct LibWin32::IGPMSitesContainer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_domain_controller(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain_controller.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_domain(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_forest(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_forest.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_site(bstrsitename : UInt8*, ppsom : IGPMSOM*) : HRESULT
+    @lpVtbl.value.get_site.unsafe_as(Proc(UInt8*, IGPMSOM*, HRESULT)).call(bstrsitename, ppsom)
+  end
+  def search_sites(pigpmsearchcriteria : IGPMSearchCriteria, ppigpmsomcollection : IGPMSOMCollection*) : HRESULT
+    @lpVtbl.value.search_sites.unsafe_as(Proc(IGPMSearchCriteria, IGPMSOMCollection*, HRESULT)).call(pigpmsearchcriteria, ppigpmsomcollection)
+  end
+end
+struct LibWin32::IGPMSearchCriteria
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def add(searchproperty : GPMSearchProperty, searchoperation : GPMSearchOperation, varvalue : VARIANT) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(GPMSearchProperty, GPMSearchOperation, VARIANT, HRESULT)).call(searchproperty, searchoperation, varvalue)
+  end
+end
+struct LibWin32::IGPMTrustee
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_trustee_sid(bstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_trustee_sid.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrval)
+  end
+  def get_trustee_name(bstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_trustee_name.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrval)
+  end
+  def get_trustee_domain(bstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_trustee_domain.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrval)
+  end
+  def get_trustee_ds_path(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_trustee_ds_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_trustee_type(lval : Int32*) : HRESULT
+    @lpVtbl.value.get_trustee_type.unsafe_as(Proc(Int32*, HRESULT)).call(lval)
+  end
+end
+struct LibWin32::IGPMPermission
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_inherited(pval : Int16*) : HRESULT
+    @lpVtbl.value.get_inherited.unsafe_as(Proc(Int16*, HRESULT)).call(pval)
+  end
+  def get_inheritable(pval : Int16*) : HRESULT
+    @lpVtbl.value.get_inheritable.unsafe_as(Proc(Int16*, HRESULT)).call(pval)
+  end
+  def get_denied(pval : Int16*) : HRESULT
+    @lpVtbl.value.get_denied.unsafe_as(Proc(Int16*, HRESULT)).call(pval)
+  end
+  def get_permission(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_permission.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_trustee(ppigpmtrustee : IGPMTrustee*) : HRESULT
+    @lpVtbl.value.get_trustee.unsafe_as(Proc(IGPMTrustee*, HRESULT)).call(ppigpmtrustee)
+  end
+end
+struct LibWin32::IGPMSecurityInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_item(lindex : Int32, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(lindex, pval)
+  end
+  def get__new_enum(ppenum : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IEnumVARIANT*, HRESULT)).call(ppenum)
+  end
+  def add(pperm : IGPMPermission) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(IGPMPermission, HRESULT)).call(pperm)
+  end
+  def remove(pperm : IGPMPermission) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(IGPMPermission, HRESULT)).call(pperm)
+  end
+  def remove_trustee(bstrtrustee : UInt8*) : HRESULT
+    @lpVtbl.value.remove_trustee.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtrustee)
+  end
+end
+struct LibWin32::IGPMBackup
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_gpoid(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_gpoid.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_gpo_domain(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_gpo_domain.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_gpo_display_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_gpo_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_timestamp(pval : Float64*) : HRESULT
+    @lpVtbl.value.get_timestamp.unsafe_as(Proc(Float64*, HRESULT)).call(pval)
+  end
+  def get_comment(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_comment.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_backup_dir(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_backup_dir.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+  def generate_report(gpmreporttype : GPMReportType, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.generate_report.unsafe_as(Proc(GPMReportType, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(gpmreporttype, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def generate_report_to_file(gpmreporttype : GPMReportType, bstrtargetfilepath : UInt8*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.generate_report_to_file.unsafe_as(Proc(GPMReportType, UInt8*, IGPMResult*, HRESULT)).call(gpmreporttype, bstrtargetfilepath, ppigpmresult)
+  end
+end
+struct LibWin32::IGPMBackupCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_item(lindex : Int32, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(lindex, pval)
+  end
+  def get__new_enum(ppigpmbackup : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IEnumVARIANT*, HRESULT)).call(ppigpmbackup)
+  end
+end
+struct LibWin32::IGPMSOM
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_gpo_inheritance_blocked(pval : Int16*) : HRESULT
+    @lpVtbl.value.get_gpo_inheritance_blocked.unsafe_as(Proc(Int16*, HRESULT)).call(pval)
+  end
+  def put_gpo_inheritance_blocked(newval : Int16) : HRESULT
+    @lpVtbl.value.put_gpo_inheritance_blocked.unsafe_as(Proc(Int16, HRESULT)).call(newval)
+  end
+  def get_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_path(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def create_gpo_link(llinkpos : Int32, pgpo : IGPMGPO, ppnewgpolink : IGPMGPOLink*) : HRESULT
+    @lpVtbl.value.create_gpo_link.unsafe_as(Proc(Int32, IGPMGPO, IGPMGPOLink*, HRESULT)).call(llinkpos, pgpo, ppnewgpolink)
+  end
+  def get_type(pval : GPMSOMType*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(GPMSOMType*, HRESULT)).call(pval)
+  end
+  def get_gpo_links(ppgpolinks : IGPMGPOLinksCollection*) : HRESULT
+    @lpVtbl.value.get_gpo_links.unsafe_as(Proc(IGPMGPOLinksCollection*, HRESULT)).call(ppgpolinks)
+  end
+  def get_inherited_gpo_links(ppgpolinks : IGPMGPOLinksCollection*) : HRESULT
+    @lpVtbl.value.get_inherited_gpo_links.unsafe_as(Proc(IGPMGPOLinksCollection*, HRESULT)).call(ppgpolinks)
+  end
+  def get_security_info(ppsecurityinfo : IGPMSecurityInfo*) : HRESULT
+    @lpVtbl.value.get_security_info.unsafe_as(Proc(IGPMSecurityInfo*, HRESULT)).call(ppsecurityinfo)
+  end
+  def set_security_info(psecurityinfo : IGPMSecurityInfo) : HRESULT
+    @lpVtbl.value.set_security_info.unsafe_as(Proc(IGPMSecurityInfo, HRESULT)).call(psecurityinfo)
+  end
+end
+struct LibWin32::IGPMSOMCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_item(lindex : Int32, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(lindex, pval)
+  end
+  def get__new_enum(ppigpmsom : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IEnumVARIANT*, HRESULT)).call(ppigpmsom)
+  end
+end
+struct LibWin32::IGPMWMIFilter
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_path(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_name(newval : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(newval)
+  end
+  def get_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_description(newval : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(newval)
+  end
+  def get_description(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_query_list(pqrylist : VARIANT*) : HRESULT
+    @lpVtbl.value.get_query_list.unsafe_as(Proc(VARIANT*, HRESULT)).call(pqrylist)
+  end
+  def get_security_info(ppsecurityinfo : IGPMSecurityInfo*) : HRESULT
+    @lpVtbl.value.get_security_info.unsafe_as(Proc(IGPMSecurityInfo*, HRESULT)).call(ppsecurityinfo)
+  end
+  def set_security_info(psecurityinfo : IGPMSecurityInfo) : HRESULT
+    @lpVtbl.value.set_security_info.unsafe_as(Proc(IGPMSecurityInfo, HRESULT)).call(psecurityinfo)
+  end
+end
+struct LibWin32::IGPMWMIFilterCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_item(lindex : Int32, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(lindex, pval)
+  end
+  def get__new_enum(pval : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IEnumVARIANT*, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::IGPMRSOP
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_mode(pval : GPMRSOPMode*) : HRESULT
+    @lpVtbl.value.get_mode.unsafe_as(Proc(GPMRSOPMode*, HRESULT)).call(pval)
+  end
+  def get_namespace(bstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_namespace.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrval)
+  end
+  def put_logging_computer(bstrval : UInt8*) : HRESULT
+    @lpVtbl.value.put_logging_computer.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrval)
+  end
+  def get_logging_computer(bstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_logging_computer.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrval)
+  end
+  def put_logging_user(bstrval : UInt8*) : HRESULT
+    @lpVtbl.value.put_logging_user.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrval)
+  end
+  def get_logging_user(bstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_logging_user.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrval)
+  end
+  def put_logging_flags(lval : Int32) : HRESULT
+    @lpVtbl.value.put_logging_flags.unsafe_as(Proc(Int32, HRESULT)).call(lval)
+  end
+  def get_logging_flags(lval : Int32*) : HRESULT
+    @lpVtbl.value.get_logging_flags.unsafe_as(Proc(Int32*, HRESULT)).call(lval)
+  end
+  def put_planning_flags(lval : Int32) : HRESULT
+    @lpVtbl.value.put_planning_flags.unsafe_as(Proc(Int32, HRESULT)).call(lval)
+  end
+  def get_planning_flags(lval : Int32*) : HRESULT
+    @lpVtbl.value.get_planning_flags.unsafe_as(Proc(Int32*, HRESULT)).call(lval)
+  end
+  def put_planning_domain_controller(bstrval : UInt8*) : HRESULT
+    @lpVtbl.value.put_planning_domain_controller.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrval)
+  end
+  def get_planning_domain_controller(bstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_planning_domain_controller.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrval)
+  end
+  def put_planning_site_name(bstrval : UInt8*) : HRESULT
+    @lpVtbl.value.put_planning_site_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrval)
+  end
+  def get_planning_site_name(bstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_planning_site_name.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrval)
+  end
+  def put_planning_user(bstrval : UInt8*) : HRESULT
+    @lpVtbl.value.put_planning_user.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrval)
+  end
+  def get_planning_user(bstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_planning_user.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrval)
+  end
+  def put_planning_user_som(bstrval : UInt8*) : HRESULT
+    @lpVtbl.value.put_planning_user_som.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrval)
+  end
+  def get_planning_user_som(bstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_planning_user_som.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrval)
+  end
+  def put_planning_user_wmi_filters(varval : VARIANT) : HRESULT
+    @lpVtbl.value.put_planning_user_wmi_filters.unsafe_as(Proc(VARIANT, HRESULT)).call(varval)
+  end
+  def get_planning_user_wmi_filters(varval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_planning_user_wmi_filters.unsafe_as(Proc(VARIANT*, HRESULT)).call(varval)
+  end
+  def put_planning_user_security_groups(varval : VARIANT) : HRESULT
+    @lpVtbl.value.put_planning_user_security_groups.unsafe_as(Proc(VARIANT, HRESULT)).call(varval)
+  end
+  def get_planning_user_security_groups(varval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_planning_user_security_groups.unsafe_as(Proc(VARIANT*, HRESULT)).call(varval)
+  end
+  def put_planning_computer(bstrval : UInt8*) : HRESULT
+    @lpVtbl.value.put_planning_computer.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrval)
+  end
+  def get_planning_computer(bstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_planning_computer.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrval)
+  end
+  def put_planning_computer_som(bstrval : UInt8*) : HRESULT
+    @lpVtbl.value.put_planning_computer_som.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrval)
+  end
+  def get_planning_computer_som(bstrval : UInt8**) : HRESULT
+    @lpVtbl.value.get_planning_computer_som.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrval)
+  end
+  def put_planning_computer_wmi_filters(varval : VARIANT) : HRESULT
+    @lpVtbl.value.put_planning_computer_wmi_filters.unsafe_as(Proc(VARIANT, HRESULT)).call(varval)
+  end
+  def get_planning_computer_wmi_filters(varval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_planning_computer_wmi_filters.unsafe_as(Proc(VARIANT*, HRESULT)).call(varval)
+  end
+  def put_planning_computer_security_groups(varval : VARIANT) : HRESULT
+    @lpVtbl.value.put_planning_computer_security_groups.unsafe_as(Proc(VARIANT, HRESULT)).call(varval)
+  end
+  def get_planning_computer_security_groups(varval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_planning_computer_security_groups.unsafe_as(Proc(VARIANT*, HRESULT)).call(varval)
+  end
+  def logging_enumerate_users(varval : VARIANT*) : HRESULT
+    @lpVtbl.value.logging_enumerate_users.unsafe_as(Proc(VARIANT*, HRESULT)).call(varval)
+  end
+  def create_query_results : HRESULT
+    @lpVtbl.value.create_query_results.unsafe_as(Proc(HRESULT)).call
+  end
+  def release_query_results : HRESULT
+    @lpVtbl.value.release_query_results.unsafe_as(Proc(HRESULT)).call
+  end
+  def generate_report(gpmreporttype : GPMReportType, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.generate_report.unsafe_as(Proc(GPMReportType, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(gpmreporttype, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def generate_report_to_file(gpmreporttype : GPMReportType, bstrtargetfilepath : UInt8*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.generate_report_to_file.unsafe_as(Proc(GPMReportType, UInt8*, IGPMResult*, HRESULT)).call(gpmreporttype, bstrtargetfilepath, ppigpmresult)
+  end
+end
+struct LibWin32::IGPMGPO
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_display_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_display_name(newval : UInt8*) : HRESULT
+    @lpVtbl.value.put_display_name.unsafe_as(Proc(UInt8*, HRESULT)).call(newval)
+  end
+  def get_path(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_id(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_domain_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_creation_time(pdate : Float64*) : HRESULT
+    @lpVtbl.value.get_creation_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdate)
+  end
+  def get_modification_time(pdate : Float64*) : HRESULT
+    @lpVtbl.value.get_modification_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdate)
+  end
+  def get_user_ds_version_number(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_user_ds_version_number.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_computer_ds_version_number(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_computer_ds_version_number.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_user_sysvol_version_number(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_user_sysvol_version_number.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_computer_sysvol_version_number(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_computer_sysvol_version_number.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_wmi_filter(ppigpmwmifilter : IGPMWMIFilter*) : HRESULT
+    @lpVtbl.value.get_wmi_filter.unsafe_as(Proc(IGPMWMIFilter*, HRESULT)).call(ppigpmwmifilter)
+  end
+  def set_wmi_filter(pigpmwmifilter : IGPMWMIFilter) : HRESULT
+    @lpVtbl.value.set_wmi_filter.unsafe_as(Proc(IGPMWMIFilter, HRESULT)).call(pigpmwmifilter)
+  end
+  def set_user_enabled(vbenabled : Int16) : HRESULT
+    @lpVtbl.value.set_user_enabled.unsafe_as(Proc(Int16, HRESULT)).call(vbenabled)
+  end
+  def set_computer_enabled(vbenabled : Int16) : HRESULT
+    @lpVtbl.value.set_computer_enabled.unsafe_as(Proc(Int16, HRESULT)).call(vbenabled)
+  end
+  def is_user_enabled(pvbenabled : Int16*) : HRESULT
+    @lpVtbl.value.is_user_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pvbenabled)
+  end
+  def is_computer_enabled(pvbenabled : Int16*) : HRESULT
+    @lpVtbl.value.is_computer_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pvbenabled)
+  end
+  def get_security_info(ppsecurityinfo : IGPMSecurityInfo*) : HRESULT
+    @lpVtbl.value.get_security_info.unsafe_as(Proc(IGPMSecurityInfo*, HRESULT)).call(ppsecurityinfo)
+  end
+  def set_security_info(psecurityinfo : IGPMSecurityInfo) : HRESULT
+    @lpVtbl.value.set_security_info.unsafe_as(Proc(IGPMSecurityInfo, HRESULT)).call(psecurityinfo)
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+  def backup(bstrbackupdir : UInt8*, bstrcomment : UInt8*, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.backup.unsafe_as(Proc(UInt8*, UInt8*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(bstrbackupdir, bstrcomment, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def import(lflags : Int32, pigpmbackup : IGPMBackup, pvarmigrationtable : VARIANT*, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.import.unsafe_as(Proc(Int32, IGPMBackup, VARIANT*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(lflags, pigpmbackup, pvarmigrationtable, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def generate_report(gpmreporttype : GPMReportType, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.generate_report.unsafe_as(Proc(GPMReportType, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(gpmreporttype, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def generate_report_to_file(gpmreporttype : GPMReportType, bstrtargetfilepath : UInt8*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.generate_report_to_file.unsafe_as(Proc(GPMReportType, UInt8*, IGPMResult*, HRESULT)).call(gpmreporttype, bstrtargetfilepath, ppigpmresult)
+  end
+  def copy_to(lflags : Int32, pigpmdomain : IGPMDomain, pvarnewdisplayname : VARIANT*, pvarmigrationtable : VARIANT*, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(Int32, IGPMDomain, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(lflags, pigpmdomain, pvarnewdisplayname, pvarmigrationtable, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def set_security_descriptor(lflags : Int32, psd : IDispatch) : HRESULT
+    @lpVtbl.value.set_security_descriptor.unsafe_as(Proc(Int32, IDispatch, HRESULT)).call(lflags, psd)
+  end
+  def get_security_descriptor(lflags : Int32, ppsd : IDispatch*) : HRESULT
+    @lpVtbl.value.get_security_descriptor.unsafe_as(Proc(Int32, IDispatch*, HRESULT)).call(lflags, ppsd)
+  end
+  def is_acl_consistent(pvbconsistent : Int16*) : HRESULT
+    @lpVtbl.value.is_acl_consistent.unsafe_as(Proc(Int16*, HRESULT)).call(pvbconsistent)
+  end
+  def make_acl_consistent : HRESULT
+    @lpVtbl.value.make_acl_consistent.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IGPMGPOCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_item(lindex : Int32, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(lindex, pval)
+  end
+  def get__new_enum(ppigpmgpos : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IEnumVARIANT*, HRESULT)).call(ppigpmgpos)
+  end
+end
+struct LibWin32::IGPMGPOLink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_gpoid(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_gpoid.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_gpo_domain(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_gpo_domain.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_enabled(pval : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pval)
+  end
+  def put_enabled(newval : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.unsafe_as(Proc(Int16, HRESULT)).call(newval)
+  end
+  def get_enforced(pval : Int16*) : HRESULT
+    @lpVtbl.value.get_enforced.unsafe_as(Proc(Int16*, HRESULT)).call(pval)
+  end
+  def put_enforced(newval : Int16) : HRESULT
+    @lpVtbl.value.put_enforced.unsafe_as(Proc(Int16, HRESULT)).call(newval)
+  end
+  def get_som_link_order(lval : Int32*) : HRESULT
+    @lpVtbl.value.get_som_link_order.unsafe_as(Proc(Int32*, HRESULT)).call(lval)
+  end
+  def get_som(ppigpmsom : IGPMSOM*) : HRESULT
+    @lpVtbl.value.get_som.unsafe_as(Proc(IGPMSOM*, HRESULT)).call(ppigpmsom)
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IGPMGPOLinksCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_item(lindex : Int32, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(lindex, pval)
+  end
+  def get__new_enum(ppigpmlinks : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IEnumVARIANT*, HRESULT)).call(ppigpmlinks)
+  end
+end
+struct LibWin32::IGPMCSECollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_item(lindex : Int32, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(lindex, pval)
+  end
+  def get__new_enum(ppigpmcses : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IEnumVARIANT*, HRESULT)).call(ppigpmcses)
+  end
+end
+struct LibWin32::IGPMClientSideExtension
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_display_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def is_user_enabled(pvbenabled : Int16*) : HRESULT
+    @lpVtbl.value.is_user_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pvbenabled)
+  end
+  def is_computer_enabled(pvbenabled : Int16*) : HRESULT
+    @lpVtbl.value.is_computer_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pvbenabled)
+  end
+end
+struct LibWin32::IGPMAsyncCancel
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IGPMAsyncProgress
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def status(lprogressnumerator : Int32, lprogressdenominator : Int32, hrstatus : HRESULT, presult : VARIANT*, ppigpmstatusmsgcollection : IGPMStatusMsgCollection) : HRESULT
+    @lpVtbl.value.status.unsafe_as(Proc(Int32, Int32, HRESULT, VARIANT*, IGPMStatusMsgCollection, HRESULT)).call(lprogressnumerator, lprogressdenominator, hrstatus, presult, ppigpmstatusmsgcollection)
+  end
+end
+struct LibWin32::IGPMStatusMsgCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_item(lindex : Int32, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(lindex, pval)
+  end
+  def get__new_enum(pval : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IEnumVARIANT*, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::IGPMStatusMessage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_object_path(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_object_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def error_code : HRESULT
+    @lpVtbl.value.error_code.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_extension_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_extension_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_settings_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_settings_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def operation_code : HRESULT
+    @lpVtbl.value.operation_code.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_message(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_message.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::IGPMConstants
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_perm_gpo_apply(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_gpo_apply.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_gpo_read(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_gpo_read.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_gpo_edit(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_gpo_edit.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_gpo_edit_security_and_delete(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_gpo_edit_security_and_delete.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_gpo_custom(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_gpo_custom.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_wmi_filter_edit(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_wmi_filter_edit.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_wmi_filter_full_control(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_wmi_filter_full_control.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_wmi_filter_custom(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_wmi_filter_custom.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_som_link(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_som_link.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_som_logging(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_som_logging.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_som_planning(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_som_planning.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_somgpo_create(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_somgpo_create.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_somwmi_create(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_somwmi_create.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_somwmi_full_control(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_somwmi_full_control.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_search_property_gpo_permissions(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_gpo_permissions.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_gpo_effective_permissions(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_gpo_effective_permissions.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_gpo_display_name(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_gpo_display_name.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_gpowmi_filter(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_gpowmi_filter.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_gpoid(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_gpoid.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_gpo_computer_extensions(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_gpo_computer_extensions.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_gpo_user_extensions(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_gpo_user_extensions.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_som_links(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_som_links.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_gpo_domain(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_gpo_domain.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_backup_most_recent(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_backup_most_recent.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_op_equals(pval : GPMSearchOperation*) : HRESULT
+    @lpVtbl.value.get_search_op_equals.unsafe_as(Proc(GPMSearchOperation*, HRESULT)).call(pval)
+  end
+  def get_search_op_contains(pval : GPMSearchOperation*) : HRESULT
+    @lpVtbl.value.get_search_op_contains.unsafe_as(Proc(GPMSearchOperation*, HRESULT)).call(pval)
+  end
+  def get_search_op_not_contains(pval : GPMSearchOperation*) : HRESULT
+    @lpVtbl.value.get_search_op_not_contains.unsafe_as(Proc(GPMSearchOperation*, HRESULT)).call(pval)
+  end
+  def get_search_op_not_equals(pval : GPMSearchOperation*) : HRESULT
+    @lpVtbl.value.get_search_op_not_equals.unsafe_as(Proc(GPMSearchOperation*, HRESULT)).call(pval)
+  end
+  def get_use_pdc(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_use_pdc.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_use_any_dc(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_use_any_dc.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_do_not_use_w2_kdc(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_do_not_use_w2_kdc.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_som_site(pval : GPMSOMType*) : HRESULT
+    @lpVtbl.value.get_som_site.unsafe_as(Proc(GPMSOMType*, HRESULT)).call(pval)
+  end
+  def get_som_domain(pval : GPMSOMType*) : HRESULT
+    @lpVtbl.value.get_som_domain.unsafe_as(Proc(GPMSOMType*, HRESULT)).call(pval)
+  end
+  def get_somou(pval : GPMSOMType*) : HRESULT
+    @lpVtbl.value.get_somou.unsafe_as(Proc(GPMSOMType*, HRESULT)).call(pval)
+  end
+  def get_security_flags(vbowner : Int16, vbgroup : Int16, vbdacl : Int16, vbsacl : Int16, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_security_flags.unsafe_as(Proc(Int16, Int16, Int16, Int16, Int32*, HRESULT)).call(vbowner, vbgroup, vbdacl, vbsacl, pval)
+  end
+  def get_do_not_validate_dc(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_do_not_validate_dc.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_report_html(pval : GPMReportType*) : HRESULT
+    @lpVtbl.value.get_report_html.unsafe_as(Proc(GPMReportType*, HRESULT)).call(pval)
+  end
+  def get_report_xml(pval : GPMReportType*) : HRESULT
+    @lpVtbl.value.get_report_xml.unsafe_as(Proc(GPMReportType*, HRESULT)).call(pval)
+  end
+  def get_rsop_mode_unknown(pval : GPMRSOPMode*) : HRESULT
+    @lpVtbl.value.get_rsop_mode_unknown.unsafe_as(Proc(GPMRSOPMode*, HRESULT)).call(pval)
+  end
+  def get_rsop_mode_planning(pval : GPMRSOPMode*) : HRESULT
+    @lpVtbl.value.get_rsop_mode_planning.unsafe_as(Proc(GPMRSOPMode*, HRESULT)).call(pval)
+  end
+  def get_rsop_mode_logging(pval : GPMRSOPMode*) : HRESULT
+    @lpVtbl.value.get_rsop_mode_logging.unsafe_as(Proc(GPMRSOPMode*, HRESULT)).call(pval)
+  end
+  def get_entry_type_user(pval : GPMEntryType*) : HRESULT
+    @lpVtbl.value.get_entry_type_user.unsafe_as(Proc(GPMEntryType*, HRESULT)).call(pval)
+  end
+  def get_entry_type_computer(pval : GPMEntryType*) : HRESULT
+    @lpVtbl.value.get_entry_type_computer.unsafe_as(Proc(GPMEntryType*, HRESULT)).call(pval)
+  end
+  def get_entry_type_local_group(pval : GPMEntryType*) : HRESULT
+    @lpVtbl.value.get_entry_type_local_group.unsafe_as(Proc(GPMEntryType*, HRESULT)).call(pval)
+  end
+  def get_entry_type_global_group(pval : GPMEntryType*) : HRESULT
+    @lpVtbl.value.get_entry_type_global_group.unsafe_as(Proc(GPMEntryType*, HRESULT)).call(pval)
+  end
+  def get_entry_type_universal_group(pval : GPMEntryType*) : HRESULT
+    @lpVtbl.value.get_entry_type_universal_group.unsafe_as(Proc(GPMEntryType*, HRESULT)).call(pval)
+  end
+  def get_entry_type_unc_path(pval : GPMEntryType*) : HRESULT
+    @lpVtbl.value.get_entry_type_unc_path.unsafe_as(Proc(GPMEntryType*, HRESULT)).call(pval)
+  end
+  def get_entry_type_unknown(pval : GPMEntryType*) : HRESULT
+    @lpVtbl.value.get_entry_type_unknown.unsafe_as(Proc(GPMEntryType*, HRESULT)).call(pval)
+  end
+  def get_destination_option_same_as_source(pval : GPMDestinationOption*) : HRESULT
+    @lpVtbl.value.get_destination_option_same_as_source.unsafe_as(Proc(GPMDestinationOption*, HRESULT)).call(pval)
+  end
+  def get_destination_option_none(pval : GPMDestinationOption*) : HRESULT
+    @lpVtbl.value.get_destination_option_none.unsafe_as(Proc(GPMDestinationOption*, HRESULT)).call(pval)
+  end
+  def get_destination_option_by_relative_name(pval : GPMDestinationOption*) : HRESULT
+    @lpVtbl.value.get_destination_option_by_relative_name.unsafe_as(Proc(GPMDestinationOption*, HRESULT)).call(pval)
+  end
+  def get_destination_option_set(pval : GPMDestinationOption*) : HRESULT
+    @lpVtbl.value.get_destination_option_set.unsafe_as(Proc(GPMDestinationOption*, HRESULT)).call(pval)
+  end
+  def get_migration_table_only(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_migration_table_only.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_process_security(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_process_security.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_rsop_logging_no_computer(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_rsop_logging_no_computer.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_rsop_logging_no_user(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_rsop_logging_no_user.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_rsop_planning_assume_slow_link(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_rsop_planning_assume_slow_link.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_rsop_planning_loopback_option(vbmerge : Int16, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_rsop_planning_loopback_option.unsafe_as(Proc(Int16, Int32*, HRESULT)).call(vbmerge, pval)
+  end
+  def get_rsop_planning_assume_user_wql_filter_true(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_rsop_planning_assume_user_wql_filter_true.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_rsop_planning_assume_comp_wql_filter_true(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_rsop_planning_assume_comp_wql_filter_true.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::IGPMResult
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_status(ppigpmstatusmsgcollection : IGPMStatusMsgCollection*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(IGPMStatusMsgCollection*, HRESULT)).call(ppigpmstatusmsgcollection)
+  end
+  def get_result(pvarresult : VARIANT*) : HRESULT
+    @lpVtbl.value.get_result.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarresult)
+  end
+  def overall_status : HRESULT
+    @lpVtbl.value.overall_status.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IGPMMapEntryCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_item(lindex : Int32, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(lindex, pval)
+  end
+  def get__new_enum(pval : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IEnumVARIANT*, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::IGPMMapEntry
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_source(pbstrsource : UInt8**) : HRESULT
+    @lpVtbl.value.get_source.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsource)
+  end
+  def get_destination(pbstrdestination : UInt8**) : HRESULT
+    @lpVtbl.value.get_destination.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdestination)
+  end
+  def get_destination_option(pgpmdestoption : GPMDestinationOption*) : HRESULT
+    @lpVtbl.value.get_destination_option.unsafe_as(Proc(GPMDestinationOption*, HRESULT)).call(pgpmdestoption)
+  end
+  def get_entry_type(pgpmentrytype : GPMEntryType*) : HRESULT
+    @lpVtbl.value.get_entry_type.unsafe_as(Proc(GPMEntryType*, HRESULT)).call(pgpmentrytype)
+  end
+end
+struct LibWin32::IGPMMigrationTable
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def save(bstrmigrationtablepath : UInt8*) : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrmigrationtablepath)
+  end
+  def add(lflags : Int32, var : VARIANT) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, var)
+  end
+  def add_entry(bstrsource : UInt8*, gpmentrytype : GPMEntryType, pvardestination : VARIANT*, ppentry : IGPMMapEntry*) : HRESULT
+    @lpVtbl.value.add_entry.unsafe_as(Proc(UInt8*, GPMEntryType, VARIANT*, IGPMMapEntry*, HRESULT)).call(bstrsource, gpmentrytype, pvardestination, ppentry)
+  end
+  def get_entry(bstrsource : UInt8*, ppentry : IGPMMapEntry*) : HRESULT
+    @lpVtbl.value.get_entry.unsafe_as(Proc(UInt8*, IGPMMapEntry*, HRESULT)).call(bstrsource, ppentry)
+  end
+  def delete_entry(bstrsource : UInt8*) : HRESULT
+    @lpVtbl.value.delete_entry.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsource)
+  end
+  def update_destination(bstrsource : UInt8*, pvardestination : VARIANT*, ppentry : IGPMMapEntry*) : HRESULT
+    @lpVtbl.value.update_destination.unsafe_as(Proc(UInt8*, VARIANT*, IGPMMapEntry*, HRESULT)).call(bstrsource, pvardestination, ppentry)
+  end
+  def validate(ppresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.validate.unsafe_as(Proc(IGPMResult*, HRESULT)).call(ppresult)
+  end
+  def get_entries(ppentries : IGPMMapEntryCollection*) : HRESULT
+    @lpVtbl.value.get_entries.unsafe_as(Proc(IGPMMapEntryCollection*, HRESULT)).call(ppentries)
+  end
+end
+struct LibWin32::IGPMBackupDirEx
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_backup_dir(pbstrbackupdir : UInt8**) : HRESULT
+    @lpVtbl.value.get_backup_dir.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbackupdir)
+  end
+  def get_backup_type(pgpmbackuptype : GPMBackupType*) : HRESULT
+    @lpVtbl.value.get_backup_type.unsafe_as(Proc(GPMBackupType*, HRESULT)).call(pgpmbackuptype)
+  end
+  def get_backup(bstrid : UInt8*, pvarbackup : VARIANT*) : HRESULT
+    @lpVtbl.value.get_backup.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrid, pvarbackup)
+  end
+  def search_backups(pigpmsearchcriteria : IGPMSearchCriteria, pvarbackupcollection : VARIANT*) : HRESULT
+    @lpVtbl.value.search_backups.unsafe_as(Proc(IGPMSearchCriteria, VARIANT*, HRESULT)).call(pigpmsearchcriteria, pvarbackupcollection)
+  end
+end
+struct LibWin32::IGPMStarterGPOBackupCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_item(lindex : Int32, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(lindex, pval)
+  end
+  def get__new_enum(ppigpmtmplbackup : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IEnumVARIANT*, HRESULT)).call(ppigpmtmplbackup)
+  end
+end
+struct LibWin32::IGPMStarterGPOBackup
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_backup_dir(pbstrbackupdir : UInt8**) : HRESULT
+    @lpVtbl.value.get_backup_dir.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbackupdir)
+  end
+  def get_comment(pbstrcomment : UInt8**) : HRESULT
+    @lpVtbl.value.get_comment.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcomment)
+  end
+  def get_display_name(pbstrdisplayname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdisplayname)
+  end
+  def get_domain(pbstrtemplatedomain : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtemplatedomain)
+  end
+  def get_starter_gpoid(pbstrtemplateid : UInt8**) : HRESULT
+    @lpVtbl.value.get_starter_gpoid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtemplateid)
+  end
+  def get_id(pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrid)
+  end
+  def get_timestamp(ptimestamp : Float64*) : HRESULT
+    @lpVtbl.value.get_timestamp.unsafe_as(Proc(Float64*, HRESULT)).call(ptimestamp)
+  end
+  def get_type(ptype : GPMStarterGPOType*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(GPMStarterGPOType*, HRESULT)).call(ptype)
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+  def generate_report(gpmreporttype : GPMReportType, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.generate_report.unsafe_as(Proc(GPMReportType, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(gpmreporttype, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def generate_report_to_file(gpmreporttype : GPMReportType, bstrtargetfilepath : UInt8*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.generate_report_to_file.unsafe_as(Proc(GPMReportType, UInt8*, IGPMResult*, HRESULT)).call(gpmreporttype, bstrtargetfilepath, ppigpmresult)
+  end
+end
+struct LibWin32::IGPM2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_domain(bstrdomain : UInt8*, bstrdomaincontroller : UInt8*, ldcflags : Int32, pigpmdomain : IGPMDomain*) : HRESULT
+    @lpVtbl.value.get_domain.unsafe_as(Proc(UInt8*, UInt8*, Int32, IGPMDomain*, HRESULT)).call(bstrdomain, bstrdomaincontroller, ldcflags, pigpmdomain)
+  end
+  def get_backup_dir(bstrbackupdir : UInt8*, pigpmbackupdir : IGPMBackupDir*) : HRESULT
+    @lpVtbl.value.get_backup_dir.unsafe_as(Proc(UInt8*, IGPMBackupDir*, HRESULT)).call(bstrbackupdir, pigpmbackupdir)
+  end
+  def get_sites_container(bstrforest : UInt8*, bstrdomain : UInt8*, bstrdomaincontroller : UInt8*, ldcflags : Int32, ppigpmsitescontainer : IGPMSitesContainer*) : HRESULT
+    @lpVtbl.value.get_sites_container.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, Int32, IGPMSitesContainer*, HRESULT)).call(bstrforest, bstrdomain, bstrdomaincontroller, ldcflags, ppigpmsitescontainer)
+  end
+  def get_rsop(gpmrsopmode : GPMRSOPMode, bstrnamespace : UInt8*, lflags : Int32, ppigpmrsop : IGPMRSOP*) : HRESULT
+    @lpVtbl.value.get_rsop.unsafe_as(Proc(GPMRSOPMode, UInt8*, Int32, IGPMRSOP*, HRESULT)).call(gpmrsopmode, bstrnamespace, lflags, ppigpmrsop)
+  end
+  def create_permission(bstrtrustee : UInt8*, perm : GPMPermissionType, binheritable : Int16, ppperm : IGPMPermission*) : HRESULT
+    @lpVtbl.value.create_permission.unsafe_as(Proc(UInt8*, GPMPermissionType, Int16, IGPMPermission*, HRESULT)).call(bstrtrustee, perm, binheritable, ppperm)
+  end
+  def create_search_criteria(ppigpmsearchcriteria : IGPMSearchCriteria*) : HRESULT
+    @lpVtbl.value.create_search_criteria.unsafe_as(Proc(IGPMSearchCriteria*, HRESULT)).call(ppigpmsearchcriteria)
+  end
+  def create_trustee(bstrtrustee : UInt8*, ppigpmtrustee : IGPMTrustee*) : HRESULT
+    @lpVtbl.value.create_trustee.unsafe_as(Proc(UInt8*, IGPMTrustee*, HRESULT)).call(bstrtrustee, ppigpmtrustee)
+  end
+  def get_client_side_extensions(ppigpmcsecollection : IGPMCSECollection*) : HRESULT
+    @lpVtbl.value.get_client_side_extensions.unsafe_as(Proc(IGPMCSECollection*, HRESULT)).call(ppigpmcsecollection)
+  end
+  def get_constants(ppigpmconstants : IGPMConstants*) : HRESULT
+    @lpVtbl.value.get_constants.unsafe_as(Proc(IGPMConstants*, HRESULT)).call(ppigpmconstants)
+  end
+  def get_migration_table(bstrmigrationtablepath : UInt8*, ppmigrationtable : IGPMMigrationTable*) : HRESULT
+    @lpVtbl.value.get_migration_table.unsafe_as(Proc(UInt8*, IGPMMigrationTable*, HRESULT)).call(bstrmigrationtablepath, ppmigrationtable)
+  end
+  def create_migration_table(ppmigrationtable : IGPMMigrationTable*) : HRESULT
+    @lpVtbl.value.create_migration_table.unsafe_as(Proc(IGPMMigrationTable*, HRESULT)).call(ppmigrationtable)
+  end
+  def initialize_reporting(bstradmpath : UInt8*) : HRESULT
+    @lpVtbl.value.initialize_reporting.unsafe_as(Proc(UInt8*, HRESULT)).call(bstradmpath)
+  end
+  def get_backup_dir_ex(bstrbackupdir : UInt8*, backupdirtype : GPMBackupType, ppigpmbackupdirex : IGPMBackupDirEx*) : HRESULT
+    @lpVtbl.value.get_backup_dir_ex.unsafe_as(Proc(UInt8*, GPMBackupType, IGPMBackupDirEx*, HRESULT)).call(bstrbackupdir, backupdirtype, ppigpmbackupdirex)
+  end
+  def initialize_reporting_ex(bstradmpath : UInt8*, reportingoptions : Int32) : HRESULT
+    @lpVtbl.value.initialize_reporting_ex.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(bstradmpath, reportingoptions)
+  end
+end
+struct LibWin32::IGPMStarterGPO
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_display_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_display_name(newval : UInt8*) : HRESULT
+    @lpVtbl.value.put_display_name.unsafe_as(Proc(UInt8*, HRESULT)).call(newval)
+  end
+  def get_description(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_description(newval : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(newval)
+  end
+  def get_author(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_author.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_product(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_product.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_creation_time(pval : Float64*) : HRESULT
+    @lpVtbl.value.get_creation_time.unsafe_as(Proc(Float64*, HRESULT)).call(pval)
+  end
+  def get_id(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_modified_time(pval : Float64*) : HRESULT
+    @lpVtbl.value.get_modified_time.unsafe_as(Proc(Float64*, HRESULT)).call(pval)
+  end
+  def get_type(pval : GPMStarterGPOType*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(GPMStarterGPOType*, HRESULT)).call(pval)
+  end
+  def get_computer_version(pval : UInt16*) : HRESULT
+    @lpVtbl.value.get_computer_version.unsafe_as(Proc(UInt16*, HRESULT)).call(pval)
+  end
+  def get_user_version(pval : UInt16*) : HRESULT
+    @lpVtbl.value.get_user_version.unsafe_as(Proc(UInt16*, HRESULT)).call(pval)
+  end
+  def get_starter_gpo_version(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_starter_gpo_version.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+  def save(bstrsavefile : UInt8*, boverwrite : Int16, bsaveassystem : Int16, bstrlanguage : VARIANT*, bstrauthor : VARIANT*, bstrproduct : VARIANT*, bstruniqueid : VARIANT*, bstrversion : VARIANT*, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(UInt8*, Int16, Int16, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(bstrsavefile, boverwrite, bsaveassystem, bstrlanguage, bstrauthor, bstrproduct, bstruniqueid, bstrversion, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def backup(bstrbackupdir : UInt8*, bstrcomment : UInt8*, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.backup.unsafe_as(Proc(UInt8*, UInt8*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(bstrbackupdir, bstrcomment, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def copy_to(pvarnewdisplayname : VARIANT*, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(VARIANT*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(pvarnewdisplayname, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def generate_report(gpmreporttype : GPMReportType, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.generate_report.unsafe_as(Proc(GPMReportType, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(gpmreporttype, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def generate_report_to_file(gpmreporttype : GPMReportType, bstrtargetfilepath : UInt8*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.generate_report_to_file.unsafe_as(Proc(GPMReportType, UInt8*, IGPMResult*, HRESULT)).call(gpmreporttype, bstrtargetfilepath, ppigpmresult)
+  end
+  def get_security_info(ppsecurityinfo : IGPMSecurityInfo*) : HRESULT
+    @lpVtbl.value.get_security_info.unsafe_as(Proc(IGPMSecurityInfo*, HRESULT)).call(ppsecurityinfo)
+  end
+  def set_security_info(psecurityinfo : IGPMSecurityInfo) : HRESULT
+    @lpVtbl.value.set_security_info.unsafe_as(Proc(IGPMSecurityInfo, HRESULT)).call(psecurityinfo)
+  end
+end
+struct LibWin32::IGPMStarterGPOCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_item(lindex : Int32, pval : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(lindex, pval)
+  end
+  def get__new_enum(ppigpmtemplates : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IEnumVARIANT*, HRESULT)).call(ppigpmtemplates)
+  end
+end
+struct LibWin32::IGPMDomain2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_domain_controller(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain_controller.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_domain(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def create_gpo(ppnewgpo : IGPMGPO*) : HRESULT
+    @lpVtbl.value.create_gpo.unsafe_as(Proc(IGPMGPO*, HRESULT)).call(ppnewgpo)
+  end
+  def get_gpo(bstrguid : UInt8*, ppgpo : IGPMGPO*) : HRESULT
+    @lpVtbl.value.get_gpo.unsafe_as(Proc(UInt8*, IGPMGPO*, HRESULT)).call(bstrguid, ppgpo)
+  end
+  def search_gp_os(pigpmsearchcriteria : IGPMSearchCriteria, ppigpmgpocollection : IGPMGPOCollection*) : HRESULT
+    @lpVtbl.value.search_gp_os.unsafe_as(Proc(IGPMSearchCriteria, IGPMGPOCollection*, HRESULT)).call(pigpmsearchcriteria, ppigpmgpocollection)
+  end
+  def restore_gpo(pigpmbackup : IGPMBackup, ldcflags : Int32, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.restore_gpo.unsafe_as(Proc(IGPMBackup, Int32, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(pigpmbackup, ldcflags, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def get_som(bstrpath : UInt8*, ppsom : IGPMSOM*) : HRESULT
+    @lpVtbl.value.get_som.unsafe_as(Proc(UInt8*, IGPMSOM*, HRESULT)).call(bstrpath, ppsom)
+  end
+  def search_so_ms(pigpmsearchcriteria : IGPMSearchCriteria, ppigpmsomcollection : IGPMSOMCollection*) : HRESULT
+    @lpVtbl.value.search_so_ms.unsafe_as(Proc(IGPMSearchCriteria, IGPMSOMCollection*, HRESULT)).call(pigpmsearchcriteria, ppigpmsomcollection)
+  end
+  def get_wmi_filter(bstrpath : UInt8*, ppwmifilter : IGPMWMIFilter*) : HRESULT
+    @lpVtbl.value.get_wmi_filter.unsafe_as(Proc(UInt8*, IGPMWMIFilter*, HRESULT)).call(bstrpath, ppwmifilter)
+  end
+  def search_wmi_filters(pigpmsearchcriteria : IGPMSearchCriteria, ppigpmwmifiltercollection : IGPMWMIFilterCollection*) : HRESULT
+    @lpVtbl.value.search_wmi_filters.unsafe_as(Proc(IGPMSearchCriteria, IGPMWMIFilterCollection*, HRESULT)).call(pigpmsearchcriteria, ppigpmwmifiltercollection)
+  end
+  def create_starter_gpo(ppnewtemplate : IGPMStarterGPO*) : HRESULT
+    @lpVtbl.value.create_starter_gpo.unsafe_as(Proc(IGPMStarterGPO*, HRESULT)).call(ppnewtemplate)
+  end
+  def create_gpo_from_starter_gpo(pgpotemplate : IGPMStarterGPO, ppnewgpo : IGPMGPO*) : HRESULT
+    @lpVtbl.value.create_gpo_from_starter_gpo.unsafe_as(Proc(IGPMStarterGPO, IGPMGPO*, HRESULT)).call(pgpotemplate, ppnewgpo)
+  end
+  def get_starter_gpo(bstrguid : UInt8*, pptemplate : IGPMStarterGPO*) : HRESULT
+    @lpVtbl.value.get_starter_gpo.unsafe_as(Proc(UInt8*, IGPMStarterGPO*, HRESULT)).call(bstrguid, pptemplate)
+  end
+  def search_starter_gp_os(pigpmsearchcriteria : IGPMSearchCriteria, ppigpmtemplatecollection : IGPMStarterGPOCollection*) : HRESULT
+    @lpVtbl.value.search_starter_gp_os.unsafe_as(Proc(IGPMSearchCriteria, IGPMStarterGPOCollection*, HRESULT)).call(pigpmsearchcriteria, ppigpmtemplatecollection)
+  end
+  def load_starter_gpo(bstrloadfile : UInt8*, boverwrite : Int16, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.load_starter_gpo.unsafe_as(Proc(UInt8*, Int16, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(bstrloadfile, boverwrite, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def restore_starter_gpo(pigpmtmplbackup : IGPMStarterGPOBackup, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.restore_starter_gpo.unsafe_as(Proc(IGPMStarterGPOBackup, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(pigpmtmplbackup, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+end
+struct LibWin32::IGPMConstants2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_perm_gpo_apply(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_gpo_apply.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_gpo_read(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_gpo_read.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_gpo_edit(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_gpo_edit.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_gpo_edit_security_and_delete(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_gpo_edit_security_and_delete.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_gpo_custom(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_gpo_custom.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_wmi_filter_edit(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_wmi_filter_edit.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_wmi_filter_full_control(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_wmi_filter_full_control.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_wmi_filter_custom(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_wmi_filter_custom.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_som_link(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_som_link.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_som_logging(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_som_logging.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_som_planning(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_som_planning.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_somgpo_create(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_somgpo_create.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_somwmi_create(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_somwmi_create.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_somwmi_full_control(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_somwmi_full_control.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_search_property_gpo_permissions(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_gpo_permissions.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_gpo_effective_permissions(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_gpo_effective_permissions.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_gpo_display_name(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_gpo_display_name.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_gpowmi_filter(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_gpowmi_filter.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_gpoid(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_gpoid.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_gpo_computer_extensions(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_gpo_computer_extensions.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_gpo_user_extensions(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_gpo_user_extensions.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_som_links(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_som_links.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_gpo_domain(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_gpo_domain.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_backup_most_recent(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_backup_most_recent.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_op_equals(pval : GPMSearchOperation*) : HRESULT
+    @lpVtbl.value.get_search_op_equals.unsafe_as(Proc(GPMSearchOperation*, HRESULT)).call(pval)
+  end
+  def get_search_op_contains(pval : GPMSearchOperation*) : HRESULT
+    @lpVtbl.value.get_search_op_contains.unsafe_as(Proc(GPMSearchOperation*, HRESULT)).call(pval)
+  end
+  def get_search_op_not_contains(pval : GPMSearchOperation*) : HRESULT
+    @lpVtbl.value.get_search_op_not_contains.unsafe_as(Proc(GPMSearchOperation*, HRESULT)).call(pval)
+  end
+  def get_search_op_not_equals(pval : GPMSearchOperation*) : HRESULT
+    @lpVtbl.value.get_search_op_not_equals.unsafe_as(Proc(GPMSearchOperation*, HRESULT)).call(pval)
+  end
+  def get_use_pdc(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_use_pdc.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_use_any_dc(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_use_any_dc.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_do_not_use_w2_kdc(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_do_not_use_w2_kdc.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_som_site(pval : GPMSOMType*) : HRESULT
+    @lpVtbl.value.get_som_site.unsafe_as(Proc(GPMSOMType*, HRESULT)).call(pval)
+  end
+  def get_som_domain(pval : GPMSOMType*) : HRESULT
+    @lpVtbl.value.get_som_domain.unsafe_as(Proc(GPMSOMType*, HRESULT)).call(pval)
+  end
+  def get_somou(pval : GPMSOMType*) : HRESULT
+    @lpVtbl.value.get_somou.unsafe_as(Proc(GPMSOMType*, HRESULT)).call(pval)
+  end
+  def get_security_flags(vbowner : Int16, vbgroup : Int16, vbdacl : Int16, vbsacl : Int16, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_security_flags.unsafe_as(Proc(Int16, Int16, Int16, Int16, Int32*, HRESULT)).call(vbowner, vbgroup, vbdacl, vbsacl, pval)
+  end
+  def get_do_not_validate_dc(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_do_not_validate_dc.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_report_html(pval : GPMReportType*) : HRESULT
+    @lpVtbl.value.get_report_html.unsafe_as(Proc(GPMReportType*, HRESULT)).call(pval)
+  end
+  def get_report_xml(pval : GPMReportType*) : HRESULT
+    @lpVtbl.value.get_report_xml.unsafe_as(Proc(GPMReportType*, HRESULT)).call(pval)
+  end
+  def get_rsop_mode_unknown(pval : GPMRSOPMode*) : HRESULT
+    @lpVtbl.value.get_rsop_mode_unknown.unsafe_as(Proc(GPMRSOPMode*, HRESULT)).call(pval)
+  end
+  def get_rsop_mode_planning(pval : GPMRSOPMode*) : HRESULT
+    @lpVtbl.value.get_rsop_mode_planning.unsafe_as(Proc(GPMRSOPMode*, HRESULT)).call(pval)
+  end
+  def get_rsop_mode_logging(pval : GPMRSOPMode*) : HRESULT
+    @lpVtbl.value.get_rsop_mode_logging.unsafe_as(Proc(GPMRSOPMode*, HRESULT)).call(pval)
+  end
+  def get_entry_type_user(pval : GPMEntryType*) : HRESULT
+    @lpVtbl.value.get_entry_type_user.unsafe_as(Proc(GPMEntryType*, HRESULT)).call(pval)
+  end
+  def get_entry_type_computer(pval : GPMEntryType*) : HRESULT
+    @lpVtbl.value.get_entry_type_computer.unsafe_as(Proc(GPMEntryType*, HRESULT)).call(pval)
+  end
+  def get_entry_type_local_group(pval : GPMEntryType*) : HRESULT
+    @lpVtbl.value.get_entry_type_local_group.unsafe_as(Proc(GPMEntryType*, HRESULT)).call(pval)
+  end
+  def get_entry_type_global_group(pval : GPMEntryType*) : HRESULT
+    @lpVtbl.value.get_entry_type_global_group.unsafe_as(Proc(GPMEntryType*, HRESULT)).call(pval)
+  end
+  def get_entry_type_universal_group(pval : GPMEntryType*) : HRESULT
+    @lpVtbl.value.get_entry_type_universal_group.unsafe_as(Proc(GPMEntryType*, HRESULT)).call(pval)
+  end
+  def get_entry_type_unc_path(pval : GPMEntryType*) : HRESULT
+    @lpVtbl.value.get_entry_type_unc_path.unsafe_as(Proc(GPMEntryType*, HRESULT)).call(pval)
+  end
+  def get_entry_type_unknown(pval : GPMEntryType*) : HRESULT
+    @lpVtbl.value.get_entry_type_unknown.unsafe_as(Proc(GPMEntryType*, HRESULT)).call(pval)
+  end
+  def get_destination_option_same_as_source(pval : GPMDestinationOption*) : HRESULT
+    @lpVtbl.value.get_destination_option_same_as_source.unsafe_as(Proc(GPMDestinationOption*, HRESULT)).call(pval)
+  end
+  def get_destination_option_none(pval : GPMDestinationOption*) : HRESULT
+    @lpVtbl.value.get_destination_option_none.unsafe_as(Proc(GPMDestinationOption*, HRESULT)).call(pval)
+  end
+  def get_destination_option_by_relative_name(pval : GPMDestinationOption*) : HRESULT
+    @lpVtbl.value.get_destination_option_by_relative_name.unsafe_as(Proc(GPMDestinationOption*, HRESULT)).call(pval)
+  end
+  def get_destination_option_set(pval : GPMDestinationOption*) : HRESULT
+    @lpVtbl.value.get_destination_option_set.unsafe_as(Proc(GPMDestinationOption*, HRESULT)).call(pval)
+  end
+  def get_migration_table_only(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_migration_table_only.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_process_security(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_process_security.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_rsop_logging_no_computer(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_rsop_logging_no_computer.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_rsop_logging_no_user(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_rsop_logging_no_user.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_rsop_planning_assume_slow_link(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_rsop_planning_assume_slow_link.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_rsop_planning_loopback_option(vbmerge : Int16, pval : Int32*) : HRESULT
+    @lpVtbl.value.get_rsop_planning_loopback_option.unsafe_as(Proc(Int16, Int32*, HRESULT)).call(vbmerge, pval)
+  end
+  def get_rsop_planning_assume_user_wql_filter_true(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_rsop_planning_assume_user_wql_filter_true.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_rsop_planning_assume_comp_wql_filter_true(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_rsop_planning_assume_comp_wql_filter_true.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_backup_type_gpo(pval : GPMBackupType*) : HRESULT
+    @lpVtbl.value.get_backup_type_gpo.unsafe_as(Proc(GPMBackupType*, HRESULT)).call(pval)
+  end
+  def get_backup_type_starter_gpo(pval : GPMBackupType*) : HRESULT
+    @lpVtbl.value.get_backup_type_starter_gpo.unsafe_as(Proc(GPMBackupType*, HRESULT)).call(pval)
+  end
+  def get_starter_gpo_type_system(pval : GPMStarterGPOType*) : HRESULT
+    @lpVtbl.value.get_starter_gpo_type_system.unsafe_as(Proc(GPMStarterGPOType*, HRESULT)).call(pval)
+  end
+  def get_starter_gpo_type_custom(pval : GPMStarterGPOType*) : HRESULT
+    @lpVtbl.value.get_starter_gpo_type_custom.unsafe_as(Proc(GPMStarterGPOType*, HRESULT)).call(pval)
+  end
+  def get_search_property_starter_gpo_permissions(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_starter_gpo_permissions.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_starter_gpo_effective_permissions(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_starter_gpo_effective_permissions.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_starter_gpo_display_name(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_starter_gpo_display_name.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_starter_gpoid(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_starter_gpoid.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_search_property_starter_gpo_domain(pval : GPMSearchProperty*) : HRESULT
+    @lpVtbl.value.get_search_property_starter_gpo_domain.unsafe_as(Proc(GPMSearchProperty*, HRESULT)).call(pval)
+  end
+  def get_perm_starter_gpo_read(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_starter_gpo_read.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_starter_gpo_edit(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_starter_gpo_edit.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_starter_gpo_full_control(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_starter_gpo_full_control.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_perm_starter_gpo_custom(pval : GPMPermissionType*) : HRESULT
+    @lpVtbl.value.get_perm_starter_gpo_custom.unsafe_as(Proc(GPMPermissionType*, HRESULT)).call(pval)
+  end
+  def get_report_legacy(pval : GPMReportingOptions*) : HRESULT
+    @lpVtbl.value.get_report_legacy.unsafe_as(Proc(GPMReportingOptions*, HRESULT)).call(pval)
+  end
+  def get_report_comments(pval : GPMReportingOptions*) : HRESULT
+    @lpVtbl.value.get_report_comments.unsafe_as(Proc(GPMReportingOptions*, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::IGPMGPO2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_display_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_display_name(newval : UInt8*) : HRESULT
+    @lpVtbl.value.put_display_name.unsafe_as(Proc(UInt8*, HRESULT)).call(newval)
+  end
+  def get_path(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_id(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_domain_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_creation_time(pdate : Float64*) : HRESULT
+    @lpVtbl.value.get_creation_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdate)
+  end
+  def get_modification_time(pdate : Float64*) : HRESULT
+    @lpVtbl.value.get_modification_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdate)
+  end
+  def get_user_ds_version_number(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_user_ds_version_number.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_computer_ds_version_number(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_computer_ds_version_number.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_user_sysvol_version_number(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_user_sysvol_version_number.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_computer_sysvol_version_number(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_computer_sysvol_version_number.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_wmi_filter(ppigpmwmifilter : IGPMWMIFilter*) : HRESULT
+    @lpVtbl.value.get_wmi_filter.unsafe_as(Proc(IGPMWMIFilter*, HRESULT)).call(ppigpmwmifilter)
+  end
+  def set_wmi_filter(pigpmwmifilter : IGPMWMIFilter) : HRESULT
+    @lpVtbl.value.set_wmi_filter.unsafe_as(Proc(IGPMWMIFilter, HRESULT)).call(pigpmwmifilter)
+  end
+  def set_user_enabled(vbenabled : Int16) : HRESULT
+    @lpVtbl.value.set_user_enabled.unsafe_as(Proc(Int16, HRESULT)).call(vbenabled)
+  end
+  def set_computer_enabled(vbenabled : Int16) : HRESULT
+    @lpVtbl.value.set_computer_enabled.unsafe_as(Proc(Int16, HRESULT)).call(vbenabled)
+  end
+  def is_user_enabled(pvbenabled : Int16*) : HRESULT
+    @lpVtbl.value.is_user_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pvbenabled)
+  end
+  def is_computer_enabled(pvbenabled : Int16*) : HRESULT
+    @lpVtbl.value.is_computer_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pvbenabled)
+  end
+  def get_security_info(ppsecurityinfo : IGPMSecurityInfo*) : HRESULT
+    @lpVtbl.value.get_security_info.unsafe_as(Proc(IGPMSecurityInfo*, HRESULT)).call(ppsecurityinfo)
+  end
+  def set_security_info(psecurityinfo : IGPMSecurityInfo) : HRESULT
+    @lpVtbl.value.set_security_info.unsafe_as(Proc(IGPMSecurityInfo, HRESULT)).call(psecurityinfo)
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+  def backup(bstrbackupdir : UInt8*, bstrcomment : UInt8*, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.backup.unsafe_as(Proc(UInt8*, UInt8*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(bstrbackupdir, bstrcomment, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def import(lflags : Int32, pigpmbackup : IGPMBackup, pvarmigrationtable : VARIANT*, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.import.unsafe_as(Proc(Int32, IGPMBackup, VARIANT*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(lflags, pigpmbackup, pvarmigrationtable, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def generate_report(gpmreporttype : GPMReportType, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.generate_report.unsafe_as(Proc(GPMReportType, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(gpmreporttype, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def generate_report_to_file(gpmreporttype : GPMReportType, bstrtargetfilepath : UInt8*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.generate_report_to_file.unsafe_as(Proc(GPMReportType, UInt8*, IGPMResult*, HRESULT)).call(gpmreporttype, bstrtargetfilepath, ppigpmresult)
+  end
+  def copy_to(lflags : Int32, pigpmdomain : IGPMDomain, pvarnewdisplayname : VARIANT*, pvarmigrationtable : VARIANT*, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(Int32, IGPMDomain, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(lflags, pigpmdomain, pvarnewdisplayname, pvarmigrationtable, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def set_security_descriptor(lflags : Int32, psd : IDispatch) : HRESULT
+    @lpVtbl.value.set_security_descriptor.unsafe_as(Proc(Int32, IDispatch, HRESULT)).call(lflags, psd)
+  end
+  def get_security_descriptor(lflags : Int32, ppsd : IDispatch*) : HRESULT
+    @lpVtbl.value.get_security_descriptor.unsafe_as(Proc(Int32, IDispatch*, HRESULT)).call(lflags, ppsd)
+  end
+  def is_acl_consistent(pvbconsistent : Int16*) : HRESULT
+    @lpVtbl.value.is_acl_consistent.unsafe_as(Proc(Int16*, HRESULT)).call(pvbconsistent)
+  end
+  def make_acl_consistent : HRESULT
+    @lpVtbl.value.make_acl_consistent.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_description(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_description(newval : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(newval)
+  end
+end
+struct LibWin32::IGPMDomain3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_domain_controller(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain_controller.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_domain(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def create_gpo(ppnewgpo : IGPMGPO*) : HRESULT
+    @lpVtbl.value.create_gpo.unsafe_as(Proc(IGPMGPO*, HRESULT)).call(ppnewgpo)
+  end
+  def get_gpo(bstrguid : UInt8*, ppgpo : IGPMGPO*) : HRESULT
+    @lpVtbl.value.get_gpo.unsafe_as(Proc(UInt8*, IGPMGPO*, HRESULT)).call(bstrguid, ppgpo)
+  end
+  def search_gp_os(pigpmsearchcriteria : IGPMSearchCriteria, ppigpmgpocollection : IGPMGPOCollection*) : HRESULT
+    @lpVtbl.value.search_gp_os.unsafe_as(Proc(IGPMSearchCriteria, IGPMGPOCollection*, HRESULT)).call(pigpmsearchcriteria, ppigpmgpocollection)
+  end
+  def restore_gpo(pigpmbackup : IGPMBackup, ldcflags : Int32, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.restore_gpo.unsafe_as(Proc(IGPMBackup, Int32, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(pigpmbackup, ldcflags, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def get_som(bstrpath : UInt8*, ppsom : IGPMSOM*) : HRESULT
+    @lpVtbl.value.get_som.unsafe_as(Proc(UInt8*, IGPMSOM*, HRESULT)).call(bstrpath, ppsom)
+  end
+  def search_so_ms(pigpmsearchcriteria : IGPMSearchCriteria, ppigpmsomcollection : IGPMSOMCollection*) : HRESULT
+    @lpVtbl.value.search_so_ms.unsafe_as(Proc(IGPMSearchCriteria, IGPMSOMCollection*, HRESULT)).call(pigpmsearchcriteria, ppigpmsomcollection)
+  end
+  def get_wmi_filter(bstrpath : UInt8*, ppwmifilter : IGPMWMIFilter*) : HRESULT
+    @lpVtbl.value.get_wmi_filter.unsafe_as(Proc(UInt8*, IGPMWMIFilter*, HRESULT)).call(bstrpath, ppwmifilter)
+  end
+  def search_wmi_filters(pigpmsearchcriteria : IGPMSearchCriteria, ppigpmwmifiltercollection : IGPMWMIFilterCollection*) : HRESULT
+    @lpVtbl.value.search_wmi_filters.unsafe_as(Proc(IGPMSearchCriteria, IGPMWMIFilterCollection*, HRESULT)).call(pigpmsearchcriteria, ppigpmwmifiltercollection)
+  end
+  def create_starter_gpo(ppnewtemplate : IGPMStarterGPO*) : HRESULT
+    @lpVtbl.value.create_starter_gpo.unsafe_as(Proc(IGPMStarterGPO*, HRESULT)).call(ppnewtemplate)
+  end
+  def create_gpo_from_starter_gpo(pgpotemplate : IGPMStarterGPO, ppnewgpo : IGPMGPO*) : HRESULT
+    @lpVtbl.value.create_gpo_from_starter_gpo.unsafe_as(Proc(IGPMStarterGPO, IGPMGPO*, HRESULT)).call(pgpotemplate, ppnewgpo)
+  end
+  def get_starter_gpo(bstrguid : UInt8*, pptemplate : IGPMStarterGPO*) : HRESULT
+    @lpVtbl.value.get_starter_gpo.unsafe_as(Proc(UInt8*, IGPMStarterGPO*, HRESULT)).call(bstrguid, pptemplate)
+  end
+  def search_starter_gp_os(pigpmsearchcriteria : IGPMSearchCriteria, ppigpmtemplatecollection : IGPMStarterGPOCollection*) : HRESULT
+    @lpVtbl.value.search_starter_gp_os.unsafe_as(Proc(IGPMSearchCriteria, IGPMStarterGPOCollection*, HRESULT)).call(pigpmsearchcriteria, ppigpmtemplatecollection)
+  end
+  def load_starter_gpo(bstrloadfile : UInt8*, boverwrite : Int16, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.load_starter_gpo.unsafe_as(Proc(UInt8*, Int16, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(bstrloadfile, boverwrite, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def restore_starter_gpo(pigpmtmplbackup : IGPMStarterGPOBackup, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.restore_starter_gpo.unsafe_as(Proc(IGPMStarterGPOBackup, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(pigpmtmplbackup, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def generate_report(gpmreporttype : GPMReportType, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.generate_report.unsafe_as(Proc(GPMReportType, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(gpmreporttype, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def get_infrastructure_dc(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_infrastructure_dc.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_infrastructure_dc(newval : UInt8*) : HRESULT
+    @lpVtbl.value.put_infrastructure_dc.unsafe_as(Proc(UInt8*, HRESULT)).call(newval)
+  end
+  def put_infrastructure_flags(dwflags : UInt32) : HRESULT
+    @lpVtbl.value.put_infrastructure_flags.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  end
+end
+struct LibWin32::IGPMGPO3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_display_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_display_name(newval : UInt8*) : HRESULT
+    @lpVtbl.value.put_display_name.unsafe_as(Proc(UInt8*, HRESULT)).call(newval)
+  end
+  def get_path(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_id(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_domain_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_creation_time(pdate : Float64*) : HRESULT
+    @lpVtbl.value.get_creation_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdate)
+  end
+  def get_modification_time(pdate : Float64*) : HRESULT
+    @lpVtbl.value.get_modification_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdate)
+  end
+  def get_user_ds_version_number(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_user_ds_version_number.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_computer_ds_version_number(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_computer_ds_version_number.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_user_sysvol_version_number(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_user_sysvol_version_number.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_computer_sysvol_version_number(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_computer_sysvol_version_number.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def get_wmi_filter(ppigpmwmifilter : IGPMWMIFilter*) : HRESULT
+    @lpVtbl.value.get_wmi_filter.unsafe_as(Proc(IGPMWMIFilter*, HRESULT)).call(ppigpmwmifilter)
+  end
+  def set_wmi_filter(pigpmwmifilter : IGPMWMIFilter) : HRESULT
+    @lpVtbl.value.set_wmi_filter.unsafe_as(Proc(IGPMWMIFilter, HRESULT)).call(pigpmwmifilter)
+  end
+  def set_user_enabled(vbenabled : Int16) : HRESULT
+    @lpVtbl.value.set_user_enabled.unsafe_as(Proc(Int16, HRESULT)).call(vbenabled)
+  end
+  def set_computer_enabled(vbenabled : Int16) : HRESULT
+    @lpVtbl.value.set_computer_enabled.unsafe_as(Proc(Int16, HRESULT)).call(vbenabled)
+  end
+  def is_user_enabled(pvbenabled : Int16*) : HRESULT
+    @lpVtbl.value.is_user_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pvbenabled)
+  end
+  def is_computer_enabled(pvbenabled : Int16*) : HRESULT
+    @lpVtbl.value.is_computer_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pvbenabled)
+  end
+  def get_security_info(ppsecurityinfo : IGPMSecurityInfo*) : HRESULT
+    @lpVtbl.value.get_security_info.unsafe_as(Proc(IGPMSecurityInfo*, HRESULT)).call(ppsecurityinfo)
+  end
+  def set_security_info(psecurityinfo : IGPMSecurityInfo) : HRESULT
+    @lpVtbl.value.set_security_info.unsafe_as(Proc(IGPMSecurityInfo, HRESULT)).call(psecurityinfo)
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+  def backup(bstrbackupdir : UInt8*, bstrcomment : UInt8*, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.backup.unsafe_as(Proc(UInt8*, UInt8*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(bstrbackupdir, bstrcomment, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def import(lflags : Int32, pigpmbackup : IGPMBackup, pvarmigrationtable : VARIANT*, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.import.unsafe_as(Proc(Int32, IGPMBackup, VARIANT*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(lflags, pigpmbackup, pvarmigrationtable, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def generate_report(gpmreporttype : GPMReportType, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.generate_report.unsafe_as(Proc(GPMReportType, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(gpmreporttype, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def generate_report_to_file(gpmreporttype : GPMReportType, bstrtargetfilepath : UInt8*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.generate_report_to_file.unsafe_as(Proc(GPMReportType, UInt8*, IGPMResult*, HRESULT)).call(gpmreporttype, bstrtargetfilepath, ppigpmresult)
+  end
+  def copy_to(lflags : Int32, pigpmdomain : IGPMDomain, pvarnewdisplayname : VARIANT*, pvarmigrationtable : VARIANT*, pvargpmprogress : VARIANT*, pvargpmcancel : VARIANT*, ppigpmresult : IGPMResult*) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(Int32, IGPMDomain, VARIANT*, VARIANT*, VARIANT*, VARIANT*, IGPMResult*, HRESULT)).call(lflags, pigpmdomain, pvarnewdisplayname, pvarmigrationtable, pvargpmprogress, pvargpmcancel, ppigpmresult)
+  end
+  def set_security_descriptor(lflags : Int32, psd : IDispatch) : HRESULT
+    @lpVtbl.value.set_security_descriptor.unsafe_as(Proc(Int32, IDispatch, HRESULT)).call(lflags, psd)
+  end
+  def get_security_descriptor(lflags : Int32, ppsd : IDispatch*) : HRESULT
+    @lpVtbl.value.get_security_descriptor.unsafe_as(Proc(Int32, IDispatch*, HRESULT)).call(lflags, ppsd)
+  end
+  def is_acl_consistent(pvbconsistent : Int16*) : HRESULT
+    @lpVtbl.value.is_acl_consistent.unsafe_as(Proc(Int16*, HRESULT)).call(pvbconsistent)
+  end
+  def make_acl_consistent : HRESULT
+    @lpVtbl.value.make_acl_consistent.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_description(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_description(newval : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(newval)
+  end
+  def get_infrastructure_dc(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_infrastructure_dc.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_infrastructure_dc(newval : UInt8*) : HRESULT
+    @lpVtbl.value.put_infrastructure_dc.unsafe_as(Proc(UInt8*, HRESULT)).call(newval)
+  end
+  def put_infrastructure_flags(dwflags : UInt32) : HRESULT
+    @lpVtbl.value.put_infrastructure_flags.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  end
+end
+struct LibWin32::IGPEInformation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_name(pszname : Char*, cchmaxlength : Int32) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(Char*, Int32, HRESULT)).call(pszname, cchmaxlength)
+  end
+  def get_display_name(pszname : Char*, cchmaxlength : Int32) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(Char*, Int32, HRESULT)).call(pszname, cchmaxlength)
+  end
+  def get_registry_key(dwsection : UInt32, hkey : HKEY*) : HRESULT
+    @lpVtbl.value.get_registry_key.unsafe_as(Proc(UInt32, HKEY*, HRESULT)).call(dwsection, hkey)
+  end
+  def get_ds_path(dwsection : UInt32, pszpath : Char*, cchmaxpath : Int32) : HRESULT
+    @lpVtbl.value.get_ds_path.unsafe_as(Proc(UInt32, Char*, Int32, HRESULT)).call(dwsection, pszpath, cchmaxpath)
+  end
+  def get_file_sys_path(dwsection : UInt32, pszpath : Char*, cchmaxpath : Int32) : HRESULT
+    @lpVtbl.value.get_file_sys_path.unsafe_as(Proc(UInt32, Char*, Int32, HRESULT)).call(dwsection, pszpath, cchmaxpath)
+  end
+  def get_options(dwoptions : UInt32*) : HRESULT
+    @lpVtbl.value.get_options.unsafe_as(Proc(UInt32*, HRESULT)).call(dwoptions)
+  end
+  def get_type(gpotype : GROUP_POLICY_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(GROUP_POLICY_OBJECT_TYPE*, HRESULT)).call(gpotype)
+  end
+  def get_hint(gphint : GROUP_POLICY_HINT_TYPE*) : HRESULT
+    @lpVtbl.value.get_hint.unsafe_as(Proc(GROUP_POLICY_HINT_TYPE*, HRESULT)).call(gphint)
+  end
+  def policy_changed(bmachine : LibC::BOOL, badd : LibC::BOOL, pguidextension : Guid*, pguidsnapin : Guid*) : HRESULT
+    @lpVtbl.value.policy_changed.unsafe_as(Proc(LibC::BOOL, LibC::BOOL, Guid*, Guid*, HRESULT)).call(bmachine, badd, pguidextension, pguidsnapin)
+  end
+end
+struct LibWin32::IGroupPolicyObject
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def new(pszdomainname : LibC::LPWSTR, pszdisplayname : LibC::LPWSTR, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.new.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(pszdomainname, pszdisplayname, dwflags)
+  end
+  def open_dsgpo(pszpath : LibC::LPWSTR, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.open_dsgpo.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(pszpath, dwflags)
+  end
+  def open_local_machine_gpo(dwflags : UInt32) : HRESULT
+    @lpVtbl.value.open_local_machine_gpo.unsafe_as(Proc(UInt32, HRESULT)).call(dwflags)
+  end
+  def open_remote_machine_gpo(pszcomputername : LibC::LPWSTR, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.open_remote_machine_gpo.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(pszcomputername, dwflags)
+  end
+  def save(bmachine : LibC::BOOL, badd : LibC::BOOL, pguidextension : Guid*, pguid : Guid*) : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(LibC::BOOL, LibC::BOOL, Guid*, Guid*, HRESULT)).call(bmachine, badd, pguidextension, pguid)
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_name(pszname : Char*, cchmaxlength : Int32) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(Char*, Int32, HRESULT)).call(pszname, cchmaxlength)
+  end
+  def get_display_name(pszname : Char*, cchmaxlength : Int32) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(Char*, Int32, HRESULT)).call(pszname, cchmaxlength)
+  end
+  def set_display_name(pszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_display_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszname)
+  end
+  def get_path(pszpath : Char*, cchmaxlength : Int32) : HRESULT
+    @lpVtbl.value.get_path.unsafe_as(Proc(Char*, Int32, HRESULT)).call(pszpath, cchmaxlength)
+  end
+  def get_ds_path(dwsection : UInt32, pszpath : Char*, cchmaxpath : Int32) : HRESULT
+    @lpVtbl.value.get_ds_path.unsafe_as(Proc(UInt32, Char*, Int32, HRESULT)).call(dwsection, pszpath, cchmaxpath)
+  end
+  def get_file_sys_path(dwsection : UInt32, pszpath : Char*, cchmaxpath : Int32) : HRESULT
+    @lpVtbl.value.get_file_sys_path.unsafe_as(Proc(UInt32, Char*, Int32, HRESULT)).call(dwsection, pszpath, cchmaxpath)
+  end
+  def get_registry_key(dwsection : UInt32, hkey : HKEY*) : HRESULT
+    @lpVtbl.value.get_registry_key.unsafe_as(Proc(UInt32, HKEY*, HRESULT)).call(dwsection, hkey)
+  end
+  def get_options(dwoptions : UInt32*) : HRESULT
+    @lpVtbl.value.get_options.unsafe_as(Proc(UInt32*, HRESULT)).call(dwoptions)
+  end
+  def set_options(dwoptions : UInt32, dwmask : UInt32) : HRESULT
+    @lpVtbl.value.set_options.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(dwoptions, dwmask)
+  end
+  def get_type(gpotype : GROUP_POLICY_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(GROUP_POLICY_OBJECT_TYPE*, HRESULT)).call(gpotype)
+  end
+  def get_machine_name(pszname : Char*, cchmaxlength : Int32) : HRESULT
+    @lpVtbl.value.get_machine_name.unsafe_as(Proc(Char*, Int32, HRESULT)).call(pszname, cchmaxlength)
+  end
+  def get_property_sheet_pages(hpages : HPROPSHEETPAGE**, upagecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_sheet_pages.unsafe_as(Proc(HPROPSHEETPAGE**, UInt32*, HRESULT)).call(hpages, upagecount)
+  end
+end
+struct LibWin32::IRSOPInformation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_namespace(dwsection : UInt32, pszname : Char*, cchmaxlength : Int32) : HRESULT
+    @lpVtbl.value.get_namespace.unsafe_as(Proc(UInt32, Char*, Int32, HRESULT)).call(dwsection, pszname, cchmaxlength)
+  end
+  def get_flags(pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwflags)
+  end
+  def get_event_log_entry_text(pszeventsource : LibC::LPWSTR, pszeventlogname : LibC::LPWSTR, pszeventtime : LibC::LPWSTR, dweventid : UInt32, ppsztext : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_event_log_entry_text.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)).call(pszeventsource, pszeventlogname, pszeventtime, dweventid, ppsztext)
+  end
 end

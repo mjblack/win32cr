@@ -106,22 +106,22 @@ lib LibWin32
 
 
   struct INetworkListManagerVTbl
-    query_interface : Proc(INetworkListManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetworkListManager*, UInt32)
-    release : Proc(INetworkListManager*, UInt32)
-    get_type_info_count : Proc(INetworkListManager*, UInt32*, HRESULT)
-    get_type_info : Proc(INetworkListManager*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetworkListManager*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetworkListManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_networks : Proc(INetworkListManager*, NLM_ENUM_NETWORK, IEnumNetworks*, HRESULT)
-    get_network : Proc(INetworkListManager*, Guid, INetwork*, HRESULT)
-    get_network_connections : Proc(INetworkListManager*, IEnumNetworkConnections*, HRESULT)
-    get_network_connection : Proc(INetworkListManager*, Guid, INetworkConnection*, HRESULT)
-    get_is_connected_to_internet : Proc(INetworkListManager*, Int16*, HRESULT)
-    get_is_connected : Proc(INetworkListManager*, Int16*, HRESULT)
-    get_connectivity : Proc(INetworkListManager*, NLM_CONNECTIVITY*, HRESULT)
-    set_simulated_profile_info : Proc(INetworkListManager*, NLM_SIMULATED_PROFILE_INFO*, HRESULT)
-    clear_simulated_profile_info : Proc(INetworkListManager*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_networks : UInt64
+    get_network : UInt64
+    get_network_connections : UInt64
+    get_network_connection : UInt64
+    get_is_connected_to_internet : UInt64
+    get_is_connected : UInt64
+    get_connectivity : UInt64
+    set_simulated_profile_info : UInt64
+    clear_simulated_profile_info : UInt64
   end
 
   INetworkListManager_GUID = "dcb00000-570f-4a9b-8d69-199fdba5723b"
@@ -131,10 +131,10 @@ lib LibWin32
   end
 
   struct INetworkListManagerEventsVTbl
-    query_interface : Proc(INetworkListManagerEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetworkListManagerEvents*, UInt32)
-    release : Proc(INetworkListManagerEvents*, UInt32)
-    connectivity_changed : Proc(INetworkListManagerEvents*, NLM_CONNECTIVITY, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    connectivity_changed : UInt64
   end
 
   INetworkListManagerEvents_GUID = "dcb00001-570f-4a9b-8d69-199fdba5723b"
@@ -144,26 +144,26 @@ lib LibWin32
   end
 
   struct INetworkVTbl
-    query_interface : Proc(INetwork*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetwork*, UInt32)
-    release : Proc(INetwork*, UInt32)
-    get_type_info_count : Proc(INetwork*, UInt32*, HRESULT)
-    get_type_info : Proc(INetwork*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetwork*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetwork*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(INetwork*, UInt8**, HRESULT)
-    set_name : Proc(INetwork*, UInt8*, HRESULT)
-    get_description : Proc(INetwork*, UInt8**, HRESULT)
-    set_description : Proc(INetwork*, UInt8*, HRESULT)
-    get_network_id : Proc(INetwork*, Guid*, HRESULT)
-    get_domain_type : Proc(INetwork*, NLM_DOMAIN_TYPE*, HRESULT)
-    get_network_connections : Proc(INetwork*, IEnumNetworkConnections*, HRESULT)
-    get_time_created_and_connected : Proc(INetwork*, UInt32*, UInt32*, UInt32*, UInt32*, HRESULT)
-    get_is_connected_to_internet : Proc(INetwork*, Int16*, HRESULT)
-    get_is_connected : Proc(INetwork*, Int16*, HRESULT)
-    get_connectivity : Proc(INetwork*, NLM_CONNECTIVITY*, HRESULT)
-    get_category : Proc(INetwork*, NLM_NETWORK_CATEGORY*, HRESULT)
-    set_category : Proc(INetwork*, NLM_NETWORK_CATEGORY, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    set_name : UInt64
+    get_description : UInt64
+    set_description : UInt64
+    get_network_id : UInt64
+    get_domain_type : UInt64
+    get_network_connections : UInt64
+    get_time_created_and_connected : UInt64
+    get_is_connected_to_internet : UInt64
+    get_is_connected : UInt64
+    get_connectivity : UInt64
+    get_category : UInt64
+    set_category : UInt64
   end
 
   INetwork_GUID = "dcb00002-570f-4a9b-8d69-199fdba5723b"
@@ -173,18 +173,18 @@ lib LibWin32
   end
 
   struct IEnumNetworksVTbl
-    query_interface : Proc(IEnumNetworks*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumNetworks*, UInt32)
-    release : Proc(IEnumNetworks*, UInt32)
-    get_type_info_count : Proc(IEnumNetworks*, UInt32*, HRESULT)
-    get_type_info : Proc(IEnumNetworks*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IEnumNetworks*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IEnumNetworks*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IEnumNetworks*, IEnumVARIANT*, HRESULT)
-    next : Proc(IEnumNetworks*, UInt32, INetwork*, UInt32*, HRESULT)
-    skip : Proc(IEnumNetworks*, UInt32, HRESULT)
-    reset : Proc(IEnumNetworks*, HRESULT)
-    clone : Proc(IEnumNetworks*, IEnumNetworks*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IEnumNetworks_GUID = "dcb00003-570f-4a9b-8d69-199fdba5723b"
@@ -194,13 +194,13 @@ lib LibWin32
   end
 
   struct INetworkEventsVTbl
-    query_interface : Proc(INetworkEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetworkEvents*, UInt32)
-    release : Proc(INetworkEvents*, UInt32)
-    network_added : Proc(INetworkEvents*, Guid, HRESULT)
-    network_deleted : Proc(INetworkEvents*, Guid, HRESULT)
-    network_connectivity_changed : Proc(INetworkEvents*, Guid, NLM_CONNECTIVITY, HRESULT)
-    network_property_changed : Proc(INetworkEvents*, Guid, NLM_NETWORK_PROPERTY_CHANGE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    network_added : UInt64
+    network_deleted : UInt64
+    network_connectivity_changed : UInt64
+    network_property_changed : UInt64
   end
 
   INetworkEvents_GUID = "dcb00004-570f-4a9b-8d69-199fdba5723b"
@@ -210,20 +210,20 @@ lib LibWin32
   end
 
   struct INetworkConnectionVTbl
-    query_interface : Proc(INetworkConnection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetworkConnection*, UInt32)
-    release : Proc(INetworkConnection*, UInt32)
-    get_type_info_count : Proc(INetworkConnection*, UInt32*, HRESULT)
-    get_type_info : Proc(INetworkConnection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(INetworkConnection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(INetworkConnection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_network : Proc(INetworkConnection*, INetwork*, HRESULT)
-    get_is_connected_to_internet : Proc(INetworkConnection*, Int16*, HRESULT)
-    get_is_connected : Proc(INetworkConnection*, Int16*, HRESULT)
-    get_connectivity : Proc(INetworkConnection*, NLM_CONNECTIVITY*, HRESULT)
-    get_connection_id : Proc(INetworkConnection*, Guid*, HRESULT)
-    get_adapter_id : Proc(INetworkConnection*, Guid*, HRESULT)
-    get_domain_type : Proc(INetworkConnection*, NLM_DOMAIN_TYPE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_network : UInt64
+    get_is_connected_to_internet : UInt64
+    get_is_connected : UInt64
+    get_connectivity : UInt64
+    get_connection_id : UInt64
+    get_adapter_id : UInt64
+    get_domain_type : UInt64
   end
 
   INetworkConnection_GUID = "dcb00005-570f-4a9b-8d69-199fdba5723b"
@@ -233,18 +233,18 @@ lib LibWin32
   end
 
   struct IEnumNetworkConnectionsVTbl
-    query_interface : Proc(IEnumNetworkConnections*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumNetworkConnections*, UInt32)
-    release : Proc(IEnumNetworkConnections*, UInt32)
-    get_type_info_count : Proc(IEnumNetworkConnections*, UInt32*, HRESULT)
-    get_type_info : Proc(IEnumNetworkConnections*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IEnumNetworkConnections*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IEnumNetworkConnections*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IEnumNetworkConnections*, IEnumVARIANT*, HRESULT)
-    next : Proc(IEnumNetworkConnections*, UInt32, INetworkConnection*, UInt32*, HRESULT)
-    skip : Proc(IEnumNetworkConnections*, UInt32, HRESULT)
-    reset : Proc(IEnumNetworkConnections*, HRESULT)
-    clone : Proc(IEnumNetworkConnections*, IEnumNetworkConnections*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IEnumNetworkConnections_GUID = "dcb00006-570f-4a9b-8d69-199fdba5723b"
@@ -254,11 +254,11 @@ lib LibWin32
   end
 
   struct INetworkConnectionEventsVTbl
-    query_interface : Proc(INetworkConnectionEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetworkConnectionEvents*, UInt32)
-    release : Proc(INetworkConnectionEvents*, UInt32)
-    network_connection_connectivity_changed : Proc(INetworkConnectionEvents*, Guid, NLM_CONNECTIVITY, HRESULT)
-    network_connection_property_changed : Proc(INetworkConnectionEvents*, Guid, NLM_CONNECTION_PROPERTY_CHANGE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    network_connection_connectivity_changed : UInt64
+    network_connection_property_changed : UInt64
   end
 
   INetworkConnectionEvents_GUID = "dcb00007-570f-4a9b-8d69-199fdba5723b"
@@ -268,12 +268,12 @@ lib LibWin32
   end
 
   struct INetworkCostManagerVTbl
-    query_interface : Proc(INetworkCostManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetworkCostManager*, UInt32)
-    release : Proc(INetworkCostManager*, UInt32)
-    get_cost : Proc(INetworkCostManager*, UInt32*, NLM_SOCKADDR*, HRESULT)
-    get_data_plan_status : Proc(INetworkCostManager*, NLM_DATAPLAN_STATUS*, NLM_SOCKADDR*, HRESULT)
-    set_destination_addresses : Proc(INetworkCostManager*, UInt32, NLM_SOCKADDR*, Int16, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_cost : UInt64
+    get_data_plan_status : UInt64
+    set_destination_addresses : UInt64
   end
 
   INetworkCostManager_GUID = "dcb00008-570f-4a9b-8d69-199fdba5723b"
@@ -283,11 +283,11 @@ lib LibWin32
   end
 
   struct INetworkCostManagerEventsVTbl
-    query_interface : Proc(INetworkCostManagerEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetworkCostManagerEvents*, UInt32)
-    release : Proc(INetworkCostManagerEvents*, UInt32)
-    cost_changed : Proc(INetworkCostManagerEvents*, UInt32, NLM_SOCKADDR*, HRESULT)
-    data_plan_status_changed : Proc(INetworkCostManagerEvents*, NLM_SOCKADDR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    cost_changed : UInt64
+    data_plan_status_changed : UInt64
   end
 
   INetworkCostManagerEvents_GUID = "dcb00009-570f-4a9b-8d69-199fdba5723b"
@@ -297,11 +297,11 @@ lib LibWin32
   end
 
   struct INetworkConnectionCostVTbl
-    query_interface : Proc(INetworkConnectionCost*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetworkConnectionCost*, UInt32)
-    release : Proc(INetworkConnectionCost*, UInt32)
-    get_cost : Proc(INetworkConnectionCost*, UInt32*, HRESULT)
-    get_data_plan_status : Proc(INetworkConnectionCost*, NLM_DATAPLAN_STATUS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_cost : UInt64
+    get_data_plan_status : UInt64
   end
 
   INetworkConnectionCost_GUID = "dcb0000a-570f-4a9b-8d69-199fdba5723b"
@@ -311,11 +311,11 @@ lib LibWin32
   end
 
   struct INetworkConnectionCostEventsVTbl
-    query_interface : Proc(INetworkConnectionCostEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(INetworkConnectionCostEvents*, UInt32)
-    release : Proc(INetworkConnectionCostEvents*, UInt32)
-    connection_cost_changed : Proc(INetworkConnectionCostEvents*, Guid, UInt32, HRESULT)
-    connection_data_plan_status_changed : Proc(INetworkConnectionCostEvents*, Guid, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    connection_cost_changed : UInt64
+    connection_data_plan_status_changed : UInt64
   end
 
   INetworkConnectionCostEvents_GUID = "dcb0000b-570f-4a9b-8d69-199fdba5723b"
@@ -324,4 +324,361 @@ lib LibWin32
     lpVtbl : INetworkConnectionCostEventsVTbl*
   end
 
+end
+struct LibWin32::INetworkListManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_networks(flags : NLM_ENUM_NETWORK, ppenumnetwork : IEnumNetworks*) : HRESULT
+    @lpVtbl.value.get_networks.unsafe_as(Proc(NLM_ENUM_NETWORK, IEnumNetworks*, HRESULT)).call(flags, ppenumnetwork)
+  end
+  def get_network(gdnetworkid : Guid, ppnetwork : INetwork*) : HRESULT
+    @lpVtbl.value.get_network.unsafe_as(Proc(Guid, INetwork*, HRESULT)).call(gdnetworkid, ppnetwork)
+  end
+  def get_network_connections(ppenum : IEnumNetworkConnections*) : HRESULT
+    @lpVtbl.value.get_network_connections.unsafe_as(Proc(IEnumNetworkConnections*, HRESULT)).call(ppenum)
+  end
+  def get_network_connection(gdnetworkconnectionid : Guid, ppnetworkconnection : INetworkConnection*) : HRESULT
+    @lpVtbl.value.get_network_connection.unsafe_as(Proc(Guid, INetworkConnection*, HRESULT)).call(gdnetworkconnectionid, ppnetworkconnection)
+  end
+  def get_is_connected_to_internet(pbisconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_is_connected_to_internet.unsafe_as(Proc(Int16*, HRESULT)).call(pbisconnected)
+  end
+  def get_is_connected(pbisconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_is_connected.unsafe_as(Proc(Int16*, HRESULT)).call(pbisconnected)
+  end
+  def get_connectivity(pconnectivity : NLM_CONNECTIVITY*) : HRESULT
+    @lpVtbl.value.get_connectivity.unsafe_as(Proc(NLM_CONNECTIVITY*, HRESULT)).call(pconnectivity)
+  end
+  def set_simulated_profile_info(psimulatedinfo : NLM_SIMULATED_PROFILE_INFO*) : HRESULT
+    @lpVtbl.value.set_simulated_profile_info.unsafe_as(Proc(NLM_SIMULATED_PROFILE_INFO*, HRESULT)).call(psimulatedinfo)
+  end
+  def clear_simulated_profile_info : HRESULT
+    @lpVtbl.value.clear_simulated_profile_info.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::INetworkListManagerEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def connectivity_changed(newconnectivity : NLM_CONNECTIVITY) : HRESULT
+    @lpVtbl.value.connectivity_changed.unsafe_as(Proc(NLM_CONNECTIVITY, HRESULT)).call(newconnectivity)
+  end
+end
+struct LibWin32::INetwork
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(psznetworkname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(psznetworkname)
+  end
+  def set_name(sznetworknewname : UInt8*) : HRESULT
+    @lpVtbl.value.set_name.unsafe_as(Proc(UInt8*, HRESULT)).call(sznetworknewname)
+  end
+  def get_description(pszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pszdescription)
+  end
+  def set_description(szdescription : UInt8*) : HRESULT
+    @lpVtbl.value.set_description.unsafe_as(Proc(UInt8*, HRESULT)).call(szdescription)
+  end
+  def get_network_id(pgdguidnetworkid : Guid*) : HRESULT
+    @lpVtbl.value.get_network_id.unsafe_as(Proc(Guid*, HRESULT)).call(pgdguidnetworkid)
+  end
+  def get_domain_type(pnetworktype : NLM_DOMAIN_TYPE*) : HRESULT
+    @lpVtbl.value.get_domain_type.unsafe_as(Proc(NLM_DOMAIN_TYPE*, HRESULT)).call(pnetworktype)
+  end
+  def get_network_connections(ppenumnetworkconnection : IEnumNetworkConnections*) : HRESULT
+    @lpVtbl.value.get_network_connections.unsafe_as(Proc(IEnumNetworkConnections*, HRESULT)).call(ppenumnetworkconnection)
+  end
+  def get_time_created_and_connected(pdwlowdatetimecreated : UInt32*, pdwhighdatetimecreated : UInt32*, pdwlowdatetimeconnected : UInt32*, pdwhighdatetimeconnected : UInt32*) : HRESULT
+    @lpVtbl.value.get_time_created_and_connected.unsafe_as(Proc(UInt32*, UInt32*, UInt32*, UInt32*, HRESULT)).call(pdwlowdatetimecreated, pdwhighdatetimecreated, pdwlowdatetimeconnected, pdwhighdatetimeconnected)
+  end
+  def get_is_connected_to_internet(pbisconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_is_connected_to_internet.unsafe_as(Proc(Int16*, HRESULT)).call(pbisconnected)
+  end
+  def get_is_connected(pbisconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_is_connected.unsafe_as(Proc(Int16*, HRESULT)).call(pbisconnected)
+  end
+  def get_connectivity(pconnectivity : NLM_CONNECTIVITY*) : HRESULT
+    @lpVtbl.value.get_connectivity.unsafe_as(Proc(NLM_CONNECTIVITY*, HRESULT)).call(pconnectivity)
+  end
+  def get_category(pcategory : NLM_NETWORK_CATEGORY*) : HRESULT
+    @lpVtbl.value.get_category.unsafe_as(Proc(NLM_NETWORK_CATEGORY*, HRESULT)).call(pcategory)
+  end
+  def set_category(newcategory : NLM_NETWORK_CATEGORY) : HRESULT
+    @lpVtbl.value.set_category.unsafe_as(Proc(NLM_NETWORK_CATEGORY, HRESULT)).call(newcategory)
+  end
+end
+struct LibWin32::IEnumNetworks
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(ppenumvar : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IEnumVARIANT*, HRESULT)).call(ppenumvar)
+  end
+  def next(celt : UInt32, rgelt : INetwork*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, INetwork*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenumnetwork : IEnumNetworks*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumNetworks*, HRESULT)).call(ppenumnetwork)
+  end
+end
+struct LibWin32::INetworkEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def network_added(networkid : Guid) : HRESULT
+    @lpVtbl.value.network_added.unsafe_as(Proc(Guid, HRESULT)).call(networkid)
+  end
+  def network_deleted(networkid : Guid) : HRESULT
+    @lpVtbl.value.network_deleted.unsafe_as(Proc(Guid, HRESULT)).call(networkid)
+  end
+  def network_connectivity_changed(networkid : Guid, newconnectivity : NLM_CONNECTIVITY) : HRESULT
+    @lpVtbl.value.network_connectivity_changed.unsafe_as(Proc(Guid, NLM_CONNECTIVITY, HRESULT)).call(networkid, newconnectivity)
+  end
+  def network_property_changed(networkid : Guid, flags : NLM_NETWORK_PROPERTY_CHANGE) : HRESULT
+    @lpVtbl.value.network_property_changed.unsafe_as(Proc(Guid, NLM_NETWORK_PROPERTY_CHANGE, HRESULT)).call(networkid, flags)
+  end
+end
+struct LibWin32::INetworkConnection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_network(ppnetwork : INetwork*) : HRESULT
+    @lpVtbl.value.get_network.unsafe_as(Proc(INetwork*, HRESULT)).call(ppnetwork)
+  end
+  def get_is_connected_to_internet(pbisconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_is_connected_to_internet.unsafe_as(Proc(Int16*, HRESULT)).call(pbisconnected)
+  end
+  def get_is_connected(pbisconnected : Int16*) : HRESULT
+    @lpVtbl.value.get_is_connected.unsafe_as(Proc(Int16*, HRESULT)).call(pbisconnected)
+  end
+  def get_connectivity(pconnectivity : NLM_CONNECTIVITY*) : HRESULT
+    @lpVtbl.value.get_connectivity.unsafe_as(Proc(NLM_CONNECTIVITY*, HRESULT)).call(pconnectivity)
+  end
+  def get_connection_id(pgdconnectionid : Guid*) : HRESULT
+    @lpVtbl.value.get_connection_id.unsafe_as(Proc(Guid*, HRESULT)).call(pgdconnectionid)
+  end
+  def get_adapter_id(pgdadapterid : Guid*) : HRESULT
+    @lpVtbl.value.get_adapter_id.unsafe_as(Proc(Guid*, HRESULT)).call(pgdadapterid)
+  end
+  def get_domain_type(pdomaintype : NLM_DOMAIN_TYPE*) : HRESULT
+    @lpVtbl.value.get_domain_type.unsafe_as(Proc(NLM_DOMAIN_TYPE*, HRESULT)).call(pdomaintype)
+  end
+end
+struct LibWin32::IEnumNetworkConnections
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(ppenumvar : IEnumVARIANT*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IEnumVARIANT*, HRESULT)).call(ppenumvar)
+  end
+  def next(celt : UInt32, rgelt : INetworkConnection*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, INetworkConnection*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenumnetwork : IEnumNetworkConnections*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumNetworkConnections*, HRESULT)).call(ppenumnetwork)
+  end
+end
+struct LibWin32::INetworkConnectionEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def network_connection_connectivity_changed(connectionid : Guid, newconnectivity : NLM_CONNECTIVITY) : HRESULT
+    @lpVtbl.value.network_connection_connectivity_changed.unsafe_as(Proc(Guid, NLM_CONNECTIVITY, HRESULT)).call(connectionid, newconnectivity)
+  end
+  def network_connection_property_changed(connectionid : Guid, flags : NLM_CONNECTION_PROPERTY_CHANGE) : HRESULT
+    @lpVtbl.value.network_connection_property_changed.unsafe_as(Proc(Guid, NLM_CONNECTION_PROPERTY_CHANGE, HRESULT)).call(connectionid, flags)
+  end
+end
+struct LibWin32::INetworkCostManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_cost(pcost : UInt32*, pdestipaddr : NLM_SOCKADDR*) : HRESULT
+    @lpVtbl.value.get_cost.unsafe_as(Proc(UInt32*, NLM_SOCKADDR*, HRESULT)).call(pcost, pdestipaddr)
+  end
+  def get_data_plan_status(pdataplanstatus : NLM_DATAPLAN_STATUS*, pdestipaddr : NLM_SOCKADDR*) : HRESULT
+    @lpVtbl.value.get_data_plan_status.unsafe_as(Proc(NLM_DATAPLAN_STATUS*, NLM_SOCKADDR*, HRESULT)).call(pdataplanstatus, pdestipaddr)
+  end
+  def set_destination_addresses(length : UInt32, pdestipaddrlist : NLM_SOCKADDR*, bappend : Int16) : HRESULT
+    @lpVtbl.value.set_destination_addresses.unsafe_as(Proc(UInt32, NLM_SOCKADDR*, Int16, HRESULT)).call(length, pdestipaddrlist, bappend)
+  end
+end
+struct LibWin32::INetworkCostManagerEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def cost_changed(newcost : UInt32, pdestaddr : NLM_SOCKADDR*) : HRESULT
+    @lpVtbl.value.cost_changed.unsafe_as(Proc(UInt32, NLM_SOCKADDR*, HRESULT)).call(newcost, pdestaddr)
+  end
+  def data_plan_status_changed(pdestaddr : NLM_SOCKADDR*) : HRESULT
+    @lpVtbl.value.data_plan_status_changed.unsafe_as(Proc(NLM_SOCKADDR*, HRESULT)).call(pdestaddr)
+  end
+end
+struct LibWin32::INetworkConnectionCost
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_cost(pcost : UInt32*) : HRESULT
+    @lpVtbl.value.get_cost.unsafe_as(Proc(UInt32*, HRESULT)).call(pcost)
+  end
+  def get_data_plan_status(pdataplanstatus : NLM_DATAPLAN_STATUS*) : HRESULT
+    @lpVtbl.value.get_data_plan_status.unsafe_as(Proc(NLM_DATAPLAN_STATUS*, HRESULT)).call(pdataplanstatus)
+  end
+end
+struct LibWin32::INetworkConnectionCostEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def connection_cost_changed(connectionid : Guid, newcost : UInt32) : HRESULT
+    @lpVtbl.value.connection_cost_changed.unsafe_as(Proc(Guid, UInt32, HRESULT)).call(connectionid, newcost)
+  end
+  def connection_data_plan_status_changed(connectionid : Guid) : HRESULT
+    @lpVtbl.value.connection_data_plan_status_changed.unsafe_as(Proc(Guid, HRESULT)).call(connectionid)
+  end
 end

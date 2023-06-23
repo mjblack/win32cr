@@ -3705,7 +3705,7 @@ lib LibWin32
 
 
   # Params # p : Void** [In]
-  fun FwpmFreeMemory0(p : Void**)
+  fun FwpmFreeMemory0(p : Void**) : Void
 
   # Params # servername : LibC::LPWSTR [In],authnservice : UInt32 [In],authidentity : SEC_WINNT_AUTH_IDENTITY_W* [In],session : FWPM_SESSION0* [In],enginehandle : LibC::HANDLE* [In]
   fun FwpmEngineOpen0(servername : LibC::LPWSTR, authnservice : UInt32, authidentity : SEC_WINNT_AUTH_IDENTITY_W*, session : FWPM_SESSION0*, enginehandle : LibC::HANDLE*) : UInt32

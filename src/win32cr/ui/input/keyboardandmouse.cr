@@ -761,10 +761,10 @@ lib LibWin32
   fun VkKeyScanExW(ch : Char, dwhkl : HKL) : Int16
 
   # Params # bvk : UInt8 [In],bscan : UInt8 [In],dwflags : KEYBD_EVENT_FLAGS [In],dwextrainfo : LibC::UINT_PTR [In]
-  fun keybd_event(bvk : UInt8, bscan : UInt8, dwflags : KEYBD_EVENT_FLAGS, dwextrainfo : LibC::UINT_PTR)
+  fun keybd_event(bvk : UInt8, bscan : UInt8, dwflags : KEYBD_EVENT_FLAGS, dwextrainfo : LibC::UINT_PTR) : Void
 
   # Params # dwflags : MOUSE_EVENT_FLAGS [In],dx : Int32 [In],dy : Int32 [In],dwdata : UInt32 [In],dwextrainfo : LibC::UINT_PTR [In]
-  fun mouse_event(dwflags : MOUSE_EVENT_FLAGS, dx : Int32, dy : Int32, dwdata : UInt32, dwextrainfo : LibC::UINT_PTR)
+  fun mouse_event(dwflags : MOUSE_EVENT_FLAGS, dx : Int32, dy : Int32, dwdata : UInt32, dwextrainfo : LibC::UINT_PTR) : Void
 
   # Params # cinputs : UInt32 [In],pinputs : INPUT* [In],cbsize : Int32 [In]
   fun SendInput(cinputs : UInt32, pinputs : INPUT*, cbsize : Int32) : UInt32

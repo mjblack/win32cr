@@ -16,11 +16,11 @@ lib LibWin32
 
 
   struct IWebApplicationScriptEventsVTbl
-    query_interface : Proc(IWebApplicationScriptEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWebApplicationScriptEvents*, UInt32)
-    release : Proc(IWebApplicationScriptEvents*, UInt32)
-    before_script_execute : Proc(IWebApplicationScriptEvents*, IHTMLWindow2, HRESULT)
-    script_error : Proc(IWebApplicationScriptEvents*, IHTMLWindow2, IActiveScriptError, LibC::LPWSTR, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    before_script_execute : UInt64
+    script_error : UInt64
   end
 
   IWebApplicationScriptEvents_GUID = "7c3f6998-1567-4bba-b52b-48d32141d613"
@@ -30,15 +30,15 @@ lib LibWin32
   end
 
   struct IWebApplicationNavigationEventsVTbl
-    query_interface : Proc(IWebApplicationNavigationEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWebApplicationNavigationEvents*, UInt32)
-    release : Proc(IWebApplicationNavigationEvents*, UInt32)
-    before_navigate : Proc(IWebApplicationNavigationEvents*, IHTMLWindow2, LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)
-    navigate_complete : Proc(IWebApplicationNavigationEvents*, IHTMLWindow2, LibC::LPWSTR, HRESULT)
-    navigate_error : Proc(IWebApplicationNavigationEvents*, IHTMLWindow2, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
-    document_complete : Proc(IWebApplicationNavigationEvents*, IHTMLWindow2, LibC::LPWSTR, HRESULT)
-    download_begin : Proc(IWebApplicationNavigationEvents*, HRESULT)
-    download_complete : Proc(IWebApplicationNavigationEvents*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    before_navigate : UInt64
+    navigate_complete : UInt64
+    navigate_error : UInt64
+    document_complete : UInt64
+    download_begin : UInt64
+    download_complete : UInt64
   end
 
   IWebApplicationNavigationEvents_GUID = "c22615d2-d318-4da2-8422-1fcaf77b10e4"
@@ -48,10 +48,10 @@ lib LibWin32
   end
 
   struct IWebApplicationUIEventsVTbl
-    query_interface : Proc(IWebApplicationUIEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWebApplicationUIEvents*, UInt32)
-    release : Proc(IWebApplicationUIEvents*, UInt32)
-    security_problem : Proc(IWebApplicationUIEvents*, UInt32, HRESULT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    security_problem : UInt64
   end
 
   IWebApplicationUIEvents_GUID = "5b2b3f99-328c-41d5-a6f7-7483ed8e71dd"
@@ -61,11 +61,11 @@ lib LibWin32
   end
 
   struct IWebApplicationUpdateEventsVTbl
-    query_interface : Proc(IWebApplicationUpdateEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWebApplicationUpdateEvents*, UInt32)
-    release : Proc(IWebApplicationUpdateEvents*, UInt32)
-    on_paint : Proc(IWebApplicationUpdateEvents*, HRESULT)
-    on_css_changed : Proc(IWebApplicationUpdateEvents*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_paint : UInt64
+    on_css_changed : UInt64
   end
 
   IWebApplicationUpdateEvents_GUID = "3e59e6b7-c652-4daf-ad5e-16feb350cde3"
@@ -75,14 +75,14 @@ lib LibWin32
   end
 
   struct IWebApplicationHostVTbl
-    query_interface : Proc(IWebApplicationHost*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWebApplicationHost*, UInt32)
-    release : Proc(IWebApplicationHost*, UInt32)
-    get_hwnd : Proc(IWebApplicationHost*, HANDLE*, HRESULT)
-    get_document : Proc(IWebApplicationHost*, IHTMLDocument2*, HRESULT)
-    refresh : Proc(IWebApplicationHost*, HRESULT)
-    advise : Proc(IWebApplicationHost*, Guid*, IUnknown, UInt32*, HRESULT)
-    unadvise : Proc(IWebApplicationHost*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_hwnd : UInt64
+    get_document : UInt64
+    refresh : UInt64
+    advise : UInt64
+    unadvise : UInt64
   end
 
   IWebApplicationHost_GUID = "cecbd2c3-a3a5-4749-9681-20e9161c6794"
@@ -92,10 +92,10 @@ lib LibWin32
   end
 
   struct IWebApplicationActivationVTbl
-    query_interface : Proc(IWebApplicationActivation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWebApplicationActivation*, UInt32)
-    release : Proc(IWebApplicationActivation*, UInt32)
-    cancel_pending_activation : Proc(IWebApplicationActivation*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    cancel_pending_activation : UInt64
   end
 
   IWebApplicationActivation_GUID = "bcdcd0de-330e-481b-b843-4898a6a8ebac"
@@ -105,11 +105,11 @@ lib LibWin32
   end
 
   struct IWebApplicationAuthoringModeVTbl
-    query_interface : Proc(IWebApplicationAuthoringMode*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWebApplicationAuthoringMode*, UInt32)
-    release : Proc(IWebApplicationAuthoringMode*, UInt32)
-    query_service : Proc(IWebApplicationAuthoringMode*, Guid*, Guid*, Void**, HRESULT)
-    get_authoring_client_binary : Proc(IWebApplicationAuthoringMode*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    query_service : UInt64
+    get_authoring_client_binary : UInt64
   end
 
   IWebApplicationAuthoringMode_GUID = "720aea93-1964-4db0-b005-29eb9e2b18a9"
@@ -118,4 +118,138 @@ lib LibWin32
     lpVtbl : IWebApplicationAuthoringModeVTbl*
   end
 
+end
+struct LibWin32::IWebApplicationScriptEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def before_script_execute(htmlwindow : IHTMLWindow2) : HRESULT
+    @lpVtbl.value.before_script_execute.unsafe_as(Proc(IHTMLWindow2, HRESULT)).call(htmlwindow)
+  end
+  def script_error(htmlwindow : IHTMLWindow2, scripterror : IActiveScriptError, url : LibC::LPWSTR, errorhandled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.script_error.unsafe_as(Proc(IHTMLWindow2, IActiveScriptError, LibC::LPWSTR, LibC::BOOL, HRESULT)).call(htmlwindow, scripterror, url, errorhandled)
+  end
+end
+struct LibWin32::IWebApplicationNavigationEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def before_navigate(htmlwindow : IHTMLWindow2, url : LibC::LPWSTR, navigationflags : UInt32, targetframename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.before_navigate.unsafe_as(Proc(IHTMLWindow2, LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)).call(htmlwindow, url, navigationflags, targetframename)
+  end
+  def navigate_complete(htmlwindow : IHTMLWindow2, url : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.navigate_complete.unsafe_as(Proc(IHTMLWindow2, LibC::LPWSTR, HRESULT)).call(htmlwindow, url)
+  end
+  def navigate_error(htmlwindow : IHTMLWindow2, url : LibC::LPWSTR, targetframename : LibC::LPWSTR, statuscode : UInt32) : HRESULT
+    @lpVtbl.value.navigate_error.unsafe_as(Proc(IHTMLWindow2, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(htmlwindow, url, targetframename, statuscode)
+  end
+  def document_complete(htmlwindow : IHTMLWindow2, url : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.document_complete.unsafe_as(Proc(IHTMLWindow2, LibC::LPWSTR, HRESULT)).call(htmlwindow, url)
+  end
+  def download_begin : HRESULT
+    @lpVtbl.value.download_begin.unsafe_as(Proc(HRESULT)).call
+  end
+  def download_complete : HRESULT
+    @lpVtbl.value.download_complete.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWebApplicationUIEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def security_problem(securityproblem : UInt32, result : HRESULT*) : HRESULT
+    @lpVtbl.value.security_problem.unsafe_as(Proc(UInt32, HRESULT*, HRESULT)).call(securityproblem, result)
+  end
+end
+struct LibWin32::IWebApplicationUpdateEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_paint : HRESULT
+    @lpVtbl.value.on_paint.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_css_changed : HRESULT
+    @lpVtbl.value.on_css_changed.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWebApplicationHost
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_hwnd(hwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_hwnd.unsafe_as(Proc(HANDLE*, HRESULT)).call(hwnd)
+  end
+  def get_document(htmldocument : IHTMLDocument2*) : HRESULT
+    @lpVtbl.value.get_document.unsafe_as(Proc(IHTMLDocument2*, HRESULT)).call(htmldocument)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def advise(interfaceid : Guid*, callback : IUnknown, cookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise.unsafe_as(Proc(Guid*, IUnknown, UInt32*, HRESULT)).call(interfaceid, callback, cookie)
+  end
+  def unadvise(cookie : UInt32) : HRESULT
+    @lpVtbl.value.unadvise.unsafe_as(Proc(UInt32, HRESULT)).call(cookie)
+  end
+end
+struct LibWin32::IWebApplicationActivation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def cancel_pending_activation : HRESULT
+    @lpVtbl.value.cancel_pending_activation.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWebApplicationAuthoringMode
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def query_service(guidservice : Guid*, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_service.unsafe_as(Proc(Guid*, Guid*, Void**, HRESULT)).call(guidservice, riid, ppvobject)
+  end
+  def get_authoring_client_binary(designmodedllpath : UInt8**) : HRESULT
+    @lpVtbl.value.get_authoring_client_binary.unsafe_as(Proc(UInt8**, HRESULT)).call(designmodedllpath)
+  end
 end

@@ -28,12 +28,12 @@ lib LibWin32
 
 
   struct ID3D11On12DeviceVTbl
-    query_interface : Proc(ID3D11On12Device*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11On12Device*, UInt32)
-    release : Proc(ID3D11On12Device*, UInt32)
-    create_wrapped_resource : Proc(ID3D11On12Device*, IUnknown, D3D11_RESOURCE_FLAGS*, D3D12_RESOURCE_STATES, D3D12_RESOURCE_STATES, Guid*, Void**, HRESULT)
-    release_wrapped_resources : Proc(ID3D11On12Device*, ID3D11Resource*, UInt32, Void)
-    acquire_wrapped_resources : Proc(ID3D11On12Device*, ID3D11Resource*, UInt32, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_wrapped_resource : UInt64
+    release_wrapped_resources : UInt64
+    acquire_wrapped_resources : UInt64
   end
 
   ID3D11On12Device_GUID = "85611e73-70a9-490e-9614-a9e302777904"
@@ -43,13 +43,13 @@ lib LibWin32
   end
 
   struct ID3D11On12Device1VTbl
-    query_interface : Proc(ID3D11On12Device1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11On12Device1*, UInt32)
-    release : Proc(ID3D11On12Device1*, UInt32)
-    create_wrapped_resource : Proc(ID3D11On12Device1*, IUnknown, D3D11_RESOURCE_FLAGS*, D3D12_RESOURCE_STATES, D3D12_RESOURCE_STATES, Guid*, Void**, HRESULT)
-    release_wrapped_resources : Proc(ID3D11On12Device1*, ID3D11Resource*, UInt32, Void)
-    acquire_wrapped_resources : Proc(ID3D11On12Device1*, ID3D11Resource*, UInt32, Void)
-    get_d3_d12_device : Proc(ID3D11On12Device1*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_wrapped_resource : UInt64
+    release_wrapped_resources : UInt64
+    acquire_wrapped_resources : UInt64
+    get_d3_d12_device : UInt64
   end
 
   ID3D11On12Device1_GUID = "bdb64df4-ea2f-4c70-b861-aaab1258bb5d"
@@ -59,15 +59,15 @@ lib LibWin32
   end
 
   struct ID3D11On12Device2VTbl
-    query_interface : Proc(ID3D11On12Device2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11On12Device2*, UInt32)
-    release : Proc(ID3D11On12Device2*, UInt32)
-    create_wrapped_resource : Proc(ID3D11On12Device2*, IUnknown, D3D11_RESOURCE_FLAGS*, D3D12_RESOURCE_STATES, D3D12_RESOURCE_STATES, Guid*, Void**, HRESULT)
-    release_wrapped_resources : Proc(ID3D11On12Device2*, ID3D11Resource*, UInt32, Void)
-    acquire_wrapped_resources : Proc(ID3D11On12Device2*, ID3D11Resource*, UInt32, Void)
-    get_d3_d12_device : Proc(ID3D11On12Device2*, Guid*, Void**, HRESULT)
-    unwrap_underlying_resource : Proc(ID3D11On12Device2*, ID3D11Resource, ID3D12CommandQueue, Guid*, Void**, HRESULT)
-    return_underlying_resource : Proc(ID3D11On12Device2*, ID3D11Resource, UInt32, UInt64*, ID3D12Fence*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_wrapped_resource : UInt64
+    release_wrapped_resources : UInt64
+    acquire_wrapped_resources : UInt64
+    get_d3_d12_device : UInt64
+    unwrap_underlying_resource : UInt64
+    return_underlying_resource : UInt64
   end
 
   ID3D11On12Device2_GUID = "dc90f331-4740-43fa-866e-67f12cb58223"
@@ -79,4 +79,76 @@ lib LibWin32
 
   # Params # pdevice : IUnknown [In],flags : UInt32 [In],pfeaturelevels : D3D_FEATURE_LEVEL* [In],featurelevels : UInt32 [In],ppcommandqueues : IUnknown* [In],numqueues : UInt32 [In],nodemask : UInt32 [In],ppdevice : ID3D11Device* [In],ppimmediatecontext : ID3D11DeviceContext* [In],pchosenfeaturelevel : D3D_FEATURE_LEVEL* [In]
   fun D3D11On12CreateDevice(pdevice : IUnknown, flags : UInt32, pfeaturelevels : D3D_FEATURE_LEVEL*, featurelevels : UInt32, ppcommandqueues : IUnknown*, numqueues : UInt32, nodemask : UInt32, ppdevice : ID3D11Device*, ppimmediatecontext : ID3D11DeviceContext*, pchosenfeaturelevel : D3D_FEATURE_LEVEL*) : HRESULT
+end
+struct LibWin32::ID3D11On12Device
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_wrapped_resource(presource12 : IUnknown, pflags11 : D3D11_RESOURCE_FLAGS*, instate : D3D12_RESOURCE_STATES, outstate : D3D12_RESOURCE_STATES, riid : Guid*, ppresource11 : Void**) : HRESULT
+    @lpVtbl.value.create_wrapped_resource.unsafe_as(Proc(IUnknown, D3D11_RESOURCE_FLAGS*, D3D12_RESOURCE_STATES, D3D12_RESOURCE_STATES, Guid*, Void**, HRESULT)).call(presource12, pflags11, instate, outstate, riid, ppresource11)
+  end
+  def release_wrapped_resources(ppresources : ID3D11Resource*, numresources : UInt32) : Void
+    @lpVtbl.value.release_wrapped_resources.unsafe_as(Proc(ID3D11Resource*, UInt32, Void)).call(ppresources, numresources)
+  end
+  def acquire_wrapped_resources(ppresources : ID3D11Resource*, numresources : UInt32) : Void
+    @lpVtbl.value.acquire_wrapped_resources.unsafe_as(Proc(ID3D11Resource*, UInt32, Void)).call(ppresources, numresources)
+  end
+end
+struct LibWin32::ID3D11On12Device1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_wrapped_resource(presource12 : IUnknown, pflags11 : D3D11_RESOURCE_FLAGS*, instate : D3D12_RESOURCE_STATES, outstate : D3D12_RESOURCE_STATES, riid : Guid*, ppresource11 : Void**) : HRESULT
+    @lpVtbl.value.create_wrapped_resource.unsafe_as(Proc(IUnknown, D3D11_RESOURCE_FLAGS*, D3D12_RESOURCE_STATES, D3D12_RESOURCE_STATES, Guid*, Void**, HRESULT)).call(presource12, pflags11, instate, outstate, riid, ppresource11)
+  end
+  def release_wrapped_resources(ppresources : ID3D11Resource*, numresources : UInt32) : Void
+    @lpVtbl.value.release_wrapped_resources.unsafe_as(Proc(ID3D11Resource*, UInt32, Void)).call(ppresources, numresources)
+  end
+  def acquire_wrapped_resources(ppresources : ID3D11Resource*, numresources : UInt32) : Void
+    @lpVtbl.value.acquire_wrapped_resources.unsafe_as(Proc(ID3D11Resource*, UInt32, Void)).call(ppresources, numresources)
+  end
+  def get_d3_d12_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_d3_d12_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+end
+struct LibWin32::ID3D11On12Device2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_wrapped_resource(presource12 : IUnknown, pflags11 : D3D11_RESOURCE_FLAGS*, instate : D3D12_RESOURCE_STATES, outstate : D3D12_RESOURCE_STATES, riid : Guid*, ppresource11 : Void**) : HRESULT
+    @lpVtbl.value.create_wrapped_resource.unsafe_as(Proc(IUnknown, D3D11_RESOURCE_FLAGS*, D3D12_RESOURCE_STATES, D3D12_RESOURCE_STATES, Guid*, Void**, HRESULT)).call(presource12, pflags11, instate, outstate, riid, ppresource11)
+  end
+  def release_wrapped_resources(ppresources : ID3D11Resource*, numresources : UInt32) : Void
+    @lpVtbl.value.release_wrapped_resources.unsafe_as(Proc(ID3D11Resource*, UInt32, Void)).call(ppresources, numresources)
+  end
+  def acquire_wrapped_resources(ppresources : ID3D11Resource*, numresources : UInt32) : Void
+    @lpVtbl.value.acquire_wrapped_resources.unsafe_as(Proc(ID3D11Resource*, UInt32, Void)).call(ppresources, numresources)
+  end
+  def get_d3_d12_device(riid : Guid*, ppvdevice : Void**) : HRESULT
+    @lpVtbl.value.get_d3_d12_device.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvdevice)
+  end
+  def unwrap_underlying_resource(presource11 : ID3D11Resource, pcommandqueue : ID3D12CommandQueue, riid : Guid*, ppvresource12 : Void**) : HRESULT
+    @lpVtbl.value.unwrap_underlying_resource.unsafe_as(Proc(ID3D11Resource, ID3D12CommandQueue, Guid*, Void**, HRESULT)).call(presource11, pcommandqueue, riid, ppvresource12)
+  end
+  def return_underlying_resource(presource11 : ID3D11Resource, numsync : UInt32, psignalvalues : UInt64*, ppfences : ID3D12Fence*) : HRESULT
+    @lpVtbl.value.return_underlying_resource.unsafe_as(Proc(ID3D11Resource, UInt32, UInt64*, ID3D12Fence*, HRESULT)).call(presource11, numsync, psignalvalues, ppfences)
+  end
 end

@@ -46,10 +46,10 @@ lib LibWin32
 
 
   struct IRandomAccessStreamFileAccessModeVTbl
-    query_interface : Proc(IRandomAccessStreamFileAccessMode*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRandomAccessStreamFileAccessMode*, UInt32)
-    release : Proc(IRandomAccessStreamFileAccessMode*, UInt32)
-    get_mode : Proc(IRandomAccessStreamFileAccessMode*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_mode : UInt64
   end
 
   IRandomAccessStreamFileAccessMode_GUID = "332e5848-2e15-458e-85c4-c911c0c3d6f4"
@@ -59,10 +59,10 @@ lib LibWin32
   end
 
   struct IUnbufferedFileHandleOplockCallbackVTbl
-    query_interface : Proc(IUnbufferedFileHandleOplockCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUnbufferedFileHandleOplockCallback*, UInt32)
-    release : Proc(IUnbufferedFileHandleOplockCallback*, UInt32)
-    on_broken_callback : Proc(IUnbufferedFileHandleOplockCallback*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_broken_callback : UInt64
   end
 
   IUnbufferedFileHandleOplockCallback_GUID = "d1019a0e-6243-4329-8497-2e75894d7710"
@@ -72,11 +72,11 @@ lib LibWin32
   end
 
   struct IUnbufferedFileHandleProviderVTbl
-    query_interface : Proc(IUnbufferedFileHandleProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUnbufferedFileHandleProvider*, UInt32)
-    release : Proc(IUnbufferedFileHandleProvider*, UInt32)
-    open_unbuffered_file_handle : Proc(IUnbufferedFileHandleProvider*, IUnbufferedFileHandleOplockCallback, LibC::UINT_PTR*, HRESULT)
-    close_unbuffered_file_handle : Proc(IUnbufferedFileHandleProvider*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    open_unbuffered_file_handle : UInt64
+    close_unbuffered_file_handle : UInt64
   end
 
   IUnbufferedFileHandleProvider_GUID = "a65c9109-42ab-4b94-a7b1-dd2e4e68515e"
@@ -86,10 +86,10 @@ lib LibWin32
   end
 
   struct IOplockBreakingHandlerVTbl
-    query_interface : Proc(IOplockBreakingHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IOplockBreakingHandler*, UInt32)
-    release : Proc(IOplockBreakingHandler*, UInt32)
-    oplock_breaking : Proc(IOplockBreakingHandler*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    oplock_breaking : UInt64
   end
 
   IOplockBreakingHandler_GUID = "826abe3d-3acd-47d3-84f2-88aaedcf6304"
@@ -99,10 +99,10 @@ lib LibWin32
   end
 
   struct IStorageItemHandleAccessVTbl
-    query_interface : Proc(IStorageItemHandleAccess*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IStorageItemHandleAccess*, UInt32)
-    release : Proc(IStorageItemHandleAccess*, UInt32)
-    create : Proc(IStorageItemHandleAccess*, HANDLE_ACCESS_OPTIONS, HANDLE_SHARING_OPTIONS, HANDLE_OPTIONS, IOplockBreakingHandler, LibC::HANDLE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create : UInt64
   end
 
   IStorageItemHandleAccess_GUID = "5ca296b2-2c25-4d22-b785-b885c8201e6a"
@@ -112,10 +112,10 @@ lib LibWin32
   end
 
   struct IStorageFolderHandleAccessVTbl
-    query_interface : Proc(IStorageFolderHandleAccess*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IStorageFolderHandleAccess*, UInt32)
-    release : Proc(IStorageFolderHandleAccess*, UInt32)
-    create : Proc(IStorageFolderHandleAccess*, LibC::LPWSTR, HANDLE_CREATION_OPTIONS, HANDLE_ACCESS_OPTIONS, HANDLE_SHARING_OPTIONS, HANDLE_OPTIONS, IOplockBreakingHandler, LibC::HANDLE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create : UInt64
   end
 
   IStorageFolderHandleAccess_GUID = "df19938f-5462-48a0-be65-d2a3271a08d6"
@@ -124,4 +124,91 @@ lib LibWin32
     lpVtbl : IStorageFolderHandleAccessVTbl*
   end
 
+end
+struct LibWin32::IRandomAccessStreamFileAccessMode
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_mode(fileaccessmode : UInt32*) : HRESULT
+    @lpVtbl.value.get_mode.unsafe_as(Proc(UInt32*, HRESULT)).call(fileaccessmode)
+  end
+end
+struct LibWin32::IUnbufferedFileHandleOplockCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_broken_callback : HRESULT
+    @lpVtbl.value.on_broken_callback.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IUnbufferedFileHandleProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def open_unbuffered_file_handle(oplockbreakcallback : IUnbufferedFileHandleOplockCallback, filehandle : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.open_unbuffered_file_handle.unsafe_as(Proc(IUnbufferedFileHandleOplockCallback, LibC::UINT_PTR*, HRESULT)).call(oplockbreakcallback, filehandle)
+  end
+  def close_unbuffered_file_handle : HRESULT
+    @lpVtbl.value.close_unbuffered_file_handle.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IOplockBreakingHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def oplock_breaking : HRESULT
+    @lpVtbl.value.oplock_breaking.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IStorageItemHandleAccess
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create(accessoptions : HANDLE_ACCESS_OPTIONS, sharingoptions : HANDLE_SHARING_OPTIONS, options : HANDLE_OPTIONS, oplockbreakinghandler : IOplockBreakingHandler, interophandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create.unsafe_as(Proc(HANDLE_ACCESS_OPTIONS, HANDLE_SHARING_OPTIONS, HANDLE_OPTIONS, IOplockBreakingHandler, LibC::HANDLE*, HRESULT)).call(accessoptions, sharingoptions, options, oplockbreakinghandler, interophandle)
+  end
+end
+struct LibWin32::IStorageFolderHandleAccess
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create(filename : LibC::LPWSTR, creationoptions : HANDLE_CREATION_OPTIONS, accessoptions : HANDLE_ACCESS_OPTIONS, sharingoptions : HANDLE_SHARING_OPTIONS, options : HANDLE_OPTIONS, oplockbreakinghandler : IOplockBreakingHandler, interophandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create.unsafe_as(Proc(LibC::LPWSTR, HANDLE_CREATION_OPTIONS, HANDLE_ACCESS_OPTIONS, HANDLE_SHARING_OPTIONS, HANDLE_OPTIONS, IOplockBreakingHandler, LibC::HANDLE*, HRESULT)).call(filename, creationoptions, accessoptions, sharingoptions, options, oplockbreakinghandler, interophandle)
+  end
 end

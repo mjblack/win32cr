@@ -61,11 +61,11 @@ lib LibWin32
 
 
   struct ITpmVirtualSmartCardManagerStatusCallbackVTbl
-    query_interface : Proc(ITpmVirtualSmartCardManagerStatusCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITpmVirtualSmartCardManagerStatusCallback*, UInt32)
-    release : Proc(ITpmVirtualSmartCardManagerStatusCallback*, UInt32)
-    report_progress : Proc(ITpmVirtualSmartCardManagerStatusCallback*, TPMVSCMGR_STATUS, HRESULT)
-    report_error : Proc(ITpmVirtualSmartCardManagerStatusCallback*, TPMVSCMGR_ERROR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    report_progress : UInt64
+    report_error : UInt64
   end
 
   ITpmVirtualSmartCardManagerStatusCallback_GUID = "1a1bb35f-abb8-451c-a1ae-33d98f1bef4a"
@@ -75,11 +75,11 @@ lib LibWin32
   end
 
   struct ITpmVirtualSmartCardManagerVTbl
-    query_interface : Proc(ITpmVirtualSmartCardManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITpmVirtualSmartCardManager*, UInt32)
-    release : Proc(ITpmVirtualSmartCardManager*, UInt32)
-    create_virtual_smart_card : Proc(ITpmVirtualSmartCardManager*, LibC::LPWSTR, UInt8, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::BOOL, ITpmVirtualSmartCardManagerStatusCallback, LibC::LPWSTR*, LibC::BOOL*, HRESULT)
-    destroy_virtual_smart_card : Proc(ITpmVirtualSmartCardManager*, LibC::LPWSTR, ITpmVirtualSmartCardManagerStatusCallback, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_virtual_smart_card : UInt64
+    destroy_virtual_smart_card : UInt64
   end
 
   ITpmVirtualSmartCardManager_GUID = "112b1dff-d9dc-41f7-869f-d67fee7cb591"
@@ -89,12 +89,12 @@ lib LibWin32
   end
 
   struct ITpmVirtualSmartCardManager2VTbl
-    query_interface : Proc(ITpmVirtualSmartCardManager2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITpmVirtualSmartCardManager2*, UInt32)
-    release : Proc(ITpmVirtualSmartCardManager2*, UInt32)
-    create_virtual_smart_card : Proc(ITpmVirtualSmartCardManager2*, LibC::LPWSTR, UInt8, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::BOOL, ITpmVirtualSmartCardManagerStatusCallback, LibC::LPWSTR*, LibC::BOOL*, HRESULT)
-    destroy_virtual_smart_card : Proc(ITpmVirtualSmartCardManager2*, LibC::LPWSTR, ITpmVirtualSmartCardManagerStatusCallback, LibC::BOOL*, HRESULT)
-    create_virtual_smart_card_with_pin_policy : Proc(ITpmVirtualSmartCardManager2*, LibC::LPWSTR, UInt8, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::BOOL, ITpmVirtualSmartCardManagerStatusCallback, LibC::LPWSTR*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_virtual_smart_card : UInt64
+    destroy_virtual_smart_card : UInt64
+    create_virtual_smart_card_with_pin_policy : UInt64
   end
 
   ITpmVirtualSmartCardManager2_GUID = "fdf8a2b9-02de-47f4-bc26-aa85ab5e5267"
@@ -104,13 +104,13 @@ lib LibWin32
   end
 
   struct ITpmVirtualSmartCardManager3VTbl
-    query_interface : Proc(ITpmVirtualSmartCardManager3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITpmVirtualSmartCardManager3*, UInt32)
-    release : Proc(ITpmVirtualSmartCardManager3*, UInt32)
-    create_virtual_smart_card : Proc(ITpmVirtualSmartCardManager3*, LibC::LPWSTR, UInt8, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::BOOL, ITpmVirtualSmartCardManagerStatusCallback, LibC::LPWSTR*, LibC::BOOL*, HRESULT)
-    destroy_virtual_smart_card : Proc(ITpmVirtualSmartCardManager3*, LibC::LPWSTR, ITpmVirtualSmartCardManagerStatusCallback, LibC::BOOL*, HRESULT)
-    create_virtual_smart_card_with_pin_policy : Proc(ITpmVirtualSmartCardManager3*, LibC::LPWSTR, UInt8, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::BOOL, ITpmVirtualSmartCardManagerStatusCallback, LibC::LPWSTR*, LibC::BOOL*, HRESULT)
-    create_virtual_smart_card_with_attestation : Proc(ITpmVirtualSmartCardManager3*, LibC::LPWSTR, UInt8, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, TPMVSC_ATTESTATION_TYPE, LibC::BOOL, ITpmVirtualSmartCardManagerStatusCallback, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_virtual_smart_card : UInt64
+    destroy_virtual_smart_card : UInt64
+    create_virtual_smart_card_with_pin_policy : UInt64
+    create_virtual_smart_card_with_attestation : UInt64
   end
 
   ITpmVirtualSmartCardManager3_GUID = "3c745a97-f375-4150-be17-5950f694c699"
@@ -119,4 +119,81 @@ lib LibWin32
     lpVtbl : ITpmVirtualSmartCardManager3VTbl*
   end
 
+end
+struct LibWin32::ITpmVirtualSmartCardManagerStatusCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def report_progress(status : TPMVSCMGR_STATUS) : HRESULT
+    @lpVtbl.value.report_progress.unsafe_as(Proc(TPMVSCMGR_STATUS, HRESULT)).call(status)
+  end
+  def report_error(error : TPMVSCMGR_ERROR) : HRESULT
+    @lpVtbl.value.report_error.unsafe_as(Proc(TPMVSCMGR_ERROR, HRESULT)).call(error)
+  end
+end
+struct LibWin32::ITpmVirtualSmartCardManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_virtual_smart_card(pszfriendlyname : LibC::LPWSTR, badminalgid : UInt8, pbadminkey : UInt8*, cbadminkey : UInt32, pbadminkcv : UInt8*, cbadminkcv : UInt32, pbpuk : UInt8*, cbpuk : UInt32, pbpin : UInt8*, cbpin : UInt32, fgenerate : LibC::BOOL, pstatuscallback : ITpmVirtualSmartCardManagerStatusCallback, ppszinstanceid : LibC::LPWSTR*, pfneedreboot : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.create_virtual_smart_card.unsafe_as(Proc(LibC::LPWSTR, UInt8, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::BOOL, ITpmVirtualSmartCardManagerStatusCallback, LibC::LPWSTR*, LibC::BOOL*, HRESULT)).call(pszfriendlyname, badminalgid, pbadminkey, cbadminkey, pbadminkcv, cbadminkcv, pbpuk, cbpuk, pbpin, cbpin, fgenerate, pstatuscallback, ppszinstanceid, pfneedreboot)
+  end
+  def destroy_virtual_smart_card(pszinstanceid : LibC::LPWSTR, pstatuscallback : ITpmVirtualSmartCardManagerStatusCallback, pfneedreboot : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.destroy_virtual_smart_card.unsafe_as(Proc(LibC::LPWSTR, ITpmVirtualSmartCardManagerStatusCallback, LibC::BOOL*, HRESULT)).call(pszinstanceid, pstatuscallback, pfneedreboot)
+  end
+end
+struct LibWin32::ITpmVirtualSmartCardManager2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_virtual_smart_card(pszfriendlyname : LibC::LPWSTR, badminalgid : UInt8, pbadminkey : UInt8*, cbadminkey : UInt32, pbadminkcv : UInt8*, cbadminkcv : UInt32, pbpuk : UInt8*, cbpuk : UInt32, pbpin : UInt8*, cbpin : UInt32, fgenerate : LibC::BOOL, pstatuscallback : ITpmVirtualSmartCardManagerStatusCallback, ppszinstanceid : LibC::LPWSTR*, pfneedreboot : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.create_virtual_smart_card.unsafe_as(Proc(LibC::LPWSTR, UInt8, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::BOOL, ITpmVirtualSmartCardManagerStatusCallback, LibC::LPWSTR*, LibC::BOOL*, HRESULT)).call(pszfriendlyname, badminalgid, pbadminkey, cbadminkey, pbadminkcv, cbadminkcv, pbpuk, cbpuk, pbpin, cbpin, fgenerate, pstatuscallback, ppszinstanceid, pfneedreboot)
+  end
+  def destroy_virtual_smart_card(pszinstanceid : LibC::LPWSTR, pstatuscallback : ITpmVirtualSmartCardManagerStatusCallback, pfneedreboot : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.destroy_virtual_smart_card.unsafe_as(Proc(LibC::LPWSTR, ITpmVirtualSmartCardManagerStatusCallback, LibC::BOOL*, HRESULT)).call(pszinstanceid, pstatuscallback, pfneedreboot)
+  end
+  def create_virtual_smart_card_with_pin_policy(pszfriendlyname : LibC::LPWSTR, badminalgid : UInt8, pbadminkey : UInt8*, cbadminkey : UInt32, pbadminkcv : UInt8*, cbadminkcv : UInt32, pbpuk : UInt8*, cbpuk : UInt32, pbpin : UInt8*, cbpin : UInt32, pbpinpolicy : UInt8*, cbpinpolicy : UInt32, fgenerate : LibC::BOOL, pstatuscallback : ITpmVirtualSmartCardManagerStatusCallback, ppszinstanceid : LibC::LPWSTR*, pfneedreboot : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.create_virtual_smart_card_with_pin_policy.unsafe_as(Proc(LibC::LPWSTR, UInt8, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::BOOL, ITpmVirtualSmartCardManagerStatusCallback, LibC::LPWSTR*, LibC::BOOL*, HRESULT)).call(pszfriendlyname, badminalgid, pbadminkey, cbadminkey, pbadminkcv, cbadminkcv, pbpuk, cbpuk, pbpin, cbpin, pbpinpolicy, cbpinpolicy, fgenerate, pstatuscallback, ppszinstanceid, pfneedreboot)
+  end
+end
+struct LibWin32::ITpmVirtualSmartCardManager3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_virtual_smart_card(pszfriendlyname : LibC::LPWSTR, badminalgid : UInt8, pbadminkey : UInt8*, cbadminkey : UInt32, pbadminkcv : UInt8*, cbadminkcv : UInt32, pbpuk : UInt8*, cbpuk : UInt32, pbpin : UInt8*, cbpin : UInt32, fgenerate : LibC::BOOL, pstatuscallback : ITpmVirtualSmartCardManagerStatusCallback, ppszinstanceid : LibC::LPWSTR*, pfneedreboot : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.create_virtual_smart_card.unsafe_as(Proc(LibC::LPWSTR, UInt8, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::BOOL, ITpmVirtualSmartCardManagerStatusCallback, LibC::LPWSTR*, LibC::BOOL*, HRESULT)).call(pszfriendlyname, badminalgid, pbadminkey, cbadminkey, pbadminkcv, cbadminkcv, pbpuk, cbpuk, pbpin, cbpin, fgenerate, pstatuscallback, ppszinstanceid, pfneedreboot)
+  end
+  def destroy_virtual_smart_card(pszinstanceid : LibC::LPWSTR, pstatuscallback : ITpmVirtualSmartCardManagerStatusCallback, pfneedreboot : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.destroy_virtual_smart_card.unsafe_as(Proc(LibC::LPWSTR, ITpmVirtualSmartCardManagerStatusCallback, LibC::BOOL*, HRESULT)).call(pszinstanceid, pstatuscallback, pfneedreboot)
+  end
+  def create_virtual_smart_card_with_pin_policy(pszfriendlyname : LibC::LPWSTR, badminalgid : UInt8, pbadminkey : UInt8*, cbadminkey : UInt32, pbadminkcv : UInt8*, cbadminkcv : UInt32, pbpuk : UInt8*, cbpuk : UInt32, pbpin : UInt8*, cbpin : UInt32, pbpinpolicy : UInt8*, cbpinpolicy : UInt32, fgenerate : LibC::BOOL, pstatuscallback : ITpmVirtualSmartCardManagerStatusCallback, ppszinstanceid : LibC::LPWSTR*, pfneedreboot : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.create_virtual_smart_card_with_pin_policy.unsafe_as(Proc(LibC::LPWSTR, UInt8, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::BOOL, ITpmVirtualSmartCardManagerStatusCallback, LibC::LPWSTR*, LibC::BOOL*, HRESULT)).call(pszfriendlyname, badminalgid, pbadminkey, cbadminkey, pbadminkcv, cbadminkcv, pbpuk, cbpuk, pbpin, cbpin, pbpinpolicy, cbpinpolicy, fgenerate, pstatuscallback, ppszinstanceid, pfneedreboot)
+  end
+  def create_virtual_smart_card_with_attestation(pszfriendlyname : LibC::LPWSTR, badminalgid : UInt8, pbadminkey : UInt8*, cbadminkey : UInt32, pbadminkcv : UInt8*, cbadminkcv : UInt32, pbpuk : UInt8*, cbpuk : UInt32, pbpin : UInt8*, cbpin : UInt32, pbpinpolicy : UInt8*, cbpinpolicy : UInt32, attestationtype : TPMVSC_ATTESTATION_TYPE, fgenerate : LibC::BOOL, pstatuscallback : ITpmVirtualSmartCardManagerStatusCallback, ppszinstanceid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.create_virtual_smart_card_with_attestation.unsafe_as(Proc(LibC::LPWSTR, UInt8, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, TPMVSC_ATTESTATION_TYPE, LibC::BOOL, ITpmVirtualSmartCardManagerStatusCallback, LibC::LPWSTR*, HRESULT)).call(pszfriendlyname, badminalgid, pbadminkey, cbadminkey, pbadminkcv, cbadminkcv, pbpuk, cbpuk, pbpin, cbpin, pbpinpolicy, cbpinpolicy, attestationtype, fgenerate, pstatuscallback, ppszinstanceid)
+  end
 end

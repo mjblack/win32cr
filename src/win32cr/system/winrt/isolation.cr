@@ -11,10 +11,10 @@ require "../../foundation.cr"
 lib LibWin32
 
   struct IIsolatedEnvironmentInteropVTbl
-    query_interface : Proc(IIsolatedEnvironmentInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IIsolatedEnvironmentInterop*, UInt32)
-    release : Proc(IIsolatedEnvironmentInterop*, UInt32)
-    get_host_hwnd_interop : Proc(IIsolatedEnvironmentInterop*, LibC::HANDLE, HANDLE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_host_hwnd_interop : UInt64
   end
 
   IIsolatedEnvironmentInterop_GUID = "85713c2e-8e62-46c5-8de2-c647e1d54636"
@@ -23,4 +23,18 @@ lib LibWin32
     lpVtbl : IIsolatedEnvironmentInteropVTbl*
   end
 
+end
+struct LibWin32::IIsolatedEnvironmentInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_host_hwnd_interop(containerhwnd : LibC::HANDLE, hosthwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_host_hwnd_interop.unsafe_as(Proc(LibC::HANDLE, HANDLE*, HRESULT)).call(containerhwnd, hosthwnd)
+  end
 end

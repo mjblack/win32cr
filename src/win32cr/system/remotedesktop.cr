@@ -1622,14 +1622,14 @@ lib LibWin32
 
 
   struct IAudioEndpointVTbl
-    query_interface : Proc(IAudioEndpoint*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioEndpoint*, UInt32)
-    release : Proc(IAudioEndpoint*, UInt32)
-    get_frame_format : Proc(IAudioEndpoint*, WAVEFORMATEX**, HRESULT)
-    get_frames_per_packet : Proc(IAudioEndpoint*, UInt32*, HRESULT)
-    get_latency : Proc(IAudioEndpoint*, Int64*, HRESULT)
-    set_stream_flags : Proc(IAudioEndpoint*, UInt32, HRESULT)
-    set_event_handle : Proc(IAudioEndpoint*, LibC::HANDLE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_frame_format : UInt64
+    get_frames_per_packet : UInt64
+    get_latency : UInt64
+    set_stream_flags : UInt64
+    set_event_handle : UInt64
   end
 
   IAudioEndpoint_GUID = "30a99515-1527-4451-af9f-00c5f0234daf"
@@ -1639,13 +1639,13 @@ lib LibWin32
   end
 
   struct IAudioEndpointRTVTbl
-    query_interface : Proc(IAudioEndpointRT*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioEndpointRT*, UInt32)
-    release : Proc(IAudioEndpointRT*, UInt32)
-    get_current_padding : Proc(IAudioEndpointRT*, Int64*, AE_CURRENT_POSITION*, Void)
-    processing_complete : Proc(IAudioEndpointRT*, Void)
-    set_pin_inactive : Proc(IAudioEndpointRT*, HRESULT)
-    set_pin_active : Proc(IAudioEndpointRT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_current_padding : UInt64
+    processing_complete : UInt64
+    set_pin_inactive : UInt64
+    set_pin_active : UInt64
   end
 
   IAudioEndpointRT_GUID = "dfd2005f-a6e5-4d39-a265-939ada9fbb4d"
@@ -1655,12 +1655,12 @@ lib LibWin32
   end
 
   struct IAudioInputEndpointRTVTbl
-    query_interface : Proc(IAudioInputEndpointRT*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioInputEndpointRT*, UInt32)
-    release : Proc(IAudioInputEndpointRT*, UInt32)
-    get_input_data_pointer : Proc(IAudioInputEndpointRT*, APO_CONNECTION_PROPERTY*, AE_CURRENT_POSITION*, Void)
-    release_input_data_pointer : Proc(IAudioInputEndpointRT*, UInt32, LibC::UINT_PTR, Void)
-    pulse_endpoint : Proc(IAudioInputEndpointRT*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_input_data_pointer : UInt64
+    release_input_data_pointer : UInt64
+    pulse_endpoint : UInt64
   end
 
   IAudioInputEndpointRT_GUID = "8026ab61-92b2-43c1-a1df-5c37ebd08d82"
@@ -1670,12 +1670,12 @@ lib LibWin32
   end
 
   struct IAudioOutputEndpointRTVTbl
-    query_interface : Proc(IAudioOutputEndpointRT*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioOutputEndpointRT*, UInt32)
-    release : Proc(IAudioOutputEndpointRT*, UInt32)
-    get_output_data_pointer : Proc(IAudioOutputEndpointRT*, UInt32, AE_CURRENT_POSITION*, LibC::UINT_PTR)
-    release_output_data_pointer : Proc(IAudioOutputEndpointRT*, APO_CONNECTION_PROPERTY*, Void)
-    pulse_endpoint : Proc(IAudioOutputEndpointRT*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_output_data_pointer : UInt64
+    release_output_data_pointer : UInt64
+    pulse_endpoint : UInt64
   end
 
   IAudioOutputEndpointRT_GUID = "8fa906e4-c31c-4e31-932e-19a66385e9aa"
@@ -1685,13 +1685,13 @@ lib LibWin32
   end
 
   struct IAudioDeviceEndpointVTbl
-    query_interface : Proc(IAudioDeviceEndpoint*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioDeviceEndpoint*, UInt32)
-    release : Proc(IAudioDeviceEndpoint*, UInt32)
-    set_buffer : Proc(IAudioDeviceEndpoint*, Int64, UInt32, HRESULT)
-    get_rt_caps : Proc(IAudioDeviceEndpoint*, LibC::BOOL*, HRESULT)
-    get_event_driven_capable : Proc(IAudioDeviceEndpoint*, LibC::BOOL*, HRESULT)
-    write_exclusive_mode_parameters_to_shared_memory : Proc(IAudioDeviceEndpoint*, LibC::UINT_PTR, Int64, Int64, UInt32, UInt32*, LibC::UINT_PTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_buffer : UInt64
+    get_rt_caps : UInt64
+    get_event_driven_capable : UInt64
+    write_exclusive_mode_parameters_to_shared_memory : UInt64
   end
 
   IAudioDeviceEndpoint_GUID = "d4952f5a-a0b2-4cc4-8b82-9358488dd8ac"
@@ -1701,12 +1701,12 @@ lib LibWin32
   end
 
   struct IAudioEndpointControlVTbl
-    query_interface : Proc(IAudioEndpointControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioEndpointControl*, UInt32)
-    release : Proc(IAudioEndpointControl*, UInt32)
-    start : Proc(IAudioEndpointControl*, HRESULT)
-    reset : Proc(IAudioEndpointControl*, HRESULT)
-    stop : Proc(IAudioEndpointControl*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    start : UInt64
+    reset : UInt64
+    stop : UInt64
   end
 
   IAudioEndpointControl_GUID = "c684b72a-6df4-4774-bdf9-76b77509b653"
@@ -1716,43 +1716,43 @@ lib LibWin32
   end
 
   struct IADsTSUserExVTbl
-    query_interface : Proc(IADsTSUserEx*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADsTSUserEx*, UInt32)
-    release : Proc(IADsTSUserEx*, UInt32)
-    get_type_info_count : Proc(IADsTSUserEx*, UInt32*, HRESULT)
-    get_type_info : Proc(IADsTSUserEx*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IADsTSUserEx*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IADsTSUserEx*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_terminal_services_profile_path : Proc(IADsTSUserEx*, UInt8**, HRESULT)
-    put_terminal_services_profile_path : Proc(IADsTSUserEx*, UInt8*, HRESULT)
-    get_terminal_services_home_directory : Proc(IADsTSUserEx*, UInt8**, HRESULT)
-    put_terminal_services_home_directory : Proc(IADsTSUserEx*, UInt8*, HRESULT)
-    get_terminal_services_home_drive : Proc(IADsTSUserEx*, UInt8**, HRESULT)
-    put_terminal_services_home_drive : Proc(IADsTSUserEx*, UInt8*, HRESULT)
-    get_allow_logon : Proc(IADsTSUserEx*, Int32*, HRESULT)
-    put_allow_logon : Proc(IADsTSUserEx*, Int32, HRESULT)
-    get_enable_remote_control : Proc(IADsTSUserEx*, Int32*, HRESULT)
-    put_enable_remote_control : Proc(IADsTSUserEx*, Int32, HRESULT)
-    get_max_disconnection_time : Proc(IADsTSUserEx*, Int32*, HRESULT)
-    put_max_disconnection_time : Proc(IADsTSUserEx*, Int32, HRESULT)
-    get_max_connection_time : Proc(IADsTSUserEx*, Int32*, HRESULT)
-    put_max_connection_time : Proc(IADsTSUserEx*, Int32, HRESULT)
-    get_max_idle_time : Proc(IADsTSUserEx*, Int32*, HRESULT)
-    put_max_idle_time : Proc(IADsTSUserEx*, Int32, HRESULT)
-    get_reconnection_action : Proc(IADsTSUserEx*, Int32*, HRESULT)
-    put_reconnection_action : Proc(IADsTSUserEx*, Int32, HRESULT)
-    get_broken_connection_action : Proc(IADsTSUserEx*, Int32*, HRESULT)
-    put_broken_connection_action : Proc(IADsTSUserEx*, Int32, HRESULT)
-    get_connect_client_drives_at_logon : Proc(IADsTSUserEx*, Int32*, HRESULT)
-    put_connect_client_drives_at_logon : Proc(IADsTSUserEx*, Int32, HRESULT)
-    get_connect_client_printers_at_logon : Proc(IADsTSUserEx*, Int32*, HRESULT)
-    put_connect_client_printers_at_logon : Proc(IADsTSUserEx*, Int32, HRESULT)
-    get_default_to_main_printer : Proc(IADsTSUserEx*, Int32*, HRESULT)
-    put_default_to_main_printer : Proc(IADsTSUserEx*, Int32, HRESULT)
-    get_terminal_services_work_directory : Proc(IADsTSUserEx*, UInt8**, HRESULT)
-    put_terminal_services_work_directory : Proc(IADsTSUserEx*, UInt8*, HRESULT)
-    get_terminal_services_initial_program : Proc(IADsTSUserEx*, UInt8**, HRESULT)
-    put_terminal_services_initial_program : Proc(IADsTSUserEx*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_terminal_services_profile_path : UInt64
+    put_terminal_services_profile_path : UInt64
+    get_terminal_services_home_directory : UInt64
+    put_terminal_services_home_directory : UInt64
+    get_terminal_services_home_drive : UInt64
+    put_terminal_services_home_drive : UInt64
+    get_allow_logon : UInt64
+    put_allow_logon : UInt64
+    get_enable_remote_control : UInt64
+    put_enable_remote_control : UInt64
+    get_max_disconnection_time : UInt64
+    put_max_disconnection_time : UInt64
+    get_max_connection_time : UInt64
+    put_max_connection_time : UInt64
+    get_max_idle_time : UInt64
+    put_max_idle_time : UInt64
+    get_reconnection_action : UInt64
+    put_reconnection_action : UInt64
+    get_broken_connection_action : UInt64
+    put_broken_connection_action : UInt64
+    get_connect_client_drives_at_logon : UInt64
+    put_connect_client_drives_at_logon : UInt64
+    get_connect_client_printers_at_logon : UInt64
+    put_connect_client_printers_at_logon : UInt64
+    get_default_to_main_printer : UInt64
+    put_default_to_main_printer : UInt64
+    get_terminal_services_work_directory : UInt64
+    put_terminal_services_work_directory : UInt64
+    get_terminal_services_initial_program : UInt64
+    put_terminal_services_initial_program : UInt64
   end
 
   IADsTSUserEx_GUID = "c4930e79-2989-4462-8a60-2fcf2f2955ef"
@@ -1762,10 +1762,10 @@ lib LibWin32
   end
 
   struct ITSGAuthorizeConnectionSinkVTbl
-    query_interface : Proc(ITSGAuthorizeConnectionSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITSGAuthorizeConnectionSink*, UInt32)
-    release : Proc(ITSGAuthorizeConnectionSink*, UInt32)
-    on_connection_authorized : Proc(ITSGAuthorizeConnectionSink*, HRESULT, Guid, UInt32, UInt8*, UInt32, UInt32, SESSION_TIMEOUT_ACTION_TYPE, AATrustClassID, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_connection_authorized : UInt64
   end
 
   ITSGAuthorizeConnectionSink_GUID = "c27ece33-7781-4318-98ef-1cf2da7b7005"
@@ -1775,10 +1775,10 @@ lib LibWin32
   end
 
   struct ITSGAuthorizeResourceSinkVTbl
-    query_interface : Proc(ITSGAuthorizeResourceSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITSGAuthorizeResourceSink*, UInt32)
-    release : Proc(ITSGAuthorizeResourceSink*, UInt32)
-    on_channel_authorized : Proc(ITSGAuthorizeResourceSink*, HRESULT, Guid, Int32, UInt8**, UInt32, UInt8**, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_channel_authorized : UInt64
   end
 
   ITSGAuthorizeResourceSink_GUID = "feddfcd4-fa12-4435-ae55-7ad1a9779af7"
@@ -1788,13 +1788,13 @@ lib LibWin32
   end
 
   struct ITSGPolicyEngineVTbl
-    query_interface : Proc(ITSGPolicyEngine*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITSGPolicyEngine*, UInt32)
-    release : Proc(ITSGPolicyEngine*, UInt32)
-    authorize_connection : Proc(ITSGPolicyEngine*, Guid, UInt8*, AAAuthSchemes, UInt8*, UInt8*, UInt8*, UInt32, UInt8*, UInt32, HANDLE_PTR, ITSGAuthorizeConnectionSink, HRESULT)
-    authorize_resource : Proc(ITSGPolicyEngine*, Guid, Int32, UInt8*, UInt8**, UInt32, UInt8**, UInt32, UInt32, UInt8*, UInt8*, UInt32, ITSGAuthorizeResourceSink, HRESULT)
-    refresh : Proc(ITSGPolicyEngine*, HRESULT)
-    is_quarantine_enabled : Proc(ITSGPolicyEngine*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    authorize_connection : UInt64
+    authorize_resource : UInt64
+    refresh : UInt64
+    is_quarantine_enabled : UInt64
   end
 
   ITSGPolicyEngine_GUID = "8bc24f08-6223-42f4-a5b4-8e37cd135bbd"
@@ -1804,10 +1804,10 @@ lib LibWin32
   end
 
   struct ITSGAccountingEngineVTbl
-    query_interface : Proc(ITSGAccountingEngine*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITSGAccountingEngine*, UInt32)
-    release : Proc(ITSGAccountingEngine*, UInt32)
-    do_accounting : Proc(ITSGAccountingEngine*, AAAccountingDataType, AAAccountingData, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    do_accounting : UInt64
   end
 
   ITSGAccountingEngine_GUID = "4ce2a0c9-e874-4f1a-86f4-06bbb9115338"
@@ -1817,13 +1817,13 @@ lib LibWin32
   end
 
   struct ITSGAuthenticateUserSinkVTbl
-    query_interface : Proc(ITSGAuthenticateUserSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITSGAuthenticateUserSink*, UInt32)
-    release : Proc(ITSGAuthenticateUserSink*, UInt32)
-    on_user_authenticated : Proc(ITSGAuthenticateUserSink*, UInt8*, UInt8*, LibC::UINT_PTR, HANDLE_PTR, HRESULT)
-    on_user_authentication_failed : Proc(ITSGAuthenticateUserSink*, LibC::UINT_PTR, HRESULT, HRESULT, HRESULT)
-    reauthenticate_user : Proc(ITSGAuthenticateUserSink*, LibC::UINT_PTR, HRESULT)
-    disconnect_user : Proc(ITSGAuthenticateUserSink*, LibC::UINT_PTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_user_authenticated : UInt64
+    on_user_authentication_failed : UInt64
+    reauthenticate_user : UInt64
+    disconnect_user : UInt64
   end
 
   ITSGAuthenticateUserSink_GUID = "2c3e2e73-a782-47f9-8dfb-77ee1ed27a03"
@@ -1833,11 +1833,11 @@ lib LibWin32
   end
 
   struct ITSGAuthenticationEngineVTbl
-    query_interface : Proc(ITSGAuthenticationEngine*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITSGAuthenticationEngine*, UInt32)
-    release : Proc(ITSGAuthenticationEngine*, UInt32)
-    authenticate_user : Proc(ITSGAuthenticationEngine*, Guid, UInt8*, UInt32, LibC::UINT_PTR, ITSGAuthenticateUserSink, HRESULT)
-    cancel_authentication : Proc(ITSGAuthenticationEngine*, Guid, LibC::UINT_PTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    authenticate_user : UInt64
+    cancel_authentication : UInt64
   end
 
   ITSGAuthenticationEngine_GUID = "9ee3e5bf-04ab-4691-998c-d7f622321a56"
@@ -1847,15 +1847,15 @@ lib LibWin32
   end
 
   struct IWTSSBPluginVTbl
-    query_interface : Proc(IWTSSBPlugin*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSSBPlugin*, UInt32)
-    release : Proc(IWTSSBPlugin*, UInt32)
-    initialize : Proc(IWTSSBPlugin*, UInt32*, HRESULT)
-    wtssbx_machine_change_notification : Proc(IWTSSBPlugin*, WTSSBX_NOTIFICATION_TYPE, Int32, WTSSBX_MACHINE_INFO*, HRESULT)
-    wtssbx_session_change_notification : Proc(IWTSSBPlugin*, WTSSBX_NOTIFICATION_TYPE, Int32, UInt32, WTSSBX_SESSION_INFO*, HRESULT)
-    wtssbx_get_most_suitable_server : Proc(IWTSSBPlugin*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, Int32*, HRESULT)
-    terminated : Proc(IWTSSBPlugin*, HRESULT)
-    wtssbx_get_user_external_session : Proc(IWTSSBPlugin*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, WTSSBX_IP_ADDRESS*, UInt32*, WTSSBX_MACHINE_CONNECT_INFO*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    wtssbx_machine_change_notification : UInt64
+    wtssbx_session_change_notification : UInt64
+    wtssbx_get_most_suitable_server : UInt64
+    terminated : UInt64
+    wtssbx_get_user_external_session : UInt64
   end
 
   IWTSSBPlugin_GUID = "dc44be78-b18d-4399-b210-641bf67a002c"
@@ -1865,12 +1865,12 @@ lib LibWin32
   end
 
   struct IWorkspaceClientExtVTbl
-    query_interface : Proc(IWorkspaceClientExt*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWorkspaceClientExt*, UInt32)
-    release : Proc(IWorkspaceClientExt*, UInt32)
-    get_resource_id : Proc(IWorkspaceClientExt*, UInt8**, HRESULT)
-    get_resource_display_name : Proc(IWorkspaceClientExt*, UInt8**, HRESULT)
-    issue_disconnect : Proc(IWorkspaceClientExt*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_resource_id : UInt64
+    get_resource_display_name : UInt64
+    issue_disconnect : UInt64
   end
 
   IWorkspaceClientExt_GUID = "12b952f4-41ca-4f21-a829-a6d07d9a16e5"
@@ -1880,12 +1880,12 @@ lib LibWin32
   end
 
   struct IWorkspaceVTbl
-    query_interface : Proc(IWorkspace*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWorkspace*, UInt32)
-    release : Proc(IWorkspace*, UInt32)
-    get_workspace_names : Proc(IWorkspace*, SAFEARRAY**, HRESULT)
-    start_remote_application : Proc(IWorkspace*, UInt8*, SAFEARRAY*, HRESULT)
-    get_process_id : Proc(IWorkspace*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_workspace_names : UInt64
+    start_remote_application : UInt64
+    get_process_id : UInt64
   end
 
   IWorkspace_GUID = "b922bbb8-4c55-4fea-8496-beb0b44285e5"
@@ -1895,13 +1895,13 @@ lib LibWin32
   end
 
   struct IWorkspace2VTbl
-    query_interface : Proc(IWorkspace2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWorkspace2*, UInt32)
-    release : Proc(IWorkspace2*, UInt32)
-    get_workspace_names : Proc(IWorkspace2*, SAFEARRAY**, HRESULT)
-    start_remote_application : Proc(IWorkspace2*, UInt8*, SAFEARRAY*, HRESULT)
-    get_process_id : Proc(IWorkspace2*, UInt32*, HRESULT)
-    start_remote_application_ex : Proc(IWorkspace2*, UInt8*, UInt8*, UInt8*, Int16, UInt8*, SAFEARRAY*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_workspace_names : UInt64
+    start_remote_application : UInt64
+    get_process_id : UInt64
+    start_remote_application_ex : UInt64
   end
 
   IWorkspace2_GUID = "96d8d7cf-783e-4286-834c-ebc0e95f783c"
@@ -1911,15 +1911,15 @@ lib LibWin32
   end
 
   struct IWorkspace3VTbl
-    query_interface : Proc(IWorkspace3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWorkspace3*, UInt32)
-    release : Proc(IWorkspace3*, UInt32)
-    get_workspace_names : Proc(IWorkspace3*, SAFEARRAY**, HRESULT)
-    start_remote_application : Proc(IWorkspace3*, UInt8*, SAFEARRAY*, HRESULT)
-    get_process_id : Proc(IWorkspace3*, UInt32*, HRESULT)
-    start_remote_application_ex : Proc(IWorkspace3*, UInt8*, UInt8*, UInt8*, Int16, UInt8*, SAFEARRAY*, HRESULT)
-    get_claims_token2 : Proc(IWorkspace3*, UInt8*, UInt8*, UInt32, UInt32, RECT, UInt8**, HRESULT)
-    set_claims_token : Proc(IWorkspace3*, UInt8*, UInt64, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_workspace_names : UInt64
+    start_remote_application : UInt64
+    get_process_id : UInt64
+    start_remote_application_ex : UInt64
+    get_claims_token2 : UInt64
+    set_claims_token : UInt64
   end
 
   IWorkspace3_GUID = "1becbe4a-d654-423b-afeb-be8d532c13c6"
@@ -1929,11 +1929,11 @@ lib LibWin32
   end
 
   struct IWorkspaceRegistrationVTbl
-    query_interface : Proc(IWorkspaceRegistration*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWorkspaceRegistration*, UInt32)
-    release : Proc(IWorkspaceRegistration*, UInt32)
-    add_resource : Proc(IWorkspaceRegistration*, IWorkspaceClientExt, UInt32*, HRESULT)
-    remove_resource : Proc(IWorkspaceRegistration*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_resource : UInt64
+    remove_resource : UInt64
   end
 
   IWorkspaceRegistration_GUID = "b922bbb8-4c55-4fea-8496-beb0b44285e6"
@@ -1943,13 +1943,13 @@ lib LibWin32
   end
 
   struct IWorkspaceRegistration2VTbl
-    query_interface : Proc(IWorkspaceRegistration2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWorkspaceRegistration2*, UInt32)
-    release : Proc(IWorkspaceRegistration2*, UInt32)
-    add_resource : Proc(IWorkspaceRegistration2*, IWorkspaceClientExt, UInt32*, HRESULT)
-    remove_resource : Proc(IWorkspaceRegistration2*, UInt32, HRESULT)
-    add_resource_ex : Proc(IWorkspaceRegistration2*, IWorkspaceClientExt, UInt8*, UInt32*, Guid, HRESULT)
-    remove_resource_ex : Proc(IWorkspaceRegistration2*, UInt32, Guid, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_resource : UInt64
+    remove_resource : UInt64
+    add_resource_ex : UInt64
+    remove_resource_ex : UInt64
   end
 
   IWorkspaceRegistration2_GUID = "cf59f654-39bb-44d8-94d0-4635728957e9"
@@ -1959,20 +1959,20 @@ lib LibWin32
   end
 
   struct IWorkspaceScriptableVTbl
-    query_interface : Proc(IWorkspaceScriptable*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWorkspaceScriptable*, UInt32)
-    release : Proc(IWorkspaceScriptable*, UInt32)
-    get_type_info_count : Proc(IWorkspaceScriptable*, UInt32*, HRESULT)
-    get_type_info : Proc(IWorkspaceScriptable*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWorkspaceScriptable*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWorkspaceScriptable*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    disconnect_workspace : Proc(IWorkspaceScriptable*, UInt8*, HRESULT)
-    start_workspace : Proc(IWorkspaceScriptable*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, HRESULT)
-    is_workspace_credential_specified : Proc(IWorkspaceScriptable*, UInt8*, Int16, Int16*, HRESULT)
-    is_workspace_sso_enabled : Proc(IWorkspaceScriptable*, Int16*, HRESULT)
-    clear_workspace_credential : Proc(IWorkspaceScriptable*, UInt8*, HRESULT)
-    on_authenticated : Proc(IWorkspaceScriptable*, UInt8*, UInt8*, HRESULT)
-    disconnect_workspace_by_friendly_name : Proc(IWorkspaceScriptable*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    disconnect_workspace : UInt64
+    start_workspace : UInt64
+    is_workspace_credential_specified : UInt64
+    is_workspace_sso_enabled : UInt64
+    clear_workspace_credential : UInt64
+    on_authenticated : UInt64
+    disconnect_workspace_by_friendly_name : UInt64
   end
 
   IWorkspaceScriptable_GUID = "efea49a2-dda5-429d-8f42-b23b92c4c347"
@@ -1982,22 +1982,22 @@ lib LibWin32
   end
 
   struct IWorkspaceScriptable2VTbl
-    query_interface : Proc(IWorkspaceScriptable2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWorkspaceScriptable2*, UInt32)
-    release : Proc(IWorkspaceScriptable2*, UInt32)
-    get_type_info_count : Proc(IWorkspaceScriptable2*, UInt32*, HRESULT)
-    get_type_info : Proc(IWorkspaceScriptable2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWorkspaceScriptable2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWorkspaceScriptable2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    disconnect_workspace : Proc(IWorkspaceScriptable2*, UInt8*, HRESULT)
-    start_workspace : Proc(IWorkspaceScriptable2*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, HRESULT)
-    is_workspace_credential_specified : Proc(IWorkspaceScriptable2*, UInt8*, Int16, Int16*, HRESULT)
-    is_workspace_sso_enabled : Proc(IWorkspaceScriptable2*, Int16*, HRESULT)
-    clear_workspace_credential : Proc(IWorkspaceScriptable2*, UInt8*, HRESULT)
-    on_authenticated : Proc(IWorkspaceScriptable2*, UInt8*, UInt8*, HRESULT)
-    disconnect_workspace_by_friendly_name : Proc(IWorkspaceScriptable2*, UInt8*, HRESULT)
-    start_workspace_ex : Proc(IWorkspaceScriptable2*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, HRESULT)
-    resource_dismissed : Proc(IWorkspaceScriptable2*, UInt8*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    disconnect_workspace : UInt64
+    start_workspace : UInt64
+    is_workspace_credential_specified : UInt64
+    is_workspace_sso_enabled : UInt64
+    clear_workspace_credential : UInt64
+    on_authenticated : UInt64
+    disconnect_workspace_by_friendly_name : UInt64
+    start_workspace_ex : UInt64
+    resource_dismissed : UInt64
   end
 
   IWorkspaceScriptable2_GUID = "efea49a2-dda5-429d-8f42-b33ba2c4c348"
@@ -2007,23 +2007,23 @@ lib LibWin32
   end
 
   struct IWorkspaceScriptable3VTbl
-    query_interface : Proc(IWorkspaceScriptable3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWorkspaceScriptable3*, UInt32)
-    release : Proc(IWorkspaceScriptable3*, UInt32)
-    get_type_info_count : Proc(IWorkspaceScriptable3*, UInt32*, HRESULT)
-    get_type_info : Proc(IWorkspaceScriptable3*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWorkspaceScriptable3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWorkspaceScriptable3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    disconnect_workspace : Proc(IWorkspaceScriptable3*, UInt8*, HRESULT)
-    start_workspace : Proc(IWorkspaceScriptable3*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, HRESULT)
-    is_workspace_credential_specified : Proc(IWorkspaceScriptable3*, UInt8*, Int16, Int16*, HRESULT)
-    is_workspace_sso_enabled : Proc(IWorkspaceScriptable3*, Int16*, HRESULT)
-    clear_workspace_credential : Proc(IWorkspaceScriptable3*, UInt8*, HRESULT)
-    on_authenticated : Proc(IWorkspaceScriptable3*, UInt8*, UInt8*, HRESULT)
-    disconnect_workspace_by_friendly_name : Proc(IWorkspaceScriptable3*, UInt8*, HRESULT)
-    start_workspace_ex : Proc(IWorkspaceScriptable3*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, HRESULT)
-    resource_dismissed : Proc(IWorkspaceScriptable3*, UInt8*, UInt8*, HRESULT)
-    start_workspace_ex2 : Proc(IWorkspaceScriptable3*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, UInt8*, Guid, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    disconnect_workspace : UInt64
+    start_workspace : UInt64
+    is_workspace_credential_specified : UInt64
+    is_workspace_sso_enabled : UInt64
+    clear_workspace_credential : UInt64
+    on_authenticated : UInt64
+    disconnect_workspace_by_friendly_name : UInt64
+    start_workspace_ex : UInt64
+    resource_dismissed : UInt64
+    start_workspace_ex2 : UInt64
   end
 
   IWorkspaceScriptable3_GUID = "531e6512-2cbf-4bd2-80a5-d90a71636a9a"
@@ -2033,12 +2033,12 @@ lib LibWin32
   end
 
   struct IWorkspaceReportMessageVTbl
-    query_interface : Proc(IWorkspaceReportMessage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWorkspaceReportMessage*, UInt32)
-    release : Proc(IWorkspaceReportMessage*, UInt32)
-    register_error_log_message : Proc(IWorkspaceReportMessage*, UInt8*, HRESULT)
-    is_error_message_registered : Proc(IWorkspaceReportMessage*, UInt8*, UInt32, UInt8*, UInt32, Int16*, HRESULT)
-    register_error_event : Proc(IWorkspaceReportMessage*, UInt8*, UInt32, UInt8*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    register_error_log_message : UInt64
+    is_error_message_registered : UInt64
+    register_error_event : UInt64
   end
 
   IWorkspaceReportMessage_GUID = "a7c06739-500f-4e8c-99a8-2bd6955899eb"
@@ -2048,13 +2048,13 @@ lib LibWin32
   end
 
   struct IITSWkspEventsVTbl
-    query_interface : Proc(IITSWkspEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IITSWkspEvents*, UInt32)
-    release : Proc(IITSWkspEvents*, UInt32)
-    get_type_info_count : Proc(IITSWkspEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IITSWkspEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IITSWkspEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IITSWkspEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
   end
 
   IITSWkspEvents_GUID = "b922bbb8-4c55-4fea-8496-beb0b44285e9"
@@ -2064,11 +2064,11 @@ lib LibWin32
   end
 
   struct ITsSbPluginVTbl
-    query_interface : Proc(ITsSbPlugin*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbPlugin*, UInt32)
-    release : Proc(ITsSbPlugin*, UInt32)
-    initialize : Proc(ITsSbPlugin*, ITsSbProvider, ITsSbPluginNotifySink, ITsSbPluginPropertySet, HRESULT)
-    terminate : Proc(ITsSbPlugin*, HRESULT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    terminate : UInt64
   end
 
   ITsSbPlugin_GUID = "48cd7406-caab-465f-a5d6-baa863b9ea4f"
@@ -2078,11 +2078,11 @@ lib LibWin32
   end
 
   struct ITsSbResourcePluginVTbl
-    query_interface : Proc(ITsSbResourcePlugin*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbResourcePlugin*, UInt32)
-    release : Proc(ITsSbResourcePlugin*, UInt32)
-    initialize : Proc(ITsSbResourcePlugin*, ITsSbProvider, ITsSbPluginNotifySink, ITsSbPluginPropertySet, HRESULT)
-    terminate : Proc(ITsSbResourcePlugin*, HRESULT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    terminate : UInt64
   end
 
   ITsSbResourcePlugin_GUID = "ea8db42c-98ed-4535-a88b-2a164f35490f"
@@ -2092,11 +2092,11 @@ lib LibWin32
   end
 
   struct ITsSbServiceNotificationVTbl
-    query_interface : Proc(ITsSbServiceNotification*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbServiceNotification*, UInt32)
-    release : Proc(ITsSbServiceNotification*, UInt32)
-    notify_service_failure : Proc(ITsSbServiceNotification*, HRESULT)
-    notify_service_success : Proc(ITsSbServiceNotification*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    notify_service_failure : UInt64
+    notify_service_success : UInt64
   end
 
   ITsSbServiceNotification_GUID = "86cb68ae-86e0-4f57-8a64-bb7406bc5550"
@@ -2106,12 +2106,12 @@ lib LibWin32
   end
 
   struct ITsSbLoadBalancingVTbl
-    query_interface : Proc(ITsSbLoadBalancing*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbLoadBalancing*, UInt32)
-    release : Proc(ITsSbLoadBalancing*, UInt32)
-    initialize : Proc(ITsSbLoadBalancing*, ITsSbProvider, ITsSbPluginNotifySink, ITsSbPluginPropertySet, HRESULT)
-    terminate : Proc(ITsSbLoadBalancing*, HRESULT, HRESULT)
-    get_most_suitable_target : Proc(ITsSbLoadBalancing*, ITsSbClientConnection, ITsSbLoadBalancingNotifySink, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    terminate : UInt64
+    get_most_suitable_target : UInt64
   end
 
   ITsSbLoadBalancing_GUID = "24329274-9eb7-11dc-ae98-f2b456d89593"
@@ -2121,12 +2121,12 @@ lib LibWin32
   end
 
   struct ITsSbPlacementVTbl
-    query_interface : Proc(ITsSbPlacement*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbPlacement*, UInt32)
-    release : Proc(ITsSbPlacement*, UInt32)
-    initialize : Proc(ITsSbPlacement*, ITsSbProvider, ITsSbPluginNotifySink, ITsSbPluginPropertySet, HRESULT)
-    terminate : Proc(ITsSbPlacement*, HRESULT, HRESULT)
-    query_environment_for_target : Proc(ITsSbPlacement*, ITsSbClientConnection, ITsSbPlacementNotifySink, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    terminate : UInt64
+    query_environment_for_target : UInt64
   end
 
   ITsSbPlacement_GUID = "daadee5f-6d32-480e-9e36-ddab2329f06d"
@@ -2136,12 +2136,12 @@ lib LibWin32
   end
 
   struct ITsSbOrchestrationVTbl
-    query_interface : Proc(ITsSbOrchestration*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbOrchestration*, UInt32)
-    release : Proc(ITsSbOrchestration*, UInt32)
-    initialize : Proc(ITsSbOrchestration*, ITsSbProvider, ITsSbPluginNotifySink, ITsSbPluginPropertySet, HRESULT)
-    terminate : Proc(ITsSbOrchestration*, HRESULT, HRESULT)
-    prepare_target_for_connect : Proc(ITsSbOrchestration*, ITsSbClientConnection, ITsSbOrchestrationNotifySink, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    terminate : UInt64
+    prepare_target_for_connect : UInt64
   end
 
   ITsSbOrchestration_GUID = "64fc1172-9eb7-11dc-8b00-3aba56d89593"
@@ -2151,13 +2151,13 @@ lib LibWin32
   end
 
   struct ITsSbEnvironmentVTbl
-    query_interface : Proc(ITsSbEnvironment*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbEnvironment*, UInt32)
-    release : Proc(ITsSbEnvironment*, UInt32)
-    get_name : Proc(ITsSbEnvironment*, UInt8**, HRESULT)
-    get_server_weight : Proc(ITsSbEnvironment*, UInt32*, HRESULT)
-    get_environment_property_set : Proc(ITsSbEnvironment*, ITsSbEnvironmentPropertySet*, HRESULT)
-    put_environment_property_set : Proc(ITsSbEnvironment*, ITsSbEnvironmentPropertySet, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_name : UInt64
+    get_server_weight : UInt64
+    get_environment_property_set : UInt64
+    put_environment_property_set : UInt64
   end
 
   ITsSbEnvironment_GUID = "8c87f7f7-bf51-4a5c-87bf-8e94fb6e2256"
@@ -2167,10 +2167,10 @@ lib LibWin32
   end
 
   struct ITsSbLoadBalanceResultVTbl
-    query_interface : Proc(ITsSbLoadBalanceResult*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbLoadBalanceResult*, UInt32)
-    release : Proc(ITsSbLoadBalanceResult*, UInt32)
-    get_target_name : Proc(ITsSbLoadBalanceResult*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_target_name : UInt64
   end
 
   ITsSbLoadBalanceResult_GUID = "24fdb7ac-fea6-11dc-9672-9a8956d89593"
@@ -2180,28 +2180,28 @@ lib LibWin32
   end
 
   struct ITsSbTargetVTbl
-    query_interface : Proc(ITsSbTarget*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbTarget*, UInt32)
-    release : Proc(ITsSbTarget*, UInt32)
-    get_target_name : Proc(ITsSbTarget*, UInt8**, HRESULT)
-    put_target_name : Proc(ITsSbTarget*, UInt8*, HRESULT)
-    get_farm_name : Proc(ITsSbTarget*, UInt8**, HRESULT)
-    put_farm_name : Proc(ITsSbTarget*, UInt8*, HRESULT)
-    get_target_fqdn : Proc(ITsSbTarget*, UInt8**, HRESULT)
-    put_target_fqdn : Proc(ITsSbTarget*, UInt8*, HRESULT)
-    get_target_netbios : Proc(ITsSbTarget*, UInt8**, HRESULT)
-    put_target_netbios : Proc(ITsSbTarget*, UInt8*, HRESULT)
-    get_ip_addresses : Proc(ITsSbTarget*, TSSD_ConnectionPoint*, UInt32*, HRESULT)
-    put_ip_addresses : Proc(ITsSbTarget*, TSSD_ConnectionPoint*, UInt32, HRESULT)
-    get_target_state : Proc(ITsSbTarget*, TARGET_STATE*, HRESULT)
-    put_target_state : Proc(ITsSbTarget*, TARGET_STATE, HRESULT)
-    get_target_property_set : Proc(ITsSbTarget*, ITsSbTargetPropertySet*, HRESULT)
-    put_target_property_set : Proc(ITsSbTarget*, ITsSbTargetPropertySet, HRESULT)
-    get_environment_name : Proc(ITsSbTarget*, UInt8**, HRESULT)
-    put_environment_name : Proc(ITsSbTarget*, UInt8*, HRESULT)
-    get_num_sessions : Proc(ITsSbTarget*, UInt32*, HRESULT)
-    get_num_pending_connections : Proc(ITsSbTarget*, UInt32*, HRESULT)
-    get_target_load : Proc(ITsSbTarget*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_target_name : UInt64
+    put_target_name : UInt64
+    get_farm_name : UInt64
+    put_farm_name : UInt64
+    get_target_fqdn : UInt64
+    put_target_fqdn : UInt64
+    get_target_netbios : UInt64
+    put_target_netbios : UInt64
+    get_ip_addresses : UInt64
+    put_ip_addresses : UInt64
+    get_target_state : UInt64
+    put_target_state : UInt64
+    get_target_property_set : UInt64
+    put_target_property_set : UInt64
+    get_environment_name : UInt64
+    put_environment_name : UInt64
+    get_num_sessions : UInt64
+    get_num_pending_connections : UInt64
+    get_target_load : UInt64
   end
 
   ITsSbTarget_GUID = "16616ecc-272d-411d-b324-126893033856"
@@ -2211,26 +2211,26 @@ lib LibWin32
   end
 
   struct ITsSbSessionVTbl
-    query_interface : Proc(ITsSbSession*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbSession*, UInt32)
-    release : Proc(ITsSbSession*, UInt32)
-    get_session_id : Proc(ITsSbSession*, UInt32*, HRESULT)
-    get_target_name : Proc(ITsSbSession*, UInt8**, HRESULT)
-    put_target_name : Proc(ITsSbSession*, UInt8*, HRESULT)
-    get_username : Proc(ITsSbSession*, UInt8**, HRESULT)
-    get_domain : Proc(ITsSbSession*, UInt8**, HRESULT)
-    get_state : Proc(ITsSbSession*, TSSESSION_STATE*, HRESULT)
-    put_state : Proc(ITsSbSession*, TSSESSION_STATE, HRESULT)
-    get_create_time : Proc(ITsSbSession*, FILETIME*, HRESULT)
-    put_create_time : Proc(ITsSbSession*, FILETIME, HRESULT)
-    get_disconnect_time : Proc(ITsSbSession*, FILETIME*, HRESULT)
-    put_disconnect_time : Proc(ITsSbSession*, FILETIME, HRESULT)
-    get_initial_program : Proc(ITsSbSession*, UInt8**, HRESULT)
-    put_initial_program : Proc(ITsSbSession*, UInt8*, HRESULT)
-    get_client_display : Proc(ITsSbSession*, CLIENT_DISPLAY*, HRESULT)
-    put_client_display : Proc(ITsSbSession*, CLIENT_DISPLAY, HRESULT)
-    get_protocol_type : Proc(ITsSbSession*, UInt32*, HRESULT)
-    put_protocol_type : Proc(ITsSbSession*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_session_id : UInt64
+    get_target_name : UInt64
+    put_target_name : UInt64
+    get_username : UInt64
+    get_domain : UInt64
+    get_state : UInt64
+    put_state : UInt64
+    get_create_time : UInt64
+    put_create_time : UInt64
+    get_disconnect_time : UInt64
+    put_disconnect_time : UInt64
+    get_initial_program : UInt64
+    put_initial_program : UInt64
+    get_client_display : UInt64
+    put_client_display : UInt64
+    get_protocol_type : UInt64
+    put_protocol_type : UInt64
   end
 
   ITsSbSession_GUID = "d453aac7-b1d8-4c5e-ba34-9afb4c8c5510"
@@ -2240,12 +2240,12 @@ lib LibWin32
   end
 
   struct ITsSbResourceNotificationVTbl
-    query_interface : Proc(ITsSbResourceNotification*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbResourceNotification*, UInt32)
-    release : Proc(ITsSbResourceNotification*, UInt32)
-    notify_session_change : Proc(ITsSbResourceNotification*, TSSESSION_STATE, ITsSbSession, HRESULT)
-    notify_target_change : Proc(ITsSbResourceNotification*, UInt32, ITsSbTarget, HRESULT)
-    notify_client_connection_state_change : Proc(ITsSbResourceNotification*, CONNECTION_CHANGE_NOTIFICATION, ITsSbClientConnection, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    notify_session_change : UInt64
+    notify_target_change : UInt64
+    notify_client_connection_state_change : UInt64
   end
 
   ITsSbResourceNotification_GUID = "65d3e85a-c39b-11dc-b92d-3cd255d89593"
@@ -2255,12 +2255,12 @@ lib LibWin32
   end
 
   struct ITsSbResourceNotificationExVTbl
-    query_interface : Proc(ITsSbResourceNotificationEx*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbResourceNotificationEx*, UInt32)
-    release : Proc(ITsSbResourceNotificationEx*, UInt32)
-    notify_session_change_ex : Proc(ITsSbResourceNotificationEx*, UInt8*, UInt8*, UInt8*, UInt32, TSSESSION_STATE, HRESULT)
-    notify_target_change_ex : Proc(ITsSbResourceNotificationEx*, UInt8*, UInt32, HRESULT)
-    notify_client_connection_state_change_ex : Proc(ITsSbResourceNotificationEx*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, CONNECTION_CHANGE_NOTIFICATION, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    notify_session_change_ex : UInt64
+    notify_target_change_ex : UInt64
+    notify_client_connection_state_change_ex : UInt64
   end
 
   ITsSbResourceNotificationEx_GUID = "a8a47fde-ca91-44d2-b897-3aa28a43b2b7"
@@ -2270,18 +2270,18 @@ lib LibWin32
   end
 
   struct ITsSbTaskInfoVTbl
-    query_interface : Proc(ITsSbTaskInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbTaskInfo*, UInt32)
-    release : Proc(ITsSbTaskInfo*, UInt32)
-    get_target_id : Proc(ITsSbTaskInfo*, UInt8**, HRESULT)
-    get_start_time : Proc(ITsSbTaskInfo*, FILETIME*, HRESULT)
-    get_end_time : Proc(ITsSbTaskInfo*, FILETIME*, HRESULT)
-    get_deadline : Proc(ITsSbTaskInfo*, FILETIME*, HRESULT)
-    get_identifier : Proc(ITsSbTaskInfo*, UInt8**, HRESULT)
-    get_label : Proc(ITsSbTaskInfo*, UInt8**, HRESULT)
-    get_context : Proc(ITsSbTaskInfo*, SAFEARRAY**, HRESULT)
-    get_plugin : Proc(ITsSbTaskInfo*, UInt8**, HRESULT)
-    get_status : Proc(ITsSbTaskInfo*, RDV_TASK_STATUS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_target_id : UInt64
+    get_start_time : UInt64
+    get_end_time : UInt64
+    get_deadline : UInt64
+    get_identifier : UInt64
+    get_label : UInt64
+    get_context : UInt64
+    get_plugin : UInt64
+    get_status : UInt64
   end
 
   ITsSbTaskInfo_GUID = "523d1083-89be-48dd-99ea-04e82ffa7265"
@@ -2291,13 +2291,13 @@ lib LibWin32
   end
 
   struct ITsSbTaskPluginVTbl
-    query_interface : Proc(ITsSbTaskPlugin*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbTaskPlugin*, UInt32)
-    release : Proc(ITsSbTaskPlugin*, UInt32)
-    initialize : Proc(ITsSbTaskPlugin*, ITsSbProvider, ITsSbPluginNotifySink, ITsSbPluginPropertySet, HRESULT)
-    terminate : Proc(ITsSbTaskPlugin*, HRESULT, HRESULT)
-    initialize_task_plugin : Proc(ITsSbTaskPlugin*, ITsSbTaskPluginNotifySink, HRESULT)
-    set_task_queue : Proc(ITsSbTaskPlugin*, UInt8*, UInt32, ITsSbTaskInfo*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    terminate : UInt64
+    initialize_task_plugin : UInt64
+    set_task_queue : UInt64
   end
 
   ITsSbTaskPlugin_GUID = "fa22ef0f-8705-41be-93bc-44bdbcf1c9c4"
@@ -2307,11 +2307,11 @@ lib LibWin32
   end
 
   struct ITsSbPropertySetVTbl
-    query_interface : Proc(ITsSbPropertySet*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbPropertySet*, UInt32)
-    release : Proc(ITsSbPropertySet*, UInt32)
-    read : Proc(ITsSbPropertySet*, LibC::LPWSTR, VARIANT*, IErrorLog, HRESULT)
-    write : Proc(ITsSbPropertySet*, LibC::LPWSTR, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    read : UInt64
+    write : UInt64
   end
 
   ITsSbPropertySet_GUID = "5c025171-bb1e-4baf-a212-6d5e9774b33b"
@@ -2321,11 +2321,11 @@ lib LibWin32
   end
 
   struct ITsSbPluginPropertySetVTbl
-    query_interface : Proc(ITsSbPluginPropertySet*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbPluginPropertySet*, UInt32)
-    release : Proc(ITsSbPluginPropertySet*, UInt32)
-    read : Proc(ITsSbPluginPropertySet*, LibC::LPWSTR, VARIANT*, IErrorLog, HRESULT)
-    write : Proc(ITsSbPluginPropertySet*, LibC::LPWSTR, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    read : UInt64
+    write : UInt64
   end
 
   ITsSbPluginPropertySet_GUID = "95006e34-7eff-4b6c-bb40-49a4fda7cea6"
@@ -2335,11 +2335,11 @@ lib LibWin32
   end
 
   struct ITsSbClientConnectionPropertySetVTbl
-    query_interface : Proc(ITsSbClientConnectionPropertySet*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbClientConnectionPropertySet*, UInt32)
-    release : Proc(ITsSbClientConnectionPropertySet*, UInt32)
-    read : Proc(ITsSbClientConnectionPropertySet*, LibC::LPWSTR, VARIANT*, IErrorLog, HRESULT)
-    write : Proc(ITsSbClientConnectionPropertySet*, LibC::LPWSTR, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    read : UInt64
+    write : UInt64
   end
 
   ITsSbClientConnectionPropertySet_GUID = "e51995b0-46d6-11dd-aa21-cedc55d89593"
@@ -2349,11 +2349,11 @@ lib LibWin32
   end
 
   struct ITsSbTargetPropertySetVTbl
-    query_interface : Proc(ITsSbTargetPropertySet*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbTargetPropertySet*, UInt32)
-    release : Proc(ITsSbTargetPropertySet*, UInt32)
-    read : Proc(ITsSbTargetPropertySet*, LibC::LPWSTR, VARIANT*, IErrorLog, HRESULT)
-    write : Proc(ITsSbTargetPropertySet*, LibC::LPWSTR, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    read : UInt64
+    write : UInt64
   end
 
   ITsSbTargetPropertySet_GUID = "f7bda5d6-994c-4e11-a079-2763b61830ac"
@@ -2363,11 +2363,11 @@ lib LibWin32
   end
 
   struct ITsSbEnvironmentPropertySetVTbl
-    query_interface : Proc(ITsSbEnvironmentPropertySet*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbEnvironmentPropertySet*, UInt32)
-    release : Proc(ITsSbEnvironmentPropertySet*, UInt32)
-    read : Proc(ITsSbEnvironmentPropertySet*, LibC::LPWSTR, VARIANT*, IErrorLog, HRESULT)
-    write : Proc(ITsSbEnvironmentPropertySet*, LibC::LPWSTR, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    read : UInt64
+    write : UInt64
   end
 
   ITsSbEnvironmentPropertySet_GUID = "d0d1bf7e-7acf-11dd-a243-e51156d89593"
@@ -2377,11 +2377,11 @@ lib LibWin32
   end
 
   struct ITsSbBaseNotifySinkVTbl
-    query_interface : Proc(ITsSbBaseNotifySink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbBaseNotifySink*, UInt32)
-    release : Proc(ITsSbBaseNotifySink*, UInt32)
-    on_error : Proc(ITsSbBaseNotifySink*, HRESULT, HRESULT)
-    on_report_status : Proc(ITsSbBaseNotifySink*, CLIENT_MESSAGE_TYPE, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_error : UInt64
+    on_report_status : UInt64
   end
 
   ITsSbBaseNotifySink_GUID = "808a6537-1282-4989-9e09-f43938b71722"
@@ -2391,13 +2391,13 @@ lib LibWin32
   end
 
   struct ITsSbPluginNotifySinkVTbl
-    query_interface : Proc(ITsSbPluginNotifySink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbPluginNotifySink*, UInt32)
-    release : Proc(ITsSbPluginNotifySink*, UInt32)
-    on_error : Proc(ITsSbPluginNotifySink*, HRESULT, HRESULT)
-    on_report_status : Proc(ITsSbPluginNotifySink*, CLIENT_MESSAGE_TYPE, UInt32, HRESULT)
-    on_initialized : Proc(ITsSbPluginNotifySink*, HRESULT, HRESULT)
-    on_terminated : Proc(ITsSbPluginNotifySink*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_error : UInt64
+    on_report_status : UInt64
+    on_initialized : UInt64
+    on_terminated : UInt64
   end
 
   ITsSbPluginNotifySink_GUID = "44dfe30b-c3be-40f5-bf82-7a95bb795adf"
@@ -2407,12 +2407,12 @@ lib LibWin32
   end
 
   struct ITsSbLoadBalancingNotifySinkVTbl
-    query_interface : Proc(ITsSbLoadBalancingNotifySink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbLoadBalancingNotifySink*, UInt32)
-    release : Proc(ITsSbLoadBalancingNotifySink*, UInt32)
-    on_error : Proc(ITsSbLoadBalancingNotifySink*, HRESULT, HRESULT)
-    on_report_status : Proc(ITsSbLoadBalancingNotifySink*, CLIENT_MESSAGE_TYPE, UInt32, HRESULT)
-    on_get_most_suitable_target : Proc(ITsSbLoadBalancingNotifySink*, ITsSbLoadBalanceResult, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_error : UInt64
+    on_report_status : UInt64
+    on_get_most_suitable_target : UInt64
   end
 
   ITsSbLoadBalancingNotifySink_GUID = "5f8a8297-3244-4e6a-958a-27c822c1e141"
@@ -2422,12 +2422,12 @@ lib LibWin32
   end
 
   struct ITsSbPlacementNotifySinkVTbl
-    query_interface : Proc(ITsSbPlacementNotifySink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbPlacementNotifySink*, UInt32)
-    release : Proc(ITsSbPlacementNotifySink*, UInt32)
-    on_error : Proc(ITsSbPlacementNotifySink*, HRESULT, HRESULT)
-    on_report_status : Proc(ITsSbPlacementNotifySink*, CLIENT_MESSAGE_TYPE, UInt32, HRESULT)
-    on_query_environment_completed : Proc(ITsSbPlacementNotifySink*, ITsSbEnvironment, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_error : UInt64
+    on_report_status : UInt64
+    on_query_environment_completed : UInt64
   end
 
   ITsSbPlacementNotifySink_GUID = "68a0c487-2b4f-46c2-94a1-6ce685183634"
@@ -2437,12 +2437,12 @@ lib LibWin32
   end
 
   struct ITsSbOrchestrationNotifySinkVTbl
-    query_interface : Proc(ITsSbOrchestrationNotifySink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbOrchestrationNotifySink*, UInt32)
-    release : Proc(ITsSbOrchestrationNotifySink*, UInt32)
-    on_error : Proc(ITsSbOrchestrationNotifySink*, HRESULT, HRESULT)
-    on_report_status : Proc(ITsSbOrchestrationNotifySink*, CLIENT_MESSAGE_TYPE, UInt32, HRESULT)
-    on_ready_to_connect : Proc(ITsSbOrchestrationNotifySink*, ITsSbTarget, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_error : UInt64
+    on_report_status : UInt64
+    on_ready_to_connect : UInt64
   end
 
   ITsSbOrchestrationNotifySink_GUID = "36c37d61-926b-442f-bca5-118c6d50dcf2"
@@ -2452,15 +2452,15 @@ lib LibWin32
   end
 
   struct ITsSbTaskPluginNotifySinkVTbl
-    query_interface : Proc(ITsSbTaskPluginNotifySink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbTaskPluginNotifySink*, UInt32)
-    release : Proc(ITsSbTaskPluginNotifySink*, UInt32)
-    on_error : Proc(ITsSbTaskPluginNotifySink*, HRESULT, HRESULT)
-    on_report_status : Proc(ITsSbTaskPluginNotifySink*, CLIENT_MESSAGE_TYPE, UInt32, HRESULT)
-    on_set_task_time : Proc(ITsSbTaskPluginNotifySink*, UInt8*, FILETIME, FILETIME, FILETIME, UInt8*, UInt8*, UInt8*, UInt32, SAFEARRAY*, HRESULT)
-    on_delete_task_time : Proc(ITsSbTaskPluginNotifySink*, UInt8*, UInt8*, HRESULT)
-    on_update_task_status : Proc(ITsSbTaskPluginNotifySink*, UInt8*, UInt8*, RDV_TASK_STATUS, HRESULT)
-    on_report_tasks : Proc(ITsSbTaskPluginNotifySink*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_error : UInt64
+    on_report_status : UInt64
+    on_set_task_time : UInt64
+    on_delete_task_time : UInt64
+    on_update_task_status : UInt64
+    on_report_tasks : UInt64
   end
 
   ITsSbTaskPluginNotifySink_GUID = "6aaf899e-c2ec-45ee-aa37-45e60895261a"
@@ -2470,24 +2470,24 @@ lib LibWin32
   end
 
   struct ITsSbClientConnectionVTbl
-    query_interface : Proc(ITsSbClientConnection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbClientConnection*, UInt32)
-    release : Proc(ITsSbClientConnection*, UInt32)
-    get_user_name : Proc(ITsSbClientConnection*, UInt8**, HRESULT)
-    get_domain : Proc(ITsSbClientConnection*, UInt8**, HRESULT)
-    get_initial_program : Proc(ITsSbClientConnection*, UInt8**, HRESULT)
-    get_load_balance_result : Proc(ITsSbClientConnection*, ITsSbLoadBalanceResult*, HRESULT)
-    get_farm_name : Proc(ITsSbClientConnection*, UInt8**, HRESULT)
-    put_context : Proc(ITsSbClientConnection*, UInt8*, VARIANT, VARIANT*, HRESULT)
-    get_context : Proc(ITsSbClientConnection*, UInt8*, VARIANT*, HRESULT)
-    get_environment : Proc(ITsSbClientConnection*, ITsSbEnvironment*, HRESULT)
-    get_connection_error : Proc(ITsSbClientConnection*, HRESULT)
-    get_sam_user_account : Proc(ITsSbClientConnection*, UInt8**, HRESULT)
-    get_client_connection_property_set : Proc(ITsSbClientConnection*, ITsSbClientConnectionPropertySet*, HRESULT)
-    get_is_first_assignment : Proc(ITsSbClientConnection*, LibC::BOOL*, HRESULT)
-    get_rd_farm_type : Proc(ITsSbClientConnection*, RD_FARM_TYPE*, HRESULT)
-    get_user_sid_string : Proc(ITsSbClientConnection*, Int8**, HRESULT)
-    get_disconnected_session : Proc(ITsSbClientConnection*, ITsSbSession*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_user_name : UInt64
+    get_domain : UInt64
+    get_initial_program : UInt64
+    get_load_balance_result : UInt64
+    get_farm_name : UInt64
+    put_context : UInt64
+    get_context : UInt64
+    get_environment : UInt64
+    get_connection_error : UInt64
+    get_sam_user_account : UInt64
+    get_client_connection_property_set : UInt64
+    get_is_first_assignment : UInt64
+    get_rd_farm_type : UInt64
+    get_user_sid_string : UInt64
+    get_disconnected_session : UInt64
   end
 
   ITsSbClientConnection_GUID = "18857499-ad61-4b1b-b7df-cbcd41fb8338"
@@ -2497,21 +2497,21 @@ lib LibWin32
   end
 
   struct ITsSbProviderVTbl
-    query_interface : Proc(ITsSbProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbProvider*, UInt32)
-    release : Proc(ITsSbProvider*, UInt32)
-    create_target_object : Proc(ITsSbProvider*, UInt8*, UInt8*, ITsSbTarget*, HRESULT)
-    create_load_balance_result_object : Proc(ITsSbProvider*, UInt8*, ITsSbLoadBalanceResult*, HRESULT)
-    create_session_object : Proc(ITsSbProvider*, UInt8*, UInt8*, UInt8*, UInt32, ITsSbSession*, HRESULT)
-    create_plugin_property_set : Proc(ITsSbProvider*, ITsSbPluginPropertySet*, HRESULT)
-    create_target_property_set_object : Proc(ITsSbProvider*, ITsSbTargetPropertySet*, HRESULT)
-    create_environment_object : Proc(ITsSbProvider*, UInt8*, UInt32, ITsSbEnvironment*, HRESULT)
-    get_resource_plugin_store : Proc(ITsSbProvider*, ITsSbResourcePluginStore*, HRESULT)
-    get_filter_plugin_store : Proc(ITsSbProvider*, ITsSbFilterPluginStore*, HRESULT)
-    register_for_notification : Proc(ITsSbProvider*, UInt32, UInt8*, ITsSbResourceNotification, HRESULT)
-    un_register_for_notification : Proc(ITsSbProvider*, UInt32, UInt8*, HRESULT)
-    get_instance_of_global_store : Proc(ITsSbProvider*, ITsSbGlobalStore*, HRESULT)
-    create_environment_property_set_object : Proc(ITsSbProvider*, ITsSbEnvironmentPropertySet*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_target_object : UInt64
+    create_load_balance_result_object : UInt64
+    create_session_object : UInt64
+    create_plugin_property_set : UInt64
+    create_target_property_set_object : UInt64
+    create_environment_object : UInt64
+    get_resource_plugin_store : UInt64
+    get_filter_plugin_store : UInt64
+    register_for_notification : UInt64
+    un_register_for_notification : UInt64
+    get_instance_of_global_store : UInt64
+    create_environment_property_set_object : UInt64
   end
 
   ITsSbProvider_GUID = "87a4098f-6d7b-44dd-bc17-8ce44e370d52"
@@ -2521,37 +2521,37 @@ lib LibWin32
   end
 
   struct ITsSbResourcePluginStoreVTbl
-    query_interface : Proc(ITsSbResourcePluginStore*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbResourcePluginStore*, UInt32)
-    release : Proc(ITsSbResourcePluginStore*, UInt32)
-    query_target : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, ITsSbTarget*, HRESULT)
-    query_session_by_session_id : Proc(ITsSbResourcePluginStore*, UInt32, UInt8*, ITsSbSession*, HRESULT)
-    add_target_to_store : Proc(ITsSbResourcePluginStore*, ITsSbTarget, HRESULT)
-    add_session_to_store : Proc(ITsSbResourcePluginStore*, ITsSbSession, HRESULT)
-    add_environment_to_store : Proc(ITsSbResourcePluginStore*, ITsSbEnvironment, HRESULT)
-    remove_environment_from_store : Proc(ITsSbResourcePluginStore*, UInt8*, LibC::BOOL, HRESULT)
-    enumerate_farms : Proc(ITsSbResourcePluginStore*, UInt32*, SAFEARRAY**, HRESULT)
-    query_environment : Proc(ITsSbResourcePluginStore*, UInt8*, ITsSbEnvironment*, HRESULT)
-    enumerate_environments : Proc(ITsSbResourcePluginStore*, UInt32*, ITsSbEnvironment**, HRESULT)
-    save_target : Proc(ITsSbResourcePluginStore*, ITsSbTarget, LibC::BOOL, HRESULT)
-    save_environment : Proc(ITsSbResourcePluginStore*, ITsSbEnvironment, LibC::BOOL, HRESULT)
-    save_session : Proc(ITsSbResourcePluginStore*, ITsSbSession, HRESULT)
-    set_target_property : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, VARIANT*, HRESULT)
-    set_environment_property : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, VARIANT*, HRESULT)
-    set_target_state : Proc(ITsSbResourcePluginStore*, UInt8*, TARGET_STATE, TARGET_STATE*, HRESULT)
-    set_session_state : Proc(ITsSbResourcePluginStore*, ITsSbSession, HRESULT)
-    enumerate_targets : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, TS_SB_SORT_BY, UInt8*, UInt32*, ITsSbTarget**, HRESULT)
-    enumerate_sessions : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, TSSESSION_STATE*, UInt32*, ITsSbSession**, HRESULT)
-    get_farm_property : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, VARIANT*, HRESULT)
-    delete_target : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, HRESULT)
-    set_target_property_with_version_check : Proc(ITsSbResourcePluginStore*, ITsSbTarget, UInt8*, VARIANT*, HRESULT)
-    set_environment_property_with_version_check : Proc(ITsSbResourcePluginStore*, ITsSbEnvironment, UInt8*, VARIANT*, HRESULT)
-    acquire_target_lock : Proc(ITsSbResourcePluginStore*, UInt8*, UInt32, IUnknown*, HRESULT)
-    release_target_lock : Proc(ITsSbResourcePluginStore*, IUnknown, HRESULT)
-    test_and_set_server_state : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, TARGET_STATE, TARGET_STATE, TARGET_STATE*, HRESULT)
-    set_server_waiting_to_start : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, HRESULT)
-    get_server_state : Proc(ITsSbResourcePluginStore*, UInt8*, UInt8*, TARGET_STATE*, HRESULT)
-    set_server_drain_mode : Proc(ITsSbResourcePluginStore*, UInt8*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    query_target : UInt64
+    query_session_by_session_id : UInt64
+    add_target_to_store : UInt64
+    add_session_to_store : UInt64
+    add_environment_to_store : UInt64
+    remove_environment_from_store : UInt64
+    enumerate_farms : UInt64
+    query_environment : UInt64
+    enumerate_environments : UInt64
+    save_target : UInt64
+    save_environment : UInt64
+    save_session : UInt64
+    set_target_property : UInt64
+    set_environment_property : UInt64
+    set_target_state : UInt64
+    set_session_state : UInt64
+    enumerate_targets : UInt64
+    enumerate_sessions : UInt64
+    get_farm_property : UInt64
+    delete_target : UInt64
+    set_target_property_with_version_check : UInt64
+    set_environment_property_with_version_check : UInt64
+    acquire_target_lock : UInt64
+    release_target_lock : UInt64
+    test_and_set_server_state : UInt64
+    set_server_waiting_to_start : UInt64
+    get_server_state : UInt64
+    set_server_drain_mode : UInt64
   end
 
   ITsSbResourcePluginStore_GUID = "5c38f65f-bcf1-4036-a6bf-9e3cccae0b63"
@@ -2561,12 +2561,12 @@ lib LibWin32
   end
 
   struct ITsSbFilterPluginStoreVTbl
-    query_interface : Proc(ITsSbFilterPluginStore*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbFilterPluginStore*, UInt32)
-    release : Proc(ITsSbFilterPluginStore*, UInt32)
-    save_properties : Proc(ITsSbFilterPluginStore*, ITsSbPropertySet, HRESULT)
-    enumerate_properties : Proc(ITsSbFilterPluginStore*, ITsSbPropertySet*, HRESULT)
-    delete_properties : Proc(ITsSbFilterPluginStore*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    save_properties : UInt64
+    enumerate_properties : UInt64
+    delete_properties : UInt64
   end
 
   ITsSbFilterPluginStore_GUID = "85b44b0f-ed78-413f-9702-fa6d3b5ee755"
@@ -2576,16 +2576,16 @@ lib LibWin32
   end
 
   struct ITsSbGlobalStoreVTbl
-    query_interface : Proc(ITsSbGlobalStore*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbGlobalStore*, UInt32)
-    release : Proc(ITsSbGlobalStore*, UInt32)
-    query_target : Proc(ITsSbGlobalStore*, UInt8*, UInt8*, UInt8*, ITsSbTarget*, HRESULT)
-    query_session_by_session_id : Proc(ITsSbGlobalStore*, UInt8*, UInt32, UInt8*, ITsSbSession*, HRESULT)
-    enumerate_farms : Proc(ITsSbGlobalStore*, UInt8*, UInt32*, SAFEARRAY**, HRESULT)
-    enumerate_targets : Proc(ITsSbGlobalStore*, UInt8*, UInt8*, UInt8*, UInt32*, ITsSbTarget**, HRESULT)
-    enumerate_environments_by_provider : Proc(ITsSbGlobalStore*, UInt8*, UInt32*, ITsSbEnvironment**, HRESULT)
-    enumerate_sessions : Proc(ITsSbGlobalStore*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, TSSESSION_STATE*, UInt32*, ITsSbSession**, HRESULT)
-    get_farm_property : Proc(ITsSbGlobalStore*, UInt8*, UInt8*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    query_target : UInt64
+    query_session_by_session_id : UInt64
+    enumerate_farms : UInt64
+    enumerate_targets : UInt64
+    enumerate_environments_by_provider : UInt64
+    enumerate_sessions : UInt64
+    get_farm_property : UInt64
   end
 
   ITsSbGlobalStore_GUID = "9ab60f7b-bd72-4d9f-8a3a-a0ea5574e635"
@@ -2595,15 +2595,15 @@ lib LibWin32
   end
 
   struct ITsSbProvisioningPluginNotifySinkVTbl
-    query_interface : Proc(ITsSbProvisioningPluginNotifySink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbProvisioningPluginNotifySink*, UInt32)
-    release : Proc(ITsSbProvisioningPluginNotifySink*, UInt32)
-    on_job_created : Proc(ITsSbProvisioningPluginNotifySink*, VM_NOTIFY_INFO*, HRESULT)
-    on_virtual_machine_status_changed : Proc(ITsSbProvisioningPluginNotifySink*, VM_NOTIFY_ENTRY*, VM_NOTIFY_STATUS, HRESULT, UInt8*, HRESULT)
-    on_job_completed : Proc(ITsSbProvisioningPluginNotifySink*, HRESULT, UInt8*, HRESULT)
-    on_job_cancelled : Proc(ITsSbProvisioningPluginNotifySink*, HRESULT)
-    lock_virtual_machine : Proc(ITsSbProvisioningPluginNotifySink*, VM_NOTIFY_ENTRY*, HRESULT)
-    on_virtual_machine_host_status_changed : Proc(ITsSbProvisioningPluginNotifySink*, UInt8*, VM_HOST_NOTIFY_STATUS, HRESULT, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_job_created : UInt64
+    on_virtual_machine_status_changed : UInt64
+    on_job_completed : UInt64
+    on_job_cancelled : UInt64
+    lock_virtual_machine : UInt64
+    on_virtual_machine_host_status_changed : UInt64
   end
 
   ITsSbProvisioningPluginNotifySink_GUID = "aca87a8e-818b-4581-a032-49c3dfb9c701"
@@ -2613,15 +2613,15 @@ lib LibWin32
   end
 
   struct ITsSbProvisioningVTbl
-    query_interface : Proc(ITsSbProvisioning*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbProvisioning*, UInt32)
-    release : Proc(ITsSbProvisioning*, UInt32)
-    initialize : Proc(ITsSbProvisioning*, ITsSbProvider, ITsSbPluginNotifySink, ITsSbPluginPropertySet, HRESULT)
-    terminate : Proc(ITsSbProvisioning*, HRESULT, HRESULT)
-    create_virtual_machines : Proc(ITsSbProvisioning*, UInt8*, UInt8*, ITsSbProvisioningPluginNotifySink, HRESULT)
-    patch_virtual_machines : Proc(ITsSbProvisioning*, UInt8*, UInt8*, ITsSbProvisioningPluginNotifySink, VM_PATCH_INFO*, HRESULT)
-    delete_virtual_machines : Proc(ITsSbProvisioning*, UInt8*, UInt8*, ITsSbProvisioningPluginNotifySink, HRESULT)
-    cancel_job : Proc(ITsSbProvisioning*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    terminate : UInt64
+    create_virtual_machines : UInt64
+    patch_virtual_machines : UInt64
+    delete_virtual_machines : UInt64
+    cancel_job : UInt64
   end
 
   ITsSbProvisioning_GUID = "2f6f0dbb-9e4f-462b-9c3f-fccc3dcb6232"
@@ -2631,11 +2631,11 @@ lib LibWin32
   end
 
   struct ITsSbGenericNotifySinkVTbl
-    query_interface : Proc(ITsSbGenericNotifySink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITsSbGenericNotifySink*, UInt32)
-    release : Proc(ITsSbGenericNotifySink*, UInt32)
-    on_completed : Proc(ITsSbGenericNotifySink*, HRESULT, HRESULT)
-    get_wait_timeout : Proc(ITsSbGenericNotifySink*, FILETIME*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_completed : UInt64
+    get_wait_timeout : UInt64
   end
 
   ITsSbGenericNotifySink_GUID = "4c4c8c4f-300b-46ad-9164-8468a7e7568c"
@@ -2645,15 +2645,15 @@ lib LibWin32
   end
 
   struct ItsPubPluginVTbl
-    query_interface : Proc(ItsPubPlugin*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ItsPubPlugin*, UInt32)
-    release : Proc(ItsPubPlugin*, UInt32)
-    get_resource_list : Proc(ItsPubPlugin*, LibC::LPWSTR, Int32*, Pluginresource**, HRESULT)
-    get_resource : Proc(ItsPubPlugin*, LibC::LPWSTR, Int32, Pluginresource*, HRESULT)
-    get_cache_last_update_time : Proc(ItsPubPlugin*, UInt64*, HRESULT)
-    get_plugin_name : Proc(ItsPubPlugin*, UInt8**, HRESULT)
-    get_plugin_version : Proc(ItsPubPlugin*, UInt8**, HRESULT)
-    resolve_resource : Proc(ItsPubPlugin*, UInt32*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_resource_list : UInt64
+    get_resource : UInt64
+    get_cache_last_update_time : UInt64
+    get_plugin_name : UInt64
+    get_plugin_version : UInt64
+    resolve_resource : UInt64
   end
 
   ItsPubPlugin_GUID = "70c04b05-f347-412b-822f-36c99c54ca45"
@@ -2663,19 +2663,19 @@ lib LibWin32
   end
 
   struct ItsPubPlugin2VTbl
-    query_interface : Proc(ItsPubPlugin2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ItsPubPlugin2*, UInt32)
-    release : Proc(ItsPubPlugin2*, UInt32)
-    get_resource_list : Proc(ItsPubPlugin2*, LibC::LPWSTR, Int32*, Pluginresource**, HRESULT)
-    get_resource : Proc(ItsPubPlugin2*, LibC::LPWSTR, Int32, Pluginresource*, HRESULT)
-    get_cache_last_update_time : Proc(ItsPubPlugin2*, UInt64*, HRESULT)
-    get_plugin_name : Proc(ItsPubPlugin2*, UInt8**, HRESULT)
-    get_plugin_version : Proc(ItsPubPlugin2*, UInt8**, HRESULT)
-    resolve_resource : Proc(ItsPubPlugin2*, UInt32*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_resource2_list : Proc(ItsPubPlugin2*, LibC::LPWSTR, Int32*, Pluginresource2**, HRESULT)
-    get_resource2 : Proc(ItsPubPlugin2*, LibC::LPWSTR, Int32, Pluginresource2*, HRESULT)
-    resolve_personal_desktop : Proc(ItsPubPlugin2*, LibC::LPWSTR, LibC::LPWSTR, TSPUB_PLUGIN_PD_RESOLUTION_TYPE, TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE*, LibC::LPWSTR, HRESULT)
-    delete_personal_desktop_assignment : Proc(ItsPubPlugin2*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_resource_list : UInt64
+    get_resource : UInt64
+    get_cache_last_update_time : UInt64
+    get_plugin_name : UInt64
+    get_plugin_version : UInt64
+    resolve_resource : UInt64
+    get_resource2_list : UInt64
+    get_resource2 : UInt64
+    resolve_personal_desktop : UInt64
+    delete_personal_desktop_assignment : UInt64
   end
 
   ItsPubPlugin2_GUID = "fa4ce418-aad7-4ec6-bad1-0a321ba465d5"
@@ -2685,18 +2685,18 @@ lib LibWin32
   end
 
   struct IWorkspaceResTypeRegistryVTbl
-    query_interface : Proc(IWorkspaceResTypeRegistry*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWorkspaceResTypeRegistry*, UInt32)
-    release : Proc(IWorkspaceResTypeRegistry*, UInt32)
-    get_type_info_count : Proc(IWorkspaceResTypeRegistry*, UInt32*, HRESULT)
-    get_type_info : Proc(IWorkspaceResTypeRegistry*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWorkspaceResTypeRegistry*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWorkspaceResTypeRegistry*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    add_resource_type : Proc(IWorkspaceResTypeRegistry*, Int16, UInt8*, UInt8*, HRESULT)
-    delete_resource_type : Proc(IWorkspaceResTypeRegistry*, Int16, UInt8*, HRESULT)
-    get_registered_file_extensions : Proc(IWorkspaceResTypeRegistry*, Int16, SAFEARRAY**, HRESULT)
-    get_resource_type_info : Proc(IWorkspaceResTypeRegistry*, Int16, UInt8*, UInt8**, HRESULT)
-    modify_resource_type : Proc(IWorkspaceResTypeRegistry*, Int16, UInt8*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    add_resource_type : UInt64
+    delete_resource_type : UInt64
+    get_registered_file_extensions : UInt64
+    get_resource_type_info : UInt64
+    modify_resource_type : UInt64
   end
 
   IWorkspaceResTypeRegistry_GUID = "1d428c79-6e2e-4351-a361-c0401a03a0ba"
@@ -2706,13 +2706,13 @@ lib LibWin32
   end
 
   struct IWTSPluginVTbl
-    query_interface : Proc(IWTSPlugin*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSPlugin*, UInt32)
-    release : Proc(IWTSPlugin*, UInt32)
-    initialize : Proc(IWTSPlugin*, IWTSVirtualChannelManager, HRESULT)
-    connected : Proc(IWTSPlugin*, HRESULT)
-    disconnected : Proc(IWTSPlugin*, UInt32, HRESULT)
-    terminated : Proc(IWTSPlugin*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    connected : UInt64
+    disconnected : UInt64
+    terminated : UInt64
   end
 
   IWTSPlugin_GUID = "a1230201-1439-4e62-a414-190d0ac3d40e"
@@ -2722,10 +2722,10 @@ lib LibWin32
   end
 
   struct IWTSListenerVTbl
-    query_interface : Proc(IWTSListener*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSListener*, UInt32)
-    release : Proc(IWTSListener*, UInt32)
-    get_configuration : Proc(IWTSListener*, IPropertyBag*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_configuration : UInt64
   end
 
   IWTSListener_GUID = "a1230206-9a39-4d58-8674-cdb4dff4e73b"
@@ -2735,10 +2735,10 @@ lib LibWin32
   end
 
   struct IWTSListenerCallbackVTbl
-    query_interface : Proc(IWTSListenerCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSListenerCallback*, UInt32)
-    release : Proc(IWTSListenerCallback*, UInt32)
-    on_new_channel_connection : Proc(IWTSListenerCallback*, IWTSVirtualChannel, UInt8*, LibC::BOOL*, IWTSVirtualChannelCallback*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_new_channel_connection : UInt64
   end
 
   IWTSListenerCallback_GUID = "a1230203-d6a7-11d8-b9fd-000bdbd1f198"
@@ -2748,11 +2748,11 @@ lib LibWin32
   end
 
   struct IWTSVirtualChannelCallbackVTbl
-    query_interface : Proc(IWTSVirtualChannelCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSVirtualChannelCallback*, UInt32)
-    release : Proc(IWTSVirtualChannelCallback*, UInt32)
-    on_data_received : Proc(IWTSVirtualChannelCallback*, UInt32, UInt8*, HRESULT)
-    on_close : Proc(IWTSVirtualChannelCallback*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_data_received : UInt64
+    on_close : UInt64
   end
 
   IWTSVirtualChannelCallback_GUID = "a1230204-d6a7-11d8-b9fd-000bdbd1f198"
@@ -2762,10 +2762,10 @@ lib LibWin32
   end
 
   struct IWTSVirtualChannelManagerVTbl
-    query_interface : Proc(IWTSVirtualChannelManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSVirtualChannelManager*, UInt32)
-    release : Proc(IWTSVirtualChannelManager*, UInt32)
-    create_listener : Proc(IWTSVirtualChannelManager*, UInt8*, UInt32, IWTSListenerCallback, IWTSListener*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_listener : UInt64
   end
 
   IWTSVirtualChannelManager_GUID = "a1230205-d6a7-11d8-b9fd-000bdbd1f198"
@@ -2775,11 +2775,11 @@ lib LibWin32
   end
 
   struct IWTSVirtualChannelVTbl
-    query_interface : Proc(IWTSVirtualChannel*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSVirtualChannel*, UInt32)
-    release : Proc(IWTSVirtualChannel*, UInt32)
-    write : Proc(IWTSVirtualChannel*, UInt32, UInt8*, IUnknown, HRESULT)
-    close : Proc(IWTSVirtualChannel*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    write : UInt64
+    close : UInt64
   end
 
   IWTSVirtualChannel_GUID = "a1230207-d6a7-11d8-b9fd-000bdbd1f198"
@@ -2789,10 +2789,10 @@ lib LibWin32
   end
 
   struct IWTSPluginServiceProviderVTbl
-    query_interface : Proc(IWTSPluginServiceProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSPluginServiceProvider*, UInt32)
-    release : Proc(IWTSPluginServiceProvider*, UInt32)
-    get_service : Proc(IWTSPluginServiceProvider*, Guid, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_service : UInt64
   end
 
   IWTSPluginServiceProvider_GUID = "d3e07363-087c-476c-86a7-dbb15f46ddb4"
@@ -2802,12 +2802,12 @@ lib LibWin32
   end
 
   struct IWTSBitmapRendererVTbl
-    query_interface : Proc(IWTSBitmapRenderer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSBitmapRenderer*, UInt32)
-    release : Proc(IWTSBitmapRenderer*, UInt32)
-    render : Proc(IWTSBitmapRenderer*, Guid, UInt32, UInt32, Int32, UInt32, UInt8*, HRESULT)
-    get_renderer_statistics : Proc(IWTSBitmapRenderer*, BITMAP_RENDERER_STATISTICS*, HRESULT)
-    remove_mapping : Proc(IWTSBitmapRenderer*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    render : UInt64
+    get_renderer_statistics : UInt64
+    remove_mapping : UInt64
   end
 
   IWTSBitmapRenderer_GUID = "5b7acc97-f3c9-46f7-8c5b-fa685d3441b1"
@@ -2817,10 +2817,10 @@ lib LibWin32
   end
 
   struct IWTSBitmapRendererCallbackVTbl
-    query_interface : Proc(IWTSBitmapRendererCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSBitmapRendererCallback*, UInt32)
-    release : Proc(IWTSBitmapRendererCallback*, UInt32)
-    on_target_size_changed : Proc(IWTSBitmapRendererCallback*, RECT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_target_size_changed : UInt64
   end
 
   IWTSBitmapRendererCallback_GUID = "d782928e-fe4e-4e77-ae90-9cd0b3e3b353"
@@ -2830,10 +2830,10 @@ lib LibWin32
   end
 
   struct IWTSBitmapRenderServiceVTbl
-    query_interface : Proc(IWTSBitmapRenderService*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSBitmapRenderService*, UInt32)
-    release : Proc(IWTSBitmapRenderService*, UInt32)
-    get_mapped_renderer : Proc(IWTSBitmapRenderService*, UInt64, IWTSBitmapRendererCallback, IWTSBitmapRenderer*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_mapped_renderer : UInt64
   end
 
   IWTSBitmapRenderService_GUID = "ea326091-05fe-40c1-b49c-3d2ef4626a0e"
@@ -2843,14 +2843,14 @@ lib LibWin32
   end
 
   struct IWRdsGraphicsChannelEventsVTbl
-    query_interface : Proc(IWRdsGraphicsChannelEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWRdsGraphicsChannelEvents*, UInt32)
-    release : Proc(IWRdsGraphicsChannelEvents*, UInt32)
-    on_data_received : Proc(IWRdsGraphicsChannelEvents*, UInt32, UInt8*, HRESULT)
-    on_close : Proc(IWRdsGraphicsChannelEvents*, HRESULT)
-    on_channel_opened : Proc(IWRdsGraphicsChannelEvents*, HRESULT, IUnknown, HRESULT)
-    on_data_sent : Proc(IWRdsGraphicsChannelEvents*, IUnknown, LibC::BOOL, UInt8*, UInt32, HRESULT)
-    on_metrics_update : Proc(IWRdsGraphicsChannelEvents*, UInt32, UInt32, UInt64, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_data_received : UInt64
+    on_close : UInt64
+    on_channel_opened : UInt64
+    on_data_sent : UInt64
+    on_metrics_update : UInt64
   end
 
   IWRdsGraphicsChannelEvents_GUID = "67f2368c-d674-4fae-66a5-d20628a640d2"
@@ -2860,12 +2860,12 @@ lib LibWin32
   end
 
   struct IWRdsGraphicsChannelVTbl
-    query_interface : Proc(IWRdsGraphicsChannel*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWRdsGraphicsChannel*, UInt32)
-    release : Proc(IWRdsGraphicsChannel*, UInt32)
-    write : Proc(IWRdsGraphicsChannel*, UInt32, UInt8*, IUnknown, HRESULT)
-    close : Proc(IWRdsGraphicsChannel*, HRESULT)
-    open : Proc(IWRdsGraphicsChannel*, IWRdsGraphicsChannelEvents, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    write : UInt64
+    close : UInt64
+    open : UInt64
   end
 
   IWRdsGraphicsChannel_GUID = "684b7a0b-edff-43ad-d5a2-4a8d5388f401"
@@ -2875,10 +2875,10 @@ lib LibWin32
   end
 
   struct IWRdsGraphicsChannelManagerVTbl
-    query_interface : Proc(IWRdsGraphicsChannelManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWRdsGraphicsChannelManager*, UInt32)
-    release : Proc(IWRdsGraphicsChannelManager*, UInt32)
-    create_channel : Proc(IWRdsGraphicsChannelManager*, UInt8*, WRdsGraphicsChannelType, IWRdsGraphicsChannel*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_channel : UInt64
   end
 
   IWRdsGraphicsChannelManager_GUID = "0fd57159-e83e-476a-a8b9-4a7976e71e18"
@@ -2888,14 +2888,14 @@ lib LibWin32
   end
 
   struct IWTSProtocolManagerVTbl
-    query_interface : Proc(IWTSProtocolManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSProtocolManager*, UInt32)
-    release : Proc(IWTSProtocolManager*, UInt32)
-    create_listener : Proc(IWTSProtocolManager*, LibC::LPWSTR, IWTSProtocolListener*, HRESULT)
-    notify_service_state_change : Proc(IWTSProtocolManager*, WTS_SERVICE_STATE*, HRESULT)
-    notify_session_of_service_start : Proc(IWTSProtocolManager*, WTS_SESSION_ID*, HRESULT)
-    notify_session_of_service_stop : Proc(IWTSProtocolManager*, WTS_SESSION_ID*, HRESULT)
-    notify_session_state_change : Proc(IWTSProtocolManager*, WTS_SESSION_ID*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_listener : UInt64
+    notify_service_state_change : UInt64
+    notify_session_of_service_start : UInt64
+    notify_session_of_service_stop : UInt64
+    notify_session_state_change : UInt64
   end
 
   IWTSProtocolManager_GUID = "f9eaf6cc-ed79-4f01-821d-1f881b9f66cc"
@@ -2905,11 +2905,11 @@ lib LibWin32
   end
 
   struct IWTSProtocolListenerVTbl
-    query_interface : Proc(IWTSProtocolListener*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSProtocolListener*, UInt32)
-    release : Proc(IWTSProtocolListener*, UInt32)
-    start_listen : Proc(IWTSProtocolListener*, IWTSProtocolListenerCallback, HRESULT)
-    stop_listen : Proc(IWTSProtocolListener*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    start_listen : UInt64
+    stop_listen : UInt64
   end
 
   IWTSProtocolListener_GUID = "23083765-45f0-4394-8f69-32b2bc0ef4ca"
@@ -2919,10 +2919,10 @@ lib LibWin32
   end
 
   struct IWTSProtocolListenerCallbackVTbl
-    query_interface : Proc(IWTSProtocolListenerCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSProtocolListenerCallback*, UInt32)
-    release : Proc(IWTSProtocolListenerCallback*, UInt32)
-    on_connected : Proc(IWTSProtocolListenerCallback*, IWTSProtocolConnection, IWTSProtocolConnectionCallback*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_connected : UInt64
   end
 
   IWTSProtocolListenerCallback_GUID = "23083765-1a2d-4de2-97de-4a35f260f0b3"
@@ -2932,32 +2932,32 @@ lib LibWin32
   end
 
   struct IWTSProtocolConnectionVTbl
-    query_interface : Proc(IWTSProtocolConnection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSProtocolConnection*, UInt32)
-    release : Proc(IWTSProtocolConnection*, UInt32)
-    get_logon_error_redirector : Proc(IWTSProtocolConnection*, IWTSProtocolLogonErrorRedirector*, HRESULT)
-    send_policy_data : Proc(IWTSProtocolConnection*, WTS_POLICY_DATA*, HRESULT)
-    accept_connection : Proc(IWTSProtocolConnection*, HRESULT)
-    get_client_data : Proc(IWTSProtocolConnection*, WTS_CLIENT_DATA*, HRESULT)
-    get_user_credentials : Proc(IWTSProtocolConnection*, WTS_USER_CREDENTIAL*, HRESULT)
-    get_license_connection : Proc(IWTSProtocolConnection*, IWTSProtocolLicenseConnection*, HRESULT)
-    authenticate_client_to_session : Proc(IWTSProtocolConnection*, WTS_SESSION_ID*, HRESULT)
-    notify_session_id : Proc(IWTSProtocolConnection*, WTS_SESSION_ID*, HRESULT)
-    get_protocol_handles : Proc(IWTSProtocolConnection*, HANDLE_PTR*, HANDLE_PTR*, HANDLE_PTR*, HANDLE_PTR*, HRESULT)
-    connect_notify : Proc(IWTSProtocolConnection*, UInt32, HRESULT)
-    is_user_allowed_to_logon : Proc(IWTSProtocolConnection*, UInt32, HANDLE_PTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    session_arbitration_enumeration : Proc(IWTSProtocolConnection*, HANDLE_PTR, LibC::BOOL, UInt32*, UInt32*, HRESULT)
-    logon_notify : Proc(IWTSProtocolConnection*, HANDLE_PTR, LibC::LPWSTR, LibC::LPWSTR, WTS_SESSION_ID*, HRESULT)
-    get_user_data : Proc(IWTSProtocolConnection*, WTS_POLICY_DATA*, WTS_USER_DATA*, HRESULT)
-    disconnect_notify : Proc(IWTSProtocolConnection*, HRESULT)
-    close : Proc(IWTSProtocolConnection*, HRESULT)
-    get_protocol_status : Proc(IWTSProtocolConnection*, WTS_PROTOCOL_STATUS*, HRESULT)
-    get_last_input_time : Proc(IWTSProtocolConnection*, UInt64*, HRESULT)
-    set_error_info : Proc(IWTSProtocolConnection*, UInt32, HRESULT)
-    send_beep : Proc(IWTSProtocolConnection*, UInt32, UInt32, HRESULT)
-    create_virtual_channel : Proc(IWTSProtocolConnection*, PSTR, LibC::BOOL, UInt32, LibC::UINT_PTR*, HRESULT)
-    query_property : Proc(IWTSProtocolConnection*, Guid, UInt32, UInt32, WTS_PROPERTY_VALUE*, WTS_PROPERTY_VALUE*, HRESULT)
-    get_shadow_connection : Proc(IWTSProtocolConnection*, IWTSProtocolShadowConnection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_logon_error_redirector : UInt64
+    send_policy_data : UInt64
+    accept_connection : UInt64
+    get_client_data : UInt64
+    get_user_credentials : UInt64
+    get_license_connection : UInt64
+    authenticate_client_to_session : UInt64
+    notify_session_id : UInt64
+    get_protocol_handles : UInt64
+    connect_notify : UInt64
+    is_user_allowed_to_logon : UInt64
+    session_arbitration_enumeration : UInt64
+    logon_notify : UInt64
+    get_user_data : UInt64
+    disconnect_notify : UInt64
+    close : UInt64
+    get_protocol_status : UInt64
+    get_last_input_time : UInt64
+    set_error_info : UInt64
+    send_beep : UInt64
+    create_virtual_channel : UInt64
+    query_property : UInt64
+    get_shadow_connection : UInt64
   end
 
   IWTSProtocolConnection_GUID = "23083765-9095-4648-98bf-ef81c914032d"
@@ -2967,14 +2967,14 @@ lib LibWin32
   end
 
   struct IWTSProtocolConnectionCallbackVTbl
-    query_interface : Proc(IWTSProtocolConnectionCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSProtocolConnectionCallback*, UInt32)
-    release : Proc(IWTSProtocolConnectionCallback*, UInt32)
-    on_ready : Proc(IWTSProtocolConnectionCallback*, HRESULT)
-    broken_connection : Proc(IWTSProtocolConnectionCallback*, UInt32, UInt32, HRESULT)
-    stop_screen_updates : Proc(IWTSProtocolConnectionCallback*, HRESULT)
-    redraw_window : Proc(IWTSProtocolConnectionCallback*, WTS_SMALL_RECT*, HRESULT)
-    display_io_ctl : Proc(IWTSProtocolConnectionCallback*, WTS_DISPLAY_IOCTL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_ready : UInt64
+    broken_connection : UInt64
+    stop_screen_updates : UInt64
+    redraw_window : UInt64
+    display_io_ctl : UInt64
   end
 
   IWTSProtocolConnectionCallback_GUID = "23083765-75eb-41fe-b4fb-e086242afa0f"
@@ -2984,12 +2984,12 @@ lib LibWin32
   end
 
   struct IWTSProtocolShadowConnectionVTbl
-    query_interface : Proc(IWTSProtocolShadowConnection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSProtocolShadowConnection*, UInt32)
-    release : Proc(IWTSProtocolShadowConnection*, UInt32)
-    start : Proc(IWTSProtocolShadowConnection*, LibC::LPWSTR, UInt32, UInt8, UInt16, IWTSProtocolShadowCallback, HRESULT)
-    stop : Proc(IWTSProtocolShadowConnection*, HRESULT)
-    do_target : Proc(IWTSProtocolShadowConnection*, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    start : UInt64
+    stop : UInt64
+    do_target : UInt64
   end
 
   IWTSProtocolShadowConnection_GUID = "ee3b0c14-37fb-456b-bab3-6d6cd51e13bf"
@@ -2999,11 +2999,11 @@ lib LibWin32
   end
 
   struct IWTSProtocolShadowCallbackVTbl
-    query_interface : Proc(IWTSProtocolShadowCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSProtocolShadowCallback*, UInt32)
-    release : Proc(IWTSProtocolShadowCallback*, UInt32)
-    stop_shadow : Proc(IWTSProtocolShadowCallback*, HRESULT)
-    invoke_target_shadow : Proc(IWTSProtocolShadowCallback*, LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    stop_shadow : UInt64
+    invoke_target_shadow : UInt64
   end
 
   IWTSProtocolShadowCallback_GUID = "503a2504-aae5-4ab1-93e0-6d1c4bc6f71a"
@@ -3013,13 +3013,13 @@ lib LibWin32
   end
 
   struct IWTSProtocolLicenseConnectionVTbl
-    query_interface : Proc(IWTSProtocolLicenseConnection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSProtocolLicenseConnection*, UInt32)
-    release : Proc(IWTSProtocolLicenseConnection*, UInt32)
-    request_licensing_capabilities : Proc(IWTSProtocolLicenseConnection*, WTS_LICENSE_CAPABILITIES*, UInt32*, HRESULT)
-    send_client_license : Proc(IWTSProtocolLicenseConnection*, UInt8*, UInt32, HRESULT)
-    request_client_license : Proc(IWTSProtocolLicenseConnection*, UInt8*, UInt32, UInt8*, UInt32*, HRESULT)
-    protocol_complete : Proc(IWTSProtocolLicenseConnection*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    request_licensing_capabilities : UInt64
+    send_client_license : UInt64
+    request_client_license : UInt64
+    protocol_complete : UInt64
   end
 
   IWTSProtocolLicenseConnection_GUID = "23083765-178c-4079-8e4a-fea6496a4d70"
@@ -3029,13 +3029,13 @@ lib LibWin32
   end
 
   struct IWTSProtocolLogonErrorRedirectorVTbl
-    query_interface : Proc(IWTSProtocolLogonErrorRedirector*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWTSProtocolLogonErrorRedirector*, UInt32)
-    release : Proc(IWTSProtocolLogonErrorRedirector*, UInt32)
-    on_begin_painting : Proc(IWTSProtocolLogonErrorRedirector*, HRESULT)
-    redirect_status : Proc(IWTSProtocolLogonErrorRedirector*, LibC::LPWSTR, WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*, HRESULT)
-    redirect_message : Proc(IWTSProtocolLogonErrorRedirector*, LibC::LPWSTR, LibC::LPWSTR, UInt32, WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*, HRESULT)
-    redirect_logon_error : Proc(IWTSProtocolLogonErrorRedirector*, Int32, Int32, LibC::LPWSTR, LibC::LPWSTR, UInt32, WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_begin_painting : UInt64
+    redirect_status : UInt64
+    redirect_message : UInt64
+    redirect_logon_error : UInt64
   end
 
   IWTSProtocolLogonErrorRedirector_GUID = "fd9b61a7-2916-4627-8dee-4328711ad6cb"
@@ -3045,11 +3045,11 @@ lib LibWin32
   end
 
   struct IWRdsProtocolSettingsVTbl
-    query_interface : Proc(IWRdsProtocolSettings*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWRdsProtocolSettings*, UInt32)
-    release : Proc(IWRdsProtocolSettings*, UInt32)
-    get_settings : Proc(IWRdsProtocolSettings*, WRDS_SETTING_TYPE, WRDS_SETTING_LEVEL, WRDS_SETTINGS*, HRESULT)
-    merge_settings : Proc(IWRdsProtocolSettings*, WRDS_SETTINGS*, WRDS_CONNECTION_SETTING_LEVEL, WRDS_CONNECTION_SETTINGS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_settings : UInt64
+    merge_settings : UInt64
   end
 
   IWRdsProtocolSettings_GUID = "654a5a6a-2550-47eb-b6f7-ebd637475265"
@@ -3059,17 +3059,17 @@ lib LibWin32
   end
 
   struct IWRdsProtocolManagerVTbl
-    query_interface : Proc(IWRdsProtocolManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWRdsProtocolManager*, UInt32)
-    release : Proc(IWRdsProtocolManager*, UInt32)
-    initialize : Proc(IWRdsProtocolManager*, IWRdsProtocolSettings, WRDS_SETTINGS*, HRESULT)
-    create_listener : Proc(IWRdsProtocolManager*, LibC::LPWSTR, IWRdsProtocolListener*, HRESULT)
-    notify_service_state_change : Proc(IWRdsProtocolManager*, WTS_SERVICE_STATE*, HRESULT)
-    notify_session_of_service_start : Proc(IWRdsProtocolManager*, WTS_SESSION_ID*, HRESULT)
-    notify_session_of_service_stop : Proc(IWRdsProtocolManager*, WTS_SESSION_ID*, HRESULT)
-    notify_session_state_change : Proc(IWRdsProtocolManager*, WTS_SESSION_ID*, UInt32, HRESULT)
-    notify_settings_change : Proc(IWRdsProtocolManager*, WRDS_SETTINGS*, HRESULT)
-    uninitialize : Proc(IWRdsProtocolManager*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    create_listener : UInt64
+    notify_service_state_change : UInt64
+    notify_session_of_service_start : UInt64
+    notify_session_of_service_stop : UInt64
+    notify_session_state_change : UInt64
+    notify_settings_change : UInt64
+    uninitialize : UInt64
   end
 
   IWRdsProtocolManager_GUID = "dc796967-3abb-40cd-a446-105276b58950"
@@ -3079,12 +3079,12 @@ lib LibWin32
   end
 
   struct IWRdsProtocolListenerVTbl
-    query_interface : Proc(IWRdsProtocolListener*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWRdsProtocolListener*, UInt32)
-    release : Proc(IWRdsProtocolListener*, UInt32)
-    get_settings : Proc(IWRdsProtocolListener*, WRDS_LISTENER_SETTING_LEVEL, WRDS_LISTENER_SETTINGS*, HRESULT)
-    start_listen : Proc(IWRdsProtocolListener*, IWRdsProtocolListenerCallback, HRESULT)
-    stop_listen : Proc(IWRdsProtocolListener*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_settings : UInt64
+    start_listen : UInt64
+    stop_listen : UInt64
   end
 
   IWRdsProtocolListener_GUID = "fcbc131b-c686-451d-a773-e279e230f540"
@@ -3094,10 +3094,10 @@ lib LibWin32
   end
 
   struct IWRdsProtocolListenerCallbackVTbl
-    query_interface : Proc(IWRdsProtocolListenerCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWRdsProtocolListenerCallback*, UInt32)
-    release : Proc(IWRdsProtocolListenerCallback*, UInt32)
-    on_connected : Proc(IWRdsProtocolListenerCallback*, IWRdsProtocolConnection, WRDS_CONNECTION_SETTINGS*, IWRdsProtocolConnectionCallback*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_connected : UInt64
   end
 
   IWRdsProtocolListenerCallback_GUID = "3ab27e5b-4449-4dc1-b74a-91621d4fe984"
@@ -3107,33 +3107,33 @@ lib LibWin32
   end
 
   struct IWRdsProtocolConnectionVTbl
-    query_interface : Proc(IWRdsProtocolConnection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWRdsProtocolConnection*, UInt32)
-    release : Proc(IWRdsProtocolConnection*, UInt32)
-    get_logon_error_redirector : Proc(IWRdsProtocolConnection*, IWRdsProtocolLogonErrorRedirector*, HRESULT)
-    accept_connection : Proc(IWRdsProtocolConnection*, HRESULT)
-    get_client_data : Proc(IWRdsProtocolConnection*, WTS_CLIENT_DATA*, HRESULT)
-    get_client_monitor_data : Proc(IWRdsProtocolConnection*, UInt32*, UInt32*, HRESULT)
-    get_user_credentials : Proc(IWRdsProtocolConnection*, WTS_USER_CREDENTIAL*, HRESULT)
-    get_license_connection : Proc(IWRdsProtocolConnection*, IWRdsProtocolLicenseConnection*, HRESULT)
-    authenticate_client_to_session : Proc(IWRdsProtocolConnection*, WTS_SESSION_ID*, HRESULT)
-    notify_session_id : Proc(IWRdsProtocolConnection*, WTS_SESSION_ID*, HANDLE_PTR, HRESULT)
-    get_input_handles : Proc(IWRdsProtocolConnection*, HANDLE_PTR*, HANDLE_PTR*, HANDLE_PTR*, HRESULT)
-    get_video_handle : Proc(IWRdsProtocolConnection*, HANDLE_PTR*, HRESULT)
-    connect_notify : Proc(IWRdsProtocolConnection*, UInt32, HRESULT)
-    is_user_allowed_to_logon : Proc(IWRdsProtocolConnection*, UInt32, HANDLE_PTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    session_arbitration_enumeration : Proc(IWRdsProtocolConnection*, HANDLE_PTR, LibC::BOOL, UInt32*, UInt32*, HRESULT)
-    logon_notify : Proc(IWRdsProtocolConnection*, HANDLE_PTR, LibC::LPWSTR, LibC::LPWSTR, WTS_SESSION_ID*, WRDS_CONNECTION_SETTINGS*, HRESULT)
-    pre_disconnect : Proc(IWRdsProtocolConnection*, UInt32, HRESULT)
-    disconnect_notify : Proc(IWRdsProtocolConnection*, HRESULT)
-    close : Proc(IWRdsProtocolConnection*, HRESULT)
-    get_protocol_status : Proc(IWRdsProtocolConnection*, WTS_PROTOCOL_STATUS*, HRESULT)
-    get_last_input_time : Proc(IWRdsProtocolConnection*, UInt64*, HRESULT)
-    set_error_info : Proc(IWRdsProtocolConnection*, UInt32, HRESULT)
-    create_virtual_channel : Proc(IWRdsProtocolConnection*, PSTR, LibC::BOOL, UInt32, LibC::UINT_PTR*, HRESULT)
-    query_property : Proc(IWRdsProtocolConnection*, Guid, UInt32, UInt32, WTS_PROPERTY_VALUE*, WTS_PROPERTY_VALUE*, HRESULT)
-    get_shadow_connection : Proc(IWRdsProtocolConnection*, IWRdsProtocolShadowConnection*, HRESULT)
-    notify_command_process_created : Proc(IWRdsProtocolConnection*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_logon_error_redirector : UInt64
+    accept_connection : UInt64
+    get_client_data : UInt64
+    get_client_monitor_data : UInt64
+    get_user_credentials : UInt64
+    get_license_connection : UInt64
+    authenticate_client_to_session : UInt64
+    notify_session_id : UInt64
+    get_input_handles : UInt64
+    get_video_handle : UInt64
+    connect_notify : UInt64
+    is_user_allowed_to_logon : UInt64
+    session_arbitration_enumeration : UInt64
+    logon_notify : UInt64
+    pre_disconnect : UInt64
+    disconnect_notify : UInt64
+    close : UInt64
+    get_protocol_status : UInt64
+    get_last_input_time : UInt64
+    set_error_info : UInt64
+    create_virtual_channel : UInt64
+    query_property : UInt64
+    get_shadow_connection : UInt64
+    notify_command_process_created : UInt64
   end
 
   IWRdsProtocolConnection_GUID = "324ed94f-fdaf-4ff6-81a8-42abe755830b"
@@ -3143,14 +3143,14 @@ lib LibWin32
   end
 
   struct IWRdsProtocolConnectionCallbackVTbl
-    query_interface : Proc(IWRdsProtocolConnectionCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWRdsProtocolConnectionCallback*, UInt32)
-    release : Proc(IWRdsProtocolConnectionCallback*, UInt32)
-    on_ready : Proc(IWRdsProtocolConnectionCallback*, HRESULT)
-    broken_connection : Proc(IWRdsProtocolConnectionCallback*, UInt32, UInt32, HRESULT)
-    stop_screen_updates : Proc(IWRdsProtocolConnectionCallback*, HRESULT)
-    redraw_window : Proc(IWRdsProtocolConnectionCallback*, WTS_SMALL_RECT*, HRESULT)
-    get_connection_id : Proc(IWRdsProtocolConnectionCallback*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_ready : UInt64
+    broken_connection : UInt64
+    stop_screen_updates : UInt64
+    redraw_window : UInt64
+    get_connection_id : UInt64
   end
 
   IWRdsProtocolConnectionCallback_GUID = "f1d70332-d070-4ef1-a088-78313536c2d6"
@@ -3160,12 +3160,12 @@ lib LibWin32
   end
 
   struct IWRdsProtocolShadowConnectionVTbl
-    query_interface : Proc(IWRdsProtocolShadowConnection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWRdsProtocolShadowConnection*, UInt32)
-    release : Proc(IWRdsProtocolShadowConnection*, UInt32)
-    start : Proc(IWRdsProtocolShadowConnection*, LibC::LPWSTR, UInt32, UInt8, UInt16, IWRdsProtocolShadowCallback, HRESULT)
-    stop : Proc(IWRdsProtocolShadowConnection*, HRESULT)
-    do_target : Proc(IWRdsProtocolShadowConnection*, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    start : UInt64
+    stop : UInt64
+    do_target : UInt64
   end
 
   IWRdsProtocolShadowConnection_GUID = "9ae85ce6-cade-4548-8feb-99016597f60a"
@@ -3175,11 +3175,11 @@ lib LibWin32
   end
 
   struct IWRdsProtocolShadowCallbackVTbl
-    query_interface : Proc(IWRdsProtocolShadowCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWRdsProtocolShadowCallback*, UInt32)
-    release : Proc(IWRdsProtocolShadowCallback*, UInt32)
-    stop_shadow : Proc(IWRdsProtocolShadowCallback*, HRESULT)
-    invoke_target_shadow : Proc(IWRdsProtocolShadowCallback*, LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    stop_shadow : UInt64
+    invoke_target_shadow : UInt64
   end
 
   IWRdsProtocolShadowCallback_GUID = "e0667ce0-0372-40d6-adb2-a0f3322674d6"
@@ -3189,13 +3189,13 @@ lib LibWin32
   end
 
   struct IWRdsProtocolLicenseConnectionVTbl
-    query_interface : Proc(IWRdsProtocolLicenseConnection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWRdsProtocolLicenseConnection*, UInt32)
-    release : Proc(IWRdsProtocolLicenseConnection*, UInt32)
-    request_licensing_capabilities : Proc(IWRdsProtocolLicenseConnection*, WTS_LICENSE_CAPABILITIES*, UInt32*, HRESULT)
-    send_client_license : Proc(IWRdsProtocolLicenseConnection*, UInt8*, UInt32, HRESULT)
-    request_client_license : Proc(IWRdsProtocolLicenseConnection*, UInt8*, UInt32, UInt8*, UInt32*, HRESULT)
-    protocol_complete : Proc(IWRdsProtocolLicenseConnection*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    request_licensing_capabilities : UInt64
+    send_client_license : UInt64
+    request_client_license : UInt64
+    protocol_complete : UInt64
   end
 
   IWRdsProtocolLicenseConnection_GUID = "1d6a145f-d095-4424-957a-407fae822d84"
@@ -3205,13 +3205,13 @@ lib LibWin32
   end
 
   struct IWRdsProtocolLogonErrorRedirectorVTbl
-    query_interface : Proc(IWRdsProtocolLogonErrorRedirector*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWRdsProtocolLogonErrorRedirector*, UInt32)
-    release : Proc(IWRdsProtocolLogonErrorRedirector*, UInt32)
-    on_begin_painting : Proc(IWRdsProtocolLogonErrorRedirector*, HRESULT)
-    redirect_status : Proc(IWRdsProtocolLogonErrorRedirector*, LibC::LPWSTR, WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*, HRESULT)
-    redirect_message : Proc(IWRdsProtocolLogonErrorRedirector*, LibC::LPWSTR, LibC::LPWSTR, UInt32, WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*, HRESULT)
-    redirect_logon_error : Proc(IWRdsProtocolLogonErrorRedirector*, Int32, Int32, LibC::LPWSTR, LibC::LPWSTR, UInt32, WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_begin_painting : UInt64
+    redirect_status : UInt64
+    redirect_message : UInt64
+    redirect_logon_error : UInt64
   end
 
   IWRdsProtocolLogonErrorRedirector_GUID = "519fe83b-142a-4120-a3d5-a405d315281a"
@@ -3221,13 +3221,13 @@ lib LibWin32
   end
 
   struct IWRdsWddmIddPropsVTbl
-    query_interface : Proc(IWRdsWddmIddProps*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWRdsWddmIddProps*, UInt32)
-    release : Proc(IWRdsWddmIddProps*, UInt32)
-    get_hardware_id : Proc(IWRdsWddmIddProps*, Char*, UInt32, HRESULT)
-    on_driver_load : Proc(IWRdsWddmIddProps*, UInt32, HANDLE_PTR, HRESULT)
-    on_driver_unload : Proc(IWRdsWddmIddProps*, UInt32, HRESULT)
-    enable_wddm_idd : Proc(IWRdsWddmIddProps*, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_hardware_id : UInt64
+    on_driver_load : UInt64
+    on_driver_unload : UInt64
+    enable_wddm_idd : UInt64
   end
 
   IWRdsWddmIddProps_GUID = "1382df4d-a289-43d1-a184-144726f9af90"
@@ -3237,11 +3237,11 @@ lib LibWin32
   end
 
   struct IWRdsProtocolConnectionSettingsVTbl
-    query_interface : Proc(IWRdsProtocolConnectionSettings*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWRdsProtocolConnectionSettings*, UInt32)
-    release : Proc(IWRdsProtocolConnectionSettings*, UInt32)
-    set_connection_setting : Proc(IWRdsProtocolConnectionSettings*, Guid, WTS_PROPERTY_VALUE*, HRESULT)
-    get_connection_setting : Proc(IWRdsProtocolConnectionSettings*, Guid, WTS_PROPERTY_VALUE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_connection_setting : UInt64
+    get_connection_setting : UInt64
   end
 
   IWRdsProtocolConnectionSettings_GUID = "83fcf5d3-f6f4-ea94-9cd2-32f280e1e510"
@@ -3251,10 +3251,10 @@ lib LibWin32
   end
 
   struct IWRdsEnhancedFastReconnectArbitratorVTbl
-    query_interface : Proc(IWRdsEnhancedFastReconnectArbitrator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWRdsEnhancedFastReconnectArbitrator*, UInt32)
-    release : Proc(IWRdsEnhancedFastReconnectArbitrator*, UInt32)
-    get_session_for_enhanced_fast_reconnect : Proc(IWRdsEnhancedFastReconnectArbitrator*, Int32*, UInt32, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_session_for_enhanced_fast_reconnect : UInt64
   end
 
   IWRdsEnhancedFastReconnectArbitrator_GUID = "5718ae9b-47f2-499f-b634-d8175bd51131"
@@ -3264,17 +3264,17 @@ lib LibWin32
   end
 
   struct IRemoteDesktopClientSettingsVTbl
-    query_interface : Proc(IRemoteDesktopClientSettings*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRemoteDesktopClientSettings*, UInt32)
-    release : Proc(IRemoteDesktopClientSettings*, UInt32)
-    get_type_info_count : Proc(IRemoteDesktopClientSettings*, UInt32*, HRESULT)
-    get_type_info : Proc(IRemoteDesktopClientSettings*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IRemoteDesktopClientSettings*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IRemoteDesktopClientSettings*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    apply_settings : Proc(IRemoteDesktopClientSettings*, UInt8*, HRESULT)
-    retrieve_settings : Proc(IRemoteDesktopClientSettings*, UInt8**, HRESULT)
-    get_rdp_property : Proc(IRemoteDesktopClientSettings*, UInt8*, VARIANT*, HRESULT)
-    set_rdp_property : Proc(IRemoteDesktopClientSettings*, UInt8*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    apply_settings : UInt64
+    retrieve_settings : UInt64
+    get_rdp_property : UInt64
+    set_rdp_property : UInt64
   end
 
   IRemoteDesktopClientSettings_GUID = "48a0f2a7-2713-431f-bbac-6f4558e7d64d"
@@ -3284,17 +3284,17 @@ lib LibWin32
   end
 
   struct IRemoteDesktopClientActionsVTbl
-    query_interface : Proc(IRemoteDesktopClientActions*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRemoteDesktopClientActions*, UInt32)
-    release : Proc(IRemoteDesktopClientActions*, UInt32)
-    get_type_info_count : Proc(IRemoteDesktopClientActions*, UInt32*, HRESULT)
-    get_type_info : Proc(IRemoteDesktopClientActions*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IRemoteDesktopClientActions*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IRemoteDesktopClientActions*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    suspend_screen_updates : Proc(IRemoteDesktopClientActions*, HRESULT)
-    resume_screen_updates : Proc(IRemoteDesktopClientActions*, HRESULT)
-    execute_remote_action : Proc(IRemoteDesktopClientActions*, RemoteActionType, HRESULT)
-    get_snapshot : Proc(IRemoteDesktopClientActions*, SnapshotEncodingType, SnapshotFormatType, UInt32, UInt32, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    suspend_screen_updates : UInt64
+    resume_screen_updates : UInt64
+    execute_remote_action : UInt64
+    get_snapshot : UInt64
   end
 
   IRemoteDesktopClientActions_GUID = "7d54bc4e-1028-45d4-8b0a-b9b6bffba176"
@@ -3304,19 +3304,19 @@ lib LibWin32
   end
 
   struct IRemoteDesktopClientTouchPointerVTbl
-    query_interface : Proc(IRemoteDesktopClientTouchPointer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRemoteDesktopClientTouchPointer*, UInt32)
-    release : Proc(IRemoteDesktopClientTouchPointer*, UInt32)
-    get_type_info_count : Proc(IRemoteDesktopClientTouchPointer*, UInt32*, HRESULT)
-    get_type_info : Proc(IRemoteDesktopClientTouchPointer*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IRemoteDesktopClientTouchPointer*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IRemoteDesktopClientTouchPointer*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    put_enabled : Proc(IRemoteDesktopClientTouchPointer*, Int16, HRESULT)
-    get_enabled : Proc(IRemoteDesktopClientTouchPointer*, Int16*, HRESULT)
-    put_events_enabled : Proc(IRemoteDesktopClientTouchPointer*, Int16, HRESULT)
-    get_events_enabled : Proc(IRemoteDesktopClientTouchPointer*, Int16*, HRESULT)
-    put_pointer_speed : Proc(IRemoteDesktopClientTouchPointer*, UInt32, HRESULT)
-    get_pointer_speed : Proc(IRemoteDesktopClientTouchPointer*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    put_enabled : UInt64
+    get_enabled : UInt64
+    put_events_enabled : UInt64
+    get_events_enabled : UInt64
+    put_pointer_speed : UInt64
+    get_pointer_speed : UInt64
   end
 
   IRemoteDesktopClientTouchPointer_GUID = "260ec22d-8cbc-44b5-9e88-2a37f6c93ae9"
@@ -3326,23 +3326,23 @@ lib LibWin32
   end
 
   struct IRemoteDesktopClientVTbl
-    query_interface : Proc(IRemoteDesktopClient*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRemoteDesktopClient*, UInt32)
-    release : Proc(IRemoteDesktopClient*, UInt32)
-    get_type_info_count : Proc(IRemoteDesktopClient*, UInt32*, HRESULT)
-    get_type_info : Proc(IRemoteDesktopClient*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IRemoteDesktopClient*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IRemoteDesktopClient*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    connect : Proc(IRemoteDesktopClient*, HRESULT)
-    disconnect : Proc(IRemoteDesktopClient*, HRESULT)
-    reconnect : Proc(IRemoteDesktopClient*, UInt32, UInt32, HRESULT)
-    get_settings : Proc(IRemoteDesktopClient*, IRemoteDesktopClientSettings*, HRESULT)
-    get_actions : Proc(IRemoteDesktopClient*, IRemoteDesktopClientActions*, HRESULT)
-    get_touch_pointer : Proc(IRemoteDesktopClient*, IRemoteDesktopClientTouchPointer*, HRESULT)
-    delete_saved_credentials : Proc(IRemoteDesktopClient*, UInt8*, HRESULT)
-    update_session_display_settings : Proc(IRemoteDesktopClient*, UInt32, UInt32, HRESULT)
-    attach_event : Proc(IRemoteDesktopClient*, UInt8*, IDispatch, HRESULT)
-    detach_event : Proc(IRemoteDesktopClient*, UInt8*, IDispatch, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    connect : UInt64
+    disconnect : UInt64
+    reconnect : UInt64
+    get_settings : UInt64
+    get_actions : UInt64
+    get_touch_pointer : UInt64
+    delete_saved_credentials : UInt64
+    update_session_display_settings : UInt64
+    attach_event : UInt64
+    detach_event : UInt64
   end
 
   IRemoteDesktopClient_GUID = "57d25668-625a-4905-be4e-304caa13f89c"
@@ -3352,10 +3352,10 @@ lib LibWin32
   end
 
   struct IRemoteSystemAdditionalInfoProviderVTbl
-    query_interface : Proc(IRemoteSystemAdditionalInfoProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRemoteSystemAdditionalInfoProvider*, UInt32)
-    release : Proc(IRemoteSystemAdditionalInfoProvider*, UInt32)
-    get_additional_info : Proc(IRemoteSystemAdditionalInfoProvider*, HSTRING*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_additional_info : UInt64
   end
 
   IRemoteSystemAdditionalInfoProvider_GUID = "eeaa3d5f-ec63-4d27-af38-e86b1d7292cb"
@@ -3399,7 +3399,7 @@ lib LibWin32
   fun WTSOpenServerExA(pservername : PSTR) : LibC::HANDLE
 
   # Params # hserver : LibC::HANDLE [In]
-  fun WTSCloseServer(hserver : LibC::HANDLE)
+  fun WTSCloseServer(hserver : LibC::HANDLE) : Void
 
   # Params # hserver : LibC::HANDLE [In],reserved : UInt32 [In],version : UInt32 [In],ppsessioninfo : WTS_SESSION_INFOW** [In],pcount : UInt32* [In]
   fun WTSEnumerateSessionsW(hserver : LibC::HANDLE, reserved : UInt32, version : UInt32, ppsessioninfo : WTS_SESSION_INFOW**, pcount : UInt32*) : LibC::BOOL
@@ -3483,7 +3483,7 @@ lib LibWin32
   fun WTSVirtualChannelQuery(hchannelhandle : LibC::HANDLE, param1 : WTS_VIRTUAL_CLASS, ppbuffer : Void**, pbytesreturned : UInt32*) : LibC::BOOL
 
   # Params # pmemory : Void* [In]
-  fun WTSFreeMemory(pmemory : Void*)
+  fun WTSFreeMemory(pmemory : Void*) : Void
 
   # Params # hwnd : LibC::HANDLE [In],dwflags : UInt32 [In]
   fun WTSRegisterSessionNotification(hwnd : LibC::HANDLE, dwflags : UInt32) : LibC::BOOL
@@ -3559,4 +3559,2708 @@ lib LibWin32
 
   # Params # 
   fun WTSGetActiveConsoleSessionId : UInt32
+end
+struct LibWin32::IAudioEndpoint
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_frame_format(ppformat : WAVEFORMATEX**) : HRESULT
+    @lpVtbl.value.get_frame_format.unsafe_as(Proc(WAVEFORMATEX**, HRESULT)).call(ppformat)
+  end
+  def get_frames_per_packet(pframesperpacket : UInt32*) : HRESULT
+    @lpVtbl.value.get_frames_per_packet.unsafe_as(Proc(UInt32*, HRESULT)).call(pframesperpacket)
+  end
+  def get_latency(platency : Int64*) : HRESULT
+    @lpVtbl.value.get_latency.unsafe_as(Proc(Int64*, HRESULT)).call(platency)
+  end
+  def set_stream_flags(streamflags : UInt32) : HRESULT
+    @lpVtbl.value.set_stream_flags.unsafe_as(Proc(UInt32, HRESULT)).call(streamflags)
+  end
+  def set_event_handle(eventhandle : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(eventhandle)
+  end
+end
+struct LibWin32::IAudioEndpointRT
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_current_padding(ppadding : Int64*, paecurrentposition : AE_CURRENT_POSITION*) : Void
+    @lpVtbl.value.get_current_padding.unsafe_as(Proc(Int64*, AE_CURRENT_POSITION*, Void)).call(ppadding, paecurrentposition)
+  end
+  def processing_complete : Void
+    @lpVtbl.value.processing_complete.unsafe_as(Proc(Void)).call
+  end
+  def set_pin_inactive : HRESULT
+    @lpVtbl.value.set_pin_inactive.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_pin_active : HRESULT
+    @lpVtbl.value.set_pin_active.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IAudioInputEndpointRT
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_input_data_pointer(pconnectionproperty : APO_CONNECTION_PROPERTY*, paetimestamp : AE_CURRENT_POSITION*) : Void
+    @lpVtbl.value.get_input_data_pointer.unsafe_as(Proc(APO_CONNECTION_PROPERTY*, AE_CURRENT_POSITION*, Void)).call(pconnectionproperty, paetimestamp)
+  end
+  def release_input_data_pointer(u32framecount : UInt32, pdatapointer : LibC::UINT_PTR) : Void
+    @lpVtbl.value.release_input_data_pointer.unsafe_as(Proc(UInt32, LibC::UINT_PTR, Void)).call(u32framecount, pdatapointer)
+  end
+  def pulse_endpoint : Void
+    @lpVtbl.value.pulse_endpoint.unsafe_as(Proc(Void)).call
+  end
+end
+struct LibWin32::IAudioOutputEndpointRT
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_output_data_pointer(u32framecount : UInt32, paetimestamp : AE_CURRENT_POSITION*) : LibC::UINT_PTR
+    @lpVtbl.value.get_output_data_pointer.unsafe_as(Proc(UInt32, AE_CURRENT_POSITION*, LibC::UINT_PTR)).call(u32framecount, paetimestamp)
+  end
+  def release_output_data_pointer(pconnectionproperty : APO_CONNECTION_PROPERTY*) : Void
+    @lpVtbl.value.release_output_data_pointer.unsafe_as(Proc(APO_CONNECTION_PROPERTY*, Void)).call(pconnectionproperty)
+  end
+  def pulse_endpoint : Void
+    @lpVtbl.value.pulse_endpoint.unsafe_as(Proc(Void)).call
+  end
+end
+struct LibWin32::IAudioDeviceEndpoint
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_buffer(maxperiod : Int64, u32latencycoefficient : UInt32) : HRESULT
+    @lpVtbl.value.set_buffer.unsafe_as(Proc(Int64, UInt32, HRESULT)).call(maxperiod, u32latencycoefficient)
+  end
+  def get_rt_caps(pbisrtcapable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_rt_caps.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbisrtcapable)
+  end
+  def get_event_driven_capable(pbiseventcapable : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_event_driven_capable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbiseventcapable)
+  end
+  def write_exclusive_mode_parameters_to_shared_memory(htargetprocess : LibC::UINT_PTR, hnsperiod : Int64, hnsbufferduration : Int64, u32latencycoefficient : UInt32, pu32sharedmemorysize : UInt32*, phsharedmemory : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.write_exclusive_mode_parameters_to_shared_memory.unsafe_as(Proc(LibC::UINT_PTR, Int64, Int64, UInt32, UInt32*, LibC::UINT_PTR*, HRESULT)).call(htargetprocess, hnsperiod, hnsbufferduration, u32latencycoefficient, pu32sharedmemorysize, phsharedmemory)
+  end
+end
+struct LibWin32::IAudioEndpointControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def start : HRESULT
+    @lpVtbl.value.start.unsafe_as(Proc(HRESULT)).call
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def stop : HRESULT
+    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IADsTSUserEx
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_terminal_services_profile_path(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_terminal_services_profile_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_terminal_services_profile_path(pnewval : UInt8*) : HRESULT
+    @lpVtbl.value.put_terminal_services_profile_path.unsafe_as(Proc(UInt8*, HRESULT)).call(pnewval)
+  end
+  def get_terminal_services_home_directory(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_terminal_services_home_directory.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_terminal_services_home_directory(pnewval : UInt8*) : HRESULT
+    @lpVtbl.value.put_terminal_services_home_directory.unsafe_as(Proc(UInt8*, HRESULT)).call(pnewval)
+  end
+  def get_terminal_services_home_drive(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_terminal_services_home_drive.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_terminal_services_home_drive(pnewval : UInt8*) : HRESULT
+    @lpVtbl.value.put_terminal_services_home_drive.unsafe_as(Proc(UInt8*, HRESULT)).call(pnewval)
+  end
+  def get_allow_logon(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_allow_logon.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def put_allow_logon(newval : Int32) : HRESULT
+    @lpVtbl.value.put_allow_logon.unsafe_as(Proc(Int32, HRESULT)).call(newval)
+  end
+  def get_enable_remote_control(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_enable_remote_control.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def put_enable_remote_control(newval : Int32) : HRESULT
+    @lpVtbl.value.put_enable_remote_control.unsafe_as(Proc(Int32, HRESULT)).call(newval)
+  end
+  def get_max_disconnection_time(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_max_disconnection_time.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def put_max_disconnection_time(newval : Int32) : HRESULT
+    @lpVtbl.value.put_max_disconnection_time.unsafe_as(Proc(Int32, HRESULT)).call(newval)
+  end
+  def get_max_connection_time(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_max_connection_time.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def put_max_connection_time(newval : Int32) : HRESULT
+    @lpVtbl.value.put_max_connection_time.unsafe_as(Proc(Int32, HRESULT)).call(newval)
+  end
+  def get_max_idle_time(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_max_idle_time.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def put_max_idle_time(newval : Int32) : HRESULT
+    @lpVtbl.value.put_max_idle_time.unsafe_as(Proc(Int32, HRESULT)).call(newval)
+  end
+  def get_reconnection_action(pnewval : Int32*) : HRESULT
+    @lpVtbl.value.get_reconnection_action.unsafe_as(Proc(Int32*, HRESULT)).call(pnewval)
+  end
+  def put_reconnection_action(newval : Int32) : HRESULT
+    @lpVtbl.value.put_reconnection_action.unsafe_as(Proc(Int32, HRESULT)).call(newval)
+  end
+  def get_broken_connection_action(pnewval : Int32*) : HRESULT
+    @lpVtbl.value.get_broken_connection_action.unsafe_as(Proc(Int32*, HRESULT)).call(pnewval)
+  end
+  def put_broken_connection_action(newval : Int32) : HRESULT
+    @lpVtbl.value.put_broken_connection_action.unsafe_as(Proc(Int32, HRESULT)).call(newval)
+  end
+  def get_connect_client_drives_at_logon(pnewval : Int32*) : HRESULT
+    @lpVtbl.value.get_connect_client_drives_at_logon.unsafe_as(Proc(Int32*, HRESULT)).call(pnewval)
+  end
+  def put_connect_client_drives_at_logon(newval : Int32) : HRESULT
+    @lpVtbl.value.put_connect_client_drives_at_logon.unsafe_as(Proc(Int32, HRESULT)).call(newval)
+  end
+  def get_connect_client_printers_at_logon(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_connect_client_printers_at_logon.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def put_connect_client_printers_at_logon(newval : Int32) : HRESULT
+    @lpVtbl.value.put_connect_client_printers_at_logon.unsafe_as(Proc(Int32, HRESULT)).call(newval)
+  end
+  def get_default_to_main_printer(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_default_to_main_printer.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def put_default_to_main_printer(newval : Int32) : HRESULT
+    @lpVtbl.value.put_default_to_main_printer.unsafe_as(Proc(Int32, HRESULT)).call(newval)
+  end
+  def get_terminal_services_work_directory(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_terminal_services_work_directory.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_terminal_services_work_directory(pnewval : UInt8*) : HRESULT
+    @lpVtbl.value.put_terminal_services_work_directory.unsafe_as(Proc(UInt8*, HRESULT)).call(pnewval)
+  end
+  def get_terminal_services_initial_program(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_terminal_services_initial_program.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_terminal_services_initial_program(pnewval : UInt8*) : HRESULT
+    @lpVtbl.value.put_terminal_services_initial_program.unsafe_as(Proc(UInt8*, HRESULT)).call(pnewval)
+  end
+end
+struct LibWin32::ITSGAuthorizeConnectionSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_connection_authorized(hrin : HRESULT, mainsessionid : Guid, cbsohresponse : UInt32, pbsohresponse : UInt8*, idletimeout : UInt32, sessiontimeout : UInt32, sessiontimeoutaction : SESSION_TIMEOUT_ACTION_TYPE, trustclass : AATrustClassID, policyattributes : UInt32*) : HRESULT
+    @lpVtbl.value.on_connection_authorized.unsafe_as(Proc(HRESULT, Guid, UInt32, UInt8*, UInt32, UInt32, SESSION_TIMEOUT_ACTION_TYPE, AATrustClassID, UInt32*, HRESULT)).call(hrin, mainsessionid, cbsohresponse, pbsohresponse, idletimeout, sessiontimeout, sessiontimeoutaction, trustclass, policyattributes)
+  end
+end
+struct LibWin32::ITSGAuthorizeResourceSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_channel_authorized(hrin : HRESULT, mainsessionid : Guid, subsessionid : Int32, allowedresourcenames : UInt8**, numallowedresourcenames : UInt32, failedresourcenames : UInt8**, numfailedresourcenames : UInt32) : HRESULT
+    @lpVtbl.value.on_channel_authorized.unsafe_as(Proc(HRESULT, Guid, Int32, UInt8**, UInt32, UInt8**, UInt32, HRESULT)).call(hrin, mainsessionid, subsessionid, allowedresourcenames, numallowedresourcenames, failedresourcenames, numfailedresourcenames)
+  end
+end
+struct LibWin32::ITSGPolicyEngine
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def authorize_connection(mainsessionid : Guid, username : UInt8*, authtype : AAAuthSchemes, clientmachineip : UInt8*, clientmachinename : UInt8*, sohdata : UInt8*, numsohbytes : UInt32, cookiedata : UInt8*, numcookiebytes : UInt32, usertoken : HANDLE_PTR, psink : ITSGAuthorizeConnectionSink) : HRESULT
+    @lpVtbl.value.authorize_connection.unsafe_as(Proc(Guid, UInt8*, AAAuthSchemes, UInt8*, UInt8*, UInt8*, UInt32, UInt8*, UInt32, HANDLE_PTR, ITSGAuthorizeConnectionSink, HRESULT)).call(mainsessionid, username, authtype, clientmachineip, clientmachinename, sohdata, numsohbytes, cookiedata, numcookiebytes, usertoken, psink)
+  end
+  def authorize_resource(mainsessionid : Guid, subsessionid : Int32, username : UInt8*, resourcenames : UInt8**, numresources : UInt32, alternateresourcenames : UInt8**, numalternateresourcename : UInt32, portnumber : UInt32, operation : UInt8*, cookie : UInt8*, numbytesincookie : UInt32, psink : ITSGAuthorizeResourceSink) : HRESULT
+    @lpVtbl.value.authorize_resource.unsafe_as(Proc(Guid, Int32, UInt8*, UInt8**, UInt32, UInt8**, UInt32, UInt32, UInt8*, UInt8*, UInt32, ITSGAuthorizeResourceSink, HRESULT)).call(mainsessionid, subsessionid, username, resourcenames, numresources, alternateresourcenames, numalternateresourcename, portnumber, operation, cookie, numbytesincookie, psink)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def is_quarantine_enabled(quarantineenabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_quarantine_enabled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(quarantineenabled)
+  end
+end
+struct LibWin32::ITSGAccountingEngine
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def do_accounting(accountingdatatype : AAAccountingDataType, accountingdata : AAAccountingData) : HRESULT
+    @lpVtbl.value.do_accounting.unsafe_as(Proc(AAAccountingDataType, AAAccountingData, HRESULT)).call(accountingdatatype, accountingdata)
+  end
+end
+struct LibWin32::ITSGAuthenticateUserSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_user_authenticated(username : UInt8*, userdomain : UInt8*, context : LibC::UINT_PTR, usertoken : HANDLE_PTR) : HRESULT
+    @lpVtbl.value.on_user_authenticated.unsafe_as(Proc(UInt8*, UInt8*, LibC::UINT_PTR, HANDLE_PTR, HRESULT)).call(username, userdomain, context, usertoken)
+  end
+  def on_user_authentication_failed(context : LibC::UINT_PTR, genericerrorcode : HRESULT, specificerrorcode : HRESULT) : HRESULT
+    @lpVtbl.value.on_user_authentication_failed.unsafe_as(Proc(LibC::UINT_PTR, HRESULT, HRESULT, HRESULT)).call(context, genericerrorcode, specificerrorcode)
+  end
+  def reauthenticate_user(context : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.reauthenticate_user.unsafe_as(Proc(LibC::UINT_PTR, HRESULT)).call(context)
+  end
+  def disconnect_user(context : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.disconnect_user.unsafe_as(Proc(LibC::UINT_PTR, HRESULT)).call(context)
+  end
+end
+struct LibWin32::ITSGAuthenticationEngine
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def authenticate_user(mainsessionid : Guid, cookiedata : UInt8*, numcookiebytes : UInt32, context : LibC::UINT_PTR, psink : ITSGAuthenticateUserSink) : HRESULT
+    @lpVtbl.value.authenticate_user.unsafe_as(Proc(Guid, UInt8*, UInt32, LibC::UINT_PTR, ITSGAuthenticateUserSink, HRESULT)).call(mainsessionid, cookiedata, numcookiebytes, context, psink)
+  end
+  def cancel_authentication(mainsessionid : Guid, context : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.cancel_authentication.unsafe_as(Proc(Guid, LibC::UINT_PTR, HRESULT)).call(mainsessionid, context)
+  end
+end
+struct LibWin32::IWTSSBPlugin
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(plugincapabilities : UInt32*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(UInt32*, HRESULT)).call(plugincapabilities)
+  end
+  def wtssbx_machine_change_notification(notificationtype : WTSSBX_NOTIFICATION_TYPE, machineid : Int32, pmachineinfo : WTSSBX_MACHINE_INFO*) : HRESULT
+    @lpVtbl.value.wtssbx_machine_change_notification.unsafe_as(Proc(WTSSBX_NOTIFICATION_TYPE, Int32, WTSSBX_MACHINE_INFO*, HRESULT)).call(notificationtype, machineid, pmachineinfo)
+  end
+  def wtssbx_session_change_notification(notificationtype : WTSSBX_NOTIFICATION_TYPE, machineid : Int32, numofsessions : UInt32, sessioninfo : WTSSBX_SESSION_INFO*) : HRESULT
+    @lpVtbl.value.wtssbx_session_change_notification.unsafe_as(Proc(WTSSBX_NOTIFICATION_TYPE, Int32, UInt32, WTSSBX_SESSION_INFO*, HRESULT)).call(notificationtype, machineid, numofsessions, sessioninfo)
+  end
+  def wtssbx_get_most_suitable_server(username : LibC::LPWSTR, domainname : LibC::LPWSTR, applicationtype : LibC::LPWSTR, farmname : LibC::LPWSTR, pmachineid : Int32*) : HRESULT
+    @lpVtbl.value.wtssbx_get_most_suitable_server.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, Int32*, HRESULT)).call(username, domainname, applicationtype, farmname, pmachineid)
+  end
+  def terminated : HRESULT
+    @lpVtbl.value.terminated.unsafe_as(Proc(HRESULT)).call
+  end
+  def wtssbx_get_user_external_session(username : LibC::LPWSTR, domainname : LibC::LPWSTR, applicationtype : LibC::LPWSTR, redirectorinternalip : WTSSBX_IP_ADDRESS*, psessionid : UInt32*, pmachineconnectinfo : WTSSBX_MACHINE_CONNECT_INFO*) : HRESULT
+    @lpVtbl.value.wtssbx_get_user_external_session.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, WTSSBX_IP_ADDRESS*, UInt32*, WTSSBX_MACHINE_CONNECT_INFO*, HRESULT)).call(username, domainname, applicationtype, redirectorinternalip, psessionid, pmachineconnectinfo)
+  end
+end
+struct LibWin32::IWorkspaceClientExt
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_resource_id(bstrworkspaceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_resource_id.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrworkspaceid)
+  end
+  def get_resource_display_name(bstrworkspacedisplayname : UInt8**) : HRESULT
+    @lpVtbl.value.get_resource_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(bstrworkspacedisplayname)
+  end
+  def issue_disconnect : HRESULT
+    @lpVtbl.value.issue_disconnect.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWorkspace
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_workspace_names(psawkspnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_workspace_names.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(psawkspnames)
+  end
+  def start_remote_application(bstrworkspaceid : UInt8*, psaparams : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.start_remote_application.unsafe_as(Proc(UInt8*, SAFEARRAY*, HRESULT)).call(bstrworkspaceid, psaparams)
+  end
+  def get_process_id(pulprocessid : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pulprocessid)
+  end
+end
+struct LibWin32::IWorkspace2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_workspace_names(psawkspnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_workspace_names.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(psawkspnames)
+  end
+  def start_remote_application(bstrworkspaceid : UInt8*, psaparams : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.start_remote_application.unsafe_as(Proc(UInt8*, SAFEARRAY*, HRESULT)).call(bstrworkspaceid, psaparams)
+  end
+  def get_process_id(pulprocessid : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pulprocessid)
+  end
+  def start_remote_application_ex(bstrworkspaceid : UInt8*, bstrrequestingappid : UInt8*, bstrrequestingappfamilyname : UInt8*, blaunchintoimmersiveclient : Int16, bstrimmersiveclientactivationcontext : UInt8*, psaparams : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.start_remote_application_ex.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, Int16, UInt8*, SAFEARRAY*, HRESULT)).call(bstrworkspaceid, bstrrequestingappid, bstrrequestingappfamilyname, blaunchintoimmersiveclient, bstrimmersiveclientactivationcontext, psaparams)
+  end
+end
+struct LibWin32::IWorkspace3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_workspace_names(psawkspnames : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_workspace_names.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(psawkspnames)
+  end
+  def start_remote_application(bstrworkspaceid : UInt8*, psaparams : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.start_remote_application.unsafe_as(Proc(UInt8*, SAFEARRAY*, HRESULT)).call(bstrworkspaceid, psaparams)
+  end
+  def get_process_id(pulprocessid : UInt32*) : HRESULT
+    @lpVtbl.value.get_process_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pulprocessid)
+  end
+  def start_remote_application_ex(bstrworkspaceid : UInt8*, bstrrequestingappid : UInt8*, bstrrequestingappfamilyname : UInt8*, blaunchintoimmersiveclient : Int16, bstrimmersiveclientactivationcontext : UInt8*, psaparams : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.start_remote_application_ex.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, Int16, UInt8*, SAFEARRAY*, HRESULT)).call(bstrworkspaceid, bstrrequestingappid, bstrrequestingappfamilyname, blaunchintoimmersiveclient, bstrimmersiveclientactivationcontext, psaparams)
+  end
+  def get_claims_token2(bstrclaimshint : UInt8*, bstruserhint : UInt8*, claimcookie : UInt32, hwndcreduiparent : UInt32, rectcreduiparent : RECT, pbstraccesstoken : UInt8**) : HRESULT
+    @lpVtbl.value.get_claims_token2.unsafe_as(Proc(UInt8*, UInt8*, UInt32, UInt32, RECT, UInt8**, HRESULT)).call(bstrclaimshint, bstruserhint, claimcookie, hwndcreduiparent, rectcreduiparent, pbstraccesstoken)
+  end
+  def set_claims_token(bstraccesstoken : UInt8*, ullaccesstokenexpiration : UInt64, bstrrefreshtoken : UInt8*) : HRESULT
+    @lpVtbl.value.set_claims_token.unsafe_as(Proc(UInt8*, UInt64, UInt8*, HRESULT)).call(bstraccesstoken, ullaccesstokenexpiration, bstrrefreshtoken)
+  end
+end
+struct LibWin32::IWorkspaceRegistration
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_resource(punk : IWorkspaceClientExt, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_resource.unsafe_as(Proc(IWorkspaceClientExt, UInt32*, HRESULT)).call(punk, pdwcookie)
+  end
+  def remove_resource(dwcookieconnection : UInt32) : HRESULT
+    @lpVtbl.value.remove_resource.unsafe_as(Proc(UInt32, HRESULT)).call(dwcookieconnection)
+  end
+end
+struct LibWin32::IWorkspaceRegistration2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_resource(punk : IWorkspaceClientExt, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.add_resource.unsafe_as(Proc(IWorkspaceClientExt, UInt32*, HRESULT)).call(punk, pdwcookie)
+  end
+  def remove_resource(dwcookieconnection : UInt32) : HRESULT
+    @lpVtbl.value.remove_resource.unsafe_as(Proc(UInt32, HRESULT)).call(dwcookieconnection)
+  end
+  def add_resource_ex(punk : IWorkspaceClientExt, bstreventloguploadaddress : UInt8*, pdwcookie : UInt32*, correlationid : Guid) : HRESULT
+    @lpVtbl.value.add_resource_ex.unsafe_as(Proc(IWorkspaceClientExt, UInt8*, UInt32*, Guid, HRESULT)).call(punk, bstreventloguploadaddress, pdwcookie, correlationid)
+  end
+  def remove_resource_ex(dwcookieconnection : UInt32, correlationid : Guid) : HRESULT
+    @lpVtbl.value.remove_resource_ex.unsafe_as(Proc(UInt32, Guid, HRESULT)).call(dwcookieconnection, correlationid)
+  end
+end
+struct LibWin32::IWorkspaceScriptable
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def disconnect_workspace(bstrworkspaceid : UInt8*) : HRESULT
+    @lpVtbl.value.disconnect_workspace.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrworkspaceid)
+  end
+  def start_workspace(bstrworkspaceid : UInt8*, bstrusername : UInt8*, bstrpassword : UInt8*, bstrworkspaceparams : UInt8*, ltimeout : Int32, lflags : Int32) : HRESULT
+    @lpVtbl.value.start_workspace.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, HRESULT)).call(bstrworkspaceid, bstrusername, bstrpassword, bstrworkspaceparams, ltimeout, lflags)
+  end
+  def is_workspace_credential_specified(bstrworkspaceid : UInt8*, bcountunauthenticatedcredentials : Int16, pbcredexist : Int16*) : HRESULT
+    @lpVtbl.value.is_workspace_credential_specified.unsafe_as(Proc(UInt8*, Int16, Int16*, HRESULT)).call(bstrworkspaceid, bcountunauthenticatedcredentials, pbcredexist)
+  end
+  def is_workspace_sso_enabled(pbssoenabled : Int16*) : HRESULT
+    @lpVtbl.value.is_workspace_sso_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pbssoenabled)
+  end
+  def clear_workspace_credential(bstrworkspaceid : UInt8*) : HRESULT
+    @lpVtbl.value.clear_workspace_credential.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrworkspaceid)
+  end
+  def on_authenticated(bstrworkspaceid : UInt8*, bstrusername : UInt8*) : HRESULT
+    @lpVtbl.value.on_authenticated.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrworkspaceid, bstrusername)
+  end
+  def disconnect_workspace_by_friendly_name(bstrworkspacefriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.disconnect_workspace_by_friendly_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrworkspacefriendlyname)
+  end
+end
+struct LibWin32::IWorkspaceScriptable2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def disconnect_workspace(bstrworkspaceid : UInt8*) : HRESULT
+    @lpVtbl.value.disconnect_workspace.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrworkspaceid)
+  end
+  def start_workspace(bstrworkspaceid : UInt8*, bstrusername : UInt8*, bstrpassword : UInt8*, bstrworkspaceparams : UInt8*, ltimeout : Int32, lflags : Int32) : HRESULT
+    @lpVtbl.value.start_workspace.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, HRESULT)).call(bstrworkspaceid, bstrusername, bstrpassword, bstrworkspaceparams, ltimeout, lflags)
+  end
+  def is_workspace_credential_specified(bstrworkspaceid : UInt8*, bcountunauthenticatedcredentials : Int16, pbcredexist : Int16*) : HRESULT
+    @lpVtbl.value.is_workspace_credential_specified.unsafe_as(Proc(UInt8*, Int16, Int16*, HRESULT)).call(bstrworkspaceid, bcountunauthenticatedcredentials, pbcredexist)
+  end
+  def is_workspace_sso_enabled(pbssoenabled : Int16*) : HRESULT
+    @lpVtbl.value.is_workspace_sso_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pbssoenabled)
+  end
+  def clear_workspace_credential(bstrworkspaceid : UInt8*) : HRESULT
+    @lpVtbl.value.clear_workspace_credential.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrworkspaceid)
+  end
+  def on_authenticated(bstrworkspaceid : UInt8*, bstrusername : UInt8*) : HRESULT
+    @lpVtbl.value.on_authenticated.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrworkspaceid, bstrusername)
+  end
+  def disconnect_workspace_by_friendly_name(bstrworkspacefriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.disconnect_workspace_by_friendly_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrworkspacefriendlyname)
+  end
+  def start_workspace_ex(bstrworkspaceid : UInt8*, bstrworkspacefriendlyname : UInt8*, bstrredirectorname : UInt8*, bstrusername : UInt8*, bstrpassword : UInt8*, bstrappcontainer : UInt8*, bstrworkspaceparams : UInt8*, ltimeout : Int32, lflags : Int32) : HRESULT
+    @lpVtbl.value.start_workspace_ex.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, HRESULT)).call(bstrworkspaceid, bstrworkspacefriendlyname, bstrredirectorname, bstrusername, bstrpassword, bstrappcontainer, bstrworkspaceparams, ltimeout, lflags)
+  end
+  def resource_dismissed(bstrworkspaceid : UInt8*, bstrworkspacefriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.resource_dismissed.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrworkspaceid, bstrworkspacefriendlyname)
+  end
+end
+struct LibWin32::IWorkspaceScriptable3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def disconnect_workspace(bstrworkspaceid : UInt8*) : HRESULT
+    @lpVtbl.value.disconnect_workspace.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrworkspaceid)
+  end
+  def start_workspace(bstrworkspaceid : UInt8*, bstrusername : UInt8*, bstrpassword : UInt8*, bstrworkspaceparams : UInt8*, ltimeout : Int32, lflags : Int32) : HRESULT
+    @lpVtbl.value.start_workspace.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, HRESULT)).call(bstrworkspaceid, bstrusername, bstrpassword, bstrworkspaceparams, ltimeout, lflags)
+  end
+  def is_workspace_credential_specified(bstrworkspaceid : UInt8*, bcountunauthenticatedcredentials : Int16, pbcredexist : Int16*) : HRESULT
+    @lpVtbl.value.is_workspace_credential_specified.unsafe_as(Proc(UInt8*, Int16, Int16*, HRESULT)).call(bstrworkspaceid, bcountunauthenticatedcredentials, pbcredexist)
+  end
+  def is_workspace_sso_enabled(pbssoenabled : Int16*) : HRESULT
+    @lpVtbl.value.is_workspace_sso_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pbssoenabled)
+  end
+  def clear_workspace_credential(bstrworkspaceid : UInt8*) : HRESULT
+    @lpVtbl.value.clear_workspace_credential.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrworkspaceid)
+  end
+  def on_authenticated(bstrworkspaceid : UInt8*, bstrusername : UInt8*) : HRESULT
+    @lpVtbl.value.on_authenticated.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrworkspaceid, bstrusername)
+  end
+  def disconnect_workspace_by_friendly_name(bstrworkspacefriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.disconnect_workspace_by_friendly_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrworkspacefriendlyname)
+  end
+  def start_workspace_ex(bstrworkspaceid : UInt8*, bstrworkspacefriendlyname : UInt8*, bstrredirectorname : UInt8*, bstrusername : UInt8*, bstrpassword : UInt8*, bstrappcontainer : UInt8*, bstrworkspaceparams : UInt8*, ltimeout : Int32, lflags : Int32) : HRESULT
+    @lpVtbl.value.start_workspace_ex.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, HRESULT)).call(bstrworkspaceid, bstrworkspacefriendlyname, bstrredirectorname, bstrusername, bstrpassword, bstrappcontainer, bstrworkspaceparams, ltimeout, lflags)
+  end
+  def resource_dismissed(bstrworkspaceid : UInt8*, bstrworkspacefriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.resource_dismissed.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(bstrworkspaceid, bstrworkspacefriendlyname)
+  end
+  def start_workspace_ex2(bstrworkspaceid : UInt8*, bstrworkspacefriendlyname : UInt8*, bstrredirectorname : UInt8*, bstrusername : UInt8*, bstrpassword : UInt8*, bstrappcontainer : UInt8*, bstrworkspaceparams : UInt8*, ltimeout : Int32, lflags : Int32, bstreventloguploadaddress : UInt8*, correlationid : Guid) : HRESULT
+    @lpVtbl.value.start_workspace_ex2.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, Int32, UInt8*, Guid, HRESULT)).call(bstrworkspaceid, bstrworkspacefriendlyname, bstrredirectorname, bstrusername, bstrpassword, bstrappcontainer, bstrworkspaceparams, ltimeout, lflags, bstreventloguploadaddress, correlationid)
+  end
+end
+struct LibWin32::IWorkspaceReportMessage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def register_error_log_message(bstrmessage : UInt8*) : HRESULT
+    @lpVtbl.value.register_error_log_message.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrmessage)
+  end
+  def is_error_message_registered(bstrwkspid : UInt8*, dwerrortype : UInt32, bstrerrormessagetype : UInt8*, dwerrorcode : UInt32, pferrorexist : Int16*) : HRESULT
+    @lpVtbl.value.is_error_message_registered.unsafe_as(Proc(UInt8*, UInt32, UInt8*, UInt32, Int16*, HRESULT)).call(bstrwkspid, dwerrortype, bstrerrormessagetype, dwerrorcode, pferrorexist)
+  end
+  def register_error_event(bstrwkspid : UInt8*, dwerrortype : UInt32, bstrerrormessagetype : UInt8*, dwerrorcode : UInt32) : HRESULT
+    @lpVtbl.value.register_error_event.unsafe_as(Proc(UInt8*, UInt32, UInt8*, UInt32, HRESULT)).call(bstrwkspid, dwerrortype, bstrerrormessagetype, dwerrorcode)
+  end
+end
+struct LibWin32::IITSWkspEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::ITsSbPlugin
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pprovider : ITsSbProvider, pnotifysink : ITsSbPluginNotifySink, ppropertyset : ITsSbPluginPropertySet) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(ITsSbProvider, ITsSbPluginNotifySink, ITsSbPluginPropertySet, HRESULT)).call(pprovider, pnotifysink, ppropertyset)
+  end
+  def terminate(hr : HRESULT) : HRESULT
+    @lpVtbl.value.terminate.unsafe_as(Proc(HRESULT, HRESULT)).call(hr)
+  end
+end
+struct LibWin32::ITsSbResourcePlugin
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pprovider : ITsSbProvider, pnotifysink : ITsSbPluginNotifySink, ppropertyset : ITsSbPluginPropertySet) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(ITsSbProvider, ITsSbPluginNotifySink, ITsSbPluginPropertySet, HRESULT)).call(pprovider, pnotifysink, ppropertyset)
+  end
+  def terminate(hr : HRESULT) : HRESULT
+    @lpVtbl.value.terminate.unsafe_as(Proc(HRESULT, HRESULT)).call(hr)
+  end
+end
+struct LibWin32::ITsSbServiceNotification
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def notify_service_failure : HRESULT
+    @lpVtbl.value.notify_service_failure.unsafe_as(Proc(HRESULT)).call
+  end
+  def notify_service_success : HRESULT
+    @lpVtbl.value.notify_service_success.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITsSbLoadBalancing
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pprovider : ITsSbProvider, pnotifysink : ITsSbPluginNotifySink, ppropertyset : ITsSbPluginPropertySet) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(ITsSbProvider, ITsSbPluginNotifySink, ITsSbPluginPropertySet, HRESULT)).call(pprovider, pnotifysink, ppropertyset)
+  end
+  def terminate(hr : HRESULT) : HRESULT
+    @lpVtbl.value.terminate.unsafe_as(Proc(HRESULT, HRESULT)).call(hr)
+  end
+  def get_most_suitable_target(pconnection : ITsSbClientConnection, plbsink : ITsSbLoadBalancingNotifySink) : HRESULT
+    @lpVtbl.value.get_most_suitable_target.unsafe_as(Proc(ITsSbClientConnection, ITsSbLoadBalancingNotifySink, HRESULT)).call(pconnection, plbsink)
+  end
+end
+struct LibWin32::ITsSbPlacement
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pprovider : ITsSbProvider, pnotifysink : ITsSbPluginNotifySink, ppropertyset : ITsSbPluginPropertySet) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(ITsSbProvider, ITsSbPluginNotifySink, ITsSbPluginPropertySet, HRESULT)).call(pprovider, pnotifysink, ppropertyset)
+  end
+  def terminate(hr : HRESULT) : HRESULT
+    @lpVtbl.value.terminate.unsafe_as(Proc(HRESULT, HRESULT)).call(hr)
+  end
+  def query_environment_for_target(pconnection : ITsSbClientConnection, pplacementsink : ITsSbPlacementNotifySink) : HRESULT
+    @lpVtbl.value.query_environment_for_target.unsafe_as(Proc(ITsSbClientConnection, ITsSbPlacementNotifySink, HRESULT)).call(pconnection, pplacementsink)
+  end
+end
+struct LibWin32::ITsSbOrchestration
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pprovider : ITsSbProvider, pnotifysink : ITsSbPluginNotifySink, ppropertyset : ITsSbPluginPropertySet) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(ITsSbProvider, ITsSbPluginNotifySink, ITsSbPluginPropertySet, HRESULT)).call(pprovider, pnotifysink, ppropertyset)
+  end
+  def terminate(hr : HRESULT) : HRESULT
+    @lpVtbl.value.terminate.unsafe_as(Proc(HRESULT, HRESULT)).call(hr)
+  end
+  def prepare_target_for_connect(pconnection : ITsSbClientConnection, porchestrationnotifysink : ITsSbOrchestrationNotifySink) : HRESULT
+    @lpVtbl.value.prepare_target_for_connect.unsafe_as(Proc(ITsSbClientConnection, ITsSbOrchestrationNotifySink, HRESULT)).call(pconnection, porchestrationnotifysink)
+  end
+end
+struct LibWin32::ITsSbEnvironment
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_server_weight(pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_server_weight.unsafe_as(Proc(UInt32*, HRESULT)).call(pval)
+  end
+  def get_environment_property_set(pppropertyset : ITsSbEnvironmentPropertySet*) : HRESULT
+    @lpVtbl.value.get_environment_property_set.unsafe_as(Proc(ITsSbEnvironmentPropertySet*, HRESULT)).call(pppropertyset)
+  end
+  def put_environment_property_set(pval : ITsSbEnvironmentPropertySet) : HRESULT
+    @lpVtbl.value.put_environment_property_set.unsafe_as(Proc(ITsSbEnvironmentPropertySet, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::ITsSbLoadBalanceResult
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_target_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+end
+struct LibWin32::ITsSbTarget
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_target_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_target_name(val : UInt8*) : HRESULT
+    @lpVtbl.value.put_target_name.unsafe_as(Proc(UInt8*, HRESULT)).call(val)
+  end
+  def get_farm_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_farm_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_farm_name(val : UInt8*) : HRESULT
+    @lpVtbl.value.put_farm_name.unsafe_as(Proc(UInt8*, HRESULT)).call(val)
+  end
+  def get_target_fqdn(targetfqdnname : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_fqdn.unsafe_as(Proc(UInt8**, HRESULT)).call(targetfqdnname)
+  end
+  def put_target_fqdn(val : UInt8*) : HRESULT
+    @lpVtbl.value.put_target_fqdn.unsafe_as(Proc(UInt8*, HRESULT)).call(val)
+  end
+  def get_target_netbios(targetnetbiosname : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_netbios.unsafe_as(Proc(UInt8**, HRESULT)).call(targetnetbiosname)
+  end
+  def put_target_netbios(val : UInt8*) : HRESULT
+    @lpVtbl.value.put_target_netbios.unsafe_as(Proc(UInt8*, HRESULT)).call(val)
+  end
+  def get_ip_addresses(sockaddr : TSSD_ConnectionPoint*, numaddresses : UInt32*) : HRESULT
+    @lpVtbl.value.get_ip_addresses.unsafe_as(Proc(TSSD_ConnectionPoint*, UInt32*, HRESULT)).call(sockaddr, numaddresses)
+  end
+  def put_ip_addresses(sockaddr : TSSD_ConnectionPoint*, numaddresses : UInt32) : HRESULT
+    @lpVtbl.value.put_ip_addresses.unsafe_as(Proc(TSSD_ConnectionPoint*, UInt32, HRESULT)).call(sockaddr, numaddresses)
+  end
+  def get_target_state(pstate : TARGET_STATE*) : HRESULT
+    @lpVtbl.value.get_target_state.unsafe_as(Proc(TARGET_STATE*, HRESULT)).call(pstate)
+  end
+  def put_target_state(state : TARGET_STATE) : HRESULT
+    @lpVtbl.value.put_target_state.unsafe_as(Proc(TARGET_STATE, HRESULT)).call(state)
+  end
+  def get_target_property_set(pppropertyset : ITsSbTargetPropertySet*) : HRESULT
+    @lpVtbl.value.get_target_property_set.unsafe_as(Proc(ITsSbTargetPropertySet*, HRESULT)).call(pppropertyset)
+  end
+  def put_target_property_set(pval : ITsSbTargetPropertySet) : HRESULT
+    @lpVtbl.value.put_target_property_set.unsafe_as(Proc(ITsSbTargetPropertySet, HRESULT)).call(pval)
+  end
+  def get_environment_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_environment_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_environment_name(val : UInt8*) : HRESULT
+    @lpVtbl.value.put_environment_name.unsafe_as(Proc(UInt8*, HRESULT)).call(val)
+  end
+  def get_num_sessions(pnumsessions : UInt32*) : HRESULT
+    @lpVtbl.value.get_num_sessions.unsafe_as(Proc(UInt32*, HRESULT)).call(pnumsessions)
+  end
+  def get_num_pending_connections(pnumpendingconnections : UInt32*) : HRESULT
+    @lpVtbl.value.get_num_pending_connections.unsafe_as(Proc(UInt32*, HRESULT)).call(pnumpendingconnections)
+  end
+  def get_target_load(ptargetload : UInt32*) : HRESULT
+    @lpVtbl.value.get_target_load.unsafe_as(Proc(UInt32*, HRESULT)).call(ptargetload)
+  end
+end
+struct LibWin32::ITsSbSession
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_session_id(pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_session_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pval)
+  end
+  def get_target_name(targetname : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_name.unsafe_as(Proc(UInt8**, HRESULT)).call(targetname)
+  end
+  def put_target_name(targetname : UInt8*) : HRESULT
+    @lpVtbl.value.put_target_name.unsafe_as(Proc(UInt8*, HRESULT)).call(targetname)
+  end
+  def get_username(username : UInt8**) : HRESULT
+    @lpVtbl.value.get_username.unsafe_as(Proc(UInt8**, HRESULT)).call(username)
+  end
+  def get_domain(domain : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain.unsafe_as(Proc(UInt8**, HRESULT)).call(domain)
+  end
+  def get_state(pstate : TSSESSION_STATE*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(TSSESSION_STATE*, HRESULT)).call(pstate)
+  end
+  def put_state(state : TSSESSION_STATE) : HRESULT
+    @lpVtbl.value.put_state.unsafe_as(Proc(TSSESSION_STATE, HRESULT)).call(state)
+  end
+  def get_create_time(ptime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_create_time.unsafe_as(Proc(FILETIME*, HRESULT)).call(ptime)
+  end
+  def put_create_time(time : FILETIME) : HRESULT
+    @lpVtbl.value.put_create_time.unsafe_as(Proc(FILETIME, HRESULT)).call(time)
+  end
+  def get_disconnect_time(ptime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_disconnect_time.unsafe_as(Proc(FILETIME*, HRESULT)).call(ptime)
+  end
+  def put_disconnect_time(time : FILETIME) : HRESULT
+    @lpVtbl.value.put_disconnect_time.unsafe_as(Proc(FILETIME, HRESULT)).call(time)
+  end
+  def get_initial_program(app : UInt8**) : HRESULT
+    @lpVtbl.value.get_initial_program.unsafe_as(Proc(UInt8**, HRESULT)).call(app)
+  end
+  def put_initial_program(application : UInt8*) : HRESULT
+    @lpVtbl.value.put_initial_program.unsafe_as(Proc(UInt8*, HRESULT)).call(application)
+  end
+  def get_client_display(pclientdisplay : CLIENT_DISPLAY*) : HRESULT
+    @lpVtbl.value.get_client_display.unsafe_as(Proc(CLIENT_DISPLAY*, HRESULT)).call(pclientdisplay)
+  end
+  def put_client_display(pclientdisplay : CLIENT_DISPLAY) : HRESULT
+    @lpVtbl.value.put_client_display.unsafe_as(Proc(CLIENT_DISPLAY, HRESULT)).call(pclientdisplay)
+  end
+  def get_protocol_type(pval : UInt32*) : HRESULT
+    @lpVtbl.value.get_protocol_type.unsafe_as(Proc(UInt32*, HRESULT)).call(pval)
+  end
+  def put_protocol_type(val : UInt32) : HRESULT
+    @lpVtbl.value.put_protocol_type.unsafe_as(Proc(UInt32, HRESULT)).call(val)
+  end
+end
+struct LibWin32::ITsSbResourceNotification
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def notify_session_change(changetype : TSSESSION_STATE, psession : ITsSbSession) : HRESULT
+    @lpVtbl.value.notify_session_change.unsafe_as(Proc(TSSESSION_STATE, ITsSbSession, HRESULT)).call(changetype, psession)
+  end
+  def notify_target_change(targetchangetype : UInt32, ptarget : ITsSbTarget) : HRESULT
+    @lpVtbl.value.notify_target_change.unsafe_as(Proc(UInt32, ITsSbTarget, HRESULT)).call(targetchangetype, ptarget)
+  end
+  def notify_client_connection_state_change(changetype : CONNECTION_CHANGE_NOTIFICATION, pconnection : ITsSbClientConnection) : HRESULT
+    @lpVtbl.value.notify_client_connection_state_change.unsafe_as(Proc(CONNECTION_CHANGE_NOTIFICATION, ITsSbClientConnection, HRESULT)).call(changetype, pconnection)
+  end
+end
+struct LibWin32::ITsSbResourceNotificationEx
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def notify_session_change_ex(targetname : UInt8*, username : UInt8*, domain : UInt8*, sessionid : UInt32, sessionstate : TSSESSION_STATE) : HRESULT
+    @lpVtbl.value.notify_session_change_ex.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt32, TSSESSION_STATE, HRESULT)).call(targetname, username, domain, sessionid, sessionstate)
+  end
+  def notify_target_change_ex(targetname : UInt8*, targetchangetype : UInt32) : HRESULT
+    @lpVtbl.value.notify_target_change_ex.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(targetname, targetchangetype)
+  end
+  def notify_client_connection_state_change_ex(username : UInt8*, domain : UInt8*, initialprogram : UInt8*, poolname : UInt8*, targetname : UInt8*, connectionchangetype : CONNECTION_CHANGE_NOTIFICATION) : HRESULT
+    @lpVtbl.value.notify_client_connection_state_change_ex.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, CONNECTION_CHANGE_NOTIFICATION, HRESULT)).call(username, domain, initialprogram, poolname, targetname, connectionchangetype)
+  end
+end
+struct LibWin32::ITsSbTaskInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_target_id(pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pname)
+  end
+  def get_start_time(pstarttime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_start_time.unsafe_as(Proc(FILETIME*, HRESULT)).call(pstarttime)
+  end
+  def get_end_time(pendtime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_end_time.unsafe_as(Proc(FILETIME*, HRESULT)).call(pendtime)
+  end
+  def get_deadline(pdeadline : FILETIME*) : HRESULT
+    @lpVtbl.value.get_deadline.unsafe_as(Proc(FILETIME*, HRESULT)).call(pdeadline)
+  end
+  def get_identifier(pidentifier : UInt8**) : HRESULT
+    @lpVtbl.value.get_identifier.unsafe_as(Proc(UInt8**, HRESULT)).call(pidentifier)
+  end
+  def get_label(plabel : UInt8**) : HRESULT
+    @lpVtbl.value.get_label.unsafe_as(Proc(UInt8**, HRESULT)).call(plabel)
+  end
+  def get_context(pcontext : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_context.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pcontext)
+  end
+  def get_plugin(pplugin : UInt8**) : HRESULT
+    @lpVtbl.value.get_plugin.unsafe_as(Proc(UInt8**, HRESULT)).call(pplugin)
+  end
+  def get_status(pstatus : RDV_TASK_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(RDV_TASK_STATUS*, HRESULT)).call(pstatus)
+  end
+end
+struct LibWin32::ITsSbTaskPlugin
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pprovider : ITsSbProvider, pnotifysink : ITsSbPluginNotifySink, ppropertyset : ITsSbPluginPropertySet) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(ITsSbProvider, ITsSbPluginNotifySink, ITsSbPluginPropertySet, HRESULT)).call(pprovider, pnotifysink, ppropertyset)
+  end
+  def terminate(hr : HRESULT) : HRESULT
+    @lpVtbl.value.terminate.unsafe_as(Proc(HRESULT, HRESULT)).call(hr)
+  end
+  def initialize_task_plugin(pitssbtaskpluginnotifysink : ITsSbTaskPluginNotifySink) : HRESULT
+    @lpVtbl.value.initialize_task_plugin.unsafe_as(Proc(ITsSbTaskPluginNotifySink, HRESULT)).call(pitssbtaskpluginnotifysink)
+  end
+  def set_task_queue(pszhostname : UInt8*, sbtaskinfosize : UInt32, pitssbtaskinfo : ITsSbTaskInfo*) : HRESULT
+    @lpVtbl.value.set_task_queue.unsafe_as(Proc(UInt8*, UInt32, ITsSbTaskInfo*, HRESULT)).call(pszhostname, sbtaskinfosize, pitssbtaskinfo)
+  end
+end
+struct LibWin32::ITsSbPropertySet
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def read(pszpropname : LibC::LPWSTR, pvar : VARIANT*, perrorlog : IErrorLog) : HRESULT
+    @lpVtbl.value.read.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, IErrorLog, HRESULT)).call(pszpropname, pvar, perrorlog)
+  end
+  def write(pszpropname : LibC::LPWSTR, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.write.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, HRESULT)).call(pszpropname, pvar)
+  end
+end
+struct LibWin32::ITsSbPluginPropertySet
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def read(pszpropname : LibC::LPWSTR, pvar : VARIANT*, perrorlog : IErrorLog) : HRESULT
+    @lpVtbl.value.read.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, IErrorLog, HRESULT)).call(pszpropname, pvar, perrorlog)
+  end
+  def write(pszpropname : LibC::LPWSTR, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.write.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, HRESULT)).call(pszpropname, pvar)
+  end
+end
+struct LibWin32::ITsSbClientConnectionPropertySet
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def read(pszpropname : LibC::LPWSTR, pvar : VARIANT*, perrorlog : IErrorLog) : HRESULT
+    @lpVtbl.value.read.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, IErrorLog, HRESULT)).call(pszpropname, pvar, perrorlog)
+  end
+  def write(pszpropname : LibC::LPWSTR, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.write.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, HRESULT)).call(pszpropname, pvar)
+  end
+end
+struct LibWin32::ITsSbTargetPropertySet
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def read(pszpropname : LibC::LPWSTR, pvar : VARIANT*, perrorlog : IErrorLog) : HRESULT
+    @lpVtbl.value.read.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, IErrorLog, HRESULT)).call(pszpropname, pvar, perrorlog)
+  end
+  def write(pszpropname : LibC::LPWSTR, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.write.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, HRESULT)).call(pszpropname, pvar)
+  end
+end
+struct LibWin32::ITsSbEnvironmentPropertySet
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def read(pszpropname : LibC::LPWSTR, pvar : VARIANT*, perrorlog : IErrorLog) : HRESULT
+    @lpVtbl.value.read.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, IErrorLog, HRESULT)).call(pszpropname, pvar, perrorlog)
+  end
+  def write(pszpropname : LibC::LPWSTR, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.write.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, HRESULT)).call(pszpropname, pvar)
+  end
+end
+struct LibWin32::ITsSbBaseNotifySink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_error(hrerror : HRESULT) : HRESULT
+    @lpVtbl.value.on_error.unsafe_as(Proc(HRESULT, HRESULT)).call(hrerror)
+  end
+  def on_report_status(messagetype : CLIENT_MESSAGE_TYPE, messageid : UInt32) : HRESULT
+    @lpVtbl.value.on_report_status.unsafe_as(Proc(CLIENT_MESSAGE_TYPE, UInt32, HRESULT)).call(messagetype, messageid)
+  end
+end
+struct LibWin32::ITsSbPluginNotifySink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_error(hrerror : HRESULT) : HRESULT
+    @lpVtbl.value.on_error.unsafe_as(Proc(HRESULT, HRESULT)).call(hrerror)
+  end
+  def on_report_status(messagetype : CLIENT_MESSAGE_TYPE, messageid : UInt32) : HRESULT
+    @lpVtbl.value.on_report_status.unsafe_as(Proc(CLIENT_MESSAGE_TYPE, UInt32, HRESULT)).call(messagetype, messageid)
+  end
+  def on_initialized(hr : HRESULT) : HRESULT
+    @lpVtbl.value.on_initialized.unsafe_as(Proc(HRESULT, HRESULT)).call(hr)
+  end
+  def on_terminated : HRESULT
+    @lpVtbl.value.on_terminated.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITsSbLoadBalancingNotifySink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_error(hrerror : HRESULT) : HRESULT
+    @lpVtbl.value.on_error.unsafe_as(Proc(HRESULT, HRESULT)).call(hrerror)
+  end
+  def on_report_status(messagetype : CLIENT_MESSAGE_TYPE, messageid : UInt32) : HRESULT
+    @lpVtbl.value.on_report_status.unsafe_as(Proc(CLIENT_MESSAGE_TYPE, UInt32, HRESULT)).call(messagetype, messageid)
+  end
+  def on_get_most_suitable_target(plbresult : ITsSbLoadBalanceResult, fisnewconnection : LibC::BOOL) : HRESULT
+    @lpVtbl.value.on_get_most_suitable_target.unsafe_as(Proc(ITsSbLoadBalanceResult, LibC::BOOL, HRESULT)).call(plbresult, fisnewconnection)
+  end
+end
+struct LibWin32::ITsSbPlacementNotifySink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_error(hrerror : HRESULT) : HRESULT
+    @lpVtbl.value.on_error.unsafe_as(Proc(HRESULT, HRESULT)).call(hrerror)
+  end
+  def on_report_status(messagetype : CLIENT_MESSAGE_TYPE, messageid : UInt32) : HRESULT
+    @lpVtbl.value.on_report_status.unsafe_as(Proc(CLIENT_MESSAGE_TYPE, UInt32, HRESULT)).call(messagetype, messageid)
+  end
+  def on_query_environment_completed(penvironment : ITsSbEnvironment) : HRESULT
+    @lpVtbl.value.on_query_environment_completed.unsafe_as(Proc(ITsSbEnvironment, HRESULT)).call(penvironment)
+  end
+end
+struct LibWin32::ITsSbOrchestrationNotifySink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_error(hrerror : HRESULT) : HRESULT
+    @lpVtbl.value.on_error.unsafe_as(Proc(HRESULT, HRESULT)).call(hrerror)
+  end
+  def on_report_status(messagetype : CLIENT_MESSAGE_TYPE, messageid : UInt32) : HRESULT
+    @lpVtbl.value.on_report_status.unsafe_as(Proc(CLIENT_MESSAGE_TYPE, UInt32, HRESULT)).call(messagetype, messageid)
+  end
+  def on_ready_to_connect(ptarget : ITsSbTarget) : HRESULT
+    @lpVtbl.value.on_ready_to_connect.unsafe_as(Proc(ITsSbTarget, HRESULT)).call(ptarget)
+  end
+end
+struct LibWin32::ITsSbTaskPluginNotifySink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_error(hrerror : HRESULT) : HRESULT
+    @lpVtbl.value.on_error.unsafe_as(Proc(HRESULT, HRESULT)).call(hrerror)
+  end
+  def on_report_status(messagetype : CLIENT_MESSAGE_TYPE, messageid : UInt32) : HRESULT
+    @lpVtbl.value.on_report_status.unsafe_as(Proc(CLIENT_MESSAGE_TYPE, UInt32, HRESULT)).call(messagetype, messageid)
+  end
+  def on_set_task_time(sztargetname : UInt8*, taskstarttime : FILETIME, taskendtime : FILETIME, taskdeadline : FILETIME, sztasklabel : UInt8*, sztaskidentifier : UInt8*, sztaskplugin : UInt8*, dwtaskstatus : UInt32, sacontext : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.on_set_task_time.unsafe_as(Proc(UInt8*, FILETIME, FILETIME, FILETIME, UInt8*, UInt8*, UInt8*, UInt32, SAFEARRAY*, HRESULT)).call(sztargetname, taskstarttime, taskendtime, taskdeadline, sztasklabel, sztaskidentifier, sztaskplugin, dwtaskstatus, sacontext)
+  end
+  def on_delete_task_time(sztargetname : UInt8*, sztaskidentifier : UInt8*) : HRESULT
+    @lpVtbl.value.on_delete_task_time.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(sztargetname, sztaskidentifier)
+  end
+  def on_update_task_status(sztargetname : UInt8*, taskidentifier : UInt8*, taskstatus : RDV_TASK_STATUS) : HRESULT
+    @lpVtbl.value.on_update_task_status.unsafe_as(Proc(UInt8*, UInt8*, RDV_TASK_STATUS, HRESULT)).call(sztargetname, taskidentifier, taskstatus)
+  end
+  def on_report_tasks(szhostname : UInt8*) : HRESULT
+    @lpVtbl.value.on_report_tasks.unsafe_as(Proc(UInt8*, HRESULT)).call(szhostname)
+  end
+end
+struct LibWin32::ITsSbClientConnection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_user_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_domain(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_domain.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_initial_program(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_initial_program.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_load_balance_result(ppval : ITsSbLoadBalanceResult*) : HRESULT
+    @lpVtbl.value.get_load_balance_result.unsafe_as(Proc(ITsSbLoadBalanceResult*, HRESULT)).call(ppval)
+  end
+  def get_farm_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_farm_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def put_context(contextid : UInt8*, context : VARIANT, existingcontext : VARIANT*) : HRESULT
+    @lpVtbl.value.put_context.unsafe_as(Proc(UInt8*, VARIANT, VARIANT*, HRESULT)).call(contextid, context, existingcontext)
+  end
+  def get_context(contextid : UInt8*, context : VARIANT*) : HRESULT
+    @lpVtbl.value.get_context.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(contextid, context)
+  end
+  def get_environment(ppenvironment : ITsSbEnvironment*) : HRESULT
+    @lpVtbl.value.get_environment.unsafe_as(Proc(ITsSbEnvironment*, HRESULT)).call(ppenvironment)
+  end
+  def get_connection_error : HRESULT
+    @lpVtbl.value.get_connection_error.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_sam_user_account(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_sam_user_account.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_client_connection_property_set(pppropertyset : ITsSbClientConnectionPropertySet*) : HRESULT
+    @lpVtbl.value.get_client_connection_property_set.unsafe_as(Proc(ITsSbClientConnectionPropertySet*, HRESULT)).call(pppropertyset)
+  end
+  def get_is_first_assignment(ppval : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_first_assignment.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(ppval)
+  end
+  def get_rd_farm_type(prdfarmtype : RD_FARM_TYPE*) : HRESULT
+    @lpVtbl.value.get_rd_farm_type.unsafe_as(Proc(RD_FARM_TYPE*, HRESULT)).call(prdfarmtype)
+  end
+  def get_user_sid_string(pszusersidstring : Int8**) : HRESULT
+    @lpVtbl.value.get_user_sid_string.unsafe_as(Proc(Int8**, HRESULT)).call(pszusersidstring)
+  end
+  def get_disconnected_session(ppsession : ITsSbSession*) : HRESULT
+    @lpVtbl.value.get_disconnected_session.unsafe_as(Proc(ITsSbSession*, HRESULT)).call(ppsession)
+  end
+end
+struct LibWin32::ITsSbProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_target_object(targetname : UInt8*, environmentname : UInt8*, pptarget : ITsSbTarget*) : HRESULT
+    @lpVtbl.value.create_target_object.unsafe_as(Proc(UInt8*, UInt8*, ITsSbTarget*, HRESULT)).call(targetname, environmentname, pptarget)
+  end
+  def create_load_balance_result_object(targetname : UInt8*, pplbresult : ITsSbLoadBalanceResult*) : HRESULT
+    @lpVtbl.value.create_load_balance_result_object.unsafe_as(Proc(UInt8*, ITsSbLoadBalanceResult*, HRESULT)).call(targetname, pplbresult)
+  end
+  def create_session_object(targetname : UInt8*, username : UInt8*, domain : UInt8*, sessionid : UInt32, ppsession : ITsSbSession*) : HRESULT
+    @lpVtbl.value.create_session_object.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt32, ITsSbSession*, HRESULT)).call(targetname, username, domain, sessionid, ppsession)
+  end
+  def create_plugin_property_set(pppropertyset : ITsSbPluginPropertySet*) : HRESULT
+    @lpVtbl.value.create_plugin_property_set.unsafe_as(Proc(ITsSbPluginPropertySet*, HRESULT)).call(pppropertyset)
+  end
+  def create_target_property_set_object(pppropertyset : ITsSbTargetPropertySet*) : HRESULT
+    @lpVtbl.value.create_target_property_set_object.unsafe_as(Proc(ITsSbTargetPropertySet*, HRESULT)).call(pppropertyset)
+  end
+  def create_environment_object(name : UInt8*, serverweight : UInt32, ppenvironment : ITsSbEnvironment*) : HRESULT
+    @lpVtbl.value.create_environment_object.unsafe_as(Proc(UInt8*, UInt32, ITsSbEnvironment*, HRESULT)).call(name, serverweight, ppenvironment)
+  end
+  def get_resource_plugin_store(ppstore : ITsSbResourcePluginStore*) : HRESULT
+    @lpVtbl.value.get_resource_plugin_store.unsafe_as(Proc(ITsSbResourcePluginStore*, HRESULT)).call(ppstore)
+  end
+  def get_filter_plugin_store(ppstore : ITsSbFilterPluginStore*) : HRESULT
+    @lpVtbl.value.get_filter_plugin_store.unsafe_as(Proc(ITsSbFilterPluginStore*, HRESULT)).call(ppstore)
+  end
+  def register_for_notification(notificationtype : UInt32, resourcetomonitor : UInt8*, ppluginnotification : ITsSbResourceNotification) : HRESULT
+    @lpVtbl.value.register_for_notification.unsafe_as(Proc(UInt32, UInt8*, ITsSbResourceNotification, HRESULT)).call(notificationtype, resourcetomonitor, ppluginnotification)
+  end
+  def un_register_for_notification(notificationtype : UInt32, resourcetomonitor : UInt8*) : HRESULT
+    @lpVtbl.value.un_register_for_notification.unsafe_as(Proc(UInt32, UInt8*, HRESULT)).call(notificationtype, resourcetomonitor)
+  end
+  def get_instance_of_global_store(ppglobalstore : ITsSbGlobalStore*) : HRESULT
+    @lpVtbl.value.get_instance_of_global_store.unsafe_as(Proc(ITsSbGlobalStore*, HRESULT)).call(ppglobalstore)
+  end
+  def create_environment_property_set_object(pppropertyset : ITsSbEnvironmentPropertySet*) : HRESULT
+    @lpVtbl.value.create_environment_property_set_object.unsafe_as(Proc(ITsSbEnvironmentPropertySet*, HRESULT)).call(pppropertyset)
+  end
+end
+struct LibWin32::ITsSbResourcePluginStore
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def query_target(targetname : UInt8*, farmname : UInt8*, pptarget : ITsSbTarget*) : HRESULT
+    @lpVtbl.value.query_target.unsafe_as(Proc(UInt8*, UInt8*, ITsSbTarget*, HRESULT)).call(targetname, farmname, pptarget)
+  end
+  def query_session_by_session_id(dwsessionid : UInt32, targetname : UInt8*, ppsession : ITsSbSession*) : HRESULT
+    @lpVtbl.value.query_session_by_session_id.unsafe_as(Proc(UInt32, UInt8*, ITsSbSession*, HRESULT)).call(dwsessionid, targetname, ppsession)
+  end
+  def add_target_to_store(ptarget : ITsSbTarget) : HRESULT
+    @lpVtbl.value.add_target_to_store.unsafe_as(Proc(ITsSbTarget, HRESULT)).call(ptarget)
+  end
+  def add_session_to_store(psession : ITsSbSession) : HRESULT
+    @lpVtbl.value.add_session_to_store.unsafe_as(Proc(ITsSbSession, HRESULT)).call(psession)
+  end
+  def add_environment_to_store(penvironment : ITsSbEnvironment) : HRESULT
+    @lpVtbl.value.add_environment_to_store.unsafe_as(Proc(ITsSbEnvironment, HRESULT)).call(penvironment)
+  end
+  def remove_environment_from_store(environmentname : UInt8*, bignoreowner : LibC::BOOL) : HRESULT
+    @lpVtbl.value.remove_environment_from_store.unsafe_as(Proc(UInt8*, LibC::BOOL, HRESULT)).call(environmentname, bignoreowner)
+  end
+  def enumerate_farms(pdwcount : UInt32*, pval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.enumerate_farms.unsafe_as(Proc(UInt32*, SAFEARRAY**, HRESULT)).call(pdwcount, pval)
+  end
+  def query_environment(environmentname : UInt8*, ppenvironment : ITsSbEnvironment*) : HRESULT
+    @lpVtbl.value.query_environment.unsafe_as(Proc(UInt8*, ITsSbEnvironment*, HRESULT)).call(environmentname, ppenvironment)
+  end
+  def enumerate_environments(pdwcount : UInt32*, pval : ITsSbEnvironment**) : HRESULT
+    @lpVtbl.value.enumerate_environments.unsafe_as(Proc(UInt32*, ITsSbEnvironment**, HRESULT)).call(pdwcount, pval)
+  end
+  def save_target(ptarget : ITsSbTarget, bforcewrite : LibC::BOOL) : HRESULT
+    @lpVtbl.value.save_target.unsafe_as(Proc(ITsSbTarget, LibC::BOOL, HRESULT)).call(ptarget, bforcewrite)
+  end
+  def save_environment(penvironment : ITsSbEnvironment, bforcewrite : LibC::BOOL) : HRESULT
+    @lpVtbl.value.save_environment.unsafe_as(Proc(ITsSbEnvironment, LibC::BOOL, HRESULT)).call(penvironment, bforcewrite)
+  end
+  def save_session(psession : ITsSbSession) : HRESULT
+    @lpVtbl.value.save_session.unsafe_as(Proc(ITsSbSession, HRESULT)).call(psession)
+  end
+  def set_target_property(targetname : UInt8*, propertyname : UInt8*, pproperty : VARIANT*) : HRESULT
+    @lpVtbl.value.set_target_property.unsafe_as(Proc(UInt8*, UInt8*, VARIANT*, HRESULT)).call(targetname, propertyname, pproperty)
+  end
+  def set_environment_property(environmentname : UInt8*, propertyname : UInt8*, pproperty : VARIANT*) : HRESULT
+    @lpVtbl.value.set_environment_property.unsafe_as(Proc(UInt8*, UInt8*, VARIANT*, HRESULT)).call(environmentname, propertyname, pproperty)
+  end
+  def set_target_state(targetname : UInt8*, newstate : TARGET_STATE, poldstate : TARGET_STATE*) : HRESULT
+    @lpVtbl.value.set_target_state.unsafe_as(Proc(UInt8*, TARGET_STATE, TARGET_STATE*, HRESULT)).call(targetname, newstate, poldstate)
+  end
+  def set_session_state(sbsession : ITsSbSession) : HRESULT
+    @lpVtbl.value.set_session_state.unsafe_as(Proc(ITsSbSession, HRESULT)).call(sbsession)
+  end
+  def enumerate_targets(farmname : UInt8*, envname : UInt8*, sortbyfieldid : TS_SB_SORT_BY, sortybypropname : UInt8*, pdwcount : UInt32*, pval : ITsSbTarget**) : HRESULT
+    @lpVtbl.value.enumerate_targets.unsafe_as(Proc(UInt8*, UInt8*, TS_SB_SORT_BY, UInt8*, UInt32*, ITsSbTarget**, HRESULT)).call(farmname, envname, sortbyfieldid, sortybypropname, pdwcount, pval)
+  end
+  def enumerate_sessions(targetname : UInt8*, username : UInt8*, userdomain : UInt8*, poolname : UInt8*, initialprogram : UInt8*, psessionstate : TSSESSION_STATE*, pdwcount : UInt32*, ppval : ITsSbSession**) : HRESULT
+    @lpVtbl.value.enumerate_sessions.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, TSSESSION_STATE*, UInt32*, ITsSbSession**, HRESULT)).call(targetname, username, userdomain, poolname, initialprogram, psessionstate, pdwcount, ppval)
+  end
+  def get_farm_property(farmname : UInt8*, propertyname : UInt8*, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_farm_property.unsafe_as(Proc(UInt8*, UInt8*, VARIANT*, HRESULT)).call(farmname, propertyname, pvarvalue)
+  end
+  def delete_target(targetname : UInt8*, hostname : UInt8*) : HRESULT
+    @lpVtbl.value.delete_target.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(targetname, hostname)
+  end
+  def set_target_property_with_version_check(ptarget : ITsSbTarget, propertyname : UInt8*, pproperty : VARIANT*) : HRESULT
+    @lpVtbl.value.set_target_property_with_version_check.unsafe_as(Proc(ITsSbTarget, UInt8*, VARIANT*, HRESULT)).call(ptarget, propertyname, pproperty)
+  end
+  def set_environment_property_with_version_check(penvironment : ITsSbEnvironment, propertyname : UInt8*, pproperty : VARIANT*) : HRESULT
+    @lpVtbl.value.set_environment_property_with_version_check.unsafe_as(Proc(ITsSbEnvironment, UInt8*, VARIANT*, HRESULT)).call(penvironment, propertyname, pproperty)
+  end
+  def acquire_target_lock(targetname : UInt8*, dwtimeout : UInt32, ppcontext : IUnknown*) : HRESULT
+    @lpVtbl.value.acquire_target_lock.unsafe_as(Proc(UInt8*, UInt32, IUnknown*, HRESULT)).call(targetname, dwtimeout, ppcontext)
+  end
+  def release_target_lock(pcontext : IUnknown) : HRESULT
+    @lpVtbl.value.release_target_lock.unsafe_as(Proc(IUnknown, HRESULT)).call(pcontext)
+  end
+  def test_and_set_server_state(poolname : UInt8*, serverfqdn : UInt8*, newstate : TARGET_STATE, teststate : TARGET_STATE, pinitstate : TARGET_STATE*) : HRESULT
+    @lpVtbl.value.test_and_set_server_state.unsafe_as(Proc(UInt8*, UInt8*, TARGET_STATE, TARGET_STATE, TARGET_STATE*, HRESULT)).call(poolname, serverfqdn, newstate, teststate, pinitstate)
+  end
+  def set_server_waiting_to_start(poolname : UInt8*, servername : UInt8*) : HRESULT
+    @lpVtbl.value.set_server_waiting_to_start.unsafe_as(Proc(UInt8*, UInt8*, HRESULT)).call(poolname, servername)
+  end
+  def get_server_state(poolname : UInt8*, serverfqdn : UInt8*, pstate : TARGET_STATE*) : HRESULT
+    @lpVtbl.value.get_server_state.unsafe_as(Proc(UInt8*, UInt8*, TARGET_STATE*, HRESULT)).call(poolname, serverfqdn, pstate)
+  end
+  def set_server_drain_mode(serverfqdn : UInt8*, drainmode : UInt32) : HRESULT
+    @lpVtbl.value.set_server_drain_mode.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(serverfqdn, drainmode)
+  end
+end
+struct LibWin32::ITsSbFilterPluginStore
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def save_properties(ppropertyset : ITsSbPropertySet) : HRESULT
+    @lpVtbl.value.save_properties.unsafe_as(Proc(ITsSbPropertySet, HRESULT)).call(ppropertyset)
+  end
+  def enumerate_properties(pppropertyset : ITsSbPropertySet*) : HRESULT
+    @lpVtbl.value.enumerate_properties.unsafe_as(Proc(ITsSbPropertySet*, HRESULT)).call(pppropertyset)
+  end
+  def delete_properties(propertyname : UInt8*) : HRESULT
+    @lpVtbl.value.delete_properties.unsafe_as(Proc(UInt8*, HRESULT)).call(propertyname)
+  end
+end
+struct LibWin32::ITsSbGlobalStore
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def query_target(providername : UInt8*, targetname : UInt8*, farmname : UInt8*, pptarget : ITsSbTarget*) : HRESULT
+    @lpVtbl.value.query_target.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, ITsSbTarget*, HRESULT)).call(providername, targetname, farmname, pptarget)
+  end
+  def query_session_by_session_id(providername : UInt8*, dwsessionid : UInt32, targetname : UInt8*, ppsession : ITsSbSession*) : HRESULT
+    @lpVtbl.value.query_session_by_session_id.unsafe_as(Proc(UInt8*, UInt32, UInt8*, ITsSbSession*, HRESULT)).call(providername, dwsessionid, targetname, ppsession)
+  end
+  def enumerate_farms(providername : UInt8*, pdwcount : UInt32*, pval : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.enumerate_farms.unsafe_as(Proc(UInt8*, UInt32*, SAFEARRAY**, HRESULT)).call(providername, pdwcount, pval)
+  end
+  def enumerate_targets(providername : UInt8*, farmname : UInt8*, envname : UInt8*, pdwcount : UInt32*, pval : ITsSbTarget**) : HRESULT
+    @lpVtbl.value.enumerate_targets.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt32*, ITsSbTarget**, HRESULT)).call(providername, farmname, envname, pdwcount, pval)
+  end
+  def enumerate_environments_by_provider(providername : UInt8*, pdwcount : UInt32*, ppval : ITsSbEnvironment**) : HRESULT
+    @lpVtbl.value.enumerate_environments_by_provider.unsafe_as(Proc(UInt8*, UInt32*, ITsSbEnvironment**, HRESULT)).call(providername, pdwcount, ppval)
+  end
+  def enumerate_sessions(providername : UInt8*, targetname : UInt8*, username : UInt8*, userdomain : UInt8*, poolname : UInt8*, initialprogram : UInt8*, psessionstate : TSSESSION_STATE*, pdwcount : UInt32*, ppval : ITsSbSession**) : HRESULT
+    @lpVtbl.value.enumerate_sessions.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, UInt8*, TSSESSION_STATE*, UInt32*, ITsSbSession**, HRESULT)).call(providername, targetname, username, userdomain, poolname, initialprogram, psessionstate, pdwcount, ppval)
+  end
+  def get_farm_property(farmname : UInt8*, propertyname : UInt8*, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_farm_property.unsafe_as(Proc(UInt8*, UInt8*, VARIANT*, HRESULT)).call(farmname, propertyname, pvarvalue)
+  end
+end
+struct LibWin32::ITsSbProvisioningPluginNotifySink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_job_created(pvmnotifyinfo : VM_NOTIFY_INFO*) : HRESULT
+    @lpVtbl.value.on_job_created.unsafe_as(Proc(VM_NOTIFY_INFO*, HRESULT)).call(pvmnotifyinfo)
+  end
+  def on_virtual_machine_status_changed(pvmnotifyentry : VM_NOTIFY_ENTRY*, vmnotifystatus : VM_NOTIFY_STATUS, errorcode : HRESULT, errordescr : UInt8*) : HRESULT
+    @lpVtbl.value.on_virtual_machine_status_changed.unsafe_as(Proc(VM_NOTIFY_ENTRY*, VM_NOTIFY_STATUS, HRESULT, UInt8*, HRESULT)).call(pvmnotifyentry, vmnotifystatus, errorcode, errordescr)
+  end
+  def on_job_completed(resultcode : HRESULT, resultdescription : UInt8*) : HRESULT
+    @lpVtbl.value.on_job_completed.unsafe_as(Proc(HRESULT, UInt8*, HRESULT)).call(resultcode, resultdescription)
+  end
+  def on_job_cancelled : HRESULT
+    @lpVtbl.value.on_job_cancelled.unsafe_as(Proc(HRESULT)).call
+  end
+  def lock_virtual_machine(pvmnotifyentry : VM_NOTIFY_ENTRY*) : HRESULT
+    @lpVtbl.value.lock_virtual_machine.unsafe_as(Proc(VM_NOTIFY_ENTRY*, HRESULT)).call(pvmnotifyentry)
+  end
+  def on_virtual_machine_host_status_changed(vmhost : UInt8*, vmhostnotifystatus : VM_HOST_NOTIFY_STATUS, errorcode : HRESULT, errordescr : UInt8*) : HRESULT
+    @lpVtbl.value.on_virtual_machine_host_status_changed.unsafe_as(Proc(UInt8*, VM_HOST_NOTIFY_STATUS, HRESULT, UInt8*, HRESULT)).call(vmhost, vmhostnotifystatus, errorcode, errordescr)
+  end
+end
+struct LibWin32::ITsSbProvisioning
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pprovider : ITsSbProvider, pnotifysink : ITsSbPluginNotifySink, ppropertyset : ITsSbPluginPropertySet) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(ITsSbProvider, ITsSbPluginNotifySink, ITsSbPluginPropertySet, HRESULT)).call(pprovider, pnotifysink, ppropertyset)
+  end
+  def terminate(hr : HRESULT) : HRESULT
+    @lpVtbl.value.terminate.unsafe_as(Proc(HRESULT, HRESULT)).call(hr)
+  end
+  def create_virtual_machines(jobxmlstring : UInt8*, jobguid : UInt8*, psink : ITsSbProvisioningPluginNotifySink) : HRESULT
+    @lpVtbl.value.create_virtual_machines.unsafe_as(Proc(UInt8*, UInt8*, ITsSbProvisioningPluginNotifySink, HRESULT)).call(jobxmlstring, jobguid, psink)
+  end
+  def patch_virtual_machines(jobxmlstring : UInt8*, jobguid : UInt8*, psink : ITsSbProvisioningPluginNotifySink, pvmpatchinfo : VM_PATCH_INFO*) : HRESULT
+    @lpVtbl.value.patch_virtual_machines.unsafe_as(Proc(UInt8*, UInt8*, ITsSbProvisioningPluginNotifySink, VM_PATCH_INFO*, HRESULT)).call(jobxmlstring, jobguid, psink, pvmpatchinfo)
+  end
+  def delete_virtual_machines(jobxmlstring : UInt8*, jobguid : UInt8*, psink : ITsSbProvisioningPluginNotifySink) : HRESULT
+    @lpVtbl.value.delete_virtual_machines.unsafe_as(Proc(UInt8*, UInt8*, ITsSbProvisioningPluginNotifySink, HRESULT)).call(jobxmlstring, jobguid, psink)
+  end
+  def cancel_job(jobguid : UInt8*) : HRESULT
+    @lpVtbl.value.cancel_job.unsafe_as(Proc(UInt8*, HRESULT)).call(jobguid)
+  end
+end
+struct LibWin32::ITsSbGenericNotifySink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_completed(status : HRESULT) : HRESULT
+    @lpVtbl.value.on_completed.unsafe_as(Proc(HRESULT, HRESULT)).call(status)
+  end
+  def get_wait_timeout(pfttimeout : FILETIME*) : HRESULT
+    @lpVtbl.value.get_wait_timeout.unsafe_as(Proc(FILETIME*, HRESULT)).call(pfttimeout)
+  end
+end
+struct LibWin32::ItsPubPlugin
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_resource_list(userid : LibC::LPWSTR, pceapplistsize : Int32*, resourcelist : Pluginresource**) : HRESULT
+    @lpVtbl.value.get_resource_list.unsafe_as(Proc(LibC::LPWSTR, Int32*, Pluginresource**, HRESULT)).call(userid, pceapplistsize, resourcelist)
+  end
+  def get_resource(alias : LibC::LPWSTR, flags : Int32, resource : Pluginresource*) : HRESULT
+    @lpVtbl.value.get_resource.unsafe_as(Proc(LibC::LPWSTR, Int32, Pluginresource*, HRESULT)).call(alias, flags, resource)
+  end
+  def get_cache_last_update_time(lastupdatetime : UInt64*) : HRESULT
+    @lpVtbl.value.get_cache_last_update_time.unsafe_as(Proc(UInt64*, HRESULT)).call(lastupdatetime)
+  end
+  def get_plugin_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_plugin_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_plugin_version(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_plugin_version.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def resolve_resource(resourcetype : UInt32*, resourcelocation : LibC::LPWSTR, endpointname : LibC::LPWSTR, userid : LibC::LPWSTR, alias : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.resolve_resource.unsafe_as(Proc(UInt32*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(resourcetype, resourcelocation, endpointname, userid, alias)
+  end
+end
+struct LibWin32::ItsPubPlugin2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_resource_list(userid : LibC::LPWSTR, pceapplistsize : Int32*, resourcelist : Pluginresource**) : HRESULT
+    @lpVtbl.value.get_resource_list.unsafe_as(Proc(LibC::LPWSTR, Int32*, Pluginresource**, HRESULT)).call(userid, pceapplistsize, resourcelist)
+  end
+  def get_resource(alias : LibC::LPWSTR, flags : Int32, resource : Pluginresource*) : HRESULT
+    @lpVtbl.value.get_resource.unsafe_as(Proc(LibC::LPWSTR, Int32, Pluginresource*, HRESULT)).call(alias, flags, resource)
+  end
+  def get_cache_last_update_time(lastupdatetime : UInt64*) : HRESULT
+    @lpVtbl.value.get_cache_last_update_time.unsafe_as(Proc(UInt64*, HRESULT)).call(lastupdatetime)
+  end
+  def get_plugin_name(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_plugin_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def get_plugin_version(pval : UInt8**) : HRESULT
+    @lpVtbl.value.get_plugin_version.unsafe_as(Proc(UInt8**, HRESULT)).call(pval)
+  end
+  def resolve_resource(resourcetype : UInt32*, resourcelocation : LibC::LPWSTR, endpointname : LibC::LPWSTR, userid : LibC::LPWSTR, alias : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.resolve_resource.unsafe_as(Proc(UInt32*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(resourcetype, resourcelocation, endpointname, userid, alias)
+  end
+  def get_resource2_list(userid : LibC::LPWSTR, pceapplistsize : Int32*, resourcelist : Pluginresource2**) : HRESULT
+    @lpVtbl.value.get_resource2_list.unsafe_as(Proc(LibC::LPWSTR, Int32*, Pluginresource2**, HRESULT)).call(userid, pceapplistsize, resourcelist)
+  end
+  def get_resource2(alias : LibC::LPWSTR, flags : Int32, resource : Pluginresource2*) : HRESULT
+    @lpVtbl.value.get_resource2.unsafe_as(Proc(LibC::LPWSTR, Int32, Pluginresource2*, HRESULT)).call(alias, flags, resource)
+  end
+  def resolve_personal_desktop(userid : LibC::LPWSTR, poolid : LibC::LPWSTR, epdresolutiontype : TSPUB_PLUGIN_PD_RESOLUTION_TYPE, ppdassignmenttype : TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE*, endpointname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.resolve_personal_desktop.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, TSPUB_PLUGIN_PD_RESOLUTION_TYPE, TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE*, LibC::LPWSTR, HRESULT)).call(userid, poolid, epdresolutiontype, ppdassignmenttype, endpointname)
+  end
+  def delete_personal_desktop_assignment(userid : LibC::LPWSTR, poolid : LibC::LPWSTR, endpointname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_personal_desktop_assignment.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(userid, poolid, endpointname)
+  end
+end
+struct LibWin32::IWorkspaceResTypeRegistry
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def add_resource_type(fmachinewide : Int16, bstrfileextension : UInt8*, bstrlauncher : UInt8*) : HRESULT
+    @lpVtbl.value.add_resource_type.unsafe_as(Proc(Int16, UInt8*, UInt8*, HRESULT)).call(fmachinewide, bstrfileextension, bstrlauncher)
+  end
+  def delete_resource_type(fmachinewide : Int16, bstrfileextension : UInt8*) : HRESULT
+    @lpVtbl.value.delete_resource_type.unsafe_as(Proc(Int16, UInt8*, HRESULT)).call(fmachinewide, bstrfileextension)
+  end
+  def get_registered_file_extensions(fmachinewide : Int16, psafileextensions : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_registered_file_extensions.unsafe_as(Proc(Int16, SAFEARRAY**, HRESULT)).call(fmachinewide, psafileextensions)
+  end
+  def get_resource_type_info(fmachinewide : Int16, bstrfileextension : UInt8*, pbstrlauncher : UInt8**) : HRESULT
+    @lpVtbl.value.get_resource_type_info.unsafe_as(Proc(Int16, UInt8*, UInt8**, HRESULT)).call(fmachinewide, bstrfileextension, pbstrlauncher)
+  end
+  def modify_resource_type(fmachinewide : Int16, bstrfileextension : UInt8*, bstrlauncher : UInt8*) : HRESULT
+    @lpVtbl.value.modify_resource_type.unsafe_as(Proc(Int16, UInt8*, UInt8*, HRESULT)).call(fmachinewide, bstrfileextension, bstrlauncher)
+  end
+end
+struct LibWin32::IWTSPlugin
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pchannelmgr : IWTSVirtualChannelManager) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(IWTSVirtualChannelManager, HRESULT)).call(pchannelmgr)
+  end
+  def connected : HRESULT
+    @lpVtbl.value.connected.unsafe_as(Proc(HRESULT)).call
+  end
+  def disconnected(dwdisconnectcode : UInt32) : HRESULT
+    @lpVtbl.value.disconnected.unsafe_as(Proc(UInt32, HRESULT)).call(dwdisconnectcode)
+  end
+  def terminated : HRESULT
+    @lpVtbl.value.terminated.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWTSListener
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_configuration(pppropertybag : IPropertyBag*) : HRESULT
+    @lpVtbl.value.get_configuration.unsafe_as(Proc(IPropertyBag*, HRESULT)).call(pppropertybag)
+  end
+end
+struct LibWin32::IWTSListenerCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_new_channel_connection(pchannel : IWTSVirtualChannel, data : UInt8*, pbaccept : LibC::BOOL*, ppcallback : IWTSVirtualChannelCallback*) : HRESULT
+    @lpVtbl.value.on_new_channel_connection.unsafe_as(Proc(IWTSVirtualChannel, UInt8*, LibC::BOOL*, IWTSVirtualChannelCallback*, HRESULT)).call(pchannel, data, pbaccept, ppcallback)
+  end
+end
+struct LibWin32::IWTSVirtualChannelCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_data_received(cbsize : UInt32, pbuffer : UInt8*) : HRESULT
+    @lpVtbl.value.on_data_received.unsafe_as(Proc(UInt32, UInt8*, HRESULT)).call(cbsize, pbuffer)
+  end
+  def on_close : HRESULT
+    @lpVtbl.value.on_close.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWTSVirtualChannelManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_listener(pszchannelname : UInt8*, uflags : UInt32, plistenercallback : IWTSListenerCallback, pplistener : IWTSListener*) : HRESULT
+    @lpVtbl.value.create_listener.unsafe_as(Proc(UInt8*, UInt32, IWTSListenerCallback, IWTSListener*, HRESULT)).call(pszchannelname, uflags, plistenercallback, pplistener)
+  end
+end
+struct LibWin32::IWTSVirtualChannel
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def write(cbsize : UInt32, pbuffer : UInt8*, preserved : IUnknown) : HRESULT
+    @lpVtbl.value.write.unsafe_as(Proc(UInt32, UInt8*, IUnknown, HRESULT)).call(cbsize, pbuffer, preserved)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWTSPluginServiceProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_service(serviceid : Guid, ppunkobject : IUnknown*) : HRESULT
+    @lpVtbl.value.get_service.unsafe_as(Proc(Guid, IUnknown*, HRESULT)).call(serviceid, ppunkobject)
+  end
+end
+struct LibWin32::IWTSBitmapRenderer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def render(imageformat : Guid, dwwidth : UInt32, dwheight : UInt32, cbstride : Int32, cbimagebuffer : UInt32, pimagebuffer : UInt8*) : HRESULT
+    @lpVtbl.value.render.unsafe_as(Proc(Guid, UInt32, UInt32, Int32, UInt32, UInt8*, HRESULT)).call(imageformat, dwwidth, dwheight, cbstride, cbimagebuffer, pimagebuffer)
+  end
+  def get_renderer_statistics(pstatistics : BITMAP_RENDERER_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_renderer_statistics.unsafe_as(Proc(BITMAP_RENDERER_STATISTICS*, HRESULT)).call(pstatistics)
+  end
+  def remove_mapping : HRESULT
+    @lpVtbl.value.remove_mapping.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWTSBitmapRendererCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_target_size_changed(rcnewsize : RECT) : HRESULT
+    @lpVtbl.value.on_target_size_changed.unsafe_as(Proc(RECT, HRESULT)).call(rcnewsize)
+  end
+end
+struct LibWin32::IWTSBitmapRenderService
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_mapped_renderer(mappingid : UInt64, pmappedrenderercallback : IWTSBitmapRendererCallback, ppmappedrenderer : IWTSBitmapRenderer*) : HRESULT
+    @lpVtbl.value.get_mapped_renderer.unsafe_as(Proc(UInt64, IWTSBitmapRendererCallback, IWTSBitmapRenderer*, HRESULT)).call(mappingid, pmappedrenderercallback, ppmappedrenderer)
+  end
+end
+struct LibWin32::IWRdsGraphicsChannelEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_data_received(cbsize : UInt32, pbuffer : UInt8*) : HRESULT
+    @lpVtbl.value.on_data_received.unsafe_as(Proc(UInt32, UInt8*, HRESULT)).call(cbsize, pbuffer)
+  end
+  def on_close : HRESULT
+    @lpVtbl.value.on_close.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_channel_opened(openresult : HRESULT, popencontext : IUnknown) : HRESULT
+    @lpVtbl.value.on_channel_opened.unsafe_as(Proc(HRESULT, IUnknown, HRESULT)).call(openresult, popencontext)
+  end
+  def on_data_sent(pwritecontext : IUnknown, bcancelled : LibC::BOOL, pbuffer : UInt8*, cbbuffer : UInt32) : HRESULT
+    @lpVtbl.value.on_data_sent.unsafe_as(Proc(IUnknown, LibC::BOOL, UInt8*, UInt32, HRESULT)).call(pwritecontext, bcancelled, pbuffer, cbbuffer)
+  end
+  def on_metrics_update(bandwidth : UInt32, rtt : UInt32, lastsentbyteindex : UInt64) : HRESULT
+    @lpVtbl.value.on_metrics_update.unsafe_as(Proc(UInt32, UInt32, UInt64, HRESULT)).call(bandwidth, rtt, lastsentbyteindex)
+  end
+end
+struct LibWin32::IWRdsGraphicsChannel
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def write(cbsize : UInt32, pbuffer : UInt8*, pcontext : IUnknown) : HRESULT
+    @lpVtbl.value.write.unsafe_as(Proc(UInt32, UInt8*, IUnknown, HRESULT)).call(cbsize, pbuffer, pcontext)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def open(pchannelevents : IWRdsGraphicsChannelEvents, popencontext : IUnknown) : HRESULT
+    @lpVtbl.value.open.unsafe_as(Proc(IWRdsGraphicsChannelEvents, IUnknown, HRESULT)).call(pchannelevents, popencontext)
+  end
+end
+struct LibWin32::IWRdsGraphicsChannelManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_channel(pszchannelname : UInt8*, channeltype : WRdsGraphicsChannelType, ppvirtualchannel : IWRdsGraphicsChannel*) : HRESULT
+    @lpVtbl.value.create_channel.unsafe_as(Proc(UInt8*, WRdsGraphicsChannelType, IWRdsGraphicsChannel*, HRESULT)).call(pszchannelname, channeltype, ppvirtualchannel)
+  end
+end
+struct LibWin32::IWTSProtocolManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_listener(wszlistenername : LibC::LPWSTR, pprotocollistener : IWTSProtocolListener*) : HRESULT
+    @lpVtbl.value.create_listener.unsafe_as(Proc(LibC::LPWSTR, IWTSProtocolListener*, HRESULT)).call(wszlistenername, pprotocollistener)
+  end
+  def notify_service_state_change(ptsservicestatechange : WTS_SERVICE_STATE*) : HRESULT
+    @lpVtbl.value.notify_service_state_change.unsafe_as(Proc(WTS_SERVICE_STATE*, HRESULT)).call(ptsservicestatechange)
+  end
+  def notify_session_of_service_start(sessionid : WTS_SESSION_ID*) : HRESULT
+    @lpVtbl.value.notify_session_of_service_start.unsafe_as(Proc(WTS_SESSION_ID*, HRESULT)).call(sessionid)
+  end
+  def notify_session_of_service_stop(sessionid : WTS_SESSION_ID*) : HRESULT
+    @lpVtbl.value.notify_session_of_service_stop.unsafe_as(Proc(WTS_SESSION_ID*, HRESULT)).call(sessionid)
+  end
+  def notify_session_state_change(sessionid : WTS_SESSION_ID*, eventid : UInt32) : HRESULT
+    @lpVtbl.value.notify_session_state_change.unsafe_as(Proc(WTS_SESSION_ID*, UInt32, HRESULT)).call(sessionid, eventid)
+  end
+end
+struct LibWin32::IWTSProtocolListener
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def start_listen(pcallback : IWTSProtocolListenerCallback) : HRESULT
+    @lpVtbl.value.start_listen.unsafe_as(Proc(IWTSProtocolListenerCallback, HRESULT)).call(pcallback)
+  end
+  def stop_listen : HRESULT
+    @lpVtbl.value.stop_listen.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWTSProtocolListenerCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_connected(pconnection : IWTSProtocolConnection, pcallback : IWTSProtocolConnectionCallback*) : HRESULT
+    @lpVtbl.value.on_connected.unsafe_as(Proc(IWTSProtocolConnection, IWTSProtocolConnectionCallback*, HRESULT)).call(pconnection, pcallback)
+  end
+end
+struct LibWin32::IWTSProtocolConnection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_logon_error_redirector(pplogonerrorredir : IWTSProtocolLogonErrorRedirector*) : HRESULT
+    @lpVtbl.value.get_logon_error_redirector.unsafe_as(Proc(IWTSProtocolLogonErrorRedirector*, HRESULT)).call(pplogonerrorredir)
+  end
+  def send_policy_data(ppolicydata : WTS_POLICY_DATA*) : HRESULT
+    @lpVtbl.value.send_policy_data.unsafe_as(Proc(WTS_POLICY_DATA*, HRESULT)).call(ppolicydata)
+  end
+  def accept_connection : HRESULT
+    @lpVtbl.value.accept_connection.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_client_data(pclientdata : WTS_CLIENT_DATA*) : HRESULT
+    @lpVtbl.value.get_client_data.unsafe_as(Proc(WTS_CLIENT_DATA*, HRESULT)).call(pclientdata)
+  end
+  def get_user_credentials(pusercreds : WTS_USER_CREDENTIAL*) : HRESULT
+    @lpVtbl.value.get_user_credentials.unsafe_as(Proc(WTS_USER_CREDENTIAL*, HRESULT)).call(pusercreds)
+  end
+  def get_license_connection(pplicenseconnection : IWTSProtocolLicenseConnection*) : HRESULT
+    @lpVtbl.value.get_license_connection.unsafe_as(Proc(IWTSProtocolLicenseConnection*, HRESULT)).call(pplicenseconnection)
+  end
+  def authenticate_client_to_session(sessionid : WTS_SESSION_ID*) : HRESULT
+    @lpVtbl.value.authenticate_client_to_session.unsafe_as(Proc(WTS_SESSION_ID*, HRESULT)).call(sessionid)
+  end
+  def notify_session_id(sessionid : WTS_SESSION_ID*) : HRESULT
+    @lpVtbl.value.notify_session_id.unsafe_as(Proc(WTS_SESSION_ID*, HRESULT)).call(sessionid)
+  end
+  def get_protocol_handles(pkeyboardhandle : HANDLE_PTR*, pmousehandle : HANDLE_PTR*, pbeephandle : HANDLE_PTR*, pvideohandle : HANDLE_PTR*) : HRESULT
+    @lpVtbl.value.get_protocol_handles.unsafe_as(Proc(HANDLE_PTR*, HANDLE_PTR*, HANDLE_PTR*, HANDLE_PTR*, HRESULT)).call(pkeyboardhandle, pmousehandle, pbeephandle, pvideohandle)
+  end
+  def connect_notify(sessionid : UInt32) : HRESULT
+    @lpVtbl.value.connect_notify.unsafe_as(Proc(UInt32, HRESULT)).call(sessionid)
+  end
+  def is_user_allowed_to_logon(sessionid : UInt32, usertoken : HANDLE_PTR, pdomainname : LibC::LPWSTR, pusername : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.is_user_allowed_to_logon.unsafe_as(Proc(UInt32, HANDLE_PTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(sessionid, usertoken, pdomainname, pusername)
+  end
+  def session_arbitration_enumeration(husertoken : HANDLE_PTR, bsinglesessionperuserenabled : LibC::BOOL, psessionidarray : UInt32*, pdwsessionidentifiercount : UInt32*) : HRESULT
+    @lpVtbl.value.session_arbitration_enumeration.unsafe_as(Proc(HANDLE_PTR, LibC::BOOL, UInt32*, UInt32*, HRESULT)).call(husertoken, bsinglesessionperuserenabled, psessionidarray, pdwsessionidentifiercount)
+  end
+  def logon_notify(hclienttoken : HANDLE_PTR, wszusername : LibC::LPWSTR, wszdomainname : LibC::LPWSTR, sessionid : WTS_SESSION_ID*) : HRESULT
+    @lpVtbl.value.logon_notify.unsafe_as(Proc(HANDLE_PTR, LibC::LPWSTR, LibC::LPWSTR, WTS_SESSION_ID*, HRESULT)).call(hclienttoken, wszusername, wszdomainname, sessionid)
+  end
+  def get_user_data(ppolicydata : WTS_POLICY_DATA*, pclientdata : WTS_USER_DATA*) : HRESULT
+    @lpVtbl.value.get_user_data.unsafe_as(Proc(WTS_POLICY_DATA*, WTS_USER_DATA*, HRESULT)).call(ppolicydata, pclientdata)
+  end
+  def disconnect_notify : HRESULT
+    @lpVtbl.value.disconnect_notify.unsafe_as(Proc(HRESULT)).call
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_protocol_status(pprotocolstatus : WTS_PROTOCOL_STATUS*) : HRESULT
+    @lpVtbl.value.get_protocol_status.unsafe_as(Proc(WTS_PROTOCOL_STATUS*, HRESULT)).call(pprotocolstatus)
+  end
+  def get_last_input_time(plastinputtime : UInt64*) : HRESULT
+    @lpVtbl.value.get_last_input_time.unsafe_as(Proc(UInt64*, HRESULT)).call(plastinputtime)
+  end
+  def set_error_info(ulerror : UInt32) : HRESULT
+    @lpVtbl.value.set_error_info.unsafe_as(Proc(UInt32, HRESULT)).call(ulerror)
+  end
+  def send_beep(frequency : UInt32, duration : UInt32) : HRESULT
+    @lpVtbl.value.send_beep.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(frequency, duration)
+  end
+  def create_virtual_channel(szendpointname : PSTR, bstatic : LibC::BOOL, requestedpriority : UInt32, phchannel : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.create_virtual_channel.unsafe_as(Proc(PSTR, LibC::BOOL, UInt32, LibC::UINT_PTR*, HRESULT)).call(szendpointname, bstatic, requestedpriority, phchannel)
+  end
+  def query_property(querytype : Guid, ulnumentriesin : UInt32, ulnumentriesout : UInt32, ppropertyentriesin : WTS_PROPERTY_VALUE*, ppropertyentriesout : WTS_PROPERTY_VALUE*) : HRESULT
+    @lpVtbl.value.query_property.unsafe_as(Proc(Guid, UInt32, UInt32, WTS_PROPERTY_VALUE*, WTS_PROPERTY_VALUE*, HRESULT)).call(querytype, ulnumentriesin, ulnumentriesout, ppropertyentriesin, ppropertyentriesout)
+  end
+  def get_shadow_connection(ppshadowconnection : IWTSProtocolShadowConnection*) : HRESULT
+    @lpVtbl.value.get_shadow_connection.unsafe_as(Proc(IWTSProtocolShadowConnection*, HRESULT)).call(ppshadowconnection)
+  end
+end
+struct LibWin32::IWTSProtocolConnectionCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_ready : HRESULT
+    @lpVtbl.value.on_ready.unsafe_as(Proc(HRESULT)).call
+  end
+  def broken_connection(reason : UInt32, source : UInt32) : HRESULT
+    @lpVtbl.value.broken_connection.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(reason, source)
+  end
+  def stop_screen_updates : HRESULT
+    @lpVtbl.value.stop_screen_updates.unsafe_as(Proc(HRESULT)).call
+  end
+  def redraw_window(rect : WTS_SMALL_RECT*) : HRESULT
+    @lpVtbl.value.redraw_window.unsafe_as(Proc(WTS_SMALL_RECT*, HRESULT)).call(rect)
+  end
+  def display_io_ctl(displayioctl : WTS_DISPLAY_IOCTL*) : HRESULT
+    @lpVtbl.value.display_io_ctl.unsafe_as(Proc(WTS_DISPLAY_IOCTL*, HRESULT)).call(displayioctl)
+  end
+end
+struct LibWin32::IWTSProtocolShadowConnection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def start(ptargetservername : LibC::LPWSTR, targetsessionid : UInt32, hotkeyvk : UInt8, hotkeymodifiers : UInt16, pshadowcallback : IWTSProtocolShadowCallback) : HRESULT
+    @lpVtbl.value.start.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt8, UInt16, IWTSProtocolShadowCallback, HRESULT)).call(ptargetservername, targetsessionid, hotkeyvk, hotkeymodifiers, pshadowcallback)
+  end
+  def stop : HRESULT
+    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  end
+  def do_target(pparam1 : UInt8*, param1size : UInt32, pparam2 : UInt8*, param2size : UInt32, pparam3 : UInt8*, param3size : UInt32, pparam4 : UInt8*, param4size : UInt32, pclientname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.do_target.unsafe_as(Proc(UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR, HRESULT)).call(pparam1, param1size, pparam2, param2size, pparam3, param3size, pparam4, param4size, pclientname)
+  end
+end
+struct LibWin32::IWTSProtocolShadowCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def stop_shadow : HRESULT
+    @lpVtbl.value.stop_shadow.unsafe_as(Proc(HRESULT)).call
+  end
+  def invoke_target_shadow(ptargetservername : LibC::LPWSTR, targetsessionid : UInt32, pparam1 : UInt8*, param1size : UInt32, pparam2 : UInt8*, param2size : UInt32, pparam3 : UInt8*, param3size : UInt32, pparam4 : UInt8*, param4size : UInt32, pclientname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.invoke_target_shadow.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR, HRESULT)).call(ptargetservername, targetsessionid, pparam1, param1size, pparam2, param2size, pparam3, param3size, pparam4, param4size, pclientname)
+  end
+end
+struct LibWin32::IWTSProtocolLicenseConnection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def request_licensing_capabilities(pplicensecapabilities : WTS_LICENSE_CAPABILITIES*, pcblicensecapabilities : UInt32*) : HRESULT
+    @lpVtbl.value.request_licensing_capabilities.unsafe_as(Proc(WTS_LICENSE_CAPABILITIES*, UInt32*, HRESULT)).call(pplicensecapabilities, pcblicensecapabilities)
+  end
+  def send_client_license(pclientlicense : UInt8*, cbclientlicense : UInt32) : HRESULT
+    @lpVtbl.value.send_client_license.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(pclientlicense, cbclientlicense)
+  end
+  def request_client_license(reserve1 : UInt8*, reserve2 : UInt32, ppclientlicense : UInt8*, pcbclientlicense : UInt32*) : HRESULT
+    @lpVtbl.value.request_client_license.unsafe_as(Proc(UInt8*, UInt32, UInt8*, UInt32*, HRESULT)).call(reserve1, reserve2, ppclientlicense, pcbclientlicense)
+  end
+  def protocol_complete(ulcomplete : UInt32) : HRESULT
+    @lpVtbl.value.protocol_complete.unsafe_as(Proc(UInt32, HRESULT)).call(ulcomplete)
+  end
+end
+struct LibWin32::IWTSProtocolLogonErrorRedirector
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_begin_painting : HRESULT
+    @lpVtbl.value.on_begin_painting.unsafe_as(Proc(HRESULT)).call
+  end
+  def redirect_status(pszmessage : LibC::LPWSTR, presponse : WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*) : HRESULT
+    @lpVtbl.value.redirect_status.unsafe_as(Proc(LibC::LPWSTR, WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*, HRESULT)).call(pszmessage, presponse)
+  end
+  def redirect_message(pszcaption : LibC::LPWSTR, pszmessage : LibC::LPWSTR, utype : UInt32, presponse : WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*) : HRESULT
+    @lpVtbl.value.redirect_message.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*, HRESULT)).call(pszcaption, pszmessage, utype, presponse)
+  end
+  def redirect_logon_error(ntsstatus : Int32, ntssubstatus : Int32, pszcaption : LibC::LPWSTR, pszmessage : LibC::LPWSTR, utype : UInt32, presponse : WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*) : HRESULT
+    @lpVtbl.value.redirect_logon_error.unsafe_as(Proc(Int32, Int32, LibC::LPWSTR, LibC::LPWSTR, UInt32, WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*, HRESULT)).call(ntsstatus, ntssubstatus, pszcaption, pszmessage, utype, presponse)
+  end
+end
+struct LibWin32::IWRdsProtocolSettings
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_settings(wrdssettingtype : WRDS_SETTING_TYPE, wrdssettinglevel : WRDS_SETTING_LEVEL, pwrdssettings : WRDS_SETTINGS*) : HRESULT
+    @lpVtbl.value.get_settings.unsafe_as(Proc(WRDS_SETTING_TYPE, WRDS_SETTING_LEVEL, WRDS_SETTINGS*, HRESULT)).call(wrdssettingtype, wrdssettinglevel, pwrdssettings)
+  end
+  def merge_settings(pwrdssettings : WRDS_SETTINGS*, wrdsconnectionsettinglevel : WRDS_CONNECTION_SETTING_LEVEL, pwrdsconnectionsettings : WRDS_CONNECTION_SETTINGS*) : HRESULT
+    @lpVtbl.value.merge_settings.unsafe_as(Proc(WRDS_SETTINGS*, WRDS_CONNECTION_SETTING_LEVEL, WRDS_CONNECTION_SETTINGS*, HRESULT)).call(pwrdssettings, wrdsconnectionsettinglevel, pwrdsconnectionsettings)
+  end
+end
+struct LibWin32::IWRdsProtocolManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(piwrdssettings : IWRdsProtocolSettings, pwrdssettings : WRDS_SETTINGS*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(IWRdsProtocolSettings, WRDS_SETTINGS*, HRESULT)).call(piwrdssettings, pwrdssettings)
+  end
+  def create_listener(wszlistenername : LibC::LPWSTR, pprotocollistener : IWRdsProtocolListener*) : HRESULT
+    @lpVtbl.value.create_listener.unsafe_as(Proc(LibC::LPWSTR, IWRdsProtocolListener*, HRESULT)).call(wszlistenername, pprotocollistener)
+  end
+  def notify_service_state_change(ptsservicestatechange : WTS_SERVICE_STATE*) : HRESULT
+    @lpVtbl.value.notify_service_state_change.unsafe_as(Proc(WTS_SERVICE_STATE*, HRESULT)).call(ptsservicestatechange)
+  end
+  def notify_session_of_service_start(sessionid : WTS_SESSION_ID*) : HRESULT
+    @lpVtbl.value.notify_session_of_service_start.unsafe_as(Proc(WTS_SESSION_ID*, HRESULT)).call(sessionid)
+  end
+  def notify_session_of_service_stop(sessionid : WTS_SESSION_ID*) : HRESULT
+    @lpVtbl.value.notify_session_of_service_stop.unsafe_as(Proc(WTS_SESSION_ID*, HRESULT)).call(sessionid)
+  end
+  def notify_session_state_change(sessionid : WTS_SESSION_ID*, eventid : UInt32) : HRESULT
+    @lpVtbl.value.notify_session_state_change.unsafe_as(Proc(WTS_SESSION_ID*, UInt32, HRESULT)).call(sessionid, eventid)
+  end
+  def notify_settings_change(pwrdssettings : WRDS_SETTINGS*) : HRESULT
+    @lpVtbl.value.notify_settings_change.unsafe_as(Proc(WRDS_SETTINGS*, HRESULT)).call(pwrdssettings)
+  end
+  def uninitialize : HRESULT
+    @lpVtbl.value.uninitialize.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWRdsProtocolListener
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_settings(wrdslistenersettinglevel : WRDS_LISTENER_SETTING_LEVEL, pwrdslistenersettings : WRDS_LISTENER_SETTINGS*) : HRESULT
+    @lpVtbl.value.get_settings.unsafe_as(Proc(WRDS_LISTENER_SETTING_LEVEL, WRDS_LISTENER_SETTINGS*, HRESULT)).call(wrdslistenersettinglevel, pwrdslistenersettings)
+  end
+  def start_listen(pcallback : IWRdsProtocolListenerCallback) : HRESULT
+    @lpVtbl.value.start_listen.unsafe_as(Proc(IWRdsProtocolListenerCallback, HRESULT)).call(pcallback)
+  end
+  def stop_listen : HRESULT
+    @lpVtbl.value.stop_listen.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWRdsProtocolListenerCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_connected(pconnection : IWRdsProtocolConnection, pwrdsconnectionsettings : WRDS_CONNECTION_SETTINGS*, pcallback : IWRdsProtocolConnectionCallback*) : HRESULT
+    @lpVtbl.value.on_connected.unsafe_as(Proc(IWRdsProtocolConnection, WRDS_CONNECTION_SETTINGS*, IWRdsProtocolConnectionCallback*, HRESULT)).call(pconnection, pwrdsconnectionsettings, pcallback)
+  end
+end
+struct LibWin32::IWRdsProtocolConnection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_logon_error_redirector(pplogonerrorredir : IWRdsProtocolLogonErrorRedirector*) : HRESULT
+    @lpVtbl.value.get_logon_error_redirector.unsafe_as(Proc(IWRdsProtocolLogonErrorRedirector*, HRESULT)).call(pplogonerrorredir)
+  end
+  def accept_connection : HRESULT
+    @lpVtbl.value.accept_connection.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_client_data(pclientdata : WTS_CLIENT_DATA*) : HRESULT
+    @lpVtbl.value.get_client_data.unsafe_as(Proc(WTS_CLIENT_DATA*, HRESULT)).call(pclientdata)
+  end
+  def get_client_monitor_data(pnummonitors : UInt32*, pprimarymonitor : UInt32*) : HRESULT
+    @lpVtbl.value.get_client_monitor_data.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pnummonitors, pprimarymonitor)
+  end
+  def get_user_credentials(pusercreds : WTS_USER_CREDENTIAL*) : HRESULT
+    @lpVtbl.value.get_user_credentials.unsafe_as(Proc(WTS_USER_CREDENTIAL*, HRESULT)).call(pusercreds)
+  end
+  def get_license_connection(pplicenseconnection : IWRdsProtocolLicenseConnection*) : HRESULT
+    @lpVtbl.value.get_license_connection.unsafe_as(Proc(IWRdsProtocolLicenseConnection*, HRESULT)).call(pplicenseconnection)
+  end
+  def authenticate_client_to_session(sessionid : WTS_SESSION_ID*) : HRESULT
+    @lpVtbl.value.authenticate_client_to_session.unsafe_as(Proc(WTS_SESSION_ID*, HRESULT)).call(sessionid)
+  end
+  def notify_session_id(sessionid : WTS_SESSION_ID*, sessionhandle : HANDLE_PTR) : HRESULT
+    @lpVtbl.value.notify_session_id.unsafe_as(Proc(WTS_SESSION_ID*, HANDLE_PTR, HRESULT)).call(sessionid, sessionhandle)
+  end
+  def get_input_handles(pkeyboardhandle : HANDLE_PTR*, pmousehandle : HANDLE_PTR*, pbeephandle : HANDLE_PTR*) : HRESULT
+    @lpVtbl.value.get_input_handles.unsafe_as(Proc(HANDLE_PTR*, HANDLE_PTR*, HANDLE_PTR*, HRESULT)).call(pkeyboardhandle, pmousehandle, pbeephandle)
+  end
+  def get_video_handle(pvideohandle : HANDLE_PTR*) : HRESULT
+    @lpVtbl.value.get_video_handle.unsafe_as(Proc(HANDLE_PTR*, HRESULT)).call(pvideohandle)
+  end
+  def connect_notify(sessionid : UInt32) : HRESULT
+    @lpVtbl.value.connect_notify.unsafe_as(Proc(UInt32, HRESULT)).call(sessionid)
+  end
+  def is_user_allowed_to_logon(sessionid : UInt32, usertoken : HANDLE_PTR, pdomainname : LibC::LPWSTR, pusername : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.is_user_allowed_to_logon.unsafe_as(Proc(UInt32, HANDLE_PTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(sessionid, usertoken, pdomainname, pusername)
+  end
+  def session_arbitration_enumeration(husertoken : HANDLE_PTR, bsinglesessionperuserenabled : LibC::BOOL, psessionidarray : UInt32*, pdwsessionidentifiercount : UInt32*) : HRESULT
+    @lpVtbl.value.session_arbitration_enumeration.unsafe_as(Proc(HANDLE_PTR, LibC::BOOL, UInt32*, UInt32*, HRESULT)).call(husertoken, bsinglesessionperuserenabled, psessionidarray, pdwsessionidentifiercount)
+  end
+  def logon_notify(hclienttoken : HANDLE_PTR, wszusername : LibC::LPWSTR, wszdomainname : LibC::LPWSTR, sessionid : WTS_SESSION_ID*, pwrdsconnectionsettings : WRDS_CONNECTION_SETTINGS*) : HRESULT
+    @lpVtbl.value.logon_notify.unsafe_as(Proc(HANDLE_PTR, LibC::LPWSTR, LibC::LPWSTR, WTS_SESSION_ID*, WRDS_CONNECTION_SETTINGS*, HRESULT)).call(hclienttoken, wszusername, wszdomainname, sessionid, pwrdsconnectionsettings)
+  end
+  def pre_disconnect(disconnectreason : UInt32) : HRESULT
+    @lpVtbl.value.pre_disconnect.unsafe_as(Proc(UInt32, HRESULT)).call(disconnectreason)
+  end
+  def disconnect_notify : HRESULT
+    @lpVtbl.value.disconnect_notify.unsafe_as(Proc(HRESULT)).call
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_protocol_status(pprotocolstatus : WTS_PROTOCOL_STATUS*) : HRESULT
+    @lpVtbl.value.get_protocol_status.unsafe_as(Proc(WTS_PROTOCOL_STATUS*, HRESULT)).call(pprotocolstatus)
+  end
+  def get_last_input_time(plastinputtime : UInt64*) : HRESULT
+    @lpVtbl.value.get_last_input_time.unsafe_as(Proc(UInt64*, HRESULT)).call(plastinputtime)
+  end
+  def set_error_info(ulerror : UInt32) : HRESULT
+    @lpVtbl.value.set_error_info.unsafe_as(Proc(UInt32, HRESULT)).call(ulerror)
+  end
+  def create_virtual_channel(szendpointname : PSTR, bstatic : LibC::BOOL, requestedpriority : UInt32, phchannel : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.create_virtual_channel.unsafe_as(Proc(PSTR, LibC::BOOL, UInt32, LibC::UINT_PTR*, HRESULT)).call(szendpointname, bstatic, requestedpriority, phchannel)
+  end
+  def query_property(querytype : Guid, ulnumentriesin : UInt32, ulnumentriesout : UInt32, ppropertyentriesin : WTS_PROPERTY_VALUE*, ppropertyentriesout : WTS_PROPERTY_VALUE*) : HRESULT
+    @lpVtbl.value.query_property.unsafe_as(Proc(Guid, UInt32, UInt32, WTS_PROPERTY_VALUE*, WTS_PROPERTY_VALUE*, HRESULT)).call(querytype, ulnumentriesin, ulnumentriesout, ppropertyentriesin, ppropertyentriesout)
+  end
+  def get_shadow_connection(ppshadowconnection : IWRdsProtocolShadowConnection*) : HRESULT
+    @lpVtbl.value.get_shadow_connection.unsafe_as(Proc(IWRdsProtocolShadowConnection*, HRESULT)).call(ppshadowconnection)
+  end
+  def notify_command_process_created(sessionid : UInt32) : HRESULT
+    @lpVtbl.value.notify_command_process_created.unsafe_as(Proc(UInt32, HRESULT)).call(sessionid)
+  end
+end
+struct LibWin32::IWRdsProtocolConnectionCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_ready : HRESULT
+    @lpVtbl.value.on_ready.unsafe_as(Proc(HRESULT)).call
+  end
+  def broken_connection(reason : UInt32, source : UInt32) : HRESULT
+    @lpVtbl.value.broken_connection.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(reason, source)
+  end
+  def stop_screen_updates : HRESULT
+    @lpVtbl.value.stop_screen_updates.unsafe_as(Proc(HRESULT)).call
+  end
+  def redraw_window(rect : WTS_SMALL_RECT*) : HRESULT
+    @lpVtbl.value.redraw_window.unsafe_as(Proc(WTS_SMALL_RECT*, HRESULT)).call(rect)
+  end
+  def get_connection_id(pconnectionid : UInt32*) : HRESULT
+    @lpVtbl.value.get_connection_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pconnectionid)
+  end
+end
+struct LibWin32::IWRdsProtocolShadowConnection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def start(ptargetservername : LibC::LPWSTR, targetsessionid : UInt32, hotkeyvk : UInt8, hotkeymodifiers : UInt16, pshadowcallback : IWRdsProtocolShadowCallback) : HRESULT
+    @lpVtbl.value.start.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt8, UInt16, IWRdsProtocolShadowCallback, HRESULT)).call(ptargetservername, targetsessionid, hotkeyvk, hotkeymodifiers, pshadowcallback)
+  end
+  def stop : HRESULT
+    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  end
+  def do_target(pparam1 : UInt8*, param1size : UInt32, pparam2 : UInt8*, param2size : UInt32, pparam3 : UInt8*, param3size : UInt32, pparam4 : UInt8*, param4size : UInt32, pclientname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.do_target.unsafe_as(Proc(UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR, HRESULT)).call(pparam1, param1size, pparam2, param2size, pparam3, param3size, pparam4, param4size, pclientname)
+  end
+end
+struct LibWin32::IWRdsProtocolShadowCallback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def stop_shadow : HRESULT
+    @lpVtbl.value.stop_shadow.unsafe_as(Proc(HRESULT)).call
+  end
+  def invoke_target_shadow(ptargetservername : LibC::LPWSTR, targetsessionid : UInt32, pparam1 : UInt8*, param1size : UInt32, pparam2 : UInt8*, param2size : UInt32, pparam3 : UInt8*, param3size : UInt32, pparam4 : UInt8*, param4size : UInt32, pclientname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.invoke_target_shadow.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, LibC::LPWSTR, HRESULT)).call(ptargetservername, targetsessionid, pparam1, param1size, pparam2, param2size, pparam3, param3size, pparam4, param4size, pclientname)
+  end
+end
+struct LibWin32::IWRdsProtocolLicenseConnection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def request_licensing_capabilities(pplicensecapabilities : WTS_LICENSE_CAPABILITIES*, pcblicensecapabilities : UInt32*) : HRESULT
+    @lpVtbl.value.request_licensing_capabilities.unsafe_as(Proc(WTS_LICENSE_CAPABILITIES*, UInt32*, HRESULT)).call(pplicensecapabilities, pcblicensecapabilities)
+  end
+  def send_client_license(pclientlicense : UInt8*, cbclientlicense : UInt32) : HRESULT
+    @lpVtbl.value.send_client_license.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(pclientlicense, cbclientlicense)
+  end
+  def request_client_license(reserve1 : UInt8*, reserve2 : UInt32, ppclientlicense : UInt8*, pcbclientlicense : UInt32*) : HRESULT
+    @lpVtbl.value.request_client_license.unsafe_as(Proc(UInt8*, UInt32, UInt8*, UInt32*, HRESULT)).call(reserve1, reserve2, ppclientlicense, pcbclientlicense)
+  end
+  def protocol_complete(ulcomplete : UInt32) : HRESULT
+    @lpVtbl.value.protocol_complete.unsafe_as(Proc(UInt32, HRESULT)).call(ulcomplete)
+  end
+end
+struct LibWin32::IWRdsProtocolLogonErrorRedirector
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_begin_painting : HRESULT
+    @lpVtbl.value.on_begin_painting.unsafe_as(Proc(HRESULT)).call
+  end
+  def redirect_status(pszmessage : LibC::LPWSTR, presponse : WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*) : HRESULT
+    @lpVtbl.value.redirect_status.unsafe_as(Proc(LibC::LPWSTR, WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*, HRESULT)).call(pszmessage, presponse)
+  end
+  def redirect_message(pszcaption : LibC::LPWSTR, pszmessage : LibC::LPWSTR, utype : UInt32, presponse : WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*) : HRESULT
+    @lpVtbl.value.redirect_message.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*, HRESULT)).call(pszcaption, pszmessage, utype, presponse)
+  end
+  def redirect_logon_error(ntsstatus : Int32, ntssubstatus : Int32, pszcaption : LibC::LPWSTR, pszmessage : LibC::LPWSTR, utype : UInt32, presponse : WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*) : HRESULT
+    @lpVtbl.value.redirect_logon_error.unsafe_as(Proc(Int32, Int32, LibC::LPWSTR, LibC::LPWSTR, UInt32, WTS_LOGON_ERROR_REDIRECTOR_RESPONSE*, HRESULT)).call(ntsstatus, ntssubstatus, pszcaption, pszmessage, utype, presponse)
+  end
+end
+struct LibWin32::IWRdsWddmIddProps
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_hardware_id(pdisplaydriverhardwareid : Char*, count : UInt32) : HRESULT
+    @lpVtbl.value.get_hardware_id.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pdisplaydriverhardwareid, count)
+  end
+  def on_driver_load(sessionid : UInt32, driverhandle : HANDLE_PTR) : HRESULT
+    @lpVtbl.value.on_driver_load.unsafe_as(Proc(UInt32, HANDLE_PTR, HRESULT)).call(sessionid, driverhandle)
+  end
+  def on_driver_unload(sessionid : UInt32) : HRESULT
+    @lpVtbl.value.on_driver_unload.unsafe_as(Proc(UInt32, HRESULT)).call(sessionid)
+  end
+  def enable_wddm_idd(enabled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_wddm_idd.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(enabled)
+  end
+end
+struct LibWin32::IWRdsProtocolConnectionSettings
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_connection_setting(propertyid : Guid, ppropertyentriesin : WTS_PROPERTY_VALUE*) : HRESULT
+    @lpVtbl.value.set_connection_setting.unsafe_as(Proc(Guid, WTS_PROPERTY_VALUE*, HRESULT)).call(propertyid, ppropertyentriesin)
+  end
+  def get_connection_setting(propertyid : Guid, ppropertyentriesout : WTS_PROPERTY_VALUE*) : HRESULT
+    @lpVtbl.value.get_connection_setting.unsafe_as(Proc(Guid, WTS_PROPERTY_VALUE*, HRESULT)).call(propertyid, ppropertyentriesout)
+  end
+end
+struct LibWin32::IWRdsEnhancedFastReconnectArbitrator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_session_for_enhanced_fast_reconnect(psessionidarray : Int32*, dwsessioncount : UInt32, presultsessionid : Int32*) : HRESULT
+    @lpVtbl.value.get_session_for_enhanced_fast_reconnect.unsafe_as(Proc(Int32*, UInt32, Int32*, HRESULT)).call(psessionidarray, dwsessioncount, presultsessionid)
+  end
+end
+struct LibWin32::IRemoteDesktopClientSettings
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def apply_settings(rdpfilecontents : UInt8*) : HRESULT
+    @lpVtbl.value.apply_settings.unsafe_as(Proc(UInt8*, HRESULT)).call(rdpfilecontents)
+  end
+  def retrieve_settings(rdpfilecontents : UInt8**) : HRESULT
+    @lpVtbl.value.retrieve_settings.unsafe_as(Proc(UInt8**, HRESULT)).call(rdpfilecontents)
+  end
+  def get_rdp_property(propertyname : UInt8*, value : VARIANT*) : HRESULT
+    @lpVtbl.value.get_rdp_property.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(propertyname, value)
+  end
+  def set_rdp_property(propertyname : UInt8*, value : VARIANT) : HRESULT
+    @lpVtbl.value.set_rdp_property.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(propertyname, value)
+  end
+end
+struct LibWin32::IRemoteDesktopClientActions
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def suspend_screen_updates : HRESULT
+    @lpVtbl.value.suspend_screen_updates.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume_screen_updates : HRESULT
+    @lpVtbl.value.resume_screen_updates.unsafe_as(Proc(HRESULT)).call
+  end
+  def execute_remote_action(remoteaction : RemoteActionType) : HRESULT
+    @lpVtbl.value.execute_remote_action.unsafe_as(Proc(RemoteActionType, HRESULT)).call(remoteaction)
+  end
+  def get_snapshot(snapshotencoding : SnapshotEncodingType, snapshotformat : SnapshotFormatType, snapshotwidth : UInt32, snapshotheight : UInt32, snapshotdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_snapshot.unsafe_as(Proc(SnapshotEncodingType, SnapshotFormatType, UInt32, UInt32, UInt8**, HRESULT)).call(snapshotencoding, snapshotformat, snapshotwidth, snapshotheight, snapshotdata)
+  end
+end
+struct LibWin32::IRemoteDesktopClientTouchPointer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def put_enabled(enabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.unsafe_as(Proc(Int16, HRESULT)).call(enabled)
+  end
+  def get_enabled(enabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(enabled)
+  end
+  def put_events_enabled(eventsenabled : Int16) : HRESULT
+    @lpVtbl.value.put_events_enabled.unsafe_as(Proc(Int16, HRESULT)).call(eventsenabled)
+  end
+  def get_events_enabled(eventsenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_events_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(eventsenabled)
+  end
+  def put_pointer_speed(pointerspeed : UInt32) : HRESULT
+    @lpVtbl.value.put_pointer_speed.unsafe_as(Proc(UInt32, HRESULT)).call(pointerspeed)
+  end
+  def get_pointer_speed(pointerspeed : UInt32*) : HRESULT
+    @lpVtbl.value.get_pointer_speed.unsafe_as(Proc(UInt32*, HRESULT)).call(pointerspeed)
+  end
+end
+struct LibWin32::IRemoteDesktopClient
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def connect : HRESULT
+    @lpVtbl.value.connect.unsafe_as(Proc(HRESULT)).call
+  end
+  def disconnect : HRESULT
+    @lpVtbl.value.disconnect.unsafe_as(Proc(HRESULT)).call
+  end
+  def reconnect(width : UInt32, height : UInt32) : HRESULT
+    @lpVtbl.value.reconnect.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(width, height)
+  end
+  def get_settings(settings : IRemoteDesktopClientSettings*) : HRESULT
+    @lpVtbl.value.get_settings.unsafe_as(Proc(IRemoteDesktopClientSettings*, HRESULT)).call(settings)
+  end
+  def get_actions(actions : IRemoteDesktopClientActions*) : HRESULT
+    @lpVtbl.value.get_actions.unsafe_as(Proc(IRemoteDesktopClientActions*, HRESULT)).call(actions)
+  end
+  def get_touch_pointer(touchpointer : IRemoteDesktopClientTouchPointer*) : HRESULT
+    @lpVtbl.value.get_touch_pointer.unsafe_as(Proc(IRemoteDesktopClientTouchPointer*, HRESULT)).call(touchpointer)
+  end
+  def delete_saved_credentials(servername : UInt8*) : HRESULT
+    @lpVtbl.value.delete_saved_credentials.unsafe_as(Proc(UInt8*, HRESULT)).call(servername)
+  end
+  def update_session_display_settings(width : UInt32, height : UInt32) : HRESULT
+    @lpVtbl.value.update_session_display_settings.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(width, height)
+  end
+  def attach_event(eventname : UInt8*, callback : IDispatch) : HRESULT
+    @lpVtbl.value.attach_event.unsafe_as(Proc(UInt8*, IDispatch, HRESULT)).call(eventname, callback)
+  end
+  def detach_event(eventname : UInt8*, callback : IDispatch) : HRESULT
+    @lpVtbl.value.detach_event.unsafe_as(Proc(UInt8*, IDispatch, HRESULT)).call(eventname, callback)
+  end
+end
+struct LibWin32::IRemoteSystemAdditionalInfoProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_additional_info(deduplicationid : HSTRING*, riid : Guid*, mapview : Void**) : HRESULT
+    @lpVtbl.value.get_additional_info.unsafe_as(Proc(HSTRING*, Guid*, Void**, HRESULT)).call(deduplicationid, riid, mapview)
+  end
 end

@@ -710,64 +710,64 @@ lib LibWin32
 
 
   struct IAzAuthorizationStoreVTbl
-    query_interface : Proc(IAzAuthorizationStore*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzAuthorizationStore*, UInt32)
-    release : Proc(IAzAuthorizationStore*, UInt32)
-    get_type_info_count : Proc(IAzAuthorizationStore*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzAuthorizationStore*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzAuthorizationStore*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzAuthorizationStore*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_description : Proc(IAzAuthorizationStore*, UInt8**, HRESULT)
-    put_description : Proc(IAzAuthorizationStore*, UInt8*, HRESULT)
-    get_application_data : Proc(IAzAuthorizationStore*, UInt8**, HRESULT)
-    put_application_data : Proc(IAzAuthorizationStore*, UInt8*, HRESULT)
-    get_domain_timeout : Proc(IAzAuthorizationStore*, Int32*, HRESULT)
-    put_domain_timeout : Proc(IAzAuthorizationStore*, Int32, HRESULT)
-    get_script_engine_timeout : Proc(IAzAuthorizationStore*, Int32*, HRESULT)
-    put_script_engine_timeout : Proc(IAzAuthorizationStore*, Int32, HRESULT)
-    get_max_script_engines : Proc(IAzAuthorizationStore*, Int32*, HRESULT)
-    put_max_script_engines : Proc(IAzAuthorizationStore*, Int32, HRESULT)
-    get_generate_audits : Proc(IAzAuthorizationStore*, LibC::BOOL*, HRESULT)
-    put_generate_audits : Proc(IAzAuthorizationStore*, LibC::BOOL, HRESULT)
-    get_writable : Proc(IAzAuthorizationStore*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzAuthorizationStore*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzAuthorizationStore*, Int32, VARIANT, VARIANT, HRESULT)
-    add_property_item : Proc(IAzAuthorizationStore*, AZ_PROP_CONSTANTS, VARIANT, VARIANT, HRESULT)
-    delete_property_item : Proc(IAzAuthorizationStore*, Int32, VARIANT, VARIANT, HRESULT)
-    get_policy_administrators : Proc(IAzAuthorizationStore*, VARIANT*, HRESULT)
-    get_policy_readers : Proc(IAzAuthorizationStore*, VARIANT*, HRESULT)
-    add_policy_administrator : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, HRESULT)
-    delete_policy_administrator : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, HRESULT)
-    add_policy_reader : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, HRESULT)
-    delete_policy_reader : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, HRESULT)
-    initialize : Proc(IAzAuthorizationStore*, AZ_PROP_CONSTANTS, UInt8*, VARIANT, HRESULT)
-    update_cache : Proc(IAzAuthorizationStore*, VARIANT, HRESULT)
-    delete : Proc(IAzAuthorizationStore*, VARIANT, HRESULT)
-    get_applications : Proc(IAzAuthorizationStore*, IAzApplications*, HRESULT)
-    open_application : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, IAzApplication*, HRESULT)
-    create_application : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, IAzApplication*, HRESULT)
-    delete_application : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, HRESULT)
-    get_application_groups : Proc(IAzAuthorizationStore*, IAzApplicationGroups*, HRESULT)
-    create_application_group : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)
-    open_application_group : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)
-    delete_application_group : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, HRESULT)
-    submit : Proc(IAzAuthorizationStore*, Int32, VARIANT, HRESULT)
-    get_delegated_policy_users : Proc(IAzAuthorizationStore*, VARIANT*, HRESULT)
-    add_delegated_policy_user : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, HRESULT)
-    delete_delegated_policy_user : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, HRESULT)
-    get_target_machine : Proc(IAzAuthorizationStore*, UInt8**, HRESULT)
-    get_apply_store_sacl : Proc(IAzAuthorizationStore*, LibC::BOOL*, HRESULT)
-    put_apply_store_sacl : Proc(IAzAuthorizationStore*, LibC::BOOL, HRESULT)
-    get_policy_administrators_name : Proc(IAzAuthorizationStore*, VARIANT*, HRESULT)
-    get_policy_readers_name : Proc(IAzAuthorizationStore*, VARIANT*, HRESULT)
-    add_policy_administrator_name : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, HRESULT)
-    delete_policy_administrator_name : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, HRESULT)
-    add_policy_reader_name : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, HRESULT)
-    delete_policy_reader_name : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, HRESULT)
-    get_delegated_policy_users_name : Proc(IAzAuthorizationStore*, VARIANT*, HRESULT)
-    add_delegated_policy_user_name : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, HRESULT)
-    delete_delegated_policy_user_name : Proc(IAzAuthorizationStore*, UInt8*, VARIANT, HRESULT)
-    close_application : Proc(IAzAuthorizationStore*, UInt8*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_data : UInt64
+    put_application_data : UInt64
+    get_domain_timeout : UInt64
+    put_domain_timeout : UInt64
+    get_script_engine_timeout : UInt64
+    put_script_engine_timeout : UInt64
+    get_max_script_engines : UInt64
+    put_max_script_engines : UInt64
+    get_generate_audits : UInt64
+    put_generate_audits : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    add_property_item : UInt64
+    delete_property_item : UInt64
+    get_policy_administrators : UInt64
+    get_policy_readers : UInt64
+    add_policy_administrator : UInt64
+    delete_policy_administrator : UInt64
+    add_policy_reader : UInt64
+    delete_policy_reader : UInt64
+    initialize : UInt64
+    update_cache : UInt64
+    delete : UInt64
+    get_applications : UInt64
+    open_application : UInt64
+    create_application : UInt64
+    delete_application : UInt64
+    get_application_groups : UInt64
+    create_application_group : UInt64
+    open_application_group : UInt64
+    delete_application_group : UInt64
+    submit : UInt64
+    get_delegated_policy_users : UInt64
+    add_delegated_policy_user : UInt64
+    delete_delegated_policy_user : UInt64
+    get_target_machine : UInt64
+    get_apply_store_sacl : UInt64
+    put_apply_store_sacl : UInt64
+    get_policy_administrators_name : UInt64
+    get_policy_readers_name : UInt64
+    add_policy_administrator_name : UInt64
+    delete_policy_administrator_name : UInt64
+    add_policy_reader_name : UInt64
+    delete_policy_reader_name : UInt64
+    get_delegated_policy_users_name : UInt64
+    add_delegated_policy_user_name : UInt64
+    delete_delegated_policy_user_name : UInt64
+    close_application : UInt64
   end
 
   IAzAuthorizationStore_GUID = "edbd9ca9-9b82-4f6a-9e8b-98301e450f14"
@@ -777,66 +777,66 @@ lib LibWin32
   end
 
   struct IAzAuthorizationStore2VTbl
-    query_interface : Proc(IAzAuthorizationStore2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzAuthorizationStore2*, UInt32)
-    release : Proc(IAzAuthorizationStore2*, UInt32)
-    get_type_info_count : Proc(IAzAuthorizationStore2*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzAuthorizationStore2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzAuthorizationStore2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzAuthorizationStore2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_description : Proc(IAzAuthorizationStore2*, UInt8**, HRESULT)
-    put_description : Proc(IAzAuthorizationStore2*, UInt8*, HRESULT)
-    get_application_data : Proc(IAzAuthorizationStore2*, UInt8**, HRESULT)
-    put_application_data : Proc(IAzAuthorizationStore2*, UInt8*, HRESULT)
-    get_domain_timeout : Proc(IAzAuthorizationStore2*, Int32*, HRESULT)
-    put_domain_timeout : Proc(IAzAuthorizationStore2*, Int32, HRESULT)
-    get_script_engine_timeout : Proc(IAzAuthorizationStore2*, Int32*, HRESULT)
-    put_script_engine_timeout : Proc(IAzAuthorizationStore2*, Int32, HRESULT)
-    get_max_script_engines : Proc(IAzAuthorizationStore2*, Int32*, HRESULT)
-    put_max_script_engines : Proc(IAzAuthorizationStore2*, Int32, HRESULT)
-    get_generate_audits : Proc(IAzAuthorizationStore2*, LibC::BOOL*, HRESULT)
-    put_generate_audits : Proc(IAzAuthorizationStore2*, LibC::BOOL, HRESULT)
-    get_writable : Proc(IAzAuthorizationStore2*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzAuthorizationStore2*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzAuthorizationStore2*, Int32, VARIANT, VARIANT, HRESULT)
-    add_property_item : Proc(IAzAuthorizationStore2*, AZ_PROP_CONSTANTS, VARIANT, VARIANT, HRESULT)
-    delete_property_item : Proc(IAzAuthorizationStore2*, Int32, VARIANT, VARIANT, HRESULT)
-    get_policy_administrators : Proc(IAzAuthorizationStore2*, VARIANT*, HRESULT)
-    get_policy_readers : Proc(IAzAuthorizationStore2*, VARIANT*, HRESULT)
-    add_policy_administrator : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, HRESULT)
-    delete_policy_administrator : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, HRESULT)
-    add_policy_reader : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, HRESULT)
-    delete_policy_reader : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, HRESULT)
-    initialize : Proc(IAzAuthorizationStore2*, AZ_PROP_CONSTANTS, UInt8*, VARIANT, HRESULT)
-    update_cache : Proc(IAzAuthorizationStore2*, VARIANT, HRESULT)
-    delete : Proc(IAzAuthorizationStore2*, VARIANT, HRESULT)
-    get_applications : Proc(IAzAuthorizationStore2*, IAzApplications*, HRESULT)
-    open_application : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, IAzApplication*, HRESULT)
-    create_application : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, IAzApplication*, HRESULT)
-    delete_application : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, HRESULT)
-    get_application_groups : Proc(IAzAuthorizationStore2*, IAzApplicationGroups*, HRESULT)
-    create_application_group : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)
-    open_application_group : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)
-    delete_application_group : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, HRESULT)
-    submit : Proc(IAzAuthorizationStore2*, Int32, VARIANT, HRESULT)
-    get_delegated_policy_users : Proc(IAzAuthorizationStore2*, VARIANT*, HRESULT)
-    add_delegated_policy_user : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, HRESULT)
-    delete_delegated_policy_user : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, HRESULT)
-    get_target_machine : Proc(IAzAuthorizationStore2*, UInt8**, HRESULT)
-    get_apply_store_sacl : Proc(IAzAuthorizationStore2*, LibC::BOOL*, HRESULT)
-    put_apply_store_sacl : Proc(IAzAuthorizationStore2*, LibC::BOOL, HRESULT)
-    get_policy_administrators_name : Proc(IAzAuthorizationStore2*, VARIANT*, HRESULT)
-    get_policy_readers_name : Proc(IAzAuthorizationStore2*, VARIANT*, HRESULT)
-    add_policy_administrator_name : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, HRESULT)
-    delete_policy_administrator_name : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, HRESULT)
-    add_policy_reader_name : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, HRESULT)
-    delete_policy_reader_name : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, HRESULT)
-    get_delegated_policy_users_name : Proc(IAzAuthorizationStore2*, VARIANT*, HRESULT)
-    add_delegated_policy_user_name : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, HRESULT)
-    delete_delegated_policy_user_name : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, HRESULT)
-    close_application : Proc(IAzAuthorizationStore2*, UInt8*, Int32, HRESULT)
-    open_application2 : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, IAzApplication2*, HRESULT)
-    create_application2 : Proc(IAzAuthorizationStore2*, UInt8*, VARIANT, IAzApplication2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_data : UInt64
+    put_application_data : UInt64
+    get_domain_timeout : UInt64
+    put_domain_timeout : UInt64
+    get_script_engine_timeout : UInt64
+    put_script_engine_timeout : UInt64
+    get_max_script_engines : UInt64
+    put_max_script_engines : UInt64
+    get_generate_audits : UInt64
+    put_generate_audits : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    add_property_item : UInt64
+    delete_property_item : UInt64
+    get_policy_administrators : UInt64
+    get_policy_readers : UInt64
+    add_policy_administrator : UInt64
+    delete_policy_administrator : UInt64
+    add_policy_reader : UInt64
+    delete_policy_reader : UInt64
+    initialize : UInt64
+    update_cache : UInt64
+    delete : UInt64
+    get_applications : UInt64
+    open_application : UInt64
+    create_application : UInt64
+    delete_application : UInt64
+    get_application_groups : UInt64
+    create_application_group : UInt64
+    open_application_group : UInt64
+    delete_application_group : UInt64
+    submit : UInt64
+    get_delegated_policy_users : UInt64
+    add_delegated_policy_user : UInt64
+    delete_delegated_policy_user : UInt64
+    get_target_machine : UInt64
+    get_apply_store_sacl : UInt64
+    put_apply_store_sacl : UInt64
+    get_policy_administrators_name : UInt64
+    get_policy_readers_name : UInt64
+    add_policy_administrator_name : UInt64
+    delete_policy_administrator_name : UInt64
+    add_policy_reader_name : UInt64
+    delete_policy_reader_name : UInt64
+    get_delegated_policy_users_name : UInt64
+    add_delegated_policy_user_name : UInt64
+    delete_delegated_policy_user_name : UInt64
+    close_application : UInt64
+    open_application2 : UInt64
+    create_application2 : UInt64
   end
 
   IAzAuthorizationStore2_GUID = "b11e5584-d577-4273-b6c5-0973e0f8e80d"
@@ -846,71 +846,71 @@ lib LibWin32
   end
 
   struct IAzAuthorizationStore3VTbl
-    query_interface : Proc(IAzAuthorizationStore3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzAuthorizationStore3*, UInt32)
-    release : Proc(IAzAuthorizationStore3*, UInt32)
-    get_type_info_count : Proc(IAzAuthorizationStore3*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzAuthorizationStore3*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzAuthorizationStore3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzAuthorizationStore3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_description : Proc(IAzAuthorizationStore3*, UInt8**, HRESULT)
-    put_description : Proc(IAzAuthorizationStore3*, UInt8*, HRESULT)
-    get_application_data : Proc(IAzAuthorizationStore3*, UInt8**, HRESULT)
-    put_application_data : Proc(IAzAuthorizationStore3*, UInt8*, HRESULT)
-    get_domain_timeout : Proc(IAzAuthorizationStore3*, Int32*, HRESULT)
-    put_domain_timeout : Proc(IAzAuthorizationStore3*, Int32, HRESULT)
-    get_script_engine_timeout : Proc(IAzAuthorizationStore3*, Int32*, HRESULT)
-    put_script_engine_timeout : Proc(IAzAuthorizationStore3*, Int32, HRESULT)
-    get_max_script_engines : Proc(IAzAuthorizationStore3*, Int32*, HRESULT)
-    put_max_script_engines : Proc(IAzAuthorizationStore3*, Int32, HRESULT)
-    get_generate_audits : Proc(IAzAuthorizationStore3*, LibC::BOOL*, HRESULT)
-    put_generate_audits : Proc(IAzAuthorizationStore3*, LibC::BOOL, HRESULT)
-    get_writable : Proc(IAzAuthorizationStore3*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzAuthorizationStore3*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzAuthorizationStore3*, Int32, VARIANT, VARIANT, HRESULT)
-    add_property_item : Proc(IAzAuthorizationStore3*, AZ_PROP_CONSTANTS, VARIANT, VARIANT, HRESULT)
-    delete_property_item : Proc(IAzAuthorizationStore3*, Int32, VARIANT, VARIANT, HRESULT)
-    get_policy_administrators : Proc(IAzAuthorizationStore3*, VARIANT*, HRESULT)
-    get_policy_readers : Proc(IAzAuthorizationStore3*, VARIANT*, HRESULT)
-    add_policy_administrator : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, HRESULT)
-    delete_policy_administrator : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, HRESULT)
-    add_policy_reader : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, HRESULT)
-    delete_policy_reader : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, HRESULT)
-    initialize : Proc(IAzAuthorizationStore3*, AZ_PROP_CONSTANTS, UInt8*, VARIANT, HRESULT)
-    update_cache : Proc(IAzAuthorizationStore3*, VARIANT, HRESULT)
-    delete : Proc(IAzAuthorizationStore3*, VARIANT, HRESULT)
-    get_applications : Proc(IAzAuthorizationStore3*, IAzApplications*, HRESULT)
-    open_application : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, IAzApplication*, HRESULT)
-    create_application : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, IAzApplication*, HRESULT)
-    delete_application : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, HRESULT)
-    get_application_groups : Proc(IAzAuthorizationStore3*, IAzApplicationGroups*, HRESULT)
-    create_application_group : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)
-    open_application_group : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)
-    delete_application_group : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, HRESULT)
-    submit : Proc(IAzAuthorizationStore3*, Int32, VARIANT, HRESULT)
-    get_delegated_policy_users : Proc(IAzAuthorizationStore3*, VARIANT*, HRESULT)
-    add_delegated_policy_user : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, HRESULT)
-    delete_delegated_policy_user : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, HRESULT)
-    get_target_machine : Proc(IAzAuthorizationStore3*, UInt8**, HRESULT)
-    get_apply_store_sacl : Proc(IAzAuthorizationStore3*, LibC::BOOL*, HRESULT)
-    put_apply_store_sacl : Proc(IAzAuthorizationStore3*, LibC::BOOL, HRESULT)
-    get_policy_administrators_name : Proc(IAzAuthorizationStore3*, VARIANT*, HRESULT)
-    get_policy_readers_name : Proc(IAzAuthorizationStore3*, VARIANT*, HRESULT)
-    add_policy_administrator_name : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, HRESULT)
-    delete_policy_administrator_name : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, HRESULT)
-    add_policy_reader_name : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, HRESULT)
-    delete_policy_reader_name : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, HRESULT)
-    get_delegated_policy_users_name : Proc(IAzAuthorizationStore3*, VARIANT*, HRESULT)
-    add_delegated_policy_user_name : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, HRESULT)
-    delete_delegated_policy_user_name : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, HRESULT)
-    close_application : Proc(IAzAuthorizationStore3*, UInt8*, Int32, HRESULT)
-    open_application2 : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, IAzApplication2*, HRESULT)
-    create_application2 : Proc(IAzAuthorizationStore3*, UInt8*, VARIANT, IAzApplication2*, HRESULT)
-    is_update_needed : Proc(IAzAuthorizationStore3*, Int16*, HRESULT)
-    bizrule_group_supported : Proc(IAzAuthorizationStore3*, Int16*, HRESULT)
-    upgrade_stores_functional_level : Proc(IAzAuthorizationStore3*, Int32, HRESULT)
-    is_functional_level_upgrade_supported : Proc(IAzAuthorizationStore3*, Int32, Int16*, HRESULT)
-    get_schema_version : Proc(IAzAuthorizationStore3*, Int32*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_data : UInt64
+    put_application_data : UInt64
+    get_domain_timeout : UInt64
+    put_domain_timeout : UInt64
+    get_script_engine_timeout : UInt64
+    put_script_engine_timeout : UInt64
+    get_max_script_engines : UInt64
+    put_max_script_engines : UInt64
+    get_generate_audits : UInt64
+    put_generate_audits : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    add_property_item : UInt64
+    delete_property_item : UInt64
+    get_policy_administrators : UInt64
+    get_policy_readers : UInt64
+    add_policy_administrator : UInt64
+    delete_policy_administrator : UInt64
+    add_policy_reader : UInt64
+    delete_policy_reader : UInt64
+    initialize : UInt64
+    update_cache : UInt64
+    delete : UInt64
+    get_applications : UInt64
+    open_application : UInt64
+    create_application : UInt64
+    delete_application : UInt64
+    get_application_groups : UInt64
+    create_application_group : UInt64
+    open_application_group : UInt64
+    delete_application_group : UInt64
+    submit : UInt64
+    get_delegated_policy_users : UInt64
+    add_delegated_policy_user : UInt64
+    delete_delegated_policy_user : UInt64
+    get_target_machine : UInt64
+    get_apply_store_sacl : UInt64
+    put_apply_store_sacl : UInt64
+    get_policy_administrators_name : UInt64
+    get_policy_readers_name : UInt64
+    add_policy_administrator_name : UInt64
+    delete_policy_administrator_name : UInt64
+    add_policy_reader_name : UInt64
+    delete_policy_reader_name : UInt64
+    get_delegated_policy_users_name : UInt64
+    add_delegated_policy_user_name : UInt64
+    delete_delegated_policy_user_name : UInt64
+    close_application : UInt64
+    open_application2 : UInt64
+    create_application2 : UInt64
+    is_update_needed : UInt64
+    bizrule_group_supported : UInt64
+    upgrade_stores_functional_level : UInt64
+    is_functional_level_upgrade_supported : UInt64
+    get_schema_version : UInt64
   end
 
   IAzAuthorizationStore3_GUID = "abc08425-0c86-4fa0-9be3-7189956c926e"
@@ -920,74 +920,74 @@ lib LibWin32
   end
 
   struct IAzApplicationVTbl
-    query_interface : Proc(IAzApplication*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzApplication*, UInt32)
-    release : Proc(IAzApplication*, UInt32)
-    get_type_info_count : Proc(IAzApplication*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzApplication*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzApplication*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzApplication*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IAzApplication*, UInt8**, HRESULT)
-    put_name : Proc(IAzApplication*, UInt8*, HRESULT)
-    get_description : Proc(IAzApplication*, UInt8**, HRESULT)
-    put_description : Proc(IAzApplication*, UInt8*, HRESULT)
-    get_application_data : Proc(IAzApplication*, UInt8**, HRESULT)
-    put_application_data : Proc(IAzApplication*, UInt8*, HRESULT)
-    get_authz_interface_clsid : Proc(IAzApplication*, UInt8**, HRESULT)
-    put_authz_interface_clsid : Proc(IAzApplication*, UInt8*, HRESULT)
-    get_version : Proc(IAzApplication*, UInt8**, HRESULT)
-    put_version : Proc(IAzApplication*, UInt8*, HRESULT)
-    get_generate_audits : Proc(IAzApplication*, LibC::BOOL*, HRESULT)
-    put_generate_audits : Proc(IAzApplication*, LibC::BOOL, HRESULT)
-    get_apply_store_sacl : Proc(IAzApplication*, LibC::BOOL*, HRESULT)
-    put_apply_store_sacl : Proc(IAzApplication*, LibC::BOOL, HRESULT)
-    get_writable : Proc(IAzApplication*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzApplication*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzApplication*, Int32, VARIANT, VARIANT, HRESULT)
-    get_policy_administrators : Proc(IAzApplication*, VARIANT*, HRESULT)
-    get_policy_readers : Proc(IAzApplication*, VARIANT*, HRESULT)
-    add_policy_administrator : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
-    delete_policy_administrator : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
-    add_policy_reader : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
-    delete_policy_reader : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
-    get_scopes : Proc(IAzApplication*, IAzScopes*, HRESULT)
-    open_scope : Proc(IAzApplication*, UInt8*, VARIANT, IAzScope*, HRESULT)
-    create_scope : Proc(IAzApplication*, UInt8*, VARIANT, IAzScope*, HRESULT)
-    delete_scope : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
-    get_operations : Proc(IAzApplication*, IAzOperations*, HRESULT)
-    open_operation : Proc(IAzApplication*, UInt8*, VARIANT, IAzOperation*, HRESULT)
-    create_operation : Proc(IAzApplication*, UInt8*, VARIANT, IAzOperation*, HRESULT)
-    delete_operation : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
-    get_tasks : Proc(IAzApplication*, IAzTasks*, HRESULT)
-    open_task : Proc(IAzApplication*, UInt8*, VARIANT, IAzTask*, HRESULT)
-    create_task : Proc(IAzApplication*, UInt8*, VARIANT, IAzTask*, HRESULT)
-    delete_task : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
-    get_application_groups : Proc(IAzApplication*, IAzApplicationGroups*, HRESULT)
-    open_application_group : Proc(IAzApplication*, UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)
-    create_application_group : Proc(IAzApplication*, UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)
-    delete_application_group : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
-    get_roles : Proc(IAzApplication*, IAzRoles*, HRESULT)
-    open_role : Proc(IAzApplication*, UInt8*, VARIANT, IAzRole*, HRESULT)
-    create_role : Proc(IAzApplication*, UInt8*, VARIANT, IAzRole*, HRESULT)
-    delete_role : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
-    initialize_client_context_from_token : Proc(IAzApplication*, UInt64, VARIANT, IAzClientContext*, HRESULT)
-    add_property_item : Proc(IAzApplication*, Int32, VARIANT, VARIANT, HRESULT)
-    delete_property_item : Proc(IAzApplication*, Int32, VARIANT, VARIANT, HRESULT)
-    submit : Proc(IAzApplication*, Int32, VARIANT, HRESULT)
-    initialize_client_context_from_name : Proc(IAzApplication*, UInt8*, UInt8*, VARIANT, IAzClientContext*, HRESULT)
-    get_delegated_policy_users : Proc(IAzApplication*, VARIANT*, HRESULT)
-    add_delegated_policy_user : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
-    delete_delegated_policy_user : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
-    initialize_client_context_from_string_sid : Proc(IAzApplication*, UInt8*, Int32, VARIANT, IAzClientContext*, HRESULT)
-    get_policy_administrators_name : Proc(IAzApplication*, VARIANT*, HRESULT)
-    get_policy_readers_name : Proc(IAzApplication*, VARIANT*, HRESULT)
-    add_policy_administrator_name : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
-    delete_policy_administrator_name : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
-    add_policy_reader_name : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
-    delete_policy_reader_name : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
-    get_delegated_policy_users_name : Proc(IAzApplication*, VARIANT*, HRESULT)
-    add_delegated_policy_user_name : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
-    delete_delegated_policy_user_name : Proc(IAzApplication*, UInt8*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_data : UInt64
+    put_application_data : UInt64
+    get_authz_interface_clsid : UInt64
+    put_authz_interface_clsid : UInt64
+    get_version : UInt64
+    put_version : UInt64
+    get_generate_audits : UInt64
+    put_generate_audits : UInt64
+    get_apply_store_sacl : UInt64
+    put_apply_store_sacl : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    get_policy_administrators : UInt64
+    get_policy_readers : UInt64
+    add_policy_administrator : UInt64
+    delete_policy_administrator : UInt64
+    add_policy_reader : UInt64
+    delete_policy_reader : UInt64
+    get_scopes : UInt64
+    open_scope : UInt64
+    create_scope : UInt64
+    delete_scope : UInt64
+    get_operations : UInt64
+    open_operation : UInt64
+    create_operation : UInt64
+    delete_operation : UInt64
+    get_tasks : UInt64
+    open_task : UInt64
+    create_task : UInt64
+    delete_task : UInt64
+    get_application_groups : UInt64
+    open_application_group : UInt64
+    create_application_group : UInt64
+    delete_application_group : UInt64
+    get_roles : UInt64
+    open_role : UInt64
+    create_role : UInt64
+    delete_role : UInt64
+    initialize_client_context_from_token : UInt64
+    add_property_item : UInt64
+    delete_property_item : UInt64
+    submit : UInt64
+    initialize_client_context_from_name : UInt64
+    get_delegated_policy_users : UInt64
+    add_delegated_policy_user : UInt64
+    delete_delegated_policy_user : UInt64
+    initialize_client_context_from_string_sid : UInt64
+    get_policy_administrators_name : UInt64
+    get_policy_readers_name : UInt64
+    add_policy_administrator_name : UInt64
+    delete_policy_administrator_name : UInt64
+    add_policy_reader_name : UInt64
+    delete_policy_reader_name : UInt64
+    get_delegated_policy_users_name : UInt64
+    add_delegated_policy_user_name : UInt64
+    delete_delegated_policy_user_name : UInt64
   end
 
   IAzApplication_GUID = "987bc7c7-b813-4d27-bede-6ba5ae867e95"
@@ -997,76 +997,76 @@ lib LibWin32
   end
 
   struct IAzApplication2VTbl
-    query_interface : Proc(IAzApplication2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzApplication2*, UInt32)
-    release : Proc(IAzApplication2*, UInt32)
-    get_type_info_count : Proc(IAzApplication2*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzApplication2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzApplication2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzApplication2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IAzApplication2*, UInt8**, HRESULT)
-    put_name : Proc(IAzApplication2*, UInt8*, HRESULT)
-    get_description : Proc(IAzApplication2*, UInt8**, HRESULT)
-    put_description : Proc(IAzApplication2*, UInt8*, HRESULT)
-    get_application_data : Proc(IAzApplication2*, UInt8**, HRESULT)
-    put_application_data : Proc(IAzApplication2*, UInt8*, HRESULT)
-    get_authz_interface_clsid : Proc(IAzApplication2*, UInt8**, HRESULT)
-    put_authz_interface_clsid : Proc(IAzApplication2*, UInt8*, HRESULT)
-    get_version : Proc(IAzApplication2*, UInt8**, HRESULT)
-    put_version : Proc(IAzApplication2*, UInt8*, HRESULT)
-    get_generate_audits : Proc(IAzApplication2*, LibC::BOOL*, HRESULT)
-    put_generate_audits : Proc(IAzApplication2*, LibC::BOOL, HRESULT)
-    get_apply_store_sacl : Proc(IAzApplication2*, LibC::BOOL*, HRESULT)
-    put_apply_store_sacl : Proc(IAzApplication2*, LibC::BOOL, HRESULT)
-    get_writable : Proc(IAzApplication2*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzApplication2*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzApplication2*, Int32, VARIANT, VARIANT, HRESULT)
-    get_policy_administrators : Proc(IAzApplication2*, VARIANT*, HRESULT)
-    get_policy_readers : Proc(IAzApplication2*, VARIANT*, HRESULT)
-    add_policy_administrator : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    delete_policy_administrator : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    add_policy_reader : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    delete_policy_reader : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    get_scopes : Proc(IAzApplication2*, IAzScopes*, HRESULT)
-    open_scope : Proc(IAzApplication2*, UInt8*, VARIANT, IAzScope*, HRESULT)
-    create_scope : Proc(IAzApplication2*, UInt8*, VARIANT, IAzScope*, HRESULT)
-    delete_scope : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    get_operations : Proc(IAzApplication2*, IAzOperations*, HRESULT)
-    open_operation : Proc(IAzApplication2*, UInt8*, VARIANT, IAzOperation*, HRESULT)
-    create_operation : Proc(IAzApplication2*, UInt8*, VARIANT, IAzOperation*, HRESULT)
-    delete_operation : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    get_tasks : Proc(IAzApplication2*, IAzTasks*, HRESULT)
-    open_task : Proc(IAzApplication2*, UInt8*, VARIANT, IAzTask*, HRESULT)
-    create_task : Proc(IAzApplication2*, UInt8*, VARIANT, IAzTask*, HRESULT)
-    delete_task : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    get_application_groups : Proc(IAzApplication2*, IAzApplicationGroups*, HRESULT)
-    open_application_group : Proc(IAzApplication2*, UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)
-    create_application_group : Proc(IAzApplication2*, UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)
-    delete_application_group : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    get_roles : Proc(IAzApplication2*, IAzRoles*, HRESULT)
-    open_role : Proc(IAzApplication2*, UInt8*, VARIANT, IAzRole*, HRESULT)
-    create_role : Proc(IAzApplication2*, UInt8*, VARIANT, IAzRole*, HRESULT)
-    delete_role : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    initialize_client_context_from_token : Proc(IAzApplication2*, UInt64, VARIANT, IAzClientContext*, HRESULT)
-    add_property_item : Proc(IAzApplication2*, Int32, VARIANT, VARIANT, HRESULT)
-    delete_property_item : Proc(IAzApplication2*, Int32, VARIANT, VARIANT, HRESULT)
-    submit : Proc(IAzApplication2*, Int32, VARIANT, HRESULT)
-    initialize_client_context_from_name : Proc(IAzApplication2*, UInt8*, UInt8*, VARIANT, IAzClientContext*, HRESULT)
-    get_delegated_policy_users : Proc(IAzApplication2*, VARIANT*, HRESULT)
-    add_delegated_policy_user : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    delete_delegated_policy_user : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    initialize_client_context_from_string_sid : Proc(IAzApplication2*, UInt8*, Int32, VARIANT, IAzClientContext*, HRESULT)
-    get_policy_administrators_name : Proc(IAzApplication2*, VARIANT*, HRESULT)
-    get_policy_readers_name : Proc(IAzApplication2*, VARIANT*, HRESULT)
-    add_policy_administrator_name : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    delete_policy_administrator_name : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    add_policy_reader_name : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    delete_policy_reader_name : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    get_delegated_policy_users_name : Proc(IAzApplication2*, VARIANT*, HRESULT)
-    add_delegated_policy_user_name : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    delete_delegated_policy_user_name : Proc(IAzApplication2*, UInt8*, VARIANT, HRESULT)
-    initialize_client_context_from_token2 : Proc(IAzApplication2*, UInt32, UInt32, VARIANT, IAzClientContext2*, HRESULT)
-    initialize_client_context2 : Proc(IAzApplication2*, UInt8*, VARIANT, IAzClientContext2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_data : UInt64
+    put_application_data : UInt64
+    get_authz_interface_clsid : UInt64
+    put_authz_interface_clsid : UInt64
+    get_version : UInt64
+    put_version : UInt64
+    get_generate_audits : UInt64
+    put_generate_audits : UInt64
+    get_apply_store_sacl : UInt64
+    put_apply_store_sacl : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    get_policy_administrators : UInt64
+    get_policy_readers : UInt64
+    add_policy_administrator : UInt64
+    delete_policy_administrator : UInt64
+    add_policy_reader : UInt64
+    delete_policy_reader : UInt64
+    get_scopes : UInt64
+    open_scope : UInt64
+    create_scope : UInt64
+    delete_scope : UInt64
+    get_operations : UInt64
+    open_operation : UInt64
+    create_operation : UInt64
+    delete_operation : UInt64
+    get_tasks : UInt64
+    open_task : UInt64
+    create_task : UInt64
+    delete_task : UInt64
+    get_application_groups : UInt64
+    open_application_group : UInt64
+    create_application_group : UInt64
+    delete_application_group : UInt64
+    get_roles : UInt64
+    open_role : UInt64
+    create_role : UInt64
+    delete_role : UInt64
+    initialize_client_context_from_token : UInt64
+    add_property_item : UInt64
+    delete_property_item : UInt64
+    submit : UInt64
+    initialize_client_context_from_name : UInt64
+    get_delegated_policy_users : UInt64
+    add_delegated_policy_user : UInt64
+    delete_delegated_policy_user : UInt64
+    initialize_client_context_from_string_sid : UInt64
+    get_policy_administrators_name : UInt64
+    get_policy_readers_name : UInt64
+    add_policy_administrator_name : UInt64
+    delete_policy_administrator_name : UInt64
+    add_policy_reader_name : UInt64
+    delete_policy_reader_name : UInt64
+    get_delegated_policy_users_name : UInt64
+    add_delegated_policy_user_name : UInt64
+    delete_delegated_policy_user_name : UInt64
+    initialize_client_context_from_token2 : UInt64
+    initialize_client_context2 : UInt64
   end
 
   IAzApplication2_GUID = "086a68af-a249-437c-b18d-d4d86d6a9660"
@@ -1076,16 +1076,16 @@ lib LibWin32
   end
 
   struct IAzApplicationsVTbl
-    query_interface : Proc(IAzApplications*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzApplications*, UInt32)
-    release : Proc(IAzApplications*, UInt32)
-    get_type_info_count : Proc(IAzApplications*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzApplications*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzApplications*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzApplications*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_item : Proc(IAzApplications*, Int32, VARIANT*, HRESULT)
-    get_count : Proc(IAzApplications*, Int32*, HRESULT)
-    get__new_enum : Proc(IAzApplications*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_item : UInt64
+    get_count : UInt64
+    get__new_enum : UInt64
   end
 
   IAzApplications_GUID = "929b11a9-95c5-4a84-a29a-20ad42c2f16c"
@@ -1095,25 +1095,25 @@ lib LibWin32
   end
 
   struct IAzOperationVTbl
-    query_interface : Proc(IAzOperation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzOperation*, UInt32)
-    release : Proc(IAzOperation*, UInt32)
-    get_type_info_count : Proc(IAzOperation*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzOperation*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzOperation*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzOperation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IAzOperation*, UInt8**, HRESULT)
-    put_name : Proc(IAzOperation*, UInt8*, HRESULT)
-    get_description : Proc(IAzOperation*, UInt8**, HRESULT)
-    put_description : Proc(IAzOperation*, UInt8*, HRESULT)
-    get_application_data : Proc(IAzOperation*, UInt8**, HRESULT)
-    put_application_data : Proc(IAzOperation*, UInt8*, HRESULT)
-    get_operation_id : Proc(IAzOperation*, Int32*, HRESULT)
-    put_operation_id : Proc(IAzOperation*, Int32, HRESULT)
-    get_writable : Proc(IAzOperation*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzOperation*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzOperation*, Int32, VARIANT, VARIANT, HRESULT)
-    submit : Proc(IAzOperation*, Int32, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_data : UInt64
+    put_application_data : UInt64
+    get_operation_id : UInt64
+    put_operation_id : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    submit : UInt64
   end
 
   IAzOperation_GUID = "5e56b24f-ea01-4d61-be44-c49b5e4eaf74"
@@ -1123,16 +1123,16 @@ lib LibWin32
   end
 
   struct IAzOperationsVTbl
-    query_interface : Proc(IAzOperations*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzOperations*, UInt32)
-    release : Proc(IAzOperations*, UInt32)
-    get_type_info_count : Proc(IAzOperations*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzOperations*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzOperations*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzOperations*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_item : Proc(IAzOperations*, Int32, VARIANT*, HRESULT)
-    get_count : Proc(IAzOperations*, Int32*, HRESULT)
-    get__new_enum : Proc(IAzOperations*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_item : UInt64
+    get_count : UInt64
+    get__new_enum : UInt64
   end
 
   IAzOperations_GUID = "90ef9c07-9706-49d9-af80-0438a5f3ec35"
@@ -1142,39 +1142,39 @@ lib LibWin32
   end
 
   struct IAzTaskVTbl
-    query_interface : Proc(IAzTask*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzTask*, UInt32)
-    release : Proc(IAzTask*, UInt32)
-    get_type_info_count : Proc(IAzTask*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzTask*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzTask*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzTask*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IAzTask*, UInt8**, HRESULT)
-    put_name : Proc(IAzTask*, UInt8*, HRESULT)
-    get_description : Proc(IAzTask*, UInt8**, HRESULT)
-    put_description : Proc(IAzTask*, UInt8*, HRESULT)
-    get_application_data : Proc(IAzTask*, UInt8**, HRESULT)
-    put_application_data : Proc(IAzTask*, UInt8*, HRESULT)
-    get_biz_rule : Proc(IAzTask*, UInt8**, HRESULT)
-    put_biz_rule : Proc(IAzTask*, UInt8*, HRESULT)
-    get_biz_rule_language : Proc(IAzTask*, UInt8**, HRESULT)
-    put_biz_rule_language : Proc(IAzTask*, UInt8*, HRESULT)
-    get_biz_rule_imported_path : Proc(IAzTask*, UInt8**, HRESULT)
-    put_biz_rule_imported_path : Proc(IAzTask*, UInt8*, HRESULT)
-    get_is_role_definition : Proc(IAzTask*, LibC::BOOL*, HRESULT)
-    put_is_role_definition : Proc(IAzTask*, LibC::BOOL, HRESULT)
-    get_operations : Proc(IAzTask*, VARIANT*, HRESULT)
-    get_tasks : Proc(IAzTask*, VARIANT*, HRESULT)
-    add_operation : Proc(IAzTask*, UInt8*, VARIANT, HRESULT)
-    delete_operation : Proc(IAzTask*, UInt8*, VARIANT, HRESULT)
-    add_task : Proc(IAzTask*, UInt8*, VARIANT, HRESULT)
-    delete_task : Proc(IAzTask*, UInt8*, VARIANT, HRESULT)
-    get_writable : Proc(IAzTask*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzTask*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzTask*, Int32, VARIANT, VARIANT, HRESULT)
-    add_property_item : Proc(IAzTask*, Int32, VARIANT, VARIANT, HRESULT)
-    delete_property_item : Proc(IAzTask*, Int32, VARIANT, VARIANT, HRESULT)
-    submit : Proc(IAzTask*, Int32, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_data : UInt64
+    put_application_data : UInt64
+    get_biz_rule : UInt64
+    put_biz_rule : UInt64
+    get_biz_rule_language : UInt64
+    put_biz_rule_language : UInt64
+    get_biz_rule_imported_path : UInt64
+    put_biz_rule_imported_path : UInt64
+    get_is_role_definition : UInt64
+    put_is_role_definition : UInt64
+    get_operations : UInt64
+    get_tasks : UInt64
+    add_operation : UInt64
+    delete_operation : UInt64
+    add_task : UInt64
+    delete_task : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    add_property_item : UInt64
+    delete_property_item : UInt64
+    submit : UInt64
   end
 
   IAzTask_GUID = "cb94e592-2e0e-4a6c-a336-b89a6dc1e388"
@@ -1184,16 +1184,16 @@ lib LibWin32
   end
 
   struct IAzTasksVTbl
-    query_interface : Proc(IAzTasks*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzTasks*, UInt32)
-    release : Proc(IAzTasks*, UInt32)
-    get_type_info_count : Proc(IAzTasks*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzTasks*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzTasks*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzTasks*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_item : Proc(IAzTasks*, Int32, VARIANT*, HRESULT)
-    get_count : Proc(IAzTasks*, Int32*, HRESULT)
-    get__new_enum : Proc(IAzTasks*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_item : UInt64
+    get_count : UInt64
+    get__new_enum : UInt64
   end
 
   IAzTasks_GUID = "b338ccab-4c85-4388-8c0a-c58592bad398"
@@ -1203,51 +1203,51 @@ lib LibWin32
   end
 
   struct IAzScopeVTbl
-    query_interface : Proc(IAzScope*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzScope*, UInt32)
-    release : Proc(IAzScope*, UInt32)
-    get_type_info_count : Proc(IAzScope*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzScope*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzScope*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzScope*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IAzScope*, UInt8**, HRESULT)
-    put_name : Proc(IAzScope*, UInt8*, HRESULT)
-    get_description : Proc(IAzScope*, UInt8**, HRESULT)
-    put_description : Proc(IAzScope*, UInt8*, HRESULT)
-    get_application_data : Proc(IAzScope*, UInt8**, HRESULT)
-    put_application_data : Proc(IAzScope*, UInt8*, HRESULT)
-    get_writable : Proc(IAzScope*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzScope*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzScope*, Int32, VARIANT, VARIANT, HRESULT)
-    add_property_item : Proc(IAzScope*, Int32, VARIANT, VARIANT, HRESULT)
-    delete_property_item : Proc(IAzScope*, Int32, VARIANT, VARIANT, HRESULT)
-    get_policy_administrators : Proc(IAzScope*, VARIANT*, HRESULT)
-    get_policy_readers : Proc(IAzScope*, VARIANT*, HRESULT)
-    add_policy_administrator : Proc(IAzScope*, UInt8*, VARIANT, HRESULT)
-    delete_policy_administrator : Proc(IAzScope*, UInt8*, VARIANT, HRESULT)
-    add_policy_reader : Proc(IAzScope*, UInt8*, VARIANT, HRESULT)
-    delete_policy_reader : Proc(IAzScope*, UInt8*, VARIANT, HRESULT)
-    get_application_groups : Proc(IAzScope*, IAzApplicationGroups*, HRESULT)
-    open_application_group : Proc(IAzScope*, UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)
-    create_application_group : Proc(IAzScope*, UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)
-    delete_application_group : Proc(IAzScope*, UInt8*, VARIANT, HRESULT)
-    get_roles : Proc(IAzScope*, IAzRoles*, HRESULT)
-    open_role : Proc(IAzScope*, UInt8*, VARIANT, IAzRole*, HRESULT)
-    create_role : Proc(IAzScope*, UInt8*, VARIANT, IAzRole*, HRESULT)
-    delete_role : Proc(IAzScope*, UInt8*, VARIANT, HRESULT)
-    get_tasks : Proc(IAzScope*, IAzTasks*, HRESULT)
-    open_task : Proc(IAzScope*, UInt8*, VARIANT, IAzTask*, HRESULT)
-    create_task : Proc(IAzScope*, UInt8*, VARIANT, IAzTask*, HRESULT)
-    delete_task : Proc(IAzScope*, UInt8*, VARIANT, HRESULT)
-    submit : Proc(IAzScope*, Int32, VARIANT, HRESULT)
-    get_can_be_delegated : Proc(IAzScope*, LibC::BOOL*, HRESULT)
-    get_bizrules_writable : Proc(IAzScope*, LibC::BOOL*, HRESULT)
-    get_policy_administrators_name : Proc(IAzScope*, VARIANT*, HRESULT)
-    get_policy_readers_name : Proc(IAzScope*, VARIANT*, HRESULT)
-    add_policy_administrator_name : Proc(IAzScope*, UInt8*, VARIANT, HRESULT)
-    delete_policy_administrator_name : Proc(IAzScope*, UInt8*, VARIANT, HRESULT)
-    add_policy_reader_name : Proc(IAzScope*, UInt8*, VARIANT, HRESULT)
-    delete_policy_reader_name : Proc(IAzScope*, UInt8*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_data : UInt64
+    put_application_data : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    add_property_item : UInt64
+    delete_property_item : UInt64
+    get_policy_administrators : UInt64
+    get_policy_readers : UInt64
+    add_policy_administrator : UInt64
+    delete_policy_administrator : UInt64
+    add_policy_reader : UInt64
+    delete_policy_reader : UInt64
+    get_application_groups : UInt64
+    open_application_group : UInt64
+    create_application_group : UInt64
+    delete_application_group : UInt64
+    get_roles : UInt64
+    open_role : UInt64
+    create_role : UInt64
+    delete_role : UInt64
+    get_tasks : UInt64
+    open_task : UInt64
+    create_task : UInt64
+    delete_task : UInt64
+    submit : UInt64
+    get_can_be_delegated : UInt64
+    get_bizrules_writable : UInt64
+    get_policy_administrators_name : UInt64
+    get_policy_readers_name : UInt64
+    add_policy_administrator_name : UInt64
+    delete_policy_administrator_name : UInt64
+    add_policy_reader_name : UInt64
+    delete_policy_reader_name : UInt64
   end
 
   IAzScope_GUID = "00e52487-e08d-4514-b62e-877d5645f5ab"
@@ -1257,16 +1257,16 @@ lib LibWin32
   end
 
   struct IAzScopesVTbl
-    query_interface : Proc(IAzScopes*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzScopes*, UInt32)
-    release : Proc(IAzScopes*, UInt32)
-    get_type_info_count : Proc(IAzScopes*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzScopes*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzScopes*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzScopes*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_item : Proc(IAzScopes*, Int32, VARIANT*, HRESULT)
-    get_count : Proc(IAzScopes*, Int32*, HRESULT)
-    get__new_enum : Proc(IAzScopes*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_item : UInt64
+    get_count : UInt64
+    get__new_enum : UInt64
   end
 
   IAzScopes_GUID = "78e14853-9f5e-406d-9b91-6bdba6973510"
@@ -1276,45 +1276,45 @@ lib LibWin32
   end
 
   struct IAzApplicationGroupVTbl
-    query_interface : Proc(IAzApplicationGroup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzApplicationGroup*, UInt32)
-    release : Proc(IAzApplicationGroup*, UInt32)
-    get_type_info_count : Proc(IAzApplicationGroup*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzApplicationGroup*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzApplicationGroup*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzApplicationGroup*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IAzApplicationGroup*, UInt8**, HRESULT)
-    put_name : Proc(IAzApplicationGroup*, UInt8*, HRESULT)
-    get_type : Proc(IAzApplicationGroup*, Int32*, HRESULT)
-    put_type : Proc(IAzApplicationGroup*, Int32, HRESULT)
-    get_ldap_query : Proc(IAzApplicationGroup*, UInt8**, HRESULT)
-    put_ldap_query : Proc(IAzApplicationGroup*, UInt8*, HRESULT)
-    get_app_members : Proc(IAzApplicationGroup*, VARIANT*, HRESULT)
-    get_app_non_members : Proc(IAzApplicationGroup*, VARIANT*, HRESULT)
-    get_members : Proc(IAzApplicationGroup*, VARIANT*, HRESULT)
-    get_non_members : Proc(IAzApplicationGroup*, VARIANT*, HRESULT)
-    get_description : Proc(IAzApplicationGroup*, UInt8**, HRESULT)
-    put_description : Proc(IAzApplicationGroup*, UInt8*, HRESULT)
-    add_app_member : Proc(IAzApplicationGroup*, UInt8*, VARIANT, HRESULT)
-    delete_app_member : Proc(IAzApplicationGroup*, UInt8*, VARIANT, HRESULT)
-    add_app_non_member : Proc(IAzApplicationGroup*, UInt8*, VARIANT, HRESULT)
-    delete_app_non_member : Proc(IAzApplicationGroup*, UInt8*, VARIANT, HRESULT)
-    add_member : Proc(IAzApplicationGroup*, UInt8*, VARIANT, HRESULT)
-    delete_member : Proc(IAzApplicationGroup*, UInt8*, VARIANT, HRESULT)
-    add_non_member : Proc(IAzApplicationGroup*, UInt8*, VARIANT, HRESULT)
-    delete_non_member : Proc(IAzApplicationGroup*, UInt8*, VARIANT, HRESULT)
-    get_writable : Proc(IAzApplicationGroup*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzApplicationGroup*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzApplicationGroup*, Int32, VARIANT, VARIANT, HRESULT)
-    add_property_item : Proc(IAzApplicationGroup*, Int32, VARIANT, VARIANT, HRESULT)
-    delete_property_item : Proc(IAzApplicationGroup*, Int32, VARIANT, VARIANT, HRESULT)
-    submit : Proc(IAzApplicationGroup*, Int32, VARIANT, HRESULT)
-    add_member_name : Proc(IAzApplicationGroup*, UInt8*, VARIANT, HRESULT)
-    delete_member_name : Proc(IAzApplicationGroup*, UInt8*, VARIANT, HRESULT)
-    add_non_member_name : Proc(IAzApplicationGroup*, UInt8*, VARIANT, HRESULT)
-    delete_non_member_name : Proc(IAzApplicationGroup*, UInt8*, VARIANT, HRESULT)
-    get_members_name : Proc(IAzApplicationGroup*, VARIANT*, HRESULT)
-    get_non_members_name : Proc(IAzApplicationGroup*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_type : UInt64
+    put_type : UInt64
+    get_ldap_query : UInt64
+    put_ldap_query : UInt64
+    get_app_members : UInt64
+    get_app_non_members : UInt64
+    get_members : UInt64
+    get_non_members : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    add_app_member : UInt64
+    delete_app_member : UInt64
+    add_app_non_member : UInt64
+    delete_app_non_member : UInt64
+    add_member : UInt64
+    delete_member : UInt64
+    add_non_member : UInt64
+    delete_non_member : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    add_property_item : UInt64
+    delete_property_item : UInt64
+    submit : UInt64
+    add_member_name : UInt64
+    delete_member_name : UInt64
+    add_non_member_name : UInt64
+    delete_non_member_name : UInt64
+    get_members_name : UInt64
+    get_non_members_name : UInt64
   end
 
   IAzApplicationGroup_GUID = "f1b744cd-58a6-4e06-9fbf-36f6d779e21e"
@@ -1324,16 +1324,16 @@ lib LibWin32
   end
 
   struct IAzApplicationGroupsVTbl
-    query_interface : Proc(IAzApplicationGroups*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzApplicationGroups*, UInt32)
-    release : Proc(IAzApplicationGroups*, UInt32)
-    get_type_info_count : Proc(IAzApplicationGroups*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzApplicationGroups*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzApplicationGroups*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzApplicationGroups*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_item : Proc(IAzApplicationGroups*, Int32, VARIANT*, HRESULT)
-    get_count : Proc(IAzApplicationGroups*, Int32*, HRESULT)
-    get__new_enum : Proc(IAzApplicationGroups*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_item : UInt64
+    get_count : UInt64
+    get__new_enum : UInt64
   end
 
   IAzApplicationGroups_GUID = "4ce66ad5-9f3c-469d-a911-b99887a7e685"
@@ -1343,40 +1343,40 @@ lib LibWin32
   end
 
   struct IAzRoleVTbl
-    query_interface : Proc(IAzRole*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzRole*, UInt32)
-    release : Proc(IAzRole*, UInt32)
-    get_type_info_count : Proc(IAzRole*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzRole*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzRole*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzRole*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IAzRole*, UInt8**, HRESULT)
-    put_name : Proc(IAzRole*, UInt8*, HRESULT)
-    get_description : Proc(IAzRole*, UInt8**, HRESULT)
-    put_description : Proc(IAzRole*, UInt8*, HRESULT)
-    get_application_data : Proc(IAzRole*, UInt8**, HRESULT)
-    put_application_data : Proc(IAzRole*, UInt8*, HRESULT)
-    add_app_member : Proc(IAzRole*, UInt8*, VARIANT, HRESULT)
-    delete_app_member : Proc(IAzRole*, UInt8*, VARIANT, HRESULT)
-    add_task : Proc(IAzRole*, UInt8*, VARIANT, HRESULT)
-    delete_task : Proc(IAzRole*, UInt8*, VARIANT, HRESULT)
-    add_operation : Proc(IAzRole*, UInt8*, VARIANT, HRESULT)
-    delete_operation : Proc(IAzRole*, UInt8*, VARIANT, HRESULT)
-    add_member : Proc(IAzRole*, UInt8*, VARIANT, HRESULT)
-    delete_member : Proc(IAzRole*, UInt8*, VARIANT, HRESULT)
-    get_writable : Proc(IAzRole*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzRole*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzRole*, Int32, VARIANT, VARIANT, HRESULT)
-    get_app_members : Proc(IAzRole*, VARIANT*, HRESULT)
-    get_members : Proc(IAzRole*, VARIANT*, HRESULT)
-    get_operations : Proc(IAzRole*, VARIANT*, HRESULT)
-    get_tasks : Proc(IAzRole*, VARIANT*, HRESULT)
-    add_property_item : Proc(IAzRole*, Int32, VARIANT, VARIANT, HRESULT)
-    delete_property_item : Proc(IAzRole*, Int32, VARIANT, VARIANT, HRESULT)
-    submit : Proc(IAzRole*, Int32, VARIANT, HRESULT)
-    add_member_name : Proc(IAzRole*, UInt8*, VARIANT, HRESULT)
-    delete_member_name : Proc(IAzRole*, UInt8*, VARIANT, HRESULT)
-    get_members_name : Proc(IAzRole*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_data : UInt64
+    put_application_data : UInt64
+    add_app_member : UInt64
+    delete_app_member : UInt64
+    add_task : UInt64
+    delete_task : UInt64
+    add_operation : UInt64
+    delete_operation : UInt64
+    add_member : UInt64
+    delete_member : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    get_app_members : UInt64
+    get_members : UInt64
+    get_operations : UInt64
+    get_tasks : UInt64
+    add_property_item : UInt64
+    delete_property_item : UInt64
+    submit : UInt64
+    add_member_name : UInt64
+    delete_member_name : UInt64
+    get_members_name : UInt64
   end
 
   IAzRole_GUID = "859e0d8d-62d7-41d8-a034-c0cd5d43fdfa"
@@ -1386,16 +1386,16 @@ lib LibWin32
   end
 
   struct IAzRolesVTbl
-    query_interface : Proc(IAzRoles*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzRoles*, UInt32)
-    release : Proc(IAzRoles*, UInt32)
-    get_type_info_count : Proc(IAzRoles*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzRoles*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzRoles*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzRoles*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_item : Proc(IAzRoles*, Int32, VARIANT*, HRESULT)
-    get_count : Proc(IAzRoles*, Int32*, HRESULT)
-    get__new_enum : Proc(IAzRoles*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_item : UInt64
+    get_count : UInt64
+    get__new_enum : UInt64
   end
 
   IAzRoles_GUID = "95e0f119-13b4-4dae-b65f-2f7d60d822e4"
@@ -1405,26 +1405,26 @@ lib LibWin32
   end
 
   struct IAzClientContextVTbl
-    query_interface : Proc(IAzClientContext*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzClientContext*, UInt32)
-    release : Proc(IAzClientContext*, UInt32)
-    get_type_info_count : Proc(IAzClientContext*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzClientContext*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzClientContext*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzClientContext*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    access_check : Proc(IAzClientContext*, UInt8*, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT*, HRESULT)
-    get_business_rule_string : Proc(IAzClientContext*, UInt8**, HRESULT)
-    get_user_dn : Proc(IAzClientContext*, UInt8**, HRESULT)
-    get_user_sam_compat : Proc(IAzClientContext*, UInt8**, HRESULT)
-    get_user_display : Proc(IAzClientContext*, UInt8**, HRESULT)
-    get_user_guid : Proc(IAzClientContext*, UInt8**, HRESULT)
-    get_user_canonical : Proc(IAzClientContext*, UInt8**, HRESULT)
-    get_user_upn : Proc(IAzClientContext*, UInt8**, HRESULT)
-    get_user_dns_sam_compat : Proc(IAzClientContext*, UInt8**, HRESULT)
-    get_property : Proc(IAzClientContext*, Int32, VARIANT, VARIANT*, HRESULT)
-    get_roles : Proc(IAzClientContext*, UInt8*, VARIANT*, HRESULT)
-    get_role_for_access_check : Proc(IAzClientContext*, UInt8**, HRESULT)
-    put_role_for_access_check : Proc(IAzClientContext*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    access_check : UInt64
+    get_business_rule_string : UInt64
+    get_user_dn : UInt64
+    get_user_sam_compat : UInt64
+    get_user_display : UInt64
+    get_user_guid : UInt64
+    get_user_canonical : UInt64
+    get_user_upn : UInt64
+    get_user_dns_sam_compat : UInt64
+    get_property : UInt64
+    get_roles : UInt64
+    get_role_for_access_check : UInt64
+    put_role_for_access_check : UInt64
   end
 
   IAzClientContext_GUID = "eff1f00b-488a-466d-afd9-a401c5f9eef5"
@@ -1434,32 +1434,32 @@ lib LibWin32
   end
 
   struct IAzClientContext2VTbl
-    query_interface : Proc(IAzClientContext2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzClientContext2*, UInt32)
-    release : Proc(IAzClientContext2*, UInt32)
-    get_type_info_count : Proc(IAzClientContext2*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzClientContext2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzClientContext2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzClientContext2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    access_check : Proc(IAzClientContext2*, UInt8*, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT*, HRESULT)
-    get_business_rule_string : Proc(IAzClientContext2*, UInt8**, HRESULT)
-    get_user_dn : Proc(IAzClientContext2*, UInt8**, HRESULT)
-    get_user_sam_compat : Proc(IAzClientContext2*, UInt8**, HRESULT)
-    get_user_display : Proc(IAzClientContext2*, UInt8**, HRESULT)
-    get_user_guid : Proc(IAzClientContext2*, UInt8**, HRESULT)
-    get_user_canonical : Proc(IAzClientContext2*, UInt8**, HRESULT)
-    get_user_upn : Proc(IAzClientContext2*, UInt8**, HRESULT)
-    get_user_dns_sam_compat : Proc(IAzClientContext2*, UInt8**, HRESULT)
-    get_property : Proc(IAzClientContext2*, Int32, VARIANT, VARIANT*, HRESULT)
-    get_roles : Proc(IAzClientContext2*, UInt8*, VARIANT*, HRESULT)
-    get_role_for_access_check : Proc(IAzClientContext2*, UInt8**, HRESULT)
-    put_role_for_access_check : Proc(IAzClientContext2*, UInt8*, HRESULT)
-    get_assigned_scopes_page : Proc(IAzClientContext2*, Int32, Int32, VARIANT*, VARIANT*, HRESULT)
-    add_roles : Proc(IAzClientContext2*, VARIANT, UInt8*, HRESULT)
-    add_application_groups : Proc(IAzClientContext2*, VARIANT, HRESULT)
-    add_string_sids : Proc(IAzClientContext2*, VARIANT, HRESULT)
-    put_ldap_query_dn : Proc(IAzClientContext2*, UInt8*, HRESULT)
-    get_ldap_query_dn : Proc(IAzClientContext2*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    access_check : UInt64
+    get_business_rule_string : UInt64
+    get_user_dn : UInt64
+    get_user_sam_compat : UInt64
+    get_user_display : UInt64
+    get_user_guid : UInt64
+    get_user_canonical : UInt64
+    get_user_upn : UInt64
+    get_user_dns_sam_compat : UInt64
+    get_property : UInt64
+    get_roles : UInt64
+    get_role_for_access_check : UInt64
+    put_role_for_access_check : UInt64
+    get_assigned_scopes_page : UInt64
+    add_roles : UInt64
+    add_application_groups : UInt64
+    add_string_sids : UInt64
+    put_ldap_query_dn : UInt64
+    get_ldap_query_dn : UInt64
   end
 
   IAzClientContext2_GUID = "2b0c92b8-208a-488a-8f81-e4edb22111cd"
@@ -1469,17 +1469,17 @@ lib LibWin32
   end
 
   struct IAzBizRuleContextVTbl
-    query_interface : Proc(IAzBizRuleContext*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzBizRuleContext*, UInt32)
-    release : Proc(IAzBizRuleContext*, UInt32)
-    get_type_info_count : Proc(IAzBizRuleContext*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzBizRuleContext*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzBizRuleContext*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzBizRuleContext*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    put_business_rule_result : Proc(IAzBizRuleContext*, LibC::BOOL, HRESULT)
-    put_business_rule_string : Proc(IAzBizRuleContext*, UInt8*, HRESULT)
-    get_business_rule_string : Proc(IAzBizRuleContext*, UInt8**, HRESULT)
-    get_parameter : Proc(IAzBizRuleContext*, UInt8*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    put_business_rule_result : UInt64
+    put_business_rule_string : UInt64
+    get_business_rule_string : UInt64
+    get_parameter : UInt64
   end
 
   IAzBizRuleContext_GUID = "e192f17d-d59f-455e-a152-940316cd77b2"
@@ -1489,19 +1489,19 @@ lib LibWin32
   end
 
   struct IAzBizRuleParametersVTbl
-    query_interface : Proc(IAzBizRuleParameters*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzBizRuleParameters*, UInt32)
-    release : Proc(IAzBizRuleParameters*, UInt32)
-    get_type_info_count : Proc(IAzBizRuleParameters*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzBizRuleParameters*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzBizRuleParameters*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzBizRuleParameters*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    add_parameter : Proc(IAzBizRuleParameters*, UInt8*, VARIANT, HRESULT)
-    add_parameters : Proc(IAzBizRuleParameters*, VARIANT, VARIANT, HRESULT)
-    get_parameter_value : Proc(IAzBizRuleParameters*, UInt8*, VARIANT*, HRESULT)
-    remove : Proc(IAzBizRuleParameters*, UInt8*, HRESULT)
-    remove_all : Proc(IAzBizRuleParameters*, HRESULT)
-    get_count : Proc(IAzBizRuleParameters*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    add_parameter : UInt64
+    add_parameters : UInt64
+    get_parameter_value : UInt64
+    remove : UInt64
+    remove_all : UInt64
+    get_count : UInt64
   end
 
   IAzBizRuleParameters_GUID = "fc17685f-e25d-4dcd-bae1-276ec9533cb5"
@@ -1511,19 +1511,19 @@ lib LibWin32
   end
 
   struct IAzBizRuleInterfacesVTbl
-    query_interface : Proc(IAzBizRuleInterfaces*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzBizRuleInterfaces*, UInt32)
-    release : Proc(IAzBizRuleInterfaces*, UInt32)
-    get_type_info_count : Proc(IAzBizRuleInterfaces*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzBizRuleInterfaces*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzBizRuleInterfaces*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzBizRuleInterfaces*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    add_interface : Proc(IAzBizRuleInterfaces*, UInt8*, Int32, VARIANT, HRESULT)
-    add_interfaces : Proc(IAzBizRuleInterfaces*, VARIANT, VARIANT, VARIANT, HRESULT)
-    get_interface_value : Proc(IAzBizRuleInterfaces*, UInt8*, Int32*, VARIANT*, HRESULT)
-    remove : Proc(IAzBizRuleInterfaces*, UInt8*, HRESULT)
-    remove_all : Proc(IAzBizRuleInterfaces*, HRESULT)
-    get_count : Proc(IAzBizRuleInterfaces*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    add_interface : UInt64
+    add_interfaces : UInt64
+    get_interface_value : UInt64
+    remove : UInt64
+    remove_all : UInt64
+    get_count : UInt64
   end
 
   IAzBizRuleInterfaces_GUID = "e94128c7-e9da-44cc-b0bd-53036f3aab3d"
@@ -1533,40 +1533,40 @@ lib LibWin32
   end
 
   struct IAzClientContext3VTbl
-    query_interface : Proc(IAzClientContext3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzClientContext3*, UInt32)
-    release : Proc(IAzClientContext3*, UInt32)
-    get_type_info_count : Proc(IAzClientContext3*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzClientContext3*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzClientContext3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzClientContext3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    access_check : Proc(IAzClientContext3*, UInt8*, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT*, HRESULT)
-    get_business_rule_string : Proc(IAzClientContext3*, UInt8**, HRESULT)
-    get_user_dn : Proc(IAzClientContext3*, UInt8**, HRESULT)
-    get_user_sam_compat : Proc(IAzClientContext3*, UInt8**, HRESULT)
-    get_user_display : Proc(IAzClientContext3*, UInt8**, HRESULT)
-    get_user_guid : Proc(IAzClientContext3*, UInt8**, HRESULT)
-    get_user_canonical : Proc(IAzClientContext3*, UInt8**, HRESULT)
-    get_user_upn : Proc(IAzClientContext3*, UInt8**, HRESULT)
-    get_user_dns_sam_compat : Proc(IAzClientContext3*, UInt8**, HRESULT)
-    get_property : Proc(IAzClientContext3*, Int32, VARIANT, VARIANT*, HRESULT)
-    get_roles : Proc(IAzClientContext3*, UInt8*, VARIANT*, HRESULT)
-    get_role_for_access_check : Proc(IAzClientContext3*, UInt8**, HRESULT)
-    put_role_for_access_check : Proc(IAzClientContext3*, UInt8*, HRESULT)
-    get_assigned_scopes_page : Proc(IAzClientContext3*, Int32, Int32, VARIANT*, VARIANT*, HRESULT)
-    add_roles : Proc(IAzClientContext3*, VARIANT, UInt8*, HRESULT)
-    add_application_groups : Proc(IAzClientContext3*, VARIANT, HRESULT)
-    add_string_sids : Proc(IAzClientContext3*, VARIANT, HRESULT)
-    put_ldap_query_dn : Proc(IAzClientContext3*, UInt8*, HRESULT)
-    get_ldap_query_dn : Proc(IAzClientContext3*, UInt8**, HRESULT)
-    access_check2 : Proc(IAzClientContext3*, UInt8*, UInt8*, Int32, UInt32*, HRESULT)
-    is_in_role_assignment : Proc(IAzClientContext3*, UInt8*, UInt8*, Int16*, HRESULT)
-    get_operations : Proc(IAzClientContext3*, UInt8*, IAzOperations*, HRESULT)
-    get_tasks : Proc(IAzClientContext3*, UInt8*, IAzTasks*, HRESULT)
-    get_biz_rule_parameters : Proc(IAzClientContext3*, IAzBizRuleParameters*, HRESULT)
-    get_biz_rule_interfaces : Proc(IAzClientContext3*, IAzBizRuleInterfaces*, HRESULT)
-    get_groups : Proc(IAzClientContext3*, UInt8*, AZ_PROP_CONSTANTS, VARIANT*, HRESULT)
-    get_sids : Proc(IAzClientContext3*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    access_check : UInt64
+    get_business_rule_string : UInt64
+    get_user_dn : UInt64
+    get_user_sam_compat : UInt64
+    get_user_display : UInt64
+    get_user_guid : UInt64
+    get_user_canonical : UInt64
+    get_user_upn : UInt64
+    get_user_dns_sam_compat : UInt64
+    get_property : UInt64
+    get_roles : UInt64
+    get_role_for_access_check : UInt64
+    put_role_for_access_check : UInt64
+    get_assigned_scopes_page : UInt64
+    add_roles : UInt64
+    add_application_groups : UInt64
+    add_string_sids : UInt64
+    put_ldap_query_dn : UInt64
+    get_ldap_query_dn : UInt64
+    access_check2 : UInt64
+    is_in_role_assignment : UInt64
+    get_operations : UInt64
+    get_tasks : UInt64
+    get_biz_rule_parameters : UInt64
+    get_biz_rule_interfaces : UInt64
+    get_groups : UInt64
+    get_sids : UInt64
   end
 
   IAzClientContext3_GUID = "11894fde-1deb-4b4b-8907-6d1cda1f5d4f"
@@ -1576,59 +1576,59 @@ lib LibWin32
   end
 
   struct IAzScope2VTbl
-    query_interface : Proc(IAzScope2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzScope2*, UInt32)
-    release : Proc(IAzScope2*, UInt32)
-    get_type_info_count : Proc(IAzScope2*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzScope2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzScope2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzScope2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IAzScope2*, UInt8**, HRESULT)
-    put_name : Proc(IAzScope2*, UInt8*, HRESULT)
-    get_description : Proc(IAzScope2*, UInt8**, HRESULT)
-    put_description : Proc(IAzScope2*, UInt8*, HRESULT)
-    get_application_data : Proc(IAzScope2*, UInt8**, HRESULT)
-    put_application_data : Proc(IAzScope2*, UInt8*, HRESULT)
-    get_writable : Proc(IAzScope2*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzScope2*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzScope2*, Int32, VARIANT, VARIANT, HRESULT)
-    add_property_item : Proc(IAzScope2*, Int32, VARIANT, VARIANT, HRESULT)
-    delete_property_item : Proc(IAzScope2*, Int32, VARIANT, VARIANT, HRESULT)
-    get_policy_administrators : Proc(IAzScope2*, VARIANT*, HRESULT)
-    get_policy_readers : Proc(IAzScope2*, VARIANT*, HRESULT)
-    add_policy_administrator : Proc(IAzScope2*, UInt8*, VARIANT, HRESULT)
-    delete_policy_administrator : Proc(IAzScope2*, UInt8*, VARIANT, HRESULT)
-    add_policy_reader : Proc(IAzScope2*, UInt8*, VARIANT, HRESULT)
-    delete_policy_reader : Proc(IAzScope2*, UInt8*, VARIANT, HRESULT)
-    get_application_groups : Proc(IAzScope2*, IAzApplicationGroups*, HRESULT)
-    open_application_group : Proc(IAzScope2*, UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)
-    create_application_group : Proc(IAzScope2*, UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)
-    delete_application_group : Proc(IAzScope2*, UInt8*, VARIANT, HRESULT)
-    get_roles : Proc(IAzScope2*, IAzRoles*, HRESULT)
-    open_role : Proc(IAzScope2*, UInt8*, VARIANT, IAzRole*, HRESULT)
-    create_role : Proc(IAzScope2*, UInt8*, VARIANT, IAzRole*, HRESULT)
-    delete_role : Proc(IAzScope2*, UInt8*, VARIANT, HRESULT)
-    get_tasks : Proc(IAzScope2*, IAzTasks*, HRESULT)
-    open_task : Proc(IAzScope2*, UInt8*, VARIANT, IAzTask*, HRESULT)
-    create_task : Proc(IAzScope2*, UInt8*, VARIANT, IAzTask*, HRESULT)
-    delete_task : Proc(IAzScope2*, UInt8*, VARIANT, HRESULT)
-    submit : Proc(IAzScope2*, Int32, VARIANT, HRESULT)
-    get_can_be_delegated : Proc(IAzScope2*, LibC::BOOL*, HRESULT)
-    get_bizrules_writable : Proc(IAzScope2*, LibC::BOOL*, HRESULT)
-    get_policy_administrators_name : Proc(IAzScope2*, VARIANT*, HRESULT)
-    get_policy_readers_name : Proc(IAzScope2*, VARIANT*, HRESULT)
-    add_policy_administrator_name : Proc(IAzScope2*, UInt8*, VARIANT, HRESULT)
-    delete_policy_administrator_name : Proc(IAzScope2*, UInt8*, VARIANT, HRESULT)
-    add_policy_reader_name : Proc(IAzScope2*, UInt8*, VARIANT, HRESULT)
-    delete_policy_reader_name : Proc(IAzScope2*, UInt8*, VARIANT, HRESULT)
-    get_role_definitions : Proc(IAzScope2*, IAzRoleDefinitions*, HRESULT)
-    create_role_definition : Proc(IAzScope2*, UInt8*, IAzRoleDefinition*, HRESULT)
-    open_role_definition : Proc(IAzScope2*, UInt8*, IAzRoleDefinition*, HRESULT)
-    delete_role_definition : Proc(IAzScope2*, UInt8*, HRESULT)
-    get_role_assignments : Proc(IAzScope2*, IAzRoleAssignments*, HRESULT)
-    create_role_assignment : Proc(IAzScope2*, UInt8*, IAzRoleAssignment*, HRESULT)
-    open_role_assignment : Proc(IAzScope2*, UInt8*, IAzRoleAssignment*, HRESULT)
-    delete_role_assignment : Proc(IAzScope2*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_data : UInt64
+    put_application_data : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    add_property_item : UInt64
+    delete_property_item : UInt64
+    get_policy_administrators : UInt64
+    get_policy_readers : UInt64
+    add_policy_administrator : UInt64
+    delete_policy_administrator : UInt64
+    add_policy_reader : UInt64
+    delete_policy_reader : UInt64
+    get_application_groups : UInt64
+    open_application_group : UInt64
+    create_application_group : UInt64
+    delete_application_group : UInt64
+    get_roles : UInt64
+    open_role : UInt64
+    create_role : UInt64
+    delete_role : UInt64
+    get_tasks : UInt64
+    open_task : UInt64
+    create_task : UInt64
+    delete_task : UInt64
+    submit : UInt64
+    get_can_be_delegated : UInt64
+    get_bizrules_writable : UInt64
+    get_policy_administrators_name : UInt64
+    get_policy_readers_name : UInt64
+    add_policy_administrator_name : UInt64
+    delete_policy_administrator_name : UInt64
+    add_policy_reader_name : UInt64
+    delete_policy_reader_name : UInt64
+    get_role_definitions : UInt64
+    create_role_definition : UInt64
+    open_role_definition : UInt64
+    delete_role_definition : UInt64
+    get_role_assignments : UInt64
+    create_role_assignment : UInt64
+    open_role_assignment : UInt64
+    delete_role_assignment : UInt64
   end
 
   IAzScope2_GUID = "ee9fe8c9-c9f3-40e2-aa12-d1d8599727fd"
@@ -1638,90 +1638,90 @@ lib LibWin32
   end
 
   struct IAzApplication3VTbl
-    query_interface : Proc(IAzApplication3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzApplication3*, UInt32)
-    release : Proc(IAzApplication3*, UInt32)
-    get_type_info_count : Proc(IAzApplication3*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzApplication3*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzApplication3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzApplication3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IAzApplication3*, UInt8**, HRESULT)
-    put_name : Proc(IAzApplication3*, UInt8*, HRESULT)
-    get_description : Proc(IAzApplication3*, UInt8**, HRESULT)
-    put_description : Proc(IAzApplication3*, UInt8*, HRESULT)
-    get_application_data : Proc(IAzApplication3*, UInt8**, HRESULT)
-    put_application_data : Proc(IAzApplication3*, UInt8*, HRESULT)
-    get_authz_interface_clsid : Proc(IAzApplication3*, UInt8**, HRESULT)
-    put_authz_interface_clsid : Proc(IAzApplication3*, UInt8*, HRESULT)
-    get_version : Proc(IAzApplication3*, UInt8**, HRESULT)
-    put_version : Proc(IAzApplication3*, UInt8*, HRESULT)
-    get_generate_audits : Proc(IAzApplication3*, LibC::BOOL*, HRESULT)
-    put_generate_audits : Proc(IAzApplication3*, LibC::BOOL, HRESULT)
-    get_apply_store_sacl : Proc(IAzApplication3*, LibC::BOOL*, HRESULT)
-    put_apply_store_sacl : Proc(IAzApplication3*, LibC::BOOL, HRESULT)
-    get_writable : Proc(IAzApplication3*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzApplication3*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzApplication3*, Int32, VARIANT, VARIANT, HRESULT)
-    get_policy_administrators : Proc(IAzApplication3*, VARIANT*, HRESULT)
-    get_policy_readers : Proc(IAzApplication3*, VARIANT*, HRESULT)
-    add_policy_administrator : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    delete_policy_administrator : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    add_policy_reader : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    delete_policy_reader : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    get_scopes : Proc(IAzApplication3*, IAzScopes*, HRESULT)
-    open_scope : Proc(IAzApplication3*, UInt8*, VARIANT, IAzScope*, HRESULT)
-    create_scope : Proc(IAzApplication3*, UInt8*, VARIANT, IAzScope*, HRESULT)
-    delete_scope : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    get_operations : Proc(IAzApplication3*, IAzOperations*, HRESULT)
-    open_operation : Proc(IAzApplication3*, UInt8*, VARIANT, IAzOperation*, HRESULT)
-    create_operation : Proc(IAzApplication3*, UInt8*, VARIANT, IAzOperation*, HRESULT)
-    delete_operation : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    get_tasks : Proc(IAzApplication3*, IAzTasks*, HRESULT)
-    open_task : Proc(IAzApplication3*, UInt8*, VARIANT, IAzTask*, HRESULT)
-    create_task : Proc(IAzApplication3*, UInt8*, VARIANT, IAzTask*, HRESULT)
-    delete_task : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    get_application_groups : Proc(IAzApplication3*, IAzApplicationGroups*, HRESULT)
-    open_application_group : Proc(IAzApplication3*, UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)
-    create_application_group : Proc(IAzApplication3*, UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)
-    delete_application_group : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    get_roles : Proc(IAzApplication3*, IAzRoles*, HRESULT)
-    open_role : Proc(IAzApplication3*, UInt8*, VARIANT, IAzRole*, HRESULT)
-    create_role : Proc(IAzApplication3*, UInt8*, VARIANT, IAzRole*, HRESULT)
-    delete_role : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    initialize_client_context_from_token : Proc(IAzApplication3*, UInt64, VARIANT, IAzClientContext*, HRESULT)
-    add_property_item : Proc(IAzApplication3*, Int32, VARIANT, VARIANT, HRESULT)
-    delete_property_item : Proc(IAzApplication3*, Int32, VARIANT, VARIANT, HRESULT)
-    submit : Proc(IAzApplication3*, Int32, VARIANT, HRESULT)
-    initialize_client_context_from_name : Proc(IAzApplication3*, UInt8*, UInt8*, VARIANT, IAzClientContext*, HRESULT)
-    get_delegated_policy_users : Proc(IAzApplication3*, VARIANT*, HRESULT)
-    add_delegated_policy_user : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    delete_delegated_policy_user : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    initialize_client_context_from_string_sid : Proc(IAzApplication3*, UInt8*, Int32, VARIANT, IAzClientContext*, HRESULT)
-    get_policy_administrators_name : Proc(IAzApplication3*, VARIANT*, HRESULT)
-    get_policy_readers_name : Proc(IAzApplication3*, VARIANT*, HRESULT)
-    add_policy_administrator_name : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    delete_policy_administrator_name : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    add_policy_reader_name : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    delete_policy_reader_name : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    get_delegated_policy_users_name : Proc(IAzApplication3*, VARIANT*, HRESULT)
-    add_delegated_policy_user_name : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    delete_delegated_policy_user_name : Proc(IAzApplication3*, UInt8*, VARIANT, HRESULT)
-    initialize_client_context_from_token2 : Proc(IAzApplication3*, UInt32, UInt32, VARIANT, IAzClientContext2*, HRESULT)
-    initialize_client_context2 : Proc(IAzApplication3*, UInt8*, VARIANT, IAzClientContext2*, HRESULT)
-    scope_exists : Proc(IAzApplication3*, UInt8*, Int16*, HRESULT)
-    open_scope2 : Proc(IAzApplication3*, UInt8*, IAzScope2*, HRESULT)
-    create_scope2 : Proc(IAzApplication3*, UInt8*, IAzScope2*, HRESULT)
-    delete_scope2 : Proc(IAzApplication3*, UInt8*, HRESULT)
-    get_role_definitions : Proc(IAzApplication3*, IAzRoleDefinitions*, HRESULT)
-    create_role_definition : Proc(IAzApplication3*, UInt8*, IAzRoleDefinition*, HRESULT)
-    open_role_definition : Proc(IAzApplication3*, UInt8*, IAzRoleDefinition*, HRESULT)
-    delete_role_definition : Proc(IAzApplication3*, UInt8*, HRESULT)
-    get_role_assignments : Proc(IAzApplication3*, IAzRoleAssignments*, HRESULT)
-    create_role_assignment : Proc(IAzApplication3*, UInt8*, IAzRoleAssignment*, HRESULT)
-    open_role_assignment : Proc(IAzApplication3*, UInt8*, IAzRoleAssignment*, HRESULT)
-    delete_role_assignment : Proc(IAzApplication3*, UInt8*, HRESULT)
-    get_biz_rules_enabled : Proc(IAzApplication3*, Int16*, HRESULT)
-    put_biz_rules_enabled : Proc(IAzApplication3*, Int16, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_data : UInt64
+    put_application_data : UInt64
+    get_authz_interface_clsid : UInt64
+    put_authz_interface_clsid : UInt64
+    get_version : UInt64
+    put_version : UInt64
+    get_generate_audits : UInt64
+    put_generate_audits : UInt64
+    get_apply_store_sacl : UInt64
+    put_apply_store_sacl : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    get_policy_administrators : UInt64
+    get_policy_readers : UInt64
+    add_policy_administrator : UInt64
+    delete_policy_administrator : UInt64
+    add_policy_reader : UInt64
+    delete_policy_reader : UInt64
+    get_scopes : UInt64
+    open_scope : UInt64
+    create_scope : UInt64
+    delete_scope : UInt64
+    get_operations : UInt64
+    open_operation : UInt64
+    create_operation : UInt64
+    delete_operation : UInt64
+    get_tasks : UInt64
+    open_task : UInt64
+    create_task : UInt64
+    delete_task : UInt64
+    get_application_groups : UInt64
+    open_application_group : UInt64
+    create_application_group : UInt64
+    delete_application_group : UInt64
+    get_roles : UInt64
+    open_role : UInt64
+    create_role : UInt64
+    delete_role : UInt64
+    initialize_client_context_from_token : UInt64
+    add_property_item : UInt64
+    delete_property_item : UInt64
+    submit : UInt64
+    initialize_client_context_from_name : UInt64
+    get_delegated_policy_users : UInt64
+    add_delegated_policy_user : UInt64
+    delete_delegated_policy_user : UInt64
+    initialize_client_context_from_string_sid : UInt64
+    get_policy_administrators_name : UInt64
+    get_policy_readers_name : UInt64
+    add_policy_administrator_name : UInt64
+    delete_policy_administrator_name : UInt64
+    add_policy_reader_name : UInt64
+    delete_policy_reader_name : UInt64
+    get_delegated_policy_users_name : UInt64
+    add_delegated_policy_user_name : UInt64
+    delete_delegated_policy_user_name : UInt64
+    initialize_client_context_from_token2 : UInt64
+    initialize_client_context2 : UInt64
+    scope_exists : UInt64
+    open_scope2 : UInt64
+    create_scope2 : UInt64
+    delete_scope2 : UInt64
+    get_role_definitions : UInt64
+    create_role_definition : UInt64
+    open_role_definition : UInt64
+    delete_role_definition : UInt64
+    get_role_assignments : UInt64
+    create_role_assignment : UInt64
+    open_role_assignment : UInt64
+    delete_role_assignment : UInt64
+    get_biz_rules_enabled : UInt64
+    put_biz_rules_enabled : UInt64
   end
 
   IAzApplication3_GUID = "181c845e-7196-4a7d-ac2e-020c0bb7a303"
@@ -1731,26 +1731,26 @@ lib LibWin32
   end
 
   struct IAzOperation2VTbl
-    query_interface : Proc(IAzOperation2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzOperation2*, UInt32)
-    release : Proc(IAzOperation2*, UInt32)
-    get_type_info_count : Proc(IAzOperation2*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzOperation2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzOperation2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzOperation2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IAzOperation2*, UInt8**, HRESULT)
-    put_name : Proc(IAzOperation2*, UInt8*, HRESULT)
-    get_description : Proc(IAzOperation2*, UInt8**, HRESULT)
-    put_description : Proc(IAzOperation2*, UInt8*, HRESULT)
-    get_application_data : Proc(IAzOperation2*, UInt8**, HRESULT)
-    put_application_data : Proc(IAzOperation2*, UInt8*, HRESULT)
-    get_operation_id : Proc(IAzOperation2*, Int32*, HRESULT)
-    put_operation_id : Proc(IAzOperation2*, Int32, HRESULT)
-    get_writable : Proc(IAzOperation2*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzOperation2*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzOperation2*, Int32, VARIANT, VARIANT, HRESULT)
-    submit : Proc(IAzOperation2*, Int32, VARIANT, HRESULT)
-    role_assignments : Proc(IAzOperation2*, UInt8*, Int16, IAzRoleAssignments*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_data : UInt64
+    put_application_data : UInt64
+    get_operation_id : UInt64
+    put_operation_id : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    submit : UInt64
+    role_assignments : UInt64
   end
 
   IAzOperation2_GUID = "1f5ea01f-44a2-4184-9c48-a75b4dcc8ccc"
@@ -1760,16 +1760,16 @@ lib LibWin32
   end
 
   struct IAzRoleDefinitionsVTbl
-    query_interface : Proc(IAzRoleDefinitions*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzRoleDefinitions*, UInt32)
-    release : Proc(IAzRoleDefinitions*, UInt32)
-    get_type_info_count : Proc(IAzRoleDefinitions*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzRoleDefinitions*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzRoleDefinitions*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzRoleDefinitions*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_item : Proc(IAzRoleDefinitions*, Int32, VARIANT*, HRESULT)
-    get_count : Proc(IAzRoleDefinitions*, Int32*, HRESULT)
-    get__new_enum : Proc(IAzRoleDefinitions*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_item : UInt64
+    get_count : UInt64
+    get__new_enum : UInt64
   end
 
   IAzRoleDefinitions_GUID = "881f25a5-d755-4550-957a-d503a3b34001"
@@ -1779,43 +1779,43 @@ lib LibWin32
   end
 
   struct IAzRoleDefinitionVTbl
-    query_interface : Proc(IAzRoleDefinition*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzRoleDefinition*, UInt32)
-    release : Proc(IAzRoleDefinition*, UInt32)
-    get_type_info_count : Proc(IAzRoleDefinition*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzRoleDefinition*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzRoleDefinition*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzRoleDefinition*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IAzRoleDefinition*, UInt8**, HRESULT)
-    put_name : Proc(IAzRoleDefinition*, UInt8*, HRESULT)
-    get_description : Proc(IAzRoleDefinition*, UInt8**, HRESULT)
-    put_description : Proc(IAzRoleDefinition*, UInt8*, HRESULT)
-    get_application_data : Proc(IAzRoleDefinition*, UInt8**, HRESULT)
-    put_application_data : Proc(IAzRoleDefinition*, UInt8*, HRESULT)
-    get_biz_rule : Proc(IAzRoleDefinition*, UInt8**, HRESULT)
-    put_biz_rule : Proc(IAzRoleDefinition*, UInt8*, HRESULT)
-    get_biz_rule_language : Proc(IAzRoleDefinition*, UInt8**, HRESULT)
-    put_biz_rule_language : Proc(IAzRoleDefinition*, UInt8*, HRESULT)
-    get_biz_rule_imported_path : Proc(IAzRoleDefinition*, UInt8**, HRESULT)
-    put_biz_rule_imported_path : Proc(IAzRoleDefinition*, UInt8*, HRESULT)
-    get_is_role_definition : Proc(IAzRoleDefinition*, LibC::BOOL*, HRESULT)
-    put_is_role_definition : Proc(IAzRoleDefinition*, LibC::BOOL, HRESULT)
-    get_operations : Proc(IAzRoleDefinition*, VARIANT*, HRESULT)
-    get_tasks : Proc(IAzRoleDefinition*, VARIANT*, HRESULT)
-    add_operation : Proc(IAzRoleDefinition*, UInt8*, VARIANT, HRESULT)
-    delete_operation : Proc(IAzRoleDefinition*, UInt8*, VARIANT, HRESULT)
-    add_task : Proc(IAzRoleDefinition*, UInt8*, VARIANT, HRESULT)
-    delete_task : Proc(IAzRoleDefinition*, UInt8*, VARIANT, HRESULT)
-    get_writable : Proc(IAzRoleDefinition*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzRoleDefinition*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzRoleDefinition*, Int32, VARIANT, VARIANT, HRESULT)
-    add_property_item : Proc(IAzRoleDefinition*, Int32, VARIANT, VARIANT, HRESULT)
-    delete_property_item : Proc(IAzRoleDefinition*, Int32, VARIANT, VARIANT, HRESULT)
-    submit : Proc(IAzRoleDefinition*, Int32, VARIANT, HRESULT)
-    role_assignments : Proc(IAzRoleDefinition*, UInt8*, Int16, IAzRoleAssignments*, HRESULT)
-    add_role_definition : Proc(IAzRoleDefinition*, UInt8*, HRESULT)
-    delete_role_definition : Proc(IAzRoleDefinition*, UInt8*, HRESULT)
-    get_role_definitions : Proc(IAzRoleDefinition*, IAzRoleDefinitions*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_data : UInt64
+    put_application_data : UInt64
+    get_biz_rule : UInt64
+    put_biz_rule : UInt64
+    get_biz_rule_language : UInt64
+    put_biz_rule_language : UInt64
+    get_biz_rule_imported_path : UInt64
+    put_biz_rule_imported_path : UInt64
+    get_is_role_definition : UInt64
+    put_is_role_definition : UInt64
+    get_operations : UInt64
+    get_tasks : UInt64
+    add_operation : UInt64
+    delete_operation : UInt64
+    add_task : UInt64
+    delete_task : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    add_property_item : UInt64
+    delete_property_item : UInt64
+    submit : UInt64
+    role_assignments : UInt64
+    add_role_definition : UInt64
+    delete_role_definition : UInt64
+    get_role_definitions : UInt64
   end
 
   IAzRoleDefinition_GUID = "d97fcea1-2599-44f1-9fc3-58e9fbe09466"
@@ -1825,44 +1825,44 @@ lib LibWin32
   end
 
   struct IAzRoleAssignmentVTbl
-    query_interface : Proc(IAzRoleAssignment*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzRoleAssignment*, UInt32)
-    release : Proc(IAzRoleAssignment*, UInt32)
-    get_type_info_count : Proc(IAzRoleAssignment*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzRoleAssignment*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzRoleAssignment*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzRoleAssignment*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IAzRoleAssignment*, UInt8**, HRESULT)
-    put_name : Proc(IAzRoleAssignment*, UInt8*, HRESULT)
-    get_description : Proc(IAzRoleAssignment*, UInt8**, HRESULT)
-    put_description : Proc(IAzRoleAssignment*, UInt8*, HRESULT)
-    get_application_data : Proc(IAzRoleAssignment*, UInt8**, HRESULT)
-    put_application_data : Proc(IAzRoleAssignment*, UInt8*, HRESULT)
-    add_app_member : Proc(IAzRoleAssignment*, UInt8*, VARIANT, HRESULT)
-    delete_app_member : Proc(IAzRoleAssignment*, UInt8*, VARIANT, HRESULT)
-    add_task : Proc(IAzRoleAssignment*, UInt8*, VARIANT, HRESULT)
-    delete_task : Proc(IAzRoleAssignment*, UInt8*, VARIANT, HRESULT)
-    add_operation : Proc(IAzRoleAssignment*, UInt8*, VARIANT, HRESULT)
-    delete_operation : Proc(IAzRoleAssignment*, UInt8*, VARIANT, HRESULT)
-    add_member : Proc(IAzRoleAssignment*, UInt8*, VARIANT, HRESULT)
-    delete_member : Proc(IAzRoleAssignment*, UInt8*, VARIANT, HRESULT)
-    get_writable : Proc(IAzRoleAssignment*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzRoleAssignment*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzRoleAssignment*, Int32, VARIANT, VARIANT, HRESULT)
-    get_app_members : Proc(IAzRoleAssignment*, VARIANT*, HRESULT)
-    get_members : Proc(IAzRoleAssignment*, VARIANT*, HRESULT)
-    get_operations : Proc(IAzRoleAssignment*, VARIANT*, HRESULT)
-    get_tasks : Proc(IAzRoleAssignment*, VARIANT*, HRESULT)
-    add_property_item : Proc(IAzRoleAssignment*, Int32, VARIANT, VARIANT, HRESULT)
-    delete_property_item : Proc(IAzRoleAssignment*, Int32, VARIANT, VARIANT, HRESULT)
-    submit : Proc(IAzRoleAssignment*, Int32, VARIANT, HRESULT)
-    add_member_name : Proc(IAzRoleAssignment*, UInt8*, VARIANT, HRESULT)
-    delete_member_name : Proc(IAzRoleAssignment*, UInt8*, VARIANT, HRESULT)
-    get_members_name : Proc(IAzRoleAssignment*, VARIANT*, HRESULT)
-    add_role_definition : Proc(IAzRoleAssignment*, UInt8*, HRESULT)
-    delete_role_definition : Proc(IAzRoleAssignment*, UInt8*, HRESULT)
-    get_role_definitions : Proc(IAzRoleAssignment*, IAzRoleDefinitions*, HRESULT)
-    get_scope : Proc(IAzRoleAssignment*, IAzScope*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_data : UInt64
+    put_application_data : UInt64
+    add_app_member : UInt64
+    delete_app_member : UInt64
+    add_task : UInt64
+    delete_task : UInt64
+    add_operation : UInt64
+    delete_operation : UInt64
+    add_member : UInt64
+    delete_member : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    get_app_members : UInt64
+    get_members : UInt64
+    get_operations : UInt64
+    get_tasks : UInt64
+    add_property_item : UInt64
+    delete_property_item : UInt64
+    submit : UInt64
+    add_member_name : UInt64
+    delete_member_name : UInt64
+    get_members_name : UInt64
+    add_role_definition : UInt64
+    delete_role_definition : UInt64
+    get_role_definitions : UInt64
+    get_scope : UInt64
   end
 
   IAzRoleAssignment_GUID = "55647d31-0d5a-4fa3-b4ac-2b5f9ad5ab76"
@@ -1872,16 +1872,16 @@ lib LibWin32
   end
 
   struct IAzRoleAssignmentsVTbl
-    query_interface : Proc(IAzRoleAssignments*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzRoleAssignments*, UInt32)
-    release : Proc(IAzRoleAssignments*, UInt32)
-    get_type_info_count : Proc(IAzRoleAssignments*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzRoleAssignments*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzRoleAssignments*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzRoleAssignments*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_item : Proc(IAzRoleAssignments*, Int32, VARIANT*, HRESULT)
-    get_count : Proc(IAzRoleAssignments*, Int32*, HRESULT)
-    get__new_enum : Proc(IAzRoleAssignments*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_item : UInt64
+    get_count : UInt64
+    get__new_enum : UInt64
   end
 
   IAzRoleAssignments_GUID = "9c80b900-fceb-4d73-a0f4-c83b0bbf2481"
@@ -1891,15 +1891,15 @@ lib LibWin32
   end
 
   struct IAzPrincipalLocatorVTbl
-    query_interface : Proc(IAzPrincipalLocator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzPrincipalLocator*, UInt32)
-    release : Proc(IAzPrincipalLocator*, UInt32)
-    get_type_info_count : Proc(IAzPrincipalLocator*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzPrincipalLocator*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzPrincipalLocator*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzPrincipalLocator*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name_resolver : Proc(IAzPrincipalLocator*, IAzNameResolver*, HRESULT)
-    get_object_picker : Proc(IAzPrincipalLocator*, IAzObjectPicker*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name_resolver : UInt64
+    get_object_picker : UInt64
   end
 
   IAzPrincipalLocator_GUID = "e5c3507d-ad6a-4992-9c7f-74ab480b44cc"
@@ -1909,15 +1909,15 @@ lib LibWin32
   end
 
   struct IAzNameResolverVTbl
-    query_interface : Proc(IAzNameResolver*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzNameResolver*, UInt32)
-    release : Proc(IAzNameResolver*, UInt32)
-    get_type_info_count : Proc(IAzNameResolver*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzNameResolver*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzNameResolver*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzNameResolver*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    name_from_sid : Proc(IAzNameResolver*, UInt8*, Int32*, UInt8**, HRESULT)
-    names_from_sids : Proc(IAzNameResolver*, VARIANT, VARIANT*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    name_from_sid : UInt64
+    names_from_sids : UInt64
   end
 
   IAzNameResolver_GUID = "504d0f15-73e2-43df-a870-a64f40714f53"
@@ -1927,15 +1927,15 @@ lib LibWin32
   end
 
   struct IAzObjectPickerVTbl
-    query_interface : Proc(IAzObjectPicker*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzObjectPicker*, UInt32)
-    release : Proc(IAzObjectPicker*, UInt32)
-    get_type_info_count : Proc(IAzObjectPicker*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzObjectPicker*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzObjectPicker*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzObjectPicker*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_principals : Proc(IAzObjectPicker*, LibC::HANDLE, UInt8*, VARIANT*, VARIANT*, VARIANT*, HRESULT)
-    get_name : Proc(IAzObjectPicker*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_principals : UInt64
+    get_name : UInt64
   end
 
   IAzObjectPicker_GUID = "63130a48-699a-42d8-bf01-c62ac3fb79f9"
@@ -1945,52 +1945,52 @@ lib LibWin32
   end
 
   struct IAzApplicationGroup2VTbl
-    query_interface : Proc(IAzApplicationGroup2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzApplicationGroup2*, UInt32)
-    release : Proc(IAzApplicationGroup2*, UInt32)
-    get_type_info_count : Proc(IAzApplicationGroup2*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzApplicationGroup2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzApplicationGroup2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzApplicationGroup2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IAzApplicationGroup2*, UInt8**, HRESULT)
-    put_name : Proc(IAzApplicationGroup2*, UInt8*, HRESULT)
-    get_type : Proc(IAzApplicationGroup2*, Int32*, HRESULT)
-    put_type : Proc(IAzApplicationGroup2*, Int32, HRESULT)
-    get_ldap_query : Proc(IAzApplicationGroup2*, UInt8**, HRESULT)
-    put_ldap_query : Proc(IAzApplicationGroup2*, UInt8*, HRESULT)
-    get_app_members : Proc(IAzApplicationGroup2*, VARIANT*, HRESULT)
-    get_app_non_members : Proc(IAzApplicationGroup2*, VARIANT*, HRESULT)
-    get_members : Proc(IAzApplicationGroup2*, VARIANT*, HRESULT)
-    get_non_members : Proc(IAzApplicationGroup2*, VARIANT*, HRESULT)
-    get_description : Proc(IAzApplicationGroup2*, UInt8**, HRESULT)
-    put_description : Proc(IAzApplicationGroup2*, UInt8*, HRESULT)
-    add_app_member : Proc(IAzApplicationGroup2*, UInt8*, VARIANT, HRESULT)
-    delete_app_member : Proc(IAzApplicationGroup2*, UInt8*, VARIANT, HRESULT)
-    add_app_non_member : Proc(IAzApplicationGroup2*, UInt8*, VARIANT, HRESULT)
-    delete_app_non_member : Proc(IAzApplicationGroup2*, UInt8*, VARIANT, HRESULT)
-    add_member : Proc(IAzApplicationGroup2*, UInt8*, VARIANT, HRESULT)
-    delete_member : Proc(IAzApplicationGroup2*, UInt8*, VARIANT, HRESULT)
-    add_non_member : Proc(IAzApplicationGroup2*, UInt8*, VARIANT, HRESULT)
-    delete_non_member : Proc(IAzApplicationGroup2*, UInt8*, VARIANT, HRESULT)
-    get_writable : Proc(IAzApplicationGroup2*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzApplicationGroup2*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzApplicationGroup2*, Int32, VARIANT, VARIANT, HRESULT)
-    add_property_item : Proc(IAzApplicationGroup2*, Int32, VARIANT, VARIANT, HRESULT)
-    delete_property_item : Proc(IAzApplicationGroup2*, Int32, VARIANT, VARIANT, HRESULT)
-    submit : Proc(IAzApplicationGroup2*, Int32, VARIANT, HRESULT)
-    add_member_name : Proc(IAzApplicationGroup2*, UInt8*, VARIANT, HRESULT)
-    delete_member_name : Proc(IAzApplicationGroup2*, UInt8*, VARIANT, HRESULT)
-    add_non_member_name : Proc(IAzApplicationGroup2*, UInt8*, VARIANT, HRESULT)
-    delete_non_member_name : Proc(IAzApplicationGroup2*, UInt8*, VARIANT, HRESULT)
-    get_members_name : Proc(IAzApplicationGroup2*, VARIANT*, HRESULT)
-    get_non_members_name : Proc(IAzApplicationGroup2*, VARIANT*, HRESULT)
-    get_biz_rule : Proc(IAzApplicationGroup2*, UInt8**, HRESULT)
-    put_biz_rule : Proc(IAzApplicationGroup2*, UInt8*, HRESULT)
-    get_biz_rule_language : Proc(IAzApplicationGroup2*, UInt8**, HRESULT)
-    put_biz_rule_language : Proc(IAzApplicationGroup2*, UInt8*, HRESULT)
-    get_biz_rule_imported_path : Proc(IAzApplicationGroup2*, UInt8**, HRESULT)
-    put_biz_rule_imported_path : Proc(IAzApplicationGroup2*, UInt8*, HRESULT)
-    role_assignments : Proc(IAzApplicationGroup2*, UInt8*, Int16, IAzRoleAssignments*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_type : UInt64
+    put_type : UInt64
+    get_ldap_query : UInt64
+    put_ldap_query : UInt64
+    get_app_members : UInt64
+    get_app_non_members : UInt64
+    get_members : UInt64
+    get_non_members : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    add_app_member : UInt64
+    delete_app_member : UInt64
+    add_app_non_member : UInt64
+    delete_app_non_member : UInt64
+    add_member : UInt64
+    delete_member : UInt64
+    add_non_member : UInt64
+    delete_non_member : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    add_property_item : UInt64
+    delete_property_item : UInt64
+    submit : UInt64
+    add_member_name : UInt64
+    delete_member_name : UInt64
+    add_non_member_name : UInt64
+    delete_non_member_name : UInt64
+    get_members_name : UInt64
+    get_non_members_name : UInt64
+    get_biz_rule : UInt64
+    put_biz_rule : UInt64
+    get_biz_rule_language : UInt64
+    put_biz_rule_language : UInt64
+    get_biz_rule_imported_path : UInt64
+    put_biz_rule_imported_path : UInt64
+    role_assignments : UInt64
   end
 
   IAzApplicationGroup2_GUID = "3f0613fc-b71a-464e-a11d-5b881a56cefa"
@@ -2000,40 +2000,40 @@ lib LibWin32
   end
 
   struct IAzTask2VTbl
-    query_interface : Proc(IAzTask2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAzTask2*, UInt32)
-    release : Proc(IAzTask2*, UInt32)
-    get_type_info_count : Proc(IAzTask2*, UInt32*, HRESULT)
-    get_type_info : Proc(IAzTask2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAzTask2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAzTask2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IAzTask2*, UInt8**, HRESULT)
-    put_name : Proc(IAzTask2*, UInt8*, HRESULT)
-    get_description : Proc(IAzTask2*, UInt8**, HRESULT)
-    put_description : Proc(IAzTask2*, UInt8*, HRESULT)
-    get_application_data : Proc(IAzTask2*, UInt8**, HRESULT)
-    put_application_data : Proc(IAzTask2*, UInt8*, HRESULT)
-    get_biz_rule : Proc(IAzTask2*, UInt8**, HRESULT)
-    put_biz_rule : Proc(IAzTask2*, UInt8*, HRESULT)
-    get_biz_rule_language : Proc(IAzTask2*, UInt8**, HRESULT)
-    put_biz_rule_language : Proc(IAzTask2*, UInt8*, HRESULT)
-    get_biz_rule_imported_path : Proc(IAzTask2*, UInt8**, HRESULT)
-    put_biz_rule_imported_path : Proc(IAzTask2*, UInt8*, HRESULT)
-    get_is_role_definition : Proc(IAzTask2*, LibC::BOOL*, HRESULT)
-    put_is_role_definition : Proc(IAzTask2*, LibC::BOOL, HRESULT)
-    get_operations : Proc(IAzTask2*, VARIANT*, HRESULT)
-    get_tasks : Proc(IAzTask2*, VARIANT*, HRESULT)
-    add_operation : Proc(IAzTask2*, UInt8*, VARIANT, HRESULT)
-    delete_operation : Proc(IAzTask2*, UInt8*, VARIANT, HRESULT)
-    add_task : Proc(IAzTask2*, UInt8*, VARIANT, HRESULT)
-    delete_task : Proc(IAzTask2*, UInt8*, VARIANT, HRESULT)
-    get_writable : Proc(IAzTask2*, LibC::BOOL*, HRESULT)
-    get_property : Proc(IAzTask2*, Int32, VARIANT, VARIANT*, HRESULT)
-    set_property : Proc(IAzTask2*, Int32, VARIANT, VARIANT, HRESULT)
-    add_property_item : Proc(IAzTask2*, Int32, VARIANT, VARIANT, HRESULT)
-    delete_property_item : Proc(IAzTask2*, Int32, VARIANT, VARIANT, HRESULT)
-    submit : Proc(IAzTask2*, Int32, VARIANT, HRESULT)
-    role_assignments : Proc(IAzTask2*, UInt8*, Int16, IAzRoleAssignments*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_application_data : UInt64
+    put_application_data : UInt64
+    get_biz_rule : UInt64
+    put_biz_rule : UInt64
+    get_biz_rule_language : UInt64
+    put_biz_rule_language : UInt64
+    get_biz_rule_imported_path : UInt64
+    put_biz_rule_imported_path : UInt64
+    get_is_role_definition : UInt64
+    put_is_role_definition : UInt64
+    get_operations : UInt64
+    get_tasks : UInt64
+    add_operation : UInt64
+    delete_operation : UInt64
+    add_task : UInt64
+    delete_task : UInt64
+    get_writable : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    add_property_item : UInt64
+    delete_property_item : UInt64
+    submit : UInt64
+    role_assignments : UInt64
   end
 
   IAzTask2_GUID = "03a9a5ee-48c8-4832-9025-aad503c46526"
@@ -2218,46 +2218,46 @@ lib LibWin32
   fun LookupSecurityDescriptorPartsW(ppowner : TRUSTEE_W**, ppgroup : TRUSTEE_W**, pccountofaccessentries : UInt32*, pplistofaccessentries : EXPLICIT_ACCESS_W**, pccountofauditentries : UInt32*, pplistofauditentries : EXPLICIT_ACCESS_W**, psd : SECURITY_DESCRIPTOR*) : UInt32
 
   # Params # pexplicitaccess : EXPLICIT_ACCESS_A* [In],ptrusteename : PSTR [In],accesspermissions : UInt32 [In],accessmode : ACCESS_MODE [In],inheritance : ACE_FLAGS [In]
-  fun BuildExplicitAccessWithNameA(pexplicitaccess : EXPLICIT_ACCESS_A*, ptrusteename : PSTR, accesspermissions : UInt32, accessmode : ACCESS_MODE, inheritance : ACE_FLAGS)
+  fun BuildExplicitAccessWithNameA(pexplicitaccess : EXPLICIT_ACCESS_A*, ptrusteename : PSTR, accesspermissions : UInt32, accessmode : ACCESS_MODE, inheritance : ACE_FLAGS) : Void
 
   # Params # pexplicitaccess : EXPLICIT_ACCESS_W* [In],ptrusteename : LibC::LPWSTR [In],accesspermissions : UInt32 [In],accessmode : ACCESS_MODE [In],inheritance : ACE_FLAGS [In]
-  fun BuildExplicitAccessWithNameW(pexplicitaccess : EXPLICIT_ACCESS_W*, ptrusteename : LibC::LPWSTR, accesspermissions : UInt32, accessmode : ACCESS_MODE, inheritance : ACE_FLAGS)
+  fun BuildExplicitAccessWithNameW(pexplicitaccess : EXPLICIT_ACCESS_W*, ptrusteename : LibC::LPWSTR, accesspermissions : UInt32, accessmode : ACCESS_MODE, inheritance : ACE_FLAGS) : Void
 
   # Params # pexplicitaccess : EXPLICIT_ACCESS_A* [In],ptrusteename : PSTR [In],ptrustee : TRUSTEE_A* [In],accesspermissions : UInt32 [In],accessmode : ACCESS_MODE [In],inheritance : UInt32 [In]
-  fun BuildImpersonateExplicitAccessWithNameA(pexplicitaccess : EXPLICIT_ACCESS_A*, ptrusteename : PSTR, ptrustee : TRUSTEE_A*, accesspermissions : UInt32, accessmode : ACCESS_MODE, inheritance : UInt32)
+  fun BuildImpersonateExplicitAccessWithNameA(pexplicitaccess : EXPLICIT_ACCESS_A*, ptrusteename : PSTR, ptrustee : TRUSTEE_A*, accesspermissions : UInt32, accessmode : ACCESS_MODE, inheritance : UInt32) : Void
 
   # Params # pexplicitaccess : EXPLICIT_ACCESS_W* [In],ptrusteename : LibC::LPWSTR [In],ptrustee : TRUSTEE_W* [In],accesspermissions : UInt32 [In],accessmode : ACCESS_MODE [In],inheritance : UInt32 [In]
-  fun BuildImpersonateExplicitAccessWithNameW(pexplicitaccess : EXPLICIT_ACCESS_W*, ptrusteename : LibC::LPWSTR, ptrustee : TRUSTEE_W*, accesspermissions : UInt32, accessmode : ACCESS_MODE, inheritance : UInt32)
+  fun BuildImpersonateExplicitAccessWithNameW(pexplicitaccess : EXPLICIT_ACCESS_W*, ptrusteename : LibC::LPWSTR, ptrustee : TRUSTEE_W*, accesspermissions : UInt32, accessmode : ACCESS_MODE, inheritance : UInt32) : Void
 
   # Params # ptrustee : TRUSTEE_A* [In],pname : PSTR [In]
-  fun BuildTrusteeWithNameA(ptrustee : TRUSTEE_A*, pname : PSTR)
+  fun BuildTrusteeWithNameA(ptrustee : TRUSTEE_A*, pname : PSTR) : Void
 
   # Params # ptrustee : TRUSTEE_W* [In],pname : LibC::LPWSTR [In]
-  fun BuildTrusteeWithNameW(ptrustee : TRUSTEE_W*, pname : LibC::LPWSTR)
+  fun BuildTrusteeWithNameW(ptrustee : TRUSTEE_W*, pname : LibC::LPWSTR) : Void
 
   # Params # ptrustee : TRUSTEE_A* [In],pimpersonatetrustee : TRUSTEE_A* [In]
-  fun BuildImpersonateTrusteeA(ptrustee : TRUSTEE_A*, pimpersonatetrustee : TRUSTEE_A*)
+  fun BuildImpersonateTrusteeA(ptrustee : TRUSTEE_A*, pimpersonatetrustee : TRUSTEE_A*) : Void
 
   # Params # ptrustee : TRUSTEE_W* [In],pimpersonatetrustee : TRUSTEE_W* [In]
-  fun BuildImpersonateTrusteeW(ptrustee : TRUSTEE_W*, pimpersonatetrustee : TRUSTEE_W*)
+  fun BuildImpersonateTrusteeW(ptrustee : TRUSTEE_W*, pimpersonatetrustee : TRUSTEE_W*) : Void
 
   # Params # ptrustee : TRUSTEE_A* [In],psid : PSID [In]
-  fun BuildTrusteeWithSidA(ptrustee : TRUSTEE_A*, psid : PSID)
+  fun BuildTrusteeWithSidA(ptrustee : TRUSTEE_A*, psid : PSID) : Void
 
   # Params # ptrustee : TRUSTEE_W* [In],psid : PSID [In]
-  fun BuildTrusteeWithSidW(ptrustee : TRUSTEE_W*, psid : PSID)
+  fun BuildTrusteeWithSidW(ptrustee : TRUSTEE_W*, psid : PSID) : Void
 
   # Params # ptrustee : TRUSTEE_A* [In],pobjsid : OBJECTS_AND_SID* [In],pobjectguid : Guid* [In],pinheritedobjectguid : Guid* [In],psid : PSID [In]
-  fun BuildTrusteeWithObjectsAndSidA(ptrustee : TRUSTEE_A*, pobjsid : OBJECTS_AND_SID*, pobjectguid : Guid*, pinheritedobjectguid : Guid*, psid : PSID)
+  fun BuildTrusteeWithObjectsAndSidA(ptrustee : TRUSTEE_A*, pobjsid : OBJECTS_AND_SID*, pobjectguid : Guid*, pinheritedobjectguid : Guid*, psid : PSID) : Void
 
   # Params # ptrustee : TRUSTEE_W* [In],pobjsid : OBJECTS_AND_SID* [In],pobjectguid : Guid* [In],pinheritedobjectguid : Guid* [In],psid : PSID [In]
-  fun BuildTrusteeWithObjectsAndSidW(ptrustee : TRUSTEE_W*, pobjsid : OBJECTS_AND_SID*, pobjectguid : Guid*, pinheritedobjectguid : Guid*, psid : PSID)
+  fun BuildTrusteeWithObjectsAndSidW(ptrustee : TRUSTEE_W*, pobjsid : OBJECTS_AND_SID*, pobjectguid : Guid*, pinheritedobjectguid : Guid*, psid : PSID) : Void
 
   # Params # ptrustee : TRUSTEE_A* [In],pobjname : OBJECTS_AND_NAME_A* [In],objecttype : SE_OBJECT_TYPE [In],objecttypename : PSTR [In],inheritedobjecttypename : PSTR [In],name : PSTR [In]
-  fun BuildTrusteeWithObjectsAndNameA(ptrustee : TRUSTEE_A*, pobjname : OBJECTS_AND_NAME_A*, objecttype : SE_OBJECT_TYPE, objecttypename : PSTR, inheritedobjecttypename : PSTR, name : PSTR)
+  fun BuildTrusteeWithObjectsAndNameA(ptrustee : TRUSTEE_A*, pobjname : OBJECTS_AND_NAME_A*, objecttype : SE_OBJECT_TYPE, objecttypename : PSTR, inheritedobjecttypename : PSTR, name : PSTR) : Void
 
   # Params # ptrustee : TRUSTEE_W* [In],pobjname : OBJECTS_AND_NAME_W* [In],objecttype : SE_OBJECT_TYPE [In],objecttypename : LibC::LPWSTR [In],inheritedobjecttypename : LibC::LPWSTR [In],name : LibC::LPWSTR [In]
-  fun BuildTrusteeWithObjectsAndNameW(ptrustee : TRUSTEE_W*, pobjname : OBJECTS_AND_NAME_W*, objecttype : SE_OBJECT_TYPE, objecttypename : LibC::LPWSTR, inheritedobjecttypename : LibC::LPWSTR, name : LibC::LPWSTR)
+  fun BuildTrusteeWithObjectsAndNameW(ptrustee : TRUSTEE_W*, pobjname : OBJECTS_AND_NAME_W*, objecttype : SE_OBJECT_TYPE, objecttypename : LibC::LPWSTR, inheritedobjecttypename : LibC::LPWSTR, name : LibC::LPWSTR) : Void
 
   # Params # ptrustee : TRUSTEE_A* [In]
   fun GetTrusteeNameA(ptrustee : TRUSTEE_A*) : PSTR
@@ -2312,4 +2312,3153 @@ lib LibWin32
 
   # Params # securitydescriptor : SECURITY_DESCRIPTOR* [In],requestedstringsdrevision : UInt32 [In],securityinformation : UInt32 [In],stringsecuritydescriptor : LibC::LPWSTR* [In],stringsecuritydescriptorlen : UInt32* [In]
   fun ConvertSecurityDescriptorToStringSecurityDescriptorW(securitydescriptor : SECURITY_DESCRIPTOR*, requestedstringsdrevision : UInt32, securityinformation : UInt32, stringsecuritydescriptor : LibC::LPWSTR*, stringsecuritydescriptorlen : UInt32*) : LibC::BOOL
+end
+struct LibWin32::IAzAuthorizationStore
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_application_data(pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrapplicationdata)
+  end
+  def put_application_data(bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrapplicationdata)
+  end
+  def get_domain_timeout(plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_domain_timeout.unsafe_as(Proc(Int32*, HRESULT)).call(plprop)
+  end
+  def put_domain_timeout(lprop : Int32) : HRESULT
+    @lpVtbl.value.put_domain_timeout.unsafe_as(Proc(Int32, HRESULT)).call(lprop)
+  end
+  def get_script_engine_timeout(plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_script_engine_timeout.unsafe_as(Proc(Int32*, HRESULT)).call(plprop)
+  end
+  def put_script_engine_timeout(lprop : Int32) : HRESULT
+    @lpVtbl.value.put_script_engine_timeout.unsafe_as(Proc(Int32, HRESULT)).call(lprop)
+  end
+  def get_max_script_engines(plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_max_script_engines.unsafe_as(Proc(Int32*, HRESULT)).call(plprop)
+  end
+  def put_max_script_engines(lprop : Int32) : HRESULT
+    @lpVtbl.value.put_max_script_engines.unsafe_as(Proc(Int32, HRESULT)).call(lprop)
+  end
+  def get_generate_audits(pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_generate_audits.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbprop)
+  end
+  def put_generate_audits(bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_generate_audits.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bprop)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def add_property_item(lpropid : AZ_PROP_CONSTANTS, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.unsafe_as(Proc(AZ_PROP_CONSTANTS, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def delete_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def get_policy_administrators(pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaradmins)
+  end
+  def get_policy_readers(pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarreaders)
+  end
+  def add_policy_administrator(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def delete_policy_administrator(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def add_policy_reader(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def delete_policy_reader(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def initialize(lflags : AZ_PROP_CONSTANTS, bstrpolicyurl : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(AZ_PROP_CONSTANTS, UInt8*, VARIANT, HRESULT)).call(lflags, bstrpolicyurl, varreserved)
+  end
+  def update_cache(varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.update_cache.unsafe_as(Proc(VARIANT, HRESULT)).call(varreserved)
+  end
+  def delete(varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(VARIANT, HRESULT)).call(varreserved)
+  end
+  def get_applications(ppappcollection : IAzApplications*) : HRESULT
+    @lpVtbl.value.get_applications.unsafe_as(Proc(IAzApplications*, HRESULT)).call(ppappcollection)
+  end
+  def open_application(bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication*) : HRESULT
+    @lpVtbl.value.open_application.unsafe_as(Proc(UInt8*, VARIANT, IAzApplication*, HRESULT)).call(bstrapplicationname, varreserved, ppapplication)
+  end
+  def create_application(bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication*) : HRESULT
+    @lpVtbl.value.create_application.unsafe_as(Proc(UInt8*, VARIANT, IAzApplication*, HRESULT)).call(bstrapplicationname, varreserved, ppapplication)
+  end
+  def delete_application(bstrapplicationname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrapplicationname, varreserved)
+  end
+  def get_application_groups(ppgroupcollection : IAzApplicationGroups*) : HRESULT
+    @lpVtbl.value.get_application_groups.unsafe_as(Proc(IAzApplicationGroups*, HRESULT)).call(ppgroupcollection)
+  end
+  def create_application_group(bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.create_application_group.unsafe_as(Proc(UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)).call(bstrgroupname, varreserved, ppgroup)
+  end
+  def open_application_group(bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.open_application_group.unsafe_as(Proc(UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)).call(bstrgroupname, varreserved, ppgroup)
+  end
+  def delete_application_group(bstrgroupname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application_group.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrgroupname, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+  def get_delegated_policy_users(pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def get_target_machine(pbstrtargetmachine : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_machine.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtargetmachine)
+  end
+  def get_apply_store_sacl(pbapplystoresacl : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_apply_store_sacl.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbapplystoresacl)
+  end
+  def put_apply_store_sacl(bapplystoresacl : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_apply_store_sacl.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bapplystoresacl)
+  end
+  def get_policy_administrators_name(pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaradmins)
+  end
+  def get_policy_readers_name(pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarreaders)
+  end
+  def add_policy_administrator_name(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def delete_policy_administrator_name(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def add_policy_reader_name(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def delete_policy_reader_name(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def get_delegated_policy_users_name(pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user_name(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user_name(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def close_application(bstrapplicationname : UInt8*, lflag : Int32) : HRESULT
+    @lpVtbl.value.close_application.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(bstrapplicationname, lflag)
+  end
+end
+struct LibWin32::IAzAuthorizationStore2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_application_data(pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrapplicationdata)
+  end
+  def put_application_data(bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrapplicationdata)
+  end
+  def get_domain_timeout(plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_domain_timeout.unsafe_as(Proc(Int32*, HRESULT)).call(plprop)
+  end
+  def put_domain_timeout(lprop : Int32) : HRESULT
+    @lpVtbl.value.put_domain_timeout.unsafe_as(Proc(Int32, HRESULT)).call(lprop)
+  end
+  def get_script_engine_timeout(plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_script_engine_timeout.unsafe_as(Proc(Int32*, HRESULT)).call(plprop)
+  end
+  def put_script_engine_timeout(lprop : Int32) : HRESULT
+    @lpVtbl.value.put_script_engine_timeout.unsafe_as(Proc(Int32, HRESULT)).call(lprop)
+  end
+  def get_max_script_engines(plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_max_script_engines.unsafe_as(Proc(Int32*, HRESULT)).call(plprop)
+  end
+  def put_max_script_engines(lprop : Int32) : HRESULT
+    @lpVtbl.value.put_max_script_engines.unsafe_as(Proc(Int32, HRESULT)).call(lprop)
+  end
+  def get_generate_audits(pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_generate_audits.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbprop)
+  end
+  def put_generate_audits(bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_generate_audits.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bprop)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def add_property_item(lpropid : AZ_PROP_CONSTANTS, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.unsafe_as(Proc(AZ_PROP_CONSTANTS, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def delete_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def get_policy_administrators(pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaradmins)
+  end
+  def get_policy_readers(pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarreaders)
+  end
+  def add_policy_administrator(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def delete_policy_administrator(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def add_policy_reader(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def delete_policy_reader(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def initialize(lflags : AZ_PROP_CONSTANTS, bstrpolicyurl : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(AZ_PROP_CONSTANTS, UInt8*, VARIANT, HRESULT)).call(lflags, bstrpolicyurl, varreserved)
+  end
+  def update_cache(varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.update_cache.unsafe_as(Proc(VARIANT, HRESULT)).call(varreserved)
+  end
+  def delete(varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(VARIANT, HRESULT)).call(varreserved)
+  end
+  def get_applications(ppappcollection : IAzApplications*) : HRESULT
+    @lpVtbl.value.get_applications.unsafe_as(Proc(IAzApplications*, HRESULT)).call(ppappcollection)
+  end
+  def open_application(bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication*) : HRESULT
+    @lpVtbl.value.open_application.unsafe_as(Proc(UInt8*, VARIANT, IAzApplication*, HRESULT)).call(bstrapplicationname, varreserved, ppapplication)
+  end
+  def create_application(bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication*) : HRESULT
+    @lpVtbl.value.create_application.unsafe_as(Proc(UInt8*, VARIANT, IAzApplication*, HRESULT)).call(bstrapplicationname, varreserved, ppapplication)
+  end
+  def delete_application(bstrapplicationname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrapplicationname, varreserved)
+  end
+  def get_application_groups(ppgroupcollection : IAzApplicationGroups*) : HRESULT
+    @lpVtbl.value.get_application_groups.unsafe_as(Proc(IAzApplicationGroups*, HRESULT)).call(ppgroupcollection)
+  end
+  def create_application_group(bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.create_application_group.unsafe_as(Proc(UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)).call(bstrgroupname, varreserved, ppgroup)
+  end
+  def open_application_group(bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.open_application_group.unsafe_as(Proc(UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)).call(bstrgroupname, varreserved, ppgroup)
+  end
+  def delete_application_group(bstrgroupname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application_group.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrgroupname, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+  def get_delegated_policy_users(pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def get_target_machine(pbstrtargetmachine : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_machine.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtargetmachine)
+  end
+  def get_apply_store_sacl(pbapplystoresacl : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_apply_store_sacl.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbapplystoresacl)
+  end
+  def put_apply_store_sacl(bapplystoresacl : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_apply_store_sacl.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bapplystoresacl)
+  end
+  def get_policy_administrators_name(pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaradmins)
+  end
+  def get_policy_readers_name(pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarreaders)
+  end
+  def add_policy_administrator_name(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def delete_policy_administrator_name(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def add_policy_reader_name(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def delete_policy_reader_name(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def get_delegated_policy_users_name(pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user_name(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user_name(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def close_application(bstrapplicationname : UInt8*, lflag : Int32) : HRESULT
+    @lpVtbl.value.close_application.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(bstrapplicationname, lflag)
+  end
+  def open_application2(bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication2*) : HRESULT
+    @lpVtbl.value.open_application2.unsafe_as(Proc(UInt8*, VARIANT, IAzApplication2*, HRESULT)).call(bstrapplicationname, varreserved, ppapplication)
+  end
+  def create_application2(bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication2*) : HRESULT
+    @lpVtbl.value.create_application2.unsafe_as(Proc(UInt8*, VARIANT, IAzApplication2*, HRESULT)).call(bstrapplicationname, varreserved, ppapplication)
+  end
+end
+struct LibWin32::IAzAuthorizationStore3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_application_data(pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrapplicationdata)
+  end
+  def put_application_data(bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrapplicationdata)
+  end
+  def get_domain_timeout(plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_domain_timeout.unsafe_as(Proc(Int32*, HRESULT)).call(plprop)
+  end
+  def put_domain_timeout(lprop : Int32) : HRESULT
+    @lpVtbl.value.put_domain_timeout.unsafe_as(Proc(Int32, HRESULT)).call(lprop)
+  end
+  def get_script_engine_timeout(plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_script_engine_timeout.unsafe_as(Proc(Int32*, HRESULT)).call(plprop)
+  end
+  def put_script_engine_timeout(lprop : Int32) : HRESULT
+    @lpVtbl.value.put_script_engine_timeout.unsafe_as(Proc(Int32, HRESULT)).call(lprop)
+  end
+  def get_max_script_engines(plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_max_script_engines.unsafe_as(Proc(Int32*, HRESULT)).call(plprop)
+  end
+  def put_max_script_engines(lprop : Int32) : HRESULT
+    @lpVtbl.value.put_max_script_engines.unsafe_as(Proc(Int32, HRESULT)).call(lprop)
+  end
+  def get_generate_audits(pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_generate_audits.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbprop)
+  end
+  def put_generate_audits(bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_generate_audits.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bprop)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def add_property_item(lpropid : AZ_PROP_CONSTANTS, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.unsafe_as(Proc(AZ_PROP_CONSTANTS, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def delete_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def get_policy_administrators(pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaradmins)
+  end
+  def get_policy_readers(pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarreaders)
+  end
+  def add_policy_administrator(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def delete_policy_administrator(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def add_policy_reader(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def delete_policy_reader(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def initialize(lflags : AZ_PROP_CONSTANTS, bstrpolicyurl : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(AZ_PROP_CONSTANTS, UInt8*, VARIANT, HRESULT)).call(lflags, bstrpolicyurl, varreserved)
+  end
+  def update_cache(varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.update_cache.unsafe_as(Proc(VARIANT, HRESULT)).call(varreserved)
+  end
+  def delete(varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(VARIANT, HRESULT)).call(varreserved)
+  end
+  def get_applications(ppappcollection : IAzApplications*) : HRESULT
+    @lpVtbl.value.get_applications.unsafe_as(Proc(IAzApplications*, HRESULT)).call(ppappcollection)
+  end
+  def open_application(bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication*) : HRESULT
+    @lpVtbl.value.open_application.unsafe_as(Proc(UInt8*, VARIANT, IAzApplication*, HRESULT)).call(bstrapplicationname, varreserved, ppapplication)
+  end
+  def create_application(bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication*) : HRESULT
+    @lpVtbl.value.create_application.unsafe_as(Proc(UInt8*, VARIANT, IAzApplication*, HRESULT)).call(bstrapplicationname, varreserved, ppapplication)
+  end
+  def delete_application(bstrapplicationname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrapplicationname, varreserved)
+  end
+  def get_application_groups(ppgroupcollection : IAzApplicationGroups*) : HRESULT
+    @lpVtbl.value.get_application_groups.unsafe_as(Proc(IAzApplicationGroups*, HRESULT)).call(ppgroupcollection)
+  end
+  def create_application_group(bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.create_application_group.unsafe_as(Proc(UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)).call(bstrgroupname, varreserved, ppgroup)
+  end
+  def open_application_group(bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.open_application_group.unsafe_as(Proc(UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)).call(bstrgroupname, varreserved, ppgroup)
+  end
+  def delete_application_group(bstrgroupname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application_group.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrgroupname, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+  def get_delegated_policy_users(pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def get_target_machine(pbstrtargetmachine : UInt8**) : HRESULT
+    @lpVtbl.value.get_target_machine.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtargetmachine)
+  end
+  def get_apply_store_sacl(pbapplystoresacl : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_apply_store_sacl.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbapplystoresacl)
+  end
+  def put_apply_store_sacl(bapplystoresacl : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_apply_store_sacl.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bapplystoresacl)
+  end
+  def get_policy_administrators_name(pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaradmins)
+  end
+  def get_policy_readers_name(pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarreaders)
+  end
+  def add_policy_administrator_name(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def delete_policy_administrator_name(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def add_policy_reader_name(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def delete_policy_reader_name(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def get_delegated_policy_users_name(pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user_name(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user_name(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def close_application(bstrapplicationname : UInt8*, lflag : Int32) : HRESULT
+    @lpVtbl.value.close_application.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(bstrapplicationname, lflag)
+  end
+  def open_application2(bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication2*) : HRESULT
+    @lpVtbl.value.open_application2.unsafe_as(Proc(UInt8*, VARIANT, IAzApplication2*, HRESULT)).call(bstrapplicationname, varreserved, ppapplication)
+  end
+  def create_application2(bstrapplicationname : UInt8*, varreserved : VARIANT, ppapplication : IAzApplication2*) : HRESULT
+    @lpVtbl.value.create_application2.unsafe_as(Proc(UInt8*, VARIANT, IAzApplication2*, HRESULT)).call(bstrapplicationname, varreserved, ppapplication)
+  end
+  def is_update_needed(pbisupdateneeded : Int16*) : HRESULT
+    @lpVtbl.value.is_update_needed.unsafe_as(Proc(Int16*, HRESULT)).call(pbisupdateneeded)
+  end
+  def bizrule_group_supported(pbsupported : Int16*) : HRESULT
+    @lpVtbl.value.bizrule_group_supported.unsafe_as(Proc(Int16*, HRESULT)).call(pbsupported)
+  end
+  def upgrade_stores_functional_level(lfunctionallevel : Int32) : HRESULT
+    @lpVtbl.value.upgrade_stores_functional_level.unsafe_as(Proc(Int32, HRESULT)).call(lfunctionallevel)
+  end
+  def is_functional_level_upgrade_supported(lfunctionallevel : Int32, pbsupported : Int16*) : HRESULT
+    @lpVtbl.value.is_functional_level_upgrade_supported.unsafe_as(Proc(Int32, Int16*, HRESULT)).call(lfunctionallevel, pbsupported)
+  end
+  def get_schema_version(plmajorversion : Int32*, plminorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_schema_version.unsafe_as(Proc(Int32*, Int32*, HRESULT)).call(plmajorversion, plminorversion)
+  end
+end
+struct LibWin32::IAzApplication
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_application_data(pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrapplicationdata)
+  end
+  def put_application_data(bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrapplicationdata)
+  end
+  def get_authz_interface_clsid(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_authz_interface_clsid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_authz_interface_clsid(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_authz_interface_clsid.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_version(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_version(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_version.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_generate_audits(pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_generate_audits.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbprop)
+  end
+  def put_generate_audits(bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_generate_audits.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bprop)
+  end
+  def get_apply_store_sacl(pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_apply_store_sacl.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbprop)
+  end
+  def put_apply_store_sacl(bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_apply_store_sacl.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bprop)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def get_policy_administrators(pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaradmins)
+  end
+  def get_policy_readers(pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarreaders)
+  end
+  def add_policy_administrator(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def delete_policy_administrator(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def add_policy_reader(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def delete_policy_reader(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def get_scopes(ppscopecollection : IAzScopes*) : HRESULT
+    @lpVtbl.value.get_scopes.unsafe_as(Proc(IAzScopes*, HRESULT)).call(ppscopecollection)
+  end
+  def open_scope(bstrscopename : UInt8*, varreserved : VARIANT, ppscope : IAzScope*) : HRESULT
+    @lpVtbl.value.open_scope.unsafe_as(Proc(UInt8*, VARIANT, IAzScope*, HRESULT)).call(bstrscopename, varreserved, ppscope)
+  end
+  def create_scope(bstrscopename : UInt8*, varreserved : VARIANT, ppscope : IAzScope*) : HRESULT
+    @lpVtbl.value.create_scope.unsafe_as(Proc(UInt8*, VARIANT, IAzScope*, HRESULT)).call(bstrscopename, varreserved, ppscope)
+  end
+  def delete_scope(bstrscopename : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_scope.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrscopename, varreserved)
+  end
+  def get_operations(ppoperationcollection : IAzOperations*) : HRESULT
+    @lpVtbl.value.get_operations.unsafe_as(Proc(IAzOperations*, HRESULT)).call(ppoperationcollection)
+  end
+  def open_operation(bstroperationname : UInt8*, varreserved : VARIANT, ppoperation : IAzOperation*) : HRESULT
+    @lpVtbl.value.open_operation.unsafe_as(Proc(UInt8*, VARIANT, IAzOperation*, HRESULT)).call(bstroperationname, varreserved, ppoperation)
+  end
+  def create_operation(bstroperationname : UInt8*, varreserved : VARIANT, ppoperation : IAzOperation*) : HRESULT
+    @lpVtbl.value.create_operation.unsafe_as(Proc(UInt8*, VARIANT, IAzOperation*, HRESULT)).call(bstroperationname, varreserved, ppoperation)
+  end
+  def delete_operation(bstroperationname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_operation.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstroperationname, varreserved)
+  end
+  def get_tasks(pptaskcollection : IAzTasks*) : HRESULT
+    @lpVtbl.value.get_tasks.unsafe_as(Proc(IAzTasks*, HRESULT)).call(pptaskcollection)
+  end
+  def open_task(bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.open_task.unsafe_as(Proc(UInt8*, VARIANT, IAzTask*, HRESULT)).call(bstrtaskname, varreserved, pptask)
+  end
+  def create_task(bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.create_task.unsafe_as(Proc(UInt8*, VARIANT, IAzTask*, HRESULT)).call(bstrtaskname, varreserved, pptask)
+  end
+  def delete_task(bstrtaskname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrtaskname, varreserved)
+  end
+  def get_application_groups(ppgroupcollection : IAzApplicationGroups*) : HRESULT
+    @lpVtbl.value.get_application_groups.unsafe_as(Proc(IAzApplicationGroups*, HRESULT)).call(ppgroupcollection)
+  end
+  def open_application_group(bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.open_application_group.unsafe_as(Proc(UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)).call(bstrgroupname, varreserved, ppgroup)
+  end
+  def create_application_group(bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.create_application_group.unsafe_as(Proc(UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)).call(bstrgroupname, varreserved, ppgroup)
+  end
+  def delete_application_group(bstrgroupname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application_group.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrgroupname, varreserved)
+  end
+  def get_roles(pprolecollection : IAzRoles*) : HRESULT
+    @lpVtbl.value.get_roles.unsafe_as(Proc(IAzRoles*, HRESULT)).call(pprolecollection)
+  end
+  def open_role(bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.open_role.unsafe_as(Proc(UInt8*, VARIANT, IAzRole*, HRESULT)).call(bstrrolename, varreserved, pprole)
+  end
+  def create_role(bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.create_role.unsafe_as(Proc(UInt8*, VARIANT, IAzRole*, HRESULT)).call(bstrrolename, varreserved, pprole)
+  end
+  def delete_role(bstrrolename : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_role.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrrolename, varreserved)
+  end
+  def initialize_client_context_from_token(ulltokenhandle : UInt64, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_token.unsafe_as(Proc(UInt64, VARIANT, IAzClientContext*, HRESULT)).call(ulltokenhandle, varreserved, ppclientcontext)
+  end
+  def add_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def delete_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+  def initialize_client_context_from_name(clientname : UInt8*, domainname : UInt8*, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_name.unsafe_as(Proc(UInt8*, UInt8*, VARIANT, IAzClientContext*, HRESULT)).call(clientname, domainname, varreserved, ppclientcontext)
+  end
+  def get_delegated_policy_users(pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def initialize_client_context_from_string_sid(sidstring : UInt8*, loptions : Int32, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_string_sid.unsafe_as(Proc(UInt8*, Int32, VARIANT, IAzClientContext*, HRESULT)).call(sidstring, loptions, varreserved, ppclientcontext)
+  end
+  def get_policy_administrators_name(pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaradmins)
+  end
+  def get_policy_readers_name(pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarreaders)
+  end
+  def add_policy_administrator_name(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def delete_policy_administrator_name(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def add_policy_reader_name(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def delete_policy_reader_name(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def get_delegated_policy_users_name(pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user_name(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user_name(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+end
+struct LibWin32::IAzApplication2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_application_data(pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrapplicationdata)
+  end
+  def put_application_data(bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrapplicationdata)
+  end
+  def get_authz_interface_clsid(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_authz_interface_clsid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_authz_interface_clsid(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_authz_interface_clsid.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_version(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_version(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_version.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_generate_audits(pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_generate_audits.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbprop)
+  end
+  def put_generate_audits(bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_generate_audits.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bprop)
+  end
+  def get_apply_store_sacl(pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_apply_store_sacl.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbprop)
+  end
+  def put_apply_store_sacl(bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_apply_store_sacl.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bprop)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def get_policy_administrators(pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaradmins)
+  end
+  def get_policy_readers(pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarreaders)
+  end
+  def add_policy_administrator(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def delete_policy_administrator(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def add_policy_reader(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def delete_policy_reader(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def get_scopes(ppscopecollection : IAzScopes*) : HRESULT
+    @lpVtbl.value.get_scopes.unsafe_as(Proc(IAzScopes*, HRESULT)).call(ppscopecollection)
+  end
+  def open_scope(bstrscopename : UInt8*, varreserved : VARIANT, ppscope : IAzScope*) : HRESULT
+    @lpVtbl.value.open_scope.unsafe_as(Proc(UInt8*, VARIANT, IAzScope*, HRESULT)).call(bstrscopename, varreserved, ppscope)
+  end
+  def create_scope(bstrscopename : UInt8*, varreserved : VARIANT, ppscope : IAzScope*) : HRESULT
+    @lpVtbl.value.create_scope.unsafe_as(Proc(UInt8*, VARIANT, IAzScope*, HRESULT)).call(bstrscopename, varreserved, ppscope)
+  end
+  def delete_scope(bstrscopename : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_scope.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrscopename, varreserved)
+  end
+  def get_operations(ppoperationcollection : IAzOperations*) : HRESULT
+    @lpVtbl.value.get_operations.unsafe_as(Proc(IAzOperations*, HRESULT)).call(ppoperationcollection)
+  end
+  def open_operation(bstroperationname : UInt8*, varreserved : VARIANT, ppoperation : IAzOperation*) : HRESULT
+    @lpVtbl.value.open_operation.unsafe_as(Proc(UInt8*, VARIANT, IAzOperation*, HRESULT)).call(bstroperationname, varreserved, ppoperation)
+  end
+  def create_operation(bstroperationname : UInt8*, varreserved : VARIANT, ppoperation : IAzOperation*) : HRESULT
+    @lpVtbl.value.create_operation.unsafe_as(Proc(UInt8*, VARIANT, IAzOperation*, HRESULT)).call(bstroperationname, varreserved, ppoperation)
+  end
+  def delete_operation(bstroperationname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_operation.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstroperationname, varreserved)
+  end
+  def get_tasks(pptaskcollection : IAzTasks*) : HRESULT
+    @lpVtbl.value.get_tasks.unsafe_as(Proc(IAzTasks*, HRESULT)).call(pptaskcollection)
+  end
+  def open_task(bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.open_task.unsafe_as(Proc(UInt8*, VARIANT, IAzTask*, HRESULT)).call(bstrtaskname, varreserved, pptask)
+  end
+  def create_task(bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.create_task.unsafe_as(Proc(UInt8*, VARIANT, IAzTask*, HRESULT)).call(bstrtaskname, varreserved, pptask)
+  end
+  def delete_task(bstrtaskname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrtaskname, varreserved)
+  end
+  def get_application_groups(ppgroupcollection : IAzApplicationGroups*) : HRESULT
+    @lpVtbl.value.get_application_groups.unsafe_as(Proc(IAzApplicationGroups*, HRESULT)).call(ppgroupcollection)
+  end
+  def open_application_group(bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.open_application_group.unsafe_as(Proc(UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)).call(bstrgroupname, varreserved, ppgroup)
+  end
+  def create_application_group(bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.create_application_group.unsafe_as(Proc(UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)).call(bstrgroupname, varreserved, ppgroup)
+  end
+  def delete_application_group(bstrgroupname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application_group.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrgroupname, varreserved)
+  end
+  def get_roles(pprolecollection : IAzRoles*) : HRESULT
+    @lpVtbl.value.get_roles.unsafe_as(Proc(IAzRoles*, HRESULT)).call(pprolecollection)
+  end
+  def open_role(bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.open_role.unsafe_as(Proc(UInt8*, VARIANT, IAzRole*, HRESULT)).call(bstrrolename, varreserved, pprole)
+  end
+  def create_role(bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.create_role.unsafe_as(Proc(UInt8*, VARIANT, IAzRole*, HRESULT)).call(bstrrolename, varreserved, pprole)
+  end
+  def delete_role(bstrrolename : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_role.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrrolename, varreserved)
+  end
+  def initialize_client_context_from_token(ulltokenhandle : UInt64, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_token.unsafe_as(Proc(UInt64, VARIANT, IAzClientContext*, HRESULT)).call(ulltokenhandle, varreserved, ppclientcontext)
+  end
+  def add_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def delete_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+  def initialize_client_context_from_name(clientname : UInt8*, domainname : UInt8*, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_name.unsafe_as(Proc(UInt8*, UInt8*, VARIANT, IAzClientContext*, HRESULT)).call(clientname, domainname, varreserved, ppclientcontext)
+  end
+  def get_delegated_policy_users(pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def initialize_client_context_from_string_sid(sidstring : UInt8*, loptions : Int32, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_string_sid.unsafe_as(Proc(UInt8*, Int32, VARIANT, IAzClientContext*, HRESULT)).call(sidstring, loptions, varreserved, ppclientcontext)
+  end
+  def get_policy_administrators_name(pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaradmins)
+  end
+  def get_policy_readers_name(pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarreaders)
+  end
+  def add_policy_administrator_name(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def delete_policy_administrator_name(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def add_policy_reader_name(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def delete_policy_reader_name(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def get_delegated_policy_users_name(pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user_name(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user_name(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def initialize_client_context_from_token2(ultokenhandlelowpart : UInt32, ultokenhandlehighpart : UInt32, varreserved : VARIANT, ppclientcontext : IAzClientContext2*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_token2.unsafe_as(Proc(UInt32, UInt32, VARIANT, IAzClientContext2*, HRESULT)).call(ultokenhandlelowpart, ultokenhandlehighpart, varreserved, ppclientcontext)
+  end
+  def initialize_client_context2(identifyingstring : UInt8*, varreserved : VARIANT, ppclientcontext : IAzClientContext2*) : HRESULT
+    @lpVtbl.value.initialize_client_context2.unsafe_as(Proc(UInt8*, VARIANT, IAzClientContext2*, HRESULT)).call(identifyingstring, varreserved, ppclientcontext)
+  end
+end
+struct LibWin32::IAzApplications
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(index : Int32, pvarobtptr : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(index, pvarobtptr)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def get__new_enum(ppenumptr : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppenumptr)
+  end
+end
+struct LibWin32::IAzOperation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_application_data(pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrapplicationdata)
+  end
+  def put_application_data(bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrapplicationdata)
+  end
+  def get_operation_id(plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_operation_id.unsafe_as(Proc(Int32*, HRESULT)).call(plprop)
+  end
+  def put_operation_id(lprop : Int32) : HRESULT
+    @lpVtbl.value.put_operation_id.unsafe_as(Proc(Int32, HRESULT)).call(lprop)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+end
+struct LibWin32::IAzOperations
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(index : Int32, pvarobtptr : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(index, pvarobtptr)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def get__new_enum(ppenumptr : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppenumptr)
+  end
+end
+struct LibWin32::IAzTask
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_application_data(pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrapplicationdata)
+  end
+  def put_application_data(bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrapplicationdata)
+  end
+  def get_biz_rule(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_biz_rule(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_biz_rule_language(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule_language.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_biz_rule_language(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule_language.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_biz_rule_imported_path(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule_imported_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_biz_rule_imported_path(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule_imported_path.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_is_role_definition(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_role_definition.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def put_is_role_definition(fprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_is_role_definition.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fprop)
+  end
+  def get_operations(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_operations.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_tasks(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_tasks.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def add_operation(bstrop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_operation.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrop, varreserved)
+  end
+  def delete_operation(bstrop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_operation.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrop, varreserved)
+  end
+  def add_task(bstrtask : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_task.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrtask, varreserved)
+  end
+  def delete_task(bstrtask : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrtask, varreserved)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def add_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def delete_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+end
+struct LibWin32::IAzTasks
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(index : Int32, pvarobtptr : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(index, pvarobtptr)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def get__new_enum(ppenumptr : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppenumptr)
+  end
+end
+struct LibWin32::IAzScope
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_application_data(pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrapplicationdata)
+  end
+  def put_application_data(bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrapplicationdata)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def add_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def delete_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def get_policy_administrators(pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaradmins)
+  end
+  def get_policy_readers(pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarreaders)
+  end
+  def add_policy_administrator(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def delete_policy_administrator(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def add_policy_reader(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def delete_policy_reader(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def get_application_groups(ppgroupcollection : IAzApplicationGroups*) : HRESULT
+    @lpVtbl.value.get_application_groups.unsafe_as(Proc(IAzApplicationGroups*, HRESULT)).call(ppgroupcollection)
+  end
+  def open_application_group(bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.open_application_group.unsafe_as(Proc(UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)).call(bstrgroupname, varreserved, ppgroup)
+  end
+  def create_application_group(bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.create_application_group.unsafe_as(Proc(UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)).call(bstrgroupname, varreserved, ppgroup)
+  end
+  def delete_application_group(bstrgroupname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application_group.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrgroupname, varreserved)
+  end
+  def get_roles(pprolecollection : IAzRoles*) : HRESULT
+    @lpVtbl.value.get_roles.unsafe_as(Proc(IAzRoles*, HRESULT)).call(pprolecollection)
+  end
+  def open_role(bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.open_role.unsafe_as(Proc(UInt8*, VARIANT, IAzRole*, HRESULT)).call(bstrrolename, varreserved, pprole)
+  end
+  def create_role(bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.create_role.unsafe_as(Proc(UInt8*, VARIANT, IAzRole*, HRESULT)).call(bstrrolename, varreserved, pprole)
+  end
+  def delete_role(bstrrolename : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_role.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrrolename, varreserved)
+  end
+  def get_tasks(pptaskcollection : IAzTasks*) : HRESULT
+    @lpVtbl.value.get_tasks.unsafe_as(Proc(IAzTasks*, HRESULT)).call(pptaskcollection)
+  end
+  def open_task(bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.open_task.unsafe_as(Proc(UInt8*, VARIANT, IAzTask*, HRESULT)).call(bstrtaskname, varreserved, pptask)
+  end
+  def create_task(bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.create_task.unsafe_as(Proc(UInt8*, VARIANT, IAzTask*, HRESULT)).call(bstrtaskname, varreserved, pptask)
+  end
+  def delete_task(bstrtaskname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrtaskname, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+  def get_can_be_delegated(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_be_delegated.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_bizrules_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_bizrules_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_policy_administrators_name(pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaradmins)
+  end
+  def get_policy_readers_name(pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarreaders)
+  end
+  def add_policy_administrator_name(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def delete_policy_administrator_name(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def add_policy_reader_name(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def delete_policy_reader_name(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+end
+struct LibWin32::IAzScopes
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(index : Int32, pvarobtptr : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(index, pvarobtptr)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def get__new_enum(ppenumptr : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppenumptr)
+  end
+end
+struct LibWin32::IAzApplicationGroup
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+  def get_type(plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(Int32*, HRESULT)).call(plprop)
+  end
+  def put_type(lprop : Int32) : HRESULT
+    @lpVtbl.value.put_type.unsafe_as(Proc(Int32, HRESULT)).call(lprop)
+  end
+  def get_ldap_query(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_ldap_query.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_ldap_query(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_ldap_query.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_app_members(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_app_members.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_app_non_members(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_app_non_members.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_members(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_members.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_non_members(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_non_members.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def add_app_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_app_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_app_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_app_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def add_app_non_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_app_non_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_app_non_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_app_non_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def add_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def add_non_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_non_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_non_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_non_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def add_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def delete_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+  def add_member_name(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_member_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_member_name(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_member_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def add_non_member_name(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_non_member_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_non_member_name(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_non_member_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def get_members_name(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_members_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_non_members_name(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_non_members_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+end
+struct LibWin32::IAzApplicationGroups
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(index : Int32, pvarobtptr : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(index, pvarobtptr)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def get__new_enum(ppenumptr : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppenumptr)
+  end
+end
+struct LibWin32::IAzRole
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_application_data(pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrapplicationdata)
+  end
+  def put_application_data(bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrapplicationdata)
+  end
+  def add_app_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_app_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_app_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_app_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def add_task(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_task.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_task(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def add_operation(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_operation.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_operation(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_operation.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def add_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def get_app_members(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_app_members.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_members(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_members.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_operations(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_operations.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_tasks(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_tasks.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def add_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def delete_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+  def add_member_name(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_member_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_member_name(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_member_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def get_members_name(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_members_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+end
+struct LibWin32::IAzRoles
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(index : Int32, pvarobtptr : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(index, pvarobtptr)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def get__new_enum(ppenumptr : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppenumptr)
+  end
+end
+struct LibWin32::IAzClientContext
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def access_check(bstrobjectname : UInt8*, varscopenames : VARIANT, varoperations : VARIANT, varparameternames : VARIANT, varparametervalues : VARIANT, varinterfacenames : VARIANT, varinterfaceflags : VARIANT, varinterfaces : VARIANT, pvarresults : VARIANT*) : HRESULT
+    @lpVtbl.value.access_check.unsafe_as(Proc(UInt8*, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT*, HRESULT)).call(bstrobjectname, varscopenames, varoperations, varparameternames, varparametervalues, varinterfacenames, varinterfaceflags, varinterfaces, pvarresults)
+  end
+  def get_business_rule_string(pbstrbusinessrulestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_business_rule_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbusinessrulestring)
+  end
+  def get_user_dn(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_dn.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_sam_compat(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_sam_compat.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_display(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_display.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_guid(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_canonical(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_canonical.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_upn(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_upn.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_dns_sam_compat(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_dns_sam_compat.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def get_roles(bstrscopename : UInt8*, pvarrolenames : VARIANT*) : HRESULT
+    @lpVtbl.value.get_roles.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrscopename, pvarrolenames)
+  end
+  def get_role_for_access_check(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_role_for_access_check.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_role_for_access_check(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_role_for_access_check.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+end
+struct LibWin32::IAzClientContext2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def access_check(bstrobjectname : UInt8*, varscopenames : VARIANT, varoperations : VARIANT, varparameternames : VARIANT, varparametervalues : VARIANT, varinterfacenames : VARIANT, varinterfaceflags : VARIANT, varinterfaces : VARIANT, pvarresults : VARIANT*) : HRESULT
+    @lpVtbl.value.access_check.unsafe_as(Proc(UInt8*, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT*, HRESULT)).call(bstrobjectname, varscopenames, varoperations, varparameternames, varparametervalues, varinterfacenames, varinterfaceflags, varinterfaces, pvarresults)
+  end
+  def get_business_rule_string(pbstrbusinessrulestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_business_rule_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbusinessrulestring)
+  end
+  def get_user_dn(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_dn.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_sam_compat(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_sam_compat.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_display(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_display.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_guid(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_canonical(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_canonical.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_upn(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_upn.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_dns_sam_compat(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_dns_sam_compat.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def get_roles(bstrscopename : UInt8*, pvarrolenames : VARIANT*) : HRESULT
+    @lpVtbl.value.get_roles.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrscopename, pvarrolenames)
+  end
+  def get_role_for_access_check(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_role_for_access_check.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_role_for_access_check(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_role_for_access_check.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_assigned_scopes_page(loptions : Int32, pagesize : Int32, pvarcursor : VARIANT*, pvarscopenames : VARIANT*) : HRESULT
+    @lpVtbl.value.get_assigned_scopes_page.unsafe_as(Proc(Int32, Int32, VARIANT*, VARIANT*, HRESULT)).call(loptions, pagesize, pvarcursor, pvarscopenames)
+  end
+  def add_roles(varroles : VARIANT, bstrscopename : UInt8*) : HRESULT
+    @lpVtbl.value.add_roles.unsafe_as(Proc(VARIANT, UInt8*, HRESULT)).call(varroles, bstrscopename)
+  end
+  def add_application_groups(varapplicationgroups : VARIANT) : HRESULT
+    @lpVtbl.value.add_application_groups.unsafe_as(Proc(VARIANT, HRESULT)).call(varapplicationgroups)
+  end
+  def add_string_sids(varstringsids : VARIANT) : HRESULT
+    @lpVtbl.value.add_string_sids.unsafe_as(Proc(VARIANT, HRESULT)).call(varstringsids)
+  end
+  def put_ldap_query_dn(bstrldapquerydn : UInt8*) : HRESULT
+    @lpVtbl.value.put_ldap_query_dn.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrldapquerydn)
+  end
+  def get_ldap_query_dn(pbstrldapquerydn : UInt8**) : HRESULT
+    @lpVtbl.value.get_ldap_query_dn.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrldapquerydn)
+  end
+end
+struct LibWin32::IAzBizRuleContext
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def put_business_rule_result(bresult : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_business_rule_result.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bresult)
+  end
+  def put_business_rule_string(bstrbusinessrulestring : UInt8*) : HRESULT
+    @lpVtbl.value.put_business_rule_string.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrbusinessrulestring)
+  end
+  def get_business_rule_string(pbstrbusinessrulestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_business_rule_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbusinessrulestring)
+  end
+  def get_parameter(bstrparametername : UInt8*, pvarparametervalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_parameter.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrparametername, pvarparametervalue)
+  end
+end
+struct LibWin32::IAzBizRuleParameters
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def add_parameter(bstrparametername : UInt8*, varparametervalue : VARIANT) : HRESULT
+    @lpVtbl.value.add_parameter.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrparametername, varparametervalue)
+  end
+  def add_parameters(varparameternames : VARIANT, varparametervalues : VARIANT) : HRESULT
+    @lpVtbl.value.add_parameters.unsafe_as(Proc(VARIANT, VARIANT, HRESULT)).call(varparameternames, varparametervalues)
+  end
+  def get_parameter_value(bstrparametername : UInt8*, pvarparametervalue : VARIANT*) : HRESULT
+    @lpVtbl.value.get_parameter_value.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrparametername, pvarparametervalue)
+  end
+  def remove(varparametername : UInt8*) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(UInt8*, HRESULT)).call(varparametername)
+  end
+  def remove_all : HRESULT
+    @lpVtbl.value.remove_all.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_count(plcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(plcount)
+  end
+end
+struct LibWin32::IAzBizRuleInterfaces
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def add_interface(bstrinterfacename : UInt8*, linterfaceflag : Int32, varinterface : VARIANT) : HRESULT
+    @lpVtbl.value.add_interface.unsafe_as(Proc(UInt8*, Int32, VARIANT, HRESULT)).call(bstrinterfacename, linterfaceflag, varinterface)
+  end
+  def add_interfaces(varinterfacenames : VARIANT, varinterfaceflags : VARIANT, varinterfaces : VARIANT) : HRESULT
+    @lpVtbl.value.add_interfaces.unsafe_as(Proc(VARIANT, VARIANT, VARIANT, HRESULT)).call(varinterfacenames, varinterfaceflags, varinterfaces)
+  end
+  def get_interface_value(bstrinterfacename : UInt8*, linterfaceflag : Int32*, varinterface : VARIANT*) : HRESULT
+    @lpVtbl.value.get_interface_value.unsafe_as(Proc(UInt8*, Int32*, VARIANT*, HRESULT)).call(bstrinterfacename, linterfaceflag, varinterface)
+  end
+  def remove(bstrinterfacename : UInt8*) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrinterfacename)
+  end
+  def remove_all : HRESULT
+    @lpVtbl.value.remove_all.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_count(plcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(plcount)
+  end
+end
+struct LibWin32::IAzClientContext3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def access_check(bstrobjectname : UInt8*, varscopenames : VARIANT, varoperations : VARIANT, varparameternames : VARIANT, varparametervalues : VARIANT, varinterfacenames : VARIANT, varinterfaceflags : VARIANT, varinterfaces : VARIANT, pvarresults : VARIANT*) : HRESULT
+    @lpVtbl.value.access_check.unsafe_as(Proc(UInt8*, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT, VARIANT*, HRESULT)).call(bstrobjectname, varscopenames, varoperations, varparameternames, varparametervalues, varinterfacenames, varinterfaceflags, varinterfaces, pvarresults)
+  end
+  def get_business_rule_string(pbstrbusinessrulestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_business_rule_string.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbusinessrulestring)
+  end
+  def get_user_dn(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_dn.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_sam_compat(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_sam_compat.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_display(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_display.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_guid(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_canonical(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_canonical.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_upn(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_upn.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_user_dns_sam_compat(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_dns_sam_compat.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def get_roles(bstrscopename : UInt8*, pvarrolenames : VARIANT*) : HRESULT
+    @lpVtbl.value.get_roles.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrscopename, pvarrolenames)
+  end
+  def get_role_for_access_check(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_role_for_access_check.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_role_for_access_check(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_role_for_access_check.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_assigned_scopes_page(loptions : Int32, pagesize : Int32, pvarcursor : VARIANT*, pvarscopenames : VARIANT*) : HRESULT
+    @lpVtbl.value.get_assigned_scopes_page.unsafe_as(Proc(Int32, Int32, VARIANT*, VARIANT*, HRESULT)).call(loptions, pagesize, pvarcursor, pvarscopenames)
+  end
+  def add_roles(varroles : VARIANT, bstrscopename : UInt8*) : HRESULT
+    @lpVtbl.value.add_roles.unsafe_as(Proc(VARIANT, UInt8*, HRESULT)).call(varroles, bstrscopename)
+  end
+  def add_application_groups(varapplicationgroups : VARIANT) : HRESULT
+    @lpVtbl.value.add_application_groups.unsafe_as(Proc(VARIANT, HRESULT)).call(varapplicationgroups)
+  end
+  def add_string_sids(varstringsids : VARIANT) : HRESULT
+    @lpVtbl.value.add_string_sids.unsafe_as(Proc(VARIANT, HRESULT)).call(varstringsids)
+  end
+  def put_ldap_query_dn(bstrldapquerydn : UInt8*) : HRESULT
+    @lpVtbl.value.put_ldap_query_dn.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrldapquerydn)
+  end
+  def get_ldap_query_dn(pbstrldapquerydn : UInt8**) : HRESULT
+    @lpVtbl.value.get_ldap_query_dn.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrldapquerydn)
+  end
+  def access_check2(bstrobjectname : UInt8*, bstrscopename : UInt8*, loperation : Int32, plresult : UInt32*) : HRESULT
+    @lpVtbl.value.access_check2.unsafe_as(Proc(UInt8*, UInt8*, Int32, UInt32*, HRESULT)).call(bstrobjectname, bstrscopename, loperation, plresult)
+  end
+  def is_in_role_assignment(bstrscopename : UInt8*, bstrrolename : UInt8*, pbisinrole : Int16*) : HRESULT
+    @lpVtbl.value.is_in_role_assignment.unsafe_as(Proc(UInt8*, UInt8*, Int16*, HRESULT)).call(bstrscopename, bstrrolename, pbisinrole)
+  end
+  def get_operations(bstrscopename : UInt8*, ppoperationcollection : IAzOperations*) : HRESULT
+    @lpVtbl.value.get_operations.unsafe_as(Proc(UInt8*, IAzOperations*, HRESULT)).call(bstrscopename, ppoperationcollection)
+  end
+  def get_tasks(bstrscopename : UInt8*, pptaskcollection : IAzTasks*) : HRESULT
+    @lpVtbl.value.get_tasks.unsafe_as(Proc(UInt8*, IAzTasks*, HRESULT)).call(bstrscopename, pptaskcollection)
+  end
+  def get_biz_rule_parameters(ppbizruleparam : IAzBizRuleParameters*) : HRESULT
+    @lpVtbl.value.get_biz_rule_parameters.unsafe_as(Proc(IAzBizRuleParameters*, HRESULT)).call(ppbizruleparam)
+  end
+  def get_biz_rule_interfaces(ppbizruleinterfaces : IAzBizRuleInterfaces*) : HRESULT
+    @lpVtbl.value.get_biz_rule_interfaces.unsafe_as(Proc(IAzBizRuleInterfaces*, HRESULT)).call(ppbizruleinterfaces)
+  end
+  def get_groups(bstrscopename : UInt8*, uloptions : AZ_PROP_CONSTANTS, pgrouparray : VARIANT*) : HRESULT
+    @lpVtbl.value.get_groups.unsafe_as(Proc(UInt8*, AZ_PROP_CONSTANTS, VARIANT*, HRESULT)).call(bstrscopename, uloptions, pgrouparray)
+  end
+  def get_sids(pstringsidarray : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sids.unsafe_as(Proc(VARIANT*, HRESULT)).call(pstringsidarray)
+  end
+end
+struct LibWin32::IAzScope2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_application_data(pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrapplicationdata)
+  end
+  def put_application_data(bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrapplicationdata)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def add_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def delete_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def get_policy_administrators(pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaradmins)
+  end
+  def get_policy_readers(pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarreaders)
+  end
+  def add_policy_administrator(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def delete_policy_administrator(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def add_policy_reader(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def delete_policy_reader(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def get_application_groups(ppgroupcollection : IAzApplicationGroups*) : HRESULT
+    @lpVtbl.value.get_application_groups.unsafe_as(Proc(IAzApplicationGroups*, HRESULT)).call(ppgroupcollection)
+  end
+  def open_application_group(bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.open_application_group.unsafe_as(Proc(UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)).call(bstrgroupname, varreserved, ppgroup)
+  end
+  def create_application_group(bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.create_application_group.unsafe_as(Proc(UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)).call(bstrgroupname, varreserved, ppgroup)
+  end
+  def delete_application_group(bstrgroupname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application_group.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrgroupname, varreserved)
+  end
+  def get_roles(pprolecollection : IAzRoles*) : HRESULT
+    @lpVtbl.value.get_roles.unsafe_as(Proc(IAzRoles*, HRESULT)).call(pprolecollection)
+  end
+  def open_role(bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.open_role.unsafe_as(Proc(UInt8*, VARIANT, IAzRole*, HRESULT)).call(bstrrolename, varreserved, pprole)
+  end
+  def create_role(bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.create_role.unsafe_as(Proc(UInt8*, VARIANT, IAzRole*, HRESULT)).call(bstrrolename, varreserved, pprole)
+  end
+  def delete_role(bstrrolename : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_role.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrrolename, varreserved)
+  end
+  def get_tasks(pptaskcollection : IAzTasks*) : HRESULT
+    @lpVtbl.value.get_tasks.unsafe_as(Proc(IAzTasks*, HRESULT)).call(pptaskcollection)
+  end
+  def open_task(bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.open_task.unsafe_as(Proc(UInt8*, VARIANT, IAzTask*, HRESULT)).call(bstrtaskname, varreserved, pptask)
+  end
+  def create_task(bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.create_task.unsafe_as(Proc(UInt8*, VARIANT, IAzTask*, HRESULT)).call(bstrtaskname, varreserved, pptask)
+  end
+  def delete_task(bstrtaskname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrtaskname, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+  def get_can_be_delegated(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_can_be_delegated.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_bizrules_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_bizrules_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_policy_administrators_name(pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaradmins)
+  end
+  def get_policy_readers_name(pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarreaders)
+  end
+  def add_policy_administrator_name(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def delete_policy_administrator_name(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def add_policy_reader_name(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def delete_policy_reader_name(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def get_role_definitions(pproledefinitions : IAzRoleDefinitions*) : HRESULT
+    @lpVtbl.value.get_role_definitions.unsafe_as(Proc(IAzRoleDefinitions*, HRESULT)).call(pproledefinitions)
+  end
+  def create_role_definition(bstrroledefinitionname : UInt8*, pproledefinitions : IAzRoleDefinition*) : HRESULT
+    @lpVtbl.value.create_role_definition.unsafe_as(Proc(UInt8*, IAzRoleDefinition*, HRESULT)).call(bstrroledefinitionname, pproledefinitions)
+  end
+  def open_role_definition(bstrroledefinitionname : UInt8*, pproledefinitions : IAzRoleDefinition*) : HRESULT
+    @lpVtbl.value.open_role_definition.unsafe_as(Proc(UInt8*, IAzRoleDefinition*, HRESULT)).call(bstrroledefinitionname, pproledefinitions)
+  end
+  def delete_role_definition(bstrroledefinitionname : UInt8*) : HRESULT
+    @lpVtbl.value.delete_role_definition.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrroledefinitionname)
+  end
+  def get_role_assignments(pproleassignments : IAzRoleAssignments*) : HRESULT
+    @lpVtbl.value.get_role_assignments.unsafe_as(Proc(IAzRoleAssignments*, HRESULT)).call(pproleassignments)
+  end
+  def create_role_assignment(bstrroleassignmentname : UInt8*, pproleassignment : IAzRoleAssignment*) : HRESULT
+    @lpVtbl.value.create_role_assignment.unsafe_as(Proc(UInt8*, IAzRoleAssignment*, HRESULT)).call(bstrroleassignmentname, pproleassignment)
+  end
+  def open_role_assignment(bstrroleassignmentname : UInt8*, pproleassignment : IAzRoleAssignment*) : HRESULT
+    @lpVtbl.value.open_role_assignment.unsafe_as(Proc(UInt8*, IAzRoleAssignment*, HRESULT)).call(bstrroleassignmentname, pproleassignment)
+  end
+  def delete_role_assignment(bstrroleassignmentname : UInt8*) : HRESULT
+    @lpVtbl.value.delete_role_assignment.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrroleassignmentname)
+  end
+end
+struct LibWin32::IAzApplication3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_application_data(pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrapplicationdata)
+  end
+  def put_application_data(bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrapplicationdata)
+  end
+  def get_authz_interface_clsid(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_authz_interface_clsid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_authz_interface_clsid(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_authz_interface_clsid.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_version(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_version(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_version.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_generate_audits(pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_generate_audits.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbprop)
+  end
+  def put_generate_audits(bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_generate_audits.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bprop)
+  end
+  def get_apply_store_sacl(pbprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_apply_store_sacl.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pbprop)
+  end
+  def put_apply_store_sacl(bprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_apply_store_sacl.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bprop)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def get_policy_administrators(pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaradmins)
+  end
+  def get_policy_readers(pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarreaders)
+  end
+  def add_policy_administrator(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def delete_policy_administrator(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def add_policy_reader(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def delete_policy_reader(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def get_scopes(ppscopecollection : IAzScopes*) : HRESULT
+    @lpVtbl.value.get_scopes.unsafe_as(Proc(IAzScopes*, HRESULT)).call(ppscopecollection)
+  end
+  def open_scope(bstrscopename : UInt8*, varreserved : VARIANT, ppscope : IAzScope*) : HRESULT
+    @lpVtbl.value.open_scope.unsafe_as(Proc(UInt8*, VARIANT, IAzScope*, HRESULT)).call(bstrscopename, varreserved, ppscope)
+  end
+  def create_scope(bstrscopename : UInt8*, varreserved : VARIANT, ppscope : IAzScope*) : HRESULT
+    @lpVtbl.value.create_scope.unsafe_as(Proc(UInt8*, VARIANT, IAzScope*, HRESULT)).call(bstrscopename, varreserved, ppscope)
+  end
+  def delete_scope(bstrscopename : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_scope.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrscopename, varreserved)
+  end
+  def get_operations(ppoperationcollection : IAzOperations*) : HRESULT
+    @lpVtbl.value.get_operations.unsafe_as(Proc(IAzOperations*, HRESULT)).call(ppoperationcollection)
+  end
+  def open_operation(bstroperationname : UInt8*, varreserved : VARIANT, ppoperation : IAzOperation*) : HRESULT
+    @lpVtbl.value.open_operation.unsafe_as(Proc(UInt8*, VARIANT, IAzOperation*, HRESULT)).call(bstroperationname, varreserved, ppoperation)
+  end
+  def create_operation(bstroperationname : UInt8*, varreserved : VARIANT, ppoperation : IAzOperation*) : HRESULT
+    @lpVtbl.value.create_operation.unsafe_as(Proc(UInt8*, VARIANT, IAzOperation*, HRESULT)).call(bstroperationname, varreserved, ppoperation)
+  end
+  def delete_operation(bstroperationname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_operation.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstroperationname, varreserved)
+  end
+  def get_tasks(pptaskcollection : IAzTasks*) : HRESULT
+    @lpVtbl.value.get_tasks.unsafe_as(Proc(IAzTasks*, HRESULT)).call(pptaskcollection)
+  end
+  def open_task(bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.open_task.unsafe_as(Proc(UInt8*, VARIANT, IAzTask*, HRESULT)).call(bstrtaskname, varreserved, pptask)
+  end
+  def create_task(bstrtaskname : UInt8*, varreserved : VARIANT, pptask : IAzTask*) : HRESULT
+    @lpVtbl.value.create_task.unsafe_as(Proc(UInt8*, VARIANT, IAzTask*, HRESULT)).call(bstrtaskname, varreserved, pptask)
+  end
+  def delete_task(bstrtaskname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrtaskname, varreserved)
+  end
+  def get_application_groups(ppgroupcollection : IAzApplicationGroups*) : HRESULT
+    @lpVtbl.value.get_application_groups.unsafe_as(Proc(IAzApplicationGroups*, HRESULT)).call(ppgroupcollection)
+  end
+  def open_application_group(bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.open_application_group.unsafe_as(Proc(UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)).call(bstrgroupname, varreserved, ppgroup)
+  end
+  def create_application_group(bstrgroupname : UInt8*, varreserved : VARIANT, ppgroup : IAzApplicationGroup*) : HRESULT
+    @lpVtbl.value.create_application_group.unsafe_as(Proc(UInt8*, VARIANT, IAzApplicationGroup*, HRESULT)).call(bstrgroupname, varreserved, ppgroup)
+  end
+  def delete_application_group(bstrgroupname : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_application_group.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrgroupname, varreserved)
+  end
+  def get_roles(pprolecollection : IAzRoles*) : HRESULT
+    @lpVtbl.value.get_roles.unsafe_as(Proc(IAzRoles*, HRESULT)).call(pprolecollection)
+  end
+  def open_role(bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.open_role.unsafe_as(Proc(UInt8*, VARIANT, IAzRole*, HRESULT)).call(bstrrolename, varreserved, pprole)
+  end
+  def create_role(bstrrolename : UInt8*, varreserved : VARIANT, pprole : IAzRole*) : HRESULT
+    @lpVtbl.value.create_role.unsafe_as(Proc(UInt8*, VARIANT, IAzRole*, HRESULT)).call(bstrrolename, varreserved, pprole)
+  end
+  def delete_role(bstrrolename : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_role.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrrolename, varreserved)
+  end
+  def initialize_client_context_from_token(ulltokenhandle : UInt64, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_token.unsafe_as(Proc(UInt64, VARIANT, IAzClientContext*, HRESULT)).call(ulltokenhandle, varreserved, ppclientcontext)
+  end
+  def add_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def delete_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+  def initialize_client_context_from_name(clientname : UInt8*, domainname : UInt8*, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_name.unsafe_as(Proc(UInt8*, UInt8*, VARIANT, IAzClientContext*, HRESULT)).call(clientname, domainname, varreserved, ppclientcontext)
+  end
+  def get_delegated_policy_users(pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def initialize_client_context_from_string_sid(sidstring : UInt8*, loptions : Int32, varreserved : VARIANT, ppclientcontext : IAzClientContext*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_string_sid.unsafe_as(Proc(UInt8*, Int32, VARIANT, IAzClientContext*, HRESULT)).call(sidstring, loptions, varreserved, ppclientcontext)
+  end
+  def get_policy_administrators_name(pvaradmins : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_administrators_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvaradmins)
+  end
+  def get_policy_readers_name(pvarreaders : VARIANT*) : HRESULT
+    @lpVtbl.value.get_policy_readers_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarreaders)
+  end
+  def add_policy_administrator_name(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_administrator_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def delete_policy_administrator_name(bstradmin : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_administrator_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstradmin, varreserved)
+  end
+  def add_policy_reader_name(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_policy_reader_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def delete_policy_reader_name(bstrreader : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_policy_reader_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrreader, varreserved)
+  end
+  def get_delegated_policy_users_name(pvardelegatedpolicyusers : VARIANT*) : HRESULT
+    @lpVtbl.value.get_delegated_policy_users_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvardelegatedpolicyusers)
+  end
+  def add_delegated_policy_user_name(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_delegated_policy_user_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def delete_delegated_policy_user_name(bstrdelegatedpolicyuser : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_delegated_policy_user_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrdelegatedpolicyuser, varreserved)
+  end
+  def initialize_client_context_from_token2(ultokenhandlelowpart : UInt32, ultokenhandlehighpart : UInt32, varreserved : VARIANT, ppclientcontext : IAzClientContext2*) : HRESULT
+    @lpVtbl.value.initialize_client_context_from_token2.unsafe_as(Proc(UInt32, UInt32, VARIANT, IAzClientContext2*, HRESULT)).call(ultokenhandlelowpart, ultokenhandlehighpart, varreserved, ppclientcontext)
+  end
+  def initialize_client_context2(identifyingstring : UInt8*, varreserved : VARIANT, ppclientcontext : IAzClientContext2*) : HRESULT
+    @lpVtbl.value.initialize_client_context2.unsafe_as(Proc(UInt8*, VARIANT, IAzClientContext2*, HRESULT)).call(identifyingstring, varreserved, ppclientcontext)
+  end
+  def scope_exists(bstrscopename : UInt8*, pbexist : Int16*) : HRESULT
+    @lpVtbl.value.scope_exists.unsafe_as(Proc(UInt8*, Int16*, HRESULT)).call(bstrscopename, pbexist)
+  end
+  def open_scope2(bstrscopename : UInt8*, ppscope2 : IAzScope2*) : HRESULT
+    @lpVtbl.value.open_scope2.unsafe_as(Proc(UInt8*, IAzScope2*, HRESULT)).call(bstrscopename, ppscope2)
+  end
+  def create_scope2(bstrscopename : UInt8*, ppscope2 : IAzScope2*) : HRESULT
+    @lpVtbl.value.create_scope2.unsafe_as(Proc(UInt8*, IAzScope2*, HRESULT)).call(bstrscopename, ppscope2)
+  end
+  def delete_scope2(bstrscopename : UInt8*) : HRESULT
+    @lpVtbl.value.delete_scope2.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrscopename)
+  end
+  def get_role_definitions(pproledefinitions : IAzRoleDefinitions*) : HRESULT
+    @lpVtbl.value.get_role_definitions.unsafe_as(Proc(IAzRoleDefinitions*, HRESULT)).call(pproledefinitions)
+  end
+  def create_role_definition(bstrroledefinitionname : UInt8*, pproledefinitions : IAzRoleDefinition*) : HRESULT
+    @lpVtbl.value.create_role_definition.unsafe_as(Proc(UInt8*, IAzRoleDefinition*, HRESULT)).call(bstrroledefinitionname, pproledefinitions)
+  end
+  def open_role_definition(bstrroledefinitionname : UInt8*, pproledefinitions : IAzRoleDefinition*) : HRESULT
+    @lpVtbl.value.open_role_definition.unsafe_as(Proc(UInt8*, IAzRoleDefinition*, HRESULT)).call(bstrroledefinitionname, pproledefinitions)
+  end
+  def delete_role_definition(bstrroledefinitionname : UInt8*) : HRESULT
+    @lpVtbl.value.delete_role_definition.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrroledefinitionname)
+  end
+  def get_role_assignments(pproleassignments : IAzRoleAssignments*) : HRESULT
+    @lpVtbl.value.get_role_assignments.unsafe_as(Proc(IAzRoleAssignments*, HRESULT)).call(pproleassignments)
+  end
+  def create_role_assignment(bstrroleassignmentname : UInt8*, pproleassignment : IAzRoleAssignment*) : HRESULT
+    @lpVtbl.value.create_role_assignment.unsafe_as(Proc(UInt8*, IAzRoleAssignment*, HRESULT)).call(bstrroleassignmentname, pproleassignment)
+  end
+  def open_role_assignment(bstrroleassignmentname : UInt8*, pproleassignment : IAzRoleAssignment*) : HRESULT
+    @lpVtbl.value.open_role_assignment.unsafe_as(Proc(UInt8*, IAzRoleAssignment*, HRESULT)).call(bstrroleassignmentname, pproleassignment)
+  end
+  def delete_role_assignment(bstrroleassignmentname : UInt8*) : HRESULT
+    @lpVtbl.value.delete_role_assignment.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrroleassignmentname)
+  end
+  def get_biz_rules_enabled(pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_biz_rules_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pbenabled)
+  end
+  def put_biz_rules_enabled(benabled : Int16) : HRESULT
+    @lpVtbl.value.put_biz_rules_enabled.unsafe_as(Proc(Int16, HRESULT)).call(benabled)
+  end
+end
+struct LibWin32::IAzOperation2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_application_data(pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrapplicationdata)
+  end
+  def put_application_data(bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrapplicationdata)
+  end
+  def get_operation_id(plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_operation_id.unsafe_as(Proc(Int32*, HRESULT)).call(plprop)
+  end
+  def put_operation_id(lprop : Int32) : HRESULT
+    @lpVtbl.value.put_operation_id.unsafe_as(Proc(Int32, HRESULT)).call(lprop)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+  def role_assignments(bstrscopename : UInt8*, brecursive : Int16, pproleassignments : IAzRoleAssignments*) : HRESULT
+    @lpVtbl.value.role_assignments.unsafe_as(Proc(UInt8*, Int16, IAzRoleAssignments*, HRESULT)).call(bstrscopename, brecursive, pproleassignments)
+  end
+end
+struct LibWin32::IAzRoleDefinitions
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(index : Int32, pvarobtptr : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(index, pvarobtptr)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def get__new_enum(ppenumptr : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppenumptr)
+  end
+end
+struct LibWin32::IAzRoleDefinition
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_application_data(pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrapplicationdata)
+  end
+  def put_application_data(bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrapplicationdata)
+  end
+  def get_biz_rule(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_biz_rule(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_biz_rule_language(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule_language.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_biz_rule_language(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule_language.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_biz_rule_imported_path(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule_imported_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_biz_rule_imported_path(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule_imported_path.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_is_role_definition(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_role_definition.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def put_is_role_definition(fprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_is_role_definition.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fprop)
+  end
+  def get_operations(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_operations.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_tasks(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_tasks.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def add_operation(bstrop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_operation.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrop, varreserved)
+  end
+  def delete_operation(bstrop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_operation.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrop, varreserved)
+  end
+  def add_task(bstrtask : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_task.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrtask, varreserved)
+  end
+  def delete_task(bstrtask : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrtask, varreserved)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def add_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def delete_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+  def role_assignments(bstrscopename : UInt8*, brecursive : Int16, pproleassignments : IAzRoleAssignments*) : HRESULT
+    @lpVtbl.value.role_assignments.unsafe_as(Proc(UInt8*, Int16, IAzRoleAssignments*, HRESULT)).call(bstrscopename, brecursive, pproleassignments)
+  end
+  def add_role_definition(bstrroledefinition : UInt8*) : HRESULT
+    @lpVtbl.value.add_role_definition.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrroledefinition)
+  end
+  def delete_role_definition(bstrroledefinition : UInt8*) : HRESULT
+    @lpVtbl.value.delete_role_definition.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrroledefinition)
+  end
+  def get_role_definitions(pproledefinitions : IAzRoleDefinitions*) : HRESULT
+    @lpVtbl.value.get_role_definitions.unsafe_as(Proc(IAzRoleDefinitions*, HRESULT)).call(pproledefinitions)
+  end
+end
+struct LibWin32::IAzRoleAssignment
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_application_data(pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrapplicationdata)
+  end
+  def put_application_data(bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrapplicationdata)
+  end
+  def add_app_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_app_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_app_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_app_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def add_task(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_task.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_task(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def add_operation(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_operation.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_operation(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_operation.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def add_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def get_app_members(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_app_members.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_members(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_members.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_operations(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_operations.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_tasks(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_tasks.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def add_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def delete_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+  def add_member_name(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_member_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_member_name(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_member_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def get_members_name(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_members_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def add_role_definition(bstrroledefinition : UInt8*) : HRESULT
+    @lpVtbl.value.add_role_definition.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrroledefinition)
+  end
+  def delete_role_definition(bstrroledefinition : UInt8*) : HRESULT
+    @lpVtbl.value.delete_role_definition.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrroledefinition)
+  end
+  def get_role_definitions(pproledefinitions : IAzRoleDefinitions*) : HRESULT
+    @lpVtbl.value.get_role_definitions.unsafe_as(Proc(IAzRoleDefinitions*, HRESULT)).call(pproledefinitions)
+  end
+  def get_scope(ppscope : IAzScope*) : HRESULT
+    @lpVtbl.value.get_scope.unsafe_as(Proc(IAzScope*, HRESULT)).call(ppscope)
+  end
+end
+struct LibWin32::IAzRoleAssignments
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_item(index : Int32, pvarobtptr : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(index, pvarobtptr)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def get__new_enum(ppenumptr : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppenumptr)
+  end
+end
+struct LibWin32::IAzPrincipalLocator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name_resolver(ppnameresolver : IAzNameResolver*) : HRESULT
+    @lpVtbl.value.get_name_resolver.unsafe_as(Proc(IAzNameResolver*, HRESULT)).call(ppnameresolver)
+  end
+  def get_object_picker(ppobjectpicker : IAzObjectPicker*) : HRESULT
+    @lpVtbl.value.get_object_picker.unsafe_as(Proc(IAzObjectPicker*, HRESULT)).call(ppobjectpicker)
+  end
+end
+struct LibWin32::IAzNameResolver
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def name_from_sid(bstrsid : UInt8*, psidtype : Int32*, pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.name_from_sid.unsafe_as(Proc(UInt8*, Int32*, UInt8**, HRESULT)).call(bstrsid, psidtype, pbstrname)
+  end
+  def names_from_sids(vsids : VARIANT, pvsidtypes : VARIANT*, pvnames : VARIANT*) : HRESULT
+    @lpVtbl.value.names_from_sids.unsafe_as(Proc(VARIANT, VARIANT*, VARIANT*, HRESULT)).call(vsids, pvsidtypes, pvnames)
+  end
+end
+struct LibWin32::IAzObjectPicker
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_principals(hparentwnd : LibC::HANDLE, bstrtitle : UInt8*, pvsidtypes : VARIANT*, pvnames : VARIANT*, pvsids : VARIANT*) : HRESULT
+    @lpVtbl.value.get_principals.unsafe_as(Proc(LibC::HANDLE, UInt8*, VARIANT*, VARIANT*, VARIANT*, HRESULT)).call(hparentwnd, bstrtitle, pvsidtypes, pvnames, pvsids)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+end
+struct LibWin32::IAzApplicationGroup2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+  def get_type(plprop : Int32*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(Int32*, HRESULT)).call(plprop)
+  end
+  def put_type(lprop : Int32) : HRESULT
+    @lpVtbl.value.put_type.unsafe_as(Proc(Int32, HRESULT)).call(lprop)
+  end
+  def get_ldap_query(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_ldap_query.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_ldap_query(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_ldap_query.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_app_members(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_app_members.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_app_non_members(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_app_non_members.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_members(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_members.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_non_members(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_non_members.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def add_app_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_app_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_app_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_app_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def add_app_non_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_app_non_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_app_non_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_app_non_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def add_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def add_non_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_non_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_non_member(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_non_member.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def add_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def delete_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+  def add_member_name(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_member_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_member_name(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_member_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def add_non_member_name(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_non_member_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def delete_non_member_name(bstrprop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_non_member_name.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrprop, varreserved)
+  end
+  def get_members_name(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_members_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_non_members_name(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_non_members_name.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_biz_rule(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_biz_rule(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_biz_rule_language(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule_language.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_biz_rule_language(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule_language.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_biz_rule_imported_path(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule_imported_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_biz_rule_imported_path(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule_imported_path.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def role_assignments(bstrscopename : UInt8*, brecursive : Int16, pproleassignments : IAzRoleAssignments*) : HRESULT
+    @lpVtbl.value.role_assignments.unsafe_as(Proc(UInt8*, Int16, IAzRoleAssignments*, HRESULT)).call(bstrscopename, brecursive, pproleassignments)
+  end
+end
+struct LibWin32::IAzTask2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_application_data(pbstrapplicationdata : UInt8**) : HRESULT
+    @lpVtbl.value.get_application_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrapplicationdata)
+  end
+  def put_application_data(bstrapplicationdata : UInt8*) : HRESULT
+    @lpVtbl.value.put_application_data.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrapplicationdata)
+  end
+  def get_biz_rule(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_biz_rule(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_biz_rule_language(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule_language.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_biz_rule_language(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule_language.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_biz_rule_imported_path(pbstrprop : UInt8**) : HRESULT
+    @lpVtbl.value.get_biz_rule_imported_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprop)
+  end
+  def put_biz_rule_imported_path(bstrprop : UInt8*) : HRESULT
+    @lpVtbl.value.put_biz_rule_imported_path.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrprop)
+  end
+  def get_is_role_definition(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_role_definition.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def put_is_role_definition(fprop : LibC::BOOL) : HRESULT
+    @lpVtbl.value.put_is_role_definition.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fprop)
+  end
+  def get_operations(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_operations.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def get_tasks(pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_tasks.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvarprop)
+  end
+  def add_operation(bstrop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_operation.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrop, varreserved)
+  end
+  def delete_operation(bstrop : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_operation.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrop, varreserved)
+  end
+  def add_task(bstrtask : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_task.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrtask, varreserved)
+  end
+  def delete_task(bstrtask : UInt8*, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_task.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrtask, varreserved)
+  end
+  def get_writable(pfprop : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_writable.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfprop)
+  end
+  def get_property(lpropid : Int32, varreserved : VARIANT, pvarprop : VARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(Int32, VARIANT, VARIANT*, HRESULT)).call(lpropid, varreserved, pvarprop)
+  end
+  def set_property(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def add_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.add_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def delete_property_item(lpropid : Int32, varprop : VARIANT, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.delete_property_item.unsafe_as(Proc(Int32, VARIANT, VARIANT, HRESULT)).call(lpropid, varprop, varreserved)
+  end
+  def submit(lflags : Int32, varreserved : VARIANT) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(Int32, VARIANT, HRESULT)).call(lflags, varreserved)
+  end
+  def role_assignments(bstrscopename : UInt8*, brecursive : Int16, pproleassignments : IAzRoleAssignments*) : HRESULT
+    @lpVtbl.value.role_assignments.unsafe_as(Proc(UInt8*, Int16, IAzRoleAssignments*, HRESULT)).call(bstrscopename, brecursive, pproleassignments)
+  end
 end

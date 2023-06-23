@@ -385,13 +385,13 @@ lib LibWin32
 
 
   struct IDummyMBNUCMExtVTbl
-    query_interface : Proc(IDummyMBNUCMExt*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDummyMBNUCMExt*, UInt32)
-    release : Proc(IDummyMBNUCMExt*, UInt32)
-    get_type_info_count : Proc(IDummyMBNUCMExt*, UInt32*, HRESULT)
-    get_type_info : Proc(IDummyMBNUCMExt*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDummyMBNUCMExt*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDummyMBNUCMExt*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
   end
 
   IDummyMBNUCMExt_GUID = "dcbbbab6-ffff-4bbb-aaee-338e368af6fa"
@@ -401,16 +401,16 @@ lib LibWin32
   end
 
   struct IMbnConnectionVTbl
-    query_interface : Proc(IMbnConnection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnConnection*, UInt32)
-    release : Proc(IMbnConnection*, UInt32)
-    get_connection_id : Proc(IMbnConnection*, UInt8**, HRESULT)
-    get_interface_id : Proc(IMbnConnection*, UInt8**, HRESULT)
-    connect : Proc(IMbnConnection*, MBN_CONNECTION_MODE, LibC::LPWSTR, UInt32*, HRESULT)
-    disconnect : Proc(IMbnConnection*, UInt32*, HRESULT)
-    get_connection_state : Proc(IMbnConnection*, MBN_ACTIVATION_STATE*, UInt8**, HRESULT)
-    get_voice_call_state : Proc(IMbnConnection*, MBN_VOICE_CALL_STATE*, HRESULT)
-    get_activation_network_error : Proc(IMbnConnection*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_connection_id : UInt64
+    get_interface_id : UInt64
+    connect : UInt64
+    disconnect : UInt64
+    get_connection_state : UInt64
+    get_voice_call_state : UInt64
+    get_activation_network_error : UInt64
   end
 
   IMbnConnection_GUID = "dcbbbab6-200d-4bbb-aaee-338e368af6fa"
@@ -420,13 +420,13 @@ lib LibWin32
   end
 
   struct IMbnConnectionEventsVTbl
-    query_interface : Proc(IMbnConnectionEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnConnectionEvents*, UInt32)
-    release : Proc(IMbnConnectionEvents*, UInt32)
-    on_connect_complete : Proc(IMbnConnectionEvents*, IMbnConnection, UInt32, HRESULT, HRESULT)
-    on_disconnect_complete : Proc(IMbnConnectionEvents*, IMbnConnection, UInt32, HRESULT, HRESULT)
-    on_connect_state_change : Proc(IMbnConnectionEvents*, IMbnConnection, HRESULT)
-    on_voice_call_state_change : Proc(IMbnConnectionEvents*, IMbnConnection, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_connect_complete : UInt64
+    on_disconnect_complete : UInt64
+    on_connect_state_change : UInt64
+    on_voice_call_state_change : UInt64
   end
 
   IMbnConnectionEvents_GUID = "dcbbbab6-200e-4bbb-aaee-338e368af6fa"
@@ -436,20 +436,20 @@ lib LibWin32
   end
 
   struct IMbnInterfaceVTbl
-    query_interface : Proc(IMbnInterface*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnInterface*, UInt32)
-    release : Proc(IMbnInterface*, UInt32)
-    get_interface_id : Proc(IMbnInterface*, UInt8**, HRESULT)
-    get_interface_capability : Proc(IMbnInterface*, MBN_INTERFACE_CAPS*, HRESULT)
-    get_subscriber_information : Proc(IMbnInterface*, IMbnSubscriberInformation*, HRESULT)
-    get_ready_state : Proc(IMbnInterface*, MBN_READY_STATE*, HRESULT)
-    in_emergency_mode : Proc(IMbnInterface*, Int16*, HRESULT)
-    get_home_provider : Proc(IMbnInterface*, MBN_PROVIDER*, HRESULT)
-    get_preferred_providers : Proc(IMbnInterface*, SAFEARRAY**, HRESULT)
-    set_preferred_providers : Proc(IMbnInterface*, SAFEARRAY*, UInt32*, HRESULT)
-    get_visible_providers : Proc(IMbnInterface*, UInt32*, SAFEARRAY**, HRESULT)
-    scan_network : Proc(IMbnInterface*, UInt32*, HRESULT)
-    get_connection : Proc(IMbnInterface*, IMbnConnection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_interface_id : UInt64
+    get_interface_capability : UInt64
+    get_subscriber_information : UInt64
+    get_ready_state : UInt64
+    in_emergency_mode : UInt64
+    get_home_provider : UInt64
+    get_preferred_providers : UInt64
+    set_preferred_providers : UInt64
+    get_visible_providers : UInt64
+    scan_network : UInt64
+    get_connection : UInt64
   end
 
   IMbnInterface_GUID = "dcbbbab6-2001-4bbb-aaee-338e368af6fa"
@@ -459,17 +459,17 @@ lib LibWin32
   end
 
   struct IMbnInterfaceEventsVTbl
-    query_interface : Proc(IMbnInterfaceEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnInterfaceEvents*, UInt32)
-    release : Proc(IMbnInterfaceEvents*, UInt32)
-    on_interface_capability_available : Proc(IMbnInterfaceEvents*, IMbnInterface, HRESULT)
-    on_subscriber_information_change : Proc(IMbnInterfaceEvents*, IMbnInterface, HRESULT)
-    on_ready_state_change : Proc(IMbnInterfaceEvents*, IMbnInterface, HRESULT)
-    on_emergency_mode_change : Proc(IMbnInterfaceEvents*, IMbnInterface, HRESULT)
-    on_home_provider_available : Proc(IMbnInterfaceEvents*, IMbnInterface, HRESULT)
-    on_preferred_providers_change : Proc(IMbnInterfaceEvents*, IMbnInterface, HRESULT)
-    on_set_preferred_providers_complete : Proc(IMbnInterfaceEvents*, IMbnInterface, UInt32, HRESULT, HRESULT)
-    on_scan_network_complete : Proc(IMbnInterfaceEvents*, IMbnInterface, UInt32, HRESULT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_interface_capability_available : UInt64
+    on_subscriber_information_change : UInt64
+    on_ready_state_change : UInt64
+    on_emergency_mode_change : UInt64
+    on_home_provider_available : UInt64
+    on_preferred_providers_change : UInt64
+    on_set_preferred_providers_complete : UInt64
+    on_scan_network_complete : UInt64
   end
 
   IMbnInterfaceEvents_GUID = "dcbbbab6-2002-4bbb-aaee-338e368af6fa"
@@ -479,11 +479,11 @@ lib LibWin32
   end
 
   struct IMbnInterfaceManagerVTbl
-    query_interface : Proc(IMbnInterfaceManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnInterfaceManager*, UInt32)
-    release : Proc(IMbnInterfaceManager*, UInt32)
-    get_interface : Proc(IMbnInterfaceManager*, LibC::LPWSTR, IMbnInterface*, HRESULT)
-    get_interfaces : Proc(IMbnInterfaceManager*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_interface : UInt64
+    get_interfaces : UInt64
   end
 
   IMbnInterfaceManager_GUID = "dcbbbab6-201b-4bbb-aaee-338e368af6fa"
@@ -493,11 +493,11 @@ lib LibWin32
   end
 
   struct IMbnInterfaceManagerEventsVTbl
-    query_interface : Proc(IMbnInterfaceManagerEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnInterfaceManagerEvents*, UInt32)
-    release : Proc(IMbnInterfaceManagerEvents*, UInt32)
-    on_interface_arrival : Proc(IMbnInterfaceManagerEvents*, IMbnInterface, HRESULT)
-    on_interface_removal : Proc(IMbnInterfaceManagerEvents*, IMbnInterface, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_interface_arrival : UInt64
+    on_interface_removal : UInt64
   end
 
   IMbnInterfaceManagerEvents_GUID = "dcbbbab6-201c-4bbb-aaee-338e368af6fa"
@@ -507,19 +507,19 @@ lib LibWin32
   end
 
   struct IMbnRegistrationVTbl
-    query_interface : Proc(IMbnRegistration*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnRegistration*, UInt32)
-    release : Proc(IMbnRegistration*, UInt32)
-    get_register_state : Proc(IMbnRegistration*, MBN_REGISTER_STATE*, HRESULT)
-    get_register_mode : Proc(IMbnRegistration*, MBN_REGISTER_MODE*, HRESULT)
-    get_provider_id : Proc(IMbnRegistration*, UInt8**, HRESULT)
-    get_provider_name : Proc(IMbnRegistration*, UInt8**, HRESULT)
-    get_roaming_text : Proc(IMbnRegistration*, UInt8**, HRESULT)
-    get_available_data_classes : Proc(IMbnRegistration*, UInt32*, HRESULT)
-    get_current_data_class : Proc(IMbnRegistration*, UInt32*, HRESULT)
-    get_registration_network_error : Proc(IMbnRegistration*, UInt32*, HRESULT)
-    get_packet_attach_network_error : Proc(IMbnRegistration*, UInt32*, HRESULT)
-    set_register_mode : Proc(IMbnRegistration*, MBN_REGISTER_MODE, LibC::LPWSTR, UInt32, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_register_state : UInt64
+    get_register_mode : UInt64
+    get_provider_id : UInt64
+    get_provider_name : UInt64
+    get_roaming_text : UInt64
+    get_available_data_classes : UInt64
+    get_current_data_class : UInt64
+    get_registration_network_error : UInt64
+    get_packet_attach_network_error : UInt64
+    set_register_mode : UInt64
   end
 
   IMbnRegistration_GUID = "dcbbbab6-2009-4bbb-aaee-338e368af6fa"
@@ -529,13 +529,13 @@ lib LibWin32
   end
 
   struct IMbnRegistrationEventsVTbl
-    query_interface : Proc(IMbnRegistrationEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnRegistrationEvents*, UInt32)
-    release : Proc(IMbnRegistrationEvents*, UInt32)
-    on_register_mode_available : Proc(IMbnRegistrationEvents*, IMbnRegistration, HRESULT)
-    on_register_state_change : Proc(IMbnRegistrationEvents*, IMbnRegistration, HRESULT)
-    on_packet_service_state_change : Proc(IMbnRegistrationEvents*, IMbnRegistration, HRESULT)
-    on_set_register_mode_complete : Proc(IMbnRegistrationEvents*, IMbnRegistration, UInt32, HRESULT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_register_mode_available : UInt64
+    on_register_state_change : UInt64
+    on_packet_service_state_change : UInt64
+    on_set_register_mode_complete : UInt64
   end
 
   IMbnRegistrationEvents_GUID = "dcbbbab6-200a-4bbb-aaee-338e368af6fa"
@@ -545,11 +545,11 @@ lib LibWin32
   end
 
   struct IMbnConnectionManagerVTbl
-    query_interface : Proc(IMbnConnectionManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnConnectionManager*, UInt32)
-    release : Proc(IMbnConnectionManager*, UInt32)
-    get_connection : Proc(IMbnConnectionManager*, LibC::LPWSTR, IMbnConnection*, HRESULT)
-    get_connections : Proc(IMbnConnectionManager*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_connection : UInt64
+    get_connections : UInt64
   end
 
   IMbnConnectionManager_GUID = "dcbbbab6-201d-4bbb-aaee-338e368af6fa"
@@ -559,11 +559,11 @@ lib LibWin32
   end
 
   struct IMbnConnectionManagerEventsVTbl
-    query_interface : Proc(IMbnConnectionManagerEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnConnectionManagerEvents*, UInt32)
-    release : Proc(IMbnConnectionManagerEvents*, UInt32)
-    on_connection_arrival : Proc(IMbnConnectionManagerEvents*, IMbnConnection, HRESULT)
-    on_connection_removal : Proc(IMbnConnectionManagerEvents*, IMbnConnection, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_connection_arrival : UInt64
+    on_connection_removal : UInt64
   end
 
   IMbnConnectionManagerEvents_GUID = "dcbbbab6-201e-4bbb-aaee-338e368af6fa"
@@ -573,12 +573,12 @@ lib LibWin32
   end
 
   struct IMbnPinManagerVTbl
-    query_interface : Proc(IMbnPinManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnPinManager*, UInt32)
-    release : Proc(IMbnPinManager*, UInt32)
-    get_pin_list : Proc(IMbnPinManager*, SAFEARRAY**, HRESULT)
-    get_pin : Proc(IMbnPinManager*, MBN_PIN_TYPE, IMbnPin*, HRESULT)
-    get_pin_state : Proc(IMbnPinManager*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_pin_list : UInt64
+    get_pin : UInt64
+    get_pin_state : UInt64
   end
 
   IMbnPinManager_GUID = "dcbbbab6-2005-4bbb-aaee-338e368af6fa"
@@ -588,11 +588,11 @@ lib LibWin32
   end
 
   struct IMbnPinManagerEventsVTbl
-    query_interface : Proc(IMbnPinManagerEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnPinManagerEvents*, UInt32)
-    release : Proc(IMbnPinManagerEvents*, UInt32)
-    on_pin_list_available : Proc(IMbnPinManagerEvents*, IMbnPinManager, HRESULT)
-    on_get_pin_state_complete : Proc(IMbnPinManagerEvents*, IMbnPinManager, MBN_PIN_INFO, UInt32, HRESULT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_pin_list_available : UInt64
+    on_get_pin_state_complete : UInt64
   end
 
   IMbnPinManagerEvents_GUID = "dcbbbab6-2006-4bbb-aaee-338e368af6fa"
@@ -602,14 +602,14 @@ lib LibWin32
   end
 
   struct IMbnPinEventsVTbl
-    query_interface : Proc(IMbnPinEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnPinEvents*, UInt32)
-    release : Proc(IMbnPinEvents*, UInt32)
-    on_enable_complete : Proc(IMbnPinEvents*, IMbnPin, MBN_PIN_INFO*, UInt32, HRESULT, HRESULT)
-    on_disable_complete : Proc(IMbnPinEvents*, IMbnPin, MBN_PIN_INFO*, UInt32, HRESULT, HRESULT)
-    on_enter_complete : Proc(IMbnPinEvents*, IMbnPin, MBN_PIN_INFO*, UInt32, HRESULT, HRESULT)
-    on_change_complete : Proc(IMbnPinEvents*, IMbnPin, MBN_PIN_INFO*, UInt32, HRESULT, HRESULT)
-    on_unblock_complete : Proc(IMbnPinEvents*, IMbnPin, MBN_PIN_INFO*, UInt32, HRESULT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_enable_complete : UInt64
+    on_disable_complete : UInt64
+    on_enter_complete : UInt64
+    on_change_complete : UInt64
+    on_unblock_complete : UInt64
   end
 
   IMbnPinEvents_GUID = "dcbbbab6-2008-4bbb-aaee-338e368af6fa"
@@ -619,12 +619,12 @@ lib LibWin32
   end
 
   struct IMbnSubscriberInformationVTbl
-    query_interface : Proc(IMbnSubscriberInformation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnSubscriberInformation*, UInt32)
-    release : Proc(IMbnSubscriberInformation*, UInt32)
-    get_subscriber_id : Proc(IMbnSubscriberInformation*, UInt8**, HRESULT)
-    get_sim_icc_id : Proc(IMbnSubscriberInformation*, UInt8**, HRESULT)
-    get_telephone_numbers : Proc(IMbnSubscriberInformation*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_subscriber_id : UInt64
+    get_sim_icc_id : UInt64
+    get_telephone_numbers : UInt64
   end
 
   IMbnSubscriberInformation_GUID = "459ecc43-bcf5-11dc-a8a8-001321f1405f"
@@ -634,11 +634,11 @@ lib LibWin32
   end
 
   struct IMbnSignalVTbl
-    query_interface : Proc(IMbnSignal*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnSignal*, UInt32)
-    release : Proc(IMbnSignal*, UInt32)
-    get_signal_strength : Proc(IMbnSignal*, UInt32*, HRESULT)
-    get_signal_error : Proc(IMbnSignal*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_signal_strength : UInt64
+    get_signal_error : UInt64
   end
 
   IMbnSignal_GUID = "dcbbbab6-2003-4bbb-aaee-338e368af6fa"
@@ -648,10 +648,10 @@ lib LibWin32
   end
 
   struct IMbnSignalEventsVTbl
-    query_interface : Proc(IMbnSignalEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnSignalEvents*, UInt32)
-    release : Proc(IMbnSignalEvents*, UInt32)
-    on_signal_state_change : Proc(IMbnSignalEvents*, IMbnSignal, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_signal_state_change : UInt64
   end
 
   IMbnSignalEvents_GUID = "dcbbbab6-2004-4bbb-aaee-338e368af6fa"
@@ -661,11 +661,11 @@ lib LibWin32
   end
 
   struct IMbnConnectionContextVTbl
-    query_interface : Proc(IMbnConnectionContext*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnConnectionContext*, UInt32)
-    release : Proc(IMbnConnectionContext*, UInt32)
-    get_provisioned_contexts : Proc(IMbnConnectionContext*, SAFEARRAY**, HRESULT)
-    set_provisioned_context : Proc(IMbnConnectionContext*, MBN_CONTEXT, LibC::LPWSTR, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_provisioned_contexts : UInt64
+    set_provisioned_context : UInt64
   end
 
   IMbnConnectionContext_GUID = "dcbbbab6-200b-4bbb-aaee-338e368af6fa"
@@ -675,11 +675,11 @@ lib LibWin32
   end
 
   struct IMbnConnectionContextEventsVTbl
-    query_interface : Proc(IMbnConnectionContextEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnConnectionContextEvents*, UInt32)
-    release : Proc(IMbnConnectionContextEvents*, UInt32)
-    on_provisioned_context_list_change : Proc(IMbnConnectionContextEvents*, IMbnConnectionContext, HRESULT)
-    on_set_provisioned_context_complete : Proc(IMbnConnectionContextEvents*, IMbnConnectionContext, UInt32, HRESULT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_provisioned_context_list_change : UInt64
+    on_set_provisioned_context_complete : UInt64
   end
 
   IMbnConnectionContextEvents_GUID = "dcbbbab6-200c-4bbb-aaee-338e368af6fa"
@@ -689,12 +689,12 @@ lib LibWin32
   end
 
   struct IMbnConnectionProfileManagerVTbl
-    query_interface : Proc(IMbnConnectionProfileManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnConnectionProfileManager*, UInt32)
-    release : Proc(IMbnConnectionProfileManager*, UInt32)
-    get_connection_profiles : Proc(IMbnConnectionProfileManager*, IMbnInterface, SAFEARRAY**, HRESULT)
-    get_connection_profile : Proc(IMbnConnectionProfileManager*, IMbnInterface, LibC::LPWSTR, IMbnConnectionProfile*, HRESULT)
-    create_connection_profile : Proc(IMbnConnectionProfileManager*, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_connection_profiles : UInt64
+    get_connection_profile : UInt64
+    create_connection_profile : UInt64
   end
 
   IMbnConnectionProfileManager_GUID = "dcbbbab6-200f-4bbb-aaee-338e368af6fa"
@@ -704,12 +704,12 @@ lib LibWin32
   end
 
   struct IMbnConnectionProfileVTbl
-    query_interface : Proc(IMbnConnectionProfile*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnConnectionProfile*, UInt32)
-    release : Proc(IMbnConnectionProfile*, UInt32)
-    get_profile_xml_data : Proc(IMbnConnectionProfile*, UInt8**, HRESULT)
-    update_profile : Proc(IMbnConnectionProfile*, LibC::LPWSTR, HRESULT)
-    delete : Proc(IMbnConnectionProfile*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_profile_xml_data : UInt64
+    update_profile : UInt64
+    delete : UInt64
   end
 
   IMbnConnectionProfile_GUID = "dcbbbab6-2010-4bbb-aaee-338e368af6fa"
@@ -719,10 +719,10 @@ lib LibWin32
   end
 
   struct IMbnConnectionProfileEventsVTbl
-    query_interface : Proc(IMbnConnectionProfileEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnConnectionProfileEvents*, UInt32)
-    release : Proc(IMbnConnectionProfileEvents*, UInt32)
-    on_profile_update : Proc(IMbnConnectionProfileEvents*, IMbnConnectionProfile, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_profile_update : UInt64
   end
 
   IMbnConnectionProfileEvents_GUID = "dcbbbab6-2011-4bbb-aaee-338e368af6fa"
@@ -732,15 +732,15 @@ lib LibWin32
   end
 
   struct IMbnSmsConfigurationVTbl
-    query_interface : Proc(IMbnSmsConfiguration*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnSmsConfiguration*, UInt32)
-    release : Proc(IMbnSmsConfiguration*, UInt32)
-    get_service_center_address : Proc(IMbnSmsConfiguration*, UInt8**, HRESULT)
-    put_service_center_address : Proc(IMbnSmsConfiguration*, LibC::LPWSTR, HRESULT)
-    get_max_message_index : Proc(IMbnSmsConfiguration*, UInt32*, HRESULT)
-    get_cdma_short_msg_size : Proc(IMbnSmsConfiguration*, UInt32*, HRESULT)
-    get_sms_format : Proc(IMbnSmsConfiguration*, MBN_SMS_FORMAT*, HRESULT)
-    put_sms_format : Proc(IMbnSmsConfiguration*, MBN_SMS_FORMAT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_service_center_address : UInt64
+    put_service_center_address : UInt64
+    get_max_message_index : UInt64
+    get_cdma_short_msg_size : UInt64
+    get_sms_format : UInt64
+    put_sms_format : UInt64
   end
 
   IMbnSmsConfiguration_GUID = "dcbbbab6-2012-4bbb-aaee-338e368af6fa"
@@ -750,13 +750,13 @@ lib LibWin32
   end
 
   struct IMbnSmsReadMsgPduVTbl
-    query_interface : Proc(IMbnSmsReadMsgPdu*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnSmsReadMsgPdu*, UInt32)
-    release : Proc(IMbnSmsReadMsgPdu*, UInt32)
-    get_index : Proc(IMbnSmsReadMsgPdu*, UInt32*, HRESULT)
-    get_status : Proc(IMbnSmsReadMsgPdu*, MBN_MSG_STATUS*, HRESULT)
-    get_pdu_data : Proc(IMbnSmsReadMsgPdu*, UInt8**, HRESULT)
-    get_message : Proc(IMbnSmsReadMsgPdu*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_index : UInt64
+    get_status : UInt64
+    get_pdu_data : UInt64
+    get_message : UInt64
   end
 
   IMbnSmsReadMsgPdu_GUID = "dcbbbab6-2013-4bbb-aaee-338e368af6fa"
@@ -766,17 +766,17 @@ lib LibWin32
   end
 
   struct IMbnSmsReadMsgTextCdmaVTbl
-    query_interface : Proc(IMbnSmsReadMsgTextCdma*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnSmsReadMsgTextCdma*, UInt32)
-    release : Proc(IMbnSmsReadMsgTextCdma*, UInt32)
-    get_index : Proc(IMbnSmsReadMsgTextCdma*, UInt32*, HRESULT)
-    get_status : Proc(IMbnSmsReadMsgTextCdma*, MBN_MSG_STATUS*, HRESULT)
-    get_address : Proc(IMbnSmsReadMsgTextCdma*, UInt8**, HRESULT)
-    get_timestamp : Proc(IMbnSmsReadMsgTextCdma*, UInt8**, HRESULT)
-    get_encoding_id : Proc(IMbnSmsReadMsgTextCdma*, MBN_SMS_CDMA_ENCODING*, HRESULT)
-    get_language_id : Proc(IMbnSmsReadMsgTextCdma*, MBN_SMS_CDMA_LANG*, HRESULT)
-    get_size_in_characters : Proc(IMbnSmsReadMsgTextCdma*, UInt32*, HRESULT)
-    get_message : Proc(IMbnSmsReadMsgTextCdma*, SAFEARRAY**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_index : UInt64
+    get_status : UInt64
+    get_address : UInt64
+    get_timestamp : UInt64
+    get_encoding_id : UInt64
+    get_language_id : UInt64
+    get_size_in_characters : UInt64
+    get_message : UInt64
   end
 
   IMbnSmsReadMsgTextCdma_GUID = "dcbbbab6-2014-4bbb-aaee-338e368af6fa"
@@ -786,17 +786,17 @@ lib LibWin32
   end
 
   struct IMbnSmsVTbl
-    query_interface : Proc(IMbnSms*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnSms*, UInt32)
-    release : Proc(IMbnSms*, UInt32)
-    get_sms_configuration : Proc(IMbnSms*, IMbnSmsConfiguration*, HRESULT)
-    set_sms_configuration : Proc(IMbnSms*, IMbnSmsConfiguration, UInt32*, HRESULT)
-    sms_send_pdu : Proc(IMbnSms*, LibC::LPWSTR, UInt8, UInt32*, HRESULT)
-    sms_send_cdma : Proc(IMbnSms*, LibC::LPWSTR, MBN_SMS_CDMA_ENCODING, MBN_SMS_CDMA_LANG, UInt32, SAFEARRAY*, UInt32*, HRESULT)
-    sms_send_cdma_pdu : Proc(IMbnSms*, SAFEARRAY*, UInt32*, HRESULT)
-    sms_read : Proc(IMbnSms*, MBN_SMS_FILTER*, MBN_SMS_FORMAT, UInt32*, HRESULT)
-    sms_delete : Proc(IMbnSms*, MBN_SMS_FILTER*, UInt32*, HRESULT)
-    get_sms_status : Proc(IMbnSms*, MBN_SMS_STATUS_INFO*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_sms_configuration : UInt64
+    set_sms_configuration : UInt64
+    sms_send_pdu : UInt64
+    sms_send_cdma : UInt64
+    sms_send_cdma_pdu : UInt64
+    sms_read : UInt64
+    sms_delete : UInt64
+    get_sms_status : UInt64
   end
 
   IMbnSms_GUID = "dcbbbab6-2015-4bbb-aaee-338e368af6fa"
@@ -806,16 +806,16 @@ lib LibWin32
   end
 
   struct IMbnSmsEventsVTbl
-    query_interface : Proc(IMbnSmsEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnSmsEvents*, UInt32)
-    release : Proc(IMbnSmsEvents*, UInt32)
-    on_sms_configuration_change : Proc(IMbnSmsEvents*, IMbnSms, HRESULT)
-    on_set_sms_configuration_complete : Proc(IMbnSmsEvents*, IMbnSms, UInt32, HRESULT, HRESULT)
-    on_sms_send_complete : Proc(IMbnSmsEvents*, IMbnSms, UInt32, HRESULT, HRESULT)
-    on_sms_read_complete : Proc(IMbnSmsEvents*, IMbnSms, MBN_SMS_FORMAT, SAFEARRAY*, Int16, UInt32, HRESULT, HRESULT)
-    on_sms_new_class0_message : Proc(IMbnSmsEvents*, IMbnSms, MBN_SMS_FORMAT, SAFEARRAY*, HRESULT)
-    on_sms_delete_complete : Proc(IMbnSmsEvents*, IMbnSms, UInt32, HRESULT, HRESULT)
-    on_sms_status_change : Proc(IMbnSmsEvents*, IMbnSms, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_sms_configuration_change : UInt64
+    on_set_sms_configuration_complete : UInt64
+    on_sms_send_complete : UInt64
+    on_sms_read_complete : UInt64
+    on_sms_new_class0_message : UInt64
+    on_sms_delete_complete : UInt64
+    on_sms_status_change : UInt64
   end
 
   IMbnSmsEvents_GUID = "dcbbbab6-2016-4bbb-aaee-338e368af6fa"
@@ -825,10 +825,10 @@ lib LibWin32
   end
 
   struct IMbnServiceActivationVTbl
-    query_interface : Proc(IMbnServiceActivation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnServiceActivation*, UInt32)
-    release : Proc(IMbnServiceActivation*, UInt32)
-    activate : Proc(IMbnServiceActivation*, SAFEARRAY*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    activate : UInt64
   end
 
   IMbnServiceActivation_GUID = "dcbbbab6-2017-4bbb-aaee-338e368af6fa"
@@ -838,10 +838,10 @@ lib LibWin32
   end
 
   struct IMbnServiceActivationEventsVTbl
-    query_interface : Proc(IMbnServiceActivationEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnServiceActivationEvents*, UInt32)
-    release : Proc(IMbnServiceActivationEvents*, UInt32)
-    on_activation_complete : Proc(IMbnServiceActivationEvents*, IMbnServiceActivation, SAFEARRAY*, UInt32, HRESULT, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_activation_complete : UInt64
   end
 
   IMbnServiceActivationEvents_GUID = "dcbbbab6-2018-4bbb-aaee-338e368af6fa"
@@ -851,10 +851,10 @@ lib LibWin32
   end
 
   struct IMbnVendorSpecificOperationVTbl
-    query_interface : Proc(IMbnVendorSpecificOperation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnVendorSpecificOperation*, UInt32)
-    release : Proc(IMbnVendorSpecificOperation*, UInt32)
-    set_vendor_specific : Proc(IMbnVendorSpecificOperation*, SAFEARRAY*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_vendor_specific : UInt64
   end
 
   IMbnVendorSpecificOperation_GUID = "dcbbbab6-2019-4bbb-aaee-338e368af6fa"
@@ -864,11 +864,11 @@ lib LibWin32
   end
 
   struct IMbnVendorSpecificEventsVTbl
-    query_interface : Proc(IMbnVendorSpecificEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnVendorSpecificEvents*, UInt32)
-    release : Proc(IMbnVendorSpecificEvents*, UInt32)
-    on_event_notification : Proc(IMbnVendorSpecificEvents*, IMbnVendorSpecificOperation, SAFEARRAY*, HRESULT)
-    on_set_vendor_specific_complete : Proc(IMbnVendorSpecificEvents*, IMbnVendorSpecificOperation, SAFEARRAY*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_event_notification : UInt64
+    on_set_vendor_specific_complete : UInt64
   end
 
   IMbnVendorSpecificEvents_GUID = "dcbbbab6-201a-4bbb-aaee-338e368af6fa"
@@ -878,11 +878,11 @@ lib LibWin32
   end
 
   struct IMbnConnectionProfileManagerEventsVTbl
-    query_interface : Proc(IMbnConnectionProfileManagerEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnConnectionProfileManagerEvents*, UInt32)
-    release : Proc(IMbnConnectionProfileManagerEvents*, UInt32)
-    on_connection_profile_arrival : Proc(IMbnConnectionProfileManagerEvents*, IMbnConnectionProfile, HRESULT)
-    on_connection_profile_removal : Proc(IMbnConnectionProfileManagerEvents*, IMbnConnectionProfile, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_connection_profile_arrival : UInt64
+    on_connection_profile_removal : UInt64
   end
 
   IMbnConnectionProfileManagerEvents_GUID = "dcbbbab6-201f-4bbb-aaee-338e368af6fa"
@@ -892,12 +892,12 @@ lib LibWin32
   end
 
   struct IMbnRadioVTbl
-    query_interface : Proc(IMbnRadio*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnRadio*, UInt32)
-    release : Proc(IMbnRadio*, UInt32)
-    get_software_radio_state : Proc(IMbnRadio*, MBN_RADIO*, HRESULT)
-    get_hardware_radio_state : Proc(IMbnRadio*, MBN_RADIO*, HRESULT)
-    set_software_radio_state : Proc(IMbnRadio*, MBN_RADIO, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_software_radio_state : UInt64
+    get_hardware_radio_state : UInt64
+    set_software_radio_state : UInt64
   end
 
   IMbnRadio_GUID = "dccccab6-201f-4bbb-aaee-338e368af6fa"
@@ -907,11 +907,11 @@ lib LibWin32
   end
 
   struct IMbnRadioEventsVTbl
-    query_interface : Proc(IMbnRadioEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnRadioEvents*, UInt32)
-    release : Proc(IMbnRadioEvents*, UInt32)
-    on_radio_state_change : Proc(IMbnRadioEvents*, IMbnRadio, HRESULT)
-    on_set_software_radio_state_complete : Proc(IMbnRadioEvents*, IMbnRadio, UInt32, HRESULT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_radio_state_change : UInt64
+    on_set_software_radio_state_complete : UInt64
   end
 
   IMbnRadioEvents_GUID = "dcdddab6-201f-4bbb-aaee-338e368af6fa"
@@ -921,15 +921,15 @@ lib LibWin32
   end
 
   struct IMbnMultiCarrierVTbl
-    query_interface : Proc(IMbnMultiCarrier*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnMultiCarrier*, UInt32)
-    release : Proc(IMbnMultiCarrier*, UInt32)
-    set_home_provider : Proc(IMbnMultiCarrier*, MBN_PROVIDER2*, UInt32*, HRESULT)
-    get_preferred_providers : Proc(IMbnMultiCarrier*, SAFEARRAY**, HRESULT)
-    get_visible_providers : Proc(IMbnMultiCarrier*, UInt32*, SAFEARRAY**, HRESULT)
-    get_supported_cellular_classes : Proc(IMbnMultiCarrier*, SAFEARRAY**, HRESULT)
-    get_current_cellular_class : Proc(IMbnMultiCarrier*, MBN_CELLULAR_CLASS*, HRESULT)
-    scan_network : Proc(IMbnMultiCarrier*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_home_provider : UInt64
+    get_preferred_providers : UInt64
+    get_visible_providers : UInt64
+    get_supported_cellular_classes : UInt64
+    get_current_cellular_class : UInt64
+    scan_network : UInt64
   end
 
   IMbnMultiCarrier_GUID = "dcbbbab6-2020-4bbb-aaee-338e368af6fa"
@@ -939,14 +939,14 @@ lib LibWin32
   end
 
   struct IMbnMultiCarrierEventsVTbl
-    query_interface : Proc(IMbnMultiCarrierEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnMultiCarrierEvents*, UInt32)
-    release : Proc(IMbnMultiCarrierEvents*, UInt32)
-    on_set_home_provider_complete : Proc(IMbnMultiCarrierEvents*, IMbnMultiCarrier, UInt32, HRESULT, HRESULT)
-    on_current_cellular_class_change : Proc(IMbnMultiCarrierEvents*, IMbnMultiCarrier, HRESULT)
-    on_preferred_providers_change : Proc(IMbnMultiCarrierEvents*, IMbnMultiCarrier, HRESULT)
-    on_scan_network_complete : Proc(IMbnMultiCarrierEvents*, IMbnMultiCarrier, UInt32, HRESULT, HRESULT)
-    on_interface_capability_change : Proc(IMbnMultiCarrierEvents*, IMbnMultiCarrier, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_set_home_provider_complete : UInt64
+    on_current_cellular_class_change : UInt64
+    on_preferred_providers_change : UInt64
+    on_scan_network_complete : UInt64
+    on_interface_capability_change : UInt64
   end
 
   IMbnMultiCarrierEvents_GUID = "dcdddab6-2021-4bbb-aaee-338e368af6fa"
@@ -956,10 +956,10 @@ lib LibWin32
   end
 
   struct IMbnDeviceServiceStateEventsVTbl
-    query_interface : Proc(IMbnDeviceServiceStateEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnDeviceServiceStateEvents*, UInt32)
-    release : Proc(IMbnDeviceServiceStateEvents*, UInt32)
-    on_sessions_state_change : Proc(IMbnDeviceServiceStateEvents*, UInt8*, MBN_DEVICE_SERVICE_SESSIONS_STATE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_sessions_state_change : UInt64
   end
 
   IMbnDeviceServiceStateEvents_GUID = "5d3ff196-89ee-49d8-8b60-33ffddffc58d"
@@ -969,10 +969,10 @@ lib LibWin32
   end
 
   struct IMbnDeviceServicesManagerVTbl
-    query_interface : Proc(IMbnDeviceServicesManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnDeviceServicesManager*, UInt32)
-    release : Proc(IMbnDeviceServicesManager*, UInt32)
-    get_device_services_context : Proc(IMbnDeviceServicesManager*, UInt8*, IMbnDeviceServicesContext*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device_services_context : UInt64
   end
 
   IMbnDeviceServicesManager_GUID = "20a26258-6811-4478-ac1d-13324e45e41c"
@@ -982,13 +982,13 @@ lib LibWin32
   end
 
   struct IMbnDeviceServicesContextVTbl
-    query_interface : Proc(IMbnDeviceServicesContext*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnDeviceServicesContext*, UInt32)
-    release : Proc(IMbnDeviceServicesContext*, UInt32)
-    enumerate_device_services : Proc(IMbnDeviceServicesContext*, SAFEARRAY**, HRESULT)
-    get_device_service : Proc(IMbnDeviceServicesContext*, UInt8*, IMbnDeviceService*, HRESULT)
-    get_max_command_size : Proc(IMbnDeviceServicesContext*, UInt32*, HRESULT)
-    get_max_data_size : Proc(IMbnDeviceServicesContext*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enumerate_device_services : UInt64
+    get_device_service : UInt64
+    get_max_command_size : UInt64
+    get_max_data_size : UInt64
   end
 
   IMbnDeviceServicesContext_GUID = "fc5ac347-1592-4068-80bb-6a57580150d8"
@@ -998,20 +998,20 @@ lib LibWin32
   end
 
   struct IMbnDeviceServicesEventsVTbl
-    query_interface : Proc(IMbnDeviceServicesEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnDeviceServicesEvents*, UInt32)
-    release : Proc(IMbnDeviceServicesEvents*, UInt32)
-    on_query_supported_commands_complete : Proc(IMbnDeviceServicesEvents*, IMbnDeviceService, SAFEARRAY*, HRESULT, UInt32, HRESULT)
-    on_open_command_session_complete : Proc(IMbnDeviceServicesEvents*, IMbnDeviceService, HRESULT, UInt32, HRESULT)
-    on_close_command_session_complete : Proc(IMbnDeviceServicesEvents*, IMbnDeviceService, HRESULT, UInt32, HRESULT)
-    on_set_command_complete : Proc(IMbnDeviceServicesEvents*, IMbnDeviceService, UInt32, SAFEARRAY*, HRESULT, UInt32, HRESULT)
-    on_query_command_complete : Proc(IMbnDeviceServicesEvents*, IMbnDeviceService, UInt32, SAFEARRAY*, HRESULT, UInt32, HRESULT)
-    on_event_notification : Proc(IMbnDeviceServicesEvents*, IMbnDeviceService, UInt32, SAFEARRAY*, HRESULT)
-    on_open_data_session_complete : Proc(IMbnDeviceServicesEvents*, IMbnDeviceService, HRESULT, UInt32, HRESULT)
-    on_close_data_session_complete : Proc(IMbnDeviceServicesEvents*, IMbnDeviceService, HRESULT, UInt32, HRESULT)
-    on_write_data_complete : Proc(IMbnDeviceServicesEvents*, IMbnDeviceService, HRESULT, UInt32, HRESULT)
-    on_read_data : Proc(IMbnDeviceServicesEvents*, IMbnDeviceService, SAFEARRAY*, HRESULT)
-    on_interface_state_change : Proc(IMbnDeviceServicesEvents*, UInt8*, MBN_DEVICE_SERVICES_INTERFACE_STATE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_query_supported_commands_complete : UInt64
+    on_open_command_session_complete : UInt64
+    on_close_command_session_complete : UInt64
+    on_set_command_complete : UInt64
+    on_query_command_complete : UInt64
+    on_event_notification : UInt64
+    on_open_data_session_complete : UInt64
+    on_close_data_session_complete : UInt64
+    on_write_data_complete : UInt64
+    on_read_data : UInt64
+    on_interface_state_change : UInt64
   end
 
   IMbnDeviceServicesEvents_GUID = "0a900c19-6824-4e97-b76e-cf239d0ca642"
@@ -1021,21 +1021,21 @@ lib LibWin32
   end
 
   struct IMbnDeviceServiceVTbl
-    query_interface : Proc(IMbnDeviceService*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnDeviceService*, UInt32)
-    release : Proc(IMbnDeviceService*, UInt32)
-    query_supported_commands : Proc(IMbnDeviceService*, UInt32*, HRESULT)
-    open_command_session : Proc(IMbnDeviceService*, UInt32*, HRESULT)
-    close_command_session : Proc(IMbnDeviceService*, UInt32*, HRESULT)
-    set_command : Proc(IMbnDeviceService*, UInt32, SAFEARRAY*, UInt32*, HRESULT)
-    query_command : Proc(IMbnDeviceService*, UInt32, SAFEARRAY*, UInt32*, HRESULT)
-    open_data_session : Proc(IMbnDeviceService*, UInt32*, HRESULT)
-    close_data_session : Proc(IMbnDeviceService*, UInt32*, HRESULT)
-    write_data : Proc(IMbnDeviceService*, SAFEARRAY*, UInt32*, HRESULT)
-    get_interface_id : Proc(IMbnDeviceService*, UInt8**, HRESULT)
-    get_device_service_id : Proc(IMbnDeviceService*, UInt8**, HRESULT)
-    get_is_command_session_open : Proc(IMbnDeviceService*, LibC::BOOL*, HRESULT)
-    get_is_data_session_open : Proc(IMbnDeviceService*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    query_supported_commands : UInt64
+    open_command_session : UInt64
+    close_command_session : UInt64
+    set_command : UInt64
+    query_command : UInt64
+    open_data_session : UInt64
+    close_data_session : UInt64
+    write_data : UInt64
+    get_interface_id : UInt64
+    get_device_service_id : UInt64
+    get_is_command_session_open : UInt64
+    get_is_data_session_open : UInt64
   end
 
   IMbnDeviceService_GUID = "b3bb9a71-dc70-4be9-a4da-7886ae8b191b"
@@ -1045,20 +1045,20 @@ lib LibWin32
   end
 
   struct IMbnPinVTbl
-    query_interface : Proc(IMbnPin*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMbnPin*, UInt32)
-    release : Proc(IMbnPin*, UInt32)
-    get_pin_type : Proc(IMbnPin*, MBN_PIN_TYPE*, HRESULT)
-    get_pin_format : Proc(IMbnPin*, MBN_PIN_FORMAT*, HRESULT)
-    get_pin_length_min : Proc(IMbnPin*, UInt32*, HRESULT)
-    get_pin_length_max : Proc(IMbnPin*, UInt32*, HRESULT)
-    get_pin_mode : Proc(IMbnPin*, MBN_PIN_MODE*, HRESULT)
-    enable : Proc(IMbnPin*, LibC::LPWSTR, UInt32*, HRESULT)
-    disable : Proc(IMbnPin*, LibC::LPWSTR, UInt32*, HRESULT)
-    enter : Proc(IMbnPin*, LibC::LPWSTR, UInt32*, HRESULT)
-    change : Proc(IMbnPin*, LibC::LPWSTR, LibC::LPWSTR, UInt32*, HRESULT)
-    unblock : Proc(IMbnPin*, LibC::LPWSTR, LibC::LPWSTR, UInt32*, HRESULT)
-    get_pin_manager : Proc(IMbnPin*, IMbnPinManager*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_pin_type : UInt64
+    get_pin_format : UInt64
+    get_pin_length_min : UInt64
+    get_pin_length_max : UInt64
+    get_pin_mode : UInt64
+    enable : UInt64
+    disable : UInt64
+    enter : UInt64
+    change : UInt64
+    unblock : UInt64
+    get_pin_manager : UInt64
   end
 
   IMbnPin_GUID = "dcbbbab6-2007-4bbb-aaee-338e368af6fa"
@@ -1067,4 +1067,1003 @@ lib LibWin32
     lpVtbl : IMbnPinVTbl*
   end
 
+end
+struct LibWin32::IDummyMBNUCMExt
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IMbnConnection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_connection_id(connectionid : UInt8**) : HRESULT
+    @lpVtbl.value.get_connection_id.unsafe_as(Proc(UInt8**, HRESULT)).call(connectionid)
+  end
+  def get_interface_id(interfaceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_interface_id.unsafe_as(Proc(UInt8**, HRESULT)).call(interfaceid)
+  end
+  def connect(connectionmode : MBN_CONNECTION_MODE, strprofile : LibC::LPWSTR, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.connect.unsafe_as(Proc(MBN_CONNECTION_MODE, LibC::LPWSTR, UInt32*, HRESULT)).call(connectionmode, strprofile, requestid)
+  end
+  def disconnect(requestid : UInt32*) : HRESULT
+    @lpVtbl.value.disconnect.unsafe_as(Proc(UInt32*, HRESULT)).call(requestid)
+  end
+  def get_connection_state(connectionstate : MBN_ACTIVATION_STATE*, profilename : UInt8**) : HRESULT
+    @lpVtbl.value.get_connection_state.unsafe_as(Proc(MBN_ACTIVATION_STATE*, UInt8**, HRESULT)).call(connectionstate, profilename)
+  end
+  def get_voice_call_state(voicecallstate : MBN_VOICE_CALL_STATE*) : HRESULT
+    @lpVtbl.value.get_voice_call_state.unsafe_as(Proc(MBN_VOICE_CALL_STATE*, HRESULT)).call(voicecallstate)
+  end
+  def get_activation_network_error(networkerror : UInt32*) : HRESULT
+    @lpVtbl.value.get_activation_network_error.unsafe_as(Proc(UInt32*, HRESULT)).call(networkerror)
+  end
+end
+struct LibWin32::IMbnConnectionEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_connect_complete(newconnection : IMbnConnection, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_connect_complete.unsafe_as(Proc(IMbnConnection, UInt32, HRESULT, HRESULT)).call(newconnection, requestid, status)
+  end
+  def on_disconnect_complete(newconnection : IMbnConnection, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_disconnect_complete.unsafe_as(Proc(IMbnConnection, UInt32, HRESULT, HRESULT)).call(newconnection, requestid, status)
+  end
+  def on_connect_state_change(newconnection : IMbnConnection) : HRESULT
+    @lpVtbl.value.on_connect_state_change.unsafe_as(Proc(IMbnConnection, HRESULT)).call(newconnection)
+  end
+  def on_voice_call_state_change(newconnection : IMbnConnection) : HRESULT
+    @lpVtbl.value.on_voice_call_state_change.unsafe_as(Proc(IMbnConnection, HRESULT)).call(newconnection)
+  end
+end
+struct LibWin32::IMbnInterface
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_interface_id(interfaceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_interface_id.unsafe_as(Proc(UInt8**, HRESULT)).call(interfaceid)
+  end
+  def get_interface_capability(interfacecaps : MBN_INTERFACE_CAPS*) : HRESULT
+    @lpVtbl.value.get_interface_capability.unsafe_as(Proc(MBN_INTERFACE_CAPS*, HRESULT)).call(interfacecaps)
+  end
+  def get_subscriber_information(subscriberinformation : IMbnSubscriberInformation*) : HRESULT
+    @lpVtbl.value.get_subscriber_information.unsafe_as(Proc(IMbnSubscriberInformation*, HRESULT)).call(subscriberinformation)
+  end
+  def get_ready_state(readystate : MBN_READY_STATE*) : HRESULT
+    @lpVtbl.value.get_ready_state.unsafe_as(Proc(MBN_READY_STATE*, HRESULT)).call(readystate)
+  end
+  def in_emergency_mode(emergencymode : Int16*) : HRESULT
+    @lpVtbl.value.in_emergency_mode.unsafe_as(Proc(Int16*, HRESULT)).call(emergencymode)
+  end
+  def get_home_provider(homeprovider : MBN_PROVIDER*) : HRESULT
+    @lpVtbl.value.get_home_provider.unsafe_as(Proc(MBN_PROVIDER*, HRESULT)).call(homeprovider)
+  end
+  def get_preferred_providers(preferredproviders : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_preferred_providers.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(preferredproviders)
+  end
+  def set_preferred_providers(preferredproviders : SAFEARRAY*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.set_preferred_providers.unsafe_as(Proc(SAFEARRAY*, UInt32*, HRESULT)).call(preferredproviders, requestid)
+  end
+  def get_visible_providers(age : UInt32*, visibleproviders : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_visible_providers.unsafe_as(Proc(UInt32*, SAFEARRAY**, HRESULT)).call(age, visibleproviders)
+  end
+  def scan_network(requestid : UInt32*) : HRESULT
+    @lpVtbl.value.scan_network.unsafe_as(Proc(UInt32*, HRESULT)).call(requestid)
+  end
+  def get_connection(mbnconnection : IMbnConnection*) : HRESULT
+    @lpVtbl.value.get_connection.unsafe_as(Proc(IMbnConnection*, HRESULT)).call(mbnconnection)
+  end
+end
+struct LibWin32::IMbnInterfaceEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_interface_capability_available(newinterface : IMbnInterface) : HRESULT
+    @lpVtbl.value.on_interface_capability_available.unsafe_as(Proc(IMbnInterface, HRESULT)).call(newinterface)
+  end
+  def on_subscriber_information_change(newinterface : IMbnInterface) : HRESULT
+    @lpVtbl.value.on_subscriber_information_change.unsafe_as(Proc(IMbnInterface, HRESULT)).call(newinterface)
+  end
+  def on_ready_state_change(newinterface : IMbnInterface) : HRESULT
+    @lpVtbl.value.on_ready_state_change.unsafe_as(Proc(IMbnInterface, HRESULT)).call(newinterface)
+  end
+  def on_emergency_mode_change(newinterface : IMbnInterface) : HRESULT
+    @lpVtbl.value.on_emergency_mode_change.unsafe_as(Proc(IMbnInterface, HRESULT)).call(newinterface)
+  end
+  def on_home_provider_available(newinterface : IMbnInterface) : HRESULT
+    @lpVtbl.value.on_home_provider_available.unsafe_as(Proc(IMbnInterface, HRESULT)).call(newinterface)
+  end
+  def on_preferred_providers_change(newinterface : IMbnInterface) : HRESULT
+    @lpVtbl.value.on_preferred_providers_change.unsafe_as(Proc(IMbnInterface, HRESULT)).call(newinterface)
+  end
+  def on_set_preferred_providers_complete(newinterface : IMbnInterface, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_set_preferred_providers_complete.unsafe_as(Proc(IMbnInterface, UInt32, HRESULT, HRESULT)).call(newinterface, requestid, status)
+  end
+  def on_scan_network_complete(newinterface : IMbnInterface, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_scan_network_complete.unsafe_as(Proc(IMbnInterface, UInt32, HRESULT, HRESULT)).call(newinterface, requestid, status)
+  end
+end
+struct LibWin32::IMbnInterfaceManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_interface(interfaceid : LibC::LPWSTR, mbninterface : IMbnInterface*) : HRESULT
+    @lpVtbl.value.get_interface.unsafe_as(Proc(LibC::LPWSTR, IMbnInterface*, HRESULT)).call(interfaceid, mbninterface)
+  end
+  def get_interfaces(mbninterfaces : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_interfaces.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(mbninterfaces)
+  end
+end
+struct LibWin32::IMbnInterfaceManagerEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_interface_arrival(newinterface : IMbnInterface) : HRESULT
+    @lpVtbl.value.on_interface_arrival.unsafe_as(Proc(IMbnInterface, HRESULT)).call(newinterface)
+  end
+  def on_interface_removal(oldinterface : IMbnInterface) : HRESULT
+    @lpVtbl.value.on_interface_removal.unsafe_as(Proc(IMbnInterface, HRESULT)).call(oldinterface)
+  end
+end
+struct LibWin32::IMbnRegistration
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_register_state(registerstate : MBN_REGISTER_STATE*) : HRESULT
+    @lpVtbl.value.get_register_state.unsafe_as(Proc(MBN_REGISTER_STATE*, HRESULT)).call(registerstate)
+  end
+  def get_register_mode(registermode : MBN_REGISTER_MODE*) : HRESULT
+    @lpVtbl.value.get_register_mode.unsafe_as(Proc(MBN_REGISTER_MODE*, HRESULT)).call(registermode)
+  end
+  def get_provider_id(providerid : UInt8**) : HRESULT
+    @lpVtbl.value.get_provider_id.unsafe_as(Proc(UInt8**, HRESULT)).call(providerid)
+  end
+  def get_provider_name(providername : UInt8**) : HRESULT
+    @lpVtbl.value.get_provider_name.unsafe_as(Proc(UInt8**, HRESULT)).call(providername)
+  end
+  def get_roaming_text(roamingtext : UInt8**) : HRESULT
+    @lpVtbl.value.get_roaming_text.unsafe_as(Proc(UInt8**, HRESULT)).call(roamingtext)
+  end
+  def get_available_data_classes(availabledataclasses : UInt32*) : HRESULT
+    @lpVtbl.value.get_available_data_classes.unsafe_as(Proc(UInt32*, HRESULT)).call(availabledataclasses)
+  end
+  def get_current_data_class(currentdataclass : UInt32*) : HRESULT
+    @lpVtbl.value.get_current_data_class.unsafe_as(Proc(UInt32*, HRESULT)).call(currentdataclass)
+  end
+  def get_registration_network_error(registrationnetworkerror : UInt32*) : HRESULT
+    @lpVtbl.value.get_registration_network_error.unsafe_as(Proc(UInt32*, HRESULT)).call(registrationnetworkerror)
+  end
+  def get_packet_attach_network_error(packetattachnetworkerror : UInt32*) : HRESULT
+    @lpVtbl.value.get_packet_attach_network_error.unsafe_as(Proc(UInt32*, HRESULT)).call(packetattachnetworkerror)
+  end
+  def set_register_mode(registermode : MBN_REGISTER_MODE, providerid : LibC::LPWSTR, dataclass : UInt32, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.set_register_mode.unsafe_as(Proc(MBN_REGISTER_MODE, LibC::LPWSTR, UInt32, UInt32*, HRESULT)).call(registermode, providerid, dataclass, requestid)
+  end
+end
+struct LibWin32::IMbnRegistrationEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_register_mode_available(newinterface : IMbnRegistration) : HRESULT
+    @lpVtbl.value.on_register_mode_available.unsafe_as(Proc(IMbnRegistration, HRESULT)).call(newinterface)
+  end
+  def on_register_state_change(newinterface : IMbnRegistration) : HRESULT
+    @lpVtbl.value.on_register_state_change.unsafe_as(Proc(IMbnRegistration, HRESULT)).call(newinterface)
+  end
+  def on_packet_service_state_change(newinterface : IMbnRegistration) : HRESULT
+    @lpVtbl.value.on_packet_service_state_change.unsafe_as(Proc(IMbnRegistration, HRESULT)).call(newinterface)
+  end
+  def on_set_register_mode_complete(newinterface : IMbnRegistration, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_set_register_mode_complete.unsafe_as(Proc(IMbnRegistration, UInt32, HRESULT, HRESULT)).call(newinterface, requestid, status)
+  end
+end
+struct LibWin32::IMbnConnectionManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_connection(connectionid : LibC::LPWSTR, mbnconnection : IMbnConnection*) : HRESULT
+    @lpVtbl.value.get_connection.unsafe_as(Proc(LibC::LPWSTR, IMbnConnection*, HRESULT)).call(connectionid, mbnconnection)
+  end
+  def get_connections(mbnconnections : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_connections.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(mbnconnections)
+  end
+end
+struct LibWin32::IMbnConnectionManagerEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_connection_arrival(newconnection : IMbnConnection) : HRESULT
+    @lpVtbl.value.on_connection_arrival.unsafe_as(Proc(IMbnConnection, HRESULT)).call(newconnection)
+  end
+  def on_connection_removal(oldconnection : IMbnConnection) : HRESULT
+    @lpVtbl.value.on_connection_removal.unsafe_as(Proc(IMbnConnection, HRESULT)).call(oldconnection)
+  end
+end
+struct LibWin32::IMbnPinManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_pin_list(pinlist : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_pin_list.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(pinlist)
+  end
+  def get_pin(pintype : MBN_PIN_TYPE, pin : IMbnPin*) : HRESULT
+    @lpVtbl.value.get_pin.unsafe_as(Proc(MBN_PIN_TYPE, IMbnPin*, HRESULT)).call(pintype, pin)
+  end
+  def get_pin_state(requestid : UInt32*) : HRESULT
+    @lpVtbl.value.get_pin_state.unsafe_as(Proc(UInt32*, HRESULT)).call(requestid)
+  end
+end
+struct LibWin32::IMbnPinManagerEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_pin_list_available(pinmanager : IMbnPinManager) : HRESULT
+    @lpVtbl.value.on_pin_list_available.unsafe_as(Proc(IMbnPinManager, HRESULT)).call(pinmanager)
+  end
+  def on_get_pin_state_complete(pinmanager : IMbnPinManager, pininfo : MBN_PIN_INFO, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_get_pin_state_complete.unsafe_as(Proc(IMbnPinManager, MBN_PIN_INFO, UInt32, HRESULT, HRESULT)).call(pinmanager, pininfo, requestid, status)
+  end
+end
+struct LibWin32::IMbnPinEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_enable_complete(pin : IMbnPin, pininfo : MBN_PIN_INFO*, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_enable_complete.unsafe_as(Proc(IMbnPin, MBN_PIN_INFO*, UInt32, HRESULT, HRESULT)).call(pin, pininfo, requestid, status)
+  end
+  def on_disable_complete(pin : IMbnPin, pininfo : MBN_PIN_INFO*, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_disable_complete.unsafe_as(Proc(IMbnPin, MBN_PIN_INFO*, UInt32, HRESULT, HRESULT)).call(pin, pininfo, requestid, status)
+  end
+  def on_enter_complete(pin : IMbnPin, pininfo : MBN_PIN_INFO*, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_enter_complete.unsafe_as(Proc(IMbnPin, MBN_PIN_INFO*, UInt32, HRESULT, HRESULT)).call(pin, pininfo, requestid, status)
+  end
+  def on_change_complete(pin : IMbnPin, pininfo : MBN_PIN_INFO*, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_change_complete.unsafe_as(Proc(IMbnPin, MBN_PIN_INFO*, UInt32, HRESULT, HRESULT)).call(pin, pininfo, requestid, status)
+  end
+  def on_unblock_complete(pin : IMbnPin, pininfo : MBN_PIN_INFO*, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_unblock_complete.unsafe_as(Proc(IMbnPin, MBN_PIN_INFO*, UInt32, HRESULT, HRESULT)).call(pin, pininfo, requestid, status)
+  end
+end
+struct LibWin32::IMbnSubscriberInformation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_subscriber_id(subscriberid : UInt8**) : HRESULT
+    @lpVtbl.value.get_subscriber_id.unsafe_as(Proc(UInt8**, HRESULT)).call(subscriberid)
+  end
+  def get_sim_icc_id(simiccid : UInt8**) : HRESULT
+    @lpVtbl.value.get_sim_icc_id.unsafe_as(Proc(UInt8**, HRESULT)).call(simiccid)
+  end
+  def get_telephone_numbers(telephonenumbers : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_telephone_numbers.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(telephonenumbers)
+  end
+end
+struct LibWin32::IMbnSignal
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_signal_strength(signalstrength : UInt32*) : HRESULT
+    @lpVtbl.value.get_signal_strength.unsafe_as(Proc(UInt32*, HRESULT)).call(signalstrength)
+  end
+  def get_signal_error(signalerror : UInt32*) : HRESULT
+    @lpVtbl.value.get_signal_error.unsafe_as(Proc(UInt32*, HRESULT)).call(signalerror)
+  end
+end
+struct LibWin32::IMbnSignalEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_signal_state_change(newinterface : IMbnSignal) : HRESULT
+    @lpVtbl.value.on_signal_state_change.unsafe_as(Proc(IMbnSignal, HRESULT)).call(newinterface)
+  end
+end
+struct LibWin32::IMbnConnectionContext
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_provisioned_contexts(provisionedcontexts : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_provisioned_contexts.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(provisionedcontexts)
+  end
+  def set_provisioned_context(provisionedcontexts : MBN_CONTEXT, providerid : LibC::LPWSTR, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.set_provisioned_context.unsafe_as(Proc(MBN_CONTEXT, LibC::LPWSTR, UInt32*, HRESULT)).call(provisionedcontexts, providerid, requestid)
+  end
+end
+struct LibWin32::IMbnConnectionContextEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_provisioned_context_list_change(newinterface : IMbnConnectionContext) : HRESULT
+    @lpVtbl.value.on_provisioned_context_list_change.unsafe_as(Proc(IMbnConnectionContext, HRESULT)).call(newinterface)
+  end
+  def on_set_provisioned_context_complete(newinterface : IMbnConnectionContext, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_set_provisioned_context_complete.unsafe_as(Proc(IMbnConnectionContext, UInt32, HRESULT, HRESULT)).call(newinterface, requestid, status)
+  end
+end
+struct LibWin32::IMbnConnectionProfileManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_connection_profiles(mbninterface : IMbnInterface, connectionprofiles : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_connection_profiles.unsafe_as(Proc(IMbnInterface, SAFEARRAY**, HRESULT)).call(mbninterface, connectionprofiles)
+  end
+  def get_connection_profile(mbninterface : IMbnInterface, profilename : LibC::LPWSTR, connectionprofile : IMbnConnectionProfile*) : HRESULT
+    @lpVtbl.value.get_connection_profile.unsafe_as(Proc(IMbnInterface, LibC::LPWSTR, IMbnConnectionProfile*, HRESULT)).call(mbninterface, profilename, connectionprofile)
+  end
+  def create_connection_profile(xmlprofile : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.create_connection_profile.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(xmlprofile)
+  end
+end
+struct LibWin32::IMbnConnectionProfile
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_profile_xml_data(profiledata : UInt8**) : HRESULT
+    @lpVtbl.value.get_profile_xml_data.unsafe_as(Proc(UInt8**, HRESULT)).call(profiledata)
+  end
+  def update_profile(strprofile : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.update_profile.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(strprofile)
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IMbnConnectionProfileEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_profile_update(newprofile : IMbnConnectionProfile) : HRESULT
+    @lpVtbl.value.on_profile_update.unsafe_as(Proc(IMbnConnectionProfile, HRESULT)).call(newprofile)
+  end
+end
+struct LibWin32::IMbnSmsConfiguration
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_service_center_address(scaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_center_address.unsafe_as(Proc(UInt8**, HRESULT)).call(scaddress)
+  end
+  def put_service_center_address(scaddress : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.put_service_center_address.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(scaddress)
+  end
+  def get_max_message_index(index : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_message_index.unsafe_as(Proc(UInt32*, HRESULT)).call(index)
+  end
+  def get_cdma_short_msg_size(shortmsgsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_cdma_short_msg_size.unsafe_as(Proc(UInt32*, HRESULT)).call(shortmsgsize)
+  end
+  def get_sms_format(smsformat : MBN_SMS_FORMAT*) : HRESULT
+    @lpVtbl.value.get_sms_format.unsafe_as(Proc(MBN_SMS_FORMAT*, HRESULT)).call(smsformat)
+  end
+  def put_sms_format(smsformat : MBN_SMS_FORMAT) : HRESULT
+    @lpVtbl.value.put_sms_format.unsafe_as(Proc(MBN_SMS_FORMAT, HRESULT)).call(smsformat)
+  end
+end
+struct LibWin32::IMbnSmsReadMsgPdu
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_index(index : UInt32*) : HRESULT
+    @lpVtbl.value.get_index.unsafe_as(Proc(UInt32*, HRESULT)).call(index)
+  end
+  def get_status(status : MBN_MSG_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(MBN_MSG_STATUS*, HRESULT)).call(status)
+  end
+  def get_pdu_data(pdudata : UInt8**) : HRESULT
+    @lpVtbl.value.get_pdu_data.unsafe_as(Proc(UInt8**, HRESULT)).call(pdudata)
+  end
+  def get_message(message : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_message.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(message)
+  end
+end
+struct LibWin32::IMbnSmsReadMsgTextCdma
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_index(index : UInt32*) : HRESULT
+    @lpVtbl.value.get_index.unsafe_as(Proc(UInt32*, HRESULT)).call(index)
+  end
+  def get_status(status : MBN_MSG_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(MBN_MSG_STATUS*, HRESULT)).call(status)
+  end
+  def get_address(address : UInt8**) : HRESULT
+    @lpVtbl.value.get_address.unsafe_as(Proc(UInt8**, HRESULT)).call(address)
+  end
+  def get_timestamp(timestamp : UInt8**) : HRESULT
+    @lpVtbl.value.get_timestamp.unsafe_as(Proc(UInt8**, HRESULT)).call(timestamp)
+  end
+  def get_encoding_id(encodingid : MBN_SMS_CDMA_ENCODING*) : HRESULT
+    @lpVtbl.value.get_encoding_id.unsafe_as(Proc(MBN_SMS_CDMA_ENCODING*, HRESULT)).call(encodingid)
+  end
+  def get_language_id(languageid : MBN_SMS_CDMA_LANG*) : HRESULT
+    @lpVtbl.value.get_language_id.unsafe_as(Proc(MBN_SMS_CDMA_LANG*, HRESULT)).call(languageid)
+  end
+  def get_size_in_characters(sizeincharacters : UInt32*) : HRESULT
+    @lpVtbl.value.get_size_in_characters.unsafe_as(Proc(UInt32*, HRESULT)).call(sizeincharacters)
+  end
+  def get_message(message : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_message.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(message)
+  end
+end
+struct LibWin32::IMbnSms
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_sms_configuration(smsconfiguration : IMbnSmsConfiguration*) : HRESULT
+    @lpVtbl.value.get_sms_configuration.unsafe_as(Proc(IMbnSmsConfiguration*, HRESULT)).call(smsconfiguration)
+  end
+  def set_sms_configuration(smsconfiguration : IMbnSmsConfiguration, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.set_sms_configuration.unsafe_as(Proc(IMbnSmsConfiguration, UInt32*, HRESULT)).call(smsconfiguration, requestid)
+  end
+  def sms_send_pdu(pdudata : LibC::LPWSTR, size : UInt8, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.sms_send_pdu.unsafe_as(Proc(LibC::LPWSTR, UInt8, UInt32*, HRESULT)).call(pdudata, size, requestid)
+  end
+  def sms_send_cdma(address : LibC::LPWSTR, encoding : MBN_SMS_CDMA_ENCODING, language : MBN_SMS_CDMA_LANG, sizeincharacters : UInt32, message : SAFEARRAY*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.sms_send_cdma.unsafe_as(Proc(LibC::LPWSTR, MBN_SMS_CDMA_ENCODING, MBN_SMS_CDMA_LANG, UInt32, SAFEARRAY*, UInt32*, HRESULT)).call(address, encoding, language, sizeincharacters, message, requestid)
+  end
+  def sms_send_cdma_pdu(message : SAFEARRAY*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.sms_send_cdma_pdu.unsafe_as(Proc(SAFEARRAY*, UInt32*, HRESULT)).call(message, requestid)
+  end
+  def sms_read(smsfilter : MBN_SMS_FILTER*, smsformat : MBN_SMS_FORMAT, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.sms_read.unsafe_as(Proc(MBN_SMS_FILTER*, MBN_SMS_FORMAT, UInt32*, HRESULT)).call(smsfilter, smsformat, requestid)
+  end
+  def sms_delete(smsfilter : MBN_SMS_FILTER*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.sms_delete.unsafe_as(Proc(MBN_SMS_FILTER*, UInt32*, HRESULT)).call(smsfilter, requestid)
+  end
+  def get_sms_status(smsstatusinfo : MBN_SMS_STATUS_INFO*) : HRESULT
+    @lpVtbl.value.get_sms_status.unsafe_as(Proc(MBN_SMS_STATUS_INFO*, HRESULT)).call(smsstatusinfo)
+  end
+end
+struct LibWin32::IMbnSmsEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_sms_configuration_change(sms : IMbnSms) : HRESULT
+    @lpVtbl.value.on_sms_configuration_change.unsafe_as(Proc(IMbnSms, HRESULT)).call(sms)
+  end
+  def on_set_sms_configuration_complete(sms : IMbnSms, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_set_sms_configuration_complete.unsafe_as(Proc(IMbnSms, UInt32, HRESULT, HRESULT)).call(sms, requestid, status)
+  end
+  def on_sms_send_complete(sms : IMbnSms, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_sms_send_complete.unsafe_as(Proc(IMbnSms, UInt32, HRESULT, HRESULT)).call(sms, requestid, status)
+  end
+  def on_sms_read_complete(sms : IMbnSms, smsformat : MBN_SMS_FORMAT, readmsgs : SAFEARRAY*, moremsgs : Int16, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_sms_read_complete.unsafe_as(Proc(IMbnSms, MBN_SMS_FORMAT, SAFEARRAY*, Int16, UInt32, HRESULT, HRESULT)).call(sms, smsformat, readmsgs, moremsgs, requestid, status)
+  end
+  def on_sms_new_class0_message(sms : IMbnSms, smsformat : MBN_SMS_FORMAT, readmsgs : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.on_sms_new_class0_message.unsafe_as(Proc(IMbnSms, MBN_SMS_FORMAT, SAFEARRAY*, HRESULT)).call(sms, smsformat, readmsgs)
+  end
+  def on_sms_delete_complete(sms : IMbnSms, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_sms_delete_complete.unsafe_as(Proc(IMbnSms, UInt32, HRESULT, HRESULT)).call(sms, requestid, status)
+  end
+  def on_sms_status_change(sms : IMbnSms) : HRESULT
+    @lpVtbl.value.on_sms_status_change.unsafe_as(Proc(IMbnSms, HRESULT)).call(sms)
+  end
+end
+struct LibWin32::IMbnServiceActivation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def activate(vendorspecificdata : SAFEARRAY*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.activate.unsafe_as(Proc(SAFEARRAY*, UInt32*, HRESULT)).call(vendorspecificdata, requestid)
+  end
+end
+struct LibWin32::IMbnServiceActivationEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_activation_complete(serviceactivation : IMbnServiceActivation, vendorspecificdata : SAFEARRAY*, requestid : UInt32, status : HRESULT, networkerror : UInt32) : HRESULT
+    @lpVtbl.value.on_activation_complete.unsafe_as(Proc(IMbnServiceActivation, SAFEARRAY*, UInt32, HRESULT, UInt32, HRESULT)).call(serviceactivation, vendorspecificdata, requestid, status, networkerror)
+  end
+end
+struct LibWin32::IMbnVendorSpecificOperation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_vendor_specific(vendorspecificdata : SAFEARRAY*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.set_vendor_specific.unsafe_as(Proc(SAFEARRAY*, UInt32*, HRESULT)).call(vendorspecificdata, requestid)
+  end
+end
+struct LibWin32::IMbnVendorSpecificEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_event_notification(vendoroperation : IMbnVendorSpecificOperation, vendorspecificdata : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.on_event_notification.unsafe_as(Proc(IMbnVendorSpecificOperation, SAFEARRAY*, HRESULT)).call(vendoroperation, vendorspecificdata)
+  end
+  def on_set_vendor_specific_complete(vendoroperation : IMbnVendorSpecificOperation, vendorspecificdata : SAFEARRAY*, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_set_vendor_specific_complete.unsafe_as(Proc(IMbnVendorSpecificOperation, SAFEARRAY*, UInt32, HRESULT)).call(vendoroperation, vendorspecificdata, requestid)
+  end
+end
+struct LibWin32::IMbnConnectionProfileManagerEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_connection_profile_arrival(newconnectionprofile : IMbnConnectionProfile) : HRESULT
+    @lpVtbl.value.on_connection_profile_arrival.unsafe_as(Proc(IMbnConnectionProfile, HRESULT)).call(newconnectionprofile)
+  end
+  def on_connection_profile_removal(oldconnectionprofile : IMbnConnectionProfile) : HRESULT
+    @lpVtbl.value.on_connection_profile_removal.unsafe_as(Proc(IMbnConnectionProfile, HRESULT)).call(oldconnectionprofile)
+  end
+end
+struct LibWin32::IMbnRadio
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_software_radio_state(softwareradiostate : MBN_RADIO*) : HRESULT
+    @lpVtbl.value.get_software_radio_state.unsafe_as(Proc(MBN_RADIO*, HRESULT)).call(softwareradiostate)
+  end
+  def get_hardware_radio_state(hardwareradiostate : MBN_RADIO*) : HRESULT
+    @lpVtbl.value.get_hardware_radio_state.unsafe_as(Proc(MBN_RADIO*, HRESULT)).call(hardwareradiostate)
+  end
+  def set_software_radio_state(radiostate : MBN_RADIO, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.set_software_radio_state.unsafe_as(Proc(MBN_RADIO, UInt32*, HRESULT)).call(radiostate, requestid)
+  end
+end
+struct LibWin32::IMbnRadioEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_radio_state_change(newinterface : IMbnRadio) : HRESULT
+    @lpVtbl.value.on_radio_state_change.unsafe_as(Proc(IMbnRadio, HRESULT)).call(newinterface)
+  end
+  def on_set_software_radio_state_complete(newinterface : IMbnRadio, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_set_software_radio_state_complete.unsafe_as(Proc(IMbnRadio, UInt32, HRESULT, HRESULT)).call(newinterface, requestid, status)
+  end
+end
+struct LibWin32::IMbnMultiCarrier
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_home_provider(homeprovider : MBN_PROVIDER2*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.set_home_provider.unsafe_as(Proc(MBN_PROVIDER2*, UInt32*, HRESULT)).call(homeprovider, requestid)
+  end
+  def get_preferred_providers(preferredmulticarrierproviders : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_preferred_providers.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(preferredmulticarrierproviders)
+  end
+  def get_visible_providers(age : UInt32*, visibleproviders : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_visible_providers.unsafe_as(Proc(UInt32*, SAFEARRAY**, HRESULT)).call(age, visibleproviders)
+  end
+  def get_supported_cellular_classes(cellularclasses : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_supported_cellular_classes.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(cellularclasses)
+  end
+  def get_current_cellular_class(currentcellularclass : MBN_CELLULAR_CLASS*) : HRESULT
+    @lpVtbl.value.get_current_cellular_class.unsafe_as(Proc(MBN_CELLULAR_CLASS*, HRESULT)).call(currentcellularclass)
+  end
+  def scan_network(requestid : UInt32*) : HRESULT
+    @lpVtbl.value.scan_network.unsafe_as(Proc(UInt32*, HRESULT)).call(requestid)
+  end
+end
+struct LibWin32::IMbnMultiCarrierEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_set_home_provider_complete(mbninterface : IMbnMultiCarrier, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_set_home_provider_complete.unsafe_as(Proc(IMbnMultiCarrier, UInt32, HRESULT, HRESULT)).call(mbninterface, requestid, status)
+  end
+  def on_current_cellular_class_change(mbninterface : IMbnMultiCarrier) : HRESULT
+    @lpVtbl.value.on_current_cellular_class_change.unsafe_as(Proc(IMbnMultiCarrier, HRESULT)).call(mbninterface)
+  end
+  def on_preferred_providers_change(mbninterface : IMbnMultiCarrier) : HRESULT
+    @lpVtbl.value.on_preferred_providers_change.unsafe_as(Proc(IMbnMultiCarrier, HRESULT)).call(mbninterface)
+  end
+  def on_scan_network_complete(mbninterface : IMbnMultiCarrier, requestid : UInt32, status : HRESULT) : HRESULT
+    @lpVtbl.value.on_scan_network_complete.unsafe_as(Proc(IMbnMultiCarrier, UInt32, HRESULT, HRESULT)).call(mbninterface, requestid, status)
+  end
+  def on_interface_capability_change(mbninterface : IMbnMultiCarrier) : HRESULT
+    @lpVtbl.value.on_interface_capability_change.unsafe_as(Proc(IMbnMultiCarrier, HRESULT)).call(mbninterface)
+  end
+end
+struct LibWin32::IMbnDeviceServiceStateEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_sessions_state_change(interfaceid : UInt8*, statechange : MBN_DEVICE_SERVICE_SESSIONS_STATE) : HRESULT
+    @lpVtbl.value.on_sessions_state_change.unsafe_as(Proc(UInt8*, MBN_DEVICE_SERVICE_SESSIONS_STATE, HRESULT)).call(interfaceid, statechange)
+  end
+end
+struct LibWin32::IMbnDeviceServicesManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device_services_context(networkinterfaceid : UInt8*, mbndevicescontext : IMbnDeviceServicesContext*) : HRESULT
+    @lpVtbl.value.get_device_services_context.unsafe_as(Proc(UInt8*, IMbnDeviceServicesContext*, HRESULT)).call(networkinterfaceid, mbndevicescontext)
+  end
+end
+struct LibWin32::IMbnDeviceServicesContext
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enumerate_device_services(deviceservices : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.enumerate_device_services.unsafe_as(Proc(SAFEARRAY**, HRESULT)).call(deviceservices)
+  end
+  def get_device_service(deviceserviceid : UInt8*, mbndeviceservice : IMbnDeviceService*) : HRESULT
+    @lpVtbl.value.get_device_service.unsafe_as(Proc(UInt8*, IMbnDeviceService*, HRESULT)).call(deviceserviceid, mbndeviceservice)
+  end
+  def get_max_command_size(maxcommandsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_command_size.unsafe_as(Proc(UInt32*, HRESULT)).call(maxcommandsize)
+  end
+  def get_max_data_size(maxdatasize : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_data_size.unsafe_as(Proc(UInt32*, HRESULT)).call(maxdatasize)
+  end
+end
+struct LibWin32::IMbnDeviceServicesEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_query_supported_commands_complete(deviceservice : IMbnDeviceService, commandidlist : SAFEARRAY*, status : HRESULT, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_query_supported_commands_complete.unsafe_as(Proc(IMbnDeviceService, SAFEARRAY*, HRESULT, UInt32, HRESULT)).call(deviceservice, commandidlist, status, requestid)
+  end
+  def on_open_command_session_complete(deviceservice : IMbnDeviceService, status : HRESULT, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_open_command_session_complete.unsafe_as(Proc(IMbnDeviceService, HRESULT, UInt32, HRESULT)).call(deviceservice, status, requestid)
+  end
+  def on_close_command_session_complete(deviceservice : IMbnDeviceService, status : HRESULT, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_close_command_session_complete.unsafe_as(Proc(IMbnDeviceService, HRESULT, UInt32, HRESULT)).call(deviceservice, status, requestid)
+  end
+  def on_set_command_complete(deviceservice : IMbnDeviceService, responseid : UInt32, deviceservicedata : SAFEARRAY*, status : HRESULT, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_set_command_complete.unsafe_as(Proc(IMbnDeviceService, UInt32, SAFEARRAY*, HRESULT, UInt32, HRESULT)).call(deviceservice, responseid, deviceservicedata, status, requestid)
+  end
+  def on_query_command_complete(deviceservice : IMbnDeviceService, responseid : UInt32, deviceservicedata : SAFEARRAY*, status : HRESULT, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_query_command_complete.unsafe_as(Proc(IMbnDeviceService, UInt32, SAFEARRAY*, HRESULT, UInt32, HRESULT)).call(deviceservice, responseid, deviceservicedata, status, requestid)
+  end
+  def on_event_notification(deviceservice : IMbnDeviceService, eventid : UInt32, deviceservicedata : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.on_event_notification.unsafe_as(Proc(IMbnDeviceService, UInt32, SAFEARRAY*, HRESULT)).call(deviceservice, eventid, deviceservicedata)
+  end
+  def on_open_data_session_complete(deviceservice : IMbnDeviceService, status : HRESULT, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_open_data_session_complete.unsafe_as(Proc(IMbnDeviceService, HRESULT, UInt32, HRESULT)).call(deviceservice, status, requestid)
+  end
+  def on_close_data_session_complete(deviceservice : IMbnDeviceService, status : HRESULT, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_close_data_session_complete.unsafe_as(Proc(IMbnDeviceService, HRESULT, UInt32, HRESULT)).call(deviceservice, status, requestid)
+  end
+  def on_write_data_complete(deviceservice : IMbnDeviceService, status : HRESULT, requestid : UInt32) : HRESULT
+    @lpVtbl.value.on_write_data_complete.unsafe_as(Proc(IMbnDeviceService, HRESULT, UInt32, HRESULT)).call(deviceservice, status, requestid)
+  end
+  def on_read_data(deviceservice : IMbnDeviceService, deviceservicedata : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.on_read_data.unsafe_as(Proc(IMbnDeviceService, SAFEARRAY*, HRESULT)).call(deviceservice, deviceservicedata)
+  end
+  def on_interface_state_change(interfaceid : UInt8*, statechange : MBN_DEVICE_SERVICES_INTERFACE_STATE) : HRESULT
+    @lpVtbl.value.on_interface_state_change.unsafe_as(Proc(UInt8*, MBN_DEVICE_SERVICES_INTERFACE_STATE, HRESULT)).call(interfaceid, statechange)
+  end
+end
+struct LibWin32::IMbnDeviceService
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def query_supported_commands(requestid : UInt32*) : HRESULT
+    @lpVtbl.value.query_supported_commands.unsafe_as(Proc(UInt32*, HRESULT)).call(requestid)
+  end
+  def open_command_session(requestid : UInt32*) : HRESULT
+    @lpVtbl.value.open_command_session.unsafe_as(Proc(UInt32*, HRESULT)).call(requestid)
+  end
+  def close_command_session(requestid : UInt32*) : HRESULT
+    @lpVtbl.value.close_command_session.unsafe_as(Proc(UInt32*, HRESULT)).call(requestid)
+  end
+  def set_command(commandid : UInt32, deviceservicedata : SAFEARRAY*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.set_command.unsafe_as(Proc(UInt32, SAFEARRAY*, UInt32*, HRESULT)).call(commandid, deviceservicedata, requestid)
+  end
+  def query_command(commandid : UInt32, deviceservicedata : SAFEARRAY*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.query_command.unsafe_as(Proc(UInt32, SAFEARRAY*, UInt32*, HRESULT)).call(commandid, deviceservicedata, requestid)
+  end
+  def open_data_session(requestid : UInt32*) : HRESULT
+    @lpVtbl.value.open_data_session.unsafe_as(Proc(UInt32*, HRESULT)).call(requestid)
+  end
+  def close_data_session(requestid : UInt32*) : HRESULT
+    @lpVtbl.value.close_data_session.unsafe_as(Proc(UInt32*, HRESULT)).call(requestid)
+  end
+  def write_data(deviceservicedata : SAFEARRAY*, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.write_data.unsafe_as(Proc(SAFEARRAY*, UInt32*, HRESULT)).call(deviceservicedata, requestid)
+  end
+  def get_interface_id(interfaceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_interface_id.unsafe_as(Proc(UInt8**, HRESULT)).call(interfaceid)
+  end
+  def get_device_service_id(deviceserviceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_service_id.unsafe_as(Proc(UInt8**, HRESULT)).call(deviceserviceid)
+  end
+  def get_is_command_session_open(value : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_command_session_open.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(value)
+  end
+  def get_is_data_session_open(value : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_is_data_session_open.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(value)
+  end
+end
+struct LibWin32::IMbnPin
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_pin_type(pintype : MBN_PIN_TYPE*) : HRESULT
+    @lpVtbl.value.get_pin_type.unsafe_as(Proc(MBN_PIN_TYPE*, HRESULT)).call(pintype)
+  end
+  def get_pin_format(pinformat : MBN_PIN_FORMAT*) : HRESULT
+    @lpVtbl.value.get_pin_format.unsafe_as(Proc(MBN_PIN_FORMAT*, HRESULT)).call(pinformat)
+  end
+  def get_pin_length_min(pinlengthmin : UInt32*) : HRESULT
+    @lpVtbl.value.get_pin_length_min.unsafe_as(Proc(UInt32*, HRESULT)).call(pinlengthmin)
+  end
+  def get_pin_length_max(pinlengthmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_pin_length_max.unsafe_as(Proc(UInt32*, HRESULT)).call(pinlengthmax)
+  end
+  def get_pin_mode(pinmode : MBN_PIN_MODE*) : HRESULT
+    @lpVtbl.value.get_pin_mode.unsafe_as(Proc(MBN_PIN_MODE*, HRESULT)).call(pinmode)
+  end
+  def enable(pin : LibC::LPWSTR, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.enable.unsafe_as(Proc(LibC::LPWSTR, UInt32*, HRESULT)).call(pin, requestid)
+  end
+  def disable(pin : LibC::LPWSTR, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.disable.unsafe_as(Proc(LibC::LPWSTR, UInt32*, HRESULT)).call(pin, requestid)
+  end
+  def enter(pin : LibC::LPWSTR, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.enter.unsafe_as(Proc(LibC::LPWSTR, UInt32*, HRESULT)).call(pin, requestid)
+  end
+  def change(pin : LibC::LPWSTR, newpin : LibC::LPWSTR, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.change.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32*, HRESULT)).call(pin, newpin, requestid)
+  end
+  def unblock(puk : LibC::LPWSTR, newpin : LibC::LPWSTR, requestid : UInt32*) : HRESULT
+    @lpVtbl.value.unblock.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32*, HRESULT)).call(puk, newpin, requestid)
+  end
+  def get_pin_manager(pinmanager : IMbnPinManager*) : HRESULT
+    @lpVtbl.value.get_pin_manager.unsafe_as(Proc(IMbnPinManager*, HRESULT)).call(pinmanager)
+  end
 end

@@ -894,7 +894,7 @@ lib LibWin32
   fun PeerGraphShutdown : HRESULT
 
   # Params # pvdata : Void* [In]
-  fun PeerGraphFreeData(pvdata : Void*)
+  fun PeerGraphFreeData(pvdata : Void*) : Void
 
   # Params # hpeerenum : Void* [In],pcount : UInt32* [In]
   fun PeerGraphGetItemCount(hpeerenum : Void*, pcount : UInt32*) : HRESULT
@@ -999,7 +999,7 @@ lib LibWin32
   fun PeerGraphUniversalTimeToPeerTime(hgraph : Void*, pftuniversaltime : FILETIME*, pftpeertime : FILETIME*) : HRESULT
 
   # Params # pvdata : Void* [In]
-  fun PeerFreeData(pvdata : Void*)
+  fun PeerFreeData(pvdata : Void*) : Void
 
   # Params # hpeerenum : Void* [In],pcount : UInt32* [In]
   fun PeerGetItemCount(hpeerenum : Void*, pcount : UInt32*) : HRESULT
@@ -1326,13 +1326,13 @@ lib LibWin32
   fun DrtCreatePnrpBootstrapResolver(fpublish : LibC::BOOL, pwzpeername : LibC::LPWSTR, pwzcloudname : LibC::LPWSTR, pwzpublishingidentity : LibC::LPWSTR, ppresolver : DRT_BOOTSTRAP_PROVIDER**) : HRESULT
 
   # Params # presolver : DRT_BOOTSTRAP_PROVIDER* [In]
-  fun DrtDeletePnrpBootstrapResolver(presolver : DRT_BOOTSTRAP_PROVIDER*)
+  fun DrtDeletePnrpBootstrapResolver(presolver : DRT_BOOTSTRAP_PROVIDER*) : Void
 
   # Params # port : UInt16 [In],pwszaddress : LibC::LPWSTR [In],ppmodule : DRT_BOOTSTRAP_PROVIDER** [In]
   fun DrtCreateDnsBootstrapResolver(port : UInt16, pwszaddress : LibC::LPWSTR, ppmodule : DRT_BOOTSTRAP_PROVIDER**) : HRESULT
 
   # Params # presolver : DRT_BOOTSTRAP_PROVIDER* [In]
-  fun DrtDeleteDnsBootstrapResolver(presolver : DRT_BOOTSTRAP_PROVIDER*)
+  fun DrtDeleteDnsBootstrapResolver(presolver : DRT_BOOTSTRAP_PROVIDER*) : Void
 
   # Params # scope : DRT_SCOPE [In],dwscopeid : UInt32 [In],dwlocalitythreshold : UInt32 [In],pwport : UInt16* [In],phtransport : Void** [In]
   fun DrtCreateIpv6UdpTransport(scope : DRT_SCOPE, dwscopeid : UInt32, dwlocalitythreshold : UInt32, pwport : UInt16*, phtransport : Void**) : HRESULT
@@ -1347,19 +1347,19 @@ lib LibWin32
   fun DrtCreateDerivedKey(plocalcert : CERT_CONTEXT*, pkey : DRT_DATA*) : HRESULT
 
   # Params # psecurityprovider : DRT_SECURITY_PROVIDER* [In]
-  fun DrtDeleteDerivedKeySecurityProvider(psecurityprovider : DRT_SECURITY_PROVIDER*)
+  fun DrtDeleteDerivedKeySecurityProvider(psecurityprovider : DRT_SECURITY_PROVIDER*) : Void
 
   # Params # ppsecurityprovider : DRT_SECURITY_PROVIDER** [In]
   fun DrtCreateNullSecurityProvider(ppsecurityprovider : DRT_SECURITY_PROVIDER**) : HRESULT
 
   # Params # psecurityprovider : DRT_SECURITY_PROVIDER* [In]
-  fun DrtDeleteNullSecurityProvider(psecurityprovider : DRT_SECURITY_PROVIDER*)
+  fun DrtDeleteNullSecurityProvider(psecurityprovider : DRT_SECURITY_PROVIDER*) : Void
 
   # Params # psettings : DRT_SETTINGS* [In],hevent : LibC::HANDLE [In],pvcontext : Void* [In],phdrt : Void** [In]
   fun DrtOpen(psettings : DRT_SETTINGS*, hevent : LibC::HANDLE, pvcontext : Void*, phdrt : Void**) : HRESULT
 
   # Params # hdrt : Void* [In]
-  fun DrtClose(hdrt : Void*)
+  fun DrtClose(hdrt : Void*) : Void
 
   # Params # hdrt : Void* [In],puleventdatalen : UInt32* [In]
   fun DrtGetEventDataSize(hdrt : Void*, puleventdatalen : UInt32*) : HRESULT
@@ -1374,7 +1374,7 @@ lib LibWin32
   fun DrtUpdateKey(hkeyregistration : Void*, pappdata : DRT_DATA*) : HRESULT
 
   # Params # hkeyregistration : Void* [In]
-  fun DrtUnregisterKey(hkeyregistration : Void*)
+  fun DrtUnregisterKey(hkeyregistration : Void*) : Void
 
   # Params # hdrt : Void* [In],pkey : DRT_DATA* [In],pinfo : DRT_SEARCH_INFO* [In],timeout : UInt32 [In],hevent : LibC::HANDLE [In],pvcontext : Void* [In],hsearchcontext : Void** [In]
   fun DrtStartSearch(hdrt : Void*, pkey : DRT_DATA*, pinfo : DRT_SEARCH_INFO*, timeout : UInt32, hevent : LibC::HANDLE, pvcontext : Void*, hsearchcontext : Void**) : HRESULT

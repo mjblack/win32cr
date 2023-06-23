@@ -721,10 +721,10 @@ lib LibWin32
 
 
   struct IMAPIAdviseSinkVTbl
-    query_interface : Proc(IMAPIAdviseSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMAPIAdviseSink*, UInt32)
-    release : Proc(IMAPIAdviseSink*, UInt32)
-    on_notify : Proc(IMAPIAdviseSink*, UInt32, NOTIFICATION*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_notify : UInt64
   end
 
   struct IMAPIAdviseSink
@@ -732,14 +732,14 @@ lib LibWin32
   end
 
   struct IMAPIProgressVTbl
-    query_interface : Proc(IMAPIProgress*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMAPIProgress*, UInt32)
-    release : Proc(IMAPIProgress*, UInt32)
-    progress : Proc(IMAPIProgress*, UInt32, UInt32, UInt32, HRESULT)
-    get_flags : Proc(IMAPIProgress*, UInt32*, HRESULT)
-    get_max : Proc(IMAPIProgress*, UInt32*, HRESULT)
-    get_min : Proc(IMAPIProgress*, UInt32*, HRESULT)
-    set_limits : Proc(IMAPIProgress*, UInt32*, UInt32*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    progress : UInt64
+    get_flags : UInt64
+    get_max : UInt64
+    get_min : UInt64
+    set_limits : UInt64
   end
 
   struct IMAPIProgress
@@ -747,20 +747,20 @@ lib LibWin32
   end
 
   struct IMAPIPropVTbl
-    query_interface : Proc(IMAPIProp*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMAPIProp*, UInt32)
-    release : Proc(IMAPIProp*, UInt32)
-    get_last_error : Proc(IMAPIProp*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    save_changes : Proc(IMAPIProp*, UInt32, HRESULT)
-    get_props : Proc(IMAPIProp*, SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)
-    get_prop_list : Proc(IMAPIProp*, UInt32, SPropTagArray**, HRESULT)
-    open_property : Proc(IMAPIProp*, UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)
-    set_props : Proc(IMAPIProp*, UInt32, SPropValue*, SPropProblemArray**, HRESULT)
-    delete_props : Proc(IMAPIProp*, SPropTagArray*, SPropProblemArray**, HRESULT)
-    copy_to : Proc(IMAPIProp*, UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    copy_props : Proc(IMAPIProp*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    get_names_from_i_ds : Proc(IMAPIProp*, SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)
-    get_i_ds_from_names : Proc(IMAPIProp*, UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    save_changes : UInt64
+    get_props : UInt64
+    get_prop_list : UInt64
+    open_property : UInt64
+    set_props : UInt64
+    delete_props : UInt64
+    copy_to : UInt64
+    copy_props : UInt64
+    get_names_from_i_ds : UInt64
+    get_i_ds_from_names : UInt64
   end
 
   struct IMAPIProp
@@ -768,32 +768,32 @@ lib LibWin32
   end
 
   struct IMAPITableVTbl
-    query_interface : Proc(IMAPITable*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMAPITable*, UInt32)
-    release : Proc(IMAPITable*, UInt32)
-    get_last_error : Proc(IMAPITable*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    advise : Proc(IMAPITable*, UInt32, IMAPIAdviseSink, UInt32*, HRESULT)
-    unadvise : Proc(IMAPITable*, UInt32, HRESULT)
-    get_status : Proc(IMAPITable*, UInt32*, UInt32*, HRESULT)
-    set_columns : Proc(IMAPITable*, SPropTagArray*, UInt32, HRESULT)
-    query_columns : Proc(IMAPITable*, UInt32, SPropTagArray**, HRESULT)
-    get_row_count : Proc(IMAPITable*, UInt32, UInt32*, HRESULT)
-    seek_row : Proc(IMAPITable*, UInt32, Int32, Int32*, HRESULT)
-    seek_row_approx : Proc(IMAPITable*, UInt32, UInt32, HRESULT)
-    query_position : Proc(IMAPITable*, UInt32*, UInt32*, UInt32*, HRESULT)
-    find_row : Proc(IMAPITable*, SRestriction*, UInt32, UInt32, HRESULT)
-    restrict : Proc(IMAPITable*, SRestriction*, UInt32, HRESULT)
-    create_bookmark : Proc(IMAPITable*, UInt32*, HRESULT)
-    free_bookmark : Proc(IMAPITable*, UInt32, HRESULT)
-    sort_table : Proc(IMAPITable*, SSortOrderSet*, UInt32, HRESULT)
-    query_sort_order : Proc(IMAPITable*, SSortOrderSet**, HRESULT)
-    query_rows : Proc(IMAPITable*, Int32, UInt32, SRowSet**, HRESULT)
-    abort : Proc(IMAPITable*, HRESULT)
-    expand_row : Proc(IMAPITable*, UInt32, UInt8*, UInt32, UInt32, SRowSet**, UInt32*, HRESULT)
-    collapse_row : Proc(IMAPITable*, UInt32, UInt8*, UInt32, UInt32*, HRESULT)
-    wait_for_completion : Proc(IMAPITable*, UInt32, UInt32, UInt32*, HRESULT)
-    get_collapse_state : Proc(IMAPITable*, UInt32, UInt32, UInt8*, UInt32*, UInt8**, HRESULT)
-    set_collapse_state : Proc(IMAPITable*, UInt32, UInt32, UInt8*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    advise : UInt64
+    unadvise : UInt64
+    get_status : UInt64
+    set_columns : UInt64
+    query_columns : UInt64
+    get_row_count : UInt64
+    seek_row : UInt64
+    seek_row_approx : UInt64
+    query_position : UInt64
+    find_row : UInt64
+    restrict : UInt64
+    create_bookmark : UInt64
+    free_bookmark : UInt64
+    sort_table : UInt64
+    query_sort_order : UInt64
+    query_rows : UInt64
+    abort : UInt64
+    expand_row : UInt64
+    collapse_row : UInt64
+    wait_for_completion : UInt64
+    get_collapse_state : UInt64
+    set_collapse_state : UInt64
   end
 
   struct IMAPITable
@@ -801,20 +801,20 @@ lib LibWin32
   end
 
   struct IProfSectVTbl
-    query_interface : Proc(IProfSect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IProfSect*, UInt32)
-    release : Proc(IProfSect*, UInt32)
-    get_last_error : Proc(IProfSect*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    save_changes : Proc(IProfSect*, UInt32, HRESULT)
-    get_props : Proc(IProfSect*, SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)
-    get_prop_list : Proc(IProfSect*, UInt32, SPropTagArray**, HRESULT)
-    open_property : Proc(IProfSect*, UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)
-    set_props : Proc(IProfSect*, UInt32, SPropValue*, SPropProblemArray**, HRESULT)
-    delete_props : Proc(IProfSect*, SPropTagArray*, SPropProblemArray**, HRESULT)
-    copy_to : Proc(IProfSect*, UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    copy_props : Proc(IProfSect*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    get_names_from_i_ds : Proc(IProfSect*, SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)
-    get_i_ds_from_names : Proc(IProfSect*, UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    save_changes : UInt64
+    get_props : UInt64
+    get_prop_list : UInt64
+    open_property : UInt64
+    set_props : UInt64
+    delete_props : UInt64
+    copy_to : UInt64
+    copy_props : UInt64
+    get_names_from_i_ds : UInt64
+    get_i_ds_from_names : UInt64
   end
 
   struct IProfSect
@@ -822,24 +822,24 @@ lib LibWin32
   end
 
   struct IMAPIStatusVTbl
-    query_interface : Proc(IMAPIStatus*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMAPIStatus*, UInt32)
-    release : Proc(IMAPIStatus*, UInt32)
-    get_last_error : Proc(IMAPIStatus*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    save_changes : Proc(IMAPIStatus*, UInt32, HRESULT)
-    get_props : Proc(IMAPIStatus*, SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)
-    get_prop_list : Proc(IMAPIStatus*, UInt32, SPropTagArray**, HRESULT)
-    open_property : Proc(IMAPIStatus*, UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)
-    set_props : Proc(IMAPIStatus*, UInt32, SPropValue*, SPropProblemArray**, HRESULT)
-    delete_props : Proc(IMAPIStatus*, SPropTagArray*, SPropProblemArray**, HRESULT)
-    copy_to : Proc(IMAPIStatus*, UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    copy_props : Proc(IMAPIStatus*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    get_names_from_i_ds : Proc(IMAPIStatus*, SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)
-    get_i_ds_from_names : Proc(IMAPIStatus*, UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)
-    validate_state : Proc(IMAPIStatus*, LibC::UINT_PTR, UInt32, HRESULT)
-    settings_dialog : Proc(IMAPIStatus*, LibC::UINT_PTR, UInt32, HRESULT)
-    change_password : Proc(IMAPIStatus*, Int8*, Int8*, UInt32, HRESULT)
-    flush_queues : Proc(IMAPIStatus*, LibC::UINT_PTR, UInt32, ENTRYID*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    save_changes : UInt64
+    get_props : UInt64
+    get_prop_list : UInt64
+    open_property : UInt64
+    set_props : UInt64
+    delete_props : UInt64
+    copy_to : UInt64
+    copy_props : UInt64
+    get_names_from_i_ds : UInt64
+    get_i_ds_from_names : UInt64
+    validate_state : UInt64
+    settings_dialog : UInt64
+    change_password : UInt64
+    flush_queues : UInt64
   end
 
   struct IMAPIStatus
@@ -847,25 +847,25 @@ lib LibWin32
   end
 
   struct IMAPIContainerVTbl
-    query_interface : Proc(IMAPIContainer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMAPIContainer*, UInt32)
-    release : Proc(IMAPIContainer*, UInt32)
-    get_last_error : Proc(IMAPIContainer*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    save_changes : Proc(IMAPIContainer*, UInt32, HRESULT)
-    get_props : Proc(IMAPIContainer*, SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)
-    get_prop_list : Proc(IMAPIContainer*, UInt32, SPropTagArray**, HRESULT)
-    open_property : Proc(IMAPIContainer*, UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)
-    set_props : Proc(IMAPIContainer*, UInt32, SPropValue*, SPropProblemArray**, HRESULT)
-    delete_props : Proc(IMAPIContainer*, SPropTagArray*, SPropProblemArray**, HRESULT)
-    copy_to : Proc(IMAPIContainer*, UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    copy_props : Proc(IMAPIContainer*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    get_names_from_i_ds : Proc(IMAPIContainer*, SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)
-    get_i_ds_from_names : Proc(IMAPIContainer*, UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)
-    get_contents_table : Proc(IMAPIContainer*, UInt32, IMAPITable*, HRESULT)
-    get_hierarchy_table : Proc(IMAPIContainer*, UInt32, IMAPITable*, HRESULT)
-    open_entry : Proc(IMAPIContainer*, UInt32, ENTRYID*, Guid*, UInt32, UInt32*, IUnknown*, HRESULT)
-    set_search_criteria : Proc(IMAPIContainer*, SRestriction*, SBinaryArray*, UInt32, HRESULT)
-    get_search_criteria : Proc(IMAPIContainer*, UInt32, SRestriction**, SBinaryArray**, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    save_changes : UInt64
+    get_props : UInt64
+    get_prop_list : UInt64
+    open_property : UInt64
+    set_props : UInt64
+    delete_props : UInt64
+    copy_to : UInt64
+    copy_props : UInt64
+    get_names_from_i_ds : UInt64
+    get_i_ds_from_names : UInt64
+    get_contents_table : UInt64
+    get_hierarchy_table : UInt64
+    open_entry : UInt64
+    set_search_criteria : UInt64
+    get_search_criteria : UInt64
   end
 
   struct IMAPIContainer
@@ -873,29 +873,29 @@ lib LibWin32
   end
 
   struct IABContainerVTbl
-    query_interface : Proc(IABContainer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IABContainer*, UInt32)
-    release : Proc(IABContainer*, UInt32)
-    get_last_error : Proc(IABContainer*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    save_changes : Proc(IABContainer*, UInt32, HRESULT)
-    get_props : Proc(IABContainer*, SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)
-    get_prop_list : Proc(IABContainer*, UInt32, SPropTagArray**, HRESULT)
-    open_property : Proc(IABContainer*, UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)
-    set_props : Proc(IABContainer*, UInt32, SPropValue*, SPropProblemArray**, HRESULT)
-    delete_props : Proc(IABContainer*, SPropTagArray*, SPropProblemArray**, HRESULT)
-    copy_to : Proc(IABContainer*, UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    copy_props : Proc(IABContainer*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    get_names_from_i_ds : Proc(IABContainer*, SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)
-    get_i_ds_from_names : Proc(IABContainer*, UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)
-    get_contents_table : Proc(IABContainer*, UInt32, IMAPITable*, HRESULT)
-    get_hierarchy_table : Proc(IABContainer*, UInt32, IMAPITable*, HRESULT)
-    open_entry : Proc(IABContainer*, UInt32, ENTRYID*, Guid*, UInt32, UInt32*, IUnknown*, HRESULT)
-    set_search_criteria : Proc(IABContainer*, SRestriction*, SBinaryArray*, UInt32, HRESULT)
-    get_search_criteria : Proc(IABContainer*, UInt32, SRestriction**, SBinaryArray**, UInt32*, HRESULT)
-    create_entry : Proc(IABContainer*, UInt32, ENTRYID*, UInt32, IMAPIProp*, HRESULT)
-    copy_entries : Proc(IABContainer*, SBinaryArray*, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)
-    delete_entries : Proc(IABContainer*, SBinaryArray*, UInt32, HRESULT)
-    resolve_names : Proc(IABContainer*, SPropTagArray*, UInt32, ADRLIST*, Flaglist*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    save_changes : UInt64
+    get_props : UInt64
+    get_prop_list : UInt64
+    open_property : UInt64
+    set_props : UInt64
+    delete_props : UInt64
+    copy_to : UInt64
+    copy_props : UInt64
+    get_names_from_i_ds : UInt64
+    get_i_ds_from_names : UInt64
+    get_contents_table : UInt64
+    get_hierarchy_table : UInt64
+    open_entry : UInt64
+    set_search_criteria : UInt64
+    get_search_criteria : UInt64
+    create_entry : UInt64
+    copy_entries : UInt64
+    delete_entries : UInt64
+    resolve_names : UInt64
   end
 
   struct IABContainer
@@ -903,20 +903,20 @@ lib LibWin32
   end
 
   struct IMailUserVTbl
-    query_interface : Proc(IMailUser*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMailUser*, UInt32)
-    release : Proc(IMailUser*, UInt32)
-    get_last_error : Proc(IMailUser*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    save_changes : Proc(IMailUser*, UInt32, HRESULT)
-    get_props : Proc(IMailUser*, SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)
-    get_prop_list : Proc(IMailUser*, UInt32, SPropTagArray**, HRESULT)
-    open_property : Proc(IMailUser*, UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)
-    set_props : Proc(IMailUser*, UInt32, SPropValue*, SPropProblemArray**, HRESULT)
-    delete_props : Proc(IMailUser*, SPropTagArray*, SPropProblemArray**, HRESULT)
-    copy_to : Proc(IMailUser*, UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    copy_props : Proc(IMailUser*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    get_names_from_i_ds : Proc(IMailUser*, SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)
-    get_i_ds_from_names : Proc(IMailUser*, UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    save_changes : UInt64
+    get_props : UInt64
+    get_prop_list : UInt64
+    open_property : UInt64
+    set_props : UInt64
+    delete_props : UInt64
+    copy_to : UInt64
+    copy_props : UInt64
+    get_names_from_i_ds : UInt64
+    get_i_ds_from_names : UInt64
   end
 
   struct IMailUser
@@ -924,29 +924,29 @@ lib LibWin32
   end
 
   struct IDistListVTbl
-    query_interface : Proc(IDistList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDistList*, UInt32)
-    release : Proc(IDistList*, UInt32)
-    get_last_error : Proc(IDistList*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    save_changes : Proc(IDistList*, UInt32, HRESULT)
-    get_props : Proc(IDistList*, SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)
-    get_prop_list : Proc(IDistList*, UInt32, SPropTagArray**, HRESULT)
-    open_property : Proc(IDistList*, UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)
-    set_props : Proc(IDistList*, UInt32, SPropValue*, SPropProblemArray**, HRESULT)
-    delete_props : Proc(IDistList*, SPropTagArray*, SPropProblemArray**, HRESULT)
-    copy_to : Proc(IDistList*, UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    copy_props : Proc(IDistList*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    get_names_from_i_ds : Proc(IDistList*, SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)
-    get_i_ds_from_names : Proc(IDistList*, UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)
-    get_contents_table : Proc(IDistList*, UInt32, IMAPITable*, HRESULT)
-    get_hierarchy_table : Proc(IDistList*, UInt32, IMAPITable*, HRESULT)
-    open_entry : Proc(IDistList*, UInt32, ENTRYID*, Guid*, UInt32, UInt32*, IUnknown*, HRESULT)
-    set_search_criteria : Proc(IDistList*, SRestriction*, SBinaryArray*, UInt32, HRESULT)
-    get_search_criteria : Proc(IDistList*, UInt32, SRestriction**, SBinaryArray**, UInt32*, HRESULT)
-    create_entry : Proc(IDistList*, UInt32, ENTRYID*, UInt32, IMAPIProp*, HRESULT)
-    copy_entries : Proc(IDistList*, SBinaryArray*, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)
-    delete_entries : Proc(IDistList*, SBinaryArray*, UInt32, HRESULT)
-    resolve_names : Proc(IDistList*, SPropTagArray*, UInt32, ADRLIST*, Flaglist*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    save_changes : UInt64
+    get_props : UInt64
+    get_prop_list : UInt64
+    open_property : UInt64
+    set_props : UInt64
+    delete_props : UInt64
+    copy_to : UInt64
+    copy_props : UInt64
+    get_names_from_i_ds : UInt64
+    get_i_ds_from_names : UInt64
+    get_contents_table : UInt64
+    get_hierarchy_table : UInt64
+    open_entry : UInt64
+    set_search_criteria : UInt64
+    get_search_criteria : UInt64
+    create_entry : UInt64
+    copy_entries : UInt64
+    delete_entries : UInt64
+    resolve_names : UInt64
   end
 
   struct IDistList
@@ -954,36 +954,36 @@ lib LibWin32
   end
 
   struct IMAPIFolderVTbl
-    query_interface : Proc(IMAPIFolder*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMAPIFolder*, UInt32)
-    release : Proc(IMAPIFolder*, UInt32)
-    get_last_error : Proc(IMAPIFolder*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    save_changes : Proc(IMAPIFolder*, UInt32, HRESULT)
-    get_props : Proc(IMAPIFolder*, SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)
-    get_prop_list : Proc(IMAPIFolder*, UInt32, SPropTagArray**, HRESULT)
-    open_property : Proc(IMAPIFolder*, UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)
-    set_props : Proc(IMAPIFolder*, UInt32, SPropValue*, SPropProblemArray**, HRESULT)
-    delete_props : Proc(IMAPIFolder*, SPropTagArray*, SPropProblemArray**, HRESULT)
-    copy_to : Proc(IMAPIFolder*, UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    copy_props : Proc(IMAPIFolder*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    get_names_from_i_ds : Proc(IMAPIFolder*, SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)
-    get_i_ds_from_names : Proc(IMAPIFolder*, UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)
-    get_contents_table : Proc(IMAPIFolder*, UInt32, IMAPITable*, HRESULT)
-    get_hierarchy_table : Proc(IMAPIFolder*, UInt32, IMAPITable*, HRESULT)
-    open_entry : Proc(IMAPIFolder*, UInt32, ENTRYID*, Guid*, UInt32, UInt32*, IUnknown*, HRESULT)
-    set_search_criteria : Proc(IMAPIFolder*, SRestriction*, SBinaryArray*, UInt32, HRESULT)
-    get_search_criteria : Proc(IMAPIFolder*, UInt32, SRestriction**, SBinaryArray**, UInt32*, HRESULT)
-    create_message : Proc(IMAPIFolder*, Guid*, UInt32, IMessage*, HRESULT)
-    copy_messages : Proc(IMAPIFolder*, SBinaryArray*, Guid*, Void*, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)
-    delete_messages : Proc(IMAPIFolder*, SBinaryArray*, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)
-    create_folder : Proc(IMAPIFolder*, UInt32, Int8*, Int8*, Guid*, UInt32, IMAPIFolder*, HRESULT)
-    copy_folder : Proc(IMAPIFolder*, UInt32, ENTRYID*, Guid*, Void*, Int8*, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)
-    delete_folder : Proc(IMAPIFolder*, UInt32, ENTRYID*, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)
-    set_read_flags : Proc(IMAPIFolder*, SBinaryArray*, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)
-    get_message_status : Proc(IMAPIFolder*, UInt32, ENTRYID*, UInt32, UInt32*, HRESULT)
-    set_message_status : Proc(IMAPIFolder*, UInt32, ENTRYID*, UInt32, UInt32, UInt32*, HRESULT)
-    save_contents_sort : Proc(IMAPIFolder*, SSortOrderSet*, UInt32, HRESULT)
-    empty_folder : Proc(IMAPIFolder*, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    save_changes : UInt64
+    get_props : UInt64
+    get_prop_list : UInt64
+    open_property : UInt64
+    set_props : UInt64
+    delete_props : UInt64
+    copy_to : UInt64
+    copy_props : UInt64
+    get_names_from_i_ds : UInt64
+    get_i_ds_from_names : UInt64
+    get_contents_table : UInt64
+    get_hierarchy_table : UInt64
+    open_entry : UInt64
+    set_search_criteria : UInt64
+    get_search_criteria : UInt64
+    create_message : UInt64
+    copy_messages : UInt64
+    delete_messages : UInt64
+    create_folder : UInt64
+    copy_folder : UInt64
+    delete_folder : UInt64
+    set_read_flags : UInt64
+    get_message_status : UInt64
+    set_message_status : UInt64
+    save_contents_sort : UInt64
+    empty_folder : UInt64
   end
 
   struct IMAPIFolder
@@ -991,33 +991,33 @@ lib LibWin32
   end
 
   struct IMsgStoreVTbl
-    query_interface : Proc(IMsgStore*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMsgStore*, UInt32)
-    release : Proc(IMsgStore*, UInt32)
-    get_last_error : Proc(IMsgStore*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    save_changes : Proc(IMsgStore*, UInt32, HRESULT)
-    get_props : Proc(IMsgStore*, SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)
-    get_prop_list : Proc(IMsgStore*, UInt32, SPropTagArray**, HRESULT)
-    open_property : Proc(IMsgStore*, UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)
-    set_props : Proc(IMsgStore*, UInt32, SPropValue*, SPropProblemArray**, HRESULT)
-    delete_props : Proc(IMsgStore*, SPropTagArray*, SPropProblemArray**, HRESULT)
-    copy_to : Proc(IMsgStore*, UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    copy_props : Proc(IMsgStore*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    get_names_from_i_ds : Proc(IMsgStore*, SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)
-    get_i_ds_from_names : Proc(IMsgStore*, UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)
-    advise : Proc(IMsgStore*, UInt32, ENTRYID*, UInt32, IMAPIAdviseSink, UInt32*, HRESULT)
-    unadvise : Proc(IMsgStore*, UInt32, HRESULT)
-    compare_entry_i_ds : Proc(IMsgStore*, UInt32, ENTRYID*, UInt32, ENTRYID*, UInt32, UInt32*, HRESULT)
-    open_entry : Proc(IMsgStore*, UInt32, ENTRYID*, Guid*, UInt32, UInt32*, IUnknown*, HRESULT)
-    set_receive_folder : Proc(IMsgStore*, Int8*, UInt32, UInt32, ENTRYID*, HRESULT)
-    get_receive_folder : Proc(IMsgStore*, Int8*, UInt32, UInt32*, ENTRYID**, Int8**, HRESULT)
-    get_receive_folder_table : Proc(IMsgStore*, UInt32, IMAPITable*, HRESULT)
-    store_logoff : Proc(IMsgStore*, UInt32*, HRESULT)
-    abort_submit : Proc(IMsgStore*, UInt32, ENTRYID*, UInt32, HRESULT)
-    get_outgoing_queue : Proc(IMsgStore*, UInt32, IMAPITable*, HRESULT)
-    set_lock_state : Proc(IMsgStore*, IMessage, UInt32, HRESULT)
-    finished_msg : Proc(IMsgStore*, UInt32, UInt32, ENTRYID*, HRESULT)
-    notify_new_mail : Proc(IMsgStore*, NOTIFICATION*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    save_changes : UInt64
+    get_props : UInt64
+    get_prop_list : UInt64
+    open_property : UInt64
+    set_props : UInt64
+    delete_props : UInt64
+    copy_to : UInt64
+    copy_props : UInt64
+    get_names_from_i_ds : UInt64
+    get_i_ds_from_names : UInt64
+    advise : UInt64
+    unadvise : UInt64
+    compare_entry_i_ds : UInt64
+    open_entry : UInt64
+    set_receive_folder : UInt64
+    get_receive_folder : UInt64
+    get_receive_folder_table : UInt64
+    store_logoff : UInt64
+    abort_submit : UInt64
+    get_outgoing_queue : UInt64
+    set_lock_state : UInt64
+    finished_msg : UInt64
+    notify_new_mail : UInt64
   end
 
   struct IMsgStore
@@ -1025,28 +1025,28 @@ lib LibWin32
   end
 
   struct IMessageVTbl
-    query_interface : Proc(IMessage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMessage*, UInt32)
-    release : Proc(IMessage*, UInt32)
-    get_last_error : Proc(IMessage*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    save_changes : Proc(IMessage*, UInt32, HRESULT)
-    get_props : Proc(IMessage*, SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)
-    get_prop_list : Proc(IMessage*, UInt32, SPropTagArray**, HRESULT)
-    open_property : Proc(IMessage*, UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)
-    set_props : Proc(IMessage*, UInt32, SPropValue*, SPropProblemArray**, HRESULT)
-    delete_props : Proc(IMessage*, SPropTagArray*, SPropProblemArray**, HRESULT)
-    copy_to : Proc(IMessage*, UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    copy_props : Proc(IMessage*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    get_names_from_i_ds : Proc(IMessage*, SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)
-    get_i_ds_from_names : Proc(IMessage*, UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)
-    get_attachment_table : Proc(IMessage*, UInt32, IMAPITable*, HRESULT)
-    open_attach : Proc(IMessage*, UInt32, Guid*, UInt32, IAttach*, HRESULT)
-    create_attach : Proc(IMessage*, Guid*, UInt32, UInt32*, IAttach*, HRESULT)
-    delete_attach : Proc(IMessage*, UInt32, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)
-    get_recipient_table : Proc(IMessage*, UInt32, IMAPITable*, HRESULT)
-    modify_recipients : Proc(IMessage*, UInt32, ADRLIST*, HRESULT)
-    submit_message : Proc(IMessage*, UInt32, HRESULT)
-    set_read_flag : Proc(IMessage*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    save_changes : UInt64
+    get_props : UInt64
+    get_prop_list : UInt64
+    open_property : UInt64
+    set_props : UInt64
+    delete_props : UInt64
+    copy_to : UInt64
+    copy_props : UInt64
+    get_names_from_i_ds : UInt64
+    get_i_ds_from_names : UInt64
+    get_attachment_table : UInt64
+    open_attach : UInt64
+    create_attach : UInt64
+    delete_attach : UInt64
+    get_recipient_table : UInt64
+    modify_recipients : UInt64
+    submit_message : UInt64
+    set_read_flag : UInt64
   end
 
   struct IMessage
@@ -1054,20 +1054,20 @@ lib LibWin32
   end
 
   struct IAttachVTbl
-    query_interface : Proc(IAttach*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAttach*, UInt32)
-    release : Proc(IAttach*, UInt32)
-    get_last_error : Proc(IAttach*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    save_changes : Proc(IAttach*, UInt32, HRESULT)
-    get_props : Proc(IAttach*, SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)
-    get_prop_list : Proc(IAttach*, UInt32, SPropTagArray**, HRESULT)
-    open_property : Proc(IAttach*, UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)
-    set_props : Proc(IAttach*, UInt32, SPropValue*, SPropProblemArray**, HRESULT)
-    delete_props : Proc(IAttach*, SPropTagArray*, SPropProblemArray**, HRESULT)
-    copy_to : Proc(IAttach*, UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    copy_props : Proc(IAttach*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    get_names_from_i_ds : Proc(IAttach*, SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)
-    get_i_ds_from_names : Proc(IAttach*, UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    save_changes : UInt64
+    get_props : UInt64
+    get_prop_list : UInt64
+    open_property : UInt64
+    set_props : UInt64
+    delete_props : UInt64
+    copy_to : UInt64
+    copy_props : UInt64
+    get_names_from_i_ds : UInt64
+    get_i_ds_from_names : UInt64
   end
 
   struct IAttach
@@ -1075,12 +1075,12 @@ lib LibWin32
   end
 
   struct IMAPIControlVTbl
-    query_interface : Proc(IMAPIControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMAPIControl*, UInt32)
-    release : Proc(IMAPIControl*, UInt32)
-    get_last_error : Proc(IMAPIControl*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    activate : Proc(IMAPIControl*, UInt32, LibC::UINT_PTR, HRESULT)
-    get_state : Proc(IMAPIControl*, UInt32, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    activate : UInt64
+    get_state : UInt64
   end
 
   struct IMAPIControl
@@ -1088,14 +1088,14 @@ lib LibWin32
   end
 
   struct IProviderAdminVTbl
-    query_interface : Proc(IProviderAdmin*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IProviderAdmin*, UInt32)
-    release : Proc(IProviderAdmin*, UInt32)
-    get_last_error : Proc(IProviderAdmin*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    get_provider_table : Proc(IProviderAdmin*, UInt32, IMAPITable*, HRESULT)
-    create_provider : Proc(IProviderAdmin*, Int8*, UInt32, SPropValue*, LibC::UINT_PTR, UInt32, MAPIUID*, HRESULT)
-    delete_provider : Proc(IProviderAdmin*, MAPIUID*, HRESULT)
-    open_profile_section : Proc(IProviderAdmin*, MAPIUID*, Guid*, UInt32, IProfSect*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    get_provider_table : UInt64
+    create_provider : UInt64
+    delete_provider : UInt64
+    open_profile_section : UInt64
   end
 
   struct IProviderAdmin
@@ -1103,18 +1103,18 @@ lib LibWin32
   end
 
   struct ITableDataVTbl
-    query_interface : Proc(ITableData*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITableData*, UInt32)
-    release : Proc(ITableData*, UInt32)
-    hr_get_view : Proc(ITableData*, SSortOrderSet*, CALLERRELEASE*, UInt32, IMAPITable*, HRESULT)
-    hr_modify_row : Proc(ITableData*, SRow*, HRESULT)
-    hr_delete_row : Proc(ITableData*, SPropValue*, HRESULT)
-    hr_query_row : Proc(ITableData*, SPropValue*, SRow**, UInt32*, HRESULT)
-    hr_enum_row : Proc(ITableData*, UInt32, SRow**, HRESULT)
-    hr_notify : Proc(ITableData*, UInt32, UInt32, SPropValue*, HRESULT)
-    hr_insert_row : Proc(ITableData*, UInt32, SRow*, HRESULT)
-    hr_modify_rows : Proc(ITableData*, UInt32, SRowSet*, HRESULT)
-    hr_delete_rows : Proc(ITableData*, UInt32, SRowSet*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    hr_get_view : UInt64
+    hr_modify_row : UInt64
+    hr_delete_row : UInt64
+    hr_query_row : UInt64
+    hr_enum_row : UInt64
+    hr_notify : UInt64
+    hr_insert_row : UInt64
+    hr_modify_rows : UInt64
+    hr_delete_rows : UInt64
   end
 
   struct ITableData
@@ -1122,24 +1122,24 @@ lib LibWin32
   end
 
   struct IPropDataVTbl
-    query_interface : Proc(IPropData*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPropData*, UInt32)
-    release : Proc(IPropData*, UInt32)
-    get_last_error : Proc(IPropData*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    save_changes : Proc(IPropData*, UInt32, HRESULT)
-    get_props : Proc(IPropData*, SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)
-    get_prop_list : Proc(IPropData*, UInt32, SPropTagArray**, HRESULT)
-    open_property : Proc(IPropData*, UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)
-    set_props : Proc(IPropData*, UInt32, SPropValue*, SPropProblemArray**, HRESULT)
-    delete_props : Proc(IPropData*, SPropTagArray*, SPropProblemArray**, HRESULT)
-    copy_to : Proc(IPropData*, UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    copy_props : Proc(IPropData*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    get_names_from_i_ds : Proc(IPropData*, SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)
-    get_i_ds_from_names : Proc(IPropData*, UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)
-    hr_set_obj_access : Proc(IPropData*, UInt32, HRESULT)
-    hr_set_prop_access : Proc(IPropData*, SPropTagArray*, UInt32*, HRESULT)
-    hr_get_prop_access : Proc(IPropData*, SPropTagArray**, UInt32**, HRESULT)
-    hr_add_obj_props : Proc(IPropData*, SPropTagArray*, SPropProblemArray**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    save_changes : UInt64
+    get_props : UInt64
+    get_prop_list : UInt64
+    open_property : UInt64
+    set_props : UInt64
+    delete_props : UInt64
+    copy_to : UInt64
+    copy_props : UInt64
+    get_names_from_i_ds : UInt64
+    get_i_ds_from_names : UInt64
+    hr_set_obj_access : UInt64
+    hr_set_prop_access : UInt64
+    hr_get_prop_access : UInt64
+    hr_add_obj_props : UInt64
   end
 
   struct IPropData
@@ -1147,38 +1147,38 @@ lib LibWin32
   end
 
   struct IAddrBookVTbl
-    query_interface : Proc(IAddrBook*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAddrBook*, UInt32)
-    release : Proc(IAddrBook*, UInt32)
-    get_last_error : Proc(IAddrBook*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    save_changes : Proc(IAddrBook*, UInt32, HRESULT)
-    get_props : Proc(IAddrBook*, SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)
-    get_prop_list : Proc(IAddrBook*, UInt32, SPropTagArray**, HRESULT)
-    open_property : Proc(IAddrBook*, UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)
-    set_props : Proc(IAddrBook*, UInt32, SPropValue*, SPropProblemArray**, HRESULT)
-    delete_props : Proc(IAddrBook*, SPropTagArray*, SPropProblemArray**, HRESULT)
-    copy_to : Proc(IAddrBook*, UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    copy_props : Proc(IAddrBook*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)
-    get_names_from_i_ds : Proc(IAddrBook*, SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)
-    get_i_ds_from_names : Proc(IAddrBook*, UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)
-    open_entry : Proc(IAddrBook*, UInt32, ENTRYID*, Guid*, UInt32, UInt32*, IUnknown*, HRESULT)
-    compare_entry_i_ds : Proc(IAddrBook*, UInt32, ENTRYID*, UInt32, ENTRYID*, UInt32, UInt32*, HRESULT)
-    advise : Proc(IAddrBook*, UInt32, ENTRYID*, UInt32, IMAPIAdviseSink, UInt32*, HRESULT)
-    unadvise : Proc(IAddrBook*, UInt32, HRESULT)
-    create_one_off : Proc(IAddrBook*, Int8*, Int8*, Int8*, UInt32, UInt32*, ENTRYID**, HRESULT)
-    new_entry : Proc(IAddrBook*, UInt32, UInt32, UInt32, ENTRYID*, UInt32, ENTRYID*, UInt32*, ENTRYID**, HRESULT)
-    resolve_name : Proc(IAddrBook*, LibC::UINT_PTR, UInt32, Int8*, ADRLIST*, HRESULT)
-    address : Proc(IAddrBook*, UInt32*, ADRPARM*, ADRLIST**, HRESULT)
-    details : Proc(IAddrBook*, LibC::UINT_PTR*, LPFNDISMISS, Void*, UInt32, ENTRYID*, LPFNBUTTON, Void*, Int8*, UInt32, HRESULT)
-    recip_options : Proc(IAddrBook*, UInt32, UInt32, ADRENTRY*, HRESULT)
-    query_default_recip_opt : Proc(IAddrBook*, Int8*, UInt32, UInt32*, SPropValue**, HRESULT)
-    get_pab : Proc(IAddrBook*, UInt32*, ENTRYID**, HRESULT)
-    set_pab : Proc(IAddrBook*, UInt32, ENTRYID*, HRESULT)
-    get_default_dir : Proc(IAddrBook*, UInt32*, ENTRYID**, HRESULT)
-    set_default_dir : Proc(IAddrBook*, UInt32, ENTRYID*, HRESULT)
-    get_search_path : Proc(IAddrBook*, UInt32, SRowSet**, HRESULT)
-    set_search_path : Proc(IAddrBook*, UInt32, SRowSet*, HRESULT)
-    prepare_recips : Proc(IAddrBook*, UInt32, SPropTagArray*, ADRLIST*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    save_changes : UInt64
+    get_props : UInt64
+    get_prop_list : UInt64
+    open_property : UInt64
+    set_props : UInt64
+    delete_props : UInt64
+    copy_to : UInt64
+    copy_props : UInt64
+    get_names_from_i_ds : UInt64
+    get_i_ds_from_names : UInt64
+    open_entry : UInt64
+    compare_entry_i_ds : UInt64
+    advise : UInt64
+    unadvise : UInt64
+    create_one_off : UInt64
+    new_entry : UInt64
+    resolve_name : UInt64
+    address : UInt64
+    details : UInt64
+    recip_options : UInt64
+    query_default_recip_opt : UInt64
+    get_pab : UInt64
+    set_pab : UInt64
+    get_default_dir : UInt64
+    set_default_dir : UInt64
+    get_search_path : UInt64
+    set_search_path : UInt64
+    prepare_recips : UInt64
   end
 
   struct IAddrBook
@@ -1186,22 +1186,22 @@ lib LibWin32
   end
 
   struct IWABObjectVTbl
-    query_interface : Proc(IWABObject*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWABObject*, UInt32)
-    release : Proc(IWABObject*, UInt32)
-    get_last_error : Proc(IWABObject*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    allocate_buffer : Proc(IWABObject*, UInt32, Void**, HRESULT)
-    allocate_more : Proc(IWABObject*, UInt32, Void*, Void**, HRESULT)
-    free_buffer : Proc(IWABObject*, Void*, HRESULT)
-    backup : Proc(IWABObject*, PSTR, HRESULT)
-    import : Proc(IWABObject*, PSTR, HRESULT)
-    find : Proc(IWABObject*, IAddrBook, LibC::HANDLE, HRESULT)
-    v_card_display : Proc(IWABObject*, IAddrBook, LibC::HANDLE, PSTR, HRESULT)
-    ldap_url : Proc(IWABObject*, IAddrBook, LibC::HANDLE, UInt32, PSTR, IMailUser*, HRESULT)
-    v_card_create : Proc(IWABObject*, IAddrBook, UInt32, PSTR, IMailUser, HRESULT)
-    v_card_retrieve : Proc(IWABObject*, IAddrBook, UInt32, PSTR, IMailUser*, HRESULT)
-    get_me : Proc(IWABObject*, IAddrBook, UInt32, UInt32*, SBinary*, LibC::HANDLE, HRESULT)
-    set_me : Proc(IWABObject*, IAddrBook, UInt32, SBinary, LibC::HANDLE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    allocate_buffer : UInt64
+    allocate_more : UInt64
+    free_buffer : UInt64
+    backup : UInt64
+    import : UInt64
+    find : UInt64
+    v_card_display : UInt64
+    ldap_url : UInt64
+    v_card_create : UInt64
+    v_card_retrieve : UInt64
+    get_me : UInt64
+    set_me : UInt64
   end
 
   struct IWABObject
@@ -1209,22 +1209,22 @@ lib LibWin32
   end
 
   struct IWABOBJECT_VTbl
-    query_interface : Proc(IWABOBJECT_*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWABOBJECT_*, UInt32)
-    release : Proc(IWABOBJECT_*, UInt32)
-    get_last_error : Proc(IWABOBJECT_*, HRESULT, UInt32, MAPIERROR**, HRESULT)
-    allocate_buffer : Proc(IWABOBJECT_*, UInt32, Void**, HRESULT)
-    allocate_more : Proc(IWABOBJECT_*, UInt32, Void*, Void**, HRESULT)
-    free_buffer : Proc(IWABOBJECT_*, Void*, HRESULT)
-    backup : Proc(IWABOBJECT_*, PSTR, HRESULT)
-    import : Proc(IWABOBJECT_*, PSTR, HRESULT)
-    find : Proc(IWABOBJECT_*, IAddrBook, LibC::HANDLE, HRESULT)
-    v_card_display : Proc(IWABOBJECT_*, IAddrBook, LibC::HANDLE, PSTR, HRESULT)
-    ldap_url : Proc(IWABOBJECT_*, IAddrBook, LibC::HANDLE, UInt32, PSTR, IMailUser*, HRESULT)
-    v_card_create : Proc(IWABOBJECT_*, IAddrBook, UInt32, PSTR, IMailUser, HRESULT)
-    v_card_retrieve : Proc(IWABOBJECT_*, IAddrBook, UInt32, PSTR, IMailUser*, HRESULT)
-    get_me : Proc(IWABOBJECT_*, IAddrBook, UInt32, UInt32*, SBinary*, LibC::HANDLE, HRESULT)
-    set_me : Proc(IWABOBJECT_*, IAddrBook, UInt32, SBinary, LibC::HANDLE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_last_error : UInt64
+    allocate_buffer : UInt64
+    allocate_more : UInt64
+    free_buffer : UInt64
+    backup : UInt64
+    import : UInt64
+    find : UInt64
+    v_card_display : UInt64
+    ldap_url : UInt64
+    v_card_create : UInt64
+    v_card_retrieve : UInt64
+    get_me : UInt64
+    set_me : UInt64
   end
 
   struct IWABOBJECT_
@@ -1232,10 +1232,10 @@ lib LibWin32
   end
 
   struct IWABExtInitVTbl
-    query_interface : Proc(IWABExtInit*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWABExtInit*, UInt32)
-    release : Proc(IWABExtInit*, UInt32)
-    initialize : Proc(IWABExtInit*, WABEXTDISPLAY*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
   end
 
   IWABExtInit_GUID = "ea22ebf0-87a4-11d1-9acf-00a0c91f9c8b"
@@ -1255,19 +1255,19 @@ lib LibWin32
   fun MAPIInitIdle(lpvreserved : Void*) : Int32
 
   # Params # 
-  fun MAPIDeinitIdle
+  fun MAPIDeinitIdle : Void
 
   # Params # lpfnidle : PFNIDLE [In],lpvidleparam : Void* [In],priidle : Int16 [In],csecidle : UInt32 [In],iroidle : UInt16 [In]
   fun FtgRegisterIdleRoutine(lpfnidle : PFNIDLE, lpvidleparam : Void*, priidle : Int16, csecidle : UInt32, iroidle : UInt16) : Void*
 
   # Params # ftg : Void* [In]
-  fun DeregisterIdleRoutine(ftg : Void*)
+  fun DeregisterIdleRoutine(ftg : Void*) : Void
 
   # Params # ftg : Void* [In],fenable : LibC::BOOL [In]
-  fun EnableIdleRoutine(ftg : Void*, fenable : LibC::BOOL)
+  fun EnableIdleRoutine(ftg : Void*, fenable : LibC::BOOL) : Void
 
   # Params # ftg : Void* [In],lpfnidle : PFNIDLE [In],lpvidleparam : Void* [In],priidle : Int16 [In],csecidle : UInt32 [In],iroidle : UInt16 [In],ircidle : UInt16 [In]
-  fun ChangeIdleRoutine(ftg : Void*, lpfnidle : PFNIDLE, lpvidleparam : Void*, priidle : Int16, csecidle : UInt32, iroidle : UInt16, ircidle : UInt16)
+  fun ChangeIdleRoutine(ftg : Void*, lpfnidle : PFNIDLE, lpvidleparam : Void*, priidle : Int16, csecidle : UInt32, iroidle : UInt16, ircidle : UInt16) : Void
 
   # Params # 
   fun MAPIGetDefaultMalloc : IMalloc
@@ -1354,10 +1354,10 @@ lib LibWin32
   fun PpropFindProp(lpproparray : SPropValue*, cvalues : UInt32, ulproptag : UInt32) : SPropValue*
 
   # Params # lpadrlist : ADRLIST* [In]
-  fun FreePadrlist(lpadrlist : ADRLIST*)
+  fun FreePadrlist(lpadrlist : ADRLIST*) : Void
 
   # Params # lprows : SRowSet* [In]
-  fun FreeProws(lprows : SRowSet*)
+  fun FreeProws(lprows : SRowSet*) : Void
 
   # Params # lptable : IMAPITable [In],lpproptags : SPropTagArray* [In],lprestriction : SRestriction* [In],lpsortorderset : SSortOrderSet* [In],crowsmax : Int32 [In],lpprows : SRowSet** [In]
   fun HrQueryAllRows(lptable : IMAPITable, lpproptags : SPropTagArray*, lprestriction : SRestriction*, lpsortorderset : SSortOrderSet*, crowsmax : Int32, lpprows : SRowSet**) : HRESULT
@@ -1414,5 +1414,1153 @@ lib LibWin32
   fun ScInitMapiUtil(ulflags : UInt32) : Int32
 
   # Params # 
-  fun DeinitMapiUtil
+  fun DeinitMapiUtil : Void
+end
+struct LibWin32::IMAPIAdviseSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_notify(cnotif : UInt32, lpnotifications : NOTIFICATION*) : UInt32
+    @lpVtbl.value.on_notify.unsafe_as(Proc(UInt32, NOTIFICATION*, UInt32)).call(cnotif, lpnotifications)
+  end
+end
+struct LibWin32::IMAPIProgress
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def progress(ulvalue : UInt32, ulcount : UInt32, ultotal : UInt32) : HRESULT
+    @lpVtbl.value.progress.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(ulvalue, ulcount, ultotal)
+  end
+  def get_flags(lpulflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(lpulflags)
+  end
+  def get_max(lpulmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_max.unsafe_as(Proc(UInt32*, HRESULT)).call(lpulmax)
+  end
+  def get_min(lpulmin : UInt32*) : HRESULT
+    @lpVtbl.value.get_min.unsafe_as(Proc(UInt32*, HRESULT)).call(lpulmin)
+  end
+  def set_limits(lpulmin : UInt32*, lpulmax : UInt32*, lpulflags : UInt32*) : HRESULT
+    @lpVtbl.value.set_limits.unsafe_as(Proc(UInt32*, UInt32*, UInt32*, HRESULT)).call(lpulmin, lpulmax, lpulflags)
+  end
+end
+struct LibWin32::IMAPIProp
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def save_changes(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+  def get_props(lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.unsafe_as(Proc(SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)).call(lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.unsafe_as(Proc(UInt32, SPropTagArray**, HRESULT)).call(ulflags, lppproptagarray)
+  end
+  def open_property(ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.unsafe_as(Proc(UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)).call(ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.unsafe_as(Proc(UInt32, SPropValue*, SPropProblemArray**, HRESULT)).call(cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.unsafe_as(Proc(SPropTagArray*, SPropProblemArray**, HRESULT)).call(lpproptagarray, lppproblems)
+  end
+  def copy_to(ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.unsafe_as(Proc(SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.unsafe_as(Proc(SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)).call(lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.unsafe_as(Proc(UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)).call(cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+end
+struct LibWin32::IMAPITable
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def advise(uleventmask : UInt32, lpadvisesink : IMAPIAdviseSink, lpulconnection : UInt32*) : HRESULT
+    @lpVtbl.value.advise.unsafe_as(Proc(UInt32, IMAPIAdviseSink, UInt32*, HRESULT)).call(uleventmask, lpadvisesink, lpulconnection)
+  end
+  def unadvise(ulconnection : UInt32) : HRESULT
+    @lpVtbl.value.unadvise.unsafe_as(Proc(UInt32, HRESULT)).call(ulconnection)
+  end
+  def get_status(lpultablestatus : UInt32*, lpultabletype : UInt32*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(lpultablestatus, lpultabletype)
+  end
+  def set_columns(lpproptagarray : SPropTagArray*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.set_columns.unsafe_as(Proc(SPropTagArray*, UInt32, HRESULT)).call(lpproptagarray, ulflags)
+  end
+  def query_columns(ulflags : UInt32, lpproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.query_columns.unsafe_as(Proc(UInt32, SPropTagArray**, HRESULT)).call(ulflags, lpproptagarray)
+  end
+  def get_row_count(ulflags : UInt32, lpulcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_row_count.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(ulflags, lpulcount)
+  end
+  def seek_row(bkorigin : UInt32, lrowcount : Int32, lplrowssought : Int32*) : HRESULT
+    @lpVtbl.value.seek_row.unsafe_as(Proc(UInt32, Int32, Int32*, HRESULT)).call(bkorigin, lrowcount, lplrowssought)
+  end
+  def seek_row_approx(ulnumerator : UInt32, uldenominator : UInt32) : HRESULT
+    @lpVtbl.value.seek_row_approx.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(ulnumerator, uldenominator)
+  end
+  def query_position(lpulrow : UInt32*, lpulnumerator : UInt32*, lpuldenominator : UInt32*) : HRESULT
+    @lpVtbl.value.query_position.unsafe_as(Proc(UInt32*, UInt32*, UInt32*, HRESULT)).call(lpulrow, lpulnumerator, lpuldenominator)
+  end
+  def find_row(lprestriction : SRestriction*, bkorigin : UInt32, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.find_row.unsafe_as(Proc(SRestriction*, UInt32, UInt32, HRESULT)).call(lprestriction, bkorigin, ulflags)
+  end
+  def restrict(lprestriction : SRestriction*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.restrict.unsafe_as(Proc(SRestriction*, UInt32, HRESULT)).call(lprestriction, ulflags)
+  end
+  def create_bookmark(lpbkposition : UInt32*) : HRESULT
+    @lpVtbl.value.create_bookmark.unsafe_as(Proc(UInt32*, HRESULT)).call(lpbkposition)
+  end
+  def free_bookmark(bkposition : UInt32) : HRESULT
+    @lpVtbl.value.free_bookmark.unsafe_as(Proc(UInt32, HRESULT)).call(bkposition)
+  end
+  def sort_table(lpsortcriteria : SSortOrderSet*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.sort_table.unsafe_as(Proc(SSortOrderSet*, UInt32, HRESULT)).call(lpsortcriteria, ulflags)
+  end
+  def query_sort_order(lppsortcriteria : SSortOrderSet**) : HRESULT
+    @lpVtbl.value.query_sort_order.unsafe_as(Proc(SSortOrderSet**, HRESULT)).call(lppsortcriteria)
+  end
+  def query_rows(lrowcount : Int32, ulflags : UInt32, lpprows : SRowSet**) : HRESULT
+    @lpVtbl.value.query_rows.unsafe_as(Proc(Int32, UInt32, SRowSet**, HRESULT)).call(lrowcount, ulflags, lpprows)
+  end
+  def abort : HRESULT
+    @lpVtbl.value.abort.unsafe_as(Proc(HRESULT)).call
+  end
+  def expand_row(cbinstancekey : UInt32, pbinstancekey : UInt8*, ulrowcount : UInt32, ulflags : UInt32, lpprows : SRowSet**, lpulmorerows : UInt32*) : HRESULT
+    @lpVtbl.value.expand_row.unsafe_as(Proc(UInt32, UInt8*, UInt32, UInt32, SRowSet**, UInt32*, HRESULT)).call(cbinstancekey, pbinstancekey, ulrowcount, ulflags, lpprows, lpulmorerows)
+  end
+  def collapse_row(cbinstancekey : UInt32, pbinstancekey : UInt8*, ulflags : UInt32, lpulrowcount : UInt32*) : HRESULT
+    @lpVtbl.value.collapse_row.unsafe_as(Proc(UInt32, UInt8*, UInt32, UInt32*, HRESULT)).call(cbinstancekey, pbinstancekey, ulflags, lpulrowcount)
+  end
+  def wait_for_completion(ulflags : UInt32, ultimeout : UInt32, lpultablestatus : UInt32*) : HRESULT
+    @lpVtbl.value.wait_for_completion.unsafe_as(Proc(UInt32, UInt32, UInt32*, HRESULT)).call(ulflags, ultimeout, lpultablestatus)
+  end
+  def get_collapse_state(ulflags : UInt32, cbinstancekey : UInt32, lpbinstancekey : UInt8*, lpcbcollapsestate : UInt32*, lppbcollapsestate : UInt8**) : HRESULT
+    @lpVtbl.value.get_collapse_state.unsafe_as(Proc(UInt32, UInt32, UInt8*, UInt32*, UInt8**, HRESULT)).call(ulflags, cbinstancekey, lpbinstancekey, lpcbcollapsestate, lppbcollapsestate)
+  end
+  def set_collapse_state(ulflags : UInt32, cbcollapsestate : UInt32, pbcollapsestate : UInt8*, lpbklocation : UInt32*) : HRESULT
+    @lpVtbl.value.set_collapse_state.unsafe_as(Proc(UInt32, UInt32, UInt8*, UInt32*, HRESULT)).call(ulflags, cbcollapsestate, pbcollapsestate, lpbklocation)
+  end
+end
+struct LibWin32::IProfSect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def save_changes(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+  def get_props(lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.unsafe_as(Proc(SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)).call(lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.unsafe_as(Proc(UInt32, SPropTagArray**, HRESULT)).call(ulflags, lppproptagarray)
+  end
+  def open_property(ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.unsafe_as(Proc(UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)).call(ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.unsafe_as(Proc(UInt32, SPropValue*, SPropProblemArray**, HRESULT)).call(cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.unsafe_as(Proc(SPropTagArray*, SPropProblemArray**, HRESULT)).call(lpproptagarray, lppproblems)
+  end
+  def copy_to(ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.unsafe_as(Proc(SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.unsafe_as(Proc(SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)).call(lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.unsafe_as(Proc(UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)).call(cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+end
+struct LibWin32::IMAPIStatus
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def save_changes(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+  def get_props(lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.unsafe_as(Proc(SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)).call(lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.unsafe_as(Proc(UInt32, SPropTagArray**, HRESULT)).call(ulflags, lppproptagarray)
+  end
+  def open_property(ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.unsafe_as(Proc(UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)).call(ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.unsafe_as(Proc(UInt32, SPropValue*, SPropProblemArray**, HRESULT)).call(cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.unsafe_as(Proc(SPropTagArray*, SPropProblemArray**, HRESULT)).call(lpproptagarray, lppproblems)
+  end
+  def copy_to(ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.unsafe_as(Proc(SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.unsafe_as(Proc(SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)).call(lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.unsafe_as(Proc(UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)).call(cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def validate_state(uluiparam : LibC::UINT_PTR, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.validate_state.unsafe_as(Proc(LibC::UINT_PTR, UInt32, HRESULT)).call(uluiparam, ulflags)
+  end
+  def settings_dialog(uluiparam : LibC::UINT_PTR, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.settings_dialog.unsafe_as(Proc(LibC::UINT_PTR, UInt32, HRESULT)).call(uluiparam, ulflags)
+  end
+  def change_password(lpoldpass : Int8*, lpnewpass : Int8*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.change_password.unsafe_as(Proc(Int8*, Int8*, UInt32, HRESULT)).call(lpoldpass, lpnewpass, ulflags)
+  end
+  def flush_queues(uluiparam : LibC::UINT_PTR, cbtargettransport : UInt32, lptargettransport : ENTRYID*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.flush_queues.unsafe_as(Proc(LibC::UINT_PTR, UInt32, ENTRYID*, UInt32, HRESULT)).call(uluiparam, cbtargettransport, lptargettransport, ulflags)
+  end
+end
+struct LibWin32::IMAPIContainer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def save_changes(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+  def get_props(lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.unsafe_as(Proc(SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)).call(lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.unsafe_as(Proc(UInt32, SPropTagArray**, HRESULT)).call(ulflags, lppproptagarray)
+  end
+  def open_property(ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.unsafe_as(Proc(UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)).call(ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.unsafe_as(Proc(UInt32, SPropValue*, SPropProblemArray**, HRESULT)).call(cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.unsafe_as(Proc(SPropTagArray*, SPropProblemArray**, HRESULT)).call(lpproptagarray, lppproblems)
+  end
+  def copy_to(ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.unsafe_as(Proc(SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.unsafe_as(Proc(SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)).call(lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.unsafe_as(Proc(UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)).call(cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def get_contents_table(ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_contents_table.unsafe_as(Proc(UInt32, IMAPITable*, HRESULT)).call(ulflags, lpptable)
+  end
+  def get_hierarchy_table(ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_hierarchy_table.unsafe_as(Proc(UInt32, IMAPITable*, HRESULT)).call(ulflags, lpptable)
+  end
+  def open_entry(cbentryid : UInt32, lpentryid : ENTRYID*, lpinterface : Guid*, ulflags : UInt32, lpulobjtype : UInt32*, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_entry.unsafe_as(Proc(UInt32, ENTRYID*, Guid*, UInt32, UInt32*, IUnknown*, HRESULT)).call(cbentryid, lpentryid, lpinterface, ulflags, lpulobjtype, lppunk)
+  end
+  def set_search_criteria(lprestriction : SRestriction*, lpcontainerlist : SBinaryArray*, ulsearchflags : UInt32) : HRESULT
+    @lpVtbl.value.set_search_criteria.unsafe_as(Proc(SRestriction*, SBinaryArray*, UInt32, HRESULT)).call(lprestriction, lpcontainerlist, ulsearchflags)
+  end
+  def get_search_criteria(ulflags : UInt32, lpprestriction : SRestriction**, lppcontainerlist : SBinaryArray**, lpulsearchstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_search_criteria.unsafe_as(Proc(UInt32, SRestriction**, SBinaryArray**, UInt32*, HRESULT)).call(ulflags, lpprestriction, lppcontainerlist, lpulsearchstate)
+  end
+end
+struct LibWin32::IABContainer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def save_changes(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+  def get_props(lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.unsafe_as(Proc(SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)).call(lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.unsafe_as(Proc(UInt32, SPropTagArray**, HRESULT)).call(ulflags, lppproptagarray)
+  end
+  def open_property(ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.unsafe_as(Proc(UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)).call(ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.unsafe_as(Proc(UInt32, SPropValue*, SPropProblemArray**, HRESULT)).call(cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.unsafe_as(Proc(SPropTagArray*, SPropProblemArray**, HRESULT)).call(lpproptagarray, lppproblems)
+  end
+  def copy_to(ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.unsafe_as(Proc(SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.unsafe_as(Proc(SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)).call(lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.unsafe_as(Proc(UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)).call(cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def get_contents_table(ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_contents_table.unsafe_as(Proc(UInt32, IMAPITable*, HRESULT)).call(ulflags, lpptable)
+  end
+  def get_hierarchy_table(ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_hierarchy_table.unsafe_as(Proc(UInt32, IMAPITable*, HRESULT)).call(ulflags, lpptable)
+  end
+  def open_entry(cbentryid : UInt32, lpentryid : ENTRYID*, lpinterface : Guid*, ulflags : UInt32, lpulobjtype : UInt32*, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_entry.unsafe_as(Proc(UInt32, ENTRYID*, Guid*, UInt32, UInt32*, IUnknown*, HRESULT)).call(cbentryid, lpentryid, lpinterface, ulflags, lpulobjtype, lppunk)
+  end
+  def set_search_criteria(lprestriction : SRestriction*, lpcontainerlist : SBinaryArray*, ulsearchflags : UInt32) : HRESULT
+    @lpVtbl.value.set_search_criteria.unsafe_as(Proc(SRestriction*, SBinaryArray*, UInt32, HRESULT)).call(lprestriction, lpcontainerlist, ulsearchflags)
+  end
+  def get_search_criteria(ulflags : UInt32, lpprestriction : SRestriction**, lppcontainerlist : SBinaryArray**, lpulsearchstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_search_criteria.unsafe_as(Proc(UInt32, SRestriction**, SBinaryArray**, UInt32*, HRESULT)).call(ulflags, lpprestriction, lppcontainerlist, lpulsearchstate)
+  end
+  def create_entry(cbentryid : UInt32, lpentryid : ENTRYID*, ulcreateflags : UInt32, lppmapipropentry : IMAPIProp*) : HRESULT
+    @lpVtbl.value.create_entry.unsafe_as(Proc(UInt32, ENTRYID*, UInt32, IMAPIProp*, HRESULT)).call(cbentryid, lpentryid, ulcreateflags, lppmapipropentry)
+  end
+  def copy_entries(lpentries : SBinaryArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.copy_entries.unsafe_as(Proc(SBinaryArray*, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)).call(lpentries, uluiparam, lpprogress, ulflags)
+  end
+  def delete_entries(lpentries : SBinaryArray*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.delete_entries.unsafe_as(Proc(SBinaryArray*, UInt32, HRESULT)).call(lpentries, ulflags)
+  end
+  def resolve_names(lpproptagarray : SPropTagArray*, ulflags : UInt32, lpadrlist : ADRLIST*, lpflaglist : Flaglist*) : HRESULT
+    @lpVtbl.value.resolve_names.unsafe_as(Proc(SPropTagArray*, UInt32, ADRLIST*, Flaglist*, HRESULT)).call(lpproptagarray, ulflags, lpadrlist, lpflaglist)
+  end
+end
+struct LibWin32::IMailUser
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def save_changes(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+  def get_props(lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.unsafe_as(Proc(SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)).call(lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.unsafe_as(Proc(UInt32, SPropTagArray**, HRESULT)).call(ulflags, lppproptagarray)
+  end
+  def open_property(ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.unsafe_as(Proc(UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)).call(ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.unsafe_as(Proc(UInt32, SPropValue*, SPropProblemArray**, HRESULT)).call(cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.unsafe_as(Proc(SPropTagArray*, SPropProblemArray**, HRESULT)).call(lpproptagarray, lppproblems)
+  end
+  def copy_to(ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.unsafe_as(Proc(SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.unsafe_as(Proc(SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)).call(lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.unsafe_as(Proc(UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)).call(cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+end
+struct LibWin32::IDistList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def save_changes(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+  def get_props(lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.unsafe_as(Proc(SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)).call(lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.unsafe_as(Proc(UInt32, SPropTagArray**, HRESULT)).call(ulflags, lppproptagarray)
+  end
+  def open_property(ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.unsafe_as(Proc(UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)).call(ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.unsafe_as(Proc(UInt32, SPropValue*, SPropProblemArray**, HRESULT)).call(cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.unsafe_as(Proc(SPropTagArray*, SPropProblemArray**, HRESULT)).call(lpproptagarray, lppproblems)
+  end
+  def copy_to(ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.unsafe_as(Proc(SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.unsafe_as(Proc(SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)).call(lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.unsafe_as(Proc(UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)).call(cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def get_contents_table(ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_contents_table.unsafe_as(Proc(UInt32, IMAPITable*, HRESULT)).call(ulflags, lpptable)
+  end
+  def get_hierarchy_table(ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_hierarchy_table.unsafe_as(Proc(UInt32, IMAPITable*, HRESULT)).call(ulflags, lpptable)
+  end
+  def open_entry(cbentryid : UInt32, lpentryid : ENTRYID*, lpinterface : Guid*, ulflags : UInt32, lpulobjtype : UInt32*, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_entry.unsafe_as(Proc(UInt32, ENTRYID*, Guid*, UInt32, UInt32*, IUnknown*, HRESULT)).call(cbentryid, lpentryid, lpinterface, ulflags, lpulobjtype, lppunk)
+  end
+  def set_search_criteria(lprestriction : SRestriction*, lpcontainerlist : SBinaryArray*, ulsearchflags : UInt32) : HRESULT
+    @lpVtbl.value.set_search_criteria.unsafe_as(Proc(SRestriction*, SBinaryArray*, UInt32, HRESULT)).call(lprestriction, lpcontainerlist, ulsearchflags)
+  end
+  def get_search_criteria(ulflags : UInt32, lpprestriction : SRestriction**, lppcontainerlist : SBinaryArray**, lpulsearchstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_search_criteria.unsafe_as(Proc(UInt32, SRestriction**, SBinaryArray**, UInt32*, HRESULT)).call(ulflags, lpprestriction, lppcontainerlist, lpulsearchstate)
+  end
+  def create_entry(cbentryid : UInt32, lpentryid : ENTRYID*, ulcreateflags : UInt32, lppmapipropentry : IMAPIProp*) : HRESULT
+    @lpVtbl.value.create_entry.unsafe_as(Proc(UInt32, ENTRYID*, UInt32, IMAPIProp*, HRESULT)).call(cbentryid, lpentryid, ulcreateflags, lppmapipropentry)
+  end
+  def copy_entries(lpentries : SBinaryArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.copy_entries.unsafe_as(Proc(SBinaryArray*, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)).call(lpentries, uluiparam, lpprogress, ulflags)
+  end
+  def delete_entries(lpentries : SBinaryArray*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.delete_entries.unsafe_as(Proc(SBinaryArray*, UInt32, HRESULT)).call(lpentries, ulflags)
+  end
+  def resolve_names(lpproptagarray : SPropTagArray*, ulflags : UInt32, lpadrlist : ADRLIST*, lpflaglist : Flaglist*) : HRESULT
+    @lpVtbl.value.resolve_names.unsafe_as(Proc(SPropTagArray*, UInt32, ADRLIST*, Flaglist*, HRESULT)).call(lpproptagarray, ulflags, lpadrlist, lpflaglist)
+  end
+end
+struct LibWin32::IMAPIFolder
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def save_changes(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+  def get_props(lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.unsafe_as(Proc(SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)).call(lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.unsafe_as(Proc(UInt32, SPropTagArray**, HRESULT)).call(ulflags, lppproptagarray)
+  end
+  def open_property(ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.unsafe_as(Proc(UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)).call(ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.unsafe_as(Proc(UInt32, SPropValue*, SPropProblemArray**, HRESULT)).call(cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.unsafe_as(Proc(SPropTagArray*, SPropProblemArray**, HRESULT)).call(lpproptagarray, lppproblems)
+  end
+  def copy_to(ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.unsafe_as(Proc(SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.unsafe_as(Proc(SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)).call(lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.unsafe_as(Proc(UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)).call(cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def get_contents_table(ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_contents_table.unsafe_as(Proc(UInt32, IMAPITable*, HRESULT)).call(ulflags, lpptable)
+  end
+  def get_hierarchy_table(ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_hierarchy_table.unsafe_as(Proc(UInt32, IMAPITable*, HRESULT)).call(ulflags, lpptable)
+  end
+  def open_entry(cbentryid : UInt32, lpentryid : ENTRYID*, lpinterface : Guid*, ulflags : UInt32, lpulobjtype : UInt32*, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_entry.unsafe_as(Proc(UInt32, ENTRYID*, Guid*, UInt32, UInt32*, IUnknown*, HRESULT)).call(cbentryid, lpentryid, lpinterface, ulflags, lpulobjtype, lppunk)
+  end
+  def set_search_criteria(lprestriction : SRestriction*, lpcontainerlist : SBinaryArray*, ulsearchflags : UInt32) : HRESULT
+    @lpVtbl.value.set_search_criteria.unsafe_as(Proc(SRestriction*, SBinaryArray*, UInt32, HRESULT)).call(lprestriction, lpcontainerlist, ulsearchflags)
+  end
+  def get_search_criteria(ulflags : UInt32, lpprestriction : SRestriction**, lppcontainerlist : SBinaryArray**, lpulsearchstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_search_criteria.unsafe_as(Proc(UInt32, SRestriction**, SBinaryArray**, UInt32*, HRESULT)).call(ulflags, lpprestriction, lppcontainerlist, lpulsearchstate)
+  end
+  def create_message(lpinterface : Guid*, ulflags : UInt32, lppmessage : IMessage*) : HRESULT
+    @lpVtbl.value.create_message.unsafe_as(Proc(Guid*, UInt32, IMessage*, HRESULT)).call(lpinterface, ulflags, lppmessage)
+  end
+  def copy_messages(lpmsglist : SBinaryArray*, lpinterface : Guid*, lpdestfolder : Void*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.copy_messages.unsafe_as(Proc(SBinaryArray*, Guid*, Void*, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)).call(lpmsglist, lpinterface, lpdestfolder, uluiparam, lpprogress, ulflags)
+  end
+  def delete_messages(lpmsglist : SBinaryArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.delete_messages.unsafe_as(Proc(SBinaryArray*, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)).call(lpmsglist, uluiparam, lpprogress, ulflags)
+  end
+  def create_folder(ulfoldertype : UInt32, lpszfoldername : Int8*, lpszfoldercomment : Int8*, lpinterface : Guid*, ulflags : UInt32, lppfolder : IMAPIFolder*) : HRESULT
+    @lpVtbl.value.create_folder.unsafe_as(Proc(UInt32, Int8*, Int8*, Guid*, UInt32, IMAPIFolder*, HRESULT)).call(ulfoldertype, lpszfoldername, lpszfoldercomment, lpinterface, ulflags, lppfolder)
+  end
+  def copy_folder(cbentryid : UInt32, lpentryid : ENTRYID*, lpinterface : Guid*, lpdestfolder : Void*, lpsznewfoldername : Int8*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.copy_folder.unsafe_as(Proc(UInt32, ENTRYID*, Guid*, Void*, Int8*, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)).call(cbentryid, lpentryid, lpinterface, lpdestfolder, lpsznewfoldername, uluiparam, lpprogress, ulflags)
+  end
+  def delete_folder(cbentryid : UInt32, lpentryid : ENTRYID*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.delete_folder.unsafe_as(Proc(UInt32, ENTRYID*, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)).call(cbentryid, lpentryid, uluiparam, lpprogress, ulflags)
+  end
+  def set_read_flags(lpmsglist : SBinaryArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.set_read_flags.unsafe_as(Proc(SBinaryArray*, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)).call(lpmsglist, uluiparam, lpprogress, ulflags)
+  end
+  def get_message_status(cbentryid : UInt32, lpentryid : ENTRYID*, ulflags : UInt32, lpulmessagestatus : UInt32*) : HRESULT
+    @lpVtbl.value.get_message_status.unsafe_as(Proc(UInt32, ENTRYID*, UInt32, UInt32*, HRESULT)).call(cbentryid, lpentryid, ulflags, lpulmessagestatus)
+  end
+  def set_message_status(cbentryid : UInt32, lpentryid : ENTRYID*, ulnewstatus : UInt32, ulnewstatusmask : UInt32, lpuloldstatus : UInt32*) : HRESULT
+    @lpVtbl.value.set_message_status.unsafe_as(Proc(UInt32, ENTRYID*, UInt32, UInt32, UInt32*, HRESULT)).call(cbentryid, lpentryid, ulnewstatus, ulnewstatusmask, lpuloldstatus)
+  end
+  def save_contents_sort(lpsortcriteria : SSortOrderSet*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_contents_sort.unsafe_as(Proc(SSortOrderSet*, UInt32, HRESULT)).call(lpsortcriteria, ulflags)
+  end
+  def empty_folder(uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.empty_folder.unsafe_as(Proc(LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)).call(uluiparam, lpprogress, ulflags)
+  end
+end
+struct LibWin32::IMsgStore
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def save_changes(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+  def get_props(lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.unsafe_as(Proc(SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)).call(lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.unsafe_as(Proc(UInt32, SPropTagArray**, HRESULT)).call(ulflags, lppproptagarray)
+  end
+  def open_property(ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.unsafe_as(Proc(UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)).call(ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.unsafe_as(Proc(UInt32, SPropValue*, SPropProblemArray**, HRESULT)).call(cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.unsafe_as(Proc(SPropTagArray*, SPropProblemArray**, HRESULT)).call(lpproptagarray, lppproblems)
+  end
+  def copy_to(ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.unsafe_as(Proc(SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.unsafe_as(Proc(SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)).call(lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.unsafe_as(Proc(UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)).call(cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def advise(cbentryid : UInt32, lpentryid : ENTRYID*, uleventmask : UInt32, lpadvisesink : IMAPIAdviseSink, lpulconnection : UInt32*) : HRESULT
+    @lpVtbl.value.advise.unsafe_as(Proc(UInt32, ENTRYID*, UInt32, IMAPIAdviseSink, UInt32*, HRESULT)).call(cbentryid, lpentryid, uleventmask, lpadvisesink, lpulconnection)
+  end
+  def unadvise(ulconnection : UInt32) : HRESULT
+    @lpVtbl.value.unadvise.unsafe_as(Proc(UInt32, HRESULT)).call(ulconnection)
+  end
+  def compare_entry_i_ds(cbentryid1 : UInt32, lpentryid1 : ENTRYID*, cbentryid2 : UInt32, lpentryid2 : ENTRYID*, ulflags : UInt32, lpulresult : UInt32*) : HRESULT
+    @lpVtbl.value.compare_entry_i_ds.unsafe_as(Proc(UInt32, ENTRYID*, UInt32, ENTRYID*, UInt32, UInt32*, HRESULT)).call(cbentryid1, lpentryid1, cbentryid2, lpentryid2, ulflags, lpulresult)
+  end
+  def open_entry(cbentryid : UInt32, lpentryid : ENTRYID*, lpinterface : Guid*, ulflags : UInt32, lpulobjtype : UInt32*, ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_entry.unsafe_as(Proc(UInt32, ENTRYID*, Guid*, UInt32, UInt32*, IUnknown*, HRESULT)).call(cbentryid, lpentryid, lpinterface, ulflags, lpulobjtype, ppunk)
+  end
+  def set_receive_folder(lpszmessageclass : Int8*, ulflags : UInt32, cbentryid : UInt32, lpentryid : ENTRYID*) : HRESULT
+    @lpVtbl.value.set_receive_folder.unsafe_as(Proc(Int8*, UInt32, UInt32, ENTRYID*, HRESULT)).call(lpszmessageclass, ulflags, cbentryid, lpentryid)
+  end
+  def get_receive_folder(lpszmessageclass : Int8*, ulflags : UInt32, lpcbentryid : UInt32*, lppentryid : ENTRYID**, lppszexplicitclass : Int8**) : HRESULT
+    @lpVtbl.value.get_receive_folder.unsafe_as(Proc(Int8*, UInt32, UInt32*, ENTRYID**, Int8**, HRESULT)).call(lpszmessageclass, ulflags, lpcbentryid, lppentryid, lppszexplicitclass)
+  end
+  def get_receive_folder_table(ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_receive_folder_table.unsafe_as(Proc(UInt32, IMAPITable*, HRESULT)).call(ulflags, lpptable)
+  end
+  def store_logoff(lpulflags : UInt32*) : HRESULT
+    @lpVtbl.value.store_logoff.unsafe_as(Proc(UInt32*, HRESULT)).call(lpulflags)
+  end
+  def abort_submit(cbentryid : UInt32, lpentryid : ENTRYID*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.abort_submit.unsafe_as(Proc(UInt32, ENTRYID*, UInt32, HRESULT)).call(cbentryid, lpentryid, ulflags)
+  end
+  def get_outgoing_queue(ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_outgoing_queue.unsafe_as(Proc(UInt32, IMAPITable*, HRESULT)).call(ulflags, lpptable)
+  end
+  def set_lock_state(lpmessage : IMessage, ullockstate : UInt32) : HRESULT
+    @lpVtbl.value.set_lock_state.unsafe_as(Proc(IMessage, UInt32, HRESULT)).call(lpmessage, ullockstate)
+  end
+  def finished_msg(ulflags : UInt32, cbentryid : UInt32, lpentryid : ENTRYID*) : HRESULT
+    @lpVtbl.value.finished_msg.unsafe_as(Proc(UInt32, UInt32, ENTRYID*, HRESULT)).call(ulflags, cbentryid, lpentryid)
+  end
+  def notify_new_mail(lpnotification : NOTIFICATION*) : HRESULT
+    @lpVtbl.value.notify_new_mail.unsafe_as(Proc(NOTIFICATION*, HRESULT)).call(lpnotification)
+  end
+end
+struct LibWin32::IMessage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def save_changes(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+  def get_props(lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.unsafe_as(Proc(SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)).call(lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.unsafe_as(Proc(UInt32, SPropTagArray**, HRESULT)).call(ulflags, lppproptagarray)
+  end
+  def open_property(ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.unsafe_as(Proc(UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)).call(ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.unsafe_as(Proc(UInt32, SPropValue*, SPropProblemArray**, HRESULT)).call(cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.unsafe_as(Proc(SPropTagArray*, SPropProblemArray**, HRESULT)).call(lpproptagarray, lppproblems)
+  end
+  def copy_to(ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.unsafe_as(Proc(SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.unsafe_as(Proc(SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)).call(lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.unsafe_as(Proc(UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)).call(cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def get_attachment_table(ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_attachment_table.unsafe_as(Proc(UInt32, IMAPITable*, HRESULT)).call(ulflags, lpptable)
+  end
+  def open_attach(ulattachmentnum : UInt32, lpinterface : Guid*, ulflags : UInt32, lppattach : IAttach*) : HRESULT
+    @lpVtbl.value.open_attach.unsafe_as(Proc(UInt32, Guid*, UInt32, IAttach*, HRESULT)).call(ulattachmentnum, lpinterface, ulflags, lppattach)
+  end
+  def create_attach(lpinterface : Guid*, ulflags : UInt32, lpulattachmentnum : UInt32*, lppattach : IAttach*) : HRESULT
+    @lpVtbl.value.create_attach.unsafe_as(Proc(Guid*, UInt32, UInt32*, IAttach*, HRESULT)).call(lpinterface, ulflags, lpulattachmentnum, lppattach)
+  end
+  def delete_attach(ulattachmentnum : UInt32, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.delete_attach.unsafe_as(Proc(UInt32, LibC::UINT_PTR, IMAPIProgress, UInt32, HRESULT)).call(ulattachmentnum, uluiparam, lpprogress, ulflags)
+  end
+  def get_recipient_table(ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_recipient_table.unsafe_as(Proc(UInt32, IMAPITable*, HRESULT)).call(ulflags, lpptable)
+  end
+  def modify_recipients(ulflags : UInt32, lpmods : ADRLIST*) : HRESULT
+    @lpVtbl.value.modify_recipients.unsafe_as(Proc(UInt32, ADRLIST*, HRESULT)).call(ulflags, lpmods)
+  end
+  def submit_message(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.submit_message.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+  def set_read_flag(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.set_read_flag.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+end
+struct LibWin32::IAttach
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def save_changes(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+  def get_props(lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.unsafe_as(Proc(SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)).call(lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.unsafe_as(Proc(UInt32, SPropTagArray**, HRESULT)).call(ulflags, lppproptagarray)
+  end
+  def open_property(ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.unsafe_as(Proc(UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)).call(ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.unsafe_as(Proc(UInt32, SPropValue*, SPropProblemArray**, HRESULT)).call(cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.unsafe_as(Proc(SPropTagArray*, SPropProblemArray**, HRESULT)).call(lpproptagarray, lppproblems)
+  end
+  def copy_to(ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.unsafe_as(Proc(SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.unsafe_as(Proc(SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)).call(lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.unsafe_as(Proc(UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)).call(cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+end
+struct LibWin32::IMAPIControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def activate(ulflags : UInt32, uluiparam : LibC::UINT_PTR) : HRESULT
+    @lpVtbl.value.activate.unsafe_as(Proc(UInt32, LibC::UINT_PTR, HRESULT)).call(ulflags, uluiparam)
+  end
+  def get_state(ulflags : UInt32, lpulstate : UInt32*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(ulflags, lpulstate)
+  end
+end
+struct LibWin32::IProviderAdmin
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def get_provider_table(ulflags : UInt32, lpptable : IMAPITable*) : HRESULT
+    @lpVtbl.value.get_provider_table.unsafe_as(Proc(UInt32, IMAPITable*, HRESULT)).call(ulflags, lpptable)
+  end
+  def create_provider(lpszprovider : Int8*, cvalues : UInt32, lpprops : SPropValue*, uluiparam : LibC::UINT_PTR, ulflags : UInt32, lpuid : MAPIUID*) : HRESULT
+    @lpVtbl.value.create_provider.unsafe_as(Proc(Int8*, UInt32, SPropValue*, LibC::UINT_PTR, UInt32, MAPIUID*, HRESULT)).call(lpszprovider, cvalues, lpprops, uluiparam, ulflags, lpuid)
+  end
+  def delete_provider(lpuid : MAPIUID*) : HRESULT
+    @lpVtbl.value.delete_provider.unsafe_as(Proc(MAPIUID*, HRESULT)).call(lpuid)
+  end
+  def open_profile_section(lpuid : MAPIUID*, lpinterface : Guid*, ulflags : UInt32, lppprofsect : IProfSect*) : HRESULT
+    @lpVtbl.value.open_profile_section.unsafe_as(Proc(MAPIUID*, Guid*, UInt32, IProfSect*, HRESULT)).call(lpuid, lpinterface, ulflags, lppprofsect)
+  end
+end
+struct LibWin32::ITableData
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def hr_get_view(lpssortorderset : SSortOrderSet*, lpfcallerrelease : CALLERRELEASE*, ulcallerdata : UInt32, lppmapitable : IMAPITable*) : HRESULT
+    @lpVtbl.value.hr_get_view.unsafe_as(Proc(SSortOrderSet*, CALLERRELEASE*, UInt32, IMAPITable*, HRESULT)).call(lpssortorderset, lpfcallerrelease, ulcallerdata, lppmapitable)
+  end
+  def hr_modify_row(param0 : SRow*) : HRESULT
+    @lpVtbl.value.hr_modify_row.unsafe_as(Proc(SRow*, HRESULT)).call(param0)
+  end
+  def hr_delete_row(lpspropvalue : SPropValue*) : HRESULT
+    @lpVtbl.value.hr_delete_row.unsafe_as(Proc(SPropValue*, HRESULT)).call(lpspropvalue)
+  end
+  def hr_query_row(lpspropvalue : SPropValue*, lppsrow : SRow**, lpulirow : UInt32*) : HRESULT
+    @lpVtbl.value.hr_query_row.unsafe_as(Proc(SPropValue*, SRow**, UInt32*, HRESULT)).call(lpspropvalue, lppsrow, lpulirow)
+  end
+  def hr_enum_row(ulrownumber : UInt32, lppsrow : SRow**) : HRESULT
+    @lpVtbl.value.hr_enum_row.unsafe_as(Proc(UInt32, SRow**, HRESULT)).call(ulrownumber, lppsrow)
+  end
+  def hr_notify(ulflags : UInt32, cvalues : UInt32, lpspropvalue : SPropValue*) : HRESULT
+    @lpVtbl.value.hr_notify.unsafe_as(Proc(UInt32, UInt32, SPropValue*, HRESULT)).call(ulflags, cvalues, lpspropvalue)
+  end
+  def hr_insert_row(ulirow : UInt32, lpsrow : SRow*) : HRESULT
+    @lpVtbl.value.hr_insert_row.unsafe_as(Proc(UInt32, SRow*, HRESULT)).call(ulirow, lpsrow)
+  end
+  def hr_modify_rows(ulflags : UInt32, lpsrowset : SRowSet*) : HRESULT
+    @lpVtbl.value.hr_modify_rows.unsafe_as(Proc(UInt32, SRowSet*, HRESULT)).call(ulflags, lpsrowset)
+  end
+  def hr_delete_rows(ulflags : UInt32, lprowsettodelete : SRowSet*, crowsdeleted : UInt32*) : HRESULT
+    @lpVtbl.value.hr_delete_rows.unsafe_as(Proc(UInt32, SRowSet*, UInt32*, HRESULT)).call(ulflags, lprowsettodelete, crowsdeleted)
+  end
+end
+struct LibWin32::IPropData
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def save_changes(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+  def get_props(lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.unsafe_as(Proc(SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)).call(lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.unsafe_as(Proc(UInt32, SPropTagArray**, HRESULT)).call(ulflags, lppproptagarray)
+  end
+  def open_property(ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.unsafe_as(Proc(UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)).call(ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.unsafe_as(Proc(UInt32, SPropValue*, SPropProblemArray**, HRESULT)).call(cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.unsafe_as(Proc(SPropTagArray*, SPropProblemArray**, HRESULT)).call(lpproptagarray, lppproblems)
+  end
+  def copy_to(ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.unsafe_as(Proc(SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.unsafe_as(Proc(SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)).call(lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.unsafe_as(Proc(UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)).call(cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def hr_set_obj_access(ulaccess : UInt32) : HRESULT
+    @lpVtbl.value.hr_set_obj_access.unsafe_as(Proc(UInt32, HRESULT)).call(ulaccess)
+  end
+  def hr_set_prop_access(lpproptagarray : SPropTagArray*, rgulaccess : UInt32*) : HRESULT
+    @lpVtbl.value.hr_set_prop_access.unsafe_as(Proc(SPropTagArray*, UInt32*, HRESULT)).call(lpproptagarray, rgulaccess)
+  end
+  def hr_get_prop_access(lppproptagarray : SPropTagArray**, lprgulaccess : UInt32**) : HRESULT
+    @lpVtbl.value.hr_get_prop_access.unsafe_as(Proc(SPropTagArray**, UInt32**, HRESULT)).call(lppproptagarray, lprgulaccess)
+  end
+  def hr_add_obj_props(lppproptagarray : SPropTagArray*, lprgulaccess : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.hr_add_obj_props.unsafe_as(Proc(SPropTagArray*, SPropProblemArray**, HRESULT)).call(lppproptagarray, lprgulaccess)
+  end
+end
+struct LibWin32::IAddrBook
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def save_changes(ulflags : UInt32) : HRESULT
+    @lpVtbl.value.save_changes.unsafe_as(Proc(UInt32, HRESULT)).call(ulflags)
+  end
+  def get_props(lpproptagarray : SPropTagArray*, ulflags : UInt32, lpcvalues : UInt32*, lppproparray : SPropValue**) : HRESULT
+    @lpVtbl.value.get_props.unsafe_as(Proc(SPropTagArray*, UInt32, UInt32*, SPropValue**, HRESULT)).call(lpproptagarray, ulflags, lpcvalues, lppproparray)
+  end
+  def get_prop_list(ulflags : UInt32, lppproptagarray : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_prop_list.unsafe_as(Proc(UInt32, SPropTagArray**, HRESULT)).call(ulflags, lppproptagarray)
+  end
+  def open_property(ulproptag : UInt32, lpiid : Guid*, ulinterfaceoptions : UInt32, ulflags : UInt32, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_property.unsafe_as(Proc(UInt32, Guid*, UInt32, UInt32, IUnknown*, HRESULT)).call(ulproptag, lpiid, ulinterfaceoptions, ulflags, lppunk)
+  end
+  def set_props(cvalues : UInt32, lpproparray : SPropValue*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.set_props.unsafe_as(Proc(UInt32, SPropValue*, SPropProblemArray**, HRESULT)).call(cvalues, lpproparray, lppproblems)
+  end
+  def delete_props(lpproptagarray : SPropTagArray*, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.delete_props.unsafe_as(Proc(SPropTagArray*, SPropProblemArray**, HRESULT)).call(lpproptagarray, lppproblems)
+  end
+  def copy_to(ciidexclude : UInt32, rgiidexclude : Guid*, lpexcludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(UInt32, Guid*, SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(ciidexclude, rgiidexclude, lpexcludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def copy_props(lpincludeprops : SPropTagArray*, uluiparam : LibC::UINT_PTR, lpprogress : IMAPIProgress, lpinterface : Guid*, lpdestobj : Void*, ulflags : UInt32, lppproblems : SPropProblemArray**) : HRESULT
+    @lpVtbl.value.copy_props.unsafe_as(Proc(SPropTagArray*, LibC::UINT_PTR, IMAPIProgress, Guid*, Void*, UInt32, SPropProblemArray**, HRESULT)).call(lpincludeprops, uluiparam, lpprogress, lpinterface, lpdestobj, ulflags, lppproblems)
+  end
+  def get_names_from_i_ds(lppproptags : SPropTagArray**, lppropsetguid : Guid*, ulflags : UInt32, lpcpropnames : UInt32*, lppppropnames : MAPINAMEID***) : HRESULT
+    @lpVtbl.value.get_names_from_i_ds.unsafe_as(Proc(SPropTagArray**, Guid*, UInt32, UInt32*, MAPINAMEID***, HRESULT)).call(lppproptags, lppropsetguid, ulflags, lpcpropnames, lppppropnames)
+  end
+  def get_i_ds_from_names(cpropnames : UInt32, lpppropnames : MAPINAMEID**, ulflags : UInt32, lppproptags : SPropTagArray**) : HRESULT
+    @lpVtbl.value.get_i_ds_from_names.unsafe_as(Proc(UInt32, MAPINAMEID**, UInt32, SPropTagArray**, HRESULT)).call(cpropnames, lpppropnames, ulflags, lppproptags)
+  end
+  def open_entry(cbentryid : UInt32, lpentryid : ENTRYID*, lpinterface : Guid*, ulflags : UInt32, lpulobjtype : UInt32*, lppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.open_entry.unsafe_as(Proc(UInt32, ENTRYID*, Guid*, UInt32, UInt32*, IUnknown*, HRESULT)).call(cbentryid, lpentryid, lpinterface, ulflags, lpulobjtype, lppunk)
+  end
+  def compare_entry_i_ds(cbentryid1 : UInt32, lpentryid1 : ENTRYID*, cbentryid2 : UInt32, lpentryid2 : ENTRYID*, ulflags : UInt32, lpulresult : UInt32*) : HRESULT
+    @lpVtbl.value.compare_entry_i_ds.unsafe_as(Proc(UInt32, ENTRYID*, UInt32, ENTRYID*, UInt32, UInt32*, HRESULT)).call(cbentryid1, lpentryid1, cbentryid2, lpentryid2, ulflags, lpulresult)
+  end
+  def advise(cbentryid : UInt32, lpentryid : ENTRYID*, uleventmask : UInt32, lpadvisesink : IMAPIAdviseSink, lpulconnection : UInt32*) : HRESULT
+    @lpVtbl.value.advise.unsafe_as(Proc(UInt32, ENTRYID*, UInt32, IMAPIAdviseSink, UInt32*, HRESULT)).call(cbentryid, lpentryid, uleventmask, lpadvisesink, lpulconnection)
+  end
+  def unadvise(ulconnection : UInt32) : HRESULT
+    @lpVtbl.value.unadvise.unsafe_as(Proc(UInt32, HRESULT)).call(ulconnection)
+  end
+  def create_one_off(lpszname : Int8*, lpszadrtype : Int8*, lpszaddress : Int8*, ulflags : UInt32, lpcbentryid : UInt32*, lppentryid : ENTRYID**) : HRESULT
+    @lpVtbl.value.create_one_off.unsafe_as(Proc(Int8*, Int8*, Int8*, UInt32, UInt32*, ENTRYID**, HRESULT)).call(lpszname, lpszadrtype, lpszaddress, ulflags, lpcbentryid, lppentryid)
+  end
+  def new_entry(uluiparam : UInt32, ulflags : UInt32, cbeidcontainer : UInt32, lpeidcontainer : ENTRYID*, cbeidnewentrytpl : UInt32, lpeidnewentrytpl : ENTRYID*, lpcbeidnewentry : UInt32*, lppeidnewentry : ENTRYID**) : HRESULT
+    @lpVtbl.value.new_entry.unsafe_as(Proc(UInt32, UInt32, UInt32, ENTRYID*, UInt32, ENTRYID*, UInt32*, ENTRYID**, HRESULT)).call(uluiparam, ulflags, cbeidcontainer, lpeidcontainer, cbeidnewentrytpl, lpeidnewentrytpl, lpcbeidnewentry, lppeidnewentry)
+  end
+  def resolve_name(uluiparam : LibC::UINT_PTR, ulflags : UInt32, lpsznewentrytitle : Int8*, lpadrlist : ADRLIST*) : HRESULT
+    @lpVtbl.value.resolve_name.unsafe_as(Proc(LibC::UINT_PTR, UInt32, Int8*, ADRLIST*, HRESULT)).call(uluiparam, ulflags, lpsznewentrytitle, lpadrlist)
+  end
+  def address(lpuluiparam : UInt32*, lpadrparms : ADRPARM*, lppadrlist : ADRLIST**) : HRESULT
+    @lpVtbl.value.address.unsafe_as(Proc(UInt32*, ADRPARM*, ADRLIST**, HRESULT)).call(lpuluiparam, lpadrparms, lppadrlist)
+  end
+  def details(lpuluiparam : LibC::UINT_PTR*, lpfndismiss : LPFNDISMISS, lpvdismisscontext : Void*, cbentryid : UInt32, lpentryid : ENTRYID*, lpfbuttoncallback : LPFNBUTTON, lpvbuttoncontext : Void*, lpszbuttontext : Int8*, ulflags : UInt32) : HRESULT
+    @lpVtbl.value.details.unsafe_as(Proc(LibC::UINT_PTR*, LPFNDISMISS, Void*, UInt32, ENTRYID*, LPFNBUTTON, Void*, Int8*, UInt32, HRESULT)).call(lpuluiparam, lpfndismiss, lpvdismisscontext, cbentryid, lpentryid, lpfbuttoncallback, lpvbuttoncontext, lpszbuttontext, ulflags)
+  end
+  def recip_options(uluiparam : UInt32, ulflags : UInt32, lprecip : ADRENTRY*) : HRESULT
+    @lpVtbl.value.recip_options.unsafe_as(Proc(UInt32, UInt32, ADRENTRY*, HRESULT)).call(uluiparam, ulflags, lprecip)
+  end
+  def query_default_recip_opt(lpszadrtype : Int8*, ulflags : UInt32, lpcvalues : UInt32*, lppoptions : SPropValue**) : HRESULT
+    @lpVtbl.value.query_default_recip_opt.unsafe_as(Proc(Int8*, UInt32, UInt32*, SPropValue**, HRESULT)).call(lpszadrtype, ulflags, lpcvalues, lppoptions)
+  end
+  def get_pab(lpcbentryid : UInt32*, lppentryid : ENTRYID**) : HRESULT
+    @lpVtbl.value.get_pab.unsafe_as(Proc(UInt32*, ENTRYID**, HRESULT)).call(lpcbentryid, lppentryid)
+  end
+  def set_pab(cbentryid : UInt32, lpentryid : ENTRYID*) : HRESULT
+    @lpVtbl.value.set_pab.unsafe_as(Proc(UInt32, ENTRYID*, HRESULT)).call(cbentryid, lpentryid)
+  end
+  def get_default_dir(lpcbentryid : UInt32*, lppentryid : ENTRYID**) : HRESULT
+    @lpVtbl.value.get_default_dir.unsafe_as(Proc(UInt32*, ENTRYID**, HRESULT)).call(lpcbentryid, lppentryid)
+  end
+  def set_default_dir(cbentryid : UInt32, lpentryid : ENTRYID*) : HRESULT
+    @lpVtbl.value.set_default_dir.unsafe_as(Proc(UInt32, ENTRYID*, HRESULT)).call(cbentryid, lpentryid)
+  end
+  def get_search_path(ulflags : UInt32, lppsearchpath : SRowSet**) : HRESULT
+    @lpVtbl.value.get_search_path.unsafe_as(Proc(UInt32, SRowSet**, HRESULT)).call(ulflags, lppsearchpath)
+  end
+  def set_search_path(ulflags : UInt32, lpsearchpath : SRowSet*) : HRESULT
+    @lpVtbl.value.set_search_path.unsafe_as(Proc(UInt32, SRowSet*, HRESULT)).call(ulflags, lpsearchpath)
+  end
+  def prepare_recips(ulflags : UInt32, lpproptagarray : SPropTagArray*, lpreciplist : ADRLIST*) : HRESULT
+    @lpVtbl.value.prepare_recips.unsafe_as(Proc(UInt32, SPropTagArray*, ADRLIST*, HRESULT)).call(ulflags, lpproptagarray, lpreciplist)
+  end
+end
+struct LibWin32::IWABObject
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def allocate_buffer(cbsize : UInt32, lppbuffer : Void**) : HRESULT
+    @lpVtbl.value.allocate_buffer.unsafe_as(Proc(UInt32, Void**, HRESULT)).call(cbsize, lppbuffer)
+  end
+  def allocate_more(cbsize : UInt32, lpobject : Void*, lppbuffer : Void**) : HRESULT
+    @lpVtbl.value.allocate_more.unsafe_as(Proc(UInt32, Void*, Void**, HRESULT)).call(cbsize, lpobject, lppbuffer)
+  end
+  def free_buffer(lpbuffer : Void*) : HRESULT
+    @lpVtbl.value.free_buffer.unsafe_as(Proc(Void*, HRESULT)).call(lpbuffer)
+  end
+  def backup(lpfilename : PSTR) : HRESULT
+    @lpVtbl.value.backup.unsafe_as(Proc(PSTR, HRESULT)).call(lpfilename)
+  end
+  def import(lpwip : PSTR) : HRESULT
+    @lpVtbl.value.import.unsafe_as(Proc(PSTR, HRESULT)).call(lpwip)
+  end
+  def find(lpiab : IAddrBook, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.find.unsafe_as(Proc(IAddrBook, LibC::HANDLE, HRESULT)).call(lpiab, hwnd)
+  end
+  def v_card_display(lpiab : IAddrBook, hwnd : LibC::HANDLE, lpszfilename : PSTR) : HRESULT
+    @lpVtbl.value.v_card_display.unsafe_as(Proc(IAddrBook, LibC::HANDLE, PSTR, HRESULT)).call(lpiab, hwnd, lpszfilename)
+  end
+  def ldap_url(lpiab : IAddrBook, hwnd : LibC::HANDLE, ulflags : UInt32, lpszurl : PSTR, lppmailuser : IMailUser*) : HRESULT
+    @lpVtbl.value.ldap_url.unsafe_as(Proc(IAddrBook, LibC::HANDLE, UInt32, PSTR, IMailUser*, HRESULT)).call(lpiab, hwnd, ulflags, lpszurl, lppmailuser)
+  end
+  def v_card_create(lpiab : IAddrBook, ulflags : UInt32, lpszvcard : PSTR, lpmailuser : IMailUser) : HRESULT
+    @lpVtbl.value.v_card_create.unsafe_as(Proc(IAddrBook, UInt32, PSTR, IMailUser, HRESULT)).call(lpiab, ulflags, lpszvcard, lpmailuser)
+  end
+  def v_card_retrieve(lpiab : IAddrBook, ulflags : UInt32, lpszvcard : PSTR, lppmailuser : IMailUser*) : HRESULT
+    @lpVtbl.value.v_card_retrieve.unsafe_as(Proc(IAddrBook, UInt32, PSTR, IMailUser*, HRESULT)).call(lpiab, ulflags, lpszvcard, lppmailuser)
+  end
+  def get_me(lpiab : IAddrBook, ulflags : UInt32, lpdwaction : UInt32*, lpsbeid : SBinary*, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_me.unsafe_as(Proc(IAddrBook, UInt32, UInt32*, SBinary*, LibC::HANDLE, HRESULT)).call(lpiab, ulflags, lpdwaction, lpsbeid, hwnd)
+  end
+  def set_me(lpiab : IAddrBook, ulflags : UInt32, sbeid : SBinary, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_me.unsafe_as(Proc(IAddrBook, UInt32, SBinary, LibC::HANDLE, HRESULT)).call(lpiab, ulflags, sbeid, hwnd)
+  end
+end
+struct LibWin32::IWABOBJECT_
+  def query_interface(riid : Guid*, ppvobj : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobj)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_last_error(hresult : HRESULT, ulflags : UInt32, lppmapierror : MAPIERROR**) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(HRESULT, UInt32, MAPIERROR**, HRESULT)).call(hresult, ulflags, lppmapierror)
+  end
+  def allocate_buffer(cbsize : UInt32, lppbuffer : Void**) : HRESULT
+    @lpVtbl.value.allocate_buffer.unsafe_as(Proc(UInt32, Void**, HRESULT)).call(cbsize, lppbuffer)
+  end
+  def allocate_more(cbsize : UInt32, lpobject : Void*, lppbuffer : Void**) : HRESULT
+    @lpVtbl.value.allocate_more.unsafe_as(Proc(UInt32, Void*, Void**, HRESULT)).call(cbsize, lpobject, lppbuffer)
+  end
+  def free_buffer(lpbuffer : Void*) : HRESULT
+    @lpVtbl.value.free_buffer.unsafe_as(Proc(Void*, HRESULT)).call(lpbuffer)
+  end
+  def backup(lpfilename : PSTR) : HRESULT
+    @lpVtbl.value.backup.unsafe_as(Proc(PSTR, HRESULT)).call(lpfilename)
+  end
+  def import(lpwip : PSTR) : HRESULT
+    @lpVtbl.value.import.unsafe_as(Proc(PSTR, HRESULT)).call(lpwip)
+  end
+  def find(lpiab : IAddrBook, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.find.unsafe_as(Proc(IAddrBook, LibC::HANDLE, HRESULT)).call(lpiab, hwnd)
+  end
+  def v_card_display(lpiab : IAddrBook, hwnd : LibC::HANDLE, lpszfilename : PSTR) : HRESULT
+    @lpVtbl.value.v_card_display.unsafe_as(Proc(IAddrBook, LibC::HANDLE, PSTR, HRESULT)).call(lpiab, hwnd, lpszfilename)
+  end
+  def ldap_url(lpiab : IAddrBook, hwnd : LibC::HANDLE, ulflags : UInt32, lpszurl : PSTR, lppmailuser : IMailUser*) : HRESULT
+    @lpVtbl.value.ldap_url.unsafe_as(Proc(IAddrBook, LibC::HANDLE, UInt32, PSTR, IMailUser*, HRESULT)).call(lpiab, hwnd, ulflags, lpszurl, lppmailuser)
+  end
+  def v_card_create(lpiab : IAddrBook, ulflags : UInt32, lpszvcard : PSTR, lpmailuser : IMailUser) : HRESULT
+    @lpVtbl.value.v_card_create.unsafe_as(Proc(IAddrBook, UInt32, PSTR, IMailUser, HRESULT)).call(lpiab, ulflags, lpszvcard, lpmailuser)
+  end
+  def v_card_retrieve(lpiab : IAddrBook, ulflags : UInt32, lpszvcard : PSTR, lppmailuser : IMailUser*) : HRESULT
+    @lpVtbl.value.v_card_retrieve.unsafe_as(Proc(IAddrBook, UInt32, PSTR, IMailUser*, HRESULT)).call(lpiab, ulflags, lpszvcard, lppmailuser)
+  end
+  def get_me(lpiab : IAddrBook, ulflags : UInt32, lpdwaction : UInt32*, lpsbeid : SBinary*, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_me.unsafe_as(Proc(IAddrBook, UInt32, UInt32*, SBinary*, LibC::HANDLE, HRESULT)).call(lpiab, ulflags, lpdwaction, lpsbeid, hwnd)
+  end
+  def set_me(lpiab : IAddrBook, ulflags : UInt32, sbeid : SBinary, hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_me.unsafe_as(Proc(IAddrBook, UInt32, SBinary, LibC::HANDLE, HRESULT)).call(lpiab, ulflags, sbeid, hwnd)
+  end
+end
+struct LibWin32::IWABExtInit
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(lpwabextdisplay : WABEXTDISPLAY*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(WABEXTDISPLAY*, HRESULT)).call(lpwabextdisplay)
+  end
 end

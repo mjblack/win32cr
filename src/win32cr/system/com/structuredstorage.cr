@@ -403,13 +403,13 @@ lib LibWin32
 
 
   struct IEnumSTATSTGVTbl
-    query_interface : Proc(IEnumSTATSTG*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumSTATSTG*, UInt32)
-    release : Proc(IEnumSTATSTG*, UInt32)
-    next : Proc(IEnumSTATSTG*, UInt32, STATSTG*, UInt32*, HRESULT)
-    skip : Proc(IEnumSTATSTG*, UInt32, HRESULT)
-    reset : Proc(IEnumSTATSTG*, HRESULT)
-    clone : Proc(IEnumSTATSTG*, IEnumSTATSTG*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IEnumSTATSTG_GUID = "0000000d-0000-0000-c000-000000000046"
@@ -419,24 +419,24 @@ lib LibWin32
   end
 
   struct IStorageVTbl
-    query_interface : Proc(IStorage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IStorage*, UInt32)
-    release : Proc(IStorage*, UInt32)
-    create_stream : Proc(IStorage*, LibC::LPWSTR, UInt32, UInt32, UInt32, IStream*, HRESULT)
-    open_stream : Proc(IStorage*, LibC::LPWSTR, Void*, UInt32, UInt32, IStream*, HRESULT)
-    create_storage : Proc(IStorage*, LibC::LPWSTR, UInt32, UInt32, UInt32, IStorage*, HRESULT)
-    open_storage : Proc(IStorage*, LibC::LPWSTR, IStorage, UInt32, UInt16**, UInt32, IStorage*, HRESULT)
-    copy_to : Proc(IStorage*, UInt32, Guid*, UInt16**, IStorage, HRESULT)
-    move_element_to : Proc(IStorage*, LibC::LPWSTR, IStorage, LibC::LPWSTR, UInt32, HRESULT)
-    commit : Proc(IStorage*, UInt32, HRESULT)
-    revert : Proc(IStorage*, HRESULT)
-    enum_elements : Proc(IStorage*, UInt32, Void*, UInt32, IEnumSTATSTG*, HRESULT)
-    destroy_element : Proc(IStorage*, LibC::LPWSTR, HRESULT)
-    rename_element : Proc(IStorage*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    set_element_times : Proc(IStorage*, LibC::LPWSTR, FILETIME*, FILETIME*, FILETIME*, HRESULT)
-    set_class : Proc(IStorage*, Guid*, HRESULT)
-    set_state_bits : Proc(IStorage*, UInt32, UInt32, HRESULT)
-    stat : Proc(IStorage*, STATSTG*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_stream : UInt64
+    open_stream : UInt64
+    create_storage : UInt64
+    open_storage : UInt64
+    copy_to : UInt64
+    move_element_to : UInt64
+    commit : UInt64
+    revert : UInt64
+    enum_elements : UInt64
+    destroy_element : UInt64
+    rename_element : UInt64
+    set_element_times : UInt64
+    set_class : UInt64
+    set_state_bits : UInt64
+    stat : UInt64
   end
 
   IStorage_GUID = "0000000b-0000-0000-c000-000000000046"
@@ -446,16 +446,16 @@ lib LibWin32
   end
 
   struct IPersistStorageVTbl
-    query_interface : Proc(IPersistStorage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPersistStorage*, UInt32)
-    release : Proc(IPersistStorage*, UInt32)
-    get_class_id : Proc(IPersistStorage*, Guid*, HRESULT)
-    is_dirty : Proc(IPersistStorage*, HRESULT)
-    init_new : Proc(IPersistStorage*, IStorage, HRESULT)
-    load : Proc(IPersistStorage*, IStorage, HRESULT)
-    save : Proc(IPersistStorage*, IStorage, LibC::BOOL, HRESULT)
-    save_completed : Proc(IPersistStorage*, IStorage, HRESULT)
-    hands_off_storage : Proc(IPersistStorage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_class_id : UInt64
+    is_dirty : UInt64
+    init_new : UInt64
+    load : UInt64
+    save : UInt64
+    save_completed : UInt64
+    hands_off_storage : UInt64
   end
 
   IPersistStorage_GUID = "0000010a-0000-0000-c000-000000000046"
@@ -465,16 +465,16 @@ lib LibWin32
   end
 
   struct ILockBytesVTbl
-    query_interface : Proc(ILockBytes*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILockBytes*, UInt32)
-    release : Proc(ILockBytes*, UInt32)
-    read_at : Proc(ILockBytes*, ULARGE_INTEGER, Void*, UInt32, UInt32*, HRESULT)
-    write_at : Proc(ILockBytes*, ULARGE_INTEGER, Void*, UInt32, UInt32*, HRESULT)
-    flush : Proc(ILockBytes*, HRESULT)
-    set_size : Proc(ILockBytes*, ULARGE_INTEGER, HRESULT)
-    lock_region : Proc(ILockBytes*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    unlock_region : Proc(ILockBytes*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    stat : Proc(ILockBytes*, STATSTG*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    read_at : UInt64
+    write_at : UInt64
+    flush : UInt64
+    set_size : UInt64
+    lock_region : UInt64
+    unlock_region : UInt64
+    stat : UInt64
   end
 
   ILockBytes_GUID = "0000000a-0000-0000-c000-000000000046"
@@ -484,10 +484,10 @@ lib LibWin32
   end
 
   struct IRootStorageVTbl
-    query_interface : Proc(IRootStorage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRootStorage*, UInt32)
-    release : Proc(IRootStorage*, UInt32)
-    switch_to_file : Proc(IRootStorage*, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    switch_to_file : UInt64
   end
 
   IRootStorage_GUID = "00000012-0000-0000-c000-000000000046"
@@ -497,13 +497,13 @@ lib LibWin32
   end
 
   struct IFillLockBytesVTbl
-    query_interface : Proc(IFillLockBytes*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFillLockBytes*, UInt32)
-    release : Proc(IFillLockBytes*, UInt32)
-    fill_append : Proc(IFillLockBytes*, Void*, UInt32, UInt32*, HRESULT)
-    fill_at : Proc(IFillLockBytes*, ULARGE_INTEGER, Void*, UInt32, UInt32*, HRESULT)
-    set_fill_size : Proc(IFillLockBytes*, ULARGE_INTEGER, HRESULT)
-    terminate : Proc(IFillLockBytes*, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    fill_append : UInt64
+    fill_at : UInt64
+    set_fill_size : UInt64
+    terminate : UInt64
   end
 
   IFillLockBytes_GUID = "99caf010-415e-11cf-8814-00aa00b569f5"
@@ -513,14 +513,14 @@ lib LibWin32
   end
 
   struct ILayoutStorageVTbl
-    query_interface : Proc(ILayoutStorage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILayoutStorage*, UInt32)
-    release : Proc(ILayoutStorage*, UInt32)
-    layout_script : Proc(ILayoutStorage*, StorageLayout*, UInt32, UInt32, HRESULT)
-    begin_monitor : Proc(ILayoutStorage*, HRESULT)
-    end_monitor : Proc(ILayoutStorage*, HRESULT)
-    re_layout_docfile : Proc(ILayoutStorage*, LibC::LPWSTR, HRESULT)
-    re_layout_docfile_on_i_lock_bytes : Proc(ILayoutStorage*, ILockBytes, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    layout_script : UInt64
+    begin_monitor : UInt64
+    end_monitor : UInt64
+    re_layout_docfile : UInt64
+    re_layout_docfile_on_i_lock_bytes : UInt64
   end
 
   ILayoutStorage_GUID = "0e6d4d90-6738-11cf-9608-00aa00680db4"
@@ -530,12 +530,12 @@ lib LibWin32
   end
 
   struct IDirectWriterLockVTbl
-    query_interface : Proc(IDirectWriterLock*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDirectWriterLock*, UInt32)
-    release : Proc(IDirectWriterLock*, UInt32)
-    wait_for_write_access : Proc(IDirectWriterLock*, UInt32, HRESULT)
-    release_write_access : Proc(IDirectWriterLock*, HRESULT)
-    have_write_access : Proc(IDirectWriterLock*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    wait_for_write_access : UInt64
+    release_write_access : UInt64
+    have_write_access : UInt64
   end
 
   IDirectWriterLock_GUID = "0e6d4d92-6738-11cf-9608-00aa00680db4"
@@ -545,21 +545,21 @@ lib LibWin32
   end
 
   struct IPropertyStorageVTbl
-    query_interface : Proc(IPropertyStorage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPropertyStorage*, UInt32)
-    release : Proc(IPropertyStorage*, UInt32)
-    read_multiple : Proc(IPropertyStorage*, UInt32, PROPSPEC*, PROPVARIANT*, HRESULT)
-    write_multiple : Proc(IPropertyStorage*, UInt32, PROPSPEC*, PROPVARIANT*, UInt32, HRESULT)
-    delete_multiple : Proc(IPropertyStorage*, UInt32, PROPSPEC*, HRESULT)
-    read_property_names : Proc(IPropertyStorage*, UInt32, UInt32*, LibC::LPWSTR*, HRESULT)
-    write_property_names : Proc(IPropertyStorage*, UInt32, UInt32*, LibC::LPWSTR*, HRESULT)
-    delete_property_names : Proc(IPropertyStorage*, UInt32, UInt32*, HRESULT)
-    commit : Proc(IPropertyStorage*, UInt32, HRESULT)
-    revert : Proc(IPropertyStorage*, HRESULT)
-    enum : Proc(IPropertyStorage*, IEnumSTATPROPSTG*, HRESULT)
-    set_times : Proc(IPropertyStorage*, FILETIME*, FILETIME*, FILETIME*, HRESULT)
-    set_class : Proc(IPropertyStorage*, Guid*, HRESULT)
-    stat : Proc(IPropertyStorage*, STATPROPSETSTG*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    read_multiple : UInt64
+    write_multiple : UInt64
+    delete_multiple : UInt64
+    read_property_names : UInt64
+    write_property_names : UInt64
+    delete_property_names : UInt64
+    commit : UInt64
+    revert : UInt64
+    enum : UInt64
+    set_times : UInt64
+    set_class : UInt64
+    stat : UInt64
   end
 
   IPropertyStorage_GUID = "00000138-0000-0000-c000-000000000046"
@@ -569,13 +569,13 @@ lib LibWin32
   end
 
   struct IPropertySetStorageVTbl
-    query_interface : Proc(IPropertySetStorage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPropertySetStorage*, UInt32)
-    release : Proc(IPropertySetStorage*, UInt32)
-    create : Proc(IPropertySetStorage*, Guid*, Guid*, UInt32, UInt32, IPropertyStorage*, HRESULT)
-    open : Proc(IPropertySetStorage*, Guid*, UInt32, IPropertyStorage*, HRESULT)
-    delete : Proc(IPropertySetStorage*, Guid*, HRESULT)
-    enum : Proc(IPropertySetStorage*, IEnumSTATPROPSETSTG*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create : UInt64
+    open : UInt64
+    delete : UInt64
+    enum : UInt64
   end
 
   IPropertySetStorage_GUID = "0000013a-0000-0000-c000-000000000046"
@@ -585,13 +585,13 @@ lib LibWin32
   end
 
   struct IEnumSTATPROPSTGVTbl
-    query_interface : Proc(IEnumSTATPROPSTG*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumSTATPROPSTG*, UInt32)
-    release : Proc(IEnumSTATPROPSTG*, UInt32)
-    next : Proc(IEnumSTATPROPSTG*, UInt32, STATPROPSTG*, UInt32*, HRESULT)
-    skip : Proc(IEnumSTATPROPSTG*, UInt32, HRESULT)
-    reset : Proc(IEnumSTATPROPSTG*, HRESULT)
-    clone : Proc(IEnumSTATPROPSTG*, IEnumSTATPROPSTG*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IEnumSTATPROPSTG_GUID = "00000139-0000-0000-c000-000000000046"
@@ -601,13 +601,13 @@ lib LibWin32
   end
 
   struct IEnumSTATPROPSETSTGVTbl
-    query_interface : Proc(IEnumSTATPROPSETSTG*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumSTATPROPSETSTG*, UInt32)
-    release : Proc(IEnumSTATPROPSETSTG*, UInt32)
-    next : Proc(IEnumSTATPROPSETSTG*, UInt32, STATPROPSETSTG*, UInt32*, HRESULT)
-    skip : Proc(IEnumSTATPROPSETSTG*, UInt32, HRESULT)
-    reset : Proc(IEnumSTATPROPSETSTG*, HRESULT)
-    clone : Proc(IEnumSTATPROPSETSTG*, IEnumSTATPROPSETSTG*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IEnumSTATPROPSETSTG_GUID = "0000013b-0000-0000-c000-000000000046"
@@ -617,11 +617,11 @@ lib LibWin32
   end
 
   struct IPropertyBagVTbl
-    query_interface : Proc(IPropertyBag*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPropertyBag*, UInt32)
-    release : Proc(IPropertyBag*, UInt32)
-    read : Proc(IPropertyBag*, LibC::LPWSTR, VARIANT*, IErrorLog, HRESULT)
-    write : Proc(IPropertyBag*, LibC::LPWSTR, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    read : UInt64
+    write : UInt64
   end
 
   IPropertyBag_GUID = "55272a00-42cb-11ce-8135-00aa004bb851"
@@ -631,14 +631,14 @@ lib LibWin32
   end
 
   struct IPropertyBag2VTbl
-    query_interface : Proc(IPropertyBag2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPropertyBag2*, UInt32)
-    release : Proc(IPropertyBag2*, UInt32)
-    read : Proc(IPropertyBag2*, UInt32, PROPBAG2*, IErrorLog, VARIANT*, HRESULT*, HRESULT)
-    write : Proc(IPropertyBag2*, UInt32, PROPBAG2*, VARIANT*, HRESULT)
-    count_properties : Proc(IPropertyBag2*, UInt32*, HRESULT)
-    get_property_info : Proc(IPropertyBag2*, UInt32, UInt32, PROPBAG2*, UInt32*, HRESULT)
-    load_object : Proc(IPropertyBag2*, LibC::LPWSTR, UInt32, IUnknown, IErrorLog, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    read : UInt64
+    write : UInt64
+    count_properties : UInt64
+    get_property_info : UInt64
+    load_object : UInt64
   end
 
   IPropertyBag2_GUID = "22f55882-280b-11d0-a8a9-00a0c90c2004"
@@ -782,4 +782,389 @@ lib LibWin32
 
   # Params # pprop : SERIALIZEDPROPERTYVALUE* [In],cbmax : UInt32 [In],ppropvar : PROPVARIANT* [In]
   fun StgDeserializePropVariant(pprop : SERIALIZEDPROPERTYVALUE*, cbmax : UInt32, ppropvar : PROPVARIANT*) : HRESULT
+end
+struct LibWin32::IEnumSTATSTG
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : STATSTG*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, STATSTG*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumSTATSTG*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumSTATSTG*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IStorage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_stream(pwcsname : LibC::LPWSTR, grfmode : UInt32, reserved1 : UInt32, reserved2 : UInt32, ppstm : IStream*) : HRESULT
+    @lpVtbl.value.create_stream.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, UInt32, IStream*, HRESULT)).call(pwcsname, grfmode, reserved1, reserved2, ppstm)
+  end
+  def open_stream(pwcsname : LibC::LPWSTR, reserved1 : Void*, grfmode : UInt32, reserved2 : UInt32, ppstm : IStream*) : HRESULT
+    @lpVtbl.value.open_stream.unsafe_as(Proc(LibC::LPWSTR, Void*, UInt32, UInt32, IStream*, HRESULT)).call(pwcsname, reserved1, grfmode, reserved2, ppstm)
+  end
+  def create_storage(pwcsname : LibC::LPWSTR, grfmode : UInt32, reserved1 : UInt32, reserved2 : UInt32, ppstg : IStorage*) : HRESULT
+    @lpVtbl.value.create_storage.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, UInt32, IStorage*, HRESULT)).call(pwcsname, grfmode, reserved1, reserved2, ppstg)
+  end
+  def open_storage(pwcsname : LibC::LPWSTR, pstgpriority : IStorage, grfmode : UInt32, snbexclude : UInt16**, reserved : UInt32, ppstg : IStorage*) : HRESULT
+    @lpVtbl.value.open_storage.unsafe_as(Proc(LibC::LPWSTR, IStorage, UInt32, UInt16**, UInt32, IStorage*, HRESULT)).call(pwcsname, pstgpriority, grfmode, snbexclude, reserved, ppstg)
+  end
+  def copy_to(ciidexclude : UInt32, rgiidexclude : Guid*, snbexclude : UInt16**, pstgdest : IStorage) : HRESULT
+    @lpVtbl.value.copy_to.unsafe_as(Proc(UInt32, Guid*, UInt16**, IStorage, HRESULT)).call(ciidexclude, rgiidexclude, snbexclude, pstgdest)
+  end
+  def move_element_to(pwcsname : LibC::LPWSTR, pstgdest : IStorage, pwcsnewname : LibC::LPWSTR, grfflags : UInt32) : HRESULT
+    @lpVtbl.value.move_element_to.unsafe_as(Proc(LibC::LPWSTR, IStorage, LibC::LPWSTR, UInt32, HRESULT)).call(pwcsname, pstgdest, pwcsnewname, grfflags)
+  end
+  def commit(grfcommitflags : UInt32) : HRESULT
+    @lpVtbl.value.commit.unsafe_as(Proc(UInt32, HRESULT)).call(grfcommitflags)
+  end
+  def revert : HRESULT
+    @lpVtbl.value.revert.unsafe_as(Proc(HRESULT)).call
+  end
+  def enum_elements(reserved1 : UInt32, reserved2 : Void*, reserved3 : UInt32, ppenum : IEnumSTATSTG*) : HRESULT
+    @lpVtbl.value.enum_elements.unsafe_as(Proc(UInt32, Void*, UInt32, IEnumSTATSTG*, HRESULT)).call(reserved1, reserved2, reserved3, ppenum)
+  end
+  def destroy_element(pwcsname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.destroy_element.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwcsname)
+  end
+  def rename_element(pwcsoldname : LibC::LPWSTR, pwcsnewname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.rename_element.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwcsoldname, pwcsnewname)
+  end
+  def set_element_times(pwcsname : LibC::LPWSTR, pctime : FILETIME*, patime : FILETIME*, pmtime : FILETIME*) : HRESULT
+    @lpVtbl.value.set_element_times.unsafe_as(Proc(LibC::LPWSTR, FILETIME*, FILETIME*, FILETIME*, HRESULT)).call(pwcsname, pctime, patime, pmtime)
+  end
+  def set_class(clsid : Guid*) : HRESULT
+    @lpVtbl.value.set_class.unsafe_as(Proc(Guid*, HRESULT)).call(clsid)
+  end
+  def set_state_bits(grfstatebits : UInt32, grfmask : UInt32) : HRESULT
+    @lpVtbl.value.set_state_bits.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(grfstatebits, grfmask)
+  end
+  def stat(pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
+    @lpVtbl.value.stat.unsafe_as(Proc(STATSTG*, UInt32, HRESULT)).call(pstatstg, grfstatflag)
+  end
+end
+struct LibWin32::IPersistStorage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_class_id(pclassid : Guid*) : HRESULT
+    @lpVtbl.value.get_class_id.unsafe_as(Proc(Guid*, HRESULT)).call(pclassid)
+  end
+  def is_dirty : HRESULT
+    @lpVtbl.value.is_dirty.unsafe_as(Proc(HRESULT)).call
+  end
+  def init_new(pstg : IStorage) : HRESULT
+    @lpVtbl.value.init_new.unsafe_as(Proc(IStorage, HRESULT)).call(pstg)
+  end
+  def load(pstg : IStorage) : HRESULT
+    @lpVtbl.value.load.unsafe_as(Proc(IStorage, HRESULT)).call(pstg)
+  end
+  def save(pstgsave : IStorage, fsameasload : LibC::BOOL) : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(IStorage, LibC::BOOL, HRESULT)).call(pstgsave, fsameasload)
+  end
+  def save_completed(pstgnew : IStorage) : HRESULT
+    @lpVtbl.value.save_completed.unsafe_as(Proc(IStorage, HRESULT)).call(pstgnew)
+  end
+  def hands_off_storage : HRESULT
+    @lpVtbl.value.hands_off_storage.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ILockBytes
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def read_at(uloffset : ULARGE_INTEGER, pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
+    @lpVtbl.value.read_at.unsafe_as(Proc(ULARGE_INTEGER, Void*, UInt32, UInt32*, HRESULT)).call(uloffset, pv, cb, pcbread)
+  end
+  def write_at(uloffset : ULARGE_INTEGER, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
+    @lpVtbl.value.write_at.unsafe_as(Proc(ULARGE_INTEGER, Void*, UInt32, UInt32*, HRESULT)).call(uloffset, pv, cb, pcbwritten)
+  end
+  def flush : HRESULT
+    @lpVtbl.value.flush.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_size(cb : ULARGE_INTEGER) : HRESULT
+    @lpVtbl.value.set_size.unsafe_as(Proc(ULARGE_INTEGER, HRESULT)).call(cb)
+  end
+  def lock_region(liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
+    @lpVtbl.value.lock_region.unsafe_as(Proc(ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)).call(liboffset, cb, dwlocktype)
+  end
+  def unlock_region(liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
+    @lpVtbl.value.unlock_region.unsafe_as(Proc(ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)).call(liboffset, cb, dwlocktype)
+  end
+  def stat(pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
+    @lpVtbl.value.stat.unsafe_as(Proc(STATSTG*, UInt32, HRESULT)).call(pstatstg, grfstatflag)
+  end
+end
+struct LibWin32::IRootStorage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def switch_to_file(pszfile : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.switch_to_file.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszfile)
+  end
+end
+struct LibWin32::IFillLockBytes
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def fill_append(pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
+    @lpVtbl.value.fill_append.unsafe_as(Proc(Void*, UInt32, UInt32*, HRESULT)).call(pv, cb, pcbwritten)
+  end
+  def fill_at(uloffset : ULARGE_INTEGER, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
+    @lpVtbl.value.fill_at.unsafe_as(Proc(ULARGE_INTEGER, Void*, UInt32, UInt32*, HRESULT)).call(uloffset, pv, cb, pcbwritten)
+  end
+  def set_fill_size(ulsize : ULARGE_INTEGER) : HRESULT
+    @lpVtbl.value.set_fill_size.unsafe_as(Proc(ULARGE_INTEGER, HRESULT)).call(ulsize)
+  end
+  def terminate(bcanceled : LibC::BOOL) : HRESULT
+    @lpVtbl.value.terminate.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bcanceled)
+  end
+end
+struct LibWin32::ILayoutStorage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def layout_script(pstoragelayout : StorageLayout*, nentries : UInt32, glfinterleavedflag : UInt32) : HRESULT
+    @lpVtbl.value.layout_script.unsafe_as(Proc(StorageLayout*, UInt32, UInt32, HRESULT)).call(pstoragelayout, nentries, glfinterleavedflag)
+  end
+  def begin_monitor : HRESULT
+    @lpVtbl.value.begin_monitor.unsafe_as(Proc(HRESULT)).call
+  end
+  def end_monitor : HRESULT
+    @lpVtbl.value.end_monitor.unsafe_as(Proc(HRESULT)).call
+  end
+  def re_layout_docfile(pwcsnewdfname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.re_layout_docfile.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwcsnewdfname)
+  end
+  def re_layout_docfile_on_i_lock_bytes(pilockbytes : ILockBytes) : HRESULT
+    @lpVtbl.value.re_layout_docfile_on_i_lock_bytes.unsafe_as(Proc(ILockBytes, HRESULT)).call(pilockbytes)
+  end
+end
+struct LibWin32::IDirectWriterLock
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def wait_for_write_access(dwtimeout : UInt32) : HRESULT
+    @lpVtbl.value.wait_for_write_access.unsafe_as(Proc(UInt32, HRESULT)).call(dwtimeout)
+  end
+  def release_write_access : HRESULT
+    @lpVtbl.value.release_write_access.unsafe_as(Proc(HRESULT)).call
+  end
+  def have_write_access : HRESULT
+    @lpVtbl.value.have_write_access.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IPropertyStorage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def read_multiple(cpspec : UInt32, rgpspec : PROPSPEC*, rgpropvar : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.read_multiple.unsafe_as(Proc(UInt32, PROPSPEC*, PROPVARIANT*, HRESULT)).call(cpspec, rgpspec, rgpropvar)
+  end
+  def write_multiple(cpspec : UInt32, rgpspec : PROPSPEC*, rgpropvar : PROPVARIANT*, propidnamefirst : UInt32) : HRESULT
+    @lpVtbl.value.write_multiple.unsafe_as(Proc(UInt32, PROPSPEC*, PROPVARIANT*, UInt32, HRESULT)).call(cpspec, rgpspec, rgpropvar, propidnamefirst)
+  end
+  def delete_multiple(cpspec : UInt32, rgpspec : PROPSPEC*) : HRESULT
+    @lpVtbl.value.delete_multiple.unsafe_as(Proc(UInt32, PROPSPEC*, HRESULT)).call(cpspec, rgpspec)
+  end
+  def read_property_names(cpropid : UInt32, rgpropid : UInt32*, rglpwstrname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.read_property_names.unsafe_as(Proc(UInt32, UInt32*, LibC::LPWSTR*, HRESULT)).call(cpropid, rgpropid, rglpwstrname)
+  end
+  def write_property_names(cpropid : UInt32, rgpropid : UInt32*, rglpwstrname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.write_property_names.unsafe_as(Proc(UInt32, UInt32*, LibC::LPWSTR*, HRESULT)).call(cpropid, rgpropid, rglpwstrname)
+  end
+  def delete_property_names(cpropid : UInt32, rgpropid : UInt32*) : HRESULT
+    @lpVtbl.value.delete_property_names.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(cpropid, rgpropid)
+  end
+  def commit(grfcommitflags : UInt32) : HRESULT
+    @lpVtbl.value.commit.unsafe_as(Proc(UInt32, HRESULT)).call(grfcommitflags)
+  end
+  def revert : HRESULT
+    @lpVtbl.value.revert.unsafe_as(Proc(HRESULT)).call
+  end
+  def enum(ppenum : IEnumSTATPROPSTG*) : HRESULT
+    @lpVtbl.value.enum.unsafe_as(Proc(IEnumSTATPROPSTG*, HRESULT)).call(ppenum)
+  end
+  def set_times(pctime : FILETIME*, patime : FILETIME*, pmtime : FILETIME*) : HRESULT
+    @lpVtbl.value.set_times.unsafe_as(Proc(FILETIME*, FILETIME*, FILETIME*, HRESULT)).call(pctime, patime, pmtime)
+  end
+  def set_class(clsid : Guid*) : HRESULT
+    @lpVtbl.value.set_class.unsafe_as(Proc(Guid*, HRESULT)).call(clsid)
+  end
+  def stat(pstatpsstg : STATPROPSETSTG*) : HRESULT
+    @lpVtbl.value.stat.unsafe_as(Proc(STATPROPSETSTG*, HRESULT)).call(pstatpsstg)
+  end
+end
+struct LibWin32::IPropertySetStorage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create(rfmtid : Guid*, pclsid : Guid*, grfflags : UInt32, grfmode : UInt32, ppprstg : IPropertyStorage*) : HRESULT
+    @lpVtbl.value.create.unsafe_as(Proc(Guid*, Guid*, UInt32, UInt32, IPropertyStorage*, HRESULT)).call(rfmtid, pclsid, grfflags, grfmode, ppprstg)
+  end
+  def open(rfmtid : Guid*, grfmode : UInt32, ppprstg : IPropertyStorage*) : HRESULT
+    @lpVtbl.value.open.unsafe_as(Proc(Guid*, UInt32, IPropertyStorage*, HRESULT)).call(rfmtid, grfmode, ppprstg)
+  end
+  def delete(rfmtid : Guid*) : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(Guid*, HRESULT)).call(rfmtid)
+  end
+  def enum(ppenum : IEnumSTATPROPSETSTG*) : HRESULT
+    @lpVtbl.value.enum.unsafe_as(Proc(IEnumSTATPROPSETSTG*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumSTATPROPSTG
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : STATPROPSTG*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, STATPROPSTG*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumSTATPROPSTG*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumSTATPROPSTG*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumSTATPROPSETSTG
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : STATPROPSETSTG*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, STATPROPSETSTG*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumSTATPROPSETSTG*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumSTATPROPSETSTG*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IPropertyBag
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def read(pszpropname : LibC::LPWSTR, pvar : VARIANT*, perrorlog : IErrorLog) : HRESULT
+    @lpVtbl.value.read.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, IErrorLog, HRESULT)).call(pszpropname, pvar, perrorlog)
+  end
+  def write(pszpropname : LibC::LPWSTR, pvar : VARIANT*) : HRESULT
+    @lpVtbl.value.write.unsafe_as(Proc(LibC::LPWSTR, VARIANT*, HRESULT)).call(pszpropname, pvar)
+  end
+end
+struct LibWin32::IPropertyBag2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def read(cproperties : UInt32, ppropbag : PROPBAG2*, perrlog : IErrorLog, pvarvalue : VARIANT*, phrerror : HRESULT*) : HRESULT
+    @lpVtbl.value.read.unsafe_as(Proc(UInt32, PROPBAG2*, IErrorLog, VARIANT*, HRESULT*, HRESULT)).call(cproperties, ppropbag, perrlog, pvarvalue, phrerror)
+  end
+  def write(cproperties : UInt32, ppropbag : PROPBAG2*, pvarvalue : VARIANT*) : HRESULT
+    @lpVtbl.value.write.unsafe_as(Proc(UInt32, PROPBAG2*, VARIANT*, HRESULT)).call(cproperties, ppropbag, pvarvalue)
+  end
+  def count_properties(pcproperties : UInt32*) : HRESULT
+    @lpVtbl.value.count_properties.unsafe_as(Proc(UInt32*, HRESULT)).call(pcproperties)
+  end
+  def get_property_info(iproperty : UInt32, cproperties : UInt32, ppropbag : PROPBAG2*, pcproperties : UInt32*) : HRESULT
+    @lpVtbl.value.get_property_info.unsafe_as(Proc(UInt32, UInt32, PROPBAG2*, UInt32*, HRESULT)).call(iproperty, cproperties, ppropbag, pcproperties)
+  end
+  def load_object(pstrname : LibC::LPWSTR, dwhint : UInt32, punkobject : IUnknown, perrlog : IErrorLog) : HRESULT
+    @lpVtbl.value.load_object.unsafe_as(Proc(LibC::LPWSTR, UInt32, IUnknown, IErrorLog, HRESULT)).call(pstrname, dwhint, punkobject, perrlog)
+  end
 end

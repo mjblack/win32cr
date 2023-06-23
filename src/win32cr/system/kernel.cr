@@ -224,7 +224,7 @@ lib LibWin32
 
 
   # Params # listhead : SLIST_HEADER* [In]
-  fun RtlInitializeSListHead(listhead : SLIST_HEADER*)
+  fun RtlInitializeSListHead(listhead : SLIST_HEADER*) : Void
 
   # Params # listhead : SLIST_HEADER* [In]
   fun RtlFirstEntrySList(listhead : SLIST_HEADER*) : SLIST_ENTRY*

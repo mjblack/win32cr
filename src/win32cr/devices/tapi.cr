@@ -2870,29 +2870,29 @@ lib LibWin32
 
 
   struct ITTAPIVTbl
-    query_interface : Proc(ITTAPI*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITTAPI*, UInt32)
-    release : Proc(ITTAPI*, UInt32)
-    get_type_info_count : Proc(ITTAPI*, UInt32*, HRESULT)
-    get_type_info : Proc(ITTAPI*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITTAPI*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITTAPI*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    initialize : Proc(ITTAPI*, HRESULT)
-    shutdown : Proc(ITTAPI*, HRESULT)
-    get_addresses : Proc(ITTAPI*, VARIANT*, HRESULT)
-    enumerate_addresses : Proc(ITTAPI*, IEnumAddress*, HRESULT)
-    register_call_notifications : Proc(ITTAPI*, ITAddress, Int16, Int16, Int32, Int32, Int32*, HRESULT)
-    unregister_notifications : Proc(ITTAPI*, Int32, HRESULT)
-    get_call_hubs : Proc(ITTAPI*, VARIANT*, HRESULT)
-    enumerate_call_hubs : Proc(ITTAPI*, IEnumCallHub*, HRESULT)
-    set_call_hub_tracking : Proc(ITTAPI*, VARIANT, Int16, HRESULT)
-    enumerate_private_tapi_objects : Proc(ITTAPI*, IEnumUnknown*, HRESULT)
-    get_private_tapi_objects : Proc(ITTAPI*, VARIANT*, HRESULT)
-    register_request_recipient : Proc(ITTAPI*, Int32, Int32, Int16, HRESULT)
-    set_assisted_telephony_priority : Proc(ITTAPI*, UInt8*, Int16, HRESULT)
-    set_application_priority : Proc(ITTAPI*, UInt8*, Int32, Int16, HRESULT)
-    put_event_filter : Proc(ITTAPI*, Int32, HRESULT)
-    get_event_filter : Proc(ITTAPI*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    initialize : UInt64
+    shutdown : UInt64
+    get_addresses : UInt64
+    enumerate_addresses : UInt64
+    register_call_notifications : UInt64
+    unregister_notifications : UInt64
+    get_call_hubs : UInt64
+    enumerate_call_hubs : UInt64
+    set_call_hub_tracking : UInt64
+    enumerate_private_tapi_objects : UInt64
+    get_private_tapi_objects : UInt64
+    register_request_recipient : UInt64
+    set_assisted_telephony_priority : UInt64
+    set_application_priority : UInt64
+    put_event_filter : UInt64
+    get_event_filter : UInt64
   end
 
   ITTAPI_GUID = "b1efc382-9355-11d0-835c-00aa003ccabd"
@@ -2902,32 +2902,32 @@ lib LibWin32
   end
 
   struct ITTAPI2VTbl
-    query_interface : Proc(ITTAPI2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITTAPI2*, UInt32)
-    release : Proc(ITTAPI2*, UInt32)
-    get_type_info_count : Proc(ITTAPI2*, UInt32*, HRESULT)
-    get_type_info : Proc(ITTAPI2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITTAPI2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITTAPI2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    initialize : Proc(ITTAPI2*, HRESULT)
-    shutdown : Proc(ITTAPI2*, HRESULT)
-    get_addresses : Proc(ITTAPI2*, VARIANT*, HRESULT)
-    enumerate_addresses : Proc(ITTAPI2*, IEnumAddress*, HRESULT)
-    register_call_notifications : Proc(ITTAPI2*, ITAddress, Int16, Int16, Int32, Int32, Int32*, HRESULT)
-    unregister_notifications : Proc(ITTAPI2*, Int32, HRESULT)
-    get_call_hubs : Proc(ITTAPI2*, VARIANT*, HRESULT)
-    enumerate_call_hubs : Proc(ITTAPI2*, IEnumCallHub*, HRESULT)
-    set_call_hub_tracking : Proc(ITTAPI2*, VARIANT, Int16, HRESULT)
-    enumerate_private_tapi_objects : Proc(ITTAPI2*, IEnumUnknown*, HRESULT)
-    get_private_tapi_objects : Proc(ITTAPI2*, VARIANT*, HRESULT)
-    register_request_recipient : Proc(ITTAPI2*, Int32, Int32, Int16, HRESULT)
-    set_assisted_telephony_priority : Proc(ITTAPI2*, UInt8*, Int16, HRESULT)
-    set_application_priority : Proc(ITTAPI2*, UInt8*, Int32, Int16, HRESULT)
-    put_event_filter : Proc(ITTAPI2*, Int32, HRESULT)
-    get_event_filter : Proc(ITTAPI2*, Int32*, HRESULT)
-    get_phones : Proc(ITTAPI2*, VARIANT*, HRESULT)
-    enumerate_phones : Proc(ITTAPI2*, IEnumPhone*, HRESULT)
-    create_empty_collection_object : Proc(ITTAPI2*, ITCollection2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    initialize : UInt64
+    shutdown : UInt64
+    get_addresses : UInt64
+    enumerate_addresses : UInt64
+    register_call_notifications : UInt64
+    unregister_notifications : UInt64
+    get_call_hubs : UInt64
+    enumerate_call_hubs : UInt64
+    set_call_hub_tracking : UInt64
+    enumerate_private_tapi_objects : UInt64
+    get_private_tapi_objects : UInt64
+    register_request_recipient : UInt64
+    set_assisted_telephony_priority : UInt64
+    set_application_priority : UInt64
+    put_event_filter : UInt64
+    get_event_filter : UInt64
+    get_phones : UInt64
+    enumerate_phones : UInt64
+    create_empty_collection_object : UInt64
   end
 
   ITTAPI2_GUID = "54fbdc8c-d90f-4dad-9695-b373097f094b"
@@ -2937,15 +2937,15 @@ lib LibWin32
   end
 
   struct ITMediaSupportVTbl
-    query_interface : Proc(ITMediaSupport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITMediaSupport*, UInt32)
-    release : Proc(ITMediaSupport*, UInt32)
-    get_type_info_count : Proc(ITMediaSupport*, UInt32*, HRESULT)
-    get_type_info : Proc(ITMediaSupport*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITMediaSupport*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITMediaSupport*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_media_types : Proc(ITMediaSupport*, Int32*, HRESULT)
-    query_media_type : Proc(ITMediaSupport*, Int32, Int16*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_media_types : UInt64
+    query_media_type : UInt64
   end
 
   ITMediaSupport_GUID = "b1efc384-9355-11d0-835c-00aa003ccabd"
@@ -2955,20 +2955,20 @@ lib LibWin32
   end
 
   struct ITPluggableTerminalClassInfoVTbl
-    query_interface : Proc(ITPluggableTerminalClassInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITPluggableTerminalClassInfo*, UInt32)
-    release : Proc(ITPluggableTerminalClassInfo*, UInt32)
-    get_type_info_count : Proc(ITPluggableTerminalClassInfo*, UInt32*, HRESULT)
-    get_type_info : Proc(ITPluggableTerminalClassInfo*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITPluggableTerminalClassInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITPluggableTerminalClassInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(ITPluggableTerminalClassInfo*, UInt8**, HRESULT)
-    get_company : Proc(ITPluggableTerminalClassInfo*, UInt8**, HRESULT)
-    get_version : Proc(ITPluggableTerminalClassInfo*, UInt8**, HRESULT)
-    get_terminal_class : Proc(ITPluggableTerminalClassInfo*, UInt8**, HRESULT)
-    get_clsid : Proc(ITPluggableTerminalClassInfo*, UInt8**, HRESULT)
-    get_direction : Proc(ITPluggableTerminalClassInfo*, TERMINAL_DIRECTION*, HRESULT)
-    get_media_types : Proc(ITPluggableTerminalClassInfo*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_company : UInt64
+    get_version : UInt64
+    get_terminal_class : UInt64
+    get_clsid : UInt64
+    get_direction : UInt64
+    get_media_types : UInt64
   end
 
   ITPluggableTerminalClassInfo_GUID = "41757f4a-cf09-4b34-bc96-0a79d2390076"
@@ -2978,15 +2978,15 @@ lib LibWin32
   end
 
   struct ITPluggableTerminalSuperclassInfoVTbl
-    query_interface : Proc(ITPluggableTerminalSuperclassInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITPluggableTerminalSuperclassInfo*, UInt32)
-    release : Proc(ITPluggableTerminalSuperclassInfo*, UInt32)
-    get_type_info_count : Proc(ITPluggableTerminalSuperclassInfo*, UInt32*, HRESULT)
-    get_type_info : Proc(ITPluggableTerminalSuperclassInfo*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITPluggableTerminalSuperclassInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITPluggableTerminalSuperclassInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(ITPluggableTerminalSuperclassInfo*, UInt8**, HRESULT)
-    get_clsid : Proc(ITPluggableTerminalSuperclassInfo*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_clsid : UInt64
   end
 
   ITPluggableTerminalSuperclassInfo_GUID = "6d54e42c-4625-4359-a6f7-631999107e05"
@@ -2996,19 +2996,19 @@ lib LibWin32
   end
 
   struct ITTerminalSupportVTbl
-    query_interface : Proc(ITTerminalSupport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITTerminalSupport*, UInt32)
-    release : Proc(ITTerminalSupport*, UInt32)
-    get_type_info_count : Proc(ITTerminalSupport*, UInt32*, HRESULT)
-    get_type_info : Proc(ITTerminalSupport*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITTerminalSupport*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITTerminalSupport*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_static_terminals : Proc(ITTerminalSupport*, VARIANT*, HRESULT)
-    enumerate_static_terminals : Proc(ITTerminalSupport*, IEnumTerminal*, HRESULT)
-    get_dynamic_terminal_classes : Proc(ITTerminalSupport*, VARIANT*, HRESULT)
-    enumerate_dynamic_terminal_classes : Proc(ITTerminalSupport*, IEnumTerminalClass*, HRESULT)
-    create_terminal : Proc(ITTerminalSupport*, UInt8*, Int32, TERMINAL_DIRECTION, ITTerminal*, HRESULT)
-    get_default_static_terminal : Proc(ITTerminalSupport*, Int32, TERMINAL_DIRECTION, ITTerminal*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_static_terminals : UInt64
+    enumerate_static_terminals : UInt64
+    get_dynamic_terminal_classes : UInt64
+    enumerate_dynamic_terminal_classes : UInt64
+    create_terminal : UInt64
+    get_default_static_terminal : UInt64
   end
 
   ITTerminalSupport_GUID = "b1efc385-9355-11d0-835c-00aa003ccabd"
@@ -3018,23 +3018,23 @@ lib LibWin32
   end
 
   struct ITTerminalSupport2VTbl
-    query_interface : Proc(ITTerminalSupport2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITTerminalSupport2*, UInt32)
-    release : Proc(ITTerminalSupport2*, UInt32)
-    get_type_info_count : Proc(ITTerminalSupport2*, UInt32*, HRESULT)
-    get_type_info : Proc(ITTerminalSupport2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITTerminalSupport2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITTerminalSupport2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_static_terminals : Proc(ITTerminalSupport2*, VARIANT*, HRESULT)
-    enumerate_static_terminals : Proc(ITTerminalSupport2*, IEnumTerminal*, HRESULT)
-    get_dynamic_terminal_classes : Proc(ITTerminalSupport2*, VARIANT*, HRESULT)
-    enumerate_dynamic_terminal_classes : Proc(ITTerminalSupport2*, IEnumTerminalClass*, HRESULT)
-    create_terminal : Proc(ITTerminalSupport2*, UInt8*, Int32, TERMINAL_DIRECTION, ITTerminal*, HRESULT)
-    get_default_static_terminal : Proc(ITTerminalSupport2*, Int32, TERMINAL_DIRECTION, ITTerminal*, HRESULT)
-    get_pluggable_superclasses : Proc(ITTerminalSupport2*, VARIANT*, HRESULT)
-    enumerate_pluggable_superclasses : Proc(ITTerminalSupport2*, IEnumPluggableSuperclassInfo*, HRESULT)
-    get_pluggable_terminal_classes : Proc(ITTerminalSupport2*, UInt8*, Int32, VARIANT*, HRESULT)
-    enumerate_pluggable_terminal_classes : Proc(ITTerminalSupport2*, Guid, Int32, IEnumPluggableTerminalClassInfo*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_static_terminals : UInt64
+    enumerate_static_terminals : UInt64
+    get_dynamic_terminal_classes : UInt64
+    enumerate_dynamic_terminal_classes : UInt64
+    create_terminal : UInt64
+    get_default_static_terminal : UInt64
+    get_pluggable_superclasses : UInt64
+    enumerate_pluggable_superclasses : UInt64
+    get_pluggable_terminal_classes : UInt64
+    enumerate_pluggable_terminal_classes : UInt64
   end
 
   ITTerminalSupport2_GUID = "f3eb39bc-1b1f-4e99-a0c0-56305c4dd591"
@@ -3044,28 +3044,28 @@ lib LibWin32
   end
 
   struct ITAddressVTbl
-    query_interface : Proc(ITAddress*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITAddress*, UInt32)
-    release : Proc(ITAddress*, UInt32)
-    get_type_info_count : Proc(ITAddress*, UInt32*, HRESULT)
-    get_type_info : Proc(ITAddress*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITAddress*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITAddress*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_state : Proc(ITAddress*, ADDRESS_STATE*, HRESULT)
-    get_address_name : Proc(ITAddress*, UInt8**, HRESULT)
-    get_service_provider_name : Proc(ITAddress*, UInt8**, HRESULT)
-    get_tapi_object : Proc(ITAddress*, ITTAPI*, HRESULT)
-    create_call : Proc(ITAddress*, UInt8*, Int32, Int32, ITBasicCallControl*, HRESULT)
-    get_calls : Proc(ITAddress*, VARIANT*, HRESULT)
-    enumerate_calls : Proc(ITAddress*, IEnumCall*, HRESULT)
-    get_dialable_address : Proc(ITAddress*, UInt8**, HRESULT)
-    create_forward_info_object : Proc(ITAddress*, ITForwardInformation*, HRESULT)
-    forward : Proc(ITAddress*, ITForwardInformation, ITBasicCallControl, HRESULT)
-    get_current_forward_info : Proc(ITAddress*, ITForwardInformation*, HRESULT)
-    put_message_waiting : Proc(ITAddress*, Int16, HRESULT)
-    get_message_waiting : Proc(ITAddress*, Int16*, HRESULT)
-    put_do_not_disturb : Proc(ITAddress*, Int16, HRESULT)
-    get_do_not_disturb : Proc(ITAddress*, Int16*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_state : UInt64
+    get_address_name : UInt64
+    get_service_provider_name : UInt64
+    get_tapi_object : UInt64
+    create_call : UInt64
+    get_calls : UInt64
+    enumerate_calls : UInt64
+    get_dialable_address : UInt64
+    create_forward_info_object : UInt64
+    forward : UInt64
+    get_current_forward_info : UInt64
+    put_message_waiting : UInt64
+    get_message_waiting : UInt64
+    put_do_not_disturb : UInt64
+    get_do_not_disturb : UInt64
   end
 
   ITAddress_GUID = "b1efc386-9355-11d0-835c-00aa003ccabd"
@@ -3075,38 +3075,38 @@ lib LibWin32
   end
 
   struct ITAddress2VTbl
-    query_interface : Proc(ITAddress2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITAddress2*, UInt32)
-    release : Proc(ITAddress2*, UInt32)
-    get_type_info_count : Proc(ITAddress2*, UInt32*, HRESULT)
-    get_type_info : Proc(ITAddress2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITAddress2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITAddress2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_state : Proc(ITAddress2*, ADDRESS_STATE*, HRESULT)
-    get_address_name : Proc(ITAddress2*, UInt8**, HRESULT)
-    get_service_provider_name : Proc(ITAddress2*, UInt8**, HRESULT)
-    get_tapi_object : Proc(ITAddress2*, ITTAPI*, HRESULT)
-    create_call : Proc(ITAddress2*, UInt8*, Int32, Int32, ITBasicCallControl*, HRESULT)
-    get_calls : Proc(ITAddress2*, VARIANT*, HRESULT)
-    enumerate_calls : Proc(ITAddress2*, IEnumCall*, HRESULT)
-    get_dialable_address : Proc(ITAddress2*, UInt8**, HRESULT)
-    create_forward_info_object : Proc(ITAddress2*, ITForwardInformation*, HRESULT)
-    forward : Proc(ITAddress2*, ITForwardInformation, ITBasicCallControl, HRESULT)
-    get_current_forward_info : Proc(ITAddress2*, ITForwardInformation*, HRESULT)
-    put_message_waiting : Proc(ITAddress2*, Int16, HRESULT)
-    get_message_waiting : Proc(ITAddress2*, Int16*, HRESULT)
-    put_do_not_disturb : Proc(ITAddress2*, Int16, HRESULT)
-    get_do_not_disturb : Proc(ITAddress2*, Int16*, HRESULT)
-    get_phones : Proc(ITAddress2*, VARIANT*, HRESULT)
-    enumerate_phones : Proc(ITAddress2*, IEnumPhone*, HRESULT)
-    get_phone_from_terminal : Proc(ITAddress2*, ITTerminal, ITPhone*, HRESULT)
-    get_preferred_phones : Proc(ITAddress2*, VARIANT*, HRESULT)
-    enumerate_preferred_phones : Proc(ITAddress2*, IEnumPhone*, HRESULT)
-    get_event_filter : Proc(ITAddress2*, TAPI_EVENT, Int32, Int16*, HRESULT)
-    put_event_filter : Proc(ITAddress2*, TAPI_EVENT, Int32, Int16, HRESULT)
-    device_specific : Proc(ITAddress2*, ITCallInfo, UInt8*, UInt32, HRESULT)
-    device_specific_variant : Proc(ITAddress2*, ITCallInfo, VARIANT, HRESULT)
-    negotiate_ext_version : Proc(ITAddress2*, Int32, Int32, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_state : UInt64
+    get_address_name : UInt64
+    get_service_provider_name : UInt64
+    get_tapi_object : UInt64
+    create_call : UInt64
+    get_calls : UInt64
+    enumerate_calls : UInt64
+    get_dialable_address : UInt64
+    create_forward_info_object : UInt64
+    forward : UInt64
+    get_current_forward_info : UInt64
+    put_message_waiting : UInt64
+    get_message_waiting : UInt64
+    put_do_not_disturb : UInt64
+    get_do_not_disturb : UInt64
+    get_phones : UInt64
+    enumerate_phones : UInt64
+    get_phone_from_terminal : UInt64
+    get_preferred_phones : UInt64
+    enumerate_preferred_phones : UInt64
+    get_event_filter : UInt64
+    put_event_filter : UInt64
+    device_specific : UInt64
+    device_specific_variant : UInt64
+    negotiate_ext_version : UInt64
   end
 
   ITAddress2_GUID = "b0ae5d9b-be51-46c9-b0f7-dfa8a22a8bc4"
@@ -3116,21 +3116,21 @@ lib LibWin32
   end
 
   struct ITAddressCapabilitiesVTbl
-    query_interface : Proc(ITAddressCapabilities*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITAddressCapabilities*, UInt32)
-    release : Proc(ITAddressCapabilities*, UInt32)
-    get_type_info_count : Proc(ITAddressCapabilities*, UInt32*, HRESULT)
-    get_type_info : Proc(ITAddressCapabilities*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITAddressCapabilities*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITAddressCapabilities*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_address_capability : Proc(ITAddressCapabilities*, ADDRESS_CAPABILITY, Int32*, HRESULT)
-    get_address_capability_string : Proc(ITAddressCapabilities*, ADDRESS_CAPABILITY_STRING, UInt8**, HRESULT)
-    get_call_treatments : Proc(ITAddressCapabilities*, VARIANT*, HRESULT)
-    enumerate_call_treatments : Proc(ITAddressCapabilities*, IEnumBstr*, HRESULT)
-    get_completion_messages : Proc(ITAddressCapabilities*, VARIANT*, HRESULT)
-    enumerate_completion_messages : Proc(ITAddressCapabilities*, IEnumBstr*, HRESULT)
-    get_device_classes : Proc(ITAddressCapabilities*, VARIANT*, HRESULT)
-    enumerate_device_classes : Proc(ITAddressCapabilities*, IEnumBstr*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_address_capability : UInt64
+    get_address_capability_string : UInt64
+    get_call_treatments : UInt64
+    enumerate_call_treatments : UInt64
+    get_completion_messages : UInt64
+    enumerate_completion_messages : UInt64
+    get_device_classes : UInt64
+    enumerate_device_classes : UInt64
   end
 
   ITAddressCapabilities_GUID = "8df232f5-821b-11d1-bb5c-00c04fb6809f"
@@ -3140,46 +3140,46 @@ lib LibWin32
   end
 
   struct ITPhoneVTbl
-    query_interface : Proc(ITPhone*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITPhone*, UInt32)
-    release : Proc(ITPhone*, UInt32)
-    get_type_info_count : Proc(ITPhone*, UInt32*, HRESULT)
-    get_type_info : Proc(ITPhone*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITPhone*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITPhone*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    open : Proc(ITPhone*, PHONE_PRIVILEGE, HRESULT)
-    close : Proc(ITPhone*, HRESULT)
-    get_addresses : Proc(ITPhone*, VARIANT*, HRESULT)
-    enumerate_addresses : Proc(ITPhone*, IEnumAddress*, HRESULT)
-    get_phone_caps_long : Proc(ITPhone*, PHONECAPS_LONG, Int32*, HRESULT)
-    get_phone_caps_string : Proc(ITPhone*, PHONECAPS_STRING, UInt8**, HRESULT)
-    get_terminals : Proc(ITPhone*, ITAddress, VARIANT*, HRESULT)
-    enumerate_terminals : Proc(ITPhone*, ITAddress, IEnumTerminal*, HRESULT)
-    get_button_mode : Proc(ITPhone*, Int32, PHONE_BUTTON_MODE*, HRESULT)
-    put_button_mode : Proc(ITPhone*, Int32, PHONE_BUTTON_MODE, HRESULT)
-    get_button_function : Proc(ITPhone*, Int32, PHONE_BUTTON_FUNCTION*, HRESULT)
-    put_button_function : Proc(ITPhone*, Int32, PHONE_BUTTON_FUNCTION, HRESULT)
-    get_button_text : Proc(ITPhone*, Int32, UInt8**, HRESULT)
-    put_button_text : Proc(ITPhone*, Int32, UInt8*, HRESULT)
-    get_button_state : Proc(ITPhone*, Int32, PHONE_BUTTON_STATE*, HRESULT)
-    get_hook_switch_state : Proc(ITPhone*, PHONE_HOOK_SWITCH_DEVICE, PHONE_HOOK_SWITCH_STATE*, HRESULT)
-    put_hook_switch_state : Proc(ITPhone*, PHONE_HOOK_SWITCH_DEVICE, PHONE_HOOK_SWITCH_STATE, HRESULT)
-    put_ring_mode : Proc(ITPhone*, Int32, HRESULT)
-    get_ring_mode : Proc(ITPhone*, Int32*, HRESULT)
-    put_ring_volume : Proc(ITPhone*, Int32, HRESULT)
-    get_ring_volume : Proc(ITPhone*, Int32*, HRESULT)
-    get_privilege : Proc(ITPhone*, PHONE_PRIVILEGE*, HRESULT)
-    get_phone_caps_buffer : Proc(ITPhone*, PHONECAPS_BUFFER, UInt32*, UInt8**, HRESULT)
-    get_phone_caps_buffer2 : Proc(ITPhone*, PHONECAPS_BUFFER, VARIANT*, HRESULT)
-    get_lamp_mode : Proc(ITPhone*, Int32, PHONE_LAMP_MODE*, HRESULT)
-    put_lamp_mode : Proc(ITPhone*, Int32, PHONE_LAMP_MODE, HRESULT)
-    get_display : Proc(ITPhone*, UInt8**, HRESULT)
-    set_display : Proc(ITPhone*, Int32, Int32, UInt8*, HRESULT)
-    get_preferred_addresses : Proc(ITPhone*, VARIANT*, HRESULT)
-    enumerate_preferred_addresses : Proc(ITPhone*, IEnumAddress*, HRESULT)
-    device_specific : Proc(ITPhone*, UInt8*, UInt32, HRESULT)
-    device_specific_variant : Proc(ITPhone*, VARIANT, HRESULT)
-    negotiate_ext_version : Proc(ITPhone*, Int32, Int32, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    open : UInt64
+    close : UInt64
+    get_addresses : UInt64
+    enumerate_addresses : UInt64
+    get_phone_caps_long : UInt64
+    get_phone_caps_string : UInt64
+    get_terminals : UInt64
+    enumerate_terminals : UInt64
+    get_button_mode : UInt64
+    put_button_mode : UInt64
+    get_button_function : UInt64
+    put_button_function : UInt64
+    get_button_text : UInt64
+    put_button_text : UInt64
+    get_button_state : UInt64
+    get_hook_switch_state : UInt64
+    put_hook_switch_state : UInt64
+    put_ring_mode : UInt64
+    get_ring_mode : UInt64
+    put_ring_volume : UInt64
+    get_ring_volume : UInt64
+    get_privilege : UInt64
+    get_phone_caps_buffer : UInt64
+    get_phone_caps_buffer2 : UInt64
+    get_lamp_mode : UInt64
+    put_lamp_mode : UInt64
+    get_display : UInt64
+    set_display : UInt64
+    get_preferred_addresses : UInt64
+    enumerate_preferred_addresses : UInt64
+    device_specific : UInt64
+    device_specific_variant : UInt64
+    negotiate_ext_version : UInt64
   end
 
   ITPhone_GUID = "09d48db4-10cc-4388-9de7-a8465618975a"
@@ -3189,45 +3189,45 @@ lib LibWin32
   end
 
   struct ITAutomatedPhoneControlVTbl
-    query_interface : Proc(ITAutomatedPhoneControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITAutomatedPhoneControl*, UInt32)
-    release : Proc(ITAutomatedPhoneControl*, UInt32)
-    get_type_info_count : Proc(ITAutomatedPhoneControl*, UInt32*, HRESULT)
-    get_type_info : Proc(ITAutomatedPhoneControl*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITAutomatedPhoneControl*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITAutomatedPhoneControl*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    start_tone : Proc(ITAutomatedPhoneControl*, PHONE_TONE, Int32, HRESULT)
-    stop_tone : Proc(ITAutomatedPhoneControl*, HRESULT)
-    get_tone : Proc(ITAutomatedPhoneControl*, PHONE_TONE*, HRESULT)
-    start_ringer : Proc(ITAutomatedPhoneControl*, Int32, Int32, HRESULT)
-    stop_ringer : Proc(ITAutomatedPhoneControl*, HRESULT)
-    get_ringer : Proc(ITAutomatedPhoneControl*, Int16*, HRESULT)
-    put_phone_handling_enabled : Proc(ITAutomatedPhoneControl*, Int16, HRESULT)
-    get_phone_handling_enabled : Proc(ITAutomatedPhoneControl*, Int16*, HRESULT)
-    put_auto_end_of_number_timeout : Proc(ITAutomatedPhoneControl*, Int32, HRESULT)
-    get_auto_end_of_number_timeout : Proc(ITAutomatedPhoneControl*, Int32*, HRESULT)
-    put_auto_dialtone : Proc(ITAutomatedPhoneControl*, Int16, HRESULT)
-    get_auto_dialtone : Proc(ITAutomatedPhoneControl*, Int16*, HRESULT)
-    put_auto_stop_tones_on_on_hook : Proc(ITAutomatedPhoneControl*, Int16, HRESULT)
-    get_auto_stop_tones_on_on_hook : Proc(ITAutomatedPhoneControl*, Int16*, HRESULT)
-    put_auto_stop_ring_on_off_hook : Proc(ITAutomatedPhoneControl*, Int16, HRESULT)
-    get_auto_stop_ring_on_off_hook : Proc(ITAutomatedPhoneControl*, Int16*, HRESULT)
-    put_auto_keypad_tones : Proc(ITAutomatedPhoneControl*, Int16, HRESULT)
-    get_auto_keypad_tones : Proc(ITAutomatedPhoneControl*, Int16*, HRESULT)
-    put_auto_keypad_tones_minimum_duration : Proc(ITAutomatedPhoneControl*, Int32, HRESULT)
-    get_auto_keypad_tones_minimum_duration : Proc(ITAutomatedPhoneControl*, Int32*, HRESULT)
-    put_auto_volume_control : Proc(ITAutomatedPhoneControl*, Int16, HRESULT)
-    get_auto_volume_control : Proc(ITAutomatedPhoneControl*, Int16*, HRESULT)
-    put_auto_volume_control_step : Proc(ITAutomatedPhoneControl*, Int32, HRESULT)
-    get_auto_volume_control_step : Proc(ITAutomatedPhoneControl*, Int32*, HRESULT)
-    put_auto_volume_control_repeat_delay : Proc(ITAutomatedPhoneControl*, Int32, HRESULT)
-    get_auto_volume_control_repeat_delay : Proc(ITAutomatedPhoneControl*, Int32*, HRESULT)
-    put_auto_volume_control_repeat_period : Proc(ITAutomatedPhoneControl*, Int32, HRESULT)
-    get_auto_volume_control_repeat_period : Proc(ITAutomatedPhoneControl*, Int32*, HRESULT)
-    select_call : Proc(ITAutomatedPhoneControl*, ITCallInfo, Int16, HRESULT)
-    unselect_call : Proc(ITAutomatedPhoneControl*, ITCallInfo, HRESULT)
-    enumerate_selected_calls : Proc(ITAutomatedPhoneControl*, IEnumCall*, HRESULT)
-    get_selected_calls : Proc(ITAutomatedPhoneControl*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    start_tone : UInt64
+    stop_tone : UInt64
+    get_tone : UInt64
+    start_ringer : UInt64
+    stop_ringer : UInt64
+    get_ringer : UInt64
+    put_phone_handling_enabled : UInt64
+    get_phone_handling_enabled : UInt64
+    put_auto_end_of_number_timeout : UInt64
+    get_auto_end_of_number_timeout : UInt64
+    put_auto_dialtone : UInt64
+    get_auto_dialtone : UInt64
+    put_auto_stop_tones_on_on_hook : UInt64
+    get_auto_stop_tones_on_on_hook : UInt64
+    put_auto_stop_ring_on_off_hook : UInt64
+    get_auto_stop_ring_on_off_hook : UInt64
+    put_auto_keypad_tones : UInt64
+    get_auto_keypad_tones : UInt64
+    put_auto_keypad_tones_minimum_duration : UInt64
+    get_auto_keypad_tones_minimum_duration : UInt64
+    put_auto_volume_control : UInt64
+    get_auto_volume_control : UInt64
+    put_auto_volume_control_step : UInt64
+    get_auto_volume_control_step : UInt64
+    put_auto_volume_control_repeat_delay : UInt64
+    get_auto_volume_control_repeat_delay : UInt64
+    put_auto_volume_control_repeat_period : UInt64
+    get_auto_volume_control_repeat_period : UInt64
+    select_call : UInt64
+    unselect_call : UInt64
+    enumerate_selected_calls : UInt64
+    get_selected_calls : UInt64
   end
 
   ITAutomatedPhoneControl_GUID = "1ee1af0e-6159-4a61-b79b-6a4ba3fc9dfc"
@@ -3237,31 +3237,31 @@ lib LibWin32
   end
 
   struct ITBasicCallControlVTbl
-    query_interface : Proc(ITBasicCallControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITBasicCallControl*, UInt32)
-    release : Proc(ITBasicCallControl*, UInt32)
-    get_type_info_count : Proc(ITBasicCallControl*, UInt32*, HRESULT)
-    get_type_info : Proc(ITBasicCallControl*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITBasicCallControl*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITBasicCallControl*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    connect : Proc(ITBasicCallControl*, Int16, HRESULT)
-    answer : Proc(ITBasicCallControl*, HRESULT)
-    disconnect : Proc(ITBasicCallControl*, DISCONNECT_CODE, HRESULT)
-    hold : Proc(ITBasicCallControl*, Int16, HRESULT)
-    handoff_direct : Proc(ITBasicCallControl*, UInt8*, HRESULT)
-    handoff_indirect : Proc(ITBasicCallControl*, Int32, HRESULT)
-    conference : Proc(ITBasicCallControl*, ITBasicCallControl, Int16, HRESULT)
-    transfer : Proc(ITBasicCallControl*, ITBasicCallControl, Int16, HRESULT)
-    blind_transfer : Proc(ITBasicCallControl*, UInt8*, HRESULT)
-    swap_hold : Proc(ITBasicCallControl*, ITBasicCallControl, HRESULT)
-    park_direct : Proc(ITBasicCallControl*, UInt8*, HRESULT)
-    park_indirect : Proc(ITBasicCallControl*, UInt8**, HRESULT)
-    unpark : Proc(ITBasicCallControl*, HRESULT)
-    set_qos : Proc(ITBasicCallControl*, Int32, QOS_SERVICE_LEVEL, HRESULT)
-    pickup : Proc(ITBasicCallControl*, UInt8*, HRESULT)
-    dial : Proc(ITBasicCallControl*, UInt8*, HRESULT)
-    finish : Proc(ITBasicCallControl*, FINISH_MODE, HRESULT)
-    remove_from_conference : Proc(ITBasicCallControl*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    connect : UInt64
+    answer : UInt64
+    disconnect : UInt64
+    hold : UInt64
+    handoff_direct : UInt64
+    handoff_indirect : UInt64
+    conference : UInt64
+    transfer : UInt64
+    blind_transfer : UInt64
+    swap_hold : UInt64
+    park_direct : UInt64
+    park_indirect : UInt64
+    unpark : UInt64
+    set_qos : UInt64
+    pickup : UInt64
+    dial : UInt64
+    finish : UInt64
+    remove_from_conference : UInt64
   end
 
   ITBasicCallControl_GUID = "b1efc389-9355-11d0-835c-00aa003ccabd"
@@ -3271,26 +3271,26 @@ lib LibWin32
   end
 
   struct ITCallInfoVTbl
-    query_interface : Proc(ITCallInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITCallInfo*, UInt32)
-    release : Proc(ITCallInfo*, UInt32)
-    get_type_info_count : Proc(ITCallInfo*, UInt32*, HRESULT)
-    get_type_info : Proc(ITCallInfo*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITCallInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITCallInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_address : Proc(ITCallInfo*, ITAddress*, HRESULT)
-    get_call_state : Proc(ITCallInfo*, CALL_STATE*, HRESULT)
-    get_privilege : Proc(ITCallInfo*, CALL_PRIVILEGE*, HRESULT)
-    get_call_hub : Proc(ITCallInfo*, ITCallHub*, HRESULT)
-    get_call_info_long : Proc(ITCallInfo*, CALLINFO_LONG, Int32*, HRESULT)
-    put_call_info_long : Proc(ITCallInfo*, CALLINFO_LONG, Int32, HRESULT)
-    get_call_info_string : Proc(ITCallInfo*, CALLINFO_STRING, UInt8**, HRESULT)
-    put_call_info_string : Proc(ITCallInfo*, CALLINFO_STRING, UInt8*, HRESULT)
-    get_call_info_buffer : Proc(ITCallInfo*, CALLINFO_BUFFER, VARIANT*, HRESULT)
-    put_call_info_buffer : Proc(ITCallInfo*, CALLINFO_BUFFER, VARIANT, HRESULT)
-    get_call_info_buffer2 : Proc(ITCallInfo*, CALLINFO_BUFFER, UInt32*, UInt8**, HRESULT)
-    set_call_info_buffer : Proc(ITCallInfo*, CALLINFO_BUFFER, UInt32, UInt8*, HRESULT)
-    release_user_user_info : Proc(ITCallInfo*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_address : UInt64
+    get_call_state : UInt64
+    get_privilege : UInt64
+    get_call_hub : UInt64
+    get_call_info_long : UInt64
+    put_call_info_long : UInt64
+    get_call_info_string : UInt64
+    put_call_info_string : UInt64
+    get_call_info_buffer : UInt64
+    put_call_info_buffer : UInt64
+    get_call_info_buffer2 : UInt64
+    set_call_info_buffer : UInt64
+    release_user_user_info : UInt64
   end
 
   ITCallInfo_GUID = "350f85d1-1227-11d3-83d4-00c04fb6809f"
@@ -3300,28 +3300,28 @@ lib LibWin32
   end
 
   struct ITCallInfo2VTbl
-    query_interface : Proc(ITCallInfo2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITCallInfo2*, UInt32)
-    release : Proc(ITCallInfo2*, UInt32)
-    get_type_info_count : Proc(ITCallInfo2*, UInt32*, HRESULT)
-    get_type_info : Proc(ITCallInfo2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITCallInfo2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITCallInfo2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_address : Proc(ITCallInfo2*, ITAddress*, HRESULT)
-    get_call_state : Proc(ITCallInfo2*, CALL_STATE*, HRESULT)
-    get_privilege : Proc(ITCallInfo2*, CALL_PRIVILEGE*, HRESULT)
-    get_call_hub : Proc(ITCallInfo2*, ITCallHub*, HRESULT)
-    get_call_info_long : Proc(ITCallInfo2*, CALLINFO_LONG, Int32*, HRESULT)
-    put_call_info_long : Proc(ITCallInfo2*, CALLINFO_LONG, Int32, HRESULT)
-    get_call_info_string : Proc(ITCallInfo2*, CALLINFO_STRING, UInt8**, HRESULT)
-    put_call_info_string : Proc(ITCallInfo2*, CALLINFO_STRING, UInt8*, HRESULT)
-    get_call_info_buffer : Proc(ITCallInfo2*, CALLINFO_BUFFER, VARIANT*, HRESULT)
-    put_call_info_buffer : Proc(ITCallInfo2*, CALLINFO_BUFFER, VARIANT, HRESULT)
-    get_call_info_buffer2 : Proc(ITCallInfo2*, CALLINFO_BUFFER, UInt32*, UInt8**, HRESULT)
-    set_call_info_buffer : Proc(ITCallInfo2*, CALLINFO_BUFFER, UInt32, UInt8*, HRESULT)
-    release_user_user_info : Proc(ITCallInfo2*, HRESULT)
-    get_event_filter : Proc(ITCallInfo2*, TAPI_EVENT, Int32, Int16*, HRESULT)
-    put_event_filter : Proc(ITCallInfo2*, TAPI_EVENT, Int32, Int16, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_address : UInt64
+    get_call_state : UInt64
+    get_privilege : UInt64
+    get_call_hub : UInt64
+    get_call_info_long : UInt64
+    put_call_info_long : UInt64
+    get_call_info_string : UInt64
+    put_call_info_string : UInt64
+    get_call_info_buffer : UInt64
+    put_call_info_buffer : UInt64
+    get_call_info_buffer2 : UInt64
+    set_call_info_buffer : UInt64
+    release_user_user_info : UInt64
+    get_event_filter : UInt64
+    put_event_filter : UInt64
   end
 
   ITCallInfo2_GUID = "94d70ca6-7ab0-4daa-81ca-b8f8643faec1"
@@ -3331,19 +3331,19 @@ lib LibWin32
   end
 
   struct ITTerminalVTbl
-    query_interface : Proc(ITTerminal*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITTerminal*, UInt32)
-    release : Proc(ITTerminal*, UInt32)
-    get_type_info_count : Proc(ITTerminal*, UInt32*, HRESULT)
-    get_type_info : Proc(ITTerminal*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITTerminal*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITTerminal*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(ITTerminal*, UInt8**, HRESULT)
-    get_state : Proc(ITTerminal*, TERMINAL_STATE*, HRESULT)
-    get_terminal_type : Proc(ITTerminal*, TERMINAL_TYPE*, HRESULT)
-    get_terminal_class : Proc(ITTerminal*, UInt8**, HRESULT)
-    get_media_type : Proc(ITTerminal*, Int32*, HRESULT)
-    get_direction : Proc(ITTerminal*, TERMINAL_DIRECTION*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_state : UInt64
+    get_terminal_type : UInt64
+    get_terminal_class : UInt64
+    get_media_type : UInt64
+    get_direction : UInt64
   end
 
   ITTerminal_GUID = "b1efc38a-9355-11d0-835c-00aa003ccabd"
@@ -3353,19 +3353,19 @@ lib LibWin32
   end
 
   struct ITMultiTrackTerminalVTbl
-    query_interface : Proc(ITMultiTrackTerminal*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITMultiTrackTerminal*, UInt32)
-    release : Proc(ITMultiTrackTerminal*, UInt32)
-    get_type_info_count : Proc(ITMultiTrackTerminal*, UInt32*, HRESULT)
-    get_type_info : Proc(ITMultiTrackTerminal*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITMultiTrackTerminal*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITMultiTrackTerminal*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_track_terminals : Proc(ITMultiTrackTerminal*, VARIANT*, HRESULT)
-    enumerate_track_terminals : Proc(ITMultiTrackTerminal*, IEnumTerminal*, HRESULT)
-    create_track_terminal : Proc(ITMultiTrackTerminal*, Int32, TERMINAL_DIRECTION, ITTerminal*, HRESULT)
-    get_media_types_in_use : Proc(ITMultiTrackTerminal*, Int32*, HRESULT)
-    get_directions_in_use : Proc(ITMultiTrackTerminal*, TERMINAL_DIRECTION*, HRESULT)
-    remove_track_terminal : Proc(ITMultiTrackTerminal*, ITTerminal, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_track_terminals : UInt64
+    enumerate_track_terminals : UInt64
+    create_track_terminal : UInt64
+    get_media_types_in_use : UInt64
+    get_directions_in_use : UInt64
+    remove_track_terminal : UInt64
   end
 
   ITMultiTrackTerminal_GUID = "fe040091-ade8-4072-95c9-bf7de8c54b44"
@@ -3375,19 +3375,19 @@ lib LibWin32
   end
 
   struct ITFileTrackVTbl
-    query_interface : Proc(ITFileTrack*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITFileTrack*, UInt32)
-    release : Proc(ITFileTrack*, UInt32)
-    get_type_info_count : Proc(ITFileTrack*, UInt32*, HRESULT)
-    get_type_info : Proc(ITFileTrack*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITFileTrack*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITFileTrack*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_format : Proc(ITFileTrack*, AM_MEDIA_TYPE**, HRESULT)
-    put_format : Proc(ITFileTrack*, AM_MEDIA_TYPE*, HRESULT)
-    get_controlling_terminal : Proc(ITFileTrack*, ITTerminal*, HRESULT)
-    get_audio_format_for_scripting : Proc(ITFileTrack*, ITScriptableAudioFormat*, HRESULT)
-    put_audio_format_for_scripting : Proc(ITFileTrack*, ITScriptableAudioFormat, HRESULT)
-    get_empty_audio_format_for_scripting : Proc(ITFileTrack*, ITScriptableAudioFormat*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_format : UInt64
+    put_format : UInt64
+    get_controlling_terminal : UInt64
+    get_audio_format_for_scripting : UInt64
+    put_audio_format_for_scripting : UInt64
+    get_empty_audio_format_for_scripting : UInt64
   end
 
   ITFileTrack_GUID = "31ca6ea9-c08a-4bea-8811-8e9c1ba3ea3a"
@@ -3397,15 +3397,15 @@ lib LibWin32
   end
 
   struct ITMediaPlaybackVTbl
-    query_interface : Proc(ITMediaPlayback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITMediaPlayback*, UInt32)
-    release : Proc(ITMediaPlayback*, UInt32)
-    get_type_info_count : Proc(ITMediaPlayback*, UInt32*, HRESULT)
-    get_type_info : Proc(ITMediaPlayback*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITMediaPlayback*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITMediaPlayback*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    put_play_list : Proc(ITMediaPlayback*, VARIANT, HRESULT)
-    get_play_list : Proc(ITMediaPlayback*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    put_play_list : UInt64
+    get_play_list : UInt64
   end
 
   ITMediaPlayback_GUID = "627e8ae6-ae4c-4a69-bb63-2ad625404b77"
@@ -3415,15 +3415,15 @@ lib LibWin32
   end
 
   struct ITMediaRecordVTbl
-    query_interface : Proc(ITMediaRecord*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITMediaRecord*, UInt32)
-    release : Proc(ITMediaRecord*, UInt32)
-    get_type_info_count : Proc(ITMediaRecord*, UInt32*, HRESULT)
-    get_type_info : Proc(ITMediaRecord*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITMediaRecord*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITMediaRecord*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    put_file_name : Proc(ITMediaRecord*, UInt8*, HRESULT)
-    get_file_name : Proc(ITMediaRecord*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    put_file_name : UInt64
+    get_file_name : UInt64
   end
 
   ITMediaRecord_GUID = "f5dd4592-5476-4cc1-9d4d-fad3eefe7db2"
@@ -3433,17 +3433,17 @@ lib LibWin32
   end
 
   struct ITMediaControlVTbl
-    query_interface : Proc(ITMediaControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITMediaControl*, UInt32)
-    release : Proc(ITMediaControl*, UInt32)
-    get_type_info_count : Proc(ITMediaControl*, UInt32*, HRESULT)
-    get_type_info : Proc(ITMediaControl*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITMediaControl*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITMediaControl*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    start : Proc(ITMediaControl*, HRESULT)
-    stop : Proc(ITMediaControl*, HRESULT)
-    pause : Proc(ITMediaControl*, HRESULT)
-    get_media_state : Proc(ITMediaControl*, TERMINAL_MEDIA_STATE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    start : UInt64
+    stop : UInt64
+    pause : UInt64
+    get_media_state : UInt64
   end
 
   ITMediaControl_GUID = "c445dde8-5199-4bc7-9807-5ffb92e42e09"
@@ -3453,17 +3453,17 @@ lib LibWin32
   end
 
   struct ITBasicAudioTerminalVTbl
-    query_interface : Proc(ITBasicAudioTerminal*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITBasicAudioTerminal*, UInt32)
-    release : Proc(ITBasicAudioTerminal*, UInt32)
-    get_type_info_count : Proc(ITBasicAudioTerminal*, UInt32*, HRESULT)
-    get_type_info : Proc(ITBasicAudioTerminal*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITBasicAudioTerminal*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITBasicAudioTerminal*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    put_volume : Proc(ITBasicAudioTerminal*, Int32, HRESULT)
-    get_volume : Proc(ITBasicAudioTerminal*, Int32*, HRESULT)
-    put_balance : Proc(ITBasicAudioTerminal*, Int32, HRESULT)
-    get_balance : Proc(ITBasicAudioTerminal*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    put_volume : UInt64
+    get_volume : UInt64
+    put_balance : UInt64
+    get_balance : UInt64
   end
 
   ITBasicAudioTerminal_GUID = "b1efc38d-9355-11d0-835c-00aa003ccabd"
@@ -3473,14 +3473,14 @@ lib LibWin32
   end
 
   struct ITStaticAudioTerminalVTbl
-    query_interface : Proc(ITStaticAudioTerminal*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITStaticAudioTerminal*, UInt32)
-    release : Proc(ITStaticAudioTerminal*, UInt32)
-    get_type_info_count : Proc(ITStaticAudioTerminal*, UInt32*, HRESULT)
-    get_type_info : Proc(ITStaticAudioTerminal*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITStaticAudioTerminal*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITStaticAudioTerminal*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_wave_id : Proc(ITStaticAudioTerminal*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_wave_id : UInt64
   end
 
   ITStaticAudioTerminal_GUID = "a86b7871-d14c-48e6-922e-a8d15f984800"
@@ -3490,18 +3490,18 @@ lib LibWin32
   end
 
   struct ITCallHubVTbl
-    query_interface : Proc(ITCallHub*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITCallHub*, UInt32)
-    release : Proc(ITCallHub*, UInt32)
-    get_type_info_count : Proc(ITCallHub*, UInt32*, HRESULT)
-    get_type_info : Proc(ITCallHub*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITCallHub*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITCallHub*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    clear : Proc(ITCallHub*, HRESULT)
-    enumerate_calls : Proc(ITCallHub*, IEnumCall*, HRESULT)
-    get_calls : Proc(ITCallHub*, VARIANT*, HRESULT)
-    get_num_calls : Proc(ITCallHub*, Int32*, HRESULT)
-    get_state : Proc(ITCallHub*, CALLHUB_STATE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    clear : UInt64
+    enumerate_calls : UInt64
+    get_calls : UInt64
+    get_num_calls : UInt64
+    get_state : UInt64
   end
 
   ITCallHub_GUID = "a3c1544e-5b92-11d1-8f4e-00c04fb6809f"
@@ -3511,12 +3511,12 @@ lib LibWin32
   end
 
   struct ITLegacyAddressMediaControlVTbl
-    query_interface : Proc(ITLegacyAddressMediaControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITLegacyAddressMediaControl*, UInt32)
-    release : Proc(ITLegacyAddressMediaControl*, UInt32)
-    get_id : Proc(ITLegacyAddressMediaControl*, UInt8*, UInt32*, UInt8**, HRESULT)
-    get_dev_config : Proc(ITLegacyAddressMediaControl*, UInt8*, UInt32*, UInt8**, HRESULT)
-    set_dev_config : Proc(ITLegacyAddressMediaControl*, UInt8*, UInt32, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_id : UInt64
+    get_dev_config : UInt64
+    set_dev_config : UInt64
   end
 
   ITLegacyAddressMediaControl_GUID = "ab493640-4c0b-11d2-a046-00c04fb6809f"
@@ -3526,18 +3526,18 @@ lib LibWin32
   end
 
   struct ITPrivateEventVTbl
-    query_interface : Proc(ITPrivateEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITPrivateEvent*, UInt32)
-    release : Proc(ITPrivateEvent*, UInt32)
-    get_type_info_count : Proc(ITPrivateEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITPrivateEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITPrivateEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITPrivateEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_address : Proc(ITPrivateEvent*, ITAddress*, HRESULT)
-    get_call : Proc(ITPrivateEvent*, ITCallInfo*, HRESULT)
-    get_call_hub : Proc(ITPrivateEvent*, ITCallHub*, HRESULT)
-    get_event_code : Proc(ITPrivateEvent*, Int32*, HRESULT)
-    get_event_interface : Proc(ITPrivateEvent*, IDispatch*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_address : UInt64
+    get_call : UInt64
+    get_call_hub : UInt64
+    get_event_code : UInt64
+    get_event_interface : UInt64
   end
 
   ITPrivateEvent_GUID = "0e269cd0-10d4-4121-9c22-9c85d625650d"
@@ -3547,14 +3547,14 @@ lib LibWin32
   end
 
   struct ITLegacyAddressMediaControl2VTbl
-    query_interface : Proc(ITLegacyAddressMediaControl2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITLegacyAddressMediaControl2*, UInt32)
-    release : Proc(ITLegacyAddressMediaControl2*, UInt32)
-    get_id : Proc(ITLegacyAddressMediaControl2*, UInt8*, UInt32*, UInt8**, HRESULT)
-    get_dev_config : Proc(ITLegacyAddressMediaControl2*, UInt8*, UInt32*, UInt8**, HRESULT)
-    set_dev_config : Proc(ITLegacyAddressMediaControl2*, UInt8*, UInt32, UInt8*, HRESULT)
-    config_dialog : Proc(ITLegacyAddressMediaControl2*, LibC::HANDLE, UInt8*, HRESULT)
-    config_dialog_edit : Proc(ITLegacyAddressMediaControl2*, LibC::HANDLE, UInt8*, UInt32, UInt8*, UInt32*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_id : UInt64
+    get_dev_config : UInt64
+    set_dev_config : UInt64
+    config_dialog : UInt64
+    config_dialog_edit : UInt64
   end
 
   ITLegacyAddressMediaControl2_GUID = "b0ee512b-a531-409e-9dd9-4099fe86c738"
@@ -3564,18 +3564,18 @@ lib LibWin32
   end
 
   struct ITLegacyCallMediaControlVTbl
-    query_interface : Proc(ITLegacyCallMediaControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITLegacyCallMediaControl*, UInt32)
-    release : Proc(ITLegacyCallMediaControl*, UInt32)
-    get_type_info_count : Proc(ITLegacyCallMediaControl*, UInt32*, HRESULT)
-    get_type_info : Proc(ITLegacyCallMediaControl*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITLegacyCallMediaControl*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITLegacyCallMediaControl*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    detect_digits : Proc(ITLegacyCallMediaControl*, Int32, HRESULT)
-    generate_digits : Proc(ITLegacyCallMediaControl*, UInt8*, Int32, HRESULT)
-    get_id : Proc(ITLegacyCallMediaControl*, UInt8*, UInt32*, UInt8**, HRESULT)
-    set_media_type : Proc(ITLegacyCallMediaControl*, Int32, HRESULT)
-    monitor_media : Proc(ITLegacyCallMediaControl*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    detect_digits : UInt64
+    generate_digits : UInt64
+    get_id : UInt64
+    set_media_type : UInt64
+    monitor_media : UInt64
   end
 
   ITLegacyCallMediaControl_GUID = "d624582f-cc23-4436-b8a5-47c625c8045d"
@@ -3585,28 +3585,28 @@ lib LibWin32
   end
 
   struct ITLegacyCallMediaControl2VTbl
-    query_interface : Proc(ITLegacyCallMediaControl2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITLegacyCallMediaControl2*, UInt32)
-    release : Proc(ITLegacyCallMediaControl2*, UInt32)
-    get_type_info_count : Proc(ITLegacyCallMediaControl2*, UInt32*, HRESULT)
-    get_type_info : Proc(ITLegacyCallMediaControl2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITLegacyCallMediaControl2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITLegacyCallMediaControl2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    detect_digits : Proc(ITLegacyCallMediaControl2*, Int32, HRESULT)
-    generate_digits : Proc(ITLegacyCallMediaControl2*, UInt8*, Int32, HRESULT)
-    get_id : Proc(ITLegacyCallMediaControl2*, UInt8*, UInt32*, UInt8**, HRESULT)
-    set_media_type : Proc(ITLegacyCallMediaControl2*, Int32, HRESULT)
-    monitor_media : Proc(ITLegacyCallMediaControl2*, Int32, HRESULT)
-    generate_digits2 : Proc(ITLegacyCallMediaControl2*, UInt8*, Int32, Int32, HRESULT)
-    gather_digits : Proc(ITLegacyCallMediaControl2*, Int32, Int32, UInt8*, Int32, Int32, HRESULT)
-    detect_tones : Proc(ITLegacyCallMediaControl2*, TAPI_DETECTTONE*, Int32, HRESULT)
-    detect_tones_by_collection : Proc(ITLegacyCallMediaControl2*, ITCollection2, HRESULT)
-    generate_tone : Proc(ITLegacyCallMediaControl2*, TAPI_TONEMODE, Int32, HRESULT)
-    generate_custom_tones : Proc(ITLegacyCallMediaControl2*, TAPI_CUSTOMTONE*, Int32, Int32, HRESULT)
-    generate_custom_tones_by_collection : Proc(ITLegacyCallMediaControl2*, ITCollection2, Int32, HRESULT)
-    create_detect_tone_object : Proc(ITLegacyCallMediaControl2*, ITDetectTone*, HRESULT)
-    create_custom_tone_object : Proc(ITLegacyCallMediaControl2*, ITCustomTone*, HRESULT)
-    get_id_as_variant : Proc(ITLegacyCallMediaControl2*, UInt8*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    detect_digits : UInt64
+    generate_digits : UInt64
+    get_id : UInt64
+    set_media_type : UInt64
+    monitor_media : UInt64
+    generate_digits2 : UInt64
+    gather_digits : UInt64
+    detect_tones : UInt64
+    detect_tones_by_collection : UInt64
+    generate_tone : UInt64
+    generate_custom_tones : UInt64
+    generate_custom_tones_by_collection : UInt64
+    create_detect_tone_object : UInt64
+    create_custom_tone_object : UInt64
+    get_id_as_variant : UInt64
   end
 
   ITLegacyCallMediaControl2_GUID = "57ca332d-7bc2-44f1-a60c-936fe8d7ce73"
@@ -3616,19 +3616,19 @@ lib LibWin32
   end
 
   struct ITDetectToneVTbl
-    query_interface : Proc(ITDetectTone*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITDetectTone*, UInt32)
-    release : Proc(ITDetectTone*, UInt32)
-    get_type_info_count : Proc(ITDetectTone*, UInt32*, HRESULT)
-    get_type_info : Proc(ITDetectTone*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITDetectTone*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITDetectTone*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_app_specific : Proc(ITDetectTone*, Int32*, HRESULT)
-    put_app_specific : Proc(ITDetectTone*, Int32, HRESULT)
-    get_duration : Proc(ITDetectTone*, Int32*, HRESULT)
-    put_duration : Proc(ITDetectTone*, Int32, HRESULT)
-    get_frequency : Proc(ITDetectTone*, Int32, Int32*, HRESULT)
-    put_frequency : Proc(ITDetectTone*, Int32, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_app_specific : UInt64
+    put_app_specific : UInt64
+    get_duration : UInt64
+    put_duration : UInt64
+    get_frequency : UInt64
+    put_frequency : UInt64
   end
 
   ITDetectTone_GUID = "961f79bd-3097-49df-a1d6-909b77e89ca0"
@@ -3638,21 +3638,21 @@ lib LibWin32
   end
 
   struct ITCustomToneVTbl
-    query_interface : Proc(ITCustomTone*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITCustomTone*, UInt32)
-    release : Proc(ITCustomTone*, UInt32)
-    get_type_info_count : Proc(ITCustomTone*, UInt32*, HRESULT)
-    get_type_info : Proc(ITCustomTone*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITCustomTone*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITCustomTone*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_frequency : Proc(ITCustomTone*, Int32*, HRESULT)
-    put_frequency : Proc(ITCustomTone*, Int32, HRESULT)
-    get_cadence_on : Proc(ITCustomTone*, Int32*, HRESULT)
-    put_cadence_on : Proc(ITCustomTone*, Int32, HRESULT)
-    get_cadence_off : Proc(ITCustomTone*, Int32*, HRESULT)
-    put_cadence_off : Proc(ITCustomTone*, Int32, HRESULT)
-    get_volume : Proc(ITCustomTone*, Int32*, HRESULT)
-    put_volume : Proc(ITCustomTone*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_frequency : UInt64
+    put_frequency : UInt64
+    get_cadence_on : UInt64
+    put_cadence_on : UInt64
+    get_cadence_off : UInt64
+    put_cadence_off : UInt64
+    get_volume : UInt64
+    put_volume : UInt64
   end
 
   ITCustomTone_GUID = "357ad764-b3c6-4b2a-8fa5-0722827a9254"
@@ -3662,13 +3662,13 @@ lib LibWin32
   end
 
   struct IEnumPhoneVTbl
-    query_interface : Proc(IEnumPhone*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumPhone*, UInt32)
-    release : Proc(IEnumPhone*, UInt32)
-    next : Proc(IEnumPhone*, UInt32, ITPhone*, UInt32*, HRESULT)
-    reset : Proc(IEnumPhone*, HRESULT)
-    skip : Proc(IEnumPhone*, UInt32, HRESULT)
-    clone : Proc(IEnumPhone*, IEnumPhone*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumPhone_GUID = "f15b7669-4780-4595-8c89-fb369c8cf7aa"
@@ -3678,13 +3678,13 @@ lib LibWin32
   end
 
   struct IEnumTerminalVTbl
-    query_interface : Proc(IEnumTerminal*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumTerminal*, UInt32)
-    release : Proc(IEnumTerminal*, UInt32)
-    next : Proc(IEnumTerminal*, UInt32, ITTerminal*, UInt32*, HRESULT)
-    reset : Proc(IEnumTerminal*, HRESULT)
-    skip : Proc(IEnumTerminal*, UInt32, HRESULT)
-    clone : Proc(IEnumTerminal*, IEnumTerminal*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumTerminal_GUID = "ae269cf4-935e-11d0-835c-00aa003ccabd"
@@ -3694,13 +3694,13 @@ lib LibWin32
   end
 
   struct IEnumTerminalClassVTbl
-    query_interface : Proc(IEnumTerminalClass*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumTerminalClass*, UInt32)
-    release : Proc(IEnumTerminalClass*, UInt32)
-    next : Proc(IEnumTerminalClass*, UInt32, Guid*, UInt32*, HRESULT)
-    reset : Proc(IEnumTerminalClass*, HRESULT)
-    skip : Proc(IEnumTerminalClass*, UInt32, HRESULT)
-    clone : Proc(IEnumTerminalClass*, IEnumTerminalClass*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumTerminalClass_GUID = "ae269cf5-935e-11d0-835c-00aa003ccabd"
@@ -3710,13 +3710,13 @@ lib LibWin32
   end
 
   struct IEnumCallVTbl
-    query_interface : Proc(IEnumCall*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumCall*, UInt32)
-    release : Proc(IEnumCall*, UInt32)
-    next : Proc(IEnumCall*, UInt32, ITCallInfo*, UInt32*, HRESULT)
-    reset : Proc(IEnumCall*, HRESULT)
-    skip : Proc(IEnumCall*, UInt32, HRESULT)
-    clone : Proc(IEnumCall*, IEnumCall*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumCall_GUID = "ae269cf6-935e-11d0-835c-00aa003ccabd"
@@ -3726,13 +3726,13 @@ lib LibWin32
   end
 
   struct IEnumAddressVTbl
-    query_interface : Proc(IEnumAddress*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumAddress*, UInt32)
-    release : Proc(IEnumAddress*, UInt32)
-    next : Proc(IEnumAddress*, UInt32, ITAddress*, UInt32*, HRESULT)
-    reset : Proc(IEnumAddress*, HRESULT)
-    skip : Proc(IEnumAddress*, UInt32, HRESULT)
-    clone : Proc(IEnumAddress*, IEnumAddress*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumAddress_GUID = "1666fca1-9363-11d0-835c-00aa003ccabd"
@@ -3742,13 +3742,13 @@ lib LibWin32
   end
 
   struct IEnumCallHubVTbl
-    query_interface : Proc(IEnumCallHub*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumCallHub*, UInt32)
-    release : Proc(IEnumCallHub*, UInt32)
-    next : Proc(IEnumCallHub*, UInt32, ITCallHub*, UInt32*, HRESULT)
-    reset : Proc(IEnumCallHub*, HRESULT)
-    skip : Proc(IEnumCallHub*, UInt32, HRESULT)
-    clone : Proc(IEnumCallHub*, IEnumCallHub*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumCallHub_GUID = "a3c15450-5b92-11d1-8f4e-00c04fb6809f"
@@ -3758,13 +3758,13 @@ lib LibWin32
   end
 
   struct IEnumBstrVTbl
-    query_interface : Proc(IEnumBstr*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumBstr*, UInt32)
-    release : Proc(IEnumBstr*, UInt32)
-    next : Proc(IEnumBstr*, UInt32, UInt8**, UInt32*, HRESULT)
-    reset : Proc(IEnumBstr*, HRESULT)
-    skip : Proc(IEnumBstr*, UInt32, HRESULT)
-    clone : Proc(IEnumBstr*, IEnumBstr*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumBstr_GUID = "35372049-0bc6-11d2-a033-00c04fb6809f"
@@ -3774,13 +3774,13 @@ lib LibWin32
   end
 
   struct IEnumPluggableTerminalClassInfoVTbl
-    query_interface : Proc(IEnumPluggableTerminalClassInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumPluggableTerminalClassInfo*, UInt32)
-    release : Proc(IEnumPluggableTerminalClassInfo*, UInt32)
-    next : Proc(IEnumPluggableTerminalClassInfo*, UInt32, ITPluggableTerminalClassInfo*, UInt32*, HRESULT)
-    reset : Proc(IEnumPluggableTerminalClassInfo*, HRESULT)
-    skip : Proc(IEnumPluggableTerminalClassInfo*, UInt32, HRESULT)
-    clone : Proc(IEnumPluggableTerminalClassInfo*, IEnumPluggableTerminalClassInfo*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumPluggableTerminalClassInfo_GUID = "4567450c-dbee-4e3f-aaf5-37bf9ebf5e29"
@@ -3790,13 +3790,13 @@ lib LibWin32
   end
 
   struct IEnumPluggableSuperclassInfoVTbl
-    query_interface : Proc(IEnumPluggableSuperclassInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumPluggableSuperclassInfo*, UInt32)
-    release : Proc(IEnumPluggableSuperclassInfo*, UInt32)
-    next : Proc(IEnumPluggableSuperclassInfo*, UInt32, ITPluggableTerminalSuperclassInfo*, UInt32*, HRESULT)
-    reset : Proc(IEnumPluggableSuperclassInfo*, HRESULT)
-    skip : Proc(IEnumPluggableSuperclassInfo*, UInt32, HRESULT)
-    clone : Proc(IEnumPluggableSuperclassInfo*, IEnumPluggableSuperclassInfo*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumPluggableSuperclassInfo_GUID = "e9586a80-89e6-4cff-931d-478d5751f4c0"
@@ -3806,22 +3806,22 @@ lib LibWin32
   end
 
   struct ITPhoneEventVTbl
-    query_interface : Proc(ITPhoneEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITPhoneEvent*, UInt32)
-    release : Proc(ITPhoneEvent*, UInt32)
-    get_type_info_count : Proc(ITPhoneEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITPhoneEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITPhoneEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITPhoneEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_phone : Proc(ITPhoneEvent*, ITPhone*, HRESULT)
-    get_event : Proc(ITPhoneEvent*, PHONE_EVENT*, HRESULT)
-    get_button_state : Proc(ITPhoneEvent*, PHONE_BUTTON_STATE*, HRESULT)
-    get_hook_switch_state : Proc(ITPhoneEvent*, PHONE_HOOK_SWITCH_STATE*, HRESULT)
-    get_hook_switch_device : Proc(ITPhoneEvent*, PHONE_HOOK_SWITCH_DEVICE*, HRESULT)
-    get_ring_mode : Proc(ITPhoneEvent*, Int32*, HRESULT)
-    get_button_lamp_id : Proc(ITPhoneEvent*, Int32*, HRESULT)
-    get_number_gathered : Proc(ITPhoneEvent*, UInt8**, HRESULT)
-    get_call : Proc(ITPhoneEvent*, ITCallInfo*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_phone : UInt64
+    get_event : UInt64
+    get_button_state : UInt64
+    get_hook_switch_state : UInt64
+    get_hook_switch_device : UInt64
+    get_ring_mode : UInt64
+    get_button_lamp_id : UInt64
+    get_number_gathered : UInt64
+    get_call : UInt64
   end
 
   ITPhoneEvent_GUID = "8f942dd8-64ed-4aaf-a77d-b23db0837ead"
@@ -3831,17 +3831,17 @@ lib LibWin32
   end
 
   struct ITCallStateEventVTbl
-    query_interface : Proc(ITCallStateEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITCallStateEvent*, UInt32)
-    release : Proc(ITCallStateEvent*, UInt32)
-    get_type_info_count : Proc(ITCallStateEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITCallStateEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITCallStateEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITCallStateEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_call : Proc(ITCallStateEvent*, ITCallInfo*, HRESULT)
-    get_state : Proc(ITCallStateEvent*, CALL_STATE*, HRESULT)
-    get_cause : Proc(ITCallStateEvent*, CALL_STATE_EVENT_CAUSE*, HRESULT)
-    get_callback_instance : Proc(ITCallStateEvent*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_call : UInt64
+    get_state : UInt64
+    get_cause : UInt64
+    get_callback_instance : UInt64
   end
 
   ITCallStateEvent_GUID = "62f47097-95c9-11d0-835d-00aa003ccabd"
@@ -3851,17 +3851,17 @@ lib LibWin32
   end
 
   struct ITPhoneDeviceSpecificEventVTbl
-    query_interface : Proc(ITPhoneDeviceSpecificEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITPhoneDeviceSpecificEvent*, UInt32)
-    release : Proc(ITPhoneDeviceSpecificEvent*, UInt32)
-    get_type_info_count : Proc(ITPhoneDeviceSpecificEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITPhoneDeviceSpecificEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITPhoneDeviceSpecificEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITPhoneDeviceSpecificEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_phone : Proc(ITPhoneDeviceSpecificEvent*, ITPhone*, HRESULT)
-    get_l_param1 : Proc(ITPhoneDeviceSpecificEvent*, Int32*, HRESULT)
-    get_l_param2 : Proc(ITPhoneDeviceSpecificEvent*, Int32*, HRESULT)
-    get_l_param3 : Proc(ITPhoneDeviceSpecificEvent*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_phone : UInt64
+    get_l_param1 : UInt64
+    get_l_param2 : UInt64
+    get_l_param3 : UInt64
   end
 
   ITPhoneDeviceSpecificEvent_GUID = "63ffb2a6-872b-4cd3-a501-326e8fb40af7"
@@ -3871,19 +3871,19 @@ lib LibWin32
   end
 
   struct ITCallMediaEventVTbl
-    query_interface : Proc(ITCallMediaEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITCallMediaEvent*, UInt32)
-    release : Proc(ITCallMediaEvent*, UInt32)
-    get_type_info_count : Proc(ITCallMediaEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITCallMediaEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITCallMediaEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITCallMediaEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_call : Proc(ITCallMediaEvent*, ITCallInfo*, HRESULT)
-    get_event : Proc(ITCallMediaEvent*, CALL_MEDIA_EVENT*, HRESULT)
-    get_error : Proc(ITCallMediaEvent*, HRESULT*, HRESULT)
-    get_terminal : Proc(ITCallMediaEvent*, ITTerminal*, HRESULT)
-    get_stream : Proc(ITCallMediaEvent*, ITStream*, HRESULT)
-    get_cause : Proc(ITCallMediaEvent*, CALL_MEDIA_EVENT_CAUSE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_call : UInt64
+    get_event : UInt64
+    get_error : UInt64
+    get_terminal : UInt64
+    get_stream : UInt64
+    get_cause : UInt64
   end
 
   ITCallMediaEvent_GUID = "ff36b87f-ec3a-11d0-8ee4-00c04fb6809f"
@@ -3893,18 +3893,18 @@ lib LibWin32
   end
 
   struct ITDigitDetectionEventVTbl
-    query_interface : Proc(ITDigitDetectionEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITDigitDetectionEvent*, UInt32)
-    release : Proc(ITDigitDetectionEvent*, UInt32)
-    get_type_info_count : Proc(ITDigitDetectionEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITDigitDetectionEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITDigitDetectionEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITDigitDetectionEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_call : Proc(ITDigitDetectionEvent*, ITCallInfo*, HRESULT)
-    get_digit : Proc(ITDigitDetectionEvent*, UInt8*, HRESULT)
-    get_digit_mode : Proc(ITDigitDetectionEvent*, Int32*, HRESULT)
-    get_tick_count : Proc(ITDigitDetectionEvent*, Int32*, HRESULT)
-    get_callback_instance : Proc(ITDigitDetectionEvent*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_call : UInt64
+    get_digit : UInt64
+    get_digit_mode : UInt64
+    get_tick_count : UInt64
+    get_callback_instance : UInt64
   end
 
   ITDigitDetectionEvent_GUID = "80d3bfac-57d9-11d2-a04a-00c04fb6809f"
@@ -3914,17 +3914,17 @@ lib LibWin32
   end
 
   struct ITDigitGenerationEventVTbl
-    query_interface : Proc(ITDigitGenerationEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITDigitGenerationEvent*, UInt32)
-    release : Proc(ITDigitGenerationEvent*, UInt32)
-    get_type_info_count : Proc(ITDigitGenerationEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITDigitGenerationEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITDigitGenerationEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITDigitGenerationEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_call : Proc(ITDigitGenerationEvent*, ITCallInfo*, HRESULT)
-    get_generation_termination : Proc(ITDigitGenerationEvent*, Int32*, HRESULT)
-    get_tick_count : Proc(ITDigitGenerationEvent*, Int32*, HRESULT)
-    get_callback_instance : Proc(ITDigitGenerationEvent*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_call : UInt64
+    get_generation_termination : UInt64
+    get_tick_count : UInt64
+    get_callback_instance : UInt64
   end
 
   ITDigitGenerationEvent_GUID = "80d3bfad-57d9-11d2-a04a-00c04fb6809f"
@@ -3934,18 +3934,18 @@ lib LibWin32
   end
 
   struct ITDigitsGatheredEventVTbl
-    query_interface : Proc(ITDigitsGatheredEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITDigitsGatheredEvent*, UInt32)
-    release : Proc(ITDigitsGatheredEvent*, UInt32)
-    get_type_info_count : Proc(ITDigitsGatheredEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITDigitsGatheredEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITDigitsGatheredEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITDigitsGatheredEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_call : Proc(ITDigitsGatheredEvent*, ITCallInfo*, HRESULT)
-    get_digits : Proc(ITDigitsGatheredEvent*, UInt8**, HRESULT)
-    get_gather_termination : Proc(ITDigitsGatheredEvent*, TAPI_GATHERTERM*, HRESULT)
-    get_tick_count : Proc(ITDigitsGatheredEvent*, Int32*, HRESULT)
-    get_callback_instance : Proc(ITDigitsGatheredEvent*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_call : UInt64
+    get_digits : UInt64
+    get_gather_termination : UInt64
+    get_tick_count : UInt64
+    get_callback_instance : UInt64
   end
 
   ITDigitsGatheredEvent_GUID = "e52ec4c1-cba3-441a-9e6a-93cb909e9724"
@@ -3955,17 +3955,17 @@ lib LibWin32
   end
 
   struct ITToneDetectionEventVTbl
-    query_interface : Proc(ITToneDetectionEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITToneDetectionEvent*, UInt32)
-    release : Proc(ITToneDetectionEvent*, UInt32)
-    get_type_info_count : Proc(ITToneDetectionEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITToneDetectionEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITToneDetectionEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITToneDetectionEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_call : Proc(ITToneDetectionEvent*, ITCallInfo*, HRESULT)
-    get_app_specific : Proc(ITToneDetectionEvent*, Int32*, HRESULT)
-    get_tick_count : Proc(ITToneDetectionEvent*, Int32*, HRESULT)
-    get_callback_instance : Proc(ITToneDetectionEvent*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_call : UInt64
+    get_app_specific : UInt64
+    get_tick_count : UInt64
+    get_callback_instance : UInt64
   end
 
   ITToneDetectionEvent_GUID = "407e0faf-d047-4753-b0c6-8e060373fecd"
@@ -3975,17 +3975,17 @@ lib LibWin32
   end
 
   struct ITTAPIObjectEventVTbl
-    query_interface : Proc(ITTAPIObjectEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITTAPIObjectEvent*, UInt32)
-    release : Proc(ITTAPIObjectEvent*, UInt32)
-    get_type_info_count : Proc(ITTAPIObjectEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITTAPIObjectEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITTAPIObjectEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITTAPIObjectEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_tapi_object : Proc(ITTAPIObjectEvent*, ITTAPI*, HRESULT)
-    get_event : Proc(ITTAPIObjectEvent*, TAPIOBJECT_EVENT*, HRESULT)
-    get_address : Proc(ITTAPIObjectEvent*, ITAddress*, HRESULT)
-    get_callback_instance : Proc(ITTAPIObjectEvent*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_tapi_object : UInt64
+    get_event : UInt64
+    get_address : UInt64
+    get_callback_instance : UInt64
   end
 
   ITTAPIObjectEvent_GUID = "f4854d48-937a-11d1-bb58-00c04fb6809f"
@@ -3995,18 +3995,18 @@ lib LibWin32
   end
 
   struct ITTAPIObjectEvent2VTbl
-    query_interface : Proc(ITTAPIObjectEvent2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITTAPIObjectEvent2*, UInt32)
-    release : Proc(ITTAPIObjectEvent2*, UInt32)
-    get_type_info_count : Proc(ITTAPIObjectEvent2*, UInt32*, HRESULT)
-    get_type_info : Proc(ITTAPIObjectEvent2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITTAPIObjectEvent2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITTAPIObjectEvent2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_tapi_object : Proc(ITTAPIObjectEvent2*, ITTAPI*, HRESULT)
-    get_event : Proc(ITTAPIObjectEvent2*, TAPIOBJECT_EVENT*, HRESULT)
-    get_address : Proc(ITTAPIObjectEvent2*, ITAddress*, HRESULT)
-    get_callback_instance : Proc(ITTAPIObjectEvent2*, Int32*, HRESULT)
-    get_phone : Proc(ITTAPIObjectEvent2*, ITPhone*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_tapi_object : UInt64
+    get_event : UInt64
+    get_address : UInt64
+    get_callback_instance : UInt64
+    get_phone : UInt64
   end
 
   ITTAPIObjectEvent2_GUID = "359dda6e-68ce-4383-bf0b-169133c41b46"
@@ -4016,10 +4016,10 @@ lib LibWin32
   end
 
   struct ITTAPIEventNotificationVTbl
-    query_interface : Proc(ITTAPIEventNotification*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITTAPIEventNotification*, UInt32)
-    release : Proc(ITTAPIEventNotification*, UInt32)
-    event : Proc(ITTAPIEventNotification*, TAPI_EVENT, IDispatch, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    event : UInt64
   end
 
   ITTAPIEventNotification_GUID = "eddb9426-3b91-11d1-8f30-00c04fb6809f"
@@ -4029,16 +4029,16 @@ lib LibWin32
   end
 
   struct ITCallHubEventVTbl
-    query_interface : Proc(ITCallHubEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITCallHubEvent*, UInt32)
-    release : Proc(ITCallHubEvent*, UInt32)
-    get_type_info_count : Proc(ITCallHubEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITCallHubEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITCallHubEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITCallHubEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_event : Proc(ITCallHubEvent*, CALLHUB_EVENT*, HRESULT)
-    get_call_hub : Proc(ITCallHubEvent*, ITCallHub*, HRESULT)
-    get_call : Proc(ITCallHubEvent*, ITCallInfo*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_event : UInt64
+    get_call_hub : UInt64
+    get_call : UInt64
   end
 
   ITCallHubEvent_GUID = "a3c15451-5b92-11d1-8f4e-00c04fb6809f"
@@ -4048,16 +4048,16 @@ lib LibWin32
   end
 
   struct ITAddressEventVTbl
-    query_interface : Proc(ITAddressEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITAddressEvent*, UInt32)
-    release : Proc(ITAddressEvent*, UInt32)
-    get_type_info_count : Proc(ITAddressEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITAddressEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITAddressEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITAddressEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_address : Proc(ITAddressEvent*, ITAddress*, HRESULT)
-    get_event : Proc(ITAddressEvent*, ADDRESS_EVENT*, HRESULT)
-    get_terminal : Proc(ITAddressEvent*, ITTerminal*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_address : UInt64
+    get_event : UInt64
+    get_terminal : UInt64
   end
 
   ITAddressEvent_GUID = "831ce2d1-83b5-11d1-bb5c-00c04fb6809f"
@@ -4067,18 +4067,18 @@ lib LibWin32
   end
 
   struct ITAddressDeviceSpecificEventVTbl
-    query_interface : Proc(ITAddressDeviceSpecificEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITAddressDeviceSpecificEvent*, UInt32)
-    release : Proc(ITAddressDeviceSpecificEvent*, UInt32)
-    get_type_info_count : Proc(ITAddressDeviceSpecificEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITAddressDeviceSpecificEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITAddressDeviceSpecificEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITAddressDeviceSpecificEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_address : Proc(ITAddressDeviceSpecificEvent*, ITAddress*, HRESULT)
-    get_call : Proc(ITAddressDeviceSpecificEvent*, ITCallInfo*, HRESULT)
-    get_l_param1 : Proc(ITAddressDeviceSpecificEvent*, Int32*, HRESULT)
-    get_l_param2 : Proc(ITAddressDeviceSpecificEvent*, Int32*, HRESULT)
-    get_l_param3 : Proc(ITAddressDeviceSpecificEvent*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_address : UInt64
+    get_call : UInt64
+    get_l_param1 : UInt64
+    get_l_param2 : UInt64
+    get_l_param3 : UInt64
   end
 
   ITAddressDeviceSpecificEvent_GUID = "3acb216b-40bd-487a-8672-5ce77bd7e3a3"
@@ -4088,19 +4088,19 @@ lib LibWin32
   end
 
   struct ITFileTerminalEventVTbl
-    query_interface : Proc(ITFileTerminalEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITFileTerminalEvent*, UInt32)
-    release : Proc(ITFileTerminalEvent*, UInt32)
-    get_type_info_count : Proc(ITFileTerminalEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITFileTerminalEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITFileTerminalEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITFileTerminalEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_terminal : Proc(ITFileTerminalEvent*, ITTerminal*, HRESULT)
-    get_track : Proc(ITFileTerminalEvent*, ITFileTrack*, HRESULT)
-    get_call : Proc(ITFileTerminalEvent*, ITCallInfo*, HRESULT)
-    get_state : Proc(ITFileTerminalEvent*, TERMINAL_MEDIA_STATE*, HRESULT)
-    get_cause : Proc(ITFileTerminalEvent*, FT_STATE_EVENT_CAUSE*, HRESULT)
-    get_error : Proc(ITFileTerminalEvent*, HRESULT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_terminal : UInt64
+    get_track : UInt64
+    get_call : UInt64
+    get_state : UInt64
+    get_cause : UInt64
+    get_error : UInt64
   end
 
   ITFileTerminalEvent_GUID = "e4a7fbac-8c17-4427-9f55-9f589ac8af00"
@@ -4110,16 +4110,16 @@ lib LibWin32
   end
 
   struct ITTTSTerminalEventVTbl
-    query_interface : Proc(ITTTSTerminalEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITTTSTerminalEvent*, UInt32)
-    release : Proc(ITTTSTerminalEvent*, UInt32)
-    get_type_info_count : Proc(ITTTSTerminalEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITTTSTerminalEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITTTSTerminalEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITTTSTerminalEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_terminal : Proc(ITTTSTerminalEvent*, ITTerminal*, HRESULT)
-    get_call : Proc(ITTTSTerminalEvent*, ITCallInfo*, HRESULT)
-    get_error : Proc(ITTTSTerminalEvent*, HRESULT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_terminal : UInt64
+    get_call : UInt64
+    get_error : UInt64
   end
 
   ITTTSTerminalEvent_GUID = "d964788f-95a5-461d-ab0c-b9900a6c2713"
@@ -4129,16 +4129,16 @@ lib LibWin32
   end
 
   struct ITASRTerminalEventVTbl
-    query_interface : Proc(ITASRTerminalEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITASRTerminalEvent*, UInt32)
-    release : Proc(ITASRTerminalEvent*, UInt32)
-    get_type_info_count : Proc(ITASRTerminalEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITASRTerminalEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITASRTerminalEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITASRTerminalEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_terminal : Proc(ITASRTerminalEvent*, ITTerminal*, HRESULT)
-    get_call : Proc(ITASRTerminalEvent*, ITCallInfo*, HRESULT)
-    get_error : Proc(ITASRTerminalEvent*, HRESULT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_terminal : UInt64
+    get_call : UInt64
+    get_error : UInt64
   end
 
   ITASRTerminalEvent_GUID = "ee016a02-4fa9-467c-933f-5a15b12377d7"
@@ -4148,16 +4148,16 @@ lib LibWin32
   end
 
   struct ITToneTerminalEventVTbl
-    query_interface : Proc(ITToneTerminalEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITToneTerminalEvent*, UInt32)
-    release : Proc(ITToneTerminalEvent*, UInt32)
-    get_type_info_count : Proc(ITToneTerminalEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITToneTerminalEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITToneTerminalEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITToneTerminalEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_terminal : Proc(ITToneTerminalEvent*, ITTerminal*, HRESULT)
-    get_call : Proc(ITToneTerminalEvent*, ITCallInfo*, HRESULT)
-    get_error : Proc(ITToneTerminalEvent*, HRESULT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_terminal : UInt64
+    get_call : UInt64
+    get_error : UInt64
   end
 
   ITToneTerminalEvent_GUID = "e6f56009-611f-4945-bbd2-2d0ce5612056"
@@ -4167,16 +4167,16 @@ lib LibWin32
   end
 
   struct ITQOSEventVTbl
-    query_interface : Proc(ITQOSEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITQOSEvent*, UInt32)
-    release : Proc(ITQOSEvent*, UInt32)
-    get_type_info_count : Proc(ITQOSEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITQOSEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITQOSEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITQOSEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_call : Proc(ITQOSEvent*, ITCallInfo*, HRESULT)
-    get_event : Proc(ITQOSEvent*, QOS_EVENT*, HRESULT)
-    get_media_type : Proc(ITQOSEvent*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_call : UInt64
+    get_event : UInt64
+    get_media_type : UInt64
   end
 
   ITQOSEvent_GUID = "cfa3357c-ad77-11d1-bb68-00c04fb6809f"
@@ -4186,16 +4186,16 @@ lib LibWin32
   end
 
   struct ITCallInfoChangeEventVTbl
-    query_interface : Proc(ITCallInfoChangeEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITCallInfoChangeEvent*, UInt32)
-    release : Proc(ITCallInfoChangeEvent*, UInt32)
-    get_type_info_count : Proc(ITCallInfoChangeEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITCallInfoChangeEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITCallInfoChangeEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITCallInfoChangeEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_call : Proc(ITCallInfoChangeEvent*, ITCallInfo*, HRESULT)
-    get_cause : Proc(ITCallInfoChangeEvent*, CALLINFOCHANGE_CAUSE*, HRESULT)
-    get_callback_instance : Proc(ITCallInfoChangeEvent*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_call : UInt64
+    get_cause : UInt64
+    get_callback_instance : UInt64
   end
 
   ITCallInfoChangeEvent_GUID = "5d4b65f9-e51c-11d1-a02f-00c04fb6809f"
@@ -4205,14 +4205,14 @@ lib LibWin32
   end
 
   struct ITRequestVTbl
-    query_interface : Proc(ITRequest*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITRequest*, UInt32)
-    release : Proc(ITRequest*, UInt32)
-    get_type_info_count : Proc(ITRequest*, UInt32*, HRESULT)
-    get_type_info : Proc(ITRequest*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITRequest*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITRequest*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    make_call : Proc(ITRequest*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    make_call : UInt64
   end
 
   ITRequest_GUID = "ac48ffdf-f8c4-11d1-a030-00c04fb6809f"
@@ -4222,19 +4222,19 @@ lib LibWin32
   end
 
   struct ITRequestEventVTbl
-    query_interface : Proc(ITRequestEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITRequestEvent*, UInt32)
-    release : Proc(ITRequestEvent*, UInt32)
-    get_type_info_count : Proc(ITRequestEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITRequestEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITRequestEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITRequestEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_registration_instance : Proc(ITRequestEvent*, Int32*, HRESULT)
-    get_request_mode : Proc(ITRequestEvent*, Int32*, HRESULT)
-    get_dest_address : Proc(ITRequestEvent*, UInt8**, HRESULT)
-    get_app_name : Proc(ITRequestEvent*, UInt8**, HRESULT)
-    get_called_party : Proc(ITRequestEvent*, UInt8**, HRESULT)
-    get_comment : Proc(ITRequestEvent*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_registration_instance : UInt64
+    get_request_mode : UInt64
+    get_dest_address : UInt64
+    get_app_name : UInt64
+    get_called_party : UInt64
+    get_comment : UInt64
   end
 
   ITRequestEvent_GUID = "ac48ffde-f8c4-11d1-a030-00c04fb6809f"
@@ -4244,16 +4244,16 @@ lib LibWin32
   end
 
   struct ITCollectionVTbl
-    query_interface : Proc(ITCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITCollection*, UInt32)
-    release : Proc(ITCollection*, UInt32)
-    get_type_info_count : Proc(ITCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(ITCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(ITCollection*, Int32*, HRESULT)
-    get_item : Proc(ITCollection*, Int32, VARIANT*, HRESULT)
-    get__new_enum : Proc(ITCollection*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    get_item : UInt64
+    get__new_enum : UInt64
   end
 
   ITCollection_GUID = "5ec5acf2-9c02-11d0-8362-00aa003ccabd"
@@ -4263,18 +4263,18 @@ lib LibWin32
   end
 
   struct ITCollection2VTbl
-    query_interface : Proc(ITCollection2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITCollection2*, UInt32)
-    release : Proc(ITCollection2*, UInt32)
-    get_type_info_count : Proc(ITCollection2*, UInt32*, HRESULT)
-    get_type_info : Proc(ITCollection2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITCollection2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITCollection2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(ITCollection2*, Int32*, HRESULT)
-    get_item : Proc(ITCollection2*, Int32, VARIANT*, HRESULT)
-    get__new_enum : Proc(ITCollection2*, IUnknown*, HRESULT)
-    add : Proc(ITCollection2*, Int32, VARIANT*, HRESULT)
-    remove : Proc(ITCollection2*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    get_item : UInt64
+    get__new_enum : UInt64
+    add : UInt64
+    remove : UInt64
   end
 
   ITCollection2_GUID = "e6dddda5-a6d3-48ff-8737-d32fc4d95477"
@@ -4284,20 +4284,20 @@ lib LibWin32
   end
 
   struct ITForwardInformationVTbl
-    query_interface : Proc(ITForwardInformation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITForwardInformation*, UInt32)
-    release : Proc(ITForwardInformation*, UInt32)
-    get_type_info_count : Proc(ITForwardInformation*, UInt32*, HRESULT)
-    get_type_info : Proc(ITForwardInformation*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITForwardInformation*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITForwardInformation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    put_num_rings_no_answer : Proc(ITForwardInformation*, Int32, HRESULT)
-    get_num_rings_no_answer : Proc(ITForwardInformation*, Int32*, HRESULT)
-    set_forward_type : Proc(ITForwardInformation*, Int32, UInt8*, UInt8*, HRESULT)
-    get_forward_type_destination : Proc(ITForwardInformation*, Int32, UInt8**, HRESULT)
-    get_forward_type_caller : Proc(ITForwardInformation*, Int32, UInt8**, HRESULT)
-    get_forward_type : Proc(ITForwardInformation*, Int32, UInt8**, UInt8**, HRESULT)
-    clear : Proc(ITForwardInformation*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    put_num_rings_no_answer : UInt64
+    get_num_rings_no_answer : UInt64
+    set_forward_type : UInt64
+    get_forward_type_destination : UInt64
+    get_forward_type_caller : UInt64
+    get_forward_type : UInt64
+    clear : UInt64
   end
 
   ITForwardInformation_GUID = "449f659e-88a3-11d1-bb5d-00c04fb6809f"
@@ -4307,24 +4307,24 @@ lib LibWin32
   end
 
   struct ITForwardInformation2VTbl
-    query_interface : Proc(ITForwardInformation2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITForwardInformation2*, UInt32)
-    release : Proc(ITForwardInformation2*, UInt32)
-    get_type_info_count : Proc(ITForwardInformation2*, UInt32*, HRESULT)
-    get_type_info : Proc(ITForwardInformation2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITForwardInformation2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITForwardInformation2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    put_num_rings_no_answer : Proc(ITForwardInformation2*, Int32, HRESULT)
-    get_num_rings_no_answer : Proc(ITForwardInformation2*, Int32*, HRESULT)
-    set_forward_type : Proc(ITForwardInformation2*, Int32, UInt8*, UInt8*, HRESULT)
-    get_forward_type_destination : Proc(ITForwardInformation2*, Int32, UInt8**, HRESULT)
-    get_forward_type_caller : Proc(ITForwardInformation2*, Int32, UInt8**, HRESULT)
-    get_forward_type : Proc(ITForwardInformation2*, Int32, UInt8**, UInt8**, HRESULT)
-    clear : Proc(ITForwardInformation2*, HRESULT)
-    set_forward_type2 : Proc(ITForwardInformation2*, Int32, UInt8*, Int32, UInt8*, Int32, HRESULT)
-    get_forward_type2 : Proc(ITForwardInformation2*, Int32, UInt8**, Int32*, UInt8**, Int32*, HRESULT)
-    get_forward_type_destination_address_type : Proc(ITForwardInformation2*, Int32, Int32*, HRESULT)
-    get_forward_type_caller_address_type : Proc(ITForwardInformation2*, Int32, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    put_num_rings_no_answer : UInt64
+    get_num_rings_no_answer : UInt64
+    set_forward_type : UInt64
+    get_forward_type_destination : UInt64
+    get_forward_type_caller : UInt64
+    get_forward_type : UInt64
+    clear : UInt64
+    set_forward_type2 : UInt64
+    get_forward_type2 : UInt64
+    get_forward_type_destination_address_type : UInt64
+    get_forward_type_caller_address_type : UInt64
   end
 
   ITForwardInformation2_GUID = "5229b4ed-b260-4382-8e1a-5df3a8a4ccc0"
@@ -4334,19 +4334,19 @@ lib LibWin32
   end
 
   struct ITAddressTranslationVTbl
-    query_interface : Proc(ITAddressTranslation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITAddressTranslation*, UInt32)
-    release : Proc(ITAddressTranslation*, UInt32)
-    get_type_info_count : Proc(ITAddressTranslation*, UInt32*, HRESULT)
-    get_type_info : Proc(ITAddressTranslation*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITAddressTranslation*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITAddressTranslation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    translate_address : Proc(ITAddressTranslation*, UInt8*, Int32, Int32, ITAddressTranslationInfo*, HRESULT)
-    translate_dialog : Proc(ITAddressTranslation*, LibC::IntPtrT, UInt8*, HRESULT)
-    enumerate_locations : Proc(ITAddressTranslation*, IEnumLocation*, HRESULT)
-    get_locations : Proc(ITAddressTranslation*, VARIANT*, HRESULT)
-    enumerate_calling_cards : Proc(ITAddressTranslation*, IEnumCallingCard*, HRESULT)
-    get_calling_cards : Proc(ITAddressTranslation*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    translate_address : UInt64
+    translate_dialog : UInt64
+    enumerate_locations : UInt64
+    get_locations : UInt64
+    enumerate_calling_cards : UInt64
+    get_calling_cards : UInt64
   end
 
   ITAddressTranslation_GUID = "0c4d8f03-8ddb-11d1-a09e-00805fc147d3"
@@ -4356,18 +4356,18 @@ lib LibWin32
   end
 
   struct ITAddressTranslationInfoVTbl
-    query_interface : Proc(ITAddressTranslationInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITAddressTranslationInfo*, UInt32)
-    release : Proc(ITAddressTranslationInfo*, UInt32)
-    get_type_info_count : Proc(ITAddressTranslationInfo*, UInt32*, HRESULT)
-    get_type_info : Proc(ITAddressTranslationInfo*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITAddressTranslationInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITAddressTranslationInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_dialable_string : Proc(ITAddressTranslationInfo*, UInt8**, HRESULT)
-    get_displayable_string : Proc(ITAddressTranslationInfo*, UInt8**, HRESULT)
-    get_current_country_code : Proc(ITAddressTranslationInfo*, Int32*, HRESULT)
-    get_destination_country_code : Proc(ITAddressTranslationInfo*, Int32*, HRESULT)
-    get_translation_results : Proc(ITAddressTranslationInfo*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_dialable_string : UInt64
+    get_displayable_string : UInt64
+    get_current_country_code : UInt64
+    get_destination_country_code : UInt64
+    get_translation_results : UInt64
   end
 
   ITAddressTranslationInfo_GUID = "afc15945-8d40-11d1-a09e-00805fc147d3"
@@ -4377,24 +4377,24 @@ lib LibWin32
   end
 
   struct ITLocationInfoVTbl
-    query_interface : Proc(ITLocationInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITLocationInfo*, UInt32)
-    release : Proc(ITLocationInfo*, UInt32)
-    get_type_info_count : Proc(ITLocationInfo*, UInt32*, HRESULT)
-    get_type_info : Proc(ITLocationInfo*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITLocationInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITLocationInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_permanent_location_id : Proc(ITLocationInfo*, Int32*, HRESULT)
-    get_country_code : Proc(ITLocationInfo*, Int32*, HRESULT)
-    get_country_id : Proc(ITLocationInfo*, Int32*, HRESULT)
-    get_options : Proc(ITLocationInfo*, Int32*, HRESULT)
-    get_preferred_card_id : Proc(ITLocationInfo*, Int32*, HRESULT)
-    get_location_name : Proc(ITLocationInfo*, UInt8**, HRESULT)
-    get_city_code : Proc(ITLocationInfo*, UInt8**, HRESULT)
-    get_local_access_code : Proc(ITLocationInfo*, UInt8**, HRESULT)
-    get_long_distance_access_code : Proc(ITLocationInfo*, UInt8**, HRESULT)
-    get_toll_prefix_list : Proc(ITLocationInfo*, UInt8**, HRESULT)
-    get_cancel_call_waiting_code : Proc(ITLocationInfo*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_permanent_location_id : UInt64
+    get_country_code : UInt64
+    get_country_id : UInt64
+    get_options : UInt64
+    get_preferred_card_id : UInt64
+    get_location_name : UInt64
+    get_city_code : UInt64
+    get_local_access_code : UInt64
+    get_long_distance_access_code : UInt64
+    get_toll_prefix_list : UInt64
+    get_cancel_call_waiting_code : UInt64
   end
 
   ITLocationInfo_GUID = "0c4d8eff-8ddb-11d1-a09e-00805fc147d3"
@@ -4404,13 +4404,13 @@ lib LibWin32
   end
 
   struct IEnumLocationVTbl
-    query_interface : Proc(IEnumLocation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumLocation*, UInt32)
-    release : Proc(IEnumLocation*, UInt32)
-    next : Proc(IEnumLocation*, UInt32, ITLocationInfo*, UInt32*, HRESULT)
-    reset : Proc(IEnumLocation*, HRESULT)
-    skip : Proc(IEnumLocation*, UInt32, HRESULT)
-    clone : Proc(IEnumLocation*, IEnumLocation*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumLocation_GUID = "0c4d8f01-8ddb-11d1-a09e-00805fc147d3"
@@ -4420,20 +4420,20 @@ lib LibWin32
   end
 
   struct ITCallingCardVTbl
-    query_interface : Proc(ITCallingCard*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITCallingCard*, UInt32)
-    release : Proc(ITCallingCard*, UInt32)
-    get_type_info_count : Proc(ITCallingCard*, UInt32*, HRESULT)
-    get_type_info : Proc(ITCallingCard*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITCallingCard*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITCallingCard*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_permanent_card_id : Proc(ITCallingCard*, Int32*, HRESULT)
-    get_number_of_digits : Proc(ITCallingCard*, Int32*, HRESULT)
-    get_options : Proc(ITCallingCard*, Int32*, HRESULT)
-    get_card_name : Proc(ITCallingCard*, UInt8**, HRESULT)
-    get_same_area_dialing_rule : Proc(ITCallingCard*, UInt8**, HRESULT)
-    get_long_distance_dialing_rule : Proc(ITCallingCard*, UInt8**, HRESULT)
-    get_international_dialing_rule : Proc(ITCallingCard*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_permanent_card_id : UInt64
+    get_number_of_digits : UInt64
+    get_options : UInt64
+    get_card_name : UInt64
+    get_same_area_dialing_rule : UInt64
+    get_long_distance_dialing_rule : UInt64
+    get_international_dialing_rule : UInt64
   end
 
   ITCallingCard_GUID = "0c4d8f00-8ddb-11d1-a09e-00805fc147d3"
@@ -4443,13 +4443,13 @@ lib LibWin32
   end
 
   struct IEnumCallingCardVTbl
-    query_interface : Proc(IEnumCallingCard*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumCallingCard*, UInt32)
-    release : Proc(IEnumCallingCard*, UInt32)
-    next : Proc(IEnumCallingCard*, UInt32, ITCallingCard*, UInt32*, HRESULT)
-    reset : Proc(IEnumCallingCard*, HRESULT)
-    skip : Proc(IEnumCallingCard*, UInt32, HRESULT)
-    clone : Proc(IEnumCallingCard*, IEnumCallingCard*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumCallingCard_GUID = "0c4d8f02-8ddb-11d1-a09e-00805fc147d3"
@@ -4459,16 +4459,16 @@ lib LibWin32
   end
 
   struct ITCallNotificationEventVTbl
-    query_interface : Proc(ITCallNotificationEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITCallNotificationEvent*, UInt32)
-    release : Proc(ITCallNotificationEvent*, UInt32)
-    get_type_info_count : Proc(ITCallNotificationEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITCallNotificationEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITCallNotificationEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITCallNotificationEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_call : Proc(ITCallNotificationEvent*, ITCallInfo*, HRESULT)
-    get_event : Proc(ITCallNotificationEvent*, CALL_NOTIFICATION_EVENT*, HRESULT)
-    get_callback_instance : Proc(ITCallNotificationEvent*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_call : UInt64
+    get_event : UInt64
+    get_callback_instance : UInt64
   end
 
   ITCallNotificationEvent_GUID = "895801df-3dd6-11d1-8f30-00c04fb6809f"
@@ -4478,14 +4478,14 @@ lib LibWin32
   end
 
   struct ITDispatchMapperVTbl
-    query_interface : Proc(ITDispatchMapper*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITDispatchMapper*, UInt32)
-    release : Proc(ITDispatchMapper*, UInt32)
-    get_type_info_count : Proc(ITDispatchMapper*, UInt32*, HRESULT)
-    get_type_info : Proc(ITDispatchMapper*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITDispatchMapper*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITDispatchMapper*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    query_dispatch_interface : Proc(ITDispatchMapper*, UInt8*, IDispatch, IDispatch*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    query_dispatch_interface : UInt64
   end
 
   ITDispatchMapper_GUID = "e9225295-c759-11d1-a02b-00c04fb6809f"
@@ -4495,17 +4495,17 @@ lib LibWin32
   end
 
   struct ITStreamControlVTbl
-    query_interface : Proc(ITStreamControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITStreamControl*, UInt32)
-    release : Proc(ITStreamControl*, UInt32)
-    get_type_info_count : Proc(ITStreamControl*, UInt32*, HRESULT)
-    get_type_info : Proc(ITStreamControl*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITStreamControl*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITStreamControl*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    create_stream : Proc(ITStreamControl*, Int32, TERMINAL_DIRECTION, ITStream*, HRESULT)
-    remove_stream : Proc(ITStreamControl*, ITStream, HRESULT)
-    enumerate_streams : Proc(ITStreamControl*, IEnumStream*, HRESULT)
-    get_streams : Proc(ITStreamControl*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    create_stream : UInt64
+    remove_stream : UInt64
+    enumerate_streams : UInt64
+    get_streams : UInt64
   end
 
   ITStreamControl_GUID = "ee3bd604-3868-11d2-a045-00c04fb6809f"
@@ -4515,23 +4515,23 @@ lib LibWin32
   end
 
   struct ITStreamVTbl
-    query_interface : Proc(ITStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITStream*, UInt32)
-    release : Proc(ITStream*, UInt32)
-    get_type_info_count : Proc(ITStream*, UInt32*, HRESULT)
-    get_type_info : Proc(ITStream*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITStream*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITStream*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_media_type : Proc(ITStream*, Int32*, HRESULT)
-    get_direction : Proc(ITStream*, TERMINAL_DIRECTION*, HRESULT)
-    get_name : Proc(ITStream*, UInt8**, HRESULT)
-    start_stream : Proc(ITStream*, HRESULT)
-    pause_stream : Proc(ITStream*, HRESULT)
-    stop_stream : Proc(ITStream*, HRESULT)
-    select_terminal : Proc(ITStream*, ITTerminal, HRESULT)
-    unselect_terminal : Proc(ITStream*, ITTerminal, HRESULT)
-    enumerate_terminals : Proc(ITStream*, IEnumTerminal*, HRESULT)
-    get_terminals : Proc(ITStream*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_media_type : UInt64
+    get_direction : UInt64
+    get_name : UInt64
+    start_stream : UInt64
+    pause_stream : UInt64
+    stop_stream : UInt64
+    select_terminal : UInt64
+    unselect_terminal : UInt64
+    enumerate_terminals : UInt64
+    get_terminals : UInt64
   end
 
   ITStream_GUID = "ee3bd605-3868-11d2-a045-00c04fb6809f"
@@ -4541,13 +4541,13 @@ lib LibWin32
   end
 
   struct IEnumStreamVTbl
-    query_interface : Proc(IEnumStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumStream*, UInt32)
-    release : Proc(IEnumStream*, UInt32)
-    next : Proc(IEnumStream*, UInt32, ITStream*, UInt32*, HRESULT)
-    reset : Proc(IEnumStream*, HRESULT)
-    skip : Proc(IEnumStream*, UInt32, HRESULT)
-    clone : Proc(IEnumStream*, IEnumStream*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumStream_GUID = "ee3bd606-3868-11d2-a045-00c04fb6809f"
@@ -4557,17 +4557,17 @@ lib LibWin32
   end
 
   struct ITSubStreamControlVTbl
-    query_interface : Proc(ITSubStreamControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITSubStreamControl*, UInt32)
-    release : Proc(ITSubStreamControl*, UInt32)
-    get_type_info_count : Proc(ITSubStreamControl*, UInt32*, HRESULT)
-    get_type_info : Proc(ITSubStreamControl*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITSubStreamControl*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITSubStreamControl*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    create_sub_stream : Proc(ITSubStreamControl*, ITSubStream*, HRESULT)
-    remove_sub_stream : Proc(ITSubStreamControl*, ITSubStream, HRESULT)
-    enumerate_sub_streams : Proc(ITSubStreamControl*, IEnumSubStream*, HRESULT)
-    get_sub_streams : Proc(ITSubStreamControl*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    create_sub_stream : UInt64
+    remove_sub_stream : UInt64
+    enumerate_sub_streams : UInt64
+    get_sub_streams : UInt64
   end
 
   ITSubStreamControl_GUID = "ee3bd607-3868-11d2-a045-00c04fb6809f"
@@ -4577,21 +4577,21 @@ lib LibWin32
   end
 
   struct ITSubStreamVTbl
-    query_interface : Proc(ITSubStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITSubStream*, UInt32)
-    release : Proc(ITSubStream*, UInt32)
-    get_type_info_count : Proc(ITSubStream*, UInt32*, HRESULT)
-    get_type_info : Proc(ITSubStream*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITSubStream*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITSubStream*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    start_sub_stream : Proc(ITSubStream*, HRESULT)
-    pause_sub_stream : Proc(ITSubStream*, HRESULT)
-    stop_sub_stream : Proc(ITSubStream*, HRESULT)
-    select_terminal : Proc(ITSubStream*, ITTerminal, HRESULT)
-    unselect_terminal : Proc(ITSubStream*, ITTerminal, HRESULT)
-    enumerate_terminals : Proc(ITSubStream*, IEnumTerminal*, HRESULT)
-    get_terminals : Proc(ITSubStream*, VARIANT*, HRESULT)
-    get_stream : Proc(ITSubStream*, ITStream*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    start_sub_stream : UInt64
+    pause_sub_stream : UInt64
+    stop_sub_stream : UInt64
+    select_terminal : UInt64
+    unselect_terminal : UInt64
+    enumerate_terminals : UInt64
+    get_terminals : UInt64
+    get_stream : UInt64
   end
 
   ITSubStream_GUID = "ee3bd608-3868-11d2-a045-00c04fb6809f"
@@ -4601,13 +4601,13 @@ lib LibWin32
   end
 
   struct IEnumSubStreamVTbl
-    query_interface : Proc(IEnumSubStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumSubStream*, UInt32)
-    release : Proc(IEnumSubStream*, UInt32)
-    next : Proc(IEnumSubStream*, UInt32, ITSubStream*, UInt32*, HRESULT)
-    reset : Proc(IEnumSubStream*, HRESULT)
-    skip : Proc(IEnumSubStream*, UInt32, HRESULT)
-    clone : Proc(IEnumSubStream*, IEnumSubStream*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumSubStream_GUID = "ee3bd609-3868-11d2-a045-00c04fb6809f"
@@ -4617,14 +4617,14 @@ lib LibWin32
   end
 
   struct ITLegacyWaveSupportVTbl
-    query_interface : Proc(ITLegacyWaveSupport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITLegacyWaveSupport*, UInt32)
-    release : Proc(ITLegacyWaveSupport*, UInt32)
-    get_type_info_count : Proc(ITLegacyWaveSupport*, UInt32*, HRESULT)
-    get_type_info : Proc(ITLegacyWaveSupport*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITLegacyWaveSupport*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITLegacyWaveSupport*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    is_full_duplex : Proc(ITLegacyWaveSupport*, FULLDUPLEX_SUPPORT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    is_full_duplex : UInt64
   end
 
   ITLegacyWaveSupport_GUID = "207823ea-e252-11d2-b77e-0080c7135381"
@@ -4634,34 +4634,34 @@ lib LibWin32
   end
 
   struct ITBasicCallControl2VTbl
-    query_interface : Proc(ITBasicCallControl2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITBasicCallControl2*, UInt32)
-    release : Proc(ITBasicCallControl2*, UInt32)
-    get_type_info_count : Proc(ITBasicCallControl2*, UInt32*, HRESULT)
-    get_type_info : Proc(ITBasicCallControl2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITBasicCallControl2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITBasicCallControl2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    connect : Proc(ITBasicCallControl2*, Int16, HRESULT)
-    answer : Proc(ITBasicCallControl2*, HRESULT)
-    disconnect : Proc(ITBasicCallControl2*, DISCONNECT_CODE, HRESULT)
-    hold : Proc(ITBasicCallControl2*, Int16, HRESULT)
-    handoff_direct : Proc(ITBasicCallControl2*, UInt8*, HRESULT)
-    handoff_indirect : Proc(ITBasicCallControl2*, Int32, HRESULT)
-    conference : Proc(ITBasicCallControl2*, ITBasicCallControl, Int16, HRESULT)
-    transfer : Proc(ITBasicCallControl2*, ITBasicCallControl, Int16, HRESULT)
-    blind_transfer : Proc(ITBasicCallControl2*, UInt8*, HRESULT)
-    swap_hold : Proc(ITBasicCallControl2*, ITBasicCallControl, HRESULT)
-    park_direct : Proc(ITBasicCallControl2*, UInt8*, HRESULT)
-    park_indirect : Proc(ITBasicCallControl2*, UInt8**, HRESULT)
-    unpark : Proc(ITBasicCallControl2*, HRESULT)
-    set_qos : Proc(ITBasicCallControl2*, Int32, QOS_SERVICE_LEVEL, HRESULT)
-    pickup : Proc(ITBasicCallControl2*, UInt8*, HRESULT)
-    dial : Proc(ITBasicCallControl2*, UInt8*, HRESULT)
-    finish : Proc(ITBasicCallControl2*, FINISH_MODE, HRESULT)
-    remove_from_conference : Proc(ITBasicCallControl2*, HRESULT)
-    request_terminal : Proc(ITBasicCallControl2*, UInt8*, Int32, TERMINAL_DIRECTION, ITTerminal*, HRESULT)
-    select_terminal_on_call : Proc(ITBasicCallControl2*, ITTerminal, HRESULT)
-    unselect_terminal_on_call : Proc(ITBasicCallControl2*, ITTerminal, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    connect : UInt64
+    answer : UInt64
+    disconnect : UInt64
+    hold : UInt64
+    handoff_direct : UInt64
+    handoff_indirect : UInt64
+    conference : UInt64
+    transfer : UInt64
+    blind_transfer : UInt64
+    swap_hold : UInt64
+    park_direct : UInt64
+    park_indirect : UInt64
+    unpark : UInt64
+    set_qos : UInt64
+    pickup : UInt64
+    dial : UInt64
+    finish : UInt64
+    remove_from_conference : UInt64
+    request_terminal : UInt64
+    select_terminal_on_call : UInt64
+    unselect_terminal_on_call : UInt64
   end
 
   ITBasicCallControl2_GUID = "161a4a56-1e99-4b3f-a46a-168f38a5ee4c"
@@ -4671,25 +4671,25 @@ lib LibWin32
   end
 
   struct ITScriptableAudioFormatVTbl
-    query_interface : Proc(ITScriptableAudioFormat*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITScriptableAudioFormat*, UInt32)
-    release : Proc(ITScriptableAudioFormat*, UInt32)
-    get_type_info_count : Proc(ITScriptableAudioFormat*, UInt32*, HRESULT)
-    get_type_info : Proc(ITScriptableAudioFormat*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITScriptableAudioFormat*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITScriptableAudioFormat*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_channels : Proc(ITScriptableAudioFormat*, Int32*, HRESULT)
-    put_channels : Proc(ITScriptableAudioFormat*, Int32, HRESULT)
-    get_samples_per_sec : Proc(ITScriptableAudioFormat*, Int32*, HRESULT)
-    put_samples_per_sec : Proc(ITScriptableAudioFormat*, Int32, HRESULT)
-    get_avg_bytes_per_sec : Proc(ITScriptableAudioFormat*, Int32*, HRESULT)
-    put_avg_bytes_per_sec : Proc(ITScriptableAudioFormat*, Int32, HRESULT)
-    get_block_align : Proc(ITScriptableAudioFormat*, Int32*, HRESULT)
-    put_block_align : Proc(ITScriptableAudioFormat*, Int32, HRESULT)
-    get_bits_per_sample : Proc(ITScriptableAudioFormat*, Int32*, HRESULT)
-    put_bits_per_sample : Proc(ITScriptableAudioFormat*, Int32, HRESULT)
-    get_format_tag : Proc(ITScriptableAudioFormat*, Int32*, HRESULT)
-    put_format_tag : Proc(ITScriptableAudioFormat*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_channels : UInt64
+    put_channels : UInt64
+    get_samples_per_sec : UInt64
+    put_samples_per_sec : UInt64
+    get_avg_bytes_per_sec : UInt64
+    put_avg_bytes_per_sec : UInt64
+    get_block_align : UInt64
+    put_block_align : UInt64
+    get_bits_per_sample : UInt64
+    put_bits_per_sample : UInt64
+    get_format_tag : UInt64
+    put_format_tag : UInt64
   end
 
   ITScriptableAudioFormat_GUID = "b87658bd-3c59-4f64-be74-aede3e86a81e"
@@ -4699,30 +4699,30 @@ lib LibWin32
   end
 
   struct ITAgentVTbl
-    query_interface : Proc(ITAgent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITAgent*, UInt32)
-    release : Proc(ITAgent*, UInt32)
-    get_type_info_count : Proc(ITAgent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITAgent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITAgent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITAgent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    enumerate_agent_sessions : Proc(ITAgent*, IEnumAgentSession*, HRESULT)
-    create_session : Proc(ITAgent*, ITACDGroup, ITAddress, ITAgentSession*, HRESULT)
-    create_session_with_pin : Proc(ITAgent*, ITACDGroup, ITAddress, UInt8*, ITAgentSession*, HRESULT)
-    get_id : Proc(ITAgent*, UInt8**, HRESULT)
-    get_user : Proc(ITAgent*, UInt8**, HRESULT)
-    put_state : Proc(ITAgent*, AGENT_STATE, HRESULT)
-    get_state : Proc(ITAgent*, AGENT_STATE*, HRESULT)
-    put_measurement_period : Proc(ITAgent*, Int32, HRESULT)
-    get_measurement_period : Proc(ITAgent*, Int32*, HRESULT)
-    get_overall_call_rate : Proc(ITAgent*, CY*, HRESULT)
-    get_number_of_acd_calls : Proc(ITAgent*, Int32*, HRESULT)
-    get_number_of_incoming_calls : Proc(ITAgent*, Int32*, HRESULT)
-    get_number_of_outgoing_calls : Proc(ITAgent*, Int32*, HRESULT)
-    get_total_acd_talk_time : Proc(ITAgent*, Int32*, HRESULT)
-    get_total_acd_call_time : Proc(ITAgent*, Int32*, HRESULT)
-    get_total_wrap_up_time : Proc(ITAgent*, Int32*, HRESULT)
-    get_agent_sessions : Proc(ITAgent*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    enumerate_agent_sessions : UInt64
+    create_session : UInt64
+    create_session_with_pin : UInt64
+    get_id : UInt64
+    get_user : UInt64
+    put_state : UInt64
+    get_state : UInt64
+    put_measurement_period : UInt64
+    get_measurement_period : UInt64
+    get_overall_call_rate : UInt64
+    get_number_of_acd_calls : UInt64
+    get_number_of_incoming_calls : UInt64
+    get_number_of_outgoing_calls : UInt64
+    get_total_acd_talk_time : UInt64
+    get_total_acd_call_time : UInt64
+    get_total_wrap_up_time : UInt64
+    get_agent_sessions : UInt64
   end
 
   ITAgent_GUID = "5770ece5-4b27-11d1-bf80-00805fc147d3"
@@ -4732,30 +4732,30 @@ lib LibWin32
   end
 
   struct ITAgentSessionVTbl
-    query_interface : Proc(ITAgentSession*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITAgentSession*, UInt32)
-    release : Proc(ITAgentSession*, UInt32)
-    get_type_info_count : Proc(ITAgentSession*, UInt32*, HRESULT)
-    get_type_info : Proc(ITAgentSession*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITAgentSession*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITAgentSession*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_agent : Proc(ITAgentSession*, ITAgent*, HRESULT)
-    get_address : Proc(ITAgentSession*, ITAddress*, HRESULT)
-    get_acd_group : Proc(ITAgentSession*, ITACDGroup*, HRESULT)
-    put_state : Proc(ITAgentSession*, AGENT_SESSION_STATE, HRESULT)
-    get_state : Proc(ITAgentSession*, AGENT_SESSION_STATE*, HRESULT)
-    get_session_start_time : Proc(ITAgentSession*, Float64*, HRESULT)
-    get_session_duration : Proc(ITAgentSession*, Int32*, HRESULT)
-    get_number_of_calls : Proc(ITAgentSession*, Int32*, HRESULT)
-    get_total_talk_time : Proc(ITAgentSession*, Int32*, HRESULT)
-    get_average_talk_time : Proc(ITAgentSession*, Int32*, HRESULT)
-    get_total_call_time : Proc(ITAgentSession*, Int32*, HRESULT)
-    get_average_call_time : Proc(ITAgentSession*, Int32*, HRESULT)
-    get_total_wrap_up_time : Proc(ITAgentSession*, Int32*, HRESULT)
-    get_average_wrap_up_time : Proc(ITAgentSession*, Int32*, HRESULT)
-    get_acd_call_rate : Proc(ITAgentSession*, CY*, HRESULT)
-    get_longest_time_to_answer : Proc(ITAgentSession*, Int32*, HRESULT)
-    get_average_time_to_answer : Proc(ITAgentSession*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_agent : UInt64
+    get_address : UInt64
+    get_acd_group : UInt64
+    put_state : UInt64
+    get_state : UInt64
+    get_session_start_time : UInt64
+    get_session_duration : UInt64
+    get_number_of_calls : UInt64
+    get_total_talk_time : UInt64
+    get_average_talk_time : UInt64
+    get_total_call_time : UInt64
+    get_average_call_time : UInt64
+    get_total_wrap_up_time : UInt64
+    get_average_wrap_up_time : UInt64
+    get_acd_call_rate : UInt64
+    get_longest_time_to_answer : UInt64
+    get_average_time_to_answer : UInt64
   end
 
   ITAgentSession_GUID = "5afc3147-4bcc-11d1-bf80-00805fc147d3"
@@ -4765,16 +4765,16 @@ lib LibWin32
   end
 
   struct ITACDGroupVTbl
-    query_interface : Proc(ITACDGroup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITACDGroup*, UInt32)
-    release : Proc(ITACDGroup*, UInt32)
-    get_type_info_count : Proc(ITACDGroup*, UInt32*, HRESULT)
-    get_type_info : Proc(ITACDGroup*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITACDGroup*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITACDGroup*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(ITACDGroup*, UInt8**, HRESULT)
-    enumerate_queues : Proc(ITACDGroup*, IEnumQueue*, HRESULT)
-    get_queues : Proc(ITACDGroup*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    enumerate_queues : UInt64
+    get_queues : UInt64
   end
 
   ITACDGroup_GUID = "5afc3148-4bcc-11d1-bf80-00805fc147d3"
@@ -4784,25 +4784,25 @@ lib LibWin32
   end
 
   struct ITQueueVTbl
-    query_interface : Proc(ITQueue*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITQueue*, UInt32)
-    release : Proc(ITQueue*, UInt32)
-    get_type_info_count : Proc(ITQueue*, UInt32*, HRESULT)
-    get_type_info : Proc(ITQueue*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITQueue*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITQueue*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    put_measurement_period : Proc(ITQueue*, Int32, HRESULT)
-    get_measurement_period : Proc(ITQueue*, Int32*, HRESULT)
-    get_total_calls_queued : Proc(ITQueue*, Int32*, HRESULT)
-    get_current_calls_queued : Proc(ITQueue*, Int32*, HRESULT)
-    get_total_calls_abandoned : Proc(ITQueue*, Int32*, HRESULT)
-    get_total_calls_flowed_in : Proc(ITQueue*, Int32*, HRESULT)
-    get_total_calls_flowed_out : Proc(ITQueue*, Int32*, HRESULT)
-    get_longest_ever_wait_time : Proc(ITQueue*, Int32*, HRESULT)
-    get_current_longest_wait_time : Proc(ITQueue*, Int32*, HRESULT)
-    get_average_wait_time : Proc(ITQueue*, Int32*, HRESULT)
-    get_final_disposition : Proc(ITQueue*, Int32*, HRESULT)
-    get_name : Proc(ITQueue*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    put_measurement_period : UInt64
+    get_measurement_period : UInt64
+    get_total_calls_queued : UInt64
+    get_current_calls_queued : UInt64
+    get_total_calls_abandoned : UInt64
+    get_total_calls_flowed_in : UInt64
+    get_total_calls_flowed_out : UInt64
+    get_longest_ever_wait_time : UInt64
+    get_current_longest_wait_time : UInt64
+    get_average_wait_time : UInt64
+    get_final_disposition : UInt64
+    get_name : UInt64
   end
 
   ITQueue_GUID = "5afc3149-4bcc-11d1-bf80-00805fc147d3"
@@ -4812,15 +4812,15 @@ lib LibWin32
   end
 
   struct ITAgentEventVTbl
-    query_interface : Proc(ITAgentEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITAgentEvent*, UInt32)
-    release : Proc(ITAgentEvent*, UInt32)
-    get_type_info_count : Proc(ITAgentEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITAgentEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITAgentEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITAgentEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_agent : Proc(ITAgentEvent*, ITAgent*, HRESULT)
-    get_event : Proc(ITAgentEvent*, AGENT_EVENT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_agent : UInt64
+    get_event : UInt64
   end
 
   ITAgentEvent_GUID = "5afc314a-4bcc-11d1-bf80-00805fc147d3"
@@ -4830,15 +4830,15 @@ lib LibWin32
   end
 
   struct ITAgentSessionEventVTbl
-    query_interface : Proc(ITAgentSessionEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITAgentSessionEvent*, UInt32)
-    release : Proc(ITAgentSessionEvent*, UInt32)
-    get_type_info_count : Proc(ITAgentSessionEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITAgentSessionEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITAgentSessionEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITAgentSessionEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_session : Proc(ITAgentSessionEvent*, ITAgentSession*, HRESULT)
-    get_event : Proc(ITAgentSessionEvent*, AGENT_SESSION_EVENT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_session : UInt64
+    get_event : UInt64
   end
 
   ITAgentSessionEvent_GUID = "5afc314b-4bcc-11d1-bf80-00805fc147d3"
@@ -4848,15 +4848,15 @@ lib LibWin32
   end
 
   struct ITACDGroupEventVTbl
-    query_interface : Proc(ITACDGroupEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITACDGroupEvent*, UInt32)
-    release : Proc(ITACDGroupEvent*, UInt32)
-    get_type_info_count : Proc(ITACDGroupEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITACDGroupEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITACDGroupEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITACDGroupEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_group : Proc(ITACDGroupEvent*, ITACDGroup*, HRESULT)
-    get_event : Proc(ITACDGroupEvent*, ACDGROUP_EVENT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_group : UInt64
+    get_event : UInt64
   end
 
   ITACDGroupEvent_GUID = "297f3032-bd11-11d1-a0a7-00805fc147d3"
@@ -4866,15 +4866,15 @@ lib LibWin32
   end
 
   struct ITQueueEventVTbl
-    query_interface : Proc(ITQueueEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITQueueEvent*, UInt32)
-    release : Proc(ITQueueEvent*, UInt32)
-    get_type_info_count : Proc(ITQueueEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITQueueEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITQueueEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITQueueEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_queue : Proc(ITQueueEvent*, ITQueue*, HRESULT)
-    get_event : Proc(ITQueueEvent*, ACDQUEUE_EVENT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_queue : UInt64
+    get_event : UInt64
   end
 
   ITQueueEvent_GUID = "297f3033-bd11-11d1-a0a7-00805fc147d3"
@@ -4884,15 +4884,15 @@ lib LibWin32
   end
 
   struct ITAgentHandlerEventVTbl
-    query_interface : Proc(ITAgentHandlerEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITAgentHandlerEvent*, UInt32)
-    release : Proc(ITAgentHandlerEvent*, UInt32)
-    get_type_info_count : Proc(ITAgentHandlerEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(ITAgentHandlerEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITAgentHandlerEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITAgentHandlerEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_agent_handler : Proc(ITAgentHandlerEvent*, ITAgentHandler*, HRESULT)
-    get_event : Proc(ITAgentHandlerEvent*, AGENTHANDLER_EVENT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_agent_handler : UInt64
+    get_event : UInt64
   end
 
   ITAgentHandlerEvent_GUID = "297f3034-bd11-11d1-a0a7-00805fc147d3"
@@ -4902,15 +4902,15 @@ lib LibWin32
   end
 
   struct ITTAPICallCenterVTbl
-    query_interface : Proc(ITTAPICallCenter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITTAPICallCenter*, UInt32)
-    release : Proc(ITTAPICallCenter*, UInt32)
-    get_type_info_count : Proc(ITTAPICallCenter*, UInt32*, HRESULT)
-    get_type_info : Proc(ITTAPICallCenter*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITTAPICallCenter*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITTAPICallCenter*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    enumerate_agent_handlers : Proc(ITTAPICallCenter*, IEnumAgentHandler*, HRESULT)
-    get_agent_handlers : Proc(ITTAPICallCenter*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    enumerate_agent_handlers : UInt64
+    get_agent_handlers : UInt64
   end
 
   ITTAPICallCenter_GUID = "5afc3154-4bcc-11d1-bf80-00805fc147d3"
@@ -4920,20 +4920,20 @@ lib LibWin32
   end
 
   struct ITAgentHandlerVTbl
-    query_interface : Proc(ITAgentHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITAgentHandler*, UInt32)
-    release : Proc(ITAgentHandler*, UInt32)
-    get_type_info_count : Proc(ITAgentHandler*, UInt32*, HRESULT)
-    get_type_info : Proc(ITAgentHandler*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITAgentHandler*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITAgentHandler*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(ITAgentHandler*, UInt8**, HRESULT)
-    create_agent : Proc(ITAgentHandler*, ITAgent*, HRESULT)
-    create_agent_with_id : Proc(ITAgentHandler*, UInt8*, UInt8*, ITAgent*, HRESULT)
-    enumerate_acd_groups : Proc(ITAgentHandler*, IEnumACDGroup*, HRESULT)
-    enumerate_usable_addresses : Proc(ITAgentHandler*, IEnumAddress*, HRESULT)
-    get_acd_groups : Proc(ITAgentHandler*, VARIANT*, HRESULT)
-    get_usable_addresses : Proc(ITAgentHandler*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    create_agent : UInt64
+    create_agent_with_id : UInt64
+    enumerate_acd_groups : UInt64
+    enumerate_usable_addresses : UInt64
+    get_acd_groups : UInt64
+    get_usable_addresses : UInt64
   end
 
   ITAgentHandler_GUID = "587e8c22-9802-11d1-a0a4-00805fc147d3"
@@ -4943,13 +4943,13 @@ lib LibWin32
   end
 
   struct IEnumAgentVTbl
-    query_interface : Proc(IEnumAgent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumAgent*, UInt32)
-    release : Proc(IEnumAgent*, UInt32)
-    next : Proc(IEnumAgent*, UInt32, ITAgent*, UInt32*, HRESULT)
-    reset : Proc(IEnumAgent*, HRESULT)
-    skip : Proc(IEnumAgent*, UInt32, HRESULT)
-    clone : Proc(IEnumAgent*, IEnumAgent*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumAgent_GUID = "5afc314d-4bcc-11d1-bf80-00805fc147d3"
@@ -4959,13 +4959,13 @@ lib LibWin32
   end
 
   struct IEnumAgentSessionVTbl
-    query_interface : Proc(IEnumAgentSession*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumAgentSession*, UInt32)
-    release : Proc(IEnumAgentSession*, UInt32)
-    next : Proc(IEnumAgentSession*, UInt32, ITAgentSession*, UInt32*, HRESULT)
-    reset : Proc(IEnumAgentSession*, HRESULT)
-    skip : Proc(IEnumAgentSession*, UInt32, HRESULT)
-    clone : Proc(IEnumAgentSession*, IEnumAgentSession*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumAgentSession_GUID = "5afc314e-4bcc-11d1-bf80-00805fc147d3"
@@ -4975,13 +4975,13 @@ lib LibWin32
   end
 
   struct IEnumQueueVTbl
-    query_interface : Proc(IEnumQueue*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumQueue*, UInt32)
-    release : Proc(IEnumQueue*, UInt32)
-    next : Proc(IEnumQueue*, UInt32, ITQueue*, UInt32*, HRESULT)
-    reset : Proc(IEnumQueue*, HRESULT)
-    skip : Proc(IEnumQueue*, UInt32, HRESULT)
-    clone : Proc(IEnumQueue*, IEnumQueue*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumQueue_GUID = "5afc3158-4bcc-11d1-bf80-00805fc147d3"
@@ -4991,13 +4991,13 @@ lib LibWin32
   end
 
   struct IEnumACDGroupVTbl
-    query_interface : Proc(IEnumACDGroup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumACDGroup*, UInt32)
-    release : Proc(IEnumACDGroup*, UInt32)
-    next : Proc(IEnumACDGroup*, UInt32, ITACDGroup*, UInt32*, HRESULT)
-    reset : Proc(IEnumACDGroup*, HRESULT)
-    skip : Proc(IEnumACDGroup*, UInt32, HRESULT)
-    clone : Proc(IEnumACDGroup*, IEnumACDGroup*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumACDGroup_GUID = "5afc3157-4bcc-11d1-bf80-00805fc147d3"
@@ -5007,13 +5007,13 @@ lib LibWin32
   end
 
   struct IEnumAgentHandlerVTbl
-    query_interface : Proc(IEnumAgentHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumAgentHandler*, UInt32)
-    release : Proc(IEnumAgentHandler*, UInt32)
-    next : Proc(IEnumAgentHandler*, UInt32, ITAgentHandler*, UInt32*, HRESULT)
-    reset : Proc(IEnumAgentHandler*, HRESULT)
-    skip : Proc(IEnumAgentHandler*, UInt32, HRESULT)
-    clone : Proc(IEnumAgentHandler*, IEnumAgentHandler*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumAgentHandler_GUID = "587e8c28-9802-11d1-a0a4-00805fc147d3"
@@ -5023,11 +5023,11 @@ lib LibWin32
   end
 
   struct ITAMMediaFormatVTbl
-    query_interface : Proc(ITAMMediaFormat*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITAMMediaFormat*, UInt32)
-    release : Proc(ITAMMediaFormat*, UInt32)
-    get_media_format : Proc(ITAMMediaFormat*, AM_MEDIA_TYPE**, HRESULT)
-    put_media_format : Proc(ITAMMediaFormat*, AM_MEDIA_TYPE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_media_format : UInt64
+    put_media_format : UInt64
   end
 
   ITAMMediaFormat_GUID = "0364eb00-4a77-11d1-a671-006097c9a2e8"
@@ -5037,15 +5037,15 @@ lib LibWin32
   end
 
   struct ITAllocatorPropertiesVTbl
-    query_interface : Proc(ITAllocatorProperties*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITAllocatorProperties*, UInt32)
-    release : Proc(ITAllocatorProperties*, UInt32)
-    set_allocator_properties : Proc(ITAllocatorProperties*, ALLOCATOR_PROPERTIES*, HRESULT)
-    get_allocator_properties : Proc(ITAllocatorProperties*, ALLOCATOR_PROPERTIES*, HRESULT)
-    set_allocate_buffers : Proc(ITAllocatorProperties*, LibC::BOOL, HRESULT)
-    get_allocate_buffers : Proc(ITAllocatorProperties*, LibC::BOOL*, HRESULT)
-    set_buffer_size : Proc(ITAllocatorProperties*, UInt32, HRESULT)
-    get_buffer_size : Proc(ITAllocatorProperties*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_allocator_properties : UInt64
+    get_allocator_properties : UInt64
+    set_allocate_buffers : UInt64
+    get_allocate_buffers : UInt64
+    set_buffer_size : UInt64
+    get_buffer_size : UInt64
   end
 
   ITAllocatorProperties_GUID = "c1bc3c90-bcfe-11d1-9745-00c04fd91ac0"
@@ -5055,10 +5055,10 @@ lib LibWin32
   end
 
   struct ITPluggableTerminalEventSinkVTbl
-    query_interface : Proc(ITPluggableTerminalEventSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITPluggableTerminalEventSink*, UInt32)
-    release : Proc(ITPluggableTerminalEventSink*, UInt32)
-    fire_event : Proc(ITPluggableTerminalEventSink*, MSP_EVENT_INFO*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    fire_event : UInt64
   end
 
   ITPluggableTerminalEventSink_GUID = "6e0887be-ba1a-492e-bd10-4020ec5e33e0"
@@ -5068,11 +5068,11 @@ lib LibWin32
   end
 
   struct ITPluggableTerminalEventSinkRegistrationVTbl
-    query_interface : Proc(ITPluggableTerminalEventSinkRegistration*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITPluggableTerminalEventSinkRegistration*, UInt32)
-    release : Proc(ITPluggableTerminalEventSinkRegistration*, UInt32)
-    register_sink : Proc(ITPluggableTerminalEventSinkRegistration*, ITPluggableTerminalEventSink, HRESULT)
-    unregister_sink : Proc(ITPluggableTerminalEventSinkRegistration*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    register_sink : UInt64
+    unregister_sink : UInt64
   end
 
   ITPluggableTerminalEventSinkRegistration_GUID = "f7115709-a216-4957-a759-060ab32a90d1"
@@ -5082,15 +5082,15 @@ lib LibWin32
   end
 
   struct ITMSPAddressVTbl
-    query_interface : Proc(ITMSPAddress*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITMSPAddress*, UInt32)
-    release : Proc(ITMSPAddress*, UInt32)
-    initialize : Proc(ITMSPAddress*, Int32*, HRESULT)
-    shutdown : Proc(ITMSPAddress*, HRESULT)
-    create_msp_call : Proc(ITMSPAddress*, Int32*, UInt32, UInt32, IUnknown, IUnknown*, HRESULT)
-    shutdown_msp_call : Proc(ITMSPAddress*, IUnknown, HRESULT)
-    receive_tsp_data : Proc(ITMSPAddress*, IUnknown, UInt8*, UInt32, HRESULT)
-    get_event : Proc(ITMSPAddress*, UInt32*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    shutdown : UInt64
+    create_msp_call : UInt64
+    shutdown_msp_call : UInt64
+    receive_tsp_data : UInt64
+    get_event : UInt64
   end
 
   ITMSPAddress_GUID = "ee3bd600-3868-11d2-a045-00c04fb6809f"
@@ -5100,13 +5100,13 @@ lib LibWin32
   end
 
   struct ITTAPIDispatchEventNotificationVTbl
-    query_interface : Proc(ITTAPIDispatchEventNotification*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITTAPIDispatchEventNotification*, UInt32)
-    release : Proc(ITTAPIDispatchEventNotification*, UInt32)
-    get_type_info_count : Proc(ITTAPIDispatchEventNotification*, UInt32*, HRESULT)
-    get_type_info : Proc(ITTAPIDispatchEventNotification*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITTAPIDispatchEventNotification*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITTAPIDispatchEventNotification*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
   end
 
   ITTAPIDispatchEventNotification_GUID = "9f34325b-7e62-11d2-9457-00c04f8ec888"
@@ -5116,28 +5116,28 @@ lib LibWin32
   end
 
   struct ITDirectoryObjectConferenceVTbl
-    query_interface : Proc(ITDirectoryObjectConference*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITDirectoryObjectConference*, UInt32)
-    release : Proc(ITDirectoryObjectConference*, UInt32)
-    get_type_info_count : Proc(ITDirectoryObjectConference*, UInt32*, HRESULT)
-    get_type_info : Proc(ITDirectoryObjectConference*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITDirectoryObjectConference*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITDirectoryObjectConference*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_protocol : Proc(ITDirectoryObjectConference*, UInt8**, HRESULT)
-    get_originator : Proc(ITDirectoryObjectConference*, UInt8**, HRESULT)
-    put_originator : Proc(ITDirectoryObjectConference*, UInt8*, HRESULT)
-    get_advertising_scope : Proc(ITDirectoryObjectConference*, RND_ADVERTISING_SCOPE*, HRESULT)
-    put_advertising_scope : Proc(ITDirectoryObjectConference*, RND_ADVERTISING_SCOPE, HRESULT)
-    get_url : Proc(ITDirectoryObjectConference*, UInt8**, HRESULT)
-    put_url : Proc(ITDirectoryObjectConference*, UInt8*, HRESULT)
-    get_description : Proc(ITDirectoryObjectConference*, UInt8**, HRESULT)
-    put_description : Proc(ITDirectoryObjectConference*, UInt8*, HRESULT)
-    get_is_encrypted : Proc(ITDirectoryObjectConference*, Int16*, HRESULT)
-    put_is_encrypted : Proc(ITDirectoryObjectConference*, Int16, HRESULT)
-    get_start_time : Proc(ITDirectoryObjectConference*, Float64*, HRESULT)
-    put_start_time : Proc(ITDirectoryObjectConference*, Float64, HRESULT)
-    get_stop_time : Proc(ITDirectoryObjectConference*, Float64*, HRESULT)
-    put_stop_time : Proc(ITDirectoryObjectConference*, Float64, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_protocol : UInt64
+    get_originator : UInt64
+    put_originator : UInt64
+    get_advertising_scope : UInt64
+    put_advertising_scope : UInt64
+    get_url : UInt64
+    put_url : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_is_encrypted : UInt64
+    put_is_encrypted : UInt64
+    get_start_time : UInt64
+    put_start_time : UInt64
+    get_stop_time : UInt64
+    put_stop_time : UInt64
   end
 
   ITDirectoryObjectConference_GUID = "f1029e5d-cb5b-11d0-8d59-00c04fd91ac0"
@@ -5147,15 +5147,15 @@ lib LibWin32
   end
 
   struct ITDirectoryObjectUserVTbl
-    query_interface : Proc(ITDirectoryObjectUser*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITDirectoryObjectUser*, UInt32)
-    release : Proc(ITDirectoryObjectUser*, UInt32)
-    get_type_info_count : Proc(ITDirectoryObjectUser*, UInt32*, HRESULT)
-    get_type_info : Proc(ITDirectoryObjectUser*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITDirectoryObjectUser*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITDirectoryObjectUser*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_ip_phone_primary : Proc(ITDirectoryObjectUser*, UInt8**, HRESULT)
-    put_ip_phone_primary : Proc(ITDirectoryObjectUser*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_ip_phone_primary : UInt64
+    put_ip_phone_primary : UInt64
   end
 
   ITDirectoryObjectUser_GUID = "34621d6f-6cff-11d1-aff7-00c04fc31fee"
@@ -5165,13 +5165,13 @@ lib LibWin32
   end
 
   struct IEnumDialableAddrsVTbl
-    query_interface : Proc(IEnumDialableAddrs*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumDialableAddrs*, UInt32)
-    release : Proc(IEnumDialableAddrs*, UInt32)
-    next : Proc(IEnumDialableAddrs*, UInt32, UInt8**, UInt32*, HRESULT)
-    reset : Proc(IEnumDialableAddrs*, HRESULT)
-    skip : Proc(IEnumDialableAddrs*, UInt32, HRESULT)
-    clone : Proc(IEnumDialableAddrs*, IEnumDialableAddrs*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumDialableAddrs_GUID = "34621d70-6cff-11d1-aff7-00c04fc31fee"
@@ -5181,20 +5181,20 @@ lib LibWin32
   end
 
   struct ITDirectoryObjectVTbl
-    query_interface : Proc(ITDirectoryObject*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITDirectoryObject*, UInt32)
-    release : Proc(ITDirectoryObject*, UInt32)
-    get_type_info_count : Proc(ITDirectoryObject*, UInt32*, HRESULT)
-    get_type_info : Proc(ITDirectoryObject*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITDirectoryObject*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITDirectoryObject*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_object_type : Proc(ITDirectoryObject*, DIRECTORY_OBJECT_TYPE*, HRESULT)
-    get_name : Proc(ITDirectoryObject*, UInt8**, HRESULT)
-    put_name : Proc(ITDirectoryObject*, UInt8*, HRESULT)
-    get_dialable_addrs : Proc(ITDirectoryObject*, Int32, VARIANT*, HRESULT)
-    enumerate_dialable_addrs : Proc(ITDirectoryObject*, UInt32, IEnumDialableAddrs*, HRESULT)
-    get_security_descriptor : Proc(ITDirectoryObject*, IDispatch*, HRESULT)
-    put_security_descriptor : Proc(ITDirectoryObject*, IDispatch, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_object_type : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_dialable_addrs : UInt64
+    enumerate_dialable_addrs : UInt64
+    get_security_descriptor : UInt64
+    put_security_descriptor : UInt64
   end
 
   ITDirectoryObject_GUID = "34621d6e-6cff-11d1-aff7-00c04fc31fee"
@@ -5204,13 +5204,13 @@ lib LibWin32
   end
 
   struct IEnumDirectoryObjectVTbl
-    query_interface : Proc(IEnumDirectoryObject*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumDirectoryObject*, UInt32)
-    release : Proc(IEnumDirectoryObject*, UInt32)
-    next : Proc(IEnumDirectoryObject*, UInt32, ITDirectoryObject*, UInt32*, HRESULT)
-    reset : Proc(IEnumDirectoryObject*, HRESULT)
-    skip : Proc(IEnumDirectoryObject*, UInt32, HRESULT)
-    clone : Proc(IEnumDirectoryObject*, IEnumDirectoryObject*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumDirectoryObject_GUID = "06c9b64a-306d-11d1-9774-00c04fd91ac0"
@@ -5220,15 +5220,15 @@ lib LibWin32
   end
 
   struct ITILSConfigVTbl
-    query_interface : Proc(ITILSConfig*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITILSConfig*, UInt32)
-    release : Proc(ITILSConfig*, UInt32)
-    get_type_info_count : Proc(ITILSConfig*, UInt32*, HRESULT)
-    get_type_info : Proc(ITILSConfig*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITILSConfig*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITILSConfig*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_port : Proc(ITILSConfig*, Int32*, HRESULT)
-    put_port : Proc(ITILSConfig*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_port : UInt64
+    put_port : UInt64
   end
 
   ITILSConfig_GUID = "34621d72-6cff-11d1-aff7-00c04fc31fee"
@@ -5238,27 +5238,27 @@ lib LibWin32
   end
 
   struct ITDirectoryVTbl
-    query_interface : Proc(ITDirectory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITDirectory*, UInt32)
-    release : Proc(ITDirectory*, UInt32)
-    get_type_info_count : Proc(ITDirectory*, UInt32*, HRESULT)
-    get_type_info : Proc(ITDirectory*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITDirectory*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITDirectory*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_directory_type : Proc(ITDirectory*, DIRECTORY_TYPE*, HRESULT)
-    get_display_name : Proc(ITDirectory*, UInt8**, HRESULT)
-    get_is_dynamic : Proc(ITDirectory*, Int16*, HRESULT)
-    get_default_object_ttl : Proc(ITDirectory*, Int32*, HRESULT)
-    put_default_object_ttl : Proc(ITDirectory*, Int32, HRESULT)
-    enable_auto_refresh : Proc(ITDirectory*, Int16, HRESULT)
-    connect : Proc(ITDirectory*, Int16, HRESULT)
-    bind : Proc(ITDirectory*, UInt8*, UInt8*, UInt8*, Int32, HRESULT)
-    add_directory_object : Proc(ITDirectory*, ITDirectoryObject, HRESULT)
-    modify_directory_object : Proc(ITDirectory*, ITDirectoryObject, HRESULT)
-    refresh_directory_object : Proc(ITDirectory*, ITDirectoryObject, HRESULT)
-    delete_directory_object : Proc(ITDirectory*, ITDirectoryObject, HRESULT)
-    get_directory_objects : Proc(ITDirectory*, DIRECTORY_OBJECT_TYPE, UInt8*, VARIANT*, HRESULT)
-    enumerate_directory_objects : Proc(ITDirectory*, DIRECTORY_OBJECT_TYPE, UInt8*, IEnumDirectoryObject*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_directory_type : UInt64
+    get_display_name : UInt64
+    get_is_dynamic : UInt64
+    get_default_object_ttl : UInt64
+    put_default_object_ttl : UInt64
+    enable_auto_refresh : UInt64
+    connect : UInt64
+    bind : UInt64
+    add_directory_object : UInt64
+    modify_directory_object : UInt64
+    refresh_directory_object : UInt64
+    delete_directory_object : UInt64
+    get_directory_objects : UInt64
+    enumerate_directory_objects : UInt64
   end
 
   ITDirectory_GUID = "34621d6c-6cff-11d1-aff7-00c04fc31fee"
@@ -5268,13 +5268,13 @@ lib LibWin32
   end
 
   struct IEnumDirectoryVTbl
-    query_interface : Proc(IEnumDirectory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumDirectory*, UInt32)
-    release : Proc(IEnumDirectory*, UInt32)
-    next : Proc(IEnumDirectory*, UInt32, ITDirectory*, UInt32*, HRESULT)
-    reset : Proc(IEnumDirectory*, HRESULT)
-    skip : Proc(IEnumDirectory*, UInt32, HRESULT)
-    clone : Proc(IEnumDirectory*, IEnumDirectory*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumDirectory_GUID = "34621d6d-6cff-11d1-aff7-00c04fc31fee"
@@ -5284,17 +5284,17 @@ lib LibWin32
   end
 
   struct ITRendezvousVTbl
-    query_interface : Proc(ITRendezvous*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITRendezvous*, UInt32)
-    release : Proc(ITRendezvous*, UInt32)
-    get_type_info_count : Proc(ITRendezvous*, UInt32*, HRESULT)
-    get_type_info : Proc(ITRendezvous*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITRendezvous*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITRendezvous*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_default_directories : Proc(ITRendezvous*, VARIANT*, HRESULT)
-    enumerate_default_directories : Proc(ITRendezvous*, IEnumDirectory*, HRESULT)
-    create_directory : Proc(ITRendezvous*, DIRECTORY_TYPE, UInt8*, ITDirectory*, HRESULT)
-    create_directory_object : Proc(ITRendezvous*, DIRECTORY_OBJECT_TYPE, UInt8*, ITDirectoryObject*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_default_directories : UInt64
+    enumerate_default_directories : UInt64
+    create_directory : UInt64
+    create_directory_object : UInt64
   end
 
   ITRendezvous_GUID = "34621d6b-6cff-11d1-aff7-00c04fc31fee"
@@ -5304,18 +5304,18 @@ lib LibWin32
   end
 
   struct IMcastScopeVTbl
-    query_interface : Proc(IMcastScope*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMcastScope*, UInt32)
-    release : Proc(IMcastScope*, UInt32)
-    get_type_info_count : Proc(IMcastScope*, UInt32*, HRESULT)
-    get_type_info : Proc(IMcastScope*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IMcastScope*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IMcastScope*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_scope_id : Proc(IMcastScope*, Int32*, HRESULT)
-    get_server_id : Proc(IMcastScope*, Int32*, HRESULT)
-    get_interface_id : Proc(IMcastScope*, Int32*, HRESULT)
-    get_scope_description : Proc(IMcastScope*, UInt8**, HRESULT)
-    get_ttl : Proc(IMcastScope*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_scope_id : UInt64
+    get_server_id : UInt64
+    get_interface_id : UInt64
+    get_scope_description : UInt64
+    get_ttl : UInt64
   end
 
   IMcastScope_GUID = "df0daef4-a289-11d1-8697-006008b0e5d2"
@@ -5325,23 +5325,23 @@ lib LibWin32
   end
 
   struct IMcastLeaseInfoVTbl
-    query_interface : Proc(IMcastLeaseInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMcastLeaseInfo*, UInt32)
-    release : Proc(IMcastLeaseInfo*, UInt32)
-    get_type_info_count : Proc(IMcastLeaseInfo*, UInt32*, HRESULT)
-    get_type_info : Proc(IMcastLeaseInfo*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IMcastLeaseInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IMcastLeaseInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_request_id : Proc(IMcastLeaseInfo*, UInt8**, HRESULT)
-    get_lease_start_time : Proc(IMcastLeaseInfo*, Float64*, HRESULT)
-    put_lease_start_time : Proc(IMcastLeaseInfo*, Float64, HRESULT)
-    get_lease_stop_time : Proc(IMcastLeaseInfo*, Float64*, HRESULT)
-    put_lease_stop_time : Proc(IMcastLeaseInfo*, Float64, HRESULT)
-    get_address_count : Proc(IMcastLeaseInfo*, Int32*, HRESULT)
-    get_server_address : Proc(IMcastLeaseInfo*, UInt8**, HRESULT)
-    get_ttl : Proc(IMcastLeaseInfo*, Int32*, HRESULT)
-    get_addresses : Proc(IMcastLeaseInfo*, VARIANT*, HRESULT)
-    enumerate_addresses : Proc(IMcastLeaseInfo*, IEnumBstr*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_request_id : UInt64
+    get_lease_start_time : UInt64
+    put_lease_start_time : UInt64
+    get_lease_stop_time : UInt64
+    put_lease_stop_time : UInt64
+    get_address_count : UInt64
+    get_server_address : UInt64
+    get_ttl : UInt64
+    get_addresses : UInt64
+    enumerate_addresses : UInt64
   end
 
   IMcastLeaseInfo_GUID = "df0daefd-a289-11d1-8697-006008b0e5d2"
@@ -5351,13 +5351,13 @@ lib LibWin32
   end
 
   struct IEnumMcastScopeVTbl
-    query_interface : Proc(IEnumMcastScope*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumMcastScope*, UInt32)
-    release : Proc(IEnumMcastScope*, UInt32)
-    next : Proc(IEnumMcastScope*, UInt32, IMcastScope*, UInt32*, HRESULT)
-    reset : Proc(IEnumMcastScope*, HRESULT)
-    skip : Proc(IEnumMcastScope*, UInt32, HRESULT)
-    clone : Proc(IEnumMcastScope*, IEnumMcastScope*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
+    clone : UInt64
   end
 
   IEnumMcastScope_GUID = "df0daf09-a289-11d1-8697-006008b0e5d2"
@@ -5367,20 +5367,20 @@ lib LibWin32
   end
 
   struct IMcastAddressAllocationVTbl
-    query_interface : Proc(IMcastAddressAllocation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMcastAddressAllocation*, UInt32)
-    release : Proc(IMcastAddressAllocation*, UInt32)
-    get_type_info_count : Proc(IMcastAddressAllocation*, UInt32*, HRESULT)
-    get_type_info : Proc(IMcastAddressAllocation*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IMcastAddressAllocation*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IMcastAddressAllocation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_scopes : Proc(IMcastAddressAllocation*, VARIANT*, HRESULT)
-    enumerate_scopes : Proc(IMcastAddressAllocation*, IEnumMcastScope*, HRESULT)
-    request_address : Proc(IMcastAddressAllocation*, IMcastScope, Float64, Float64, Int32, IMcastLeaseInfo*, HRESULT)
-    renew_address : Proc(IMcastAddressAllocation*, Int32, IMcastLeaseInfo, IMcastLeaseInfo*, HRESULT)
-    release_address : Proc(IMcastAddressAllocation*, IMcastLeaseInfo, HRESULT)
-    create_lease_info : Proc(IMcastAddressAllocation*, Float64, Float64, UInt32, LibC::LPWSTR*, LibC::LPWSTR, LibC::LPWSTR, IMcastLeaseInfo*, HRESULT)
-    create_lease_info_from_variant : Proc(IMcastAddressAllocation*, Float64, Float64, VARIANT, UInt8*, UInt8*, IMcastLeaseInfo*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_scopes : UInt64
+    enumerate_scopes : UInt64
+    request_address : UInt64
+    renew_address : UInt64
+    release_address : UInt64
+    create_lease_info : UInt64
+    create_lease_info_from_variant : UInt64
   end
 
   IMcastAddressAllocation_GUID = "df0daef1-a289-11d1-8697-006008b0e5d2"
@@ -5390,16 +5390,16 @@ lib LibWin32
   end
 
   struct ITnefVTbl
-    query_interface : Proc(ITnef*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITnef*, UInt32)
-    release : Proc(ITnef*, UInt32)
-    add_props : Proc(ITnef*, UInt32, UInt32, Void*, SPropTagArray*, HRESULT)
-    extract_props : Proc(ITnef*, UInt32, SPropTagArray*, STnefProblemArray**, HRESULT)
-    finish : Proc(ITnef*, UInt32, UInt16*, STnefProblemArray**, HRESULT)
-    open_tagged_body : Proc(ITnef*, IMessage, UInt32, IStream*, HRESULT)
-    set_props : Proc(ITnef*, UInt32, UInt32, UInt32, SPropValue*, HRESULT)
-    encode_recips : Proc(ITnef*, UInt32, IMAPITable, HRESULT)
-    finish_component : Proc(ITnef*, UInt32, UInt32, SPropTagArray*, SPropValue*, SPropTagArray*, STnefProblemArray**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_props : UInt64
+    extract_props : UInt64
+    finish : UInt64
+    open_tagged_body : UInt64
+    set_props : UInt64
+    encode_recips : UInt64
+    finish_component : UInt64
   end
 
   struct ITnef
@@ -6162,4 +6162,4646 @@ lib LibWin32
 
   # Params # lpstream : IStream [In],lpulcodepage : UInt32* [In],lpulsubcodepage : UInt32* [In]
   fun GetTnefStreamCodepage(lpstream : IStream, lpulcodepage : UInt32*, lpulsubcodepage : UInt32*) : HRESULT
+end
+struct LibWin32::ITTAPI
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def initialize : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HRESULT)).call
+  end
+  def shutdown : HRESULT
+    @lpVtbl.value.shutdown.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_addresses(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_addresses.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_addresses(ppenumaddress : IEnumAddress*) : HRESULT
+    @lpVtbl.value.enumerate_addresses.unsafe_as(Proc(IEnumAddress*, HRESULT)).call(ppenumaddress)
+  end
+  def register_call_notifications(paddress : ITAddress, fmonitor : Int16, fowner : Int16, lmediatypes : Int32, lcallbackinstance : Int32, plregister : Int32*) : HRESULT
+    @lpVtbl.value.register_call_notifications.unsafe_as(Proc(ITAddress, Int16, Int16, Int32, Int32, Int32*, HRESULT)).call(paddress, fmonitor, fowner, lmediatypes, lcallbackinstance, plregister)
+  end
+  def unregister_notifications(lregister : Int32) : HRESULT
+    @lpVtbl.value.unregister_notifications.unsafe_as(Proc(Int32, HRESULT)).call(lregister)
+  end
+  def get_call_hubs(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_call_hubs.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_call_hubs(ppenumcallhub : IEnumCallHub*) : HRESULT
+    @lpVtbl.value.enumerate_call_hubs.unsafe_as(Proc(IEnumCallHub*, HRESULT)).call(ppenumcallhub)
+  end
+  def set_call_hub_tracking(paddresses : VARIANT, btracking : Int16) : HRESULT
+    @lpVtbl.value.set_call_hub_tracking.unsafe_as(Proc(VARIANT, Int16, HRESULT)).call(paddresses, btracking)
+  end
+  def enumerate_private_tapi_objects(ppenumunknown : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.enumerate_private_tapi_objects.unsafe_as(Proc(IEnumUnknown*, HRESULT)).call(ppenumunknown)
+  end
+  def get_private_tapi_objects(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_private_tapi_objects.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def register_request_recipient(lregistrationinstance : Int32, lrequestmode : Int32, fenable : Int16) : HRESULT
+    @lpVtbl.value.register_request_recipient.unsafe_as(Proc(Int32, Int32, Int16, HRESULT)).call(lregistrationinstance, lrequestmode, fenable)
+  end
+  def set_assisted_telephony_priority(pappfilename : UInt8*, fpriority : Int16) : HRESULT
+    @lpVtbl.value.set_assisted_telephony_priority.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(pappfilename, fpriority)
+  end
+  def set_application_priority(pappfilename : UInt8*, lmediatype : Int32, fpriority : Int16) : HRESULT
+    @lpVtbl.value.set_application_priority.unsafe_as(Proc(UInt8*, Int32, Int16, HRESULT)).call(pappfilename, lmediatype, fpriority)
+  end
+  def put_event_filter(lfiltermask : Int32) : HRESULT
+    @lpVtbl.value.put_event_filter.unsafe_as(Proc(Int32, HRESULT)).call(lfiltermask)
+  end
+  def get_event_filter(plfiltermask : Int32*) : HRESULT
+    @lpVtbl.value.get_event_filter.unsafe_as(Proc(Int32*, HRESULT)).call(plfiltermask)
+  end
+end
+struct LibWin32::ITTAPI2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def initialize : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HRESULT)).call
+  end
+  def shutdown : HRESULT
+    @lpVtbl.value.shutdown.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_addresses(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_addresses.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_addresses(ppenumaddress : IEnumAddress*) : HRESULT
+    @lpVtbl.value.enumerate_addresses.unsafe_as(Proc(IEnumAddress*, HRESULT)).call(ppenumaddress)
+  end
+  def register_call_notifications(paddress : ITAddress, fmonitor : Int16, fowner : Int16, lmediatypes : Int32, lcallbackinstance : Int32, plregister : Int32*) : HRESULT
+    @lpVtbl.value.register_call_notifications.unsafe_as(Proc(ITAddress, Int16, Int16, Int32, Int32, Int32*, HRESULT)).call(paddress, fmonitor, fowner, lmediatypes, lcallbackinstance, plregister)
+  end
+  def unregister_notifications(lregister : Int32) : HRESULT
+    @lpVtbl.value.unregister_notifications.unsafe_as(Proc(Int32, HRESULT)).call(lregister)
+  end
+  def get_call_hubs(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_call_hubs.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_call_hubs(ppenumcallhub : IEnumCallHub*) : HRESULT
+    @lpVtbl.value.enumerate_call_hubs.unsafe_as(Proc(IEnumCallHub*, HRESULT)).call(ppenumcallhub)
+  end
+  def set_call_hub_tracking(paddresses : VARIANT, btracking : Int16) : HRESULT
+    @lpVtbl.value.set_call_hub_tracking.unsafe_as(Proc(VARIANT, Int16, HRESULT)).call(paddresses, btracking)
+  end
+  def enumerate_private_tapi_objects(ppenumunknown : IEnumUnknown*) : HRESULT
+    @lpVtbl.value.enumerate_private_tapi_objects.unsafe_as(Proc(IEnumUnknown*, HRESULT)).call(ppenumunknown)
+  end
+  def get_private_tapi_objects(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_private_tapi_objects.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def register_request_recipient(lregistrationinstance : Int32, lrequestmode : Int32, fenable : Int16) : HRESULT
+    @lpVtbl.value.register_request_recipient.unsafe_as(Proc(Int32, Int32, Int16, HRESULT)).call(lregistrationinstance, lrequestmode, fenable)
+  end
+  def set_assisted_telephony_priority(pappfilename : UInt8*, fpriority : Int16) : HRESULT
+    @lpVtbl.value.set_assisted_telephony_priority.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(pappfilename, fpriority)
+  end
+  def set_application_priority(pappfilename : UInt8*, lmediatype : Int32, fpriority : Int16) : HRESULT
+    @lpVtbl.value.set_application_priority.unsafe_as(Proc(UInt8*, Int32, Int16, HRESULT)).call(pappfilename, lmediatype, fpriority)
+  end
+  def put_event_filter(lfiltermask : Int32) : HRESULT
+    @lpVtbl.value.put_event_filter.unsafe_as(Proc(Int32, HRESULT)).call(lfiltermask)
+  end
+  def get_event_filter(plfiltermask : Int32*) : HRESULT
+    @lpVtbl.value.get_event_filter.unsafe_as(Proc(Int32*, HRESULT)).call(plfiltermask)
+  end
+  def get_phones(pphones : VARIANT*) : HRESULT
+    @lpVtbl.value.get_phones.unsafe_as(Proc(VARIANT*, HRESULT)).call(pphones)
+  end
+  def enumerate_phones(ppenumphone : IEnumPhone*) : HRESULT
+    @lpVtbl.value.enumerate_phones.unsafe_as(Proc(IEnumPhone*, HRESULT)).call(ppenumphone)
+  end
+  def create_empty_collection_object(ppcollection : ITCollection2*) : HRESULT
+    @lpVtbl.value.create_empty_collection_object.unsafe_as(Proc(ITCollection2*, HRESULT)).call(ppcollection)
+  end
+end
+struct LibWin32::ITMediaSupport
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_media_types(plmediatypes : Int32*) : HRESULT
+    @lpVtbl.value.get_media_types.unsafe_as(Proc(Int32*, HRESULT)).call(plmediatypes)
+  end
+  def query_media_type(lmediatype : Int32, pfsupport : Int16*) : HRESULT
+    @lpVtbl.value.query_media_type.unsafe_as(Proc(Int32, Int16*, HRESULT)).call(lmediatype, pfsupport)
+  end
+end
+struct LibWin32::ITPluggableTerminalClassInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pname)
+  end
+  def get_company(pcompany : UInt8**) : HRESULT
+    @lpVtbl.value.get_company.unsafe_as(Proc(UInt8**, HRESULT)).call(pcompany)
+  end
+  def get_version(pversion : UInt8**) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(UInt8**, HRESULT)).call(pversion)
+  end
+  def get_terminal_class(pterminalclass : UInt8**) : HRESULT
+    @lpVtbl.value.get_terminal_class.unsafe_as(Proc(UInt8**, HRESULT)).call(pterminalclass)
+  end
+  def get_clsid(pclsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_clsid.unsafe_as(Proc(UInt8**, HRESULT)).call(pclsid)
+  end
+  def get_direction(pdirection : TERMINAL_DIRECTION*) : HRESULT
+    @lpVtbl.value.get_direction.unsafe_as(Proc(TERMINAL_DIRECTION*, HRESULT)).call(pdirection)
+  end
+  def get_media_types(pmediatypes : Int32*) : HRESULT
+    @lpVtbl.value.get_media_types.unsafe_as(Proc(Int32*, HRESULT)).call(pmediatypes)
+  end
+end
+struct LibWin32::ITPluggableTerminalSuperclassInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pname)
+  end
+  def get_clsid(pclsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_clsid.unsafe_as(Proc(UInt8**, HRESULT)).call(pclsid)
+  end
+end
+struct LibWin32::ITTerminalSupport
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_static_terminals(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_static_terminals.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_static_terminals(ppterminalenumerator : IEnumTerminal*) : HRESULT
+    @lpVtbl.value.enumerate_static_terminals.unsafe_as(Proc(IEnumTerminal*, HRESULT)).call(ppterminalenumerator)
+  end
+  def get_dynamic_terminal_classes(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_dynamic_terminal_classes.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_dynamic_terminal_classes(ppterminalclassenumerator : IEnumTerminalClass*) : HRESULT
+    @lpVtbl.value.enumerate_dynamic_terminal_classes.unsafe_as(Proc(IEnumTerminalClass*, HRESULT)).call(ppterminalclassenumerator)
+  end
+  def create_terminal(pterminalclass : UInt8*, lmediatype : Int32, direction : TERMINAL_DIRECTION, ppterminal : ITTerminal*) : HRESULT
+    @lpVtbl.value.create_terminal.unsafe_as(Proc(UInt8*, Int32, TERMINAL_DIRECTION, ITTerminal*, HRESULT)).call(pterminalclass, lmediatype, direction, ppterminal)
+  end
+  def get_default_static_terminal(lmediatype : Int32, direction : TERMINAL_DIRECTION, ppterminal : ITTerminal*) : HRESULT
+    @lpVtbl.value.get_default_static_terminal.unsafe_as(Proc(Int32, TERMINAL_DIRECTION, ITTerminal*, HRESULT)).call(lmediatype, direction, ppterminal)
+  end
+end
+struct LibWin32::ITTerminalSupport2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_static_terminals(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_static_terminals.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_static_terminals(ppterminalenumerator : IEnumTerminal*) : HRESULT
+    @lpVtbl.value.enumerate_static_terminals.unsafe_as(Proc(IEnumTerminal*, HRESULT)).call(ppterminalenumerator)
+  end
+  def get_dynamic_terminal_classes(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_dynamic_terminal_classes.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_dynamic_terminal_classes(ppterminalclassenumerator : IEnumTerminalClass*) : HRESULT
+    @lpVtbl.value.enumerate_dynamic_terminal_classes.unsafe_as(Proc(IEnumTerminalClass*, HRESULT)).call(ppterminalclassenumerator)
+  end
+  def create_terminal(pterminalclass : UInt8*, lmediatype : Int32, direction : TERMINAL_DIRECTION, ppterminal : ITTerminal*) : HRESULT
+    @lpVtbl.value.create_terminal.unsafe_as(Proc(UInt8*, Int32, TERMINAL_DIRECTION, ITTerminal*, HRESULT)).call(pterminalclass, lmediatype, direction, ppterminal)
+  end
+  def get_default_static_terminal(lmediatype : Int32, direction : TERMINAL_DIRECTION, ppterminal : ITTerminal*) : HRESULT
+    @lpVtbl.value.get_default_static_terminal.unsafe_as(Proc(Int32, TERMINAL_DIRECTION, ITTerminal*, HRESULT)).call(lmediatype, direction, ppterminal)
+  end
+  def get_pluggable_superclasses(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_pluggable_superclasses.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_pluggable_superclasses(ppsuperclassenumerator : IEnumPluggableSuperclassInfo*) : HRESULT
+    @lpVtbl.value.enumerate_pluggable_superclasses.unsafe_as(Proc(IEnumPluggableSuperclassInfo*, HRESULT)).call(ppsuperclassenumerator)
+  end
+  def get_pluggable_terminal_classes(bstrterminalsuperclass : UInt8*, lmediatype : Int32, pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_pluggable_terminal_classes.unsafe_as(Proc(UInt8*, Int32, VARIANT*, HRESULT)).call(bstrterminalsuperclass, lmediatype, pvariant)
+  end
+  def enumerate_pluggable_terminal_classes(iidterminalsuperclass : Guid, lmediatype : Int32, ppclassenumerator : IEnumPluggableTerminalClassInfo*) : HRESULT
+    @lpVtbl.value.enumerate_pluggable_terminal_classes.unsafe_as(Proc(Guid, Int32, IEnumPluggableTerminalClassInfo*, HRESULT)).call(iidterminalsuperclass, lmediatype, ppclassenumerator)
+  end
+end
+struct LibWin32::ITAddress
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_state(paddressstate : ADDRESS_STATE*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(ADDRESS_STATE*, HRESULT)).call(paddressstate)
+  end
+  def get_address_name(ppname : UInt8**) : HRESULT
+    @lpVtbl.value.get_address_name.unsafe_as(Proc(UInt8**, HRESULT)).call(ppname)
+  end
+  def get_service_provider_name(ppname : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_provider_name.unsafe_as(Proc(UInt8**, HRESULT)).call(ppname)
+  end
+  def get_tapi_object(pptapiobject : ITTAPI*) : HRESULT
+    @lpVtbl.value.get_tapi_object.unsafe_as(Proc(ITTAPI*, HRESULT)).call(pptapiobject)
+  end
+  def create_call(pdestaddress : UInt8*, laddresstype : Int32, lmediatypes : Int32, ppcall : ITBasicCallControl*) : HRESULT
+    @lpVtbl.value.create_call.unsafe_as(Proc(UInt8*, Int32, Int32, ITBasicCallControl*, HRESULT)).call(pdestaddress, laddresstype, lmediatypes, ppcall)
+  end
+  def get_calls(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_calls.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_calls(ppcallenum : IEnumCall*) : HRESULT
+    @lpVtbl.value.enumerate_calls.unsafe_as(Proc(IEnumCall*, HRESULT)).call(ppcallenum)
+  end
+  def get_dialable_address(pdialableaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_dialable_address.unsafe_as(Proc(UInt8**, HRESULT)).call(pdialableaddress)
+  end
+  def create_forward_info_object(ppforwardinfo : ITForwardInformation*) : HRESULT
+    @lpVtbl.value.create_forward_info_object.unsafe_as(Proc(ITForwardInformation*, HRESULT)).call(ppforwardinfo)
+  end
+  def forward(pforwardinfo : ITForwardInformation, pcall : ITBasicCallControl) : HRESULT
+    @lpVtbl.value.forward.unsafe_as(Proc(ITForwardInformation, ITBasicCallControl, HRESULT)).call(pforwardinfo, pcall)
+  end
+  def get_current_forward_info(ppforwardinfo : ITForwardInformation*) : HRESULT
+    @lpVtbl.value.get_current_forward_info.unsafe_as(Proc(ITForwardInformation*, HRESULT)).call(ppforwardinfo)
+  end
+  def put_message_waiting(fmessagewaiting : Int16) : HRESULT
+    @lpVtbl.value.put_message_waiting.unsafe_as(Proc(Int16, HRESULT)).call(fmessagewaiting)
+  end
+  def get_message_waiting(pfmessagewaiting : Int16*) : HRESULT
+    @lpVtbl.value.get_message_waiting.unsafe_as(Proc(Int16*, HRESULT)).call(pfmessagewaiting)
+  end
+  def put_do_not_disturb(fdonotdisturb : Int16) : HRESULT
+    @lpVtbl.value.put_do_not_disturb.unsafe_as(Proc(Int16, HRESULT)).call(fdonotdisturb)
+  end
+  def get_do_not_disturb(pfdonotdisturb : Int16*) : HRESULT
+    @lpVtbl.value.get_do_not_disturb.unsafe_as(Proc(Int16*, HRESULT)).call(pfdonotdisturb)
+  end
+end
+struct LibWin32::ITAddress2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_state(paddressstate : ADDRESS_STATE*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(ADDRESS_STATE*, HRESULT)).call(paddressstate)
+  end
+  def get_address_name(ppname : UInt8**) : HRESULT
+    @lpVtbl.value.get_address_name.unsafe_as(Proc(UInt8**, HRESULT)).call(ppname)
+  end
+  def get_service_provider_name(ppname : UInt8**) : HRESULT
+    @lpVtbl.value.get_service_provider_name.unsafe_as(Proc(UInt8**, HRESULT)).call(ppname)
+  end
+  def get_tapi_object(pptapiobject : ITTAPI*) : HRESULT
+    @lpVtbl.value.get_tapi_object.unsafe_as(Proc(ITTAPI*, HRESULT)).call(pptapiobject)
+  end
+  def create_call(pdestaddress : UInt8*, laddresstype : Int32, lmediatypes : Int32, ppcall : ITBasicCallControl*) : HRESULT
+    @lpVtbl.value.create_call.unsafe_as(Proc(UInt8*, Int32, Int32, ITBasicCallControl*, HRESULT)).call(pdestaddress, laddresstype, lmediatypes, ppcall)
+  end
+  def get_calls(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_calls.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_calls(ppcallenum : IEnumCall*) : HRESULT
+    @lpVtbl.value.enumerate_calls.unsafe_as(Proc(IEnumCall*, HRESULT)).call(ppcallenum)
+  end
+  def get_dialable_address(pdialableaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_dialable_address.unsafe_as(Proc(UInt8**, HRESULT)).call(pdialableaddress)
+  end
+  def create_forward_info_object(ppforwardinfo : ITForwardInformation*) : HRESULT
+    @lpVtbl.value.create_forward_info_object.unsafe_as(Proc(ITForwardInformation*, HRESULT)).call(ppforwardinfo)
+  end
+  def forward(pforwardinfo : ITForwardInformation, pcall : ITBasicCallControl) : HRESULT
+    @lpVtbl.value.forward.unsafe_as(Proc(ITForwardInformation, ITBasicCallControl, HRESULT)).call(pforwardinfo, pcall)
+  end
+  def get_current_forward_info(ppforwardinfo : ITForwardInformation*) : HRESULT
+    @lpVtbl.value.get_current_forward_info.unsafe_as(Proc(ITForwardInformation*, HRESULT)).call(ppforwardinfo)
+  end
+  def put_message_waiting(fmessagewaiting : Int16) : HRESULT
+    @lpVtbl.value.put_message_waiting.unsafe_as(Proc(Int16, HRESULT)).call(fmessagewaiting)
+  end
+  def get_message_waiting(pfmessagewaiting : Int16*) : HRESULT
+    @lpVtbl.value.get_message_waiting.unsafe_as(Proc(Int16*, HRESULT)).call(pfmessagewaiting)
+  end
+  def put_do_not_disturb(fdonotdisturb : Int16) : HRESULT
+    @lpVtbl.value.put_do_not_disturb.unsafe_as(Proc(Int16, HRESULT)).call(fdonotdisturb)
+  end
+  def get_do_not_disturb(pfdonotdisturb : Int16*) : HRESULT
+    @lpVtbl.value.get_do_not_disturb.unsafe_as(Proc(Int16*, HRESULT)).call(pfdonotdisturb)
+  end
+  def get_phones(pphones : VARIANT*) : HRESULT
+    @lpVtbl.value.get_phones.unsafe_as(Proc(VARIANT*, HRESULT)).call(pphones)
+  end
+  def enumerate_phones(ppenumphone : IEnumPhone*) : HRESULT
+    @lpVtbl.value.enumerate_phones.unsafe_as(Proc(IEnumPhone*, HRESULT)).call(ppenumphone)
+  end
+  def get_phone_from_terminal(pterminal : ITTerminal, ppphone : ITPhone*) : HRESULT
+    @lpVtbl.value.get_phone_from_terminal.unsafe_as(Proc(ITTerminal, ITPhone*, HRESULT)).call(pterminal, ppphone)
+  end
+  def get_preferred_phones(pphones : VARIANT*) : HRESULT
+    @lpVtbl.value.get_preferred_phones.unsafe_as(Proc(VARIANT*, HRESULT)).call(pphones)
+  end
+  def enumerate_preferred_phones(ppenumphone : IEnumPhone*) : HRESULT
+    @lpVtbl.value.enumerate_preferred_phones.unsafe_as(Proc(IEnumPhone*, HRESULT)).call(ppenumphone)
+  end
+  def get_event_filter(tapievent : TAPI_EVENT, lsubevent : Int32, penable : Int16*) : HRESULT
+    @lpVtbl.value.get_event_filter.unsafe_as(Proc(TAPI_EVENT, Int32, Int16*, HRESULT)).call(tapievent, lsubevent, penable)
+  end
+  def put_event_filter(tapievent : TAPI_EVENT, lsubevent : Int32, benable : Int16) : HRESULT
+    @lpVtbl.value.put_event_filter.unsafe_as(Proc(TAPI_EVENT, Int32, Int16, HRESULT)).call(tapievent, lsubevent, benable)
+  end
+  def device_specific(pcall : ITCallInfo, pparams : UInt8*, dwsize : UInt32) : HRESULT
+    @lpVtbl.value.device_specific.unsafe_as(Proc(ITCallInfo, UInt8*, UInt32, HRESULT)).call(pcall, pparams, dwsize)
+  end
+  def device_specific_variant(pcall : ITCallInfo, vardevspecificbytearray : VARIANT) : HRESULT
+    @lpVtbl.value.device_specific_variant.unsafe_as(Proc(ITCallInfo, VARIANT, HRESULT)).call(pcall, vardevspecificbytearray)
+  end
+  def negotiate_ext_version(llowversion : Int32, lhighversion : Int32, plextversion : Int32*) : HRESULT
+    @lpVtbl.value.negotiate_ext_version.unsafe_as(Proc(Int32, Int32, Int32*, HRESULT)).call(llowversion, lhighversion, plextversion)
+  end
+end
+struct LibWin32::ITAddressCapabilities
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_address_capability(addresscap : ADDRESS_CAPABILITY, plcapability : Int32*) : HRESULT
+    @lpVtbl.value.get_address_capability.unsafe_as(Proc(ADDRESS_CAPABILITY, Int32*, HRESULT)).call(addresscap, plcapability)
+  end
+  def get_address_capability_string(addresscapstring : ADDRESS_CAPABILITY_STRING, ppcapabilitystring : UInt8**) : HRESULT
+    @lpVtbl.value.get_address_capability_string.unsafe_as(Proc(ADDRESS_CAPABILITY_STRING, UInt8**, HRESULT)).call(addresscapstring, ppcapabilitystring)
+  end
+  def get_call_treatments(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_call_treatments.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_call_treatments(ppenumcalltreatment : IEnumBstr*) : HRESULT
+    @lpVtbl.value.enumerate_call_treatments.unsafe_as(Proc(IEnumBstr*, HRESULT)).call(ppenumcalltreatment)
+  end
+  def get_completion_messages(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_completion_messages.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_completion_messages(ppenumcompletionmessage : IEnumBstr*) : HRESULT
+    @lpVtbl.value.enumerate_completion_messages.unsafe_as(Proc(IEnumBstr*, HRESULT)).call(ppenumcompletionmessage)
+  end
+  def get_device_classes(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_device_classes.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_device_classes(ppenumdeviceclass : IEnumBstr*) : HRESULT
+    @lpVtbl.value.enumerate_device_classes.unsafe_as(Proc(IEnumBstr*, HRESULT)).call(ppenumdeviceclass)
+  end
+end
+struct LibWin32::ITPhone
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def open(privilege : PHONE_PRIVILEGE) : HRESULT
+    @lpVtbl.value.open.unsafe_as(Proc(PHONE_PRIVILEGE, HRESULT)).call(privilege)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_addresses(paddresses : VARIANT*) : HRESULT
+    @lpVtbl.value.get_addresses.unsafe_as(Proc(VARIANT*, HRESULT)).call(paddresses)
+  end
+  def enumerate_addresses(ppenumaddress : IEnumAddress*) : HRESULT
+    @lpVtbl.value.enumerate_addresses.unsafe_as(Proc(IEnumAddress*, HRESULT)).call(ppenumaddress)
+  end
+  def get_phone_caps_long(pclcap : PHONECAPS_LONG, plcapability : Int32*) : HRESULT
+    @lpVtbl.value.get_phone_caps_long.unsafe_as(Proc(PHONECAPS_LONG, Int32*, HRESULT)).call(pclcap, plcapability)
+  end
+  def get_phone_caps_string(pcscap : PHONECAPS_STRING, ppcapability : UInt8**) : HRESULT
+    @lpVtbl.value.get_phone_caps_string.unsafe_as(Proc(PHONECAPS_STRING, UInt8**, HRESULT)).call(pcscap, ppcapability)
+  end
+  def get_terminals(paddress : ITAddress, pterminals : VARIANT*) : HRESULT
+    @lpVtbl.value.get_terminals.unsafe_as(Proc(ITAddress, VARIANT*, HRESULT)).call(paddress, pterminals)
+  end
+  def enumerate_terminals(paddress : ITAddress, ppenumterminal : IEnumTerminal*) : HRESULT
+    @lpVtbl.value.enumerate_terminals.unsafe_as(Proc(ITAddress, IEnumTerminal*, HRESULT)).call(paddress, ppenumterminal)
+  end
+  def get_button_mode(lbuttonid : Int32, pbuttonmode : PHONE_BUTTON_MODE*) : HRESULT
+    @lpVtbl.value.get_button_mode.unsafe_as(Proc(Int32, PHONE_BUTTON_MODE*, HRESULT)).call(lbuttonid, pbuttonmode)
+  end
+  def put_button_mode(lbuttonid : Int32, buttonmode : PHONE_BUTTON_MODE) : HRESULT
+    @lpVtbl.value.put_button_mode.unsafe_as(Proc(Int32, PHONE_BUTTON_MODE, HRESULT)).call(lbuttonid, buttonmode)
+  end
+  def get_button_function(lbuttonid : Int32, pbuttonfunction : PHONE_BUTTON_FUNCTION*) : HRESULT
+    @lpVtbl.value.get_button_function.unsafe_as(Proc(Int32, PHONE_BUTTON_FUNCTION*, HRESULT)).call(lbuttonid, pbuttonfunction)
+  end
+  def put_button_function(lbuttonid : Int32, buttonfunction : PHONE_BUTTON_FUNCTION) : HRESULT
+    @lpVtbl.value.put_button_function.unsafe_as(Proc(Int32, PHONE_BUTTON_FUNCTION, HRESULT)).call(lbuttonid, buttonfunction)
+  end
+  def get_button_text(lbuttonid : Int32, ppbuttontext : UInt8**) : HRESULT
+    @lpVtbl.value.get_button_text.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(lbuttonid, ppbuttontext)
+  end
+  def put_button_text(lbuttonid : Int32, bstrbuttontext : UInt8*) : HRESULT
+    @lpVtbl.value.put_button_text.unsafe_as(Proc(Int32, UInt8*, HRESULT)).call(lbuttonid, bstrbuttontext)
+  end
+  def get_button_state(lbuttonid : Int32, pbuttonstate : PHONE_BUTTON_STATE*) : HRESULT
+    @lpVtbl.value.get_button_state.unsafe_as(Proc(Int32, PHONE_BUTTON_STATE*, HRESULT)).call(lbuttonid, pbuttonstate)
+  end
+  def get_hook_switch_state(hookswitchdevice : PHONE_HOOK_SWITCH_DEVICE, phookswitchstate : PHONE_HOOK_SWITCH_STATE*) : HRESULT
+    @lpVtbl.value.get_hook_switch_state.unsafe_as(Proc(PHONE_HOOK_SWITCH_DEVICE, PHONE_HOOK_SWITCH_STATE*, HRESULT)).call(hookswitchdevice, phookswitchstate)
+  end
+  def put_hook_switch_state(hookswitchdevice : PHONE_HOOK_SWITCH_DEVICE, hookswitchstate : PHONE_HOOK_SWITCH_STATE) : HRESULT
+    @lpVtbl.value.put_hook_switch_state.unsafe_as(Proc(PHONE_HOOK_SWITCH_DEVICE, PHONE_HOOK_SWITCH_STATE, HRESULT)).call(hookswitchdevice, hookswitchstate)
+  end
+  def put_ring_mode(lringmode : Int32) : HRESULT
+    @lpVtbl.value.put_ring_mode.unsafe_as(Proc(Int32, HRESULT)).call(lringmode)
+  end
+  def get_ring_mode(plringmode : Int32*) : HRESULT
+    @lpVtbl.value.get_ring_mode.unsafe_as(Proc(Int32*, HRESULT)).call(plringmode)
+  end
+  def put_ring_volume(lringvolume : Int32) : HRESULT
+    @lpVtbl.value.put_ring_volume.unsafe_as(Proc(Int32, HRESULT)).call(lringvolume)
+  end
+  def get_ring_volume(plringvolume : Int32*) : HRESULT
+    @lpVtbl.value.get_ring_volume.unsafe_as(Proc(Int32*, HRESULT)).call(plringvolume)
+  end
+  def get_privilege(pprivilege : PHONE_PRIVILEGE*) : HRESULT
+    @lpVtbl.value.get_privilege.unsafe_as(Proc(PHONE_PRIVILEGE*, HRESULT)).call(pprivilege)
+  end
+  def get_phone_caps_buffer(pcbcaps : PHONECAPS_BUFFER, pdwsize : UInt32*, ppphonecapsbuffer : UInt8**) : HRESULT
+    @lpVtbl.value.get_phone_caps_buffer.unsafe_as(Proc(PHONECAPS_BUFFER, UInt32*, UInt8**, HRESULT)).call(pcbcaps, pdwsize, ppphonecapsbuffer)
+  end
+  def get_phone_caps_buffer2(pcbcaps : PHONECAPS_BUFFER, pvarbuffer : VARIANT*) : HRESULT
+    @lpVtbl.value.get_phone_caps_buffer2.unsafe_as(Proc(PHONECAPS_BUFFER, VARIANT*, HRESULT)).call(pcbcaps, pvarbuffer)
+  end
+  def get_lamp_mode(llampid : Int32, plampmode : PHONE_LAMP_MODE*) : HRESULT
+    @lpVtbl.value.get_lamp_mode.unsafe_as(Proc(Int32, PHONE_LAMP_MODE*, HRESULT)).call(llampid, plampmode)
+  end
+  def put_lamp_mode(llampid : Int32, lampmode : PHONE_LAMP_MODE) : HRESULT
+    @lpVtbl.value.put_lamp_mode.unsafe_as(Proc(Int32, PHONE_LAMP_MODE, HRESULT)).call(llampid, lampmode)
+  end
+  def get_display(pbstrdisplay : UInt8**) : HRESULT
+    @lpVtbl.value.get_display.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdisplay)
+  end
+  def set_display(lrow : Int32, lcolumn : Int32, bstrdisplay : UInt8*) : HRESULT
+    @lpVtbl.value.set_display.unsafe_as(Proc(Int32, Int32, UInt8*, HRESULT)).call(lrow, lcolumn, bstrdisplay)
+  end
+  def get_preferred_addresses(paddresses : VARIANT*) : HRESULT
+    @lpVtbl.value.get_preferred_addresses.unsafe_as(Proc(VARIANT*, HRESULT)).call(paddresses)
+  end
+  def enumerate_preferred_addresses(ppenumaddress : IEnumAddress*) : HRESULT
+    @lpVtbl.value.enumerate_preferred_addresses.unsafe_as(Proc(IEnumAddress*, HRESULT)).call(ppenumaddress)
+  end
+  def device_specific(pparams : UInt8*, dwsize : UInt32) : HRESULT
+    @lpVtbl.value.device_specific.unsafe_as(Proc(UInt8*, UInt32, HRESULT)).call(pparams, dwsize)
+  end
+  def device_specific_variant(vardevspecificbytearray : VARIANT) : HRESULT
+    @lpVtbl.value.device_specific_variant.unsafe_as(Proc(VARIANT, HRESULT)).call(vardevspecificbytearray)
+  end
+  def negotiate_ext_version(llowversion : Int32, lhighversion : Int32, plextversion : Int32*) : HRESULT
+    @lpVtbl.value.negotiate_ext_version.unsafe_as(Proc(Int32, Int32, Int32*, HRESULT)).call(llowversion, lhighversion, plextversion)
+  end
+end
+struct LibWin32::ITAutomatedPhoneControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def start_tone(tone : PHONE_TONE, lduration : Int32) : HRESULT
+    @lpVtbl.value.start_tone.unsafe_as(Proc(PHONE_TONE, Int32, HRESULT)).call(tone, lduration)
+  end
+  def stop_tone : HRESULT
+    @lpVtbl.value.stop_tone.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_tone(ptone : PHONE_TONE*) : HRESULT
+    @lpVtbl.value.get_tone.unsafe_as(Proc(PHONE_TONE*, HRESULT)).call(ptone)
+  end
+  def start_ringer(lringmode : Int32, lduration : Int32) : HRESULT
+    @lpVtbl.value.start_ringer.unsafe_as(Proc(Int32, Int32, HRESULT)).call(lringmode, lduration)
+  end
+  def stop_ringer : HRESULT
+    @lpVtbl.value.stop_ringer.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_ringer(pfringing : Int16*) : HRESULT
+    @lpVtbl.value.get_ringer.unsafe_as(Proc(Int16*, HRESULT)).call(pfringing)
+  end
+  def put_phone_handling_enabled(fenabled : Int16) : HRESULT
+    @lpVtbl.value.put_phone_handling_enabled.unsafe_as(Proc(Int16, HRESULT)).call(fenabled)
+  end
+  def get_phone_handling_enabled(pfenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_phone_handling_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pfenabled)
+  end
+  def put_auto_end_of_number_timeout(ltimeout : Int32) : HRESULT
+    @lpVtbl.value.put_auto_end_of_number_timeout.unsafe_as(Proc(Int32, HRESULT)).call(ltimeout)
+  end
+  def get_auto_end_of_number_timeout(pltimeout : Int32*) : HRESULT
+    @lpVtbl.value.get_auto_end_of_number_timeout.unsafe_as(Proc(Int32*, HRESULT)).call(pltimeout)
+  end
+  def put_auto_dialtone(fenabled : Int16) : HRESULT
+    @lpVtbl.value.put_auto_dialtone.unsafe_as(Proc(Int16, HRESULT)).call(fenabled)
+  end
+  def get_auto_dialtone(pfenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_dialtone.unsafe_as(Proc(Int16*, HRESULT)).call(pfenabled)
+  end
+  def put_auto_stop_tones_on_on_hook(fenabled : Int16) : HRESULT
+    @lpVtbl.value.put_auto_stop_tones_on_on_hook.unsafe_as(Proc(Int16, HRESULT)).call(fenabled)
+  end
+  def get_auto_stop_tones_on_on_hook(pfenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_stop_tones_on_on_hook.unsafe_as(Proc(Int16*, HRESULT)).call(pfenabled)
+  end
+  def put_auto_stop_ring_on_off_hook(fenabled : Int16) : HRESULT
+    @lpVtbl.value.put_auto_stop_ring_on_off_hook.unsafe_as(Proc(Int16, HRESULT)).call(fenabled)
+  end
+  def get_auto_stop_ring_on_off_hook(pfenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_stop_ring_on_off_hook.unsafe_as(Proc(Int16*, HRESULT)).call(pfenabled)
+  end
+  def put_auto_keypad_tones(fenabled : Int16) : HRESULT
+    @lpVtbl.value.put_auto_keypad_tones.unsafe_as(Proc(Int16, HRESULT)).call(fenabled)
+  end
+  def get_auto_keypad_tones(pfenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_keypad_tones.unsafe_as(Proc(Int16*, HRESULT)).call(pfenabled)
+  end
+  def put_auto_keypad_tones_minimum_duration(lduration : Int32) : HRESULT
+    @lpVtbl.value.put_auto_keypad_tones_minimum_duration.unsafe_as(Proc(Int32, HRESULT)).call(lduration)
+  end
+  def get_auto_keypad_tones_minimum_duration(plduration : Int32*) : HRESULT
+    @lpVtbl.value.get_auto_keypad_tones_minimum_duration.unsafe_as(Proc(Int32*, HRESULT)).call(plduration)
+  end
+  def put_auto_volume_control(fenabled : Int16) : HRESULT
+    @lpVtbl.value.put_auto_volume_control.unsafe_as(Proc(Int16, HRESULT)).call(fenabled)
+  end
+  def get_auto_volume_control(fenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_volume_control.unsafe_as(Proc(Int16*, HRESULT)).call(fenabled)
+  end
+  def put_auto_volume_control_step(lstepsize : Int32) : HRESULT
+    @lpVtbl.value.put_auto_volume_control_step.unsafe_as(Proc(Int32, HRESULT)).call(lstepsize)
+  end
+  def get_auto_volume_control_step(plstepsize : Int32*) : HRESULT
+    @lpVtbl.value.get_auto_volume_control_step.unsafe_as(Proc(Int32*, HRESULT)).call(plstepsize)
+  end
+  def put_auto_volume_control_repeat_delay(ldelay : Int32) : HRESULT
+    @lpVtbl.value.put_auto_volume_control_repeat_delay.unsafe_as(Proc(Int32, HRESULT)).call(ldelay)
+  end
+  def get_auto_volume_control_repeat_delay(pldelay : Int32*) : HRESULT
+    @lpVtbl.value.get_auto_volume_control_repeat_delay.unsafe_as(Proc(Int32*, HRESULT)).call(pldelay)
+  end
+  def put_auto_volume_control_repeat_period(lperiod : Int32) : HRESULT
+    @lpVtbl.value.put_auto_volume_control_repeat_period.unsafe_as(Proc(Int32, HRESULT)).call(lperiod)
+  end
+  def get_auto_volume_control_repeat_period(plperiod : Int32*) : HRESULT
+    @lpVtbl.value.get_auto_volume_control_repeat_period.unsafe_as(Proc(Int32*, HRESULT)).call(plperiod)
+  end
+  def select_call(pcall : ITCallInfo, fselectdefaultterminals : Int16) : HRESULT
+    @lpVtbl.value.select_call.unsafe_as(Proc(ITCallInfo, Int16, HRESULT)).call(pcall, fselectdefaultterminals)
+  end
+  def unselect_call(pcall : ITCallInfo) : HRESULT
+    @lpVtbl.value.unselect_call.unsafe_as(Proc(ITCallInfo, HRESULT)).call(pcall)
+  end
+  def enumerate_selected_calls(ppcallenum : IEnumCall*) : HRESULT
+    @lpVtbl.value.enumerate_selected_calls.unsafe_as(Proc(IEnumCall*, HRESULT)).call(ppcallenum)
+  end
+  def get_selected_calls(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_selected_calls.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+end
+struct LibWin32::ITBasicCallControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def connect(fsync : Int16) : HRESULT
+    @lpVtbl.value.connect.unsafe_as(Proc(Int16, HRESULT)).call(fsync)
+  end
+  def answer : HRESULT
+    @lpVtbl.value.answer.unsafe_as(Proc(HRESULT)).call
+  end
+  def disconnect(code : DISCONNECT_CODE) : HRESULT
+    @lpVtbl.value.disconnect.unsafe_as(Proc(DISCONNECT_CODE, HRESULT)).call(code)
+  end
+  def hold(fhold : Int16) : HRESULT
+    @lpVtbl.value.hold.unsafe_as(Proc(Int16, HRESULT)).call(fhold)
+  end
+  def handoff_direct(papplicationname : UInt8*) : HRESULT
+    @lpVtbl.value.handoff_direct.unsafe_as(Proc(UInt8*, HRESULT)).call(papplicationname)
+  end
+  def handoff_indirect(lmediatype : Int32) : HRESULT
+    @lpVtbl.value.handoff_indirect.unsafe_as(Proc(Int32, HRESULT)).call(lmediatype)
+  end
+  def conference(pcall : ITBasicCallControl, fsync : Int16) : HRESULT
+    @lpVtbl.value.conference.unsafe_as(Proc(ITBasicCallControl, Int16, HRESULT)).call(pcall, fsync)
+  end
+  def transfer(pcall : ITBasicCallControl, fsync : Int16) : HRESULT
+    @lpVtbl.value.transfer.unsafe_as(Proc(ITBasicCallControl, Int16, HRESULT)).call(pcall, fsync)
+  end
+  def blind_transfer(pdestaddress : UInt8*) : HRESULT
+    @lpVtbl.value.blind_transfer.unsafe_as(Proc(UInt8*, HRESULT)).call(pdestaddress)
+  end
+  def swap_hold(pcall : ITBasicCallControl) : HRESULT
+    @lpVtbl.value.swap_hold.unsafe_as(Proc(ITBasicCallControl, HRESULT)).call(pcall)
+  end
+  def park_direct(pparkaddress : UInt8*) : HRESULT
+    @lpVtbl.value.park_direct.unsafe_as(Proc(UInt8*, HRESULT)).call(pparkaddress)
+  end
+  def park_indirect(ppnondiraddress : UInt8**) : HRESULT
+    @lpVtbl.value.park_indirect.unsafe_as(Proc(UInt8**, HRESULT)).call(ppnondiraddress)
+  end
+  def unpark : HRESULT
+    @lpVtbl.value.unpark.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_qos(lmediatype : Int32, servicelevel : QOS_SERVICE_LEVEL) : HRESULT
+    @lpVtbl.value.set_qos.unsafe_as(Proc(Int32, QOS_SERVICE_LEVEL, HRESULT)).call(lmediatype, servicelevel)
+  end
+  def pickup(pgroupid : UInt8*) : HRESULT
+    @lpVtbl.value.pickup.unsafe_as(Proc(UInt8*, HRESULT)).call(pgroupid)
+  end
+  def dial(pdestaddress : UInt8*) : HRESULT
+    @lpVtbl.value.dial.unsafe_as(Proc(UInt8*, HRESULT)).call(pdestaddress)
+  end
+  def finish(finishmode : FINISH_MODE) : HRESULT
+    @lpVtbl.value.finish.unsafe_as(Proc(FINISH_MODE, HRESULT)).call(finishmode)
+  end
+  def remove_from_conference : HRESULT
+    @lpVtbl.value.remove_from_conference.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITCallInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_address(ppaddress : ITAddress*) : HRESULT
+    @lpVtbl.value.get_address.unsafe_as(Proc(ITAddress*, HRESULT)).call(ppaddress)
+  end
+  def get_call_state(pcallstate : CALL_STATE*) : HRESULT
+    @lpVtbl.value.get_call_state.unsafe_as(Proc(CALL_STATE*, HRESULT)).call(pcallstate)
+  end
+  def get_privilege(pprivilege : CALL_PRIVILEGE*) : HRESULT
+    @lpVtbl.value.get_privilege.unsafe_as(Proc(CALL_PRIVILEGE*, HRESULT)).call(pprivilege)
+  end
+  def get_call_hub(ppcallhub : ITCallHub*) : HRESULT
+    @lpVtbl.value.get_call_hub.unsafe_as(Proc(ITCallHub*, HRESULT)).call(ppcallhub)
+  end
+  def get_call_info_long(callinfolong : CALLINFO_LONG, plcallinfolongval : Int32*) : HRESULT
+    @lpVtbl.value.get_call_info_long.unsafe_as(Proc(CALLINFO_LONG, Int32*, HRESULT)).call(callinfolong, plcallinfolongval)
+  end
+  def put_call_info_long(callinfolong : CALLINFO_LONG, lcallinfolongval : Int32) : HRESULT
+    @lpVtbl.value.put_call_info_long.unsafe_as(Proc(CALLINFO_LONG, Int32, HRESULT)).call(callinfolong, lcallinfolongval)
+  end
+  def get_call_info_string(callinfostring : CALLINFO_STRING, ppcallinfostring : UInt8**) : HRESULT
+    @lpVtbl.value.get_call_info_string.unsafe_as(Proc(CALLINFO_STRING, UInt8**, HRESULT)).call(callinfostring, ppcallinfostring)
+  end
+  def put_call_info_string(callinfostring : CALLINFO_STRING, pcallinfostring : UInt8*) : HRESULT
+    @lpVtbl.value.put_call_info_string.unsafe_as(Proc(CALLINFO_STRING, UInt8*, HRESULT)).call(callinfostring, pcallinfostring)
+  end
+  def get_call_info_buffer(callinfobuffer : CALLINFO_BUFFER, ppcallinfobuffer : VARIANT*) : HRESULT
+    @lpVtbl.value.get_call_info_buffer.unsafe_as(Proc(CALLINFO_BUFFER, VARIANT*, HRESULT)).call(callinfobuffer, ppcallinfobuffer)
+  end
+  def put_call_info_buffer(callinfobuffer : CALLINFO_BUFFER, pcallinfobuffer : VARIANT) : HRESULT
+    @lpVtbl.value.put_call_info_buffer.unsafe_as(Proc(CALLINFO_BUFFER, VARIANT, HRESULT)).call(callinfobuffer, pcallinfobuffer)
+  end
+  def get_call_info_buffer2(callinfobuffer : CALLINFO_BUFFER, pdwsize : UInt32*, ppcallinfobuffer : UInt8**) : HRESULT
+    @lpVtbl.value.get_call_info_buffer2.unsafe_as(Proc(CALLINFO_BUFFER, UInt32*, UInt8**, HRESULT)).call(callinfobuffer, pdwsize, ppcallinfobuffer)
+  end
+  def set_call_info_buffer(callinfobuffer : CALLINFO_BUFFER, dwsize : UInt32, pcallinfobuffer : UInt8*) : HRESULT
+    @lpVtbl.value.set_call_info_buffer.unsafe_as(Proc(CALLINFO_BUFFER, UInt32, UInt8*, HRESULT)).call(callinfobuffer, dwsize, pcallinfobuffer)
+  end
+  def release_user_user_info : HRESULT
+    @lpVtbl.value.release_user_user_info.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITCallInfo2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_address(ppaddress : ITAddress*) : HRESULT
+    @lpVtbl.value.get_address.unsafe_as(Proc(ITAddress*, HRESULT)).call(ppaddress)
+  end
+  def get_call_state(pcallstate : CALL_STATE*) : HRESULT
+    @lpVtbl.value.get_call_state.unsafe_as(Proc(CALL_STATE*, HRESULT)).call(pcallstate)
+  end
+  def get_privilege(pprivilege : CALL_PRIVILEGE*) : HRESULT
+    @lpVtbl.value.get_privilege.unsafe_as(Proc(CALL_PRIVILEGE*, HRESULT)).call(pprivilege)
+  end
+  def get_call_hub(ppcallhub : ITCallHub*) : HRESULT
+    @lpVtbl.value.get_call_hub.unsafe_as(Proc(ITCallHub*, HRESULT)).call(ppcallhub)
+  end
+  def get_call_info_long(callinfolong : CALLINFO_LONG, plcallinfolongval : Int32*) : HRESULT
+    @lpVtbl.value.get_call_info_long.unsafe_as(Proc(CALLINFO_LONG, Int32*, HRESULT)).call(callinfolong, plcallinfolongval)
+  end
+  def put_call_info_long(callinfolong : CALLINFO_LONG, lcallinfolongval : Int32) : HRESULT
+    @lpVtbl.value.put_call_info_long.unsafe_as(Proc(CALLINFO_LONG, Int32, HRESULT)).call(callinfolong, lcallinfolongval)
+  end
+  def get_call_info_string(callinfostring : CALLINFO_STRING, ppcallinfostring : UInt8**) : HRESULT
+    @lpVtbl.value.get_call_info_string.unsafe_as(Proc(CALLINFO_STRING, UInt8**, HRESULT)).call(callinfostring, ppcallinfostring)
+  end
+  def put_call_info_string(callinfostring : CALLINFO_STRING, pcallinfostring : UInt8*) : HRESULT
+    @lpVtbl.value.put_call_info_string.unsafe_as(Proc(CALLINFO_STRING, UInt8*, HRESULT)).call(callinfostring, pcallinfostring)
+  end
+  def get_call_info_buffer(callinfobuffer : CALLINFO_BUFFER, ppcallinfobuffer : VARIANT*) : HRESULT
+    @lpVtbl.value.get_call_info_buffer.unsafe_as(Proc(CALLINFO_BUFFER, VARIANT*, HRESULT)).call(callinfobuffer, ppcallinfobuffer)
+  end
+  def put_call_info_buffer(callinfobuffer : CALLINFO_BUFFER, pcallinfobuffer : VARIANT) : HRESULT
+    @lpVtbl.value.put_call_info_buffer.unsafe_as(Proc(CALLINFO_BUFFER, VARIANT, HRESULT)).call(callinfobuffer, pcallinfobuffer)
+  end
+  def get_call_info_buffer2(callinfobuffer : CALLINFO_BUFFER, pdwsize : UInt32*, ppcallinfobuffer : UInt8**) : HRESULT
+    @lpVtbl.value.get_call_info_buffer2.unsafe_as(Proc(CALLINFO_BUFFER, UInt32*, UInt8**, HRESULT)).call(callinfobuffer, pdwsize, ppcallinfobuffer)
+  end
+  def set_call_info_buffer(callinfobuffer : CALLINFO_BUFFER, dwsize : UInt32, pcallinfobuffer : UInt8*) : HRESULT
+    @lpVtbl.value.set_call_info_buffer.unsafe_as(Proc(CALLINFO_BUFFER, UInt32, UInt8*, HRESULT)).call(callinfobuffer, dwsize, pcallinfobuffer)
+  end
+  def release_user_user_info : HRESULT
+    @lpVtbl.value.release_user_user_info.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_event_filter(tapievent : TAPI_EVENT, lsubevent : Int32, penable : Int16*) : HRESULT
+    @lpVtbl.value.get_event_filter.unsafe_as(Proc(TAPI_EVENT, Int32, Int16*, HRESULT)).call(tapievent, lsubevent, penable)
+  end
+  def put_event_filter(tapievent : TAPI_EVENT, lsubevent : Int32, benable : Int16) : HRESULT
+    @lpVtbl.value.put_event_filter.unsafe_as(Proc(TAPI_EVENT, Int32, Int16, HRESULT)).call(tapievent, lsubevent, benable)
+  end
+end
+struct LibWin32::ITTerminal
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(ppname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(ppname)
+  end
+  def get_state(pterminalstate : TERMINAL_STATE*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(TERMINAL_STATE*, HRESULT)).call(pterminalstate)
+  end
+  def get_terminal_type(ptype : TERMINAL_TYPE*) : HRESULT
+    @lpVtbl.value.get_terminal_type.unsafe_as(Proc(TERMINAL_TYPE*, HRESULT)).call(ptype)
+  end
+  def get_terminal_class(ppterminalclass : UInt8**) : HRESULT
+    @lpVtbl.value.get_terminal_class.unsafe_as(Proc(UInt8**, HRESULT)).call(ppterminalclass)
+  end
+  def get_media_type(plmediatype : Int32*) : HRESULT
+    @lpVtbl.value.get_media_type.unsafe_as(Proc(Int32*, HRESULT)).call(plmediatype)
+  end
+  def get_direction(pdirection : TERMINAL_DIRECTION*) : HRESULT
+    @lpVtbl.value.get_direction.unsafe_as(Proc(TERMINAL_DIRECTION*, HRESULT)).call(pdirection)
+  end
+end
+struct LibWin32::ITMultiTrackTerminal
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_track_terminals(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_track_terminals.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_track_terminals(ppenumterminal : IEnumTerminal*) : HRESULT
+    @lpVtbl.value.enumerate_track_terminals.unsafe_as(Proc(IEnumTerminal*, HRESULT)).call(ppenumterminal)
+  end
+  def create_track_terminal(mediatype : Int32, terminaldirection : TERMINAL_DIRECTION, ppterminal : ITTerminal*) : HRESULT
+    @lpVtbl.value.create_track_terminal.unsafe_as(Proc(Int32, TERMINAL_DIRECTION, ITTerminal*, HRESULT)).call(mediatype, terminaldirection, ppterminal)
+  end
+  def get_media_types_in_use(plmediatypesinuse : Int32*) : HRESULT
+    @lpVtbl.value.get_media_types_in_use.unsafe_as(Proc(Int32*, HRESULT)).call(plmediatypesinuse)
+  end
+  def get_directions_in_use(pldirectionsinused : TERMINAL_DIRECTION*) : HRESULT
+    @lpVtbl.value.get_directions_in_use.unsafe_as(Proc(TERMINAL_DIRECTION*, HRESULT)).call(pldirectionsinused)
+  end
+  def remove_track_terminal(ptrackterminaltoremove : ITTerminal) : HRESULT
+    @lpVtbl.value.remove_track_terminal.unsafe_as(Proc(ITTerminal, HRESULT)).call(ptrackterminaltoremove)
+  end
+end
+struct LibWin32::ITFileTrack
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_format(ppmt : AM_MEDIA_TYPE**) : HRESULT
+    @lpVtbl.value.get_format.unsafe_as(Proc(AM_MEDIA_TYPE**, HRESULT)).call(ppmt)
+  end
+  def put_format(pmt : AM_MEDIA_TYPE*) : HRESULT
+    @lpVtbl.value.put_format.unsafe_as(Proc(AM_MEDIA_TYPE*, HRESULT)).call(pmt)
+  end
+  def get_controlling_terminal(ppcontrollingterminal : ITTerminal*) : HRESULT
+    @lpVtbl.value.get_controlling_terminal.unsafe_as(Proc(ITTerminal*, HRESULT)).call(ppcontrollingterminal)
+  end
+  def get_audio_format_for_scripting(ppaudioformat : ITScriptableAudioFormat*) : HRESULT
+    @lpVtbl.value.get_audio_format_for_scripting.unsafe_as(Proc(ITScriptableAudioFormat*, HRESULT)).call(ppaudioformat)
+  end
+  def put_audio_format_for_scripting(paudioformat : ITScriptableAudioFormat) : HRESULT
+    @lpVtbl.value.put_audio_format_for_scripting.unsafe_as(Proc(ITScriptableAudioFormat, HRESULT)).call(paudioformat)
+  end
+  def get_empty_audio_format_for_scripting(ppaudioformat : ITScriptableAudioFormat*) : HRESULT
+    @lpVtbl.value.get_empty_audio_format_for_scripting.unsafe_as(Proc(ITScriptableAudioFormat*, HRESULT)).call(ppaudioformat)
+  end
+end
+struct LibWin32::ITMediaPlayback
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def put_play_list(playlistvariant : VARIANT) : HRESULT
+    @lpVtbl.value.put_play_list.unsafe_as(Proc(VARIANT, HRESULT)).call(playlistvariant)
+  end
+  def get_play_list(pplaylistvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_play_list.unsafe_as(Proc(VARIANT*, HRESULT)).call(pplaylistvariant)
+  end
+end
+struct LibWin32::ITMediaRecord
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def put_file_name(bstrfilename : UInt8*) : HRESULT
+    @lpVtbl.value.put_file_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrfilename)
+  end
+  def get_file_name(pbstrfilename : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrfilename)
+  end
+end
+struct LibWin32::ITMediaControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def start : HRESULT
+    @lpVtbl.value.start.unsafe_as(Proc(HRESULT)).call
+  end
+  def stop : HRESULT
+    @lpVtbl.value.stop.unsafe_as(Proc(HRESULT)).call
+  end
+  def pause : HRESULT
+    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_media_state(pterminalmediastate : TERMINAL_MEDIA_STATE*) : HRESULT
+    @lpVtbl.value.get_media_state.unsafe_as(Proc(TERMINAL_MEDIA_STATE*, HRESULT)).call(pterminalmediastate)
+  end
+end
+struct LibWin32::ITBasicAudioTerminal
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def put_volume(lvolume : Int32) : HRESULT
+    @lpVtbl.value.put_volume.unsafe_as(Proc(Int32, HRESULT)).call(lvolume)
+  end
+  def get_volume(plvolume : Int32*) : HRESULT
+    @lpVtbl.value.get_volume.unsafe_as(Proc(Int32*, HRESULT)).call(plvolume)
+  end
+  def put_balance(lbalance : Int32) : HRESULT
+    @lpVtbl.value.put_balance.unsafe_as(Proc(Int32, HRESULT)).call(lbalance)
+  end
+  def get_balance(plbalance : Int32*) : HRESULT
+    @lpVtbl.value.get_balance.unsafe_as(Proc(Int32*, HRESULT)).call(plbalance)
+  end
+end
+struct LibWin32::ITStaticAudioTerminal
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_wave_id(plwaveid : Int32*) : HRESULT
+    @lpVtbl.value.get_wave_id.unsafe_as(Proc(Int32*, HRESULT)).call(plwaveid)
+  end
+end
+struct LibWin32::ITCallHub
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def clear : HRESULT
+    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  end
+  def enumerate_calls(ppenumcall : IEnumCall*) : HRESULT
+    @lpVtbl.value.enumerate_calls.unsafe_as(Proc(IEnumCall*, HRESULT)).call(ppenumcall)
+  end
+  def get_calls(pcalls : VARIANT*) : HRESULT
+    @lpVtbl.value.get_calls.unsafe_as(Proc(VARIANT*, HRESULT)).call(pcalls)
+  end
+  def get_num_calls(plcalls : Int32*) : HRESULT
+    @lpVtbl.value.get_num_calls.unsafe_as(Proc(Int32*, HRESULT)).call(plcalls)
+  end
+  def get_state(pstate : CALLHUB_STATE*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(CALLHUB_STATE*, HRESULT)).call(pstate)
+  end
+end
+struct LibWin32::ITLegacyAddressMediaControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_id(pdeviceclass : UInt8*, pdwsize : UInt32*, ppdeviceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8*, UInt32*, UInt8**, HRESULT)).call(pdeviceclass, pdwsize, ppdeviceid)
+  end
+  def get_dev_config(pdeviceclass : UInt8*, pdwsize : UInt32*, ppdeviceconfig : UInt8**) : HRESULT
+    @lpVtbl.value.get_dev_config.unsafe_as(Proc(UInt8*, UInt32*, UInt8**, HRESULT)).call(pdeviceclass, pdwsize, ppdeviceconfig)
+  end
+  def set_dev_config(pdeviceclass : UInt8*, dwsize : UInt32, pdeviceconfig : UInt8*) : HRESULT
+    @lpVtbl.value.set_dev_config.unsafe_as(Proc(UInt8*, UInt32, UInt8*, HRESULT)).call(pdeviceclass, dwsize, pdeviceconfig)
+  end
+end
+struct LibWin32::ITPrivateEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_address(ppaddress : ITAddress*) : HRESULT
+    @lpVtbl.value.get_address.unsafe_as(Proc(ITAddress*, HRESULT)).call(ppaddress)
+  end
+  def get_call(ppcallinfo : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcallinfo)
+  end
+  def get_call_hub(ppcallhub : ITCallHub*) : HRESULT
+    @lpVtbl.value.get_call_hub.unsafe_as(Proc(ITCallHub*, HRESULT)).call(ppcallhub)
+  end
+  def get_event_code(pleventcode : Int32*) : HRESULT
+    @lpVtbl.value.get_event_code.unsafe_as(Proc(Int32*, HRESULT)).call(pleventcode)
+  end
+  def get_event_interface(peventinterface : IDispatch*) : HRESULT
+    @lpVtbl.value.get_event_interface.unsafe_as(Proc(IDispatch*, HRESULT)).call(peventinterface)
+  end
+end
+struct LibWin32::ITLegacyAddressMediaControl2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_id(pdeviceclass : UInt8*, pdwsize : UInt32*, ppdeviceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8*, UInt32*, UInt8**, HRESULT)).call(pdeviceclass, pdwsize, ppdeviceid)
+  end
+  def get_dev_config(pdeviceclass : UInt8*, pdwsize : UInt32*, ppdeviceconfig : UInt8**) : HRESULT
+    @lpVtbl.value.get_dev_config.unsafe_as(Proc(UInt8*, UInt32*, UInt8**, HRESULT)).call(pdeviceclass, pdwsize, ppdeviceconfig)
+  end
+  def set_dev_config(pdeviceclass : UInt8*, dwsize : UInt32, pdeviceconfig : UInt8*) : HRESULT
+    @lpVtbl.value.set_dev_config.unsafe_as(Proc(UInt8*, UInt32, UInt8*, HRESULT)).call(pdeviceclass, dwsize, pdeviceconfig)
+  end
+  def config_dialog(hwndowner : LibC::HANDLE, pdeviceclass : UInt8*) : HRESULT
+    @lpVtbl.value.config_dialog.unsafe_as(Proc(LibC::HANDLE, UInt8*, HRESULT)).call(hwndowner, pdeviceclass)
+  end
+  def config_dialog_edit(hwndowner : LibC::HANDLE, pdeviceclass : UInt8*, dwsizein : UInt32, pdeviceconfigin : UInt8*, pdwsizeout : UInt32*, ppdeviceconfigout : UInt8**) : HRESULT
+    @lpVtbl.value.config_dialog_edit.unsafe_as(Proc(LibC::HANDLE, UInt8*, UInt32, UInt8*, UInt32*, UInt8**, HRESULT)).call(hwndowner, pdeviceclass, dwsizein, pdeviceconfigin, pdwsizeout, ppdeviceconfigout)
+  end
+end
+struct LibWin32::ITLegacyCallMediaControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def detect_digits(digitmode : Int32) : HRESULT
+    @lpVtbl.value.detect_digits.unsafe_as(Proc(Int32, HRESULT)).call(digitmode)
+  end
+  def generate_digits(pdigits : UInt8*, digitmode : Int32) : HRESULT
+    @lpVtbl.value.generate_digits.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(pdigits, digitmode)
+  end
+  def get_id(pdeviceclass : UInt8*, pdwsize : UInt32*, ppdeviceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8*, UInt32*, UInt8**, HRESULT)).call(pdeviceclass, pdwsize, ppdeviceid)
+  end
+  def set_media_type(lmediatype : Int32) : HRESULT
+    @lpVtbl.value.set_media_type.unsafe_as(Proc(Int32, HRESULT)).call(lmediatype)
+  end
+  def monitor_media(lmediatype : Int32) : HRESULT
+    @lpVtbl.value.monitor_media.unsafe_as(Proc(Int32, HRESULT)).call(lmediatype)
+  end
+end
+struct LibWin32::ITLegacyCallMediaControl2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def detect_digits(digitmode : Int32) : HRESULT
+    @lpVtbl.value.detect_digits.unsafe_as(Proc(Int32, HRESULT)).call(digitmode)
+  end
+  def generate_digits(pdigits : UInt8*, digitmode : Int32) : HRESULT
+    @lpVtbl.value.generate_digits.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(pdigits, digitmode)
+  end
+  def get_id(pdeviceclass : UInt8*, pdwsize : UInt32*, ppdeviceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8*, UInt32*, UInt8**, HRESULT)).call(pdeviceclass, pdwsize, ppdeviceid)
+  end
+  def set_media_type(lmediatype : Int32) : HRESULT
+    @lpVtbl.value.set_media_type.unsafe_as(Proc(Int32, HRESULT)).call(lmediatype)
+  end
+  def monitor_media(lmediatype : Int32) : HRESULT
+    @lpVtbl.value.monitor_media.unsafe_as(Proc(Int32, HRESULT)).call(lmediatype)
+  end
+  def generate_digits2(pdigits : UInt8*, digitmode : Int32, lduration : Int32) : HRESULT
+    @lpVtbl.value.generate_digits2.unsafe_as(Proc(UInt8*, Int32, Int32, HRESULT)).call(pdigits, digitmode, lduration)
+  end
+  def gather_digits(digitmode : Int32, lnumdigits : Int32, pterminationdigits : UInt8*, lfirstdigittimeout : Int32, linterdigittimeout : Int32) : HRESULT
+    @lpVtbl.value.gather_digits.unsafe_as(Proc(Int32, Int32, UInt8*, Int32, Int32, HRESULT)).call(digitmode, lnumdigits, pterminationdigits, lfirstdigittimeout, linterdigittimeout)
+  end
+  def detect_tones(ptonelist : TAPI_DETECTTONE*, lnumtones : Int32) : HRESULT
+    @lpVtbl.value.detect_tones.unsafe_as(Proc(TAPI_DETECTTONE*, Int32, HRESULT)).call(ptonelist, lnumtones)
+  end
+  def detect_tones_by_collection(pdetecttonecollection : ITCollection2) : HRESULT
+    @lpVtbl.value.detect_tones_by_collection.unsafe_as(Proc(ITCollection2, HRESULT)).call(pdetecttonecollection)
+  end
+  def generate_tone(tonemode : TAPI_TONEMODE, lduration : Int32) : HRESULT
+    @lpVtbl.value.generate_tone.unsafe_as(Proc(TAPI_TONEMODE, Int32, HRESULT)).call(tonemode, lduration)
+  end
+  def generate_custom_tones(ptonelist : TAPI_CUSTOMTONE*, lnumtones : Int32, lduration : Int32) : HRESULT
+    @lpVtbl.value.generate_custom_tones.unsafe_as(Proc(TAPI_CUSTOMTONE*, Int32, Int32, HRESULT)).call(ptonelist, lnumtones, lduration)
+  end
+  def generate_custom_tones_by_collection(pcustomtonecollection : ITCollection2, lduration : Int32) : HRESULT
+    @lpVtbl.value.generate_custom_tones_by_collection.unsafe_as(Proc(ITCollection2, Int32, HRESULT)).call(pcustomtonecollection, lduration)
+  end
+  def create_detect_tone_object(ppdetecttone : ITDetectTone*) : HRESULT
+    @lpVtbl.value.create_detect_tone_object.unsafe_as(Proc(ITDetectTone*, HRESULT)).call(ppdetecttone)
+  end
+  def create_custom_tone_object(ppcustomtone : ITCustomTone*) : HRESULT
+    @lpVtbl.value.create_custom_tone_object.unsafe_as(Proc(ITCustomTone*, HRESULT)).call(ppcustomtone)
+  end
+  def get_id_as_variant(bstrdeviceclass : UInt8*, pvardeviceid : VARIANT*) : HRESULT
+    @lpVtbl.value.get_id_as_variant.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrdeviceclass, pvardeviceid)
+  end
+end
+struct LibWin32::ITDetectTone
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_app_specific(plappspecific : Int32*) : HRESULT
+    @lpVtbl.value.get_app_specific.unsafe_as(Proc(Int32*, HRESULT)).call(plappspecific)
+  end
+  def put_app_specific(lappspecific : Int32) : HRESULT
+    @lpVtbl.value.put_app_specific.unsafe_as(Proc(Int32, HRESULT)).call(lappspecific)
+  end
+  def get_duration(plduration : Int32*) : HRESULT
+    @lpVtbl.value.get_duration.unsafe_as(Proc(Int32*, HRESULT)).call(plduration)
+  end
+  def put_duration(lduration : Int32) : HRESULT
+    @lpVtbl.value.put_duration.unsafe_as(Proc(Int32, HRESULT)).call(lduration)
+  end
+  def get_frequency(index : Int32, plfrequency : Int32*) : HRESULT
+    @lpVtbl.value.get_frequency.unsafe_as(Proc(Int32, Int32*, HRESULT)).call(index, plfrequency)
+  end
+  def put_frequency(index : Int32, lfrequency : Int32) : HRESULT
+    @lpVtbl.value.put_frequency.unsafe_as(Proc(Int32, Int32, HRESULT)).call(index, lfrequency)
+  end
+end
+struct LibWin32::ITCustomTone
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_frequency(plfrequency : Int32*) : HRESULT
+    @lpVtbl.value.get_frequency.unsafe_as(Proc(Int32*, HRESULT)).call(plfrequency)
+  end
+  def put_frequency(lfrequency : Int32) : HRESULT
+    @lpVtbl.value.put_frequency.unsafe_as(Proc(Int32, HRESULT)).call(lfrequency)
+  end
+  def get_cadence_on(plcadenceon : Int32*) : HRESULT
+    @lpVtbl.value.get_cadence_on.unsafe_as(Proc(Int32*, HRESULT)).call(plcadenceon)
+  end
+  def put_cadence_on(cadenceon : Int32) : HRESULT
+    @lpVtbl.value.put_cadence_on.unsafe_as(Proc(Int32, HRESULT)).call(cadenceon)
+  end
+  def get_cadence_off(plcadenceoff : Int32*) : HRESULT
+    @lpVtbl.value.get_cadence_off.unsafe_as(Proc(Int32*, HRESULT)).call(plcadenceoff)
+  end
+  def put_cadence_off(lcadenceoff : Int32) : HRESULT
+    @lpVtbl.value.put_cadence_off.unsafe_as(Proc(Int32, HRESULT)).call(lcadenceoff)
+  end
+  def get_volume(plvolume : Int32*) : HRESULT
+    @lpVtbl.value.get_volume.unsafe_as(Proc(Int32*, HRESULT)).call(plvolume)
+  end
+  def put_volume(lvolume : Int32) : HRESULT
+    @lpVtbl.value.put_volume.unsafe_as(Proc(Int32, HRESULT)).call(lvolume)
+  end
+end
+struct LibWin32::IEnumPhone
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITPhone*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITPhone*, UInt32*, HRESULT)).call(celt, ppelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumPhone*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumPhone*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumTerminal
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITTerminal*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITTerminal*, UInt32*, HRESULT)).call(celt, ppelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumTerminal*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumTerminal*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumTerminalClass
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, pelements : Guid*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, Guid*, UInt32*, HRESULT)).call(celt, pelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumTerminalClass*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumTerminalClass*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumCall
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITCallInfo*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITCallInfo*, UInt32*, HRESULT)).call(celt, ppelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumCall*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumCall*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumAddress
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITAddress*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITAddress*, UInt32*, HRESULT)).call(celt, ppelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumAddress*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumAddress*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumCallHub
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITCallHub*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITCallHub*, UInt32*, HRESULT)).call(celt, ppelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumCallHub*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumCallHub*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumBstr
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppstrings : UInt8**, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, UInt8**, UInt32*, HRESULT)).call(celt, ppstrings, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumBstr*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumBstr*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumPluggableTerminalClassInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITPluggableTerminalClassInfo*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITPluggableTerminalClassInfo*, UInt32*, HRESULT)).call(celt, ppelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumPluggableTerminalClassInfo*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumPluggableTerminalClassInfo*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumPluggableSuperclassInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITPluggableTerminalSuperclassInfo*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITPluggableTerminalSuperclassInfo*, UInt32*, HRESULT)).call(celt, ppelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumPluggableSuperclassInfo*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumPluggableSuperclassInfo*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::ITPhoneEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_phone(ppphone : ITPhone*) : HRESULT
+    @lpVtbl.value.get_phone.unsafe_as(Proc(ITPhone*, HRESULT)).call(ppphone)
+  end
+  def get_event(pevent : PHONE_EVENT*) : HRESULT
+    @lpVtbl.value.get_event.unsafe_as(Proc(PHONE_EVENT*, HRESULT)).call(pevent)
+  end
+  def get_button_state(pstate : PHONE_BUTTON_STATE*) : HRESULT
+    @lpVtbl.value.get_button_state.unsafe_as(Proc(PHONE_BUTTON_STATE*, HRESULT)).call(pstate)
+  end
+  def get_hook_switch_state(pstate : PHONE_HOOK_SWITCH_STATE*) : HRESULT
+    @lpVtbl.value.get_hook_switch_state.unsafe_as(Proc(PHONE_HOOK_SWITCH_STATE*, HRESULT)).call(pstate)
+  end
+  def get_hook_switch_device(pdevice : PHONE_HOOK_SWITCH_DEVICE*) : HRESULT
+    @lpVtbl.value.get_hook_switch_device.unsafe_as(Proc(PHONE_HOOK_SWITCH_DEVICE*, HRESULT)).call(pdevice)
+  end
+  def get_ring_mode(plringmode : Int32*) : HRESULT
+    @lpVtbl.value.get_ring_mode.unsafe_as(Proc(Int32*, HRESULT)).call(plringmode)
+  end
+  def get_button_lamp_id(plbuttonlampid : Int32*) : HRESULT
+    @lpVtbl.value.get_button_lamp_id.unsafe_as(Proc(Int32*, HRESULT)).call(plbuttonlampid)
+  end
+  def get_number_gathered(ppnumber : UInt8**) : HRESULT
+    @lpVtbl.value.get_number_gathered.unsafe_as(Proc(UInt8**, HRESULT)).call(ppnumber)
+  end
+  def get_call(ppcallinfo : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcallinfo)
+  end
+end
+struct LibWin32::ITCallStateEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_call(ppcallinfo : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcallinfo)
+  end
+  def get_state(pcallstate : CALL_STATE*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(CALL_STATE*, HRESULT)).call(pcallstate)
+  end
+  def get_cause(pcec : CALL_STATE_EVENT_CAUSE*) : HRESULT
+    @lpVtbl.value.get_cause.unsafe_as(Proc(CALL_STATE_EVENT_CAUSE*, HRESULT)).call(pcec)
+  end
+  def get_callback_instance(plcallbackinstance : Int32*) : HRESULT
+    @lpVtbl.value.get_callback_instance.unsafe_as(Proc(Int32*, HRESULT)).call(plcallbackinstance)
+  end
+end
+struct LibWin32::ITPhoneDeviceSpecificEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_phone(ppphone : ITPhone*) : HRESULT
+    @lpVtbl.value.get_phone.unsafe_as(Proc(ITPhone*, HRESULT)).call(ppphone)
+  end
+  def get_l_param1(pparam1 : Int32*) : HRESULT
+    @lpVtbl.value.get_l_param1.unsafe_as(Proc(Int32*, HRESULT)).call(pparam1)
+  end
+  def get_l_param2(pparam2 : Int32*) : HRESULT
+    @lpVtbl.value.get_l_param2.unsafe_as(Proc(Int32*, HRESULT)).call(pparam2)
+  end
+  def get_l_param3(pparam3 : Int32*) : HRESULT
+    @lpVtbl.value.get_l_param3.unsafe_as(Proc(Int32*, HRESULT)).call(pparam3)
+  end
+end
+struct LibWin32::ITCallMediaEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_call(ppcallinfo : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcallinfo)
+  end
+  def get_event(pcallmediaevent : CALL_MEDIA_EVENT*) : HRESULT
+    @lpVtbl.value.get_event.unsafe_as(Proc(CALL_MEDIA_EVENT*, HRESULT)).call(pcallmediaevent)
+  end
+  def get_error(phrerror : HRESULT*) : HRESULT
+    @lpVtbl.value.get_error.unsafe_as(Proc(HRESULT*, HRESULT)).call(phrerror)
+  end
+  def get_terminal(ppterminal : ITTerminal*) : HRESULT
+    @lpVtbl.value.get_terminal.unsafe_as(Proc(ITTerminal*, HRESULT)).call(ppterminal)
+  end
+  def get_stream(ppstream : ITStream*) : HRESULT
+    @lpVtbl.value.get_stream.unsafe_as(Proc(ITStream*, HRESULT)).call(ppstream)
+  end
+  def get_cause(pcause : CALL_MEDIA_EVENT_CAUSE*) : HRESULT
+    @lpVtbl.value.get_cause.unsafe_as(Proc(CALL_MEDIA_EVENT_CAUSE*, HRESULT)).call(pcause)
+  end
+end
+struct LibWin32::ITDigitDetectionEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_call(ppcallinfo : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcallinfo)
+  end
+  def get_digit(pucdigit : UInt8*) : HRESULT
+    @lpVtbl.value.get_digit.unsafe_as(Proc(UInt8*, HRESULT)).call(pucdigit)
+  end
+  def get_digit_mode(pdigitmode : Int32*) : HRESULT
+    @lpVtbl.value.get_digit_mode.unsafe_as(Proc(Int32*, HRESULT)).call(pdigitmode)
+  end
+  def get_tick_count(pltickcount : Int32*) : HRESULT
+    @lpVtbl.value.get_tick_count.unsafe_as(Proc(Int32*, HRESULT)).call(pltickcount)
+  end
+  def get_callback_instance(plcallbackinstance : Int32*) : HRESULT
+    @lpVtbl.value.get_callback_instance.unsafe_as(Proc(Int32*, HRESULT)).call(plcallbackinstance)
+  end
+end
+struct LibWin32::ITDigitGenerationEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_call(ppcallinfo : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcallinfo)
+  end
+  def get_generation_termination(plgenerationtermination : Int32*) : HRESULT
+    @lpVtbl.value.get_generation_termination.unsafe_as(Proc(Int32*, HRESULT)).call(plgenerationtermination)
+  end
+  def get_tick_count(pltickcount : Int32*) : HRESULT
+    @lpVtbl.value.get_tick_count.unsafe_as(Proc(Int32*, HRESULT)).call(pltickcount)
+  end
+  def get_callback_instance(plcallbackinstance : Int32*) : HRESULT
+    @lpVtbl.value.get_callback_instance.unsafe_as(Proc(Int32*, HRESULT)).call(plcallbackinstance)
+  end
+end
+struct LibWin32::ITDigitsGatheredEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_call(ppcallinfo : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcallinfo)
+  end
+  def get_digits(ppdigits : UInt8**) : HRESULT
+    @lpVtbl.value.get_digits.unsafe_as(Proc(UInt8**, HRESULT)).call(ppdigits)
+  end
+  def get_gather_termination(pgathertermination : TAPI_GATHERTERM*) : HRESULT
+    @lpVtbl.value.get_gather_termination.unsafe_as(Proc(TAPI_GATHERTERM*, HRESULT)).call(pgathertermination)
+  end
+  def get_tick_count(pltickcount : Int32*) : HRESULT
+    @lpVtbl.value.get_tick_count.unsafe_as(Proc(Int32*, HRESULT)).call(pltickcount)
+  end
+  def get_callback_instance(plcallbackinstance : Int32*) : HRESULT
+    @lpVtbl.value.get_callback_instance.unsafe_as(Proc(Int32*, HRESULT)).call(plcallbackinstance)
+  end
+end
+struct LibWin32::ITToneDetectionEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_call(ppcallinfo : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcallinfo)
+  end
+  def get_app_specific(plappspecific : Int32*) : HRESULT
+    @lpVtbl.value.get_app_specific.unsafe_as(Proc(Int32*, HRESULT)).call(plappspecific)
+  end
+  def get_tick_count(pltickcount : Int32*) : HRESULT
+    @lpVtbl.value.get_tick_count.unsafe_as(Proc(Int32*, HRESULT)).call(pltickcount)
+  end
+  def get_callback_instance(plcallbackinstance : Int32*) : HRESULT
+    @lpVtbl.value.get_callback_instance.unsafe_as(Proc(Int32*, HRESULT)).call(plcallbackinstance)
+  end
+end
+struct LibWin32::ITTAPIObjectEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_tapi_object(pptapiobject : ITTAPI*) : HRESULT
+    @lpVtbl.value.get_tapi_object.unsafe_as(Proc(ITTAPI*, HRESULT)).call(pptapiobject)
+  end
+  def get_event(pevent : TAPIOBJECT_EVENT*) : HRESULT
+    @lpVtbl.value.get_event.unsafe_as(Proc(TAPIOBJECT_EVENT*, HRESULT)).call(pevent)
+  end
+  def get_address(ppaddress : ITAddress*) : HRESULT
+    @lpVtbl.value.get_address.unsafe_as(Proc(ITAddress*, HRESULT)).call(ppaddress)
+  end
+  def get_callback_instance(plcallbackinstance : Int32*) : HRESULT
+    @lpVtbl.value.get_callback_instance.unsafe_as(Proc(Int32*, HRESULT)).call(plcallbackinstance)
+  end
+end
+struct LibWin32::ITTAPIObjectEvent2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_tapi_object(pptapiobject : ITTAPI*) : HRESULT
+    @lpVtbl.value.get_tapi_object.unsafe_as(Proc(ITTAPI*, HRESULT)).call(pptapiobject)
+  end
+  def get_event(pevent : TAPIOBJECT_EVENT*) : HRESULT
+    @lpVtbl.value.get_event.unsafe_as(Proc(TAPIOBJECT_EVENT*, HRESULT)).call(pevent)
+  end
+  def get_address(ppaddress : ITAddress*) : HRESULT
+    @lpVtbl.value.get_address.unsafe_as(Proc(ITAddress*, HRESULT)).call(ppaddress)
+  end
+  def get_callback_instance(plcallbackinstance : Int32*) : HRESULT
+    @lpVtbl.value.get_callback_instance.unsafe_as(Proc(Int32*, HRESULT)).call(plcallbackinstance)
+  end
+  def get_phone(ppphone : ITPhone*) : HRESULT
+    @lpVtbl.value.get_phone.unsafe_as(Proc(ITPhone*, HRESULT)).call(ppphone)
+  end
+end
+struct LibWin32::ITTAPIEventNotification
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def event(tapievent : TAPI_EVENT, pevent : IDispatch) : HRESULT
+    @lpVtbl.value.event.unsafe_as(Proc(TAPI_EVENT, IDispatch, HRESULT)).call(tapievent, pevent)
+  end
+end
+struct LibWin32::ITCallHubEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_event(pevent : CALLHUB_EVENT*) : HRESULT
+    @lpVtbl.value.get_event.unsafe_as(Proc(CALLHUB_EVENT*, HRESULT)).call(pevent)
+  end
+  def get_call_hub(ppcallhub : ITCallHub*) : HRESULT
+    @lpVtbl.value.get_call_hub.unsafe_as(Proc(ITCallHub*, HRESULT)).call(ppcallhub)
+  end
+  def get_call(ppcall : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcall)
+  end
+end
+struct LibWin32::ITAddressEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_address(ppaddress : ITAddress*) : HRESULT
+    @lpVtbl.value.get_address.unsafe_as(Proc(ITAddress*, HRESULT)).call(ppaddress)
+  end
+  def get_event(pevent : ADDRESS_EVENT*) : HRESULT
+    @lpVtbl.value.get_event.unsafe_as(Proc(ADDRESS_EVENT*, HRESULT)).call(pevent)
+  end
+  def get_terminal(ppterminal : ITTerminal*) : HRESULT
+    @lpVtbl.value.get_terminal.unsafe_as(Proc(ITTerminal*, HRESULT)).call(ppterminal)
+  end
+end
+struct LibWin32::ITAddressDeviceSpecificEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_address(ppaddress : ITAddress*) : HRESULT
+    @lpVtbl.value.get_address.unsafe_as(Proc(ITAddress*, HRESULT)).call(ppaddress)
+  end
+  def get_call(ppcall : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcall)
+  end
+  def get_l_param1(pparam1 : Int32*) : HRESULT
+    @lpVtbl.value.get_l_param1.unsafe_as(Proc(Int32*, HRESULT)).call(pparam1)
+  end
+  def get_l_param2(pparam2 : Int32*) : HRESULT
+    @lpVtbl.value.get_l_param2.unsafe_as(Proc(Int32*, HRESULT)).call(pparam2)
+  end
+  def get_l_param3(pparam3 : Int32*) : HRESULT
+    @lpVtbl.value.get_l_param3.unsafe_as(Proc(Int32*, HRESULT)).call(pparam3)
+  end
+end
+struct LibWin32::ITFileTerminalEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_terminal(ppterminal : ITTerminal*) : HRESULT
+    @lpVtbl.value.get_terminal.unsafe_as(Proc(ITTerminal*, HRESULT)).call(ppterminal)
+  end
+  def get_track(pptrackterminal : ITFileTrack*) : HRESULT
+    @lpVtbl.value.get_track.unsafe_as(Proc(ITFileTrack*, HRESULT)).call(pptrackterminal)
+  end
+  def get_call(ppcall : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcall)
+  end
+  def get_state(pstate : TERMINAL_MEDIA_STATE*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(TERMINAL_MEDIA_STATE*, HRESULT)).call(pstate)
+  end
+  def get_cause(pcause : FT_STATE_EVENT_CAUSE*) : HRESULT
+    @lpVtbl.value.get_cause.unsafe_as(Proc(FT_STATE_EVENT_CAUSE*, HRESULT)).call(pcause)
+  end
+  def get_error(phrerrorcode : HRESULT*) : HRESULT
+    @lpVtbl.value.get_error.unsafe_as(Proc(HRESULT*, HRESULT)).call(phrerrorcode)
+  end
+end
+struct LibWin32::ITTTSTerminalEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_terminal(ppterminal : ITTerminal*) : HRESULT
+    @lpVtbl.value.get_terminal.unsafe_as(Proc(ITTerminal*, HRESULT)).call(ppterminal)
+  end
+  def get_call(ppcall : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcall)
+  end
+  def get_error(phrerrorcode : HRESULT*) : HRESULT
+    @lpVtbl.value.get_error.unsafe_as(Proc(HRESULT*, HRESULT)).call(phrerrorcode)
+  end
+end
+struct LibWin32::ITASRTerminalEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_terminal(ppterminal : ITTerminal*) : HRESULT
+    @lpVtbl.value.get_terminal.unsafe_as(Proc(ITTerminal*, HRESULT)).call(ppterminal)
+  end
+  def get_call(ppcall : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcall)
+  end
+  def get_error(phrerrorcode : HRESULT*) : HRESULT
+    @lpVtbl.value.get_error.unsafe_as(Proc(HRESULT*, HRESULT)).call(phrerrorcode)
+  end
+end
+struct LibWin32::ITToneTerminalEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_terminal(ppterminal : ITTerminal*) : HRESULT
+    @lpVtbl.value.get_terminal.unsafe_as(Proc(ITTerminal*, HRESULT)).call(ppterminal)
+  end
+  def get_call(ppcall : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcall)
+  end
+  def get_error(phrerrorcode : HRESULT*) : HRESULT
+    @lpVtbl.value.get_error.unsafe_as(Proc(HRESULT*, HRESULT)).call(phrerrorcode)
+  end
+end
+struct LibWin32::ITQOSEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_call(ppcall : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcall)
+  end
+  def get_event(pqosevent : QOS_EVENT*) : HRESULT
+    @lpVtbl.value.get_event.unsafe_as(Proc(QOS_EVENT*, HRESULT)).call(pqosevent)
+  end
+  def get_media_type(plmediatype : Int32*) : HRESULT
+    @lpVtbl.value.get_media_type.unsafe_as(Proc(Int32*, HRESULT)).call(plmediatype)
+  end
+end
+struct LibWin32::ITCallInfoChangeEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_call(ppcall : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcall)
+  end
+  def get_cause(pcic : CALLINFOCHANGE_CAUSE*) : HRESULT
+    @lpVtbl.value.get_cause.unsafe_as(Proc(CALLINFOCHANGE_CAUSE*, HRESULT)).call(pcic)
+  end
+  def get_callback_instance(plcallbackinstance : Int32*) : HRESULT
+    @lpVtbl.value.get_callback_instance.unsafe_as(Proc(Int32*, HRESULT)).call(plcallbackinstance)
+  end
+end
+struct LibWin32::ITRequest
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def make_call(pdestaddress : UInt8*, pappname : UInt8*, pcalledparty : UInt8*, pcomment : UInt8*) : HRESULT
+    @lpVtbl.value.make_call.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)).call(pdestaddress, pappname, pcalledparty, pcomment)
+  end
+end
+struct LibWin32::ITRequestEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_registration_instance(plregistrationinstance : Int32*) : HRESULT
+    @lpVtbl.value.get_registration_instance.unsafe_as(Proc(Int32*, HRESULT)).call(plregistrationinstance)
+  end
+  def get_request_mode(plrequestmode : Int32*) : HRESULT
+    @lpVtbl.value.get_request_mode.unsafe_as(Proc(Int32*, HRESULT)).call(plrequestmode)
+  end
+  def get_dest_address(ppdestaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_dest_address.unsafe_as(Proc(UInt8**, HRESULT)).call(ppdestaddress)
+  end
+  def get_app_name(ppappname : UInt8**) : HRESULT
+    @lpVtbl.value.get_app_name.unsafe_as(Proc(UInt8**, HRESULT)).call(ppappname)
+  end
+  def get_called_party(ppcalledparty : UInt8**) : HRESULT
+    @lpVtbl.value.get_called_party.unsafe_as(Proc(UInt8**, HRESULT)).call(ppcalledparty)
+  end
+  def get_comment(ppcomment : UInt8**) : HRESULT
+    @lpVtbl.value.get_comment.unsafe_as(Proc(UInt8**, HRESULT)).call(ppcomment)
+  end
+end
+struct LibWin32::ITCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(lcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(lcount)
+  end
+  def get_item(index : Int32, pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(index, pvariant)
+  end
+  def get__new_enum(ppnewenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppnewenum)
+  end
+end
+struct LibWin32::ITCollection2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(lcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(lcount)
+  end
+  def get_item(index : Int32, pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(index, pvariant)
+  end
+  def get__new_enum(ppnewenum : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppnewenum)
+  end
+  def add(index : Int32, pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(index, pvariant)
+  end
+  def remove(index : Int32) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(Int32, HRESULT)).call(index)
+  end
+end
+struct LibWin32::ITForwardInformation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def put_num_rings_no_answer(lnumrings : Int32) : HRESULT
+    @lpVtbl.value.put_num_rings_no_answer.unsafe_as(Proc(Int32, HRESULT)).call(lnumrings)
+  end
+  def get_num_rings_no_answer(plnumrings : Int32*) : HRESULT
+    @lpVtbl.value.get_num_rings_no_answer.unsafe_as(Proc(Int32*, HRESULT)).call(plnumrings)
+  end
+  def set_forward_type(forwardtype : Int32, pdestaddress : UInt8*, pcalleraddress : UInt8*) : HRESULT
+    @lpVtbl.value.set_forward_type.unsafe_as(Proc(Int32, UInt8*, UInt8*, HRESULT)).call(forwardtype, pdestaddress, pcalleraddress)
+  end
+  def get_forward_type_destination(forwardtype : Int32, ppdestaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_forward_type_destination.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(forwardtype, ppdestaddress)
+  end
+  def get_forward_type_caller(forwardtype : Int32, ppcalleraddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_forward_type_caller.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(forwardtype, ppcalleraddress)
+  end
+  def get_forward_type(forwardtype : Int32, ppdestinationaddress : UInt8**, ppcalleraddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_forward_type.unsafe_as(Proc(Int32, UInt8**, UInt8**, HRESULT)).call(forwardtype, ppdestinationaddress, ppcalleraddress)
+  end
+  def clear : HRESULT
+    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITForwardInformation2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def put_num_rings_no_answer(lnumrings : Int32) : HRESULT
+    @lpVtbl.value.put_num_rings_no_answer.unsafe_as(Proc(Int32, HRESULT)).call(lnumrings)
+  end
+  def get_num_rings_no_answer(plnumrings : Int32*) : HRESULT
+    @lpVtbl.value.get_num_rings_no_answer.unsafe_as(Proc(Int32*, HRESULT)).call(plnumrings)
+  end
+  def set_forward_type(forwardtype : Int32, pdestaddress : UInt8*, pcalleraddress : UInt8*) : HRESULT
+    @lpVtbl.value.set_forward_type.unsafe_as(Proc(Int32, UInt8*, UInt8*, HRESULT)).call(forwardtype, pdestaddress, pcalleraddress)
+  end
+  def get_forward_type_destination(forwardtype : Int32, ppdestaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_forward_type_destination.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(forwardtype, ppdestaddress)
+  end
+  def get_forward_type_caller(forwardtype : Int32, ppcalleraddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_forward_type_caller.unsafe_as(Proc(Int32, UInt8**, HRESULT)).call(forwardtype, ppcalleraddress)
+  end
+  def get_forward_type(forwardtype : Int32, ppdestinationaddress : UInt8**, ppcalleraddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_forward_type.unsafe_as(Proc(Int32, UInt8**, UInt8**, HRESULT)).call(forwardtype, ppdestinationaddress, ppcalleraddress)
+  end
+  def clear : HRESULT
+    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_forward_type2(forwardtype : Int32, pdestaddress : UInt8*, destaddresstype : Int32, pcalleraddress : UInt8*, calleraddresstype : Int32) : HRESULT
+    @lpVtbl.value.set_forward_type2.unsafe_as(Proc(Int32, UInt8*, Int32, UInt8*, Int32, HRESULT)).call(forwardtype, pdestaddress, destaddresstype, pcalleraddress, calleraddresstype)
+  end
+  def get_forward_type2(forwardtype : Int32, ppdestinationaddress : UInt8**, pdestaddresstype : Int32*, ppcalleraddress : UInt8**, pcalleraddresstype : Int32*) : HRESULT
+    @lpVtbl.value.get_forward_type2.unsafe_as(Proc(Int32, UInt8**, Int32*, UInt8**, Int32*, HRESULT)).call(forwardtype, ppdestinationaddress, pdestaddresstype, ppcalleraddress, pcalleraddresstype)
+  end
+  def get_forward_type_destination_address_type(forwardtype : Int32, pdestaddresstype : Int32*) : HRESULT
+    @lpVtbl.value.get_forward_type_destination_address_type.unsafe_as(Proc(Int32, Int32*, HRESULT)).call(forwardtype, pdestaddresstype)
+  end
+  def get_forward_type_caller_address_type(forwardtype : Int32, pcalleraddresstype : Int32*) : HRESULT
+    @lpVtbl.value.get_forward_type_caller_address_type.unsafe_as(Proc(Int32, Int32*, HRESULT)).call(forwardtype, pcalleraddresstype)
+  end
+end
+struct LibWin32::ITAddressTranslation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def translate_address(paddresstotranslate : UInt8*, lcard : Int32, ltranslateoptions : Int32, pptranslated : ITAddressTranslationInfo*) : HRESULT
+    @lpVtbl.value.translate_address.unsafe_as(Proc(UInt8*, Int32, Int32, ITAddressTranslationInfo*, HRESULT)).call(paddresstotranslate, lcard, ltranslateoptions, pptranslated)
+  end
+  def translate_dialog(hwndowner : LibC::IntPtrT, paddressin : UInt8*) : HRESULT
+    @lpVtbl.value.translate_dialog.unsafe_as(Proc(LibC::IntPtrT, UInt8*, HRESULT)).call(hwndowner, paddressin)
+  end
+  def enumerate_locations(ppenumlocation : IEnumLocation*) : HRESULT
+    @lpVtbl.value.enumerate_locations.unsafe_as(Proc(IEnumLocation*, HRESULT)).call(ppenumlocation)
+  end
+  def get_locations(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_locations.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_calling_cards(ppenumcallingcard : IEnumCallingCard*) : HRESULT
+    @lpVtbl.value.enumerate_calling_cards.unsafe_as(Proc(IEnumCallingCard*, HRESULT)).call(ppenumcallingcard)
+  end
+  def get_calling_cards(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_calling_cards.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+end
+struct LibWin32::ITAddressTranslationInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_dialable_string(ppdialablestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_dialable_string.unsafe_as(Proc(UInt8**, HRESULT)).call(ppdialablestring)
+  end
+  def get_displayable_string(ppdisplayablestring : UInt8**) : HRESULT
+    @lpVtbl.value.get_displayable_string.unsafe_as(Proc(UInt8**, HRESULT)).call(ppdisplayablestring)
+  end
+  def get_current_country_code(countrycode : Int32*) : HRESULT
+    @lpVtbl.value.get_current_country_code.unsafe_as(Proc(Int32*, HRESULT)).call(countrycode)
+  end
+  def get_destination_country_code(countrycode : Int32*) : HRESULT
+    @lpVtbl.value.get_destination_country_code.unsafe_as(Proc(Int32*, HRESULT)).call(countrycode)
+  end
+  def get_translation_results(plresults : Int32*) : HRESULT
+    @lpVtbl.value.get_translation_results.unsafe_as(Proc(Int32*, HRESULT)).call(plresults)
+  end
+end
+struct LibWin32::ITLocationInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_permanent_location_id(pllocationid : Int32*) : HRESULT
+    @lpVtbl.value.get_permanent_location_id.unsafe_as(Proc(Int32*, HRESULT)).call(pllocationid)
+  end
+  def get_country_code(plcountrycode : Int32*) : HRESULT
+    @lpVtbl.value.get_country_code.unsafe_as(Proc(Int32*, HRESULT)).call(plcountrycode)
+  end
+  def get_country_id(plcountryid : Int32*) : HRESULT
+    @lpVtbl.value.get_country_id.unsafe_as(Proc(Int32*, HRESULT)).call(plcountryid)
+  end
+  def get_options(ploptions : Int32*) : HRESULT
+    @lpVtbl.value.get_options.unsafe_as(Proc(Int32*, HRESULT)).call(ploptions)
+  end
+  def get_preferred_card_id(plcardid : Int32*) : HRESULT
+    @lpVtbl.value.get_preferred_card_id.unsafe_as(Proc(Int32*, HRESULT)).call(plcardid)
+  end
+  def get_location_name(pplocationname : UInt8**) : HRESULT
+    @lpVtbl.value.get_location_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pplocationname)
+  end
+  def get_city_code(ppcode : UInt8**) : HRESULT
+    @lpVtbl.value.get_city_code.unsafe_as(Proc(UInt8**, HRESULT)).call(ppcode)
+  end
+  def get_local_access_code(ppcode : UInt8**) : HRESULT
+    @lpVtbl.value.get_local_access_code.unsafe_as(Proc(UInt8**, HRESULT)).call(ppcode)
+  end
+  def get_long_distance_access_code(ppcode : UInt8**) : HRESULT
+    @lpVtbl.value.get_long_distance_access_code.unsafe_as(Proc(UInt8**, HRESULT)).call(ppcode)
+  end
+  def get_toll_prefix_list(pptolllist : UInt8**) : HRESULT
+    @lpVtbl.value.get_toll_prefix_list.unsafe_as(Proc(UInt8**, HRESULT)).call(pptolllist)
+  end
+  def get_cancel_call_waiting_code(ppcode : UInt8**) : HRESULT
+    @lpVtbl.value.get_cancel_call_waiting_code.unsafe_as(Proc(UInt8**, HRESULT)).call(ppcode)
+  end
+end
+struct LibWin32::IEnumLocation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITLocationInfo*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITLocationInfo*, UInt32*, HRESULT)).call(celt, ppelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumLocation*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumLocation*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::ITCallingCard
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_permanent_card_id(plcardid : Int32*) : HRESULT
+    @lpVtbl.value.get_permanent_card_id.unsafe_as(Proc(Int32*, HRESULT)).call(plcardid)
+  end
+  def get_number_of_digits(pldigits : Int32*) : HRESULT
+    @lpVtbl.value.get_number_of_digits.unsafe_as(Proc(Int32*, HRESULT)).call(pldigits)
+  end
+  def get_options(ploptions : Int32*) : HRESULT
+    @lpVtbl.value.get_options.unsafe_as(Proc(Int32*, HRESULT)).call(ploptions)
+  end
+  def get_card_name(ppcardname : UInt8**) : HRESULT
+    @lpVtbl.value.get_card_name.unsafe_as(Proc(UInt8**, HRESULT)).call(ppcardname)
+  end
+  def get_same_area_dialing_rule(pprule : UInt8**) : HRESULT
+    @lpVtbl.value.get_same_area_dialing_rule.unsafe_as(Proc(UInt8**, HRESULT)).call(pprule)
+  end
+  def get_long_distance_dialing_rule(pprule : UInt8**) : HRESULT
+    @lpVtbl.value.get_long_distance_dialing_rule.unsafe_as(Proc(UInt8**, HRESULT)).call(pprule)
+  end
+  def get_international_dialing_rule(pprule : UInt8**) : HRESULT
+    @lpVtbl.value.get_international_dialing_rule.unsafe_as(Proc(UInt8**, HRESULT)).call(pprule)
+  end
+end
+struct LibWin32::IEnumCallingCard
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITCallingCard*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITCallingCard*, UInt32*, HRESULT)).call(celt, ppelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumCallingCard*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumCallingCard*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::ITCallNotificationEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_call(ppcall : ITCallInfo*) : HRESULT
+    @lpVtbl.value.get_call.unsafe_as(Proc(ITCallInfo*, HRESULT)).call(ppcall)
+  end
+  def get_event(pcallnotificationevent : CALL_NOTIFICATION_EVENT*) : HRESULT
+    @lpVtbl.value.get_event.unsafe_as(Proc(CALL_NOTIFICATION_EVENT*, HRESULT)).call(pcallnotificationevent)
+  end
+  def get_callback_instance(plcallbackinstance : Int32*) : HRESULT
+    @lpVtbl.value.get_callback_instance.unsafe_as(Proc(Int32*, HRESULT)).call(plcallbackinstance)
+  end
+end
+struct LibWin32::ITDispatchMapper
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def query_dispatch_interface(piid : UInt8*, pinterfacetomap : IDispatch, ppreturnedinterface : IDispatch*) : HRESULT
+    @lpVtbl.value.query_dispatch_interface.unsafe_as(Proc(UInt8*, IDispatch, IDispatch*, HRESULT)).call(piid, pinterfacetomap, ppreturnedinterface)
+  end
+end
+struct LibWin32::ITStreamControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def create_stream(lmediatype : Int32, td : TERMINAL_DIRECTION, ppstream : ITStream*) : HRESULT
+    @lpVtbl.value.create_stream.unsafe_as(Proc(Int32, TERMINAL_DIRECTION, ITStream*, HRESULT)).call(lmediatype, td, ppstream)
+  end
+  def remove_stream(pstream : ITStream) : HRESULT
+    @lpVtbl.value.remove_stream.unsafe_as(Proc(ITStream, HRESULT)).call(pstream)
+  end
+  def enumerate_streams(ppenumstream : IEnumStream*) : HRESULT
+    @lpVtbl.value.enumerate_streams.unsafe_as(Proc(IEnumStream*, HRESULT)).call(ppenumstream)
+  end
+  def get_streams(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_streams.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+end
+struct LibWin32::ITStream
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_media_type(plmediatype : Int32*) : HRESULT
+    @lpVtbl.value.get_media_type.unsafe_as(Proc(Int32*, HRESULT)).call(plmediatype)
+  end
+  def get_direction(ptd : TERMINAL_DIRECTION*) : HRESULT
+    @lpVtbl.value.get_direction.unsafe_as(Proc(TERMINAL_DIRECTION*, HRESULT)).call(ptd)
+  end
+  def get_name(ppname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(ppname)
+  end
+  def start_stream : HRESULT
+    @lpVtbl.value.start_stream.unsafe_as(Proc(HRESULT)).call
+  end
+  def pause_stream : HRESULT
+    @lpVtbl.value.pause_stream.unsafe_as(Proc(HRESULT)).call
+  end
+  def stop_stream : HRESULT
+    @lpVtbl.value.stop_stream.unsafe_as(Proc(HRESULT)).call
+  end
+  def select_terminal(pterminal : ITTerminal) : HRESULT
+    @lpVtbl.value.select_terminal.unsafe_as(Proc(ITTerminal, HRESULT)).call(pterminal)
+  end
+  def unselect_terminal(pterminal : ITTerminal) : HRESULT
+    @lpVtbl.value.unselect_terminal.unsafe_as(Proc(ITTerminal, HRESULT)).call(pterminal)
+  end
+  def enumerate_terminals(ppenumterminal : IEnumTerminal*) : HRESULT
+    @lpVtbl.value.enumerate_terminals.unsafe_as(Proc(IEnumTerminal*, HRESULT)).call(ppenumterminal)
+  end
+  def get_terminals(pterminals : VARIANT*) : HRESULT
+    @lpVtbl.value.get_terminals.unsafe_as(Proc(VARIANT*, HRESULT)).call(pterminals)
+  end
+end
+struct LibWin32::IEnumStream
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITStream*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITStream*, UInt32*, HRESULT)).call(celt, ppelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumStream*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumStream*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::ITSubStreamControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def create_sub_stream(ppsubstream : ITSubStream*) : HRESULT
+    @lpVtbl.value.create_sub_stream.unsafe_as(Proc(ITSubStream*, HRESULT)).call(ppsubstream)
+  end
+  def remove_sub_stream(psubstream : ITSubStream) : HRESULT
+    @lpVtbl.value.remove_sub_stream.unsafe_as(Proc(ITSubStream, HRESULT)).call(psubstream)
+  end
+  def enumerate_sub_streams(ppenumsubstream : IEnumSubStream*) : HRESULT
+    @lpVtbl.value.enumerate_sub_streams.unsafe_as(Proc(IEnumSubStream*, HRESULT)).call(ppenumsubstream)
+  end
+  def get_sub_streams(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_sub_streams.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+end
+struct LibWin32::ITSubStream
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def start_sub_stream : HRESULT
+    @lpVtbl.value.start_sub_stream.unsafe_as(Proc(HRESULT)).call
+  end
+  def pause_sub_stream : HRESULT
+    @lpVtbl.value.pause_sub_stream.unsafe_as(Proc(HRESULT)).call
+  end
+  def stop_sub_stream : HRESULT
+    @lpVtbl.value.stop_sub_stream.unsafe_as(Proc(HRESULT)).call
+  end
+  def select_terminal(pterminal : ITTerminal) : HRESULT
+    @lpVtbl.value.select_terminal.unsafe_as(Proc(ITTerminal, HRESULT)).call(pterminal)
+  end
+  def unselect_terminal(pterminal : ITTerminal) : HRESULT
+    @lpVtbl.value.unselect_terminal.unsafe_as(Proc(ITTerminal, HRESULT)).call(pterminal)
+  end
+  def enumerate_terminals(ppenumterminal : IEnumTerminal*) : HRESULT
+    @lpVtbl.value.enumerate_terminals.unsafe_as(Proc(IEnumTerminal*, HRESULT)).call(ppenumterminal)
+  end
+  def get_terminals(pterminals : VARIANT*) : HRESULT
+    @lpVtbl.value.get_terminals.unsafe_as(Proc(VARIANT*, HRESULT)).call(pterminals)
+  end
+  def get_stream(ppitstream : ITStream*) : HRESULT
+    @lpVtbl.value.get_stream.unsafe_as(Proc(ITStream*, HRESULT)).call(ppitstream)
+  end
+end
+struct LibWin32::IEnumSubStream
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITSubStream*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITSubStream*, UInt32*, HRESULT)).call(celt, ppelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumSubStream*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumSubStream*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::ITLegacyWaveSupport
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def is_full_duplex(psupport : FULLDUPLEX_SUPPORT*) : HRESULT
+    @lpVtbl.value.is_full_duplex.unsafe_as(Proc(FULLDUPLEX_SUPPORT*, HRESULT)).call(psupport)
+  end
+end
+struct LibWin32::ITBasicCallControl2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def connect(fsync : Int16) : HRESULT
+    @lpVtbl.value.connect.unsafe_as(Proc(Int16, HRESULT)).call(fsync)
+  end
+  def answer : HRESULT
+    @lpVtbl.value.answer.unsafe_as(Proc(HRESULT)).call
+  end
+  def disconnect(code : DISCONNECT_CODE) : HRESULT
+    @lpVtbl.value.disconnect.unsafe_as(Proc(DISCONNECT_CODE, HRESULT)).call(code)
+  end
+  def hold(fhold : Int16) : HRESULT
+    @lpVtbl.value.hold.unsafe_as(Proc(Int16, HRESULT)).call(fhold)
+  end
+  def handoff_direct(papplicationname : UInt8*) : HRESULT
+    @lpVtbl.value.handoff_direct.unsafe_as(Proc(UInt8*, HRESULT)).call(papplicationname)
+  end
+  def handoff_indirect(lmediatype : Int32) : HRESULT
+    @lpVtbl.value.handoff_indirect.unsafe_as(Proc(Int32, HRESULT)).call(lmediatype)
+  end
+  def conference(pcall : ITBasicCallControl, fsync : Int16) : HRESULT
+    @lpVtbl.value.conference.unsafe_as(Proc(ITBasicCallControl, Int16, HRESULT)).call(pcall, fsync)
+  end
+  def transfer(pcall : ITBasicCallControl, fsync : Int16) : HRESULT
+    @lpVtbl.value.transfer.unsafe_as(Proc(ITBasicCallControl, Int16, HRESULT)).call(pcall, fsync)
+  end
+  def blind_transfer(pdestaddress : UInt8*) : HRESULT
+    @lpVtbl.value.blind_transfer.unsafe_as(Proc(UInt8*, HRESULT)).call(pdestaddress)
+  end
+  def swap_hold(pcall : ITBasicCallControl) : HRESULT
+    @lpVtbl.value.swap_hold.unsafe_as(Proc(ITBasicCallControl, HRESULT)).call(pcall)
+  end
+  def park_direct(pparkaddress : UInt8*) : HRESULT
+    @lpVtbl.value.park_direct.unsafe_as(Proc(UInt8*, HRESULT)).call(pparkaddress)
+  end
+  def park_indirect(ppnondiraddress : UInt8**) : HRESULT
+    @lpVtbl.value.park_indirect.unsafe_as(Proc(UInt8**, HRESULT)).call(ppnondiraddress)
+  end
+  def unpark : HRESULT
+    @lpVtbl.value.unpark.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_qos(lmediatype : Int32, servicelevel : QOS_SERVICE_LEVEL) : HRESULT
+    @lpVtbl.value.set_qos.unsafe_as(Proc(Int32, QOS_SERVICE_LEVEL, HRESULT)).call(lmediatype, servicelevel)
+  end
+  def pickup(pgroupid : UInt8*) : HRESULT
+    @lpVtbl.value.pickup.unsafe_as(Proc(UInt8*, HRESULT)).call(pgroupid)
+  end
+  def dial(pdestaddress : UInt8*) : HRESULT
+    @lpVtbl.value.dial.unsafe_as(Proc(UInt8*, HRESULT)).call(pdestaddress)
+  end
+  def finish(finishmode : FINISH_MODE) : HRESULT
+    @lpVtbl.value.finish.unsafe_as(Proc(FINISH_MODE, HRESULT)).call(finishmode)
+  end
+  def remove_from_conference : HRESULT
+    @lpVtbl.value.remove_from_conference.unsafe_as(Proc(HRESULT)).call
+  end
+  def request_terminal(bstrterminalclassguid : UInt8*, lmediatype : Int32, direction : TERMINAL_DIRECTION, ppterminal : ITTerminal*) : HRESULT
+    @lpVtbl.value.request_terminal.unsafe_as(Proc(UInt8*, Int32, TERMINAL_DIRECTION, ITTerminal*, HRESULT)).call(bstrterminalclassguid, lmediatype, direction, ppterminal)
+  end
+  def select_terminal_on_call(pterminal : ITTerminal) : HRESULT
+    @lpVtbl.value.select_terminal_on_call.unsafe_as(Proc(ITTerminal, HRESULT)).call(pterminal)
+  end
+  def unselect_terminal_on_call(pterminal : ITTerminal) : HRESULT
+    @lpVtbl.value.unselect_terminal_on_call.unsafe_as(Proc(ITTerminal, HRESULT)).call(pterminal)
+  end
+end
+struct LibWin32::ITScriptableAudioFormat
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_channels(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_channels.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def put_channels(nnewval : Int32) : HRESULT
+    @lpVtbl.value.put_channels.unsafe_as(Proc(Int32, HRESULT)).call(nnewval)
+  end
+  def get_samples_per_sec(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_samples_per_sec.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def put_samples_per_sec(nnewval : Int32) : HRESULT
+    @lpVtbl.value.put_samples_per_sec.unsafe_as(Proc(Int32, HRESULT)).call(nnewval)
+  end
+  def get_avg_bytes_per_sec(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_avg_bytes_per_sec.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def put_avg_bytes_per_sec(nnewval : Int32) : HRESULT
+    @lpVtbl.value.put_avg_bytes_per_sec.unsafe_as(Proc(Int32, HRESULT)).call(nnewval)
+  end
+  def get_block_align(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_block_align.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def put_block_align(nnewval : Int32) : HRESULT
+    @lpVtbl.value.put_block_align.unsafe_as(Proc(Int32, HRESULT)).call(nnewval)
+  end
+  def get_bits_per_sample(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_bits_per_sample.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def put_bits_per_sample(nnewval : Int32) : HRESULT
+    @lpVtbl.value.put_bits_per_sample.unsafe_as(Proc(Int32, HRESULT)).call(nnewval)
+  end
+  def get_format_tag(pval : Int32*) : HRESULT
+    @lpVtbl.value.get_format_tag.unsafe_as(Proc(Int32*, HRESULT)).call(pval)
+  end
+  def put_format_tag(nnewval : Int32) : HRESULT
+    @lpVtbl.value.put_format_tag.unsafe_as(Proc(Int32, HRESULT)).call(nnewval)
+  end
+end
+struct LibWin32::ITAgent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def enumerate_agent_sessions(ppenumagentsession : IEnumAgentSession*) : HRESULT
+    @lpVtbl.value.enumerate_agent_sessions.unsafe_as(Proc(IEnumAgentSession*, HRESULT)).call(ppenumagentsession)
+  end
+  def create_session(pacdgroup : ITACDGroup, paddress : ITAddress, ppagentsession : ITAgentSession*) : HRESULT
+    @lpVtbl.value.create_session.unsafe_as(Proc(ITACDGroup, ITAddress, ITAgentSession*, HRESULT)).call(pacdgroup, paddress, ppagentsession)
+  end
+  def create_session_with_pin(pacdgroup : ITACDGroup, paddress : ITAddress, ppin : UInt8*, ppagentsession : ITAgentSession*) : HRESULT
+    @lpVtbl.value.create_session_with_pin.unsafe_as(Proc(ITACDGroup, ITAddress, UInt8*, ITAgentSession*, HRESULT)).call(pacdgroup, paddress, ppin, ppagentsession)
+  end
+  def get_id(ppid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(ppid)
+  end
+  def get_user(ppuser : UInt8**) : HRESULT
+    @lpVtbl.value.get_user.unsafe_as(Proc(UInt8**, HRESULT)).call(ppuser)
+  end
+  def put_state(agentstate : AGENT_STATE) : HRESULT
+    @lpVtbl.value.put_state.unsafe_as(Proc(AGENT_STATE, HRESULT)).call(agentstate)
+  end
+  def get_state(pagentstate : AGENT_STATE*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(AGENT_STATE*, HRESULT)).call(pagentstate)
+  end
+  def put_measurement_period(lperiod : Int32) : HRESULT
+    @lpVtbl.value.put_measurement_period.unsafe_as(Proc(Int32, HRESULT)).call(lperiod)
+  end
+  def get_measurement_period(plperiod : Int32*) : HRESULT
+    @lpVtbl.value.get_measurement_period.unsafe_as(Proc(Int32*, HRESULT)).call(plperiod)
+  end
+  def get_overall_call_rate(pcycallrate : CY*) : HRESULT
+    @lpVtbl.value.get_overall_call_rate.unsafe_as(Proc(CY*, HRESULT)).call(pcycallrate)
+  end
+  def get_number_of_acd_calls(plcalls : Int32*) : HRESULT
+    @lpVtbl.value.get_number_of_acd_calls.unsafe_as(Proc(Int32*, HRESULT)).call(plcalls)
+  end
+  def get_number_of_incoming_calls(plcalls : Int32*) : HRESULT
+    @lpVtbl.value.get_number_of_incoming_calls.unsafe_as(Proc(Int32*, HRESULT)).call(plcalls)
+  end
+  def get_number_of_outgoing_calls(plcalls : Int32*) : HRESULT
+    @lpVtbl.value.get_number_of_outgoing_calls.unsafe_as(Proc(Int32*, HRESULT)).call(plcalls)
+  end
+  def get_total_acd_talk_time(pltalktime : Int32*) : HRESULT
+    @lpVtbl.value.get_total_acd_talk_time.unsafe_as(Proc(Int32*, HRESULT)).call(pltalktime)
+  end
+  def get_total_acd_call_time(plcalltime : Int32*) : HRESULT
+    @lpVtbl.value.get_total_acd_call_time.unsafe_as(Proc(Int32*, HRESULT)).call(plcalltime)
+  end
+  def get_total_wrap_up_time(plwrapuptime : Int32*) : HRESULT
+    @lpVtbl.value.get_total_wrap_up_time.unsafe_as(Proc(Int32*, HRESULT)).call(plwrapuptime)
+  end
+  def get_agent_sessions(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_agent_sessions.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+end
+struct LibWin32::ITAgentSession
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_agent(ppagent : ITAgent*) : HRESULT
+    @lpVtbl.value.get_agent.unsafe_as(Proc(ITAgent*, HRESULT)).call(ppagent)
+  end
+  def get_address(ppaddress : ITAddress*) : HRESULT
+    @lpVtbl.value.get_address.unsafe_as(Proc(ITAddress*, HRESULT)).call(ppaddress)
+  end
+  def get_acd_group(ppacdgroup : ITACDGroup*) : HRESULT
+    @lpVtbl.value.get_acd_group.unsafe_as(Proc(ITACDGroup*, HRESULT)).call(ppacdgroup)
+  end
+  def put_state(sessionstate : AGENT_SESSION_STATE) : HRESULT
+    @lpVtbl.value.put_state.unsafe_as(Proc(AGENT_SESSION_STATE, HRESULT)).call(sessionstate)
+  end
+  def get_state(psessionstate : AGENT_SESSION_STATE*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(AGENT_SESSION_STATE*, HRESULT)).call(psessionstate)
+  end
+  def get_session_start_time(pdatesessionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_session_start_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdatesessionstart)
+  end
+  def get_session_duration(plduration : Int32*) : HRESULT
+    @lpVtbl.value.get_session_duration.unsafe_as(Proc(Int32*, HRESULT)).call(plduration)
+  end
+  def get_number_of_calls(plcalls : Int32*) : HRESULT
+    @lpVtbl.value.get_number_of_calls.unsafe_as(Proc(Int32*, HRESULT)).call(plcalls)
+  end
+  def get_total_talk_time(pltalktime : Int32*) : HRESULT
+    @lpVtbl.value.get_total_talk_time.unsafe_as(Proc(Int32*, HRESULT)).call(pltalktime)
+  end
+  def get_average_talk_time(pltalktime : Int32*) : HRESULT
+    @lpVtbl.value.get_average_talk_time.unsafe_as(Proc(Int32*, HRESULT)).call(pltalktime)
+  end
+  def get_total_call_time(plcalltime : Int32*) : HRESULT
+    @lpVtbl.value.get_total_call_time.unsafe_as(Proc(Int32*, HRESULT)).call(plcalltime)
+  end
+  def get_average_call_time(plcalltime : Int32*) : HRESULT
+    @lpVtbl.value.get_average_call_time.unsafe_as(Proc(Int32*, HRESULT)).call(plcalltime)
+  end
+  def get_total_wrap_up_time(plwrapuptime : Int32*) : HRESULT
+    @lpVtbl.value.get_total_wrap_up_time.unsafe_as(Proc(Int32*, HRESULT)).call(plwrapuptime)
+  end
+  def get_average_wrap_up_time(plwrapuptime : Int32*) : HRESULT
+    @lpVtbl.value.get_average_wrap_up_time.unsafe_as(Proc(Int32*, HRESULT)).call(plwrapuptime)
+  end
+  def get_acd_call_rate(pcycallrate : CY*) : HRESULT
+    @lpVtbl.value.get_acd_call_rate.unsafe_as(Proc(CY*, HRESULT)).call(pcycallrate)
+  end
+  def get_longest_time_to_answer(planswertime : Int32*) : HRESULT
+    @lpVtbl.value.get_longest_time_to_answer.unsafe_as(Proc(Int32*, HRESULT)).call(planswertime)
+  end
+  def get_average_time_to_answer(planswertime : Int32*) : HRESULT
+    @lpVtbl.value.get_average_time_to_answer.unsafe_as(Proc(Int32*, HRESULT)).call(planswertime)
+  end
+end
+struct LibWin32::ITACDGroup
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(ppname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(ppname)
+  end
+  def enumerate_queues(ppenumqueue : IEnumQueue*) : HRESULT
+    @lpVtbl.value.enumerate_queues.unsafe_as(Proc(IEnumQueue*, HRESULT)).call(ppenumqueue)
+  end
+  def get_queues(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_queues.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+end
+struct LibWin32::ITQueue
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def put_measurement_period(lperiod : Int32) : HRESULT
+    @lpVtbl.value.put_measurement_period.unsafe_as(Proc(Int32, HRESULT)).call(lperiod)
+  end
+  def get_measurement_period(plperiod : Int32*) : HRESULT
+    @lpVtbl.value.get_measurement_period.unsafe_as(Proc(Int32*, HRESULT)).call(plperiod)
+  end
+  def get_total_calls_queued(plcalls : Int32*) : HRESULT
+    @lpVtbl.value.get_total_calls_queued.unsafe_as(Proc(Int32*, HRESULT)).call(plcalls)
+  end
+  def get_current_calls_queued(plcalls : Int32*) : HRESULT
+    @lpVtbl.value.get_current_calls_queued.unsafe_as(Proc(Int32*, HRESULT)).call(plcalls)
+  end
+  def get_total_calls_abandoned(plcalls : Int32*) : HRESULT
+    @lpVtbl.value.get_total_calls_abandoned.unsafe_as(Proc(Int32*, HRESULT)).call(plcalls)
+  end
+  def get_total_calls_flowed_in(plcalls : Int32*) : HRESULT
+    @lpVtbl.value.get_total_calls_flowed_in.unsafe_as(Proc(Int32*, HRESULT)).call(plcalls)
+  end
+  def get_total_calls_flowed_out(plcalls : Int32*) : HRESULT
+    @lpVtbl.value.get_total_calls_flowed_out.unsafe_as(Proc(Int32*, HRESULT)).call(plcalls)
+  end
+  def get_longest_ever_wait_time(plwaittime : Int32*) : HRESULT
+    @lpVtbl.value.get_longest_ever_wait_time.unsafe_as(Proc(Int32*, HRESULT)).call(plwaittime)
+  end
+  def get_current_longest_wait_time(plwaittime : Int32*) : HRESULT
+    @lpVtbl.value.get_current_longest_wait_time.unsafe_as(Proc(Int32*, HRESULT)).call(plwaittime)
+  end
+  def get_average_wait_time(plwaittime : Int32*) : HRESULT
+    @lpVtbl.value.get_average_wait_time.unsafe_as(Proc(Int32*, HRESULT)).call(plwaittime)
+  end
+  def get_final_disposition(plcalls : Int32*) : HRESULT
+    @lpVtbl.value.get_final_disposition.unsafe_as(Proc(Int32*, HRESULT)).call(plcalls)
+  end
+  def get_name(ppname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(ppname)
+  end
+end
+struct LibWin32::ITAgentEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_agent(ppagent : ITAgent*) : HRESULT
+    @lpVtbl.value.get_agent.unsafe_as(Proc(ITAgent*, HRESULT)).call(ppagent)
+  end
+  def get_event(pevent : AGENT_EVENT*) : HRESULT
+    @lpVtbl.value.get_event.unsafe_as(Proc(AGENT_EVENT*, HRESULT)).call(pevent)
+  end
+end
+struct LibWin32::ITAgentSessionEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_session(ppsession : ITAgentSession*) : HRESULT
+    @lpVtbl.value.get_session.unsafe_as(Proc(ITAgentSession*, HRESULT)).call(ppsession)
+  end
+  def get_event(pevent : AGENT_SESSION_EVENT*) : HRESULT
+    @lpVtbl.value.get_event.unsafe_as(Proc(AGENT_SESSION_EVENT*, HRESULT)).call(pevent)
+  end
+end
+struct LibWin32::ITACDGroupEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_group(ppgroup : ITACDGroup*) : HRESULT
+    @lpVtbl.value.get_group.unsafe_as(Proc(ITACDGroup*, HRESULT)).call(ppgroup)
+  end
+  def get_event(pevent : ACDGROUP_EVENT*) : HRESULT
+    @lpVtbl.value.get_event.unsafe_as(Proc(ACDGROUP_EVENT*, HRESULT)).call(pevent)
+  end
+end
+struct LibWin32::ITQueueEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_queue(ppqueue : ITQueue*) : HRESULT
+    @lpVtbl.value.get_queue.unsafe_as(Proc(ITQueue*, HRESULT)).call(ppqueue)
+  end
+  def get_event(pevent : ACDQUEUE_EVENT*) : HRESULT
+    @lpVtbl.value.get_event.unsafe_as(Proc(ACDQUEUE_EVENT*, HRESULT)).call(pevent)
+  end
+end
+struct LibWin32::ITAgentHandlerEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_agent_handler(ppagenthandler : ITAgentHandler*) : HRESULT
+    @lpVtbl.value.get_agent_handler.unsafe_as(Proc(ITAgentHandler*, HRESULT)).call(ppagenthandler)
+  end
+  def get_event(pevent : AGENTHANDLER_EVENT*) : HRESULT
+    @lpVtbl.value.get_event.unsafe_as(Proc(AGENTHANDLER_EVENT*, HRESULT)).call(pevent)
+  end
+end
+struct LibWin32::ITTAPICallCenter
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def enumerate_agent_handlers(ppenumhandler : IEnumAgentHandler*) : HRESULT
+    @lpVtbl.value.enumerate_agent_handlers.unsafe_as(Proc(IEnumAgentHandler*, HRESULT)).call(ppenumhandler)
+  end
+  def get_agent_handlers(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_agent_handlers.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+end
+struct LibWin32::ITAgentHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(ppname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(ppname)
+  end
+  def create_agent(ppagent : ITAgent*) : HRESULT
+    @lpVtbl.value.create_agent.unsafe_as(Proc(ITAgent*, HRESULT)).call(ppagent)
+  end
+  def create_agent_with_id(pid : UInt8*, ppin : UInt8*, ppagent : ITAgent*) : HRESULT
+    @lpVtbl.value.create_agent_with_id.unsafe_as(Proc(UInt8*, UInt8*, ITAgent*, HRESULT)).call(pid, ppin, ppagent)
+  end
+  def enumerate_acd_groups(ppenumacdgroup : IEnumACDGroup*) : HRESULT
+    @lpVtbl.value.enumerate_acd_groups.unsafe_as(Proc(IEnumACDGroup*, HRESULT)).call(ppenumacdgroup)
+  end
+  def enumerate_usable_addresses(ppenumaddress : IEnumAddress*) : HRESULT
+    @lpVtbl.value.enumerate_usable_addresses.unsafe_as(Proc(IEnumAddress*, HRESULT)).call(ppenumaddress)
+  end
+  def get_acd_groups(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_acd_groups.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def get_usable_addresses(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_usable_addresses.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+end
+struct LibWin32::IEnumAgent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITAgent*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITAgent*, UInt32*, HRESULT)).call(celt, ppelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumAgent*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumAgent*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumAgentSession
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITAgentSession*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITAgentSession*, UInt32*, HRESULT)).call(celt, ppelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumAgentSession*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumAgentSession*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumQueue
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITQueue*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITQueue*, UInt32*, HRESULT)).call(celt, ppelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumQueue*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumQueue*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumACDGroup
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITACDGroup*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITACDGroup*, UInt32*, HRESULT)).call(celt, ppelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumACDGroup*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumACDGroup*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumAgentHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITAgentHandler*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITAgentHandler*, UInt32*, HRESULT)).call(celt, ppelements, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumAgentHandler*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumAgentHandler*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::ITAMMediaFormat
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_media_format(ppmt : AM_MEDIA_TYPE**) : HRESULT
+    @lpVtbl.value.get_media_format.unsafe_as(Proc(AM_MEDIA_TYPE**, HRESULT)).call(ppmt)
+  end
+  def put_media_format(pmt : AM_MEDIA_TYPE*) : HRESULT
+    @lpVtbl.value.put_media_format.unsafe_as(Proc(AM_MEDIA_TYPE*, HRESULT)).call(pmt)
+  end
+end
+struct LibWin32::ITAllocatorProperties
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_allocator_properties(pallocproperties : ALLOCATOR_PROPERTIES*) : HRESULT
+    @lpVtbl.value.set_allocator_properties.unsafe_as(Proc(ALLOCATOR_PROPERTIES*, HRESULT)).call(pallocproperties)
+  end
+  def get_allocator_properties(pallocproperties : ALLOCATOR_PROPERTIES*) : HRESULT
+    @lpVtbl.value.get_allocator_properties.unsafe_as(Proc(ALLOCATOR_PROPERTIES*, HRESULT)).call(pallocproperties)
+  end
+  def set_allocate_buffers(ballocbuffers : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_allocate_buffers.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(ballocbuffers)
+  end
+  def get_allocate_buffers(pballocbuffers : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_allocate_buffers.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pballocbuffers)
+  end
+  def set_buffer_size(buffersize : UInt32) : HRESULT
+    @lpVtbl.value.set_buffer_size.unsafe_as(Proc(UInt32, HRESULT)).call(buffersize)
+  end
+  def get_buffer_size(pbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pbuffersize)
+  end
+end
+struct LibWin32::ITPluggableTerminalEventSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def fire_event(pmspeventinfo : MSP_EVENT_INFO*) : HRESULT
+    @lpVtbl.value.fire_event.unsafe_as(Proc(MSP_EVENT_INFO*, HRESULT)).call(pmspeventinfo)
+  end
+end
+struct LibWin32::ITPluggableTerminalEventSinkRegistration
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def register_sink(peventsink : ITPluggableTerminalEventSink) : HRESULT
+    @lpVtbl.value.register_sink.unsafe_as(Proc(ITPluggableTerminalEventSink, HRESULT)).call(peventsink)
+  end
+  def unregister_sink : HRESULT
+    @lpVtbl.value.unregister_sink.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ITMSPAddress
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(hevent : Int32*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(Int32*, HRESULT)).call(hevent)
+  end
+  def shutdown : HRESULT
+    @lpVtbl.value.shutdown.unsafe_as(Proc(HRESULT)).call
+  end
+  def create_msp_call(hcall : Int32*, dwreserved : UInt32, dwmediatype : UInt32, pouterunknown : IUnknown, ppstreamcontrol : IUnknown*) : HRESULT
+    @lpVtbl.value.create_msp_call.unsafe_as(Proc(Int32*, UInt32, UInt32, IUnknown, IUnknown*, HRESULT)).call(hcall, dwreserved, dwmediatype, pouterunknown, ppstreamcontrol)
+  end
+  def shutdown_msp_call(pstreamcontrol : IUnknown) : HRESULT
+    @lpVtbl.value.shutdown_msp_call.unsafe_as(Proc(IUnknown, HRESULT)).call(pstreamcontrol)
+  end
+  def receive_tsp_data(pmspcall : IUnknown, pbuffer : UInt8*, dwsize : UInt32) : HRESULT
+    @lpVtbl.value.receive_tsp_data.unsafe_as(Proc(IUnknown, UInt8*, UInt32, HRESULT)).call(pmspcall, pbuffer, dwsize)
+  end
+  def get_event(pdwsize : UInt32*, peventbuffer : UInt8*) : HRESULT
+    @lpVtbl.value.get_event.unsafe_as(Proc(UInt32*, UInt8*, HRESULT)).call(pdwsize, peventbuffer)
+  end
+end
+struct LibWin32::ITTAPIDispatchEventNotification
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::ITDirectoryObjectConference
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_protocol(ppprotocol : UInt8**) : HRESULT
+    @lpVtbl.value.get_protocol.unsafe_as(Proc(UInt8**, HRESULT)).call(ppprotocol)
+  end
+  def get_originator(pporiginator : UInt8**) : HRESULT
+    @lpVtbl.value.get_originator.unsafe_as(Proc(UInt8**, HRESULT)).call(pporiginator)
+  end
+  def put_originator(poriginator : UInt8*) : HRESULT
+    @lpVtbl.value.put_originator.unsafe_as(Proc(UInt8*, HRESULT)).call(poriginator)
+  end
+  def get_advertising_scope(padvertisingscope : RND_ADVERTISING_SCOPE*) : HRESULT
+    @lpVtbl.value.get_advertising_scope.unsafe_as(Proc(RND_ADVERTISING_SCOPE*, HRESULT)).call(padvertisingscope)
+  end
+  def put_advertising_scope(advertisingscope : RND_ADVERTISING_SCOPE) : HRESULT
+    @lpVtbl.value.put_advertising_scope.unsafe_as(Proc(RND_ADVERTISING_SCOPE, HRESULT)).call(advertisingscope)
+  end
+  def get_url(ppurl : UInt8**) : HRESULT
+    @lpVtbl.value.get_url.unsafe_as(Proc(UInt8**, HRESULT)).call(ppurl)
+  end
+  def put_url(purl : UInt8*) : HRESULT
+    @lpVtbl.value.put_url.unsafe_as(Proc(UInt8*, HRESULT)).call(purl)
+  end
+  def get_description(ppdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(ppdescription)
+  end
+  def put_description(pdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(pdescription)
+  end
+  def get_is_encrypted(pfencrypted : Int16*) : HRESULT
+    @lpVtbl.value.get_is_encrypted.unsafe_as(Proc(Int16*, HRESULT)).call(pfencrypted)
+  end
+  def put_is_encrypted(fencrypted : Int16) : HRESULT
+    @lpVtbl.value.put_is_encrypted.unsafe_as(Proc(Int16, HRESULT)).call(fencrypted)
+  end
+  def get_start_time(pdate : Float64*) : HRESULT
+    @lpVtbl.value.get_start_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdate)
+  end
+  def put_start_time(date : Float64) : HRESULT
+    @lpVtbl.value.put_start_time.unsafe_as(Proc(Float64, HRESULT)).call(date)
+  end
+  def get_stop_time(pdate : Float64*) : HRESULT
+    @lpVtbl.value.get_stop_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdate)
+  end
+  def put_stop_time(date : Float64) : HRESULT
+    @lpVtbl.value.put_stop_time.unsafe_as(Proc(Float64, HRESULT)).call(date)
+  end
+end
+struct LibWin32::ITDirectoryObjectUser
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_ip_phone_primary(ppname : UInt8**) : HRESULT
+    @lpVtbl.value.get_ip_phone_primary.unsafe_as(Proc(UInt8**, HRESULT)).call(ppname)
+  end
+  def put_ip_phone_primary(pname : UInt8*) : HRESULT
+    @lpVtbl.value.put_ip_phone_primary.unsafe_as(Proc(UInt8*, HRESULT)).call(pname)
+  end
+end
+struct LibWin32::IEnumDialableAddrs
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : UInt8**, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, UInt8**, UInt32*, HRESULT)).call(celt, ppelements, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumDialableAddrs*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumDialableAddrs*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::ITDirectoryObject
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_object_type(pobjecttype : DIRECTORY_OBJECT_TYPE*) : HRESULT
+    @lpVtbl.value.get_object_type.unsafe_as(Proc(DIRECTORY_OBJECT_TYPE*, HRESULT)).call(pobjecttype)
+  end
+  def get_name(ppname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(ppname)
+  end
+  def put_name(pname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(pname)
+  end
+  def get_dialable_addrs(dwaddresstype : Int32, pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_dialable_addrs.unsafe_as(Proc(Int32, VARIANT*, HRESULT)).call(dwaddresstype, pvariant)
+  end
+  def enumerate_dialable_addrs(dwaddresstype : UInt32, ppenumdialableaddrs : IEnumDialableAddrs*) : HRESULT
+    @lpVtbl.value.enumerate_dialable_addrs.unsafe_as(Proc(UInt32, IEnumDialableAddrs*, HRESULT)).call(dwaddresstype, ppenumdialableaddrs)
+  end
+  def get_security_descriptor(ppsecdes : IDispatch*) : HRESULT
+    @lpVtbl.value.get_security_descriptor.unsafe_as(Proc(IDispatch*, HRESULT)).call(ppsecdes)
+  end
+  def put_security_descriptor(psecdes : IDispatch) : HRESULT
+    @lpVtbl.value.put_security_descriptor.unsafe_as(Proc(IDispatch, HRESULT)).call(psecdes)
+  end
+end
+struct LibWin32::IEnumDirectoryObject
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, pval : ITDirectoryObject*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITDirectoryObject*, UInt32*, HRESULT)).call(celt, pval, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumDirectoryObject*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumDirectoryObject*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::ITILSConfig
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_port(pport : Int32*) : HRESULT
+    @lpVtbl.value.get_port.unsafe_as(Proc(Int32*, HRESULT)).call(pport)
+  end
+  def put_port(port : Int32) : HRESULT
+    @lpVtbl.value.put_port.unsafe_as(Proc(Int32, HRESULT)).call(port)
+  end
+end
+struct LibWin32::ITDirectory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_directory_type(pdirectorytype : DIRECTORY_TYPE*) : HRESULT
+    @lpVtbl.value.get_directory_type.unsafe_as(Proc(DIRECTORY_TYPE*, HRESULT)).call(pdirectorytype)
+  end
+  def get_display_name(pname : UInt8**) : HRESULT
+    @lpVtbl.value.get_display_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pname)
+  end
+  def get_is_dynamic(pfdynamic : Int16*) : HRESULT
+    @lpVtbl.value.get_is_dynamic.unsafe_as(Proc(Int16*, HRESULT)).call(pfdynamic)
+  end
+  def get_default_object_ttl(pttl : Int32*) : HRESULT
+    @lpVtbl.value.get_default_object_ttl.unsafe_as(Proc(Int32*, HRESULT)).call(pttl)
+  end
+  def put_default_object_ttl(ttl : Int32) : HRESULT
+    @lpVtbl.value.put_default_object_ttl.unsafe_as(Proc(Int32, HRESULT)).call(ttl)
+  end
+  def enable_auto_refresh(fenable : Int16) : HRESULT
+    @lpVtbl.value.enable_auto_refresh.unsafe_as(Proc(Int16, HRESULT)).call(fenable)
+  end
+  def connect(fsecure : Int16) : HRESULT
+    @lpVtbl.value.connect.unsafe_as(Proc(Int16, HRESULT)).call(fsecure)
+  end
+  def bind(pdomainname : UInt8*, pusername : UInt8*, ppassword : UInt8*, lflags : Int32) : HRESULT
+    @lpVtbl.value.bind.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, Int32, HRESULT)).call(pdomainname, pusername, ppassword, lflags)
+  end
+  def add_directory_object(pdirectoryobject : ITDirectoryObject) : HRESULT
+    @lpVtbl.value.add_directory_object.unsafe_as(Proc(ITDirectoryObject, HRESULT)).call(pdirectoryobject)
+  end
+  def modify_directory_object(pdirectoryobject : ITDirectoryObject) : HRESULT
+    @lpVtbl.value.modify_directory_object.unsafe_as(Proc(ITDirectoryObject, HRESULT)).call(pdirectoryobject)
+  end
+  def refresh_directory_object(pdirectoryobject : ITDirectoryObject) : HRESULT
+    @lpVtbl.value.refresh_directory_object.unsafe_as(Proc(ITDirectoryObject, HRESULT)).call(pdirectoryobject)
+  end
+  def delete_directory_object(pdirectoryobject : ITDirectoryObject) : HRESULT
+    @lpVtbl.value.delete_directory_object.unsafe_as(Proc(ITDirectoryObject, HRESULT)).call(pdirectoryobject)
+  end
+  def get_directory_objects(directoryobjecttype : DIRECTORY_OBJECT_TYPE, pname : UInt8*, pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_directory_objects.unsafe_as(Proc(DIRECTORY_OBJECT_TYPE, UInt8*, VARIANT*, HRESULT)).call(directoryobjecttype, pname, pvariant)
+  end
+  def enumerate_directory_objects(directoryobjecttype : DIRECTORY_OBJECT_TYPE, pname : UInt8*, ppenumobject : IEnumDirectoryObject*) : HRESULT
+    @lpVtbl.value.enumerate_directory_objects.unsafe_as(Proc(DIRECTORY_OBJECT_TYPE, UInt8*, IEnumDirectoryObject*, HRESULT)).call(directoryobjecttype, pname, ppenumobject)
+  end
+end
+struct LibWin32::IEnumDirectory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppelements : ITDirectory*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, ITDirectory*, UInt32*, HRESULT)).call(celt, ppelements, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumDirectory*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumDirectory*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::ITRendezvous
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_default_directories(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_default_directories.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_default_directories(ppenumdirectory : IEnumDirectory*) : HRESULT
+    @lpVtbl.value.enumerate_default_directories.unsafe_as(Proc(IEnumDirectory*, HRESULT)).call(ppenumdirectory)
+  end
+  def create_directory(directorytype : DIRECTORY_TYPE, pname : UInt8*, ppdir : ITDirectory*) : HRESULT
+    @lpVtbl.value.create_directory.unsafe_as(Proc(DIRECTORY_TYPE, UInt8*, ITDirectory*, HRESULT)).call(directorytype, pname, ppdir)
+  end
+  def create_directory_object(directoryobjecttype : DIRECTORY_OBJECT_TYPE, pname : UInt8*, ppdirectoryobject : ITDirectoryObject*) : HRESULT
+    @lpVtbl.value.create_directory_object.unsafe_as(Proc(DIRECTORY_OBJECT_TYPE, UInt8*, ITDirectoryObject*, HRESULT)).call(directoryobjecttype, pname, ppdirectoryobject)
+  end
+end
+struct LibWin32::IMcastScope
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_scope_id(pid : Int32*) : HRESULT
+    @lpVtbl.value.get_scope_id.unsafe_as(Proc(Int32*, HRESULT)).call(pid)
+  end
+  def get_server_id(pid : Int32*) : HRESULT
+    @lpVtbl.value.get_server_id.unsafe_as(Proc(Int32*, HRESULT)).call(pid)
+  end
+  def get_interface_id(pid : Int32*) : HRESULT
+    @lpVtbl.value.get_interface_id.unsafe_as(Proc(Int32*, HRESULT)).call(pid)
+  end
+  def get_scope_description(ppdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_scope_description.unsafe_as(Proc(UInt8**, HRESULT)).call(ppdescription)
+  end
+  def get_ttl(pttl : Int32*) : HRESULT
+    @lpVtbl.value.get_ttl.unsafe_as(Proc(Int32*, HRESULT)).call(pttl)
+  end
+end
+struct LibWin32::IMcastLeaseInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_request_id(pprequestid : UInt8**) : HRESULT
+    @lpVtbl.value.get_request_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pprequestid)
+  end
+  def get_lease_start_time(ptime : Float64*) : HRESULT
+    @lpVtbl.value.get_lease_start_time.unsafe_as(Proc(Float64*, HRESULT)).call(ptime)
+  end
+  def put_lease_start_time(time : Float64) : HRESULT
+    @lpVtbl.value.put_lease_start_time.unsafe_as(Proc(Float64, HRESULT)).call(time)
+  end
+  def get_lease_stop_time(ptime : Float64*) : HRESULT
+    @lpVtbl.value.get_lease_stop_time.unsafe_as(Proc(Float64*, HRESULT)).call(ptime)
+  end
+  def put_lease_stop_time(time : Float64) : HRESULT
+    @lpVtbl.value.put_lease_stop_time.unsafe_as(Proc(Float64, HRESULT)).call(time)
+  end
+  def get_address_count(pcount : Int32*) : HRESULT
+    @lpVtbl.value.get_address_count.unsafe_as(Proc(Int32*, HRESULT)).call(pcount)
+  end
+  def get_server_address(ppaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_server_address.unsafe_as(Proc(UInt8**, HRESULT)).call(ppaddress)
+  end
+  def get_ttl(pttl : Int32*) : HRESULT
+    @lpVtbl.value.get_ttl.unsafe_as(Proc(Int32*, HRESULT)).call(pttl)
+  end
+  def get_addresses(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_addresses.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_addresses(ppenumaddresses : IEnumBstr*) : HRESULT
+    @lpVtbl.value.enumerate_addresses.unsafe_as(Proc(IEnumBstr*, HRESULT)).call(ppenumaddresses)
+  end
+end
+struct LibWin32::IEnumMcastScope
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, ppscopes : IMcastScope*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IMcastScope*, UInt32*, HRESULT)).call(celt, ppscopes, pceltfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def clone(ppenum : IEnumMcastScope*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumMcastScope*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IMcastAddressAllocation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_scopes(pvariant : VARIANT*) : HRESULT
+    @lpVtbl.value.get_scopes.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvariant)
+  end
+  def enumerate_scopes(ppenummcastscope : IEnumMcastScope*) : HRESULT
+    @lpVtbl.value.enumerate_scopes.unsafe_as(Proc(IEnumMcastScope*, HRESULT)).call(ppenummcastscope)
+  end
+  def request_address(pscope : IMcastScope, leasestarttime : Float64, leasestoptime : Float64, numaddresses : Int32, ppleaseresponse : IMcastLeaseInfo*) : HRESULT
+    @lpVtbl.value.request_address.unsafe_as(Proc(IMcastScope, Float64, Float64, Int32, IMcastLeaseInfo*, HRESULT)).call(pscope, leasestarttime, leasestoptime, numaddresses, ppleaseresponse)
+  end
+  def renew_address(lreserved : Int32, prenewrequest : IMcastLeaseInfo, pprenewresponse : IMcastLeaseInfo*) : HRESULT
+    @lpVtbl.value.renew_address.unsafe_as(Proc(Int32, IMcastLeaseInfo, IMcastLeaseInfo*, HRESULT)).call(lreserved, prenewrequest, pprenewresponse)
+  end
+  def release_address(preleaserequest : IMcastLeaseInfo) : HRESULT
+    @lpVtbl.value.release_address.unsafe_as(Proc(IMcastLeaseInfo, HRESULT)).call(preleaserequest)
+  end
+  def create_lease_info(leasestarttime : Float64, leasestoptime : Float64, dwnumaddresses : UInt32, ppaddresses : LibC::LPWSTR*, prequestid : LibC::LPWSTR, pserveraddress : LibC::LPWSTR, ppreleaserequest : IMcastLeaseInfo*) : HRESULT
+    @lpVtbl.value.create_lease_info.unsafe_as(Proc(Float64, Float64, UInt32, LibC::LPWSTR*, LibC::LPWSTR, LibC::LPWSTR, IMcastLeaseInfo*, HRESULT)).call(leasestarttime, leasestoptime, dwnumaddresses, ppaddresses, prequestid, pserveraddress, ppreleaserequest)
+  end
+  def create_lease_info_from_variant(leasestarttime : Float64, leasestoptime : Float64, vaddresses : VARIANT, prequestid : UInt8*, pserveraddress : UInt8*, ppreleaserequest : IMcastLeaseInfo*) : HRESULT
+    @lpVtbl.value.create_lease_info_from_variant.unsafe_as(Proc(Float64, Float64, VARIANT, UInt8*, UInt8*, IMcastLeaseInfo*, HRESULT)).call(leasestarttime, leasestoptime, vaddresses, prequestid, pserveraddress, ppreleaserequest)
+  end
+end
+struct LibWin32::ITnef
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_props(ulflags : UInt32, ulelemid : UInt32, lpvdata : Void*, lpproplist : SPropTagArray*) : HRESULT
+    @lpVtbl.value.add_props.unsafe_as(Proc(UInt32, UInt32, Void*, SPropTagArray*, HRESULT)).call(ulflags, ulelemid, lpvdata, lpproplist)
+  end
+  def extract_props(ulflags : UInt32, lpproplist : SPropTagArray*, lpproblems : STnefProblemArray**) : HRESULT
+    @lpVtbl.value.extract_props.unsafe_as(Proc(UInt32, SPropTagArray*, STnefProblemArray**, HRESULT)).call(ulflags, lpproplist, lpproblems)
+  end
+  def finish(ulflags : UInt32, lpkey : UInt16*, lpproblems : STnefProblemArray**) : HRESULT
+    @lpVtbl.value.finish.unsafe_as(Proc(UInt32, UInt16*, STnefProblemArray**, HRESULT)).call(ulflags, lpkey, lpproblems)
+  end
+  def open_tagged_body(lpmessage : IMessage, ulflags : UInt32, lppstream : IStream*) : HRESULT
+    @lpVtbl.value.open_tagged_body.unsafe_as(Proc(IMessage, UInt32, IStream*, HRESULT)).call(lpmessage, ulflags, lppstream)
+  end
+  def set_props(ulflags : UInt32, ulelemid : UInt32, cvalues : UInt32, lpprops : SPropValue*) : HRESULT
+    @lpVtbl.value.set_props.unsafe_as(Proc(UInt32, UInt32, UInt32, SPropValue*, HRESULT)).call(ulflags, ulelemid, cvalues, lpprops)
+  end
+  def encode_recips(ulflags : UInt32, lprecipienttable : IMAPITable) : HRESULT
+    @lpVtbl.value.encode_recips.unsafe_as(Proc(UInt32, IMAPITable, HRESULT)).call(ulflags, lprecipienttable)
+  end
+  def finish_component(ulflags : UInt32, ulcomponentid : UInt32, lpcustomproplist : SPropTagArray*, lpcustomprops : SPropValue*, lpproplist : SPropTagArray*, lpproblems : STnefProblemArray**) : HRESULT
+    @lpVtbl.value.finish_component.unsafe_as(Proc(UInt32, UInt32, SPropTagArray*, SPropValue*, SPropTagArray*, STnefProblemArray**, HRESULT)).call(ulflags, ulcomponentid, lpcustomproplist, lpcustomprops, lpproplist, lpproblems)
+  end
 end

@@ -367,20 +367,20 @@ lib LibWin32
 
 
   struct IWCNDeviceVTbl
-    query_interface : Proc(IWCNDevice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWCNDevice*, UInt32)
-    release : Proc(IWCNDevice*, UInt32)
-    set_password : Proc(IWCNDevice*, WCN_PASSWORD_TYPE, UInt32, UInt8*, HRESULT)
-    connect : Proc(IWCNDevice*, IWCNConnectNotify, HRESULT)
-    get_attribute : Proc(IWCNDevice*, WCN_ATTRIBUTE_TYPE, UInt32, UInt8*, UInt32*, HRESULT)
-    get_integer_attribute : Proc(IWCNDevice*, WCN_ATTRIBUTE_TYPE, UInt32*, HRESULT)
-    get_string_attribute : Proc(IWCNDevice*, WCN_ATTRIBUTE_TYPE, UInt32, Char*, HRESULT)
-    get_network_profile : Proc(IWCNDevice*, UInt32, Char*, HRESULT)
-    set_network_profile : Proc(IWCNDevice*, LibC::LPWSTR, HRESULT)
-    get_vendor_extension : Proc(IWCNDevice*, WCN_VENDOR_EXTENSION_SPEC*, UInt32, UInt8*, UInt32*, HRESULT)
-    set_vendor_extension : Proc(IWCNDevice*, WCN_VENDOR_EXTENSION_SPEC*, UInt32, UInt8*, HRESULT)
-    unadvise : Proc(IWCNDevice*, HRESULT)
-    set_nfc_password_params : Proc(IWCNDevice*, WCN_PASSWORD_TYPE, UInt32, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_password : UInt64
+    connect : UInt64
+    get_attribute : UInt64
+    get_integer_attribute : UInt64
+    get_string_attribute : UInt64
+    get_network_profile : UInt64
+    set_network_profile : UInt64
+    get_vendor_extension : UInt64
+    set_vendor_extension : UInt64
+    unadvise : UInt64
+    set_nfc_password_params : UInt64
   end
 
   IWCNDevice_GUID = "c100be9c-d33a-4a4b-bf23-bbef4663d017"
@@ -390,11 +390,11 @@ lib LibWin32
   end
 
   struct IWCNConnectNotifyVTbl
-    query_interface : Proc(IWCNConnectNotify*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWCNConnectNotify*, UInt32)
-    release : Proc(IWCNConnectNotify*, UInt32)
-    connect_succeeded : Proc(IWCNConnectNotify*, HRESULT)
-    connect_failed : Proc(IWCNConnectNotify*, HRESULT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    connect_succeeded : UInt64
+    connect_failed : UInt64
   end
 
   IWCNConnectNotify_GUID = "c100be9f-d33a-4a4b-bf23-bbef4663d017"
@@ -403,4 +403,65 @@ lib LibWin32
     lpVtbl : IWCNConnectNotifyVTbl*
   end
 
+end
+struct LibWin32::IWCNDevice
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_password(type : WCN_PASSWORD_TYPE, dwpasswordlength : UInt32, pbpassword : UInt8*) : HRESULT
+    @lpVtbl.value.set_password.unsafe_as(Proc(WCN_PASSWORD_TYPE, UInt32, UInt8*, HRESULT)).call(type, dwpasswordlength, pbpassword)
+  end
+  def connect(pnotify : IWCNConnectNotify) : HRESULT
+    @lpVtbl.value.connect.unsafe_as(Proc(IWCNConnectNotify, HRESULT)).call(pnotify)
+  end
+  def get_attribute(attributetype : WCN_ATTRIBUTE_TYPE, dwmaxbuffersize : UInt32, pbbuffer : UInt8*, pdwbufferused : UInt32*) : HRESULT
+    @lpVtbl.value.get_attribute.unsafe_as(Proc(WCN_ATTRIBUTE_TYPE, UInt32, UInt8*, UInt32*, HRESULT)).call(attributetype, dwmaxbuffersize, pbbuffer, pdwbufferused)
+  end
+  def get_integer_attribute(attributetype : WCN_ATTRIBUTE_TYPE, puinteger : UInt32*) : HRESULT
+    @lpVtbl.value.get_integer_attribute.unsafe_as(Proc(WCN_ATTRIBUTE_TYPE, UInt32*, HRESULT)).call(attributetype, puinteger)
+  end
+  def get_string_attribute(attributetype : WCN_ATTRIBUTE_TYPE, cchmaxstring : UInt32, wszstring : Char*) : HRESULT
+    @lpVtbl.value.get_string_attribute.unsafe_as(Proc(WCN_ATTRIBUTE_TYPE, UInt32, Char*, HRESULT)).call(attributetype, cchmaxstring, wszstring)
+  end
+  def get_network_profile(cchmaxstringlength : UInt32, wszprofile : Char*) : HRESULT
+    @lpVtbl.value.get_network_profile.unsafe_as(Proc(UInt32, Char*, HRESULT)).call(cchmaxstringlength, wszprofile)
+  end
+  def set_network_profile(pszprofilexml : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_network_profile.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszprofilexml)
+  end
+  def get_vendor_extension(pvendorextspec : WCN_VENDOR_EXTENSION_SPEC*, dwmaxbuffersize : UInt32, pbbuffer : UInt8*, pdwbufferused : UInt32*) : HRESULT
+    @lpVtbl.value.get_vendor_extension.unsafe_as(Proc(WCN_VENDOR_EXTENSION_SPEC*, UInt32, UInt8*, UInt32*, HRESULT)).call(pvendorextspec, dwmaxbuffersize, pbbuffer, pdwbufferused)
+  end
+  def set_vendor_extension(pvendorextspec : WCN_VENDOR_EXTENSION_SPEC*, cbbuffer : UInt32, pbbuffer : UInt8*) : HRESULT
+    @lpVtbl.value.set_vendor_extension.unsafe_as(Proc(WCN_VENDOR_EXTENSION_SPEC*, UInt32, UInt8*, HRESULT)).call(pvendorextspec, cbbuffer, pbbuffer)
+  end
+  def unadvise : HRESULT
+    @lpVtbl.value.unadvise.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_nfc_password_params(type : WCN_PASSWORD_TYPE, dwoobpasswordid : UInt32, dwpasswordlength : UInt32, pbpassword : UInt8*, dwremotepublickeyhashlength : UInt32, pbremotepublickeyhash : UInt8*, dwdhkeybloblength : UInt32, pbdhkeyblob : UInt8*) : HRESULT
+    @lpVtbl.value.set_nfc_password_params.unsafe_as(Proc(WCN_PASSWORD_TYPE, UInt32, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt8*, HRESULT)).call(type, dwoobpasswordid, dwpasswordlength, pbpassword, dwremotepublickeyhashlength, pbremotepublickeyhash, dwdhkeybloblength, pbdhkeyblob)
+  end
+end
+struct LibWin32::IWCNConnectNotify
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def connect_succeeded : HRESULT
+    @lpVtbl.value.connect_succeeded.unsafe_as(Proc(HRESULT)).call
+  end
+  def connect_failed(hrfailure : HRESULT) : HRESULT
+    @lpVtbl.value.connect_failed.unsafe_as(Proc(HRESULT, HRESULT)).call(hrfailure)
+  end
 end

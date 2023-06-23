@@ -953,7 +953,7 @@ lib LibWin32
   fun sqlite3_last_insert_rowid(param0 : Sqlite3*) : Int64
 
   # Params # param0 : Sqlite3* [In],param1 : Int64 [In]
-  fun sqlite3_set_last_insert_rowid(param0 : Sqlite3*, param1 : Int64)
+  fun sqlite3_set_last_insert_rowid(param0 : Sqlite3*, param1 : Int64) : Void
 
   # Params # param0 : Sqlite3* [In]
   fun sqlite3_changes(param0 : Sqlite3*) : Int32
@@ -962,7 +962,7 @@ lib LibWin32
   fun sqlite3_total_changes(param0 : Sqlite3*) : Int32
 
   # Params # param0 : Sqlite3* [In]
-  fun sqlite3_interrupt(param0 : Sqlite3*)
+  fun sqlite3_interrupt(param0 : Sqlite3*) : Void
 
   # Params # sql : PSTR [In]
   fun sqlite3_complete(sql : PSTR) : Int32
@@ -980,7 +980,7 @@ lib LibWin32
   fun sqlite3_get_table(db : Sqlite3*, zsql : PSTR, pazresult : Int8***, pnrow : Int32*, pncolumn : Int32*, pzerrmsg : Int8**) : Int32
 
   # Params # result : Int8** [In]
-  fun sqlite3_free_table(result : Int8**)
+  fun sqlite3_free_table(result : Int8**) : Void
 
   # Params # param0 : PSTR [In]
   fun sqlite3_mprintf(param0 : PSTR) : PSTR
@@ -1007,7 +1007,7 @@ lib LibWin32
   fun sqlite3_realloc64(param0 : Void*, param1 : UInt64) : Void*
 
   # Params # param0 : Void* [In]
-  fun sqlite3_free(param0 : Void*)
+  fun sqlite3_free(param0 : Void*) : Void
 
   # Params # param0 : Void* [In]
   fun sqlite3_msize(param0 : Void*) : UInt64
@@ -1019,7 +1019,7 @@ lib LibWin32
   fun sqlite3_memory_highwater(resetflag : Int32) : Int64
 
   # Params # n : Int32 [In],p : Void* [In]
-  fun sqlite3_randomness(n : Int32, p : Void*)
+  fun sqlite3_randomness(n : Int32, p : Void*) : Void
 
   # Params # param0 : Sqlite3* [In],xauth : LibC::IntPtrT [In],puserdata : Void* [In]
   fun sqlite3_set_authorizer(param0 : Sqlite3*, xauth : LibC::IntPtrT, puserdata : Void*) : Int32
@@ -1034,7 +1034,7 @@ lib LibWin32
   fun sqlite3_trace_v2(param0 : Sqlite3*, umask : UInt32, xcallback : LibC::IntPtrT, pctx : Void*) : Int32
 
   # Params # param0 : Sqlite3* [In],param1 : Int32 [In],param2 : LibC::IntPtrT [In],param3 : Void* [In]
-  fun sqlite3_progress_handler(param0 : Sqlite3*, param1 : Int32, param2 : LibC::IntPtrT, param3 : Void*)
+  fun sqlite3_progress_handler(param0 : Sqlite3*, param1 : Int32, param2 : LibC::IntPtrT, param3 : Void*) : Void
 
   # Params # filename : PSTR [In],ppdb : Sqlite3** [In]
   fun sqlite3_open(filename : PSTR, ppdb : Sqlite3**) : Int32
@@ -1073,7 +1073,7 @@ lib LibWin32
   fun sqlite3_create_filename(zdatabase : PSTR, zjournal : PSTR, zwal : PSTR, nparam : Int32, azparam : Int8**) : PSTR
 
   # Params # param0 : PSTR [In]
-  fun sqlite3_free_filename(param0 : PSTR)
+  fun sqlite3_free_filename(param0 : PSTR) : Void
 
   # Params # db : Sqlite3* [In]
   fun sqlite3_errcode(db : Sqlite3*) : Int32
@@ -1277,7 +1277,7 @@ lib LibWin32
   fun sqlite3_global_recover : Int32
 
   # Params # 
-  fun sqlite3_thread_cleanup
+  fun sqlite3_thread_cleanup : Void
 
   # Params # param0 : LibC::IntPtrT [In],param1 : Void* [In],param2 : Int64 [In]
   fun sqlite3_memory_alarm(param0 : LibC::IntPtrT, param1 : Void*, param2 : Int64) : Int32
@@ -1334,7 +1334,7 @@ lib LibWin32
   fun sqlite3_value_dup(param0 : Sqlite3_value*) : Sqlite3_value*
 
   # Params # param0 : Sqlite3_value* [In]
-  fun sqlite3_value_free(param0 : Sqlite3_value*)
+  fun sqlite3_value_free(param0 : Sqlite3_value*) : Void
 
   # Params # param0 : Sqlite3_context* [In],nbytes : Int32 [In]
   fun sqlite3_aggregate_context(param0 : Sqlite3_context*, nbytes : Int32) : Void*
@@ -1349,70 +1349,70 @@ lib LibWin32
   fun sqlite3_get_auxdata(param0 : Sqlite3_context*, n : Int32) : Void*
 
   # Params # param0 : Sqlite3_context* [In],n : Int32 [In],param2 : Void* [In],param3 : LibC::IntPtrT [In]
-  fun sqlite3_set_auxdata(param0 : Sqlite3_context*, n : Int32, param2 : Void*, param3 : LibC::IntPtrT)
+  fun sqlite3_set_auxdata(param0 : Sqlite3_context*, n : Int32, param2 : Void*, param3 : LibC::IntPtrT) : Void
 
   # Params # param0 : Sqlite3_context* [In],param1 : Void* [In],param2 : Int32 [In],param3 : LibC::IntPtrT [In]
-  fun sqlite3_result_blob(param0 : Sqlite3_context*, param1 : Void*, param2 : Int32, param3 : LibC::IntPtrT)
+  fun sqlite3_result_blob(param0 : Sqlite3_context*, param1 : Void*, param2 : Int32, param3 : LibC::IntPtrT) : Void
 
   # Params # param0 : Sqlite3_context* [In],param1 : Void* [In],param2 : UInt64 [In],param3 : LibC::IntPtrT [In]
-  fun sqlite3_result_blob64(param0 : Sqlite3_context*, param1 : Void*, param2 : UInt64, param3 : LibC::IntPtrT)
+  fun sqlite3_result_blob64(param0 : Sqlite3_context*, param1 : Void*, param2 : UInt64, param3 : LibC::IntPtrT) : Void
 
   # Params # param0 : Sqlite3_context* [In],param1 : Float64 [In]
-  fun sqlite3_result_double(param0 : Sqlite3_context*, param1 : Float64)
+  fun sqlite3_result_double(param0 : Sqlite3_context*, param1 : Float64) : Void
 
   # Params # param0 : Sqlite3_context* [In],param1 : PSTR [In],param2 : Int32 [In]
-  fun sqlite3_result_error(param0 : Sqlite3_context*, param1 : PSTR, param2 : Int32)
+  fun sqlite3_result_error(param0 : Sqlite3_context*, param1 : PSTR, param2 : Int32) : Void
 
   # Params # param0 : Sqlite3_context* [In],param1 : Void* [In],param2 : Int32 [In]
-  fun sqlite3_result_error16(param0 : Sqlite3_context*, param1 : Void*, param2 : Int32)
+  fun sqlite3_result_error16(param0 : Sqlite3_context*, param1 : Void*, param2 : Int32) : Void
 
   # Params # param0 : Sqlite3_context* [In]
-  fun sqlite3_result_error_toobig(param0 : Sqlite3_context*)
+  fun sqlite3_result_error_toobig(param0 : Sqlite3_context*) : Void
 
   # Params # param0 : Sqlite3_context* [In]
-  fun sqlite3_result_error_nomem(param0 : Sqlite3_context*)
+  fun sqlite3_result_error_nomem(param0 : Sqlite3_context*) : Void
 
   # Params # param0 : Sqlite3_context* [In],param1 : Int32 [In]
-  fun sqlite3_result_error_code(param0 : Sqlite3_context*, param1 : Int32)
+  fun sqlite3_result_error_code(param0 : Sqlite3_context*, param1 : Int32) : Void
 
   # Params # param0 : Sqlite3_context* [In],param1 : Int32 [In]
-  fun sqlite3_result_int(param0 : Sqlite3_context*, param1 : Int32)
+  fun sqlite3_result_int(param0 : Sqlite3_context*, param1 : Int32) : Void
 
   # Params # param0 : Sqlite3_context* [In],param1 : Int64 [In]
-  fun sqlite3_result_int64(param0 : Sqlite3_context*, param1 : Int64)
+  fun sqlite3_result_int64(param0 : Sqlite3_context*, param1 : Int64) : Void
 
   # Params # param0 : Sqlite3_context* [In]
-  fun sqlite3_result_null(param0 : Sqlite3_context*)
+  fun sqlite3_result_null(param0 : Sqlite3_context*) : Void
 
   # Params # param0 : Sqlite3_context* [In],param1 : PSTR [In],param2 : Int32 [In],param3 : LibC::IntPtrT [In]
-  fun sqlite3_result_text(param0 : Sqlite3_context*, param1 : PSTR, param2 : Int32, param3 : LibC::IntPtrT)
+  fun sqlite3_result_text(param0 : Sqlite3_context*, param1 : PSTR, param2 : Int32, param3 : LibC::IntPtrT) : Void
 
   # Params # param0 : Sqlite3_context* [In],param1 : PSTR [In],param2 : UInt64 [In],param3 : LibC::IntPtrT [In],encoding : UInt8 [In]
-  fun sqlite3_result_text64(param0 : Sqlite3_context*, param1 : PSTR, param2 : UInt64, param3 : LibC::IntPtrT, encoding : UInt8)
+  fun sqlite3_result_text64(param0 : Sqlite3_context*, param1 : PSTR, param2 : UInt64, param3 : LibC::IntPtrT, encoding : UInt8) : Void
 
   # Params # param0 : Sqlite3_context* [In],param1 : Void* [In],param2 : Int32 [In],param3 : LibC::IntPtrT [In]
-  fun sqlite3_result_text16(param0 : Sqlite3_context*, param1 : Void*, param2 : Int32, param3 : LibC::IntPtrT)
+  fun sqlite3_result_text16(param0 : Sqlite3_context*, param1 : Void*, param2 : Int32, param3 : LibC::IntPtrT) : Void
 
   # Params # param0 : Sqlite3_context* [In],param1 : Void* [In],param2 : Int32 [In],param3 : LibC::IntPtrT [In]
-  fun sqlite3_result_text16le(param0 : Sqlite3_context*, param1 : Void*, param2 : Int32, param3 : LibC::IntPtrT)
+  fun sqlite3_result_text16le(param0 : Sqlite3_context*, param1 : Void*, param2 : Int32, param3 : LibC::IntPtrT) : Void
 
   # Params # param0 : Sqlite3_context* [In],param1 : Void* [In],param2 : Int32 [In],param3 : LibC::IntPtrT [In]
-  fun sqlite3_result_text16be(param0 : Sqlite3_context*, param1 : Void*, param2 : Int32, param3 : LibC::IntPtrT)
+  fun sqlite3_result_text16be(param0 : Sqlite3_context*, param1 : Void*, param2 : Int32, param3 : LibC::IntPtrT) : Void
 
   # Params # param0 : Sqlite3_context* [In],param1 : Sqlite3_value* [In]
-  fun sqlite3_result_value(param0 : Sqlite3_context*, param1 : Sqlite3_value*)
+  fun sqlite3_result_value(param0 : Sqlite3_context*, param1 : Sqlite3_value*) : Void
 
   # Params # param0 : Sqlite3_context* [In],param1 : Void* [In],param2 : PSTR [In],param3 : LibC::IntPtrT [In]
-  fun sqlite3_result_pointer(param0 : Sqlite3_context*, param1 : Void*, param2 : PSTR, param3 : LibC::IntPtrT)
+  fun sqlite3_result_pointer(param0 : Sqlite3_context*, param1 : Void*, param2 : PSTR, param3 : LibC::IntPtrT) : Void
 
   # Params # param0 : Sqlite3_context* [In],n : Int32 [In]
-  fun sqlite3_result_zeroblob(param0 : Sqlite3_context*, n : Int32)
+  fun sqlite3_result_zeroblob(param0 : Sqlite3_context*, n : Int32) : Void
 
   # Params # param0 : Sqlite3_context* [In],n : UInt64 [In]
   fun sqlite3_result_zeroblob64(param0 : Sqlite3_context*, n : UInt64) : Int32
 
   # Params # param0 : Sqlite3_context* [In],param1 : UInt32 [In]
-  fun sqlite3_result_subtype(param0 : Sqlite3_context*, param1 : UInt32)
+  fun sqlite3_result_subtype(param0 : Sqlite3_context*, param1 : UInt32) : Void
 
   # Params # param0 : Sqlite3* [In],zname : PSTR [In],etextrep : Int32 [In],parg : Void* [In],xcompare : LibC::IntPtrT [In]
   fun sqlite3_create_collation(param0 : Sqlite3*, zname : PSTR, etextrep : Int32, parg : Void*, xcompare : LibC::IntPtrT) : Int32
@@ -1484,7 +1484,7 @@ lib LibWin32
   fun sqlite3_hard_heap_limit64(n : Int64) : Int64
 
   # Params # n : Int32 [In]
-  fun sqlite3_soft_heap_limit(n : Int32)
+  fun sqlite3_soft_heap_limit(n : Int32) : Void
 
   # Params # db : Sqlite3* [In],zdbname : PSTR [In],ztablename : PSTR [In],zcolumnname : PSTR [In],pzdatatype : Int8** [In],pzcollseq : Int8** [In],pnotnull : Int32* [In],pprimarykey : Int32* [In],pautoinc : Int32* [In]
   fun sqlite3_table_column_metadata(db : Sqlite3*, zdbname : PSTR, ztablename : PSTR, zcolumnname : PSTR, pzdatatype : Int8**, pzcollseq : Int8**, pnotnull : Int32*, pprimarykey : Int32*, pautoinc : Int32*) : Int32
@@ -1502,7 +1502,7 @@ lib LibWin32
   fun sqlite3_cancel_auto_extension(xentrypoint : LibC::IntPtrT) : Int32
 
   # Params # 
-  fun sqlite3_reset_auto_extension
+  fun sqlite3_reset_auto_extension : Void
 
   # Params # db : Sqlite3* [In],zname : PSTR [In],p : Sqlite3_module* [In],pclientdata : Void* [In]
   fun sqlite3_create_module(db : Sqlite3*, zname : PSTR, p : Sqlite3_module*, pclientdata : Void*) : Int32
@@ -1550,16 +1550,16 @@ lib LibWin32
   fun sqlite3_mutex_alloc(param0 : Int32) : Sqlite3_mutex*
 
   # Params # param0 : Sqlite3_mutex* [In]
-  fun sqlite3_mutex_free(param0 : Sqlite3_mutex*)
+  fun sqlite3_mutex_free(param0 : Sqlite3_mutex*) : Void
 
   # Params # param0 : Sqlite3_mutex* [In]
-  fun sqlite3_mutex_enter(param0 : Sqlite3_mutex*)
+  fun sqlite3_mutex_enter(param0 : Sqlite3_mutex*) : Void
 
   # Params # param0 : Sqlite3_mutex* [In]
   fun sqlite3_mutex_try(param0 : Sqlite3_mutex*) : Int32
 
   # Params # param0 : Sqlite3_mutex* [In]
-  fun sqlite3_mutex_leave(param0 : Sqlite3_mutex*)
+  fun sqlite3_mutex_leave(param0 : Sqlite3_mutex*) : Void
 
   # Params # param0 : Sqlite3* [In]
   fun sqlite3_db_mutex(param0 : Sqlite3*) : Sqlite3_mutex*
@@ -1586,22 +1586,22 @@ lib LibWin32
   fun sqlite3_str_finish(param0 : Sqlite3_str*) : PSTR
 
   # Params # param0 : Sqlite3_str* [In],zformat : PSTR [In]
-  fun sqlite3_str_appendf(param0 : Sqlite3_str*, zformat : PSTR)
+  fun sqlite3_str_appendf(param0 : Sqlite3_str*, zformat : PSTR) : Void
 
   # Params # param0 : Sqlite3_str* [In],zformat : PSTR [In],param2 : Int8* [In]
-  fun sqlite3_str_vappendf(param0 : Sqlite3_str*, zformat : PSTR, param2 : Int8*)
+  fun sqlite3_str_vappendf(param0 : Sqlite3_str*, zformat : PSTR, param2 : Int8*) : Void
 
   # Params # param0 : Sqlite3_str* [In],zin : PSTR [In],n : Int32 [In]
-  fun sqlite3_str_append(param0 : Sqlite3_str*, zin : PSTR, n : Int32)
+  fun sqlite3_str_append(param0 : Sqlite3_str*, zin : PSTR, n : Int32) : Void
 
   # Params # param0 : Sqlite3_str* [In],zin : PSTR [In]
-  fun sqlite3_str_appendall(param0 : Sqlite3_str*, zin : PSTR)
+  fun sqlite3_str_appendall(param0 : Sqlite3_str*, zin : PSTR) : Void
 
   # Params # param0 : Sqlite3_str* [In],n : Int32 [In],c : CHAR [In]
-  fun sqlite3_str_appendchar(param0 : Sqlite3_str*, n : Int32, c : CHAR)
+  fun sqlite3_str_appendchar(param0 : Sqlite3_str*, n : Int32, c : CHAR) : Void
 
   # Params # param0 : Sqlite3_str* [In]
-  fun sqlite3_str_reset(param0 : Sqlite3_str*)
+  fun sqlite3_str_reset(param0 : Sqlite3_str*) : Void
 
   # Params # param0 : Sqlite3_str* [In]
   fun sqlite3_str_errcode(param0 : Sqlite3_str*) : Int32
@@ -1652,7 +1652,7 @@ lib LibWin32
   fun sqlite3_strlike(zglob : PSTR, zstr : PSTR, cesc : UInt32) : Int32
 
   # Params # ierrcode : Int32 [In],zformat : PSTR [In]
-  fun sqlite3_log(ierrcode : Int32, zformat : PSTR)
+  fun sqlite3_log(ierrcode : Int32, zformat : PSTR) : Void
 
   # Params # param0 : Sqlite3* [In],param1 : LibC::IntPtrT [In],param2 : Void* [In]
   fun sqlite3_wal_hook(param0 : Sqlite3*, param1 : LibC::IntPtrT, param2 : Void*) : Void*

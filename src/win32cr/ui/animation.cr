@@ -102,28 +102,28 @@ lib LibWin32
 
 
   struct IUIAnimationManagerVTbl
-    query_interface : Proc(IUIAnimationManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationManager*, UInt32)
-    release : Proc(IUIAnimationManager*, UInt32)
-    create_animation_variable : Proc(IUIAnimationManager*, Float64, IUIAnimationVariable*, HRESULT)
-    schedule_transition : Proc(IUIAnimationManager*, IUIAnimationVariable, IUIAnimationTransition, Float64, HRESULT)
-    create_storyboard : Proc(IUIAnimationManager*, IUIAnimationStoryboard*, HRESULT)
-    finish_all_storyboards : Proc(IUIAnimationManager*, Float64, HRESULT)
-    abandon_all_storyboards : Proc(IUIAnimationManager*, HRESULT)
-    update : Proc(IUIAnimationManager*, Float64, UI_ANIMATION_UPDATE_RESULT*, HRESULT)
-    get_variable_from_tag : Proc(IUIAnimationManager*, IUnknown, UInt32, IUIAnimationVariable*, HRESULT)
-    get_storyboard_from_tag : Proc(IUIAnimationManager*, IUnknown, UInt32, IUIAnimationStoryboard*, HRESULT)
-    get_status : Proc(IUIAnimationManager*, UI_ANIMATION_MANAGER_STATUS*, HRESULT)
-    set_animation_mode : Proc(IUIAnimationManager*, UI_ANIMATION_MODE, HRESULT)
-    pause : Proc(IUIAnimationManager*, HRESULT)
-    resume : Proc(IUIAnimationManager*, HRESULT)
-    set_manager_event_handler : Proc(IUIAnimationManager*, IUIAnimationManagerEventHandler, HRESULT)
-    set_cancel_priority_comparison : Proc(IUIAnimationManager*, IUIAnimationPriorityComparison, HRESULT)
-    set_trim_priority_comparison : Proc(IUIAnimationManager*, IUIAnimationPriorityComparison, HRESULT)
-    set_compress_priority_comparison : Proc(IUIAnimationManager*, IUIAnimationPriorityComparison, HRESULT)
-    set_conclude_priority_comparison : Proc(IUIAnimationManager*, IUIAnimationPriorityComparison, HRESULT)
-    set_default_longest_acceptable_delay : Proc(IUIAnimationManager*, Float64, HRESULT)
-    shutdown : Proc(IUIAnimationManager*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_animation_variable : UInt64
+    schedule_transition : UInt64
+    create_storyboard : UInt64
+    finish_all_storyboards : UInt64
+    abandon_all_storyboards : UInt64
+    update : UInt64
+    get_variable_from_tag : UInt64
+    get_storyboard_from_tag : UInt64
+    get_status : UInt64
+    set_animation_mode : UInt64
+    pause : UInt64
+    resume : UInt64
+    set_manager_event_handler : UInt64
+    set_cancel_priority_comparison : UInt64
+    set_trim_priority_comparison : UInt64
+    set_compress_priority_comparison : UInt64
+    set_conclude_priority_comparison : UInt64
+    set_default_longest_acceptable_delay : UInt64
+    shutdown : UInt64
   end
 
   IUIAnimationManager_GUID = "9169896c-ac8d-4e7d-94e5-67fa4dc2f2e8"
@@ -133,23 +133,23 @@ lib LibWin32
   end
 
   struct IUIAnimationVariableVTbl
-    query_interface : Proc(IUIAnimationVariable*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationVariable*, UInt32)
-    release : Proc(IUIAnimationVariable*, UInt32)
-    get_value : Proc(IUIAnimationVariable*, Float64*, HRESULT)
-    get_final_value : Proc(IUIAnimationVariable*, Float64*, HRESULT)
-    get_previous_value : Proc(IUIAnimationVariable*, Float64*, HRESULT)
-    get_integer_value : Proc(IUIAnimationVariable*, Int32*, HRESULT)
-    get_final_integer_value : Proc(IUIAnimationVariable*, Int32*, HRESULT)
-    get_previous_integer_value : Proc(IUIAnimationVariable*, Int32*, HRESULT)
-    get_current_storyboard : Proc(IUIAnimationVariable*, IUIAnimationStoryboard*, HRESULT)
-    set_lower_bound : Proc(IUIAnimationVariable*, Float64, HRESULT)
-    set_upper_bound : Proc(IUIAnimationVariable*, Float64, HRESULT)
-    set_rounding_mode : Proc(IUIAnimationVariable*, UI_ANIMATION_ROUNDING_MODE, HRESULT)
-    set_tag : Proc(IUIAnimationVariable*, IUnknown, UInt32, HRESULT)
-    get_tag : Proc(IUIAnimationVariable*, IUnknown*, UInt32*, HRESULT)
-    set_variable_change_handler : Proc(IUIAnimationVariable*, IUIAnimationVariableChangeHandler, HRESULT)
-    set_variable_integer_change_handler : Proc(IUIAnimationVariable*, IUIAnimationVariableIntegerChangeHandler, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_value : UInt64
+    get_final_value : UInt64
+    get_previous_value : UInt64
+    get_integer_value : UInt64
+    get_final_integer_value : UInt64
+    get_previous_integer_value : UInt64
+    get_current_storyboard : UInt64
+    set_lower_bound : UInt64
+    set_upper_bound : UInt64
+    set_rounding_mode : UInt64
+    set_tag : UInt64
+    get_tag : UInt64
+    set_variable_change_handler : UInt64
+    set_variable_integer_change_handler : UInt64
   end
 
   IUIAnimationVariable_GUID = "8ceeb155-2849-4ce5-9448-91ff70e1e4d9"
@@ -159,26 +159,26 @@ lib LibWin32
   end
 
   struct IUIAnimationStoryboardVTbl
-    query_interface : Proc(IUIAnimationStoryboard*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationStoryboard*, UInt32)
-    release : Proc(IUIAnimationStoryboard*, UInt32)
-    add_transition : Proc(IUIAnimationStoryboard*, IUIAnimationVariable, IUIAnimationTransition, HRESULT)
-    add_keyframe_at_offset : Proc(IUIAnimationStoryboard*, UI_ANIMATION_KEYFRAME, Float64, UI_ANIMATION_KEYFRAME*, HRESULT)
-    add_keyframe_after_transition : Proc(IUIAnimationStoryboard*, IUIAnimationTransition, UI_ANIMATION_KEYFRAME*, HRESULT)
-    add_transition_at_keyframe : Proc(IUIAnimationStoryboard*, IUIAnimationVariable, IUIAnimationTransition, UI_ANIMATION_KEYFRAME, HRESULT)
-    add_transition_between_keyframes : Proc(IUIAnimationStoryboard*, IUIAnimationVariable, IUIAnimationTransition, UI_ANIMATION_KEYFRAME, UI_ANIMATION_KEYFRAME, HRESULT)
-    repeat_between_keyframes : Proc(IUIAnimationStoryboard*, UI_ANIMATION_KEYFRAME, UI_ANIMATION_KEYFRAME, Int32, HRESULT)
-    hold_variable : Proc(IUIAnimationStoryboard*, IUIAnimationVariable, HRESULT)
-    set_longest_acceptable_delay : Proc(IUIAnimationStoryboard*, Float64, HRESULT)
-    schedule : Proc(IUIAnimationStoryboard*, Float64, UI_ANIMATION_SCHEDULING_RESULT*, HRESULT)
-    conclude : Proc(IUIAnimationStoryboard*, HRESULT)
-    finish : Proc(IUIAnimationStoryboard*, Float64, HRESULT)
-    abandon : Proc(IUIAnimationStoryboard*, HRESULT)
-    set_tag : Proc(IUIAnimationStoryboard*, IUnknown, UInt32, HRESULT)
-    get_tag : Proc(IUIAnimationStoryboard*, IUnknown*, UInt32*, HRESULT)
-    get_status : Proc(IUIAnimationStoryboard*, UI_ANIMATION_STORYBOARD_STATUS*, HRESULT)
-    get_elapsed_time : Proc(IUIAnimationStoryboard*, Float64*, HRESULT)
-    set_storyboard_event_handler : Proc(IUIAnimationStoryboard*, IUIAnimationStoryboardEventHandler, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_transition : UInt64
+    add_keyframe_at_offset : UInt64
+    add_keyframe_after_transition : UInt64
+    add_transition_at_keyframe : UInt64
+    add_transition_between_keyframes : UInt64
+    repeat_between_keyframes : UInt64
+    hold_variable : UInt64
+    set_longest_acceptable_delay : UInt64
+    schedule : UInt64
+    conclude : UInt64
+    finish : UInt64
+    abandon : UInt64
+    set_tag : UInt64
+    get_tag : UInt64
+    get_status : UInt64
+    get_elapsed_time : UInt64
+    set_storyboard_event_handler : UInt64
   end
 
   IUIAnimationStoryboard_GUID = "a8ff128f-9bf9-4af1-9e67-e5e410defb84"
@@ -188,13 +188,13 @@ lib LibWin32
   end
 
   struct IUIAnimationTransitionVTbl
-    query_interface : Proc(IUIAnimationTransition*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationTransition*, UInt32)
-    release : Proc(IUIAnimationTransition*, UInt32)
-    set_initial_value : Proc(IUIAnimationTransition*, Float64, HRESULT)
-    set_initial_velocity : Proc(IUIAnimationTransition*, Float64, HRESULT)
-    is_duration_known : Proc(IUIAnimationTransition*, HRESULT)
-    get_duration : Proc(IUIAnimationTransition*, Float64*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_initial_value : UInt64
+    set_initial_velocity : UInt64
+    is_duration_known : UInt64
+    get_duration : UInt64
   end
 
   IUIAnimationTransition_GUID = "dc6ce252-f731-41cf-b610-614b6ca049ad"
@@ -204,10 +204,10 @@ lib LibWin32
   end
 
   struct IUIAnimationManagerEventHandlerVTbl
-    query_interface : Proc(IUIAnimationManagerEventHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationManagerEventHandler*, UInt32)
-    release : Proc(IUIAnimationManagerEventHandler*, UInt32)
-    on_manager_status_changed : Proc(IUIAnimationManagerEventHandler*, UI_ANIMATION_MANAGER_STATUS, UI_ANIMATION_MANAGER_STATUS, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_manager_status_changed : UInt64
   end
 
   IUIAnimationManagerEventHandler_GUID = "783321ed-78a3-4366-b574-6af607a64788"
@@ -217,10 +217,10 @@ lib LibWin32
   end
 
   struct IUIAnimationVariableChangeHandlerVTbl
-    query_interface : Proc(IUIAnimationVariableChangeHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationVariableChangeHandler*, UInt32)
-    release : Proc(IUIAnimationVariableChangeHandler*, UInt32)
-    on_value_changed : Proc(IUIAnimationVariableChangeHandler*, IUIAnimationStoryboard, IUIAnimationVariable, Float64, Float64, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_value_changed : UInt64
   end
 
   IUIAnimationVariableChangeHandler_GUID = "6358b7ba-87d2-42d5-bf71-82e919dd5862"
@@ -230,10 +230,10 @@ lib LibWin32
   end
 
   struct IUIAnimationVariableIntegerChangeHandlerVTbl
-    query_interface : Proc(IUIAnimationVariableIntegerChangeHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationVariableIntegerChangeHandler*, UInt32)
-    release : Proc(IUIAnimationVariableIntegerChangeHandler*, UInt32)
-    on_integer_value_changed : Proc(IUIAnimationVariableIntegerChangeHandler*, IUIAnimationStoryboard, IUIAnimationVariable, Int32, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_integer_value_changed : UInt64
   end
 
   IUIAnimationVariableIntegerChangeHandler_GUID = "bb3e1550-356e-44b0-99da-85ac6017865e"
@@ -243,11 +243,11 @@ lib LibWin32
   end
 
   struct IUIAnimationStoryboardEventHandlerVTbl
-    query_interface : Proc(IUIAnimationStoryboardEventHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationStoryboardEventHandler*, UInt32)
-    release : Proc(IUIAnimationStoryboardEventHandler*, UInt32)
-    on_storyboard_status_changed : Proc(IUIAnimationStoryboardEventHandler*, IUIAnimationStoryboard, UI_ANIMATION_STORYBOARD_STATUS, UI_ANIMATION_STORYBOARD_STATUS, HRESULT)
-    on_storyboard_updated : Proc(IUIAnimationStoryboardEventHandler*, IUIAnimationStoryboard, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_storyboard_status_changed : UInt64
+    on_storyboard_updated : UInt64
   end
 
   IUIAnimationStoryboardEventHandler_GUID = "3d5c9008-ec7c-4364-9f8a-9af3c58cbae6"
@@ -257,10 +257,10 @@ lib LibWin32
   end
 
   struct IUIAnimationPriorityComparisonVTbl
-    query_interface : Proc(IUIAnimationPriorityComparison*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationPriorityComparison*, UInt32)
-    release : Proc(IUIAnimationPriorityComparison*, UInt32)
-    has_priority : Proc(IUIAnimationPriorityComparison*, IUIAnimationStoryboard, IUIAnimationStoryboard, UI_ANIMATION_PRIORITY_EFFECT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    has_priority : UInt64
   end
 
   IUIAnimationPriorityComparison_GUID = "83fa9b74-5f86-4618-bc6a-a2fac19b3f44"
@@ -270,21 +270,21 @@ lib LibWin32
   end
 
   struct IUIAnimationTransitionLibraryVTbl
-    query_interface : Proc(IUIAnimationTransitionLibrary*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationTransitionLibrary*, UInt32)
-    release : Proc(IUIAnimationTransitionLibrary*, UInt32)
-    create_instantaneous_transition : Proc(IUIAnimationTransitionLibrary*, Float64, IUIAnimationTransition*, HRESULT)
-    create_constant_transition : Proc(IUIAnimationTransitionLibrary*, Float64, IUIAnimationTransition*, HRESULT)
-    create_discrete_transition : Proc(IUIAnimationTransitionLibrary*, Float64, Float64, Float64, IUIAnimationTransition*, HRESULT)
-    create_linear_transition : Proc(IUIAnimationTransitionLibrary*, Float64, Float64, IUIAnimationTransition*, HRESULT)
-    create_linear_transition_from_speed : Proc(IUIAnimationTransitionLibrary*, Float64, Float64, IUIAnimationTransition*, HRESULT)
-    create_sinusoidal_transition_from_velocity : Proc(IUIAnimationTransitionLibrary*, Float64, Float64, IUIAnimationTransition*, HRESULT)
-    create_sinusoidal_transition_from_range : Proc(IUIAnimationTransitionLibrary*, Float64, Float64, Float64, Float64, UI_ANIMATION_SLOPE, IUIAnimationTransition*, HRESULT)
-    create_accelerate_decelerate_transition : Proc(IUIAnimationTransitionLibrary*, Float64, Float64, Float64, Float64, IUIAnimationTransition*, HRESULT)
-    create_reversal_transition : Proc(IUIAnimationTransitionLibrary*, Float64, IUIAnimationTransition*, HRESULT)
-    create_cubic_transition : Proc(IUIAnimationTransitionLibrary*, Float64, Float64, Float64, IUIAnimationTransition*, HRESULT)
-    create_smooth_stop_transition : Proc(IUIAnimationTransitionLibrary*, Float64, Float64, IUIAnimationTransition*, HRESULT)
-    create_parabolic_transition_from_acceleration : Proc(IUIAnimationTransitionLibrary*, Float64, Float64, Float64, IUIAnimationTransition*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_instantaneous_transition : UInt64
+    create_constant_transition : UInt64
+    create_discrete_transition : UInt64
+    create_linear_transition : UInt64
+    create_linear_transition_from_speed : UInt64
+    create_sinusoidal_transition_from_velocity : UInt64
+    create_sinusoidal_transition_from_range : UInt64
+    create_accelerate_decelerate_transition : UInt64
+    create_reversal_transition : UInt64
+    create_cubic_transition : UInt64
+    create_smooth_stop_transition : UInt64
+    create_parabolic_transition_from_acceleration : UInt64
   end
 
   IUIAnimationTransitionLibrary_GUID = "ca5a14b1-d24f-48b8-8fe4-c78169ba954e"
@@ -294,16 +294,16 @@ lib LibWin32
   end
 
   struct IUIAnimationInterpolatorVTbl
-    query_interface : Proc(IUIAnimationInterpolator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationInterpolator*, UInt32)
-    release : Proc(IUIAnimationInterpolator*, UInt32)
-    set_initial_value_and_velocity : Proc(IUIAnimationInterpolator*, Float64, Float64, HRESULT)
-    set_duration : Proc(IUIAnimationInterpolator*, Float64, HRESULT)
-    get_duration : Proc(IUIAnimationInterpolator*, Float64*, HRESULT)
-    get_final_value : Proc(IUIAnimationInterpolator*, Float64*, HRESULT)
-    interpolate_value : Proc(IUIAnimationInterpolator*, Float64, Float64*, HRESULT)
-    interpolate_velocity : Proc(IUIAnimationInterpolator*, Float64, Float64*, HRESULT)
-    get_dependencies : Proc(IUIAnimationInterpolator*, UI_ANIMATION_DEPENDENCIES*, UI_ANIMATION_DEPENDENCIES*, UI_ANIMATION_DEPENDENCIES*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_initial_value_and_velocity : UInt64
+    set_duration : UInt64
+    get_duration : UInt64
+    get_final_value : UInt64
+    interpolate_value : UInt64
+    interpolate_velocity : UInt64
+    get_dependencies : UInt64
   end
 
   IUIAnimationInterpolator_GUID = "7815cbba-ddf7-478c-a46c-7b6c738b7978"
@@ -313,10 +313,10 @@ lib LibWin32
   end
 
   struct IUIAnimationTransitionFactoryVTbl
-    query_interface : Proc(IUIAnimationTransitionFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationTransitionFactory*, UInt32)
-    release : Proc(IUIAnimationTransitionFactory*, UInt32)
-    create_transition : Proc(IUIAnimationTransitionFactory*, IUIAnimationInterpolator, IUIAnimationTransition*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_transition : UInt64
   end
 
   IUIAnimationTransitionFactory_GUID = "fcd91e03-3e3b-45ad-bbb1-6dfc8153743d"
@@ -326,16 +326,16 @@ lib LibWin32
   end
 
   struct IUIAnimationTimerVTbl
-    query_interface : Proc(IUIAnimationTimer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationTimer*, UInt32)
-    release : Proc(IUIAnimationTimer*, UInt32)
-    set_timer_update_handler : Proc(IUIAnimationTimer*, IUIAnimationTimerUpdateHandler, UI_ANIMATION_IDLE_BEHAVIOR, HRESULT)
-    set_timer_event_handler : Proc(IUIAnimationTimer*, IUIAnimationTimerEventHandler, HRESULT)
-    enable : Proc(IUIAnimationTimer*, HRESULT)
-    disable : Proc(IUIAnimationTimer*, HRESULT)
-    is_enabled : Proc(IUIAnimationTimer*, HRESULT)
-    get_time : Proc(IUIAnimationTimer*, Float64*, HRESULT)
-    set_frame_rate_threshold : Proc(IUIAnimationTimer*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_timer_update_handler : UInt64
+    set_timer_event_handler : UInt64
+    enable : UInt64
+    disable : UInt64
+    is_enabled : UInt64
+    get_time : UInt64
+    set_frame_rate_threshold : UInt64
   end
 
   IUIAnimationTimer_GUID = "6b0efad1-a053-41d6-9085-33a689144665"
@@ -345,12 +345,12 @@ lib LibWin32
   end
 
   struct IUIAnimationTimerUpdateHandlerVTbl
-    query_interface : Proc(IUIAnimationTimerUpdateHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationTimerUpdateHandler*, UInt32)
-    release : Proc(IUIAnimationTimerUpdateHandler*, UInt32)
-    on_update : Proc(IUIAnimationTimerUpdateHandler*, Float64, UI_ANIMATION_UPDATE_RESULT*, HRESULT)
-    set_timer_client_event_handler : Proc(IUIAnimationTimerUpdateHandler*, IUIAnimationTimerClientEventHandler, HRESULT)
-    clear_timer_client_event_handler : Proc(IUIAnimationTimerUpdateHandler*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_update : UInt64
+    set_timer_client_event_handler : UInt64
+    clear_timer_client_event_handler : UInt64
   end
 
   IUIAnimationTimerUpdateHandler_GUID = "195509b7-5d5e-4e3e-b278-ee3759b367ad"
@@ -360,10 +360,10 @@ lib LibWin32
   end
 
   struct IUIAnimationTimerClientEventHandlerVTbl
-    query_interface : Proc(IUIAnimationTimerClientEventHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationTimerClientEventHandler*, UInt32)
-    release : Proc(IUIAnimationTimerClientEventHandler*, UInt32)
-    on_timer_client_status_changed : Proc(IUIAnimationTimerClientEventHandler*, UI_ANIMATION_TIMER_CLIENT_STATUS, UI_ANIMATION_TIMER_CLIENT_STATUS, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_timer_client_status_changed : UInt64
   end
 
   IUIAnimationTimerClientEventHandler_GUID = "bedb4db6-94fa-4bfb-a47f-ef2d9e408c25"
@@ -373,12 +373,12 @@ lib LibWin32
   end
 
   struct IUIAnimationTimerEventHandlerVTbl
-    query_interface : Proc(IUIAnimationTimerEventHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationTimerEventHandler*, UInt32)
-    release : Proc(IUIAnimationTimerEventHandler*, UInt32)
-    on_pre_update : Proc(IUIAnimationTimerEventHandler*, HRESULT)
-    on_post_update : Proc(IUIAnimationTimerEventHandler*, HRESULT)
-    on_rendering_too_slow : Proc(IUIAnimationTimerEventHandler*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_pre_update : UInt64
+    on_post_update : UInt64
+    on_rendering_too_slow : UInt64
   end
 
   IUIAnimationTimerEventHandler_GUID = "274a7dea-d771-4095-abbd-8df7abd23ce3"
@@ -388,30 +388,30 @@ lib LibWin32
   end
 
   struct IUIAnimationManager2VTbl
-    query_interface : Proc(IUIAnimationManager2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationManager2*, UInt32)
-    release : Proc(IUIAnimationManager2*, UInt32)
-    create_animation_vector_variable : Proc(IUIAnimationManager2*, Float64*, UInt32, IUIAnimationVariable2*, HRESULT)
-    create_animation_variable : Proc(IUIAnimationManager2*, Float64, IUIAnimationVariable2*, HRESULT)
-    schedule_transition : Proc(IUIAnimationManager2*, IUIAnimationVariable2, IUIAnimationTransition2, Float64, HRESULT)
-    create_storyboard : Proc(IUIAnimationManager2*, IUIAnimationStoryboard2*, HRESULT)
-    finish_all_storyboards : Proc(IUIAnimationManager2*, Float64, HRESULT)
-    abandon_all_storyboards : Proc(IUIAnimationManager2*, HRESULT)
-    update : Proc(IUIAnimationManager2*, Float64, UI_ANIMATION_UPDATE_RESULT*, HRESULT)
-    get_variable_from_tag : Proc(IUIAnimationManager2*, IUnknown, UInt32, IUIAnimationVariable2*, HRESULT)
-    get_storyboard_from_tag : Proc(IUIAnimationManager2*, IUnknown, UInt32, IUIAnimationStoryboard2*, HRESULT)
-    estimate_next_event_time : Proc(IUIAnimationManager2*, Float64*, HRESULT)
-    get_status : Proc(IUIAnimationManager2*, UI_ANIMATION_MANAGER_STATUS*, HRESULT)
-    set_animation_mode : Proc(IUIAnimationManager2*, UI_ANIMATION_MODE, HRESULT)
-    pause : Proc(IUIAnimationManager2*, HRESULT)
-    resume : Proc(IUIAnimationManager2*, HRESULT)
-    set_manager_event_handler : Proc(IUIAnimationManager2*, IUIAnimationManagerEventHandler2, LibC::BOOL, HRESULT)
-    set_cancel_priority_comparison : Proc(IUIAnimationManager2*, IUIAnimationPriorityComparison2, HRESULT)
-    set_trim_priority_comparison : Proc(IUIAnimationManager2*, IUIAnimationPriorityComparison2, HRESULT)
-    set_compress_priority_comparison : Proc(IUIAnimationManager2*, IUIAnimationPriorityComparison2, HRESULT)
-    set_conclude_priority_comparison : Proc(IUIAnimationManager2*, IUIAnimationPriorityComparison2, HRESULT)
-    set_default_longest_acceptable_delay : Proc(IUIAnimationManager2*, Float64, HRESULT)
-    shutdown : Proc(IUIAnimationManager2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_animation_vector_variable : UInt64
+    create_animation_variable : UInt64
+    schedule_transition : UInt64
+    create_storyboard : UInt64
+    finish_all_storyboards : UInt64
+    abandon_all_storyboards : UInt64
+    update : UInt64
+    get_variable_from_tag : UInt64
+    get_storyboard_from_tag : UInt64
+    estimate_next_event_time : UInt64
+    get_status : UInt64
+    set_animation_mode : UInt64
+    pause : UInt64
+    resume : UInt64
+    set_manager_event_handler : UInt64
+    set_cancel_priority_comparison : UInt64
+    set_trim_priority_comparison : UInt64
+    set_compress_priority_comparison : UInt64
+    set_conclude_priority_comparison : UInt64
+    set_default_longest_acceptable_delay : UInt64
+    shutdown : UInt64
   end
 
   IUIAnimationManager2_GUID = "d8b6f7d4-4109-4d3f-acee-879926968cb1"
@@ -421,35 +421,35 @@ lib LibWin32
   end
 
   struct IUIAnimationVariable2VTbl
-    query_interface : Proc(IUIAnimationVariable2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationVariable2*, UInt32)
-    release : Proc(IUIAnimationVariable2*, UInt32)
-    get_dimension : Proc(IUIAnimationVariable2*, UInt32*, HRESULT)
-    get_value : Proc(IUIAnimationVariable2*, Float64*, HRESULT)
-    get_vector_value : Proc(IUIAnimationVariable2*, Float64*, UInt32, HRESULT)
-    get_curve : Proc(IUIAnimationVariable2*, IDCompositionAnimation, HRESULT)
-    get_vector_curve : Proc(IUIAnimationVariable2*, IDCompositionAnimation*, UInt32, HRESULT)
-    get_final_value : Proc(IUIAnimationVariable2*, Float64*, HRESULT)
-    get_final_vector_value : Proc(IUIAnimationVariable2*, Float64*, UInt32, HRESULT)
-    get_previous_value : Proc(IUIAnimationVariable2*, Float64*, HRESULT)
-    get_previous_vector_value : Proc(IUIAnimationVariable2*, Float64*, UInt32, HRESULT)
-    get_integer_value : Proc(IUIAnimationVariable2*, Int32*, HRESULT)
-    get_integer_vector_value : Proc(IUIAnimationVariable2*, Int32*, UInt32, HRESULT)
-    get_final_integer_value : Proc(IUIAnimationVariable2*, Int32*, HRESULT)
-    get_final_integer_vector_value : Proc(IUIAnimationVariable2*, Int32*, UInt32, HRESULT)
-    get_previous_integer_value : Proc(IUIAnimationVariable2*, Int32*, HRESULT)
-    get_previous_integer_vector_value : Proc(IUIAnimationVariable2*, Int32*, UInt32, HRESULT)
-    get_current_storyboard : Proc(IUIAnimationVariable2*, IUIAnimationStoryboard2*, HRESULT)
-    set_lower_bound : Proc(IUIAnimationVariable2*, Float64, HRESULT)
-    set_lower_bound_vector : Proc(IUIAnimationVariable2*, Float64*, UInt32, HRESULT)
-    set_upper_bound : Proc(IUIAnimationVariable2*, Float64, HRESULT)
-    set_upper_bound_vector : Proc(IUIAnimationVariable2*, Float64*, UInt32, HRESULT)
-    set_rounding_mode : Proc(IUIAnimationVariable2*, UI_ANIMATION_ROUNDING_MODE, HRESULT)
-    set_tag : Proc(IUIAnimationVariable2*, IUnknown, UInt32, HRESULT)
-    get_tag : Proc(IUIAnimationVariable2*, IUnknown*, UInt32*, HRESULT)
-    set_variable_change_handler : Proc(IUIAnimationVariable2*, IUIAnimationVariableChangeHandler2, LibC::BOOL, HRESULT)
-    set_variable_integer_change_handler : Proc(IUIAnimationVariable2*, IUIAnimationVariableIntegerChangeHandler2, LibC::BOOL, HRESULT)
-    set_variable_curve_change_handler : Proc(IUIAnimationVariable2*, IUIAnimationVariableCurveChangeHandler2, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_dimension : UInt64
+    get_value : UInt64
+    get_vector_value : UInt64
+    get_curve : UInt64
+    get_vector_curve : UInt64
+    get_final_value : UInt64
+    get_final_vector_value : UInt64
+    get_previous_value : UInt64
+    get_previous_vector_value : UInt64
+    get_integer_value : UInt64
+    get_integer_vector_value : UInt64
+    get_final_integer_value : UInt64
+    get_final_integer_vector_value : UInt64
+    get_previous_integer_value : UInt64
+    get_previous_integer_vector_value : UInt64
+    get_current_storyboard : UInt64
+    set_lower_bound : UInt64
+    set_lower_bound_vector : UInt64
+    set_upper_bound : UInt64
+    set_upper_bound_vector : UInt64
+    set_rounding_mode : UInt64
+    set_tag : UInt64
+    get_tag : UInt64
+    set_variable_change_handler : UInt64
+    set_variable_integer_change_handler : UInt64
+    set_variable_curve_change_handler : UInt64
   end
 
   IUIAnimationVariable2_GUID = "4914b304-96ab-44d9-9e77-d5109b7e7466"
@@ -459,16 +459,16 @@ lib LibWin32
   end
 
   struct IUIAnimationTransition2VTbl
-    query_interface : Proc(IUIAnimationTransition2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationTransition2*, UInt32)
-    release : Proc(IUIAnimationTransition2*, UInt32)
-    get_dimension : Proc(IUIAnimationTransition2*, UInt32*, HRESULT)
-    set_initial_value : Proc(IUIAnimationTransition2*, Float64, HRESULT)
-    set_initial_vector_value : Proc(IUIAnimationTransition2*, Float64*, UInt32, HRESULT)
-    set_initial_velocity : Proc(IUIAnimationTransition2*, Float64, HRESULT)
-    set_initial_vector_velocity : Proc(IUIAnimationTransition2*, Float64*, UInt32, HRESULT)
-    is_duration_known : Proc(IUIAnimationTransition2*, HRESULT)
-    get_duration : Proc(IUIAnimationTransition2*, Float64*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_dimension : UInt64
+    set_initial_value : UInt64
+    set_initial_vector_value : UInt64
+    set_initial_velocity : UInt64
+    set_initial_vector_velocity : UInt64
+    is_duration_known : UInt64
+    get_duration : UInt64
   end
 
   IUIAnimationTransition2_GUID = "62ff9123-a85a-4e9b-a218-435a93e268fd"
@@ -478,10 +478,10 @@ lib LibWin32
   end
 
   struct IUIAnimationManagerEventHandler2VTbl
-    query_interface : Proc(IUIAnimationManagerEventHandler2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationManagerEventHandler2*, UInt32)
-    release : Proc(IUIAnimationManagerEventHandler2*, UInt32)
-    on_manager_status_changed : Proc(IUIAnimationManagerEventHandler2*, UI_ANIMATION_MANAGER_STATUS, UI_ANIMATION_MANAGER_STATUS, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_manager_status_changed : UInt64
   end
 
   IUIAnimationManagerEventHandler2_GUID = "f6e022ba-bff3-42ec-9033-e073f33e83c3"
@@ -491,10 +491,10 @@ lib LibWin32
   end
 
   struct IUIAnimationVariableChangeHandler2VTbl
-    query_interface : Proc(IUIAnimationVariableChangeHandler2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationVariableChangeHandler2*, UInt32)
-    release : Proc(IUIAnimationVariableChangeHandler2*, UInt32)
-    on_value_changed : Proc(IUIAnimationVariableChangeHandler2*, IUIAnimationStoryboard2, IUIAnimationVariable2, Float64*, Float64*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_value_changed : UInt64
   end
 
   IUIAnimationVariableChangeHandler2_GUID = "63acc8d2-6eae-4bb0-b879-586dd8cfbe42"
@@ -504,10 +504,10 @@ lib LibWin32
   end
 
   struct IUIAnimationVariableIntegerChangeHandler2VTbl
-    query_interface : Proc(IUIAnimationVariableIntegerChangeHandler2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationVariableIntegerChangeHandler2*, UInt32)
-    release : Proc(IUIAnimationVariableIntegerChangeHandler2*, UInt32)
-    on_integer_value_changed : Proc(IUIAnimationVariableIntegerChangeHandler2*, IUIAnimationStoryboard2, IUIAnimationVariable2, Int32*, Int32*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_integer_value_changed : UInt64
   end
 
   IUIAnimationVariableIntegerChangeHandler2_GUID = "829b6cf1-4f3a-4412-ae09-b243eb4c6b58"
@@ -517,10 +517,10 @@ lib LibWin32
   end
 
   struct IUIAnimationVariableCurveChangeHandler2VTbl
-    query_interface : Proc(IUIAnimationVariableCurveChangeHandler2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationVariableCurveChangeHandler2*, UInt32)
-    release : Proc(IUIAnimationVariableCurveChangeHandler2*, UInt32)
-    on_curve_changed : Proc(IUIAnimationVariableCurveChangeHandler2*, IUIAnimationVariable2, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_curve_changed : UInt64
   end
 
   IUIAnimationVariableCurveChangeHandler2_GUID = "72895e91-0145-4c21-9192-5aab40eddf80"
@@ -530,11 +530,11 @@ lib LibWin32
   end
 
   struct IUIAnimationStoryboardEventHandler2VTbl
-    query_interface : Proc(IUIAnimationStoryboardEventHandler2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationStoryboardEventHandler2*, UInt32)
-    release : Proc(IUIAnimationStoryboardEventHandler2*, UInt32)
-    on_storyboard_status_changed : Proc(IUIAnimationStoryboardEventHandler2*, IUIAnimationStoryboard2, UI_ANIMATION_STORYBOARD_STATUS, UI_ANIMATION_STORYBOARD_STATUS, HRESULT)
-    on_storyboard_updated : Proc(IUIAnimationStoryboardEventHandler2*, IUIAnimationStoryboard2, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_storyboard_status_changed : UInt64
+    on_storyboard_updated : UInt64
   end
 
   IUIAnimationStoryboardEventHandler2_GUID = "bac5f55a-ba7c-414c-b599-fbf850f553c6"
@@ -544,10 +544,10 @@ lib LibWin32
   end
 
   struct IUIAnimationLoopIterationChangeHandler2VTbl
-    query_interface : Proc(IUIAnimationLoopIterationChangeHandler2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationLoopIterationChangeHandler2*, UInt32)
-    release : Proc(IUIAnimationLoopIterationChangeHandler2*, UInt32)
-    on_loop_iteration_changed : Proc(IUIAnimationLoopIterationChangeHandler2*, IUIAnimationStoryboard2, LibC::UINT_PTR, UInt32, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_loop_iteration_changed : UInt64
   end
 
   IUIAnimationLoopIterationChangeHandler2_GUID = "2d3b15a4-4762-47ab-a030-b23221df3ae0"
@@ -557,10 +557,10 @@ lib LibWin32
   end
 
   struct IUIAnimationPriorityComparison2VTbl
-    query_interface : Proc(IUIAnimationPriorityComparison2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationPriorityComparison2*, UInt32)
-    release : Proc(IUIAnimationPriorityComparison2*, UInt32)
-    has_priority : Proc(IUIAnimationPriorityComparison2*, IUIAnimationStoryboard2, IUIAnimationStoryboard2, UI_ANIMATION_PRIORITY_EFFECT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    has_priority : UInt64
   end
 
   IUIAnimationPriorityComparison2_GUID = "5b6d7a37-4621-467c-8b05-70131de62ddb"
@@ -570,28 +570,28 @@ lib LibWin32
   end
 
   struct IUIAnimationTransitionLibrary2VTbl
-    query_interface : Proc(IUIAnimationTransitionLibrary2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationTransitionLibrary2*, UInt32)
-    release : Proc(IUIAnimationTransitionLibrary2*, UInt32)
-    create_instantaneous_transition : Proc(IUIAnimationTransitionLibrary2*, Float64, IUIAnimationTransition2*, HRESULT)
-    create_instantaneous_vector_transition : Proc(IUIAnimationTransitionLibrary2*, Float64*, UInt32, IUIAnimationTransition2*, HRESULT)
-    create_constant_transition : Proc(IUIAnimationTransitionLibrary2*, Float64, IUIAnimationTransition2*, HRESULT)
-    create_discrete_transition : Proc(IUIAnimationTransitionLibrary2*, Float64, Float64, Float64, IUIAnimationTransition2*, HRESULT)
-    create_discrete_vector_transition : Proc(IUIAnimationTransitionLibrary2*, Float64, Float64*, UInt32, Float64, IUIAnimationTransition2*, HRESULT)
-    create_linear_transition : Proc(IUIAnimationTransitionLibrary2*, Float64, Float64, IUIAnimationTransition2*, HRESULT)
-    create_linear_vector_transition : Proc(IUIAnimationTransitionLibrary2*, Float64, Float64*, UInt32, IUIAnimationTransition2*, HRESULT)
-    create_linear_transition_from_speed : Proc(IUIAnimationTransitionLibrary2*, Float64, Float64, IUIAnimationTransition2*, HRESULT)
-    create_linear_vector_transition_from_speed : Proc(IUIAnimationTransitionLibrary2*, Float64, Float64*, UInt32, IUIAnimationTransition2*, HRESULT)
-    create_sinusoidal_transition_from_velocity : Proc(IUIAnimationTransitionLibrary2*, Float64, Float64, IUIAnimationTransition2*, HRESULT)
-    create_sinusoidal_transition_from_range : Proc(IUIAnimationTransitionLibrary2*, Float64, Float64, Float64, Float64, UI_ANIMATION_SLOPE, IUIAnimationTransition2*, HRESULT)
-    create_accelerate_decelerate_transition : Proc(IUIAnimationTransitionLibrary2*, Float64, Float64, Float64, Float64, IUIAnimationTransition2*, HRESULT)
-    create_reversal_transition : Proc(IUIAnimationTransitionLibrary2*, Float64, IUIAnimationTransition2*, HRESULT)
-    create_cubic_transition : Proc(IUIAnimationTransitionLibrary2*, Float64, Float64, Float64, IUIAnimationTransition2*, HRESULT)
-    create_cubic_vector_transition : Proc(IUIAnimationTransitionLibrary2*, Float64, Float64*, Float64*, UInt32, IUIAnimationTransition2*, HRESULT)
-    create_smooth_stop_transition : Proc(IUIAnimationTransitionLibrary2*, Float64, Float64, IUIAnimationTransition2*, HRESULT)
-    create_parabolic_transition_from_acceleration : Proc(IUIAnimationTransitionLibrary2*, Float64, Float64, Float64, IUIAnimationTransition2*, HRESULT)
-    create_cubic_bezier_linear_transition : Proc(IUIAnimationTransitionLibrary2*, Float64, Float64, Float64, Float64, Float64, Float64, IUIAnimationTransition2*, HRESULT)
-    create_cubic_bezier_linear_vector_transition : Proc(IUIAnimationTransitionLibrary2*, Float64, Float64*, UInt32, Float64, Float64, Float64, Float64, IUIAnimationTransition2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_instantaneous_transition : UInt64
+    create_instantaneous_vector_transition : UInt64
+    create_constant_transition : UInt64
+    create_discrete_transition : UInt64
+    create_discrete_vector_transition : UInt64
+    create_linear_transition : UInt64
+    create_linear_vector_transition : UInt64
+    create_linear_transition_from_speed : UInt64
+    create_linear_vector_transition_from_speed : UInt64
+    create_sinusoidal_transition_from_velocity : UInt64
+    create_sinusoidal_transition_from_range : UInt64
+    create_accelerate_decelerate_transition : UInt64
+    create_reversal_transition : UInt64
+    create_cubic_transition : UInt64
+    create_cubic_vector_transition : UInt64
+    create_smooth_stop_transition : UInt64
+    create_parabolic_transition_from_acceleration : UInt64
+    create_cubic_bezier_linear_transition : UInt64
+    create_cubic_bezier_linear_vector_transition : UInt64
   end
 
   IUIAnimationTransitionLibrary2_GUID = "03cfae53-9580-4ee3-b363-2ece51b4af6a"
@@ -601,11 +601,11 @@ lib LibWin32
   end
 
   struct IUIAnimationPrimitiveInterpolationVTbl
-    query_interface : Proc(IUIAnimationPrimitiveInterpolation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationPrimitiveInterpolation*, UInt32)
-    release : Proc(IUIAnimationPrimitiveInterpolation*, UInt32)
-    add_cubic : Proc(IUIAnimationPrimitiveInterpolation*, UInt32, Float64, Float32, Float32, Float32, Float32, HRESULT)
-    add_sinusoidal : Proc(IUIAnimationPrimitiveInterpolation*, UInt32, Float64, Float32, Float32, Float32, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_cubic : UInt64
+    add_sinusoidal : UInt64
   end
 
   IUIAnimationPrimitiveInterpolation_GUID = "bab20d63-4361-45da-a24f-ab8508846b5b"
@@ -615,18 +615,18 @@ lib LibWin32
   end
 
   struct IUIAnimationInterpolator2VTbl
-    query_interface : Proc(IUIAnimationInterpolator2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationInterpolator2*, UInt32)
-    release : Proc(IUIAnimationInterpolator2*, UInt32)
-    get_dimension : Proc(IUIAnimationInterpolator2*, UInt32*, HRESULT)
-    set_initial_value_and_velocity : Proc(IUIAnimationInterpolator2*, Float64*, Float64*, UInt32, HRESULT)
-    set_duration : Proc(IUIAnimationInterpolator2*, Float64, HRESULT)
-    get_duration : Proc(IUIAnimationInterpolator2*, Float64*, HRESULT)
-    get_final_value : Proc(IUIAnimationInterpolator2*, Float64*, UInt32, HRESULT)
-    interpolate_value : Proc(IUIAnimationInterpolator2*, Float64, Float64*, UInt32, HRESULT)
-    interpolate_velocity : Proc(IUIAnimationInterpolator2*, Float64, Float64*, UInt32, HRESULT)
-    get_primitive_interpolation : Proc(IUIAnimationInterpolator2*, IUIAnimationPrimitiveInterpolation, UInt32, HRESULT)
-    get_dependencies : Proc(IUIAnimationInterpolator2*, UI_ANIMATION_DEPENDENCIES*, UI_ANIMATION_DEPENDENCIES*, UI_ANIMATION_DEPENDENCIES*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_dimension : UInt64
+    set_initial_value_and_velocity : UInt64
+    set_duration : UInt64
+    get_duration : UInt64
+    get_final_value : UInt64
+    interpolate_value : UInt64
+    interpolate_velocity : UInt64
+    get_primitive_interpolation : UInt64
+    get_dependencies : UInt64
   end
 
   IUIAnimationInterpolator2_GUID = "ea76aff8-ea22-4a23-a0ef-a6a966703518"
@@ -636,10 +636,10 @@ lib LibWin32
   end
 
   struct IUIAnimationTransitionFactory2VTbl
-    query_interface : Proc(IUIAnimationTransitionFactory2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationTransitionFactory2*, UInt32)
-    release : Proc(IUIAnimationTransitionFactory2*, UInt32)
-    create_transition : Proc(IUIAnimationTransitionFactory2*, IUIAnimationInterpolator2, IUIAnimationTransition2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_transition : UInt64
   end
 
   IUIAnimationTransitionFactory2_GUID = "937d4916-c1a6-42d5-88d8-30344d6efe31"
@@ -649,27 +649,27 @@ lib LibWin32
   end
 
   struct IUIAnimationStoryboard2VTbl
-    query_interface : Proc(IUIAnimationStoryboard2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIAnimationStoryboard2*, UInt32)
-    release : Proc(IUIAnimationStoryboard2*, UInt32)
-    add_transition : Proc(IUIAnimationStoryboard2*, IUIAnimationVariable2, IUIAnimationTransition2, HRESULT)
-    add_keyframe_at_offset : Proc(IUIAnimationStoryboard2*, UI_ANIMATION_KEYFRAME, Float64, UI_ANIMATION_KEYFRAME*, HRESULT)
-    add_keyframe_after_transition : Proc(IUIAnimationStoryboard2*, IUIAnimationTransition2, UI_ANIMATION_KEYFRAME*, HRESULT)
-    add_transition_at_keyframe : Proc(IUIAnimationStoryboard2*, IUIAnimationVariable2, IUIAnimationTransition2, UI_ANIMATION_KEYFRAME, HRESULT)
-    add_transition_between_keyframes : Proc(IUIAnimationStoryboard2*, IUIAnimationVariable2, IUIAnimationTransition2, UI_ANIMATION_KEYFRAME, UI_ANIMATION_KEYFRAME, HRESULT)
-    repeat_between_keyframes : Proc(IUIAnimationStoryboard2*, UI_ANIMATION_KEYFRAME, UI_ANIMATION_KEYFRAME, Float64, UI_ANIMATION_REPEAT_MODE, IUIAnimationLoopIterationChangeHandler2, LibC::UINT_PTR, LibC::BOOL, HRESULT)
-    hold_variable : Proc(IUIAnimationStoryboard2*, IUIAnimationVariable2, HRESULT)
-    set_longest_acceptable_delay : Proc(IUIAnimationStoryboard2*, Float64, HRESULT)
-    set_skip_duration : Proc(IUIAnimationStoryboard2*, Float64, HRESULT)
-    schedule : Proc(IUIAnimationStoryboard2*, Float64, UI_ANIMATION_SCHEDULING_RESULT*, HRESULT)
-    conclude : Proc(IUIAnimationStoryboard2*, HRESULT)
-    finish : Proc(IUIAnimationStoryboard2*, Float64, HRESULT)
-    abandon : Proc(IUIAnimationStoryboard2*, HRESULT)
-    set_tag : Proc(IUIAnimationStoryboard2*, IUnknown, UInt32, HRESULT)
-    get_tag : Proc(IUIAnimationStoryboard2*, IUnknown*, UInt32*, HRESULT)
-    get_status : Proc(IUIAnimationStoryboard2*, UI_ANIMATION_STORYBOARD_STATUS*, HRESULT)
-    get_elapsed_time : Proc(IUIAnimationStoryboard2*, Float64*, HRESULT)
-    set_storyboard_event_handler : Proc(IUIAnimationStoryboard2*, IUIAnimationStoryboardEventHandler2, LibC::BOOL, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_transition : UInt64
+    add_keyframe_at_offset : UInt64
+    add_keyframe_after_transition : UInt64
+    add_transition_at_keyframe : UInt64
+    add_transition_between_keyframes : UInt64
+    repeat_between_keyframes : UInt64
+    hold_variable : UInt64
+    set_longest_acceptable_delay : UInt64
+    set_skip_duration : UInt64
+    schedule : UInt64
+    conclude : UInt64
+    finish : UInt64
+    abandon : UInt64
+    set_tag : UInt64
+    get_tag : UInt64
+    get_status : UInt64
+    get_elapsed_time : UInt64
+    set_storyboard_event_handler : UInt64
   end
 
   IUIAnimationStoryboard2_GUID = "ae289cd2-12d4-4945-9419-9e41be034df2"
@@ -678,4 +678,960 @@ lib LibWin32
     lpVtbl : IUIAnimationStoryboard2VTbl*
   end
 
+end
+struct LibWin32::IUIAnimationManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_animation_variable(initialvalue : Float64, variable : IUIAnimationVariable*) : HRESULT
+    @lpVtbl.value.create_animation_variable.unsafe_as(Proc(Float64, IUIAnimationVariable*, HRESULT)).call(initialvalue, variable)
+  end
+  def schedule_transition(variable : IUIAnimationVariable, transition : IUIAnimationTransition, timenow : Float64) : HRESULT
+    @lpVtbl.value.schedule_transition.unsafe_as(Proc(IUIAnimationVariable, IUIAnimationTransition, Float64, HRESULT)).call(variable, transition, timenow)
+  end
+  def create_storyboard(storyboard : IUIAnimationStoryboard*) : HRESULT
+    @lpVtbl.value.create_storyboard.unsafe_as(Proc(IUIAnimationStoryboard*, HRESULT)).call(storyboard)
+  end
+  def finish_all_storyboards(completiondeadline : Float64) : HRESULT
+    @lpVtbl.value.finish_all_storyboards.unsafe_as(Proc(Float64, HRESULT)).call(completiondeadline)
+  end
+  def abandon_all_storyboards : HRESULT
+    @lpVtbl.value.abandon_all_storyboards.unsafe_as(Proc(HRESULT)).call
+  end
+  def update(timenow : Float64, updateresult : UI_ANIMATION_UPDATE_RESULT*) : HRESULT
+    @lpVtbl.value.update.unsafe_as(Proc(Float64, UI_ANIMATION_UPDATE_RESULT*, HRESULT)).call(timenow, updateresult)
+  end
+  def get_variable_from_tag(object : IUnknown, id : UInt32, variable : IUIAnimationVariable*) : HRESULT
+    @lpVtbl.value.get_variable_from_tag.unsafe_as(Proc(IUnknown, UInt32, IUIAnimationVariable*, HRESULT)).call(object, id, variable)
+  end
+  def get_storyboard_from_tag(object : IUnknown, id : UInt32, storyboard : IUIAnimationStoryboard*) : HRESULT
+    @lpVtbl.value.get_storyboard_from_tag.unsafe_as(Proc(IUnknown, UInt32, IUIAnimationStoryboard*, HRESULT)).call(object, id, storyboard)
+  end
+  def get_status(status : UI_ANIMATION_MANAGER_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UI_ANIMATION_MANAGER_STATUS*, HRESULT)).call(status)
+  end
+  def set_animation_mode(mode : UI_ANIMATION_MODE) : HRESULT
+    @lpVtbl.value.set_animation_mode.unsafe_as(Proc(UI_ANIMATION_MODE, HRESULT)).call(mode)
+  end
+  def pause : HRESULT
+    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume : HRESULT
+    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_manager_event_handler(handler : IUIAnimationManagerEventHandler) : HRESULT
+    @lpVtbl.value.set_manager_event_handler.unsafe_as(Proc(IUIAnimationManagerEventHandler, HRESULT)).call(handler)
+  end
+  def set_cancel_priority_comparison(comparison : IUIAnimationPriorityComparison) : HRESULT
+    @lpVtbl.value.set_cancel_priority_comparison.unsafe_as(Proc(IUIAnimationPriorityComparison, HRESULT)).call(comparison)
+  end
+  def set_trim_priority_comparison(comparison : IUIAnimationPriorityComparison) : HRESULT
+    @lpVtbl.value.set_trim_priority_comparison.unsafe_as(Proc(IUIAnimationPriorityComparison, HRESULT)).call(comparison)
+  end
+  def set_compress_priority_comparison(comparison : IUIAnimationPriorityComparison) : HRESULT
+    @lpVtbl.value.set_compress_priority_comparison.unsafe_as(Proc(IUIAnimationPriorityComparison, HRESULT)).call(comparison)
+  end
+  def set_conclude_priority_comparison(comparison : IUIAnimationPriorityComparison) : HRESULT
+    @lpVtbl.value.set_conclude_priority_comparison.unsafe_as(Proc(IUIAnimationPriorityComparison, HRESULT)).call(comparison)
+  end
+  def set_default_longest_acceptable_delay(delay : Float64) : HRESULT
+    @lpVtbl.value.set_default_longest_acceptable_delay.unsafe_as(Proc(Float64, HRESULT)).call(delay)
+  end
+  def shutdown : HRESULT
+    @lpVtbl.value.shutdown.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IUIAnimationVariable
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_value(value : Float64*) : HRESULT
+    @lpVtbl.value.get_value.unsafe_as(Proc(Float64*, HRESULT)).call(value)
+  end
+  def get_final_value(finalvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_final_value.unsafe_as(Proc(Float64*, HRESULT)).call(finalvalue)
+  end
+  def get_previous_value(previousvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_previous_value.unsafe_as(Proc(Float64*, HRESULT)).call(previousvalue)
+  end
+  def get_integer_value(value : Int32*) : HRESULT
+    @lpVtbl.value.get_integer_value.unsafe_as(Proc(Int32*, HRESULT)).call(value)
+  end
+  def get_final_integer_value(finalvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_final_integer_value.unsafe_as(Proc(Int32*, HRESULT)).call(finalvalue)
+  end
+  def get_previous_integer_value(previousvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_previous_integer_value.unsafe_as(Proc(Int32*, HRESULT)).call(previousvalue)
+  end
+  def get_current_storyboard(storyboard : IUIAnimationStoryboard*) : HRESULT
+    @lpVtbl.value.get_current_storyboard.unsafe_as(Proc(IUIAnimationStoryboard*, HRESULT)).call(storyboard)
+  end
+  def set_lower_bound(bound : Float64) : HRESULT
+    @lpVtbl.value.set_lower_bound.unsafe_as(Proc(Float64, HRESULT)).call(bound)
+  end
+  def set_upper_bound(bound : Float64) : HRESULT
+    @lpVtbl.value.set_upper_bound.unsafe_as(Proc(Float64, HRESULT)).call(bound)
+  end
+  def set_rounding_mode(mode : UI_ANIMATION_ROUNDING_MODE) : HRESULT
+    @lpVtbl.value.set_rounding_mode.unsafe_as(Proc(UI_ANIMATION_ROUNDING_MODE, HRESULT)).call(mode)
+  end
+  def set_tag(object : IUnknown, id : UInt32) : HRESULT
+    @lpVtbl.value.set_tag.unsafe_as(Proc(IUnknown, UInt32, HRESULT)).call(object, id)
+  end
+  def get_tag(object : IUnknown*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_tag.unsafe_as(Proc(IUnknown*, UInt32*, HRESULT)).call(object, id)
+  end
+  def set_variable_change_handler(handler : IUIAnimationVariableChangeHandler) : HRESULT
+    @lpVtbl.value.set_variable_change_handler.unsafe_as(Proc(IUIAnimationVariableChangeHandler, HRESULT)).call(handler)
+  end
+  def set_variable_integer_change_handler(handler : IUIAnimationVariableIntegerChangeHandler) : HRESULT
+    @lpVtbl.value.set_variable_integer_change_handler.unsafe_as(Proc(IUIAnimationVariableIntegerChangeHandler, HRESULT)).call(handler)
+  end
+end
+struct LibWin32::IUIAnimationStoryboard
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_transition(variable : IUIAnimationVariable, transition : IUIAnimationTransition) : HRESULT
+    @lpVtbl.value.add_transition.unsafe_as(Proc(IUIAnimationVariable, IUIAnimationTransition, HRESULT)).call(variable, transition)
+  end
+  def add_keyframe_at_offset(existingkeyframe : UI_ANIMATION_KEYFRAME, offset : Float64, keyframe : UI_ANIMATION_KEYFRAME*) : HRESULT
+    @lpVtbl.value.add_keyframe_at_offset.unsafe_as(Proc(UI_ANIMATION_KEYFRAME, Float64, UI_ANIMATION_KEYFRAME*, HRESULT)).call(existingkeyframe, offset, keyframe)
+  end
+  def add_keyframe_after_transition(transition : IUIAnimationTransition, keyframe : UI_ANIMATION_KEYFRAME*) : HRESULT
+    @lpVtbl.value.add_keyframe_after_transition.unsafe_as(Proc(IUIAnimationTransition, UI_ANIMATION_KEYFRAME*, HRESULT)).call(transition, keyframe)
+  end
+  def add_transition_at_keyframe(variable : IUIAnimationVariable, transition : IUIAnimationTransition, startkeyframe : UI_ANIMATION_KEYFRAME) : HRESULT
+    @lpVtbl.value.add_transition_at_keyframe.unsafe_as(Proc(IUIAnimationVariable, IUIAnimationTransition, UI_ANIMATION_KEYFRAME, HRESULT)).call(variable, transition, startkeyframe)
+  end
+  def add_transition_between_keyframes(variable : IUIAnimationVariable, transition : IUIAnimationTransition, startkeyframe : UI_ANIMATION_KEYFRAME, endkeyframe : UI_ANIMATION_KEYFRAME) : HRESULT
+    @lpVtbl.value.add_transition_between_keyframes.unsafe_as(Proc(IUIAnimationVariable, IUIAnimationTransition, UI_ANIMATION_KEYFRAME, UI_ANIMATION_KEYFRAME, HRESULT)).call(variable, transition, startkeyframe, endkeyframe)
+  end
+  def repeat_between_keyframes(startkeyframe : UI_ANIMATION_KEYFRAME, endkeyframe : UI_ANIMATION_KEYFRAME, repetitioncount : Int32) : HRESULT
+    @lpVtbl.value.repeat_between_keyframes.unsafe_as(Proc(UI_ANIMATION_KEYFRAME, UI_ANIMATION_KEYFRAME, Int32, HRESULT)).call(startkeyframe, endkeyframe, repetitioncount)
+  end
+  def hold_variable(variable : IUIAnimationVariable) : HRESULT
+    @lpVtbl.value.hold_variable.unsafe_as(Proc(IUIAnimationVariable, HRESULT)).call(variable)
+  end
+  def set_longest_acceptable_delay(delay : Float64) : HRESULT
+    @lpVtbl.value.set_longest_acceptable_delay.unsafe_as(Proc(Float64, HRESULT)).call(delay)
+  end
+  def schedule(timenow : Float64, schedulingresult : UI_ANIMATION_SCHEDULING_RESULT*) : HRESULT
+    @lpVtbl.value.schedule.unsafe_as(Proc(Float64, UI_ANIMATION_SCHEDULING_RESULT*, HRESULT)).call(timenow, schedulingresult)
+  end
+  def conclude : HRESULT
+    @lpVtbl.value.conclude.unsafe_as(Proc(HRESULT)).call
+  end
+  def finish(completiondeadline : Float64) : HRESULT
+    @lpVtbl.value.finish.unsafe_as(Proc(Float64, HRESULT)).call(completiondeadline)
+  end
+  def abandon : HRESULT
+    @lpVtbl.value.abandon.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_tag(object : IUnknown, id : UInt32) : HRESULT
+    @lpVtbl.value.set_tag.unsafe_as(Proc(IUnknown, UInt32, HRESULT)).call(object, id)
+  end
+  def get_tag(object : IUnknown*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_tag.unsafe_as(Proc(IUnknown*, UInt32*, HRESULT)).call(object, id)
+  end
+  def get_status(status : UI_ANIMATION_STORYBOARD_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UI_ANIMATION_STORYBOARD_STATUS*, HRESULT)).call(status)
+  end
+  def get_elapsed_time(elapsedtime : Float64*) : HRESULT
+    @lpVtbl.value.get_elapsed_time.unsafe_as(Proc(Float64*, HRESULT)).call(elapsedtime)
+  end
+  def set_storyboard_event_handler(handler : IUIAnimationStoryboardEventHandler) : HRESULT
+    @lpVtbl.value.set_storyboard_event_handler.unsafe_as(Proc(IUIAnimationStoryboardEventHandler, HRESULT)).call(handler)
+  end
+end
+struct LibWin32::IUIAnimationTransition
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_initial_value(value : Float64) : HRESULT
+    @lpVtbl.value.set_initial_value.unsafe_as(Proc(Float64, HRESULT)).call(value)
+  end
+  def set_initial_velocity(velocity : Float64) : HRESULT
+    @lpVtbl.value.set_initial_velocity.unsafe_as(Proc(Float64, HRESULT)).call(velocity)
+  end
+  def is_duration_known : HRESULT
+    @lpVtbl.value.is_duration_known.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_duration(duration : Float64*) : HRESULT
+    @lpVtbl.value.get_duration.unsafe_as(Proc(Float64*, HRESULT)).call(duration)
+  end
+end
+struct LibWin32::IUIAnimationManagerEventHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_manager_status_changed(newstatus : UI_ANIMATION_MANAGER_STATUS, previousstatus : UI_ANIMATION_MANAGER_STATUS) : HRESULT
+    @lpVtbl.value.on_manager_status_changed.unsafe_as(Proc(UI_ANIMATION_MANAGER_STATUS, UI_ANIMATION_MANAGER_STATUS, HRESULT)).call(newstatus, previousstatus)
+  end
+end
+struct LibWin32::IUIAnimationVariableChangeHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_value_changed(storyboard : IUIAnimationStoryboard, variable : IUIAnimationVariable, newvalue : Float64, previousvalue : Float64) : HRESULT
+    @lpVtbl.value.on_value_changed.unsafe_as(Proc(IUIAnimationStoryboard, IUIAnimationVariable, Float64, Float64, HRESULT)).call(storyboard, variable, newvalue, previousvalue)
+  end
+end
+struct LibWin32::IUIAnimationVariableIntegerChangeHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_integer_value_changed(storyboard : IUIAnimationStoryboard, variable : IUIAnimationVariable, newvalue : Int32, previousvalue : Int32) : HRESULT
+    @lpVtbl.value.on_integer_value_changed.unsafe_as(Proc(IUIAnimationStoryboard, IUIAnimationVariable, Int32, Int32, HRESULT)).call(storyboard, variable, newvalue, previousvalue)
+  end
+end
+struct LibWin32::IUIAnimationStoryboardEventHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_storyboard_status_changed(storyboard : IUIAnimationStoryboard, newstatus : UI_ANIMATION_STORYBOARD_STATUS, previousstatus : UI_ANIMATION_STORYBOARD_STATUS) : HRESULT
+    @lpVtbl.value.on_storyboard_status_changed.unsafe_as(Proc(IUIAnimationStoryboard, UI_ANIMATION_STORYBOARD_STATUS, UI_ANIMATION_STORYBOARD_STATUS, HRESULT)).call(storyboard, newstatus, previousstatus)
+  end
+  def on_storyboard_updated(storyboard : IUIAnimationStoryboard) : HRESULT
+    @lpVtbl.value.on_storyboard_updated.unsafe_as(Proc(IUIAnimationStoryboard, HRESULT)).call(storyboard)
+  end
+end
+struct LibWin32::IUIAnimationPriorityComparison
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def has_priority(scheduledstoryboard : IUIAnimationStoryboard, newstoryboard : IUIAnimationStoryboard, priorityeffect : UI_ANIMATION_PRIORITY_EFFECT) : HRESULT
+    @lpVtbl.value.has_priority.unsafe_as(Proc(IUIAnimationStoryboard, IUIAnimationStoryboard, UI_ANIMATION_PRIORITY_EFFECT, HRESULT)).call(scheduledstoryboard, newstoryboard, priorityeffect)
+  end
+end
+struct LibWin32::IUIAnimationTransitionLibrary
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_instantaneous_transition(finalvalue : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_instantaneous_transition.unsafe_as(Proc(Float64, IUIAnimationTransition*, HRESULT)).call(finalvalue, transition)
+  end
+  def create_constant_transition(duration : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_constant_transition.unsafe_as(Proc(Float64, IUIAnimationTransition*, HRESULT)).call(duration, transition)
+  end
+  def create_discrete_transition(delay : Float64, finalvalue : Float64, hold : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_discrete_transition.unsafe_as(Proc(Float64, Float64, Float64, IUIAnimationTransition*, HRESULT)).call(delay, finalvalue, hold, transition)
+  end
+  def create_linear_transition(duration : Float64, finalvalue : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_linear_transition.unsafe_as(Proc(Float64, Float64, IUIAnimationTransition*, HRESULT)).call(duration, finalvalue, transition)
+  end
+  def create_linear_transition_from_speed(speed : Float64, finalvalue : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_linear_transition_from_speed.unsafe_as(Proc(Float64, Float64, IUIAnimationTransition*, HRESULT)).call(speed, finalvalue, transition)
+  end
+  def create_sinusoidal_transition_from_velocity(duration : Float64, period : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_sinusoidal_transition_from_velocity.unsafe_as(Proc(Float64, Float64, IUIAnimationTransition*, HRESULT)).call(duration, period, transition)
+  end
+  def create_sinusoidal_transition_from_range(duration : Float64, minimumvalue : Float64, maximumvalue : Float64, period : Float64, slope : UI_ANIMATION_SLOPE, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_sinusoidal_transition_from_range.unsafe_as(Proc(Float64, Float64, Float64, Float64, UI_ANIMATION_SLOPE, IUIAnimationTransition*, HRESULT)).call(duration, minimumvalue, maximumvalue, period, slope, transition)
+  end
+  def create_accelerate_decelerate_transition(duration : Float64, finalvalue : Float64, accelerationratio : Float64, decelerationratio : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_accelerate_decelerate_transition.unsafe_as(Proc(Float64, Float64, Float64, Float64, IUIAnimationTransition*, HRESULT)).call(duration, finalvalue, accelerationratio, decelerationratio, transition)
+  end
+  def create_reversal_transition(duration : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_reversal_transition.unsafe_as(Proc(Float64, IUIAnimationTransition*, HRESULT)).call(duration, transition)
+  end
+  def create_cubic_transition(duration : Float64, finalvalue : Float64, finalvelocity : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_cubic_transition.unsafe_as(Proc(Float64, Float64, Float64, IUIAnimationTransition*, HRESULT)).call(duration, finalvalue, finalvelocity, transition)
+  end
+  def create_smooth_stop_transition(maximumduration : Float64, finalvalue : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_smooth_stop_transition.unsafe_as(Proc(Float64, Float64, IUIAnimationTransition*, HRESULT)).call(maximumduration, finalvalue, transition)
+  end
+  def create_parabolic_transition_from_acceleration(finalvalue : Float64, finalvelocity : Float64, acceleration : Float64, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_parabolic_transition_from_acceleration.unsafe_as(Proc(Float64, Float64, Float64, IUIAnimationTransition*, HRESULT)).call(finalvalue, finalvelocity, acceleration, transition)
+  end
+end
+struct LibWin32::IUIAnimationInterpolator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_initial_value_and_velocity(initialvalue : Float64, initialvelocity : Float64) : HRESULT
+    @lpVtbl.value.set_initial_value_and_velocity.unsafe_as(Proc(Float64, Float64, HRESULT)).call(initialvalue, initialvelocity)
+  end
+  def set_duration(duration : Float64) : HRESULT
+    @lpVtbl.value.set_duration.unsafe_as(Proc(Float64, HRESULT)).call(duration)
+  end
+  def get_duration(duration : Float64*) : HRESULT
+    @lpVtbl.value.get_duration.unsafe_as(Proc(Float64*, HRESULT)).call(duration)
+  end
+  def get_final_value(value : Float64*) : HRESULT
+    @lpVtbl.value.get_final_value.unsafe_as(Proc(Float64*, HRESULT)).call(value)
+  end
+  def interpolate_value(offset : Float64, value : Float64*) : HRESULT
+    @lpVtbl.value.interpolate_value.unsafe_as(Proc(Float64, Float64*, HRESULT)).call(offset, value)
+  end
+  def interpolate_velocity(offset : Float64, velocity : Float64*) : HRESULT
+    @lpVtbl.value.interpolate_velocity.unsafe_as(Proc(Float64, Float64*, HRESULT)).call(offset, velocity)
+  end
+  def get_dependencies(initialvaluedependencies : UI_ANIMATION_DEPENDENCIES*, initialvelocitydependencies : UI_ANIMATION_DEPENDENCIES*, durationdependencies : UI_ANIMATION_DEPENDENCIES*) : HRESULT
+    @lpVtbl.value.get_dependencies.unsafe_as(Proc(UI_ANIMATION_DEPENDENCIES*, UI_ANIMATION_DEPENDENCIES*, UI_ANIMATION_DEPENDENCIES*, HRESULT)).call(initialvaluedependencies, initialvelocitydependencies, durationdependencies)
+  end
+end
+struct LibWin32::IUIAnimationTransitionFactory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_transition(interpolator : IUIAnimationInterpolator, transition : IUIAnimationTransition*) : HRESULT
+    @lpVtbl.value.create_transition.unsafe_as(Proc(IUIAnimationInterpolator, IUIAnimationTransition*, HRESULT)).call(interpolator, transition)
+  end
+end
+struct LibWin32::IUIAnimationTimer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_timer_update_handler(updatehandler : IUIAnimationTimerUpdateHandler, idlebehavior : UI_ANIMATION_IDLE_BEHAVIOR) : HRESULT
+    @lpVtbl.value.set_timer_update_handler.unsafe_as(Proc(IUIAnimationTimerUpdateHandler, UI_ANIMATION_IDLE_BEHAVIOR, HRESULT)).call(updatehandler, idlebehavior)
+  end
+  def set_timer_event_handler(handler : IUIAnimationTimerEventHandler) : HRESULT
+    @lpVtbl.value.set_timer_event_handler.unsafe_as(Proc(IUIAnimationTimerEventHandler, HRESULT)).call(handler)
+  end
+  def enable : HRESULT
+    @lpVtbl.value.enable.unsafe_as(Proc(HRESULT)).call
+  end
+  def disable : HRESULT
+    @lpVtbl.value.disable.unsafe_as(Proc(HRESULT)).call
+  end
+  def is_enabled : HRESULT
+    @lpVtbl.value.is_enabled.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_time(seconds : Float64*) : HRESULT
+    @lpVtbl.value.get_time.unsafe_as(Proc(Float64*, HRESULT)).call(seconds)
+  end
+  def set_frame_rate_threshold(framespersecond : UInt32) : HRESULT
+    @lpVtbl.value.set_frame_rate_threshold.unsafe_as(Proc(UInt32, HRESULT)).call(framespersecond)
+  end
+end
+struct LibWin32::IUIAnimationTimerUpdateHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_update(timenow : Float64, result : UI_ANIMATION_UPDATE_RESULT*) : HRESULT
+    @lpVtbl.value.on_update.unsafe_as(Proc(Float64, UI_ANIMATION_UPDATE_RESULT*, HRESULT)).call(timenow, result)
+  end
+  def set_timer_client_event_handler(handler : IUIAnimationTimerClientEventHandler) : HRESULT
+    @lpVtbl.value.set_timer_client_event_handler.unsafe_as(Proc(IUIAnimationTimerClientEventHandler, HRESULT)).call(handler)
+  end
+  def clear_timer_client_event_handler : HRESULT
+    @lpVtbl.value.clear_timer_client_event_handler.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IUIAnimationTimerClientEventHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_timer_client_status_changed(newstatus : UI_ANIMATION_TIMER_CLIENT_STATUS, previousstatus : UI_ANIMATION_TIMER_CLIENT_STATUS) : HRESULT
+    @lpVtbl.value.on_timer_client_status_changed.unsafe_as(Proc(UI_ANIMATION_TIMER_CLIENT_STATUS, UI_ANIMATION_TIMER_CLIENT_STATUS, HRESULT)).call(newstatus, previousstatus)
+  end
+end
+struct LibWin32::IUIAnimationTimerEventHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_pre_update : HRESULT
+    @lpVtbl.value.on_pre_update.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_post_update : HRESULT
+    @lpVtbl.value.on_post_update.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_rendering_too_slow(framespersecond : UInt32) : HRESULT
+    @lpVtbl.value.on_rendering_too_slow.unsafe_as(Proc(UInt32, HRESULT)).call(framespersecond)
+  end
+end
+struct LibWin32::IUIAnimationManager2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_animation_vector_variable(initialvalue : Float64*, cdimension : UInt32, variable : IUIAnimationVariable2*) : HRESULT
+    @lpVtbl.value.create_animation_vector_variable.unsafe_as(Proc(Float64*, UInt32, IUIAnimationVariable2*, HRESULT)).call(initialvalue, cdimension, variable)
+  end
+  def create_animation_variable(initialvalue : Float64, variable : IUIAnimationVariable2*) : HRESULT
+    @lpVtbl.value.create_animation_variable.unsafe_as(Proc(Float64, IUIAnimationVariable2*, HRESULT)).call(initialvalue, variable)
+  end
+  def schedule_transition(variable : IUIAnimationVariable2, transition : IUIAnimationTransition2, timenow : Float64) : HRESULT
+    @lpVtbl.value.schedule_transition.unsafe_as(Proc(IUIAnimationVariable2, IUIAnimationTransition2, Float64, HRESULT)).call(variable, transition, timenow)
+  end
+  def create_storyboard(storyboard : IUIAnimationStoryboard2*) : HRESULT
+    @lpVtbl.value.create_storyboard.unsafe_as(Proc(IUIAnimationStoryboard2*, HRESULT)).call(storyboard)
+  end
+  def finish_all_storyboards(completiondeadline : Float64) : HRESULT
+    @lpVtbl.value.finish_all_storyboards.unsafe_as(Proc(Float64, HRESULT)).call(completiondeadline)
+  end
+  def abandon_all_storyboards : HRESULT
+    @lpVtbl.value.abandon_all_storyboards.unsafe_as(Proc(HRESULT)).call
+  end
+  def update(timenow : Float64, updateresult : UI_ANIMATION_UPDATE_RESULT*) : HRESULT
+    @lpVtbl.value.update.unsafe_as(Proc(Float64, UI_ANIMATION_UPDATE_RESULT*, HRESULT)).call(timenow, updateresult)
+  end
+  def get_variable_from_tag(object : IUnknown, id : UInt32, variable : IUIAnimationVariable2*) : HRESULT
+    @lpVtbl.value.get_variable_from_tag.unsafe_as(Proc(IUnknown, UInt32, IUIAnimationVariable2*, HRESULT)).call(object, id, variable)
+  end
+  def get_storyboard_from_tag(object : IUnknown, id : UInt32, storyboard : IUIAnimationStoryboard2*) : HRESULT
+    @lpVtbl.value.get_storyboard_from_tag.unsafe_as(Proc(IUnknown, UInt32, IUIAnimationStoryboard2*, HRESULT)).call(object, id, storyboard)
+  end
+  def estimate_next_event_time(seconds : Float64*) : HRESULT
+    @lpVtbl.value.estimate_next_event_time.unsafe_as(Proc(Float64*, HRESULT)).call(seconds)
+  end
+  def get_status(status : UI_ANIMATION_MANAGER_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UI_ANIMATION_MANAGER_STATUS*, HRESULT)).call(status)
+  end
+  def set_animation_mode(mode : UI_ANIMATION_MODE) : HRESULT
+    @lpVtbl.value.set_animation_mode.unsafe_as(Proc(UI_ANIMATION_MODE, HRESULT)).call(mode)
+  end
+  def pause : HRESULT
+    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume : HRESULT
+    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_manager_event_handler(handler : IUIAnimationManagerEventHandler2, fregisterfornextanimationevent : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_manager_event_handler.unsafe_as(Proc(IUIAnimationManagerEventHandler2, LibC::BOOL, HRESULT)).call(handler, fregisterfornextanimationevent)
+  end
+  def set_cancel_priority_comparison(comparison : IUIAnimationPriorityComparison2) : HRESULT
+    @lpVtbl.value.set_cancel_priority_comparison.unsafe_as(Proc(IUIAnimationPriorityComparison2, HRESULT)).call(comparison)
+  end
+  def set_trim_priority_comparison(comparison : IUIAnimationPriorityComparison2) : HRESULT
+    @lpVtbl.value.set_trim_priority_comparison.unsafe_as(Proc(IUIAnimationPriorityComparison2, HRESULT)).call(comparison)
+  end
+  def set_compress_priority_comparison(comparison : IUIAnimationPriorityComparison2) : HRESULT
+    @lpVtbl.value.set_compress_priority_comparison.unsafe_as(Proc(IUIAnimationPriorityComparison2, HRESULT)).call(comparison)
+  end
+  def set_conclude_priority_comparison(comparison : IUIAnimationPriorityComparison2) : HRESULT
+    @lpVtbl.value.set_conclude_priority_comparison.unsafe_as(Proc(IUIAnimationPriorityComparison2, HRESULT)).call(comparison)
+  end
+  def set_default_longest_acceptable_delay(delay : Float64) : HRESULT
+    @lpVtbl.value.set_default_longest_acceptable_delay.unsafe_as(Proc(Float64, HRESULT)).call(delay)
+  end
+  def shutdown : HRESULT
+    @lpVtbl.value.shutdown.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IUIAnimationVariable2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_dimension(dimension : UInt32*) : HRESULT
+    @lpVtbl.value.get_dimension.unsafe_as(Proc(UInt32*, HRESULT)).call(dimension)
+  end
+  def get_value(value : Float64*) : HRESULT
+    @lpVtbl.value.get_value.unsafe_as(Proc(Float64*, HRESULT)).call(value)
+  end
+  def get_vector_value(value : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_vector_value.unsafe_as(Proc(Float64*, UInt32, HRESULT)).call(value, cdimension)
+  end
+  def get_curve(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.get_curve.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def get_vector_curve(animation : IDCompositionAnimation*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_vector_curve.unsafe_as(Proc(IDCompositionAnimation*, UInt32, HRESULT)).call(animation, cdimension)
+  end
+  def get_final_value(finalvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_final_value.unsafe_as(Proc(Float64*, HRESULT)).call(finalvalue)
+  end
+  def get_final_vector_value(finalvalue : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_final_vector_value.unsafe_as(Proc(Float64*, UInt32, HRESULT)).call(finalvalue, cdimension)
+  end
+  def get_previous_value(previousvalue : Float64*) : HRESULT
+    @lpVtbl.value.get_previous_value.unsafe_as(Proc(Float64*, HRESULT)).call(previousvalue)
+  end
+  def get_previous_vector_value(previousvalue : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_previous_vector_value.unsafe_as(Proc(Float64*, UInt32, HRESULT)).call(previousvalue, cdimension)
+  end
+  def get_integer_value(value : Int32*) : HRESULT
+    @lpVtbl.value.get_integer_value.unsafe_as(Proc(Int32*, HRESULT)).call(value)
+  end
+  def get_integer_vector_value(value : Int32*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_integer_vector_value.unsafe_as(Proc(Int32*, UInt32, HRESULT)).call(value, cdimension)
+  end
+  def get_final_integer_value(finalvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_final_integer_value.unsafe_as(Proc(Int32*, HRESULT)).call(finalvalue)
+  end
+  def get_final_integer_vector_value(finalvalue : Int32*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_final_integer_vector_value.unsafe_as(Proc(Int32*, UInt32, HRESULT)).call(finalvalue, cdimension)
+  end
+  def get_previous_integer_value(previousvalue : Int32*) : HRESULT
+    @lpVtbl.value.get_previous_integer_value.unsafe_as(Proc(Int32*, HRESULT)).call(previousvalue)
+  end
+  def get_previous_integer_vector_value(previousvalue : Int32*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_previous_integer_vector_value.unsafe_as(Proc(Int32*, UInt32, HRESULT)).call(previousvalue, cdimension)
+  end
+  def get_current_storyboard(storyboard : IUIAnimationStoryboard2*) : HRESULT
+    @lpVtbl.value.get_current_storyboard.unsafe_as(Proc(IUIAnimationStoryboard2*, HRESULT)).call(storyboard)
+  end
+  def set_lower_bound(bound : Float64) : HRESULT
+    @lpVtbl.value.set_lower_bound.unsafe_as(Proc(Float64, HRESULT)).call(bound)
+  end
+  def set_lower_bound_vector(bound : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.set_lower_bound_vector.unsafe_as(Proc(Float64*, UInt32, HRESULT)).call(bound, cdimension)
+  end
+  def set_upper_bound(bound : Float64) : HRESULT
+    @lpVtbl.value.set_upper_bound.unsafe_as(Proc(Float64, HRESULT)).call(bound)
+  end
+  def set_upper_bound_vector(bound : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.set_upper_bound_vector.unsafe_as(Proc(Float64*, UInt32, HRESULT)).call(bound, cdimension)
+  end
+  def set_rounding_mode(mode : UI_ANIMATION_ROUNDING_MODE) : HRESULT
+    @lpVtbl.value.set_rounding_mode.unsafe_as(Proc(UI_ANIMATION_ROUNDING_MODE, HRESULT)).call(mode)
+  end
+  def set_tag(object : IUnknown, id : UInt32) : HRESULT
+    @lpVtbl.value.set_tag.unsafe_as(Proc(IUnknown, UInt32, HRESULT)).call(object, id)
+  end
+  def get_tag(object : IUnknown*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_tag.unsafe_as(Proc(IUnknown*, UInt32*, HRESULT)).call(object, id)
+  end
+  def set_variable_change_handler(handler : IUIAnimationVariableChangeHandler2, fregisterfornextanimationevent : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_variable_change_handler.unsafe_as(Proc(IUIAnimationVariableChangeHandler2, LibC::BOOL, HRESULT)).call(handler, fregisterfornextanimationevent)
+  end
+  def set_variable_integer_change_handler(handler : IUIAnimationVariableIntegerChangeHandler2, fregisterfornextanimationevent : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_variable_integer_change_handler.unsafe_as(Proc(IUIAnimationVariableIntegerChangeHandler2, LibC::BOOL, HRESULT)).call(handler, fregisterfornextanimationevent)
+  end
+  def set_variable_curve_change_handler(handler : IUIAnimationVariableCurveChangeHandler2) : HRESULT
+    @lpVtbl.value.set_variable_curve_change_handler.unsafe_as(Proc(IUIAnimationVariableCurveChangeHandler2, HRESULT)).call(handler)
+  end
+end
+struct LibWin32::IUIAnimationTransition2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_dimension(dimension : UInt32*) : HRESULT
+    @lpVtbl.value.get_dimension.unsafe_as(Proc(UInt32*, HRESULT)).call(dimension)
+  end
+  def set_initial_value(value : Float64) : HRESULT
+    @lpVtbl.value.set_initial_value.unsafe_as(Proc(Float64, HRESULT)).call(value)
+  end
+  def set_initial_vector_value(value : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.set_initial_vector_value.unsafe_as(Proc(Float64*, UInt32, HRESULT)).call(value, cdimension)
+  end
+  def set_initial_velocity(velocity : Float64) : HRESULT
+    @lpVtbl.value.set_initial_velocity.unsafe_as(Proc(Float64, HRESULT)).call(velocity)
+  end
+  def set_initial_vector_velocity(velocity : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.set_initial_vector_velocity.unsafe_as(Proc(Float64*, UInt32, HRESULT)).call(velocity, cdimension)
+  end
+  def is_duration_known : HRESULT
+    @lpVtbl.value.is_duration_known.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_duration(duration : Float64*) : HRESULT
+    @lpVtbl.value.get_duration.unsafe_as(Proc(Float64*, HRESULT)).call(duration)
+  end
+end
+struct LibWin32::IUIAnimationManagerEventHandler2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_manager_status_changed(newstatus : UI_ANIMATION_MANAGER_STATUS, previousstatus : UI_ANIMATION_MANAGER_STATUS) : HRESULT
+    @lpVtbl.value.on_manager_status_changed.unsafe_as(Proc(UI_ANIMATION_MANAGER_STATUS, UI_ANIMATION_MANAGER_STATUS, HRESULT)).call(newstatus, previousstatus)
+  end
+end
+struct LibWin32::IUIAnimationVariableChangeHandler2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_value_changed(storyboard : IUIAnimationStoryboard2, variable : IUIAnimationVariable2, newvalue : Float64*, previousvalue : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.on_value_changed.unsafe_as(Proc(IUIAnimationStoryboard2, IUIAnimationVariable2, Float64*, Float64*, UInt32, HRESULT)).call(storyboard, variable, newvalue, previousvalue, cdimension)
+  end
+end
+struct LibWin32::IUIAnimationVariableIntegerChangeHandler2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_integer_value_changed(storyboard : IUIAnimationStoryboard2, variable : IUIAnimationVariable2, newvalue : Int32*, previousvalue : Int32*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.on_integer_value_changed.unsafe_as(Proc(IUIAnimationStoryboard2, IUIAnimationVariable2, Int32*, Int32*, UInt32, HRESULT)).call(storyboard, variable, newvalue, previousvalue, cdimension)
+  end
+end
+struct LibWin32::IUIAnimationVariableCurveChangeHandler2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_curve_changed(variable : IUIAnimationVariable2) : HRESULT
+    @lpVtbl.value.on_curve_changed.unsafe_as(Proc(IUIAnimationVariable2, HRESULT)).call(variable)
+  end
+end
+struct LibWin32::IUIAnimationStoryboardEventHandler2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_storyboard_status_changed(storyboard : IUIAnimationStoryboard2, newstatus : UI_ANIMATION_STORYBOARD_STATUS, previousstatus : UI_ANIMATION_STORYBOARD_STATUS) : HRESULT
+    @lpVtbl.value.on_storyboard_status_changed.unsafe_as(Proc(IUIAnimationStoryboard2, UI_ANIMATION_STORYBOARD_STATUS, UI_ANIMATION_STORYBOARD_STATUS, HRESULT)).call(storyboard, newstatus, previousstatus)
+  end
+  def on_storyboard_updated(storyboard : IUIAnimationStoryboard2) : HRESULT
+    @lpVtbl.value.on_storyboard_updated.unsafe_as(Proc(IUIAnimationStoryboard2, HRESULT)).call(storyboard)
+  end
+end
+struct LibWin32::IUIAnimationLoopIterationChangeHandler2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_loop_iteration_changed(storyboard : IUIAnimationStoryboard2, id : LibC::UINT_PTR, newiterationcount : UInt32, olditerationcount : UInt32) : HRESULT
+    @lpVtbl.value.on_loop_iteration_changed.unsafe_as(Proc(IUIAnimationStoryboard2, LibC::UINT_PTR, UInt32, UInt32, HRESULT)).call(storyboard, id, newiterationcount, olditerationcount)
+  end
+end
+struct LibWin32::IUIAnimationPriorityComparison2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def has_priority(scheduledstoryboard : IUIAnimationStoryboard2, newstoryboard : IUIAnimationStoryboard2, priorityeffect : UI_ANIMATION_PRIORITY_EFFECT) : HRESULT
+    @lpVtbl.value.has_priority.unsafe_as(Proc(IUIAnimationStoryboard2, IUIAnimationStoryboard2, UI_ANIMATION_PRIORITY_EFFECT, HRESULT)).call(scheduledstoryboard, newstoryboard, priorityeffect)
+  end
+end
+struct LibWin32::IUIAnimationTransitionLibrary2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_instantaneous_transition(finalvalue : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_instantaneous_transition.unsafe_as(Proc(Float64, IUIAnimationTransition2*, HRESULT)).call(finalvalue, transition)
+  end
+  def create_instantaneous_vector_transition(finalvalue : Float64*, cdimension : UInt32, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_instantaneous_vector_transition.unsafe_as(Proc(Float64*, UInt32, IUIAnimationTransition2*, HRESULT)).call(finalvalue, cdimension, transition)
+  end
+  def create_constant_transition(duration : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_constant_transition.unsafe_as(Proc(Float64, IUIAnimationTransition2*, HRESULT)).call(duration, transition)
+  end
+  def create_discrete_transition(delay : Float64, finalvalue : Float64, hold : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_discrete_transition.unsafe_as(Proc(Float64, Float64, Float64, IUIAnimationTransition2*, HRESULT)).call(delay, finalvalue, hold, transition)
+  end
+  def create_discrete_vector_transition(delay : Float64, finalvalue : Float64*, cdimension : UInt32, hold : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_discrete_vector_transition.unsafe_as(Proc(Float64, Float64*, UInt32, Float64, IUIAnimationTransition2*, HRESULT)).call(delay, finalvalue, cdimension, hold, transition)
+  end
+  def create_linear_transition(duration : Float64, finalvalue : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_linear_transition.unsafe_as(Proc(Float64, Float64, IUIAnimationTransition2*, HRESULT)).call(duration, finalvalue, transition)
+  end
+  def create_linear_vector_transition(duration : Float64, finalvalue : Float64*, cdimension : UInt32, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_linear_vector_transition.unsafe_as(Proc(Float64, Float64*, UInt32, IUIAnimationTransition2*, HRESULT)).call(duration, finalvalue, cdimension, transition)
+  end
+  def create_linear_transition_from_speed(speed : Float64, finalvalue : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_linear_transition_from_speed.unsafe_as(Proc(Float64, Float64, IUIAnimationTransition2*, HRESULT)).call(speed, finalvalue, transition)
+  end
+  def create_linear_vector_transition_from_speed(speed : Float64, finalvalue : Float64*, cdimension : UInt32, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_linear_vector_transition_from_speed.unsafe_as(Proc(Float64, Float64*, UInt32, IUIAnimationTransition2*, HRESULT)).call(speed, finalvalue, cdimension, transition)
+  end
+  def create_sinusoidal_transition_from_velocity(duration : Float64, period : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_sinusoidal_transition_from_velocity.unsafe_as(Proc(Float64, Float64, IUIAnimationTransition2*, HRESULT)).call(duration, period, transition)
+  end
+  def create_sinusoidal_transition_from_range(duration : Float64, minimumvalue : Float64, maximumvalue : Float64, period : Float64, slope : UI_ANIMATION_SLOPE, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_sinusoidal_transition_from_range.unsafe_as(Proc(Float64, Float64, Float64, Float64, UI_ANIMATION_SLOPE, IUIAnimationTransition2*, HRESULT)).call(duration, minimumvalue, maximumvalue, period, slope, transition)
+  end
+  def create_accelerate_decelerate_transition(duration : Float64, finalvalue : Float64, accelerationratio : Float64, decelerationratio : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_accelerate_decelerate_transition.unsafe_as(Proc(Float64, Float64, Float64, Float64, IUIAnimationTransition2*, HRESULT)).call(duration, finalvalue, accelerationratio, decelerationratio, transition)
+  end
+  def create_reversal_transition(duration : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_reversal_transition.unsafe_as(Proc(Float64, IUIAnimationTransition2*, HRESULT)).call(duration, transition)
+  end
+  def create_cubic_transition(duration : Float64, finalvalue : Float64, finalvelocity : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_cubic_transition.unsafe_as(Proc(Float64, Float64, Float64, IUIAnimationTransition2*, HRESULT)).call(duration, finalvalue, finalvelocity, transition)
+  end
+  def create_cubic_vector_transition(duration : Float64, finalvalue : Float64*, finalvelocity : Float64*, cdimension : UInt32, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_cubic_vector_transition.unsafe_as(Proc(Float64, Float64*, Float64*, UInt32, IUIAnimationTransition2*, HRESULT)).call(duration, finalvalue, finalvelocity, cdimension, transition)
+  end
+  def create_smooth_stop_transition(maximumduration : Float64, finalvalue : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_smooth_stop_transition.unsafe_as(Proc(Float64, Float64, IUIAnimationTransition2*, HRESULT)).call(maximumduration, finalvalue, transition)
+  end
+  def create_parabolic_transition_from_acceleration(finalvalue : Float64, finalvelocity : Float64, acceleration : Float64, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_parabolic_transition_from_acceleration.unsafe_as(Proc(Float64, Float64, Float64, IUIAnimationTransition2*, HRESULT)).call(finalvalue, finalvelocity, acceleration, transition)
+  end
+  def create_cubic_bezier_linear_transition(duration : Float64, finalvalue : Float64, x1 : Float64, y1 : Float64, x2 : Float64, y2 : Float64, pptransition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_cubic_bezier_linear_transition.unsafe_as(Proc(Float64, Float64, Float64, Float64, Float64, Float64, IUIAnimationTransition2*, HRESULT)).call(duration, finalvalue, x1, y1, x2, y2, pptransition)
+  end
+  def create_cubic_bezier_linear_vector_transition(duration : Float64, finalvalue : Float64*, cdimension : UInt32, x1 : Float64, y1 : Float64, x2 : Float64, y2 : Float64, pptransition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_cubic_bezier_linear_vector_transition.unsafe_as(Proc(Float64, Float64*, UInt32, Float64, Float64, Float64, Float64, IUIAnimationTransition2*, HRESULT)).call(duration, finalvalue, cdimension, x1, y1, x2, y2, pptransition)
+  end
+end
+struct LibWin32::IUIAnimationPrimitiveInterpolation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_cubic(dimension : UInt32, beginoffset : Float64, constantcoefficient : Float32, linearcoefficient : Float32, quadraticcoefficient : Float32, cubiccoefficient : Float32) : HRESULT
+    @lpVtbl.value.add_cubic.unsafe_as(Proc(UInt32, Float64, Float32, Float32, Float32, Float32, HRESULT)).call(dimension, beginoffset, constantcoefficient, linearcoefficient, quadraticcoefficient, cubiccoefficient)
+  end
+  def add_sinusoidal(dimension : UInt32, beginoffset : Float64, bias : Float32, amplitude : Float32, frequency : Float32, phase : Float32) : HRESULT
+    @lpVtbl.value.add_sinusoidal.unsafe_as(Proc(UInt32, Float64, Float32, Float32, Float32, Float32, HRESULT)).call(dimension, beginoffset, bias, amplitude, frequency, phase)
+  end
+end
+struct LibWin32::IUIAnimationInterpolator2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_dimension(dimension : UInt32*) : HRESULT
+    @lpVtbl.value.get_dimension.unsafe_as(Proc(UInt32*, HRESULT)).call(dimension)
+  end
+  def set_initial_value_and_velocity(initialvalue : Float64*, initialvelocity : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.set_initial_value_and_velocity.unsafe_as(Proc(Float64*, Float64*, UInt32, HRESULT)).call(initialvalue, initialvelocity, cdimension)
+  end
+  def set_duration(duration : Float64) : HRESULT
+    @lpVtbl.value.set_duration.unsafe_as(Proc(Float64, HRESULT)).call(duration)
+  end
+  def get_duration(duration : Float64*) : HRESULT
+    @lpVtbl.value.get_duration.unsafe_as(Proc(Float64*, HRESULT)).call(duration)
+  end
+  def get_final_value(value : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_final_value.unsafe_as(Proc(Float64*, UInt32, HRESULT)).call(value, cdimension)
+  end
+  def interpolate_value(offset : Float64, value : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.interpolate_value.unsafe_as(Proc(Float64, Float64*, UInt32, HRESULT)).call(offset, value, cdimension)
+  end
+  def interpolate_velocity(offset : Float64, velocity : Float64*, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.interpolate_velocity.unsafe_as(Proc(Float64, Float64*, UInt32, HRESULT)).call(offset, velocity, cdimension)
+  end
+  def get_primitive_interpolation(interpolation : IUIAnimationPrimitiveInterpolation, cdimension : UInt32) : HRESULT
+    @lpVtbl.value.get_primitive_interpolation.unsafe_as(Proc(IUIAnimationPrimitiveInterpolation, UInt32, HRESULT)).call(interpolation, cdimension)
+  end
+  def get_dependencies(initialvaluedependencies : UI_ANIMATION_DEPENDENCIES*, initialvelocitydependencies : UI_ANIMATION_DEPENDENCIES*, durationdependencies : UI_ANIMATION_DEPENDENCIES*) : HRESULT
+    @lpVtbl.value.get_dependencies.unsafe_as(Proc(UI_ANIMATION_DEPENDENCIES*, UI_ANIMATION_DEPENDENCIES*, UI_ANIMATION_DEPENDENCIES*, HRESULT)).call(initialvaluedependencies, initialvelocitydependencies, durationdependencies)
+  end
+end
+struct LibWin32::IUIAnimationTransitionFactory2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_transition(interpolator : IUIAnimationInterpolator2, transition : IUIAnimationTransition2*) : HRESULT
+    @lpVtbl.value.create_transition.unsafe_as(Proc(IUIAnimationInterpolator2, IUIAnimationTransition2*, HRESULT)).call(interpolator, transition)
+  end
+end
+struct LibWin32::IUIAnimationStoryboard2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_transition(variable : IUIAnimationVariable2, transition : IUIAnimationTransition2) : HRESULT
+    @lpVtbl.value.add_transition.unsafe_as(Proc(IUIAnimationVariable2, IUIAnimationTransition2, HRESULT)).call(variable, transition)
+  end
+  def add_keyframe_at_offset(existingkeyframe : UI_ANIMATION_KEYFRAME, offset : Float64, keyframe : UI_ANIMATION_KEYFRAME*) : HRESULT
+    @lpVtbl.value.add_keyframe_at_offset.unsafe_as(Proc(UI_ANIMATION_KEYFRAME, Float64, UI_ANIMATION_KEYFRAME*, HRESULT)).call(existingkeyframe, offset, keyframe)
+  end
+  def add_keyframe_after_transition(transition : IUIAnimationTransition2, keyframe : UI_ANIMATION_KEYFRAME*) : HRESULT
+    @lpVtbl.value.add_keyframe_after_transition.unsafe_as(Proc(IUIAnimationTransition2, UI_ANIMATION_KEYFRAME*, HRESULT)).call(transition, keyframe)
+  end
+  def add_transition_at_keyframe(variable : IUIAnimationVariable2, transition : IUIAnimationTransition2, startkeyframe : UI_ANIMATION_KEYFRAME) : HRESULT
+    @lpVtbl.value.add_transition_at_keyframe.unsafe_as(Proc(IUIAnimationVariable2, IUIAnimationTransition2, UI_ANIMATION_KEYFRAME, HRESULT)).call(variable, transition, startkeyframe)
+  end
+  def add_transition_between_keyframes(variable : IUIAnimationVariable2, transition : IUIAnimationTransition2, startkeyframe : UI_ANIMATION_KEYFRAME, endkeyframe : UI_ANIMATION_KEYFRAME) : HRESULT
+    @lpVtbl.value.add_transition_between_keyframes.unsafe_as(Proc(IUIAnimationVariable2, IUIAnimationTransition2, UI_ANIMATION_KEYFRAME, UI_ANIMATION_KEYFRAME, HRESULT)).call(variable, transition, startkeyframe, endkeyframe)
+  end
+  def repeat_between_keyframes(startkeyframe : UI_ANIMATION_KEYFRAME, endkeyframe : UI_ANIMATION_KEYFRAME, crepetition : Float64, repeatmode : UI_ANIMATION_REPEAT_MODE, piterationchangehandler : IUIAnimationLoopIterationChangeHandler2, id : LibC::UINT_PTR, fregisterfornextanimationevent : LibC::BOOL) : HRESULT
+    @lpVtbl.value.repeat_between_keyframes.unsafe_as(Proc(UI_ANIMATION_KEYFRAME, UI_ANIMATION_KEYFRAME, Float64, UI_ANIMATION_REPEAT_MODE, IUIAnimationLoopIterationChangeHandler2, LibC::UINT_PTR, LibC::BOOL, HRESULT)).call(startkeyframe, endkeyframe, crepetition, repeatmode, piterationchangehandler, id, fregisterfornextanimationevent)
+  end
+  def hold_variable(variable : IUIAnimationVariable2) : HRESULT
+    @lpVtbl.value.hold_variable.unsafe_as(Proc(IUIAnimationVariable2, HRESULT)).call(variable)
+  end
+  def set_longest_acceptable_delay(delay : Float64) : HRESULT
+    @lpVtbl.value.set_longest_acceptable_delay.unsafe_as(Proc(Float64, HRESULT)).call(delay)
+  end
+  def set_skip_duration(secondsduration : Float64) : HRESULT
+    @lpVtbl.value.set_skip_duration.unsafe_as(Proc(Float64, HRESULT)).call(secondsduration)
+  end
+  def schedule(timenow : Float64, schedulingresult : UI_ANIMATION_SCHEDULING_RESULT*) : HRESULT
+    @lpVtbl.value.schedule.unsafe_as(Proc(Float64, UI_ANIMATION_SCHEDULING_RESULT*, HRESULT)).call(timenow, schedulingresult)
+  end
+  def conclude : HRESULT
+    @lpVtbl.value.conclude.unsafe_as(Proc(HRESULT)).call
+  end
+  def finish(completiondeadline : Float64) : HRESULT
+    @lpVtbl.value.finish.unsafe_as(Proc(Float64, HRESULT)).call(completiondeadline)
+  end
+  def abandon : HRESULT
+    @lpVtbl.value.abandon.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_tag(object : IUnknown, id : UInt32) : HRESULT
+    @lpVtbl.value.set_tag.unsafe_as(Proc(IUnknown, UInt32, HRESULT)).call(object, id)
+  end
+  def get_tag(object : IUnknown*, id : UInt32*) : HRESULT
+    @lpVtbl.value.get_tag.unsafe_as(Proc(IUnknown*, UInt32*, HRESULT)).call(object, id)
+  end
+  def get_status(status : UI_ANIMATION_STORYBOARD_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(UI_ANIMATION_STORYBOARD_STATUS*, HRESULT)).call(status)
+  end
+  def get_elapsed_time(elapsedtime : Float64*) : HRESULT
+    @lpVtbl.value.get_elapsed_time.unsafe_as(Proc(Float64*, HRESULT)).call(elapsedtime)
+  end
+  def set_storyboard_event_handler(handler : IUIAnimationStoryboardEventHandler2, fregisterstatuschangefornextanimationevent : LibC::BOOL, fregisterupdatefornextanimationevent : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_storyboard_event_handler.unsafe_as(Proc(IUIAnimationStoryboardEventHandler2, LibC::BOOL, LibC::BOOL, HRESULT)).call(handler, fregisterstatuschangefornextanimationevent, fregisterupdatefornextanimationevent)
+  end
 end

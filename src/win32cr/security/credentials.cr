@@ -612,7 +612,7 @@ lib LibWin32
   fun KeyCredentialManagerGetInformation(keycredentialmanagerinfo : KeyCredentialManagerInfo**) : HRESULT
 
   # Params # keycredentialmanagerinfo : KeyCredentialManagerInfo* [In]
-  fun KeyCredentialManagerFreeInformation(keycredentialmanagerinfo : KeyCredentialManagerInfo*)
+  fun KeyCredentialManagerFreeInformation(keycredentialmanagerinfo : KeyCredentialManagerInfo*) : Void
 
   # Params # credential : CREDENTIALW* [In],flags : UInt32 [In]
   fun CredWriteW(credential : CREDENTIALW*, flags : UInt32) : LibC::BOOL
@@ -720,7 +720,7 @@ lib LibWin32
   fun CredGetSessionTypes(maximumpersistcount : UInt32, maximumpersist : UInt32*) : LibC::BOOL
 
   # Params # buffer : Void* [In]
-  fun CredFree(buffer : Void*)
+  fun CredFree(buffer : Void*) : Void
 
   # Params # puiinfo : CREDUI_INFOW* [In],psztargetname : LibC::LPWSTR [In],pcontext : SecHandle* [In],dwautherror : UInt32 [In],pszusername : Char* [In],ulusernamebuffersize : UInt32 [In],pszpassword : Char* [In],ulpasswordbuffersize : UInt32 [In],save : LibC::BOOL* [In],dwflags : CREDUI_FLAGS [In]
   fun CredUIPromptForCredentialsW(puiinfo : CREDUI_INFOW*, psztargetname : LibC::LPWSTR, pcontext : SecHandle*, dwautherror : UInt32, pszusername : Char*, ulusernamebuffersize : UInt32, pszpassword : Char*, ulpasswordbuffersize : UInt32, save : LibC::BOOL*, dwflags : CREDUI_FLAGS) : UInt32
@@ -864,7 +864,7 @@ lib LibWin32
   fun SCardAccessStartedEvent : LibC::HANDLE
 
   # Params # 
-  fun SCardReleaseStartedEvent
+  fun SCardReleaseStartedEvent : Void
 
   # Params # hcontext : LibC::UINT_PTR [In],mszcards : PSTR [In],rgreaderstates : SCARD_READERSTATEA* [In],creaders : UInt32 [In]
   fun SCardLocateCardsA(hcontext : LibC::UINT_PTR, mszcards : PSTR, rgreaderstates : SCARD_READERSTATEA*, creaders : UInt32) : Int32

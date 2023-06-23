@@ -254,13 +254,13 @@ lib LibWin32
 
 
   struct IAudioMediaTypeVTbl
-    query_interface : Proc(IAudioMediaType*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioMediaType*, UInt32)
-    release : Proc(IAudioMediaType*, UInt32)
-    is_compressed_format : Proc(IAudioMediaType*, LibC::BOOL*, HRESULT)
-    is_equal : Proc(IAudioMediaType*, IAudioMediaType, UInt32*, HRESULT)
-    get_audio_format : Proc(IAudioMediaType*, WAVEFORMATEX**)
-    get_uncompressed_audio_format : Proc(IAudioMediaType*, UNCOMPRESSEDAUDIOFORMAT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    is_compressed_format : UInt64
+    is_equal : UInt64
+    get_audio_format : UInt64
+    get_uncompressed_audio_format : UInt64
   end
 
   IAudioMediaType_GUID = "4e997f73-b71f-4798-873b-ed7dfcf15b4d"
@@ -270,12 +270,12 @@ lib LibWin32
   end
 
   struct IAudioProcessingObjectRTVTbl
-    query_interface : Proc(IAudioProcessingObjectRT*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioProcessingObjectRT*, UInt32)
-    release : Proc(IAudioProcessingObjectRT*, UInt32)
-    apo_process : Proc(IAudioProcessingObjectRT*, UInt32, APO_CONNECTION_PROPERTY**, UInt32, APO_CONNECTION_PROPERTY**, Void)
-    calc_input_frames : Proc(IAudioProcessingObjectRT*, UInt32, UInt32)
-    calc_output_frames : Proc(IAudioProcessingObjectRT*, UInt32, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    apo_process : UInt64
+    calc_input_frames : UInt64
+    calc_output_frames : UInt64
   end
 
   IAudioProcessingObjectRT_GUID = "9e1d6a6d-ddbc-4e95-a4c7-ad64ba37846c"
@@ -285,11 +285,11 @@ lib LibWin32
   end
 
   struct IAudioProcessingObjectVBRVTbl
-    query_interface : Proc(IAudioProcessingObjectVBR*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioProcessingObjectVBR*, UInt32)
-    release : Proc(IAudioProcessingObjectVBR*, UInt32)
-    calc_max_input_frames : Proc(IAudioProcessingObjectVBR*, UInt32, UInt32*, HRESULT)
-    calc_max_output_frames : Proc(IAudioProcessingObjectVBR*, UInt32, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    calc_max_input_frames : UInt64
+    calc_max_output_frames : UInt64
   end
 
   IAudioProcessingObjectVBR_GUID = "7ba1db8f-78ad-49cd-9591-f79d80a17c81"
@@ -299,11 +299,11 @@ lib LibWin32
   end
 
   struct IAudioProcessingObjectConfigurationVTbl
-    query_interface : Proc(IAudioProcessingObjectConfiguration*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioProcessingObjectConfiguration*, UInt32)
-    release : Proc(IAudioProcessingObjectConfiguration*, UInt32)
-    lock_for_process : Proc(IAudioProcessingObjectConfiguration*, UInt32, APO_CONNECTION_DESCRIPTOR**, UInt32, APO_CONNECTION_DESCRIPTOR**, HRESULT)
-    unlock_for_process : Proc(IAudioProcessingObjectConfiguration*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    lock_for_process : UInt64
+    unlock_for_process : UInt64
   end
 
   IAudioProcessingObjectConfiguration_GUID = "0e5ed805-aba6-49c3-8f9a-2b8c889c4fa8"
@@ -313,16 +313,16 @@ lib LibWin32
   end
 
   struct IAudioProcessingObjectVTbl
-    query_interface : Proc(IAudioProcessingObject*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioProcessingObject*, UInt32)
-    release : Proc(IAudioProcessingObject*, UInt32)
-    reset : Proc(IAudioProcessingObject*, HRESULT)
-    get_latency : Proc(IAudioProcessingObject*, Int64*, HRESULT)
-    get_registration_properties : Proc(IAudioProcessingObject*, APO_REG_PROPERTIES**, HRESULT)
-    initialize : Proc(IAudioProcessingObject*, UInt32, UInt8*, HRESULT)
-    is_input_format_supported : Proc(IAudioProcessingObject*, IAudioMediaType, IAudioMediaType, IAudioMediaType*, HRESULT)
-    is_output_format_supported : Proc(IAudioProcessingObject*, IAudioMediaType, IAudioMediaType, IAudioMediaType*, HRESULT)
-    get_input_channel_count : Proc(IAudioProcessingObject*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    reset : UInt64
+    get_latency : UInt64
+    get_registration_properties : UInt64
+    initialize : UInt64
+    is_input_format_supported : UInt64
+    is_output_format_supported : UInt64
+    get_input_channel_count : UInt64
   end
 
   IAudioProcessingObject_GUID = "fd7f2b29-24d0-4b5c-b177-592c39f9ca10"
@@ -332,10 +332,10 @@ lib LibWin32
   end
 
   struct IAudioDeviceModulesClientVTbl
-    query_interface : Proc(IAudioDeviceModulesClient*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioDeviceModulesClient*, UInt32)
-    release : Proc(IAudioDeviceModulesClient*, UInt32)
-    set_audio_device_modules_manager : Proc(IAudioDeviceModulesClient*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_audio_device_modules_manager : UInt64
   end
 
   IAudioDeviceModulesClient_GUID = "98f37dac-d0b6-49f5-896a-aa4d169a4c48"
@@ -345,9 +345,9 @@ lib LibWin32
   end
 
   struct IAudioSystemEffectsVTbl
-    query_interface : Proc(IAudioSystemEffects*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioSystemEffects*, UInt32)
-    release : Proc(IAudioSystemEffects*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
   end
 
   IAudioSystemEffects_GUID = "5fa00f27-add6-499a-8a9d-6b98521fa75b"
@@ -357,10 +357,10 @@ lib LibWin32
   end
 
   struct IAudioSystemEffects2VTbl
-    query_interface : Proc(IAudioSystemEffects2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioSystemEffects2*, UInt32)
-    release : Proc(IAudioSystemEffects2*, UInt32)
-    get_effects_list : Proc(IAudioSystemEffects2*, Guid**, UInt32*, LibC::HANDLE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_effects_list : UInt64
   end
 
   IAudioSystemEffects2_GUID = "bafe99d2-7436-44ce-9e0e-4d89afbfff56"
@@ -370,12 +370,12 @@ lib LibWin32
   end
 
   struct IAudioSystemEffectsCustomFormatsVTbl
-    query_interface : Proc(IAudioSystemEffectsCustomFormats*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioSystemEffectsCustomFormats*, UInt32)
-    release : Proc(IAudioSystemEffectsCustomFormats*, UInt32)
-    get_format_count : Proc(IAudioSystemEffectsCustomFormats*, UInt32*, HRESULT)
-    get_format : Proc(IAudioSystemEffectsCustomFormats*, UInt32, IAudioMediaType*, HRESULT)
-    get_format_representation : Proc(IAudioSystemEffectsCustomFormats*, UInt32, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_format_count : UInt64
+    get_format : UInt64
+    get_format_representation : UInt64
   end
 
   IAudioSystemEffectsCustomFormats_GUID = "b1176e34-bb7f-4f05-bebd-1b18a534e097"
@@ -385,12 +385,12 @@ lib LibWin32
   end
 
   struct IApoAuxiliaryInputConfigurationVTbl
-    query_interface : Proc(IApoAuxiliaryInputConfiguration*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IApoAuxiliaryInputConfiguration*, UInt32)
-    release : Proc(IApoAuxiliaryInputConfiguration*, UInt32)
-    add_auxiliary_input : Proc(IApoAuxiliaryInputConfiguration*, UInt32, UInt32, UInt8*, APO_CONNECTION_DESCRIPTOR*, HRESULT)
-    remove_auxiliary_input : Proc(IApoAuxiliaryInputConfiguration*, UInt32, HRESULT)
-    is_input_format_supported : Proc(IApoAuxiliaryInputConfiguration*, IAudioMediaType, IAudioMediaType*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_auxiliary_input : UInt64
+    remove_auxiliary_input : UInt64
+    is_input_format_supported : UInt64
   end
 
   IApoAuxiliaryInputConfiguration_GUID = "4ceb0aab-fa19-48ed-a857-87771ae1b768"
@@ -400,10 +400,10 @@ lib LibWin32
   end
 
   struct IApoAuxiliaryInputRTVTbl
-    query_interface : Proc(IApoAuxiliaryInputRT*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IApoAuxiliaryInputRT*, UInt32)
-    release : Proc(IApoAuxiliaryInputRT*, UInt32)
-    accept_input : Proc(IApoAuxiliaryInputRT*, UInt32, APO_CONNECTION_PROPERTY*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    accept_input : UInt64
   end
 
   IApoAuxiliaryInputRT_GUID = "f851809c-c177-49a0-b1b2-b66f017943ab"
@@ -413,9 +413,9 @@ lib LibWin32
   end
 
   struct IApoAcousticEchoCancellationVTbl
-    query_interface : Proc(IApoAcousticEchoCancellation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IApoAcousticEchoCancellation*, UInt32)
-    release : Proc(IApoAcousticEchoCancellation*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
   end
 
   IApoAcousticEchoCancellation_GUID = "25385759-3236-4101-a943-25693dfb5d2d"
@@ -425,12 +425,12 @@ lib LibWin32
   end
 
   struct IAudioSystemEffects3VTbl
-    query_interface : Proc(IAudioSystemEffects3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioSystemEffects3*, UInt32)
-    release : Proc(IAudioSystemEffects3*, UInt32)
-    get_effects_list : Proc(IAudioSystemEffects3*, Guid**, UInt32*, LibC::HANDLE, HRESULT)
-    get_controllable_system_effects_list : Proc(IAudioSystemEffects3*, AUDIO_SYSTEMEFFECT**, UInt32*, LibC::HANDLE, HRESULT)
-    set_audio_system_effect_state : Proc(IAudioSystemEffects3*, Guid, AUDIO_SYSTEMEFFECT_STATE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_effects_list : UInt64
+    get_controllable_system_effects_list : UInt64
+    set_audio_system_effect_state : UInt64
   end
 
   IAudioSystemEffects3_GUID = "c58b31cd-fc6a-4255-bc1f-ad29bb0a4a17"
@@ -440,10 +440,10 @@ lib LibWin32
   end
 
   struct IAudioProcessingObjectRTQueueServiceVTbl
-    query_interface : Proc(IAudioProcessingObjectRTQueueService*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioProcessingObjectRTQueueService*, UInt32)
-    release : Proc(IAudioProcessingObjectRTQueueService*, UInt32)
-    get_real_time_work_queue : Proc(IAudioProcessingObjectRTQueueService*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_real_time_work_queue : UInt64
   end
 
   IAudioProcessingObjectRTQueueService_GUID = "acd65e2f-955b-4b57-b9bf-ac297bb752c9"
@@ -453,10 +453,10 @@ lib LibWin32
   end
 
   struct IAudioProcessingObjectLoggingServiceVTbl
-    query_interface : Proc(IAudioProcessingObjectLoggingService*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioProcessingObjectLoggingService*, UInt32)
-    release : Proc(IAudioProcessingObjectLoggingService*, UInt32)
-    apo_log : Proc(IAudioProcessingObjectLoggingService*, APO_LOG_LEVEL, LibC::LPWSTR, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    apo_log : UInt64
   end
 
   IAudioProcessingObjectLoggingService_GUID = "698f0107-1745-4708-95a5-d84478a62a65"
@@ -466,11 +466,11 @@ lib LibWin32
   end
 
   struct IAudioProcessingObjectNotificationsVTbl
-    query_interface : Proc(IAudioProcessingObjectNotifications*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioProcessingObjectNotifications*, UInt32)
-    release : Proc(IAudioProcessingObjectNotifications*, UInt32)
-    get_apo_notification_registration_info : Proc(IAudioProcessingObjectNotifications*, APO_NOTIFICATION_DESCRIPTOR**, UInt32*, HRESULT)
-    handle_notification : Proc(IAudioProcessingObjectNotifications*, APO_NOTIFICATION*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_apo_notification_registration_info : UInt64
+    handle_notification : UInt64
   end
 
   IAudioProcessingObjectNotifications_GUID = "56b0c76f-02fd-4b21-a52e-9f8219fc86e4"
@@ -479,4 +479,282 @@ lib LibWin32
     lpVtbl : IAudioProcessingObjectNotificationsVTbl*
   end
 
+end
+struct LibWin32::IAudioMediaType
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def is_compressed_format(pfcompressed : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_compressed_format.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfcompressed)
+  end
+  def is_equal(piaudiotype : IAudioMediaType, pdwflags : UInt32*) : HRESULT
+    @lpVtbl.value.is_equal.unsafe_as(Proc(IAudioMediaType, UInt32*, HRESULT)).call(piaudiotype, pdwflags)
+  end
+  def get_audio_format : WAVEFORMATEX*
+    @lpVtbl.value.get_audio_format.unsafe_as(Proc(WAVEFORMATEX**)).call
+  end
+  def get_uncompressed_audio_format(puncompressedaudioformat : UNCOMPRESSEDAUDIOFORMAT*) : HRESULT
+    @lpVtbl.value.get_uncompressed_audio_format.unsafe_as(Proc(UNCOMPRESSEDAUDIOFORMAT*, HRESULT)).call(puncompressedaudioformat)
+  end
+end
+struct LibWin32::IAudioProcessingObjectRT
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def apo_process(u32numinputconnections : UInt32, ppinputconnections : APO_CONNECTION_PROPERTY**, u32numoutputconnections : UInt32, ppoutputconnections : APO_CONNECTION_PROPERTY**) : Void
+    @lpVtbl.value.apo_process.unsafe_as(Proc(UInt32, APO_CONNECTION_PROPERTY**, UInt32, APO_CONNECTION_PROPERTY**, Void)).call(u32numinputconnections, ppinputconnections, u32numoutputconnections, ppoutputconnections)
+  end
+  def calc_input_frames(u32outputframecount : UInt32) : UInt32
+    @lpVtbl.value.calc_input_frames.unsafe_as(Proc(UInt32, UInt32)).call(u32outputframecount)
+  end
+  def calc_output_frames(u32inputframecount : UInt32) : UInt32
+    @lpVtbl.value.calc_output_frames.unsafe_as(Proc(UInt32, UInt32)).call(u32inputframecount)
+  end
+end
+struct LibWin32::IAudioProcessingObjectVBR
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def calc_max_input_frames(u32maxoutputframecount : UInt32, pu32inputframecount : UInt32*) : HRESULT
+    @lpVtbl.value.calc_max_input_frames.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(u32maxoutputframecount, pu32inputframecount)
+  end
+  def calc_max_output_frames(u32maxinputframecount : UInt32, pu32outputframecount : UInt32*) : HRESULT
+    @lpVtbl.value.calc_max_output_frames.unsafe_as(Proc(UInt32, UInt32*, HRESULT)).call(u32maxinputframecount, pu32outputframecount)
+  end
+end
+struct LibWin32::IAudioProcessingObjectConfiguration
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def lock_for_process(u32numinputconnections : UInt32, ppinputconnections : APO_CONNECTION_DESCRIPTOR**, u32numoutputconnections : UInt32, ppoutputconnections : APO_CONNECTION_DESCRIPTOR**) : HRESULT
+    @lpVtbl.value.lock_for_process.unsafe_as(Proc(UInt32, APO_CONNECTION_DESCRIPTOR**, UInt32, APO_CONNECTION_DESCRIPTOR**, HRESULT)).call(u32numinputconnections, ppinputconnections, u32numoutputconnections, ppoutputconnections)
+  end
+  def unlock_for_process : HRESULT
+    @lpVtbl.value.unlock_for_process.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IAudioProcessingObject
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_latency(ptime : Int64*) : HRESULT
+    @lpVtbl.value.get_latency.unsafe_as(Proc(Int64*, HRESULT)).call(ptime)
+  end
+  def get_registration_properties(ppregprops : APO_REG_PROPERTIES**) : HRESULT
+    @lpVtbl.value.get_registration_properties.unsafe_as(Proc(APO_REG_PROPERTIES**, HRESULT)).call(ppregprops)
+  end
+  def initialize(cbdatasize : UInt32, pbydata : UInt8*) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(UInt32, UInt8*, HRESULT)).call(cbdatasize, pbydata)
+  end
+  def is_input_format_supported(poppositeformat : IAudioMediaType, prequestedinputformat : IAudioMediaType, ppsupportedinputformat : IAudioMediaType*) : HRESULT
+    @lpVtbl.value.is_input_format_supported.unsafe_as(Proc(IAudioMediaType, IAudioMediaType, IAudioMediaType*, HRESULT)).call(poppositeformat, prequestedinputformat, ppsupportedinputformat)
+  end
+  def is_output_format_supported(poppositeformat : IAudioMediaType, prequestedoutputformat : IAudioMediaType, ppsupportedoutputformat : IAudioMediaType*) : HRESULT
+    @lpVtbl.value.is_output_format_supported.unsafe_as(Proc(IAudioMediaType, IAudioMediaType, IAudioMediaType*, HRESULT)).call(poppositeformat, prequestedoutputformat, ppsupportedoutputformat)
+  end
+  def get_input_channel_count(pu32channelcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_input_channel_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pu32channelcount)
+  end
+end
+struct LibWin32::IAudioDeviceModulesClient
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_audio_device_modules_manager(paudiodevicemodulesmanager : IUnknown) : HRESULT
+    @lpVtbl.value.set_audio_device_modules_manager.unsafe_as(Proc(IUnknown, HRESULT)).call(paudiodevicemodulesmanager)
+  end
+end
+struct LibWin32::IAudioSystemEffects
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::IAudioSystemEffects2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_effects_list(ppeffectsids : Guid**, pceffects : UInt32*, event : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_effects_list.unsafe_as(Proc(Guid**, UInt32*, LibC::HANDLE, HRESULT)).call(ppeffectsids, pceffects, event)
+  end
+end
+struct LibWin32::IAudioSystemEffectsCustomFormats
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_format_count(pcformats : UInt32*) : HRESULT
+    @lpVtbl.value.get_format_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcformats)
+  end
+  def get_format(nformat : UInt32, ppformat : IAudioMediaType*) : HRESULT
+    @lpVtbl.value.get_format.unsafe_as(Proc(UInt32, IAudioMediaType*, HRESULT)).call(nformat, ppformat)
+  end
+  def get_format_representation(nformat : UInt32, ppwstrformatrep : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_format_representation.unsafe_as(Proc(UInt32, LibC::LPWSTR*, HRESULT)).call(nformat, ppwstrformatrep)
+  end
+end
+struct LibWin32::IApoAuxiliaryInputConfiguration
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_auxiliary_input(dwinputid : UInt32, cbdatasize : UInt32, pbydata : UInt8*, pinputconnection : APO_CONNECTION_DESCRIPTOR*) : HRESULT
+    @lpVtbl.value.add_auxiliary_input.unsafe_as(Proc(UInt32, UInt32, UInt8*, APO_CONNECTION_DESCRIPTOR*, HRESULT)).call(dwinputid, cbdatasize, pbydata, pinputconnection)
+  end
+  def remove_auxiliary_input(dwinputid : UInt32) : HRESULT
+    @lpVtbl.value.remove_auxiliary_input.unsafe_as(Proc(UInt32, HRESULT)).call(dwinputid)
+  end
+  def is_input_format_supported(prequestedinputformat : IAudioMediaType, ppsupportedinputformat : IAudioMediaType*) : HRESULT
+    @lpVtbl.value.is_input_format_supported.unsafe_as(Proc(IAudioMediaType, IAudioMediaType*, HRESULT)).call(prequestedinputformat, ppsupportedinputformat)
+  end
+end
+struct LibWin32::IApoAuxiliaryInputRT
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def accept_input(dwinputid : UInt32, pinputconnection : APO_CONNECTION_PROPERTY*) : Void
+    @lpVtbl.value.accept_input.unsafe_as(Proc(UInt32, APO_CONNECTION_PROPERTY*, Void)).call(dwinputid, pinputconnection)
+  end
+end
+struct LibWin32::IApoAcousticEchoCancellation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::IAudioSystemEffects3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_effects_list(ppeffectsids : Guid**, pceffects : UInt32*, event : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_effects_list.unsafe_as(Proc(Guid**, UInt32*, LibC::HANDLE, HRESULT)).call(ppeffectsids, pceffects, event)
+  end
+  def get_controllable_system_effects_list(effects : AUDIO_SYSTEMEFFECT**, numeffects : UInt32*, event : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.get_controllable_system_effects_list.unsafe_as(Proc(AUDIO_SYSTEMEFFECT**, UInt32*, LibC::HANDLE, HRESULT)).call(effects, numeffects, event)
+  end
+  def set_audio_system_effect_state(effectid : Guid, state : AUDIO_SYSTEMEFFECT_STATE) : HRESULT
+    @lpVtbl.value.set_audio_system_effect_state.unsafe_as(Proc(Guid, AUDIO_SYSTEMEFFECT_STATE, HRESULT)).call(effectid, state)
+  end
+end
+struct LibWin32::IAudioProcessingObjectRTQueueService
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_real_time_work_queue(workqueueid : UInt32*) : HRESULT
+    @lpVtbl.value.get_real_time_work_queue.unsafe_as(Proc(UInt32*, HRESULT)).call(workqueueid)
+  end
+end
+struct LibWin32::IAudioProcessingObjectLoggingService
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def apo_log(level : APO_LOG_LEVEL, format : LibC::LPWSTR) : Void
+    @lpVtbl.value.apo_log.unsafe_as(Proc(APO_LOG_LEVEL, LibC::LPWSTR, Void)).call(level, format)
+  end
+end
+struct LibWin32::IAudioProcessingObjectNotifications
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_apo_notification_registration_info(aponotifications : APO_NOTIFICATION_DESCRIPTOR**, count : UInt32*) : HRESULT
+    @lpVtbl.value.get_apo_notification_registration_info.unsafe_as(Proc(APO_NOTIFICATION_DESCRIPTOR**, UInt32*, HRESULT)).call(aponotifications, count)
+  end
+  def handle_notification(aponotification : APO_NOTIFICATION*) : Void
+    @lpVtbl.value.handle_notification.unsafe_as(Proc(APO_NOTIFICATION*, Void)).call(aponotification)
+  end
 end

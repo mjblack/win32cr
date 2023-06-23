@@ -11,13 +11,13 @@ require "../../foundation.cr"
 lib LibWin32
 
   struct IRadialControllerInteropVTbl
-    query_interface : Proc(IRadialControllerInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRadialControllerInterop*, UInt32)
-    release : Proc(IRadialControllerInterop*, UInt32)
-    get_iids : Proc(IRadialControllerInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IRadialControllerInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IRadialControllerInterop*, TrustLevel*, HRESULT)
-    create_for_window : Proc(IRadialControllerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    create_for_window : UInt64
   end
 
   IRadialControllerInterop_GUID = "1b0535c9-57ad-45c1-9d79-ad5c34360513"
@@ -27,13 +27,13 @@ lib LibWin32
   end
 
   struct IRadialControllerConfigurationInteropVTbl
-    query_interface : Proc(IRadialControllerConfigurationInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRadialControllerConfigurationInterop*, UInt32)
-    release : Proc(IRadialControllerConfigurationInterop*, UInt32)
-    get_iids : Proc(IRadialControllerConfigurationInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IRadialControllerConfigurationInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IRadialControllerConfigurationInterop*, TrustLevel*, HRESULT)
-    get_for_window : Proc(IRadialControllerConfigurationInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    get_for_window : UInt64
   end
 
   IRadialControllerConfigurationInterop_GUID = "787cdaac-3186-476d-87e4-b9374a7b9970"
@@ -43,13 +43,13 @@ lib LibWin32
   end
 
   struct IRadialControllerIndependentInputSourceInteropVTbl
-    query_interface : Proc(IRadialControllerIndependentInputSourceInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRadialControllerIndependentInputSourceInterop*, UInt32)
-    release : Proc(IRadialControllerIndependentInputSourceInterop*, UInt32)
-    get_iids : Proc(IRadialControllerIndependentInputSourceInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IRadialControllerIndependentInputSourceInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IRadialControllerIndependentInputSourceInterop*, TrustLevel*, HRESULT)
-    create_for_window : Proc(IRadialControllerIndependentInputSourceInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    create_for_window : UInt64
   end
 
   IRadialControllerIndependentInputSourceInterop_GUID = "3d577eff-4cee-11e6-b535-001bdc06ab3b"
@@ -58,4 +58,73 @@ lib LibWin32
     lpVtbl : IRadialControllerIndependentInputSourceInteropVTbl*
   end
 
+end
+struct LibWin32::IRadialControllerInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def create_for_window(hwnd : LibC::HANDLE, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_for_window.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hwnd, riid, ppv)
+  end
+end
+struct LibWin32::IRadialControllerConfigurationInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def get_for_window(hwnd : LibC::HANDLE, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hwnd, riid, ppv)
+  end
+end
+struct LibWin32::IRadialControllerIndependentInputSourceInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def create_for_window(hwnd : LibC::HANDLE, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.create_for_window.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hwnd, riid, ppv)
+  end
 end

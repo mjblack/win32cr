@@ -110,15 +110,15 @@ lib LibWin32
 
 
   struct IDCompositionAnimationVTbl
-    query_interface : Proc(IDCompositionAnimation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionAnimation*, UInt32)
-    release : Proc(IDCompositionAnimation*, UInt32)
-    reset : Proc(IDCompositionAnimation*, HRESULT)
-    set_absolute_begin_time : Proc(IDCompositionAnimation*, LARGE_INTEGER, HRESULT)
-    add_cubic : Proc(IDCompositionAnimation*, Float64, Float32, Float32, Float32, Float32, HRESULT)
-    add_sinusoidal : Proc(IDCompositionAnimation*, Float64, Float32, Float32, Float32, Float32, HRESULT)
-    add_repeat : Proc(IDCompositionAnimation*, Float64, Float64, HRESULT)
-    rend : Proc(IDCompositionAnimation*, Float64, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    reset : UInt64
+    set_absolute_begin_time : UInt64
+    add_cubic : UInt64
+    add_sinusoidal : UInt64
+    add_repeat : UInt64
+    end_ : UInt64
   end
 
   IDCompositionAnimation_GUID = "cbfd91d9-51b2-45e4-b3de-d19ccfb863c5"
@@ -128,33 +128,33 @@ lib LibWin32
   end
 
   struct IDCompositionDeviceVTbl
-    query_interface : Proc(IDCompositionDevice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionDevice*, UInt32)
-    release : Proc(IDCompositionDevice*, UInt32)
-    commit : Proc(IDCompositionDevice*, HRESULT)
-    wait_for_commit_completion : Proc(IDCompositionDevice*, HRESULT)
-    get_frame_statistics : Proc(IDCompositionDevice*, DCOMPOSITION_FRAME_STATISTICS*, HRESULT)
-    create_target_for_hwnd : Proc(IDCompositionDevice*, LibC::HANDLE, LibC::BOOL, IDCompositionTarget*, HRESULT)
-    create_visual : Proc(IDCompositionDevice*, IDCompositionVisual*, HRESULT)
-    create_surface : Proc(IDCompositionDevice*, UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionSurface*, HRESULT)
-    create_virtual_surface : Proc(IDCompositionDevice*, UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionVirtualSurface*, HRESULT)
-    create_surface_from_handle : Proc(IDCompositionDevice*, LibC::HANDLE, IUnknown*, HRESULT)
-    create_surface_from_hwnd : Proc(IDCompositionDevice*, LibC::HANDLE, IUnknown*, HRESULT)
-    create_translate_transform : Proc(IDCompositionDevice*, IDCompositionTranslateTransform*, HRESULT)
-    create_scale_transform : Proc(IDCompositionDevice*, IDCompositionScaleTransform*, HRESULT)
-    create_rotate_transform : Proc(IDCompositionDevice*, IDCompositionRotateTransform*, HRESULT)
-    create_skew_transform : Proc(IDCompositionDevice*, IDCompositionSkewTransform*, HRESULT)
-    create_matrix_transform : Proc(IDCompositionDevice*, IDCompositionMatrixTransform*, HRESULT)
-    create_transform_group : Proc(IDCompositionDevice*, IDCompositionTransform*, UInt32, IDCompositionTransform*, HRESULT)
-    create_translate_transform3_d : Proc(IDCompositionDevice*, IDCompositionTranslateTransform3D*, HRESULT)
-    create_scale_transform3_d : Proc(IDCompositionDevice*, IDCompositionScaleTransform3D*, HRESULT)
-    create_rotate_transform3_d : Proc(IDCompositionDevice*, IDCompositionRotateTransform3D*, HRESULT)
-    create_matrix_transform3_d : Proc(IDCompositionDevice*, IDCompositionMatrixTransform3D*, HRESULT)
-    create_transform3_d_group : Proc(IDCompositionDevice*, IDCompositionTransform3D*, UInt32, IDCompositionTransform3D*, HRESULT)
-    create_effect_group : Proc(IDCompositionDevice*, IDCompositionEffectGroup*, HRESULT)
-    create_rectangle_clip : Proc(IDCompositionDevice*, IDCompositionRectangleClip*, HRESULT)
-    create_animation : Proc(IDCompositionDevice*, IDCompositionAnimation*, HRESULT)
-    check_device_state : Proc(IDCompositionDevice*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    commit : UInt64
+    wait_for_commit_completion : UInt64
+    get_frame_statistics : UInt64
+    create_target_for_hwnd : UInt64
+    create_visual : UInt64
+    create_surface : UInt64
+    create_virtual_surface : UInt64
+    create_surface_from_handle : UInt64
+    create_surface_from_hwnd : UInt64
+    create_translate_transform : UInt64
+    create_scale_transform : UInt64
+    create_rotate_transform : UInt64
+    create_skew_transform : UInt64
+    create_matrix_transform : UInt64
+    create_transform_group : UInt64
+    create_translate_transform3_d : UInt64
+    create_scale_transform3_d : UInt64
+    create_rotate_transform3_d : UInt64
+    create_matrix_transform3_d : UInt64
+    create_transform3_d_group : UInt64
+    create_effect_group : UInt64
+    create_rectangle_clip : UInt64
+    create_animation : UInt64
+    check_device_state : UInt64
   end
 
   IDCompositionDevice_GUID = "c37ea93a-e7aa-450d-b16f-9746cb0407f3"
@@ -164,10 +164,10 @@ lib LibWin32
   end
 
   struct IDCompositionTargetVTbl
-    query_interface : Proc(IDCompositionTarget*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionTarget*, UInt32)
-    release : Proc(IDCompositionTarget*, UInt32)
-    set_root : Proc(IDCompositionTarget*, IDCompositionVisual, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_root : UInt64
   end
 
   IDCompositionTarget_GUID = "eacdd04c-117e-4e17-88f4-d1b12b0e3d89"
@@ -177,26 +177,26 @@ lib LibWin32
   end
 
   struct IDCompositionVisualVTbl
-    query_interface : Proc(IDCompositionVisual*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionVisual*, UInt32)
-    release : Proc(IDCompositionVisual*, UInt32)
-    set_offset_x : Proc(IDCompositionVisual*, IDCompositionAnimation, HRESULT)
-    set_offset_x2 : Proc(IDCompositionVisual*, Float32, HRESULT)
-    set_offset_y : Proc(IDCompositionVisual*, IDCompositionAnimation, HRESULT)
-    set_offset_y2 : Proc(IDCompositionVisual*, Float32, HRESULT)
-    set_transform : Proc(IDCompositionVisual*, IDCompositionTransform, HRESULT)
-    set_transform2 : Proc(IDCompositionVisual*, D2D_MATRIX_3X2_F*, HRESULT)
-    set_transform_parent : Proc(IDCompositionVisual*, IDCompositionVisual, HRESULT)
-    set_effect : Proc(IDCompositionVisual*, IDCompositionEffect, HRESULT)
-    set_bitmap_interpolation_mode : Proc(IDCompositionVisual*, DCOMPOSITION_BITMAP_INTERPOLATION_MODE, HRESULT)
-    set_border_mode : Proc(IDCompositionVisual*, DCOMPOSITION_BORDER_MODE, HRESULT)
-    set_clip : Proc(IDCompositionVisual*, IDCompositionClip, HRESULT)
-    set_clip2 : Proc(IDCompositionVisual*, D2D_RECT_F*, HRESULT)
-    set_content : Proc(IDCompositionVisual*, IUnknown, HRESULT)
-    add_visual : Proc(IDCompositionVisual*, IDCompositionVisual, LibC::BOOL, IDCompositionVisual, HRESULT)
-    remove_visual : Proc(IDCompositionVisual*, IDCompositionVisual, HRESULT)
-    remove_all_visuals : Proc(IDCompositionVisual*, HRESULT)
-    set_composite_mode : Proc(IDCompositionVisual*, DCOMPOSITION_COMPOSITE_MODE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_offset_x : UInt64
+    set_offset_x2 : UInt64
+    set_offset_y : UInt64
+    set_offset_y2 : UInt64
+    set_transform : UInt64
+    set_transform2 : UInt64
+    set_transform_parent : UInt64
+    set_effect : UInt64
+    set_bitmap_interpolation_mode : UInt64
+    set_border_mode : UInt64
+    set_clip : UInt64
+    set_clip2 : UInt64
+    set_content : UInt64
+    add_visual : UInt64
+    remove_visual : UInt64
+    remove_all_visuals : UInt64
+    set_composite_mode : UInt64
   end
 
   IDCompositionVisual_GUID = "4d93059d-097b-4651-9a60-f0f25116e2f3"
@@ -206,9 +206,9 @@ lib LibWin32
   end
 
   struct IDCompositionEffectVTbl
-    query_interface : Proc(IDCompositionEffect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionEffect*, UInt32)
-    release : Proc(IDCompositionEffect*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
   end
 
   IDCompositionEffect_GUID = "ec81b08f-bfcb-4e8d-b193-a915587999e8"
@@ -218,9 +218,9 @@ lib LibWin32
   end
 
   struct IDCompositionTransform3DVTbl
-    query_interface : Proc(IDCompositionTransform3D*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionTransform3D*, UInt32)
-    release : Proc(IDCompositionTransform3D*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
   end
 
   IDCompositionTransform3D_GUID = "71185722-246b-41f2-aad1-0443f7f4bfc2"
@@ -230,9 +230,9 @@ lib LibWin32
   end
 
   struct IDCompositionTransformVTbl
-    query_interface : Proc(IDCompositionTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionTransform*, UInt32)
-    release : Proc(IDCompositionTransform*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
   end
 
   IDCompositionTransform_GUID = "fd55faa7-37e0-4c20-95d2-9be45bc33f55"
@@ -242,13 +242,13 @@ lib LibWin32
   end
 
   struct IDCompositionTranslateTransformVTbl
-    query_interface : Proc(IDCompositionTranslateTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionTranslateTransform*, UInt32)
-    release : Proc(IDCompositionTranslateTransform*, UInt32)
-    set_offset_x : Proc(IDCompositionTranslateTransform*, IDCompositionAnimation, HRESULT)
-    set_offset_x2 : Proc(IDCompositionTranslateTransform*, Float32, HRESULT)
-    set_offset_y : Proc(IDCompositionTranslateTransform*, IDCompositionAnimation, HRESULT)
-    set_offset_y2 : Proc(IDCompositionTranslateTransform*, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_offset_x : UInt64
+    set_offset_x2 : UInt64
+    set_offset_y : UInt64
+    set_offset_y2 : UInt64
   end
 
   IDCompositionTranslateTransform_GUID = "06791122-c6f0-417d-8323-269e987f5954"
@@ -258,17 +258,17 @@ lib LibWin32
   end
 
   struct IDCompositionScaleTransformVTbl
-    query_interface : Proc(IDCompositionScaleTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionScaleTransform*, UInt32)
-    release : Proc(IDCompositionScaleTransform*, UInt32)
-    set_scale_x : Proc(IDCompositionScaleTransform*, IDCompositionAnimation, HRESULT)
-    set_scale_x2 : Proc(IDCompositionScaleTransform*, Float32, HRESULT)
-    set_scale_y : Proc(IDCompositionScaleTransform*, IDCompositionAnimation, HRESULT)
-    set_scale_y2 : Proc(IDCompositionScaleTransform*, Float32, HRESULT)
-    set_center_x : Proc(IDCompositionScaleTransform*, IDCompositionAnimation, HRESULT)
-    set_center_x2 : Proc(IDCompositionScaleTransform*, Float32, HRESULT)
-    set_center_y : Proc(IDCompositionScaleTransform*, IDCompositionAnimation, HRESULT)
-    set_center_y2 : Proc(IDCompositionScaleTransform*, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_scale_x : UInt64
+    set_scale_x2 : UInt64
+    set_scale_y : UInt64
+    set_scale_y2 : UInt64
+    set_center_x : UInt64
+    set_center_x2 : UInt64
+    set_center_y : UInt64
+    set_center_y2 : UInt64
   end
 
   IDCompositionScaleTransform_GUID = "71fde914-40ef-45ef-bd51-68b037c339f9"
@@ -278,15 +278,15 @@ lib LibWin32
   end
 
   struct IDCompositionRotateTransformVTbl
-    query_interface : Proc(IDCompositionRotateTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionRotateTransform*, UInt32)
-    release : Proc(IDCompositionRotateTransform*, UInt32)
-    set_angle : Proc(IDCompositionRotateTransform*, IDCompositionAnimation, HRESULT)
-    set_angle2 : Proc(IDCompositionRotateTransform*, Float32, HRESULT)
-    set_center_x : Proc(IDCompositionRotateTransform*, IDCompositionAnimation, HRESULT)
-    set_center_x2 : Proc(IDCompositionRotateTransform*, Float32, HRESULT)
-    set_center_y : Proc(IDCompositionRotateTransform*, IDCompositionAnimation, HRESULT)
-    set_center_y2 : Proc(IDCompositionRotateTransform*, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_angle : UInt64
+    set_angle2 : UInt64
+    set_center_x : UInt64
+    set_center_x2 : UInt64
+    set_center_y : UInt64
+    set_center_y2 : UInt64
   end
 
   IDCompositionRotateTransform_GUID = "641ed83c-ae96-46c5-90dc-32774cc5c6d5"
@@ -296,17 +296,17 @@ lib LibWin32
   end
 
   struct IDCompositionSkewTransformVTbl
-    query_interface : Proc(IDCompositionSkewTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionSkewTransform*, UInt32)
-    release : Proc(IDCompositionSkewTransform*, UInt32)
-    set_angle_x : Proc(IDCompositionSkewTransform*, IDCompositionAnimation, HRESULT)
-    set_angle_x2 : Proc(IDCompositionSkewTransform*, Float32, HRESULT)
-    set_angle_y : Proc(IDCompositionSkewTransform*, IDCompositionAnimation, HRESULT)
-    set_angle_y2 : Proc(IDCompositionSkewTransform*, Float32, HRESULT)
-    set_center_x : Proc(IDCompositionSkewTransform*, IDCompositionAnimation, HRESULT)
-    set_center_x2 : Proc(IDCompositionSkewTransform*, Float32, HRESULT)
-    set_center_y : Proc(IDCompositionSkewTransform*, IDCompositionAnimation, HRESULT)
-    set_center_y2 : Proc(IDCompositionSkewTransform*, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_angle_x : UInt64
+    set_angle_x2 : UInt64
+    set_angle_y : UInt64
+    set_angle_y2 : UInt64
+    set_center_x : UInt64
+    set_center_x2 : UInt64
+    set_center_y : UInt64
+    set_center_y2 : UInt64
   end
 
   IDCompositionSkewTransform_GUID = "e57aa735-dcdb-4c72-9c61-0591f58889ee"
@@ -316,12 +316,12 @@ lib LibWin32
   end
 
   struct IDCompositionMatrixTransformVTbl
-    query_interface : Proc(IDCompositionMatrixTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionMatrixTransform*, UInt32)
-    release : Proc(IDCompositionMatrixTransform*, UInt32)
-    set_matrix : Proc(IDCompositionMatrixTransform*, D2D_MATRIX_3X2_F*, HRESULT)
-    set_matrix_element : Proc(IDCompositionMatrixTransform*, Int32, Int32, IDCompositionAnimation, HRESULT)
-    set_matrix_element2 : Proc(IDCompositionMatrixTransform*, Int32, Int32, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_matrix : UInt64
+    set_matrix_element : UInt64
+    set_matrix_element2 : UInt64
   end
 
   IDCompositionMatrixTransform_GUID = "16cdff07-c503-419c-83f2-0965c7af1fa6"
@@ -331,12 +331,12 @@ lib LibWin32
   end
 
   struct IDCompositionEffectGroupVTbl
-    query_interface : Proc(IDCompositionEffectGroup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionEffectGroup*, UInt32)
-    release : Proc(IDCompositionEffectGroup*, UInt32)
-    set_opacity : Proc(IDCompositionEffectGroup*, IDCompositionAnimation, HRESULT)
-    set_opacity2 : Proc(IDCompositionEffectGroup*, Float32, HRESULT)
-    set_transform3_d : Proc(IDCompositionEffectGroup*, IDCompositionTransform3D, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_opacity : UInt64
+    set_opacity2 : UInt64
+    set_transform3_d : UInt64
   end
 
   IDCompositionEffectGroup_GUID = "a7929a74-e6b2-4bd6-8b95-4040119ca34d"
@@ -346,15 +346,15 @@ lib LibWin32
   end
 
   struct IDCompositionTranslateTransform3DVTbl
-    query_interface : Proc(IDCompositionTranslateTransform3D*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionTranslateTransform3D*, UInt32)
-    release : Proc(IDCompositionTranslateTransform3D*, UInt32)
-    set_offset_x : Proc(IDCompositionTranslateTransform3D*, IDCompositionAnimation, HRESULT)
-    set_offset_x2 : Proc(IDCompositionTranslateTransform3D*, Float32, HRESULT)
-    set_offset_y : Proc(IDCompositionTranslateTransform3D*, IDCompositionAnimation, HRESULT)
-    set_offset_y2 : Proc(IDCompositionTranslateTransform3D*, Float32, HRESULT)
-    set_offset_z : Proc(IDCompositionTranslateTransform3D*, IDCompositionAnimation, HRESULT)
-    set_offset_z2 : Proc(IDCompositionTranslateTransform3D*, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_offset_x : UInt64
+    set_offset_x2 : UInt64
+    set_offset_y : UInt64
+    set_offset_y2 : UInt64
+    set_offset_z : UInt64
+    set_offset_z2 : UInt64
   end
 
   IDCompositionTranslateTransform3D_GUID = "91636d4b-9ba1-4532-aaf7-e3344994d788"
@@ -364,21 +364,21 @@ lib LibWin32
   end
 
   struct IDCompositionScaleTransform3DVTbl
-    query_interface : Proc(IDCompositionScaleTransform3D*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionScaleTransform3D*, UInt32)
-    release : Proc(IDCompositionScaleTransform3D*, UInt32)
-    set_scale_x : Proc(IDCompositionScaleTransform3D*, IDCompositionAnimation, HRESULT)
-    set_scale_x2 : Proc(IDCompositionScaleTransform3D*, Float32, HRESULT)
-    set_scale_y : Proc(IDCompositionScaleTransform3D*, IDCompositionAnimation, HRESULT)
-    set_scale_y2 : Proc(IDCompositionScaleTransform3D*, Float32, HRESULT)
-    set_scale_z : Proc(IDCompositionScaleTransform3D*, IDCompositionAnimation, HRESULT)
-    set_scale_z2 : Proc(IDCompositionScaleTransform3D*, Float32, HRESULT)
-    set_center_x : Proc(IDCompositionScaleTransform3D*, IDCompositionAnimation, HRESULT)
-    set_center_x2 : Proc(IDCompositionScaleTransform3D*, Float32, HRESULT)
-    set_center_y : Proc(IDCompositionScaleTransform3D*, IDCompositionAnimation, HRESULT)
-    set_center_y2 : Proc(IDCompositionScaleTransform3D*, Float32, HRESULT)
-    set_center_z : Proc(IDCompositionScaleTransform3D*, IDCompositionAnimation, HRESULT)
-    set_center_z2 : Proc(IDCompositionScaleTransform3D*, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_scale_x : UInt64
+    set_scale_x2 : UInt64
+    set_scale_y : UInt64
+    set_scale_y2 : UInt64
+    set_scale_z : UInt64
+    set_scale_z2 : UInt64
+    set_center_x : UInt64
+    set_center_x2 : UInt64
+    set_center_y : UInt64
+    set_center_y2 : UInt64
+    set_center_z : UInt64
+    set_center_z2 : UInt64
   end
 
   IDCompositionScaleTransform3D_GUID = "2a9e9ead-364b-4b15-a7c4-a1997f78b389"
@@ -388,23 +388,23 @@ lib LibWin32
   end
 
   struct IDCompositionRotateTransform3DVTbl
-    query_interface : Proc(IDCompositionRotateTransform3D*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionRotateTransform3D*, UInt32)
-    release : Proc(IDCompositionRotateTransform3D*, UInt32)
-    set_angle : Proc(IDCompositionRotateTransform3D*, IDCompositionAnimation, HRESULT)
-    set_angle2 : Proc(IDCompositionRotateTransform3D*, Float32, HRESULT)
-    set_axis_x : Proc(IDCompositionRotateTransform3D*, IDCompositionAnimation, HRESULT)
-    set_axis_x2 : Proc(IDCompositionRotateTransform3D*, Float32, HRESULT)
-    set_axis_y : Proc(IDCompositionRotateTransform3D*, IDCompositionAnimation, HRESULT)
-    set_axis_y2 : Proc(IDCompositionRotateTransform3D*, Float32, HRESULT)
-    set_axis_z : Proc(IDCompositionRotateTransform3D*, IDCompositionAnimation, HRESULT)
-    set_axis_z2 : Proc(IDCompositionRotateTransform3D*, Float32, HRESULT)
-    set_center_x : Proc(IDCompositionRotateTransform3D*, IDCompositionAnimation, HRESULT)
-    set_center_x2 : Proc(IDCompositionRotateTransform3D*, Float32, HRESULT)
-    set_center_y : Proc(IDCompositionRotateTransform3D*, IDCompositionAnimation, HRESULT)
-    set_center_y2 : Proc(IDCompositionRotateTransform3D*, Float32, HRESULT)
-    set_center_z : Proc(IDCompositionRotateTransform3D*, IDCompositionAnimation, HRESULT)
-    set_center_z2 : Proc(IDCompositionRotateTransform3D*, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_angle : UInt64
+    set_angle2 : UInt64
+    set_axis_x : UInt64
+    set_axis_x2 : UInt64
+    set_axis_y : UInt64
+    set_axis_y2 : UInt64
+    set_axis_z : UInt64
+    set_axis_z2 : UInt64
+    set_center_x : UInt64
+    set_center_x2 : UInt64
+    set_center_y : UInt64
+    set_center_y2 : UInt64
+    set_center_z : UInt64
+    set_center_z2 : UInt64
   end
 
   IDCompositionRotateTransform3D_GUID = "d8f5b23f-d429-4a91-b55a-d2f45fd75b18"
@@ -414,12 +414,12 @@ lib LibWin32
   end
 
   struct IDCompositionMatrixTransform3DVTbl
-    query_interface : Proc(IDCompositionMatrixTransform3D*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionMatrixTransform3D*, UInt32)
-    release : Proc(IDCompositionMatrixTransform3D*, UInt32)
-    set_matrix : Proc(IDCompositionMatrixTransform3D*, D3DMATRIX*, HRESULT)
-    set_matrix_element : Proc(IDCompositionMatrixTransform3D*, Int32, Int32, IDCompositionAnimation, HRESULT)
-    set_matrix_element2 : Proc(IDCompositionMatrixTransform3D*, Int32, Int32, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_matrix : UInt64
+    set_matrix_element : UInt64
+    set_matrix_element2 : UInt64
   end
 
   IDCompositionMatrixTransform3D_GUID = "4b3363f0-643b-41b7-b6e0-ccf22d34467c"
@@ -429,9 +429,9 @@ lib LibWin32
   end
 
   struct IDCompositionClipVTbl
-    query_interface : Proc(IDCompositionClip*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionClip*, UInt32)
-    release : Proc(IDCompositionClip*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
   end
 
   IDCompositionClip_GUID = "64ac3703-9d3f-45ec-a109-7cac0e7a13a7"
@@ -441,33 +441,33 @@ lib LibWin32
   end
 
   struct IDCompositionRectangleClipVTbl
-    query_interface : Proc(IDCompositionRectangleClip*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionRectangleClip*, UInt32)
-    release : Proc(IDCompositionRectangleClip*, UInt32)
-    set_left : Proc(IDCompositionRectangleClip*, IDCompositionAnimation, HRESULT)
-    set_left2 : Proc(IDCompositionRectangleClip*, Float32, HRESULT)
-    set_top : Proc(IDCompositionRectangleClip*, IDCompositionAnimation, HRESULT)
-    set_top2 : Proc(IDCompositionRectangleClip*, Float32, HRESULT)
-    set_right : Proc(IDCompositionRectangleClip*, IDCompositionAnimation, HRESULT)
-    set_right2 : Proc(IDCompositionRectangleClip*, Float32, HRESULT)
-    set_bottom : Proc(IDCompositionRectangleClip*, IDCompositionAnimation, HRESULT)
-    set_bottom2 : Proc(IDCompositionRectangleClip*, Float32, HRESULT)
-    set_top_left_radius_x : Proc(IDCompositionRectangleClip*, IDCompositionAnimation, HRESULT)
-    set_top_left_radius_x2 : Proc(IDCompositionRectangleClip*, Float32, HRESULT)
-    set_top_left_radius_y : Proc(IDCompositionRectangleClip*, IDCompositionAnimation, HRESULT)
-    set_top_left_radius_y2 : Proc(IDCompositionRectangleClip*, Float32, HRESULT)
-    set_top_right_radius_x : Proc(IDCompositionRectangleClip*, IDCompositionAnimation, HRESULT)
-    set_top_right_radius_x2 : Proc(IDCompositionRectangleClip*, Float32, HRESULT)
-    set_top_right_radius_y : Proc(IDCompositionRectangleClip*, IDCompositionAnimation, HRESULT)
-    set_top_right_radius_y2 : Proc(IDCompositionRectangleClip*, Float32, HRESULT)
-    set_bottom_left_radius_x : Proc(IDCompositionRectangleClip*, IDCompositionAnimation, HRESULT)
-    set_bottom_left_radius_x2 : Proc(IDCompositionRectangleClip*, Float32, HRESULT)
-    set_bottom_left_radius_y : Proc(IDCompositionRectangleClip*, IDCompositionAnimation, HRESULT)
-    set_bottom_left_radius_y2 : Proc(IDCompositionRectangleClip*, Float32, HRESULT)
-    set_bottom_right_radius_x : Proc(IDCompositionRectangleClip*, IDCompositionAnimation, HRESULT)
-    set_bottom_right_radius_x2 : Proc(IDCompositionRectangleClip*, Float32, HRESULT)
-    set_bottom_right_radius_y : Proc(IDCompositionRectangleClip*, IDCompositionAnimation, HRESULT)
-    set_bottom_right_radius_y2 : Proc(IDCompositionRectangleClip*, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_left : UInt64
+    set_left2 : UInt64
+    set_top : UInt64
+    set_top2 : UInt64
+    set_right : UInt64
+    set_right2 : UInt64
+    set_bottom : UInt64
+    set_bottom2 : UInt64
+    set_top_left_radius_x : UInt64
+    set_top_left_radius_x2 : UInt64
+    set_top_left_radius_y : UInt64
+    set_top_left_radius_y2 : UInt64
+    set_top_right_radius_x : UInt64
+    set_top_right_radius_x2 : UInt64
+    set_top_right_radius_y : UInt64
+    set_top_right_radius_y2 : UInt64
+    set_bottom_left_radius_x : UInt64
+    set_bottom_left_radius_x2 : UInt64
+    set_bottom_left_radius_y : UInt64
+    set_bottom_left_radius_y2 : UInt64
+    set_bottom_right_radius_x : UInt64
+    set_bottom_right_radius_x2 : UInt64
+    set_bottom_right_radius_y : UInt64
+    set_bottom_right_radius_y2 : UInt64
   end
 
   IDCompositionRectangleClip_GUID = "9842ad7d-d9cf-4908-aed7-48b51da5e7c2"
@@ -477,14 +477,14 @@ lib LibWin32
   end
 
   struct IDCompositionSurfaceVTbl
-    query_interface : Proc(IDCompositionSurface*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionSurface*, UInt32)
-    release : Proc(IDCompositionSurface*, UInt32)
-    begin_draw : Proc(IDCompositionSurface*, RECT*, Guid*, Void**, POINT*, HRESULT)
-    end_draw : Proc(IDCompositionSurface*, HRESULT)
-    suspend_draw : Proc(IDCompositionSurface*, HRESULT)
-    resume_draw : Proc(IDCompositionSurface*, HRESULT)
-    scroll : Proc(IDCompositionSurface*, RECT*, RECT*, Int32, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    suspend_draw : UInt64
+    resume_draw : UInt64
+    scroll : UInt64
   end
 
   IDCompositionSurface_GUID = "bb8a4953-2c99-4f5a-96f5-4819027fa3ac"
@@ -494,16 +494,16 @@ lib LibWin32
   end
 
   struct IDCompositionVirtualSurfaceVTbl
-    query_interface : Proc(IDCompositionVirtualSurface*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionVirtualSurface*, UInt32)
-    release : Proc(IDCompositionVirtualSurface*, UInt32)
-    begin_draw : Proc(IDCompositionVirtualSurface*, RECT*, Guid*, Void**, POINT*, HRESULT)
-    end_draw : Proc(IDCompositionVirtualSurface*, HRESULT)
-    suspend_draw : Proc(IDCompositionVirtualSurface*, HRESULT)
-    resume_draw : Proc(IDCompositionVirtualSurface*, HRESULT)
-    scroll : Proc(IDCompositionVirtualSurface*, RECT*, RECT*, Int32, Int32, HRESULT)
-    resize : Proc(IDCompositionVirtualSurface*, UInt32, UInt32, HRESULT)
-    trim : Proc(IDCompositionVirtualSurface*, RECT*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_draw : UInt64
+    end_draw : UInt64
+    suspend_draw : UInt64
+    resume_draw : UInt64
+    scroll : UInt64
+    resize : UInt64
+    trim : UInt64
   end
 
   IDCompositionVirtualSurface_GUID = "ae471c51-5f53-4a24-8d3e-d0c39c30b3f0"
@@ -513,30 +513,30 @@ lib LibWin32
   end
 
   struct IDCompositionDevice2VTbl
-    query_interface : Proc(IDCompositionDevice2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionDevice2*, UInt32)
-    release : Proc(IDCompositionDevice2*, UInt32)
-    commit : Proc(IDCompositionDevice2*, HRESULT)
-    wait_for_commit_completion : Proc(IDCompositionDevice2*, HRESULT)
-    get_frame_statistics : Proc(IDCompositionDevice2*, DCOMPOSITION_FRAME_STATISTICS*, HRESULT)
-    create_visual : Proc(IDCompositionDevice2*, IDCompositionVisual2*, HRESULT)
-    create_surface_factory : Proc(IDCompositionDevice2*, IUnknown, IDCompositionSurfaceFactory*, HRESULT)
-    create_surface : Proc(IDCompositionDevice2*, UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionSurface*, HRESULT)
-    create_virtual_surface : Proc(IDCompositionDevice2*, UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionVirtualSurface*, HRESULT)
-    create_translate_transform : Proc(IDCompositionDevice2*, IDCompositionTranslateTransform*, HRESULT)
-    create_scale_transform : Proc(IDCompositionDevice2*, IDCompositionScaleTransform*, HRESULT)
-    create_rotate_transform : Proc(IDCompositionDevice2*, IDCompositionRotateTransform*, HRESULT)
-    create_skew_transform : Proc(IDCompositionDevice2*, IDCompositionSkewTransform*, HRESULT)
-    create_matrix_transform : Proc(IDCompositionDevice2*, IDCompositionMatrixTransform*, HRESULT)
-    create_transform_group : Proc(IDCompositionDevice2*, IDCompositionTransform*, UInt32, IDCompositionTransform*, HRESULT)
-    create_translate_transform3_d : Proc(IDCompositionDevice2*, IDCompositionTranslateTransform3D*, HRESULT)
-    create_scale_transform3_d : Proc(IDCompositionDevice2*, IDCompositionScaleTransform3D*, HRESULT)
-    create_rotate_transform3_d : Proc(IDCompositionDevice2*, IDCompositionRotateTransform3D*, HRESULT)
-    create_matrix_transform3_d : Proc(IDCompositionDevice2*, IDCompositionMatrixTransform3D*, HRESULT)
-    create_transform3_d_group : Proc(IDCompositionDevice2*, IDCompositionTransform3D*, UInt32, IDCompositionTransform3D*, HRESULT)
-    create_effect_group : Proc(IDCompositionDevice2*, IDCompositionEffectGroup*, HRESULT)
-    create_rectangle_clip : Proc(IDCompositionDevice2*, IDCompositionRectangleClip*, HRESULT)
-    create_animation : Proc(IDCompositionDevice2*, IDCompositionAnimation*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    commit : UInt64
+    wait_for_commit_completion : UInt64
+    get_frame_statistics : UInt64
+    create_visual : UInt64
+    create_surface_factory : UInt64
+    create_surface : UInt64
+    create_virtual_surface : UInt64
+    create_translate_transform : UInt64
+    create_scale_transform : UInt64
+    create_rotate_transform : UInt64
+    create_skew_transform : UInt64
+    create_matrix_transform : UInt64
+    create_transform_group : UInt64
+    create_translate_transform3_d : UInt64
+    create_scale_transform3_d : UInt64
+    create_rotate_transform3_d : UInt64
+    create_matrix_transform3_d : UInt64
+    create_transform3_d_group : UInt64
+    create_effect_group : UInt64
+    create_rectangle_clip : UInt64
+    create_animation : UInt64
   end
 
   IDCompositionDevice2_GUID = "75f6468d-1b8e-447c-9bc6-75fea80b5b25"
@@ -546,33 +546,33 @@ lib LibWin32
   end
 
   struct IDCompositionDesktopDeviceVTbl
-    query_interface : Proc(IDCompositionDesktopDevice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionDesktopDevice*, UInt32)
-    release : Proc(IDCompositionDesktopDevice*, UInt32)
-    commit : Proc(IDCompositionDesktopDevice*, HRESULT)
-    wait_for_commit_completion : Proc(IDCompositionDesktopDevice*, HRESULT)
-    get_frame_statistics : Proc(IDCompositionDesktopDevice*, DCOMPOSITION_FRAME_STATISTICS*, HRESULT)
-    create_visual : Proc(IDCompositionDesktopDevice*, IDCompositionVisual2*, HRESULT)
-    create_surface_factory : Proc(IDCompositionDesktopDevice*, IUnknown, IDCompositionSurfaceFactory*, HRESULT)
-    create_surface : Proc(IDCompositionDesktopDevice*, UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionSurface*, HRESULT)
-    create_virtual_surface : Proc(IDCompositionDesktopDevice*, UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionVirtualSurface*, HRESULT)
-    create_translate_transform : Proc(IDCompositionDesktopDevice*, IDCompositionTranslateTransform*, HRESULT)
-    create_scale_transform : Proc(IDCompositionDesktopDevice*, IDCompositionScaleTransform*, HRESULT)
-    create_rotate_transform : Proc(IDCompositionDesktopDevice*, IDCompositionRotateTransform*, HRESULT)
-    create_skew_transform : Proc(IDCompositionDesktopDevice*, IDCompositionSkewTransform*, HRESULT)
-    create_matrix_transform : Proc(IDCompositionDesktopDevice*, IDCompositionMatrixTransform*, HRESULT)
-    create_transform_group : Proc(IDCompositionDesktopDevice*, IDCompositionTransform*, UInt32, IDCompositionTransform*, HRESULT)
-    create_translate_transform3_d : Proc(IDCompositionDesktopDevice*, IDCompositionTranslateTransform3D*, HRESULT)
-    create_scale_transform3_d : Proc(IDCompositionDesktopDevice*, IDCompositionScaleTransform3D*, HRESULT)
-    create_rotate_transform3_d : Proc(IDCompositionDesktopDevice*, IDCompositionRotateTransform3D*, HRESULT)
-    create_matrix_transform3_d : Proc(IDCompositionDesktopDevice*, IDCompositionMatrixTransform3D*, HRESULT)
-    create_transform3_d_group : Proc(IDCompositionDesktopDevice*, IDCompositionTransform3D*, UInt32, IDCompositionTransform3D*, HRESULT)
-    create_effect_group : Proc(IDCompositionDesktopDevice*, IDCompositionEffectGroup*, HRESULT)
-    create_rectangle_clip : Proc(IDCompositionDesktopDevice*, IDCompositionRectangleClip*, HRESULT)
-    create_animation : Proc(IDCompositionDesktopDevice*, IDCompositionAnimation*, HRESULT)
-    create_target_for_hwnd : Proc(IDCompositionDesktopDevice*, LibC::HANDLE, LibC::BOOL, IDCompositionTarget*, HRESULT)
-    create_surface_from_handle : Proc(IDCompositionDesktopDevice*, LibC::HANDLE, IUnknown*, HRESULT)
-    create_surface_from_hwnd : Proc(IDCompositionDesktopDevice*, LibC::HANDLE, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    commit : UInt64
+    wait_for_commit_completion : UInt64
+    get_frame_statistics : UInt64
+    create_visual : UInt64
+    create_surface_factory : UInt64
+    create_surface : UInt64
+    create_virtual_surface : UInt64
+    create_translate_transform : UInt64
+    create_scale_transform : UInt64
+    create_rotate_transform : UInt64
+    create_skew_transform : UInt64
+    create_matrix_transform : UInt64
+    create_transform_group : UInt64
+    create_translate_transform3_d : UInt64
+    create_scale_transform3_d : UInt64
+    create_rotate_transform3_d : UInt64
+    create_matrix_transform3_d : UInt64
+    create_transform3_d_group : UInt64
+    create_effect_group : UInt64
+    create_rectangle_clip : UInt64
+    create_animation : UInt64
+    create_target_for_hwnd : UInt64
+    create_surface_from_handle : UInt64
+    create_surface_from_hwnd : UInt64
   end
 
   IDCompositionDesktopDevice_GUID = "5f4633fe-1e08-4cb8-8c75-ce24333f5602"
@@ -582,11 +582,11 @@ lib LibWin32
   end
 
   struct IDCompositionDeviceDebugVTbl
-    query_interface : Proc(IDCompositionDeviceDebug*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionDeviceDebug*, UInt32)
-    release : Proc(IDCompositionDeviceDebug*, UInt32)
-    enable_debug_counters : Proc(IDCompositionDeviceDebug*, HRESULT)
-    disable_debug_counters : Proc(IDCompositionDeviceDebug*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enable_debug_counters : UInt64
+    disable_debug_counters : UInt64
   end
 
   IDCompositionDeviceDebug_GUID = "a1a3c64a-224f-4a81-9773-4f03a89d3c6c"
@@ -596,11 +596,11 @@ lib LibWin32
   end
 
   struct IDCompositionSurfaceFactoryVTbl
-    query_interface : Proc(IDCompositionSurfaceFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionSurfaceFactory*, UInt32)
-    release : Proc(IDCompositionSurfaceFactory*, UInt32)
-    create_surface : Proc(IDCompositionSurfaceFactory*, UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionSurface*, HRESULT)
-    create_virtual_surface : Proc(IDCompositionSurfaceFactory*, UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionVirtualSurface*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_surface : UInt64
+    create_virtual_surface : UInt64
   end
 
   IDCompositionSurfaceFactory_GUID = "e334bc12-3937-4e02-85eb-fcf4eb30d2c8"
@@ -610,28 +610,28 @@ lib LibWin32
   end
 
   struct IDCompositionVisual2VTbl
-    query_interface : Proc(IDCompositionVisual2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionVisual2*, UInt32)
-    release : Proc(IDCompositionVisual2*, UInt32)
-    set_offset_x : Proc(IDCompositionVisual2*, IDCompositionAnimation, HRESULT)
-    set_offset_x2 : Proc(IDCompositionVisual2*, Float32, HRESULT)
-    set_offset_y : Proc(IDCompositionVisual2*, IDCompositionAnimation, HRESULT)
-    set_offset_y2 : Proc(IDCompositionVisual2*, Float32, HRESULT)
-    set_transform : Proc(IDCompositionVisual2*, IDCompositionTransform, HRESULT)
-    set_transform2 : Proc(IDCompositionVisual2*, D2D_MATRIX_3X2_F*, HRESULT)
-    set_transform_parent : Proc(IDCompositionVisual2*, IDCompositionVisual, HRESULT)
-    set_effect : Proc(IDCompositionVisual2*, IDCompositionEffect, HRESULT)
-    set_bitmap_interpolation_mode : Proc(IDCompositionVisual2*, DCOMPOSITION_BITMAP_INTERPOLATION_MODE, HRESULT)
-    set_border_mode : Proc(IDCompositionVisual2*, DCOMPOSITION_BORDER_MODE, HRESULT)
-    set_clip : Proc(IDCompositionVisual2*, IDCompositionClip, HRESULT)
-    set_clip2 : Proc(IDCompositionVisual2*, D2D_RECT_F*, HRESULT)
-    set_content : Proc(IDCompositionVisual2*, IUnknown, HRESULT)
-    add_visual : Proc(IDCompositionVisual2*, IDCompositionVisual, LibC::BOOL, IDCompositionVisual, HRESULT)
-    remove_visual : Proc(IDCompositionVisual2*, IDCompositionVisual, HRESULT)
-    remove_all_visuals : Proc(IDCompositionVisual2*, HRESULT)
-    set_composite_mode : Proc(IDCompositionVisual2*, DCOMPOSITION_COMPOSITE_MODE, HRESULT)
-    set_opacity_mode : Proc(IDCompositionVisual2*, DCOMPOSITION_OPACITY_MODE, HRESULT)
-    set_back_face_visibility : Proc(IDCompositionVisual2*, DCOMPOSITION_BACKFACE_VISIBILITY, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_offset_x : UInt64
+    set_offset_x2 : UInt64
+    set_offset_y : UInt64
+    set_offset_y2 : UInt64
+    set_transform : UInt64
+    set_transform2 : UInt64
+    set_transform_parent : UInt64
+    set_effect : UInt64
+    set_bitmap_interpolation_mode : UInt64
+    set_border_mode : UInt64
+    set_clip : UInt64
+    set_clip2 : UInt64
+    set_content : UInt64
+    add_visual : UInt64
+    remove_visual : UInt64
+    remove_all_visuals : UInt64
+    set_composite_mode : UInt64
+    set_opacity_mode : UInt64
+    set_back_face_visibility : UInt64
   end
 
   IDCompositionVisual2_GUID = "e8de1639-4331-4b26-bc5f-6a321d347a85"
@@ -641,32 +641,32 @@ lib LibWin32
   end
 
   struct IDCompositionVisualDebugVTbl
-    query_interface : Proc(IDCompositionVisualDebug*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionVisualDebug*, UInt32)
-    release : Proc(IDCompositionVisualDebug*, UInt32)
-    set_offset_x : Proc(IDCompositionVisualDebug*, IDCompositionAnimation, HRESULT)
-    set_offset_x2 : Proc(IDCompositionVisualDebug*, Float32, HRESULT)
-    set_offset_y : Proc(IDCompositionVisualDebug*, IDCompositionAnimation, HRESULT)
-    set_offset_y2 : Proc(IDCompositionVisualDebug*, Float32, HRESULT)
-    set_transform : Proc(IDCompositionVisualDebug*, IDCompositionTransform, HRESULT)
-    set_transform2 : Proc(IDCompositionVisualDebug*, D2D_MATRIX_3X2_F*, HRESULT)
-    set_transform_parent : Proc(IDCompositionVisualDebug*, IDCompositionVisual, HRESULT)
-    set_effect : Proc(IDCompositionVisualDebug*, IDCompositionEffect, HRESULT)
-    set_bitmap_interpolation_mode : Proc(IDCompositionVisualDebug*, DCOMPOSITION_BITMAP_INTERPOLATION_MODE, HRESULT)
-    set_border_mode : Proc(IDCompositionVisualDebug*, DCOMPOSITION_BORDER_MODE, HRESULT)
-    set_clip : Proc(IDCompositionVisualDebug*, IDCompositionClip, HRESULT)
-    set_clip2 : Proc(IDCompositionVisualDebug*, D2D_RECT_F*, HRESULT)
-    set_content : Proc(IDCompositionVisualDebug*, IUnknown, HRESULT)
-    add_visual : Proc(IDCompositionVisualDebug*, IDCompositionVisual, LibC::BOOL, IDCompositionVisual, HRESULT)
-    remove_visual : Proc(IDCompositionVisualDebug*, IDCompositionVisual, HRESULT)
-    remove_all_visuals : Proc(IDCompositionVisualDebug*, HRESULT)
-    set_composite_mode : Proc(IDCompositionVisualDebug*, DCOMPOSITION_COMPOSITE_MODE, HRESULT)
-    set_opacity_mode : Proc(IDCompositionVisualDebug*, DCOMPOSITION_OPACITY_MODE, HRESULT)
-    set_back_face_visibility : Proc(IDCompositionVisualDebug*, DCOMPOSITION_BACKFACE_VISIBILITY, HRESULT)
-    enable_heat_map : Proc(IDCompositionVisualDebug*, D2D1_COLOR_F*, HRESULT)
-    disable_heat_map : Proc(IDCompositionVisualDebug*, HRESULT)
-    enable_redraw_regions : Proc(IDCompositionVisualDebug*, HRESULT)
-    disable_redraw_regions : Proc(IDCompositionVisualDebug*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_offset_x : UInt64
+    set_offset_x2 : UInt64
+    set_offset_y : UInt64
+    set_offset_y2 : UInt64
+    set_transform : UInt64
+    set_transform2 : UInt64
+    set_transform_parent : UInt64
+    set_effect : UInt64
+    set_bitmap_interpolation_mode : UInt64
+    set_border_mode : UInt64
+    set_clip : UInt64
+    set_clip2 : UInt64
+    set_content : UInt64
+    add_visual : UInt64
+    remove_visual : UInt64
+    remove_all_visuals : UInt64
+    set_composite_mode : UInt64
+    set_opacity_mode : UInt64
+    set_back_face_visibility : UInt64
+    enable_heat_map : UInt64
+    disable_heat_map : UInt64
+    enable_redraw_regions : UInt64
+    disable_redraw_regions : UInt64
   end
 
   IDCompositionVisualDebug_GUID = "fed2b808-5eb4-43a0-aea3-35f65280f91b"
@@ -676,40 +676,40 @@ lib LibWin32
   end
 
   struct IDCompositionVisual3VTbl
-    query_interface : Proc(IDCompositionVisual3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionVisual3*, UInt32)
-    release : Proc(IDCompositionVisual3*, UInt32)
-    set_offset_x : Proc(IDCompositionVisual3*, IDCompositionAnimation, HRESULT)
-    set_offset_x2 : Proc(IDCompositionVisual3*, Float32, HRESULT)
-    set_offset_y : Proc(IDCompositionVisual3*, IDCompositionAnimation, HRESULT)
-    set_offset_y2 : Proc(IDCompositionVisual3*, Float32, HRESULT)
-    set_transform : Proc(IDCompositionVisual3*, IDCompositionTransform, HRESULT)
-    set_transform2 : Proc(IDCompositionVisual3*, D2D_MATRIX_3X2_F*, HRESULT)
-    set_transform_parent : Proc(IDCompositionVisual3*, IDCompositionVisual, HRESULT)
-    set_effect : Proc(IDCompositionVisual3*, IDCompositionEffect, HRESULT)
-    set_bitmap_interpolation_mode : Proc(IDCompositionVisual3*, DCOMPOSITION_BITMAP_INTERPOLATION_MODE, HRESULT)
-    set_border_mode : Proc(IDCompositionVisual3*, DCOMPOSITION_BORDER_MODE, HRESULT)
-    set_clip : Proc(IDCompositionVisual3*, IDCompositionClip, HRESULT)
-    set_clip2 : Proc(IDCompositionVisual3*, D2D_RECT_F*, HRESULT)
-    set_content : Proc(IDCompositionVisual3*, IUnknown, HRESULT)
-    add_visual : Proc(IDCompositionVisual3*, IDCompositionVisual, LibC::BOOL, IDCompositionVisual, HRESULT)
-    remove_visual : Proc(IDCompositionVisual3*, IDCompositionVisual, HRESULT)
-    remove_all_visuals : Proc(IDCompositionVisual3*, HRESULT)
-    set_composite_mode : Proc(IDCompositionVisual3*, DCOMPOSITION_COMPOSITE_MODE, HRESULT)
-    set_opacity_mode : Proc(IDCompositionVisual3*, DCOMPOSITION_OPACITY_MODE, HRESULT)
-    set_back_face_visibility : Proc(IDCompositionVisual3*, DCOMPOSITION_BACKFACE_VISIBILITY, HRESULT)
-    enable_heat_map : Proc(IDCompositionVisual3*, D2D1_COLOR_F*, HRESULT)
-    disable_heat_map : Proc(IDCompositionVisual3*, HRESULT)
-    enable_redraw_regions : Proc(IDCompositionVisual3*, HRESULT)
-    disable_redraw_regions : Proc(IDCompositionVisual3*, HRESULT)
-    set_depth_mode : Proc(IDCompositionVisual3*, DCOMPOSITION_DEPTH_MODE, HRESULT)
-    set_offset_z : Proc(IDCompositionVisual3*, IDCompositionAnimation, HRESULT)
-    set_offset_z2 : Proc(IDCompositionVisual3*, Float32, HRESULT)
-    set_opacity : Proc(IDCompositionVisual3*, IDCompositionAnimation, HRESULT)
-    set_opacity2 : Proc(IDCompositionVisual3*, Float32, HRESULT)
-    set_transform3 : Proc(IDCompositionVisual3*, IDCompositionTransform3D, HRESULT)
-    set_transform22 : Proc(IDCompositionVisual3*, D2D_MATRIX_4X4_F*, HRESULT)
-    set_visible : Proc(IDCompositionVisual3*, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_offset_x : UInt64
+    set_offset_x2 : UInt64
+    set_offset_y : UInt64
+    set_offset_y2 : UInt64
+    set_transform : UInt64
+    set_transform2 : UInt64
+    set_transform_parent : UInt64
+    set_effect : UInt64
+    set_bitmap_interpolation_mode : UInt64
+    set_border_mode : UInt64
+    set_clip : UInt64
+    set_clip2 : UInt64
+    set_content : UInt64
+    add_visual : UInt64
+    remove_visual : UInt64
+    remove_all_visuals : UInt64
+    set_composite_mode : UInt64
+    set_opacity_mode : UInt64
+    set_back_face_visibility : UInt64
+    enable_heat_map : UInt64
+    disable_heat_map : UInt64
+    enable_redraw_regions : UInt64
+    disable_redraw_regions : UInt64
+    set_depth_mode : UInt64
+    set_offset_z : UInt64
+    set_offset_z2 : UInt64
+    set_opacity : UInt64
+    set_opacity2 : UInt64
+    set_transform3 : UInt64
+    set_transform22 : UInt64
+    set_visible : UInt64
   end
 
   IDCompositionVisual3_GUID = "2775f462-b6c1-4015-b0be-b3e7d6a4976d"
@@ -719,43 +719,43 @@ lib LibWin32
   end
 
   struct IDCompositionDevice3VTbl
-    query_interface : Proc(IDCompositionDevice3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionDevice3*, UInt32)
-    release : Proc(IDCompositionDevice3*, UInt32)
-    commit : Proc(IDCompositionDevice3*, HRESULT)
-    wait_for_commit_completion : Proc(IDCompositionDevice3*, HRESULT)
-    get_frame_statistics : Proc(IDCompositionDevice3*, DCOMPOSITION_FRAME_STATISTICS*, HRESULT)
-    create_visual : Proc(IDCompositionDevice3*, IDCompositionVisual2*, HRESULT)
-    create_surface_factory : Proc(IDCompositionDevice3*, IUnknown, IDCompositionSurfaceFactory*, HRESULT)
-    create_surface : Proc(IDCompositionDevice3*, UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionSurface*, HRESULT)
-    create_virtual_surface : Proc(IDCompositionDevice3*, UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionVirtualSurface*, HRESULT)
-    create_translate_transform : Proc(IDCompositionDevice3*, IDCompositionTranslateTransform*, HRESULT)
-    create_scale_transform : Proc(IDCompositionDevice3*, IDCompositionScaleTransform*, HRESULT)
-    create_rotate_transform : Proc(IDCompositionDevice3*, IDCompositionRotateTransform*, HRESULT)
-    create_skew_transform : Proc(IDCompositionDevice3*, IDCompositionSkewTransform*, HRESULT)
-    create_matrix_transform : Proc(IDCompositionDevice3*, IDCompositionMatrixTransform*, HRESULT)
-    create_transform_group : Proc(IDCompositionDevice3*, IDCompositionTransform*, UInt32, IDCompositionTransform*, HRESULT)
-    create_translate_transform3_d : Proc(IDCompositionDevice3*, IDCompositionTranslateTransform3D*, HRESULT)
-    create_scale_transform3_d : Proc(IDCompositionDevice3*, IDCompositionScaleTransform3D*, HRESULT)
-    create_rotate_transform3_d : Proc(IDCompositionDevice3*, IDCompositionRotateTransform3D*, HRESULT)
-    create_matrix_transform3_d : Proc(IDCompositionDevice3*, IDCompositionMatrixTransform3D*, HRESULT)
-    create_transform3_d_group : Proc(IDCompositionDevice3*, IDCompositionTransform3D*, UInt32, IDCompositionTransform3D*, HRESULT)
-    create_effect_group : Proc(IDCompositionDevice3*, IDCompositionEffectGroup*, HRESULT)
-    create_rectangle_clip : Proc(IDCompositionDevice3*, IDCompositionRectangleClip*, HRESULT)
-    create_animation : Proc(IDCompositionDevice3*, IDCompositionAnimation*, HRESULT)
-    create_gaussian_blur_effect : Proc(IDCompositionDevice3*, IDCompositionGaussianBlurEffect*, HRESULT)
-    create_brightness_effect : Proc(IDCompositionDevice3*, IDCompositionBrightnessEffect*, HRESULT)
-    create_color_matrix_effect : Proc(IDCompositionDevice3*, IDCompositionColorMatrixEffect*, HRESULT)
-    create_shadow_effect : Proc(IDCompositionDevice3*, IDCompositionShadowEffect*, HRESULT)
-    create_hue_rotation_effect : Proc(IDCompositionDevice3*, IDCompositionHueRotationEffect*, HRESULT)
-    create_saturation_effect : Proc(IDCompositionDevice3*, IDCompositionSaturationEffect*, HRESULT)
-    create_turbulence_effect : Proc(IDCompositionDevice3*, IDCompositionTurbulenceEffect*, HRESULT)
-    create_linear_transfer_effect : Proc(IDCompositionDevice3*, IDCompositionLinearTransferEffect*, HRESULT)
-    create_table_transfer_effect : Proc(IDCompositionDevice3*, IDCompositionTableTransferEffect*, HRESULT)
-    create_composite_effect : Proc(IDCompositionDevice3*, IDCompositionCompositeEffect*, HRESULT)
-    create_blend_effect : Proc(IDCompositionDevice3*, IDCompositionBlendEffect*, HRESULT)
-    create_arithmetic_composite_effect : Proc(IDCompositionDevice3*, IDCompositionArithmeticCompositeEffect*, HRESULT)
-    create_affine_transform2_d_effect : Proc(IDCompositionDevice3*, IDCompositionAffineTransform2DEffect*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    commit : UInt64
+    wait_for_commit_completion : UInt64
+    get_frame_statistics : UInt64
+    create_visual : UInt64
+    create_surface_factory : UInt64
+    create_surface : UInt64
+    create_virtual_surface : UInt64
+    create_translate_transform : UInt64
+    create_scale_transform : UInt64
+    create_rotate_transform : UInt64
+    create_skew_transform : UInt64
+    create_matrix_transform : UInt64
+    create_transform_group : UInt64
+    create_translate_transform3_d : UInt64
+    create_scale_transform3_d : UInt64
+    create_rotate_transform3_d : UInt64
+    create_matrix_transform3_d : UInt64
+    create_transform3_d_group : UInt64
+    create_effect_group : UInt64
+    create_rectangle_clip : UInt64
+    create_animation : UInt64
+    create_gaussian_blur_effect : UInt64
+    create_brightness_effect : UInt64
+    create_color_matrix_effect : UInt64
+    create_shadow_effect : UInt64
+    create_hue_rotation_effect : UInt64
+    create_saturation_effect : UInt64
+    create_turbulence_effect : UInt64
+    create_linear_transfer_effect : UInt64
+    create_table_transfer_effect : UInt64
+    create_composite_effect : UInt64
+    create_blend_effect : UInt64
+    create_arithmetic_composite_effect : UInt64
+    create_affine_transform2_d_effect : UInt64
   end
 
   IDCompositionDevice3_GUID = "0987cb06-f916-48bf-8d35-ce7641781bd9"
@@ -765,10 +765,10 @@ lib LibWin32
   end
 
   struct IDCompositionFilterEffectVTbl
-    query_interface : Proc(IDCompositionFilterEffect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionFilterEffect*, UInt32)
-    release : Proc(IDCompositionFilterEffect*, UInt32)
-    set_input : Proc(IDCompositionFilterEffect*, UInt32, IUnknown, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input : UInt64
   end
 
   IDCompositionFilterEffect_GUID = "30c421d5-8cb2-4e9f-b133-37be270d4ac2"
@@ -778,13 +778,13 @@ lib LibWin32
   end
 
   struct IDCompositionGaussianBlurEffectVTbl
-    query_interface : Proc(IDCompositionGaussianBlurEffect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionGaussianBlurEffect*, UInt32)
-    release : Proc(IDCompositionGaussianBlurEffect*, UInt32)
-    set_input : Proc(IDCompositionGaussianBlurEffect*, UInt32, IUnknown, UInt32, HRESULT)
-    set_standard_deviation : Proc(IDCompositionGaussianBlurEffect*, IDCompositionAnimation, HRESULT)
-    set_standard_deviation2 : Proc(IDCompositionGaussianBlurEffect*, Float32, HRESULT)
-    set_border_mode : Proc(IDCompositionGaussianBlurEffect*, D2D1_BORDER_MODE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input : UInt64
+    set_standard_deviation : UInt64
+    set_standard_deviation2 : UInt64
+    set_border_mode : UInt64
   end
 
   IDCompositionGaussianBlurEffect_GUID = "45d4d0b7-1bd4-454e-8894-2bfa68443033"
@@ -794,20 +794,20 @@ lib LibWin32
   end
 
   struct IDCompositionBrightnessEffectVTbl
-    query_interface : Proc(IDCompositionBrightnessEffect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionBrightnessEffect*, UInt32)
-    release : Proc(IDCompositionBrightnessEffect*, UInt32)
-    set_input : Proc(IDCompositionBrightnessEffect*, UInt32, IUnknown, UInt32, HRESULT)
-    set_white_point : Proc(IDCompositionBrightnessEffect*, D2D_VECTOR_2F*, HRESULT)
-    set_black_point : Proc(IDCompositionBrightnessEffect*, D2D_VECTOR_2F*, HRESULT)
-    set_white_point_x : Proc(IDCompositionBrightnessEffect*, IDCompositionAnimation, HRESULT)
-    set_white_point_x2 : Proc(IDCompositionBrightnessEffect*, Float32, HRESULT)
-    set_white_point_y : Proc(IDCompositionBrightnessEffect*, IDCompositionAnimation, HRESULT)
-    set_white_point_y2 : Proc(IDCompositionBrightnessEffect*, Float32, HRESULT)
-    set_black_point_x : Proc(IDCompositionBrightnessEffect*, IDCompositionAnimation, HRESULT)
-    set_black_point_x2 : Proc(IDCompositionBrightnessEffect*, Float32, HRESULT)
-    set_black_point_y : Proc(IDCompositionBrightnessEffect*, IDCompositionAnimation, HRESULT)
-    set_black_point_y2 : Proc(IDCompositionBrightnessEffect*, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input : UInt64
+    set_white_point : UInt64
+    set_black_point : UInt64
+    set_white_point_x : UInt64
+    set_white_point_x2 : UInt64
+    set_white_point_y : UInt64
+    set_white_point_y2 : UInt64
+    set_black_point_x : UInt64
+    set_black_point_x2 : UInt64
+    set_black_point_y : UInt64
+    set_black_point_y2 : UInt64
   end
 
   IDCompositionBrightnessEffect_GUID = "6027496e-cb3a-49ab-934f-d798da4f7da6"
@@ -817,15 +817,15 @@ lib LibWin32
   end
 
   struct IDCompositionColorMatrixEffectVTbl
-    query_interface : Proc(IDCompositionColorMatrixEffect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionColorMatrixEffect*, UInt32)
-    release : Proc(IDCompositionColorMatrixEffect*, UInt32)
-    set_input : Proc(IDCompositionColorMatrixEffect*, UInt32, IUnknown, UInt32, HRESULT)
-    set_matrix : Proc(IDCompositionColorMatrixEffect*, D2D_MATRIX_5X4_F*, HRESULT)
-    set_matrix_element : Proc(IDCompositionColorMatrixEffect*, Int32, Int32, IDCompositionAnimation, HRESULT)
-    set_matrix_element2 : Proc(IDCompositionColorMatrixEffect*, Int32, Int32, Float32, HRESULT)
-    set_alpha_mode : Proc(IDCompositionColorMatrixEffect*, D2D1_COLORMATRIX_ALPHA_MODE, HRESULT)
-    set_clamp_output : Proc(IDCompositionColorMatrixEffect*, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input : UInt64
+    set_matrix : UInt64
+    set_matrix_element : UInt64
+    set_matrix_element2 : UInt64
+    set_alpha_mode : UInt64
+    set_clamp_output : UInt64
   end
 
   IDCompositionColorMatrixEffect_GUID = "c1170a22-3ce2-4966-90d4-55408bfc84c4"
@@ -835,21 +835,21 @@ lib LibWin32
   end
 
   struct IDCompositionShadowEffectVTbl
-    query_interface : Proc(IDCompositionShadowEffect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionShadowEffect*, UInt32)
-    release : Proc(IDCompositionShadowEffect*, UInt32)
-    set_input : Proc(IDCompositionShadowEffect*, UInt32, IUnknown, UInt32, HRESULT)
-    set_standard_deviation : Proc(IDCompositionShadowEffect*, IDCompositionAnimation, HRESULT)
-    set_standard_deviation2 : Proc(IDCompositionShadowEffect*, Float32, HRESULT)
-    set_color : Proc(IDCompositionShadowEffect*, D2D_VECTOR_4F*, HRESULT)
-    set_red : Proc(IDCompositionShadowEffect*, IDCompositionAnimation, HRESULT)
-    set_red2 : Proc(IDCompositionShadowEffect*, Float32, HRESULT)
-    set_green : Proc(IDCompositionShadowEffect*, IDCompositionAnimation, HRESULT)
-    set_green2 : Proc(IDCompositionShadowEffect*, Float32, HRESULT)
-    set_blue : Proc(IDCompositionShadowEffect*, IDCompositionAnimation, HRESULT)
-    set_blue2 : Proc(IDCompositionShadowEffect*, Float32, HRESULT)
-    set_alpha : Proc(IDCompositionShadowEffect*, IDCompositionAnimation, HRESULT)
-    set_alpha2 : Proc(IDCompositionShadowEffect*, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input : UInt64
+    set_standard_deviation : UInt64
+    set_standard_deviation2 : UInt64
+    set_color : UInt64
+    set_red : UInt64
+    set_red2 : UInt64
+    set_green : UInt64
+    set_green2 : UInt64
+    set_blue : UInt64
+    set_blue2 : UInt64
+    set_alpha : UInt64
+    set_alpha2 : UInt64
   end
 
   IDCompositionShadowEffect_GUID = "4ad18ac0-cfd2-4c2f-bb62-96e54fdb6879"
@@ -859,12 +859,12 @@ lib LibWin32
   end
 
   struct IDCompositionHueRotationEffectVTbl
-    query_interface : Proc(IDCompositionHueRotationEffect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionHueRotationEffect*, UInt32)
-    release : Proc(IDCompositionHueRotationEffect*, UInt32)
-    set_input : Proc(IDCompositionHueRotationEffect*, UInt32, IUnknown, UInt32, HRESULT)
-    set_angle : Proc(IDCompositionHueRotationEffect*, IDCompositionAnimation, HRESULT)
-    set_angle2 : Proc(IDCompositionHueRotationEffect*, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input : UInt64
+    set_angle : UInt64
+    set_angle2 : UInt64
   end
 
   IDCompositionHueRotationEffect_GUID = "6db9f920-0770-4781-b0c6-381912f9d167"
@@ -874,12 +874,12 @@ lib LibWin32
   end
 
   struct IDCompositionSaturationEffectVTbl
-    query_interface : Proc(IDCompositionSaturationEffect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionSaturationEffect*, UInt32)
-    release : Proc(IDCompositionSaturationEffect*, UInt32)
-    set_input : Proc(IDCompositionSaturationEffect*, UInt32, IUnknown, UInt32, HRESULT)
-    set_saturation : Proc(IDCompositionSaturationEffect*, IDCompositionAnimation, HRESULT)
-    set_saturation2 : Proc(IDCompositionSaturationEffect*, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input : UInt64
+    set_saturation : UInt64
+    set_saturation2 : UInt64
   end
 
   IDCompositionSaturationEffect_GUID = "a08debda-3258-4fa4-9f16-9174d3fe93b1"
@@ -889,17 +889,17 @@ lib LibWin32
   end
 
   struct IDCompositionTurbulenceEffectVTbl
-    query_interface : Proc(IDCompositionTurbulenceEffect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionTurbulenceEffect*, UInt32)
-    release : Proc(IDCompositionTurbulenceEffect*, UInt32)
-    set_input : Proc(IDCompositionTurbulenceEffect*, UInt32, IUnknown, UInt32, HRESULT)
-    set_offset : Proc(IDCompositionTurbulenceEffect*, D2D_VECTOR_2F*, HRESULT)
-    set_base_frequency : Proc(IDCompositionTurbulenceEffect*, D2D_VECTOR_2F*, HRESULT)
-    set_size : Proc(IDCompositionTurbulenceEffect*, D2D_VECTOR_2F*, HRESULT)
-    set_num_octaves : Proc(IDCompositionTurbulenceEffect*, UInt32, HRESULT)
-    set_seed : Proc(IDCompositionTurbulenceEffect*, UInt32, HRESULT)
-    set_noise : Proc(IDCompositionTurbulenceEffect*, D2D1_TURBULENCE_NOISE, HRESULT)
-    set_stitchable : Proc(IDCompositionTurbulenceEffect*, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input : UInt64
+    set_offset : UInt64
+    set_base_frequency : UInt64
+    set_size : UInt64
+    set_num_octaves : UInt64
+    set_seed : UInt64
+    set_noise : UInt64
+    set_stitchable : UInt64
   end
 
   IDCompositionTurbulenceEffect_GUID = "a6a55bda-c09c-49f3-9193-a41922c89715"
@@ -909,31 +909,31 @@ lib LibWin32
   end
 
   struct IDCompositionLinearTransferEffectVTbl
-    query_interface : Proc(IDCompositionLinearTransferEffect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionLinearTransferEffect*, UInt32)
-    release : Proc(IDCompositionLinearTransferEffect*, UInt32)
-    set_input : Proc(IDCompositionLinearTransferEffect*, UInt32, IUnknown, UInt32, HRESULT)
-    set_red_y_intercept : Proc(IDCompositionLinearTransferEffect*, IDCompositionAnimation, HRESULT)
-    set_red_y_intercept2 : Proc(IDCompositionLinearTransferEffect*, Float32, HRESULT)
-    set_red_slope : Proc(IDCompositionLinearTransferEffect*, IDCompositionAnimation, HRESULT)
-    set_red_slope2 : Proc(IDCompositionLinearTransferEffect*, Float32, HRESULT)
-    set_red_disable : Proc(IDCompositionLinearTransferEffect*, LibC::BOOL, HRESULT)
-    set_green_y_intercept : Proc(IDCompositionLinearTransferEffect*, IDCompositionAnimation, HRESULT)
-    set_green_y_intercept2 : Proc(IDCompositionLinearTransferEffect*, Float32, HRESULT)
-    set_green_slope : Proc(IDCompositionLinearTransferEffect*, IDCompositionAnimation, HRESULT)
-    set_green_slope2 : Proc(IDCompositionLinearTransferEffect*, Float32, HRESULT)
-    set_green_disable : Proc(IDCompositionLinearTransferEffect*, LibC::BOOL, HRESULT)
-    set_blue_y_intercept : Proc(IDCompositionLinearTransferEffect*, IDCompositionAnimation, HRESULT)
-    set_blue_y_intercept2 : Proc(IDCompositionLinearTransferEffect*, Float32, HRESULT)
-    set_blue_slope : Proc(IDCompositionLinearTransferEffect*, IDCompositionAnimation, HRESULT)
-    set_blue_slope2 : Proc(IDCompositionLinearTransferEffect*, Float32, HRESULT)
-    set_blue_disable : Proc(IDCompositionLinearTransferEffect*, LibC::BOOL, HRESULT)
-    set_alpha_y_intercept : Proc(IDCompositionLinearTransferEffect*, IDCompositionAnimation, HRESULT)
-    set_alpha_y_intercept2 : Proc(IDCompositionLinearTransferEffect*, Float32, HRESULT)
-    set_alpha_slope : Proc(IDCompositionLinearTransferEffect*, IDCompositionAnimation, HRESULT)
-    set_alpha_slope2 : Proc(IDCompositionLinearTransferEffect*, Float32, HRESULT)
-    set_alpha_disable : Proc(IDCompositionLinearTransferEffect*, LibC::BOOL, HRESULT)
-    set_clamp_output : Proc(IDCompositionLinearTransferEffect*, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input : UInt64
+    set_red_y_intercept : UInt64
+    set_red_y_intercept2 : UInt64
+    set_red_slope : UInt64
+    set_red_slope2 : UInt64
+    set_red_disable : UInt64
+    set_green_y_intercept : UInt64
+    set_green_y_intercept2 : UInt64
+    set_green_slope : UInt64
+    set_green_slope2 : UInt64
+    set_green_disable : UInt64
+    set_blue_y_intercept : UInt64
+    set_blue_y_intercept2 : UInt64
+    set_blue_slope : UInt64
+    set_blue_slope2 : UInt64
+    set_blue_disable : UInt64
+    set_alpha_y_intercept : UInt64
+    set_alpha_y_intercept2 : UInt64
+    set_alpha_slope : UInt64
+    set_alpha_slope2 : UInt64
+    set_alpha_disable : UInt64
+    set_clamp_output : UInt64
   end
 
   IDCompositionLinearTransferEffect_GUID = "4305ee5b-c4a0-4c88-9385-67124e017683"
@@ -943,27 +943,27 @@ lib LibWin32
   end
 
   struct IDCompositionTableTransferEffectVTbl
-    query_interface : Proc(IDCompositionTableTransferEffect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionTableTransferEffect*, UInt32)
-    release : Proc(IDCompositionTableTransferEffect*, UInt32)
-    set_input : Proc(IDCompositionTableTransferEffect*, UInt32, IUnknown, UInt32, HRESULT)
-    set_red_table : Proc(IDCompositionTableTransferEffect*, Float32*, UInt32, HRESULT)
-    set_green_table : Proc(IDCompositionTableTransferEffect*, Float32*, UInt32, HRESULT)
-    set_blue_table : Proc(IDCompositionTableTransferEffect*, Float32*, UInt32, HRESULT)
-    set_alpha_table : Proc(IDCompositionTableTransferEffect*, Float32*, UInt32, HRESULT)
-    set_red_disable : Proc(IDCompositionTableTransferEffect*, LibC::BOOL, HRESULT)
-    set_green_disable : Proc(IDCompositionTableTransferEffect*, LibC::BOOL, HRESULT)
-    set_blue_disable : Proc(IDCompositionTableTransferEffect*, LibC::BOOL, HRESULT)
-    set_alpha_disable : Proc(IDCompositionTableTransferEffect*, LibC::BOOL, HRESULT)
-    set_clamp_output : Proc(IDCompositionTableTransferEffect*, LibC::BOOL, HRESULT)
-    set_red_table_value : Proc(IDCompositionTableTransferEffect*, UInt32, IDCompositionAnimation, HRESULT)
-    set_red_table_value2 : Proc(IDCompositionTableTransferEffect*, UInt32, Float32, HRESULT)
-    set_green_table_value : Proc(IDCompositionTableTransferEffect*, UInt32, IDCompositionAnimation, HRESULT)
-    set_green_table_value2 : Proc(IDCompositionTableTransferEffect*, UInt32, Float32, HRESULT)
-    set_blue_table_value : Proc(IDCompositionTableTransferEffect*, UInt32, IDCompositionAnimation, HRESULT)
-    set_blue_table_value2 : Proc(IDCompositionTableTransferEffect*, UInt32, Float32, HRESULT)
-    set_alpha_table_value : Proc(IDCompositionTableTransferEffect*, UInt32, IDCompositionAnimation, HRESULT)
-    set_alpha_table_value2 : Proc(IDCompositionTableTransferEffect*, UInt32, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input : UInt64
+    set_red_table : UInt64
+    set_green_table : UInt64
+    set_blue_table : UInt64
+    set_alpha_table : UInt64
+    set_red_disable : UInt64
+    set_green_disable : UInt64
+    set_blue_disable : UInt64
+    set_alpha_disable : UInt64
+    set_clamp_output : UInt64
+    set_red_table_value : UInt64
+    set_red_table_value2 : UInt64
+    set_green_table_value : UInt64
+    set_green_table_value2 : UInt64
+    set_blue_table_value : UInt64
+    set_blue_table_value2 : UInt64
+    set_alpha_table_value : UInt64
+    set_alpha_table_value2 : UInt64
   end
 
   IDCompositionTableTransferEffect_GUID = "9b7e82e2-69c5-4eb4-a5f5-a7033f5132cd"
@@ -973,11 +973,11 @@ lib LibWin32
   end
 
   struct IDCompositionCompositeEffectVTbl
-    query_interface : Proc(IDCompositionCompositeEffect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionCompositeEffect*, UInt32)
-    release : Proc(IDCompositionCompositeEffect*, UInt32)
-    set_input : Proc(IDCompositionCompositeEffect*, UInt32, IUnknown, UInt32, HRESULT)
-    set_mode : Proc(IDCompositionCompositeEffect*, D2D1_COMPOSITE_MODE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input : UInt64
+    set_mode : UInt64
   end
 
   IDCompositionCompositeEffect_GUID = "576616c0-a231-494d-a38d-00fd5ec4db46"
@@ -987,11 +987,11 @@ lib LibWin32
   end
 
   struct IDCompositionBlendEffectVTbl
-    query_interface : Proc(IDCompositionBlendEffect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionBlendEffect*, UInt32)
-    release : Proc(IDCompositionBlendEffect*, UInt32)
-    set_input : Proc(IDCompositionBlendEffect*, UInt32, IUnknown, UInt32, HRESULT)
-    set_mode : Proc(IDCompositionBlendEffect*, D2D1_BLEND_MODE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input : UInt64
+    set_mode : UInt64
   end
 
   IDCompositionBlendEffect_GUID = "33ecdc0a-578a-4a11-9c14-0cb90517f9c5"
@@ -1001,20 +1001,20 @@ lib LibWin32
   end
 
   struct IDCompositionArithmeticCompositeEffectVTbl
-    query_interface : Proc(IDCompositionArithmeticCompositeEffect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionArithmeticCompositeEffect*, UInt32)
-    release : Proc(IDCompositionArithmeticCompositeEffect*, UInt32)
-    set_input : Proc(IDCompositionArithmeticCompositeEffect*, UInt32, IUnknown, UInt32, HRESULT)
-    set_coefficients : Proc(IDCompositionArithmeticCompositeEffect*, D2D_VECTOR_4F*, HRESULT)
-    set_clamp_output : Proc(IDCompositionArithmeticCompositeEffect*, LibC::BOOL, HRESULT)
-    set_coefficient1 : Proc(IDCompositionArithmeticCompositeEffect*, IDCompositionAnimation, HRESULT)
-    set_coefficient12 : Proc(IDCompositionArithmeticCompositeEffect*, Float32, HRESULT)
-    set_coefficient2 : Proc(IDCompositionArithmeticCompositeEffect*, IDCompositionAnimation, HRESULT)
-    set_coefficient22 : Proc(IDCompositionArithmeticCompositeEffect*, Float32, HRESULT)
-    set_coefficient3 : Proc(IDCompositionArithmeticCompositeEffect*, IDCompositionAnimation, HRESULT)
-    set_coefficient32 : Proc(IDCompositionArithmeticCompositeEffect*, Float32, HRESULT)
-    set_coefficient4 : Proc(IDCompositionArithmeticCompositeEffect*, IDCompositionAnimation, HRESULT)
-    set_coefficient42 : Proc(IDCompositionArithmeticCompositeEffect*, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input : UInt64
+    set_coefficients : UInt64
+    set_clamp_output : UInt64
+    set_coefficient1 : UInt64
+    set_coefficient12 : UInt64
+    set_coefficient2 : UInt64
+    set_coefficient22 : UInt64
+    set_coefficient3 : UInt64
+    set_coefficient32 : UInt64
+    set_coefficient4 : UInt64
+    set_coefficient42 : UInt64
   end
 
   IDCompositionArithmeticCompositeEffect_GUID = "3b67dfa8-e3dd-4e61-b640-46c2f3d739dc"
@@ -1024,17 +1024,17 @@ lib LibWin32
   end
 
   struct IDCompositionAffineTransform2DEffectVTbl
-    query_interface : Proc(IDCompositionAffineTransform2DEffect*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionAffineTransform2DEffect*, UInt32)
-    release : Proc(IDCompositionAffineTransform2DEffect*, UInt32)
-    set_input : Proc(IDCompositionAffineTransform2DEffect*, UInt32, IUnknown, UInt32, HRESULT)
-    set_interpolation_mode : Proc(IDCompositionAffineTransform2DEffect*, D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE, HRESULT)
-    set_border_mode : Proc(IDCompositionAffineTransform2DEffect*, D2D1_BORDER_MODE, HRESULT)
-    set_transform_matrix : Proc(IDCompositionAffineTransform2DEffect*, D2D_MATRIX_3X2_F*, HRESULT)
-    set_transform_matrix_element : Proc(IDCompositionAffineTransform2DEffect*, Int32, Int32, IDCompositionAnimation, HRESULT)
-    set_transform_matrix_element2 : Proc(IDCompositionAffineTransform2DEffect*, Int32, Int32, Float32, HRESULT)
-    set_sharpness : Proc(IDCompositionAffineTransform2DEffect*, IDCompositionAnimation, HRESULT)
-    set_sharpness2 : Proc(IDCompositionAffineTransform2DEffect*, Float32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input : UInt64
+    set_interpolation_mode : UInt64
+    set_border_mode : UInt64
+    set_transform_matrix : UInt64
+    set_transform_matrix_element : UInt64
+    set_transform_matrix_element2 : UInt64
+    set_sharpness : UInt64
+    set_sharpness2 : UInt64
   end
 
   IDCompositionAffineTransform2DEffect_GUID = "0b74b9e8-cdd6-492f-bbbc-5ed32157026d"
@@ -1044,13 +1044,13 @@ lib LibWin32
   end
 
   struct IDCompositionDelegatedInkTrailVTbl
-    query_interface : Proc(IDCompositionDelegatedInkTrail*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionDelegatedInkTrail*, UInt32)
-    release : Proc(IDCompositionDelegatedInkTrail*, UInt32)
-    add_trail_points : Proc(IDCompositionDelegatedInkTrail*, DCompositionInkTrailPoint*, UInt32, UInt32*, HRESULT)
-    add_trail_points_with_prediction : Proc(IDCompositionDelegatedInkTrail*, DCompositionInkTrailPoint*, UInt32, DCompositionInkTrailPoint*, UInt32, UInt32*, HRESULT)
-    remove_trail_points : Proc(IDCompositionDelegatedInkTrail*, UInt32, HRESULT)
-    start_new_trail : Proc(IDCompositionDelegatedInkTrail*, D2D1_COLOR_F*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_trail_points : UInt64
+    add_trail_points_with_prediction : UInt64
+    remove_trail_points : UInt64
+    start_new_trail : UInt64
   end
 
   IDCompositionDelegatedInkTrail_GUID = "c2448e9b-547d-4057-8cf5-8144ede1c2da"
@@ -1060,11 +1060,11 @@ lib LibWin32
   end
 
   struct IDCompositionInkTrailDeviceVTbl
-    query_interface : Proc(IDCompositionInkTrailDevice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDCompositionInkTrailDevice*, UInt32)
-    release : Proc(IDCompositionInkTrailDevice*, UInt32)
-    create_delegated_ink_trail : Proc(IDCompositionInkTrailDevice*, IDCompositionDelegatedInkTrail*, HRESULT)
-    create_delegated_ink_trail_for_swap_chain : Proc(IDCompositionInkTrailDevice*, IUnknown, IDCompositionDelegatedInkTrail*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_delegated_ink_trail : UInt64
+    create_delegated_ink_trail_for_swap_chain : UInt64
   end
 
   IDCompositionInkTrailDevice_GUID = "df0c7cec-cdeb-4d4a-b91c-721bf22f4e6c"
@@ -1106,4 +1106,1771 @@ lib LibWin32
 
   # Params # count : UInt32 [In],handles : LibC::HANDLE* [In],timeoutinms : UInt32 [In]
   fun DCompositionWaitForCompositorClock(count : UInt32, handles : LibC::HANDLE*, timeoutinms : UInt32) : UInt32
+end
+struct LibWin32::IDCompositionAnimation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_absolute_begin_time(begintime : LARGE_INTEGER) : HRESULT
+    @lpVtbl.value.set_absolute_begin_time.unsafe_as(Proc(LARGE_INTEGER, HRESULT)).call(begintime)
+  end
+  def add_cubic(beginoffset : Float64, constantcoefficient : Float32, linearcoefficient : Float32, quadraticcoefficient : Float32, cubiccoefficient : Float32) : HRESULT
+    @lpVtbl.value.add_cubic.unsafe_as(Proc(Float64, Float32, Float32, Float32, Float32, HRESULT)).call(beginoffset, constantcoefficient, linearcoefficient, quadraticcoefficient, cubiccoefficient)
+  end
+  def add_sinusoidal(beginoffset : Float64, bias : Float32, amplitude : Float32, frequency : Float32, phase : Float32) : HRESULT
+    @lpVtbl.value.add_sinusoidal.unsafe_as(Proc(Float64, Float32, Float32, Float32, Float32, HRESULT)).call(beginoffset, bias, amplitude, frequency, phase)
+  end
+  def add_repeat(beginoffset : Float64, durationtorepeat : Float64) : HRESULT
+    @lpVtbl.value.add_repeat.unsafe_as(Proc(Float64, Float64, HRESULT)).call(beginoffset, durationtorepeat)
+  end
+  def end_(endoffset : Float64, endvalue : Float32) : HRESULT
+    @lpVtbl.value.end_.unsafe_as(Proc(Float64, Float32, HRESULT)).call(endoffset, endvalue)
+  end
+end
+struct LibWin32::IDCompositionDevice
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def commit : HRESULT
+    @lpVtbl.value.commit.unsafe_as(Proc(HRESULT)).call
+  end
+  def wait_for_commit_completion : HRESULT
+    @lpVtbl.value.wait_for_commit_completion.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_frame_statistics(statistics : DCOMPOSITION_FRAME_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_frame_statistics.unsafe_as(Proc(DCOMPOSITION_FRAME_STATISTICS*, HRESULT)).call(statistics)
+  end
+  def create_target_for_hwnd(hwnd : LibC::HANDLE, topmost : LibC::BOOL, target : IDCompositionTarget*) : HRESULT
+    @lpVtbl.value.create_target_for_hwnd.unsafe_as(Proc(LibC::HANDLE, LibC::BOOL, IDCompositionTarget*, HRESULT)).call(hwnd, topmost, target)
+  end
+  def create_visual(visual : IDCompositionVisual*) : HRESULT
+    @lpVtbl.value.create_visual.unsafe_as(Proc(IDCompositionVisual*, HRESULT)).call(visual)
+  end
+  def create_surface(width : UInt32, height : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, surface : IDCompositionSurface*) : HRESULT
+    @lpVtbl.value.create_surface.unsafe_as(Proc(UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionSurface*, HRESULT)).call(width, height, pixelformat, alphamode, surface)
+  end
+  def create_virtual_surface(initialwidth : UInt32, initialheight : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, virtualsurface : IDCompositionVirtualSurface*) : HRESULT
+    @lpVtbl.value.create_virtual_surface.unsafe_as(Proc(UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionVirtualSurface*, HRESULT)).call(initialwidth, initialheight, pixelformat, alphamode, virtualsurface)
+  end
+  def create_surface_from_handle(handle : LibC::HANDLE, surface : IUnknown*) : HRESULT
+    @lpVtbl.value.create_surface_from_handle.unsafe_as(Proc(LibC::HANDLE, IUnknown*, HRESULT)).call(handle, surface)
+  end
+  def create_surface_from_hwnd(hwnd : LibC::HANDLE, surface : IUnknown*) : HRESULT
+    @lpVtbl.value.create_surface_from_hwnd.unsafe_as(Proc(LibC::HANDLE, IUnknown*, HRESULT)).call(hwnd, surface)
+  end
+  def create_translate_transform(translatetransform : IDCompositionTranslateTransform*) : HRESULT
+    @lpVtbl.value.create_translate_transform.unsafe_as(Proc(IDCompositionTranslateTransform*, HRESULT)).call(translatetransform)
+  end
+  def create_scale_transform(scaletransform : IDCompositionScaleTransform*) : HRESULT
+    @lpVtbl.value.create_scale_transform.unsafe_as(Proc(IDCompositionScaleTransform*, HRESULT)).call(scaletransform)
+  end
+  def create_rotate_transform(rotatetransform : IDCompositionRotateTransform*) : HRESULT
+    @lpVtbl.value.create_rotate_transform.unsafe_as(Proc(IDCompositionRotateTransform*, HRESULT)).call(rotatetransform)
+  end
+  def create_skew_transform(skewtransform : IDCompositionSkewTransform*) : HRESULT
+    @lpVtbl.value.create_skew_transform.unsafe_as(Proc(IDCompositionSkewTransform*, HRESULT)).call(skewtransform)
+  end
+  def create_matrix_transform(matrixtransform : IDCompositionMatrixTransform*) : HRESULT
+    @lpVtbl.value.create_matrix_transform.unsafe_as(Proc(IDCompositionMatrixTransform*, HRESULT)).call(matrixtransform)
+  end
+  def create_transform_group(transforms : IDCompositionTransform*, elements : UInt32, transformgroup : IDCompositionTransform*) : HRESULT
+    @lpVtbl.value.create_transform_group.unsafe_as(Proc(IDCompositionTransform*, UInt32, IDCompositionTransform*, HRESULT)).call(transforms, elements, transformgroup)
+  end
+  def create_translate_transform3_d(translatetransform3d : IDCompositionTranslateTransform3D*) : HRESULT
+    @lpVtbl.value.create_translate_transform3_d.unsafe_as(Proc(IDCompositionTranslateTransform3D*, HRESULT)).call(translatetransform3d)
+  end
+  def create_scale_transform3_d(scaletransform3d : IDCompositionScaleTransform3D*) : HRESULT
+    @lpVtbl.value.create_scale_transform3_d.unsafe_as(Proc(IDCompositionScaleTransform3D*, HRESULT)).call(scaletransform3d)
+  end
+  def create_rotate_transform3_d(rotatetransform3d : IDCompositionRotateTransform3D*) : HRESULT
+    @lpVtbl.value.create_rotate_transform3_d.unsafe_as(Proc(IDCompositionRotateTransform3D*, HRESULT)).call(rotatetransform3d)
+  end
+  def create_matrix_transform3_d(matrixtransform3d : IDCompositionMatrixTransform3D*) : HRESULT
+    @lpVtbl.value.create_matrix_transform3_d.unsafe_as(Proc(IDCompositionMatrixTransform3D*, HRESULT)).call(matrixtransform3d)
+  end
+  def create_transform3_d_group(transforms3d : IDCompositionTransform3D*, elements : UInt32, transform3dgroup : IDCompositionTransform3D*) : HRESULT
+    @lpVtbl.value.create_transform3_d_group.unsafe_as(Proc(IDCompositionTransform3D*, UInt32, IDCompositionTransform3D*, HRESULT)).call(transforms3d, elements, transform3dgroup)
+  end
+  def create_effect_group(effectgroup : IDCompositionEffectGroup*) : HRESULT
+    @lpVtbl.value.create_effect_group.unsafe_as(Proc(IDCompositionEffectGroup*, HRESULT)).call(effectgroup)
+  end
+  def create_rectangle_clip(clip : IDCompositionRectangleClip*) : HRESULT
+    @lpVtbl.value.create_rectangle_clip.unsafe_as(Proc(IDCompositionRectangleClip*, HRESULT)).call(clip)
+  end
+  def create_animation(animation : IDCompositionAnimation*) : HRESULT
+    @lpVtbl.value.create_animation.unsafe_as(Proc(IDCompositionAnimation*, HRESULT)).call(animation)
+  end
+  def check_device_state(pfvalid : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_device_state.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfvalid)
+  end
+end
+struct LibWin32::IDCompositionTarget
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_root(visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.set_root.unsafe_as(Proc(IDCompositionVisual, HRESULT)).call(visual)
+  end
+end
+struct LibWin32::IDCompositionVisual
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_offset_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_offset_x2(offsetx : Float32) : HRESULT
+    @lpVtbl.value.set_offset_x2.unsafe_as(Proc(Float32, HRESULT)).call(offsetx)
+  end
+  def set_offset_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_offset_y2(offsety : Float32) : HRESULT
+    @lpVtbl.value.set_offset_y2.unsafe_as(Proc(Float32, HRESULT)).call(offsety)
+  end
+  def set_transform(transform : IDCompositionTransform) : HRESULT
+    @lpVtbl.value.set_transform.unsafe_as(Proc(IDCompositionTransform, HRESULT)).call(transform)
+  end
+  def set_transform2(matrix : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform2.unsafe_as(Proc(D2D_MATRIX_3X2_F*, HRESULT)).call(matrix)
+  end
+  def set_transform_parent(visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.set_transform_parent.unsafe_as(Proc(IDCompositionVisual, HRESULT)).call(visual)
+  end
+  def set_effect(effect : IDCompositionEffect) : HRESULT
+    @lpVtbl.value.set_effect.unsafe_as(Proc(IDCompositionEffect, HRESULT)).call(effect)
+  end
+  def set_bitmap_interpolation_mode(interpolationmode : DCOMPOSITION_BITMAP_INTERPOLATION_MODE) : HRESULT
+    @lpVtbl.value.set_bitmap_interpolation_mode.unsafe_as(Proc(DCOMPOSITION_BITMAP_INTERPOLATION_MODE, HRESULT)).call(interpolationmode)
+  end
+  def set_border_mode(bordermode : DCOMPOSITION_BORDER_MODE) : HRESULT
+    @lpVtbl.value.set_border_mode.unsafe_as(Proc(DCOMPOSITION_BORDER_MODE, HRESULT)).call(bordermode)
+  end
+  def set_clip(clip : IDCompositionClip) : HRESULT
+    @lpVtbl.value.set_clip.unsafe_as(Proc(IDCompositionClip, HRESULT)).call(clip)
+  end
+  def set_clip2(rect : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.set_clip2.unsafe_as(Proc(D2D_RECT_F*, HRESULT)).call(rect)
+  end
+  def set_content(content : IUnknown) : HRESULT
+    @lpVtbl.value.set_content.unsafe_as(Proc(IUnknown, HRESULT)).call(content)
+  end
+  def add_visual(visual : IDCompositionVisual, insertabove : LibC::BOOL, referencevisual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.add_visual.unsafe_as(Proc(IDCompositionVisual, LibC::BOOL, IDCompositionVisual, HRESULT)).call(visual, insertabove, referencevisual)
+  end
+  def remove_visual(visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.remove_visual.unsafe_as(Proc(IDCompositionVisual, HRESULT)).call(visual)
+  end
+  def remove_all_visuals : HRESULT
+    @lpVtbl.value.remove_all_visuals.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_composite_mode(compositemode : DCOMPOSITION_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.set_composite_mode.unsafe_as(Proc(DCOMPOSITION_COMPOSITE_MODE, HRESULT)).call(compositemode)
+  end
+end
+struct LibWin32::IDCompositionEffect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::IDCompositionTransform3D
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::IDCompositionTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::IDCompositionTranslateTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_offset_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_offset_x2(offsetx : Float32) : HRESULT
+    @lpVtbl.value.set_offset_x2.unsafe_as(Proc(Float32, HRESULT)).call(offsetx)
+  end
+  def set_offset_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_offset_y2(offsety : Float32) : HRESULT
+    @lpVtbl.value.set_offset_y2.unsafe_as(Proc(Float32, HRESULT)).call(offsety)
+  end
+end
+struct LibWin32::IDCompositionScaleTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_scale_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_scale_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_scale_x2(scalex : Float32) : HRESULT
+    @lpVtbl.value.set_scale_x2.unsafe_as(Proc(Float32, HRESULT)).call(scalex)
+  end
+  def set_scale_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_scale_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_scale_y2(scaley : Float32) : HRESULT
+    @lpVtbl.value.set_scale_y2.unsafe_as(Proc(Float32, HRESULT)).call(scaley)
+  end
+  def set_center_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_center_x2(centerx : Float32) : HRESULT
+    @lpVtbl.value.set_center_x2.unsafe_as(Proc(Float32, HRESULT)).call(centerx)
+  end
+  def set_center_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_center_y2(centery : Float32) : HRESULT
+    @lpVtbl.value.set_center_y2.unsafe_as(Proc(Float32, HRESULT)).call(centery)
+  end
+end
+struct LibWin32::IDCompositionRotateTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_angle(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_angle.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_angle2(angle : Float32) : HRESULT
+    @lpVtbl.value.set_angle2.unsafe_as(Proc(Float32, HRESULT)).call(angle)
+  end
+  def set_center_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_center_x2(centerx : Float32) : HRESULT
+    @lpVtbl.value.set_center_x2.unsafe_as(Proc(Float32, HRESULT)).call(centerx)
+  end
+  def set_center_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_center_y2(centery : Float32) : HRESULT
+    @lpVtbl.value.set_center_y2.unsafe_as(Proc(Float32, HRESULT)).call(centery)
+  end
+end
+struct LibWin32::IDCompositionSkewTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_angle_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_angle_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_angle_x2(anglex : Float32) : HRESULT
+    @lpVtbl.value.set_angle_x2.unsafe_as(Proc(Float32, HRESULT)).call(anglex)
+  end
+  def set_angle_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_angle_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_angle_y2(angley : Float32) : HRESULT
+    @lpVtbl.value.set_angle_y2.unsafe_as(Proc(Float32, HRESULT)).call(angley)
+  end
+  def set_center_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_center_x2(centerx : Float32) : HRESULT
+    @lpVtbl.value.set_center_x2.unsafe_as(Proc(Float32, HRESULT)).call(centerx)
+  end
+  def set_center_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_center_y2(centery : Float32) : HRESULT
+    @lpVtbl.value.set_center_y2.unsafe_as(Proc(Float32, HRESULT)).call(centery)
+  end
+end
+struct LibWin32::IDCompositionMatrixTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_matrix(matrix : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_matrix.unsafe_as(Proc(D2D_MATRIX_3X2_F*, HRESULT)).call(matrix)
+  end
+  def set_matrix_element(row : Int32, column : Int32, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_matrix_element.unsafe_as(Proc(Int32, Int32, IDCompositionAnimation, HRESULT)).call(row, column, animation)
+  end
+  def set_matrix_element2(row : Int32, column : Int32, value : Float32) : HRESULT
+    @lpVtbl.value.set_matrix_element2.unsafe_as(Proc(Int32, Int32, Float32, HRESULT)).call(row, column, value)
+  end
+end
+struct LibWin32::IDCompositionEffectGroup
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_opacity(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_opacity2(opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity2.unsafe_as(Proc(Float32, HRESULT)).call(opacity)
+  end
+  def set_transform3_d(transform3d : IDCompositionTransform3D) : HRESULT
+    @lpVtbl.value.set_transform3_d.unsafe_as(Proc(IDCompositionTransform3D, HRESULT)).call(transform3d)
+  end
+end
+struct LibWin32::IDCompositionTranslateTransform3D
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_offset_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_offset_x2(offsetx : Float32) : HRESULT
+    @lpVtbl.value.set_offset_x2.unsafe_as(Proc(Float32, HRESULT)).call(offsetx)
+  end
+  def set_offset_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_offset_y2(offsety : Float32) : HRESULT
+    @lpVtbl.value.set_offset_y2.unsafe_as(Proc(Float32, HRESULT)).call(offsety)
+  end
+  def set_offset_z(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_z.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_offset_z2(offsetz : Float32) : HRESULT
+    @lpVtbl.value.set_offset_z2.unsafe_as(Proc(Float32, HRESULT)).call(offsetz)
+  end
+end
+struct LibWin32::IDCompositionScaleTransform3D
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_scale_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_scale_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_scale_x2(scalex : Float32) : HRESULT
+    @lpVtbl.value.set_scale_x2.unsafe_as(Proc(Float32, HRESULT)).call(scalex)
+  end
+  def set_scale_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_scale_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_scale_y2(scaley : Float32) : HRESULT
+    @lpVtbl.value.set_scale_y2.unsafe_as(Proc(Float32, HRESULT)).call(scaley)
+  end
+  def set_scale_z(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_scale_z.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_scale_z2(scalez : Float32) : HRESULT
+    @lpVtbl.value.set_scale_z2.unsafe_as(Proc(Float32, HRESULT)).call(scalez)
+  end
+  def set_center_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_center_x2(centerx : Float32) : HRESULT
+    @lpVtbl.value.set_center_x2.unsafe_as(Proc(Float32, HRESULT)).call(centerx)
+  end
+  def set_center_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_center_y2(centery : Float32) : HRESULT
+    @lpVtbl.value.set_center_y2.unsafe_as(Proc(Float32, HRESULT)).call(centery)
+  end
+  def set_center_z(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_z.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_center_z2(centerz : Float32) : HRESULT
+    @lpVtbl.value.set_center_z2.unsafe_as(Proc(Float32, HRESULT)).call(centerz)
+  end
+end
+struct LibWin32::IDCompositionRotateTransform3D
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_angle(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_angle.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_angle2(angle : Float32) : HRESULT
+    @lpVtbl.value.set_angle2.unsafe_as(Proc(Float32, HRESULT)).call(angle)
+  end
+  def set_axis_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_axis_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_axis_x2(axisx : Float32) : HRESULT
+    @lpVtbl.value.set_axis_x2.unsafe_as(Proc(Float32, HRESULT)).call(axisx)
+  end
+  def set_axis_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_axis_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_axis_y2(axisy : Float32) : HRESULT
+    @lpVtbl.value.set_axis_y2.unsafe_as(Proc(Float32, HRESULT)).call(axisy)
+  end
+  def set_axis_z(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_axis_z.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_axis_z2(axisz : Float32) : HRESULT
+    @lpVtbl.value.set_axis_z2.unsafe_as(Proc(Float32, HRESULT)).call(axisz)
+  end
+  def set_center_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_center_x2(centerx : Float32) : HRESULT
+    @lpVtbl.value.set_center_x2.unsafe_as(Proc(Float32, HRESULT)).call(centerx)
+  end
+  def set_center_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_center_y2(centery : Float32) : HRESULT
+    @lpVtbl.value.set_center_y2.unsafe_as(Proc(Float32, HRESULT)).call(centery)
+  end
+  def set_center_z(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_center_z.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_center_z2(centerz : Float32) : HRESULT
+    @lpVtbl.value.set_center_z2.unsafe_as(Proc(Float32, HRESULT)).call(centerz)
+  end
+end
+struct LibWin32::IDCompositionMatrixTransform3D
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_matrix(matrix : D3DMATRIX*) : HRESULT
+    @lpVtbl.value.set_matrix.unsafe_as(Proc(D3DMATRIX*, HRESULT)).call(matrix)
+  end
+  def set_matrix_element(row : Int32, column : Int32, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_matrix_element.unsafe_as(Proc(Int32, Int32, IDCompositionAnimation, HRESULT)).call(row, column, animation)
+  end
+  def set_matrix_element2(row : Int32, column : Int32, value : Float32) : HRESULT
+    @lpVtbl.value.set_matrix_element2.unsafe_as(Proc(Int32, Int32, Float32, HRESULT)).call(row, column, value)
+  end
+end
+struct LibWin32::IDCompositionClip
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::IDCompositionRectangleClip
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_left(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_left.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_left2(left : Float32) : HRESULT
+    @lpVtbl.value.set_left2.unsafe_as(Proc(Float32, HRESULT)).call(left)
+  end
+  def set_top(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_top.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_top2(top : Float32) : HRESULT
+    @lpVtbl.value.set_top2.unsafe_as(Proc(Float32, HRESULT)).call(top)
+  end
+  def set_right(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_right.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_right2(right : Float32) : HRESULT
+    @lpVtbl.value.set_right2.unsafe_as(Proc(Float32, HRESULT)).call(right)
+  end
+  def set_bottom(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_bottom.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_bottom2(bottom : Float32) : HRESULT
+    @lpVtbl.value.set_bottom2.unsafe_as(Proc(Float32, HRESULT)).call(bottom)
+  end
+  def set_top_left_radius_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_top_left_radius_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_top_left_radius_x2(radius : Float32) : HRESULT
+    @lpVtbl.value.set_top_left_radius_x2.unsafe_as(Proc(Float32, HRESULT)).call(radius)
+  end
+  def set_top_left_radius_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_top_left_radius_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_top_left_radius_y2(radius : Float32) : HRESULT
+    @lpVtbl.value.set_top_left_radius_y2.unsafe_as(Proc(Float32, HRESULT)).call(radius)
+  end
+  def set_top_right_radius_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_top_right_radius_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_top_right_radius_x2(radius : Float32) : HRESULT
+    @lpVtbl.value.set_top_right_radius_x2.unsafe_as(Proc(Float32, HRESULT)).call(radius)
+  end
+  def set_top_right_radius_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_top_right_radius_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_top_right_radius_y2(radius : Float32) : HRESULT
+    @lpVtbl.value.set_top_right_radius_y2.unsafe_as(Proc(Float32, HRESULT)).call(radius)
+  end
+  def set_bottom_left_radius_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_bottom_left_radius_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_bottom_left_radius_x2(radius : Float32) : HRESULT
+    @lpVtbl.value.set_bottom_left_radius_x2.unsafe_as(Proc(Float32, HRESULT)).call(radius)
+  end
+  def set_bottom_left_radius_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_bottom_left_radius_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_bottom_left_radius_y2(radius : Float32) : HRESULT
+    @lpVtbl.value.set_bottom_left_radius_y2.unsafe_as(Proc(Float32, HRESULT)).call(radius)
+  end
+  def set_bottom_right_radius_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_bottom_right_radius_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_bottom_right_radius_x2(radius : Float32) : HRESULT
+    @lpVtbl.value.set_bottom_right_radius_x2.unsafe_as(Proc(Float32, HRESULT)).call(radius)
+  end
+  def set_bottom_right_radius_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_bottom_right_radius_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_bottom_right_radius_y2(radius : Float32) : HRESULT
+    @lpVtbl.value.set_bottom_right_radius_y2.unsafe_as(Proc(Float32, HRESULT)).call(radius)
+  end
+end
+struct LibWin32::IDCompositionSurface
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_draw(updaterect : RECT*, iid : Guid*, updateobject : Void**, updateoffset : POINT*) : HRESULT
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(RECT*, Guid*, Void**, POINT*, HRESULT)).call(updaterect, iid, updateobject, updateoffset)
+  end
+  def end_draw : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def suspend_draw : HRESULT
+    @lpVtbl.value.suspend_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume_draw : HRESULT
+    @lpVtbl.value.resume_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def scroll(scrollrect : RECT*, cliprect : RECT*, offsetx : Int32, offsety : Int32) : HRESULT
+    @lpVtbl.value.scroll.unsafe_as(Proc(RECT*, RECT*, Int32, Int32, HRESULT)).call(scrollrect, cliprect, offsetx, offsety)
+  end
+end
+struct LibWin32::IDCompositionVirtualSurface
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_draw(updaterect : RECT*, iid : Guid*, updateobject : Void**, updateoffset : POINT*) : HRESULT
+    @lpVtbl.value.begin_draw.unsafe_as(Proc(RECT*, Guid*, Void**, POINT*, HRESULT)).call(updaterect, iid, updateobject, updateoffset)
+  end
+  def end_draw : HRESULT
+    @lpVtbl.value.end_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def suspend_draw : HRESULT
+    @lpVtbl.value.suspend_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume_draw : HRESULT
+    @lpVtbl.value.resume_draw.unsafe_as(Proc(HRESULT)).call
+  end
+  def scroll(scrollrect : RECT*, cliprect : RECT*, offsetx : Int32, offsety : Int32) : HRESULT
+    @lpVtbl.value.scroll.unsafe_as(Proc(RECT*, RECT*, Int32, Int32, HRESULT)).call(scrollrect, cliprect, offsetx, offsety)
+  end
+  def resize(width : UInt32, height : UInt32) : HRESULT
+    @lpVtbl.value.resize.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(width, height)
+  end
+  def trim(rectangles : RECT*, count : UInt32) : HRESULT
+    @lpVtbl.value.trim.unsafe_as(Proc(RECT*, UInt32, HRESULT)).call(rectangles, count)
+  end
+end
+struct LibWin32::IDCompositionDevice2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def commit : HRESULT
+    @lpVtbl.value.commit.unsafe_as(Proc(HRESULT)).call
+  end
+  def wait_for_commit_completion : HRESULT
+    @lpVtbl.value.wait_for_commit_completion.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_frame_statistics(statistics : DCOMPOSITION_FRAME_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_frame_statistics.unsafe_as(Proc(DCOMPOSITION_FRAME_STATISTICS*, HRESULT)).call(statistics)
+  end
+  def create_visual(visual : IDCompositionVisual2*) : HRESULT
+    @lpVtbl.value.create_visual.unsafe_as(Proc(IDCompositionVisual2*, HRESULT)).call(visual)
+  end
+  def create_surface_factory(renderingdevice : IUnknown, surfacefactory : IDCompositionSurfaceFactory*) : HRESULT
+    @lpVtbl.value.create_surface_factory.unsafe_as(Proc(IUnknown, IDCompositionSurfaceFactory*, HRESULT)).call(renderingdevice, surfacefactory)
+  end
+  def create_surface(width : UInt32, height : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, surface : IDCompositionSurface*) : HRESULT
+    @lpVtbl.value.create_surface.unsafe_as(Proc(UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionSurface*, HRESULT)).call(width, height, pixelformat, alphamode, surface)
+  end
+  def create_virtual_surface(initialwidth : UInt32, initialheight : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, virtualsurface : IDCompositionVirtualSurface*) : HRESULT
+    @lpVtbl.value.create_virtual_surface.unsafe_as(Proc(UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionVirtualSurface*, HRESULT)).call(initialwidth, initialheight, pixelformat, alphamode, virtualsurface)
+  end
+  def create_translate_transform(translatetransform : IDCompositionTranslateTransform*) : HRESULT
+    @lpVtbl.value.create_translate_transform.unsafe_as(Proc(IDCompositionTranslateTransform*, HRESULT)).call(translatetransform)
+  end
+  def create_scale_transform(scaletransform : IDCompositionScaleTransform*) : HRESULT
+    @lpVtbl.value.create_scale_transform.unsafe_as(Proc(IDCompositionScaleTransform*, HRESULT)).call(scaletransform)
+  end
+  def create_rotate_transform(rotatetransform : IDCompositionRotateTransform*) : HRESULT
+    @lpVtbl.value.create_rotate_transform.unsafe_as(Proc(IDCompositionRotateTransform*, HRESULT)).call(rotatetransform)
+  end
+  def create_skew_transform(skewtransform : IDCompositionSkewTransform*) : HRESULT
+    @lpVtbl.value.create_skew_transform.unsafe_as(Proc(IDCompositionSkewTransform*, HRESULT)).call(skewtransform)
+  end
+  def create_matrix_transform(matrixtransform : IDCompositionMatrixTransform*) : HRESULT
+    @lpVtbl.value.create_matrix_transform.unsafe_as(Proc(IDCompositionMatrixTransform*, HRESULT)).call(matrixtransform)
+  end
+  def create_transform_group(transforms : IDCompositionTransform*, elements : UInt32, transformgroup : IDCompositionTransform*) : HRESULT
+    @lpVtbl.value.create_transform_group.unsafe_as(Proc(IDCompositionTransform*, UInt32, IDCompositionTransform*, HRESULT)).call(transforms, elements, transformgroup)
+  end
+  def create_translate_transform3_d(translatetransform3d : IDCompositionTranslateTransform3D*) : HRESULT
+    @lpVtbl.value.create_translate_transform3_d.unsafe_as(Proc(IDCompositionTranslateTransform3D*, HRESULT)).call(translatetransform3d)
+  end
+  def create_scale_transform3_d(scaletransform3d : IDCompositionScaleTransform3D*) : HRESULT
+    @lpVtbl.value.create_scale_transform3_d.unsafe_as(Proc(IDCompositionScaleTransform3D*, HRESULT)).call(scaletransform3d)
+  end
+  def create_rotate_transform3_d(rotatetransform3d : IDCompositionRotateTransform3D*) : HRESULT
+    @lpVtbl.value.create_rotate_transform3_d.unsafe_as(Proc(IDCompositionRotateTransform3D*, HRESULT)).call(rotatetransform3d)
+  end
+  def create_matrix_transform3_d(matrixtransform3d : IDCompositionMatrixTransform3D*) : HRESULT
+    @lpVtbl.value.create_matrix_transform3_d.unsafe_as(Proc(IDCompositionMatrixTransform3D*, HRESULT)).call(matrixtransform3d)
+  end
+  def create_transform3_d_group(transforms3d : IDCompositionTransform3D*, elements : UInt32, transform3dgroup : IDCompositionTransform3D*) : HRESULT
+    @lpVtbl.value.create_transform3_d_group.unsafe_as(Proc(IDCompositionTransform3D*, UInt32, IDCompositionTransform3D*, HRESULT)).call(transforms3d, elements, transform3dgroup)
+  end
+  def create_effect_group(effectgroup : IDCompositionEffectGroup*) : HRESULT
+    @lpVtbl.value.create_effect_group.unsafe_as(Proc(IDCompositionEffectGroup*, HRESULT)).call(effectgroup)
+  end
+  def create_rectangle_clip(clip : IDCompositionRectangleClip*) : HRESULT
+    @lpVtbl.value.create_rectangle_clip.unsafe_as(Proc(IDCompositionRectangleClip*, HRESULT)).call(clip)
+  end
+  def create_animation(animation : IDCompositionAnimation*) : HRESULT
+    @lpVtbl.value.create_animation.unsafe_as(Proc(IDCompositionAnimation*, HRESULT)).call(animation)
+  end
+end
+struct LibWin32::IDCompositionDesktopDevice
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def commit : HRESULT
+    @lpVtbl.value.commit.unsafe_as(Proc(HRESULT)).call
+  end
+  def wait_for_commit_completion : HRESULT
+    @lpVtbl.value.wait_for_commit_completion.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_frame_statistics(statistics : DCOMPOSITION_FRAME_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_frame_statistics.unsafe_as(Proc(DCOMPOSITION_FRAME_STATISTICS*, HRESULT)).call(statistics)
+  end
+  def create_visual(visual : IDCompositionVisual2*) : HRESULT
+    @lpVtbl.value.create_visual.unsafe_as(Proc(IDCompositionVisual2*, HRESULT)).call(visual)
+  end
+  def create_surface_factory(renderingdevice : IUnknown, surfacefactory : IDCompositionSurfaceFactory*) : HRESULT
+    @lpVtbl.value.create_surface_factory.unsafe_as(Proc(IUnknown, IDCompositionSurfaceFactory*, HRESULT)).call(renderingdevice, surfacefactory)
+  end
+  def create_surface(width : UInt32, height : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, surface : IDCompositionSurface*) : HRESULT
+    @lpVtbl.value.create_surface.unsafe_as(Proc(UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionSurface*, HRESULT)).call(width, height, pixelformat, alphamode, surface)
+  end
+  def create_virtual_surface(initialwidth : UInt32, initialheight : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, virtualsurface : IDCompositionVirtualSurface*) : HRESULT
+    @lpVtbl.value.create_virtual_surface.unsafe_as(Proc(UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionVirtualSurface*, HRESULT)).call(initialwidth, initialheight, pixelformat, alphamode, virtualsurface)
+  end
+  def create_translate_transform(translatetransform : IDCompositionTranslateTransform*) : HRESULT
+    @lpVtbl.value.create_translate_transform.unsafe_as(Proc(IDCompositionTranslateTransform*, HRESULT)).call(translatetransform)
+  end
+  def create_scale_transform(scaletransform : IDCompositionScaleTransform*) : HRESULT
+    @lpVtbl.value.create_scale_transform.unsafe_as(Proc(IDCompositionScaleTransform*, HRESULT)).call(scaletransform)
+  end
+  def create_rotate_transform(rotatetransform : IDCompositionRotateTransform*) : HRESULT
+    @lpVtbl.value.create_rotate_transform.unsafe_as(Proc(IDCompositionRotateTransform*, HRESULT)).call(rotatetransform)
+  end
+  def create_skew_transform(skewtransform : IDCompositionSkewTransform*) : HRESULT
+    @lpVtbl.value.create_skew_transform.unsafe_as(Proc(IDCompositionSkewTransform*, HRESULT)).call(skewtransform)
+  end
+  def create_matrix_transform(matrixtransform : IDCompositionMatrixTransform*) : HRESULT
+    @lpVtbl.value.create_matrix_transform.unsafe_as(Proc(IDCompositionMatrixTransform*, HRESULT)).call(matrixtransform)
+  end
+  def create_transform_group(transforms : IDCompositionTransform*, elements : UInt32, transformgroup : IDCompositionTransform*) : HRESULT
+    @lpVtbl.value.create_transform_group.unsafe_as(Proc(IDCompositionTransform*, UInt32, IDCompositionTransform*, HRESULT)).call(transforms, elements, transformgroup)
+  end
+  def create_translate_transform3_d(translatetransform3d : IDCompositionTranslateTransform3D*) : HRESULT
+    @lpVtbl.value.create_translate_transform3_d.unsafe_as(Proc(IDCompositionTranslateTransform3D*, HRESULT)).call(translatetransform3d)
+  end
+  def create_scale_transform3_d(scaletransform3d : IDCompositionScaleTransform3D*) : HRESULT
+    @lpVtbl.value.create_scale_transform3_d.unsafe_as(Proc(IDCompositionScaleTransform3D*, HRESULT)).call(scaletransform3d)
+  end
+  def create_rotate_transform3_d(rotatetransform3d : IDCompositionRotateTransform3D*) : HRESULT
+    @lpVtbl.value.create_rotate_transform3_d.unsafe_as(Proc(IDCompositionRotateTransform3D*, HRESULT)).call(rotatetransform3d)
+  end
+  def create_matrix_transform3_d(matrixtransform3d : IDCompositionMatrixTransform3D*) : HRESULT
+    @lpVtbl.value.create_matrix_transform3_d.unsafe_as(Proc(IDCompositionMatrixTransform3D*, HRESULT)).call(matrixtransform3d)
+  end
+  def create_transform3_d_group(transforms3d : IDCompositionTransform3D*, elements : UInt32, transform3dgroup : IDCompositionTransform3D*) : HRESULT
+    @lpVtbl.value.create_transform3_d_group.unsafe_as(Proc(IDCompositionTransform3D*, UInt32, IDCompositionTransform3D*, HRESULT)).call(transforms3d, elements, transform3dgroup)
+  end
+  def create_effect_group(effectgroup : IDCompositionEffectGroup*) : HRESULT
+    @lpVtbl.value.create_effect_group.unsafe_as(Proc(IDCompositionEffectGroup*, HRESULT)).call(effectgroup)
+  end
+  def create_rectangle_clip(clip : IDCompositionRectangleClip*) : HRESULT
+    @lpVtbl.value.create_rectangle_clip.unsafe_as(Proc(IDCompositionRectangleClip*, HRESULT)).call(clip)
+  end
+  def create_animation(animation : IDCompositionAnimation*) : HRESULT
+    @lpVtbl.value.create_animation.unsafe_as(Proc(IDCompositionAnimation*, HRESULT)).call(animation)
+  end
+  def create_target_for_hwnd(hwnd : LibC::HANDLE, topmost : LibC::BOOL, target : IDCompositionTarget*) : HRESULT
+    @lpVtbl.value.create_target_for_hwnd.unsafe_as(Proc(LibC::HANDLE, LibC::BOOL, IDCompositionTarget*, HRESULT)).call(hwnd, topmost, target)
+  end
+  def create_surface_from_handle(handle : LibC::HANDLE, surface : IUnknown*) : HRESULT
+    @lpVtbl.value.create_surface_from_handle.unsafe_as(Proc(LibC::HANDLE, IUnknown*, HRESULT)).call(handle, surface)
+  end
+  def create_surface_from_hwnd(hwnd : LibC::HANDLE, surface : IUnknown*) : HRESULT
+    @lpVtbl.value.create_surface_from_hwnd.unsafe_as(Proc(LibC::HANDLE, IUnknown*, HRESULT)).call(hwnd, surface)
+  end
+end
+struct LibWin32::IDCompositionDeviceDebug
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enable_debug_counters : HRESULT
+    @lpVtbl.value.enable_debug_counters.unsafe_as(Proc(HRESULT)).call
+  end
+  def disable_debug_counters : HRESULT
+    @lpVtbl.value.disable_debug_counters.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IDCompositionSurfaceFactory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_surface(width : UInt32, height : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, surface : IDCompositionSurface*) : HRESULT
+    @lpVtbl.value.create_surface.unsafe_as(Proc(UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionSurface*, HRESULT)).call(width, height, pixelformat, alphamode, surface)
+  end
+  def create_virtual_surface(initialwidth : UInt32, initialheight : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, virtualsurface : IDCompositionVirtualSurface*) : HRESULT
+    @lpVtbl.value.create_virtual_surface.unsafe_as(Proc(UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionVirtualSurface*, HRESULT)).call(initialwidth, initialheight, pixelformat, alphamode, virtualsurface)
+  end
+end
+struct LibWin32::IDCompositionVisual2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_offset_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_offset_x2(offsetx : Float32) : HRESULT
+    @lpVtbl.value.set_offset_x2.unsafe_as(Proc(Float32, HRESULT)).call(offsetx)
+  end
+  def set_offset_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_offset_y2(offsety : Float32) : HRESULT
+    @lpVtbl.value.set_offset_y2.unsafe_as(Proc(Float32, HRESULT)).call(offsety)
+  end
+  def set_transform(transform : IDCompositionTransform) : HRESULT
+    @lpVtbl.value.set_transform.unsafe_as(Proc(IDCompositionTransform, HRESULT)).call(transform)
+  end
+  def set_transform2(matrix : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform2.unsafe_as(Proc(D2D_MATRIX_3X2_F*, HRESULT)).call(matrix)
+  end
+  def set_transform_parent(visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.set_transform_parent.unsafe_as(Proc(IDCompositionVisual, HRESULT)).call(visual)
+  end
+  def set_effect(effect : IDCompositionEffect) : HRESULT
+    @lpVtbl.value.set_effect.unsafe_as(Proc(IDCompositionEffect, HRESULT)).call(effect)
+  end
+  def set_bitmap_interpolation_mode(interpolationmode : DCOMPOSITION_BITMAP_INTERPOLATION_MODE) : HRESULT
+    @lpVtbl.value.set_bitmap_interpolation_mode.unsafe_as(Proc(DCOMPOSITION_BITMAP_INTERPOLATION_MODE, HRESULT)).call(interpolationmode)
+  end
+  def set_border_mode(bordermode : DCOMPOSITION_BORDER_MODE) : HRESULT
+    @lpVtbl.value.set_border_mode.unsafe_as(Proc(DCOMPOSITION_BORDER_MODE, HRESULT)).call(bordermode)
+  end
+  def set_clip(clip : IDCompositionClip) : HRESULT
+    @lpVtbl.value.set_clip.unsafe_as(Proc(IDCompositionClip, HRESULT)).call(clip)
+  end
+  def set_clip2(rect : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.set_clip2.unsafe_as(Proc(D2D_RECT_F*, HRESULT)).call(rect)
+  end
+  def set_content(content : IUnknown) : HRESULT
+    @lpVtbl.value.set_content.unsafe_as(Proc(IUnknown, HRESULT)).call(content)
+  end
+  def add_visual(visual : IDCompositionVisual, insertabove : LibC::BOOL, referencevisual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.add_visual.unsafe_as(Proc(IDCompositionVisual, LibC::BOOL, IDCompositionVisual, HRESULT)).call(visual, insertabove, referencevisual)
+  end
+  def remove_visual(visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.remove_visual.unsafe_as(Proc(IDCompositionVisual, HRESULT)).call(visual)
+  end
+  def remove_all_visuals : HRESULT
+    @lpVtbl.value.remove_all_visuals.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_composite_mode(compositemode : DCOMPOSITION_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.set_composite_mode.unsafe_as(Proc(DCOMPOSITION_COMPOSITE_MODE, HRESULT)).call(compositemode)
+  end
+  def set_opacity_mode(mode : DCOMPOSITION_OPACITY_MODE) : HRESULT
+    @lpVtbl.value.set_opacity_mode.unsafe_as(Proc(DCOMPOSITION_OPACITY_MODE, HRESULT)).call(mode)
+  end
+  def set_back_face_visibility(visibility : DCOMPOSITION_BACKFACE_VISIBILITY) : HRESULT
+    @lpVtbl.value.set_back_face_visibility.unsafe_as(Proc(DCOMPOSITION_BACKFACE_VISIBILITY, HRESULT)).call(visibility)
+  end
+end
+struct LibWin32::IDCompositionVisualDebug
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_offset_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_offset_x2(offsetx : Float32) : HRESULT
+    @lpVtbl.value.set_offset_x2.unsafe_as(Proc(Float32, HRESULT)).call(offsetx)
+  end
+  def set_offset_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_offset_y2(offsety : Float32) : HRESULT
+    @lpVtbl.value.set_offset_y2.unsafe_as(Proc(Float32, HRESULT)).call(offsety)
+  end
+  def set_transform(transform : IDCompositionTransform) : HRESULT
+    @lpVtbl.value.set_transform.unsafe_as(Proc(IDCompositionTransform, HRESULT)).call(transform)
+  end
+  def set_transform2(matrix : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform2.unsafe_as(Proc(D2D_MATRIX_3X2_F*, HRESULT)).call(matrix)
+  end
+  def set_transform_parent(visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.set_transform_parent.unsafe_as(Proc(IDCompositionVisual, HRESULT)).call(visual)
+  end
+  def set_effect(effect : IDCompositionEffect) : HRESULT
+    @lpVtbl.value.set_effect.unsafe_as(Proc(IDCompositionEffect, HRESULT)).call(effect)
+  end
+  def set_bitmap_interpolation_mode(interpolationmode : DCOMPOSITION_BITMAP_INTERPOLATION_MODE) : HRESULT
+    @lpVtbl.value.set_bitmap_interpolation_mode.unsafe_as(Proc(DCOMPOSITION_BITMAP_INTERPOLATION_MODE, HRESULT)).call(interpolationmode)
+  end
+  def set_border_mode(bordermode : DCOMPOSITION_BORDER_MODE) : HRESULT
+    @lpVtbl.value.set_border_mode.unsafe_as(Proc(DCOMPOSITION_BORDER_MODE, HRESULT)).call(bordermode)
+  end
+  def set_clip(clip : IDCompositionClip) : HRESULT
+    @lpVtbl.value.set_clip.unsafe_as(Proc(IDCompositionClip, HRESULT)).call(clip)
+  end
+  def set_clip2(rect : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.set_clip2.unsafe_as(Proc(D2D_RECT_F*, HRESULT)).call(rect)
+  end
+  def set_content(content : IUnknown) : HRESULT
+    @lpVtbl.value.set_content.unsafe_as(Proc(IUnknown, HRESULT)).call(content)
+  end
+  def add_visual(visual : IDCompositionVisual, insertabove : LibC::BOOL, referencevisual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.add_visual.unsafe_as(Proc(IDCompositionVisual, LibC::BOOL, IDCompositionVisual, HRESULT)).call(visual, insertabove, referencevisual)
+  end
+  def remove_visual(visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.remove_visual.unsafe_as(Proc(IDCompositionVisual, HRESULT)).call(visual)
+  end
+  def remove_all_visuals : HRESULT
+    @lpVtbl.value.remove_all_visuals.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_composite_mode(compositemode : DCOMPOSITION_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.set_composite_mode.unsafe_as(Proc(DCOMPOSITION_COMPOSITE_MODE, HRESULT)).call(compositemode)
+  end
+  def set_opacity_mode(mode : DCOMPOSITION_OPACITY_MODE) : HRESULT
+    @lpVtbl.value.set_opacity_mode.unsafe_as(Proc(DCOMPOSITION_OPACITY_MODE, HRESULT)).call(mode)
+  end
+  def set_back_face_visibility(visibility : DCOMPOSITION_BACKFACE_VISIBILITY) : HRESULT
+    @lpVtbl.value.set_back_face_visibility.unsafe_as(Proc(DCOMPOSITION_BACKFACE_VISIBILITY, HRESULT)).call(visibility)
+  end
+  def enable_heat_map(color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.enable_heat_map.unsafe_as(Proc(D2D1_COLOR_F*, HRESULT)).call(color)
+  end
+  def disable_heat_map : HRESULT
+    @lpVtbl.value.disable_heat_map.unsafe_as(Proc(HRESULT)).call
+  end
+  def enable_redraw_regions : HRESULT
+    @lpVtbl.value.enable_redraw_regions.unsafe_as(Proc(HRESULT)).call
+  end
+  def disable_redraw_regions : HRESULT
+    @lpVtbl.value.disable_redraw_regions.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IDCompositionVisual3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_offset_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_offset_x2(offsetx : Float32) : HRESULT
+    @lpVtbl.value.set_offset_x2.unsafe_as(Proc(Float32, HRESULT)).call(offsetx)
+  end
+  def set_offset_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_offset_y2(offsety : Float32) : HRESULT
+    @lpVtbl.value.set_offset_y2.unsafe_as(Proc(Float32, HRESULT)).call(offsety)
+  end
+  def set_transform(transform : IDCompositionTransform) : HRESULT
+    @lpVtbl.value.set_transform.unsafe_as(Proc(IDCompositionTransform, HRESULT)).call(transform)
+  end
+  def set_transform2(matrix : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform2.unsafe_as(Proc(D2D_MATRIX_3X2_F*, HRESULT)).call(matrix)
+  end
+  def set_transform_parent(visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.set_transform_parent.unsafe_as(Proc(IDCompositionVisual, HRESULT)).call(visual)
+  end
+  def set_effect(effect : IDCompositionEffect) : HRESULT
+    @lpVtbl.value.set_effect.unsafe_as(Proc(IDCompositionEffect, HRESULT)).call(effect)
+  end
+  def set_bitmap_interpolation_mode(interpolationmode : DCOMPOSITION_BITMAP_INTERPOLATION_MODE) : HRESULT
+    @lpVtbl.value.set_bitmap_interpolation_mode.unsafe_as(Proc(DCOMPOSITION_BITMAP_INTERPOLATION_MODE, HRESULT)).call(interpolationmode)
+  end
+  def set_border_mode(bordermode : DCOMPOSITION_BORDER_MODE) : HRESULT
+    @lpVtbl.value.set_border_mode.unsafe_as(Proc(DCOMPOSITION_BORDER_MODE, HRESULT)).call(bordermode)
+  end
+  def set_clip(clip : IDCompositionClip) : HRESULT
+    @lpVtbl.value.set_clip.unsafe_as(Proc(IDCompositionClip, HRESULT)).call(clip)
+  end
+  def set_clip2(rect : D2D_RECT_F*) : HRESULT
+    @lpVtbl.value.set_clip2.unsafe_as(Proc(D2D_RECT_F*, HRESULT)).call(rect)
+  end
+  def set_content(content : IUnknown) : HRESULT
+    @lpVtbl.value.set_content.unsafe_as(Proc(IUnknown, HRESULT)).call(content)
+  end
+  def add_visual(visual : IDCompositionVisual, insertabove : LibC::BOOL, referencevisual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.add_visual.unsafe_as(Proc(IDCompositionVisual, LibC::BOOL, IDCompositionVisual, HRESULT)).call(visual, insertabove, referencevisual)
+  end
+  def remove_visual(visual : IDCompositionVisual) : HRESULT
+    @lpVtbl.value.remove_visual.unsafe_as(Proc(IDCompositionVisual, HRESULT)).call(visual)
+  end
+  def remove_all_visuals : HRESULT
+    @lpVtbl.value.remove_all_visuals.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_composite_mode(compositemode : DCOMPOSITION_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.set_composite_mode.unsafe_as(Proc(DCOMPOSITION_COMPOSITE_MODE, HRESULT)).call(compositemode)
+  end
+  def set_opacity_mode(mode : DCOMPOSITION_OPACITY_MODE) : HRESULT
+    @lpVtbl.value.set_opacity_mode.unsafe_as(Proc(DCOMPOSITION_OPACITY_MODE, HRESULT)).call(mode)
+  end
+  def set_back_face_visibility(visibility : DCOMPOSITION_BACKFACE_VISIBILITY) : HRESULT
+    @lpVtbl.value.set_back_face_visibility.unsafe_as(Proc(DCOMPOSITION_BACKFACE_VISIBILITY, HRESULT)).call(visibility)
+  end
+  def enable_heat_map(color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.enable_heat_map.unsafe_as(Proc(D2D1_COLOR_F*, HRESULT)).call(color)
+  end
+  def disable_heat_map : HRESULT
+    @lpVtbl.value.disable_heat_map.unsafe_as(Proc(HRESULT)).call
+  end
+  def enable_redraw_regions : HRESULT
+    @lpVtbl.value.enable_redraw_regions.unsafe_as(Proc(HRESULT)).call
+  end
+  def disable_redraw_regions : HRESULT
+    @lpVtbl.value.disable_redraw_regions.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_depth_mode(mode : DCOMPOSITION_DEPTH_MODE) : HRESULT
+    @lpVtbl.value.set_depth_mode.unsafe_as(Proc(DCOMPOSITION_DEPTH_MODE, HRESULT)).call(mode)
+  end
+  def set_offset_z(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_offset_z.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_offset_z2(offsetz : Float32) : HRESULT
+    @lpVtbl.value.set_offset_z2.unsafe_as(Proc(Float32, HRESULT)).call(offsetz)
+  end
+  def set_opacity(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_opacity.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_opacity2(opacity : Float32) : HRESULT
+    @lpVtbl.value.set_opacity2.unsafe_as(Proc(Float32, HRESULT)).call(opacity)
+  end
+  def set_transform3(transform : IDCompositionTransform3D) : HRESULT
+    @lpVtbl.value.set_transform3.unsafe_as(Proc(IDCompositionTransform3D, HRESULT)).call(transform)
+  end
+  def set_transform22(matrix : D2D_MATRIX_4X4_F*) : HRESULT
+    @lpVtbl.value.set_transform22.unsafe_as(Proc(D2D_MATRIX_4X4_F*, HRESULT)).call(matrix)
+  end
+  def set_visible(visible : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_visible.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(visible)
+  end
+end
+struct LibWin32::IDCompositionDevice3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def commit : HRESULT
+    @lpVtbl.value.commit.unsafe_as(Proc(HRESULT)).call
+  end
+  def wait_for_commit_completion : HRESULT
+    @lpVtbl.value.wait_for_commit_completion.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_frame_statistics(statistics : DCOMPOSITION_FRAME_STATISTICS*) : HRESULT
+    @lpVtbl.value.get_frame_statistics.unsafe_as(Proc(DCOMPOSITION_FRAME_STATISTICS*, HRESULT)).call(statistics)
+  end
+  def create_visual(visual : IDCompositionVisual2*) : HRESULT
+    @lpVtbl.value.create_visual.unsafe_as(Proc(IDCompositionVisual2*, HRESULT)).call(visual)
+  end
+  def create_surface_factory(renderingdevice : IUnknown, surfacefactory : IDCompositionSurfaceFactory*) : HRESULT
+    @lpVtbl.value.create_surface_factory.unsafe_as(Proc(IUnknown, IDCompositionSurfaceFactory*, HRESULT)).call(renderingdevice, surfacefactory)
+  end
+  def create_surface(width : UInt32, height : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, surface : IDCompositionSurface*) : HRESULT
+    @lpVtbl.value.create_surface.unsafe_as(Proc(UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionSurface*, HRESULT)).call(width, height, pixelformat, alphamode, surface)
+  end
+  def create_virtual_surface(initialwidth : UInt32, initialheight : UInt32, pixelformat : DXGI_FORMAT, alphamode : DXGI_ALPHA_MODE, virtualsurface : IDCompositionVirtualSurface*) : HRESULT
+    @lpVtbl.value.create_virtual_surface.unsafe_as(Proc(UInt32, UInt32, DXGI_FORMAT, DXGI_ALPHA_MODE, IDCompositionVirtualSurface*, HRESULT)).call(initialwidth, initialheight, pixelformat, alphamode, virtualsurface)
+  end
+  def create_translate_transform(translatetransform : IDCompositionTranslateTransform*) : HRESULT
+    @lpVtbl.value.create_translate_transform.unsafe_as(Proc(IDCompositionTranslateTransform*, HRESULT)).call(translatetransform)
+  end
+  def create_scale_transform(scaletransform : IDCompositionScaleTransform*) : HRESULT
+    @lpVtbl.value.create_scale_transform.unsafe_as(Proc(IDCompositionScaleTransform*, HRESULT)).call(scaletransform)
+  end
+  def create_rotate_transform(rotatetransform : IDCompositionRotateTransform*) : HRESULT
+    @lpVtbl.value.create_rotate_transform.unsafe_as(Proc(IDCompositionRotateTransform*, HRESULT)).call(rotatetransform)
+  end
+  def create_skew_transform(skewtransform : IDCompositionSkewTransform*) : HRESULT
+    @lpVtbl.value.create_skew_transform.unsafe_as(Proc(IDCompositionSkewTransform*, HRESULT)).call(skewtransform)
+  end
+  def create_matrix_transform(matrixtransform : IDCompositionMatrixTransform*) : HRESULT
+    @lpVtbl.value.create_matrix_transform.unsafe_as(Proc(IDCompositionMatrixTransform*, HRESULT)).call(matrixtransform)
+  end
+  def create_transform_group(transforms : IDCompositionTransform*, elements : UInt32, transformgroup : IDCompositionTransform*) : HRESULT
+    @lpVtbl.value.create_transform_group.unsafe_as(Proc(IDCompositionTransform*, UInt32, IDCompositionTransform*, HRESULT)).call(transforms, elements, transformgroup)
+  end
+  def create_translate_transform3_d(translatetransform3d : IDCompositionTranslateTransform3D*) : HRESULT
+    @lpVtbl.value.create_translate_transform3_d.unsafe_as(Proc(IDCompositionTranslateTransform3D*, HRESULT)).call(translatetransform3d)
+  end
+  def create_scale_transform3_d(scaletransform3d : IDCompositionScaleTransform3D*) : HRESULT
+    @lpVtbl.value.create_scale_transform3_d.unsafe_as(Proc(IDCompositionScaleTransform3D*, HRESULT)).call(scaletransform3d)
+  end
+  def create_rotate_transform3_d(rotatetransform3d : IDCompositionRotateTransform3D*) : HRESULT
+    @lpVtbl.value.create_rotate_transform3_d.unsafe_as(Proc(IDCompositionRotateTransform3D*, HRESULT)).call(rotatetransform3d)
+  end
+  def create_matrix_transform3_d(matrixtransform3d : IDCompositionMatrixTransform3D*) : HRESULT
+    @lpVtbl.value.create_matrix_transform3_d.unsafe_as(Proc(IDCompositionMatrixTransform3D*, HRESULT)).call(matrixtransform3d)
+  end
+  def create_transform3_d_group(transforms3d : IDCompositionTransform3D*, elements : UInt32, transform3dgroup : IDCompositionTransform3D*) : HRESULT
+    @lpVtbl.value.create_transform3_d_group.unsafe_as(Proc(IDCompositionTransform3D*, UInt32, IDCompositionTransform3D*, HRESULT)).call(transforms3d, elements, transform3dgroup)
+  end
+  def create_effect_group(effectgroup : IDCompositionEffectGroup*) : HRESULT
+    @lpVtbl.value.create_effect_group.unsafe_as(Proc(IDCompositionEffectGroup*, HRESULT)).call(effectgroup)
+  end
+  def create_rectangle_clip(clip : IDCompositionRectangleClip*) : HRESULT
+    @lpVtbl.value.create_rectangle_clip.unsafe_as(Proc(IDCompositionRectangleClip*, HRESULT)).call(clip)
+  end
+  def create_animation(animation : IDCompositionAnimation*) : HRESULT
+    @lpVtbl.value.create_animation.unsafe_as(Proc(IDCompositionAnimation*, HRESULT)).call(animation)
+  end
+  def create_gaussian_blur_effect(gaussianblureffect : IDCompositionGaussianBlurEffect*) : HRESULT
+    @lpVtbl.value.create_gaussian_blur_effect.unsafe_as(Proc(IDCompositionGaussianBlurEffect*, HRESULT)).call(gaussianblureffect)
+  end
+  def create_brightness_effect(brightnesseffect : IDCompositionBrightnessEffect*) : HRESULT
+    @lpVtbl.value.create_brightness_effect.unsafe_as(Proc(IDCompositionBrightnessEffect*, HRESULT)).call(brightnesseffect)
+  end
+  def create_color_matrix_effect(colormatrixeffect : IDCompositionColorMatrixEffect*) : HRESULT
+    @lpVtbl.value.create_color_matrix_effect.unsafe_as(Proc(IDCompositionColorMatrixEffect*, HRESULT)).call(colormatrixeffect)
+  end
+  def create_shadow_effect(shadoweffect : IDCompositionShadowEffect*) : HRESULT
+    @lpVtbl.value.create_shadow_effect.unsafe_as(Proc(IDCompositionShadowEffect*, HRESULT)).call(shadoweffect)
+  end
+  def create_hue_rotation_effect(huerotationeffect : IDCompositionHueRotationEffect*) : HRESULT
+    @lpVtbl.value.create_hue_rotation_effect.unsafe_as(Proc(IDCompositionHueRotationEffect*, HRESULT)).call(huerotationeffect)
+  end
+  def create_saturation_effect(saturationeffect : IDCompositionSaturationEffect*) : HRESULT
+    @lpVtbl.value.create_saturation_effect.unsafe_as(Proc(IDCompositionSaturationEffect*, HRESULT)).call(saturationeffect)
+  end
+  def create_turbulence_effect(turbulenceeffect : IDCompositionTurbulenceEffect*) : HRESULT
+    @lpVtbl.value.create_turbulence_effect.unsafe_as(Proc(IDCompositionTurbulenceEffect*, HRESULT)).call(turbulenceeffect)
+  end
+  def create_linear_transfer_effect(lineartransfereffect : IDCompositionLinearTransferEffect*) : HRESULT
+    @lpVtbl.value.create_linear_transfer_effect.unsafe_as(Proc(IDCompositionLinearTransferEffect*, HRESULT)).call(lineartransfereffect)
+  end
+  def create_table_transfer_effect(tabletransfereffect : IDCompositionTableTransferEffect*) : HRESULT
+    @lpVtbl.value.create_table_transfer_effect.unsafe_as(Proc(IDCompositionTableTransferEffect*, HRESULT)).call(tabletransfereffect)
+  end
+  def create_composite_effect(compositeeffect : IDCompositionCompositeEffect*) : HRESULT
+    @lpVtbl.value.create_composite_effect.unsafe_as(Proc(IDCompositionCompositeEffect*, HRESULT)).call(compositeeffect)
+  end
+  def create_blend_effect(blendeffect : IDCompositionBlendEffect*) : HRESULT
+    @lpVtbl.value.create_blend_effect.unsafe_as(Proc(IDCompositionBlendEffect*, HRESULT)).call(blendeffect)
+  end
+  def create_arithmetic_composite_effect(arithmeticcompositeeffect : IDCompositionArithmeticCompositeEffect*) : HRESULT
+    @lpVtbl.value.create_arithmetic_composite_effect.unsafe_as(Proc(IDCompositionArithmeticCompositeEffect*, HRESULT)).call(arithmeticcompositeeffect)
+  end
+  def create_affine_transform2_d_effect(affinetransform2deffect : IDCompositionAffineTransform2DEffect*) : HRESULT
+    @lpVtbl.value.create_affine_transform2_d_effect.unsafe_as(Proc(IDCompositionAffineTransform2DEffect*, HRESULT)).call(affinetransform2deffect)
+  end
+end
+struct LibWin32::IDCompositionFilterEffect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input(index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.unsafe_as(Proc(UInt32, IUnknown, UInt32, HRESULT)).call(index, input, flags)
+  end
+end
+struct LibWin32::IDCompositionGaussianBlurEffect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input(index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.unsafe_as(Proc(UInt32, IUnknown, UInt32, HRESULT)).call(index, input, flags)
+  end
+  def set_standard_deviation(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_standard_deviation.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_standard_deviation2(amount : Float32) : HRESULT
+    @lpVtbl.value.set_standard_deviation2.unsafe_as(Proc(Float32, HRESULT)).call(amount)
+  end
+  def set_border_mode(mode : D2D1_BORDER_MODE) : HRESULT
+    @lpVtbl.value.set_border_mode.unsafe_as(Proc(D2D1_BORDER_MODE, HRESULT)).call(mode)
+  end
+end
+struct LibWin32::IDCompositionBrightnessEffect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input(index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.unsafe_as(Proc(UInt32, IUnknown, UInt32, HRESULT)).call(index, input, flags)
+  end
+  def set_white_point(whitepoint : D2D_VECTOR_2F*) : HRESULT
+    @lpVtbl.value.set_white_point.unsafe_as(Proc(D2D_VECTOR_2F*, HRESULT)).call(whitepoint)
+  end
+  def set_black_point(blackpoint : D2D_VECTOR_2F*) : HRESULT
+    @lpVtbl.value.set_black_point.unsafe_as(Proc(D2D_VECTOR_2F*, HRESULT)).call(blackpoint)
+  end
+  def set_white_point_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_white_point_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_white_point_x2(whitepointx : Float32) : HRESULT
+    @lpVtbl.value.set_white_point_x2.unsafe_as(Proc(Float32, HRESULT)).call(whitepointx)
+  end
+  def set_white_point_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_white_point_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_white_point_y2(whitepointy : Float32) : HRESULT
+    @lpVtbl.value.set_white_point_y2.unsafe_as(Proc(Float32, HRESULT)).call(whitepointy)
+  end
+  def set_black_point_x(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_black_point_x.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_black_point_x2(blackpointx : Float32) : HRESULT
+    @lpVtbl.value.set_black_point_x2.unsafe_as(Proc(Float32, HRESULT)).call(blackpointx)
+  end
+  def set_black_point_y(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_black_point_y.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_black_point_y2(blackpointy : Float32) : HRESULT
+    @lpVtbl.value.set_black_point_y2.unsafe_as(Proc(Float32, HRESULT)).call(blackpointy)
+  end
+end
+struct LibWin32::IDCompositionColorMatrixEffect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input(index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.unsafe_as(Proc(UInt32, IUnknown, UInt32, HRESULT)).call(index, input, flags)
+  end
+  def set_matrix(matrix : D2D_MATRIX_5X4_F*) : HRESULT
+    @lpVtbl.value.set_matrix.unsafe_as(Proc(D2D_MATRIX_5X4_F*, HRESULT)).call(matrix)
+  end
+  def set_matrix_element(row : Int32, column : Int32, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_matrix_element.unsafe_as(Proc(Int32, Int32, IDCompositionAnimation, HRESULT)).call(row, column, animation)
+  end
+  def set_matrix_element2(row : Int32, column : Int32, value : Float32) : HRESULT
+    @lpVtbl.value.set_matrix_element2.unsafe_as(Proc(Int32, Int32, Float32, HRESULT)).call(row, column, value)
+  end
+  def set_alpha_mode(mode : D2D1_COLORMATRIX_ALPHA_MODE) : HRESULT
+    @lpVtbl.value.set_alpha_mode.unsafe_as(Proc(D2D1_COLORMATRIX_ALPHA_MODE, HRESULT)).call(mode)
+  end
+  def set_clamp_output(clamp : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_clamp_output.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(clamp)
+  end
+end
+struct LibWin32::IDCompositionShadowEffect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input(index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.unsafe_as(Proc(UInt32, IUnknown, UInt32, HRESULT)).call(index, input, flags)
+  end
+  def set_standard_deviation(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_standard_deviation.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_standard_deviation2(amount : Float32) : HRESULT
+    @lpVtbl.value.set_standard_deviation2.unsafe_as(Proc(Float32, HRESULT)).call(amount)
+  end
+  def set_color(color : D2D_VECTOR_4F*) : HRESULT
+    @lpVtbl.value.set_color.unsafe_as(Proc(D2D_VECTOR_4F*, HRESULT)).call(color)
+  end
+  def set_red(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_red.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_red2(amount : Float32) : HRESULT
+    @lpVtbl.value.set_red2.unsafe_as(Proc(Float32, HRESULT)).call(amount)
+  end
+  def set_green(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_green.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_green2(amount : Float32) : HRESULT
+    @lpVtbl.value.set_green2.unsafe_as(Proc(Float32, HRESULT)).call(amount)
+  end
+  def set_blue(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_blue.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_blue2(amount : Float32) : HRESULT
+    @lpVtbl.value.set_blue2.unsafe_as(Proc(Float32, HRESULT)).call(amount)
+  end
+  def set_alpha(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_alpha.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_alpha2(amount : Float32) : HRESULT
+    @lpVtbl.value.set_alpha2.unsafe_as(Proc(Float32, HRESULT)).call(amount)
+  end
+end
+struct LibWin32::IDCompositionHueRotationEffect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input(index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.unsafe_as(Proc(UInt32, IUnknown, UInt32, HRESULT)).call(index, input, flags)
+  end
+  def set_angle(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_angle.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_angle2(amountdegrees : Float32) : HRESULT
+    @lpVtbl.value.set_angle2.unsafe_as(Proc(Float32, HRESULT)).call(amountdegrees)
+  end
+end
+struct LibWin32::IDCompositionSaturationEffect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input(index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.unsafe_as(Proc(UInt32, IUnknown, UInt32, HRESULT)).call(index, input, flags)
+  end
+  def set_saturation(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_saturation.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_saturation2(ratio : Float32) : HRESULT
+    @lpVtbl.value.set_saturation2.unsafe_as(Proc(Float32, HRESULT)).call(ratio)
+  end
+end
+struct LibWin32::IDCompositionTurbulenceEffect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input(index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.unsafe_as(Proc(UInt32, IUnknown, UInt32, HRESULT)).call(index, input, flags)
+  end
+  def set_offset(offset : D2D_VECTOR_2F*) : HRESULT
+    @lpVtbl.value.set_offset.unsafe_as(Proc(D2D_VECTOR_2F*, HRESULT)).call(offset)
+  end
+  def set_base_frequency(frequency : D2D_VECTOR_2F*) : HRESULT
+    @lpVtbl.value.set_base_frequency.unsafe_as(Proc(D2D_VECTOR_2F*, HRESULT)).call(frequency)
+  end
+  def set_size(size : D2D_VECTOR_2F*) : HRESULT
+    @lpVtbl.value.set_size.unsafe_as(Proc(D2D_VECTOR_2F*, HRESULT)).call(size)
+  end
+  def set_num_octaves(numoctaves : UInt32) : HRESULT
+    @lpVtbl.value.set_num_octaves.unsafe_as(Proc(UInt32, HRESULT)).call(numoctaves)
+  end
+  def set_seed(seed : UInt32) : HRESULT
+    @lpVtbl.value.set_seed.unsafe_as(Proc(UInt32, HRESULT)).call(seed)
+  end
+  def set_noise(noise : D2D1_TURBULENCE_NOISE) : HRESULT
+    @lpVtbl.value.set_noise.unsafe_as(Proc(D2D1_TURBULENCE_NOISE, HRESULT)).call(noise)
+  end
+  def set_stitchable(stitchable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_stitchable.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(stitchable)
+  end
+end
+struct LibWin32::IDCompositionLinearTransferEffect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input(index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.unsafe_as(Proc(UInt32, IUnknown, UInt32, HRESULT)).call(index, input, flags)
+  end
+  def set_red_y_intercept(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_red_y_intercept.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_red_y_intercept2(redyintercept : Float32) : HRESULT
+    @lpVtbl.value.set_red_y_intercept2.unsafe_as(Proc(Float32, HRESULT)).call(redyintercept)
+  end
+  def set_red_slope(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_red_slope.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_red_slope2(redslope : Float32) : HRESULT
+    @lpVtbl.value.set_red_slope2.unsafe_as(Proc(Float32, HRESULT)).call(redslope)
+  end
+  def set_red_disable(reddisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_red_disable.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(reddisable)
+  end
+  def set_green_y_intercept(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_green_y_intercept.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_green_y_intercept2(greenyintercept : Float32) : HRESULT
+    @lpVtbl.value.set_green_y_intercept2.unsafe_as(Proc(Float32, HRESULT)).call(greenyintercept)
+  end
+  def set_green_slope(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_green_slope.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_green_slope2(greenslope : Float32) : HRESULT
+    @lpVtbl.value.set_green_slope2.unsafe_as(Proc(Float32, HRESULT)).call(greenslope)
+  end
+  def set_green_disable(greendisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_green_disable.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(greendisable)
+  end
+  def set_blue_y_intercept(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_blue_y_intercept.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_blue_y_intercept2(blueyintercept : Float32) : HRESULT
+    @lpVtbl.value.set_blue_y_intercept2.unsafe_as(Proc(Float32, HRESULT)).call(blueyintercept)
+  end
+  def set_blue_slope(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_blue_slope.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_blue_slope2(blueslope : Float32) : HRESULT
+    @lpVtbl.value.set_blue_slope2.unsafe_as(Proc(Float32, HRESULT)).call(blueslope)
+  end
+  def set_blue_disable(bluedisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_blue_disable.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bluedisable)
+  end
+  def set_alpha_y_intercept(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_alpha_y_intercept.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_alpha_y_intercept2(alphayintercept : Float32) : HRESULT
+    @lpVtbl.value.set_alpha_y_intercept2.unsafe_as(Proc(Float32, HRESULT)).call(alphayintercept)
+  end
+  def set_alpha_slope(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_alpha_slope.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_alpha_slope2(alphaslope : Float32) : HRESULT
+    @lpVtbl.value.set_alpha_slope2.unsafe_as(Proc(Float32, HRESULT)).call(alphaslope)
+  end
+  def set_alpha_disable(alphadisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_alpha_disable.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(alphadisable)
+  end
+  def set_clamp_output(clampoutput : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_clamp_output.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(clampoutput)
+  end
+end
+struct LibWin32::IDCompositionTableTransferEffect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input(index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.unsafe_as(Proc(UInt32, IUnknown, UInt32, HRESULT)).call(index, input, flags)
+  end
+  def set_red_table(tablevalues : Float32*, count : UInt32) : HRESULT
+    @lpVtbl.value.set_red_table.unsafe_as(Proc(Float32*, UInt32, HRESULT)).call(tablevalues, count)
+  end
+  def set_green_table(tablevalues : Float32*, count : UInt32) : HRESULT
+    @lpVtbl.value.set_green_table.unsafe_as(Proc(Float32*, UInt32, HRESULT)).call(tablevalues, count)
+  end
+  def set_blue_table(tablevalues : Float32*, count : UInt32) : HRESULT
+    @lpVtbl.value.set_blue_table.unsafe_as(Proc(Float32*, UInt32, HRESULT)).call(tablevalues, count)
+  end
+  def set_alpha_table(tablevalues : Float32*, count : UInt32) : HRESULT
+    @lpVtbl.value.set_alpha_table.unsafe_as(Proc(Float32*, UInt32, HRESULT)).call(tablevalues, count)
+  end
+  def set_red_disable(reddisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_red_disable.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(reddisable)
+  end
+  def set_green_disable(greendisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_green_disable.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(greendisable)
+  end
+  def set_blue_disable(bluedisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_blue_disable.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(bluedisable)
+  end
+  def set_alpha_disable(alphadisable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_alpha_disable.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(alphadisable)
+  end
+  def set_clamp_output(clampoutput : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_clamp_output.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(clampoutput)
+  end
+  def set_red_table_value(index : UInt32, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_red_table_value.unsafe_as(Proc(UInt32, IDCompositionAnimation, HRESULT)).call(index, animation)
+  end
+  def set_red_table_value2(index : UInt32, value : Float32) : HRESULT
+    @lpVtbl.value.set_red_table_value2.unsafe_as(Proc(UInt32, Float32, HRESULT)).call(index, value)
+  end
+  def set_green_table_value(index : UInt32, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_green_table_value.unsafe_as(Proc(UInt32, IDCompositionAnimation, HRESULT)).call(index, animation)
+  end
+  def set_green_table_value2(index : UInt32, value : Float32) : HRESULT
+    @lpVtbl.value.set_green_table_value2.unsafe_as(Proc(UInt32, Float32, HRESULT)).call(index, value)
+  end
+  def set_blue_table_value(index : UInt32, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_blue_table_value.unsafe_as(Proc(UInt32, IDCompositionAnimation, HRESULT)).call(index, animation)
+  end
+  def set_blue_table_value2(index : UInt32, value : Float32) : HRESULT
+    @lpVtbl.value.set_blue_table_value2.unsafe_as(Proc(UInt32, Float32, HRESULT)).call(index, value)
+  end
+  def set_alpha_table_value(index : UInt32, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_alpha_table_value.unsafe_as(Proc(UInt32, IDCompositionAnimation, HRESULT)).call(index, animation)
+  end
+  def set_alpha_table_value2(index : UInt32, value : Float32) : HRESULT
+    @lpVtbl.value.set_alpha_table_value2.unsafe_as(Proc(UInt32, Float32, HRESULT)).call(index, value)
+  end
+end
+struct LibWin32::IDCompositionCompositeEffect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input(index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.unsafe_as(Proc(UInt32, IUnknown, UInt32, HRESULT)).call(index, input, flags)
+  end
+  def set_mode(mode : D2D1_COMPOSITE_MODE) : HRESULT
+    @lpVtbl.value.set_mode.unsafe_as(Proc(D2D1_COMPOSITE_MODE, HRESULT)).call(mode)
+  end
+end
+struct LibWin32::IDCompositionBlendEffect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input(index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.unsafe_as(Proc(UInt32, IUnknown, UInt32, HRESULT)).call(index, input, flags)
+  end
+  def set_mode(mode : D2D1_BLEND_MODE) : HRESULT
+    @lpVtbl.value.set_mode.unsafe_as(Proc(D2D1_BLEND_MODE, HRESULT)).call(mode)
+  end
+end
+struct LibWin32::IDCompositionArithmeticCompositeEffect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input(index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.unsafe_as(Proc(UInt32, IUnknown, UInt32, HRESULT)).call(index, input, flags)
+  end
+  def set_coefficients(coefficients : D2D_VECTOR_4F*) : HRESULT
+    @lpVtbl.value.set_coefficients.unsafe_as(Proc(D2D_VECTOR_4F*, HRESULT)).call(coefficients)
+  end
+  def set_clamp_output(clampoutput : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_clamp_output.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(clampoutput)
+  end
+  def set_coefficient1(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_coefficient1.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_coefficient12(coeffcient1 : Float32) : HRESULT
+    @lpVtbl.value.set_coefficient12.unsafe_as(Proc(Float32, HRESULT)).call(coeffcient1)
+  end
+  def set_coefficient2(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_coefficient2.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_coefficient22(coefficient2 : Float32) : HRESULT
+    @lpVtbl.value.set_coefficient22.unsafe_as(Proc(Float32, HRESULT)).call(coefficient2)
+  end
+  def set_coefficient3(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_coefficient3.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_coefficient32(coefficient3 : Float32) : HRESULT
+    @lpVtbl.value.set_coefficient32.unsafe_as(Proc(Float32, HRESULT)).call(coefficient3)
+  end
+  def set_coefficient4(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_coefficient4.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_coefficient42(coefficient4 : Float32) : HRESULT
+    @lpVtbl.value.set_coefficient42.unsafe_as(Proc(Float32, HRESULT)).call(coefficient4)
+  end
+end
+struct LibWin32::IDCompositionAffineTransform2DEffect
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input(index : UInt32, input : IUnknown, flags : UInt32) : HRESULT
+    @lpVtbl.value.set_input.unsafe_as(Proc(UInt32, IUnknown, UInt32, HRESULT)).call(index, input, flags)
+  end
+  def set_interpolation_mode(interpolationmode : D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE) : HRESULT
+    @lpVtbl.value.set_interpolation_mode.unsafe_as(Proc(D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE, HRESULT)).call(interpolationmode)
+  end
+  def set_border_mode(bordermode : D2D1_BORDER_MODE) : HRESULT
+    @lpVtbl.value.set_border_mode.unsafe_as(Proc(D2D1_BORDER_MODE, HRESULT)).call(bordermode)
+  end
+  def set_transform_matrix(transformmatrix : D2D_MATRIX_3X2_F*) : HRESULT
+    @lpVtbl.value.set_transform_matrix.unsafe_as(Proc(D2D_MATRIX_3X2_F*, HRESULT)).call(transformmatrix)
+  end
+  def set_transform_matrix_element(row : Int32, column : Int32, animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_transform_matrix_element.unsafe_as(Proc(Int32, Int32, IDCompositionAnimation, HRESULT)).call(row, column, animation)
+  end
+  def set_transform_matrix_element2(row : Int32, column : Int32, value : Float32) : HRESULT
+    @lpVtbl.value.set_transform_matrix_element2.unsafe_as(Proc(Int32, Int32, Float32, HRESULT)).call(row, column, value)
+  end
+  def set_sharpness(animation : IDCompositionAnimation) : HRESULT
+    @lpVtbl.value.set_sharpness.unsafe_as(Proc(IDCompositionAnimation, HRESULT)).call(animation)
+  end
+  def set_sharpness2(sharpness : Float32) : HRESULT
+    @lpVtbl.value.set_sharpness2.unsafe_as(Proc(Float32, HRESULT)).call(sharpness)
+  end
+end
+struct LibWin32::IDCompositionDelegatedInkTrail
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_trail_points(inkpoints : DCompositionInkTrailPoint*, inkpointscount : UInt32, generationid : UInt32*) : HRESULT
+    @lpVtbl.value.add_trail_points.unsafe_as(Proc(DCompositionInkTrailPoint*, UInt32, UInt32*, HRESULT)).call(inkpoints, inkpointscount, generationid)
+  end
+  def add_trail_points_with_prediction(inkpoints : DCompositionInkTrailPoint*, inkpointscount : UInt32, predictedinkpoints : DCompositionInkTrailPoint*, predictedinkpointscount : UInt32, generationid : UInt32*) : HRESULT
+    @lpVtbl.value.add_trail_points_with_prediction.unsafe_as(Proc(DCompositionInkTrailPoint*, UInt32, DCompositionInkTrailPoint*, UInt32, UInt32*, HRESULT)).call(inkpoints, inkpointscount, predictedinkpoints, predictedinkpointscount, generationid)
+  end
+  def remove_trail_points(generationid : UInt32) : HRESULT
+    @lpVtbl.value.remove_trail_points.unsafe_as(Proc(UInt32, HRESULT)).call(generationid)
+  end
+  def start_new_trail(color : D2D1_COLOR_F*) : HRESULT
+    @lpVtbl.value.start_new_trail.unsafe_as(Proc(D2D1_COLOR_F*, HRESULT)).call(color)
+  end
+end
+struct LibWin32::IDCompositionInkTrailDevice
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_delegated_ink_trail(inktrail : IDCompositionDelegatedInkTrail*) : HRESULT
+    @lpVtbl.value.create_delegated_ink_trail.unsafe_as(Proc(IDCompositionDelegatedInkTrail*, HRESULT)).call(inktrail)
+  end
+  def create_delegated_ink_trail_for_swap_chain(swapchain : IUnknown, inktrail : IDCompositionDelegatedInkTrail*) : HRESULT
+    @lpVtbl.value.create_delegated_ink_trail_for_swap_chain.unsafe_as(Proc(IUnknown, IDCompositionDelegatedInkTrail*, HRESULT)).call(swapchain, inktrail)
+  end
 end

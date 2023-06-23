@@ -3934,7 +3934,7 @@ lib LibWin32
     sampler_size : UInt32
   end
   struct D3D11_SHADER_TYPE_DESC
-    class : D3D_SHADER_VARIABLE_CLASS
+    class_ : D3D_SHADER_VARIABLE_CLASS
     type : D3D_SHADER_VARIABLE_TYPE
     rows : UInt32
     columns : UInt32
@@ -4037,7 +4037,7 @@ lib LibWin32
     name : PSTR
     semantic_name : PSTR
     type : D3D_SHADER_VARIABLE_TYPE
-    class : D3D_SHADER_VARIABLE_CLASS
+    class_ : D3D_SHADER_VARIABLE_CLASS
     rows : UInt32
     columns : UInt32
     interpolation_mode : D3D_INTERPOLATION_MODE
@@ -4134,13 +4134,13 @@ lib LibWin32
 
 
   struct ID3D11DeviceChildVTbl
-    query_interface : Proc(ID3D11DeviceChild*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11DeviceChild*, UInt32)
-    release : Proc(ID3D11DeviceChild*, UInt32)
-    get_device : Proc(ID3D11DeviceChild*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11DeviceChild*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11DeviceChild*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11DeviceChild*, Guid*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
   end
 
   ID3D11DeviceChild_GUID = "1841e5c8-16b0-489b-bcc8-44cfb0d5deae"
@@ -4150,14 +4150,14 @@ lib LibWin32
   end
 
   struct ID3D11DepthStencilStateVTbl
-    query_interface : Proc(ID3D11DepthStencilState*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11DepthStencilState*, UInt32)
-    release : Proc(ID3D11DepthStencilState*, UInt32)
-    get_device : Proc(ID3D11DepthStencilState*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11DepthStencilState*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11DepthStencilState*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11DepthStencilState*, Guid*, IUnknown, HRESULT)
-    get_desc : Proc(ID3D11DepthStencilState*, D3D11_DEPTH_STENCIL_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_desc : UInt64
   end
 
   ID3D11DepthStencilState_GUID = "03823efb-8d8f-4e1c-9aa2-f64bb2cbfdf1"
@@ -4167,14 +4167,14 @@ lib LibWin32
   end
 
   struct ID3D11BlendStateVTbl
-    query_interface : Proc(ID3D11BlendState*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11BlendState*, UInt32)
-    release : Proc(ID3D11BlendState*, UInt32)
-    get_device : Proc(ID3D11BlendState*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11BlendState*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11BlendState*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11BlendState*, Guid*, IUnknown, HRESULT)
-    get_desc : Proc(ID3D11BlendState*, D3D11_BLEND_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_desc : UInt64
   end
 
   ID3D11BlendState_GUID = "75b68faa-347d-4159-8f45-a0640f01cd9a"
@@ -4184,14 +4184,14 @@ lib LibWin32
   end
 
   struct ID3D11RasterizerStateVTbl
-    query_interface : Proc(ID3D11RasterizerState*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11RasterizerState*, UInt32)
-    release : Proc(ID3D11RasterizerState*, UInt32)
-    get_device : Proc(ID3D11RasterizerState*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11RasterizerState*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11RasterizerState*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11RasterizerState*, Guid*, IUnknown, HRESULT)
-    get_desc : Proc(ID3D11RasterizerState*, D3D11_RASTERIZER_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_desc : UInt64
   end
 
   ID3D11RasterizerState_GUID = "9bb4ab81-ab1a-4d8f-b506-fc04200b6ee7"
@@ -4201,16 +4201,16 @@ lib LibWin32
   end
 
   struct ID3D11ResourceVTbl
-    query_interface : Proc(ID3D11Resource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Resource*, UInt32)
-    release : Proc(ID3D11Resource*, UInt32)
-    get_device : Proc(ID3D11Resource*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11Resource*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Resource*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Resource*, Guid*, IUnknown, HRESULT)
-    get_type : Proc(ID3D11Resource*, D3D11_RESOURCE_DIMENSION*, Void)
-    set_eviction_priority : Proc(ID3D11Resource*, UInt32, Void)
-    get_eviction_priority : Proc(ID3D11Resource*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_type : UInt64
+    set_eviction_priority : UInt64
+    get_eviction_priority : UInt64
   end
 
   ID3D11Resource_GUID = "dc8e63f3-d12b-4952-b47b-5e45026a862d"
@@ -4220,17 +4220,17 @@ lib LibWin32
   end
 
   struct ID3D11BufferVTbl
-    query_interface : Proc(ID3D11Buffer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Buffer*, UInt32)
-    release : Proc(ID3D11Buffer*, UInt32)
-    get_device : Proc(ID3D11Buffer*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11Buffer*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Buffer*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Buffer*, Guid*, IUnknown, HRESULT)
-    get_type : Proc(ID3D11Buffer*, D3D11_RESOURCE_DIMENSION*, Void)
-    set_eviction_priority : Proc(ID3D11Buffer*, UInt32, Void)
-    get_eviction_priority : Proc(ID3D11Buffer*, UInt32)
-    get_desc : Proc(ID3D11Buffer*, D3D11_BUFFER_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_type : UInt64
+    set_eviction_priority : UInt64
+    get_eviction_priority : UInt64
+    get_desc : UInt64
   end
 
   ID3D11Buffer_GUID = "48570b85-d1ee-4fcd-a250-eb350722b037"
@@ -4240,17 +4240,17 @@ lib LibWin32
   end
 
   struct ID3D11Texture1DVTbl
-    query_interface : Proc(ID3D11Texture1D*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Texture1D*, UInt32)
-    release : Proc(ID3D11Texture1D*, UInt32)
-    get_device : Proc(ID3D11Texture1D*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11Texture1D*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Texture1D*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Texture1D*, Guid*, IUnknown, HRESULT)
-    get_type : Proc(ID3D11Texture1D*, D3D11_RESOURCE_DIMENSION*, Void)
-    set_eviction_priority : Proc(ID3D11Texture1D*, UInt32, Void)
-    get_eviction_priority : Proc(ID3D11Texture1D*, UInt32)
-    get_desc : Proc(ID3D11Texture1D*, D3D11_TEXTURE1D_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_type : UInt64
+    set_eviction_priority : UInt64
+    get_eviction_priority : UInt64
+    get_desc : UInt64
   end
 
   ID3D11Texture1D_GUID = "f8fb5c27-c6b3-4f75-a4c8-439af2ef564c"
@@ -4260,17 +4260,17 @@ lib LibWin32
   end
 
   struct ID3D11Texture2DVTbl
-    query_interface : Proc(ID3D11Texture2D*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Texture2D*, UInt32)
-    release : Proc(ID3D11Texture2D*, UInt32)
-    get_device : Proc(ID3D11Texture2D*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11Texture2D*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Texture2D*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Texture2D*, Guid*, IUnknown, HRESULT)
-    get_type : Proc(ID3D11Texture2D*, D3D11_RESOURCE_DIMENSION*, Void)
-    set_eviction_priority : Proc(ID3D11Texture2D*, UInt32, Void)
-    get_eviction_priority : Proc(ID3D11Texture2D*, UInt32)
-    get_desc : Proc(ID3D11Texture2D*, D3D11_TEXTURE2D_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_type : UInt64
+    set_eviction_priority : UInt64
+    get_eviction_priority : UInt64
+    get_desc : UInt64
   end
 
   ID3D11Texture2D_GUID = "6f15aaf2-d208-4e89-9ab4-489535d34f9c"
@@ -4280,17 +4280,17 @@ lib LibWin32
   end
 
   struct ID3D11Texture3DVTbl
-    query_interface : Proc(ID3D11Texture3D*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Texture3D*, UInt32)
-    release : Proc(ID3D11Texture3D*, UInt32)
-    get_device : Proc(ID3D11Texture3D*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11Texture3D*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Texture3D*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Texture3D*, Guid*, IUnknown, HRESULT)
-    get_type : Proc(ID3D11Texture3D*, D3D11_RESOURCE_DIMENSION*, Void)
-    set_eviction_priority : Proc(ID3D11Texture3D*, UInt32, Void)
-    get_eviction_priority : Proc(ID3D11Texture3D*, UInt32)
-    get_desc : Proc(ID3D11Texture3D*, D3D11_TEXTURE3D_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_type : UInt64
+    set_eviction_priority : UInt64
+    get_eviction_priority : UInt64
+    get_desc : UInt64
   end
 
   ID3D11Texture3D_GUID = "037e866e-f56d-4357-a8af-9dabbe6e250e"
@@ -4300,14 +4300,14 @@ lib LibWin32
   end
 
   struct ID3D11ViewVTbl
-    query_interface : Proc(ID3D11View*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11View*, UInt32)
-    release : Proc(ID3D11View*, UInt32)
-    get_device : Proc(ID3D11View*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11View*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11View*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11View*, Guid*, IUnknown, HRESULT)
-    get_resource : Proc(ID3D11View*, ID3D11Resource*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_resource : UInt64
   end
 
   ID3D11View_GUID = "839d1216-bb2e-412b-b7f4-a9dbebe08ed1"
@@ -4317,15 +4317,15 @@ lib LibWin32
   end
 
   struct ID3D11ShaderResourceViewVTbl
-    query_interface : Proc(ID3D11ShaderResourceView*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11ShaderResourceView*, UInt32)
-    release : Proc(ID3D11ShaderResourceView*, UInt32)
-    get_device : Proc(ID3D11ShaderResourceView*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11ShaderResourceView*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11ShaderResourceView*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11ShaderResourceView*, Guid*, IUnknown, HRESULT)
-    get_resource : Proc(ID3D11ShaderResourceView*, ID3D11Resource*, Void)
-    get_desc : Proc(ID3D11ShaderResourceView*, D3D11_SHADER_RESOURCE_VIEW_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_resource : UInt64
+    get_desc : UInt64
   end
 
   ID3D11ShaderResourceView_GUID = "b0e06fe0-8192-4e1a-b1ca-36d7414710b2"
@@ -4335,15 +4335,15 @@ lib LibWin32
   end
 
   struct ID3D11RenderTargetViewVTbl
-    query_interface : Proc(ID3D11RenderTargetView*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11RenderTargetView*, UInt32)
-    release : Proc(ID3D11RenderTargetView*, UInt32)
-    get_device : Proc(ID3D11RenderTargetView*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11RenderTargetView*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11RenderTargetView*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11RenderTargetView*, Guid*, IUnknown, HRESULT)
-    get_resource : Proc(ID3D11RenderTargetView*, ID3D11Resource*, Void)
-    get_desc : Proc(ID3D11RenderTargetView*, D3D11_RENDER_TARGET_VIEW_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_resource : UInt64
+    get_desc : UInt64
   end
 
   ID3D11RenderTargetView_GUID = "dfdba067-0b8d-4865-875b-d7b4516cc164"
@@ -4353,15 +4353,15 @@ lib LibWin32
   end
 
   struct ID3D11DepthStencilViewVTbl
-    query_interface : Proc(ID3D11DepthStencilView*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11DepthStencilView*, UInt32)
-    release : Proc(ID3D11DepthStencilView*, UInt32)
-    get_device : Proc(ID3D11DepthStencilView*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11DepthStencilView*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11DepthStencilView*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11DepthStencilView*, Guid*, IUnknown, HRESULT)
-    get_resource : Proc(ID3D11DepthStencilView*, ID3D11Resource*, Void)
-    get_desc : Proc(ID3D11DepthStencilView*, D3D11_DEPTH_STENCIL_VIEW_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_resource : UInt64
+    get_desc : UInt64
   end
 
   ID3D11DepthStencilView_GUID = "9fdac92a-1876-48c3-afad-25b94f84a9b6"
@@ -4371,15 +4371,15 @@ lib LibWin32
   end
 
   struct ID3D11UnorderedAccessViewVTbl
-    query_interface : Proc(ID3D11UnorderedAccessView*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11UnorderedAccessView*, UInt32)
-    release : Proc(ID3D11UnorderedAccessView*, UInt32)
-    get_device : Proc(ID3D11UnorderedAccessView*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11UnorderedAccessView*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11UnorderedAccessView*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11UnorderedAccessView*, Guid*, IUnknown, HRESULT)
-    get_resource : Proc(ID3D11UnorderedAccessView*, ID3D11Resource*, Void)
-    get_desc : Proc(ID3D11UnorderedAccessView*, D3D11_UNORDERED_ACCESS_VIEW_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_resource : UInt64
+    get_desc : UInt64
   end
 
   ID3D11UnorderedAccessView_GUID = "28acf509-7f5c-48f6-8611-f316010a6380"
@@ -4389,13 +4389,13 @@ lib LibWin32
   end
 
   struct ID3D11VertexShaderVTbl
-    query_interface : Proc(ID3D11VertexShader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11VertexShader*, UInt32)
-    release : Proc(ID3D11VertexShader*, UInt32)
-    get_device : Proc(ID3D11VertexShader*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11VertexShader*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11VertexShader*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11VertexShader*, Guid*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
   end
 
   ID3D11VertexShader_GUID = "3b301d64-d678-4289-8897-22f8928b72f3"
@@ -4405,13 +4405,13 @@ lib LibWin32
   end
 
   struct ID3D11HullShaderVTbl
-    query_interface : Proc(ID3D11HullShader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11HullShader*, UInt32)
-    release : Proc(ID3D11HullShader*, UInt32)
-    get_device : Proc(ID3D11HullShader*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11HullShader*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11HullShader*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11HullShader*, Guid*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
   end
 
   ID3D11HullShader_GUID = "8e5c6061-628a-4c8e-8264-bbe45cb3d5dd"
@@ -4421,13 +4421,13 @@ lib LibWin32
   end
 
   struct ID3D11DomainShaderVTbl
-    query_interface : Proc(ID3D11DomainShader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11DomainShader*, UInt32)
-    release : Proc(ID3D11DomainShader*, UInt32)
-    get_device : Proc(ID3D11DomainShader*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11DomainShader*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11DomainShader*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11DomainShader*, Guid*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
   end
 
   ID3D11DomainShader_GUID = "f582c508-0f36-490c-9977-31eece268cfa"
@@ -4437,13 +4437,13 @@ lib LibWin32
   end
 
   struct ID3D11GeometryShaderVTbl
-    query_interface : Proc(ID3D11GeometryShader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11GeometryShader*, UInt32)
-    release : Proc(ID3D11GeometryShader*, UInt32)
-    get_device : Proc(ID3D11GeometryShader*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11GeometryShader*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11GeometryShader*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11GeometryShader*, Guid*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
   end
 
   ID3D11GeometryShader_GUID = "38325b96-effb-4022-ba02-2e795b70275c"
@@ -4453,13 +4453,13 @@ lib LibWin32
   end
 
   struct ID3D11PixelShaderVTbl
-    query_interface : Proc(ID3D11PixelShader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11PixelShader*, UInt32)
-    release : Proc(ID3D11PixelShader*, UInt32)
-    get_device : Proc(ID3D11PixelShader*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11PixelShader*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11PixelShader*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11PixelShader*, Guid*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
   end
 
   ID3D11PixelShader_GUID = "ea82e40d-51dc-4f33-93d4-db7c9125ae8c"
@@ -4469,13 +4469,13 @@ lib LibWin32
   end
 
   struct ID3D11ComputeShaderVTbl
-    query_interface : Proc(ID3D11ComputeShader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11ComputeShader*, UInt32)
-    release : Proc(ID3D11ComputeShader*, UInt32)
-    get_device : Proc(ID3D11ComputeShader*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11ComputeShader*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11ComputeShader*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11ComputeShader*, Guid*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
   end
 
   ID3D11ComputeShader_GUID = "4f5b196e-c2bd-495e-bd01-1fded38e4969"
@@ -4485,13 +4485,13 @@ lib LibWin32
   end
 
   struct ID3D11InputLayoutVTbl
-    query_interface : Proc(ID3D11InputLayout*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11InputLayout*, UInt32)
-    release : Proc(ID3D11InputLayout*, UInt32)
-    get_device : Proc(ID3D11InputLayout*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11InputLayout*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11InputLayout*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11InputLayout*, Guid*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
   end
 
   ID3D11InputLayout_GUID = "e4819ddc-4cf0-4025-bd26-5de82a3e07b7"
@@ -4501,14 +4501,14 @@ lib LibWin32
   end
 
   struct ID3D11SamplerStateVTbl
-    query_interface : Proc(ID3D11SamplerState*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11SamplerState*, UInt32)
-    release : Proc(ID3D11SamplerState*, UInt32)
-    get_device : Proc(ID3D11SamplerState*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11SamplerState*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11SamplerState*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11SamplerState*, Guid*, IUnknown, HRESULT)
-    get_desc : Proc(ID3D11SamplerState*, D3D11_SAMPLER_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_desc : UInt64
   end
 
   ID3D11SamplerState_GUID = "da6fea51-564c-4487-9810-f0d0f9b4e3a5"
@@ -4518,14 +4518,14 @@ lib LibWin32
   end
 
   struct ID3D11AsynchronousVTbl
-    query_interface : Proc(ID3D11Asynchronous*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Asynchronous*, UInt32)
-    release : Proc(ID3D11Asynchronous*, UInt32)
-    get_device : Proc(ID3D11Asynchronous*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11Asynchronous*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Asynchronous*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Asynchronous*, Guid*, IUnknown, HRESULT)
-    get_data_size : Proc(ID3D11Asynchronous*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_data_size : UInt64
   end
 
   ID3D11Asynchronous_GUID = "4b35d0cd-1e15-4258-9c98-1b1333f6dd3b"
@@ -4535,15 +4535,15 @@ lib LibWin32
   end
 
   struct ID3D11QueryVTbl
-    query_interface : Proc(ID3D11Query*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Query*, UInt32)
-    release : Proc(ID3D11Query*, UInt32)
-    get_device : Proc(ID3D11Query*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11Query*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Query*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Query*, Guid*, IUnknown, HRESULT)
-    get_data_size : Proc(ID3D11Query*, UInt32)
-    get_desc : Proc(ID3D11Query*, D3D11_QUERY_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_data_size : UInt64
+    get_desc : UInt64
   end
 
   ID3D11Query_GUID = "d6c00747-87b7-425e-b84d-44d108560afd"
@@ -4553,15 +4553,15 @@ lib LibWin32
   end
 
   struct ID3D11PredicateVTbl
-    query_interface : Proc(ID3D11Predicate*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Predicate*, UInt32)
-    release : Proc(ID3D11Predicate*, UInt32)
-    get_device : Proc(ID3D11Predicate*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11Predicate*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Predicate*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Predicate*, Guid*, IUnknown, HRESULT)
-    get_data_size : Proc(ID3D11Predicate*, UInt32)
-    get_desc : Proc(ID3D11Predicate*, D3D11_QUERY_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_data_size : UInt64
+    get_desc : UInt64
   end
 
   ID3D11Predicate_GUID = "9eb576dd-9f77-4d86-81aa-8bab5fe490e2"
@@ -4571,15 +4571,15 @@ lib LibWin32
   end
 
   struct ID3D11CounterVTbl
-    query_interface : Proc(ID3D11Counter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Counter*, UInt32)
-    release : Proc(ID3D11Counter*, UInt32)
-    get_device : Proc(ID3D11Counter*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11Counter*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Counter*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Counter*, Guid*, IUnknown, HRESULT)
-    get_data_size : Proc(ID3D11Counter*, UInt32)
-    get_desc : Proc(ID3D11Counter*, D3D11_COUNTER_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_data_size : UInt64
+    get_desc : UInt64
   end
 
   ID3D11Counter_GUID = "6e8c49fb-a371-4770-b440-29086022b741"
@@ -4589,17 +4589,17 @@ lib LibWin32
   end
 
   struct ID3D11ClassInstanceVTbl
-    query_interface : Proc(ID3D11ClassInstance*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11ClassInstance*, UInt32)
-    release : Proc(ID3D11ClassInstance*, UInt32)
-    get_device : Proc(ID3D11ClassInstance*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11ClassInstance*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11ClassInstance*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11ClassInstance*, Guid*, IUnknown, HRESULT)
-    get_class_linkage : Proc(ID3D11ClassInstance*, ID3D11ClassLinkage*, Void)
-    get_desc : Proc(ID3D11ClassInstance*, D3D11_CLASS_INSTANCE_DESC*, Void)
-    get_instance_name : Proc(ID3D11ClassInstance*, UInt8*, LibC::UINT_PTR*, Void)
-    get_type_name : Proc(ID3D11ClassInstance*, UInt8*, LibC::UINT_PTR*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_class_linkage : UInt64
+    get_desc : UInt64
+    get_instance_name : UInt64
+    get_type_name : UInt64
   end
 
   ID3D11ClassInstance_GUID = "a6cd7faa-b0b7-4a2f-9436-8662a65797cb"
@@ -4609,15 +4609,15 @@ lib LibWin32
   end
 
   struct ID3D11ClassLinkageVTbl
-    query_interface : Proc(ID3D11ClassLinkage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11ClassLinkage*, UInt32)
-    release : Proc(ID3D11ClassLinkage*, UInt32)
-    get_device : Proc(ID3D11ClassLinkage*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11ClassLinkage*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11ClassLinkage*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11ClassLinkage*, Guid*, IUnknown, HRESULT)
-    get_class_instance : Proc(ID3D11ClassLinkage*, PSTR, UInt32, ID3D11ClassInstance*, HRESULT)
-    create_class_instance : Proc(ID3D11ClassLinkage*, PSTR, UInt32, UInt32, UInt32, UInt32, ID3D11ClassInstance*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_class_instance : UInt64
+    create_class_instance : UInt64
   end
 
   ID3D11ClassLinkage_GUID = "ddf57cba-9543-46e4-a12b-f207a0fe7fed"
@@ -4627,14 +4627,14 @@ lib LibWin32
   end
 
   struct ID3D11CommandListVTbl
-    query_interface : Proc(ID3D11CommandList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11CommandList*, UInt32)
-    release : Proc(ID3D11CommandList*, UInt32)
-    get_device : Proc(ID3D11CommandList*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11CommandList*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11CommandList*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11CommandList*, Guid*, IUnknown, HRESULT)
-    get_context_flags : Proc(ID3D11CommandList*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_context_flags : UInt64
   end
 
   ID3D11CommandList_GUID = "a24bc4d1-769e-43f7-8013-98ff566c18e2"
@@ -4644,121 +4644,121 @@ lib LibWin32
   end
 
   struct ID3D11DeviceContextVTbl
-    query_interface : Proc(ID3D11DeviceContext*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11DeviceContext*, UInt32)
-    release : Proc(ID3D11DeviceContext*, UInt32)
-    get_device : Proc(ID3D11DeviceContext*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11DeviceContext*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11DeviceContext*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11DeviceContext*, Guid*, IUnknown, HRESULT)
-    vs_set_constant_buffers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ps_set_shader_resources : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ps_set_shader : Proc(ID3D11DeviceContext*, ID3D11PixelShader, ID3D11ClassInstance*, UInt32, Void)
-    ps_set_samplers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    vs_set_shader : Proc(ID3D11DeviceContext*, ID3D11VertexShader, ID3D11ClassInstance*, UInt32, Void)
-    draw_indexed : Proc(ID3D11DeviceContext*, UInt32, UInt32, Int32, Void)
-    draw : Proc(ID3D11DeviceContext*, UInt32, UInt32, Void)
-    map : Proc(ID3D11DeviceContext*, ID3D11Resource, UInt32, D3D11_MAP, UInt32, D3D11_MAPPED_SUBRESOURCE*, HRESULT)
-    unmap : Proc(ID3D11DeviceContext*, ID3D11Resource, UInt32, Void)
-    ps_set_constant_buffers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ia_set_input_layout : Proc(ID3D11DeviceContext*, ID3D11InputLayout, Void)
-    ia_set_vertex_buffers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ia_set_index_buffer : Proc(ID3D11DeviceContext*, ID3D11Buffer, DXGI_FORMAT, UInt32, Void)
-    draw_indexed_instanced : Proc(ID3D11DeviceContext*, UInt32, UInt32, UInt32, Int32, UInt32, Void)
-    draw_instanced : Proc(ID3D11DeviceContext*, UInt32, UInt32, UInt32, UInt32, Void)
-    gs_set_constant_buffers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11Buffer*, Void)
-    gs_set_shader : Proc(ID3D11DeviceContext*, ID3D11GeometryShader, ID3D11ClassInstance*, UInt32, Void)
-    ia_set_primitive_topology : Proc(ID3D11DeviceContext*, D3D_PRIMITIVE_TOPOLOGY, Void)
-    vs_set_shader_resources : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    vs_set_samplers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    rbegin : Proc(ID3D11DeviceContext*, ID3D11Asynchronous, Void)
-    rend : Proc(ID3D11DeviceContext*, ID3D11Asynchronous, Void)
-    get_data : Proc(ID3D11DeviceContext*, ID3D11Asynchronous, Void*, UInt32, UInt32, HRESULT)
-    set_predication : Proc(ID3D11DeviceContext*, ID3D11Predicate, LibC::BOOL, Void)
-    gs_set_shader_resources : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    gs_set_samplers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    om_set_render_targets : Proc(ID3D11DeviceContext*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, Void)
-    om_set_render_targets_and_unordered_access_views : Proc(ID3D11DeviceContext*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)
-    om_set_blend_state : Proc(ID3D11DeviceContext*, ID3D11BlendState, Float32*, UInt32, Void)
-    om_set_depth_stencil_state : Proc(ID3D11DeviceContext*, ID3D11DepthStencilState, UInt32, Void)
-    so_set_targets : Proc(ID3D11DeviceContext*, UInt32, ID3D11Buffer*, UInt32*, Void)
-    draw_auto : Proc(ID3D11DeviceContext*, Void)
-    draw_indexed_instanced_indirect : Proc(ID3D11DeviceContext*, ID3D11Buffer, UInt32, Void)
-    draw_instanced_indirect : Proc(ID3D11DeviceContext*, ID3D11Buffer, UInt32, Void)
-    dispatch : Proc(ID3D11DeviceContext*, UInt32, UInt32, UInt32, Void)
-    dispatch_indirect : Proc(ID3D11DeviceContext*, ID3D11Buffer, UInt32, Void)
-    rs_set_state : Proc(ID3D11DeviceContext*, ID3D11RasterizerState, Void)
-    rs_set_viewports : Proc(ID3D11DeviceContext*, UInt32, D3D11_VIEWPORT*, Void)
-    rs_set_scissor_rects : Proc(ID3D11DeviceContext*, UInt32, RECT*, Void)
-    copy_subresource_region : Proc(ID3D11DeviceContext*, ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)
-    copy_resource : Proc(ID3D11DeviceContext*, ID3D11Resource, ID3D11Resource, Void)
-    update_subresource : Proc(ID3D11DeviceContext*, ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, Void)
-    copy_structure_count : Proc(ID3D11DeviceContext*, ID3D11Buffer, UInt32, ID3D11UnorderedAccessView, Void)
-    clear_render_target_view : Proc(ID3D11DeviceContext*, ID3D11RenderTargetView, Float32*, Void)
-    clear_unordered_access_view_uint : Proc(ID3D11DeviceContext*, ID3D11UnorderedAccessView, UInt32*, Void)
-    clear_unordered_access_view_float : Proc(ID3D11DeviceContext*, ID3D11UnorderedAccessView, Float32*, Void)
-    clear_depth_stencil_view : Proc(ID3D11DeviceContext*, ID3D11DepthStencilView, UInt32, Float32, UInt8, Void)
-    generate_mips : Proc(ID3D11DeviceContext*, ID3D11ShaderResourceView, Void)
-    set_resource_min_lod : Proc(ID3D11DeviceContext*, ID3D11Resource, Float32, Void)
-    get_resource_min_lod : Proc(ID3D11DeviceContext*, ID3D11Resource, Float32)
-    resolve_subresource : Proc(ID3D11DeviceContext*, ID3D11Resource, UInt32, ID3D11Resource, UInt32, DXGI_FORMAT, Void)
-    execute_command_list : Proc(ID3D11DeviceContext*, ID3D11CommandList, LibC::BOOL, Void)
-    hs_set_shader_resources : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    hs_set_shader : Proc(ID3D11DeviceContext*, ID3D11HullShader, ID3D11ClassInstance*, UInt32, Void)
-    hs_set_samplers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    hs_set_constant_buffers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ds_set_shader_resources : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ds_set_shader : Proc(ID3D11DeviceContext*, ID3D11DomainShader, ID3D11ClassInstance*, UInt32, Void)
-    ds_set_samplers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    ds_set_constant_buffers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11Buffer*, Void)
-    cs_set_shader_resources : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    cs_set_unordered_access_views : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)
-    cs_set_shader : Proc(ID3D11DeviceContext*, ID3D11ComputeShader, ID3D11ClassInstance*, UInt32, Void)
-    cs_set_samplers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    cs_set_constant_buffers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11Buffer*, Void)
-    vs_get_constant_buffers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ps_get_shader_resources : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ps_get_shader : Proc(ID3D11DeviceContext*, ID3D11PixelShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ps_get_samplers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    vs_get_shader : Proc(ID3D11DeviceContext*, ID3D11VertexShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ps_get_constant_buffers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ia_get_input_layout : Proc(ID3D11DeviceContext*, ID3D11InputLayout*, Void)
-    ia_get_vertex_buffers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ia_get_index_buffer : Proc(ID3D11DeviceContext*, ID3D11Buffer*, DXGI_FORMAT*, UInt32*, Void)
-    gs_get_constant_buffers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11Buffer*, Void)
-    gs_get_shader : Proc(ID3D11DeviceContext*, ID3D11GeometryShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ia_get_primitive_topology : Proc(ID3D11DeviceContext*, D3D_PRIMITIVE_TOPOLOGY*, Void)
-    vs_get_shader_resources : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    vs_get_samplers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    get_predication : Proc(ID3D11DeviceContext*, ID3D11Predicate*, LibC::BOOL*, Void)
-    gs_get_shader_resources : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    gs_get_samplers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    om_get_render_targets : Proc(ID3D11DeviceContext*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, Void)
-    om_get_render_targets_and_unordered_access_views : Proc(ID3D11DeviceContext*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, UInt32, UInt32, ID3D11UnorderedAccessView*, Void)
-    om_get_blend_state : Proc(ID3D11DeviceContext*, ID3D11BlendState*, Float32*, UInt32*, Void)
-    om_get_depth_stencil_state : Proc(ID3D11DeviceContext*, ID3D11DepthStencilState*, UInt32*, Void)
-    so_get_targets : Proc(ID3D11DeviceContext*, UInt32, ID3D11Buffer*, Void)
-    rs_get_state : Proc(ID3D11DeviceContext*, ID3D11RasterizerState*, Void)
-    rs_get_viewports : Proc(ID3D11DeviceContext*, UInt32*, D3D11_VIEWPORT*, Void)
-    rs_get_scissor_rects : Proc(ID3D11DeviceContext*, UInt32*, RECT*, Void)
-    hs_get_shader_resources : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    hs_get_shader : Proc(ID3D11DeviceContext*, ID3D11HullShader*, ID3D11ClassInstance*, UInt32*, Void)
-    hs_get_samplers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    hs_get_constant_buffers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ds_get_shader_resources : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ds_get_shader : Proc(ID3D11DeviceContext*, ID3D11DomainShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ds_get_samplers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    ds_get_constant_buffers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11Buffer*, Void)
-    cs_get_shader_resources : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    cs_get_unordered_access_views : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11UnorderedAccessView*, Void)
-    cs_get_shader : Proc(ID3D11DeviceContext*, ID3D11ComputeShader*, ID3D11ClassInstance*, UInt32*, Void)
-    cs_get_samplers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    cs_get_constant_buffers : Proc(ID3D11DeviceContext*, UInt32, UInt32, ID3D11Buffer*, Void)
-    clear_state : Proc(ID3D11DeviceContext*, Void)
-    flush : Proc(ID3D11DeviceContext*, Void)
-    get_type : Proc(ID3D11DeviceContext*, D3D11_DEVICE_CONTEXT_TYPE)
-    get_context_flags : Proc(ID3D11DeviceContext*, UInt32)
-    finish_command_list : Proc(ID3D11DeviceContext*, LibC::BOOL, ID3D11CommandList*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    vs_set_constant_buffers : UInt64
+    ps_set_shader_resources : UInt64
+    ps_set_shader : UInt64
+    ps_set_samplers : UInt64
+    vs_set_shader : UInt64
+    draw_indexed : UInt64
+    draw : UInt64
+    map : UInt64
+    unmap : UInt64
+    ps_set_constant_buffers : UInt64
+    ia_set_input_layout : UInt64
+    ia_set_vertex_buffers : UInt64
+    ia_set_index_buffer : UInt64
+    draw_indexed_instanced : UInt64
+    draw_instanced : UInt64
+    gs_set_constant_buffers : UInt64
+    gs_set_shader : UInt64
+    ia_set_primitive_topology : UInt64
+    vs_set_shader_resources : UInt64
+    vs_set_samplers : UInt64
+    begin_ : UInt64
+    end_ : UInt64
+    get_data : UInt64
+    set_predication : UInt64
+    gs_set_shader_resources : UInt64
+    gs_set_samplers : UInt64
+    om_set_render_targets : UInt64
+    om_set_render_targets_and_unordered_access_views : UInt64
+    om_set_blend_state : UInt64
+    om_set_depth_stencil_state : UInt64
+    so_set_targets : UInt64
+    draw_auto : UInt64
+    draw_indexed_instanced_indirect : UInt64
+    draw_instanced_indirect : UInt64
+    dispatch : UInt64
+    dispatch_indirect : UInt64
+    rs_set_state : UInt64
+    rs_set_viewports : UInt64
+    rs_set_scissor_rects : UInt64
+    copy_subresource_region : UInt64
+    copy_resource : UInt64
+    update_subresource : UInt64
+    copy_structure_count : UInt64
+    clear_render_target_view : UInt64
+    clear_unordered_access_view_uint : UInt64
+    clear_unordered_access_view_float : UInt64
+    clear_depth_stencil_view : UInt64
+    generate_mips : UInt64
+    set_resource_min_lod : UInt64
+    get_resource_min_lod : UInt64
+    resolve_subresource : UInt64
+    execute_command_list : UInt64
+    hs_set_shader_resources : UInt64
+    hs_set_shader : UInt64
+    hs_set_samplers : UInt64
+    hs_set_constant_buffers : UInt64
+    ds_set_shader_resources : UInt64
+    ds_set_shader : UInt64
+    ds_set_samplers : UInt64
+    ds_set_constant_buffers : UInt64
+    cs_set_shader_resources : UInt64
+    cs_set_unordered_access_views : UInt64
+    cs_set_shader : UInt64
+    cs_set_samplers : UInt64
+    cs_set_constant_buffers : UInt64
+    vs_get_constant_buffers : UInt64
+    ps_get_shader_resources : UInt64
+    ps_get_shader : UInt64
+    ps_get_samplers : UInt64
+    vs_get_shader : UInt64
+    ps_get_constant_buffers : UInt64
+    ia_get_input_layout : UInt64
+    ia_get_vertex_buffers : UInt64
+    ia_get_index_buffer : UInt64
+    gs_get_constant_buffers : UInt64
+    gs_get_shader : UInt64
+    ia_get_primitive_topology : UInt64
+    vs_get_shader_resources : UInt64
+    vs_get_samplers : UInt64
+    get_predication : UInt64
+    gs_get_shader_resources : UInt64
+    gs_get_samplers : UInt64
+    om_get_render_targets : UInt64
+    om_get_render_targets_and_unordered_access_views : UInt64
+    om_get_blend_state : UInt64
+    om_get_depth_stencil_state : UInt64
+    so_get_targets : UInt64
+    rs_get_state : UInt64
+    rs_get_viewports : UInt64
+    rs_get_scissor_rects : UInt64
+    hs_get_shader_resources : UInt64
+    hs_get_shader : UInt64
+    hs_get_samplers : UInt64
+    hs_get_constant_buffers : UInt64
+    ds_get_shader_resources : UInt64
+    ds_get_shader : UInt64
+    ds_get_samplers : UInt64
+    ds_get_constant_buffers : UInt64
+    cs_get_shader_resources : UInt64
+    cs_get_unordered_access_views : UInt64
+    cs_get_shader : UInt64
+    cs_get_samplers : UInt64
+    cs_get_constant_buffers : UInt64
+    clear_state : UInt64
+    flush : UInt64
+    get_type : UInt64
+    get_context_flags : UInt64
+    finish_command_list : UInt64
   end
 
   ID3D11DeviceContext_GUID = "c0bfa96c-e089-44fb-8eaf-26f8796190da"
@@ -4768,15 +4768,15 @@ lib LibWin32
   end
 
   struct ID3D11VideoDecoderVTbl
-    query_interface : Proc(ID3D11VideoDecoder*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11VideoDecoder*, UInt32)
-    release : Proc(ID3D11VideoDecoder*, UInt32)
-    get_device : Proc(ID3D11VideoDecoder*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11VideoDecoder*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11VideoDecoder*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11VideoDecoder*, Guid*, IUnknown, HRESULT)
-    get_creation_parameters : Proc(ID3D11VideoDecoder*, D3D11_VIDEO_DECODER_DESC*, D3D11_VIDEO_DECODER_CONFIG*, HRESULT)
-    get_driver_handle : Proc(ID3D11VideoDecoder*, LibC::HANDLE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_creation_parameters : UInt64
+    get_driver_handle : UInt64
   end
 
   ID3D11VideoDecoder_GUID = "3c9c5b51-995d-48d1-9b8d-fa5caeded65c"
@@ -4786,19 +4786,19 @@ lib LibWin32
   end
 
   struct ID3D11VideoProcessorEnumeratorVTbl
-    query_interface : Proc(ID3D11VideoProcessorEnumerator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11VideoProcessorEnumerator*, UInt32)
-    release : Proc(ID3D11VideoProcessorEnumerator*, UInt32)
-    get_device : Proc(ID3D11VideoProcessorEnumerator*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11VideoProcessorEnumerator*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11VideoProcessorEnumerator*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11VideoProcessorEnumerator*, Guid*, IUnknown, HRESULT)
-    get_video_processor_content_desc : Proc(ID3D11VideoProcessorEnumerator*, D3D11_VIDEO_PROCESSOR_CONTENT_DESC*, HRESULT)
-    check_video_processor_format : Proc(ID3D11VideoProcessorEnumerator*, DXGI_FORMAT, UInt32*, HRESULT)
-    get_video_processor_caps : Proc(ID3D11VideoProcessorEnumerator*, D3D11_VIDEO_PROCESSOR_CAPS*, HRESULT)
-    get_video_processor_rate_conversion_caps : Proc(ID3D11VideoProcessorEnumerator*, UInt32, D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS*, HRESULT)
-    get_video_processor_custom_rate : Proc(ID3D11VideoProcessorEnumerator*, UInt32, UInt32, D3D11_VIDEO_PROCESSOR_CUSTOM_RATE*, HRESULT)
-    get_video_processor_filter_range : Proc(ID3D11VideoProcessorEnumerator*, D3D11_VIDEO_PROCESSOR_FILTER, D3D11_VIDEO_PROCESSOR_FILTER_RANGE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_video_processor_content_desc : UInt64
+    check_video_processor_format : UInt64
+    get_video_processor_caps : UInt64
+    get_video_processor_rate_conversion_caps : UInt64
+    get_video_processor_custom_rate : UInt64
+    get_video_processor_filter_range : UInt64
   end
 
   ID3D11VideoProcessorEnumerator_GUID = "31627037-53ab-4200-9061-05faa9ab45f9"
@@ -4808,15 +4808,15 @@ lib LibWin32
   end
 
   struct ID3D11VideoProcessorVTbl
-    query_interface : Proc(ID3D11VideoProcessor*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11VideoProcessor*, UInt32)
-    release : Proc(ID3D11VideoProcessor*, UInt32)
-    get_device : Proc(ID3D11VideoProcessor*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11VideoProcessor*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11VideoProcessor*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11VideoProcessor*, Guid*, IUnknown, HRESULT)
-    get_content_desc : Proc(ID3D11VideoProcessor*, D3D11_VIDEO_PROCESSOR_CONTENT_DESC*, Void)
-    get_rate_conversion_caps : Proc(ID3D11VideoProcessor*, D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_content_desc : UInt64
+    get_rate_conversion_caps : UInt64
   end
 
   ID3D11VideoProcessor_GUID = "1d7b0652-185f-41c6-85ce-0c5be3d4ae6c"
@@ -4826,16 +4826,16 @@ lib LibWin32
   end
 
   struct ID3D11AuthenticatedChannelVTbl
-    query_interface : Proc(ID3D11AuthenticatedChannel*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11AuthenticatedChannel*, UInt32)
-    release : Proc(ID3D11AuthenticatedChannel*, UInt32)
-    get_device : Proc(ID3D11AuthenticatedChannel*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11AuthenticatedChannel*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11AuthenticatedChannel*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11AuthenticatedChannel*, Guid*, IUnknown, HRESULT)
-    get_certificate_size : Proc(ID3D11AuthenticatedChannel*, UInt32*, HRESULT)
-    get_certificate : Proc(ID3D11AuthenticatedChannel*, UInt32, UInt8*, HRESULT)
-    get_channel_handle : Proc(ID3D11AuthenticatedChannel*, LibC::HANDLE*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_certificate_size : UInt64
+    get_certificate : UInt64
+    get_channel_handle : UInt64
   end
 
   ID3D11AuthenticatedChannel_GUID = "3015a308-dcbd-47aa-a747-192486d14d4a"
@@ -4845,18 +4845,18 @@ lib LibWin32
   end
 
   struct ID3D11CryptoSessionVTbl
-    query_interface : Proc(ID3D11CryptoSession*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11CryptoSession*, UInt32)
-    release : Proc(ID3D11CryptoSession*, UInt32)
-    get_device : Proc(ID3D11CryptoSession*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11CryptoSession*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11CryptoSession*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11CryptoSession*, Guid*, IUnknown, HRESULT)
-    get_crypto_type : Proc(ID3D11CryptoSession*, Guid*, Void)
-    get_decoder_profile : Proc(ID3D11CryptoSession*, Guid*, Void)
-    get_certificate_size : Proc(ID3D11CryptoSession*, UInt32*, HRESULT)
-    get_certificate : Proc(ID3D11CryptoSession*, UInt32, UInt8*, HRESULT)
-    get_crypto_session_handle : Proc(ID3D11CryptoSession*, LibC::HANDLE*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_crypto_type : UInt64
+    get_decoder_profile : UInt64
+    get_certificate_size : UInt64
+    get_certificate : UInt64
+    get_crypto_session_handle : UInt64
   end
 
   ID3D11CryptoSession_GUID = "9b32f9ad-bdcc-40a6-a39d-d5c865845720"
@@ -4866,15 +4866,15 @@ lib LibWin32
   end
 
   struct ID3D11VideoDecoderOutputViewVTbl
-    query_interface : Proc(ID3D11VideoDecoderOutputView*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11VideoDecoderOutputView*, UInt32)
-    release : Proc(ID3D11VideoDecoderOutputView*, UInt32)
-    get_device : Proc(ID3D11VideoDecoderOutputView*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11VideoDecoderOutputView*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11VideoDecoderOutputView*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11VideoDecoderOutputView*, Guid*, IUnknown, HRESULT)
-    get_resource : Proc(ID3D11VideoDecoderOutputView*, ID3D11Resource*, Void)
-    get_desc : Proc(ID3D11VideoDecoderOutputView*, D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_resource : UInt64
+    get_desc : UInt64
   end
 
   ID3D11VideoDecoderOutputView_GUID = "c2931aea-2a85-4f20-860f-fba1fd256e18"
@@ -4884,15 +4884,15 @@ lib LibWin32
   end
 
   struct ID3D11VideoProcessorInputViewVTbl
-    query_interface : Proc(ID3D11VideoProcessorInputView*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11VideoProcessorInputView*, UInt32)
-    release : Proc(ID3D11VideoProcessorInputView*, UInt32)
-    get_device : Proc(ID3D11VideoProcessorInputView*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11VideoProcessorInputView*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11VideoProcessorInputView*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11VideoProcessorInputView*, Guid*, IUnknown, HRESULT)
-    get_resource : Proc(ID3D11VideoProcessorInputView*, ID3D11Resource*, Void)
-    get_desc : Proc(ID3D11VideoProcessorInputView*, D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_resource : UInt64
+    get_desc : UInt64
   end
 
   ID3D11VideoProcessorInputView_GUID = "11ec5a5f-51dc-4945-ab34-6e8c21300ea5"
@@ -4902,15 +4902,15 @@ lib LibWin32
   end
 
   struct ID3D11VideoProcessorOutputViewVTbl
-    query_interface : Proc(ID3D11VideoProcessorOutputView*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11VideoProcessorOutputView*, UInt32)
-    release : Proc(ID3D11VideoProcessorOutputView*, UInt32)
-    get_device : Proc(ID3D11VideoProcessorOutputView*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11VideoProcessorOutputView*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11VideoProcessorOutputView*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11VideoProcessorOutputView*, Guid*, IUnknown, HRESULT)
-    get_resource : Proc(ID3D11VideoProcessorOutputView*, ID3D11Resource*, Void)
-    get_desc : Proc(ID3D11VideoProcessorOutputView*, D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_resource : UInt64
+    get_desc : UInt64
   end
 
   ID3D11VideoProcessorOutputView_GUID = "a048285e-25a9-4527-bd93-d68b68c44254"
@@ -4920,71 +4920,71 @@ lib LibWin32
   end
 
   struct ID3D11VideoContextVTbl
-    query_interface : Proc(ID3D11VideoContext*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11VideoContext*, UInt32)
-    release : Proc(ID3D11VideoContext*, UInt32)
-    get_device : Proc(ID3D11VideoContext*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11VideoContext*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11VideoContext*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11VideoContext*, Guid*, IUnknown, HRESULT)
-    get_decoder_buffer : Proc(ID3D11VideoContext*, ID3D11VideoDecoder, D3D11_VIDEO_DECODER_BUFFER_TYPE, UInt32*, Void**, HRESULT)
-    release_decoder_buffer : Proc(ID3D11VideoContext*, ID3D11VideoDecoder, D3D11_VIDEO_DECODER_BUFFER_TYPE, HRESULT)
-    decoder_begin_frame : Proc(ID3D11VideoContext*, ID3D11VideoDecoder, ID3D11VideoDecoderOutputView, UInt32, Void*, HRESULT)
-    decoder_end_frame : Proc(ID3D11VideoContext*, ID3D11VideoDecoder, HRESULT)
-    submit_decoder_buffers : Proc(ID3D11VideoContext*, ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC*, HRESULT)
-    decoder_extension : Proc(ID3D11VideoContext*, ID3D11VideoDecoder, D3D11_VIDEO_DECODER_EXTENSION*, Int32)
-    video_processor_set_output_target_rect : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, LibC::BOOL, RECT*, Void)
-    video_processor_set_output_background_color : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, LibC::BOOL, D3D11_VIDEO_COLOR*, Void)
-    video_processor_set_output_color_space : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)
-    video_processor_set_output_alpha_fill_mode : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, UInt32, Void)
-    video_processor_set_output_constriction : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, LibC::BOOL, SIZE, Void)
-    video_processor_set_output_stereo_mode : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, LibC::BOOL, Void)
-    video_processor_set_output_extension : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, Guid*, UInt32, Void*, Int32)
-    video_processor_get_output_target_rect : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, LibC::BOOL*, RECT*, Void)
-    video_processor_get_output_background_color : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, LibC::BOOL*, D3D11_VIDEO_COLOR*, Void)
-    video_processor_get_output_color_space : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)
-    video_processor_get_output_alpha_fill_mode : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE*, UInt32*, Void)
-    video_processor_get_output_constriction : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, LibC::BOOL*, SIZE*, Void)
-    video_processor_get_output_stereo_mode : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, LibC::BOOL*, Void)
-    video_processor_get_output_extension : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, Guid*, UInt32, Void*, Int32)
-    video_processor_set_stream_frame_format : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_FRAME_FORMAT, Void)
-    video_processor_set_stream_color_space : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)
-    video_processor_set_stream_output_rate : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, LibC::BOOL, DXGI_RATIONAL*, Void)
-    video_processor_set_stream_source_rect : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL, RECT*, Void)
-    video_processor_set_stream_dest_rect : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL, RECT*, Void)
-    video_processor_set_stream_alpha : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL, Float32, Void)
-    video_processor_set_stream_palette : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, UInt32, UInt32*, Void)
-    video_processor_set_stream_pixel_aspect_ratio : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL, DXGI_RATIONAL*, DXGI_RATIONAL*, Void)
-    video_processor_set_stream_luma_key : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL, Float32, Float32, Void)
-    video_processor_set_stream_stereo_format : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL, D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, LibC::BOOL, LibC::BOOL, D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, Int32, Void)
-    video_processor_set_stream_auto_processing_mode : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL, Void)
-    video_processor_set_stream_filter : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_FILTER, LibC::BOOL, Int32, Void)
-    video_processor_set_stream_extension : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, Guid*, UInt32, Void*, Int32)
-    video_processor_get_stream_frame_format : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_FRAME_FORMAT*, Void)
-    video_processor_get_stream_color_space : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)
-    video_processor_get_stream_output_rate : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_OUTPUT_RATE*, LibC::BOOL*, DXGI_RATIONAL*, Void)
-    video_processor_get_stream_source_rect : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, RECT*, Void)
-    video_processor_get_stream_dest_rect : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, RECT*, Void)
-    video_processor_get_stream_alpha : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, Float32*, Void)
-    video_processor_get_stream_palette : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, UInt32, UInt32*, Void)
-    video_processor_get_stream_pixel_aspect_ratio : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, DXGI_RATIONAL*, DXGI_RATIONAL*, Void)
-    video_processor_get_stream_luma_key : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, Float32*, Float32*, Void)
-    video_processor_get_stream_stereo_format : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_STEREO_FORMAT*, LibC::BOOL*, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE*, Int32*, Void)
-    video_processor_get_stream_auto_processing_mode : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, Void)
-    video_processor_get_stream_filter : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_FILTER, LibC::BOOL*, Int32*, Void)
-    video_processor_get_stream_extension : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, Guid*, UInt32, Void*, Int32)
-    video_processor_blt : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, ID3D11VideoProcessorOutputView, UInt32, UInt32, D3D11_VIDEO_PROCESSOR_STREAM*, HRESULT)
-    negotiate_crypto_session_key_exchange : Proc(ID3D11VideoContext*, ID3D11CryptoSession, UInt32, Void*, HRESULT)
-    encryption_blt : Proc(ID3D11VideoContext*, ID3D11CryptoSession, ID3D11Texture2D, ID3D11Texture2D, UInt32, Void*, Void)
-    decryption_blt : Proc(ID3D11VideoContext*, ID3D11CryptoSession, ID3D11Texture2D, ID3D11Texture2D, D3D11_ENCRYPTED_BLOCK_INFO*, UInt32, Void*, UInt32, Void*, Void)
-    start_session_key_refresh : Proc(ID3D11VideoContext*, ID3D11CryptoSession, UInt32, Void*, Void)
-    finish_session_key_refresh : Proc(ID3D11VideoContext*, ID3D11CryptoSession, Void)
-    get_encryption_blt_key : Proc(ID3D11VideoContext*, ID3D11CryptoSession, UInt32, Void*, HRESULT)
-    negotiate_authenticated_channel_key_exchange : Proc(ID3D11VideoContext*, ID3D11AuthenticatedChannel, UInt32, Void*, HRESULT)
-    query_authenticated_channel : Proc(ID3D11VideoContext*, ID3D11AuthenticatedChannel, UInt32, Void*, UInt32, Void*, HRESULT)
-    configure_authenticated_channel : Proc(ID3D11VideoContext*, ID3D11AuthenticatedChannel, UInt32, Void*, D3D11_AUTHENTICATED_CONFIGURE_OUTPUT*, HRESULT)
-    video_processor_set_stream_rotation : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL, D3D11_VIDEO_PROCESSOR_ROTATION, Void)
-    video_processor_get_stream_rotation : Proc(ID3D11VideoContext*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_ROTATION*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_decoder_buffer : UInt64
+    release_decoder_buffer : UInt64
+    decoder_begin_frame : UInt64
+    decoder_end_frame : UInt64
+    submit_decoder_buffers : UInt64
+    decoder_extension : UInt64
+    video_processor_set_output_target_rect : UInt64
+    video_processor_set_output_background_color : UInt64
+    video_processor_set_output_color_space : UInt64
+    video_processor_set_output_alpha_fill_mode : UInt64
+    video_processor_set_output_constriction : UInt64
+    video_processor_set_output_stereo_mode : UInt64
+    video_processor_set_output_extension : UInt64
+    video_processor_get_output_target_rect : UInt64
+    video_processor_get_output_background_color : UInt64
+    video_processor_get_output_color_space : UInt64
+    video_processor_get_output_alpha_fill_mode : UInt64
+    video_processor_get_output_constriction : UInt64
+    video_processor_get_output_stereo_mode : UInt64
+    video_processor_get_output_extension : UInt64
+    video_processor_set_stream_frame_format : UInt64
+    video_processor_set_stream_color_space : UInt64
+    video_processor_set_stream_output_rate : UInt64
+    video_processor_set_stream_source_rect : UInt64
+    video_processor_set_stream_dest_rect : UInt64
+    video_processor_set_stream_alpha : UInt64
+    video_processor_set_stream_palette : UInt64
+    video_processor_set_stream_pixel_aspect_ratio : UInt64
+    video_processor_set_stream_luma_key : UInt64
+    video_processor_set_stream_stereo_format : UInt64
+    video_processor_set_stream_auto_processing_mode : UInt64
+    video_processor_set_stream_filter : UInt64
+    video_processor_set_stream_extension : UInt64
+    video_processor_get_stream_frame_format : UInt64
+    video_processor_get_stream_color_space : UInt64
+    video_processor_get_stream_output_rate : UInt64
+    video_processor_get_stream_source_rect : UInt64
+    video_processor_get_stream_dest_rect : UInt64
+    video_processor_get_stream_alpha : UInt64
+    video_processor_get_stream_palette : UInt64
+    video_processor_get_stream_pixel_aspect_ratio : UInt64
+    video_processor_get_stream_luma_key : UInt64
+    video_processor_get_stream_stereo_format : UInt64
+    video_processor_get_stream_auto_processing_mode : UInt64
+    video_processor_get_stream_filter : UInt64
+    video_processor_get_stream_extension : UInt64
+    video_processor_blt : UInt64
+    negotiate_crypto_session_key_exchange : UInt64
+    encryption_blt : UInt64
+    decryption_blt : UInt64
+    start_session_key_refresh : UInt64
+    finish_session_key_refresh : UInt64
+    get_encryption_blt_key : UInt64
+    negotiate_authenticated_channel_key_exchange : UInt64
+    query_authenticated_channel : UInt64
+    configure_authenticated_channel : UInt64
+    video_processor_set_stream_rotation : UInt64
+    video_processor_get_stream_rotation : UInt64
   end
 
   ID3D11VideoContext_GUID = "61f21c45-3c0e-4a74-9cea-67100d9ad5e4"
@@ -4994,26 +4994,26 @@ lib LibWin32
   end
 
   struct ID3D11VideoDeviceVTbl
-    query_interface : Proc(ID3D11VideoDevice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11VideoDevice*, UInt32)
-    release : Proc(ID3D11VideoDevice*, UInt32)
-    create_video_decoder : Proc(ID3D11VideoDevice*, D3D11_VIDEO_DECODER_DESC*, D3D11_VIDEO_DECODER_CONFIG*, ID3D11VideoDecoder*, HRESULT)
-    create_video_processor : Proc(ID3D11VideoDevice*, ID3D11VideoProcessorEnumerator, UInt32, ID3D11VideoProcessor*, HRESULT)
-    create_authenticated_channel : Proc(ID3D11VideoDevice*, D3D11_AUTHENTICATED_CHANNEL_TYPE, ID3D11AuthenticatedChannel*, HRESULT)
-    create_crypto_session : Proc(ID3D11VideoDevice*, Guid*, Guid*, Guid*, ID3D11CryptoSession*, HRESULT)
-    create_video_decoder_output_view : Proc(ID3D11VideoDevice*, ID3D11Resource, D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC*, ID3D11VideoDecoderOutputView*, HRESULT)
-    create_video_processor_input_view : Proc(ID3D11VideoDevice*, ID3D11Resource, ID3D11VideoProcessorEnumerator, D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC*, ID3D11VideoProcessorInputView*, HRESULT)
-    create_video_processor_output_view : Proc(ID3D11VideoDevice*, ID3D11Resource, ID3D11VideoProcessorEnumerator, D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC*, ID3D11VideoProcessorOutputView*, HRESULT)
-    create_video_processor_enumerator : Proc(ID3D11VideoDevice*, D3D11_VIDEO_PROCESSOR_CONTENT_DESC*, ID3D11VideoProcessorEnumerator*, HRESULT)
-    get_video_decoder_profile_count : Proc(ID3D11VideoDevice*, UInt32)
-    get_video_decoder_profile : Proc(ID3D11VideoDevice*, UInt32, Guid*, HRESULT)
-    check_video_decoder_format : Proc(ID3D11VideoDevice*, Guid*, DXGI_FORMAT, LibC::BOOL*, HRESULT)
-    get_video_decoder_config_count : Proc(ID3D11VideoDevice*, D3D11_VIDEO_DECODER_DESC*, UInt32*, HRESULT)
-    get_video_decoder_config : Proc(ID3D11VideoDevice*, D3D11_VIDEO_DECODER_DESC*, UInt32, D3D11_VIDEO_DECODER_CONFIG*, HRESULT)
-    get_content_protection_caps : Proc(ID3D11VideoDevice*, Guid*, Guid*, D3D11_VIDEO_CONTENT_PROTECTION_CAPS*, HRESULT)
-    check_crypto_key_exchange : Proc(ID3D11VideoDevice*, Guid*, Guid*, UInt32, Guid*, HRESULT)
-    set_private_data : Proc(ID3D11VideoDevice*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11VideoDevice*, Guid*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_video_decoder : UInt64
+    create_video_processor : UInt64
+    create_authenticated_channel : UInt64
+    create_crypto_session : UInt64
+    create_video_decoder_output_view : UInt64
+    create_video_processor_input_view : UInt64
+    create_video_processor_output_view : UInt64
+    create_video_processor_enumerator : UInt64
+    get_video_decoder_profile_count : UInt64
+    get_video_decoder_profile : UInt64
+    check_video_decoder_format : UInt64
+    get_video_decoder_config_count : UInt64
+    get_video_decoder_config : UInt64
+    get_content_protection_caps : UInt64
+    check_crypto_key_exchange : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
   end
 
   ID3D11VideoDevice_GUID = "10ec4d5b-975a-4689-b9e4-d0aac30fe333"
@@ -5023,49 +5023,49 @@ lib LibWin32
   end
 
   struct ID3D11DeviceVTbl
-    query_interface : Proc(ID3D11Device*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Device*, UInt32)
-    release : Proc(ID3D11Device*, UInt32)
-    create_buffer : Proc(ID3D11Device*, D3D11_BUFFER_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Buffer*, HRESULT)
-    create_texture1_d : Proc(ID3D11Device*, D3D11_TEXTURE1D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture1D*, HRESULT)
-    create_texture2_d : Proc(ID3D11Device*, D3D11_TEXTURE2D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D*, HRESULT)
-    create_texture3_d : Proc(ID3D11Device*, D3D11_TEXTURE3D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D*, HRESULT)
-    create_shader_resource_view : Proc(ID3D11Device*, ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC*, ID3D11ShaderResourceView*, HRESULT)
-    create_unordered_access_view : Proc(ID3D11Device*, ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC*, ID3D11UnorderedAccessView*, HRESULT)
-    create_render_target_view : Proc(ID3D11Device*, ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC*, ID3D11RenderTargetView*, HRESULT)
-    create_depth_stencil_view : Proc(ID3D11Device*, ID3D11Resource, D3D11_DEPTH_STENCIL_VIEW_DESC*, ID3D11DepthStencilView*, HRESULT)
-    create_input_layout : Proc(ID3D11Device*, D3D11_INPUT_ELEMENT_DESC*, UInt32, Void*, LibC::UINT_PTR, ID3D11InputLayout*, HRESULT)
-    create_vertex_shader : Proc(ID3D11Device*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11VertexShader*, HRESULT)
-    create_geometry_shader : Proc(ID3D11Device*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)
-    create_geometry_shader_with_stream_output : Proc(ID3D11Device*, Void*, LibC::UINT_PTR, D3D11_SO_DECLARATION_ENTRY*, UInt32, UInt32*, UInt32, UInt32, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)
-    create_pixel_shader : Proc(ID3D11Device*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11PixelShader*, HRESULT)
-    create_hull_shader : Proc(ID3D11Device*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11HullShader*, HRESULT)
-    create_domain_shader : Proc(ID3D11Device*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11DomainShader*, HRESULT)
-    create_compute_shader : Proc(ID3D11Device*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11ComputeShader*, HRESULT)
-    create_class_linkage : Proc(ID3D11Device*, ID3D11ClassLinkage*, HRESULT)
-    create_blend_state : Proc(ID3D11Device*, D3D11_BLEND_DESC*, ID3D11BlendState*, HRESULT)
-    create_depth_stencil_state : Proc(ID3D11Device*, D3D11_DEPTH_STENCIL_DESC*, ID3D11DepthStencilState*, HRESULT)
-    create_rasterizer_state : Proc(ID3D11Device*, D3D11_RASTERIZER_DESC*, ID3D11RasterizerState*, HRESULT)
-    create_sampler_state : Proc(ID3D11Device*, D3D11_SAMPLER_DESC*, ID3D11SamplerState*, HRESULT)
-    create_query : Proc(ID3D11Device*, D3D11_QUERY_DESC*, ID3D11Query*, HRESULT)
-    create_predicate : Proc(ID3D11Device*, D3D11_QUERY_DESC*, ID3D11Predicate*, HRESULT)
-    create_counter : Proc(ID3D11Device*, D3D11_COUNTER_DESC*, ID3D11Counter*, HRESULT)
-    create_deferred_context : Proc(ID3D11Device*, UInt32, ID3D11DeviceContext*, HRESULT)
-    open_shared_resource : Proc(ID3D11Device*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    check_format_support : Proc(ID3D11Device*, DXGI_FORMAT, UInt32*, HRESULT)
-    check_multisample_quality_levels : Proc(ID3D11Device*, DXGI_FORMAT, UInt32, UInt32*, HRESULT)
-    check_counter_info : Proc(ID3D11Device*, D3D11_COUNTER_INFO*, Void)
-    check_counter : Proc(ID3D11Device*, D3D11_COUNTER_DESC*, D3D11_COUNTER_TYPE*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)
-    check_feature_support : Proc(ID3D11Device*, D3D11_FEATURE, Void*, UInt32, HRESULT)
-    get_private_data : Proc(ID3D11Device*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Device*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Device*, Guid*, IUnknown, HRESULT)
-    get_feature_level : Proc(ID3D11Device*, D3D_FEATURE_LEVEL)
-    get_creation_flags : Proc(ID3D11Device*, UInt32)
-    get_device_removed_reason : Proc(ID3D11Device*, HRESULT)
-    get_immediate_context : Proc(ID3D11Device*, ID3D11DeviceContext*, Void)
-    set_exception_mode : Proc(ID3D11Device*, UInt32, HRESULT)
-    get_exception_mode : Proc(ID3D11Device*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_buffer : UInt64
+    create_texture1_d : UInt64
+    create_texture2_d : UInt64
+    create_texture3_d : UInt64
+    create_shader_resource_view : UInt64
+    create_unordered_access_view : UInt64
+    create_render_target_view : UInt64
+    create_depth_stencil_view : UInt64
+    create_input_layout : UInt64
+    create_vertex_shader : UInt64
+    create_geometry_shader : UInt64
+    create_geometry_shader_with_stream_output : UInt64
+    create_pixel_shader : UInt64
+    create_hull_shader : UInt64
+    create_domain_shader : UInt64
+    create_compute_shader : UInt64
+    create_class_linkage : UInt64
+    create_blend_state : UInt64
+    create_depth_stencil_state : UInt64
+    create_rasterizer_state : UInt64
+    create_sampler_state : UInt64
+    create_query : UInt64
+    create_predicate : UInt64
+    create_counter : UInt64
+    create_deferred_context : UInt64
+    open_shared_resource : UInt64
+    check_format_support : UInt64
+    check_multisample_quality_levels : UInt64
+    check_counter_info : UInt64
+    check_counter : UInt64
+    check_feature_support : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_feature_level : UInt64
+    get_creation_flags : UInt64
+    get_device_removed_reason : UInt64
+    get_immediate_context : UInt64
+    set_exception_mode : UInt64
+    get_exception_mode : UInt64
   end
 
   ID3D11Device_GUID = "db6f6ddb-ac77-4e88-8253-819df9bbf140"
@@ -5075,18 +5075,18 @@ lib LibWin32
   end
 
   struct ID3D11DebugVTbl
-    query_interface : Proc(ID3D11Debug*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Debug*, UInt32)
-    release : Proc(ID3D11Debug*, UInt32)
-    set_feature_mask : Proc(ID3D11Debug*, UInt32, HRESULT)
-    get_feature_mask : Proc(ID3D11Debug*, UInt32)
-    set_present_per_render_op_delay : Proc(ID3D11Debug*, UInt32, HRESULT)
-    get_present_per_render_op_delay : Proc(ID3D11Debug*, UInt32)
-    set_swap_chain : Proc(ID3D11Debug*, IDXGISwapChain, HRESULT)
-    get_swap_chain : Proc(ID3D11Debug*, IDXGISwapChain*, HRESULT)
-    validate_context : Proc(ID3D11Debug*, ID3D11DeviceContext, HRESULT)
-    report_live_device_objects : Proc(ID3D11Debug*, D3D11_RLDO_FLAGS, HRESULT)
-    validate_context_for_dispatch : Proc(ID3D11Debug*, ID3D11DeviceContext, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_feature_mask : UInt64
+    get_feature_mask : UInt64
+    set_present_per_render_op_delay : UInt64
+    get_present_per_render_op_delay : UInt64
+    set_swap_chain : UInt64
+    get_swap_chain : UInt64
+    validate_context : UInt64
+    report_live_device_objects : UInt64
+    validate_context_for_dispatch : UInt64
   end
 
   ID3D11Debug_GUID = "79cf2233-7536-4948-9d36-1e4692dc5760"
@@ -5096,11 +5096,11 @@ lib LibWin32
   end
 
   struct ID3D11SwitchToRefVTbl
-    query_interface : Proc(ID3D11SwitchToRef*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11SwitchToRef*, UInt32)
-    release : Proc(ID3D11SwitchToRef*, UInt32)
-    set_use_ref : Proc(ID3D11SwitchToRef*, LibC::BOOL, LibC::BOOL)
-    get_use_ref : Proc(ID3D11SwitchToRef*, LibC::BOOL)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_use_ref : UInt64
+    get_use_ref : UInt64
   end
 
   ID3D11SwitchToRef_GUID = "1ef337e3-58e7-4f83-a692-db221f5ed47e"
@@ -5110,11 +5110,11 @@ lib LibWin32
   end
 
   struct ID3D11TracingDeviceVTbl
-    query_interface : Proc(ID3D11TracingDevice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11TracingDevice*, UInt32)
-    release : Proc(ID3D11TracingDevice*, UInt32)
-    set_shader_tracking_options_by_type : Proc(ID3D11TracingDevice*, UInt32, UInt32, HRESULT)
-    set_shader_tracking_options : Proc(ID3D11TracingDevice*, IUnknown, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_shader_tracking_options_by_type : UInt64
+    set_shader_tracking_options : UInt64
   end
 
   ID3D11TracingDevice_GUID = "1911c771-1587-413e-a7e0-fb26c3de0268"
@@ -5124,10 +5124,10 @@ lib LibWin32
   end
 
   struct ID3D11RefTrackingOptionsVTbl
-    query_interface : Proc(ID3D11RefTrackingOptions*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11RefTrackingOptions*, UInt32)
-    release : Proc(ID3D11RefTrackingOptions*, UInt32)
-    set_tracking_options : Proc(ID3D11RefTrackingOptions*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_tracking_options : UInt64
   end
 
   ID3D11RefTrackingOptions_GUID = "193dacdf-0db2-4c05-a55c-ef06cac56fd9"
@@ -5137,10 +5137,10 @@ lib LibWin32
   end
 
   struct ID3D11RefDefaultTrackingOptionsVTbl
-    query_interface : Proc(ID3D11RefDefaultTrackingOptions*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11RefDefaultTrackingOptions*, UInt32)
-    release : Proc(ID3D11RefDefaultTrackingOptions*, UInt32)
-    set_tracking_options : Proc(ID3D11RefDefaultTrackingOptions*, UInt32, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_tracking_options : UInt64
   end
 
   ID3D11RefDefaultTrackingOptions_GUID = "03916615-c644-418c-9bf4-75db5be63ca0"
@@ -5150,44 +5150,44 @@ lib LibWin32
   end
 
   struct ID3D11InfoQueueVTbl
-    query_interface : Proc(ID3D11InfoQueue*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11InfoQueue*, UInt32)
-    release : Proc(ID3D11InfoQueue*, UInt32)
-    set_message_count_limit : Proc(ID3D11InfoQueue*, UInt64, HRESULT)
-    clear_stored_messages : Proc(ID3D11InfoQueue*, Void)
-    get_message : Proc(ID3D11InfoQueue*, UInt64, D3D11_MESSAGE*, LibC::UINT_PTR*, HRESULT)
-    get_num_messages_allowed_by_storage_filter : Proc(ID3D11InfoQueue*, UInt64)
-    get_num_messages_denied_by_storage_filter : Proc(ID3D11InfoQueue*, UInt64)
-    get_num_stored_messages : Proc(ID3D11InfoQueue*, UInt64)
-    get_num_stored_messages_allowed_by_retrieval_filter : Proc(ID3D11InfoQueue*, UInt64)
-    get_num_messages_discarded_by_message_count_limit : Proc(ID3D11InfoQueue*, UInt64)
-    get_message_count_limit : Proc(ID3D11InfoQueue*, UInt64)
-    add_storage_filter_entries : Proc(ID3D11InfoQueue*, D3D11_INFO_QUEUE_FILTER*, HRESULT)
-    get_storage_filter : Proc(ID3D11InfoQueue*, D3D11_INFO_QUEUE_FILTER*, LibC::UINT_PTR*, HRESULT)
-    clear_storage_filter : Proc(ID3D11InfoQueue*, Void)
-    push_empty_storage_filter : Proc(ID3D11InfoQueue*, HRESULT)
-    push_copy_of_storage_filter : Proc(ID3D11InfoQueue*, HRESULT)
-    push_storage_filter : Proc(ID3D11InfoQueue*, D3D11_INFO_QUEUE_FILTER*, HRESULT)
-    pop_storage_filter : Proc(ID3D11InfoQueue*, Void)
-    get_storage_filter_stack_size : Proc(ID3D11InfoQueue*, UInt32)
-    add_retrieval_filter_entries : Proc(ID3D11InfoQueue*, D3D11_INFO_QUEUE_FILTER*, HRESULT)
-    get_retrieval_filter : Proc(ID3D11InfoQueue*, D3D11_INFO_QUEUE_FILTER*, LibC::UINT_PTR*, HRESULT)
-    clear_retrieval_filter : Proc(ID3D11InfoQueue*, Void)
-    push_empty_retrieval_filter : Proc(ID3D11InfoQueue*, HRESULT)
-    push_copy_of_retrieval_filter : Proc(ID3D11InfoQueue*, HRESULT)
-    push_retrieval_filter : Proc(ID3D11InfoQueue*, D3D11_INFO_QUEUE_FILTER*, HRESULT)
-    pop_retrieval_filter : Proc(ID3D11InfoQueue*, Void)
-    get_retrieval_filter_stack_size : Proc(ID3D11InfoQueue*, UInt32)
-    add_message : Proc(ID3D11InfoQueue*, D3D11_MESSAGE_CATEGORY, D3D11_MESSAGE_SEVERITY, D3D11_MESSAGE_ID, PSTR, HRESULT)
-    add_application_message : Proc(ID3D11InfoQueue*, D3D11_MESSAGE_SEVERITY, PSTR, HRESULT)
-    set_break_on_category : Proc(ID3D11InfoQueue*, D3D11_MESSAGE_CATEGORY, LibC::BOOL, HRESULT)
-    set_break_on_severity : Proc(ID3D11InfoQueue*, D3D11_MESSAGE_SEVERITY, LibC::BOOL, HRESULT)
-    set_break_on_id : Proc(ID3D11InfoQueue*, D3D11_MESSAGE_ID, LibC::BOOL, HRESULT)
-    get_break_on_category : Proc(ID3D11InfoQueue*, D3D11_MESSAGE_CATEGORY, LibC::BOOL)
-    get_break_on_severity : Proc(ID3D11InfoQueue*, D3D11_MESSAGE_SEVERITY, LibC::BOOL)
-    get_break_on_id : Proc(ID3D11InfoQueue*, D3D11_MESSAGE_ID, LibC::BOOL)
-    set_mute_debug_output : Proc(ID3D11InfoQueue*, LibC::BOOL, Void)
-    get_mute_debug_output : Proc(ID3D11InfoQueue*, LibC::BOOL)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_message_count_limit : UInt64
+    clear_stored_messages : UInt64
+    get_message : UInt64
+    get_num_messages_allowed_by_storage_filter : UInt64
+    get_num_messages_denied_by_storage_filter : UInt64
+    get_num_stored_messages : UInt64
+    get_num_stored_messages_allowed_by_retrieval_filter : UInt64
+    get_num_messages_discarded_by_message_count_limit : UInt64
+    get_message_count_limit : UInt64
+    add_storage_filter_entries : UInt64
+    get_storage_filter : UInt64
+    clear_storage_filter : UInt64
+    push_empty_storage_filter : UInt64
+    push_copy_of_storage_filter : UInt64
+    push_storage_filter : UInt64
+    pop_storage_filter : UInt64
+    get_storage_filter_stack_size : UInt64
+    add_retrieval_filter_entries : UInt64
+    get_retrieval_filter : UInt64
+    clear_retrieval_filter : UInt64
+    push_empty_retrieval_filter : UInt64
+    push_copy_of_retrieval_filter : UInt64
+    push_retrieval_filter : UInt64
+    pop_retrieval_filter : UInt64
+    get_retrieval_filter_stack_size : UInt64
+    add_message : UInt64
+    add_application_message : UInt64
+    set_break_on_category : UInt64
+    set_break_on_severity : UInt64
+    set_break_on_id : UInt64
+    get_break_on_category : UInt64
+    get_break_on_severity : UInt64
+    get_break_on_id : UInt64
+    set_mute_debug_output : UInt64
+    get_mute_debug_output : UInt64
   end
 
   ID3D11InfoQueue_GUID = "6543dbb6-1b48-42f5-ab82-e97ec74326f6"
@@ -5197,15 +5197,15 @@ lib LibWin32
   end
 
   struct ID3D11BlendState1VTbl
-    query_interface : Proc(ID3D11BlendState1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11BlendState1*, UInt32)
-    release : Proc(ID3D11BlendState1*, UInt32)
-    get_device : Proc(ID3D11BlendState1*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11BlendState1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11BlendState1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11BlendState1*, Guid*, IUnknown, HRESULT)
-    get_desc : Proc(ID3D11BlendState1*, D3D11_BLEND_DESC*, Void)
-    get_desc1 : Proc(ID3D11BlendState1*, D3D11_BLEND_DESC1*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_desc : UInt64
+    get_desc1 : UInt64
   end
 
   ID3D11BlendState1_GUID = "cc86fabe-da55-401d-85e7-e3c9de2877e9"
@@ -5215,15 +5215,15 @@ lib LibWin32
   end
 
   struct ID3D11RasterizerState1VTbl
-    query_interface : Proc(ID3D11RasterizerState1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11RasterizerState1*, UInt32)
-    release : Proc(ID3D11RasterizerState1*, UInt32)
-    get_device : Proc(ID3D11RasterizerState1*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11RasterizerState1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11RasterizerState1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11RasterizerState1*, Guid*, IUnknown, HRESULT)
-    get_desc : Proc(ID3D11RasterizerState1*, D3D11_RASTERIZER_DESC*, Void)
-    get_desc1 : Proc(ID3D11RasterizerState1*, D3D11_RASTERIZER_DESC1*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_desc : UInt64
+    get_desc1 : UInt64
   end
 
   ID3D11RasterizerState1_GUID = "1217d7a6-5039-418c-b042-9cbe256afd6e"
@@ -5233,13 +5233,13 @@ lib LibWin32
   end
 
   struct ID3DDeviceContextStateVTbl
-    query_interface : Proc(ID3DDeviceContextState*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3DDeviceContextState*, UInt32)
-    release : Proc(ID3DDeviceContextState*, UInt32)
-    get_device : Proc(ID3DDeviceContextState*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3DDeviceContextState*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3DDeviceContextState*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3DDeviceContextState*, Guid*, IUnknown, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
   end
 
   ID3DDeviceContextState_GUID = "5c1e0d8a-7c23-48f9-8c59-a92958ceff11"
@@ -5249,140 +5249,140 @@ lib LibWin32
   end
 
   struct ID3D11DeviceContext1VTbl
-    query_interface : Proc(ID3D11DeviceContext1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11DeviceContext1*, UInt32)
-    release : Proc(ID3D11DeviceContext1*, UInt32)
-    get_device : Proc(ID3D11DeviceContext1*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11DeviceContext1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11DeviceContext1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11DeviceContext1*, Guid*, IUnknown, HRESULT)
-    vs_set_constant_buffers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ps_set_shader_resources : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ps_set_shader : Proc(ID3D11DeviceContext1*, ID3D11PixelShader, ID3D11ClassInstance*, UInt32, Void)
-    ps_set_samplers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    vs_set_shader : Proc(ID3D11DeviceContext1*, ID3D11VertexShader, ID3D11ClassInstance*, UInt32, Void)
-    draw_indexed : Proc(ID3D11DeviceContext1*, UInt32, UInt32, Int32, Void)
-    draw : Proc(ID3D11DeviceContext1*, UInt32, UInt32, Void)
-    map : Proc(ID3D11DeviceContext1*, ID3D11Resource, UInt32, D3D11_MAP, UInt32, D3D11_MAPPED_SUBRESOURCE*, HRESULT)
-    unmap : Proc(ID3D11DeviceContext1*, ID3D11Resource, UInt32, Void)
-    ps_set_constant_buffers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ia_set_input_layout : Proc(ID3D11DeviceContext1*, ID3D11InputLayout, Void)
-    ia_set_vertex_buffers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ia_set_index_buffer : Proc(ID3D11DeviceContext1*, ID3D11Buffer, DXGI_FORMAT, UInt32, Void)
-    draw_indexed_instanced : Proc(ID3D11DeviceContext1*, UInt32, UInt32, UInt32, Int32, UInt32, Void)
-    draw_instanced : Proc(ID3D11DeviceContext1*, UInt32, UInt32, UInt32, UInt32, Void)
-    gs_set_constant_buffers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, Void)
-    gs_set_shader : Proc(ID3D11DeviceContext1*, ID3D11GeometryShader, ID3D11ClassInstance*, UInt32, Void)
-    ia_set_primitive_topology : Proc(ID3D11DeviceContext1*, D3D_PRIMITIVE_TOPOLOGY, Void)
-    vs_set_shader_resources : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    vs_set_samplers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    rbegin : Proc(ID3D11DeviceContext1*, ID3D11Asynchronous, Void)
-    rend : Proc(ID3D11DeviceContext1*, ID3D11Asynchronous, Void)
-    get_data : Proc(ID3D11DeviceContext1*, ID3D11Asynchronous, Void*, UInt32, UInt32, HRESULT)
-    set_predication : Proc(ID3D11DeviceContext1*, ID3D11Predicate, LibC::BOOL, Void)
-    gs_set_shader_resources : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    gs_set_samplers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    om_set_render_targets : Proc(ID3D11DeviceContext1*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, Void)
-    om_set_render_targets_and_unordered_access_views : Proc(ID3D11DeviceContext1*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)
-    om_set_blend_state : Proc(ID3D11DeviceContext1*, ID3D11BlendState, Float32*, UInt32, Void)
-    om_set_depth_stencil_state : Proc(ID3D11DeviceContext1*, ID3D11DepthStencilState, UInt32, Void)
-    so_set_targets : Proc(ID3D11DeviceContext1*, UInt32, ID3D11Buffer*, UInt32*, Void)
-    draw_auto : Proc(ID3D11DeviceContext1*, Void)
-    draw_indexed_instanced_indirect : Proc(ID3D11DeviceContext1*, ID3D11Buffer, UInt32, Void)
-    draw_instanced_indirect : Proc(ID3D11DeviceContext1*, ID3D11Buffer, UInt32, Void)
-    dispatch : Proc(ID3D11DeviceContext1*, UInt32, UInt32, UInt32, Void)
-    dispatch_indirect : Proc(ID3D11DeviceContext1*, ID3D11Buffer, UInt32, Void)
-    rs_set_state : Proc(ID3D11DeviceContext1*, ID3D11RasterizerState, Void)
-    rs_set_viewports : Proc(ID3D11DeviceContext1*, UInt32, D3D11_VIEWPORT*, Void)
-    rs_set_scissor_rects : Proc(ID3D11DeviceContext1*, UInt32, RECT*, Void)
-    copy_subresource_region : Proc(ID3D11DeviceContext1*, ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)
-    copy_resource : Proc(ID3D11DeviceContext1*, ID3D11Resource, ID3D11Resource, Void)
-    update_subresource : Proc(ID3D11DeviceContext1*, ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, Void)
-    copy_structure_count : Proc(ID3D11DeviceContext1*, ID3D11Buffer, UInt32, ID3D11UnorderedAccessView, Void)
-    clear_render_target_view : Proc(ID3D11DeviceContext1*, ID3D11RenderTargetView, Float32*, Void)
-    clear_unordered_access_view_uint : Proc(ID3D11DeviceContext1*, ID3D11UnorderedAccessView, UInt32*, Void)
-    clear_unordered_access_view_float : Proc(ID3D11DeviceContext1*, ID3D11UnorderedAccessView, Float32*, Void)
-    clear_depth_stencil_view : Proc(ID3D11DeviceContext1*, ID3D11DepthStencilView, UInt32, Float32, UInt8, Void)
-    generate_mips : Proc(ID3D11DeviceContext1*, ID3D11ShaderResourceView, Void)
-    set_resource_min_lod : Proc(ID3D11DeviceContext1*, ID3D11Resource, Float32, Void)
-    get_resource_min_lod : Proc(ID3D11DeviceContext1*, ID3D11Resource, Float32)
-    resolve_subresource : Proc(ID3D11DeviceContext1*, ID3D11Resource, UInt32, ID3D11Resource, UInt32, DXGI_FORMAT, Void)
-    execute_command_list : Proc(ID3D11DeviceContext1*, ID3D11CommandList, LibC::BOOL, Void)
-    hs_set_shader_resources : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    hs_set_shader : Proc(ID3D11DeviceContext1*, ID3D11HullShader, ID3D11ClassInstance*, UInt32, Void)
-    hs_set_samplers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    hs_set_constant_buffers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ds_set_shader_resources : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ds_set_shader : Proc(ID3D11DeviceContext1*, ID3D11DomainShader, ID3D11ClassInstance*, UInt32, Void)
-    ds_set_samplers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    ds_set_constant_buffers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, Void)
-    cs_set_shader_resources : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    cs_set_unordered_access_views : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)
-    cs_set_shader : Proc(ID3D11DeviceContext1*, ID3D11ComputeShader, ID3D11ClassInstance*, UInt32, Void)
-    cs_set_samplers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    cs_set_constant_buffers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, Void)
-    vs_get_constant_buffers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ps_get_shader_resources : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ps_get_shader : Proc(ID3D11DeviceContext1*, ID3D11PixelShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ps_get_samplers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    vs_get_shader : Proc(ID3D11DeviceContext1*, ID3D11VertexShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ps_get_constant_buffers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ia_get_input_layout : Proc(ID3D11DeviceContext1*, ID3D11InputLayout*, Void)
-    ia_get_vertex_buffers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ia_get_index_buffer : Proc(ID3D11DeviceContext1*, ID3D11Buffer*, DXGI_FORMAT*, UInt32*, Void)
-    gs_get_constant_buffers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, Void)
-    gs_get_shader : Proc(ID3D11DeviceContext1*, ID3D11GeometryShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ia_get_primitive_topology : Proc(ID3D11DeviceContext1*, D3D_PRIMITIVE_TOPOLOGY*, Void)
-    vs_get_shader_resources : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    vs_get_samplers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    get_predication : Proc(ID3D11DeviceContext1*, ID3D11Predicate*, LibC::BOOL*, Void)
-    gs_get_shader_resources : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    gs_get_samplers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    om_get_render_targets : Proc(ID3D11DeviceContext1*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, Void)
-    om_get_render_targets_and_unordered_access_views : Proc(ID3D11DeviceContext1*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, UInt32, UInt32, ID3D11UnorderedAccessView*, Void)
-    om_get_blend_state : Proc(ID3D11DeviceContext1*, ID3D11BlendState*, Float32*, UInt32*, Void)
-    om_get_depth_stencil_state : Proc(ID3D11DeviceContext1*, ID3D11DepthStencilState*, UInt32*, Void)
-    so_get_targets : Proc(ID3D11DeviceContext1*, UInt32, ID3D11Buffer*, Void)
-    rs_get_state : Proc(ID3D11DeviceContext1*, ID3D11RasterizerState*, Void)
-    rs_get_viewports : Proc(ID3D11DeviceContext1*, UInt32*, D3D11_VIEWPORT*, Void)
-    rs_get_scissor_rects : Proc(ID3D11DeviceContext1*, UInt32*, RECT*, Void)
-    hs_get_shader_resources : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    hs_get_shader : Proc(ID3D11DeviceContext1*, ID3D11HullShader*, ID3D11ClassInstance*, UInt32*, Void)
-    hs_get_samplers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    hs_get_constant_buffers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ds_get_shader_resources : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ds_get_shader : Proc(ID3D11DeviceContext1*, ID3D11DomainShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ds_get_samplers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    ds_get_constant_buffers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, Void)
-    cs_get_shader_resources : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    cs_get_unordered_access_views : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11UnorderedAccessView*, Void)
-    cs_get_shader : Proc(ID3D11DeviceContext1*, ID3D11ComputeShader*, ID3D11ClassInstance*, UInt32*, Void)
-    cs_get_samplers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    cs_get_constant_buffers : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, Void)
-    clear_state : Proc(ID3D11DeviceContext1*, Void)
-    flush : Proc(ID3D11DeviceContext1*, Void)
-    get_type : Proc(ID3D11DeviceContext1*, D3D11_DEVICE_CONTEXT_TYPE)
-    get_context_flags : Proc(ID3D11DeviceContext1*, UInt32)
-    finish_command_list : Proc(ID3D11DeviceContext1*, LibC::BOOL, ID3D11CommandList*, HRESULT)
-    copy_subresource_region1 : Proc(ID3D11DeviceContext1*, ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, UInt32, Void)
-    update_subresource1 : Proc(ID3D11DeviceContext1*, ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, UInt32, Void)
-    discard_resource : Proc(ID3D11DeviceContext1*, ID3D11Resource, Void)
-    discard_view : Proc(ID3D11DeviceContext1*, ID3D11View, Void)
-    vs_set_constant_buffers1 : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    hs_set_constant_buffers1 : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ds_set_constant_buffers1 : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    gs_set_constant_buffers1 : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ps_set_constant_buffers1 : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    cs_set_constant_buffers1 : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    vs_get_constant_buffers1 : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    hs_get_constant_buffers1 : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ds_get_constant_buffers1 : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    gs_get_constant_buffers1 : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ps_get_constant_buffers1 : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    cs_get_constant_buffers1 : Proc(ID3D11DeviceContext1*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    swap_device_context_state : Proc(ID3D11DeviceContext1*, ID3DDeviceContextState, ID3DDeviceContextState*, Void)
-    clear_view : Proc(ID3D11DeviceContext1*, ID3D11View, Float32*, RECT*, UInt32, Void)
-    discard_view1 : Proc(ID3D11DeviceContext1*, ID3D11View, RECT*, UInt32, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    vs_set_constant_buffers : UInt64
+    ps_set_shader_resources : UInt64
+    ps_set_shader : UInt64
+    ps_set_samplers : UInt64
+    vs_set_shader : UInt64
+    draw_indexed : UInt64
+    draw : UInt64
+    map : UInt64
+    unmap : UInt64
+    ps_set_constant_buffers : UInt64
+    ia_set_input_layout : UInt64
+    ia_set_vertex_buffers : UInt64
+    ia_set_index_buffer : UInt64
+    draw_indexed_instanced : UInt64
+    draw_instanced : UInt64
+    gs_set_constant_buffers : UInt64
+    gs_set_shader : UInt64
+    ia_set_primitive_topology : UInt64
+    vs_set_shader_resources : UInt64
+    vs_set_samplers : UInt64
+    begin_ : UInt64
+    end_ : UInt64
+    get_data : UInt64
+    set_predication : UInt64
+    gs_set_shader_resources : UInt64
+    gs_set_samplers : UInt64
+    om_set_render_targets : UInt64
+    om_set_render_targets_and_unordered_access_views : UInt64
+    om_set_blend_state : UInt64
+    om_set_depth_stencil_state : UInt64
+    so_set_targets : UInt64
+    draw_auto : UInt64
+    draw_indexed_instanced_indirect : UInt64
+    draw_instanced_indirect : UInt64
+    dispatch : UInt64
+    dispatch_indirect : UInt64
+    rs_set_state : UInt64
+    rs_set_viewports : UInt64
+    rs_set_scissor_rects : UInt64
+    copy_subresource_region : UInt64
+    copy_resource : UInt64
+    update_subresource : UInt64
+    copy_structure_count : UInt64
+    clear_render_target_view : UInt64
+    clear_unordered_access_view_uint : UInt64
+    clear_unordered_access_view_float : UInt64
+    clear_depth_stencil_view : UInt64
+    generate_mips : UInt64
+    set_resource_min_lod : UInt64
+    get_resource_min_lod : UInt64
+    resolve_subresource : UInt64
+    execute_command_list : UInt64
+    hs_set_shader_resources : UInt64
+    hs_set_shader : UInt64
+    hs_set_samplers : UInt64
+    hs_set_constant_buffers : UInt64
+    ds_set_shader_resources : UInt64
+    ds_set_shader : UInt64
+    ds_set_samplers : UInt64
+    ds_set_constant_buffers : UInt64
+    cs_set_shader_resources : UInt64
+    cs_set_unordered_access_views : UInt64
+    cs_set_shader : UInt64
+    cs_set_samplers : UInt64
+    cs_set_constant_buffers : UInt64
+    vs_get_constant_buffers : UInt64
+    ps_get_shader_resources : UInt64
+    ps_get_shader : UInt64
+    ps_get_samplers : UInt64
+    vs_get_shader : UInt64
+    ps_get_constant_buffers : UInt64
+    ia_get_input_layout : UInt64
+    ia_get_vertex_buffers : UInt64
+    ia_get_index_buffer : UInt64
+    gs_get_constant_buffers : UInt64
+    gs_get_shader : UInt64
+    ia_get_primitive_topology : UInt64
+    vs_get_shader_resources : UInt64
+    vs_get_samplers : UInt64
+    get_predication : UInt64
+    gs_get_shader_resources : UInt64
+    gs_get_samplers : UInt64
+    om_get_render_targets : UInt64
+    om_get_render_targets_and_unordered_access_views : UInt64
+    om_get_blend_state : UInt64
+    om_get_depth_stencil_state : UInt64
+    so_get_targets : UInt64
+    rs_get_state : UInt64
+    rs_get_viewports : UInt64
+    rs_get_scissor_rects : UInt64
+    hs_get_shader_resources : UInt64
+    hs_get_shader : UInt64
+    hs_get_samplers : UInt64
+    hs_get_constant_buffers : UInt64
+    ds_get_shader_resources : UInt64
+    ds_get_shader : UInt64
+    ds_get_samplers : UInt64
+    ds_get_constant_buffers : UInt64
+    cs_get_shader_resources : UInt64
+    cs_get_unordered_access_views : UInt64
+    cs_get_shader : UInt64
+    cs_get_samplers : UInt64
+    cs_get_constant_buffers : UInt64
+    clear_state : UInt64
+    flush : UInt64
+    get_type : UInt64
+    get_context_flags : UInt64
+    finish_command_list : UInt64
+    copy_subresource_region1 : UInt64
+    update_subresource1 : UInt64
+    discard_resource : UInt64
+    discard_view : UInt64
+    vs_set_constant_buffers1 : UInt64
+    hs_set_constant_buffers1 : UInt64
+    ds_set_constant_buffers1 : UInt64
+    gs_set_constant_buffers1 : UInt64
+    ps_set_constant_buffers1 : UInt64
+    cs_set_constant_buffers1 : UInt64
+    vs_get_constant_buffers1 : UInt64
+    hs_get_constant_buffers1 : UInt64
+    ds_get_constant_buffers1 : UInt64
+    gs_get_constant_buffers1 : UInt64
+    ps_get_constant_buffers1 : UInt64
+    cs_get_constant_buffers1 : UInt64
+    swap_device_context_state : UInt64
+    clear_view : UInt64
+    discard_view1 : UInt64
   end
 
   ID3D11DeviceContext1_GUID = "bb2c6faa-b5fb-4082-8e6b-388b8cfa90e1"
@@ -5392,85 +5392,85 @@ lib LibWin32
   end
 
   struct ID3D11VideoContext1VTbl
-    query_interface : Proc(ID3D11VideoContext1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11VideoContext1*, UInt32)
-    release : Proc(ID3D11VideoContext1*, UInt32)
-    get_device : Proc(ID3D11VideoContext1*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11VideoContext1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11VideoContext1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11VideoContext1*, Guid*, IUnknown, HRESULT)
-    get_decoder_buffer : Proc(ID3D11VideoContext1*, ID3D11VideoDecoder, D3D11_VIDEO_DECODER_BUFFER_TYPE, UInt32*, Void**, HRESULT)
-    release_decoder_buffer : Proc(ID3D11VideoContext1*, ID3D11VideoDecoder, D3D11_VIDEO_DECODER_BUFFER_TYPE, HRESULT)
-    decoder_begin_frame : Proc(ID3D11VideoContext1*, ID3D11VideoDecoder, ID3D11VideoDecoderOutputView, UInt32, Void*, HRESULT)
-    decoder_end_frame : Proc(ID3D11VideoContext1*, ID3D11VideoDecoder, HRESULT)
-    submit_decoder_buffers : Proc(ID3D11VideoContext1*, ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC*, HRESULT)
-    decoder_extension : Proc(ID3D11VideoContext1*, ID3D11VideoDecoder, D3D11_VIDEO_DECODER_EXTENSION*, Int32)
-    video_processor_set_output_target_rect : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, LibC::BOOL, RECT*, Void)
-    video_processor_set_output_background_color : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, LibC::BOOL, D3D11_VIDEO_COLOR*, Void)
-    video_processor_set_output_color_space : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)
-    video_processor_set_output_alpha_fill_mode : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, UInt32, Void)
-    video_processor_set_output_constriction : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, LibC::BOOL, SIZE, Void)
-    video_processor_set_output_stereo_mode : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, LibC::BOOL, Void)
-    video_processor_set_output_extension : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, Guid*, UInt32, Void*, Int32)
-    video_processor_get_output_target_rect : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, LibC::BOOL*, RECT*, Void)
-    video_processor_get_output_background_color : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, LibC::BOOL*, D3D11_VIDEO_COLOR*, Void)
-    video_processor_get_output_color_space : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)
-    video_processor_get_output_alpha_fill_mode : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE*, UInt32*, Void)
-    video_processor_get_output_constriction : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, LibC::BOOL*, SIZE*, Void)
-    video_processor_get_output_stereo_mode : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, LibC::BOOL*, Void)
-    video_processor_get_output_extension : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, Guid*, UInt32, Void*, Int32)
-    video_processor_set_stream_frame_format : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_FRAME_FORMAT, Void)
-    video_processor_set_stream_color_space : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)
-    video_processor_set_stream_output_rate : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, LibC::BOOL, DXGI_RATIONAL*, Void)
-    video_processor_set_stream_source_rect : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL, RECT*, Void)
-    video_processor_set_stream_dest_rect : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL, RECT*, Void)
-    video_processor_set_stream_alpha : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL, Float32, Void)
-    video_processor_set_stream_palette : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, UInt32, UInt32*, Void)
-    video_processor_set_stream_pixel_aspect_ratio : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL, DXGI_RATIONAL*, DXGI_RATIONAL*, Void)
-    video_processor_set_stream_luma_key : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL, Float32, Float32, Void)
-    video_processor_set_stream_stereo_format : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL, D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, LibC::BOOL, LibC::BOOL, D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, Int32, Void)
-    video_processor_set_stream_auto_processing_mode : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL, Void)
-    video_processor_set_stream_filter : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_FILTER, LibC::BOOL, Int32, Void)
-    video_processor_set_stream_extension : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, Guid*, UInt32, Void*, Int32)
-    video_processor_get_stream_frame_format : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_FRAME_FORMAT*, Void)
-    video_processor_get_stream_color_space : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)
-    video_processor_get_stream_output_rate : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_OUTPUT_RATE*, LibC::BOOL*, DXGI_RATIONAL*, Void)
-    video_processor_get_stream_source_rect : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, RECT*, Void)
-    video_processor_get_stream_dest_rect : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, RECT*, Void)
-    video_processor_get_stream_alpha : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, Float32*, Void)
-    video_processor_get_stream_palette : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, UInt32, UInt32*, Void)
-    video_processor_get_stream_pixel_aspect_ratio : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, DXGI_RATIONAL*, DXGI_RATIONAL*, Void)
-    video_processor_get_stream_luma_key : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, Float32*, Float32*, Void)
-    video_processor_get_stream_stereo_format : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_STEREO_FORMAT*, LibC::BOOL*, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE*, Int32*, Void)
-    video_processor_get_stream_auto_processing_mode : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, Void)
-    video_processor_get_stream_filter : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_FILTER, LibC::BOOL*, Int32*, Void)
-    video_processor_get_stream_extension : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, Guid*, UInt32, Void*, Int32)
-    video_processor_blt : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, ID3D11VideoProcessorOutputView, UInt32, UInt32, D3D11_VIDEO_PROCESSOR_STREAM*, HRESULT)
-    negotiate_crypto_session_key_exchange : Proc(ID3D11VideoContext1*, ID3D11CryptoSession, UInt32, Void*, HRESULT)
-    encryption_blt : Proc(ID3D11VideoContext1*, ID3D11CryptoSession, ID3D11Texture2D, ID3D11Texture2D, UInt32, Void*, Void)
-    decryption_blt : Proc(ID3D11VideoContext1*, ID3D11CryptoSession, ID3D11Texture2D, ID3D11Texture2D, D3D11_ENCRYPTED_BLOCK_INFO*, UInt32, Void*, UInt32, Void*, Void)
-    start_session_key_refresh : Proc(ID3D11VideoContext1*, ID3D11CryptoSession, UInt32, Void*, Void)
-    finish_session_key_refresh : Proc(ID3D11VideoContext1*, ID3D11CryptoSession, Void)
-    get_encryption_blt_key : Proc(ID3D11VideoContext1*, ID3D11CryptoSession, UInt32, Void*, HRESULT)
-    negotiate_authenticated_channel_key_exchange : Proc(ID3D11VideoContext1*, ID3D11AuthenticatedChannel, UInt32, Void*, HRESULT)
-    query_authenticated_channel : Proc(ID3D11VideoContext1*, ID3D11AuthenticatedChannel, UInt32, Void*, UInt32, Void*, HRESULT)
-    configure_authenticated_channel : Proc(ID3D11VideoContext1*, ID3D11AuthenticatedChannel, UInt32, Void*, D3D11_AUTHENTICATED_CONFIGURE_OUTPUT*, HRESULT)
-    video_processor_set_stream_rotation : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL, D3D11_VIDEO_PROCESSOR_ROTATION, Void)
-    video_processor_get_stream_rotation : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_ROTATION*, Void)
-    submit_decoder_buffers1 : Proc(ID3D11VideoContext1*, ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC1*, HRESULT)
-    get_data_for_new_hardware_key : Proc(ID3D11VideoContext1*, ID3D11CryptoSession, UInt32, Void*, UInt64*, HRESULT)
-    check_crypto_session_status : Proc(ID3D11VideoContext1*, ID3D11CryptoSession, D3D11_CRYPTO_SESSION_STATUS*, HRESULT)
-    decoder_enable_downsampling : Proc(ID3D11VideoContext1*, ID3D11VideoDecoder, DXGI_COLOR_SPACE_TYPE, D3D11_VIDEO_SAMPLE_DESC*, UInt32, HRESULT)
-    decoder_update_downsampling : Proc(ID3D11VideoContext1*, ID3D11VideoDecoder, D3D11_VIDEO_SAMPLE_DESC*, HRESULT)
-    video_processor_set_output_color_space1 : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, DXGI_COLOR_SPACE_TYPE, Void)
-    video_processor_set_output_shader_usage : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, LibC::BOOL, Void)
-    video_processor_get_output_color_space1 : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, DXGI_COLOR_SPACE_TYPE*, Void)
-    video_processor_get_output_shader_usage : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, LibC::BOOL*, Void)
-    video_processor_set_stream_color_space1 : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, DXGI_COLOR_SPACE_TYPE, Void)
-    video_processor_set_stream_mirror : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL, LibC::BOOL, LibC::BOOL, Void)
-    video_processor_get_stream_color_space1 : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, DXGI_COLOR_SPACE_TYPE*, Void)
-    video_processor_get_stream_mirror : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, LibC::BOOL*, LibC::BOOL*, Void)
-    video_processor_get_behavior_hints : Proc(ID3D11VideoContext1*, ID3D11VideoProcessor, UInt32, UInt32, DXGI_FORMAT, UInt32, D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_decoder_buffer : UInt64
+    release_decoder_buffer : UInt64
+    decoder_begin_frame : UInt64
+    decoder_end_frame : UInt64
+    submit_decoder_buffers : UInt64
+    decoder_extension : UInt64
+    video_processor_set_output_target_rect : UInt64
+    video_processor_set_output_background_color : UInt64
+    video_processor_set_output_color_space : UInt64
+    video_processor_set_output_alpha_fill_mode : UInt64
+    video_processor_set_output_constriction : UInt64
+    video_processor_set_output_stereo_mode : UInt64
+    video_processor_set_output_extension : UInt64
+    video_processor_get_output_target_rect : UInt64
+    video_processor_get_output_background_color : UInt64
+    video_processor_get_output_color_space : UInt64
+    video_processor_get_output_alpha_fill_mode : UInt64
+    video_processor_get_output_constriction : UInt64
+    video_processor_get_output_stereo_mode : UInt64
+    video_processor_get_output_extension : UInt64
+    video_processor_set_stream_frame_format : UInt64
+    video_processor_set_stream_color_space : UInt64
+    video_processor_set_stream_output_rate : UInt64
+    video_processor_set_stream_source_rect : UInt64
+    video_processor_set_stream_dest_rect : UInt64
+    video_processor_set_stream_alpha : UInt64
+    video_processor_set_stream_palette : UInt64
+    video_processor_set_stream_pixel_aspect_ratio : UInt64
+    video_processor_set_stream_luma_key : UInt64
+    video_processor_set_stream_stereo_format : UInt64
+    video_processor_set_stream_auto_processing_mode : UInt64
+    video_processor_set_stream_filter : UInt64
+    video_processor_set_stream_extension : UInt64
+    video_processor_get_stream_frame_format : UInt64
+    video_processor_get_stream_color_space : UInt64
+    video_processor_get_stream_output_rate : UInt64
+    video_processor_get_stream_source_rect : UInt64
+    video_processor_get_stream_dest_rect : UInt64
+    video_processor_get_stream_alpha : UInt64
+    video_processor_get_stream_palette : UInt64
+    video_processor_get_stream_pixel_aspect_ratio : UInt64
+    video_processor_get_stream_luma_key : UInt64
+    video_processor_get_stream_stereo_format : UInt64
+    video_processor_get_stream_auto_processing_mode : UInt64
+    video_processor_get_stream_filter : UInt64
+    video_processor_get_stream_extension : UInt64
+    video_processor_blt : UInt64
+    negotiate_crypto_session_key_exchange : UInt64
+    encryption_blt : UInt64
+    decryption_blt : UInt64
+    start_session_key_refresh : UInt64
+    finish_session_key_refresh : UInt64
+    get_encryption_blt_key : UInt64
+    negotiate_authenticated_channel_key_exchange : UInt64
+    query_authenticated_channel : UInt64
+    configure_authenticated_channel : UInt64
+    video_processor_set_stream_rotation : UInt64
+    video_processor_get_stream_rotation : UInt64
+    submit_decoder_buffers1 : UInt64
+    get_data_for_new_hardware_key : UInt64
+    check_crypto_session_status : UInt64
+    decoder_enable_downsampling : UInt64
+    decoder_update_downsampling : UInt64
+    video_processor_set_output_color_space1 : UInt64
+    video_processor_set_output_shader_usage : UInt64
+    video_processor_get_output_color_space1 : UInt64
+    video_processor_get_output_shader_usage : UInt64
+    video_processor_set_stream_color_space1 : UInt64
+    video_processor_set_stream_mirror : UInt64
+    video_processor_get_stream_color_space1 : UInt64
+    video_processor_get_stream_mirror : UInt64
+    video_processor_get_behavior_hints : UInt64
   end
 
   ID3D11VideoContext1_GUID = "a7f026da-a5f8-4487-a564-15e34357651e"
@@ -5480,30 +5480,30 @@ lib LibWin32
   end
 
   struct ID3D11VideoDevice1VTbl
-    query_interface : Proc(ID3D11VideoDevice1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11VideoDevice1*, UInt32)
-    release : Proc(ID3D11VideoDevice1*, UInt32)
-    create_video_decoder : Proc(ID3D11VideoDevice1*, D3D11_VIDEO_DECODER_DESC*, D3D11_VIDEO_DECODER_CONFIG*, ID3D11VideoDecoder*, HRESULT)
-    create_video_processor : Proc(ID3D11VideoDevice1*, ID3D11VideoProcessorEnumerator, UInt32, ID3D11VideoProcessor*, HRESULT)
-    create_authenticated_channel : Proc(ID3D11VideoDevice1*, D3D11_AUTHENTICATED_CHANNEL_TYPE, ID3D11AuthenticatedChannel*, HRESULT)
-    create_crypto_session : Proc(ID3D11VideoDevice1*, Guid*, Guid*, Guid*, ID3D11CryptoSession*, HRESULT)
-    create_video_decoder_output_view : Proc(ID3D11VideoDevice1*, ID3D11Resource, D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC*, ID3D11VideoDecoderOutputView*, HRESULT)
-    create_video_processor_input_view : Proc(ID3D11VideoDevice1*, ID3D11Resource, ID3D11VideoProcessorEnumerator, D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC*, ID3D11VideoProcessorInputView*, HRESULT)
-    create_video_processor_output_view : Proc(ID3D11VideoDevice1*, ID3D11Resource, ID3D11VideoProcessorEnumerator, D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC*, ID3D11VideoProcessorOutputView*, HRESULT)
-    create_video_processor_enumerator : Proc(ID3D11VideoDevice1*, D3D11_VIDEO_PROCESSOR_CONTENT_DESC*, ID3D11VideoProcessorEnumerator*, HRESULT)
-    get_video_decoder_profile_count : Proc(ID3D11VideoDevice1*, UInt32)
-    get_video_decoder_profile : Proc(ID3D11VideoDevice1*, UInt32, Guid*, HRESULT)
-    check_video_decoder_format : Proc(ID3D11VideoDevice1*, Guid*, DXGI_FORMAT, LibC::BOOL*, HRESULT)
-    get_video_decoder_config_count : Proc(ID3D11VideoDevice1*, D3D11_VIDEO_DECODER_DESC*, UInt32*, HRESULT)
-    get_video_decoder_config : Proc(ID3D11VideoDevice1*, D3D11_VIDEO_DECODER_DESC*, UInt32, D3D11_VIDEO_DECODER_CONFIG*, HRESULT)
-    get_content_protection_caps : Proc(ID3D11VideoDevice1*, Guid*, Guid*, D3D11_VIDEO_CONTENT_PROTECTION_CAPS*, HRESULT)
-    check_crypto_key_exchange : Proc(ID3D11VideoDevice1*, Guid*, Guid*, UInt32, Guid*, HRESULT)
-    set_private_data : Proc(ID3D11VideoDevice1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11VideoDevice1*, Guid*, IUnknown, HRESULT)
-    get_crypto_session_private_data_size : Proc(ID3D11VideoDevice1*, Guid*, Guid*, Guid*, UInt32*, UInt32*, HRESULT)
-    get_video_decoder_caps : Proc(ID3D11VideoDevice1*, Guid*, UInt32, UInt32, DXGI_RATIONAL*, UInt32, Guid*, UInt32*, HRESULT)
-    check_video_decoder_downsampling : Proc(ID3D11VideoDevice1*, D3D11_VIDEO_DECODER_DESC*, DXGI_COLOR_SPACE_TYPE, D3D11_VIDEO_DECODER_CONFIG*, DXGI_RATIONAL*, D3D11_VIDEO_SAMPLE_DESC*, LibC::BOOL*, LibC::BOOL*, HRESULT)
-    recommend_video_decoder_downsample_parameters : Proc(ID3D11VideoDevice1*, D3D11_VIDEO_DECODER_DESC*, DXGI_COLOR_SPACE_TYPE, D3D11_VIDEO_DECODER_CONFIG*, DXGI_RATIONAL*, D3D11_VIDEO_SAMPLE_DESC*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_video_decoder : UInt64
+    create_video_processor : UInt64
+    create_authenticated_channel : UInt64
+    create_crypto_session : UInt64
+    create_video_decoder_output_view : UInt64
+    create_video_processor_input_view : UInt64
+    create_video_processor_output_view : UInt64
+    create_video_processor_enumerator : UInt64
+    get_video_decoder_profile_count : UInt64
+    get_video_decoder_profile : UInt64
+    check_video_decoder_format : UInt64
+    get_video_decoder_config_count : UInt64
+    get_video_decoder_config : UInt64
+    get_content_protection_caps : UInt64
+    check_crypto_key_exchange : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_crypto_session_private_data_size : UInt64
+    get_video_decoder_caps : UInt64
+    check_video_decoder_downsampling : UInt64
+    recommend_video_decoder_downsample_parameters : UInt64
   end
 
   ID3D11VideoDevice1_GUID = "29da1d51-1321-4454-804b-f5fc9f861f0f"
@@ -5513,20 +5513,20 @@ lib LibWin32
   end
 
   struct ID3D11VideoProcessorEnumerator1VTbl
-    query_interface : Proc(ID3D11VideoProcessorEnumerator1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11VideoProcessorEnumerator1*, UInt32)
-    release : Proc(ID3D11VideoProcessorEnumerator1*, UInt32)
-    get_device : Proc(ID3D11VideoProcessorEnumerator1*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11VideoProcessorEnumerator1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11VideoProcessorEnumerator1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11VideoProcessorEnumerator1*, Guid*, IUnknown, HRESULT)
-    get_video_processor_content_desc : Proc(ID3D11VideoProcessorEnumerator1*, D3D11_VIDEO_PROCESSOR_CONTENT_DESC*, HRESULT)
-    check_video_processor_format : Proc(ID3D11VideoProcessorEnumerator1*, DXGI_FORMAT, UInt32*, HRESULT)
-    get_video_processor_caps : Proc(ID3D11VideoProcessorEnumerator1*, D3D11_VIDEO_PROCESSOR_CAPS*, HRESULT)
-    get_video_processor_rate_conversion_caps : Proc(ID3D11VideoProcessorEnumerator1*, UInt32, D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS*, HRESULT)
-    get_video_processor_custom_rate : Proc(ID3D11VideoProcessorEnumerator1*, UInt32, UInt32, D3D11_VIDEO_PROCESSOR_CUSTOM_RATE*, HRESULT)
-    get_video_processor_filter_range : Proc(ID3D11VideoProcessorEnumerator1*, D3D11_VIDEO_PROCESSOR_FILTER, D3D11_VIDEO_PROCESSOR_FILTER_RANGE*, HRESULT)
-    check_video_processor_format_conversion : Proc(ID3D11VideoProcessorEnumerator1*, DXGI_FORMAT, DXGI_COLOR_SPACE_TYPE, DXGI_FORMAT, DXGI_COLOR_SPACE_TYPE, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_video_processor_content_desc : UInt64
+    check_video_processor_format : UInt64
+    get_video_processor_caps : UInt64
+    get_video_processor_rate_conversion_caps : UInt64
+    get_video_processor_custom_rate : UInt64
+    get_video_processor_filter_range : UInt64
+    check_video_processor_format_conversion : UInt64
   end
 
   ID3D11VideoProcessorEnumerator1_GUID = "465217f2-5568-43cf-b5b9-f61d54531ca1"
@@ -5536,56 +5536,56 @@ lib LibWin32
   end
 
   struct ID3D11Device1VTbl
-    query_interface : Proc(ID3D11Device1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Device1*, UInt32)
-    release : Proc(ID3D11Device1*, UInt32)
-    create_buffer : Proc(ID3D11Device1*, D3D11_BUFFER_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Buffer*, HRESULT)
-    create_texture1_d : Proc(ID3D11Device1*, D3D11_TEXTURE1D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture1D*, HRESULT)
-    create_texture2_d : Proc(ID3D11Device1*, D3D11_TEXTURE2D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D*, HRESULT)
-    create_texture3_d : Proc(ID3D11Device1*, D3D11_TEXTURE3D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D*, HRESULT)
-    create_shader_resource_view : Proc(ID3D11Device1*, ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC*, ID3D11ShaderResourceView*, HRESULT)
-    create_unordered_access_view : Proc(ID3D11Device1*, ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC*, ID3D11UnorderedAccessView*, HRESULT)
-    create_render_target_view : Proc(ID3D11Device1*, ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC*, ID3D11RenderTargetView*, HRESULT)
-    create_depth_stencil_view : Proc(ID3D11Device1*, ID3D11Resource, D3D11_DEPTH_STENCIL_VIEW_DESC*, ID3D11DepthStencilView*, HRESULT)
-    create_input_layout : Proc(ID3D11Device1*, D3D11_INPUT_ELEMENT_DESC*, UInt32, Void*, LibC::UINT_PTR, ID3D11InputLayout*, HRESULT)
-    create_vertex_shader : Proc(ID3D11Device1*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11VertexShader*, HRESULT)
-    create_geometry_shader : Proc(ID3D11Device1*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)
-    create_geometry_shader_with_stream_output : Proc(ID3D11Device1*, Void*, LibC::UINT_PTR, D3D11_SO_DECLARATION_ENTRY*, UInt32, UInt32*, UInt32, UInt32, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)
-    create_pixel_shader : Proc(ID3D11Device1*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11PixelShader*, HRESULT)
-    create_hull_shader : Proc(ID3D11Device1*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11HullShader*, HRESULT)
-    create_domain_shader : Proc(ID3D11Device1*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11DomainShader*, HRESULT)
-    create_compute_shader : Proc(ID3D11Device1*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11ComputeShader*, HRESULT)
-    create_class_linkage : Proc(ID3D11Device1*, ID3D11ClassLinkage*, HRESULT)
-    create_blend_state : Proc(ID3D11Device1*, D3D11_BLEND_DESC*, ID3D11BlendState*, HRESULT)
-    create_depth_stencil_state : Proc(ID3D11Device1*, D3D11_DEPTH_STENCIL_DESC*, ID3D11DepthStencilState*, HRESULT)
-    create_rasterizer_state : Proc(ID3D11Device1*, D3D11_RASTERIZER_DESC*, ID3D11RasterizerState*, HRESULT)
-    create_sampler_state : Proc(ID3D11Device1*, D3D11_SAMPLER_DESC*, ID3D11SamplerState*, HRESULT)
-    create_query : Proc(ID3D11Device1*, D3D11_QUERY_DESC*, ID3D11Query*, HRESULT)
-    create_predicate : Proc(ID3D11Device1*, D3D11_QUERY_DESC*, ID3D11Predicate*, HRESULT)
-    create_counter : Proc(ID3D11Device1*, D3D11_COUNTER_DESC*, ID3D11Counter*, HRESULT)
-    create_deferred_context : Proc(ID3D11Device1*, UInt32, ID3D11DeviceContext*, HRESULT)
-    open_shared_resource : Proc(ID3D11Device1*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    check_format_support : Proc(ID3D11Device1*, DXGI_FORMAT, UInt32*, HRESULT)
-    check_multisample_quality_levels : Proc(ID3D11Device1*, DXGI_FORMAT, UInt32, UInt32*, HRESULT)
-    check_counter_info : Proc(ID3D11Device1*, D3D11_COUNTER_INFO*, Void)
-    check_counter : Proc(ID3D11Device1*, D3D11_COUNTER_DESC*, D3D11_COUNTER_TYPE*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)
-    check_feature_support : Proc(ID3D11Device1*, D3D11_FEATURE, Void*, UInt32, HRESULT)
-    get_private_data : Proc(ID3D11Device1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Device1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Device1*, Guid*, IUnknown, HRESULT)
-    get_feature_level : Proc(ID3D11Device1*, D3D_FEATURE_LEVEL)
-    get_creation_flags : Proc(ID3D11Device1*, UInt32)
-    get_device_removed_reason : Proc(ID3D11Device1*, HRESULT)
-    get_immediate_context : Proc(ID3D11Device1*, ID3D11DeviceContext*, Void)
-    set_exception_mode : Proc(ID3D11Device1*, UInt32, HRESULT)
-    get_exception_mode : Proc(ID3D11Device1*, UInt32)
-    get_immediate_context1 : Proc(ID3D11Device1*, ID3D11DeviceContext1*, Void)
-    create_deferred_context1 : Proc(ID3D11Device1*, UInt32, ID3D11DeviceContext1*, HRESULT)
-    create_blend_state1 : Proc(ID3D11Device1*, D3D11_BLEND_DESC1*, ID3D11BlendState1*, HRESULT)
-    create_rasterizer_state1 : Proc(ID3D11Device1*, D3D11_RASTERIZER_DESC1*, ID3D11RasterizerState1*, HRESULT)
-    create_device_context_state : Proc(ID3D11Device1*, UInt32, D3D_FEATURE_LEVEL*, UInt32, UInt32, Guid*, D3D_FEATURE_LEVEL*, ID3DDeviceContextState*, HRESULT)
-    open_shared_resource1 : Proc(ID3D11Device1*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    open_shared_resource_by_name : Proc(ID3D11Device1*, LibC::LPWSTR, UInt32, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_buffer : UInt64
+    create_texture1_d : UInt64
+    create_texture2_d : UInt64
+    create_texture3_d : UInt64
+    create_shader_resource_view : UInt64
+    create_unordered_access_view : UInt64
+    create_render_target_view : UInt64
+    create_depth_stencil_view : UInt64
+    create_input_layout : UInt64
+    create_vertex_shader : UInt64
+    create_geometry_shader : UInt64
+    create_geometry_shader_with_stream_output : UInt64
+    create_pixel_shader : UInt64
+    create_hull_shader : UInt64
+    create_domain_shader : UInt64
+    create_compute_shader : UInt64
+    create_class_linkage : UInt64
+    create_blend_state : UInt64
+    create_depth_stencil_state : UInt64
+    create_rasterizer_state : UInt64
+    create_sampler_state : UInt64
+    create_query : UInt64
+    create_predicate : UInt64
+    create_counter : UInt64
+    create_deferred_context : UInt64
+    open_shared_resource : UInt64
+    check_format_support : UInt64
+    check_multisample_quality_levels : UInt64
+    check_counter_info : UInt64
+    check_counter : UInt64
+    check_feature_support : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_feature_level : UInt64
+    get_creation_flags : UInt64
+    get_device_removed_reason : UInt64
+    get_immediate_context : UInt64
+    set_exception_mode : UInt64
+    get_exception_mode : UInt64
+    get_immediate_context1 : UInt64
+    create_deferred_context1 : UInt64
+    create_blend_state1 : UInt64
+    create_rasterizer_state1 : UInt64
+    create_device_context_state : UInt64
+    open_shared_resource1 : UInt64
+    open_shared_resource_by_name : UInt64
   end
 
   ID3D11Device1_GUID = "a04bfb29-08ef-43d6-a49c-a9bdbdcbe686"
@@ -5595,13 +5595,13 @@ lib LibWin32
   end
 
   struct ID3DUserDefinedAnnotationVTbl
-    query_interface : Proc(ID3DUserDefinedAnnotation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3DUserDefinedAnnotation*, UInt32)
-    release : Proc(ID3DUserDefinedAnnotation*, UInt32)
-    begin_event : Proc(ID3DUserDefinedAnnotation*, LibC::LPWSTR, Int32)
-    end_event : Proc(ID3DUserDefinedAnnotation*, Int32)
-    set_marker : Proc(ID3DUserDefinedAnnotation*, LibC::LPWSTR, Void)
-    get_status : Proc(ID3DUserDefinedAnnotation*, LibC::BOOL)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_event : UInt64
+    end_event : UInt64
+    set_marker : UInt64
+    get_status : UInt64
   end
 
   ID3DUserDefinedAnnotation_GUID = "b2daad8b-03d4-4dbf-95eb-32ab4b63d0ab"
@@ -5611,150 +5611,150 @@ lib LibWin32
   end
 
   struct ID3D11DeviceContext2VTbl
-    query_interface : Proc(ID3D11DeviceContext2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11DeviceContext2*, UInt32)
-    release : Proc(ID3D11DeviceContext2*, UInt32)
-    get_device : Proc(ID3D11DeviceContext2*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11DeviceContext2*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11DeviceContext2*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11DeviceContext2*, Guid*, IUnknown, HRESULT)
-    vs_set_constant_buffers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ps_set_shader_resources : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ps_set_shader : Proc(ID3D11DeviceContext2*, ID3D11PixelShader, ID3D11ClassInstance*, UInt32, Void)
-    ps_set_samplers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    vs_set_shader : Proc(ID3D11DeviceContext2*, ID3D11VertexShader, ID3D11ClassInstance*, UInt32, Void)
-    draw_indexed : Proc(ID3D11DeviceContext2*, UInt32, UInt32, Int32, Void)
-    draw : Proc(ID3D11DeviceContext2*, UInt32, UInt32, Void)
-    map : Proc(ID3D11DeviceContext2*, ID3D11Resource, UInt32, D3D11_MAP, UInt32, D3D11_MAPPED_SUBRESOURCE*, HRESULT)
-    unmap : Proc(ID3D11DeviceContext2*, ID3D11Resource, UInt32, Void)
-    ps_set_constant_buffers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ia_set_input_layout : Proc(ID3D11DeviceContext2*, ID3D11InputLayout, Void)
-    ia_set_vertex_buffers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ia_set_index_buffer : Proc(ID3D11DeviceContext2*, ID3D11Buffer, DXGI_FORMAT, UInt32, Void)
-    draw_indexed_instanced : Proc(ID3D11DeviceContext2*, UInt32, UInt32, UInt32, Int32, UInt32, Void)
-    draw_instanced : Proc(ID3D11DeviceContext2*, UInt32, UInt32, UInt32, UInt32, Void)
-    gs_set_constant_buffers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, Void)
-    gs_set_shader : Proc(ID3D11DeviceContext2*, ID3D11GeometryShader, ID3D11ClassInstance*, UInt32, Void)
-    ia_set_primitive_topology : Proc(ID3D11DeviceContext2*, D3D_PRIMITIVE_TOPOLOGY, Void)
-    vs_set_shader_resources : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    vs_set_samplers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    rbegin : Proc(ID3D11DeviceContext2*, ID3D11Asynchronous, Void)
-    rend : Proc(ID3D11DeviceContext2*, ID3D11Asynchronous, Void)
-    get_data : Proc(ID3D11DeviceContext2*, ID3D11Asynchronous, Void*, UInt32, UInt32, HRESULT)
-    set_predication : Proc(ID3D11DeviceContext2*, ID3D11Predicate, LibC::BOOL, Void)
-    gs_set_shader_resources : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    gs_set_samplers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    om_set_render_targets : Proc(ID3D11DeviceContext2*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, Void)
-    om_set_render_targets_and_unordered_access_views : Proc(ID3D11DeviceContext2*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)
-    om_set_blend_state : Proc(ID3D11DeviceContext2*, ID3D11BlendState, Float32*, UInt32, Void)
-    om_set_depth_stencil_state : Proc(ID3D11DeviceContext2*, ID3D11DepthStencilState, UInt32, Void)
-    so_set_targets : Proc(ID3D11DeviceContext2*, UInt32, ID3D11Buffer*, UInt32*, Void)
-    draw_auto : Proc(ID3D11DeviceContext2*, Void)
-    draw_indexed_instanced_indirect : Proc(ID3D11DeviceContext2*, ID3D11Buffer, UInt32, Void)
-    draw_instanced_indirect : Proc(ID3D11DeviceContext2*, ID3D11Buffer, UInt32, Void)
-    dispatch : Proc(ID3D11DeviceContext2*, UInt32, UInt32, UInt32, Void)
-    dispatch_indirect : Proc(ID3D11DeviceContext2*, ID3D11Buffer, UInt32, Void)
-    rs_set_state : Proc(ID3D11DeviceContext2*, ID3D11RasterizerState, Void)
-    rs_set_viewports : Proc(ID3D11DeviceContext2*, UInt32, D3D11_VIEWPORT*, Void)
-    rs_set_scissor_rects : Proc(ID3D11DeviceContext2*, UInt32, RECT*, Void)
-    copy_subresource_region : Proc(ID3D11DeviceContext2*, ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)
-    copy_resource : Proc(ID3D11DeviceContext2*, ID3D11Resource, ID3D11Resource, Void)
-    update_subresource : Proc(ID3D11DeviceContext2*, ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, Void)
-    copy_structure_count : Proc(ID3D11DeviceContext2*, ID3D11Buffer, UInt32, ID3D11UnorderedAccessView, Void)
-    clear_render_target_view : Proc(ID3D11DeviceContext2*, ID3D11RenderTargetView, Float32*, Void)
-    clear_unordered_access_view_uint : Proc(ID3D11DeviceContext2*, ID3D11UnorderedAccessView, UInt32*, Void)
-    clear_unordered_access_view_float : Proc(ID3D11DeviceContext2*, ID3D11UnorderedAccessView, Float32*, Void)
-    clear_depth_stencil_view : Proc(ID3D11DeviceContext2*, ID3D11DepthStencilView, UInt32, Float32, UInt8, Void)
-    generate_mips : Proc(ID3D11DeviceContext2*, ID3D11ShaderResourceView, Void)
-    set_resource_min_lod : Proc(ID3D11DeviceContext2*, ID3D11Resource, Float32, Void)
-    get_resource_min_lod : Proc(ID3D11DeviceContext2*, ID3D11Resource, Float32)
-    resolve_subresource : Proc(ID3D11DeviceContext2*, ID3D11Resource, UInt32, ID3D11Resource, UInt32, DXGI_FORMAT, Void)
-    execute_command_list : Proc(ID3D11DeviceContext2*, ID3D11CommandList, LibC::BOOL, Void)
-    hs_set_shader_resources : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    hs_set_shader : Proc(ID3D11DeviceContext2*, ID3D11HullShader, ID3D11ClassInstance*, UInt32, Void)
-    hs_set_samplers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    hs_set_constant_buffers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ds_set_shader_resources : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ds_set_shader : Proc(ID3D11DeviceContext2*, ID3D11DomainShader, ID3D11ClassInstance*, UInt32, Void)
-    ds_set_samplers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    ds_set_constant_buffers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, Void)
-    cs_set_shader_resources : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    cs_set_unordered_access_views : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)
-    cs_set_shader : Proc(ID3D11DeviceContext2*, ID3D11ComputeShader, ID3D11ClassInstance*, UInt32, Void)
-    cs_set_samplers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    cs_set_constant_buffers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, Void)
-    vs_get_constant_buffers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ps_get_shader_resources : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ps_get_shader : Proc(ID3D11DeviceContext2*, ID3D11PixelShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ps_get_samplers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    vs_get_shader : Proc(ID3D11DeviceContext2*, ID3D11VertexShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ps_get_constant_buffers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ia_get_input_layout : Proc(ID3D11DeviceContext2*, ID3D11InputLayout*, Void)
-    ia_get_vertex_buffers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ia_get_index_buffer : Proc(ID3D11DeviceContext2*, ID3D11Buffer*, DXGI_FORMAT*, UInt32*, Void)
-    gs_get_constant_buffers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, Void)
-    gs_get_shader : Proc(ID3D11DeviceContext2*, ID3D11GeometryShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ia_get_primitive_topology : Proc(ID3D11DeviceContext2*, D3D_PRIMITIVE_TOPOLOGY*, Void)
-    vs_get_shader_resources : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    vs_get_samplers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    get_predication : Proc(ID3D11DeviceContext2*, ID3D11Predicate*, LibC::BOOL*, Void)
-    gs_get_shader_resources : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    gs_get_samplers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    om_get_render_targets : Proc(ID3D11DeviceContext2*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, Void)
-    om_get_render_targets_and_unordered_access_views : Proc(ID3D11DeviceContext2*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, UInt32, UInt32, ID3D11UnorderedAccessView*, Void)
-    om_get_blend_state : Proc(ID3D11DeviceContext2*, ID3D11BlendState*, Float32*, UInt32*, Void)
-    om_get_depth_stencil_state : Proc(ID3D11DeviceContext2*, ID3D11DepthStencilState*, UInt32*, Void)
-    so_get_targets : Proc(ID3D11DeviceContext2*, UInt32, ID3D11Buffer*, Void)
-    rs_get_state : Proc(ID3D11DeviceContext2*, ID3D11RasterizerState*, Void)
-    rs_get_viewports : Proc(ID3D11DeviceContext2*, UInt32*, D3D11_VIEWPORT*, Void)
-    rs_get_scissor_rects : Proc(ID3D11DeviceContext2*, UInt32*, RECT*, Void)
-    hs_get_shader_resources : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    hs_get_shader : Proc(ID3D11DeviceContext2*, ID3D11HullShader*, ID3D11ClassInstance*, UInt32*, Void)
-    hs_get_samplers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    hs_get_constant_buffers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ds_get_shader_resources : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ds_get_shader : Proc(ID3D11DeviceContext2*, ID3D11DomainShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ds_get_samplers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    ds_get_constant_buffers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, Void)
-    cs_get_shader_resources : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    cs_get_unordered_access_views : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11UnorderedAccessView*, Void)
-    cs_get_shader : Proc(ID3D11DeviceContext2*, ID3D11ComputeShader*, ID3D11ClassInstance*, UInt32*, Void)
-    cs_get_samplers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    cs_get_constant_buffers : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, Void)
-    clear_state : Proc(ID3D11DeviceContext2*, Void)
-    flush : Proc(ID3D11DeviceContext2*, Void)
-    get_type : Proc(ID3D11DeviceContext2*, D3D11_DEVICE_CONTEXT_TYPE)
-    get_context_flags : Proc(ID3D11DeviceContext2*, UInt32)
-    finish_command_list : Proc(ID3D11DeviceContext2*, LibC::BOOL, ID3D11CommandList*, HRESULT)
-    copy_subresource_region1 : Proc(ID3D11DeviceContext2*, ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, UInt32, Void)
-    update_subresource1 : Proc(ID3D11DeviceContext2*, ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, UInt32, Void)
-    discard_resource : Proc(ID3D11DeviceContext2*, ID3D11Resource, Void)
-    discard_view : Proc(ID3D11DeviceContext2*, ID3D11View, Void)
-    vs_set_constant_buffers1 : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    hs_set_constant_buffers1 : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ds_set_constant_buffers1 : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    gs_set_constant_buffers1 : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ps_set_constant_buffers1 : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    cs_set_constant_buffers1 : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    vs_get_constant_buffers1 : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    hs_get_constant_buffers1 : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ds_get_constant_buffers1 : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    gs_get_constant_buffers1 : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ps_get_constant_buffers1 : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    cs_get_constant_buffers1 : Proc(ID3D11DeviceContext2*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    swap_device_context_state : Proc(ID3D11DeviceContext2*, ID3DDeviceContextState, ID3DDeviceContextState*, Void)
-    clear_view : Proc(ID3D11DeviceContext2*, ID3D11View, Float32*, RECT*, UInt32, Void)
-    discard_view1 : Proc(ID3D11DeviceContext2*, ID3D11View, RECT*, UInt32, Void)
-    update_tile_mappings : Proc(ID3D11DeviceContext2*, ID3D11Resource, UInt32, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, ID3D11Buffer, UInt32, UInt32*, UInt32*, UInt32*, UInt32, HRESULT)
-    copy_tile_mappings : Proc(ID3D11DeviceContext2*, ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, UInt32, HRESULT)
-    copy_tiles : Proc(ID3D11DeviceContext2*, ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, ID3D11Buffer, UInt64, UInt32, Void)
-    update_tiles : Proc(ID3D11DeviceContext2*, ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, Void*, UInt32, Void)
-    resize_tile_pool : Proc(ID3D11DeviceContext2*, ID3D11Buffer, UInt64, HRESULT)
-    tiled_resource_barrier : Proc(ID3D11DeviceContext2*, ID3D11DeviceChild, ID3D11DeviceChild, Void)
-    is_annotation_enabled : Proc(ID3D11DeviceContext2*, LibC::BOOL)
-    set_marker_int : Proc(ID3D11DeviceContext2*, LibC::LPWSTR, Int32, Void)
-    begin_event_int : Proc(ID3D11DeviceContext2*, LibC::LPWSTR, Int32, Void)
-    end_event : Proc(ID3D11DeviceContext2*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    vs_set_constant_buffers : UInt64
+    ps_set_shader_resources : UInt64
+    ps_set_shader : UInt64
+    ps_set_samplers : UInt64
+    vs_set_shader : UInt64
+    draw_indexed : UInt64
+    draw : UInt64
+    map : UInt64
+    unmap : UInt64
+    ps_set_constant_buffers : UInt64
+    ia_set_input_layout : UInt64
+    ia_set_vertex_buffers : UInt64
+    ia_set_index_buffer : UInt64
+    draw_indexed_instanced : UInt64
+    draw_instanced : UInt64
+    gs_set_constant_buffers : UInt64
+    gs_set_shader : UInt64
+    ia_set_primitive_topology : UInt64
+    vs_set_shader_resources : UInt64
+    vs_set_samplers : UInt64
+    begin_ : UInt64
+    end_ : UInt64
+    get_data : UInt64
+    set_predication : UInt64
+    gs_set_shader_resources : UInt64
+    gs_set_samplers : UInt64
+    om_set_render_targets : UInt64
+    om_set_render_targets_and_unordered_access_views : UInt64
+    om_set_blend_state : UInt64
+    om_set_depth_stencil_state : UInt64
+    so_set_targets : UInt64
+    draw_auto : UInt64
+    draw_indexed_instanced_indirect : UInt64
+    draw_instanced_indirect : UInt64
+    dispatch : UInt64
+    dispatch_indirect : UInt64
+    rs_set_state : UInt64
+    rs_set_viewports : UInt64
+    rs_set_scissor_rects : UInt64
+    copy_subresource_region : UInt64
+    copy_resource : UInt64
+    update_subresource : UInt64
+    copy_structure_count : UInt64
+    clear_render_target_view : UInt64
+    clear_unordered_access_view_uint : UInt64
+    clear_unordered_access_view_float : UInt64
+    clear_depth_stencil_view : UInt64
+    generate_mips : UInt64
+    set_resource_min_lod : UInt64
+    get_resource_min_lod : UInt64
+    resolve_subresource : UInt64
+    execute_command_list : UInt64
+    hs_set_shader_resources : UInt64
+    hs_set_shader : UInt64
+    hs_set_samplers : UInt64
+    hs_set_constant_buffers : UInt64
+    ds_set_shader_resources : UInt64
+    ds_set_shader : UInt64
+    ds_set_samplers : UInt64
+    ds_set_constant_buffers : UInt64
+    cs_set_shader_resources : UInt64
+    cs_set_unordered_access_views : UInt64
+    cs_set_shader : UInt64
+    cs_set_samplers : UInt64
+    cs_set_constant_buffers : UInt64
+    vs_get_constant_buffers : UInt64
+    ps_get_shader_resources : UInt64
+    ps_get_shader : UInt64
+    ps_get_samplers : UInt64
+    vs_get_shader : UInt64
+    ps_get_constant_buffers : UInt64
+    ia_get_input_layout : UInt64
+    ia_get_vertex_buffers : UInt64
+    ia_get_index_buffer : UInt64
+    gs_get_constant_buffers : UInt64
+    gs_get_shader : UInt64
+    ia_get_primitive_topology : UInt64
+    vs_get_shader_resources : UInt64
+    vs_get_samplers : UInt64
+    get_predication : UInt64
+    gs_get_shader_resources : UInt64
+    gs_get_samplers : UInt64
+    om_get_render_targets : UInt64
+    om_get_render_targets_and_unordered_access_views : UInt64
+    om_get_blend_state : UInt64
+    om_get_depth_stencil_state : UInt64
+    so_get_targets : UInt64
+    rs_get_state : UInt64
+    rs_get_viewports : UInt64
+    rs_get_scissor_rects : UInt64
+    hs_get_shader_resources : UInt64
+    hs_get_shader : UInt64
+    hs_get_samplers : UInt64
+    hs_get_constant_buffers : UInt64
+    ds_get_shader_resources : UInt64
+    ds_get_shader : UInt64
+    ds_get_samplers : UInt64
+    ds_get_constant_buffers : UInt64
+    cs_get_shader_resources : UInt64
+    cs_get_unordered_access_views : UInt64
+    cs_get_shader : UInt64
+    cs_get_samplers : UInt64
+    cs_get_constant_buffers : UInt64
+    clear_state : UInt64
+    flush : UInt64
+    get_type : UInt64
+    get_context_flags : UInt64
+    finish_command_list : UInt64
+    copy_subresource_region1 : UInt64
+    update_subresource1 : UInt64
+    discard_resource : UInt64
+    discard_view : UInt64
+    vs_set_constant_buffers1 : UInt64
+    hs_set_constant_buffers1 : UInt64
+    ds_set_constant_buffers1 : UInt64
+    gs_set_constant_buffers1 : UInt64
+    ps_set_constant_buffers1 : UInt64
+    cs_set_constant_buffers1 : UInt64
+    vs_get_constant_buffers1 : UInt64
+    hs_get_constant_buffers1 : UInt64
+    ds_get_constant_buffers1 : UInt64
+    gs_get_constant_buffers1 : UInt64
+    ps_get_constant_buffers1 : UInt64
+    cs_get_constant_buffers1 : UInt64
+    swap_device_context_state : UInt64
+    clear_view : UInt64
+    discard_view1 : UInt64
+    update_tile_mappings : UInt64
+    copy_tile_mappings : UInt64
+    copy_tiles : UInt64
+    update_tiles : UInt64
+    resize_tile_pool : UInt64
+    tiled_resource_barrier : UInt64
+    is_annotation_enabled : UInt64
+    set_marker_int : UInt64
+    begin_event_int : UInt64
+    end_event : UInt64
   end
 
   ID3D11DeviceContext2_GUID = "420d5b32-b90c-4da4-bef0-359f6a24a83a"
@@ -5764,60 +5764,60 @@ lib LibWin32
   end
 
   struct ID3D11Device2VTbl
-    query_interface : Proc(ID3D11Device2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Device2*, UInt32)
-    release : Proc(ID3D11Device2*, UInt32)
-    create_buffer : Proc(ID3D11Device2*, D3D11_BUFFER_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Buffer*, HRESULT)
-    create_texture1_d : Proc(ID3D11Device2*, D3D11_TEXTURE1D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture1D*, HRESULT)
-    create_texture2_d : Proc(ID3D11Device2*, D3D11_TEXTURE2D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D*, HRESULT)
-    create_texture3_d : Proc(ID3D11Device2*, D3D11_TEXTURE3D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D*, HRESULT)
-    create_shader_resource_view : Proc(ID3D11Device2*, ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC*, ID3D11ShaderResourceView*, HRESULT)
-    create_unordered_access_view : Proc(ID3D11Device2*, ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC*, ID3D11UnorderedAccessView*, HRESULT)
-    create_render_target_view : Proc(ID3D11Device2*, ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC*, ID3D11RenderTargetView*, HRESULT)
-    create_depth_stencil_view : Proc(ID3D11Device2*, ID3D11Resource, D3D11_DEPTH_STENCIL_VIEW_DESC*, ID3D11DepthStencilView*, HRESULT)
-    create_input_layout : Proc(ID3D11Device2*, D3D11_INPUT_ELEMENT_DESC*, UInt32, Void*, LibC::UINT_PTR, ID3D11InputLayout*, HRESULT)
-    create_vertex_shader : Proc(ID3D11Device2*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11VertexShader*, HRESULT)
-    create_geometry_shader : Proc(ID3D11Device2*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)
-    create_geometry_shader_with_stream_output : Proc(ID3D11Device2*, Void*, LibC::UINT_PTR, D3D11_SO_DECLARATION_ENTRY*, UInt32, UInt32*, UInt32, UInt32, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)
-    create_pixel_shader : Proc(ID3D11Device2*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11PixelShader*, HRESULT)
-    create_hull_shader : Proc(ID3D11Device2*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11HullShader*, HRESULT)
-    create_domain_shader : Proc(ID3D11Device2*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11DomainShader*, HRESULT)
-    create_compute_shader : Proc(ID3D11Device2*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11ComputeShader*, HRESULT)
-    create_class_linkage : Proc(ID3D11Device2*, ID3D11ClassLinkage*, HRESULT)
-    create_blend_state : Proc(ID3D11Device2*, D3D11_BLEND_DESC*, ID3D11BlendState*, HRESULT)
-    create_depth_stencil_state : Proc(ID3D11Device2*, D3D11_DEPTH_STENCIL_DESC*, ID3D11DepthStencilState*, HRESULT)
-    create_rasterizer_state : Proc(ID3D11Device2*, D3D11_RASTERIZER_DESC*, ID3D11RasterizerState*, HRESULT)
-    create_sampler_state : Proc(ID3D11Device2*, D3D11_SAMPLER_DESC*, ID3D11SamplerState*, HRESULT)
-    create_query : Proc(ID3D11Device2*, D3D11_QUERY_DESC*, ID3D11Query*, HRESULT)
-    create_predicate : Proc(ID3D11Device2*, D3D11_QUERY_DESC*, ID3D11Predicate*, HRESULT)
-    create_counter : Proc(ID3D11Device2*, D3D11_COUNTER_DESC*, ID3D11Counter*, HRESULT)
-    create_deferred_context : Proc(ID3D11Device2*, UInt32, ID3D11DeviceContext*, HRESULT)
-    open_shared_resource : Proc(ID3D11Device2*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    check_format_support : Proc(ID3D11Device2*, DXGI_FORMAT, UInt32*, HRESULT)
-    check_multisample_quality_levels : Proc(ID3D11Device2*, DXGI_FORMAT, UInt32, UInt32*, HRESULT)
-    check_counter_info : Proc(ID3D11Device2*, D3D11_COUNTER_INFO*, Void)
-    check_counter : Proc(ID3D11Device2*, D3D11_COUNTER_DESC*, D3D11_COUNTER_TYPE*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)
-    check_feature_support : Proc(ID3D11Device2*, D3D11_FEATURE, Void*, UInt32, HRESULT)
-    get_private_data : Proc(ID3D11Device2*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Device2*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Device2*, Guid*, IUnknown, HRESULT)
-    get_feature_level : Proc(ID3D11Device2*, D3D_FEATURE_LEVEL)
-    get_creation_flags : Proc(ID3D11Device2*, UInt32)
-    get_device_removed_reason : Proc(ID3D11Device2*, HRESULT)
-    get_immediate_context : Proc(ID3D11Device2*, ID3D11DeviceContext*, Void)
-    set_exception_mode : Proc(ID3D11Device2*, UInt32, HRESULT)
-    get_exception_mode : Proc(ID3D11Device2*, UInt32)
-    get_immediate_context1 : Proc(ID3D11Device2*, ID3D11DeviceContext1*, Void)
-    create_deferred_context1 : Proc(ID3D11Device2*, UInt32, ID3D11DeviceContext1*, HRESULT)
-    create_blend_state1 : Proc(ID3D11Device2*, D3D11_BLEND_DESC1*, ID3D11BlendState1*, HRESULT)
-    create_rasterizer_state1 : Proc(ID3D11Device2*, D3D11_RASTERIZER_DESC1*, ID3D11RasterizerState1*, HRESULT)
-    create_device_context_state : Proc(ID3D11Device2*, UInt32, D3D_FEATURE_LEVEL*, UInt32, UInt32, Guid*, D3D_FEATURE_LEVEL*, ID3DDeviceContextState*, HRESULT)
-    open_shared_resource1 : Proc(ID3D11Device2*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    open_shared_resource_by_name : Proc(ID3D11Device2*, LibC::LPWSTR, UInt32, Guid*, Void**, HRESULT)
-    get_immediate_context2 : Proc(ID3D11Device2*, ID3D11DeviceContext2*, Void)
-    create_deferred_context2 : Proc(ID3D11Device2*, UInt32, ID3D11DeviceContext2*, HRESULT)
-    get_resource_tiling : Proc(ID3D11Device2*, ID3D11Resource, UInt32*, D3D11_PACKED_MIP_DESC*, D3D11_TILE_SHAPE*, UInt32*, UInt32, D3D11_SUBRESOURCE_TILING*, Void)
-    check_multisample_quality_levels1 : Proc(ID3D11Device2*, DXGI_FORMAT, UInt32, UInt32, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_buffer : UInt64
+    create_texture1_d : UInt64
+    create_texture2_d : UInt64
+    create_texture3_d : UInt64
+    create_shader_resource_view : UInt64
+    create_unordered_access_view : UInt64
+    create_render_target_view : UInt64
+    create_depth_stencil_view : UInt64
+    create_input_layout : UInt64
+    create_vertex_shader : UInt64
+    create_geometry_shader : UInt64
+    create_geometry_shader_with_stream_output : UInt64
+    create_pixel_shader : UInt64
+    create_hull_shader : UInt64
+    create_domain_shader : UInt64
+    create_compute_shader : UInt64
+    create_class_linkage : UInt64
+    create_blend_state : UInt64
+    create_depth_stencil_state : UInt64
+    create_rasterizer_state : UInt64
+    create_sampler_state : UInt64
+    create_query : UInt64
+    create_predicate : UInt64
+    create_counter : UInt64
+    create_deferred_context : UInt64
+    open_shared_resource : UInt64
+    check_format_support : UInt64
+    check_multisample_quality_levels : UInt64
+    check_counter_info : UInt64
+    check_counter : UInt64
+    check_feature_support : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_feature_level : UInt64
+    get_creation_flags : UInt64
+    get_device_removed_reason : UInt64
+    get_immediate_context : UInt64
+    set_exception_mode : UInt64
+    get_exception_mode : UInt64
+    get_immediate_context1 : UInt64
+    create_deferred_context1 : UInt64
+    create_blend_state1 : UInt64
+    create_rasterizer_state1 : UInt64
+    create_device_context_state : UInt64
+    open_shared_resource1 : UInt64
+    open_shared_resource_by_name : UInt64
+    get_immediate_context2 : UInt64
+    create_deferred_context2 : UInt64
+    get_resource_tiling : UInt64
+    check_multisample_quality_levels1 : UInt64
   end
 
   ID3D11Device2_GUID = "9d06dffa-d1e5-4d07-83a8-1bb123f2f841"
@@ -5827,18 +5827,18 @@ lib LibWin32
   end
 
   struct ID3D11Texture2D1VTbl
-    query_interface : Proc(ID3D11Texture2D1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Texture2D1*, UInt32)
-    release : Proc(ID3D11Texture2D1*, UInt32)
-    get_device : Proc(ID3D11Texture2D1*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11Texture2D1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Texture2D1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Texture2D1*, Guid*, IUnknown, HRESULT)
-    get_type : Proc(ID3D11Texture2D1*, D3D11_RESOURCE_DIMENSION*, Void)
-    set_eviction_priority : Proc(ID3D11Texture2D1*, UInt32, Void)
-    get_eviction_priority : Proc(ID3D11Texture2D1*, UInt32)
-    get_desc : Proc(ID3D11Texture2D1*, D3D11_TEXTURE2D_DESC*, Void)
-    get_desc1 : Proc(ID3D11Texture2D1*, D3D11_TEXTURE2D_DESC1*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_type : UInt64
+    set_eviction_priority : UInt64
+    get_eviction_priority : UInt64
+    get_desc : UInt64
+    get_desc1 : UInt64
   end
 
   ID3D11Texture2D1_GUID = "51218251-1e33-4617-9ccb-4d3a4367e7bb"
@@ -5848,18 +5848,18 @@ lib LibWin32
   end
 
   struct ID3D11Texture3D1VTbl
-    query_interface : Proc(ID3D11Texture3D1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Texture3D1*, UInt32)
-    release : Proc(ID3D11Texture3D1*, UInt32)
-    get_device : Proc(ID3D11Texture3D1*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11Texture3D1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Texture3D1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Texture3D1*, Guid*, IUnknown, HRESULT)
-    get_type : Proc(ID3D11Texture3D1*, D3D11_RESOURCE_DIMENSION*, Void)
-    set_eviction_priority : Proc(ID3D11Texture3D1*, UInt32, Void)
-    get_eviction_priority : Proc(ID3D11Texture3D1*, UInt32)
-    get_desc : Proc(ID3D11Texture3D1*, D3D11_TEXTURE3D_DESC*, Void)
-    get_desc1 : Proc(ID3D11Texture3D1*, D3D11_TEXTURE3D_DESC1*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_type : UInt64
+    set_eviction_priority : UInt64
+    get_eviction_priority : UInt64
+    get_desc : UInt64
+    get_desc1 : UInt64
   end
 
   ID3D11Texture3D1_GUID = "0c711683-2853-4846-9bb0-f3e60639e46a"
@@ -5869,16 +5869,16 @@ lib LibWin32
   end
 
   struct ID3D11RasterizerState2VTbl
-    query_interface : Proc(ID3D11RasterizerState2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11RasterizerState2*, UInt32)
-    release : Proc(ID3D11RasterizerState2*, UInt32)
-    get_device : Proc(ID3D11RasterizerState2*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11RasterizerState2*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11RasterizerState2*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11RasterizerState2*, Guid*, IUnknown, HRESULT)
-    get_desc : Proc(ID3D11RasterizerState2*, D3D11_RASTERIZER_DESC*, Void)
-    get_desc1 : Proc(ID3D11RasterizerState2*, D3D11_RASTERIZER_DESC1*, Void)
-    get_desc2 : Proc(ID3D11RasterizerState2*, D3D11_RASTERIZER_DESC2*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_desc : UInt64
+    get_desc1 : UInt64
+    get_desc2 : UInt64
   end
 
   ID3D11RasterizerState2_GUID = "6fbd02fb-209f-46c4-b059-2ed15586a6ac"
@@ -5888,16 +5888,16 @@ lib LibWin32
   end
 
   struct ID3D11ShaderResourceView1VTbl
-    query_interface : Proc(ID3D11ShaderResourceView1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11ShaderResourceView1*, UInt32)
-    release : Proc(ID3D11ShaderResourceView1*, UInt32)
-    get_device : Proc(ID3D11ShaderResourceView1*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11ShaderResourceView1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11ShaderResourceView1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11ShaderResourceView1*, Guid*, IUnknown, HRESULT)
-    get_resource : Proc(ID3D11ShaderResourceView1*, ID3D11Resource*, Void)
-    get_desc : Proc(ID3D11ShaderResourceView1*, D3D11_SHADER_RESOURCE_VIEW_DESC*, Void)
-    get_desc1 : Proc(ID3D11ShaderResourceView1*, D3D11_SHADER_RESOURCE_VIEW_DESC1*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_resource : UInt64
+    get_desc : UInt64
+    get_desc1 : UInt64
   end
 
   ID3D11ShaderResourceView1_GUID = "91308b87-9040-411d-8c67-c39253ce3802"
@@ -5907,16 +5907,16 @@ lib LibWin32
   end
 
   struct ID3D11RenderTargetView1VTbl
-    query_interface : Proc(ID3D11RenderTargetView1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11RenderTargetView1*, UInt32)
-    release : Proc(ID3D11RenderTargetView1*, UInt32)
-    get_device : Proc(ID3D11RenderTargetView1*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11RenderTargetView1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11RenderTargetView1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11RenderTargetView1*, Guid*, IUnknown, HRESULT)
-    get_resource : Proc(ID3D11RenderTargetView1*, ID3D11Resource*, Void)
-    get_desc : Proc(ID3D11RenderTargetView1*, D3D11_RENDER_TARGET_VIEW_DESC*, Void)
-    get_desc1 : Proc(ID3D11RenderTargetView1*, D3D11_RENDER_TARGET_VIEW_DESC1*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_resource : UInt64
+    get_desc : UInt64
+    get_desc1 : UInt64
   end
 
   ID3D11RenderTargetView1_GUID = "ffbe2e23-f011-418a-ac56-5ceed7c5b94b"
@@ -5926,16 +5926,16 @@ lib LibWin32
   end
 
   struct ID3D11UnorderedAccessView1VTbl
-    query_interface : Proc(ID3D11UnorderedAccessView1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11UnorderedAccessView1*, UInt32)
-    release : Proc(ID3D11UnorderedAccessView1*, UInt32)
-    get_device : Proc(ID3D11UnorderedAccessView1*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11UnorderedAccessView1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11UnorderedAccessView1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11UnorderedAccessView1*, Guid*, IUnknown, HRESULT)
-    get_resource : Proc(ID3D11UnorderedAccessView1*, ID3D11Resource*, Void)
-    get_desc : Proc(ID3D11UnorderedAccessView1*, D3D11_UNORDERED_ACCESS_VIEW_DESC*, Void)
-    get_desc1 : Proc(ID3D11UnorderedAccessView1*, D3D11_UNORDERED_ACCESS_VIEW_DESC1*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_resource : UInt64
+    get_desc : UInt64
+    get_desc1 : UInt64
   end
 
   ID3D11UnorderedAccessView1_GUID = "7b3b6153-a886-4544-ab37-6537c8500403"
@@ -5945,16 +5945,16 @@ lib LibWin32
   end
 
   struct ID3D11Query1VTbl
-    query_interface : Proc(ID3D11Query1*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Query1*, UInt32)
-    release : Proc(ID3D11Query1*, UInt32)
-    get_device : Proc(ID3D11Query1*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11Query1*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Query1*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Query1*, Guid*, IUnknown, HRESULT)
-    get_data_size : Proc(ID3D11Query1*, UInt32)
-    get_desc : Proc(ID3D11Query1*, D3D11_QUERY_DESC*, Void)
-    get_desc1 : Proc(ID3D11Query1*, D3D11_QUERY_DESC1*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_data_size : UInt64
+    get_desc : UInt64
+    get_desc1 : UInt64
   end
 
   ID3D11Query1_GUID = "631b4766-36dc-461d-8db6-c47e13e60916"
@@ -5964,153 +5964,153 @@ lib LibWin32
   end
 
   struct ID3D11DeviceContext3VTbl
-    query_interface : Proc(ID3D11DeviceContext3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11DeviceContext3*, UInt32)
-    release : Proc(ID3D11DeviceContext3*, UInt32)
-    get_device : Proc(ID3D11DeviceContext3*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11DeviceContext3*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11DeviceContext3*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11DeviceContext3*, Guid*, IUnknown, HRESULT)
-    vs_set_constant_buffers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ps_set_shader_resources : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ps_set_shader : Proc(ID3D11DeviceContext3*, ID3D11PixelShader, ID3D11ClassInstance*, UInt32, Void)
-    ps_set_samplers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    vs_set_shader : Proc(ID3D11DeviceContext3*, ID3D11VertexShader, ID3D11ClassInstance*, UInt32, Void)
-    draw_indexed : Proc(ID3D11DeviceContext3*, UInt32, UInt32, Int32, Void)
-    draw : Proc(ID3D11DeviceContext3*, UInt32, UInt32, Void)
-    map : Proc(ID3D11DeviceContext3*, ID3D11Resource, UInt32, D3D11_MAP, UInt32, D3D11_MAPPED_SUBRESOURCE*, HRESULT)
-    unmap : Proc(ID3D11DeviceContext3*, ID3D11Resource, UInt32, Void)
-    ps_set_constant_buffers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ia_set_input_layout : Proc(ID3D11DeviceContext3*, ID3D11InputLayout, Void)
-    ia_set_vertex_buffers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ia_set_index_buffer : Proc(ID3D11DeviceContext3*, ID3D11Buffer, DXGI_FORMAT, UInt32, Void)
-    draw_indexed_instanced : Proc(ID3D11DeviceContext3*, UInt32, UInt32, UInt32, Int32, UInt32, Void)
-    draw_instanced : Proc(ID3D11DeviceContext3*, UInt32, UInt32, UInt32, UInt32, Void)
-    gs_set_constant_buffers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, Void)
-    gs_set_shader : Proc(ID3D11DeviceContext3*, ID3D11GeometryShader, ID3D11ClassInstance*, UInt32, Void)
-    ia_set_primitive_topology : Proc(ID3D11DeviceContext3*, D3D_PRIMITIVE_TOPOLOGY, Void)
-    vs_set_shader_resources : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    vs_set_samplers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    rbegin : Proc(ID3D11DeviceContext3*, ID3D11Asynchronous, Void)
-    rend : Proc(ID3D11DeviceContext3*, ID3D11Asynchronous, Void)
-    get_data : Proc(ID3D11DeviceContext3*, ID3D11Asynchronous, Void*, UInt32, UInt32, HRESULT)
-    set_predication : Proc(ID3D11DeviceContext3*, ID3D11Predicate, LibC::BOOL, Void)
-    gs_set_shader_resources : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    gs_set_samplers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    om_set_render_targets : Proc(ID3D11DeviceContext3*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, Void)
-    om_set_render_targets_and_unordered_access_views : Proc(ID3D11DeviceContext3*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)
-    om_set_blend_state : Proc(ID3D11DeviceContext3*, ID3D11BlendState, Float32*, UInt32, Void)
-    om_set_depth_stencil_state : Proc(ID3D11DeviceContext3*, ID3D11DepthStencilState, UInt32, Void)
-    so_set_targets : Proc(ID3D11DeviceContext3*, UInt32, ID3D11Buffer*, UInt32*, Void)
-    draw_auto : Proc(ID3D11DeviceContext3*, Void)
-    draw_indexed_instanced_indirect : Proc(ID3D11DeviceContext3*, ID3D11Buffer, UInt32, Void)
-    draw_instanced_indirect : Proc(ID3D11DeviceContext3*, ID3D11Buffer, UInt32, Void)
-    dispatch : Proc(ID3D11DeviceContext3*, UInt32, UInt32, UInt32, Void)
-    dispatch_indirect : Proc(ID3D11DeviceContext3*, ID3D11Buffer, UInt32, Void)
-    rs_set_state : Proc(ID3D11DeviceContext3*, ID3D11RasterizerState, Void)
-    rs_set_viewports : Proc(ID3D11DeviceContext3*, UInt32, D3D11_VIEWPORT*, Void)
-    rs_set_scissor_rects : Proc(ID3D11DeviceContext3*, UInt32, RECT*, Void)
-    copy_subresource_region : Proc(ID3D11DeviceContext3*, ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)
-    copy_resource : Proc(ID3D11DeviceContext3*, ID3D11Resource, ID3D11Resource, Void)
-    update_subresource : Proc(ID3D11DeviceContext3*, ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, Void)
-    copy_structure_count : Proc(ID3D11DeviceContext3*, ID3D11Buffer, UInt32, ID3D11UnorderedAccessView, Void)
-    clear_render_target_view : Proc(ID3D11DeviceContext3*, ID3D11RenderTargetView, Float32*, Void)
-    clear_unordered_access_view_uint : Proc(ID3D11DeviceContext3*, ID3D11UnorderedAccessView, UInt32*, Void)
-    clear_unordered_access_view_float : Proc(ID3D11DeviceContext3*, ID3D11UnorderedAccessView, Float32*, Void)
-    clear_depth_stencil_view : Proc(ID3D11DeviceContext3*, ID3D11DepthStencilView, UInt32, Float32, UInt8, Void)
-    generate_mips : Proc(ID3D11DeviceContext3*, ID3D11ShaderResourceView, Void)
-    set_resource_min_lod : Proc(ID3D11DeviceContext3*, ID3D11Resource, Float32, Void)
-    get_resource_min_lod : Proc(ID3D11DeviceContext3*, ID3D11Resource, Float32)
-    resolve_subresource : Proc(ID3D11DeviceContext3*, ID3D11Resource, UInt32, ID3D11Resource, UInt32, DXGI_FORMAT, Void)
-    execute_command_list : Proc(ID3D11DeviceContext3*, ID3D11CommandList, LibC::BOOL, Void)
-    hs_set_shader_resources : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    hs_set_shader : Proc(ID3D11DeviceContext3*, ID3D11HullShader, ID3D11ClassInstance*, UInt32, Void)
-    hs_set_samplers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    hs_set_constant_buffers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ds_set_shader_resources : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ds_set_shader : Proc(ID3D11DeviceContext3*, ID3D11DomainShader, ID3D11ClassInstance*, UInt32, Void)
-    ds_set_samplers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    ds_set_constant_buffers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, Void)
-    cs_set_shader_resources : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    cs_set_unordered_access_views : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)
-    cs_set_shader : Proc(ID3D11DeviceContext3*, ID3D11ComputeShader, ID3D11ClassInstance*, UInt32, Void)
-    cs_set_samplers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    cs_set_constant_buffers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, Void)
-    vs_get_constant_buffers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ps_get_shader_resources : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ps_get_shader : Proc(ID3D11DeviceContext3*, ID3D11PixelShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ps_get_samplers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    vs_get_shader : Proc(ID3D11DeviceContext3*, ID3D11VertexShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ps_get_constant_buffers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ia_get_input_layout : Proc(ID3D11DeviceContext3*, ID3D11InputLayout*, Void)
-    ia_get_vertex_buffers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ia_get_index_buffer : Proc(ID3D11DeviceContext3*, ID3D11Buffer*, DXGI_FORMAT*, UInt32*, Void)
-    gs_get_constant_buffers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, Void)
-    gs_get_shader : Proc(ID3D11DeviceContext3*, ID3D11GeometryShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ia_get_primitive_topology : Proc(ID3D11DeviceContext3*, D3D_PRIMITIVE_TOPOLOGY*, Void)
-    vs_get_shader_resources : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    vs_get_samplers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    get_predication : Proc(ID3D11DeviceContext3*, ID3D11Predicate*, LibC::BOOL*, Void)
-    gs_get_shader_resources : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    gs_get_samplers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    om_get_render_targets : Proc(ID3D11DeviceContext3*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, Void)
-    om_get_render_targets_and_unordered_access_views : Proc(ID3D11DeviceContext3*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, UInt32, UInt32, ID3D11UnorderedAccessView*, Void)
-    om_get_blend_state : Proc(ID3D11DeviceContext3*, ID3D11BlendState*, Float32*, UInt32*, Void)
-    om_get_depth_stencil_state : Proc(ID3D11DeviceContext3*, ID3D11DepthStencilState*, UInt32*, Void)
-    so_get_targets : Proc(ID3D11DeviceContext3*, UInt32, ID3D11Buffer*, Void)
-    rs_get_state : Proc(ID3D11DeviceContext3*, ID3D11RasterizerState*, Void)
-    rs_get_viewports : Proc(ID3D11DeviceContext3*, UInt32*, D3D11_VIEWPORT*, Void)
-    rs_get_scissor_rects : Proc(ID3D11DeviceContext3*, UInt32*, RECT*, Void)
-    hs_get_shader_resources : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    hs_get_shader : Proc(ID3D11DeviceContext3*, ID3D11HullShader*, ID3D11ClassInstance*, UInt32*, Void)
-    hs_get_samplers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    hs_get_constant_buffers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ds_get_shader_resources : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ds_get_shader : Proc(ID3D11DeviceContext3*, ID3D11DomainShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ds_get_samplers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    ds_get_constant_buffers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, Void)
-    cs_get_shader_resources : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    cs_get_unordered_access_views : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11UnorderedAccessView*, Void)
-    cs_get_shader : Proc(ID3D11DeviceContext3*, ID3D11ComputeShader*, ID3D11ClassInstance*, UInt32*, Void)
-    cs_get_samplers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    cs_get_constant_buffers : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, Void)
-    clear_state : Proc(ID3D11DeviceContext3*, Void)
-    flush : Proc(ID3D11DeviceContext3*, Void)
-    get_type : Proc(ID3D11DeviceContext3*, D3D11_DEVICE_CONTEXT_TYPE)
-    get_context_flags : Proc(ID3D11DeviceContext3*, UInt32)
-    finish_command_list : Proc(ID3D11DeviceContext3*, LibC::BOOL, ID3D11CommandList*, HRESULT)
-    copy_subresource_region1 : Proc(ID3D11DeviceContext3*, ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, UInt32, Void)
-    update_subresource1 : Proc(ID3D11DeviceContext3*, ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, UInt32, Void)
-    discard_resource : Proc(ID3D11DeviceContext3*, ID3D11Resource, Void)
-    discard_view : Proc(ID3D11DeviceContext3*, ID3D11View, Void)
-    vs_set_constant_buffers1 : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    hs_set_constant_buffers1 : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ds_set_constant_buffers1 : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    gs_set_constant_buffers1 : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ps_set_constant_buffers1 : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    cs_set_constant_buffers1 : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    vs_get_constant_buffers1 : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    hs_get_constant_buffers1 : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ds_get_constant_buffers1 : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    gs_get_constant_buffers1 : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ps_get_constant_buffers1 : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    cs_get_constant_buffers1 : Proc(ID3D11DeviceContext3*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    swap_device_context_state : Proc(ID3D11DeviceContext3*, ID3DDeviceContextState, ID3DDeviceContextState*, Void)
-    clear_view : Proc(ID3D11DeviceContext3*, ID3D11View, Float32*, RECT*, UInt32, Void)
-    discard_view1 : Proc(ID3D11DeviceContext3*, ID3D11View, RECT*, UInt32, Void)
-    update_tile_mappings : Proc(ID3D11DeviceContext3*, ID3D11Resource, UInt32, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, ID3D11Buffer, UInt32, UInt32*, UInt32*, UInt32*, UInt32, HRESULT)
-    copy_tile_mappings : Proc(ID3D11DeviceContext3*, ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, UInt32, HRESULT)
-    copy_tiles : Proc(ID3D11DeviceContext3*, ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, ID3D11Buffer, UInt64, UInt32, Void)
-    update_tiles : Proc(ID3D11DeviceContext3*, ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, Void*, UInt32, Void)
-    resize_tile_pool : Proc(ID3D11DeviceContext3*, ID3D11Buffer, UInt64, HRESULT)
-    tiled_resource_barrier : Proc(ID3D11DeviceContext3*, ID3D11DeviceChild, ID3D11DeviceChild, Void)
-    is_annotation_enabled : Proc(ID3D11DeviceContext3*, LibC::BOOL)
-    set_marker_int : Proc(ID3D11DeviceContext3*, LibC::LPWSTR, Int32, Void)
-    begin_event_int : Proc(ID3D11DeviceContext3*, LibC::LPWSTR, Int32, Void)
-    end_event : Proc(ID3D11DeviceContext3*, Void)
-    flush1 : Proc(ID3D11DeviceContext3*, D3D11_CONTEXT_TYPE, LibC::HANDLE, Void)
-    set_hardware_protection_state : Proc(ID3D11DeviceContext3*, LibC::BOOL, Void)
-    get_hardware_protection_state : Proc(ID3D11DeviceContext3*, LibC::BOOL*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    vs_set_constant_buffers : UInt64
+    ps_set_shader_resources : UInt64
+    ps_set_shader : UInt64
+    ps_set_samplers : UInt64
+    vs_set_shader : UInt64
+    draw_indexed : UInt64
+    draw : UInt64
+    map : UInt64
+    unmap : UInt64
+    ps_set_constant_buffers : UInt64
+    ia_set_input_layout : UInt64
+    ia_set_vertex_buffers : UInt64
+    ia_set_index_buffer : UInt64
+    draw_indexed_instanced : UInt64
+    draw_instanced : UInt64
+    gs_set_constant_buffers : UInt64
+    gs_set_shader : UInt64
+    ia_set_primitive_topology : UInt64
+    vs_set_shader_resources : UInt64
+    vs_set_samplers : UInt64
+    begin_ : UInt64
+    end_ : UInt64
+    get_data : UInt64
+    set_predication : UInt64
+    gs_set_shader_resources : UInt64
+    gs_set_samplers : UInt64
+    om_set_render_targets : UInt64
+    om_set_render_targets_and_unordered_access_views : UInt64
+    om_set_blend_state : UInt64
+    om_set_depth_stencil_state : UInt64
+    so_set_targets : UInt64
+    draw_auto : UInt64
+    draw_indexed_instanced_indirect : UInt64
+    draw_instanced_indirect : UInt64
+    dispatch : UInt64
+    dispatch_indirect : UInt64
+    rs_set_state : UInt64
+    rs_set_viewports : UInt64
+    rs_set_scissor_rects : UInt64
+    copy_subresource_region : UInt64
+    copy_resource : UInt64
+    update_subresource : UInt64
+    copy_structure_count : UInt64
+    clear_render_target_view : UInt64
+    clear_unordered_access_view_uint : UInt64
+    clear_unordered_access_view_float : UInt64
+    clear_depth_stencil_view : UInt64
+    generate_mips : UInt64
+    set_resource_min_lod : UInt64
+    get_resource_min_lod : UInt64
+    resolve_subresource : UInt64
+    execute_command_list : UInt64
+    hs_set_shader_resources : UInt64
+    hs_set_shader : UInt64
+    hs_set_samplers : UInt64
+    hs_set_constant_buffers : UInt64
+    ds_set_shader_resources : UInt64
+    ds_set_shader : UInt64
+    ds_set_samplers : UInt64
+    ds_set_constant_buffers : UInt64
+    cs_set_shader_resources : UInt64
+    cs_set_unordered_access_views : UInt64
+    cs_set_shader : UInt64
+    cs_set_samplers : UInt64
+    cs_set_constant_buffers : UInt64
+    vs_get_constant_buffers : UInt64
+    ps_get_shader_resources : UInt64
+    ps_get_shader : UInt64
+    ps_get_samplers : UInt64
+    vs_get_shader : UInt64
+    ps_get_constant_buffers : UInt64
+    ia_get_input_layout : UInt64
+    ia_get_vertex_buffers : UInt64
+    ia_get_index_buffer : UInt64
+    gs_get_constant_buffers : UInt64
+    gs_get_shader : UInt64
+    ia_get_primitive_topology : UInt64
+    vs_get_shader_resources : UInt64
+    vs_get_samplers : UInt64
+    get_predication : UInt64
+    gs_get_shader_resources : UInt64
+    gs_get_samplers : UInt64
+    om_get_render_targets : UInt64
+    om_get_render_targets_and_unordered_access_views : UInt64
+    om_get_blend_state : UInt64
+    om_get_depth_stencil_state : UInt64
+    so_get_targets : UInt64
+    rs_get_state : UInt64
+    rs_get_viewports : UInt64
+    rs_get_scissor_rects : UInt64
+    hs_get_shader_resources : UInt64
+    hs_get_shader : UInt64
+    hs_get_samplers : UInt64
+    hs_get_constant_buffers : UInt64
+    ds_get_shader_resources : UInt64
+    ds_get_shader : UInt64
+    ds_get_samplers : UInt64
+    ds_get_constant_buffers : UInt64
+    cs_get_shader_resources : UInt64
+    cs_get_unordered_access_views : UInt64
+    cs_get_shader : UInt64
+    cs_get_samplers : UInt64
+    cs_get_constant_buffers : UInt64
+    clear_state : UInt64
+    flush : UInt64
+    get_type : UInt64
+    get_context_flags : UInt64
+    finish_command_list : UInt64
+    copy_subresource_region1 : UInt64
+    update_subresource1 : UInt64
+    discard_resource : UInt64
+    discard_view : UInt64
+    vs_set_constant_buffers1 : UInt64
+    hs_set_constant_buffers1 : UInt64
+    ds_set_constant_buffers1 : UInt64
+    gs_set_constant_buffers1 : UInt64
+    ps_set_constant_buffers1 : UInt64
+    cs_set_constant_buffers1 : UInt64
+    vs_get_constant_buffers1 : UInt64
+    hs_get_constant_buffers1 : UInt64
+    ds_get_constant_buffers1 : UInt64
+    gs_get_constant_buffers1 : UInt64
+    ps_get_constant_buffers1 : UInt64
+    cs_get_constant_buffers1 : UInt64
+    swap_device_context_state : UInt64
+    clear_view : UInt64
+    discard_view1 : UInt64
+    update_tile_mappings : UInt64
+    copy_tile_mappings : UInt64
+    copy_tiles : UInt64
+    update_tiles : UInt64
+    resize_tile_pool : UInt64
+    tiled_resource_barrier : UInt64
+    is_annotation_enabled : UInt64
+    set_marker_int : UInt64
+    begin_event_int : UInt64
+    end_event : UInt64
+    flush1 : UInt64
+    set_hardware_protection_state : UInt64
+    get_hardware_protection_state : UInt64
   end
 
   ID3D11DeviceContext3_GUID = "b4e3c01d-e79e-4637-91b2-510e9f4c9b8f"
@@ -6120,16 +6120,16 @@ lib LibWin32
   end
 
   struct ID3D11FenceVTbl
-    query_interface : Proc(ID3D11Fence*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Fence*, UInt32)
-    release : Proc(ID3D11Fence*, UInt32)
-    get_device : Proc(ID3D11Fence*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11Fence*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Fence*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Fence*, Guid*, IUnknown, HRESULT)
-    create_shared_handle : Proc(ID3D11Fence*, SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)
-    get_completed_value : Proc(ID3D11Fence*, UInt64)
-    set_event_on_completion : Proc(ID3D11Fence*, UInt64, LibC::HANDLE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    create_shared_handle : UInt64
+    get_completed_value : UInt64
+    set_event_on_completion : UInt64
   end
 
   ID3D11Fence_GUID = "affde9d1-1df7-4bb7-8a34-0f46251dab80"
@@ -6139,155 +6139,155 @@ lib LibWin32
   end
 
   struct ID3D11DeviceContext4VTbl
-    query_interface : Proc(ID3D11DeviceContext4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11DeviceContext4*, UInt32)
-    release : Proc(ID3D11DeviceContext4*, UInt32)
-    get_device : Proc(ID3D11DeviceContext4*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11DeviceContext4*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11DeviceContext4*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11DeviceContext4*, Guid*, IUnknown, HRESULT)
-    vs_set_constant_buffers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ps_set_shader_resources : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ps_set_shader : Proc(ID3D11DeviceContext4*, ID3D11PixelShader, ID3D11ClassInstance*, UInt32, Void)
-    ps_set_samplers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    vs_set_shader : Proc(ID3D11DeviceContext4*, ID3D11VertexShader, ID3D11ClassInstance*, UInt32, Void)
-    draw_indexed : Proc(ID3D11DeviceContext4*, UInt32, UInt32, Int32, Void)
-    draw : Proc(ID3D11DeviceContext4*, UInt32, UInt32, Void)
-    map : Proc(ID3D11DeviceContext4*, ID3D11Resource, UInt32, D3D11_MAP, UInt32, D3D11_MAPPED_SUBRESOURCE*, HRESULT)
-    unmap : Proc(ID3D11DeviceContext4*, ID3D11Resource, UInt32, Void)
-    ps_set_constant_buffers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ia_set_input_layout : Proc(ID3D11DeviceContext4*, ID3D11InputLayout, Void)
-    ia_set_vertex_buffers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ia_set_index_buffer : Proc(ID3D11DeviceContext4*, ID3D11Buffer, DXGI_FORMAT, UInt32, Void)
-    draw_indexed_instanced : Proc(ID3D11DeviceContext4*, UInt32, UInt32, UInt32, Int32, UInt32, Void)
-    draw_instanced : Proc(ID3D11DeviceContext4*, UInt32, UInt32, UInt32, UInt32, Void)
-    gs_set_constant_buffers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, Void)
-    gs_set_shader : Proc(ID3D11DeviceContext4*, ID3D11GeometryShader, ID3D11ClassInstance*, UInt32, Void)
-    ia_set_primitive_topology : Proc(ID3D11DeviceContext4*, D3D_PRIMITIVE_TOPOLOGY, Void)
-    vs_set_shader_resources : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    vs_set_samplers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    rbegin : Proc(ID3D11DeviceContext4*, ID3D11Asynchronous, Void)
-    rend : Proc(ID3D11DeviceContext4*, ID3D11Asynchronous, Void)
-    get_data : Proc(ID3D11DeviceContext4*, ID3D11Asynchronous, Void*, UInt32, UInt32, HRESULT)
-    set_predication : Proc(ID3D11DeviceContext4*, ID3D11Predicate, LibC::BOOL, Void)
-    gs_set_shader_resources : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    gs_set_samplers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    om_set_render_targets : Proc(ID3D11DeviceContext4*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, Void)
-    om_set_render_targets_and_unordered_access_views : Proc(ID3D11DeviceContext4*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)
-    om_set_blend_state : Proc(ID3D11DeviceContext4*, ID3D11BlendState, Float32*, UInt32, Void)
-    om_set_depth_stencil_state : Proc(ID3D11DeviceContext4*, ID3D11DepthStencilState, UInt32, Void)
-    so_set_targets : Proc(ID3D11DeviceContext4*, UInt32, ID3D11Buffer*, UInt32*, Void)
-    draw_auto : Proc(ID3D11DeviceContext4*, Void)
-    draw_indexed_instanced_indirect : Proc(ID3D11DeviceContext4*, ID3D11Buffer, UInt32, Void)
-    draw_instanced_indirect : Proc(ID3D11DeviceContext4*, ID3D11Buffer, UInt32, Void)
-    dispatch : Proc(ID3D11DeviceContext4*, UInt32, UInt32, UInt32, Void)
-    dispatch_indirect : Proc(ID3D11DeviceContext4*, ID3D11Buffer, UInt32, Void)
-    rs_set_state : Proc(ID3D11DeviceContext4*, ID3D11RasterizerState, Void)
-    rs_set_viewports : Proc(ID3D11DeviceContext4*, UInt32, D3D11_VIEWPORT*, Void)
-    rs_set_scissor_rects : Proc(ID3D11DeviceContext4*, UInt32, RECT*, Void)
-    copy_subresource_region : Proc(ID3D11DeviceContext4*, ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)
-    copy_resource : Proc(ID3D11DeviceContext4*, ID3D11Resource, ID3D11Resource, Void)
-    update_subresource : Proc(ID3D11DeviceContext4*, ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, Void)
-    copy_structure_count : Proc(ID3D11DeviceContext4*, ID3D11Buffer, UInt32, ID3D11UnorderedAccessView, Void)
-    clear_render_target_view : Proc(ID3D11DeviceContext4*, ID3D11RenderTargetView, Float32*, Void)
-    clear_unordered_access_view_uint : Proc(ID3D11DeviceContext4*, ID3D11UnorderedAccessView, UInt32*, Void)
-    clear_unordered_access_view_float : Proc(ID3D11DeviceContext4*, ID3D11UnorderedAccessView, Float32*, Void)
-    clear_depth_stencil_view : Proc(ID3D11DeviceContext4*, ID3D11DepthStencilView, UInt32, Float32, UInt8, Void)
-    generate_mips : Proc(ID3D11DeviceContext4*, ID3D11ShaderResourceView, Void)
-    set_resource_min_lod : Proc(ID3D11DeviceContext4*, ID3D11Resource, Float32, Void)
-    get_resource_min_lod : Proc(ID3D11DeviceContext4*, ID3D11Resource, Float32)
-    resolve_subresource : Proc(ID3D11DeviceContext4*, ID3D11Resource, UInt32, ID3D11Resource, UInt32, DXGI_FORMAT, Void)
-    execute_command_list : Proc(ID3D11DeviceContext4*, ID3D11CommandList, LibC::BOOL, Void)
-    hs_set_shader_resources : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    hs_set_shader : Proc(ID3D11DeviceContext4*, ID3D11HullShader, ID3D11ClassInstance*, UInt32, Void)
-    hs_set_samplers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    hs_set_constant_buffers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ds_set_shader_resources : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ds_set_shader : Proc(ID3D11DeviceContext4*, ID3D11DomainShader, ID3D11ClassInstance*, UInt32, Void)
-    ds_set_samplers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    ds_set_constant_buffers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, Void)
-    cs_set_shader_resources : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    cs_set_unordered_access_views : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)
-    cs_set_shader : Proc(ID3D11DeviceContext4*, ID3D11ComputeShader, ID3D11ClassInstance*, UInt32, Void)
-    cs_set_samplers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    cs_set_constant_buffers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, Void)
-    vs_get_constant_buffers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ps_get_shader_resources : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ps_get_shader : Proc(ID3D11DeviceContext4*, ID3D11PixelShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ps_get_samplers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    vs_get_shader : Proc(ID3D11DeviceContext4*, ID3D11VertexShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ps_get_constant_buffers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ia_get_input_layout : Proc(ID3D11DeviceContext4*, ID3D11InputLayout*, Void)
-    ia_get_vertex_buffers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ia_get_index_buffer : Proc(ID3D11DeviceContext4*, ID3D11Buffer*, DXGI_FORMAT*, UInt32*, Void)
-    gs_get_constant_buffers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, Void)
-    gs_get_shader : Proc(ID3D11DeviceContext4*, ID3D11GeometryShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ia_get_primitive_topology : Proc(ID3D11DeviceContext4*, D3D_PRIMITIVE_TOPOLOGY*, Void)
-    vs_get_shader_resources : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    vs_get_samplers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    get_predication : Proc(ID3D11DeviceContext4*, ID3D11Predicate*, LibC::BOOL*, Void)
-    gs_get_shader_resources : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    gs_get_samplers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    om_get_render_targets : Proc(ID3D11DeviceContext4*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, Void)
-    om_get_render_targets_and_unordered_access_views : Proc(ID3D11DeviceContext4*, UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, UInt32, UInt32, ID3D11UnorderedAccessView*, Void)
-    om_get_blend_state : Proc(ID3D11DeviceContext4*, ID3D11BlendState*, Float32*, UInt32*, Void)
-    om_get_depth_stencil_state : Proc(ID3D11DeviceContext4*, ID3D11DepthStencilState*, UInt32*, Void)
-    so_get_targets : Proc(ID3D11DeviceContext4*, UInt32, ID3D11Buffer*, Void)
-    rs_get_state : Proc(ID3D11DeviceContext4*, ID3D11RasterizerState*, Void)
-    rs_get_viewports : Proc(ID3D11DeviceContext4*, UInt32*, D3D11_VIEWPORT*, Void)
-    rs_get_scissor_rects : Proc(ID3D11DeviceContext4*, UInt32*, RECT*, Void)
-    hs_get_shader_resources : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    hs_get_shader : Proc(ID3D11DeviceContext4*, ID3D11HullShader*, ID3D11ClassInstance*, UInt32*, Void)
-    hs_get_samplers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    hs_get_constant_buffers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, Void)
-    ds_get_shader_resources : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    ds_get_shader : Proc(ID3D11DeviceContext4*, ID3D11DomainShader*, ID3D11ClassInstance*, UInt32*, Void)
-    ds_get_samplers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    ds_get_constant_buffers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, Void)
-    cs_get_shader_resources : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11ShaderResourceView*, Void)
-    cs_get_unordered_access_views : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11UnorderedAccessView*, Void)
-    cs_get_shader : Proc(ID3D11DeviceContext4*, ID3D11ComputeShader*, ID3D11ClassInstance*, UInt32*, Void)
-    cs_get_samplers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11SamplerState*, Void)
-    cs_get_constant_buffers : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, Void)
-    clear_state : Proc(ID3D11DeviceContext4*, Void)
-    flush : Proc(ID3D11DeviceContext4*, Void)
-    get_type : Proc(ID3D11DeviceContext4*, D3D11_DEVICE_CONTEXT_TYPE)
-    get_context_flags : Proc(ID3D11DeviceContext4*, UInt32)
-    finish_command_list : Proc(ID3D11DeviceContext4*, LibC::BOOL, ID3D11CommandList*, HRESULT)
-    copy_subresource_region1 : Proc(ID3D11DeviceContext4*, ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, UInt32, Void)
-    update_subresource1 : Proc(ID3D11DeviceContext4*, ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, UInt32, Void)
-    discard_resource : Proc(ID3D11DeviceContext4*, ID3D11Resource, Void)
-    discard_view : Proc(ID3D11DeviceContext4*, ID3D11View, Void)
-    vs_set_constant_buffers1 : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    hs_set_constant_buffers1 : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ds_set_constant_buffers1 : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    gs_set_constant_buffers1 : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ps_set_constant_buffers1 : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    cs_set_constant_buffers1 : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    vs_get_constant_buffers1 : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    hs_get_constant_buffers1 : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ds_get_constant_buffers1 : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    gs_get_constant_buffers1 : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    ps_get_constant_buffers1 : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    cs_get_constant_buffers1 : Proc(ID3D11DeviceContext4*, UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)
-    swap_device_context_state : Proc(ID3D11DeviceContext4*, ID3DDeviceContextState, ID3DDeviceContextState*, Void)
-    clear_view : Proc(ID3D11DeviceContext4*, ID3D11View, Float32*, RECT*, UInt32, Void)
-    discard_view1 : Proc(ID3D11DeviceContext4*, ID3D11View, RECT*, UInt32, Void)
-    update_tile_mappings : Proc(ID3D11DeviceContext4*, ID3D11Resource, UInt32, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, ID3D11Buffer, UInt32, UInt32*, UInt32*, UInt32*, UInt32, HRESULT)
-    copy_tile_mappings : Proc(ID3D11DeviceContext4*, ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, UInt32, HRESULT)
-    copy_tiles : Proc(ID3D11DeviceContext4*, ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, ID3D11Buffer, UInt64, UInt32, Void)
-    update_tiles : Proc(ID3D11DeviceContext4*, ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, Void*, UInt32, Void)
-    resize_tile_pool : Proc(ID3D11DeviceContext4*, ID3D11Buffer, UInt64, HRESULT)
-    tiled_resource_barrier : Proc(ID3D11DeviceContext4*, ID3D11DeviceChild, ID3D11DeviceChild, Void)
-    is_annotation_enabled : Proc(ID3D11DeviceContext4*, LibC::BOOL)
-    set_marker_int : Proc(ID3D11DeviceContext4*, LibC::LPWSTR, Int32, Void)
-    begin_event_int : Proc(ID3D11DeviceContext4*, LibC::LPWSTR, Int32, Void)
-    end_event : Proc(ID3D11DeviceContext4*, Void)
-    flush1 : Proc(ID3D11DeviceContext4*, D3D11_CONTEXT_TYPE, LibC::HANDLE, Void)
-    set_hardware_protection_state : Proc(ID3D11DeviceContext4*, LibC::BOOL, Void)
-    get_hardware_protection_state : Proc(ID3D11DeviceContext4*, LibC::BOOL*, Void)
-    signal : Proc(ID3D11DeviceContext4*, ID3D11Fence, UInt64, HRESULT)
-    wait : Proc(ID3D11DeviceContext4*, ID3D11Fence, UInt64, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    vs_set_constant_buffers : UInt64
+    ps_set_shader_resources : UInt64
+    ps_set_shader : UInt64
+    ps_set_samplers : UInt64
+    vs_set_shader : UInt64
+    draw_indexed : UInt64
+    draw : UInt64
+    map : UInt64
+    unmap : UInt64
+    ps_set_constant_buffers : UInt64
+    ia_set_input_layout : UInt64
+    ia_set_vertex_buffers : UInt64
+    ia_set_index_buffer : UInt64
+    draw_indexed_instanced : UInt64
+    draw_instanced : UInt64
+    gs_set_constant_buffers : UInt64
+    gs_set_shader : UInt64
+    ia_set_primitive_topology : UInt64
+    vs_set_shader_resources : UInt64
+    vs_set_samplers : UInt64
+    begin_ : UInt64
+    end_ : UInt64
+    get_data : UInt64
+    set_predication : UInt64
+    gs_set_shader_resources : UInt64
+    gs_set_samplers : UInt64
+    om_set_render_targets : UInt64
+    om_set_render_targets_and_unordered_access_views : UInt64
+    om_set_blend_state : UInt64
+    om_set_depth_stencil_state : UInt64
+    so_set_targets : UInt64
+    draw_auto : UInt64
+    draw_indexed_instanced_indirect : UInt64
+    draw_instanced_indirect : UInt64
+    dispatch : UInt64
+    dispatch_indirect : UInt64
+    rs_set_state : UInt64
+    rs_set_viewports : UInt64
+    rs_set_scissor_rects : UInt64
+    copy_subresource_region : UInt64
+    copy_resource : UInt64
+    update_subresource : UInt64
+    copy_structure_count : UInt64
+    clear_render_target_view : UInt64
+    clear_unordered_access_view_uint : UInt64
+    clear_unordered_access_view_float : UInt64
+    clear_depth_stencil_view : UInt64
+    generate_mips : UInt64
+    set_resource_min_lod : UInt64
+    get_resource_min_lod : UInt64
+    resolve_subresource : UInt64
+    execute_command_list : UInt64
+    hs_set_shader_resources : UInt64
+    hs_set_shader : UInt64
+    hs_set_samplers : UInt64
+    hs_set_constant_buffers : UInt64
+    ds_set_shader_resources : UInt64
+    ds_set_shader : UInt64
+    ds_set_samplers : UInt64
+    ds_set_constant_buffers : UInt64
+    cs_set_shader_resources : UInt64
+    cs_set_unordered_access_views : UInt64
+    cs_set_shader : UInt64
+    cs_set_samplers : UInt64
+    cs_set_constant_buffers : UInt64
+    vs_get_constant_buffers : UInt64
+    ps_get_shader_resources : UInt64
+    ps_get_shader : UInt64
+    ps_get_samplers : UInt64
+    vs_get_shader : UInt64
+    ps_get_constant_buffers : UInt64
+    ia_get_input_layout : UInt64
+    ia_get_vertex_buffers : UInt64
+    ia_get_index_buffer : UInt64
+    gs_get_constant_buffers : UInt64
+    gs_get_shader : UInt64
+    ia_get_primitive_topology : UInt64
+    vs_get_shader_resources : UInt64
+    vs_get_samplers : UInt64
+    get_predication : UInt64
+    gs_get_shader_resources : UInt64
+    gs_get_samplers : UInt64
+    om_get_render_targets : UInt64
+    om_get_render_targets_and_unordered_access_views : UInt64
+    om_get_blend_state : UInt64
+    om_get_depth_stencil_state : UInt64
+    so_get_targets : UInt64
+    rs_get_state : UInt64
+    rs_get_viewports : UInt64
+    rs_get_scissor_rects : UInt64
+    hs_get_shader_resources : UInt64
+    hs_get_shader : UInt64
+    hs_get_samplers : UInt64
+    hs_get_constant_buffers : UInt64
+    ds_get_shader_resources : UInt64
+    ds_get_shader : UInt64
+    ds_get_samplers : UInt64
+    ds_get_constant_buffers : UInt64
+    cs_get_shader_resources : UInt64
+    cs_get_unordered_access_views : UInt64
+    cs_get_shader : UInt64
+    cs_get_samplers : UInt64
+    cs_get_constant_buffers : UInt64
+    clear_state : UInt64
+    flush : UInt64
+    get_type : UInt64
+    get_context_flags : UInt64
+    finish_command_list : UInt64
+    copy_subresource_region1 : UInt64
+    update_subresource1 : UInt64
+    discard_resource : UInt64
+    discard_view : UInt64
+    vs_set_constant_buffers1 : UInt64
+    hs_set_constant_buffers1 : UInt64
+    ds_set_constant_buffers1 : UInt64
+    gs_set_constant_buffers1 : UInt64
+    ps_set_constant_buffers1 : UInt64
+    cs_set_constant_buffers1 : UInt64
+    vs_get_constant_buffers1 : UInt64
+    hs_get_constant_buffers1 : UInt64
+    ds_get_constant_buffers1 : UInt64
+    gs_get_constant_buffers1 : UInt64
+    ps_get_constant_buffers1 : UInt64
+    cs_get_constant_buffers1 : UInt64
+    swap_device_context_state : UInt64
+    clear_view : UInt64
+    discard_view1 : UInt64
+    update_tile_mappings : UInt64
+    copy_tile_mappings : UInt64
+    copy_tiles : UInt64
+    update_tiles : UInt64
+    resize_tile_pool : UInt64
+    tiled_resource_barrier : UInt64
+    is_annotation_enabled : UInt64
+    set_marker_int : UInt64
+    begin_event_int : UInt64
+    end_event : UInt64
+    flush1 : UInt64
+    set_hardware_protection_state : UInt64
+    get_hardware_protection_state : UInt64
+    signal : UInt64
+    wait : UInt64
   end
 
   ID3D11DeviceContext4_GUID = "917600da-f58c-4c33-98d8-3e15b390fa24"
@@ -6297,71 +6297,71 @@ lib LibWin32
   end
 
   struct ID3D11Device3VTbl
-    query_interface : Proc(ID3D11Device3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Device3*, UInt32)
-    release : Proc(ID3D11Device3*, UInt32)
-    create_buffer : Proc(ID3D11Device3*, D3D11_BUFFER_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Buffer*, HRESULT)
-    create_texture1_d : Proc(ID3D11Device3*, D3D11_TEXTURE1D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture1D*, HRESULT)
-    create_texture2_d : Proc(ID3D11Device3*, D3D11_TEXTURE2D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D*, HRESULT)
-    create_texture3_d : Proc(ID3D11Device3*, D3D11_TEXTURE3D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D*, HRESULT)
-    create_shader_resource_view : Proc(ID3D11Device3*, ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC*, ID3D11ShaderResourceView*, HRESULT)
-    create_unordered_access_view : Proc(ID3D11Device3*, ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC*, ID3D11UnorderedAccessView*, HRESULT)
-    create_render_target_view : Proc(ID3D11Device3*, ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC*, ID3D11RenderTargetView*, HRESULT)
-    create_depth_stencil_view : Proc(ID3D11Device3*, ID3D11Resource, D3D11_DEPTH_STENCIL_VIEW_DESC*, ID3D11DepthStencilView*, HRESULT)
-    create_input_layout : Proc(ID3D11Device3*, D3D11_INPUT_ELEMENT_DESC*, UInt32, Void*, LibC::UINT_PTR, ID3D11InputLayout*, HRESULT)
-    create_vertex_shader : Proc(ID3D11Device3*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11VertexShader*, HRESULT)
-    create_geometry_shader : Proc(ID3D11Device3*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)
-    create_geometry_shader_with_stream_output : Proc(ID3D11Device3*, Void*, LibC::UINT_PTR, D3D11_SO_DECLARATION_ENTRY*, UInt32, UInt32*, UInt32, UInt32, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)
-    create_pixel_shader : Proc(ID3D11Device3*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11PixelShader*, HRESULT)
-    create_hull_shader : Proc(ID3D11Device3*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11HullShader*, HRESULT)
-    create_domain_shader : Proc(ID3D11Device3*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11DomainShader*, HRESULT)
-    create_compute_shader : Proc(ID3D11Device3*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11ComputeShader*, HRESULT)
-    create_class_linkage : Proc(ID3D11Device3*, ID3D11ClassLinkage*, HRESULT)
-    create_blend_state : Proc(ID3D11Device3*, D3D11_BLEND_DESC*, ID3D11BlendState*, HRESULT)
-    create_depth_stencil_state : Proc(ID3D11Device3*, D3D11_DEPTH_STENCIL_DESC*, ID3D11DepthStencilState*, HRESULT)
-    create_rasterizer_state : Proc(ID3D11Device3*, D3D11_RASTERIZER_DESC*, ID3D11RasterizerState*, HRESULT)
-    create_sampler_state : Proc(ID3D11Device3*, D3D11_SAMPLER_DESC*, ID3D11SamplerState*, HRESULT)
-    create_query : Proc(ID3D11Device3*, D3D11_QUERY_DESC*, ID3D11Query*, HRESULT)
-    create_predicate : Proc(ID3D11Device3*, D3D11_QUERY_DESC*, ID3D11Predicate*, HRESULT)
-    create_counter : Proc(ID3D11Device3*, D3D11_COUNTER_DESC*, ID3D11Counter*, HRESULT)
-    create_deferred_context : Proc(ID3D11Device3*, UInt32, ID3D11DeviceContext*, HRESULT)
-    open_shared_resource : Proc(ID3D11Device3*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    check_format_support : Proc(ID3D11Device3*, DXGI_FORMAT, UInt32*, HRESULT)
-    check_multisample_quality_levels : Proc(ID3D11Device3*, DXGI_FORMAT, UInt32, UInt32*, HRESULT)
-    check_counter_info : Proc(ID3D11Device3*, D3D11_COUNTER_INFO*, Void)
-    check_counter : Proc(ID3D11Device3*, D3D11_COUNTER_DESC*, D3D11_COUNTER_TYPE*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)
-    check_feature_support : Proc(ID3D11Device3*, D3D11_FEATURE, Void*, UInt32, HRESULT)
-    get_private_data : Proc(ID3D11Device3*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Device3*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Device3*, Guid*, IUnknown, HRESULT)
-    get_feature_level : Proc(ID3D11Device3*, D3D_FEATURE_LEVEL)
-    get_creation_flags : Proc(ID3D11Device3*, UInt32)
-    get_device_removed_reason : Proc(ID3D11Device3*, HRESULT)
-    get_immediate_context : Proc(ID3D11Device3*, ID3D11DeviceContext*, Void)
-    set_exception_mode : Proc(ID3D11Device3*, UInt32, HRESULT)
-    get_exception_mode : Proc(ID3D11Device3*, UInt32)
-    get_immediate_context1 : Proc(ID3D11Device3*, ID3D11DeviceContext1*, Void)
-    create_deferred_context1 : Proc(ID3D11Device3*, UInt32, ID3D11DeviceContext1*, HRESULT)
-    create_blend_state1 : Proc(ID3D11Device3*, D3D11_BLEND_DESC1*, ID3D11BlendState1*, HRESULT)
-    create_rasterizer_state1 : Proc(ID3D11Device3*, D3D11_RASTERIZER_DESC1*, ID3D11RasterizerState1*, HRESULT)
-    create_device_context_state : Proc(ID3D11Device3*, UInt32, D3D_FEATURE_LEVEL*, UInt32, UInt32, Guid*, D3D_FEATURE_LEVEL*, ID3DDeviceContextState*, HRESULT)
-    open_shared_resource1 : Proc(ID3D11Device3*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    open_shared_resource_by_name : Proc(ID3D11Device3*, LibC::LPWSTR, UInt32, Guid*, Void**, HRESULT)
-    get_immediate_context2 : Proc(ID3D11Device3*, ID3D11DeviceContext2*, Void)
-    create_deferred_context2 : Proc(ID3D11Device3*, UInt32, ID3D11DeviceContext2*, HRESULT)
-    get_resource_tiling : Proc(ID3D11Device3*, ID3D11Resource, UInt32*, D3D11_PACKED_MIP_DESC*, D3D11_TILE_SHAPE*, UInt32*, UInt32, D3D11_SUBRESOURCE_TILING*, Void)
-    check_multisample_quality_levels1 : Proc(ID3D11Device3*, DXGI_FORMAT, UInt32, UInt32, UInt32*, HRESULT)
-    create_texture2_d1 : Proc(ID3D11Device3*, D3D11_TEXTURE2D_DESC1*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D1*, HRESULT)
-    create_texture3_d1 : Proc(ID3D11Device3*, D3D11_TEXTURE3D_DESC1*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D1*, HRESULT)
-    create_rasterizer_state2 : Proc(ID3D11Device3*, D3D11_RASTERIZER_DESC2*, ID3D11RasterizerState2*, HRESULT)
-    create_shader_resource_view1 : Proc(ID3D11Device3*, ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC1*, ID3D11ShaderResourceView1*, HRESULT)
-    create_unordered_access_view1 : Proc(ID3D11Device3*, ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC1*, ID3D11UnorderedAccessView1*, HRESULT)
-    create_render_target_view1 : Proc(ID3D11Device3*, ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC1*, ID3D11RenderTargetView1*, HRESULT)
-    create_query1 : Proc(ID3D11Device3*, D3D11_QUERY_DESC1*, ID3D11Query1*, HRESULT)
-    get_immediate_context3 : Proc(ID3D11Device3*, ID3D11DeviceContext3*, Void)
-    create_deferred_context3 : Proc(ID3D11Device3*, UInt32, ID3D11DeviceContext3*, HRESULT)
-    write_to_subresource : Proc(ID3D11Device3*, ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, Void)
-    read_from_subresource : Proc(ID3D11Device3*, Void*, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_buffer : UInt64
+    create_texture1_d : UInt64
+    create_texture2_d : UInt64
+    create_texture3_d : UInt64
+    create_shader_resource_view : UInt64
+    create_unordered_access_view : UInt64
+    create_render_target_view : UInt64
+    create_depth_stencil_view : UInt64
+    create_input_layout : UInt64
+    create_vertex_shader : UInt64
+    create_geometry_shader : UInt64
+    create_geometry_shader_with_stream_output : UInt64
+    create_pixel_shader : UInt64
+    create_hull_shader : UInt64
+    create_domain_shader : UInt64
+    create_compute_shader : UInt64
+    create_class_linkage : UInt64
+    create_blend_state : UInt64
+    create_depth_stencil_state : UInt64
+    create_rasterizer_state : UInt64
+    create_sampler_state : UInt64
+    create_query : UInt64
+    create_predicate : UInt64
+    create_counter : UInt64
+    create_deferred_context : UInt64
+    open_shared_resource : UInt64
+    check_format_support : UInt64
+    check_multisample_quality_levels : UInt64
+    check_counter_info : UInt64
+    check_counter : UInt64
+    check_feature_support : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_feature_level : UInt64
+    get_creation_flags : UInt64
+    get_device_removed_reason : UInt64
+    get_immediate_context : UInt64
+    set_exception_mode : UInt64
+    get_exception_mode : UInt64
+    get_immediate_context1 : UInt64
+    create_deferred_context1 : UInt64
+    create_blend_state1 : UInt64
+    create_rasterizer_state1 : UInt64
+    create_device_context_state : UInt64
+    open_shared_resource1 : UInt64
+    open_shared_resource_by_name : UInt64
+    get_immediate_context2 : UInt64
+    create_deferred_context2 : UInt64
+    get_resource_tiling : UInt64
+    check_multisample_quality_levels1 : UInt64
+    create_texture2_d1 : UInt64
+    create_texture3_d1 : UInt64
+    create_rasterizer_state2 : UInt64
+    create_shader_resource_view1 : UInt64
+    create_unordered_access_view1 : UInt64
+    create_render_target_view1 : UInt64
+    create_query1 : UInt64
+    get_immediate_context3 : UInt64
+    create_deferred_context3 : UInt64
+    write_to_subresource : UInt64
+    read_from_subresource : UInt64
   end
 
   ID3D11Device3_GUID = "a05c8c37-d2c6-4732-b3a0-9ce0b0dc9ae6"
@@ -6371,73 +6371,73 @@ lib LibWin32
   end
 
   struct ID3D11Device4VTbl
-    query_interface : Proc(ID3D11Device4*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Device4*, UInt32)
-    release : Proc(ID3D11Device4*, UInt32)
-    create_buffer : Proc(ID3D11Device4*, D3D11_BUFFER_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Buffer*, HRESULT)
-    create_texture1_d : Proc(ID3D11Device4*, D3D11_TEXTURE1D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture1D*, HRESULT)
-    create_texture2_d : Proc(ID3D11Device4*, D3D11_TEXTURE2D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D*, HRESULT)
-    create_texture3_d : Proc(ID3D11Device4*, D3D11_TEXTURE3D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D*, HRESULT)
-    create_shader_resource_view : Proc(ID3D11Device4*, ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC*, ID3D11ShaderResourceView*, HRESULT)
-    create_unordered_access_view : Proc(ID3D11Device4*, ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC*, ID3D11UnorderedAccessView*, HRESULT)
-    create_render_target_view : Proc(ID3D11Device4*, ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC*, ID3D11RenderTargetView*, HRESULT)
-    create_depth_stencil_view : Proc(ID3D11Device4*, ID3D11Resource, D3D11_DEPTH_STENCIL_VIEW_DESC*, ID3D11DepthStencilView*, HRESULT)
-    create_input_layout : Proc(ID3D11Device4*, D3D11_INPUT_ELEMENT_DESC*, UInt32, Void*, LibC::UINT_PTR, ID3D11InputLayout*, HRESULT)
-    create_vertex_shader : Proc(ID3D11Device4*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11VertexShader*, HRESULT)
-    create_geometry_shader : Proc(ID3D11Device4*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)
-    create_geometry_shader_with_stream_output : Proc(ID3D11Device4*, Void*, LibC::UINT_PTR, D3D11_SO_DECLARATION_ENTRY*, UInt32, UInt32*, UInt32, UInt32, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)
-    create_pixel_shader : Proc(ID3D11Device4*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11PixelShader*, HRESULT)
-    create_hull_shader : Proc(ID3D11Device4*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11HullShader*, HRESULT)
-    create_domain_shader : Proc(ID3D11Device4*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11DomainShader*, HRESULT)
-    create_compute_shader : Proc(ID3D11Device4*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11ComputeShader*, HRESULT)
-    create_class_linkage : Proc(ID3D11Device4*, ID3D11ClassLinkage*, HRESULT)
-    create_blend_state : Proc(ID3D11Device4*, D3D11_BLEND_DESC*, ID3D11BlendState*, HRESULT)
-    create_depth_stencil_state : Proc(ID3D11Device4*, D3D11_DEPTH_STENCIL_DESC*, ID3D11DepthStencilState*, HRESULT)
-    create_rasterizer_state : Proc(ID3D11Device4*, D3D11_RASTERIZER_DESC*, ID3D11RasterizerState*, HRESULT)
-    create_sampler_state : Proc(ID3D11Device4*, D3D11_SAMPLER_DESC*, ID3D11SamplerState*, HRESULT)
-    create_query : Proc(ID3D11Device4*, D3D11_QUERY_DESC*, ID3D11Query*, HRESULT)
-    create_predicate : Proc(ID3D11Device4*, D3D11_QUERY_DESC*, ID3D11Predicate*, HRESULT)
-    create_counter : Proc(ID3D11Device4*, D3D11_COUNTER_DESC*, ID3D11Counter*, HRESULT)
-    create_deferred_context : Proc(ID3D11Device4*, UInt32, ID3D11DeviceContext*, HRESULT)
-    open_shared_resource : Proc(ID3D11Device4*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    check_format_support : Proc(ID3D11Device4*, DXGI_FORMAT, UInt32*, HRESULT)
-    check_multisample_quality_levels : Proc(ID3D11Device4*, DXGI_FORMAT, UInt32, UInt32*, HRESULT)
-    check_counter_info : Proc(ID3D11Device4*, D3D11_COUNTER_INFO*, Void)
-    check_counter : Proc(ID3D11Device4*, D3D11_COUNTER_DESC*, D3D11_COUNTER_TYPE*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)
-    check_feature_support : Proc(ID3D11Device4*, D3D11_FEATURE, Void*, UInt32, HRESULT)
-    get_private_data : Proc(ID3D11Device4*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Device4*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Device4*, Guid*, IUnknown, HRESULT)
-    get_feature_level : Proc(ID3D11Device4*, D3D_FEATURE_LEVEL)
-    get_creation_flags : Proc(ID3D11Device4*, UInt32)
-    get_device_removed_reason : Proc(ID3D11Device4*, HRESULT)
-    get_immediate_context : Proc(ID3D11Device4*, ID3D11DeviceContext*, Void)
-    set_exception_mode : Proc(ID3D11Device4*, UInt32, HRESULT)
-    get_exception_mode : Proc(ID3D11Device4*, UInt32)
-    get_immediate_context1 : Proc(ID3D11Device4*, ID3D11DeviceContext1*, Void)
-    create_deferred_context1 : Proc(ID3D11Device4*, UInt32, ID3D11DeviceContext1*, HRESULT)
-    create_blend_state1 : Proc(ID3D11Device4*, D3D11_BLEND_DESC1*, ID3D11BlendState1*, HRESULT)
-    create_rasterizer_state1 : Proc(ID3D11Device4*, D3D11_RASTERIZER_DESC1*, ID3D11RasterizerState1*, HRESULT)
-    create_device_context_state : Proc(ID3D11Device4*, UInt32, D3D_FEATURE_LEVEL*, UInt32, UInt32, Guid*, D3D_FEATURE_LEVEL*, ID3DDeviceContextState*, HRESULT)
-    open_shared_resource1 : Proc(ID3D11Device4*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    open_shared_resource_by_name : Proc(ID3D11Device4*, LibC::LPWSTR, UInt32, Guid*, Void**, HRESULT)
-    get_immediate_context2 : Proc(ID3D11Device4*, ID3D11DeviceContext2*, Void)
-    create_deferred_context2 : Proc(ID3D11Device4*, UInt32, ID3D11DeviceContext2*, HRESULT)
-    get_resource_tiling : Proc(ID3D11Device4*, ID3D11Resource, UInt32*, D3D11_PACKED_MIP_DESC*, D3D11_TILE_SHAPE*, UInt32*, UInt32, D3D11_SUBRESOURCE_TILING*, Void)
-    check_multisample_quality_levels1 : Proc(ID3D11Device4*, DXGI_FORMAT, UInt32, UInt32, UInt32*, HRESULT)
-    create_texture2_d1 : Proc(ID3D11Device4*, D3D11_TEXTURE2D_DESC1*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D1*, HRESULT)
-    create_texture3_d1 : Proc(ID3D11Device4*, D3D11_TEXTURE3D_DESC1*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D1*, HRESULT)
-    create_rasterizer_state2 : Proc(ID3D11Device4*, D3D11_RASTERIZER_DESC2*, ID3D11RasterizerState2*, HRESULT)
-    create_shader_resource_view1 : Proc(ID3D11Device4*, ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC1*, ID3D11ShaderResourceView1*, HRESULT)
-    create_unordered_access_view1 : Proc(ID3D11Device4*, ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC1*, ID3D11UnorderedAccessView1*, HRESULT)
-    create_render_target_view1 : Proc(ID3D11Device4*, ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC1*, ID3D11RenderTargetView1*, HRESULT)
-    create_query1 : Proc(ID3D11Device4*, D3D11_QUERY_DESC1*, ID3D11Query1*, HRESULT)
-    get_immediate_context3 : Proc(ID3D11Device4*, ID3D11DeviceContext3*, Void)
-    create_deferred_context3 : Proc(ID3D11Device4*, UInt32, ID3D11DeviceContext3*, HRESULT)
-    write_to_subresource : Proc(ID3D11Device4*, ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, Void)
-    read_from_subresource : Proc(ID3D11Device4*, Void*, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)
-    register_device_removed_event : Proc(ID3D11Device4*, LibC::HANDLE, UInt32*, HRESULT)
-    unregister_device_removed : Proc(ID3D11Device4*, UInt32, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_buffer : UInt64
+    create_texture1_d : UInt64
+    create_texture2_d : UInt64
+    create_texture3_d : UInt64
+    create_shader_resource_view : UInt64
+    create_unordered_access_view : UInt64
+    create_render_target_view : UInt64
+    create_depth_stencil_view : UInt64
+    create_input_layout : UInt64
+    create_vertex_shader : UInt64
+    create_geometry_shader : UInt64
+    create_geometry_shader_with_stream_output : UInt64
+    create_pixel_shader : UInt64
+    create_hull_shader : UInt64
+    create_domain_shader : UInt64
+    create_compute_shader : UInt64
+    create_class_linkage : UInt64
+    create_blend_state : UInt64
+    create_depth_stencil_state : UInt64
+    create_rasterizer_state : UInt64
+    create_sampler_state : UInt64
+    create_query : UInt64
+    create_predicate : UInt64
+    create_counter : UInt64
+    create_deferred_context : UInt64
+    open_shared_resource : UInt64
+    check_format_support : UInt64
+    check_multisample_quality_levels : UInt64
+    check_counter_info : UInt64
+    check_counter : UInt64
+    check_feature_support : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_feature_level : UInt64
+    get_creation_flags : UInt64
+    get_device_removed_reason : UInt64
+    get_immediate_context : UInt64
+    set_exception_mode : UInt64
+    get_exception_mode : UInt64
+    get_immediate_context1 : UInt64
+    create_deferred_context1 : UInt64
+    create_blend_state1 : UInt64
+    create_rasterizer_state1 : UInt64
+    create_device_context_state : UInt64
+    open_shared_resource1 : UInt64
+    open_shared_resource_by_name : UInt64
+    get_immediate_context2 : UInt64
+    create_deferred_context2 : UInt64
+    get_resource_tiling : UInt64
+    check_multisample_quality_levels1 : UInt64
+    create_texture2_d1 : UInt64
+    create_texture3_d1 : UInt64
+    create_rasterizer_state2 : UInt64
+    create_shader_resource_view1 : UInt64
+    create_unordered_access_view1 : UInt64
+    create_render_target_view1 : UInt64
+    create_query1 : UInt64
+    get_immediate_context3 : UInt64
+    create_deferred_context3 : UInt64
+    write_to_subresource : UInt64
+    read_from_subresource : UInt64
+    register_device_removed_event : UInt64
+    unregister_device_removed : UInt64
   end
 
   ID3D11Device4_GUID = "8992ab71-02e6-4b8d-ba48-b056dcda42c4"
@@ -6447,75 +6447,75 @@ lib LibWin32
   end
 
   struct ID3D11Device5VTbl
-    query_interface : Proc(ID3D11Device5*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Device5*, UInt32)
-    release : Proc(ID3D11Device5*, UInt32)
-    create_buffer : Proc(ID3D11Device5*, D3D11_BUFFER_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Buffer*, HRESULT)
-    create_texture1_d : Proc(ID3D11Device5*, D3D11_TEXTURE1D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture1D*, HRESULT)
-    create_texture2_d : Proc(ID3D11Device5*, D3D11_TEXTURE2D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D*, HRESULT)
-    create_texture3_d : Proc(ID3D11Device5*, D3D11_TEXTURE3D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D*, HRESULT)
-    create_shader_resource_view : Proc(ID3D11Device5*, ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC*, ID3D11ShaderResourceView*, HRESULT)
-    create_unordered_access_view : Proc(ID3D11Device5*, ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC*, ID3D11UnorderedAccessView*, HRESULT)
-    create_render_target_view : Proc(ID3D11Device5*, ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC*, ID3D11RenderTargetView*, HRESULT)
-    create_depth_stencil_view : Proc(ID3D11Device5*, ID3D11Resource, D3D11_DEPTH_STENCIL_VIEW_DESC*, ID3D11DepthStencilView*, HRESULT)
-    create_input_layout : Proc(ID3D11Device5*, D3D11_INPUT_ELEMENT_DESC*, UInt32, Void*, LibC::UINT_PTR, ID3D11InputLayout*, HRESULT)
-    create_vertex_shader : Proc(ID3D11Device5*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11VertexShader*, HRESULT)
-    create_geometry_shader : Proc(ID3D11Device5*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)
-    create_geometry_shader_with_stream_output : Proc(ID3D11Device5*, Void*, LibC::UINT_PTR, D3D11_SO_DECLARATION_ENTRY*, UInt32, UInt32*, UInt32, UInt32, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)
-    create_pixel_shader : Proc(ID3D11Device5*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11PixelShader*, HRESULT)
-    create_hull_shader : Proc(ID3D11Device5*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11HullShader*, HRESULT)
-    create_domain_shader : Proc(ID3D11Device5*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11DomainShader*, HRESULT)
-    create_compute_shader : Proc(ID3D11Device5*, Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11ComputeShader*, HRESULT)
-    create_class_linkage : Proc(ID3D11Device5*, ID3D11ClassLinkage*, HRESULT)
-    create_blend_state : Proc(ID3D11Device5*, D3D11_BLEND_DESC*, ID3D11BlendState*, HRESULT)
-    create_depth_stencil_state : Proc(ID3D11Device5*, D3D11_DEPTH_STENCIL_DESC*, ID3D11DepthStencilState*, HRESULT)
-    create_rasterizer_state : Proc(ID3D11Device5*, D3D11_RASTERIZER_DESC*, ID3D11RasterizerState*, HRESULT)
-    create_sampler_state : Proc(ID3D11Device5*, D3D11_SAMPLER_DESC*, ID3D11SamplerState*, HRESULT)
-    create_query : Proc(ID3D11Device5*, D3D11_QUERY_DESC*, ID3D11Query*, HRESULT)
-    create_predicate : Proc(ID3D11Device5*, D3D11_QUERY_DESC*, ID3D11Predicate*, HRESULT)
-    create_counter : Proc(ID3D11Device5*, D3D11_COUNTER_DESC*, ID3D11Counter*, HRESULT)
-    create_deferred_context : Proc(ID3D11Device5*, UInt32, ID3D11DeviceContext*, HRESULT)
-    open_shared_resource : Proc(ID3D11Device5*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    check_format_support : Proc(ID3D11Device5*, DXGI_FORMAT, UInt32*, HRESULT)
-    check_multisample_quality_levels : Proc(ID3D11Device5*, DXGI_FORMAT, UInt32, UInt32*, HRESULT)
-    check_counter_info : Proc(ID3D11Device5*, D3D11_COUNTER_INFO*, Void)
-    check_counter : Proc(ID3D11Device5*, D3D11_COUNTER_DESC*, D3D11_COUNTER_TYPE*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)
-    check_feature_support : Proc(ID3D11Device5*, D3D11_FEATURE, Void*, UInt32, HRESULT)
-    get_private_data : Proc(ID3D11Device5*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11Device5*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11Device5*, Guid*, IUnknown, HRESULT)
-    get_feature_level : Proc(ID3D11Device5*, D3D_FEATURE_LEVEL)
-    get_creation_flags : Proc(ID3D11Device5*, UInt32)
-    get_device_removed_reason : Proc(ID3D11Device5*, HRESULT)
-    get_immediate_context : Proc(ID3D11Device5*, ID3D11DeviceContext*, Void)
-    set_exception_mode : Proc(ID3D11Device5*, UInt32, HRESULT)
-    get_exception_mode : Proc(ID3D11Device5*, UInt32)
-    get_immediate_context1 : Proc(ID3D11Device5*, ID3D11DeviceContext1*, Void)
-    create_deferred_context1 : Proc(ID3D11Device5*, UInt32, ID3D11DeviceContext1*, HRESULT)
-    create_blend_state1 : Proc(ID3D11Device5*, D3D11_BLEND_DESC1*, ID3D11BlendState1*, HRESULT)
-    create_rasterizer_state1 : Proc(ID3D11Device5*, D3D11_RASTERIZER_DESC1*, ID3D11RasterizerState1*, HRESULT)
-    create_device_context_state : Proc(ID3D11Device5*, UInt32, D3D_FEATURE_LEVEL*, UInt32, UInt32, Guid*, D3D_FEATURE_LEVEL*, ID3DDeviceContextState*, HRESULT)
-    open_shared_resource1 : Proc(ID3D11Device5*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    open_shared_resource_by_name : Proc(ID3D11Device5*, LibC::LPWSTR, UInt32, Guid*, Void**, HRESULT)
-    get_immediate_context2 : Proc(ID3D11Device5*, ID3D11DeviceContext2*, Void)
-    create_deferred_context2 : Proc(ID3D11Device5*, UInt32, ID3D11DeviceContext2*, HRESULT)
-    get_resource_tiling : Proc(ID3D11Device5*, ID3D11Resource, UInt32*, D3D11_PACKED_MIP_DESC*, D3D11_TILE_SHAPE*, UInt32*, UInt32, D3D11_SUBRESOURCE_TILING*, Void)
-    check_multisample_quality_levels1 : Proc(ID3D11Device5*, DXGI_FORMAT, UInt32, UInt32, UInt32*, HRESULT)
-    create_texture2_d1 : Proc(ID3D11Device5*, D3D11_TEXTURE2D_DESC1*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D1*, HRESULT)
-    create_texture3_d1 : Proc(ID3D11Device5*, D3D11_TEXTURE3D_DESC1*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D1*, HRESULT)
-    create_rasterizer_state2 : Proc(ID3D11Device5*, D3D11_RASTERIZER_DESC2*, ID3D11RasterizerState2*, HRESULT)
-    create_shader_resource_view1 : Proc(ID3D11Device5*, ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC1*, ID3D11ShaderResourceView1*, HRESULT)
-    create_unordered_access_view1 : Proc(ID3D11Device5*, ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC1*, ID3D11UnorderedAccessView1*, HRESULT)
-    create_render_target_view1 : Proc(ID3D11Device5*, ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC1*, ID3D11RenderTargetView1*, HRESULT)
-    create_query1 : Proc(ID3D11Device5*, D3D11_QUERY_DESC1*, ID3D11Query1*, HRESULT)
-    get_immediate_context3 : Proc(ID3D11Device5*, ID3D11DeviceContext3*, Void)
-    create_deferred_context3 : Proc(ID3D11Device5*, UInt32, ID3D11DeviceContext3*, HRESULT)
-    write_to_subresource : Proc(ID3D11Device5*, ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, Void)
-    read_from_subresource : Proc(ID3D11Device5*, Void*, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)
-    register_device_removed_event : Proc(ID3D11Device5*, LibC::HANDLE, UInt32*, HRESULT)
-    unregister_device_removed : Proc(ID3D11Device5*, UInt32, Void)
-    open_shared_fence : Proc(ID3D11Device5*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    create_fence : Proc(ID3D11Device5*, UInt64, D3D11_FENCE_FLAG, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_buffer : UInt64
+    create_texture1_d : UInt64
+    create_texture2_d : UInt64
+    create_texture3_d : UInt64
+    create_shader_resource_view : UInt64
+    create_unordered_access_view : UInt64
+    create_render_target_view : UInt64
+    create_depth_stencil_view : UInt64
+    create_input_layout : UInt64
+    create_vertex_shader : UInt64
+    create_geometry_shader : UInt64
+    create_geometry_shader_with_stream_output : UInt64
+    create_pixel_shader : UInt64
+    create_hull_shader : UInt64
+    create_domain_shader : UInt64
+    create_compute_shader : UInt64
+    create_class_linkage : UInt64
+    create_blend_state : UInt64
+    create_depth_stencil_state : UInt64
+    create_rasterizer_state : UInt64
+    create_sampler_state : UInt64
+    create_query : UInt64
+    create_predicate : UInt64
+    create_counter : UInt64
+    create_deferred_context : UInt64
+    open_shared_resource : UInt64
+    check_format_support : UInt64
+    check_multisample_quality_levels : UInt64
+    check_counter_info : UInt64
+    check_counter : UInt64
+    check_feature_support : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_feature_level : UInt64
+    get_creation_flags : UInt64
+    get_device_removed_reason : UInt64
+    get_immediate_context : UInt64
+    set_exception_mode : UInt64
+    get_exception_mode : UInt64
+    get_immediate_context1 : UInt64
+    create_deferred_context1 : UInt64
+    create_blend_state1 : UInt64
+    create_rasterizer_state1 : UInt64
+    create_device_context_state : UInt64
+    open_shared_resource1 : UInt64
+    open_shared_resource_by_name : UInt64
+    get_immediate_context2 : UInt64
+    create_deferred_context2 : UInt64
+    get_resource_tiling : UInt64
+    check_multisample_quality_levels1 : UInt64
+    create_texture2_d1 : UInt64
+    create_texture3_d1 : UInt64
+    create_rasterizer_state2 : UInt64
+    create_shader_resource_view1 : UInt64
+    create_unordered_access_view1 : UInt64
+    create_render_target_view1 : UInt64
+    create_query1 : UInt64
+    get_immediate_context3 : UInt64
+    create_deferred_context3 : UInt64
+    write_to_subresource : UInt64
+    read_from_subresource : UInt64
+    register_device_removed_event : UInt64
+    unregister_device_removed : UInt64
+    open_shared_fence : UInt64
+    create_fence : UInt64
   end
 
   ID3D11Device5_GUID = "8ffde202-a0e7-45df-9e01-e837801b5ea0"
@@ -6525,13 +6525,13 @@ lib LibWin32
   end
 
   struct ID3D11MultithreadVTbl
-    query_interface : Proc(ID3D11Multithread*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Multithread*, UInt32)
-    release : Proc(ID3D11Multithread*, UInt32)
-    enter : Proc(ID3D11Multithread*, Void)
-    leave : Proc(ID3D11Multithread*, Void)
-    set_multithread_protected : Proc(ID3D11Multithread*, LibC::BOOL, LibC::BOOL)
-    get_multithread_protected : Proc(ID3D11Multithread*, LibC::BOOL)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enter : UInt64
+    leave : UInt64
+    set_multithread_protected : UInt64
+    get_multithread_protected : UInt64
   end
 
   ID3D11Multithread_GUID = "9b7e4e00-342c-4106-a19f-4f2704f689f0"
@@ -6541,89 +6541,89 @@ lib LibWin32
   end
 
   struct ID3D11VideoContext2VTbl
-    query_interface : Proc(ID3D11VideoContext2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11VideoContext2*, UInt32)
-    release : Proc(ID3D11VideoContext2*, UInt32)
-    get_device : Proc(ID3D11VideoContext2*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11VideoContext2*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11VideoContext2*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11VideoContext2*, Guid*, IUnknown, HRESULT)
-    get_decoder_buffer : Proc(ID3D11VideoContext2*, ID3D11VideoDecoder, D3D11_VIDEO_DECODER_BUFFER_TYPE, UInt32*, Void**, HRESULT)
-    release_decoder_buffer : Proc(ID3D11VideoContext2*, ID3D11VideoDecoder, D3D11_VIDEO_DECODER_BUFFER_TYPE, HRESULT)
-    decoder_begin_frame : Proc(ID3D11VideoContext2*, ID3D11VideoDecoder, ID3D11VideoDecoderOutputView, UInt32, Void*, HRESULT)
-    decoder_end_frame : Proc(ID3D11VideoContext2*, ID3D11VideoDecoder, HRESULT)
-    submit_decoder_buffers : Proc(ID3D11VideoContext2*, ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC*, HRESULT)
-    decoder_extension : Proc(ID3D11VideoContext2*, ID3D11VideoDecoder, D3D11_VIDEO_DECODER_EXTENSION*, Int32)
-    video_processor_set_output_target_rect : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, LibC::BOOL, RECT*, Void)
-    video_processor_set_output_background_color : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, LibC::BOOL, D3D11_VIDEO_COLOR*, Void)
-    video_processor_set_output_color_space : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)
-    video_processor_set_output_alpha_fill_mode : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, UInt32, Void)
-    video_processor_set_output_constriction : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, LibC::BOOL, SIZE, Void)
-    video_processor_set_output_stereo_mode : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, LibC::BOOL, Void)
-    video_processor_set_output_extension : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, Guid*, UInt32, Void*, Int32)
-    video_processor_get_output_target_rect : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, LibC::BOOL*, RECT*, Void)
-    video_processor_get_output_background_color : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, LibC::BOOL*, D3D11_VIDEO_COLOR*, Void)
-    video_processor_get_output_color_space : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)
-    video_processor_get_output_alpha_fill_mode : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE*, UInt32*, Void)
-    video_processor_get_output_constriction : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, LibC::BOOL*, SIZE*, Void)
-    video_processor_get_output_stereo_mode : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, LibC::BOOL*, Void)
-    video_processor_get_output_extension : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, Guid*, UInt32, Void*, Int32)
-    video_processor_set_stream_frame_format : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_FRAME_FORMAT, Void)
-    video_processor_set_stream_color_space : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)
-    video_processor_set_stream_output_rate : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, LibC::BOOL, DXGI_RATIONAL*, Void)
-    video_processor_set_stream_source_rect : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL, RECT*, Void)
-    video_processor_set_stream_dest_rect : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL, RECT*, Void)
-    video_processor_set_stream_alpha : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL, Float32, Void)
-    video_processor_set_stream_palette : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, UInt32, UInt32*, Void)
-    video_processor_set_stream_pixel_aspect_ratio : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL, DXGI_RATIONAL*, DXGI_RATIONAL*, Void)
-    video_processor_set_stream_luma_key : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL, Float32, Float32, Void)
-    video_processor_set_stream_stereo_format : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL, D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, LibC::BOOL, LibC::BOOL, D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, Int32, Void)
-    video_processor_set_stream_auto_processing_mode : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL, Void)
-    video_processor_set_stream_filter : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_FILTER, LibC::BOOL, Int32, Void)
-    video_processor_set_stream_extension : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, Guid*, UInt32, Void*, Int32)
-    video_processor_get_stream_frame_format : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_FRAME_FORMAT*, Void)
-    video_processor_get_stream_color_space : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)
-    video_processor_get_stream_output_rate : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_OUTPUT_RATE*, LibC::BOOL*, DXGI_RATIONAL*, Void)
-    video_processor_get_stream_source_rect : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, RECT*, Void)
-    video_processor_get_stream_dest_rect : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, RECT*, Void)
-    video_processor_get_stream_alpha : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, Float32*, Void)
-    video_processor_get_stream_palette : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, UInt32, UInt32*, Void)
-    video_processor_get_stream_pixel_aspect_ratio : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, DXGI_RATIONAL*, DXGI_RATIONAL*, Void)
-    video_processor_get_stream_luma_key : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, Float32*, Float32*, Void)
-    video_processor_get_stream_stereo_format : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_STEREO_FORMAT*, LibC::BOOL*, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE*, Int32*, Void)
-    video_processor_get_stream_auto_processing_mode : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, Void)
-    video_processor_get_stream_filter : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_FILTER, LibC::BOOL*, Int32*, Void)
-    video_processor_get_stream_extension : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, Guid*, UInt32, Void*, Int32)
-    video_processor_blt : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, ID3D11VideoProcessorOutputView, UInt32, UInt32, D3D11_VIDEO_PROCESSOR_STREAM*, HRESULT)
-    negotiate_crypto_session_key_exchange : Proc(ID3D11VideoContext2*, ID3D11CryptoSession, UInt32, Void*, HRESULT)
-    encryption_blt : Proc(ID3D11VideoContext2*, ID3D11CryptoSession, ID3D11Texture2D, ID3D11Texture2D, UInt32, Void*, Void)
-    decryption_blt : Proc(ID3D11VideoContext2*, ID3D11CryptoSession, ID3D11Texture2D, ID3D11Texture2D, D3D11_ENCRYPTED_BLOCK_INFO*, UInt32, Void*, UInt32, Void*, Void)
-    start_session_key_refresh : Proc(ID3D11VideoContext2*, ID3D11CryptoSession, UInt32, Void*, Void)
-    finish_session_key_refresh : Proc(ID3D11VideoContext2*, ID3D11CryptoSession, Void)
-    get_encryption_blt_key : Proc(ID3D11VideoContext2*, ID3D11CryptoSession, UInt32, Void*, HRESULT)
-    negotiate_authenticated_channel_key_exchange : Proc(ID3D11VideoContext2*, ID3D11AuthenticatedChannel, UInt32, Void*, HRESULT)
-    query_authenticated_channel : Proc(ID3D11VideoContext2*, ID3D11AuthenticatedChannel, UInt32, Void*, UInt32, Void*, HRESULT)
-    configure_authenticated_channel : Proc(ID3D11VideoContext2*, ID3D11AuthenticatedChannel, UInt32, Void*, D3D11_AUTHENTICATED_CONFIGURE_OUTPUT*, HRESULT)
-    video_processor_set_stream_rotation : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL, D3D11_VIDEO_PROCESSOR_ROTATION, Void)
-    video_processor_get_stream_rotation : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_ROTATION*, Void)
-    submit_decoder_buffers1 : Proc(ID3D11VideoContext2*, ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC1*, HRESULT)
-    get_data_for_new_hardware_key : Proc(ID3D11VideoContext2*, ID3D11CryptoSession, UInt32, Void*, UInt64*, HRESULT)
-    check_crypto_session_status : Proc(ID3D11VideoContext2*, ID3D11CryptoSession, D3D11_CRYPTO_SESSION_STATUS*, HRESULT)
-    decoder_enable_downsampling : Proc(ID3D11VideoContext2*, ID3D11VideoDecoder, DXGI_COLOR_SPACE_TYPE, D3D11_VIDEO_SAMPLE_DESC*, UInt32, HRESULT)
-    decoder_update_downsampling : Proc(ID3D11VideoContext2*, ID3D11VideoDecoder, D3D11_VIDEO_SAMPLE_DESC*, HRESULT)
-    video_processor_set_output_color_space1 : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, DXGI_COLOR_SPACE_TYPE, Void)
-    video_processor_set_output_shader_usage : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, LibC::BOOL, Void)
-    video_processor_get_output_color_space1 : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, DXGI_COLOR_SPACE_TYPE*, Void)
-    video_processor_get_output_shader_usage : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, LibC::BOOL*, Void)
-    video_processor_set_stream_color_space1 : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, DXGI_COLOR_SPACE_TYPE, Void)
-    video_processor_set_stream_mirror : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL, LibC::BOOL, LibC::BOOL, Void)
-    video_processor_get_stream_color_space1 : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, DXGI_COLOR_SPACE_TYPE*, Void)
-    video_processor_get_stream_mirror : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, LibC::BOOL*, LibC::BOOL*, Void)
-    video_processor_get_behavior_hints : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, UInt32, DXGI_FORMAT, UInt32, D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT*, UInt32*, HRESULT)
-    video_processor_set_output_hdr_meta_data : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, DXGI_HDR_METADATA_TYPE, UInt32, Void*, Void)
-    video_processor_get_output_hdr_meta_data : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, DXGI_HDR_METADATA_TYPE*, UInt32, Void*, Void)
-    video_processor_set_stream_hdr_meta_data : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, DXGI_HDR_METADATA_TYPE, UInt32, Void*, Void)
-    video_processor_get_stream_hdr_meta_data : Proc(ID3D11VideoContext2*, ID3D11VideoProcessor, UInt32, DXGI_HDR_METADATA_TYPE*, UInt32, Void*, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_decoder_buffer : UInt64
+    release_decoder_buffer : UInt64
+    decoder_begin_frame : UInt64
+    decoder_end_frame : UInt64
+    submit_decoder_buffers : UInt64
+    decoder_extension : UInt64
+    video_processor_set_output_target_rect : UInt64
+    video_processor_set_output_background_color : UInt64
+    video_processor_set_output_color_space : UInt64
+    video_processor_set_output_alpha_fill_mode : UInt64
+    video_processor_set_output_constriction : UInt64
+    video_processor_set_output_stereo_mode : UInt64
+    video_processor_set_output_extension : UInt64
+    video_processor_get_output_target_rect : UInt64
+    video_processor_get_output_background_color : UInt64
+    video_processor_get_output_color_space : UInt64
+    video_processor_get_output_alpha_fill_mode : UInt64
+    video_processor_get_output_constriction : UInt64
+    video_processor_get_output_stereo_mode : UInt64
+    video_processor_get_output_extension : UInt64
+    video_processor_set_stream_frame_format : UInt64
+    video_processor_set_stream_color_space : UInt64
+    video_processor_set_stream_output_rate : UInt64
+    video_processor_set_stream_source_rect : UInt64
+    video_processor_set_stream_dest_rect : UInt64
+    video_processor_set_stream_alpha : UInt64
+    video_processor_set_stream_palette : UInt64
+    video_processor_set_stream_pixel_aspect_ratio : UInt64
+    video_processor_set_stream_luma_key : UInt64
+    video_processor_set_stream_stereo_format : UInt64
+    video_processor_set_stream_auto_processing_mode : UInt64
+    video_processor_set_stream_filter : UInt64
+    video_processor_set_stream_extension : UInt64
+    video_processor_get_stream_frame_format : UInt64
+    video_processor_get_stream_color_space : UInt64
+    video_processor_get_stream_output_rate : UInt64
+    video_processor_get_stream_source_rect : UInt64
+    video_processor_get_stream_dest_rect : UInt64
+    video_processor_get_stream_alpha : UInt64
+    video_processor_get_stream_palette : UInt64
+    video_processor_get_stream_pixel_aspect_ratio : UInt64
+    video_processor_get_stream_luma_key : UInt64
+    video_processor_get_stream_stereo_format : UInt64
+    video_processor_get_stream_auto_processing_mode : UInt64
+    video_processor_get_stream_filter : UInt64
+    video_processor_get_stream_extension : UInt64
+    video_processor_blt : UInt64
+    negotiate_crypto_session_key_exchange : UInt64
+    encryption_blt : UInt64
+    decryption_blt : UInt64
+    start_session_key_refresh : UInt64
+    finish_session_key_refresh : UInt64
+    get_encryption_blt_key : UInt64
+    negotiate_authenticated_channel_key_exchange : UInt64
+    query_authenticated_channel : UInt64
+    configure_authenticated_channel : UInt64
+    video_processor_set_stream_rotation : UInt64
+    video_processor_get_stream_rotation : UInt64
+    submit_decoder_buffers1 : UInt64
+    get_data_for_new_hardware_key : UInt64
+    check_crypto_session_status : UInt64
+    decoder_enable_downsampling : UInt64
+    decoder_update_downsampling : UInt64
+    video_processor_set_output_color_space1 : UInt64
+    video_processor_set_output_shader_usage : UInt64
+    video_processor_get_output_color_space1 : UInt64
+    video_processor_get_output_shader_usage : UInt64
+    video_processor_set_stream_color_space1 : UInt64
+    video_processor_set_stream_mirror : UInt64
+    video_processor_get_stream_color_space1 : UInt64
+    video_processor_get_stream_mirror : UInt64
+    video_processor_get_behavior_hints : UInt64
+    video_processor_set_output_hdr_meta_data : UInt64
+    video_processor_get_output_hdr_meta_data : UInt64
+    video_processor_set_stream_hdr_meta_data : UInt64
+    video_processor_get_stream_hdr_meta_data : UInt64
   end
 
   ID3D11VideoContext2_GUID = "c4e7374c-6243-4d1b-ae87-52b4f740e261"
@@ -6633,32 +6633,32 @@ lib LibWin32
   end
 
   struct ID3D11VideoDevice2VTbl
-    query_interface : Proc(ID3D11VideoDevice2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11VideoDevice2*, UInt32)
-    release : Proc(ID3D11VideoDevice2*, UInt32)
-    create_video_decoder : Proc(ID3D11VideoDevice2*, D3D11_VIDEO_DECODER_DESC*, D3D11_VIDEO_DECODER_CONFIG*, ID3D11VideoDecoder*, HRESULT)
-    create_video_processor : Proc(ID3D11VideoDevice2*, ID3D11VideoProcessorEnumerator, UInt32, ID3D11VideoProcessor*, HRESULT)
-    create_authenticated_channel : Proc(ID3D11VideoDevice2*, D3D11_AUTHENTICATED_CHANNEL_TYPE, ID3D11AuthenticatedChannel*, HRESULT)
-    create_crypto_session : Proc(ID3D11VideoDevice2*, Guid*, Guid*, Guid*, ID3D11CryptoSession*, HRESULT)
-    create_video_decoder_output_view : Proc(ID3D11VideoDevice2*, ID3D11Resource, D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC*, ID3D11VideoDecoderOutputView*, HRESULT)
-    create_video_processor_input_view : Proc(ID3D11VideoDevice2*, ID3D11Resource, ID3D11VideoProcessorEnumerator, D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC*, ID3D11VideoProcessorInputView*, HRESULT)
-    create_video_processor_output_view : Proc(ID3D11VideoDevice2*, ID3D11Resource, ID3D11VideoProcessorEnumerator, D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC*, ID3D11VideoProcessorOutputView*, HRESULT)
-    create_video_processor_enumerator : Proc(ID3D11VideoDevice2*, D3D11_VIDEO_PROCESSOR_CONTENT_DESC*, ID3D11VideoProcessorEnumerator*, HRESULT)
-    get_video_decoder_profile_count : Proc(ID3D11VideoDevice2*, UInt32)
-    get_video_decoder_profile : Proc(ID3D11VideoDevice2*, UInt32, Guid*, HRESULT)
-    check_video_decoder_format : Proc(ID3D11VideoDevice2*, Guid*, DXGI_FORMAT, LibC::BOOL*, HRESULT)
-    get_video_decoder_config_count : Proc(ID3D11VideoDevice2*, D3D11_VIDEO_DECODER_DESC*, UInt32*, HRESULT)
-    get_video_decoder_config : Proc(ID3D11VideoDevice2*, D3D11_VIDEO_DECODER_DESC*, UInt32, D3D11_VIDEO_DECODER_CONFIG*, HRESULT)
-    get_content_protection_caps : Proc(ID3D11VideoDevice2*, Guid*, Guid*, D3D11_VIDEO_CONTENT_PROTECTION_CAPS*, HRESULT)
-    check_crypto_key_exchange : Proc(ID3D11VideoDevice2*, Guid*, Guid*, UInt32, Guid*, HRESULT)
-    set_private_data : Proc(ID3D11VideoDevice2*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11VideoDevice2*, Guid*, IUnknown, HRESULT)
-    get_crypto_session_private_data_size : Proc(ID3D11VideoDevice2*, Guid*, Guid*, Guid*, UInt32*, UInt32*, HRESULT)
-    get_video_decoder_caps : Proc(ID3D11VideoDevice2*, Guid*, UInt32, UInt32, DXGI_RATIONAL*, UInt32, Guid*, UInt32*, HRESULT)
-    check_video_decoder_downsampling : Proc(ID3D11VideoDevice2*, D3D11_VIDEO_DECODER_DESC*, DXGI_COLOR_SPACE_TYPE, D3D11_VIDEO_DECODER_CONFIG*, DXGI_RATIONAL*, D3D11_VIDEO_SAMPLE_DESC*, LibC::BOOL*, LibC::BOOL*, HRESULT)
-    recommend_video_decoder_downsample_parameters : Proc(ID3D11VideoDevice2*, D3D11_VIDEO_DECODER_DESC*, DXGI_COLOR_SPACE_TYPE, D3D11_VIDEO_DECODER_CONFIG*, DXGI_RATIONAL*, D3D11_VIDEO_SAMPLE_DESC*, HRESULT)
-    check_feature_support : Proc(ID3D11VideoDevice2*, D3D11_FEATURE_VIDEO, Void*, UInt32, HRESULT)
-    negotiate_crypto_session_key_exchange_mt : Proc(ID3D11VideoDevice2*, ID3D11CryptoSession, D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS, UInt32, Void*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_video_decoder : UInt64
+    create_video_processor : UInt64
+    create_authenticated_channel : UInt64
+    create_crypto_session : UInt64
+    create_video_decoder_output_view : UInt64
+    create_video_processor_input_view : UInt64
+    create_video_processor_output_view : UInt64
+    create_video_processor_enumerator : UInt64
+    get_video_decoder_profile_count : UInt64
+    get_video_decoder_profile : UInt64
+    check_video_decoder_format : UInt64
+    get_video_decoder_config_count : UInt64
+    get_video_decoder_config : UInt64
+    get_content_protection_caps : UInt64
+    check_crypto_key_exchange : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_crypto_session_private_data_size : UInt64
+    get_video_decoder_caps : UInt64
+    check_video_decoder_downsampling : UInt64
+    recommend_video_decoder_downsample_parameters : UInt64
+    check_feature_support : UInt64
+    negotiate_crypto_session_key_exchange_mt : UInt64
   end
 
   ID3D11VideoDevice2_GUID = "59c0cb01-35f0-4a70-8f67-87905c906a53"
@@ -6668,91 +6668,91 @@ lib LibWin32
   end
 
   struct ID3D11VideoContext3VTbl
-    query_interface : Proc(ID3D11VideoContext3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11VideoContext3*, UInt32)
-    release : Proc(ID3D11VideoContext3*, UInt32)
-    get_device : Proc(ID3D11VideoContext3*, ID3D11Device*, Void)
-    get_private_data : Proc(ID3D11VideoContext3*, Guid*, UInt32*, Void*, HRESULT)
-    set_private_data : Proc(ID3D11VideoContext3*, Guid*, UInt32, Void*, HRESULT)
-    set_private_data_interface : Proc(ID3D11VideoContext3*, Guid*, IUnknown, HRESULT)
-    get_decoder_buffer : Proc(ID3D11VideoContext3*, ID3D11VideoDecoder, D3D11_VIDEO_DECODER_BUFFER_TYPE, UInt32*, Void**, HRESULT)
-    release_decoder_buffer : Proc(ID3D11VideoContext3*, ID3D11VideoDecoder, D3D11_VIDEO_DECODER_BUFFER_TYPE, HRESULT)
-    decoder_begin_frame : Proc(ID3D11VideoContext3*, ID3D11VideoDecoder, ID3D11VideoDecoderOutputView, UInt32, Void*, HRESULT)
-    decoder_end_frame : Proc(ID3D11VideoContext3*, ID3D11VideoDecoder, HRESULT)
-    submit_decoder_buffers : Proc(ID3D11VideoContext3*, ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC*, HRESULT)
-    decoder_extension : Proc(ID3D11VideoContext3*, ID3D11VideoDecoder, D3D11_VIDEO_DECODER_EXTENSION*, Int32)
-    video_processor_set_output_target_rect : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, LibC::BOOL, RECT*, Void)
-    video_processor_set_output_background_color : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, LibC::BOOL, D3D11_VIDEO_COLOR*, Void)
-    video_processor_set_output_color_space : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)
-    video_processor_set_output_alpha_fill_mode : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, UInt32, Void)
-    video_processor_set_output_constriction : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, LibC::BOOL, SIZE, Void)
-    video_processor_set_output_stereo_mode : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, LibC::BOOL, Void)
-    video_processor_set_output_extension : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, Guid*, UInt32, Void*, Int32)
-    video_processor_get_output_target_rect : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, LibC::BOOL*, RECT*, Void)
-    video_processor_get_output_background_color : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, LibC::BOOL*, D3D11_VIDEO_COLOR*, Void)
-    video_processor_get_output_color_space : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)
-    video_processor_get_output_alpha_fill_mode : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE*, UInt32*, Void)
-    video_processor_get_output_constriction : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, LibC::BOOL*, SIZE*, Void)
-    video_processor_get_output_stereo_mode : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, LibC::BOOL*, Void)
-    video_processor_get_output_extension : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, Guid*, UInt32, Void*, Int32)
-    video_processor_set_stream_frame_format : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_FRAME_FORMAT, Void)
-    video_processor_set_stream_color_space : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)
-    video_processor_set_stream_output_rate : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, LibC::BOOL, DXGI_RATIONAL*, Void)
-    video_processor_set_stream_source_rect : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL, RECT*, Void)
-    video_processor_set_stream_dest_rect : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL, RECT*, Void)
-    video_processor_set_stream_alpha : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL, Float32, Void)
-    video_processor_set_stream_palette : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, UInt32, UInt32*, Void)
-    video_processor_set_stream_pixel_aspect_ratio : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL, DXGI_RATIONAL*, DXGI_RATIONAL*, Void)
-    video_processor_set_stream_luma_key : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL, Float32, Float32, Void)
-    video_processor_set_stream_stereo_format : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL, D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, LibC::BOOL, LibC::BOOL, D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, Int32, Void)
-    video_processor_set_stream_auto_processing_mode : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL, Void)
-    video_processor_set_stream_filter : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_FILTER, LibC::BOOL, Int32, Void)
-    video_processor_set_stream_extension : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, Guid*, UInt32, Void*, Int32)
-    video_processor_get_stream_frame_format : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_FRAME_FORMAT*, Void)
-    video_processor_get_stream_color_space : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)
-    video_processor_get_stream_output_rate : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_OUTPUT_RATE*, LibC::BOOL*, DXGI_RATIONAL*, Void)
-    video_processor_get_stream_source_rect : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, RECT*, Void)
-    video_processor_get_stream_dest_rect : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, RECT*, Void)
-    video_processor_get_stream_alpha : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, Float32*, Void)
-    video_processor_get_stream_palette : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, UInt32, UInt32*, Void)
-    video_processor_get_stream_pixel_aspect_ratio : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, DXGI_RATIONAL*, DXGI_RATIONAL*, Void)
-    video_processor_get_stream_luma_key : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, Float32*, Float32*, Void)
-    video_processor_get_stream_stereo_format : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_STEREO_FORMAT*, LibC::BOOL*, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE*, Int32*, Void)
-    video_processor_get_stream_auto_processing_mode : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, Void)
-    video_processor_get_stream_filter : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_FILTER, LibC::BOOL*, Int32*, Void)
-    video_processor_get_stream_extension : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, Guid*, UInt32, Void*, Int32)
-    video_processor_blt : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, ID3D11VideoProcessorOutputView, UInt32, UInt32, D3D11_VIDEO_PROCESSOR_STREAM*, HRESULT)
-    negotiate_crypto_session_key_exchange : Proc(ID3D11VideoContext3*, ID3D11CryptoSession, UInt32, Void*, HRESULT)
-    encryption_blt : Proc(ID3D11VideoContext3*, ID3D11CryptoSession, ID3D11Texture2D, ID3D11Texture2D, UInt32, Void*, Void)
-    decryption_blt : Proc(ID3D11VideoContext3*, ID3D11CryptoSession, ID3D11Texture2D, ID3D11Texture2D, D3D11_ENCRYPTED_BLOCK_INFO*, UInt32, Void*, UInt32, Void*, Void)
-    start_session_key_refresh : Proc(ID3D11VideoContext3*, ID3D11CryptoSession, UInt32, Void*, Void)
-    finish_session_key_refresh : Proc(ID3D11VideoContext3*, ID3D11CryptoSession, Void)
-    get_encryption_blt_key : Proc(ID3D11VideoContext3*, ID3D11CryptoSession, UInt32, Void*, HRESULT)
-    negotiate_authenticated_channel_key_exchange : Proc(ID3D11VideoContext3*, ID3D11AuthenticatedChannel, UInt32, Void*, HRESULT)
-    query_authenticated_channel : Proc(ID3D11VideoContext3*, ID3D11AuthenticatedChannel, UInt32, Void*, UInt32, Void*, HRESULT)
-    configure_authenticated_channel : Proc(ID3D11VideoContext3*, ID3D11AuthenticatedChannel, UInt32, Void*, D3D11_AUTHENTICATED_CONFIGURE_OUTPUT*, HRESULT)
-    video_processor_set_stream_rotation : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL, D3D11_VIDEO_PROCESSOR_ROTATION, Void)
-    video_processor_get_stream_rotation : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_ROTATION*, Void)
-    submit_decoder_buffers1 : Proc(ID3D11VideoContext3*, ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC1*, HRESULT)
-    get_data_for_new_hardware_key : Proc(ID3D11VideoContext3*, ID3D11CryptoSession, UInt32, Void*, UInt64*, HRESULT)
-    check_crypto_session_status : Proc(ID3D11VideoContext3*, ID3D11CryptoSession, D3D11_CRYPTO_SESSION_STATUS*, HRESULT)
-    decoder_enable_downsampling : Proc(ID3D11VideoContext3*, ID3D11VideoDecoder, DXGI_COLOR_SPACE_TYPE, D3D11_VIDEO_SAMPLE_DESC*, UInt32, HRESULT)
-    decoder_update_downsampling : Proc(ID3D11VideoContext3*, ID3D11VideoDecoder, D3D11_VIDEO_SAMPLE_DESC*, HRESULT)
-    video_processor_set_output_color_space1 : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, DXGI_COLOR_SPACE_TYPE, Void)
-    video_processor_set_output_shader_usage : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, LibC::BOOL, Void)
-    video_processor_get_output_color_space1 : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, DXGI_COLOR_SPACE_TYPE*, Void)
-    video_processor_get_output_shader_usage : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, LibC::BOOL*, Void)
-    video_processor_set_stream_color_space1 : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, DXGI_COLOR_SPACE_TYPE, Void)
-    video_processor_set_stream_mirror : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL, LibC::BOOL, LibC::BOOL, Void)
-    video_processor_get_stream_color_space1 : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, DXGI_COLOR_SPACE_TYPE*, Void)
-    video_processor_get_stream_mirror : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, LibC::BOOL*, LibC::BOOL*, LibC::BOOL*, Void)
-    video_processor_get_behavior_hints : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, UInt32, DXGI_FORMAT, UInt32, D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT*, UInt32*, HRESULT)
-    video_processor_set_output_hdr_meta_data : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, DXGI_HDR_METADATA_TYPE, UInt32, Void*, Void)
-    video_processor_get_output_hdr_meta_data : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, DXGI_HDR_METADATA_TYPE*, UInt32, Void*, Void)
-    video_processor_set_stream_hdr_meta_data : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, DXGI_HDR_METADATA_TYPE, UInt32, Void*, Void)
-    video_processor_get_stream_hdr_meta_data : Proc(ID3D11VideoContext3*, ID3D11VideoProcessor, UInt32, DXGI_HDR_METADATA_TYPE*, UInt32, Void*, Void)
-    decoder_begin_frame1 : Proc(ID3D11VideoContext3*, ID3D11VideoDecoder, ID3D11VideoDecoderOutputView, UInt32, Void*, UInt32, UInt32*, ID3D11Buffer*, HRESULT)
-    submit_decoder_buffers2 : Proc(ID3D11VideoContext3*, ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device : UInt64
+    get_private_data : UInt64
+    set_private_data : UInt64
+    set_private_data_interface : UInt64
+    get_decoder_buffer : UInt64
+    release_decoder_buffer : UInt64
+    decoder_begin_frame : UInt64
+    decoder_end_frame : UInt64
+    submit_decoder_buffers : UInt64
+    decoder_extension : UInt64
+    video_processor_set_output_target_rect : UInt64
+    video_processor_set_output_background_color : UInt64
+    video_processor_set_output_color_space : UInt64
+    video_processor_set_output_alpha_fill_mode : UInt64
+    video_processor_set_output_constriction : UInt64
+    video_processor_set_output_stereo_mode : UInt64
+    video_processor_set_output_extension : UInt64
+    video_processor_get_output_target_rect : UInt64
+    video_processor_get_output_background_color : UInt64
+    video_processor_get_output_color_space : UInt64
+    video_processor_get_output_alpha_fill_mode : UInt64
+    video_processor_get_output_constriction : UInt64
+    video_processor_get_output_stereo_mode : UInt64
+    video_processor_get_output_extension : UInt64
+    video_processor_set_stream_frame_format : UInt64
+    video_processor_set_stream_color_space : UInt64
+    video_processor_set_stream_output_rate : UInt64
+    video_processor_set_stream_source_rect : UInt64
+    video_processor_set_stream_dest_rect : UInt64
+    video_processor_set_stream_alpha : UInt64
+    video_processor_set_stream_palette : UInt64
+    video_processor_set_stream_pixel_aspect_ratio : UInt64
+    video_processor_set_stream_luma_key : UInt64
+    video_processor_set_stream_stereo_format : UInt64
+    video_processor_set_stream_auto_processing_mode : UInt64
+    video_processor_set_stream_filter : UInt64
+    video_processor_set_stream_extension : UInt64
+    video_processor_get_stream_frame_format : UInt64
+    video_processor_get_stream_color_space : UInt64
+    video_processor_get_stream_output_rate : UInt64
+    video_processor_get_stream_source_rect : UInt64
+    video_processor_get_stream_dest_rect : UInt64
+    video_processor_get_stream_alpha : UInt64
+    video_processor_get_stream_palette : UInt64
+    video_processor_get_stream_pixel_aspect_ratio : UInt64
+    video_processor_get_stream_luma_key : UInt64
+    video_processor_get_stream_stereo_format : UInt64
+    video_processor_get_stream_auto_processing_mode : UInt64
+    video_processor_get_stream_filter : UInt64
+    video_processor_get_stream_extension : UInt64
+    video_processor_blt : UInt64
+    negotiate_crypto_session_key_exchange : UInt64
+    encryption_blt : UInt64
+    decryption_blt : UInt64
+    start_session_key_refresh : UInt64
+    finish_session_key_refresh : UInt64
+    get_encryption_blt_key : UInt64
+    negotiate_authenticated_channel_key_exchange : UInt64
+    query_authenticated_channel : UInt64
+    configure_authenticated_channel : UInt64
+    video_processor_set_stream_rotation : UInt64
+    video_processor_get_stream_rotation : UInt64
+    submit_decoder_buffers1 : UInt64
+    get_data_for_new_hardware_key : UInt64
+    check_crypto_session_status : UInt64
+    decoder_enable_downsampling : UInt64
+    decoder_update_downsampling : UInt64
+    video_processor_set_output_color_space1 : UInt64
+    video_processor_set_output_shader_usage : UInt64
+    video_processor_get_output_color_space1 : UInt64
+    video_processor_get_output_shader_usage : UInt64
+    video_processor_set_stream_color_space1 : UInt64
+    video_processor_set_stream_mirror : UInt64
+    video_processor_get_stream_color_space1 : UInt64
+    video_processor_get_stream_mirror : UInt64
+    video_processor_get_behavior_hints : UInt64
+    video_processor_set_output_hdr_meta_data : UInt64
+    video_processor_get_output_hdr_meta_data : UInt64
+    video_processor_set_stream_hdr_meta_data : UInt64
+    video_processor_get_stream_hdr_meta_data : UInt64
+    decoder_begin_frame1 : UInt64
+    submit_decoder_buffers2 : UInt64
   end
 
   ID3D11VideoContext3_GUID = "a9e2faa0-cb39-418f-a0b7-d8aad4de672e"
@@ -6762,17 +6762,17 @@ lib LibWin32
   end
 
   struct ID3D11ShaderReflectionTypeVTbl
-    get_desc : Proc(ID3D11ShaderReflectionType*, D3D11_SHADER_TYPE_DESC*, HRESULT)
-    get_member_type_by_index : Proc(ID3D11ShaderReflectionType*, UInt32, ID3D11ShaderReflectionType)
-    get_member_type_by_name : Proc(ID3D11ShaderReflectionType*, PSTR, ID3D11ShaderReflectionType)
-    get_member_type_name : Proc(ID3D11ShaderReflectionType*, UInt32, PSTR)
-    is_equal : Proc(ID3D11ShaderReflectionType*, ID3D11ShaderReflectionType, HRESULT)
-    get_sub_type : Proc(ID3D11ShaderReflectionType*, ID3D11ShaderReflectionType)
-    get_base_class : Proc(ID3D11ShaderReflectionType*, ID3D11ShaderReflectionType)
-    get_num_interfaces : Proc(ID3D11ShaderReflectionType*, UInt32)
-    get_interface_by_index : Proc(ID3D11ShaderReflectionType*, UInt32, ID3D11ShaderReflectionType)
-    is_of_type : Proc(ID3D11ShaderReflectionType*, ID3D11ShaderReflectionType, HRESULT)
-    implements_interface : Proc(ID3D11ShaderReflectionType*, ID3D11ShaderReflectionType, HRESULT)
+    get_desc : UInt64
+    get_member_type_by_index : UInt64
+    get_member_type_by_name : UInt64
+    get_member_type_name : UInt64
+    is_equal : UInt64
+    get_sub_type : UInt64
+    get_base_class : UInt64
+    get_num_interfaces : UInt64
+    get_interface_by_index : UInt64
+    is_of_type : UInt64
+    implements_interface : UInt64
   end
 
   ID3D11ShaderReflectionType_GUID = "6e6ffa6a-9bae-4613-a51e-91652d508c21"
@@ -6782,10 +6782,10 @@ lib LibWin32
   end
 
   struct ID3D11ShaderReflectionVariableVTbl
-    get_desc : Proc(ID3D11ShaderReflectionVariable*, D3D11_SHADER_VARIABLE_DESC*, HRESULT)
-    get_type : Proc(ID3D11ShaderReflectionVariable*, ID3D11ShaderReflectionType)
-    get_buffer : Proc(ID3D11ShaderReflectionVariable*, ID3D11ShaderReflectionConstantBuffer)
-    get_interface_slot : Proc(ID3D11ShaderReflectionVariable*, UInt32, UInt32)
+    get_desc : UInt64
+    get_type : UInt64
+    get_buffer : UInt64
+    get_interface_slot : UInt64
   end
 
   ID3D11ShaderReflectionVariable_GUID = "51f23923-f3e5-4bd1-91cb-606177d8db4c"
@@ -6795,9 +6795,9 @@ lib LibWin32
   end
 
   struct ID3D11ShaderReflectionConstantBufferVTbl
-    get_desc : Proc(ID3D11ShaderReflectionConstantBuffer*, D3D11_SHADER_BUFFER_DESC*, HRESULT)
-    get_variable_by_index : Proc(ID3D11ShaderReflectionConstantBuffer*, UInt32, ID3D11ShaderReflectionVariable)
-    get_variable_by_name : Proc(ID3D11ShaderReflectionConstantBuffer*, PSTR, ID3D11ShaderReflectionVariable)
+    get_desc : UInt64
+    get_variable_by_index : UInt64
+    get_variable_by_name : UInt64
   end
 
   ID3D11ShaderReflectionConstantBuffer_GUID = "eb62d63d-93dd-4318-8ae8-c6f83ad371b8"
@@ -6807,28 +6807,28 @@ lib LibWin32
   end
 
   struct ID3D11ShaderReflectionVTbl
-    query_interface : Proc(ID3D11ShaderReflection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11ShaderReflection*, UInt32)
-    release : Proc(ID3D11ShaderReflection*, UInt32)
-    get_desc : Proc(ID3D11ShaderReflection*, D3D11_SHADER_DESC*, HRESULT)
-    get_constant_buffer_by_index : Proc(ID3D11ShaderReflection*, UInt32, ID3D11ShaderReflectionConstantBuffer)
-    get_constant_buffer_by_name : Proc(ID3D11ShaderReflection*, PSTR, ID3D11ShaderReflectionConstantBuffer)
-    get_resource_binding_desc : Proc(ID3D11ShaderReflection*, UInt32, D3D11_SHADER_INPUT_BIND_DESC*, HRESULT)
-    get_input_parameter_desc : Proc(ID3D11ShaderReflection*, UInt32, D3D11_SIGNATURE_PARAMETER_DESC*, HRESULT)
-    get_output_parameter_desc : Proc(ID3D11ShaderReflection*, UInt32, D3D11_SIGNATURE_PARAMETER_DESC*, HRESULT)
-    get_patch_constant_parameter_desc : Proc(ID3D11ShaderReflection*, UInt32, D3D11_SIGNATURE_PARAMETER_DESC*, HRESULT)
-    get_variable_by_name : Proc(ID3D11ShaderReflection*, PSTR, ID3D11ShaderReflectionVariable)
-    get_resource_binding_desc_by_name : Proc(ID3D11ShaderReflection*, PSTR, D3D11_SHADER_INPUT_BIND_DESC*, HRESULT)
-    get_mov_instruction_count : Proc(ID3D11ShaderReflection*, UInt32)
-    get_movc_instruction_count : Proc(ID3D11ShaderReflection*, UInt32)
-    get_conversion_instruction_count : Proc(ID3D11ShaderReflection*, UInt32)
-    get_bitwise_instruction_count : Proc(ID3D11ShaderReflection*, UInt32)
-    get_gs_input_primitive : Proc(ID3D11ShaderReflection*, D3D_PRIMITIVE)
-    is_sample_frequency_shader : Proc(ID3D11ShaderReflection*, LibC::BOOL)
-    get_num_interface_slots : Proc(ID3D11ShaderReflection*, UInt32)
-    get_min_feature_level : Proc(ID3D11ShaderReflection*, D3D_FEATURE_LEVEL*, HRESULT)
-    get_thread_group_size : Proc(ID3D11ShaderReflection*, UInt32*, UInt32*, UInt32*, UInt32)
-    get_requires_flags : Proc(ID3D11ShaderReflection*, UInt64)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_desc : UInt64
+    get_constant_buffer_by_index : UInt64
+    get_constant_buffer_by_name : UInt64
+    get_resource_binding_desc : UInt64
+    get_input_parameter_desc : UInt64
+    get_output_parameter_desc : UInt64
+    get_patch_constant_parameter_desc : UInt64
+    get_variable_by_name : UInt64
+    get_resource_binding_desc_by_name : UInt64
+    get_mov_instruction_count : UInt64
+    get_movc_instruction_count : UInt64
+    get_conversion_instruction_count : UInt64
+    get_bitwise_instruction_count : UInt64
+    get_gs_input_primitive : UInt64
+    is_sample_frequency_shader : UInt64
+    get_num_interface_slots : UInt64
+    get_min_feature_level : UInt64
+    get_thread_group_size : UInt64
+    get_requires_flags : UInt64
   end
 
   ID3D11ShaderReflection_GUID = "8d536ca1-0cca-4956-a837-786963755584"
@@ -6838,11 +6838,11 @@ lib LibWin32
   end
 
   struct ID3D11LibraryReflectionVTbl
-    query_interface : Proc(ID3D11LibraryReflection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11LibraryReflection*, UInt32)
-    release : Proc(ID3D11LibraryReflection*, UInt32)
-    get_desc : Proc(ID3D11LibraryReflection*, D3D11_LIBRARY_DESC*, HRESULT)
-    get_function_by_index : Proc(ID3D11LibraryReflection*, Int32, ID3D11FunctionReflection)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_desc : UInt64
+    get_function_by_index : UInt64
   end
 
   ID3D11LibraryReflection_GUID = "54384f1b-5b3e-4bb7-ae01-60ba3097cbb6"
@@ -6852,13 +6852,13 @@ lib LibWin32
   end
 
   struct ID3D11FunctionReflectionVTbl
-    get_desc : Proc(ID3D11FunctionReflection*, D3D11_FUNCTION_DESC*, HRESULT)
-    get_constant_buffer_by_index : Proc(ID3D11FunctionReflection*, UInt32, ID3D11ShaderReflectionConstantBuffer)
-    get_constant_buffer_by_name : Proc(ID3D11FunctionReflection*, PSTR, ID3D11ShaderReflectionConstantBuffer)
-    get_resource_binding_desc : Proc(ID3D11FunctionReflection*, UInt32, D3D11_SHADER_INPUT_BIND_DESC*, HRESULT)
-    get_variable_by_name : Proc(ID3D11FunctionReflection*, PSTR, ID3D11ShaderReflectionVariable)
-    get_resource_binding_desc_by_name : Proc(ID3D11FunctionReflection*, PSTR, D3D11_SHADER_INPUT_BIND_DESC*, HRESULT)
-    get_function_parameter : Proc(ID3D11FunctionReflection*, Int32, ID3D11FunctionParameterReflection)
+    get_desc : UInt64
+    get_constant_buffer_by_index : UInt64
+    get_constant_buffer_by_name : UInt64
+    get_resource_binding_desc : UInt64
+    get_variable_by_name : UInt64
+    get_resource_binding_desc_by_name : UInt64
+    get_function_parameter : UInt64
   end
 
   ID3D11FunctionReflection_GUID = "207bcecb-d683-4a06-a8a3-9b149b9f73a4"
@@ -6868,7 +6868,7 @@ lib LibWin32
   end
 
   struct ID3D11FunctionParameterReflectionVTbl
-    get_desc : Proc(ID3D11FunctionParameterReflection*, D3D11_PARAMETER_DESC*, HRESULT)
+    get_desc : UInt64
   end
 
   ID3D11FunctionParameterReflection_GUID = "42757488-334f-47fe-982e-1a65d08cc462"
@@ -6878,19 +6878,19 @@ lib LibWin32
   end
 
   struct ID3D11ModuleInstanceVTbl
-    query_interface : Proc(ID3D11ModuleInstance*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11ModuleInstance*, UInt32)
-    release : Proc(ID3D11ModuleInstance*, UInt32)
-    bind_constant_buffer : Proc(ID3D11ModuleInstance*, UInt32, UInt32, UInt32, HRESULT)
-    bind_constant_buffer_by_name : Proc(ID3D11ModuleInstance*, PSTR, UInt32, UInt32, HRESULT)
-    bind_resource : Proc(ID3D11ModuleInstance*, UInt32, UInt32, UInt32, HRESULT)
-    bind_resource_by_name : Proc(ID3D11ModuleInstance*, PSTR, UInt32, UInt32, HRESULT)
-    bind_sampler : Proc(ID3D11ModuleInstance*, UInt32, UInt32, UInt32, HRESULT)
-    bind_sampler_by_name : Proc(ID3D11ModuleInstance*, PSTR, UInt32, UInt32, HRESULT)
-    bind_unordered_access_view : Proc(ID3D11ModuleInstance*, UInt32, UInt32, UInt32, HRESULT)
-    bind_unordered_access_view_by_name : Proc(ID3D11ModuleInstance*, PSTR, UInt32, UInt32, HRESULT)
-    bind_resource_as_unordered_access_view : Proc(ID3D11ModuleInstance*, UInt32, UInt32, UInt32, HRESULT)
-    bind_resource_as_unordered_access_view_by_name : Proc(ID3D11ModuleInstance*, PSTR, UInt32, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    bind_constant_buffer : UInt64
+    bind_constant_buffer_by_name : UInt64
+    bind_resource : UInt64
+    bind_resource_by_name : UInt64
+    bind_sampler : UInt64
+    bind_sampler_by_name : UInt64
+    bind_unordered_access_view : UInt64
+    bind_unordered_access_view_by_name : UInt64
+    bind_resource_as_unordered_access_view : UInt64
+    bind_resource_as_unordered_access_view_by_name : UInt64
   end
 
   ID3D11ModuleInstance_GUID = "469e07f7-045a-48d5-aa12-68a478cdf75d"
@@ -6900,10 +6900,10 @@ lib LibWin32
   end
 
   struct ID3D11ModuleVTbl
-    query_interface : Proc(ID3D11Module*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Module*, UInt32)
-    release : Proc(ID3D11Module*, UInt32)
-    create_instance : Proc(ID3D11Module*, PSTR, ID3D11ModuleInstance*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_instance : UInt64
   end
 
   ID3D11Module_GUID = "cac701ee-80fc-4122-8242-10b39c8cec34"
@@ -6913,12 +6913,12 @@ lib LibWin32
   end
 
   struct ID3D11LinkerVTbl
-    query_interface : Proc(ID3D11Linker*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11Linker*, UInt32)
-    release : Proc(ID3D11Linker*, UInt32)
-    link : Proc(ID3D11Linker*, ID3D11ModuleInstance, PSTR, PSTR, UInt32, ID3DBlob*, ID3DBlob*, HRESULT)
-    use_library : Proc(ID3D11Linker*, ID3D11ModuleInstance, HRESULT)
-    add_clip_plane_from_c_buffer : Proc(ID3D11Linker*, UInt32, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    link : UInt64
+    use_library : UInt64
+    add_clip_plane_from_c_buffer : UInt64
   end
 
   ID3D11Linker_GUID = "59a6cd0e-e10d-4c1f-88c0-63aba1daf30e"
@@ -6928,9 +6928,9 @@ lib LibWin32
   end
 
   struct ID3D11LinkingNodeVTbl
-    query_interface : Proc(ID3D11LinkingNode*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11LinkingNode*, UInt32)
-    release : Proc(ID3D11LinkingNode*, UInt32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
   end
 
   ID3D11LinkingNode_GUID = "d80dd70c-8d2f-4751-94a1-03c79b3556db"
@@ -6940,17 +6940,17 @@ lib LibWin32
   end
 
   struct ID3D11FunctionLinkingGraphVTbl
-    query_interface : Proc(ID3D11FunctionLinkingGraph*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11FunctionLinkingGraph*, UInt32)
-    release : Proc(ID3D11FunctionLinkingGraph*, UInt32)
-    create_module_instance : Proc(ID3D11FunctionLinkingGraph*, ID3D11ModuleInstance*, ID3DBlob*, HRESULT)
-    set_input_signature : Proc(ID3D11FunctionLinkingGraph*, D3D11_PARAMETER_DESC*, UInt32, ID3D11LinkingNode*, HRESULT)
-    set_output_signature : Proc(ID3D11FunctionLinkingGraph*, D3D11_PARAMETER_DESC*, UInt32, ID3D11LinkingNode*, HRESULT)
-    call_function : Proc(ID3D11FunctionLinkingGraph*, PSTR, ID3D11Module, PSTR, ID3D11LinkingNode*, HRESULT)
-    pass_value : Proc(ID3D11FunctionLinkingGraph*, ID3D11LinkingNode, Int32, ID3D11LinkingNode, Int32, HRESULT)
-    pass_value_with_swizzle : Proc(ID3D11FunctionLinkingGraph*, ID3D11LinkingNode, Int32, PSTR, ID3D11LinkingNode, Int32, PSTR, HRESULT)
-    get_last_error : Proc(ID3D11FunctionLinkingGraph*, ID3DBlob*, HRESULT)
-    generate_hlsl : Proc(ID3D11FunctionLinkingGraph*, UInt32, ID3DBlob*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_module_instance : UInt64
+    set_input_signature : UInt64
+    set_output_signature : UInt64
+    call_function : UInt64
+    pass_value : UInt64
+    pass_value_with_swizzle : UInt64
+    get_last_error : UInt64
+    generate_hlsl : UInt64
   end
 
   ID3D11FunctionLinkingGraph_GUID = "54133220-1ce8-43d3-8236-9855c5ceecff"
@@ -6960,17 +6960,17 @@ lib LibWin32
   end
 
   struct ID3D11ShaderTraceVTbl
-    query_interface : Proc(ID3D11ShaderTrace*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11ShaderTrace*, UInt32)
-    release : Proc(ID3D11ShaderTrace*, UInt32)
-    trace_ready : Proc(ID3D11ShaderTrace*, UInt64*, HRESULT)
-    reset_trace : Proc(ID3D11ShaderTrace*, Void)
-    get_trace_stats : Proc(ID3D11ShaderTrace*, D3D11_TRACE_STATS*, HRESULT)
-    ps_select_stamp : Proc(ID3D11ShaderTrace*, UInt32, HRESULT)
-    get_initial_register_contents : Proc(ID3D11ShaderTrace*, D3D11_TRACE_REGISTER*, D3D11_TRACE_VALUE*, HRESULT)
-    get_step : Proc(ID3D11ShaderTrace*, UInt32, D3D11_TRACE_STEP*, HRESULT)
-    get_written_register : Proc(ID3D11ShaderTrace*, UInt32, UInt32, D3D11_TRACE_REGISTER*, D3D11_TRACE_VALUE*, HRESULT)
-    get_read_register : Proc(ID3D11ShaderTrace*, UInt32, UInt32, D3D11_TRACE_REGISTER*, D3D11_TRACE_VALUE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    trace_ready : UInt64
+    reset_trace : UInt64
+    get_trace_stats : UInt64
+    ps_select_stamp : UInt64
+    get_initial_register_contents : UInt64
+    get_step : UInt64
+    get_written_register : UInt64
+    get_read_register : UInt64
   end
 
   ID3D11ShaderTrace_GUID = "36b013e6-2811-4845-baa7-d623fe0df104"
@@ -6980,10 +6980,10 @@ lib LibWin32
   end
 
   struct ID3D11ShaderTraceFactoryVTbl
-    query_interface : Proc(ID3D11ShaderTraceFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3D11ShaderTraceFactory*, UInt32)
-    release : Proc(ID3D11ShaderTraceFactory*, UInt32)
-    create_shader_trace : Proc(ID3D11ShaderTraceFactory*, IUnknown, D3D11_SHADER_TRACE_DESC*, ID3D11ShaderTrace*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_shader_trace : UInt64
   end
 
   ID3D11ShaderTraceFactory_GUID = "1fbad429-66ab-41cc-9617-667ac10e4459"
@@ -6993,12 +6993,12 @@ lib LibWin32
   end
 
   struct ID3DX11ScanVTbl
-    query_interface : Proc(ID3DX11Scan*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3DX11Scan*, UInt32)
-    release : Proc(ID3DX11Scan*, UInt32)
-    set_scan_direction : Proc(ID3DX11Scan*, D3DX11_SCAN_DIRECTION, HRESULT)
-    scan : Proc(ID3DX11Scan*, D3DX11_SCAN_DATA_TYPE, D3DX11_SCAN_OPCODE, UInt32, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView, HRESULT)
-    multiscan : Proc(ID3DX11Scan*, D3DX11_SCAN_DATA_TYPE, D3DX11_SCAN_OPCODE, UInt32, UInt32, UInt32, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_scan_direction : UInt64
+    scan : UInt64
+    multiscan : UInt64
   end
 
   ID3DX11Scan_GUID = "5089b68f-e71d-4d38-be8e-f363b95a9405"
@@ -7008,11 +7008,11 @@ lib LibWin32
   end
 
   struct ID3DX11SegmentedScanVTbl
-    query_interface : Proc(ID3DX11SegmentedScan*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3DX11SegmentedScan*, UInt32)
-    release : Proc(ID3DX11SegmentedScan*, UInt32)
-    set_scan_direction : Proc(ID3DX11SegmentedScan*, D3DX11_SCAN_DIRECTION, HRESULT)
-    seg_scan : Proc(ID3DX11SegmentedScan*, D3DX11_SCAN_DATA_TYPE, D3DX11_SCAN_OPCODE, UInt32, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_scan_direction : UInt64
+    seg_scan : UInt64
   end
 
   ID3DX11SegmentedScan_GUID = "a915128c-d954-4c79-bfe1-64db923194d6"
@@ -7022,16 +7022,16 @@ lib LibWin32
   end
 
   struct ID3DX11FFTVTbl
-    query_interface : Proc(ID3DX11FFT*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3DX11FFT*, UInt32)
-    release : Proc(ID3DX11FFT*, UInt32)
-    set_forward_scale : Proc(ID3DX11FFT*, Float32, HRESULT)
-    get_forward_scale : Proc(ID3DX11FFT*, Float32)
-    set_inverse_scale : Proc(ID3DX11FFT*, Float32, HRESULT)
-    get_inverse_scale : Proc(ID3DX11FFT*, Float32)
-    attach_buffers_and_precompute : Proc(ID3DX11FFT*, UInt32, ID3D11UnorderedAccessView*, UInt32, ID3D11UnorderedAccessView*, HRESULT)
-    forward_transform : Proc(ID3DX11FFT*, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView*, HRESULT)
-    inverse_transform : Proc(ID3DX11FFT*, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_forward_scale : UInt64
+    get_forward_scale : UInt64
+    set_inverse_scale : UInt64
+    get_inverse_scale : UInt64
+    attach_buffers_and_precompute : UInt64
+    forward_transform : UInt64
+    inverse_transform : UInt64
   end
 
   ID3DX11FFT_GUID = "b3f7a938-4c93-4310-a675-b30d6de50553"
@@ -7076,4 +7076,6425 @@ lib LibWin32
 
   # Params # pdevicecontext : ID3D11DeviceContext [In],x : UInt32 [In],y : UInt32 [In],z : UInt32 [In],flags : UInt32 [In],pbufferinfo : D3DX11_FFT_BUFFER_INFO* [In],ppfft : ID3DX11FFT* [In]
   fun D3DX11CreateFFT3DComplex(pdevicecontext : ID3D11DeviceContext, x : UInt32, y : UInt32, z : UInt32, flags : UInt32, pbufferinfo : D3DX11_FFT_BUFFER_INFO*, ppfft : ID3DX11FFT*) : HRESULT
+end
+struct LibWin32::ID3D11DeviceChild
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+end
+struct LibWin32::ID3D11DepthStencilState
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_desc(pdesc : D3D11_DEPTH_STENCIL_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_DEPTH_STENCIL_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11BlendState
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_desc(pdesc : D3D11_BLEND_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_BLEND_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11RasterizerState
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_desc(pdesc : D3D11_RASTERIZER_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_RASTERIZER_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11Resource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_type(presourcedimension : D3D11_RESOURCE_DIMENSION*) : Void
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D11_RESOURCE_DIMENSION*, Void)).call(presourcedimension)
+  end
+  def set_eviction_priority(evictionpriority : UInt32) : Void
+    @lpVtbl.value.set_eviction_priority.unsafe_as(Proc(UInt32, Void)).call(evictionpriority)
+  end
+  def get_eviction_priority : UInt32
+    @lpVtbl.value.get_eviction_priority.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::ID3D11Buffer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_type(presourcedimension : D3D11_RESOURCE_DIMENSION*) : Void
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D11_RESOURCE_DIMENSION*, Void)).call(presourcedimension)
+  end
+  def set_eviction_priority(evictionpriority : UInt32) : Void
+    @lpVtbl.value.set_eviction_priority.unsafe_as(Proc(UInt32, Void)).call(evictionpriority)
+  end
+  def get_eviction_priority : UInt32
+    @lpVtbl.value.get_eviction_priority.unsafe_as(Proc(UInt32)).call
+  end
+  def get_desc(pdesc : D3D11_BUFFER_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_BUFFER_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11Texture1D
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_type(presourcedimension : D3D11_RESOURCE_DIMENSION*) : Void
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D11_RESOURCE_DIMENSION*, Void)).call(presourcedimension)
+  end
+  def set_eviction_priority(evictionpriority : UInt32) : Void
+    @lpVtbl.value.set_eviction_priority.unsafe_as(Proc(UInt32, Void)).call(evictionpriority)
+  end
+  def get_eviction_priority : UInt32
+    @lpVtbl.value.get_eviction_priority.unsafe_as(Proc(UInt32)).call
+  end
+  def get_desc(pdesc : D3D11_TEXTURE1D_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_TEXTURE1D_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11Texture2D
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_type(presourcedimension : D3D11_RESOURCE_DIMENSION*) : Void
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D11_RESOURCE_DIMENSION*, Void)).call(presourcedimension)
+  end
+  def set_eviction_priority(evictionpriority : UInt32) : Void
+    @lpVtbl.value.set_eviction_priority.unsafe_as(Proc(UInt32, Void)).call(evictionpriority)
+  end
+  def get_eviction_priority : UInt32
+    @lpVtbl.value.get_eviction_priority.unsafe_as(Proc(UInt32)).call
+  end
+  def get_desc(pdesc : D3D11_TEXTURE2D_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_TEXTURE2D_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11Texture3D
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_type(presourcedimension : D3D11_RESOURCE_DIMENSION*) : Void
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D11_RESOURCE_DIMENSION*, Void)).call(presourcedimension)
+  end
+  def set_eviction_priority(evictionpriority : UInt32) : Void
+    @lpVtbl.value.set_eviction_priority.unsafe_as(Proc(UInt32, Void)).call(evictionpriority)
+  end
+  def get_eviction_priority : UInt32
+    @lpVtbl.value.get_eviction_priority.unsafe_as(Proc(UInt32)).call
+  end
+  def get_desc(pdesc : D3D11_TEXTURE3D_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_TEXTURE3D_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11View
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_resource(ppresource : ID3D11Resource*) : Void
+    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D11Resource*, Void)).call(ppresource)
+  end
+end
+struct LibWin32::ID3D11ShaderResourceView
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_resource(ppresource : ID3D11Resource*) : Void
+    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D11Resource*, Void)).call(ppresource)
+  end
+  def get_desc(pdesc : D3D11_SHADER_RESOURCE_VIEW_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_SHADER_RESOURCE_VIEW_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11RenderTargetView
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_resource(ppresource : ID3D11Resource*) : Void
+    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D11Resource*, Void)).call(ppresource)
+  end
+  def get_desc(pdesc : D3D11_RENDER_TARGET_VIEW_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_RENDER_TARGET_VIEW_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11DepthStencilView
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_resource(ppresource : ID3D11Resource*) : Void
+    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D11Resource*, Void)).call(ppresource)
+  end
+  def get_desc(pdesc : D3D11_DEPTH_STENCIL_VIEW_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_DEPTH_STENCIL_VIEW_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11UnorderedAccessView
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_resource(ppresource : ID3D11Resource*) : Void
+    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D11Resource*, Void)).call(ppresource)
+  end
+  def get_desc(pdesc : D3D11_UNORDERED_ACCESS_VIEW_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_UNORDERED_ACCESS_VIEW_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11VertexShader
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+end
+struct LibWin32::ID3D11HullShader
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+end
+struct LibWin32::ID3D11DomainShader
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+end
+struct LibWin32::ID3D11GeometryShader
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+end
+struct LibWin32::ID3D11PixelShader
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+end
+struct LibWin32::ID3D11ComputeShader
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+end
+struct LibWin32::ID3D11InputLayout
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+end
+struct LibWin32::ID3D11SamplerState
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_desc(pdesc : D3D11_SAMPLER_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_SAMPLER_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11Asynchronous
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_data_size : UInt32
+    @lpVtbl.value.get_data_size.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::ID3D11Query
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_data_size : UInt32
+    @lpVtbl.value.get_data_size.unsafe_as(Proc(UInt32)).call
+  end
+  def get_desc(pdesc : D3D11_QUERY_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_QUERY_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11Predicate
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_data_size : UInt32
+    @lpVtbl.value.get_data_size.unsafe_as(Proc(UInt32)).call
+  end
+  def get_desc(pdesc : D3D11_QUERY_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_QUERY_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11Counter
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_data_size : UInt32
+    @lpVtbl.value.get_data_size.unsafe_as(Proc(UInt32)).call
+  end
+  def get_desc(pdesc : D3D11_COUNTER_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_COUNTER_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11ClassInstance
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_class_linkage(pplinkage : ID3D11ClassLinkage*) : Void
+    @lpVtbl.value.get_class_linkage.unsafe_as(Proc(ID3D11ClassLinkage*, Void)).call(pplinkage)
+  end
+  def get_desc(pdesc : D3D11_CLASS_INSTANCE_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_CLASS_INSTANCE_DESC*, Void)).call(pdesc)
+  end
+  def get_instance_name(pinstancename : UInt8*, pbufferlength : LibC::UINT_PTR*) : Void
+    @lpVtbl.value.get_instance_name.unsafe_as(Proc(UInt8*, LibC::UINT_PTR*, Void)).call(pinstancename, pbufferlength)
+  end
+  def get_type_name(ptypename : UInt8*, pbufferlength : LibC::UINT_PTR*) : Void
+    @lpVtbl.value.get_type_name.unsafe_as(Proc(UInt8*, LibC::UINT_PTR*, Void)).call(ptypename, pbufferlength)
+  end
+end
+struct LibWin32::ID3D11ClassLinkage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_class_instance(pclassinstancename : PSTR, instanceindex : UInt32, ppinstance : ID3D11ClassInstance*) : HRESULT
+    @lpVtbl.value.get_class_instance.unsafe_as(Proc(PSTR, UInt32, ID3D11ClassInstance*, HRESULT)).call(pclassinstancename, instanceindex, ppinstance)
+  end
+  def create_class_instance(pclasstypename : PSTR, constantbufferoffset : UInt32, constantvectoroffset : UInt32, textureoffset : UInt32, sampleroffset : UInt32, ppinstance : ID3D11ClassInstance*) : HRESULT
+    @lpVtbl.value.create_class_instance.unsafe_as(Proc(PSTR, UInt32, UInt32, UInt32, UInt32, ID3D11ClassInstance*, HRESULT)).call(pclasstypename, constantbufferoffset, constantvectoroffset, textureoffset, sampleroffset, ppinstance)
+  end
+end
+struct LibWin32::ID3D11CommandList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_context_flags : UInt32
+    @lpVtbl.value.get_context_flags.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::ID3D11DeviceContext
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def vs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.vs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ps_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ps_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ps_set_shader(ppixelshader : ID3D11PixelShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.ps_set_shader.unsafe_as(Proc(ID3D11PixelShader, ID3D11ClassInstance*, UInt32, Void)).call(ppixelshader, ppclassinstances, numclassinstances)
+  end
+  def ps_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ps_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def vs_set_shader(pvertexshader : ID3D11VertexShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.vs_set_shader.unsafe_as(Proc(ID3D11VertexShader, ID3D11ClassInstance*, UInt32, Void)).call(pvertexshader, ppclassinstances, numclassinstances)
+  end
+  def draw_indexed(indexcount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32) : Void
+    @lpVtbl.value.draw_indexed.unsafe_as(Proc(UInt32, UInt32, Int32, Void)).call(indexcount, startindexlocation, basevertexlocation)
+  end
+  def draw(vertexcount : UInt32, startvertexlocation : UInt32) : Void
+    @lpVtbl.value.draw.unsafe_as(Proc(UInt32, UInt32, Void)).call(vertexcount, startvertexlocation)
+  end
+  def map(presource : ID3D11Resource, subresource : UInt32, maptype : D3D11_MAP, mapflags : UInt32, pmappedresource : D3D11_MAPPED_SUBRESOURCE*) : HRESULT
+    @lpVtbl.value.map.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_MAP, UInt32, D3D11_MAPPED_SUBRESOURCE*, HRESULT)).call(presource, subresource, maptype, mapflags, pmappedresource)
+  end
+  def unmap(presource : ID3D11Resource, subresource : UInt32) : Void
+    @lpVtbl.value.unmap.unsafe_as(Proc(ID3D11Resource, UInt32, Void)).call(presource, subresource)
+  end
+  def ps_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ps_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ia_set_input_layout(pinputlayout : ID3D11InputLayout) : Void
+    @lpVtbl.value.ia_set_input_layout.unsafe_as(Proc(ID3D11InputLayout, Void)).call(pinputlayout)
+  end
+  def ia_set_vertex_buffers(startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D11Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
+    @lpVtbl.value.ia_set_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
+  end
+  def ia_set_index_buffer(pindexbuffer : ID3D11Buffer, format : DXGI_FORMAT, offset : UInt32) : Void
+    @lpVtbl.value.ia_set_index_buffer.unsafe_as(Proc(ID3D11Buffer, DXGI_FORMAT, UInt32, Void)).call(pindexbuffer, format, offset)
+  end
+  def draw_indexed_instanced(indexcountperinstance : UInt32, instancecount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, Int32, UInt32, Void)).call(indexcountperinstance, instancecount, startindexlocation, basevertexlocation, startinstancelocation)
+  end
+  def draw_instanced(vertexcountperinstance : UInt32, instancecount : UInt32, startvertexlocation : UInt32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, Void)).call(vertexcountperinstance, instancecount, startvertexlocation, startinstancelocation)
+  end
+  def gs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.gs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def gs_set_shader(pshader : ID3D11GeometryShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.gs_set_shader.unsafe_as(Proc(ID3D11GeometryShader, ID3D11ClassInstance*, UInt32, Void)).call(pshader, ppclassinstances, numclassinstances)
+  end
+  def ia_set_primitive_topology(topology : D3D_PRIMITIVE_TOPOLOGY) : Void
+    @lpVtbl.value.ia_set_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY, Void)).call(topology)
+  end
+  def vs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.vs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def vs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.vs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def begin_(pasync : ID3D11Asynchronous) : Void
+    @lpVtbl.value.begin_.unsafe_as(Proc(ID3D11Asynchronous, Void)).call(pasync)
+  end
+  def end_(pasync : ID3D11Asynchronous) : Void
+    @lpVtbl.value.end_.unsafe_as(Proc(ID3D11Asynchronous, Void)).call(pasync)
+  end
+  def get_data(pasync : ID3D11Asynchronous, pdata : Void*, datasize : UInt32, getdataflags : UInt32) : HRESULT
+    @lpVtbl.value.get_data.unsafe_as(Proc(ID3D11Asynchronous, Void*, UInt32, UInt32, HRESULT)).call(pasync, pdata, datasize, getdataflags)
+  end
+  def set_predication(ppredicate : ID3D11Predicate, predicatevalue : LibC::BOOL) : Void
+    @lpVtbl.value.set_predication.unsafe_as(Proc(ID3D11Predicate, LibC::BOOL, Void)).call(ppredicate, predicatevalue)
+  end
+  def gs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.gs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def gs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.gs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def om_set_render_targets(numviews : UInt32, pprendertargetviews : ID3D11RenderTargetView*, pdepthstencilview : ID3D11DepthStencilView) : Void
+    @lpVtbl.value.om_set_render_targets.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, Void)).call(numviews, pprendertargetviews, pdepthstencilview)
+  end
+  def om_set_render_targets_and_unordered_access_views(numrtvs : UInt32, pprendertargetviews : ID3D11RenderTargetView*, pdepthstencilview : ID3D11DepthStencilView, uavstartslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*, puavinitialcounts : UInt32*) : Void
+    @lpVtbl.value.om_set_render_targets_and_unordered_access_views.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)).call(numrtvs, pprendertargetviews, pdepthstencilview, uavstartslot, numuavs, ppunorderedaccessviews, puavinitialcounts)
+  end
+  def om_set_blend_state(pblendstate : ID3D11BlendState, blendfactor : Float32*, samplemask : UInt32) : Void
+    @lpVtbl.value.om_set_blend_state.unsafe_as(Proc(ID3D11BlendState, Float32*, UInt32, Void)).call(pblendstate, blendfactor, samplemask)
+  end
+  def om_set_depth_stencil_state(pdepthstencilstate : ID3D11DepthStencilState, stencilref : UInt32) : Void
+    @lpVtbl.value.om_set_depth_stencil_state.unsafe_as(Proc(ID3D11DepthStencilState, UInt32, Void)).call(pdepthstencilstate, stencilref)
+  end
+  def so_set_targets(numbuffers : UInt32, ppsotargets : ID3D11Buffer*, poffsets : UInt32*) : Void
+    @lpVtbl.value.so_set_targets.unsafe_as(Proc(UInt32, ID3D11Buffer*, UInt32*, Void)).call(numbuffers, ppsotargets, poffsets)
+  end
+  def draw_auto : Void
+    @lpVtbl.value.draw_auto.unsafe_as(Proc(Void)).call
+  end
+  def draw_indexed_instanced_indirect(pbufferforargs : ID3D11Buffer, alignedbyteoffsetforargs : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced_indirect.unsafe_as(Proc(ID3D11Buffer, UInt32, Void)).call(pbufferforargs, alignedbyteoffsetforargs)
+  end
+  def draw_instanced_indirect(pbufferforargs : ID3D11Buffer, alignedbyteoffsetforargs : UInt32) : Void
+    @lpVtbl.value.draw_instanced_indirect.unsafe_as(Proc(ID3D11Buffer, UInt32, Void)).call(pbufferforargs, alignedbyteoffsetforargs)
+  end
+  def dispatch(threadgroupcountx : UInt32, threadgroupcounty : UInt32, threadgroupcountz : UInt32) : Void
+    @lpVtbl.value.dispatch.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(threadgroupcountx, threadgroupcounty, threadgroupcountz)
+  end
+  def dispatch_indirect(pbufferforargs : ID3D11Buffer, alignedbyteoffsetforargs : UInt32) : Void
+    @lpVtbl.value.dispatch_indirect.unsafe_as(Proc(ID3D11Buffer, UInt32, Void)).call(pbufferforargs, alignedbyteoffsetforargs)
+  end
+  def rs_set_state(prasterizerstate : ID3D11RasterizerState) : Void
+    @lpVtbl.value.rs_set_state.unsafe_as(Proc(ID3D11RasterizerState, Void)).call(prasterizerstate)
+  end
+  def rs_set_viewports(numviewports : UInt32, pviewports : D3D11_VIEWPORT*) : Void
+    @lpVtbl.value.rs_set_viewports.unsafe_as(Proc(UInt32, D3D11_VIEWPORT*, Void)).call(numviewports, pviewports)
+  end
+  def rs_set_scissor_rects(numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.rs_set_scissor_rects.unsafe_as(Proc(UInt32, RECT*, Void)).call(numrects, prects)
+  end
+  def copy_subresource_region(pdstresource : ID3D11Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, psrcbox : D3D11_BOX*) : Void
+    @lpVtbl.value.copy_subresource_region.unsafe_as(Proc(ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)).call(pdstresource, dstsubresource, dstx, dsty, dstz, psrcresource, srcsubresource, psrcbox)
+  end
+  def copy_resource(pdstresource : ID3D11Resource, psrcresource : ID3D11Resource) : Void
+    @lpVtbl.value.copy_resource.unsafe_as(Proc(ID3D11Resource, ID3D11Resource, Void)).call(pdstresource, psrcresource)
+  end
+  def update_subresource(pdstresource : ID3D11Resource, dstsubresource : UInt32, pdstbox : D3D11_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32) : Void
+    @lpVtbl.value.update_subresource.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, Void)).call(pdstresource, dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch)
+  end
+  def copy_structure_count(pdstbuffer : ID3D11Buffer, dstalignedbyteoffset : UInt32, psrcview : ID3D11UnorderedAccessView) : Void
+    @lpVtbl.value.copy_structure_count.unsafe_as(Proc(ID3D11Buffer, UInt32, ID3D11UnorderedAccessView, Void)).call(pdstbuffer, dstalignedbyteoffset, psrcview)
+  end
+  def clear_render_target_view(prendertargetview : ID3D11RenderTargetView, colorrgba : Float32*) : Void
+    @lpVtbl.value.clear_render_target_view.unsafe_as(Proc(ID3D11RenderTargetView, Float32*, Void)).call(prendertargetview, colorrgba)
+  end
+  def clear_unordered_access_view_uint(punorderedaccessview : ID3D11UnorderedAccessView, values : UInt32*) : Void
+    @lpVtbl.value.clear_unordered_access_view_uint.unsafe_as(Proc(ID3D11UnorderedAccessView, UInt32*, Void)).call(punorderedaccessview, values)
+  end
+  def clear_unordered_access_view_float(punorderedaccessview : ID3D11UnorderedAccessView, values : Float32*) : Void
+    @lpVtbl.value.clear_unordered_access_view_float.unsafe_as(Proc(ID3D11UnorderedAccessView, Float32*, Void)).call(punorderedaccessview, values)
+  end
+  def clear_depth_stencil_view(pdepthstencilview : ID3D11DepthStencilView, clearflags : UInt32, depth : Float32, stencil : UInt8) : Void
+    @lpVtbl.value.clear_depth_stencil_view.unsafe_as(Proc(ID3D11DepthStencilView, UInt32, Float32, UInt8, Void)).call(pdepthstencilview, clearflags, depth, stencil)
+  end
+  def generate_mips(pshaderresourceview : ID3D11ShaderResourceView) : Void
+    @lpVtbl.value.generate_mips.unsafe_as(Proc(ID3D11ShaderResourceView, Void)).call(pshaderresourceview)
+  end
+  def set_resource_min_lod(presource : ID3D11Resource, minlod : Float32) : Void
+    @lpVtbl.value.set_resource_min_lod.unsafe_as(Proc(ID3D11Resource, Float32, Void)).call(presource, minlod)
+  end
+  def get_resource_min_lod(presource : ID3D11Resource) : Float32
+    @lpVtbl.value.get_resource_min_lod.unsafe_as(Proc(ID3D11Resource, Float32)).call(presource)
+  end
+  def resolve_subresource(pdstresource : ID3D11Resource, dstsubresource : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, format : DXGI_FORMAT) : Void
+    @lpVtbl.value.resolve_subresource.unsafe_as(Proc(ID3D11Resource, UInt32, ID3D11Resource, UInt32, DXGI_FORMAT, Void)).call(pdstresource, dstsubresource, psrcresource, srcsubresource, format)
+  end
+  def execute_command_list(pcommandlist : ID3D11CommandList, restorecontextstate : LibC::BOOL) : Void
+    @lpVtbl.value.execute_command_list.unsafe_as(Proc(ID3D11CommandList, LibC::BOOL, Void)).call(pcommandlist, restorecontextstate)
+  end
+  def hs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.hs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def hs_set_shader(phullshader : ID3D11HullShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.hs_set_shader.unsafe_as(Proc(ID3D11HullShader, ID3D11ClassInstance*, UInt32, Void)).call(phullshader, ppclassinstances, numclassinstances)
+  end
+  def hs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.hs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def hs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.hs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ds_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ds_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ds_set_shader(pdomainshader : ID3D11DomainShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.ds_set_shader.unsafe_as(Proc(ID3D11DomainShader, ID3D11ClassInstance*, UInt32, Void)).call(pdomainshader, ppclassinstances, numclassinstances)
+  end
+  def ds_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ds_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def ds_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ds_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def cs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.cs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def cs_set_unordered_access_views(startslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*, puavinitialcounts : UInt32*) : Void
+    @lpVtbl.value.cs_set_unordered_access_views.unsafe_as(Proc(UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)).call(startslot, numuavs, ppunorderedaccessviews, puavinitialcounts)
+  end
+  def cs_set_shader(pcomputeshader : ID3D11ComputeShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.cs_set_shader.unsafe_as(Proc(ID3D11ComputeShader, ID3D11ClassInstance*, UInt32, Void)).call(pcomputeshader, ppclassinstances, numclassinstances)
+  end
+  def cs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.cs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def cs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.cs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def vs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.vs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ps_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ps_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ps_get_shader(pppixelshader : ID3D11PixelShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.ps_get_shader.unsafe_as(Proc(ID3D11PixelShader*, ID3D11ClassInstance*, UInt32*, Void)).call(pppixelshader, ppclassinstances, pnumclassinstances)
+  end
+  def ps_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ps_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def vs_get_shader(ppvertexshader : ID3D11VertexShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.vs_get_shader.unsafe_as(Proc(ID3D11VertexShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppvertexshader, ppclassinstances, pnumclassinstances)
+  end
+  def ps_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ps_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ia_get_input_layout(ppinputlayout : ID3D11InputLayout*) : Void
+    @lpVtbl.value.ia_get_input_layout.unsafe_as(Proc(ID3D11InputLayout*, Void)).call(ppinputlayout)
+  end
+  def ia_get_vertex_buffers(startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D11Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
+    @lpVtbl.value.ia_get_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
+  end
+  def ia_get_index_buffer(pindexbuffer : ID3D11Buffer*, format : DXGI_FORMAT*, offset : UInt32*) : Void
+    @lpVtbl.value.ia_get_index_buffer.unsafe_as(Proc(ID3D11Buffer*, DXGI_FORMAT*, UInt32*, Void)).call(pindexbuffer, format, offset)
+  end
+  def gs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.gs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def gs_get_shader(ppgeometryshader : ID3D11GeometryShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.gs_get_shader.unsafe_as(Proc(ID3D11GeometryShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppgeometryshader, ppclassinstances, pnumclassinstances)
+  end
+  def ia_get_primitive_topology(ptopology : D3D_PRIMITIVE_TOPOLOGY*) : Void
+    @lpVtbl.value.ia_get_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY*, Void)).call(ptopology)
+  end
+  def vs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.vs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def vs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.vs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def get_predication(pppredicate : ID3D11Predicate*, ppredicatevalue : LibC::BOOL*) : Void
+    @lpVtbl.value.get_predication.unsafe_as(Proc(ID3D11Predicate*, LibC::BOOL*, Void)).call(pppredicate, ppredicatevalue)
+  end
+  def gs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.gs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def gs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.gs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def om_get_render_targets(numviews : UInt32, pprendertargetviews : ID3D11RenderTargetView*, ppdepthstencilview : ID3D11DepthStencilView*) : Void
+    @lpVtbl.value.om_get_render_targets.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, Void)).call(numviews, pprendertargetviews, ppdepthstencilview)
+  end
+  def om_get_render_targets_and_unordered_access_views(numrtvs : UInt32, pprendertargetviews : ID3D11RenderTargetView*, ppdepthstencilview : ID3D11DepthStencilView*, uavstartslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*) : Void
+    @lpVtbl.value.om_get_render_targets_and_unordered_access_views.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, UInt32, UInt32, ID3D11UnorderedAccessView*, Void)).call(numrtvs, pprendertargetviews, ppdepthstencilview, uavstartslot, numuavs, ppunorderedaccessviews)
+  end
+  def om_get_blend_state(ppblendstate : ID3D11BlendState*, blendfactor : Float32*, psamplemask : UInt32*) : Void
+    @lpVtbl.value.om_get_blend_state.unsafe_as(Proc(ID3D11BlendState*, Float32*, UInt32*, Void)).call(ppblendstate, blendfactor, psamplemask)
+  end
+  def om_get_depth_stencil_state(ppdepthstencilstate : ID3D11DepthStencilState*, pstencilref : UInt32*) : Void
+    @lpVtbl.value.om_get_depth_stencil_state.unsafe_as(Proc(ID3D11DepthStencilState*, UInt32*, Void)).call(ppdepthstencilstate, pstencilref)
+  end
+  def so_get_targets(numbuffers : UInt32, ppsotargets : ID3D11Buffer*) : Void
+    @lpVtbl.value.so_get_targets.unsafe_as(Proc(UInt32, ID3D11Buffer*, Void)).call(numbuffers, ppsotargets)
+  end
+  def rs_get_state(pprasterizerstate : ID3D11RasterizerState*) : Void
+    @lpVtbl.value.rs_get_state.unsafe_as(Proc(ID3D11RasterizerState*, Void)).call(pprasterizerstate)
+  end
+  def rs_get_viewports(pnumviewports : UInt32*, pviewports : D3D11_VIEWPORT*) : Void
+    @lpVtbl.value.rs_get_viewports.unsafe_as(Proc(UInt32*, D3D11_VIEWPORT*, Void)).call(pnumviewports, pviewports)
+  end
+  def rs_get_scissor_rects(pnumrects : UInt32*, prects : RECT*) : Void
+    @lpVtbl.value.rs_get_scissor_rects.unsafe_as(Proc(UInt32*, RECT*, Void)).call(pnumrects, prects)
+  end
+  def hs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.hs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def hs_get_shader(pphullshader : ID3D11HullShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.hs_get_shader.unsafe_as(Proc(ID3D11HullShader*, ID3D11ClassInstance*, UInt32*, Void)).call(pphullshader, ppclassinstances, pnumclassinstances)
+  end
+  def hs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.hs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def hs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.hs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ds_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ds_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ds_get_shader(ppdomainshader : ID3D11DomainShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.ds_get_shader.unsafe_as(Proc(ID3D11DomainShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppdomainshader, ppclassinstances, pnumclassinstances)
+  end
+  def ds_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ds_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def ds_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ds_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def cs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.cs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def cs_get_unordered_access_views(startslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*) : Void
+    @lpVtbl.value.cs_get_unordered_access_views.unsafe_as(Proc(UInt32, UInt32, ID3D11UnorderedAccessView*, Void)).call(startslot, numuavs, ppunorderedaccessviews)
+  end
+  def cs_get_shader(ppcomputeshader : ID3D11ComputeShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.cs_get_shader.unsafe_as(Proc(ID3D11ComputeShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppcomputeshader, ppclassinstances, pnumclassinstances)
+  end
+  def cs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.cs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def cs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.cs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def clear_state : Void
+    @lpVtbl.value.clear_state.unsafe_as(Proc(Void)).call
+  end
+  def flush : Void
+    @lpVtbl.value.flush.unsafe_as(Proc(Void)).call
+  end
+  def get_type : D3D11_DEVICE_CONTEXT_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D11_DEVICE_CONTEXT_TYPE)).call
+  end
+  def get_context_flags : UInt32
+    @lpVtbl.value.get_context_flags.unsafe_as(Proc(UInt32)).call
+  end
+  def finish_command_list(restoredeferredcontextstate : LibC::BOOL, ppcommandlist : ID3D11CommandList*) : HRESULT
+    @lpVtbl.value.finish_command_list.unsafe_as(Proc(LibC::BOOL, ID3D11CommandList*, HRESULT)).call(restoredeferredcontextstate, ppcommandlist)
+  end
+end
+struct LibWin32::ID3D11VideoDecoder
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_creation_parameters(pvideodesc : D3D11_VIDEO_DECODER_DESC*, pconfig : D3D11_VIDEO_DECODER_CONFIG*) : HRESULT
+    @lpVtbl.value.get_creation_parameters.unsafe_as(Proc(D3D11_VIDEO_DECODER_DESC*, D3D11_VIDEO_DECODER_CONFIG*, HRESULT)).call(pvideodesc, pconfig)
+  end
+  def get_driver_handle(pdriverhandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_driver_handle.unsafe_as(Proc(LibC::HANDLE*, HRESULT)).call(pdriverhandle)
+  end
+end
+struct LibWin32::ID3D11VideoProcessorEnumerator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_video_processor_content_desc(pcontentdesc : D3D11_VIDEO_PROCESSOR_CONTENT_DESC*) : HRESULT
+    @lpVtbl.value.get_video_processor_content_desc.unsafe_as(Proc(D3D11_VIDEO_PROCESSOR_CONTENT_DESC*, HRESULT)).call(pcontentdesc)
+  end
+  def check_video_processor_format(format : DXGI_FORMAT, pflags : UInt32*) : HRESULT
+    @lpVtbl.value.check_video_processor_format.unsafe_as(Proc(DXGI_FORMAT, UInt32*, HRESULT)).call(format, pflags)
+  end
+  def get_video_processor_caps(pcaps : D3D11_VIDEO_PROCESSOR_CAPS*) : HRESULT
+    @lpVtbl.value.get_video_processor_caps.unsafe_as(Proc(D3D11_VIDEO_PROCESSOR_CAPS*, HRESULT)).call(pcaps)
+  end
+  def get_video_processor_rate_conversion_caps(typeindex : UInt32, pcaps : D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS*) : HRESULT
+    @lpVtbl.value.get_video_processor_rate_conversion_caps.unsafe_as(Proc(UInt32, D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS*, HRESULT)).call(typeindex, pcaps)
+  end
+  def get_video_processor_custom_rate(typeindex : UInt32, customrateindex : UInt32, prate : D3D11_VIDEO_PROCESSOR_CUSTOM_RATE*) : HRESULT
+    @lpVtbl.value.get_video_processor_custom_rate.unsafe_as(Proc(UInt32, UInt32, D3D11_VIDEO_PROCESSOR_CUSTOM_RATE*, HRESULT)).call(typeindex, customrateindex, prate)
+  end
+  def get_video_processor_filter_range(filter : D3D11_VIDEO_PROCESSOR_FILTER, prange : D3D11_VIDEO_PROCESSOR_FILTER_RANGE*) : HRESULT
+    @lpVtbl.value.get_video_processor_filter_range.unsafe_as(Proc(D3D11_VIDEO_PROCESSOR_FILTER, D3D11_VIDEO_PROCESSOR_FILTER_RANGE*, HRESULT)).call(filter, prange)
+  end
+end
+struct LibWin32::ID3D11VideoProcessor
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_content_desc(pdesc : D3D11_VIDEO_PROCESSOR_CONTENT_DESC*) : Void
+    @lpVtbl.value.get_content_desc.unsafe_as(Proc(D3D11_VIDEO_PROCESSOR_CONTENT_DESC*, Void)).call(pdesc)
+  end
+  def get_rate_conversion_caps(pcaps : D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS*) : Void
+    @lpVtbl.value.get_rate_conversion_caps.unsafe_as(Proc(D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS*, Void)).call(pcaps)
+  end
+end
+struct LibWin32::ID3D11AuthenticatedChannel
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_certificate_size(pcertificatesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_certificate_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pcertificatesize)
+  end
+  def get_certificate(certificatesize : UInt32, pcertificate : UInt8*) : HRESULT
+    @lpVtbl.value.get_certificate.unsafe_as(Proc(UInt32, UInt8*, HRESULT)).call(certificatesize, pcertificate)
+  end
+  def get_channel_handle(pchannelhandle : LibC::HANDLE*) : Void
+    @lpVtbl.value.get_channel_handle.unsafe_as(Proc(LibC::HANDLE*, Void)).call(pchannelhandle)
+  end
+end
+struct LibWin32::ID3D11CryptoSession
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_crypto_type(pcryptotype : Guid*) : Void
+    @lpVtbl.value.get_crypto_type.unsafe_as(Proc(Guid*, Void)).call(pcryptotype)
+  end
+  def get_decoder_profile(pdecoderprofile : Guid*) : Void
+    @lpVtbl.value.get_decoder_profile.unsafe_as(Proc(Guid*, Void)).call(pdecoderprofile)
+  end
+  def get_certificate_size(pcertificatesize : UInt32*) : HRESULT
+    @lpVtbl.value.get_certificate_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pcertificatesize)
+  end
+  def get_certificate(certificatesize : UInt32, pcertificate : UInt8*) : HRESULT
+    @lpVtbl.value.get_certificate.unsafe_as(Proc(UInt32, UInt8*, HRESULT)).call(certificatesize, pcertificate)
+  end
+  def get_crypto_session_handle(pcryptosessionhandle : LibC::HANDLE*) : Void
+    @lpVtbl.value.get_crypto_session_handle.unsafe_as(Proc(LibC::HANDLE*, Void)).call(pcryptosessionhandle)
+  end
+end
+struct LibWin32::ID3D11VideoDecoderOutputView
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_resource(ppresource : ID3D11Resource*) : Void
+    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D11Resource*, Void)).call(ppresource)
+  end
+  def get_desc(pdesc : D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11VideoProcessorInputView
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_resource(ppresource : ID3D11Resource*) : Void
+    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D11Resource*, Void)).call(ppresource)
+  end
+  def get_desc(pdesc : D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11VideoProcessorOutputView
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_resource(ppresource : ID3D11Resource*) : Void
+    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D11Resource*, Void)).call(ppresource)
+  end
+  def get_desc(pdesc : D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11VideoContext
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_decoder_buffer(pdecoder : ID3D11VideoDecoder, type : D3D11_VIDEO_DECODER_BUFFER_TYPE, pbuffersize : UInt32*, ppbuffer : Void**) : HRESULT
+    @lpVtbl.value.get_decoder_buffer.unsafe_as(Proc(ID3D11VideoDecoder, D3D11_VIDEO_DECODER_BUFFER_TYPE, UInt32*, Void**, HRESULT)).call(pdecoder, type, pbuffersize, ppbuffer)
+  end
+  def release_decoder_buffer(pdecoder : ID3D11VideoDecoder, type : D3D11_VIDEO_DECODER_BUFFER_TYPE) : HRESULT
+    @lpVtbl.value.release_decoder_buffer.unsafe_as(Proc(ID3D11VideoDecoder, D3D11_VIDEO_DECODER_BUFFER_TYPE, HRESULT)).call(pdecoder, type)
+  end
+  def decoder_begin_frame(pdecoder : ID3D11VideoDecoder, pview : ID3D11VideoDecoderOutputView, contentkeysize : UInt32, pcontentkey : Void*) : HRESULT
+    @lpVtbl.value.decoder_begin_frame.unsafe_as(Proc(ID3D11VideoDecoder, ID3D11VideoDecoderOutputView, UInt32, Void*, HRESULT)).call(pdecoder, pview, contentkeysize, pcontentkey)
+  end
+  def decoder_end_frame(pdecoder : ID3D11VideoDecoder) : HRESULT
+    @lpVtbl.value.decoder_end_frame.unsafe_as(Proc(ID3D11VideoDecoder, HRESULT)).call(pdecoder)
+  end
+  def submit_decoder_buffers(pdecoder : ID3D11VideoDecoder, numbuffers : UInt32, pbufferdesc : D3D11_VIDEO_DECODER_BUFFER_DESC*) : HRESULT
+    @lpVtbl.value.submit_decoder_buffers.unsafe_as(Proc(ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC*, HRESULT)).call(pdecoder, numbuffers, pbufferdesc)
+  end
+  def decoder_extension(pdecoder : ID3D11VideoDecoder, pextensiondata : D3D11_VIDEO_DECODER_EXTENSION*) : Int32
+    @lpVtbl.value.decoder_extension.unsafe_as(Proc(ID3D11VideoDecoder, D3D11_VIDEO_DECODER_EXTENSION*, Int32)).call(pdecoder, pextensiondata)
+  end
+  def video_processor_set_output_target_rect(pvideoprocessor : ID3D11VideoProcessor, enable : LibC::BOOL, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_set_output_target_rect.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, RECT*, Void)).call(pvideoprocessor, enable, prect)
+  end
+  def video_processor_set_output_background_color(pvideoprocessor : ID3D11VideoProcessor, ycbcr : LibC::BOOL, pcolor : D3D11_VIDEO_COLOR*) : Void
+    @lpVtbl.value.video_processor_set_output_background_color.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, D3D11_VIDEO_COLOR*, Void)).call(pvideoprocessor, ycbcr, pcolor)
+  end
+  def video_processor_set_output_color_space(pvideoprocessor : ID3D11VideoProcessor, pcolorspace : D3D11_VIDEO_PROCESSOR_COLOR_SPACE*) : Void
+    @lpVtbl.value.video_processor_set_output_color_space.unsafe_as(Proc(ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)).call(pvideoprocessor, pcolorspace)
+  end
+  def video_processor_set_output_alpha_fill_mode(pvideoprocessor : ID3D11VideoProcessor, alphafillmode : D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, streamindex : UInt32) : Void
+    @lpVtbl.value.video_processor_set_output_alpha_fill_mode.unsafe_as(Proc(ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, UInt32, Void)).call(pvideoprocessor, alphafillmode, streamindex)
+  end
+  def video_processor_set_output_constriction(pvideoprocessor : ID3D11VideoProcessor, enable : LibC::BOOL, size : SIZE) : Void
+    @lpVtbl.value.video_processor_set_output_constriction.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, SIZE, Void)).call(pvideoprocessor, enable, size)
+  end
+  def video_processor_set_output_stereo_mode(pvideoprocessor : ID3D11VideoProcessor, enable : LibC::BOOL) : Void
+    @lpVtbl.value.video_processor_set_output_stereo_mode.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, Void)).call(pvideoprocessor, enable)
+  end
+  def video_processor_set_output_extension(pvideoprocessor : ID3D11VideoProcessor, pextensionguid : Guid*, datasize : UInt32, pdata : Void*) : Int32
+    @lpVtbl.value.video_processor_set_output_extension.unsafe_as(Proc(ID3D11VideoProcessor, Guid*, UInt32, Void*, Int32)).call(pvideoprocessor, pextensionguid, datasize, pdata)
+  end
+  def video_processor_get_output_target_rect(pvideoprocessor : ID3D11VideoProcessor, enabled : LibC::BOOL*, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_get_output_target_rect.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, RECT*, Void)).call(pvideoprocessor, enabled, prect)
+  end
+  def video_processor_get_output_background_color(pvideoprocessor : ID3D11VideoProcessor, pycbcr : LibC::BOOL*, pcolor : D3D11_VIDEO_COLOR*) : Void
+    @lpVtbl.value.video_processor_get_output_background_color.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, D3D11_VIDEO_COLOR*, Void)).call(pvideoprocessor, pycbcr, pcolor)
+  end
+  def video_processor_get_output_color_space(pvideoprocessor : ID3D11VideoProcessor, pcolorspace : D3D11_VIDEO_PROCESSOR_COLOR_SPACE*) : Void
+    @lpVtbl.value.video_processor_get_output_color_space.unsafe_as(Proc(ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)).call(pvideoprocessor, pcolorspace)
+  end
+  def video_processor_get_output_alpha_fill_mode(pvideoprocessor : ID3D11VideoProcessor, palphafillmode : D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE*, pstreamindex : UInt32*) : Void
+    @lpVtbl.value.video_processor_get_output_alpha_fill_mode.unsafe_as(Proc(ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE*, UInt32*, Void)).call(pvideoprocessor, palphafillmode, pstreamindex)
+  end
+  def video_processor_get_output_constriction(pvideoprocessor : ID3D11VideoProcessor, penabled : LibC::BOOL*, psize : SIZE*) : Void
+    @lpVtbl.value.video_processor_get_output_constriction.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, SIZE*, Void)).call(pvideoprocessor, penabled, psize)
+  end
+  def video_processor_get_output_stereo_mode(pvideoprocessor : ID3D11VideoProcessor, penabled : LibC::BOOL*) : Void
+    @lpVtbl.value.video_processor_get_output_stereo_mode.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, Void)).call(pvideoprocessor, penabled)
+  end
+  def video_processor_get_output_extension(pvideoprocessor : ID3D11VideoProcessor, pextensionguid : Guid*, datasize : UInt32, pdata : Void*) : Int32
+    @lpVtbl.value.video_processor_get_output_extension.unsafe_as(Proc(ID3D11VideoProcessor, Guid*, UInt32, Void*, Int32)).call(pvideoprocessor, pextensionguid, datasize, pdata)
+  end
+  def video_processor_set_stream_frame_format(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, frameformat : D3D11_VIDEO_FRAME_FORMAT) : Void
+    @lpVtbl.value.video_processor_set_stream_frame_format.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_FRAME_FORMAT, Void)).call(pvideoprocessor, streamindex, frameformat)
+  end
+  def video_processor_set_stream_color_space(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pcolorspace : D3D11_VIDEO_PROCESSOR_COLOR_SPACE*) : Void
+    @lpVtbl.value.video_processor_set_stream_color_space.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)).call(pvideoprocessor, streamindex, pcolorspace)
+  end
+  def video_processor_set_stream_output_rate(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, outputrate : D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, repeatframe : LibC::BOOL, pcustomrate : DXGI_RATIONAL*) : Void
+    @lpVtbl.value.video_processor_set_stream_output_rate.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, LibC::BOOL, DXGI_RATIONAL*, Void)).call(pvideoprocessor, streamindex, outputrate, repeatframe, pcustomrate)
+  end
+  def video_processor_set_stream_source_rect(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_set_stream_source_rect.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, RECT*, Void)).call(pvideoprocessor, streamindex, enable, prect)
+  end
+  def video_processor_set_stream_dest_rect(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_set_stream_dest_rect.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, RECT*, Void)).call(pvideoprocessor, streamindex, enable, prect)
+  end
+  def video_processor_set_stream_alpha(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, alpha : Float32) : Void
+    @lpVtbl.value.video_processor_set_stream_alpha.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, Float32, Void)).call(pvideoprocessor, streamindex, enable, alpha)
+  end
+  def video_processor_set_stream_palette(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, count : UInt32, pentries : UInt32*) : Void
+    @lpVtbl.value.video_processor_set_stream_palette.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, UInt32, UInt32*, Void)).call(pvideoprocessor, streamindex, count, pentries)
+  end
+  def video_processor_set_stream_pixel_aspect_ratio(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, psourceaspectratio : DXGI_RATIONAL*, pdestinationaspectratio : DXGI_RATIONAL*) : Void
+    @lpVtbl.value.video_processor_set_stream_pixel_aspect_ratio.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, DXGI_RATIONAL*, DXGI_RATIONAL*, Void)).call(pvideoprocessor, streamindex, enable, psourceaspectratio, pdestinationaspectratio)
+  end
+  def video_processor_set_stream_luma_key(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, lower : Float32, upper : Float32) : Void
+    @lpVtbl.value.video_processor_set_stream_luma_key.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, Float32, Float32, Void)).call(pvideoprocessor, streamindex, enable, lower, upper)
+  end
+  def video_processor_set_stream_stereo_format(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, format : D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, leftviewframe0 : LibC::BOOL, baseviewframe0 : LibC::BOOL, flipmode : D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, monooffset : Int32) : Void
+    @lpVtbl.value.video_processor_set_stream_stereo_format.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, LibC::BOOL, LibC::BOOL, D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, Int32, Void)).call(pvideoprocessor, streamindex, enable, format, leftviewframe0, baseviewframe0, flipmode, monooffset)
+  end
+  def video_processor_set_stream_auto_processing_mode(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL) : Void
+    @lpVtbl.value.video_processor_set_stream_auto_processing_mode.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, Void)).call(pvideoprocessor, streamindex, enable)
+  end
+  def video_processor_set_stream_filter(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, filter : D3D11_VIDEO_PROCESSOR_FILTER, enable : LibC::BOOL, level : Int32) : Void
+    @lpVtbl.value.video_processor_set_stream_filter.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_FILTER, LibC::BOOL, Int32, Void)).call(pvideoprocessor, streamindex, filter, enable, level)
+  end
+  def video_processor_set_stream_extension(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pextensionguid : Guid*, datasize : UInt32, pdata : Void*) : Int32
+    @lpVtbl.value.video_processor_set_stream_extension.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, Guid*, UInt32, Void*, Int32)).call(pvideoprocessor, streamindex, pextensionguid, datasize, pdata)
+  end
+  def video_processor_get_stream_frame_format(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pframeformat : D3D11_VIDEO_FRAME_FORMAT*) : Void
+    @lpVtbl.value.video_processor_get_stream_frame_format.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_FRAME_FORMAT*, Void)).call(pvideoprocessor, streamindex, pframeformat)
+  end
+  def video_processor_get_stream_color_space(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pcolorspace : D3D11_VIDEO_PROCESSOR_COLOR_SPACE*) : Void
+    @lpVtbl.value.video_processor_get_stream_color_space.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)).call(pvideoprocessor, streamindex, pcolorspace)
+  end
+  def video_processor_get_stream_output_rate(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, poutputrate : D3D11_VIDEO_PROCESSOR_OUTPUT_RATE*, prepeatframe : LibC::BOOL*, pcustomrate : DXGI_RATIONAL*) : Void
+    @lpVtbl.value.video_processor_get_stream_output_rate.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_OUTPUT_RATE*, LibC::BOOL*, DXGI_RATIONAL*, Void)).call(pvideoprocessor, streamindex, poutputrate, prepeatframe, pcustomrate)
+  end
+  def video_processor_get_stream_source_rect(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_get_stream_source_rect.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, RECT*, Void)).call(pvideoprocessor, streamindex, penabled, prect)
+  end
+  def video_processor_get_stream_dest_rect(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_get_stream_dest_rect.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, RECT*, Void)).call(pvideoprocessor, streamindex, penabled, prect)
+  end
+  def video_processor_get_stream_alpha(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, palpha : Float32*) : Void
+    @lpVtbl.value.video_processor_get_stream_alpha.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, Float32*, Void)).call(pvideoprocessor, streamindex, penabled, palpha)
+  end
+  def video_processor_get_stream_palette(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, count : UInt32, pentries : UInt32*) : Void
+    @lpVtbl.value.video_processor_get_stream_palette.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, UInt32, UInt32*, Void)).call(pvideoprocessor, streamindex, count, pentries)
+  end
+  def video_processor_get_stream_pixel_aspect_ratio(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, psourceaspectratio : DXGI_RATIONAL*, pdestinationaspectratio : DXGI_RATIONAL*) : Void
+    @lpVtbl.value.video_processor_get_stream_pixel_aspect_ratio.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, DXGI_RATIONAL*, DXGI_RATIONAL*, Void)).call(pvideoprocessor, streamindex, penabled, psourceaspectratio, pdestinationaspectratio)
+  end
+  def video_processor_get_stream_luma_key(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, plower : Float32*, pupper : Float32*) : Void
+    @lpVtbl.value.video_processor_get_stream_luma_key.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, Float32*, Float32*, Void)).call(pvideoprocessor, streamindex, penabled, plower, pupper)
+  end
+  def video_processor_get_stream_stereo_format(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penable : LibC::BOOL*, pformat : D3D11_VIDEO_PROCESSOR_STEREO_FORMAT*, pleftviewframe0 : LibC::BOOL*, pbaseviewframe0 : LibC::BOOL*, pflipmode : D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE*, monooffset : Int32*) : Void
+    @lpVtbl.value.video_processor_get_stream_stereo_format.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_STEREO_FORMAT*, LibC::BOOL*, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE*, Int32*, Void)).call(pvideoprocessor, streamindex, penable, pformat, pleftviewframe0, pbaseviewframe0, pflipmode, monooffset)
+  end
+  def video_processor_get_stream_auto_processing_mode(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*) : Void
+    @lpVtbl.value.video_processor_get_stream_auto_processing_mode.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, Void)).call(pvideoprocessor, streamindex, penabled)
+  end
+  def video_processor_get_stream_filter(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, filter : D3D11_VIDEO_PROCESSOR_FILTER, penabled : LibC::BOOL*, plevel : Int32*) : Void
+    @lpVtbl.value.video_processor_get_stream_filter.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_FILTER, LibC::BOOL*, Int32*, Void)).call(pvideoprocessor, streamindex, filter, penabled, plevel)
+  end
+  def video_processor_get_stream_extension(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pextensionguid : Guid*, datasize : UInt32, pdata : Void*) : Int32
+    @lpVtbl.value.video_processor_get_stream_extension.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, Guid*, UInt32, Void*, Int32)).call(pvideoprocessor, streamindex, pextensionguid, datasize, pdata)
+  end
+  def video_processor_blt(pvideoprocessor : ID3D11VideoProcessor, pview : ID3D11VideoProcessorOutputView, outputframe : UInt32, streamcount : UInt32, pstreams : D3D11_VIDEO_PROCESSOR_STREAM*) : HRESULT
+    @lpVtbl.value.video_processor_blt.unsafe_as(Proc(ID3D11VideoProcessor, ID3D11VideoProcessorOutputView, UInt32, UInt32, D3D11_VIDEO_PROCESSOR_STREAM*, HRESULT)).call(pvideoprocessor, pview, outputframe, streamcount, pstreams)
+  end
+  def negotiate_crypto_session_key_exchange(pcryptosession : ID3D11CryptoSession, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.negotiate_crypto_session_key_exchange.unsafe_as(Proc(ID3D11CryptoSession, UInt32, Void*, HRESULT)).call(pcryptosession, datasize, pdata)
+  end
+  def encryption_blt(pcryptosession : ID3D11CryptoSession, psrcsurface : ID3D11Texture2D, pdstsurface : ID3D11Texture2D, ivsize : UInt32, piv : Void*) : Void
+    @lpVtbl.value.encryption_blt.unsafe_as(Proc(ID3D11CryptoSession, ID3D11Texture2D, ID3D11Texture2D, UInt32, Void*, Void)).call(pcryptosession, psrcsurface, pdstsurface, ivsize, piv)
+  end
+  def decryption_blt(pcryptosession : ID3D11CryptoSession, psrcsurface : ID3D11Texture2D, pdstsurface : ID3D11Texture2D, pencryptedblockinfo : D3D11_ENCRYPTED_BLOCK_INFO*, contentkeysize : UInt32, pcontentkey : Void*, ivsize : UInt32, piv : Void*) : Void
+    @lpVtbl.value.decryption_blt.unsafe_as(Proc(ID3D11CryptoSession, ID3D11Texture2D, ID3D11Texture2D, D3D11_ENCRYPTED_BLOCK_INFO*, UInt32, Void*, UInt32, Void*, Void)).call(pcryptosession, psrcsurface, pdstsurface, pencryptedblockinfo, contentkeysize, pcontentkey, ivsize, piv)
+  end
+  def start_session_key_refresh(pcryptosession : ID3D11CryptoSession, randomnumbersize : UInt32, prandomnumber : Void*) : Void
+    @lpVtbl.value.start_session_key_refresh.unsafe_as(Proc(ID3D11CryptoSession, UInt32, Void*, Void)).call(pcryptosession, randomnumbersize, prandomnumber)
+  end
+  def finish_session_key_refresh(pcryptosession : ID3D11CryptoSession) : Void
+    @lpVtbl.value.finish_session_key_refresh.unsafe_as(Proc(ID3D11CryptoSession, Void)).call(pcryptosession)
+  end
+  def get_encryption_blt_key(pcryptosession : ID3D11CryptoSession, keysize : UInt32, preadbackkey : Void*) : HRESULT
+    @lpVtbl.value.get_encryption_blt_key.unsafe_as(Proc(ID3D11CryptoSession, UInt32, Void*, HRESULT)).call(pcryptosession, keysize, preadbackkey)
+  end
+  def negotiate_authenticated_channel_key_exchange(pchannel : ID3D11AuthenticatedChannel, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.negotiate_authenticated_channel_key_exchange.unsafe_as(Proc(ID3D11AuthenticatedChannel, UInt32, Void*, HRESULT)).call(pchannel, datasize, pdata)
+  end
+  def query_authenticated_channel(pchannel : ID3D11AuthenticatedChannel, inputsize : UInt32, pinput : Void*, outputsize : UInt32, poutput : Void*) : HRESULT
+    @lpVtbl.value.query_authenticated_channel.unsafe_as(Proc(ID3D11AuthenticatedChannel, UInt32, Void*, UInt32, Void*, HRESULT)).call(pchannel, inputsize, pinput, outputsize, poutput)
+  end
+  def configure_authenticated_channel(pchannel : ID3D11AuthenticatedChannel, inputsize : UInt32, pinput : Void*, poutput : D3D11_AUTHENTICATED_CONFIGURE_OUTPUT*) : HRESULT
+    @lpVtbl.value.configure_authenticated_channel.unsafe_as(Proc(ID3D11AuthenticatedChannel, UInt32, Void*, D3D11_AUTHENTICATED_CONFIGURE_OUTPUT*, HRESULT)).call(pchannel, inputsize, pinput, poutput)
+  end
+  def video_processor_set_stream_rotation(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, rotation : D3D11_VIDEO_PROCESSOR_ROTATION) : Void
+    @lpVtbl.value.video_processor_set_stream_rotation.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, D3D11_VIDEO_PROCESSOR_ROTATION, Void)).call(pvideoprocessor, streamindex, enable, rotation)
+  end
+  def video_processor_get_stream_rotation(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penable : LibC::BOOL*, protation : D3D11_VIDEO_PROCESSOR_ROTATION*) : Void
+    @lpVtbl.value.video_processor_get_stream_rotation.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_ROTATION*, Void)).call(pvideoprocessor, streamindex, penable, protation)
+  end
+end
+struct LibWin32::ID3D11VideoDevice
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_video_decoder(pvideodesc : D3D11_VIDEO_DECODER_DESC*, pconfig : D3D11_VIDEO_DECODER_CONFIG*, ppdecoder : ID3D11VideoDecoder*) : HRESULT
+    @lpVtbl.value.create_video_decoder.unsafe_as(Proc(D3D11_VIDEO_DECODER_DESC*, D3D11_VIDEO_DECODER_CONFIG*, ID3D11VideoDecoder*, HRESULT)).call(pvideodesc, pconfig, ppdecoder)
+  end
+  def create_video_processor(penum : ID3D11VideoProcessorEnumerator, rateconversionindex : UInt32, ppvideoprocessor : ID3D11VideoProcessor*) : HRESULT
+    @lpVtbl.value.create_video_processor.unsafe_as(Proc(ID3D11VideoProcessorEnumerator, UInt32, ID3D11VideoProcessor*, HRESULT)).call(penum, rateconversionindex, ppvideoprocessor)
+  end
+  def create_authenticated_channel(channeltype : D3D11_AUTHENTICATED_CHANNEL_TYPE, ppauthenticatedchannel : ID3D11AuthenticatedChannel*) : HRESULT
+    @lpVtbl.value.create_authenticated_channel.unsafe_as(Proc(D3D11_AUTHENTICATED_CHANNEL_TYPE, ID3D11AuthenticatedChannel*, HRESULT)).call(channeltype, ppauthenticatedchannel)
+  end
+  def create_crypto_session(pcryptotype : Guid*, pdecoderprofile : Guid*, pkeyexchangetype : Guid*, ppcryptosession : ID3D11CryptoSession*) : HRESULT
+    @lpVtbl.value.create_crypto_session.unsafe_as(Proc(Guid*, Guid*, Guid*, ID3D11CryptoSession*, HRESULT)).call(pcryptotype, pdecoderprofile, pkeyexchangetype, ppcryptosession)
+  end
+  def create_video_decoder_output_view(presource : ID3D11Resource, pdesc : D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC*, ppvdovview : ID3D11VideoDecoderOutputView*) : HRESULT
+    @lpVtbl.value.create_video_decoder_output_view.unsafe_as(Proc(ID3D11Resource, D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC*, ID3D11VideoDecoderOutputView*, HRESULT)).call(presource, pdesc, ppvdovview)
+  end
+  def create_video_processor_input_view(presource : ID3D11Resource, penum : ID3D11VideoProcessorEnumerator, pdesc : D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC*, ppvpiview : ID3D11VideoProcessorInputView*) : HRESULT
+    @lpVtbl.value.create_video_processor_input_view.unsafe_as(Proc(ID3D11Resource, ID3D11VideoProcessorEnumerator, D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC*, ID3D11VideoProcessorInputView*, HRESULT)).call(presource, penum, pdesc, ppvpiview)
+  end
+  def create_video_processor_output_view(presource : ID3D11Resource, penum : ID3D11VideoProcessorEnumerator, pdesc : D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC*, ppvpoview : ID3D11VideoProcessorOutputView*) : HRESULT
+    @lpVtbl.value.create_video_processor_output_view.unsafe_as(Proc(ID3D11Resource, ID3D11VideoProcessorEnumerator, D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC*, ID3D11VideoProcessorOutputView*, HRESULT)).call(presource, penum, pdesc, ppvpoview)
+  end
+  def create_video_processor_enumerator(pdesc : D3D11_VIDEO_PROCESSOR_CONTENT_DESC*, ppenum : ID3D11VideoProcessorEnumerator*) : HRESULT
+    @lpVtbl.value.create_video_processor_enumerator.unsafe_as(Proc(D3D11_VIDEO_PROCESSOR_CONTENT_DESC*, ID3D11VideoProcessorEnumerator*, HRESULT)).call(pdesc, ppenum)
+  end
+  def get_video_decoder_profile_count : UInt32
+    @lpVtbl.value.get_video_decoder_profile_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_video_decoder_profile(index : UInt32, pdecoderprofile : Guid*) : HRESULT
+    @lpVtbl.value.get_video_decoder_profile.unsafe_as(Proc(UInt32, Guid*, HRESULT)).call(index, pdecoderprofile)
+  end
+  def check_video_decoder_format(pdecoderprofile : Guid*, format : DXGI_FORMAT, psupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_video_decoder_format.unsafe_as(Proc(Guid*, DXGI_FORMAT, LibC::BOOL*, HRESULT)).call(pdecoderprofile, format, psupported)
+  end
+  def get_video_decoder_config_count(pdesc : D3D11_VIDEO_DECODER_DESC*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_video_decoder_config_count.unsafe_as(Proc(D3D11_VIDEO_DECODER_DESC*, UInt32*, HRESULT)).call(pdesc, pcount)
+  end
+  def get_video_decoder_config(pdesc : D3D11_VIDEO_DECODER_DESC*, index : UInt32, pconfig : D3D11_VIDEO_DECODER_CONFIG*) : HRESULT
+    @lpVtbl.value.get_video_decoder_config.unsafe_as(Proc(D3D11_VIDEO_DECODER_DESC*, UInt32, D3D11_VIDEO_DECODER_CONFIG*, HRESULT)).call(pdesc, index, pconfig)
+  end
+  def get_content_protection_caps(pcryptotype : Guid*, pdecoderprofile : Guid*, pcaps : D3D11_VIDEO_CONTENT_PROTECTION_CAPS*) : HRESULT
+    @lpVtbl.value.get_content_protection_caps.unsafe_as(Proc(Guid*, Guid*, D3D11_VIDEO_CONTENT_PROTECTION_CAPS*, HRESULT)).call(pcryptotype, pdecoderprofile, pcaps)
+  end
+  def check_crypto_key_exchange(pcryptotype : Guid*, pdecoderprofile : Guid*, index : UInt32, pkeyexchangetype : Guid*) : HRESULT
+    @lpVtbl.value.check_crypto_key_exchange.unsafe_as(Proc(Guid*, Guid*, UInt32, Guid*, HRESULT)).call(pcryptotype, pdecoderprofile, index, pkeyexchangetype)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+end
+struct LibWin32::ID3D11Device
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_buffer(pdesc : D3D11_BUFFER_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, ppbuffer : ID3D11Buffer*) : HRESULT
+    @lpVtbl.value.create_buffer.unsafe_as(Proc(D3D11_BUFFER_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Buffer*, HRESULT)).call(pdesc, pinitialdata, ppbuffer)
+  end
+  def create_texture1_d(pdesc : D3D11_TEXTURE1D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture1d : ID3D11Texture1D*) : HRESULT
+    @lpVtbl.value.create_texture1_d.unsafe_as(Proc(D3D11_TEXTURE1D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture1D*, HRESULT)).call(pdesc, pinitialdata, pptexture1d)
+  end
+  def create_texture2_d(pdesc : D3D11_TEXTURE2D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture2d : ID3D11Texture2D*) : HRESULT
+    @lpVtbl.value.create_texture2_d.unsafe_as(Proc(D3D11_TEXTURE2D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D*, HRESULT)).call(pdesc, pinitialdata, pptexture2d)
+  end
+  def create_texture3_d(pdesc : D3D11_TEXTURE3D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture3d : ID3D11Texture3D*) : HRESULT
+    @lpVtbl.value.create_texture3_d.unsafe_as(Proc(D3D11_TEXTURE3D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D*, HRESULT)).call(pdesc, pinitialdata, pptexture3d)
+  end
+  def create_shader_resource_view(presource : ID3D11Resource, pdesc : D3D11_SHADER_RESOURCE_VIEW_DESC*, ppsrview : ID3D11ShaderResourceView*) : HRESULT
+    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC*, ID3D11ShaderResourceView*, HRESULT)).call(presource, pdesc, ppsrview)
+  end
+  def create_unordered_access_view(presource : ID3D11Resource, pdesc : D3D11_UNORDERED_ACCESS_VIEW_DESC*, ppuaview : ID3D11UnorderedAccessView*) : HRESULT
+    @lpVtbl.value.create_unordered_access_view.unsafe_as(Proc(ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC*, ID3D11UnorderedAccessView*, HRESULT)).call(presource, pdesc, ppuaview)
+  end
+  def create_render_target_view(presource : ID3D11Resource, pdesc : D3D11_RENDER_TARGET_VIEW_DESC*, pprtview : ID3D11RenderTargetView*) : HRESULT
+    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC*, ID3D11RenderTargetView*, HRESULT)).call(presource, pdesc, pprtview)
+  end
+  def create_depth_stencil_view(presource : ID3D11Resource, pdesc : D3D11_DEPTH_STENCIL_VIEW_DESC*, ppdepthstencilview : ID3D11DepthStencilView*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D11Resource, D3D11_DEPTH_STENCIL_VIEW_DESC*, ID3D11DepthStencilView*, HRESULT)).call(presource, pdesc, ppdepthstencilview)
+  end
+  def create_input_layout(pinputelementdescs : D3D11_INPUT_ELEMENT_DESC*, numelements : UInt32, pshaderbytecodewithinputsignature : Void*, bytecodelength : LibC::UINT_PTR, ppinputlayout : ID3D11InputLayout*) : HRESULT
+    @lpVtbl.value.create_input_layout.unsafe_as(Proc(D3D11_INPUT_ELEMENT_DESC*, UInt32, Void*, LibC::UINT_PTR, ID3D11InputLayout*, HRESULT)).call(pinputelementdescs, numelements, pshaderbytecodewithinputsignature, bytecodelength, ppinputlayout)
+  end
+  def create_vertex_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppvertexshader : ID3D11VertexShader*) : HRESULT
+    @lpVtbl.value.create_vertex_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11VertexShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppvertexshader)
+  end
+  def create_geometry_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppgeometryshader : ID3D11GeometryShader*) : HRESULT
+    @lpVtbl.value.create_geometry_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppgeometryshader)
+  end
+  def create_geometry_shader_with_stream_output(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, psodeclaration : D3D11_SO_DECLARATION_ENTRY*, numentries : UInt32, pbufferstrides : UInt32*, numstrides : UInt32, rasterizedstream : UInt32, pclasslinkage : ID3D11ClassLinkage, ppgeometryshader : ID3D11GeometryShader*) : HRESULT
+    @lpVtbl.value.create_geometry_shader_with_stream_output.unsafe_as(Proc(Void*, LibC::UINT_PTR, D3D11_SO_DECLARATION_ENTRY*, UInt32, UInt32*, UInt32, UInt32, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)).call(pshaderbytecode, bytecodelength, psodeclaration, numentries, pbufferstrides, numstrides, rasterizedstream, pclasslinkage, ppgeometryshader)
+  end
+  def create_pixel_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, pppixelshader : ID3D11PixelShader*) : HRESULT
+    @lpVtbl.value.create_pixel_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11PixelShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, pppixelshader)
+  end
+  def create_hull_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, pphullshader : ID3D11HullShader*) : HRESULT
+    @lpVtbl.value.create_hull_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11HullShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, pphullshader)
+  end
+  def create_domain_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppdomainshader : ID3D11DomainShader*) : HRESULT
+    @lpVtbl.value.create_domain_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11DomainShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppdomainshader)
+  end
+  def create_compute_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppcomputeshader : ID3D11ComputeShader*) : HRESULT
+    @lpVtbl.value.create_compute_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11ComputeShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppcomputeshader)
+  end
+  def create_class_linkage(pplinkage : ID3D11ClassLinkage*) : HRESULT
+    @lpVtbl.value.create_class_linkage.unsafe_as(Proc(ID3D11ClassLinkage*, HRESULT)).call(pplinkage)
+  end
+  def create_blend_state(pblendstatedesc : D3D11_BLEND_DESC*, ppblendstate : ID3D11BlendState*) : HRESULT
+    @lpVtbl.value.create_blend_state.unsafe_as(Proc(D3D11_BLEND_DESC*, ID3D11BlendState*, HRESULT)).call(pblendstatedesc, ppblendstate)
+  end
+  def create_depth_stencil_state(pdepthstencildesc : D3D11_DEPTH_STENCIL_DESC*, ppdepthstencilstate : ID3D11DepthStencilState*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_state.unsafe_as(Proc(D3D11_DEPTH_STENCIL_DESC*, ID3D11DepthStencilState*, HRESULT)).call(pdepthstencildesc, ppdepthstencilstate)
+  end
+  def create_rasterizer_state(prasterizerdesc : D3D11_RASTERIZER_DESC*, pprasterizerstate : ID3D11RasterizerState*) : HRESULT
+    @lpVtbl.value.create_rasterizer_state.unsafe_as(Proc(D3D11_RASTERIZER_DESC*, ID3D11RasterizerState*, HRESULT)).call(prasterizerdesc, pprasterizerstate)
+  end
+  def create_sampler_state(psamplerdesc : D3D11_SAMPLER_DESC*, ppsamplerstate : ID3D11SamplerState*) : HRESULT
+    @lpVtbl.value.create_sampler_state.unsafe_as(Proc(D3D11_SAMPLER_DESC*, ID3D11SamplerState*, HRESULT)).call(psamplerdesc, ppsamplerstate)
+  end
+  def create_query(pquerydesc : D3D11_QUERY_DESC*, ppquery : ID3D11Query*) : HRESULT
+    @lpVtbl.value.create_query.unsafe_as(Proc(D3D11_QUERY_DESC*, ID3D11Query*, HRESULT)).call(pquerydesc, ppquery)
+  end
+  def create_predicate(ppredicatedesc : D3D11_QUERY_DESC*, pppredicate : ID3D11Predicate*) : HRESULT
+    @lpVtbl.value.create_predicate.unsafe_as(Proc(D3D11_QUERY_DESC*, ID3D11Predicate*, HRESULT)).call(ppredicatedesc, pppredicate)
+  end
+  def create_counter(pcounterdesc : D3D11_COUNTER_DESC*, ppcounter : ID3D11Counter*) : HRESULT
+    @lpVtbl.value.create_counter.unsafe_as(Proc(D3D11_COUNTER_DESC*, ID3D11Counter*, HRESULT)).call(pcounterdesc, ppcounter)
+  end
+  def create_deferred_context(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext*) : HRESULT
+    @lpVtbl.value.create_deferred_context.unsafe_as(Proc(UInt32, ID3D11DeviceContext*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def open_shared_resource(hresource : LibC::HANDLE, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hresource, returnedinterface, ppresource)
+  end
+  def check_format_support(format : DXGI_FORMAT, pformatsupport : UInt32*) : HRESULT
+    @lpVtbl.value.check_format_support.unsafe_as(Proc(DXGI_FORMAT, UInt32*, HRESULT)).call(format, pformatsupport)
+  end
+  def check_multisample_quality_levels(format : DXGI_FORMAT, samplecount : UInt32, pnumqualitylevels : UInt32*) : HRESULT
+    @lpVtbl.value.check_multisample_quality_levels.unsafe_as(Proc(DXGI_FORMAT, UInt32, UInt32*, HRESULT)).call(format, samplecount, pnumqualitylevels)
+  end
+  def check_counter_info(pcounterinfo : D3D11_COUNTER_INFO*) : Void
+    @lpVtbl.value.check_counter_info.unsafe_as(Proc(D3D11_COUNTER_INFO*, Void)).call(pcounterinfo)
+  end
+  def check_counter(pdesc : D3D11_COUNTER_DESC*, ptype : D3D11_COUNTER_TYPE*, pactivecounters : UInt32*, szname : UInt8*, pnamelength : UInt32*, szunits : UInt8*, punitslength : UInt32*, szdescription : UInt8*, pdescriptionlength : UInt32*) : HRESULT
+    @lpVtbl.value.check_counter.unsafe_as(Proc(D3D11_COUNTER_DESC*, D3D11_COUNTER_TYPE*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)).call(pdesc, ptype, pactivecounters, szname, pnamelength, szunits, punitslength, szdescription, pdescriptionlength)
+  end
+  def check_feature_support(feature : D3D11_FEATURE, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D11_FEATURE, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_feature_level : D3D_FEATURE_LEVEL
+    @lpVtbl.value.get_feature_level.unsafe_as(Proc(D3D_FEATURE_LEVEL)).call
+  end
+  def get_creation_flags : UInt32
+    @lpVtbl.value.get_creation_flags.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device_removed_reason : HRESULT
+    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_immediate_context(ppimmediatecontext : ID3D11DeviceContext*) : Void
+    @lpVtbl.value.get_immediate_context.unsafe_as(Proc(ID3D11DeviceContext*, Void)).call(ppimmediatecontext)
+  end
+  def set_exception_mode(raiseflags : UInt32) : HRESULT
+    @lpVtbl.value.set_exception_mode.unsafe_as(Proc(UInt32, HRESULT)).call(raiseflags)
+  end
+  def get_exception_mode : UInt32
+    @lpVtbl.value.get_exception_mode.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::ID3D11Debug
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_feature_mask(mask : UInt32) : HRESULT
+    @lpVtbl.value.set_feature_mask.unsafe_as(Proc(UInt32, HRESULT)).call(mask)
+  end
+  def get_feature_mask : UInt32
+    @lpVtbl.value.get_feature_mask.unsafe_as(Proc(UInt32)).call
+  end
+  def set_present_per_render_op_delay(milliseconds : UInt32) : HRESULT
+    @lpVtbl.value.set_present_per_render_op_delay.unsafe_as(Proc(UInt32, HRESULT)).call(milliseconds)
+  end
+  def get_present_per_render_op_delay : UInt32
+    @lpVtbl.value.get_present_per_render_op_delay.unsafe_as(Proc(UInt32)).call
+  end
+  def set_swap_chain(pswapchain : IDXGISwapChain) : HRESULT
+    @lpVtbl.value.set_swap_chain.unsafe_as(Proc(IDXGISwapChain, HRESULT)).call(pswapchain)
+  end
+  def get_swap_chain(ppswapchain : IDXGISwapChain*) : HRESULT
+    @lpVtbl.value.get_swap_chain.unsafe_as(Proc(IDXGISwapChain*, HRESULT)).call(ppswapchain)
+  end
+  def validate_context(pcontext : ID3D11DeviceContext) : HRESULT
+    @lpVtbl.value.validate_context.unsafe_as(Proc(ID3D11DeviceContext, HRESULT)).call(pcontext)
+  end
+  def report_live_device_objects(flags : D3D11_RLDO_FLAGS) : HRESULT
+    @lpVtbl.value.report_live_device_objects.unsafe_as(Proc(D3D11_RLDO_FLAGS, HRESULT)).call(flags)
+  end
+  def validate_context_for_dispatch(pcontext : ID3D11DeviceContext) : HRESULT
+    @lpVtbl.value.validate_context_for_dispatch.unsafe_as(Proc(ID3D11DeviceContext, HRESULT)).call(pcontext)
+  end
+end
+struct LibWin32::ID3D11SwitchToRef
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_use_ref(useref : LibC::BOOL) : LibC::BOOL
+    @lpVtbl.value.set_use_ref.unsafe_as(Proc(LibC::BOOL, LibC::BOOL)).call(useref)
+  end
+  def get_use_ref : LibC::BOOL
+    @lpVtbl.value.get_use_ref.unsafe_as(Proc(LibC::BOOL)).call
+  end
+end
+struct LibWin32::ID3D11TracingDevice
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_shader_tracking_options_by_type(resourcetypeflags : UInt32, options : UInt32) : HRESULT
+    @lpVtbl.value.set_shader_tracking_options_by_type.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(resourcetypeflags, options)
+  end
+  def set_shader_tracking_options(pshader : IUnknown, options : UInt32) : HRESULT
+    @lpVtbl.value.set_shader_tracking_options.unsafe_as(Proc(IUnknown, UInt32, HRESULT)).call(pshader, options)
+  end
+end
+struct LibWin32::ID3D11RefTrackingOptions
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_tracking_options(uoptions : UInt32) : HRESULT
+    @lpVtbl.value.set_tracking_options.unsafe_as(Proc(UInt32, HRESULT)).call(uoptions)
+  end
+end
+struct LibWin32::ID3D11RefDefaultTrackingOptions
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_tracking_options(resourcetypeflags : UInt32, options : UInt32) : HRESULT
+    @lpVtbl.value.set_tracking_options.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(resourcetypeflags, options)
+  end
+end
+struct LibWin32::ID3D11InfoQueue
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_message_count_limit(messagecountlimit : UInt64) : HRESULT
+    @lpVtbl.value.set_message_count_limit.unsafe_as(Proc(UInt64, HRESULT)).call(messagecountlimit)
+  end
+  def clear_stored_messages : Void
+    @lpVtbl.value.clear_stored_messages.unsafe_as(Proc(Void)).call
+  end
+  def get_message(messageindex : UInt64, pmessage : D3D11_MESSAGE*, pmessagebytelength : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_message.unsafe_as(Proc(UInt64, D3D11_MESSAGE*, LibC::UINT_PTR*, HRESULT)).call(messageindex, pmessage, pmessagebytelength)
+  end
+  def get_num_messages_allowed_by_storage_filter : UInt64
+    @lpVtbl.value.get_num_messages_allowed_by_storage_filter.unsafe_as(Proc(UInt64)).call
+  end
+  def get_num_messages_denied_by_storage_filter : UInt64
+    @lpVtbl.value.get_num_messages_denied_by_storage_filter.unsafe_as(Proc(UInt64)).call
+  end
+  def get_num_stored_messages : UInt64
+    @lpVtbl.value.get_num_stored_messages.unsafe_as(Proc(UInt64)).call
+  end
+  def get_num_stored_messages_allowed_by_retrieval_filter : UInt64
+    @lpVtbl.value.get_num_stored_messages_allowed_by_retrieval_filter.unsafe_as(Proc(UInt64)).call
+  end
+  def get_num_messages_discarded_by_message_count_limit : UInt64
+    @lpVtbl.value.get_num_messages_discarded_by_message_count_limit.unsafe_as(Proc(UInt64)).call
+  end
+  def get_message_count_limit : UInt64
+    @lpVtbl.value.get_message_count_limit.unsafe_as(Proc(UInt64)).call
+  end
+  def add_storage_filter_entries(pfilter : D3D11_INFO_QUEUE_FILTER*) : HRESULT
+    @lpVtbl.value.add_storage_filter_entries.unsafe_as(Proc(D3D11_INFO_QUEUE_FILTER*, HRESULT)).call(pfilter)
+  end
+  def get_storage_filter(pfilter : D3D11_INFO_QUEUE_FILTER*, pfilterbytelength : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_storage_filter.unsafe_as(Proc(D3D11_INFO_QUEUE_FILTER*, LibC::UINT_PTR*, HRESULT)).call(pfilter, pfilterbytelength)
+  end
+  def clear_storage_filter : Void
+    @lpVtbl.value.clear_storage_filter.unsafe_as(Proc(Void)).call
+  end
+  def push_empty_storage_filter : HRESULT
+    @lpVtbl.value.push_empty_storage_filter.unsafe_as(Proc(HRESULT)).call
+  end
+  def push_copy_of_storage_filter : HRESULT
+    @lpVtbl.value.push_copy_of_storage_filter.unsafe_as(Proc(HRESULT)).call
+  end
+  def push_storage_filter(pfilter : D3D11_INFO_QUEUE_FILTER*) : HRESULT
+    @lpVtbl.value.push_storage_filter.unsafe_as(Proc(D3D11_INFO_QUEUE_FILTER*, HRESULT)).call(pfilter)
+  end
+  def pop_storage_filter : Void
+    @lpVtbl.value.pop_storage_filter.unsafe_as(Proc(Void)).call
+  end
+  def get_storage_filter_stack_size : UInt32
+    @lpVtbl.value.get_storage_filter_stack_size.unsafe_as(Proc(UInt32)).call
+  end
+  def add_retrieval_filter_entries(pfilter : D3D11_INFO_QUEUE_FILTER*) : HRESULT
+    @lpVtbl.value.add_retrieval_filter_entries.unsafe_as(Proc(D3D11_INFO_QUEUE_FILTER*, HRESULT)).call(pfilter)
+  end
+  def get_retrieval_filter(pfilter : D3D11_INFO_QUEUE_FILTER*, pfilterbytelength : LibC::UINT_PTR*) : HRESULT
+    @lpVtbl.value.get_retrieval_filter.unsafe_as(Proc(D3D11_INFO_QUEUE_FILTER*, LibC::UINT_PTR*, HRESULT)).call(pfilter, pfilterbytelength)
+  end
+  def clear_retrieval_filter : Void
+    @lpVtbl.value.clear_retrieval_filter.unsafe_as(Proc(Void)).call
+  end
+  def push_empty_retrieval_filter : HRESULT
+    @lpVtbl.value.push_empty_retrieval_filter.unsafe_as(Proc(HRESULT)).call
+  end
+  def push_copy_of_retrieval_filter : HRESULT
+    @lpVtbl.value.push_copy_of_retrieval_filter.unsafe_as(Proc(HRESULT)).call
+  end
+  def push_retrieval_filter(pfilter : D3D11_INFO_QUEUE_FILTER*) : HRESULT
+    @lpVtbl.value.push_retrieval_filter.unsafe_as(Proc(D3D11_INFO_QUEUE_FILTER*, HRESULT)).call(pfilter)
+  end
+  def pop_retrieval_filter : Void
+    @lpVtbl.value.pop_retrieval_filter.unsafe_as(Proc(Void)).call
+  end
+  def get_retrieval_filter_stack_size : UInt32
+    @lpVtbl.value.get_retrieval_filter_stack_size.unsafe_as(Proc(UInt32)).call
+  end
+  def add_message(category : D3D11_MESSAGE_CATEGORY, severity : D3D11_MESSAGE_SEVERITY, id : D3D11_MESSAGE_ID, pdescription : PSTR) : HRESULT
+    @lpVtbl.value.add_message.unsafe_as(Proc(D3D11_MESSAGE_CATEGORY, D3D11_MESSAGE_SEVERITY, D3D11_MESSAGE_ID, PSTR, HRESULT)).call(category, severity, id, pdescription)
+  end
+  def add_application_message(severity : D3D11_MESSAGE_SEVERITY, pdescription : PSTR) : HRESULT
+    @lpVtbl.value.add_application_message.unsafe_as(Proc(D3D11_MESSAGE_SEVERITY, PSTR, HRESULT)).call(severity, pdescription)
+  end
+  def set_break_on_category(category : D3D11_MESSAGE_CATEGORY, benable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_break_on_category.unsafe_as(Proc(D3D11_MESSAGE_CATEGORY, LibC::BOOL, HRESULT)).call(category, benable)
+  end
+  def set_break_on_severity(severity : D3D11_MESSAGE_SEVERITY, benable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_break_on_severity.unsafe_as(Proc(D3D11_MESSAGE_SEVERITY, LibC::BOOL, HRESULT)).call(severity, benable)
+  end
+  def set_break_on_id(id : D3D11_MESSAGE_ID, benable : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_break_on_id.unsafe_as(Proc(D3D11_MESSAGE_ID, LibC::BOOL, HRESULT)).call(id, benable)
+  end
+  def get_break_on_category(category : D3D11_MESSAGE_CATEGORY) : LibC::BOOL
+    @lpVtbl.value.get_break_on_category.unsafe_as(Proc(D3D11_MESSAGE_CATEGORY, LibC::BOOL)).call(category)
+  end
+  def get_break_on_severity(severity : D3D11_MESSAGE_SEVERITY) : LibC::BOOL
+    @lpVtbl.value.get_break_on_severity.unsafe_as(Proc(D3D11_MESSAGE_SEVERITY, LibC::BOOL)).call(severity)
+  end
+  def get_break_on_id(id : D3D11_MESSAGE_ID) : LibC::BOOL
+    @lpVtbl.value.get_break_on_id.unsafe_as(Proc(D3D11_MESSAGE_ID, LibC::BOOL)).call(id)
+  end
+  def set_mute_debug_output(bmute : LibC::BOOL) : Void
+    @lpVtbl.value.set_mute_debug_output.unsafe_as(Proc(LibC::BOOL, Void)).call(bmute)
+  end
+  def get_mute_debug_output : LibC::BOOL
+    @lpVtbl.value.get_mute_debug_output.unsafe_as(Proc(LibC::BOOL)).call
+  end
+end
+struct LibWin32::ID3D11BlendState1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_desc(pdesc : D3D11_BLEND_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_BLEND_DESC*, Void)).call(pdesc)
+  end
+  def get_desc1(pdesc : D3D11_BLEND_DESC1*) : Void
+    @lpVtbl.value.get_desc1.unsafe_as(Proc(D3D11_BLEND_DESC1*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11RasterizerState1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_desc(pdesc : D3D11_RASTERIZER_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_RASTERIZER_DESC*, Void)).call(pdesc)
+  end
+  def get_desc1(pdesc : D3D11_RASTERIZER_DESC1*) : Void
+    @lpVtbl.value.get_desc1.unsafe_as(Proc(D3D11_RASTERIZER_DESC1*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3DDeviceContextState
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+end
+struct LibWin32::ID3D11DeviceContext1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def vs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.vs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ps_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ps_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ps_set_shader(ppixelshader : ID3D11PixelShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.ps_set_shader.unsafe_as(Proc(ID3D11PixelShader, ID3D11ClassInstance*, UInt32, Void)).call(ppixelshader, ppclassinstances, numclassinstances)
+  end
+  def ps_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ps_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def vs_set_shader(pvertexshader : ID3D11VertexShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.vs_set_shader.unsafe_as(Proc(ID3D11VertexShader, ID3D11ClassInstance*, UInt32, Void)).call(pvertexshader, ppclassinstances, numclassinstances)
+  end
+  def draw_indexed(indexcount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32) : Void
+    @lpVtbl.value.draw_indexed.unsafe_as(Proc(UInt32, UInt32, Int32, Void)).call(indexcount, startindexlocation, basevertexlocation)
+  end
+  def draw(vertexcount : UInt32, startvertexlocation : UInt32) : Void
+    @lpVtbl.value.draw.unsafe_as(Proc(UInt32, UInt32, Void)).call(vertexcount, startvertexlocation)
+  end
+  def map(presource : ID3D11Resource, subresource : UInt32, maptype : D3D11_MAP, mapflags : UInt32, pmappedresource : D3D11_MAPPED_SUBRESOURCE*) : HRESULT
+    @lpVtbl.value.map.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_MAP, UInt32, D3D11_MAPPED_SUBRESOURCE*, HRESULT)).call(presource, subresource, maptype, mapflags, pmappedresource)
+  end
+  def unmap(presource : ID3D11Resource, subresource : UInt32) : Void
+    @lpVtbl.value.unmap.unsafe_as(Proc(ID3D11Resource, UInt32, Void)).call(presource, subresource)
+  end
+  def ps_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ps_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ia_set_input_layout(pinputlayout : ID3D11InputLayout) : Void
+    @lpVtbl.value.ia_set_input_layout.unsafe_as(Proc(ID3D11InputLayout, Void)).call(pinputlayout)
+  end
+  def ia_set_vertex_buffers(startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D11Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
+    @lpVtbl.value.ia_set_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
+  end
+  def ia_set_index_buffer(pindexbuffer : ID3D11Buffer, format : DXGI_FORMAT, offset : UInt32) : Void
+    @lpVtbl.value.ia_set_index_buffer.unsafe_as(Proc(ID3D11Buffer, DXGI_FORMAT, UInt32, Void)).call(pindexbuffer, format, offset)
+  end
+  def draw_indexed_instanced(indexcountperinstance : UInt32, instancecount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, Int32, UInt32, Void)).call(indexcountperinstance, instancecount, startindexlocation, basevertexlocation, startinstancelocation)
+  end
+  def draw_instanced(vertexcountperinstance : UInt32, instancecount : UInt32, startvertexlocation : UInt32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, Void)).call(vertexcountperinstance, instancecount, startvertexlocation, startinstancelocation)
+  end
+  def gs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.gs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def gs_set_shader(pshader : ID3D11GeometryShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.gs_set_shader.unsafe_as(Proc(ID3D11GeometryShader, ID3D11ClassInstance*, UInt32, Void)).call(pshader, ppclassinstances, numclassinstances)
+  end
+  def ia_set_primitive_topology(topology : D3D_PRIMITIVE_TOPOLOGY) : Void
+    @lpVtbl.value.ia_set_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY, Void)).call(topology)
+  end
+  def vs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.vs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def vs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.vs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def begin_(pasync : ID3D11Asynchronous) : Void
+    @lpVtbl.value.begin_.unsafe_as(Proc(ID3D11Asynchronous, Void)).call(pasync)
+  end
+  def end_(pasync : ID3D11Asynchronous) : Void
+    @lpVtbl.value.end_.unsafe_as(Proc(ID3D11Asynchronous, Void)).call(pasync)
+  end
+  def get_data(pasync : ID3D11Asynchronous, pdata : Void*, datasize : UInt32, getdataflags : UInt32) : HRESULT
+    @lpVtbl.value.get_data.unsafe_as(Proc(ID3D11Asynchronous, Void*, UInt32, UInt32, HRESULT)).call(pasync, pdata, datasize, getdataflags)
+  end
+  def set_predication(ppredicate : ID3D11Predicate, predicatevalue : LibC::BOOL) : Void
+    @lpVtbl.value.set_predication.unsafe_as(Proc(ID3D11Predicate, LibC::BOOL, Void)).call(ppredicate, predicatevalue)
+  end
+  def gs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.gs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def gs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.gs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def om_set_render_targets(numviews : UInt32, pprendertargetviews : ID3D11RenderTargetView*, pdepthstencilview : ID3D11DepthStencilView) : Void
+    @lpVtbl.value.om_set_render_targets.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, Void)).call(numviews, pprendertargetviews, pdepthstencilview)
+  end
+  def om_set_render_targets_and_unordered_access_views(numrtvs : UInt32, pprendertargetviews : ID3D11RenderTargetView*, pdepthstencilview : ID3D11DepthStencilView, uavstartslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*, puavinitialcounts : UInt32*) : Void
+    @lpVtbl.value.om_set_render_targets_and_unordered_access_views.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)).call(numrtvs, pprendertargetviews, pdepthstencilview, uavstartslot, numuavs, ppunorderedaccessviews, puavinitialcounts)
+  end
+  def om_set_blend_state(pblendstate : ID3D11BlendState, blendfactor : Float32*, samplemask : UInt32) : Void
+    @lpVtbl.value.om_set_blend_state.unsafe_as(Proc(ID3D11BlendState, Float32*, UInt32, Void)).call(pblendstate, blendfactor, samplemask)
+  end
+  def om_set_depth_stencil_state(pdepthstencilstate : ID3D11DepthStencilState, stencilref : UInt32) : Void
+    @lpVtbl.value.om_set_depth_stencil_state.unsafe_as(Proc(ID3D11DepthStencilState, UInt32, Void)).call(pdepthstencilstate, stencilref)
+  end
+  def so_set_targets(numbuffers : UInt32, ppsotargets : ID3D11Buffer*, poffsets : UInt32*) : Void
+    @lpVtbl.value.so_set_targets.unsafe_as(Proc(UInt32, ID3D11Buffer*, UInt32*, Void)).call(numbuffers, ppsotargets, poffsets)
+  end
+  def draw_auto : Void
+    @lpVtbl.value.draw_auto.unsafe_as(Proc(Void)).call
+  end
+  def draw_indexed_instanced_indirect(pbufferforargs : ID3D11Buffer, alignedbyteoffsetforargs : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced_indirect.unsafe_as(Proc(ID3D11Buffer, UInt32, Void)).call(pbufferforargs, alignedbyteoffsetforargs)
+  end
+  def draw_instanced_indirect(pbufferforargs : ID3D11Buffer, alignedbyteoffsetforargs : UInt32) : Void
+    @lpVtbl.value.draw_instanced_indirect.unsafe_as(Proc(ID3D11Buffer, UInt32, Void)).call(pbufferforargs, alignedbyteoffsetforargs)
+  end
+  def dispatch(threadgroupcountx : UInt32, threadgroupcounty : UInt32, threadgroupcountz : UInt32) : Void
+    @lpVtbl.value.dispatch.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(threadgroupcountx, threadgroupcounty, threadgroupcountz)
+  end
+  def dispatch_indirect(pbufferforargs : ID3D11Buffer, alignedbyteoffsetforargs : UInt32) : Void
+    @lpVtbl.value.dispatch_indirect.unsafe_as(Proc(ID3D11Buffer, UInt32, Void)).call(pbufferforargs, alignedbyteoffsetforargs)
+  end
+  def rs_set_state(prasterizerstate : ID3D11RasterizerState) : Void
+    @lpVtbl.value.rs_set_state.unsafe_as(Proc(ID3D11RasterizerState, Void)).call(prasterizerstate)
+  end
+  def rs_set_viewports(numviewports : UInt32, pviewports : D3D11_VIEWPORT*) : Void
+    @lpVtbl.value.rs_set_viewports.unsafe_as(Proc(UInt32, D3D11_VIEWPORT*, Void)).call(numviewports, pviewports)
+  end
+  def rs_set_scissor_rects(numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.rs_set_scissor_rects.unsafe_as(Proc(UInt32, RECT*, Void)).call(numrects, prects)
+  end
+  def copy_subresource_region(pdstresource : ID3D11Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, psrcbox : D3D11_BOX*) : Void
+    @lpVtbl.value.copy_subresource_region.unsafe_as(Proc(ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)).call(pdstresource, dstsubresource, dstx, dsty, dstz, psrcresource, srcsubresource, psrcbox)
+  end
+  def copy_resource(pdstresource : ID3D11Resource, psrcresource : ID3D11Resource) : Void
+    @lpVtbl.value.copy_resource.unsafe_as(Proc(ID3D11Resource, ID3D11Resource, Void)).call(pdstresource, psrcresource)
+  end
+  def update_subresource(pdstresource : ID3D11Resource, dstsubresource : UInt32, pdstbox : D3D11_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32) : Void
+    @lpVtbl.value.update_subresource.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, Void)).call(pdstresource, dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch)
+  end
+  def copy_structure_count(pdstbuffer : ID3D11Buffer, dstalignedbyteoffset : UInt32, psrcview : ID3D11UnorderedAccessView) : Void
+    @lpVtbl.value.copy_structure_count.unsafe_as(Proc(ID3D11Buffer, UInt32, ID3D11UnorderedAccessView, Void)).call(pdstbuffer, dstalignedbyteoffset, psrcview)
+  end
+  def clear_render_target_view(prendertargetview : ID3D11RenderTargetView, colorrgba : Float32*) : Void
+    @lpVtbl.value.clear_render_target_view.unsafe_as(Proc(ID3D11RenderTargetView, Float32*, Void)).call(prendertargetview, colorrgba)
+  end
+  def clear_unordered_access_view_uint(punorderedaccessview : ID3D11UnorderedAccessView, values : UInt32*) : Void
+    @lpVtbl.value.clear_unordered_access_view_uint.unsafe_as(Proc(ID3D11UnorderedAccessView, UInt32*, Void)).call(punorderedaccessview, values)
+  end
+  def clear_unordered_access_view_float(punorderedaccessview : ID3D11UnorderedAccessView, values : Float32*) : Void
+    @lpVtbl.value.clear_unordered_access_view_float.unsafe_as(Proc(ID3D11UnorderedAccessView, Float32*, Void)).call(punorderedaccessview, values)
+  end
+  def clear_depth_stencil_view(pdepthstencilview : ID3D11DepthStencilView, clearflags : UInt32, depth : Float32, stencil : UInt8) : Void
+    @lpVtbl.value.clear_depth_stencil_view.unsafe_as(Proc(ID3D11DepthStencilView, UInt32, Float32, UInt8, Void)).call(pdepthstencilview, clearflags, depth, stencil)
+  end
+  def generate_mips(pshaderresourceview : ID3D11ShaderResourceView) : Void
+    @lpVtbl.value.generate_mips.unsafe_as(Proc(ID3D11ShaderResourceView, Void)).call(pshaderresourceview)
+  end
+  def set_resource_min_lod(presource : ID3D11Resource, minlod : Float32) : Void
+    @lpVtbl.value.set_resource_min_lod.unsafe_as(Proc(ID3D11Resource, Float32, Void)).call(presource, minlod)
+  end
+  def get_resource_min_lod(presource : ID3D11Resource) : Float32
+    @lpVtbl.value.get_resource_min_lod.unsafe_as(Proc(ID3D11Resource, Float32)).call(presource)
+  end
+  def resolve_subresource(pdstresource : ID3D11Resource, dstsubresource : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, format : DXGI_FORMAT) : Void
+    @lpVtbl.value.resolve_subresource.unsafe_as(Proc(ID3D11Resource, UInt32, ID3D11Resource, UInt32, DXGI_FORMAT, Void)).call(pdstresource, dstsubresource, psrcresource, srcsubresource, format)
+  end
+  def execute_command_list(pcommandlist : ID3D11CommandList, restorecontextstate : LibC::BOOL) : Void
+    @lpVtbl.value.execute_command_list.unsafe_as(Proc(ID3D11CommandList, LibC::BOOL, Void)).call(pcommandlist, restorecontextstate)
+  end
+  def hs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.hs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def hs_set_shader(phullshader : ID3D11HullShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.hs_set_shader.unsafe_as(Proc(ID3D11HullShader, ID3D11ClassInstance*, UInt32, Void)).call(phullshader, ppclassinstances, numclassinstances)
+  end
+  def hs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.hs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def hs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.hs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ds_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ds_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ds_set_shader(pdomainshader : ID3D11DomainShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.ds_set_shader.unsafe_as(Proc(ID3D11DomainShader, ID3D11ClassInstance*, UInt32, Void)).call(pdomainshader, ppclassinstances, numclassinstances)
+  end
+  def ds_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ds_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def ds_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ds_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def cs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.cs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def cs_set_unordered_access_views(startslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*, puavinitialcounts : UInt32*) : Void
+    @lpVtbl.value.cs_set_unordered_access_views.unsafe_as(Proc(UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)).call(startslot, numuavs, ppunorderedaccessviews, puavinitialcounts)
+  end
+  def cs_set_shader(pcomputeshader : ID3D11ComputeShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.cs_set_shader.unsafe_as(Proc(ID3D11ComputeShader, ID3D11ClassInstance*, UInt32, Void)).call(pcomputeshader, ppclassinstances, numclassinstances)
+  end
+  def cs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.cs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def cs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.cs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def vs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.vs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ps_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ps_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ps_get_shader(pppixelshader : ID3D11PixelShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.ps_get_shader.unsafe_as(Proc(ID3D11PixelShader*, ID3D11ClassInstance*, UInt32*, Void)).call(pppixelshader, ppclassinstances, pnumclassinstances)
+  end
+  def ps_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ps_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def vs_get_shader(ppvertexshader : ID3D11VertexShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.vs_get_shader.unsafe_as(Proc(ID3D11VertexShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppvertexshader, ppclassinstances, pnumclassinstances)
+  end
+  def ps_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ps_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ia_get_input_layout(ppinputlayout : ID3D11InputLayout*) : Void
+    @lpVtbl.value.ia_get_input_layout.unsafe_as(Proc(ID3D11InputLayout*, Void)).call(ppinputlayout)
+  end
+  def ia_get_vertex_buffers(startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D11Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
+    @lpVtbl.value.ia_get_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
+  end
+  def ia_get_index_buffer(pindexbuffer : ID3D11Buffer*, format : DXGI_FORMAT*, offset : UInt32*) : Void
+    @lpVtbl.value.ia_get_index_buffer.unsafe_as(Proc(ID3D11Buffer*, DXGI_FORMAT*, UInt32*, Void)).call(pindexbuffer, format, offset)
+  end
+  def gs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.gs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def gs_get_shader(ppgeometryshader : ID3D11GeometryShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.gs_get_shader.unsafe_as(Proc(ID3D11GeometryShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppgeometryshader, ppclassinstances, pnumclassinstances)
+  end
+  def ia_get_primitive_topology(ptopology : D3D_PRIMITIVE_TOPOLOGY*) : Void
+    @lpVtbl.value.ia_get_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY*, Void)).call(ptopology)
+  end
+  def vs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.vs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def vs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.vs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def get_predication(pppredicate : ID3D11Predicate*, ppredicatevalue : LibC::BOOL*) : Void
+    @lpVtbl.value.get_predication.unsafe_as(Proc(ID3D11Predicate*, LibC::BOOL*, Void)).call(pppredicate, ppredicatevalue)
+  end
+  def gs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.gs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def gs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.gs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def om_get_render_targets(numviews : UInt32, pprendertargetviews : ID3D11RenderTargetView*, ppdepthstencilview : ID3D11DepthStencilView*) : Void
+    @lpVtbl.value.om_get_render_targets.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, Void)).call(numviews, pprendertargetviews, ppdepthstencilview)
+  end
+  def om_get_render_targets_and_unordered_access_views(numrtvs : UInt32, pprendertargetviews : ID3D11RenderTargetView*, ppdepthstencilview : ID3D11DepthStencilView*, uavstartslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*) : Void
+    @lpVtbl.value.om_get_render_targets_and_unordered_access_views.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, UInt32, UInt32, ID3D11UnorderedAccessView*, Void)).call(numrtvs, pprendertargetviews, ppdepthstencilview, uavstartslot, numuavs, ppunorderedaccessviews)
+  end
+  def om_get_blend_state(ppblendstate : ID3D11BlendState*, blendfactor : Float32*, psamplemask : UInt32*) : Void
+    @lpVtbl.value.om_get_blend_state.unsafe_as(Proc(ID3D11BlendState*, Float32*, UInt32*, Void)).call(ppblendstate, blendfactor, psamplemask)
+  end
+  def om_get_depth_stencil_state(ppdepthstencilstate : ID3D11DepthStencilState*, pstencilref : UInt32*) : Void
+    @lpVtbl.value.om_get_depth_stencil_state.unsafe_as(Proc(ID3D11DepthStencilState*, UInt32*, Void)).call(ppdepthstencilstate, pstencilref)
+  end
+  def so_get_targets(numbuffers : UInt32, ppsotargets : ID3D11Buffer*) : Void
+    @lpVtbl.value.so_get_targets.unsafe_as(Proc(UInt32, ID3D11Buffer*, Void)).call(numbuffers, ppsotargets)
+  end
+  def rs_get_state(pprasterizerstate : ID3D11RasterizerState*) : Void
+    @lpVtbl.value.rs_get_state.unsafe_as(Proc(ID3D11RasterizerState*, Void)).call(pprasterizerstate)
+  end
+  def rs_get_viewports(pnumviewports : UInt32*, pviewports : D3D11_VIEWPORT*) : Void
+    @lpVtbl.value.rs_get_viewports.unsafe_as(Proc(UInt32*, D3D11_VIEWPORT*, Void)).call(pnumviewports, pviewports)
+  end
+  def rs_get_scissor_rects(pnumrects : UInt32*, prects : RECT*) : Void
+    @lpVtbl.value.rs_get_scissor_rects.unsafe_as(Proc(UInt32*, RECT*, Void)).call(pnumrects, prects)
+  end
+  def hs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.hs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def hs_get_shader(pphullshader : ID3D11HullShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.hs_get_shader.unsafe_as(Proc(ID3D11HullShader*, ID3D11ClassInstance*, UInt32*, Void)).call(pphullshader, ppclassinstances, pnumclassinstances)
+  end
+  def hs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.hs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def hs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.hs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ds_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ds_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ds_get_shader(ppdomainshader : ID3D11DomainShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.ds_get_shader.unsafe_as(Proc(ID3D11DomainShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppdomainshader, ppclassinstances, pnumclassinstances)
+  end
+  def ds_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ds_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def ds_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ds_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def cs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.cs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def cs_get_unordered_access_views(startslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*) : Void
+    @lpVtbl.value.cs_get_unordered_access_views.unsafe_as(Proc(UInt32, UInt32, ID3D11UnorderedAccessView*, Void)).call(startslot, numuavs, ppunorderedaccessviews)
+  end
+  def cs_get_shader(ppcomputeshader : ID3D11ComputeShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.cs_get_shader.unsafe_as(Proc(ID3D11ComputeShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppcomputeshader, ppclassinstances, pnumclassinstances)
+  end
+  def cs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.cs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def cs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.cs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def clear_state : Void
+    @lpVtbl.value.clear_state.unsafe_as(Proc(Void)).call
+  end
+  def flush : Void
+    @lpVtbl.value.flush.unsafe_as(Proc(Void)).call
+  end
+  def get_type : D3D11_DEVICE_CONTEXT_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D11_DEVICE_CONTEXT_TYPE)).call
+  end
+  def get_context_flags : UInt32
+    @lpVtbl.value.get_context_flags.unsafe_as(Proc(UInt32)).call
+  end
+  def finish_command_list(restoredeferredcontextstate : LibC::BOOL, ppcommandlist : ID3D11CommandList*) : HRESULT
+    @lpVtbl.value.finish_command_list.unsafe_as(Proc(LibC::BOOL, ID3D11CommandList*, HRESULT)).call(restoredeferredcontextstate, ppcommandlist)
+  end
+  def copy_subresource_region1(pdstresource : ID3D11Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, psrcbox : D3D11_BOX*, copyflags : UInt32) : Void
+    @lpVtbl.value.copy_subresource_region1.unsafe_as(Proc(ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, UInt32, Void)).call(pdstresource, dstsubresource, dstx, dsty, dstz, psrcresource, srcsubresource, psrcbox, copyflags)
+  end
+  def update_subresource1(pdstresource : ID3D11Resource, dstsubresource : UInt32, pdstbox : D3D11_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32, copyflags : UInt32) : Void
+    @lpVtbl.value.update_subresource1.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, UInt32, Void)).call(pdstresource, dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch, copyflags)
+  end
+  def discard_resource(presource : ID3D11Resource) : Void
+    @lpVtbl.value.discard_resource.unsafe_as(Proc(ID3D11Resource, Void)).call(presource)
+  end
+  def discard_view(presourceview : ID3D11View) : Void
+    @lpVtbl.value.discard_view.unsafe_as(Proc(ID3D11View, Void)).call(presourceview)
+  end
+  def vs_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.vs_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def hs_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.hs_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def ds_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.ds_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def gs_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.gs_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def ps_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.ps_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def cs_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.cs_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def vs_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.vs_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def hs_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.hs_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def ds_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.ds_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def gs_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.gs_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def ps_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.ps_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def cs_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.cs_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def swap_device_context_state(pstate : ID3DDeviceContextState, pppreviousstate : ID3DDeviceContextState*) : Void
+    @lpVtbl.value.swap_device_context_state.unsafe_as(Proc(ID3DDeviceContextState, ID3DDeviceContextState*, Void)).call(pstate, pppreviousstate)
+  end
+  def clear_view(pview : ID3D11View, color : Float32*, prect : RECT*, numrects : UInt32) : Void
+    @lpVtbl.value.clear_view.unsafe_as(Proc(ID3D11View, Float32*, RECT*, UInt32, Void)).call(pview, color, prect, numrects)
+  end
+  def discard_view1(presourceview : ID3D11View, prects : RECT*, numrects : UInt32) : Void
+    @lpVtbl.value.discard_view1.unsafe_as(Proc(ID3D11View, RECT*, UInt32, Void)).call(presourceview, prects, numrects)
+  end
+end
+struct LibWin32::ID3D11VideoContext1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_decoder_buffer(pdecoder : ID3D11VideoDecoder, type : D3D11_VIDEO_DECODER_BUFFER_TYPE, pbuffersize : UInt32*, ppbuffer : Void**) : HRESULT
+    @lpVtbl.value.get_decoder_buffer.unsafe_as(Proc(ID3D11VideoDecoder, D3D11_VIDEO_DECODER_BUFFER_TYPE, UInt32*, Void**, HRESULT)).call(pdecoder, type, pbuffersize, ppbuffer)
+  end
+  def release_decoder_buffer(pdecoder : ID3D11VideoDecoder, type : D3D11_VIDEO_DECODER_BUFFER_TYPE) : HRESULT
+    @lpVtbl.value.release_decoder_buffer.unsafe_as(Proc(ID3D11VideoDecoder, D3D11_VIDEO_DECODER_BUFFER_TYPE, HRESULT)).call(pdecoder, type)
+  end
+  def decoder_begin_frame(pdecoder : ID3D11VideoDecoder, pview : ID3D11VideoDecoderOutputView, contentkeysize : UInt32, pcontentkey : Void*) : HRESULT
+    @lpVtbl.value.decoder_begin_frame.unsafe_as(Proc(ID3D11VideoDecoder, ID3D11VideoDecoderOutputView, UInt32, Void*, HRESULT)).call(pdecoder, pview, contentkeysize, pcontentkey)
+  end
+  def decoder_end_frame(pdecoder : ID3D11VideoDecoder) : HRESULT
+    @lpVtbl.value.decoder_end_frame.unsafe_as(Proc(ID3D11VideoDecoder, HRESULT)).call(pdecoder)
+  end
+  def submit_decoder_buffers(pdecoder : ID3D11VideoDecoder, numbuffers : UInt32, pbufferdesc : D3D11_VIDEO_DECODER_BUFFER_DESC*) : HRESULT
+    @lpVtbl.value.submit_decoder_buffers.unsafe_as(Proc(ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC*, HRESULT)).call(pdecoder, numbuffers, pbufferdesc)
+  end
+  def decoder_extension(pdecoder : ID3D11VideoDecoder, pextensiondata : D3D11_VIDEO_DECODER_EXTENSION*) : Int32
+    @lpVtbl.value.decoder_extension.unsafe_as(Proc(ID3D11VideoDecoder, D3D11_VIDEO_DECODER_EXTENSION*, Int32)).call(pdecoder, pextensiondata)
+  end
+  def video_processor_set_output_target_rect(pvideoprocessor : ID3D11VideoProcessor, enable : LibC::BOOL, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_set_output_target_rect.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, RECT*, Void)).call(pvideoprocessor, enable, prect)
+  end
+  def video_processor_set_output_background_color(pvideoprocessor : ID3D11VideoProcessor, ycbcr : LibC::BOOL, pcolor : D3D11_VIDEO_COLOR*) : Void
+    @lpVtbl.value.video_processor_set_output_background_color.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, D3D11_VIDEO_COLOR*, Void)).call(pvideoprocessor, ycbcr, pcolor)
+  end
+  def video_processor_set_output_color_space(pvideoprocessor : ID3D11VideoProcessor, pcolorspace : D3D11_VIDEO_PROCESSOR_COLOR_SPACE*) : Void
+    @lpVtbl.value.video_processor_set_output_color_space.unsafe_as(Proc(ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)).call(pvideoprocessor, pcolorspace)
+  end
+  def video_processor_set_output_alpha_fill_mode(pvideoprocessor : ID3D11VideoProcessor, alphafillmode : D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, streamindex : UInt32) : Void
+    @lpVtbl.value.video_processor_set_output_alpha_fill_mode.unsafe_as(Proc(ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, UInt32, Void)).call(pvideoprocessor, alphafillmode, streamindex)
+  end
+  def video_processor_set_output_constriction(pvideoprocessor : ID3D11VideoProcessor, enable : LibC::BOOL, size : SIZE) : Void
+    @lpVtbl.value.video_processor_set_output_constriction.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, SIZE, Void)).call(pvideoprocessor, enable, size)
+  end
+  def video_processor_set_output_stereo_mode(pvideoprocessor : ID3D11VideoProcessor, enable : LibC::BOOL) : Void
+    @lpVtbl.value.video_processor_set_output_stereo_mode.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, Void)).call(pvideoprocessor, enable)
+  end
+  def video_processor_set_output_extension(pvideoprocessor : ID3D11VideoProcessor, pextensionguid : Guid*, datasize : UInt32, pdata : Void*) : Int32
+    @lpVtbl.value.video_processor_set_output_extension.unsafe_as(Proc(ID3D11VideoProcessor, Guid*, UInt32, Void*, Int32)).call(pvideoprocessor, pextensionguid, datasize, pdata)
+  end
+  def video_processor_get_output_target_rect(pvideoprocessor : ID3D11VideoProcessor, enabled : LibC::BOOL*, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_get_output_target_rect.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, RECT*, Void)).call(pvideoprocessor, enabled, prect)
+  end
+  def video_processor_get_output_background_color(pvideoprocessor : ID3D11VideoProcessor, pycbcr : LibC::BOOL*, pcolor : D3D11_VIDEO_COLOR*) : Void
+    @lpVtbl.value.video_processor_get_output_background_color.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, D3D11_VIDEO_COLOR*, Void)).call(pvideoprocessor, pycbcr, pcolor)
+  end
+  def video_processor_get_output_color_space(pvideoprocessor : ID3D11VideoProcessor, pcolorspace : D3D11_VIDEO_PROCESSOR_COLOR_SPACE*) : Void
+    @lpVtbl.value.video_processor_get_output_color_space.unsafe_as(Proc(ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)).call(pvideoprocessor, pcolorspace)
+  end
+  def video_processor_get_output_alpha_fill_mode(pvideoprocessor : ID3D11VideoProcessor, palphafillmode : D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE*, pstreamindex : UInt32*) : Void
+    @lpVtbl.value.video_processor_get_output_alpha_fill_mode.unsafe_as(Proc(ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE*, UInt32*, Void)).call(pvideoprocessor, palphafillmode, pstreamindex)
+  end
+  def video_processor_get_output_constriction(pvideoprocessor : ID3D11VideoProcessor, penabled : LibC::BOOL*, psize : SIZE*) : Void
+    @lpVtbl.value.video_processor_get_output_constriction.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, SIZE*, Void)).call(pvideoprocessor, penabled, psize)
+  end
+  def video_processor_get_output_stereo_mode(pvideoprocessor : ID3D11VideoProcessor, penabled : LibC::BOOL*) : Void
+    @lpVtbl.value.video_processor_get_output_stereo_mode.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, Void)).call(pvideoprocessor, penabled)
+  end
+  def video_processor_get_output_extension(pvideoprocessor : ID3D11VideoProcessor, pextensionguid : Guid*, datasize : UInt32, pdata : Void*) : Int32
+    @lpVtbl.value.video_processor_get_output_extension.unsafe_as(Proc(ID3D11VideoProcessor, Guid*, UInt32, Void*, Int32)).call(pvideoprocessor, pextensionguid, datasize, pdata)
+  end
+  def video_processor_set_stream_frame_format(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, frameformat : D3D11_VIDEO_FRAME_FORMAT) : Void
+    @lpVtbl.value.video_processor_set_stream_frame_format.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_FRAME_FORMAT, Void)).call(pvideoprocessor, streamindex, frameformat)
+  end
+  def video_processor_set_stream_color_space(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pcolorspace : D3D11_VIDEO_PROCESSOR_COLOR_SPACE*) : Void
+    @lpVtbl.value.video_processor_set_stream_color_space.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)).call(pvideoprocessor, streamindex, pcolorspace)
+  end
+  def video_processor_set_stream_output_rate(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, outputrate : D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, repeatframe : LibC::BOOL, pcustomrate : DXGI_RATIONAL*) : Void
+    @lpVtbl.value.video_processor_set_stream_output_rate.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, LibC::BOOL, DXGI_RATIONAL*, Void)).call(pvideoprocessor, streamindex, outputrate, repeatframe, pcustomrate)
+  end
+  def video_processor_set_stream_source_rect(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_set_stream_source_rect.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, RECT*, Void)).call(pvideoprocessor, streamindex, enable, prect)
+  end
+  def video_processor_set_stream_dest_rect(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_set_stream_dest_rect.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, RECT*, Void)).call(pvideoprocessor, streamindex, enable, prect)
+  end
+  def video_processor_set_stream_alpha(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, alpha : Float32) : Void
+    @lpVtbl.value.video_processor_set_stream_alpha.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, Float32, Void)).call(pvideoprocessor, streamindex, enable, alpha)
+  end
+  def video_processor_set_stream_palette(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, count : UInt32, pentries : UInt32*) : Void
+    @lpVtbl.value.video_processor_set_stream_palette.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, UInt32, UInt32*, Void)).call(pvideoprocessor, streamindex, count, pentries)
+  end
+  def video_processor_set_stream_pixel_aspect_ratio(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, psourceaspectratio : DXGI_RATIONAL*, pdestinationaspectratio : DXGI_RATIONAL*) : Void
+    @lpVtbl.value.video_processor_set_stream_pixel_aspect_ratio.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, DXGI_RATIONAL*, DXGI_RATIONAL*, Void)).call(pvideoprocessor, streamindex, enable, psourceaspectratio, pdestinationaspectratio)
+  end
+  def video_processor_set_stream_luma_key(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, lower : Float32, upper : Float32) : Void
+    @lpVtbl.value.video_processor_set_stream_luma_key.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, Float32, Float32, Void)).call(pvideoprocessor, streamindex, enable, lower, upper)
+  end
+  def video_processor_set_stream_stereo_format(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, format : D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, leftviewframe0 : LibC::BOOL, baseviewframe0 : LibC::BOOL, flipmode : D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, monooffset : Int32) : Void
+    @lpVtbl.value.video_processor_set_stream_stereo_format.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, LibC::BOOL, LibC::BOOL, D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, Int32, Void)).call(pvideoprocessor, streamindex, enable, format, leftviewframe0, baseviewframe0, flipmode, monooffset)
+  end
+  def video_processor_set_stream_auto_processing_mode(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL) : Void
+    @lpVtbl.value.video_processor_set_stream_auto_processing_mode.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, Void)).call(pvideoprocessor, streamindex, enable)
+  end
+  def video_processor_set_stream_filter(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, filter : D3D11_VIDEO_PROCESSOR_FILTER, enable : LibC::BOOL, level : Int32) : Void
+    @lpVtbl.value.video_processor_set_stream_filter.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_FILTER, LibC::BOOL, Int32, Void)).call(pvideoprocessor, streamindex, filter, enable, level)
+  end
+  def video_processor_set_stream_extension(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pextensionguid : Guid*, datasize : UInt32, pdata : Void*) : Int32
+    @lpVtbl.value.video_processor_set_stream_extension.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, Guid*, UInt32, Void*, Int32)).call(pvideoprocessor, streamindex, pextensionguid, datasize, pdata)
+  end
+  def video_processor_get_stream_frame_format(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pframeformat : D3D11_VIDEO_FRAME_FORMAT*) : Void
+    @lpVtbl.value.video_processor_get_stream_frame_format.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_FRAME_FORMAT*, Void)).call(pvideoprocessor, streamindex, pframeformat)
+  end
+  def video_processor_get_stream_color_space(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pcolorspace : D3D11_VIDEO_PROCESSOR_COLOR_SPACE*) : Void
+    @lpVtbl.value.video_processor_get_stream_color_space.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)).call(pvideoprocessor, streamindex, pcolorspace)
+  end
+  def video_processor_get_stream_output_rate(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, poutputrate : D3D11_VIDEO_PROCESSOR_OUTPUT_RATE*, prepeatframe : LibC::BOOL*, pcustomrate : DXGI_RATIONAL*) : Void
+    @lpVtbl.value.video_processor_get_stream_output_rate.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_OUTPUT_RATE*, LibC::BOOL*, DXGI_RATIONAL*, Void)).call(pvideoprocessor, streamindex, poutputrate, prepeatframe, pcustomrate)
+  end
+  def video_processor_get_stream_source_rect(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_get_stream_source_rect.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, RECT*, Void)).call(pvideoprocessor, streamindex, penabled, prect)
+  end
+  def video_processor_get_stream_dest_rect(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_get_stream_dest_rect.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, RECT*, Void)).call(pvideoprocessor, streamindex, penabled, prect)
+  end
+  def video_processor_get_stream_alpha(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, palpha : Float32*) : Void
+    @lpVtbl.value.video_processor_get_stream_alpha.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, Float32*, Void)).call(pvideoprocessor, streamindex, penabled, palpha)
+  end
+  def video_processor_get_stream_palette(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, count : UInt32, pentries : UInt32*) : Void
+    @lpVtbl.value.video_processor_get_stream_palette.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, UInt32, UInt32*, Void)).call(pvideoprocessor, streamindex, count, pentries)
+  end
+  def video_processor_get_stream_pixel_aspect_ratio(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, psourceaspectratio : DXGI_RATIONAL*, pdestinationaspectratio : DXGI_RATIONAL*) : Void
+    @lpVtbl.value.video_processor_get_stream_pixel_aspect_ratio.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, DXGI_RATIONAL*, DXGI_RATIONAL*, Void)).call(pvideoprocessor, streamindex, penabled, psourceaspectratio, pdestinationaspectratio)
+  end
+  def video_processor_get_stream_luma_key(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, plower : Float32*, pupper : Float32*) : Void
+    @lpVtbl.value.video_processor_get_stream_luma_key.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, Float32*, Float32*, Void)).call(pvideoprocessor, streamindex, penabled, plower, pupper)
+  end
+  def video_processor_get_stream_stereo_format(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penable : LibC::BOOL*, pformat : D3D11_VIDEO_PROCESSOR_STEREO_FORMAT*, pleftviewframe0 : LibC::BOOL*, pbaseviewframe0 : LibC::BOOL*, pflipmode : D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE*, monooffset : Int32*) : Void
+    @lpVtbl.value.video_processor_get_stream_stereo_format.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_STEREO_FORMAT*, LibC::BOOL*, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE*, Int32*, Void)).call(pvideoprocessor, streamindex, penable, pformat, pleftviewframe0, pbaseviewframe0, pflipmode, monooffset)
+  end
+  def video_processor_get_stream_auto_processing_mode(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*) : Void
+    @lpVtbl.value.video_processor_get_stream_auto_processing_mode.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, Void)).call(pvideoprocessor, streamindex, penabled)
+  end
+  def video_processor_get_stream_filter(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, filter : D3D11_VIDEO_PROCESSOR_FILTER, penabled : LibC::BOOL*, plevel : Int32*) : Void
+    @lpVtbl.value.video_processor_get_stream_filter.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_FILTER, LibC::BOOL*, Int32*, Void)).call(pvideoprocessor, streamindex, filter, penabled, plevel)
+  end
+  def video_processor_get_stream_extension(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pextensionguid : Guid*, datasize : UInt32, pdata : Void*) : Int32
+    @lpVtbl.value.video_processor_get_stream_extension.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, Guid*, UInt32, Void*, Int32)).call(pvideoprocessor, streamindex, pextensionguid, datasize, pdata)
+  end
+  def video_processor_blt(pvideoprocessor : ID3D11VideoProcessor, pview : ID3D11VideoProcessorOutputView, outputframe : UInt32, streamcount : UInt32, pstreams : D3D11_VIDEO_PROCESSOR_STREAM*) : HRESULT
+    @lpVtbl.value.video_processor_blt.unsafe_as(Proc(ID3D11VideoProcessor, ID3D11VideoProcessorOutputView, UInt32, UInt32, D3D11_VIDEO_PROCESSOR_STREAM*, HRESULT)).call(pvideoprocessor, pview, outputframe, streamcount, pstreams)
+  end
+  def negotiate_crypto_session_key_exchange(pcryptosession : ID3D11CryptoSession, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.negotiate_crypto_session_key_exchange.unsafe_as(Proc(ID3D11CryptoSession, UInt32, Void*, HRESULT)).call(pcryptosession, datasize, pdata)
+  end
+  def encryption_blt(pcryptosession : ID3D11CryptoSession, psrcsurface : ID3D11Texture2D, pdstsurface : ID3D11Texture2D, ivsize : UInt32, piv : Void*) : Void
+    @lpVtbl.value.encryption_blt.unsafe_as(Proc(ID3D11CryptoSession, ID3D11Texture2D, ID3D11Texture2D, UInt32, Void*, Void)).call(pcryptosession, psrcsurface, pdstsurface, ivsize, piv)
+  end
+  def decryption_blt(pcryptosession : ID3D11CryptoSession, psrcsurface : ID3D11Texture2D, pdstsurface : ID3D11Texture2D, pencryptedblockinfo : D3D11_ENCRYPTED_BLOCK_INFO*, contentkeysize : UInt32, pcontentkey : Void*, ivsize : UInt32, piv : Void*) : Void
+    @lpVtbl.value.decryption_blt.unsafe_as(Proc(ID3D11CryptoSession, ID3D11Texture2D, ID3D11Texture2D, D3D11_ENCRYPTED_BLOCK_INFO*, UInt32, Void*, UInt32, Void*, Void)).call(pcryptosession, psrcsurface, pdstsurface, pencryptedblockinfo, contentkeysize, pcontentkey, ivsize, piv)
+  end
+  def start_session_key_refresh(pcryptosession : ID3D11CryptoSession, randomnumbersize : UInt32, prandomnumber : Void*) : Void
+    @lpVtbl.value.start_session_key_refresh.unsafe_as(Proc(ID3D11CryptoSession, UInt32, Void*, Void)).call(pcryptosession, randomnumbersize, prandomnumber)
+  end
+  def finish_session_key_refresh(pcryptosession : ID3D11CryptoSession) : Void
+    @lpVtbl.value.finish_session_key_refresh.unsafe_as(Proc(ID3D11CryptoSession, Void)).call(pcryptosession)
+  end
+  def get_encryption_blt_key(pcryptosession : ID3D11CryptoSession, keysize : UInt32, preadbackkey : Void*) : HRESULT
+    @lpVtbl.value.get_encryption_blt_key.unsafe_as(Proc(ID3D11CryptoSession, UInt32, Void*, HRESULT)).call(pcryptosession, keysize, preadbackkey)
+  end
+  def negotiate_authenticated_channel_key_exchange(pchannel : ID3D11AuthenticatedChannel, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.negotiate_authenticated_channel_key_exchange.unsafe_as(Proc(ID3D11AuthenticatedChannel, UInt32, Void*, HRESULT)).call(pchannel, datasize, pdata)
+  end
+  def query_authenticated_channel(pchannel : ID3D11AuthenticatedChannel, inputsize : UInt32, pinput : Void*, outputsize : UInt32, poutput : Void*) : HRESULT
+    @lpVtbl.value.query_authenticated_channel.unsafe_as(Proc(ID3D11AuthenticatedChannel, UInt32, Void*, UInt32, Void*, HRESULT)).call(pchannel, inputsize, pinput, outputsize, poutput)
+  end
+  def configure_authenticated_channel(pchannel : ID3D11AuthenticatedChannel, inputsize : UInt32, pinput : Void*, poutput : D3D11_AUTHENTICATED_CONFIGURE_OUTPUT*) : HRESULT
+    @lpVtbl.value.configure_authenticated_channel.unsafe_as(Proc(ID3D11AuthenticatedChannel, UInt32, Void*, D3D11_AUTHENTICATED_CONFIGURE_OUTPUT*, HRESULT)).call(pchannel, inputsize, pinput, poutput)
+  end
+  def video_processor_set_stream_rotation(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, rotation : D3D11_VIDEO_PROCESSOR_ROTATION) : Void
+    @lpVtbl.value.video_processor_set_stream_rotation.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, D3D11_VIDEO_PROCESSOR_ROTATION, Void)).call(pvideoprocessor, streamindex, enable, rotation)
+  end
+  def video_processor_get_stream_rotation(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penable : LibC::BOOL*, protation : D3D11_VIDEO_PROCESSOR_ROTATION*) : Void
+    @lpVtbl.value.video_processor_get_stream_rotation.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_ROTATION*, Void)).call(pvideoprocessor, streamindex, penable, protation)
+  end
+  def submit_decoder_buffers1(pdecoder : ID3D11VideoDecoder, numbuffers : UInt32, pbufferdesc : D3D11_VIDEO_DECODER_BUFFER_DESC1*) : HRESULT
+    @lpVtbl.value.submit_decoder_buffers1.unsafe_as(Proc(ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC1*, HRESULT)).call(pdecoder, numbuffers, pbufferdesc)
+  end
+  def get_data_for_new_hardware_key(pcryptosession : ID3D11CryptoSession, privateinputsize : UInt32, pprivatinputdata : Void*, pprivateoutputdata : UInt64*) : HRESULT
+    @lpVtbl.value.get_data_for_new_hardware_key.unsafe_as(Proc(ID3D11CryptoSession, UInt32, Void*, UInt64*, HRESULT)).call(pcryptosession, privateinputsize, pprivatinputdata, pprivateoutputdata)
+  end
+  def check_crypto_session_status(pcryptosession : ID3D11CryptoSession, pstatus : D3D11_CRYPTO_SESSION_STATUS*) : HRESULT
+    @lpVtbl.value.check_crypto_session_status.unsafe_as(Proc(ID3D11CryptoSession, D3D11_CRYPTO_SESSION_STATUS*, HRESULT)).call(pcryptosession, pstatus)
+  end
+  def decoder_enable_downsampling(pdecoder : ID3D11VideoDecoder, inputcolorspace : DXGI_COLOR_SPACE_TYPE, poutputdesc : D3D11_VIDEO_SAMPLE_DESC*, referenceframecount : UInt32) : HRESULT
+    @lpVtbl.value.decoder_enable_downsampling.unsafe_as(Proc(ID3D11VideoDecoder, DXGI_COLOR_SPACE_TYPE, D3D11_VIDEO_SAMPLE_DESC*, UInt32, HRESULT)).call(pdecoder, inputcolorspace, poutputdesc, referenceframecount)
+  end
+  def decoder_update_downsampling(pdecoder : ID3D11VideoDecoder, poutputdesc : D3D11_VIDEO_SAMPLE_DESC*) : HRESULT
+    @lpVtbl.value.decoder_update_downsampling.unsafe_as(Proc(ID3D11VideoDecoder, D3D11_VIDEO_SAMPLE_DESC*, HRESULT)).call(pdecoder, poutputdesc)
+  end
+  def video_processor_set_output_color_space1(pvideoprocessor : ID3D11VideoProcessor, colorspace : DXGI_COLOR_SPACE_TYPE) : Void
+    @lpVtbl.value.video_processor_set_output_color_space1.unsafe_as(Proc(ID3D11VideoProcessor, DXGI_COLOR_SPACE_TYPE, Void)).call(pvideoprocessor, colorspace)
+  end
+  def video_processor_set_output_shader_usage(pvideoprocessor : ID3D11VideoProcessor, shaderusage : LibC::BOOL) : Void
+    @lpVtbl.value.video_processor_set_output_shader_usage.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, Void)).call(pvideoprocessor, shaderusage)
+  end
+  def video_processor_get_output_color_space1(pvideoprocessor : ID3D11VideoProcessor, pcolorspace : DXGI_COLOR_SPACE_TYPE*) : Void
+    @lpVtbl.value.video_processor_get_output_color_space1.unsafe_as(Proc(ID3D11VideoProcessor, DXGI_COLOR_SPACE_TYPE*, Void)).call(pvideoprocessor, pcolorspace)
+  end
+  def video_processor_get_output_shader_usage(pvideoprocessor : ID3D11VideoProcessor, pshaderusage : LibC::BOOL*) : Void
+    @lpVtbl.value.video_processor_get_output_shader_usage.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, Void)).call(pvideoprocessor, pshaderusage)
+  end
+  def video_processor_set_stream_color_space1(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, colorspace : DXGI_COLOR_SPACE_TYPE) : Void
+    @lpVtbl.value.video_processor_set_stream_color_space1.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, DXGI_COLOR_SPACE_TYPE, Void)).call(pvideoprocessor, streamindex, colorspace)
+  end
+  def video_processor_set_stream_mirror(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, fliphorizontal : LibC::BOOL, flipvertical : LibC::BOOL) : Void
+    @lpVtbl.value.video_processor_set_stream_mirror.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, LibC::BOOL, LibC::BOOL, Void)).call(pvideoprocessor, streamindex, enable, fliphorizontal, flipvertical)
+  end
+  def video_processor_get_stream_color_space1(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pcolorspace : DXGI_COLOR_SPACE_TYPE*) : Void
+    @lpVtbl.value.video_processor_get_stream_color_space1.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, DXGI_COLOR_SPACE_TYPE*, Void)).call(pvideoprocessor, streamindex, pcolorspace)
+  end
+  def video_processor_get_stream_mirror(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penable : LibC::BOOL*, pfliphorizontal : LibC::BOOL*, pflipvertical : LibC::BOOL*) : Void
+    @lpVtbl.value.video_processor_get_stream_mirror.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, LibC::BOOL*, LibC::BOOL*, Void)).call(pvideoprocessor, streamindex, penable, pfliphorizontal, pflipvertical)
+  end
+  def video_processor_get_behavior_hints(pvideoprocessor : ID3D11VideoProcessor, outputwidth : UInt32, outputheight : UInt32, outputformat : DXGI_FORMAT, streamcount : UInt32, pstreams : D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT*, pbehaviorhints : UInt32*) : HRESULT
+    @lpVtbl.value.video_processor_get_behavior_hints.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, UInt32, DXGI_FORMAT, UInt32, D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT*, UInt32*, HRESULT)).call(pvideoprocessor, outputwidth, outputheight, outputformat, streamcount, pstreams, pbehaviorhints)
+  end
+end
+struct LibWin32::ID3D11VideoDevice1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_video_decoder(pvideodesc : D3D11_VIDEO_DECODER_DESC*, pconfig : D3D11_VIDEO_DECODER_CONFIG*, ppdecoder : ID3D11VideoDecoder*) : HRESULT
+    @lpVtbl.value.create_video_decoder.unsafe_as(Proc(D3D11_VIDEO_DECODER_DESC*, D3D11_VIDEO_DECODER_CONFIG*, ID3D11VideoDecoder*, HRESULT)).call(pvideodesc, pconfig, ppdecoder)
+  end
+  def create_video_processor(penum : ID3D11VideoProcessorEnumerator, rateconversionindex : UInt32, ppvideoprocessor : ID3D11VideoProcessor*) : HRESULT
+    @lpVtbl.value.create_video_processor.unsafe_as(Proc(ID3D11VideoProcessorEnumerator, UInt32, ID3D11VideoProcessor*, HRESULT)).call(penum, rateconversionindex, ppvideoprocessor)
+  end
+  def create_authenticated_channel(channeltype : D3D11_AUTHENTICATED_CHANNEL_TYPE, ppauthenticatedchannel : ID3D11AuthenticatedChannel*) : HRESULT
+    @lpVtbl.value.create_authenticated_channel.unsafe_as(Proc(D3D11_AUTHENTICATED_CHANNEL_TYPE, ID3D11AuthenticatedChannel*, HRESULT)).call(channeltype, ppauthenticatedchannel)
+  end
+  def create_crypto_session(pcryptotype : Guid*, pdecoderprofile : Guid*, pkeyexchangetype : Guid*, ppcryptosession : ID3D11CryptoSession*) : HRESULT
+    @lpVtbl.value.create_crypto_session.unsafe_as(Proc(Guid*, Guid*, Guid*, ID3D11CryptoSession*, HRESULT)).call(pcryptotype, pdecoderprofile, pkeyexchangetype, ppcryptosession)
+  end
+  def create_video_decoder_output_view(presource : ID3D11Resource, pdesc : D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC*, ppvdovview : ID3D11VideoDecoderOutputView*) : HRESULT
+    @lpVtbl.value.create_video_decoder_output_view.unsafe_as(Proc(ID3D11Resource, D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC*, ID3D11VideoDecoderOutputView*, HRESULT)).call(presource, pdesc, ppvdovview)
+  end
+  def create_video_processor_input_view(presource : ID3D11Resource, penum : ID3D11VideoProcessorEnumerator, pdesc : D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC*, ppvpiview : ID3D11VideoProcessorInputView*) : HRESULT
+    @lpVtbl.value.create_video_processor_input_view.unsafe_as(Proc(ID3D11Resource, ID3D11VideoProcessorEnumerator, D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC*, ID3D11VideoProcessorInputView*, HRESULT)).call(presource, penum, pdesc, ppvpiview)
+  end
+  def create_video_processor_output_view(presource : ID3D11Resource, penum : ID3D11VideoProcessorEnumerator, pdesc : D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC*, ppvpoview : ID3D11VideoProcessorOutputView*) : HRESULT
+    @lpVtbl.value.create_video_processor_output_view.unsafe_as(Proc(ID3D11Resource, ID3D11VideoProcessorEnumerator, D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC*, ID3D11VideoProcessorOutputView*, HRESULT)).call(presource, penum, pdesc, ppvpoview)
+  end
+  def create_video_processor_enumerator(pdesc : D3D11_VIDEO_PROCESSOR_CONTENT_DESC*, ppenum : ID3D11VideoProcessorEnumerator*) : HRESULT
+    @lpVtbl.value.create_video_processor_enumerator.unsafe_as(Proc(D3D11_VIDEO_PROCESSOR_CONTENT_DESC*, ID3D11VideoProcessorEnumerator*, HRESULT)).call(pdesc, ppenum)
+  end
+  def get_video_decoder_profile_count : UInt32
+    @lpVtbl.value.get_video_decoder_profile_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_video_decoder_profile(index : UInt32, pdecoderprofile : Guid*) : HRESULT
+    @lpVtbl.value.get_video_decoder_profile.unsafe_as(Proc(UInt32, Guid*, HRESULT)).call(index, pdecoderprofile)
+  end
+  def check_video_decoder_format(pdecoderprofile : Guid*, format : DXGI_FORMAT, psupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_video_decoder_format.unsafe_as(Proc(Guid*, DXGI_FORMAT, LibC::BOOL*, HRESULT)).call(pdecoderprofile, format, psupported)
+  end
+  def get_video_decoder_config_count(pdesc : D3D11_VIDEO_DECODER_DESC*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_video_decoder_config_count.unsafe_as(Proc(D3D11_VIDEO_DECODER_DESC*, UInt32*, HRESULT)).call(pdesc, pcount)
+  end
+  def get_video_decoder_config(pdesc : D3D11_VIDEO_DECODER_DESC*, index : UInt32, pconfig : D3D11_VIDEO_DECODER_CONFIG*) : HRESULT
+    @lpVtbl.value.get_video_decoder_config.unsafe_as(Proc(D3D11_VIDEO_DECODER_DESC*, UInt32, D3D11_VIDEO_DECODER_CONFIG*, HRESULT)).call(pdesc, index, pconfig)
+  end
+  def get_content_protection_caps(pcryptotype : Guid*, pdecoderprofile : Guid*, pcaps : D3D11_VIDEO_CONTENT_PROTECTION_CAPS*) : HRESULT
+    @lpVtbl.value.get_content_protection_caps.unsafe_as(Proc(Guid*, Guid*, D3D11_VIDEO_CONTENT_PROTECTION_CAPS*, HRESULT)).call(pcryptotype, pdecoderprofile, pcaps)
+  end
+  def check_crypto_key_exchange(pcryptotype : Guid*, pdecoderprofile : Guid*, index : UInt32, pkeyexchangetype : Guid*) : HRESULT
+    @lpVtbl.value.check_crypto_key_exchange.unsafe_as(Proc(Guid*, Guid*, UInt32, Guid*, HRESULT)).call(pcryptotype, pdecoderprofile, index, pkeyexchangetype)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_crypto_session_private_data_size(pcryptotype : Guid*, pdecoderprofile : Guid*, pkeyexchangetype : Guid*, pprivateinputsize : UInt32*, pprivateoutputsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_crypto_session_private_data_size.unsafe_as(Proc(Guid*, Guid*, Guid*, UInt32*, UInt32*, HRESULT)).call(pcryptotype, pdecoderprofile, pkeyexchangetype, pprivateinputsize, pprivateoutputsize)
+  end
+  def get_video_decoder_caps(pdecoderprofile : Guid*, samplewidth : UInt32, sampleheight : UInt32, pframerate : DXGI_RATIONAL*, bitrate : UInt32, pcryptotype : Guid*, pdecodercaps : UInt32*) : HRESULT
+    @lpVtbl.value.get_video_decoder_caps.unsafe_as(Proc(Guid*, UInt32, UInt32, DXGI_RATIONAL*, UInt32, Guid*, UInt32*, HRESULT)).call(pdecoderprofile, samplewidth, sampleheight, pframerate, bitrate, pcryptotype, pdecodercaps)
+  end
+  def check_video_decoder_downsampling(pinputdesc : D3D11_VIDEO_DECODER_DESC*, inputcolorspace : DXGI_COLOR_SPACE_TYPE, pinputconfig : D3D11_VIDEO_DECODER_CONFIG*, pframerate : DXGI_RATIONAL*, poutputdesc : D3D11_VIDEO_SAMPLE_DESC*, psupported : LibC::BOOL*, prealtimehint : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_video_decoder_downsampling.unsafe_as(Proc(D3D11_VIDEO_DECODER_DESC*, DXGI_COLOR_SPACE_TYPE, D3D11_VIDEO_DECODER_CONFIG*, DXGI_RATIONAL*, D3D11_VIDEO_SAMPLE_DESC*, LibC::BOOL*, LibC::BOOL*, HRESULT)).call(pinputdesc, inputcolorspace, pinputconfig, pframerate, poutputdesc, psupported, prealtimehint)
+  end
+  def recommend_video_decoder_downsample_parameters(pinputdesc : D3D11_VIDEO_DECODER_DESC*, inputcolorspace : DXGI_COLOR_SPACE_TYPE, pinputconfig : D3D11_VIDEO_DECODER_CONFIG*, pframerate : DXGI_RATIONAL*, precommendedoutputdesc : D3D11_VIDEO_SAMPLE_DESC*) : HRESULT
+    @lpVtbl.value.recommend_video_decoder_downsample_parameters.unsafe_as(Proc(D3D11_VIDEO_DECODER_DESC*, DXGI_COLOR_SPACE_TYPE, D3D11_VIDEO_DECODER_CONFIG*, DXGI_RATIONAL*, D3D11_VIDEO_SAMPLE_DESC*, HRESULT)).call(pinputdesc, inputcolorspace, pinputconfig, pframerate, precommendedoutputdesc)
+  end
+end
+struct LibWin32::ID3D11VideoProcessorEnumerator1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_video_processor_content_desc(pcontentdesc : D3D11_VIDEO_PROCESSOR_CONTENT_DESC*) : HRESULT
+    @lpVtbl.value.get_video_processor_content_desc.unsafe_as(Proc(D3D11_VIDEO_PROCESSOR_CONTENT_DESC*, HRESULT)).call(pcontentdesc)
+  end
+  def check_video_processor_format(format : DXGI_FORMAT, pflags : UInt32*) : HRESULT
+    @lpVtbl.value.check_video_processor_format.unsafe_as(Proc(DXGI_FORMAT, UInt32*, HRESULT)).call(format, pflags)
+  end
+  def get_video_processor_caps(pcaps : D3D11_VIDEO_PROCESSOR_CAPS*) : HRESULT
+    @lpVtbl.value.get_video_processor_caps.unsafe_as(Proc(D3D11_VIDEO_PROCESSOR_CAPS*, HRESULT)).call(pcaps)
+  end
+  def get_video_processor_rate_conversion_caps(typeindex : UInt32, pcaps : D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS*) : HRESULT
+    @lpVtbl.value.get_video_processor_rate_conversion_caps.unsafe_as(Proc(UInt32, D3D11_VIDEO_PROCESSOR_RATE_CONVERSION_CAPS*, HRESULT)).call(typeindex, pcaps)
+  end
+  def get_video_processor_custom_rate(typeindex : UInt32, customrateindex : UInt32, prate : D3D11_VIDEO_PROCESSOR_CUSTOM_RATE*) : HRESULT
+    @lpVtbl.value.get_video_processor_custom_rate.unsafe_as(Proc(UInt32, UInt32, D3D11_VIDEO_PROCESSOR_CUSTOM_RATE*, HRESULT)).call(typeindex, customrateindex, prate)
+  end
+  def get_video_processor_filter_range(filter : D3D11_VIDEO_PROCESSOR_FILTER, prange : D3D11_VIDEO_PROCESSOR_FILTER_RANGE*) : HRESULT
+    @lpVtbl.value.get_video_processor_filter_range.unsafe_as(Proc(D3D11_VIDEO_PROCESSOR_FILTER, D3D11_VIDEO_PROCESSOR_FILTER_RANGE*, HRESULT)).call(filter, prange)
+  end
+  def check_video_processor_format_conversion(inputformat : DXGI_FORMAT, inputcolorspace : DXGI_COLOR_SPACE_TYPE, outputformat : DXGI_FORMAT, outputcolorspace : DXGI_COLOR_SPACE_TYPE, psupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_video_processor_format_conversion.unsafe_as(Proc(DXGI_FORMAT, DXGI_COLOR_SPACE_TYPE, DXGI_FORMAT, DXGI_COLOR_SPACE_TYPE, LibC::BOOL*, HRESULT)).call(inputformat, inputcolorspace, outputformat, outputcolorspace, psupported)
+  end
+end
+struct LibWin32::ID3D11Device1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_buffer(pdesc : D3D11_BUFFER_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, ppbuffer : ID3D11Buffer*) : HRESULT
+    @lpVtbl.value.create_buffer.unsafe_as(Proc(D3D11_BUFFER_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Buffer*, HRESULT)).call(pdesc, pinitialdata, ppbuffer)
+  end
+  def create_texture1_d(pdesc : D3D11_TEXTURE1D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture1d : ID3D11Texture1D*) : HRESULT
+    @lpVtbl.value.create_texture1_d.unsafe_as(Proc(D3D11_TEXTURE1D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture1D*, HRESULT)).call(pdesc, pinitialdata, pptexture1d)
+  end
+  def create_texture2_d(pdesc : D3D11_TEXTURE2D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture2d : ID3D11Texture2D*) : HRESULT
+    @lpVtbl.value.create_texture2_d.unsafe_as(Proc(D3D11_TEXTURE2D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D*, HRESULT)).call(pdesc, pinitialdata, pptexture2d)
+  end
+  def create_texture3_d(pdesc : D3D11_TEXTURE3D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture3d : ID3D11Texture3D*) : HRESULT
+    @lpVtbl.value.create_texture3_d.unsafe_as(Proc(D3D11_TEXTURE3D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D*, HRESULT)).call(pdesc, pinitialdata, pptexture3d)
+  end
+  def create_shader_resource_view(presource : ID3D11Resource, pdesc : D3D11_SHADER_RESOURCE_VIEW_DESC*, ppsrview : ID3D11ShaderResourceView*) : HRESULT
+    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC*, ID3D11ShaderResourceView*, HRESULT)).call(presource, pdesc, ppsrview)
+  end
+  def create_unordered_access_view(presource : ID3D11Resource, pdesc : D3D11_UNORDERED_ACCESS_VIEW_DESC*, ppuaview : ID3D11UnorderedAccessView*) : HRESULT
+    @lpVtbl.value.create_unordered_access_view.unsafe_as(Proc(ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC*, ID3D11UnorderedAccessView*, HRESULT)).call(presource, pdesc, ppuaview)
+  end
+  def create_render_target_view(presource : ID3D11Resource, pdesc : D3D11_RENDER_TARGET_VIEW_DESC*, pprtview : ID3D11RenderTargetView*) : HRESULT
+    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC*, ID3D11RenderTargetView*, HRESULT)).call(presource, pdesc, pprtview)
+  end
+  def create_depth_stencil_view(presource : ID3D11Resource, pdesc : D3D11_DEPTH_STENCIL_VIEW_DESC*, ppdepthstencilview : ID3D11DepthStencilView*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D11Resource, D3D11_DEPTH_STENCIL_VIEW_DESC*, ID3D11DepthStencilView*, HRESULT)).call(presource, pdesc, ppdepthstencilview)
+  end
+  def create_input_layout(pinputelementdescs : D3D11_INPUT_ELEMENT_DESC*, numelements : UInt32, pshaderbytecodewithinputsignature : Void*, bytecodelength : LibC::UINT_PTR, ppinputlayout : ID3D11InputLayout*) : HRESULT
+    @lpVtbl.value.create_input_layout.unsafe_as(Proc(D3D11_INPUT_ELEMENT_DESC*, UInt32, Void*, LibC::UINT_PTR, ID3D11InputLayout*, HRESULT)).call(pinputelementdescs, numelements, pshaderbytecodewithinputsignature, bytecodelength, ppinputlayout)
+  end
+  def create_vertex_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppvertexshader : ID3D11VertexShader*) : HRESULT
+    @lpVtbl.value.create_vertex_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11VertexShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppvertexshader)
+  end
+  def create_geometry_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppgeometryshader : ID3D11GeometryShader*) : HRESULT
+    @lpVtbl.value.create_geometry_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppgeometryshader)
+  end
+  def create_geometry_shader_with_stream_output(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, psodeclaration : D3D11_SO_DECLARATION_ENTRY*, numentries : UInt32, pbufferstrides : UInt32*, numstrides : UInt32, rasterizedstream : UInt32, pclasslinkage : ID3D11ClassLinkage, ppgeometryshader : ID3D11GeometryShader*) : HRESULT
+    @lpVtbl.value.create_geometry_shader_with_stream_output.unsafe_as(Proc(Void*, LibC::UINT_PTR, D3D11_SO_DECLARATION_ENTRY*, UInt32, UInt32*, UInt32, UInt32, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)).call(pshaderbytecode, bytecodelength, psodeclaration, numentries, pbufferstrides, numstrides, rasterizedstream, pclasslinkage, ppgeometryshader)
+  end
+  def create_pixel_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, pppixelshader : ID3D11PixelShader*) : HRESULT
+    @lpVtbl.value.create_pixel_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11PixelShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, pppixelshader)
+  end
+  def create_hull_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, pphullshader : ID3D11HullShader*) : HRESULT
+    @lpVtbl.value.create_hull_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11HullShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, pphullshader)
+  end
+  def create_domain_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppdomainshader : ID3D11DomainShader*) : HRESULT
+    @lpVtbl.value.create_domain_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11DomainShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppdomainshader)
+  end
+  def create_compute_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppcomputeshader : ID3D11ComputeShader*) : HRESULT
+    @lpVtbl.value.create_compute_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11ComputeShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppcomputeshader)
+  end
+  def create_class_linkage(pplinkage : ID3D11ClassLinkage*) : HRESULT
+    @lpVtbl.value.create_class_linkage.unsafe_as(Proc(ID3D11ClassLinkage*, HRESULT)).call(pplinkage)
+  end
+  def create_blend_state(pblendstatedesc : D3D11_BLEND_DESC*, ppblendstate : ID3D11BlendState*) : HRESULT
+    @lpVtbl.value.create_blend_state.unsafe_as(Proc(D3D11_BLEND_DESC*, ID3D11BlendState*, HRESULT)).call(pblendstatedesc, ppblendstate)
+  end
+  def create_depth_stencil_state(pdepthstencildesc : D3D11_DEPTH_STENCIL_DESC*, ppdepthstencilstate : ID3D11DepthStencilState*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_state.unsafe_as(Proc(D3D11_DEPTH_STENCIL_DESC*, ID3D11DepthStencilState*, HRESULT)).call(pdepthstencildesc, ppdepthstencilstate)
+  end
+  def create_rasterizer_state(prasterizerdesc : D3D11_RASTERIZER_DESC*, pprasterizerstate : ID3D11RasterizerState*) : HRESULT
+    @lpVtbl.value.create_rasterizer_state.unsafe_as(Proc(D3D11_RASTERIZER_DESC*, ID3D11RasterizerState*, HRESULT)).call(prasterizerdesc, pprasterizerstate)
+  end
+  def create_sampler_state(psamplerdesc : D3D11_SAMPLER_DESC*, ppsamplerstate : ID3D11SamplerState*) : HRESULT
+    @lpVtbl.value.create_sampler_state.unsafe_as(Proc(D3D11_SAMPLER_DESC*, ID3D11SamplerState*, HRESULT)).call(psamplerdesc, ppsamplerstate)
+  end
+  def create_query(pquerydesc : D3D11_QUERY_DESC*, ppquery : ID3D11Query*) : HRESULT
+    @lpVtbl.value.create_query.unsafe_as(Proc(D3D11_QUERY_DESC*, ID3D11Query*, HRESULT)).call(pquerydesc, ppquery)
+  end
+  def create_predicate(ppredicatedesc : D3D11_QUERY_DESC*, pppredicate : ID3D11Predicate*) : HRESULT
+    @lpVtbl.value.create_predicate.unsafe_as(Proc(D3D11_QUERY_DESC*, ID3D11Predicate*, HRESULT)).call(ppredicatedesc, pppredicate)
+  end
+  def create_counter(pcounterdesc : D3D11_COUNTER_DESC*, ppcounter : ID3D11Counter*) : HRESULT
+    @lpVtbl.value.create_counter.unsafe_as(Proc(D3D11_COUNTER_DESC*, ID3D11Counter*, HRESULT)).call(pcounterdesc, ppcounter)
+  end
+  def create_deferred_context(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext*) : HRESULT
+    @lpVtbl.value.create_deferred_context.unsafe_as(Proc(UInt32, ID3D11DeviceContext*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def open_shared_resource(hresource : LibC::HANDLE, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hresource, returnedinterface, ppresource)
+  end
+  def check_format_support(format : DXGI_FORMAT, pformatsupport : UInt32*) : HRESULT
+    @lpVtbl.value.check_format_support.unsafe_as(Proc(DXGI_FORMAT, UInt32*, HRESULT)).call(format, pformatsupport)
+  end
+  def check_multisample_quality_levels(format : DXGI_FORMAT, samplecount : UInt32, pnumqualitylevels : UInt32*) : HRESULT
+    @lpVtbl.value.check_multisample_quality_levels.unsafe_as(Proc(DXGI_FORMAT, UInt32, UInt32*, HRESULT)).call(format, samplecount, pnumqualitylevels)
+  end
+  def check_counter_info(pcounterinfo : D3D11_COUNTER_INFO*) : Void
+    @lpVtbl.value.check_counter_info.unsafe_as(Proc(D3D11_COUNTER_INFO*, Void)).call(pcounterinfo)
+  end
+  def check_counter(pdesc : D3D11_COUNTER_DESC*, ptype : D3D11_COUNTER_TYPE*, pactivecounters : UInt32*, szname : UInt8*, pnamelength : UInt32*, szunits : UInt8*, punitslength : UInt32*, szdescription : UInt8*, pdescriptionlength : UInt32*) : HRESULT
+    @lpVtbl.value.check_counter.unsafe_as(Proc(D3D11_COUNTER_DESC*, D3D11_COUNTER_TYPE*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)).call(pdesc, ptype, pactivecounters, szname, pnamelength, szunits, punitslength, szdescription, pdescriptionlength)
+  end
+  def check_feature_support(feature : D3D11_FEATURE, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D11_FEATURE, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_feature_level : D3D_FEATURE_LEVEL
+    @lpVtbl.value.get_feature_level.unsafe_as(Proc(D3D_FEATURE_LEVEL)).call
+  end
+  def get_creation_flags : UInt32
+    @lpVtbl.value.get_creation_flags.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device_removed_reason : HRESULT
+    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_immediate_context(ppimmediatecontext : ID3D11DeviceContext*) : Void
+    @lpVtbl.value.get_immediate_context.unsafe_as(Proc(ID3D11DeviceContext*, Void)).call(ppimmediatecontext)
+  end
+  def set_exception_mode(raiseflags : UInt32) : HRESULT
+    @lpVtbl.value.set_exception_mode.unsafe_as(Proc(UInt32, HRESULT)).call(raiseflags)
+  end
+  def get_exception_mode : UInt32
+    @lpVtbl.value.get_exception_mode.unsafe_as(Proc(UInt32)).call
+  end
+  def get_immediate_context1(ppimmediatecontext : ID3D11DeviceContext1*) : Void
+    @lpVtbl.value.get_immediate_context1.unsafe_as(Proc(ID3D11DeviceContext1*, Void)).call(ppimmediatecontext)
+  end
+  def create_deferred_context1(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_deferred_context1.unsafe_as(Proc(UInt32, ID3D11DeviceContext1*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def create_blend_state1(pblendstatedesc : D3D11_BLEND_DESC1*, ppblendstate : ID3D11BlendState1*) : HRESULT
+    @lpVtbl.value.create_blend_state1.unsafe_as(Proc(D3D11_BLEND_DESC1*, ID3D11BlendState1*, HRESULT)).call(pblendstatedesc, ppblendstate)
+  end
+  def create_rasterizer_state1(prasterizerdesc : D3D11_RASTERIZER_DESC1*, pprasterizerstate : ID3D11RasterizerState1*) : HRESULT
+    @lpVtbl.value.create_rasterizer_state1.unsafe_as(Proc(D3D11_RASTERIZER_DESC1*, ID3D11RasterizerState1*, HRESULT)).call(prasterizerdesc, pprasterizerstate)
+  end
+  def create_device_context_state(flags : UInt32, pfeaturelevels : D3D_FEATURE_LEVEL*, featurelevels : UInt32, sdkversion : UInt32, emulatedinterface : Guid*, pchosenfeaturelevel : D3D_FEATURE_LEVEL*, ppcontextstate : ID3DDeviceContextState*) : HRESULT
+    @lpVtbl.value.create_device_context_state.unsafe_as(Proc(UInt32, D3D_FEATURE_LEVEL*, UInt32, UInt32, Guid*, D3D_FEATURE_LEVEL*, ID3DDeviceContextState*, HRESULT)).call(flags, pfeaturelevels, featurelevels, sdkversion, emulatedinterface, pchosenfeaturelevel, ppcontextstate)
+  end
+  def open_shared_resource1(hresource : LibC::HANDLE, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource1.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hresource, returnedinterface, ppresource)
+  end
+  def open_shared_resource_by_name(lpname : LibC::LPWSTR, dwdesiredaccess : UInt32, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource_by_name.unsafe_as(Proc(LibC::LPWSTR, UInt32, Guid*, Void**, HRESULT)).call(lpname, dwdesiredaccess, returnedinterface, ppresource)
+  end
+end
+struct LibWin32::ID3DUserDefinedAnnotation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_event(name : LibC::LPWSTR) : Int32
+    @lpVtbl.value.begin_event.unsafe_as(Proc(LibC::LPWSTR, Int32)).call(name)
+  end
+  def end_event : Int32
+    @lpVtbl.value.end_event.unsafe_as(Proc(Int32)).call
+  end
+  def set_marker(name : LibC::LPWSTR) : Void
+    @lpVtbl.value.set_marker.unsafe_as(Proc(LibC::LPWSTR, Void)).call(name)
+  end
+  def get_status : LibC::BOOL
+    @lpVtbl.value.get_status.unsafe_as(Proc(LibC::BOOL)).call
+  end
+end
+struct LibWin32::ID3D11DeviceContext2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def vs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.vs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ps_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ps_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ps_set_shader(ppixelshader : ID3D11PixelShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.ps_set_shader.unsafe_as(Proc(ID3D11PixelShader, ID3D11ClassInstance*, UInt32, Void)).call(ppixelshader, ppclassinstances, numclassinstances)
+  end
+  def ps_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ps_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def vs_set_shader(pvertexshader : ID3D11VertexShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.vs_set_shader.unsafe_as(Proc(ID3D11VertexShader, ID3D11ClassInstance*, UInt32, Void)).call(pvertexshader, ppclassinstances, numclassinstances)
+  end
+  def draw_indexed(indexcount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32) : Void
+    @lpVtbl.value.draw_indexed.unsafe_as(Proc(UInt32, UInt32, Int32, Void)).call(indexcount, startindexlocation, basevertexlocation)
+  end
+  def draw(vertexcount : UInt32, startvertexlocation : UInt32) : Void
+    @lpVtbl.value.draw.unsafe_as(Proc(UInt32, UInt32, Void)).call(vertexcount, startvertexlocation)
+  end
+  def map(presource : ID3D11Resource, subresource : UInt32, maptype : D3D11_MAP, mapflags : UInt32, pmappedresource : D3D11_MAPPED_SUBRESOURCE*) : HRESULT
+    @lpVtbl.value.map.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_MAP, UInt32, D3D11_MAPPED_SUBRESOURCE*, HRESULT)).call(presource, subresource, maptype, mapflags, pmappedresource)
+  end
+  def unmap(presource : ID3D11Resource, subresource : UInt32) : Void
+    @lpVtbl.value.unmap.unsafe_as(Proc(ID3D11Resource, UInt32, Void)).call(presource, subresource)
+  end
+  def ps_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ps_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ia_set_input_layout(pinputlayout : ID3D11InputLayout) : Void
+    @lpVtbl.value.ia_set_input_layout.unsafe_as(Proc(ID3D11InputLayout, Void)).call(pinputlayout)
+  end
+  def ia_set_vertex_buffers(startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D11Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
+    @lpVtbl.value.ia_set_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
+  end
+  def ia_set_index_buffer(pindexbuffer : ID3D11Buffer, format : DXGI_FORMAT, offset : UInt32) : Void
+    @lpVtbl.value.ia_set_index_buffer.unsafe_as(Proc(ID3D11Buffer, DXGI_FORMAT, UInt32, Void)).call(pindexbuffer, format, offset)
+  end
+  def draw_indexed_instanced(indexcountperinstance : UInt32, instancecount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, Int32, UInt32, Void)).call(indexcountperinstance, instancecount, startindexlocation, basevertexlocation, startinstancelocation)
+  end
+  def draw_instanced(vertexcountperinstance : UInt32, instancecount : UInt32, startvertexlocation : UInt32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, Void)).call(vertexcountperinstance, instancecount, startvertexlocation, startinstancelocation)
+  end
+  def gs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.gs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def gs_set_shader(pshader : ID3D11GeometryShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.gs_set_shader.unsafe_as(Proc(ID3D11GeometryShader, ID3D11ClassInstance*, UInt32, Void)).call(pshader, ppclassinstances, numclassinstances)
+  end
+  def ia_set_primitive_topology(topology : D3D_PRIMITIVE_TOPOLOGY) : Void
+    @lpVtbl.value.ia_set_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY, Void)).call(topology)
+  end
+  def vs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.vs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def vs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.vs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def begin_(pasync : ID3D11Asynchronous) : Void
+    @lpVtbl.value.begin_.unsafe_as(Proc(ID3D11Asynchronous, Void)).call(pasync)
+  end
+  def end_(pasync : ID3D11Asynchronous) : Void
+    @lpVtbl.value.end_.unsafe_as(Proc(ID3D11Asynchronous, Void)).call(pasync)
+  end
+  def get_data(pasync : ID3D11Asynchronous, pdata : Void*, datasize : UInt32, getdataflags : UInt32) : HRESULT
+    @lpVtbl.value.get_data.unsafe_as(Proc(ID3D11Asynchronous, Void*, UInt32, UInt32, HRESULT)).call(pasync, pdata, datasize, getdataflags)
+  end
+  def set_predication(ppredicate : ID3D11Predicate, predicatevalue : LibC::BOOL) : Void
+    @lpVtbl.value.set_predication.unsafe_as(Proc(ID3D11Predicate, LibC::BOOL, Void)).call(ppredicate, predicatevalue)
+  end
+  def gs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.gs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def gs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.gs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def om_set_render_targets(numviews : UInt32, pprendertargetviews : ID3D11RenderTargetView*, pdepthstencilview : ID3D11DepthStencilView) : Void
+    @lpVtbl.value.om_set_render_targets.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, Void)).call(numviews, pprendertargetviews, pdepthstencilview)
+  end
+  def om_set_render_targets_and_unordered_access_views(numrtvs : UInt32, pprendertargetviews : ID3D11RenderTargetView*, pdepthstencilview : ID3D11DepthStencilView, uavstartslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*, puavinitialcounts : UInt32*) : Void
+    @lpVtbl.value.om_set_render_targets_and_unordered_access_views.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)).call(numrtvs, pprendertargetviews, pdepthstencilview, uavstartslot, numuavs, ppunorderedaccessviews, puavinitialcounts)
+  end
+  def om_set_blend_state(pblendstate : ID3D11BlendState, blendfactor : Float32*, samplemask : UInt32) : Void
+    @lpVtbl.value.om_set_blend_state.unsafe_as(Proc(ID3D11BlendState, Float32*, UInt32, Void)).call(pblendstate, blendfactor, samplemask)
+  end
+  def om_set_depth_stencil_state(pdepthstencilstate : ID3D11DepthStencilState, stencilref : UInt32) : Void
+    @lpVtbl.value.om_set_depth_stencil_state.unsafe_as(Proc(ID3D11DepthStencilState, UInt32, Void)).call(pdepthstencilstate, stencilref)
+  end
+  def so_set_targets(numbuffers : UInt32, ppsotargets : ID3D11Buffer*, poffsets : UInt32*) : Void
+    @lpVtbl.value.so_set_targets.unsafe_as(Proc(UInt32, ID3D11Buffer*, UInt32*, Void)).call(numbuffers, ppsotargets, poffsets)
+  end
+  def draw_auto : Void
+    @lpVtbl.value.draw_auto.unsafe_as(Proc(Void)).call
+  end
+  def draw_indexed_instanced_indirect(pbufferforargs : ID3D11Buffer, alignedbyteoffsetforargs : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced_indirect.unsafe_as(Proc(ID3D11Buffer, UInt32, Void)).call(pbufferforargs, alignedbyteoffsetforargs)
+  end
+  def draw_instanced_indirect(pbufferforargs : ID3D11Buffer, alignedbyteoffsetforargs : UInt32) : Void
+    @lpVtbl.value.draw_instanced_indirect.unsafe_as(Proc(ID3D11Buffer, UInt32, Void)).call(pbufferforargs, alignedbyteoffsetforargs)
+  end
+  def dispatch(threadgroupcountx : UInt32, threadgroupcounty : UInt32, threadgroupcountz : UInt32) : Void
+    @lpVtbl.value.dispatch.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(threadgroupcountx, threadgroupcounty, threadgroupcountz)
+  end
+  def dispatch_indirect(pbufferforargs : ID3D11Buffer, alignedbyteoffsetforargs : UInt32) : Void
+    @lpVtbl.value.dispatch_indirect.unsafe_as(Proc(ID3D11Buffer, UInt32, Void)).call(pbufferforargs, alignedbyteoffsetforargs)
+  end
+  def rs_set_state(prasterizerstate : ID3D11RasterizerState) : Void
+    @lpVtbl.value.rs_set_state.unsafe_as(Proc(ID3D11RasterizerState, Void)).call(prasterizerstate)
+  end
+  def rs_set_viewports(numviewports : UInt32, pviewports : D3D11_VIEWPORT*) : Void
+    @lpVtbl.value.rs_set_viewports.unsafe_as(Proc(UInt32, D3D11_VIEWPORT*, Void)).call(numviewports, pviewports)
+  end
+  def rs_set_scissor_rects(numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.rs_set_scissor_rects.unsafe_as(Proc(UInt32, RECT*, Void)).call(numrects, prects)
+  end
+  def copy_subresource_region(pdstresource : ID3D11Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, psrcbox : D3D11_BOX*) : Void
+    @lpVtbl.value.copy_subresource_region.unsafe_as(Proc(ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)).call(pdstresource, dstsubresource, dstx, dsty, dstz, psrcresource, srcsubresource, psrcbox)
+  end
+  def copy_resource(pdstresource : ID3D11Resource, psrcresource : ID3D11Resource) : Void
+    @lpVtbl.value.copy_resource.unsafe_as(Proc(ID3D11Resource, ID3D11Resource, Void)).call(pdstresource, psrcresource)
+  end
+  def update_subresource(pdstresource : ID3D11Resource, dstsubresource : UInt32, pdstbox : D3D11_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32) : Void
+    @lpVtbl.value.update_subresource.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, Void)).call(pdstresource, dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch)
+  end
+  def copy_structure_count(pdstbuffer : ID3D11Buffer, dstalignedbyteoffset : UInt32, psrcview : ID3D11UnorderedAccessView) : Void
+    @lpVtbl.value.copy_structure_count.unsafe_as(Proc(ID3D11Buffer, UInt32, ID3D11UnorderedAccessView, Void)).call(pdstbuffer, dstalignedbyteoffset, psrcview)
+  end
+  def clear_render_target_view(prendertargetview : ID3D11RenderTargetView, colorrgba : Float32*) : Void
+    @lpVtbl.value.clear_render_target_view.unsafe_as(Proc(ID3D11RenderTargetView, Float32*, Void)).call(prendertargetview, colorrgba)
+  end
+  def clear_unordered_access_view_uint(punorderedaccessview : ID3D11UnorderedAccessView, values : UInt32*) : Void
+    @lpVtbl.value.clear_unordered_access_view_uint.unsafe_as(Proc(ID3D11UnorderedAccessView, UInt32*, Void)).call(punorderedaccessview, values)
+  end
+  def clear_unordered_access_view_float(punorderedaccessview : ID3D11UnorderedAccessView, values : Float32*) : Void
+    @lpVtbl.value.clear_unordered_access_view_float.unsafe_as(Proc(ID3D11UnorderedAccessView, Float32*, Void)).call(punorderedaccessview, values)
+  end
+  def clear_depth_stencil_view(pdepthstencilview : ID3D11DepthStencilView, clearflags : UInt32, depth : Float32, stencil : UInt8) : Void
+    @lpVtbl.value.clear_depth_stencil_view.unsafe_as(Proc(ID3D11DepthStencilView, UInt32, Float32, UInt8, Void)).call(pdepthstencilview, clearflags, depth, stencil)
+  end
+  def generate_mips(pshaderresourceview : ID3D11ShaderResourceView) : Void
+    @lpVtbl.value.generate_mips.unsafe_as(Proc(ID3D11ShaderResourceView, Void)).call(pshaderresourceview)
+  end
+  def set_resource_min_lod(presource : ID3D11Resource, minlod : Float32) : Void
+    @lpVtbl.value.set_resource_min_lod.unsafe_as(Proc(ID3D11Resource, Float32, Void)).call(presource, minlod)
+  end
+  def get_resource_min_lod(presource : ID3D11Resource) : Float32
+    @lpVtbl.value.get_resource_min_lod.unsafe_as(Proc(ID3D11Resource, Float32)).call(presource)
+  end
+  def resolve_subresource(pdstresource : ID3D11Resource, dstsubresource : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, format : DXGI_FORMAT) : Void
+    @lpVtbl.value.resolve_subresource.unsafe_as(Proc(ID3D11Resource, UInt32, ID3D11Resource, UInt32, DXGI_FORMAT, Void)).call(pdstresource, dstsubresource, psrcresource, srcsubresource, format)
+  end
+  def execute_command_list(pcommandlist : ID3D11CommandList, restorecontextstate : LibC::BOOL) : Void
+    @lpVtbl.value.execute_command_list.unsafe_as(Proc(ID3D11CommandList, LibC::BOOL, Void)).call(pcommandlist, restorecontextstate)
+  end
+  def hs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.hs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def hs_set_shader(phullshader : ID3D11HullShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.hs_set_shader.unsafe_as(Proc(ID3D11HullShader, ID3D11ClassInstance*, UInt32, Void)).call(phullshader, ppclassinstances, numclassinstances)
+  end
+  def hs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.hs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def hs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.hs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ds_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ds_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ds_set_shader(pdomainshader : ID3D11DomainShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.ds_set_shader.unsafe_as(Proc(ID3D11DomainShader, ID3D11ClassInstance*, UInt32, Void)).call(pdomainshader, ppclassinstances, numclassinstances)
+  end
+  def ds_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ds_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def ds_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ds_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def cs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.cs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def cs_set_unordered_access_views(startslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*, puavinitialcounts : UInt32*) : Void
+    @lpVtbl.value.cs_set_unordered_access_views.unsafe_as(Proc(UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)).call(startslot, numuavs, ppunorderedaccessviews, puavinitialcounts)
+  end
+  def cs_set_shader(pcomputeshader : ID3D11ComputeShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.cs_set_shader.unsafe_as(Proc(ID3D11ComputeShader, ID3D11ClassInstance*, UInt32, Void)).call(pcomputeshader, ppclassinstances, numclassinstances)
+  end
+  def cs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.cs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def cs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.cs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def vs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.vs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ps_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ps_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ps_get_shader(pppixelshader : ID3D11PixelShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.ps_get_shader.unsafe_as(Proc(ID3D11PixelShader*, ID3D11ClassInstance*, UInt32*, Void)).call(pppixelshader, ppclassinstances, pnumclassinstances)
+  end
+  def ps_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ps_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def vs_get_shader(ppvertexshader : ID3D11VertexShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.vs_get_shader.unsafe_as(Proc(ID3D11VertexShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppvertexshader, ppclassinstances, pnumclassinstances)
+  end
+  def ps_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ps_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ia_get_input_layout(ppinputlayout : ID3D11InputLayout*) : Void
+    @lpVtbl.value.ia_get_input_layout.unsafe_as(Proc(ID3D11InputLayout*, Void)).call(ppinputlayout)
+  end
+  def ia_get_vertex_buffers(startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D11Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
+    @lpVtbl.value.ia_get_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
+  end
+  def ia_get_index_buffer(pindexbuffer : ID3D11Buffer*, format : DXGI_FORMAT*, offset : UInt32*) : Void
+    @lpVtbl.value.ia_get_index_buffer.unsafe_as(Proc(ID3D11Buffer*, DXGI_FORMAT*, UInt32*, Void)).call(pindexbuffer, format, offset)
+  end
+  def gs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.gs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def gs_get_shader(ppgeometryshader : ID3D11GeometryShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.gs_get_shader.unsafe_as(Proc(ID3D11GeometryShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppgeometryshader, ppclassinstances, pnumclassinstances)
+  end
+  def ia_get_primitive_topology(ptopology : D3D_PRIMITIVE_TOPOLOGY*) : Void
+    @lpVtbl.value.ia_get_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY*, Void)).call(ptopology)
+  end
+  def vs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.vs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def vs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.vs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def get_predication(pppredicate : ID3D11Predicate*, ppredicatevalue : LibC::BOOL*) : Void
+    @lpVtbl.value.get_predication.unsafe_as(Proc(ID3D11Predicate*, LibC::BOOL*, Void)).call(pppredicate, ppredicatevalue)
+  end
+  def gs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.gs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def gs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.gs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def om_get_render_targets(numviews : UInt32, pprendertargetviews : ID3D11RenderTargetView*, ppdepthstencilview : ID3D11DepthStencilView*) : Void
+    @lpVtbl.value.om_get_render_targets.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, Void)).call(numviews, pprendertargetviews, ppdepthstencilview)
+  end
+  def om_get_render_targets_and_unordered_access_views(numrtvs : UInt32, pprendertargetviews : ID3D11RenderTargetView*, ppdepthstencilview : ID3D11DepthStencilView*, uavstartslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*) : Void
+    @lpVtbl.value.om_get_render_targets_and_unordered_access_views.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, UInt32, UInt32, ID3D11UnorderedAccessView*, Void)).call(numrtvs, pprendertargetviews, ppdepthstencilview, uavstartslot, numuavs, ppunorderedaccessviews)
+  end
+  def om_get_blend_state(ppblendstate : ID3D11BlendState*, blendfactor : Float32*, psamplemask : UInt32*) : Void
+    @lpVtbl.value.om_get_blend_state.unsafe_as(Proc(ID3D11BlendState*, Float32*, UInt32*, Void)).call(ppblendstate, blendfactor, psamplemask)
+  end
+  def om_get_depth_stencil_state(ppdepthstencilstate : ID3D11DepthStencilState*, pstencilref : UInt32*) : Void
+    @lpVtbl.value.om_get_depth_stencil_state.unsafe_as(Proc(ID3D11DepthStencilState*, UInt32*, Void)).call(ppdepthstencilstate, pstencilref)
+  end
+  def so_get_targets(numbuffers : UInt32, ppsotargets : ID3D11Buffer*) : Void
+    @lpVtbl.value.so_get_targets.unsafe_as(Proc(UInt32, ID3D11Buffer*, Void)).call(numbuffers, ppsotargets)
+  end
+  def rs_get_state(pprasterizerstate : ID3D11RasterizerState*) : Void
+    @lpVtbl.value.rs_get_state.unsafe_as(Proc(ID3D11RasterizerState*, Void)).call(pprasterizerstate)
+  end
+  def rs_get_viewports(pnumviewports : UInt32*, pviewports : D3D11_VIEWPORT*) : Void
+    @lpVtbl.value.rs_get_viewports.unsafe_as(Proc(UInt32*, D3D11_VIEWPORT*, Void)).call(pnumviewports, pviewports)
+  end
+  def rs_get_scissor_rects(pnumrects : UInt32*, prects : RECT*) : Void
+    @lpVtbl.value.rs_get_scissor_rects.unsafe_as(Proc(UInt32*, RECT*, Void)).call(pnumrects, prects)
+  end
+  def hs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.hs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def hs_get_shader(pphullshader : ID3D11HullShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.hs_get_shader.unsafe_as(Proc(ID3D11HullShader*, ID3D11ClassInstance*, UInt32*, Void)).call(pphullshader, ppclassinstances, pnumclassinstances)
+  end
+  def hs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.hs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def hs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.hs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ds_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ds_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ds_get_shader(ppdomainshader : ID3D11DomainShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.ds_get_shader.unsafe_as(Proc(ID3D11DomainShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppdomainshader, ppclassinstances, pnumclassinstances)
+  end
+  def ds_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ds_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def ds_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ds_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def cs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.cs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def cs_get_unordered_access_views(startslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*) : Void
+    @lpVtbl.value.cs_get_unordered_access_views.unsafe_as(Proc(UInt32, UInt32, ID3D11UnorderedAccessView*, Void)).call(startslot, numuavs, ppunorderedaccessviews)
+  end
+  def cs_get_shader(ppcomputeshader : ID3D11ComputeShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.cs_get_shader.unsafe_as(Proc(ID3D11ComputeShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppcomputeshader, ppclassinstances, pnumclassinstances)
+  end
+  def cs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.cs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def cs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.cs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def clear_state : Void
+    @lpVtbl.value.clear_state.unsafe_as(Proc(Void)).call
+  end
+  def flush : Void
+    @lpVtbl.value.flush.unsafe_as(Proc(Void)).call
+  end
+  def get_type : D3D11_DEVICE_CONTEXT_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D11_DEVICE_CONTEXT_TYPE)).call
+  end
+  def get_context_flags : UInt32
+    @lpVtbl.value.get_context_flags.unsafe_as(Proc(UInt32)).call
+  end
+  def finish_command_list(restoredeferredcontextstate : LibC::BOOL, ppcommandlist : ID3D11CommandList*) : HRESULT
+    @lpVtbl.value.finish_command_list.unsafe_as(Proc(LibC::BOOL, ID3D11CommandList*, HRESULT)).call(restoredeferredcontextstate, ppcommandlist)
+  end
+  def copy_subresource_region1(pdstresource : ID3D11Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, psrcbox : D3D11_BOX*, copyflags : UInt32) : Void
+    @lpVtbl.value.copy_subresource_region1.unsafe_as(Proc(ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, UInt32, Void)).call(pdstresource, dstsubresource, dstx, dsty, dstz, psrcresource, srcsubresource, psrcbox, copyflags)
+  end
+  def update_subresource1(pdstresource : ID3D11Resource, dstsubresource : UInt32, pdstbox : D3D11_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32, copyflags : UInt32) : Void
+    @lpVtbl.value.update_subresource1.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, UInt32, Void)).call(pdstresource, dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch, copyflags)
+  end
+  def discard_resource(presource : ID3D11Resource) : Void
+    @lpVtbl.value.discard_resource.unsafe_as(Proc(ID3D11Resource, Void)).call(presource)
+  end
+  def discard_view(presourceview : ID3D11View) : Void
+    @lpVtbl.value.discard_view.unsafe_as(Proc(ID3D11View, Void)).call(presourceview)
+  end
+  def vs_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.vs_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def hs_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.hs_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def ds_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.ds_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def gs_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.gs_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def ps_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.ps_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def cs_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.cs_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def vs_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.vs_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def hs_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.hs_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def ds_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.ds_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def gs_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.gs_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def ps_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.ps_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def cs_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.cs_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def swap_device_context_state(pstate : ID3DDeviceContextState, pppreviousstate : ID3DDeviceContextState*) : Void
+    @lpVtbl.value.swap_device_context_state.unsafe_as(Proc(ID3DDeviceContextState, ID3DDeviceContextState*, Void)).call(pstate, pppreviousstate)
+  end
+  def clear_view(pview : ID3D11View, color : Float32*, prect : RECT*, numrects : UInt32) : Void
+    @lpVtbl.value.clear_view.unsafe_as(Proc(ID3D11View, Float32*, RECT*, UInt32, Void)).call(pview, color, prect, numrects)
+  end
+  def discard_view1(presourceview : ID3D11View, prects : RECT*, numrects : UInt32) : Void
+    @lpVtbl.value.discard_view1.unsafe_as(Proc(ID3D11View, RECT*, UInt32, Void)).call(presourceview, prects, numrects)
+  end
+  def update_tile_mappings(ptiledresource : ID3D11Resource, numtiledresourceregions : UInt32, ptiledresourceregionstartcoordinates : D3D11_TILED_RESOURCE_COORDINATE*, ptiledresourceregionsizes : D3D11_TILE_REGION_SIZE*, ptilepool : ID3D11Buffer, numranges : UInt32, prangeflags : UInt32*, ptilepoolstartoffsets : UInt32*, prangetilecounts : UInt32*, flags : UInt32) : HRESULT
+    @lpVtbl.value.update_tile_mappings.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, ID3D11Buffer, UInt32, UInt32*, UInt32*, UInt32*, UInt32, HRESULT)).call(ptiledresource, numtiledresourceregions, ptiledresourceregionstartcoordinates, ptiledresourceregionsizes, ptilepool, numranges, prangeflags, ptilepoolstartoffsets, prangetilecounts, flags)
+  end
+  def copy_tile_mappings(pdesttiledresource : ID3D11Resource, pdestregionstartcoordinate : D3D11_TILED_RESOURCE_COORDINATE*, psourcetiledresource : ID3D11Resource, psourceregionstartcoordinate : D3D11_TILED_RESOURCE_COORDINATE*, ptileregionsize : D3D11_TILE_REGION_SIZE*, flags : UInt32) : HRESULT
+    @lpVtbl.value.copy_tile_mappings.unsafe_as(Proc(ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, UInt32, HRESULT)).call(pdesttiledresource, pdestregionstartcoordinate, psourcetiledresource, psourceregionstartcoordinate, ptileregionsize, flags)
+  end
+  def copy_tiles(ptiledresource : ID3D11Resource, ptileregionstartcoordinate : D3D11_TILED_RESOURCE_COORDINATE*, ptileregionsize : D3D11_TILE_REGION_SIZE*, pbuffer : ID3D11Buffer, bufferstartoffsetinbytes : UInt64, flags : UInt32) : Void
+    @lpVtbl.value.copy_tiles.unsafe_as(Proc(ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, ID3D11Buffer, UInt64, UInt32, Void)).call(ptiledresource, ptileregionstartcoordinate, ptileregionsize, pbuffer, bufferstartoffsetinbytes, flags)
+  end
+  def update_tiles(pdesttiledresource : ID3D11Resource, pdesttileregionstartcoordinate : D3D11_TILED_RESOURCE_COORDINATE*, pdesttileregionsize : D3D11_TILE_REGION_SIZE*, psourcetiledata : Void*, flags : UInt32) : Void
+    @lpVtbl.value.update_tiles.unsafe_as(Proc(ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, Void*, UInt32, Void)).call(pdesttiledresource, pdesttileregionstartcoordinate, pdesttileregionsize, psourcetiledata, flags)
+  end
+  def resize_tile_pool(ptilepool : ID3D11Buffer, newsizeinbytes : UInt64) : HRESULT
+    @lpVtbl.value.resize_tile_pool.unsafe_as(Proc(ID3D11Buffer, UInt64, HRESULT)).call(ptilepool, newsizeinbytes)
+  end
+  def tiled_resource_barrier(ptiledresourceorviewaccessbeforebarrier : ID3D11DeviceChild, ptiledresourceorviewaccessafterbarrier : ID3D11DeviceChild) : Void
+    @lpVtbl.value.tiled_resource_barrier.unsafe_as(Proc(ID3D11DeviceChild, ID3D11DeviceChild, Void)).call(ptiledresourceorviewaccessbeforebarrier, ptiledresourceorviewaccessafterbarrier)
+  end
+  def is_annotation_enabled : LibC::BOOL
+    @lpVtbl.value.is_annotation_enabled.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def set_marker_int(plabel : LibC::LPWSTR, data : Int32) : Void
+    @lpVtbl.value.set_marker_int.unsafe_as(Proc(LibC::LPWSTR, Int32, Void)).call(plabel, data)
+  end
+  def begin_event_int(plabel : LibC::LPWSTR, data : Int32) : Void
+    @lpVtbl.value.begin_event_int.unsafe_as(Proc(LibC::LPWSTR, Int32, Void)).call(plabel, data)
+  end
+  def end_event : Void
+    @lpVtbl.value.end_event.unsafe_as(Proc(Void)).call
+  end
+end
+struct LibWin32::ID3D11Device2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_buffer(pdesc : D3D11_BUFFER_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, ppbuffer : ID3D11Buffer*) : HRESULT
+    @lpVtbl.value.create_buffer.unsafe_as(Proc(D3D11_BUFFER_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Buffer*, HRESULT)).call(pdesc, pinitialdata, ppbuffer)
+  end
+  def create_texture1_d(pdesc : D3D11_TEXTURE1D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture1d : ID3D11Texture1D*) : HRESULT
+    @lpVtbl.value.create_texture1_d.unsafe_as(Proc(D3D11_TEXTURE1D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture1D*, HRESULT)).call(pdesc, pinitialdata, pptexture1d)
+  end
+  def create_texture2_d(pdesc : D3D11_TEXTURE2D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture2d : ID3D11Texture2D*) : HRESULT
+    @lpVtbl.value.create_texture2_d.unsafe_as(Proc(D3D11_TEXTURE2D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D*, HRESULT)).call(pdesc, pinitialdata, pptexture2d)
+  end
+  def create_texture3_d(pdesc : D3D11_TEXTURE3D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture3d : ID3D11Texture3D*) : HRESULT
+    @lpVtbl.value.create_texture3_d.unsafe_as(Proc(D3D11_TEXTURE3D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D*, HRESULT)).call(pdesc, pinitialdata, pptexture3d)
+  end
+  def create_shader_resource_view(presource : ID3D11Resource, pdesc : D3D11_SHADER_RESOURCE_VIEW_DESC*, ppsrview : ID3D11ShaderResourceView*) : HRESULT
+    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC*, ID3D11ShaderResourceView*, HRESULT)).call(presource, pdesc, ppsrview)
+  end
+  def create_unordered_access_view(presource : ID3D11Resource, pdesc : D3D11_UNORDERED_ACCESS_VIEW_DESC*, ppuaview : ID3D11UnorderedAccessView*) : HRESULT
+    @lpVtbl.value.create_unordered_access_view.unsafe_as(Proc(ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC*, ID3D11UnorderedAccessView*, HRESULT)).call(presource, pdesc, ppuaview)
+  end
+  def create_render_target_view(presource : ID3D11Resource, pdesc : D3D11_RENDER_TARGET_VIEW_DESC*, pprtview : ID3D11RenderTargetView*) : HRESULT
+    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC*, ID3D11RenderTargetView*, HRESULT)).call(presource, pdesc, pprtview)
+  end
+  def create_depth_stencil_view(presource : ID3D11Resource, pdesc : D3D11_DEPTH_STENCIL_VIEW_DESC*, ppdepthstencilview : ID3D11DepthStencilView*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D11Resource, D3D11_DEPTH_STENCIL_VIEW_DESC*, ID3D11DepthStencilView*, HRESULT)).call(presource, pdesc, ppdepthstencilview)
+  end
+  def create_input_layout(pinputelementdescs : D3D11_INPUT_ELEMENT_DESC*, numelements : UInt32, pshaderbytecodewithinputsignature : Void*, bytecodelength : LibC::UINT_PTR, ppinputlayout : ID3D11InputLayout*) : HRESULT
+    @lpVtbl.value.create_input_layout.unsafe_as(Proc(D3D11_INPUT_ELEMENT_DESC*, UInt32, Void*, LibC::UINT_PTR, ID3D11InputLayout*, HRESULT)).call(pinputelementdescs, numelements, pshaderbytecodewithinputsignature, bytecodelength, ppinputlayout)
+  end
+  def create_vertex_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppvertexshader : ID3D11VertexShader*) : HRESULT
+    @lpVtbl.value.create_vertex_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11VertexShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppvertexshader)
+  end
+  def create_geometry_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppgeometryshader : ID3D11GeometryShader*) : HRESULT
+    @lpVtbl.value.create_geometry_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppgeometryshader)
+  end
+  def create_geometry_shader_with_stream_output(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, psodeclaration : D3D11_SO_DECLARATION_ENTRY*, numentries : UInt32, pbufferstrides : UInt32*, numstrides : UInt32, rasterizedstream : UInt32, pclasslinkage : ID3D11ClassLinkage, ppgeometryshader : ID3D11GeometryShader*) : HRESULT
+    @lpVtbl.value.create_geometry_shader_with_stream_output.unsafe_as(Proc(Void*, LibC::UINT_PTR, D3D11_SO_DECLARATION_ENTRY*, UInt32, UInt32*, UInt32, UInt32, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)).call(pshaderbytecode, bytecodelength, psodeclaration, numentries, pbufferstrides, numstrides, rasterizedstream, pclasslinkage, ppgeometryshader)
+  end
+  def create_pixel_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, pppixelshader : ID3D11PixelShader*) : HRESULT
+    @lpVtbl.value.create_pixel_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11PixelShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, pppixelshader)
+  end
+  def create_hull_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, pphullshader : ID3D11HullShader*) : HRESULT
+    @lpVtbl.value.create_hull_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11HullShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, pphullshader)
+  end
+  def create_domain_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppdomainshader : ID3D11DomainShader*) : HRESULT
+    @lpVtbl.value.create_domain_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11DomainShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppdomainshader)
+  end
+  def create_compute_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppcomputeshader : ID3D11ComputeShader*) : HRESULT
+    @lpVtbl.value.create_compute_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11ComputeShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppcomputeshader)
+  end
+  def create_class_linkage(pplinkage : ID3D11ClassLinkage*) : HRESULT
+    @lpVtbl.value.create_class_linkage.unsafe_as(Proc(ID3D11ClassLinkage*, HRESULT)).call(pplinkage)
+  end
+  def create_blend_state(pblendstatedesc : D3D11_BLEND_DESC*, ppblendstate : ID3D11BlendState*) : HRESULT
+    @lpVtbl.value.create_blend_state.unsafe_as(Proc(D3D11_BLEND_DESC*, ID3D11BlendState*, HRESULT)).call(pblendstatedesc, ppblendstate)
+  end
+  def create_depth_stencil_state(pdepthstencildesc : D3D11_DEPTH_STENCIL_DESC*, ppdepthstencilstate : ID3D11DepthStencilState*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_state.unsafe_as(Proc(D3D11_DEPTH_STENCIL_DESC*, ID3D11DepthStencilState*, HRESULT)).call(pdepthstencildesc, ppdepthstencilstate)
+  end
+  def create_rasterizer_state(prasterizerdesc : D3D11_RASTERIZER_DESC*, pprasterizerstate : ID3D11RasterizerState*) : HRESULT
+    @lpVtbl.value.create_rasterizer_state.unsafe_as(Proc(D3D11_RASTERIZER_DESC*, ID3D11RasterizerState*, HRESULT)).call(prasterizerdesc, pprasterizerstate)
+  end
+  def create_sampler_state(psamplerdesc : D3D11_SAMPLER_DESC*, ppsamplerstate : ID3D11SamplerState*) : HRESULT
+    @lpVtbl.value.create_sampler_state.unsafe_as(Proc(D3D11_SAMPLER_DESC*, ID3D11SamplerState*, HRESULT)).call(psamplerdesc, ppsamplerstate)
+  end
+  def create_query(pquerydesc : D3D11_QUERY_DESC*, ppquery : ID3D11Query*) : HRESULT
+    @lpVtbl.value.create_query.unsafe_as(Proc(D3D11_QUERY_DESC*, ID3D11Query*, HRESULT)).call(pquerydesc, ppquery)
+  end
+  def create_predicate(ppredicatedesc : D3D11_QUERY_DESC*, pppredicate : ID3D11Predicate*) : HRESULT
+    @lpVtbl.value.create_predicate.unsafe_as(Proc(D3D11_QUERY_DESC*, ID3D11Predicate*, HRESULT)).call(ppredicatedesc, pppredicate)
+  end
+  def create_counter(pcounterdesc : D3D11_COUNTER_DESC*, ppcounter : ID3D11Counter*) : HRESULT
+    @lpVtbl.value.create_counter.unsafe_as(Proc(D3D11_COUNTER_DESC*, ID3D11Counter*, HRESULT)).call(pcounterdesc, ppcounter)
+  end
+  def create_deferred_context(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext*) : HRESULT
+    @lpVtbl.value.create_deferred_context.unsafe_as(Proc(UInt32, ID3D11DeviceContext*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def open_shared_resource(hresource : LibC::HANDLE, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hresource, returnedinterface, ppresource)
+  end
+  def check_format_support(format : DXGI_FORMAT, pformatsupport : UInt32*) : HRESULT
+    @lpVtbl.value.check_format_support.unsafe_as(Proc(DXGI_FORMAT, UInt32*, HRESULT)).call(format, pformatsupport)
+  end
+  def check_multisample_quality_levels(format : DXGI_FORMAT, samplecount : UInt32, pnumqualitylevels : UInt32*) : HRESULT
+    @lpVtbl.value.check_multisample_quality_levels.unsafe_as(Proc(DXGI_FORMAT, UInt32, UInt32*, HRESULT)).call(format, samplecount, pnumqualitylevels)
+  end
+  def check_counter_info(pcounterinfo : D3D11_COUNTER_INFO*) : Void
+    @lpVtbl.value.check_counter_info.unsafe_as(Proc(D3D11_COUNTER_INFO*, Void)).call(pcounterinfo)
+  end
+  def check_counter(pdesc : D3D11_COUNTER_DESC*, ptype : D3D11_COUNTER_TYPE*, pactivecounters : UInt32*, szname : UInt8*, pnamelength : UInt32*, szunits : UInt8*, punitslength : UInt32*, szdescription : UInt8*, pdescriptionlength : UInt32*) : HRESULT
+    @lpVtbl.value.check_counter.unsafe_as(Proc(D3D11_COUNTER_DESC*, D3D11_COUNTER_TYPE*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)).call(pdesc, ptype, pactivecounters, szname, pnamelength, szunits, punitslength, szdescription, pdescriptionlength)
+  end
+  def check_feature_support(feature : D3D11_FEATURE, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D11_FEATURE, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_feature_level : D3D_FEATURE_LEVEL
+    @lpVtbl.value.get_feature_level.unsafe_as(Proc(D3D_FEATURE_LEVEL)).call
+  end
+  def get_creation_flags : UInt32
+    @lpVtbl.value.get_creation_flags.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device_removed_reason : HRESULT
+    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_immediate_context(ppimmediatecontext : ID3D11DeviceContext*) : Void
+    @lpVtbl.value.get_immediate_context.unsafe_as(Proc(ID3D11DeviceContext*, Void)).call(ppimmediatecontext)
+  end
+  def set_exception_mode(raiseflags : UInt32) : HRESULT
+    @lpVtbl.value.set_exception_mode.unsafe_as(Proc(UInt32, HRESULT)).call(raiseflags)
+  end
+  def get_exception_mode : UInt32
+    @lpVtbl.value.get_exception_mode.unsafe_as(Proc(UInt32)).call
+  end
+  def get_immediate_context1(ppimmediatecontext : ID3D11DeviceContext1*) : Void
+    @lpVtbl.value.get_immediate_context1.unsafe_as(Proc(ID3D11DeviceContext1*, Void)).call(ppimmediatecontext)
+  end
+  def create_deferred_context1(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_deferred_context1.unsafe_as(Proc(UInt32, ID3D11DeviceContext1*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def create_blend_state1(pblendstatedesc : D3D11_BLEND_DESC1*, ppblendstate : ID3D11BlendState1*) : HRESULT
+    @lpVtbl.value.create_blend_state1.unsafe_as(Proc(D3D11_BLEND_DESC1*, ID3D11BlendState1*, HRESULT)).call(pblendstatedesc, ppblendstate)
+  end
+  def create_rasterizer_state1(prasterizerdesc : D3D11_RASTERIZER_DESC1*, pprasterizerstate : ID3D11RasterizerState1*) : HRESULT
+    @lpVtbl.value.create_rasterizer_state1.unsafe_as(Proc(D3D11_RASTERIZER_DESC1*, ID3D11RasterizerState1*, HRESULT)).call(prasterizerdesc, pprasterizerstate)
+  end
+  def create_device_context_state(flags : UInt32, pfeaturelevels : D3D_FEATURE_LEVEL*, featurelevels : UInt32, sdkversion : UInt32, emulatedinterface : Guid*, pchosenfeaturelevel : D3D_FEATURE_LEVEL*, ppcontextstate : ID3DDeviceContextState*) : HRESULT
+    @lpVtbl.value.create_device_context_state.unsafe_as(Proc(UInt32, D3D_FEATURE_LEVEL*, UInt32, UInt32, Guid*, D3D_FEATURE_LEVEL*, ID3DDeviceContextState*, HRESULT)).call(flags, pfeaturelevels, featurelevels, sdkversion, emulatedinterface, pchosenfeaturelevel, ppcontextstate)
+  end
+  def open_shared_resource1(hresource : LibC::HANDLE, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource1.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hresource, returnedinterface, ppresource)
+  end
+  def open_shared_resource_by_name(lpname : LibC::LPWSTR, dwdesiredaccess : UInt32, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource_by_name.unsafe_as(Proc(LibC::LPWSTR, UInt32, Guid*, Void**, HRESULT)).call(lpname, dwdesiredaccess, returnedinterface, ppresource)
+  end
+  def get_immediate_context2(ppimmediatecontext : ID3D11DeviceContext2*) : Void
+    @lpVtbl.value.get_immediate_context2.unsafe_as(Proc(ID3D11DeviceContext2*, Void)).call(ppimmediatecontext)
+  end
+  def create_deferred_context2(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext2*) : HRESULT
+    @lpVtbl.value.create_deferred_context2.unsafe_as(Proc(UInt32, ID3D11DeviceContext2*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def get_resource_tiling(ptiledresource : ID3D11Resource, pnumtilesforentireresource : UInt32*, ppackedmipdesc : D3D11_PACKED_MIP_DESC*, pstandardtileshapefornonpackedmips : D3D11_TILE_SHAPE*, pnumsubresourcetilings : UInt32*, firstsubresourcetilingtoget : UInt32, psubresourcetilingsfornonpackedmips : D3D11_SUBRESOURCE_TILING*) : Void
+    @lpVtbl.value.get_resource_tiling.unsafe_as(Proc(ID3D11Resource, UInt32*, D3D11_PACKED_MIP_DESC*, D3D11_TILE_SHAPE*, UInt32*, UInt32, D3D11_SUBRESOURCE_TILING*, Void)).call(ptiledresource, pnumtilesforentireresource, ppackedmipdesc, pstandardtileshapefornonpackedmips, pnumsubresourcetilings, firstsubresourcetilingtoget, psubresourcetilingsfornonpackedmips)
+  end
+  def check_multisample_quality_levels1(format : DXGI_FORMAT, samplecount : UInt32, flags : UInt32, pnumqualitylevels : UInt32*) : HRESULT
+    @lpVtbl.value.check_multisample_quality_levels1.unsafe_as(Proc(DXGI_FORMAT, UInt32, UInt32, UInt32*, HRESULT)).call(format, samplecount, flags, pnumqualitylevels)
+  end
+end
+struct LibWin32::ID3D11Texture2D1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_type(presourcedimension : D3D11_RESOURCE_DIMENSION*) : Void
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D11_RESOURCE_DIMENSION*, Void)).call(presourcedimension)
+  end
+  def set_eviction_priority(evictionpriority : UInt32) : Void
+    @lpVtbl.value.set_eviction_priority.unsafe_as(Proc(UInt32, Void)).call(evictionpriority)
+  end
+  def get_eviction_priority : UInt32
+    @lpVtbl.value.get_eviction_priority.unsafe_as(Proc(UInt32)).call
+  end
+  def get_desc(pdesc : D3D11_TEXTURE2D_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_TEXTURE2D_DESC*, Void)).call(pdesc)
+  end
+  def get_desc1(pdesc : D3D11_TEXTURE2D_DESC1*) : Void
+    @lpVtbl.value.get_desc1.unsafe_as(Proc(D3D11_TEXTURE2D_DESC1*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11Texture3D1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_type(presourcedimension : D3D11_RESOURCE_DIMENSION*) : Void
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D11_RESOURCE_DIMENSION*, Void)).call(presourcedimension)
+  end
+  def set_eviction_priority(evictionpriority : UInt32) : Void
+    @lpVtbl.value.set_eviction_priority.unsafe_as(Proc(UInt32, Void)).call(evictionpriority)
+  end
+  def get_eviction_priority : UInt32
+    @lpVtbl.value.get_eviction_priority.unsafe_as(Proc(UInt32)).call
+  end
+  def get_desc(pdesc : D3D11_TEXTURE3D_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_TEXTURE3D_DESC*, Void)).call(pdesc)
+  end
+  def get_desc1(pdesc : D3D11_TEXTURE3D_DESC1*) : Void
+    @lpVtbl.value.get_desc1.unsafe_as(Proc(D3D11_TEXTURE3D_DESC1*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11RasterizerState2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_desc(pdesc : D3D11_RASTERIZER_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_RASTERIZER_DESC*, Void)).call(pdesc)
+  end
+  def get_desc1(pdesc : D3D11_RASTERIZER_DESC1*) : Void
+    @lpVtbl.value.get_desc1.unsafe_as(Proc(D3D11_RASTERIZER_DESC1*, Void)).call(pdesc)
+  end
+  def get_desc2(pdesc : D3D11_RASTERIZER_DESC2*) : Void
+    @lpVtbl.value.get_desc2.unsafe_as(Proc(D3D11_RASTERIZER_DESC2*, Void)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11ShaderResourceView1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_resource(ppresource : ID3D11Resource*) : Void
+    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D11Resource*, Void)).call(ppresource)
+  end
+  def get_desc(pdesc : D3D11_SHADER_RESOURCE_VIEW_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_SHADER_RESOURCE_VIEW_DESC*, Void)).call(pdesc)
+  end
+  def get_desc1(pdesc1 : D3D11_SHADER_RESOURCE_VIEW_DESC1*) : Void
+    @lpVtbl.value.get_desc1.unsafe_as(Proc(D3D11_SHADER_RESOURCE_VIEW_DESC1*, Void)).call(pdesc1)
+  end
+end
+struct LibWin32::ID3D11RenderTargetView1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_resource(ppresource : ID3D11Resource*) : Void
+    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D11Resource*, Void)).call(ppresource)
+  end
+  def get_desc(pdesc : D3D11_RENDER_TARGET_VIEW_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_RENDER_TARGET_VIEW_DESC*, Void)).call(pdesc)
+  end
+  def get_desc1(pdesc1 : D3D11_RENDER_TARGET_VIEW_DESC1*) : Void
+    @lpVtbl.value.get_desc1.unsafe_as(Proc(D3D11_RENDER_TARGET_VIEW_DESC1*, Void)).call(pdesc1)
+  end
+end
+struct LibWin32::ID3D11UnorderedAccessView1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_resource(ppresource : ID3D11Resource*) : Void
+    @lpVtbl.value.get_resource.unsafe_as(Proc(ID3D11Resource*, Void)).call(ppresource)
+  end
+  def get_desc(pdesc : D3D11_UNORDERED_ACCESS_VIEW_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_UNORDERED_ACCESS_VIEW_DESC*, Void)).call(pdesc)
+  end
+  def get_desc1(pdesc1 : D3D11_UNORDERED_ACCESS_VIEW_DESC1*) : Void
+    @lpVtbl.value.get_desc1.unsafe_as(Proc(D3D11_UNORDERED_ACCESS_VIEW_DESC1*, Void)).call(pdesc1)
+  end
+end
+struct LibWin32::ID3D11Query1
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_data_size : UInt32
+    @lpVtbl.value.get_data_size.unsafe_as(Proc(UInt32)).call
+  end
+  def get_desc(pdesc : D3D11_QUERY_DESC*) : Void
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_QUERY_DESC*, Void)).call(pdesc)
+  end
+  def get_desc1(pdesc1 : D3D11_QUERY_DESC1*) : Void
+    @lpVtbl.value.get_desc1.unsafe_as(Proc(D3D11_QUERY_DESC1*, Void)).call(pdesc1)
+  end
+end
+struct LibWin32::ID3D11DeviceContext3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def vs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.vs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ps_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ps_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ps_set_shader(ppixelshader : ID3D11PixelShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.ps_set_shader.unsafe_as(Proc(ID3D11PixelShader, ID3D11ClassInstance*, UInt32, Void)).call(ppixelshader, ppclassinstances, numclassinstances)
+  end
+  def ps_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ps_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def vs_set_shader(pvertexshader : ID3D11VertexShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.vs_set_shader.unsafe_as(Proc(ID3D11VertexShader, ID3D11ClassInstance*, UInt32, Void)).call(pvertexshader, ppclassinstances, numclassinstances)
+  end
+  def draw_indexed(indexcount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32) : Void
+    @lpVtbl.value.draw_indexed.unsafe_as(Proc(UInt32, UInt32, Int32, Void)).call(indexcount, startindexlocation, basevertexlocation)
+  end
+  def draw(vertexcount : UInt32, startvertexlocation : UInt32) : Void
+    @lpVtbl.value.draw.unsafe_as(Proc(UInt32, UInt32, Void)).call(vertexcount, startvertexlocation)
+  end
+  def map(presource : ID3D11Resource, subresource : UInt32, maptype : D3D11_MAP, mapflags : UInt32, pmappedresource : D3D11_MAPPED_SUBRESOURCE*) : HRESULT
+    @lpVtbl.value.map.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_MAP, UInt32, D3D11_MAPPED_SUBRESOURCE*, HRESULT)).call(presource, subresource, maptype, mapflags, pmappedresource)
+  end
+  def unmap(presource : ID3D11Resource, subresource : UInt32) : Void
+    @lpVtbl.value.unmap.unsafe_as(Proc(ID3D11Resource, UInt32, Void)).call(presource, subresource)
+  end
+  def ps_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ps_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ia_set_input_layout(pinputlayout : ID3D11InputLayout) : Void
+    @lpVtbl.value.ia_set_input_layout.unsafe_as(Proc(ID3D11InputLayout, Void)).call(pinputlayout)
+  end
+  def ia_set_vertex_buffers(startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D11Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
+    @lpVtbl.value.ia_set_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
+  end
+  def ia_set_index_buffer(pindexbuffer : ID3D11Buffer, format : DXGI_FORMAT, offset : UInt32) : Void
+    @lpVtbl.value.ia_set_index_buffer.unsafe_as(Proc(ID3D11Buffer, DXGI_FORMAT, UInt32, Void)).call(pindexbuffer, format, offset)
+  end
+  def draw_indexed_instanced(indexcountperinstance : UInt32, instancecount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, Int32, UInt32, Void)).call(indexcountperinstance, instancecount, startindexlocation, basevertexlocation, startinstancelocation)
+  end
+  def draw_instanced(vertexcountperinstance : UInt32, instancecount : UInt32, startvertexlocation : UInt32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, Void)).call(vertexcountperinstance, instancecount, startvertexlocation, startinstancelocation)
+  end
+  def gs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.gs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def gs_set_shader(pshader : ID3D11GeometryShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.gs_set_shader.unsafe_as(Proc(ID3D11GeometryShader, ID3D11ClassInstance*, UInt32, Void)).call(pshader, ppclassinstances, numclassinstances)
+  end
+  def ia_set_primitive_topology(topology : D3D_PRIMITIVE_TOPOLOGY) : Void
+    @lpVtbl.value.ia_set_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY, Void)).call(topology)
+  end
+  def vs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.vs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def vs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.vs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def begin_(pasync : ID3D11Asynchronous) : Void
+    @lpVtbl.value.begin_.unsafe_as(Proc(ID3D11Asynchronous, Void)).call(pasync)
+  end
+  def end_(pasync : ID3D11Asynchronous) : Void
+    @lpVtbl.value.end_.unsafe_as(Proc(ID3D11Asynchronous, Void)).call(pasync)
+  end
+  def get_data(pasync : ID3D11Asynchronous, pdata : Void*, datasize : UInt32, getdataflags : UInt32) : HRESULT
+    @lpVtbl.value.get_data.unsafe_as(Proc(ID3D11Asynchronous, Void*, UInt32, UInt32, HRESULT)).call(pasync, pdata, datasize, getdataflags)
+  end
+  def set_predication(ppredicate : ID3D11Predicate, predicatevalue : LibC::BOOL) : Void
+    @lpVtbl.value.set_predication.unsafe_as(Proc(ID3D11Predicate, LibC::BOOL, Void)).call(ppredicate, predicatevalue)
+  end
+  def gs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.gs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def gs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.gs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def om_set_render_targets(numviews : UInt32, pprendertargetviews : ID3D11RenderTargetView*, pdepthstencilview : ID3D11DepthStencilView) : Void
+    @lpVtbl.value.om_set_render_targets.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, Void)).call(numviews, pprendertargetviews, pdepthstencilview)
+  end
+  def om_set_render_targets_and_unordered_access_views(numrtvs : UInt32, pprendertargetviews : ID3D11RenderTargetView*, pdepthstencilview : ID3D11DepthStencilView, uavstartslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*, puavinitialcounts : UInt32*) : Void
+    @lpVtbl.value.om_set_render_targets_and_unordered_access_views.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)).call(numrtvs, pprendertargetviews, pdepthstencilview, uavstartslot, numuavs, ppunorderedaccessviews, puavinitialcounts)
+  end
+  def om_set_blend_state(pblendstate : ID3D11BlendState, blendfactor : Float32*, samplemask : UInt32) : Void
+    @lpVtbl.value.om_set_blend_state.unsafe_as(Proc(ID3D11BlendState, Float32*, UInt32, Void)).call(pblendstate, blendfactor, samplemask)
+  end
+  def om_set_depth_stencil_state(pdepthstencilstate : ID3D11DepthStencilState, stencilref : UInt32) : Void
+    @lpVtbl.value.om_set_depth_stencil_state.unsafe_as(Proc(ID3D11DepthStencilState, UInt32, Void)).call(pdepthstencilstate, stencilref)
+  end
+  def so_set_targets(numbuffers : UInt32, ppsotargets : ID3D11Buffer*, poffsets : UInt32*) : Void
+    @lpVtbl.value.so_set_targets.unsafe_as(Proc(UInt32, ID3D11Buffer*, UInt32*, Void)).call(numbuffers, ppsotargets, poffsets)
+  end
+  def draw_auto : Void
+    @lpVtbl.value.draw_auto.unsafe_as(Proc(Void)).call
+  end
+  def draw_indexed_instanced_indirect(pbufferforargs : ID3D11Buffer, alignedbyteoffsetforargs : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced_indirect.unsafe_as(Proc(ID3D11Buffer, UInt32, Void)).call(pbufferforargs, alignedbyteoffsetforargs)
+  end
+  def draw_instanced_indirect(pbufferforargs : ID3D11Buffer, alignedbyteoffsetforargs : UInt32) : Void
+    @lpVtbl.value.draw_instanced_indirect.unsafe_as(Proc(ID3D11Buffer, UInt32, Void)).call(pbufferforargs, alignedbyteoffsetforargs)
+  end
+  def dispatch(threadgroupcountx : UInt32, threadgroupcounty : UInt32, threadgroupcountz : UInt32) : Void
+    @lpVtbl.value.dispatch.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(threadgroupcountx, threadgroupcounty, threadgroupcountz)
+  end
+  def dispatch_indirect(pbufferforargs : ID3D11Buffer, alignedbyteoffsetforargs : UInt32) : Void
+    @lpVtbl.value.dispatch_indirect.unsafe_as(Proc(ID3D11Buffer, UInt32, Void)).call(pbufferforargs, alignedbyteoffsetforargs)
+  end
+  def rs_set_state(prasterizerstate : ID3D11RasterizerState) : Void
+    @lpVtbl.value.rs_set_state.unsafe_as(Proc(ID3D11RasterizerState, Void)).call(prasterizerstate)
+  end
+  def rs_set_viewports(numviewports : UInt32, pviewports : D3D11_VIEWPORT*) : Void
+    @lpVtbl.value.rs_set_viewports.unsafe_as(Proc(UInt32, D3D11_VIEWPORT*, Void)).call(numviewports, pviewports)
+  end
+  def rs_set_scissor_rects(numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.rs_set_scissor_rects.unsafe_as(Proc(UInt32, RECT*, Void)).call(numrects, prects)
+  end
+  def copy_subresource_region(pdstresource : ID3D11Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, psrcbox : D3D11_BOX*) : Void
+    @lpVtbl.value.copy_subresource_region.unsafe_as(Proc(ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)).call(pdstresource, dstsubresource, dstx, dsty, dstz, psrcresource, srcsubresource, psrcbox)
+  end
+  def copy_resource(pdstresource : ID3D11Resource, psrcresource : ID3D11Resource) : Void
+    @lpVtbl.value.copy_resource.unsafe_as(Proc(ID3D11Resource, ID3D11Resource, Void)).call(pdstresource, psrcresource)
+  end
+  def update_subresource(pdstresource : ID3D11Resource, dstsubresource : UInt32, pdstbox : D3D11_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32) : Void
+    @lpVtbl.value.update_subresource.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, Void)).call(pdstresource, dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch)
+  end
+  def copy_structure_count(pdstbuffer : ID3D11Buffer, dstalignedbyteoffset : UInt32, psrcview : ID3D11UnorderedAccessView) : Void
+    @lpVtbl.value.copy_structure_count.unsafe_as(Proc(ID3D11Buffer, UInt32, ID3D11UnorderedAccessView, Void)).call(pdstbuffer, dstalignedbyteoffset, psrcview)
+  end
+  def clear_render_target_view(prendertargetview : ID3D11RenderTargetView, colorrgba : Float32*) : Void
+    @lpVtbl.value.clear_render_target_view.unsafe_as(Proc(ID3D11RenderTargetView, Float32*, Void)).call(prendertargetview, colorrgba)
+  end
+  def clear_unordered_access_view_uint(punorderedaccessview : ID3D11UnorderedAccessView, values : UInt32*) : Void
+    @lpVtbl.value.clear_unordered_access_view_uint.unsafe_as(Proc(ID3D11UnorderedAccessView, UInt32*, Void)).call(punorderedaccessview, values)
+  end
+  def clear_unordered_access_view_float(punorderedaccessview : ID3D11UnorderedAccessView, values : Float32*) : Void
+    @lpVtbl.value.clear_unordered_access_view_float.unsafe_as(Proc(ID3D11UnorderedAccessView, Float32*, Void)).call(punorderedaccessview, values)
+  end
+  def clear_depth_stencil_view(pdepthstencilview : ID3D11DepthStencilView, clearflags : UInt32, depth : Float32, stencil : UInt8) : Void
+    @lpVtbl.value.clear_depth_stencil_view.unsafe_as(Proc(ID3D11DepthStencilView, UInt32, Float32, UInt8, Void)).call(pdepthstencilview, clearflags, depth, stencil)
+  end
+  def generate_mips(pshaderresourceview : ID3D11ShaderResourceView) : Void
+    @lpVtbl.value.generate_mips.unsafe_as(Proc(ID3D11ShaderResourceView, Void)).call(pshaderresourceview)
+  end
+  def set_resource_min_lod(presource : ID3D11Resource, minlod : Float32) : Void
+    @lpVtbl.value.set_resource_min_lod.unsafe_as(Proc(ID3D11Resource, Float32, Void)).call(presource, minlod)
+  end
+  def get_resource_min_lod(presource : ID3D11Resource) : Float32
+    @lpVtbl.value.get_resource_min_lod.unsafe_as(Proc(ID3D11Resource, Float32)).call(presource)
+  end
+  def resolve_subresource(pdstresource : ID3D11Resource, dstsubresource : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, format : DXGI_FORMAT) : Void
+    @lpVtbl.value.resolve_subresource.unsafe_as(Proc(ID3D11Resource, UInt32, ID3D11Resource, UInt32, DXGI_FORMAT, Void)).call(pdstresource, dstsubresource, psrcresource, srcsubresource, format)
+  end
+  def execute_command_list(pcommandlist : ID3D11CommandList, restorecontextstate : LibC::BOOL) : Void
+    @lpVtbl.value.execute_command_list.unsafe_as(Proc(ID3D11CommandList, LibC::BOOL, Void)).call(pcommandlist, restorecontextstate)
+  end
+  def hs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.hs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def hs_set_shader(phullshader : ID3D11HullShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.hs_set_shader.unsafe_as(Proc(ID3D11HullShader, ID3D11ClassInstance*, UInt32, Void)).call(phullshader, ppclassinstances, numclassinstances)
+  end
+  def hs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.hs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def hs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.hs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ds_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ds_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ds_set_shader(pdomainshader : ID3D11DomainShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.ds_set_shader.unsafe_as(Proc(ID3D11DomainShader, ID3D11ClassInstance*, UInt32, Void)).call(pdomainshader, ppclassinstances, numclassinstances)
+  end
+  def ds_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ds_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def ds_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ds_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def cs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.cs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def cs_set_unordered_access_views(startslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*, puavinitialcounts : UInt32*) : Void
+    @lpVtbl.value.cs_set_unordered_access_views.unsafe_as(Proc(UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)).call(startslot, numuavs, ppunorderedaccessviews, puavinitialcounts)
+  end
+  def cs_set_shader(pcomputeshader : ID3D11ComputeShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.cs_set_shader.unsafe_as(Proc(ID3D11ComputeShader, ID3D11ClassInstance*, UInt32, Void)).call(pcomputeshader, ppclassinstances, numclassinstances)
+  end
+  def cs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.cs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def cs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.cs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def vs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.vs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ps_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ps_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ps_get_shader(pppixelshader : ID3D11PixelShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.ps_get_shader.unsafe_as(Proc(ID3D11PixelShader*, ID3D11ClassInstance*, UInt32*, Void)).call(pppixelshader, ppclassinstances, pnumclassinstances)
+  end
+  def ps_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ps_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def vs_get_shader(ppvertexshader : ID3D11VertexShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.vs_get_shader.unsafe_as(Proc(ID3D11VertexShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppvertexshader, ppclassinstances, pnumclassinstances)
+  end
+  def ps_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ps_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ia_get_input_layout(ppinputlayout : ID3D11InputLayout*) : Void
+    @lpVtbl.value.ia_get_input_layout.unsafe_as(Proc(ID3D11InputLayout*, Void)).call(ppinputlayout)
+  end
+  def ia_get_vertex_buffers(startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D11Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
+    @lpVtbl.value.ia_get_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
+  end
+  def ia_get_index_buffer(pindexbuffer : ID3D11Buffer*, format : DXGI_FORMAT*, offset : UInt32*) : Void
+    @lpVtbl.value.ia_get_index_buffer.unsafe_as(Proc(ID3D11Buffer*, DXGI_FORMAT*, UInt32*, Void)).call(pindexbuffer, format, offset)
+  end
+  def gs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.gs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def gs_get_shader(ppgeometryshader : ID3D11GeometryShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.gs_get_shader.unsafe_as(Proc(ID3D11GeometryShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppgeometryshader, ppclassinstances, pnumclassinstances)
+  end
+  def ia_get_primitive_topology(ptopology : D3D_PRIMITIVE_TOPOLOGY*) : Void
+    @lpVtbl.value.ia_get_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY*, Void)).call(ptopology)
+  end
+  def vs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.vs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def vs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.vs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def get_predication(pppredicate : ID3D11Predicate*, ppredicatevalue : LibC::BOOL*) : Void
+    @lpVtbl.value.get_predication.unsafe_as(Proc(ID3D11Predicate*, LibC::BOOL*, Void)).call(pppredicate, ppredicatevalue)
+  end
+  def gs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.gs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def gs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.gs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def om_get_render_targets(numviews : UInt32, pprendertargetviews : ID3D11RenderTargetView*, ppdepthstencilview : ID3D11DepthStencilView*) : Void
+    @lpVtbl.value.om_get_render_targets.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, Void)).call(numviews, pprendertargetviews, ppdepthstencilview)
+  end
+  def om_get_render_targets_and_unordered_access_views(numrtvs : UInt32, pprendertargetviews : ID3D11RenderTargetView*, ppdepthstencilview : ID3D11DepthStencilView*, uavstartslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*) : Void
+    @lpVtbl.value.om_get_render_targets_and_unordered_access_views.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, UInt32, UInt32, ID3D11UnorderedAccessView*, Void)).call(numrtvs, pprendertargetviews, ppdepthstencilview, uavstartslot, numuavs, ppunorderedaccessviews)
+  end
+  def om_get_blend_state(ppblendstate : ID3D11BlendState*, blendfactor : Float32*, psamplemask : UInt32*) : Void
+    @lpVtbl.value.om_get_blend_state.unsafe_as(Proc(ID3D11BlendState*, Float32*, UInt32*, Void)).call(ppblendstate, blendfactor, psamplemask)
+  end
+  def om_get_depth_stencil_state(ppdepthstencilstate : ID3D11DepthStencilState*, pstencilref : UInt32*) : Void
+    @lpVtbl.value.om_get_depth_stencil_state.unsafe_as(Proc(ID3D11DepthStencilState*, UInt32*, Void)).call(ppdepthstencilstate, pstencilref)
+  end
+  def so_get_targets(numbuffers : UInt32, ppsotargets : ID3D11Buffer*) : Void
+    @lpVtbl.value.so_get_targets.unsafe_as(Proc(UInt32, ID3D11Buffer*, Void)).call(numbuffers, ppsotargets)
+  end
+  def rs_get_state(pprasterizerstate : ID3D11RasterizerState*) : Void
+    @lpVtbl.value.rs_get_state.unsafe_as(Proc(ID3D11RasterizerState*, Void)).call(pprasterizerstate)
+  end
+  def rs_get_viewports(pnumviewports : UInt32*, pviewports : D3D11_VIEWPORT*) : Void
+    @lpVtbl.value.rs_get_viewports.unsafe_as(Proc(UInt32*, D3D11_VIEWPORT*, Void)).call(pnumviewports, pviewports)
+  end
+  def rs_get_scissor_rects(pnumrects : UInt32*, prects : RECT*) : Void
+    @lpVtbl.value.rs_get_scissor_rects.unsafe_as(Proc(UInt32*, RECT*, Void)).call(pnumrects, prects)
+  end
+  def hs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.hs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def hs_get_shader(pphullshader : ID3D11HullShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.hs_get_shader.unsafe_as(Proc(ID3D11HullShader*, ID3D11ClassInstance*, UInt32*, Void)).call(pphullshader, ppclassinstances, pnumclassinstances)
+  end
+  def hs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.hs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def hs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.hs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ds_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ds_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ds_get_shader(ppdomainshader : ID3D11DomainShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.ds_get_shader.unsafe_as(Proc(ID3D11DomainShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppdomainshader, ppclassinstances, pnumclassinstances)
+  end
+  def ds_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ds_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def ds_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ds_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def cs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.cs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def cs_get_unordered_access_views(startslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*) : Void
+    @lpVtbl.value.cs_get_unordered_access_views.unsafe_as(Proc(UInt32, UInt32, ID3D11UnorderedAccessView*, Void)).call(startslot, numuavs, ppunorderedaccessviews)
+  end
+  def cs_get_shader(ppcomputeshader : ID3D11ComputeShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.cs_get_shader.unsafe_as(Proc(ID3D11ComputeShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppcomputeshader, ppclassinstances, pnumclassinstances)
+  end
+  def cs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.cs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def cs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.cs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def clear_state : Void
+    @lpVtbl.value.clear_state.unsafe_as(Proc(Void)).call
+  end
+  def flush : Void
+    @lpVtbl.value.flush.unsafe_as(Proc(Void)).call
+  end
+  def get_type : D3D11_DEVICE_CONTEXT_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D11_DEVICE_CONTEXT_TYPE)).call
+  end
+  def get_context_flags : UInt32
+    @lpVtbl.value.get_context_flags.unsafe_as(Proc(UInt32)).call
+  end
+  def finish_command_list(restoredeferredcontextstate : LibC::BOOL, ppcommandlist : ID3D11CommandList*) : HRESULT
+    @lpVtbl.value.finish_command_list.unsafe_as(Proc(LibC::BOOL, ID3D11CommandList*, HRESULT)).call(restoredeferredcontextstate, ppcommandlist)
+  end
+  def copy_subresource_region1(pdstresource : ID3D11Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, psrcbox : D3D11_BOX*, copyflags : UInt32) : Void
+    @lpVtbl.value.copy_subresource_region1.unsafe_as(Proc(ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, UInt32, Void)).call(pdstresource, dstsubresource, dstx, dsty, dstz, psrcresource, srcsubresource, psrcbox, copyflags)
+  end
+  def update_subresource1(pdstresource : ID3D11Resource, dstsubresource : UInt32, pdstbox : D3D11_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32, copyflags : UInt32) : Void
+    @lpVtbl.value.update_subresource1.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, UInt32, Void)).call(pdstresource, dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch, copyflags)
+  end
+  def discard_resource(presource : ID3D11Resource) : Void
+    @lpVtbl.value.discard_resource.unsafe_as(Proc(ID3D11Resource, Void)).call(presource)
+  end
+  def discard_view(presourceview : ID3D11View) : Void
+    @lpVtbl.value.discard_view.unsafe_as(Proc(ID3D11View, Void)).call(presourceview)
+  end
+  def vs_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.vs_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def hs_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.hs_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def ds_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.ds_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def gs_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.gs_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def ps_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.ps_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def cs_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.cs_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def vs_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.vs_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def hs_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.hs_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def ds_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.ds_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def gs_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.gs_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def ps_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.ps_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def cs_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.cs_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def swap_device_context_state(pstate : ID3DDeviceContextState, pppreviousstate : ID3DDeviceContextState*) : Void
+    @lpVtbl.value.swap_device_context_state.unsafe_as(Proc(ID3DDeviceContextState, ID3DDeviceContextState*, Void)).call(pstate, pppreviousstate)
+  end
+  def clear_view(pview : ID3D11View, color : Float32*, prect : RECT*, numrects : UInt32) : Void
+    @lpVtbl.value.clear_view.unsafe_as(Proc(ID3D11View, Float32*, RECT*, UInt32, Void)).call(pview, color, prect, numrects)
+  end
+  def discard_view1(presourceview : ID3D11View, prects : RECT*, numrects : UInt32) : Void
+    @lpVtbl.value.discard_view1.unsafe_as(Proc(ID3D11View, RECT*, UInt32, Void)).call(presourceview, prects, numrects)
+  end
+  def update_tile_mappings(ptiledresource : ID3D11Resource, numtiledresourceregions : UInt32, ptiledresourceregionstartcoordinates : D3D11_TILED_RESOURCE_COORDINATE*, ptiledresourceregionsizes : D3D11_TILE_REGION_SIZE*, ptilepool : ID3D11Buffer, numranges : UInt32, prangeflags : UInt32*, ptilepoolstartoffsets : UInt32*, prangetilecounts : UInt32*, flags : UInt32) : HRESULT
+    @lpVtbl.value.update_tile_mappings.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, ID3D11Buffer, UInt32, UInt32*, UInt32*, UInt32*, UInt32, HRESULT)).call(ptiledresource, numtiledresourceregions, ptiledresourceregionstartcoordinates, ptiledresourceregionsizes, ptilepool, numranges, prangeflags, ptilepoolstartoffsets, prangetilecounts, flags)
+  end
+  def copy_tile_mappings(pdesttiledresource : ID3D11Resource, pdestregionstartcoordinate : D3D11_TILED_RESOURCE_COORDINATE*, psourcetiledresource : ID3D11Resource, psourceregionstartcoordinate : D3D11_TILED_RESOURCE_COORDINATE*, ptileregionsize : D3D11_TILE_REGION_SIZE*, flags : UInt32) : HRESULT
+    @lpVtbl.value.copy_tile_mappings.unsafe_as(Proc(ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, UInt32, HRESULT)).call(pdesttiledresource, pdestregionstartcoordinate, psourcetiledresource, psourceregionstartcoordinate, ptileregionsize, flags)
+  end
+  def copy_tiles(ptiledresource : ID3D11Resource, ptileregionstartcoordinate : D3D11_TILED_RESOURCE_COORDINATE*, ptileregionsize : D3D11_TILE_REGION_SIZE*, pbuffer : ID3D11Buffer, bufferstartoffsetinbytes : UInt64, flags : UInt32) : Void
+    @lpVtbl.value.copy_tiles.unsafe_as(Proc(ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, ID3D11Buffer, UInt64, UInt32, Void)).call(ptiledresource, ptileregionstartcoordinate, ptileregionsize, pbuffer, bufferstartoffsetinbytes, flags)
+  end
+  def update_tiles(pdesttiledresource : ID3D11Resource, pdesttileregionstartcoordinate : D3D11_TILED_RESOURCE_COORDINATE*, pdesttileregionsize : D3D11_TILE_REGION_SIZE*, psourcetiledata : Void*, flags : UInt32) : Void
+    @lpVtbl.value.update_tiles.unsafe_as(Proc(ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, Void*, UInt32, Void)).call(pdesttiledresource, pdesttileregionstartcoordinate, pdesttileregionsize, psourcetiledata, flags)
+  end
+  def resize_tile_pool(ptilepool : ID3D11Buffer, newsizeinbytes : UInt64) : HRESULT
+    @lpVtbl.value.resize_tile_pool.unsafe_as(Proc(ID3D11Buffer, UInt64, HRESULT)).call(ptilepool, newsizeinbytes)
+  end
+  def tiled_resource_barrier(ptiledresourceorviewaccessbeforebarrier : ID3D11DeviceChild, ptiledresourceorviewaccessafterbarrier : ID3D11DeviceChild) : Void
+    @lpVtbl.value.tiled_resource_barrier.unsafe_as(Proc(ID3D11DeviceChild, ID3D11DeviceChild, Void)).call(ptiledresourceorviewaccessbeforebarrier, ptiledresourceorviewaccessafterbarrier)
+  end
+  def is_annotation_enabled : LibC::BOOL
+    @lpVtbl.value.is_annotation_enabled.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def set_marker_int(plabel : LibC::LPWSTR, data : Int32) : Void
+    @lpVtbl.value.set_marker_int.unsafe_as(Proc(LibC::LPWSTR, Int32, Void)).call(plabel, data)
+  end
+  def begin_event_int(plabel : LibC::LPWSTR, data : Int32) : Void
+    @lpVtbl.value.begin_event_int.unsafe_as(Proc(LibC::LPWSTR, Int32, Void)).call(plabel, data)
+  end
+  def end_event : Void
+    @lpVtbl.value.end_event.unsafe_as(Proc(Void)).call
+  end
+  def flush1(contexttype : D3D11_CONTEXT_TYPE, hevent : LibC::HANDLE) : Void
+    @lpVtbl.value.flush1.unsafe_as(Proc(D3D11_CONTEXT_TYPE, LibC::HANDLE, Void)).call(contexttype, hevent)
+  end
+  def set_hardware_protection_state(hwprotectionenable : LibC::BOOL) : Void
+    @lpVtbl.value.set_hardware_protection_state.unsafe_as(Proc(LibC::BOOL, Void)).call(hwprotectionenable)
+  end
+  def get_hardware_protection_state(phwprotectionenable : LibC::BOOL*) : Void
+    @lpVtbl.value.get_hardware_protection_state.unsafe_as(Proc(LibC::BOOL*, Void)).call(phwprotectionenable)
+  end
+end
+struct LibWin32::ID3D11Fence
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def create_shared_handle(pattributes : SECURITY_ATTRIBUTES*, dwaccess : UInt32, lpname : LibC::LPWSTR, phandle : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.create_shared_handle.unsafe_as(Proc(SECURITY_ATTRIBUTES*, UInt32, LibC::LPWSTR, LibC::HANDLE*, HRESULT)).call(pattributes, dwaccess, lpname, phandle)
+  end
+  def get_completed_value : UInt64
+    @lpVtbl.value.get_completed_value.unsafe_as(Proc(UInt64)).call
+  end
+  def set_event_on_completion(value : UInt64, hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_event_on_completion.unsafe_as(Proc(UInt64, LibC::HANDLE, HRESULT)).call(value, hevent)
+  end
+end
+struct LibWin32::ID3D11DeviceContext4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def vs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.vs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ps_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ps_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ps_set_shader(ppixelshader : ID3D11PixelShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.ps_set_shader.unsafe_as(Proc(ID3D11PixelShader, ID3D11ClassInstance*, UInt32, Void)).call(ppixelshader, ppclassinstances, numclassinstances)
+  end
+  def ps_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ps_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def vs_set_shader(pvertexshader : ID3D11VertexShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.vs_set_shader.unsafe_as(Proc(ID3D11VertexShader, ID3D11ClassInstance*, UInt32, Void)).call(pvertexshader, ppclassinstances, numclassinstances)
+  end
+  def draw_indexed(indexcount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32) : Void
+    @lpVtbl.value.draw_indexed.unsafe_as(Proc(UInt32, UInt32, Int32, Void)).call(indexcount, startindexlocation, basevertexlocation)
+  end
+  def draw(vertexcount : UInt32, startvertexlocation : UInt32) : Void
+    @lpVtbl.value.draw.unsafe_as(Proc(UInt32, UInt32, Void)).call(vertexcount, startvertexlocation)
+  end
+  def map(presource : ID3D11Resource, subresource : UInt32, maptype : D3D11_MAP, mapflags : UInt32, pmappedresource : D3D11_MAPPED_SUBRESOURCE*) : HRESULT
+    @lpVtbl.value.map.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_MAP, UInt32, D3D11_MAPPED_SUBRESOURCE*, HRESULT)).call(presource, subresource, maptype, mapflags, pmappedresource)
+  end
+  def unmap(presource : ID3D11Resource, subresource : UInt32) : Void
+    @lpVtbl.value.unmap.unsafe_as(Proc(ID3D11Resource, UInt32, Void)).call(presource, subresource)
+  end
+  def ps_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ps_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ia_set_input_layout(pinputlayout : ID3D11InputLayout) : Void
+    @lpVtbl.value.ia_set_input_layout.unsafe_as(Proc(ID3D11InputLayout, Void)).call(pinputlayout)
+  end
+  def ia_set_vertex_buffers(startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D11Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
+    @lpVtbl.value.ia_set_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
+  end
+  def ia_set_index_buffer(pindexbuffer : ID3D11Buffer, format : DXGI_FORMAT, offset : UInt32) : Void
+    @lpVtbl.value.ia_set_index_buffer.unsafe_as(Proc(ID3D11Buffer, DXGI_FORMAT, UInt32, Void)).call(pindexbuffer, format, offset)
+  end
+  def draw_indexed_instanced(indexcountperinstance : UInt32, instancecount : UInt32, startindexlocation : UInt32, basevertexlocation : Int32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, Int32, UInt32, Void)).call(indexcountperinstance, instancecount, startindexlocation, basevertexlocation, startinstancelocation)
+  end
+  def draw_instanced(vertexcountperinstance : UInt32, instancecount : UInt32, startvertexlocation : UInt32, startinstancelocation : UInt32) : Void
+    @lpVtbl.value.draw_instanced.unsafe_as(Proc(UInt32, UInt32, UInt32, UInt32, Void)).call(vertexcountperinstance, instancecount, startvertexlocation, startinstancelocation)
+  end
+  def gs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.gs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def gs_set_shader(pshader : ID3D11GeometryShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.gs_set_shader.unsafe_as(Proc(ID3D11GeometryShader, ID3D11ClassInstance*, UInt32, Void)).call(pshader, ppclassinstances, numclassinstances)
+  end
+  def ia_set_primitive_topology(topology : D3D_PRIMITIVE_TOPOLOGY) : Void
+    @lpVtbl.value.ia_set_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY, Void)).call(topology)
+  end
+  def vs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.vs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def vs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.vs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def begin_(pasync : ID3D11Asynchronous) : Void
+    @lpVtbl.value.begin_.unsafe_as(Proc(ID3D11Asynchronous, Void)).call(pasync)
+  end
+  def end_(pasync : ID3D11Asynchronous) : Void
+    @lpVtbl.value.end_.unsafe_as(Proc(ID3D11Asynchronous, Void)).call(pasync)
+  end
+  def get_data(pasync : ID3D11Asynchronous, pdata : Void*, datasize : UInt32, getdataflags : UInt32) : HRESULT
+    @lpVtbl.value.get_data.unsafe_as(Proc(ID3D11Asynchronous, Void*, UInt32, UInt32, HRESULT)).call(pasync, pdata, datasize, getdataflags)
+  end
+  def set_predication(ppredicate : ID3D11Predicate, predicatevalue : LibC::BOOL) : Void
+    @lpVtbl.value.set_predication.unsafe_as(Proc(ID3D11Predicate, LibC::BOOL, Void)).call(ppredicate, predicatevalue)
+  end
+  def gs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.gs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def gs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.gs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def om_set_render_targets(numviews : UInt32, pprendertargetviews : ID3D11RenderTargetView*, pdepthstencilview : ID3D11DepthStencilView) : Void
+    @lpVtbl.value.om_set_render_targets.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, Void)).call(numviews, pprendertargetviews, pdepthstencilview)
+  end
+  def om_set_render_targets_and_unordered_access_views(numrtvs : UInt32, pprendertargetviews : ID3D11RenderTargetView*, pdepthstencilview : ID3D11DepthStencilView, uavstartslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*, puavinitialcounts : UInt32*) : Void
+    @lpVtbl.value.om_set_render_targets_and_unordered_access_views.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView, UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)).call(numrtvs, pprendertargetviews, pdepthstencilview, uavstartslot, numuavs, ppunorderedaccessviews, puavinitialcounts)
+  end
+  def om_set_blend_state(pblendstate : ID3D11BlendState, blendfactor : Float32*, samplemask : UInt32) : Void
+    @lpVtbl.value.om_set_blend_state.unsafe_as(Proc(ID3D11BlendState, Float32*, UInt32, Void)).call(pblendstate, blendfactor, samplemask)
+  end
+  def om_set_depth_stencil_state(pdepthstencilstate : ID3D11DepthStencilState, stencilref : UInt32) : Void
+    @lpVtbl.value.om_set_depth_stencil_state.unsafe_as(Proc(ID3D11DepthStencilState, UInt32, Void)).call(pdepthstencilstate, stencilref)
+  end
+  def so_set_targets(numbuffers : UInt32, ppsotargets : ID3D11Buffer*, poffsets : UInt32*) : Void
+    @lpVtbl.value.so_set_targets.unsafe_as(Proc(UInt32, ID3D11Buffer*, UInt32*, Void)).call(numbuffers, ppsotargets, poffsets)
+  end
+  def draw_auto : Void
+    @lpVtbl.value.draw_auto.unsafe_as(Proc(Void)).call
+  end
+  def draw_indexed_instanced_indirect(pbufferforargs : ID3D11Buffer, alignedbyteoffsetforargs : UInt32) : Void
+    @lpVtbl.value.draw_indexed_instanced_indirect.unsafe_as(Proc(ID3D11Buffer, UInt32, Void)).call(pbufferforargs, alignedbyteoffsetforargs)
+  end
+  def draw_instanced_indirect(pbufferforargs : ID3D11Buffer, alignedbyteoffsetforargs : UInt32) : Void
+    @lpVtbl.value.draw_instanced_indirect.unsafe_as(Proc(ID3D11Buffer, UInt32, Void)).call(pbufferforargs, alignedbyteoffsetforargs)
+  end
+  def dispatch(threadgroupcountx : UInt32, threadgroupcounty : UInt32, threadgroupcountz : UInt32) : Void
+    @lpVtbl.value.dispatch.unsafe_as(Proc(UInt32, UInt32, UInt32, Void)).call(threadgroupcountx, threadgroupcounty, threadgroupcountz)
+  end
+  def dispatch_indirect(pbufferforargs : ID3D11Buffer, alignedbyteoffsetforargs : UInt32) : Void
+    @lpVtbl.value.dispatch_indirect.unsafe_as(Proc(ID3D11Buffer, UInt32, Void)).call(pbufferforargs, alignedbyteoffsetforargs)
+  end
+  def rs_set_state(prasterizerstate : ID3D11RasterizerState) : Void
+    @lpVtbl.value.rs_set_state.unsafe_as(Proc(ID3D11RasterizerState, Void)).call(prasterizerstate)
+  end
+  def rs_set_viewports(numviewports : UInt32, pviewports : D3D11_VIEWPORT*) : Void
+    @lpVtbl.value.rs_set_viewports.unsafe_as(Proc(UInt32, D3D11_VIEWPORT*, Void)).call(numviewports, pviewports)
+  end
+  def rs_set_scissor_rects(numrects : UInt32, prects : RECT*) : Void
+    @lpVtbl.value.rs_set_scissor_rects.unsafe_as(Proc(UInt32, RECT*, Void)).call(numrects, prects)
+  end
+  def copy_subresource_region(pdstresource : ID3D11Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, psrcbox : D3D11_BOX*) : Void
+    @lpVtbl.value.copy_subresource_region.unsafe_as(Proc(ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)).call(pdstresource, dstsubresource, dstx, dsty, dstz, psrcresource, srcsubresource, psrcbox)
+  end
+  def copy_resource(pdstresource : ID3D11Resource, psrcresource : ID3D11Resource) : Void
+    @lpVtbl.value.copy_resource.unsafe_as(Proc(ID3D11Resource, ID3D11Resource, Void)).call(pdstresource, psrcresource)
+  end
+  def update_subresource(pdstresource : ID3D11Resource, dstsubresource : UInt32, pdstbox : D3D11_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32) : Void
+    @lpVtbl.value.update_subresource.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, Void)).call(pdstresource, dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch)
+  end
+  def copy_structure_count(pdstbuffer : ID3D11Buffer, dstalignedbyteoffset : UInt32, psrcview : ID3D11UnorderedAccessView) : Void
+    @lpVtbl.value.copy_structure_count.unsafe_as(Proc(ID3D11Buffer, UInt32, ID3D11UnorderedAccessView, Void)).call(pdstbuffer, dstalignedbyteoffset, psrcview)
+  end
+  def clear_render_target_view(prendertargetview : ID3D11RenderTargetView, colorrgba : Float32*) : Void
+    @lpVtbl.value.clear_render_target_view.unsafe_as(Proc(ID3D11RenderTargetView, Float32*, Void)).call(prendertargetview, colorrgba)
+  end
+  def clear_unordered_access_view_uint(punorderedaccessview : ID3D11UnorderedAccessView, values : UInt32*) : Void
+    @lpVtbl.value.clear_unordered_access_view_uint.unsafe_as(Proc(ID3D11UnorderedAccessView, UInt32*, Void)).call(punorderedaccessview, values)
+  end
+  def clear_unordered_access_view_float(punorderedaccessview : ID3D11UnorderedAccessView, values : Float32*) : Void
+    @lpVtbl.value.clear_unordered_access_view_float.unsafe_as(Proc(ID3D11UnorderedAccessView, Float32*, Void)).call(punorderedaccessview, values)
+  end
+  def clear_depth_stencil_view(pdepthstencilview : ID3D11DepthStencilView, clearflags : UInt32, depth : Float32, stencil : UInt8) : Void
+    @lpVtbl.value.clear_depth_stencil_view.unsafe_as(Proc(ID3D11DepthStencilView, UInt32, Float32, UInt8, Void)).call(pdepthstencilview, clearflags, depth, stencil)
+  end
+  def generate_mips(pshaderresourceview : ID3D11ShaderResourceView) : Void
+    @lpVtbl.value.generate_mips.unsafe_as(Proc(ID3D11ShaderResourceView, Void)).call(pshaderresourceview)
+  end
+  def set_resource_min_lod(presource : ID3D11Resource, minlod : Float32) : Void
+    @lpVtbl.value.set_resource_min_lod.unsafe_as(Proc(ID3D11Resource, Float32, Void)).call(presource, minlod)
+  end
+  def get_resource_min_lod(presource : ID3D11Resource) : Float32
+    @lpVtbl.value.get_resource_min_lod.unsafe_as(Proc(ID3D11Resource, Float32)).call(presource)
+  end
+  def resolve_subresource(pdstresource : ID3D11Resource, dstsubresource : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, format : DXGI_FORMAT) : Void
+    @lpVtbl.value.resolve_subresource.unsafe_as(Proc(ID3D11Resource, UInt32, ID3D11Resource, UInt32, DXGI_FORMAT, Void)).call(pdstresource, dstsubresource, psrcresource, srcsubresource, format)
+  end
+  def execute_command_list(pcommandlist : ID3D11CommandList, restorecontextstate : LibC::BOOL) : Void
+    @lpVtbl.value.execute_command_list.unsafe_as(Proc(ID3D11CommandList, LibC::BOOL, Void)).call(pcommandlist, restorecontextstate)
+  end
+  def hs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.hs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def hs_set_shader(phullshader : ID3D11HullShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.hs_set_shader.unsafe_as(Proc(ID3D11HullShader, ID3D11ClassInstance*, UInt32, Void)).call(phullshader, ppclassinstances, numclassinstances)
+  end
+  def hs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.hs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def hs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.hs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ds_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ds_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ds_set_shader(pdomainshader : ID3D11DomainShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.ds_set_shader.unsafe_as(Proc(ID3D11DomainShader, ID3D11ClassInstance*, UInt32, Void)).call(pdomainshader, ppclassinstances, numclassinstances)
+  end
+  def ds_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ds_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def ds_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ds_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def cs_set_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.cs_set_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def cs_set_unordered_access_views(startslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*, puavinitialcounts : UInt32*) : Void
+    @lpVtbl.value.cs_set_unordered_access_views.unsafe_as(Proc(UInt32, UInt32, ID3D11UnorderedAccessView*, UInt32*, Void)).call(startslot, numuavs, ppunorderedaccessviews, puavinitialcounts)
+  end
+  def cs_set_shader(pcomputeshader : ID3D11ComputeShader, ppclassinstances : ID3D11ClassInstance*, numclassinstances : UInt32) : Void
+    @lpVtbl.value.cs_set_shader.unsafe_as(Proc(ID3D11ComputeShader, ID3D11ClassInstance*, UInt32, Void)).call(pcomputeshader, ppclassinstances, numclassinstances)
+  end
+  def cs_set_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.cs_set_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def cs_set_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.cs_set_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def vs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.vs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ps_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ps_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ps_get_shader(pppixelshader : ID3D11PixelShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.ps_get_shader.unsafe_as(Proc(ID3D11PixelShader*, ID3D11ClassInstance*, UInt32*, Void)).call(pppixelshader, ppclassinstances, pnumclassinstances)
+  end
+  def ps_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ps_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def vs_get_shader(ppvertexshader : ID3D11VertexShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.vs_get_shader.unsafe_as(Proc(ID3D11VertexShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppvertexshader, ppclassinstances, pnumclassinstances)
+  end
+  def ps_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ps_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ia_get_input_layout(ppinputlayout : ID3D11InputLayout*) : Void
+    @lpVtbl.value.ia_get_input_layout.unsafe_as(Proc(ID3D11InputLayout*, Void)).call(ppinputlayout)
+  end
+  def ia_get_vertex_buffers(startslot : UInt32, numbuffers : UInt32, ppvertexbuffers : ID3D11Buffer*, pstrides : UInt32*, poffsets : UInt32*) : Void
+    @lpVtbl.value.ia_get_vertex_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppvertexbuffers, pstrides, poffsets)
+  end
+  def ia_get_index_buffer(pindexbuffer : ID3D11Buffer*, format : DXGI_FORMAT*, offset : UInt32*) : Void
+    @lpVtbl.value.ia_get_index_buffer.unsafe_as(Proc(ID3D11Buffer*, DXGI_FORMAT*, UInt32*, Void)).call(pindexbuffer, format, offset)
+  end
+  def gs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.gs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def gs_get_shader(ppgeometryshader : ID3D11GeometryShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.gs_get_shader.unsafe_as(Proc(ID3D11GeometryShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppgeometryshader, ppclassinstances, pnumclassinstances)
+  end
+  def ia_get_primitive_topology(ptopology : D3D_PRIMITIVE_TOPOLOGY*) : Void
+    @lpVtbl.value.ia_get_primitive_topology.unsafe_as(Proc(D3D_PRIMITIVE_TOPOLOGY*, Void)).call(ptopology)
+  end
+  def vs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.vs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def vs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.vs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def get_predication(pppredicate : ID3D11Predicate*, ppredicatevalue : LibC::BOOL*) : Void
+    @lpVtbl.value.get_predication.unsafe_as(Proc(ID3D11Predicate*, LibC::BOOL*, Void)).call(pppredicate, ppredicatevalue)
+  end
+  def gs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.gs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def gs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.gs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def om_get_render_targets(numviews : UInt32, pprendertargetviews : ID3D11RenderTargetView*, ppdepthstencilview : ID3D11DepthStencilView*) : Void
+    @lpVtbl.value.om_get_render_targets.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, Void)).call(numviews, pprendertargetviews, ppdepthstencilview)
+  end
+  def om_get_render_targets_and_unordered_access_views(numrtvs : UInt32, pprendertargetviews : ID3D11RenderTargetView*, ppdepthstencilview : ID3D11DepthStencilView*, uavstartslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*) : Void
+    @lpVtbl.value.om_get_render_targets_and_unordered_access_views.unsafe_as(Proc(UInt32, ID3D11RenderTargetView*, ID3D11DepthStencilView*, UInt32, UInt32, ID3D11UnorderedAccessView*, Void)).call(numrtvs, pprendertargetviews, ppdepthstencilview, uavstartslot, numuavs, ppunorderedaccessviews)
+  end
+  def om_get_blend_state(ppblendstate : ID3D11BlendState*, blendfactor : Float32*, psamplemask : UInt32*) : Void
+    @lpVtbl.value.om_get_blend_state.unsafe_as(Proc(ID3D11BlendState*, Float32*, UInt32*, Void)).call(ppblendstate, blendfactor, psamplemask)
+  end
+  def om_get_depth_stencil_state(ppdepthstencilstate : ID3D11DepthStencilState*, pstencilref : UInt32*) : Void
+    @lpVtbl.value.om_get_depth_stencil_state.unsafe_as(Proc(ID3D11DepthStencilState*, UInt32*, Void)).call(ppdepthstencilstate, pstencilref)
+  end
+  def so_get_targets(numbuffers : UInt32, ppsotargets : ID3D11Buffer*) : Void
+    @lpVtbl.value.so_get_targets.unsafe_as(Proc(UInt32, ID3D11Buffer*, Void)).call(numbuffers, ppsotargets)
+  end
+  def rs_get_state(pprasterizerstate : ID3D11RasterizerState*) : Void
+    @lpVtbl.value.rs_get_state.unsafe_as(Proc(ID3D11RasterizerState*, Void)).call(pprasterizerstate)
+  end
+  def rs_get_viewports(pnumviewports : UInt32*, pviewports : D3D11_VIEWPORT*) : Void
+    @lpVtbl.value.rs_get_viewports.unsafe_as(Proc(UInt32*, D3D11_VIEWPORT*, Void)).call(pnumviewports, pviewports)
+  end
+  def rs_get_scissor_rects(pnumrects : UInt32*, prects : RECT*) : Void
+    @lpVtbl.value.rs_get_scissor_rects.unsafe_as(Proc(UInt32*, RECT*, Void)).call(pnumrects, prects)
+  end
+  def hs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.hs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def hs_get_shader(pphullshader : ID3D11HullShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.hs_get_shader.unsafe_as(Proc(ID3D11HullShader*, ID3D11ClassInstance*, UInt32*, Void)).call(pphullshader, ppclassinstances, pnumclassinstances)
+  end
+  def hs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.hs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def hs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.hs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def ds_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.ds_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def ds_get_shader(ppdomainshader : ID3D11DomainShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.ds_get_shader.unsafe_as(Proc(ID3D11DomainShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppdomainshader, ppclassinstances, pnumclassinstances)
+  end
+  def ds_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.ds_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def ds_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.ds_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def cs_get_shader_resources(startslot : UInt32, numviews : UInt32, ppshaderresourceviews : ID3D11ShaderResourceView*) : Void
+    @lpVtbl.value.cs_get_shader_resources.unsafe_as(Proc(UInt32, UInt32, ID3D11ShaderResourceView*, Void)).call(startslot, numviews, ppshaderresourceviews)
+  end
+  def cs_get_unordered_access_views(startslot : UInt32, numuavs : UInt32, ppunorderedaccessviews : ID3D11UnorderedAccessView*) : Void
+    @lpVtbl.value.cs_get_unordered_access_views.unsafe_as(Proc(UInt32, UInt32, ID3D11UnorderedAccessView*, Void)).call(startslot, numuavs, ppunorderedaccessviews)
+  end
+  def cs_get_shader(ppcomputeshader : ID3D11ComputeShader*, ppclassinstances : ID3D11ClassInstance*, pnumclassinstances : UInt32*) : Void
+    @lpVtbl.value.cs_get_shader.unsafe_as(Proc(ID3D11ComputeShader*, ID3D11ClassInstance*, UInt32*, Void)).call(ppcomputeshader, ppclassinstances, pnumclassinstances)
+  end
+  def cs_get_samplers(startslot : UInt32, numsamplers : UInt32, ppsamplers : ID3D11SamplerState*) : Void
+    @lpVtbl.value.cs_get_samplers.unsafe_as(Proc(UInt32, UInt32, ID3D11SamplerState*, Void)).call(startslot, numsamplers, ppsamplers)
+  end
+  def cs_get_constant_buffers(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*) : Void
+    @lpVtbl.value.cs_get_constant_buffers.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, Void)).call(startslot, numbuffers, ppconstantbuffers)
+  end
+  def clear_state : Void
+    @lpVtbl.value.clear_state.unsafe_as(Proc(Void)).call
+  end
+  def flush : Void
+    @lpVtbl.value.flush.unsafe_as(Proc(Void)).call
+  end
+  def get_type : D3D11_DEVICE_CONTEXT_TYPE
+    @lpVtbl.value.get_type.unsafe_as(Proc(D3D11_DEVICE_CONTEXT_TYPE)).call
+  end
+  def get_context_flags : UInt32
+    @lpVtbl.value.get_context_flags.unsafe_as(Proc(UInt32)).call
+  end
+  def finish_command_list(restoredeferredcontextstate : LibC::BOOL, ppcommandlist : ID3D11CommandList*) : HRESULT
+    @lpVtbl.value.finish_command_list.unsafe_as(Proc(LibC::BOOL, ID3D11CommandList*, HRESULT)).call(restoredeferredcontextstate, ppcommandlist)
+  end
+  def copy_subresource_region1(pdstresource : ID3D11Resource, dstsubresource : UInt32, dstx : UInt32, dsty : UInt32, dstz : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, psrcbox : D3D11_BOX*, copyflags : UInt32) : Void
+    @lpVtbl.value.copy_subresource_region1.unsafe_as(Proc(ID3D11Resource, UInt32, UInt32, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, UInt32, Void)).call(pdstresource, dstsubresource, dstx, dsty, dstz, psrcresource, srcsubresource, psrcbox, copyflags)
+  end
+  def update_subresource1(pdstresource : ID3D11Resource, dstsubresource : UInt32, pdstbox : D3D11_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32, copyflags : UInt32) : Void
+    @lpVtbl.value.update_subresource1.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, UInt32, Void)).call(pdstresource, dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch, copyflags)
+  end
+  def discard_resource(presource : ID3D11Resource) : Void
+    @lpVtbl.value.discard_resource.unsafe_as(Proc(ID3D11Resource, Void)).call(presource)
+  end
+  def discard_view(presourceview : ID3D11View) : Void
+    @lpVtbl.value.discard_view.unsafe_as(Proc(ID3D11View, Void)).call(presourceview)
+  end
+  def vs_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.vs_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def hs_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.hs_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def ds_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.ds_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def gs_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.gs_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def ps_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.ps_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def cs_set_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.cs_set_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def vs_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.vs_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def hs_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.hs_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def ds_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.ds_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def gs_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.gs_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def ps_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.ps_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def cs_get_constant_buffers1(startslot : UInt32, numbuffers : UInt32, ppconstantbuffers : ID3D11Buffer*, pfirstconstant : UInt32*, pnumconstants : UInt32*) : Void
+    @lpVtbl.value.cs_get_constant_buffers1.unsafe_as(Proc(UInt32, UInt32, ID3D11Buffer*, UInt32*, UInt32*, Void)).call(startslot, numbuffers, ppconstantbuffers, pfirstconstant, pnumconstants)
+  end
+  def swap_device_context_state(pstate : ID3DDeviceContextState, pppreviousstate : ID3DDeviceContextState*) : Void
+    @lpVtbl.value.swap_device_context_state.unsafe_as(Proc(ID3DDeviceContextState, ID3DDeviceContextState*, Void)).call(pstate, pppreviousstate)
+  end
+  def clear_view(pview : ID3D11View, color : Float32*, prect : RECT*, numrects : UInt32) : Void
+    @lpVtbl.value.clear_view.unsafe_as(Proc(ID3D11View, Float32*, RECT*, UInt32, Void)).call(pview, color, prect, numrects)
+  end
+  def discard_view1(presourceview : ID3D11View, prects : RECT*, numrects : UInt32) : Void
+    @lpVtbl.value.discard_view1.unsafe_as(Proc(ID3D11View, RECT*, UInt32, Void)).call(presourceview, prects, numrects)
+  end
+  def update_tile_mappings(ptiledresource : ID3D11Resource, numtiledresourceregions : UInt32, ptiledresourceregionstartcoordinates : D3D11_TILED_RESOURCE_COORDINATE*, ptiledresourceregionsizes : D3D11_TILE_REGION_SIZE*, ptilepool : ID3D11Buffer, numranges : UInt32, prangeflags : UInt32*, ptilepoolstartoffsets : UInt32*, prangetilecounts : UInt32*, flags : UInt32) : HRESULT
+    @lpVtbl.value.update_tile_mappings.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, ID3D11Buffer, UInt32, UInt32*, UInt32*, UInt32*, UInt32, HRESULT)).call(ptiledresource, numtiledresourceregions, ptiledresourceregionstartcoordinates, ptiledresourceregionsizes, ptilepool, numranges, prangeflags, ptilepoolstartoffsets, prangetilecounts, flags)
+  end
+  def copy_tile_mappings(pdesttiledresource : ID3D11Resource, pdestregionstartcoordinate : D3D11_TILED_RESOURCE_COORDINATE*, psourcetiledresource : ID3D11Resource, psourceregionstartcoordinate : D3D11_TILED_RESOURCE_COORDINATE*, ptileregionsize : D3D11_TILE_REGION_SIZE*, flags : UInt32) : HRESULT
+    @lpVtbl.value.copy_tile_mappings.unsafe_as(Proc(ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, UInt32, HRESULT)).call(pdesttiledresource, pdestregionstartcoordinate, psourcetiledresource, psourceregionstartcoordinate, ptileregionsize, flags)
+  end
+  def copy_tiles(ptiledresource : ID3D11Resource, ptileregionstartcoordinate : D3D11_TILED_RESOURCE_COORDINATE*, ptileregionsize : D3D11_TILE_REGION_SIZE*, pbuffer : ID3D11Buffer, bufferstartoffsetinbytes : UInt64, flags : UInt32) : Void
+    @lpVtbl.value.copy_tiles.unsafe_as(Proc(ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, ID3D11Buffer, UInt64, UInt32, Void)).call(ptiledresource, ptileregionstartcoordinate, ptileregionsize, pbuffer, bufferstartoffsetinbytes, flags)
+  end
+  def update_tiles(pdesttiledresource : ID3D11Resource, pdesttileregionstartcoordinate : D3D11_TILED_RESOURCE_COORDINATE*, pdesttileregionsize : D3D11_TILE_REGION_SIZE*, psourcetiledata : Void*, flags : UInt32) : Void
+    @lpVtbl.value.update_tiles.unsafe_as(Proc(ID3D11Resource, D3D11_TILED_RESOURCE_COORDINATE*, D3D11_TILE_REGION_SIZE*, Void*, UInt32, Void)).call(pdesttiledresource, pdesttileregionstartcoordinate, pdesttileregionsize, psourcetiledata, flags)
+  end
+  def resize_tile_pool(ptilepool : ID3D11Buffer, newsizeinbytes : UInt64) : HRESULT
+    @lpVtbl.value.resize_tile_pool.unsafe_as(Proc(ID3D11Buffer, UInt64, HRESULT)).call(ptilepool, newsizeinbytes)
+  end
+  def tiled_resource_barrier(ptiledresourceorviewaccessbeforebarrier : ID3D11DeviceChild, ptiledresourceorviewaccessafterbarrier : ID3D11DeviceChild) : Void
+    @lpVtbl.value.tiled_resource_barrier.unsafe_as(Proc(ID3D11DeviceChild, ID3D11DeviceChild, Void)).call(ptiledresourceorviewaccessbeforebarrier, ptiledresourceorviewaccessafterbarrier)
+  end
+  def is_annotation_enabled : LibC::BOOL
+    @lpVtbl.value.is_annotation_enabled.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def set_marker_int(plabel : LibC::LPWSTR, data : Int32) : Void
+    @lpVtbl.value.set_marker_int.unsafe_as(Proc(LibC::LPWSTR, Int32, Void)).call(plabel, data)
+  end
+  def begin_event_int(plabel : LibC::LPWSTR, data : Int32) : Void
+    @lpVtbl.value.begin_event_int.unsafe_as(Proc(LibC::LPWSTR, Int32, Void)).call(plabel, data)
+  end
+  def end_event : Void
+    @lpVtbl.value.end_event.unsafe_as(Proc(Void)).call
+  end
+  def flush1(contexttype : D3D11_CONTEXT_TYPE, hevent : LibC::HANDLE) : Void
+    @lpVtbl.value.flush1.unsafe_as(Proc(D3D11_CONTEXT_TYPE, LibC::HANDLE, Void)).call(contexttype, hevent)
+  end
+  def set_hardware_protection_state(hwprotectionenable : LibC::BOOL) : Void
+    @lpVtbl.value.set_hardware_protection_state.unsafe_as(Proc(LibC::BOOL, Void)).call(hwprotectionenable)
+  end
+  def get_hardware_protection_state(phwprotectionenable : LibC::BOOL*) : Void
+    @lpVtbl.value.get_hardware_protection_state.unsafe_as(Proc(LibC::BOOL*, Void)).call(phwprotectionenable)
+  end
+  def signal(pfence : ID3D11Fence, value : UInt64) : HRESULT
+    @lpVtbl.value.signal.unsafe_as(Proc(ID3D11Fence, UInt64, HRESULT)).call(pfence, value)
+  end
+  def wait(pfence : ID3D11Fence, value : UInt64) : HRESULT
+    @lpVtbl.value.wait.unsafe_as(Proc(ID3D11Fence, UInt64, HRESULT)).call(pfence, value)
+  end
+end
+struct LibWin32::ID3D11Device3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_buffer(pdesc : D3D11_BUFFER_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, ppbuffer : ID3D11Buffer*) : HRESULT
+    @lpVtbl.value.create_buffer.unsafe_as(Proc(D3D11_BUFFER_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Buffer*, HRESULT)).call(pdesc, pinitialdata, ppbuffer)
+  end
+  def create_texture1_d(pdesc : D3D11_TEXTURE1D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture1d : ID3D11Texture1D*) : HRESULT
+    @lpVtbl.value.create_texture1_d.unsafe_as(Proc(D3D11_TEXTURE1D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture1D*, HRESULT)).call(pdesc, pinitialdata, pptexture1d)
+  end
+  def create_texture2_d(pdesc : D3D11_TEXTURE2D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture2d : ID3D11Texture2D*) : HRESULT
+    @lpVtbl.value.create_texture2_d.unsafe_as(Proc(D3D11_TEXTURE2D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D*, HRESULT)).call(pdesc, pinitialdata, pptexture2d)
+  end
+  def create_texture3_d(pdesc : D3D11_TEXTURE3D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture3d : ID3D11Texture3D*) : HRESULT
+    @lpVtbl.value.create_texture3_d.unsafe_as(Proc(D3D11_TEXTURE3D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D*, HRESULT)).call(pdesc, pinitialdata, pptexture3d)
+  end
+  def create_shader_resource_view(presource : ID3D11Resource, pdesc : D3D11_SHADER_RESOURCE_VIEW_DESC*, ppsrview : ID3D11ShaderResourceView*) : HRESULT
+    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC*, ID3D11ShaderResourceView*, HRESULT)).call(presource, pdesc, ppsrview)
+  end
+  def create_unordered_access_view(presource : ID3D11Resource, pdesc : D3D11_UNORDERED_ACCESS_VIEW_DESC*, ppuaview : ID3D11UnorderedAccessView*) : HRESULT
+    @lpVtbl.value.create_unordered_access_view.unsafe_as(Proc(ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC*, ID3D11UnorderedAccessView*, HRESULT)).call(presource, pdesc, ppuaview)
+  end
+  def create_render_target_view(presource : ID3D11Resource, pdesc : D3D11_RENDER_TARGET_VIEW_DESC*, pprtview : ID3D11RenderTargetView*) : HRESULT
+    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC*, ID3D11RenderTargetView*, HRESULT)).call(presource, pdesc, pprtview)
+  end
+  def create_depth_stencil_view(presource : ID3D11Resource, pdesc : D3D11_DEPTH_STENCIL_VIEW_DESC*, ppdepthstencilview : ID3D11DepthStencilView*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D11Resource, D3D11_DEPTH_STENCIL_VIEW_DESC*, ID3D11DepthStencilView*, HRESULT)).call(presource, pdesc, ppdepthstencilview)
+  end
+  def create_input_layout(pinputelementdescs : D3D11_INPUT_ELEMENT_DESC*, numelements : UInt32, pshaderbytecodewithinputsignature : Void*, bytecodelength : LibC::UINT_PTR, ppinputlayout : ID3D11InputLayout*) : HRESULT
+    @lpVtbl.value.create_input_layout.unsafe_as(Proc(D3D11_INPUT_ELEMENT_DESC*, UInt32, Void*, LibC::UINT_PTR, ID3D11InputLayout*, HRESULT)).call(pinputelementdescs, numelements, pshaderbytecodewithinputsignature, bytecodelength, ppinputlayout)
+  end
+  def create_vertex_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppvertexshader : ID3D11VertexShader*) : HRESULT
+    @lpVtbl.value.create_vertex_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11VertexShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppvertexshader)
+  end
+  def create_geometry_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppgeometryshader : ID3D11GeometryShader*) : HRESULT
+    @lpVtbl.value.create_geometry_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppgeometryshader)
+  end
+  def create_geometry_shader_with_stream_output(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, psodeclaration : D3D11_SO_DECLARATION_ENTRY*, numentries : UInt32, pbufferstrides : UInt32*, numstrides : UInt32, rasterizedstream : UInt32, pclasslinkage : ID3D11ClassLinkage, ppgeometryshader : ID3D11GeometryShader*) : HRESULT
+    @lpVtbl.value.create_geometry_shader_with_stream_output.unsafe_as(Proc(Void*, LibC::UINT_PTR, D3D11_SO_DECLARATION_ENTRY*, UInt32, UInt32*, UInt32, UInt32, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)).call(pshaderbytecode, bytecodelength, psodeclaration, numentries, pbufferstrides, numstrides, rasterizedstream, pclasslinkage, ppgeometryshader)
+  end
+  def create_pixel_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, pppixelshader : ID3D11PixelShader*) : HRESULT
+    @lpVtbl.value.create_pixel_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11PixelShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, pppixelshader)
+  end
+  def create_hull_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, pphullshader : ID3D11HullShader*) : HRESULT
+    @lpVtbl.value.create_hull_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11HullShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, pphullshader)
+  end
+  def create_domain_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppdomainshader : ID3D11DomainShader*) : HRESULT
+    @lpVtbl.value.create_domain_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11DomainShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppdomainshader)
+  end
+  def create_compute_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppcomputeshader : ID3D11ComputeShader*) : HRESULT
+    @lpVtbl.value.create_compute_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11ComputeShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppcomputeshader)
+  end
+  def create_class_linkage(pplinkage : ID3D11ClassLinkage*) : HRESULT
+    @lpVtbl.value.create_class_linkage.unsafe_as(Proc(ID3D11ClassLinkage*, HRESULT)).call(pplinkage)
+  end
+  def create_blend_state(pblendstatedesc : D3D11_BLEND_DESC*, ppblendstate : ID3D11BlendState*) : HRESULT
+    @lpVtbl.value.create_blend_state.unsafe_as(Proc(D3D11_BLEND_DESC*, ID3D11BlendState*, HRESULT)).call(pblendstatedesc, ppblendstate)
+  end
+  def create_depth_stencil_state(pdepthstencildesc : D3D11_DEPTH_STENCIL_DESC*, ppdepthstencilstate : ID3D11DepthStencilState*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_state.unsafe_as(Proc(D3D11_DEPTH_STENCIL_DESC*, ID3D11DepthStencilState*, HRESULT)).call(pdepthstencildesc, ppdepthstencilstate)
+  end
+  def create_rasterizer_state(prasterizerdesc : D3D11_RASTERIZER_DESC*, pprasterizerstate : ID3D11RasterizerState*) : HRESULT
+    @lpVtbl.value.create_rasterizer_state.unsafe_as(Proc(D3D11_RASTERIZER_DESC*, ID3D11RasterizerState*, HRESULT)).call(prasterizerdesc, pprasterizerstate)
+  end
+  def create_sampler_state(psamplerdesc : D3D11_SAMPLER_DESC*, ppsamplerstate : ID3D11SamplerState*) : HRESULT
+    @lpVtbl.value.create_sampler_state.unsafe_as(Proc(D3D11_SAMPLER_DESC*, ID3D11SamplerState*, HRESULT)).call(psamplerdesc, ppsamplerstate)
+  end
+  def create_query(pquerydesc : D3D11_QUERY_DESC*, ppquery : ID3D11Query*) : HRESULT
+    @lpVtbl.value.create_query.unsafe_as(Proc(D3D11_QUERY_DESC*, ID3D11Query*, HRESULT)).call(pquerydesc, ppquery)
+  end
+  def create_predicate(ppredicatedesc : D3D11_QUERY_DESC*, pppredicate : ID3D11Predicate*) : HRESULT
+    @lpVtbl.value.create_predicate.unsafe_as(Proc(D3D11_QUERY_DESC*, ID3D11Predicate*, HRESULT)).call(ppredicatedesc, pppredicate)
+  end
+  def create_counter(pcounterdesc : D3D11_COUNTER_DESC*, ppcounter : ID3D11Counter*) : HRESULT
+    @lpVtbl.value.create_counter.unsafe_as(Proc(D3D11_COUNTER_DESC*, ID3D11Counter*, HRESULT)).call(pcounterdesc, ppcounter)
+  end
+  def create_deferred_context(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext*) : HRESULT
+    @lpVtbl.value.create_deferred_context.unsafe_as(Proc(UInt32, ID3D11DeviceContext*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def open_shared_resource(hresource : LibC::HANDLE, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hresource, returnedinterface, ppresource)
+  end
+  def check_format_support(format : DXGI_FORMAT, pformatsupport : UInt32*) : HRESULT
+    @lpVtbl.value.check_format_support.unsafe_as(Proc(DXGI_FORMAT, UInt32*, HRESULT)).call(format, pformatsupport)
+  end
+  def check_multisample_quality_levels(format : DXGI_FORMAT, samplecount : UInt32, pnumqualitylevels : UInt32*) : HRESULT
+    @lpVtbl.value.check_multisample_quality_levels.unsafe_as(Proc(DXGI_FORMAT, UInt32, UInt32*, HRESULT)).call(format, samplecount, pnumqualitylevels)
+  end
+  def check_counter_info(pcounterinfo : D3D11_COUNTER_INFO*) : Void
+    @lpVtbl.value.check_counter_info.unsafe_as(Proc(D3D11_COUNTER_INFO*, Void)).call(pcounterinfo)
+  end
+  def check_counter(pdesc : D3D11_COUNTER_DESC*, ptype : D3D11_COUNTER_TYPE*, pactivecounters : UInt32*, szname : UInt8*, pnamelength : UInt32*, szunits : UInt8*, punitslength : UInt32*, szdescription : UInt8*, pdescriptionlength : UInt32*) : HRESULT
+    @lpVtbl.value.check_counter.unsafe_as(Proc(D3D11_COUNTER_DESC*, D3D11_COUNTER_TYPE*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)).call(pdesc, ptype, pactivecounters, szname, pnamelength, szunits, punitslength, szdescription, pdescriptionlength)
+  end
+  def check_feature_support(feature : D3D11_FEATURE, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D11_FEATURE, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_feature_level : D3D_FEATURE_LEVEL
+    @lpVtbl.value.get_feature_level.unsafe_as(Proc(D3D_FEATURE_LEVEL)).call
+  end
+  def get_creation_flags : UInt32
+    @lpVtbl.value.get_creation_flags.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device_removed_reason : HRESULT
+    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_immediate_context(ppimmediatecontext : ID3D11DeviceContext*) : Void
+    @lpVtbl.value.get_immediate_context.unsafe_as(Proc(ID3D11DeviceContext*, Void)).call(ppimmediatecontext)
+  end
+  def set_exception_mode(raiseflags : UInt32) : HRESULT
+    @lpVtbl.value.set_exception_mode.unsafe_as(Proc(UInt32, HRESULT)).call(raiseflags)
+  end
+  def get_exception_mode : UInt32
+    @lpVtbl.value.get_exception_mode.unsafe_as(Proc(UInt32)).call
+  end
+  def get_immediate_context1(ppimmediatecontext : ID3D11DeviceContext1*) : Void
+    @lpVtbl.value.get_immediate_context1.unsafe_as(Proc(ID3D11DeviceContext1*, Void)).call(ppimmediatecontext)
+  end
+  def create_deferred_context1(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_deferred_context1.unsafe_as(Proc(UInt32, ID3D11DeviceContext1*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def create_blend_state1(pblendstatedesc : D3D11_BLEND_DESC1*, ppblendstate : ID3D11BlendState1*) : HRESULT
+    @lpVtbl.value.create_blend_state1.unsafe_as(Proc(D3D11_BLEND_DESC1*, ID3D11BlendState1*, HRESULT)).call(pblendstatedesc, ppblendstate)
+  end
+  def create_rasterizer_state1(prasterizerdesc : D3D11_RASTERIZER_DESC1*, pprasterizerstate : ID3D11RasterizerState1*) : HRESULT
+    @lpVtbl.value.create_rasterizer_state1.unsafe_as(Proc(D3D11_RASTERIZER_DESC1*, ID3D11RasterizerState1*, HRESULT)).call(prasterizerdesc, pprasterizerstate)
+  end
+  def create_device_context_state(flags : UInt32, pfeaturelevels : D3D_FEATURE_LEVEL*, featurelevels : UInt32, sdkversion : UInt32, emulatedinterface : Guid*, pchosenfeaturelevel : D3D_FEATURE_LEVEL*, ppcontextstate : ID3DDeviceContextState*) : HRESULT
+    @lpVtbl.value.create_device_context_state.unsafe_as(Proc(UInt32, D3D_FEATURE_LEVEL*, UInt32, UInt32, Guid*, D3D_FEATURE_LEVEL*, ID3DDeviceContextState*, HRESULT)).call(flags, pfeaturelevels, featurelevels, sdkversion, emulatedinterface, pchosenfeaturelevel, ppcontextstate)
+  end
+  def open_shared_resource1(hresource : LibC::HANDLE, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource1.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hresource, returnedinterface, ppresource)
+  end
+  def open_shared_resource_by_name(lpname : LibC::LPWSTR, dwdesiredaccess : UInt32, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource_by_name.unsafe_as(Proc(LibC::LPWSTR, UInt32, Guid*, Void**, HRESULT)).call(lpname, dwdesiredaccess, returnedinterface, ppresource)
+  end
+  def get_immediate_context2(ppimmediatecontext : ID3D11DeviceContext2*) : Void
+    @lpVtbl.value.get_immediate_context2.unsafe_as(Proc(ID3D11DeviceContext2*, Void)).call(ppimmediatecontext)
+  end
+  def create_deferred_context2(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext2*) : HRESULT
+    @lpVtbl.value.create_deferred_context2.unsafe_as(Proc(UInt32, ID3D11DeviceContext2*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def get_resource_tiling(ptiledresource : ID3D11Resource, pnumtilesforentireresource : UInt32*, ppackedmipdesc : D3D11_PACKED_MIP_DESC*, pstandardtileshapefornonpackedmips : D3D11_TILE_SHAPE*, pnumsubresourcetilings : UInt32*, firstsubresourcetilingtoget : UInt32, psubresourcetilingsfornonpackedmips : D3D11_SUBRESOURCE_TILING*) : Void
+    @lpVtbl.value.get_resource_tiling.unsafe_as(Proc(ID3D11Resource, UInt32*, D3D11_PACKED_MIP_DESC*, D3D11_TILE_SHAPE*, UInt32*, UInt32, D3D11_SUBRESOURCE_TILING*, Void)).call(ptiledresource, pnumtilesforentireresource, ppackedmipdesc, pstandardtileshapefornonpackedmips, pnumsubresourcetilings, firstsubresourcetilingtoget, psubresourcetilingsfornonpackedmips)
+  end
+  def check_multisample_quality_levels1(format : DXGI_FORMAT, samplecount : UInt32, flags : UInt32, pnumqualitylevels : UInt32*) : HRESULT
+    @lpVtbl.value.check_multisample_quality_levels1.unsafe_as(Proc(DXGI_FORMAT, UInt32, UInt32, UInt32*, HRESULT)).call(format, samplecount, flags, pnumqualitylevels)
+  end
+  def create_texture2_d1(pdesc1 : D3D11_TEXTURE2D_DESC1*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture2d : ID3D11Texture2D1*) : HRESULT
+    @lpVtbl.value.create_texture2_d1.unsafe_as(Proc(D3D11_TEXTURE2D_DESC1*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D1*, HRESULT)).call(pdesc1, pinitialdata, pptexture2d)
+  end
+  def create_texture3_d1(pdesc1 : D3D11_TEXTURE3D_DESC1*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture3d : ID3D11Texture3D1*) : HRESULT
+    @lpVtbl.value.create_texture3_d1.unsafe_as(Proc(D3D11_TEXTURE3D_DESC1*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D1*, HRESULT)).call(pdesc1, pinitialdata, pptexture3d)
+  end
+  def create_rasterizer_state2(prasterizerdesc : D3D11_RASTERIZER_DESC2*, pprasterizerstate : ID3D11RasterizerState2*) : HRESULT
+    @lpVtbl.value.create_rasterizer_state2.unsafe_as(Proc(D3D11_RASTERIZER_DESC2*, ID3D11RasterizerState2*, HRESULT)).call(prasterizerdesc, pprasterizerstate)
+  end
+  def create_shader_resource_view1(presource : ID3D11Resource, pdesc1 : D3D11_SHADER_RESOURCE_VIEW_DESC1*, ppsrview1 : ID3D11ShaderResourceView1*) : HRESULT
+    @lpVtbl.value.create_shader_resource_view1.unsafe_as(Proc(ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC1*, ID3D11ShaderResourceView1*, HRESULT)).call(presource, pdesc1, ppsrview1)
+  end
+  def create_unordered_access_view1(presource : ID3D11Resource, pdesc1 : D3D11_UNORDERED_ACCESS_VIEW_DESC1*, ppuaview1 : ID3D11UnorderedAccessView1*) : HRESULT
+    @lpVtbl.value.create_unordered_access_view1.unsafe_as(Proc(ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC1*, ID3D11UnorderedAccessView1*, HRESULT)).call(presource, pdesc1, ppuaview1)
+  end
+  def create_render_target_view1(presource : ID3D11Resource, pdesc1 : D3D11_RENDER_TARGET_VIEW_DESC1*, pprtview1 : ID3D11RenderTargetView1*) : HRESULT
+    @lpVtbl.value.create_render_target_view1.unsafe_as(Proc(ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC1*, ID3D11RenderTargetView1*, HRESULT)).call(presource, pdesc1, pprtview1)
+  end
+  def create_query1(pquerydesc1 : D3D11_QUERY_DESC1*, ppquery1 : ID3D11Query1*) : HRESULT
+    @lpVtbl.value.create_query1.unsafe_as(Proc(D3D11_QUERY_DESC1*, ID3D11Query1*, HRESULT)).call(pquerydesc1, ppquery1)
+  end
+  def get_immediate_context3(ppimmediatecontext : ID3D11DeviceContext3*) : Void
+    @lpVtbl.value.get_immediate_context3.unsafe_as(Proc(ID3D11DeviceContext3*, Void)).call(ppimmediatecontext)
+  end
+  def create_deferred_context3(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext3*) : HRESULT
+    @lpVtbl.value.create_deferred_context3.unsafe_as(Proc(UInt32, ID3D11DeviceContext3*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def write_to_subresource(pdstresource : ID3D11Resource, dstsubresource : UInt32, pdstbox : D3D11_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32) : Void
+    @lpVtbl.value.write_to_subresource.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, Void)).call(pdstresource, dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch)
+  end
+  def read_from_subresource(pdstdata : Void*, dstrowpitch : UInt32, dstdepthpitch : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, psrcbox : D3D11_BOX*) : Void
+    @lpVtbl.value.read_from_subresource.unsafe_as(Proc(Void*, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)).call(pdstdata, dstrowpitch, dstdepthpitch, psrcresource, srcsubresource, psrcbox)
+  end
+end
+struct LibWin32::ID3D11Device4
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_buffer(pdesc : D3D11_BUFFER_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, ppbuffer : ID3D11Buffer*) : HRESULT
+    @lpVtbl.value.create_buffer.unsafe_as(Proc(D3D11_BUFFER_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Buffer*, HRESULT)).call(pdesc, pinitialdata, ppbuffer)
+  end
+  def create_texture1_d(pdesc : D3D11_TEXTURE1D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture1d : ID3D11Texture1D*) : HRESULT
+    @lpVtbl.value.create_texture1_d.unsafe_as(Proc(D3D11_TEXTURE1D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture1D*, HRESULT)).call(pdesc, pinitialdata, pptexture1d)
+  end
+  def create_texture2_d(pdesc : D3D11_TEXTURE2D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture2d : ID3D11Texture2D*) : HRESULT
+    @lpVtbl.value.create_texture2_d.unsafe_as(Proc(D3D11_TEXTURE2D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D*, HRESULT)).call(pdesc, pinitialdata, pptexture2d)
+  end
+  def create_texture3_d(pdesc : D3D11_TEXTURE3D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture3d : ID3D11Texture3D*) : HRESULT
+    @lpVtbl.value.create_texture3_d.unsafe_as(Proc(D3D11_TEXTURE3D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D*, HRESULT)).call(pdesc, pinitialdata, pptexture3d)
+  end
+  def create_shader_resource_view(presource : ID3D11Resource, pdesc : D3D11_SHADER_RESOURCE_VIEW_DESC*, ppsrview : ID3D11ShaderResourceView*) : HRESULT
+    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC*, ID3D11ShaderResourceView*, HRESULT)).call(presource, pdesc, ppsrview)
+  end
+  def create_unordered_access_view(presource : ID3D11Resource, pdesc : D3D11_UNORDERED_ACCESS_VIEW_DESC*, ppuaview : ID3D11UnorderedAccessView*) : HRESULT
+    @lpVtbl.value.create_unordered_access_view.unsafe_as(Proc(ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC*, ID3D11UnorderedAccessView*, HRESULT)).call(presource, pdesc, ppuaview)
+  end
+  def create_render_target_view(presource : ID3D11Resource, pdesc : D3D11_RENDER_TARGET_VIEW_DESC*, pprtview : ID3D11RenderTargetView*) : HRESULT
+    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC*, ID3D11RenderTargetView*, HRESULT)).call(presource, pdesc, pprtview)
+  end
+  def create_depth_stencil_view(presource : ID3D11Resource, pdesc : D3D11_DEPTH_STENCIL_VIEW_DESC*, ppdepthstencilview : ID3D11DepthStencilView*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D11Resource, D3D11_DEPTH_STENCIL_VIEW_DESC*, ID3D11DepthStencilView*, HRESULT)).call(presource, pdesc, ppdepthstencilview)
+  end
+  def create_input_layout(pinputelementdescs : D3D11_INPUT_ELEMENT_DESC*, numelements : UInt32, pshaderbytecodewithinputsignature : Void*, bytecodelength : LibC::UINT_PTR, ppinputlayout : ID3D11InputLayout*) : HRESULT
+    @lpVtbl.value.create_input_layout.unsafe_as(Proc(D3D11_INPUT_ELEMENT_DESC*, UInt32, Void*, LibC::UINT_PTR, ID3D11InputLayout*, HRESULT)).call(pinputelementdescs, numelements, pshaderbytecodewithinputsignature, bytecodelength, ppinputlayout)
+  end
+  def create_vertex_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppvertexshader : ID3D11VertexShader*) : HRESULT
+    @lpVtbl.value.create_vertex_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11VertexShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppvertexshader)
+  end
+  def create_geometry_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppgeometryshader : ID3D11GeometryShader*) : HRESULT
+    @lpVtbl.value.create_geometry_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppgeometryshader)
+  end
+  def create_geometry_shader_with_stream_output(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, psodeclaration : D3D11_SO_DECLARATION_ENTRY*, numentries : UInt32, pbufferstrides : UInt32*, numstrides : UInt32, rasterizedstream : UInt32, pclasslinkage : ID3D11ClassLinkage, ppgeometryshader : ID3D11GeometryShader*) : HRESULT
+    @lpVtbl.value.create_geometry_shader_with_stream_output.unsafe_as(Proc(Void*, LibC::UINT_PTR, D3D11_SO_DECLARATION_ENTRY*, UInt32, UInt32*, UInt32, UInt32, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)).call(pshaderbytecode, bytecodelength, psodeclaration, numentries, pbufferstrides, numstrides, rasterizedstream, pclasslinkage, ppgeometryshader)
+  end
+  def create_pixel_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, pppixelshader : ID3D11PixelShader*) : HRESULT
+    @lpVtbl.value.create_pixel_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11PixelShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, pppixelshader)
+  end
+  def create_hull_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, pphullshader : ID3D11HullShader*) : HRESULT
+    @lpVtbl.value.create_hull_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11HullShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, pphullshader)
+  end
+  def create_domain_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppdomainshader : ID3D11DomainShader*) : HRESULT
+    @lpVtbl.value.create_domain_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11DomainShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppdomainshader)
+  end
+  def create_compute_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppcomputeshader : ID3D11ComputeShader*) : HRESULT
+    @lpVtbl.value.create_compute_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11ComputeShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppcomputeshader)
+  end
+  def create_class_linkage(pplinkage : ID3D11ClassLinkage*) : HRESULT
+    @lpVtbl.value.create_class_linkage.unsafe_as(Proc(ID3D11ClassLinkage*, HRESULT)).call(pplinkage)
+  end
+  def create_blend_state(pblendstatedesc : D3D11_BLEND_DESC*, ppblendstate : ID3D11BlendState*) : HRESULT
+    @lpVtbl.value.create_blend_state.unsafe_as(Proc(D3D11_BLEND_DESC*, ID3D11BlendState*, HRESULT)).call(pblendstatedesc, ppblendstate)
+  end
+  def create_depth_stencil_state(pdepthstencildesc : D3D11_DEPTH_STENCIL_DESC*, ppdepthstencilstate : ID3D11DepthStencilState*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_state.unsafe_as(Proc(D3D11_DEPTH_STENCIL_DESC*, ID3D11DepthStencilState*, HRESULT)).call(pdepthstencildesc, ppdepthstencilstate)
+  end
+  def create_rasterizer_state(prasterizerdesc : D3D11_RASTERIZER_DESC*, pprasterizerstate : ID3D11RasterizerState*) : HRESULT
+    @lpVtbl.value.create_rasterizer_state.unsafe_as(Proc(D3D11_RASTERIZER_DESC*, ID3D11RasterizerState*, HRESULT)).call(prasterizerdesc, pprasterizerstate)
+  end
+  def create_sampler_state(psamplerdesc : D3D11_SAMPLER_DESC*, ppsamplerstate : ID3D11SamplerState*) : HRESULT
+    @lpVtbl.value.create_sampler_state.unsafe_as(Proc(D3D11_SAMPLER_DESC*, ID3D11SamplerState*, HRESULT)).call(psamplerdesc, ppsamplerstate)
+  end
+  def create_query(pquerydesc : D3D11_QUERY_DESC*, ppquery : ID3D11Query*) : HRESULT
+    @lpVtbl.value.create_query.unsafe_as(Proc(D3D11_QUERY_DESC*, ID3D11Query*, HRESULT)).call(pquerydesc, ppquery)
+  end
+  def create_predicate(ppredicatedesc : D3D11_QUERY_DESC*, pppredicate : ID3D11Predicate*) : HRESULT
+    @lpVtbl.value.create_predicate.unsafe_as(Proc(D3D11_QUERY_DESC*, ID3D11Predicate*, HRESULT)).call(ppredicatedesc, pppredicate)
+  end
+  def create_counter(pcounterdesc : D3D11_COUNTER_DESC*, ppcounter : ID3D11Counter*) : HRESULT
+    @lpVtbl.value.create_counter.unsafe_as(Proc(D3D11_COUNTER_DESC*, ID3D11Counter*, HRESULT)).call(pcounterdesc, ppcounter)
+  end
+  def create_deferred_context(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext*) : HRESULT
+    @lpVtbl.value.create_deferred_context.unsafe_as(Proc(UInt32, ID3D11DeviceContext*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def open_shared_resource(hresource : LibC::HANDLE, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hresource, returnedinterface, ppresource)
+  end
+  def check_format_support(format : DXGI_FORMAT, pformatsupport : UInt32*) : HRESULT
+    @lpVtbl.value.check_format_support.unsafe_as(Proc(DXGI_FORMAT, UInt32*, HRESULT)).call(format, pformatsupport)
+  end
+  def check_multisample_quality_levels(format : DXGI_FORMAT, samplecount : UInt32, pnumqualitylevels : UInt32*) : HRESULT
+    @lpVtbl.value.check_multisample_quality_levels.unsafe_as(Proc(DXGI_FORMAT, UInt32, UInt32*, HRESULT)).call(format, samplecount, pnumqualitylevels)
+  end
+  def check_counter_info(pcounterinfo : D3D11_COUNTER_INFO*) : Void
+    @lpVtbl.value.check_counter_info.unsafe_as(Proc(D3D11_COUNTER_INFO*, Void)).call(pcounterinfo)
+  end
+  def check_counter(pdesc : D3D11_COUNTER_DESC*, ptype : D3D11_COUNTER_TYPE*, pactivecounters : UInt32*, szname : UInt8*, pnamelength : UInt32*, szunits : UInt8*, punitslength : UInt32*, szdescription : UInt8*, pdescriptionlength : UInt32*) : HRESULT
+    @lpVtbl.value.check_counter.unsafe_as(Proc(D3D11_COUNTER_DESC*, D3D11_COUNTER_TYPE*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)).call(pdesc, ptype, pactivecounters, szname, pnamelength, szunits, punitslength, szdescription, pdescriptionlength)
+  end
+  def check_feature_support(feature : D3D11_FEATURE, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D11_FEATURE, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_feature_level : D3D_FEATURE_LEVEL
+    @lpVtbl.value.get_feature_level.unsafe_as(Proc(D3D_FEATURE_LEVEL)).call
+  end
+  def get_creation_flags : UInt32
+    @lpVtbl.value.get_creation_flags.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device_removed_reason : HRESULT
+    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_immediate_context(ppimmediatecontext : ID3D11DeviceContext*) : Void
+    @lpVtbl.value.get_immediate_context.unsafe_as(Proc(ID3D11DeviceContext*, Void)).call(ppimmediatecontext)
+  end
+  def set_exception_mode(raiseflags : UInt32) : HRESULT
+    @lpVtbl.value.set_exception_mode.unsafe_as(Proc(UInt32, HRESULT)).call(raiseflags)
+  end
+  def get_exception_mode : UInt32
+    @lpVtbl.value.get_exception_mode.unsafe_as(Proc(UInt32)).call
+  end
+  def get_immediate_context1(ppimmediatecontext : ID3D11DeviceContext1*) : Void
+    @lpVtbl.value.get_immediate_context1.unsafe_as(Proc(ID3D11DeviceContext1*, Void)).call(ppimmediatecontext)
+  end
+  def create_deferred_context1(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_deferred_context1.unsafe_as(Proc(UInt32, ID3D11DeviceContext1*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def create_blend_state1(pblendstatedesc : D3D11_BLEND_DESC1*, ppblendstate : ID3D11BlendState1*) : HRESULT
+    @lpVtbl.value.create_blend_state1.unsafe_as(Proc(D3D11_BLEND_DESC1*, ID3D11BlendState1*, HRESULT)).call(pblendstatedesc, ppblendstate)
+  end
+  def create_rasterizer_state1(prasterizerdesc : D3D11_RASTERIZER_DESC1*, pprasterizerstate : ID3D11RasterizerState1*) : HRESULT
+    @lpVtbl.value.create_rasterizer_state1.unsafe_as(Proc(D3D11_RASTERIZER_DESC1*, ID3D11RasterizerState1*, HRESULT)).call(prasterizerdesc, pprasterizerstate)
+  end
+  def create_device_context_state(flags : UInt32, pfeaturelevels : D3D_FEATURE_LEVEL*, featurelevels : UInt32, sdkversion : UInt32, emulatedinterface : Guid*, pchosenfeaturelevel : D3D_FEATURE_LEVEL*, ppcontextstate : ID3DDeviceContextState*) : HRESULT
+    @lpVtbl.value.create_device_context_state.unsafe_as(Proc(UInt32, D3D_FEATURE_LEVEL*, UInt32, UInt32, Guid*, D3D_FEATURE_LEVEL*, ID3DDeviceContextState*, HRESULT)).call(flags, pfeaturelevels, featurelevels, sdkversion, emulatedinterface, pchosenfeaturelevel, ppcontextstate)
+  end
+  def open_shared_resource1(hresource : LibC::HANDLE, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource1.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hresource, returnedinterface, ppresource)
+  end
+  def open_shared_resource_by_name(lpname : LibC::LPWSTR, dwdesiredaccess : UInt32, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource_by_name.unsafe_as(Proc(LibC::LPWSTR, UInt32, Guid*, Void**, HRESULT)).call(lpname, dwdesiredaccess, returnedinterface, ppresource)
+  end
+  def get_immediate_context2(ppimmediatecontext : ID3D11DeviceContext2*) : Void
+    @lpVtbl.value.get_immediate_context2.unsafe_as(Proc(ID3D11DeviceContext2*, Void)).call(ppimmediatecontext)
+  end
+  def create_deferred_context2(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext2*) : HRESULT
+    @lpVtbl.value.create_deferred_context2.unsafe_as(Proc(UInt32, ID3D11DeviceContext2*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def get_resource_tiling(ptiledresource : ID3D11Resource, pnumtilesforentireresource : UInt32*, ppackedmipdesc : D3D11_PACKED_MIP_DESC*, pstandardtileshapefornonpackedmips : D3D11_TILE_SHAPE*, pnumsubresourcetilings : UInt32*, firstsubresourcetilingtoget : UInt32, psubresourcetilingsfornonpackedmips : D3D11_SUBRESOURCE_TILING*) : Void
+    @lpVtbl.value.get_resource_tiling.unsafe_as(Proc(ID3D11Resource, UInt32*, D3D11_PACKED_MIP_DESC*, D3D11_TILE_SHAPE*, UInt32*, UInt32, D3D11_SUBRESOURCE_TILING*, Void)).call(ptiledresource, pnumtilesforentireresource, ppackedmipdesc, pstandardtileshapefornonpackedmips, pnumsubresourcetilings, firstsubresourcetilingtoget, psubresourcetilingsfornonpackedmips)
+  end
+  def check_multisample_quality_levels1(format : DXGI_FORMAT, samplecount : UInt32, flags : UInt32, pnumqualitylevels : UInt32*) : HRESULT
+    @lpVtbl.value.check_multisample_quality_levels1.unsafe_as(Proc(DXGI_FORMAT, UInt32, UInt32, UInt32*, HRESULT)).call(format, samplecount, flags, pnumqualitylevels)
+  end
+  def create_texture2_d1(pdesc1 : D3D11_TEXTURE2D_DESC1*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture2d : ID3D11Texture2D1*) : HRESULT
+    @lpVtbl.value.create_texture2_d1.unsafe_as(Proc(D3D11_TEXTURE2D_DESC1*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D1*, HRESULT)).call(pdesc1, pinitialdata, pptexture2d)
+  end
+  def create_texture3_d1(pdesc1 : D3D11_TEXTURE3D_DESC1*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture3d : ID3D11Texture3D1*) : HRESULT
+    @lpVtbl.value.create_texture3_d1.unsafe_as(Proc(D3D11_TEXTURE3D_DESC1*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D1*, HRESULT)).call(pdesc1, pinitialdata, pptexture3d)
+  end
+  def create_rasterizer_state2(prasterizerdesc : D3D11_RASTERIZER_DESC2*, pprasterizerstate : ID3D11RasterizerState2*) : HRESULT
+    @lpVtbl.value.create_rasterizer_state2.unsafe_as(Proc(D3D11_RASTERIZER_DESC2*, ID3D11RasterizerState2*, HRESULT)).call(prasterizerdesc, pprasterizerstate)
+  end
+  def create_shader_resource_view1(presource : ID3D11Resource, pdesc1 : D3D11_SHADER_RESOURCE_VIEW_DESC1*, ppsrview1 : ID3D11ShaderResourceView1*) : HRESULT
+    @lpVtbl.value.create_shader_resource_view1.unsafe_as(Proc(ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC1*, ID3D11ShaderResourceView1*, HRESULT)).call(presource, pdesc1, ppsrview1)
+  end
+  def create_unordered_access_view1(presource : ID3D11Resource, pdesc1 : D3D11_UNORDERED_ACCESS_VIEW_DESC1*, ppuaview1 : ID3D11UnorderedAccessView1*) : HRESULT
+    @lpVtbl.value.create_unordered_access_view1.unsafe_as(Proc(ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC1*, ID3D11UnorderedAccessView1*, HRESULT)).call(presource, pdesc1, ppuaview1)
+  end
+  def create_render_target_view1(presource : ID3D11Resource, pdesc1 : D3D11_RENDER_TARGET_VIEW_DESC1*, pprtview1 : ID3D11RenderTargetView1*) : HRESULT
+    @lpVtbl.value.create_render_target_view1.unsafe_as(Proc(ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC1*, ID3D11RenderTargetView1*, HRESULT)).call(presource, pdesc1, pprtview1)
+  end
+  def create_query1(pquerydesc1 : D3D11_QUERY_DESC1*, ppquery1 : ID3D11Query1*) : HRESULT
+    @lpVtbl.value.create_query1.unsafe_as(Proc(D3D11_QUERY_DESC1*, ID3D11Query1*, HRESULT)).call(pquerydesc1, ppquery1)
+  end
+  def get_immediate_context3(ppimmediatecontext : ID3D11DeviceContext3*) : Void
+    @lpVtbl.value.get_immediate_context3.unsafe_as(Proc(ID3D11DeviceContext3*, Void)).call(ppimmediatecontext)
+  end
+  def create_deferred_context3(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext3*) : HRESULT
+    @lpVtbl.value.create_deferred_context3.unsafe_as(Proc(UInt32, ID3D11DeviceContext3*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def write_to_subresource(pdstresource : ID3D11Resource, dstsubresource : UInt32, pdstbox : D3D11_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32) : Void
+    @lpVtbl.value.write_to_subresource.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, Void)).call(pdstresource, dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch)
+  end
+  def read_from_subresource(pdstdata : Void*, dstrowpitch : UInt32, dstdepthpitch : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, psrcbox : D3D11_BOX*) : Void
+    @lpVtbl.value.read_from_subresource.unsafe_as(Proc(Void*, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)).call(pdstdata, dstrowpitch, dstdepthpitch, psrcresource, srcsubresource, psrcbox)
+  end
+  def register_device_removed_event(hevent : LibC::HANDLE, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.register_device_removed_event.unsafe_as(Proc(LibC::HANDLE, UInt32*, HRESULT)).call(hevent, pdwcookie)
+  end
+  def unregister_device_removed(dwcookie : UInt32) : Void
+    @lpVtbl.value.unregister_device_removed.unsafe_as(Proc(UInt32, Void)).call(dwcookie)
+  end
+end
+struct LibWin32::ID3D11Device5
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_buffer(pdesc : D3D11_BUFFER_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, ppbuffer : ID3D11Buffer*) : HRESULT
+    @lpVtbl.value.create_buffer.unsafe_as(Proc(D3D11_BUFFER_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Buffer*, HRESULT)).call(pdesc, pinitialdata, ppbuffer)
+  end
+  def create_texture1_d(pdesc : D3D11_TEXTURE1D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture1d : ID3D11Texture1D*) : HRESULT
+    @lpVtbl.value.create_texture1_d.unsafe_as(Proc(D3D11_TEXTURE1D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture1D*, HRESULT)).call(pdesc, pinitialdata, pptexture1d)
+  end
+  def create_texture2_d(pdesc : D3D11_TEXTURE2D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture2d : ID3D11Texture2D*) : HRESULT
+    @lpVtbl.value.create_texture2_d.unsafe_as(Proc(D3D11_TEXTURE2D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D*, HRESULT)).call(pdesc, pinitialdata, pptexture2d)
+  end
+  def create_texture3_d(pdesc : D3D11_TEXTURE3D_DESC*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture3d : ID3D11Texture3D*) : HRESULT
+    @lpVtbl.value.create_texture3_d.unsafe_as(Proc(D3D11_TEXTURE3D_DESC*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D*, HRESULT)).call(pdesc, pinitialdata, pptexture3d)
+  end
+  def create_shader_resource_view(presource : ID3D11Resource, pdesc : D3D11_SHADER_RESOURCE_VIEW_DESC*, ppsrview : ID3D11ShaderResourceView*) : HRESULT
+    @lpVtbl.value.create_shader_resource_view.unsafe_as(Proc(ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC*, ID3D11ShaderResourceView*, HRESULT)).call(presource, pdesc, ppsrview)
+  end
+  def create_unordered_access_view(presource : ID3D11Resource, pdesc : D3D11_UNORDERED_ACCESS_VIEW_DESC*, ppuaview : ID3D11UnorderedAccessView*) : HRESULT
+    @lpVtbl.value.create_unordered_access_view.unsafe_as(Proc(ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC*, ID3D11UnorderedAccessView*, HRESULT)).call(presource, pdesc, ppuaview)
+  end
+  def create_render_target_view(presource : ID3D11Resource, pdesc : D3D11_RENDER_TARGET_VIEW_DESC*, pprtview : ID3D11RenderTargetView*) : HRESULT
+    @lpVtbl.value.create_render_target_view.unsafe_as(Proc(ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC*, ID3D11RenderTargetView*, HRESULT)).call(presource, pdesc, pprtview)
+  end
+  def create_depth_stencil_view(presource : ID3D11Resource, pdesc : D3D11_DEPTH_STENCIL_VIEW_DESC*, ppdepthstencilview : ID3D11DepthStencilView*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_view.unsafe_as(Proc(ID3D11Resource, D3D11_DEPTH_STENCIL_VIEW_DESC*, ID3D11DepthStencilView*, HRESULT)).call(presource, pdesc, ppdepthstencilview)
+  end
+  def create_input_layout(pinputelementdescs : D3D11_INPUT_ELEMENT_DESC*, numelements : UInt32, pshaderbytecodewithinputsignature : Void*, bytecodelength : LibC::UINT_PTR, ppinputlayout : ID3D11InputLayout*) : HRESULT
+    @lpVtbl.value.create_input_layout.unsafe_as(Proc(D3D11_INPUT_ELEMENT_DESC*, UInt32, Void*, LibC::UINT_PTR, ID3D11InputLayout*, HRESULT)).call(pinputelementdescs, numelements, pshaderbytecodewithinputsignature, bytecodelength, ppinputlayout)
+  end
+  def create_vertex_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppvertexshader : ID3D11VertexShader*) : HRESULT
+    @lpVtbl.value.create_vertex_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11VertexShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppvertexshader)
+  end
+  def create_geometry_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppgeometryshader : ID3D11GeometryShader*) : HRESULT
+    @lpVtbl.value.create_geometry_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppgeometryshader)
+  end
+  def create_geometry_shader_with_stream_output(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, psodeclaration : D3D11_SO_DECLARATION_ENTRY*, numentries : UInt32, pbufferstrides : UInt32*, numstrides : UInt32, rasterizedstream : UInt32, pclasslinkage : ID3D11ClassLinkage, ppgeometryshader : ID3D11GeometryShader*) : HRESULT
+    @lpVtbl.value.create_geometry_shader_with_stream_output.unsafe_as(Proc(Void*, LibC::UINT_PTR, D3D11_SO_DECLARATION_ENTRY*, UInt32, UInt32*, UInt32, UInt32, ID3D11ClassLinkage, ID3D11GeometryShader*, HRESULT)).call(pshaderbytecode, bytecodelength, psodeclaration, numentries, pbufferstrides, numstrides, rasterizedstream, pclasslinkage, ppgeometryshader)
+  end
+  def create_pixel_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, pppixelshader : ID3D11PixelShader*) : HRESULT
+    @lpVtbl.value.create_pixel_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11PixelShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, pppixelshader)
+  end
+  def create_hull_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, pphullshader : ID3D11HullShader*) : HRESULT
+    @lpVtbl.value.create_hull_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11HullShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, pphullshader)
+  end
+  def create_domain_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppdomainshader : ID3D11DomainShader*) : HRESULT
+    @lpVtbl.value.create_domain_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11DomainShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppdomainshader)
+  end
+  def create_compute_shader(pshaderbytecode : Void*, bytecodelength : LibC::UINT_PTR, pclasslinkage : ID3D11ClassLinkage, ppcomputeshader : ID3D11ComputeShader*) : HRESULT
+    @lpVtbl.value.create_compute_shader.unsafe_as(Proc(Void*, LibC::UINT_PTR, ID3D11ClassLinkage, ID3D11ComputeShader*, HRESULT)).call(pshaderbytecode, bytecodelength, pclasslinkage, ppcomputeshader)
+  end
+  def create_class_linkage(pplinkage : ID3D11ClassLinkage*) : HRESULT
+    @lpVtbl.value.create_class_linkage.unsafe_as(Proc(ID3D11ClassLinkage*, HRESULT)).call(pplinkage)
+  end
+  def create_blend_state(pblendstatedesc : D3D11_BLEND_DESC*, ppblendstate : ID3D11BlendState*) : HRESULT
+    @lpVtbl.value.create_blend_state.unsafe_as(Proc(D3D11_BLEND_DESC*, ID3D11BlendState*, HRESULT)).call(pblendstatedesc, ppblendstate)
+  end
+  def create_depth_stencil_state(pdepthstencildesc : D3D11_DEPTH_STENCIL_DESC*, ppdepthstencilstate : ID3D11DepthStencilState*) : HRESULT
+    @lpVtbl.value.create_depth_stencil_state.unsafe_as(Proc(D3D11_DEPTH_STENCIL_DESC*, ID3D11DepthStencilState*, HRESULT)).call(pdepthstencildesc, ppdepthstencilstate)
+  end
+  def create_rasterizer_state(prasterizerdesc : D3D11_RASTERIZER_DESC*, pprasterizerstate : ID3D11RasterizerState*) : HRESULT
+    @lpVtbl.value.create_rasterizer_state.unsafe_as(Proc(D3D11_RASTERIZER_DESC*, ID3D11RasterizerState*, HRESULT)).call(prasterizerdesc, pprasterizerstate)
+  end
+  def create_sampler_state(psamplerdesc : D3D11_SAMPLER_DESC*, ppsamplerstate : ID3D11SamplerState*) : HRESULT
+    @lpVtbl.value.create_sampler_state.unsafe_as(Proc(D3D11_SAMPLER_DESC*, ID3D11SamplerState*, HRESULT)).call(psamplerdesc, ppsamplerstate)
+  end
+  def create_query(pquerydesc : D3D11_QUERY_DESC*, ppquery : ID3D11Query*) : HRESULT
+    @lpVtbl.value.create_query.unsafe_as(Proc(D3D11_QUERY_DESC*, ID3D11Query*, HRESULT)).call(pquerydesc, ppquery)
+  end
+  def create_predicate(ppredicatedesc : D3D11_QUERY_DESC*, pppredicate : ID3D11Predicate*) : HRESULT
+    @lpVtbl.value.create_predicate.unsafe_as(Proc(D3D11_QUERY_DESC*, ID3D11Predicate*, HRESULT)).call(ppredicatedesc, pppredicate)
+  end
+  def create_counter(pcounterdesc : D3D11_COUNTER_DESC*, ppcounter : ID3D11Counter*) : HRESULT
+    @lpVtbl.value.create_counter.unsafe_as(Proc(D3D11_COUNTER_DESC*, ID3D11Counter*, HRESULT)).call(pcounterdesc, ppcounter)
+  end
+  def create_deferred_context(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext*) : HRESULT
+    @lpVtbl.value.create_deferred_context.unsafe_as(Proc(UInt32, ID3D11DeviceContext*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def open_shared_resource(hresource : LibC::HANDLE, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hresource, returnedinterface, ppresource)
+  end
+  def check_format_support(format : DXGI_FORMAT, pformatsupport : UInt32*) : HRESULT
+    @lpVtbl.value.check_format_support.unsafe_as(Proc(DXGI_FORMAT, UInt32*, HRESULT)).call(format, pformatsupport)
+  end
+  def check_multisample_quality_levels(format : DXGI_FORMAT, samplecount : UInt32, pnumqualitylevels : UInt32*) : HRESULT
+    @lpVtbl.value.check_multisample_quality_levels.unsafe_as(Proc(DXGI_FORMAT, UInt32, UInt32*, HRESULT)).call(format, samplecount, pnumqualitylevels)
+  end
+  def check_counter_info(pcounterinfo : D3D11_COUNTER_INFO*) : Void
+    @lpVtbl.value.check_counter_info.unsafe_as(Proc(D3D11_COUNTER_INFO*, Void)).call(pcounterinfo)
+  end
+  def check_counter(pdesc : D3D11_COUNTER_DESC*, ptype : D3D11_COUNTER_TYPE*, pactivecounters : UInt32*, szname : UInt8*, pnamelength : UInt32*, szunits : UInt8*, punitslength : UInt32*, szdescription : UInt8*, pdescriptionlength : UInt32*) : HRESULT
+    @lpVtbl.value.check_counter.unsafe_as(Proc(D3D11_COUNTER_DESC*, D3D11_COUNTER_TYPE*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, UInt8*, UInt32*, HRESULT)).call(pdesc, ptype, pactivecounters, szname, pnamelength, szunits, punitslength, szdescription, pdescriptionlength)
+  end
+  def check_feature_support(feature : D3D11_FEATURE, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D11_FEATURE, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_feature_level : D3D_FEATURE_LEVEL
+    @lpVtbl.value.get_feature_level.unsafe_as(Proc(D3D_FEATURE_LEVEL)).call
+  end
+  def get_creation_flags : UInt32
+    @lpVtbl.value.get_creation_flags.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device_removed_reason : HRESULT
+    @lpVtbl.value.get_device_removed_reason.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_immediate_context(ppimmediatecontext : ID3D11DeviceContext*) : Void
+    @lpVtbl.value.get_immediate_context.unsafe_as(Proc(ID3D11DeviceContext*, Void)).call(ppimmediatecontext)
+  end
+  def set_exception_mode(raiseflags : UInt32) : HRESULT
+    @lpVtbl.value.set_exception_mode.unsafe_as(Proc(UInt32, HRESULT)).call(raiseflags)
+  end
+  def get_exception_mode : UInt32
+    @lpVtbl.value.get_exception_mode.unsafe_as(Proc(UInt32)).call
+  end
+  def get_immediate_context1(ppimmediatecontext : ID3D11DeviceContext1*) : Void
+    @lpVtbl.value.get_immediate_context1.unsafe_as(Proc(ID3D11DeviceContext1*, Void)).call(ppimmediatecontext)
+  end
+  def create_deferred_context1(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext1*) : HRESULT
+    @lpVtbl.value.create_deferred_context1.unsafe_as(Proc(UInt32, ID3D11DeviceContext1*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def create_blend_state1(pblendstatedesc : D3D11_BLEND_DESC1*, ppblendstate : ID3D11BlendState1*) : HRESULT
+    @lpVtbl.value.create_blend_state1.unsafe_as(Proc(D3D11_BLEND_DESC1*, ID3D11BlendState1*, HRESULT)).call(pblendstatedesc, ppblendstate)
+  end
+  def create_rasterizer_state1(prasterizerdesc : D3D11_RASTERIZER_DESC1*, pprasterizerstate : ID3D11RasterizerState1*) : HRESULT
+    @lpVtbl.value.create_rasterizer_state1.unsafe_as(Proc(D3D11_RASTERIZER_DESC1*, ID3D11RasterizerState1*, HRESULT)).call(prasterizerdesc, pprasterizerstate)
+  end
+  def create_device_context_state(flags : UInt32, pfeaturelevels : D3D_FEATURE_LEVEL*, featurelevels : UInt32, sdkversion : UInt32, emulatedinterface : Guid*, pchosenfeaturelevel : D3D_FEATURE_LEVEL*, ppcontextstate : ID3DDeviceContextState*) : HRESULT
+    @lpVtbl.value.create_device_context_state.unsafe_as(Proc(UInt32, D3D_FEATURE_LEVEL*, UInt32, UInt32, Guid*, D3D_FEATURE_LEVEL*, ID3DDeviceContextState*, HRESULT)).call(flags, pfeaturelevels, featurelevels, sdkversion, emulatedinterface, pchosenfeaturelevel, ppcontextstate)
+  end
+  def open_shared_resource1(hresource : LibC::HANDLE, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource1.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hresource, returnedinterface, ppresource)
+  end
+  def open_shared_resource_by_name(lpname : LibC::LPWSTR, dwdesiredaccess : UInt32, returnedinterface : Guid*, ppresource : Void**) : HRESULT
+    @lpVtbl.value.open_shared_resource_by_name.unsafe_as(Proc(LibC::LPWSTR, UInt32, Guid*, Void**, HRESULT)).call(lpname, dwdesiredaccess, returnedinterface, ppresource)
+  end
+  def get_immediate_context2(ppimmediatecontext : ID3D11DeviceContext2*) : Void
+    @lpVtbl.value.get_immediate_context2.unsafe_as(Proc(ID3D11DeviceContext2*, Void)).call(ppimmediatecontext)
+  end
+  def create_deferred_context2(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext2*) : HRESULT
+    @lpVtbl.value.create_deferred_context2.unsafe_as(Proc(UInt32, ID3D11DeviceContext2*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def get_resource_tiling(ptiledresource : ID3D11Resource, pnumtilesforentireresource : UInt32*, ppackedmipdesc : D3D11_PACKED_MIP_DESC*, pstandardtileshapefornonpackedmips : D3D11_TILE_SHAPE*, pnumsubresourcetilings : UInt32*, firstsubresourcetilingtoget : UInt32, psubresourcetilingsfornonpackedmips : D3D11_SUBRESOURCE_TILING*) : Void
+    @lpVtbl.value.get_resource_tiling.unsafe_as(Proc(ID3D11Resource, UInt32*, D3D11_PACKED_MIP_DESC*, D3D11_TILE_SHAPE*, UInt32*, UInt32, D3D11_SUBRESOURCE_TILING*, Void)).call(ptiledresource, pnumtilesforentireresource, ppackedmipdesc, pstandardtileshapefornonpackedmips, pnumsubresourcetilings, firstsubresourcetilingtoget, psubresourcetilingsfornonpackedmips)
+  end
+  def check_multisample_quality_levels1(format : DXGI_FORMAT, samplecount : UInt32, flags : UInt32, pnumqualitylevels : UInt32*) : HRESULT
+    @lpVtbl.value.check_multisample_quality_levels1.unsafe_as(Proc(DXGI_FORMAT, UInt32, UInt32, UInt32*, HRESULT)).call(format, samplecount, flags, pnumqualitylevels)
+  end
+  def create_texture2_d1(pdesc1 : D3D11_TEXTURE2D_DESC1*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture2d : ID3D11Texture2D1*) : HRESULT
+    @lpVtbl.value.create_texture2_d1.unsafe_as(Proc(D3D11_TEXTURE2D_DESC1*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture2D1*, HRESULT)).call(pdesc1, pinitialdata, pptexture2d)
+  end
+  def create_texture3_d1(pdesc1 : D3D11_TEXTURE3D_DESC1*, pinitialdata : D3D11_SUBRESOURCE_DATA*, pptexture3d : ID3D11Texture3D1*) : HRESULT
+    @lpVtbl.value.create_texture3_d1.unsafe_as(Proc(D3D11_TEXTURE3D_DESC1*, D3D11_SUBRESOURCE_DATA*, ID3D11Texture3D1*, HRESULT)).call(pdesc1, pinitialdata, pptexture3d)
+  end
+  def create_rasterizer_state2(prasterizerdesc : D3D11_RASTERIZER_DESC2*, pprasterizerstate : ID3D11RasterizerState2*) : HRESULT
+    @lpVtbl.value.create_rasterizer_state2.unsafe_as(Proc(D3D11_RASTERIZER_DESC2*, ID3D11RasterizerState2*, HRESULT)).call(prasterizerdesc, pprasterizerstate)
+  end
+  def create_shader_resource_view1(presource : ID3D11Resource, pdesc1 : D3D11_SHADER_RESOURCE_VIEW_DESC1*, ppsrview1 : ID3D11ShaderResourceView1*) : HRESULT
+    @lpVtbl.value.create_shader_resource_view1.unsafe_as(Proc(ID3D11Resource, D3D11_SHADER_RESOURCE_VIEW_DESC1*, ID3D11ShaderResourceView1*, HRESULT)).call(presource, pdesc1, ppsrview1)
+  end
+  def create_unordered_access_view1(presource : ID3D11Resource, pdesc1 : D3D11_UNORDERED_ACCESS_VIEW_DESC1*, ppuaview1 : ID3D11UnorderedAccessView1*) : HRESULT
+    @lpVtbl.value.create_unordered_access_view1.unsafe_as(Proc(ID3D11Resource, D3D11_UNORDERED_ACCESS_VIEW_DESC1*, ID3D11UnorderedAccessView1*, HRESULT)).call(presource, pdesc1, ppuaview1)
+  end
+  def create_render_target_view1(presource : ID3D11Resource, pdesc1 : D3D11_RENDER_TARGET_VIEW_DESC1*, pprtview1 : ID3D11RenderTargetView1*) : HRESULT
+    @lpVtbl.value.create_render_target_view1.unsafe_as(Proc(ID3D11Resource, D3D11_RENDER_TARGET_VIEW_DESC1*, ID3D11RenderTargetView1*, HRESULT)).call(presource, pdesc1, pprtview1)
+  end
+  def create_query1(pquerydesc1 : D3D11_QUERY_DESC1*, ppquery1 : ID3D11Query1*) : HRESULT
+    @lpVtbl.value.create_query1.unsafe_as(Proc(D3D11_QUERY_DESC1*, ID3D11Query1*, HRESULT)).call(pquerydesc1, ppquery1)
+  end
+  def get_immediate_context3(ppimmediatecontext : ID3D11DeviceContext3*) : Void
+    @lpVtbl.value.get_immediate_context3.unsafe_as(Proc(ID3D11DeviceContext3*, Void)).call(ppimmediatecontext)
+  end
+  def create_deferred_context3(contextflags : UInt32, ppdeferredcontext : ID3D11DeviceContext3*) : HRESULT
+    @lpVtbl.value.create_deferred_context3.unsafe_as(Proc(UInt32, ID3D11DeviceContext3*, HRESULT)).call(contextflags, ppdeferredcontext)
+  end
+  def write_to_subresource(pdstresource : ID3D11Resource, dstsubresource : UInt32, pdstbox : D3D11_BOX*, psrcdata : Void*, srcrowpitch : UInt32, srcdepthpitch : UInt32) : Void
+    @lpVtbl.value.write_to_subresource.unsafe_as(Proc(ID3D11Resource, UInt32, D3D11_BOX*, Void*, UInt32, UInt32, Void)).call(pdstresource, dstsubresource, pdstbox, psrcdata, srcrowpitch, srcdepthpitch)
+  end
+  def read_from_subresource(pdstdata : Void*, dstrowpitch : UInt32, dstdepthpitch : UInt32, psrcresource : ID3D11Resource, srcsubresource : UInt32, psrcbox : D3D11_BOX*) : Void
+    @lpVtbl.value.read_from_subresource.unsafe_as(Proc(Void*, UInt32, UInt32, ID3D11Resource, UInt32, D3D11_BOX*, Void)).call(pdstdata, dstrowpitch, dstdepthpitch, psrcresource, srcsubresource, psrcbox)
+  end
+  def register_device_removed_event(hevent : LibC::HANDLE, pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.register_device_removed_event.unsafe_as(Proc(LibC::HANDLE, UInt32*, HRESULT)).call(hevent, pdwcookie)
+  end
+  def unregister_device_removed(dwcookie : UInt32) : Void
+    @lpVtbl.value.unregister_device_removed.unsafe_as(Proc(UInt32, Void)).call(dwcookie)
+  end
+  def open_shared_fence(hfence : LibC::HANDLE, returnedinterface : Guid*, ppfence : Void**) : HRESULT
+    @lpVtbl.value.open_shared_fence.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hfence, returnedinterface, ppfence)
+  end
+  def create_fence(initialvalue : UInt64, flags : D3D11_FENCE_FLAG, returnedinterface : Guid*, ppfence : Void**) : HRESULT
+    @lpVtbl.value.create_fence.unsafe_as(Proc(UInt64, D3D11_FENCE_FLAG, Guid*, Void**, HRESULT)).call(initialvalue, flags, returnedinterface, ppfence)
+  end
+end
+struct LibWin32::ID3D11Multithread
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enter : Void
+    @lpVtbl.value.enter.unsafe_as(Proc(Void)).call
+  end
+  def leave : Void
+    @lpVtbl.value.leave.unsafe_as(Proc(Void)).call
+  end
+  def set_multithread_protected(bmtprotect : LibC::BOOL) : LibC::BOOL
+    @lpVtbl.value.set_multithread_protected.unsafe_as(Proc(LibC::BOOL, LibC::BOOL)).call(bmtprotect)
+  end
+  def get_multithread_protected : LibC::BOOL
+    @lpVtbl.value.get_multithread_protected.unsafe_as(Proc(LibC::BOOL)).call
+  end
+end
+struct LibWin32::ID3D11VideoContext2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_decoder_buffer(pdecoder : ID3D11VideoDecoder, type : D3D11_VIDEO_DECODER_BUFFER_TYPE, pbuffersize : UInt32*, ppbuffer : Void**) : HRESULT
+    @lpVtbl.value.get_decoder_buffer.unsafe_as(Proc(ID3D11VideoDecoder, D3D11_VIDEO_DECODER_BUFFER_TYPE, UInt32*, Void**, HRESULT)).call(pdecoder, type, pbuffersize, ppbuffer)
+  end
+  def release_decoder_buffer(pdecoder : ID3D11VideoDecoder, type : D3D11_VIDEO_DECODER_BUFFER_TYPE) : HRESULT
+    @lpVtbl.value.release_decoder_buffer.unsafe_as(Proc(ID3D11VideoDecoder, D3D11_VIDEO_DECODER_BUFFER_TYPE, HRESULT)).call(pdecoder, type)
+  end
+  def decoder_begin_frame(pdecoder : ID3D11VideoDecoder, pview : ID3D11VideoDecoderOutputView, contentkeysize : UInt32, pcontentkey : Void*) : HRESULT
+    @lpVtbl.value.decoder_begin_frame.unsafe_as(Proc(ID3D11VideoDecoder, ID3D11VideoDecoderOutputView, UInt32, Void*, HRESULT)).call(pdecoder, pview, contentkeysize, pcontentkey)
+  end
+  def decoder_end_frame(pdecoder : ID3D11VideoDecoder) : HRESULT
+    @lpVtbl.value.decoder_end_frame.unsafe_as(Proc(ID3D11VideoDecoder, HRESULT)).call(pdecoder)
+  end
+  def submit_decoder_buffers(pdecoder : ID3D11VideoDecoder, numbuffers : UInt32, pbufferdesc : D3D11_VIDEO_DECODER_BUFFER_DESC*) : HRESULT
+    @lpVtbl.value.submit_decoder_buffers.unsafe_as(Proc(ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC*, HRESULT)).call(pdecoder, numbuffers, pbufferdesc)
+  end
+  def decoder_extension(pdecoder : ID3D11VideoDecoder, pextensiondata : D3D11_VIDEO_DECODER_EXTENSION*) : Int32
+    @lpVtbl.value.decoder_extension.unsafe_as(Proc(ID3D11VideoDecoder, D3D11_VIDEO_DECODER_EXTENSION*, Int32)).call(pdecoder, pextensiondata)
+  end
+  def video_processor_set_output_target_rect(pvideoprocessor : ID3D11VideoProcessor, enable : LibC::BOOL, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_set_output_target_rect.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, RECT*, Void)).call(pvideoprocessor, enable, prect)
+  end
+  def video_processor_set_output_background_color(pvideoprocessor : ID3D11VideoProcessor, ycbcr : LibC::BOOL, pcolor : D3D11_VIDEO_COLOR*) : Void
+    @lpVtbl.value.video_processor_set_output_background_color.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, D3D11_VIDEO_COLOR*, Void)).call(pvideoprocessor, ycbcr, pcolor)
+  end
+  def video_processor_set_output_color_space(pvideoprocessor : ID3D11VideoProcessor, pcolorspace : D3D11_VIDEO_PROCESSOR_COLOR_SPACE*) : Void
+    @lpVtbl.value.video_processor_set_output_color_space.unsafe_as(Proc(ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)).call(pvideoprocessor, pcolorspace)
+  end
+  def video_processor_set_output_alpha_fill_mode(pvideoprocessor : ID3D11VideoProcessor, alphafillmode : D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, streamindex : UInt32) : Void
+    @lpVtbl.value.video_processor_set_output_alpha_fill_mode.unsafe_as(Proc(ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, UInt32, Void)).call(pvideoprocessor, alphafillmode, streamindex)
+  end
+  def video_processor_set_output_constriction(pvideoprocessor : ID3D11VideoProcessor, enable : LibC::BOOL, size : SIZE) : Void
+    @lpVtbl.value.video_processor_set_output_constriction.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, SIZE, Void)).call(pvideoprocessor, enable, size)
+  end
+  def video_processor_set_output_stereo_mode(pvideoprocessor : ID3D11VideoProcessor, enable : LibC::BOOL) : Void
+    @lpVtbl.value.video_processor_set_output_stereo_mode.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, Void)).call(pvideoprocessor, enable)
+  end
+  def video_processor_set_output_extension(pvideoprocessor : ID3D11VideoProcessor, pextensionguid : Guid*, datasize : UInt32, pdata : Void*) : Int32
+    @lpVtbl.value.video_processor_set_output_extension.unsafe_as(Proc(ID3D11VideoProcessor, Guid*, UInt32, Void*, Int32)).call(pvideoprocessor, pextensionguid, datasize, pdata)
+  end
+  def video_processor_get_output_target_rect(pvideoprocessor : ID3D11VideoProcessor, enabled : LibC::BOOL*, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_get_output_target_rect.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, RECT*, Void)).call(pvideoprocessor, enabled, prect)
+  end
+  def video_processor_get_output_background_color(pvideoprocessor : ID3D11VideoProcessor, pycbcr : LibC::BOOL*, pcolor : D3D11_VIDEO_COLOR*) : Void
+    @lpVtbl.value.video_processor_get_output_background_color.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, D3D11_VIDEO_COLOR*, Void)).call(pvideoprocessor, pycbcr, pcolor)
+  end
+  def video_processor_get_output_color_space(pvideoprocessor : ID3D11VideoProcessor, pcolorspace : D3D11_VIDEO_PROCESSOR_COLOR_SPACE*) : Void
+    @lpVtbl.value.video_processor_get_output_color_space.unsafe_as(Proc(ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)).call(pvideoprocessor, pcolorspace)
+  end
+  def video_processor_get_output_alpha_fill_mode(pvideoprocessor : ID3D11VideoProcessor, palphafillmode : D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE*, pstreamindex : UInt32*) : Void
+    @lpVtbl.value.video_processor_get_output_alpha_fill_mode.unsafe_as(Proc(ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE*, UInt32*, Void)).call(pvideoprocessor, palphafillmode, pstreamindex)
+  end
+  def video_processor_get_output_constriction(pvideoprocessor : ID3D11VideoProcessor, penabled : LibC::BOOL*, psize : SIZE*) : Void
+    @lpVtbl.value.video_processor_get_output_constriction.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, SIZE*, Void)).call(pvideoprocessor, penabled, psize)
+  end
+  def video_processor_get_output_stereo_mode(pvideoprocessor : ID3D11VideoProcessor, penabled : LibC::BOOL*) : Void
+    @lpVtbl.value.video_processor_get_output_stereo_mode.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, Void)).call(pvideoprocessor, penabled)
+  end
+  def video_processor_get_output_extension(pvideoprocessor : ID3D11VideoProcessor, pextensionguid : Guid*, datasize : UInt32, pdata : Void*) : Int32
+    @lpVtbl.value.video_processor_get_output_extension.unsafe_as(Proc(ID3D11VideoProcessor, Guid*, UInt32, Void*, Int32)).call(pvideoprocessor, pextensionguid, datasize, pdata)
+  end
+  def video_processor_set_stream_frame_format(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, frameformat : D3D11_VIDEO_FRAME_FORMAT) : Void
+    @lpVtbl.value.video_processor_set_stream_frame_format.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_FRAME_FORMAT, Void)).call(pvideoprocessor, streamindex, frameformat)
+  end
+  def video_processor_set_stream_color_space(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pcolorspace : D3D11_VIDEO_PROCESSOR_COLOR_SPACE*) : Void
+    @lpVtbl.value.video_processor_set_stream_color_space.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)).call(pvideoprocessor, streamindex, pcolorspace)
+  end
+  def video_processor_set_stream_output_rate(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, outputrate : D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, repeatframe : LibC::BOOL, pcustomrate : DXGI_RATIONAL*) : Void
+    @lpVtbl.value.video_processor_set_stream_output_rate.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, LibC::BOOL, DXGI_RATIONAL*, Void)).call(pvideoprocessor, streamindex, outputrate, repeatframe, pcustomrate)
+  end
+  def video_processor_set_stream_source_rect(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_set_stream_source_rect.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, RECT*, Void)).call(pvideoprocessor, streamindex, enable, prect)
+  end
+  def video_processor_set_stream_dest_rect(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_set_stream_dest_rect.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, RECT*, Void)).call(pvideoprocessor, streamindex, enable, prect)
+  end
+  def video_processor_set_stream_alpha(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, alpha : Float32) : Void
+    @lpVtbl.value.video_processor_set_stream_alpha.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, Float32, Void)).call(pvideoprocessor, streamindex, enable, alpha)
+  end
+  def video_processor_set_stream_palette(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, count : UInt32, pentries : UInt32*) : Void
+    @lpVtbl.value.video_processor_set_stream_palette.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, UInt32, UInt32*, Void)).call(pvideoprocessor, streamindex, count, pentries)
+  end
+  def video_processor_set_stream_pixel_aspect_ratio(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, psourceaspectratio : DXGI_RATIONAL*, pdestinationaspectratio : DXGI_RATIONAL*) : Void
+    @lpVtbl.value.video_processor_set_stream_pixel_aspect_ratio.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, DXGI_RATIONAL*, DXGI_RATIONAL*, Void)).call(pvideoprocessor, streamindex, enable, psourceaspectratio, pdestinationaspectratio)
+  end
+  def video_processor_set_stream_luma_key(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, lower : Float32, upper : Float32) : Void
+    @lpVtbl.value.video_processor_set_stream_luma_key.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, Float32, Float32, Void)).call(pvideoprocessor, streamindex, enable, lower, upper)
+  end
+  def video_processor_set_stream_stereo_format(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, format : D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, leftviewframe0 : LibC::BOOL, baseviewframe0 : LibC::BOOL, flipmode : D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, monooffset : Int32) : Void
+    @lpVtbl.value.video_processor_set_stream_stereo_format.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, LibC::BOOL, LibC::BOOL, D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, Int32, Void)).call(pvideoprocessor, streamindex, enable, format, leftviewframe0, baseviewframe0, flipmode, monooffset)
+  end
+  def video_processor_set_stream_auto_processing_mode(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL) : Void
+    @lpVtbl.value.video_processor_set_stream_auto_processing_mode.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, Void)).call(pvideoprocessor, streamindex, enable)
+  end
+  def video_processor_set_stream_filter(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, filter : D3D11_VIDEO_PROCESSOR_FILTER, enable : LibC::BOOL, level : Int32) : Void
+    @lpVtbl.value.video_processor_set_stream_filter.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_FILTER, LibC::BOOL, Int32, Void)).call(pvideoprocessor, streamindex, filter, enable, level)
+  end
+  def video_processor_set_stream_extension(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pextensionguid : Guid*, datasize : UInt32, pdata : Void*) : Int32
+    @lpVtbl.value.video_processor_set_stream_extension.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, Guid*, UInt32, Void*, Int32)).call(pvideoprocessor, streamindex, pextensionguid, datasize, pdata)
+  end
+  def video_processor_get_stream_frame_format(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pframeformat : D3D11_VIDEO_FRAME_FORMAT*) : Void
+    @lpVtbl.value.video_processor_get_stream_frame_format.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_FRAME_FORMAT*, Void)).call(pvideoprocessor, streamindex, pframeformat)
+  end
+  def video_processor_get_stream_color_space(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pcolorspace : D3D11_VIDEO_PROCESSOR_COLOR_SPACE*) : Void
+    @lpVtbl.value.video_processor_get_stream_color_space.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)).call(pvideoprocessor, streamindex, pcolorspace)
+  end
+  def video_processor_get_stream_output_rate(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, poutputrate : D3D11_VIDEO_PROCESSOR_OUTPUT_RATE*, prepeatframe : LibC::BOOL*, pcustomrate : DXGI_RATIONAL*) : Void
+    @lpVtbl.value.video_processor_get_stream_output_rate.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_OUTPUT_RATE*, LibC::BOOL*, DXGI_RATIONAL*, Void)).call(pvideoprocessor, streamindex, poutputrate, prepeatframe, pcustomrate)
+  end
+  def video_processor_get_stream_source_rect(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_get_stream_source_rect.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, RECT*, Void)).call(pvideoprocessor, streamindex, penabled, prect)
+  end
+  def video_processor_get_stream_dest_rect(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_get_stream_dest_rect.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, RECT*, Void)).call(pvideoprocessor, streamindex, penabled, prect)
+  end
+  def video_processor_get_stream_alpha(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, palpha : Float32*) : Void
+    @lpVtbl.value.video_processor_get_stream_alpha.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, Float32*, Void)).call(pvideoprocessor, streamindex, penabled, palpha)
+  end
+  def video_processor_get_stream_palette(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, count : UInt32, pentries : UInt32*) : Void
+    @lpVtbl.value.video_processor_get_stream_palette.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, UInt32, UInt32*, Void)).call(pvideoprocessor, streamindex, count, pentries)
+  end
+  def video_processor_get_stream_pixel_aspect_ratio(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, psourceaspectratio : DXGI_RATIONAL*, pdestinationaspectratio : DXGI_RATIONAL*) : Void
+    @lpVtbl.value.video_processor_get_stream_pixel_aspect_ratio.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, DXGI_RATIONAL*, DXGI_RATIONAL*, Void)).call(pvideoprocessor, streamindex, penabled, psourceaspectratio, pdestinationaspectratio)
+  end
+  def video_processor_get_stream_luma_key(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, plower : Float32*, pupper : Float32*) : Void
+    @lpVtbl.value.video_processor_get_stream_luma_key.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, Float32*, Float32*, Void)).call(pvideoprocessor, streamindex, penabled, plower, pupper)
+  end
+  def video_processor_get_stream_stereo_format(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penable : LibC::BOOL*, pformat : D3D11_VIDEO_PROCESSOR_STEREO_FORMAT*, pleftviewframe0 : LibC::BOOL*, pbaseviewframe0 : LibC::BOOL*, pflipmode : D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE*, monooffset : Int32*) : Void
+    @lpVtbl.value.video_processor_get_stream_stereo_format.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_STEREO_FORMAT*, LibC::BOOL*, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE*, Int32*, Void)).call(pvideoprocessor, streamindex, penable, pformat, pleftviewframe0, pbaseviewframe0, pflipmode, monooffset)
+  end
+  def video_processor_get_stream_auto_processing_mode(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*) : Void
+    @lpVtbl.value.video_processor_get_stream_auto_processing_mode.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, Void)).call(pvideoprocessor, streamindex, penabled)
+  end
+  def video_processor_get_stream_filter(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, filter : D3D11_VIDEO_PROCESSOR_FILTER, penabled : LibC::BOOL*, plevel : Int32*) : Void
+    @lpVtbl.value.video_processor_get_stream_filter.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_FILTER, LibC::BOOL*, Int32*, Void)).call(pvideoprocessor, streamindex, filter, penabled, plevel)
+  end
+  def video_processor_get_stream_extension(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pextensionguid : Guid*, datasize : UInt32, pdata : Void*) : Int32
+    @lpVtbl.value.video_processor_get_stream_extension.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, Guid*, UInt32, Void*, Int32)).call(pvideoprocessor, streamindex, pextensionguid, datasize, pdata)
+  end
+  def video_processor_blt(pvideoprocessor : ID3D11VideoProcessor, pview : ID3D11VideoProcessorOutputView, outputframe : UInt32, streamcount : UInt32, pstreams : D3D11_VIDEO_PROCESSOR_STREAM*) : HRESULT
+    @lpVtbl.value.video_processor_blt.unsafe_as(Proc(ID3D11VideoProcessor, ID3D11VideoProcessorOutputView, UInt32, UInt32, D3D11_VIDEO_PROCESSOR_STREAM*, HRESULT)).call(pvideoprocessor, pview, outputframe, streamcount, pstreams)
+  end
+  def negotiate_crypto_session_key_exchange(pcryptosession : ID3D11CryptoSession, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.negotiate_crypto_session_key_exchange.unsafe_as(Proc(ID3D11CryptoSession, UInt32, Void*, HRESULT)).call(pcryptosession, datasize, pdata)
+  end
+  def encryption_blt(pcryptosession : ID3D11CryptoSession, psrcsurface : ID3D11Texture2D, pdstsurface : ID3D11Texture2D, ivsize : UInt32, piv : Void*) : Void
+    @lpVtbl.value.encryption_blt.unsafe_as(Proc(ID3D11CryptoSession, ID3D11Texture2D, ID3D11Texture2D, UInt32, Void*, Void)).call(pcryptosession, psrcsurface, pdstsurface, ivsize, piv)
+  end
+  def decryption_blt(pcryptosession : ID3D11CryptoSession, psrcsurface : ID3D11Texture2D, pdstsurface : ID3D11Texture2D, pencryptedblockinfo : D3D11_ENCRYPTED_BLOCK_INFO*, contentkeysize : UInt32, pcontentkey : Void*, ivsize : UInt32, piv : Void*) : Void
+    @lpVtbl.value.decryption_blt.unsafe_as(Proc(ID3D11CryptoSession, ID3D11Texture2D, ID3D11Texture2D, D3D11_ENCRYPTED_BLOCK_INFO*, UInt32, Void*, UInt32, Void*, Void)).call(pcryptosession, psrcsurface, pdstsurface, pencryptedblockinfo, contentkeysize, pcontentkey, ivsize, piv)
+  end
+  def start_session_key_refresh(pcryptosession : ID3D11CryptoSession, randomnumbersize : UInt32, prandomnumber : Void*) : Void
+    @lpVtbl.value.start_session_key_refresh.unsafe_as(Proc(ID3D11CryptoSession, UInt32, Void*, Void)).call(pcryptosession, randomnumbersize, prandomnumber)
+  end
+  def finish_session_key_refresh(pcryptosession : ID3D11CryptoSession) : Void
+    @lpVtbl.value.finish_session_key_refresh.unsafe_as(Proc(ID3D11CryptoSession, Void)).call(pcryptosession)
+  end
+  def get_encryption_blt_key(pcryptosession : ID3D11CryptoSession, keysize : UInt32, preadbackkey : Void*) : HRESULT
+    @lpVtbl.value.get_encryption_blt_key.unsafe_as(Proc(ID3D11CryptoSession, UInt32, Void*, HRESULT)).call(pcryptosession, keysize, preadbackkey)
+  end
+  def negotiate_authenticated_channel_key_exchange(pchannel : ID3D11AuthenticatedChannel, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.negotiate_authenticated_channel_key_exchange.unsafe_as(Proc(ID3D11AuthenticatedChannel, UInt32, Void*, HRESULT)).call(pchannel, datasize, pdata)
+  end
+  def query_authenticated_channel(pchannel : ID3D11AuthenticatedChannel, inputsize : UInt32, pinput : Void*, outputsize : UInt32, poutput : Void*) : HRESULT
+    @lpVtbl.value.query_authenticated_channel.unsafe_as(Proc(ID3D11AuthenticatedChannel, UInt32, Void*, UInt32, Void*, HRESULT)).call(pchannel, inputsize, pinput, outputsize, poutput)
+  end
+  def configure_authenticated_channel(pchannel : ID3D11AuthenticatedChannel, inputsize : UInt32, pinput : Void*, poutput : D3D11_AUTHENTICATED_CONFIGURE_OUTPUT*) : HRESULT
+    @lpVtbl.value.configure_authenticated_channel.unsafe_as(Proc(ID3D11AuthenticatedChannel, UInt32, Void*, D3D11_AUTHENTICATED_CONFIGURE_OUTPUT*, HRESULT)).call(pchannel, inputsize, pinput, poutput)
+  end
+  def video_processor_set_stream_rotation(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, rotation : D3D11_VIDEO_PROCESSOR_ROTATION) : Void
+    @lpVtbl.value.video_processor_set_stream_rotation.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, D3D11_VIDEO_PROCESSOR_ROTATION, Void)).call(pvideoprocessor, streamindex, enable, rotation)
+  end
+  def video_processor_get_stream_rotation(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penable : LibC::BOOL*, protation : D3D11_VIDEO_PROCESSOR_ROTATION*) : Void
+    @lpVtbl.value.video_processor_get_stream_rotation.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_ROTATION*, Void)).call(pvideoprocessor, streamindex, penable, protation)
+  end
+  def submit_decoder_buffers1(pdecoder : ID3D11VideoDecoder, numbuffers : UInt32, pbufferdesc : D3D11_VIDEO_DECODER_BUFFER_DESC1*) : HRESULT
+    @lpVtbl.value.submit_decoder_buffers1.unsafe_as(Proc(ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC1*, HRESULT)).call(pdecoder, numbuffers, pbufferdesc)
+  end
+  def get_data_for_new_hardware_key(pcryptosession : ID3D11CryptoSession, privateinputsize : UInt32, pprivatinputdata : Void*, pprivateoutputdata : UInt64*) : HRESULT
+    @lpVtbl.value.get_data_for_new_hardware_key.unsafe_as(Proc(ID3D11CryptoSession, UInt32, Void*, UInt64*, HRESULT)).call(pcryptosession, privateinputsize, pprivatinputdata, pprivateoutputdata)
+  end
+  def check_crypto_session_status(pcryptosession : ID3D11CryptoSession, pstatus : D3D11_CRYPTO_SESSION_STATUS*) : HRESULT
+    @lpVtbl.value.check_crypto_session_status.unsafe_as(Proc(ID3D11CryptoSession, D3D11_CRYPTO_SESSION_STATUS*, HRESULT)).call(pcryptosession, pstatus)
+  end
+  def decoder_enable_downsampling(pdecoder : ID3D11VideoDecoder, inputcolorspace : DXGI_COLOR_SPACE_TYPE, poutputdesc : D3D11_VIDEO_SAMPLE_DESC*, referenceframecount : UInt32) : HRESULT
+    @lpVtbl.value.decoder_enable_downsampling.unsafe_as(Proc(ID3D11VideoDecoder, DXGI_COLOR_SPACE_TYPE, D3D11_VIDEO_SAMPLE_DESC*, UInt32, HRESULT)).call(pdecoder, inputcolorspace, poutputdesc, referenceframecount)
+  end
+  def decoder_update_downsampling(pdecoder : ID3D11VideoDecoder, poutputdesc : D3D11_VIDEO_SAMPLE_DESC*) : HRESULT
+    @lpVtbl.value.decoder_update_downsampling.unsafe_as(Proc(ID3D11VideoDecoder, D3D11_VIDEO_SAMPLE_DESC*, HRESULT)).call(pdecoder, poutputdesc)
+  end
+  def video_processor_set_output_color_space1(pvideoprocessor : ID3D11VideoProcessor, colorspace : DXGI_COLOR_SPACE_TYPE) : Void
+    @lpVtbl.value.video_processor_set_output_color_space1.unsafe_as(Proc(ID3D11VideoProcessor, DXGI_COLOR_SPACE_TYPE, Void)).call(pvideoprocessor, colorspace)
+  end
+  def video_processor_set_output_shader_usage(pvideoprocessor : ID3D11VideoProcessor, shaderusage : LibC::BOOL) : Void
+    @lpVtbl.value.video_processor_set_output_shader_usage.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, Void)).call(pvideoprocessor, shaderusage)
+  end
+  def video_processor_get_output_color_space1(pvideoprocessor : ID3D11VideoProcessor, pcolorspace : DXGI_COLOR_SPACE_TYPE*) : Void
+    @lpVtbl.value.video_processor_get_output_color_space1.unsafe_as(Proc(ID3D11VideoProcessor, DXGI_COLOR_SPACE_TYPE*, Void)).call(pvideoprocessor, pcolorspace)
+  end
+  def video_processor_get_output_shader_usage(pvideoprocessor : ID3D11VideoProcessor, pshaderusage : LibC::BOOL*) : Void
+    @lpVtbl.value.video_processor_get_output_shader_usage.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, Void)).call(pvideoprocessor, pshaderusage)
+  end
+  def video_processor_set_stream_color_space1(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, colorspace : DXGI_COLOR_SPACE_TYPE) : Void
+    @lpVtbl.value.video_processor_set_stream_color_space1.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, DXGI_COLOR_SPACE_TYPE, Void)).call(pvideoprocessor, streamindex, colorspace)
+  end
+  def video_processor_set_stream_mirror(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, fliphorizontal : LibC::BOOL, flipvertical : LibC::BOOL) : Void
+    @lpVtbl.value.video_processor_set_stream_mirror.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, LibC::BOOL, LibC::BOOL, Void)).call(pvideoprocessor, streamindex, enable, fliphorizontal, flipvertical)
+  end
+  def video_processor_get_stream_color_space1(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pcolorspace : DXGI_COLOR_SPACE_TYPE*) : Void
+    @lpVtbl.value.video_processor_get_stream_color_space1.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, DXGI_COLOR_SPACE_TYPE*, Void)).call(pvideoprocessor, streamindex, pcolorspace)
+  end
+  def video_processor_get_stream_mirror(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penable : LibC::BOOL*, pfliphorizontal : LibC::BOOL*, pflipvertical : LibC::BOOL*) : Void
+    @lpVtbl.value.video_processor_get_stream_mirror.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, LibC::BOOL*, LibC::BOOL*, Void)).call(pvideoprocessor, streamindex, penable, pfliphorizontal, pflipvertical)
+  end
+  def video_processor_get_behavior_hints(pvideoprocessor : ID3D11VideoProcessor, outputwidth : UInt32, outputheight : UInt32, outputformat : DXGI_FORMAT, streamcount : UInt32, pstreams : D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT*, pbehaviorhints : UInt32*) : HRESULT
+    @lpVtbl.value.video_processor_get_behavior_hints.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, UInt32, DXGI_FORMAT, UInt32, D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT*, UInt32*, HRESULT)).call(pvideoprocessor, outputwidth, outputheight, outputformat, streamcount, pstreams, pbehaviorhints)
+  end
+  def video_processor_set_output_hdr_meta_data(pvideoprocessor : ID3D11VideoProcessor, type : DXGI_HDR_METADATA_TYPE, size : UInt32, phdrmetadata : Void*) : Void
+    @lpVtbl.value.video_processor_set_output_hdr_meta_data.unsafe_as(Proc(ID3D11VideoProcessor, DXGI_HDR_METADATA_TYPE, UInt32, Void*, Void)).call(pvideoprocessor, type, size, phdrmetadata)
+  end
+  def video_processor_get_output_hdr_meta_data(pvideoprocessor : ID3D11VideoProcessor, ptype : DXGI_HDR_METADATA_TYPE*, size : UInt32, pmetadata : Void*) : Void
+    @lpVtbl.value.video_processor_get_output_hdr_meta_data.unsafe_as(Proc(ID3D11VideoProcessor, DXGI_HDR_METADATA_TYPE*, UInt32, Void*, Void)).call(pvideoprocessor, ptype, size, pmetadata)
+  end
+  def video_processor_set_stream_hdr_meta_data(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, type : DXGI_HDR_METADATA_TYPE, size : UInt32, phdrmetadata : Void*) : Void
+    @lpVtbl.value.video_processor_set_stream_hdr_meta_data.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, DXGI_HDR_METADATA_TYPE, UInt32, Void*, Void)).call(pvideoprocessor, streamindex, type, size, phdrmetadata)
+  end
+  def video_processor_get_stream_hdr_meta_data(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, ptype : DXGI_HDR_METADATA_TYPE*, size : UInt32, pmetadata : Void*) : Void
+    @lpVtbl.value.video_processor_get_stream_hdr_meta_data.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, DXGI_HDR_METADATA_TYPE*, UInt32, Void*, Void)).call(pvideoprocessor, streamindex, ptype, size, pmetadata)
+  end
+end
+struct LibWin32::ID3D11VideoDevice2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_video_decoder(pvideodesc : D3D11_VIDEO_DECODER_DESC*, pconfig : D3D11_VIDEO_DECODER_CONFIG*, ppdecoder : ID3D11VideoDecoder*) : HRESULT
+    @lpVtbl.value.create_video_decoder.unsafe_as(Proc(D3D11_VIDEO_DECODER_DESC*, D3D11_VIDEO_DECODER_CONFIG*, ID3D11VideoDecoder*, HRESULT)).call(pvideodesc, pconfig, ppdecoder)
+  end
+  def create_video_processor(penum : ID3D11VideoProcessorEnumerator, rateconversionindex : UInt32, ppvideoprocessor : ID3D11VideoProcessor*) : HRESULT
+    @lpVtbl.value.create_video_processor.unsafe_as(Proc(ID3D11VideoProcessorEnumerator, UInt32, ID3D11VideoProcessor*, HRESULT)).call(penum, rateconversionindex, ppvideoprocessor)
+  end
+  def create_authenticated_channel(channeltype : D3D11_AUTHENTICATED_CHANNEL_TYPE, ppauthenticatedchannel : ID3D11AuthenticatedChannel*) : HRESULT
+    @lpVtbl.value.create_authenticated_channel.unsafe_as(Proc(D3D11_AUTHENTICATED_CHANNEL_TYPE, ID3D11AuthenticatedChannel*, HRESULT)).call(channeltype, ppauthenticatedchannel)
+  end
+  def create_crypto_session(pcryptotype : Guid*, pdecoderprofile : Guid*, pkeyexchangetype : Guid*, ppcryptosession : ID3D11CryptoSession*) : HRESULT
+    @lpVtbl.value.create_crypto_session.unsafe_as(Proc(Guid*, Guid*, Guid*, ID3D11CryptoSession*, HRESULT)).call(pcryptotype, pdecoderprofile, pkeyexchangetype, ppcryptosession)
+  end
+  def create_video_decoder_output_view(presource : ID3D11Resource, pdesc : D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC*, ppvdovview : ID3D11VideoDecoderOutputView*) : HRESULT
+    @lpVtbl.value.create_video_decoder_output_view.unsafe_as(Proc(ID3D11Resource, D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC*, ID3D11VideoDecoderOutputView*, HRESULT)).call(presource, pdesc, ppvdovview)
+  end
+  def create_video_processor_input_view(presource : ID3D11Resource, penum : ID3D11VideoProcessorEnumerator, pdesc : D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC*, ppvpiview : ID3D11VideoProcessorInputView*) : HRESULT
+    @lpVtbl.value.create_video_processor_input_view.unsafe_as(Proc(ID3D11Resource, ID3D11VideoProcessorEnumerator, D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC*, ID3D11VideoProcessorInputView*, HRESULT)).call(presource, penum, pdesc, ppvpiview)
+  end
+  def create_video_processor_output_view(presource : ID3D11Resource, penum : ID3D11VideoProcessorEnumerator, pdesc : D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC*, ppvpoview : ID3D11VideoProcessorOutputView*) : HRESULT
+    @lpVtbl.value.create_video_processor_output_view.unsafe_as(Proc(ID3D11Resource, ID3D11VideoProcessorEnumerator, D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC*, ID3D11VideoProcessorOutputView*, HRESULT)).call(presource, penum, pdesc, ppvpoview)
+  end
+  def create_video_processor_enumerator(pdesc : D3D11_VIDEO_PROCESSOR_CONTENT_DESC*, ppenum : ID3D11VideoProcessorEnumerator*) : HRESULT
+    @lpVtbl.value.create_video_processor_enumerator.unsafe_as(Proc(D3D11_VIDEO_PROCESSOR_CONTENT_DESC*, ID3D11VideoProcessorEnumerator*, HRESULT)).call(pdesc, ppenum)
+  end
+  def get_video_decoder_profile_count : UInt32
+    @lpVtbl.value.get_video_decoder_profile_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_video_decoder_profile(index : UInt32, pdecoderprofile : Guid*) : HRESULT
+    @lpVtbl.value.get_video_decoder_profile.unsafe_as(Proc(UInt32, Guid*, HRESULT)).call(index, pdecoderprofile)
+  end
+  def check_video_decoder_format(pdecoderprofile : Guid*, format : DXGI_FORMAT, psupported : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_video_decoder_format.unsafe_as(Proc(Guid*, DXGI_FORMAT, LibC::BOOL*, HRESULT)).call(pdecoderprofile, format, psupported)
+  end
+  def get_video_decoder_config_count(pdesc : D3D11_VIDEO_DECODER_DESC*, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_video_decoder_config_count.unsafe_as(Proc(D3D11_VIDEO_DECODER_DESC*, UInt32*, HRESULT)).call(pdesc, pcount)
+  end
+  def get_video_decoder_config(pdesc : D3D11_VIDEO_DECODER_DESC*, index : UInt32, pconfig : D3D11_VIDEO_DECODER_CONFIG*) : HRESULT
+    @lpVtbl.value.get_video_decoder_config.unsafe_as(Proc(D3D11_VIDEO_DECODER_DESC*, UInt32, D3D11_VIDEO_DECODER_CONFIG*, HRESULT)).call(pdesc, index, pconfig)
+  end
+  def get_content_protection_caps(pcryptotype : Guid*, pdecoderprofile : Guid*, pcaps : D3D11_VIDEO_CONTENT_PROTECTION_CAPS*) : HRESULT
+    @lpVtbl.value.get_content_protection_caps.unsafe_as(Proc(Guid*, Guid*, D3D11_VIDEO_CONTENT_PROTECTION_CAPS*, HRESULT)).call(pcryptotype, pdecoderprofile, pcaps)
+  end
+  def check_crypto_key_exchange(pcryptotype : Guid*, pdecoderprofile : Guid*, index : UInt32, pkeyexchangetype : Guid*) : HRESULT
+    @lpVtbl.value.check_crypto_key_exchange.unsafe_as(Proc(Guid*, Guid*, UInt32, Guid*, HRESULT)).call(pcryptotype, pdecoderprofile, index, pkeyexchangetype)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_crypto_session_private_data_size(pcryptotype : Guid*, pdecoderprofile : Guid*, pkeyexchangetype : Guid*, pprivateinputsize : UInt32*, pprivateoutputsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_crypto_session_private_data_size.unsafe_as(Proc(Guid*, Guid*, Guid*, UInt32*, UInt32*, HRESULT)).call(pcryptotype, pdecoderprofile, pkeyexchangetype, pprivateinputsize, pprivateoutputsize)
+  end
+  def get_video_decoder_caps(pdecoderprofile : Guid*, samplewidth : UInt32, sampleheight : UInt32, pframerate : DXGI_RATIONAL*, bitrate : UInt32, pcryptotype : Guid*, pdecodercaps : UInt32*) : HRESULT
+    @lpVtbl.value.get_video_decoder_caps.unsafe_as(Proc(Guid*, UInt32, UInt32, DXGI_RATIONAL*, UInt32, Guid*, UInt32*, HRESULT)).call(pdecoderprofile, samplewidth, sampleheight, pframerate, bitrate, pcryptotype, pdecodercaps)
+  end
+  def check_video_decoder_downsampling(pinputdesc : D3D11_VIDEO_DECODER_DESC*, inputcolorspace : DXGI_COLOR_SPACE_TYPE, pinputconfig : D3D11_VIDEO_DECODER_CONFIG*, pframerate : DXGI_RATIONAL*, poutputdesc : D3D11_VIDEO_SAMPLE_DESC*, psupported : LibC::BOOL*, prealtimehint : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.check_video_decoder_downsampling.unsafe_as(Proc(D3D11_VIDEO_DECODER_DESC*, DXGI_COLOR_SPACE_TYPE, D3D11_VIDEO_DECODER_CONFIG*, DXGI_RATIONAL*, D3D11_VIDEO_SAMPLE_DESC*, LibC::BOOL*, LibC::BOOL*, HRESULT)).call(pinputdesc, inputcolorspace, pinputconfig, pframerate, poutputdesc, psupported, prealtimehint)
+  end
+  def recommend_video_decoder_downsample_parameters(pinputdesc : D3D11_VIDEO_DECODER_DESC*, inputcolorspace : DXGI_COLOR_SPACE_TYPE, pinputconfig : D3D11_VIDEO_DECODER_CONFIG*, pframerate : DXGI_RATIONAL*, precommendedoutputdesc : D3D11_VIDEO_SAMPLE_DESC*) : HRESULT
+    @lpVtbl.value.recommend_video_decoder_downsample_parameters.unsafe_as(Proc(D3D11_VIDEO_DECODER_DESC*, DXGI_COLOR_SPACE_TYPE, D3D11_VIDEO_DECODER_CONFIG*, DXGI_RATIONAL*, D3D11_VIDEO_SAMPLE_DESC*, HRESULT)).call(pinputdesc, inputcolorspace, pinputconfig, pframerate, precommendedoutputdesc)
+  end
+  def check_feature_support(feature : D3D11_FEATURE_VIDEO, pfeaturesupportdata : Void*, featuresupportdatasize : UInt32) : HRESULT
+    @lpVtbl.value.check_feature_support.unsafe_as(Proc(D3D11_FEATURE_VIDEO, Void*, UInt32, HRESULT)).call(feature, pfeaturesupportdata, featuresupportdatasize)
+  end
+  def negotiate_crypto_session_key_exchange_mt(pcryptosession : ID3D11CryptoSession, flags : D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.negotiate_crypto_session_key_exchange_mt.unsafe_as(Proc(ID3D11CryptoSession, D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS, UInt32, Void*, HRESULT)).call(pcryptosession, flags, datasize, pdata)
+  end
+end
+struct LibWin32::ID3D11VideoContext3
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device(ppdevice : ID3D11Device*) : Void
+    @lpVtbl.value.get_device.unsafe_as(Proc(ID3D11Device*, Void)).call(ppdevice)
+  end
+  def get_private_data(guid : Guid*, pdatasize : UInt32*, pdata : Void*) : HRESULT
+    @lpVtbl.value.get_private_data.unsafe_as(Proc(Guid*, UInt32*, Void*, HRESULT)).call(guid, pdatasize, pdata)
+  end
+  def set_private_data(guid : Guid*, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.set_private_data.unsafe_as(Proc(Guid*, UInt32, Void*, HRESULT)).call(guid, datasize, pdata)
+  end
+  def set_private_data_interface(guid : Guid*, pdata : IUnknown) : HRESULT
+    @lpVtbl.value.set_private_data_interface.unsafe_as(Proc(Guid*, IUnknown, HRESULT)).call(guid, pdata)
+  end
+  def get_decoder_buffer(pdecoder : ID3D11VideoDecoder, type : D3D11_VIDEO_DECODER_BUFFER_TYPE, pbuffersize : UInt32*, ppbuffer : Void**) : HRESULT
+    @lpVtbl.value.get_decoder_buffer.unsafe_as(Proc(ID3D11VideoDecoder, D3D11_VIDEO_DECODER_BUFFER_TYPE, UInt32*, Void**, HRESULT)).call(pdecoder, type, pbuffersize, ppbuffer)
+  end
+  def release_decoder_buffer(pdecoder : ID3D11VideoDecoder, type : D3D11_VIDEO_DECODER_BUFFER_TYPE) : HRESULT
+    @lpVtbl.value.release_decoder_buffer.unsafe_as(Proc(ID3D11VideoDecoder, D3D11_VIDEO_DECODER_BUFFER_TYPE, HRESULT)).call(pdecoder, type)
+  end
+  def decoder_begin_frame(pdecoder : ID3D11VideoDecoder, pview : ID3D11VideoDecoderOutputView, contentkeysize : UInt32, pcontentkey : Void*) : HRESULT
+    @lpVtbl.value.decoder_begin_frame.unsafe_as(Proc(ID3D11VideoDecoder, ID3D11VideoDecoderOutputView, UInt32, Void*, HRESULT)).call(pdecoder, pview, contentkeysize, pcontentkey)
+  end
+  def decoder_end_frame(pdecoder : ID3D11VideoDecoder) : HRESULT
+    @lpVtbl.value.decoder_end_frame.unsafe_as(Proc(ID3D11VideoDecoder, HRESULT)).call(pdecoder)
+  end
+  def submit_decoder_buffers(pdecoder : ID3D11VideoDecoder, numbuffers : UInt32, pbufferdesc : D3D11_VIDEO_DECODER_BUFFER_DESC*) : HRESULT
+    @lpVtbl.value.submit_decoder_buffers.unsafe_as(Proc(ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC*, HRESULT)).call(pdecoder, numbuffers, pbufferdesc)
+  end
+  def decoder_extension(pdecoder : ID3D11VideoDecoder, pextensiondata : D3D11_VIDEO_DECODER_EXTENSION*) : Int32
+    @lpVtbl.value.decoder_extension.unsafe_as(Proc(ID3D11VideoDecoder, D3D11_VIDEO_DECODER_EXTENSION*, Int32)).call(pdecoder, pextensiondata)
+  end
+  def video_processor_set_output_target_rect(pvideoprocessor : ID3D11VideoProcessor, enable : LibC::BOOL, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_set_output_target_rect.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, RECT*, Void)).call(pvideoprocessor, enable, prect)
+  end
+  def video_processor_set_output_background_color(pvideoprocessor : ID3D11VideoProcessor, ycbcr : LibC::BOOL, pcolor : D3D11_VIDEO_COLOR*) : Void
+    @lpVtbl.value.video_processor_set_output_background_color.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, D3D11_VIDEO_COLOR*, Void)).call(pvideoprocessor, ycbcr, pcolor)
+  end
+  def video_processor_set_output_color_space(pvideoprocessor : ID3D11VideoProcessor, pcolorspace : D3D11_VIDEO_PROCESSOR_COLOR_SPACE*) : Void
+    @lpVtbl.value.video_processor_set_output_color_space.unsafe_as(Proc(ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)).call(pvideoprocessor, pcolorspace)
+  end
+  def video_processor_set_output_alpha_fill_mode(pvideoprocessor : ID3D11VideoProcessor, alphafillmode : D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, streamindex : UInt32) : Void
+    @lpVtbl.value.video_processor_set_output_alpha_fill_mode.unsafe_as(Proc(ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE, UInt32, Void)).call(pvideoprocessor, alphafillmode, streamindex)
+  end
+  def video_processor_set_output_constriction(pvideoprocessor : ID3D11VideoProcessor, enable : LibC::BOOL, size : SIZE) : Void
+    @lpVtbl.value.video_processor_set_output_constriction.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, SIZE, Void)).call(pvideoprocessor, enable, size)
+  end
+  def video_processor_set_output_stereo_mode(pvideoprocessor : ID3D11VideoProcessor, enable : LibC::BOOL) : Void
+    @lpVtbl.value.video_processor_set_output_stereo_mode.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, Void)).call(pvideoprocessor, enable)
+  end
+  def video_processor_set_output_extension(pvideoprocessor : ID3D11VideoProcessor, pextensionguid : Guid*, datasize : UInt32, pdata : Void*) : Int32
+    @lpVtbl.value.video_processor_set_output_extension.unsafe_as(Proc(ID3D11VideoProcessor, Guid*, UInt32, Void*, Int32)).call(pvideoprocessor, pextensionguid, datasize, pdata)
+  end
+  def video_processor_get_output_target_rect(pvideoprocessor : ID3D11VideoProcessor, enabled : LibC::BOOL*, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_get_output_target_rect.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, RECT*, Void)).call(pvideoprocessor, enabled, prect)
+  end
+  def video_processor_get_output_background_color(pvideoprocessor : ID3D11VideoProcessor, pycbcr : LibC::BOOL*, pcolor : D3D11_VIDEO_COLOR*) : Void
+    @lpVtbl.value.video_processor_get_output_background_color.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, D3D11_VIDEO_COLOR*, Void)).call(pvideoprocessor, pycbcr, pcolor)
+  end
+  def video_processor_get_output_color_space(pvideoprocessor : ID3D11VideoProcessor, pcolorspace : D3D11_VIDEO_PROCESSOR_COLOR_SPACE*) : Void
+    @lpVtbl.value.video_processor_get_output_color_space.unsafe_as(Proc(ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)).call(pvideoprocessor, pcolorspace)
+  end
+  def video_processor_get_output_alpha_fill_mode(pvideoprocessor : ID3D11VideoProcessor, palphafillmode : D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE*, pstreamindex : UInt32*) : Void
+    @lpVtbl.value.video_processor_get_output_alpha_fill_mode.unsafe_as(Proc(ID3D11VideoProcessor, D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE*, UInt32*, Void)).call(pvideoprocessor, palphafillmode, pstreamindex)
+  end
+  def video_processor_get_output_constriction(pvideoprocessor : ID3D11VideoProcessor, penabled : LibC::BOOL*, psize : SIZE*) : Void
+    @lpVtbl.value.video_processor_get_output_constriction.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, SIZE*, Void)).call(pvideoprocessor, penabled, psize)
+  end
+  def video_processor_get_output_stereo_mode(pvideoprocessor : ID3D11VideoProcessor, penabled : LibC::BOOL*) : Void
+    @lpVtbl.value.video_processor_get_output_stereo_mode.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, Void)).call(pvideoprocessor, penabled)
+  end
+  def video_processor_get_output_extension(pvideoprocessor : ID3D11VideoProcessor, pextensionguid : Guid*, datasize : UInt32, pdata : Void*) : Int32
+    @lpVtbl.value.video_processor_get_output_extension.unsafe_as(Proc(ID3D11VideoProcessor, Guid*, UInt32, Void*, Int32)).call(pvideoprocessor, pextensionguid, datasize, pdata)
+  end
+  def video_processor_set_stream_frame_format(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, frameformat : D3D11_VIDEO_FRAME_FORMAT) : Void
+    @lpVtbl.value.video_processor_set_stream_frame_format.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_FRAME_FORMAT, Void)).call(pvideoprocessor, streamindex, frameformat)
+  end
+  def video_processor_set_stream_color_space(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pcolorspace : D3D11_VIDEO_PROCESSOR_COLOR_SPACE*) : Void
+    @lpVtbl.value.video_processor_set_stream_color_space.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)).call(pvideoprocessor, streamindex, pcolorspace)
+  end
+  def video_processor_set_stream_output_rate(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, outputrate : D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, repeatframe : LibC::BOOL, pcustomrate : DXGI_RATIONAL*) : Void
+    @lpVtbl.value.video_processor_set_stream_output_rate.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_OUTPUT_RATE, LibC::BOOL, DXGI_RATIONAL*, Void)).call(pvideoprocessor, streamindex, outputrate, repeatframe, pcustomrate)
+  end
+  def video_processor_set_stream_source_rect(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_set_stream_source_rect.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, RECT*, Void)).call(pvideoprocessor, streamindex, enable, prect)
+  end
+  def video_processor_set_stream_dest_rect(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_set_stream_dest_rect.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, RECT*, Void)).call(pvideoprocessor, streamindex, enable, prect)
+  end
+  def video_processor_set_stream_alpha(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, alpha : Float32) : Void
+    @lpVtbl.value.video_processor_set_stream_alpha.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, Float32, Void)).call(pvideoprocessor, streamindex, enable, alpha)
+  end
+  def video_processor_set_stream_palette(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, count : UInt32, pentries : UInt32*) : Void
+    @lpVtbl.value.video_processor_set_stream_palette.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, UInt32, UInt32*, Void)).call(pvideoprocessor, streamindex, count, pentries)
+  end
+  def video_processor_set_stream_pixel_aspect_ratio(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, psourceaspectratio : DXGI_RATIONAL*, pdestinationaspectratio : DXGI_RATIONAL*) : Void
+    @lpVtbl.value.video_processor_set_stream_pixel_aspect_ratio.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, DXGI_RATIONAL*, DXGI_RATIONAL*, Void)).call(pvideoprocessor, streamindex, enable, psourceaspectratio, pdestinationaspectratio)
+  end
+  def video_processor_set_stream_luma_key(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, lower : Float32, upper : Float32) : Void
+    @lpVtbl.value.video_processor_set_stream_luma_key.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, Float32, Float32, Void)).call(pvideoprocessor, streamindex, enable, lower, upper)
+  end
+  def video_processor_set_stream_stereo_format(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, format : D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, leftviewframe0 : LibC::BOOL, baseviewframe0 : LibC::BOOL, flipmode : D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, monooffset : Int32) : Void
+    @lpVtbl.value.video_processor_set_stream_stereo_format.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, D3D11_VIDEO_PROCESSOR_STEREO_FORMAT, LibC::BOOL, LibC::BOOL, D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE, Int32, Void)).call(pvideoprocessor, streamindex, enable, format, leftviewframe0, baseviewframe0, flipmode, monooffset)
+  end
+  def video_processor_set_stream_auto_processing_mode(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL) : Void
+    @lpVtbl.value.video_processor_set_stream_auto_processing_mode.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, Void)).call(pvideoprocessor, streamindex, enable)
+  end
+  def video_processor_set_stream_filter(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, filter : D3D11_VIDEO_PROCESSOR_FILTER, enable : LibC::BOOL, level : Int32) : Void
+    @lpVtbl.value.video_processor_set_stream_filter.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_FILTER, LibC::BOOL, Int32, Void)).call(pvideoprocessor, streamindex, filter, enable, level)
+  end
+  def video_processor_set_stream_extension(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pextensionguid : Guid*, datasize : UInt32, pdata : Void*) : Int32
+    @lpVtbl.value.video_processor_set_stream_extension.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, Guid*, UInt32, Void*, Int32)).call(pvideoprocessor, streamindex, pextensionguid, datasize, pdata)
+  end
+  def video_processor_get_stream_frame_format(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pframeformat : D3D11_VIDEO_FRAME_FORMAT*) : Void
+    @lpVtbl.value.video_processor_get_stream_frame_format.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_FRAME_FORMAT*, Void)).call(pvideoprocessor, streamindex, pframeformat)
+  end
+  def video_processor_get_stream_color_space(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pcolorspace : D3D11_VIDEO_PROCESSOR_COLOR_SPACE*) : Void
+    @lpVtbl.value.video_processor_get_stream_color_space.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_COLOR_SPACE*, Void)).call(pvideoprocessor, streamindex, pcolorspace)
+  end
+  def video_processor_get_stream_output_rate(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, poutputrate : D3D11_VIDEO_PROCESSOR_OUTPUT_RATE*, prepeatframe : LibC::BOOL*, pcustomrate : DXGI_RATIONAL*) : Void
+    @lpVtbl.value.video_processor_get_stream_output_rate.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_OUTPUT_RATE*, LibC::BOOL*, DXGI_RATIONAL*, Void)).call(pvideoprocessor, streamindex, poutputrate, prepeatframe, pcustomrate)
+  end
+  def video_processor_get_stream_source_rect(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_get_stream_source_rect.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, RECT*, Void)).call(pvideoprocessor, streamindex, penabled, prect)
+  end
+  def video_processor_get_stream_dest_rect(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, prect : RECT*) : Void
+    @lpVtbl.value.video_processor_get_stream_dest_rect.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, RECT*, Void)).call(pvideoprocessor, streamindex, penabled, prect)
+  end
+  def video_processor_get_stream_alpha(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, palpha : Float32*) : Void
+    @lpVtbl.value.video_processor_get_stream_alpha.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, Float32*, Void)).call(pvideoprocessor, streamindex, penabled, palpha)
+  end
+  def video_processor_get_stream_palette(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, count : UInt32, pentries : UInt32*) : Void
+    @lpVtbl.value.video_processor_get_stream_palette.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, UInt32, UInt32*, Void)).call(pvideoprocessor, streamindex, count, pentries)
+  end
+  def video_processor_get_stream_pixel_aspect_ratio(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, psourceaspectratio : DXGI_RATIONAL*, pdestinationaspectratio : DXGI_RATIONAL*) : Void
+    @lpVtbl.value.video_processor_get_stream_pixel_aspect_ratio.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, DXGI_RATIONAL*, DXGI_RATIONAL*, Void)).call(pvideoprocessor, streamindex, penabled, psourceaspectratio, pdestinationaspectratio)
+  end
+  def video_processor_get_stream_luma_key(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*, plower : Float32*, pupper : Float32*) : Void
+    @lpVtbl.value.video_processor_get_stream_luma_key.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, Float32*, Float32*, Void)).call(pvideoprocessor, streamindex, penabled, plower, pupper)
+  end
+  def video_processor_get_stream_stereo_format(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penable : LibC::BOOL*, pformat : D3D11_VIDEO_PROCESSOR_STEREO_FORMAT*, pleftviewframe0 : LibC::BOOL*, pbaseviewframe0 : LibC::BOOL*, pflipmode : D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE*, monooffset : Int32*) : Void
+    @lpVtbl.value.video_processor_get_stream_stereo_format.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_STEREO_FORMAT*, LibC::BOOL*, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_STEREO_FLIP_MODE*, Int32*, Void)).call(pvideoprocessor, streamindex, penable, pformat, pleftviewframe0, pbaseviewframe0, pflipmode, monooffset)
+  end
+  def video_processor_get_stream_auto_processing_mode(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penabled : LibC::BOOL*) : Void
+    @lpVtbl.value.video_processor_get_stream_auto_processing_mode.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, Void)).call(pvideoprocessor, streamindex, penabled)
+  end
+  def video_processor_get_stream_filter(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, filter : D3D11_VIDEO_PROCESSOR_FILTER, penabled : LibC::BOOL*, plevel : Int32*) : Void
+    @lpVtbl.value.video_processor_get_stream_filter.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, D3D11_VIDEO_PROCESSOR_FILTER, LibC::BOOL*, Int32*, Void)).call(pvideoprocessor, streamindex, filter, penabled, plevel)
+  end
+  def video_processor_get_stream_extension(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pextensionguid : Guid*, datasize : UInt32, pdata : Void*) : Int32
+    @lpVtbl.value.video_processor_get_stream_extension.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, Guid*, UInt32, Void*, Int32)).call(pvideoprocessor, streamindex, pextensionguid, datasize, pdata)
+  end
+  def video_processor_blt(pvideoprocessor : ID3D11VideoProcessor, pview : ID3D11VideoProcessorOutputView, outputframe : UInt32, streamcount : UInt32, pstreams : D3D11_VIDEO_PROCESSOR_STREAM*) : HRESULT
+    @lpVtbl.value.video_processor_blt.unsafe_as(Proc(ID3D11VideoProcessor, ID3D11VideoProcessorOutputView, UInt32, UInt32, D3D11_VIDEO_PROCESSOR_STREAM*, HRESULT)).call(pvideoprocessor, pview, outputframe, streamcount, pstreams)
+  end
+  def negotiate_crypto_session_key_exchange(pcryptosession : ID3D11CryptoSession, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.negotiate_crypto_session_key_exchange.unsafe_as(Proc(ID3D11CryptoSession, UInt32, Void*, HRESULT)).call(pcryptosession, datasize, pdata)
+  end
+  def encryption_blt(pcryptosession : ID3D11CryptoSession, psrcsurface : ID3D11Texture2D, pdstsurface : ID3D11Texture2D, ivsize : UInt32, piv : Void*) : Void
+    @lpVtbl.value.encryption_blt.unsafe_as(Proc(ID3D11CryptoSession, ID3D11Texture2D, ID3D11Texture2D, UInt32, Void*, Void)).call(pcryptosession, psrcsurface, pdstsurface, ivsize, piv)
+  end
+  def decryption_blt(pcryptosession : ID3D11CryptoSession, psrcsurface : ID3D11Texture2D, pdstsurface : ID3D11Texture2D, pencryptedblockinfo : D3D11_ENCRYPTED_BLOCK_INFO*, contentkeysize : UInt32, pcontentkey : Void*, ivsize : UInt32, piv : Void*) : Void
+    @lpVtbl.value.decryption_blt.unsafe_as(Proc(ID3D11CryptoSession, ID3D11Texture2D, ID3D11Texture2D, D3D11_ENCRYPTED_BLOCK_INFO*, UInt32, Void*, UInt32, Void*, Void)).call(pcryptosession, psrcsurface, pdstsurface, pencryptedblockinfo, contentkeysize, pcontentkey, ivsize, piv)
+  end
+  def start_session_key_refresh(pcryptosession : ID3D11CryptoSession, randomnumbersize : UInt32, prandomnumber : Void*) : Void
+    @lpVtbl.value.start_session_key_refresh.unsafe_as(Proc(ID3D11CryptoSession, UInt32, Void*, Void)).call(pcryptosession, randomnumbersize, prandomnumber)
+  end
+  def finish_session_key_refresh(pcryptosession : ID3D11CryptoSession) : Void
+    @lpVtbl.value.finish_session_key_refresh.unsafe_as(Proc(ID3D11CryptoSession, Void)).call(pcryptosession)
+  end
+  def get_encryption_blt_key(pcryptosession : ID3D11CryptoSession, keysize : UInt32, preadbackkey : Void*) : HRESULT
+    @lpVtbl.value.get_encryption_blt_key.unsafe_as(Proc(ID3D11CryptoSession, UInt32, Void*, HRESULT)).call(pcryptosession, keysize, preadbackkey)
+  end
+  def negotiate_authenticated_channel_key_exchange(pchannel : ID3D11AuthenticatedChannel, datasize : UInt32, pdata : Void*) : HRESULT
+    @lpVtbl.value.negotiate_authenticated_channel_key_exchange.unsafe_as(Proc(ID3D11AuthenticatedChannel, UInt32, Void*, HRESULT)).call(pchannel, datasize, pdata)
+  end
+  def query_authenticated_channel(pchannel : ID3D11AuthenticatedChannel, inputsize : UInt32, pinput : Void*, outputsize : UInt32, poutput : Void*) : HRESULT
+    @lpVtbl.value.query_authenticated_channel.unsafe_as(Proc(ID3D11AuthenticatedChannel, UInt32, Void*, UInt32, Void*, HRESULT)).call(pchannel, inputsize, pinput, outputsize, poutput)
+  end
+  def configure_authenticated_channel(pchannel : ID3D11AuthenticatedChannel, inputsize : UInt32, pinput : Void*, poutput : D3D11_AUTHENTICATED_CONFIGURE_OUTPUT*) : HRESULT
+    @lpVtbl.value.configure_authenticated_channel.unsafe_as(Proc(ID3D11AuthenticatedChannel, UInt32, Void*, D3D11_AUTHENTICATED_CONFIGURE_OUTPUT*, HRESULT)).call(pchannel, inputsize, pinput, poutput)
+  end
+  def video_processor_set_stream_rotation(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, rotation : D3D11_VIDEO_PROCESSOR_ROTATION) : Void
+    @lpVtbl.value.video_processor_set_stream_rotation.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, D3D11_VIDEO_PROCESSOR_ROTATION, Void)).call(pvideoprocessor, streamindex, enable, rotation)
+  end
+  def video_processor_get_stream_rotation(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penable : LibC::BOOL*, protation : D3D11_VIDEO_PROCESSOR_ROTATION*) : Void
+    @lpVtbl.value.video_processor_get_stream_rotation.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, D3D11_VIDEO_PROCESSOR_ROTATION*, Void)).call(pvideoprocessor, streamindex, penable, protation)
+  end
+  def submit_decoder_buffers1(pdecoder : ID3D11VideoDecoder, numbuffers : UInt32, pbufferdesc : D3D11_VIDEO_DECODER_BUFFER_DESC1*) : HRESULT
+    @lpVtbl.value.submit_decoder_buffers1.unsafe_as(Proc(ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC1*, HRESULT)).call(pdecoder, numbuffers, pbufferdesc)
+  end
+  def get_data_for_new_hardware_key(pcryptosession : ID3D11CryptoSession, privateinputsize : UInt32, pprivatinputdata : Void*, pprivateoutputdata : UInt64*) : HRESULT
+    @lpVtbl.value.get_data_for_new_hardware_key.unsafe_as(Proc(ID3D11CryptoSession, UInt32, Void*, UInt64*, HRESULT)).call(pcryptosession, privateinputsize, pprivatinputdata, pprivateoutputdata)
+  end
+  def check_crypto_session_status(pcryptosession : ID3D11CryptoSession, pstatus : D3D11_CRYPTO_SESSION_STATUS*) : HRESULT
+    @lpVtbl.value.check_crypto_session_status.unsafe_as(Proc(ID3D11CryptoSession, D3D11_CRYPTO_SESSION_STATUS*, HRESULT)).call(pcryptosession, pstatus)
+  end
+  def decoder_enable_downsampling(pdecoder : ID3D11VideoDecoder, inputcolorspace : DXGI_COLOR_SPACE_TYPE, poutputdesc : D3D11_VIDEO_SAMPLE_DESC*, referenceframecount : UInt32) : HRESULT
+    @lpVtbl.value.decoder_enable_downsampling.unsafe_as(Proc(ID3D11VideoDecoder, DXGI_COLOR_SPACE_TYPE, D3D11_VIDEO_SAMPLE_DESC*, UInt32, HRESULT)).call(pdecoder, inputcolorspace, poutputdesc, referenceframecount)
+  end
+  def decoder_update_downsampling(pdecoder : ID3D11VideoDecoder, poutputdesc : D3D11_VIDEO_SAMPLE_DESC*) : HRESULT
+    @lpVtbl.value.decoder_update_downsampling.unsafe_as(Proc(ID3D11VideoDecoder, D3D11_VIDEO_SAMPLE_DESC*, HRESULT)).call(pdecoder, poutputdesc)
+  end
+  def video_processor_set_output_color_space1(pvideoprocessor : ID3D11VideoProcessor, colorspace : DXGI_COLOR_SPACE_TYPE) : Void
+    @lpVtbl.value.video_processor_set_output_color_space1.unsafe_as(Proc(ID3D11VideoProcessor, DXGI_COLOR_SPACE_TYPE, Void)).call(pvideoprocessor, colorspace)
+  end
+  def video_processor_set_output_shader_usage(pvideoprocessor : ID3D11VideoProcessor, shaderusage : LibC::BOOL) : Void
+    @lpVtbl.value.video_processor_set_output_shader_usage.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL, Void)).call(pvideoprocessor, shaderusage)
+  end
+  def video_processor_get_output_color_space1(pvideoprocessor : ID3D11VideoProcessor, pcolorspace : DXGI_COLOR_SPACE_TYPE*) : Void
+    @lpVtbl.value.video_processor_get_output_color_space1.unsafe_as(Proc(ID3D11VideoProcessor, DXGI_COLOR_SPACE_TYPE*, Void)).call(pvideoprocessor, pcolorspace)
+  end
+  def video_processor_get_output_shader_usage(pvideoprocessor : ID3D11VideoProcessor, pshaderusage : LibC::BOOL*) : Void
+    @lpVtbl.value.video_processor_get_output_shader_usage.unsafe_as(Proc(ID3D11VideoProcessor, LibC::BOOL*, Void)).call(pvideoprocessor, pshaderusage)
+  end
+  def video_processor_set_stream_color_space1(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, colorspace : DXGI_COLOR_SPACE_TYPE) : Void
+    @lpVtbl.value.video_processor_set_stream_color_space1.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, DXGI_COLOR_SPACE_TYPE, Void)).call(pvideoprocessor, streamindex, colorspace)
+  end
+  def video_processor_set_stream_mirror(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, enable : LibC::BOOL, fliphorizontal : LibC::BOOL, flipvertical : LibC::BOOL) : Void
+    @lpVtbl.value.video_processor_set_stream_mirror.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL, LibC::BOOL, LibC::BOOL, Void)).call(pvideoprocessor, streamindex, enable, fliphorizontal, flipvertical)
+  end
+  def video_processor_get_stream_color_space1(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, pcolorspace : DXGI_COLOR_SPACE_TYPE*) : Void
+    @lpVtbl.value.video_processor_get_stream_color_space1.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, DXGI_COLOR_SPACE_TYPE*, Void)).call(pvideoprocessor, streamindex, pcolorspace)
+  end
+  def video_processor_get_stream_mirror(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, penable : LibC::BOOL*, pfliphorizontal : LibC::BOOL*, pflipvertical : LibC::BOOL*) : Void
+    @lpVtbl.value.video_processor_get_stream_mirror.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, LibC::BOOL*, LibC::BOOL*, LibC::BOOL*, Void)).call(pvideoprocessor, streamindex, penable, pfliphorizontal, pflipvertical)
+  end
+  def video_processor_get_behavior_hints(pvideoprocessor : ID3D11VideoProcessor, outputwidth : UInt32, outputheight : UInt32, outputformat : DXGI_FORMAT, streamcount : UInt32, pstreams : D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT*, pbehaviorhints : UInt32*) : HRESULT
+    @lpVtbl.value.video_processor_get_behavior_hints.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, UInt32, DXGI_FORMAT, UInt32, D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT*, UInt32*, HRESULT)).call(pvideoprocessor, outputwidth, outputheight, outputformat, streamcount, pstreams, pbehaviorhints)
+  end
+  def video_processor_set_output_hdr_meta_data(pvideoprocessor : ID3D11VideoProcessor, type : DXGI_HDR_METADATA_TYPE, size : UInt32, phdrmetadata : Void*) : Void
+    @lpVtbl.value.video_processor_set_output_hdr_meta_data.unsafe_as(Proc(ID3D11VideoProcessor, DXGI_HDR_METADATA_TYPE, UInt32, Void*, Void)).call(pvideoprocessor, type, size, phdrmetadata)
+  end
+  def video_processor_get_output_hdr_meta_data(pvideoprocessor : ID3D11VideoProcessor, ptype : DXGI_HDR_METADATA_TYPE*, size : UInt32, pmetadata : Void*) : Void
+    @lpVtbl.value.video_processor_get_output_hdr_meta_data.unsafe_as(Proc(ID3D11VideoProcessor, DXGI_HDR_METADATA_TYPE*, UInt32, Void*, Void)).call(pvideoprocessor, ptype, size, pmetadata)
+  end
+  def video_processor_set_stream_hdr_meta_data(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, type : DXGI_HDR_METADATA_TYPE, size : UInt32, phdrmetadata : Void*) : Void
+    @lpVtbl.value.video_processor_set_stream_hdr_meta_data.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, DXGI_HDR_METADATA_TYPE, UInt32, Void*, Void)).call(pvideoprocessor, streamindex, type, size, phdrmetadata)
+  end
+  def video_processor_get_stream_hdr_meta_data(pvideoprocessor : ID3D11VideoProcessor, streamindex : UInt32, ptype : DXGI_HDR_METADATA_TYPE*, size : UInt32, pmetadata : Void*) : Void
+    @lpVtbl.value.video_processor_get_stream_hdr_meta_data.unsafe_as(Proc(ID3D11VideoProcessor, UInt32, DXGI_HDR_METADATA_TYPE*, UInt32, Void*, Void)).call(pvideoprocessor, streamindex, ptype, size, pmetadata)
+  end
+  def decoder_begin_frame1(pdecoder : ID3D11VideoDecoder, pview : ID3D11VideoDecoderOutputView, contentkeysize : UInt32, pcontentkey : Void*, numcomponenthistograms : UInt32, phistogramoffsets : UInt32*, pphistogrambuffers : ID3D11Buffer*) : HRESULT
+    @lpVtbl.value.decoder_begin_frame1.unsafe_as(Proc(ID3D11VideoDecoder, ID3D11VideoDecoderOutputView, UInt32, Void*, UInt32, UInt32*, ID3D11Buffer*, HRESULT)).call(pdecoder, pview, contentkeysize, pcontentkey, numcomponenthistograms, phistogramoffsets, pphistogrambuffers)
+  end
+  def submit_decoder_buffers2(pdecoder : ID3D11VideoDecoder, numbuffers : UInt32, pbufferdesc : D3D11_VIDEO_DECODER_BUFFER_DESC2*) : HRESULT
+    @lpVtbl.value.submit_decoder_buffers2.unsafe_as(Proc(ID3D11VideoDecoder, UInt32, D3D11_VIDEO_DECODER_BUFFER_DESC2*, HRESULT)).call(pdecoder, numbuffers, pbufferdesc)
+  end
+end
+struct LibWin32::ID3D11ShaderReflectionType
+  def get_desc(pdesc : D3D11_SHADER_TYPE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_SHADER_TYPE_DESC*, HRESULT)).call(pdesc)
+  end
+  def get_member_type_by_index(index : UInt32) : ID3D11ShaderReflectionType
+    @lpVtbl.value.get_member_type_by_index.unsafe_as(Proc(UInt32, ID3D11ShaderReflectionType)).call(index)
+  end
+  def get_member_type_by_name(name : PSTR) : ID3D11ShaderReflectionType
+    @lpVtbl.value.get_member_type_by_name.unsafe_as(Proc(PSTR, ID3D11ShaderReflectionType)).call(name)
+  end
+  def get_member_type_name(index : UInt32) : PSTR
+    @lpVtbl.value.get_member_type_name.unsafe_as(Proc(UInt32, PSTR)).call(index)
+  end
+  def is_equal(ptype : ID3D11ShaderReflectionType) : HRESULT
+    @lpVtbl.value.is_equal.unsafe_as(Proc(ID3D11ShaderReflectionType, HRESULT)).call(ptype)
+  end
+  def get_sub_type : ID3D11ShaderReflectionType
+    @lpVtbl.value.get_sub_type.unsafe_as(Proc(ID3D11ShaderReflectionType)).call
+  end
+  def get_base_class : ID3D11ShaderReflectionType
+    @lpVtbl.value.get_base_class.unsafe_as(Proc(ID3D11ShaderReflectionType)).call
+  end
+  def get_num_interfaces : UInt32
+    @lpVtbl.value.get_num_interfaces.unsafe_as(Proc(UInt32)).call
+  end
+  def get_interface_by_index(uindex : UInt32) : ID3D11ShaderReflectionType
+    @lpVtbl.value.get_interface_by_index.unsafe_as(Proc(UInt32, ID3D11ShaderReflectionType)).call(uindex)
+  end
+  def is_of_type(ptype : ID3D11ShaderReflectionType) : HRESULT
+    @lpVtbl.value.is_of_type.unsafe_as(Proc(ID3D11ShaderReflectionType, HRESULT)).call(ptype)
+  end
+  def implements_interface(pbase : ID3D11ShaderReflectionType) : HRESULT
+    @lpVtbl.value.implements_interface.unsafe_as(Proc(ID3D11ShaderReflectionType, HRESULT)).call(pbase)
+  end
+end
+struct LibWin32::ID3D11ShaderReflectionVariable
+  def get_desc(pdesc : D3D11_SHADER_VARIABLE_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_SHADER_VARIABLE_DESC*, HRESULT)).call(pdesc)
+  end
+  def get_type : ID3D11ShaderReflectionType
+    @lpVtbl.value.get_type.unsafe_as(Proc(ID3D11ShaderReflectionType)).call
+  end
+  def get_buffer : ID3D11ShaderReflectionConstantBuffer
+    @lpVtbl.value.get_buffer.unsafe_as(Proc(ID3D11ShaderReflectionConstantBuffer)).call
+  end
+  def get_interface_slot(uarrayindex : UInt32) : UInt32
+    @lpVtbl.value.get_interface_slot.unsafe_as(Proc(UInt32, UInt32)).call(uarrayindex)
+  end
+end
+struct LibWin32::ID3D11ShaderReflectionConstantBuffer
+  def get_desc(pdesc : D3D11_SHADER_BUFFER_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_SHADER_BUFFER_DESC*, HRESULT)).call(pdesc)
+  end
+  def get_variable_by_index(index : UInt32) : ID3D11ShaderReflectionVariable
+    @lpVtbl.value.get_variable_by_index.unsafe_as(Proc(UInt32, ID3D11ShaderReflectionVariable)).call(index)
+  end
+  def get_variable_by_name(name : PSTR) : ID3D11ShaderReflectionVariable
+    @lpVtbl.value.get_variable_by_name.unsafe_as(Proc(PSTR, ID3D11ShaderReflectionVariable)).call(name)
+  end
+end
+struct LibWin32::ID3D11ShaderReflection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_desc(pdesc : D3D11_SHADER_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_SHADER_DESC*, HRESULT)).call(pdesc)
+  end
+  def get_constant_buffer_by_index(index : UInt32) : ID3D11ShaderReflectionConstantBuffer
+    @lpVtbl.value.get_constant_buffer_by_index.unsafe_as(Proc(UInt32, ID3D11ShaderReflectionConstantBuffer)).call(index)
+  end
+  def get_constant_buffer_by_name(name : PSTR) : ID3D11ShaderReflectionConstantBuffer
+    @lpVtbl.value.get_constant_buffer_by_name.unsafe_as(Proc(PSTR, ID3D11ShaderReflectionConstantBuffer)).call(name)
+  end
+  def get_resource_binding_desc(resourceindex : UInt32, pdesc : D3D11_SHADER_INPUT_BIND_DESC*) : HRESULT
+    @lpVtbl.value.get_resource_binding_desc.unsafe_as(Proc(UInt32, D3D11_SHADER_INPUT_BIND_DESC*, HRESULT)).call(resourceindex, pdesc)
+  end
+  def get_input_parameter_desc(parameterindex : UInt32, pdesc : D3D11_SIGNATURE_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.get_input_parameter_desc.unsafe_as(Proc(UInt32, D3D11_SIGNATURE_PARAMETER_DESC*, HRESULT)).call(parameterindex, pdesc)
+  end
+  def get_output_parameter_desc(parameterindex : UInt32, pdesc : D3D11_SIGNATURE_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.get_output_parameter_desc.unsafe_as(Proc(UInt32, D3D11_SIGNATURE_PARAMETER_DESC*, HRESULT)).call(parameterindex, pdesc)
+  end
+  def get_patch_constant_parameter_desc(parameterindex : UInt32, pdesc : D3D11_SIGNATURE_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.get_patch_constant_parameter_desc.unsafe_as(Proc(UInt32, D3D11_SIGNATURE_PARAMETER_DESC*, HRESULT)).call(parameterindex, pdesc)
+  end
+  def get_variable_by_name(name : PSTR) : ID3D11ShaderReflectionVariable
+    @lpVtbl.value.get_variable_by_name.unsafe_as(Proc(PSTR, ID3D11ShaderReflectionVariable)).call(name)
+  end
+  def get_resource_binding_desc_by_name(name : PSTR, pdesc : D3D11_SHADER_INPUT_BIND_DESC*) : HRESULT
+    @lpVtbl.value.get_resource_binding_desc_by_name.unsafe_as(Proc(PSTR, D3D11_SHADER_INPUT_BIND_DESC*, HRESULT)).call(name, pdesc)
+  end
+  def get_mov_instruction_count : UInt32
+    @lpVtbl.value.get_mov_instruction_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_movc_instruction_count : UInt32
+    @lpVtbl.value.get_movc_instruction_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_conversion_instruction_count : UInt32
+    @lpVtbl.value.get_conversion_instruction_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_bitwise_instruction_count : UInt32
+    @lpVtbl.value.get_bitwise_instruction_count.unsafe_as(Proc(UInt32)).call
+  end
+  def get_gs_input_primitive : D3D_PRIMITIVE
+    @lpVtbl.value.get_gs_input_primitive.unsafe_as(Proc(D3D_PRIMITIVE)).call
+  end
+  def is_sample_frequency_shader : LibC::BOOL
+    @lpVtbl.value.is_sample_frequency_shader.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_num_interface_slots : UInt32
+    @lpVtbl.value.get_num_interface_slots.unsafe_as(Proc(UInt32)).call
+  end
+  def get_min_feature_level(plevel : D3D_FEATURE_LEVEL*) : HRESULT
+    @lpVtbl.value.get_min_feature_level.unsafe_as(Proc(D3D_FEATURE_LEVEL*, HRESULT)).call(plevel)
+  end
+  def get_thread_group_size(psizex : UInt32*, psizey : UInt32*, psizez : UInt32*) : UInt32
+    @lpVtbl.value.get_thread_group_size.unsafe_as(Proc(UInt32*, UInt32*, UInt32*, UInt32)).call(psizex, psizey, psizez)
+  end
+  def get_requires_flags : UInt64
+    @lpVtbl.value.get_requires_flags.unsafe_as(Proc(UInt64)).call
+  end
+end
+struct LibWin32::ID3D11LibraryReflection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_desc(pdesc : D3D11_LIBRARY_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_LIBRARY_DESC*, HRESULT)).call(pdesc)
+  end
+  def get_function_by_index(functionindex : Int32) : ID3D11FunctionReflection
+    @lpVtbl.value.get_function_by_index.unsafe_as(Proc(Int32, ID3D11FunctionReflection)).call(functionindex)
+  end
+end
+struct LibWin32::ID3D11FunctionReflection
+  def get_desc(pdesc : D3D11_FUNCTION_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_FUNCTION_DESC*, HRESULT)).call(pdesc)
+  end
+  def get_constant_buffer_by_index(bufferindex : UInt32) : ID3D11ShaderReflectionConstantBuffer
+    @lpVtbl.value.get_constant_buffer_by_index.unsafe_as(Proc(UInt32, ID3D11ShaderReflectionConstantBuffer)).call(bufferindex)
+  end
+  def get_constant_buffer_by_name(name : PSTR) : ID3D11ShaderReflectionConstantBuffer
+    @lpVtbl.value.get_constant_buffer_by_name.unsafe_as(Proc(PSTR, ID3D11ShaderReflectionConstantBuffer)).call(name)
+  end
+  def get_resource_binding_desc(resourceindex : UInt32, pdesc : D3D11_SHADER_INPUT_BIND_DESC*) : HRESULT
+    @lpVtbl.value.get_resource_binding_desc.unsafe_as(Proc(UInt32, D3D11_SHADER_INPUT_BIND_DESC*, HRESULT)).call(resourceindex, pdesc)
+  end
+  def get_variable_by_name(name : PSTR) : ID3D11ShaderReflectionVariable
+    @lpVtbl.value.get_variable_by_name.unsafe_as(Proc(PSTR, ID3D11ShaderReflectionVariable)).call(name)
+  end
+  def get_resource_binding_desc_by_name(name : PSTR, pdesc : D3D11_SHADER_INPUT_BIND_DESC*) : HRESULT
+    @lpVtbl.value.get_resource_binding_desc_by_name.unsafe_as(Proc(PSTR, D3D11_SHADER_INPUT_BIND_DESC*, HRESULT)).call(name, pdesc)
+  end
+  def get_function_parameter(parameterindex : Int32) : ID3D11FunctionParameterReflection
+    @lpVtbl.value.get_function_parameter.unsafe_as(Proc(Int32, ID3D11FunctionParameterReflection)).call(parameterindex)
+  end
+end
+struct LibWin32::ID3D11FunctionParameterReflection
+  def get_desc(pdesc : D3D11_PARAMETER_DESC*) : HRESULT
+    @lpVtbl.value.get_desc.unsafe_as(Proc(D3D11_PARAMETER_DESC*, HRESULT)).call(pdesc)
+  end
+end
+struct LibWin32::ID3D11ModuleInstance
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def bind_constant_buffer(usrcslot : UInt32, udstslot : UInt32, cbdstoffset : UInt32) : HRESULT
+    @lpVtbl.value.bind_constant_buffer.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(usrcslot, udstslot, cbdstoffset)
+  end
+  def bind_constant_buffer_by_name(pname : PSTR, udstslot : UInt32, cbdstoffset : UInt32) : HRESULT
+    @lpVtbl.value.bind_constant_buffer_by_name.unsafe_as(Proc(PSTR, UInt32, UInt32, HRESULT)).call(pname, udstslot, cbdstoffset)
+  end
+  def bind_resource(usrcslot : UInt32, udstslot : UInt32, ucount : UInt32) : HRESULT
+    @lpVtbl.value.bind_resource.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(usrcslot, udstslot, ucount)
+  end
+  def bind_resource_by_name(pname : PSTR, udstslot : UInt32, ucount : UInt32) : HRESULT
+    @lpVtbl.value.bind_resource_by_name.unsafe_as(Proc(PSTR, UInt32, UInt32, HRESULT)).call(pname, udstslot, ucount)
+  end
+  def bind_sampler(usrcslot : UInt32, udstslot : UInt32, ucount : UInt32) : HRESULT
+    @lpVtbl.value.bind_sampler.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(usrcslot, udstslot, ucount)
+  end
+  def bind_sampler_by_name(pname : PSTR, udstslot : UInt32, ucount : UInt32) : HRESULT
+    @lpVtbl.value.bind_sampler_by_name.unsafe_as(Proc(PSTR, UInt32, UInt32, HRESULT)).call(pname, udstslot, ucount)
+  end
+  def bind_unordered_access_view(usrcslot : UInt32, udstslot : UInt32, ucount : UInt32) : HRESULT
+    @lpVtbl.value.bind_unordered_access_view.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(usrcslot, udstslot, ucount)
+  end
+  def bind_unordered_access_view_by_name(pname : PSTR, udstslot : UInt32, ucount : UInt32) : HRESULT
+    @lpVtbl.value.bind_unordered_access_view_by_name.unsafe_as(Proc(PSTR, UInt32, UInt32, HRESULT)).call(pname, udstslot, ucount)
+  end
+  def bind_resource_as_unordered_access_view(usrcsrvslot : UInt32, udstuavslot : UInt32, ucount : UInt32) : HRESULT
+    @lpVtbl.value.bind_resource_as_unordered_access_view.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(usrcsrvslot, udstuavslot, ucount)
+  end
+  def bind_resource_as_unordered_access_view_by_name(psrvname : PSTR, udstuavslot : UInt32, ucount : UInt32) : HRESULT
+    @lpVtbl.value.bind_resource_as_unordered_access_view_by_name.unsafe_as(Proc(PSTR, UInt32, UInt32, HRESULT)).call(psrvname, udstuavslot, ucount)
+  end
+end
+struct LibWin32::ID3D11Module
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_instance(pnamespace : PSTR, ppmoduleinstance : ID3D11ModuleInstance*) : HRESULT
+    @lpVtbl.value.create_instance.unsafe_as(Proc(PSTR, ID3D11ModuleInstance*, HRESULT)).call(pnamespace, ppmoduleinstance)
+  end
+end
+struct LibWin32::ID3D11Linker
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def link(pentry : ID3D11ModuleInstance, pentryname : PSTR, ptargetname : PSTR, uflags : UInt32, ppshaderblob : ID3DBlob*, pperrorbuffer : ID3DBlob*) : HRESULT
+    @lpVtbl.value.link.unsafe_as(Proc(ID3D11ModuleInstance, PSTR, PSTR, UInt32, ID3DBlob*, ID3DBlob*, HRESULT)).call(pentry, pentryname, ptargetname, uflags, ppshaderblob, pperrorbuffer)
+  end
+  def use_library(plibrarymi : ID3D11ModuleInstance) : HRESULT
+    @lpVtbl.value.use_library.unsafe_as(Proc(ID3D11ModuleInstance, HRESULT)).call(plibrarymi)
+  end
+  def add_clip_plane_from_c_buffer(ucbufferslot : UInt32, ucbufferentry : UInt32) : HRESULT
+    @lpVtbl.value.add_clip_plane_from_c_buffer.unsafe_as(Proc(UInt32, UInt32, HRESULT)).call(ucbufferslot, ucbufferentry)
+  end
+end
+struct LibWin32::ID3D11LinkingNode
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+end
+struct LibWin32::ID3D11FunctionLinkingGraph
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_module_instance(ppmoduleinstance : ID3D11ModuleInstance*, pperrorbuffer : ID3DBlob*) : HRESULT
+    @lpVtbl.value.create_module_instance.unsafe_as(Proc(ID3D11ModuleInstance*, ID3DBlob*, HRESULT)).call(ppmoduleinstance, pperrorbuffer)
+  end
+  def set_input_signature(pinputparameters : D3D11_PARAMETER_DESC*, cinputparameters : UInt32, ppinputnode : ID3D11LinkingNode*) : HRESULT
+    @lpVtbl.value.set_input_signature.unsafe_as(Proc(D3D11_PARAMETER_DESC*, UInt32, ID3D11LinkingNode*, HRESULT)).call(pinputparameters, cinputparameters, ppinputnode)
+  end
+  def set_output_signature(poutputparameters : D3D11_PARAMETER_DESC*, coutputparameters : UInt32, ppoutputnode : ID3D11LinkingNode*) : HRESULT
+    @lpVtbl.value.set_output_signature.unsafe_as(Proc(D3D11_PARAMETER_DESC*, UInt32, ID3D11LinkingNode*, HRESULT)).call(poutputparameters, coutputparameters, ppoutputnode)
+  end
+  def call_function(pmoduleinstancenamespace : PSTR, pmodulewithfunctionprototype : ID3D11Module, pfunctionname : PSTR, ppcallnode : ID3D11LinkingNode*) : HRESULT
+    @lpVtbl.value.call_function.unsafe_as(Proc(PSTR, ID3D11Module, PSTR, ID3D11LinkingNode*, HRESULT)).call(pmoduleinstancenamespace, pmodulewithfunctionprototype, pfunctionname, ppcallnode)
+  end
+  def pass_value(psrcnode : ID3D11LinkingNode, srcparameterindex : Int32, pdstnode : ID3D11LinkingNode, dstparameterindex : Int32) : HRESULT
+    @lpVtbl.value.pass_value.unsafe_as(Proc(ID3D11LinkingNode, Int32, ID3D11LinkingNode, Int32, HRESULT)).call(psrcnode, srcparameterindex, pdstnode, dstparameterindex)
+  end
+  def pass_value_with_swizzle(psrcnode : ID3D11LinkingNode, srcparameterindex : Int32, psrcswizzle : PSTR, pdstnode : ID3D11LinkingNode, dstparameterindex : Int32, pdstswizzle : PSTR) : HRESULT
+    @lpVtbl.value.pass_value_with_swizzle.unsafe_as(Proc(ID3D11LinkingNode, Int32, PSTR, ID3D11LinkingNode, Int32, PSTR, HRESULT)).call(psrcnode, srcparameterindex, psrcswizzle, pdstnode, dstparameterindex, pdstswizzle)
+  end
+  def get_last_error(pperrorbuffer : ID3DBlob*) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(ID3DBlob*, HRESULT)).call(pperrorbuffer)
+  end
+  def generate_hlsl(uflags : UInt32, ppbuffer : ID3DBlob*) : HRESULT
+    @lpVtbl.value.generate_hlsl.unsafe_as(Proc(UInt32, ID3DBlob*, HRESULT)).call(uflags, ppbuffer)
+  end
+end
+struct LibWin32::ID3D11ShaderTrace
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def trace_ready(ptestcount : UInt64*) : HRESULT
+    @lpVtbl.value.trace_ready.unsafe_as(Proc(UInt64*, HRESULT)).call(ptestcount)
+  end
+  def reset_trace : Void
+    @lpVtbl.value.reset_trace.unsafe_as(Proc(Void)).call
+  end
+  def get_trace_stats(ptracestats : D3D11_TRACE_STATS*) : HRESULT
+    @lpVtbl.value.get_trace_stats.unsafe_as(Proc(D3D11_TRACE_STATS*, HRESULT)).call(ptracestats)
+  end
+  def ps_select_stamp(stampindex : UInt32) : HRESULT
+    @lpVtbl.value.ps_select_stamp.unsafe_as(Proc(UInt32, HRESULT)).call(stampindex)
+  end
+  def get_initial_register_contents(pregister : D3D11_TRACE_REGISTER*, pvalue : D3D11_TRACE_VALUE*) : HRESULT
+    @lpVtbl.value.get_initial_register_contents.unsafe_as(Proc(D3D11_TRACE_REGISTER*, D3D11_TRACE_VALUE*, HRESULT)).call(pregister, pvalue)
+  end
+  def get_step(stepindex : UInt32, ptracestep : D3D11_TRACE_STEP*) : HRESULT
+    @lpVtbl.value.get_step.unsafe_as(Proc(UInt32, D3D11_TRACE_STEP*, HRESULT)).call(stepindex, ptracestep)
+  end
+  def get_written_register(stepindex : UInt32, writtenregisterindex : UInt32, pregister : D3D11_TRACE_REGISTER*, pvalue : D3D11_TRACE_VALUE*) : HRESULT
+    @lpVtbl.value.get_written_register.unsafe_as(Proc(UInt32, UInt32, D3D11_TRACE_REGISTER*, D3D11_TRACE_VALUE*, HRESULT)).call(stepindex, writtenregisterindex, pregister, pvalue)
+  end
+  def get_read_register(stepindex : UInt32, readregisterindex : UInt32, pregister : D3D11_TRACE_REGISTER*, pvalue : D3D11_TRACE_VALUE*) : HRESULT
+    @lpVtbl.value.get_read_register.unsafe_as(Proc(UInt32, UInt32, D3D11_TRACE_REGISTER*, D3D11_TRACE_VALUE*, HRESULT)).call(stepindex, readregisterindex, pregister, pvalue)
+  end
+end
+struct LibWin32::ID3D11ShaderTraceFactory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_shader_trace(pshader : IUnknown, ptracedesc : D3D11_SHADER_TRACE_DESC*, ppshadertrace : ID3D11ShaderTrace*) : HRESULT
+    @lpVtbl.value.create_shader_trace.unsafe_as(Proc(IUnknown, D3D11_SHADER_TRACE_DESC*, ID3D11ShaderTrace*, HRESULT)).call(pshader, ptracedesc, ppshadertrace)
+  end
+end
+struct LibWin32::ID3DX11Scan
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_scan_direction(direction : D3DX11_SCAN_DIRECTION) : HRESULT
+    @lpVtbl.value.set_scan_direction.unsafe_as(Proc(D3DX11_SCAN_DIRECTION, HRESULT)).call(direction)
+  end
+  def scan(elementtype : D3DX11_SCAN_DATA_TYPE, opcode : D3DX11_SCAN_OPCODE, elementscansize : UInt32, psrc : ID3D11UnorderedAccessView, pdst : ID3D11UnorderedAccessView) : HRESULT
+    @lpVtbl.value.scan.unsafe_as(Proc(D3DX11_SCAN_DATA_TYPE, D3DX11_SCAN_OPCODE, UInt32, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView, HRESULT)).call(elementtype, opcode, elementscansize, psrc, pdst)
+  end
+  def multiscan(elementtype : D3DX11_SCAN_DATA_TYPE, opcode : D3DX11_SCAN_OPCODE, elementscansize : UInt32, elementscanpitch : UInt32, scancount : UInt32, psrc : ID3D11UnorderedAccessView, pdst : ID3D11UnorderedAccessView) : HRESULT
+    @lpVtbl.value.multiscan.unsafe_as(Proc(D3DX11_SCAN_DATA_TYPE, D3DX11_SCAN_OPCODE, UInt32, UInt32, UInt32, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView, HRESULT)).call(elementtype, opcode, elementscansize, elementscanpitch, scancount, psrc, pdst)
+  end
+end
+struct LibWin32::ID3DX11SegmentedScan
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_scan_direction(direction : D3DX11_SCAN_DIRECTION) : HRESULT
+    @lpVtbl.value.set_scan_direction.unsafe_as(Proc(D3DX11_SCAN_DIRECTION, HRESULT)).call(direction)
+  end
+  def seg_scan(elementtype : D3DX11_SCAN_DATA_TYPE, opcode : D3DX11_SCAN_OPCODE, elementscansize : UInt32, psrc : ID3D11UnorderedAccessView, psrcelementflags : ID3D11UnorderedAccessView, pdst : ID3D11UnorderedAccessView) : HRESULT
+    @lpVtbl.value.seg_scan.unsafe_as(Proc(D3DX11_SCAN_DATA_TYPE, D3DX11_SCAN_OPCODE, UInt32, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView, ID3D11UnorderedAccessView, HRESULT)).call(elementtype, opcode, elementscansize, psrc, psrcelementflags, pdst)
+  end
+end
+struct LibWin32::ID3DX11FFT
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_forward_scale(forwardscale : Float32) : HRESULT
+    @lpVtbl.value.set_forward_scale.unsafe_as(Proc(Float32, HRESULT)).call(forwardscale)
+  end
+  def get_forward_scale : Float32
+    @lpVtbl.value.get_forward_scale.unsafe_as(Proc(Float32)).call
+  end
+  def set_inverse_scale(inversescale : Float32) : HRESULT
+    @lpVtbl.value.set_inverse_scale.unsafe_as(Proc(Float32, HRESULT)).call(inversescale)
+  end
+  def get_inverse_scale : Float32
+    @lpVtbl.value.get_inverse_scale.unsafe_as(Proc(Float32)).call
+  end
+  def attach_buffers_and_precompute(numtempbuffers : UInt32, pptempbuffers : ID3D11UnorderedAccessView*, numprecomputebuffers : UInt32, ppprecomputebuffersizes : ID3D11UnorderedAccessView*) : HRESULT
+    @lpVtbl.value.attach_buffers_and_precompute.unsafe_as(Proc(UInt32, ID3D11UnorderedAccessView*, UInt32, ID3D11UnorderedAccessView*, HRESULT)).call(numtempbuffers, pptempbuffers, numprecomputebuffers, ppprecomputebuffersizes)
+  end
+  def forward_transform(pinputbuffer : ID3D11UnorderedAccessView, ppoutputbuffer : ID3D11UnorderedAccessView*) : HRESULT
+    @lpVtbl.value.forward_transform.unsafe_as(Proc(ID3D11UnorderedAccessView, ID3D11UnorderedAccessView*, HRESULT)).call(pinputbuffer, ppoutputbuffer)
+  end
+  def inverse_transform(pinputbuffer : ID3D11UnorderedAccessView, ppoutputbuffer : ID3D11UnorderedAccessView*) : HRESULT
+    @lpVtbl.value.inverse_transform.unsafe_as(Proc(ID3D11UnorderedAccessView, ID3D11UnorderedAccessView*, HRESULT)).call(pinputbuffer, ppoutputbuffer)
+  end
 end

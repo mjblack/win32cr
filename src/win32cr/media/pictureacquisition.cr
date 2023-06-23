@@ -104,18 +104,18 @@ lib LibWin32
 
 
   struct IPhotoAcquireItemVTbl
-    query_interface : Proc(IPhotoAcquireItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPhotoAcquireItem*, UInt32)
-    release : Proc(IPhotoAcquireItem*, UInt32)
-    get_item_name : Proc(IPhotoAcquireItem*, UInt8**, HRESULT)
-    get_thumbnail : Proc(IPhotoAcquireItem*, SIZE, HBITMAP*, HRESULT)
-    get_property : Proc(IPhotoAcquireItem*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
-    set_property : Proc(IPhotoAcquireItem*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
-    get_stream : Proc(IPhotoAcquireItem*, IStream*, HRESULT)
-    can_delete : Proc(IPhotoAcquireItem*, LibC::BOOL*, HRESULT)
-    delete : Proc(IPhotoAcquireItem*, HRESULT)
-    get_sub_item_count : Proc(IPhotoAcquireItem*, UInt32*, HRESULT)
-    get_sub_item_at : Proc(IPhotoAcquireItem*, UInt32, IPhotoAcquireItem*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_item_name : UInt64
+    get_thumbnail : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    get_stream : UInt64
+    can_delete : UInt64
+    delete : UInt64
+    get_sub_item_count : UInt64
+    get_sub_item_at : UInt64
   end
 
   IPhotoAcquireItem_GUID = "00f21c97-28bf-4c02-b842-5e4e90139a30"
@@ -125,19 +125,19 @@ lib LibWin32
   end
 
   struct IUserInputStringVTbl
-    query_interface : Proc(IUserInputString*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUserInputString*, UInt32)
-    release : Proc(IUserInputString*, UInt32)
-    get_submit_button_text : Proc(IUserInputString*, UInt8**, HRESULT)
-    get_prompt : Proc(IUserInputString*, UInt8**, HRESULT)
-    get_string_id : Proc(IUserInputString*, UInt8**, HRESULT)
-    get_string_type : Proc(IUserInputString*, USER_INPUT_STRING_TYPE*, HRESULT)
-    get_tooltip_text : Proc(IUserInputString*, UInt8**, HRESULT)
-    get_max_length : Proc(IUserInputString*, UInt32*, HRESULT)
-    get_default : Proc(IUserInputString*, UInt8**, HRESULT)
-    get_mru_count : Proc(IUserInputString*, UInt32*, HRESULT)
-    get_mru_entry_at : Proc(IUserInputString*, UInt32, UInt8**, HRESULT)
-    get_image : Proc(IUserInputString*, UInt32, HBITMAP*, HANDLE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_submit_button_text : UInt64
+    get_prompt : UInt64
+    get_string_id : UInt64
+    get_string_type : UInt64
+    get_tooltip_text : UInt64
+    get_max_length : UInt64
+    get_default : UInt64
+    get_mru_count : UInt64
+    get_mru_entry_at : UInt64
+    get_image : UInt64
   end
 
   IUserInputString_GUID = "00f243a1-205b-45ba-ae26-abbc53aa7a6f"
@@ -147,28 +147,28 @@ lib LibWin32
   end
 
   struct IPhotoAcquireProgressCBVTbl
-    query_interface : Proc(IPhotoAcquireProgressCB*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPhotoAcquireProgressCB*, UInt32)
-    release : Proc(IPhotoAcquireProgressCB*, UInt32)
-    cancelled : Proc(IPhotoAcquireProgressCB*, LibC::BOOL*, HRESULT)
-    start_enumeration : Proc(IPhotoAcquireProgressCB*, IPhotoAcquireSource, HRESULT)
-    found_item : Proc(IPhotoAcquireProgressCB*, IPhotoAcquireItem, HRESULT)
-    end_enumeration : Proc(IPhotoAcquireProgressCB*, HRESULT, HRESULT)
-    start_transfer : Proc(IPhotoAcquireProgressCB*, IPhotoAcquireSource, HRESULT)
-    start_item_transfer : Proc(IPhotoAcquireProgressCB*, UInt32, IPhotoAcquireItem, HRESULT)
-    directory_created : Proc(IPhotoAcquireProgressCB*, LibC::LPWSTR, HRESULT)
-    update_transfer_percent : Proc(IPhotoAcquireProgressCB*, LibC::BOOL, UInt32, HRESULT)
-    end_item_transfer : Proc(IPhotoAcquireProgressCB*, UInt32, IPhotoAcquireItem, HRESULT, HRESULT)
-    end_transfer : Proc(IPhotoAcquireProgressCB*, HRESULT, HRESULT)
-    start_delete : Proc(IPhotoAcquireProgressCB*, IPhotoAcquireSource, HRESULT)
-    start_item_delete : Proc(IPhotoAcquireProgressCB*, UInt32, IPhotoAcquireItem, HRESULT)
-    update_delete_percent : Proc(IPhotoAcquireProgressCB*, UInt32, HRESULT)
-    end_item_delete : Proc(IPhotoAcquireProgressCB*, UInt32, IPhotoAcquireItem, HRESULT, HRESULT)
-    end_delete : Proc(IPhotoAcquireProgressCB*, HRESULT, HRESULT)
-    end_session : Proc(IPhotoAcquireProgressCB*, HRESULT, HRESULT)
-    get_delete_after_acquire : Proc(IPhotoAcquireProgressCB*, LibC::BOOL*, HRESULT)
-    error_advise : Proc(IPhotoAcquireProgressCB*, HRESULT, LibC::LPWSTR, ERROR_ADVISE_MESSAGE_TYPE, ERROR_ADVISE_RESULT*, HRESULT)
-    get_user_input : Proc(IPhotoAcquireProgressCB*, Guid*, IUnknown, PROPVARIANT*, PROPVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    cancelled : UInt64
+    start_enumeration : UInt64
+    found_item : UInt64
+    end_enumeration : UInt64
+    start_transfer : UInt64
+    start_item_transfer : UInt64
+    directory_created : UInt64
+    update_transfer_percent : UInt64
+    end_item_transfer : UInt64
+    end_transfer : UInt64
+    start_delete : UInt64
+    start_item_delete : UInt64
+    update_delete_percent : UInt64
+    end_item_delete : UInt64
+    end_delete : UInt64
+    end_session : UInt64
+    get_delete_after_acquire : UInt64
+    error_advise : UInt64
+    get_user_input : UInt64
   end
 
   IPhotoAcquireProgressCB_GUID = "00f2ce1e-935e-4248-892c-130f32c45cb4"
@@ -178,10 +178,10 @@ lib LibWin32
   end
 
   struct IPhotoProgressActionCBVTbl
-    query_interface : Proc(IPhotoProgressActionCB*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPhotoProgressActionCB*, UInt32)
-    release : Proc(IPhotoProgressActionCB*, UInt32)
-    do_action : Proc(IPhotoProgressActionCB*, LibC::HANDLE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    do_action : UInt64
   end
 
   IPhotoProgressActionCB_GUID = "00f242d0-b206-4e7d-b4c1-4755bcbb9c9f"
@@ -191,27 +191,27 @@ lib LibWin32
   end
 
   struct IPhotoProgressDialogVTbl
-    query_interface : Proc(IPhotoProgressDialog*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPhotoProgressDialog*, UInt32)
-    release : Proc(IPhotoProgressDialog*, UInt32)
-    create : Proc(IPhotoProgressDialog*, LibC::HANDLE, HRESULT)
-    get_window : Proc(IPhotoProgressDialog*, HANDLE*, HRESULT)
-    destroy : Proc(IPhotoProgressDialog*, HRESULT)
-    set_title : Proc(IPhotoProgressDialog*, LibC::LPWSTR, HRESULT)
-    show_checkbox : Proc(IPhotoProgressDialog*, PROGRESS_DIALOG_CHECKBOX_ID, LibC::BOOL, HRESULT)
-    set_checkbox_text : Proc(IPhotoProgressDialog*, PROGRESS_DIALOG_CHECKBOX_ID, LibC::LPWSTR, HRESULT)
-    set_checkbox_check : Proc(IPhotoProgressDialog*, PROGRESS_DIALOG_CHECKBOX_ID, LibC::BOOL, HRESULT)
-    set_checkbox_tooltip : Proc(IPhotoProgressDialog*, PROGRESS_DIALOG_CHECKBOX_ID, LibC::LPWSTR, HRESULT)
-    is_checkbox_checked : Proc(IPhotoProgressDialog*, PROGRESS_DIALOG_CHECKBOX_ID, LibC::BOOL*, HRESULT)
-    set_caption : Proc(IPhotoProgressDialog*, LibC::LPWSTR, HRESULT)
-    set_image : Proc(IPhotoProgressDialog*, PROGRESS_DIALOG_IMAGE_TYPE, LibC::HANDLE, HBITMAP, HRESULT)
-    set_percent_complete : Proc(IPhotoProgressDialog*, Int32, HRESULT)
-    set_progress_text : Proc(IPhotoProgressDialog*, LibC::LPWSTR, HRESULT)
-    set_action_link_callback : Proc(IPhotoProgressDialog*, IPhotoProgressActionCB, HRESULT)
-    set_action_link_text : Proc(IPhotoProgressDialog*, LibC::LPWSTR, HRESULT)
-    show_action_link : Proc(IPhotoProgressDialog*, LibC::BOOL, HRESULT)
-    is_cancelled : Proc(IPhotoProgressDialog*, LibC::BOOL*, HRESULT)
-    get_user_input : Proc(IPhotoProgressDialog*, Guid*, IUnknown, PROPVARIANT*, PROPVARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create : UInt64
+    get_window : UInt64
+    destroy : UInt64
+    set_title : UInt64
+    show_checkbox : UInt64
+    set_checkbox_text : UInt64
+    set_checkbox_check : UInt64
+    set_checkbox_tooltip : UInt64
+    is_checkbox_checked : UInt64
+    set_caption : UInt64
+    set_image : UInt64
+    set_percent_complete : UInt64
+    set_progress_text : UInt64
+    set_action_link_callback : UInt64
+    set_action_link_text : UInt64
+    show_action_link : UInt64
+    is_cancelled : UInt64
+    get_user_input : UInt64
   end
 
   IPhotoProgressDialog_GUID = "00f246f9-0750-4f08-9381-2cd8e906a4ae"
@@ -221,17 +221,17 @@ lib LibWin32
   end
 
   struct IPhotoAcquireSourceVTbl
-    query_interface : Proc(IPhotoAcquireSource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPhotoAcquireSource*, UInt32)
-    release : Proc(IPhotoAcquireSource*, UInt32)
-    get_friendly_name : Proc(IPhotoAcquireSource*, UInt8**, HRESULT)
-    get_device_icons : Proc(IPhotoAcquireSource*, UInt32, HANDLE*, HANDLE*, HRESULT)
-    initialize_item_list : Proc(IPhotoAcquireSource*, LibC::BOOL, IPhotoAcquireProgressCB, UInt32*, HRESULT)
-    get_item_count : Proc(IPhotoAcquireSource*, UInt32*, HRESULT)
-    get_item_at : Proc(IPhotoAcquireSource*, UInt32, IPhotoAcquireItem*, HRESULT)
-    get_photo_acquire_settings : Proc(IPhotoAcquireSource*, IPhotoAcquireSettings*, HRESULT)
-    get_device_id : Proc(IPhotoAcquireSource*, UInt8**, HRESULT)
-    bind_to_object : Proc(IPhotoAcquireSource*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_friendly_name : UInt64
+    get_device_icons : UInt64
+    initialize_item_list : UInt64
+    get_item_count : UInt64
+    get_item_at : UInt64
+    get_photo_acquire_settings : UInt64
+    get_device_id : UInt64
+    bind_to_object : UInt64
   end
 
   IPhotoAcquireSource_GUID = "00f2c703-8613-4282-a53b-6ec59c5883ac"
@@ -241,12 +241,12 @@ lib LibWin32
   end
 
   struct IPhotoAcquireVTbl
-    query_interface : Proc(IPhotoAcquire*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPhotoAcquire*, UInt32)
-    release : Proc(IPhotoAcquire*, UInt32)
-    create_photo_source : Proc(IPhotoAcquire*, LibC::LPWSTR, IPhotoAcquireSource*, HRESULT)
-    acquire : Proc(IPhotoAcquire*, IPhotoAcquireSource, LibC::BOOL, LibC::HANDLE, LibC::LPWSTR, IPhotoAcquireProgressCB, HRESULT)
-    enum_results : Proc(IPhotoAcquire*, IEnumString*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_photo_source : UInt64
+    acquire : UInt64
+    enum_results : UInt64
   end
 
   IPhotoAcquire_GUID = "00f23353-e31b-4955-a8ad-ca5ebf31e2ce"
@@ -256,22 +256,22 @@ lib LibWin32
   end
 
   struct IPhotoAcquireSettingsVTbl
-    query_interface : Proc(IPhotoAcquireSettings*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPhotoAcquireSettings*, UInt32)
-    release : Proc(IPhotoAcquireSettings*, UInt32)
-    initialize_from_registry : Proc(IPhotoAcquireSettings*, LibC::LPWSTR, HRESULT)
-    set_flags : Proc(IPhotoAcquireSettings*, UInt32, HRESULT)
-    set_output_filename_template : Proc(IPhotoAcquireSettings*, LibC::LPWSTR, HRESULT)
-    set_sequence_padding_width : Proc(IPhotoAcquireSettings*, UInt32, HRESULT)
-    set_sequence_zero_padding : Proc(IPhotoAcquireSettings*, LibC::BOOL, HRESULT)
-    set_group_tag : Proc(IPhotoAcquireSettings*, LibC::LPWSTR, HRESULT)
-    set_acquisition_time : Proc(IPhotoAcquireSettings*, FILETIME*, HRESULT)
-    get_flags : Proc(IPhotoAcquireSettings*, UInt32*, HRESULT)
-    get_output_filename_template : Proc(IPhotoAcquireSettings*, UInt8**, HRESULT)
-    get_sequence_padding_width : Proc(IPhotoAcquireSettings*, UInt32*, HRESULT)
-    get_sequence_zero_padding : Proc(IPhotoAcquireSettings*, LibC::BOOL*, HRESULT)
-    get_group_tag : Proc(IPhotoAcquireSettings*, UInt8**, HRESULT)
-    get_acquisition_time : Proc(IPhotoAcquireSettings*, FILETIME*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize_from_registry : UInt64
+    set_flags : UInt64
+    set_output_filename_template : UInt64
+    set_sequence_padding_width : UInt64
+    set_sequence_zero_padding : UInt64
+    set_group_tag : UInt64
+    set_acquisition_time : UInt64
+    get_flags : UInt64
+    get_output_filename_template : UInt64
+    get_sequence_padding_width : UInt64
+    get_sequence_zero_padding : UInt64
+    get_group_tag : UInt64
+    get_acquisition_time : UInt64
   end
 
   IPhotoAcquireSettings_GUID = "00f2b868-dd67-487c-9553-049240767e91"
@@ -281,14 +281,14 @@ lib LibWin32
   end
 
   struct IPhotoAcquireOptionsDialogVTbl
-    query_interface : Proc(IPhotoAcquireOptionsDialog*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPhotoAcquireOptionsDialog*, UInt32)
-    release : Proc(IPhotoAcquireOptionsDialog*, UInt32)
-    initialize : Proc(IPhotoAcquireOptionsDialog*, LibC::LPWSTR, HRESULT)
-    create : Proc(IPhotoAcquireOptionsDialog*, LibC::HANDLE, HANDLE*, HRESULT)
-    destroy : Proc(IPhotoAcquireOptionsDialog*, HRESULT)
-    do_modal : Proc(IPhotoAcquireOptionsDialog*, LibC::HANDLE, LibC::IntPtrT*, HRESULT)
-    save_data : Proc(IPhotoAcquireOptionsDialog*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    create : UInt64
+    destroy : UInt64
+    do_modal : UInt64
+    save_data : UInt64
   end
 
   IPhotoAcquireOptionsDialog_GUID = "00f2b3ee-bf64-47ee-89f4-4dedd79643f2"
@@ -298,12 +298,12 @@ lib LibWin32
   end
 
   struct IPhotoAcquireDeviceSelectionDialogVTbl
-    query_interface : Proc(IPhotoAcquireDeviceSelectionDialog*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPhotoAcquireDeviceSelectionDialog*, UInt32)
-    release : Proc(IPhotoAcquireDeviceSelectionDialog*, UInt32)
-    set_title : Proc(IPhotoAcquireDeviceSelectionDialog*, LibC::LPWSTR, HRESULT)
-    set_submit_button_text : Proc(IPhotoAcquireDeviceSelectionDialog*, LibC::LPWSTR, HRESULT)
-    do_modal : Proc(IPhotoAcquireDeviceSelectionDialog*, LibC::HANDLE, UInt32, UInt8**, DEVICE_SELECTION_DEVICE_TYPE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_title : UInt64
+    set_submit_button_text : UInt64
+    do_modal : UInt64
   end
 
   IPhotoAcquireDeviceSelectionDialog_GUID = "00f28837-55dd-4f37-aaf5-6855a9640467"
@@ -313,13 +313,13 @@ lib LibWin32
   end
 
   struct IPhotoAcquirePluginVTbl
-    query_interface : Proc(IPhotoAcquirePlugin*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPhotoAcquirePlugin*, UInt32)
-    release : Proc(IPhotoAcquirePlugin*, UInt32)
-    initialize : Proc(IPhotoAcquirePlugin*, IPhotoAcquireSource, IPhotoAcquireProgressCB, HRESULT)
-    process_item : Proc(IPhotoAcquirePlugin*, UInt32, IPhotoAcquireItem, IStream, LibC::LPWSTR, IPropertyStore, HRESULT)
-    transfer_complete : Proc(IPhotoAcquirePlugin*, HRESULT, HRESULT)
-    display_configure_dialog : Proc(IPhotoAcquirePlugin*, LibC::HANDLE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    process_item : UInt64
+    transfer_complete : UInt64
+    display_configure_dialog : UInt64
   end
 
   IPhotoAcquirePlugin_GUID = "00f2dceb-ecb8-4f77-8e47-e7a987c83dd0"
@@ -328,4 +328,404 @@ lib LibWin32
     lpVtbl : IPhotoAcquirePluginVTbl*
   end
 
+end
+struct LibWin32::IPhotoAcquireItem
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_item_name(pbstritemname : UInt8**) : HRESULT
+    @lpVtbl.value.get_item_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstritemname)
+  end
+  def get_thumbnail(sizethumbnail : SIZE, phbmpthumbnail : HBITMAP*) : HRESULT
+    @lpVtbl.value.get_thumbnail.unsafe_as(Proc(SIZE, HBITMAP*, HRESULT)).call(sizethumbnail, phbmpthumbnail)
+  end
+  def get_property(key : PROPERTYKEY*, pv : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(key, pv)
+  end
+  def set_property(key : PROPERTYKEY*, pv : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(key, pv)
+  end
+  def get_stream(ppstream : IStream*) : HRESULT
+    @lpVtbl.value.get_stream.unsafe_as(Proc(IStream*, HRESULT)).call(ppstream)
+  end
+  def can_delete(pfcandelete : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.can_delete.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfcandelete)
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_sub_item_count(pncount : UInt32*) : HRESULT
+    @lpVtbl.value.get_sub_item_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pncount)
+  end
+  def get_sub_item_at(nitemindex : UInt32, ppphotoacquireitem : IPhotoAcquireItem*) : HRESULT
+    @lpVtbl.value.get_sub_item_at.unsafe_as(Proc(UInt32, IPhotoAcquireItem*, HRESULT)).call(nitemindex, ppphotoacquireitem)
+  end
+end
+struct LibWin32::IUserInputString
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_submit_button_text(pbstrsubmitbuttontext : UInt8**) : HRESULT
+    @lpVtbl.value.get_submit_button_text.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsubmitbuttontext)
+  end
+  def get_prompt(pbstrprompttitle : UInt8**) : HRESULT
+    @lpVtbl.value.get_prompt.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprompttitle)
+  end
+  def get_string_id(pbstrstringid : UInt8**) : HRESULT
+    @lpVtbl.value.get_string_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrstringid)
+  end
+  def get_string_type(pnstringtype : USER_INPUT_STRING_TYPE*) : HRESULT
+    @lpVtbl.value.get_string_type.unsafe_as(Proc(USER_INPUT_STRING_TYPE*, HRESULT)).call(pnstringtype)
+  end
+  def get_tooltip_text(pbstrtooltiptext : UInt8**) : HRESULT
+    @lpVtbl.value.get_tooltip_text.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtooltiptext)
+  end
+  def get_max_length(pcchmaxlength : UInt32*) : HRESULT
+    @lpVtbl.value.get_max_length.unsafe_as(Proc(UInt32*, HRESULT)).call(pcchmaxlength)
+  end
+  def get_default(pbstrdefault : UInt8**) : HRESULT
+    @lpVtbl.value.get_default.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdefault)
+  end
+  def get_mru_count(pnmrucount : UInt32*) : HRESULT
+    @lpVtbl.value.get_mru_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pnmrucount)
+  end
+  def get_mru_entry_at(nindex : UInt32, pbstrmruentry : UInt8**) : HRESULT
+    @lpVtbl.value.get_mru_entry_at.unsafe_as(Proc(UInt32, UInt8**, HRESULT)).call(nindex, pbstrmruentry)
+  end
+  def get_image(nsize : UInt32, phbitmap : HBITMAP*, phicon : HANDLE*) : HRESULT
+    @lpVtbl.value.get_image.unsafe_as(Proc(UInt32, HBITMAP*, HANDLE*, HRESULT)).call(nsize, phbitmap, phicon)
+  end
+end
+struct LibWin32::IPhotoAcquireProgressCB
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def cancelled(pfcancelled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.cancelled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfcancelled)
+  end
+  def start_enumeration(pphotoacquiresource : IPhotoAcquireSource) : HRESULT
+    @lpVtbl.value.start_enumeration.unsafe_as(Proc(IPhotoAcquireSource, HRESULT)).call(pphotoacquiresource)
+  end
+  def found_item(pphotoacquireitem : IPhotoAcquireItem) : HRESULT
+    @lpVtbl.value.found_item.unsafe_as(Proc(IPhotoAcquireItem, HRESULT)).call(pphotoacquireitem)
+  end
+  def end_enumeration(hr : HRESULT) : HRESULT
+    @lpVtbl.value.end_enumeration.unsafe_as(Proc(HRESULT, HRESULT)).call(hr)
+  end
+  def start_transfer(pphotoacquiresource : IPhotoAcquireSource) : HRESULT
+    @lpVtbl.value.start_transfer.unsafe_as(Proc(IPhotoAcquireSource, HRESULT)).call(pphotoacquiresource)
+  end
+  def start_item_transfer(nitemindex : UInt32, pphotoacquireitem : IPhotoAcquireItem) : HRESULT
+    @lpVtbl.value.start_item_transfer.unsafe_as(Proc(UInt32, IPhotoAcquireItem, HRESULT)).call(nitemindex, pphotoacquireitem)
+  end
+  def directory_created(pszdirectory : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.directory_created.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszdirectory)
+  end
+  def update_transfer_percent(foverall : LibC::BOOL, npercent : UInt32) : HRESULT
+    @lpVtbl.value.update_transfer_percent.unsafe_as(Proc(LibC::BOOL, UInt32, HRESULT)).call(foverall, npercent)
+  end
+  def end_item_transfer(nitemindex : UInt32, pphotoacquireitem : IPhotoAcquireItem, hr : HRESULT) : HRESULT
+    @lpVtbl.value.end_item_transfer.unsafe_as(Proc(UInt32, IPhotoAcquireItem, HRESULT, HRESULT)).call(nitemindex, pphotoacquireitem, hr)
+  end
+  def end_transfer(hr : HRESULT) : HRESULT
+    @lpVtbl.value.end_transfer.unsafe_as(Proc(HRESULT, HRESULT)).call(hr)
+  end
+  def start_delete(pphotoacquiresource : IPhotoAcquireSource) : HRESULT
+    @lpVtbl.value.start_delete.unsafe_as(Proc(IPhotoAcquireSource, HRESULT)).call(pphotoacquiresource)
+  end
+  def start_item_delete(nitemindex : UInt32, pphotoacquireitem : IPhotoAcquireItem) : HRESULT
+    @lpVtbl.value.start_item_delete.unsafe_as(Proc(UInt32, IPhotoAcquireItem, HRESULT)).call(nitemindex, pphotoacquireitem)
+  end
+  def update_delete_percent(npercent : UInt32) : HRESULT
+    @lpVtbl.value.update_delete_percent.unsafe_as(Proc(UInt32, HRESULT)).call(npercent)
+  end
+  def end_item_delete(nitemindex : UInt32, pphotoacquireitem : IPhotoAcquireItem, hr : HRESULT) : HRESULT
+    @lpVtbl.value.end_item_delete.unsafe_as(Proc(UInt32, IPhotoAcquireItem, HRESULT, HRESULT)).call(nitemindex, pphotoacquireitem, hr)
+  end
+  def end_delete(hr : HRESULT) : HRESULT
+    @lpVtbl.value.end_delete.unsafe_as(Proc(HRESULT, HRESULT)).call(hr)
+  end
+  def end_session(hr : HRESULT) : HRESULT
+    @lpVtbl.value.end_session.unsafe_as(Proc(HRESULT, HRESULT)).call(hr)
+  end
+  def get_delete_after_acquire(pfdeleteafteracquire : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_delete_after_acquire.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfdeleteafteracquire)
+  end
+  def error_advise(hr : HRESULT, pszerrormessage : LibC::LPWSTR, nmessagetype : ERROR_ADVISE_MESSAGE_TYPE, pnerroradviseresult : ERROR_ADVISE_RESULT*) : HRESULT
+    @lpVtbl.value.error_advise.unsafe_as(Proc(HRESULT, LibC::LPWSTR, ERROR_ADVISE_MESSAGE_TYPE, ERROR_ADVISE_RESULT*, HRESULT)).call(hr, pszerrormessage, nmessagetype, pnerroradviseresult)
+  end
+  def get_user_input(riidtype : Guid*, punknown : IUnknown, ppropvarresult : PROPVARIANT*, ppropvardefault : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_user_input.unsafe_as(Proc(Guid*, IUnknown, PROPVARIANT*, PROPVARIANT*, HRESULT)).call(riidtype, punknown, ppropvarresult, ppropvardefault)
+  end
+end
+struct LibWin32::IPhotoProgressActionCB
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def do_action(hwndparent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.do_action.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwndparent)
+  end
+end
+struct LibWin32::IPhotoProgressDialog
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create(hwndparent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.create.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwndparent)
+  end
+  def get_window(phwndprogressdialog : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.unsafe_as(Proc(HANDLE*, HRESULT)).call(phwndprogressdialog)
+  end
+  def destroy : HRESULT
+    @lpVtbl.value.destroy.unsafe_as(Proc(HRESULT)).call
+  end
+  def set_title(psztitle : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_title.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(psztitle)
+  end
+  def show_checkbox(ncheckboxid : PROGRESS_DIALOG_CHECKBOX_ID, fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show_checkbox.unsafe_as(Proc(PROGRESS_DIALOG_CHECKBOX_ID, LibC::BOOL, HRESULT)).call(ncheckboxid, fshow)
+  end
+  def set_checkbox_text(ncheckboxid : PROGRESS_DIALOG_CHECKBOX_ID, pszcheckboxtext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_checkbox_text.unsafe_as(Proc(PROGRESS_DIALOG_CHECKBOX_ID, LibC::LPWSTR, HRESULT)).call(ncheckboxid, pszcheckboxtext)
+  end
+  def set_checkbox_check(ncheckboxid : PROGRESS_DIALOG_CHECKBOX_ID, fchecked : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_checkbox_check.unsafe_as(Proc(PROGRESS_DIALOG_CHECKBOX_ID, LibC::BOOL, HRESULT)).call(ncheckboxid, fchecked)
+  end
+  def set_checkbox_tooltip(ncheckboxid : PROGRESS_DIALOG_CHECKBOX_ID, pszcheckboxtooltiptext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_checkbox_tooltip.unsafe_as(Proc(PROGRESS_DIALOG_CHECKBOX_ID, LibC::LPWSTR, HRESULT)).call(ncheckboxid, pszcheckboxtooltiptext)
+  end
+  def is_checkbox_checked(ncheckboxid : PROGRESS_DIALOG_CHECKBOX_ID, pfchecked : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_checkbox_checked.unsafe_as(Proc(PROGRESS_DIALOG_CHECKBOX_ID, LibC::BOOL*, HRESULT)).call(ncheckboxid, pfchecked)
+  end
+  def set_caption(psztitle : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_caption.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(psztitle)
+  end
+  def set_image(nimagetype : PROGRESS_DIALOG_IMAGE_TYPE, hicon : LibC::HANDLE, hbitmap : HBITMAP) : HRESULT
+    @lpVtbl.value.set_image.unsafe_as(Proc(PROGRESS_DIALOG_IMAGE_TYPE, LibC::HANDLE, HBITMAP, HRESULT)).call(nimagetype, hicon, hbitmap)
+  end
+  def set_percent_complete(npercent : Int32) : HRESULT
+    @lpVtbl.value.set_percent_complete.unsafe_as(Proc(Int32, HRESULT)).call(npercent)
+  end
+  def set_progress_text(pszprogresstext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_progress_text.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszprogresstext)
+  end
+  def set_action_link_callback(pphotoprogressactioncb : IPhotoProgressActionCB) : HRESULT
+    @lpVtbl.value.set_action_link_callback.unsafe_as(Proc(IPhotoProgressActionCB, HRESULT)).call(pphotoprogressactioncb)
+  end
+  def set_action_link_text(pszcaption : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_action_link_text.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszcaption)
+  end
+  def show_action_link(fshow : LibC::BOOL) : HRESULT
+    @lpVtbl.value.show_action_link.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fshow)
+  end
+  def is_cancelled(pfcancelled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_cancelled.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfcancelled)
+  end
+  def get_user_input(riidtype : Guid*, punknown : IUnknown, ppropvarresult : PROPVARIANT*, ppropvardefault : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_user_input.unsafe_as(Proc(Guid*, IUnknown, PROPVARIANT*, PROPVARIANT*, HRESULT)).call(riidtype, punknown, ppropvarresult, ppropvardefault)
+  end
+end
+struct LibWin32::IPhotoAcquireSource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_friendly_name(pbstrfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrfriendlyname)
+  end
+  def get_device_icons(nsize : UInt32, phlargeicon : HANDLE*, phsmallicon : HANDLE*) : HRESULT
+    @lpVtbl.value.get_device_icons.unsafe_as(Proc(UInt32, HANDLE*, HANDLE*, HRESULT)).call(nsize, phlargeicon, phsmallicon)
+  end
+  def initialize_item_list(fforceenumeration : LibC::BOOL, pphotoacquireprogresscb : IPhotoAcquireProgressCB, pnitemcount : UInt32*) : HRESULT
+    @lpVtbl.value.initialize_item_list.unsafe_as(Proc(LibC::BOOL, IPhotoAcquireProgressCB, UInt32*, HRESULT)).call(fforceenumeration, pphotoacquireprogresscb, pnitemcount)
+  end
+  def get_item_count(pnitemcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_item_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pnitemcount)
+  end
+  def get_item_at(nindex : UInt32, ppphotoacquireitem : IPhotoAcquireItem*) : HRESULT
+    @lpVtbl.value.get_item_at.unsafe_as(Proc(UInt32, IPhotoAcquireItem*, HRESULT)).call(nindex, ppphotoacquireitem)
+  end
+  def get_photo_acquire_settings(ppphotoacquiresettings : IPhotoAcquireSettings*) : HRESULT
+    @lpVtbl.value.get_photo_acquire_settings.unsafe_as(Proc(IPhotoAcquireSettings*, HRESULT)).call(ppphotoacquiresettings)
+  end
+  def get_device_id(pbstrdeviceid : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdeviceid)
+  end
+  def bind_to_object(riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.bind_to_object.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppv)
+  end
+end
+struct LibWin32::IPhotoAcquire
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_photo_source(pszdevice : LibC::LPWSTR, ppphotoacquiresource : IPhotoAcquireSource*) : HRESULT
+    @lpVtbl.value.create_photo_source.unsafe_as(Proc(LibC::LPWSTR, IPhotoAcquireSource*, HRESULT)).call(pszdevice, ppphotoacquiresource)
+  end
+  def acquire(pphotoacquiresource : IPhotoAcquireSource, fshowprogress : LibC::BOOL, hwndparent : LibC::HANDLE, pszapplicationname : LibC::LPWSTR, pphotoacquireprogresscb : IPhotoAcquireProgressCB) : HRESULT
+    @lpVtbl.value.acquire.unsafe_as(Proc(IPhotoAcquireSource, LibC::BOOL, LibC::HANDLE, LibC::LPWSTR, IPhotoAcquireProgressCB, HRESULT)).call(pphotoacquiresource, fshowprogress, hwndparent, pszapplicationname, pphotoacquireprogresscb)
+  end
+  def enum_results(ppenumfilepaths : IEnumString*) : HRESULT
+    @lpVtbl.value.enum_results.unsafe_as(Proc(IEnumString*, HRESULT)).call(ppenumfilepaths)
+  end
+end
+struct LibWin32::IPhotoAcquireSettings
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize_from_registry(pszregistrykey : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.initialize_from_registry.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszregistrykey)
+  end
+  def set_flags(dwphotoacquireflags : UInt32) : HRESULT
+    @lpVtbl.value.set_flags.unsafe_as(Proc(UInt32, HRESULT)).call(dwphotoacquireflags)
+  end
+  def set_output_filename_template(psztemplate : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_output_filename_template.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(psztemplate)
+  end
+  def set_sequence_padding_width(dwwidth : UInt32) : HRESULT
+    @lpVtbl.value.set_sequence_padding_width.unsafe_as(Proc(UInt32, HRESULT)).call(dwwidth)
+  end
+  def set_sequence_zero_padding(fzeropad : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_sequence_zero_padding.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fzeropad)
+  end
+  def set_group_tag(pszgrouptag : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_group_tag.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszgrouptag)
+  end
+  def set_acquisition_time(pftacquisitiontime : FILETIME*) : HRESULT
+    @lpVtbl.value.set_acquisition_time.unsafe_as(Proc(FILETIME*, HRESULT)).call(pftacquisitiontime)
+  end
+  def get_flags(pdwphotoacquireflags : UInt32*) : HRESULT
+    @lpVtbl.value.get_flags.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwphotoacquireflags)
+  end
+  def get_output_filename_template(pbstrtemplate : UInt8**) : HRESULT
+    @lpVtbl.value.get_output_filename_template.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtemplate)
+  end
+  def get_sequence_padding_width(pdwwidth : UInt32*) : HRESULT
+    @lpVtbl.value.get_sequence_padding_width.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwwidth)
+  end
+  def get_sequence_zero_padding(pfzeropad : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_sequence_zero_padding.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfzeropad)
+  end
+  def get_group_tag(pbstrgrouptag : UInt8**) : HRESULT
+    @lpVtbl.value.get_group_tag.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrgrouptag)
+  end
+  def get_acquisition_time(pftacquisitiontime : FILETIME*) : HRESULT
+    @lpVtbl.value.get_acquisition_time.unsafe_as(Proc(FILETIME*, HRESULT)).call(pftacquisitiontime)
+  end
+end
+struct LibWin32::IPhotoAcquireOptionsDialog
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pszregistryroot : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszregistryroot)
+  end
+  def create(hwndparent : LibC::HANDLE, phwnddialog : HANDLE*) : HRESULT
+    @lpVtbl.value.create.unsafe_as(Proc(LibC::HANDLE, HANDLE*, HRESULT)).call(hwndparent, phwnddialog)
+  end
+  def destroy : HRESULT
+    @lpVtbl.value.destroy.unsafe_as(Proc(HRESULT)).call
+  end
+  def do_modal(hwndparent : LibC::HANDLE, ppnreturncode : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.do_modal.unsafe_as(Proc(LibC::HANDLE, LibC::IntPtrT*, HRESULT)).call(hwndparent, ppnreturncode)
+  end
+  def save_data : HRESULT
+    @lpVtbl.value.save_data.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IPhotoAcquireDeviceSelectionDialog
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_title(psztitle : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_title.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(psztitle)
+  end
+  def set_submit_button_text(pszsubmitbuttontext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_submit_button_text.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pszsubmitbuttontext)
+  end
+  def do_modal(hwndparent : LibC::HANDLE, dwdeviceflags : UInt32, pbstrdeviceid : UInt8**, pndevicetype : DEVICE_SELECTION_DEVICE_TYPE*) : HRESULT
+    @lpVtbl.value.do_modal.unsafe_as(Proc(LibC::HANDLE, UInt32, UInt8**, DEVICE_SELECTION_DEVICE_TYPE*, HRESULT)).call(hwndparent, dwdeviceflags, pbstrdeviceid, pndevicetype)
+  end
+end
+struct LibWin32::IPhotoAcquirePlugin
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pphotoacquiresource : IPhotoAcquireSource, pphotoacquireprogresscb : IPhotoAcquireProgressCB) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(IPhotoAcquireSource, IPhotoAcquireProgressCB, HRESULT)).call(pphotoacquiresource, pphotoacquireprogresscb)
+  end
+  def process_item(dwacquirestage : UInt32, pphotoacquireitem : IPhotoAcquireItem, poriginalitemstream : IStream, pszfinalfilename : LibC::LPWSTR, ppropertystore : IPropertyStore) : HRESULT
+    @lpVtbl.value.process_item.unsafe_as(Proc(UInt32, IPhotoAcquireItem, IStream, LibC::LPWSTR, IPropertyStore, HRESULT)).call(dwacquirestage, pphotoacquireitem, poriginalitemstream, pszfinalfilename, ppropertystore)
+  end
+  def transfer_complete(hr : HRESULT) : HRESULT
+    @lpVtbl.value.transfer_complete.unsafe_as(Proc(HRESULT, HRESULT)).call(hr)
+  end
+  def display_configure_dialog(hwndparent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.display_configure_dialog.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwndparent)
+  end
 end

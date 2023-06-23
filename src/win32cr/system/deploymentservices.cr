@@ -505,17 +505,17 @@ lib LibWin32
 
 
   struct IWdsTransportCacheableVTbl
-    query_interface : Proc(IWdsTransportCacheable*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportCacheable*, UInt32)
-    release : Proc(IWdsTransportCacheable*, UInt32)
-    get_type_info_count : Proc(IWdsTransportCacheable*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportCacheable*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportCacheable*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportCacheable*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_dirty : Proc(IWdsTransportCacheable*, Int16*, HRESULT)
-    discard : Proc(IWdsTransportCacheable*, HRESULT)
-    refresh : Proc(IWdsTransportCacheable*, HRESULT)
-    commit : Proc(IWdsTransportCacheable*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_dirty : UInt64
+    discard : UInt64
+    refresh : UInt64
+    commit : UInt64
   end
 
   IWdsTransportCacheable_GUID = "46ad894b-0bab-47dc-84b2-7b553f1d8f80"
@@ -525,16 +525,16 @@ lib LibWin32
   end
 
   struct IWdsTransportCollectionVTbl
-    query_interface : Proc(IWdsTransportCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportCollection*, UInt32)
-    release : Proc(IWdsTransportCollection*, UInt32)
-    get_type_info_count : Proc(IWdsTransportCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IWdsTransportCollection*, UInt32*, HRESULT)
-    get_item : Proc(IWdsTransportCollection*, UInt32, IDispatch*, HRESULT)
-    get__new_enum : Proc(IWdsTransportCollection*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_count : UInt64
+    get_item : UInt64
+    get__new_enum : UInt64
   end
 
   IWdsTransportCollection_GUID = "b8ba4b1a-2ff4-43ab-996c-b2b10a91a6eb"
@@ -544,14 +544,14 @@ lib LibWin32
   end
 
   struct IWdsTransportManagerVTbl
-    query_interface : Proc(IWdsTransportManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportManager*, UInt32)
-    release : Proc(IWdsTransportManager*, UInt32)
-    get_type_info_count : Proc(IWdsTransportManager*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportManager*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportManager*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_wds_transport_server : Proc(IWdsTransportManager*, UInt8*, IWdsTransportServer*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_wds_transport_server : UInt64
   end
 
   IWdsTransportManager_GUID = "5b0d35f5-1b13-4afd-b878-6526dc340b5d"
@@ -561,18 +561,18 @@ lib LibWin32
   end
 
   struct IWdsTransportServerVTbl
-    query_interface : Proc(IWdsTransportServer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportServer*, UInt32)
-    release : Proc(IWdsTransportServer*, UInt32)
-    get_type_info_count : Proc(IWdsTransportServer*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportServer*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportServer*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportServer*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IWdsTransportServer*, UInt8**, HRESULT)
-    get_setup_manager : Proc(IWdsTransportServer*, IWdsTransportSetupManager*, HRESULT)
-    get_configuration_manager : Proc(IWdsTransportServer*, IWdsTransportConfigurationManager*, HRESULT)
-    get_namespace_manager : Proc(IWdsTransportServer*, IWdsTransportNamespaceManager*, HRESULT)
-    disconnect_client : Proc(IWdsTransportServer*, UInt32, WDSTRANSPORT_DISCONNECT_TYPE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_setup_manager : UInt64
+    get_configuration_manager : UInt64
+    get_namespace_manager : UInt64
+    disconnect_client : UInt64
   end
 
   IWdsTransportServer_GUID = "09ccd093-830d-4344-a30a-73ae8e8fca90"
@@ -582,19 +582,19 @@ lib LibWin32
   end
 
   struct IWdsTransportServer2VTbl
-    query_interface : Proc(IWdsTransportServer2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportServer2*, UInt32)
-    release : Proc(IWdsTransportServer2*, UInt32)
-    get_type_info_count : Proc(IWdsTransportServer2*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportServer2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportServer2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportServer2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IWdsTransportServer2*, UInt8**, HRESULT)
-    get_setup_manager : Proc(IWdsTransportServer2*, IWdsTransportSetupManager*, HRESULT)
-    get_configuration_manager : Proc(IWdsTransportServer2*, IWdsTransportConfigurationManager*, HRESULT)
-    get_namespace_manager : Proc(IWdsTransportServer2*, IWdsTransportNamespaceManager*, HRESULT)
-    disconnect_client : Proc(IWdsTransportServer2*, UInt32, WDSTRANSPORT_DISCONNECT_TYPE, HRESULT)
-    get_tftp_manager : Proc(IWdsTransportServer2*, IWdsTransportTftpManager*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_setup_manager : UInt64
+    get_configuration_manager : UInt64
+    get_namespace_manager : UInt64
+    disconnect_client : UInt64
+    get_tftp_manager : UInt64
   end
 
   IWdsTransportServer2_GUID = "256e999f-6df4-4538-81b9-857b9ab8fb47"
@@ -604,18 +604,18 @@ lib LibWin32
   end
 
   struct IWdsTransportSetupManagerVTbl
-    query_interface : Proc(IWdsTransportSetupManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportSetupManager*, UInt32)
-    release : Proc(IWdsTransportSetupManager*, UInt32)
-    get_type_info_count : Proc(IWdsTransportSetupManager*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportSetupManager*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportSetupManager*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportSetupManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_version : Proc(IWdsTransportSetupManager*, UInt64*, HRESULT)
-    get_installed_features : Proc(IWdsTransportSetupManager*, UInt32*, HRESULT)
-    get_protocols : Proc(IWdsTransportSetupManager*, UInt32*, HRESULT)
-    register_content_provider : Proc(IWdsTransportSetupManager*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
-    deregister_content_provider : Proc(IWdsTransportSetupManager*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_version : UInt64
+    get_installed_features : UInt64
+    get_protocols : UInt64
+    register_content_provider : UInt64
+    deregister_content_provider : UInt64
   end
 
   IWdsTransportSetupManager_GUID = "f7238425-efa8-40a4-aef9-c98d969c0b75"
@@ -625,20 +625,20 @@ lib LibWin32
   end
 
   struct IWdsTransportSetupManager2VTbl
-    query_interface : Proc(IWdsTransportSetupManager2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportSetupManager2*, UInt32)
-    release : Proc(IWdsTransportSetupManager2*, UInt32)
-    get_type_info_count : Proc(IWdsTransportSetupManager2*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportSetupManager2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportSetupManager2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportSetupManager2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_version : Proc(IWdsTransportSetupManager2*, UInt64*, HRESULT)
-    get_installed_features : Proc(IWdsTransportSetupManager2*, UInt32*, HRESULT)
-    get_protocols : Proc(IWdsTransportSetupManager2*, UInt32*, HRESULT)
-    register_content_provider : Proc(IWdsTransportSetupManager2*, UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)
-    deregister_content_provider : Proc(IWdsTransportSetupManager2*, UInt8*, HRESULT)
-    get_tftp_capabilities : Proc(IWdsTransportSetupManager2*, UInt32*, HRESULT)
-    get_content_providers : Proc(IWdsTransportSetupManager2*, IWdsTransportCollection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_version : UInt64
+    get_installed_features : UInt64
+    get_protocols : UInt64
+    register_content_provider : UInt64
+    deregister_content_provider : UInt64
+    get_tftp_capabilities : UInt64
+    get_content_providers : UInt64
   end
 
   IWdsTransportSetupManager2_GUID = "02be79da-7e9e-4366-8b6e-2aa9a91be47f"
@@ -648,22 +648,22 @@ lib LibWin32
   end
 
   struct IWdsTransportConfigurationManagerVTbl
-    query_interface : Proc(IWdsTransportConfigurationManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportConfigurationManager*, UInt32)
-    release : Proc(IWdsTransportConfigurationManager*, UInt32)
-    get_type_info_count : Proc(IWdsTransportConfigurationManager*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportConfigurationManager*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportConfigurationManager*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportConfigurationManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_service_policy : Proc(IWdsTransportConfigurationManager*, IWdsTransportServicePolicy*, HRESULT)
-    get_diagnostics_policy : Proc(IWdsTransportConfigurationManager*, IWdsTransportDiagnosticsPolicy*, HRESULT)
-    get_wds_transport_services_running : Proc(IWdsTransportConfigurationManager*, Int16, Int16*, HRESULT)
-    enable_wds_transport_services : Proc(IWdsTransportConfigurationManager*, HRESULT)
-    disable_wds_transport_services : Proc(IWdsTransportConfigurationManager*, HRESULT)
-    start_wds_transport_services : Proc(IWdsTransportConfigurationManager*, HRESULT)
-    stop_wds_transport_services : Proc(IWdsTransportConfigurationManager*, HRESULT)
-    restart_wds_transport_services : Proc(IWdsTransportConfigurationManager*, HRESULT)
-    notify_wds_transport_services : Proc(IWdsTransportConfigurationManager*, WDSTRANSPORT_SERVICE_NOTIFICATION, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_service_policy : UInt64
+    get_diagnostics_policy : UInt64
+    get_wds_transport_services_running : UInt64
+    enable_wds_transport_services : UInt64
+    disable_wds_transport_services : UInt64
+    start_wds_transport_services : UInt64
+    stop_wds_transport_services : UInt64
+    restart_wds_transport_services : UInt64
+    notify_wds_transport_services : UInt64
   end
 
   IWdsTransportConfigurationManager_GUID = "84cc4779-42dd-4792-891e-1321d6d74b44"
@@ -673,23 +673,23 @@ lib LibWin32
   end
 
   struct IWdsTransportConfigurationManager2VTbl
-    query_interface : Proc(IWdsTransportConfigurationManager2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportConfigurationManager2*, UInt32)
-    release : Proc(IWdsTransportConfigurationManager2*, UInt32)
-    get_type_info_count : Proc(IWdsTransportConfigurationManager2*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportConfigurationManager2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportConfigurationManager2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportConfigurationManager2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_service_policy : Proc(IWdsTransportConfigurationManager2*, IWdsTransportServicePolicy*, HRESULT)
-    get_diagnostics_policy : Proc(IWdsTransportConfigurationManager2*, IWdsTransportDiagnosticsPolicy*, HRESULT)
-    get_wds_transport_services_running : Proc(IWdsTransportConfigurationManager2*, Int16, Int16*, HRESULT)
-    enable_wds_transport_services : Proc(IWdsTransportConfigurationManager2*, HRESULT)
-    disable_wds_transport_services : Proc(IWdsTransportConfigurationManager2*, HRESULT)
-    start_wds_transport_services : Proc(IWdsTransportConfigurationManager2*, HRESULT)
-    stop_wds_transport_services : Proc(IWdsTransportConfigurationManager2*, HRESULT)
-    restart_wds_transport_services : Proc(IWdsTransportConfigurationManager2*, HRESULT)
-    notify_wds_transport_services : Proc(IWdsTransportConfigurationManager2*, WDSTRANSPORT_SERVICE_NOTIFICATION, HRESULT)
-    get_multicast_session_policy : Proc(IWdsTransportConfigurationManager2*, IWdsTransportMulticastSessionPolicy*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_service_policy : UInt64
+    get_diagnostics_policy : UInt64
+    get_wds_transport_services_running : UInt64
+    enable_wds_transport_services : UInt64
+    disable_wds_transport_services : UInt64
+    start_wds_transport_services : UInt64
+    stop_wds_transport_services : UInt64
+    restart_wds_transport_services : UInt64
+    notify_wds_transport_services : UInt64
+    get_multicast_session_policy : UInt64
   end
 
   IWdsTransportConfigurationManager2_GUID = "d0d85caf-a153-4f1d-a9dd-96f431c50717"
@@ -699,16 +699,16 @@ lib LibWin32
   end
 
   struct IWdsTransportNamespaceManagerVTbl
-    query_interface : Proc(IWdsTransportNamespaceManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportNamespaceManager*, UInt32)
-    release : Proc(IWdsTransportNamespaceManager*, UInt32)
-    get_type_info_count : Proc(IWdsTransportNamespaceManager*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportNamespaceManager*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportNamespaceManager*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportNamespaceManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    create_namespace : Proc(IWdsTransportNamespaceManager*, WDSTRANSPORT_NAMESPACE_TYPE, UInt8*, UInt8*, UInt8*, IWdsTransportNamespace*, HRESULT)
-    retrieve_namespace : Proc(IWdsTransportNamespaceManager*, UInt8*, IWdsTransportNamespace*, HRESULT)
-    retrieve_namespaces : Proc(IWdsTransportNamespaceManager*, UInt8*, UInt8*, Int16, IWdsTransportCollection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    create_namespace : UInt64
+    retrieve_namespace : UInt64
+    retrieve_namespaces : UInt64
   end
 
   IWdsTransportNamespaceManager_GUID = "3e22d9f6-3777-4d98-83e1-f98696717ba3"
@@ -718,14 +718,14 @@ lib LibWin32
   end
 
   struct IWdsTransportTftpManagerVTbl
-    query_interface : Proc(IWdsTransportTftpManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportTftpManager*, UInt32)
-    release : Proc(IWdsTransportTftpManager*, UInt32)
-    get_type_info_count : Proc(IWdsTransportTftpManager*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportTftpManager*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportTftpManager*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportTftpManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    retrieve_tftp_clients : Proc(IWdsTransportTftpManager*, IWdsTransportCollection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    retrieve_tftp_clients : UInt64
   end
 
   IWdsTransportTftpManager_GUID = "1327a7c8-ae8a-4fb3-8150-136227c37e9a"
@@ -735,29 +735,29 @@ lib LibWin32
   end
 
   struct IWdsTransportServicePolicyVTbl
-    query_interface : Proc(IWdsTransportServicePolicy*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportServicePolicy*, UInt32)
-    release : Proc(IWdsTransportServicePolicy*, UInt32)
-    get_type_info_count : Proc(IWdsTransportServicePolicy*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportServicePolicy*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportServicePolicy*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportServicePolicy*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_dirty : Proc(IWdsTransportServicePolicy*, Int16*, HRESULT)
-    discard : Proc(IWdsTransportServicePolicy*, HRESULT)
-    refresh : Proc(IWdsTransportServicePolicy*, HRESULT)
-    commit : Proc(IWdsTransportServicePolicy*, HRESULT)
-    get_ip_address_source : Proc(IWdsTransportServicePolicy*, WDSTRANSPORT_IP_ADDRESS_TYPE, WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE*, HRESULT)
-    put_ip_address_source : Proc(IWdsTransportServicePolicy*, WDSTRANSPORT_IP_ADDRESS_TYPE, WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE, HRESULT)
-    get_start_ip_address : Proc(IWdsTransportServicePolicy*, WDSTRANSPORT_IP_ADDRESS_TYPE, UInt8**, HRESULT)
-    put_start_ip_address : Proc(IWdsTransportServicePolicy*, WDSTRANSPORT_IP_ADDRESS_TYPE, UInt8*, HRESULT)
-    get_end_ip_address : Proc(IWdsTransportServicePolicy*, WDSTRANSPORT_IP_ADDRESS_TYPE, UInt8**, HRESULT)
-    put_end_ip_address : Proc(IWdsTransportServicePolicy*, WDSTRANSPORT_IP_ADDRESS_TYPE, UInt8*, HRESULT)
-    get_start_port : Proc(IWdsTransportServicePolicy*, UInt32*, HRESULT)
-    put_start_port : Proc(IWdsTransportServicePolicy*, UInt32, HRESULT)
-    get_end_port : Proc(IWdsTransportServicePolicy*, UInt32*, HRESULT)
-    put_end_port : Proc(IWdsTransportServicePolicy*, UInt32, HRESULT)
-    get_network_profile : Proc(IWdsTransportServicePolicy*, WDSTRANSPORT_NETWORK_PROFILE_TYPE*, HRESULT)
-    put_network_profile : Proc(IWdsTransportServicePolicy*, WDSTRANSPORT_NETWORK_PROFILE_TYPE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_dirty : UInt64
+    discard : UInt64
+    refresh : UInt64
+    commit : UInt64
+    get_ip_address_source : UInt64
+    put_ip_address_source : UInt64
+    get_start_ip_address : UInt64
+    put_start_ip_address : UInt64
+    get_end_ip_address : UInt64
+    put_end_ip_address : UInt64
+    get_start_port : UInt64
+    put_start_port : UInt64
+    get_end_port : UInt64
+    put_end_port : UInt64
+    get_network_profile : UInt64
+    put_network_profile : UInt64
   end
 
   IWdsTransportServicePolicy_GUID = "b9468578-9f2b-48cc-b27a-a60799c2750c"
@@ -767,35 +767,35 @@ lib LibWin32
   end
 
   struct IWdsTransportServicePolicy2VTbl
-    query_interface : Proc(IWdsTransportServicePolicy2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportServicePolicy2*, UInt32)
-    release : Proc(IWdsTransportServicePolicy2*, UInt32)
-    get_type_info_count : Proc(IWdsTransportServicePolicy2*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportServicePolicy2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportServicePolicy2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportServicePolicy2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_dirty : Proc(IWdsTransportServicePolicy2*, Int16*, HRESULT)
-    discard : Proc(IWdsTransportServicePolicy2*, HRESULT)
-    refresh : Proc(IWdsTransportServicePolicy2*, HRESULT)
-    commit : Proc(IWdsTransportServicePolicy2*, HRESULT)
-    get_ip_address_source : Proc(IWdsTransportServicePolicy2*, WDSTRANSPORT_IP_ADDRESS_TYPE, WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE*, HRESULT)
-    put_ip_address_source : Proc(IWdsTransportServicePolicy2*, WDSTRANSPORT_IP_ADDRESS_TYPE, WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE, HRESULT)
-    get_start_ip_address : Proc(IWdsTransportServicePolicy2*, WDSTRANSPORT_IP_ADDRESS_TYPE, UInt8**, HRESULT)
-    put_start_ip_address : Proc(IWdsTransportServicePolicy2*, WDSTRANSPORT_IP_ADDRESS_TYPE, UInt8*, HRESULT)
-    get_end_ip_address : Proc(IWdsTransportServicePolicy2*, WDSTRANSPORT_IP_ADDRESS_TYPE, UInt8**, HRESULT)
-    put_end_ip_address : Proc(IWdsTransportServicePolicy2*, WDSTRANSPORT_IP_ADDRESS_TYPE, UInt8*, HRESULT)
-    get_start_port : Proc(IWdsTransportServicePolicy2*, UInt32*, HRESULT)
-    put_start_port : Proc(IWdsTransportServicePolicy2*, UInt32, HRESULT)
-    get_end_port : Proc(IWdsTransportServicePolicy2*, UInt32*, HRESULT)
-    put_end_port : Proc(IWdsTransportServicePolicy2*, UInt32, HRESULT)
-    get_network_profile : Proc(IWdsTransportServicePolicy2*, WDSTRANSPORT_NETWORK_PROFILE_TYPE*, HRESULT)
-    put_network_profile : Proc(IWdsTransportServicePolicy2*, WDSTRANSPORT_NETWORK_PROFILE_TYPE, HRESULT)
-    get_udp_port_policy : Proc(IWdsTransportServicePolicy2*, WDSTRANSPORT_UDP_PORT_POLICY*, HRESULT)
-    put_udp_port_policy : Proc(IWdsTransportServicePolicy2*, WDSTRANSPORT_UDP_PORT_POLICY, HRESULT)
-    get_tftp_maximum_block_size : Proc(IWdsTransportServicePolicy2*, UInt32*, HRESULT)
-    put_tftp_maximum_block_size : Proc(IWdsTransportServicePolicy2*, UInt32, HRESULT)
-    get_enable_tftp_variable_window_extension : Proc(IWdsTransportServicePolicy2*, Int16*, HRESULT)
-    put_enable_tftp_variable_window_extension : Proc(IWdsTransportServicePolicy2*, Int16, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_dirty : UInt64
+    discard : UInt64
+    refresh : UInt64
+    commit : UInt64
+    get_ip_address_source : UInt64
+    put_ip_address_source : UInt64
+    get_start_ip_address : UInt64
+    put_start_ip_address : UInt64
+    get_end_ip_address : UInt64
+    put_end_ip_address : UInt64
+    get_start_port : UInt64
+    put_start_port : UInt64
+    get_end_port : UInt64
+    put_end_port : UInt64
+    get_network_profile : UInt64
+    put_network_profile : UInt64
+    get_udp_port_policy : UInt64
+    put_udp_port_policy : UInt64
+    get_tftp_maximum_block_size : UInt64
+    put_tftp_maximum_block_size : UInt64
+    get_enable_tftp_variable_window_extension : UInt64
+    put_enable_tftp_variable_window_extension : UInt64
   end
 
   IWdsTransportServicePolicy2_GUID = "65c19e5c-aa7e-4b91-8944-91e0e5572797"
@@ -805,21 +805,21 @@ lib LibWin32
   end
 
   struct IWdsTransportDiagnosticsPolicyVTbl
-    query_interface : Proc(IWdsTransportDiagnosticsPolicy*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportDiagnosticsPolicy*, UInt32)
-    release : Proc(IWdsTransportDiagnosticsPolicy*, UInt32)
-    get_type_info_count : Proc(IWdsTransportDiagnosticsPolicy*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportDiagnosticsPolicy*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportDiagnosticsPolicy*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportDiagnosticsPolicy*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_dirty : Proc(IWdsTransportDiagnosticsPolicy*, Int16*, HRESULT)
-    discard : Proc(IWdsTransportDiagnosticsPolicy*, HRESULT)
-    refresh : Proc(IWdsTransportDiagnosticsPolicy*, HRESULT)
-    commit : Proc(IWdsTransportDiagnosticsPolicy*, HRESULT)
-    get_enabled : Proc(IWdsTransportDiagnosticsPolicy*, Int16*, HRESULT)
-    put_enabled : Proc(IWdsTransportDiagnosticsPolicy*, Int16, HRESULT)
-    get_components : Proc(IWdsTransportDiagnosticsPolicy*, UInt32*, HRESULT)
-    put_components : Proc(IWdsTransportDiagnosticsPolicy*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_dirty : UInt64
+    discard : UInt64
+    refresh : UInt64
+    commit : UInt64
+    get_enabled : UInt64
+    put_enabled : UInt64
+    get_components : UInt64
+    put_components : UInt64
   end
 
   IWdsTransportDiagnosticsPolicy_GUID = "13b33efc-7856-4f61-9a59-8de67b6b87b6"
@@ -829,25 +829,25 @@ lib LibWin32
   end
 
   struct IWdsTransportMulticastSessionPolicyVTbl
-    query_interface : Proc(IWdsTransportMulticastSessionPolicy*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportMulticastSessionPolicy*, UInt32)
-    release : Proc(IWdsTransportMulticastSessionPolicy*, UInt32)
-    get_type_info_count : Proc(IWdsTransportMulticastSessionPolicy*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportMulticastSessionPolicy*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportMulticastSessionPolicy*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportMulticastSessionPolicy*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_dirty : Proc(IWdsTransportMulticastSessionPolicy*, Int16*, HRESULT)
-    discard : Proc(IWdsTransportMulticastSessionPolicy*, HRESULT)
-    refresh : Proc(IWdsTransportMulticastSessionPolicy*, HRESULT)
-    commit : Proc(IWdsTransportMulticastSessionPolicy*, HRESULT)
-    get_slow_client_handling : Proc(IWdsTransportMulticastSessionPolicy*, WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE*, HRESULT)
-    put_slow_client_handling : Proc(IWdsTransportMulticastSessionPolicy*, WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE, HRESULT)
-    get_auto_disconnect_threshold : Proc(IWdsTransportMulticastSessionPolicy*, UInt32*, HRESULT)
-    put_auto_disconnect_threshold : Proc(IWdsTransportMulticastSessionPolicy*, UInt32, HRESULT)
-    get_multistream_stream_count : Proc(IWdsTransportMulticastSessionPolicy*, UInt32*, HRESULT)
-    put_multistream_stream_count : Proc(IWdsTransportMulticastSessionPolicy*, UInt32, HRESULT)
-    get_slow_client_fallback : Proc(IWdsTransportMulticastSessionPolicy*, Int16*, HRESULT)
-    put_slow_client_fallback : Proc(IWdsTransportMulticastSessionPolicy*, Int16, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_dirty : UInt64
+    discard : UInt64
+    refresh : UInt64
+    commit : UInt64
+    get_slow_client_handling : UInt64
+    put_slow_client_handling : UInt64
+    get_auto_disconnect_threshold : UInt64
+    put_auto_disconnect_threshold : UInt64
+    get_multistream_stream_count : UInt64
+    put_multistream_stream_count : UInt64
+    get_slow_client_fallback : UInt64
+    put_slow_client_fallback : UInt64
   end
 
   IWdsTransportMulticastSessionPolicy_GUID = "4e5753cf-68ec-4504-a951-4a003266606b"
@@ -857,34 +857,34 @@ lib LibWin32
   end
 
   struct IWdsTransportNamespaceVTbl
-    query_interface : Proc(IWdsTransportNamespace*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportNamespace*, UInt32)
-    release : Proc(IWdsTransportNamespace*, UInt32)
-    get_type_info_count : Proc(IWdsTransportNamespace*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportNamespace*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportNamespace*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportNamespace*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_type : Proc(IWdsTransportNamespace*, WDSTRANSPORT_NAMESPACE_TYPE*, HRESULT)
-    get_id : Proc(IWdsTransportNamespace*, UInt32*, HRESULT)
-    get_name : Proc(IWdsTransportNamespace*, UInt8**, HRESULT)
-    put_name : Proc(IWdsTransportNamespace*, UInt8*, HRESULT)
-    get_friendly_name : Proc(IWdsTransportNamespace*, UInt8**, HRESULT)
-    put_friendly_name : Proc(IWdsTransportNamespace*, UInt8*, HRESULT)
-    get_description : Proc(IWdsTransportNamespace*, UInt8**, HRESULT)
-    put_description : Proc(IWdsTransportNamespace*, UInt8*, HRESULT)
-    get_content_provider : Proc(IWdsTransportNamespace*, UInt8**, HRESULT)
-    put_content_provider : Proc(IWdsTransportNamespace*, UInt8*, HRESULT)
-    get_configuration : Proc(IWdsTransportNamespace*, UInt8**, HRESULT)
-    put_configuration : Proc(IWdsTransportNamespace*, UInt8*, HRESULT)
-    get_registered : Proc(IWdsTransportNamespace*, Int16*, HRESULT)
-    get_tombstoned : Proc(IWdsTransportNamespace*, Int16*, HRESULT)
-    get_tombstone_time : Proc(IWdsTransportNamespace*, Float64*, HRESULT)
-    get_transmission_started : Proc(IWdsTransportNamespace*, Int16*, HRESULT)
-    register : Proc(IWdsTransportNamespace*, HRESULT)
-    deregister : Proc(IWdsTransportNamespace*, Int16, HRESULT)
-    clone : Proc(IWdsTransportNamespace*, IWdsTransportNamespace*, HRESULT)
-    refresh : Proc(IWdsTransportNamespace*, HRESULT)
-    retrieve_contents : Proc(IWdsTransportNamespace*, IWdsTransportCollection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_type : UInt64
+    get_id : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_friendly_name : UInt64
+    put_friendly_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_content_provider : UInt64
+    put_content_provider : UInt64
+    get_configuration : UInt64
+    put_configuration : UInt64
+    get_registered : UInt64
+    get_tombstoned : UInt64
+    get_tombstone_time : UInt64
+    get_transmission_started : UInt64
+    register : UInt64
+    deregister : UInt64
+    clone : UInt64
+    refresh : UInt64
+    retrieve_contents : UInt64
   end
 
   IWdsTransportNamespace_GUID = "fa561f57-fbef-4ed3-b056-127cb1b33b84"
@@ -894,34 +894,34 @@ lib LibWin32
   end
 
   struct IWdsTransportNamespaceAutoCastVTbl
-    query_interface : Proc(IWdsTransportNamespaceAutoCast*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportNamespaceAutoCast*, UInt32)
-    release : Proc(IWdsTransportNamespaceAutoCast*, UInt32)
-    get_type_info_count : Proc(IWdsTransportNamespaceAutoCast*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportNamespaceAutoCast*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportNamespaceAutoCast*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportNamespaceAutoCast*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_type : Proc(IWdsTransportNamespaceAutoCast*, WDSTRANSPORT_NAMESPACE_TYPE*, HRESULT)
-    get_id : Proc(IWdsTransportNamespaceAutoCast*, UInt32*, HRESULT)
-    get_name : Proc(IWdsTransportNamespaceAutoCast*, UInt8**, HRESULT)
-    put_name : Proc(IWdsTransportNamespaceAutoCast*, UInt8*, HRESULT)
-    get_friendly_name : Proc(IWdsTransportNamespaceAutoCast*, UInt8**, HRESULT)
-    put_friendly_name : Proc(IWdsTransportNamespaceAutoCast*, UInt8*, HRESULT)
-    get_description : Proc(IWdsTransportNamespaceAutoCast*, UInt8**, HRESULT)
-    put_description : Proc(IWdsTransportNamespaceAutoCast*, UInt8*, HRESULT)
-    get_content_provider : Proc(IWdsTransportNamespaceAutoCast*, UInt8**, HRESULT)
-    put_content_provider : Proc(IWdsTransportNamespaceAutoCast*, UInt8*, HRESULT)
-    get_configuration : Proc(IWdsTransportNamespaceAutoCast*, UInt8**, HRESULT)
-    put_configuration : Proc(IWdsTransportNamespaceAutoCast*, UInt8*, HRESULT)
-    get_registered : Proc(IWdsTransportNamespaceAutoCast*, Int16*, HRESULT)
-    get_tombstoned : Proc(IWdsTransportNamespaceAutoCast*, Int16*, HRESULT)
-    get_tombstone_time : Proc(IWdsTransportNamespaceAutoCast*, Float64*, HRESULT)
-    get_transmission_started : Proc(IWdsTransportNamespaceAutoCast*, Int16*, HRESULT)
-    register : Proc(IWdsTransportNamespaceAutoCast*, HRESULT)
-    deregister : Proc(IWdsTransportNamespaceAutoCast*, Int16, HRESULT)
-    clone : Proc(IWdsTransportNamespaceAutoCast*, IWdsTransportNamespace*, HRESULT)
-    refresh : Proc(IWdsTransportNamespaceAutoCast*, HRESULT)
-    retrieve_contents : Proc(IWdsTransportNamespaceAutoCast*, IWdsTransportCollection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_type : UInt64
+    get_id : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_friendly_name : UInt64
+    put_friendly_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_content_provider : UInt64
+    put_content_provider : UInt64
+    get_configuration : UInt64
+    put_configuration : UInt64
+    get_registered : UInt64
+    get_tombstoned : UInt64
+    get_tombstone_time : UInt64
+    get_transmission_started : UInt64
+    register : UInt64
+    deregister : UInt64
+    clone : UInt64
+    refresh : UInt64
+    retrieve_contents : UInt64
   end
 
   IWdsTransportNamespaceAutoCast_GUID = "ad931a72-c4bd-4c41-8fbc-59c9c748df9e"
@@ -931,35 +931,35 @@ lib LibWin32
   end
 
   struct IWdsTransportNamespaceScheduledCastVTbl
-    query_interface : Proc(IWdsTransportNamespaceScheduledCast*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportNamespaceScheduledCast*, UInt32)
-    release : Proc(IWdsTransportNamespaceScheduledCast*, UInt32)
-    get_type_info_count : Proc(IWdsTransportNamespaceScheduledCast*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportNamespaceScheduledCast*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportNamespaceScheduledCast*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportNamespaceScheduledCast*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_type : Proc(IWdsTransportNamespaceScheduledCast*, WDSTRANSPORT_NAMESPACE_TYPE*, HRESULT)
-    get_id : Proc(IWdsTransportNamespaceScheduledCast*, UInt32*, HRESULT)
-    get_name : Proc(IWdsTransportNamespaceScheduledCast*, UInt8**, HRESULT)
-    put_name : Proc(IWdsTransportNamespaceScheduledCast*, UInt8*, HRESULT)
-    get_friendly_name : Proc(IWdsTransportNamespaceScheduledCast*, UInt8**, HRESULT)
-    put_friendly_name : Proc(IWdsTransportNamespaceScheduledCast*, UInt8*, HRESULT)
-    get_description : Proc(IWdsTransportNamespaceScheduledCast*, UInt8**, HRESULT)
-    put_description : Proc(IWdsTransportNamespaceScheduledCast*, UInt8*, HRESULT)
-    get_content_provider : Proc(IWdsTransportNamespaceScheduledCast*, UInt8**, HRESULT)
-    put_content_provider : Proc(IWdsTransportNamespaceScheduledCast*, UInt8*, HRESULT)
-    get_configuration : Proc(IWdsTransportNamespaceScheduledCast*, UInt8**, HRESULT)
-    put_configuration : Proc(IWdsTransportNamespaceScheduledCast*, UInt8*, HRESULT)
-    get_registered : Proc(IWdsTransportNamespaceScheduledCast*, Int16*, HRESULT)
-    get_tombstoned : Proc(IWdsTransportNamespaceScheduledCast*, Int16*, HRESULT)
-    get_tombstone_time : Proc(IWdsTransportNamespaceScheduledCast*, Float64*, HRESULT)
-    get_transmission_started : Proc(IWdsTransportNamespaceScheduledCast*, Int16*, HRESULT)
-    register : Proc(IWdsTransportNamespaceScheduledCast*, HRESULT)
-    deregister : Proc(IWdsTransportNamespaceScheduledCast*, Int16, HRESULT)
-    clone : Proc(IWdsTransportNamespaceScheduledCast*, IWdsTransportNamespace*, HRESULT)
-    refresh : Proc(IWdsTransportNamespaceScheduledCast*, HRESULT)
-    retrieve_contents : Proc(IWdsTransportNamespaceScheduledCast*, IWdsTransportCollection*, HRESULT)
-    start_transmission : Proc(IWdsTransportNamespaceScheduledCast*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_type : UInt64
+    get_id : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_friendly_name : UInt64
+    put_friendly_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_content_provider : UInt64
+    put_content_provider : UInt64
+    get_configuration : UInt64
+    put_configuration : UInt64
+    get_registered : UInt64
+    get_tombstoned : UInt64
+    get_tombstone_time : UInt64
+    get_transmission_started : UInt64
+    register : UInt64
+    deregister : UInt64
+    clone : UInt64
+    refresh : UInt64
+    retrieve_contents : UInt64
+    start_transmission : UInt64
   end
 
   IWdsTransportNamespaceScheduledCast_GUID = "3840cecf-d76c-416e-a4cc-31c741d2874b"
@@ -969,35 +969,35 @@ lib LibWin32
   end
 
   struct IWdsTransportNamespaceScheduledCastManualStartVTbl
-    query_interface : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt32)
-    release : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt32)
-    get_type_info_count : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_type : Proc(IWdsTransportNamespaceScheduledCastManualStart*, WDSTRANSPORT_NAMESPACE_TYPE*, HRESULT)
-    get_id : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt32*, HRESULT)
-    get_name : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt8**, HRESULT)
-    put_name : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt8*, HRESULT)
-    get_friendly_name : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt8**, HRESULT)
-    put_friendly_name : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt8*, HRESULT)
-    get_description : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt8**, HRESULT)
-    put_description : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt8*, HRESULT)
-    get_content_provider : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt8**, HRESULT)
-    put_content_provider : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt8*, HRESULT)
-    get_configuration : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt8**, HRESULT)
-    put_configuration : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt8*, HRESULT)
-    get_registered : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Int16*, HRESULT)
-    get_tombstoned : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Int16*, HRESULT)
-    get_tombstone_time : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Float64*, HRESULT)
-    get_transmission_started : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Int16*, HRESULT)
-    register : Proc(IWdsTransportNamespaceScheduledCastManualStart*, HRESULT)
-    deregister : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Int16, HRESULT)
-    clone : Proc(IWdsTransportNamespaceScheduledCastManualStart*, IWdsTransportNamespace*, HRESULT)
-    refresh : Proc(IWdsTransportNamespaceScheduledCastManualStart*, HRESULT)
-    retrieve_contents : Proc(IWdsTransportNamespaceScheduledCastManualStart*, IWdsTransportCollection*, HRESULT)
-    start_transmission : Proc(IWdsTransportNamespaceScheduledCastManualStart*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_type : UInt64
+    get_id : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_friendly_name : UInt64
+    put_friendly_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_content_provider : UInt64
+    put_content_provider : UInt64
+    get_configuration : UInt64
+    put_configuration : UInt64
+    get_registered : UInt64
+    get_tombstoned : UInt64
+    get_tombstone_time : UInt64
+    get_transmission_started : UInt64
+    register : UInt64
+    deregister : UInt64
+    clone : UInt64
+    refresh : UInt64
+    retrieve_contents : UInt64
+    start_transmission : UInt64
   end
 
   IWdsTransportNamespaceScheduledCastManualStart_GUID = "013e6e4c-e6a7-4fb5-b7ff-d9f5da805c31"
@@ -1007,39 +1007,39 @@ lib LibWin32
   end
 
   struct IWdsTransportNamespaceScheduledCastAutoStartVTbl
-    query_interface : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt32)
-    release : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt32)
-    get_type_info_count : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_type : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, WDSTRANSPORT_NAMESPACE_TYPE*, HRESULT)
-    get_id : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt32*, HRESULT)
-    get_name : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt8**, HRESULT)
-    put_name : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt8*, HRESULT)
-    get_friendly_name : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt8**, HRESULT)
-    put_friendly_name : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt8*, HRESULT)
-    get_description : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt8**, HRESULT)
-    put_description : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt8*, HRESULT)
-    get_content_provider : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt8**, HRESULT)
-    put_content_provider : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt8*, HRESULT)
-    get_configuration : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt8**, HRESULT)
-    put_configuration : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt8*, HRESULT)
-    get_registered : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Int16*, HRESULT)
-    get_tombstoned : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Int16*, HRESULT)
-    get_tombstone_time : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Float64*, HRESULT)
-    get_transmission_started : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Int16*, HRESULT)
-    register : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, HRESULT)
-    deregister : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Int16, HRESULT)
-    clone : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, IWdsTransportNamespace*, HRESULT)
-    refresh : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, HRESULT)
-    retrieve_contents : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, IWdsTransportCollection*, HRESULT)
-    start_transmission : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, HRESULT)
-    get_minimum_clients : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt32*, HRESULT)
-    put_minimum_clients : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt32, HRESULT)
-    get_start_time : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Float64*, HRESULT)
-    put_start_time : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Float64, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_type : UInt64
+    get_id : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_friendly_name : UInt64
+    put_friendly_name : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_content_provider : UInt64
+    put_content_provider : UInt64
+    get_configuration : UInt64
+    put_configuration : UInt64
+    get_registered : UInt64
+    get_tombstoned : UInt64
+    get_tombstone_time : UInt64
+    get_transmission_started : UInt64
+    register : UInt64
+    deregister : UInt64
+    clone : UInt64
+    refresh : UInt64
+    retrieve_contents : UInt64
+    start_transmission : UInt64
+    get_minimum_clients : UInt64
+    put_minimum_clients : UInt64
+    get_start_time : UInt64
+    put_start_time : UInt64
   end
 
   IWdsTransportNamespaceScheduledCastAutoStart_GUID = "d606af3d-ea9c-4219-961e-7491d618d9b9"
@@ -1049,18 +1049,18 @@ lib LibWin32
   end
 
   struct IWdsTransportContentVTbl
-    query_interface : Proc(IWdsTransportContent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportContent*, UInt32)
-    release : Proc(IWdsTransportContent*, UInt32)
-    get_type_info_count : Proc(IWdsTransportContent*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportContent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportContent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportContent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_namespace : Proc(IWdsTransportContent*, IWdsTransportNamespace*, HRESULT)
-    get_id : Proc(IWdsTransportContent*, UInt32*, HRESULT)
-    get_name : Proc(IWdsTransportContent*, UInt8**, HRESULT)
-    retrieve_sessions : Proc(IWdsTransportContent*, IWdsTransportCollection*, HRESULT)
-    terminate : Proc(IWdsTransportContent*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_namespace : UInt64
+    get_id : UInt64
+    get_name : UInt64
+    retrieve_sessions : UInt64
+    terminate : UInt64
   end
 
   IWdsTransportContent_GUID = "d405d711-0296-4ab4-a860-ac7d32e65798"
@@ -1070,21 +1070,21 @@ lib LibWin32
   end
 
   struct IWdsTransportSessionVTbl
-    query_interface : Proc(IWdsTransportSession*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportSession*, UInt32)
-    release : Proc(IWdsTransportSession*, UInt32)
-    get_type_info_count : Proc(IWdsTransportSession*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportSession*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportSession*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportSession*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_content : Proc(IWdsTransportSession*, IWdsTransportContent*, HRESULT)
-    get_id : Proc(IWdsTransportSession*, UInt32*, HRESULT)
-    get_network_interface_name : Proc(IWdsTransportSession*, UInt8**, HRESULT)
-    get_network_interface_address : Proc(IWdsTransportSession*, UInt8**, HRESULT)
-    get_transfer_rate : Proc(IWdsTransportSession*, UInt32*, HRESULT)
-    get_master_client_id : Proc(IWdsTransportSession*, UInt32*, HRESULT)
-    retrieve_clients : Proc(IWdsTransportSession*, IWdsTransportCollection*, HRESULT)
-    terminate : Proc(IWdsTransportSession*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_content : UInt64
+    get_id : UInt64
+    get_network_interface_name : UInt64
+    get_network_interface_address : UInt64
+    get_transfer_rate : UInt64
+    get_master_client_id : UInt64
+    retrieve_clients : UInt64
+    terminate : UInt64
   end
 
   IWdsTransportSession_GUID = "f4efea88-65b1-4f30-a4b9-2793987796fb"
@@ -1094,25 +1094,25 @@ lib LibWin32
   end
 
   struct IWdsTransportClientVTbl
-    query_interface : Proc(IWdsTransportClient*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportClient*, UInt32)
-    release : Proc(IWdsTransportClient*, UInt32)
-    get_type_info_count : Proc(IWdsTransportClient*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportClient*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportClient*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportClient*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_session : Proc(IWdsTransportClient*, IWdsTransportSession*, HRESULT)
-    get_id : Proc(IWdsTransportClient*, UInt32*, HRESULT)
-    get_name : Proc(IWdsTransportClient*, UInt8**, HRESULT)
-    get_mac_address : Proc(IWdsTransportClient*, UInt8**, HRESULT)
-    get_ip_address : Proc(IWdsTransportClient*, UInt8**, HRESULT)
-    get_percent_completion : Proc(IWdsTransportClient*, UInt32*, HRESULT)
-    get_join_duration : Proc(IWdsTransportClient*, UInt32*, HRESULT)
-    get_cpu_utilization : Proc(IWdsTransportClient*, UInt32*, HRESULT)
-    get_memory_utilization : Proc(IWdsTransportClient*, UInt32*, HRESULT)
-    get_network_utilization : Proc(IWdsTransportClient*, UInt32*, HRESULT)
-    get_user_identity : Proc(IWdsTransportClient*, UInt8**, HRESULT)
-    disconnect : Proc(IWdsTransportClient*, WDSTRANSPORT_DISCONNECT_TYPE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_session : UInt64
+    get_id : UInt64
+    get_name : UInt64
+    get_mac_address : UInt64
+    get_ip_address : UInt64
+    get_percent_completion : UInt64
+    get_join_duration : UInt64
+    get_cpu_utilization : UInt64
+    get_memory_utilization : UInt64
+    get_network_utilization : UInt64
+    get_user_identity : UInt64
+    disconnect : UInt64
   end
 
   IWdsTransportClient_GUID = "b5dbc93a-cabe-46ca-837f-3e44e93c6545"
@@ -1122,20 +1122,20 @@ lib LibWin32
   end
 
   struct IWdsTransportTftpClientVTbl
-    query_interface : Proc(IWdsTransportTftpClient*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportTftpClient*, UInt32)
-    release : Proc(IWdsTransportTftpClient*, UInt32)
-    get_type_info_count : Proc(IWdsTransportTftpClient*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportTftpClient*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportTftpClient*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportTftpClient*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_file_name : Proc(IWdsTransportTftpClient*, UInt8**, HRESULT)
-    get_ip_address : Proc(IWdsTransportTftpClient*, UInt8**, HRESULT)
-    get_timeout : Proc(IWdsTransportTftpClient*, UInt32*, HRESULT)
-    get_current_file_offset : Proc(IWdsTransportTftpClient*, UInt64*, HRESULT)
-    get_file_size : Proc(IWdsTransportTftpClient*, UInt64*, HRESULT)
-    get_block_size : Proc(IWdsTransportTftpClient*, UInt32*, HRESULT)
-    get_window_size : Proc(IWdsTransportTftpClient*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_file_name : UInt64
+    get_ip_address : UInt64
+    get_timeout : UInt64
+    get_current_file_offset : UInt64
+    get_file_size : UInt64
+    get_block_size : UInt64
+    get_window_size : UInt64
   end
 
   IWdsTransportTftpClient_GUID = "b022d3ae-884d-4d85-b146-53320e76ef62"
@@ -1145,17 +1145,17 @@ lib LibWin32
   end
 
   struct IWdsTransportContentProviderVTbl
-    query_interface : Proc(IWdsTransportContentProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWdsTransportContentProvider*, UInt32)
-    release : Proc(IWdsTransportContentProvider*, UInt32)
-    get_type_info_count : Proc(IWdsTransportContentProvider*, UInt32*, HRESULT)
-    get_type_info : Proc(IWdsTransportContentProvider*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWdsTransportContentProvider*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWdsTransportContentProvider*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IWdsTransportContentProvider*, UInt8**, HRESULT)
-    get_description : Proc(IWdsTransportContentProvider*, UInt8**, HRESULT)
-    get_file_path : Proc(IWdsTransportContentProvider*, UInt8**, HRESULT)
-    get_initialization_routine : Proc(IWdsTransportContentProvider*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_description : UInt64
+    get_file_path : UInt64
+    get_initialization_routine : UInt64
   end
 
   IWdsTransportContentProvider_GUID = "b9489f24-f219-4acf-aad7-265c7c08a6ae"
@@ -1253,7 +1253,7 @@ lib LibWin32
   fun WdsCliGetTransferSize(hifh : LibC::HANDLE, pullvalue : UInt64*) : HRESULT
 
   # Params # ulsizeinbytes : UInt32 [In]
-  fun WdsCliSetTransferBufferSize(ulsizeinbytes : UInt32)
+  fun WdsCliSetTransferBufferSize(ulsizeinbytes : UInt32) : Void
 
   # Params # himage : LibC::HANDLE [In],pwszlocalpath : LibC::LPWSTR [In],dwflags : UInt32 [In],dwreserved : UInt32 [In],pfnwdsclicallback : PFN_WdsCliCallback [In],pvuserdata : Void* [In],phtransfer : LibC::HANDLE* [In]
   fun WdsCliTransferImage(himage : LibC::HANDLE, pwszlocalpath : LibC::LPWSTR, dwflags : UInt32, dwreserved : UInt32, pfnwdsclicallback : PFN_WdsCliCallback, pvuserdata : Void*, phtransfer : LibC::HANDLE*) : HRESULT
@@ -1446,4 +1446,1359 @@ lib LibWin32
 
   # Params # hhandle : LibC::HANDLE [In],ubufferlen : UInt32 [In],pbuffer : Void* [In],pubytes : UInt32* [In]
   fun WdsBpGetOptionBuffer(hhandle : LibC::HANDLE, ubufferlen : UInt32, pbuffer : Void*, pubytes : UInt32*) : UInt32
+end
+struct LibWin32::IWdsTransportCacheable
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_dirty(pbdirty : Int16*) : HRESULT
+    @lpVtbl.value.get_dirty.unsafe_as(Proc(Int16*, HRESULT)).call(pbdirty)
+  end
+  def discard : HRESULT
+    @lpVtbl.value.discard.unsafe_as(Proc(HRESULT)).call
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def commit : HRESULT
+    @lpVtbl.value.commit.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWdsTransportCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_count(pulcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pulcount)
+  end
+  def get_item(ulindex : UInt32, ppval : IDispatch*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(UInt32, IDispatch*, HRESULT)).call(ulindex, ppval)
+  end
+  def get__new_enum(ppval : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppval)
+  end
+end
+struct LibWin32::IWdsTransportManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_wds_transport_server(bszservername : UInt8*, ppwdstransportserver : IWdsTransportServer*) : HRESULT
+    @lpVtbl.value.get_wds_transport_server.unsafe_as(Proc(UInt8*, IWdsTransportServer*, HRESULT)).call(bszservername, ppwdstransportserver)
+  end
+end
+struct LibWin32::IWdsTransportServer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszname)
+  end
+  def get_setup_manager(ppwdstransportsetupmanager : IWdsTransportSetupManager*) : HRESULT
+    @lpVtbl.value.get_setup_manager.unsafe_as(Proc(IWdsTransportSetupManager*, HRESULT)).call(ppwdstransportsetupmanager)
+  end
+  def get_configuration_manager(ppwdstransportconfigurationmanager : IWdsTransportConfigurationManager*) : HRESULT
+    @lpVtbl.value.get_configuration_manager.unsafe_as(Proc(IWdsTransportConfigurationManager*, HRESULT)).call(ppwdstransportconfigurationmanager)
+  end
+  def get_namespace_manager(ppwdstransportnamespacemanager : IWdsTransportNamespaceManager*) : HRESULT
+    @lpVtbl.value.get_namespace_manager.unsafe_as(Proc(IWdsTransportNamespaceManager*, HRESULT)).call(ppwdstransportnamespacemanager)
+  end
+  def disconnect_client(ulclientid : UInt32, disconnectiontype : WDSTRANSPORT_DISCONNECT_TYPE) : HRESULT
+    @lpVtbl.value.disconnect_client.unsafe_as(Proc(UInt32, WDSTRANSPORT_DISCONNECT_TYPE, HRESULT)).call(ulclientid, disconnectiontype)
+  end
+end
+struct LibWin32::IWdsTransportServer2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszname)
+  end
+  def get_setup_manager(ppwdstransportsetupmanager : IWdsTransportSetupManager*) : HRESULT
+    @lpVtbl.value.get_setup_manager.unsafe_as(Proc(IWdsTransportSetupManager*, HRESULT)).call(ppwdstransportsetupmanager)
+  end
+  def get_configuration_manager(ppwdstransportconfigurationmanager : IWdsTransportConfigurationManager*) : HRESULT
+    @lpVtbl.value.get_configuration_manager.unsafe_as(Proc(IWdsTransportConfigurationManager*, HRESULT)).call(ppwdstransportconfigurationmanager)
+  end
+  def get_namespace_manager(ppwdstransportnamespacemanager : IWdsTransportNamespaceManager*) : HRESULT
+    @lpVtbl.value.get_namespace_manager.unsafe_as(Proc(IWdsTransportNamespaceManager*, HRESULT)).call(ppwdstransportnamespacemanager)
+  end
+  def disconnect_client(ulclientid : UInt32, disconnectiontype : WDSTRANSPORT_DISCONNECT_TYPE) : HRESULT
+    @lpVtbl.value.disconnect_client.unsafe_as(Proc(UInt32, WDSTRANSPORT_DISCONNECT_TYPE, HRESULT)).call(ulclientid, disconnectiontype)
+  end
+  def get_tftp_manager(ppwdstransporttftpmanager : IWdsTransportTftpManager*) : HRESULT
+    @lpVtbl.value.get_tftp_manager.unsafe_as(Proc(IWdsTransportTftpManager*, HRESULT)).call(ppwdstransporttftpmanager)
+  end
+end
+struct LibWin32::IWdsTransportSetupManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_version(pullversion : UInt64*) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(UInt64*, HRESULT)).call(pullversion)
+  end
+  def get_installed_features(pulinstalledfeatures : UInt32*) : HRESULT
+    @lpVtbl.value.get_installed_features.unsafe_as(Proc(UInt32*, HRESULT)).call(pulinstalledfeatures)
+  end
+  def get_protocols(pulprotocols : UInt32*) : HRESULT
+    @lpVtbl.value.get_protocols.unsafe_as(Proc(UInt32*, HRESULT)).call(pulprotocols)
+  end
+  def register_content_provider(bszname : UInt8*, bszdescription : UInt8*, bszfilepath : UInt8*, bszinitializationroutine : UInt8*) : HRESULT
+    @lpVtbl.value.register_content_provider.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)).call(bszname, bszdescription, bszfilepath, bszinitializationroutine)
+  end
+  def deregister_content_provider(bszname : UInt8*) : HRESULT
+    @lpVtbl.value.deregister_content_provider.unsafe_as(Proc(UInt8*, HRESULT)).call(bszname)
+  end
+end
+struct LibWin32::IWdsTransportSetupManager2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_version(pullversion : UInt64*) : HRESULT
+    @lpVtbl.value.get_version.unsafe_as(Proc(UInt64*, HRESULT)).call(pullversion)
+  end
+  def get_installed_features(pulinstalledfeatures : UInt32*) : HRESULT
+    @lpVtbl.value.get_installed_features.unsafe_as(Proc(UInt32*, HRESULT)).call(pulinstalledfeatures)
+  end
+  def get_protocols(pulprotocols : UInt32*) : HRESULT
+    @lpVtbl.value.get_protocols.unsafe_as(Proc(UInt32*, HRESULT)).call(pulprotocols)
+  end
+  def register_content_provider(bszname : UInt8*, bszdescription : UInt8*, bszfilepath : UInt8*, bszinitializationroutine : UInt8*) : HRESULT
+    @lpVtbl.value.register_content_provider.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, HRESULT)).call(bszname, bszdescription, bszfilepath, bszinitializationroutine)
+  end
+  def deregister_content_provider(bszname : UInt8*) : HRESULT
+    @lpVtbl.value.deregister_content_provider.unsafe_as(Proc(UInt8*, HRESULT)).call(bszname)
+  end
+  def get_tftp_capabilities(pultftpcapabilities : UInt32*) : HRESULT
+    @lpVtbl.value.get_tftp_capabilities.unsafe_as(Proc(UInt32*, HRESULT)).call(pultftpcapabilities)
+  end
+  def get_content_providers(ppprovidercollection : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.get_content_providers.unsafe_as(Proc(IWdsTransportCollection*, HRESULT)).call(ppprovidercollection)
+  end
+end
+struct LibWin32::IWdsTransportConfigurationManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_service_policy(ppwdstransportservicepolicy : IWdsTransportServicePolicy*) : HRESULT
+    @lpVtbl.value.get_service_policy.unsafe_as(Proc(IWdsTransportServicePolicy*, HRESULT)).call(ppwdstransportservicepolicy)
+  end
+  def get_diagnostics_policy(ppwdstransportdiagnosticspolicy : IWdsTransportDiagnosticsPolicy*) : HRESULT
+    @lpVtbl.value.get_diagnostics_policy.unsafe_as(Proc(IWdsTransportDiagnosticsPolicy*, HRESULT)).call(ppwdstransportdiagnosticspolicy)
+  end
+  def get_wds_transport_services_running(brealtimestatus : Int16, pbservicesrunning : Int16*) : HRESULT
+    @lpVtbl.value.get_wds_transport_services_running.unsafe_as(Proc(Int16, Int16*, HRESULT)).call(brealtimestatus, pbservicesrunning)
+  end
+  def enable_wds_transport_services : HRESULT
+    @lpVtbl.value.enable_wds_transport_services.unsafe_as(Proc(HRESULT)).call
+  end
+  def disable_wds_transport_services : HRESULT
+    @lpVtbl.value.disable_wds_transport_services.unsafe_as(Proc(HRESULT)).call
+  end
+  def start_wds_transport_services : HRESULT
+    @lpVtbl.value.start_wds_transport_services.unsafe_as(Proc(HRESULT)).call
+  end
+  def stop_wds_transport_services : HRESULT
+    @lpVtbl.value.stop_wds_transport_services.unsafe_as(Proc(HRESULT)).call
+  end
+  def restart_wds_transport_services : HRESULT
+    @lpVtbl.value.restart_wds_transport_services.unsafe_as(Proc(HRESULT)).call
+  end
+  def notify_wds_transport_services(servicenotification : WDSTRANSPORT_SERVICE_NOTIFICATION) : HRESULT
+    @lpVtbl.value.notify_wds_transport_services.unsafe_as(Proc(WDSTRANSPORT_SERVICE_NOTIFICATION, HRESULT)).call(servicenotification)
+  end
+end
+struct LibWin32::IWdsTransportConfigurationManager2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_service_policy(ppwdstransportservicepolicy : IWdsTransportServicePolicy*) : HRESULT
+    @lpVtbl.value.get_service_policy.unsafe_as(Proc(IWdsTransportServicePolicy*, HRESULT)).call(ppwdstransportservicepolicy)
+  end
+  def get_diagnostics_policy(ppwdstransportdiagnosticspolicy : IWdsTransportDiagnosticsPolicy*) : HRESULT
+    @lpVtbl.value.get_diagnostics_policy.unsafe_as(Proc(IWdsTransportDiagnosticsPolicy*, HRESULT)).call(ppwdstransportdiagnosticspolicy)
+  end
+  def get_wds_transport_services_running(brealtimestatus : Int16, pbservicesrunning : Int16*) : HRESULT
+    @lpVtbl.value.get_wds_transport_services_running.unsafe_as(Proc(Int16, Int16*, HRESULT)).call(brealtimestatus, pbservicesrunning)
+  end
+  def enable_wds_transport_services : HRESULT
+    @lpVtbl.value.enable_wds_transport_services.unsafe_as(Proc(HRESULT)).call
+  end
+  def disable_wds_transport_services : HRESULT
+    @lpVtbl.value.disable_wds_transport_services.unsafe_as(Proc(HRESULT)).call
+  end
+  def start_wds_transport_services : HRESULT
+    @lpVtbl.value.start_wds_transport_services.unsafe_as(Proc(HRESULT)).call
+  end
+  def stop_wds_transport_services : HRESULT
+    @lpVtbl.value.stop_wds_transport_services.unsafe_as(Proc(HRESULT)).call
+  end
+  def restart_wds_transport_services : HRESULT
+    @lpVtbl.value.restart_wds_transport_services.unsafe_as(Proc(HRESULT)).call
+  end
+  def notify_wds_transport_services(servicenotification : WDSTRANSPORT_SERVICE_NOTIFICATION) : HRESULT
+    @lpVtbl.value.notify_wds_transport_services.unsafe_as(Proc(WDSTRANSPORT_SERVICE_NOTIFICATION, HRESULT)).call(servicenotification)
+  end
+  def get_multicast_session_policy(ppwdstransportmulticastsessionpolicy : IWdsTransportMulticastSessionPolicy*) : HRESULT
+    @lpVtbl.value.get_multicast_session_policy.unsafe_as(Proc(IWdsTransportMulticastSessionPolicy*, HRESULT)).call(ppwdstransportmulticastsessionpolicy)
+  end
+end
+struct LibWin32::IWdsTransportNamespaceManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def create_namespace(namespacetype : WDSTRANSPORT_NAMESPACE_TYPE, bsznamespacename : UInt8*, bszcontentprovider : UInt8*, bszconfiguration : UInt8*, ppwdstransportnamespace : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.create_namespace.unsafe_as(Proc(WDSTRANSPORT_NAMESPACE_TYPE, UInt8*, UInt8*, UInt8*, IWdsTransportNamespace*, HRESULT)).call(namespacetype, bsznamespacename, bszcontentprovider, bszconfiguration, ppwdstransportnamespace)
+  end
+  def retrieve_namespace(bsznamespacename : UInt8*, ppwdstransportnamespace : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.retrieve_namespace.unsafe_as(Proc(UInt8*, IWdsTransportNamespace*, HRESULT)).call(bsznamespacename, ppwdstransportnamespace)
+  end
+  def retrieve_namespaces(bszcontentprovider : UInt8*, bsznamespacename : UInt8*, bincludetombstones : Int16, ppwdstransportnamespaces : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_namespaces.unsafe_as(Proc(UInt8*, UInt8*, Int16, IWdsTransportCollection*, HRESULT)).call(bszcontentprovider, bsznamespacename, bincludetombstones, ppwdstransportnamespaces)
+  end
+end
+struct LibWin32::IWdsTransportTftpManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def retrieve_tftp_clients(ppwdstransporttftpclients : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_tftp_clients.unsafe_as(Proc(IWdsTransportCollection*, HRESULT)).call(ppwdstransporttftpclients)
+  end
+end
+struct LibWin32::IWdsTransportServicePolicy
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_dirty(pbdirty : Int16*) : HRESULT
+    @lpVtbl.value.get_dirty.unsafe_as(Proc(Int16*, HRESULT)).call(pbdirty)
+  end
+  def discard : HRESULT
+    @lpVtbl.value.discard.unsafe_as(Proc(HRESULT)).call
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def commit : HRESULT
+    @lpVtbl.value.commit.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_ip_address_source(addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, psourcetype : WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE*) : HRESULT
+    @lpVtbl.value.get_ip_address_source.unsafe_as(Proc(WDSTRANSPORT_IP_ADDRESS_TYPE, WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE*, HRESULT)).call(addresstype, psourcetype)
+  end
+  def put_ip_address_source(addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, sourcetype : WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE) : HRESULT
+    @lpVtbl.value.put_ip_address_source.unsafe_as(Proc(WDSTRANSPORT_IP_ADDRESS_TYPE, WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE, HRESULT)).call(addresstype, sourcetype)
+  end
+  def get_start_ip_address(addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, pbszstartipaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_ip_address.unsafe_as(Proc(WDSTRANSPORT_IP_ADDRESS_TYPE, UInt8**, HRESULT)).call(addresstype, pbszstartipaddress)
+  end
+  def put_start_ip_address(addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, bszstartipaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_start_ip_address.unsafe_as(Proc(WDSTRANSPORT_IP_ADDRESS_TYPE, UInt8*, HRESULT)).call(addresstype, bszstartipaddress)
+  end
+  def get_end_ip_address(addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, pbszendipaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_end_ip_address.unsafe_as(Proc(WDSTRANSPORT_IP_ADDRESS_TYPE, UInt8**, HRESULT)).call(addresstype, pbszendipaddress)
+  end
+  def put_end_ip_address(addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, bszendipaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_end_ip_address.unsafe_as(Proc(WDSTRANSPORT_IP_ADDRESS_TYPE, UInt8*, HRESULT)).call(addresstype, bszendipaddress)
+  end
+  def get_start_port(pulstartport : UInt32*) : HRESULT
+    @lpVtbl.value.get_start_port.unsafe_as(Proc(UInt32*, HRESULT)).call(pulstartport)
+  end
+  def put_start_port(ulstartport : UInt32) : HRESULT
+    @lpVtbl.value.put_start_port.unsafe_as(Proc(UInt32, HRESULT)).call(ulstartport)
+  end
+  def get_end_port(pulendport : UInt32*) : HRESULT
+    @lpVtbl.value.get_end_port.unsafe_as(Proc(UInt32*, HRESULT)).call(pulendport)
+  end
+  def put_end_port(ulendport : UInt32) : HRESULT
+    @lpVtbl.value.put_end_port.unsafe_as(Proc(UInt32, HRESULT)).call(ulendport)
+  end
+  def get_network_profile(pprofiletype : WDSTRANSPORT_NETWORK_PROFILE_TYPE*) : HRESULT
+    @lpVtbl.value.get_network_profile.unsafe_as(Proc(WDSTRANSPORT_NETWORK_PROFILE_TYPE*, HRESULT)).call(pprofiletype)
+  end
+  def put_network_profile(profiletype : WDSTRANSPORT_NETWORK_PROFILE_TYPE) : HRESULT
+    @lpVtbl.value.put_network_profile.unsafe_as(Proc(WDSTRANSPORT_NETWORK_PROFILE_TYPE, HRESULT)).call(profiletype)
+  end
+end
+struct LibWin32::IWdsTransportServicePolicy2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_dirty(pbdirty : Int16*) : HRESULT
+    @lpVtbl.value.get_dirty.unsafe_as(Proc(Int16*, HRESULT)).call(pbdirty)
+  end
+  def discard : HRESULT
+    @lpVtbl.value.discard.unsafe_as(Proc(HRESULT)).call
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def commit : HRESULT
+    @lpVtbl.value.commit.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_ip_address_source(addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, psourcetype : WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE*) : HRESULT
+    @lpVtbl.value.get_ip_address_source.unsafe_as(Proc(WDSTRANSPORT_IP_ADDRESS_TYPE, WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE*, HRESULT)).call(addresstype, psourcetype)
+  end
+  def put_ip_address_source(addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, sourcetype : WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE) : HRESULT
+    @lpVtbl.value.put_ip_address_source.unsafe_as(Proc(WDSTRANSPORT_IP_ADDRESS_TYPE, WDSTRANSPORT_IP_ADDRESS_SOURCE_TYPE, HRESULT)).call(addresstype, sourcetype)
+  end
+  def get_start_ip_address(addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, pbszstartipaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_start_ip_address.unsafe_as(Proc(WDSTRANSPORT_IP_ADDRESS_TYPE, UInt8**, HRESULT)).call(addresstype, pbszstartipaddress)
+  end
+  def put_start_ip_address(addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, bszstartipaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_start_ip_address.unsafe_as(Proc(WDSTRANSPORT_IP_ADDRESS_TYPE, UInt8*, HRESULT)).call(addresstype, bszstartipaddress)
+  end
+  def get_end_ip_address(addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, pbszendipaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_end_ip_address.unsafe_as(Proc(WDSTRANSPORT_IP_ADDRESS_TYPE, UInt8**, HRESULT)).call(addresstype, pbszendipaddress)
+  end
+  def put_end_ip_address(addresstype : WDSTRANSPORT_IP_ADDRESS_TYPE, bszendipaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_end_ip_address.unsafe_as(Proc(WDSTRANSPORT_IP_ADDRESS_TYPE, UInt8*, HRESULT)).call(addresstype, bszendipaddress)
+  end
+  def get_start_port(pulstartport : UInt32*) : HRESULT
+    @lpVtbl.value.get_start_port.unsafe_as(Proc(UInt32*, HRESULT)).call(pulstartport)
+  end
+  def put_start_port(ulstartport : UInt32) : HRESULT
+    @lpVtbl.value.put_start_port.unsafe_as(Proc(UInt32, HRESULT)).call(ulstartport)
+  end
+  def get_end_port(pulendport : UInt32*) : HRESULT
+    @lpVtbl.value.get_end_port.unsafe_as(Proc(UInt32*, HRESULT)).call(pulendport)
+  end
+  def put_end_port(ulendport : UInt32) : HRESULT
+    @lpVtbl.value.put_end_port.unsafe_as(Proc(UInt32, HRESULT)).call(ulendport)
+  end
+  def get_network_profile(pprofiletype : WDSTRANSPORT_NETWORK_PROFILE_TYPE*) : HRESULT
+    @lpVtbl.value.get_network_profile.unsafe_as(Proc(WDSTRANSPORT_NETWORK_PROFILE_TYPE*, HRESULT)).call(pprofiletype)
+  end
+  def put_network_profile(profiletype : WDSTRANSPORT_NETWORK_PROFILE_TYPE) : HRESULT
+    @lpVtbl.value.put_network_profile.unsafe_as(Proc(WDSTRANSPORT_NETWORK_PROFILE_TYPE, HRESULT)).call(profiletype)
+  end
+  def get_udp_port_policy(pudpportpolicy : WDSTRANSPORT_UDP_PORT_POLICY*) : HRESULT
+    @lpVtbl.value.get_udp_port_policy.unsafe_as(Proc(WDSTRANSPORT_UDP_PORT_POLICY*, HRESULT)).call(pudpportpolicy)
+  end
+  def put_udp_port_policy(udpportpolicy : WDSTRANSPORT_UDP_PORT_POLICY) : HRESULT
+    @lpVtbl.value.put_udp_port_policy.unsafe_as(Proc(WDSTRANSPORT_UDP_PORT_POLICY, HRESULT)).call(udpportpolicy)
+  end
+  def get_tftp_maximum_block_size(pultftpmaximumblocksize : UInt32*) : HRESULT
+    @lpVtbl.value.get_tftp_maximum_block_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pultftpmaximumblocksize)
+  end
+  def put_tftp_maximum_block_size(ultftpmaximumblocksize : UInt32) : HRESULT
+    @lpVtbl.value.put_tftp_maximum_block_size.unsafe_as(Proc(UInt32, HRESULT)).call(ultftpmaximumblocksize)
+  end
+  def get_enable_tftp_variable_window_extension(pbenabletftpvariablewindowextension : Int16*) : HRESULT
+    @lpVtbl.value.get_enable_tftp_variable_window_extension.unsafe_as(Proc(Int16*, HRESULT)).call(pbenabletftpvariablewindowextension)
+  end
+  def put_enable_tftp_variable_window_extension(benabletftpvariablewindowextension : Int16) : HRESULT
+    @lpVtbl.value.put_enable_tftp_variable_window_extension.unsafe_as(Proc(Int16, HRESULT)).call(benabletftpvariablewindowextension)
+  end
+end
+struct LibWin32::IWdsTransportDiagnosticsPolicy
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_dirty(pbdirty : Int16*) : HRESULT
+    @lpVtbl.value.get_dirty.unsafe_as(Proc(Int16*, HRESULT)).call(pbdirty)
+  end
+  def discard : HRESULT
+    @lpVtbl.value.discard.unsafe_as(Proc(HRESULT)).call
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def commit : HRESULT
+    @lpVtbl.value.commit.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_enabled(pbenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pbenabled)
+  end
+  def put_enabled(benabled : Int16) : HRESULT
+    @lpVtbl.value.put_enabled.unsafe_as(Proc(Int16, HRESULT)).call(benabled)
+  end
+  def get_components(pulcomponents : UInt32*) : HRESULT
+    @lpVtbl.value.get_components.unsafe_as(Proc(UInt32*, HRESULT)).call(pulcomponents)
+  end
+  def put_components(ulcomponents : UInt32) : HRESULT
+    @lpVtbl.value.put_components.unsafe_as(Proc(UInt32, HRESULT)).call(ulcomponents)
+  end
+end
+struct LibWin32::IWdsTransportMulticastSessionPolicy
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_dirty(pbdirty : Int16*) : HRESULT
+    @lpVtbl.value.get_dirty.unsafe_as(Proc(Int16*, HRESULT)).call(pbdirty)
+  end
+  def discard : HRESULT
+    @lpVtbl.value.discard.unsafe_as(Proc(HRESULT)).call
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def commit : HRESULT
+    @lpVtbl.value.commit.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_slow_client_handling(pslowclienthandling : WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE*) : HRESULT
+    @lpVtbl.value.get_slow_client_handling.unsafe_as(Proc(WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE*, HRESULT)).call(pslowclienthandling)
+  end
+  def put_slow_client_handling(slowclienthandling : WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE) : HRESULT
+    @lpVtbl.value.put_slow_client_handling.unsafe_as(Proc(WDSTRANSPORT_SLOW_CLIENT_HANDLING_TYPE, HRESULT)).call(slowclienthandling)
+  end
+  def get_auto_disconnect_threshold(pulthreshold : UInt32*) : HRESULT
+    @lpVtbl.value.get_auto_disconnect_threshold.unsafe_as(Proc(UInt32*, HRESULT)).call(pulthreshold)
+  end
+  def put_auto_disconnect_threshold(ulthreshold : UInt32) : HRESULT
+    @lpVtbl.value.put_auto_disconnect_threshold.unsafe_as(Proc(UInt32, HRESULT)).call(ulthreshold)
+  end
+  def get_multistream_stream_count(pulstreamcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_multistream_stream_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pulstreamcount)
+  end
+  def put_multistream_stream_count(ulstreamcount : UInt32) : HRESULT
+    @lpVtbl.value.put_multistream_stream_count.unsafe_as(Proc(UInt32, HRESULT)).call(ulstreamcount)
+  end
+  def get_slow_client_fallback(pbclientfallback : Int16*) : HRESULT
+    @lpVtbl.value.get_slow_client_fallback.unsafe_as(Proc(Int16*, HRESULT)).call(pbclientfallback)
+  end
+  def put_slow_client_fallback(bclientfallback : Int16) : HRESULT
+    @lpVtbl.value.put_slow_client_fallback.unsafe_as(Proc(Int16, HRESULT)).call(bclientfallback)
+  end
+end
+struct LibWin32::IWdsTransportNamespace
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(ptype : WDSTRANSPORT_NAMESPACE_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(WDSTRANSPORT_NAMESPACE_TYPE*, HRESULT)).call(ptype)
+  end
+  def get_id(pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pulid)
+  end
+  def get_name(pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszname)
+  end
+  def put_name(bszname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bszname)
+  end
+  def get_friendly_name(pbszfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszfriendlyname)
+  end
+  def put_friendly_name(bszfriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.put_friendly_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bszfriendlyname)
+  end
+  def get_description(pbszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszdescription)
+  end
+  def put_description(bszdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bszdescription)
+  end
+  def get_content_provider(pbszcontentprovider : UInt8**) : HRESULT
+    @lpVtbl.value.get_content_provider.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszcontentprovider)
+  end
+  def put_content_provider(bszcontentprovider : UInt8*) : HRESULT
+    @lpVtbl.value.put_content_provider.unsafe_as(Proc(UInt8*, HRESULT)).call(bszcontentprovider)
+  end
+  def get_configuration(pbszconfiguration : UInt8**) : HRESULT
+    @lpVtbl.value.get_configuration.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszconfiguration)
+  end
+  def put_configuration(bszconfiguration : UInt8*) : HRESULT
+    @lpVtbl.value.put_configuration.unsafe_as(Proc(UInt8*, HRESULT)).call(bszconfiguration)
+  end
+  def get_registered(pbregistered : Int16*) : HRESULT
+    @lpVtbl.value.get_registered.unsafe_as(Proc(Int16*, HRESULT)).call(pbregistered)
+  end
+  def get_tombstoned(pbtombstoned : Int16*) : HRESULT
+    @lpVtbl.value.get_tombstoned.unsafe_as(Proc(Int16*, HRESULT)).call(pbtombstoned)
+  end
+  def get_tombstone_time(ptombstonetime : Float64*) : HRESULT
+    @lpVtbl.value.get_tombstone_time.unsafe_as(Proc(Float64*, HRESULT)).call(ptombstonetime)
+  end
+  def get_transmission_started(pbtransmissionstarted : Int16*) : HRESULT
+    @lpVtbl.value.get_transmission_started.unsafe_as(Proc(Int16*, HRESULT)).call(pbtransmissionstarted)
+  end
+  def register : HRESULT
+    @lpVtbl.value.register.unsafe_as(Proc(HRESULT)).call
+  end
+  def deregister(bterminatesessions : Int16) : HRESULT
+    @lpVtbl.value.deregister.unsafe_as(Proc(Int16, HRESULT)).call(bterminatesessions)
+  end
+  def clone(ppwdstransportnamespaceclone : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IWdsTransportNamespace*, HRESULT)).call(ppwdstransportnamespaceclone)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def retrieve_contents(ppwdstransportcontents : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_contents.unsafe_as(Proc(IWdsTransportCollection*, HRESULT)).call(ppwdstransportcontents)
+  end
+end
+struct LibWin32::IWdsTransportNamespaceAutoCast
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(ptype : WDSTRANSPORT_NAMESPACE_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(WDSTRANSPORT_NAMESPACE_TYPE*, HRESULT)).call(ptype)
+  end
+  def get_id(pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pulid)
+  end
+  def get_name(pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszname)
+  end
+  def put_name(bszname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bszname)
+  end
+  def get_friendly_name(pbszfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszfriendlyname)
+  end
+  def put_friendly_name(bszfriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.put_friendly_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bszfriendlyname)
+  end
+  def get_description(pbszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszdescription)
+  end
+  def put_description(bszdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bszdescription)
+  end
+  def get_content_provider(pbszcontentprovider : UInt8**) : HRESULT
+    @lpVtbl.value.get_content_provider.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszcontentprovider)
+  end
+  def put_content_provider(bszcontentprovider : UInt8*) : HRESULT
+    @lpVtbl.value.put_content_provider.unsafe_as(Proc(UInt8*, HRESULT)).call(bszcontentprovider)
+  end
+  def get_configuration(pbszconfiguration : UInt8**) : HRESULT
+    @lpVtbl.value.get_configuration.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszconfiguration)
+  end
+  def put_configuration(bszconfiguration : UInt8*) : HRESULT
+    @lpVtbl.value.put_configuration.unsafe_as(Proc(UInt8*, HRESULT)).call(bszconfiguration)
+  end
+  def get_registered(pbregistered : Int16*) : HRESULT
+    @lpVtbl.value.get_registered.unsafe_as(Proc(Int16*, HRESULT)).call(pbregistered)
+  end
+  def get_tombstoned(pbtombstoned : Int16*) : HRESULT
+    @lpVtbl.value.get_tombstoned.unsafe_as(Proc(Int16*, HRESULT)).call(pbtombstoned)
+  end
+  def get_tombstone_time(ptombstonetime : Float64*) : HRESULT
+    @lpVtbl.value.get_tombstone_time.unsafe_as(Proc(Float64*, HRESULT)).call(ptombstonetime)
+  end
+  def get_transmission_started(pbtransmissionstarted : Int16*) : HRESULT
+    @lpVtbl.value.get_transmission_started.unsafe_as(Proc(Int16*, HRESULT)).call(pbtransmissionstarted)
+  end
+  def register : HRESULT
+    @lpVtbl.value.register.unsafe_as(Proc(HRESULT)).call
+  end
+  def deregister(bterminatesessions : Int16) : HRESULT
+    @lpVtbl.value.deregister.unsafe_as(Proc(Int16, HRESULT)).call(bterminatesessions)
+  end
+  def clone(ppwdstransportnamespaceclone : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IWdsTransportNamespace*, HRESULT)).call(ppwdstransportnamespaceclone)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def retrieve_contents(ppwdstransportcontents : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_contents.unsafe_as(Proc(IWdsTransportCollection*, HRESULT)).call(ppwdstransportcontents)
+  end
+end
+struct LibWin32::IWdsTransportNamespaceScheduledCast
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(ptype : WDSTRANSPORT_NAMESPACE_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(WDSTRANSPORT_NAMESPACE_TYPE*, HRESULT)).call(ptype)
+  end
+  def get_id(pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pulid)
+  end
+  def get_name(pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszname)
+  end
+  def put_name(bszname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bszname)
+  end
+  def get_friendly_name(pbszfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszfriendlyname)
+  end
+  def put_friendly_name(bszfriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.put_friendly_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bszfriendlyname)
+  end
+  def get_description(pbszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszdescription)
+  end
+  def put_description(bszdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bszdescription)
+  end
+  def get_content_provider(pbszcontentprovider : UInt8**) : HRESULT
+    @lpVtbl.value.get_content_provider.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszcontentprovider)
+  end
+  def put_content_provider(bszcontentprovider : UInt8*) : HRESULT
+    @lpVtbl.value.put_content_provider.unsafe_as(Proc(UInt8*, HRESULT)).call(bszcontentprovider)
+  end
+  def get_configuration(pbszconfiguration : UInt8**) : HRESULT
+    @lpVtbl.value.get_configuration.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszconfiguration)
+  end
+  def put_configuration(bszconfiguration : UInt8*) : HRESULT
+    @lpVtbl.value.put_configuration.unsafe_as(Proc(UInt8*, HRESULT)).call(bszconfiguration)
+  end
+  def get_registered(pbregistered : Int16*) : HRESULT
+    @lpVtbl.value.get_registered.unsafe_as(Proc(Int16*, HRESULT)).call(pbregistered)
+  end
+  def get_tombstoned(pbtombstoned : Int16*) : HRESULT
+    @lpVtbl.value.get_tombstoned.unsafe_as(Proc(Int16*, HRESULT)).call(pbtombstoned)
+  end
+  def get_tombstone_time(ptombstonetime : Float64*) : HRESULT
+    @lpVtbl.value.get_tombstone_time.unsafe_as(Proc(Float64*, HRESULT)).call(ptombstonetime)
+  end
+  def get_transmission_started(pbtransmissionstarted : Int16*) : HRESULT
+    @lpVtbl.value.get_transmission_started.unsafe_as(Proc(Int16*, HRESULT)).call(pbtransmissionstarted)
+  end
+  def register : HRESULT
+    @lpVtbl.value.register.unsafe_as(Proc(HRESULT)).call
+  end
+  def deregister(bterminatesessions : Int16) : HRESULT
+    @lpVtbl.value.deregister.unsafe_as(Proc(Int16, HRESULT)).call(bterminatesessions)
+  end
+  def clone(ppwdstransportnamespaceclone : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IWdsTransportNamespace*, HRESULT)).call(ppwdstransportnamespaceclone)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def retrieve_contents(ppwdstransportcontents : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_contents.unsafe_as(Proc(IWdsTransportCollection*, HRESULT)).call(ppwdstransportcontents)
+  end
+  def start_transmission : HRESULT
+    @lpVtbl.value.start_transmission.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWdsTransportNamespaceScheduledCastManualStart
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(ptype : WDSTRANSPORT_NAMESPACE_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(WDSTRANSPORT_NAMESPACE_TYPE*, HRESULT)).call(ptype)
+  end
+  def get_id(pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pulid)
+  end
+  def get_name(pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszname)
+  end
+  def put_name(bszname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bszname)
+  end
+  def get_friendly_name(pbszfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszfriendlyname)
+  end
+  def put_friendly_name(bszfriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.put_friendly_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bszfriendlyname)
+  end
+  def get_description(pbszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszdescription)
+  end
+  def put_description(bszdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bszdescription)
+  end
+  def get_content_provider(pbszcontentprovider : UInt8**) : HRESULT
+    @lpVtbl.value.get_content_provider.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszcontentprovider)
+  end
+  def put_content_provider(bszcontentprovider : UInt8*) : HRESULT
+    @lpVtbl.value.put_content_provider.unsafe_as(Proc(UInt8*, HRESULT)).call(bszcontentprovider)
+  end
+  def get_configuration(pbszconfiguration : UInt8**) : HRESULT
+    @lpVtbl.value.get_configuration.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszconfiguration)
+  end
+  def put_configuration(bszconfiguration : UInt8*) : HRESULT
+    @lpVtbl.value.put_configuration.unsafe_as(Proc(UInt8*, HRESULT)).call(bszconfiguration)
+  end
+  def get_registered(pbregistered : Int16*) : HRESULT
+    @lpVtbl.value.get_registered.unsafe_as(Proc(Int16*, HRESULT)).call(pbregistered)
+  end
+  def get_tombstoned(pbtombstoned : Int16*) : HRESULT
+    @lpVtbl.value.get_tombstoned.unsafe_as(Proc(Int16*, HRESULT)).call(pbtombstoned)
+  end
+  def get_tombstone_time(ptombstonetime : Float64*) : HRESULT
+    @lpVtbl.value.get_tombstone_time.unsafe_as(Proc(Float64*, HRESULT)).call(ptombstonetime)
+  end
+  def get_transmission_started(pbtransmissionstarted : Int16*) : HRESULT
+    @lpVtbl.value.get_transmission_started.unsafe_as(Proc(Int16*, HRESULT)).call(pbtransmissionstarted)
+  end
+  def register : HRESULT
+    @lpVtbl.value.register.unsafe_as(Proc(HRESULT)).call
+  end
+  def deregister(bterminatesessions : Int16) : HRESULT
+    @lpVtbl.value.deregister.unsafe_as(Proc(Int16, HRESULT)).call(bterminatesessions)
+  end
+  def clone(ppwdstransportnamespaceclone : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IWdsTransportNamespace*, HRESULT)).call(ppwdstransportnamespaceclone)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def retrieve_contents(ppwdstransportcontents : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_contents.unsafe_as(Proc(IWdsTransportCollection*, HRESULT)).call(ppwdstransportcontents)
+  end
+  def start_transmission : HRESULT
+    @lpVtbl.value.start_transmission.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWdsTransportNamespaceScheduledCastAutoStart
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_type(ptype : WDSTRANSPORT_NAMESPACE_TYPE*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(WDSTRANSPORT_NAMESPACE_TYPE*, HRESULT)).call(ptype)
+  end
+  def get_id(pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pulid)
+  end
+  def get_name(pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszname)
+  end
+  def put_name(bszname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bszname)
+  end
+  def get_friendly_name(pbszfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszfriendlyname)
+  end
+  def put_friendly_name(bszfriendlyname : UInt8*) : HRESULT
+    @lpVtbl.value.put_friendly_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bszfriendlyname)
+  end
+  def get_description(pbszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszdescription)
+  end
+  def put_description(bszdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bszdescription)
+  end
+  def get_content_provider(pbszcontentprovider : UInt8**) : HRESULT
+    @lpVtbl.value.get_content_provider.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszcontentprovider)
+  end
+  def put_content_provider(bszcontentprovider : UInt8*) : HRESULT
+    @lpVtbl.value.put_content_provider.unsafe_as(Proc(UInt8*, HRESULT)).call(bszcontentprovider)
+  end
+  def get_configuration(pbszconfiguration : UInt8**) : HRESULT
+    @lpVtbl.value.get_configuration.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszconfiguration)
+  end
+  def put_configuration(bszconfiguration : UInt8*) : HRESULT
+    @lpVtbl.value.put_configuration.unsafe_as(Proc(UInt8*, HRESULT)).call(bszconfiguration)
+  end
+  def get_registered(pbregistered : Int16*) : HRESULT
+    @lpVtbl.value.get_registered.unsafe_as(Proc(Int16*, HRESULT)).call(pbregistered)
+  end
+  def get_tombstoned(pbtombstoned : Int16*) : HRESULT
+    @lpVtbl.value.get_tombstoned.unsafe_as(Proc(Int16*, HRESULT)).call(pbtombstoned)
+  end
+  def get_tombstone_time(ptombstonetime : Float64*) : HRESULT
+    @lpVtbl.value.get_tombstone_time.unsafe_as(Proc(Float64*, HRESULT)).call(ptombstonetime)
+  end
+  def get_transmission_started(pbtransmissionstarted : Int16*) : HRESULT
+    @lpVtbl.value.get_transmission_started.unsafe_as(Proc(Int16*, HRESULT)).call(pbtransmissionstarted)
+  end
+  def register : HRESULT
+    @lpVtbl.value.register.unsafe_as(Proc(HRESULT)).call
+  end
+  def deregister(bterminatesessions : Int16) : HRESULT
+    @lpVtbl.value.deregister.unsafe_as(Proc(Int16, HRESULT)).call(bterminatesessions)
+  end
+  def clone(ppwdstransportnamespaceclone : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IWdsTransportNamespace*, HRESULT)).call(ppwdstransportnamespaceclone)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def retrieve_contents(ppwdstransportcontents : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_contents.unsafe_as(Proc(IWdsTransportCollection*, HRESULT)).call(ppwdstransportcontents)
+  end
+  def start_transmission : HRESULT
+    @lpVtbl.value.start_transmission.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_minimum_clients(pulminimumclients : UInt32*) : HRESULT
+    @lpVtbl.value.get_minimum_clients.unsafe_as(Proc(UInt32*, HRESULT)).call(pulminimumclients)
+  end
+  def put_minimum_clients(ulminimumclients : UInt32) : HRESULT
+    @lpVtbl.value.put_minimum_clients.unsafe_as(Proc(UInt32, HRESULT)).call(ulminimumclients)
+  end
+  def get_start_time(pstarttime : Float64*) : HRESULT
+    @lpVtbl.value.get_start_time.unsafe_as(Proc(Float64*, HRESULT)).call(pstarttime)
+  end
+  def put_start_time(starttime : Float64) : HRESULT
+    @lpVtbl.value.put_start_time.unsafe_as(Proc(Float64, HRESULT)).call(starttime)
+  end
+end
+struct LibWin32::IWdsTransportContent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_namespace(ppwdstransportnamespace : IWdsTransportNamespace*) : HRESULT
+    @lpVtbl.value.get_namespace.unsafe_as(Proc(IWdsTransportNamespace*, HRESULT)).call(ppwdstransportnamespace)
+  end
+  def get_id(pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pulid)
+  end
+  def get_name(pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszname)
+  end
+  def retrieve_sessions(ppwdstransportsessions : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_sessions.unsafe_as(Proc(IWdsTransportCollection*, HRESULT)).call(ppwdstransportsessions)
+  end
+  def terminate : HRESULT
+    @lpVtbl.value.terminate.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWdsTransportSession
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_content(ppwdstransportcontent : IWdsTransportContent*) : HRESULT
+    @lpVtbl.value.get_content.unsafe_as(Proc(IWdsTransportContent*, HRESULT)).call(ppwdstransportcontent)
+  end
+  def get_id(pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pulid)
+  end
+  def get_network_interface_name(pbsznetworkinterfacename : UInt8**) : HRESULT
+    @lpVtbl.value.get_network_interface_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbsznetworkinterfacename)
+  end
+  def get_network_interface_address(pbsznetworkinterfaceaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_network_interface_address.unsafe_as(Proc(UInt8**, HRESULT)).call(pbsznetworkinterfaceaddress)
+  end
+  def get_transfer_rate(pultransferrate : UInt32*) : HRESULT
+    @lpVtbl.value.get_transfer_rate.unsafe_as(Proc(UInt32*, HRESULT)).call(pultransferrate)
+  end
+  def get_master_client_id(pulmasterclientid : UInt32*) : HRESULT
+    @lpVtbl.value.get_master_client_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pulmasterclientid)
+  end
+  def retrieve_clients(ppwdstransportclients : IWdsTransportCollection*) : HRESULT
+    @lpVtbl.value.retrieve_clients.unsafe_as(Proc(IWdsTransportCollection*, HRESULT)).call(ppwdstransportclients)
+  end
+  def terminate : HRESULT
+    @lpVtbl.value.terminate.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IWdsTransportClient
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_session(ppwdstransportsession : IWdsTransportSession*) : HRESULT
+    @lpVtbl.value.get_session.unsafe_as(Proc(IWdsTransportSession*, HRESULT)).call(ppwdstransportsession)
+  end
+  def get_id(pulid : UInt32*) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt32*, HRESULT)).call(pulid)
+  end
+  def get_name(pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszname)
+  end
+  def get_mac_address(pbszmacaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_mac_address.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszmacaddress)
+  end
+  def get_ip_address(pbszipaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_ip_address.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszipaddress)
+  end
+  def get_percent_completion(pulpercentcompletion : UInt32*) : HRESULT
+    @lpVtbl.value.get_percent_completion.unsafe_as(Proc(UInt32*, HRESULT)).call(pulpercentcompletion)
+  end
+  def get_join_duration(puljoinduration : UInt32*) : HRESULT
+    @lpVtbl.value.get_join_duration.unsafe_as(Proc(UInt32*, HRESULT)).call(puljoinduration)
+  end
+  def get_cpu_utilization(pulcpuutilization : UInt32*) : HRESULT
+    @lpVtbl.value.get_cpu_utilization.unsafe_as(Proc(UInt32*, HRESULT)).call(pulcpuutilization)
+  end
+  def get_memory_utilization(pulmemoryutilization : UInt32*) : HRESULT
+    @lpVtbl.value.get_memory_utilization.unsafe_as(Proc(UInt32*, HRESULT)).call(pulmemoryutilization)
+  end
+  def get_network_utilization(pulnetworkutilization : UInt32*) : HRESULT
+    @lpVtbl.value.get_network_utilization.unsafe_as(Proc(UInt32*, HRESULT)).call(pulnetworkutilization)
+  end
+  def get_user_identity(pbszuseridentity : UInt8**) : HRESULT
+    @lpVtbl.value.get_user_identity.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszuseridentity)
+  end
+  def disconnect(disconnectiontype : WDSTRANSPORT_DISCONNECT_TYPE) : HRESULT
+    @lpVtbl.value.disconnect.unsafe_as(Proc(WDSTRANSPORT_DISCONNECT_TYPE, HRESULT)).call(disconnectiontype)
+  end
+end
+struct LibWin32::IWdsTransportTftpClient
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_file_name(pbszfilename : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszfilename)
+  end
+  def get_ip_address(pbszipaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_ip_address.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszipaddress)
+  end
+  def get_timeout(pultimeout : UInt32*) : HRESULT
+    @lpVtbl.value.get_timeout.unsafe_as(Proc(UInt32*, HRESULT)).call(pultimeout)
+  end
+  def get_current_file_offset(pul64currentoffset : UInt64*) : HRESULT
+    @lpVtbl.value.get_current_file_offset.unsafe_as(Proc(UInt64*, HRESULT)).call(pul64currentoffset)
+  end
+  def get_file_size(pul64filesize : UInt64*) : HRESULT
+    @lpVtbl.value.get_file_size.unsafe_as(Proc(UInt64*, HRESULT)).call(pul64filesize)
+  end
+  def get_block_size(pulblocksize : UInt32*) : HRESULT
+    @lpVtbl.value.get_block_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pulblocksize)
+  end
+  def get_window_size(pulwindowsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_window_size.unsafe_as(Proc(UInt32*, HRESULT)).call(pulwindowsize)
+  end
+end
+struct LibWin32::IWdsTransportContentProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbszname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszname)
+  end
+  def get_description(pbszdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszdescription)
+  end
+  def get_file_path(pbszfilepath : UInt8**) : HRESULT
+    @lpVtbl.value.get_file_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszfilepath)
+  end
+  def get_initialization_routine(pbszinitializationroutine : UInt8**) : HRESULT
+    @lpVtbl.value.get_initialization_routine.unsafe_as(Proc(UInt8**, HRESULT)).call(pbszinitializationroutine)
+  end
 end

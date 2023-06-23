@@ -55,12 +55,12 @@ lib LibWin32
 
 
   struct IXpsPrintJobStreamVTbl
-    query_interface : Proc(IXpsPrintJobStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsPrintJobStream*, UInt32)
-    release : Proc(IXpsPrintJobStream*, UInt32)
-    read : Proc(IXpsPrintJobStream*, Void*, UInt32, UInt32*, HRESULT)
-    write : Proc(IXpsPrintJobStream*, Void*, UInt32, UInt32*, HRESULT)
-    close : Proc(IXpsPrintJobStream*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    read : UInt64
+    write : UInt64
+    close : UInt64
   end
 
   IXpsPrintJobStream_GUID = "7a77dc5f-45d6-4dff-9307-d8cb846347ca"
@@ -70,11 +70,11 @@ lib LibWin32
   end
 
   struct IXpsPrintJobVTbl
-    query_interface : Proc(IXpsPrintJob*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXpsPrintJob*, UInt32)
-    release : Proc(IXpsPrintJob*, UInt32)
-    cancel : Proc(IXpsPrintJob*, HRESULT)
-    get_job_status : Proc(IXpsPrintJob*, XPS_JOB_STATUS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    cancel : UInt64
+    get_job_status : UInt64
   end
 
   IXpsPrintJob_GUID = "5ab89b06-8194-425f-ab3b-d7a96e350161"
@@ -84,12 +84,12 @@ lib LibWin32
   end
 
   struct IPrintDocumentPackageTargetVTbl
-    query_interface : Proc(IPrintDocumentPackageTarget*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPrintDocumentPackageTarget*, UInt32)
-    release : Proc(IPrintDocumentPackageTarget*, UInt32)
-    get_package_target_types : Proc(IPrintDocumentPackageTarget*, UInt32*, Guid**, HRESULT)
-    get_package_target : Proc(IPrintDocumentPackageTarget*, Guid*, Guid*, Void**, HRESULT)
-    cancel : Proc(IPrintDocumentPackageTarget*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_package_target_types : UInt64
+    get_package_target : UInt64
+    cancel : UInt64
   end
 
   IPrintDocumentPackageTarget_GUID = "1b8efec4-3019-4c27-964e-367202156906"
@@ -99,14 +99,14 @@ lib LibWin32
   end
 
   struct IPrintDocumentPackageStatusEventVTbl
-    query_interface : Proc(IPrintDocumentPackageStatusEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPrintDocumentPackageStatusEvent*, UInt32)
-    release : Proc(IPrintDocumentPackageStatusEvent*, UInt32)
-    get_type_info_count : Proc(IPrintDocumentPackageStatusEvent*, UInt32*, HRESULT)
-    get_type_info : Proc(IPrintDocumentPackageStatusEvent*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IPrintDocumentPackageStatusEvent*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IPrintDocumentPackageStatusEvent*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    package_status_updated : Proc(IPrintDocumentPackageStatusEvent*, PrintDocumentPackageStatus*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    package_status_updated : UInt64
   end
 
   IPrintDocumentPackageStatusEvent_GUID = "ed90c8ad-5c34-4d05-a1ec-0e8a9b3ad7af"
@@ -116,10 +116,10 @@ lib LibWin32
   end
 
   struct IPrintDocumentPackageTargetFactoryVTbl
-    query_interface : Proc(IPrintDocumentPackageTargetFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPrintDocumentPackageTargetFactory*, UInt32)
-    release : Proc(IPrintDocumentPackageTargetFactory*, UInt32)
-    create_document_package_target_for_print_job : Proc(IPrintDocumentPackageTargetFactory*, LibC::LPWSTR, LibC::LPWSTR, IStream, IStream, IPrintDocumentPackageTarget*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_document_package_target_for_print_job : UInt64
   end
 
   IPrintDocumentPackageTargetFactory_GUID = "d2959bf7-b31b-4a3d-9600-712eb1335ba4"
@@ -134,4 +134,101 @@ lib LibWin32
 
   # Params # printername : LibC::LPWSTR [In],jobname : LibC::LPWSTR [In],outputfilename : LibC::LPWSTR [In],progressevent : LibC::HANDLE [In],completionevent : LibC::HANDLE [In],xpsprintjob : IXpsPrintJob* [In],printcontentreceiver : IXpsOMPackageTarget* [In]
   fun StartXpsPrintJob1(printername : LibC::LPWSTR, jobname : LibC::LPWSTR, outputfilename : LibC::LPWSTR, progressevent : LibC::HANDLE, completionevent : LibC::HANDLE, xpsprintjob : IXpsPrintJob*, printcontentreceiver : IXpsOMPackageTarget*) : HRESULT
+end
+struct LibWin32::IXpsPrintJobStream
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def read(pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
+    @lpVtbl.value.read.unsafe_as(Proc(Void*, UInt32, UInt32*, HRESULT)).call(pv, cb, pcbread)
+  end
+  def write(pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
+    @lpVtbl.value.write.unsafe_as(Proc(Void*, UInt32, UInt32*, HRESULT)).call(pv, cb, pcbwritten)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IXpsPrintJob
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_job_status(jobstatus : XPS_JOB_STATUS*) : HRESULT
+    @lpVtbl.value.get_job_status.unsafe_as(Proc(XPS_JOB_STATUS*, HRESULT)).call(jobstatus)
+  end
+end
+struct LibWin32::IPrintDocumentPackageTarget
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_package_target_types(targetcount : UInt32*, targettypes : Guid**) : HRESULT
+    @lpVtbl.value.get_package_target_types.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(targetcount, targettypes)
+  end
+  def get_package_target(guidtargettype : Guid*, riid : Guid*, ppvtarget : Void**) : HRESULT
+    @lpVtbl.value.get_package_target.unsafe_as(Proc(Guid*, Guid*, Void**, HRESULT)).call(guidtargettype, riid, ppvtarget)
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IPrintDocumentPackageStatusEvent
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def package_status_updated(packagestatus : PrintDocumentPackageStatus*) : HRESULT
+    @lpVtbl.value.package_status_updated.unsafe_as(Proc(PrintDocumentPackageStatus*, HRESULT)).call(packagestatus)
+  end
+end
+struct LibWin32::IPrintDocumentPackageTargetFactory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_document_package_target_for_print_job(printername : LibC::LPWSTR, jobname : LibC::LPWSTR, joboutputstream : IStream, jobprintticketstream : IStream, docpackagetarget : IPrintDocumentPackageTarget*) : HRESULT
+    @lpVtbl.value.create_document_package_target_for_print_job.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, IStream, IStream, IPrintDocumentPackageTarget*, HRESULT)).call(printername, jobname, joboutputstream, jobprintticketstream, docpackagetarget)
+  end
 end

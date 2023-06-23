@@ -40,5 +40,5 @@ lib LibWin32
   fun ApplicationRecoveryInProgress(pbcancelled : LibC::BOOL*) : HRESULT
 
   # Params # bsuccess : LibC::BOOL [In]
-  fun ApplicationRecoveryFinished(bsuccess : LibC::BOOL)
+  fun ApplicationRecoveryFinished(bsuccess : LibC::BOOL) : Void
 end

@@ -122,13 +122,13 @@ lib LibWin32
   fun WebSocketGetAction(hwebsocket : WEB_SOCKET_HANDLE, eactionqueue : WEB_SOCKET_ACTION_QUEUE, pdatabuffers : WEB_SOCKET_BUFFER*, puldatabuffercount : UInt32*, paction : WEB_SOCKET_ACTION*, pbuffertype : WEB_SOCKET_BUFFER_TYPE*, pvapplicationcontext : Void**, pvactioncontext : Void**) : HRESULT
 
   # Params # hwebsocket : WEB_SOCKET_HANDLE [In],pvactioncontext : Void* [In],ulbytestransferred : UInt32 [In]
-  fun WebSocketCompleteAction(hwebsocket : WEB_SOCKET_HANDLE, pvactioncontext : Void*, ulbytestransferred : UInt32)
+  fun WebSocketCompleteAction(hwebsocket : WEB_SOCKET_HANDLE, pvactioncontext : Void*, ulbytestransferred : UInt32) : Void
 
   # Params # hwebsocket : WEB_SOCKET_HANDLE [In]
-  fun WebSocketAbortHandle(hwebsocket : WEB_SOCKET_HANDLE)
+  fun WebSocketAbortHandle(hwebsocket : WEB_SOCKET_HANDLE) : Void
 
   # Params # hwebsocket : WEB_SOCKET_HANDLE [In]
-  fun WebSocketDeleteHandle(hwebsocket : WEB_SOCKET_HANDLE)
+  fun WebSocketDeleteHandle(hwebsocket : WEB_SOCKET_HANDLE) : Void
 
   # Params # etype : WEB_SOCKET_PROPERTY_TYPE [In],pvvalue : Void* [In],ulsize : UInt32* [In]
   fun WebSocketGetGlobalProperty(etype : WEB_SOCKET_PROPERTY_TYPE, pvvalue : Void*, ulsize : UInt32*) : HRESULT

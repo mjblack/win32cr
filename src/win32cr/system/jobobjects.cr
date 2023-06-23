@@ -398,7 +398,7 @@ lib LibWin32
   fun CreateJobObjectW(lpjobattributes : SECURITY_ATTRIBUTES*, lpname : LibC::LPWSTR) : LibC::HANDLE
 
   # Params # buffer : Void* [In]
-  fun FreeMemoryJobObject(buffer : Void*)
+  fun FreeMemoryJobObject(buffer : Void*) : Void
 
   # Params # dwdesiredaccess : UInt32 [In],binherithandle : LibC::BOOL [In],lpname : LibC::LPWSTR [In]
   fun OpenJobObjectW(dwdesiredaccess : UInt32, binherithandle : LibC::BOOL, lpname : LibC::LPWSTR) : LibC::HANDLE

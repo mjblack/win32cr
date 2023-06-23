@@ -84,12 +84,12 @@ lib LibWin32
 
 
   struct ISceSvcAttachmentPersistInfoVTbl
-    query_interface : Proc(ISceSvcAttachmentPersistInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISceSvcAttachmentPersistInfo*, UInt32)
-    release : Proc(ISceSvcAttachmentPersistInfo*, UInt32)
-    save : Proc(ISceSvcAttachmentPersistInfo*, Int8*, Void**, Void**, LibC::BOOL*, HRESULT)
-    is_dirty : Proc(ISceSvcAttachmentPersistInfo*, Int8*, HRESULT)
-    free_buffer : Proc(ISceSvcAttachmentPersistInfo*, Void*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    save : UInt64
+    is_dirty : UInt64
+    free_buffer : UInt64
   end
 
   ISceSvcAttachmentPersistInfo_GUID = "6d90e0d0-200d-11d1-affb-00c04fb984f9"
@@ -99,13 +99,13 @@ lib LibWin32
   end
 
   struct ISceSvcAttachmentDataVTbl
-    query_interface : Proc(ISceSvcAttachmentData*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISceSvcAttachmentData*, UInt32)
-    release : Proc(ISceSvcAttachmentData*, UInt32)
-    get_data : Proc(ISceSvcAttachmentData*, Void*, SCESVC_INFO_TYPE, Void**, UInt32*, HRESULT)
-    initialize : Proc(ISceSvcAttachmentData*, Int8*, Int8*, ISceSvcAttachmentPersistInfo, Void**, HRESULT)
-    free_buffer : Proc(ISceSvcAttachmentData*, Void*, HRESULT)
-    close_handle : Proc(ISceSvcAttachmentData*, Void*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_data : UInt64
+    initialize : UInt64
+    free_buffer : UInt64
+    close_handle : UInt64
   end
 
   ISceSvcAttachmentData_GUID = "17c35fde-200d-11d1-affb-00c04fb984f9"
@@ -114,4 +114,47 @@ lib LibWin32
     lpVtbl : ISceSvcAttachmentDataVTbl*
   end
 
+end
+struct LibWin32::ISceSvcAttachmentPersistInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def save(lptemplatename : Int8*, scesvchandle : Void**, ppvdata : Void**, pboverwriteall : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(Int8*, Void**, Void**, LibC::BOOL*, HRESULT)).call(lptemplatename, scesvchandle, ppvdata, pboverwriteall)
+  end
+  def is_dirty(lptemplatename : Int8*) : HRESULT
+    @lpVtbl.value.is_dirty.unsafe_as(Proc(Int8*, HRESULT)).call(lptemplatename)
+  end
+  def free_buffer(pvdata : Void*) : HRESULT
+    @lpVtbl.value.free_buffer.unsafe_as(Proc(Void*, HRESULT)).call(pvdata)
+  end
+end
+struct LibWin32::ISceSvcAttachmentData
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_data(scesvchandle : Void*, scetype : SCESVC_INFO_TYPE, ppvdata : Void**, psceenumhandle : UInt32*) : HRESULT
+    @lpVtbl.value.get_data.unsafe_as(Proc(Void*, SCESVC_INFO_TYPE, Void**, UInt32*, HRESULT)).call(scesvchandle, scetype, ppvdata, psceenumhandle)
+  end
+  def initialize(lpservicename : Int8*, lptemplatename : Int8*, lpscesvcpersistinfo : ISceSvcAttachmentPersistInfo, pscesvchandle : Void**) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(Int8*, Int8*, ISceSvcAttachmentPersistInfo, Void**, HRESULT)).call(lpservicename, lptemplatename, lpscesvcpersistinfo, pscesvchandle)
+  end
+  def free_buffer(pvdata : Void*) : HRESULT
+    @lpVtbl.value.free_buffer.unsafe_as(Proc(Void*, HRESULT)).call(pvdata)
+  end
+  def close_handle(scesvchandle : Void*) : HRESULT
+    @lpVtbl.value.close_handle.unsafe_as(Proc(Void*, HRESULT)).call(scesvchandle)
+  end
 end

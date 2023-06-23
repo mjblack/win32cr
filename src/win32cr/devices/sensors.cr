@@ -491,14 +491,14 @@ lib LibWin32
 
 
   struct ISensorManagerVTbl
-    query_interface : Proc(ISensorManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISensorManager*, UInt32)
-    release : Proc(ISensorManager*, UInt32)
-    get_sensors_by_category : Proc(ISensorManager*, Guid*, ISensorCollection*, HRESULT)
-    get_sensors_by_type : Proc(ISensorManager*, Guid*, ISensorCollection*, HRESULT)
-    get_sensor_by_id : Proc(ISensorManager*, Guid*, ISensor*, HRESULT)
-    set_event_sink : Proc(ISensorManager*, ISensorManagerEvents, HRESULT)
-    request_permissions : Proc(ISensorManager*, LibC::HANDLE, ISensorCollection, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_sensors_by_category : UInt64
+    get_sensors_by_type : UInt64
+    get_sensor_by_id : UInt64
+    set_event_sink : UInt64
+    request_permissions : UInt64
   end
 
   ISensorManager_GUID = "bd77db67-45a8-42dc-8d00-6dcf15f8377a"
@@ -508,11 +508,11 @@ lib LibWin32
   end
 
   struct ILocationPermissionsVTbl
-    query_interface : Proc(ILocationPermissions*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILocationPermissions*, UInt32)
-    release : Proc(ILocationPermissions*, UInt32)
-    get_global_location_permission : Proc(ILocationPermissions*, LibC::BOOL*, HRESULT)
-    check_location_capability : Proc(ILocationPermissions*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_global_location_permission : UInt64
+    check_location_capability : UInt64
   end
 
   ILocationPermissions_GUID = "d5fb0a7f-e74e-44f5-8e02-4806863a274f"
@@ -522,15 +522,15 @@ lib LibWin32
   end
 
   struct ISensorCollectionVTbl
-    query_interface : Proc(ISensorCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISensorCollection*, UInt32)
-    release : Proc(ISensorCollection*, UInt32)
-    get_at : Proc(ISensorCollection*, UInt32, ISensor*, HRESULT)
-    get_count : Proc(ISensorCollection*, UInt32*, HRESULT)
-    add : Proc(ISensorCollection*, ISensor, HRESULT)
-    remove : Proc(ISensorCollection*, ISensor, HRESULT)
-    remove_by_id : Proc(ISensorCollection*, Guid*, HRESULT)
-    clear : Proc(ISensorCollection*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_at : UInt64
+    get_count : UInt64
+    add : UInt64
+    remove : UInt64
+    remove_by_id : UInt64
+    clear : UInt64
   end
 
   ISensorCollection_GUID = "23571e11-e545-4dd8-a337-b89bf44b10df"
@@ -540,24 +540,24 @@ lib LibWin32
   end
 
   struct ISensorVTbl
-    query_interface : Proc(ISensor*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISensor*, UInt32)
-    release : Proc(ISensor*, UInt32)
-    get_id : Proc(ISensor*, Guid*, HRESULT)
-    get_category : Proc(ISensor*, Guid*, HRESULT)
-    get_type : Proc(ISensor*, Guid*, HRESULT)
-    get_friendly_name : Proc(ISensor*, UInt8**, HRESULT)
-    get_property : Proc(ISensor*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
-    get_properties : Proc(ISensor*, IPortableDeviceKeyCollection, IPortableDeviceValues*, HRESULT)
-    get_supported_data_fields : Proc(ISensor*, IPortableDeviceKeyCollection*, HRESULT)
-    set_properties : Proc(ISensor*, IPortableDeviceValues, IPortableDeviceValues*, HRESULT)
-    supports_data_field : Proc(ISensor*, PROPERTYKEY*, Int16*, HRESULT)
-    get_state : Proc(ISensor*, SensorState*, HRESULT)
-    get_data : Proc(ISensor*, ISensorDataReport*, HRESULT)
-    supports_event : Proc(ISensor*, Guid*, Int16*, HRESULT)
-    get_event_interest : Proc(ISensor*, Guid**, UInt32*, HRESULT)
-    set_event_interest : Proc(ISensor*, Guid*, UInt32, HRESULT)
-    set_event_sink : Proc(ISensor*, ISensorEvents, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_id : UInt64
+    get_category : UInt64
+    get_type : UInt64
+    get_friendly_name : UInt64
+    get_property : UInt64
+    get_properties : UInt64
+    get_supported_data_fields : UInt64
+    set_properties : UInt64
+    supports_data_field : UInt64
+    get_state : UInt64
+    get_data : UInt64
+    supports_event : UInt64
+    get_event_interest : UInt64
+    set_event_interest : UInt64
+    set_event_sink : UInt64
   end
 
   ISensor_GUID = "5fa08f80-2657-458e-af75-46f73fa6ac5c"
@@ -567,12 +567,12 @@ lib LibWin32
   end
 
   struct ISensorDataReportVTbl
-    query_interface : Proc(ISensorDataReport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISensorDataReport*, UInt32)
-    release : Proc(ISensorDataReport*, UInt32)
-    get_timestamp : Proc(ISensorDataReport*, SYSTEMTIME*, HRESULT)
-    get_sensor_value : Proc(ISensorDataReport*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
-    get_sensor_values : Proc(ISensorDataReport*, IPortableDeviceKeyCollection, IPortableDeviceValues*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_timestamp : UInt64
+    get_sensor_value : UInt64
+    get_sensor_values : UInt64
   end
 
   ISensorDataReport_GUID = "0ab9df9b-c4b5-4796-8898-0470706a2e1d"
@@ -582,10 +582,10 @@ lib LibWin32
   end
 
   struct ISensorManagerEventsVTbl
-    query_interface : Proc(ISensorManagerEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISensorManagerEvents*, UInt32)
-    release : Proc(ISensorManagerEvents*, UInt32)
-    on_sensor_enter : Proc(ISensorManagerEvents*, ISensor, SensorState, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_sensor_enter : UInt64
   end
 
   ISensorManagerEvents_GUID = "9b3b0b86-266a-4aad-b21f-fde5501001b7"
@@ -595,13 +595,13 @@ lib LibWin32
   end
 
   struct ISensorEventsVTbl
-    query_interface : Proc(ISensorEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISensorEvents*, UInt32)
-    release : Proc(ISensorEvents*, UInt32)
-    on_state_changed : Proc(ISensorEvents*, ISensor, SensorState, HRESULT)
-    on_data_updated : Proc(ISensorEvents*, ISensor, ISensorDataReport, HRESULT)
-    on_event : Proc(ISensorEvents*, ISensor, Guid*, IPortableDeviceValues, HRESULT)
-    on_leave : Proc(ISensorEvents*, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_state_changed : UInt64
+    on_data_updated : UInt64
+    on_event : UInt64
+    on_leave : UInt64
   end
 
   ISensorEvents_GUID = "5d8dcc91-4641-47e7-b7c3-b74f48a6c391"
@@ -696,7 +696,7 @@ lib LibWin32
   fun SerializationBufferAllocate(sizeinbytes : UInt32, pbuffer : UInt8**) : NTSTATUS
 
   # Params # buffer : UInt8* [In]
-  fun SerializationBufferFree(buffer : UInt8*)
+  fun SerializationBufferFree(buffer : UInt8*) : Void
 
   # Params # collection : SENSOR_COLLECTION_LIST* [In]
   fun CollectionsListGetSerializedSize(collection : SENSOR_COLLECTION_LIST*) : UInt32
@@ -730,4 +730,189 @@ lib LibWin32
 
   # Params # guidarray : Guid* [In],arraylength : UInt32 [In],guidelem : Guid* [In]
   fun IsGUIDPresentInList(guidarray : Guid*, arraylength : UInt32, guidelem : Guid*) : BOOLEAN
+end
+struct LibWin32::ISensorManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_sensors_by_category(sensorcategory : Guid*, ppsensorsfound : ISensorCollection*) : HRESULT
+    @lpVtbl.value.get_sensors_by_category.unsafe_as(Proc(Guid*, ISensorCollection*, HRESULT)).call(sensorcategory, ppsensorsfound)
+  end
+  def get_sensors_by_type(sensortype : Guid*, ppsensorsfound : ISensorCollection*) : HRESULT
+    @lpVtbl.value.get_sensors_by_type.unsafe_as(Proc(Guid*, ISensorCollection*, HRESULT)).call(sensortype, ppsensorsfound)
+  end
+  def get_sensor_by_id(sensorid : Guid*, ppsensor : ISensor*) : HRESULT
+    @lpVtbl.value.get_sensor_by_id.unsafe_as(Proc(Guid*, ISensor*, HRESULT)).call(sensorid, ppsensor)
+  end
+  def set_event_sink(pevents : ISensorManagerEvents) : HRESULT
+    @lpVtbl.value.set_event_sink.unsafe_as(Proc(ISensorManagerEvents, HRESULT)).call(pevents)
+  end
+  def request_permissions(hparent : LibC::HANDLE, psensors : ISensorCollection, fmodal : LibC::BOOL) : HRESULT
+    @lpVtbl.value.request_permissions.unsafe_as(Proc(LibC::HANDLE, ISensorCollection, LibC::BOOL, HRESULT)).call(hparent, psensors, fmodal)
+  end
+end
+struct LibWin32::ILocationPermissions
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_global_location_permission(pfenabled : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_global_location_permission.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfenabled)
+  end
+  def check_location_capability(dwclientthreadid : UInt32) : HRESULT
+    @lpVtbl.value.check_location_capability.unsafe_as(Proc(UInt32, HRESULT)).call(dwclientthreadid)
+  end
+end
+struct LibWin32::ISensorCollection
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_at(ulindex : UInt32, ppsensor : ISensor*) : HRESULT
+    @lpVtbl.value.get_at.unsafe_as(Proc(UInt32, ISensor*, HRESULT)).call(ulindex, ppsensor)
+  end
+  def get_count(pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pcount)
+  end
+  def add(psensor : ISensor) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(ISensor, HRESULT)).call(psensor)
+  end
+  def remove(psensor : ISensor) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(ISensor, HRESULT)).call(psensor)
+  end
+  def remove_by_id(sensorid : Guid*) : HRESULT
+    @lpVtbl.value.remove_by_id.unsafe_as(Proc(Guid*, HRESULT)).call(sensorid)
+  end
+  def clear : HRESULT
+    @lpVtbl.value.clear.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::ISensor
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_id(pid : Guid*) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(Guid*, HRESULT)).call(pid)
+  end
+  def get_category(psensorcategory : Guid*) : HRESULT
+    @lpVtbl.value.get_category.unsafe_as(Proc(Guid*, HRESULT)).call(psensorcategory)
+  end
+  def get_type(psensortype : Guid*) : HRESULT
+    @lpVtbl.value.get_type.unsafe_as(Proc(Guid*, HRESULT)).call(psensortype)
+  end
+  def get_friendly_name(pfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pfriendlyname)
+  end
+  def get_property(key : PROPERTYKEY*, pproperty : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(key, pproperty)
+  end
+  def get_properties(pkeys : IPortableDeviceKeyCollection, ppproperties : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(IPortableDeviceKeyCollection, IPortableDeviceValues*, HRESULT)).call(pkeys, ppproperties)
+  end
+  def get_supported_data_fields(ppdatafields : IPortableDeviceKeyCollection*) : HRESULT
+    @lpVtbl.value.get_supported_data_fields.unsafe_as(Proc(IPortableDeviceKeyCollection*, HRESULT)).call(ppdatafields)
+  end
+  def set_properties(pproperties : IPortableDeviceValues, ppresults : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.set_properties.unsafe_as(Proc(IPortableDeviceValues, IPortableDeviceValues*, HRESULT)).call(pproperties, ppresults)
+  end
+  def supports_data_field(key : PROPERTYKEY*, pissupported : Int16*) : HRESULT
+    @lpVtbl.value.supports_data_field.unsafe_as(Proc(PROPERTYKEY*, Int16*, HRESULT)).call(key, pissupported)
+  end
+  def get_state(pstate : SensorState*) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(SensorState*, HRESULT)).call(pstate)
+  end
+  def get_data(ppdatareport : ISensorDataReport*) : HRESULT
+    @lpVtbl.value.get_data.unsafe_as(Proc(ISensorDataReport*, HRESULT)).call(ppdatareport)
+  end
+  def supports_event(eventguid : Guid*, pissupported : Int16*) : HRESULT
+    @lpVtbl.value.supports_event.unsafe_as(Proc(Guid*, Int16*, HRESULT)).call(eventguid, pissupported)
+  end
+  def get_event_interest(ppvalues : Guid**, pcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_event_interest.unsafe_as(Proc(Guid**, UInt32*, HRESULT)).call(ppvalues, pcount)
+  end
+  def set_event_interest(pvalues : Guid*, count : UInt32) : HRESULT
+    @lpVtbl.value.set_event_interest.unsafe_as(Proc(Guid*, UInt32, HRESULT)).call(pvalues, count)
+  end
+  def set_event_sink(pevents : ISensorEvents) : HRESULT
+    @lpVtbl.value.set_event_sink.unsafe_as(Proc(ISensorEvents, HRESULT)).call(pevents)
+  end
+end
+struct LibWin32::ISensorDataReport
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_timestamp(ptimestamp : SYSTEMTIME*) : HRESULT
+    @lpVtbl.value.get_timestamp.unsafe_as(Proc(SYSTEMTIME*, HRESULT)).call(ptimestamp)
+  end
+  def get_sensor_value(pkey : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
+    @lpVtbl.value.get_sensor_value.unsafe_as(Proc(PROPERTYKEY*, PROPVARIANT*, HRESULT)).call(pkey, pvalue)
+  end
+  def get_sensor_values(pkeys : IPortableDeviceKeyCollection, ppvalues : IPortableDeviceValues*) : HRESULT
+    @lpVtbl.value.get_sensor_values.unsafe_as(Proc(IPortableDeviceKeyCollection, IPortableDeviceValues*, HRESULT)).call(pkeys, ppvalues)
+  end
+end
+struct LibWin32::ISensorManagerEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_sensor_enter(psensor : ISensor, state : SensorState) : HRESULT
+    @lpVtbl.value.on_sensor_enter.unsafe_as(Proc(ISensor, SensorState, HRESULT)).call(psensor, state)
+  end
+end
+struct LibWin32::ISensorEvents
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_state_changed(psensor : ISensor, state : SensorState) : HRESULT
+    @lpVtbl.value.on_state_changed.unsafe_as(Proc(ISensor, SensorState, HRESULT)).call(psensor, state)
+  end
+  def on_data_updated(psensor : ISensor, pnewdata : ISensorDataReport) : HRESULT
+    @lpVtbl.value.on_data_updated.unsafe_as(Proc(ISensor, ISensorDataReport, HRESULT)).call(psensor, pnewdata)
+  end
+  def on_event(psensor : ISensor, eventid : Guid*, peventdata : IPortableDeviceValues) : HRESULT
+    @lpVtbl.value.on_event.unsafe_as(Proc(ISensor, Guid*, IPortableDeviceValues, HRESULT)).call(psensor, eventid, peventdata)
+  end
+  def on_leave(id : Guid*) : HRESULT
+    @lpVtbl.value.on_leave.unsafe_as(Proc(Guid*, HRESULT)).call(id)
+  end
 end

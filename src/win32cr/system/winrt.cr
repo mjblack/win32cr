@@ -132,10 +132,10 @@ lib LibWin32
 
 
   struct IAgileReferenceVTbl
-    query_interface : Proc(IAgileReference*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAgileReference*, UInt32)
-    release : Proc(IAgileReference*, UInt32)
-    resolve : Proc(IAgileReference*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    resolve : UInt64
   end
 
   IAgileReference_GUID = "c03f6a43-65a4-9818-987e-e0b810d2a6f2"
@@ -145,10 +145,10 @@ lib LibWin32
   end
 
   struct IApartmentShutdownVTbl
-    query_interface : Proc(IApartmentShutdown*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IApartmentShutdown*, UInt32)
-    release : Proc(IApartmentShutdown*, UInt32)
-    on_uninitialize : Proc(IApartmentShutdown*, UInt64, Void)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_uninitialize : UInt64
   end
 
   IApartmentShutdown_GUID = "a2f05a09-27a2-42b5-bc0e-ac163ef49d9b"
@@ -158,13 +158,13 @@ lib LibWin32
   end
 
   struct ISpatialInteractionManagerInteropVTbl
-    query_interface : Proc(ISpatialInteractionManagerInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialInteractionManagerInterop*, UInt32)
-    release : Proc(ISpatialInteractionManagerInterop*, UInt32)
-    get_iids : Proc(ISpatialInteractionManagerInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(ISpatialInteractionManagerInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(ISpatialInteractionManagerInterop*, TrustLevel*, HRESULT)
-    get_for_window : Proc(ISpatialInteractionManagerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    get_for_window : UInt64
   end
 
   ISpatialInteractionManagerInterop_GUID = "5c4ee536-6a98-4b86-a170-587013d6fd4b"
@@ -174,13 +174,13 @@ lib LibWin32
   end
 
   struct IHolographicSpaceInteropVTbl
-    query_interface : Proc(IHolographicSpaceInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IHolographicSpaceInterop*, UInt32)
-    release : Proc(IHolographicSpaceInterop*, UInt32)
-    get_iids : Proc(IHolographicSpaceInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IHolographicSpaceInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IHolographicSpaceInterop*, TrustLevel*, HRESULT)
-    create_for_window : Proc(IHolographicSpaceInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    create_for_window : UInt64
   end
 
   IHolographicSpaceInterop_GUID = "5c4ee536-6a98-4b86-a170-587013d6fd4b"
@@ -190,12 +190,12 @@ lib LibWin32
   end
 
   struct IInspectableVTbl
-    query_interface : Proc(IInspectable*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IInspectable*, UInt32)
-    release : Proc(IInspectable*, UInt32)
-    get_iids : Proc(IInspectable*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IInspectable*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IInspectable*, TrustLevel*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
   end
 
   IInspectable_GUID = "af86e2e0-b12d-4c6a-9c5a-d7aa65101e90"
@@ -205,15 +205,15 @@ lib LibWin32
   end
 
   struct IAccountsSettingsPaneInteropVTbl
-    query_interface : Proc(IAccountsSettingsPaneInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAccountsSettingsPaneInterop*, UInt32)
-    release : Proc(IAccountsSettingsPaneInterop*, UInt32)
-    get_iids : Proc(IAccountsSettingsPaneInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IAccountsSettingsPaneInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IAccountsSettingsPaneInterop*, TrustLevel*, HRESULT)
-    get_for_window : Proc(IAccountsSettingsPaneInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    show_manage_accounts_for_window_async : Proc(IAccountsSettingsPaneInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    show_add_account_for_window_async : Proc(IAccountsSettingsPaneInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    get_for_window : UInt64
+    show_manage_accounts_for_window_async : UInt64
+    show_add_account_for_window_async : UInt64
   end
 
   IAccountsSettingsPaneInterop_GUID = "d3ee12ad-3865-4362-9746-b75a682df0e6"
@@ -223,10 +223,10 @@ lib LibWin32
   end
 
   struct IAppServiceConnectionExtendedExecutionVTbl
-    query_interface : Proc(IAppServiceConnectionExtendedExecution*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAppServiceConnectionExtendedExecution*, UInt32)
-    release : Proc(IAppServiceConnectionExtendedExecution*, UInt32)
-    open_for_extended_execution_async : Proc(IAppServiceConnectionExtendedExecution*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    open_for_extended_execution_async : UInt64
   end
 
   IAppServiceConnectionExtendedExecution_GUID = "65219584-f9cb-4ae3-81f9-a28a6ca450d9"
@@ -236,10 +236,10 @@ lib LibWin32
   end
 
   struct ICorrelationVectorSourceVTbl
-    query_interface : Proc(ICorrelationVectorSource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICorrelationVectorSource*, UInt32)
-    release : Proc(ICorrelationVectorSource*, UInt32)
-    get_correlation_vector : Proc(ICorrelationVectorSource*, HSTRING*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_correlation_vector : UInt64
   end
 
   ICorrelationVectorSource_GUID = "152b8a3b-b9b9-4685-b56e-974847bc7545"
@@ -249,11 +249,11 @@ lib LibWin32
   end
 
   struct ICastingEventHandlerVTbl
-    query_interface : Proc(ICastingEventHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICastingEventHandler*, UInt32)
-    release : Proc(ICastingEventHandler*, UInt32)
-    on_state_changed : Proc(ICastingEventHandler*, CASTING_CONNECTION_STATE, HRESULT)
-    on_error : Proc(ICastingEventHandler*, CASTING_CONNECTION_ERROR_STATUS, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_state_changed : UInt64
+    on_error : UInt64
   end
 
   ICastingEventHandler_GUID = "c79a6cb7-bebd-47a6-a2ad-4d45ad79c7bc"
@@ -263,14 +263,14 @@ lib LibWin32
   end
 
   struct ICastingControllerVTbl
-    query_interface : Proc(ICastingController*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICastingController*, UInt32)
-    release : Proc(ICastingController*, UInt32)
-    initialize : Proc(ICastingController*, IUnknown, IUnknown, HRESULT)
-    connect : Proc(ICastingController*, HRESULT)
-    disconnect : Proc(ICastingController*, HRESULT)
-    advise : Proc(ICastingController*, ICastingEventHandler, UInt32*, HRESULT)
-    un_advise : Proc(ICastingController*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    connect : UInt64
+    disconnect : UInt64
+    advise : UInt64
+    un_advise : UInt64
   end
 
   ICastingController_GUID = "f0a56423-a664-4fbd-8b43-409a45e8d9a1"
@@ -280,11 +280,11 @@ lib LibWin32
   end
 
   struct ICastingSourceInfoVTbl
-    query_interface : Proc(ICastingSourceInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICastingSourceInfo*, UInt32)
-    release : Proc(ICastingSourceInfo*, UInt32)
-    get_controller : Proc(ICastingSourceInfo*, ICastingController*, HRESULT)
-    get_properties : Proc(ICastingSourceInfo*, INamedPropertyStore*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_controller : UInt64
+    get_properties : UInt64
   end
 
   ICastingSourceInfo_GUID = "45101ab7-7c3a-4bce-9500-12c09024b298"
@@ -294,13 +294,13 @@ lib LibWin32
   end
 
   struct IDragDropManagerInteropVTbl
-    query_interface : Proc(IDragDropManagerInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDragDropManagerInterop*, UInt32)
-    release : Proc(IDragDropManagerInterop*, UInt32)
-    get_iids : Proc(IDragDropManagerInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IDragDropManagerInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IDragDropManagerInterop*, TrustLevel*, HRESULT)
-    get_for_window : Proc(IDragDropManagerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    get_for_window : UInt64
   end
 
   IDragDropManagerInterop_GUID = "5ad8cba7-4c01-4dac-9074-827894292d63"
@@ -310,13 +310,13 @@ lib LibWin32
   end
 
   struct IInputPaneInteropVTbl
-    query_interface : Proc(IInputPaneInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IInputPaneInterop*, UInt32)
-    release : Proc(IInputPaneInterop*, UInt32)
-    get_iids : Proc(IInputPaneInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IInputPaneInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IInputPaneInterop*, TrustLevel*, HRESULT)
-    get_for_window : Proc(IInputPaneInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    get_for_window : UInt64
   end
 
   IInputPaneInterop_GUID = "75cf2c57-9195-4931-8332-f0b409e916af"
@@ -326,14 +326,14 @@ lib LibWin32
   end
 
   struct IPlayToManagerInteropVTbl
-    query_interface : Proc(IPlayToManagerInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPlayToManagerInterop*, UInt32)
-    release : Proc(IPlayToManagerInterop*, UInt32)
-    get_iids : Proc(IPlayToManagerInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IPlayToManagerInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IPlayToManagerInterop*, TrustLevel*, HRESULT)
-    get_for_window : Proc(IPlayToManagerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    show_play_to_ui_for_window : Proc(IPlayToManagerInterop*, LibC::HANDLE, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    get_for_window : UInt64
+    show_play_to_ui_for_window : UInt64
   end
 
   IPlayToManagerInterop_GUID = "24394699-1f2c-4eb3-8cd7-0ec1da42a540"
@@ -343,15 +343,15 @@ lib LibWin32
   end
 
   struct ICorrelationVectorInformationVTbl
-    query_interface : Proc(ICorrelationVectorInformation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICorrelationVectorInformation*, UInt32)
-    release : Proc(ICorrelationVectorInformation*, UInt32)
-    get_iids : Proc(ICorrelationVectorInformation*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(ICorrelationVectorInformation*, HSTRING*, HRESULT)
-    get_trust_level : Proc(ICorrelationVectorInformation*, TrustLevel*, HRESULT)
-    get_last_correlation_vector_for_thread : Proc(ICorrelationVectorInformation*, HSTRING*, HRESULT)
-    get_next_correlation_vector_for_thread : Proc(ICorrelationVectorInformation*, HSTRING*, HRESULT)
-    put_next_correlation_vector_for_thread : Proc(ICorrelationVectorInformation*, HSTRING, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    get_last_correlation_vector_for_thread : UInt64
+    get_next_correlation_vector_for_thread : UInt64
+    put_next_correlation_vector_for_thread : UInt64
   end
 
   ICorrelationVectorInformation_GUID = "83c78b3c-d88b-4950-aa6e-22b8d22aabd3"
@@ -361,13 +361,13 @@ lib LibWin32
   end
 
   struct IUIViewSettingsInteropVTbl
-    query_interface : Proc(IUIViewSettingsInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUIViewSettingsInterop*, UInt32)
-    release : Proc(IUIViewSettingsInterop*, UInt32)
-    get_iids : Proc(IUIViewSettingsInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IUIViewSettingsInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IUIViewSettingsInterop*, TrustLevel*, HRESULT)
-    get_for_window : Proc(IUIViewSettingsInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    get_for_window : UInt64
   end
 
   IUIViewSettingsInterop_GUID = "3694dbf9-8f68-44be-8ff5-195c98ede8a6"
@@ -377,13 +377,13 @@ lib LibWin32
   end
 
   struct IUserActivityInteropVTbl
-    query_interface : Proc(IUserActivityInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUserActivityInterop*, UInt32)
-    release : Proc(IUserActivityInterop*, UInt32)
-    get_iids : Proc(IUserActivityInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IUserActivityInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IUserActivityInterop*, TrustLevel*, HRESULT)
-    create_session_for_window : Proc(IUserActivityInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    create_session_for_window : UInt64
   end
 
   IUserActivityInterop_GUID = "1ade314d-0e0a-40d9-824c-9a088a50059f"
@@ -393,13 +393,13 @@ lib LibWin32
   end
 
   struct IUserActivitySourceHostInteropVTbl
-    query_interface : Proc(IUserActivitySourceHostInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUserActivitySourceHostInterop*, UInt32)
-    release : Proc(IUserActivitySourceHostInterop*, UInt32)
-    get_iids : Proc(IUserActivitySourceHostInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IUserActivitySourceHostInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IUserActivitySourceHostInterop*, TrustLevel*, HRESULT)
-    set_activity_source_host : Proc(IUserActivitySourceHostInterop*, HSTRING, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    set_activity_source_host : UInt64
   end
 
   IUserActivitySourceHostInterop_GUID = "c15df8bc-8844-487a-b85b-7578e0f61419"
@@ -409,13 +409,13 @@ lib LibWin32
   end
 
   struct IUserActivityRequestManagerInteropVTbl
-    query_interface : Proc(IUserActivityRequestManagerInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUserActivityRequestManagerInterop*, UInt32)
-    release : Proc(IUserActivityRequestManagerInterop*, UInt32)
-    get_iids : Proc(IUserActivityRequestManagerInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IUserActivityRequestManagerInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IUserActivityRequestManagerInterop*, TrustLevel*, HRESULT)
-    get_for_window : Proc(IUserActivityRequestManagerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    get_for_window : UInt64
   end
 
   IUserActivityRequestManagerInterop_GUID = "dd69f876-9699-4715-9095-e37ea30dfa1b"
@@ -425,13 +425,13 @@ lib LibWin32
   end
 
   struct IUserConsentVerifierInteropVTbl
-    query_interface : Proc(IUserConsentVerifierInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IUserConsentVerifierInterop*, UInt32)
-    release : Proc(IUserConsentVerifierInterop*, UInt32)
-    get_iids : Proc(IUserConsentVerifierInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IUserConsentVerifierInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IUserConsentVerifierInterop*, TrustLevel*, HRESULT)
-    request_verification_for_window_async : Proc(IUserConsentVerifierInterop*, LibC::HANDLE, HSTRING, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    request_verification_for_window_async : UInt64
   end
 
   IUserConsentVerifierInterop_GUID = "39e050c3-4e74-441a-8dc0-b81104df949c"
@@ -441,14 +441,14 @@ lib LibWin32
   end
 
   struct IWebAuthenticationCoreManagerInteropVTbl
-    query_interface : Proc(IWebAuthenticationCoreManagerInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWebAuthenticationCoreManagerInterop*, UInt32)
-    release : Proc(IWebAuthenticationCoreManagerInterop*, UInt32)
-    get_iids : Proc(IWebAuthenticationCoreManagerInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IWebAuthenticationCoreManagerInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IWebAuthenticationCoreManagerInterop*, TrustLevel*, HRESULT)
-    request_token_for_window_async : Proc(IWebAuthenticationCoreManagerInterop*, LibC::HANDLE, IInspectable, Guid*, Void**, HRESULT)
-    request_token_with_web_account_for_window_async : Proc(IWebAuthenticationCoreManagerInterop*, LibC::HANDLE, IInspectable, IInspectable, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    request_token_for_window_async : UInt64
+    request_token_with_web_account_for_window_async : UInt64
   end
 
   IWebAuthenticationCoreManagerInterop_GUID = "f4b8e804-811e-4436-b69c-44cb67b72084"
@@ -458,11 +458,11 @@ lib LibWin32
   end
 
   struct IRestrictedErrorInfoVTbl
-    query_interface : Proc(IRestrictedErrorInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRestrictedErrorInfo*, UInt32)
-    release : Proc(IRestrictedErrorInfo*, UInt32)
-    get_error_details : Proc(IRestrictedErrorInfo*, UInt8**, HRESULT*, UInt8**, UInt8**, HRESULT)
-    get_reference : Proc(IRestrictedErrorInfo*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_error_details : UInt64
+    get_reference : UInt64
   end
 
   IRestrictedErrorInfo_GUID = "82ba7092-4c88-427d-a7bc-16dd93feb67e"
@@ -472,10 +472,10 @@ lib LibWin32
   end
 
   struct ILanguageExceptionErrorInfoVTbl
-    query_interface : Proc(ILanguageExceptionErrorInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILanguageExceptionErrorInfo*, UInt32)
-    release : Proc(ILanguageExceptionErrorInfo*, UInt32)
-    get_language_exception : Proc(ILanguageExceptionErrorInfo*, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_language_exception : UInt64
   end
 
   ILanguageExceptionErrorInfo_GUID = "04a2dbf3-df83-116c-0946-0812abf6e07d"
@@ -485,10 +485,10 @@ lib LibWin32
   end
 
   struct ILanguageExceptionTransformVTbl
-    query_interface : Proc(ILanguageExceptionTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILanguageExceptionTransform*, UInt32)
-    release : Proc(ILanguageExceptionTransform*, UInt32)
-    get_transformed_restricted_error_info : Proc(ILanguageExceptionTransform*, IRestrictedErrorInfo*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_transformed_restricted_error_info : UInt64
   end
 
   ILanguageExceptionTransform_GUID = "feb5a271-a6cd-45ce-880a-696706badc65"
@@ -498,10 +498,10 @@ lib LibWin32
   end
 
   struct ILanguageExceptionStackBackTraceVTbl
-    query_interface : Proc(ILanguageExceptionStackBackTrace*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILanguageExceptionStackBackTrace*, UInt32)
-    release : Proc(ILanguageExceptionStackBackTrace*, UInt32)
-    get_stack_back_trace : Proc(ILanguageExceptionStackBackTrace*, UInt32, LibC::UINT_PTR*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_stack_back_trace : UInt64
   end
 
   ILanguageExceptionStackBackTrace_GUID = "cbe53fb5-f967-4258-8d34-42f5e25833de"
@@ -511,13 +511,13 @@ lib LibWin32
   end
 
   struct ILanguageExceptionErrorInfo2VTbl
-    query_interface : Proc(ILanguageExceptionErrorInfo2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILanguageExceptionErrorInfo2*, UInt32)
-    release : Proc(ILanguageExceptionErrorInfo2*, UInt32)
-    get_language_exception : Proc(ILanguageExceptionErrorInfo2*, IUnknown*, HRESULT)
-    get_previous_language_exception_error_info : Proc(ILanguageExceptionErrorInfo2*, ILanguageExceptionErrorInfo2*, HRESULT)
-    capture_propagation_context : Proc(ILanguageExceptionErrorInfo2*, IUnknown, HRESULT)
-    get_propagation_context_head : Proc(ILanguageExceptionErrorInfo2*, ILanguageExceptionErrorInfo2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_language_exception : UInt64
+    get_previous_language_exception_error_info : UInt64
+    capture_propagation_context : UInt64
+    get_propagation_context_head : UInt64
   end
 
   ILanguageExceptionErrorInfo2_GUID = "5746e5c4-5b97-424c-b620-2822915734dd"
@@ -527,13 +527,13 @@ lib LibWin32
   end
 
   struct IActivationFactoryVTbl
-    query_interface : Proc(IActivationFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IActivationFactory*, UInt32)
-    release : Proc(IActivationFactory*, UInt32)
-    get_iids : Proc(IActivationFactory*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IActivationFactory*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IActivationFactory*, TrustLevel*, HRESULT)
-    activate_instance : Proc(IActivationFactory*, IInspectable*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    activate_instance : UInt64
   end
 
   IActivationFactory_GUID = "00000035-0000-0000-c000-000000000046"
@@ -543,10 +543,10 @@ lib LibWin32
   end
 
   struct IBufferByteAccessVTbl
-    query_interface : Proc(IBufferByteAccess*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBufferByteAccess*, UInt32)
-    release : Proc(IBufferByteAccess*, UInt32)
-    buffer : Proc(IBufferByteAccess*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    buffer : UInt64
   end
 
   IBufferByteAccess_GUID = "905a0fef-bc53-11df-8c49-001e4fc686da"
@@ -556,16 +556,16 @@ lib LibWin32
   end
 
   struct IRoSimpleMetaDataBuilderVTbl
-    set_win_rt_interface : Proc(IRoSimpleMetaDataBuilder*, Guid, HRESULT)
-    set_delegate : Proc(IRoSimpleMetaDataBuilder*, Guid, HRESULT)
-    set_interface_group_simple_default : Proc(IRoSimpleMetaDataBuilder*, LibC::LPWSTR, LibC::LPWSTR, Guid*, HRESULT)
-    set_interface_group_parameterized_default : Proc(IRoSimpleMetaDataBuilder*, LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)
-    set_runtime_class_simple_default : Proc(IRoSimpleMetaDataBuilder*, LibC::LPWSTR, LibC::LPWSTR, Guid*, HRESULT)
-    set_runtime_class_parameterized_default : Proc(IRoSimpleMetaDataBuilder*, LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)
-    set_struct : Proc(IRoSimpleMetaDataBuilder*, LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)
-    set_enum : Proc(IRoSimpleMetaDataBuilder*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    set_parameterized_interface : Proc(IRoSimpleMetaDataBuilder*, Guid, UInt32, HRESULT)
-    set_parameterized_delegate : Proc(IRoSimpleMetaDataBuilder*, Guid, UInt32, HRESULT)
+    set_win_rt_interface : UInt64
+    set_delegate : UInt64
+    set_interface_group_simple_default : UInt64
+    set_interface_group_parameterized_default : UInt64
+    set_runtime_class_simple_default : UInt64
+    set_runtime_class_parameterized_default : UInt64
+    set_struct : UInt64
+    set_enum : UInt64
+    set_parameterized_interface : UInt64
+    set_parameterized_delegate : UInt64
   end
 
   struct IRoSimpleMetaDataBuilder
@@ -573,7 +573,7 @@ lib LibWin32
   end
 
   struct IRoMetaDataLocatorVTbl
-    locate : Proc(IRoMetaDataLocator*, LibC::LPWSTR, IRoSimpleMetaDataBuilder, HRESULT)
+    locate : UInt64
   end
 
   struct IRoMetaDataLocator
@@ -581,10 +581,10 @@ lib LibWin32
   end
 
   struct IMemoryBufferByteAccessVTbl
-    query_interface : Proc(IMemoryBufferByteAccess*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMemoryBufferByteAccess*, UInt32)
-    release : Proc(IMemoryBufferByteAccess*, UInt32)
-    get_buffer : Proc(IMemoryBufferByteAccess*, UInt8**, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_buffer : UInt64
   end
 
   IMemoryBufferByteAccess_GUID = "5b0d3235-4dba-4d44-865e-8f1d0e4fd04d"
@@ -594,10 +594,10 @@ lib LibWin32
   end
 
   struct IWeakReferenceVTbl
-    query_interface : Proc(IWeakReference*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWeakReference*, UInt32)
-    release : Proc(IWeakReference*, UInt32)
-    resolve : Proc(IWeakReference*, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    resolve : UInt64
   end
 
   IWeakReference_GUID = "00000037-0000-0000-c000-000000000046"
@@ -607,10 +607,10 @@ lib LibWin32
   end
 
   struct IWeakReferenceSourceVTbl
-    query_interface : Proc(IWeakReferenceSource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWeakReferenceSource*, UInt32)
-    release : Proc(IWeakReferenceSource*, UInt32)
-    get_weak_reference : Proc(IWeakReferenceSource*, IWeakReference*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_weak_reference : UInt64
   end
 
   IWeakReferenceSource_GUID = "00000038-0000-0000-c000-000000000046"
@@ -620,13 +620,13 @@ lib LibWin32
   end
 
   struct ISystemMediaTransportControlsInteropVTbl
-    query_interface : Proc(ISystemMediaTransportControlsInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISystemMediaTransportControlsInterop*, UInt32)
-    release : Proc(ISystemMediaTransportControlsInterop*, UInt32)
-    get_iids : Proc(ISystemMediaTransportControlsInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(ISystemMediaTransportControlsInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(ISystemMediaTransportControlsInterop*, TrustLevel*, HRESULT)
-    get_for_window : Proc(ISystemMediaTransportControlsInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    get_for_window : UInt64
   end
 
   ISystemMediaTransportControlsInterop_GUID = "ddb0472d-c911-4a1f-86d9-dc3d71a95f5a"
@@ -636,10 +636,10 @@ lib LibWin32
   end
 
   struct IShareWindowCommandEventArgsInteropVTbl
-    query_interface : Proc(IShareWindowCommandEventArgsInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IShareWindowCommandEventArgsInterop*, UInt32)
-    release : Proc(IShareWindowCommandEventArgsInterop*, UInt32)
-    get_window : Proc(IShareWindowCommandEventArgsInterop*, HANDLE*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_window : UInt64
   end
 
   IShareWindowCommandEventArgsInterop_GUID = "6571a721-643d-43d4-aca4-6b6f5f30f1ad"
@@ -649,10 +649,10 @@ lib LibWin32
   end
 
   struct IShareWindowCommandSourceInteropVTbl
-    query_interface : Proc(IShareWindowCommandSourceInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IShareWindowCommandSourceInterop*, UInt32)
-    release : Proc(IShareWindowCommandSourceInterop*, UInt32)
-    get_for_window : Proc(IShareWindowCommandSourceInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_for_window : UInt64
   end
 
   IShareWindowCommandSourceInterop_GUID = "461a191f-8424-43a6-a0fa-3451a22f56ab"
@@ -662,13 +662,13 @@ lib LibWin32
   end
 
   struct IMessageDispatcherVTbl
-    query_interface : Proc(IMessageDispatcher*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMessageDispatcher*, UInt32)
-    release : Proc(IMessageDispatcher*, UInt32)
-    get_iids : Proc(IMessageDispatcher*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IMessageDispatcher*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IMessageDispatcher*, TrustLevel*, HRESULT)
-    pump_messages : Proc(IMessageDispatcher*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    pump_messages : UInt64
   end
 
   IMessageDispatcher_GUID = "f5f84c8f-cfd0-4cd6-b66b-c5d26ff1689d"
@@ -694,7 +694,7 @@ lib LibWin32
   fun HSTRING_UserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : HSTRING*) : UInt8*
 
   # Params # param0 : UInt32* [In],param1 : HSTRING* [In]
-  fun HSTRING_UserFree(param0 : UInt32*, param1 : HSTRING*)
+  fun HSTRING_UserFree(param0 : UInt32*, param1 : HSTRING*) : Void
 
   # Params # param0 : UInt32* [In],param1 : UInt32 [In],param2 : HSTRING* [In]
   fun HSTRING_UserSize64(param0 : UInt32*, param1 : UInt32, param2 : HSTRING*) : UInt32
@@ -706,7 +706,7 @@ lib LibWin32
   fun HSTRING_UserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : HSTRING*) : UInt8*
 
   # Params # param0 : UInt32* [In],param1 : HSTRING* [In]
-  fun HSTRING_UserFree64(param0 : UInt32*, param1 : HSTRING*)
+  fun HSTRING_UserFree64(param0 : UInt32*, param1 : HSTRING*) : Void
 
   # Params # sourcestring : Char* [In],length : UInt32 [In],string : HSTRING* [In]
   fun WindowsCreateString(sourcestring : Char*, length : UInt32, string : HSTRING*) : HRESULT
@@ -775,7 +775,7 @@ lib LibWin32
   fun RoInitialize(inittype : RO_INIT_TYPE) : HRESULT
 
   # Params # 
-  fun RoUninitialize
+  fun RoUninitialize : Void
 
   # Params # activatableclassid : HSTRING [In],instance : IInspectable* [In]
   fun RoActivateInstance(activatableclassid : HSTRING, instance : IInspectable*) : HRESULT
@@ -784,7 +784,7 @@ lib LibWin32
   fun RoRegisterActivationFactories(activatableclassids : HSTRING*, activationfactorycallbacks : LibC::IntPtrT*, count : UInt32, cookie : LibC::IntPtrT*) : HRESULT
 
   # Params # cookie : LibC::IntPtrT [In]
-  fun RoRevokeActivationFactories(cookie : LibC::IntPtrT)
+  fun RoRevokeActivationFactories(cookie : LibC::IntPtrT) : Void
 
   # Params # activatableclassid : HSTRING [In],iid : Guid* [In],factory : Void** [In]
   fun RoGetActivationFactory(activatableclassid : HSTRING, iid : Guid*, factory : Void**) : HRESULT
@@ -832,13 +832,13 @@ lib LibWin32
   fun RoCaptureErrorContext(hr : HRESULT) : HRESULT
 
   # Params # hrerror : HRESULT [In]
-  fun RoFailFastWithErrorContext(hrerror : HRESULT)
+  fun RoFailFastWithErrorContext(hrerror : HRESULT) : Void
 
   # Params # error : HRESULT [In],message : HSTRING [In],languageexception : IUnknown [In]
   fun RoOriginateLanguageException(error : HRESULT, message : HSTRING, languageexception : IUnknown) : LibC::BOOL
 
   # Params # 
-  fun RoClearError
+  fun RoClearError : Void
 
   # Params # prestrictederrorinfo : IRestrictedErrorInfo [In]
   fun RoReportUnhandledError(prestrictederrorinfo : IRestrictedErrorInfo) : HRESULT
@@ -865,7 +865,7 @@ lib LibWin32
   fun RoGetParameterizedTypeInstanceIID(nameelementcount : UInt32, nameelements : LibC::LPWSTR*, metadatalocator : IRoMetaDataLocator, iid : Guid*, pextra : ROPARAMIIDHANDLE*) : HRESULT
 
   # Params # extra : ROPARAMIIDHANDLE [In]
-  fun RoFreeParameterizedTypeExtra(extra : ROPARAMIIDHANDLE)
+  fun RoFreeParameterizedTypeExtra(extra : ROPARAMIIDHANDLE) : Void
 
   # Params # extra : ROPARAMIIDHANDLE [In]
   fun RoParameterizedTypeExtraGetTypeSignature(extra : ROPARAMIIDHANDLE) : PSTR
@@ -881,4 +881,729 @@ lib LibWin32
 
   # Params # randomaccessstream : IUnknown [In],riid : Guid* [In],ppv : Void** [In]
   fun CreateStreamOverRandomAccessStream(randomaccessstream : IUnknown, riid : Guid*, ppv : Void**) : HRESULT
+end
+struct LibWin32::IAgileReference
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def resolve(riid : Guid*, ppvobjectreference : Void**) : HRESULT
+    @lpVtbl.value.resolve.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobjectreference)
+  end
+end
+struct LibWin32::IApartmentShutdown
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_uninitialize(ui64apartmentidentifier : UInt64) : Void
+    @lpVtbl.value.on_uninitialize.unsafe_as(Proc(UInt64, Void)).call(ui64apartmentidentifier)
+  end
+end
+struct LibWin32::ISpatialInteractionManagerInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def get_for_window(window : LibC::HANDLE, riid : Guid*, spatialinteractionmanager : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(window, riid, spatialinteractionmanager)
+  end
+end
+struct LibWin32::IHolographicSpaceInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def create_for_window(window : LibC::HANDLE, riid : Guid*, holographicspace : Void**) : HRESULT
+    @lpVtbl.value.create_for_window.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(window, riid, holographicspace)
+  end
+end
+struct LibWin32::IInspectable
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+end
+struct LibWin32::IAccountsSettingsPaneInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def get_for_window(appwindow : LibC::HANDLE, riid : Guid*, accountssettingspane : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(appwindow, riid, accountssettingspane)
+  end
+  def show_manage_accounts_for_window_async(appwindow : LibC::HANDLE, riid : Guid*, asyncaction : Void**) : HRESULT
+    @lpVtbl.value.show_manage_accounts_for_window_async.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(appwindow, riid, asyncaction)
+  end
+  def show_add_account_for_window_async(appwindow : LibC::HANDLE, riid : Guid*, asyncaction : Void**) : HRESULT
+    @lpVtbl.value.show_add_account_for_window_async.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(appwindow, riid, asyncaction)
+  end
+end
+struct LibWin32::IAppServiceConnectionExtendedExecution
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def open_for_extended_execution_async(riid : Guid*, operation : Void**) : HRESULT
+    @lpVtbl.value.open_for_extended_execution_async.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, operation)
+  end
+end
+struct LibWin32::ICorrelationVectorSource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_correlation_vector(cv : HSTRING*) : HRESULT
+    @lpVtbl.value.get_correlation_vector.unsafe_as(Proc(HSTRING*, HRESULT)).call(cv)
+  end
+end
+struct LibWin32::ICastingEventHandler
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_state_changed(newstate : CASTING_CONNECTION_STATE) : HRESULT
+    @lpVtbl.value.on_state_changed.unsafe_as(Proc(CASTING_CONNECTION_STATE, HRESULT)).call(newstate)
+  end
+  def on_error(errorstatus : CASTING_CONNECTION_ERROR_STATUS, errormessage : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.on_error.unsafe_as(Proc(CASTING_CONNECTION_ERROR_STATUS, LibC::LPWSTR, HRESULT)).call(errorstatus, errormessage)
+  end
+end
+struct LibWin32::ICastingController
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(castingengine : IUnknown, castingsource : IUnknown) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(IUnknown, IUnknown, HRESULT)).call(castingengine, castingsource)
+  end
+  def connect : HRESULT
+    @lpVtbl.value.connect.unsafe_as(Proc(HRESULT)).call
+  end
+  def disconnect : HRESULT
+    @lpVtbl.value.disconnect.unsafe_as(Proc(HRESULT)).call
+  end
+  def advise(eventhandler : ICastingEventHandler, cookie : UInt32*) : HRESULT
+    @lpVtbl.value.advise.unsafe_as(Proc(ICastingEventHandler, UInt32*, HRESULT)).call(eventhandler, cookie)
+  end
+  def un_advise(cookie : UInt32) : HRESULT
+    @lpVtbl.value.un_advise.unsafe_as(Proc(UInt32, HRESULT)).call(cookie)
+  end
+end
+struct LibWin32::ICastingSourceInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_controller(controller : ICastingController*) : HRESULT
+    @lpVtbl.value.get_controller.unsafe_as(Proc(ICastingController*, HRESULT)).call(controller)
+  end
+  def get_properties(props : INamedPropertyStore*) : HRESULT
+    @lpVtbl.value.get_properties.unsafe_as(Proc(INamedPropertyStore*, HRESULT)).call(props)
+  end
+end
+struct LibWin32::IDragDropManagerInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def get_for_window(hwnd : LibC::HANDLE, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hwnd, riid, ppv)
+  end
+end
+struct LibWin32::IInputPaneInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def get_for_window(appwindow : LibC::HANDLE, riid : Guid*, inputpane : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(appwindow, riid, inputpane)
+  end
+end
+struct LibWin32::IPlayToManagerInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def get_for_window(appwindow : LibC::HANDLE, riid : Guid*, playtomanager : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(appwindow, riid, playtomanager)
+  end
+  def show_play_to_ui_for_window(appwindow : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.show_play_to_ui_for_window.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(appwindow)
+  end
+end
+struct LibWin32::ICorrelationVectorInformation
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def get_last_correlation_vector_for_thread(cv : HSTRING*) : HRESULT
+    @lpVtbl.value.get_last_correlation_vector_for_thread.unsafe_as(Proc(HSTRING*, HRESULT)).call(cv)
+  end
+  def get_next_correlation_vector_for_thread(cv : HSTRING*) : HRESULT
+    @lpVtbl.value.get_next_correlation_vector_for_thread.unsafe_as(Proc(HSTRING*, HRESULT)).call(cv)
+  end
+  def put_next_correlation_vector_for_thread(cv : HSTRING) : HRESULT
+    @lpVtbl.value.put_next_correlation_vector_for_thread.unsafe_as(Proc(HSTRING, HRESULT)).call(cv)
+  end
+end
+struct LibWin32::IUIViewSettingsInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def get_for_window(hwnd : LibC::HANDLE, riid : Guid*, ppv : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(hwnd, riid, ppv)
+  end
+end
+struct LibWin32::IUserActivityInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def create_session_for_window(window : LibC::HANDLE, iid : Guid*, value : Void**) : HRESULT
+    @lpVtbl.value.create_session_for_window.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(window, iid, value)
+  end
+end
+struct LibWin32::IUserActivitySourceHostInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def set_activity_source_host(activitysourcehost : HSTRING) : HRESULT
+    @lpVtbl.value.set_activity_source_host.unsafe_as(Proc(HSTRING, HRESULT)).call(activitysourcehost)
+  end
+end
+struct LibWin32::IUserActivityRequestManagerInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def get_for_window(window : LibC::HANDLE, iid : Guid*, value : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(window, iid, value)
+  end
+end
+struct LibWin32::IUserConsentVerifierInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def request_verification_for_window_async(appwindow : LibC::HANDLE, message : HSTRING, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.request_verification_for_window_async.unsafe_as(Proc(LibC::HANDLE, HSTRING, Guid*, Void**, HRESULT)).call(appwindow, message, riid, asyncoperation)
+  end
+end
+struct LibWin32::IWebAuthenticationCoreManagerInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def request_token_for_window_async(appwindow : LibC::HANDLE, request : IInspectable, riid : Guid*, asyncinfo : Void**) : HRESULT
+    @lpVtbl.value.request_token_for_window_async.unsafe_as(Proc(LibC::HANDLE, IInspectable, Guid*, Void**, HRESULT)).call(appwindow, request, riid, asyncinfo)
+  end
+  def request_token_with_web_account_for_window_async(appwindow : LibC::HANDLE, request : IInspectable, webaccount : IInspectable, riid : Guid*, asyncinfo : Void**) : HRESULT
+    @lpVtbl.value.request_token_with_web_account_for_window_async.unsafe_as(Proc(LibC::HANDLE, IInspectable, IInspectable, Guid*, Void**, HRESULT)).call(appwindow, request, webaccount, riid, asyncinfo)
+  end
+end
+struct LibWin32::IRestrictedErrorInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_error_details(description : UInt8**, error : HRESULT*, restricteddescription : UInt8**, capabilitysid : UInt8**) : HRESULT
+    @lpVtbl.value.get_error_details.unsafe_as(Proc(UInt8**, HRESULT*, UInt8**, UInt8**, HRESULT)).call(description, error, restricteddescription, capabilitysid)
+  end
+  def get_reference(reference : UInt8**) : HRESULT
+    @lpVtbl.value.get_reference.unsafe_as(Proc(UInt8**, HRESULT)).call(reference)
+  end
+end
+struct LibWin32::ILanguageExceptionErrorInfo
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_language_exception(languageexception : IUnknown*) : HRESULT
+    @lpVtbl.value.get_language_exception.unsafe_as(Proc(IUnknown*, HRESULT)).call(languageexception)
+  end
+end
+struct LibWin32::ILanguageExceptionTransform
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_transformed_restricted_error_info(restrictederrorinfo : IRestrictedErrorInfo*) : HRESULT
+    @lpVtbl.value.get_transformed_restricted_error_info.unsafe_as(Proc(IRestrictedErrorInfo*, HRESULT)).call(restrictederrorinfo)
+  end
+end
+struct LibWin32::ILanguageExceptionStackBackTrace
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_stack_back_trace(maxframestocapture : UInt32, stackbacktrace : LibC::UINT_PTR*, framescaptured : UInt32*) : HRESULT
+    @lpVtbl.value.get_stack_back_trace.unsafe_as(Proc(UInt32, LibC::UINT_PTR*, UInt32*, HRESULT)).call(maxframestocapture, stackbacktrace, framescaptured)
+  end
+end
+struct LibWin32::ILanguageExceptionErrorInfo2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_language_exception(languageexception : IUnknown*) : HRESULT
+    @lpVtbl.value.get_language_exception.unsafe_as(Proc(IUnknown*, HRESULT)).call(languageexception)
+  end
+  def get_previous_language_exception_error_info(previouslanguageexceptionerrorinfo : ILanguageExceptionErrorInfo2*) : HRESULT
+    @lpVtbl.value.get_previous_language_exception_error_info.unsafe_as(Proc(ILanguageExceptionErrorInfo2*, HRESULT)).call(previouslanguageexceptionerrorinfo)
+  end
+  def capture_propagation_context(languageexception : IUnknown) : HRESULT
+    @lpVtbl.value.capture_propagation_context.unsafe_as(Proc(IUnknown, HRESULT)).call(languageexception)
+  end
+  def get_propagation_context_head(propagatedlanguageexceptionerrorinfohead : ILanguageExceptionErrorInfo2*) : HRESULT
+    @lpVtbl.value.get_propagation_context_head.unsafe_as(Proc(ILanguageExceptionErrorInfo2*, HRESULT)).call(propagatedlanguageexceptionerrorinfohead)
+  end
+end
+struct LibWin32::IActivationFactory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def activate_instance(instance : IInspectable*) : HRESULT
+    @lpVtbl.value.activate_instance.unsafe_as(Proc(IInspectable*, HRESULT)).call(instance)
+  end
+end
+struct LibWin32::IBufferByteAccess
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def buffer(value : UInt8**) : HRESULT
+    @lpVtbl.value.buffer.unsafe_as(Proc(UInt8**, HRESULT)).call(value)
+  end
+end
+struct LibWin32::IRoSimpleMetaDataBuilder
+  def set_win_rt_interface(iid : Guid) : HRESULT
+    @lpVtbl.value.set_win_rt_interface.unsafe_as(Proc(Guid, HRESULT)).call(iid)
+  end
+  def set_delegate(iid : Guid) : HRESULT
+    @lpVtbl.value.set_delegate.unsafe_as(Proc(Guid, HRESULT)).call(iid)
+  end
+  def set_interface_group_simple_default(name : LibC::LPWSTR, defaultinterfacename : LibC::LPWSTR, defaultinterfaceiid : Guid*) : HRESULT
+    @lpVtbl.value.set_interface_group_simple_default.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Guid*, HRESULT)).call(name, defaultinterfacename, defaultinterfaceiid)
+  end
+  def set_interface_group_parameterized_default(name : LibC::LPWSTR, elementcount : UInt32, defaultinterfacenameelements : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.set_interface_group_parameterized_default.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)).call(name, elementcount, defaultinterfacenameelements)
+  end
+  def set_runtime_class_simple_default(name : LibC::LPWSTR, defaultinterfacename : LibC::LPWSTR, defaultinterfaceiid : Guid*) : HRESULT
+    @lpVtbl.value.set_runtime_class_simple_default.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Guid*, HRESULT)).call(name, defaultinterfacename, defaultinterfaceiid)
+  end
+  def set_runtime_class_parameterized_default(name : LibC::LPWSTR, elementcount : UInt32, defaultinterfacenameelements : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.set_runtime_class_parameterized_default.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)).call(name, elementcount, defaultinterfacenameelements)
+  end
+  def set_struct(name : LibC::LPWSTR, numfields : UInt32, fieldtypenames : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.set_struct.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)).call(name, numfields, fieldtypenames)
+  end
+  def set_enum(name : LibC::LPWSTR, basetype : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_enum.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(name, basetype)
+  end
+  def set_parameterized_interface(piid : Guid, numargs : UInt32) : HRESULT
+    @lpVtbl.value.set_parameterized_interface.unsafe_as(Proc(Guid, UInt32, HRESULT)).call(piid, numargs)
+  end
+  def set_parameterized_delegate(piid : Guid, numargs : UInt32) : HRESULT
+    @lpVtbl.value.set_parameterized_delegate.unsafe_as(Proc(Guid, UInt32, HRESULT)).call(piid, numargs)
+  end
+end
+struct LibWin32::IRoMetaDataLocator
+  def locate(nameelement : LibC::LPWSTR, metadatadestination : IRoSimpleMetaDataBuilder) : HRESULT
+    @lpVtbl.value.locate.unsafe_as(Proc(LibC::LPWSTR, IRoSimpleMetaDataBuilder, HRESULT)).call(nameelement, metadatadestination)
+  end
+end
+struct LibWin32::IMemoryBufferByteAccess
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_buffer(value : UInt8**, capacity : UInt32*) : HRESULT
+    @lpVtbl.value.get_buffer.unsafe_as(Proc(UInt8**, UInt32*, HRESULT)).call(value, capacity)
+  end
+end
+struct LibWin32::IWeakReference
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def resolve(riid : Guid*, objectreference : Void**) : HRESULT
+    @lpVtbl.value.resolve.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, objectreference)
+  end
+end
+struct LibWin32::IWeakReferenceSource
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_weak_reference(weakreference : IWeakReference*) : HRESULT
+    @lpVtbl.value.get_weak_reference.unsafe_as(Proc(IWeakReference*, HRESULT)).call(weakreference)
+  end
+end
+struct LibWin32::ISystemMediaTransportControlsInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def get_for_window(appwindow : LibC::HANDLE, riid : Guid*, mediatransportcontrol : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(appwindow, riid, mediatransportcontrol)
+  end
+end
+struct LibWin32::IShareWindowCommandEventArgsInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_window(value : HANDLE*) : HRESULT
+    @lpVtbl.value.get_window.unsafe_as(Proc(HANDLE*, HRESULT)).call(value)
+  end
+end
+struct LibWin32::IShareWindowCommandSourceInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_for_window(appwindow : LibC::HANDLE, riid : Guid*, sharewindowcommandsource : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(appwindow, riid, sharewindowcommandsource)
+  end
+end
+struct LibWin32::IMessageDispatcher
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def pump_messages : HRESULT
+    @lpVtbl.value.pump_messages.unsafe_as(Proc(HRESULT)).call
+  end
 end

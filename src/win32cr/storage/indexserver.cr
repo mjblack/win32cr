@@ -258,14 +258,14 @@ lib LibWin32
 
 
   struct IFilterVTbl
-    query_interface : Proc(IFilter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFilter*, UInt32)
-    release : Proc(IFilter*, UInt32)
-    init : Proc(IFilter*, UInt32, UInt32, FULLPROPSPEC*, UInt32*, Int32)
-    get_chunk : Proc(IFilter*, STAT_CHUNK*, Int32)
-    get_text : Proc(IFilter*, UInt32*, Char*, Int32)
-    get_value : Proc(IFilter*, PROPVARIANT**, Int32)
-    bind_region : Proc(IFilter*, FILTERREGION, Guid*, Void**, Int32)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    init : UInt64
+    get_chunk : UInt64
+    get_text : UInt64
+    get_value : UInt64
+    bind_region : UInt64
   end
 
   IFilter_GUID = "89bcb740-6119-101a-bcb7-00dd010655af"
@@ -275,11 +275,11 @@ lib LibWin32
   end
 
   struct IPhraseSinkVTbl
-    query_interface : Proc(IPhraseSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPhraseSink*, UInt32)
-    release : Proc(IPhraseSink*, UInt32)
-    put_small_phrase : Proc(IPhraseSink*, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)
-    put_phrase : Proc(IPhraseSink*, LibC::LPWSTR, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    put_small_phrase : UInt64
+    put_phrase : UInt64
   end
 
   IPhraseSink_GUID = "cc906ff0-c058-101a-b554-08002b33b0e6"
@@ -300,4 +300,47 @@ lib LibWin32
 
   # Params # pstm : IStream [In],punkouter : IUnknown [In],ppiunk : Void** [In]
   fun BindIFilterFromStream(pstm : IStream, punkouter : IUnknown, ppiunk : Void**) : HRESULT
+end
+struct LibWin32::IFilter
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def init(grfflags : UInt32, cattributes : UInt32, aattributes : FULLPROPSPEC*, pflags : UInt32*) : Int32
+    @lpVtbl.value.init.unsafe_as(Proc(UInt32, UInt32, FULLPROPSPEC*, UInt32*, Int32)).call(grfflags, cattributes, aattributes, pflags)
+  end
+  def get_chunk(pstat : STAT_CHUNK*) : Int32
+    @lpVtbl.value.get_chunk.unsafe_as(Proc(STAT_CHUNK*, Int32)).call(pstat)
+  end
+  def get_text(pcwcbuffer : UInt32*, awcbuffer : Char*) : Int32
+    @lpVtbl.value.get_text.unsafe_as(Proc(UInt32*, Char*, Int32)).call(pcwcbuffer, awcbuffer)
+  end
+  def get_value(pppropvalue : PROPVARIANT**) : Int32
+    @lpVtbl.value.get_value.unsafe_as(Proc(PROPVARIANT**, Int32)).call(pppropvalue)
+  end
+  def bind_region(origpos : FILTERREGION, riid : Guid*, ppunk : Void**) : Int32
+    @lpVtbl.value.bind_region.unsafe_as(Proc(FILTERREGION, Guid*, Void**, Int32)).call(origpos, riid, ppunk)
+  end
+end
+struct LibWin32::IPhraseSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def put_small_phrase(pwcnoun : LibC::LPWSTR, cwcnoun : UInt32, pwcmodifier : LibC::LPWSTR, cwcmodifier : UInt32, ulattachmenttype : UInt32) : HRESULT
+    @lpVtbl.value.put_small_phrase.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)).call(pwcnoun, cwcnoun, pwcmodifier, cwcmodifier, ulattachmenttype)
+  end
+  def put_phrase(pwcphrase : LibC::LPWSTR, cwcphrase : UInt32) : HRESULT
+    @lpVtbl.value.put_phrase.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(pwcphrase, cwcphrase)
+  end
 end

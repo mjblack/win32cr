@@ -3324,14 +3324,14 @@ lib LibWin32
 
 
   struct IDot11AdHocManagerVTbl
-    query_interface : Proc(IDot11AdHocManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDot11AdHocManager*, UInt32)
-    release : Proc(IDot11AdHocManager*, UInt32)
-    create_network : Proc(IDot11AdHocManager*, LibC::LPWSTR, LibC::LPWSTR, Int32, IDot11AdHocInterface, IDot11AdHocSecuritySettings, Guid*, IDot11AdHocNetwork*, HRESULT)
-    commit_created_network : Proc(IDot11AdHocManager*, IDot11AdHocNetwork, BOOLEAN, BOOLEAN, HRESULT)
-    get_i_enum_dot11_ad_hoc_networks : Proc(IDot11AdHocManager*, Guid*, IEnumDot11AdHocNetworks*, HRESULT)
-    get_i_enum_dot11_ad_hoc_interfaces : Proc(IDot11AdHocManager*, IEnumDot11AdHocInterfaces*, HRESULT)
-    get_network : Proc(IDot11AdHocManager*, Guid*, IDot11AdHocNetwork*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_network : UInt64
+    commit_created_network : UInt64
+    get_i_enum_dot11_ad_hoc_networks : UInt64
+    get_i_enum_dot11_ad_hoc_interfaces : UInt64
+    get_network : UInt64
   end
 
   IDot11AdHocManager_GUID = "8f10cc26-cf0d-42a0-acbe-e2de7007384d"
@@ -3341,13 +3341,13 @@ lib LibWin32
   end
 
   struct IDot11AdHocManagerNotificationSinkVTbl
-    query_interface : Proc(IDot11AdHocManagerNotificationSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDot11AdHocManagerNotificationSink*, UInt32)
-    release : Proc(IDot11AdHocManagerNotificationSink*, UInt32)
-    on_network_add : Proc(IDot11AdHocManagerNotificationSink*, IDot11AdHocNetwork, HRESULT)
-    on_network_remove : Proc(IDot11AdHocManagerNotificationSink*, Guid*, HRESULT)
-    on_interface_add : Proc(IDot11AdHocManagerNotificationSink*, IDot11AdHocInterface, HRESULT)
-    on_interface_remove : Proc(IDot11AdHocManagerNotificationSink*, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_network_add : UInt64
+    on_network_remove : UInt64
+    on_interface_add : UInt64
+    on_interface_remove : UInt64
   end
 
   IDot11AdHocManagerNotificationSink_GUID = "8f10cc27-cf0d-42a0-acbe-e2de7007384d"
@@ -3357,13 +3357,13 @@ lib LibWin32
   end
 
   struct IEnumDot11AdHocNetworksVTbl
-    query_interface : Proc(IEnumDot11AdHocNetworks*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumDot11AdHocNetworks*, UInt32)
-    release : Proc(IEnumDot11AdHocNetworks*, UInt32)
-    next : Proc(IEnumDot11AdHocNetworks*, UInt32, IDot11AdHocNetwork*, UInt32*, HRESULT)
-    skip : Proc(IEnumDot11AdHocNetworks*, UInt32, HRESULT)
-    reset : Proc(IEnumDot11AdHocNetworks*, HRESULT)
-    clone : Proc(IEnumDot11AdHocNetworks*, IEnumDot11AdHocNetworks*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IEnumDot11AdHocNetworks_GUID = "8f10cc28-cf0d-42a0-acbe-e2de7007384d"
@@ -3373,21 +3373,21 @@ lib LibWin32
   end
 
   struct IDot11AdHocNetworkVTbl
-    query_interface : Proc(IDot11AdHocNetwork*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDot11AdHocNetwork*, UInt32)
-    release : Proc(IDot11AdHocNetwork*, UInt32)
-    get_status : Proc(IDot11AdHocNetwork*, DOT11_ADHOC_NETWORK_CONNECTION_STATUS*, HRESULT)
-    get_ssid : Proc(IDot11AdHocNetwork*, LibC::LPWSTR*, HRESULT)
-    has_profile : Proc(IDot11AdHocNetwork*, UInt8*, HRESULT)
-    get_profile_name : Proc(IDot11AdHocNetwork*, LibC::LPWSTR*, HRESULT)
-    delete_profile : Proc(IDot11AdHocNetwork*, HRESULT)
-    get_signal_quality : Proc(IDot11AdHocNetwork*, UInt32*, UInt32*, HRESULT)
-    get_security_setting : Proc(IDot11AdHocNetwork*, IDot11AdHocSecuritySettings*, HRESULT)
-    get_context_guid : Proc(IDot11AdHocNetwork*, Guid*, HRESULT)
-    get_signature : Proc(IDot11AdHocNetwork*, Guid*, HRESULT)
-    get_interface : Proc(IDot11AdHocNetwork*, IDot11AdHocInterface*, HRESULT)
-    connect : Proc(IDot11AdHocNetwork*, LibC::LPWSTR, Int32, BOOLEAN, BOOLEAN, HRESULT)
-    disconnect : Proc(IDot11AdHocNetwork*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_status : UInt64
+    get_ssid : UInt64
+    has_profile : UInt64
+    get_profile_name : UInt64
+    delete_profile : UInt64
+    get_signal_quality : UInt64
+    get_security_setting : UInt64
+    get_context_guid : UInt64
+    get_signature : UInt64
+    get_interface : UInt64
+    connect : UInt64
+    disconnect : UInt64
   end
 
   IDot11AdHocNetwork_GUID = "8f10cc29-cf0d-42a0-acbe-e2de7007384d"
@@ -3397,11 +3397,11 @@ lib LibWin32
   end
 
   struct IDot11AdHocNetworkNotificationSinkVTbl
-    query_interface : Proc(IDot11AdHocNetworkNotificationSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDot11AdHocNetworkNotificationSink*, UInt32)
-    release : Proc(IDot11AdHocNetworkNotificationSink*, UInt32)
-    on_status_change : Proc(IDot11AdHocNetworkNotificationSink*, DOT11_ADHOC_NETWORK_CONNECTION_STATUS, HRESULT)
-    on_connect_fail : Proc(IDot11AdHocNetworkNotificationSink*, DOT11_ADHOC_CONNECT_FAIL_REASON, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_status_change : UInt64
+    on_connect_fail : UInt64
   end
 
   IDot11AdHocNetworkNotificationSink_GUID = "8f10cc2a-cf0d-42a0-acbe-e2de7007384d"
@@ -3411,18 +3411,18 @@ lib LibWin32
   end
 
   struct IDot11AdHocInterfaceVTbl
-    query_interface : Proc(IDot11AdHocInterface*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDot11AdHocInterface*, UInt32)
-    release : Proc(IDot11AdHocInterface*, UInt32)
-    get_device_signature : Proc(IDot11AdHocInterface*, Guid*, HRESULT)
-    get_friendly_name : Proc(IDot11AdHocInterface*, LibC::LPWSTR*, HRESULT)
-    is_dot11d : Proc(IDot11AdHocInterface*, UInt8*, HRESULT)
-    is_ad_hoc_capable : Proc(IDot11AdHocInterface*, UInt8*, HRESULT)
-    is_radio_on : Proc(IDot11AdHocInterface*, UInt8*, HRESULT)
-    get_active_network : Proc(IDot11AdHocInterface*, IDot11AdHocNetwork*, HRESULT)
-    get_i_enum_security_settings : Proc(IDot11AdHocInterface*, IEnumDot11AdHocSecuritySettings*, HRESULT)
-    get_i_enum_dot11_ad_hoc_networks : Proc(IDot11AdHocInterface*, Guid*, IEnumDot11AdHocNetworks*, HRESULT)
-    get_status : Proc(IDot11AdHocInterface*, DOT11_ADHOC_NETWORK_CONNECTION_STATUS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_device_signature : UInt64
+    get_friendly_name : UInt64
+    is_dot11d : UInt64
+    is_ad_hoc_capable : UInt64
+    is_radio_on : UInt64
+    get_active_network : UInt64
+    get_i_enum_security_settings : UInt64
+    get_i_enum_dot11_ad_hoc_networks : UInt64
+    get_status : UInt64
   end
 
   IDot11AdHocInterface_GUID = "8f10cc2b-cf0d-42a0-acbe-e2de7007384d"
@@ -3432,13 +3432,13 @@ lib LibWin32
   end
 
   struct IEnumDot11AdHocInterfacesVTbl
-    query_interface : Proc(IEnumDot11AdHocInterfaces*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumDot11AdHocInterfaces*, UInt32)
-    release : Proc(IEnumDot11AdHocInterfaces*, UInt32)
-    next : Proc(IEnumDot11AdHocInterfaces*, UInt32, IDot11AdHocInterface*, UInt32*, HRESULT)
-    skip : Proc(IEnumDot11AdHocInterfaces*, UInt32, HRESULT)
-    reset : Proc(IEnumDot11AdHocInterfaces*, HRESULT)
-    clone : Proc(IEnumDot11AdHocInterfaces*, IEnumDot11AdHocInterfaces*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IEnumDot11AdHocInterfaces_GUID = "8f10cc2c-cf0d-42a0-acbe-e2de7007384d"
@@ -3448,13 +3448,13 @@ lib LibWin32
   end
 
   struct IEnumDot11AdHocSecuritySettingsVTbl
-    query_interface : Proc(IEnumDot11AdHocSecuritySettings*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumDot11AdHocSecuritySettings*, UInt32)
-    release : Proc(IEnumDot11AdHocSecuritySettings*, UInt32)
-    next : Proc(IEnumDot11AdHocSecuritySettings*, UInt32, IDot11AdHocSecuritySettings*, UInt32*, HRESULT)
-    skip : Proc(IEnumDot11AdHocSecuritySettings*, UInt32, HRESULT)
-    reset : Proc(IEnumDot11AdHocSecuritySettings*, HRESULT)
-    clone : Proc(IEnumDot11AdHocSecuritySettings*, IEnumDot11AdHocSecuritySettings*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    next : UInt64
+    skip : UInt64
+    reset : UInt64
+    clone : UInt64
   end
 
   IEnumDot11AdHocSecuritySettings_GUID = "8f10cc2d-cf0d-42a0-acbe-e2de7007384d"
@@ -3464,11 +3464,11 @@ lib LibWin32
   end
 
   struct IDot11AdHocSecuritySettingsVTbl
-    query_interface : Proc(IDot11AdHocSecuritySettings*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDot11AdHocSecuritySettings*, UInt32)
-    release : Proc(IDot11AdHocSecuritySettings*, UInt32)
-    get_dot11_auth_algorithm : Proc(IDot11AdHocSecuritySettings*, DOT11_ADHOC_AUTH_ALGORITHM*, HRESULT)
-    get_dot11_cipher_algorithm : Proc(IDot11AdHocSecuritySettings*, DOT11_ADHOC_CIPHER_ALGORITHM*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_dot11_auth_algorithm : UInt64
+    get_dot11_cipher_algorithm : UInt64
   end
 
   IDot11AdHocSecuritySettings_GUID = "8f10cc2e-cf0d-42a0-acbe-e2de7007384d"
@@ -3478,10 +3478,10 @@ lib LibWin32
   end
 
   struct IDot11AdHocInterfaceNotificationSinkVTbl
-    query_interface : Proc(IDot11AdHocInterfaceNotificationSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDot11AdHocInterfaceNotificationSink*, UInt32)
-    release : Proc(IDot11AdHocInterfaceNotificationSink*, UInt32)
-    on_connection_status_change : Proc(IDot11AdHocInterfaceNotificationSink*, DOT11_ADHOC_NETWORK_CONNECTION_STATUS, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    on_connection_status_change : UInt64
   end
 
   IDot11AdHocInterfaceNotificationSink_GUID = "8f10cc2f-cf0d-42a0-acbe-e2de7007384d"
@@ -3606,7 +3606,7 @@ lib LibWin32
   fun WlanAllocateMemory(dwmemorysize : UInt32) : Void*
 
   # Params # pmemory : Void* [In]
-  fun WlanFreeMemory(pmemory : Void*)
+  fun WlanFreeMemory(pmemory : Void*) : Void
 
   # Params # hclienthandle : LibC::HANDLE [In],securableobject : WLAN_SECURABLE_OBJECT [In],strmodifiedsddl : LibC::LPWSTR [In]
   fun WlanSetSecuritySettings(hclienthandle : LibC::HANDLE, securableobject : WLAN_SECURABLE_OBJECT, strmodifiedsddl : LibC::LPWSTR) : UInt32
@@ -3673,4 +3673,255 @@ lib LibWin32
 
   # Params # pdeviceaddress : UInt8** [In]
   fun WFDUpdateDeviceVisibility(pdeviceaddress : UInt8**) : UInt32
+end
+struct LibWin32::IDot11AdHocManager
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_network(name : LibC::LPWSTR, password : LibC::LPWSTR, geographicalid : Int32, pinterface : IDot11AdHocInterface, psecurity : IDot11AdHocSecuritySettings, pcontextguid : Guid*, piadhoc : IDot11AdHocNetwork*) : HRESULT
+    @lpVtbl.value.create_network.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, Int32, IDot11AdHocInterface, IDot11AdHocSecuritySettings, Guid*, IDot11AdHocNetwork*, HRESULT)).call(name, password, geographicalid, pinterface, psecurity, pcontextguid, piadhoc)
+  end
+  def commit_created_network(piadhoc : IDot11AdHocNetwork, fsaveprofile : BOOLEAN, fmakesavedprofileuserspecific : BOOLEAN) : HRESULT
+    @lpVtbl.value.commit_created_network.unsafe_as(Proc(IDot11AdHocNetwork, BOOLEAN, BOOLEAN, HRESULT)).call(piadhoc, fsaveprofile, fmakesavedprofileuserspecific)
+  end
+  def get_i_enum_dot11_ad_hoc_networks(pcontextguid : Guid*, ppenum : IEnumDot11AdHocNetworks*) : HRESULT
+    @lpVtbl.value.get_i_enum_dot11_ad_hoc_networks.unsafe_as(Proc(Guid*, IEnumDot11AdHocNetworks*, HRESULT)).call(pcontextguid, ppenum)
+  end
+  def get_i_enum_dot11_ad_hoc_interfaces(ppenum : IEnumDot11AdHocInterfaces*) : HRESULT
+    @lpVtbl.value.get_i_enum_dot11_ad_hoc_interfaces.unsafe_as(Proc(IEnumDot11AdHocInterfaces*, HRESULT)).call(ppenum)
+  end
+  def get_network(networksignature : Guid*, pnetwork : IDot11AdHocNetwork*) : HRESULT
+    @lpVtbl.value.get_network.unsafe_as(Proc(Guid*, IDot11AdHocNetwork*, HRESULT)).call(networksignature, pnetwork)
+  end
+end
+struct LibWin32::IDot11AdHocManagerNotificationSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_network_add(piadhocnetwork : IDot11AdHocNetwork) : HRESULT
+    @lpVtbl.value.on_network_add.unsafe_as(Proc(IDot11AdHocNetwork, HRESULT)).call(piadhocnetwork)
+  end
+  def on_network_remove(signature : Guid*) : HRESULT
+    @lpVtbl.value.on_network_remove.unsafe_as(Proc(Guid*, HRESULT)).call(signature)
+  end
+  def on_interface_add(piadhocinterface : IDot11AdHocInterface) : HRESULT
+    @lpVtbl.value.on_interface_add.unsafe_as(Proc(IDot11AdHocInterface, HRESULT)).call(piadhocinterface)
+  end
+  def on_interface_remove(signature : Guid*) : HRESULT
+    @lpVtbl.value.on_interface_remove.unsafe_as(Proc(Guid*, HRESULT)).call(signature)
+  end
+end
+struct LibWin32::IEnumDot11AdHocNetworks
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : IDot11AdHocNetwork*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IDot11AdHocNetwork*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumDot11AdHocNetworks*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumDot11AdHocNetworks*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IDot11AdHocNetwork
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_status(estatus : DOT11_ADHOC_NETWORK_CONNECTION_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(DOT11_ADHOC_NETWORK_CONNECTION_STATUS*, HRESULT)).call(estatus)
+  end
+  def get_ssid(ppszwssid : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_ssid.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszwssid)
+  end
+  def has_profile(pf11d : UInt8*) : HRESULT
+    @lpVtbl.value.has_profile.unsafe_as(Proc(UInt8*, HRESULT)).call(pf11d)
+  end
+  def get_profile_name(ppszwprofilename : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_profile_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszwprofilename)
+  end
+  def delete_profile : HRESULT
+    @lpVtbl.value.delete_profile.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_signal_quality(pustrengthvalue : UInt32*, pustrengthmax : UInt32*) : HRESULT
+    @lpVtbl.value.get_signal_quality.unsafe_as(Proc(UInt32*, UInt32*, HRESULT)).call(pustrengthvalue, pustrengthmax)
+  end
+  def get_security_setting(padhocsecuritysetting : IDot11AdHocSecuritySettings*) : HRESULT
+    @lpVtbl.value.get_security_setting.unsafe_as(Proc(IDot11AdHocSecuritySettings*, HRESULT)).call(padhocsecuritysetting)
+  end
+  def get_context_guid(pcontextguid : Guid*) : HRESULT
+    @lpVtbl.value.get_context_guid.unsafe_as(Proc(Guid*, HRESULT)).call(pcontextguid)
+  end
+  def get_signature(psignature : Guid*) : HRESULT
+    @lpVtbl.value.get_signature.unsafe_as(Proc(Guid*, HRESULT)).call(psignature)
+  end
+  def get_interface(padhocinterface : IDot11AdHocInterface*) : HRESULT
+    @lpVtbl.value.get_interface.unsafe_as(Proc(IDot11AdHocInterface*, HRESULT)).call(padhocinterface)
+  end
+  def connect(passphrase : LibC::LPWSTR, geographicalid : Int32, fsaveprofile : BOOLEAN, fmakesavedprofileuserspecific : BOOLEAN) : HRESULT
+    @lpVtbl.value.connect.unsafe_as(Proc(LibC::LPWSTR, Int32, BOOLEAN, BOOLEAN, HRESULT)).call(passphrase, geographicalid, fsaveprofile, fmakesavedprofileuserspecific)
+  end
+  def disconnect : HRESULT
+    @lpVtbl.value.disconnect.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IDot11AdHocNetworkNotificationSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_status_change(estatus : DOT11_ADHOC_NETWORK_CONNECTION_STATUS) : HRESULT
+    @lpVtbl.value.on_status_change.unsafe_as(Proc(DOT11_ADHOC_NETWORK_CONNECTION_STATUS, HRESULT)).call(estatus)
+  end
+  def on_connect_fail(efailreason : DOT11_ADHOC_CONNECT_FAIL_REASON) : HRESULT
+    @lpVtbl.value.on_connect_fail.unsafe_as(Proc(DOT11_ADHOC_CONNECT_FAIL_REASON, HRESULT)).call(efailreason)
+  end
+end
+struct LibWin32::IDot11AdHocInterface
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_device_signature(psignature : Guid*) : HRESULT
+    @lpVtbl.value.get_device_signature.unsafe_as(Proc(Guid*, HRESULT)).call(psignature)
+  end
+  def get_friendly_name(ppszname : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_friendly_name.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszname)
+  end
+  def is_dot11d(pf11d : UInt8*) : HRESULT
+    @lpVtbl.value.is_dot11d.unsafe_as(Proc(UInt8*, HRESULT)).call(pf11d)
+  end
+  def is_ad_hoc_capable(pfadhoccapable : UInt8*) : HRESULT
+    @lpVtbl.value.is_ad_hoc_capable.unsafe_as(Proc(UInt8*, HRESULT)).call(pfadhoccapable)
+  end
+  def is_radio_on(pfisradioon : UInt8*) : HRESULT
+    @lpVtbl.value.is_radio_on.unsafe_as(Proc(UInt8*, HRESULT)).call(pfisradioon)
+  end
+  def get_active_network(ppnetwork : IDot11AdHocNetwork*) : HRESULT
+    @lpVtbl.value.get_active_network.unsafe_as(Proc(IDot11AdHocNetwork*, HRESULT)).call(ppnetwork)
+  end
+  def get_i_enum_security_settings(ppenum : IEnumDot11AdHocSecuritySettings*) : HRESULT
+    @lpVtbl.value.get_i_enum_security_settings.unsafe_as(Proc(IEnumDot11AdHocSecuritySettings*, HRESULT)).call(ppenum)
+  end
+  def get_i_enum_dot11_ad_hoc_networks(pfilterguid : Guid*, ppenum : IEnumDot11AdHocNetworks*) : HRESULT
+    @lpVtbl.value.get_i_enum_dot11_ad_hoc_networks.unsafe_as(Proc(Guid*, IEnumDot11AdHocNetworks*, HRESULT)).call(pfilterguid, ppenum)
+  end
+  def get_status(pstate : DOT11_ADHOC_NETWORK_CONNECTION_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(DOT11_ADHOC_NETWORK_CONNECTION_STATUS*, HRESULT)).call(pstate)
+  end
+end
+struct LibWin32::IEnumDot11AdHocInterfaces
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : IDot11AdHocInterface*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IDot11AdHocInterface*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumDot11AdHocInterfaces*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumDot11AdHocInterfaces*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IEnumDot11AdHocSecuritySettings
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def next(celt : UInt32, rgelt : IDot11AdHocSecuritySettings*, pceltfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, IDot11AdHocSecuritySettings*, UInt32*, HRESULT)).call(celt, rgelt, pceltfetched)
+  end
+  def skip(celt : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(celt)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def clone(ppenum : IEnumDot11AdHocSecuritySettings*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumDot11AdHocSecuritySettings*, HRESULT)).call(ppenum)
+  end
+end
+struct LibWin32::IDot11AdHocSecuritySettings
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_dot11_auth_algorithm(pauth : DOT11_ADHOC_AUTH_ALGORITHM*) : HRESULT
+    @lpVtbl.value.get_dot11_auth_algorithm.unsafe_as(Proc(DOT11_ADHOC_AUTH_ALGORITHM*, HRESULT)).call(pauth)
+  end
+  def get_dot11_cipher_algorithm(pcipher : DOT11_ADHOC_CIPHER_ALGORITHM*) : HRESULT
+    @lpVtbl.value.get_dot11_cipher_algorithm.unsafe_as(Proc(DOT11_ADHOC_CIPHER_ALGORITHM*, HRESULT)).call(pcipher)
+  end
+end
+struct LibWin32::IDot11AdHocInterfaceNotificationSink
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def on_connection_status_change(estatus : DOT11_ADHOC_NETWORK_CONNECTION_STATUS) : HRESULT
+    @lpVtbl.value.on_connection_status_change.unsafe_as(Proc(DOT11_ADHOC_NETWORK_CONNECTION_STATUS, HRESULT)).call(estatus)
+  end
 end

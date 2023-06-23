@@ -14,14 +14,14 @@ require "../../graphics/printing.cr"
 lib LibWin32
 
   struct IPrinting3DManagerInteropVTbl
-    query_interface : Proc(IPrinting3DManagerInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPrinting3DManagerInterop*, UInt32)
-    release : Proc(IPrinting3DManagerInterop*, UInt32)
-    get_iids : Proc(IPrinting3DManagerInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IPrinting3DManagerInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IPrinting3DManagerInterop*, TrustLevel*, HRESULT)
-    get_for_window : Proc(IPrinting3DManagerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    show_print_ui_for_window_async : Proc(IPrinting3DManagerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    get_for_window : UInt64
+    show_print_ui_for_window_async : UInt64
   end
 
   IPrinting3DManagerInterop_GUID = "9ca31010-1484-4587-b26b-dddf9f9caecd"
@@ -31,14 +31,14 @@ lib LibWin32
   end
 
   struct IPrintManagerInteropVTbl
-    query_interface : Proc(IPrintManagerInterop*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPrintManagerInterop*, UInt32)
-    release : Proc(IPrintManagerInterop*, UInt32)
-    get_iids : Proc(IPrintManagerInterop*, UInt32*, Guid**, HRESULT)
-    get_runtime_class_name : Proc(IPrintManagerInterop*, HSTRING*, HRESULT)
-    get_trust_level : Proc(IPrintManagerInterop*, TrustLevel*, HRESULT)
-    get_for_window : Proc(IPrintManagerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
-    show_print_ui_for_window_async : Proc(IPrintManagerInterop*, LibC::HANDLE, Guid*, Void**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_iids : UInt64
+    get_runtime_class_name : UInt64
+    get_trust_level : UInt64
+    get_for_window : UInt64
+    show_print_ui_for_window_async : UInt64
   end
 
   IPrintManagerInterop_GUID = "c5435a42-8d43-4e7b-a68a-ef311e392087"
@@ -48,14 +48,14 @@ lib LibWin32
   end
 
   struct IPrintWorkflowXpsReceiverVTbl
-    query_interface : Proc(IPrintWorkflowXpsReceiver*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPrintWorkflowXpsReceiver*, UInt32)
-    release : Proc(IPrintWorkflowXpsReceiver*, UInt32)
-    set_document_sequence_print_ticket : Proc(IPrintWorkflowXpsReceiver*, IStream, HRESULT)
-    set_document_sequence_uri : Proc(IPrintWorkflowXpsReceiver*, LibC::LPWSTR, HRESULT)
-    add_document_data : Proc(IPrintWorkflowXpsReceiver*, UInt32, IStream, LibC::LPWSTR, HRESULT)
-    add_page : Proc(IPrintWorkflowXpsReceiver*, UInt32, UInt32, IXpsOMPageReference, LibC::LPWSTR, HRESULT)
-    close : Proc(IPrintWorkflowXpsReceiver*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_document_sequence_print_ticket : UInt64
+    set_document_sequence_uri : UInt64
+    add_document_data : UInt64
+    add_page : UInt64
+    close : UInt64
   end
 
   IPrintWorkflowXpsReceiver_GUID = "04097374-77b8-47f6-8167-aae29d4cf84b"
@@ -65,15 +65,15 @@ lib LibWin32
   end
 
   struct IPrintWorkflowXpsReceiver2VTbl
-    query_interface : Proc(IPrintWorkflowXpsReceiver2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPrintWorkflowXpsReceiver2*, UInt32)
-    release : Proc(IPrintWorkflowXpsReceiver2*, UInt32)
-    set_document_sequence_print_ticket : Proc(IPrintWorkflowXpsReceiver2*, IStream, HRESULT)
-    set_document_sequence_uri : Proc(IPrintWorkflowXpsReceiver2*, LibC::LPWSTR, HRESULT)
-    add_document_data : Proc(IPrintWorkflowXpsReceiver2*, UInt32, IStream, LibC::LPWSTR, HRESULT)
-    add_page : Proc(IPrintWorkflowXpsReceiver2*, UInt32, UInt32, IXpsOMPageReference, LibC::LPWSTR, HRESULT)
-    close : Proc(IPrintWorkflowXpsReceiver2*, HRESULT)
-    failed : Proc(IPrintWorkflowXpsReceiver2*, HRESULT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_document_sequence_print_ticket : UInt64
+    set_document_sequence_uri : UInt64
+    add_document_data : UInt64
+    add_page : UInt64
+    close : UInt64
+    failed : UInt64
   end
 
   IPrintWorkflowXpsReceiver2_GUID = "023bcc0c-dfab-4a61-b074-490c6995580d"
@@ -83,11 +83,11 @@ lib LibWin32
   end
 
   struct IPrintWorkflowObjectModelSourceFileContentNativeVTbl
-    query_interface : Proc(IPrintWorkflowObjectModelSourceFileContentNative*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPrintWorkflowObjectModelSourceFileContentNative*, UInt32)
-    release : Proc(IPrintWorkflowObjectModelSourceFileContentNative*, UInt32)
-    start_xps_om_generation : Proc(IPrintWorkflowObjectModelSourceFileContentNative*, IPrintWorkflowXpsReceiver, HRESULT)
-    get_object_factory : Proc(IPrintWorkflowObjectModelSourceFileContentNative*, IXpsOMObjectFactory1*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    start_xps_om_generation : UInt64
+    get_object_factory : UInt64
   end
 
   IPrintWorkflowObjectModelSourceFileContentNative_GUID = "68c9e477-993e-4052-8ac6-454eff58db9d"
@@ -97,10 +97,10 @@ lib LibWin32
   end
 
   struct IPrintWorkflowXpsObjectModelTargetPackageNativeVTbl
-    query_interface : Proc(IPrintWorkflowXpsObjectModelTargetPackageNative*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPrintWorkflowXpsObjectModelTargetPackageNative*, UInt32)
-    release : Proc(IPrintWorkflowXpsObjectModelTargetPackageNative*, UInt32)
-    get_document_package_target : Proc(IPrintWorkflowXpsObjectModelTargetPackageNative*, IXpsDocumentPackageTarget*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_document_package_target : UInt64
   end
 
   IPrintWorkflowXpsObjectModelTargetPackageNative_GUID = "7d96bc74-9b54-4ca1-ad3a-979c3d44ddac"
@@ -110,12 +110,12 @@ lib LibWin32
   end
 
   struct IPrintWorkflowConfigurationNativeVTbl
-    query_interface : Proc(IPrintWorkflowConfigurationNative*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPrintWorkflowConfigurationNative*, UInt32)
-    release : Proc(IPrintWorkflowConfigurationNative*, UInt32)
-    get_printer_queue : Proc(IPrintWorkflowConfigurationNative*, IPrinterQueue*, HRESULT)
-    get_driver_properties : Proc(IPrintWorkflowConfigurationNative*, IPrinterPropertyBag*, HRESULT)
-    get_user_properties : Proc(IPrintWorkflowConfigurationNative*, IPrinterPropertyBag*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_printer_queue : UInt64
+    get_driver_properties : UInt64
+    get_user_properties : UInt64
   end
 
   IPrintWorkflowConfigurationNative_GUID = "c056be0a-9ee2-450a-9823-964f0006f2bb"
@@ -124,4 +124,162 @@ lib LibWin32
     lpVtbl : IPrintWorkflowConfigurationNativeVTbl*
   end
 
+end
+struct LibWin32::IPrinting3DManagerInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def get_for_window(appwindow : LibC::HANDLE, riid : Guid*, printmanager : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(appwindow, riid, printmanager)
+  end
+  def show_print_ui_for_window_async(appwindow : LibC::HANDLE, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.show_print_ui_for_window_async.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(appwindow, riid, asyncoperation)
+  end
+end
+struct LibWin32::IPrintManagerInterop
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_iids(iidcount : UInt32*, iids : Guid**) : HRESULT
+    @lpVtbl.value.get_iids.unsafe_as(Proc(UInt32*, Guid**, HRESULT)).call(iidcount, iids)
+  end
+  def get_runtime_class_name(classname : HSTRING*) : HRESULT
+    @lpVtbl.value.get_runtime_class_name.unsafe_as(Proc(HSTRING*, HRESULT)).call(classname)
+  end
+  def get_trust_level(trustlevel : TrustLevel*) : HRESULT
+    @lpVtbl.value.get_trust_level.unsafe_as(Proc(TrustLevel*, HRESULT)).call(trustlevel)
+  end
+  def get_for_window(appwindow : LibC::HANDLE, riid : Guid*, printmanager : Void**) : HRESULT
+    @lpVtbl.value.get_for_window.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(appwindow, riid, printmanager)
+  end
+  def show_print_ui_for_window_async(appwindow : LibC::HANDLE, riid : Guid*, asyncoperation : Void**) : HRESULT
+    @lpVtbl.value.show_print_ui_for_window_async.unsafe_as(Proc(LibC::HANDLE, Guid*, Void**, HRESULT)).call(appwindow, riid, asyncoperation)
+  end
+end
+struct LibWin32::IPrintWorkflowXpsReceiver
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_document_sequence_print_ticket(documentsequenceprintticket : IStream) : HRESULT
+    @lpVtbl.value.set_document_sequence_print_ticket.unsafe_as(Proc(IStream, HRESULT)).call(documentsequenceprintticket)
+  end
+  def set_document_sequence_uri(documentsequenceuri : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_document_sequence_uri.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(documentsequenceuri)
+  end
+  def add_document_data(documentid : UInt32, documentprintticket : IStream, documenturi : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_document_data.unsafe_as(Proc(UInt32, IStream, LibC::LPWSTR, HRESULT)).call(documentid, documentprintticket, documenturi)
+  end
+  def add_page(documentid : UInt32, pageid : UInt32, pagereference : IXpsOMPageReference, pageuri : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_page.unsafe_as(Proc(UInt32, UInt32, IXpsOMPageReference, LibC::LPWSTR, HRESULT)).call(documentid, pageid, pagereference, pageuri)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IPrintWorkflowXpsReceiver2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_document_sequence_print_ticket(documentsequenceprintticket : IStream) : HRESULT
+    @lpVtbl.value.set_document_sequence_print_ticket.unsafe_as(Proc(IStream, HRESULT)).call(documentsequenceprintticket)
+  end
+  def set_document_sequence_uri(documentsequenceuri : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.set_document_sequence_uri.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(documentsequenceuri)
+  end
+  def add_document_data(documentid : UInt32, documentprintticket : IStream, documenturi : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_document_data.unsafe_as(Proc(UInt32, IStream, LibC::LPWSTR, HRESULT)).call(documentid, documentprintticket, documenturi)
+  end
+  def add_page(documentid : UInt32, pageid : UInt32, pagereference : IXpsOMPageReference, pageuri : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_page.unsafe_as(Proc(UInt32, UInt32, IXpsOMPageReference, LibC::LPWSTR, HRESULT)).call(documentid, pageid, pagereference, pageuri)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def failed(xpserror : HRESULT) : HRESULT
+    @lpVtbl.value.failed.unsafe_as(Proc(HRESULT, HRESULT)).call(xpserror)
+  end
+end
+struct LibWin32::IPrintWorkflowObjectModelSourceFileContentNative
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def start_xps_om_generation(receiver : IPrintWorkflowXpsReceiver) : HRESULT
+    @lpVtbl.value.start_xps_om_generation.unsafe_as(Proc(IPrintWorkflowXpsReceiver, HRESULT)).call(receiver)
+  end
+  def get_object_factory(value : IXpsOMObjectFactory1*) : HRESULT
+    @lpVtbl.value.get_object_factory.unsafe_as(Proc(IXpsOMObjectFactory1*, HRESULT)).call(value)
+  end
+end
+struct LibWin32::IPrintWorkflowXpsObjectModelTargetPackageNative
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_document_package_target(value : IXpsDocumentPackageTarget*) : HRESULT
+    @lpVtbl.value.get_document_package_target.unsafe_as(Proc(IXpsDocumentPackageTarget*, HRESULT)).call(value)
+  end
+end
+struct LibWin32::IPrintWorkflowConfigurationNative
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_printer_queue(value : IPrinterQueue*) : HRESULT
+    @lpVtbl.value.get_printer_queue.unsafe_as(Proc(IPrinterQueue*, HRESULT)).call(value)
+  end
+  def get_driver_properties(value : IPrinterPropertyBag*) : HRESULT
+    @lpVtbl.value.get_driver_properties.unsafe_as(Proc(IPrinterPropertyBag*, HRESULT)).call(value)
+  end
+  def get_user_properties(value : IPrinterPropertyBag*) : HRESULT
+    @lpVtbl.value.get_user_properties.unsafe_as(Proc(IPrinterPropertyBag*, HRESULT)).call(value)
+  end
 end

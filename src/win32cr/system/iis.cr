@@ -1291,10 +1291,10 @@ lib LibWin32
 
 
   struct IFtpProviderConstructVTbl
-    query_interface : Proc(IFtpProviderConstruct*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFtpProviderConstruct*, UInt32)
-    release : Proc(IFtpProviderConstruct*, UInt32)
-    construct : Proc(IFtpProviderConstruct*, SAFEARRAY*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    construct : UInt64
   end
 
   IFtpProviderConstruct_GUID = "4d1a3f7b-412d-447c-b199-64f967e9a2da"
@@ -1304,10 +1304,10 @@ lib LibWin32
   end
 
   struct IFtpAuthenticationProviderVTbl
-    query_interface : Proc(IFtpAuthenticationProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFtpAuthenticationProvider*, UInt32)
-    release : Proc(IFtpAuthenticationProvider*, UInt32)
-    authenticate_user : Proc(IFtpAuthenticationProvider*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    authenticate_user : UInt64
   end
 
   IFtpAuthenticationProvider_GUID = "4659f95c-d5a8-4707-b2fc-6fd5794246cf"
@@ -1317,11 +1317,11 @@ lib LibWin32
   end
 
   struct AsyncIFtpAuthenticationProviderVTbl
-    query_interface : Proc(AsyncIFtpAuthenticationProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AsyncIFtpAuthenticationProvider*, UInt32)
-    release : Proc(AsyncIFtpAuthenticationProvider*, UInt32)
-    begin_authenticate_user : Proc(AsyncIFtpAuthenticationProvider*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    finish_authenticate_user : Proc(AsyncIFtpAuthenticationProvider*, LibC::LPWSTR*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_authenticate_user : UInt64
+    finish_authenticate_user : UInt64
   end
 
   AsyncIFtpAuthenticationProvider_GUID = "c24efb65-9f3e-4996-8fb1-ce166916bab5"
@@ -1331,10 +1331,10 @@ lib LibWin32
   end
 
   struct IFtpRoleProviderVTbl
-    query_interface : Proc(IFtpRoleProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFtpRoleProvider*, UInt32)
-    release : Proc(IFtpRoleProvider*, UInt32)
-    is_user_in_role : Proc(IFtpRoleProvider*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    is_user_in_role : UInt64
   end
 
   IFtpRoleProvider_GUID = "909c850d-8ca0-4674-96b8-cc2941535725"
@@ -1344,11 +1344,11 @@ lib LibWin32
   end
 
   struct AsyncIFtpRoleProviderVTbl
-    query_interface : Proc(AsyncIFtpRoleProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AsyncIFtpRoleProvider*, UInt32)
-    release : Proc(AsyncIFtpRoleProvider*, UInt32)
-    begin_is_user_in_role : Proc(AsyncIFtpRoleProvider*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    finish_is_user_in_role : Proc(AsyncIFtpRoleProvider*, LibC::BOOL*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_is_user_in_role : UInt64
+    finish_is_user_in_role : UInt64
   end
 
   AsyncIFtpRoleProvider_GUID = "3e83bf99-70ec-41ca-84b6-aca7c7a62caf"
@@ -1358,10 +1358,10 @@ lib LibWin32
   end
 
   struct IFtpHomeDirectoryProviderVTbl
-    query_interface : Proc(IFtpHomeDirectoryProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFtpHomeDirectoryProvider*, UInt32)
-    release : Proc(IFtpHomeDirectoryProvider*, UInt32)
-    get_user_home_directory_data : Proc(IFtpHomeDirectoryProvider*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_user_home_directory_data : UInt64
   end
 
   IFtpHomeDirectoryProvider_GUID = "0933b392-18dd-4097-8b9c-83325c35d9a6"
@@ -1371,11 +1371,11 @@ lib LibWin32
   end
 
   struct AsyncIFtpHomeDirectoryProviderVTbl
-    query_interface : Proc(AsyncIFtpHomeDirectoryProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AsyncIFtpHomeDirectoryProvider*, UInt32)
-    release : Proc(AsyncIFtpHomeDirectoryProvider*, UInt32)
-    begin_get_user_home_directory_data : Proc(AsyncIFtpHomeDirectoryProvider*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    finish_get_user_home_directory_data : Proc(AsyncIFtpHomeDirectoryProvider*, LibC::LPWSTR*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_get_user_home_directory_data : UInt64
+    finish_get_user_home_directory_data : UInt64
   end
 
   AsyncIFtpHomeDirectoryProvider_GUID = "73f81638-6295-42bd-a2be-4a657f7c479c"
@@ -1385,10 +1385,10 @@ lib LibWin32
   end
 
   struct IFtpLogProviderVTbl
-    query_interface : Proc(IFtpLogProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFtpLogProvider*, UInt32)
-    release : Proc(IFtpLogProvider*, UInt32)
-    log : Proc(IFtpLogProvider*, LOGGING_PARAMETERS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    log : UInt64
   end
 
   IFtpLogProvider_GUID = "a18a94cc-8299-4408-816c-7c3baca1a40e"
@@ -1398,11 +1398,11 @@ lib LibWin32
   end
 
   struct AsyncIFtpLogProviderVTbl
-    query_interface : Proc(AsyncIFtpLogProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AsyncIFtpLogProvider*, UInt32)
-    release : Proc(AsyncIFtpLogProvider*, UInt32)
-    begin_log : Proc(AsyncIFtpLogProvider*, LOGGING_PARAMETERS*, HRESULT)
-    finish_log : Proc(AsyncIFtpLogProvider*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_log : UInt64
+    finish_log : UInt64
   end
 
   AsyncIFtpLogProvider_GUID = "00a0ae46-2498-48b2-95e6-df678ed7d49f"
@@ -1412,10 +1412,10 @@ lib LibWin32
   end
 
   struct IFtpAuthorizationProviderVTbl
-    query_interface : Proc(IFtpAuthorizationProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFtpAuthorizationProvider*, UInt32)
-    release : Proc(IFtpAuthorizationProvider*, UInt32)
-    get_user_access_permission : Proc(IFtpAuthorizationProvider*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, FTP_ACCESS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_user_access_permission : UInt64
   end
 
   IFtpAuthorizationProvider_GUID = "a50ae7a1-a35a-42b4-a4f3-f4f7057a05d1"
@@ -1425,11 +1425,11 @@ lib LibWin32
   end
 
   struct AsyncIFtpAuthorizationProviderVTbl
-    query_interface : Proc(AsyncIFtpAuthorizationProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AsyncIFtpAuthorizationProvider*, UInt32)
-    release : Proc(AsyncIFtpAuthorizationProvider*, UInt32)
-    begin_get_user_access_permission : Proc(AsyncIFtpAuthorizationProvider*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    finish_get_user_access_permission : Proc(AsyncIFtpAuthorizationProvider*, FTP_ACCESS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_get_user_access_permission : UInt64
+    finish_get_user_access_permission : UInt64
   end
 
   AsyncIFtpAuthorizationProvider_GUID = "860dc339-07e5-4a5c-9c61-8820cea012bc"
@@ -1439,10 +1439,10 @@ lib LibWin32
   end
 
   struct IFtpPreprocessProviderVTbl
-    query_interface : Proc(IFtpPreprocessProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFtpPreprocessProvider*, UInt32)
-    release : Proc(IFtpPreprocessProvider*, UInt32)
-    handle_preprocess : Proc(IFtpPreprocessProvider*, PRE_PROCESS_PARAMETERS*, FTP_PROCESS_STATUS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    handle_preprocess : UInt64
   end
 
   IFtpPreprocessProvider_GUID = "a3c19b60-5a28-471a-8f93-ab30411cee82"
@@ -1452,11 +1452,11 @@ lib LibWin32
   end
 
   struct AsyncIFtpPreprocessProviderVTbl
-    query_interface : Proc(AsyncIFtpPreprocessProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AsyncIFtpPreprocessProvider*, UInt32)
-    release : Proc(AsyncIFtpPreprocessProvider*, UInt32)
-    begin_handle_preprocess : Proc(AsyncIFtpPreprocessProvider*, PRE_PROCESS_PARAMETERS*, HRESULT)
-    finish_handle_preprocess : Proc(AsyncIFtpPreprocessProvider*, FTP_PROCESS_STATUS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_handle_preprocess : UInt64
+    finish_handle_preprocess : UInt64
   end
 
   AsyncIFtpPreprocessProvider_GUID = "6ff5fd8f-fd8e-48b1-a3e0-bf7073db4db5"
@@ -1466,10 +1466,10 @@ lib LibWin32
   end
 
   struct IFtpPostprocessProviderVTbl
-    query_interface : Proc(IFtpPostprocessProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFtpPostprocessProvider*, UInt32)
-    release : Proc(IFtpPostprocessProvider*, UInt32)
-    handle_postprocess : Proc(IFtpPostprocessProvider*, POST_PROCESS_PARAMETERS*, FTP_PROCESS_STATUS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    handle_postprocess : UInt64
   end
 
   IFtpPostprocessProvider_GUID = "4522cbc6-16cd-49ad-8653-9a2c579e4280"
@@ -1479,11 +1479,11 @@ lib LibWin32
   end
 
   struct AsyncIFtpPostprocessProviderVTbl
-    query_interface : Proc(AsyncIFtpPostprocessProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AsyncIFtpPostprocessProvider*, UInt32)
-    release : Proc(AsyncIFtpPostprocessProvider*, UInt32)
-    begin_handle_postprocess : Proc(AsyncIFtpPostprocessProvider*, POST_PROCESS_PARAMETERS*, HRESULT)
-    finish_handle_postprocess : Proc(AsyncIFtpPostprocessProvider*, FTP_PROCESS_STATUS*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_handle_postprocess : UInt64
+    finish_handle_postprocess : UInt64
   end
 
   AsyncIFtpPostprocessProvider_GUID = "a16b2542-9694-4eb1-a564-6c2e91fdc133"
@@ -1493,12 +1493,12 @@ lib LibWin32
   end
 
   struct IADMEXTVTbl
-    query_interface : Proc(IADMEXT*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IADMEXT*, UInt32)
-    release : Proc(IADMEXT*, UInt32)
-    initialize : Proc(IADMEXT*, HRESULT)
-    enum_dcom_clsi_ds : Proc(IADMEXT*, Guid*, UInt32, HRESULT)
-    terminate : Proc(IADMEXT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    enum_dcom_clsi_ds : UInt64
+    terminate : UInt64
   end
 
   IADMEXT_GUID = "51dfe970-f6f2-11d0-b9bd-00a0c922e750"
@@ -1508,40 +1508,40 @@ lib LibWin32
   end
 
   struct IMSAdminBaseWVTbl
-    query_interface : Proc(IMSAdminBaseW*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMSAdminBaseW*, UInt32)
-    release : Proc(IMSAdminBaseW*, UInt32)
-    add_key : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, HRESULT)
-    delete_key : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, HRESULT)
-    delete_child_keys : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, HRESULT)
-    enum_keys : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, Char*, UInt32, HRESULT)
-    copy_key : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR, LibC::BOOL, LibC::BOOL, HRESULT)
-    rename_key : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    set_data : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, METADATA_RECORD*, HRESULT)
-    get_data : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, METADATA_RECORD*, UInt32*, HRESULT)
-    delete_data : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)
-    enum_data : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, METADATA_RECORD*, UInt32, UInt32*, HRESULT)
-    get_all_data : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, UInt32*, UInt32*, UInt32, UInt8*, UInt32*, HRESULT)
-    delete_all_data : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)
-    copy_data : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, LibC::BOOL, HRESULT)
-    get_data_paths : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, Char*, UInt32*, HRESULT)
-    open_key : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32*, HRESULT)
-    close_key : Proc(IMSAdminBaseW*, UInt32, HRESULT)
-    change_permissions : Proc(IMSAdminBaseW*, UInt32, UInt32, UInt32, HRESULT)
-    save_data : Proc(IMSAdminBaseW*, HRESULT)
-    get_handle_info : Proc(IMSAdminBaseW*, UInt32, METADATA_HANDLE_INFO*, HRESULT)
-    get_system_change_number : Proc(IMSAdminBaseW*, UInt32*, HRESULT)
-    get_data_set_number : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, UInt32*, HRESULT)
-    set_last_change_time : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, FILETIME*, LibC::BOOL, HRESULT)
-    get_last_change_time : Proc(IMSAdminBaseW*, UInt32, LibC::LPWSTR, FILETIME*, LibC::BOOL, HRESULT)
-    key_exchange_phase1 : Proc(IMSAdminBaseW*, HRESULT)
-    key_exchange_phase2 : Proc(IMSAdminBaseW*, HRESULT)
-    backup : Proc(IMSAdminBaseW*, LibC::LPWSTR, UInt32, UInt32, HRESULT)
-    restore : Proc(IMSAdminBaseW*, LibC::LPWSTR, UInt32, UInt32, HRESULT)
-    enum_backups : Proc(IMSAdminBaseW*, Char*, UInt32*, FILETIME*, UInt32, HRESULT)
-    delete_backup : Proc(IMSAdminBaseW*, LibC::LPWSTR, UInt32, HRESULT)
-    unmarshal_interface : Proc(IMSAdminBaseW*, IMSAdminBaseW*, HRESULT)
-    get_server_guid : Proc(IMSAdminBaseW*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_key : UInt64
+    delete_key : UInt64
+    delete_child_keys : UInt64
+    enum_keys : UInt64
+    copy_key : UInt64
+    rename_key : UInt64
+    set_data : UInt64
+    get_data : UInt64
+    delete_data : UInt64
+    enum_data : UInt64
+    get_all_data : UInt64
+    delete_all_data : UInt64
+    copy_data : UInt64
+    get_data_paths : UInt64
+    open_key : UInt64
+    close_key : UInt64
+    change_permissions : UInt64
+    save_data : UInt64
+    get_handle_info : UInt64
+    get_system_change_number : UInt64
+    get_data_set_number : UInt64
+    set_last_change_time : UInt64
+    get_last_change_time : UInt64
+    key_exchange_phase1 : UInt64
+    key_exchange_phase2 : UInt64
+    backup : UInt64
+    restore : UInt64
+    enum_backups : UInt64
+    delete_backup : UInt64
+    unmarshal_interface : UInt64
+    get_server_guid : UInt64
   end
 
   IMSAdminBaseW_GUID = "70b51430-b6ca-11d0-b9b9-00a0c922e750"
@@ -1551,46 +1551,46 @@ lib LibWin32
   end
 
   struct IMSAdminBase2WVTbl
-    query_interface : Proc(IMSAdminBase2W*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMSAdminBase2W*, UInt32)
-    release : Proc(IMSAdminBase2W*, UInt32)
-    add_key : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, HRESULT)
-    delete_key : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, HRESULT)
-    delete_child_keys : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, HRESULT)
-    enum_keys : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, Char*, UInt32, HRESULT)
-    copy_key : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR, LibC::BOOL, LibC::BOOL, HRESULT)
-    rename_key : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    set_data : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, METADATA_RECORD*, HRESULT)
-    get_data : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, METADATA_RECORD*, UInt32*, HRESULT)
-    delete_data : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)
-    enum_data : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, METADATA_RECORD*, UInt32, UInt32*, HRESULT)
-    get_all_data : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, UInt32*, UInt32*, UInt32, UInt8*, UInt32*, HRESULT)
-    delete_all_data : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)
-    copy_data : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, LibC::BOOL, HRESULT)
-    get_data_paths : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, Char*, UInt32*, HRESULT)
-    open_key : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32*, HRESULT)
-    close_key : Proc(IMSAdminBase2W*, UInt32, HRESULT)
-    change_permissions : Proc(IMSAdminBase2W*, UInt32, UInt32, UInt32, HRESULT)
-    save_data : Proc(IMSAdminBase2W*, HRESULT)
-    get_handle_info : Proc(IMSAdminBase2W*, UInt32, METADATA_HANDLE_INFO*, HRESULT)
-    get_system_change_number : Proc(IMSAdminBase2W*, UInt32*, HRESULT)
-    get_data_set_number : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, UInt32*, HRESULT)
-    set_last_change_time : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, FILETIME*, LibC::BOOL, HRESULT)
-    get_last_change_time : Proc(IMSAdminBase2W*, UInt32, LibC::LPWSTR, FILETIME*, LibC::BOOL, HRESULT)
-    key_exchange_phase1 : Proc(IMSAdminBase2W*, HRESULT)
-    key_exchange_phase2 : Proc(IMSAdminBase2W*, HRESULT)
-    backup : Proc(IMSAdminBase2W*, LibC::LPWSTR, UInt32, UInt32, HRESULT)
-    restore : Proc(IMSAdminBase2W*, LibC::LPWSTR, UInt32, UInt32, HRESULT)
-    enum_backups : Proc(IMSAdminBase2W*, Char*, UInt32*, FILETIME*, UInt32, HRESULT)
-    delete_backup : Proc(IMSAdminBase2W*, LibC::LPWSTR, UInt32, HRESULT)
-    unmarshal_interface : Proc(IMSAdminBase2W*, IMSAdminBaseW*, HRESULT)
-    get_server_guid : Proc(IMSAdminBase2W*, HRESULT)
-    backup_with_passwd : Proc(IMSAdminBase2W*, LibC::LPWSTR, UInt32, UInt32, LibC::LPWSTR, HRESULT)
-    restore_with_passwd : Proc(IMSAdminBase2W*, LibC::LPWSTR, UInt32, UInt32, LibC::LPWSTR, HRESULT)
-    export : Proc(IMSAdminBase2W*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
-    import : Proc(IMSAdminBase2W*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
-    restore_history : Proc(IMSAdminBase2W*, LibC::LPWSTR, UInt32, UInt32, UInt32, HRESULT)
-    enum_history : Proc(IMSAdminBase2W*, Char*, UInt32*, UInt32*, FILETIME*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_key : UInt64
+    delete_key : UInt64
+    delete_child_keys : UInt64
+    enum_keys : UInt64
+    copy_key : UInt64
+    rename_key : UInt64
+    set_data : UInt64
+    get_data : UInt64
+    delete_data : UInt64
+    enum_data : UInt64
+    get_all_data : UInt64
+    delete_all_data : UInt64
+    copy_data : UInt64
+    get_data_paths : UInt64
+    open_key : UInt64
+    close_key : UInt64
+    change_permissions : UInt64
+    save_data : UInt64
+    get_handle_info : UInt64
+    get_system_change_number : UInt64
+    get_data_set_number : UInt64
+    set_last_change_time : UInt64
+    get_last_change_time : UInt64
+    key_exchange_phase1 : UInt64
+    key_exchange_phase2 : UInt64
+    backup : UInt64
+    restore : UInt64
+    enum_backups : UInt64
+    delete_backup : UInt64
+    unmarshal_interface : UInt64
+    get_server_guid : UInt64
+    backup_with_passwd : UInt64
+    restore_with_passwd : UInt64
+    export : UInt64
+    import : UInt64
+    restore_history : UInt64
+    enum_history : UInt64
   end
 
   IMSAdminBase2W_GUID = "8298d101-f992-43b7-8eca-5052d885b995"
@@ -1600,47 +1600,47 @@ lib LibWin32
   end
 
   struct IMSAdminBase3WVTbl
-    query_interface : Proc(IMSAdminBase3W*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMSAdminBase3W*, UInt32)
-    release : Proc(IMSAdminBase3W*, UInt32)
-    add_key : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, HRESULT)
-    delete_key : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, HRESULT)
-    delete_child_keys : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, HRESULT)
-    enum_keys : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, Char*, UInt32, HRESULT)
-    copy_key : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR, LibC::BOOL, LibC::BOOL, HRESULT)
-    rename_key : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    set_data : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, METADATA_RECORD*, HRESULT)
-    get_data : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, METADATA_RECORD*, UInt32*, HRESULT)
-    delete_data : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)
-    enum_data : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, METADATA_RECORD*, UInt32, UInt32*, HRESULT)
-    get_all_data : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, UInt32*, UInt32*, UInt32, UInt8*, UInt32*, HRESULT)
-    delete_all_data : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)
-    copy_data : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, LibC::BOOL, HRESULT)
-    get_data_paths : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, Char*, UInt32*, HRESULT)
-    open_key : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32*, HRESULT)
-    close_key : Proc(IMSAdminBase3W*, UInt32, HRESULT)
-    change_permissions : Proc(IMSAdminBase3W*, UInt32, UInt32, UInt32, HRESULT)
-    save_data : Proc(IMSAdminBase3W*, HRESULT)
-    get_handle_info : Proc(IMSAdminBase3W*, UInt32, METADATA_HANDLE_INFO*, HRESULT)
-    get_system_change_number : Proc(IMSAdminBase3W*, UInt32*, HRESULT)
-    get_data_set_number : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, UInt32*, HRESULT)
-    set_last_change_time : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, FILETIME*, LibC::BOOL, HRESULT)
-    get_last_change_time : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, FILETIME*, LibC::BOOL, HRESULT)
-    key_exchange_phase1 : Proc(IMSAdminBase3W*, HRESULT)
-    key_exchange_phase2 : Proc(IMSAdminBase3W*, HRESULT)
-    backup : Proc(IMSAdminBase3W*, LibC::LPWSTR, UInt32, UInt32, HRESULT)
-    restore : Proc(IMSAdminBase3W*, LibC::LPWSTR, UInt32, UInt32, HRESULT)
-    enum_backups : Proc(IMSAdminBase3W*, Char*, UInt32*, FILETIME*, UInt32, HRESULT)
-    delete_backup : Proc(IMSAdminBase3W*, LibC::LPWSTR, UInt32, HRESULT)
-    unmarshal_interface : Proc(IMSAdminBase3W*, IMSAdminBaseW*, HRESULT)
-    get_server_guid : Proc(IMSAdminBase3W*, HRESULT)
-    backup_with_passwd : Proc(IMSAdminBase3W*, LibC::LPWSTR, UInt32, UInt32, LibC::LPWSTR, HRESULT)
-    restore_with_passwd : Proc(IMSAdminBase3W*, LibC::LPWSTR, UInt32, UInt32, LibC::LPWSTR, HRESULT)
-    export : Proc(IMSAdminBase3W*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
-    import : Proc(IMSAdminBase3W*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)
-    restore_history : Proc(IMSAdminBase3W*, LibC::LPWSTR, UInt32, UInt32, UInt32, HRESULT)
-    enum_history : Proc(IMSAdminBase3W*, Char*, UInt32*, UInt32*, FILETIME*, UInt32, HRESULT)
-    get_child_paths : Proc(IMSAdminBase3W*, UInt32, LibC::LPWSTR, UInt32, Char*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    add_key : UInt64
+    delete_key : UInt64
+    delete_child_keys : UInt64
+    enum_keys : UInt64
+    copy_key : UInt64
+    rename_key : UInt64
+    set_data : UInt64
+    get_data : UInt64
+    delete_data : UInt64
+    enum_data : UInt64
+    get_all_data : UInt64
+    delete_all_data : UInt64
+    copy_data : UInt64
+    get_data_paths : UInt64
+    open_key : UInt64
+    close_key : UInt64
+    change_permissions : UInt64
+    save_data : UInt64
+    get_handle_info : UInt64
+    get_system_change_number : UInt64
+    get_data_set_number : UInt64
+    set_last_change_time : UInt64
+    get_last_change_time : UInt64
+    key_exchange_phase1 : UInt64
+    key_exchange_phase2 : UInt64
+    backup : UInt64
+    restore : UInt64
+    enum_backups : UInt64
+    delete_backup : UInt64
+    unmarshal_interface : UInt64
+    get_server_guid : UInt64
+    backup_with_passwd : UInt64
+    restore_with_passwd : UInt64
+    export : UInt64
+    import : UInt64
+    restore_history : UInt64
+    enum_history : UInt64
+    get_child_paths : UInt64
   end
 
   IMSAdminBase3W_GUID = "f612954d-3b0b-4c56-9563-227b7be624b4"
@@ -1650,10 +1650,10 @@ lib LibWin32
   end
 
   struct IMSImpExpHelpWVTbl
-    query_interface : Proc(IMSImpExpHelpW*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMSImpExpHelpW*, UInt32)
-    release : Proc(IMSImpExpHelpW*, UInt32)
-    enumerate_paths_in_file : Proc(IMSImpExpHelpW*, LibC::LPWSTR, LibC::LPWSTR, UInt32, Char*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    enumerate_paths_in_file : UInt64
   end
 
   IMSImpExpHelpW_GUID = "29ff67ff-8050-480f-9f30-cc41635f2f9d"
@@ -1663,11 +1663,11 @@ lib LibWin32
   end
 
   struct IMSAdminBaseSinkWVTbl
-    query_interface : Proc(IMSAdminBaseSinkW*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMSAdminBaseSinkW*, UInt32)
-    release : Proc(IMSAdminBaseSinkW*, UInt32)
-    sink_notify : Proc(IMSAdminBaseSinkW*, UInt32, MD_CHANGE_OBJECT_W*, HRESULT)
-    shutdown_notify : Proc(IMSAdminBaseSinkW*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    sink_notify : UInt64
+    shutdown_notify : UInt64
   end
 
   IMSAdminBaseSinkW_GUID = "a9e69612-b80d-11d0-b9b9-00a0c922e750"
@@ -1677,13 +1677,13 @@ lib LibWin32
   end
 
   struct AsyncIMSAdminBaseSinkWVTbl
-    query_interface : Proc(AsyncIMSAdminBaseSinkW*, Guid*, Void**, HRESULT)
-    add_ref : Proc(AsyncIMSAdminBaseSinkW*, UInt32)
-    release : Proc(AsyncIMSAdminBaseSinkW*, UInt32)
-    begin_sink_notify : Proc(AsyncIMSAdminBaseSinkW*, UInt32, MD_CHANGE_OBJECT_W*, HRESULT)
-    finish_sink_notify : Proc(AsyncIMSAdminBaseSinkW*, HRESULT)
-    begin_shutdown_notify : Proc(AsyncIMSAdminBaseSinkW*, HRESULT)
-    finish_shutdown_notify : Proc(AsyncIMSAdminBaseSinkW*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    begin_sink_notify : UInt64
+    finish_sink_notify : UInt64
+    begin_shutdown_notify : UInt64
+    finish_shutdown_notify : UInt64
   end
 
   AsyncIMSAdminBaseSinkW_GUID = "a9e69613-b80d-11d0-b9b9-00a0c922e750"
@@ -1704,4 +1704,660 @@ lib LibWin32
 
   # Params # pver : HTTP_FILTER_VERSION* [In]
   fun GetFilterVersion(pver : HTTP_FILTER_VERSION*) : LibC::BOOL
+end
+struct LibWin32::IFtpProviderConstruct
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def construct(configurationentries : SAFEARRAY*) : HRESULT
+    @lpVtbl.value.construct.unsafe_as(Proc(SAFEARRAY*, HRESULT)).call(configurationentries)
+  end
+end
+struct LibWin32::IFtpAuthenticationProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def authenticate_user(pszsessionid : LibC::LPWSTR, pszsitename : LibC::LPWSTR, pszusername : LibC::LPWSTR, pszpassword : LibC::LPWSTR, ppszcanonicalusername : LibC::LPWSTR*, pfauthenticated : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.authenticate_user.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, LibC::BOOL*, HRESULT)).call(pszsessionid, pszsitename, pszusername, pszpassword, ppszcanonicalusername, pfauthenticated)
+  end
+end
+struct LibWin32::AsyncIFtpAuthenticationProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_authenticate_user(pszsessionid : LibC::LPWSTR, pszsitename : LibC::LPWSTR, pszusername : LibC::LPWSTR, pszpassword : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.begin_authenticate_user.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszsessionid, pszsitename, pszusername, pszpassword)
+  end
+  def finish_authenticate_user(ppszcanonicalusername : LibC::LPWSTR*, pfauthenticated : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.finish_authenticate_user.unsafe_as(Proc(LibC::LPWSTR*, LibC::BOOL*, HRESULT)).call(ppszcanonicalusername, pfauthenticated)
+  end
+end
+struct LibWin32::IFtpRoleProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def is_user_in_role(pszsessionid : LibC::LPWSTR, pszsitename : LibC::LPWSTR, pszusername : LibC::LPWSTR, pszrole : LibC::LPWSTR, pfisinrole : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.is_user_in_role.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(pszsessionid, pszsitename, pszusername, pszrole, pfisinrole)
+  end
+end
+struct LibWin32::AsyncIFtpRoleProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_is_user_in_role(pszsessionid : LibC::LPWSTR, pszsitename : LibC::LPWSTR, pszusername : LibC::LPWSTR, pszrole : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.begin_is_user_in_role.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszsessionid, pszsitename, pszusername, pszrole)
+  end
+  def finish_is_user_in_role(pfisinrole : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.finish_is_user_in_role.unsafe_as(Proc(LibC::BOOL*, HRESULT)).call(pfisinrole)
+  end
+end
+struct LibWin32::IFtpHomeDirectoryProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_user_home_directory_data(pszsessionid : LibC::LPWSTR, pszsitename : LibC::LPWSTR, pszusername : LibC::LPWSTR, ppszhomedirectorydata : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.get_user_home_directory_data.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)).call(pszsessionid, pszsitename, pszusername, ppszhomedirectorydata)
+  end
+end
+struct LibWin32::AsyncIFtpHomeDirectoryProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_get_user_home_directory_data(pszsessionid : LibC::LPWSTR, pszsitename : LibC::LPWSTR, pszusername : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.begin_get_user_home_directory_data.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszsessionid, pszsitename, pszusername)
+  end
+  def finish_get_user_home_directory_data(ppszhomedirectorydata : LibC::LPWSTR*) : HRESULT
+    @lpVtbl.value.finish_get_user_home_directory_data.unsafe_as(Proc(LibC::LPWSTR*, HRESULT)).call(ppszhomedirectorydata)
+  end
+end
+struct LibWin32::IFtpLogProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def log(ploggingparameters : LOGGING_PARAMETERS*) : HRESULT
+    @lpVtbl.value.log.unsafe_as(Proc(LOGGING_PARAMETERS*, HRESULT)).call(ploggingparameters)
+  end
+end
+struct LibWin32::AsyncIFtpLogProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_log(ploggingparameters : LOGGING_PARAMETERS*) : HRESULT
+    @lpVtbl.value.begin_log.unsafe_as(Proc(LOGGING_PARAMETERS*, HRESULT)).call(ploggingparameters)
+  end
+  def finish_log : HRESULT
+    @lpVtbl.value.finish_log.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IFtpAuthorizationProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_user_access_permission(pszsessionid : LibC::LPWSTR, pszsitename : LibC::LPWSTR, pszvirtualpath : LibC::LPWSTR, pszusername : LibC::LPWSTR, pftpaccess : FTP_ACCESS*) : HRESULT
+    @lpVtbl.value.get_user_access_permission.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, FTP_ACCESS*, HRESULT)).call(pszsessionid, pszsitename, pszvirtualpath, pszusername, pftpaccess)
+  end
+end
+struct LibWin32::AsyncIFtpAuthorizationProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_get_user_access_permission(pszsessionid : LibC::LPWSTR, pszsitename : LibC::LPWSTR, pszvirtualpath : LibC::LPWSTR, pszusername : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.begin_get_user_access_permission.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pszsessionid, pszsitename, pszvirtualpath, pszusername)
+  end
+  def finish_get_user_access_permission(pftpaccess : FTP_ACCESS*) : HRESULT
+    @lpVtbl.value.finish_get_user_access_permission.unsafe_as(Proc(FTP_ACCESS*, HRESULT)).call(pftpaccess)
+  end
+end
+struct LibWin32::IFtpPreprocessProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def handle_preprocess(ppreprocessparameters : PRE_PROCESS_PARAMETERS*, pftpprocessstatus : FTP_PROCESS_STATUS*) : HRESULT
+    @lpVtbl.value.handle_preprocess.unsafe_as(Proc(PRE_PROCESS_PARAMETERS*, FTP_PROCESS_STATUS*, HRESULT)).call(ppreprocessparameters, pftpprocessstatus)
+  end
+end
+struct LibWin32::AsyncIFtpPreprocessProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_handle_preprocess(ppreprocessparameters : PRE_PROCESS_PARAMETERS*) : HRESULT
+    @lpVtbl.value.begin_handle_preprocess.unsafe_as(Proc(PRE_PROCESS_PARAMETERS*, HRESULT)).call(ppreprocessparameters)
+  end
+  def finish_handle_preprocess(pftpprocessstatus : FTP_PROCESS_STATUS*) : HRESULT
+    @lpVtbl.value.finish_handle_preprocess.unsafe_as(Proc(FTP_PROCESS_STATUS*, HRESULT)).call(pftpprocessstatus)
+  end
+end
+struct LibWin32::IFtpPostprocessProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def handle_postprocess(ppostprocessparameters : POST_PROCESS_PARAMETERS*, pftpprocessstatus : FTP_PROCESS_STATUS*) : HRESULT
+    @lpVtbl.value.handle_postprocess.unsafe_as(Proc(POST_PROCESS_PARAMETERS*, FTP_PROCESS_STATUS*, HRESULT)).call(ppostprocessparameters, pftpprocessstatus)
+  end
+end
+struct LibWin32::AsyncIFtpPostprocessProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_handle_postprocess(ppostprocessparameters : POST_PROCESS_PARAMETERS*) : HRESULT
+    @lpVtbl.value.begin_handle_postprocess.unsafe_as(Proc(POST_PROCESS_PARAMETERS*, HRESULT)).call(ppostprocessparameters)
+  end
+  def finish_handle_postprocess(pftpprocessstatus : FTP_PROCESS_STATUS*) : HRESULT
+    @lpVtbl.value.finish_handle_postprocess.unsafe_as(Proc(FTP_PROCESS_STATUS*, HRESULT)).call(pftpprocessstatus)
+  end
+end
+struct LibWin32::IADMEXT
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HRESULT)).call
+  end
+  def enum_dcom_clsi_ds(pclsiddcom : Guid*, dwenumindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_dcom_clsi_ds.unsafe_as(Proc(Guid*, UInt32, HRESULT)).call(pclsiddcom, dwenumindex)
+  end
+  def terminate : HRESULT
+    @lpVtbl.value.terminate.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IMSAdminBaseW
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_key(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_key.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(hmdhandle, pszmdpath)
+  end
+  def delete_key(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_key.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(hmdhandle, pszmdpath)
+  end
+  def delete_child_keys(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_child_keys.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(hmdhandle, pszmdpath)
+  end
+  def enum_keys(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pszmdname : Char*, dwmdenumobjectindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_keys.unsafe_as(Proc(UInt32, LibC::LPWSTR, Char*, UInt32, HRESULT)).call(hmdhandle, pszmdpath, pszmdname, dwmdenumobjectindex)
+  end
+  def copy_key(hmdsourcehandle : UInt32, pszmdsourcepath : LibC::LPWSTR, hmddesthandle : UInt32, pszmddestpath : LibC::LPWSTR, bmdoverwriteflag : LibC::BOOL, bmdcopyflag : LibC::BOOL) : HRESULT
+    @lpVtbl.value.copy_key.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR, LibC::BOOL, LibC::BOOL, HRESULT)).call(hmdsourcehandle, pszmdsourcepath, hmddesthandle, pszmddestpath, bmdoverwriteflag, bmdcopyflag)
+  end
+  def rename_key(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pszmdnewname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.rename_key.unsafe_as(Proc(UInt32, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(hmdhandle, pszmdpath, pszmdnewname)
+  end
+  def set_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*) : HRESULT
+    @lpVtbl.value.set_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, METADATA_RECORD*, HRESULT)).call(hmdhandle, pszmdpath, pmdrmddata)
+  end
+  def get_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*, pdwmdrequireddatalen : UInt32*) : HRESULT
+    @lpVtbl.value.get_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, METADATA_RECORD*, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, pmdrmddata, pdwmdrequireddatalen)
+  end
+  def delete_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdidentifier : UInt32, dwmddatatype : UInt32) : HRESULT
+    @lpVtbl.value.delete_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)).call(hmdhandle, pszmdpath, dwmdidentifier, dwmddatatype)
+  end
+  def enum_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*, dwmdenumdataindex : UInt32, pdwmdrequireddatalen : UInt32*) : HRESULT
+    @lpVtbl.value.enum_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, METADATA_RECORD*, UInt32, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, pmdrmddata, dwmdenumdataindex, pdwmdrequireddatalen)
+  end
+  def get_all_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdattributes : UInt32, dwmdusertype : UInt32, dwmddatatype : UInt32, pdwmdnumdataentries : UInt32*, pdwmddatasetnumber : UInt32*, dwmdbuffersize : UInt32, pbmdbuffer : UInt8*, pdwmdrequiredbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_all_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, UInt32*, UInt32*, UInt32, UInt8*, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, dwmdattributes, dwmdusertype, dwmddatatype, pdwmdnumdataentries, pdwmddatasetnumber, dwmdbuffersize, pbmdbuffer, pdwmdrequiredbuffersize)
+  end
+  def delete_all_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdusertype : UInt32, dwmddatatype : UInt32) : HRESULT
+    @lpVtbl.value.delete_all_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)).call(hmdhandle, pszmdpath, dwmdusertype, dwmddatatype)
+  end
+  def copy_data(hmdsourcehandle : UInt32, pszmdsourcepath : LibC::LPWSTR, hmddesthandle : UInt32, pszmddestpath : LibC::LPWSTR, dwmdattributes : UInt32, dwmdusertype : UInt32, dwmddatatype : UInt32, bmdcopyflag : LibC::BOOL) : HRESULT
+    @lpVtbl.value.copy_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, LibC::BOOL, HRESULT)).call(hmdsourcehandle, pszmdsourcepath, hmddesthandle, pszmddestpath, dwmdattributes, dwmdusertype, dwmddatatype, bmdcopyflag)
+  end
+  def get_data_paths(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdidentifier : UInt32, dwmddatatype : UInt32, dwmdbuffersize : UInt32, pszbuffer : Char*, pdwmdrequiredbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_paths.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, Char*, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, dwmdidentifier, dwmddatatype, dwmdbuffersize, pszbuffer, pdwmdrequiredbuffersize)
+  end
+  def open_key(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdaccessrequested : UInt32, dwmdtimeout : UInt32, phmdnewhandle : UInt32*) : HRESULT
+    @lpVtbl.value.open_key.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, dwmdaccessrequested, dwmdtimeout, phmdnewhandle)
+  end
+  def close_key(hmdhandle : UInt32) : HRESULT
+    @lpVtbl.value.close_key.unsafe_as(Proc(UInt32, HRESULT)).call(hmdhandle)
+  end
+  def change_permissions(hmdhandle : UInt32, dwmdtimeout : UInt32, dwmdaccessrequested : UInt32) : HRESULT
+    @lpVtbl.value.change_permissions.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(hmdhandle, dwmdtimeout, dwmdaccessrequested)
+  end
+  def save_data : HRESULT
+    @lpVtbl.value.save_data.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_handle_info(hmdhandle : UInt32, pmdhiinfo : METADATA_HANDLE_INFO*) : HRESULT
+    @lpVtbl.value.get_handle_info.unsafe_as(Proc(UInt32, METADATA_HANDLE_INFO*, HRESULT)).call(hmdhandle, pmdhiinfo)
+  end
+  def get_system_change_number(pdwsystemchangenumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_change_number.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwsystemchangenumber)
+  end
+  def get_data_set_number(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pdwmddatasetnumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_set_number.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, pdwmddatasetnumber)
+  end
+  def set_last_change_time(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pftmdlastchangetime : FILETIME*, blocaltime : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_change_time.unsafe_as(Proc(UInt32, LibC::LPWSTR, FILETIME*, LibC::BOOL, HRESULT)).call(hmdhandle, pszmdpath, pftmdlastchangetime, blocaltime)
+  end
+  def get_last_change_time(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pftmdlastchangetime : FILETIME*, blocaltime : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_last_change_time.unsafe_as(Proc(UInt32, LibC::LPWSTR, FILETIME*, LibC::BOOL, HRESULT)).call(hmdhandle, pszmdpath, pftmdlastchangetime, blocaltime)
+  end
+  def key_exchange_phase1 : HRESULT
+    @lpVtbl.value.key_exchange_phase1.unsafe_as(Proc(HRESULT)).call
+  end
+  def key_exchange_phase2 : HRESULT
+    @lpVtbl.value.key_exchange_phase2.unsafe_as(Proc(HRESULT)).call
+  end
+  def backup(pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.backup.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, HRESULT)).call(pszmdbackuplocation, dwmdversion, dwmdflags)
+  end
+  def restore(pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.restore.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, HRESULT)).call(pszmdbackuplocation, dwmdversion, dwmdflags)
+  end
+  def enum_backups(pszmdbackuplocation : Char*, pdwmdversion : UInt32*, pftmdbackuptime : FILETIME*, dwmdenumindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_backups.unsafe_as(Proc(Char*, UInt32*, FILETIME*, UInt32, HRESULT)).call(pszmdbackuplocation, pdwmdversion, pftmdbackuptime, dwmdenumindex)
+  end
+  def delete_backup(pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32) : HRESULT
+    @lpVtbl.value.delete_backup.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(pszmdbackuplocation, dwmdversion)
+  end
+  def unmarshal_interface(piadmbwinterface : IMSAdminBaseW*) : HRESULT
+    @lpVtbl.value.unmarshal_interface.unsafe_as(Proc(IMSAdminBaseW*, HRESULT)).call(piadmbwinterface)
+  end
+  def get_server_guid : HRESULT
+    @lpVtbl.value.get_server_guid.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IMSAdminBase2W
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_key(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_key.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(hmdhandle, pszmdpath)
+  end
+  def delete_key(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_key.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(hmdhandle, pszmdpath)
+  end
+  def delete_child_keys(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_child_keys.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(hmdhandle, pszmdpath)
+  end
+  def enum_keys(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pszmdname : Char*, dwmdenumobjectindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_keys.unsafe_as(Proc(UInt32, LibC::LPWSTR, Char*, UInt32, HRESULT)).call(hmdhandle, pszmdpath, pszmdname, dwmdenumobjectindex)
+  end
+  def copy_key(hmdsourcehandle : UInt32, pszmdsourcepath : LibC::LPWSTR, hmddesthandle : UInt32, pszmddestpath : LibC::LPWSTR, bmdoverwriteflag : LibC::BOOL, bmdcopyflag : LibC::BOOL) : HRESULT
+    @lpVtbl.value.copy_key.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR, LibC::BOOL, LibC::BOOL, HRESULT)).call(hmdsourcehandle, pszmdsourcepath, hmddesthandle, pszmddestpath, bmdoverwriteflag, bmdcopyflag)
+  end
+  def rename_key(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pszmdnewname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.rename_key.unsafe_as(Proc(UInt32, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(hmdhandle, pszmdpath, pszmdnewname)
+  end
+  def set_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*) : HRESULT
+    @lpVtbl.value.set_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, METADATA_RECORD*, HRESULT)).call(hmdhandle, pszmdpath, pmdrmddata)
+  end
+  def get_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*, pdwmdrequireddatalen : UInt32*) : HRESULT
+    @lpVtbl.value.get_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, METADATA_RECORD*, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, pmdrmddata, pdwmdrequireddatalen)
+  end
+  def delete_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdidentifier : UInt32, dwmddatatype : UInt32) : HRESULT
+    @lpVtbl.value.delete_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)).call(hmdhandle, pszmdpath, dwmdidentifier, dwmddatatype)
+  end
+  def enum_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*, dwmdenumdataindex : UInt32, pdwmdrequireddatalen : UInt32*) : HRESULT
+    @lpVtbl.value.enum_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, METADATA_RECORD*, UInt32, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, pmdrmddata, dwmdenumdataindex, pdwmdrequireddatalen)
+  end
+  def get_all_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdattributes : UInt32, dwmdusertype : UInt32, dwmddatatype : UInt32, pdwmdnumdataentries : UInt32*, pdwmddatasetnumber : UInt32*, dwmdbuffersize : UInt32, pbmdbuffer : UInt8*, pdwmdrequiredbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_all_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, UInt32*, UInt32*, UInt32, UInt8*, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, dwmdattributes, dwmdusertype, dwmddatatype, pdwmdnumdataentries, pdwmddatasetnumber, dwmdbuffersize, pbmdbuffer, pdwmdrequiredbuffersize)
+  end
+  def delete_all_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdusertype : UInt32, dwmddatatype : UInt32) : HRESULT
+    @lpVtbl.value.delete_all_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)).call(hmdhandle, pszmdpath, dwmdusertype, dwmddatatype)
+  end
+  def copy_data(hmdsourcehandle : UInt32, pszmdsourcepath : LibC::LPWSTR, hmddesthandle : UInt32, pszmddestpath : LibC::LPWSTR, dwmdattributes : UInt32, dwmdusertype : UInt32, dwmddatatype : UInt32, bmdcopyflag : LibC::BOOL) : HRESULT
+    @lpVtbl.value.copy_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, LibC::BOOL, HRESULT)).call(hmdsourcehandle, pszmdsourcepath, hmddesthandle, pszmddestpath, dwmdattributes, dwmdusertype, dwmddatatype, bmdcopyflag)
+  end
+  def get_data_paths(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdidentifier : UInt32, dwmddatatype : UInt32, dwmdbuffersize : UInt32, pszbuffer : Char*, pdwmdrequiredbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_paths.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, Char*, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, dwmdidentifier, dwmddatatype, dwmdbuffersize, pszbuffer, pdwmdrequiredbuffersize)
+  end
+  def open_key(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdaccessrequested : UInt32, dwmdtimeout : UInt32, phmdnewhandle : UInt32*) : HRESULT
+    @lpVtbl.value.open_key.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, dwmdaccessrequested, dwmdtimeout, phmdnewhandle)
+  end
+  def close_key(hmdhandle : UInt32) : HRESULT
+    @lpVtbl.value.close_key.unsafe_as(Proc(UInt32, HRESULT)).call(hmdhandle)
+  end
+  def change_permissions(hmdhandle : UInt32, dwmdtimeout : UInt32, dwmdaccessrequested : UInt32) : HRESULT
+    @lpVtbl.value.change_permissions.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(hmdhandle, dwmdtimeout, dwmdaccessrequested)
+  end
+  def save_data : HRESULT
+    @lpVtbl.value.save_data.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_handle_info(hmdhandle : UInt32, pmdhiinfo : METADATA_HANDLE_INFO*) : HRESULT
+    @lpVtbl.value.get_handle_info.unsafe_as(Proc(UInt32, METADATA_HANDLE_INFO*, HRESULT)).call(hmdhandle, pmdhiinfo)
+  end
+  def get_system_change_number(pdwsystemchangenumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_change_number.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwsystemchangenumber)
+  end
+  def get_data_set_number(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pdwmddatasetnumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_set_number.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, pdwmddatasetnumber)
+  end
+  def set_last_change_time(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pftmdlastchangetime : FILETIME*, blocaltime : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_change_time.unsafe_as(Proc(UInt32, LibC::LPWSTR, FILETIME*, LibC::BOOL, HRESULT)).call(hmdhandle, pszmdpath, pftmdlastchangetime, blocaltime)
+  end
+  def get_last_change_time(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pftmdlastchangetime : FILETIME*, blocaltime : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_last_change_time.unsafe_as(Proc(UInt32, LibC::LPWSTR, FILETIME*, LibC::BOOL, HRESULT)).call(hmdhandle, pszmdpath, pftmdlastchangetime, blocaltime)
+  end
+  def key_exchange_phase1 : HRESULT
+    @lpVtbl.value.key_exchange_phase1.unsafe_as(Proc(HRESULT)).call
+  end
+  def key_exchange_phase2 : HRESULT
+    @lpVtbl.value.key_exchange_phase2.unsafe_as(Proc(HRESULT)).call
+  end
+  def backup(pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.backup.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, HRESULT)).call(pszmdbackuplocation, dwmdversion, dwmdflags)
+  end
+  def restore(pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.restore.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, HRESULT)).call(pszmdbackuplocation, dwmdversion, dwmdflags)
+  end
+  def enum_backups(pszmdbackuplocation : Char*, pdwmdversion : UInt32*, pftmdbackuptime : FILETIME*, dwmdenumindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_backups.unsafe_as(Proc(Char*, UInt32*, FILETIME*, UInt32, HRESULT)).call(pszmdbackuplocation, pdwmdversion, pftmdbackuptime, dwmdenumindex)
+  end
+  def delete_backup(pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32) : HRESULT
+    @lpVtbl.value.delete_backup.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(pszmdbackuplocation, dwmdversion)
+  end
+  def unmarshal_interface(piadmbwinterface : IMSAdminBaseW*) : HRESULT
+    @lpVtbl.value.unmarshal_interface.unsafe_as(Proc(IMSAdminBaseW*, HRESULT)).call(piadmbwinterface)
+  end
+  def get_server_guid : HRESULT
+    @lpVtbl.value.get_server_guid.unsafe_as(Proc(HRESULT)).call
+  end
+  def backup_with_passwd(pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32, pszpasswd : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.backup_with_passwd.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, LibC::LPWSTR, HRESULT)).call(pszmdbackuplocation, dwmdversion, dwmdflags, pszpasswd)
+  end
+  def restore_with_passwd(pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32, pszpasswd : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.restore_with_passwd.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, LibC::LPWSTR, HRESULT)).call(pszmdbackuplocation, dwmdversion, dwmdflags, pszpasswd)
+  end
+  def export(pszpasswd : LibC::LPWSTR, pszfilename : LibC::LPWSTR, pszsourcepath : LibC::LPWSTR, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.export.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(pszpasswd, pszfilename, pszsourcepath, dwmdflags)
+  end
+  def import(pszpasswd : LibC::LPWSTR, pszfilename : LibC::LPWSTR, pszsourcepath : LibC::LPWSTR, pszdestpath : LibC::LPWSTR, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.import.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(pszpasswd, pszfilename, pszsourcepath, pszdestpath, dwmdflags)
+  end
+  def restore_history(pszmdhistorylocation : LibC::LPWSTR, dwmdmajorversion : UInt32, dwmdminorversion : UInt32, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.restore_history.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, UInt32, HRESULT)).call(pszmdhistorylocation, dwmdmajorversion, dwmdminorversion, dwmdflags)
+  end
+  def enum_history(pszmdhistorylocation : Char*, pdwmdmajorversion : UInt32*, pdwmdminorversion : UInt32*, pftmdhistorytime : FILETIME*, dwmdenumindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_history.unsafe_as(Proc(Char*, UInt32*, UInt32*, FILETIME*, UInt32, HRESULT)).call(pszmdhistorylocation, pdwmdmajorversion, pdwmdminorversion, pftmdhistorytime, dwmdenumindex)
+  end
+end
+struct LibWin32::IMSAdminBase3W
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def add_key(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.add_key.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(hmdhandle, pszmdpath)
+  end
+  def delete_key(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_key.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(hmdhandle, pszmdpath)
+  end
+  def delete_child_keys(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.delete_child_keys.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(hmdhandle, pszmdpath)
+  end
+  def enum_keys(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pszmdname : Char*, dwmdenumobjectindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_keys.unsafe_as(Proc(UInt32, LibC::LPWSTR, Char*, UInt32, HRESULT)).call(hmdhandle, pszmdpath, pszmdname, dwmdenumobjectindex)
+  end
+  def copy_key(hmdsourcehandle : UInt32, pszmdsourcepath : LibC::LPWSTR, hmddesthandle : UInt32, pszmddestpath : LibC::LPWSTR, bmdoverwriteflag : LibC::BOOL, bmdcopyflag : LibC::BOOL) : HRESULT
+    @lpVtbl.value.copy_key.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR, LibC::BOOL, LibC::BOOL, HRESULT)).call(hmdsourcehandle, pszmdsourcepath, hmddesthandle, pszmddestpath, bmdoverwriteflag, bmdcopyflag)
+  end
+  def rename_key(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pszmdnewname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.rename_key.unsafe_as(Proc(UInt32, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(hmdhandle, pszmdpath, pszmdnewname)
+  end
+  def set_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*) : HRESULT
+    @lpVtbl.value.set_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, METADATA_RECORD*, HRESULT)).call(hmdhandle, pszmdpath, pmdrmddata)
+  end
+  def get_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*, pdwmdrequireddatalen : UInt32*) : HRESULT
+    @lpVtbl.value.get_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, METADATA_RECORD*, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, pmdrmddata, pdwmdrequireddatalen)
+  end
+  def delete_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdidentifier : UInt32, dwmddatatype : UInt32) : HRESULT
+    @lpVtbl.value.delete_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)).call(hmdhandle, pszmdpath, dwmdidentifier, dwmddatatype)
+  end
+  def enum_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pmdrmddata : METADATA_RECORD*, dwmdenumdataindex : UInt32, pdwmdrequireddatalen : UInt32*) : HRESULT
+    @lpVtbl.value.enum_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, METADATA_RECORD*, UInt32, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, pmdrmddata, dwmdenumdataindex, pdwmdrequireddatalen)
+  end
+  def get_all_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdattributes : UInt32, dwmdusertype : UInt32, dwmddatatype : UInt32, pdwmdnumdataentries : UInt32*, pdwmddatasetnumber : UInt32*, dwmdbuffersize : UInt32, pbmdbuffer : UInt8*, pdwmdrequiredbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_all_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, UInt32*, UInt32*, UInt32, UInt8*, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, dwmdattributes, dwmdusertype, dwmddatatype, pdwmdnumdataentries, pdwmddatasetnumber, dwmdbuffersize, pbmdbuffer, pdwmdrequiredbuffersize)
+  end
+  def delete_all_data(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdusertype : UInt32, dwmddatatype : UInt32) : HRESULT
+    @lpVtbl.value.delete_all_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, HRESULT)).call(hmdhandle, pszmdpath, dwmdusertype, dwmddatatype)
+  end
+  def copy_data(hmdsourcehandle : UInt32, pszmdsourcepath : LibC::LPWSTR, hmddesthandle : UInt32, pszmddestpath : LibC::LPWSTR, dwmdattributes : UInt32, dwmdusertype : UInt32, dwmddatatype : UInt32, bmdcopyflag : LibC::BOOL) : HRESULT
+    @lpVtbl.value.copy_data.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, LibC::BOOL, HRESULT)).call(hmdsourcehandle, pszmdsourcepath, hmddesthandle, pszmddestpath, dwmdattributes, dwmdusertype, dwmddatatype, bmdcopyflag)
+  end
+  def get_data_paths(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdidentifier : UInt32, dwmddatatype : UInt32, dwmdbuffersize : UInt32, pszbuffer : Char*, pdwmdrequiredbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_paths.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32, Char*, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, dwmdidentifier, dwmddatatype, dwmdbuffersize, pszbuffer, pdwmdrequiredbuffersize)
+  end
+  def open_key(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, dwmdaccessrequested : UInt32, dwmdtimeout : UInt32, phmdnewhandle : UInt32*) : HRESULT
+    @lpVtbl.value.open_key.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, UInt32, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, dwmdaccessrequested, dwmdtimeout, phmdnewhandle)
+  end
+  def close_key(hmdhandle : UInt32) : HRESULT
+    @lpVtbl.value.close_key.unsafe_as(Proc(UInt32, HRESULT)).call(hmdhandle)
+  end
+  def change_permissions(hmdhandle : UInt32, dwmdtimeout : UInt32, dwmdaccessrequested : UInt32) : HRESULT
+    @lpVtbl.value.change_permissions.unsafe_as(Proc(UInt32, UInt32, UInt32, HRESULT)).call(hmdhandle, dwmdtimeout, dwmdaccessrequested)
+  end
+  def save_data : HRESULT
+    @lpVtbl.value.save_data.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_handle_info(hmdhandle : UInt32, pmdhiinfo : METADATA_HANDLE_INFO*) : HRESULT
+    @lpVtbl.value.get_handle_info.unsafe_as(Proc(UInt32, METADATA_HANDLE_INFO*, HRESULT)).call(hmdhandle, pmdhiinfo)
+  end
+  def get_system_change_number(pdwsystemchangenumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_system_change_number.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwsystemchangenumber)
+  end
+  def get_data_set_number(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pdwmddatasetnumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_data_set_number.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, pdwmddatasetnumber)
+  end
+  def set_last_change_time(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pftmdlastchangetime : FILETIME*, blocaltime : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_last_change_time.unsafe_as(Proc(UInt32, LibC::LPWSTR, FILETIME*, LibC::BOOL, HRESULT)).call(hmdhandle, pszmdpath, pftmdlastchangetime, blocaltime)
+  end
+  def get_last_change_time(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, pftmdlastchangetime : FILETIME*, blocaltime : LibC::BOOL) : HRESULT
+    @lpVtbl.value.get_last_change_time.unsafe_as(Proc(UInt32, LibC::LPWSTR, FILETIME*, LibC::BOOL, HRESULT)).call(hmdhandle, pszmdpath, pftmdlastchangetime, blocaltime)
+  end
+  def key_exchange_phase1 : HRESULT
+    @lpVtbl.value.key_exchange_phase1.unsafe_as(Proc(HRESULT)).call
+  end
+  def key_exchange_phase2 : HRESULT
+    @lpVtbl.value.key_exchange_phase2.unsafe_as(Proc(HRESULT)).call
+  end
+  def backup(pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.backup.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, HRESULT)).call(pszmdbackuplocation, dwmdversion, dwmdflags)
+  end
+  def restore(pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.restore.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, HRESULT)).call(pszmdbackuplocation, dwmdversion, dwmdflags)
+  end
+  def enum_backups(pszmdbackuplocation : Char*, pdwmdversion : UInt32*, pftmdbackuptime : FILETIME*, dwmdenumindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_backups.unsafe_as(Proc(Char*, UInt32*, FILETIME*, UInt32, HRESULT)).call(pszmdbackuplocation, pdwmdversion, pftmdbackuptime, dwmdenumindex)
+  end
+  def delete_backup(pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32) : HRESULT
+    @lpVtbl.value.delete_backup.unsafe_as(Proc(LibC::LPWSTR, UInt32, HRESULT)).call(pszmdbackuplocation, dwmdversion)
+  end
+  def unmarshal_interface(piadmbwinterface : IMSAdminBaseW*) : HRESULT
+    @lpVtbl.value.unmarshal_interface.unsafe_as(Proc(IMSAdminBaseW*, HRESULT)).call(piadmbwinterface)
+  end
+  def get_server_guid : HRESULT
+    @lpVtbl.value.get_server_guid.unsafe_as(Proc(HRESULT)).call
+  end
+  def backup_with_passwd(pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32, pszpasswd : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.backup_with_passwd.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, LibC::LPWSTR, HRESULT)).call(pszmdbackuplocation, dwmdversion, dwmdflags, pszpasswd)
+  end
+  def restore_with_passwd(pszmdbackuplocation : LibC::LPWSTR, dwmdversion : UInt32, dwmdflags : UInt32, pszpasswd : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.restore_with_passwd.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, LibC::LPWSTR, HRESULT)).call(pszmdbackuplocation, dwmdversion, dwmdflags, pszpasswd)
+  end
+  def export(pszpasswd : LibC::LPWSTR, pszfilename : LibC::LPWSTR, pszsourcepath : LibC::LPWSTR, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.export.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(pszpasswd, pszfilename, pszsourcepath, dwmdflags)
+  end
+  def import(pszpasswd : LibC::LPWSTR, pszfilename : LibC::LPWSTR, pszsourcepath : LibC::LPWSTR, pszdestpath : LibC::LPWSTR, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.import.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, HRESULT)).call(pszpasswd, pszfilename, pszsourcepath, pszdestpath, dwmdflags)
+  end
+  def restore_history(pszmdhistorylocation : LibC::LPWSTR, dwmdmajorversion : UInt32, dwmdminorversion : UInt32, dwmdflags : UInt32) : HRESULT
+    @lpVtbl.value.restore_history.unsafe_as(Proc(LibC::LPWSTR, UInt32, UInt32, UInt32, HRESULT)).call(pszmdhistorylocation, dwmdmajorversion, dwmdminorversion, dwmdflags)
+  end
+  def enum_history(pszmdhistorylocation : Char*, pdwmdmajorversion : UInt32*, pdwmdminorversion : UInt32*, pftmdhistorytime : FILETIME*, dwmdenumindex : UInt32) : HRESULT
+    @lpVtbl.value.enum_history.unsafe_as(Proc(Char*, UInt32*, UInt32*, FILETIME*, UInt32, HRESULT)).call(pszmdhistorylocation, pdwmdmajorversion, pdwmdminorversion, pftmdhistorytime, dwmdenumindex)
+  end
+  def get_child_paths(hmdhandle : UInt32, pszmdpath : LibC::LPWSTR, cchmdbuffersize : UInt32, pszbuffer : Char*, pcchmdrequiredbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.get_child_paths.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, Char*, UInt32*, HRESULT)).call(hmdhandle, pszmdpath, cchmdbuffersize, pszbuffer, pcchmdrequiredbuffersize)
+  end
+end
+struct LibWin32::IMSImpExpHelpW
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def enumerate_paths_in_file(pszfilename : LibC::LPWSTR, pszkeytype : LibC::LPWSTR, dwmdbuffersize : UInt32, pszbuffer : Char*, pdwmdrequiredbuffersize : UInt32*) : HRESULT
+    @lpVtbl.value.enumerate_paths_in_file.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, Char*, UInt32*, HRESULT)).call(pszfilename, pszkeytype, dwmdbuffersize, pszbuffer, pdwmdrequiredbuffersize)
+  end
+end
+struct LibWin32::IMSAdminBaseSinkW
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def sink_notify(dwmdnumelements : UInt32, pcochangelist : MD_CHANGE_OBJECT_W*) : HRESULT
+    @lpVtbl.value.sink_notify.unsafe_as(Proc(UInt32, MD_CHANGE_OBJECT_W*, HRESULT)).call(dwmdnumelements, pcochangelist)
+  end
+  def shutdown_notify : HRESULT
+    @lpVtbl.value.shutdown_notify.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::AsyncIMSAdminBaseSinkW
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def begin_sink_notify(dwmdnumelements : UInt32, pcochangelist : MD_CHANGE_OBJECT_W*) : HRESULT
+    @lpVtbl.value.begin_sink_notify.unsafe_as(Proc(UInt32, MD_CHANGE_OBJECT_W*, HRESULT)).call(dwmdnumelements, pcochangelist)
+  end
+  def finish_sink_notify : HRESULT
+    @lpVtbl.value.finish_sink_notify.unsafe_as(Proc(HRESULT)).call
+  end
+  def begin_shutdown_notify : HRESULT
+    @lpVtbl.value.begin_shutdown_notify.unsafe_as(Proc(HRESULT)).call
+  end
+  def finish_shutdown_notify : HRESULT
+    @lpVtbl.value.finish_shutdown_notify.unsafe_as(Proc(HRESULT)).call
+  end
 end

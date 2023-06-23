@@ -1090,30 +1090,30 @@ lib LibWin32
 
 
   struct IFaxJobStatusVTbl
-    query_interface : Proc(IFaxJobStatus*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxJobStatus*, UInt32)
-    release : Proc(IFaxJobStatus*, UInt32)
-    get_type_info_count : Proc(IFaxJobStatus*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxJobStatus*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxJobStatus*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxJobStatus*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_status : Proc(IFaxJobStatus*, FAX_JOB_STATUS_ENUM*, HRESULT)
-    get_pages : Proc(IFaxJobStatus*, Int32*, HRESULT)
-    get_size : Proc(IFaxJobStatus*, Int32*, HRESULT)
-    get_current_page : Proc(IFaxJobStatus*, Int32*, HRESULT)
-    get_device_id : Proc(IFaxJobStatus*, Int32*, HRESULT)
-    get_csid : Proc(IFaxJobStatus*, UInt8**, HRESULT)
-    get_tsid : Proc(IFaxJobStatus*, UInt8**, HRESULT)
-    get_extended_status_code : Proc(IFaxJobStatus*, FAX_JOB_EXTENDED_STATUS_ENUM*, HRESULT)
-    get_extended_status : Proc(IFaxJobStatus*, UInt8**, HRESULT)
-    get_available_operations : Proc(IFaxJobStatus*, FAX_JOB_OPERATIONS_ENUM*, HRESULT)
-    get_retries : Proc(IFaxJobStatus*, Int32*, HRESULT)
-    get_job_type : Proc(IFaxJobStatus*, FAX_JOB_TYPE_ENUM*, HRESULT)
-    get_scheduled_time : Proc(IFaxJobStatus*, Float64*, HRESULT)
-    get_transmission_start : Proc(IFaxJobStatus*, Float64*, HRESULT)
-    get_transmission_end : Proc(IFaxJobStatus*, Float64*, HRESULT)
-    get_caller_id : Proc(IFaxJobStatus*, UInt8**, HRESULT)
-    get_routing_information : Proc(IFaxJobStatus*, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_status : UInt64
+    get_pages : UInt64
+    get_size : UInt64
+    get_current_page : UInt64
+    get_device_id : UInt64
+    get_csid : UInt64
+    get_tsid : UInt64
+    get_extended_status_code : UInt64
+    get_extended_status : UInt64
+    get_available_operations : UInt64
+    get_retries : UInt64
+    get_job_type : UInt64
+    get_scheduled_time : UInt64
+    get_transmission_start : UInt64
+    get_transmission_end : UInt64
+    get_caller_id : UInt64
+    get_routing_information : UInt64
   end
 
   IFaxJobStatus_GUID = "8b86f485-fd7f-4824-886b-40c5caa617cc"
@@ -1123,39 +1123,39 @@ lib LibWin32
   end
 
   struct IFaxServerVTbl
-    query_interface : Proc(IFaxServer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxServer*, UInt32)
-    release : Proc(IFaxServer*, UInt32)
-    get_type_info_count : Proc(IFaxServer*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxServer*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxServer*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxServer*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    connect : Proc(IFaxServer*, UInt8*, HRESULT)
-    get_server_name : Proc(IFaxServer*, UInt8**, HRESULT)
-    get_device_providers : Proc(IFaxServer*, IFaxDeviceProviders*, HRESULT)
-    get_devices : Proc(IFaxServer*, IFaxDevices*, HRESULT)
-    get_inbound_routing : Proc(IFaxServer*, IFaxInboundRouting*, HRESULT)
-    get_folders : Proc(IFaxServer*, IFaxFolders*, HRESULT)
-    get_logging_options : Proc(IFaxServer*, IFaxLoggingOptions*, HRESULT)
-    get_major_version : Proc(IFaxServer*, Int32*, HRESULT)
-    get_minor_version : Proc(IFaxServer*, Int32*, HRESULT)
-    get_major_build : Proc(IFaxServer*, Int32*, HRESULT)
-    get_minor_build : Proc(IFaxServer*, Int32*, HRESULT)
-    get_debug : Proc(IFaxServer*, Int16*, HRESULT)
-    get_activity : Proc(IFaxServer*, IFaxActivity*, HRESULT)
-    get_outbound_routing : Proc(IFaxServer*, IFaxOutboundRouting*, HRESULT)
-    get_receipt_options : Proc(IFaxServer*, IFaxReceiptOptions*, HRESULT)
-    get_security : Proc(IFaxServer*, IFaxSecurity*, HRESULT)
-    disconnect : Proc(IFaxServer*, HRESULT)
-    get_extension_property : Proc(IFaxServer*, UInt8*, VARIANT*, HRESULT)
-    set_extension_property : Proc(IFaxServer*, UInt8*, VARIANT, HRESULT)
-    listen_to_server_events : Proc(IFaxServer*, FAX_SERVER_EVENTS_TYPE_ENUM, HRESULT)
-    register_device_provider : Proc(IFaxServer*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, HRESULT)
-    unregister_device_provider : Proc(IFaxServer*, UInt8*, HRESULT)
-    register_inbound_routing_extension : Proc(IFaxServer*, UInt8*, UInt8*, UInt8*, VARIANT, HRESULT)
-    unregister_inbound_routing_extension : Proc(IFaxServer*, UInt8*, HRESULT)
-    get_registered_events : Proc(IFaxServer*, FAX_SERVER_EVENTS_TYPE_ENUM*, HRESULT)
-    get_api_version : Proc(IFaxServer*, FAX_SERVER_APIVERSION_ENUM*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    connect : UInt64
+    get_server_name : UInt64
+    get_device_providers : UInt64
+    get_devices : UInt64
+    get_inbound_routing : UInt64
+    get_folders : UInt64
+    get_logging_options : UInt64
+    get_major_version : UInt64
+    get_minor_version : UInt64
+    get_major_build : UInt64
+    get_minor_build : UInt64
+    get_debug : UInt64
+    get_activity : UInt64
+    get_outbound_routing : UInt64
+    get_receipt_options : UInt64
+    get_security : UInt64
+    disconnect : UInt64
+    get_extension_property : UInt64
+    set_extension_property : UInt64
+    listen_to_server_events : UInt64
+    register_device_provider : UInt64
+    unregister_device_provider : UInt64
+    register_inbound_routing_extension : UInt64
+    unregister_inbound_routing_extension : UInt64
+    get_registered_events : UInt64
+    get_api_version : UInt64
   end
 
   IFaxServer_GUID = "475b6469-90a5-4878-a577-17a86e8e3462"
@@ -1165,16 +1165,16 @@ lib LibWin32
   end
 
   struct IFaxDeviceProvidersVTbl
-    query_interface : Proc(IFaxDeviceProviders*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxDeviceProviders*, UInt32)
-    release : Proc(IFaxDeviceProviders*, UInt32)
-    get_type_info_count : Proc(IFaxDeviceProviders*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxDeviceProviders*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxDeviceProviders*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxDeviceProviders*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IFaxDeviceProviders*, IUnknown*, HRESULT)
-    get_item : Proc(IFaxDeviceProviders*, VARIANT, IFaxDeviceProvider*, HRESULT)
-    get_count : Proc(IFaxDeviceProviders*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_item : UInt64
+    get_count : UInt64
   end
 
   IFaxDeviceProviders_GUID = "9fb76f62-4c7e-43a5-b6fd-502893f7e13e"
@@ -1184,17 +1184,17 @@ lib LibWin32
   end
 
   struct IFaxDevicesVTbl
-    query_interface : Proc(IFaxDevices*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxDevices*, UInt32)
-    release : Proc(IFaxDevices*, UInt32)
-    get_type_info_count : Proc(IFaxDevices*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxDevices*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxDevices*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxDevices*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IFaxDevices*, IUnknown*, HRESULT)
-    get_item : Proc(IFaxDevices*, VARIANT, IFaxDevice*, HRESULT)
-    get_count : Proc(IFaxDevices*, Int32*, HRESULT)
-    get_item_by_id : Proc(IFaxDevices*, Int32, IFaxDevice*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_item : UInt64
+    get_count : UInt64
+    get_item_by_id : UInt64
   end
 
   IFaxDevices_GUID = "9e46783e-f34f-482e-a360-0416becbbd96"
@@ -1204,15 +1204,15 @@ lib LibWin32
   end
 
   struct IFaxInboundRoutingVTbl
-    query_interface : Proc(IFaxInboundRouting*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxInboundRouting*, UInt32)
-    release : Proc(IFaxInboundRouting*, UInt32)
-    get_type_info_count : Proc(IFaxInboundRouting*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxInboundRouting*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxInboundRouting*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxInboundRouting*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_extensions : Proc(IFaxInboundRouting*, IFaxInboundRoutingExtensions*, HRESULT)
-    get_methods : Proc(IFaxInboundRouting*, IFaxInboundRoutingMethods*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_extensions : UInt64
+    get_methods : UInt64
   end
 
   IFaxInboundRouting_GUID = "8148c20f-9d52-45b1-bf96-38fc12713527"
@@ -1222,17 +1222,17 @@ lib LibWin32
   end
 
   struct IFaxFoldersVTbl
-    query_interface : Proc(IFaxFolders*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxFolders*, UInt32)
-    release : Proc(IFaxFolders*, UInt32)
-    get_type_info_count : Proc(IFaxFolders*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxFolders*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxFolders*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxFolders*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_outgoing_queue : Proc(IFaxFolders*, IFaxOutgoingQueue*, HRESULT)
-    get_incoming_queue : Proc(IFaxFolders*, IFaxIncomingQueue*, HRESULT)
-    get_incoming_archive : Proc(IFaxFolders*, IFaxIncomingArchive*, HRESULT)
-    get_outgoing_archive : Proc(IFaxFolders*, IFaxOutgoingArchive*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_outgoing_queue : UInt64
+    get_incoming_queue : UInt64
+    get_incoming_archive : UInt64
+    get_outgoing_archive : UInt64
   end
 
   IFaxFolders_GUID = "dce3b2a8-a7ab-42bc-9d0a-3149457261a0"
@@ -1242,15 +1242,15 @@ lib LibWin32
   end
 
   struct IFaxLoggingOptionsVTbl
-    query_interface : Proc(IFaxLoggingOptions*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxLoggingOptions*, UInt32)
-    release : Proc(IFaxLoggingOptions*, UInt32)
-    get_type_info_count : Proc(IFaxLoggingOptions*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxLoggingOptions*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxLoggingOptions*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxLoggingOptions*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_event_logging : Proc(IFaxLoggingOptions*, IFaxEventLogging*, HRESULT)
-    get_activity_logging : Proc(IFaxLoggingOptions*, IFaxActivityLogging*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_event_logging : UInt64
+    get_activity_logging : UInt64
   end
 
   IFaxLoggingOptions_GUID = "34e64fb9-6b31-4d32-8b27-d286c0c33606"
@@ -1260,18 +1260,18 @@ lib LibWin32
   end
 
   struct IFaxActivityVTbl
-    query_interface : Proc(IFaxActivity*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxActivity*, UInt32)
-    release : Proc(IFaxActivity*, UInt32)
-    get_type_info_count : Proc(IFaxActivity*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxActivity*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxActivity*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxActivity*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_incoming_messages : Proc(IFaxActivity*, Int32*, HRESULT)
-    get_routing_messages : Proc(IFaxActivity*, Int32*, HRESULT)
-    get_outgoing_messages : Proc(IFaxActivity*, Int32*, HRESULT)
-    get_queued_messages : Proc(IFaxActivity*, Int32*, HRESULT)
-    refresh : Proc(IFaxActivity*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_incoming_messages : UInt64
+    get_routing_messages : UInt64
+    get_outgoing_messages : UInt64
+    get_queued_messages : UInt64
+    refresh : UInt64
   end
 
   IFaxActivity_GUID = "4b106f97-3df5-40f2-bc3c-44cb8115ebdf"
@@ -1281,15 +1281,15 @@ lib LibWin32
   end
 
   struct IFaxOutboundRoutingVTbl
-    query_interface : Proc(IFaxOutboundRouting*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxOutboundRouting*, UInt32)
-    release : Proc(IFaxOutboundRouting*, UInt32)
-    get_type_info_count : Proc(IFaxOutboundRouting*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxOutboundRouting*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxOutboundRouting*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxOutboundRouting*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_groups : Proc(IFaxOutboundRouting*, IFaxOutboundRoutingGroups*, HRESULT)
-    get_rules : Proc(IFaxOutboundRouting*, IFaxOutboundRoutingRules*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_groups : UInt64
+    get_rules : UInt64
   end
 
   IFaxOutboundRouting_GUID = "25dc05a4-9909-41bd-a95b-7e5d1dec1d43"
@@ -1299,31 +1299,31 @@ lib LibWin32
   end
 
   struct IFaxReceiptOptionsVTbl
-    query_interface : Proc(IFaxReceiptOptions*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxReceiptOptions*, UInt32)
-    release : Proc(IFaxReceiptOptions*, UInt32)
-    get_type_info_count : Proc(IFaxReceiptOptions*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxReceiptOptions*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxReceiptOptions*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxReceiptOptions*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_authentication_type : Proc(IFaxReceiptOptions*, FAX_SMTP_AUTHENTICATION_TYPE_ENUM*, HRESULT)
-    put_authentication_type : Proc(IFaxReceiptOptions*, FAX_SMTP_AUTHENTICATION_TYPE_ENUM, HRESULT)
-    get_smtp_server : Proc(IFaxReceiptOptions*, UInt8**, HRESULT)
-    put_smtp_server : Proc(IFaxReceiptOptions*, UInt8*, HRESULT)
-    get_smtp_port : Proc(IFaxReceiptOptions*, Int32*, HRESULT)
-    put_smtp_port : Proc(IFaxReceiptOptions*, Int32, HRESULT)
-    get_smtp_sender : Proc(IFaxReceiptOptions*, UInt8**, HRESULT)
-    put_smtp_sender : Proc(IFaxReceiptOptions*, UInt8*, HRESULT)
-    get_smtp_user : Proc(IFaxReceiptOptions*, UInt8**, HRESULT)
-    put_smtp_user : Proc(IFaxReceiptOptions*, UInt8*, HRESULT)
-    get_allowed_receipts : Proc(IFaxReceiptOptions*, FAX_RECEIPT_TYPE_ENUM*, HRESULT)
-    put_allowed_receipts : Proc(IFaxReceiptOptions*, FAX_RECEIPT_TYPE_ENUM, HRESULT)
-    get_smtp_password : Proc(IFaxReceiptOptions*, UInt8**, HRESULT)
-    put_smtp_password : Proc(IFaxReceiptOptions*, UInt8*, HRESULT)
-    refresh : Proc(IFaxReceiptOptions*, HRESULT)
-    save : Proc(IFaxReceiptOptions*, HRESULT)
-    get_use_for_inbound_routing : Proc(IFaxReceiptOptions*, Int16*, HRESULT)
-    put_use_for_inbound_routing : Proc(IFaxReceiptOptions*, Int16, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_authentication_type : UInt64
+    put_authentication_type : UInt64
+    get_smtp_server : UInt64
+    put_smtp_server : UInt64
+    get_smtp_port : UInt64
+    put_smtp_port : UInt64
+    get_smtp_sender : UInt64
+    put_smtp_sender : UInt64
+    get_smtp_user : UInt64
+    put_smtp_user : UInt64
+    get_allowed_receipts : UInt64
+    put_allowed_receipts : UInt64
+    get_smtp_password : UInt64
+    put_smtp_password : UInt64
+    refresh : UInt64
+    save : UInt64
+    get_use_for_inbound_routing : UInt64
+    put_use_for_inbound_routing : UInt64
   end
 
   IFaxReceiptOptions_GUID = "378efaeb-5fcb-4afb-b2ee-e16e80614487"
@@ -1333,20 +1333,20 @@ lib LibWin32
   end
 
   struct IFaxSecurityVTbl
-    query_interface : Proc(IFaxSecurity*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxSecurity*, UInt32)
-    release : Proc(IFaxSecurity*, UInt32)
-    get_type_info_count : Proc(IFaxSecurity*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxSecurity*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxSecurity*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxSecurity*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_descriptor : Proc(IFaxSecurity*, VARIANT*, HRESULT)
-    put_descriptor : Proc(IFaxSecurity*, VARIANT, HRESULT)
-    get_granted_rights : Proc(IFaxSecurity*, FAX_ACCESS_RIGHTS_ENUM*, HRESULT)
-    refresh : Proc(IFaxSecurity*, HRESULT)
-    save : Proc(IFaxSecurity*, HRESULT)
-    get_information_type : Proc(IFaxSecurity*, Int32*, HRESULT)
-    put_information_type : Proc(IFaxSecurity*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_descriptor : UInt64
+    put_descriptor : UInt64
+    get_granted_rights : UInt64
+    refresh : UInt64
+    save : UInt64
+    get_information_type : UInt64
+    put_information_type : UInt64
   end
 
   IFaxSecurity_GUID = "77b508c1-09c0-47a2-91eb-fce7fdf2690e"
@@ -1356,47 +1356,47 @@ lib LibWin32
   end
 
   struct IFaxDocumentVTbl
-    query_interface : Proc(IFaxDocument*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxDocument*, UInt32)
-    release : Proc(IFaxDocument*, UInt32)
-    get_type_info_count : Proc(IFaxDocument*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxDocument*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxDocument*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxDocument*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_body : Proc(IFaxDocument*, UInt8**, HRESULT)
-    put_body : Proc(IFaxDocument*, UInt8*, HRESULT)
-    get_sender : Proc(IFaxDocument*, IFaxSender*, HRESULT)
-    get_recipients : Proc(IFaxDocument*, IFaxRecipients*, HRESULT)
-    get_cover_page : Proc(IFaxDocument*, UInt8**, HRESULT)
-    put_cover_page : Proc(IFaxDocument*, UInt8*, HRESULT)
-    get_subject : Proc(IFaxDocument*, UInt8**, HRESULT)
-    put_subject : Proc(IFaxDocument*, UInt8*, HRESULT)
-    get_note : Proc(IFaxDocument*, UInt8**, HRESULT)
-    put_note : Proc(IFaxDocument*, UInt8*, HRESULT)
-    get_schedule_time : Proc(IFaxDocument*, Float64*, HRESULT)
-    put_schedule_time : Proc(IFaxDocument*, Float64, HRESULT)
-    get_receipt_address : Proc(IFaxDocument*, UInt8**, HRESULT)
-    put_receipt_address : Proc(IFaxDocument*, UInt8*, HRESULT)
-    get_document_name : Proc(IFaxDocument*, UInt8**, HRESULT)
-    put_document_name : Proc(IFaxDocument*, UInt8*, HRESULT)
-    get_call_handle : Proc(IFaxDocument*, Int32*, HRESULT)
-    put_call_handle : Proc(IFaxDocument*, Int32, HRESULT)
-    get_cover_page_type : Proc(IFaxDocument*, FAX_COVERPAGE_TYPE_ENUM*, HRESULT)
-    put_cover_page_type : Proc(IFaxDocument*, FAX_COVERPAGE_TYPE_ENUM, HRESULT)
-    get_schedule_type : Proc(IFaxDocument*, FAX_SCHEDULE_TYPE_ENUM*, HRESULT)
-    put_schedule_type : Proc(IFaxDocument*, FAX_SCHEDULE_TYPE_ENUM, HRESULT)
-    get_receipt_type : Proc(IFaxDocument*, FAX_RECEIPT_TYPE_ENUM*, HRESULT)
-    put_receipt_type : Proc(IFaxDocument*, FAX_RECEIPT_TYPE_ENUM, HRESULT)
-    get_group_broadcast_receipts : Proc(IFaxDocument*, Int16*, HRESULT)
-    put_group_broadcast_receipts : Proc(IFaxDocument*, Int16, HRESULT)
-    get_priority : Proc(IFaxDocument*, FAX_PRIORITY_TYPE_ENUM*, HRESULT)
-    put_priority : Proc(IFaxDocument*, FAX_PRIORITY_TYPE_ENUM, HRESULT)
-    get_tapi_connection : Proc(IFaxDocument*, IDispatch*, HRESULT)
-    putref_tapi_connection : Proc(IFaxDocument*, IDispatch, HRESULT)
-    submit : Proc(IFaxDocument*, UInt8*, VARIANT*, HRESULT)
-    connected_submit : Proc(IFaxDocument*, IFaxServer, VARIANT*, HRESULT)
-    get_attach_fax_to_receipt : Proc(IFaxDocument*, Int16*, HRESULT)
-    put_attach_fax_to_receipt : Proc(IFaxDocument*, Int16, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_body : UInt64
+    put_body : UInt64
+    get_sender : UInt64
+    get_recipients : UInt64
+    get_cover_page : UInt64
+    put_cover_page : UInt64
+    get_subject : UInt64
+    put_subject : UInt64
+    get_note : UInt64
+    put_note : UInt64
+    get_schedule_time : UInt64
+    put_schedule_time : UInt64
+    get_receipt_address : UInt64
+    put_receipt_address : UInt64
+    get_document_name : UInt64
+    put_document_name : UInt64
+    get_call_handle : UInt64
+    put_call_handle : UInt64
+    get_cover_page_type : UInt64
+    put_cover_page_type : UInt64
+    get_schedule_type : UInt64
+    put_schedule_type : UInt64
+    get_receipt_type : UInt64
+    put_receipt_type : UInt64
+    get_group_broadcast_receipts : UInt64
+    put_group_broadcast_receipts : UInt64
+    get_priority : UInt64
+    put_priority : UInt64
+    get_tapi_connection : UInt64
+    putref_tapi_connection : UInt64
+    submit : UInt64
+    connected_submit : UInt64
+    get_attach_fax_to_receipt : UInt64
+    put_attach_fax_to_receipt : UInt64
   end
 
   IFaxDocument_GUID = "b207a246-09e3-4a4e-a7dc-fea31d29458f"
@@ -1406,47 +1406,47 @@ lib LibWin32
   end
 
   struct IFaxSenderVTbl
-    query_interface : Proc(IFaxSender*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxSender*, UInt32)
-    release : Proc(IFaxSender*, UInt32)
-    get_type_info_count : Proc(IFaxSender*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxSender*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxSender*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxSender*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_billing_code : Proc(IFaxSender*, UInt8**, HRESULT)
-    put_billing_code : Proc(IFaxSender*, UInt8*, HRESULT)
-    get_city : Proc(IFaxSender*, UInt8**, HRESULT)
-    put_city : Proc(IFaxSender*, UInt8*, HRESULT)
-    get_company : Proc(IFaxSender*, UInt8**, HRESULT)
-    put_company : Proc(IFaxSender*, UInt8*, HRESULT)
-    get_country : Proc(IFaxSender*, UInt8**, HRESULT)
-    put_country : Proc(IFaxSender*, UInt8*, HRESULT)
-    get_department : Proc(IFaxSender*, UInt8**, HRESULT)
-    put_department : Proc(IFaxSender*, UInt8*, HRESULT)
-    get_email : Proc(IFaxSender*, UInt8**, HRESULT)
-    put_email : Proc(IFaxSender*, UInt8*, HRESULT)
-    get_fax_number : Proc(IFaxSender*, UInt8**, HRESULT)
-    put_fax_number : Proc(IFaxSender*, UInt8*, HRESULT)
-    get_home_phone : Proc(IFaxSender*, UInt8**, HRESULT)
-    put_home_phone : Proc(IFaxSender*, UInt8*, HRESULT)
-    get_name : Proc(IFaxSender*, UInt8**, HRESULT)
-    put_name : Proc(IFaxSender*, UInt8*, HRESULT)
-    get_tsid : Proc(IFaxSender*, UInt8**, HRESULT)
-    put_tsid : Proc(IFaxSender*, UInt8*, HRESULT)
-    get_office_phone : Proc(IFaxSender*, UInt8**, HRESULT)
-    put_office_phone : Proc(IFaxSender*, UInt8*, HRESULT)
-    get_office_location : Proc(IFaxSender*, UInt8**, HRESULT)
-    put_office_location : Proc(IFaxSender*, UInt8*, HRESULT)
-    get_state : Proc(IFaxSender*, UInt8**, HRESULT)
-    put_state : Proc(IFaxSender*, UInt8*, HRESULT)
-    get_street_address : Proc(IFaxSender*, UInt8**, HRESULT)
-    put_street_address : Proc(IFaxSender*, UInt8*, HRESULT)
-    get_title : Proc(IFaxSender*, UInt8**, HRESULT)
-    put_title : Proc(IFaxSender*, UInt8*, HRESULT)
-    get_zip_code : Proc(IFaxSender*, UInt8**, HRESULT)
-    put_zip_code : Proc(IFaxSender*, UInt8*, HRESULT)
-    load_default_sender : Proc(IFaxSender*, HRESULT)
-    save_default_sender : Proc(IFaxSender*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_billing_code : UInt64
+    put_billing_code : UInt64
+    get_city : UInt64
+    put_city : UInt64
+    get_company : UInt64
+    put_company : UInt64
+    get_country : UInt64
+    put_country : UInt64
+    get_department : UInt64
+    put_department : UInt64
+    get_email : UInt64
+    put_email : UInt64
+    get_fax_number : UInt64
+    put_fax_number : UInt64
+    get_home_phone : UInt64
+    put_home_phone : UInt64
+    get_name : UInt64
+    put_name : UInt64
+    get_tsid : UInt64
+    put_tsid : UInt64
+    get_office_phone : UInt64
+    put_office_phone : UInt64
+    get_office_location : UInt64
+    put_office_location : UInt64
+    get_state : UInt64
+    put_state : UInt64
+    get_street_address : UInt64
+    put_street_address : UInt64
+    get_title : UInt64
+    put_title : UInt64
+    get_zip_code : UInt64
+    put_zip_code : UInt64
+    load_default_sender : UInt64
+    save_default_sender : UInt64
   end
 
   IFaxSender_GUID = "0d879d7d-f57a-4cc6-a6f9-3ee5d527b46a"
@@ -1456,17 +1456,17 @@ lib LibWin32
   end
 
   struct IFaxRecipientVTbl
-    query_interface : Proc(IFaxRecipient*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxRecipient*, UInt32)
-    release : Proc(IFaxRecipient*, UInt32)
-    get_type_info_count : Proc(IFaxRecipient*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxRecipient*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxRecipient*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxRecipient*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_fax_number : Proc(IFaxRecipient*, UInt8**, HRESULT)
-    put_fax_number : Proc(IFaxRecipient*, UInt8*, HRESULT)
-    get_name : Proc(IFaxRecipient*, UInt8**, HRESULT)
-    put_name : Proc(IFaxRecipient*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_fax_number : UInt64
+    put_fax_number : UInt64
+    get_name : UInt64
+    put_name : UInt64
   end
 
   IFaxRecipient_GUID = "9a3da3a0-538d-42b6-9444-aaa57d0ce2bc"
@@ -1476,18 +1476,18 @@ lib LibWin32
   end
 
   struct IFaxRecipientsVTbl
-    query_interface : Proc(IFaxRecipients*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxRecipients*, UInt32)
-    release : Proc(IFaxRecipients*, UInt32)
-    get_type_info_count : Proc(IFaxRecipients*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxRecipients*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxRecipients*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxRecipients*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IFaxRecipients*, IUnknown*, HRESULT)
-    get_item : Proc(IFaxRecipients*, Int32, IFaxRecipient*, HRESULT)
-    get_count : Proc(IFaxRecipients*, Int32*, HRESULT)
-    add : Proc(IFaxRecipients*, UInt8*, UInt8*, IFaxRecipient*, HRESULT)
-    remove : Proc(IFaxRecipients*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_item : UInt64
+    get_count : UInt64
+    add : UInt64
+    remove : UInt64
   end
 
   IFaxRecipients_GUID = "b9c9de5a-894e-4492-9fa3-08c627c11d5d"
@@ -1497,31 +1497,31 @@ lib LibWin32
   end
 
   struct IFaxIncomingArchiveVTbl
-    query_interface : Proc(IFaxIncomingArchive*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxIncomingArchive*, UInt32)
-    release : Proc(IFaxIncomingArchive*, UInt32)
-    get_type_info_count : Proc(IFaxIncomingArchive*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxIncomingArchive*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxIncomingArchive*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxIncomingArchive*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_use_archive : Proc(IFaxIncomingArchive*, Int16*, HRESULT)
-    put_use_archive : Proc(IFaxIncomingArchive*, Int16, HRESULT)
-    get_archive_folder : Proc(IFaxIncomingArchive*, UInt8**, HRESULT)
-    put_archive_folder : Proc(IFaxIncomingArchive*, UInt8*, HRESULT)
-    get_size_quota_warning : Proc(IFaxIncomingArchive*, Int16*, HRESULT)
-    put_size_quota_warning : Proc(IFaxIncomingArchive*, Int16, HRESULT)
-    get_high_quota_water_mark : Proc(IFaxIncomingArchive*, Int32*, HRESULT)
-    put_high_quota_water_mark : Proc(IFaxIncomingArchive*, Int32, HRESULT)
-    get_low_quota_water_mark : Proc(IFaxIncomingArchive*, Int32*, HRESULT)
-    put_low_quota_water_mark : Proc(IFaxIncomingArchive*, Int32, HRESULT)
-    get_age_limit : Proc(IFaxIncomingArchive*, Int32*, HRESULT)
-    put_age_limit : Proc(IFaxIncomingArchive*, Int32, HRESULT)
-    get_size_low : Proc(IFaxIncomingArchive*, Int32*, HRESULT)
-    get_size_high : Proc(IFaxIncomingArchive*, Int32*, HRESULT)
-    refresh : Proc(IFaxIncomingArchive*, HRESULT)
-    save : Proc(IFaxIncomingArchive*, HRESULT)
-    get_messages : Proc(IFaxIncomingArchive*, Int32, IFaxIncomingMessageIterator*, HRESULT)
-    get_message : Proc(IFaxIncomingArchive*, UInt8*, IFaxIncomingMessage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_use_archive : UInt64
+    put_use_archive : UInt64
+    get_archive_folder : UInt64
+    put_archive_folder : UInt64
+    get_size_quota_warning : UInt64
+    put_size_quota_warning : UInt64
+    get_high_quota_water_mark : UInt64
+    put_high_quota_water_mark : UInt64
+    get_low_quota_water_mark : UInt64
+    put_low_quota_water_mark : UInt64
+    get_age_limit : UInt64
+    put_age_limit : UInt64
+    get_size_low : UInt64
+    get_size_high : UInt64
+    refresh : UInt64
+    save : UInt64
+    get_messages : UInt64
+    get_message : UInt64
   end
 
   IFaxIncomingArchive_GUID = "76062cc7-f714-4fbd-aa06-ed6e4a4b70f3"
@@ -1531,19 +1531,19 @@ lib LibWin32
   end
 
   struct IFaxIncomingQueueVTbl
-    query_interface : Proc(IFaxIncomingQueue*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxIncomingQueue*, UInt32)
-    release : Proc(IFaxIncomingQueue*, UInt32)
-    get_type_info_count : Proc(IFaxIncomingQueue*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxIncomingQueue*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxIncomingQueue*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxIncomingQueue*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_blocked : Proc(IFaxIncomingQueue*, Int16*, HRESULT)
-    put_blocked : Proc(IFaxIncomingQueue*, Int16, HRESULT)
-    refresh : Proc(IFaxIncomingQueue*, HRESULT)
-    save : Proc(IFaxIncomingQueue*, HRESULT)
-    get_jobs : Proc(IFaxIncomingQueue*, IFaxIncomingJobs*, HRESULT)
-    get_job : Proc(IFaxIncomingQueue*, UInt8*, IFaxIncomingJob*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_blocked : UInt64
+    put_blocked : UInt64
+    refresh : UInt64
+    save : UInt64
+    get_jobs : UInt64
+    get_job : UInt64
   end
 
   IFaxIncomingQueue_GUID = "902e64ef-8fd8-4b75-9725-6014df161545"
@@ -1553,31 +1553,31 @@ lib LibWin32
   end
 
   struct IFaxOutgoingArchiveVTbl
-    query_interface : Proc(IFaxOutgoingArchive*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxOutgoingArchive*, UInt32)
-    release : Proc(IFaxOutgoingArchive*, UInt32)
-    get_type_info_count : Proc(IFaxOutgoingArchive*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxOutgoingArchive*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxOutgoingArchive*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxOutgoingArchive*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_use_archive : Proc(IFaxOutgoingArchive*, Int16*, HRESULT)
-    put_use_archive : Proc(IFaxOutgoingArchive*, Int16, HRESULT)
-    get_archive_folder : Proc(IFaxOutgoingArchive*, UInt8**, HRESULT)
-    put_archive_folder : Proc(IFaxOutgoingArchive*, UInt8*, HRESULT)
-    get_size_quota_warning : Proc(IFaxOutgoingArchive*, Int16*, HRESULT)
-    put_size_quota_warning : Proc(IFaxOutgoingArchive*, Int16, HRESULT)
-    get_high_quota_water_mark : Proc(IFaxOutgoingArchive*, Int32*, HRESULT)
-    put_high_quota_water_mark : Proc(IFaxOutgoingArchive*, Int32, HRESULT)
-    get_low_quota_water_mark : Proc(IFaxOutgoingArchive*, Int32*, HRESULT)
-    put_low_quota_water_mark : Proc(IFaxOutgoingArchive*, Int32, HRESULT)
-    get_age_limit : Proc(IFaxOutgoingArchive*, Int32*, HRESULT)
-    put_age_limit : Proc(IFaxOutgoingArchive*, Int32, HRESULT)
-    get_size_low : Proc(IFaxOutgoingArchive*, Int32*, HRESULT)
-    get_size_high : Proc(IFaxOutgoingArchive*, Int32*, HRESULT)
-    refresh : Proc(IFaxOutgoingArchive*, HRESULT)
-    save : Proc(IFaxOutgoingArchive*, HRESULT)
-    get_messages : Proc(IFaxOutgoingArchive*, Int32, IFaxOutgoingMessageIterator*, HRESULT)
-    get_message : Proc(IFaxOutgoingArchive*, UInt8*, IFaxOutgoingMessage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_use_archive : UInt64
+    put_use_archive : UInt64
+    get_archive_folder : UInt64
+    put_archive_folder : UInt64
+    get_size_quota_warning : UInt64
+    put_size_quota_warning : UInt64
+    get_high_quota_water_mark : UInt64
+    put_high_quota_water_mark : UInt64
+    get_low_quota_water_mark : UInt64
+    put_low_quota_water_mark : UInt64
+    get_age_limit : UInt64
+    put_age_limit : UInt64
+    get_size_low : UInt64
+    get_size_high : UInt64
+    refresh : UInt64
+    save : UInt64
+    get_messages : UInt64
+    get_message : UInt64
   end
 
   IFaxOutgoingArchive_GUID = "c9c28f40-8d80-4e53-810f-9a79919b49fd"
@@ -1587,37 +1587,37 @@ lib LibWin32
   end
 
   struct IFaxOutgoingQueueVTbl
-    query_interface : Proc(IFaxOutgoingQueue*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxOutgoingQueue*, UInt32)
-    release : Proc(IFaxOutgoingQueue*, UInt32)
-    get_type_info_count : Proc(IFaxOutgoingQueue*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxOutgoingQueue*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxOutgoingQueue*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxOutgoingQueue*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_blocked : Proc(IFaxOutgoingQueue*, Int16*, HRESULT)
-    put_blocked : Proc(IFaxOutgoingQueue*, Int16, HRESULT)
-    get_paused : Proc(IFaxOutgoingQueue*, Int16*, HRESULT)
-    put_paused : Proc(IFaxOutgoingQueue*, Int16, HRESULT)
-    get_allow_personal_cover_pages : Proc(IFaxOutgoingQueue*, Int16*, HRESULT)
-    put_allow_personal_cover_pages : Proc(IFaxOutgoingQueue*, Int16, HRESULT)
-    get_use_device_tsid : Proc(IFaxOutgoingQueue*, Int16*, HRESULT)
-    put_use_device_tsid : Proc(IFaxOutgoingQueue*, Int16, HRESULT)
-    get_retries : Proc(IFaxOutgoingQueue*, Int32*, HRESULT)
-    put_retries : Proc(IFaxOutgoingQueue*, Int32, HRESULT)
-    get_retry_delay : Proc(IFaxOutgoingQueue*, Int32*, HRESULT)
-    put_retry_delay : Proc(IFaxOutgoingQueue*, Int32, HRESULT)
-    get_discount_rate_start : Proc(IFaxOutgoingQueue*, Float64*, HRESULT)
-    put_discount_rate_start : Proc(IFaxOutgoingQueue*, Float64, HRESULT)
-    get_discount_rate_end : Proc(IFaxOutgoingQueue*, Float64*, HRESULT)
-    put_discount_rate_end : Proc(IFaxOutgoingQueue*, Float64, HRESULT)
-    get_age_limit : Proc(IFaxOutgoingQueue*, Int32*, HRESULT)
-    put_age_limit : Proc(IFaxOutgoingQueue*, Int32, HRESULT)
-    get_branding : Proc(IFaxOutgoingQueue*, Int16*, HRESULT)
-    put_branding : Proc(IFaxOutgoingQueue*, Int16, HRESULT)
-    refresh : Proc(IFaxOutgoingQueue*, HRESULT)
-    save : Proc(IFaxOutgoingQueue*, HRESULT)
-    get_jobs : Proc(IFaxOutgoingQueue*, IFaxOutgoingJobs*, HRESULT)
-    get_job : Proc(IFaxOutgoingQueue*, UInt8*, IFaxOutgoingJob*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_blocked : UInt64
+    put_blocked : UInt64
+    get_paused : UInt64
+    put_paused : UInt64
+    get_allow_personal_cover_pages : UInt64
+    put_allow_personal_cover_pages : UInt64
+    get_use_device_tsid : UInt64
+    put_use_device_tsid : UInt64
+    get_retries : UInt64
+    put_retries : UInt64
+    get_retry_delay : UInt64
+    put_retry_delay : UInt64
+    get_discount_rate_start : UInt64
+    put_discount_rate_start : UInt64
+    get_discount_rate_end : UInt64
+    put_discount_rate_end : UInt64
+    get_age_limit : UInt64
+    put_age_limit : UInt64
+    get_branding : UInt64
+    put_branding : UInt64
+    refresh : UInt64
+    save : UInt64
+    get_jobs : UInt64
+    get_job : UInt64
   end
 
   IFaxOutgoingQueue_GUID = "80b1df24-d9ac-4333-b373-487cedc80ce5"
@@ -1627,19 +1627,19 @@ lib LibWin32
   end
 
   struct IFaxIncomingMessageIteratorVTbl
-    query_interface : Proc(IFaxIncomingMessageIterator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxIncomingMessageIterator*, UInt32)
-    release : Proc(IFaxIncomingMessageIterator*, UInt32)
-    get_type_info_count : Proc(IFaxIncomingMessageIterator*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxIncomingMessageIterator*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxIncomingMessageIterator*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxIncomingMessageIterator*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_message : Proc(IFaxIncomingMessageIterator*, IFaxIncomingMessage*, HRESULT)
-    get_prefetch_size : Proc(IFaxIncomingMessageIterator*, Int32*, HRESULT)
-    put_prefetch_size : Proc(IFaxIncomingMessageIterator*, Int32, HRESULT)
-    get_at_eof : Proc(IFaxIncomingMessageIterator*, Int16*, HRESULT)
-    move_first : Proc(IFaxIncomingMessageIterator*, HRESULT)
-    move_next : Proc(IFaxIncomingMessageIterator*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_message : UInt64
+    get_prefetch_size : UInt64
+    put_prefetch_size : UInt64
+    get_at_eof : UInt64
+    move_first : UInt64
+    move_next : UInt64
   end
 
   IFaxIncomingMessageIterator_GUID = "fd73ecc4-6f06-4f52-82a8-f7ba06ae3108"
@@ -1649,26 +1649,26 @@ lib LibWin32
   end
 
   struct IFaxIncomingMessageVTbl
-    query_interface : Proc(IFaxIncomingMessage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxIncomingMessage*, UInt32)
-    release : Proc(IFaxIncomingMessage*, UInt32)
-    get_type_info_count : Proc(IFaxIncomingMessage*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxIncomingMessage*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxIncomingMessage*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxIncomingMessage*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_id : Proc(IFaxIncomingMessage*, UInt8**, HRESULT)
-    get_pages : Proc(IFaxIncomingMessage*, Int32*, HRESULT)
-    get_size : Proc(IFaxIncomingMessage*, Int32*, HRESULT)
-    get_device_name : Proc(IFaxIncomingMessage*, UInt8**, HRESULT)
-    get_retries : Proc(IFaxIncomingMessage*, Int32*, HRESULT)
-    get_transmission_start : Proc(IFaxIncomingMessage*, Float64*, HRESULT)
-    get_transmission_end : Proc(IFaxIncomingMessage*, Float64*, HRESULT)
-    get_csid : Proc(IFaxIncomingMessage*, UInt8**, HRESULT)
-    get_tsid : Proc(IFaxIncomingMessage*, UInt8**, HRESULT)
-    get_caller_id : Proc(IFaxIncomingMessage*, UInt8**, HRESULT)
-    get_routing_information : Proc(IFaxIncomingMessage*, UInt8**, HRESULT)
-    copy_tiff : Proc(IFaxIncomingMessage*, UInt8*, HRESULT)
-    delete : Proc(IFaxIncomingMessage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_id : UInt64
+    get_pages : UInt64
+    get_size : UInt64
+    get_device_name : UInt64
+    get_retries : UInt64
+    get_transmission_start : UInt64
+    get_transmission_end : UInt64
+    get_csid : UInt64
+    get_tsid : UInt64
+    get_caller_id : UInt64
+    get_routing_information : UInt64
+    copy_tiff : UInt64
+    delete : UInt64
   end
 
   IFaxIncomingMessage_GUID = "7cab88fa-2ef9-4851-b2f3-1d148fed8447"
@@ -1678,16 +1678,16 @@ lib LibWin32
   end
 
   struct IFaxOutgoingJobsVTbl
-    query_interface : Proc(IFaxOutgoingJobs*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxOutgoingJobs*, UInt32)
-    release : Proc(IFaxOutgoingJobs*, UInt32)
-    get_type_info_count : Proc(IFaxOutgoingJobs*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxOutgoingJobs*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxOutgoingJobs*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxOutgoingJobs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IFaxOutgoingJobs*, IUnknown*, HRESULT)
-    get_item : Proc(IFaxOutgoingJobs*, VARIANT, IFaxOutgoingJob*, HRESULT)
-    get_count : Proc(IFaxOutgoingJobs*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_item : UInt64
+    get_count : UInt64
   end
 
   IFaxOutgoingJobs_GUID = "2c56d8e6-8c2f-4573-944c-e505f8f5aeed"
@@ -1697,44 +1697,44 @@ lib LibWin32
   end
 
   struct IFaxOutgoingJobVTbl
-    query_interface : Proc(IFaxOutgoingJob*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxOutgoingJob*, UInt32)
-    release : Proc(IFaxOutgoingJob*, UInt32)
-    get_type_info_count : Proc(IFaxOutgoingJob*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxOutgoingJob*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxOutgoingJob*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxOutgoingJob*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_subject : Proc(IFaxOutgoingJob*, UInt8**, HRESULT)
-    get_document_name : Proc(IFaxOutgoingJob*, UInt8**, HRESULT)
-    get_pages : Proc(IFaxOutgoingJob*, Int32*, HRESULT)
-    get_size : Proc(IFaxOutgoingJob*, Int32*, HRESULT)
-    get_submission_id : Proc(IFaxOutgoingJob*, UInt8**, HRESULT)
-    get_id : Proc(IFaxOutgoingJob*, UInt8**, HRESULT)
-    get_original_scheduled_time : Proc(IFaxOutgoingJob*, Float64*, HRESULT)
-    get_submission_time : Proc(IFaxOutgoingJob*, Float64*, HRESULT)
-    get_receipt_type : Proc(IFaxOutgoingJob*, FAX_RECEIPT_TYPE_ENUM*, HRESULT)
-    get_priority : Proc(IFaxOutgoingJob*, FAX_PRIORITY_TYPE_ENUM*, HRESULT)
-    get_sender : Proc(IFaxOutgoingJob*, IFaxSender*, HRESULT)
-    get_recipient : Proc(IFaxOutgoingJob*, IFaxRecipient*, HRESULT)
-    get_current_page : Proc(IFaxOutgoingJob*, Int32*, HRESULT)
-    get_device_id : Proc(IFaxOutgoingJob*, Int32*, HRESULT)
-    get_status : Proc(IFaxOutgoingJob*, FAX_JOB_STATUS_ENUM*, HRESULT)
-    get_extended_status_code : Proc(IFaxOutgoingJob*, FAX_JOB_EXTENDED_STATUS_ENUM*, HRESULT)
-    get_extended_status : Proc(IFaxOutgoingJob*, UInt8**, HRESULT)
-    get_available_operations : Proc(IFaxOutgoingJob*, FAX_JOB_OPERATIONS_ENUM*, HRESULT)
-    get_retries : Proc(IFaxOutgoingJob*, Int32*, HRESULT)
-    get_scheduled_time : Proc(IFaxOutgoingJob*, Float64*, HRESULT)
-    get_transmission_start : Proc(IFaxOutgoingJob*, Float64*, HRESULT)
-    get_transmission_end : Proc(IFaxOutgoingJob*, Float64*, HRESULT)
-    get_csid : Proc(IFaxOutgoingJob*, UInt8**, HRESULT)
-    get_tsid : Proc(IFaxOutgoingJob*, UInt8**, HRESULT)
-    get_group_broadcast_receipts : Proc(IFaxOutgoingJob*, Int16*, HRESULT)
-    pause : Proc(IFaxOutgoingJob*, HRESULT)
-    resume : Proc(IFaxOutgoingJob*, HRESULT)
-    restart : Proc(IFaxOutgoingJob*, HRESULT)
-    copy_tiff : Proc(IFaxOutgoingJob*, UInt8*, HRESULT)
-    refresh : Proc(IFaxOutgoingJob*, HRESULT)
-    cancel : Proc(IFaxOutgoingJob*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_subject : UInt64
+    get_document_name : UInt64
+    get_pages : UInt64
+    get_size : UInt64
+    get_submission_id : UInt64
+    get_id : UInt64
+    get_original_scheduled_time : UInt64
+    get_submission_time : UInt64
+    get_receipt_type : UInt64
+    get_priority : UInt64
+    get_sender : UInt64
+    get_recipient : UInt64
+    get_current_page : UInt64
+    get_device_id : UInt64
+    get_status : UInt64
+    get_extended_status_code : UInt64
+    get_extended_status : UInt64
+    get_available_operations : UInt64
+    get_retries : UInt64
+    get_scheduled_time : UInt64
+    get_transmission_start : UInt64
+    get_transmission_end : UInt64
+    get_csid : UInt64
+    get_tsid : UInt64
+    get_group_broadcast_receipts : UInt64
+    pause : UInt64
+    resume : UInt64
+    restart : UInt64
+    copy_tiff : UInt64
+    refresh : UInt64
+    cancel : UInt64
   end
 
   IFaxOutgoingJob_GUID = "6356daad-6614-4583-bf7a-3ad67bbfc71c"
@@ -1744,19 +1744,19 @@ lib LibWin32
   end
 
   struct IFaxOutgoingMessageIteratorVTbl
-    query_interface : Proc(IFaxOutgoingMessageIterator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxOutgoingMessageIterator*, UInt32)
-    release : Proc(IFaxOutgoingMessageIterator*, UInt32)
-    get_type_info_count : Proc(IFaxOutgoingMessageIterator*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxOutgoingMessageIterator*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxOutgoingMessageIterator*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxOutgoingMessageIterator*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_message : Proc(IFaxOutgoingMessageIterator*, IFaxOutgoingMessage*, HRESULT)
-    get_at_eof : Proc(IFaxOutgoingMessageIterator*, Int16*, HRESULT)
-    get_prefetch_size : Proc(IFaxOutgoingMessageIterator*, Int32*, HRESULT)
-    put_prefetch_size : Proc(IFaxOutgoingMessageIterator*, Int32, HRESULT)
-    move_first : Proc(IFaxOutgoingMessageIterator*, HRESULT)
-    move_next : Proc(IFaxOutgoingMessageIterator*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_message : UInt64
+    get_at_eof : UInt64
+    get_prefetch_size : UInt64
+    put_prefetch_size : UInt64
+    move_first : UInt64
+    move_next : UInt64
   end
 
   IFaxOutgoingMessageIterator_GUID = "f5ec5d4f-b840-432f-9980-112fe42a9b7a"
@@ -1766,32 +1766,32 @@ lib LibWin32
   end
 
   struct IFaxOutgoingMessageVTbl
-    query_interface : Proc(IFaxOutgoingMessage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxOutgoingMessage*, UInt32)
-    release : Proc(IFaxOutgoingMessage*, UInt32)
-    get_type_info_count : Proc(IFaxOutgoingMessage*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxOutgoingMessage*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxOutgoingMessage*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxOutgoingMessage*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_submission_id : Proc(IFaxOutgoingMessage*, UInt8**, HRESULT)
-    get_id : Proc(IFaxOutgoingMessage*, UInt8**, HRESULT)
-    get_subject : Proc(IFaxOutgoingMessage*, UInt8**, HRESULT)
-    get_document_name : Proc(IFaxOutgoingMessage*, UInt8**, HRESULT)
-    get_retries : Proc(IFaxOutgoingMessage*, Int32*, HRESULT)
-    get_pages : Proc(IFaxOutgoingMessage*, Int32*, HRESULT)
-    get_size : Proc(IFaxOutgoingMessage*, Int32*, HRESULT)
-    get_original_scheduled_time : Proc(IFaxOutgoingMessage*, Float64*, HRESULT)
-    get_submission_time : Proc(IFaxOutgoingMessage*, Float64*, HRESULT)
-    get_priority : Proc(IFaxOutgoingMessage*, FAX_PRIORITY_TYPE_ENUM*, HRESULT)
-    get_sender : Proc(IFaxOutgoingMessage*, IFaxSender*, HRESULT)
-    get_recipient : Proc(IFaxOutgoingMessage*, IFaxRecipient*, HRESULT)
-    get_device_name : Proc(IFaxOutgoingMessage*, UInt8**, HRESULT)
-    get_transmission_start : Proc(IFaxOutgoingMessage*, Float64*, HRESULT)
-    get_transmission_end : Proc(IFaxOutgoingMessage*, Float64*, HRESULT)
-    get_csid : Proc(IFaxOutgoingMessage*, UInt8**, HRESULT)
-    get_tsid : Proc(IFaxOutgoingMessage*, UInt8**, HRESULT)
-    copy_tiff : Proc(IFaxOutgoingMessage*, UInt8*, HRESULT)
-    delete : Proc(IFaxOutgoingMessage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_submission_id : UInt64
+    get_id : UInt64
+    get_subject : UInt64
+    get_document_name : UInt64
+    get_retries : UInt64
+    get_pages : UInt64
+    get_size : UInt64
+    get_original_scheduled_time : UInt64
+    get_submission_time : UInt64
+    get_priority : UInt64
+    get_sender : UInt64
+    get_recipient : UInt64
+    get_device_name : UInt64
+    get_transmission_start : UInt64
+    get_transmission_end : UInt64
+    get_csid : UInt64
+    get_tsid : UInt64
+    copy_tiff : UInt64
+    delete : UInt64
   end
 
   IFaxOutgoingMessage_GUID = "f0ea35de-caa5-4a7c-82c7-2b60ba5f2be2"
@@ -1801,16 +1801,16 @@ lib LibWin32
   end
 
   struct IFaxIncomingJobsVTbl
-    query_interface : Proc(IFaxIncomingJobs*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxIncomingJobs*, UInt32)
-    release : Proc(IFaxIncomingJobs*, UInt32)
-    get_type_info_count : Proc(IFaxIncomingJobs*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxIncomingJobs*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxIncomingJobs*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxIncomingJobs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IFaxIncomingJobs*, IUnknown*, HRESULT)
-    get_item : Proc(IFaxIncomingJobs*, VARIANT, IFaxIncomingJob*, HRESULT)
-    get_count : Proc(IFaxIncomingJobs*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_item : UInt64
+    get_count : UInt64
   end
 
   IFaxIncomingJobs_GUID = "011f04e9-4fd6-4c23-9513-b6b66bb26be9"
@@ -1820,32 +1820,32 @@ lib LibWin32
   end
 
   struct IFaxIncomingJobVTbl
-    query_interface : Proc(IFaxIncomingJob*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxIncomingJob*, UInt32)
-    release : Proc(IFaxIncomingJob*, UInt32)
-    get_type_info_count : Proc(IFaxIncomingJob*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxIncomingJob*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxIncomingJob*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxIncomingJob*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_size : Proc(IFaxIncomingJob*, Int32*, HRESULT)
-    get_id : Proc(IFaxIncomingJob*, UInt8**, HRESULT)
-    get_current_page : Proc(IFaxIncomingJob*, Int32*, HRESULT)
-    get_device_id : Proc(IFaxIncomingJob*, Int32*, HRESULT)
-    get_status : Proc(IFaxIncomingJob*, FAX_JOB_STATUS_ENUM*, HRESULT)
-    get_extended_status_code : Proc(IFaxIncomingJob*, FAX_JOB_EXTENDED_STATUS_ENUM*, HRESULT)
-    get_extended_status : Proc(IFaxIncomingJob*, UInt8**, HRESULT)
-    get_available_operations : Proc(IFaxIncomingJob*, FAX_JOB_OPERATIONS_ENUM*, HRESULT)
-    get_retries : Proc(IFaxIncomingJob*, Int32*, HRESULT)
-    get_transmission_start : Proc(IFaxIncomingJob*, Float64*, HRESULT)
-    get_transmission_end : Proc(IFaxIncomingJob*, Float64*, HRESULT)
-    get_csid : Proc(IFaxIncomingJob*, UInt8**, HRESULT)
-    get_tsid : Proc(IFaxIncomingJob*, UInt8**, HRESULT)
-    get_caller_id : Proc(IFaxIncomingJob*, UInt8**, HRESULT)
-    get_routing_information : Proc(IFaxIncomingJob*, UInt8**, HRESULT)
-    get_job_type : Proc(IFaxIncomingJob*, FAX_JOB_TYPE_ENUM*, HRESULT)
-    cancel : Proc(IFaxIncomingJob*, HRESULT)
-    refresh : Proc(IFaxIncomingJob*, HRESULT)
-    copy_tiff : Proc(IFaxIncomingJob*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_size : UInt64
+    get_id : UInt64
+    get_current_page : UInt64
+    get_device_id : UInt64
+    get_status : UInt64
+    get_extended_status_code : UInt64
+    get_extended_status : UInt64
+    get_available_operations : UInt64
+    get_retries : UInt64
+    get_transmission_start : UInt64
+    get_transmission_end : UInt64
+    get_csid : UInt64
+    get_tsid : UInt64
+    get_caller_id : UInt64
+    get_routing_information : UInt64
+    get_job_type : UInt64
+    cancel : UInt64
+    refresh : UInt64
+    copy_tiff : UInt64
   end
 
   IFaxIncomingJob_GUID = "207529e6-654a-4916-9f88-4d232ee8a107"
@@ -1855,25 +1855,25 @@ lib LibWin32
   end
 
   struct IFaxDeviceProviderVTbl
-    query_interface : Proc(IFaxDeviceProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxDeviceProvider*, UInt32)
-    release : Proc(IFaxDeviceProvider*, UInt32)
-    get_type_info_count : Proc(IFaxDeviceProvider*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxDeviceProvider*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxDeviceProvider*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxDeviceProvider*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_friendly_name : Proc(IFaxDeviceProvider*, UInt8**, HRESULT)
-    get_image_name : Proc(IFaxDeviceProvider*, UInt8**, HRESULT)
-    get_unique_name : Proc(IFaxDeviceProvider*, UInt8**, HRESULT)
-    get_tapi_provider_name : Proc(IFaxDeviceProvider*, UInt8**, HRESULT)
-    get_major_version : Proc(IFaxDeviceProvider*, Int32*, HRESULT)
-    get_minor_version : Proc(IFaxDeviceProvider*, Int32*, HRESULT)
-    get_major_build : Proc(IFaxDeviceProvider*, Int32*, HRESULT)
-    get_minor_build : Proc(IFaxDeviceProvider*, Int32*, HRESULT)
-    get_debug : Proc(IFaxDeviceProvider*, Int16*, HRESULT)
-    get_status : Proc(IFaxDeviceProvider*, FAX_PROVIDER_STATUS_ENUM*, HRESULT)
-    get_init_error_code : Proc(IFaxDeviceProvider*, Int32*, HRESULT)
-    get_device_ids : Proc(IFaxDeviceProvider*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_friendly_name : UInt64
+    get_image_name : UInt64
+    get_unique_name : UInt64
+    get_tapi_provider_name : UInt64
+    get_major_version : UInt64
+    get_minor_version : UInt64
+    get_major_build : UInt64
+    get_minor_build : UInt64
+    get_debug : UInt64
+    get_status : UInt64
+    get_init_error_code : UInt64
+    get_device_ids : UInt64
   end
 
   IFaxDeviceProvider_GUID = "290eac63-83ec-449c-8417-f148df8c682a"
@@ -1883,39 +1883,39 @@ lib LibWin32
   end
 
   struct IFaxDeviceVTbl
-    query_interface : Proc(IFaxDevice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxDevice*, UInt32)
-    release : Proc(IFaxDevice*, UInt32)
-    get_type_info_count : Proc(IFaxDevice*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxDevice*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxDevice*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxDevice*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_id : Proc(IFaxDevice*, Int32*, HRESULT)
-    get_device_name : Proc(IFaxDevice*, UInt8**, HRESULT)
-    get_provider_unique_name : Proc(IFaxDevice*, UInt8**, HRESULT)
-    get_powered_off : Proc(IFaxDevice*, Int16*, HRESULT)
-    get_receiving_now : Proc(IFaxDevice*, Int16*, HRESULT)
-    get_sending_now : Proc(IFaxDevice*, Int16*, HRESULT)
-    get_used_routing_methods : Proc(IFaxDevice*, VARIANT*, HRESULT)
-    get_description : Proc(IFaxDevice*, UInt8**, HRESULT)
-    put_description : Proc(IFaxDevice*, UInt8*, HRESULT)
-    get_send_enabled : Proc(IFaxDevice*, Int16*, HRESULT)
-    put_send_enabled : Proc(IFaxDevice*, Int16, HRESULT)
-    get_receive_mode : Proc(IFaxDevice*, FAX_DEVICE_RECEIVE_MODE_ENUM*, HRESULT)
-    put_receive_mode : Proc(IFaxDevice*, FAX_DEVICE_RECEIVE_MODE_ENUM, HRESULT)
-    get_rings_before_answer : Proc(IFaxDevice*, Int32*, HRESULT)
-    put_rings_before_answer : Proc(IFaxDevice*, Int32, HRESULT)
-    get_csid : Proc(IFaxDevice*, UInt8**, HRESULT)
-    put_csid : Proc(IFaxDevice*, UInt8*, HRESULT)
-    get_tsid : Proc(IFaxDevice*, UInt8**, HRESULT)
-    put_tsid : Proc(IFaxDevice*, UInt8*, HRESULT)
-    refresh : Proc(IFaxDevice*, HRESULT)
-    save : Proc(IFaxDevice*, HRESULT)
-    get_extension_property : Proc(IFaxDevice*, UInt8*, VARIANT*, HRESULT)
-    set_extension_property : Proc(IFaxDevice*, UInt8*, VARIANT, HRESULT)
-    use_routing_method : Proc(IFaxDevice*, UInt8*, Int16, HRESULT)
-    get_ringing_now : Proc(IFaxDevice*, Int16*, HRESULT)
-    answer_call : Proc(IFaxDevice*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_id : UInt64
+    get_device_name : UInt64
+    get_provider_unique_name : UInt64
+    get_powered_off : UInt64
+    get_receiving_now : UInt64
+    get_sending_now : UInt64
+    get_used_routing_methods : UInt64
+    get_description : UInt64
+    put_description : UInt64
+    get_send_enabled : UInt64
+    put_send_enabled : UInt64
+    get_receive_mode : UInt64
+    put_receive_mode : UInt64
+    get_rings_before_answer : UInt64
+    put_rings_before_answer : UInt64
+    get_csid : UInt64
+    put_csid : UInt64
+    get_tsid : UInt64
+    put_tsid : UInt64
+    refresh : UInt64
+    save : UInt64
+    get_extension_property : UInt64
+    set_extension_property : UInt64
+    use_routing_method : UInt64
+    get_ringing_now : UInt64
+    answer_call : UInt64
   end
 
   IFaxDevice_GUID = "49306c59-b52e-4867-9df4-ca5841c956d0"
@@ -1925,21 +1925,21 @@ lib LibWin32
   end
 
   struct IFaxActivityLoggingVTbl
-    query_interface : Proc(IFaxActivityLogging*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxActivityLogging*, UInt32)
-    release : Proc(IFaxActivityLogging*, UInt32)
-    get_type_info_count : Proc(IFaxActivityLogging*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxActivityLogging*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxActivityLogging*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxActivityLogging*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_log_incoming : Proc(IFaxActivityLogging*, Int16*, HRESULT)
-    put_log_incoming : Proc(IFaxActivityLogging*, Int16, HRESULT)
-    get_log_outgoing : Proc(IFaxActivityLogging*, Int16*, HRESULT)
-    put_log_outgoing : Proc(IFaxActivityLogging*, Int16, HRESULT)
-    get_database_path : Proc(IFaxActivityLogging*, UInt8**, HRESULT)
-    put_database_path : Proc(IFaxActivityLogging*, UInt8*, HRESULT)
-    refresh : Proc(IFaxActivityLogging*, HRESULT)
-    save : Proc(IFaxActivityLogging*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_log_incoming : UInt64
+    put_log_incoming : UInt64
+    get_log_outgoing : UInt64
+    put_log_outgoing : UInt64
+    get_database_path : UInt64
+    put_database_path : UInt64
+    refresh : UInt64
+    save : UInt64
   end
 
   IFaxActivityLogging_GUID = "1e29078b-5a69-497b-9592-49b7e7faddb5"
@@ -1949,23 +1949,23 @@ lib LibWin32
   end
 
   struct IFaxEventLoggingVTbl
-    query_interface : Proc(IFaxEventLogging*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxEventLogging*, UInt32)
-    release : Proc(IFaxEventLogging*, UInt32)
-    get_type_info_count : Proc(IFaxEventLogging*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxEventLogging*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxEventLogging*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxEventLogging*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_init_events_level : Proc(IFaxEventLogging*, FAX_LOG_LEVEL_ENUM*, HRESULT)
-    put_init_events_level : Proc(IFaxEventLogging*, FAX_LOG_LEVEL_ENUM, HRESULT)
-    get_inbound_events_level : Proc(IFaxEventLogging*, FAX_LOG_LEVEL_ENUM*, HRESULT)
-    put_inbound_events_level : Proc(IFaxEventLogging*, FAX_LOG_LEVEL_ENUM, HRESULT)
-    get_outbound_events_level : Proc(IFaxEventLogging*, FAX_LOG_LEVEL_ENUM*, HRESULT)
-    put_outbound_events_level : Proc(IFaxEventLogging*, FAX_LOG_LEVEL_ENUM, HRESULT)
-    get_general_events_level : Proc(IFaxEventLogging*, FAX_LOG_LEVEL_ENUM*, HRESULT)
-    put_general_events_level : Proc(IFaxEventLogging*, FAX_LOG_LEVEL_ENUM, HRESULT)
-    refresh : Proc(IFaxEventLogging*, HRESULT)
-    save : Proc(IFaxEventLogging*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_init_events_level : UInt64
+    put_init_events_level : UInt64
+    get_inbound_events_level : UInt64
+    put_inbound_events_level : UInt64
+    get_outbound_events_level : UInt64
+    put_outbound_events_level : UInt64
+    get_general_events_level : UInt64
+    put_general_events_level : UInt64
+    refresh : UInt64
+    save : UInt64
   end
 
   IFaxEventLogging_GUID = "0880d965-20e8-42e4-8e17-944f192caad4"
@@ -1975,18 +1975,18 @@ lib LibWin32
   end
 
   struct IFaxOutboundRoutingGroupsVTbl
-    query_interface : Proc(IFaxOutboundRoutingGroups*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxOutboundRoutingGroups*, UInt32)
-    release : Proc(IFaxOutboundRoutingGroups*, UInt32)
-    get_type_info_count : Proc(IFaxOutboundRoutingGroups*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxOutboundRoutingGroups*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxOutboundRoutingGroups*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxOutboundRoutingGroups*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IFaxOutboundRoutingGroups*, IUnknown*, HRESULT)
-    get_item : Proc(IFaxOutboundRoutingGroups*, VARIANT, IFaxOutboundRoutingGroup*, HRESULT)
-    get_count : Proc(IFaxOutboundRoutingGroups*, Int32*, HRESULT)
-    add : Proc(IFaxOutboundRoutingGroups*, UInt8*, IFaxOutboundRoutingGroup*, HRESULT)
-    remove : Proc(IFaxOutboundRoutingGroups*, VARIANT, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_item : UInt64
+    get_count : UInt64
+    add : UInt64
+    remove : UInt64
   end
 
   IFaxOutboundRoutingGroups_GUID = "235cbef7-c2de-4bfd-b8da-75097c82c87f"
@@ -1996,16 +1996,16 @@ lib LibWin32
   end
 
   struct IFaxOutboundRoutingGroupVTbl
-    query_interface : Proc(IFaxOutboundRoutingGroup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxOutboundRoutingGroup*, UInt32)
-    release : Proc(IFaxOutboundRoutingGroup*, UInt32)
-    get_type_info_count : Proc(IFaxOutboundRoutingGroup*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxOutboundRoutingGroup*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxOutboundRoutingGroup*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxOutboundRoutingGroup*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IFaxOutboundRoutingGroup*, UInt8**, HRESULT)
-    get_status : Proc(IFaxOutboundRoutingGroup*, FAX_GROUP_STATUS_ENUM*, HRESULT)
-    get_device_ids : Proc(IFaxOutboundRoutingGroup*, IFaxDeviceIds*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_status : UInt64
+    get_device_ids : UInt64
   end
 
   IFaxOutboundRoutingGroup_GUID = "ca6289a1-7e25-4f87-9a0b-93365734962c"
@@ -2015,19 +2015,19 @@ lib LibWin32
   end
 
   struct IFaxDeviceIdsVTbl
-    query_interface : Proc(IFaxDeviceIds*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxDeviceIds*, UInt32)
-    release : Proc(IFaxDeviceIds*, UInt32)
-    get_type_info_count : Proc(IFaxDeviceIds*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxDeviceIds*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxDeviceIds*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxDeviceIds*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IFaxDeviceIds*, IUnknown*, HRESULT)
-    get_item : Proc(IFaxDeviceIds*, Int32, Int32*, HRESULT)
-    get_count : Proc(IFaxDeviceIds*, Int32*, HRESULT)
-    add : Proc(IFaxDeviceIds*, Int32, HRESULT)
-    remove : Proc(IFaxDeviceIds*, Int32, HRESULT)
-    set_order : Proc(IFaxDeviceIds*, Int32, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_item : UInt64
+    get_count : UInt64
+    add : UInt64
+    remove : UInt64
+    set_order : UInt64
   end
 
   IFaxDeviceIds_GUID = "2f0f813f-4ce9-443e-8ca1-738cfaeee149"
@@ -2037,20 +2037,20 @@ lib LibWin32
   end
 
   struct IFaxOutboundRoutingRulesVTbl
-    query_interface : Proc(IFaxOutboundRoutingRules*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxOutboundRoutingRules*, UInt32)
-    release : Proc(IFaxOutboundRoutingRules*, UInt32)
-    get_type_info_count : Proc(IFaxOutboundRoutingRules*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxOutboundRoutingRules*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxOutboundRoutingRules*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxOutboundRoutingRules*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IFaxOutboundRoutingRules*, IUnknown*, HRESULT)
-    get_item : Proc(IFaxOutboundRoutingRules*, Int32, IFaxOutboundRoutingRule*, HRESULT)
-    get_count : Proc(IFaxOutboundRoutingRules*, Int32*, HRESULT)
-    item_by_country_and_area : Proc(IFaxOutboundRoutingRules*, Int32, Int32, IFaxOutboundRoutingRule*, HRESULT)
-    remove_by_country_and_area : Proc(IFaxOutboundRoutingRules*, Int32, Int32, HRESULT)
-    remove : Proc(IFaxOutboundRoutingRules*, Int32, HRESULT)
-    add : Proc(IFaxOutboundRoutingRules*, Int32, Int32, Int16, UInt8*, Int32, IFaxOutboundRoutingRule*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_item : UInt64
+    get_count : UInt64
+    item_by_country_and_area : UInt64
+    remove_by_country_and_area : UInt64
+    remove : UInt64
+    add : UInt64
   end
 
   IFaxOutboundRoutingRules_GUID = "dcefa1e7-ae7d-4ed6-8521-369edcca5120"
@@ -2060,24 +2060,24 @@ lib LibWin32
   end
 
   struct IFaxOutboundRoutingRuleVTbl
-    query_interface : Proc(IFaxOutboundRoutingRule*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxOutboundRoutingRule*, UInt32)
-    release : Proc(IFaxOutboundRoutingRule*, UInt32)
-    get_type_info_count : Proc(IFaxOutboundRoutingRule*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxOutboundRoutingRule*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxOutboundRoutingRule*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxOutboundRoutingRule*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_country_code : Proc(IFaxOutboundRoutingRule*, Int32*, HRESULT)
-    get_area_code : Proc(IFaxOutboundRoutingRule*, Int32*, HRESULT)
-    get_status : Proc(IFaxOutboundRoutingRule*, FAX_RULE_STATUS_ENUM*, HRESULT)
-    get_use_device : Proc(IFaxOutboundRoutingRule*, Int16*, HRESULT)
-    put_use_device : Proc(IFaxOutboundRoutingRule*, Int16, HRESULT)
-    get_device_id : Proc(IFaxOutboundRoutingRule*, Int32*, HRESULT)
-    put_device_id : Proc(IFaxOutboundRoutingRule*, Int32, HRESULT)
-    get_group_name : Proc(IFaxOutboundRoutingRule*, UInt8**, HRESULT)
-    put_group_name : Proc(IFaxOutboundRoutingRule*, UInt8*, HRESULT)
-    refresh : Proc(IFaxOutboundRoutingRule*, HRESULT)
-    save : Proc(IFaxOutboundRoutingRule*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_country_code : UInt64
+    get_area_code : UInt64
+    get_status : UInt64
+    get_use_device : UInt64
+    put_use_device : UInt64
+    get_device_id : UInt64
+    put_device_id : UInt64
+    get_group_name : UInt64
+    put_group_name : UInt64
+    refresh : UInt64
+    save : UInt64
   end
 
   IFaxOutboundRoutingRule_GUID = "e1f795d5-07c2-469f-b027-acacc23219da"
@@ -2087,16 +2087,16 @@ lib LibWin32
   end
 
   struct IFaxInboundRoutingExtensionsVTbl
-    query_interface : Proc(IFaxInboundRoutingExtensions*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxInboundRoutingExtensions*, UInt32)
-    release : Proc(IFaxInboundRoutingExtensions*, UInt32)
-    get_type_info_count : Proc(IFaxInboundRoutingExtensions*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxInboundRoutingExtensions*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxInboundRoutingExtensions*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxInboundRoutingExtensions*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IFaxInboundRoutingExtensions*, IUnknown*, HRESULT)
-    get_item : Proc(IFaxInboundRoutingExtensions*, VARIANT, IFaxInboundRoutingExtension*, HRESULT)
-    get_count : Proc(IFaxInboundRoutingExtensions*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_item : UInt64
+    get_count : UInt64
   end
 
   IFaxInboundRoutingExtensions_GUID = "2f6c9673-7b26-42de-8eb0-915dcd2a4f4c"
@@ -2106,24 +2106,24 @@ lib LibWin32
   end
 
   struct IFaxInboundRoutingExtensionVTbl
-    query_interface : Proc(IFaxInboundRoutingExtension*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxInboundRoutingExtension*, UInt32)
-    release : Proc(IFaxInboundRoutingExtension*, UInt32)
-    get_type_info_count : Proc(IFaxInboundRoutingExtension*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxInboundRoutingExtension*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxInboundRoutingExtension*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxInboundRoutingExtension*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_friendly_name : Proc(IFaxInboundRoutingExtension*, UInt8**, HRESULT)
-    get_image_name : Proc(IFaxInboundRoutingExtension*, UInt8**, HRESULT)
-    get_unique_name : Proc(IFaxInboundRoutingExtension*, UInt8**, HRESULT)
-    get_major_version : Proc(IFaxInboundRoutingExtension*, Int32*, HRESULT)
-    get_minor_version : Proc(IFaxInboundRoutingExtension*, Int32*, HRESULT)
-    get_major_build : Proc(IFaxInboundRoutingExtension*, Int32*, HRESULT)
-    get_minor_build : Proc(IFaxInboundRoutingExtension*, Int32*, HRESULT)
-    get_debug : Proc(IFaxInboundRoutingExtension*, Int16*, HRESULT)
-    get_status : Proc(IFaxInboundRoutingExtension*, FAX_PROVIDER_STATUS_ENUM*, HRESULT)
-    get_init_error_code : Proc(IFaxInboundRoutingExtension*, Int32*, HRESULT)
-    get_methods : Proc(IFaxInboundRoutingExtension*, VARIANT*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_friendly_name : UInt64
+    get_image_name : UInt64
+    get_unique_name : UInt64
+    get_major_version : UInt64
+    get_minor_version : UInt64
+    get_major_build : UInt64
+    get_minor_build : UInt64
+    get_debug : UInt64
+    get_status : UInt64
+    get_init_error_code : UInt64
+    get_methods : UInt64
   end
 
   IFaxInboundRoutingExtension_GUID = "885b5e08-c26c-4ef9-af83-51580a750be1"
@@ -2133,16 +2133,16 @@ lib LibWin32
   end
 
   struct IFaxInboundRoutingMethodsVTbl
-    query_interface : Proc(IFaxInboundRoutingMethods*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxInboundRoutingMethods*, UInt32)
-    release : Proc(IFaxInboundRoutingMethods*, UInt32)
-    get_type_info_count : Proc(IFaxInboundRoutingMethods*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxInboundRoutingMethods*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxInboundRoutingMethods*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxInboundRoutingMethods*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IFaxInboundRoutingMethods*, IUnknown*, HRESULT)
-    get_item : Proc(IFaxInboundRoutingMethods*, VARIANT, IFaxInboundRoutingMethod*, HRESULT)
-    get_count : Proc(IFaxInboundRoutingMethods*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_item : UInt64
+    get_count : UInt64
   end
 
   IFaxInboundRoutingMethods_GUID = "783fca10-8908-4473-9d69-f67fbea0c6b9"
@@ -2152,22 +2152,22 @@ lib LibWin32
   end
 
   struct IFaxInboundRoutingMethodVTbl
-    query_interface : Proc(IFaxInboundRoutingMethod*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxInboundRoutingMethod*, UInt32)
-    release : Proc(IFaxInboundRoutingMethod*, UInt32)
-    get_type_info_count : Proc(IFaxInboundRoutingMethod*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxInboundRoutingMethod*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxInboundRoutingMethod*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxInboundRoutingMethod*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IFaxInboundRoutingMethod*, UInt8**, HRESULT)
-    get_guid : Proc(IFaxInboundRoutingMethod*, UInt8**, HRESULT)
-    get_function_name : Proc(IFaxInboundRoutingMethod*, UInt8**, HRESULT)
-    get_extension_friendly_name : Proc(IFaxInboundRoutingMethod*, UInt8**, HRESULT)
-    get_extension_image_name : Proc(IFaxInboundRoutingMethod*, UInt8**, HRESULT)
-    get_priority : Proc(IFaxInboundRoutingMethod*, Int32*, HRESULT)
-    put_priority : Proc(IFaxInboundRoutingMethod*, Int32, HRESULT)
-    refresh : Proc(IFaxInboundRoutingMethod*, HRESULT)
-    save : Proc(IFaxInboundRoutingMethod*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_name : UInt64
+    get_guid : UInt64
+    get_function_name : UInt64
+    get_extension_friendly_name : UInt64
+    get_extension_image_name : UInt64
+    get_priority : UInt64
+    put_priority : UInt64
+    refresh : UInt64
+    save : UInt64
   end
 
   IFaxInboundRoutingMethod_GUID = "45700061-ad9d-4776-a8c4-64065492cf4b"
@@ -2177,52 +2177,52 @@ lib LibWin32
   end
 
   struct IFaxDocument2VTbl
-    query_interface : Proc(IFaxDocument2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxDocument2*, UInt32)
-    release : Proc(IFaxDocument2*, UInt32)
-    get_type_info_count : Proc(IFaxDocument2*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxDocument2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxDocument2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxDocument2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_body : Proc(IFaxDocument2*, UInt8**, HRESULT)
-    put_body : Proc(IFaxDocument2*, UInt8*, HRESULT)
-    get_sender : Proc(IFaxDocument2*, IFaxSender*, HRESULT)
-    get_recipients : Proc(IFaxDocument2*, IFaxRecipients*, HRESULT)
-    get_cover_page : Proc(IFaxDocument2*, UInt8**, HRESULT)
-    put_cover_page : Proc(IFaxDocument2*, UInt8*, HRESULT)
-    get_subject : Proc(IFaxDocument2*, UInt8**, HRESULT)
-    put_subject : Proc(IFaxDocument2*, UInt8*, HRESULT)
-    get_note : Proc(IFaxDocument2*, UInt8**, HRESULT)
-    put_note : Proc(IFaxDocument2*, UInt8*, HRESULT)
-    get_schedule_time : Proc(IFaxDocument2*, Float64*, HRESULT)
-    put_schedule_time : Proc(IFaxDocument2*, Float64, HRESULT)
-    get_receipt_address : Proc(IFaxDocument2*, UInt8**, HRESULT)
-    put_receipt_address : Proc(IFaxDocument2*, UInt8*, HRESULT)
-    get_document_name : Proc(IFaxDocument2*, UInt8**, HRESULT)
-    put_document_name : Proc(IFaxDocument2*, UInt8*, HRESULT)
-    get_call_handle : Proc(IFaxDocument2*, Int32*, HRESULT)
-    put_call_handle : Proc(IFaxDocument2*, Int32, HRESULT)
-    get_cover_page_type : Proc(IFaxDocument2*, FAX_COVERPAGE_TYPE_ENUM*, HRESULT)
-    put_cover_page_type : Proc(IFaxDocument2*, FAX_COVERPAGE_TYPE_ENUM, HRESULT)
-    get_schedule_type : Proc(IFaxDocument2*, FAX_SCHEDULE_TYPE_ENUM*, HRESULT)
-    put_schedule_type : Proc(IFaxDocument2*, FAX_SCHEDULE_TYPE_ENUM, HRESULT)
-    get_receipt_type : Proc(IFaxDocument2*, FAX_RECEIPT_TYPE_ENUM*, HRESULT)
-    put_receipt_type : Proc(IFaxDocument2*, FAX_RECEIPT_TYPE_ENUM, HRESULT)
-    get_group_broadcast_receipts : Proc(IFaxDocument2*, Int16*, HRESULT)
-    put_group_broadcast_receipts : Proc(IFaxDocument2*, Int16, HRESULT)
-    get_priority : Proc(IFaxDocument2*, FAX_PRIORITY_TYPE_ENUM*, HRESULT)
-    put_priority : Proc(IFaxDocument2*, FAX_PRIORITY_TYPE_ENUM, HRESULT)
-    get_tapi_connection : Proc(IFaxDocument2*, IDispatch*, HRESULT)
-    putref_tapi_connection : Proc(IFaxDocument2*, IDispatch, HRESULT)
-    submit : Proc(IFaxDocument2*, UInt8*, VARIANT*, HRESULT)
-    connected_submit : Proc(IFaxDocument2*, IFaxServer, VARIANT*, HRESULT)
-    get_attach_fax_to_receipt : Proc(IFaxDocument2*, Int16*, HRESULT)
-    put_attach_fax_to_receipt : Proc(IFaxDocument2*, Int16, HRESULT)
-    get_submission_id : Proc(IFaxDocument2*, UInt8**, HRESULT)
-    get_bodies : Proc(IFaxDocument2*, VARIANT*, HRESULT)
-    put_bodies : Proc(IFaxDocument2*, VARIANT, HRESULT)
-    submit2 : Proc(IFaxDocument2*, UInt8*, VARIANT*, Int32*, HRESULT)
-    connected_submit2 : Proc(IFaxDocument2*, IFaxServer, VARIANT*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_body : UInt64
+    put_body : UInt64
+    get_sender : UInt64
+    get_recipients : UInt64
+    get_cover_page : UInt64
+    put_cover_page : UInt64
+    get_subject : UInt64
+    put_subject : UInt64
+    get_note : UInt64
+    put_note : UInt64
+    get_schedule_time : UInt64
+    put_schedule_time : UInt64
+    get_receipt_address : UInt64
+    put_receipt_address : UInt64
+    get_document_name : UInt64
+    put_document_name : UInt64
+    get_call_handle : UInt64
+    put_call_handle : UInt64
+    get_cover_page_type : UInt64
+    put_cover_page_type : UInt64
+    get_schedule_type : UInt64
+    put_schedule_type : UInt64
+    get_receipt_type : UInt64
+    put_receipt_type : UInt64
+    get_group_broadcast_receipts : UInt64
+    put_group_broadcast_receipts : UInt64
+    get_priority : UInt64
+    put_priority : UInt64
+    get_tapi_connection : UInt64
+    putref_tapi_connection : UInt64
+    submit : UInt64
+    connected_submit : UInt64
+    get_attach_fax_to_receipt : UInt64
+    put_attach_fax_to_receipt : UInt64
+    get_submission_id : UInt64
+    get_bodies : UInt64
+    put_bodies : UInt64
+    submit2 : UInt64
+    connected_submit2 : UInt64
   end
 
   IFaxDocument2_GUID = "e1347661-f9ef-4d6d-b4a5-c0a068b65cff"
@@ -2232,55 +2232,55 @@ lib LibWin32
   end
 
   struct IFaxConfigurationVTbl
-    query_interface : Proc(IFaxConfiguration*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxConfiguration*, UInt32)
-    release : Proc(IFaxConfiguration*, UInt32)
-    get_type_info_count : Proc(IFaxConfiguration*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxConfiguration*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxConfiguration*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxConfiguration*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_use_archive : Proc(IFaxConfiguration*, Int16*, HRESULT)
-    put_use_archive : Proc(IFaxConfiguration*, Int16, HRESULT)
-    get_archive_location : Proc(IFaxConfiguration*, UInt8**, HRESULT)
-    put_archive_location : Proc(IFaxConfiguration*, UInt8*, HRESULT)
-    get_size_quota_warning : Proc(IFaxConfiguration*, Int16*, HRESULT)
-    put_size_quota_warning : Proc(IFaxConfiguration*, Int16, HRESULT)
-    get_high_quota_water_mark : Proc(IFaxConfiguration*, Int32*, HRESULT)
-    put_high_quota_water_mark : Proc(IFaxConfiguration*, Int32, HRESULT)
-    get_low_quota_water_mark : Proc(IFaxConfiguration*, Int32*, HRESULT)
-    put_low_quota_water_mark : Proc(IFaxConfiguration*, Int32, HRESULT)
-    get_archive_age_limit : Proc(IFaxConfiguration*, Int32*, HRESULT)
-    put_archive_age_limit : Proc(IFaxConfiguration*, Int32, HRESULT)
-    get_archive_size_low : Proc(IFaxConfiguration*, Int32*, HRESULT)
-    get_archive_size_high : Proc(IFaxConfiguration*, Int32*, HRESULT)
-    get_outgoing_queue_blocked : Proc(IFaxConfiguration*, Int16*, HRESULT)
-    put_outgoing_queue_blocked : Proc(IFaxConfiguration*, Int16, HRESULT)
-    get_outgoing_queue_paused : Proc(IFaxConfiguration*, Int16*, HRESULT)
-    put_outgoing_queue_paused : Proc(IFaxConfiguration*, Int16, HRESULT)
-    get_allow_personal_cover_pages : Proc(IFaxConfiguration*, Int16*, HRESULT)
-    put_allow_personal_cover_pages : Proc(IFaxConfiguration*, Int16, HRESULT)
-    get_use_device_tsid : Proc(IFaxConfiguration*, Int16*, HRESULT)
-    put_use_device_tsid : Proc(IFaxConfiguration*, Int16, HRESULT)
-    get_retries : Proc(IFaxConfiguration*, Int32*, HRESULT)
-    put_retries : Proc(IFaxConfiguration*, Int32, HRESULT)
-    get_retry_delay : Proc(IFaxConfiguration*, Int32*, HRESULT)
-    put_retry_delay : Proc(IFaxConfiguration*, Int32, HRESULT)
-    get_discount_rate_start : Proc(IFaxConfiguration*, Float64*, HRESULT)
-    put_discount_rate_start : Proc(IFaxConfiguration*, Float64, HRESULT)
-    get_discount_rate_end : Proc(IFaxConfiguration*, Float64*, HRESULT)
-    put_discount_rate_end : Proc(IFaxConfiguration*, Float64, HRESULT)
-    get_outgoing_queue_age_limit : Proc(IFaxConfiguration*, Int32*, HRESULT)
-    put_outgoing_queue_age_limit : Proc(IFaxConfiguration*, Int32, HRESULT)
-    get_branding : Proc(IFaxConfiguration*, Int16*, HRESULT)
-    put_branding : Proc(IFaxConfiguration*, Int16, HRESULT)
-    get_incoming_queue_blocked : Proc(IFaxConfiguration*, Int16*, HRESULT)
-    put_incoming_queue_blocked : Proc(IFaxConfiguration*, Int16, HRESULT)
-    get_auto_create_account_on_connect : Proc(IFaxConfiguration*, Int16*, HRESULT)
-    put_auto_create_account_on_connect : Proc(IFaxConfiguration*, Int16, HRESULT)
-    get_incoming_faxes_are_public : Proc(IFaxConfiguration*, Int16*, HRESULT)
-    put_incoming_faxes_are_public : Proc(IFaxConfiguration*, Int16, HRESULT)
-    refresh : Proc(IFaxConfiguration*, HRESULT)
-    save : Proc(IFaxConfiguration*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_use_archive : UInt64
+    put_use_archive : UInt64
+    get_archive_location : UInt64
+    put_archive_location : UInt64
+    get_size_quota_warning : UInt64
+    put_size_quota_warning : UInt64
+    get_high_quota_water_mark : UInt64
+    put_high_quota_water_mark : UInt64
+    get_low_quota_water_mark : UInt64
+    put_low_quota_water_mark : UInt64
+    get_archive_age_limit : UInt64
+    put_archive_age_limit : UInt64
+    get_archive_size_low : UInt64
+    get_archive_size_high : UInt64
+    get_outgoing_queue_blocked : UInt64
+    put_outgoing_queue_blocked : UInt64
+    get_outgoing_queue_paused : UInt64
+    put_outgoing_queue_paused : UInt64
+    get_allow_personal_cover_pages : UInt64
+    put_allow_personal_cover_pages : UInt64
+    get_use_device_tsid : UInt64
+    put_use_device_tsid : UInt64
+    get_retries : UInt64
+    put_retries : UInt64
+    get_retry_delay : UInt64
+    put_retry_delay : UInt64
+    get_discount_rate_start : UInt64
+    put_discount_rate_start : UInt64
+    get_discount_rate_end : UInt64
+    put_discount_rate_end : UInt64
+    get_outgoing_queue_age_limit : UInt64
+    put_outgoing_queue_age_limit : UInt64
+    get_branding : UInt64
+    put_branding : UInt64
+    get_incoming_queue_blocked : UInt64
+    put_incoming_queue_blocked : UInt64
+    get_auto_create_account_on_connect : UInt64
+    put_auto_create_account_on_connect : UInt64
+    get_incoming_faxes_are_public : UInt64
+    put_incoming_faxes_are_public : UInt64
+    refresh : UInt64
+    save : UInt64
   end
 
   IFaxConfiguration_GUID = "10f4d0f7-0994-4543-ab6e-506949128c40"
@@ -2290,43 +2290,43 @@ lib LibWin32
   end
 
   struct IFaxServer2VTbl
-    query_interface : Proc(IFaxServer2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxServer2*, UInt32)
-    release : Proc(IFaxServer2*, UInt32)
-    get_type_info_count : Proc(IFaxServer2*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxServer2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxServer2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxServer2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    connect : Proc(IFaxServer2*, UInt8*, HRESULT)
-    get_server_name : Proc(IFaxServer2*, UInt8**, HRESULT)
-    get_device_providers : Proc(IFaxServer2*, IFaxDeviceProviders*, HRESULT)
-    get_devices : Proc(IFaxServer2*, IFaxDevices*, HRESULT)
-    get_inbound_routing : Proc(IFaxServer2*, IFaxInboundRouting*, HRESULT)
-    get_folders : Proc(IFaxServer2*, IFaxFolders*, HRESULT)
-    get_logging_options : Proc(IFaxServer2*, IFaxLoggingOptions*, HRESULT)
-    get_major_version : Proc(IFaxServer2*, Int32*, HRESULT)
-    get_minor_version : Proc(IFaxServer2*, Int32*, HRESULT)
-    get_major_build : Proc(IFaxServer2*, Int32*, HRESULT)
-    get_minor_build : Proc(IFaxServer2*, Int32*, HRESULT)
-    get_debug : Proc(IFaxServer2*, Int16*, HRESULT)
-    get_activity : Proc(IFaxServer2*, IFaxActivity*, HRESULT)
-    get_outbound_routing : Proc(IFaxServer2*, IFaxOutboundRouting*, HRESULT)
-    get_receipt_options : Proc(IFaxServer2*, IFaxReceiptOptions*, HRESULT)
-    get_security : Proc(IFaxServer2*, IFaxSecurity*, HRESULT)
-    disconnect : Proc(IFaxServer2*, HRESULT)
-    get_extension_property : Proc(IFaxServer2*, UInt8*, VARIANT*, HRESULT)
-    set_extension_property : Proc(IFaxServer2*, UInt8*, VARIANT, HRESULT)
-    listen_to_server_events : Proc(IFaxServer2*, FAX_SERVER_EVENTS_TYPE_ENUM, HRESULT)
-    register_device_provider : Proc(IFaxServer2*, UInt8*, UInt8*, UInt8*, UInt8*, Int32, HRESULT)
-    unregister_device_provider : Proc(IFaxServer2*, UInt8*, HRESULT)
-    register_inbound_routing_extension : Proc(IFaxServer2*, UInt8*, UInt8*, UInt8*, VARIANT, HRESULT)
-    unregister_inbound_routing_extension : Proc(IFaxServer2*, UInt8*, HRESULT)
-    get_registered_events : Proc(IFaxServer2*, FAX_SERVER_EVENTS_TYPE_ENUM*, HRESULT)
-    get_api_version : Proc(IFaxServer2*, FAX_SERVER_APIVERSION_ENUM*, HRESULT)
-    get_configuration : Proc(IFaxServer2*, IFaxConfiguration*, HRESULT)
-    get_current_account : Proc(IFaxServer2*, IFaxAccount*, HRESULT)
-    get_fax_account_set : Proc(IFaxServer2*, IFaxAccountSet*, HRESULT)
-    get_security2 : Proc(IFaxServer2*, IFaxSecurity2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    connect : UInt64
+    get_server_name : UInt64
+    get_device_providers : UInt64
+    get_devices : UInt64
+    get_inbound_routing : UInt64
+    get_folders : UInt64
+    get_logging_options : UInt64
+    get_major_version : UInt64
+    get_minor_version : UInt64
+    get_major_build : UInt64
+    get_minor_build : UInt64
+    get_debug : UInt64
+    get_activity : UInt64
+    get_outbound_routing : UInt64
+    get_receipt_options : UInt64
+    get_security : UInt64
+    disconnect : UInt64
+    get_extension_property : UInt64
+    set_extension_property : UInt64
+    listen_to_server_events : UInt64
+    register_device_provider : UInt64
+    unregister_device_provider : UInt64
+    register_inbound_routing_extension : UInt64
+    unregister_inbound_routing_extension : UInt64
+    get_registered_events : UInt64
+    get_api_version : UInt64
+    get_configuration : UInt64
+    get_current_account : UInt64
+    get_fax_account_set : UInt64
+    get_security2 : UInt64
   end
 
   IFaxServer2_GUID = "571ced0f-5609-4f40-9176-547e3a72ca7c"
@@ -2336,17 +2336,17 @@ lib LibWin32
   end
 
   struct IFaxAccountSetVTbl
-    query_interface : Proc(IFaxAccountSet*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxAccountSet*, UInt32)
-    release : Proc(IFaxAccountSet*, UInt32)
-    get_type_info_count : Proc(IFaxAccountSet*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxAccountSet*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxAccountSet*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxAccountSet*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_accounts : Proc(IFaxAccountSet*, IFaxAccounts*, HRESULT)
-    get_account : Proc(IFaxAccountSet*, UInt8*, IFaxAccount*, HRESULT)
-    add_account : Proc(IFaxAccountSet*, UInt8*, IFaxAccount*, HRESULT)
-    remove_account : Proc(IFaxAccountSet*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_accounts : UInt64
+    get_account : UInt64
+    add_account : UInt64
+    remove_account : UInt64
   end
 
   IFaxAccountSet_GUID = "7428fbae-841e-47b8-86f4-2288946dca1b"
@@ -2356,16 +2356,16 @@ lib LibWin32
   end
 
   struct IFaxAccountsVTbl
-    query_interface : Proc(IFaxAccounts*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxAccounts*, UInt32)
-    release : Proc(IFaxAccounts*, UInt32)
-    get_type_info_count : Proc(IFaxAccounts*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxAccounts*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxAccounts*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxAccounts*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IFaxAccounts*, IUnknown*, HRESULT)
-    get_item : Proc(IFaxAccounts*, VARIANT, IFaxAccount*, HRESULT)
-    get_count : Proc(IFaxAccounts*, Int32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get__new_enum : UInt64
+    get_item : UInt64
+    get_count : UInt64
   end
 
   IFaxAccounts_GUID = "93ea8162-8be7-42d1-ae7b-ec74e2d989da"
@@ -2375,17 +2375,17 @@ lib LibWin32
   end
 
   struct IFaxAccountVTbl
-    query_interface : Proc(IFaxAccount*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxAccount*, UInt32)
-    release : Proc(IFaxAccount*, UInt32)
-    get_type_info_count : Proc(IFaxAccount*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxAccount*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxAccount*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxAccount*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_account_name : Proc(IFaxAccount*, UInt8**, HRESULT)
-    get_folders : Proc(IFaxAccount*, IFaxAccountFolders*, HRESULT)
-    listen_to_account_events : Proc(IFaxAccount*, FAX_ACCOUNT_EVENTS_TYPE_ENUM, HRESULT)
-    get_registered_events : Proc(IFaxAccount*, FAX_ACCOUNT_EVENTS_TYPE_ENUM*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_account_name : UInt64
+    get_folders : UInt64
+    listen_to_account_events : UInt64
+    get_registered_events : UInt64
   end
 
   IFaxAccount_GUID = "68535b33-5dc4-4086-be26-b76f9b711006"
@@ -2395,47 +2395,47 @@ lib LibWin32
   end
 
   struct IFaxOutgoingJob2VTbl
-    query_interface : Proc(IFaxOutgoingJob2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxOutgoingJob2*, UInt32)
-    release : Proc(IFaxOutgoingJob2*, UInt32)
-    get_type_info_count : Proc(IFaxOutgoingJob2*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxOutgoingJob2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxOutgoingJob2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxOutgoingJob2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_subject : Proc(IFaxOutgoingJob2*, UInt8**, HRESULT)
-    get_document_name : Proc(IFaxOutgoingJob2*, UInt8**, HRESULT)
-    get_pages : Proc(IFaxOutgoingJob2*, Int32*, HRESULT)
-    get_size : Proc(IFaxOutgoingJob2*, Int32*, HRESULT)
-    get_submission_id : Proc(IFaxOutgoingJob2*, UInt8**, HRESULT)
-    get_id : Proc(IFaxOutgoingJob2*, UInt8**, HRESULT)
-    get_original_scheduled_time : Proc(IFaxOutgoingJob2*, Float64*, HRESULT)
-    get_submission_time : Proc(IFaxOutgoingJob2*, Float64*, HRESULT)
-    get_receipt_type : Proc(IFaxOutgoingJob2*, FAX_RECEIPT_TYPE_ENUM*, HRESULT)
-    get_priority : Proc(IFaxOutgoingJob2*, FAX_PRIORITY_TYPE_ENUM*, HRESULT)
-    get_sender : Proc(IFaxOutgoingJob2*, IFaxSender*, HRESULT)
-    get_recipient : Proc(IFaxOutgoingJob2*, IFaxRecipient*, HRESULT)
-    get_current_page : Proc(IFaxOutgoingJob2*, Int32*, HRESULT)
-    get_device_id : Proc(IFaxOutgoingJob2*, Int32*, HRESULT)
-    get_status : Proc(IFaxOutgoingJob2*, FAX_JOB_STATUS_ENUM*, HRESULT)
-    get_extended_status_code : Proc(IFaxOutgoingJob2*, FAX_JOB_EXTENDED_STATUS_ENUM*, HRESULT)
-    get_extended_status : Proc(IFaxOutgoingJob2*, UInt8**, HRESULT)
-    get_available_operations : Proc(IFaxOutgoingJob2*, FAX_JOB_OPERATIONS_ENUM*, HRESULT)
-    get_retries : Proc(IFaxOutgoingJob2*, Int32*, HRESULT)
-    get_scheduled_time : Proc(IFaxOutgoingJob2*, Float64*, HRESULT)
-    get_transmission_start : Proc(IFaxOutgoingJob2*, Float64*, HRESULT)
-    get_transmission_end : Proc(IFaxOutgoingJob2*, Float64*, HRESULT)
-    get_csid : Proc(IFaxOutgoingJob2*, UInt8**, HRESULT)
-    get_tsid : Proc(IFaxOutgoingJob2*, UInt8**, HRESULT)
-    get_group_broadcast_receipts : Proc(IFaxOutgoingJob2*, Int16*, HRESULT)
-    pause : Proc(IFaxOutgoingJob2*, HRESULT)
-    resume : Proc(IFaxOutgoingJob2*, HRESULT)
-    restart : Proc(IFaxOutgoingJob2*, HRESULT)
-    copy_tiff : Proc(IFaxOutgoingJob2*, UInt8*, HRESULT)
-    refresh : Proc(IFaxOutgoingJob2*, HRESULT)
-    cancel : Proc(IFaxOutgoingJob2*, HRESULT)
-    get_has_cover_page : Proc(IFaxOutgoingJob2*, Int16*, HRESULT)
-    get_receipt_address : Proc(IFaxOutgoingJob2*, UInt8**, HRESULT)
-    get_schedule_type : Proc(IFaxOutgoingJob2*, FAX_SCHEDULE_TYPE_ENUM*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_subject : UInt64
+    get_document_name : UInt64
+    get_pages : UInt64
+    get_size : UInt64
+    get_submission_id : UInt64
+    get_id : UInt64
+    get_original_scheduled_time : UInt64
+    get_submission_time : UInt64
+    get_receipt_type : UInt64
+    get_priority : UInt64
+    get_sender : UInt64
+    get_recipient : UInt64
+    get_current_page : UInt64
+    get_device_id : UInt64
+    get_status : UInt64
+    get_extended_status_code : UInt64
+    get_extended_status : UInt64
+    get_available_operations : UInt64
+    get_retries : UInt64
+    get_scheduled_time : UInt64
+    get_transmission_start : UInt64
+    get_transmission_end : UInt64
+    get_csid : UInt64
+    get_tsid : UInt64
+    get_group_broadcast_receipts : UInt64
+    pause : UInt64
+    resume : UInt64
+    restart : UInt64
+    copy_tiff : UInt64
+    refresh : UInt64
+    cancel : UInt64
+    get_has_cover_page : UInt64
+    get_receipt_address : UInt64
+    get_schedule_type : UInt64
   end
 
   IFaxOutgoingJob2_GUID = "418a8d96-59a0-4789-b176-edf3dc8fa8f7"
@@ -2445,17 +2445,17 @@ lib LibWin32
   end
 
   struct IFaxAccountFoldersVTbl
-    query_interface : Proc(IFaxAccountFolders*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxAccountFolders*, UInt32)
-    release : Proc(IFaxAccountFolders*, UInt32)
-    get_type_info_count : Proc(IFaxAccountFolders*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxAccountFolders*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxAccountFolders*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxAccountFolders*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_outgoing_queue : Proc(IFaxAccountFolders*, IFaxAccountOutgoingQueue*, HRESULT)
-    get_incoming_queue : Proc(IFaxAccountFolders*, IFaxAccountIncomingQueue*, HRESULT)
-    get_incoming_archive : Proc(IFaxAccountFolders*, IFaxAccountIncomingArchive*, HRESULT)
-    get_outgoing_archive : Proc(IFaxAccountFolders*, IFaxAccountOutgoingArchive*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_outgoing_queue : UInt64
+    get_incoming_queue : UInt64
+    get_incoming_archive : UInt64
+    get_outgoing_archive : UInt64
   end
 
   IFaxAccountFolders_GUID = "6463f89d-23d8-46a9-8f86-c47b77ca7926"
@@ -2465,15 +2465,15 @@ lib LibWin32
   end
 
   struct IFaxAccountIncomingQueueVTbl
-    query_interface : Proc(IFaxAccountIncomingQueue*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxAccountIncomingQueue*, UInt32)
-    release : Proc(IFaxAccountIncomingQueue*, UInt32)
-    get_type_info_count : Proc(IFaxAccountIncomingQueue*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxAccountIncomingQueue*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxAccountIncomingQueue*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxAccountIncomingQueue*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_jobs : Proc(IFaxAccountIncomingQueue*, IFaxIncomingJobs*, HRESULT)
-    get_job : Proc(IFaxAccountIncomingQueue*, UInt8*, IFaxIncomingJob*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_jobs : UInt64
+    get_job : UInt64
   end
 
   IFaxAccountIncomingQueue_GUID = "dd142d92-0186-4a95-a090-cbc3eadba6b4"
@@ -2483,15 +2483,15 @@ lib LibWin32
   end
 
   struct IFaxAccountOutgoingQueueVTbl
-    query_interface : Proc(IFaxAccountOutgoingQueue*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxAccountOutgoingQueue*, UInt32)
-    release : Proc(IFaxAccountOutgoingQueue*, UInt32)
-    get_type_info_count : Proc(IFaxAccountOutgoingQueue*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxAccountOutgoingQueue*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxAccountOutgoingQueue*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxAccountOutgoingQueue*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_jobs : Proc(IFaxAccountOutgoingQueue*, IFaxOutgoingJobs*, HRESULT)
-    get_job : Proc(IFaxAccountOutgoingQueue*, UInt8*, IFaxOutgoingJob*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_jobs : UInt64
+    get_job : UInt64
   end
 
   IFaxAccountOutgoingQueue_GUID = "0f1424e9-f22d-4553-b7a5-0d24bd0d7e46"
@@ -2501,39 +2501,39 @@ lib LibWin32
   end
 
   struct IFaxOutgoingMessage2VTbl
-    query_interface : Proc(IFaxOutgoingMessage2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxOutgoingMessage2*, UInt32)
-    release : Proc(IFaxOutgoingMessage2*, UInt32)
-    get_type_info_count : Proc(IFaxOutgoingMessage2*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxOutgoingMessage2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxOutgoingMessage2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxOutgoingMessage2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_submission_id : Proc(IFaxOutgoingMessage2*, UInt8**, HRESULT)
-    get_id : Proc(IFaxOutgoingMessage2*, UInt8**, HRESULT)
-    get_subject : Proc(IFaxOutgoingMessage2*, UInt8**, HRESULT)
-    get_document_name : Proc(IFaxOutgoingMessage2*, UInt8**, HRESULT)
-    get_retries : Proc(IFaxOutgoingMessage2*, Int32*, HRESULT)
-    get_pages : Proc(IFaxOutgoingMessage2*, Int32*, HRESULT)
-    get_size : Proc(IFaxOutgoingMessage2*, Int32*, HRESULT)
-    get_original_scheduled_time : Proc(IFaxOutgoingMessage2*, Float64*, HRESULT)
-    get_submission_time : Proc(IFaxOutgoingMessage2*, Float64*, HRESULT)
-    get_priority : Proc(IFaxOutgoingMessage2*, FAX_PRIORITY_TYPE_ENUM*, HRESULT)
-    get_sender : Proc(IFaxOutgoingMessage2*, IFaxSender*, HRESULT)
-    get_recipient : Proc(IFaxOutgoingMessage2*, IFaxRecipient*, HRESULT)
-    get_device_name : Proc(IFaxOutgoingMessage2*, UInt8**, HRESULT)
-    get_transmission_start : Proc(IFaxOutgoingMessage2*, Float64*, HRESULT)
-    get_transmission_end : Proc(IFaxOutgoingMessage2*, Float64*, HRESULT)
-    get_csid : Proc(IFaxOutgoingMessage2*, UInt8**, HRESULT)
-    get_tsid : Proc(IFaxOutgoingMessage2*, UInt8**, HRESULT)
-    copy_tiff : Proc(IFaxOutgoingMessage2*, UInt8*, HRESULT)
-    delete : Proc(IFaxOutgoingMessage2*, HRESULT)
-    get_has_cover_page : Proc(IFaxOutgoingMessage2*, Int16*, HRESULT)
-    get_receipt_type : Proc(IFaxOutgoingMessage2*, FAX_RECEIPT_TYPE_ENUM*, HRESULT)
-    get_receipt_address : Proc(IFaxOutgoingMessage2*, UInt8**, HRESULT)
-    get_read : Proc(IFaxOutgoingMessage2*, Int16*, HRESULT)
-    put_read : Proc(IFaxOutgoingMessage2*, Int16, HRESULT)
-    save : Proc(IFaxOutgoingMessage2*, HRESULT)
-    refresh : Proc(IFaxOutgoingMessage2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_submission_id : UInt64
+    get_id : UInt64
+    get_subject : UInt64
+    get_document_name : UInt64
+    get_retries : UInt64
+    get_pages : UInt64
+    get_size : UInt64
+    get_original_scheduled_time : UInt64
+    get_submission_time : UInt64
+    get_priority : UInt64
+    get_sender : UInt64
+    get_recipient : UInt64
+    get_device_name : UInt64
+    get_transmission_start : UInt64
+    get_transmission_end : UInt64
+    get_csid : UInt64
+    get_tsid : UInt64
+    copy_tiff : UInt64
+    delete : UInt64
+    get_has_cover_page : UInt64
+    get_receipt_type : UInt64
+    get_receipt_address : UInt64
+    get_read : UInt64
+    put_read : UInt64
+    save : UInt64
+    refresh : UInt64
   end
 
   IFaxOutgoingMessage2_GUID = "b37df687-bc88-4b46-b3be-b458b3ea9e7f"
@@ -2543,18 +2543,18 @@ lib LibWin32
   end
 
   struct IFaxAccountIncomingArchiveVTbl
-    query_interface : Proc(IFaxAccountIncomingArchive*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxAccountIncomingArchive*, UInt32)
-    release : Proc(IFaxAccountIncomingArchive*, UInt32)
-    get_type_info_count : Proc(IFaxAccountIncomingArchive*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxAccountIncomingArchive*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxAccountIncomingArchive*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxAccountIncomingArchive*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_size_low : Proc(IFaxAccountIncomingArchive*, Int32*, HRESULT)
-    get_size_high : Proc(IFaxAccountIncomingArchive*, Int32*, HRESULT)
-    refresh : Proc(IFaxAccountIncomingArchive*, HRESULT)
-    get_messages : Proc(IFaxAccountIncomingArchive*, Int32, IFaxIncomingMessageIterator*, HRESULT)
-    get_message : Proc(IFaxAccountIncomingArchive*, UInt8*, IFaxIncomingMessage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_size_low : UInt64
+    get_size_high : UInt64
+    refresh : UInt64
+    get_messages : UInt64
+    get_message : UInt64
   end
 
   IFaxAccountIncomingArchive_GUID = "a8a5b6ef-e0d6-4aee-955c-91625bec9db4"
@@ -2564,18 +2564,18 @@ lib LibWin32
   end
 
   struct IFaxAccountOutgoingArchiveVTbl
-    query_interface : Proc(IFaxAccountOutgoingArchive*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxAccountOutgoingArchive*, UInt32)
-    release : Proc(IFaxAccountOutgoingArchive*, UInt32)
-    get_type_info_count : Proc(IFaxAccountOutgoingArchive*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxAccountOutgoingArchive*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxAccountOutgoingArchive*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxAccountOutgoingArchive*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_size_low : Proc(IFaxAccountOutgoingArchive*, Int32*, HRESULT)
-    get_size_high : Proc(IFaxAccountOutgoingArchive*, Int32*, HRESULT)
-    refresh : Proc(IFaxAccountOutgoingArchive*, HRESULT)
-    get_messages : Proc(IFaxAccountOutgoingArchive*, Int32, IFaxOutgoingMessageIterator*, HRESULT)
-    get_message : Proc(IFaxAccountOutgoingArchive*, UInt8*, IFaxOutgoingMessage*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_size_low : UInt64
+    get_size_high : UInt64
+    refresh : UInt64
+    get_messages : UInt64
+    get_message : UInt64
   end
 
   IFaxAccountOutgoingArchive_GUID = "5463076d-ec14-491f-926e-b3ceda5e5662"
@@ -2585,20 +2585,20 @@ lib LibWin32
   end
 
   struct IFaxSecurity2VTbl
-    query_interface : Proc(IFaxSecurity2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxSecurity2*, UInt32)
-    release : Proc(IFaxSecurity2*, UInt32)
-    get_type_info_count : Proc(IFaxSecurity2*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxSecurity2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxSecurity2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxSecurity2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_descriptor : Proc(IFaxSecurity2*, VARIANT*, HRESULT)
-    put_descriptor : Proc(IFaxSecurity2*, VARIANT, HRESULT)
-    get_granted_rights : Proc(IFaxSecurity2*, FAX_ACCESS_RIGHTS_ENUM_2*, HRESULT)
-    refresh : Proc(IFaxSecurity2*, HRESULT)
-    save : Proc(IFaxSecurity2*, HRESULT)
-    get_information_type : Proc(IFaxSecurity2*, Int32*, HRESULT)
-    put_information_type : Proc(IFaxSecurity2*, Int32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_descriptor : UInt64
+    put_descriptor : UInt64
+    get_granted_rights : UInt64
+    refresh : UInt64
+    save : UInt64
+    get_information_type : UInt64
+    put_information_type : UInt64
   end
 
   IFaxSecurity2_GUID = "17d851f4-d09b-48fc-99c9-8f24c4db9ab1"
@@ -2608,42 +2608,42 @@ lib LibWin32
   end
 
   struct IFaxIncomingMessage2VTbl
-    query_interface : Proc(IFaxIncomingMessage2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxIncomingMessage2*, UInt32)
-    release : Proc(IFaxIncomingMessage2*, UInt32)
-    get_type_info_count : Proc(IFaxIncomingMessage2*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxIncomingMessage2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxIncomingMessage2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxIncomingMessage2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_id : Proc(IFaxIncomingMessage2*, UInt8**, HRESULT)
-    get_pages : Proc(IFaxIncomingMessage2*, Int32*, HRESULT)
-    get_size : Proc(IFaxIncomingMessage2*, Int32*, HRESULT)
-    get_device_name : Proc(IFaxIncomingMessage2*, UInt8**, HRESULT)
-    get_retries : Proc(IFaxIncomingMessage2*, Int32*, HRESULT)
-    get_transmission_start : Proc(IFaxIncomingMessage2*, Float64*, HRESULT)
-    get_transmission_end : Proc(IFaxIncomingMessage2*, Float64*, HRESULT)
-    get_csid : Proc(IFaxIncomingMessage2*, UInt8**, HRESULT)
-    get_tsid : Proc(IFaxIncomingMessage2*, UInt8**, HRESULT)
-    get_caller_id : Proc(IFaxIncomingMessage2*, UInt8**, HRESULT)
-    get_routing_information : Proc(IFaxIncomingMessage2*, UInt8**, HRESULT)
-    copy_tiff : Proc(IFaxIncomingMessage2*, UInt8*, HRESULT)
-    delete : Proc(IFaxIncomingMessage2*, HRESULT)
-    get_subject : Proc(IFaxIncomingMessage2*, UInt8**, HRESULT)
-    put_subject : Proc(IFaxIncomingMessage2*, UInt8*, HRESULT)
-    get_sender_name : Proc(IFaxIncomingMessage2*, UInt8**, HRESULT)
-    put_sender_name : Proc(IFaxIncomingMessage2*, UInt8*, HRESULT)
-    get_sender_fax_number : Proc(IFaxIncomingMessage2*, UInt8**, HRESULT)
-    put_sender_fax_number : Proc(IFaxIncomingMessage2*, UInt8*, HRESULT)
-    get_has_cover_page : Proc(IFaxIncomingMessage2*, Int16*, HRESULT)
-    put_has_cover_page : Proc(IFaxIncomingMessage2*, Int16, HRESULT)
-    get_recipients : Proc(IFaxIncomingMessage2*, UInt8**, HRESULT)
-    put_recipients : Proc(IFaxIncomingMessage2*, UInt8*, HRESULT)
-    get_was_re_assigned : Proc(IFaxIncomingMessage2*, Int16*, HRESULT)
-    get_read : Proc(IFaxIncomingMessage2*, Int16*, HRESULT)
-    put_read : Proc(IFaxIncomingMessage2*, Int16, HRESULT)
-    re_assign : Proc(IFaxIncomingMessage2*, HRESULT)
-    save : Proc(IFaxIncomingMessage2*, HRESULT)
-    refresh : Proc(IFaxIncomingMessage2*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    get_id : UInt64
+    get_pages : UInt64
+    get_size : UInt64
+    get_device_name : UInt64
+    get_retries : UInt64
+    get_transmission_start : UInt64
+    get_transmission_end : UInt64
+    get_csid : UInt64
+    get_tsid : UInt64
+    get_caller_id : UInt64
+    get_routing_information : UInt64
+    copy_tiff : UInt64
+    delete : UInt64
+    get_subject : UInt64
+    put_subject : UInt64
+    get_sender_name : UInt64
+    put_sender_name : UInt64
+    get_sender_fax_number : UInt64
+    put_sender_fax_number : UInt64
+    get_has_cover_page : UInt64
+    put_has_cover_page : UInt64
+    get_recipients : UInt64
+    put_recipients : UInt64
+    get_was_re_assigned : UInt64
+    get_read : UInt64
+    put_read : UInt64
+    re_assign : UInt64
+    save : UInt64
+    refresh : UInt64
   end
 
   IFaxIncomingMessage2_GUID = "f9208503-e2bc-48f3-9ec0-e6236f9b509a"
@@ -2653,13 +2653,13 @@ lib LibWin32
   end
 
   struct IFaxServerNotifyVTbl
-    query_interface : Proc(IFaxServerNotify*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxServerNotify*, UInt32)
-    release : Proc(IFaxServerNotify*, UInt32)
-    get_type_info_count : Proc(IFaxServerNotify*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxServerNotify*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxServerNotify*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxServerNotify*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
   end
 
   IFaxServerNotify_GUID = "2e037b27-cf8a-4abd-b1e0-5704943bea6f"
@@ -2669,39 +2669,39 @@ lib LibWin32
   end
 
   struct IIFaxServerNotify2VTbl
-    query_interface : Proc(IIFaxServerNotify2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IIFaxServerNotify2*, UInt32)
-    release : Proc(IIFaxServerNotify2*, UInt32)
-    get_type_info_count : Proc(IIFaxServerNotify2*, UInt32*, HRESULT)
-    get_type_info : Proc(IIFaxServerNotify2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IIFaxServerNotify2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IIFaxServerNotify2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    on_incoming_job_added : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
-    on_incoming_job_removed : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
-    on_incoming_job_changed : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, IFaxJobStatus, HRESULT)
-    on_outgoing_job_added : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
-    on_outgoing_job_removed : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
-    on_outgoing_job_changed : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, IFaxJobStatus, HRESULT)
-    on_incoming_message_added : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
-    on_incoming_message_removed : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
-    on_outgoing_message_added : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
-    on_outgoing_message_removed : Proc(IIFaxServerNotify2*, IFaxServer2, UInt8*, HRESULT)
-    on_receipt_options_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_activity_logging_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_security_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_event_logging_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_outgoing_queue_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_outgoing_archive_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_incoming_archive_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_devices_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_outbound_routing_groups_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_outbound_routing_rules_config_change : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_server_activity_change : Proc(IIFaxServerNotify2*, IFaxServer2, Int32, Int32, Int32, Int32, HRESULT)
-    on_queues_status_change : Proc(IIFaxServerNotify2*, IFaxServer2, Int16, Int16, Int16, HRESULT)
-    on_new_call : Proc(IIFaxServerNotify2*, IFaxServer2, Int32, Int32, UInt8*, HRESULT)
-    on_server_shut_down : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
-    on_device_status_change : Proc(IIFaxServerNotify2*, IFaxServer2, Int32, Int16, Int16, Int16, Int16, HRESULT)
-    on_general_server_config_changed : Proc(IIFaxServerNotify2*, IFaxServer2, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    on_incoming_job_added : UInt64
+    on_incoming_job_removed : UInt64
+    on_incoming_job_changed : UInt64
+    on_outgoing_job_added : UInt64
+    on_outgoing_job_removed : UInt64
+    on_outgoing_job_changed : UInt64
+    on_incoming_message_added : UInt64
+    on_incoming_message_removed : UInt64
+    on_outgoing_message_added : UInt64
+    on_outgoing_message_removed : UInt64
+    on_receipt_options_change : UInt64
+    on_activity_logging_config_change : UInt64
+    on_security_config_change : UInt64
+    on_event_logging_config_change : UInt64
+    on_outgoing_queue_config_change : UInt64
+    on_outgoing_archive_config_change : UInt64
+    on_incoming_archive_config_change : UInt64
+    on_devices_config_change : UInt64
+    on_outbound_routing_groups_config_change : UInt64
+    on_outbound_routing_rules_config_change : UInt64
+    on_server_activity_change : UInt64
+    on_queues_status_change : UInt64
+    on_new_call : UInt64
+    on_server_shut_down : UInt64
+    on_device_status_change : UInt64
+    on_general_server_config_changed : UInt64
   end
 
   IIFaxServerNotify2_GUID = "ec9c69b9-5fe7-4805-9467-82fcd96af903"
@@ -2711,13 +2711,13 @@ lib LibWin32
   end
 
   struct IFaxServerNotify2VTbl
-    query_interface : Proc(IFaxServerNotify2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxServerNotify2*, UInt32)
-    release : Proc(IFaxServerNotify2*, UInt32)
-    get_type_info_count : Proc(IFaxServerNotify2*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxServerNotify2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxServerNotify2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxServerNotify2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
   end
 
   IFaxServerNotify2_GUID = "616ca8d6-a77a-4062-abfd-0e471241c7aa"
@@ -2727,24 +2727,24 @@ lib LibWin32
   end
 
   struct IIFaxAccountNotifyVTbl
-    query_interface : Proc(IIFaxAccountNotify*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IIFaxAccountNotify*, UInt32)
-    release : Proc(IIFaxAccountNotify*, UInt32)
-    get_type_info_count : Proc(IIFaxAccountNotify*, UInt32*, HRESULT)
-    get_type_info : Proc(IIFaxAccountNotify*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IIFaxAccountNotify*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IIFaxAccountNotify*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    on_incoming_job_added : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
-    on_incoming_job_removed : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
-    on_incoming_job_changed : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, IFaxJobStatus, HRESULT)
-    on_outgoing_job_added : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
-    on_outgoing_job_removed : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
-    on_outgoing_job_changed : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, IFaxJobStatus, HRESULT)
-    on_incoming_message_added : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, Int16, HRESULT)
-    on_incoming_message_removed : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, Int16, HRESULT)
-    on_outgoing_message_added : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
-    on_outgoing_message_removed : Proc(IIFaxAccountNotify*, IFaxAccount, UInt8*, HRESULT)
-    on_server_shut_down : Proc(IIFaxAccountNotify*, IFaxServer2, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
+    on_incoming_job_added : UInt64
+    on_incoming_job_removed : UInt64
+    on_incoming_job_changed : UInt64
+    on_outgoing_job_added : UInt64
+    on_outgoing_job_removed : UInt64
+    on_outgoing_job_changed : UInt64
+    on_incoming_message_added : UInt64
+    on_incoming_message_removed : UInt64
+    on_outgoing_message_added : UInt64
+    on_outgoing_message_removed : UInt64
+    on_server_shut_down : UInt64
   end
 
   IIFaxAccountNotify_GUID = "b9b3bc81-ac1b-46f3-b39d-0adc30e1b788"
@@ -2754,13 +2754,13 @@ lib LibWin32
   end
 
   struct IFaxAccountNotifyVTbl
-    query_interface : Proc(IFaxAccountNotify*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFaxAccountNotify*, UInt32)
-    release : Proc(IFaxAccountNotify*, UInt32)
-    get_type_info_count : Proc(IFaxAccountNotify*, UInt32*, HRESULT)
-    get_type_info : Proc(IFaxAccountNotify*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFaxAccountNotify*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFaxAccountNotify*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_type_info_count : UInt64
+    get_type_info : UInt64
+    get_i_ds_of_names : UInt64
+    invoke : UInt64
   end
 
   IFaxAccountNotify_GUID = "0b5e5bd1-b8a9-47a0-a323-ef4a293ba06a"
@@ -2770,24 +2770,24 @@ lib LibWin32
   end
 
   struct IStillImageWVTbl
-    query_interface : Proc(IStillImageW*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IStillImageW*, UInt32)
-    release : Proc(IStillImageW*, UInt32)
-    initialize : Proc(IStillImageW*, HINSTANCE, UInt32, HRESULT)
-    get_device_list : Proc(IStillImageW*, UInt32, UInt32, UInt32*, Void**, HRESULT)
-    get_device_info : Proc(IStillImageW*, LibC::LPWSTR, Void**, HRESULT)
-    create_device : Proc(IStillImageW*, LibC::LPWSTR, UInt32, IStiDevice*, IUnknown, HRESULT)
-    get_device_value : Proc(IStillImageW*, LibC::LPWSTR, LibC::LPWSTR, UInt32*, UInt8*, UInt32*, HRESULT)
-    set_device_value : Proc(IStillImageW*, LibC::LPWSTR, LibC::LPWSTR, UInt32, UInt8*, UInt32, HRESULT)
-    get_sti_launch_information : Proc(IStillImageW*, Char*, UInt32*, Char*, HRESULT)
-    register_launch_application : Proc(IStillImageW*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    unregister_launch_application : Proc(IStillImageW*, LibC::LPWSTR, HRESULT)
-    enable_hw_notifications : Proc(IStillImageW*, LibC::LPWSTR, LibC::BOOL, HRESULT)
-    get_hw_notification_state : Proc(IStillImageW*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
-    refresh_device_bus : Proc(IStillImageW*, LibC::LPWSTR, HRESULT)
-    launch_application_for_device : Proc(IStillImageW*, LibC::LPWSTR, LibC::LPWSTR, STINOTIFY*, HRESULT)
-    setup_device_parameters : Proc(IStillImageW*, STI_DEVICE_INFORMATIONW*, HRESULT)
-    write_to_error_log : Proc(IStillImageW*, UInt32, LibC::LPWSTR, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    get_device_list : UInt64
+    get_device_info : UInt64
+    create_device : UInt64
+    get_device_value : UInt64
+    set_device_value : UInt64
+    get_sti_launch_information : UInt64
+    register_launch_application : UInt64
+    unregister_launch_application : UInt64
+    enable_hw_notifications : UInt64
+    get_hw_notification_state : UInt64
+    refresh_device_bus : UInt64
+    launch_application_for_device : UInt64
+    setup_device_parameters : UInt64
+    write_to_error_log : UInt64
   end
 
   IStillImageW_GUID = "641bd880-2dc8-11d0-90ea-00aa0060f86c"
@@ -2797,26 +2797,26 @@ lib LibWin32
   end
 
   struct IStiDeviceVTbl
-    query_interface : Proc(IStiDevice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IStiDevice*, UInt32)
-    release : Proc(IStiDevice*, UInt32)
-    initialize : Proc(IStiDevice*, HINSTANCE, LibC::LPWSTR, UInt32, UInt32, HRESULT)
-    get_capabilities : Proc(IStiDevice*, STI_DEV_CAPS*, HRESULT)
-    get_status : Proc(IStiDevice*, STI_DEVICE_STATUS*, HRESULT)
-    device_reset : Proc(IStiDevice*, HRESULT)
-    diagnostic : Proc(IStiDevice*, STI_DIAG*, HRESULT)
-    escape : Proc(IStiDevice*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, HRESULT)
-    get_last_error : Proc(IStiDevice*, UInt32*, HRESULT)
-    lock_device : Proc(IStiDevice*, UInt32, HRESULT)
-    un_lock_device : Proc(IStiDevice*, HRESULT)
-    raw_read_data : Proc(IStiDevice*, Void*, UInt32*, OVERLAPPED*, HRESULT)
-    raw_write_data : Proc(IStiDevice*, Void*, UInt32, OVERLAPPED*, HRESULT)
-    raw_read_command : Proc(IStiDevice*, Void*, UInt32*, OVERLAPPED*, HRESULT)
-    raw_write_command : Proc(IStiDevice*, Void*, UInt32, OVERLAPPED*, HRESULT)
-    subscribe : Proc(IStiDevice*, STISUBSCRIBE*, HRESULT)
-    get_last_notification_data : Proc(IStiDevice*, STINOTIFY*, HRESULT)
-    un_subscribe : Proc(IStiDevice*, HRESULT)
-    get_last_error_info : Proc(IStiDevice*, ERROR_INFOW*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    get_capabilities : UInt64
+    get_status : UInt64
+    device_reset : UInt64
+    diagnostic : UInt64
+    escape : UInt64
+    get_last_error : UInt64
+    lock_device : UInt64
+    un_lock_device : UInt64
+    raw_read_data : UInt64
+    raw_write_data : UInt64
+    raw_read_command : UInt64
+    raw_write_command : UInt64
+    subscribe : UInt64
+    get_last_notification_data : UInt64
+    un_subscribe : UInt64
+    get_last_error_info : UInt64
   end
 
   IStiDevice_GUID = "6cfa5a80-2dc8-11d0-90ea-00aa0060f86c"
@@ -2826,20 +2826,20 @@ lib LibWin32
   end
 
   struct IStiDeviceControlVTbl
-    query_interface : Proc(IStiDeviceControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IStiDeviceControl*, UInt32)
-    release : Proc(IStiDeviceControl*, UInt32)
-    initialize : Proc(IStiDeviceControl*, UInt32, UInt32, LibC::LPWSTR, UInt32, HRESULT)
-    raw_read_data : Proc(IStiDeviceControl*, Void*, UInt32*, OVERLAPPED*, HRESULT)
-    raw_write_data : Proc(IStiDeviceControl*, Void*, UInt32, OVERLAPPED*, HRESULT)
-    raw_read_command : Proc(IStiDeviceControl*, Void*, UInt32*, OVERLAPPED*, HRESULT)
-    raw_write_command : Proc(IStiDeviceControl*, Void*, UInt32, OVERLAPPED*, HRESULT)
-    raw_device_control : Proc(IStiDeviceControl*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, HRESULT)
-    get_last_error : Proc(IStiDeviceControl*, UInt32*, HRESULT)
-    get_my_device_port_name : Proc(IStiDeviceControl*, Char*, UInt32, HRESULT)
-    get_my_device_handle : Proc(IStiDeviceControl*, LibC::HANDLE*, HRESULT)
-    get_my_device_open_mode : Proc(IStiDeviceControl*, UInt32*, HRESULT)
-    write_to_error_log : Proc(IStiDeviceControl*, UInt32, LibC::LPWSTR, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    raw_read_data : UInt64
+    raw_write_data : UInt64
+    raw_read_command : UInt64
+    raw_write_command : UInt64
+    raw_device_control : UInt64
+    get_last_error : UInt64
+    get_my_device_port_name : UInt64
+    get_my_device_handle : UInt64
+    get_my_device_open_mode : UInt64
+    write_to_error_log : UInt64
   end
 
   IStiDeviceControl_GUID = "128a9860-52dc-11d0-9edf-444553540000"
@@ -2849,25 +2849,25 @@ lib LibWin32
   end
 
   struct IStiUSDVTbl
-    query_interface : Proc(IStiUSD*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IStiUSD*, UInt32)
-    release : Proc(IStiUSD*, UInt32)
-    initialize : Proc(IStiUSD*, IStiDeviceControl, UInt32, HKEY, HRESULT)
-    get_capabilities : Proc(IStiUSD*, STI_USD_CAPS*, HRESULT)
-    get_status : Proc(IStiUSD*, STI_DEVICE_STATUS*, HRESULT)
-    device_reset : Proc(IStiUSD*, HRESULT)
-    diagnostic : Proc(IStiUSD*, STI_DIAG*, HRESULT)
-    escape : Proc(IStiUSD*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, HRESULT)
-    get_last_error : Proc(IStiUSD*, UInt32*, HRESULT)
-    lock_device : Proc(IStiUSD*, HRESULT)
-    un_lock_device : Proc(IStiUSD*, HRESULT)
-    raw_read_data : Proc(IStiUSD*, Void*, UInt32*, OVERLAPPED*, HRESULT)
-    raw_write_data : Proc(IStiUSD*, Void*, UInt32, OVERLAPPED*, HRESULT)
-    raw_read_command : Proc(IStiUSD*, Void*, UInt32*, OVERLAPPED*, HRESULT)
-    raw_write_command : Proc(IStiUSD*, Void*, UInt32, OVERLAPPED*, HRESULT)
-    set_notification_handle : Proc(IStiUSD*, LibC::HANDLE, HRESULT)
-    get_notification_data : Proc(IStiUSD*, STINOTIFY*, HRESULT)
-    get_last_error_info : Proc(IStiUSD*, ERROR_INFOW*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    get_capabilities : UInt64
+    get_status : UInt64
+    device_reset : UInt64
+    diagnostic : UInt64
+    escape : UInt64
+    get_last_error : UInt64
+    lock_device : UInt64
+    un_lock_device : UInt64
+    raw_read_data : UInt64
+    raw_write_data : UInt64
+    raw_read_command : UInt64
+    raw_write_command : UInt64
+    set_notification_handle : UInt64
+    get_notification_data : UInt64
+    get_last_error_info : UInt64
   end
 
   IStiUSD_GUID = "0c9bb460-51ac-11d0-90ea-00aa0060f86c"
@@ -3019,7 +3019,7 @@ lib LibWin32
   fun FaxInitializeEventQueue(faxhandle : LibC::HANDLE, completionport : LibC::HANDLE, completionkey : LibC::UINT_PTR, hwnd : LibC::HANDLE, messagestart : UInt32) : LibC::BOOL
 
   # Params # buffer : Void* [In]
-  fun FaxFreeBuffer(buffer : Void*)
+  fun FaxFreeBuffer(buffer : Void*) : Void
 
   # Params # printername : PSTR [In],printinfo : FAX_PRINT_INFOA* [In],faxjobid : UInt32* [In],faxcontextinfo : FAX_CONTEXT_INFOA* [In]
   fun FaxStartPrintJobA(printername : PSTR, printinfo : FAX_PRINT_INFOA*, faxjobid : UInt32*, faxcontextinfo : FAX_CONTEXT_INFOA*) : LibC::BOOL
@@ -3053,4 +3053,3765 @@ lib LibWin32
 
   # Params # hinst : HINSTANCE [In],dwver : UInt32 [In],ppsti : IStillImageW* [In],punkouter : IUnknown [In]
   fun StiCreateInstanceW(hinst : HINSTANCE, dwver : UInt32, ppsti : IStillImageW*, punkouter : IUnknown) : HRESULT
+end
+struct LibWin32::IFaxJobStatus
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_status(pstatus : FAX_JOB_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(FAX_JOB_STATUS_ENUM*, HRESULT)).call(pstatus)
+  end
+  def get_pages(plpages : Int32*) : HRESULT
+    @lpVtbl.value.get_pages.unsafe_as(Proc(Int32*, HRESULT)).call(plpages)
+  end
+  def get_size(plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(Int32*, HRESULT)).call(plsize)
+  end
+  def get_current_page(plcurrentpage : Int32*) : HRESULT
+    @lpVtbl.value.get_current_page.unsafe_as(Proc(Int32*, HRESULT)).call(plcurrentpage)
+  end
+  def get_device_id(pldeviceid : Int32*) : HRESULT
+    @lpVtbl.value.get_device_id.unsafe_as(Proc(Int32*, HRESULT)).call(pldeviceid)
+  end
+  def get_csid(pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcsid)
+  end
+  def get_tsid(pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtsid)
+  end
+  def get_extended_status_code(pextendedstatuscode : FAX_JOB_EXTENDED_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_extended_status_code.unsafe_as(Proc(FAX_JOB_EXTENDED_STATUS_ENUM*, HRESULT)).call(pextendedstatuscode)
+  end
+  def get_extended_status(pbstrextendedstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_extended_status.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrextendedstatus)
+  end
+  def get_available_operations(pavailableoperations : FAX_JOB_OPERATIONS_ENUM*) : HRESULT
+    @lpVtbl.value.get_available_operations.unsafe_as(Proc(FAX_JOB_OPERATIONS_ENUM*, HRESULT)).call(pavailableoperations)
+  end
+  def get_retries(plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.unsafe_as(Proc(Int32*, HRESULT)).call(plretries)
+  end
+  def get_job_type(pjobtype : FAX_JOB_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_job_type.unsafe_as(Proc(FAX_JOB_TYPE_ENUM*, HRESULT)).call(pjobtype)
+  end
+  def get_scheduled_time(pdatescheduledtime : Float64*) : HRESULT
+    @lpVtbl.value.get_scheduled_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdatescheduledtime)
+  end
+  def get_transmission_start(pdatetransmissionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_start.unsafe_as(Proc(Float64*, HRESULT)).call(pdatetransmissionstart)
+  end
+  def get_transmission_end(pdatetransmissionend : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_end.unsafe_as(Proc(Float64*, HRESULT)).call(pdatetransmissionend)
+  end
+  def get_caller_id(pbstrcallerid : UInt8**) : HRESULT
+    @lpVtbl.value.get_caller_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcallerid)
+  end
+  def get_routing_information(pbstrroutinginformation : UInt8**) : HRESULT
+    @lpVtbl.value.get_routing_information.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrroutinginformation)
+  end
+end
+struct LibWin32::IFaxServer
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def connect(bstrservername : UInt8*) : HRESULT
+    @lpVtbl.value.connect.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrservername)
+  end
+  def get_server_name(pbstrservername : UInt8**) : HRESULT
+    @lpVtbl.value.get_server_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrservername)
+  end
+  def get_device_providers(ppfaxdeviceproviders : IFaxDeviceProviders*) : HRESULT
+    @lpVtbl.value.get_device_providers.unsafe_as(Proc(IFaxDeviceProviders*, HRESULT)).call(ppfaxdeviceproviders)
+  end
+  def get_devices(ppfaxdevices : IFaxDevices*) : HRESULT
+    @lpVtbl.value.get_devices.unsafe_as(Proc(IFaxDevices*, HRESULT)).call(ppfaxdevices)
+  end
+  def get_inbound_routing(ppfaxinboundrouting : IFaxInboundRouting*) : HRESULT
+    @lpVtbl.value.get_inbound_routing.unsafe_as(Proc(IFaxInboundRouting*, HRESULT)).call(ppfaxinboundrouting)
+  end
+  def get_folders(pfaxfolders : IFaxFolders*) : HRESULT
+    @lpVtbl.value.get_folders.unsafe_as(Proc(IFaxFolders*, HRESULT)).call(pfaxfolders)
+  end
+  def get_logging_options(ppfaxloggingoptions : IFaxLoggingOptions*) : HRESULT
+    @lpVtbl.value.get_logging_options.unsafe_as(Proc(IFaxLoggingOptions*, HRESULT)).call(ppfaxloggingoptions)
+  end
+  def get_major_version(plmajorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_major_version.unsafe_as(Proc(Int32*, HRESULT)).call(plmajorversion)
+  end
+  def get_minor_version(plminorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_version.unsafe_as(Proc(Int32*, HRESULT)).call(plminorversion)
+  end
+  def get_major_build(plmajorbuild : Int32*) : HRESULT
+    @lpVtbl.value.get_major_build.unsafe_as(Proc(Int32*, HRESULT)).call(plmajorbuild)
+  end
+  def get_minor_build(plminorbuild : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_build.unsafe_as(Proc(Int32*, HRESULT)).call(plminorbuild)
+  end
+  def get_debug(pbdebug : Int16*) : HRESULT
+    @lpVtbl.value.get_debug.unsafe_as(Proc(Int16*, HRESULT)).call(pbdebug)
+  end
+  def get_activity(ppfaxactivity : IFaxActivity*) : HRESULT
+    @lpVtbl.value.get_activity.unsafe_as(Proc(IFaxActivity*, HRESULT)).call(ppfaxactivity)
+  end
+  def get_outbound_routing(ppfaxoutboundrouting : IFaxOutboundRouting*) : HRESULT
+    @lpVtbl.value.get_outbound_routing.unsafe_as(Proc(IFaxOutboundRouting*, HRESULT)).call(ppfaxoutboundrouting)
+  end
+  def get_receipt_options(ppfaxreceiptoptions : IFaxReceiptOptions*) : HRESULT
+    @lpVtbl.value.get_receipt_options.unsafe_as(Proc(IFaxReceiptOptions*, HRESULT)).call(ppfaxreceiptoptions)
+  end
+  def get_security(ppfaxsecurity : IFaxSecurity*) : HRESULT
+    @lpVtbl.value.get_security.unsafe_as(Proc(IFaxSecurity*, HRESULT)).call(ppfaxsecurity)
+  end
+  def disconnect : HRESULT
+    @lpVtbl.value.disconnect.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_extension_property(bstrguid : UInt8*, pvproperty : VARIANT*) : HRESULT
+    @lpVtbl.value.get_extension_property.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrguid, pvproperty)
+  end
+  def set_extension_property(bstrguid : UInt8*, vproperty : VARIANT) : HRESULT
+    @lpVtbl.value.set_extension_property.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrguid, vproperty)
+  end
+  def listen_to_server_events(eventtypes : FAX_SERVER_EVENTS_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.listen_to_server_events.unsafe_as(Proc(FAX_SERVER_EVENTS_TYPE_ENUM, HRESULT)).call(eventtypes)
+  end
+  def register_device_provider(bstrguid : UInt8*, bstrfriendlyname : UInt8*, bstrimagename : UInt8*, tspname : UInt8*, lfspiversion : Int32) : HRESULT
+    @lpVtbl.value.register_device_provider.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, Int32, HRESULT)).call(bstrguid, bstrfriendlyname, bstrimagename, tspname, lfspiversion)
+  end
+  def unregister_device_provider(bstruniquename : UInt8*) : HRESULT
+    @lpVtbl.value.unregister_device_provider.unsafe_as(Proc(UInt8*, HRESULT)).call(bstruniquename)
+  end
+  def register_inbound_routing_extension(bstrextensionname : UInt8*, bstrfriendlyname : UInt8*, bstrimagename : UInt8*, vmethods : VARIANT) : HRESULT
+    @lpVtbl.value.register_inbound_routing_extension.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, VARIANT, HRESULT)).call(bstrextensionname, bstrfriendlyname, bstrimagename, vmethods)
+  end
+  def unregister_inbound_routing_extension(bstrextensionuniquename : UInt8*) : HRESULT
+    @lpVtbl.value.unregister_inbound_routing_extension.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrextensionuniquename)
+  end
+  def get_registered_events(peventtypes : FAX_SERVER_EVENTS_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_registered_events.unsafe_as(Proc(FAX_SERVER_EVENTS_TYPE_ENUM*, HRESULT)).call(peventtypes)
+  end
+  def get_api_version(papiversion : FAX_SERVER_APIVERSION_ENUM*) : HRESULT
+    @lpVtbl.value.get_api_version.unsafe_as(Proc(FAX_SERVER_APIVERSION_ENUM*, HRESULT)).call(papiversion)
+  end
+end
+struct LibWin32::IFaxDeviceProviders
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  end
+  def get_item(vindex : VARIANT, pfaxdeviceprovider : IFaxDeviceProvider*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(VARIANT, IFaxDeviceProvider*, HRESULT)).call(vindex, pfaxdeviceprovider)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+end
+struct LibWin32::IFaxDevices
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  end
+  def get_item(vindex : VARIANT, pfaxdevice : IFaxDevice*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(VARIANT, IFaxDevice*, HRESULT)).call(vindex, pfaxdevice)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def get_item_by_id(lid : Int32, ppfaxdevice : IFaxDevice*) : HRESULT
+    @lpVtbl.value.get_item_by_id.unsafe_as(Proc(Int32, IFaxDevice*, HRESULT)).call(lid, ppfaxdevice)
+  end
+end
+struct LibWin32::IFaxInboundRouting
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_extensions(pfaxinboundroutingextensions : IFaxInboundRoutingExtensions*) : HRESULT
+    @lpVtbl.value.get_extensions.unsafe_as(Proc(IFaxInboundRoutingExtensions*, HRESULT)).call(pfaxinboundroutingextensions)
+  end
+  def get_methods(pfaxinboundroutingmethods : IFaxInboundRoutingMethods*) : HRESULT
+    @lpVtbl.value.get_methods.unsafe_as(Proc(IFaxInboundRoutingMethods*, HRESULT)).call(pfaxinboundroutingmethods)
+  end
+end
+struct LibWin32::IFaxFolders
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_outgoing_queue(pfaxoutgoingqueue : IFaxOutgoingQueue*) : HRESULT
+    @lpVtbl.value.get_outgoing_queue.unsafe_as(Proc(IFaxOutgoingQueue*, HRESULT)).call(pfaxoutgoingqueue)
+  end
+  def get_incoming_queue(pfaxincomingqueue : IFaxIncomingQueue*) : HRESULT
+    @lpVtbl.value.get_incoming_queue.unsafe_as(Proc(IFaxIncomingQueue*, HRESULT)).call(pfaxincomingqueue)
+  end
+  def get_incoming_archive(pfaxincomingarchive : IFaxIncomingArchive*) : HRESULT
+    @lpVtbl.value.get_incoming_archive.unsafe_as(Proc(IFaxIncomingArchive*, HRESULT)).call(pfaxincomingarchive)
+  end
+  def get_outgoing_archive(pfaxoutgoingarchive : IFaxOutgoingArchive*) : HRESULT
+    @lpVtbl.value.get_outgoing_archive.unsafe_as(Proc(IFaxOutgoingArchive*, HRESULT)).call(pfaxoutgoingarchive)
+  end
+end
+struct LibWin32::IFaxLoggingOptions
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_event_logging(pfaxeventlogging : IFaxEventLogging*) : HRESULT
+    @lpVtbl.value.get_event_logging.unsafe_as(Proc(IFaxEventLogging*, HRESULT)).call(pfaxeventlogging)
+  end
+  def get_activity_logging(pfaxactivitylogging : IFaxActivityLogging*) : HRESULT
+    @lpVtbl.value.get_activity_logging.unsafe_as(Proc(IFaxActivityLogging*, HRESULT)).call(pfaxactivitylogging)
+  end
+end
+struct LibWin32::IFaxActivity
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_incoming_messages(plincomingmessages : Int32*) : HRESULT
+    @lpVtbl.value.get_incoming_messages.unsafe_as(Proc(Int32*, HRESULT)).call(plincomingmessages)
+  end
+  def get_routing_messages(plroutingmessages : Int32*) : HRESULT
+    @lpVtbl.value.get_routing_messages.unsafe_as(Proc(Int32*, HRESULT)).call(plroutingmessages)
+  end
+  def get_outgoing_messages(ploutgoingmessages : Int32*) : HRESULT
+    @lpVtbl.value.get_outgoing_messages.unsafe_as(Proc(Int32*, HRESULT)).call(ploutgoingmessages)
+  end
+  def get_queued_messages(plqueuedmessages : Int32*) : HRESULT
+    @lpVtbl.value.get_queued_messages.unsafe_as(Proc(Int32*, HRESULT)).call(plqueuedmessages)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IFaxOutboundRouting
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_groups(pfaxoutboundroutinggroups : IFaxOutboundRoutingGroups*) : HRESULT
+    @lpVtbl.value.get_groups.unsafe_as(Proc(IFaxOutboundRoutingGroups*, HRESULT)).call(pfaxoutboundroutinggroups)
+  end
+  def get_rules(pfaxoutboundroutingrules : IFaxOutboundRoutingRules*) : HRESULT
+    @lpVtbl.value.get_rules.unsafe_as(Proc(IFaxOutboundRoutingRules*, HRESULT)).call(pfaxoutboundroutingrules)
+  end
+end
+struct LibWin32::IFaxReceiptOptions
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_authentication_type(ptype : FAX_SMTP_AUTHENTICATION_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_authentication_type.unsafe_as(Proc(FAX_SMTP_AUTHENTICATION_TYPE_ENUM*, HRESULT)).call(ptype)
+  end
+  def put_authentication_type(type : FAX_SMTP_AUTHENTICATION_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_authentication_type.unsafe_as(Proc(FAX_SMTP_AUTHENTICATION_TYPE_ENUM, HRESULT)).call(type)
+  end
+  def get_smtp_server(pbstrsmtpserver : UInt8**) : HRESULT
+    @lpVtbl.value.get_smtp_server.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsmtpserver)
+  end
+  def put_smtp_server(bstrsmtpserver : UInt8*) : HRESULT
+    @lpVtbl.value.put_smtp_server.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsmtpserver)
+  end
+  def get_smtp_port(plsmtpport : Int32*) : HRESULT
+    @lpVtbl.value.get_smtp_port.unsafe_as(Proc(Int32*, HRESULT)).call(plsmtpport)
+  end
+  def put_smtp_port(lsmtpport : Int32) : HRESULT
+    @lpVtbl.value.put_smtp_port.unsafe_as(Proc(Int32, HRESULT)).call(lsmtpport)
+  end
+  def get_smtp_sender(pbstrsmtpsender : UInt8**) : HRESULT
+    @lpVtbl.value.get_smtp_sender.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsmtpsender)
+  end
+  def put_smtp_sender(bstrsmtpsender : UInt8*) : HRESULT
+    @lpVtbl.value.put_smtp_sender.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsmtpsender)
+  end
+  def get_smtp_user(pbstrsmtpuser : UInt8**) : HRESULT
+    @lpVtbl.value.get_smtp_user.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsmtpuser)
+  end
+  def put_smtp_user(bstrsmtpuser : UInt8*) : HRESULT
+    @lpVtbl.value.put_smtp_user.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsmtpuser)
+  end
+  def get_allowed_receipts(pallowedreceipts : FAX_RECEIPT_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_allowed_receipts.unsafe_as(Proc(FAX_RECEIPT_TYPE_ENUM*, HRESULT)).call(pallowedreceipts)
+  end
+  def put_allowed_receipts(allowedreceipts : FAX_RECEIPT_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_allowed_receipts.unsafe_as(Proc(FAX_RECEIPT_TYPE_ENUM, HRESULT)).call(allowedreceipts)
+  end
+  def get_smtp_password(pbstrsmtppassword : UInt8**) : HRESULT
+    @lpVtbl.value.get_smtp_password.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsmtppassword)
+  end
+  def put_smtp_password(bstrsmtppassword : UInt8*) : HRESULT
+    @lpVtbl.value.put_smtp_password.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsmtppassword)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def save : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_use_for_inbound_routing(pbuseforinboundrouting : Int16*) : HRESULT
+    @lpVtbl.value.get_use_for_inbound_routing.unsafe_as(Proc(Int16*, HRESULT)).call(pbuseforinboundrouting)
+  end
+  def put_use_for_inbound_routing(buseforinboundrouting : Int16) : HRESULT
+    @lpVtbl.value.put_use_for_inbound_routing.unsafe_as(Proc(Int16, HRESULT)).call(buseforinboundrouting)
+  end
+end
+struct LibWin32::IFaxSecurity
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_descriptor(pvdescriptor : VARIANT*) : HRESULT
+    @lpVtbl.value.get_descriptor.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvdescriptor)
+  end
+  def put_descriptor(vdescriptor : VARIANT) : HRESULT
+    @lpVtbl.value.put_descriptor.unsafe_as(Proc(VARIANT, HRESULT)).call(vdescriptor)
+  end
+  def get_granted_rights(pgrantedrights : FAX_ACCESS_RIGHTS_ENUM*) : HRESULT
+    @lpVtbl.value.get_granted_rights.unsafe_as(Proc(FAX_ACCESS_RIGHTS_ENUM*, HRESULT)).call(pgrantedrights)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def save : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_information_type(plinformationtype : Int32*) : HRESULT
+    @lpVtbl.value.get_information_type.unsafe_as(Proc(Int32*, HRESULT)).call(plinformationtype)
+  end
+  def put_information_type(linformationtype : Int32) : HRESULT
+    @lpVtbl.value.put_information_type.unsafe_as(Proc(Int32, HRESULT)).call(linformationtype)
+  end
+end
+struct LibWin32::IFaxDocument
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_body(pbstrbody : UInt8**) : HRESULT
+    @lpVtbl.value.get_body.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbody)
+  end
+  def put_body(bstrbody : UInt8*) : HRESULT
+    @lpVtbl.value.put_body.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrbody)
+  end
+  def get_sender(ppfaxsender : IFaxSender*) : HRESULT
+    @lpVtbl.value.get_sender.unsafe_as(Proc(IFaxSender*, HRESULT)).call(ppfaxsender)
+  end
+  def get_recipients(ppfaxrecipients : IFaxRecipients*) : HRESULT
+    @lpVtbl.value.get_recipients.unsafe_as(Proc(IFaxRecipients*, HRESULT)).call(ppfaxrecipients)
+  end
+  def get_cover_page(pbstrcoverpage : UInt8**) : HRESULT
+    @lpVtbl.value.get_cover_page.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcoverpage)
+  end
+  def put_cover_page(bstrcoverpage : UInt8*) : HRESULT
+    @lpVtbl.value.put_cover_page.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrcoverpage)
+  end
+  def get_subject(pbstrsubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_subject.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsubject)
+  end
+  def put_subject(bstrsubject : UInt8*) : HRESULT
+    @lpVtbl.value.put_subject.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsubject)
+  end
+  def get_note(pbstrnote : UInt8**) : HRESULT
+    @lpVtbl.value.get_note.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrnote)
+  end
+  def put_note(bstrnote : UInt8*) : HRESULT
+    @lpVtbl.value.put_note.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrnote)
+  end
+  def get_schedule_time(pdatescheduletime : Float64*) : HRESULT
+    @lpVtbl.value.get_schedule_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdatescheduletime)
+  end
+  def put_schedule_time(datescheduletime : Float64) : HRESULT
+    @lpVtbl.value.put_schedule_time.unsafe_as(Proc(Float64, HRESULT)).call(datescheduletime)
+  end
+  def get_receipt_address(pbstrreceiptaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_receipt_address.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrreceiptaddress)
+  end
+  def put_receipt_address(bstrreceiptaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_receipt_address.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrreceiptaddress)
+  end
+  def get_document_name(pbstrdocumentname : UInt8**) : HRESULT
+    @lpVtbl.value.get_document_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdocumentname)
+  end
+  def put_document_name(bstrdocumentname : UInt8*) : HRESULT
+    @lpVtbl.value.put_document_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdocumentname)
+  end
+  def get_call_handle(plcallhandle : Int32*) : HRESULT
+    @lpVtbl.value.get_call_handle.unsafe_as(Proc(Int32*, HRESULT)).call(plcallhandle)
+  end
+  def put_call_handle(lcallhandle : Int32) : HRESULT
+    @lpVtbl.value.put_call_handle.unsafe_as(Proc(Int32, HRESULT)).call(lcallhandle)
+  end
+  def get_cover_page_type(pcoverpagetype : FAX_COVERPAGE_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_cover_page_type.unsafe_as(Proc(FAX_COVERPAGE_TYPE_ENUM*, HRESULT)).call(pcoverpagetype)
+  end
+  def put_cover_page_type(coverpagetype : FAX_COVERPAGE_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_cover_page_type.unsafe_as(Proc(FAX_COVERPAGE_TYPE_ENUM, HRESULT)).call(coverpagetype)
+  end
+  def get_schedule_type(pscheduletype : FAX_SCHEDULE_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_schedule_type.unsafe_as(Proc(FAX_SCHEDULE_TYPE_ENUM*, HRESULT)).call(pscheduletype)
+  end
+  def put_schedule_type(scheduletype : FAX_SCHEDULE_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_schedule_type.unsafe_as(Proc(FAX_SCHEDULE_TYPE_ENUM, HRESULT)).call(scheduletype)
+  end
+  def get_receipt_type(preceipttype : FAX_RECEIPT_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_receipt_type.unsafe_as(Proc(FAX_RECEIPT_TYPE_ENUM*, HRESULT)).call(preceipttype)
+  end
+  def put_receipt_type(receipttype : FAX_RECEIPT_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_receipt_type.unsafe_as(Proc(FAX_RECEIPT_TYPE_ENUM, HRESULT)).call(receipttype)
+  end
+  def get_group_broadcast_receipts(pbusegrouping : Int16*) : HRESULT
+    @lpVtbl.value.get_group_broadcast_receipts.unsafe_as(Proc(Int16*, HRESULT)).call(pbusegrouping)
+  end
+  def put_group_broadcast_receipts(busegrouping : Int16) : HRESULT
+    @lpVtbl.value.put_group_broadcast_receipts.unsafe_as(Proc(Int16, HRESULT)).call(busegrouping)
+  end
+  def get_priority(ppriority : FAX_PRIORITY_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_priority.unsafe_as(Proc(FAX_PRIORITY_TYPE_ENUM*, HRESULT)).call(ppriority)
+  end
+  def put_priority(priority : FAX_PRIORITY_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_priority.unsafe_as(Proc(FAX_PRIORITY_TYPE_ENUM, HRESULT)).call(priority)
+  end
+  def get_tapi_connection(pptapiconnection : IDispatch*) : HRESULT
+    @lpVtbl.value.get_tapi_connection.unsafe_as(Proc(IDispatch*, HRESULT)).call(pptapiconnection)
+  end
+  def putref_tapi_connection(ptapiconnection : IDispatch) : HRESULT
+    @lpVtbl.value.putref_tapi_connection.unsafe_as(Proc(IDispatch, HRESULT)).call(ptapiconnection)
+  end
+  def submit(bstrfaxservername : UInt8*, pvfaxoutgoingjobids : VARIANT*) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrfaxservername, pvfaxoutgoingjobids)
+  end
+  def connected_submit(pfaxserver : IFaxServer, pvfaxoutgoingjobids : VARIANT*) : HRESULT
+    @lpVtbl.value.connected_submit.unsafe_as(Proc(IFaxServer, VARIANT*, HRESULT)).call(pfaxserver, pvfaxoutgoingjobids)
+  end
+  def get_attach_fax_to_receipt(pbattachfax : Int16*) : HRESULT
+    @lpVtbl.value.get_attach_fax_to_receipt.unsafe_as(Proc(Int16*, HRESULT)).call(pbattachfax)
+  end
+  def put_attach_fax_to_receipt(battachfax : Int16) : HRESULT
+    @lpVtbl.value.put_attach_fax_to_receipt.unsafe_as(Proc(Int16, HRESULT)).call(battachfax)
+  end
+end
+struct LibWin32::IFaxSender
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_billing_code(pbstrbillingcode : UInt8**) : HRESULT
+    @lpVtbl.value.get_billing_code.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbillingcode)
+  end
+  def put_billing_code(bstrbillingcode : UInt8*) : HRESULT
+    @lpVtbl.value.put_billing_code.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrbillingcode)
+  end
+  def get_city(pbstrcity : UInt8**) : HRESULT
+    @lpVtbl.value.get_city.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcity)
+  end
+  def put_city(bstrcity : UInt8*) : HRESULT
+    @lpVtbl.value.put_city.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrcity)
+  end
+  def get_company(pbstrcompany : UInt8**) : HRESULT
+    @lpVtbl.value.get_company.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcompany)
+  end
+  def put_company(bstrcompany : UInt8*) : HRESULT
+    @lpVtbl.value.put_company.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrcompany)
+  end
+  def get_country(pbstrcountry : UInt8**) : HRESULT
+    @lpVtbl.value.get_country.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcountry)
+  end
+  def put_country(bstrcountry : UInt8*) : HRESULT
+    @lpVtbl.value.put_country.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrcountry)
+  end
+  def get_department(pbstrdepartment : UInt8**) : HRESULT
+    @lpVtbl.value.get_department.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdepartment)
+  end
+  def put_department(bstrdepartment : UInt8*) : HRESULT
+    @lpVtbl.value.put_department.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdepartment)
+  end
+  def get_email(pbstremail : UInt8**) : HRESULT
+    @lpVtbl.value.get_email.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstremail)
+  end
+  def put_email(bstremail : UInt8*) : HRESULT
+    @lpVtbl.value.put_email.unsafe_as(Proc(UInt8*, HRESULT)).call(bstremail)
+  end
+  def get_fax_number(pbstrfaxnumber : UInt8**) : HRESULT
+    @lpVtbl.value.get_fax_number.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrfaxnumber)
+  end
+  def put_fax_number(bstrfaxnumber : UInt8*) : HRESULT
+    @lpVtbl.value.put_fax_number.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrfaxnumber)
+  end
+  def get_home_phone(pbstrhomephone : UInt8**) : HRESULT
+    @lpVtbl.value.get_home_phone.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrhomephone)
+  end
+  def put_home_phone(bstrhomephone : UInt8*) : HRESULT
+    @lpVtbl.value.put_home_phone.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrhomephone)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+  def get_tsid(pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtsid)
+  end
+  def put_tsid(bstrtsid : UInt8*) : HRESULT
+    @lpVtbl.value.put_tsid.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtsid)
+  end
+  def get_office_phone(pbstrofficephone : UInt8**) : HRESULT
+    @lpVtbl.value.get_office_phone.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrofficephone)
+  end
+  def put_office_phone(bstrofficephone : UInt8*) : HRESULT
+    @lpVtbl.value.put_office_phone.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrofficephone)
+  end
+  def get_office_location(pbstrofficelocation : UInt8**) : HRESULT
+    @lpVtbl.value.get_office_location.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrofficelocation)
+  end
+  def put_office_location(bstrofficelocation : UInt8*) : HRESULT
+    @lpVtbl.value.put_office_location.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrofficelocation)
+  end
+  def get_state(pbstrstate : UInt8**) : HRESULT
+    @lpVtbl.value.get_state.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrstate)
+  end
+  def put_state(bstrstate : UInt8*) : HRESULT
+    @lpVtbl.value.put_state.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrstate)
+  end
+  def get_street_address(pbstrstreetaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_street_address.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrstreetaddress)
+  end
+  def put_street_address(bstrstreetaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_street_address.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrstreetaddress)
+  end
+  def get_title(pbstrtitle : UInt8**) : HRESULT
+    @lpVtbl.value.get_title.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtitle)
+  end
+  def put_title(bstrtitle : UInt8*) : HRESULT
+    @lpVtbl.value.put_title.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtitle)
+  end
+  def get_zip_code(pbstrzipcode : UInt8**) : HRESULT
+    @lpVtbl.value.get_zip_code.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrzipcode)
+  end
+  def put_zip_code(bstrzipcode : UInt8*) : HRESULT
+    @lpVtbl.value.put_zip_code.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrzipcode)
+  end
+  def load_default_sender : HRESULT
+    @lpVtbl.value.load_default_sender.unsafe_as(Proc(HRESULT)).call
+  end
+  def save_default_sender : HRESULT
+    @lpVtbl.value.save_default_sender.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IFaxRecipient
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_fax_number(pbstrfaxnumber : UInt8**) : HRESULT
+    @lpVtbl.value.get_fax_number.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrfaxnumber)
+  end
+  def put_fax_number(bstrfaxnumber : UInt8*) : HRESULT
+    @lpVtbl.value.put_fax_number.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrfaxnumber)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def put_name(bstrname : UInt8*) : HRESULT
+    @lpVtbl.value.put_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrname)
+  end
+end
+struct LibWin32::IFaxRecipients
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  end
+  def get_item(lindex : Int32, ppfaxrecipient : IFaxRecipient*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IFaxRecipient*, HRESULT)).call(lindex, ppfaxrecipient)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def add(bstrfaxnumber : UInt8*, bstrrecipientname : UInt8*, ppfaxrecipient : IFaxRecipient*) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(UInt8*, UInt8*, IFaxRecipient*, HRESULT)).call(bstrfaxnumber, bstrrecipientname, ppfaxrecipient)
+  end
+  def remove(lindex : Int32) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(Int32, HRESULT)).call(lindex)
+  end
+end
+struct LibWin32::IFaxIncomingArchive
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_use_archive(pbusearchive : Int16*) : HRESULT
+    @lpVtbl.value.get_use_archive.unsafe_as(Proc(Int16*, HRESULT)).call(pbusearchive)
+  end
+  def put_use_archive(busearchive : Int16) : HRESULT
+    @lpVtbl.value.put_use_archive.unsafe_as(Proc(Int16, HRESULT)).call(busearchive)
+  end
+  def get_archive_folder(pbstrarchivefolder : UInt8**) : HRESULT
+    @lpVtbl.value.get_archive_folder.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrarchivefolder)
+  end
+  def put_archive_folder(bstrarchivefolder : UInt8*) : HRESULT
+    @lpVtbl.value.put_archive_folder.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrarchivefolder)
+  end
+  def get_size_quota_warning(pbsizequotawarning : Int16*) : HRESULT
+    @lpVtbl.value.get_size_quota_warning.unsafe_as(Proc(Int16*, HRESULT)).call(pbsizequotawarning)
+  end
+  def put_size_quota_warning(bsizequotawarning : Int16) : HRESULT
+    @lpVtbl.value.put_size_quota_warning.unsafe_as(Proc(Int16, HRESULT)).call(bsizequotawarning)
+  end
+  def get_high_quota_water_mark(plhighquotawatermark : Int32*) : HRESULT
+    @lpVtbl.value.get_high_quota_water_mark.unsafe_as(Proc(Int32*, HRESULT)).call(plhighquotawatermark)
+  end
+  def put_high_quota_water_mark(lhighquotawatermark : Int32) : HRESULT
+    @lpVtbl.value.put_high_quota_water_mark.unsafe_as(Proc(Int32, HRESULT)).call(lhighquotawatermark)
+  end
+  def get_low_quota_water_mark(pllowquotawatermark : Int32*) : HRESULT
+    @lpVtbl.value.get_low_quota_water_mark.unsafe_as(Proc(Int32*, HRESULT)).call(pllowquotawatermark)
+  end
+  def put_low_quota_water_mark(llowquotawatermark : Int32) : HRESULT
+    @lpVtbl.value.put_low_quota_water_mark.unsafe_as(Proc(Int32, HRESULT)).call(llowquotawatermark)
+  end
+  def get_age_limit(plagelimit : Int32*) : HRESULT
+    @lpVtbl.value.get_age_limit.unsafe_as(Proc(Int32*, HRESULT)).call(plagelimit)
+  end
+  def put_age_limit(lagelimit : Int32) : HRESULT
+    @lpVtbl.value.put_age_limit.unsafe_as(Proc(Int32, HRESULT)).call(lagelimit)
+  end
+  def get_size_low(plsizelow : Int32*) : HRESULT
+    @lpVtbl.value.get_size_low.unsafe_as(Proc(Int32*, HRESULT)).call(plsizelow)
+  end
+  def get_size_high(plsizehigh : Int32*) : HRESULT
+    @lpVtbl.value.get_size_high.unsafe_as(Proc(Int32*, HRESULT)).call(plsizehigh)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def save : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_messages(lprefetchsize : Int32, pfaxincomingmessageiterator : IFaxIncomingMessageIterator*) : HRESULT
+    @lpVtbl.value.get_messages.unsafe_as(Proc(Int32, IFaxIncomingMessageIterator*, HRESULT)).call(lprefetchsize, pfaxincomingmessageiterator)
+  end
+  def get_message(bstrmessageid : UInt8*, pfaxincomingmessage : IFaxIncomingMessage*) : HRESULT
+    @lpVtbl.value.get_message.unsafe_as(Proc(UInt8*, IFaxIncomingMessage*, HRESULT)).call(bstrmessageid, pfaxincomingmessage)
+  end
+end
+struct LibWin32::IFaxIncomingQueue
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_blocked(pbblocked : Int16*) : HRESULT
+    @lpVtbl.value.get_blocked.unsafe_as(Proc(Int16*, HRESULT)).call(pbblocked)
+  end
+  def put_blocked(bblocked : Int16) : HRESULT
+    @lpVtbl.value.put_blocked.unsafe_as(Proc(Int16, HRESULT)).call(bblocked)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def save : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_jobs(pfaxincomingjobs : IFaxIncomingJobs*) : HRESULT
+    @lpVtbl.value.get_jobs.unsafe_as(Proc(IFaxIncomingJobs*, HRESULT)).call(pfaxincomingjobs)
+  end
+  def get_job(bstrjobid : UInt8*, pfaxincomingjob : IFaxIncomingJob*) : HRESULT
+    @lpVtbl.value.get_job.unsafe_as(Proc(UInt8*, IFaxIncomingJob*, HRESULT)).call(bstrjobid, pfaxincomingjob)
+  end
+end
+struct LibWin32::IFaxOutgoingArchive
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_use_archive(pbusearchive : Int16*) : HRESULT
+    @lpVtbl.value.get_use_archive.unsafe_as(Proc(Int16*, HRESULT)).call(pbusearchive)
+  end
+  def put_use_archive(busearchive : Int16) : HRESULT
+    @lpVtbl.value.put_use_archive.unsafe_as(Proc(Int16, HRESULT)).call(busearchive)
+  end
+  def get_archive_folder(pbstrarchivefolder : UInt8**) : HRESULT
+    @lpVtbl.value.get_archive_folder.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrarchivefolder)
+  end
+  def put_archive_folder(bstrarchivefolder : UInt8*) : HRESULT
+    @lpVtbl.value.put_archive_folder.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrarchivefolder)
+  end
+  def get_size_quota_warning(pbsizequotawarning : Int16*) : HRESULT
+    @lpVtbl.value.get_size_quota_warning.unsafe_as(Proc(Int16*, HRESULT)).call(pbsizequotawarning)
+  end
+  def put_size_quota_warning(bsizequotawarning : Int16) : HRESULT
+    @lpVtbl.value.put_size_quota_warning.unsafe_as(Proc(Int16, HRESULT)).call(bsizequotawarning)
+  end
+  def get_high_quota_water_mark(plhighquotawatermark : Int32*) : HRESULT
+    @lpVtbl.value.get_high_quota_water_mark.unsafe_as(Proc(Int32*, HRESULT)).call(plhighquotawatermark)
+  end
+  def put_high_quota_water_mark(lhighquotawatermark : Int32) : HRESULT
+    @lpVtbl.value.put_high_quota_water_mark.unsafe_as(Proc(Int32, HRESULT)).call(lhighquotawatermark)
+  end
+  def get_low_quota_water_mark(pllowquotawatermark : Int32*) : HRESULT
+    @lpVtbl.value.get_low_quota_water_mark.unsafe_as(Proc(Int32*, HRESULT)).call(pllowquotawatermark)
+  end
+  def put_low_quota_water_mark(llowquotawatermark : Int32) : HRESULT
+    @lpVtbl.value.put_low_quota_water_mark.unsafe_as(Proc(Int32, HRESULT)).call(llowquotawatermark)
+  end
+  def get_age_limit(plagelimit : Int32*) : HRESULT
+    @lpVtbl.value.get_age_limit.unsafe_as(Proc(Int32*, HRESULT)).call(plagelimit)
+  end
+  def put_age_limit(lagelimit : Int32) : HRESULT
+    @lpVtbl.value.put_age_limit.unsafe_as(Proc(Int32, HRESULT)).call(lagelimit)
+  end
+  def get_size_low(plsizelow : Int32*) : HRESULT
+    @lpVtbl.value.get_size_low.unsafe_as(Proc(Int32*, HRESULT)).call(plsizelow)
+  end
+  def get_size_high(plsizehigh : Int32*) : HRESULT
+    @lpVtbl.value.get_size_high.unsafe_as(Proc(Int32*, HRESULT)).call(plsizehigh)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def save : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_messages(lprefetchsize : Int32, pfaxoutgoingmessageiterator : IFaxOutgoingMessageIterator*) : HRESULT
+    @lpVtbl.value.get_messages.unsafe_as(Proc(Int32, IFaxOutgoingMessageIterator*, HRESULT)).call(lprefetchsize, pfaxoutgoingmessageiterator)
+  end
+  def get_message(bstrmessageid : UInt8*, pfaxoutgoingmessage : IFaxOutgoingMessage*) : HRESULT
+    @lpVtbl.value.get_message.unsafe_as(Proc(UInt8*, IFaxOutgoingMessage*, HRESULT)).call(bstrmessageid, pfaxoutgoingmessage)
+  end
+end
+struct LibWin32::IFaxOutgoingQueue
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_blocked(pbblocked : Int16*) : HRESULT
+    @lpVtbl.value.get_blocked.unsafe_as(Proc(Int16*, HRESULT)).call(pbblocked)
+  end
+  def put_blocked(bblocked : Int16) : HRESULT
+    @lpVtbl.value.put_blocked.unsafe_as(Proc(Int16, HRESULT)).call(bblocked)
+  end
+  def get_paused(pbpaused : Int16*) : HRESULT
+    @lpVtbl.value.get_paused.unsafe_as(Proc(Int16*, HRESULT)).call(pbpaused)
+  end
+  def put_paused(bpaused : Int16) : HRESULT
+    @lpVtbl.value.put_paused.unsafe_as(Proc(Int16, HRESULT)).call(bpaused)
+  end
+  def get_allow_personal_cover_pages(pballowpersonalcoverpages : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_personal_cover_pages.unsafe_as(Proc(Int16*, HRESULT)).call(pballowpersonalcoverpages)
+  end
+  def put_allow_personal_cover_pages(ballowpersonalcoverpages : Int16) : HRESULT
+    @lpVtbl.value.put_allow_personal_cover_pages.unsafe_as(Proc(Int16, HRESULT)).call(ballowpersonalcoverpages)
+  end
+  def get_use_device_tsid(pbusedevicetsid : Int16*) : HRESULT
+    @lpVtbl.value.get_use_device_tsid.unsafe_as(Proc(Int16*, HRESULT)).call(pbusedevicetsid)
+  end
+  def put_use_device_tsid(busedevicetsid : Int16) : HRESULT
+    @lpVtbl.value.put_use_device_tsid.unsafe_as(Proc(Int16, HRESULT)).call(busedevicetsid)
+  end
+  def get_retries(plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.unsafe_as(Proc(Int32*, HRESULT)).call(plretries)
+  end
+  def put_retries(lretries : Int32) : HRESULT
+    @lpVtbl.value.put_retries.unsafe_as(Proc(Int32, HRESULT)).call(lretries)
+  end
+  def get_retry_delay(plretrydelay : Int32*) : HRESULT
+    @lpVtbl.value.get_retry_delay.unsafe_as(Proc(Int32*, HRESULT)).call(plretrydelay)
+  end
+  def put_retry_delay(lretrydelay : Int32) : HRESULT
+    @lpVtbl.value.put_retry_delay.unsafe_as(Proc(Int32, HRESULT)).call(lretrydelay)
+  end
+  def get_discount_rate_start(pdatediscountratestart : Float64*) : HRESULT
+    @lpVtbl.value.get_discount_rate_start.unsafe_as(Proc(Float64*, HRESULT)).call(pdatediscountratestart)
+  end
+  def put_discount_rate_start(datediscountratestart : Float64) : HRESULT
+    @lpVtbl.value.put_discount_rate_start.unsafe_as(Proc(Float64, HRESULT)).call(datediscountratestart)
+  end
+  def get_discount_rate_end(pdatediscountrateend : Float64*) : HRESULT
+    @lpVtbl.value.get_discount_rate_end.unsafe_as(Proc(Float64*, HRESULT)).call(pdatediscountrateend)
+  end
+  def put_discount_rate_end(datediscountrateend : Float64) : HRESULT
+    @lpVtbl.value.put_discount_rate_end.unsafe_as(Proc(Float64, HRESULT)).call(datediscountrateend)
+  end
+  def get_age_limit(plagelimit : Int32*) : HRESULT
+    @lpVtbl.value.get_age_limit.unsafe_as(Proc(Int32*, HRESULT)).call(plagelimit)
+  end
+  def put_age_limit(lagelimit : Int32) : HRESULT
+    @lpVtbl.value.put_age_limit.unsafe_as(Proc(Int32, HRESULT)).call(lagelimit)
+  end
+  def get_branding(pbbranding : Int16*) : HRESULT
+    @lpVtbl.value.get_branding.unsafe_as(Proc(Int16*, HRESULT)).call(pbbranding)
+  end
+  def put_branding(bbranding : Int16) : HRESULT
+    @lpVtbl.value.put_branding.unsafe_as(Proc(Int16, HRESULT)).call(bbranding)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def save : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_jobs(pfaxoutgoingjobs : IFaxOutgoingJobs*) : HRESULT
+    @lpVtbl.value.get_jobs.unsafe_as(Proc(IFaxOutgoingJobs*, HRESULT)).call(pfaxoutgoingjobs)
+  end
+  def get_job(bstrjobid : UInt8*, pfaxoutgoingjob : IFaxOutgoingJob*) : HRESULT
+    @lpVtbl.value.get_job.unsafe_as(Proc(UInt8*, IFaxOutgoingJob*, HRESULT)).call(bstrjobid, pfaxoutgoingjob)
+  end
+end
+struct LibWin32::IFaxIncomingMessageIterator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_message(pfaxincomingmessage : IFaxIncomingMessage*) : HRESULT
+    @lpVtbl.value.get_message.unsafe_as(Proc(IFaxIncomingMessage*, HRESULT)).call(pfaxincomingmessage)
+  end
+  def get_prefetch_size(plprefetchsize : Int32*) : HRESULT
+    @lpVtbl.value.get_prefetch_size.unsafe_as(Proc(Int32*, HRESULT)).call(plprefetchsize)
+  end
+  def put_prefetch_size(lprefetchsize : Int32) : HRESULT
+    @lpVtbl.value.put_prefetch_size.unsafe_as(Proc(Int32, HRESULT)).call(lprefetchsize)
+  end
+  def get_at_eof(pbeof : Int16*) : HRESULT
+    @lpVtbl.value.get_at_eof.unsafe_as(Proc(Int16*, HRESULT)).call(pbeof)
+  end
+  def move_first : HRESULT
+    @lpVtbl.value.move_first.unsafe_as(Proc(HRESULT)).call
+  end
+  def move_next : HRESULT
+    @lpVtbl.value.move_next.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IFaxIncomingMessage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrid)
+  end
+  def get_pages(plpages : Int32*) : HRESULT
+    @lpVtbl.value.get_pages.unsafe_as(Proc(Int32*, HRESULT)).call(plpages)
+  end
+  def get_size(plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(Int32*, HRESULT)).call(plsize)
+  end
+  def get_device_name(pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdevicename)
+  end
+  def get_retries(plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.unsafe_as(Proc(Int32*, HRESULT)).call(plretries)
+  end
+  def get_transmission_start(pdatetransmissionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_start.unsafe_as(Proc(Float64*, HRESULT)).call(pdatetransmissionstart)
+  end
+  def get_transmission_end(pdatetransmissionend : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_end.unsafe_as(Proc(Float64*, HRESULT)).call(pdatetransmissionend)
+  end
+  def get_csid(pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcsid)
+  end
+  def get_tsid(pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtsid)
+  end
+  def get_caller_id(pbstrcallerid : UInt8**) : HRESULT
+    @lpVtbl.value.get_caller_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcallerid)
+  end
+  def get_routing_information(pbstrroutinginformation : UInt8**) : HRESULT
+    @lpVtbl.value.get_routing_information.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrroutinginformation)
+  end
+  def copy_tiff(bstrtiffpath : UInt8*) : HRESULT
+    @lpVtbl.value.copy_tiff.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtiffpath)
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IFaxOutgoingJobs
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  end
+  def get_item(vindex : VARIANT, pfaxoutgoingjob : IFaxOutgoingJob*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(VARIANT, IFaxOutgoingJob*, HRESULT)).call(vindex, pfaxoutgoingjob)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+end
+struct LibWin32::IFaxOutgoingJob
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_subject(pbstrsubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_subject.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsubject)
+  end
+  def get_document_name(pbstrdocumentname : UInt8**) : HRESULT
+    @lpVtbl.value.get_document_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdocumentname)
+  end
+  def get_pages(plpages : Int32*) : HRESULT
+    @lpVtbl.value.get_pages.unsafe_as(Proc(Int32*, HRESULT)).call(plpages)
+  end
+  def get_size(plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(Int32*, HRESULT)).call(plsize)
+  end
+  def get_submission_id(pbstrsubmissionid : UInt8**) : HRESULT
+    @lpVtbl.value.get_submission_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsubmissionid)
+  end
+  def get_id(pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrid)
+  end
+  def get_original_scheduled_time(pdateoriginalscheduledtime : Float64*) : HRESULT
+    @lpVtbl.value.get_original_scheduled_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdateoriginalscheduledtime)
+  end
+  def get_submission_time(pdatesubmissiontime : Float64*) : HRESULT
+    @lpVtbl.value.get_submission_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdatesubmissiontime)
+  end
+  def get_receipt_type(preceipttype : FAX_RECEIPT_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_receipt_type.unsafe_as(Proc(FAX_RECEIPT_TYPE_ENUM*, HRESULT)).call(preceipttype)
+  end
+  def get_priority(ppriority : FAX_PRIORITY_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_priority.unsafe_as(Proc(FAX_PRIORITY_TYPE_ENUM*, HRESULT)).call(ppriority)
+  end
+  def get_sender(ppfaxsender : IFaxSender*) : HRESULT
+    @lpVtbl.value.get_sender.unsafe_as(Proc(IFaxSender*, HRESULT)).call(ppfaxsender)
+  end
+  def get_recipient(ppfaxrecipient : IFaxRecipient*) : HRESULT
+    @lpVtbl.value.get_recipient.unsafe_as(Proc(IFaxRecipient*, HRESULT)).call(ppfaxrecipient)
+  end
+  def get_current_page(plcurrentpage : Int32*) : HRESULT
+    @lpVtbl.value.get_current_page.unsafe_as(Proc(Int32*, HRESULT)).call(plcurrentpage)
+  end
+  def get_device_id(pldeviceid : Int32*) : HRESULT
+    @lpVtbl.value.get_device_id.unsafe_as(Proc(Int32*, HRESULT)).call(pldeviceid)
+  end
+  def get_status(pstatus : FAX_JOB_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(FAX_JOB_STATUS_ENUM*, HRESULT)).call(pstatus)
+  end
+  def get_extended_status_code(pextendedstatuscode : FAX_JOB_EXTENDED_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_extended_status_code.unsafe_as(Proc(FAX_JOB_EXTENDED_STATUS_ENUM*, HRESULT)).call(pextendedstatuscode)
+  end
+  def get_extended_status(pbstrextendedstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_extended_status.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrextendedstatus)
+  end
+  def get_available_operations(pavailableoperations : FAX_JOB_OPERATIONS_ENUM*) : HRESULT
+    @lpVtbl.value.get_available_operations.unsafe_as(Proc(FAX_JOB_OPERATIONS_ENUM*, HRESULT)).call(pavailableoperations)
+  end
+  def get_retries(plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.unsafe_as(Proc(Int32*, HRESULT)).call(plretries)
+  end
+  def get_scheduled_time(pdatescheduledtime : Float64*) : HRESULT
+    @lpVtbl.value.get_scheduled_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdatescheduledtime)
+  end
+  def get_transmission_start(pdatetransmissionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_start.unsafe_as(Proc(Float64*, HRESULT)).call(pdatetransmissionstart)
+  end
+  def get_transmission_end(pdatetransmissionend : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_end.unsafe_as(Proc(Float64*, HRESULT)).call(pdatetransmissionend)
+  end
+  def get_csid(pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcsid)
+  end
+  def get_tsid(pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtsid)
+  end
+  def get_group_broadcast_receipts(pbgroupbroadcastreceipts : Int16*) : HRESULT
+    @lpVtbl.value.get_group_broadcast_receipts.unsafe_as(Proc(Int16*, HRESULT)).call(pbgroupbroadcastreceipts)
+  end
+  def pause : HRESULT
+    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume : HRESULT
+    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  end
+  def restart : HRESULT
+    @lpVtbl.value.restart.unsafe_as(Proc(HRESULT)).call
+  end
+  def copy_tiff(bstrtiffpath : UInt8*) : HRESULT
+    @lpVtbl.value.copy_tiff.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtiffpath)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IFaxOutgoingMessageIterator
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_message(pfaxoutgoingmessage : IFaxOutgoingMessage*) : HRESULT
+    @lpVtbl.value.get_message.unsafe_as(Proc(IFaxOutgoingMessage*, HRESULT)).call(pfaxoutgoingmessage)
+  end
+  def get_at_eof(pbeof : Int16*) : HRESULT
+    @lpVtbl.value.get_at_eof.unsafe_as(Proc(Int16*, HRESULT)).call(pbeof)
+  end
+  def get_prefetch_size(plprefetchsize : Int32*) : HRESULT
+    @lpVtbl.value.get_prefetch_size.unsafe_as(Proc(Int32*, HRESULT)).call(plprefetchsize)
+  end
+  def put_prefetch_size(lprefetchsize : Int32) : HRESULT
+    @lpVtbl.value.put_prefetch_size.unsafe_as(Proc(Int32, HRESULT)).call(lprefetchsize)
+  end
+  def move_first : HRESULT
+    @lpVtbl.value.move_first.unsafe_as(Proc(HRESULT)).call
+  end
+  def move_next : HRESULT
+    @lpVtbl.value.move_next.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IFaxOutgoingMessage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_submission_id(pbstrsubmissionid : UInt8**) : HRESULT
+    @lpVtbl.value.get_submission_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsubmissionid)
+  end
+  def get_id(pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrid)
+  end
+  def get_subject(pbstrsubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_subject.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsubject)
+  end
+  def get_document_name(pbstrdocumentname : UInt8**) : HRESULT
+    @lpVtbl.value.get_document_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdocumentname)
+  end
+  def get_retries(plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.unsafe_as(Proc(Int32*, HRESULT)).call(plretries)
+  end
+  def get_pages(plpages : Int32*) : HRESULT
+    @lpVtbl.value.get_pages.unsafe_as(Proc(Int32*, HRESULT)).call(plpages)
+  end
+  def get_size(plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(Int32*, HRESULT)).call(plsize)
+  end
+  def get_original_scheduled_time(pdateoriginalscheduledtime : Float64*) : HRESULT
+    @lpVtbl.value.get_original_scheduled_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdateoriginalscheduledtime)
+  end
+  def get_submission_time(pdatesubmissiontime : Float64*) : HRESULT
+    @lpVtbl.value.get_submission_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdatesubmissiontime)
+  end
+  def get_priority(ppriority : FAX_PRIORITY_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_priority.unsafe_as(Proc(FAX_PRIORITY_TYPE_ENUM*, HRESULT)).call(ppriority)
+  end
+  def get_sender(ppfaxsender : IFaxSender*) : HRESULT
+    @lpVtbl.value.get_sender.unsafe_as(Proc(IFaxSender*, HRESULT)).call(ppfaxsender)
+  end
+  def get_recipient(ppfaxrecipient : IFaxRecipient*) : HRESULT
+    @lpVtbl.value.get_recipient.unsafe_as(Proc(IFaxRecipient*, HRESULT)).call(ppfaxrecipient)
+  end
+  def get_device_name(pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdevicename)
+  end
+  def get_transmission_start(pdatetransmissionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_start.unsafe_as(Proc(Float64*, HRESULT)).call(pdatetransmissionstart)
+  end
+  def get_transmission_end(pdatetransmissionend : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_end.unsafe_as(Proc(Float64*, HRESULT)).call(pdatetransmissionend)
+  end
+  def get_csid(pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcsid)
+  end
+  def get_tsid(pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtsid)
+  end
+  def copy_tiff(bstrtiffpath : UInt8*) : HRESULT
+    @lpVtbl.value.copy_tiff.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtiffpath)
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IFaxIncomingJobs
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  end
+  def get_item(vindex : VARIANT, pfaxincomingjob : IFaxIncomingJob*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(VARIANT, IFaxIncomingJob*, HRESULT)).call(vindex, pfaxincomingjob)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+end
+struct LibWin32::IFaxIncomingJob
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_size(plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(Int32*, HRESULT)).call(plsize)
+  end
+  def get_id(pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrid)
+  end
+  def get_current_page(plcurrentpage : Int32*) : HRESULT
+    @lpVtbl.value.get_current_page.unsafe_as(Proc(Int32*, HRESULT)).call(plcurrentpage)
+  end
+  def get_device_id(pldeviceid : Int32*) : HRESULT
+    @lpVtbl.value.get_device_id.unsafe_as(Proc(Int32*, HRESULT)).call(pldeviceid)
+  end
+  def get_status(pstatus : FAX_JOB_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(FAX_JOB_STATUS_ENUM*, HRESULT)).call(pstatus)
+  end
+  def get_extended_status_code(pextendedstatuscode : FAX_JOB_EXTENDED_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_extended_status_code.unsafe_as(Proc(FAX_JOB_EXTENDED_STATUS_ENUM*, HRESULT)).call(pextendedstatuscode)
+  end
+  def get_extended_status(pbstrextendedstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_extended_status.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrextendedstatus)
+  end
+  def get_available_operations(pavailableoperations : FAX_JOB_OPERATIONS_ENUM*) : HRESULT
+    @lpVtbl.value.get_available_operations.unsafe_as(Proc(FAX_JOB_OPERATIONS_ENUM*, HRESULT)).call(pavailableoperations)
+  end
+  def get_retries(plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.unsafe_as(Proc(Int32*, HRESULT)).call(plretries)
+  end
+  def get_transmission_start(pdatetransmissionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_start.unsafe_as(Proc(Float64*, HRESULT)).call(pdatetransmissionstart)
+  end
+  def get_transmission_end(pdatetransmissionend : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_end.unsafe_as(Proc(Float64*, HRESULT)).call(pdatetransmissionend)
+  end
+  def get_csid(pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcsid)
+  end
+  def get_tsid(pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtsid)
+  end
+  def get_caller_id(pbstrcallerid : UInt8**) : HRESULT
+    @lpVtbl.value.get_caller_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcallerid)
+  end
+  def get_routing_information(pbstrroutinginformation : UInt8**) : HRESULT
+    @lpVtbl.value.get_routing_information.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrroutinginformation)
+  end
+  def get_job_type(pjobtype : FAX_JOB_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_job_type.unsafe_as(Proc(FAX_JOB_TYPE_ENUM*, HRESULT)).call(pjobtype)
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def copy_tiff(bstrtiffpath : UInt8*) : HRESULT
+    @lpVtbl.value.copy_tiff.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtiffpath)
+  end
+end
+struct LibWin32::IFaxDeviceProvider
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_friendly_name(pbstrfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrfriendlyname)
+  end
+  def get_image_name(pbstrimagename : UInt8**) : HRESULT
+    @lpVtbl.value.get_image_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrimagename)
+  end
+  def get_unique_name(pbstruniquename : UInt8**) : HRESULT
+    @lpVtbl.value.get_unique_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstruniquename)
+  end
+  def get_tapi_provider_name(pbstrtapiprovidername : UInt8**) : HRESULT
+    @lpVtbl.value.get_tapi_provider_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtapiprovidername)
+  end
+  def get_major_version(plmajorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_major_version.unsafe_as(Proc(Int32*, HRESULT)).call(plmajorversion)
+  end
+  def get_minor_version(plminorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_version.unsafe_as(Proc(Int32*, HRESULT)).call(plminorversion)
+  end
+  def get_major_build(plmajorbuild : Int32*) : HRESULT
+    @lpVtbl.value.get_major_build.unsafe_as(Proc(Int32*, HRESULT)).call(plmajorbuild)
+  end
+  def get_minor_build(plminorbuild : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_build.unsafe_as(Proc(Int32*, HRESULT)).call(plminorbuild)
+  end
+  def get_debug(pbdebug : Int16*) : HRESULT
+    @lpVtbl.value.get_debug.unsafe_as(Proc(Int16*, HRESULT)).call(pbdebug)
+  end
+  def get_status(pstatus : FAX_PROVIDER_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(FAX_PROVIDER_STATUS_ENUM*, HRESULT)).call(pstatus)
+  end
+  def get_init_error_code(pliniterrorcode : Int32*) : HRESULT
+    @lpVtbl.value.get_init_error_code.unsafe_as(Proc(Int32*, HRESULT)).call(pliniterrorcode)
+  end
+  def get_device_ids(pvdeviceids : VARIANT*) : HRESULT
+    @lpVtbl.value.get_device_ids.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvdeviceids)
+  end
+end
+struct LibWin32::IFaxDevice
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(plid : Int32*) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(Int32*, HRESULT)).call(plid)
+  end
+  def get_device_name(pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdevicename)
+  end
+  def get_provider_unique_name(pbstrprovideruniquename : UInt8**) : HRESULT
+    @lpVtbl.value.get_provider_unique_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrprovideruniquename)
+  end
+  def get_powered_off(pbpoweredoff : Int16*) : HRESULT
+    @lpVtbl.value.get_powered_off.unsafe_as(Proc(Int16*, HRESULT)).call(pbpoweredoff)
+  end
+  def get_receiving_now(pbreceivingnow : Int16*) : HRESULT
+    @lpVtbl.value.get_receiving_now.unsafe_as(Proc(Int16*, HRESULT)).call(pbreceivingnow)
+  end
+  def get_sending_now(pbsendingnow : Int16*) : HRESULT
+    @lpVtbl.value.get_sending_now.unsafe_as(Proc(Int16*, HRESULT)).call(pbsendingnow)
+  end
+  def get_used_routing_methods(pvusedroutingmethods : VARIANT*) : HRESULT
+    @lpVtbl.value.get_used_routing_methods.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvusedroutingmethods)
+  end
+  def get_description(pbstrdescription : UInt8**) : HRESULT
+    @lpVtbl.value.get_description.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdescription)
+  end
+  def put_description(bstrdescription : UInt8*) : HRESULT
+    @lpVtbl.value.put_description.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdescription)
+  end
+  def get_send_enabled(pbsendenabled : Int16*) : HRESULT
+    @lpVtbl.value.get_send_enabled.unsafe_as(Proc(Int16*, HRESULT)).call(pbsendenabled)
+  end
+  def put_send_enabled(bsendenabled : Int16) : HRESULT
+    @lpVtbl.value.put_send_enabled.unsafe_as(Proc(Int16, HRESULT)).call(bsendenabled)
+  end
+  def get_receive_mode(preceivemode : FAX_DEVICE_RECEIVE_MODE_ENUM*) : HRESULT
+    @lpVtbl.value.get_receive_mode.unsafe_as(Proc(FAX_DEVICE_RECEIVE_MODE_ENUM*, HRESULT)).call(preceivemode)
+  end
+  def put_receive_mode(receivemode : FAX_DEVICE_RECEIVE_MODE_ENUM) : HRESULT
+    @lpVtbl.value.put_receive_mode.unsafe_as(Proc(FAX_DEVICE_RECEIVE_MODE_ENUM, HRESULT)).call(receivemode)
+  end
+  def get_rings_before_answer(plringsbeforeanswer : Int32*) : HRESULT
+    @lpVtbl.value.get_rings_before_answer.unsafe_as(Proc(Int32*, HRESULT)).call(plringsbeforeanswer)
+  end
+  def put_rings_before_answer(lringsbeforeanswer : Int32) : HRESULT
+    @lpVtbl.value.put_rings_before_answer.unsafe_as(Proc(Int32, HRESULT)).call(lringsbeforeanswer)
+  end
+  def get_csid(pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcsid)
+  end
+  def put_csid(bstrcsid : UInt8*) : HRESULT
+    @lpVtbl.value.put_csid.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrcsid)
+  end
+  def get_tsid(pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtsid)
+  end
+  def put_tsid(bstrtsid : UInt8*) : HRESULT
+    @lpVtbl.value.put_tsid.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtsid)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def save : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_extension_property(bstrguid : UInt8*, pvproperty : VARIANT*) : HRESULT
+    @lpVtbl.value.get_extension_property.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrguid, pvproperty)
+  end
+  def set_extension_property(bstrguid : UInt8*, vproperty : VARIANT) : HRESULT
+    @lpVtbl.value.set_extension_property.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrguid, vproperty)
+  end
+  def use_routing_method(bstrmethodguid : UInt8*, buse : Int16) : HRESULT
+    @lpVtbl.value.use_routing_method.unsafe_as(Proc(UInt8*, Int16, HRESULT)).call(bstrmethodguid, buse)
+  end
+  def get_ringing_now(pbringingnow : Int16*) : HRESULT
+    @lpVtbl.value.get_ringing_now.unsafe_as(Proc(Int16*, HRESULT)).call(pbringingnow)
+  end
+  def answer_call : HRESULT
+    @lpVtbl.value.answer_call.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IFaxActivityLogging
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_log_incoming(pblogincoming : Int16*) : HRESULT
+    @lpVtbl.value.get_log_incoming.unsafe_as(Proc(Int16*, HRESULT)).call(pblogincoming)
+  end
+  def put_log_incoming(blogincoming : Int16) : HRESULT
+    @lpVtbl.value.put_log_incoming.unsafe_as(Proc(Int16, HRESULT)).call(blogincoming)
+  end
+  def get_log_outgoing(pblogoutgoing : Int16*) : HRESULT
+    @lpVtbl.value.get_log_outgoing.unsafe_as(Proc(Int16*, HRESULT)).call(pblogoutgoing)
+  end
+  def put_log_outgoing(blogoutgoing : Int16) : HRESULT
+    @lpVtbl.value.put_log_outgoing.unsafe_as(Proc(Int16, HRESULT)).call(blogoutgoing)
+  end
+  def get_database_path(pbstrdatabasepath : UInt8**) : HRESULT
+    @lpVtbl.value.get_database_path.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdatabasepath)
+  end
+  def put_database_path(bstrdatabasepath : UInt8*) : HRESULT
+    @lpVtbl.value.put_database_path.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdatabasepath)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def save : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IFaxEventLogging
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_init_events_level(piniteventlevel : FAX_LOG_LEVEL_ENUM*) : HRESULT
+    @lpVtbl.value.get_init_events_level.unsafe_as(Proc(FAX_LOG_LEVEL_ENUM*, HRESULT)).call(piniteventlevel)
+  end
+  def put_init_events_level(initeventlevel : FAX_LOG_LEVEL_ENUM) : HRESULT
+    @lpVtbl.value.put_init_events_level.unsafe_as(Proc(FAX_LOG_LEVEL_ENUM, HRESULT)).call(initeventlevel)
+  end
+  def get_inbound_events_level(pinboundeventlevel : FAX_LOG_LEVEL_ENUM*) : HRESULT
+    @lpVtbl.value.get_inbound_events_level.unsafe_as(Proc(FAX_LOG_LEVEL_ENUM*, HRESULT)).call(pinboundeventlevel)
+  end
+  def put_inbound_events_level(inboundeventlevel : FAX_LOG_LEVEL_ENUM) : HRESULT
+    @lpVtbl.value.put_inbound_events_level.unsafe_as(Proc(FAX_LOG_LEVEL_ENUM, HRESULT)).call(inboundeventlevel)
+  end
+  def get_outbound_events_level(poutboundeventlevel : FAX_LOG_LEVEL_ENUM*) : HRESULT
+    @lpVtbl.value.get_outbound_events_level.unsafe_as(Proc(FAX_LOG_LEVEL_ENUM*, HRESULT)).call(poutboundeventlevel)
+  end
+  def put_outbound_events_level(outboundeventlevel : FAX_LOG_LEVEL_ENUM) : HRESULT
+    @lpVtbl.value.put_outbound_events_level.unsafe_as(Proc(FAX_LOG_LEVEL_ENUM, HRESULT)).call(outboundeventlevel)
+  end
+  def get_general_events_level(pgeneraleventlevel : FAX_LOG_LEVEL_ENUM*) : HRESULT
+    @lpVtbl.value.get_general_events_level.unsafe_as(Proc(FAX_LOG_LEVEL_ENUM*, HRESULT)).call(pgeneraleventlevel)
+  end
+  def put_general_events_level(generaleventlevel : FAX_LOG_LEVEL_ENUM) : HRESULT
+    @lpVtbl.value.put_general_events_level.unsafe_as(Proc(FAX_LOG_LEVEL_ENUM, HRESULT)).call(generaleventlevel)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def save : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IFaxOutboundRoutingGroups
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  end
+  def get_item(vindex : VARIANT, pfaxoutboundroutinggroup : IFaxOutboundRoutingGroup*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(VARIANT, IFaxOutboundRoutingGroup*, HRESULT)).call(vindex, pfaxoutboundroutinggroup)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def add(bstrname : UInt8*, pfaxoutboundroutinggroup : IFaxOutboundRoutingGroup*) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(UInt8*, IFaxOutboundRoutingGroup*, HRESULT)).call(bstrname, pfaxoutboundroutinggroup)
+  end
+  def remove(vindex : VARIANT) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(VARIANT, HRESULT)).call(vindex)
+  end
+end
+struct LibWin32::IFaxOutboundRoutingGroup
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def get_status(pstatus : FAX_GROUP_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(FAX_GROUP_STATUS_ENUM*, HRESULT)).call(pstatus)
+  end
+  def get_device_ids(pfaxdeviceids : IFaxDeviceIds*) : HRESULT
+    @lpVtbl.value.get_device_ids.unsafe_as(Proc(IFaxDeviceIds*, HRESULT)).call(pfaxdeviceids)
+  end
+end
+struct LibWin32::IFaxDeviceIds
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  end
+  def get_item(lindex : Int32, pldeviceid : Int32*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, Int32*, HRESULT)).call(lindex, pldeviceid)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def add(ldeviceid : Int32) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(Int32, HRESULT)).call(ldeviceid)
+  end
+  def remove(lindex : Int32) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(Int32, HRESULT)).call(lindex)
+  end
+  def set_order(ldeviceid : Int32, lneworder : Int32) : HRESULT
+    @lpVtbl.value.set_order.unsafe_as(Proc(Int32, Int32, HRESULT)).call(ldeviceid, lneworder)
+  end
+end
+struct LibWin32::IFaxOutboundRoutingRules
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  end
+  def get_item(lindex : Int32, pfaxoutboundroutingrule : IFaxOutboundRoutingRule*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(Int32, IFaxOutboundRoutingRule*, HRESULT)).call(lindex, pfaxoutboundroutingrule)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+  def item_by_country_and_area(lcountrycode : Int32, lareacode : Int32, pfaxoutboundroutingrule : IFaxOutboundRoutingRule*) : HRESULT
+    @lpVtbl.value.item_by_country_and_area.unsafe_as(Proc(Int32, Int32, IFaxOutboundRoutingRule*, HRESULT)).call(lcountrycode, lareacode, pfaxoutboundroutingrule)
+  end
+  def remove_by_country_and_area(lcountrycode : Int32, lareacode : Int32) : HRESULT
+    @lpVtbl.value.remove_by_country_and_area.unsafe_as(Proc(Int32, Int32, HRESULT)).call(lcountrycode, lareacode)
+  end
+  def remove(lindex : Int32) : HRESULT
+    @lpVtbl.value.remove.unsafe_as(Proc(Int32, HRESULT)).call(lindex)
+  end
+  def add(lcountrycode : Int32, lareacode : Int32, busedevice : Int16, bstrgroupname : UInt8*, ldeviceid : Int32, pfaxoutboundroutingrule : IFaxOutboundRoutingRule*) : HRESULT
+    @lpVtbl.value.add.unsafe_as(Proc(Int32, Int32, Int16, UInt8*, Int32, IFaxOutboundRoutingRule*, HRESULT)).call(lcountrycode, lareacode, busedevice, bstrgroupname, ldeviceid, pfaxoutboundroutingrule)
+  end
+end
+struct LibWin32::IFaxOutboundRoutingRule
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_country_code(plcountrycode : Int32*) : HRESULT
+    @lpVtbl.value.get_country_code.unsafe_as(Proc(Int32*, HRESULT)).call(plcountrycode)
+  end
+  def get_area_code(plareacode : Int32*) : HRESULT
+    @lpVtbl.value.get_area_code.unsafe_as(Proc(Int32*, HRESULT)).call(plareacode)
+  end
+  def get_status(pstatus : FAX_RULE_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(FAX_RULE_STATUS_ENUM*, HRESULT)).call(pstatus)
+  end
+  def get_use_device(pbusedevice : Int16*) : HRESULT
+    @lpVtbl.value.get_use_device.unsafe_as(Proc(Int16*, HRESULT)).call(pbusedevice)
+  end
+  def put_use_device(busedevice : Int16) : HRESULT
+    @lpVtbl.value.put_use_device.unsafe_as(Proc(Int16, HRESULT)).call(busedevice)
+  end
+  def get_device_id(pldeviceid : Int32*) : HRESULT
+    @lpVtbl.value.get_device_id.unsafe_as(Proc(Int32*, HRESULT)).call(pldeviceid)
+  end
+  def put_device_id(deviceid : Int32) : HRESULT
+    @lpVtbl.value.put_device_id.unsafe_as(Proc(Int32, HRESULT)).call(deviceid)
+  end
+  def get_group_name(pbstrgroupname : UInt8**) : HRESULT
+    @lpVtbl.value.get_group_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrgroupname)
+  end
+  def put_group_name(bstrgroupname : UInt8*) : HRESULT
+    @lpVtbl.value.put_group_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrgroupname)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def save : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IFaxInboundRoutingExtensions
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  end
+  def get_item(vindex : VARIANT, pfaxinboundroutingextension : IFaxInboundRoutingExtension*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(VARIANT, IFaxInboundRoutingExtension*, HRESULT)).call(vindex, pfaxinboundroutingextension)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+end
+struct LibWin32::IFaxInboundRoutingExtension
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_friendly_name(pbstrfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_friendly_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrfriendlyname)
+  end
+  def get_image_name(pbstrimagename : UInt8**) : HRESULT
+    @lpVtbl.value.get_image_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrimagename)
+  end
+  def get_unique_name(pbstruniquename : UInt8**) : HRESULT
+    @lpVtbl.value.get_unique_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstruniquename)
+  end
+  def get_major_version(plmajorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_major_version.unsafe_as(Proc(Int32*, HRESULT)).call(plmajorversion)
+  end
+  def get_minor_version(plminorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_version.unsafe_as(Proc(Int32*, HRESULT)).call(plminorversion)
+  end
+  def get_major_build(plmajorbuild : Int32*) : HRESULT
+    @lpVtbl.value.get_major_build.unsafe_as(Proc(Int32*, HRESULT)).call(plmajorbuild)
+  end
+  def get_minor_build(plminorbuild : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_build.unsafe_as(Proc(Int32*, HRESULT)).call(plminorbuild)
+  end
+  def get_debug(pbdebug : Int16*) : HRESULT
+    @lpVtbl.value.get_debug.unsafe_as(Proc(Int16*, HRESULT)).call(pbdebug)
+  end
+  def get_status(pstatus : FAX_PROVIDER_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(FAX_PROVIDER_STATUS_ENUM*, HRESULT)).call(pstatus)
+  end
+  def get_init_error_code(pliniterrorcode : Int32*) : HRESULT
+    @lpVtbl.value.get_init_error_code.unsafe_as(Proc(Int32*, HRESULT)).call(pliniterrorcode)
+  end
+  def get_methods(pvmethods : VARIANT*) : HRESULT
+    @lpVtbl.value.get_methods.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvmethods)
+  end
+end
+struct LibWin32::IFaxInboundRoutingMethods
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  end
+  def get_item(vindex : VARIANT, pfaxinboundroutingmethod : IFaxInboundRoutingMethod*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(VARIANT, IFaxInboundRoutingMethod*, HRESULT)).call(vindex, pfaxinboundroutingmethod)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+end
+struct LibWin32::IFaxInboundRoutingMethod
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_name(pbstrname : UInt8**) : HRESULT
+    @lpVtbl.value.get_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrname)
+  end
+  def get_guid(pbstrguid : UInt8**) : HRESULT
+    @lpVtbl.value.get_guid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrguid)
+  end
+  def get_function_name(pbstrfunctionname : UInt8**) : HRESULT
+    @lpVtbl.value.get_function_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrfunctionname)
+  end
+  def get_extension_friendly_name(pbstrextensionfriendlyname : UInt8**) : HRESULT
+    @lpVtbl.value.get_extension_friendly_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrextensionfriendlyname)
+  end
+  def get_extension_image_name(pbstrextensionimagename : UInt8**) : HRESULT
+    @lpVtbl.value.get_extension_image_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrextensionimagename)
+  end
+  def get_priority(plpriority : Int32*) : HRESULT
+    @lpVtbl.value.get_priority.unsafe_as(Proc(Int32*, HRESULT)).call(plpriority)
+  end
+  def put_priority(lpriority : Int32) : HRESULT
+    @lpVtbl.value.put_priority.unsafe_as(Proc(Int32, HRESULT)).call(lpriority)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def save : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IFaxDocument2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_body(pbstrbody : UInt8**) : HRESULT
+    @lpVtbl.value.get_body.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrbody)
+  end
+  def put_body(bstrbody : UInt8*) : HRESULT
+    @lpVtbl.value.put_body.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrbody)
+  end
+  def get_sender(ppfaxsender : IFaxSender*) : HRESULT
+    @lpVtbl.value.get_sender.unsafe_as(Proc(IFaxSender*, HRESULT)).call(ppfaxsender)
+  end
+  def get_recipients(ppfaxrecipients : IFaxRecipients*) : HRESULT
+    @lpVtbl.value.get_recipients.unsafe_as(Proc(IFaxRecipients*, HRESULT)).call(ppfaxrecipients)
+  end
+  def get_cover_page(pbstrcoverpage : UInt8**) : HRESULT
+    @lpVtbl.value.get_cover_page.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcoverpage)
+  end
+  def put_cover_page(bstrcoverpage : UInt8*) : HRESULT
+    @lpVtbl.value.put_cover_page.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrcoverpage)
+  end
+  def get_subject(pbstrsubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_subject.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsubject)
+  end
+  def put_subject(bstrsubject : UInt8*) : HRESULT
+    @lpVtbl.value.put_subject.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsubject)
+  end
+  def get_note(pbstrnote : UInt8**) : HRESULT
+    @lpVtbl.value.get_note.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrnote)
+  end
+  def put_note(bstrnote : UInt8*) : HRESULT
+    @lpVtbl.value.put_note.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrnote)
+  end
+  def get_schedule_time(pdatescheduletime : Float64*) : HRESULT
+    @lpVtbl.value.get_schedule_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdatescheduletime)
+  end
+  def put_schedule_time(datescheduletime : Float64) : HRESULT
+    @lpVtbl.value.put_schedule_time.unsafe_as(Proc(Float64, HRESULT)).call(datescheduletime)
+  end
+  def get_receipt_address(pbstrreceiptaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_receipt_address.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrreceiptaddress)
+  end
+  def put_receipt_address(bstrreceiptaddress : UInt8*) : HRESULT
+    @lpVtbl.value.put_receipt_address.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrreceiptaddress)
+  end
+  def get_document_name(pbstrdocumentname : UInt8**) : HRESULT
+    @lpVtbl.value.get_document_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdocumentname)
+  end
+  def put_document_name(bstrdocumentname : UInt8*) : HRESULT
+    @lpVtbl.value.put_document_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdocumentname)
+  end
+  def get_call_handle(plcallhandle : Int32*) : HRESULT
+    @lpVtbl.value.get_call_handle.unsafe_as(Proc(Int32*, HRESULT)).call(plcallhandle)
+  end
+  def put_call_handle(lcallhandle : Int32) : HRESULT
+    @lpVtbl.value.put_call_handle.unsafe_as(Proc(Int32, HRESULT)).call(lcallhandle)
+  end
+  def get_cover_page_type(pcoverpagetype : FAX_COVERPAGE_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_cover_page_type.unsafe_as(Proc(FAX_COVERPAGE_TYPE_ENUM*, HRESULT)).call(pcoverpagetype)
+  end
+  def put_cover_page_type(coverpagetype : FAX_COVERPAGE_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_cover_page_type.unsafe_as(Proc(FAX_COVERPAGE_TYPE_ENUM, HRESULT)).call(coverpagetype)
+  end
+  def get_schedule_type(pscheduletype : FAX_SCHEDULE_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_schedule_type.unsafe_as(Proc(FAX_SCHEDULE_TYPE_ENUM*, HRESULT)).call(pscheduletype)
+  end
+  def put_schedule_type(scheduletype : FAX_SCHEDULE_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_schedule_type.unsafe_as(Proc(FAX_SCHEDULE_TYPE_ENUM, HRESULT)).call(scheduletype)
+  end
+  def get_receipt_type(preceipttype : FAX_RECEIPT_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_receipt_type.unsafe_as(Proc(FAX_RECEIPT_TYPE_ENUM*, HRESULT)).call(preceipttype)
+  end
+  def put_receipt_type(receipttype : FAX_RECEIPT_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_receipt_type.unsafe_as(Proc(FAX_RECEIPT_TYPE_ENUM, HRESULT)).call(receipttype)
+  end
+  def get_group_broadcast_receipts(pbusegrouping : Int16*) : HRESULT
+    @lpVtbl.value.get_group_broadcast_receipts.unsafe_as(Proc(Int16*, HRESULT)).call(pbusegrouping)
+  end
+  def put_group_broadcast_receipts(busegrouping : Int16) : HRESULT
+    @lpVtbl.value.put_group_broadcast_receipts.unsafe_as(Proc(Int16, HRESULT)).call(busegrouping)
+  end
+  def get_priority(ppriority : FAX_PRIORITY_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_priority.unsafe_as(Proc(FAX_PRIORITY_TYPE_ENUM*, HRESULT)).call(ppriority)
+  end
+  def put_priority(priority : FAX_PRIORITY_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.put_priority.unsafe_as(Proc(FAX_PRIORITY_TYPE_ENUM, HRESULT)).call(priority)
+  end
+  def get_tapi_connection(pptapiconnection : IDispatch*) : HRESULT
+    @lpVtbl.value.get_tapi_connection.unsafe_as(Proc(IDispatch*, HRESULT)).call(pptapiconnection)
+  end
+  def putref_tapi_connection(ptapiconnection : IDispatch) : HRESULT
+    @lpVtbl.value.putref_tapi_connection.unsafe_as(Proc(IDispatch, HRESULT)).call(ptapiconnection)
+  end
+  def submit(bstrfaxservername : UInt8*, pvfaxoutgoingjobids : VARIANT*) : HRESULT
+    @lpVtbl.value.submit.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrfaxservername, pvfaxoutgoingjobids)
+  end
+  def connected_submit(pfaxserver : IFaxServer, pvfaxoutgoingjobids : VARIANT*) : HRESULT
+    @lpVtbl.value.connected_submit.unsafe_as(Proc(IFaxServer, VARIANT*, HRESULT)).call(pfaxserver, pvfaxoutgoingjobids)
+  end
+  def get_attach_fax_to_receipt(pbattachfax : Int16*) : HRESULT
+    @lpVtbl.value.get_attach_fax_to_receipt.unsafe_as(Proc(Int16*, HRESULT)).call(pbattachfax)
+  end
+  def put_attach_fax_to_receipt(battachfax : Int16) : HRESULT
+    @lpVtbl.value.put_attach_fax_to_receipt.unsafe_as(Proc(Int16, HRESULT)).call(battachfax)
+  end
+  def get_submission_id(pbstrsubmissionid : UInt8**) : HRESULT
+    @lpVtbl.value.get_submission_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsubmissionid)
+  end
+  def get_bodies(pvbodies : VARIANT*) : HRESULT
+    @lpVtbl.value.get_bodies.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvbodies)
+  end
+  def put_bodies(vbodies : VARIANT) : HRESULT
+    @lpVtbl.value.put_bodies.unsafe_as(Proc(VARIANT, HRESULT)).call(vbodies)
+  end
+  def submit2(bstrfaxservername : UInt8*, pvfaxoutgoingjobids : VARIANT*, plerrorbodyfile : Int32*) : HRESULT
+    @lpVtbl.value.submit2.unsafe_as(Proc(UInt8*, VARIANT*, Int32*, HRESULT)).call(bstrfaxservername, pvfaxoutgoingjobids, plerrorbodyfile)
+  end
+  def connected_submit2(pfaxserver : IFaxServer, pvfaxoutgoingjobids : VARIANT*, plerrorbodyfile : Int32*) : HRESULT
+    @lpVtbl.value.connected_submit2.unsafe_as(Proc(IFaxServer, VARIANT*, Int32*, HRESULT)).call(pfaxserver, pvfaxoutgoingjobids, plerrorbodyfile)
+  end
+end
+struct LibWin32::IFaxConfiguration
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_use_archive(pbusearchive : Int16*) : HRESULT
+    @lpVtbl.value.get_use_archive.unsafe_as(Proc(Int16*, HRESULT)).call(pbusearchive)
+  end
+  def put_use_archive(busearchive : Int16) : HRESULT
+    @lpVtbl.value.put_use_archive.unsafe_as(Proc(Int16, HRESULT)).call(busearchive)
+  end
+  def get_archive_location(pbstrarchivelocation : UInt8**) : HRESULT
+    @lpVtbl.value.get_archive_location.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrarchivelocation)
+  end
+  def put_archive_location(bstrarchivelocation : UInt8*) : HRESULT
+    @lpVtbl.value.put_archive_location.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrarchivelocation)
+  end
+  def get_size_quota_warning(pbsizequotawarning : Int16*) : HRESULT
+    @lpVtbl.value.get_size_quota_warning.unsafe_as(Proc(Int16*, HRESULT)).call(pbsizequotawarning)
+  end
+  def put_size_quota_warning(bsizequotawarning : Int16) : HRESULT
+    @lpVtbl.value.put_size_quota_warning.unsafe_as(Proc(Int16, HRESULT)).call(bsizequotawarning)
+  end
+  def get_high_quota_water_mark(plhighquotawatermark : Int32*) : HRESULT
+    @lpVtbl.value.get_high_quota_water_mark.unsafe_as(Proc(Int32*, HRESULT)).call(plhighquotawatermark)
+  end
+  def put_high_quota_water_mark(lhighquotawatermark : Int32) : HRESULT
+    @lpVtbl.value.put_high_quota_water_mark.unsafe_as(Proc(Int32, HRESULT)).call(lhighquotawatermark)
+  end
+  def get_low_quota_water_mark(pllowquotawatermark : Int32*) : HRESULT
+    @lpVtbl.value.get_low_quota_water_mark.unsafe_as(Proc(Int32*, HRESULT)).call(pllowquotawatermark)
+  end
+  def put_low_quota_water_mark(llowquotawatermark : Int32) : HRESULT
+    @lpVtbl.value.put_low_quota_water_mark.unsafe_as(Proc(Int32, HRESULT)).call(llowquotawatermark)
+  end
+  def get_archive_age_limit(plarchiveagelimit : Int32*) : HRESULT
+    @lpVtbl.value.get_archive_age_limit.unsafe_as(Proc(Int32*, HRESULT)).call(plarchiveagelimit)
+  end
+  def put_archive_age_limit(larchiveagelimit : Int32) : HRESULT
+    @lpVtbl.value.put_archive_age_limit.unsafe_as(Proc(Int32, HRESULT)).call(larchiveagelimit)
+  end
+  def get_archive_size_low(plsizelow : Int32*) : HRESULT
+    @lpVtbl.value.get_archive_size_low.unsafe_as(Proc(Int32*, HRESULT)).call(plsizelow)
+  end
+  def get_archive_size_high(plsizehigh : Int32*) : HRESULT
+    @lpVtbl.value.get_archive_size_high.unsafe_as(Proc(Int32*, HRESULT)).call(plsizehigh)
+  end
+  def get_outgoing_queue_blocked(pboutgoingblocked : Int16*) : HRESULT
+    @lpVtbl.value.get_outgoing_queue_blocked.unsafe_as(Proc(Int16*, HRESULT)).call(pboutgoingblocked)
+  end
+  def put_outgoing_queue_blocked(boutgoingblocked : Int16) : HRESULT
+    @lpVtbl.value.put_outgoing_queue_blocked.unsafe_as(Proc(Int16, HRESULT)).call(boutgoingblocked)
+  end
+  def get_outgoing_queue_paused(pboutgoingpaused : Int16*) : HRESULT
+    @lpVtbl.value.get_outgoing_queue_paused.unsafe_as(Proc(Int16*, HRESULT)).call(pboutgoingpaused)
+  end
+  def put_outgoing_queue_paused(boutgoingpaused : Int16) : HRESULT
+    @lpVtbl.value.put_outgoing_queue_paused.unsafe_as(Proc(Int16, HRESULT)).call(boutgoingpaused)
+  end
+  def get_allow_personal_cover_pages(pballowpersonalcoverpages : Int16*) : HRESULT
+    @lpVtbl.value.get_allow_personal_cover_pages.unsafe_as(Proc(Int16*, HRESULT)).call(pballowpersonalcoverpages)
+  end
+  def put_allow_personal_cover_pages(ballowpersonalcoverpages : Int16) : HRESULT
+    @lpVtbl.value.put_allow_personal_cover_pages.unsafe_as(Proc(Int16, HRESULT)).call(ballowpersonalcoverpages)
+  end
+  def get_use_device_tsid(pbusedevicetsid : Int16*) : HRESULT
+    @lpVtbl.value.get_use_device_tsid.unsafe_as(Proc(Int16*, HRESULT)).call(pbusedevicetsid)
+  end
+  def put_use_device_tsid(busedevicetsid : Int16) : HRESULT
+    @lpVtbl.value.put_use_device_tsid.unsafe_as(Proc(Int16, HRESULT)).call(busedevicetsid)
+  end
+  def get_retries(plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.unsafe_as(Proc(Int32*, HRESULT)).call(plretries)
+  end
+  def put_retries(lretries : Int32) : HRESULT
+    @lpVtbl.value.put_retries.unsafe_as(Proc(Int32, HRESULT)).call(lretries)
+  end
+  def get_retry_delay(plretrydelay : Int32*) : HRESULT
+    @lpVtbl.value.get_retry_delay.unsafe_as(Proc(Int32*, HRESULT)).call(plretrydelay)
+  end
+  def put_retry_delay(lretrydelay : Int32) : HRESULT
+    @lpVtbl.value.put_retry_delay.unsafe_as(Proc(Int32, HRESULT)).call(lretrydelay)
+  end
+  def get_discount_rate_start(pdatediscountratestart : Float64*) : HRESULT
+    @lpVtbl.value.get_discount_rate_start.unsafe_as(Proc(Float64*, HRESULT)).call(pdatediscountratestart)
+  end
+  def put_discount_rate_start(datediscountratestart : Float64) : HRESULT
+    @lpVtbl.value.put_discount_rate_start.unsafe_as(Proc(Float64, HRESULT)).call(datediscountratestart)
+  end
+  def get_discount_rate_end(pdatediscountrateend : Float64*) : HRESULT
+    @lpVtbl.value.get_discount_rate_end.unsafe_as(Proc(Float64*, HRESULT)).call(pdatediscountrateend)
+  end
+  def put_discount_rate_end(datediscountrateend : Float64) : HRESULT
+    @lpVtbl.value.put_discount_rate_end.unsafe_as(Proc(Float64, HRESULT)).call(datediscountrateend)
+  end
+  def get_outgoing_queue_age_limit(ploutgoingqueueagelimit : Int32*) : HRESULT
+    @lpVtbl.value.get_outgoing_queue_age_limit.unsafe_as(Proc(Int32*, HRESULT)).call(ploutgoingqueueagelimit)
+  end
+  def put_outgoing_queue_age_limit(loutgoingqueueagelimit : Int32) : HRESULT
+    @lpVtbl.value.put_outgoing_queue_age_limit.unsafe_as(Proc(Int32, HRESULT)).call(loutgoingqueueagelimit)
+  end
+  def get_branding(pbbranding : Int16*) : HRESULT
+    @lpVtbl.value.get_branding.unsafe_as(Proc(Int16*, HRESULT)).call(pbbranding)
+  end
+  def put_branding(bbranding : Int16) : HRESULT
+    @lpVtbl.value.put_branding.unsafe_as(Proc(Int16, HRESULT)).call(bbranding)
+  end
+  def get_incoming_queue_blocked(pbincomingblocked : Int16*) : HRESULT
+    @lpVtbl.value.get_incoming_queue_blocked.unsafe_as(Proc(Int16*, HRESULT)).call(pbincomingblocked)
+  end
+  def put_incoming_queue_blocked(bincomingblocked : Int16) : HRESULT
+    @lpVtbl.value.put_incoming_queue_blocked.unsafe_as(Proc(Int16, HRESULT)).call(bincomingblocked)
+  end
+  def get_auto_create_account_on_connect(pbautocreateaccountonconnect : Int16*) : HRESULT
+    @lpVtbl.value.get_auto_create_account_on_connect.unsafe_as(Proc(Int16*, HRESULT)).call(pbautocreateaccountonconnect)
+  end
+  def put_auto_create_account_on_connect(bautocreateaccountonconnect : Int16) : HRESULT
+    @lpVtbl.value.put_auto_create_account_on_connect.unsafe_as(Proc(Int16, HRESULT)).call(bautocreateaccountonconnect)
+  end
+  def get_incoming_faxes_are_public(pbincomingfaxesarepublic : Int16*) : HRESULT
+    @lpVtbl.value.get_incoming_faxes_are_public.unsafe_as(Proc(Int16*, HRESULT)).call(pbincomingfaxesarepublic)
+  end
+  def put_incoming_faxes_are_public(bincomingfaxesarepublic : Int16) : HRESULT
+    @lpVtbl.value.put_incoming_faxes_are_public.unsafe_as(Proc(Int16, HRESULT)).call(bincomingfaxesarepublic)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def save : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IFaxServer2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def connect(bstrservername : UInt8*) : HRESULT
+    @lpVtbl.value.connect.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrservername)
+  end
+  def get_server_name(pbstrservername : UInt8**) : HRESULT
+    @lpVtbl.value.get_server_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrservername)
+  end
+  def get_device_providers(ppfaxdeviceproviders : IFaxDeviceProviders*) : HRESULT
+    @lpVtbl.value.get_device_providers.unsafe_as(Proc(IFaxDeviceProviders*, HRESULT)).call(ppfaxdeviceproviders)
+  end
+  def get_devices(ppfaxdevices : IFaxDevices*) : HRESULT
+    @lpVtbl.value.get_devices.unsafe_as(Proc(IFaxDevices*, HRESULT)).call(ppfaxdevices)
+  end
+  def get_inbound_routing(ppfaxinboundrouting : IFaxInboundRouting*) : HRESULT
+    @lpVtbl.value.get_inbound_routing.unsafe_as(Proc(IFaxInboundRouting*, HRESULT)).call(ppfaxinboundrouting)
+  end
+  def get_folders(pfaxfolders : IFaxFolders*) : HRESULT
+    @lpVtbl.value.get_folders.unsafe_as(Proc(IFaxFolders*, HRESULT)).call(pfaxfolders)
+  end
+  def get_logging_options(ppfaxloggingoptions : IFaxLoggingOptions*) : HRESULT
+    @lpVtbl.value.get_logging_options.unsafe_as(Proc(IFaxLoggingOptions*, HRESULT)).call(ppfaxloggingoptions)
+  end
+  def get_major_version(plmajorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_major_version.unsafe_as(Proc(Int32*, HRESULT)).call(plmajorversion)
+  end
+  def get_minor_version(plminorversion : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_version.unsafe_as(Proc(Int32*, HRESULT)).call(plminorversion)
+  end
+  def get_major_build(plmajorbuild : Int32*) : HRESULT
+    @lpVtbl.value.get_major_build.unsafe_as(Proc(Int32*, HRESULT)).call(plmajorbuild)
+  end
+  def get_minor_build(plminorbuild : Int32*) : HRESULT
+    @lpVtbl.value.get_minor_build.unsafe_as(Proc(Int32*, HRESULT)).call(plminorbuild)
+  end
+  def get_debug(pbdebug : Int16*) : HRESULT
+    @lpVtbl.value.get_debug.unsafe_as(Proc(Int16*, HRESULT)).call(pbdebug)
+  end
+  def get_activity(ppfaxactivity : IFaxActivity*) : HRESULT
+    @lpVtbl.value.get_activity.unsafe_as(Proc(IFaxActivity*, HRESULT)).call(ppfaxactivity)
+  end
+  def get_outbound_routing(ppfaxoutboundrouting : IFaxOutboundRouting*) : HRESULT
+    @lpVtbl.value.get_outbound_routing.unsafe_as(Proc(IFaxOutboundRouting*, HRESULT)).call(ppfaxoutboundrouting)
+  end
+  def get_receipt_options(ppfaxreceiptoptions : IFaxReceiptOptions*) : HRESULT
+    @lpVtbl.value.get_receipt_options.unsafe_as(Proc(IFaxReceiptOptions*, HRESULT)).call(ppfaxreceiptoptions)
+  end
+  def get_security(ppfaxsecurity : IFaxSecurity*) : HRESULT
+    @lpVtbl.value.get_security.unsafe_as(Proc(IFaxSecurity*, HRESULT)).call(ppfaxsecurity)
+  end
+  def disconnect : HRESULT
+    @lpVtbl.value.disconnect.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_extension_property(bstrguid : UInt8*, pvproperty : VARIANT*) : HRESULT
+    @lpVtbl.value.get_extension_property.unsafe_as(Proc(UInt8*, VARIANT*, HRESULT)).call(bstrguid, pvproperty)
+  end
+  def set_extension_property(bstrguid : UInt8*, vproperty : VARIANT) : HRESULT
+    @lpVtbl.value.set_extension_property.unsafe_as(Proc(UInt8*, VARIANT, HRESULT)).call(bstrguid, vproperty)
+  end
+  def listen_to_server_events(eventtypes : FAX_SERVER_EVENTS_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.listen_to_server_events.unsafe_as(Proc(FAX_SERVER_EVENTS_TYPE_ENUM, HRESULT)).call(eventtypes)
+  end
+  def register_device_provider(bstrguid : UInt8*, bstrfriendlyname : UInt8*, bstrimagename : UInt8*, tspname : UInt8*, lfspiversion : Int32) : HRESULT
+    @lpVtbl.value.register_device_provider.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, UInt8*, Int32, HRESULT)).call(bstrguid, bstrfriendlyname, bstrimagename, tspname, lfspiversion)
+  end
+  def unregister_device_provider(bstruniquename : UInt8*) : HRESULT
+    @lpVtbl.value.unregister_device_provider.unsafe_as(Proc(UInt8*, HRESULT)).call(bstruniquename)
+  end
+  def register_inbound_routing_extension(bstrextensionname : UInt8*, bstrfriendlyname : UInt8*, bstrimagename : UInt8*, vmethods : VARIANT) : HRESULT
+    @lpVtbl.value.register_inbound_routing_extension.unsafe_as(Proc(UInt8*, UInt8*, UInt8*, VARIANT, HRESULT)).call(bstrextensionname, bstrfriendlyname, bstrimagename, vmethods)
+  end
+  def unregister_inbound_routing_extension(bstrextensionuniquename : UInt8*) : HRESULT
+    @lpVtbl.value.unregister_inbound_routing_extension.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrextensionuniquename)
+  end
+  def get_registered_events(peventtypes : FAX_SERVER_EVENTS_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_registered_events.unsafe_as(Proc(FAX_SERVER_EVENTS_TYPE_ENUM*, HRESULT)).call(peventtypes)
+  end
+  def get_api_version(papiversion : FAX_SERVER_APIVERSION_ENUM*) : HRESULT
+    @lpVtbl.value.get_api_version.unsafe_as(Proc(FAX_SERVER_APIVERSION_ENUM*, HRESULT)).call(papiversion)
+  end
+  def get_configuration(ppfaxconfiguration : IFaxConfiguration*) : HRESULT
+    @lpVtbl.value.get_configuration.unsafe_as(Proc(IFaxConfiguration*, HRESULT)).call(ppfaxconfiguration)
+  end
+  def get_current_account(ppcurrentaccount : IFaxAccount*) : HRESULT
+    @lpVtbl.value.get_current_account.unsafe_as(Proc(IFaxAccount*, HRESULT)).call(ppcurrentaccount)
+  end
+  def get_fax_account_set(ppfaxaccountset : IFaxAccountSet*) : HRESULT
+    @lpVtbl.value.get_fax_account_set.unsafe_as(Proc(IFaxAccountSet*, HRESULT)).call(ppfaxaccountset)
+  end
+  def get_security2(ppfaxsecurity2 : IFaxSecurity2*) : HRESULT
+    @lpVtbl.value.get_security2.unsafe_as(Proc(IFaxSecurity2*, HRESULT)).call(ppfaxsecurity2)
+  end
+end
+struct LibWin32::IFaxAccountSet
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_accounts(ppfaxaccounts : IFaxAccounts*) : HRESULT
+    @lpVtbl.value.get_accounts.unsafe_as(Proc(IFaxAccounts*, HRESULT)).call(ppfaxaccounts)
+  end
+  def get_account(bstraccountname : UInt8*, pfaxaccount : IFaxAccount*) : HRESULT
+    @lpVtbl.value.get_account.unsafe_as(Proc(UInt8*, IFaxAccount*, HRESULT)).call(bstraccountname, pfaxaccount)
+  end
+  def add_account(bstraccountname : UInt8*, pfaxaccount : IFaxAccount*) : HRESULT
+    @lpVtbl.value.add_account.unsafe_as(Proc(UInt8*, IFaxAccount*, HRESULT)).call(bstraccountname, pfaxaccount)
+  end
+  def remove_account(bstraccountname : UInt8*) : HRESULT
+    @lpVtbl.value.remove_account.unsafe_as(Proc(UInt8*, HRESULT)).call(bstraccountname)
+  end
+end
+struct LibWin32::IFaxAccounts
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get__new_enum(ppunk : IUnknown*) : HRESULT
+    @lpVtbl.value.get__new_enum.unsafe_as(Proc(IUnknown*, HRESULT)).call(ppunk)
+  end
+  def get_item(vindex : VARIANT, pfaxaccount : IFaxAccount*) : HRESULT
+    @lpVtbl.value.get_item.unsafe_as(Proc(VARIANT, IFaxAccount*, HRESULT)).call(vindex, pfaxaccount)
+  end
+  def get_count(plcount : Int32*) : HRESULT
+    @lpVtbl.value.get_count.unsafe_as(Proc(Int32*, HRESULT)).call(plcount)
+  end
+end
+struct LibWin32::IFaxAccount
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_account_name(pbstraccountname : UInt8**) : HRESULT
+    @lpVtbl.value.get_account_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstraccountname)
+  end
+  def get_folders(ppfolders : IFaxAccountFolders*) : HRESULT
+    @lpVtbl.value.get_folders.unsafe_as(Proc(IFaxAccountFolders*, HRESULT)).call(ppfolders)
+  end
+  def listen_to_account_events(eventtypes : FAX_ACCOUNT_EVENTS_TYPE_ENUM) : HRESULT
+    @lpVtbl.value.listen_to_account_events.unsafe_as(Proc(FAX_ACCOUNT_EVENTS_TYPE_ENUM, HRESULT)).call(eventtypes)
+  end
+  def get_registered_events(pregisteredevents : FAX_ACCOUNT_EVENTS_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_registered_events.unsafe_as(Proc(FAX_ACCOUNT_EVENTS_TYPE_ENUM*, HRESULT)).call(pregisteredevents)
+  end
+end
+struct LibWin32::IFaxOutgoingJob2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_subject(pbstrsubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_subject.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsubject)
+  end
+  def get_document_name(pbstrdocumentname : UInt8**) : HRESULT
+    @lpVtbl.value.get_document_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdocumentname)
+  end
+  def get_pages(plpages : Int32*) : HRESULT
+    @lpVtbl.value.get_pages.unsafe_as(Proc(Int32*, HRESULT)).call(plpages)
+  end
+  def get_size(plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(Int32*, HRESULT)).call(plsize)
+  end
+  def get_submission_id(pbstrsubmissionid : UInt8**) : HRESULT
+    @lpVtbl.value.get_submission_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsubmissionid)
+  end
+  def get_id(pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrid)
+  end
+  def get_original_scheduled_time(pdateoriginalscheduledtime : Float64*) : HRESULT
+    @lpVtbl.value.get_original_scheduled_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdateoriginalscheduledtime)
+  end
+  def get_submission_time(pdatesubmissiontime : Float64*) : HRESULT
+    @lpVtbl.value.get_submission_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdatesubmissiontime)
+  end
+  def get_receipt_type(preceipttype : FAX_RECEIPT_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_receipt_type.unsafe_as(Proc(FAX_RECEIPT_TYPE_ENUM*, HRESULT)).call(preceipttype)
+  end
+  def get_priority(ppriority : FAX_PRIORITY_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_priority.unsafe_as(Proc(FAX_PRIORITY_TYPE_ENUM*, HRESULT)).call(ppriority)
+  end
+  def get_sender(ppfaxsender : IFaxSender*) : HRESULT
+    @lpVtbl.value.get_sender.unsafe_as(Proc(IFaxSender*, HRESULT)).call(ppfaxsender)
+  end
+  def get_recipient(ppfaxrecipient : IFaxRecipient*) : HRESULT
+    @lpVtbl.value.get_recipient.unsafe_as(Proc(IFaxRecipient*, HRESULT)).call(ppfaxrecipient)
+  end
+  def get_current_page(plcurrentpage : Int32*) : HRESULT
+    @lpVtbl.value.get_current_page.unsafe_as(Proc(Int32*, HRESULT)).call(plcurrentpage)
+  end
+  def get_device_id(pldeviceid : Int32*) : HRESULT
+    @lpVtbl.value.get_device_id.unsafe_as(Proc(Int32*, HRESULT)).call(pldeviceid)
+  end
+  def get_status(pstatus : FAX_JOB_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(FAX_JOB_STATUS_ENUM*, HRESULT)).call(pstatus)
+  end
+  def get_extended_status_code(pextendedstatuscode : FAX_JOB_EXTENDED_STATUS_ENUM*) : HRESULT
+    @lpVtbl.value.get_extended_status_code.unsafe_as(Proc(FAX_JOB_EXTENDED_STATUS_ENUM*, HRESULT)).call(pextendedstatuscode)
+  end
+  def get_extended_status(pbstrextendedstatus : UInt8**) : HRESULT
+    @lpVtbl.value.get_extended_status.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrextendedstatus)
+  end
+  def get_available_operations(pavailableoperations : FAX_JOB_OPERATIONS_ENUM*) : HRESULT
+    @lpVtbl.value.get_available_operations.unsafe_as(Proc(FAX_JOB_OPERATIONS_ENUM*, HRESULT)).call(pavailableoperations)
+  end
+  def get_retries(plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.unsafe_as(Proc(Int32*, HRESULT)).call(plretries)
+  end
+  def get_scheduled_time(pdatescheduledtime : Float64*) : HRESULT
+    @lpVtbl.value.get_scheduled_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdatescheduledtime)
+  end
+  def get_transmission_start(pdatetransmissionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_start.unsafe_as(Proc(Float64*, HRESULT)).call(pdatetransmissionstart)
+  end
+  def get_transmission_end(pdatetransmissionend : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_end.unsafe_as(Proc(Float64*, HRESULT)).call(pdatetransmissionend)
+  end
+  def get_csid(pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcsid)
+  end
+  def get_tsid(pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtsid)
+  end
+  def get_group_broadcast_receipts(pbgroupbroadcastreceipts : Int16*) : HRESULT
+    @lpVtbl.value.get_group_broadcast_receipts.unsafe_as(Proc(Int16*, HRESULT)).call(pbgroupbroadcastreceipts)
+  end
+  def pause : HRESULT
+    @lpVtbl.value.pause.unsafe_as(Proc(HRESULT)).call
+  end
+  def resume : HRESULT
+    @lpVtbl.value.resume.unsafe_as(Proc(HRESULT)).call
+  end
+  def restart : HRESULT
+    @lpVtbl.value.restart.unsafe_as(Proc(HRESULT)).call
+  end
+  def copy_tiff(bstrtiffpath : UInt8*) : HRESULT
+    @lpVtbl.value.copy_tiff.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtiffpath)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def cancel : HRESULT
+    @lpVtbl.value.cancel.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_has_cover_page(pbhascoverpage : Int16*) : HRESULT
+    @lpVtbl.value.get_has_cover_page.unsafe_as(Proc(Int16*, HRESULT)).call(pbhascoverpage)
+  end
+  def get_receipt_address(pbstrreceiptaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_receipt_address.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrreceiptaddress)
+  end
+  def get_schedule_type(pscheduletype : FAX_SCHEDULE_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_schedule_type.unsafe_as(Proc(FAX_SCHEDULE_TYPE_ENUM*, HRESULT)).call(pscheduletype)
+  end
+end
+struct LibWin32::IFaxAccountFolders
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_outgoing_queue(pfaxoutgoingqueue : IFaxAccountOutgoingQueue*) : HRESULT
+    @lpVtbl.value.get_outgoing_queue.unsafe_as(Proc(IFaxAccountOutgoingQueue*, HRESULT)).call(pfaxoutgoingqueue)
+  end
+  def get_incoming_queue(pfaxincomingqueue : IFaxAccountIncomingQueue*) : HRESULT
+    @lpVtbl.value.get_incoming_queue.unsafe_as(Proc(IFaxAccountIncomingQueue*, HRESULT)).call(pfaxincomingqueue)
+  end
+  def get_incoming_archive(pfaxincomingarchive : IFaxAccountIncomingArchive*) : HRESULT
+    @lpVtbl.value.get_incoming_archive.unsafe_as(Proc(IFaxAccountIncomingArchive*, HRESULT)).call(pfaxincomingarchive)
+  end
+  def get_outgoing_archive(pfaxoutgoingarchive : IFaxAccountOutgoingArchive*) : HRESULT
+    @lpVtbl.value.get_outgoing_archive.unsafe_as(Proc(IFaxAccountOutgoingArchive*, HRESULT)).call(pfaxoutgoingarchive)
+  end
+end
+struct LibWin32::IFaxAccountIncomingQueue
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_jobs(pfaxincomingjobs : IFaxIncomingJobs*) : HRESULT
+    @lpVtbl.value.get_jobs.unsafe_as(Proc(IFaxIncomingJobs*, HRESULT)).call(pfaxincomingjobs)
+  end
+  def get_job(bstrjobid : UInt8*, pfaxincomingjob : IFaxIncomingJob*) : HRESULT
+    @lpVtbl.value.get_job.unsafe_as(Proc(UInt8*, IFaxIncomingJob*, HRESULT)).call(bstrjobid, pfaxincomingjob)
+  end
+end
+struct LibWin32::IFaxAccountOutgoingQueue
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_jobs(pfaxoutgoingjobs : IFaxOutgoingJobs*) : HRESULT
+    @lpVtbl.value.get_jobs.unsafe_as(Proc(IFaxOutgoingJobs*, HRESULT)).call(pfaxoutgoingjobs)
+  end
+  def get_job(bstrjobid : UInt8*, pfaxoutgoingjob : IFaxOutgoingJob*) : HRESULT
+    @lpVtbl.value.get_job.unsafe_as(Proc(UInt8*, IFaxOutgoingJob*, HRESULT)).call(bstrjobid, pfaxoutgoingjob)
+  end
+end
+struct LibWin32::IFaxOutgoingMessage2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_submission_id(pbstrsubmissionid : UInt8**) : HRESULT
+    @lpVtbl.value.get_submission_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsubmissionid)
+  end
+  def get_id(pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrid)
+  end
+  def get_subject(pbstrsubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_subject.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsubject)
+  end
+  def get_document_name(pbstrdocumentname : UInt8**) : HRESULT
+    @lpVtbl.value.get_document_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdocumentname)
+  end
+  def get_retries(plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.unsafe_as(Proc(Int32*, HRESULT)).call(plretries)
+  end
+  def get_pages(plpages : Int32*) : HRESULT
+    @lpVtbl.value.get_pages.unsafe_as(Proc(Int32*, HRESULT)).call(plpages)
+  end
+  def get_size(plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(Int32*, HRESULT)).call(plsize)
+  end
+  def get_original_scheduled_time(pdateoriginalscheduledtime : Float64*) : HRESULT
+    @lpVtbl.value.get_original_scheduled_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdateoriginalscheduledtime)
+  end
+  def get_submission_time(pdatesubmissiontime : Float64*) : HRESULT
+    @lpVtbl.value.get_submission_time.unsafe_as(Proc(Float64*, HRESULT)).call(pdatesubmissiontime)
+  end
+  def get_priority(ppriority : FAX_PRIORITY_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_priority.unsafe_as(Proc(FAX_PRIORITY_TYPE_ENUM*, HRESULT)).call(ppriority)
+  end
+  def get_sender(ppfaxsender : IFaxSender*) : HRESULT
+    @lpVtbl.value.get_sender.unsafe_as(Proc(IFaxSender*, HRESULT)).call(ppfaxsender)
+  end
+  def get_recipient(ppfaxrecipient : IFaxRecipient*) : HRESULT
+    @lpVtbl.value.get_recipient.unsafe_as(Proc(IFaxRecipient*, HRESULT)).call(ppfaxrecipient)
+  end
+  def get_device_name(pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdevicename)
+  end
+  def get_transmission_start(pdatetransmissionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_start.unsafe_as(Proc(Float64*, HRESULT)).call(pdatetransmissionstart)
+  end
+  def get_transmission_end(pdatetransmissionend : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_end.unsafe_as(Proc(Float64*, HRESULT)).call(pdatetransmissionend)
+  end
+  def get_csid(pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcsid)
+  end
+  def get_tsid(pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtsid)
+  end
+  def copy_tiff(bstrtiffpath : UInt8*) : HRESULT
+    @lpVtbl.value.copy_tiff.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtiffpath)
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_has_cover_page(pbhascoverpage : Int16*) : HRESULT
+    @lpVtbl.value.get_has_cover_page.unsafe_as(Proc(Int16*, HRESULT)).call(pbhascoverpage)
+  end
+  def get_receipt_type(preceipttype : FAX_RECEIPT_TYPE_ENUM*) : HRESULT
+    @lpVtbl.value.get_receipt_type.unsafe_as(Proc(FAX_RECEIPT_TYPE_ENUM*, HRESULT)).call(preceipttype)
+  end
+  def get_receipt_address(pbstrreceiptaddress : UInt8**) : HRESULT
+    @lpVtbl.value.get_receipt_address.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrreceiptaddress)
+  end
+  def get_read(pbread : Int16*) : HRESULT
+    @lpVtbl.value.get_read.unsafe_as(Proc(Int16*, HRESULT)).call(pbread)
+  end
+  def put_read(bread : Int16) : HRESULT
+    @lpVtbl.value.put_read.unsafe_as(Proc(Int16, HRESULT)).call(bread)
+  end
+  def save : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IFaxAccountIncomingArchive
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_size_low(plsizelow : Int32*) : HRESULT
+    @lpVtbl.value.get_size_low.unsafe_as(Proc(Int32*, HRESULT)).call(plsizelow)
+  end
+  def get_size_high(plsizehigh : Int32*) : HRESULT
+    @lpVtbl.value.get_size_high.unsafe_as(Proc(Int32*, HRESULT)).call(plsizehigh)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_messages(lprefetchsize : Int32, pfaxincomingmessageiterator : IFaxIncomingMessageIterator*) : HRESULT
+    @lpVtbl.value.get_messages.unsafe_as(Proc(Int32, IFaxIncomingMessageIterator*, HRESULT)).call(lprefetchsize, pfaxincomingmessageiterator)
+  end
+  def get_message(bstrmessageid : UInt8*, pfaxincomingmessage : IFaxIncomingMessage*) : HRESULT
+    @lpVtbl.value.get_message.unsafe_as(Proc(UInt8*, IFaxIncomingMessage*, HRESULT)).call(bstrmessageid, pfaxincomingmessage)
+  end
+end
+struct LibWin32::IFaxAccountOutgoingArchive
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_size_low(plsizelow : Int32*) : HRESULT
+    @lpVtbl.value.get_size_low.unsafe_as(Proc(Int32*, HRESULT)).call(plsizelow)
+  end
+  def get_size_high(plsizehigh : Int32*) : HRESULT
+    @lpVtbl.value.get_size_high.unsafe_as(Proc(Int32*, HRESULT)).call(plsizehigh)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_messages(lprefetchsize : Int32, pfaxoutgoingmessageiterator : IFaxOutgoingMessageIterator*) : HRESULT
+    @lpVtbl.value.get_messages.unsafe_as(Proc(Int32, IFaxOutgoingMessageIterator*, HRESULT)).call(lprefetchsize, pfaxoutgoingmessageiterator)
+  end
+  def get_message(bstrmessageid : UInt8*, pfaxoutgoingmessage : IFaxOutgoingMessage*) : HRESULT
+    @lpVtbl.value.get_message.unsafe_as(Proc(UInt8*, IFaxOutgoingMessage*, HRESULT)).call(bstrmessageid, pfaxoutgoingmessage)
+  end
+end
+struct LibWin32::IFaxSecurity2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_descriptor(pvdescriptor : VARIANT*) : HRESULT
+    @lpVtbl.value.get_descriptor.unsafe_as(Proc(VARIANT*, HRESULT)).call(pvdescriptor)
+  end
+  def put_descriptor(vdescriptor : VARIANT) : HRESULT
+    @lpVtbl.value.put_descriptor.unsafe_as(Proc(VARIANT, HRESULT)).call(vdescriptor)
+  end
+  def get_granted_rights(pgrantedrights : FAX_ACCESS_RIGHTS_ENUM_2*) : HRESULT
+    @lpVtbl.value.get_granted_rights.unsafe_as(Proc(FAX_ACCESS_RIGHTS_ENUM_2*, HRESULT)).call(pgrantedrights)
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+  def save : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_information_type(plinformationtype : Int32*) : HRESULT
+    @lpVtbl.value.get_information_type.unsafe_as(Proc(Int32*, HRESULT)).call(plinformationtype)
+  end
+  def put_information_type(linformationtype : Int32) : HRESULT
+    @lpVtbl.value.put_information_type.unsafe_as(Proc(Int32, HRESULT)).call(linformationtype)
+  end
+end
+struct LibWin32::IFaxIncomingMessage2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def get_id(pbstrid : UInt8**) : HRESULT
+    @lpVtbl.value.get_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrid)
+  end
+  def get_pages(plpages : Int32*) : HRESULT
+    @lpVtbl.value.get_pages.unsafe_as(Proc(Int32*, HRESULT)).call(plpages)
+  end
+  def get_size(plsize : Int32*) : HRESULT
+    @lpVtbl.value.get_size.unsafe_as(Proc(Int32*, HRESULT)).call(plsize)
+  end
+  def get_device_name(pbstrdevicename : UInt8**) : HRESULT
+    @lpVtbl.value.get_device_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrdevicename)
+  end
+  def get_retries(plretries : Int32*) : HRESULT
+    @lpVtbl.value.get_retries.unsafe_as(Proc(Int32*, HRESULT)).call(plretries)
+  end
+  def get_transmission_start(pdatetransmissionstart : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_start.unsafe_as(Proc(Float64*, HRESULT)).call(pdatetransmissionstart)
+  end
+  def get_transmission_end(pdatetransmissionend : Float64*) : HRESULT
+    @lpVtbl.value.get_transmission_end.unsafe_as(Proc(Float64*, HRESULT)).call(pdatetransmissionend)
+  end
+  def get_csid(pbstrcsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_csid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcsid)
+  end
+  def get_tsid(pbstrtsid : UInt8**) : HRESULT
+    @lpVtbl.value.get_tsid.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrtsid)
+  end
+  def get_caller_id(pbstrcallerid : UInt8**) : HRESULT
+    @lpVtbl.value.get_caller_id.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrcallerid)
+  end
+  def get_routing_information(pbstrroutinginformation : UInt8**) : HRESULT
+    @lpVtbl.value.get_routing_information.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrroutinginformation)
+  end
+  def copy_tiff(bstrtiffpath : UInt8*) : HRESULT
+    @lpVtbl.value.copy_tiff.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrtiffpath)
+  end
+  def delete : HRESULT
+    @lpVtbl.value.delete.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_subject(pbstrsubject : UInt8**) : HRESULT
+    @lpVtbl.value.get_subject.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsubject)
+  end
+  def put_subject(bstrsubject : UInt8*) : HRESULT
+    @lpVtbl.value.put_subject.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsubject)
+  end
+  def get_sender_name(pbstrsendername : UInt8**) : HRESULT
+    @lpVtbl.value.get_sender_name.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsendername)
+  end
+  def put_sender_name(bstrsendername : UInt8*) : HRESULT
+    @lpVtbl.value.put_sender_name.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsendername)
+  end
+  def get_sender_fax_number(pbstrsenderfaxnumber : UInt8**) : HRESULT
+    @lpVtbl.value.get_sender_fax_number.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrsenderfaxnumber)
+  end
+  def put_sender_fax_number(bstrsenderfaxnumber : UInt8*) : HRESULT
+    @lpVtbl.value.put_sender_fax_number.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrsenderfaxnumber)
+  end
+  def get_has_cover_page(pbhascoverpage : Int16*) : HRESULT
+    @lpVtbl.value.get_has_cover_page.unsafe_as(Proc(Int16*, HRESULT)).call(pbhascoverpage)
+  end
+  def put_has_cover_page(bhascoverpage : Int16) : HRESULT
+    @lpVtbl.value.put_has_cover_page.unsafe_as(Proc(Int16, HRESULT)).call(bhascoverpage)
+  end
+  def get_recipients(pbstrrecipients : UInt8**) : HRESULT
+    @lpVtbl.value.get_recipients.unsafe_as(Proc(UInt8**, HRESULT)).call(pbstrrecipients)
+  end
+  def put_recipients(bstrrecipients : UInt8*) : HRESULT
+    @lpVtbl.value.put_recipients.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrrecipients)
+  end
+  def get_was_re_assigned(pbwasreassigned : Int16*) : HRESULT
+    @lpVtbl.value.get_was_re_assigned.unsafe_as(Proc(Int16*, HRESULT)).call(pbwasreassigned)
+  end
+  def get_read(pbread : Int16*) : HRESULT
+    @lpVtbl.value.get_read.unsafe_as(Proc(Int16*, HRESULT)).call(pbread)
+  end
+  def put_read(bread : Int16) : HRESULT
+    @lpVtbl.value.put_read.unsafe_as(Proc(Int16, HRESULT)).call(bread)
+  end
+  def re_assign : HRESULT
+    @lpVtbl.value.re_assign.unsafe_as(Proc(HRESULT)).call
+  end
+  def save : HRESULT
+    @lpVtbl.value.save.unsafe_as(Proc(HRESULT)).call
+  end
+  def refresh : HRESULT
+    @lpVtbl.value.refresh.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IFaxServerNotify
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IIFaxServerNotify2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def on_incoming_job_added(pfaxserver : IFaxServer2, bstrjobid : UInt8*) : HRESULT
+    @lpVtbl.value.on_incoming_job_added.unsafe_as(Proc(IFaxServer2, UInt8*, HRESULT)).call(pfaxserver, bstrjobid)
+  end
+  def on_incoming_job_removed(pfaxserver : IFaxServer2, bstrjobid : UInt8*) : HRESULT
+    @lpVtbl.value.on_incoming_job_removed.unsafe_as(Proc(IFaxServer2, UInt8*, HRESULT)).call(pfaxserver, bstrjobid)
+  end
+  def on_incoming_job_changed(pfaxserver : IFaxServer2, bstrjobid : UInt8*, pjobstatus : IFaxJobStatus) : HRESULT
+    @lpVtbl.value.on_incoming_job_changed.unsafe_as(Proc(IFaxServer2, UInt8*, IFaxJobStatus, HRESULT)).call(pfaxserver, bstrjobid, pjobstatus)
+  end
+  def on_outgoing_job_added(pfaxserver : IFaxServer2, bstrjobid : UInt8*) : HRESULT
+    @lpVtbl.value.on_outgoing_job_added.unsafe_as(Proc(IFaxServer2, UInt8*, HRESULT)).call(pfaxserver, bstrjobid)
+  end
+  def on_outgoing_job_removed(pfaxserver : IFaxServer2, bstrjobid : UInt8*) : HRESULT
+    @lpVtbl.value.on_outgoing_job_removed.unsafe_as(Proc(IFaxServer2, UInt8*, HRESULT)).call(pfaxserver, bstrjobid)
+  end
+  def on_outgoing_job_changed(pfaxserver : IFaxServer2, bstrjobid : UInt8*, pjobstatus : IFaxJobStatus) : HRESULT
+    @lpVtbl.value.on_outgoing_job_changed.unsafe_as(Proc(IFaxServer2, UInt8*, IFaxJobStatus, HRESULT)).call(pfaxserver, bstrjobid, pjobstatus)
+  end
+  def on_incoming_message_added(pfaxserver : IFaxServer2, bstrmessageid : UInt8*) : HRESULT
+    @lpVtbl.value.on_incoming_message_added.unsafe_as(Proc(IFaxServer2, UInt8*, HRESULT)).call(pfaxserver, bstrmessageid)
+  end
+  def on_incoming_message_removed(pfaxserver : IFaxServer2, bstrmessageid : UInt8*) : HRESULT
+    @lpVtbl.value.on_incoming_message_removed.unsafe_as(Proc(IFaxServer2, UInt8*, HRESULT)).call(pfaxserver, bstrmessageid)
+  end
+  def on_outgoing_message_added(pfaxserver : IFaxServer2, bstrmessageid : UInt8*) : HRESULT
+    @lpVtbl.value.on_outgoing_message_added.unsafe_as(Proc(IFaxServer2, UInt8*, HRESULT)).call(pfaxserver, bstrmessageid)
+  end
+  def on_outgoing_message_removed(pfaxserver : IFaxServer2, bstrmessageid : UInt8*) : HRESULT
+    @lpVtbl.value.on_outgoing_message_removed.unsafe_as(Proc(IFaxServer2, UInt8*, HRESULT)).call(pfaxserver, bstrmessageid)
+  end
+  def on_receipt_options_change(pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_receipt_options_change.unsafe_as(Proc(IFaxServer2, HRESULT)).call(pfaxserver)
+  end
+  def on_activity_logging_config_change(pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_activity_logging_config_change.unsafe_as(Proc(IFaxServer2, HRESULT)).call(pfaxserver)
+  end
+  def on_security_config_change(pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_security_config_change.unsafe_as(Proc(IFaxServer2, HRESULT)).call(pfaxserver)
+  end
+  def on_event_logging_config_change(pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_event_logging_config_change.unsafe_as(Proc(IFaxServer2, HRESULT)).call(pfaxserver)
+  end
+  def on_outgoing_queue_config_change(pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_outgoing_queue_config_change.unsafe_as(Proc(IFaxServer2, HRESULT)).call(pfaxserver)
+  end
+  def on_outgoing_archive_config_change(pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_outgoing_archive_config_change.unsafe_as(Proc(IFaxServer2, HRESULT)).call(pfaxserver)
+  end
+  def on_incoming_archive_config_change(pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_incoming_archive_config_change.unsafe_as(Proc(IFaxServer2, HRESULT)).call(pfaxserver)
+  end
+  def on_devices_config_change(pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_devices_config_change.unsafe_as(Proc(IFaxServer2, HRESULT)).call(pfaxserver)
+  end
+  def on_outbound_routing_groups_config_change(pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_outbound_routing_groups_config_change.unsafe_as(Proc(IFaxServer2, HRESULT)).call(pfaxserver)
+  end
+  def on_outbound_routing_rules_config_change(pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_outbound_routing_rules_config_change.unsafe_as(Proc(IFaxServer2, HRESULT)).call(pfaxserver)
+  end
+  def on_server_activity_change(pfaxserver : IFaxServer2, lincomingmessages : Int32, lroutingmessages : Int32, loutgoingmessages : Int32, lqueuedmessages : Int32) : HRESULT
+    @lpVtbl.value.on_server_activity_change.unsafe_as(Proc(IFaxServer2, Int32, Int32, Int32, Int32, HRESULT)).call(pfaxserver, lincomingmessages, lroutingmessages, loutgoingmessages, lqueuedmessages)
+  end
+  def on_queues_status_change(pfaxserver : IFaxServer2, boutgoingqueueblocked : Int16, boutgoingqueuepaused : Int16, bincomingqueueblocked : Int16) : HRESULT
+    @lpVtbl.value.on_queues_status_change.unsafe_as(Proc(IFaxServer2, Int16, Int16, Int16, HRESULT)).call(pfaxserver, boutgoingqueueblocked, boutgoingqueuepaused, bincomingqueueblocked)
+  end
+  def on_new_call(pfaxserver : IFaxServer2, lcallid : Int32, ldeviceid : Int32, bstrcallerid : UInt8*) : HRESULT
+    @lpVtbl.value.on_new_call.unsafe_as(Proc(IFaxServer2, Int32, Int32, UInt8*, HRESULT)).call(pfaxserver, lcallid, ldeviceid, bstrcallerid)
+  end
+  def on_server_shut_down(pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_server_shut_down.unsafe_as(Proc(IFaxServer2, HRESULT)).call(pfaxserver)
+  end
+  def on_device_status_change(pfaxserver : IFaxServer2, ldeviceid : Int32, bpoweredoff : Int16, bsending : Int16, breceiving : Int16, bringing : Int16) : HRESULT
+    @lpVtbl.value.on_device_status_change.unsafe_as(Proc(IFaxServer2, Int32, Int16, Int16, Int16, Int16, HRESULT)).call(pfaxserver, ldeviceid, bpoweredoff, bsending, breceiving, bringing)
+  end
+  def on_general_server_config_changed(pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_general_server_config_changed.unsafe_as(Proc(IFaxServer2, HRESULT)).call(pfaxserver)
+  end
+end
+struct LibWin32::IFaxServerNotify2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IIFaxAccountNotify
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+  def on_incoming_job_added(pfaxaccount : IFaxAccount, bstrjobid : UInt8*) : HRESULT
+    @lpVtbl.value.on_incoming_job_added.unsafe_as(Proc(IFaxAccount, UInt8*, HRESULT)).call(pfaxaccount, bstrjobid)
+  end
+  def on_incoming_job_removed(pfaxaccount : IFaxAccount, bstrjobid : UInt8*) : HRESULT
+    @lpVtbl.value.on_incoming_job_removed.unsafe_as(Proc(IFaxAccount, UInt8*, HRESULT)).call(pfaxaccount, bstrjobid)
+  end
+  def on_incoming_job_changed(pfaxaccount : IFaxAccount, bstrjobid : UInt8*, pjobstatus : IFaxJobStatus) : HRESULT
+    @lpVtbl.value.on_incoming_job_changed.unsafe_as(Proc(IFaxAccount, UInt8*, IFaxJobStatus, HRESULT)).call(pfaxaccount, bstrjobid, pjobstatus)
+  end
+  def on_outgoing_job_added(pfaxaccount : IFaxAccount, bstrjobid : UInt8*) : HRESULT
+    @lpVtbl.value.on_outgoing_job_added.unsafe_as(Proc(IFaxAccount, UInt8*, HRESULT)).call(pfaxaccount, bstrjobid)
+  end
+  def on_outgoing_job_removed(pfaxaccount : IFaxAccount, bstrjobid : UInt8*) : HRESULT
+    @lpVtbl.value.on_outgoing_job_removed.unsafe_as(Proc(IFaxAccount, UInt8*, HRESULT)).call(pfaxaccount, bstrjobid)
+  end
+  def on_outgoing_job_changed(pfaxaccount : IFaxAccount, bstrjobid : UInt8*, pjobstatus : IFaxJobStatus) : HRESULT
+    @lpVtbl.value.on_outgoing_job_changed.unsafe_as(Proc(IFaxAccount, UInt8*, IFaxJobStatus, HRESULT)).call(pfaxaccount, bstrjobid, pjobstatus)
+  end
+  def on_incoming_message_added(pfaxaccount : IFaxAccount, bstrmessageid : UInt8*, faddedtoreceivefolder : Int16) : HRESULT
+    @lpVtbl.value.on_incoming_message_added.unsafe_as(Proc(IFaxAccount, UInt8*, Int16, HRESULT)).call(pfaxaccount, bstrmessageid, faddedtoreceivefolder)
+  end
+  def on_incoming_message_removed(pfaxaccount : IFaxAccount, bstrmessageid : UInt8*, fremovedfromreceivefolder : Int16) : HRESULT
+    @lpVtbl.value.on_incoming_message_removed.unsafe_as(Proc(IFaxAccount, UInt8*, Int16, HRESULT)).call(pfaxaccount, bstrmessageid, fremovedfromreceivefolder)
+  end
+  def on_outgoing_message_added(pfaxaccount : IFaxAccount, bstrmessageid : UInt8*) : HRESULT
+    @lpVtbl.value.on_outgoing_message_added.unsafe_as(Proc(IFaxAccount, UInt8*, HRESULT)).call(pfaxaccount, bstrmessageid)
+  end
+  def on_outgoing_message_removed(pfaxaccount : IFaxAccount, bstrmessageid : UInt8*) : HRESULT
+    @lpVtbl.value.on_outgoing_message_removed.unsafe_as(Proc(IFaxAccount, UInt8*, HRESULT)).call(pfaxaccount, bstrmessageid)
+  end
+  def on_server_shut_down(pfaxserver : IFaxServer2) : HRESULT
+    @lpVtbl.value.on_server_shut_down.unsafe_as(Proc(IFaxServer2, HRESULT)).call(pfaxserver)
+  end
+end
+struct LibWin32::IFaxAccountNotify
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_type_info_count(pctinfo : UInt32*) : HRESULT
+    @lpVtbl.value.get_type_info_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pctinfo)
+  end
+  def get_type_info(itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
+    @lpVtbl.value.get_type_info.unsafe_as(Proc(UInt32, UInt32, ITypeInfo*, HRESULT)).call(itinfo, lcid, pptinfo)
+  end
+  def get_i_ds_of_names(riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
+    @lpVtbl.value.get_i_ds_of_names.unsafe_as(Proc(Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)).call(riid, rgsznames, cnames, lcid, rgdispid)
+  end
+  def invoke(dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
+    @lpVtbl.value.invoke.unsafe_as(Proc(Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)).call(dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
+  end
+end
+struct LibWin32::IStillImageW
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(hinst : HINSTANCE, dwversion : UInt32) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, UInt32, HRESULT)).call(hinst, dwversion)
+  end
+  def get_device_list(dwtype : UInt32, dwflags : UInt32, pdwitemsreturned : UInt32*, ppbuffer : Void**) : HRESULT
+    @lpVtbl.value.get_device_list.unsafe_as(Proc(UInt32, UInt32, UInt32*, Void**, HRESULT)).call(dwtype, dwflags, pdwitemsreturned, ppbuffer)
+  end
+  def get_device_info(pwszdevicename : LibC::LPWSTR, ppbuffer : Void**) : HRESULT
+    @lpVtbl.value.get_device_info.unsafe_as(Proc(LibC::LPWSTR, Void**, HRESULT)).call(pwszdevicename, ppbuffer)
+  end
+  def create_device(pwszdevicename : LibC::LPWSTR, dwmode : UInt32, pdevice : IStiDevice*, punkouter : IUnknown) : HRESULT
+    @lpVtbl.value.create_device.unsafe_as(Proc(LibC::LPWSTR, UInt32, IStiDevice*, IUnknown, HRESULT)).call(pwszdevicename, dwmode, pdevice, punkouter)
+  end
+  def get_device_value(pwszdevicename : LibC::LPWSTR, pvaluename : LibC::LPWSTR, ptype : UInt32*, pdata : UInt8*, cbdata : UInt32*) : HRESULT
+    @lpVtbl.value.get_device_value.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32*, UInt8*, UInt32*, HRESULT)).call(pwszdevicename, pvaluename, ptype, pdata, cbdata)
+  end
+  def set_device_value(pwszdevicename : LibC::LPWSTR, pvaluename : LibC::LPWSTR, type : UInt32, pdata : UInt8*, cbdata : UInt32) : HRESULT
+    @lpVtbl.value.set_device_value.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, UInt8*, UInt32, HRESULT)).call(pwszdevicename, pvaluename, type, pdata, cbdata)
+  end
+  def get_sti_launch_information(pwszdevicename : Char*, pdweventcode : UInt32*, pwszeventname : Char*) : HRESULT
+    @lpVtbl.value.get_sti_launch_information.unsafe_as(Proc(Char*, UInt32*, Char*, HRESULT)).call(pwszdevicename, pdweventcode, pwszeventname)
+  end
+  def register_launch_application(pwszappname : LibC::LPWSTR, pwszcommandline : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_launch_application.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszappname, pwszcommandline)
+  end
+  def unregister_launch_application(pwszappname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_launch_application.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszappname)
+  end
+  def enable_hw_notifications(pwszdevicename : LibC::LPWSTR, bnewstate : LibC::BOOL) : HRESULT
+    @lpVtbl.value.enable_hw_notifications.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL, HRESULT)).call(pwszdevicename, bnewstate)
+  end
+  def get_hw_notification_state(pwszdevicename : LibC::LPWSTR, pbcurrentstate : LibC::BOOL*) : HRESULT
+    @lpVtbl.value.get_hw_notification_state.unsafe_as(Proc(LibC::LPWSTR, LibC::BOOL*, HRESULT)).call(pwszdevicename, pbcurrentstate)
+  end
+  def refresh_device_bus(pwszdevicename : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.refresh_device_bus.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszdevicename)
+  end
+  def launch_application_for_device(pwszdevicename : LibC::LPWSTR, pwszappname : LibC::LPWSTR, pstinotify : STINOTIFY*) : HRESULT
+    @lpVtbl.value.launch_application_for_device.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, STINOTIFY*, HRESULT)).call(pwszdevicename, pwszappname, pstinotify)
+  end
+  def setup_device_parameters(param0 : STI_DEVICE_INFORMATIONW*) : HRESULT
+    @lpVtbl.value.setup_device_parameters.unsafe_as(Proc(STI_DEVICE_INFORMATIONW*, HRESULT)).call(param0)
+  end
+  def write_to_error_log(dwmessagetype : UInt32, pszmessage : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_to_error_log.unsafe_as(Proc(UInt32, LibC::LPWSTR, HRESULT)).call(dwmessagetype, pszmessage)
+  end
+end
+struct LibWin32::IStiDevice
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(hinst : HINSTANCE, pwszdevicename : LibC::LPWSTR, dwversion : UInt32, dwmode : UInt32) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(HINSTANCE, LibC::LPWSTR, UInt32, UInt32, HRESULT)).call(hinst, pwszdevicename, dwversion, dwmode)
+  end
+  def get_capabilities(pdevcaps : STI_DEV_CAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.unsafe_as(Proc(STI_DEV_CAPS*, HRESULT)).call(pdevcaps)
+  end
+  def get_status(pdevstatus : STI_DEVICE_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(STI_DEVICE_STATUS*, HRESULT)).call(pdevstatus)
+  end
+  def device_reset : HRESULT
+    @lpVtbl.value.device_reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def diagnostic(pbuffer : STI_DIAG*) : HRESULT
+    @lpVtbl.value.diagnostic.unsafe_as(Proc(STI_DIAG*, HRESULT)).call(pbuffer)
+  end
+  def escape(escapefunction : UInt32, lpindata : Void*, cbindatasize : UInt32, poutdata : Void*, dwoutdatasize : UInt32, pdwactualdata : UInt32*) : HRESULT
+    @lpVtbl.value.escape.unsafe_as(Proc(UInt32, Void*, UInt32, Void*, UInt32, UInt32*, HRESULT)).call(escapefunction, lpindata, cbindatasize, poutdata, dwoutdatasize, pdwactualdata)
+  end
+  def get_last_error(pdwlastdeviceerror : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwlastdeviceerror)
+  end
+  def lock_device(dwtimeout : UInt32) : HRESULT
+    @lpVtbl.value.lock_device.unsafe_as(Proc(UInt32, HRESULT)).call(dwtimeout)
+  end
+  def un_lock_device : HRESULT
+    @lpVtbl.value.un_lock_device.unsafe_as(Proc(HRESULT)).call
+  end
+  def raw_read_data(lpbuffer : Void*, lpdwnumberofbytes : UInt32*, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_read_data.unsafe_as(Proc(Void*, UInt32*, OVERLAPPED*, HRESULT)).call(lpbuffer, lpdwnumberofbytes, lpoverlapped)
+  end
+  def raw_write_data(lpbuffer : Void*, nnumberofbytes : UInt32, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_write_data.unsafe_as(Proc(Void*, UInt32, OVERLAPPED*, HRESULT)).call(lpbuffer, nnumberofbytes, lpoverlapped)
+  end
+  def raw_read_command(lpbuffer : Void*, lpdwnumberofbytes : UInt32*, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_read_command.unsafe_as(Proc(Void*, UInt32*, OVERLAPPED*, HRESULT)).call(lpbuffer, lpdwnumberofbytes, lpoverlapped)
+  end
+  def raw_write_command(lpbuffer : Void*, nnumberofbytes : UInt32, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_write_command.unsafe_as(Proc(Void*, UInt32, OVERLAPPED*, HRESULT)).call(lpbuffer, nnumberofbytes, lpoverlapped)
+  end
+  def subscribe(lpsubsribe : STISUBSCRIBE*) : HRESULT
+    @lpVtbl.value.subscribe.unsafe_as(Proc(STISUBSCRIBE*, HRESULT)).call(lpsubsribe)
+  end
+  def get_last_notification_data(lpnotify : STINOTIFY*) : HRESULT
+    @lpVtbl.value.get_last_notification_data.unsafe_as(Proc(STINOTIFY*, HRESULT)).call(lpnotify)
+  end
+  def un_subscribe : HRESULT
+    @lpVtbl.value.un_subscribe.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_last_error_info(plasterrorinfo : ERROR_INFOW*) : HRESULT
+    @lpVtbl.value.get_last_error_info.unsafe_as(Proc(ERROR_INFOW*, HRESULT)).call(plasterrorinfo)
+  end
+end
+struct LibWin32::IStiDeviceControl
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(dwdevicetype : UInt32, dwmode : UInt32, pwszportname : LibC::LPWSTR, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(UInt32, UInt32, LibC::LPWSTR, UInt32, HRESULT)).call(dwdevicetype, dwmode, pwszportname, dwflags)
+  end
+  def raw_read_data(lpbuffer : Void*, lpdwnumberofbytes : UInt32*, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_read_data.unsafe_as(Proc(Void*, UInt32*, OVERLAPPED*, HRESULT)).call(lpbuffer, lpdwnumberofbytes, lpoverlapped)
+  end
+  def raw_write_data(lpbuffer : Void*, nnumberofbytes : UInt32, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_write_data.unsafe_as(Proc(Void*, UInt32, OVERLAPPED*, HRESULT)).call(lpbuffer, nnumberofbytes, lpoverlapped)
+  end
+  def raw_read_command(lpbuffer : Void*, lpdwnumberofbytes : UInt32*, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_read_command.unsafe_as(Proc(Void*, UInt32*, OVERLAPPED*, HRESULT)).call(lpbuffer, lpdwnumberofbytes, lpoverlapped)
+  end
+  def raw_write_command(lpbuffer : Void*, nnumberofbytes : UInt32, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_write_command.unsafe_as(Proc(Void*, UInt32, OVERLAPPED*, HRESULT)).call(lpbuffer, nnumberofbytes, lpoverlapped)
+  end
+  def raw_device_control(escapefunction : UInt32, lpindata : Void*, cbindatasize : UInt32, poutdata : Void*, dwoutdatasize : UInt32, pdwactualdata : UInt32*) : HRESULT
+    @lpVtbl.value.raw_device_control.unsafe_as(Proc(UInt32, Void*, UInt32, Void*, UInt32, UInt32*, HRESULT)).call(escapefunction, lpindata, cbindatasize, poutdata, dwoutdatasize, pdwactualdata)
+  end
+  def get_last_error(lpdwlasterror : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(UInt32*, HRESULT)).call(lpdwlasterror)
+  end
+  def get_my_device_port_name(lpszdevicepath : Char*, cwdevicepathsize : UInt32) : HRESULT
+    @lpVtbl.value.get_my_device_port_name.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(lpszdevicepath, cwdevicepathsize)
+  end
+  def get_my_device_handle(lph : LibC::HANDLE*) : HRESULT
+    @lpVtbl.value.get_my_device_handle.unsafe_as(Proc(LibC::HANDLE*, HRESULT)).call(lph)
+  end
+  def get_my_device_open_mode(pdwopenmode : UInt32*) : HRESULT
+    @lpVtbl.value.get_my_device_open_mode.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwopenmode)
+  end
+  def write_to_error_log(dwmessagetype : UInt32, pszmessage : LibC::LPWSTR, dwerrorcode : UInt32) : HRESULT
+    @lpVtbl.value.write_to_error_log.unsafe_as(Proc(UInt32, LibC::LPWSTR, UInt32, HRESULT)).call(dwmessagetype, pszmessage, dwerrorcode)
+  end
+end
+struct LibWin32::IStiUSD
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(pheldcb : IStiDeviceControl, dwstiversion : UInt32, hparameterskey : HKEY) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(IStiDeviceControl, UInt32, HKEY, HRESULT)).call(pheldcb, dwstiversion, hparameterskey)
+  end
+  def get_capabilities(pdevcaps : STI_USD_CAPS*) : HRESULT
+    @lpVtbl.value.get_capabilities.unsafe_as(Proc(STI_USD_CAPS*, HRESULT)).call(pdevcaps)
+  end
+  def get_status(pdevstatus : STI_DEVICE_STATUS*) : HRESULT
+    @lpVtbl.value.get_status.unsafe_as(Proc(STI_DEVICE_STATUS*, HRESULT)).call(pdevstatus)
+  end
+  def device_reset : HRESULT
+    @lpVtbl.value.device_reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def diagnostic(pbuffer : STI_DIAG*) : HRESULT
+    @lpVtbl.value.diagnostic.unsafe_as(Proc(STI_DIAG*, HRESULT)).call(pbuffer)
+  end
+  def escape(escapefunction : UInt32, lpindata : Void*, cbindatasize : UInt32, poutdata : Void*, cboutdatasize : UInt32, pdwactualdata : UInt32*) : HRESULT
+    @lpVtbl.value.escape.unsafe_as(Proc(UInt32, Void*, UInt32, Void*, UInt32, UInt32*, HRESULT)).call(escapefunction, lpindata, cbindatasize, poutdata, cboutdatasize, pdwactualdata)
+  end
+  def get_last_error(pdwlastdeviceerror : UInt32*) : HRESULT
+    @lpVtbl.value.get_last_error.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwlastdeviceerror)
+  end
+  def lock_device : HRESULT
+    @lpVtbl.value.lock_device.unsafe_as(Proc(HRESULT)).call
+  end
+  def un_lock_device : HRESULT
+    @lpVtbl.value.un_lock_device.unsafe_as(Proc(HRESULT)).call
+  end
+  def raw_read_data(lpbuffer : Void*, lpdwnumberofbytes : UInt32*, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_read_data.unsafe_as(Proc(Void*, UInt32*, OVERLAPPED*, HRESULT)).call(lpbuffer, lpdwnumberofbytes, lpoverlapped)
+  end
+  def raw_write_data(lpbuffer : Void*, nnumberofbytes : UInt32, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_write_data.unsafe_as(Proc(Void*, UInt32, OVERLAPPED*, HRESULT)).call(lpbuffer, nnumberofbytes, lpoverlapped)
+  end
+  def raw_read_command(lpbuffer : Void*, lpdwnumberofbytes : UInt32*, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_read_command.unsafe_as(Proc(Void*, UInt32*, OVERLAPPED*, HRESULT)).call(lpbuffer, lpdwnumberofbytes, lpoverlapped)
+  end
+  def raw_write_command(lpbuffer : Void*, nnumberofbytes : UInt32, lpoverlapped : OVERLAPPED*) : HRESULT
+    @lpVtbl.value.raw_write_command.unsafe_as(Proc(Void*, UInt32, OVERLAPPED*, HRESULT)).call(lpbuffer, nnumberofbytes, lpoverlapped)
+  end
+  def set_notification_handle(hevent : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.set_notification_handle.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hevent)
+  end
+  def get_notification_data(lpnotify : STINOTIFY*) : HRESULT
+    @lpVtbl.value.get_notification_data.unsafe_as(Proc(STINOTIFY*, HRESULT)).call(lpnotify)
+  end
+  def get_last_error_info(plasterrorinfo : ERROR_INFOW*) : HRESULT
+    @lpVtbl.value.get_last_error_info.unsafe_as(Proc(ERROR_INFOW*, HRESULT)).call(plasterrorinfo)
+  end
 end

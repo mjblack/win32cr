@@ -174,32 +174,32 @@ lib LibWin32
 
 
   struct IXmlReaderVTbl
-    query_interface : Proc(IXmlReader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXmlReader*, UInt32)
-    release : Proc(IXmlReader*, UInt32)
-    set_input : Proc(IXmlReader*, IUnknown, HRESULT)
-    get_property : Proc(IXmlReader*, UInt32, LibC::IntPtrT*, HRESULT)
-    set_property : Proc(IXmlReader*, UInt32, LibC::IntPtrT, HRESULT)
-    read : Proc(IXmlReader*, XmlNodeType*, HRESULT)
-    get_node_type : Proc(IXmlReader*, XmlNodeType*, HRESULT)
-    move_to_first_attribute : Proc(IXmlReader*, HRESULT)
-    move_to_next_attribute : Proc(IXmlReader*, HRESULT)
-    move_to_attribute_by_name : Proc(IXmlReader*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    move_to_element : Proc(IXmlReader*, HRESULT)
-    get_qualified_name : Proc(IXmlReader*, LibC::LPWSTR*, UInt32*, HRESULT)
-    get_namespace_uri : Proc(IXmlReader*, LibC::LPWSTR*, UInt32*, HRESULT)
-    get_local_name : Proc(IXmlReader*, LibC::LPWSTR*, UInt32*, HRESULT)
-    get_prefix : Proc(IXmlReader*, LibC::LPWSTR*, UInt32*, HRESULT)
-    get_value : Proc(IXmlReader*, LibC::LPWSTR*, UInt32*, HRESULT)
-    read_value_chunk : Proc(IXmlReader*, Char*, UInt32, UInt32*, HRESULT)
-    get_base_uri : Proc(IXmlReader*, LibC::LPWSTR*, UInt32*, HRESULT)
-    is_default : Proc(IXmlReader*, LibC::BOOL)
-    is_empty_element : Proc(IXmlReader*, LibC::BOOL)
-    get_line_number : Proc(IXmlReader*, UInt32*, HRESULT)
-    get_line_position : Proc(IXmlReader*, UInt32*, HRESULT)
-    get_attribute_count : Proc(IXmlReader*, UInt32*, HRESULT)
-    get_depth : Proc(IXmlReader*, UInt32*, HRESULT)
-    is_eof : Proc(IXmlReader*, LibC::BOOL)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_input : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    read : UInt64
+    get_node_type : UInt64
+    move_to_first_attribute : UInt64
+    move_to_next_attribute : UInt64
+    move_to_attribute_by_name : UInt64
+    move_to_element : UInt64
+    get_qualified_name : UInt64
+    get_namespace_uri : UInt64
+    get_local_name : UInt64
+    get_prefix : UInt64
+    get_value : UInt64
+    read_value_chunk : UInt64
+    get_base_uri : UInt64
+    is_default : UInt64
+    is_empty_element : UInt64
+    get_line_number : UInt64
+    get_line_position : UInt64
+    get_attribute_count : UInt64
+    get_depth : UInt64
+    is_eof : UInt64
   end
 
   IXmlReader_GUID = "7279fc81-709d-4095-b63d-69fe4b0d9030"
@@ -209,10 +209,10 @@ lib LibWin32
   end
 
   struct IXmlResolverVTbl
-    query_interface : Proc(IXmlResolver*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXmlResolver*, UInt32)
-    release : Proc(IXmlResolver*, UInt32)
-    resolve_uri : Proc(IXmlResolver*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IUnknown*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    resolve_uri : UInt64
   end
 
   IXmlResolver_GUID = "7279fc82-709d-4095-b63d-69fe4b0d9030"
@@ -222,38 +222,38 @@ lib LibWin32
   end
 
   struct IXmlWriterVTbl
-    query_interface : Proc(IXmlWriter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXmlWriter*, UInt32)
-    release : Proc(IXmlWriter*, UInt32)
-    set_output : Proc(IXmlWriter*, IUnknown, HRESULT)
-    get_property : Proc(IXmlWriter*, UInt32, LibC::IntPtrT*, HRESULT)
-    set_property : Proc(IXmlWriter*, UInt32, LibC::IntPtrT, HRESULT)
-    write_attributes : Proc(IXmlWriter*, IXmlReader, LibC::BOOL, HRESULT)
-    write_attribute_string : Proc(IXmlWriter*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    write_c_data : Proc(IXmlWriter*, LibC::LPWSTR, HRESULT)
-    write_char_entity : Proc(IXmlWriter*, Char, HRESULT)
-    write_chars : Proc(IXmlWriter*, Char*, UInt32, HRESULT)
-    write_comment : Proc(IXmlWriter*, LibC::LPWSTR, HRESULT)
-    write_doc_type : Proc(IXmlWriter*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    write_element_string : Proc(IXmlWriter*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    write_end_document : Proc(IXmlWriter*, HRESULT)
-    write_end_element : Proc(IXmlWriter*, HRESULT)
-    write_entity_ref : Proc(IXmlWriter*, LibC::LPWSTR, HRESULT)
-    write_full_end_element : Proc(IXmlWriter*, HRESULT)
-    write_name : Proc(IXmlWriter*, LibC::LPWSTR, HRESULT)
-    write_nm_token : Proc(IXmlWriter*, LibC::LPWSTR, HRESULT)
-    write_node : Proc(IXmlWriter*, IXmlReader, LibC::BOOL, HRESULT)
-    write_node_shallow : Proc(IXmlWriter*, IXmlReader, LibC::BOOL, HRESULT)
-    write_processing_instruction : Proc(IXmlWriter*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    write_qualified_name : Proc(IXmlWriter*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    write_raw : Proc(IXmlWriter*, LibC::LPWSTR, HRESULT)
-    write_raw_chars : Proc(IXmlWriter*, Char*, UInt32, HRESULT)
-    write_start_document : Proc(IXmlWriter*, XmlStandalone, HRESULT)
-    write_start_element : Proc(IXmlWriter*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    write_string : Proc(IXmlWriter*, LibC::LPWSTR, HRESULT)
-    write_surrogate_char_entity : Proc(IXmlWriter*, Char, Char, HRESULT)
-    write_whitespace : Proc(IXmlWriter*, LibC::LPWSTR, HRESULT)
-    flush : Proc(IXmlWriter*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_output : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    write_attributes : UInt64
+    write_attribute_string : UInt64
+    write_c_data : UInt64
+    write_char_entity : UInt64
+    write_chars : UInt64
+    write_comment : UInt64
+    write_doc_type : UInt64
+    write_element_string : UInt64
+    write_end_document : UInt64
+    write_end_element : UInt64
+    write_entity_ref : UInt64
+    write_full_end_element : UInt64
+    write_name : UInt64
+    write_nm_token : UInt64
+    write_node : UInt64
+    write_node_shallow : UInt64
+    write_processing_instruction : UInt64
+    write_qualified_name : UInt64
+    write_raw : UInt64
+    write_raw_chars : UInt64
+    write_start_document : UInt64
+    write_start_element : UInt64
+    write_string : UInt64
+    write_surrogate_char_entity : UInt64
+    write_whitespace : UInt64
+    flush : UInt64
   end
 
   IXmlWriter_GUID = "7279fc88-709d-4095-b63d-69fe4b0d9030"
@@ -263,37 +263,37 @@ lib LibWin32
   end
 
   struct IXmlWriterLiteVTbl
-    query_interface : Proc(IXmlWriterLite*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IXmlWriterLite*, UInt32)
-    release : Proc(IXmlWriterLite*, UInt32)
-    set_output : Proc(IXmlWriterLite*, IUnknown, HRESULT)
-    get_property : Proc(IXmlWriterLite*, UInt32, LibC::IntPtrT*, HRESULT)
-    set_property : Proc(IXmlWriterLite*, UInt32, LibC::IntPtrT, HRESULT)
-    write_attributes : Proc(IXmlWriterLite*, IXmlReader, LibC::BOOL, HRESULT)
-    write_attribute_string : Proc(IXmlWriterLite*, Char*, UInt32, Char*, UInt32, HRESULT)
-    write_c_data : Proc(IXmlWriterLite*, LibC::LPWSTR, HRESULT)
-    write_char_entity : Proc(IXmlWriterLite*, Char, HRESULT)
-    write_chars : Proc(IXmlWriterLite*, Char*, UInt32, HRESULT)
-    write_comment : Proc(IXmlWriterLite*, LibC::LPWSTR, HRESULT)
-    write_doc_type : Proc(IXmlWriterLite*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    write_element_string : Proc(IXmlWriterLite*, Char*, UInt32, LibC::LPWSTR, HRESULT)
-    write_end_document : Proc(IXmlWriterLite*, HRESULT)
-    write_end_element : Proc(IXmlWriterLite*, Char*, UInt32, HRESULT)
-    write_entity_ref : Proc(IXmlWriterLite*, LibC::LPWSTR, HRESULT)
-    write_full_end_element : Proc(IXmlWriterLite*, Char*, UInt32, HRESULT)
-    write_name : Proc(IXmlWriterLite*, LibC::LPWSTR, HRESULT)
-    write_nm_token : Proc(IXmlWriterLite*, LibC::LPWSTR, HRESULT)
-    write_node : Proc(IXmlWriterLite*, IXmlReader, LibC::BOOL, HRESULT)
-    write_node_shallow : Proc(IXmlWriterLite*, IXmlReader, LibC::BOOL, HRESULT)
-    write_processing_instruction : Proc(IXmlWriterLite*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    write_raw : Proc(IXmlWriterLite*, LibC::LPWSTR, HRESULT)
-    write_raw_chars : Proc(IXmlWriterLite*, Char*, UInt32, HRESULT)
-    write_start_document : Proc(IXmlWriterLite*, XmlStandalone, HRESULT)
-    write_start_element : Proc(IXmlWriterLite*, Char*, UInt32, HRESULT)
-    write_string : Proc(IXmlWriterLite*, LibC::LPWSTR, HRESULT)
-    write_surrogate_char_entity : Proc(IXmlWriterLite*, Char, Char, HRESULT)
-    write_whitespace : Proc(IXmlWriterLite*, LibC::LPWSTR, HRESULT)
-    flush : Proc(IXmlWriterLite*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    set_output : UInt64
+    get_property : UInt64
+    set_property : UInt64
+    write_attributes : UInt64
+    write_attribute_string : UInt64
+    write_c_data : UInt64
+    write_char_entity : UInt64
+    write_chars : UInt64
+    write_comment : UInt64
+    write_doc_type : UInt64
+    write_element_string : UInt64
+    write_end_document : UInt64
+    write_end_element : UInt64
+    write_entity_ref : UInt64
+    write_full_end_element : UInt64
+    write_name : UInt64
+    write_nm_token : UInt64
+    write_node : UInt64
+    write_node_shallow : UInt64
+    write_processing_instruction : UInt64
+    write_raw : UInt64
+    write_raw_chars : UInt64
+    write_start_document : UInt64
+    write_start_element : UInt64
+    write_string : UInt64
+    write_surrogate_char_entity : UInt64
+    write_whitespace : UInt64
+    flush : UInt64
   end
 
   IXmlWriterLite_GUID = "862494c6-1310-4aad-b3cd-2dbeebf670d3"
@@ -320,4 +320,291 @@ lib LibWin32
 
   # Params # poutputstream : IUnknown [In],pmalloc : IMalloc [In],pwszencodingname : LibC::LPWSTR [In],ppoutput : IUnknown* [In]
   fun CreateXmlWriterOutputWithEncodingName(poutputstream : IUnknown, pmalloc : IMalloc, pwszencodingname : LibC::LPWSTR, ppoutput : IUnknown*) : HRESULT
+end
+struct LibWin32::IXmlReader
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_input(pinput : IUnknown) : HRESULT
+    @lpVtbl.value.set_input.unsafe_as(Proc(IUnknown, HRESULT)).call(pinput)
+  end
+  def get_property(nproperty : UInt32, ppvalue : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(UInt32, LibC::IntPtrT*, HRESULT)).call(nproperty, ppvalue)
+  end
+  def set_property(nproperty : UInt32, pvalue : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(UInt32, LibC::IntPtrT, HRESULT)).call(nproperty, pvalue)
+  end
+  def read(pnodetype : XmlNodeType*) : HRESULT
+    @lpVtbl.value.read.unsafe_as(Proc(XmlNodeType*, HRESULT)).call(pnodetype)
+  end
+  def get_node_type(pnodetype : XmlNodeType*) : HRESULT
+    @lpVtbl.value.get_node_type.unsafe_as(Proc(XmlNodeType*, HRESULT)).call(pnodetype)
+  end
+  def move_to_first_attribute : HRESULT
+    @lpVtbl.value.move_to_first_attribute.unsafe_as(Proc(HRESULT)).call
+  end
+  def move_to_next_attribute : HRESULT
+    @lpVtbl.value.move_to_next_attribute.unsafe_as(Proc(HRESULT)).call
+  end
+  def move_to_attribute_by_name(pwszlocalname : LibC::LPWSTR, pwsznamespaceuri : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.move_to_attribute_by_name.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszlocalname, pwsznamespaceuri)
+  end
+  def move_to_element : HRESULT
+    @lpVtbl.value.move_to_element.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_qualified_name(ppwszqualifiedname : LibC::LPWSTR*, pcwchqualifiedname : UInt32*) : HRESULT
+    @lpVtbl.value.get_qualified_name.unsafe_as(Proc(LibC::LPWSTR*, UInt32*, HRESULT)).call(ppwszqualifiedname, pcwchqualifiedname)
+  end
+  def get_namespace_uri(ppwsznamespaceuri : LibC::LPWSTR*, pcwchnamespaceuri : UInt32*) : HRESULT
+    @lpVtbl.value.get_namespace_uri.unsafe_as(Proc(LibC::LPWSTR*, UInt32*, HRESULT)).call(ppwsznamespaceuri, pcwchnamespaceuri)
+  end
+  def get_local_name(ppwszlocalname : LibC::LPWSTR*, pcwchlocalname : UInt32*) : HRESULT
+    @lpVtbl.value.get_local_name.unsafe_as(Proc(LibC::LPWSTR*, UInt32*, HRESULT)).call(ppwszlocalname, pcwchlocalname)
+  end
+  def get_prefix(ppwszprefix : LibC::LPWSTR*, pcwchprefix : UInt32*) : HRESULT
+    @lpVtbl.value.get_prefix.unsafe_as(Proc(LibC::LPWSTR*, UInt32*, HRESULT)).call(ppwszprefix, pcwchprefix)
+  end
+  def get_value(ppwszvalue : LibC::LPWSTR*, pcwchvalue : UInt32*) : HRESULT
+    @lpVtbl.value.get_value.unsafe_as(Proc(LibC::LPWSTR*, UInt32*, HRESULT)).call(ppwszvalue, pcwchvalue)
+  end
+  def read_value_chunk(pwchbuffer : Char*, cwchchunksize : UInt32, pcwchread : UInt32*) : HRESULT
+    @lpVtbl.value.read_value_chunk.unsafe_as(Proc(Char*, UInt32, UInt32*, HRESULT)).call(pwchbuffer, cwchchunksize, pcwchread)
+  end
+  def get_base_uri(ppwszbaseuri : LibC::LPWSTR*, pcwchbaseuri : UInt32*) : HRESULT
+    @lpVtbl.value.get_base_uri.unsafe_as(Proc(LibC::LPWSTR*, UInt32*, HRESULT)).call(ppwszbaseuri, pcwchbaseuri)
+  end
+  def is_default : LibC::BOOL
+    @lpVtbl.value.is_default.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def is_empty_element : LibC::BOOL
+    @lpVtbl.value.is_empty_element.unsafe_as(Proc(LibC::BOOL)).call
+  end
+  def get_line_number(pnlinenumber : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_number.unsafe_as(Proc(UInt32*, HRESULT)).call(pnlinenumber)
+  end
+  def get_line_position(pnlineposition : UInt32*) : HRESULT
+    @lpVtbl.value.get_line_position.unsafe_as(Proc(UInt32*, HRESULT)).call(pnlineposition)
+  end
+  def get_attribute_count(pnattributecount : UInt32*) : HRESULT
+    @lpVtbl.value.get_attribute_count.unsafe_as(Proc(UInt32*, HRESULT)).call(pnattributecount)
+  end
+  def get_depth(pndepth : UInt32*) : HRESULT
+    @lpVtbl.value.get_depth.unsafe_as(Proc(UInt32*, HRESULT)).call(pndepth)
+  end
+  def is_eof : LibC::BOOL
+    @lpVtbl.value.is_eof.unsafe_as(Proc(LibC::BOOL)).call
+  end
+end
+struct LibWin32::IXmlResolver
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def resolve_uri(pwszbaseuri : LibC::LPWSTR, pwszpublicidentifier : LibC::LPWSTR, pwszsystemidentifier : LibC::LPWSTR, ppresolvedinput : IUnknown*) : HRESULT
+    @lpVtbl.value.resolve_uri.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, IUnknown*, HRESULT)).call(pwszbaseuri, pwszpublicidentifier, pwszsystemidentifier, ppresolvedinput)
+  end
+end
+struct LibWin32::IXmlWriter
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_output(poutput : IUnknown) : HRESULT
+    @lpVtbl.value.set_output.unsafe_as(Proc(IUnknown, HRESULT)).call(poutput)
+  end
+  def get_property(nproperty : UInt32, ppvalue : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(UInt32, LibC::IntPtrT*, HRESULT)).call(nproperty, ppvalue)
+  end
+  def set_property(nproperty : UInt32, pvalue : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(UInt32, LibC::IntPtrT, HRESULT)).call(nproperty, pvalue)
+  end
+  def write_attributes(preader : IXmlReader, fwritedefaultattributes : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_attributes.unsafe_as(Proc(IXmlReader, LibC::BOOL, HRESULT)).call(preader, fwritedefaultattributes)
+  end
+  def write_attribute_string(pwszprefix : LibC::LPWSTR, pwszlocalname : LibC::LPWSTR, pwsznamespaceuri : LibC::LPWSTR, pwszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_attribute_string.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszprefix, pwszlocalname, pwsznamespaceuri, pwszvalue)
+  end
+  def write_c_data(pwsztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_c_data.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwsztext)
+  end
+  def write_char_entity(wch : Char) : HRESULT
+    @lpVtbl.value.write_char_entity.unsafe_as(Proc(Char, HRESULT)).call(wch)
+  end
+  def write_chars(pwch : Char*, cwch : UInt32) : HRESULT
+    @lpVtbl.value.write_chars.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwch, cwch)
+  end
+  def write_comment(pwszcomment : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_comment.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszcomment)
+  end
+  def write_doc_type(pwszname : LibC::LPWSTR, pwszpublicid : LibC::LPWSTR, pwszsystemid : LibC::LPWSTR, pwszsubset : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_doc_type.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszname, pwszpublicid, pwszsystemid, pwszsubset)
+  end
+  def write_element_string(pwszprefix : LibC::LPWSTR, pwszlocalname : LibC::LPWSTR, pwsznamespaceuri : LibC::LPWSTR, pwszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_element_string.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszprefix, pwszlocalname, pwsznamespaceuri, pwszvalue)
+  end
+  def write_end_document : HRESULT
+    @lpVtbl.value.write_end_document.unsafe_as(Proc(HRESULT)).call
+  end
+  def write_end_element : HRESULT
+    @lpVtbl.value.write_end_element.unsafe_as(Proc(HRESULT)).call
+  end
+  def write_entity_ref(pwszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_entity_ref.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszname)
+  end
+  def write_full_end_element : HRESULT
+    @lpVtbl.value.write_full_end_element.unsafe_as(Proc(HRESULT)).call
+  end
+  def write_name(pwszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszname)
+  end
+  def write_nm_token(pwsznmtoken : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_nm_token.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwsznmtoken)
+  end
+  def write_node(preader : IXmlReader, fwritedefaultattributes : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_node.unsafe_as(Proc(IXmlReader, LibC::BOOL, HRESULT)).call(preader, fwritedefaultattributes)
+  end
+  def write_node_shallow(preader : IXmlReader, fwritedefaultattributes : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_node_shallow.unsafe_as(Proc(IXmlReader, LibC::BOOL, HRESULT)).call(preader, fwritedefaultattributes)
+  end
+  def write_processing_instruction(pwszname : LibC::LPWSTR, pwsztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_processing_instruction.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszname, pwsztext)
+  end
+  def write_qualified_name(pwszlocalname : LibC::LPWSTR, pwsznamespaceuri : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_qualified_name.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszlocalname, pwsznamespaceuri)
+  end
+  def write_raw(pwszdata : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_raw.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszdata)
+  end
+  def write_raw_chars(pwch : Char*, cwch : UInt32) : HRESULT
+    @lpVtbl.value.write_raw_chars.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwch, cwch)
+  end
+  def write_start_document(standalone : XmlStandalone) : HRESULT
+    @lpVtbl.value.write_start_document.unsafe_as(Proc(XmlStandalone, HRESULT)).call(standalone)
+  end
+  def write_start_element(pwszprefix : LibC::LPWSTR, pwszlocalname : LibC::LPWSTR, pwsznamespaceuri : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_start_element.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszprefix, pwszlocalname, pwsznamespaceuri)
+  end
+  def write_string(pwsztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_string.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwsztext)
+  end
+  def write_surrogate_char_entity(wchlow : Char, wchhigh : Char) : HRESULT
+    @lpVtbl.value.write_surrogate_char_entity.unsafe_as(Proc(Char, Char, HRESULT)).call(wchlow, wchhigh)
+  end
+  def write_whitespace(pwszwhitespace : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_whitespace.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszwhitespace)
+  end
+  def flush : HRESULT
+    @lpVtbl.value.flush.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IXmlWriterLite
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def set_output(poutput : IUnknown) : HRESULT
+    @lpVtbl.value.set_output.unsafe_as(Proc(IUnknown, HRESULT)).call(poutput)
+  end
+  def get_property(nproperty : UInt32, ppvalue : LibC::IntPtrT*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(UInt32, LibC::IntPtrT*, HRESULT)).call(nproperty, ppvalue)
+  end
+  def set_property(nproperty : UInt32, pvalue : LibC::IntPtrT) : HRESULT
+    @lpVtbl.value.set_property.unsafe_as(Proc(UInt32, LibC::IntPtrT, HRESULT)).call(nproperty, pvalue)
+  end
+  def write_attributes(preader : IXmlReader, fwritedefaultattributes : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_attributes.unsafe_as(Proc(IXmlReader, LibC::BOOL, HRESULT)).call(preader, fwritedefaultattributes)
+  end
+  def write_attribute_string(pwszqname : Char*, cwszqname : UInt32, pwszvalue : Char*, cwszvalue : UInt32) : HRESULT
+    @lpVtbl.value.write_attribute_string.unsafe_as(Proc(Char*, UInt32, Char*, UInt32, HRESULT)).call(pwszqname, cwszqname, pwszvalue, cwszvalue)
+  end
+  def write_c_data(pwsztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_c_data.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwsztext)
+  end
+  def write_char_entity(wch : Char) : HRESULT
+    @lpVtbl.value.write_char_entity.unsafe_as(Proc(Char, HRESULT)).call(wch)
+  end
+  def write_chars(pwch : Char*, cwch : UInt32) : HRESULT
+    @lpVtbl.value.write_chars.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwch, cwch)
+  end
+  def write_comment(pwszcomment : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_comment.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszcomment)
+  end
+  def write_doc_type(pwszname : LibC::LPWSTR, pwszpublicid : LibC::LPWSTR, pwszsystemid : LibC::LPWSTR, pwszsubset : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_doc_type.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszname, pwszpublicid, pwszsystemid, pwszsubset)
+  end
+  def write_element_string(pwszqname : Char*, cwszqname : UInt32, pwszvalue : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_element_string.unsafe_as(Proc(Char*, UInt32, LibC::LPWSTR, HRESULT)).call(pwszqname, cwszqname, pwszvalue)
+  end
+  def write_end_document : HRESULT
+    @lpVtbl.value.write_end_document.unsafe_as(Proc(HRESULT)).call
+  end
+  def write_end_element(pwszqname : Char*, cwszqname : UInt32) : HRESULT
+    @lpVtbl.value.write_end_element.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszqname, cwszqname)
+  end
+  def write_entity_ref(pwszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_entity_ref.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszname)
+  end
+  def write_full_end_element(pwszqname : Char*, cwszqname : UInt32) : HRESULT
+    @lpVtbl.value.write_full_end_element.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszqname, cwszqname)
+  end
+  def write_name(pwszname : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_name.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszname)
+  end
+  def write_nm_token(pwsznmtoken : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_nm_token.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwsznmtoken)
+  end
+  def write_node(preader : IXmlReader, fwritedefaultattributes : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_node.unsafe_as(Proc(IXmlReader, LibC::BOOL, HRESULT)).call(preader, fwritedefaultattributes)
+  end
+  def write_node_shallow(preader : IXmlReader, fwritedefaultattributes : LibC::BOOL) : HRESULT
+    @lpVtbl.value.write_node_shallow.unsafe_as(Proc(IXmlReader, LibC::BOOL, HRESULT)).call(preader, fwritedefaultattributes)
+  end
+  def write_processing_instruction(pwszname : LibC::LPWSTR, pwsztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_processing_instruction.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(pwszname, pwsztext)
+  end
+  def write_raw(pwszdata : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_raw.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszdata)
+  end
+  def write_raw_chars(pwch : Char*, cwch : UInt32) : HRESULT
+    @lpVtbl.value.write_raw_chars.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwch, cwch)
+  end
+  def write_start_document(standalone : XmlStandalone) : HRESULT
+    @lpVtbl.value.write_start_document.unsafe_as(Proc(XmlStandalone, HRESULT)).call(standalone)
+  end
+  def write_start_element(pwszqname : Char*, cwszqname : UInt32) : HRESULT
+    @lpVtbl.value.write_start_element.unsafe_as(Proc(Char*, UInt32, HRESULT)).call(pwszqname, cwszqname)
+  end
+  def write_string(pwsztext : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_string.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwsztext)
+  end
+  def write_surrogate_char_entity(wchlow : Char, wchhigh : Char) : HRESULT
+    @lpVtbl.value.write_surrogate_char_entity.unsafe_as(Proc(Char, Char, HRESULT)).call(wchlow, wchhigh)
+  end
+  def write_whitespace(pwszwhitespace : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.write_whitespace.unsafe_as(Proc(LibC::LPWSTR, HRESULT)).call(pwszwhitespace)
+  end
+  def flush : HRESULT
+    @lpVtbl.value.flush.unsafe_as(Proc(HRESULT)).call
+  end
 end

@@ -739,11 +739,11 @@ lib LibWin32
 
 
   struct ID3DBlobVTbl
-    query_interface : Proc(ID3DBlob*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3DBlob*, UInt32)
-    release : Proc(ID3DBlob*, UInt32)
-    get_buffer_pointer : Proc(ID3DBlob*, Void**)
-    get_buffer_size : Proc(ID3DBlob*, LibC::UINT_PTR)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_buffer_pointer : UInt64
+    get_buffer_size : UInt64
   end
 
   ID3DBlob_GUID = "8ba5fb08-5195-40e2-ac58-0d989c3a0102"
@@ -753,11 +753,11 @@ lib LibWin32
   end
 
   struct ID3DDestructionNotifierVTbl
-    query_interface : Proc(ID3DDestructionNotifier*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ID3DDestructionNotifier*, UInt32)
-    release : Proc(ID3DDestructionNotifier*, UInt32)
-    register_destruction_callback : Proc(ID3DDestructionNotifier*, PFN_DESTRUCTION_CALLBACK, Void*, UInt32*, HRESULT)
-    unregister_destruction_callback : Proc(ID3DDestructionNotifier*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    register_destruction_callback : UInt64
+    unregister_destruction_callback : UInt64
   end
 
   ID3DDestructionNotifier_GUID = "a06eb39a-50da-425b-8c31-4eecd6c270f3"
@@ -767,12 +767,54 @@ lib LibWin32
   end
 
   struct ID3DIncludeVTbl
-    open : Proc(ID3DInclude*, D3D_INCLUDE_TYPE, PSTR, Void*, Void**, UInt32*, HRESULT)
-    close : Proc(ID3DInclude*, Void*, HRESULT)
+    open : UInt64
+    close : UInt64
   end
 
   struct ID3DInclude
     lpVtbl : ID3DIncludeVTbl*
   end
 
+end
+struct LibWin32::ID3DBlob
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_buffer_pointer : Void*
+    @lpVtbl.value.get_buffer_pointer.unsafe_as(Proc(Void**)).call
+  end
+  def get_buffer_size : LibC::UINT_PTR
+    @lpVtbl.value.get_buffer_size.unsafe_as(Proc(LibC::UINT_PTR)).call
+  end
+end
+struct LibWin32::ID3DDestructionNotifier
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def register_destruction_callback(callbackfn : PFN_DESTRUCTION_CALLBACK, pdata : Void*, pcallbackid : UInt32*) : HRESULT
+    @lpVtbl.value.register_destruction_callback.unsafe_as(Proc(PFN_DESTRUCTION_CALLBACK, Void*, UInt32*, HRESULT)).call(callbackfn, pdata, pcallbackid)
+  end
+  def unregister_destruction_callback(callbackid : UInt32) : HRESULT
+    @lpVtbl.value.unregister_destruction_callback.unsafe_as(Proc(UInt32, HRESULT)).call(callbackid)
+  end
+end
+struct LibWin32::ID3DInclude
+  def open(includetype : D3D_INCLUDE_TYPE, pfilename : PSTR, pparentdata : Void*, ppdata : Void**, pbytes : UInt32*) : HRESULT
+    @lpVtbl.value.open.unsafe_as(Proc(D3D_INCLUDE_TYPE, PSTR, Void*, Void**, UInt32*, HRESULT)).call(includetype, pfilename, pparentdata, ppdata, pbytes)
+  end
+  def close(pdata : Void*) : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(Void*, HRESULT)).call(pdata)
+  end
 end

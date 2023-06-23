@@ -1173,11 +1173,11 @@ lib LibWin32
 
 
   struct IFEClassFactoryVTbl
-    query_interface : Proc(IFEClassFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFEClassFactory*, UInt32)
-    release : Proc(IFEClassFactory*, UInt32)
-    create_instance : Proc(IFEClassFactory*, IUnknown, Guid*, Void**, HRESULT)
-    lock_server : Proc(IFEClassFactory*, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    create_instance : UInt64
+    lock_server : UInt64
   end
 
   struct IFEClassFactory
@@ -1185,13 +1185,13 @@ lib LibWin32
   end
 
   struct IFECommonVTbl
-    query_interface : Proc(IFECommon*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFECommon*, UInt32)
-    release : Proc(IFECommon*, UInt32)
-    is_default_ime : Proc(IFECommon*, UInt8*, Int32, HRESULT)
-    set_default_ime : Proc(IFECommon*, HRESULT)
-    invoke_word_reg_dialog : Proc(IFECommon*, IMEDLG*, HRESULT)
-    invoke_dict_tool_dialog : Proc(IFECommon*, IMEDLG*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    is_default_ime : UInt64
+    set_default_ime : UInt64
+    invoke_word_reg_dialog : UInt64
+    invoke_dict_tool_dialog : UInt64
   end
 
   IFECommon_GUID = "019f7151-e6db-11d0-83c3-00c04fddb82e"
@@ -1201,15 +1201,15 @@ lib LibWin32
   end
 
   struct IFELanguageVTbl
-    query_interface : Proc(IFELanguage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFELanguage*, UInt32)
-    release : Proc(IFELanguage*, UInt32)
-    open : Proc(IFELanguage*, HRESULT)
-    close : Proc(IFELanguage*, HRESULT)
-    get_j_morph_result : Proc(IFELanguage*, UInt32, UInt32, Int32, LibC::LPWSTR, UInt32*, MORRSLT**, HRESULT)
-    get_conversion_mode_caps : Proc(IFELanguage*, UInt32*, HRESULT)
-    get_phonetic : Proc(IFELanguage*, UInt8*, Int32, Int32, UInt8**, HRESULT)
-    get_conversion : Proc(IFELanguage*, UInt8*, Int32, Int32, UInt8**, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    open : UInt64
+    close : UInt64
+    get_j_morph_result : UInt64
+    get_conversion_mode_caps : UInt64
+    get_phonetic : UInt64
+    get_conversion : UInt64
   end
 
   IFELanguage_GUID = "019f7152-e6db-11d0-83c3-00c04fddb82e"
@@ -1219,26 +1219,26 @@ lib LibWin32
   end
 
   struct IFEDictionaryVTbl
-    query_interface : Proc(IFEDictionary*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFEDictionary*, UInt32)
-    release : Proc(IFEDictionary*, UInt32)
-    open : Proc(IFEDictionary*, UInt8*, IMESHF*, HRESULT)
-    close : Proc(IFEDictionary*, HRESULT)
-    get_header : Proc(IFEDictionary*, UInt8*, IMESHF*, IMEFMT*, UInt32*, HRESULT)
-    display_property : Proc(IFEDictionary*, LibC::HANDLE, HRESULT)
-    get_pos_table : Proc(IFEDictionary*, POSTBL**, Int32*, HRESULT)
-    get_words : Proc(IFEDictionary*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, UInt32, UInt32, UInt8*, UInt32, UInt32*, HRESULT)
-    next_words : Proc(IFEDictionary*, UInt8*, UInt32, UInt32*, HRESULT)
-    create : Proc(IFEDictionary*, PSTR, IMESHF*, HRESULT)
-    set_header : Proc(IFEDictionary*, IMESHF*, HRESULT)
-    exist_word : Proc(IFEDictionary*, IMEWRD*, HRESULT)
-    exist_dependency : Proc(IFEDictionary*, IMEDP*, HRESULT)
-    register_word : Proc(IFEDictionary*, IMEREG, IMEWRD*, HRESULT)
-    register_dependency : Proc(IFEDictionary*, IMEREG, IMEDP*, HRESULT)
-    get_dependencies : Proc(IFEDictionary*, LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR, LibC::LPWSTR, UInt32, IMEREL, UInt32, UInt8*, UInt32, UInt32*, HRESULT)
-    next_dependencies : Proc(IFEDictionary*, UInt8*, UInt32, UInt32*, HRESULT)
-    convert_from_old_msime : Proc(IFEDictionary*, PSTR, PFNLOG, IMEREG, HRESULT)
-    convert_from_user_to_sys : Proc(IFEDictionary*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    open : UInt64
+    close : UInt64
+    get_header : UInt64
+    display_property : UInt64
+    get_pos_table : UInt64
+    get_words : UInt64
+    next_words : UInt64
+    create : UInt64
+    set_header : UInt64
+    exist_word : UInt64
+    exist_dependency : UInt64
+    register_word : UInt64
+    register_dependency : UInt64
+    get_dependencies : UInt64
+    next_dependencies : UInt64
+    convert_from_old_msime : UInt64
+    convert_from_user_to_sys : UInt64
   end
 
   IFEDictionary_GUID = "019f7153-e6db-11d0-83c3-00c04fddb82e"
@@ -1248,10 +1248,10 @@ lib LibWin32
   end
 
   struct IImeSpecifyAppletsVTbl
-    query_interface : Proc(IImeSpecifyApplets*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IImeSpecifyApplets*, UInt32)
-    release : Proc(IImeSpecifyApplets*, UInt32)
-    get_applet_iid_list : Proc(IImeSpecifyApplets*, Guid*, APPLETIDLIST*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_applet_iid_list : UInt64
   end
 
   IImeSpecifyApplets_GUID = "5d8e643c-c3a9-11d1-afef-00805f0c8b6d"
@@ -1261,14 +1261,14 @@ lib LibWin32
   end
 
   struct IImePadAppletVTbl
-    query_interface : Proc(IImePadApplet*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IImePadApplet*, UInt32)
-    release : Proc(IImePadApplet*, UInt32)
-    initialize : Proc(IImePadApplet*, IUnknown, HRESULT)
-    terminate : Proc(IImePadApplet*, HRESULT)
-    get_applet_config : Proc(IImePadApplet*, IMEAPPLETCFG*, HRESULT)
-    create_ui : Proc(IImePadApplet*, LibC::HANDLE, IMEAPPLETUI*, HRESULT)
-    notify : Proc(IImePadApplet*, IUnknown, Int32, LibC::UINT_PTR, LPARAM, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    initialize : UInt64
+    terminate : UInt64
+    get_applet_config : UInt64
+    create_ui : UInt64
+    notify : UInt64
   end
 
   IImePadApplet_GUID = "5d8e643b-c3a9-11d1-afef-00805f0c8b6d"
@@ -1278,10 +1278,10 @@ lib LibWin32
   end
 
   struct IImePadVTbl
-    query_interface : Proc(IImePad*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IImePad*, UInt32)
-    release : Proc(IImePad*, UInt32)
-    request : Proc(IImePad*, IImePadApplet, IME_PAD_REQUEST_FLAGS, LibC::UINT_PTR, LPARAM, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    request : UInt64
   end
 
   IImePad_GUID = "5d8e643a-c3a9-11d1-afef-00805f0c8b6d"
@@ -1291,11 +1291,11 @@ lib LibWin32
   end
 
   struct IImePlugInDictDictionaryListVTbl
-    query_interface : Proc(IImePlugInDictDictionaryList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IImePlugInDictDictionaryList*, UInt32)
-    release : Proc(IImePlugInDictDictionaryList*, UInt32)
-    get_dictionaries_in_use : Proc(IImePlugInDictDictionaryList*, SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, HRESULT)
-    delete_dictionary : Proc(IImePlugInDictDictionaryList*, UInt8*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    get_dictionaries_in_use : UInt64
+    delete_dictionary : UInt64
   end
 
   IImePlugInDictDictionaryList_GUID = "98752974-b0a6-489b-8f6f-bff3769c8eeb"
@@ -1305,13 +1305,13 @@ lib LibWin32
   end
 
   struct IEnumRegisterWordAVTbl
-    query_interface : Proc(IEnumRegisterWordA*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumRegisterWordA*, UInt32)
-    release : Proc(IEnumRegisterWordA*, UInt32)
-    clone : Proc(IEnumRegisterWordA*, IEnumRegisterWordA*, HRESULT)
-    next : Proc(IEnumRegisterWordA*, UInt32, REGISTERWORDA*, UInt32*, HRESULT)
-    reset : Proc(IEnumRegisterWordA*, HRESULT)
-    skip : Proc(IEnumRegisterWordA*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumRegisterWordA_GUID = "08c03412-f96b-11d0-a475-00aa006bcc59"
@@ -1321,13 +1321,13 @@ lib LibWin32
   end
 
   struct IEnumRegisterWordWVTbl
-    query_interface : Proc(IEnumRegisterWordW*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumRegisterWordW*, UInt32)
-    release : Proc(IEnumRegisterWordW*, UInt32)
-    clone : Proc(IEnumRegisterWordW*, IEnumRegisterWordW*, HRESULT)
-    next : Proc(IEnumRegisterWordW*, UInt32, REGISTERWORDW*, UInt32*, HRESULT)
-    reset : Proc(IEnumRegisterWordW*, HRESULT)
-    skip : Proc(IEnumRegisterWordW*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumRegisterWordW_GUID = "4955dd31-b159-11d0-8fcf-00aa006bcc59"
@@ -1337,13 +1337,13 @@ lib LibWin32
   end
 
   struct IEnumInputContextVTbl
-    query_interface : Proc(IEnumInputContext*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumInputContext*, UInt32)
-    release : Proc(IEnumInputContext*, UInt32)
-    clone : Proc(IEnumInputContext*, IEnumInputContext*, HRESULT)
-    next : Proc(IEnumInputContext*, UInt32, HIMC*, UInt32*, HRESULT)
-    reset : Proc(IEnumInputContext*, HRESULT)
-    skip : Proc(IEnumInputContext*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    clone : UInt64
+    next : UInt64
+    reset : UInt64
+    skip : UInt64
   end
 
   IEnumInputContext_GUID = "09b5eab0-f997-11d1-93d4-0060b067b86e"
@@ -1353,11 +1353,11 @@ lib LibWin32
   end
 
   struct IActiveIMMRegistrarVTbl
-    query_interface : Proc(IActiveIMMRegistrar*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IActiveIMMRegistrar*, UInt32)
-    release : Proc(IActiveIMMRegistrar*, UInt32)
-    register_ime : Proc(IActiveIMMRegistrar*, Guid*, UInt16, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    unregister_ime : Proc(IActiveIMMRegistrar*, Guid*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    register_ime : UInt64
+    unregister_ime : UInt64
   end
 
   IActiveIMMRegistrar_GUID = "b3458082-bd00-11d1-939b-0060b067b86e"
@@ -1367,14 +1367,14 @@ lib LibWin32
   end
 
   struct IActiveIMMMessagePumpOwnerVTbl
-    query_interface : Proc(IActiveIMMMessagePumpOwner*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IActiveIMMMessagePumpOwner*, UInt32)
-    release : Proc(IActiveIMMMessagePumpOwner*, UInt32)
-    start : Proc(IActiveIMMMessagePumpOwner*, HRESULT)
-    rend : Proc(IActiveIMMMessagePumpOwner*, HRESULT)
-    on_translate_message : Proc(IActiveIMMMessagePumpOwner*, MSG*, HRESULT)
-    pause : Proc(IActiveIMMMessagePumpOwner*, UInt32*, HRESULT)
-    resume : Proc(IActiveIMMMessagePumpOwner*, UInt32, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    start : UInt64
+    end_ : UInt64
+    on_translate_message : UInt64
+    pause : UInt64
+    resume : UInt64
   end
 
   IActiveIMMMessagePumpOwner_GUID = "b5cf2cfa-8aeb-11d1-9364-0060b067b86e"
@@ -1384,77 +1384,77 @@ lib LibWin32
   end
 
   struct IActiveIMMAppVTbl
-    query_interface : Proc(IActiveIMMApp*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IActiveIMMApp*, UInt32)
-    release : Proc(IActiveIMMApp*, UInt32)
-    associate_context : Proc(IActiveIMMApp*, LibC::HANDLE, HIMC, HIMC*, HRESULT)
-    configure_imea : Proc(IActiveIMMApp*, HKL, LibC::HANDLE, UInt32, REGISTERWORDA*, HRESULT)
-    configure_imew : Proc(IActiveIMMApp*, HKL, LibC::HANDLE, UInt32, REGISTERWORDW*, HRESULT)
-    create_context : Proc(IActiveIMMApp*, HIMC*, HRESULT)
-    destroy_context : Proc(IActiveIMMApp*, HIMC, HRESULT)
-    enum_register_word_a : Proc(IActiveIMMApp*, HKL, PSTR, UInt32, PSTR, Void*, IEnumRegisterWordA*, HRESULT)
-    enum_register_word_w : Proc(IActiveIMMApp*, HKL, LibC::LPWSTR, UInt32, LibC::LPWSTR, Void*, IEnumRegisterWordW*, HRESULT)
-    escape_a : Proc(IActiveIMMApp*, HKL, HIMC, UInt32, Void*, LRESULT*, HRESULT)
-    escape_w : Proc(IActiveIMMApp*, HKL, HIMC, UInt32, Void*, LRESULT*, HRESULT)
-    get_candidate_list_a : Proc(IActiveIMMApp*, HIMC, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)
-    get_candidate_list_w : Proc(IActiveIMMApp*, HIMC, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)
-    get_candidate_list_count_a : Proc(IActiveIMMApp*, HIMC, UInt32*, UInt32*, HRESULT)
-    get_candidate_list_count_w : Proc(IActiveIMMApp*, HIMC, UInt32*, UInt32*, HRESULT)
-    get_candidate_window : Proc(IActiveIMMApp*, HIMC, UInt32, CANDIDATEFORM*, HRESULT)
-    get_composition_font_a : Proc(IActiveIMMApp*, HIMC, LOGFONTA*, HRESULT)
-    get_composition_font_w : Proc(IActiveIMMApp*, HIMC, LOGFONTW*, HRESULT)
-    get_composition_string_a : Proc(IActiveIMMApp*, HIMC, UInt32, UInt32, Int32*, Void*, HRESULT)
-    get_composition_string_w : Proc(IActiveIMMApp*, HIMC, UInt32, UInt32, Int32*, Void*, HRESULT)
-    get_composition_window : Proc(IActiveIMMApp*, HIMC, COMPOSITIONFORM*, HRESULT)
-    get_context : Proc(IActiveIMMApp*, LibC::HANDLE, HIMC*, HRESULT)
-    get_conversion_list_a : Proc(IActiveIMMApp*, HKL, HIMC, PSTR, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)
-    get_conversion_list_w : Proc(IActiveIMMApp*, HKL, HIMC, LibC::LPWSTR, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)
-    get_conversion_status : Proc(IActiveIMMApp*, HIMC, UInt32*, UInt32*, HRESULT)
-    get_default_ime_wnd : Proc(IActiveIMMApp*, LibC::HANDLE, HANDLE*, HRESULT)
-    get_description_a : Proc(IActiveIMMApp*, HKL, UInt32, PSTR, UInt32*, HRESULT)
-    get_description_w : Proc(IActiveIMMApp*, HKL, UInt32, LibC::LPWSTR, UInt32*, HRESULT)
-    get_guide_line_a : Proc(IActiveIMMApp*, HIMC, UInt32, UInt32, PSTR, UInt32*, HRESULT)
-    get_guide_line_w : Proc(IActiveIMMApp*, HIMC, UInt32, UInt32, LibC::LPWSTR, UInt32*, HRESULT)
-    get_ime_file_name_a : Proc(IActiveIMMApp*, HKL, UInt32, PSTR, UInt32*, HRESULT)
-    get_ime_file_name_w : Proc(IActiveIMMApp*, HKL, UInt32, LibC::LPWSTR, UInt32*, HRESULT)
-    get_open_status : Proc(IActiveIMMApp*, HIMC, HRESULT)
-    get_property : Proc(IActiveIMMApp*, HKL, UInt32, UInt32*, HRESULT)
-    get_register_word_style_a : Proc(IActiveIMMApp*, HKL, UInt32, STYLEBUFA*, UInt32*, HRESULT)
-    get_register_word_style_w : Proc(IActiveIMMApp*, HKL, UInt32, STYLEBUFW*, UInt32*, HRESULT)
-    get_status_window_pos : Proc(IActiveIMMApp*, HIMC, POINT*, HRESULT)
-    get_virtual_key : Proc(IActiveIMMApp*, LibC::HANDLE, UInt32*, HRESULT)
-    install_imea : Proc(IActiveIMMApp*, PSTR, PSTR, HKL*, HRESULT)
-    install_imew : Proc(IActiveIMMApp*, LibC::LPWSTR, LibC::LPWSTR, HKL*, HRESULT)
-    is_ime : Proc(IActiveIMMApp*, HKL, HRESULT)
-    is_ui_message_a : Proc(IActiveIMMApp*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)
-    is_ui_message_w : Proc(IActiveIMMApp*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)
-    notify_ime : Proc(IActiveIMMApp*, HIMC, UInt32, UInt32, UInt32, HRESULT)
-    register_word_a : Proc(IActiveIMMApp*, HKL, PSTR, UInt32, PSTR, HRESULT)
-    register_word_w : Proc(IActiveIMMApp*, HKL, LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)
-    release_context : Proc(IActiveIMMApp*, LibC::HANDLE, HIMC, HRESULT)
-    set_candidate_window : Proc(IActiveIMMApp*, HIMC, CANDIDATEFORM*, HRESULT)
-    set_composition_font_a : Proc(IActiveIMMApp*, HIMC, LOGFONTA*, HRESULT)
-    set_composition_font_w : Proc(IActiveIMMApp*, HIMC, LOGFONTW*, HRESULT)
-    set_composition_string_a : Proc(IActiveIMMApp*, HIMC, UInt32, Void*, UInt32, Void*, UInt32, HRESULT)
-    set_composition_string_w : Proc(IActiveIMMApp*, HIMC, UInt32, Void*, UInt32, Void*, UInt32, HRESULT)
-    set_composition_window : Proc(IActiveIMMApp*, HIMC, COMPOSITIONFORM*, HRESULT)
-    set_conversion_status : Proc(IActiveIMMApp*, HIMC, UInt32, UInt32, HRESULT)
-    set_open_status : Proc(IActiveIMMApp*, HIMC, LibC::BOOL, HRESULT)
-    set_status_window_pos : Proc(IActiveIMMApp*, HIMC, POINT*, HRESULT)
-    simulate_hot_key : Proc(IActiveIMMApp*, LibC::HANDLE, UInt32, HRESULT)
-    unregister_word_a : Proc(IActiveIMMApp*, HKL, PSTR, UInt32, PSTR, HRESULT)
-    unregister_word_w : Proc(IActiveIMMApp*, HKL, LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)
-    activate : Proc(IActiveIMMApp*, LibC::BOOL, HRESULT)
-    deactivate : Proc(IActiveIMMApp*, HRESULT)
-    on_def_window_proc : Proc(IActiveIMMApp*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, HRESULT)
-    filter_client_windows : Proc(IActiveIMMApp*, UInt16*, UInt32, HRESULT)
-    get_code_page_a : Proc(IActiveIMMApp*, HKL, UInt32*, HRESULT)
-    get_lang_id : Proc(IActiveIMMApp*, HKL, UInt16*, HRESULT)
-    associate_context_ex : Proc(IActiveIMMApp*, LibC::HANDLE, HIMC, UInt32, HRESULT)
-    disable_ime : Proc(IActiveIMMApp*, UInt32, HRESULT)
-    get_ime_menu_items_a : Proc(IActiveIMMApp*, HIMC, UInt32, UInt32, IMEMENUITEMINFOA*, IMEMENUITEMINFOA*, UInt32, UInt32*, HRESULT)
-    get_ime_menu_items_w : Proc(IActiveIMMApp*, HIMC, UInt32, UInt32, IMEMENUITEMINFOW*, IMEMENUITEMINFOW*, UInt32, UInt32*, HRESULT)
-    enum_input_context : Proc(IActiveIMMApp*, UInt32, IEnumInputContext*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    associate_context : UInt64
+    configure_imea : UInt64
+    configure_imew : UInt64
+    create_context : UInt64
+    destroy_context : UInt64
+    enum_register_word_a : UInt64
+    enum_register_word_w : UInt64
+    escape_a : UInt64
+    escape_w : UInt64
+    get_candidate_list_a : UInt64
+    get_candidate_list_w : UInt64
+    get_candidate_list_count_a : UInt64
+    get_candidate_list_count_w : UInt64
+    get_candidate_window : UInt64
+    get_composition_font_a : UInt64
+    get_composition_font_w : UInt64
+    get_composition_string_a : UInt64
+    get_composition_string_w : UInt64
+    get_composition_window : UInt64
+    get_context : UInt64
+    get_conversion_list_a : UInt64
+    get_conversion_list_w : UInt64
+    get_conversion_status : UInt64
+    get_default_ime_wnd : UInt64
+    get_description_a : UInt64
+    get_description_w : UInt64
+    get_guide_line_a : UInt64
+    get_guide_line_w : UInt64
+    get_ime_file_name_a : UInt64
+    get_ime_file_name_w : UInt64
+    get_open_status : UInt64
+    get_property : UInt64
+    get_register_word_style_a : UInt64
+    get_register_word_style_w : UInt64
+    get_status_window_pos : UInt64
+    get_virtual_key : UInt64
+    install_imea : UInt64
+    install_imew : UInt64
+    is_ime : UInt64
+    is_ui_message_a : UInt64
+    is_ui_message_w : UInt64
+    notify_ime : UInt64
+    register_word_a : UInt64
+    register_word_w : UInt64
+    release_context : UInt64
+    set_candidate_window : UInt64
+    set_composition_font_a : UInt64
+    set_composition_font_w : UInt64
+    set_composition_string_a : UInt64
+    set_composition_string_w : UInt64
+    set_composition_window : UInt64
+    set_conversion_status : UInt64
+    set_open_status : UInt64
+    set_status_window_pos : UInt64
+    simulate_hot_key : UInt64
+    unregister_word_a : UInt64
+    unregister_word_w : UInt64
+    activate : UInt64
+    deactivate : UInt64
+    on_def_window_proc : UInt64
+    filter_client_windows : UInt64
+    get_code_page_a : UInt64
+    get_lang_id : UInt64
+    associate_context_ex : UInt64
+    disable_ime : UInt64
+    get_ime_menu_items_a : UInt64
+    get_ime_menu_items_w : UInt64
+    enum_input_context : UInt64
   end
 
   IActiveIMMApp_GUID = "08c0e040-62d1-11d1-9326-0060b067b86e"
@@ -1464,97 +1464,97 @@ lib LibWin32
   end
 
   struct IActiveIMMIMEVTbl
-    query_interface : Proc(IActiveIMMIME*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IActiveIMMIME*, UInt32)
-    release : Proc(IActiveIMMIME*, UInt32)
-    associate_context : Proc(IActiveIMMIME*, LibC::HANDLE, HIMC, HIMC*, HRESULT)
-    configure_imea : Proc(IActiveIMMIME*, HKL, LibC::HANDLE, UInt32, REGISTERWORDA*, HRESULT)
-    configure_imew : Proc(IActiveIMMIME*, HKL, LibC::HANDLE, UInt32, REGISTERWORDW*, HRESULT)
-    create_context : Proc(IActiveIMMIME*, HIMC*, HRESULT)
-    destroy_context : Proc(IActiveIMMIME*, HIMC, HRESULT)
-    enum_register_word_a : Proc(IActiveIMMIME*, HKL, PSTR, UInt32, PSTR, Void*, IEnumRegisterWordA*, HRESULT)
-    enum_register_word_w : Proc(IActiveIMMIME*, HKL, LibC::LPWSTR, UInt32, LibC::LPWSTR, Void*, IEnumRegisterWordW*, HRESULT)
-    escape_a : Proc(IActiveIMMIME*, HKL, HIMC, UInt32, Void*, LRESULT*, HRESULT)
-    escape_w : Proc(IActiveIMMIME*, HKL, HIMC, UInt32, Void*, LRESULT*, HRESULT)
-    get_candidate_list_a : Proc(IActiveIMMIME*, HIMC, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)
-    get_candidate_list_w : Proc(IActiveIMMIME*, HIMC, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)
-    get_candidate_list_count_a : Proc(IActiveIMMIME*, HIMC, UInt32*, UInt32*, HRESULT)
-    get_candidate_list_count_w : Proc(IActiveIMMIME*, HIMC, UInt32*, UInt32*, HRESULT)
-    get_candidate_window : Proc(IActiveIMMIME*, HIMC, UInt32, CANDIDATEFORM*, HRESULT)
-    get_composition_font_a : Proc(IActiveIMMIME*, HIMC, LOGFONTA*, HRESULT)
-    get_composition_font_w : Proc(IActiveIMMIME*, HIMC, LOGFONTW*, HRESULT)
-    get_composition_string_a : Proc(IActiveIMMIME*, HIMC, UInt32, UInt32, Int32*, Void*, HRESULT)
-    get_composition_string_w : Proc(IActiveIMMIME*, HIMC, UInt32, UInt32, Int32*, Void*, HRESULT)
-    get_composition_window : Proc(IActiveIMMIME*, HIMC, COMPOSITIONFORM*, HRESULT)
-    get_context : Proc(IActiveIMMIME*, LibC::HANDLE, HIMC*, HRESULT)
-    get_conversion_list_a : Proc(IActiveIMMIME*, HKL, HIMC, PSTR, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)
-    get_conversion_list_w : Proc(IActiveIMMIME*, HKL, HIMC, LibC::LPWSTR, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)
-    get_conversion_status : Proc(IActiveIMMIME*, HIMC, UInt32*, UInt32*, HRESULT)
-    get_default_ime_wnd : Proc(IActiveIMMIME*, LibC::HANDLE, HANDLE*, HRESULT)
-    get_description_a : Proc(IActiveIMMIME*, HKL, UInt32, PSTR, UInt32*, HRESULT)
-    get_description_w : Proc(IActiveIMMIME*, HKL, UInt32, LibC::LPWSTR, UInt32*, HRESULT)
-    get_guide_line_a : Proc(IActiveIMMIME*, HIMC, UInt32, UInt32, PSTR, UInt32*, HRESULT)
-    get_guide_line_w : Proc(IActiveIMMIME*, HIMC, UInt32, UInt32, LibC::LPWSTR, UInt32*, HRESULT)
-    get_ime_file_name_a : Proc(IActiveIMMIME*, HKL, UInt32, PSTR, UInt32*, HRESULT)
-    get_ime_file_name_w : Proc(IActiveIMMIME*, HKL, UInt32, LibC::LPWSTR, UInt32*, HRESULT)
-    get_open_status : Proc(IActiveIMMIME*, HIMC, HRESULT)
-    get_property : Proc(IActiveIMMIME*, HKL, UInt32, UInt32*, HRESULT)
-    get_register_word_style_a : Proc(IActiveIMMIME*, HKL, UInt32, STYLEBUFA*, UInt32*, HRESULT)
-    get_register_word_style_w : Proc(IActiveIMMIME*, HKL, UInt32, STYLEBUFW*, UInt32*, HRESULT)
-    get_status_window_pos : Proc(IActiveIMMIME*, HIMC, POINT*, HRESULT)
-    get_virtual_key : Proc(IActiveIMMIME*, LibC::HANDLE, UInt32*, HRESULT)
-    install_imea : Proc(IActiveIMMIME*, PSTR, PSTR, HKL*, HRESULT)
-    install_imew : Proc(IActiveIMMIME*, LibC::LPWSTR, LibC::LPWSTR, HKL*, HRESULT)
-    is_ime : Proc(IActiveIMMIME*, HKL, HRESULT)
-    is_ui_message_a : Proc(IActiveIMMIME*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)
-    is_ui_message_w : Proc(IActiveIMMIME*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)
-    notify_ime : Proc(IActiveIMMIME*, HIMC, UInt32, UInt32, UInt32, HRESULT)
-    register_word_a : Proc(IActiveIMMIME*, HKL, PSTR, UInt32, PSTR, HRESULT)
-    register_word_w : Proc(IActiveIMMIME*, HKL, LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)
-    release_context : Proc(IActiveIMMIME*, LibC::HANDLE, HIMC, HRESULT)
-    set_candidate_window : Proc(IActiveIMMIME*, HIMC, CANDIDATEFORM*, HRESULT)
-    set_composition_font_a : Proc(IActiveIMMIME*, HIMC, LOGFONTA*, HRESULT)
-    set_composition_font_w : Proc(IActiveIMMIME*, HIMC, LOGFONTW*, HRESULT)
-    set_composition_string_a : Proc(IActiveIMMIME*, HIMC, UInt32, Void*, UInt32, Void*, UInt32, HRESULT)
-    set_composition_string_w : Proc(IActiveIMMIME*, HIMC, UInt32, Void*, UInt32, Void*, UInt32, HRESULT)
-    set_composition_window : Proc(IActiveIMMIME*, HIMC, COMPOSITIONFORM*, HRESULT)
-    set_conversion_status : Proc(IActiveIMMIME*, HIMC, UInt32, UInt32, HRESULT)
-    set_open_status : Proc(IActiveIMMIME*, HIMC, LibC::BOOL, HRESULT)
-    set_status_window_pos : Proc(IActiveIMMIME*, HIMC, POINT*, HRESULT)
-    simulate_hot_key : Proc(IActiveIMMIME*, LibC::HANDLE, UInt32, HRESULT)
-    unregister_word_a : Proc(IActiveIMMIME*, HKL, PSTR, UInt32, PSTR, HRESULT)
-    unregister_word_w : Proc(IActiveIMMIME*, HKL, LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)
-    generate_message : Proc(IActiveIMMIME*, HIMC, HRESULT)
-    lock_imc : Proc(IActiveIMMIME*, HIMC, INPUTCONTEXT**, HRESULT)
-    unlock_imc : Proc(IActiveIMMIME*, HIMC, HRESULT)
-    get_imc_lock_count : Proc(IActiveIMMIME*, HIMC, UInt32*, HRESULT)
-    create_imcc : Proc(IActiveIMMIME*, UInt32, HIMCC*, HRESULT)
-    destroy_imcc : Proc(IActiveIMMIME*, HIMCC, HRESULT)
-    lock_imcc : Proc(IActiveIMMIME*, HIMCC, Void**, HRESULT)
-    unlock_imcc : Proc(IActiveIMMIME*, HIMCC, HRESULT)
-    re_size_imcc : Proc(IActiveIMMIME*, HIMCC, UInt32, HIMCC*, HRESULT)
-    get_imcc_size : Proc(IActiveIMMIME*, HIMCC, UInt32*, HRESULT)
-    get_imcc_lock_count : Proc(IActiveIMMIME*, HIMCC, UInt32*, HRESULT)
-    get_hot_key : Proc(IActiveIMMIME*, UInt32, UInt32*, UInt32*, HKL*, HRESULT)
-    set_hot_key : Proc(IActiveIMMIME*, UInt32, UInt32, UInt32, HKL, HRESULT)
-    create_soft_keyboard : Proc(IActiveIMMIME*, UInt32, LibC::HANDLE, Int32, Int32, HANDLE*, HRESULT)
-    destroy_soft_keyboard : Proc(IActiveIMMIME*, LibC::HANDLE, HRESULT)
-    show_soft_keyboard : Proc(IActiveIMMIME*, LibC::HANDLE, Int32, HRESULT)
-    get_code_page_a : Proc(IActiveIMMIME*, HKL, UInt32*, HRESULT)
-    get_lang_id : Proc(IActiveIMMIME*, HKL, UInt16*, HRESULT)
-    keybd_event : Proc(IActiveIMMIME*, UInt16, UInt8, UInt8, UInt32, UInt32, HRESULT)
-    lock_modal : Proc(IActiveIMMIME*, HRESULT)
-    unlock_modal : Proc(IActiveIMMIME*, HRESULT)
-    associate_context_ex : Proc(IActiveIMMIME*, LibC::HANDLE, HIMC, UInt32, HRESULT)
-    disable_ime : Proc(IActiveIMMIME*, UInt32, HRESULT)
-    get_ime_menu_items_a : Proc(IActiveIMMIME*, HIMC, UInt32, UInt32, IMEMENUITEMINFOA*, IMEMENUITEMINFOA*, UInt32, UInt32*, HRESULT)
-    get_ime_menu_items_w : Proc(IActiveIMMIME*, HIMC, UInt32, UInt32, IMEMENUITEMINFOW*, IMEMENUITEMINFOW*, UInt32, UInt32*, HRESULT)
-    enum_input_context : Proc(IActiveIMMIME*, UInt32, IEnumInputContext*, HRESULT)
-    request_message_a : Proc(IActiveIMMIME*, HIMC, LibC::UINT_PTR, LPARAM, LRESULT*, HRESULT)
-    request_message_w : Proc(IActiveIMMIME*, HIMC, LibC::UINT_PTR, LPARAM, LRESULT*, HRESULT)
-    send_imca : Proc(IActiveIMMIME*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, HRESULT)
-    send_imcw : Proc(IActiveIMMIME*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, HRESULT)
-    is_sleeping : Proc(IActiveIMMIME*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    associate_context : UInt64
+    configure_imea : UInt64
+    configure_imew : UInt64
+    create_context : UInt64
+    destroy_context : UInt64
+    enum_register_word_a : UInt64
+    enum_register_word_w : UInt64
+    escape_a : UInt64
+    escape_w : UInt64
+    get_candidate_list_a : UInt64
+    get_candidate_list_w : UInt64
+    get_candidate_list_count_a : UInt64
+    get_candidate_list_count_w : UInt64
+    get_candidate_window : UInt64
+    get_composition_font_a : UInt64
+    get_composition_font_w : UInt64
+    get_composition_string_a : UInt64
+    get_composition_string_w : UInt64
+    get_composition_window : UInt64
+    get_context : UInt64
+    get_conversion_list_a : UInt64
+    get_conversion_list_w : UInt64
+    get_conversion_status : UInt64
+    get_default_ime_wnd : UInt64
+    get_description_a : UInt64
+    get_description_w : UInt64
+    get_guide_line_a : UInt64
+    get_guide_line_w : UInt64
+    get_ime_file_name_a : UInt64
+    get_ime_file_name_w : UInt64
+    get_open_status : UInt64
+    get_property : UInt64
+    get_register_word_style_a : UInt64
+    get_register_word_style_w : UInt64
+    get_status_window_pos : UInt64
+    get_virtual_key : UInt64
+    install_imea : UInt64
+    install_imew : UInt64
+    is_ime : UInt64
+    is_ui_message_a : UInt64
+    is_ui_message_w : UInt64
+    notify_ime : UInt64
+    register_word_a : UInt64
+    register_word_w : UInt64
+    release_context : UInt64
+    set_candidate_window : UInt64
+    set_composition_font_a : UInt64
+    set_composition_font_w : UInt64
+    set_composition_string_a : UInt64
+    set_composition_string_w : UInt64
+    set_composition_window : UInt64
+    set_conversion_status : UInt64
+    set_open_status : UInt64
+    set_status_window_pos : UInt64
+    simulate_hot_key : UInt64
+    unregister_word_a : UInt64
+    unregister_word_w : UInt64
+    generate_message : UInt64
+    lock_imc : UInt64
+    unlock_imc : UInt64
+    get_imc_lock_count : UInt64
+    create_imcc : UInt64
+    destroy_imcc : UInt64
+    lock_imcc : UInt64
+    unlock_imcc : UInt64
+    re_size_imcc : UInt64
+    get_imcc_size : UInt64
+    get_imcc_lock_count : UInt64
+    get_hot_key : UInt64
+    set_hot_key : UInt64
+    create_soft_keyboard : UInt64
+    destroy_soft_keyboard : UInt64
+    show_soft_keyboard : UInt64
+    get_code_page_a : UInt64
+    get_lang_id : UInt64
+    keybd_event : UInt64
+    lock_modal : UInt64
+    unlock_modal : UInt64
+    associate_context_ex : UInt64
+    disable_ime : UInt64
+    get_ime_menu_items_a : UInt64
+    get_ime_menu_items_w : UInt64
+    enum_input_context : UInt64
+    request_message_a : UInt64
+    request_message_w : UInt64
+    send_imca : UInt64
+    send_imcw : UInt64
+    is_sleeping : UInt64
   end
 
   IActiveIMMIME_GUID = "08c03411-f96b-11d0-a475-00aa006bcc59"
@@ -1564,26 +1564,26 @@ lib LibWin32
   end
 
   struct IActiveIMEVTbl
-    query_interface : Proc(IActiveIME*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IActiveIME*, UInt32)
-    release : Proc(IActiveIME*, UInt32)
-    inquire : Proc(IActiveIME*, UInt32, IMEINFO*, LibC::LPWSTR, UInt32*, HRESULT)
-    conversion_list : Proc(IActiveIME*, HIMC, LibC::LPWSTR, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)
-    configure : Proc(IActiveIME*, HKL, LibC::HANDLE, UInt32, REGISTERWORDW*, HRESULT)
-    destroy : Proc(IActiveIME*, UInt32, HRESULT)
-    escape : Proc(IActiveIME*, HIMC, UInt32, Void*, LRESULT*, HRESULT)
-    set_active_context : Proc(IActiveIME*, HIMC, LibC::BOOL, HRESULT)
-    process_key : Proc(IActiveIME*, HIMC, UInt32, UInt32, UInt8*, HRESULT)
-    notify : Proc(IActiveIME*, HIMC, UInt32, UInt32, UInt32, HRESULT)
-    select : Proc(IActiveIME*, HIMC, LibC::BOOL, HRESULT)
-    set_composition_string : Proc(IActiveIME*, HIMC, UInt32, Void*, UInt32, Void*, UInt32, HRESULT)
-    to_ascii_ex : Proc(IActiveIME*, UInt32, UInt32, UInt8*, UInt32, HIMC, UInt32*, UInt32*, HRESULT)
-    register_word : Proc(IActiveIME*, LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)
-    unregister_word : Proc(IActiveIME*, LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)
-    get_register_word_style : Proc(IActiveIME*, UInt32, STYLEBUFW*, UInt32*, HRESULT)
-    enum_register_word : Proc(IActiveIME*, LibC::LPWSTR, UInt32, LibC::LPWSTR, Void*, IEnumRegisterWordW*, HRESULT)
-    get_code_page_a : Proc(IActiveIME*, UInt32*, HRESULT)
-    get_lang_id : Proc(IActiveIME*, UInt16*, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    inquire : UInt64
+    conversion_list : UInt64
+    configure : UInt64
+    destroy : UInt64
+    escape : UInt64
+    set_active_context : UInt64
+    process_key : UInt64
+    notify : UInt64
+    select : UInt64
+    set_composition_string : UInt64
+    to_ascii_ex : UInt64
+    register_word : UInt64
+    unregister_word : UInt64
+    get_register_word_style : UInt64
+    enum_register_word : UInt64
+    get_code_page_a : UInt64
+    get_lang_id : UInt64
   end
 
   IActiveIME_GUID = "6fe20962-d077-11d0-8fe7-00aa006bcc59"
@@ -1593,28 +1593,28 @@ lib LibWin32
   end
 
   struct IActiveIME2VTbl
-    query_interface : Proc(IActiveIME2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IActiveIME2*, UInt32)
-    release : Proc(IActiveIME2*, UInt32)
-    inquire : Proc(IActiveIME2*, UInt32, IMEINFO*, LibC::LPWSTR, UInt32*, HRESULT)
-    conversion_list : Proc(IActiveIME2*, HIMC, LibC::LPWSTR, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)
-    configure : Proc(IActiveIME2*, HKL, LibC::HANDLE, UInt32, REGISTERWORDW*, HRESULT)
-    destroy : Proc(IActiveIME2*, UInt32, HRESULT)
-    escape : Proc(IActiveIME2*, HIMC, UInt32, Void*, LRESULT*, HRESULT)
-    set_active_context : Proc(IActiveIME2*, HIMC, LibC::BOOL, HRESULT)
-    process_key : Proc(IActiveIME2*, HIMC, UInt32, UInt32, UInt8*, HRESULT)
-    notify : Proc(IActiveIME2*, HIMC, UInt32, UInt32, UInt32, HRESULT)
-    select : Proc(IActiveIME2*, HIMC, LibC::BOOL, HRESULT)
-    set_composition_string : Proc(IActiveIME2*, HIMC, UInt32, Void*, UInt32, Void*, UInt32, HRESULT)
-    to_ascii_ex : Proc(IActiveIME2*, UInt32, UInt32, UInt8*, UInt32, HIMC, UInt32*, UInt32*, HRESULT)
-    register_word : Proc(IActiveIME2*, LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)
-    unregister_word : Proc(IActiveIME2*, LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)
-    get_register_word_style : Proc(IActiveIME2*, UInt32, STYLEBUFW*, UInt32*, HRESULT)
-    enum_register_word : Proc(IActiveIME2*, LibC::LPWSTR, UInt32, LibC::LPWSTR, Void*, IEnumRegisterWordW*, HRESULT)
-    get_code_page_a : Proc(IActiveIME2*, UInt32*, HRESULT)
-    get_lang_id : Proc(IActiveIME2*, UInt16*, HRESULT)
-    sleep : Proc(IActiveIME2*, HRESULT)
-    unsleep : Proc(IActiveIME2*, LibC::BOOL, HRESULT)
+    query_interface : UInt64
+    add_ref : UInt64
+    release : UInt64
+    inquire : UInt64
+    conversion_list : UInt64
+    configure : UInt64
+    destroy : UInt64
+    escape : UInt64
+    set_active_context : UInt64
+    process_key : UInt64
+    notify : UInt64
+    select : UInt64
+    set_composition_string : UInt64
+    to_ascii_ex : UInt64
+    register_word : UInt64
+    unregister_word : UInt64
+    get_register_word_style : UInt64
+    enum_register_word : UInt64
+    get_code_page_a : UInt64
+    get_lang_id : UInt64
+    sleep : UInt64
+    unsleep : UInt64
   end
 
   IActiveIME2_GUID = "e1c4bf0e-2d53-11d2-93e1-0060b067b86e"
@@ -1869,4 +1869,938 @@ lib LibWin32
 
   # Params # param0 : HIMCC [In]
   fun ImmGetIMCCSize(param0 : HIMCC) : UInt32
+end
+struct LibWin32::IFEClassFactory
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def create_instance(punkouter : IUnknown, riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.create_instance.unsafe_as(Proc(IUnknown, Guid*, Void**, HRESULT)).call(punkouter, riid, ppvobject)
+  end
+  def lock_server(flock : LibC::BOOL) : HRESULT
+    @lpVtbl.value.lock_server.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(flock)
+  end
+end
+struct LibWin32::IFECommon
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def is_default_ime(szname : UInt8*, cszname : Int32) : HRESULT
+    @lpVtbl.value.is_default_ime.unsafe_as(Proc(UInt8*, Int32, HRESULT)).call(szname, cszname)
+  end
+  def set_default_ime : HRESULT
+    @lpVtbl.value.set_default_ime.unsafe_as(Proc(HRESULT)).call
+  end
+  def invoke_word_reg_dialog(pimedlg : IMEDLG*) : HRESULT
+    @lpVtbl.value.invoke_word_reg_dialog.unsafe_as(Proc(IMEDLG*, HRESULT)).call(pimedlg)
+  end
+  def invoke_dict_tool_dialog(pimedlg : IMEDLG*) : HRESULT
+    @lpVtbl.value.invoke_dict_tool_dialog.unsafe_as(Proc(IMEDLG*, HRESULT)).call(pimedlg)
+  end
+end
+struct LibWin32::IFELanguage
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def open : HRESULT
+    @lpVtbl.value.open.unsafe_as(Proc(HRESULT)).call
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_j_morph_result(dwrequest : UInt32, dwcmode : UInt32, cwchinput : Int32, pwchinput : LibC::LPWSTR, pfcinfo : UInt32*, ppresult : MORRSLT**) : HRESULT
+    @lpVtbl.value.get_j_morph_result.unsafe_as(Proc(UInt32, UInt32, Int32, LibC::LPWSTR, UInt32*, MORRSLT**, HRESULT)).call(dwrequest, dwcmode, cwchinput, pwchinput, pfcinfo, ppresult)
+  end
+  def get_conversion_mode_caps(pdwcaps : UInt32*) : HRESULT
+    @lpVtbl.value.get_conversion_mode_caps.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcaps)
+  end
+  def get_phonetic(string : UInt8*, start : Int32, length : Int32, phonetic : UInt8**) : HRESULT
+    @lpVtbl.value.get_phonetic.unsafe_as(Proc(UInt8*, Int32, Int32, UInt8**, HRESULT)).call(string, start, length, phonetic)
+  end
+  def get_conversion(string : UInt8*, start : Int32, length : Int32, result : UInt8**) : HRESULT
+    @lpVtbl.value.get_conversion.unsafe_as(Proc(UInt8*, Int32, Int32, UInt8**, HRESULT)).call(string, start, length, result)
+  end
+end
+struct LibWin32::IFEDictionary
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def open(pchdictpath : UInt8*, pshf : IMESHF*) : HRESULT
+    @lpVtbl.value.open.unsafe_as(Proc(UInt8*, IMESHF*, HRESULT)).call(pchdictpath, pshf)
+  end
+  def close : HRESULT
+    @lpVtbl.value.close.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_header(pchdictpath : UInt8*, pshf : IMESHF*, pjfmt : IMEFMT*, pultype : UInt32*) : HRESULT
+    @lpVtbl.value.get_header.unsafe_as(Proc(UInt8*, IMESHF*, IMEFMT*, UInt32*, HRESULT)).call(pchdictpath, pshf, pjfmt, pultype)
+  end
+  def display_property(hwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.display_property.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hwnd)
+  end
+  def get_pos_table(prgpostbl : POSTBL**, pcpostbl : Int32*) : HRESULT
+    @lpVtbl.value.get_pos_table.unsafe_as(Proc(POSTBL**, Int32*, HRESULT)).call(prgpostbl, pcpostbl)
+  end
+  def get_words(pwchfirst : LibC::LPWSTR, pwchlast : LibC::LPWSTR, pwchdisplay : LibC::LPWSTR, ulpos : UInt32, ulselect : UInt32, ulwordsrc : UInt32, pchbuffer : UInt8*, cbbuffer : UInt32, pcwrd : UInt32*) : HRESULT
+    @lpVtbl.value.get_words.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt32, UInt32, UInt32, UInt8*, UInt32, UInt32*, HRESULT)).call(pwchfirst, pwchlast, pwchdisplay, ulpos, ulselect, ulwordsrc, pchbuffer, cbbuffer, pcwrd)
+  end
+  def next_words(pchbuffer : UInt8*, cbbuffer : UInt32, pcwrd : UInt32*) : HRESULT
+    @lpVtbl.value.next_words.unsafe_as(Proc(UInt8*, UInt32, UInt32*, HRESULT)).call(pchbuffer, cbbuffer, pcwrd)
+  end
+  def create(pchdictpath : PSTR, pshf : IMESHF*) : HRESULT
+    @lpVtbl.value.create.unsafe_as(Proc(PSTR, IMESHF*, HRESULT)).call(pchdictpath, pshf)
+  end
+  def set_header(pshf : IMESHF*) : HRESULT
+    @lpVtbl.value.set_header.unsafe_as(Proc(IMESHF*, HRESULT)).call(pshf)
+  end
+  def exist_word(pwrd : IMEWRD*) : HRESULT
+    @lpVtbl.value.exist_word.unsafe_as(Proc(IMEWRD*, HRESULT)).call(pwrd)
+  end
+  def exist_dependency(pdp : IMEDP*) : HRESULT
+    @lpVtbl.value.exist_dependency.unsafe_as(Proc(IMEDP*, HRESULT)).call(pdp)
+  end
+  def register_word(reg : IMEREG, pwrd : IMEWRD*) : HRESULT
+    @lpVtbl.value.register_word.unsafe_as(Proc(IMEREG, IMEWRD*, HRESULT)).call(reg, pwrd)
+  end
+  def register_dependency(reg : IMEREG, pdp : IMEDP*) : HRESULT
+    @lpVtbl.value.register_dependency.unsafe_as(Proc(IMEREG, IMEDP*, HRESULT)).call(reg, pdp)
+  end
+  def get_dependencies(pwchkakarireading : LibC::LPWSTR, pwchkakaridisplay : LibC::LPWSTR, ulkakaripos : UInt32, pwchukereading : LibC::LPWSTR, pwchukedisplay : LibC::LPWSTR, ulukepos : UInt32, jrel : IMEREL, ulwordsrc : UInt32, pchbuffer : UInt8*, cbbuffer : UInt32, pcdp : UInt32*) : HRESULT
+    @lpVtbl.value.get_dependencies.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR, LibC::LPWSTR, UInt32, IMEREL, UInt32, UInt8*, UInt32, UInt32*, HRESULT)).call(pwchkakarireading, pwchkakaridisplay, ulkakaripos, pwchukereading, pwchukedisplay, ulukepos, jrel, ulwordsrc, pchbuffer, cbbuffer, pcdp)
+  end
+  def next_dependencies(pchbuffer : UInt8*, cbbuffer : UInt32, pcdp : UInt32*) : HRESULT
+    @lpVtbl.value.next_dependencies.unsafe_as(Proc(UInt8*, UInt32, UInt32*, HRESULT)).call(pchbuffer, cbbuffer, pcdp)
+  end
+  def convert_from_old_msime(pchdic : PSTR, pfnlog : PFNLOG, reg : IMEREG) : HRESULT
+    @lpVtbl.value.convert_from_old_msime.unsafe_as(Proc(PSTR, PFNLOG, IMEREG, HRESULT)).call(pchdic, pfnlog, reg)
+  end
+  def convert_from_user_to_sys : HRESULT
+    @lpVtbl.value.convert_from_user_to_sys.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IImeSpecifyApplets
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_applet_iid_list(refiid : Guid*, lpiidlist : APPLETIDLIST*) : HRESULT
+    @lpVtbl.value.get_applet_iid_list.unsafe_as(Proc(Guid*, APPLETIDLIST*, HRESULT)).call(refiid, lpiidlist)
+  end
+end
+struct LibWin32::IImePadApplet
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def initialize(lpiimepad : IUnknown) : HRESULT
+    @lpVtbl.value.initialize.unsafe_as(Proc(IUnknown, HRESULT)).call(lpiimepad)
+  end
+  def terminate : HRESULT
+    @lpVtbl.value.terminate.unsafe_as(Proc(HRESULT)).call
+  end
+  def get_applet_config(lpappletcfg : IMEAPPLETCFG*) : HRESULT
+    @lpVtbl.value.get_applet_config.unsafe_as(Proc(IMEAPPLETCFG*, HRESULT)).call(lpappletcfg)
+  end
+  def create_ui(hwndparent : LibC::HANDLE, lpimeappletui : IMEAPPLETUI*) : HRESULT
+    @lpVtbl.value.create_ui.unsafe_as(Proc(LibC::HANDLE, IMEAPPLETUI*, HRESULT)).call(hwndparent, lpimeappletui)
+  end
+  def notify(lpimepad : IUnknown, notify : Int32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.notify.unsafe_as(Proc(IUnknown, Int32, LibC::UINT_PTR, LPARAM, HRESULT)).call(lpimepad, notify, wparam, lparam)
+  end
+end
+struct LibWin32::IImePad
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def request(piimepadapplet : IImePadApplet, reqid : IME_PAD_REQUEST_FLAGS, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.request.unsafe_as(Proc(IImePadApplet, IME_PAD_REQUEST_FLAGS, LibC::UINT_PTR, LPARAM, HRESULT)).call(piimepadapplet, reqid, wparam, lparam)
+  end
+end
+struct LibWin32::IImePlugInDictDictionaryList
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def get_dictionaries_in_use(prgdictionaryguid : SAFEARRAY**, prgdatecreated : SAFEARRAY**, prgfencrypted : SAFEARRAY**) : HRESULT
+    @lpVtbl.value.get_dictionaries_in_use.unsafe_as(Proc(SAFEARRAY**, SAFEARRAY**, SAFEARRAY**, HRESULT)).call(prgdictionaryguid, prgdatecreated, prgfencrypted)
+  end
+  def delete_dictionary(bstrdictionaryguid : UInt8*) : HRESULT
+    @lpVtbl.value.delete_dictionary.unsafe_as(Proc(UInt8*, HRESULT)).call(bstrdictionaryguid)
+  end
+end
+struct LibWin32::IEnumRegisterWordA
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumRegisterWordA*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumRegisterWordA*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, rgregisterword : REGISTERWORDA*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, REGISTERWORDA*, UInt32*, HRESULT)).call(ulcount, rgregisterword, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::IEnumRegisterWordW
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumRegisterWordW*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumRegisterWordW*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, rgregisterword : REGISTERWORDW*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, REGISTERWORDW*, UInt32*, HRESULT)).call(ulcount, rgregisterword, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::IEnumInputContext
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def clone(ppenum : IEnumInputContext*) : HRESULT
+    @lpVtbl.value.clone.unsafe_as(Proc(IEnumInputContext*, HRESULT)).call(ppenum)
+  end
+  def next(ulcount : UInt32, rginputcontext : HIMC*, pcfetched : UInt32*) : HRESULT
+    @lpVtbl.value.next.unsafe_as(Proc(UInt32, HIMC*, UInt32*, HRESULT)).call(ulcount, rginputcontext, pcfetched)
+  end
+  def reset : HRESULT
+    @lpVtbl.value.reset.unsafe_as(Proc(HRESULT)).call
+  end
+  def skip(ulcount : UInt32) : HRESULT
+    @lpVtbl.value.skip.unsafe_as(Proc(UInt32, HRESULT)).call(ulcount)
+  end
+end
+struct LibWin32::IActiveIMMRegistrar
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def register_ime(rclsid : Guid*, lgid : UInt16, psziconfile : LibC::LPWSTR, pszdesc : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_ime.unsafe_as(Proc(Guid*, UInt16, LibC::LPWSTR, LibC::LPWSTR, HRESULT)).call(rclsid, lgid, psziconfile, pszdesc)
+  end
+  def unregister_ime(rclsid : Guid*) : HRESULT
+    @lpVtbl.value.unregister_ime.unsafe_as(Proc(Guid*, HRESULT)).call(rclsid)
+  end
+end
+struct LibWin32::IActiveIMMMessagePumpOwner
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def start : HRESULT
+    @lpVtbl.value.start.unsafe_as(Proc(HRESULT)).call
+  end
+  def end_ : HRESULT
+    @lpVtbl.value.end_.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_translate_message(pmsg : MSG*) : HRESULT
+    @lpVtbl.value.on_translate_message.unsafe_as(Proc(MSG*, HRESULT)).call(pmsg)
+  end
+  def pause(pdwcookie : UInt32*) : HRESULT
+    @lpVtbl.value.pause.unsafe_as(Proc(UInt32*, HRESULT)).call(pdwcookie)
+  end
+  def resume(dwcookie : UInt32) : HRESULT
+    @lpVtbl.value.resume.unsafe_as(Proc(UInt32, HRESULT)).call(dwcookie)
+  end
+end
+struct LibWin32::IActiveIMMApp
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def associate_context(hwnd : LibC::HANDLE, hime : HIMC, phprev : HIMC*) : HRESULT
+    @lpVtbl.value.associate_context.unsafe_as(Proc(LibC::HANDLE, HIMC, HIMC*, HRESULT)).call(hwnd, hime, phprev)
+  end
+  def configure_imea(hkl : HKL, hwnd : LibC::HANDLE, dwmode : UInt32, pdata : REGISTERWORDA*) : HRESULT
+    @lpVtbl.value.configure_imea.unsafe_as(Proc(HKL, LibC::HANDLE, UInt32, REGISTERWORDA*, HRESULT)).call(hkl, hwnd, dwmode, pdata)
+  end
+  def configure_imew(hkl : HKL, hwnd : LibC::HANDLE, dwmode : UInt32, pdata : REGISTERWORDW*) : HRESULT
+    @lpVtbl.value.configure_imew.unsafe_as(Proc(HKL, LibC::HANDLE, UInt32, REGISTERWORDW*, HRESULT)).call(hkl, hwnd, dwmode, pdata)
+  end
+  def create_context(phimc : HIMC*) : HRESULT
+    @lpVtbl.value.create_context.unsafe_as(Proc(HIMC*, HRESULT)).call(phimc)
+  end
+  def destroy_context(hime : HIMC) : HRESULT
+    @lpVtbl.value.destroy_context.unsafe_as(Proc(HIMC, HRESULT)).call(hime)
+  end
+  def enum_register_word_a(hkl : HKL, szreading : PSTR, dwstyle : UInt32, szregister : PSTR, pdata : Void*, penum : IEnumRegisterWordA*) : HRESULT
+    @lpVtbl.value.enum_register_word_a.unsafe_as(Proc(HKL, PSTR, UInt32, PSTR, Void*, IEnumRegisterWordA*, HRESULT)).call(hkl, szreading, dwstyle, szregister, pdata, penum)
+  end
+  def enum_register_word_w(hkl : HKL, szreading : LibC::LPWSTR, dwstyle : UInt32, szregister : LibC::LPWSTR, pdata : Void*, penum : IEnumRegisterWordW*) : HRESULT
+    @lpVtbl.value.enum_register_word_w.unsafe_as(Proc(HKL, LibC::LPWSTR, UInt32, LibC::LPWSTR, Void*, IEnumRegisterWordW*, HRESULT)).call(hkl, szreading, dwstyle, szregister, pdata, penum)
+  end
+  def escape_a(hkl : HKL, himc : HIMC, uescape : UInt32, pdata : Void*, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.escape_a.unsafe_as(Proc(HKL, HIMC, UInt32, Void*, LRESULT*, HRESULT)).call(hkl, himc, uescape, pdata, plresult)
+  end
+  def escape_w(hkl : HKL, himc : HIMC, uescape : UInt32, pdata : Void*, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.escape_w.unsafe_as(Proc(HKL, HIMC, UInt32, Void*, LRESULT*, HRESULT)).call(hkl, himc, uescape, pdata, plresult)
+  end
+  def get_candidate_list_a(himc : HIMC, dwindex : UInt32, ubuflen : UInt32, pcandlist : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_list_a.unsafe_as(Proc(HIMC, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)).call(himc, dwindex, ubuflen, pcandlist, pucopied)
+  end
+  def get_candidate_list_w(himc : HIMC, dwindex : UInt32, ubuflen : UInt32, pcandlist : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_list_w.unsafe_as(Proc(HIMC, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)).call(himc, dwindex, ubuflen, pcandlist, pucopied)
+  end
+  def get_candidate_list_count_a(himc : HIMC, pdwlistsize : UInt32*, pdwbuflen : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_list_count_a.unsafe_as(Proc(HIMC, UInt32*, UInt32*, HRESULT)).call(himc, pdwlistsize, pdwbuflen)
+  end
+  def get_candidate_list_count_w(himc : HIMC, pdwlistsize : UInt32*, pdwbuflen : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_list_count_w.unsafe_as(Proc(HIMC, UInt32*, UInt32*, HRESULT)).call(himc, pdwlistsize, pdwbuflen)
+  end
+  def get_candidate_window(himc : HIMC, dwindex : UInt32, pcandidate : CANDIDATEFORM*) : HRESULT
+    @lpVtbl.value.get_candidate_window.unsafe_as(Proc(HIMC, UInt32, CANDIDATEFORM*, HRESULT)).call(himc, dwindex, pcandidate)
+  end
+  def get_composition_font_a(himc : HIMC, plf : LOGFONTA*) : HRESULT
+    @lpVtbl.value.get_composition_font_a.unsafe_as(Proc(HIMC, LOGFONTA*, HRESULT)).call(himc, plf)
+  end
+  def get_composition_font_w(himc : HIMC, plf : LOGFONTW*) : HRESULT
+    @lpVtbl.value.get_composition_font_w.unsafe_as(Proc(HIMC, LOGFONTW*, HRESULT)).call(himc, plf)
+  end
+  def get_composition_string_a(himc : HIMC, dwindex : UInt32, dwbuflen : UInt32, plcopied : Int32*, pbuf : Void*) : HRESULT
+    @lpVtbl.value.get_composition_string_a.unsafe_as(Proc(HIMC, UInt32, UInt32, Int32*, Void*, HRESULT)).call(himc, dwindex, dwbuflen, plcopied, pbuf)
+  end
+  def get_composition_string_w(himc : HIMC, dwindex : UInt32, dwbuflen : UInt32, plcopied : Int32*, pbuf : Void*) : HRESULT
+    @lpVtbl.value.get_composition_string_w.unsafe_as(Proc(HIMC, UInt32, UInt32, Int32*, Void*, HRESULT)).call(himc, dwindex, dwbuflen, plcopied, pbuf)
+  end
+  def get_composition_window(himc : HIMC, pcompform : COMPOSITIONFORM*) : HRESULT
+    @lpVtbl.value.get_composition_window.unsafe_as(Proc(HIMC, COMPOSITIONFORM*, HRESULT)).call(himc, pcompform)
+  end
+  def get_context(hwnd : LibC::HANDLE, phimc : HIMC*) : HRESULT
+    @lpVtbl.value.get_context.unsafe_as(Proc(LibC::HANDLE, HIMC*, HRESULT)).call(hwnd, phimc)
+  end
+  def get_conversion_list_a(hkl : HKL, himc : HIMC, psrc : PSTR, ubuflen : UInt32, uflag : UInt32, pdst : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_conversion_list_a.unsafe_as(Proc(HKL, HIMC, PSTR, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)).call(hkl, himc, psrc, ubuflen, uflag, pdst, pucopied)
+  end
+  def get_conversion_list_w(hkl : HKL, himc : HIMC, psrc : LibC::LPWSTR, ubuflen : UInt32, uflag : UInt32, pdst : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_conversion_list_w.unsafe_as(Proc(HKL, HIMC, LibC::LPWSTR, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)).call(hkl, himc, psrc, ubuflen, uflag, pdst, pucopied)
+  end
+  def get_conversion_status(himc : HIMC, pfdwconversion : UInt32*, pfdwsentence : UInt32*) : HRESULT
+    @lpVtbl.value.get_conversion_status.unsafe_as(Proc(HIMC, UInt32*, UInt32*, HRESULT)).call(himc, pfdwconversion, pfdwsentence)
+  end
+  def get_default_ime_wnd(hwnd : LibC::HANDLE, phdefwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_default_ime_wnd.unsafe_as(Proc(LibC::HANDLE, HANDLE*, HRESULT)).call(hwnd, phdefwnd)
+  end
+  def get_description_a(hkl : HKL, ubuflen : UInt32, szdescription : PSTR, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_description_a.unsafe_as(Proc(HKL, UInt32, PSTR, UInt32*, HRESULT)).call(hkl, ubuflen, szdescription, pucopied)
+  end
+  def get_description_w(hkl : HKL, ubuflen : UInt32, szdescription : LibC::LPWSTR, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_description_w.unsafe_as(Proc(HKL, UInt32, LibC::LPWSTR, UInt32*, HRESULT)).call(hkl, ubuflen, szdescription, pucopied)
+  end
+  def get_guide_line_a(himc : HIMC, dwindex : UInt32, dwbuflen : UInt32, pbuf : PSTR, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.get_guide_line_a.unsafe_as(Proc(HIMC, UInt32, UInt32, PSTR, UInt32*, HRESULT)).call(himc, dwindex, dwbuflen, pbuf, pdwresult)
+  end
+  def get_guide_line_w(himc : HIMC, dwindex : UInt32, dwbuflen : UInt32, pbuf : LibC::LPWSTR, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.get_guide_line_w.unsafe_as(Proc(HIMC, UInt32, UInt32, LibC::LPWSTR, UInt32*, HRESULT)).call(himc, dwindex, dwbuflen, pbuf, pdwresult)
+  end
+  def get_ime_file_name_a(hkl : HKL, ubuflen : UInt32, szfilename : PSTR, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_ime_file_name_a.unsafe_as(Proc(HKL, UInt32, PSTR, UInt32*, HRESULT)).call(hkl, ubuflen, szfilename, pucopied)
+  end
+  def get_ime_file_name_w(hkl : HKL, ubuflen : UInt32, szfilename : LibC::LPWSTR, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_ime_file_name_w.unsafe_as(Proc(HKL, UInt32, LibC::LPWSTR, UInt32*, HRESULT)).call(hkl, ubuflen, szfilename, pucopied)
+  end
+  def get_open_status(himc : HIMC) : HRESULT
+    @lpVtbl.value.get_open_status.unsafe_as(Proc(HIMC, HRESULT)).call(himc)
+  end
+  def get_property(hkl : HKL, fdwindex : UInt32, pdwproperty : UInt32*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(HKL, UInt32, UInt32*, HRESULT)).call(hkl, fdwindex, pdwproperty)
+  end
+  def get_register_word_style_a(hkl : HKL, nitem : UInt32, pstylebuf : STYLEBUFA*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_register_word_style_a.unsafe_as(Proc(HKL, UInt32, STYLEBUFA*, UInt32*, HRESULT)).call(hkl, nitem, pstylebuf, pucopied)
+  end
+  def get_register_word_style_w(hkl : HKL, nitem : UInt32, pstylebuf : STYLEBUFW*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_register_word_style_w.unsafe_as(Proc(HKL, UInt32, STYLEBUFW*, UInt32*, HRESULT)).call(hkl, nitem, pstylebuf, pucopied)
+  end
+  def get_status_window_pos(himc : HIMC, pptpos : POINT*) : HRESULT
+    @lpVtbl.value.get_status_window_pos.unsafe_as(Proc(HIMC, POINT*, HRESULT)).call(himc, pptpos)
+  end
+  def get_virtual_key(hwnd : LibC::HANDLE, puvirtualkey : UInt32*) : HRESULT
+    @lpVtbl.value.get_virtual_key.unsafe_as(Proc(LibC::HANDLE, UInt32*, HRESULT)).call(hwnd, puvirtualkey)
+  end
+  def install_imea(szimefilename : PSTR, szlayouttext : PSTR, phkl : HKL*) : HRESULT
+    @lpVtbl.value.install_imea.unsafe_as(Proc(PSTR, PSTR, HKL*, HRESULT)).call(szimefilename, szlayouttext, phkl)
+  end
+  def install_imew(szimefilename : LibC::LPWSTR, szlayouttext : LibC::LPWSTR, phkl : HKL*) : HRESULT
+    @lpVtbl.value.install_imew.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HKL*, HRESULT)).call(szimefilename, szlayouttext, phkl)
+  end
+  def is_ime(hkl : HKL) : HRESULT
+    @lpVtbl.value.is_ime.unsafe_as(Proc(HKL, HRESULT)).call(hkl)
+  end
+  def is_ui_message_a(hwndime : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.is_ui_message_a.unsafe_as(Proc(LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)).call(hwndime, msg, wparam, lparam)
+  end
+  def is_ui_message_w(hwndime : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.is_ui_message_w.unsafe_as(Proc(LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)).call(hwndime, msg, wparam, lparam)
+  end
+  def notify_ime(himc : HIMC, dwaction : UInt32, dwindex : UInt32, dwvalue : UInt32) : HRESULT
+    @lpVtbl.value.notify_ime.unsafe_as(Proc(HIMC, UInt32, UInt32, UInt32, HRESULT)).call(himc, dwaction, dwindex, dwvalue)
+  end
+  def register_word_a(hkl : HKL, szreading : PSTR, dwstyle : UInt32, szregister : PSTR) : HRESULT
+    @lpVtbl.value.register_word_a.unsafe_as(Proc(HKL, PSTR, UInt32, PSTR, HRESULT)).call(hkl, szreading, dwstyle, szregister)
+  end
+  def register_word_w(hkl : HKL, szreading : LibC::LPWSTR, dwstyle : UInt32, szregister : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_word_w.unsafe_as(Proc(HKL, LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)).call(hkl, szreading, dwstyle, szregister)
+  end
+  def release_context(hwnd : LibC::HANDLE, himc : HIMC) : HRESULT
+    @lpVtbl.value.release_context.unsafe_as(Proc(LibC::HANDLE, HIMC, HRESULT)).call(hwnd, himc)
+  end
+  def set_candidate_window(himc : HIMC, pcandidate : CANDIDATEFORM*) : HRESULT
+    @lpVtbl.value.set_candidate_window.unsafe_as(Proc(HIMC, CANDIDATEFORM*, HRESULT)).call(himc, pcandidate)
+  end
+  def set_composition_font_a(himc : HIMC, plf : LOGFONTA*) : HRESULT
+    @lpVtbl.value.set_composition_font_a.unsafe_as(Proc(HIMC, LOGFONTA*, HRESULT)).call(himc, plf)
+  end
+  def set_composition_font_w(himc : HIMC, plf : LOGFONTW*) : HRESULT
+    @lpVtbl.value.set_composition_font_w.unsafe_as(Proc(HIMC, LOGFONTW*, HRESULT)).call(himc, plf)
+  end
+  def set_composition_string_a(himc : HIMC, dwindex : UInt32, pcomp : Void*, dwcomplen : UInt32, pread : Void*, dwreadlen : UInt32) : HRESULT
+    @lpVtbl.value.set_composition_string_a.unsafe_as(Proc(HIMC, UInt32, Void*, UInt32, Void*, UInt32, HRESULT)).call(himc, dwindex, pcomp, dwcomplen, pread, dwreadlen)
+  end
+  def set_composition_string_w(himc : HIMC, dwindex : UInt32, pcomp : Void*, dwcomplen : UInt32, pread : Void*, dwreadlen : UInt32) : HRESULT
+    @lpVtbl.value.set_composition_string_w.unsafe_as(Proc(HIMC, UInt32, Void*, UInt32, Void*, UInt32, HRESULT)).call(himc, dwindex, pcomp, dwcomplen, pread, dwreadlen)
+  end
+  def set_composition_window(himc : HIMC, pcompform : COMPOSITIONFORM*) : HRESULT
+    @lpVtbl.value.set_composition_window.unsafe_as(Proc(HIMC, COMPOSITIONFORM*, HRESULT)).call(himc, pcompform)
+  end
+  def set_conversion_status(himc : HIMC, fdwconversion : UInt32, fdwsentence : UInt32) : HRESULT
+    @lpVtbl.value.set_conversion_status.unsafe_as(Proc(HIMC, UInt32, UInt32, HRESULT)).call(himc, fdwconversion, fdwsentence)
+  end
+  def set_open_status(himc : HIMC, fopen : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_open_status.unsafe_as(Proc(HIMC, LibC::BOOL, HRESULT)).call(himc, fopen)
+  end
+  def set_status_window_pos(himc : HIMC, pptpos : POINT*) : HRESULT
+    @lpVtbl.value.set_status_window_pos.unsafe_as(Proc(HIMC, POINT*, HRESULT)).call(himc, pptpos)
+  end
+  def simulate_hot_key(hwnd : LibC::HANDLE, dwhotkeyid : UInt32) : HRESULT
+    @lpVtbl.value.simulate_hot_key.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(hwnd, dwhotkeyid)
+  end
+  def unregister_word_a(hkl : HKL, szreading : PSTR, dwstyle : UInt32, szunregister : PSTR) : HRESULT
+    @lpVtbl.value.unregister_word_a.unsafe_as(Proc(HKL, PSTR, UInt32, PSTR, HRESULT)).call(hkl, szreading, dwstyle, szunregister)
+  end
+  def unregister_word_w(hkl : HKL, szreading : LibC::LPWSTR, dwstyle : UInt32, szunregister : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_word_w.unsafe_as(Proc(HKL, LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)).call(hkl, szreading, dwstyle, szunregister)
+  end
+  def activate(frestorelayout : LibC::BOOL) : HRESULT
+    @lpVtbl.value.activate.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(frestorelayout)
+  end
+  def deactivate : HRESULT
+    @lpVtbl.value.deactivate.unsafe_as(Proc(HRESULT)).call
+  end
+  def on_def_window_proc(hwnd : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.on_def_window_proc.unsafe_as(Proc(LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, HRESULT)).call(hwnd, msg, wparam, lparam, plresult)
+  end
+  def filter_client_windows(aaclasslist : UInt16*, usize : UInt32) : HRESULT
+    @lpVtbl.value.filter_client_windows.unsafe_as(Proc(UInt16*, UInt32, HRESULT)).call(aaclasslist, usize)
+  end
+  def get_code_page_a(hkl : HKL, ucodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_page_a.unsafe_as(Proc(HKL, UInt32*, HRESULT)).call(hkl, ucodepage)
+  end
+  def get_lang_id(hkl : HKL, plid : UInt16*) : HRESULT
+    @lpVtbl.value.get_lang_id.unsafe_as(Proc(HKL, UInt16*, HRESULT)).call(hkl, plid)
+  end
+  def associate_context_ex(hwnd : LibC::HANDLE, himc : HIMC, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.associate_context_ex.unsafe_as(Proc(LibC::HANDLE, HIMC, UInt32, HRESULT)).call(hwnd, himc, dwflags)
+  end
+  def disable_ime(idthread : UInt32) : HRESULT
+    @lpVtbl.value.disable_ime.unsafe_as(Proc(UInt32, HRESULT)).call(idthread)
+  end
+  def get_ime_menu_items_a(himc : HIMC, dwflags : UInt32, dwtype : UInt32, pimeparentmenu : IMEMENUITEMINFOA*, pimemenu : IMEMENUITEMINFOA*, dwsize : UInt32, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.get_ime_menu_items_a.unsafe_as(Proc(HIMC, UInt32, UInt32, IMEMENUITEMINFOA*, IMEMENUITEMINFOA*, UInt32, UInt32*, HRESULT)).call(himc, dwflags, dwtype, pimeparentmenu, pimemenu, dwsize, pdwresult)
+  end
+  def get_ime_menu_items_w(himc : HIMC, dwflags : UInt32, dwtype : UInt32, pimeparentmenu : IMEMENUITEMINFOW*, pimemenu : IMEMENUITEMINFOW*, dwsize : UInt32, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.get_ime_menu_items_w.unsafe_as(Proc(HIMC, UInt32, UInt32, IMEMENUITEMINFOW*, IMEMENUITEMINFOW*, UInt32, UInt32*, HRESULT)).call(himc, dwflags, dwtype, pimeparentmenu, pimemenu, dwsize, pdwresult)
+  end
+  def enum_input_context(idthread : UInt32, ppenum : IEnumInputContext*) : HRESULT
+    @lpVtbl.value.enum_input_context.unsafe_as(Proc(UInt32, IEnumInputContext*, HRESULT)).call(idthread, ppenum)
+  end
+end
+struct LibWin32::IActiveIMMIME
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def associate_context(hwnd : LibC::HANDLE, hime : HIMC, phprev : HIMC*) : HRESULT
+    @lpVtbl.value.associate_context.unsafe_as(Proc(LibC::HANDLE, HIMC, HIMC*, HRESULT)).call(hwnd, hime, phprev)
+  end
+  def configure_imea(hkl : HKL, hwnd : LibC::HANDLE, dwmode : UInt32, pdata : REGISTERWORDA*) : HRESULT
+    @lpVtbl.value.configure_imea.unsafe_as(Proc(HKL, LibC::HANDLE, UInt32, REGISTERWORDA*, HRESULT)).call(hkl, hwnd, dwmode, pdata)
+  end
+  def configure_imew(hkl : HKL, hwnd : LibC::HANDLE, dwmode : UInt32, pdata : REGISTERWORDW*) : HRESULT
+    @lpVtbl.value.configure_imew.unsafe_as(Proc(HKL, LibC::HANDLE, UInt32, REGISTERWORDW*, HRESULT)).call(hkl, hwnd, dwmode, pdata)
+  end
+  def create_context(phimc : HIMC*) : HRESULT
+    @lpVtbl.value.create_context.unsafe_as(Proc(HIMC*, HRESULT)).call(phimc)
+  end
+  def destroy_context(hime : HIMC) : HRESULT
+    @lpVtbl.value.destroy_context.unsafe_as(Proc(HIMC, HRESULT)).call(hime)
+  end
+  def enum_register_word_a(hkl : HKL, szreading : PSTR, dwstyle : UInt32, szregister : PSTR, pdata : Void*, penum : IEnumRegisterWordA*) : HRESULT
+    @lpVtbl.value.enum_register_word_a.unsafe_as(Proc(HKL, PSTR, UInt32, PSTR, Void*, IEnumRegisterWordA*, HRESULT)).call(hkl, szreading, dwstyle, szregister, pdata, penum)
+  end
+  def enum_register_word_w(hkl : HKL, szreading : LibC::LPWSTR, dwstyle : UInt32, szregister : LibC::LPWSTR, pdata : Void*, penum : IEnumRegisterWordW*) : HRESULT
+    @lpVtbl.value.enum_register_word_w.unsafe_as(Proc(HKL, LibC::LPWSTR, UInt32, LibC::LPWSTR, Void*, IEnumRegisterWordW*, HRESULT)).call(hkl, szreading, dwstyle, szregister, pdata, penum)
+  end
+  def escape_a(hkl : HKL, himc : HIMC, uescape : UInt32, pdata : Void*, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.escape_a.unsafe_as(Proc(HKL, HIMC, UInt32, Void*, LRESULT*, HRESULT)).call(hkl, himc, uescape, pdata, plresult)
+  end
+  def escape_w(hkl : HKL, himc : HIMC, uescape : UInt32, pdata : Void*, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.escape_w.unsafe_as(Proc(HKL, HIMC, UInt32, Void*, LRESULT*, HRESULT)).call(hkl, himc, uescape, pdata, plresult)
+  end
+  def get_candidate_list_a(himc : HIMC, dwindex : UInt32, ubuflen : UInt32, pcandlist : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_list_a.unsafe_as(Proc(HIMC, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)).call(himc, dwindex, ubuflen, pcandlist, pucopied)
+  end
+  def get_candidate_list_w(himc : HIMC, dwindex : UInt32, ubuflen : UInt32, pcandlist : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_list_w.unsafe_as(Proc(HIMC, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)).call(himc, dwindex, ubuflen, pcandlist, pucopied)
+  end
+  def get_candidate_list_count_a(himc : HIMC, pdwlistsize : UInt32*, pdwbuflen : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_list_count_a.unsafe_as(Proc(HIMC, UInt32*, UInt32*, HRESULT)).call(himc, pdwlistsize, pdwbuflen)
+  end
+  def get_candidate_list_count_w(himc : HIMC, pdwlistsize : UInt32*, pdwbuflen : UInt32*) : HRESULT
+    @lpVtbl.value.get_candidate_list_count_w.unsafe_as(Proc(HIMC, UInt32*, UInt32*, HRESULT)).call(himc, pdwlistsize, pdwbuflen)
+  end
+  def get_candidate_window(himc : HIMC, dwindex : UInt32, pcandidate : CANDIDATEFORM*) : HRESULT
+    @lpVtbl.value.get_candidate_window.unsafe_as(Proc(HIMC, UInt32, CANDIDATEFORM*, HRESULT)).call(himc, dwindex, pcandidate)
+  end
+  def get_composition_font_a(himc : HIMC, plf : LOGFONTA*) : HRESULT
+    @lpVtbl.value.get_composition_font_a.unsafe_as(Proc(HIMC, LOGFONTA*, HRESULT)).call(himc, plf)
+  end
+  def get_composition_font_w(himc : HIMC, plf : LOGFONTW*) : HRESULT
+    @lpVtbl.value.get_composition_font_w.unsafe_as(Proc(HIMC, LOGFONTW*, HRESULT)).call(himc, plf)
+  end
+  def get_composition_string_a(himc : HIMC, dwindex : UInt32, dwbuflen : UInt32, plcopied : Int32*, pbuf : Void*) : HRESULT
+    @lpVtbl.value.get_composition_string_a.unsafe_as(Proc(HIMC, UInt32, UInt32, Int32*, Void*, HRESULT)).call(himc, dwindex, dwbuflen, plcopied, pbuf)
+  end
+  def get_composition_string_w(himc : HIMC, dwindex : UInt32, dwbuflen : UInt32, plcopied : Int32*, pbuf : Void*) : HRESULT
+    @lpVtbl.value.get_composition_string_w.unsafe_as(Proc(HIMC, UInt32, UInt32, Int32*, Void*, HRESULT)).call(himc, dwindex, dwbuflen, plcopied, pbuf)
+  end
+  def get_composition_window(himc : HIMC, pcompform : COMPOSITIONFORM*) : HRESULT
+    @lpVtbl.value.get_composition_window.unsafe_as(Proc(HIMC, COMPOSITIONFORM*, HRESULT)).call(himc, pcompform)
+  end
+  def get_context(hwnd : LibC::HANDLE, phimc : HIMC*) : HRESULT
+    @lpVtbl.value.get_context.unsafe_as(Proc(LibC::HANDLE, HIMC*, HRESULT)).call(hwnd, phimc)
+  end
+  def get_conversion_list_a(hkl : HKL, himc : HIMC, psrc : PSTR, ubuflen : UInt32, uflag : UInt32, pdst : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_conversion_list_a.unsafe_as(Proc(HKL, HIMC, PSTR, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)).call(hkl, himc, psrc, ubuflen, uflag, pdst, pucopied)
+  end
+  def get_conversion_list_w(hkl : HKL, himc : HIMC, psrc : LibC::LPWSTR, ubuflen : UInt32, uflag : UInt32, pdst : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_conversion_list_w.unsafe_as(Proc(HKL, HIMC, LibC::LPWSTR, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)).call(hkl, himc, psrc, ubuflen, uflag, pdst, pucopied)
+  end
+  def get_conversion_status(himc : HIMC, pfdwconversion : UInt32*, pfdwsentence : UInt32*) : HRESULT
+    @lpVtbl.value.get_conversion_status.unsafe_as(Proc(HIMC, UInt32*, UInt32*, HRESULT)).call(himc, pfdwconversion, pfdwsentence)
+  end
+  def get_default_ime_wnd(hwnd : LibC::HANDLE, phdefwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.get_default_ime_wnd.unsafe_as(Proc(LibC::HANDLE, HANDLE*, HRESULT)).call(hwnd, phdefwnd)
+  end
+  def get_description_a(hkl : HKL, ubuflen : UInt32, szdescription : PSTR, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_description_a.unsafe_as(Proc(HKL, UInt32, PSTR, UInt32*, HRESULT)).call(hkl, ubuflen, szdescription, pucopied)
+  end
+  def get_description_w(hkl : HKL, ubuflen : UInt32, szdescription : LibC::LPWSTR, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_description_w.unsafe_as(Proc(HKL, UInt32, LibC::LPWSTR, UInt32*, HRESULT)).call(hkl, ubuflen, szdescription, pucopied)
+  end
+  def get_guide_line_a(himc : HIMC, dwindex : UInt32, dwbuflen : UInt32, pbuf : PSTR, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.get_guide_line_a.unsafe_as(Proc(HIMC, UInt32, UInt32, PSTR, UInt32*, HRESULT)).call(himc, dwindex, dwbuflen, pbuf, pdwresult)
+  end
+  def get_guide_line_w(himc : HIMC, dwindex : UInt32, dwbuflen : UInt32, pbuf : LibC::LPWSTR, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.get_guide_line_w.unsafe_as(Proc(HIMC, UInt32, UInt32, LibC::LPWSTR, UInt32*, HRESULT)).call(himc, dwindex, dwbuflen, pbuf, pdwresult)
+  end
+  def get_ime_file_name_a(hkl : HKL, ubuflen : UInt32, szfilename : PSTR, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_ime_file_name_a.unsafe_as(Proc(HKL, UInt32, PSTR, UInt32*, HRESULT)).call(hkl, ubuflen, szfilename, pucopied)
+  end
+  def get_ime_file_name_w(hkl : HKL, ubuflen : UInt32, szfilename : LibC::LPWSTR, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_ime_file_name_w.unsafe_as(Proc(HKL, UInt32, LibC::LPWSTR, UInt32*, HRESULT)).call(hkl, ubuflen, szfilename, pucopied)
+  end
+  def get_open_status(himc : HIMC) : HRESULT
+    @lpVtbl.value.get_open_status.unsafe_as(Proc(HIMC, HRESULT)).call(himc)
+  end
+  def get_property(hkl : HKL, fdwindex : UInt32, pdwproperty : UInt32*) : HRESULT
+    @lpVtbl.value.get_property.unsafe_as(Proc(HKL, UInt32, UInt32*, HRESULT)).call(hkl, fdwindex, pdwproperty)
+  end
+  def get_register_word_style_a(hkl : HKL, nitem : UInt32, pstylebuf : STYLEBUFA*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_register_word_style_a.unsafe_as(Proc(HKL, UInt32, STYLEBUFA*, UInt32*, HRESULT)).call(hkl, nitem, pstylebuf, pucopied)
+  end
+  def get_register_word_style_w(hkl : HKL, nitem : UInt32, pstylebuf : STYLEBUFW*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.get_register_word_style_w.unsafe_as(Proc(HKL, UInt32, STYLEBUFW*, UInt32*, HRESULT)).call(hkl, nitem, pstylebuf, pucopied)
+  end
+  def get_status_window_pos(himc : HIMC, pptpos : POINT*) : HRESULT
+    @lpVtbl.value.get_status_window_pos.unsafe_as(Proc(HIMC, POINT*, HRESULT)).call(himc, pptpos)
+  end
+  def get_virtual_key(hwnd : LibC::HANDLE, puvirtualkey : UInt32*) : HRESULT
+    @lpVtbl.value.get_virtual_key.unsafe_as(Proc(LibC::HANDLE, UInt32*, HRESULT)).call(hwnd, puvirtualkey)
+  end
+  def install_imea(szimefilename : PSTR, szlayouttext : PSTR, phkl : HKL*) : HRESULT
+    @lpVtbl.value.install_imea.unsafe_as(Proc(PSTR, PSTR, HKL*, HRESULT)).call(szimefilename, szlayouttext, phkl)
+  end
+  def install_imew(szimefilename : LibC::LPWSTR, szlayouttext : LibC::LPWSTR, phkl : HKL*) : HRESULT
+    @lpVtbl.value.install_imew.unsafe_as(Proc(LibC::LPWSTR, LibC::LPWSTR, HKL*, HRESULT)).call(szimefilename, szlayouttext, phkl)
+  end
+  def is_ime(hkl : HKL) : HRESULT
+    @lpVtbl.value.is_ime.unsafe_as(Proc(HKL, HRESULT)).call(hkl)
+  end
+  def is_ui_message_a(hwndime : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.is_ui_message_a.unsafe_as(Proc(LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)).call(hwndime, msg, wparam, lparam)
+  end
+  def is_ui_message_w(hwndime : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
+    @lpVtbl.value.is_ui_message_w.unsafe_as(Proc(LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)).call(hwndime, msg, wparam, lparam)
+  end
+  def notify_ime(himc : HIMC, dwaction : UInt32, dwindex : UInt32, dwvalue : UInt32) : HRESULT
+    @lpVtbl.value.notify_ime.unsafe_as(Proc(HIMC, UInt32, UInt32, UInt32, HRESULT)).call(himc, dwaction, dwindex, dwvalue)
+  end
+  def register_word_a(hkl : HKL, szreading : PSTR, dwstyle : UInt32, szregister : PSTR) : HRESULT
+    @lpVtbl.value.register_word_a.unsafe_as(Proc(HKL, PSTR, UInt32, PSTR, HRESULT)).call(hkl, szreading, dwstyle, szregister)
+  end
+  def register_word_w(hkl : HKL, szreading : LibC::LPWSTR, dwstyle : UInt32, szregister : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_word_w.unsafe_as(Proc(HKL, LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)).call(hkl, szreading, dwstyle, szregister)
+  end
+  def release_context(hwnd : LibC::HANDLE, himc : HIMC) : HRESULT
+    @lpVtbl.value.release_context.unsafe_as(Proc(LibC::HANDLE, HIMC, HRESULT)).call(hwnd, himc)
+  end
+  def set_candidate_window(himc : HIMC, pcandidate : CANDIDATEFORM*) : HRESULT
+    @lpVtbl.value.set_candidate_window.unsafe_as(Proc(HIMC, CANDIDATEFORM*, HRESULT)).call(himc, pcandidate)
+  end
+  def set_composition_font_a(himc : HIMC, plf : LOGFONTA*) : HRESULT
+    @lpVtbl.value.set_composition_font_a.unsafe_as(Proc(HIMC, LOGFONTA*, HRESULT)).call(himc, plf)
+  end
+  def set_composition_font_w(himc : HIMC, plf : LOGFONTW*) : HRESULT
+    @lpVtbl.value.set_composition_font_w.unsafe_as(Proc(HIMC, LOGFONTW*, HRESULT)).call(himc, plf)
+  end
+  def set_composition_string_a(himc : HIMC, dwindex : UInt32, pcomp : Void*, dwcomplen : UInt32, pread : Void*, dwreadlen : UInt32) : HRESULT
+    @lpVtbl.value.set_composition_string_a.unsafe_as(Proc(HIMC, UInt32, Void*, UInt32, Void*, UInt32, HRESULT)).call(himc, dwindex, pcomp, dwcomplen, pread, dwreadlen)
+  end
+  def set_composition_string_w(himc : HIMC, dwindex : UInt32, pcomp : Void*, dwcomplen : UInt32, pread : Void*, dwreadlen : UInt32) : HRESULT
+    @lpVtbl.value.set_composition_string_w.unsafe_as(Proc(HIMC, UInt32, Void*, UInt32, Void*, UInt32, HRESULT)).call(himc, dwindex, pcomp, dwcomplen, pread, dwreadlen)
+  end
+  def set_composition_window(himc : HIMC, pcompform : COMPOSITIONFORM*) : HRESULT
+    @lpVtbl.value.set_composition_window.unsafe_as(Proc(HIMC, COMPOSITIONFORM*, HRESULT)).call(himc, pcompform)
+  end
+  def set_conversion_status(himc : HIMC, fdwconversion : UInt32, fdwsentence : UInt32) : HRESULT
+    @lpVtbl.value.set_conversion_status.unsafe_as(Proc(HIMC, UInt32, UInt32, HRESULT)).call(himc, fdwconversion, fdwsentence)
+  end
+  def set_open_status(himc : HIMC, fopen : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_open_status.unsafe_as(Proc(HIMC, LibC::BOOL, HRESULT)).call(himc, fopen)
+  end
+  def set_status_window_pos(himc : HIMC, pptpos : POINT*) : HRESULT
+    @lpVtbl.value.set_status_window_pos.unsafe_as(Proc(HIMC, POINT*, HRESULT)).call(himc, pptpos)
+  end
+  def simulate_hot_key(hwnd : LibC::HANDLE, dwhotkeyid : UInt32) : HRESULT
+    @lpVtbl.value.simulate_hot_key.unsafe_as(Proc(LibC::HANDLE, UInt32, HRESULT)).call(hwnd, dwhotkeyid)
+  end
+  def unregister_word_a(hkl : HKL, szreading : PSTR, dwstyle : UInt32, szunregister : PSTR) : HRESULT
+    @lpVtbl.value.unregister_word_a.unsafe_as(Proc(HKL, PSTR, UInt32, PSTR, HRESULT)).call(hkl, szreading, dwstyle, szunregister)
+  end
+  def unregister_word_w(hkl : HKL, szreading : LibC::LPWSTR, dwstyle : UInt32, szunregister : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_word_w.unsafe_as(Proc(HKL, LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)).call(hkl, szreading, dwstyle, szunregister)
+  end
+  def generate_message(himc : HIMC) : HRESULT
+    @lpVtbl.value.generate_message.unsafe_as(Proc(HIMC, HRESULT)).call(himc)
+  end
+  def lock_imc(himc : HIMC, ppimc : INPUTCONTEXT**) : HRESULT
+    @lpVtbl.value.lock_imc.unsafe_as(Proc(HIMC, INPUTCONTEXT**, HRESULT)).call(himc, ppimc)
+  end
+  def unlock_imc(himc : HIMC) : HRESULT
+    @lpVtbl.value.unlock_imc.unsafe_as(Proc(HIMC, HRESULT)).call(himc)
+  end
+  def get_imc_lock_count(himc : HIMC, pdwlockcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_imc_lock_count.unsafe_as(Proc(HIMC, UInt32*, HRESULT)).call(himc, pdwlockcount)
+  end
+  def create_imcc(dwsize : UInt32, phimcc : HIMCC*) : HRESULT
+    @lpVtbl.value.create_imcc.unsafe_as(Proc(UInt32, HIMCC*, HRESULT)).call(dwsize, phimcc)
+  end
+  def destroy_imcc(himcc : HIMCC) : HRESULT
+    @lpVtbl.value.destroy_imcc.unsafe_as(Proc(HIMCC, HRESULT)).call(himcc)
+  end
+  def lock_imcc(himcc : HIMCC, ppv : Void**) : HRESULT
+    @lpVtbl.value.lock_imcc.unsafe_as(Proc(HIMCC, Void**, HRESULT)).call(himcc, ppv)
+  end
+  def unlock_imcc(himcc : HIMCC) : HRESULT
+    @lpVtbl.value.unlock_imcc.unsafe_as(Proc(HIMCC, HRESULT)).call(himcc)
+  end
+  def re_size_imcc(himcc : HIMCC, dwsize : UInt32, phimcc : HIMCC*) : HRESULT
+    @lpVtbl.value.re_size_imcc.unsafe_as(Proc(HIMCC, UInt32, HIMCC*, HRESULT)).call(himcc, dwsize, phimcc)
+  end
+  def get_imcc_size(himcc : HIMCC, pdwsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_imcc_size.unsafe_as(Proc(HIMCC, UInt32*, HRESULT)).call(himcc, pdwsize)
+  end
+  def get_imcc_lock_count(himcc : HIMCC, pdwlockcount : UInt32*) : HRESULT
+    @lpVtbl.value.get_imcc_lock_count.unsafe_as(Proc(HIMCC, UInt32*, HRESULT)).call(himcc, pdwlockcount)
+  end
+  def get_hot_key(dwhotkeyid : UInt32, pumodifiers : UInt32*, puvkey : UInt32*, phkl : HKL*) : HRESULT
+    @lpVtbl.value.get_hot_key.unsafe_as(Proc(UInt32, UInt32*, UInt32*, HKL*, HRESULT)).call(dwhotkeyid, pumodifiers, puvkey, phkl)
+  end
+  def set_hot_key(dwhotkeyid : UInt32, umodifiers : UInt32, uvkey : UInt32, hkl : HKL) : HRESULT
+    @lpVtbl.value.set_hot_key.unsafe_as(Proc(UInt32, UInt32, UInt32, HKL, HRESULT)).call(dwhotkeyid, umodifiers, uvkey, hkl)
+  end
+  def create_soft_keyboard(utype : UInt32, howner : LibC::HANDLE, x : Int32, y : Int32, phsoftkbdwnd : HANDLE*) : HRESULT
+    @lpVtbl.value.create_soft_keyboard.unsafe_as(Proc(UInt32, LibC::HANDLE, Int32, Int32, HANDLE*, HRESULT)).call(utype, howner, x, y, phsoftkbdwnd)
+  end
+  def destroy_soft_keyboard(hsoftkbdwnd : LibC::HANDLE) : HRESULT
+    @lpVtbl.value.destroy_soft_keyboard.unsafe_as(Proc(LibC::HANDLE, HRESULT)).call(hsoftkbdwnd)
+  end
+  def show_soft_keyboard(hsoftkbdwnd : LibC::HANDLE, ncmdshow : Int32) : HRESULT
+    @lpVtbl.value.show_soft_keyboard.unsafe_as(Proc(LibC::HANDLE, Int32, HRESULT)).call(hsoftkbdwnd, ncmdshow)
+  end
+  def get_code_page_a(hkl : HKL, ucodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_page_a.unsafe_as(Proc(HKL, UInt32*, HRESULT)).call(hkl, ucodepage)
+  end
+  def get_lang_id(hkl : HKL, plid : UInt16*) : HRESULT
+    @lpVtbl.value.get_lang_id.unsafe_as(Proc(HKL, UInt16*, HRESULT)).call(hkl, plid)
+  end
+  def keybd_event(lgidime : UInt16, bvk : UInt8, bscan : UInt8, dwflags : UInt32, dwextrainfo : UInt32) : HRESULT
+    @lpVtbl.value.keybd_event.unsafe_as(Proc(UInt16, UInt8, UInt8, UInt32, UInt32, HRESULT)).call(lgidime, bvk, bscan, dwflags, dwextrainfo)
+  end
+  def lock_modal : HRESULT
+    @lpVtbl.value.lock_modal.unsafe_as(Proc(HRESULT)).call
+  end
+  def unlock_modal : HRESULT
+    @lpVtbl.value.unlock_modal.unsafe_as(Proc(HRESULT)).call
+  end
+  def associate_context_ex(hwnd : LibC::HANDLE, himc : HIMC, dwflags : UInt32) : HRESULT
+    @lpVtbl.value.associate_context_ex.unsafe_as(Proc(LibC::HANDLE, HIMC, UInt32, HRESULT)).call(hwnd, himc, dwflags)
+  end
+  def disable_ime(idthread : UInt32) : HRESULT
+    @lpVtbl.value.disable_ime.unsafe_as(Proc(UInt32, HRESULT)).call(idthread)
+  end
+  def get_ime_menu_items_a(himc : HIMC, dwflags : UInt32, dwtype : UInt32, pimeparentmenu : IMEMENUITEMINFOA*, pimemenu : IMEMENUITEMINFOA*, dwsize : UInt32, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.get_ime_menu_items_a.unsafe_as(Proc(HIMC, UInt32, UInt32, IMEMENUITEMINFOA*, IMEMENUITEMINFOA*, UInt32, UInt32*, HRESULT)).call(himc, dwflags, dwtype, pimeparentmenu, pimemenu, dwsize, pdwresult)
+  end
+  def get_ime_menu_items_w(himc : HIMC, dwflags : UInt32, dwtype : UInt32, pimeparentmenu : IMEMENUITEMINFOW*, pimemenu : IMEMENUITEMINFOW*, dwsize : UInt32, pdwresult : UInt32*) : HRESULT
+    @lpVtbl.value.get_ime_menu_items_w.unsafe_as(Proc(HIMC, UInt32, UInt32, IMEMENUITEMINFOW*, IMEMENUITEMINFOW*, UInt32, UInt32*, HRESULT)).call(himc, dwflags, dwtype, pimeparentmenu, pimemenu, dwsize, pdwresult)
+  end
+  def enum_input_context(idthread : UInt32, ppenum : IEnumInputContext*) : HRESULT
+    @lpVtbl.value.enum_input_context.unsafe_as(Proc(UInt32, IEnumInputContext*, HRESULT)).call(idthread, ppenum)
+  end
+  def request_message_a(himc : HIMC, wparam : LibC::UINT_PTR, lparam : LPARAM, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.request_message_a.unsafe_as(Proc(HIMC, LibC::UINT_PTR, LPARAM, LRESULT*, HRESULT)).call(himc, wparam, lparam, plresult)
+  end
+  def request_message_w(himc : HIMC, wparam : LibC::UINT_PTR, lparam : LPARAM, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.request_message_w.unsafe_as(Proc(HIMC, LibC::UINT_PTR, LPARAM, LRESULT*, HRESULT)).call(himc, wparam, lparam, plresult)
+  end
+  def send_imca(hwnd : LibC::HANDLE, umsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.send_imca.unsafe_as(Proc(LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, HRESULT)).call(hwnd, umsg, wparam, lparam, plresult)
+  end
+  def send_imcw(hwnd : LibC::HANDLE, umsg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.send_imcw.unsafe_as(Proc(LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, LRESULT*, HRESULT)).call(hwnd, umsg, wparam, lparam, plresult)
+  end
+  def is_sleeping : HRESULT
+    @lpVtbl.value.is_sleeping.unsafe_as(Proc(HRESULT)).call
+  end
+end
+struct LibWin32::IActiveIME
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def inquire(dwsysteminfoflags : UInt32, pimeinfo : IMEINFO*, szwndclass : LibC::LPWSTR, pdwprivate : UInt32*) : HRESULT
+    @lpVtbl.value.inquire.unsafe_as(Proc(UInt32, IMEINFO*, LibC::LPWSTR, UInt32*, HRESULT)).call(dwsysteminfoflags, pimeinfo, szwndclass, pdwprivate)
+  end
+  def conversion_list(himc : HIMC, szsource : LibC::LPWSTR, uflag : UInt32, ubuflen : UInt32, pdest : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.conversion_list.unsafe_as(Proc(HIMC, LibC::LPWSTR, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)).call(himc, szsource, uflag, ubuflen, pdest, pucopied)
+  end
+  def configure(hkl : HKL, hwnd : LibC::HANDLE, dwmode : UInt32, pregisterword : REGISTERWORDW*) : HRESULT
+    @lpVtbl.value.configure.unsafe_as(Proc(HKL, LibC::HANDLE, UInt32, REGISTERWORDW*, HRESULT)).call(hkl, hwnd, dwmode, pregisterword)
+  end
+  def destroy(ureserved : UInt32) : HRESULT
+    @lpVtbl.value.destroy.unsafe_as(Proc(UInt32, HRESULT)).call(ureserved)
+  end
+  def escape(himc : HIMC, uescape : UInt32, pdata : Void*, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.escape.unsafe_as(Proc(HIMC, UInt32, Void*, LRESULT*, HRESULT)).call(himc, uescape, pdata, plresult)
+  end
+  def set_active_context(himc : HIMC, fflag : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_active_context.unsafe_as(Proc(HIMC, LibC::BOOL, HRESULT)).call(himc, fflag)
+  end
+  def process_key(himc : HIMC, uvirkey : UInt32, lparam : UInt32, pbkeystate : UInt8*) : HRESULT
+    @lpVtbl.value.process_key.unsafe_as(Proc(HIMC, UInt32, UInt32, UInt8*, HRESULT)).call(himc, uvirkey, lparam, pbkeystate)
+  end
+  def notify(himc : HIMC, dwaction : UInt32, dwindex : UInt32, dwvalue : UInt32) : HRESULT
+    @lpVtbl.value.notify.unsafe_as(Proc(HIMC, UInt32, UInt32, UInt32, HRESULT)).call(himc, dwaction, dwindex, dwvalue)
+  end
+  def select(himc : HIMC, fselect : LibC::BOOL) : HRESULT
+    @lpVtbl.value.select.unsafe_as(Proc(HIMC, LibC::BOOL, HRESULT)).call(himc, fselect)
+  end
+  def set_composition_string(himc : HIMC, dwindex : UInt32, pcomp : Void*, dwcomplen : UInt32, pread : Void*, dwreadlen : UInt32) : HRESULT
+    @lpVtbl.value.set_composition_string.unsafe_as(Proc(HIMC, UInt32, Void*, UInt32, Void*, UInt32, HRESULT)).call(himc, dwindex, pcomp, dwcomplen, pread, dwreadlen)
+  end
+  def to_ascii_ex(uvirkey : UInt32, uscancode : UInt32, pbkeystate : UInt8*, fustate : UInt32, himc : HIMC, pdwtransbuf : UInt32*, pusize : UInt32*) : HRESULT
+    @lpVtbl.value.to_ascii_ex.unsafe_as(Proc(UInt32, UInt32, UInt8*, UInt32, HIMC, UInt32*, UInt32*, HRESULT)).call(uvirkey, uscancode, pbkeystate, fustate, himc, pdwtransbuf, pusize)
+  end
+  def register_word(szreading : LibC::LPWSTR, dwstyle : UInt32, szstring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_word.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)).call(szreading, dwstyle, szstring)
+  end
+  def unregister_word(szreading : LibC::LPWSTR, dwstyle : UInt32, szstring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_word.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)).call(szreading, dwstyle, szstring)
+  end
+  def get_register_word_style(nitem : UInt32, pstylebuf : STYLEBUFW*, pubufsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_register_word_style.unsafe_as(Proc(UInt32, STYLEBUFW*, UInt32*, HRESULT)).call(nitem, pstylebuf, pubufsize)
+  end
+  def enum_register_word(szreading : LibC::LPWSTR, dwstyle : UInt32, szregister : LibC::LPWSTR, pdata : Void*, ppenum : IEnumRegisterWordW*) : HRESULT
+    @lpVtbl.value.enum_register_word.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::LPWSTR, Void*, IEnumRegisterWordW*, HRESULT)).call(szreading, dwstyle, szregister, pdata, ppenum)
+  end
+  def get_code_page_a(ucodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_page_a.unsafe_as(Proc(UInt32*, HRESULT)).call(ucodepage)
+  end
+  def get_lang_id(plid : UInt16*) : HRESULT
+    @lpVtbl.value.get_lang_id.unsafe_as(Proc(UInt16*, HRESULT)).call(plid)
+  end
+end
+struct LibWin32::IActiveIME2
+  def query_interface(riid : Guid*, ppvobject : Void**) : HRESULT
+    @lpVtbl.value.query_interface.unsafe_as(Proc(Guid*, Void**, HRESULT)).call(riid, ppvobject)
+  end
+  def add_ref : UInt32
+    @lpVtbl.value.add_ref.unsafe_as(Proc(UInt32)).call
+  end
+  def release : UInt32
+    @lpVtbl.value.release.unsafe_as(Proc(UInt32)).call
+  end
+  def inquire(dwsysteminfoflags : UInt32, pimeinfo : IMEINFO*, szwndclass : LibC::LPWSTR, pdwprivate : UInt32*) : HRESULT
+    @lpVtbl.value.inquire.unsafe_as(Proc(UInt32, IMEINFO*, LibC::LPWSTR, UInt32*, HRESULT)).call(dwsysteminfoflags, pimeinfo, szwndclass, pdwprivate)
+  end
+  def conversion_list(himc : HIMC, szsource : LibC::LPWSTR, uflag : UInt32, ubuflen : UInt32, pdest : CANDIDATELIST*, pucopied : UInt32*) : HRESULT
+    @lpVtbl.value.conversion_list.unsafe_as(Proc(HIMC, LibC::LPWSTR, UInt32, UInt32, CANDIDATELIST*, UInt32*, HRESULT)).call(himc, szsource, uflag, ubuflen, pdest, pucopied)
+  end
+  def configure(hkl : HKL, hwnd : LibC::HANDLE, dwmode : UInt32, pregisterword : REGISTERWORDW*) : HRESULT
+    @lpVtbl.value.configure.unsafe_as(Proc(HKL, LibC::HANDLE, UInt32, REGISTERWORDW*, HRESULT)).call(hkl, hwnd, dwmode, pregisterword)
+  end
+  def destroy(ureserved : UInt32) : HRESULT
+    @lpVtbl.value.destroy.unsafe_as(Proc(UInt32, HRESULT)).call(ureserved)
+  end
+  def escape(himc : HIMC, uescape : UInt32, pdata : Void*, plresult : LRESULT*) : HRESULT
+    @lpVtbl.value.escape.unsafe_as(Proc(HIMC, UInt32, Void*, LRESULT*, HRESULT)).call(himc, uescape, pdata, plresult)
+  end
+  def set_active_context(himc : HIMC, fflag : LibC::BOOL) : HRESULT
+    @lpVtbl.value.set_active_context.unsafe_as(Proc(HIMC, LibC::BOOL, HRESULT)).call(himc, fflag)
+  end
+  def process_key(himc : HIMC, uvirkey : UInt32, lparam : UInt32, pbkeystate : UInt8*) : HRESULT
+    @lpVtbl.value.process_key.unsafe_as(Proc(HIMC, UInt32, UInt32, UInt8*, HRESULT)).call(himc, uvirkey, lparam, pbkeystate)
+  end
+  def notify(himc : HIMC, dwaction : UInt32, dwindex : UInt32, dwvalue : UInt32) : HRESULT
+    @lpVtbl.value.notify.unsafe_as(Proc(HIMC, UInt32, UInt32, UInt32, HRESULT)).call(himc, dwaction, dwindex, dwvalue)
+  end
+  def select(himc : HIMC, fselect : LibC::BOOL) : HRESULT
+    @lpVtbl.value.select.unsafe_as(Proc(HIMC, LibC::BOOL, HRESULT)).call(himc, fselect)
+  end
+  def set_composition_string(himc : HIMC, dwindex : UInt32, pcomp : Void*, dwcomplen : UInt32, pread : Void*, dwreadlen : UInt32) : HRESULT
+    @lpVtbl.value.set_composition_string.unsafe_as(Proc(HIMC, UInt32, Void*, UInt32, Void*, UInt32, HRESULT)).call(himc, dwindex, pcomp, dwcomplen, pread, dwreadlen)
+  end
+  def to_ascii_ex(uvirkey : UInt32, uscancode : UInt32, pbkeystate : UInt8*, fustate : UInt32, himc : HIMC, pdwtransbuf : UInt32*, pusize : UInt32*) : HRESULT
+    @lpVtbl.value.to_ascii_ex.unsafe_as(Proc(UInt32, UInt32, UInt8*, UInt32, HIMC, UInt32*, UInt32*, HRESULT)).call(uvirkey, uscancode, pbkeystate, fustate, himc, pdwtransbuf, pusize)
+  end
+  def register_word(szreading : LibC::LPWSTR, dwstyle : UInt32, szstring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.register_word.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)).call(szreading, dwstyle, szstring)
+  end
+  def unregister_word(szreading : LibC::LPWSTR, dwstyle : UInt32, szstring : LibC::LPWSTR) : HRESULT
+    @lpVtbl.value.unregister_word.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::LPWSTR, HRESULT)).call(szreading, dwstyle, szstring)
+  end
+  def get_register_word_style(nitem : UInt32, pstylebuf : STYLEBUFW*, pubufsize : UInt32*) : HRESULT
+    @lpVtbl.value.get_register_word_style.unsafe_as(Proc(UInt32, STYLEBUFW*, UInt32*, HRESULT)).call(nitem, pstylebuf, pubufsize)
+  end
+  def enum_register_word(szreading : LibC::LPWSTR, dwstyle : UInt32, szregister : LibC::LPWSTR, pdata : Void*, ppenum : IEnumRegisterWordW*) : HRESULT
+    @lpVtbl.value.enum_register_word.unsafe_as(Proc(LibC::LPWSTR, UInt32, LibC::LPWSTR, Void*, IEnumRegisterWordW*, HRESULT)).call(szreading, dwstyle, szregister, pdata, ppenum)
+  end
+  def get_code_page_a(ucodepage : UInt32*) : HRESULT
+    @lpVtbl.value.get_code_page_a.unsafe_as(Proc(UInt32*, HRESULT)).call(ucodepage)
+  end
+  def get_lang_id(plid : UInt16*) : HRESULT
+    @lpVtbl.value.get_lang_id.unsafe_as(Proc(UInt16*, HRESULT)).call(plid)
+  end
+  def sleep : HRESULT
+    @lpVtbl.value.sleep.unsafe_as(Proc(HRESULT)).call
+  end
+  def unsleep(fdead : LibC::BOOL) : HRESULT
+    @lpVtbl.value.unsleep.unsafe_as(Proc(LibC::BOOL, HRESULT)).call(fdead)
+  end
 end

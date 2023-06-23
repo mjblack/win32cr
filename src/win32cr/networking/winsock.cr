@@ -3211,7 +3211,7 @@ lib LibWin32
 
   # Params # ierror : Int32 [In]
   # Commented out because function is part of Lib C
-  #fun WSASetLastError(ierror : Int32)
+  #fun WSASetLastError(ierror : Int32) : Void
 
   # Params # 
   # Commented out because function is part of Lib C
@@ -3513,7 +3513,7 @@ lib LibWin32
   fun AcceptEx(slistensocket : SOCKET, sacceptsocket : SOCKET, lpoutputbuffer : Void*, dwreceivedatalength : UInt32, dwlocaladdresslength : UInt32, dwremoteaddresslength : UInt32, lpdwbytesreceived : UInt32*, lpoverlapped : OVERLAPPED*) : LibC::BOOL
 
   # Params # lpoutputbuffer : Void* [In],dwreceivedatalength : UInt32 [In],dwlocaladdresslength : UInt32 [In],dwremoteaddresslength : UInt32 [In],localsockaddr : SOCKADDR** [In],localsockaddrlength : Int32* [In],remotesockaddr : SOCKADDR** [In],remotesockaddrlength : Int32* [In]
-  fun GetAcceptExSockaddrs(lpoutputbuffer : Void*, dwreceivedatalength : UInt32, dwlocaladdresslength : UInt32, dwremoteaddresslength : UInt32, localsockaddr : SOCKADDR**, localsockaddrlength : Int32*, remotesockaddr : SOCKADDR**, remotesockaddrlength : Int32*)
+  fun GetAcceptExSockaddrs(lpoutputbuffer : Void*, dwreceivedatalength : UInt32, dwlocaladdresslength : UInt32, dwremoteaddresslength : UInt32, localsockaddr : SOCKADDR**, localsockaddrlength : Int32*, remotesockaddr : SOCKADDR**, remotesockaddrlength : Int32*) : Void
 
   # Params # lpiprotocols : Int32* [In],lpprotocolbuffer : WSAPROTOCOL_INFOW* [In],lpdwbufferlength : UInt32* [In],lperrno : Int32* [In]
   fun WSCEnumProtocols(lpiprotocols : Int32*, lpprotocolbuffer : WSAPROTOCOL_INFOW*, lpdwbufferlength : UInt32*, lperrno : Int32*) : Int32
@@ -3671,16 +3671,16 @@ lib LibWin32
 
   # Params # paddrinfo : ADDRINFOA* [In]
   # Commented out because function is part of Lib C
-  #fun freeaddrinfo(paddrinfo : ADDRINFOA*)
+  #fun freeaddrinfo(paddrinfo : ADDRINFOA*) : Void
 
   # Params # paddrinfo : Addrinfow* [In]
-  fun FreeAddrInfoW(paddrinfo : Addrinfow*)
+  fun FreeAddrInfoW(paddrinfo : Addrinfow*) : Void
 
   # Params # paddrinfoex : Addrinfoexa* [In]
-  fun FreeAddrInfoEx(paddrinfoex : Addrinfoexa*)
+  fun FreeAddrInfoEx(paddrinfoex : Addrinfoexa*) : Void
 
   # Params # paddrinfoex : Addrinfoexw* [In]
-  fun FreeAddrInfoExW(paddrinfoex : Addrinfoexw*)
+  fun FreeAddrInfoExW(paddrinfoex : Addrinfoexw*) : Void
 
   # Params # psockaddr : SOCKADDR* [In],sockaddrlength : Int32 [In],pnodebuffer : UInt8* [In],nodebuffersize : UInt32 [In],pservicebuffer : UInt8* [In],servicebuffersize : UInt32 [In],flags : Int32 [In]
   fun getnameinfo(psockaddr : SOCKADDR*, sockaddrlength : Int32, pnodebuffer : UInt8*, nodebuffersize : UInt32, pservicebuffer : UInt8*, servicebuffersize : UInt32, flags : Int32) : Int32
